@@ -47,8 +47,8 @@ func TestAllJavaSpecs_LoadAndMerge(t *testing.T) {
 
 	t.Logf("found %d spec files", len(specs))
 
-	if len(specs) != 41 {
-		t.Errorf("expected 41 spec files, got %d", len(specs))
+	if len(specs) != 59 {
+		t.Errorf("expected 59 spec files, got %d", len(specs))
 	}
 
 	for _, specPath := range specs {
@@ -164,7 +164,7 @@ func TestGenerate_Idempotency(t *testing.T) {
 	outputDir2 := t.TempDir()
 
 	// Pick a representative subset to keep test time reasonable.
-	testSpecs := []string{"location", "bluetooth", "notification", "widget", "content"}
+	testSpecs := []string{"location", "bluetooth", "notification", "toast", "content"}
 
 	for _, name := range testSpecs {
 		specPath := filepath.Join(specsDir, name+".yaml")
@@ -293,17 +293,17 @@ func TestGenerate_OutputFilePatterns(t *testing.T) {
 	}{
 		{
 			specName:      "location",
-			expectFiles:   []string{"doc.go", "init.go", "location_manager.go", "location.go", "constants.go"},
+			expectFiles:   []string{"doc.go", "init.go", "location_manager.go", "constants.go"},
 			unexpectFiles: []string{"callbacks.go"},
 		},
 		{
-			specName:      "widget",
+			specName:      "toast",
 			expectFiles:   []string{"doc.go", "init.go", "toast.go", "constants.go"},
 			unexpectFiles: []string{"callbacks.go"},
 		},
 		{
 			specName:      "content",
-			expectFiles:   []string{"doc.go", "init.go", "constants.go"},
+			expectFiles:   []string{"doc.go", "init.go", "broadcast_receiver.go"},
 			unexpectFiles: []string{"callbacks.go"},
 		},
 	}

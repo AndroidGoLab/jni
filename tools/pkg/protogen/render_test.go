@@ -283,8 +283,8 @@ func TestRenderProto_BluetoothIntegration(t *testing.T) {
 	content := string(data)
 
 	// Verify basic bluetooth structure.
-	if !strings.Contains(content, "service BluetoothAdapterService {") {
-		t.Error("missing BluetoothAdapterService")
+	if !strings.Contains(content, "service BluetoothGattCharacteristicService {") {
+		t.Error("missing BluetoothGattCharacteristicService")
 	}
 	if !strings.Contains(content, "rpc ") {
 		t.Error("no RPCs generated for bluetooth")
@@ -292,6 +292,6 @@ func TestRenderProto_BluetoothIntegration(t *testing.T) {
 	// The old hand-curated spec had callbacks; the generated spec from .class
 	// files doesn't include callback interfaces. Verify just basic presence.
 	if !strings.Contains(content, "message ") {
-		t.Error("missing server streaming RPC for ScanCallback")
+		t.Error("missing messages in bluetooth proto")
 	}
 }

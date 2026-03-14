@@ -11,6 +11,14 @@ import (
 	"github.com/xaionaro-go/jni/tools/pkg/protoscan"
 )
 
+func emptyGoNames() protoscan.GoNames {
+	return protoscan.GoNames{
+		ServiceClients: map[string]string{},
+		RPCMethods:     map[string]string{},
+		MessageTypes:   map[string]string{},
+	}
+}
+
 func TestBuildClientData_Location(t *testing.T) {
 	root := findRepoRoot(t)
 	specPath := filepath.Join(root, "spec", "java", "location.yaml")
@@ -29,7 +37,9 @@ func TestBuildClientData_Location(t *testing.T) {
 		t.Fatalf("merge: %v", err)
 	}
 
-	data := buildClientData(merged, "github.com/xaionaro-go/jni")
+	goModule := "github.com/xaionaro-go/jni"
+	protoData := protogen.BuildProtoData(merged, goModule)
+	data := buildClientData(merged, goModule, protoData, emptyGoNames())
 
 	if data.Package != "location" {
 		t.Errorf("Package = %q, want %q", data.Package, "location")
@@ -76,7 +86,9 @@ func TestBuildClientData_LocationMethod_Object(t *testing.T) {
 		t.Fatalf("merge: %v", err)
 	}
 
-	data := buildClientData(merged, "github.com/xaionaro-go/jni")
+	goModule := "github.com/xaionaro-go/jni"
+	protoData := protogen.BuildProtoData(merged, goModule)
+	data := buildClientData(merged, goModule, protoData, emptyGoNames())
 
 	var m *ClientMethod
 	for i := range data.Services[0].Methods {
@@ -126,7 +138,9 @@ func TestRenderClientToString_Location(t *testing.T) {
 		t.Fatalf("merge: %v", err)
 	}
 
-	data := buildClientData(merged, "github.com/xaionaro-go/jni")
+	goModule := "github.com/xaionaro-go/jni"
+	protoData := protogen.BuildProtoData(merged, goModule)
+	data := buildClientData(merged, goModule, protoData, emptyGoNames())
 	output, err := renderClientToString(data)
 	if err != nil {
 		t.Fatalf("renderClientToString: %v", err)
@@ -176,7 +190,7 @@ func TestGenerateClient_AllRealSpecs(t *testing.T) {
 		baseName := strings.TrimSuffix(filepath.Base(specPath), ".yaml")
 		overlayPath := filepath.Join(overlaysDir, baseName+".yaml")
 
-		if err := GenerateClient(specPath, overlayPath, outputDir, goModule); err != nil {
+		if err := GenerateClient(specPath, overlayPath, outputDir, goModule, ""); err != nil {
 			t.Errorf("GenerateClient %s: %v", baseName, err)
 			failed = append(failed, baseName)
 			continue
