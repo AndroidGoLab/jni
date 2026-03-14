@@ -8,7 +8,6 @@ import (
 
 	"github.com/xaionaro-go/jni/tools/pkg/javagen"
 	"github.com/xaionaro-go/jni/tools/pkg/protogen"
-	"github.com/xaionaro-go/jni/tools/pkg/protoscan"
 )
 
 func findRepoRoot(t *testing.T) string {
@@ -47,7 +46,9 @@ func TestBuildServerData_Location(t *testing.T) {
 		t.Fatalf("merge: %v", err)
 	}
 
-	data := buildServerData(merged, "github.com/xaionaro-go/jni")
+	goModule := "github.com/xaionaro-go/jni"
+	protoData := protogen.BuildProtoData(merged, goModule)
+	data := buildServerData(merged, goModule, protoData, emptyGoNames())
 
 	if data.Package != "location" {
 		t.Errorf("Package = %q, want %q", data.Package, "location")
@@ -107,7 +108,9 @@ func TestBuildServerData_LocationMethod_Object(t *testing.T) {
 		t.Fatalf("merge: %v", err)
 	}
 
-	data := buildServerData(merged, "github.com/xaionaro-go/jni")
+	goModule := "github.com/xaionaro-go/jni"
+	protoData := protogen.BuildProtoData(merged, goModule)
+	data := buildServerData(merged, goModule, protoData, emptyGoNames())
 
 	// Find GetLastKnownLocation method.
 	var m *ServerMethod
@@ -155,7 +158,9 @@ func TestRenderServerToString_Location(t *testing.T) {
 		t.Fatalf("merge: %v", err)
 	}
 
-	data := buildServerData(merged, "github.com/xaionaro-go/jni")
+	goModule := "github.com/xaionaro-go/jni"
+	protoData := protogen.BuildProtoData(merged, goModule)
+	data := buildServerData(merged, goModule, protoData, emptyGoNames())
 	output, err := renderServerToString(data)
 	if err != nil {
 		t.Fatalf("renderServerToString: %v", err)
@@ -209,7 +214,7 @@ func TestGenerateServer_AllRealSpecs(t *testing.T) {
 		baseName := strings.TrimSuffix(filepath.Base(specPath), ".yaml")
 		overlayPath := filepath.Join(overlaysDir, baseName+".yaml")
 
-		if _, err := GenerateServer(specPath, overlayPath, outputDir, goModule); err != nil {
+		if _, err := GenerateServer(specPath, overlayPath, outputDir, goModule, ""); err != nil {
 			t.Errorf("GenerateServer %s: %v", baseName, err)
 			failed = append(failed, baseName)
 			continue
