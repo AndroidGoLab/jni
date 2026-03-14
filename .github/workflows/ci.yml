@@ -99,7 +99,7 @@ jobs:
         run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
       - name: Lint (tools)
-        run: golangci-lint run --skip-dirs-use-default --build-tags="" ./tools/...
+        run: golangci-lint run --build-tags="" ./tools/...
 
       - name: Lint (jnictl)
-        run: golangci-lint run --skip-dirs-use-default --build-tags="" ./cmd/jnictl/
+        run: golangci-lint run --build-tags="" ./cmd/jnictl/
