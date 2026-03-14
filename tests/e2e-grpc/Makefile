@@ -1,6 +1,10 @@
-# E2E gRPC tests for jnictl against jniservice on Android emulator.
+# E2E gRPC tests for jnictl against jniservice on Android.
 #
-# Prerequisites: Android SDK, running emulator, NDK for cross-compilation.
+# Usage:
+#   make -C tests/e2e-grpc test      # Full pipeline: build, push, start, forward, test, stop
+#   make -C tests/e2e-grpc test-go   # Run Go tests only (server must be running + forwarded)
+#   make -C tests/e2e-grpc test-sh   # Run shell tests only (server must be running + forwarded)
+#   make -C tests/e2e-grpc deploy    # Build, push, start server, set up port forwarding
 
 ANDROID_SDK ?= $(HOME)/Android/Sdk
 NDK ?= $(shell ls -d $(ANDROID_SDK)/ndk/* 2>/dev/null | sort -V | tail -1)
@@ -11,8 +15,8 @@ CC_X86 := $(NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android$
 ARCH ?= $(shell $(ADB) shell getprop ro.product.cpu.abi 2>/dev/null)
 REMOTE_DIR := /data/local/tmp
 PORT ?= 50051
+HOST_PORT ?= $(PORT)
 
-# Detect architecture and set CC
 ifeq ($(ARCH),arm64-v8a)
   GOARCH := arm64
   CC := $(CC_ARM64)
@@ -21,38 +25,79 @@ else
   CC := $(CC_X86)
 endif
 
-.PHONY: build push start-server stop-server test clean
+.PHONY: build build-host build-android push deploy start-server stop-server forward \
+	test test-go test-sh clean
 
-build:
-	# Build jnictl for Android
+# Build host + android binaries.
+build: build-host build-android
+
+# Build jnictl for the host (used by test runners).
+build-host:
+	@mkdir -p build
+	CGO_ENABLED=0 go build -o build/jnictl-host ../../cmd/jnictl/
+
+# Build jnictl + libjniservice.so + classes.dex for Android.
+build-android:
+	@mkdir -p build
 	CGO_ENABLED=0 GOOS=android GOARCH=$(GOARCH) go build -o build/jnictl ../../cmd/jnictl/
-	# Build jniservice shared library
 	CGO_ENABLED=1 GOOS=android GOARCH=$(GOARCH) CC=$(CC) \
 		go build -buildmode=c-shared -o build/libjniservice.so ../../cmd/jniservice/
-	# Compile Java wrapper
 	javac --release 17 -d build ../../cmd/jniservice/JNIService.java
 	$(ANDROID_SDK)/build-tools/$$(ls $(ANDROID_SDK)/build-tools | sort -V | tail -1)/d8 \
 		--lib $$(ls -d $(ANDROID_SDK)/platforms/android-* | sort -V | tail -1)/android.jar \
 		--output build build/JNIService.class
 
-push: build
+# Push artifacts to the device.
+push: build-android
 	$(ADB) push build/jnictl $(REMOTE_DIR)/jnictl
 	$(ADB) shell chmod +x $(REMOTE_DIR)/jnictl
 	$(ADB) push build/libjniservice.so $(REMOTE_DIR)/libjniservice.so
 	$(ADB) push build/classes.dex $(REMOTE_DIR)/jniservice.dex
 
-start-server:
-	$(ADB) shell "JNISERVICE_PORT=$(PORT) app_process -Djava.class.path=$(REMOTE_DIR)/jniservice.dex $(REMOTE_DIR) JNIService &"
+# Deploy = push + start + forward. Ready for testing.
+deploy: push start-server forward
+
+# Start the gRPC server on the device (kills any old instance first).
+start-server: stop-server
+	$(ADB) shell "JNISERVICE_PORT=$(PORT) app_process \
+		-Djava.class.path=$(REMOTE_DIR)/jniservice.dex \
+		$(REMOTE_DIR) JNIService" &
+	@echo "Waiting for jniservice to start..."
+	@for i in 1 2 3 4 5 6 7 8 9 10; do \
+		sleep 1; \
+		if $(ADB) shell "netstat -tlnp 2>/dev/null | grep -q ':$(PORT)'" 2>/dev/null; then \
+			echo "jniservice is listening on port $(PORT)"; \
+			exit 0; \
+		fi; \
+		echo "  attempt $$i/10..."; \
+	done; \
+	echo "WARNING: could not confirm server is listening; proceeding anyway"; \
 	sleep 2
-	@echo "jniservice started on port $(PORT)"
 
+# Stop the server on the device.
 stop-server:
-	$(ADB) shell "pkill -f JNIService" || true
+	-@$(ADB) shell "pkill -f JNIService" 2>/dev/null || true
+	@sleep 1
 
-test: push start-server
-	$(ADB) shell "$(REMOTE_DIR)/jnictl --addr localhost:$(PORT) --insecure power power-manager is-interactive" || true
-	@echo "E2E test complete"
-	$(MAKE) stop-server
+# Set up adb port forwarding so host can reach the server.
+# Use HOST_PORT if port $(PORT) is already in use on the host.
+forward:
+	$(ADB) forward tcp:$(HOST_PORT) tcp:$(PORT)
+	@echo "Port forwarding: localhost:$(HOST_PORT) -> device:$(PORT)"
+
+# Full E2E test pipeline: build, deploy, test, clean up.
+test: build push start-server forward test-go
+	@$(MAKE) stop-server
+
+# Run Go E2E tests (requires server running + port forwarded).
+test-go: build-host
+	JNICTL_E2E_ADDR=localhost:$(HOST_PORT) JNICTL_BIN=$$(pwd)/build/jnictl-host \
+		go test -v -run TestE2E ./
+
+# Run shell-based E2E tests (requires server running + port forwarded).
+test-sh: build-host
+	JNICTL_E2E_ADDR=localhost:$(HOST_PORT) JNICTL_BIN=$$(pwd)/build/jnictl-host \
+		./run_e2e.sh
 
 clean:
 	rm -rf build/

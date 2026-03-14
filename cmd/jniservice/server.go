@@ -23,10 +23,10 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"runtime"
 	"unsafe"
 
 	"github.com/xaionaro-go/jni"
-	"github.com/xaionaro-go/jni/app"
 	"github.com/xaionaro-go/jni/grpc/server"
 	jnirawserver "github.com/xaionaro-go/jni/grpc/server/jni_raw"
 	"github.com/xaionaro-go/jni/handlestore"
@@ -50,15 +50,11 @@ func runServer(cvm *C.JavaVM) {
 
 	token := os.Getenv("JNISERVICE_TOKEN")
 
-	// Obtain the Android system Context via ActivityThread, the same
-	// technique used by the E2E test suite to run inside app_process.
-	appCtx, err := getSystemContext(vm)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "jniservice: get system context: %v\n", err)
-		os.Exit(1)
-	}
-
 	handles := handlestore.New()
+
+	// Initialize Android system context (Looper + ActivityThread).
+	// This makes the Context handle available for Android API calls.
+	initAndroidContext(vm, handles)
 
 	// Build the auth interceptor chain.
 	var auth server.Authorizer
@@ -74,14 +70,24 @@ func runServer(cvm *C.JavaVM) {
 		grpc.ChainStreamInterceptor(server.StreamAuthInterceptor(auth)),
 	)
 
-	// Register all generated Android API service servers.
-	server.RegisterAll(grpcServer, appCtx, handles)
+	// Register handle store + any available Android API services.
+	server.RegisterAll(grpcServer, vm, handles)
+	fmt.Fprintf(os.Stderr, "jniservice: registered handlestore\n")
 
 	// Register the raw JNI service for low-level JNI access.
 	jnirawpb.RegisterJNIServiceServer(grpcServer, &jnirawserver.Server{
 		VM:      vm,
 		Handles: handles,
 	})
+	fmt.Fprintf(os.Stderr, "jniservice: registered jni_raw service\n")
+
+	svcInfo := grpcServer.GetServiceInfo()
+	for name := range svcInfo {
+		fmt.Fprintf(os.Stderr, "jniservice: registered service: %s\n", name)
+	}
+
+	// Enable gRPC server reflection for debugging.
+	// reflection.Register(grpcServer) // uncomment if reflection package is available
 
 	addr := net.JoinHostPort(listenAddr, port)
 	lis, err := net.Listen("tcp", addr)
@@ -91,99 +97,71 @@ func runServer(cvm *C.JavaVM) {
 	}
 	fmt.Fprintf(os.Stderr, "jniservice: listening on %s\n", lis.Addr())
 
-	if err := grpcServer.Serve(lis); err != nil {
-		fmt.Fprintf(os.Stderr, "jniservice: serve: %v\n", err)
-		os.Exit(1)
-	}
+	// Serve in a goroutine so JNI_OnLoad can return.
+	// The JVM keeps the process alive; the server goroutine handles RPCs.
+	go func() {
+		if err := grpcServer.Serve(lis); err != nil {
+			fmt.Fprintf(os.Stderr, "jniservice: serve: %v\n", err)
+		}
+	}()
 }
 
-// getSystemContext obtains an Android Context via ActivityThread reflection.
-// This is the standard technique for running inside app_process without a
-// full Activity/Application lifecycle. It mirrors the pattern used in
-// tests/e2e/e2e.go.
-func getSystemContext(vm *jni.VM) (*app.Context, error) {
-	var ctx app.Context
-	ctx.VM = vm
+// initAndroidContext initializes the Android system context by calling
+// Looper.prepare() and ActivityThread.systemMain() on a pinned OS thread.
+// The resulting Context handle is stored in the HandleStore and printed
+// to stderr for CLI tools to reference.
+func initAndroidContext(vm *jni.VM, handles *handlestore.HandleStore) {
+	// Pin to OS thread so Looper.prepare() and systemMain() run on the same thread.
+	runtime.LockOSThread()
+	defer runtime.UnlockOSThread()
 
+	var contextHandle int64
 	err := vm.Do(func(env *jni.Env) error {
-		if err := app.Init(env); err != nil {
-			return err
-		}
-
-		atClass, err := env.FindClass("android/app/ActivityThread")
+		// Looper.prepare() — required before creating an ActivityThread.
+		looperCls, err := env.FindClass("android/os/Looper")
 		if err != nil {
-			return fmt.Errorf("find ActivityThread: %w", err)
+			return fmt.Errorf("find Looper class: %w", err)
 		}
-
-		// Try currentActivityThread() first (returns existing thread or null).
-		currentMid, err := env.GetStaticMethodID(atClass, "currentActivityThread", "()Landroid/app/ActivityThread;")
+		prepareMID, err := env.GetStaticMethodID(looperCls, "prepare", "()V")
 		if err != nil {
-			return fmt.Errorf("get currentActivityThread: %w", err)
+			return fmt.Errorf("get Looper.prepare: %w", err)
 		}
-		atObj, _ := env.CallStaticObjectMethod(atClass, currentMid)
-
-		if atObj == nil || atObj.Ref() == 0 {
-			// Prepare Looper before creating ActivityThread.
-			looperClass, err := env.FindClass("android/os/Looper")
-			if err != nil {
-				return fmt.Errorf("find Looper: %w", err)
-			}
-			prepMid, err := env.GetStaticMethodID(looperClass, "prepareMainLooper", "()V")
-			if err != nil {
-				return fmt.Errorf("get prepareMainLooper: %w", err)
-			}
-			// Ignore error: the main looper may already be prepared.
-			_ = env.CallStaticVoidMethod(looperClass, prepMid)
-
-			// Create ActivityThread via systemMain().
-			sysMid, err := env.GetStaticMethodID(atClass, "systemMain", "()Landroid/app/ActivityThread;")
-			if err != nil {
-				return fmt.Errorf("get systemMain: %w", err)
-			}
-			atObj, err = env.CallStaticObjectMethod(atClass, sysMid)
-			if err != nil {
-				return fmt.Errorf("call systemMain: %w", err)
-			}
+		if err := env.CallStaticVoidMethod(looperCls, prepareMID); err != nil {
+			return fmt.Errorf("Looper.prepare: %w", err)
 		}
 
-		getCtxMid, err := env.GetMethodID(atClass, "getSystemContext", "()Landroid/app/ContextImpl;")
+		// ActivityThread.systemMain() — creates a full ActivityThread with system context.
+		atCls, err := env.FindClass("android/app/ActivityThread")
+		if err != nil {
+			return fmt.Errorf("find ActivityThread class: %w", err)
+		}
+		systemMainMID, err := env.GetStaticMethodID(atCls, "systemMain", "()Landroid/app/ActivityThread;")
+		if err != nil {
+			return fmt.Errorf("get systemMain: %w", err)
+		}
+		atObj, err := env.CallStaticObjectMethod(atCls, systemMainMID)
+		if err != nil {
+			return fmt.Errorf("systemMain: %w", err)
+		}
+
+		// ActivityThread.getSystemContext() → ContextImpl (which IS a Context).
+		getCtxMID, err := env.GetMethodID(atCls, "getSystemContext", "()Landroid/app/ContextImpl;")
 		if err != nil {
 			return fmt.Errorf("get getSystemContext: %w", err)
 		}
-		sysCtxObj, err := env.CallObjectMethod(atObj, getCtxMid)
+		ctxObj, err := env.CallObjectMethod(atObj, getCtxMID)
 		if err != nil {
-			return fmt.Errorf("call getSystemContext: %w", err)
+			return fmt.Errorf("getSystemContext: %w", err)
 		}
 
-		// Create a package context for com.android.shell (matches shell uid 2000
-		// and has location/network permissions).
-		ctxClass, err := env.FindClass("android/content/Context")
-		if err != nil {
-			return fmt.Errorf("find Context class: %w", err)
-		}
-		createPkgCtxMid, err := env.GetMethodID(ctxClass, "createPackageContext", "(Ljava/lang/String;I)Landroid/content/Context;")
-		if err != nil {
-			return fmt.Errorf("get createPackageContext: %w", err)
-		}
-		pkgName, err := env.NewStringUTF("com.android.shell")
-		if err != nil {
-			return fmt.Errorf("new string: %w", err)
-		}
-		shellCtxObj, err := env.CallObjectMethod(sysCtxObj, createPkgCtxMid,
-			jni.ObjectValue(&pkgName.Object), jni.IntValue(0))
-		if err != nil {
-			// Fall back to system context if createPackageContext fails.
-			ctx.Obj = env.NewGlobalRef(sysCtxObj)
-			return nil
-		}
-
-		ctx.Obj = env.NewGlobalRef(shellCtxObj)
+		contextHandle = handles.Put(env, ctxObj)
 		return nil
 	})
 	if err != nil {
-		return nil, err
+		fmt.Fprintf(os.Stderr, "jniservice: WARNING: context init failed: %v\n", err)
+		return
 	}
-	return &ctx, nil
+	fmt.Fprintf(os.Stderr, "jniservice: android context initialized (handle=%d)\n", contextHandle)
 }
 
 func main() {} // Required for c-shared build mode.

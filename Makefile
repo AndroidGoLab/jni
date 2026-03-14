@@ -1,4 +1,4 @@
-.PHONY: generate specs jni java proto protoc grpc cli clean lint test test-tools test-e2e build build-server list-commands
+.PHONY: generate specs jni java proto protoc grpc cli clean lint test test-tools test-e2e test-emulator build build-server list-commands
 
 # JDK detection for host tests (jni.h and libjvm.so).
 JDK_HOME ?= $(shell readlink -f $$(which javac) 2>/dev/null | sed 's|/bin/javac$$||')
@@ -97,3 +97,8 @@ build-server:
 # Run E2E scenario tests (host-side, no emulator needed)
 test-e2e:
 	go test ./tests/e2e-grpc/ -v
+
+# Run E2E tests against a running Android emulator/device.
+# Full pipeline: build, push, start server, forward port, run tests, stop server.
+test-emulator:
+	$(MAKE) -C tests/e2e-grpc test

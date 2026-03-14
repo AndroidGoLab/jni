@@ -30,19 +30,13 @@ jobs:
       - name: Install Android NDK
         run: sdkmanager --install "ndk;27.0.12077973"
 
-      - name: Build and deploy
-        run: make -C tests/e2e-grpc push
-        env:
-          ANDROID_SDK: /usr/local/lib/android/sdk
-
       - name: Run E2E tests on emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 34
           arch: x86_64
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
-          script: |
-            make -C tests/e2e-grpc start-server
-            adb forward tcp:50051 tcp:50051
-            JNICTL_E2E_ADDR=localhost:50051 go test ./tests/e2e-grpc/ -v -run TestEmulator
-            make -C tests/e2e-grpc stop-server
+          script: make test-emulator ARCH=x86_64
+        env:
+          ANDROID_SDK: /usr/local/lib/android/sdk
+          NDK: /usr/local/lib/android/sdk/ndk/27.0.12077973
