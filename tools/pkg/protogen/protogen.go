@@ -26,7 +26,7 @@ func Generate(specPath, overlayPath, outputDir, goModule string) error {
 		return fmt.Errorf("merge: %w", err)
 	}
 
-	data := buildProtoData(merged, goModule)
+	data := BuildProtoData(merged, goModule)
 
 	pkgDir := filepath.Join(outputDir, merged.Package)
 	if err := os.MkdirAll(pkgDir, 0o755); err != nil {

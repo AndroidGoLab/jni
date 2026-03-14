@@ -1,6 +1,9 @@
 package main
 
-import "github.com/spf13/cobra"
+import (
+	"github.com/spf13/cobra"
+	pb "github.com/xaionaro-go/jni/proto/handlestore"
+)
 
 var handleCmd = &cobra.Command{
 	Use:   "handle",
@@ -13,11 +16,16 @@ var handleReleaseCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
+		client := pb.NewHandleStoreServiceClient(grpcConn)
 		handle, err := cmd.Flags().GetInt64("handle")
 		if err != nil {
 			return err
 		}
-		return grpcClient.ReleaseHandle(ctx, handle)
+		resp, err := client.ReleaseHandle(ctx, &pb.ReleaseHandleRequest{Handle: handle})
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
 	},
 }
 

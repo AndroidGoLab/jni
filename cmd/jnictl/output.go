@@ -3,6 +3,9 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+
+	"google.golang.org/protobuf/encoding/protojson"
+	"google.golang.org/protobuf/proto"
 )
 
 func printResult(v any) error {
@@ -33,5 +36,16 @@ func printResult(v any) error {
 	default:
 		return fmt.Errorf("unknown format: %s", flagFormat)
 	}
+	return nil
+}
+
+// printProtoMessage marshals a proto message to JSON and prints it.
+func printProtoMessage(msg proto.Message) error {
+	opts := protojson.MarshalOptions{Multiline: true, Indent: "  "}
+	data, err := opts.Marshal(msg)
+	if err != nil {
+		return fmt.Errorf("marshal proto: %w", err)
+	}
+	fmt.Println(string(data))
 	return nil
 }

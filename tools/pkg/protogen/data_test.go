@@ -28,7 +28,7 @@ func TestBuildProtoData_DataClassMessages(t *testing.T) {
 		},
 	}
 
-	data := buildProtoData(merged, "example.com/mod")
+	data := BuildProtoData(merged, "example.com/mod")
 
 	if len(data.Messages) != 1 {
 		t.Fatalf("expected 1 message, got %d", len(data.Messages))
@@ -96,7 +96,7 @@ func TestBuildProtoData_DataClassCrossReference(t *testing.T) {
 		},
 	}
 
-	data := buildProtoData(merged, "example.com/mod")
+	data := BuildProtoData(merged, "example.com/mod")
 
 	if len(data.Messages) != 2 {
 		t.Fatalf("expected 2 messages, got %d", len(data.Messages))
@@ -157,7 +157,7 @@ func TestBuildProtoData_ManagerServiceWithMethods(t *testing.T) {
 		},
 	}
 
-	data := buildProtoData(merged, "example.com/mod")
+	data := BuildProtoData(merged, "example.com/mod")
 
 	// Should have 1 service.
 	if len(data.Services) != 1 {
@@ -260,7 +260,7 @@ func TestBuildProtoData_SkipsIterableDataClass(t *testing.T) {
 		},
 	}
 
-	data := buildProtoData(merged, "example.com/mod")
+	data := BuildProtoData(merged, "example.com/mod")
 
 	if len(data.Services) != 1 {
 		t.Fatalf("expected 1 service (Manager only), got %d", len(data.Services))
@@ -297,7 +297,7 @@ func TestBuildProtoData_Callbacks(t *testing.T) {
 		},
 	}
 
-	data := buildProtoData(merged, "example.com/mod")
+	data := BuildProtoData(merged, "example.com/mod")
 
 	// Should have a service with a streaming RPC.
 	if len(data.Services) != 1 {
@@ -359,7 +359,7 @@ func TestBuildProtoData_BidiCallbacks(t *testing.T) {
 		},
 	}
 
-	data := buildProtoData(merged, "example.com/mod")
+	data := BuildProtoData(merged, "example.com/mod")
 
 	if len(data.Services) != 1 {
 		t.Fatalf("expected 1 service, got %d", len(data.Services))
@@ -388,7 +388,7 @@ func TestBuildProtoData_BidiCallbacks(t *testing.T) {
 
 func TestBuildProtoData_PackageAndGoPackage(t *testing.T) {
 	merged := &javagen.MergedSpec{Package: "location"}
-	data := buildProtoData(merged, "github.com/example/jni")
+	data := BuildProtoData(merged, "github.com/example/jni")
 
 	if data.Package != "location" {
 		t.Errorf("expected package location, got %s", data.Package)
@@ -448,7 +448,7 @@ func TestBuildProtoData_CapitalizesNames(t *testing.T) {
 		},
 	}
 
-	data := buildProtoData(merged, "example.com/mod")
+	data := BuildProtoData(merged, "example.com/mod")
 
 	if len(data.Services) != 1 {
 		t.Fatalf("expected 1 service, got %d", len(data.Services))
