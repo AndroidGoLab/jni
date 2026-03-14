@@ -1,54 +1,434 @@
 package: telecom
-go_import: "github.com/xaionaro-go/jni/telecom"
-
+go_import: github.com/xaionaro-go/jni/telecom
 classes:
-  - java_class: android.telecom.TelecomManager
-    go_type: Manager
-    obtain: system_service
-    service_name: "telecom"
-    close: false
-
-    methods:
-      - java_method: isInCall
-        go_name: isInCallRaw
-        params: []
-        returns: boolean
-        error: true
-
-      - java_method: isInManagedCall
-        go_name: isInManagedCallRaw
-        params: []
-        returns: boolean
-        error: true
-
-      - java_method: getDefaultDialerPackage
-        go_name: getDefaultDialerPackageRaw
-        params: []
-        returns: String
-        error: true
-
-      - java_method: placeCall
-        go_name: placeCallRaw
-        params:
-          - { java_type: android.net.Uri, go_name: uri }
-          - { java_type: android.os.Bundle, go_name: extras }
-        returns: void
-        error: true
-
-      - java_method: silenceRinger
-        go_name: silenceRingerRaw
-        params: []
-        returns: void
-        error: true
-
-      - java_method: acceptRingingCall
-        go_name: acceptRingingCallRaw
-        params: []
-        returns: void
-        error: true
-
-      - java_method: endCall
-        go_name: endCallRaw
-        params: []
-        returns: boolean
-        error: true
+    - java_class: android.telecom.TelecomManager
+      go_type: telecomManager
+      obtain: system_service
+      service_name: telecom
+      close: true
+      methods:
+        - java_method: acceptHandover
+          go_name: AcceptHandover
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: acceptRingingCall
+          go_name: AcceptRingingCall0
+          returns: void
+          error: true
+        - java_method: acceptRingingCall
+          go_name: AcceptRingingCall1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: addCall
+          go_name: AddCall
+          params:
+            - java_type: android.telecom.CallAttributes
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: android.os.OutcomeReceiver<android.telecom.CallControl
+              go_name: arg2
+            - java_type: android.telecom.CallException>
+              go_name: arg3
+            - java_type: android.telecom.CallControlCallback
+              go_name: arg4
+            - java_type: android.telecom.CallEventCallback
+              go_name: arg5
+          returns: void
+          error: true
+        - java_method: addNewIncomingCall
+          go_name: AddNewIncomingCall
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: addNewIncomingConference
+          go_name: AddNewIncomingConference
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: cancelMissedCallsNotification
+          go_name: CancelMissedCallsNotification
+          returns: void
+          error: true
+        - java_method: createManageBlockedNumbersIntent
+          go_name: CreateManageBlockedNumbersIntent
+          returns: android.content.Intent
+          error: true
+        - java_method: endCall
+          go_name: EndCall
+          returns: boolean
+          error: true
+        - java_method: getAdnUriForPhoneAccount
+          go_name: GetAdnUriForPhoneAccount
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: getCallCapablePhoneAccounts
+          go_name: GetCallCapablePhoneAccounts
+          returns: java.util.List<android.telecom.PhoneAccountHandle>
+          error: true
+        - java_method: getDefaultDialerPackage
+          go_name: GetDefaultDialerPackage
+          returns: String
+          error: true
+        - java_method: getDefaultOutgoingPhoneAccount
+          go_name: GetDefaultOutgoingPhoneAccount
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.telecom.PhoneAccountHandle
+          error: true
+        - java_method: getLine1Number
+          go_name: GetLine1Number
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getOwnSelfManagedPhoneAccounts
+          go_name: GetOwnSelfManagedPhoneAccounts
+          returns: java.util.List<android.telecom.PhoneAccountHandle>
+          error: true
+        - java_method: getPhoneAccount
+          go_name: GetPhoneAccount
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: android.telecom.PhoneAccount
+          error: true
+        - java_method: getRegisteredPhoneAccounts
+          go_name: GetRegisteredPhoneAccounts
+          returns: java.util.List<android.telecom.PhoneAccount>
+          error: true
+        - java_method: getSelfManagedPhoneAccounts
+          go_name: GetSelfManagedPhoneAccounts
+          returns: java.util.List<android.telecom.PhoneAccountHandle>
+          error: true
+        - java_method: getSimCallManager
+          go_name: GetSimCallManager
+          returns: android.telecom.PhoneAccountHandle
+          error: true
+        - java_method: getSimCallManagerForSubscription
+          go_name: GetSimCallManagerForSubscription
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.telecom.PhoneAccountHandle
+          error: true
+        - java_method: getSystemDialerPackage
+          go_name: GetSystemDialerPackage
+          returns: String
+          error: true
+        - java_method: getUserSelectedOutgoingPhoneAccount
+          go_name: GetUserSelectedOutgoingPhoneAccount
+          returns: android.telecom.PhoneAccountHandle
+          error: true
+        - java_method: getVoiceMailNumber
+          go_name: GetVoiceMailNumber
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: handleMmi
+          go_name: HandleMmi1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: handleMmi
+          go_name: HandleMmi2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: hasManageOngoingCallsPermission
+          go_name: HasManageOngoingCallsPermission
+          returns: boolean
+          error: true
+        - java_method: isInCall
+          go_name: IsInCall
+          returns: boolean
+          error: true
+        - java_method: isInManagedCall
+          go_name: IsInManagedCall
+          returns: boolean
+          error: true
+        - java_method: isIncomingCallPermitted
+          go_name: IsIncomingCallPermitted
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isOutgoingCallPermitted
+          go_name: IsOutgoingCallPermitted
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isTtySupported
+          go_name: IsTtySupported
+          returns: boolean
+          error: true
+        - java_method: isVoiceMailNumber
+          go_name: IsVoiceMailNumber
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: placeCall
+          go_name: PlaceCall
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: registerPhoneAccount
+          go_name: RegisterPhoneAccount
+          params:
+            - java_type: android.telecom.PhoneAccount
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: showInCallScreen
+          go_name: ShowInCallScreen
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: silenceRinger
+          go_name: SilenceRinger
+          returns: void
+          error: true
+        - java_method: startConference
+          go_name: StartConference
+          params:
+            - java_type: java.util.List<android.net.Uri>
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: unregisterPhoneAccount
+          go_name: UnregisterPhoneAccount
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: void
+          error: true
+constants:
+    - go_name: ActionChangeDefaultDialer
+      value: '""'
+      go_type: string
+    - go_name: ActionChangePhoneAccounts
+      value: '""'
+      go_type: string
+    - go_name: ActionConfigurePhoneAccount
+      value: '""'
+      go_type: string
+    - go_name: ActionDefaultCallScreeningAppChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionDefaultDialerChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionIncomingCall
+      value: '""'
+      go_type: string
+    - go_name: ActionPhoneAccountRegistered
+      value: '""'
+      go_type: string
+    - go_name: ActionPhoneAccountUnregistered
+      value: '""'
+      go_type: string
+    - go_name: ActionPostCall
+      value: '""'
+      go_type: string
+    - go_name: ActionShowCallAccessibilitySettings
+      value: '""'
+      go_type: string
+    - go_name: ActionShowCallSettings
+      value: '""'
+      go_type: string
+    - go_name: ActionShowMissedCallsNotification
+      value: '""'
+      go_type: string
+    - go_name: ActionShowRespondViaSmsSettings
+      value: '""'
+      go_type: string
+    - go_name: DtmfCharacterPause
+      value: "0"
+      go_type: int
+    - go_name: DtmfCharacterWait
+      value: "0"
+      go_type: int
+    - go_name: DurationLong
+      value: "0"
+      go_type: int
+    - go_name: DurationMedium
+      value: "0"
+      go_type: int
+    - go_name: DurationShort
+      value: "0"
+      go_type: int
+    - go_name: DurationVeryShort
+      value: "0"
+      go_type: int
+    - go_name: ExtraCallBackNumber
+      value: '""'
+      go_type: string
+    - go_name: ExtraCallDisconnectCause
+      value: '""'
+      go_type: string
+    - go_name: ExtraCallDisconnectMessage
+      value: '""'
+      go_type: string
+    - go_name: ExtraCallDuration
+      value: '""'
+      go_type: string
+    - go_name: ExtraCallLogUri
+      value: '""'
+      go_type: string
+    - go_name: ExtraCallNetworkType
+      value: '""'
+      go_type: string
+    - go_name: ExtraCallSubject
+      value: '""'
+      go_type: string
+    - go_name: ExtraChangeDefaultDialerPackageName
+      value: '""'
+      go_type: string
+    - go_name: ExtraDefaultCallScreeningAppComponentName
+      value: '""'
+      go_type: string
+    - go_name: ExtraDisconnectCause
+      value: '""'
+      go_type: string
+    - go_name: ExtraHandle
+      value: '""'
+      go_type: string
+    - go_name: ExtraHasPicture
+      value: '""'
+      go_type: string
+    - go_name: ExtraIncomingCallAddress
+      value: '""'
+      go_type: string
+    - go_name: ExtraIncomingCallExtras
+      value: '""'
+      go_type: string
+    - go_name: ExtraIncomingVideoState
+      value: '""'
+      go_type: string
+    - go_name: ExtraIsDefaultCallScreeningApp
+      value: '""'
+      go_type: string
+    - go_name: ExtraLocation
+      value: '""'
+      go_type: string
+    - go_name: ExtraNotificationCount
+      value: '""'
+      go_type: string
+    - go_name: ExtraNotificationPhoneNumber
+      value: '""'
+      go_type: string
+    - go_name: ExtraOutgoingCallExtras
+      value: '""'
+      go_type: string
+    - go_name: ExtraOutgoingPicture
+      value: '""'
+      go_type: string
+    - go_name: ExtraPhoneAccountHandle
+      value: '""'
+      go_type: string
+    - go_name: ExtraPictureUri
+      value: '""'
+      go_type: string
+    - go_name: ExtraPriority
+      value: '""'
+      go_type: string
+    - go_name: ExtraStartCallWithRtt
+      value: '""'
+      go_type: string
+    - go_name: ExtraStartCallWithSpeakerphone
+      value: '""'
+      go_type: string
+    - go_name: ExtraStartCallWithVideoState
+      value: '""'
+      go_type: string
+    - go_name: ExtraUseAssistedDialing
+      value: '""'
+      go_type: string
+    - go_name: GatewayOriginalAddress
+      value: '""'
+      go_type: string
+    - go_name: GatewayProviderPackage
+      value: '""'
+      go_type: string
+    - go_name: MetadataIncludeExternalCalls
+      value: '""'
+      go_type: string
+    - go_name: MetadataIncludeSelfManagedCalls
+      value: '""'
+      go_type: string
+    - go_name: MetadataInCallServiceCarModeUi
+      value: '""'
+      go_type: string
+    - go_name: MetadataInCallServiceRinging
+      value: '""'
+      go_type: string
+    - go_name: MetadataInCallServiceUi
+      value: '""'
+      go_type: string
+    - go_name: PresentationAllowed
+      value: "0"
+      go_type: int
+    - go_name: PresentationPayphone
+      value: "0"
+      go_type: int
+    - go_name: PresentationRestricted
+      value: "0"
+      go_type: int
+    - go_name: PresentationUnavailable
+      value: "0"
+      go_type: int
+    - go_name: PresentationUnknown
+      value: "0"
+      go_type: int
+    - go_name: PriorityNormal
+      value: "0"
+      go_type: int
+    - go_name: PriorityUrgent
+      value: "0"
+      go_type: int

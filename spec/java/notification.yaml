@@ -1,199 +1,106 @@
 package: notification
-go_import: "github.com/xaionaro-go/jni/app/notification"
-
+go_import: github.com/xaionaro-go/jni/notification
 classes:
-  - java_class: android.app.NotificationManager
-    go_type: Manager
-    obtain: system_service
-    service_name: "notification"
-    close: true
-
-    methods:
-      - java_method: areNotificationsEnabled
-        params: []
-        returns: boolean
-        go_name: areNotificationsEnabled
-        error: true
-
-      - java_method: createNotificationChannel
-        params: [{ java_type: android.app.NotificationChannel, go_name: channel }]
-        returns: void
-        go_name: createNotificationChannel
-        error: true
-
-      - java_method: deleteNotificationChannel
-        params: [{ java_type: String, go_name: channelId }]
-        returns: void
-        go_name: deleteNotificationChannel
-        error: true
-
-      - java_method: getNotificationChannels
-        params: []
-        returns: java.util.List
-        go_name: getNotificationChannelsRaw
-        error: true
-
-      - java_method: notify
-        params:
-          - { java_type: int, go_name: id }
-          - { java_type: android.app.Notification, go_name: notification }
-        returns: void
-        go_name: notifyRaw
-        error: true
-
-      - java_method: cancel
-        params: [{ java_type: int, go_name: id }]
-        returns: void
-        go_name: cancel
-        error: true
-
-      - java_method: cancelAll
-        params: []
-        returns: void
-        go_name: cancelAll
-        error: true
-
-      - java_method: getActiveNotifications
-        params: []
-        returns: android.service.notification.StatusBarNotification[]
-        go_name: getActiveNotificationsRaw
-        error: true
-
-  - java_class: android.app.NotificationChannel
-    go_type: notificationChannel
-    obtain: constructor
-    constructor_params:
-      - { java_type: String, go_name: id }
-      - { java_type: java.lang.CharSequence, go_name: name }
-      - { java_type: int, go_name: importance }
-
-    methods:
-      - java_method: setDescription
-        params: [{ java_type: String, go_name: description }]
-        returns: void
-        go_name: setDescription
-
-      - java_method: getId
-        params: []
-        returns: String
-        go_name: getId
-
-      - java_method: getName
-        params: []
-        returns: java.lang.CharSequence
-        go_name: getName
-
-      - java_method: getDescription
-        params: []
-        returns: String
-        go_name: getDescription
-
-      - java_method: getImportance
-        params: []
-        returns: int
-        go_name: getImportance
-
-  - java_class: android.app.Notification$Builder
-    go_type: notificationBuilder
-    obtain: constructor
-    constructor_params:
-      - { java_type: android.content.Context, go_name: ctx }
-      - { java_type: String, go_name: channelId }
-
-    methods:
-      - java_method: setContentTitle
-        params: [{ java_type: java.lang.CharSequence, go_name: title }]
-        returns: android.app.Notification$Builder
-        go_name: setContentTitle
-
-      - java_method: setContentText
-        params: [{ java_type: java.lang.CharSequence, go_name: text }]
-        returns: android.app.Notification$Builder
-        go_name: setContentText
-
-      - java_method: setSmallIcon
-        params: [{ java_type: int, go_name: resId }]
-        returns: android.app.Notification$Builder
-        go_name: setSmallIcon
-
-      - java_method: setContentIntent
-        params: [{ java_type: android.app.PendingIntent, go_name: intent }]
-        returns: android.app.Notification$Builder
-        go_name: setContentIntent
-
-      - java_method: setAutoCancel
-        params: [{ java_type: boolean, go_name: autoCancel }]
-        returns: android.app.Notification$Builder
-        go_name: setAutoCancel
-
-      - java_method: setOngoing
-        params: [{ java_type: boolean, go_name: ongoing }]
-        returns: android.app.Notification$Builder
-        go_name: setOngoing
-
-      - java_method: setStyle
-        params: [{ java_type: android.app.Notification$Style, go_name: style }]
-        returns: android.app.Notification$Builder
-        go_name: setStyle
-
-      - java_method: setGroup
-        params: [{ java_type: String, go_name: groupKey }]
-        returns: android.app.Notification$Builder
-        go_name: setGroup
-
-      - java_method: setProgress
-        params:
-          - { java_type: int, go_name: max }
-          - { java_type: int, go_name: progress }
-          - { java_type: boolean, go_name: indeterminate }
-        returns: android.app.Notification$Builder
-        go_name: setProgress
-
-      - java_method: addAction
-        params:
-          - { java_type: int, go_name: icon }
-          - { java_type: java.lang.CharSequence, go_name: title }
-          - { java_type: android.app.PendingIntent, go_name: intent }
-        returns: android.app.Notification$Builder
-        go_name: addAction
-
-      - java_method: build
-        params: []
-        returns: android.app.Notification
-        go_name: build
-        error: true
-
-  - java_class: android.app.Notification$BigTextStyle
-    go_type: bigTextStyle
-    obtain: constructor
-    constructor_params: []
-
-    methods:
-      - java_method: bigText
-        params: [{ java_type: java.lang.CharSequence, go_name: text }]
-        returns: android.app.Notification$BigTextStyle
-        go_name: bigText
-
-  - java_class: android.service.notification.StatusBarNotification
-    go_type: statusBarNotification
-    kind: data_class
-    fields:
-      - { java_method: getId, returns: int, go_name: ID, go_type: int32 }
-
+    - java_class: android.service.notification.StatusBarNotification
+      go_type: statusBarNotification
+      methods:
+        - java_method: clone
+          go_name: Clone0
+          returns: android.service.notification.StatusBarNotification
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getGroupKey
+          go_name: GetGroupKey
+          returns: String
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: int
+          error: true
+        - java_method: getKey
+          go_name: GetKey
+          returns: String
+          error: true
+        - java_method: getNotification
+          go_name: GetNotification
+          returns: android.app.Notification
+          error: true
+        - java_method: getOpPkg
+          go_name: GetOpPkg
+          returns: String
+          error: true
+        - java_method: getOverrideGroupKey
+          go_name: GetOverrideGroupKey
+          returns: String
+          error: true
+        - java_method: getPackageName
+          go_name: GetPackageName
+          returns: String
+          error: true
+        - java_method: getPostTime
+          go_name: GetPostTime
+          returns: long
+          error: true
+        - java_method: getTag
+          go_name: GetTag
+          returns: String
+          error: true
+        - java_method: getUid
+          go_name: GetUid
+          returns: int
+          error: true
+        - java_method: getUser
+          go_name: GetUser
+          returns: android.os.UserHandle
+          error: true
+        - java_method: getUserId
+          go_name: GetUserId
+          returns: int
+          error: true
+        - java_method: isAppGroup
+          go_name: IsAppGroup
+          returns: boolean
+          error: true
+        - java_method: isClearable
+          go_name: IsClearable
+          returns: boolean
+          error: true
+        - java_method: isGroup
+          go_name: IsGroup
+          returns: boolean
+          error: true
+        - java_method: isOngoing
+          go_name: IsOngoing
+          returns: boolean
+          error: true
+        - java_method: setOverrideGroupKey
+          go_name: SetOverrideGroupKey
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: clone
+          go_name: Clone0_1
+          returns: java.lang.Object
+          error: true
 constants:
-  # NotificationManager importance levels (also used by NotificationChannel)
-  - go_name: ImportanceNone
-    value: "0"
-    go_type: int
-  - go_name: ImportanceMin
-    value: "1"
-    go_type: int
-  - go_name: ImportanceLow
-    value: "2"
-    go_type: int
-  - go_name: ImportanceDefault
-    value: "3"
-    go_type: int
-  - go_name: ImportanceHigh
-    value: "4"
-    go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int

@@ -1,12 +1,19 @@
-.PHONY: generate jni java proto protoc grpc cli clean lint test test-tools build list-commands
+.PHONY: generate specs jni java proto protoc grpc cli clean lint test test-tools build list-commands
 
 # JDK detection for host tests (jni.h and libjvm.so).
 JDK_HOME ?= $(shell readlink -f $$(which javac) 2>/dev/null | sed 's|/bin/javac$$||')
 JNI_INCLUDE ?= $(JDK_HOME)/include
 LIBJVM_DIR ?= $(shell find $(JDK_HOME) -name libjvm.so -printf '%h' -quit 2>/dev/null)
 
+# Android SDK platform JAR for specgen.
+ANDROID_JAR ?= $(ANDROID_HOME)/platforms/android-36/android.jar
+
 # Run all generators
-generate: jni java proto protoc grpc cli
+generate: specs jni java proto protoc grpc cli
+
+# Run specgen — generates YAML specs from ref/ .class files
+specs:
+	go run ./tools/cmd/specgen/ -ref ref -classpath $(ANDROID_JAR) -output spec/java/ -go-module github.com/xaionaro-go/jni
 
 # Run jnigen only — generates capi/ and root package idiomatic files
 jni:

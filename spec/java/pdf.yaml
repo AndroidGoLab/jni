@@ -1,101 +1,178 @@
 package: pdf
-go_import: "github.com/xaionaro-go/jni/graphics/pdf"
-
+go_import: github.com/xaionaro-go/jni/pdf
 classes:
-  - java_class: android.graphics.pdf.PdfRenderer
-    go_type: Renderer
-    obtain: constructor
-    close: true
-    methods:
-      - java_method: getPageCount
-        go_name: GetPageCount
-        params: []
-        returns: int
-        error: true
-
-      - java_method: openPage
-        go_name: openPageRaw
-        params:
-          - { java_type: int, go_name: index }
-        returns: android.graphics.pdf.PdfRenderer$Page
-        error: true
-
-      - java_method: close
-        go_name: closeRaw
-        params: []
-        returns: void
-        error: true
-
-  - java_class: android.graphics.pdf.PdfRenderer$Page
-    go_type: Page
-    close: true
-    methods:
-      - java_method: getWidth
-        go_name: GetWidth
-        params: []
-        returns: int
-        error: false
-
-      - java_method: getHeight
-        go_name: GetHeight
-        params: []
-        returns: int
-        error: false
-
-      - java_method: render
-        go_name: renderRaw
-        params:
-          - { java_type: android.graphics.Bitmap, go_name: bitmap }
-          - { java_type: android.graphics.Rect, go_name: destClip }
-          - { java_type: android.graphics.Matrix, go_name: transform }
-          - { java_type: int, go_name: renderMode }
-        returns: void
-        error: true
-
-      - java_method: close
-        go_name: closeRaw
-        params: []
-        returns: void
-        error: true
-
-  # Internal helper classes
-  - java_class: android.os.ParcelFileDescriptor
-    go_type: parcelFileDescriptor
-    obtain: static_factory
-    methods:
-      - java_method: open
-        go_name: openRaw
-        static: true
-        params:
-          - { java_type: java.io.File, go_name: file }
-          - { java_type: int, go_name: mode }
-        returns: android.os.ParcelFileDescriptor
-        error: true
-
-  - java_class: android.graphics.Bitmap
-    go_type: bitmap
-    obtain: static_factory
-    methods:
-      - java_method: createBitmap
-        go_name: createBitmapRaw
-        static: true
-        params:
-          - { java_type: int, go_name: width }
-          - { java_type: int, go_name: height }
-          - { java_type: android.graphics.Bitmap$Config, go_name: config }
-        returns: android.graphics.Bitmap
-        error: true
-
-      - java_method: copyPixelsToBuffer
-        go_name: copyPixelsToBufferRaw
-        params:
-          - { java_type: java.nio.Buffer, go_name: buffer }
-        returns: void
-        error: true
-
+    - java_class: android.graphics.pdf.PdfRenderer$Page
+      go_type: page
+      methods:
+        - java_method: applyEdit
+          go_name: ApplyEdit
+          params:
+            - java_type: android.graphics.pdf.models.FormEditRecord
+              go_name: arg0
+          returns: java.util.List<android.graphics.Rect>
+          error: true
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: getFormWidgetInfoAtIndex
+          go_name: GetFormWidgetInfoAtIndex
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.graphics.pdf.models.FormWidgetInfo
+          error: true
+        - java_method: getFormWidgetInfoAtPosition
+          go_name: GetFormWidgetInfoAtPosition
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.graphics.pdf.models.FormWidgetInfo
+          error: true
+        - java_method: getFormWidgetInfos
+          go_name: GetFormWidgetInfos0
+          returns: java.util.List<android.graphics.pdf.models.FormWidgetInfo>
+          error: true
+        - java_method: getFormWidgetInfos
+          go_name: GetFormWidgetInfos1_1
+          params:
+            - java_type: '[I'
+              go_name: arg0
+          returns: java.util.List<android.graphics.pdf.models.FormWidgetInfo>
+          error: true
+        - java_method: getGotoLinks
+          go_name: GetGotoLinks
+          returns: java.util.List<android.graphics.pdf.content.PdfPageGotoLinkContent>
+          error: true
+        - java_method: getHeight
+          go_name: GetHeight
+          returns: int
+          error: true
+        - java_method: getImageContents
+          go_name: GetImageContents
+          returns: java.util.List<android.graphics.pdf.content.PdfPageImageContent>
+          error: true
+        - java_method: getIndex
+          go_name: GetIndex
+          returns: int
+          error: true
+        - java_method: getLinkContents
+          go_name: GetLinkContents
+          returns: java.util.List<android.graphics.pdf.content.PdfPageLinkContent>
+          error: true
+        - java_method: getTextContents
+          go_name: GetTextContents
+          returns: java.util.List<android.graphics.pdf.content.PdfPageTextContent>
+          error: true
+        - java_method: getWidth
+          go_name: GetWidth
+          returns: int
+          error: true
+        - java_method: render
+          go_name: Render4
+          params:
+            - java_type: android.graphics.Bitmap
+              go_name: arg0
+            - java_type: android.graphics.Rect
+              go_name: arg1
+            - java_type: android.graphics.Matrix
+              go_name: arg2
+            - java_type: android.graphics.pdf.RenderParams
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: render
+          go_name: Render4_1
+          params:
+            - java_type: android.graphics.Bitmap
+              go_name: arg0
+            - java_type: android.graphics.Rect
+              go_name: arg1
+            - java_type: android.graphics.Matrix
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: searchText
+          go_name: SearchText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.List<android.graphics.pdf.models.PageMatchBounds>
+          error: true
+        - java_method: selectContent
+          go_name: SelectContent
+          params:
+            - java_type: android.graphics.pdf.models.selection.SelectionBoundary
+              go_name: arg0
+            - java_type: android.graphics.pdf.models.selection.SelectionBoundary
+              go_name: arg1
+          returns: android.graphics.pdf.models.selection.PageSelection
+          error: true
+    - java_class: android.graphics.pdf.PdfRenderer
+      go_type: pdfRenderer
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: getDocumentLinearizationType
+          go_name: GetDocumentLinearizationType
+          returns: int
+          error: true
+        - java_method: getPageCount
+          go_name: GetPageCount
+          returns: int
+          error: true
+        - java_method: getPdfFormType
+          go_name: GetPdfFormType
+          returns: int
+          error: true
+        - java_method: openPage
+          go_name: OpenPage
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.graphics.pdf.PdfRenderer$Page
+          error: true
+        - java_method: shouldScaleForPrinting
+          go_name: ShouldScaleForPrinting
+          returns: boolean
+          error: true
+        - java_method: write
+          go_name: Write
+          params:
+            - java_type: android.os.ParcelFileDescriptor
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
 constants:
-  - { go_name: RenderModeForDisplay, value: 1, go_type: int }
-  - { go_name: RenderModeForPrint, value: 2, go_type: int }
-  - { go_name: ModeReadOnly, value: "268435456", go_type: int }
-
-callbacks: []
+    - go_name: RenderModeForDisplay
+      value: "0"
+      go_type: int
+    - go_name: RenderModeForPrint
+      value: "0"
+      go_type: int
+    - go_name: DocumentLinearizedTypeLinearized
+      value: "0"
+      go_type: int
+    - go_name: DocumentLinearizedTypeNonLinearized
+      value: "0"
+      go_type: int
+    - go_name: PdfFormTypeAcroForm
+      value: "0"
+      go_type: int
+    - go_name: PdfFormTypeNone
+      value: "0"
+      go_type: int
+    - go_name: PdfFormTypeXfaForeground
+      value: "0"
+      go_type: int
+    - go_name: PdfFormTypeXfaFull
+      value: "0"
+      go_type: int

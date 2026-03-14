@@ -1,68 +1,244 @@
 package: companion
-go_import: "github.com/xaionaro-go/jni/companion"
-
+go_import: github.com/xaionaro-go/jni/companion
 classes:
-  - java_class: android.companion.CompanionDeviceManager
-    go_type: Manager
-    obtain: system_service
-    service_name: "companion_device"
-    close: false
-    methods:
-      - java_method: associate
-        go_name: associateRaw
-        params:
-          - { java_type: android.companion.AssociationRequest, go_name: request }
-          - { java_type: android.companion.CompanionDeviceManager$Callback, go_name: callback }
-          - { java_type: android.os.Handler, go_name: handler }
-        returns: void
-        error: true
-
-      - java_method: disassociate
-        go_name: disassociateByIdRaw
-        params:
-          - { java_type: int, go_name: associationId }
-        returns: void
-        error: true
-
-      - java_method: getAssociations
-        go_name: getAssociationsRaw
-        params: []
-        returns: java.util.List
-        error: true
-
-  - java_class: android.companion.AssociationRequest$Builder
-    go_type: associationRequestBuilder
-    kind: builder
-    methods:
-      - java_method: setSingleDevice
-        go_name: setSingleDevice
-        params:
-          - { java_type: boolean, go_name: singleDevice }
-        returns: android.companion.AssociationRequest$Builder
-
-      - java_method: addDeviceFilter
-        go_name: addDeviceFilter
-        params:
-          - { java_type: android.companion.DeviceFilter, go_name: filter }
-        returns: android.companion.AssociationRequest$Builder
-
-      - java_method: build
-        go_name: build
-        params: []
-        returns: android.companion.AssociationRequest
-
-constants: []
-
-callbacks:
-  - java_interface: android.companion.CompanionDeviceManager$Callback
-    go_type: companionCallback
-    methods:
-      - java_method: onDeviceFound
-        params:
-          - android.content.IntentSender
-        go_field: OnDeviceFound
-
-      - java_method: onFailure
-        params:
-          - java.lang.CharSequence
-        go_field: OnFailure
+    - java_class: android.companion.AssociationRequest$Builder
+      go_type: builder
+      methods:
+        - java_method: addDeviceFilter
+          go_name: AddDeviceFilter
+          params:
+            - java_type: android.companion.DeviceFilter<?>
+              go_name: arg0
+          returns: android.companion.AssociationRequest$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.companion.AssociationRequest
+          error: true
+        - java_method: setDeviceProfile
+          go_name: SetDeviceProfile
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.companion.AssociationRequest$Builder
+          error: true
+        - java_method: setDisplayName
+          go_name: SetDisplayName
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.companion.AssociationRequest$Builder
+          error: true
+        - java_method: setForceConfirmation
+          go_name: SetForceConfirmation
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.companion.AssociationRequest$Builder
+          error: true
+        - java_method: setSelfManaged
+          go_name: SetSelfManaged
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.companion.AssociationRequest$Builder
+          error: true
+        - java_method: setSingleDevice
+          go_name: SetSingleDevice
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.companion.AssociationRequest$Builder
+          error: true
+    - java_class: android.companion.CompanionDeviceManager
+      go_type: companionDeviceManager
+      obtain: system_service
+      service_name: companiondevice
+      close: true
+      methods:
+        - java_method: associate
+          go_name: Associate
+          params:
+            - java_type: android.companion.AssociationRequest
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: android.companion.CompanionDeviceManager$Callback
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: attachSystemDataTransport
+          go_name: AttachSystemDataTransport
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: java.io.InputStream
+              go_name: arg1
+            - java_type: java.io.OutputStream
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: buildAssociationCancellationIntent
+          go_name: BuildAssociationCancellationIntent
+          returns: android.content.IntentSender
+          error: true
+        - java_method: buildPermissionTransferUserConsentIntent
+          go_name: BuildPermissionTransferUserConsentIntent
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.content.IntentSender
+          error: true
+        - java_method: detachSystemDataTransport
+          go_name: DetachSystemDataTransport
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: disableSystemDataSyncForTypes
+          go_name: DisableSystemDataSyncForTypes
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: disassociate
+          go_name: Disassociate1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: disassociate
+          go_name: Disassociate1_1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: enableSystemDataSyncForTypes
+          go_name: EnableSystemDataSyncForTypes
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: getAssociations
+          go_name: GetAssociations
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getMyAssociations
+          go_name: GetMyAssociations
+          returns: java.util.List<android.companion.AssociationInfo>
+          error: true
+        - java_method: hasNotificationAccess
+          go_name: HasNotificationAccess
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isPermissionTransferUserConsented
+          go_name: IsPermissionTransferUserConsented
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: removeBond
+          go_name: RemoveBond
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: requestNotificationAccess
+          go_name: RequestNotificationAccess
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDeviceId
+          go_name: SetDeviceId
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.companion.DeviceId
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: startObservingDevicePresence
+          go_name: StartObservingDevicePresence1
+          params:
+            - java_type: android.companion.ObservingDevicePresenceRequest
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: startObservingDevicePresence
+          go_name: StartObservingDevicePresence1_1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: startSystemDataTransfer
+          go_name: StartSystemDataTransfer
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: android.os.OutcomeReceiver<java.lang.Void
+              go_name: arg2
+            - java_type: android.companion.CompanionException>
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: stopObservingDevicePresence
+          go_name: StopObservingDevicePresence1
+          params:
+            - java_type: android.companion.ObservingDevicePresenceRequest
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: stopObservingDevicePresence
+          go_name: StopObservingDevicePresence1_1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+constants:
+    - go_name: ExtraAssociation
+      value: '""'
+      go_type: string
+    - go_name: ExtraDevice
+      value: '""'
+      go_type: string
+    - go_name: FlagCallMetadata
+      value: "0"
+      go_type: int
+    - go_name: ResultCanceled
+      value: "0"
+      go_type: int
+    - go_name: ResultDiscoveryTimeout
+      value: "0"
+      go_type: int
+    - go_name: ResultInternalError
+      value: "0"
+      go_type: int
+    - go_name: ResultOk
+      value: "0"
+      go_type: int
+    - go_name: ResultSecurityError
+      value: "0"
+      go_type: int
+    - go_name: ResultUserRejected
+      value: "0"
+      go_type: int

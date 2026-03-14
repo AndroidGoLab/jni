@@ -1,143 +1,911 @@
 package: wifi_p2p
-go_import: "github.com/xaionaro-go/jni/net/wifi/p2p"
-
+go_import: github.com/xaionaro-go/jni/net/wifi/p2p
 classes:
-  - java_class: android.net.wifi.p2p.WifiP2pManager
-    go_type: Manager
-    obtain: system_service
-    service_name: "wifip2p"
-    close: true
-
-    methods:
-      - java_method: initialize
-        go_name: initializeRaw
-        params:
-          - { java_type: android.content.Context, go_name: ctx }
-          - { java_type: android.os.Looper, go_name: looper }
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$ChannelListener, go_name: listener }
-        returns: android.net.wifi.p2p.WifiP2pManager$Channel
-        error: true
-
-      - java_method: discoverPeers
-        go_name: discoverPeersRaw
-        params:
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$Channel, go_name: channel }
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener, go_name: listener }
-        returns: void
-        error: true
-
-      - java_method: stopPeerDiscovery
-        go_name: stopPeerDiscoveryRaw
-        params:
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$Channel, go_name: channel }
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener, go_name: listener }
-        returns: void
-        error: true
-
-      - java_method: connect
-        go_name: connectRaw
-        params:
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$Channel, go_name: channel }
-          - { java_type: android.net.wifi.p2p.WifiP2pConfig, go_name: config }
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener, go_name: listener }
-        returns: void
-        error: true
-
-      - java_method: cancelConnect
-        go_name: cancelConnectRaw
-        params:
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$Channel, go_name: channel }
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener, go_name: listener }
-        returns: void
-        error: true
-
-      - java_method: createGroup
-        go_name: createGroupRaw
-        params:
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$Channel, go_name: channel }
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener, go_name: listener }
-        returns: void
-        error: true
-
-      - java_method: removeGroup
-        go_name: removeGroupRaw
-        params:
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$Channel, go_name: channel }
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener, go_name: listener }
-        returns: void
-        error: true
-
-      - java_method: requestConnectionInfo
-        go_name: requestConnectionInfoRaw
-        params:
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$Channel, go_name: channel }
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$ConnectionInfoListener, go_name: listener }
-        returns: void
-        error: true
-
-      - java_method: requestPeers
-        go_name: requestPeersRaw
-        params:
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$Channel, go_name: channel }
-          - { java_type: android.net.wifi.p2p.WifiP2pManager$PeerListListener, go_name: listener }
-        returns: void
-        error: true
-
-  - java_class: android.net.wifi.p2p.WifiP2pDevice
-    go_type: Device
-    kind: data_class
-    fields:
-      - { java_field: deviceName, returns: String, go_name: Name, go_type: string }
-      - { java_field: deviceAddress, returns: String, go_name: Address, go_type: string }
-      - { java_field: status, returns: int, go_name: Status, go_type: int }
-
-  - java_class: android.net.wifi.p2p.WifiP2pGroup
-    go_type: Group
-    kind: data_class
-    fields:
-      - { java_method: getNetworkName, returns: String, go_name: NetworkName, go_type: string }
-      - { java_method: getPassphrase, returns: String, go_name: Passphrase, go_type: string }
-      - { java_method: isGroupOwner, returns: boolean, go_name: IsOwner, go_type: bool }
-
-  - java_class: android.net.wifi.p2p.WifiP2pConfig
-    go_type: p2pConfig
-    obtain: constructor
-    kind: builder
-    methods:
-      - java_method: toString
-        go_name: toString
-        params: []
-        returns: String
-        error: false
-    fields:
-      - { java_field: deviceAddress, returns: String, go_name: DeviceAddress, go_type: string }
-
-callbacks:
-  - java_interface: android.net.wifi.p2p.WifiP2pManager$ActionListener
-    go_type: actionListener
-    methods:
-      - { java_method: onSuccess, params: [], go_field: OnSuccess }
-      - { java_method: onFailure, params: [int], go_field: OnFailure }
-
-  - java_interface: android.net.wifi.p2p.WifiP2pManager$PeerListListener
-    go_type: peerListListener
-    methods:
-      - { java_method: onPeersAvailable, params: [android.net.wifi.p2p.WifiP2pDeviceList], go_field: OnPeersAvailable }
-
-  - java_interface: android.net.wifi.p2p.WifiP2pManager$ConnectionInfoListener
-    go_type: connectionInfoListener
-    methods:
-      - { java_method: onConnectionInfoAvailable, params: [android.net.wifi.p2p.WifiP2pInfo], go_field: OnConnectionInfoAvailable }
-
-  - java_interface: android.net.wifi.p2p.WifiP2pManager$ChannelListener
-    go_type: channelListener
-    methods:
-      - { java_method: onChannelDisconnected, params: [], go_field: OnChannelDisconnected }
-
+    - java_class: android.net.wifi.p2p.WifiP2pConfig
+      go_type: wifiP2pConfig
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getGroupClientIpProvisioningMode
+          go_name: GetGroupClientIpProvisioningMode
+          returns: int
+          error: true
+        - java_method: getGroupOwnerBand
+          go_name: GetGroupOwnerBand
+          returns: int
+          error: true
+        - java_method: getGroupOwnerVersion
+          go_name: GetGroupOwnerVersion
+          returns: int
+          error: true
+        - java_method: getNetworkId
+          go_name: GetNetworkId
+          returns: int
+          error: true
+        - java_method: getNetworkName
+          go_name: GetNetworkName
+          returns: String
+          error: true
+        - java_method: getPairingBootstrappingConfig
+          go_name: GetPairingBootstrappingConfig
+          returns: android.net.wifi.p2p.WifiP2pPairingBootstrappingConfig
+          error: true
+        - java_method: getPassphrase
+          go_name: GetPassphrase
+          returns: String
+          error: true
+        - java_method: getPccModeConnectionType
+          go_name: GetPccModeConnectionType
+          returns: int
+          error: true
+        - java_method: isAuthorizeConnectionFromPeerEnabled
+          go_name: IsAuthorizeConnectionFromPeerEnabled
+          returns: boolean
+          error: true
+        - java_method: setGroupOwnerVersion
+          go_name: SetGroupOwnerVersion
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.net.wifi.p2p.WifiP2pDevice
+      go_type: wifiP2pDevice
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getIpAddress
+          go_name: GetIpAddress
+          returns: java.net.InetAddress
+          error: true
+        - java_method: getVendorElements
+          go_name: GetVendorElements
+          returns: java.util.List<android.net.wifi.ScanResult$InformationElement>
+          error: true
+        - java_method: getWfdInfo
+          go_name: GetWfdInfo
+          returns: android.net.wifi.p2p.WifiP2pWfdInfo
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isGroupOwner
+          go_name: IsGroupOwner
+          returns: boolean
+          error: true
+        - java_method: isOpportunisticBootstrappingMethodSupported
+          go_name: IsOpportunisticBootstrappingMethodSupported
+          returns: boolean
+          error: true
+        - java_method: isPassphraseDisplayBootstrappingMethodSupported
+          go_name: IsPassphraseDisplayBootstrappingMethodSupported
+          returns: boolean
+          error: true
+        - java_method: isPassphraseKeypadBootstrappingMethodSupported
+          go_name: IsPassphraseKeypadBootstrappingMethodSupported
+          returns: boolean
+          error: true
+        - java_method: isPinCodeDisplayBootstrappingMethodSupported
+          go_name: IsPinCodeDisplayBootstrappingMethodSupported
+          returns: boolean
+          error: true
+        - java_method: isPinCodeKeypadBootstrappingMethodSupported
+          go_name: IsPinCodeKeypadBootstrappingMethodSupported
+          returns: boolean
+          error: true
+        - java_method: isServiceDiscoveryCapable
+          go_name: IsServiceDiscoveryCapable
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: update
+          go_name: Update
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pDevice
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: wpsDisplaySupported
+          go_name: WpsDisplaySupported
+          returns: boolean
+          error: true
+        - java_method: wpsKeypadSupported
+          go_name: WpsKeypadSupported
+          returns: boolean
+          error: true
+        - java_method: wpsPbcSupported
+          go_name: WpsPbcSupported
+          returns: boolean
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.net.wifi.p2p.WifiP2pGroup
+      go_type: wifiP2pGroup
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getClientList
+          go_name: GetClientList
+          returns: java.util.Collection<android.net.wifi.p2p.WifiP2pDevice>
+          error: true
+        - java_method: getFrequency
+          go_name: GetFrequency
+          returns: int
+          error: true
+        - java_method: getGroupOwnerBssid
+          go_name: GetGroupOwnerBssid
+          returns: android.net.MacAddress
+          error: true
+        - java_method: getInterface
+          go_name: GetInterface
+          returns: String
+          error: true
+        - java_method: getNetworkId
+          go_name: GetNetworkId
+          returns: int
+          error: true
+        - java_method: getNetworkName
+          go_name: GetNetworkName
+          returns: String
+          error: true
+        - java_method: getOwner
+          go_name: GetOwner
+          returns: android.net.wifi.p2p.WifiP2pDevice
+          error: true
+        - java_method: getPassphrase
+          go_name: GetPassphrase
+          returns: String
+          error: true
+        - java_method: getSecurityType
+          go_name: GetSecurityType
+          returns: int
+          error: true
+        - java_method: isGroupOwner
+          go_name: IsGroupOwner
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.net.wifi.p2p.WifiP2pManager
+      go_type: wifiP2pManager
+      obtain: system_service
+      service_name: wifip2p
+      close: true
+      methods:
+        - java_method: addExternalApprover
+          go_name: AddExternalApprover
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.MacAddress
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ExternalApproverRequestListener
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: addLocalService
+          go_name: AddLocalService
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.nsd.WifiP2pServiceInfo
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: addServiceRequest
+          go_name: AddServiceRequest
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.nsd.WifiP2pServiceRequest
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: cancelConnect
+          go_name: CancelConnect
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: clearLocalServices
+          go_name: ClearLocalServices
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: clearServiceRequests
+          go_name: ClearServiceRequests
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: connect
+          go_name: Connect
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pConfig
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: createGroup
+          go_name: CreateGroup3
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pConfig
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: createGroup
+          go_name: CreateGroup2_1
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: discoverPeers
+          go_name: DiscoverPeers
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: discoverPeersOnSocialChannels
+          go_name: DiscoverPeersOnSocialChannels
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: discoverPeersOnSpecificFrequency
+          go_name: DiscoverPeersOnSpecificFrequency
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: discoverServices
+          go_name: DiscoverServices
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: discoverUsdBasedServices
+          go_name: DiscoverUsdBasedServices
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pUsdBasedServiceDiscoveryConfig
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: getListenState
+          go_name: GetListenState
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: java.util.function.Consumer<java.lang.Integer>
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: initialize
+          go_name: Initialize
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.os.Looper
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ChannelListener
+              go_name: arg2
+          returns: android.net.wifi.p2p.WifiP2pManager$Channel
+          error: true
+        - java_method: isChannelConstrainedDiscoverySupported
+          go_name: IsChannelConstrainedDiscoverySupported
+          returns: boolean
+          error: true
+        - java_method: isGroupClientRemovalSupported
+          go_name: IsGroupClientRemovalSupported
+          returns: boolean
+          error: true
+        - java_method: isGroupOwnerIPv6LinkLocalAddressProvided
+          go_name: IsGroupOwnerIPv6LinkLocalAddressProvided
+          returns: boolean
+          error: true
+        - java_method: isPccModeSupported
+          go_name: IsPccModeSupported
+          returns: boolean
+          error: true
+        - java_method: isSetVendorElementsSupported
+          go_name: IsSetVendorElementsSupported
+          returns: boolean
+          error: true
+        - java_method: isWiFiDirectR2Supported
+          go_name: IsWiFiDirectR2Supported
+          returns: boolean
+          error: true
+        - java_method: registerWifiP2pListener
+          go_name: RegisterWifiP2pListener
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$WifiP2pListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: removeClient
+          go_name: RemoveClient
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.MacAddress
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: removeExternalApprover
+          go_name: RemoveExternalApprover
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.MacAddress
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: removeGroup
+          go_name: RemoveGroup
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: removeLocalService
+          go_name: RemoveLocalService
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.nsd.WifiP2pServiceInfo
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: removeServiceRequest
+          go_name: RemoveServiceRequest
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.nsd.WifiP2pServiceRequest
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: requestConnectionInfo
+          go_name: RequestConnectionInfo
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ConnectionInfoListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: requestDeviceInfo
+          go_name: RequestDeviceInfo
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$DeviceInfoListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: requestDirInfo
+          go_name: RequestDirInfo
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: android.os.OutcomeReceiver<android.net.wifi.p2p.WifiP2pDirInfo
+              go_name: arg2
+            - java_type: java.lang.Exception>
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: requestDiscoveryState
+          go_name: RequestDiscoveryState
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$DiscoveryStateListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: requestGroupInfo
+          go_name: RequestGroupInfo
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$GroupInfoListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: requestNetworkInfo
+          go_name: RequestNetworkInfo
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$NetworkInfoListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: requestP2pState
+          go_name: RequestP2pState
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$P2pStateListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: requestPeers
+          go_name: RequestPeers
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$PeerListListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setConnectionRequestResult
+          go_name: SetConnectionRequestResult4
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.MacAddress
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: setConnectionRequestResult
+          go_name: SetConnectionRequestResult5_1
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.MacAddress
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg4
+          returns: void
+          error: true
+        - java_method: setDnsSdResponseListeners
+          go_name: SetDnsSdResponseListeners
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$DnsSdServiceResponseListener
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pManager$DnsSdTxtRecordListener
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setServiceResponseListener
+          go_name: SetServiceResponseListener
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ServiceResponseListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setUpnpServiceResponseListener
+          go_name: SetUpnpServiceResponseListener
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$UpnpServiceResponseListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setVendorElements
+          go_name: SetVendorElements
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: java.util.List<android.net.wifi.ScanResult$InformationElement>
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setWfdInfo
+          go_name: SetWfdInfo
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pWfdInfo
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: startListening
+          go_name: StartListening
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: startPeerDiscovery
+          go_name: StartPeerDiscovery
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pDiscoveryConfig
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: startUsdBasedLocalServiceAdvertisement
+          go_name: StartUsdBasedLocalServiceAdvertisement
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.nsd.WifiP2pServiceInfo
+              go_name: arg1
+            - java_type: android.net.wifi.p2p.WifiP2pUsdBasedLocalServiceAdvertisementConfig
+              go_name: arg2
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: stopListening
+          go_name: StopListening
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: stopPeerDiscovery
+          go_name: StopPeerDiscovery
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pManager$ActionListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: unregisterWifiP2pListener
+          go_name: UnregisterWifiP2pListener
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$WifiP2pListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: validateDirInfo
+          go_name: ValidateDirInfo
+          params:
+            - java_type: android.net.wifi.p2p.WifiP2pManager$Channel
+              go_name: arg0
+            - java_type: android.net.wifi.p2p.WifiP2pDirInfo
+              go_name: arg1
+            - java_type: java.util.concurrent.Executor
+              go_name: arg2
+            - java_type: android.os.OutcomeReceiver<java.lang.Boolean
+              go_name: arg3
+            - java_type: java.lang.Exception>
+              go_name: arg4
+          returns: void
+          error: true
+      static_methods:
+        - java_method: getP2pMaxAllowedVendorElementsLengthBytes
+          go_name: GetP2pMaxAllowedVendorElementsLengthBytes
+          returns: int
+          error: true
 constants:
-  # Device status
-  - { go_name: StatusConnected, value: "0", go_type: int }
-  - { go_name: StatusInvited, value: "1", go_type: int }
-  - { go_name: StatusFailed, value: "2", go_type: int }
-  - { go_name: StatusAvailable, value: "3", go_type: int }
-  - { go_name: StatusUnavailable, value: "4", go_type: int }
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: GroupClientIpProvisioningModeIpv4Dhcp
+      value: "0"
+      go_type: int
+    - go_name: GroupClientIpProvisioningModeIpv6LinkLocal
+      value: "0"
+      go_type: int
+    - go_name: GroupOwnerBand2ghz
+      value: "0"
+      go_type: int
+    - go_name: GroupOwnerBand5ghz
+      value: "0"
+      go_type: int
+    - go_name: GroupOwnerBand6ghz
+      value: "0"
+      go_type: int
+    - go_name: GroupOwnerBandAuto
+      value: "0"
+      go_type: int
+    - go_name: GroupOwnerIntentAuto
+      value: "0"
+      go_type: int
+    - go_name: GroupOwnerIntentMax
+      value: "0"
+      go_type: int
+    - go_name: GroupOwnerIntentMin
+      value: "0"
+      go_type: int
+    - go_name: P2pVersion1
+      value: "0"
+      go_type: int
+    - go_name: P2pVersion2
+      value: "0"
+      go_type: int
+    - go_name: PccModeConnectionTypeLegacyOnly
+      value: "0"
+      go_type: int
+    - go_name: PccModeConnectionTypeLegacyOrR2
+      value: "0"
+      go_type: int
+    - go_name: PccModeConnectionTypeR2Only
+      value: "0"
+      go_type: int
+    - go_name: Available
+      value: "0"
+      go_type: int
+    - go_name: Connected
+      value: "0"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: Failed
+      value: "0"
+      go_type: int
+    - go_name: Invited
+      value: "0"
+      go_type: int
+    - go_name: Unavailable
+      value: "0"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: NetworkIdPersistent
+      value: "0"
+      go_type: int
+    - go_name: NetworkIdTemporary
+      value: "0"
+      go_type: int
+    - go_name: SecurityTypeUnknown
+      value: "0"
+      go_type: int
+    - go_name: SecurityTypeWpa2Psk
+      value: "0"
+      go_type: int
+    - go_name: SecurityTypeWpa3Compatibility
+      value: "0"
+      go_type: int
+    - go_name: SecurityTypeWpa3Sae
+      value: "0"
+      go_type: int
+    - go_name: ActionWifiP2pListenStateChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionWifiP2pRequestResponseChanged
+      value: '""'
+      go_type: string
+    - go_name: Busy
+      value: "0"
+      go_type: int
+    - go_name: ConnectionRequestAccept
+      value: "0"
+      go_type: int
+    - go_name: ConnectionRequestDeferShowPinToService
+      value: "0"
+      go_type: int
+    - go_name: ConnectionRequestDeferToService
+      value: "0"
+      go_type: int
+    - go_name: ConnectionRequestReject
+      value: "0"
+      go_type: int
+    - go_name: Error
+      value: "0"
+      go_type: int
+    - go_name: ExtraDiscoveryState
+      value: '""'
+      go_type: string
+    - go_name: ExtraListenState
+      value: '""'
+      go_type: string
+    - go_name: ExtraNetworkInfo
+      value: '""'
+      go_type: string
+    - go_name: ExtraP2pDeviceList
+      value: '""'
+      go_type: string
+    - go_name: ExtraRequestConfig
+      value: '""'
+      go_type: string
+    - go_name: ExtraRequestResponse
+      value: '""'
+      go_type: string
+    - go_name: ExtraWifiP2pDevice
+      value: '""'
+      go_type: string
+    - go_name: ExtraWifiP2pGroup
+      value: '""'
+      go_type: string
+    - go_name: ExtraWifiP2pInfo
+      value: '""'
+      go_type: string
+    - go_name: ExtraWifiState
+      value: '""'
+      go_type: string
+    - go_name: GroupCreationFailureReasonConnectionCancelled
+      value: "0"
+      go_type: int
+    - go_name: GroupCreationFailureReasonGroupRemoved
+      value: "0"
+      go_type: int
+    - go_name: GroupCreationFailureReasonInvitationFailed
+      value: "0"
+      go_type: int
+    - go_name: GroupCreationFailureReasonProvisionDiscoveryFailed
+      value: "0"
+      go_type: int
+    - go_name: GroupCreationFailureReasonTimedOut
+      value: "0"
+      go_type: int
+    - go_name: GroupCreationFailureReasonUserRejected
+      value: "0"
+      go_type: int
+    - go_name: NoPermission
+      value: "0"
+      go_type: int
+    - go_name: NoServiceRequests
+      value: "0"
+      go_type: int
+    - go_name: P2pUnsupported
+      value: "0"
+      go_type: int
+    - go_name: WifiP2pConnectionChangedAction
+      value: '""'
+      go_type: string
+    - go_name: WifiP2pDiscoveryChangedAction
+      value: '""'
+      go_type: string
+    - go_name: WifiP2pDiscoveryStarted
+      value: "0"
+      go_type: int
+    - go_name: WifiP2pDiscoveryStopped
+      value: "0"
+      go_type: int
+    - go_name: WifiP2pListenStarted
+      value: "0"
+      go_type: int
+    - go_name: WifiP2pListenStopped
+      value: "0"
+      go_type: int
+    - go_name: WifiP2pPeersChangedAction
+      value: '""'
+      go_type: string
+    - go_name: WifiP2pScanFull
+      value: "0"
+      go_type: int
+    - go_name: WifiP2pScanSingleFreq
+      value: "0"
+      go_type: int
+    - go_name: WifiP2pScanSocial
+      value: "0"
+      go_type: int
+    - go_name: WifiP2pStateChangedAction
+      value: '""'
+      go_type: string
+    - go_name: WifiP2pStateDisabled
+      value: "0"
+      go_type: int
+    - go_name: WifiP2pStateEnabled
+      value: "0"
+      go_type: int
+    - go_name: WifiP2pThisDeviceChangedAction
+      value: '""'
+      go_type: string

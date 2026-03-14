@@ -1,52 +1,1463 @@
 package: telephony
-go_import: "github.com/xaionaro-go/jni/telephony"
-
+go_import: github.com/xaionaro-go/jni/telephony
 classes:
-  - java_class: android.telephony.TelephonyManager
-    go_type: Manager
-    obtain: system_service
-    service_name: "phone"
-    close: false  # lightweight, no callbacks to unregister
-
-    methods:
-      - java_method: getNetworkOperatorName
-        params: []
-        returns: String
-        go_name: getNetworkOperatorName
-        error: true
-
-      - java_method: getNetworkOperator
-        params: []
-        returns: String
-        go_name: getNetworkOperator
-        error: true
-
-      - java_method: getPhoneType
-        params: []
-        returns: int
-        go_name: getPhoneType
-        error: true
-
-      - java_method: getSimState
-        params: []
-        returns: int
-        go_name: getSimState
-        error: true
-
-      - java_method: isNetworkRoaming
-        params: []
-        returns: boolean
-        go_name: isNetworkRoaming
-        error: true
-
-      - java_method: getDataState
-        params: []
-        returns: int
-        go_name: getDataState
-        error: true
-
-      - java_method: getDataNetworkType
-        params: []
-        returns: int
-        go_name: getDataNetworkType
-        error: true
+    - java_class: android.telephony.TelephonyManager
+      go_type: telephonyManager
+      obtain: system_service
+      service_name: phone
+      close: true
+      methods:
+        - java_method: canChangeDtmfToneLength
+          go_name: CanChangeDtmfToneLength
+          returns: boolean
+          error: true
+        - java_method: clearSignalStrengthUpdateRequest
+          go_name: ClearSignalStrengthUpdateRequest
+          params:
+            - java_type: android.telephony.SignalStrengthUpdateRequest
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: createForPhoneAccountHandle
+          go_name: CreateForPhoneAccountHandle
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: android.telephony.TelephonyManager
+          error: true
+        - java_method: createForSubscriptionId
+          go_name: CreateForSubscriptionId
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.telephony.TelephonyManager
+          error: true
+        - java_method: doesSwitchMultiSimConfigTriggerReboot
+          go_name: DoesSwitchMultiSimConfigTriggerReboot
+          returns: boolean
+          error: true
+        - java_method: getActiveModemCount
+          go_name: GetActiveModemCount
+          returns: int
+          error: true
+        - java_method: getAllCellInfo
+          go_name: GetAllCellInfo
+          returns: java.util.List<android.telephony.CellInfo>
+          error: true
+        - java_method: getAllowedNetworkTypesForReason
+          go_name: GetAllowedNetworkTypesForReason
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getCallComposerStatus
+          go_name: GetCallComposerStatus
+          returns: int
+          error: true
+        - java_method: getCallState
+          go_name: GetCallState
+          returns: int
+          error: true
+        - java_method: getCallStateForSubscription
+          go_name: GetCallStateForSubscription
+          returns: int
+          error: true
+        - java_method: getCardIdForDefaultEuicc
+          go_name: GetCardIdForDefaultEuicc
+          returns: int
+          error: true
+        - java_method: getCarrierConfig
+          go_name: GetCarrierConfig
+          returns: android.os.PersistableBundle
+          error: true
+        - java_method: getCarrierIdFromSimMccMnc
+          go_name: GetCarrierIdFromSimMccMnc
+          returns: int
+          error: true
+        - java_method: getCarrierRestrictionStatus
+          go_name: GetCarrierRestrictionStatus
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: java.util.function.Consumer<java.lang.Integer>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: getCellLocation
+          go_name: GetCellLocation
+          returns: android.telephony.CellLocation
+          error: true
+        - java_method: getDataActivity
+          go_name: GetDataActivity
+          returns: int
+          error: true
+        - java_method: getDataNetworkType
+          go_name: GetDataNetworkType
+          returns: int
+          error: true
+        - java_method: getDataState
+          go_name: GetDataState
+          returns: int
+          error: true
+        - java_method: getDeviceId
+          go_name: GetDeviceId0
+          returns: String
+          error: true
+        - java_method: getDeviceId
+          go_name: GetDeviceId1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getDeviceSoftwareVersion
+          go_name: GetDeviceSoftwareVersion
+          returns: String
+          error: true
+        - java_method: getEquivalentHomePlmns
+          go_name: GetEquivalentHomePlmns
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getForbiddenPlmns
+          go_name: GetForbiddenPlmns
+          returns: java.lang.String[]
+          error: true
+        - java_method: getGroupIdLevel1
+          go_name: GetGroupIdLevel1
+          returns: String
+          error: true
+        - java_method: getIccAuthentication
+          go_name: GetIccAuthentication
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: String
+          error: true
+        - java_method: getImei
+          go_name: GetImei0
+          returns: String
+          error: true
+        - java_method: getImei
+          go_name: GetImei1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getLine1Number
+          go_name: GetLine1Number
+          returns: String
+          error: true
+        - java_method: getManualNetworkSelectionPlmn
+          go_name: GetManualNetworkSelectionPlmn
+          returns: String
+          error: true
+        - java_method: getManufacturerCode
+          go_name: GetManufacturerCode0
+          returns: String
+          error: true
+        - java_method: getManufacturerCode
+          go_name: GetManufacturerCode1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getMeid
+          go_name: GetMeid0
+          returns: String
+          error: true
+        - java_method: getMeid
+          go_name: GetMeid1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getMmsUAProfUrl
+          go_name: GetMmsUAProfUrl
+          returns: String
+          error: true
+        - java_method: getMmsUserAgent
+          go_name: GetMmsUserAgent
+          returns: String
+          error: true
+        - java_method: getNai
+          go_name: GetNai
+          returns: String
+          error: true
+        - java_method: getNetworkCountryIso
+          go_name: GetNetworkCountryIso0
+          returns: String
+          error: true
+        - java_method: getNetworkCountryIso
+          go_name: GetNetworkCountryIso1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getNetworkOperator
+          go_name: GetNetworkOperator
+          returns: String
+          error: true
+        - java_method: getNetworkOperatorName
+          go_name: GetNetworkOperatorName
+          returns: String
+          error: true
+        - java_method: getNetworkSelectionMode
+          go_name: GetNetworkSelectionMode
+          returns: int
+          error: true
+        - java_method: getNetworkSlicingConfiguration
+          go_name: GetNetworkSlicingConfiguration
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.os.OutcomeReceiver<android.telephony.data.NetworkSlicingConfig
+              go_name: arg1
+            - java_type: android.telephony.TelephonyManager$NetworkSlicingException>
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: getNetworkSpecifier
+          go_name: GetNetworkSpecifier
+          returns: String
+          error: true
+        - java_method: getNetworkType
+          go_name: GetNetworkType
+          returns: int
+          error: true
+        - java_method: getPhoneAccountHandle
+          go_name: GetPhoneAccountHandle
+          returns: android.telecom.PhoneAccountHandle
+          error: true
+        - java_method: getPhoneCount
+          go_name: GetPhoneCount
+          returns: int
+          error: true
+        - java_method: getPhoneType
+          go_name: GetPhoneType
+          returns: int
+          error: true
+        - java_method: getPreferredOpportunisticDataSubscription
+          go_name: GetPreferredOpportunisticDataSubscription
+          returns: int
+          error: true
+        - java_method: getPrimaryImei
+          go_name: GetPrimaryImei
+          returns: String
+          error: true
+        - java_method: getServiceState
+          go_name: GetServiceState0
+          returns: android.telephony.ServiceState
+          error: true
+        - java_method: getServiceState
+          go_name: GetServiceState1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.telephony.ServiceState
+          error: true
+        - java_method: getSignalStrength
+          go_name: GetSignalStrength
+          returns: android.telephony.SignalStrength
+          error: true
+        - java_method: getSimCarrierId
+          go_name: GetSimCarrierId
+          returns: int
+          error: true
+        - java_method: getSimCarrierIdName
+          go_name: GetSimCarrierIdName
+          returns: String
+          error: true
+        - java_method: getSimCountryIso
+          go_name: GetSimCountryIso
+          returns: String
+          error: true
+        - java_method: getSimOperator
+          go_name: GetSimOperator
+          returns: String
+          error: true
+        - java_method: getSimOperatorName
+          go_name: GetSimOperatorName
+          returns: String
+          error: true
+        - java_method: getSimSerialNumber
+          go_name: GetSimSerialNumber
+          returns: String
+          error: true
+        - java_method: getSimSpecificCarrierId
+          go_name: GetSimSpecificCarrierId
+          returns: int
+          error: true
+        - java_method: getSimSpecificCarrierIdName
+          go_name: GetSimSpecificCarrierIdName
+          returns: String
+          error: true
+        - java_method: getSimState
+          go_name: GetSimState0
+          returns: int
+          error: true
+        - java_method: getSimState
+          go_name: GetSimState1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getSubscriberId
+          go_name: GetSubscriberId
+          returns: String
+          error: true
+        - java_method: getSubscriptionId
+          go_name: GetSubscriptionId0
+          returns: int
+          error: true
+        - java_method: getSubscriptionId
+          go_name: GetSubscriptionId1_1
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getSupportedModemCount
+          go_name: GetSupportedModemCount
+          returns: int
+          error: true
+        - java_method: getSupportedRadioAccessFamily
+          go_name: GetSupportedRadioAccessFamily
+          returns: long
+          error: true
+        - java_method: getTypeAllocationCode
+          go_name: GetTypeAllocationCode0
+          returns: String
+          error: true
+        - java_method: getTypeAllocationCode
+          go_name: GetTypeAllocationCode1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getUiccCardsInfo
+          go_name: GetUiccCardsInfo
+          returns: java.util.List<android.telephony.UiccCardInfo>
+          error: true
+        - java_method: getVisualVoicemailPackageName
+          go_name: GetVisualVoicemailPackageName
+          returns: String
+          error: true
+        - java_method: getVoiceMailAlphaTag
+          go_name: GetVoiceMailAlphaTag
+          returns: String
+          error: true
+        - java_method: getVoiceMailNumber
+          go_name: GetVoiceMailNumber
+          returns: String
+          error: true
+        - java_method: getVoiceNetworkType
+          go_name: GetVoiceNetworkType
+          returns: int
+          error: true
+        - java_method: getVoicemailRingtoneUri
+          go_name: GetVoicemailRingtoneUri
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: hasCarrierPrivileges
+          go_name: HasCarrierPrivileges
+          returns: boolean
+          error: true
+        - java_method: hasIccCard
+          go_name: HasIccCard
+          returns: boolean
+          error: true
+        - java_method: iccCloseLogicalChannel
+          go_name: IccCloseLogicalChannel
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: iccExchangeSimIO
+          go_name: IccExchangeSimIO
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: String
+              go_name: arg5
+          returns: '[B'
+          error: true
+        - java_method: iccOpenLogicalChannel
+          go_name: IccOpenLogicalChannel1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.telephony.IccOpenLogicalChannelResponse
+          error: true
+        - java_method: iccOpenLogicalChannel
+          go_name: IccOpenLogicalChannel2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.telephony.IccOpenLogicalChannelResponse
+          error: true
+        - java_method: iccTransmitApduBasicChannel
+          go_name: IccTransmitApduBasicChannel
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: String
+              go_name: arg5
+          returns: String
+          error: true
+        - java_method: iccTransmitApduLogicalChannel
+          go_name: IccTransmitApduLogicalChannel
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+            - java_type: String
+              go_name: arg6
+          returns: String
+          error: true
+        - java_method: isConcurrentVoiceAndDataSupported
+          go_name: IsConcurrentVoiceAndDataSupported
+          returns: boolean
+          error: true
+        - java_method: isDataCapable
+          go_name: IsDataCapable
+          returns: boolean
+          error: true
+        - java_method: isDataConnectionAllowed
+          go_name: IsDataConnectionAllowed
+          returns: boolean
+          error: true
+        - java_method: isDataEnabled
+          go_name: IsDataEnabled
+          returns: boolean
+          error: true
+        - java_method: isDataEnabledForReason
+          go_name: IsDataEnabledForReason
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isDataRoamingEnabled
+          go_name: IsDataRoamingEnabled
+          returns: boolean
+          error: true
+        - java_method: isDeviceSmsCapable
+          go_name: IsDeviceSmsCapable
+          returns: boolean
+          error: true
+        - java_method: isDeviceVoiceCapable
+          go_name: IsDeviceVoiceCapable
+          returns: boolean
+          error: true
+        - java_method: isEmergencyNumber
+          go_name: IsEmergencyNumber
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isHearingAidCompatibilitySupported
+          go_name: IsHearingAidCompatibilitySupported
+          returns: boolean
+          error: true
+        - java_method: isManualNetworkSelectionAllowed
+          go_name: IsManualNetworkSelectionAllowed
+          returns: boolean
+          error: true
+        - java_method: isModemEnabledForSlot
+          go_name: IsModemEnabledForSlot
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isMultiSimSupported
+          go_name: IsMultiSimSupported
+          returns: int
+          error: true
+        - java_method: isNetworkRoaming
+          go_name: IsNetworkRoaming
+          returns: boolean
+          error: true
+        - java_method: isPremiumCapabilityAvailableForPurchase
+          go_name: IsPremiumCapabilityAvailableForPurchase
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isRadioInterfaceCapabilitySupported
+          go_name: IsRadioInterfaceCapabilitySupported
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isRttSupported
+          go_name: IsRttSupported
+          returns: boolean
+          error: true
+        - java_method: isSmsCapable
+          go_name: IsSmsCapable
+          returns: boolean
+          error: true
+        - java_method: isTtyModeSupported
+          go_name: IsTtyModeSupported
+          returns: boolean
+          error: true
+        - java_method: isVoiceCapable
+          go_name: IsVoiceCapable
+          returns: boolean
+          error: true
+        - java_method: isVoicemailVibrationEnabled
+          go_name: IsVoicemailVibrationEnabled
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isWorldPhone
+          go_name: IsWorldPhone
+          returns: boolean
+          error: true
+        - java_method: listen
+          go_name: Listen
+          params:
+            - java_type: android.telephony.PhoneStateListener
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: purchasePremiumCapability
+          go_name: PurchasePremiumCapability
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: java.util.function.Consumer<java.lang.Integer>
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: rebootModem
+          go_name: RebootModem
+          returns: void
+          error: true
+        - java_method: registerTelephonyCallback
+          go_name: RegisterTelephonyCallback3
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: android.telephony.TelephonyCallback
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: registerTelephonyCallback
+          go_name: RegisterTelephonyCallback2_1
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.telephony.TelephonyCallback
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: requestCellInfoUpdate
+          go_name: RequestCellInfoUpdate
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.telephony.TelephonyManager$CellInfoCallback
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: requestNetworkScan
+          go_name: RequestNetworkScan3
+          params:
+            - java_type: android.telephony.NetworkScanRequest
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: android.telephony.TelephonyScanManager$NetworkScanCallback
+              go_name: arg2
+          returns: android.telephony.NetworkScan
+          error: true
+        - java_method: requestNetworkScan
+          go_name: RequestNetworkScan4_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.telephony.NetworkScanRequest
+              go_name: arg1
+            - java_type: java.util.concurrent.Executor
+              go_name: arg2
+            - java_type: android.telephony.TelephonyScanManager$NetworkScanCallback
+              go_name: arg3
+          returns: android.telephony.NetworkScan
+          error: true
+        - java_method: sendDialerSpecialCode
+          go_name: SendDialerSpecialCode
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: sendEnvelopeWithStatus
+          go_name: SendEnvelopeWithStatus
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: sendVisualVoicemailSms
+          go_name: SendVisualVoicemailSms
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+            - java_type: android.app.PendingIntent
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: setAllowedNetworkTypesForReason
+          go_name: SetAllowedNetworkTypesForReason
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setCallComposerStatus
+          go_name: SetCallComposerStatus
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDataEnabled
+          go_name: SetDataEnabled
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDataEnabledForReason
+          go_name: SetDataEnabledForReason
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setForbiddenPlmns
+          go_name: SetForbiddenPlmns
+          params:
+            - java_type: java.util.List<java.lang.String>
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: setLine1NumberForDisplay
+          go_name: SetLine1NumberForDisplay
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: setNetworkSelectionModeAutomatic
+          go_name: SetNetworkSelectionModeAutomatic
+          returns: void
+          error: true
+        - java_method: setNetworkSelectionModeManual
+          go_name: SetNetworkSelectionModeManual2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: setNetworkSelectionModeManual
+          go_name: SetNetworkSelectionModeManual3_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: setOperatorBrandOverride
+          go_name: SetOperatorBrandOverride
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setPreferredNetworkTypeToGlobal
+          go_name: SetPreferredNetworkTypeToGlobal
+          returns: boolean
+          error: true
+        - java_method: setPreferredOpportunisticDataSubscription
+          go_name: SetPreferredOpportunisticDataSubscription
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+            - java_type: java.util.concurrent.Executor
+              go_name: arg2
+            - java_type: java.util.function.Consumer<java.lang.Integer>
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: setSignalStrengthUpdateRequest
+          go_name: SetSignalStrengthUpdateRequest
+          params:
+            - java_type: android.telephony.SignalStrengthUpdateRequest
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVisualVoicemailSmsFilterSettings
+          go_name: SetVisualVoicemailSmsFilterSettings
+          params:
+            - java_type: android.telephony.VisualVoicemailSmsFilterSettings
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVoiceMailNumber
+          go_name: SetVoiceMailNumber
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: setVoicemailRingtoneUri
+          go_name: SetVoicemailRingtoneUri
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setVoicemailVibrationEnabled
+          go_name: SetVoicemailVibrationEnabled
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: switchMultiSimConfig
+          go_name: SwitchMultiSimConfig
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unregisterTelephonyCallback
+          go_name: UnregisterTelephonyCallback
+          params:
+            - java_type: android.telephony.TelephonyCallback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: updateAvailableNetworks
+          go_name: UpdateAvailableNetworks
+          params:
+            - java_type: java.util.List<android.telephony.AvailableNetworkInfo>
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: java.util.function.Consumer<java.lang.Integer>
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: uploadCallComposerPicture
+          go_name: UploadCallComposerPicture5
+          params:
+            - java_type: java.io.InputStream
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: java.util.concurrent.Executor
+              go_name: arg2
+            - java_type: android.os.OutcomeReceiver<android.os.ParcelUuid
+              go_name: arg3
+            - java_type: android.telephony.TelephonyManager$CallComposerException>
+              go_name: arg4
+          returns: void
+          error: true
+        - java_method: uploadCallComposerPicture
+          go_name: UploadCallComposerPicture5_1
+          params:
+            - java_type: java.nio.file.Path
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: java.util.concurrent.Executor
+              go_name: arg2
+            - java_type: android.os.OutcomeReceiver<android.os.ParcelUuid
+              go_name: arg3
+            - java_type: android.telephony.TelephonyManager$CallComposerException>
+              go_name: arg4
+          returns: void
+          error: true
+      static_methods:
+        - java_method: getMaximumCallComposerPictureSize
+          go_name: GetMaximumCallComposerPictureSize
+          returns: long
+          error: true
+constants:
+    - go_name: ActionCarrierMessagingClientService
+      value: '""'
+      go_type: string
+    - go_name: ActionCarrierSignalDefaultNetworkAvailable
+      value: '""'
+      go_type: string
+    - go_name: ActionCarrierSignalPcoValue
+      value: '""'
+      go_type: string
+    - go_name: ActionCarrierSignalRedirected
+      value: '""'
+      go_type: string
+    - go_name: ActionCarrierSignalRequestNetworkFailed
+      value: '""'
+      go_type: string
+    - go_name: ActionCarrierSignalReset
+      value: '""'
+      go_type: string
+    - go_name: ActionConfigureVoicemail
+      value: '""'
+      go_type: string
+    - go_name: ActionMultiSimConfigChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionNetworkCountryChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionPhoneStateChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionResetMobileNetworkSettings
+      value: '""'
+      go_type: string
+    - go_name: ActionRespondViaMessage
+      value: '""'
+      go_type: string
+    - go_name: ActionSecretCode
+      value: '""'
+      go_type: string
+    - go_name: ActionShowVoicemailNotification
+      value: '""'
+      go_type: string
+    - go_name: ActionSubscriptionCarrierIdentityChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionSubscriptionSpecificCarrierIdentityChanged
+      value: '""'
+      go_type: string
+    - go_name: AllowedNetworkTypesReasonCarrier
+      value: "0"
+      go_type: int
+    - go_name: AllowedNetworkTypesReasonUser
+      value: "0"
+      go_type: int
+    - go_name: ApptypeCsim
+      value: "0"
+      go_type: int
+    - go_name: ApptypeIsim
+      value: "0"
+      go_type: int
+    - go_name: ApptypeRuim
+      value: "0"
+      go_type: int
+    - go_name: ApptypeSim
+      value: "0"
+      go_type: int
+    - go_name: ApptypeUnknown
+      value: "0"
+      go_type: int
+    - go_name: ApptypeUsim
+      value: "0"
+      go_type: int
+    - go_name: AuthtypeEapAka
+      value: "0"
+      go_type: int
+    - go_name: AuthtypeEapSim
+      value: "0"
+      go_type: int
+    - go_name: AuthtypeGbaBootstrap
+      value: "0"
+      go_type: int
+    - go_name: AuthtypeGbaNafKeyExternal
+      value: "0"
+      go_type: int
+    - go_name: CallComposerStatusBusinessOnly
+      value: "0"
+      go_type: int
+    - go_name: CallComposerStatusOff
+      value: "0"
+      go_type: int
+    - go_name: CallComposerStatusOn
+      value: "0"
+      go_type: int
+    - go_name: CallStateIdle
+      value: "0"
+      go_type: int
+    - go_name: CallStateOffhook
+      value: "0"
+      go_type: int
+    - go_name: CallStateRinging
+      value: "0"
+      go_type: int
+    - go_name: CapabilitySlicingConfigSupported
+      value: '""'
+      go_type: string
+    - go_name: CarrierRestrictionStatusNotRestricted
+      value: "0"
+      go_type: int
+    - go_name: CarrierRestrictionStatusRestricted
+      value: "0"
+      go_type: int
+    - go_name: CarrierRestrictionStatusRestrictedToCaller
+      value: "0"
+      go_type: int
+    - go_name: CarrierRestrictionStatusUnknown
+      value: "0"
+      go_type: int
+    - go_name: CdmaRoamingModeAffiliated
+      value: "0"
+      go_type: int
+    - go_name: CdmaRoamingModeAny
+      value: "0"
+      go_type: int
+    - go_name: CdmaRoamingModeHome
+      value: "0"
+      go_type: int
+    - go_name: CdmaRoamingModeRadioDefault
+      value: "0"
+      go_type: int
+    - go_name: DataActivityDormant
+      value: "0"
+      go_type: int
+    - go_name: DataActivityIn
+      value: "0"
+      go_type: int
+    - go_name: DataActivityInout
+      value: "0"
+      go_type: int
+    - go_name: DataActivityNone
+      value: "0"
+      go_type: int
+    - go_name: DataActivityOut
+      value: "0"
+      go_type: int
+    - go_name: DataConnected
+      value: "0"
+      go_type: int
+    - go_name: DataConnecting
+      value: "0"
+      go_type: int
+    - go_name: DataDisconnected
+      value: "0"
+      go_type: int
+    - go_name: DataDisconnecting
+      value: "0"
+      go_type: int
+    - go_name: DataEnabledReasonCarrier
+      value: "0"
+      go_type: int
+    - go_name: DataEnabledReasonOverride
+      value: "0"
+      go_type: int
+    - go_name: DataEnabledReasonPolicy
+      value: "0"
+      go_type: int
+    - go_name: DataEnabledReasonThermal
+      value: "0"
+      go_type: int
+    - go_name: DataEnabledReasonUnknown
+      value: "0"
+      go_type: int
+    - go_name: DataEnabledReasonUser
+      value: "0"
+      go_type: int
+    - go_name: DataHandoverInProgress
+      value: "0"
+      go_type: int
+    - go_name: DataSuspended
+      value: "0"
+      go_type: int
+    - go_name: DataUnknown
+      value: "0"
+      go_type: int
+    - go_name: DefaultPortIndex
+      value: "0"
+      go_type: int
+    - go_name: EriFlash
+      value: "0"
+      go_type: int
+    - go_name: EriOff
+      value: "0"
+      go_type: int
+    - go_name: EriOn
+      value: "0"
+      go_type: int
+    - go_name: EventDisplayEmergencyMessage
+      value: '""'
+      go_type: string
+    - go_name: ExtraActiveSimSupportedCount
+      value: '""'
+      go_type: string
+    - go_name: ExtraApnProtocol
+      value: '""'
+      go_type: string
+    - go_name: ExtraApnType
+      value: '""'
+      go_type: string
+    - go_name: ExtraCallVoicemailIntent
+      value: '""'
+      go_type: string
+    - go_name: ExtraCarrierId
+      value: '""'
+      go_type: string
+    - go_name: ExtraCarrierName
+      value: '""'
+      go_type: string
+    - go_name: ExtraDataFailCause
+      value: '""'
+      go_type: string
+    - go_name: ExtraDefaultNetworkAvailable
+      value: '""'
+      go_type: string
+    - go_name: ExtraEmergencyCallToSatelliteHandoverType
+      value: '""'
+      go_type: string
+    - go_name: ExtraEmergencyCallToSatelliteLaunchIntent
+      value: '""'
+      go_type: string
+    - go_name: ExtraHidePublicSettings
+      value: '""'
+      go_type: string
+    - go_name: ExtraIncomingNumber
+      value: '""'
+      go_type: string
+    - go_name: ExtraIsRefresh
+      value: '""'
+      go_type: string
+    - go_name: ExtraLastKnownNetworkCountry
+      value: '""'
+      go_type: string
+    - go_name: ExtraLaunchVoicemailSettingsIntent
+      value: '""'
+      go_type: string
+    - go_name: ExtraNetworkCountry
+      value: '""'
+      go_type: string
+    - go_name: ExtraNotificationCount
+      value: '""'
+      go_type: string
+    - go_name: ExtraPcoId
+      value: '""'
+      go_type: string
+    - go_name: ExtraPcoValue
+      value: '""'
+      go_type: string
+    - go_name: ExtraPhoneAccountHandle
+      value: '""'
+      go_type: string
+    - go_name: ExtraRedirectionUrl
+      value: '""'
+      go_type: string
+    - go_name: ExtraSpecificCarrierId
+      value: '""'
+      go_type: string
+    - go_name: ExtraSpecificCarrierName
+      value: '""'
+      go_type: string
+    - go_name: ExtraState
+      value: '""'
+      go_type: string
+    - go_name: ExtraStateIdle
+      value: '""'
+      go_type: string
+    - go_name: ExtraStateOffhook
+      value: '""'
+      go_type: string
+    - go_name: ExtraStateRinging
+      value: '""'
+      go_type: string
+    - go_name: ExtraSubscriptionId
+      value: '""'
+      go_type: string
+    - go_name: ExtraVoicemailNumber
+      value: '""'
+      go_type: string
+    - go_name: IncludeLocationDataCoarse
+      value: "0"
+      go_type: int
+    - go_name: IncludeLocationDataFine
+      value: "0"
+      go_type: int
+    - go_name: IncludeLocationDataNone
+      value: "0"
+      go_type: int
+    - go_name: MetadataHideVoicemailSettingsMenu
+      value: '""'
+      go_type: string
+    - go_name: MultisimAllowed
+      value: "0"
+      go_type: int
+    - go_name: MultisimNotSupportedByCarrier
+      value: "0"
+      go_type: int
+    - go_name: MultisimNotSupportedByHardware
+      value: "0"
+      go_type: int
+    - go_name: NetworkSelectionModeAuto
+      value: "0"
+      go_type: int
+    - go_name: NetworkSelectionModeManual
+      value: "0"
+      go_type: int
+    - go_name: NetworkSelectionModeUnknown
+      value: "0"
+      go_type: int
+    - go_name: NetworkType1xrtt
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeBitmask1xrtt
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskCdma
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskEdge
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskEhrpd
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskEvdo0
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskEvdoA
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskEvdoB
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskGprs
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskGsm
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskHsdpa
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskHspa
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskHspap
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskHsupa
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskIwlan
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskLte
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskLteCa
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskNr
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskTdScdma
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskUmts
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeBitmaskUnknown
+      value: "0"
+      go_type: int64
+    - go_name: NetworkTypeCdma
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeEdge
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeEhrpd
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeEvdo0
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeEvdoA
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeEvdoB
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeGprs
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeGsm
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeHsdpa
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeHspa
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeHspap
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeHsupa
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeIden
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeIwlan
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeLte
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeNr
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeTdScdma
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeUmts
+      value: "0"
+      go_type: int
+    - go_name: NetworkTypeUnknown
+      value: "0"
+      go_type: int
+    - go_name: PhoneTypeCdma
+      value: "0"
+      go_type: int
+    - go_name: PhoneTypeGsm
+      value: "0"
+      go_type: int
+    - go_name: PhoneTypeNone
+      value: "0"
+      go_type: int
+    - go_name: PhoneTypeSip
+      value: "0"
+      go_type: int
+    - go_name: PremiumCapabilityPrioritizeLatency
+      value: "0"
+      go_type: int
+    - go_name: PurchasePremiumCapabilityResultAlreadyInProgress
+      value: "0"
+      go_type: int
+    - go_name: PurchasePremiumCapabilityResultAlreadyPurchased
+      value: "0"
+      go_type: int
+    - go_name: PurchasePremiumCapabilityResultCarrierDisabled
+      value: "0"
+      go_type: int
+    - go_name: PurchasePremiumCapabilityResultCarrierError
+      value: "0"
+      go_type: int
+    - go_name: PurchasePremiumCapabilityResultEntitlementCheckFailed
+      value: "0"
+      go_type: int
+    - go_name: PurchasePremiumCapabilityResultFeatureNotSupported
+      value: "0"
+      go_type: int
+    - go_name: PurchasePremiumCapabilityResultNetworkNotAvailable
+      value: "0"
+      go_type: int
+    - go_name: PurchasePremiumCapabilityResultNotDefaultDataSubscription
+      value: "0"
+      go_type: int
+    - go_name: PurchasePremiumCapabilityResultNotForeground
+      value: "0"
+      go_type: int
+    - go_name: PurchasePremiumCapabilityResultPendingNetworkSetup
+      value: "0"
+      go_type: int
+    - go_name: PurchasePremiumCapabilityResultRequestFailed
+      value: "0"
+      go_type: int
+    - go_name: PurchasePremiumCapabilityResultSuccess
+      value: "0"
+      go_type: int
+    - go_name: PurchasePremiumCapabilityResultThrottled
+      value: "0"
+      go_type: int
+    - go_name: PurchasePremiumCapabilityResultTimeout
+      value: "0"
+      go_type: int
+    - go_name: PurchasePremiumCapabilityResultUserCanceled
+      value: "0"
+      go_type: int
+    - go_name: PurchasePremiumCapabilityResultUserDisabled
+      value: "0"
+      go_type: int
+    - go_name: SetOpportunisticSubInactiveSubscription
+      value: "0"
+      go_type: int
+    - go_name: SetOpportunisticSubNoOpportunisticSubAvailable
+      value: "0"
+      go_type: int
+    - go_name: SetOpportunisticSubRemoteServiceException
+      value: "0"
+      go_type: int
+    - go_name: SetOpportunisticSubSuccess
+      value: "0"
+      go_type: int
+    - go_name: SetOpportunisticSubValidationFailed
+      value: "0"
+      go_type: int
+    - go_name: SimStateAbsent
+      value: "0"
+      go_type: int
+    - go_name: SimStateCardIoError
+      value: "0"
+      go_type: int
+    - go_name: SimStateCardRestricted
+      value: "0"
+      go_type: int
+    - go_name: SimStateNetworkLocked
+      value: "0"
+      go_type: int
+    - go_name: SimStateNotReady
+      value: "0"
+      go_type: int
+    - go_name: SimStatePermDisabled
+      value: "0"
+      go_type: int
+    - go_name: SimStatePinRequired
+      value: "0"
+      go_type: int
+    - go_name: SimStatePukRequired
+      value: "0"
+      go_type: int
+    - go_name: SimStateReady
+      value: "0"
+      go_type: int
+    - go_name: SimStateUnknown
+      value: "0"
+      go_type: int
+    - go_name: UninitializedCardId
+      value: "0"
+      go_type: int
+    - go_name: UnknownCarrierId
+      value: "0"
+      go_type: int
+    - go_name: UnsupportedCardId
+      value: "0"
+      go_type: int
+    - go_name: UpdateAvailableNetworksAborted
+      value: "0"
+      go_type: int
+    - go_name: UpdateAvailableNetworksDisableModemFail
+      value: "0"
+      go_type: int
+    - go_name: UpdateAvailableNetworksEnableModemFail
+      value: "0"
+      go_type: int
+    - go_name: UpdateAvailableNetworksInvalidArguments
+      value: "0"
+      go_type: int
+    - go_name: UpdateAvailableNetworksMultipleNetworksNotSupported
+      value: "0"
+      go_type: int
+    - go_name: UpdateAvailableNetworksNoCarrierPrivilege
+      value: "0"
+      go_type: int
+    - go_name: UpdateAvailableNetworksNoOpportunisticSubAvailable
+      value: "0"
+      go_type: int
+    - go_name: UpdateAvailableNetworksRemoteServiceException
+      value: "0"
+      go_type: int
+    - go_name: UpdateAvailableNetworksServiceIsDisabled
+      value: "0"
+      go_type: int
+    - go_name: UpdateAvailableNetworksSuccess
+      value: "0"
+      go_type: int
+    - go_name: UpdateAvailableNetworksUnknownFailure
+      value: "0"
+      go_type: int
+    - go_name: UssdErrorServiceUnavail
+      value: "0"
+      go_type: int
+    - go_name: UssdReturnFailure
+      value: "0"
+      go_type: int
+    - go_name: VvmTypeCvvm
+      value: '""'
+      go_type: string
+    - go_name: VvmTypeOmtp
+      value: '""'
+      go_type: string

@@ -1,576 +1,3779 @@
 package: app
-go_import: "github.com/xaionaro-go/jni/app"
-
+go_import: github.com/xaionaro-go/jni/app
 classes:
-  # ---------- android.content.Context ----------
-  - java_class: android.content.Context
-    go_type: Context
-    obtain: constructor
-    close: true
-    methods:
-      - java_method: getSystemService
-        go_name: GetSystemService
-        params:
-          - java_type: String
-            go_name: name
-        returns: Object
-        error: true
-
-      - java_method: getPackageName
-        go_name: PackageName
-        params: []
-        returns: String
-        error: true
-
-      - java_method: getApplicationContext
-        go_name: ApplicationContext
-        params: []
-        returns: android.content.Context
-        error: true
-
-      - java_method: startActivity
-        go_name: StartActivity
-        params:
-          - java_type: android.content.Intent
-            go_name: intent
-        returns: void
-        error: true
-
-      - java_method: sendBroadcast
-        go_name: SendBroadcast
-        params:
-          - java_type: android.content.Intent
-            go_name: intent
-        returns: void
-        error: true
-
-      - java_method: startService
-        go_name: StartService
-        params:
-          - java_type: android.content.Intent
-            go_name: intent
-        returns: android.content.ComponentName
-        error: true
-
-      - java_method: registerReceiver
-        go_name: RegisterReceiverRaw
-        params:
-          - java_type: android.content.BroadcastReceiver
-            go_name: receiver
-          - java_type: android.content.IntentFilter
-            go_name: filter
-        returns: android.content.Intent
-        error: true
-
-      - java_method: unregisterReceiver
-        go_name: UnregisterReceiver
-        params:
-          - java_type: android.content.BroadcastReceiver
-            go_name: receiver
-        returns: void
-        error: true
-
-      - java_method: getContentResolver
-        go_name: ContentResolver
-        params: []
-        returns: android.content.ContentResolver
-        error: false
-
-      - java_method: getPackageManager
-        go_name: PackageManager
-        params: []
-        returns: android.content.pm.PackageManager
-        error: true
-
-      - java_method: getCacheDir
-        go_name: CacheDir
-        params: []
-        returns: java.io.File
-        error: true
-
-      - java_method: getFilesDir
-        go_name: FilesDir
-        params: []
-        returns: java.io.File
-        error: true
-
-      - java_method: getExternalFilesDir
-        go_name: ExternalFilesDir
-        params:
-          - java_type: String
-            go_name: typ
-        returns: java.io.File
-        error: true
-
-      - java_method: getExternalCacheDir
-        go_name: ExternalCacheDir
-        params: []
-        returns: java.io.File
-        error: true
-
-      - java_method: getDataDir
-        go_name: DataDir
-        params: []
-        returns: java.io.File
-        error: true
-
-  # ---------- android.app.Activity ----------
-  - java_class: android.app.Activity
-    go_type: Activity
-    obtain: constructor
-    close: false
-    methods:
-      - java_method: finish
-        go_name: Finish
-        params: []
-        returns: void
-        error: true
-
-      - java_method: getIntent
-        go_name: GetIntent
-        params: []
-        returns: android.content.Intent
-        error: true
-
-      - java_method: setResult
-        go_name: SetResult
-        params:
-          - java_type: int
-            go_name: resultCode
-          - java_type: android.content.Intent
-            go_name: data
-        returns: void
-        error: false
-
-      - java_method: getWindow
-        go_name: GetWindow
-        params: []
-        returns: android.view.Window
-        error: true
-
-      - java_method: runOnUiThread
-        go_name: RunOnUiThread
-        params:
-          - java_type: java.lang.Runnable
-            go_name: fn
-        returns: void
-        error: true
-
-      - java_method: startActivityForResult
-        go_name: StartActivityForResult
-        params:
-          - java_type: android.content.Intent
-            go_name: intent
-          - java_type: int
-            go_name: requestCode
-        returns: void
-        error: true
-
-  # ---------- android.content.Intent ----------
-  - java_class: android.content.Intent
-    go_type: Intent
-    obtain: constructor
-    kind: builder
-    methods:
-      - java_method: setAction
-        go_name: SetAction
-        params:
-          - java_type: String
-            go_name: action
-        returns: android.content.Intent
-        error: false
-
-      - java_method: setData
-        go_name: SetData
-        params:
-          - java_type: android.net.Uri
-            go_name: uri
-        returns: android.content.Intent
-        error: false
-
-      - java_method: setComponent
-        go_name: SetComponent
-        params:
-          - java_type: android.content.ComponentName
-            go_name: component
-        returns: android.content.Intent
-        error: false
-
-      - java_method: setFlags
-        go_name: SetFlags
-        params:
-          - java_type: int
-            go_name: flags
-        returns: android.content.Intent
-        error: false
-
-      - java_method: addFlags
-        go_name: AddFlags
-        params:
-          - java_type: int
-            go_name: flags
-        returns: android.content.Intent
-        error: false
-
-      - java_method: addCategory
-        go_name: AddCategory
-        params:
-          - java_type: String
-            go_name: category
-        returns: android.content.Intent
-        error: false
-
-      - java_method: setPackage
-        go_name: SetPackage
-        params:
-          - java_type: String
-            go_name: pkg
-        returns: android.content.Intent
-        error: false
-
-      - java_method: setType
-        go_name: SetType
-        params:
-          - java_type: String
-            go_name: mimeType
-        returns: android.content.Intent
-        error: false
-
-      - java_method: getAction
-        go_name: GetAction
-        params: []
-        returns: String
-        error: false
-
-      - java_method: getData
-        go_name: GetData
-        params: []
-        returns: android.net.Uri
-        error: false
-
-      - java_method: getStringExtra
-        go_name: GetStringExtra
-        params:
-          - java_type: String
-            go_name: key
-        returns: String
-        error: false
-
-      - java_method: getBooleanExtra
-        go_name: GetBoolExtra
-        params:
-          - java_type: String
-            go_name: key
-          - java_type: boolean
-            go_name: defaultVal
-        returns: boolean
-        error: false
-
-      - java_method: getIntExtra
-        go_name: GetIntExtra
-        params:
-          - java_type: String
-            go_name: key
-          - java_type: int
-            go_name: defaultVal
-        returns: int
-        error: false
-
-      - java_method: putExtra
-        go_name: PutStringExtra
-        params:
-          - java_type: String
-            go_name: key
-          - java_type: String
-            go_name: value
-        returns: android.content.Intent
-        error: false
-
-      - java_method: putExtra
-        go_name: PutIntExtra
-        params:
-          - java_type: String
-            go_name: key
-          - java_type: int
-            go_name: value
-        returns: android.content.Intent
-        error: false
-
-      - java_method: putExtra
-        go_name: PutBoolExtra
-        params:
-          - java_type: String
-            go_name: key
-          - java_type: boolean
-            go_name: value
-        returns: android.content.Intent
-        error: false
-
-      - java_method: putExtra
-        go_name: PutLongExtra
-        params:
-          - java_type: String
-            go_name: key
-          - java_type: long
-            go_name: value
-        returns: android.content.Intent
-        error: false
-
-  # ---------- android.app.PendingIntent ----------
-  - java_class: android.app.PendingIntent
-    go_type: PendingIntent
-    obtain: static_factory
-    methods:
-      - java_method: getActivity
-        go_name: NewPendingActivity
-        static: true
-        params:
-          - java_type: android.content.Context
-            go_name: ctx
-          - java_type: int
-            go_name: requestCode
-          - java_type: android.content.Intent
-            go_name: intent
-          - java_type: int
-            go_name: flags
-        returns: android.app.PendingIntent
-        error: true
-
-      - java_method: getBroadcast
-        go_name: NewPendingBroadcast
-        static: true
-        params:
-          - java_type: android.content.Context
-            go_name: ctx
-          - java_type: int
-            go_name: requestCode
-          - java_type: android.content.Intent
-            go_name: intent
-          - java_type: int
-            go_name: flags
-        returns: android.app.PendingIntent
-        error: true
-
-      - java_method: getService
-        go_name: NewPendingService
-        static: true
-        params:
-          - java_type: android.content.Context
-            go_name: ctx
-          - java_type: int
-            go_name: requestCode
-          - java_type: android.content.Intent
-            go_name: intent
-          - java_type: int
-            go_name: flags
-        returns: android.app.PendingIntent
-        error: true
-
-  # ---------- android.os.Bundle ----------
-  - java_class: android.os.Bundle
-    go_type: Bundle
-    obtain: constructor
-    kind: data_class
-    methods:
-      - java_method: getString
-        go_name: GetString
-        params:
-          - java_type: String
-            go_name: key
-        returns: String
-        error: false
-
-      - java_method: getInt
-        go_name: GetInt
-        params:
-          - java_type: String
-            go_name: key
-        returns: int
-        error: false
-
-      - java_method: getBoolean
-        go_name: GetBool
-        params:
-          - java_type: String
-            go_name: key
-        returns: boolean
-        error: false
-
-      - java_method: getLong
-        go_name: GetLong
-        params:
-          - java_type: String
-            go_name: key
-        returns: long
-        error: false
-
-      - java_method: getFloat
-        go_name: GetFloat
-        params:
-          - java_type: String
-            go_name: key
-        returns: float
-        error: false
-
-      - java_method: getDouble
-        go_name: GetDouble
-        params:
-          - java_type: String
-            go_name: key
-        returns: double
-        error: false
-
-      - java_method: putString
-        go_name: PutString
-        params:
-          - java_type: String
-            go_name: key
-          - java_type: String
-            go_name: value
-        returns: void
-        error: false
-
-      - java_method: putInt
-        go_name: PutInt
-        params:
-          - java_type: String
-            go_name: key
-          - java_type: int
-            go_name: value
-        returns: void
-        error: false
-
-      - java_method: putBoolean
-        go_name: PutBool
-        params:
-          - java_type: String
-            go_name: key
-          - java_type: boolean
-            go_name: value
-        returns: void
-        error: false
-
-      - java_method: putLong
-        go_name: PutLong
-        params:
-          - java_type: String
-            go_name: key
-          - java_type: long
-            go_name: value
-        returns: void
-        error: false
-
-      - java_method: putFloat
-        go_name: PutFloat
-        params:
-          - java_type: String
-            go_name: key
-          - java_type: float
-            go_name: value
-        returns: void
-        error: false
-
-      - java_method: putDouble
-        go_name: PutDouble
-        params:
-          - java_type: String
-            go_name: key
-          - java_type: double
-            go_name: value
-        returns: void
-        error: false
-
-      - java_method: putStringArray
-        go_name: PutStringArray
-        params:
-          - java_type: String
-            go_name: key
-          - java_type: String[]
-            go_name: value
-        returns: void
-        error: false
-
-      - java_method: keySet
-        go_name: KeySet
-        params: []
-        returns: java.util.Set
-        error: false
-
-      - java_method: containsKey
-        go_name: ContainsKey
-        params:
-          - java_type: String
-            go_name: key
-        returns: boolean
-        error: false
-
-      - java_method: size
-        go_name: Size
-        params: []
-        returns: int
-        error: false
-
-      - java_method: isEmpty
-        go_name: IsEmpty
-        params: []
-        returns: boolean
-        error: false
-
-  # ---------- android.content.BroadcastReceiver ----------
-  - java_class: android.content.BroadcastReceiver
-    go_type: BroadcastReceiver
-    obtain: callback
-
-callbacks:
-  - java_interface: android.content.BroadcastReceiver
-    go_type: broadcastReceiver
-    methods:
-      - java_method: onReceive
-        params:
-          - android.content.Context
-          - android.content.Intent
-        go_field: OnReceive
-
-  - java_interface: java.lang.Runnable
-    go_type: runnable
-    methods:
-      - java_method: run
-        params: []
-        go_field: OnRun
-
+    - java_class: android.app.Activity
+      go_type: activity
+      methods:
+        - java_method: addContentView
+          go_name: AddContentView
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: android.view.ViewGroup$LayoutParams
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: clearOverrideActivityTransition
+          go_name: ClearOverrideActivityTransition
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: closeContextMenu
+          go_name: CloseContextMenu
+          returns: void
+          error: true
+        - java_method: closeOptionsMenu
+          go_name: CloseOptionsMenu
+          returns: void
+          error: true
+        - java_method: createPendingResult
+          go_name: CreatePendingResult
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: android.app.PendingIntent
+          error: true
+        - java_method: dispatchGenericMotionEvent
+          go_name: DispatchGenericMotionEvent
+          params:
+            - java_type: android.view.MotionEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: dispatchKeyEvent
+          go_name: DispatchKeyEvent
+          params:
+            - java_type: android.view.KeyEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: dispatchKeyShortcutEvent
+          go_name: DispatchKeyShortcutEvent
+          params:
+            - java_type: android.view.KeyEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: dispatchPopulateAccessibilityEvent
+          go_name: DispatchPopulateAccessibilityEvent
+          params:
+            - java_type: android.view.accessibility.AccessibilityEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: dispatchTouchEvent
+          go_name: DispatchTouchEvent
+          params:
+            - java_type: android.view.MotionEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: dispatchTrackballEvent
+          go_name: DispatchTrackballEvent
+          params:
+            - java_type: android.view.MotionEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: dump
+          go_name: Dump
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.io.FileDescriptor
+              go_name: arg1
+            - java_type: java.io.PrintWriter
+              go_name: arg2
+            - java_type: java.lang.String[]
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: enterPictureInPictureMode
+          go_name: EnterPictureInPictureMode0
+          returns: void
+          error: true
+        - java_method: enterPictureInPictureMode
+          go_name: EnterPictureInPictureMode1_1
+          params:
+            - java_type: android.app.PictureInPictureParams
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: finish
+          go_name: Finish
+          returns: void
+          error: true
+        - java_method: finishActivity
+          go_name: FinishActivity
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: finishActivityFromChild
+          go_name: FinishActivityFromChild
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: finishAffinity
+          go_name: FinishAffinity
+          returns: void
+          error: true
+        - java_method: finishAfterTransition
+          go_name: FinishAfterTransition
+          returns: void
+          error: true
+        - java_method: finishAndRemoveTask
+          go_name: FinishAndRemoveTask
+          returns: void
+          error: true
+        - java_method: finishFromChild
+          go_name: FinishFromChild
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getActionBar
+          go_name: GetActionBar
+          returns: android.app.ActionBar
+          error: true
+        - java_method: getCaller
+          go_name: GetCaller
+          returns: android.app.ComponentCaller
+          error: true
+        - java_method: getCallingActivity
+          go_name: GetCallingActivity
+          returns: android.content.ComponentName
+          error: true
+        - java_method: getCallingPackage
+          go_name: GetCallingPackage
+          returns: String
+          error: true
+        - java_method: getChangingConfigurations
+          go_name: GetChangingConfigurations
+          returns: int
+          error: true
+        - java_method: getComponentName
+          go_name: GetComponentName
+          returns: android.content.ComponentName
+          error: true
+        - java_method: getContentScene
+          go_name: GetContentScene
+          returns: android.transition.Scene
+          error: true
+        - java_method: getContentTransitionManager
+          go_name: GetContentTransitionManager
+          returns: android.transition.TransitionManager
+          error: true
+        - java_method: getCurrentCaller
+          go_name: GetCurrentCaller
+          returns: android.app.ComponentCaller
+          error: true
+        - java_method: getCurrentFocus
+          go_name: GetCurrentFocus
+          returns: android.view.View
+          error: true
+        - java_method: getFragmentManager
+          go_name: GetFragmentManager
+          returns: android.app.FragmentManager
+          error: true
+        - java_method: getInitialCaller
+          go_name: GetInitialCaller
+          returns: android.app.ComponentCaller
+          error: true
+        - java_method: getIntent
+          go_name: GetIntent
+          returns: android.content.Intent
+          error: true
+        - java_method: getLastNonConfigurationInstance
+          go_name: GetLastNonConfigurationInstance
+          returns: java.lang.Object
+          error: true
+        - java_method: getLaunchedFromPackage
+          go_name: GetLaunchedFromPackage
+          returns: String
+          error: true
+        - java_method: getLaunchedFromUid
+          go_name: GetLaunchedFromUid
+          returns: int
+          error: true
+        - java_method: getLayoutInflater
+          go_name: GetLayoutInflater
+          returns: android.view.LayoutInflater
+          error: true
+        - java_method: getLoaderManager
+          go_name: GetLoaderManager
+          returns: android.app.LoaderManager
+          error: true
+        - java_method: getLocalClassName
+          go_name: GetLocalClassName
+          returns: String
+          error: true
+        - java_method: getMaxNumPictureInPictureActions
+          go_name: GetMaxNumPictureInPictureActions
+          returns: int
+          error: true
+        - java_method: getMenuInflater
+          go_name: GetMenuInflater
+          returns: android.view.MenuInflater
+          error: true
+        - java_method: getOnBackInvokedDispatcher
+          go_name: GetOnBackInvokedDispatcher
+          returns: android.window.OnBackInvokedDispatcher
+          error: true
+        - java_method: getParentActivityIntent
+          go_name: GetParentActivityIntent
+          returns: android.content.Intent
+          error: true
+        - java_method: getPreferences
+          go_name: GetPreferences
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.content.SharedPreferences
+          error: true
+        - java_method: getReferrer
+          go_name: GetReferrer
+          returns: android.net.Uri
+          error: true
+        - java_method: getRequestedOrientation
+          go_name: GetRequestedOrientation
+          returns: int
+          error: true
+        - java_method: getSystemService
+          go_name: GetSystemService
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.lang.Object
+          error: true
+        - java_method: getTaskId
+          go_name: GetTaskId
+          returns: int
+          error: true
+        - java_method: getVoiceInteractor
+          go_name: GetVoiceInteractor
+          returns: android.app.VoiceInteractor
+          error: true
+        - java_method: getWindow
+          go_name: GetWindow
+          returns: android.view.Window
+          error: true
+        - java_method: getWindowManager
+          go_name: GetWindowManager
+          returns: android.view.WindowManager
+          error: true
+        - java_method: hasWindowFocus
+          go_name: HasWindowFocus
+          returns: boolean
+          error: true
+        - java_method: invalidateOptionsMenu
+          go_name: InvalidateOptionsMenu
+          returns: void
+          error: true
+        - java_method: isActivityTransitionRunning
+          go_name: IsActivityTransitionRunning
+          returns: boolean
+          error: true
+        - java_method: isChangingConfigurations
+          go_name: IsChangingConfigurations
+          returns: boolean
+          error: true
+        - java_method: isDestroyed
+          go_name: IsDestroyed
+          returns: boolean
+          error: true
+        - java_method: isFinishing
+          go_name: IsFinishing
+          returns: boolean
+          error: true
+        - java_method: isImmersive
+          go_name: IsImmersive
+          returns: boolean
+          error: true
+        - java_method: isInMultiWindowMode
+          go_name: IsInMultiWindowMode
+          returns: boolean
+          error: true
+        - java_method: isInPictureInPictureMode
+          go_name: IsInPictureInPictureMode
+          returns: boolean
+          error: true
+        - java_method: isLaunchedFromBubble
+          go_name: IsLaunchedFromBubble
+          returns: boolean
+          error: true
+        - java_method: isLocalVoiceInteractionSupported
+          go_name: IsLocalVoiceInteractionSupported
+          returns: boolean
+          error: true
+        - java_method: isTaskRoot
+          go_name: IsTaskRoot
+          returns: boolean
+          error: true
+        - java_method: isVoiceInteraction
+          go_name: IsVoiceInteraction
+          returns: boolean
+          error: true
+        - java_method: isVoiceInteractionRoot
+          go_name: IsVoiceInteractionRoot
+          returns: boolean
+          error: true
+        - java_method: moveTaskToBack
+          go_name: MoveTaskToBack
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: navigateUpTo
+          go_name: NavigateUpTo
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: navigateUpToFromChild
+          go_name: NavigateUpToFromChild
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: onActionModeFinished
+          go_name: OnActionModeFinished
+          params:
+            - java_type: android.view.ActionMode
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onActionModeStarted
+          go_name: OnActionModeStarted
+          params:
+            - java_type: android.view.ActionMode
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onActivityReenter
+          go_name: OnActivityReenter
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onActivityResult
+          go_name: OnActivityResult
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.content.Intent
+              go_name: arg2
+            - java_type: android.app.ComponentCaller
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: onAttachFragment
+          go_name: OnAttachFragment
+          params:
+            - java_type: android.app.Fragment
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onAttachedToWindow
+          go_name: OnAttachedToWindow
+          returns: void
+          error: true
+        - java_method: onBackPressed
+          go_name: OnBackPressed
+          returns: void
+          error: true
+        - java_method: onConfigurationChanged
+          go_name: OnConfigurationChanged
+          params:
+            - java_type: android.content.res.Configuration
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onContentChanged
+          go_name: OnContentChanged
+          returns: void
+          error: true
+        - java_method: onContextItemSelected
+          go_name: OnContextItemSelected
+          params:
+            - java_type: android.view.MenuItem
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: onContextMenuClosed
+          go_name: OnContextMenuClosed
+          params:
+            - java_type: android.view.Menu
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onCreate
+          go_name: OnCreate
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+            - java_type: android.os.PersistableBundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onCreateContextMenu
+          go_name: OnCreateContextMenu
+          params:
+            - java_type: android.view.ContextMenu
+              go_name: arg0
+            - java_type: android.view.View
+              go_name: arg1
+            - java_type: android.view.ContextMenu$ContextMenuInfo
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onCreateDescription
+          go_name: OnCreateDescription
+          returns: String
+          error: true
+        - java_method: onCreateNavigateUpTaskStack
+          go_name: OnCreateNavigateUpTaskStack
+          params:
+            - java_type: android.app.TaskStackBuilder
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onCreateOptionsMenu
+          go_name: OnCreateOptionsMenu
+          params:
+            - java_type: android.view.Menu
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: onCreatePanelMenu
+          go_name: OnCreatePanelMenu
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.view.Menu
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: onCreatePanelView
+          go_name: OnCreatePanelView
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.view.View
+          error: true
+        - java_method: onCreateThumbnail
+          go_name: OnCreateThumbnail
+          params:
+            - java_type: android.graphics.Bitmap
+              go_name: arg0
+            - java_type: android.graphics.Canvas
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: onCreateView
+          go_name: OnCreateView4
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.content.Context
+              go_name: arg2
+            - java_type: android.util.AttributeSet
+              go_name: arg3
+          returns: android.view.View
+          error: true
+        - java_method: onCreateView
+          go_name: OnCreateView3_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.content.Context
+              go_name: arg1
+            - java_type: android.util.AttributeSet
+              go_name: arg2
+          returns: android.view.View
+          error: true
+        - java_method: onDetachedFromWindow
+          go_name: OnDetachedFromWindow
+          returns: void
+          error: true
+        - java_method: onEnterAnimationComplete
+          go_name: OnEnterAnimationComplete
+          returns: void
+          error: true
+        - java_method: onGenericMotionEvent
+          go_name: OnGenericMotionEvent
+          params:
+            - java_type: android.view.MotionEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: onGetDirectActions
+          go_name: OnGetDirectActions
+          params:
+            - java_type: android.os.CancellationSignal
+              go_name: arg0
+            - java_type: java.util.function.Consumer<java.util.List<android.app.DirectAction>>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onKeyDown
+          go_name: OnKeyDown
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.view.KeyEvent
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: onKeyLongPress
+          go_name: OnKeyLongPress
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.view.KeyEvent
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: onKeyMultiple
+          go_name: OnKeyMultiple
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.view.KeyEvent
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: onKeyShortcut
+          go_name: OnKeyShortcut
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.view.KeyEvent
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: onKeyUp
+          go_name: OnKeyUp
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.view.KeyEvent
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: onLocalVoiceInteractionStarted
+          go_name: OnLocalVoiceInteractionStarted
+          returns: void
+          error: true
+        - java_method: onLocalVoiceInteractionStopped
+          go_name: OnLocalVoiceInteractionStopped
+          returns: void
+          error: true
+        - java_method: onLowMemory
+          go_name: OnLowMemory
+          returns: void
+          error: true
+        - java_method: onMenuItemSelected
+          go_name: OnMenuItemSelected
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.view.MenuItem
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: onMenuOpened
+          go_name: OnMenuOpened
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.view.Menu
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: onMultiWindowModeChanged
+          go_name: OnMultiWindowModeChanged1
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onMultiWindowModeChanged
+          go_name: OnMultiWindowModeChanged2_1
+          params:
+            - java_type: boolean
+              go_name: arg0
+            - java_type: android.content.res.Configuration
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onNavigateUp
+          go_name: OnNavigateUp
+          returns: boolean
+          error: true
+        - java_method: onNavigateUpFromChild
+          go_name: OnNavigateUpFromChild
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: onNewIntent
+          go_name: OnNewIntent
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: android.app.ComponentCaller
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onOptionsItemSelected
+          go_name: OnOptionsItemSelected
+          params:
+            - java_type: android.view.MenuItem
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: onOptionsMenuClosed
+          go_name: OnOptionsMenuClosed
+          params:
+            - java_type: android.view.Menu
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onPanelClosed
+          go_name: OnPanelClosed
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.view.Menu
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onPerformDirectAction
+          go_name: OnPerformDirectAction
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+            - java_type: android.os.CancellationSignal
+              go_name: arg2
+            - java_type: java.util.function.Consumer<android.os.Bundle>
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: onPictureInPictureModeChanged
+          go_name: OnPictureInPictureModeChanged1
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onPictureInPictureModeChanged
+          go_name: OnPictureInPictureModeChanged2_1
+          params:
+            - java_type: boolean
+              go_name: arg0
+            - java_type: android.content.res.Configuration
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onPictureInPictureRequested
+          go_name: OnPictureInPictureRequested
+          returns: boolean
+          error: true
+        - java_method: onPictureInPictureUiStateChanged
+          go_name: OnPictureInPictureUiStateChanged
+          params:
+            - java_type: android.app.PictureInPictureUiState
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onPostCreate
+          go_name: OnPostCreate
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+            - java_type: android.os.PersistableBundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onPrepareNavigateUpTaskStack
+          go_name: OnPrepareNavigateUpTaskStack
+          params:
+            - java_type: android.app.TaskStackBuilder
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onPrepareOptionsMenu
+          go_name: OnPrepareOptionsMenu
+          params:
+            - java_type: android.view.Menu
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: onPreparePanel
+          go_name: OnPreparePanel
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.view.View
+              go_name: arg1
+            - java_type: android.view.Menu
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: onProvideAssistContent
+          go_name: OnProvideAssistContent
+          params:
+            - java_type: android.app.assist.AssistContent
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onProvideAssistData
+          go_name: OnProvideAssistData
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onProvideKeyboardShortcuts
+          go_name: OnProvideKeyboardShortcuts
+          params:
+            - java_type: java.util.List<android.view.KeyboardShortcutGroup>
+              go_name: arg0
+            - java_type: android.view.Menu
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onProvideReferrer
+          go_name: OnProvideReferrer
+          returns: android.net.Uri
+          error: true
+        - java_method: onRequestPermissionsResult
+          go_name: OnRequestPermissionsResult3
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: java.lang.String[]
+              go_name: arg1
+            - java_type: '[I'
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onRequestPermissionsResult
+          go_name: OnRequestPermissionsResult4_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: java.lang.String[]
+              go_name: arg1
+            - java_type: '[I'
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: onRestoreInstanceState
+          go_name: OnRestoreInstanceState
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+            - java_type: android.os.PersistableBundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onRetainNonConfigurationInstance
+          go_name: OnRetainNonConfigurationInstance
+          returns: java.lang.Object
+          error: true
+        - java_method: onSaveInstanceState
+          go_name: OnSaveInstanceState
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+            - java_type: android.os.PersistableBundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onSearchRequested
+          go_name: OnSearchRequested0
+          returns: boolean
+          error: true
+        - java_method: onSearchRequested
+          go_name: OnSearchRequested1_1
+          params:
+            - java_type: android.view.SearchEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: onStateNotSaved
+          go_name: OnStateNotSaved
+          returns: void
+          error: true
+        - java_method: onTopResumedActivityChanged
+          go_name: OnTopResumedActivityChanged
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onTouchEvent
+          go_name: OnTouchEvent
+          params:
+            - java_type: android.view.MotionEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: onTrackballEvent
+          go_name: OnTrackballEvent
+          params:
+            - java_type: android.view.MotionEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: onTrimMemory
+          go_name: OnTrimMemory
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onUserInteraction
+          go_name: OnUserInteraction
+          returns: void
+          error: true
+        - java_method: onVisibleBehindCanceled
+          go_name: OnVisibleBehindCanceled
+          returns: void
+          error: true
+        - java_method: onWindowAttributesChanged
+          go_name: OnWindowAttributesChanged
+          params:
+            - java_type: android.view.WindowManager$LayoutParams
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onWindowFocusChanged
+          go_name: OnWindowFocusChanged
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onWindowStartingActionMode
+          go_name: OnWindowStartingActionMode1
+          params:
+            - java_type: android.view.ActionMode$Callback
+              go_name: arg0
+          returns: android.view.ActionMode
+          error: true
+        - java_method: onWindowStartingActionMode
+          go_name: OnWindowStartingActionMode2_1
+          params:
+            - java_type: android.view.ActionMode$Callback
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.view.ActionMode
+          error: true
+        - java_method: openContextMenu
+          go_name: OpenContextMenu
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: openOptionsMenu
+          go_name: OpenOptionsMenu
+          returns: void
+          error: true
+        - java_method: overrideActivityTransition
+          go_name: OverrideActivityTransition3
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: overrideActivityTransition
+          go_name: OverrideActivityTransition4_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: overridePendingTransition
+          go_name: OverridePendingTransition2
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: overridePendingTransition
+          go_name: OverridePendingTransition3_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: postponeEnterTransition
+          go_name: PostponeEnterTransition
+          returns: void
+          error: true
+        - java_method: recreate
+          go_name: Recreate
+          returns: void
+          error: true
+        - java_method: registerActivityLifecycleCallbacks
+          go_name: RegisterActivityLifecycleCallbacks
+          params:
+            - java_type: android.app.Application$ActivityLifecycleCallbacks
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: registerComponentCallbacks
+          go_name: RegisterComponentCallbacks
+          params:
+            - java_type: android.content.ComponentCallbacks
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: registerForContextMenu
+          go_name: RegisterForContextMenu
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: registerScreenCaptureCallback
+          go_name: RegisterScreenCaptureCallback
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.app.Activity$ScreenCaptureCallback
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: releaseInstance
+          go_name: ReleaseInstance
+          returns: boolean
+          error: true
+        - java_method: reportFullyDrawn
+          go_name: ReportFullyDrawn
+          returns: void
+          error: true
+        - java_method: requestDragAndDropPermissions
+          go_name: RequestDragAndDropPermissions
+          params:
+            - java_type: android.view.DragEvent
+              go_name: arg0
+          returns: android.view.DragAndDropPermissions
+          error: true
+        - java_method: requestFullscreenMode
+          go_name: RequestFullscreenMode
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.os.OutcomeReceiver<java.lang.Void
+              go_name: arg1
+            - java_type: java.lang.Throwable>
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: requestVisibleBehind
+          go_name: RequestVisibleBehind
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setActionBar
+          go_name: SetActionBar
+          params:
+            - java_type: android.widget.Toolbar
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAllowCrossUidActivitySwitchFromBelow
+          go_name: SetAllowCrossUidActivitySwitchFromBelow
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setContentTransitionManager
+          go_name: SetContentTransitionManager
+          params:
+            - java_type: android.transition.TransitionManager
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setContentView
+          go_name: SetContentView1
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setContentView
+          go_name: SetContentView2_1
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: android.view.ViewGroup$LayoutParams
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setContentView
+          go_name: SetContentView1_2
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setEnterSharedElementCallback
+          go_name: SetEnterSharedElementCallback
+          params:
+            - java_type: android.app.SharedElementCallback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setExitSharedElementCallback
+          go_name: SetExitSharedElementCallback
+          params:
+            - java_type: android.app.SharedElementCallback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setFinishOnTouchOutside
+          go_name: SetFinishOnTouchOutside
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setImmersive
+          go_name: SetImmersive
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setInheritShowWhenLocked
+          go_name: SetInheritShowWhenLocked
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setIntent
+          go_name: SetIntent1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setIntent
+          go_name: SetIntent2_1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: android.app.ComponentCaller
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setLocusContext
+          go_name: SetLocusContext
+          params:
+            - java_type: android.content.LocusId
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setPictureInPictureParams
+          go_name: SetPictureInPictureParams
+          params:
+            - java_type: android.app.PictureInPictureParams
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setRecentsScreenshotEnabled
+          go_name: SetRecentsScreenshotEnabled
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setRequestedOrientation
+          go_name: SetRequestedOrientation
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setShouldDockBigOverlays
+          go_name: SetShouldDockBigOverlays
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setShowWhenLocked
+          go_name: SetShowWhenLocked
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTaskDescription
+          go_name: SetTaskDescription
+          params:
+            - java_type: android.app.ActivityManager$TaskDescription
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTheme
+          go_name: SetTheme
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTitle
+          go_name: SetTitle1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTitle
+          go_name: SetTitle1_1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTitleColor
+          go_name: SetTitleColor
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTranslucent
+          go_name: SetTranslucent
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setTurnScreenOn
+          go_name: SetTurnScreenOn
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVisible
+          go_name: SetVisible
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVrModeEnabled
+          go_name: SetVrModeEnabled
+          params:
+            - java_type: boolean
+              go_name: arg0
+            - java_type: android.content.ComponentName
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: shouldDockBigOverlays
+          go_name: ShouldDockBigOverlays
+          returns: boolean
+          error: true
+        - java_method: shouldShowRequestPermissionRationale
+          go_name: ShouldShowRequestPermissionRationale1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: shouldShowRequestPermissionRationale
+          go_name: ShouldShowRequestPermissionRationale2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: shouldUpRecreateTask
+          go_name: ShouldUpRecreateTask
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: showAssist
+          go_name: ShowAssist
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: showLockTaskEscapeMessage
+          go_name: ShowLockTaskEscapeMessage
+          returns: void
+          error: true
+        - java_method: startActionMode
+          go_name: StartActionMode1
+          params:
+            - java_type: android.view.ActionMode$Callback
+              go_name: arg0
+          returns: android.view.ActionMode
+          error: true
+        - java_method: startActionMode
+          go_name: StartActionMode2_1
+          params:
+            - java_type: android.view.ActionMode$Callback
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.view.ActionMode
+          error: true
+        - java_method: startActivities
+          go_name: StartActivities1
+          params:
+            - java_type: android.content.Intent[]
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: startActivities
+          go_name: StartActivities2_1
+          params:
+            - java_type: android.content.Intent[]
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: startActivity
+          go_name: StartActivity1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: startActivity
+          go_name: StartActivity2_1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: startActivityForResult
+          go_name: StartActivityForResult2
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: startActivityForResult
+          go_name: StartActivityForResult3_1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: startActivityFromChild
+          go_name: StartActivityFromChild3
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: startActivityFromChild
+          go_name: StartActivityFromChild4_1
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: android.os.Bundle
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: startActivityFromFragment
+          go_name: StartActivityFromFragment3
+          params:
+            - java_type: android.app.Fragment
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: startActivityFromFragment
+          go_name: StartActivityFromFragment4_1
+          params:
+            - java_type: android.app.Fragment
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: android.os.Bundle
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: startActivityIfNeeded
+          go_name: StartActivityIfNeeded2
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: startActivityIfNeeded
+          go_name: StartActivityIfNeeded3_1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: startIntentSender
+          go_name: StartIntentSender5
+          params:
+            - java_type: android.content.IntentSender
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+          returns: void
+          error: true
+        - java_method: startIntentSender
+          go_name: StartIntentSender6_1
+          params:
+            - java_type: android.content.IntentSender
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: android.os.Bundle
+              go_name: arg5
+          returns: void
+          error: true
+        - java_method: startIntentSenderForResult
+          go_name: StartIntentSenderForResult6
+          params:
+            - java_type: android.content.IntentSender
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.content.Intent
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+          returns: void
+          error: true
+        - java_method: startIntentSenderForResult
+          go_name: StartIntentSenderForResult7_1
+          params:
+            - java_type: android.content.IntentSender
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.content.Intent
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+            - java_type: android.os.Bundle
+              go_name: arg6
+          returns: void
+          error: true
+        - java_method: startIntentSenderFromChild
+          go_name: StartIntentSenderFromChild7
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+            - java_type: android.content.IntentSender
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: android.content.Intent
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+            - java_type: int
+              go_name: arg6
+          returns: void
+          error: true
+        - java_method: startIntentSenderFromChild
+          go_name: StartIntentSenderFromChild8_1
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+            - java_type: android.content.IntentSender
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: android.content.Intent
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+            - java_type: int
+              go_name: arg6
+            - java_type: android.os.Bundle
+              go_name: arg7
+          returns: void
+          error: true
+        - java_method: startLocalVoiceInteraction
+          go_name: StartLocalVoiceInteraction
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: startLockTask
+          go_name: StartLockTask
+          returns: void
+          error: true
+        - java_method: startManagingCursor
+          go_name: StartManagingCursor
+          params:
+            - java_type: android.database.Cursor
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: startNextMatchingActivity
+          go_name: StartNextMatchingActivity1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: startNextMatchingActivity
+          go_name: StartNextMatchingActivity2_1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: startPostponedEnterTransition
+          go_name: StartPostponedEnterTransition
+          returns: void
+          error: true
+        - java_method: startSearch
+          go_name: StartSearch
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+            - java_type: boolean
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: stopLocalVoiceInteraction
+          go_name: StopLocalVoiceInteraction
+          returns: void
+          error: true
+        - java_method: stopLockTask
+          go_name: StopLockTask
+          returns: void
+          error: true
+        - java_method: stopManagingCursor
+          go_name: StopManagingCursor
+          params:
+            - java_type: android.database.Cursor
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: takeKeyEvents
+          go_name: TakeKeyEvents
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: triggerSearch
+          go_name: TriggerSearch
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: unregisterActivityLifecycleCallbacks
+          go_name: UnregisterActivityLifecycleCallbacks
+          params:
+            - java_type: android.app.Application$ActivityLifecycleCallbacks
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unregisterComponentCallbacks
+          go_name: UnregisterComponentCallbacks
+          params:
+            - java_type: android.content.ComponentCallbacks
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unregisterForContextMenu
+          go_name: UnregisterForContextMenu
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unregisterScreenCaptureCallback
+          go_name: UnregisterScreenCaptureCallback
+          params:
+            - java_type: android.app.Activity$ScreenCaptureCallback
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.app.AlarmManager$AlarmClockInfo
+      go_type: alarmClockInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getShowIntent
+          go_name: GetShowIntent
+          returns: android.app.PendingIntent
+          error: true
+        - java_method: getTriggerTime
+          go_name: GetTriggerTime
+          returns: long
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.app.AlarmManager
+      go_type: alarmManager
+      obtain: system_service
+      service_name: alarm
+      close: true
+      methods:
+        - java_method: canScheduleExactAlarms
+          go_name: CanScheduleExactAlarms
+          returns: boolean
+          error: true
+        - java_method: cancel
+          go_name: Cancel1
+          params:
+            - java_type: android.app.AlarmManager$OnAlarmListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: cancel
+          go_name: Cancel1_1
+          params:
+            - java_type: android.app.PendingIntent
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: cancelAll
+          go_name: CancelAll
+          returns: void
+          error: true
+        - java_method: getNextAlarmClock
+          go_name: GetNextAlarmClock
+          returns: android.app.AlarmManager$AlarmClockInfo
+          error: true
+        - java_method: set
+          go_name: Set
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: android.app.PendingIntent
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setAlarmClock
+          go_name: SetAlarmClock
+          params:
+            - java_type: android.app.AlarmManager$AlarmClockInfo
+              go_name: arg0
+            - java_type: android.app.PendingIntent
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setAndAllowWhileIdle
+          go_name: SetAndAllowWhileIdle
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: android.app.PendingIntent
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setExact
+          go_name: SetExact
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: android.app.PendingIntent
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setExactAndAllowWhileIdle
+          go_name: SetExactAndAllowWhileIdle
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: android.app.PendingIntent
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setInexactRepeating
+          go_name: SetInexactRepeating
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: android.app.PendingIntent
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: setRepeating
+          go_name: SetRepeating
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: android.app.PendingIntent
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: setTime
+          go_name: SetTime
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTimeZone
+          go_name: SetTimeZone
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setWindow
+          go_name: SetWindow4
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: android.app.PendingIntent
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: setWindow
+          go_name: SetWindow6_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+            - java_type: java.util.concurrent.Executor
+              go_name: arg4
+            - java_type: android.app.AlarmManager$OnAlarmListener
+              go_name: arg5
+          returns: void
+          error: true
+    - java_class: android.app.DownloadManager$Query
+      go_type: query
+      methods:
+        - java_method: setFilterById
+          go_name: SetFilterById
+          params:
+            - java_type: long...
+              go_name: arg0
+          returns: android.app.DownloadManager$Query
+          error: true
+        - java_method: setFilterByStatus
+          go_name: SetFilterByStatus
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.app.DownloadManager$Query
+          error: true
+    - java_class: android.app.DownloadManager$Request
+      go_type: request
+      methods:
+        - java_method: addRequestHeader
+          go_name: AddRequestHeader
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: allowScanningByMediaScanner
+          go_name: AllowScanningByMediaScanner
+          returns: void
+          error: true
+        - java_method: setAllowedNetworkTypes
+          go_name: SetAllowedNetworkTypes
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setAllowedOverMetered
+          go_name: SetAllowedOverMetered
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setAllowedOverRoaming
+          go_name: SetAllowedOverRoaming
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setDescription
+          go_name: SetDescription
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setDestinationInExternalFilesDir
+          go_name: SetDestinationInExternalFilesDir
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setDestinationInExternalPublicDir
+          go_name: SetDestinationInExternalPublicDir
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setDestinationUri
+          go_name: SetDestinationUri
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setMimeType
+          go_name: SetMimeType
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setNotificationVisibility
+          go_name: SetNotificationVisibility
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setRequiresCharging
+          go_name: SetRequiresCharging
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setRequiresDeviceIdle
+          go_name: SetRequiresDeviceIdle
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setShowRunningNotification
+          go_name: SetShowRunningNotification
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setTitle
+          go_name: SetTitle
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setVisibleInDownloadsUi
+          go_name: SetVisibleInDownloadsUi
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+    - java_class: android.app.DownloadManager
+      go_type: downloadManager
+      methods:
+        - java_method: addCompletedDownload
+          go_name: AddCompletedDownload7
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+            - java_type: String
+              go_name: arg4
+            - java_type: long
+              go_name: arg5
+            - java_type: boolean
+              go_name: arg6
+          returns: long
+          error: true
+        - java_method: addCompletedDownload
+          go_name: AddCompletedDownload9_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+            - java_type: String
+              go_name: arg4
+            - java_type: long
+              go_name: arg5
+            - java_type: boolean
+              go_name: arg6
+            - java_type: android.net.Uri
+              go_name: arg7
+            - java_type: android.net.Uri
+              go_name: arg8
+          returns: long
+          error: true
+        - java_method: enqueue
+          go_name: Enqueue
+          params:
+            - java_type: android.app.DownloadManager$Request
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getMimeTypeForDownloadedFile
+          go_name: GetMimeTypeForDownloadedFile
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getUriForDownloadedFile
+          go_name: GetUriForDownloadedFile
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: openDownloadedFile
+          go_name: OpenDownloadedFile
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: query
+          go_name: Query
+          params:
+            - java_type: android.app.DownloadManager$Query
+              go_name: arg0
+          returns: android.database.Cursor
+          error: true
+        - java_method: remove
+          go_name: Remove
+          params:
+            - java_type: long...
+              go_name: arg0
+          returns: int
+          error: true
+      static_methods:
+        - java_method: getMaxBytesOverMobile
+          go_name: GetMaxBytesOverMobile
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: java.lang.Long
+          error: true
+        - java_method: getRecommendedMaxBytesOverMobile
+          go_name: GetRecommendedMaxBytesOverMobile
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: java.lang.Long
+          error: true
+    - java_class: android.app.KeyguardManager
+      go_type: keyguardManager
+      obtain: system_service
+      service_name: keyguard
+      close: true
+      methods:
+        - java_method: addKeyguardLockedStateListener
+          go_name: AddKeyguardLockedStateListener
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.app.KeyguardManager$KeyguardLockedStateListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: createConfirmDeviceCredentialIntent
+          go_name: CreateConfirmDeviceCredentialIntent
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: exitKeyguardSecurely
+          go_name: ExitKeyguardSecurely
+          params:
+            - java_type: android.app.KeyguardManager$OnKeyguardExitResult
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: inKeyguardRestrictedInputMode
+          go_name: InKeyguardRestrictedInputMode
+          returns: boolean
+          error: true
+        - java_method: isDeviceLocked
+          go_name: IsDeviceLocked
+          returns: boolean
+          error: true
+        - java_method: isDeviceSecure
+          go_name: IsDeviceSecure
+          returns: boolean
+          error: true
+        - java_method: isKeyguardLocked
+          go_name: IsKeyguardLocked
+          returns: boolean
+          error: true
+        - java_method: isKeyguardSecure
+          go_name: IsKeyguardSecure
+          returns: boolean
+          error: true
+        - java_method: newKeyguardLock
+          go_name: NewKeyguardLock
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.KeyguardManager$KeyguardLock
+          error: true
+        - java_method: removeKeyguardLockedStateListener
+          go_name: RemoveKeyguardLockedStateListener
+          params:
+            - java_type: android.app.KeyguardManager$KeyguardLockedStateListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: requestDismissKeyguard
+          go_name: RequestDismissKeyguard
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+            - java_type: android.app.KeyguardManager$KeyguardDismissCallback
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.app.Notification$BigTextStyle
+      go_type: bigTextStyle
+      methods:
+        - java_method: bigText
+          go_name: BigText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.Notification$BigTextStyle
+          error: true
+        - java_method: setBigContentTitle
+          go_name: SetBigContentTitle
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.Notification$BigTextStyle
+          error: true
+        - java_method: setSummaryText
+          go_name: SetSummaryText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.Notification$BigTextStyle
+          error: true
+    - java_class: android.app.Notification$Builder
+      go_type: builder
+      methods:
+        - java_method: addAction
+          go_name: AddAction1
+          params:
+            - java_type: android.app.Notification$Action
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: addAction
+          go_name: AddAction3_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.app.PendingIntent
+              go_name: arg2
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: addExtras
+          go_name: AddExtras
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: addPerson
+          go_name: AddPerson1
+          params:
+            - java_type: android.app.Person
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: addPerson
+          go_name: AddPerson1_1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.app.Notification
+          error: true
+        - java_method: createBigContentView
+          go_name: CreateBigContentView
+          returns: android.widget.RemoteViews
+          error: true
+        - java_method: createContentView
+          go_name: CreateContentView
+          returns: android.widget.RemoteViews
+          error: true
+        - java_method: createHeadsUpContentView
+          go_name: CreateHeadsUpContentView
+          returns: android.widget.RemoteViews
+          error: true
+        - java_method: extend
+          go_name: Extend
+          params:
+            - java_type: android.app.Notification$Extender
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: getExtras
+          go_name: GetExtras
+          returns: android.os.Bundle
+          error: true
+        - java_method: getNotification
+          go_name: GetNotification
+          returns: android.app.Notification
+          error: true
+        - java_method: getStyle
+          go_name: GetStyle
+          returns: android.app.Notification$Style
+          error: true
+        - java_method: setActions
+          go_name: SetActions
+          params:
+            - java_type: android.app.Notification$Action...
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setAllowSystemGeneratedContextualActions
+          go_name: SetAllowSystemGeneratedContextualActions
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setAutoCancel
+          go_name: SetAutoCancel
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setBadgeIconType
+          go_name: SetBadgeIconType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setBubbleMetadata
+          go_name: SetBubbleMetadata
+          params:
+            - java_type: android.app.Notification$BubbleMetadata
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setCategory
+          go_name: SetCategory
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setChannelId
+          go_name: SetChannelId
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setChronometerCountDown
+          go_name: SetChronometerCountDown
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setColor
+          go_name: SetColor
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setColorized
+          go_name: SetColorized
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setContent
+          go_name: SetContent
+          params:
+            - java_type: android.widget.RemoteViews
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setContentInfo
+          go_name: SetContentInfo
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setContentIntent
+          go_name: SetContentIntent
+          params:
+            - java_type: android.app.PendingIntent
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setContentText
+          go_name: SetContentText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setContentTitle
+          go_name: SetContentTitle
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setCustomBigContentView
+          go_name: SetCustomBigContentView
+          params:
+            - java_type: android.widget.RemoteViews
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setCustomContentView
+          go_name: SetCustomContentView
+          params:
+            - java_type: android.widget.RemoteViews
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setCustomHeadsUpContentView
+          go_name: SetCustomHeadsUpContentView
+          params:
+            - java_type: android.widget.RemoteViews
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setDefaults
+          go_name: SetDefaults
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setDeleteIntent
+          go_name: SetDeleteIntent
+          params:
+            - java_type: android.app.PendingIntent
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setExtras
+          go_name: SetExtras
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setFlag
+          go_name: SetFlag
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setForegroundServiceBehavior
+          go_name: SetForegroundServiceBehavior
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setFullScreenIntent
+          go_name: SetFullScreenIntent
+          params:
+            - java_type: android.app.PendingIntent
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setGroup
+          go_name: SetGroup
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setGroupAlertBehavior
+          go_name: SetGroupAlertBehavior
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setGroupSummary
+          go_name: SetGroupSummary
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setLargeIcon
+          go_name: SetLargeIcon1
+          params:
+            - java_type: android.graphics.Bitmap
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setLargeIcon
+          go_name: SetLargeIcon1_1
+          params:
+            - java_type: android.graphics.drawable.Icon
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setLights
+          go_name: SetLights
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setLocalOnly
+          go_name: SetLocalOnly
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setLocusId
+          go_name: SetLocusId
+          params:
+            - java_type: android.content.LocusId
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setNumber
+          go_name: SetNumber
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setOngoing
+          go_name: SetOngoing
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setOnlyAlertOnce
+          go_name: SetOnlyAlertOnce
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setPriority
+          go_name: SetPriority
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setProgress
+          go_name: SetProgress
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setPublicVersion
+          go_name: SetPublicVersion
+          params:
+            - java_type: android.app.Notification
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setRemoteInputHistory
+          go_name: SetRemoteInputHistory
+          params:
+            - java_type: java.lang.CharSequence[]
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setSettingsText
+          go_name: SetSettingsText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setShortCriticalText
+          go_name: SetShortCriticalText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setShortcutId
+          go_name: SetShortcutId
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setShowWhen
+          go_name: SetShowWhen
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setSmallIcon
+          go_name: SetSmallIcon1
+          params:
+            - java_type: android.graphics.drawable.Icon
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setSmallIcon
+          go_name: SetSmallIcon1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setSmallIcon
+          go_name: SetSmallIcon2_2
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setSortKey
+          go_name: SetSortKey
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setSound
+          go_name: SetSound1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setSound
+          go_name: SetSound2_1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.media.AudioAttributes
+              go_name: arg1
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setSound
+          go_name: SetSound2_2
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setStyle
+          go_name: SetStyle
+          params:
+            - java_type: android.app.Notification$Style
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setSubText
+          go_name: SetSubText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setTicker
+          go_name: SetTicker1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setTicker
+          go_name: SetTicker2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.widget.RemoteViews
+              go_name: arg1
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setTimeoutAfter
+          go_name: SetTimeoutAfter
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setUsesChronometer
+          go_name: SetUsesChronometer
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setVibrate
+          go_name: SetVibrate
+          params:
+            - java_type: '[J'
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setVisibility
+          go_name: SetVisibility
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+        - java_method: setWhen
+          go_name: SetWhen
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.app.Notification$Builder
+          error: true
+      static_methods:
+        - java_method: recoverBuilder
+          go_name: RecoverBuilder
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.app.Notification
+              go_name: arg1
+          returns: android.app.Notification$Builder
+          error: true
+    - java_class: android.app.NotificationChannel
+      go_type: notificationChannel
+      methods:
+        - java_method: canBubble
+          go_name: CanBubble
+          returns: boolean
+          error: true
+        - java_method: canBypassDnd
+          go_name: CanBypassDnd
+          returns: boolean
+          error: true
+        - java_method: canShowBadge
+          go_name: CanShowBadge
+          returns: boolean
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: enableLights
+          go_name: EnableLights
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: enableVibration
+          go_name: EnableVibration
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAudioAttributes
+          go_name: GetAudioAttributes
+          returns: android.media.AudioAttributes
+          error: true
+        - java_method: getConversationId
+          go_name: GetConversationId
+          returns: String
+          error: true
+        - java_method: getDescription
+          go_name: GetDescription
+          returns: String
+          error: true
+        - java_method: getGroup
+          go_name: GetGroup
+          returns: String
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: String
+          error: true
+        - java_method: getImportance
+          go_name: GetImportance
+          returns: int
+          error: true
+        - java_method: getLightColor
+          go_name: GetLightColor
+          returns: int
+          error: true
+        - java_method: getLockscreenVisibility
+          go_name: GetLockscreenVisibility
+          returns: int
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: getParentChannelId
+          go_name: GetParentChannelId
+          returns: String
+          error: true
+        - java_method: getSound
+          go_name: GetSound
+          returns: android.net.Uri
+          error: true
+        - java_method: getVibrationEffect
+          go_name: GetVibrationEffect
+          returns: android.os.VibrationEffect
+          error: true
+        - java_method: getVibrationPattern
+          go_name: GetVibrationPattern
+          returns: '[J'
+          error: true
+        - java_method: hasUserSetImportance
+          go_name: HasUserSetImportance
+          returns: boolean
+          error: true
+        - java_method: hasUserSetSound
+          go_name: HasUserSetSound
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isBlockable
+          go_name: IsBlockable
+          returns: boolean
+          error: true
+        - java_method: isConversation
+          go_name: IsConversation
+          returns: boolean
+          error: true
+        - java_method: isDemoted
+          go_name: IsDemoted
+          returns: boolean
+          error: true
+        - java_method: isImportantConversation
+          go_name: IsImportantConversation
+          returns: boolean
+          error: true
+        - java_method: setAllowBubbles
+          go_name: SetAllowBubbles
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setBlockable
+          go_name: SetBlockable
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setBypassDnd
+          go_name: SetBypassDnd
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setConversationId
+          go_name: SetConversationId
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setDescription
+          go_name: SetDescription
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setGroup
+          go_name: SetGroup
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setImportance
+          go_name: SetImportance
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setLightColor
+          go_name: SetLightColor
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setLockscreenVisibility
+          go_name: SetLockscreenVisibility
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setName
+          go_name: SetName
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setShowBadge
+          go_name: SetShowBadge
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setSound
+          go_name: SetSound
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.media.AudioAttributes
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setVibrationEffect
+          go_name: SetVibrationEffect
+          params:
+            - java_type: android.os.VibrationEffect
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVibrationPattern
+          go_name: SetVibrationPattern
+          params:
+            - java_type: '[J'
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: shouldShowLights
+          go_name: ShouldShowLights
+          returns: boolean
+          error: true
+        - java_method: shouldVibrate
+          go_name: ShouldVibrate
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.app.NotificationManager
+      go_type: notificationManager
+      obtain: system_service
+      service_name: notification
+      close: true
+      methods:
+        - java_method: addAutomaticZenRule
+          go_name: AddAutomaticZenRule
+          params:
+            - java_type: android.app.AutomaticZenRule
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: areAutomaticZenRulesUserManaged
+          go_name: AreAutomaticZenRulesUserManaged
+          returns: boolean
+          error: true
+        - java_method: areBubblesAllowed
+          go_name: AreBubblesAllowed
+          returns: boolean
+          error: true
+        - java_method: areBubblesEnabled
+          go_name: AreBubblesEnabled
+          returns: boolean
+          error: true
+        - java_method: areNotificationsEnabled
+          go_name: AreNotificationsEnabled
+          returns: boolean
+          error: true
+        - java_method: areNotificationsPaused
+          go_name: AreNotificationsPaused
+          returns: boolean
+          error: true
+        - java_method: canNotifyAsPackage
+          go_name: CanNotifyAsPackage
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: canPostPromotedNotifications
+          go_name: CanPostPromotedNotifications
+          returns: boolean
+          error: true
+        - java_method: canUseFullScreenIntent
+          go_name: CanUseFullScreenIntent
+          returns: boolean
+          error: true
+        - java_method: cancel
+          go_name: Cancel1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: cancel
+          go_name: Cancel2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: cancelAll
+          go_name: CancelAll
+          returns: void
+          error: true
+        - java_method: cancelAsPackage
+          go_name: CancelAsPackage
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: createNotificationChannel
+          go_name: CreateNotificationChannel
+          params:
+            - java_type: android.app.NotificationChannel
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: createNotificationChannelGroup
+          go_name: CreateNotificationChannelGroup
+          params:
+            - java_type: android.app.NotificationChannelGroup
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: createNotificationChannelGroups
+          go_name: CreateNotificationChannelGroups
+          params:
+            - java_type: java.util.List<android.app.NotificationChannelGroup>
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: createNotificationChannels
+          go_name: CreateNotificationChannels
+          params:
+            - java_type: java.util.List<android.app.NotificationChannel>
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: deleteNotificationChannel
+          go_name: DeleteNotificationChannel
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: deleteNotificationChannelGroup
+          go_name: DeleteNotificationChannelGroup
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getActiveNotifications
+          go_name: GetActiveNotifications
+          returns: android.service.notification.StatusBarNotification[]
+          error: true
+        - java_method: getAutomaticZenRule
+          go_name: GetAutomaticZenRule
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.AutomaticZenRule
+          error: true
+        - java_method: getAutomaticZenRuleState
+          go_name: GetAutomaticZenRuleState
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getBubblePreference
+          go_name: GetBubblePreference
+          returns: int
+          error: true
+        - java_method: getConsolidatedNotificationPolicy
+          go_name: GetConsolidatedNotificationPolicy
+          returns: android.app.NotificationManager$Policy
+          error: true
+        - java_method: getImportance
+          go_name: GetImportance
+          returns: int
+          error: true
+        - java_method: getNotificationChannel
+          go_name: GetNotificationChannel1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.NotificationChannel
+          error: true
+        - java_method: getNotificationChannel
+          go_name: GetNotificationChannel2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.app.NotificationChannel
+          error: true
+        - java_method: getNotificationChannelGroup
+          go_name: GetNotificationChannelGroup
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.NotificationChannelGroup
+          error: true
+        - java_method: getNotificationChannelGroups
+          go_name: GetNotificationChannelGroups
+          returns: java.util.List<android.app.NotificationChannelGroup>
+          error: true
+        - java_method: getNotificationChannels
+          go_name: GetNotificationChannels
+          returns: java.util.List<android.app.NotificationChannel>
+          error: true
+        - java_method: getNotificationDelegate
+          go_name: GetNotificationDelegate
+          returns: String
+          error: true
+        - java_method: getNotificationPolicy
+          go_name: GetNotificationPolicy
+          returns: android.app.NotificationManager$Policy
+          error: true
+        - java_method: isNotificationListenerAccessGranted
+          go_name: IsNotificationListenerAccessGranted
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isNotificationPolicyAccessGranted
+          go_name: IsNotificationPolicyAccessGranted
+          returns: boolean
+          error: true
+        - java_method: matchesCallFilter
+          go_name: MatchesCallFilter
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: notify
+          go_name: Notify2
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.app.Notification
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: notify
+          go_name: Notify3_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.app.Notification
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: notifyAsPackage
+          go_name: NotifyAsPackage
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: android.app.Notification
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: removeAutomaticZenRule
+          go_name: RemoveAutomaticZenRule
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setAutomaticZenRuleState
+          go_name: SetAutomaticZenRuleState
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.service.notification.Condition
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setNotificationDelegate
+          go_name: SetNotificationDelegate
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setNotificationPolicy
+          go_name: SetNotificationPolicy
+          params:
+            - java_type: android.app.NotificationManager$Policy
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: shouldHideSilentStatusBarIcons
+          go_name: ShouldHideSilentStatusBarIcons
+          returns: boolean
+          error: true
+        - java_method: updateAutomaticZenRule
+          go_name: UpdateAutomaticZenRule
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.app.AutomaticZenRule
+              go_name: arg1
+          returns: boolean
+          error: true
+    - java_class: android.app.PendingIntent
+      go_type: pendingIntent
+      methods:
+        - java_method: cancel
+          go_name: Cancel
+          returns: void
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getCreatorPackage
+          go_name: GetCreatorPackage
+          returns: String
+          error: true
+        - java_method: getCreatorUid
+          go_name: GetCreatorUid
+          returns: int
+          error: true
+        - java_method: getCreatorUserHandle
+          go_name: GetCreatorUserHandle
+          returns: android.os.UserHandle
+          error: true
+        - java_method: getIntentSender
+          go_name: GetIntentSender
+          returns: android.content.IntentSender
+          error: true
+        - java_method: getTargetPackage
+          go_name: GetTargetPackage
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isActivity
+          go_name: IsActivity
+          returns: boolean
+          error: true
+        - java_method: isBroadcast
+          go_name: IsBroadcast
+          returns: boolean
+          error: true
+        - java_method: isForegroundService
+          go_name: IsForegroundService
+          returns: boolean
+          error: true
+        - java_method: isImmutable
+          go_name: IsImmutable
+          returns: boolean
+          error: true
+        - java_method: isService
+          go_name: IsService
+          returns: boolean
+          error: true
+        - java_method: send
+          go_name: Send0
+          returns: void
+          error: true
+        - java_method: send
+          go_name: Send3_1
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.content.Intent
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: send
+          go_name: Send1_2
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: send
+          go_name: Send1_3
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: getActivities
+          go_name: GetActivities4
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.content.Intent[]
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: android.app.PendingIntent
+          error: true
+        - java_method: getActivities
+          go_name: GetActivities5_1
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.content.Intent[]
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: android.os.Bundle
+              go_name: arg4
+          returns: android.app.PendingIntent
+          error: true
+        - java_method: getActivity
+          go_name: GetActivity4
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.content.Intent
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: android.app.PendingIntent
+          error: true
+        - java_method: getActivity
+          go_name: GetActivity5_1
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.content.Intent
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: android.os.Bundle
+              go_name: arg4
+          returns: android.app.PendingIntent
+          error: true
+        - java_method: getBroadcast
+          go_name: GetBroadcast
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.content.Intent
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: android.app.PendingIntent
+          error: true
+        - java_method: getForegroundService
+          go_name: GetForegroundService
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.content.Intent
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: android.app.PendingIntent
+          error: true
+        - java_method: getService
+          go_name: GetService
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.content.Intent
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: android.app.PendingIntent
+          error: true
+        - java_method: readPendingIntentOrNullFromParcel
+          go_name: ReadPendingIntentOrNullFromParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+          returns: android.app.PendingIntent
+          error: true
+        - java_method: writePendingIntentOrNullToParcel
+          go_name: WritePendingIntentOrNullToParcel
+          params:
+            - java_type: android.app.PendingIntent
+              go_name: arg0
+            - java_type: android.os.Parcel
+              go_name: arg1
+          returns: void
+          error: true
 constants:
-  # Intent actions
-  - go_name: ActionView
-    value: '"android.intent.action.VIEW"'
-    go_type: string
-  - go_name: ActionSend
-    value: '"android.intent.action.SEND"'
-    go_type: string
-  - go_name: ActionDial
-    value: '"android.intent.action.DIAL"'
-    go_type: string
-  - go_name: ActionPick
-    value: '"android.intent.action.PICK"'
-    go_type: string
-
-  # Intent flags
-  - go_name: FlagNewTask
-    value: "0x10000000"
-    go_type: int32
-  - go_name: FlagClearTop
-    value: "0x04000000"
-    go_type: int32
-  - go_name: FlagGrantReadURI
-    value: "0x00000001"
-    go_type: int32
-
-  # PendingIntent flags
-  - go_name: PendingFlagImmutable
-    value: "1 << 26"
-    go_type: int32
-  - go_name: PendingFlagMutable
-    value: "1 << 25"
-    go_type: int32
-  - go_name: PendingFlagUpdateCurrent
-    value: "1 << 27"
-    go_type: int32
+    - go_name: DefaultKeysDialer
+      value: "0"
+      go_type: int
+    - go_name: DefaultKeysDisable
+      value: "0"
+      go_type: int
+    - go_name: DefaultKeysSearchGlobal
+      value: "0"
+      go_type: int
+    - go_name: DefaultKeysSearchLocal
+      value: "0"
+      go_type: int
+    - go_name: DefaultKeysShortcut
+      value: "0"
+      go_type: int
+    - go_name: FullscreenModeRequestEnter
+      value: "0"
+      go_type: int
+    - go_name: FullscreenModeRequestExit
+      value: "0"
+      go_type: int
+    - go_name: OverrideTransitionClose
+      value: "0"
+      go_type: int
+    - go_name: OverrideTransitionOpen
+      value: "0"
+      go_type: int
+    - go_name: ResultCanceled
+      value: "0"
+      go_type: int
+    - go_name: ResultFirstUser
+      value: "0"
+      go_type: int
+    - go_name: ResultOk
+      value: "0"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: ActionNextAlarmClockChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionScheduleExactAlarmPermissionStateChanged
+      value: '""'
+      go_type: string
+    - go_name: ElapsedRealtime
+      value: "0"
+      go_type: int
+    - go_name: ElapsedRealtimeWakeup
+      value: "0"
+      go_type: int
+    - go_name: IntervalDay
+      value: "0"
+      go_type: int64
+    - go_name: IntervalFifteenMinutes
+      value: "0"
+      go_type: int64
+    - go_name: IntervalHalfDay
+      value: "0"
+      go_type: int64
+    - go_name: IntervalHalfHour
+      value: "0"
+      go_type: int64
+    - go_name: IntervalHour
+      value: "0"
+      go_type: int64
+    - go_name: Rtc
+      value: "0"
+      go_type: int
+    - go_name: RtcWakeup
+      value: "0"
+      go_type: int
+    - go_name: NetworkMobile
+      value: "0"
+      go_type: int
+    - go_name: NetworkWifi
+      value: "0"
+      go_type: int
+    - go_name: VisibilityHidden
+      value: "0"
+      go_type: int
+    - go_name: VisibilityVisible
+      value: "0"
+      go_type: int
+    - go_name: VisibilityVisibleNotifyCompleted
+      value: "0"
+      go_type: int
+    - go_name: VisibilityVisibleNotifyOnlyCompletion
+      value: "0"
+      go_type: int
+    - go_name: ActionDownloadComplete
+      value: '""'
+      go_type: string
+    - go_name: ActionNotificationClicked
+      value: '""'
+      go_type: string
+    - go_name: ActionViewDownloads
+      value: '""'
+      go_type: string
+    - go_name: ColumnBytesDownloadedSoFar
+      value: '""'
+      go_type: string
+    - go_name: ColumnDescription
+      value: '""'
+      go_type: string
+    - go_name: ColumnId
+      value: '""'
+      go_type: string
+    - go_name: ColumnLastModifiedTimestamp
+      value: '""'
+      go_type: string
+    - go_name: ColumnLocalFilename
+      value: '""'
+      go_type: string
+    - go_name: ColumnLocalUri
+      value: '""'
+      go_type: string
+    - go_name: ColumnMediaproviderUri
+      value: '""'
+      go_type: string
+    - go_name: ColumnMediaType
+      value: '""'
+      go_type: string
+    - go_name: ColumnReason
+      value: '""'
+      go_type: string
+    - go_name: ColumnStatus
+      value: '""'
+      go_type: string
+    - go_name: ColumnTitle
+      value: '""'
+      go_type: string
+    - go_name: ColumnTotalSizeBytes
+      value: '""'
+      go_type: string
+    - go_name: ColumnUri
+      value: '""'
+      go_type: string
+    - go_name: ErrorCannotResume
+      value: "0"
+      go_type: int
+    - go_name: ErrorDeviceNotFound
+      value: "0"
+      go_type: int
+    - go_name: ErrorFileAlreadyExists
+      value: "0"
+      go_type: int
+    - go_name: ErrorFileError
+      value: "0"
+      go_type: int
+    - go_name: ErrorHttpDataError
+      value: "0"
+      go_type: int
+    - go_name: ErrorInsufficientSpace
+      value: "0"
+      go_type: int
+    - go_name: ErrorTooManyRedirects
+      value: "0"
+      go_type: int
+    - go_name: ErrorUnhandledHttpCode
+      value: "0"
+      go_type: int
+    - go_name: ErrorUnknown
+      value: "0"
+      go_type: int
+    - go_name: ExtraDownloadId
+      value: '""'
+      go_type: string
+    - go_name: ExtraNotificationClickDownloadIds
+      value: '""'
+      go_type: string
+    - go_name: IntentExtrasSortBySize
+      value: '""'
+      go_type: string
+    - go_name: PausedQueuedForWifi
+      value: "0"
+      go_type: int
+    - go_name: PausedUnknown
+      value: "0"
+      go_type: int
+    - go_name: PausedWaitingForNetwork
+      value: "0"
+      go_type: int
+    - go_name: PausedWaitingToRetry
+      value: "0"
+      go_type: int
+    - go_name: StatusFailed
+      value: "0"
+      go_type: int
+    - go_name: StatusPaused
+      value: "0"
+      go_type: int
+    - go_name: StatusPending
+      value: "0"
+      go_type: int
+    - go_name: StatusRunning
+      value: "0"
+      go_type: int
+    - go_name: StatusSuccessful
+      value: "0"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: DefaultChannelId
+      value: '""'
+      go_type: string
+    - go_name: EditConversation
+      value: '""'
+      go_type: string
+    - go_name: EditImportance
+      value: '""'
+      go_type: string
+    - go_name: EditLauncher
+      value: '""'
+      go_type: string
+    - go_name: EditLockedDevice
+      value: '""'
+      go_type: string
+    - go_name: EditSound
+      value: '""'
+      go_type: string
+    - go_name: EditVibration
+      value: '""'
+      go_type: string
+    - go_name: EditZen
+      value: '""'
+      go_type: string
+    - go_name: ActionAppBlockStateChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionAutomaticZenRule
+      value: '""'
+      go_type: string
+    - go_name: ActionAutomaticZenRuleStatusChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionConsolidatedNotificationPolicyChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionInterruptionFilterChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionNotificationChannelBlockStateChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionNotificationChannelGroupBlockStateChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionNotificationPolicyAccessGrantedChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionNotificationPolicyChanged
+      value: '""'
+      go_type: string
+    - go_name: AutomaticRuleStatusActivated
+      value: "0"
+      go_type: int
+    - go_name: AutomaticRuleStatusDeactivated
+      value: "0"
+      go_type: int
+    - go_name: AutomaticRuleStatusDisabled
+      value: "0"
+      go_type: int
+    - go_name: AutomaticRuleStatusEnabled
+      value: "0"
+      go_type: int
+    - go_name: AutomaticRuleStatusRemoved
+      value: "0"
+      go_type: int
+    - go_name: AutomaticRuleStatusUnknown
+      value: "0"
+      go_type: int
+    - go_name: BubblePreferenceAll
+      value: "0"
+      go_type: int
+    - go_name: BubblePreferenceNone
+      value: "0"
+      go_type: int
+    - go_name: BubblePreferenceSelected
+      value: "0"
+      go_type: int
+    - go_name: ExtraAutomaticRuleId
+      value: '""'
+      go_type: string
+    - go_name: ExtraAutomaticZenRuleId
+      value: '""'
+      go_type: string
+    - go_name: ExtraAutomaticZenRuleStatus
+      value: '""'
+      go_type: string
+    - go_name: ExtraBlockedState
+      value: '""'
+      go_type: string
+    - go_name: ExtraNotificationChannelGroupId
+      value: '""'
+      go_type: string
+    - go_name: ExtraNotificationChannelId
+      value: '""'
+      go_type: string
+    - go_name: ExtraNotificationPolicy
+      value: '""'
+      go_type: string
+    - go_name: ImportanceDefault
+      value: "0"
+      go_type: int
+    - go_name: ImportanceHigh
+      value: "0"
+      go_type: int
+    - go_name: ImportanceLow
+      value: "0"
+      go_type: int
+    - go_name: ImportanceMax
+      value: "0"
+      go_type: int
+    - go_name: ImportanceMin
+      value: "0"
+      go_type: int
+    - go_name: ImportanceNone
+      value: "0"
+      go_type: int
+    - go_name: ImportanceUnspecified
+      value: "0"
+      go_type: int
+    - go_name: InterruptionFilterAlarms
+      value: "0"
+      go_type: int
+    - go_name: InterruptionFilterAll
+      value: "0"
+      go_type: int
+    - go_name: InterruptionFilterNone
+      value: "0"
+      go_type: int
+    - go_name: InterruptionFilterPriority
+      value: "0"
+      go_type: int
+    - go_name: InterruptionFilterUnknown
+      value: "0"
+      go_type: int
+    - go_name: MetaDataAutomaticRuleType
+      value: '""'
+      go_type: string
+    - go_name: MetaDataRuleInstanceLimit
+      value: '""'
+      go_type: string
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: FlagAllowUnsafeImplicitIntent
+      value: "0"
+      go_type: int
+    - go_name: FlagCancelCurrent
+      value: "0"
+      go_type: int
+    - go_name: FlagImmutable
+      value: "0"
+      go_type: int
+    - go_name: FlagMutable
+      value: "0"
+      go_type: int
+    - go_name: FlagNoCreate
+      value: "0"
+      go_type: int
+    - go_name: FlagOneShot
+      value: "0"
+      go_type: int
+    - go_name: FlagUpdateCurrent
+      value: "0"
+      go_type: int

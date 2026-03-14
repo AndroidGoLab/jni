@@ -1,56 +1,177 @@
 package: usage
-go_import: "github.com/xaionaro-go/jni/app/usage"
-
+go_import: github.com/xaionaro-go/jni/app/usage
 classes:
-  - java_class: android.app.usage.UsageStatsManager
-    go_type: Manager
-    obtain: system_service
-    service_name: "usagestats"
-    close: false
-    methods:
-      - java_method: queryUsageStats
-        go_name: queryUsageStatsRaw
-        params:
-          - { java_type: int, go_name: intervalType }
-          - { java_type: long, go_name: beginTime }
-          - { java_type: long, go_name: endTime }
-        returns: java.util.List
-        error: true
-
-      - java_method: isAppInactive
-        go_name: IsAppInactive
-        params:
-          - { java_type: String, go_name: packageName }
-        returns: boolean
-        error: true
-
-      - java_method: getAppStandbyBucket
-        go_name: GetAppStandbyBucket
-        params: []
-        returns: int
-        error: true
-
-  - java_class: android.app.usage.UsageStats
-    go_type: Stats
-    kind: data_class
-    fields:
-      - { java_method: getPackageName, returns: String, go_name: PackageName, go_type: string }
-      - { java_method: getFirstTimeStamp, returns: long, go_name: FirstTimestamp, go_type: int64 }
-      - { java_method: getLastTimeStamp, returns: long, go_name: LastTimestamp, go_type: int64 }
-      - { java_method: getTotalTimeVisible, returns: long, go_name: TotalTimeVisible, go_type: int64 }
-      - { java_method: getTotalTimeInForeground, returns: long, go_name: TotalTimeForeground, go_type: int64 }
-
+    - java_class: android.app.usage.UsageStats
+      go_type: usageStats
+      methods:
+        - java_method: add
+          go_name: Add
+          params:
+            - java_type: android.app.usage.UsageStats
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getFirstTimeStamp
+          go_name: GetFirstTimeStamp
+          returns: long
+          error: true
+        - java_method: getLastTimeForegroundServiceUsed
+          go_name: GetLastTimeForegroundServiceUsed
+          returns: long
+          error: true
+        - java_method: getLastTimeStamp
+          go_name: GetLastTimeStamp
+          returns: long
+          error: true
+        - java_method: getLastTimeUsed
+          go_name: GetLastTimeUsed
+          returns: long
+          error: true
+        - java_method: getLastTimeVisible
+          go_name: GetLastTimeVisible
+          returns: long
+          error: true
+        - java_method: getPackageName
+          go_name: GetPackageName
+          returns: String
+          error: true
+        - java_method: getTotalTimeForegroundServiceUsed
+          go_name: GetTotalTimeForegroundServiceUsed
+          returns: long
+          error: true
+        - java_method: getTotalTimeInForeground
+          go_name: GetTotalTimeInForeground
+          returns: long
+          error: true
+        - java_method: getTotalTimeVisible
+          go_name: GetTotalTimeVisible
+          returns: long
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.app.usage.UsageStatsManager
+      go_type: usageStatsManager
+      obtain: system_service
+      service_name: usagestats
+      close: true
+      methods:
+        - java_method: getAppStandbyBucket
+          go_name: GetAppStandbyBucket
+          returns: int
+          error: true
+        - java_method: isAppInactive
+          go_name: IsAppInactive
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: queryConfigurations
+          go_name: QueryConfigurations
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+          returns: java.util.List<android.app.usage.ConfigurationStats>
+          error: true
+        - java_method: queryEventStats
+          go_name: QueryEventStats
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+          returns: java.util.List<android.app.usage.EventStats>
+          error: true
+        - java_method: queryEvents
+          go_name: QueryEvents1
+          params:
+            - java_type: android.app.usage.UsageEventsQuery
+              go_name: arg0
+          returns: android.app.usage.UsageEvents
+          error: true
+        - java_method: queryEvents
+          go_name: QueryEvents2_1
+          params:
+            - java_type: long
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: android.app.usage.UsageEvents
+          error: true
+        - java_method: queryEventsForSelf
+          go_name: QueryEventsForSelf
+          params:
+            - java_type: long
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: android.app.usage.UsageEvents
+          error: true
+        - java_method: queryUsageStats
+          go_name: QueryUsageStats
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+          returns: java.util.List<android.app.usage.UsageStats>
+          error: true
 constants:
-  - { go_name: Daily, value: 0, go_type: Interval }
-  - { go_name: Weekly, value: 1, go_type: Interval }
-  - { go_name: Monthly, value: 2, go_type: Interval }
-  - { go_name: Yearly, value: 3, go_type: Interval }
-
-  # Standby buckets
-  - { go_name: StandbyActive, value: 10, go_type: int }
-  - { go_name: StandbyWorkingSet, value: 20, go_type: int }
-  - { go_name: StandbyFrequent, value: 30, go_type: int }
-  - { go_name: StandbyRare, value: 40, go_type: int }
-  - { go_name: StandbyRestricted, value: 45, go_type: int }
-
-callbacks: []
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: ExtraEventAction
+      value: '""'
+      go_type: string
+    - go_name: ExtraEventCategory
+      value: '""'
+      go_type: string
+    - go_name: IntervalBest
+      value: "0"
+      go_type: int
+    - go_name: IntervalDaily
+      value: "0"
+      go_type: int
+    - go_name: IntervalMonthly
+      value: "0"
+      go_type: int
+    - go_name: IntervalWeekly
+      value: "0"
+      go_type: int
+    - go_name: IntervalYearly
+      value: "0"
+      go_type: int
+    - go_name: StandbyBucketActive
+      value: "0"
+      go_type: int
+    - go_name: StandbyBucketFrequent
+      value: "0"
+      go_type: int
+    - go_name: StandbyBucketRare
+      value: "0"
+      go_type: int
+    - go_name: StandbyBucketRestricted
+      value: "0"
+      go_type: int
+    - go_name: StandbyBucketWorkingSet
+      value: "0"
+      go_type: int
