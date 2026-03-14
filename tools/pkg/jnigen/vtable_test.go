@@ -50,7 +50,7 @@ func TestGenerateVtableHelpers_Void(t *testing.T) {
 		t.Error("missing function signature")
 	}
 	if strings.Contains(output, "return") && !strings.Contains(output, "return (*") {
-		// Make sure there's no "return" in the void function body.
+		t.Error("void function should not have bare 'return' statements")
 	}
 	if !strings.Contains(output, "(*env)->ExceptionClear(env)") {
 		t.Error("missing vtable call")
