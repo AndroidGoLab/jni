@@ -59,8 +59,8 @@ type ProtoEnumValue struct {
 	Number int
 }
 
-// buildProtoData converts a MergedSpec into proto data structures.
-func buildProtoData(merged *javagen.MergedSpec, goModule string) *ProtoData {
+// BuildProtoData converts a MergedSpec into proto data structures.
+func BuildProtoData(merged *javagen.MergedSpec, goModule string) *ProtoData {
 	data := &ProtoData{
 		Package:   merged.Package,
 		GoPackage: goModule + "/proto/" + merged.Package,
