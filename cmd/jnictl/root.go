@@ -28,7 +28,7 @@ var rootCmd = &cobra.Command{
 	Long:  "jnictl provides command-line access to Android system services via the go-jni gRPC layer.",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		switch cmd.Name() {
-		case "help", "completion":
+		case "help", "completion", "list-commands":
 			return nil
 		}
 
