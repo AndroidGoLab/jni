@@ -1,0 +1,160 @@
+package: speech
+go_import: "github.com/xaionaro-go/jni/speech"
+
+overrides:
+  android.speech.SpeechRecognizer:
+    constructor:
+      go_name: NewRecognizer
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+      implementation_notes: |
+        Call createSpeechRecognizer(ctx) static factory method.
+
+    composite_methods:
+      - go_name: IsAvailable
+        doc: "IsAvailable returns whether speech recognition is available on this device"
+        params: [{ go_name: ctx, go_type: "*app.Context" }]
+        static: true
+        returns: { go_type: bool }
+        implementation_notes: |
+          Call isRecognitionAvailable(ctx)
+
+      - go_name: Start
+        doc: "Start begins speech recognition with the given options"
+        params:
+          - { go_name: opts, go_type: RecognizeOptions }
+          - { go_name: onPartial, go_type: "func([]RecognitionResult)" }
+          - { go_name: onFinal, go_type: "func([]RecognitionResult)" }
+          - { go_name: onError, go_type: "func(int)" }
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          1. Create RecognitionListener proxy:
+             - onResults: extract RESULTS_RECOGNITION (ArrayList<String>) and
+               CONFIDENCE_SCORES (float[]) from Bundle → []RecognitionResult, call onFinal
+             - onPartialResults: same extraction, call onPartial
+             - onError: call onError(errorCode)
+             - other callbacks: no-op or log
+          2. Call setRecognitionListener(listener)
+          3. Build Intent with action RecognizerIntent.ACTION_RECOGNIZE_SPEECH:
+             - putExtra EXTRA_LANGUAGE_MODEL = LANGUAGE_MODEL_FREE_FORM
+             - putExtra EXTRA_LANGUAGE = opts.Language (if non-empty)
+             - putExtra EXTRA_PARTIAL_RESULTS = opts.PartialResults
+             - putExtra EXTRA_MAX_RESULTS = opts.MaxResults (if > 0)
+          4. Call startListeningRaw(intent)
+
+      - go_name: Stop
+        doc: "Stop stops listening for speech (triggers final results)"
+        params: []
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Call stopListeningRaw()
+
+      - go_name: Cancel
+        doc: "Cancel cancels speech recognition without results"
+        params: []
+        returns: { go_type: void }
+        implementation_notes: |
+          Call cancelRaw()
+
+      - go_name: Destroy
+        doc: "Destroy releases speech recognizer resources"
+        params: []
+        returns: { go_type: void }
+        implementation_notes: |
+          Call destroyRaw()
+
+  android.speech.tts.TextToSpeech:
+    constructor:
+      go_name: NewTTS
+      params_override:
+        - { go_name: ctx, go_type: "*app.Context" }
+        - { go_name: onInit, go_type: "func(status int)" }
+      implementation_notes: |
+        1. Create OnInitListener proxy that calls onInit(status)
+        2. Construct TextToSpeech(ctx, listener)
+
+    composite_methods:
+      - go_name: Speak
+        doc: "Speak enqueues text for TTS playback"
+        params:
+          - { go_name: text, go_type: string }
+          - { go_name: queueMode, go_type: int }
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Generate a unique utteranceId (e.g. UUID).
+          Call speakRaw(text, queueMode, nil, utteranceId).
+          Check return code: 0=SUCCESS, -1=ERROR.
+
+      - go_name: Stop
+        doc: "Stop interrupts current TTS playback"
+        params: []
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Call stopRaw(). Check return code.
+
+      - go_name: IsSpeaking
+        doc: "IsSpeaking returns whether TTS is currently speaking"
+        params: []
+        returns: { go_type: bool }
+        implementation_notes: |
+          Call isSpeakingRaw()
+
+      - go_name: SetLanguage
+        doc: "SetLanguage sets the TTS language from a BCP-47 locale string"
+        params: [{ go_name: locale, go_type: string }]
+        returns: { go_type: int, error: true }
+        implementation_notes: |
+          Parse locale string to java.util.Locale (Locale.forLanguageTag).
+          Call setLanguageRaw(locale). Return availability code.
+
+      - go_name: SetPitch
+        doc: "SetPitch sets the TTS pitch (1.0 = normal)"
+        params: [{ go_name: pitch, go_type: float32 }]
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Call setPitchRaw(pitch). Check return code.
+
+      - go_name: SetSpeechRate
+        doc: "SetSpeechRate sets the TTS speech rate (1.0 = normal)"
+        params: [{ go_name: rate, go_type: float32 }]
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Call setSpeechRateRaw(rate). Check return code.
+
+      - go_name: GetAvailableLanguages
+        doc: "GetAvailableLanguages returns BCP-47 locale strings of available TTS languages"
+        params: []
+        returns: { go_type: "[]string", error: true }
+        implementation_notes: |
+          Call getAvailableLanguagesRaw() → Set<Locale>.
+          Iterate set, call Locale.toLanguageTag() on each, collect strings.
+
+      - go_name: Shutdown
+        doc: "Shutdown releases TTS engine resources"
+        params: []
+        returns: { go_type: void }
+        implementation_notes: |
+          Call shutdownRaw()
+
+      - go_name: OnUtteranceCompleted
+        doc: "OnUtteranceCompleted registers a callback for utterance completion"
+        params: [{ go_name: fn, go_type: "func(utteranceID string)" }]
+        returns: { go_type: void }
+        implementation_notes: |
+          1. Create UtteranceProgressListener proxy (abstract class):
+             - onDone: call fn(utteranceId)
+             - onStart/onError: no-op
+          2. Call setOnUtteranceProgressListenerRaw(listener)
+
+custom_types:
+  - go_name: RecognitionResult
+    doc: "Speech recognition result with text and confidence"
+    fields:
+      - { go_name: Text, go_type: string, doc: "Recognized text" }
+      - { go_name: Confidence, go_type: float32, doc: "Confidence score 0.0-1.0" }
+
+  - go_name: RecognizeOptions
+    doc: "Options for speech recognition"
+    fields:
+      - { go_name: Language, go_type: string, doc: "BCP-47 language tag, e.g. en-US" }
+      - { go_name: PartialResults, go_type: bool, doc: "Whether to receive partial results" }
+      - { go_name: MaxResults, go_type: int, doc: "Maximum number of results to return" }

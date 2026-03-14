@@ -1,0 +1,187 @@
+package: nfc
+go_import: "github.com/xaionaro-go/jni/nfc"
+
+classes:
+  - java_class: android.nfc.NfcAdapter
+    go_type: Adapter
+    obtain: static_factory
+    factory_method: getDefaultAdapter
+    factory_params: [{ java_type: android.content.Context, go_name: ctx }]
+    close: true
+
+    methods:
+      - java_method: isEnabled
+        params: []
+        returns: boolean
+        go_name: isEnabled
+        error: true
+
+      - java_method: enableReaderMode
+        params:
+          - { java_type: android.app.Activity, go_name: activity }
+          - { java_type: android.nfc.NfcAdapter$ReaderCallback, go_name: callback }
+          - { java_type: int, go_name: flags }
+          - { java_type: android.os.Bundle, go_name: extras }
+        returns: void
+        go_name: enableReaderMode
+        error: true
+
+      - java_method: disableReaderMode
+        params: [{ java_type: android.app.Activity, go_name: activity }]
+        returns: void
+        go_name: disableReaderMode
+        error: true
+
+  - java_class: android.nfc.Tag
+    go_type: tag  # internal, mapped to Tag struct
+    kind: data_class
+    fields:
+      - { java_method: getId, returns: "byte[]", go_name: ID, go_type: "[]byte" }
+      - { java_method: getTechList, returns: "String[]", go_name: TechList, go_type: "[]string" }
+
+  - java_class: android.nfc.NdefMessage
+    go_type: ndefMessage  # internal
+    obtain: constructor
+    constructor_params:
+      - { java_type: "android.nfc.NdefRecord[]", go_name: records }
+
+    methods:
+      - java_method: getRecords
+        params: []
+        returns: "android.nfc.NdefRecord[]"
+        go_name: getRecords
+
+  - java_class: android.nfc.NdefRecord
+    go_type: ndefRecord  # internal
+    kind: data_class
+    fields:
+      - { java_method: getTnf, returns: short, go_name: TNF, go_type: int }
+      - { java_method: getType, returns: "byte[]", go_name: Type, go_type: "[]byte" }
+      - { java_method: getId, returns: "byte[]", go_name: ID, go_type: "[]byte" }
+      - { java_method: getPayload, returns: "byte[]", go_name: Payload, go_type: "[]byte" }
+
+    static_methods:
+      - java_method: createUri
+        params: [{ java_type: String, go_name: uriString }]
+        returns: android.nfc.NdefRecord
+        go_name: createUri
+
+      - java_method: createTextRecord
+        params:
+          - { java_type: String, go_name: languageCode }
+          - { java_type: String, go_name: text }
+        returns: android.nfc.NdefRecord
+        go_name: createTextRecord
+
+      - java_method: createMime
+        params:
+          - { java_type: String, go_name: mimeType }
+          - { java_type: "byte[]", go_name: mimeData }
+        returns: android.nfc.NdefRecord
+        go_name: createMime
+
+  - java_class: android.nfc.tech.Ndef
+    go_type: NdefTag
+    obtain: static_factory
+    factory_method: get
+    factory_params: [{ java_type: android.nfc.Tag, go_name: tag }]
+
+    methods:
+      - java_method: connect
+        params: []
+        returns: void
+        go_name: connect
+        error: true
+
+      - java_method: getNdefMessage
+        params: []
+        returns: android.nfc.NdefMessage
+        go_name: getNdefMessageRaw
+        error: true
+
+      - java_method: writeNdefMessage
+        params: [{ java_type: android.nfc.NdefMessage, go_name: msg }]
+        returns: void
+        go_name: writeNdefMessageRaw
+        error: true
+
+      - java_method: makeReadOnly
+        params: []
+        returns: boolean
+        go_name: makeReadOnly
+        error: true
+
+      - java_method: isWritable
+        params: []
+        returns: boolean
+        go_name: isWritable
+
+      - java_method: getMaxSize
+        params: []
+        returns: int
+        go_name: getMaxSize
+
+      - java_method: close
+        params: []
+        returns: void
+        go_name: close
+        error: true
+
+  - java_class: android.nfc.tech.IsoDep
+    go_type: IsoDepTag
+    obtain: static_factory
+    factory_method: get
+    factory_params: [{ java_type: android.nfc.Tag, go_name: tag }]
+
+    methods:
+      - java_method: connect
+        params: []
+        returns: void
+        go_name: connect
+        error: true
+
+      - java_method: transceive
+        params: [{ java_type: "byte[]", go_name: data }]
+        returns: "byte[]"
+        go_name: transceive
+        error: true
+
+      - java_method: setTimeout
+        params: [{ java_type: int, go_name: timeoutMs }]
+        returns: void
+        go_name: setTimeoutMs
+
+      - java_method: getMaxTransceiveLength
+        params: []
+        returns: int
+        go_name: getMaxTransceiveLength
+
+      - java_method: close
+        params: []
+        returns: void
+        go_name: close
+        error: true
+
+callbacks:
+  - java_interface: android.nfc.NfcAdapter$ReaderCallback
+    go_type: readerCallback
+    methods:
+      - { java_method: onTagDiscovered, params: [android.nfc.Tag], go_field: OnTag }
+
+constants:
+  # Reader mode flags
+  - { go_name: FlagReaderNfcA, value: "0x1", go_type: int }
+  - { go_name: FlagReaderNfcB, value: "0x2", go_type: int }
+  - { go_name: FlagReaderNfcF, value: "0x4", go_type: int }
+  - { go_name: FlagReaderNfcV, value: "0x8", go_type: int }
+  - { go_name: FlagReaderNfcBarcode, value: "0x10", go_type: int }
+  - { go_name: FlagReaderNoPlatformSounds, value: "0x100", go_type: int }
+  - { go_name: FlagReaderSkipNdefCheck, value: "0x80", go_type: int }
+  # TNF (Type Name Format)
+  - { go_name: TNFEmpty, value: "0", go_type: int }
+  - { go_name: TNFWellKnown, value: "1", go_type: int }
+  - { go_name: TNFMimeMedia, value: "2", go_type: int }
+  - { go_name: TNFAbsoluteURI, value: "3", go_type: int }
+  - { go_name: TNFExternalType, value: "4", go_type: int }
+  - { go_name: TNFUnknown, value: "5", go_type: int }
+  - { go_name: TNFUnchanged, value: "6", go_type: int }

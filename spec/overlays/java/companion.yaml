@@ -1,0 +1,43 @@
+overlays:
+  - target: Manager
+    composite_methods:
+      - go_name: Associate
+        doc: "Starts a companion device association flow. Calls onAssociated with the association ID on success."
+        params:
+          - { go_name: activity, go_type: "*app.Activity" }
+          - { go_name: req, go_type: AssociationRequest }
+          - { go_name: onAssociated, go_type: "func(associationID int)" }
+          - { go_name: onFailed, go_type: "func(err error)" }
+        returns: { go_type: "", error: true }
+        implementation_notes: |
+          1. Build AssociationRequest from req using AssociationRequest.Builder
+          2. Create CompanionDeviceManager.Callback proxy:
+             a. onDeviceFound(IntentSender): launch with activity.startIntentSenderForResult
+                to get user consent, extract association ID from result
+             b. onFailure(CharSequence): call onFailed with error
+          3. Call associateRaw(request, callback, null)
+
+      - go_name: Disassociate
+        doc: "Removes a companion device association."
+        params:
+          - { go_name: associationID, go_type: int }
+        returns: { go_type: "", error: true }
+        implementation_notes: |
+          Call disassociateByIdRaw(associationID)
+
+      - go_name: GetAssociations
+        doc: "Returns the list of associated device addresses."
+        params: []
+        returns: { go_type: "[]string", error: true }
+        implementation_notes: |
+          1. Call getAssociationsRaw() to get List<String>
+          2. Iterate and collect into []string
+
+custom_types:
+  - go_name: AssociationRequest
+    doc: "Configuration for companion device association."
+    fields:
+      - { go_name: SingleDevice, go_type: bool, doc: "Whether to find a single device only" }
+
+imports:
+  - '"github.com/xaionaro-go/jni/app"'

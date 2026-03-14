@@ -1,0 +1,45 @@
+overlays:
+  - target: Manager
+    composite_methods:
+      - go_name: GetPrintJobs
+        doc: "Returns information about all active print jobs."
+        params: []
+        returns: { go_type: "[]JobInfo", error: true }
+        implementation_notes: |
+          1. Call getPrintJobsRaw() to get List<PrintJob>
+          2. Iterate list, for each PrintJob:
+             a. getId().toString() -> ID string
+             b. getInfo().getLabel() -> Label
+             c. getInfo().getState() -> State (cast to JobState)
+          3. Collect into []JobInfo
+
+      - go_name: PrintPDF
+        doc: "Prints a PDF file. Must be called from the UI thread with an Activity."
+        params:
+          - { go_name: activity, go_type: "*app.Activity" }
+          - { go_name: jobName, go_type: string }
+          - { go_name: pdfPath, go_type: string }
+        returns: { go_type: "", error: true }
+        implementation_notes: |
+          1. Create a custom PrintDocumentAdapter subclass:
+             a. onLayout: report document info (page count from PdfRenderer)
+             b. onWrite: open PDF with PdfRenderer, render requested pages,
+                write each page to the provided ParcelFileDescriptor via PdfDocument
+             c. onFinish: close resources
+          2. Build default PrintAttributes
+          3. Call PrintManager.print(jobName, adapter, attributes) on UI thread via activity.runOnUiThread
+
+custom_types:
+  - go_name: JobState
+    underlying: int
+    doc: "Print job state constant."
+
+  - go_name: JobInfo
+    doc: "Information about a print job."
+    fields:
+      - { go_name: ID, go_type: string, doc: "Print job ID" }
+      - { go_name: Label, go_type: string, doc: "Print job label" }
+      - { go_name: State, go_type: JobState, doc: "Current state of the print job" }
+
+imports:
+  - '"github.com/xaionaro-go/jni/app"'

@@ -1,0 +1,101 @@
+package: pdf
+go_import: "github.com/xaionaro-go/jni/graphics/pdf"
+
+classes:
+  - java_class: android.graphics.pdf.PdfRenderer
+    go_type: Renderer
+    obtain: constructor
+    close: true
+    methods:
+      - java_method: getPageCount
+        go_name: GetPageCount
+        params: []
+        returns: int
+        error: true
+
+      - java_method: openPage
+        go_name: openPageRaw
+        params:
+          - { java_type: int, go_name: index }
+        returns: android.graphics.pdf.PdfRenderer$Page
+        error: true
+
+      - java_method: close
+        go_name: closeRaw
+        params: []
+        returns: void
+        error: true
+
+  - java_class: android.graphics.pdf.PdfRenderer$Page
+    go_type: Page
+    close: true
+    methods:
+      - java_method: getWidth
+        go_name: GetWidth
+        params: []
+        returns: int
+        error: false
+
+      - java_method: getHeight
+        go_name: GetHeight
+        params: []
+        returns: int
+        error: false
+
+      - java_method: render
+        go_name: renderRaw
+        params:
+          - { java_type: android.graphics.Bitmap, go_name: bitmap }
+          - { java_type: android.graphics.Rect, go_name: destClip }
+          - { java_type: android.graphics.Matrix, go_name: transform }
+          - { java_type: int, go_name: renderMode }
+        returns: void
+        error: true
+
+      - java_method: close
+        go_name: closeRaw
+        params: []
+        returns: void
+        error: true
+
+  # Internal helper classes
+  - java_class: android.os.ParcelFileDescriptor
+    go_type: parcelFileDescriptor
+    obtain: static_factory
+    methods:
+      - java_method: open
+        go_name: openRaw
+        static: true
+        params:
+          - { java_type: java.io.File, go_name: file }
+          - { java_type: int, go_name: mode }
+        returns: android.os.ParcelFileDescriptor
+        error: true
+
+  - java_class: android.graphics.Bitmap
+    go_type: bitmap
+    obtain: static_factory
+    methods:
+      - java_method: createBitmap
+        go_name: createBitmapRaw
+        static: true
+        params:
+          - { java_type: int, go_name: width }
+          - { java_type: int, go_name: height }
+          - { java_type: android.graphics.Bitmap$Config, go_name: config }
+        returns: android.graphics.Bitmap
+        error: true
+
+      - java_method: copyPixelsToBuffer
+        go_name: copyPixelsToBufferRaw
+        params:
+          - { java_type: java.nio.Buffer, go_name: buffer }
+        returns: void
+        error: true
+
+constants:
+  - { go_name: RenderModeForDisplay, value: 1, go_type: int }
+  - { go_name: RenderModeForPrint, value: 2, go_type: int }
+  - { go_name: ModeReadOnly, value: "268435456", go_type: int }
+
+callbacks: []

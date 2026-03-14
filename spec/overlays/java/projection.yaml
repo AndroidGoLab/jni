@@ -1,0 +1,59 @@
+package: projection
+go_import: "github.com/xaionaro-go/jni/media/projection"
+
+overrides:
+  android.media.projection.MediaProjectionManager:
+    constructor:
+      go_name: NewManager
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+
+    composite_methods:
+      - go_name: CreateScreenCaptureIntent
+        doc: "Create an Intent for requesting screen capture permission"
+        params: []
+        returns: { go_type: "*app.Intent", error: true }
+        implementation_notes: |
+          Direct delegation to createScreenCaptureIntent()
+
+      - go_name: GetProjection
+        doc: "Get a MediaProjection from activity result"
+        params:
+          - { go_name: resultCode, go_type: int }
+          - { go_name: data, go_type: "*app.Intent" }
+        returns: { go_type: "*Projection", error: true }
+        implementation_notes: |
+          Call getMediaProjection(resultCode, data)
+
+  android.media.projection.MediaProjection:
+    composite_methods:
+      - go_name: Stop
+        doc: "Stop the projection"
+        params: []
+
+      - go_name: OnStop
+        doc: "Register callback for projection stop"
+        params: [{ go_name: fn, go_type: "func()" }]
+        implementation_notes: |
+          1. Create MediaProjection.Callback with OnStop calling fn()
+          2. Call registerCallback(callback, nil)
+
+      - go_name: CreateVirtualDisplay
+        doc: "Create a virtual display for screen capture"
+        params:
+          - { go_name: name, go_type: string }
+          - { go_name: width, go_type: int }
+          - { go_name: height, go_type: int }
+          - { go_name: dpi, go_type: int }
+        returns: { go_type: "*VirtualDisplay", error: true }
+        implementation_notes: |
+          Call createVirtualDisplayRaw(name, width, height, dpi, 0, nil, nil, nil)
+          Surface, VirtualDisplay.Callback, and Handler passed as nil for basic usage
+
+  android.hardware.display.VirtualDisplay:
+    composite_methods:
+      - go_name: Release
+        doc: "Release the virtual display"
+        params: []
+
+imports:
+  - "github.com/xaionaro-go/jni/app"

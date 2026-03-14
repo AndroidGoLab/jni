@@ -1,0 +1,425 @@
+go_name_overrides:
+  # BluetoothAdapter methods
+  "android.bluetooth.BluetoothAdapter.isEnabled": IsEnabled
+  "android.bluetooth.BluetoothAdapter.getName": GetName
+  "android.bluetooth.BluetoothAdapter.getAddress": GetAddress
+  "android.bluetooth.BluetoothAdapter.getBondedDevices": GetBondedDevices
+  "android.bluetooth.BluetoothAdapter.startDiscovery": startDiscovery
+  "android.bluetooth.BluetoothAdapter.cancelDiscovery": cancelDiscovery
+  "android.bluetooth.BluetoothAdapter.getBluetoothLeScanner": getLeScanner
+  "android.bluetooth.BluetoothAdapter.getBluetoothLeAdvertiser": getLeAdvertiser
+  "android.bluetooth.BluetoothAdapter.listenUsingRfcommWithServiceRecord": listenRfcomm
+
+  # BluetoothDevice methods
+  "android.bluetooth.BluetoothDevice.createRfcommSocketToServiceRecord": createRfcommSocket
+
+  # BluetoothSocket methods
+  "android.bluetooth.BluetoothSocket.connect": connect
+  "android.bluetooth.BluetoothSocket.getInputStream": getInputStream
+  "android.bluetooth.BluetoothSocket.getOutputStream": getOutputStream
+  "android.bluetooth.BluetoothSocket.getRemoteDevice": RemoteDevice
+
+  # BluetoothServerSocket methods
+  "android.bluetooth.BluetoothServerSocket.accept": accept
+
+  # BLE Scanner methods
+  "android.bluetooth.le.BluetoothLeScanner.startScan": startScan
+  "android.bluetooth.le.BluetoothLeScanner.stopScan": stopScan
+
+  # BLE Advertiser methods
+  "android.bluetooth.le.BluetoothLeAdvertiser.startAdvertising": startAdvertising
+  "android.bluetooth.le.BluetoothLeAdvertiser.stopAdvertising": stopAdvertising
+
+  # GATT Client methods
+  "android.bluetooth.BluetoothGatt.discoverServices": discoverServices
+  "android.bluetooth.BluetoothGatt.getServices": getServices
+  "android.bluetooth.BluetoothGatt.readCharacteristic": readCharacteristic
+  "android.bluetooth.BluetoothGatt.writeCharacteristic": writeCharacteristic
+  "android.bluetooth.BluetoothGatt.setCharacteristicNotification": setCharacteristicNotification
+  "android.bluetooth.BluetoothGatt.requestMtu": requestMtu
+  "android.bluetooth.BluetoothGatt.readRemoteRssi": readRemoteRssi
+
+  # GATT Server methods
+  "android.bluetooth.BluetoothGattServer.addService": AddService
+  "android.bluetooth.BluetoothGattServer.notifyCharacteristicChanged": NotifyCharacteristic
+
+method_grouping:
+  # Adapter: public query methods
+  adapter_queries:
+    - IsEnabled
+    - GetName
+    - GetAddress
+    - GetBondedDevices
+
+  # Adapter: internal methods wrapped by overlay
+  adapter_internal:
+    - startDiscovery
+    - cancelDiscovery
+    - getLeScanner
+    - getLeAdvertiser
+    - listenRfcomm
+
+  # Socket: internal methods wrapped for io.Reader/io.Writer
+  socket_internal:
+    - connect
+    - getInputStream
+    - getOutputStream
+
+  # GATT Client: internal methods wrapped by overlay
+  gatt_client_internal:
+    - discoverServices
+    - getServices
+    - readCharacteristic
+    - writeCharacteristic
+    - setCharacteristicNotification
+    - requestMtu
+    - readRemoteRssi
+
+  # Builder methods: ScanFilter.Builder
+  scan_filter_builder:
+    - setDeviceName
+    - setDeviceAddress
+    - setServiceUuid
+    - build
+
+  # Builder methods: ScanSettings.Builder
+  scan_settings_builder:
+    - setScanMode
+    - setReportDelay
+    - build
+
+  # Builder methods: AdvertiseSettings.Builder
+  advertise_settings_builder:
+    - setAdvertiseMode
+    - setConnectable
+    - setTimeout
+    - build
+
+  # Builder methods: AdvertiseData.Builder
+  advertise_data_builder:
+    - addServiceUuid
+    - addServiceData
+    - addManufacturerData
+    - setIncludeDeviceName
+    - setIncludeTxPowerLevel
+    - build
+
+type_overrides:
+  # UUID methods accept Go string, convert to java.util.UUID internally
+  "android.bluetooth.BluetoothAdapter.listenRfcomm.params.uuid": string
+  "android.bluetooth.BluetoothDevice.createRfcommSocket.params.uuid": string
+
+  # ScanResult.Record returns raw bytes from ScanRecord.getBytes()
+  "android.bluetooth.le.ScanResult.getScanRecord.returns": "[]byte"
+
+  # Service UUID returned as Go string from java.util.UUID.toString()
+  "android.bluetooth.BluetoothGattService.getUuid.returns": string
+  "android.bluetooth.BluetoothGattCharacteristic.getUuid.returns": string
+  "android.bluetooth.BluetoothGattDescriptor.getUuid.returns": string
+
+  # ServerSocket.Accept takes time.Duration, converts to ms int
+  "android.bluetooth.BluetoothServerSocket.accept.params.timeoutMs": time.Duration
+
+  # Socket implements io.Reader and io.Writer
+  "android.bluetooth.BluetoothSocket.interfaces": "io.Reader,io.Writer"
+
+conversion_funcs:
+  uuid_from_string:
+    to_go: "toString"
+    to_java: "java.util.UUID.fromString"
+  parcel_uuid_from_string:
+    to_go: "toString"
+    to_java: "android.os.ParcelUuid.fromString"
+  scan_record_to_bytes:
+    to_go: "getBytes"
+    to_java: ""
+  duration_to_ms:
+    to_go: "time.Duration"
+    to_java: "Milliseconds()"
+
+helpers:
+  - name: uuidFromString
+    java_class: java.util.UUID
+    java_method: fromString
+    params:
+      - java_type: String
+    returns: java.util.UUID
+    doc: "Converts a Go UUID string to java.util.UUID"
+
+  - name: parcelUuidFromString
+    java_class: android.os.ParcelUuid
+    java_method: fromString
+    params:
+      - java_type: String
+    returns: android.os.ParcelUuid
+    doc: "Converts a Go UUID string to android.os.ParcelUuid"
+
+synthetic_methods:
+  # --- Adapter synthetic methods ---
+  - target: Adapter
+    go_name: StartDiscovery
+    go_signature: "func (a *Adapter) StartDiscovery(fn func(Device)) (cancel func(), err error)"
+    doc: >
+      Starts classic Bluetooth discovery. Calls fn for each device found.
+      Returns a cancel function that stops discovery and unregisters the receiver.
+    implementation:
+      - register BroadcastReceiver for "android.bluetooth.device.action.FOUND"
+      - on receive: extract BluetoothDevice from Intent extras, convert to Device, call fn
+      - call startDiscovery()
+      - "cancel: calls cancelDiscovery() + UnregisterReceiver"
+
+  - target: Adapter
+    go_name: Connect
+    go_signature: "func (a *Adapter) Connect(address, uuid string) (*Socket, error)"
+    doc: "Connects to a remote Bluetooth device via RFCOMM."
+    implementation:
+      - get BluetoothDevice via getRemoteDevice(address)
+      - convert uuid string to java.util.UUID via uuidFromString
+      - call device.createRfcommSocketToServiceRecord(uuid)
+      - call socket.connect()
+      - wrap in Socket with cached InputStream/OutputStream
+      - return Socket implementing io.Reader + io.Writer
+
+  - target: Adapter
+    go_name: Listen
+    go_signature: "func (a *Adapter) Listen(name, uuid string) (*ServerSocket, error)"
+    doc: "Creates an RFCOMM server socket that listens for connections."
+    implementation:
+      - convert uuid string to java.util.UUID via uuidFromString
+      - call listenRfcomm(name, javaUUID)
+      - wrap in ServerSocket
+
+  - target: Adapter
+    go_name: StartLEScan
+    go_signature: "func (a *Adapter) StartLEScan(filters []ScanFilter, settings ScanSettings, fn func(ScanResult)) (cancel func(), err error)"
+    doc: "Starts BLE scanning with filters. Returns cancel function to stop."
+    implementation:
+      - get leScanner via getLeScanner()
+      - build ScanFilter Java objects from Go structs using ScanFilter.Builder
+      - build ScanSettings Java object using ScanSettings.Builder
+      - create ScanCallback proxy with OnScanResult calling fn
+      - call scanner.startScan(filterList, settings, callback)
+      - "cancel: calls scanner.stopScan(callback)"
+
+  - target: Adapter
+    go_name: StartAdvertising
+    go_signature: "func (a *Adapter) StartAdvertising(settings AdvertiseSettings, data AdvertiseData) (cancel func(), err error)"
+    doc: "Starts BLE advertising. Returns cancel function to stop."
+    implementation:
+      - get leAdvertiser via getLeAdvertiser()
+      - build AdvertiseSettings Java object using Builder
+      - build AdvertiseData Java object using Builder
+      - create AdvertiseCallback proxy
+      - call advertiser.startAdvertising(settings, data, callback)
+      - block until success/failure signal
+      - "cancel: calls advertiser.stopAdvertising(callback)"
+
+  - target: Adapter
+    go_name: ConnectGATT
+    go_signature: "func (a *Adapter) ConnectGATT(address string, callbacks GATTCallbacks) (*GATTClient, error)"
+    doc: "Connects to a BLE device's GATT server."
+    implementation:
+      - get BluetoothDevice via getRemoteDevice(address)
+      - create BluetoothGattCallback proxy
+      - call device.connectGatt(context, false, gattCallback)
+      - wrap returned BluetoothGatt in GATTClient
+
+  - target: Adapter
+    go_name: OpenGATTServer
+    go_signature: "func (a *Adapter) OpenGATTServer(callbacks GATTServerCallbacks) (*GATTServer, error)"
+    doc: "Opens a local GATT server."
+    implementation:
+      - get BluetoothManager system service
+      - create BluetoothGattServerCallback proxy
+      - call manager.openGattServer(context, callback)
+      - wrap in GATTServer
+
+  # --- ServerSocket synthetic methods ---
+  - target: ServerSocket
+    go_name: Accept
+    go_signature: "func (s *ServerSocket) Accept(timeout time.Duration) (*Socket, error)"
+    doc: "Accepts an incoming RFCOMM connection with timeout."
+    implementation:
+      - convert timeout to milliseconds int
+      - call accept(ms)
+      - wrap result in Socket with io.Reader/io.Writer
+
+  # --- Socket synthetic methods ---
+  - target: Socket
+    go_name: Read
+    go_signature: "func (s *Socket) Read(buf []byte) (int, error)"
+    doc: "Implements io.Reader via InputStream.read(byte[])."
+    implementation:
+      - get cached InputStream (from getInputStream on first call)
+      - call InputStream.read(byte[]) with buf
+      - return n bytes read or io.EOF on -1
+
+  - target: Socket
+    go_name: Write
+    go_signature: "func (s *Socket) Write(data []byte) (int, error)"
+    doc: "Implements io.Writer via OutputStream.write(byte[])."
+    implementation:
+      - get cached OutputStream (from getOutputStream on first call)
+      - call OutputStream.write(byte[]) with data
+      - return len(data), nil on success
+
+  # --- GATTClient synthetic methods ---
+  - target: GATTClient
+    go_name: DiscoverServices
+    go_signature: "func (g *GATTClient) DiscoverServices() ([]Service, error)"
+    doc: "Discovers GATT services and returns them."
+    implementation:
+      - call discoverServices() to trigger discovery
+      - wait for onServicesDiscovered callback
+      - call getServices() to get list
+      - extract each service into Service data class
+
+  - target: GATTClient
+    go_name: ReadCharacteristic
+    go_signature: "func (g *GATTClient) ReadCharacteristic(char Characteristic) ([]byte, error)"
+    doc: "Reads a characteristic value from the remote device."
+    implementation:
+      - find Java BluetoothGattCharacteristic by UUID
+      - call readCharacteristic()
+      - wait for onCharacteristicRead callback
+      - return characteristic.getValue()
+
+  - target: GATTClient
+    go_name: WriteCharacteristic
+    go_signature: "func (g *GATTClient) WriteCharacteristic(char Characteristic, data []byte) error"
+    doc: "Writes a value to a characteristic on the remote device."
+    implementation:
+      - find Java characteristic by UUID
+      - call characteristic.setValue(data)
+      - call writeCharacteristic()
+      - wait for onCharacteristicWrite callback
+
+  - target: GATTClient
+    go_name: EnableNotifications
+    go_signature: "func (g *GATTClient) EnableNotifications(char Characteristic, fn func([]byte)) error"
+    doc: "Enables notifications for a characteristic."
+    implementation:
+      - call setCharacteristicNotification(char, true)
+      - write to CCCD descriptor (0x2902) to enable notifications
+      - store fn in per-characteristic map
+      - onCharacteristicChanged dispatches to stored fn
+
+  - target: GATTClient
+    go_name: DisableNotifications
+    go_signature: "func (g *GATTClient) DisableNotifications(char Characteristic) error"
+    doc: "Disables notifications for a characteristic."
+    implementation:
+      - call setCharacteristicNotification(char, false)
+      - write to CCCD descriptor to disable
+      - remove from per-characteristic map
+
+  - target: GATTClient
+    go_name: RequestMTU
+    go_signature: "func (g *GATTClient) RequestMTU(mtu int) (int, error)"
+    doc: "Requests an MTU size change and returns the negotiated MTU."
+    implementation:
+      - call requestMtu(mtu)
+      - wait for onMtuChanged callback
+      - return negotiated MTU
+
+  - target: GATTClient
+    go_name: ReadRSSI
+    go_signature: "func (g *GATTClient) ReadRSSI() (int32, error)"
+    doc: "Reads the RSSI of the remote device."
+    implementation:
+      - call readRemoteRssi()
+      - wait for onReadRemoteRssi callback
+      - return RSSI value
+
+  # --- GATTServer synthetic methods ---
+  - target: GATTServer
+    go_name: AddService
+    go_signature: "func (s *GATTServer) AddService(svc ServiceDefinition) error"
+    doc: "Adds a GATT service definition to the server."
+    implementation:
+      - create BluetoothGattService(uuid, SERVICE_TYPE_PRIMARY)
+      - for each CharacteristicDefinition create BluetoothGattCharacteristic
+      - store OnRead/OnWrite handlers
+      - call server.addService(service)
+
+  - target: GATTServer
+    go_name: NotifyCharacteristic
+    go_signature: "func (s *GATTServer) NotifyCharacteristic(device Device, char Characteristic, data []byte) error"
+    doc: "Sends a characteristic notification to a connected device."
+    implementation:
+      - find Java device and characteristic objects
+      - set characteristic value
+      - call notifyCharacteristicChanged(device, characteristic, confirm)
+
+go_types:
+  - name: ScanFilter
+    fields:
+      - name: Name
+        type: string
+      - name: Address
+        type: string
+      - name: ServiceUUIDs
+        type: "[]string"
+
+  - name: ScanSettings
+    fields:
+      - name: Mode
+        type: int
+      - name: ReportDelay
+        type: int64
+
+  - name: AdvertiseSettings
+    fields:
+      - name: Mode
+        type: int
+      - name: Connectable
+        type: bool
+      - name: Timeout
+        type: time.Duration
+
+  - name: AdvertiseData
+    fields:
+      - name: ServiceUUIDs
+        type: "[]string"
+      - name: ServiceData
+        type: "map[string][]byte"
+      - name: ManufacturerData
+        type: "map[uint16][]byte"
+      - name: IncludeName
+        type: bool
+      - name: IncludeTxPower
+        type: bool
+
+  - name: GATTCallbacks
+    fields:
+      - name: OnConnectionStateChange
+        type: "func(connected bool)"
+      - name: OnServicesDiscovered
+        type: "func()"
+      - name: OnMTUChanged
+        type: "func(mtu int)"
+
+  - name: GATTServerCallbacks
+    fields:
+      - name: OnConnectionStateChange
+        type: "func(device Device, connected bool)"
+
+  - name: ServiceDefinition
+    fields:
+      - name: UUID
+        type: string
+      - name: Characteristics
+        type: "[]CharacteristicDefinition"
+
+  - name: CharacteristicDefinition
+    fields:
+      - name: UUID
+        type: string
+      - name: Properties
+        type: int
+      - name: Value
+        type: "[]byte"
+      - name: OnRead
+        type: "func(device Device) []byte"
+      - name: OnWrite
+        type: "func(device Device, data []byte)"

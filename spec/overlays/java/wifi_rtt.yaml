@@ -1,0 +1,42 @@
+package: wifi_rtt
+go_import: "github.com/xaionaro-go/jni/net/wifi/rtt"
+
+overrides:
+  android.net.wifi.rtt.WifiRttManager:
+    constructor:
+      go_name: NewManager
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+
+    composite_methods:
+      - go_name: IsAvailable
+        doc: "IsAvailable returns whether Wi-Fi RTT ranging is available"
+        params: []
+        returns: { go_type: bool, error: true }
+        implementation_notes: |
+          Call isAvailableRaw()
+
+      - go_name: StartRanging
+        doc: "StartRanging performs Wi-Fi RTT ranging to the given BSSIDs"
+        params:
+          - { go_name: bssids, go_type: "[]string" }
+          - { go_name: onResult, go_type: "func([]RangingResult)" }
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          1. Create RangingRequest.Builder
+          2. For each BSSID: create a ScanResult with BSSID field set, call addAccessPoint
+          3. Call build() to get RangingRequest
+          4. Create RangingResultCallback proxy (abstract class):
+             - onRangingResults: iterate List<RangingResult>, extract fields into []RangingResult,
+               extract MACAddress via getMacAddress().toString(), call onResult
+             - onRangingFailure: report error
+          5. Call startRangingRaw(request, mainExecutor, callback)
+
+  android.net.wifi.rtt.RangingResult:
+    doc: "Wi-Fi RTT ranging measurement result"
+    extra_fields:
+      - go_name: MACAddress
+        go_type: string
+        doc: "MAC address of the access point"
+        derived_from: "getMacAddress()"
+        implementation_notes: |
+          Call getMacAddress() → MacAddress, then toString() to get string representation

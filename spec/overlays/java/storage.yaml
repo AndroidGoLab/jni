@@ -1,0 +1,48 @@
+overlays:
+  - target: Manager
+    synthetic_methods:
+      - go_name: GetStorageVolumes
+        go_signature: "func (m *Manager) GetStorageVolumes() ([]Volume, error)"
+        implementation:
+          - call getStorageVolumes() to get List<StorageVolume>
+          - iterate list via size()/get(i) pattern
+          - extract each StorageVolume into Volume data class
+          - return []Volume
+
+      - go_name: GetPrimaryStorageVolume
+        go_signature: "func (m *Manager) GetPrimaryStorageVolume() (*Volume, error)"
+        implementation:
+          - call getPrimaryStorageVolume()
+          - extract into Volume data class
+
+      - go_name: GetAllocatableBytes
+        go_signature: "func (m *Manager) GetAllocatableBytes(uuid string) (int64, error)"
+        implementation:
+          - "convert uuid string to java.util.UUID:"
+          - "  if uuid is empty, use StorageManager.UUID_DEFAULT (primary storage)"
+          - "  otherwise, call java.util.UUID.fromString(uuid)"
+          - call getAllocatableBytes(javaUUID)
+
+      - go_name: AllocateBytes
+        go_signature: "func (m *Manager) AllocateBytes(uuid string, bytes int64) error"
+        implementation:
+          - convert uuid string to java.util.UUID (same as above)
+          - call allocateBytes(javaUUID, bytes)
+
+      - go_name: GetCacheSizeBytes
+        go_signature: "func (m *Manager) GetCacheSizeBytes(uuid string) (int64, error)"
+        implementation:
+          - convert uuid string to java.util.UUID
+          - call getCacheSizeBytes(javaUUID)
+
+      - go_name: GetCacheQuotaBytes
+        go_signature: "func (m *Manager) GetCacheQuotaBytes(uuid string) (int64, error)"
+        implementation:
+          - convert uuid string to java.util.UUID
+          - call getCacheQuotaBytes(javaUUID)
+
+    uuid_helper: |
+      StorageManager methods take java.util.UUID for the storage volume identifier.
+      StorageVolume.getUuid() returns a String (nullable - null for primary).
+      The overlay converts: empty string -> StorageManager.UUID_DEFAULT, non-empty -> UUID.fromString(s).
+      StorageManager.UUID_DEFAULT is a static field of type java.util.UUID.

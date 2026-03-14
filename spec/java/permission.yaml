@@ -1,0 +1,89 @@
+package: permission
+go_import: "github.com/xaionaro-go/jni/content/permission"
+
+classes:
+  - java_class: androidx.core.content.ContextCompat
+    go_type: contextCompat  # internal, not exported
+    obtain: static_only  # no instance needed
+
+    static_methods:
+      - java_method: checkSelfPermission
+        params:
+          - { java_type: android.content.Context, go_name: ctx }
+          - { java_type: String, go_name: permission }
+        returns: int
+        go_name: checkSelfPermission
+        error: true
+
+  - java_class: androidx.core.app.ActivityCompat
+    go_type: activityCompat  # internal
+    obtain: static_only
+
+    static_methods:
+      - java_method: requestPermissions
+        params:
+          - { java_type: android.app.Activity, go_name: activity }
+          - { java_type: "String[]", go_name: permissions }
+          - { java_type: int, go_name: requestCode }
+        returns: void
+        go_name: requestPermissions
+        error: true
+
+constants:
+  - go_name: AccessFineLocation
+    value: '"android.permission.ACCESS_FINE_LOCATION"'
+    go_type: string
+  - go_name: AccessCoarseLocation
+    value: '"android.permission.ACCESS_COARSE_LOCATION"'
+    go_type: string
+  - go_name: Camera
+    value: '"android.permission.CAMERA"'
+    go_type: string
+  - go_name: RecordAudio
+    value: '"android.permission.RECORD_AUDIO"'
+    go_type: string
+  - go_name: Bluetooth
+    value: '"android.permission.BLUETOOTH"'
+    go_type: string
+  - go_name: BluetoothConnect
+    value: '"android.permission.BLUETOOTH_CONNECT"'
+    go_type: string
+  - go_name: BluetoothScan
+    value: '"android.permission.BLUETOOTH_SCAN"'
+    go_type: string
+  - go_name: Internet
+    value: '"android.permission.INTERNET"'
+    go_type: string
+  - go_name: ReadContacts
+    value: '"android.permission.READ_CONTACTS"'
+    go_type: string
+  - go_name: WriteContacts
+    value: '"android.permission.WRITE_CONTACTS"'
+    go_type: string
+  - go_name: ReadExternalStorage
+    value: '"android.permission.READ_EXTERNAL_STORAGE"'
+    go_type: string
+  - go_name: WriteExternalStorage
+    value: '"android.permission.WRITE_EXTERNAL_STORAGE"'
+    go_type: string
+  - go_name: ReadMediaImages
+    value: '"android.permission.READ_MEDIA_IMAGES"'
+    go_type: string
+  - go_name: ReadMediaVideo
+    value: '"android.permission.READ_MEDIA_VIDEO"'
+    go_type: string
+  - go_name: ReadMediaAudio
+    value: '"android.permission.READ_MEDIA_AUDIO"'
+    go_type: string
+  - go_name: PostNotifications
+    value: '"android.permission.POST_NOTIFICATIONS"'
+    go_type: string
+  - go_name: AccessBackgroundLocation
+    value: '"android.permission.ACCESS_BACKGROUND_LOCATION"'
+    go_type: string
+  - go_name: ReadPhoneState
+    value: '"android.permission.READ_PHONE_STATE"'
+    go_type: string
+  - go_name: NearbyWifiDevices
+    value: '"android.permission.NEARBY_WIFI_DEVICES"'
+    go_type: string

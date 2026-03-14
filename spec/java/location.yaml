@@ -1,0 +1,127 @@
+package: location
+go_import: "github.com/xaionaro-go/jni/location"
+
+classes:
+  - java_class: android.location.LocationManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "location"
+    close: true
+
+    methods:
+      - java_method: getLastKnownLocation
+        params: [{ java_type: String, go_name: provider }]
+        returns: android.location.Location
+        go_name: GetLastKnownLocation
+        error: true
+
+      - java_method: isProviderEnabled
+        params: [{ java_type: String, go_name: provider }]
+        returns: boolean
+        go_name: IsProviderEnabled
+        error: true
+
+      - java_method: getProviders
+        params: [{ java_type: boolean, go_name: enabledOnly }]
+        returns: java.util.List
+        go_name: getProvidersRaw
+        error: true
+
+      - java_method: requestLocationUpdates
+        params:
+          - { java_type: String, go_name: provider }
+          - { java_type: long, go_name: minTimeMs }
+          - { java_type: float, go_name: minDistanceM }
+          - { java_type: android.location.LocationListener, go_name: listener }
+        returns: void
+        go_name: requestLocationUpdatesRaw
+        error: true
+
+      - java_method: removeUpdates
+        params: [{ java_type: android.location.LocationListener, go_name: listener }]
+        returns: void
+        go_name: removeUpdatesRaw
+        error: false
+
+      # API 30+ — active single fix
+      - java_method: getCurrentLocation
+        params:
+          - { java_type: String, go_name: provider }
+          - { java_type: android.os.CancellationSignal, go_name: signal }
+          - { java_type: java.util.concurrent.Executor, go_name: executor }
+          - { java_type: java.util.function.Consumer, go_name: consumer }
+        returns: void
+        go_name: getCurrentLocationRaw
+        error: true
+        min_api: 30
+
+      # GNSS satellite status
+      - java_method: registerGnssStatusCallback
+        params:
+          - { java_type: java.util.concurrent.Executor, go_name: executor }
+          - { java_type: android.location.GnssStatus$Callback, go_name: callback }
+        returns: boolean
+        go_name: registerGnssStatusCallbackRaw
+        error: true
+
+      - java_method: unregisterGnssStatusCallback
+        params: [{ java_type: android.location.GnssStatus$Callback, go_name: callback }]
+        returns: void
+        go_name: unregisterGnssStatusCallbackRaw
+
+  - java_class: android.location.Location
+    go_type: Location
+    kind: data_class
+    fields:
+      - { java_method: getLatitude,  returns: double, go_name: Latitude,  go_type: float64 }
+      - { java_method: getLongitude, returns: double, go_name: Longitude, go_type: float64 }
+      - { java_method: getAltitude,  returns: double, go_name: Altitude,  go_type: float64 }
+      - { java_method: getAccuracy,  returns: float,  go_name: Accuracy,  go_type: float32 }
+      - { java_method: getSpeed,     returns: float,  go_name: Speed,     go_type: float32 }
+      - { java_method: getBearing,   returns: float,  go_name: Bearing,   go_type: float32 }
+      - { java_method: getTime,      returns: long,   go_name: Time,      go_type: int64 }
+      - { java_method: getProvider,  returns: String,  go_name: Provider,  go_type: string }
+
+  - java_class: android.location.GnssStatus
+    go_type: gnssStatus  # internal, iterated to produce []GnssSatellite
+    kind: iterable_data
+    count_method: getSatelliteCount
+    element_fields:
+      - { java_method: getSvid,              params: [int], returns: int,     go_name: Svid,          go_type: int32 }
+      - { java_method: getConstellationType, params: [int], returns: int,     go_name: Constellation, go_type: int32 }
+      - { java_method: getElevationDegrees,  params: [int], returns: float,   go_name: Elevation,     go_type: float32 }
+      - { java_method: getAzimuthDegrees,    params: [int], returns: float,   go_name: Azimuth,       go_type: float32 }
+      - { java_method: getCn0DbHz,           params: [int], returns: float,   go_name: Cn0DbHz,       go_type: float32 }
+      - { java_method: usedInFix,            params: [int], returns: boolean, go_name: UsedInFix,     go_type: bool }
+
+callbacks:
+  - java_interface: android.location.LocationListener
+    go_type: locationListener
+    methods:
+      - { java_method: onLocationChanged, params: [android.location.Location], go_field: OnLocation }
+      - { java_method: onProviderEnabled, params: [String], go_field: OnProviderEnabled }
+      - { java_method: onProviderDisabled, params: [String], go_field: OnProviderDisabled }
+
+  - java_interface: android.location.GnssStatus$Callback
+    go_type: gnssStatusCallback
+    abstract_class: true  # GnssStatus.Callback is abstract class
+    methods:
+      - { java_method: onStarted, params: [], go_field: OnStarted }
+      - { java_method: onStopped, params: [], go_field: OnStopped }
+      - { java_method: onSatelliteStatusChanged, params: [android.location.GnssStatus], go_field: OnSatelliteStatus }
+
+  - java_interface: java.util.function.Consumer
+    go_type: locationConsumer  # for getCurrentLocation API 30+
+    methods:
+      - { java_method: accept, params: [Object], go_field: OnResult }
+
+constants:
+  - go_name: GPS
+    value: '"gps"'
+    go_type: string
+  - go_name: Network
+    value: '"network"'
+    go_type: string
+  - go_name: Passive
+    value: '"passive"'
+    go_type: string

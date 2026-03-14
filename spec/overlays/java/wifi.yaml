@@ -1,0 +1,49 @@
+package: wifi
+go_import: "github.com/xaionaro-go/jni/net/wifi"
+
+overrides:
+  android.net.wifi.WifiManager:
+    constructor:
+      go_name: NewManager
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+
+    composite_methods:
+      - go_name: GetConnectionInfo
+        doc: "GetConnectionInfo returns current WiFi connection details"
+        params: []
+        returns: { go_type: "*ConnectionInfo", error: true }
+        implementation_notes: |
+          Call getConnectionInfoRaw(), extract WifiInfo fields into ConnectionInfo struct
+
+      - go_name: GetScanResults
+        doc: "GetScanResults returns nearby WiFi networks from last scan"
+        params: []
+        returns: { go_type: "[]ScanResult", error: true }
+        implementation_notes: |
+          Call getScanResultsRaw(), iterate List, extract each ScanResult.
+          Parse capabilities string to derive Security field.
+
+  android.net.wifi.WifiInfo:
+    doc: "Current WiFi connection information"
+    field_overrides:
+      SSID:
+        doc: "Network name"
+        transform: "strip_quotes"  # Android returns SSID wrapped in double quotes
+      IPAddress:
+        doc: "IP address as 32-bit integer (host byte order)"
+
+  android.net.wifi.ScanResult:
+    doc: "Nearby WiFi network from scan"
+    extra_fields:
+      - go_name: Security
+        go_type: string
+        doc: "Parsed security type: WPA2, WPA3, WEP, Open, etc."
+        derived_from: Capabilities
+        parse_pattern: |
+          Parse capabilities string (e.g. "[WPA2-PSK-CCMP][ESS]") to extract security type.
+          Look for WPA3, WPA2, WPA, WEP in order. Default to "Open" if none found.
+
+transforms:
+  strip_quotes:
+    doc: "Remove surrounding double quotes from SSID string"
+    expression: 'strings.Trim(result, `"`)'

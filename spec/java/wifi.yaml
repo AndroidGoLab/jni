@@ -1,0 +1,49 @@
+package: wifi
+go_import: "github.com/xaionaro-go/jni/net/wifi"
+
+classes:
+  - java_class: android.net.wifi.WifiManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "wifi"
+    close: true
+
+    methods:
+      - java_method: isWifiEnabled
+        params: []
+        returns: boolean
+        go_name: IsEnabled
+        error: true
+
+      - java_method: getConnectionInfo
+        params: []
+        returns: android.net.wifi.WifiInfo
+        go_name: getConnectionInfoRaw
+        error: true
+
+      - java_method: getScanResults
+        params: []
+        returns: java.util.List
+        go_name: getScanResultsRaw
+        error: true
+
+  - java_class: android.net.wifi.WifiInfo
+    go_type: ConnectionInfo
+    kind: data_class
+    fields:
+      - { java_method: getSSID,       returns: String, go_name: SSID,      go_type: string }
+      - { java_method: getBSSID,      returns: String, go_name: BSSID,     go_type: string }
+      - { java_method: getRssi,       returns: int,    go_name: RSSI,      go_type: int32 }
+      - { java_method: getLinkSpeed,   returns: int,    go_name: LinkSpeed, go_type: int32 }
+      - { java_method: getFrequency,   returns: int,    go_name: Frequency, go_type: int32 }
+      - { java_method: getIpAddress,   returns: int,    go_name: IPAddress, go_type: uint32 }
+
+  - java_class: android.net.wifi.ScanResult
+    go_type: ScanResult
+    kind: data_class
+    fields:
+      - { java_field: SSID,         returns: String, go_name: SSID,      go_type: string }
+      - { java_field: BSSID,        returns: String, go_name: BSSID,     go_type: string }
+      - { java_field: level,        returns: int,    go_name: RSSI,      go_type: int32 }
+      - { java_field: frequency,    returns: int,    go_name: Frequency, go_type: int32 }
+      - { java_field: capabilities, returns: String, go_name: Capabilities, go_type: string }

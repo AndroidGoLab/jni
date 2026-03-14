@@ -1,0 +1,77 @@
+package: documents
+go_import: "github.com/xaionaro-go/jni/provider/documents"
+
+classes:
+  - java_class: android.provider.DocumentsContract
+    go_type: documentsContract
+    obtain: static_only
+    methods:
+      - java_method: createDocument
+        go_name: createDocumentRaw
+        static: true
+        params:
+          - { java_type: android.content.ContentResolver, go_name: resolver }
+          - { java_type: android.net.Uri, go_name: parentUri }
+          - { java_type: String, go_name: mimeType }
+          - { java_type: String, go_name: displayName }
+        returns: android.net.Uri
+        error: true
+
+      - java_method: renameDocument
+        go_name: renameDocumentRaw
+        static: true
+        params:
+          - { java_type: android.content.ContentResolver, go_name: resolver }
+          - { java_type: android.net.Uri, go_name: uri }
+          - { java_type: String, go_name: displayName }
+        returns: android.net.Uri
+        error: true
+
+      - java_method: copyDocument
+        go_name: copyDocumentRaw
+        static: true
+        params:
+          - { java_type: android.content.ContentResolver, go_name: resolver }
+          - { java_type: android.net.Uri, go_name: srcUri }
+          - { java_type: android.net.Uri, go_name: destParentUri }
+        returns: android.net.Uri
+        error: true
+
+      - java_method: moveDocument
+        go_name: moveDocumentRaw
+        static: true
+        params:
+          - { java_type: android.content.ContentResolver, go_name: resolver }
+          - { java_type: android.net.Uri, go_name: srcUri }
+          - { java_type: android.net.Uri, go_name: srcParentUri }
+          - { java_type: android.net.Uri, go_name: destParentUri }
+        returns: android.net.Uri
+        error: true
+
+      - java_method: deleteDocument
+        go_name: deleteDocumentRaw
+        static: true
+        params:
+          - { java_type: android.content.ContentResolver, go_name: resolver }
+          - { java_type: android.net.Uri, go_name: uri }
+        returns: boolean
+        error: true
+
+      - java_method: isDocumentUri
+        go_name: isDocumentUriRaw
+        static: true
+        params:
+          - { java_type: android.content.Context, go_name: ctx }
+          - { java_type: android.net.Uri, go_name: uri }
+        returns: boolean
+        error: false
+
+constants:
+  - { go_name: ActionOpenDocument, value: '"android.intent.action.OPEN_DOCUMENT"', go_type: string }
+  - { go_name: ActionOpenDocumentTree, value: '"android.intent.action.OPEN_DOCUMENT_TREE"', go_type: string }
+  - { go_name: ActionCreateDocument, value: '"android.intent.action.CREATE_DOCUMENT"', go_type: string }
+  - { go_name: ExtraMimeTypes, value: '"android.intent.extra.MIME_TYPES"', go_type: string }
+  - { go_name: ExtraAllowMultiple, value: '"android.intent.extra.ALLOW_MULTIPLE"', go_type: string }
+  - { go_name: ExtraTitle, value: '"android.intent.extra.TITLE"', go_type: string }
+
+callbacks: []

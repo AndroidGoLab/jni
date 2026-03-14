@@ -1,0 +1,138 @@
+package: notification
+go_import: "github.com/xaionaro-go/jni/app/notification"
+
+# Go types exposed to users (not direct Java mappings)
+go_types:
+  - go_name: Channel
+    doc: "Notification channel for grouping notifications by importance"
+    fields:
+      - { go_name: ID, go_type: string }
+      - { go_name: Name, go_type: string }
+      - { go_name: Description, go_type: string }
+      - { go_name: Importance, go_type: int, doc: "ImportanceNone(0) through ImportanceHigh(4)" }
+
+  - go_name: Action
+    doc: "Action button shown on an expanded notification"
+    fields:
+      - { go_name: Title, go_type: string }
+      - { go_name: Intent, go_type: "*app.PendingIntent" }
+
+  - go_name: Style
+    doc: "Notification display style"
+    base_type: int
+    constants:
+      - { go_name: StyleDefault, value: 0 }
+      - { go_name: StyleBigText, value: 1 }
+      - { go_name: StyleBigPicture, value: 2, doc: "TODO: needs Bitmap support" }
+      - { go_name: StyleInbox, value: 3 }
+
+  - go_name: Progress
+    doc: "Progress bar configuration"
+    fields:
+      - { go_name: Max, go_type: int32 }
+      - { go_name: Current, go_type: int32 }
+      - { go_name: Indeterminate, go_type: bool }
+
+  - go_name: Notification
+    doc: "Notification to post via Manager.Notify"
+    fields:
+      - { go_name: ChannelID, go_type: string }
+      - { go_name: Title, go_type: string }
+      - { go_name: Text, go_type: string }
+      - { go_name: BigText, go_type: string, doc: "Expanded text for StyleBigText" }
+      - { go_name: SmallIcon, go_type: int32, doc: "Resource ID" }
+      - { go_name: ContentIntent, go_type: "*app.PendingIntent", doc: "Tap action" }
+      - { go_name: AutoCancel, go_type: bool }
+      - { go_name: Ongoing, go_type: bool, doc: "Persistent (e.g. foreground service)" }
+      - { go_name: Actions, go_type: "[]Action", doc: "Up to 3 action buttons" }
+      - { go_name: Style, go_type: Style }
+      - { go_name: Group, go_type: string }
+      - { go_name: Progress, go_type: "*Progress" }
+
+overrides:
+  android.app.NotificationManager:
+    constructor:
+      go_name: NewManager
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+
+    composite_methods:
+      - go_name: AreNotificationsEnabled
+        doc: "Check if notifications are enabled for this app"
+        params: []
+        returns: { go_type: bool, error: true }
+        implementation_notes: |
+          Direct delegation to areNotificationsEnabled()
+
+      - go_name: CreateChannel
+        doc: "Create or update a notification channel"
+        params: [{ go_name: ch, go_type: Channel }]
+        returns: { error: true }
+        implementation_notes: |
+          1. Construct NotificationChannel(ch.ID, ch.Name, ch.Importance)
+          2. If ch.Description != "", call channel.setDescription(ch.Description)
+          3. Call createNotificationChannel(channel)
+
+      - go_name: DeleteChannel
+        doc: "Delete a notification channel by ID"
+        params: [{ go_name: id, go_type: string }]
+        returns: { error: true }
+        implementation_notes: |
+          Direct delegation to deleteNotificationChannel(id)
+
+      - go_name: GetChannels
+        doc: "List all notification channels"
+        params: []
+        returns: { go_type: "[]Channel", error: true }
+        implementation_notes: |
+          1. Call getNotificationChannelsRaw() -> List<NotificationChannel>
+          2. Iterate list, extract getId/getName/getDescription/getImportance
+          3. Populate []Channel
+
+      - go_name: Notify
+        doc: "Post a notification with the given ID"
+        params:
+          - { go_name: id, go_type: int32 }
+          - { go_name: n, go_type: Notification }
+        returns: { error: true }
+        implementation_notes: |
+          1. Create Notification.Builder(ctx, n.ChannelID)
+          2. Call setContentTitle(n.Title) if non-empty
+          3. Call setContentText(n.Text) if non-empty
+          4. Call setSmallIcon(n.SmallIcon) if non-zero
+          5. Call setContentIntent(n.ContentIntent) if non-nil
+          6. Call setAutoCancel(n.AutoCancel)
+          7. Call setOngoing(n.Ongoing)
+          8. Call setGroup(n.Group) if non-empty
+          9. If n.Progress != nil: call setProgress(p.Max, p.Current, p.Indeterminate)
+          10. If n.Style == StyleBigText && n.BigText != "":
+              create BigTextStyle, call bigText(n.BigText), call setStyle(style)
+          11. For each action in n.Actions:
+              call addAction(0, action.Title, action.Intent)
+          12. Call build() -> notification
+          13. Call notifyRaw(id, notification)
+
+      - go_name: Cancel
+        doc: "Cancel a notification by ID"
+        params: [{ go_name: id, go_type: int32 }]
+        returns: { error: true }
+        implementation_notes: |
+          Direct delegation to cancel(id)
+
+      - go_name: CancelAll
+        doc: "Cancel all notifications from this app"
+        params: []
+        returns: { error: true }
+        implementation_notes: |
+          Direct delegation to cancelAll()
+
+      - go_name: GetActiveNotifications
+        doc: "Get IDs of currently active notifications"
+        params: []
+        returns: { go_type: "[]int32", error: true }
+        implementation_notes: |
+          1. Call getActiveNotificationsRaw() -> StatusBarNotification[]
+          2. Iterate array, extract getId() from each
+          3. Return []int32
+
+imports:
+  - "github.com/xaionaro-go/jni/app"

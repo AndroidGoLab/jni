@@ -1,0 +1,43 @@
+package: session
+go_import: "github.com/xaionaro-go/jni/media/session"
+
+classes:
+  - java_class: android.media.session.MediaSessionManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "media_session"
+    close: true
+
+    methods:
+      - java_method: getActiveSessions
+        params: [{ java_type: android.content.ComponentName, go_name: notificationListener }]
+        returns: java.util.List
+        go_name: getActiveSessionsRaw
+        error: true
+
+      - java_method: addOnActiveSessionsChangedListener
+        params:
+          - { java_type: android.media.session.MediaSessionManager$OnActiveSessionsChangedListener, go_name: listener }
+          - { java_type: android.content.ComponentName, go_name: notificationListener }
+        returns: void
+        go_name: addOnActiveSessionsChangedListener
+        error: true
+
+      - java_method: removeOnActiveSessionsChangedListener
+        params: [{ java_type: android.media.session.MediaSessionManager$OnActiveSessionsChangedListener, go_name: listener }]
+        returns: void
+        go_name: removeOnActiveSessionsChangedListener
+        error: true
+
+  - java_class: android.media.session.MediaController
+    go_type: mediaController
+    kind: data_class
+    fields:
+      - { java_method: getPackageName, returns: String, go_name: PackageName, go_type: string }
+      - { java_method: getTag, returns: String, go_name: Tag, go_type: string }
+
+callbacks:
+  - java_interface: android.media.session.MediaSessionManager$OnActiveSessionsChangedListener
+    go_type: onActiveSessionsChangedListener
+    methods:
+      - { java_method: onActiveSessionsChanged, params: [java.util.List], go_field: OnChanged }

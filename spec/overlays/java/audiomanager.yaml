@@ -1,0 +1,111 @@
+package: audiomanager
+go_import: "github.com/xaionaro-go/jni/media/audiomanager"
+
+go_types:
+  - go_name: DeviceType
+    doc: "Audio device type"
+    base_type: int
+
+  - go_name: DeviceFlag
+    doc: "Filter for input/output devices"
+    base_type: int
+
+  - go_name: DeviceInfo
+    doc: "Information about an audio device"
+    fields:
+      - { go_name: ID, go_type: int32 }
+      - { go_name: Type, go_type: DeviceType }
+      - { go_name: ProductName, go_type: string }
+      - { go_name: Address, go_type: string, doc: "MAC for BT, empty for built-in" }
+      - { go_name: IsSource, go_type: bool, doc: "Input device" }
+      - { go_name: IsSink, go_type: bool, doc: "Output device" }
+      - { go_name: SampleRates, go_type: "[]int32" }
+      - { go_name: ChannelCounts, go_type: "[]int32" }
+      - { go_name: Encodings, go_type: "[]int32" }
+
+  - go_name: FocusGainType
+    doc: "Audio focus gain type"
+    base_type: int
+
+  - go_name: FocusLossType
+    doc: "Audio focus loss type"
+    base_type: int
+
+  - go_name: Stream
+    doc: "Audio stream type"
+    base_type: int
+
+overrides:
+  android.media.AudioManager:
+    constructor:
+      go_name: NewManager
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+
+    composite_methods:
+      - go_name: GetDevices
+        doc: "Get audio devices matching the given flags"
+        params: [{ go_name: flags, go_type: DeviceFlag }]
+        returns: { go_type: "[]DeviceInfo", error: true }
+        implementation_notes: |
+          1. Call getDevicesRaw(int(flags)) -> AudioDeviceInfo[]
+          2. Iterate array, extract fields into []DeviceInfo
+
+      - go_name: OnDeviceChanged
+        doc: "Register for audio device change events"
+        params: [{ go_name: fn, go_type: "func(added, removed []DeviceInfo)" }]
+        returns: { go_type: "cancel func()", error: true }
+        implementation_notes: |
+          1. Create AudioDeviceCallback with OnAdded/OnRemoved converting AudioDeviceInfo[] to []DeviceInfo
+          2. Call registerAudioDeviceCallback(callback, nil)
+          3. Return cancel func that calls unregisterAudioDeviceCallback(callback)
+
+      - go_name: RequestAudioFocus
+        doc: "Request audio focus with a loss callback"
+        params:
+          - { go_name: gain, go_type: FocusGainType }
+          - { go_name: stream, go_type: Stream }
+          - { go_name: onLoss, go_type: "func(FocusLossType)" }
+        returns: { go_type: "release func()", error: true }
+        implementation_notes: |
+          1. Create OnAudioFocusChangeListener that calls onLoss with the focus change value
+          2. Build AudioFocusRequest via Builder(int(gain)):
+             - setOnAudioFocusChangeListener(listener)
+             - build()
+          3. Call requestAudioFocusRaw(request)
+          4. Return release func that calls abandonAudioFocusRequest(request)
+
+      - go_name: GetVolume
+        doc: "Get current volume for a stream"
+        params: [{ go_name: stream, go_type: Stream }]
+        returns: { go_type: int32, error: true }
+        implementation_notes: |
+          Direct delegation to getStreamVolume(int(stream))
+
+      - go_name: SetVolume
+        doc: "Set volume for a stream"
+        params:
+          - { go_name: stream, go_type: Stream }
+          - { go_name: volume, go_type: int32 }
+        returns: { error: true }
+        implementation_notes: |
+          Call setStreamVolume(int(stream), int(volume), 0)
+
+      - go_name: GetMaxVolume
+        doc: "Get maximum volume for a stream"
+        params: [{ go_name: stream, go_type: Stream }]
+        returns: { go_type: int32, error: true }
+        implementation_notes: |
+          Direct delegation to getStreamMaxVolume(int(stream))
+
+      - go_name: IsSpeakerphoneOn
+        doc: "Check if speakerphone is on"
+        params: []
+        returns: { go_type: bool, error: true }
+
+      - go_name: SetSpeakerphoneOn
+        doc: "Enable or disable speakerphone"
+        params: [{ go_name: on, go_type: bool }]
+        returns: { error: true }
+
+imports:
+  - "github.com/xaionaro-go/jni/app"

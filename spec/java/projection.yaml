@@ -1,0 +1,74 @@
+package: projection
+go_import: "github.com/xaionaro-go/jni/media/projection"
+
+classes:
+  - java_class: android.media.projection.MediaProjectionManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "media_projection"
+    close: true
+
+    methods:
+      - java_method: createScreenCaptureIntent
+        params: []
+        returns: android.content.Intent
+        go_name: createScreenCaptureIntent
+        error: true
+
+      - java_method: getMediaProjection
+        params:
+          - { java_type: int, go_name: resultCode }
+          - { java_type: android.content.Intent, go_name: resultData }
+        returns: android.media.projection.MediaProjection
+        go_name: getMediaProjection
+        error: true
+
+  - java_class: android.media.projection.MediaProjection
+    go_type: Projection
+    obtain: from_method
+    close: false
+
+    methods:
+      - java_method: stop
+        params: []
+        returns: void
+        go_name: stop
+
+      - java_method: registerCallback
+        params:
+          - { java_type: android.media.projection.MediaProjection$Callback, go_name: callback }
+          - { java_type: android.os.Handler, go_name: handler }
+        returns: void
+        go_name: registerCallback
+        error: true
+
+      - java_method: createVirtualDisplay
+        params:
+          - { java_type: String, go_name: name }
+          - { java_type: int, go_name: width }
+          - { java_type: int, go_name: height }
+          - { java_type: int, go_name: dpi }
+          - { java_type: int, go_name: flags }
+          - { java_type: android.view.Surface, go_name: surface }
+          - { java_type: android.hardware.display.VirtualDisplay$Callback, go_name: callback }
+          - { java_type: android.os.Handler, go_name: handler }
+        returns: android.hardware.display.VirtualDisplay
+        go_name: createVirtualDisplayRaw
+        error: true
+
+  - java_class: android.hardware.display.VirtualDisplay
+    go_type: VirtualDisplay
+    obtain: from_method
+
+    methods:
+      - java_method: release
+        params: []
+        returns: void
+        go_name: release
+
+callbacks:
+  - java_interface: android.media.projection.MediaProjection$Callback
+    go_type: projectionCallback
+    kind: abstract_class
+    methods:
+      - { java_method: onStop, params: [], go_field: OnStop }

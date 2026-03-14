@@ -1,0 +1,39 @@
+overlays:
+  - target: Manager
+    composite_methods:
+      - go_name: GetLights
+        doc: "Returns the list of available lights on the device (API 31+)."
+        params: []
+        returns: { go_type: "[]Light", error: true }
+        implementation_notes: |
+          1. Call getLightsRaw() to get List<Light>
+          2. Iterate list, extract getId(), getName(), getType() for each
+          3. Collect into []Light
+
+      - go_name: OpenSession
+        doc: "Opens a light control session (API 31+)."
+        params: []
+        returns: { go_type: "*Session", error: true }
+        implementation_notes: |
+          Call openSessionRaw() and wrap result as *Session
+
+  - target: Session
+    method_overlays:
+      - go_name: RequestLights
+        original: requestLightsRaw
+        go_signature: "func (s *Session) RequestLights(requests map[Light]LightState) error"
+        transform: |
+          1. Create LightsRequest.Builder
+          2. Iterate map entries:
+             a. For each Light key, create LightState via LightState.Builder.setColor(state.Color).build()
+             b. Call builder.addLight(light, lightState)
+          3. Call builder.build() to get LightsRequest
+          4. Call requestLightsRaw(request)
+        doc: "Sets light states for the session. Map keys are lights, values are desired states."
+
+custom_types:
+  - go_name: LightState
+    doc: "Desired state for a light."
+    fields:
+      - { go_name: Color, go_type: int, doc: "ARGB color value" }
+      - { go_name: PlayerID, go_type: int, doc: "Player ID for player lights" }

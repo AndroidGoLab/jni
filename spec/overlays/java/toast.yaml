@@ -1,0 +1,16 @@
+package: toast
+go_import: "github.com/xaionaro-go/jni/widget/toast"
+
+# Combine makeText + show into single package-level Show function
+composite_methods:
+  - go_name: Show
+    doc: "Show displays a toast message"
+    params:
+      - { go_name: ctx, go_type: "*app.Context" }
+      - { go_name: message, go_type: string }
+      - { go_name: duration, go_type: int }
+    returns: { error: true }
+    implementation_notes: |
+      1. Call Toast.makeText(ctx, message, duration) to get Toast object
+      2. Call toast.show()
+      3. Must run on UI thread — wrap in runOnUiThread if needed

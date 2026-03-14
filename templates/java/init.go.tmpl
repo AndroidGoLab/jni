@@ -1,0 +1,96 @@
+package {{.Package}}
+
+import (
+	"fmt"
+	"sync"
+	"unsafe"
+
+	"github.com/xaionaro-go/jni"
+)
+
+// Ensure imports are used.
+var (
+	_ = fmt.Errorf
+	_ = unsafe.Pointer(nil)
+)
+
+var (
+	initOnce sync.Once
+	initErr  error
+{{range .Classes}}
+	cls{{.GoType}} *jni.GlobalRef
+{{- if eq .Obtain "constructor"}}
+	mid{{.GoType}}Init jni.MethodID
+{{- end}}
+{{$cls := .}}{{range .Methods}}	mid{{$cls.GoType}}{{.GoName}} jni.MethodID
+{{end}}{{end}}
+{{- range .DataClasses}}
+	cls{{.GoType}} *jni.GlobalRef
+{{$dc := .}}{{range .Fields}}{{if .IsField}}	fid{{$dc.GoType}}{{.GoName}} jni.FieldID
+{{else}}	mid{{$dc.GoType}}{{.GoName}} jni.MethodID
+{{end}}{{end}}{{end}}
+{{- range .Callbacks}}
+	cls{{.GoType}} *jni.GlobalRef
+{{end}})
+
+func ensureInit(env *jni.Env) error {
+	initOnce.Do(func() {
+		initErr = doInit(env)
+	})
+	return initErr
+}
+
+// Init resolves all JNI class and method references for this package.
+// It is safe to call multiple times (uses sync.Once internally).
+// Exported for E2E testing on Android.
+func Init(env *jni.Env) error {
+	return ensureInit(env)
+}
+
+func doInit(env *jni.Env) error {
+	var c *jni.Class
+	var err error
+{{range .Classes}}
+	c, err = env.FindClass("{{.JavaClassSlash}}")
+	if err != nil {
+		return fmt.Errorf("find class {{.JavaClass}}: %w", err)
+	}
+	cls{{.GoType}} = env.NewGlobalRef(&c.Object)
+{{- if eq .Obtain "constructor"}}
+	mid{{.GoType}}Init, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(cls{{.GoType}})), "<init>", "()V")
+	if err != nil {
+		return fmt.Errorf("get constructor {{.JavaClass}}.<init>: %w", err)
+	}
+{{- end}}
+{{$cls := .}}{{range .Methods}}
+	mid{{$cls.GoType}}{{.GoName}}, err = env.Get{{if .Static}}Static{{end}}MethodID((*jni.Class)(unsafe.Pointer(cls{{$cls.GoType}})), "{{.JavaMethod}}", "{{.JNISig}}")
+	if err != nil {
+		return fmt.Errorf("get method {{$cls.JavaClass}}.{{.JavaMethod}}: %w", err)
+	}
+{{end}}{{end}}
+{{- range .DataClasses}}
+	c, err = env.FindClass("{{.JavaClassSlash}}")
+	if err != nil {
+		return fmt.Errorf("find class {{.JavaClass}}: %w", err)
+	}
+	cls{{.GoType}} = env.NewGlobalRef(&c.Object)
+{{$dc := .}}{{range .Fields}}{{if .IsField}}
+	fid{{$dc.GoType}}{{.GoName}}, err = env.GetFieldID((*jni.Class)(unsafe.Pointer(cls{{$dc.GoType}})), "{{.JavaName}}", "{{.JNISig}}")
+	if err != nil {
+		return fmt.Errorf("get field {{$dc.JavaClass}}.{{.JavaName}}: %w", err)
+	}
+{{else}}
+	mid{{$dc.GoType}}{{.GoName}}, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(cls{{$dc.GoType}})), "{{.JavaMethod}}", "{{.JNISig}}")
+	if err != nil {
+		return fmt.Errorf("get method {{$dc.JavaClass}}.{{.JavaMethod}}: %w", err)
+	}
+{{end}}{{end}}{{end}}
+{{- range .Callbacks}}
+	c, err = env.FindClass("{{javaClassToSlash .JavaInterface}}")
+	if err != nil {
+		return fmt.Errorf("find class {{.JavaInterface}}: %w", err)
+	}
+	cls{{.GoType}} = env.NewGlobalRef(&c.Object)
+{{end}}
+	return nil
+}

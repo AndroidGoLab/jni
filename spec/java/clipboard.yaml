@@ -1,0 +1,69 @@
+package: clipboard
+go_import: "github.com/xaionaro-go/jni/content/clipboard"
+
+classes:
+  - java_class: android.content.ClipboardManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "clipboard"
+    close: true
+
+    methods:
+      - java_method: setPrimaryClip
+        params: [{ java_type: android.content.ClipData, go_name: clip }]
+        returns: void
+        go_name: setPrimaryClip  # internal, overlay wraps
+        error: true
+
+      - java_method: getPrimaryClip
+        returns: android.content.ClipData
+        go_name: getPrimaryClip  # internal, overlay extracts text
+        error: true
+
+      - java_method: hasPrimaryClip
+        returns: boolean
+        go_name: hasPrimaryClip  # internal
+        error: true
+
+      - java_method: addPrimaryClipChangedListener
+        params: [{ java_type: android.content.ClipboardManager.OnPrimaryClipChangedListener, go_name: listener }]
+        returns: void
+        go_name: addListener  # internal
+        error: true
+
+      - java_method: removePrimaryClipChangedListener
+        params: [{ java_type: android.content.ClipboardManager.OnPrimaryClipChangedListener, go_name: listener }]
+        returns: void
+        go_name: removeListener  # internal
+        error: true
+
+  - java_class: android.content.ClipData
+    go_type: clipData  # unexported
+    methods:
+      - java_method: getItemAt
+        params: [{ java_type: int, go_name: index }]
+        returns: android.content.ClipData.Item
+        go_name: getItemAt
+
+    static_methods:
+      - java_method: newPlainText
+        params:
+          - { java_type: CharSequence, go_name: label }
+          - { java_type: CharSequence, go_name: text }
+        returns: android.content.ClipData
+        go_name: newPlainText
+
+  - java_class: android.content.ClipData$Item
+    go_type: clipItem  # unexported
+    methods:
+      - java_method: getText
+        returns: CharSequence
+        go_name: getText
+
+callbacks:
+  - java_interface: android.content.ClipboardManager$OnPrimaryClipChangedListener
+    go_type: clipChangedListener
+    methods:
+      - { java_method: onPrimaryClipChanged, params: [], go_field: OnChanged }
+
+constants: []

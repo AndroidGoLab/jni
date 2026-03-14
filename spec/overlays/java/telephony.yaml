@@ -1,0 +1,37 @@
+package: telephony
+go_import: "github.com/xaionaro-go/jni/telephony"
+
+overrides:
+  android.telephony.TelephonyManager:
+    constructor:
+      go_name: NewManager
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+
+    # Single GetInfo method reads all fields at once
+    composite_methods:
+      - go_name: GetInfo
+        doc: "GetInfo reads all telephony information in a single JNI call batch"
+        params: []
+        returns: { go_type: "*Info", error: true }
+        implementation_notes: |
+          In a single VM.Do() call:
+          1. Call getNetworkOperatorName() → Operator
+          2. Call getNetworkOperator() → OperatorCode (MCC+MNC string)
+          3. Call getPhoneType() → PhoneType
+          4. Call getSimState() → SimState
+          5. Call isNetworkRoaming() → IsRoaming
+          6. Call getDataState() → DataState
+          7. Call getDataNetworkType() → NetworkType
+          Populate Info struct with all values
+
+custom_types:
+  - go_name: Info
+    doc: "Telephony and SIM information"
+    fields:
+      - { go_name: Operator,     go_type: string, doc: "Carrier name" }
+      - { go_name: OperatorCode, go_type: string, doc: "MCC+MNC code" }
+      - { go_name: PhoneType,    go_type: int,    doc: "GSM(1), CDMA(2), SIP(3)" }
+      - { go_name: SimState,     go_type: int,    doc: "READY(5), ABSENT(1), etc." }
+      - { go_name: IsRoaming,    go_type: bool,   doc: "Whether device is roaming" }
+      - { go_name: DataState,    go_type: int,    doc: "CONNECTED(2), DISCONNECTED(0), etc." }
+      - { go_name: NetworkType,  go_type: int,    doc: "LTE(13), NR/5G(20), etc." }

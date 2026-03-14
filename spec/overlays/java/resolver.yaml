@@ -1,0 +1,35 @@
+overlays:
+  - target: Resolver
+    constructor_overlay:
+      go_name: New
+      go_signature: "func New(ctx *app.Context) *Resolver"
+      doc: "Creates a Resolver from the Context's ContentResolver."
+
+    synthetic_methods:
+      - go_name: Query
+        go_signature: "func (r *Resolver) Query(uri string, projection []string, selection string, selectionArgs []string, sortOrder string) (*Cursor, error)"
+        implementation:
+          - parse uri string via Uri.parse(uri)
+          - "convert projection []string -> String[]"
+          - "convert selectionArgs []string -> String[]"
+          - call queryRaw(parsedUri, projectionArr, selection, selectionArgsArr, sortOrder)
+          - wrap returned Java Cursor in Go Cursor
+
+      - go_name: OpenFileDescriptor
+        go_signature: "func (r *Resolver) OpenFileDescriptor(uri, mode string) (*os.File, error)"
+        implementation:
+          - parse uri string via Uri.parse(uri)
+          - call openFileDescriptorRaw(parsedUri, mode)
+          - call detachFd() on ParcelFileDescriptor to get raw fd (detach transfers ownership)
+          - wrap fd in os.NewFile(uintptr(fd), uri)
+          - return *os.File
+
+  - target: Cursor
+    synthetic_methods:
+      - go_name: Next
+        go_signature: "func (c *Cursor) Next() bool"
+        implementation: "call moveToNext(), return result"
+        doc: "Advances to the next row. Returns false when no more rows."
+
+imports:
+  - "os"

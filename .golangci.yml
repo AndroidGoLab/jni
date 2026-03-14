@@ -1,0 +1,12 @@
+run:
+  timeout: 5m
+  build-tags:
+    - android
+
+linters:
+  enable:
+    - govet
+    - staticcheck
+    - errcheck
+    - ineffassign
+    - unused

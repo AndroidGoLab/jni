@@ -1,0 +1,69 @@
+overlays:
+  - target: mediastore
+    synthetic_functions:
+      - go_name: CreateImageCaptureIntent
+        go_signature: "func CreateImageCaptureIntent() *app.Intent"
+        doc: "Creates an intent to capture a photo with the camera."
+        implementation:
+          - "Create new Intent with action ACTION_IMAGE_CAPTURE"
+
+      - go_name: CreateVideoCaptureIntent
+        go_signature: "func CreateVideoCaptureIntent() *app.Intent"
+        doc: "Creates an intent to capture a video with the camera."
+        implementation:
+          - "Create new Intent with action ACTION_VIDEO_CAPTURE"
+
+      - go_name: CreatePickImagesIntent
+        go_signature: "func CreatePickImagesIntent(maxImages int) *app.Intent"
+        doc: "Creates an intent to open the photo picker (API 33+)."
+        implementation:
+          - "Create new Intent with action ACTION_PICK_IMAGES"
+          - "If maxImages > 0, set EXTRA_PICK_IMAGES_MAX int extra"
+
+      - go_name: GetExternalVolumeNames
+        go_signature: "func GetExternalVolumeNames(ctx *app.Context) ([]string, error)"
+        doc: "Returns the set of external volume names."
+        implementation:
+          - "Call MediaStore.getExternalVolumeNames(ctx)"
+          - "Iterate Set<String> and collect into []string"
+
+      - go_name: CreateWriteRequest
+        go_signature: "func CreateWriteRequest(ctx *app.Context, uris []string) (*app.PendingIntent, error)"
+        doc: "Creates a PendingIntent for user consent to write the specified media URIs (API 30+)."
+        implementation:
+          - "Parse each uri string to android.net.Uri"
+          - "Collect into Collection<Uri>"
+          - "Get ContentResolver from ctx"
+          - "Call MediaStore.createWriteRequest(resolver, uris)"
+
+      - go_name: CreateTrashRequest
+        go_signature: "func CreateTrashRequest(ctx *app.Context, uris []string, trash bool) (*app.PendingIntent, error)"
+        doc: "Creates a PendingIntent for user consent to trash/untrash media URIs (API 30+)."
+        implementation:
+          - "Parse each uri string to android.net.Uri"
+          - "Get ContentResolver from ctx"
+          - "Call MediaStore.createTrashRequest(resolver, uris, trash)"
+
+      - go_name: CreateDeleteRequest
+        go_signature: "func CreateDeleteRequest(ctx *app.Context, uris []string) (*app.PendingIntent, error)"
+        doc: "Creates a PendingIntent for user consent to delete media URIs (API 30+)."
+        implementation:
+          - "Parse each uri string to android.net.Uri"
+          - "Get ContentResolver from ctx"
+          - "Call MediaStore.createDeleteRequest(resolver, uris)"
+
+      - go_name: CreateFavoriteRequest
+        go_signature: "func CreateFavoriteRequest(ctx *app.Context, uris []string, favorite bool) (*app.PendingIntent, error)"
+        doc: "Creates a PendingIntent for user consent to favorite/unfavorite media URIs (API 30+)."
+        implementation:
+          - "Parse each uri string to android.net.Uri"
+          - "Get ContentResolver from ctx"
+          - "Call MediaStore.createFavoriteRequest(resolver, uris, favorite)"
+
+conversion_funcs:
+  string_to_uri:
+    to_java: "android.net.Uri.parse(String)"
+    to_go: "Uri.toString()"
+
+imports:
+  - '"github.com/xaionaro-go/jni/app"'

@@ -1,0 +1,81 @@
+package: pm
+go_import: "github.com/xaionaro-go/jni/content/pm"
+
+classes:
+  - java_class: android.content.pm.PackageManager
+    go_type: Manager
+    obtain: context_method  # ctx.getPackageManager(), not getSystemService
+    context_method: getPackageManager
+    close: false  # no global ref to release
+
+    methods:
+      - java_method: hasSystemFeature
+        params: [{ java_type: String, go_name: feature }]
+        returns: boolean
+        go_name: HasSystemFeature
+        error: true
+
+      - java_method: getPackageInfo
+        params:
+          - { java_type: String, go_name: packageName }
+          - { java_type: int, go_name: flags }
+        returns: android.content.pm.PackageInfo
+        go_name: getPackageInfoRaw
+        error: true
+
+      - java_method: getInstalledPackages
+        params: [{ java_type: int, go_name: flags }]
+        returns: java.util.List
+        go_name: getInstalledPackagesRaw
+        error: true
+
+      - java_method: resolveActivity
+        params:
+          - { java_type: android.content.Intent, go_name: intent }
+          - { java_type: int, go_name: flags }
+        returns: android.content.pm.ResolveInfo
+        go_name: resolveActivityRaw
+        error: true
+
+  - java_class: android.content.pm.PackageInfo
+    go_type: PackageInfo
+    kind: data_class
+    fields:
+      - { java_field: packageName,      returns: String, go_name: PackageName,  go_type: string }
+      - { java_field: versionName,      returns: String, go_name: VersionName,  go_type: string }
+      - { java_method: getLongVersionCode, returns: long, go_name: VersionCode, go_type: int64 }
+      - { java_field: firstInstallTime, returns: long,  go_name: FirstInstall, go_type: int64 }
+      - { java_field: lastUpdateTime,   returns: long,  go_name: LastUpdate,   go_type: int64 }
+
+constants:
+  # Hardware feature constants
+  - go_name: FeatureCamera
+    value: '"android.hardware.camera"'
+    go_type: string
+  - go_name: FeatureCameraFront
+    value: '"android.hardware.camera.front"'
+    go_type: string
+  - go_name: FeatureBluetooth
+    value: '"android.hardware.bluetooth"'
+    go_type: string
+  - go_name: FeatureBluetoothLE
+    value: '"android.hardware.bluetooth_le"'
+    go_type: string
+  - go_name: FeatureNFC
+    value: '"android.hardware.nfc"'
+    go_type: string
+  - go_name: FeatureGPS
+    value: '"android.hardware.location.gps"'
+    go_type: string
+  - go_name: FeatureTelephony
+    value: '"android.hardware.telephony"'
+    go_type: string
+  - go_name: FeatureWifi
+    value: '"android.hardware.wifi"'
+    go_type: string
+  - go_name: FeatureFingerprint
+    value: '"android.hardware.fingerprint"'
+    go_type: string
+  - go_name: FeatureUSBHost
+    value: '"android.hardware.usb.host"'
+    go_type: string

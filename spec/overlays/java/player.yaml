@@ -1,0 +1,111 @@
+package: player
+go_import: "github.com/xaionaro-go/jni/media/player"
+
+overrides:
+  android.media.MediaPlayer:
+    constructor:
+      go_name: New
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+      implementation_notes: |
+        Create new MediaPlayer() instance. ctx needed for URI data sources.
+
+    composite_methods:
+      - go_name: SetDataSource
+        doc: "Set a local file path as the data source"
+        params: [{ go_name: path, go_type: string }]
+        returns: { error: true }
+        implementation_notes: |
+          Direct delegation to setDataSourcePath(path)
+
+      - go_name: SetDataSourceURI
+        doc: "Set a content URI as the data source"
+        params: [{ go_name: uri, go_type: string }]
+        returns: { error: true }
+        implementation_notes: |
+          1. Parse uri string into android.net.Uri via Uri.parse(uri)
+          2. Call setDataSourceUri(ctx, uri)
+
+      - go_name: Prepare
+        doc: "Prepare the player synchronously"
+        params: []
+        returns: { error: true }
+
+      - go_name: PrepareAsync
+        doc: "Prepare the player asynchronously; onPrepared called when ready"
+        params: [{ go_name: onPrepared, go_type: "func()" }]
+        returns: { error: true }
+        implementation_notes: |
+          1. Create OnPreparedListener that calls onPrepared()
+          2. Call setOnPreparedListener(listener)
+          3. Call prepareAsync()
+
+      - go_name: Start
+        doc: "Start or resume playback"
+        params: []
+        returns: { error: true }
+
+      - go_name: Pause
+        doc: "Pause playback"
+        params: []
+        returns: { error: true }
+
+      - go_name: Stop
+        doc: "Stop playback (must prepare again to restart)"
+        params: []
+        returns: { error: true }
+
+      - go_name: SeekTo
+        doc: "Seek to position in milliseconds"
+        params: [{ go_name: ms, go_type: int32 }]
+        returns: { error: true }
+
+      - go_name: GetDuration
+        doc: "Get total duration in milliseconds"
+        params: []
+        returns: { go_type: int32, error: true }
+
+      - go_name: GetCurrentPosition
+        doc: "Get current playback position in milliseconds"
+        params: []
+        returns: { go_type: int32, error: true }
+
+      - go_name: IsPlaying
+        doc: "Check if currently playing"
+        params: []
+        returns: { go_type: bool, error: true }
+
+      - go_name: SetVolume
+        doc: "Set left and right volume (0.0 to 1.0)"
+        params:
+          - { go_name: left, go_type: float32 }
+          - { go_name: right, go_type: float32 }
+        returns: { error: true }
+
+      - go_name: SetLooping
+        doc: "Enable or disable looping"
+        params: [{ go_name: looping, go_type: bool }]
+        returns: { error: true }
+
+      - go_name: OnCompletion
+        doc: "Set callback for playback completion"
+        params: [{ go_name: fn, go_type: "func()" }]
+        implementation_notes: |
+          1. Create OnCompletionListener that calls fn()
+          2. Call setOnCompletionListener(listener)
+
+      - go_name: OnError
+        doc: "Set callback for playback errors"
+        params: [{ go_name: fn, go_type: "func(what, extra int)" }]
+        implementation_notes: |
+          1. Create OnErrorListener that calls fn(what, extra) and returns true
+          2. Call setOnErrorListener(listener)
+
+      - go_name: Release
+        doc: "Release the player and all resources (must call when done)"
+        params: []
+        returns: { error: true }
+        implementation_notes: |
+          Direct delegation to release()
+
+imports:
+  - "github.com/xaionaro-go/jni/app"

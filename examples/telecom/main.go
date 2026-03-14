@@ -1,0 +1,110 @@
+//go:build android
+
+// Command telecom demonstrates using the Android TelecomManager
+// system service, wrapped by the telecom package. It is built as a
+// c-shared library and packaged into an APK using the shared apk.mk
+// infrastructure.
+//
+// The telecom package wraps android.telecom.TelecomManager and
+// provides methods for querying call state, managing calls, and
+// retrieving the default dialer package. Many operations require
+// the ANSWER_PHONE_CALLS or CALL_PHONE permissions.
+package main
+
+/*
+#include <jni.h>
+*/
+import "C"
+import (
+	"bytes"
+	"fmt"
+	"unsafe"
+
+	"github.com/xaionaro-go/jni"
+	"github.com/xaionaro-go/jni/app"
+	"github.com/xaionaro-go/jni/telecom"
+)
+
+func main() {}
+
+var output bytes.Buffer
+
+//export goRun
+func goRun(cvm *C.JavaVM) {
+	vm := jni.VMFromPtr(unsafe.Pointer(cvm))
+	if err := run(vm); err != nil {
+		fmt.Fprintf(&output, "ERROR: %v\n", err)
+	}
+}
+
+//export goGetOutput
+func goGetOutput() *C.char {
+	return C.CString(output.String())
+}
+
+func run(vm *jni.VM) error {
+	ctx, err := getAppContext(vm)
+	if err != nil {
+		return fmt.Errorf("get context: %w", err)
+	}
+	defer ctx.Close()
+
+	mgr, err := telecom.NewManager(ctx)
+	if err != nil {
+		return fmt.Errorf("telecom.NewManager: %w", err)
+	}
+
+	// Manager provides unexported methods for telecom operations:
+	//   isInCallRaw()                  -- checks if a call is in progress.
+	//   isInManagedCallRaw()           -- checks if a managed call is active.
+	//   getDefaultDialerPackageRaw()   -- returns the default dialer package name.
+	//   placeCallRaw(uri, extras)      -- places a phone call.
+	//   silenceRingerRaw()             -- silences the ringer.
+	//   acceptRingingCallRaw()         -- accepts an incoming call.
+	//   endCallRaw()                   -- ends the current call.
+	//
+	// These methods are intended to be wrapped by higher-level helpers
+	// that handle JNI object conversion and permission checks.
+
+	fmt.Fprintln(&output, "TelecomManager obtained successfully")
+	fmt.Fprintln(&output, "Unexported methods: isInCallRaw, isInManagedCallRaw, getDefaultDialerPackageRaw, placeCallRaw, silenceRingerRaw, acceptRingingCallRaw, endCallRaw")
+
+	_ = mgr
+	return nil
+}
+
+// getAppContext obtains an Android Context via ActivityThread.currentApplication().
+func getAppContext(vm *jni.VM) (*app.Context, error) {
+	var ctx app.Context
+	ctx.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := app.Init(env); err != nil {
+			return err
+		}
+
+		atClass, err := env.FindClass("android/app/ActivityThread")
+		if err != nil {
+			return fmt.Errorf("find ActivityThread: %w", err)
+		}
+
+		curAppMid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
+		if err != nil {
+			return fmt.Errorf("get currentApplication: %w", err)
+		}
+		appObj, err := env.CallStaticObjectMethod(atClass, curAppMid)
+		if err != nil {
+			return fmt.Errorf("call currentApplication: %w", err)
+		}
+		if appObj == nil || appObj.Ref() == 0 {
+			return fmt.Errorf("currentApplication returned null")
+		}
+
+		ctx.Obj = env.NewGlobalRef(appObj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &ctx, nil
+}

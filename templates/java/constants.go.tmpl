@@ -1,0 +1,10 @@
+package {{.Package}}
+
+{{range .ConstantGroups}}{{$grp := .}}
+{{if .GoType}}// {{.GoType}} represents a typed constant.
+type {{.GoType}} {{.BaseType}}
+{{end}}
+const (
+{{range .Values}}	{{.GoName}} {{if $grp.GoType}}{{$grp.GoType}} {{end}}= {{.Value}}
+{{end}})
+{{end}}

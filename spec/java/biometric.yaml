@@ -1,0 +1,111 @@
+package: biometric
+go_import: "github.com/xaionaro-go/jni/hardware/biometric"
+
+classes:
+  - java_class: android.hardware.biometrics.BiometricManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "biometric"
+    close: true
+
+    methods:
+      - java_method: canAuthenticate
+        params: [{ java_type: int, go_name: authenticators }]
+        returns: int
+        go_name: canAuthenticateRaw
+        error: true
+
+  - java_class: android.hardware.biometrics.BiometricPrompt$Builder
+    go_type: biometricPromptBuilder  # internal
+    obtain: constructor
+    constructor_params:
+      - { java_type: android.content.Context, go_name: ctx }
+
+    methods:
+      - java_method: setTitle
+        params: [{ java_type: java.lang.CharSequence, go_name: title }]
+        returns: android.hardware.biometrics.BiometricPrompt$Builder
+        go_name: setTitle
+
+      - java_method: setSubtitle
+        params: [{ java_type: java.lang.CharSequence, go_name: subtitle }]
+        returns: android.hardware.biometrics.BiometricPrompt$Builder
+        go_name: setSubtitle
+
+      - java_method: setDescription
+        params: [{ java_type: java.lang.CharSequence, go_name: description }]
+        returns: android.hardware.biometrics.BiometricPrompt$Builder
+        go_name: setDescription
+
+      - java_method: setNegativeButton
+        params:
+          - { java_type: java.lang.CharSequence, go_name: text }
+          - { java_type: java.util.concurrent.Executor, go_name: executor }
+          - { java_type: android.content.DialogInterface$OnClickListener, go_name: listener }
+        returns: android.hardware.biometrics.BiometricPrompt$Builder
+        go_name: setNegativeButton
+
+      - java_method: setAllowedAuthenticators
+        params: [{ java_type: int, go_name: authenticators }]
+        returns: android.hardware.biometrics.BiometricPrompt$Builder
+        go_name: setAllowedAuthenticators
+
+      - java_method: build
+        params: []
+        returns: android.hardware.biometrics.BiometricPrompt
+        go_name: build
+
+  - java_class: android.hardware.biometrics.BiometricPrompt
+    go_type: biometricPrompt  # internal
+    obtain: from_builder
+
+    methods:
+      - java_method: authenticate
+        params: [{ java_type: android.os.CancellationSignal, go_name: cancel }, { java_type: java.util.concurrent.Executor, go_name: executor }, { java_type: android.hardware.biometrics.BiometricPrompt$AuthenticationCallback, go_name: callback }]
+        returns: void
+        go_name: authenticate
+        error: true
+
+  - java_class: android.os.CancellationSignal
+    go_type: cancellationSignal  # internal
+    obtain: constructor
+    constructor_params: []
+
+    methods:
+      - java_method: cancel
+        params: []
+        returns: void
+        go_name: cancel
+
+callbacks:
+  - java_interface: android.hardware.biometrics.BiometricPrompt$AuthenticationCallback
+    go_type: authenticationCallback
+    kind: abstract_class
+    methods:
+      - { java_method: onAuthenticationSucceeded, params: [android.hardware.biometrics.BiometricPrompt$AuthenticationResult], go_field: OnSucceeded }
+      - { java_method: onAuthenticationError, params: [int, java.lang.CharSequence], go_field: OnError }
+      - { java_method: onAuthenticationFailed, params: [], go_field: OnFailed }
+
+  - java_interface: android.content.DialogInterface$OnClickListener
+    go_type: onClickListener  # internal, for negative button
+    methods:
+      - { java_method: onClick, params: [android.content.DialogInterface, int], go_field: OnClick }
+
+constants:
+  # Authenticator types (bitmask)
+  - { go_name: Strong, value: "0x0f", go_type: int }
+  - { go_name: Weak, value: "0xff", go_type: int }
+  - { go_name: Credential, value: "0x8000", go_type: int, doc: "PIN/pattern/password" }
+  # Error codes
+  - { go_name: ErrNone, value: "0", go_type: int }
+  - { go_name: ErrHWUnavailable, value: "1", go_type: int }
+  - { go_name: ErrCanceled, value: "5", go_type: int }
+  - { go_name: ErrLockout, value: "7", go_type: int, doc: "Too many attempts, try later" }
+  - { go_name: ErrLockoutPermanent, value: "9", go_type: int, doc: "Too many attempts, device credential required" }
+  - { go_name: ErrUserCanceled, value: "10", go_type: int }
+  - { go_name: ErrNoBiometrics, value: "11", go_type: int }
+  # canAuthenticate return values
+  - { go_name: BiometricSuccess, value: "0", go_type: int }
+  - { go_name: BiometricErrorNoHardware, value: "12", go_type: int }
+  - { go_name: BiometricErrorHWUnavailable, value: "1", go_type: int }
+  - { go_name: BiometricErrorNoneEnrolled, value: "11", go_type: int }

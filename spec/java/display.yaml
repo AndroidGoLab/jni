@@ -1,0 +1,48 @@
+package: display
+go_import: "github.com/xaionaro-go/jni/view/display"
+
+classes:
+  - java_class: android.view.WindowManager
+    go_type: windowManager  # internal
+    obtain: system_service
+    service_name: "window"
+
+    methods:
+      - java_method: getDefaultDisplay
+        params: []
+        returns: android.view.Display
+        go_name: getDefaultDisplay
+        error: true
+
+  - java_class: android.view.Display
+    go_type: display  # internal
+    kind: intermediate  # not directly exposed, used to get metrics
+
+    methods:
+      - java_method: getRotation
+        params: []
+        returns: int
+        go_name: getRotation
+
+      - java_method: getRefreshRate
+        params: []
+        returns: float
+        go_name: getRefreshRate
+
+      - java_method: getMetrics
+        params: [{ java_type: android.util.DisplayMetrics, go_name: metrics }]
+        returns: void
+        go_name: getMetrics
+
+      - java_method: getRealMetrics
+        params: [{ java_type: android.util.DisplayMetrics, go_name: metrics }]
+        returns: void
+        go_name: getRealMetrics
+
+  - java_class: android.util.DisplayMetrics
+    go_type: displayMetrics  # internal
+    obtain: constructor
+    fields:
+      - { java_field: widthPixels,  returns: int,   go_name: Width,      go_type: int32 }
+      - { java_field: heightPixels, returns: int,   go_name: Height,     go_type: int32 }
+      - { java_field: densityDpi,   returns: int,   go_name: DensityDPI, go_type: int32 }

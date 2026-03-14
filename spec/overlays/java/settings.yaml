@@ -1,0 +1,30 @@
+overlays:
+  - target: settings
+    synthetic_functions:
+      - go_name: GetInt
+        go_signature: "func GetInt(ctx *app.Context, namespace, key string) (int32, error)"
+        implementation:
+          - get ContentResolver from ctx.ContentResolver()
+          - "switch namespace:"
+          - '  "system": call getIntSystem(resolver, key, 0)'
+          - '  "secure": call getIntSecure(resolver, key, 0)'
+          - '  "global": call getIntGlobal(resolver, key, 0)'
+          - 'default: return error "unknown namespace"'
+
+      - go_name: GetString
+        go_signature: "func GetString(ctx *app.Context, namespace, key string) (string, error)"
+        implementation:
+          - get ContentResolver from ctx.ContentResolver()
+          - "switch namespace:"
+          - '  "system": call getStringSystem(resolver, key)'
+          - '  "secure": call getStringSecure(resolver, key)'
+          - '  "global": call getStringGlobal(resolver, key)'
+
+      - go_name: PutInt
+        go_signature: "func PutInt(ctx *app.Context, namespace, key string, value int32) error"
+        implementation:
+          - get ContentResolver from ctx.ContentResolver()
+          - only "system" namespace supports writes (Secure/Global require WRITE_SECURE_SETTINGS)
+          - "switch namespace:"
+          - '  "system": call putIntSystem(resolver, key, value)'
+          - 'default: return error "can only write to System namespace without special permissions"'

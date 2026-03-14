@@ -1,0 +1,31 @@
+package: build
+go_import: "github.com/xaionaro-go/jni/os/build"
+
+# Combine Build + Build.VERSION fields into single Info struct
+composite_type:
+  go_name: Info
+  doc: "Device and OS information"
+  sources:
+    - android.os.Build
+    - android.os.Build$VERSION
+  fields:
+    - { go_name: Manufacturer, source: "android.os.Build.MANUFACTURER" }
+    - { go_name: Model,        source: "android.os.Build.MODEL" }
+    - { go_name: Brand,        source: "android.os.Build.BRAND" }
+    - { go_name: Device,       source: "android.os.Build.DEVICE" }
+    - { go_name: Hardware,     source: "android.os.Build.HARDWARE" }
+    - { go_name: Product,      source: "android.os.Build.PRODUCT" }
+    - { go_name: Fingerprint,  source: "android.os.Build.FINGERPRINT" }
+    - { go_name: ID,           source: "android.os.Build.ID" }
+    - { go_name: SDKInt,       source: "android.os.Build$VERSION.SDK_INT" }
+    - { go_name: Release,      source: "android.os.Build$VERSION.RELEASE" }
+
+# Single package-level function
+package_func:
+  go_name: Get
+  doc: "Get reads all Build and Build.VERSION static fields"
+  params: [{ go_name: vm, go_type: "*jni.VM" }]
+  returns: { go_type: "*Info", error: true }
+  implementation_notes: |
+    Read all static fields from Build and Build.VERSION in a single VM.Do() call.
+    Does NOT require a Context — only needs the VM.

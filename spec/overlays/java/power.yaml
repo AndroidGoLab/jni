@@ -1,0 +1,23 @@
+overlays:
+  - target: Manager
+    method_overlays:
+      - go_name: NewWakeLock
+        original: newWakeLock
+        go_signature: "func (m *Manager) NewWakeLock(tag string) (*WakeLock, error)"
+        transform: |
+          Call newWakeLock(PartialWakeLock, tag).
+          Always uses PARTIAL_WAKE_LOCK (value 1) — this is the only wake lock type
+          that works without special permissions and is appropriate for most use cases.
+          Other flags (FULL_WAKE_LOCK etc.) are deprecated.
+        doc: "Creates a new partial wake lock with the given tag."
+
+  - target: WakeLock
+    method_overlays:
+      - go_name: Acquire
+        original: acquireMs
+        go_signature: "func (w *WakeLock) Acquire(timeout time.Duration) error"
+        transform: "convert timeout to milliseconds (timeout.Milliseconds()), call acquireMs(ms)"
+        doc: "Acquires the wake lock with a timeout. The lock is automatically released after the timeout expires."
+
+imports:
+  - "time"

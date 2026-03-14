@@ -1,0 +1,83 @@
+package: biometric
+go_import: "github.com/xaionaro-go/jni/hardware/biometric"
+
+go_types:
+  - go_name: Strength
+    doc: "Authenticator strength requirement"
+    base_type: int
+
+  - go_name: PromptConfig
+    doc: "Configuration for the biometric prompt"
+    fields:
+      - { go_name: Title, go_type: string }
+      - { go_name: Subtitle, go_type: string }
+      - { go_name: Description, go_type: string }
+      - { go_name: NegativeButton, go_type: string, doc: "Text for cancel button (required if no Credential)" }
+      - { go_name: Authenticators, go_type: Strength, doc: "Allowed authenticator types" }
+
+  - go_name: AuthResult
+    doc: "Result of a successful authentication"
+    fields: []  # crypto object available if CryptoObject was passed
+
+  - go_name: AuthError
+    doc: "Authentication error"
+    fields:
+      - { go_name: Code, go_type: int }
+      - { go_name: Message, go_type: string }
+    implements_error: true  # generate Error() string method
+
+overrides:
+  android.hardware.biometrics.BiometricManager:
+    constructor:
+      go_name: NewManager
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+
+    composite_methods:
+      - go_name: CanAuthenticate
+        doc: "Check if biometric authentication is available"
+        params: [{ go_name: strength, go_type: Strength }]
+        returns: { go_type: bool }
+        implementation_notes: |
+          Call canAuthenticateRaw(int(strength)), return result == BiometricSuccess (0)
+
+      - go_name: Authenticate
+        doc: "Show the biometric prompt and block until result (nil on success, *AuthError on failure)"
+        params:
+          - { go_name: activity, go_type: "*app.Activity" }
+          - { go_name: config, go_type: PromptConfig }
+        returns: { go_type: "*AuthResult", error: true }
+        implementation_notes: |
+          1. Build BiometricPrompt via Builder(ctx):
+             - setTitle(config.Title)
+             - setSubtitle(config.Subtitle) if non-empty
+             - setDescription(config.Description) if non-empty
+             - setAllowedAuthenticators(int(config.Authenticators))
+             - If config.NegativeButton != "": setNegativeButton(text, executor, listener)
+             - build()
+          2. Create CancellationSignal
+          3. Create AuthenticationCallback with channels:
+             - OnSucceeded: send AuthResult to channel
+             - OnError: send AuthError to channel
+             - OnFailed: send AuthError{Code: -1, Message: "biometric not recognized"}
+          4. Call prompt.authenticate(cancelSignal, executor, callback)
+          5. Block on channel, return result
+          6. Error type is *AuthError (implements error)
+
+      - go_name: AuthenticateAsync
+        doc: "Show the biometric prompt with async callbacks"
+        params:
+          - { go_name: activity, go_type: "*app.Activity" }
+          - { go_name: config, go_type: PromptConfig }
+          - { go_name: onSuccess, go_type: "func(AuthResult)" }
+          - { go_name: onError, go_type: "func(AuthError)" }
+          - { go_name: onFailed, go_type: "func()" }
+        returns: { go_type: "cancel func()", error: true }
+        implementation_notes: |
+          1. Same builder setup as Authenticate
+          2. Create CancellationSignal
+          3. Create AuthenticationCallback forwarding to onSuccess/onError/onFailed
+          4. Call prompt.authenticate(cancelSignal, executor, callback)
+          5. Return cancel func that calls cancelSignal.cancel()
+
+imports:
+  - "github.com/xaionaro-go/jni/app"

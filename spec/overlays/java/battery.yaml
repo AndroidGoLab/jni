@@ -1,0 +1,33 @@
+overlays:
+  - target: battery
+    synthetic_functions:
+      - go_name: Get
+        go_signature: "func Get(ctx *app.Context) (*Info, error)"
+        doc: "Returns current battery information by reading the sticky BATTERY_CHANGED broadcast."
+        implementation:
+          - call ctx.RegisterReceiver([]string{"android.intent.action.BATTERY_CHANGED"}, handler)
+            with sticky=true to get the current Intent immediately
+          - "extract extras from the returned Intent:"
+          - '  level = intent.getIntExtra("level", -1)'
+          - '  scale = intent.getIntExtra("scale", 100)'
+          - "  Level = int(level * 100 / scale)  # normalize to 0-100"
+          - '  Status = Status(intent.getIntExtra("status", 1))'
+          - '  temperatureRaw = intent.getIntExtra("temperature", 0)'
+          - "  Temperature = float32(temperatureRaw) / 10.0  # tenths C -> C"
+          - '  voltageRaw = intent.getIntExtra("voltage", 0)'
+          - "  Voltage = float32(voltageRaw) / 1000.0  # mV -> V"
+          - '  Plugged = intent.getIntExtra("plugged", 0)'
+          - unregister the receiver immediately (one-shot read)
+          - "return &Info{Level, Status, Temperature, Voltage, Plugged}"
+
+go_types:
+  - name: Status
+    underlying: int
+
+  - name: Info
+    fields:
+      - { name: Level, type: int, doc: "Battery level 0-100" }
+      - { name: Status, type: Status }
+      - { name: Temperature, type: float32, doc: "Temperature in degrees Celsius" }
+      - { name: Voltage, type: float32, doc: "Voltage in Volts" }
+      - { name: Plugged, type: int, doc: "0=none, 1=AC, 2=USB, 4=wireless" }

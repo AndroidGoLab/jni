@@ -1,0 +1,576 @@
+package: app
+go_import: "github.com/xaionaro-go/jni/app"
+
+classes:
+  # ---------- android.content.Context ----------
+  - java_class: android.content.Context
+    go_type: Context
+    obtain: constructor
+    close: true
+    methods:
+      - java_method: getSystemService
+        go_name: GetSystemService
+        params:
+          - java_type: String
+            go_name: name
+        returns: Object
+        error: true
+
+      - java_method: getPackageName
+        go_name: PackageName
+        params: []
+        returns: String
+        error: true
+
+      - java_method: getApplicationContext
+        go_name: ApplicationContext
+        params: []
+        returns: android.content.Context
+        error: true
+
+      - java_method: startActivity
+        go_name: StartActivity
+        params:
+          - java_type: android.content.Intent
+            go_name: intent
+        returns: void
+        error: true
+
+      - java_method: sendBroadcast
+        go_name: SendBroadcast
+        params:
+          - java_type: android.content.Intent
+            go_name: intent
+        returns: void
+        error: true
+
+      - java_method: startService
+        go_name: StartService
+        params:
+          - java_type: android.content.Intent
+            go_name: intent
+        returns: android.content.ComponentName
+        error: true
+
+      - java_method: registerReceiver
+        go_name: RegisterReceiverRaw
+        params:
+          - java_type: android.content.BroadcastReceiver
+            go_name: receiver
+          - java_type: android.content.IntentFilter
+            go_name: filter
+        returns: android.content.Intent
+        error: true
+
+      - java_method: unregisterReceiver
+        go_name: UnregisterReceiver
+        params:
+          - java_type: android.content.BroadcastReceiver
+            go_name: receiver
+        returns: void
+        error: true
+
+      - java_method: getContentResolver
+        go_name: ContentResolver
+        params: []
+        returns: android.content.ContentResolver
+        error: false
+
+      - java_method: getPackageManager
+        go_name: PackageManager
+        params: []
+        returns: android.content.pm.PackageManager
+        error: true
+
+      - java_method: getCacheDir
+        go_name: CacheDir
+        params: []
+        returns: java.io.File
+        error: true
+
+      - java_method: getFilesDir
+        go_name: FilesDir
+        params: []
+        returns: java.io.File
+        error: true
+
+      - java_method: getExternalFilesDir
+        go_name: ExternalFilesDir
+        params:
+          - java_type: String
+            go_name: typ
+        returns: java.io.File
+        error: true
+
+      - java_method: getExternalCacheDir
+        go_name: ExternalCacheDir
+        params: []
+        returns: java.io.File
+        error: true
+
+      - java_method: getDataDir
+        go_name: DataDir
+        params: []
+        returns: java.io.File
+        error: true
+
+  # ---------- android.app.Activity ----------
+  - java_class: android.app.Activity
+    go_type: Activity
+    obtain: constructor
+    close: false
+    methods:
+      - java_method: finish
+        go_name: Finish
+        params: []
+        returns: void
+        error: true
+
+      - java_method: getIntent
+        go_name: GetIntent
+        params: []
+        returns: android.content.Intent
+        error: true
+
+      - java_method: setResult
+        go_name: SetResult
+        params:
+          - java_type: int
+            go_name: resultCode
+          - java_type: android.content.Intent
+            go_name: data
+        returns: void
+        error: false
+
+      - java_method: getWindow
+        go_name: GetWindow
+        params: []
+        returns: android.view.Window
+        error: true
+
+      - java_method: runOnUiThread
+        go_name: RunOnUiThread
+        params:
+          - java_type: java.lang.Runnable
+            go_name: fn
+        returns: void
+        error: true
+
+      - java_method: startActivityForResult
+        go_name: StartActivityForResult
+        params:
+          - java_type: android.content.Intent
+            go_name: intent
+          - java_type: int
+            go_name: requestCode
+        returns: void
+        error: true
+
+  # ---------- android.content.Intent ----------
+  - java_class: android.content.Intent
+    go_type: Intent
+    obtain: constructor
+    kind: builder
+    methods:
+      - java_method: setAction
+        go_name: SetAction
+        params:
+          - java_type: String
+            go_name: action
+        returns: android.content.Intent
+        error: false
+
+      - java_method: setData
+        go_name: SetData
+        params:
+          - java_type: android.net.Uri
+            go_name: uri
+        returns: android.content.Intent
+        error: false
+
+      - java_method: setComponent
+        go_name: SetComponent
+        params:
+          - java_type: android.content.ComponentName
+            go_name: component
+        returns: android.content.Intent
+        error: false
+
+      - java_method: setFlags
+        go_name: SetFlags
+        params:
+          - java_type: int
+            go_name: flags
+        returns: android.content.Intent
+        error: false
+
+      - java_method: addFlags
+        go_name: AddFlags
+        params:
+          - java_type: int
+            go_name: flags
+        returns: android.content.Intent
+        error: false
+
+      - java_method: addCategory
+        go_name: AddCategory
+        params:
+          - java_type: String
+            go_name: category
+        returns: android.content.Intent
+        error: false
+
+      - java_method: setPackage
+        go_name: SetPackage
+        params:
+          - java_type: String
+            go_name: pkg
+        returns: android.content.Intent
+        error: false
+
+      - java_method: setType
+        go_name: SetType
+        params:
+          - java_type: String
+            go_name: mimeType
+        returns: android.content.Intent
+        error: false
+
+      - java_method: getAction
+        go_name: GetAction
+        params: []
+        returns: String
+        error: false
+
+      - java_method: getData
+        go_name: GetData
+        params: []
+        returns: android.net.Uri
+        error: false
+
+      - java_method: getStringExtra
+        go_name: GetStringExtra
+        params:
+          - java_type: String
+            go_name: key
+        returns: String
+        error: false
+
+      - java_method: getBooleanExtra
+        go_name: GetBoolExtra
+        params:
+          - java_type: String
+            go_name: key
+          - java_type: boolean
+            go_name: defaultVal
+        returns: boolean
+        error: false
+
+      - java_method: getIntExtra
+        go_name: GetIntExtra
+        params:
+          - java_type: String
+            go_name: key
+          - java_type: int
+            go_name: defaultVal
+        returns: int
+        error: false
+
+      - java_method: putExtra
+        go_name: PutStringExtra
+        params:
+          - java_type: String
+            go_name: key
+          - java_type: String
+            go_name: value
+        returns: android.content.Intent
+        error: false
+
+      - java_method: putExtra
+        go_name: PutIntExtra
+        params:
+          - java_type: String
+            go_name: key
+          - java_type: int
+            go_name: value
+        returns: android.content.Intent
+        error: false
+
+      - java_method: putExtra
+        go_name: PutBoolExtra
+        params:
+          - java_type: String
+            go_name: key
+          - java_type: boolean
+            go_name: value
+        returns: android.content.Intent
+        error: false
+
+      - java_method: putExtra
+        go_name: PutLongExtra
+        params:
+          - java_type: String
+            go_name: key
+          - java_type: long
+            go_name: value
+        returns: android.content.Intent
+        error: false
+
+  # ---------- android.app.PendingIntent ----------
+  - java_class: android.app.PendingIntent
+    go_type: PendingIntent
+    obtain: static_factory
+    methods:
+      - java_method: getActivity
+        go_name: NewPendingActivity
+        static: true
+        params:
+          - java_type: android.content.Context
+            go_name: ctx
+          - java_type: int
+            go_name: requestCode
+          - java_type: android.content.Intent
+            go_name: intent
+          - java_type: int
+            go_name: flags
+        returns: android.app.PendingIntent
+        error: true
+
+      - java_method: getBroadcast
+        go_name: NewPendingBroadcast
+        static: true
+        params:
+          - java_type: android.content.Context
+            go_name: ctx
+          - java_type: int
+            go_name: requestCode
+          - java_type: android.content.Intent
+            go_name: intent
+          - java_type: int
+            go_name: flags
+        returns: android.app.PendingIntent
+        error: true
+
+      - java_method: getService
+        go_name: NewPendingService
+        static: true
+        params:
+          - java_type: android.content.Context
+            go_name: ctx
+          - java_type: int
+            go_name: requestCode
+          - java_type: android.content.Intent
+            go_name: intent
+          - java_type: int
+            go_name: flags
+        returns: android.app.PendingIntent
+        error: true
+
+  # ---------- android.os.Bundle ----------
+  - java_class: android.os.Bundle
+    go_type: Bundle
+    obtain: constructor
+    kind: data_class
+    methods:
+      - java_method: getString
+        go_name: GetString
+        params:
+          - java_type: String
+            go_name: key
+        returns: String
+        error: false
+
+      - java_method: getInt
+        go_name: GetInt
+        params:
+          - java_type: String
+            go_name: key
+        returns: int
+        error: false
+
+      - java_method: getBoolean
+        go_name: GetBool
+        params:
+          - java_type: String
+            go_name: key
+        returns: boolean
+        error: false
+
+      - java_method: getLong
+        go_name: GetLong
+        params:
+          - java_type: String
+            go_name: key
+        returns: long
+        error: false
+
+      - java_method: getFloat
+        go_name: GetFloat
+        params:
+          - java_type: String
+            go_name: key
+        returns: float
+        error: false
+
+      - java_method: getDouble
+        go_name: GetDouble
+        params:
+          - java_type: String
+            go_name: key
+        returns: double
+        error: false
+
+      - java_method: putString
+        go_name: PutString
+        params:
+          - java_type: String
+            go_name: key
+          - java_type: String
+            go_name: value
+        returns: void
+        error: false
+
+      - java_method: putInt
+        go_name: PutInt
+        params:
+          - java_type: String
+            go_name: key
+          - java_type: int
+            go_name: value
+        returns: void
+        error: false
+
+      - java_method: putBoolean
+        go_name: PutBool
+        params:
+          - java_type: String
+            go_name: key
+          - java_type: boolean
+            go_name: value
+        returns: void
+        error: false
+
+      - java_method: putLong
+        go_name: PutLong
+        params:
+          - java_type: String
+            go_name: key
+          - java_type: long
+            go_name: value
+        returns: void
+        error: false
+
+      - java_method: putFloat
+        go_name: PutFloat
+        params:
+          - java_type: String
+            go_name: key
+          - java_type: float
+            go_name: value
+        returns: void
+        error: false
+
+      - java_method: putDouble
+        go_name: PutDouble
+        params:
+          - java_type: String
+            go_name: key
+          - java_type: double
+            go_name: value
+        returns: void
+        error: false
+
+      - java_method: putStringArray
+        go_name: PutStringArray
+        params:
+          - java_type: String
+            go_name: key
+          - java_type: String[]
+            go_name: value
+        returns: void
+        error: false
+
+      - java_method: keySet
+        go_name: KeySet
+        params: []
+        returns: java.util.Set
+        error: false
+
+      - java_method: containsKey
+        go_name: ContainsKey
+        params:
+          - java_type: String
+            go_name: key
+        returns: boolean
+        error: false
+
+      - java_method: size
+        go_name: Size
+        params: []
+        returns: int
+        error: false
+
+      - java_method: isEmpty
+        go_name: IsEmpty
+        params: []
+        returns: boolean
+        error: false
+
+  # ---------- android.content.BroadcastReceiver ----------
+  - java_class: android.content.BroadcastReceiver
+    go_type: BroadcastReceiver
+    obtain: callback
+
+callbacks:
+  - java_interface: android.content.BroadcastReceiver
+    go_type: broadcastReceiver
+    methods:
+      - java_method: onReceive
+        params:
+          - android.content.Context
+          - android.content.Intent
+        go_field: OnReceive
+
+  - java_interface: java.lang.Runnable
+    go_type: runnable
+    methods:
+      - java_method: run
+        params: []
+        go_field: OnRun
+
+constants:
+  # Intent actions
+  - go_name: ActionView
+    value: '"android.intent.action.VIEW"'
+    go_type: string
+  - go_name: ActionSend
+    value: '"android.intent.action.SEND"'
+    go_type: string
+  - go_name: ActionDial
+    value: '"android.intent.action.DIAL"'
+    go_type: string
+  - go_name: ActionPick
+    value: '"android.intent.action.PICK"'
+    go_type: string
+
+  # Intent flags
+  - go_name: FlagNewTask
+    value: "0x10000000"
+    go_type: int32
+  - go_name: FlagClearTop
+    value: "0x04000000"
+    go_type: int32
+  - go_name: FlagGrantReadURI
+    value: "0x00000001"
+    go_type: int32
+
+  # PendingIntent flags
+  - go_name: PendingFlagImmutable
+    value: "1 << 26"
+    go_type: int32
+  - go_name: PendingFlagMutable
+    value: "1 << 25"
+    go_type: int32
+  - go_name: PendingFlagUpdateCurrent
+    value: "1 << 27"
+    go_type: int32

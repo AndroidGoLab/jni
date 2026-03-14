@@ -1,0 +1,28 @@
+package: display
+go_import: "github.com/xaionaro-go/jni/view/display"
+
+# Combine WindowManager + Display + DisplayMetrics into single Info struct
+composite_type:
+  go_name: Info
+  doc: "Screen size, density, refresh rate"
+  fields:
+    - { go_name: Width,       go_type: int32,   doc: "Screen width in pixels" }
+    - { go_name: Height,      go_type: int32,   doc: "Screen height in pixels" }
+    - { go_name: DensityDPI,  go_type: int32,   doc: "Screen density in DPI" }
+    - { go_name: RefreshRate, go_type: float32,  doc: "Display refresh rate in Hz" }
+    - { go_name: Rotation,    go_type: int32,   doc: "Display rotation: 0, 90, 180, 270" }
+
+# Single package-level function
+package_func:
+  go_name: Get
+  doc: "Get reads display information"
+  params: [{ go_name: ctx, go_type: "*app.Context" }]
+  returns: { go_type: "*Info", error: true }
+  implementation_notes: |
+    1. Get WindowManager via ctx.GetSystemService("window")
+    2. Call windowManager.getDefaultDisplay() → Display
+    3. Create DisplayMetrics, call display.getRealMetrics(metrics)
+    4. Read widthPixels, heightPixels, densityDpi from metrics
+    5. Call display.getRotation() → multiply by 90 for degrees
+    6. Call display.getRefreshRate()
+    7. Populate Info struct

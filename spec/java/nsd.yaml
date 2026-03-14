@@ -1,0 +1,133 @@
+package: nsd
+go_import: "github.com/xaionaro-go/jni/net/nsd"
+
+classes:
+  - java_class: android.net.nsd.NsdManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "servicediscovery"
+    close: true
+
+    methods:
+      - java_method: discoverServices
+        go_name: discoverServicesRaw
+        params:
+          - { java_type: String, go_name: serviceType }
+          - { java_type: int, go_name: protocolType }
+          - { java_type: android.net.nsd.NsdManager$DiscoveryListener, go_name: listener }
+        returns: void
+        error: true
+
+      - java_method: stopServiceDiscovery
+        go_name: stopServiceDiscoveryRaw
+        params:
+          - { java_type: android.net.nsd.NsdManager$DiscoveryListener, go_name: listener }
+        returns: void
+        error: true
+
+      - java_method: resolveService
+        go_name: resolveServiceRaw
+        params:
+          - { java_type: android.net.nsd.NsdServiceInfo, go_name: serviceInfo }
+          - { java_type: android.net.nsd.NsdManager$ResolveListener, go_name: listener }
+        returns: void
+        error: true
+
+      - java_method: registerService
+        go_name: registerServiceRaw
+        params:
+          - { java_type: android.net.nsd.NsdServiceInfo, go_name: serviceInfo }
+          - { java_type: int, go_name: protocolType }
+          - { java_type: android.net.nsd.NsdManager$RegistrationListener, go_name: listener }
+        returns: void
+        error: true
+
+      - java_method: unregisterService
+        go_name: unregisterServiceRaw
+        params:
+          - { java_type: android.net.nsd.NsdManager$RegistrationListener, go_name: listener }
+        returns: void
+        error: true
+
+  - java_class: android.net.nsd.NsdServiceInfo
+    go_type: nsdServiceInfo
+    obtain: constructor
+    kind: builder
+    methods:
+      - java_method: setServiceName
+        go_name: setServiceName
+        params: [{ java_type: String, go_name: name }]
+        returns: void
+        error: false
+
+      - java_method: setServiceType
+        go_name: setServiceType
+        params: [{ java_type: String, go_name: serviceType }]
+        returns: void
+        error: false
+
+      - java_method: setPort
+        go_name: setPort
+        params: [{ java_type: int, go_name: port }]
+        returns: void
+        error: false
+
+      - java_method: setAttribute
+        go_name: setAttribute
+        params:
+          - { java_type: String, go_name: key }
+          - { java_type: String, go_name: value }
+        returns: void
+        error: false
+
+      - java_method: getServiceName
+        go_name: getServiceName
+        params: []
+        returns: String
+        error: false
+
+      - java_method: getServiceType
+        go_name: getServiceType
+        params: []
+        returns: String
+        error: false
+
+      - java_method: getHost
+        go_name: getHost
+        params: []
+        returns: java.net.InetAddress
+        error: false
+
+      - java_method: getPort
+        go_name: getPort
+        params: []
+        returns: int
+        error: false
+
+callbacks:
+  - java_interface: android.net.nsd.NsdManager$DiscoveryListener
+    go_type: discoveryListener
+    methods:
+      - { java_method: onServiceFound, params: [android.net.nsd.NsdServiceInfo], go_field: OnServiceFound }
+      - { java_method: onServiceLost, params: [android.net.nsd.NsdServiceInfo], go_field: OnServiceLost }
+      - { java_method: onDiscoveryStarted, params: [String], go_field: OnDiscoveryStarted }
+      - { java_method: onDiscoveryStopped, params: [String], go_field: OnDiscoveryStopped }
+      - { java_method: onStartDiscoveryFailed, params: [String, int], go_field: OnStartDiscoveryFailed }
+      - { java_method: onStopDiscoveryFailed, params: [String, int], go_field: OnStopDiscoveryFailed }
+
+  - java_interface: android.net.nsd.NsdManager$ResolveListener
+    go_type: resolveListener
+    methods:
+      - { java_method: onServiceResolved, params: [android.net.nsd.NsdServiceInfo], go_field: OnServiceResolved }
+      - { java_method: onResolveFailed, params: [android.net.nsd.NsdServiceInfo, int], go_field: OnResolveFailed }
+
+  - java_interface: android.net.nsd.NsdManager$RegistrationListener
+    go_type: registrationListener
+    methods:
+      - { java_method: onServiceRegistered, params: [android.net.nsd.NsdServiceInfo], go_field: OnServiceRegistered }
+      - { java_method: onRegistrationFailed, params: [android.net.nsd.NsdServiceInfo, int], go_field: OnRegistrationFailed }
+      - { java_method: onServiceUnregistered, params: [android.net.nsd.NsdServiceInfo], go_field: OnServiceUnregistered }
+      - { java_method: onUnregistrationFailed, params: [android.net.nsd.NsdServiceInfo, int], go_field: OnUnregistrationFailed }
+
+constants:
+  - { go_name: ProtocolDNSSD, value: "1", go_type: int }

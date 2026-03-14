@@ -1,0 +1,116 @@
+package: alarm
+go_import: "github.com/xaionaro-go/jni/app/alarm"
+
+classes:
+  - java_class: android.app.AlarmManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "alarm"
+    close: true
+
+    methods:
+      - java_method: set
+        params:
+          - { java_type: int, go_name: type }
+          - { java_type: long, go_name: triggerAtMillis }
+          - { java_type: android.app.PendingIntent, go_name: operation }
+        returns: void
+        go_name: setRaw
+        error: true
+
+      - java_method: setExact
+        params:
+          - { java_type: int, go_name: type }
+          - { java_type: long, go_name: triggerAtMillis }
+          - { java_type: android.app.PendingIntent, go_name: operation }
+        returns: void
+        go_name: setExactRaw
+        error: true
+
+      - java_method: setExactAndAllowWhileIdle
+        params:
+          - { java_type: int, go_name: type }
+          - { java_type: long, go_name: triggerAtMillis }
+          - { java_type: android.app.PendingIntent, go_name: operation }
+        returns: void
+        go_name: setExactAndAllowWhileIdleRaw
+        error: true
+
+      - java_method: setRepeating
+        params:
+          - { java_type: int, go_name: type }
+          - { java_type: long, go_name: triggerAtMillis }
+          - { java_type: long, go_name: intervalMillis }
+          - { java_type: android.app.PendingIntent, go_name: operation }
+        returns: void
+        go_name: setRepeatingRaw
+        error: true
+
+      - java_method: setWindow
+        params:
+          - { java_type: int, go_name: type }
+          - { java_type: long, go_name: windowStartMillis }
+          - { java_type: long, go_name: windowLengthMillis }
+          - { java_type: android.app.PendingIntent, go_name: operation }
+        returns: void
+        go_name: setWindowRaw
+        error: true
+
+      - java_method: setAlarmClock
+        params:
+          - { java_type: android.app.AlarmManager.AlarmClockInfo, go_name: info }
+          - { java_type: android.app.PendingIntent, go_name: operation }
+        returns: void
+        go_name: setAlarmClockRaw
+        error: true
+
+      - java_method: cancel
+        params:
+          - { java_type: android.app.PendingIntent, go_name: operation }
+        returns: void
+        go_name: Cancel
+        error: true
+
+      - java_method: getNextAlarmClock
+        params: []
+        returns: android.app.AlarmManager.AlarmClockInfo
+        go_name: getNextAlarmClockRaw
+        error: true
+
+      - java_method: canScheduleExactAlarms
+        params: []
+        returns: boolean
+        go_name: CanScheduleExactAlarms
+        error: true
+        min_api: 31
+
+  - java_class: android.app.AlarmManager.AlarmClockInfo
+    go_type: alarmClockInfo
+    kind: data_class
+    fields:
+      - { java_method: getTriggerTime, returns: long, go_name: TriggerTime, go_type: int64 }
+      - { java_method: getShowIntent, returns: android.app.PendingIntent, go_name: ShowIntent, go_type: "*app.PendingIntent" }
+
+    # Constructor for building AlarmClockInfo
+    obtain: constructor
+    constructor_params:
+      - { java_type: long, go_name: triggerTime }
+      - { java_type: android.app.PendingIntent, go_name: showIntent }
+
+constants:
+  - go_name: RTCWakeup
+    value: 0
+    go_type: int
+    java_source: android.app.AlarmManager.RTC_WAKEUP
+  - go_name: RTC
+    value: 1
+    go_type: int
+    java_source: android.app.AlarmManager.RTC
+  - go_name: ElapsedRealtimeWakeup
+    value: 2
+    go_type: int
+    java_source: android.app.AlarmManager.ELAPSED_REALTIME_WAKEUP
+  - go_name: ElapsedRealtime
+    value: 3
+    go_type: int
+    java_source: android.app.AlarmManager.ELAPSED_REALTIME

@@ -1,0 +1,23 @@
+package: build
+go_import: "github.com/xaionaro-go/jni/os/build"
+
+classes:
+  - java_class: android.os.Build
+    go_type: buildInfo  # internal
+    obtain: static_fields
+    static_fields:
+      - { java_field: MANUFACTURER, returns: String, go_name: Manufacturer, go_type: string }
+      - { java_field: MODEL,        returns: String, go_name: Model,        go_type: string }
+      - { java_field: BRAND,        returns: String, go_name: Brand,        go_type: string }
+      - { java_field: DEVICE,       returns: String, go_name: Device,       go_type: string }
+      - { java_field: HARDWARE,     returns: String, go_name: Hardware,     go_type: string }
+      - { java_field: PRODUCT,      returns: String, go_name: Product,      go_type: string }
+      - { java_field: FINGERPRINT,  returns: String, go_name: Fingerprint,  go_type: string }
+      - { java_field: ID,           returns: String, go_name: ID,           go_type: string }
+
+  - java_class: android.os.Build$VERSION
+    go_type: versionInfo  # internal
+    obtain: static_fields
+    static_fields:
+      - { java_field: SDK_INT, returns: int,    go_name: SDKInt,   go_type: int32 }
+      - { java_field: RELEASE, returns: String, go_name: Release,  go_type: string }

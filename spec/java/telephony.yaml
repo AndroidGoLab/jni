@@ -1,0 +1,52 @@
+package: telephony
+go_import: "github.com/xaionaro-go/jni/telephony"
+
+classes:
+  - java_class: android.telephony.TelephonyManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "phone"
+    close: false  # lightweight, no callbacks to unregister
+
+    methods:
+      - java_method: getNetworkOperatorName
+        params: []
+        returns: String
+        go_name: getNetworkOperatorName
+        error: true
+
+      - java_method: getNetworkOperator
+        params: []
+        returns: String
+        go_name: getNetworkOperator
+        error: true
+
+      - java_method: getPhoneType
+        params: []
+        returns: int
+        go_name: getPhoneType
+        error: true
+
+      - java_method: getSimState
+        params: []
+        returns: int
+        go_name: getSimState
+        error: true
+
+      - java_method: isNetworkRoaming
+        params: []
+        returns: boolean
+        go_name: isNetworkRoaming
+        error: true
+
+      - java_method: getDataState
+        params: []
+        returns: int
+        go_name: getDataState
+        error: true
+
+      - java_method: getDataNetworkType
+        params: []
+        returns: int
+        go_name: getDataNetworkType
+        error: true

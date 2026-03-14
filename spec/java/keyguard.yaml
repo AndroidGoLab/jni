@@ -1,0 +1,64 @@
+package: keyguard
+go_import: "github.com/xaionaro-go/jni/os/keyguard"
+
+classes:
+  - java_class: android.app.KeyguardManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "keyguard"
+    close: true
+
+    methods:
+      - java_method: isKeyguardLocked
+        params: []
+        returns: boolean
+        go_name: IsKeyguardLocked
+        error: true
+
+      - java_method: isKeyguardSecure
+        params: []
+        returns: boolean
+        go_name: IsKeyguardSecure
+        error: true
+
+      - java_method: isDeviceLocked
+        params: []
+        returns: boolean
+        go_name: IsDeviceLocked
+        error: true
+
+      - java_method: isDeviceSecure
+        params: []
+        returns: boolean
+        go_name: IsDeviceSecure
+        error: true
+
+      - java_method: requestDismissKeyguard
+        params:
+          - { java_type: android.app.Activity, go_name: activity }
+          - { java_type: android.app.KeyguardManager.KeyguardDismissCallback, go_name: callback }
+        returns: void
+        go_name: requestDismissKeyguardRaw
+        error: true
+
+      - java_method: createConfirmDeviceCredentialIntent
+        params:
+          - { java_type: java.lang.CharSequence, go_name: title }
+          - { java_type: java.lang.CharSequence, go_name: description }
+        returns: android.content.Intent
+        go_name: createConfirmDeviceCredentialIntentRaw
+        error: true
+
+callbacks:
+  - java_interface: android.app.KeyguardManager.KeyguardDismissCallback
+    go_type: keyguardDismissCallback
+    methods:
+      - { java_method: onDismissSucceeded, params: [], go_field: OnDismissSucceeded }
+      - { java_method: onDismissError, params: [], go_field: OnDismissError }
+      - { java_method: onDismissCancelled, params: [], go_field: OnDismissCancelled }
+
+  - java_interface: android.app.KeyguardManager.KeyguardLockedStateListener
+    go_type: keyguardLockedStateListener
+    min_api: 31
+    methods:
+      - { java_method: onKeyguardLockedStateChanged, params: [boolean], go_field: OnLockedStateChanged }

@@ -1,0 +1,270 @@
+# JNI API Specification
+#
+# Single source of truth for jnigen. Covers all ~230 JNI functions.
+# JNIEnv* and JavaVM* parameters are implicit and NOT listed in params.
+# Only "A" variants (jvalue array) for method calls — no variadic or va_list.
+
+primitives:
+  - { c_type: jboolean, go_type: uint8,   suffix: Boolean }
+  - { c_type: jbyte,    go_type: int8,    suffix: Byte }
+  - { c_type: jchar,    go_type: uint16,  suffix: Char }
+  - { c_type: jshort,   go_type: int16,   suffix: Short }
+  - { c_type: jint,     go_type: int32,   suffix: Int }
+  - { c_type: jlong,    go_type: int64,   suffix: Long }
+  - { c_type: jfloat,   go_type: float32, suffix: Float }
+  - { c_type: jdouble,  go_type: float64, suffix: Double }
+
+reference_types:
+  - { c_type: jobject,         parent: ~ }
+  - { c_type: jclass,          parent: jobject }
+  - { c_type: jstring,         parent: jobject }
+  - { c_type: jthrowable,      parent: jobject }
+  - { c_type: jarray,          parent: jobject }
+  - { c_type: jbooleanArray,   parent: jarray }
+  - { c_type: jbyteArray,      parent: jarray }
+  - { c_type: jcharArray,      parent: jarray }
+  - { c_type: jshortArray,     parent: jarray }
+  - { c_type: jintArray,       parent: jarray }
+  - { c_type: jlongArray,      parent: jarray }
+  - { c_type: jfloatArray,     parent: jarray }
+  - { c_type: jdoubleArray,    parent: jarray }
+  - { c_type: jobjectArray,    parent: jarray }
+  - { c_type: jweak,           parent: jobject }
+
+opaque_types:
+  - { c_type: jmethodID }
+  - { c_type: jfieldID }
+  - { c_type: jsize, go_type: int32 }
+
+# Typed families — generator expands {Type}/{type} across listed suffixes.
+#
+# Expansion rules:
+#   {Type} -> suffix (e.g. Int, Boolean)
+#   {type} -> c_type (e.g. jint, jboolean; Object -> jobject, Void -> void)
+#   {type}Array -> array c_type (e.g. jintArray, jbooleanArray)
+
+function_families:
+  # --- Instance method calls ---
+  - pattern: "Call{Type}MethodA"
+    vtable: JNIEnv
+    params: [jobject, jmethodID, "const jvalue*"]
+    returns: "{type}"
+    expand: [Boolean, Byte, Char, Short, Int, Long, Float, Double, Object, Void]
+    exception: true
+
+  # --- Static method calls ---
+  - pattern: "CallStatic{Type}MethodA"
+    vtable: JNIEnv
+    params: [jclass, jmethodID, "const jvalue*"]
+    returns: "{type}"
+    expand: [Boolean, Byte, Char, Short, Int, Long, Float, Double, Object, Void]
+    exception: true
+
+  # --- Nonvirtual method calls ---
+  - pattern: "CallNonvirtual{Type}MethodA"
+    vtable: JNIEnv
+    params: [jobject, jclass, jmethodID, "const jvalue*"]
+    returns: "{type}"
+    expand: [Boolean, Byte, Char, Short, Int, Long, Float, Double, Object, Void]
+    exception: true
+
+  # --- Instance field get ---
+  - pattern: "Get{Type}Field"
+    vtable: JNIEnv
+    params: [jobject, jfieldID]
+    returns: "{type}"
+    expand: [Boolean, Byte, Char, Short, Int, Long, Float, Double, Object]
+
+  # --- Instance field set ---
+  - pattern: "Set{Type}Field"
+    vtable: JNIEnv
+    params: [jobject, jfieldID, "{type}"]
+    returns: void
+    expand: [Boolean, Byte, Char, Short, Int, Long, Float, Double, Object]
+
+  # --- Static field get ---
+  - pattern: "GetStatic{Type}Field"
+    vtable: JNIEnv
+    params: [jclass, jfieldID]
+    returns: "{type}"
+    expand: [Boolean, Byte, Char, Short, Int, Long, Float, Double, Object]
+
+  # --- Static field set ---
+  - pattern: "SetStatic{Type}Field"
+    vtable: JNIEnv
+    params: [jclass, jfieldID, "{type}"]
+    returns: void
+    expand: [Boolean, Byte, Char, Short, Int, Long, Float, Double, Object]
+
+  # --- Primitive array creation ---
+  - pattern: "New{Type}Array"
+    vtable: JNIEnv
+    params: [jsize]
+    returns: "{type}Array"
+    expand: [Boolean, Byte, Char, Short, Int, Long, Float, Double]
+
+  # --- Get primitive array elements ---
+  - pattern: "Get{Type}ArrayElements"
+    vtable: JNIEnv
+    params: ["{type}Array", "jboolean*"]
+    returns: "{type}*"
+    expand: [Boolean, Byte, Char, Short, Int, Long, Float, Double]
+
+  # --- Release primitive array elements ---
+  - pattern: "Release{Type}ArrayElements"
+    vtable: JNIEnv
+    params: ["{type}Array", "{type}*", jint]
+    returns: void
+    expand: [Boolean, Byte, Char, Short, Int, Long, Float, Double]
+
+  # --- Get primitive array region ---
+  - pattern: "Get{Type}ArrayRegion"
+    vtable: JNIEnv
+    params: ["{type}Array", jsize, jsize, "{type}*"]
+    returns: void
+    expand: [Boolean, Byte, Char, Short, Int, Long, Float, Double]
+
+  # --- Set primitive array region ---
+  - pattern: "Set{Type}ArrayRegion"
+    vtable: JNIEnv
+    params: ["{type}Array", jsize, jsize, "const {type}*"]
+    returns: void
+    expand: [Boolean, Byte, Char, Short, Int, Long, Float, Double]
+
+# Individual JNIEnv functions not covered by typed families.
+# JNIEnv* is implicit — NOT listed in params.
+
+env_functions:
+  # Version
+  - { name: GetVersion, returns: jint }
+
+  # Class operations
+  - { name: DefineClass, params: ["const char*", jobject, "const jbyte*", jsize], returns: jclass, exception: true }
+  - { name: FindClass, params: ["const char*"], returns: jclass, exception: true }
+  - { name: GetSuperclass, params: [jclass], returns: jclass }
+  - { name: IsAssignableFrom, params: [jclass, jclass], returns: jboolean }
+
+  # Exceptions
+  - { name: Throw, params: [jthrowable], returns: jint }
+  - { name: ThrowNew, params: [jclass, "const char*"], returns: jint }
+  - { name: ExceptionOccurred, returns: jthrowable }
+  - { name: ExceptionDescribe, returns: void }
+  - { name: ExceptionClear, returns: void }
+  - { name: ExceptionCheck, returns: jboolean }
+  - { name: FatalError, params: ["const char*"], returns: void }
+
+  # References
+  - { name: NewGlobalRef, params: [jobject], returns: jobject }
+  - { name: DeleteGlobalRef, params: [jobject], returns: void }
+  - { name: NewLocalRef, params: [jobject], returns: jobject }
+  - { name: DeleteLocalRef, params: [jobject], returns: void }
+  - { name: NewWeakGlobalRef, params: [jobject], returns: jweak }
+  - { name: DeleteWeakGlobalRef, params: [jweak], returns: void }
+
+  # Local frames
+  - { name: PushLocalFrame, params: [jint], returns: jint }
+  - { name: PopLocalFrame, params: [jobject], returns: jobject }
+  - { name: EnsureLocalCapacity, params: [jint], returns: jint }
+
+  # Object operations
+  - { name: AllocObject, params: [jclass], returns: jobject, exception: true }
+  - { name: NewObjectA, params: [jclass, jmethodID, "const jvalue*"], returns: jobject, exception: true }
+  - { name: GetObjectClass, params: [jobject], returns: jclass }
+  - { name: IsInstanceOf, params: [jobject, jclass], returns: jboolean }
+  - { name: IsSameObject, params: [jobject, jobject], returns: jboolean }
+  - { name: GetObjectRefType, params: [jobject], returns: jobjectRefType }
+
+  # Method/Field ID lookup
+  - { name: GetMethodID, params: [jclass, "const char*", "const char*"], returns: jmethodID, exception: true }
+  - { name: GetStaticMethodID, params: [jclass, "const char*", "const char*"], returns: jmethodID, exception: true }
+  - { name: GetFieldID, params: [jclass, "const char*", "const char*"], returns: jfieldID, exception: true }
+  - { name: GetStaticFieldID, params: [jclass, "const char*", "const char*"], returns: jfieldID, exception: true }
+
+  # String operations
+  - { name: NewString, params: ["const jchar*", jsize], returns: jstring, exception: true }
+  - { name: GetStringLength, params: [jstring], returns: jsize }
+  - { name: GetStringChars, params: [jstring, "jboolean*"], returns: "const jchar*", exception: true }
+  - { name: ReleaseStringChars, params: [jstring, "const jchar*"], returns: void }
+  - { name: NewStringUTF, params: ["const char*"], returns: jstring, exception: true }
+  - { name: GetStringUTFLength, params: [jstring], returns: jsize }
+  - { name: GetStringUTFChars, params: [jstring, "jboolean*"], returns: "const char*", exception: true }
+  - { name: ReleaseStringUTFChars, params: [jstring, "const char*"], returns: void }
+  - { name: GetStringRegion, params: [jstring, jsize, jsize, "jchar*"], returns: void, exception: true }
+  - { name: GetStringUTFRegion, params: [jstring, jsize, jsize, "char*"], returns: void, exception: true }
+  - { name: GetStringCritical, params: [jstring, "jboolean*"], returns: "const jchar*" }
+  - { name: ReleaseStringCritical, params: [jstring, "const jchar*"], returns: void }
+
+  # Array operations (non-typed)
+  - { name: GetArrayLength, params: [jarray], returns: jsize }
+  - { name: NewObjectArray, params: [jsize, jclass, jobject], returns: jobjectArray, exception: true }
+  - { name: GetObjectArrayElement, params: [jobjectArray, jsize], returns: jobject, exception: true }
+  - { name: SetObjectArrayElement, params: [jobjectArray, jsize, jobject], returns: void, exception: true }
+  - { name: GetPrimitiveArrayCritical, params: [jarray, "jboolean*"], returns: "void*" }
+  - { name: ReleasePrimitiveArrayCritical, params: [jarray, "void*", jint], returns: void }
+
+  # Direct byte buffers (NIO)
+  - { name: NewDirectByteBuffer, params: ["void*", jlong], returns: jobject }
+  - { name: GetDirectBufferAddress, params: [jobject], returns: "void*" }
+  - { name: GetDirectBufferCapacity, params: [jobject], returns: jlong }
+
+  # Monitor (synchronization)
+  - { name: MonitorEnter, params: [jobject], returns: jint, exception: true }
+  - { name: MonitorExit, params: [jobject], returns: jint, exception: true }
+
+  # Reflection
+  - { name: FromReflectedMethod, params: [jobject], returns: jmethodID }
+  - { name: FromReflectedField, params: [jobject], returns: jfieldID }
+  - { name: ToReflectedMethod, params: [jclass, jmethodID, jboolean], returns: jobject }
+  - { name: ToReflectedField, params: [jclass, jfieldID, jboolean], returns: jobject }
+
+  # Native method registration
+  - { name: RegisterNatives, params: [jclass, "const JNINativeMethod*", jint], returns: jint }
+  - { name: UnregisterNatives, params: [jclass], returns: jint }
+
+# JavaVM vtable functions. JavaVM* is implicit.
+
+vm_functions:
+  - { name: DestroyJavaVM, returns: jint }
+  - { name: AttachCurrentThread, params: ["JNIEnv**", "void*"], returns: jint }
+  - { name: DetachCurrentThread, returns: jint }
+  - { name: GetEnv, params: ["void**", jint], returns: jint }
+  - { name: AttachCurrentThreadAsDaemon, params: ["JNIEnv**", "void*"], returns: jint }
+
+# JNI constants: return codes, version numbers, array release modes, booleans,
+# and jobjectRefType enum values.
+
+constants:
+  # Return codes
+  - { name: JNI_OK,         value: 0,  go_type: int32 }
+  - { name: JNI_ERR,        value: -1, go_type: int32 }
+  - { name: JNI_EDETACHED,  value: -2, go_type: int32 }
+  - { name: JNI_EVERSION,   value: -3, go_type: int32 }
+  - { name: JNI_ENOMEM,     value: -4, go_type: int32 }
+  - { name: JNI_EEXIST,     value: -5, go_type: int32 }
+  - { name: JNI_EINVAL,     value: -6, go_type: int32 }
+
+  # Version constants
+  - { name: JNI_VERSION_1_1,  value: "0x00010001", go_type: int32 }
+  - { name: JNI_VERSION_1_2,  value: "0x00010002", go_type: int32 }
+  - { name: JNI_VERSION_1_4,  value: "0x00010004", go_type: int32 }
+  - { name: JNI_VERSION_1_6,  value: "0x00010006", go_type: int32 }
+  - { name: JNI_VERSION_1_8,  value: "0x00010008", go_type: int32 }
+  - { name: JNI_VERSION_9,    value: "0x00090000", go_type: int32 }
+  - { name: JNI_VERSION_10,   value: "0x000a0000", go_type: int32 }
+  - { name: JNI_VERSION_19,   value: "0x00130000", go_type: int32 }
+  - { name: JNI_VERSION_20,   value: "0x00140000", go_type: int32 }
+  - { name: JNI_VERSION_21,   value: "0x00150000", go_type: int32 }
+
+  # Array release modes
+  - { name: JNI_COMMIT, value: 1, go_type: int32 }
+  - { name: JNI_ABORT,  value: 2, go_type: int32 }
+
+  # Boolean constants
+  - { name: JNI_FALSE, value: 0, go_type: uint8 }
+  - { name: JNI_TRUE,  value: 1, go_type: uint8 }
+
+  # jobjectRefType enum
+  - { name: JNIInvalidRefType,    value: 0, go_type: int32 }
+  - { name: JNILocalRefType,      value: 1, go_type: int32 }
+  - { name: JNIGlobalRefType,     value: 2, go_type: int32 }
+  - { name: JNIWeakGlobalRefType, value: 3, go_type: int32 }

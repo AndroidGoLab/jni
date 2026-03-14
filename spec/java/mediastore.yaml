@@ -1,0 +1,86 @@
+package: mediastore
+go_import: "github.com/xaionaro-go/jni/provider/media"
+
+classes:
+  - java_class: android.provider.MediaStore
+    go_type: mediaStore
+    obtain: static_only
+    methods:
+      - java_method: getExternalVolumeNames
+        go_name: getExternalVolumeNamesRaw
+        static: true
+        params:
+          - { java_type: android.content.Context, go_name: ctx }
+        returns: java.util.Set
+        error: true
+
+      - java_method: createWriteRequest
+        go_name: createWriteRequestRaw
+        static: true
+        params:
+          - { java_type: android.content.ContentResolver, go_name: resolver }
+          - { java_type: java.util.Collection, go_name: uris }
+        returns: android.app.PendingIntent
+        error: true
+
+      - java_method: createTrashRequest
+        go_name: createTrashRequestRaw
+        static: true
+        params:
+          - { java_type: android.content.ContentResolver, go_name: resolver }
+          - { java_type: java.util.Collection, go_name: uris }
+          - { java_type: boolean, go_name: trash }
+        returns: android.app.PendingIntent
+        error: true
+
+      - java_method: createDeleteRequest
+        go_name: createDeleteRequestRaw
+        static: true
+        params:
+          - { java_type: android.content.ContentResolver, go_name: resolver }
+          - { java_type: java.util.Collection, go_name: uris }
+        returns: android.app.PendingIntent
+        error: true
+
+      - java_method: createFavoriteRequest
+        go_name: createFavoriteRequestRaw
+        static: true
+        params:
+          - { java_type: android.content.ContentResolver, go_name: resolver }
+          - { java_type: java.util.Collection, go_name: uris }
+          - { java_type: boolean, go_name: favorite }
+        returns: android.app.PendingIntent
+        error: true
+
+constants:
+  # Intent actions
+  - { go_name: ActionImageCapture, value: '"android.media.action.IMAGE_CAPTURE"', go_type: string }
+  - { go_name: ActionVideoCapture, value: '"android.media.action.VIDEO_CAPTURE"', go_type: string }
+  - { go_name: ActionPickImages, value: '"android.provider.action.PICK_IMAGES"', go_type: string }
+  - { go_name: ExtraPickImagesMax, value: '"android.provider.extra.PICK_IMAGES_MAX"', go_type: string }
+
+  # Volume names
+  - { go_name: VolumeInternal, value: '"internal"', go_type: string }
+  - { go_name: VolumeExternal, value: '"external"', go_type: string }
+  - { go_name: VolumeExternalPrimary, value: '"external_primary"', go_type: string }
+
+  # Collection URIs
+  - { go_name: ImagesURI, value: '"content://media/external/images/media"', go_type: string }
+  - { go_name: VideoURI, value: '"content://media/external/video/media"', go_type: string }
+  - { go_name: AudioURI, value: '"content://media/external/audio/media"', go_type: string }
+  - { go_name: DownloadsURI, value: '"content://media/external/downloads"', go_type: string }
+  - { go_name: FilesURI, value: '"content://media/external/file"', go_type: string }
+
+  # Column names
+  - { go_name: ColumnID, value: '"_id"', go_type: string }
+  - { go_name: ColumnDisplayName, value: '"_display_name"', go_type: string }
+  - { go_name: ColumnMimeType, value: '"mime_type"', go_type: string }
+  - { go_name: ColumnSize, value: '"_size"', go_type: string }
+  - { go_name: ColumnDateAdded, value: '"date_added"', go_type: string }
+  - { go_name: ColumnDateModified, value: '"date_modified"', go_type: string }
+  - { go_name: ColumnRelativePath, value: '"relative_path"', go_type: string }
+  - { go_name: ColumnDuration, value: '"duration"', go_type: string }
+  - { go_name: ColumnWidth, value: '"width"', go_type: string }
+  - { go_name: ColumnHeight, value: '"height"', go_type: string }
+
+callbacks: []

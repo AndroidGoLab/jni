@@ -1,0 +1,48 @@
+package: battery
+go_import: "github.com/xaionaro-go/jni/os/battery"
+
+classes:
+  - java_class: android.os.BatteryManager
+    go_type: batteryManager
+    obtain: sticky_broadcast
+    action: "android.intent.action.BATTERY_CHANGED"
+
+    methods: []
+
+intent_extras:
+  - java_extra: "level"
+    java_type: int
+    go_name: levelRaw
+  - java_extra: "scale"
+    java_type: int
+    go_name: scaleRaw
+  - java_extra: "status"
+    java_type: int
+    go_name: Status
+    go_type: Status
+  - java_extra: "temperature"
+    java_type: int
+    go_name: temperatureRaw
+    doc: "Temperature in tenths of a degree Celsius"
+  - java_extra: "voltage"
+    java_type: int
+    go_name: voltageRaw
+    doc: "Voltage in millivolts"
+  - java_extra: "plugged"
+    java_type: int
+    go_name: Plugged
+    go_type: int
+
+constants:
+  - { go_name: StatusUnknown, value: 1, go_type: Status }
+  - { go_name: StatusCharging, value: 2, go_type: Status }
+  - { go_name: StatusDischarging, value: 3, go_type: Status }
+  - { go_name: StatusNotCharging, value: 4, go_type: Status }
+  - { go_name: StatusFull, value: 5, go_type: Status }
+  # Plugged sources
+  - { go_name: PluggedNone, value: 0, go_type: int }
+  - { go_name: PluggedAC, value: 1, go_type: int }
+  - { go_name: PluggedUSB, value: 2, go_type: int }
+  - { go_name: PluggedWireless, value: 4, go_type: int }
+
+callbacks: []
