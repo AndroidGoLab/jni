@@ -74,7 +74,40 @@ func buildCLIPackage(
 	if len(pkg.Services) == 0 {
 		return nil
 	}
+
+	// Deduplicate Go variable names to prevent redeclaration errors.
+	// This can happen when a service name and an RPC name combine to
+	// produce the same var prefix (e.g., DownloadManager service has
+	// RPC "Query" and there's also a DownloadManagerQuery service).
+	deduplicateVarNames(pkg)
+
 	return pkg
+}
+
+// deduplicateVarNames detects and renames colliding Go variable names
+// across all services and commands in a package.
+func deduplicateVarNames(pkg *CLIPackage) {
+	seen := make(map[string]bool)
+
+	// Register service-level var names first.
+	for si := range pkg.Services {
+		svc := &pkg.Services[si]
+		varName := pkg.VarPrefix + svc.VarName + "Cmd"
+		if seen[varName] {
+			svc.VarName = svc.VarName + "Svc"
+		}
+		seen[pkg.VarPrefix+svc.VarName+"Cmd"] = true
+
+		// Register command-level var names.
+		for ci := range svc.Commands {
+			cmd := &svc.Commands[ci]
+			cmdVar := pkg.VarPrefix + svc.VarName + cmd.VarName + "Cmd"
+			if seen[cmdVar] {
+				cmd.VarName = cmd.VarName + "Rpc"
+			}
+			seen[pkg.VarPrefix+svc.VarName+cmd.VarName+"Cmd"] = true
+		}
+	}
 }
 
 // buildMessageFieldMap creates a lookup from message name to its fields.
@@ -114,7 +147,7 @@ func buildCLIService(
 			continue
 		}
 
-		cmd := buildCLICommand(rpc, msgFields)
+		cmd := buildCLICommand(rpc, msgFields, goClientNames)
 		cs.Commands = append(cs.Commands, cmd)
 	}
 
@@ -125,13 +158,24 @@ func buildCLIService(
 func buildCLICommand(
 	rpc protogen.ProtoRPC,
 	msgFields map[string][]protogen.ProtoField,
+	goClientNames map[string]string,
 ) CLICommand {
+	// Resolve RPC name through protoc naming (e.g., A2dp → A2Dp).
+	rpcName := rpc.Name
+	if resolved, ok := goClientNames[strings.ToLower(rpc.Name)]; ok {
+		rpcName = resolved
+	}
+	// Also resolve request type name through protoc naming.
+	reqType := rpc.InputType
+	if resolved, ok := goClientNames[strings.ToLower(rpc.InputType)]; ok {
+		reqType = resolved
+	}
 	cmd := CLICommand{
-		RPCName:         rpc.Name,
+		RPCName:         rpcName,
 		CobraName:       toKebabCase(rpc.Name),
 		VarName:         rpc.Name,
 		Short:           rpc.Name + " RPC",
-		RequestType:     rpc.InputType,
+		RequestType:     reqType,
 		ServerStreaming: rpc.ServerStreaming,
 		ClientStreaming: rpc.ClientStreaming,
 	}

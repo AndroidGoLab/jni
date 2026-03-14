@@ -8,10 +8,24 @@ import (
 	handlepb "github.com/xaionaro-go/jni/proto/handlestore"
 	"google.golang.org/grpc"
 
+	adminserver "github.com/xaionaro-go/jni/grpc/server/admin"
+	adminpb "github.com/xaionaro-go/jni/proto/admin"
 	alarmserver "github.com/xaionaro-go/jni/grpc/server/alarm"
 	alarmpb "github.com/xaionaro-go/jni/proto/alarm"
-	bluetoothserver "github.com/xaionaro-go/jni/grpc/server/bluetooth"
-	bluetoothpb "github.com/xaionaro-go/jni/proto/bluetooth"
+	audiomanagerserver "github.com/xaionaro-go/jni/grpc/server/audiomanager"
+	audiomanagerpb "github.com/xaionaro-go/jni/proto/audiomanager"
+	batteryserver "github.com/xaionaro-go/jni/grpc/server/battery"
+	batterypb "github.com/xaionaro-go/jni/proto/battery"
+	blobserver "github.com/xaionaro-go/jni/grpc/server/blob"
+	blobpb "github.com/xaionaro-go/jni/proto/blob"
+	cameraserver "github.com/xaionaro-go/jni/grpc/server/camera"
+	camerapb "github.com/xaionaro-go/jni/proto/camera"
+	clipboardserver "github.com/xaionaro-go/jni/grpc/server/clipboard"
+	clipboardpb "github.com/xaionaro-go/jni/proto/clipboard"
+	companionserver "github.com/xaionaro-go/jni/grpc/server/companion"
+	companionpb "github.com/xaionaro-go/jni/proto/companion"
+	inputmethodserver "github.com/xaionaro-go/jni/grpc/server/inputmethod"
+	inputmethodpb "github.com/xaionaro-go/jni/proto/inputmethod"
 	irserver "github.com/xaionaro-go/jni/grpc/server/ir"
 	irpb "github.com/xaionaro-go/jni/proto/ir"
 	jobserver "github.com/xaionaro-go/jni/grpc/server/job"
@@ -20,14 +34,22 @@ import (
 	keyguardpb "github.com/xaionaro-go/jni/proto/keyguard"
 	locationserver "github.com/xaionaro-go/jni/grpc/server/location"
 	locationpb "github.com/xaionaro-go/jni/proto/location"
+	netserver "github.com/xaionaro-go/jni/grpc/server/net"
+	netpb "github.com/xaionaro-go/jni/proto/net"
 	powerserver "github.com/xaionaro-go/jni/grpc/server/power"
 	powerpb "github.com/xaionaro-go/jni/proto/power"
-	usageserver "github.com/xaionaro-go/jni/grpc/server/usage"
-	usagepb "github.com/xaionaro-go/jni/proto/usage"
+	printserver "github.com/xaionaro-go/jni/grpc/server/print"
+	printpb "github.com/xaionaro-go/jni/proto/print"
+	roleserver "github.com/xaionaro-go/jni/grpc/server/role"
+	rolepb "github.com/xaionaro-go/jni/proto/role"
+	storageserver "github.com/xaionaro-go/jni/grpc/server/storage"
+	storagepb "github.com/xaionaro-go/jni/proto/storage"
+	telecomserver "github.com/xaionaro-go/jni/grpc/server/telecom"
+	telecompb "github.com/xaionaro-go/jni/proto/telecom"
+	telephonyserver "github.com/xaionaro-go/jni/grpc/server/telephony"
+	telephonypb "github.com/xaionaro-go/jni/proto/telephony"
 	vibratorserver "github.com/xaionaro-go/jni/grpc/server/vibrator"
 	vibratorpb "github.com/xaionaro-go/jni/proto/vibrator"
-	wifiserver "github.com/xaionaro-go/jni/grpc/server/wifi"
-	wifipb "github.com/xaionaro-go/jni/proto/wifi"
 )
 
 // RegisterAll registers all generated gRPC service servers.
@@ -35,14 +57,25 @@ import (
 // that pass JNI object references over gRPC.
 func RegisterAll(s grpc.ServiceRegistrar, ctx *app.Context, handles *handlestore.HandleStore) {
 	handlepb.RegisterHandleStoreServiceServer(s, &handlestore.Server{VM: ctx.VM, Handles: handles})
-	alarmpb.RegisterManagerServiceServer(s, &alarmserver.ManagerServer{Ctx: ctx, Handles: handles})
-	bluetoothpb.RegisterAdapterServiceServer(s, &bluetoothserver.AdapterServer{Ctx: ctx, Handles: handles})
-	irpb.RegisterManagerServiceServer(s, &irserver.ManagerServer{Ctx: ctx, Handles: handles})
-	jobpb.RegisterSchedulerServiceServer(s, &jobserver.SchedulerServer{Ctx: ctx})
-	keyguardpb.RegisterManagerServiceServer(s, &keyguardserver.ManagerServer{Ctx: ctx})
-	locationpb.RegisterManagerServiceServer(s, &locationserver.ManagerServer{Ctx: ctx})
-	powerpb.RegisterManagerServiceServer(s, &powerserver.ManagerServer{Ctx: ctx})
-	usagepb.RegisterManagerServiceServer(s, &usageserver.ManagerServer{Ctx: ctx})
-	vibratorpb.RegisterVibratorServiceServer(s, &vibratorserver.VibratorServer{Ctx: ctx})
-	wifipb.RegisterManagerServiceServer(s, &wifiserver.ManagerServer{Ctx: ctx})
+	adminpb.RegisterDevicePolicyManagerServiceServer(s, &adminserver.devicePolicyManagerServer{Ctx: ctx, Handles: handles})
+	alarmpb.RegisterAlarmManagerServiceServer(s, &alarmserver.alarmManagerServer{Ctx: ctx, Handles: handles})
+	audiomanagerpb.RegisterAudioManagerServiceServer(s, &audiomanagerserver.audioManagerServer{Ctx: ctx, Handles: handles})
+	batterypb.RegisterBatteryManagerServiceServer(s, &batteryserver.batteryManagerServer{Ctx: ctx})
+	blobpb.RegisterBlobStoreManagerServiceServer(s, &blobserver.blobStoreManagerServer{Ctx: ctx, Handles: handles})
+	camerapb.RegisterCameraManagerServiceServer(s, &cameraserver.cameraManagerServer{Ctx: ctx, Handles: handles})
+	clipboardpb.RegisterClipboardManagerServiceServer(s, &clipboardserver.clipboardManagerServer{Ctx: ctx, Handles: handles})
+	companionpb.RegisterCompanionDeviceManagerServiceServer(s, &companionserver.companionDeviceManagerServer{Ctx: ctx, Handles: handles})
+	inputmethodpb.RegisterInputMethodManagerServiceServer(s, &inputmethodserver.inputMethodManagerServer{Ctx: ctx, Handles: handles})
+	irpb.RegisterConsumerIrManagerServiceServer(s, &irserver.consumerIrManagerServer{Ctx: ctx, Handles: handles})
+	jobpb.RegisterJobSchedulerServiceServer(s, &jobserver.jobSchedulerServer{Ctx: ctx, Handles: handles})
+	keyguardpb.RegisterKeyguardManagerServiceServer(s, &keyguardserver.keyguardManagerServer{Ctx: ctx, Handles: handles})
+	locationpb.RegisterLocationManagerServiceServer(s, &locationserver.locationManagerServer{Ctx: ctx, Handles: handles})
+	netpb.RegisterConnectivityManagerServiceServer(s, &netserver.connectivityManagerServer{Ctx: ctx, Handles: handles})
+	powerpb.RegisterPowerManagerServiceServer(s, &powerserver.powerManagerServer{Ctx: ctx, Handles: handles})
+	printpb.RegisterPrintManagerServiceServer(s, &printserver.printManagerServer{Ctx: ctx, Handles: handles})
+	rolepb.RegisterRoleManagerServiceServer(s, &roleserver.roleManagerServer{Ctx: ctx, Handles: handles})
+	storagepb.RegisterStorageManagerServiceServer(s, &storageserver.storageManagerServer{Ctx: ctx, Handles: handles})
+	telecompb.RegisterTelecomManagerServiceServer(s, &telecomserver.telecomManagerServer{Ctx: ctx, Handles: handles})
+	telephonypb.RegisterTelephonyManagerServiceServer(s, &telephonyserver.telephonyManagerServer{Ctx: ctx, Handles: handles})
+	vibratorpb.RegisterVibratorServiceServer(s, &vibratorserver.vibratorServer{Ctx: ctx, Handles: handles})
 }

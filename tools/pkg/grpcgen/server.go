@@ -7,13 +7,15 @@ import (
 	"strings"
 
 	"github.com/xaionaro-go/jni/tools/pkg/javagen"
+	"github.com/xaionaro-go/jni/tools/pkg/protogen"
+	"github.com/xaionaro-go/jni/tools/pkg/protoscan"
 )
 
 // GenerateServer loads a Java API spec and overlay, merges them, builds server
 // data structures, and writes a gRPC server implementation file.
 // It returns composite entries for each service generated (for use in the
 // composite server registration file).
-func GenerateServer(specPath, overlayPath, outputDir, goModule string) ([]CompositeEntry, error) {
+func GenerateServer(specPath, overlayPath, outputDir, goModule, protoDir string) ([]CompositeEntry, error) {
 	spec, err := javagen.LoadSpec(specPath)
 	if err != nil {
 		return nil, fmt.Errorf("load spec: %w", err)
@@ -29,7 +31,10 @@ func GenerateServer(specPath, overlayPath, outputDir, goModule string) ([]Compos
 		return nil, fmt.Errorf("merge: %w", err)
 	}
 
-	data := buildServerData(merged, goModule)
+	protoData := protogen.BuildProtoData(merged, goModule)
+	goNames := protoscan.Scan(filepath.Join(protoDir, merged.Package))
+
+	data := buildServerData(merged, goModule, protoData, goNames)
 	if len(data.Services) == 0 {
 		return nil, nil
 	}
@@ -57,7 +62,12 @@ func GenerateServer(specPath, overlayPath, outputDir, goModule string) ([]Compos
 }
 
 // buildServerData converts a MergedSpec into server template data.
-func buildServerData(merged *javagen.MergedSpec, goModule string) *ServerData {
+func buildServerData(
+	merged *javagen.MergedSpec,
+	goModule string,
+	protoData *protogen.ProtoData,
+	goNames protoscan.GoNames,
+) *ServerData {
 	data := &ServerData{
 		Package:  merged.Package,
 		GoModule: goModule,
@@ -96,8 +106,18 @@ func buildServerData(merged *javagen.MergedSpec, goModule string) *ServerData {
 		data.DataClasses = append(data.DataClasses, sdc)
 	}
 
+	// Build RPC name lookup from protogen data (handles collision renames).
+	protoRPCNames := make(map[string]string)
+	for _, ps := range protoData.Services {
+		for _, rpc := range ps.RPCs {
+			if rpc.OriginalName != "" {
+				protoRPCNames[strings.ToLower(rpc.OriginalName)] = rpc.Name
+			}
+			protoRPCNames[strings.ToLower(rpc.Name)] = rpc.Name
+		}
+	}
+
 	// Build services from classes that have a NewXxx(ctx *app.Context) constructor.
-	// Only system_service and context_method obtain types produce this pattern.
 	for _, cls := range merged.Classes {
 		if !hasContextConstructor(cls) {
 			continue
@@ -106,9 +126,8 @@ func buildServerData(merged *javagen.MergedSpec, goModule string) *ServerData {
 			continue
 		}
 
-		// protoc-gen-go always capitalizes service names, so
-		// "leScannerService" in proto becomes "LeScannerServiceServer" in Go.
-		serviceName := exportName(cls.GoType) + "Service"
+		rawServiceName := exportName(cls.GoType) + "Service"
+		serviceName := goNames.ResolveService(rawServiceName)
 
 		svc := ServerService{
 			GoType:      cls.GoType,
@@ -118,11 +137,10 @@ func buildServerData(merged *javagen.MergedSpec, goModule string) *ServerData {
 		}
 
 		for _, m := range cls.Methods {
-			// Skip unexported methods: they cannot be called from another package.
 			if !isExported(m.GoName) {
 				continue
 			}
-			sm := buildServerMethod(m, dataClassMap, javaClassToDataClass, dcFieldMap)
+			sm := buildServerMethod(m, dataClassMap, javaClassToDataClass, dcFieldMap, protoRPCNames, goNames)
 			if sm.ReturnKind == "data_class" || sm.ReturnKind == "object" {
 				data.NeedsJNI = true
 			}
@@ -149,10 +167,17 @@ func buildServerMethod(
 	dataClassNames map[string]bool,
 	javaClassToDataMsg map[string]string,
 	dcFieldMap map[string][]javagen.MergedField,
+	protoRPCNames map[string]string,
+	goNames protoscan.GoNames,
 ) ServerMethod {
-	goName := exportName(m.GoName)
-	reqType := exportName(m.GoName) + "Request"
-	respType := exportName(m.GoName) + "Response"
+	rawName := exportName(m.GoName)
+	goName := rawName
+	if resolved, ok := protoRPCNames[strings.ToLower(rawName)]; ok {
+		goName = resolved
+	}
+	goName = goNames.ResolveRPC(goName)
+	reqType := goName + "Request"
+	respType := goName + "Response"
 
 	sm := ServerMethod{
 		GoName:       goName,

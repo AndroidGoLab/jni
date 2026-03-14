@@ -7,6 +7,8 @@ import (
 	"testing"
 
 	"github.com/xaionaro-go/jni/tools/pkg/javagen"
+	"github.com/xaionaro-go/jni/tools/pkg/protogen"
+	"github.com/xaionaro-go/jni/tools/pkg/protoscan"
 )
 
 func findRepoRoot(t *testing.T) string {

@@ -772,8 +772,8 @@ var audiomanagerAudioManagerIsBluetoothA2dpOnCmd = &cobra.Command{
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewAudioManagerServiceClient(grpcConn)
-		req := &pb.IsBluetoothA2dpOnRequest{}
-		resp, err := client.IsBluetoothA2dpOn(ctx, req)
+		req := &pb.IsBluetoothA2DpOnRequest{}
+		resp, err := client.IsBluetoothA2DpOn(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -1242,11 +1242,11 @@ var audiomanagerAudioManagerSetBluetoothA2dpOnCmd = &cobra.Command{
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewAudioManagerServiceClient(grpcConn)
-		req := &pb.SetBluetoothA2dpOnRequest{}
+		req := &pb.SetBluetoothA2DpOnRequest{}
 		if v, err := cmd.Flags().GetBool("arg0"); err == nil {
 			req.Arg0 = v
 		}
-		resp, err := client.SetBluetoothA2dpOn(ctx, req)
+		resp, err := client.SetBluetoothA2DpOn(ctx, req)
 		if err != nil {
 			return err
 		}

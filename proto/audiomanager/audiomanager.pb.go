@@ -8293,6 +8293,7 @@ func (x *AbandonAudioFocusRequestOpRequest) GetArg0() int64 {
 
 type AbandonAudioFocusRequestOpResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8325,6 +8326,13 @@ func (x *AbandonAudioFocusRequestOpResponse) ProtoReflect() protoreflect.Message
 // Deprecated: Use AbandonAudioFocusRequestOpResponse.ProtoReflect.Descriptor instead.
 func (*AbandonAudioFocusRequestOpResponse) Descriptor() ([]byte, []int) {
 	return file_proto_audiomanager_audiomanager_proto_rawDescGZIP(), []int{195}
+}
+
+func (x *AbandonAudioFocusRequestOpResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
 }
 
 var File_proto_audiomanager_audiomanager_proto protoreflect.FileDescriptor
@@ -8682,8 +8690,9 @@ const file_proto_audiomanager_audiomanager_proto_rawDesc = "" +
 	"$IsOffloadedPlaybackSupportedResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\bR\x06result\"7\n" +
 	"!AbandonAudioFocusRequestOpRequest\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"$\n" +
-	"\"AbandonAudioFocusRequestOpResponse2\xb2X\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"<\n" +
+	"\"AbandonAudioFocusRequestOpResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result2\xb2X\n" +
 	"\x13AudioManagerService\x12d\n" +
 	"\x11AbandonAudioFocus\x12&.audiomanager.AbandonAudioFocusRequest\x1a'.audiomanager.AbandonAudioFocusResponse\x12\x7f\n" +
 	"\x1aAbandonAudioFocusRequestOp\x12/.audiomanager.AbandonAudioFocusRequestOpRequest\x1a0.audiomanager.AbandonAudioFocusRequestOpResponse\x12\xa6\x01\n" +
