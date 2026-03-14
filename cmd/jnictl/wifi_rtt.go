@@ -60,8 +60,8 @@ var wifirttRangingResultGet80211azInitiatorTxLtfRepetitionsCountCmd = &cobra.Com
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewRangingResultServiceClient(grpcConn)
-		req := &pb.Get80211azInitiatorTxLtfRepetitionsCountRequest{}
-		resp, err := client.Get80211azInitiatorTxLtfRepetitionsCount(ctx, req)
+		req := &pb.Get80211AzInitiatorTxLtfRepetitionsCountRequest{}
+		resp, err := client.Get80211AzInitiatorTxLtfRepetitionsCount(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -76,8 +76,8 @@ var wifirttRangingResultGet80211azNumberOfRxSpatialStreamsCmd = &cobra.Command{
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewRangingResultServiceClient(grpcConn)
-		req := &pb.Get80211azNumberOfRxSpatialStreamsRequest{}
-		resp, err := client.Get80211azNumberOfRxSpatialStreams(ctx, req)
+		req := &pb.Get80211AzNumberOfRxSpatialStreamsRequest{}
+		resp, err := client.Get80211AzNumberOfRxSpatialStreams(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -92,8 +92,8 @@ var wifirttRangingResultGet80211azNumberOfTxSpatialStreamsCmd = &cobra.Command{
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewRangingResultServiceClient(grpcConn)
-		req := &pb.Get80211azNumberOfTxSpatialStreamsRequest{}
-		resp, err := client.Get80211azNumberOfTxSpatialStreams(ctx, req)
+		req := &pb.Get80211AzNumberOfTxSpatialStreamsRequest{}
+		resp, err := client.Get80211AzNumberOfTxSpatialStreams(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -108,8 +108,8 @@ var wifirttRangingResultGet80211azResponderTxLtfRepetitionsCountCmd = &cobra.Com
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewRangingResultServiceClient(grpcConn)
-		req := &pb.Get80211azResponderTxLtfRepetitionsCountRequest{}
-		resp, err := client.Get80211azResponderTxLtfRepetitionsCount(ctx, req)
+		req := &pb.Get80211AzResponderTxLtfRepetitionsCountRequest{}
+		resp, err := client.Get80211AzResponderTxLtfRepetitionsCount(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -444,8 +444,8 @@ var wifirttRangingResultIs80211azNtbMeasurementCmd = &cobra.Command{
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewRangingResultServiceClient(grpcConn)
-		req := &pb.Is80211azNtbMeasurementRequest{}
-		resp, err := client.Is80211azNtbMeasurement(ctx, req)
+		req := &pb.Is80211AzNtbMeasurementRequest{}
+		resp, err := client.Is80211AzNtbMeasurement(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -460,8 +460,8 @@ var wifirttRangingResultIs80211mcMeasurementCmd = &cobra.Command{
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewRangingResultServiceClient(grpcConn)
-		req := &pb.Is80211mcMeasurementRequest{}
-		resp, err := client.Is80211mcMeasurement(ctx, req)
+		req := &pb.Is80211McMeasurementRequest{}
+		resp, err := client.Is80211McMeasurement(ctx, req)
 		if err != nil {
 			return err
 		}

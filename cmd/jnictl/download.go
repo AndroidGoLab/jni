@@ -250,12 +250,12 @@ var downloadDownloadManagerGetRecommendedMaxBytesOverMobileCmd = &cobra.Command{
 	},
 }
 
-var downloadDownloadManagerQueryCmd = &cobra.Command{
+var downloadDownloadManagerQuerySvcCmd = &cobra.Command{
 	Use:   "download-manager-query",
 	Short: "DownloadManagerQueryService operations",
 }
 
-var downloadDownloadManagerQuerySetFilterByIdCmd = &cobra.Command{
+var downloadDownloadManagerQuerySvcSetFilterByIdCmd = &cobra.Command{
 	Use:   "set-filter-by-id",
 	Short: "SetFilterById RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -274,7 +274,7 @@ var downloadDownloadManagerQuerySetFilterByIdCmd = &cobra.Command{
 	},
 }
 
-var downloadDownloadManagerQuerySetFilterByStatusCmd = &cobra.Command{
+var downloadDownloadManagerQuerySvcSetFilterByStatusCmd = &cobra.Command{
 	Use:   "set-filter-by-status",
 	Short: "SetFilterByStatus RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -647,11 +647,11 @@ func init() {
 	downloadDownloadManagerGetRecommendedMaxBytesOverMobileCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
 	downloadDownloadManagerCmd.AddCommand(downloadDownloadManagerGetRecommendedMaxBytesOverMobileCmd)
 	downloadCmd.AddCommand(downloadDownloadManagerCmd)
-	downloadDownloadManagerQuerySetFilterByIdCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
-	downloadDownloadManagerQueryCmd.AddCommand(downloadDownloadManagerQuerySetFilterByIdCmd)
-	downloadDownloadManagerQuerySetFilterByStatusCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
-	downloadDownloadManagerQueryCmd.AddCommand(downloadDownloadManagerQuerySetFilterByStatusCmd)
-	downloadCmd.AddCommand(downloadDownloadManagerQueryCmd)
+	downloadDownloadManagerQuerySvcSetFilterByIdCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	downloadDownloadManagerQuerySvcCmd.AddCommand(downloadDownloadManagerQuerySvcSetFilterByIdCmd)
+	downloadDownloadManagerQuerySvcSetFilterByStatusCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	downloadDownloadManagerQuerySvcCmd.AddCommand(downloadDownloadManagerQuerySvcSetFilterByStatusCmd)
+	downloadCmd.AddCommand(downloadDownloadManagerQuerySvcCmd)
 	downloadDownloadManagerRequestAddRequestHeaderCmd.Flags().String("arg0", "", "arg0 (string)")
 	downloadDownloadManagerRequestAddRequestHeaderCmd.Flags().String("arg1", "", "arg1 (string)")
 	downloadDownloadManagerRequestCmd.AddCommand(downloadDownloadManagerRequestAddRequestHeaderCmd)

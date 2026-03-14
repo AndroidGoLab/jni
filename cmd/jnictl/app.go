@@ -2235,8 +2235,8 @@ var appIntentToURICmd = &cobra.Command{
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewIntentServiceClient(grpcConn)
-		req := &pb.ToURIRequest{}
-		resp, err := client.ToURI(ctx, req)
+		req := &pb.ToUriRequest{}
+		resp, err := client.ToUri(ctx, req)
 		if err != nil {
 			return err
 		}

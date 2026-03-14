@@ -7,6 +7,8 @@ import (
 	"strings"
 
 	"github.com/xaionaro-go/jni/tools/pkg/javagen"
+	"github.com/xaionaro-go/jni/tools/pkg/protogen"
+	"github.com/xaionaro-go/jni/tools/pkg/protoscan"
 )
 
 // ClientData holds all information needed to render a gRPC client file.
@@ -65,7 +67,8 @@ type ClientDataClassField struct {
 
 // GenerateClient loads a Java API spec and overlay, merges them, builds client
 // data structures, and writes a gRPC client implementation file.
-func GenerateClient(specPath, overlayPath, outputDir, goModule string) error {
+// protoDir is the base directory containing compiled proto Go stubs (for name resolution).
+func GenerateClient(specPath, overlayPath, outputDir, goModule, protoDir string) error {
 	spec, err := javagen.LoadSpec(specPath)
 	if err != nil {
 		return fmt.Errorf("load spec: %w", err)
@@ -81,7 +84,13 @@ func GenerateClient(specPath, overlayPath, outputDir, goModule string) error {
 		return fmt.Errorf("merge: %w", err)
 	}
 
-	data := buildClientData(merged, goModule)
+	// Build proto data to get the canonical RPC names (with collision renames).
+	protoData := protogen.BuildProtoData(merged, goModule)
+
+	// Scan compiled proto stubs for actual Go names (handles protoc naming quirks).
+	goNames := protoscan.Scan(filepath.Join(protoDir, merged.Package))
+
+	data := buildClientData(merged, goModule, protoData, goNames)
 	if len(data.Services) == 0 {
 		return nil
 	}
@@ -100,7 +109,14 @@ func GenerateClient(specPath, overlayPath, outputDir, goModule string) error {
 }
 
 // buildClientData converts a MergedSpec into client template data.
-func buildClientData(merged *javagen.MergedSpec, goModule string) *ClientData {
+// protoData provides canonical RPC names (with collision renames).
+// goNames provides actual Go names from compiled proto stubs.
+func buildClientData(
+	merged *javagen.MergedSpec,
+	goModule string,
+	protoData *protogen.ProtoData,
+	goNames protoscan.GoNames,
+) *ClientData {
 	data := &ClientData{
 		Package:  merged.Package,
 		GoModule: goModule,
@@ -135,13 +151,26 @@ func buildClientData(merged *javagen.MergedSpec, goModule string) *ClientData {
 		data.DataClasses = append(data.DataClasses, cdc)
 	}
 
+	// Build RPC name lookup from protogen data (handles collision renames).
+	// Maps lowercase(original name) → final RPC name.
+	protoRPCNames := make(map[string]string)
+	for _, ps := range protoData.Services {
+		for _, rpc := range ps.RPCs {
+			if rpc.OriginalName != "" {
+				protoRPCNames[strings.ToLower(rpc.OriginalName)] = rpc.Name
+			}
+			protoRPCNames[strings.ToLower(rpc.Name)] = rpc.Name
+		}
+	}
+
 	// Build services from classes that have a NewXxx(ctx *app.Context) constructor.
 	for _, cls := range merged.Classes {
 		if !hasContextConstructor(cls) {
 			continue
 		}
 
-		serviceName := exportName(cls.GoType) + "Service"
+		rawServiceName := exportName(cls.GoType) + "Service"
+		serviceName := goNames.ResolveService(rawServiceName)
 		svc := ClientService{
 			GoType:      cls.GoType,
 			ServiceName: serviceName,
@@ -151,7 +180,7 @@ func buildClientData(merged *javagen.MergedSpec, goModule string) *ClientData {
 			if !isExported(m.GoName) {
 				continue
 			}
-			cm := buildClientMethod(m, javaClassToDataClass, dcFieldMap)
+			cm := buildClientMethod(m, javaClassToDataClass, dcFieldMap, protoRPCNames, goNames)
 			svc.Methods = append(svc.Methods, cm)
 		}
 
@@ -169,10 +198,18 @@ func buildClientMethod(
 	m javagen.MergedMethod,
 	javaClassToDataMsg map[string]string,
 	dcFieldMap map[string][]javagen.MergedField,
+	protoRPCNames map[string]string,
+	goNames protoscan.GoNames,
 ) ClientMethod {
-	goName := exportName(m.GoName)
-	reqType := exportName(m.GoName) + "Request"
-	respType := exportName(m.GoName) + "Response"
+	rawName := exportName(m.GoName)
+	// Resolve through protogen (collision renames) then protoc (naming quirks).
+	goName := rawName
+	if resolved, ok := protoRPCNames[strings.ToLower(rawName)]; ok {
+		goName = resolved
+	}
+	goName = goNames.ResolveRPC(goName)
+	reqType := goName + "Request"
+	respType := goName + "Response"
 
 	cm := ClientMethod{
 		GoName:       goName,

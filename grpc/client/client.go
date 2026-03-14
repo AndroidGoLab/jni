@@ -8,47 +8,80 @@ import (
 	handlepb "github.com/xaionaro-go/jni/proto/handlestore"
 	"google.golang.org/grpc"
 
+	adminclient "github.com/xaionaro-go/jni/grpc/client/admin"
 	alarmclient "github.com/xaionaro-go/jni/grpc/client/alarm"
-	bluetoothclient "github.com/xaionaro-go/jni/grpc/client/bluetooth"
+	audiomanagerclient "github.com/xaionaro-go/jni/grpc/client/audiomanager"
+	batteryclient "github.com/xaionaro-go/jni/grpc/client/battery"
+	blobclient "github.com/xaionaro-go/jni/grpc/client/blob"
+	cameraclient "github.com/xaionaro-go/jni/grpc/client/camera"
+	clipboardclient "github.com/xaionaro-go/jni/grpc/client/clipboard"
+	companionclient "github.com/xaionaro-go/jni/grpc/client/companion"
+	inputmethodclient "github.com/xaionaro-go/jni/grpc/client/inputmethod"
 	irclient "github.com/xaionaro-go/jni/grpc/client/ir"
 	jobclient "github.com/xaionaro-go/jni/grpc/client/job"
 	keyguardclient "github.com/xaionaro-go/jni/grpc/client/keyguard"
 	locationclient "github.com/xaionaro-go/jni/grpc/client/location"
+	netclient "github.com/xaionaro-go/jni/grpc/client/net"
 	powerclient "github.com/xaionaro-go/jni/grpc/client/power"
-	usageclient "github.com/xaionaro-go/jni/grpc/client/usage"
+	printclient "github.com/xaionaro-go/jni/grpc/client/print"
+	roleclient "github.com/xaionaro-go/jni/grpc/client/role"
+	storageclient "github.com/xaionaro-go/jni/grpc/client/storage"
+	telecomclient "github.com/xaionaro-go/jni/grpc/client/telecom"
+	telephonyclient "github.com/xaionaro-go/jni/grpc/client/telephony"
 	vibratorclient "github.com/xaionaro-go/jni/grpc/client/vibrator"
-	wificlient "github.com/xaionaro-go/jni/grpc/client/wifi"
 )
 
 // Client provides access to all Android API services over gRPC.
 type Client struct {
 	handles handlepb.HandleStoreServiceClient
+	Admin *adminclient.Client
 	Alarm *alarmclient.Client
-	Bluetooth *bluetoothclient.Client
+	Audiomanager *audiomanagerclient.Client
+	Battery *batteryclient.Client
+	Blob *blobclient.Client
+	Camera *cameraclient.Client
+	Clipboard *clipboardclient.Client
+	Companion *companionclient.Client
+	Inputmethod *inputmethodclient.Client
 	Ir *irclient.Client
 	Job *jobclient.Client
 	Keyguard *keyguardclient.Client
 	Location *locationclient.Client
+	Net *netclient.Client
 	Power *powerclient.Client
-	Usage *usageclient.Client
+	Print *printclient.Client
+	Role *roleclient.Client
+	Storage *storageclient.Client
+	Telecom *telecomclient.Client
+	Telephony *telephonyclient.Client
 	Vibrator *vibratorclient.Client
-	Wifi *wificlient.Client
 }
 
 // NewClient creates a composite client from a gRPC connection.
 func NewClient(cc grpc.ClientConnInterface) *Client {
 	return &Client{
 		handles: handlepb.NewHandleStoreServiceClient(cc),
+		Admin: adminclient.NewClient(cc),
 		Alarm: alarmclient.NewClient(cc),
-		Bluetooth: bluetoothclient.NewClient(cc),
+		Audiomanager: audiomanagerclient.NewClient(cc),
+		Battery: batteryclient.NewClient(cc),
+		Blob: blobclient.NewClient(cc),
+		Camera: cameraclient.NewClient(cc),
+		Clipboard: clipboardclient.NewClient(cc),
+		Companion: companionclient.NewClient(cc),
+		Inputmethod: inputmethodclient.NewClient(cc),
 		Ir: irclient.NewClient(cc),
 		Job: jobclient.NewClient(cc),
 		Keyguard: keyguardclient.NewClient(cc),
 		Location: locationclient.NewClient(cc),
+		Net: netclient.NewClient(cc),
 		Power: powerclient.NewClient(cc),
-		Usage: usageclient.NewClient(cc),
+		Print: printclient.NewClient(cc),
+		Role: roleclient.NewClient(cc),
+		Storage: storageclient.NewClient(cc),
+		Telecom: telecomclient.NewClient(cc),
+		Telephony: telephonyclient.NewClient(cc),
 		Vibrator: vibratorclient.NewClient(cc),
-		Wifi: wificlient.NewClient(cc),
 	}
 }
 

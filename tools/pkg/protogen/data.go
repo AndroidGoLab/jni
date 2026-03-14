@@ -24,6 +24,7 @@ type ProtoService struct {
 // ProtoRPC describes a single RPC method in a gRPC service.
 type ProtoRPC struct {
 	Name           string
+	OriginalName   string // Name before collision renaming (empty if unchanged).
 	InputType      string
 	OutputType     string
 	ClientStreaming bool
@@ -156,23 +157,26 @@ func BuildProtoData(merged *javagen.MergedSpec, goModule string) *ProtoData {
 				continue
 			}
 
-			// Find the original request message to copy its fields.
-			var origFields []ProtoField
+			// Find the original request/response messages to copy their fields.
+			var origReqFields, origRespFields []ProtoField
 			for _, m := range data.Messages {
-				if m.Name == rpc.InputType {
-					origFields = m.Fields
-					break
+				switch m.Name {
+				case rpc.InputType:
+					origReqFields = m.Fields
+				case rpc.OutputType:
+					origRespFields = m.Fields
 				}
 			}
 
+			rpc.OriginalName = rpc.Name
 			newName := rpc.Name + "Op"
 			newReq := newName + "Request"
 			newResp := newName + "Response"
 
-			// Create renamed request/response messages.
+			// Create renamed request/response messages with copied fields.
 			data.Messages = append(data.Messages,
-				ProtoMessage{Name: newReq, Fields: origFields},
-				ProtoMessage{Name: newResp},
+				ProtoMessage{Name: newReq, Fields: origReqFields},
+				ProtoMessage{Name: newResp, Fields: origRespFields},
 			)
 
 			rpc.Name = newName

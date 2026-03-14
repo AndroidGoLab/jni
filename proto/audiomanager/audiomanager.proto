@@ -748,6 +748,7 @@ message AbandonAudioFocusRequestOpRequest {
 }
 
 message AbandonAudioFocusRequestOpResponse {
+  int32 result = 1;
 }
 
 service AudioManagerService {
