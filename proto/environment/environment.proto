@@ -6,11 +6,79 @@ package environment;
 
 option go_package = "github.com/xaionaro-go/jni/proto/environment";
 
+message GetRootDirectoryRequest {
+}
+
+message GetRootDirectoryResponse {
+  int64 result = 1;
+}
+
+message GetDataDirectoryRequest {
+}
+
+message GetDataDirectoryResponse {
+  int64 result = 1;
+}
+
+message GetExternalStorageDirectoryRequest {
+}
+
+message GetExternalStorageDirectoryResponse {
+  int64 result = 1;
+}
+
+message GetExternalStoragePublicDirectoryRequest {
+  string typ = 1;
+}
+
+message GetExternalStoragePublicDirectoryResponse {
+  int64 result = 1;
+}
+
+message GetExternalStorageStateRequest {
+}
+
+message GetExternalStorageStateResponse {
+  string result = 1;
+}
+
+message IsExternalStorageRemovableRequest {
+}
+
+message IsExternalStorageRemovableResponse {
+  bool result = 1;
+}
+
+message IsExternalStorageEmulatedRequest {
+}
+
+message IsExternalStorageEmulatedResponse {
+  bool result = 1;
+}
+
+message IsExternalStorageManagerRequest {
+}
+
+message IsExternalStorageManagerResponse {
+  bool result = 1;
+}
+
 message GetAbsolutePathRequest {
 }
 
 message GetAbsolutePathResponse {
   string result = 1;
+}
+
+service EnvironmentService {
+  rpc GetRootDirectory (GetRootDirectoryRequest) returns (GetRootDirectoryResponse);
+  rpc GetDataDirectory (GetDataDirectoryRequest) returns (GetDataDirectoryResponse);
+  rpc GetExternalStorageDirectory (GetExternalStorageDirectoryRequest) returns (GetExternalStorageDirectoryResponse);
+  rpc GetExternalStoragePublicDirectory (GetExternalStoragePublicDirectoryRequest) returns (GetExternalStoragePublicDirectoryResponse);
+  rpc GetExternalStorageState (GetExternalStorageStateRequest) returns (GetExternalStorageStateResponse);
+  rpc IsExternalStorageRemovable (IsExternalStorageRemovableRequest) returns (IsExternalStorageRemovableResponse);
+  rpc IsExternalStorageEmulated (IsExternalStorageEmulatedRequest) returns (IsExternalStorageEmulatedResponse);
+  rpc IsExternalStorageManager (IsExternalStorageManagerRequest) returns (IsExternalStorageManagerResponse);
 }
 
 service JavaFileService {

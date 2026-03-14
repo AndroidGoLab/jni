@@ -12,6 +12,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
+	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -22,17 +23,247 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type CheckSelfPermissionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ctx           int64                  `protobuf:"varint,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	Permission    string                 `protobuf:"bytes,2,opt,name=permission,proto3" json:"permission,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckSelfPermissionRequest) Reset() {
+	*x = CheckSelfPermissionRequest{}
+	mi := &file_proto_permission_permission_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckSelfPermissionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckSelfPermissionRequest) ProtoMessage() {}
+
+func (x *CheckSelfPermissionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_permission_permission_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckSelfPermissionRequest.ProtoReflect.Descriptor instead.
+func (*CheckSelfPermissionRequest) Descriptor() ([]byte, []int) {
+	return file_proto_permission_permission_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *CheckSelfPermissionRequest) GetCtx() int64 {
+	if x != nil {
+		return x.Ctx
+	}
+	return 0
+}
+
+func (x *CheckSelfPermissionRequest) GetPermission() string {
+	if x != nil {
+		return x.Permission
+	}
+	return ""
+}
+
+type CheckSelfPermissionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckSelfPermissionResponse) Reset() {
+	*x = CheckSelfPermissionResponse{}
+	mi := &file_proto_permission_permission_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckSelfPermissionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckSelfPermissionResponse) ProtoMessage() {}
+
+func (x *CheckSelfPermissionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_permission_permission_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckSelfPermissionResponse.ProtoReflect.Descriptor instead.
+func (*CheckSelfPermissionResponse) Descriptor() ([]byte, []int) {
+	return file_proto_permission_permission_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CheckSelfPermissionResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type RequestPermissionsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Activity      int64                  `protobuf:"varint,1,opt,name=activity,proto3" json:"activity,omitempty"`
+	Permissions   int64                  `protobuf:"varint,2,opt,name=permissions,proto3" json:"permissions,omitempty"`
+	RequestCode   int32                  `protobuf:"varint,3,opt,name=request_code,json=requestCode,proto3" json:"request_code,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestPermissionsRequest) Reset() {
+	*x = RequestPermissionsRequest{}
+	mi := &file_proto_permission_permission_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestPermissionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestPermissionsRequest) ProtoMessage() {}
+
+func (x *RequestPermissionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_permission_permission_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestPermissionsRequest.ProtoReflect.Descriptor instead.
+func (*RequestPermissionsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_permission_permission_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *RequestPermissionsRequest) GetActivity() int64 {
+	if x != nil {
+		return x.Activity
+	}
+	return 0
+}
+
+func (x *RequestPermissionsRequest) GetPermissions() int64 {
+	if x != nil {
+		return x.Permissions
+	}
+	return 0
+}
+
+func (x *RequestPermissionsRequest) GetRequestCode() int32 {
+	if x != nil {
+		return x.RequestCode
+	}
+	return 0
+}
+
+type RequestPermissionsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestPermissionsResponse) Reset() {
+	*x = RequestPermissionsResponse{}
+	mi := &file_proto_permission_permission_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestPermissionsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestPermissionsResponse) ProtoMessage() {}
+
+func (x *RequestPermissionsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_permission_permission_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestPermissionsResponse.ProtoReflect.Descriptor instead.
+func (*RequestPermissionsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_permission_permission_proto_rawDescGZIP(), []int{3}
+}
+
 var File_proto_permission_permission_proto protoreflect.FileDescriptor
 
 const file_proto_permission_permission_proto_rawDesc = "" +
 	"\n" +
 	"!proto/permission/permission.proto\x12\n" +
-	"permissionB-Z+github.com/xaionaro-go/jni/proto/permissionb\x06proto3"
+	"permission\"N\n" +
+	"\x1aCheckSelfPermissionRequest\x12\x10\n" +
+	"\x03ctx\x18\x01 \x01(\x03R\x03ctx\x12\x1e\n" +
+	"\n" +
+	"permission\x18\x02 \x01(\tR\n" +
+	"permission\"5\n" +
+	"\x1bCheckSelfPermissionResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"|\n" +
+	"\x19RequestPermissionsRequest\x12\x1a\n" +
+	"\bactivity\x18\x01 \x01(\x03R\bactivity\x12 \n" +
+	"\vpermissions\x18\x02 \x01(\x03R\vpermissions\x12!\n" +
+	"\frequest_code\x18\x03 \x01(\x05R\vrequestCode\"\x1c\n" +
+	"\x1aRequestPermissionsResponse2~\n" +
+	"\x14ContextCompatService\x12f\n" +
+	"\x13CheckSelfPermission\x12&.permission.CheckSelfPermissionRequest\x1a'.permission.CheckSelfPermissionResponse2|\n" +
+	"\x15ActivityCompatService\x12c\n" +
+	"\x12RequestPermissions\x12%.permission.RequestPermissionsRequest\x1a&.permission.RequestPermissionsResponseB-Z+github.com/xaionaro-go/jni/proto/permissionb\x06proto3"
 
-var file_proto_permission_permission_proto_goTypes = []any{}
+var (
+	file_proto_permission_permission_proto_rawDescOnce sync.Once
+	file_proto_permission_permission_proto_rawDescData []byte
+)
+
+func file_proto_permission_permission_proto_rawDescGZIP() []byte {
+	file_proto_permission_permission_proto_rawDescOnce.Do(func() {
+		file_proto_permission_permission_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_permission_permission_proto_rawDesc), len(file_proto_permission_permission_proto_rawDesc)))
+	})
+	return file_proto_permission_permission_proto_rawDescData
+}
+
+var file_proto_permission_permission_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_proto_permission_permission_proto_goTypes = []any{
+	(*CheckSelfPermissionRequest)(nil),  // 0: permission.CheckSelfPermissionRequest
+	(*CheckSelfPermissionResponse)(nil), // 1: permission.CheckSelfPermissionResponse
+	(*RequestPermissionsRequest)(nil),   // 2: permission.RequestPermissionsRequest
+	(*RequestPermissionsResponse)(nil),  // 3: permission.RequestPermissionsResponse
+}
 var file_proto_permission_permission_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
+	0, // 0: permission.ContextCompatService.CheckSelfPermission:input_type -> permission.CheckSelfPermissionRequest
+	2, // 1: permission.ActivityCompatService.RequestPermissions:input_type -> permission.RequestPermissionsRequest
+	1, // 2: permission.ContextCompatService.CheckSelfPermission:output_type -> permission.CheckSelfPermissionResponse
+	3, // 3: permission.ActivityCompatService.RequestPermissions:output_type -> permission.RequestPermissionsResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -49,12 +280,13 @@ func file_proto_permission_permission_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_permission_permission_proto_rawDesc), len(file_proto_permission_permission_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   0,
+			NumMessages:   4,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   2,
 		},
 		GoTypes:           file_proto_permission_permission_proto_goTypes,
 		DependencyIndexes: file_proto_permission_permission_proto_depIdxs,
+		MessageInfos:      file_proto_permission_permission_proto_msgTypes,
 	}.Build()
 	File_proto_permission_permission_proto = out.File
 	file_proto_permission_permission_proto_goTypes = nil

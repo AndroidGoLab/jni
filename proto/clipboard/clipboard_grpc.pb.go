@@ -275,7 +275,8 @@ var ManagerService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ClipDataService_GetItemAt_FullMethodName = "/clipboard.ClipDataService/GetItemAt"
+	ClipDataService_GetItemAt_FullMethodName    = "/clipboard.ClipDataService/GetItemAt"
+	ClipDataService_NewPlainText_FullMethodName = "/clipboard.ClipDataService/NewPlainText"
 )
 
 // ClipDataServiceClient is the client API for ClipDataService service.
@@ -283,6 +284,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ClipDataServiceClient interface {
 	GetItemAt(ctx context.Context, in *GetItemAtRequest, opts ...grpc.CallOption) (*GetItemAtResponse, error)
+	NewPlainText(ctx context.Context, in *NewPlainTextRequest, opts ...grpc.CallOption) (*NewPlainTextResponse, error)
 }
 
 type clipDataServiceClient struct {
@@ -303,11 +305,22 @@ func (c *clipDataServiceClient) GetItemAt(ctx context.Context, in *GetItemAtRequ
 	return out, nil
 }
 
+func (c *clipDataServiceClient) NewPlainText(ctx context.Context, in *NewPlainTextRequest, opts ...grpc.CallOption) (*NewPlainTextResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NewPlainTextResponse)
+	err := c.cc.Invoke(ctx, ClipDataService_NewPlainText_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ClipDataServiceServer is the server API for ClipDataService service.
 // All implementations must embed UnimplementedClipDataServiceServer
 // for forward compatibility.
 type ClipDataServiceServer interface {
 	GetItemAt(context.Context, *GetItemAtRequest) (*GetItemAtResponse, error)
+	NewPlainText(context.Context, *NewPlainTextRequest) (*NewPlainTextResponse, error)
 	mustEmbedUnimplementedClipDataServiceServer()
 }
 
@@ -320,6 +333,9 @@ type UnimplementedClipDataServiceServer struct{}
 
 func (UnimplementedClipDataServiceServer) GetItemAt(context.Context, *GetItemAtRequest) (*GetItemAtResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetItemAt not implemented")
+}
+func (UnimplementedClipDataServiceServer) NewPlainText(context.Context, *NewPlainTextRequest) (*NewPlainTextResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method NewPlainText not implemented")
 }
 func (UnimplementedClipDataServiceServer) mustEmbedUnimplementedClipDataServiceServer() {}
 func (UnimplementedClipDataServiceServer) testEmbeddedByValue()                         {}
@@ -360,6 +376,24 @@ func _ClipDataService_GetItemAt_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClipDataService_NewPlainText_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NewPlainTextRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClipDataServiceServer).NewPlainText(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClipDataService_NewPlainText_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClipDataServiceServer).NewPlainText(ctx, req.(*NewPlainTextRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ClipDataService_ServiceDesc is the grpc.ServiceDesc for ClipDataService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -370,6 +404,10 @@ var ClipDataService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetItemAt",
 			Handler:    _ClipDataService_GetItemAt_Handler,
+		},
+		{
+			MethodName: "NewPlainText",
+			Handler:    _ClipDataService_NewPlainText_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

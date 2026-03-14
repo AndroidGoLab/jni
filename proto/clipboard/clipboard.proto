@@ -49,6 +49,15 @@ message GetItemAtResponse {
   int64 result = 1;
 }
 
+message NewPlainTextRequest {
+  int64 label = 1;
+  int64 text = 2;
+}
+
+message NewPlainTextResponse {
+  int64 result = 1;
+}
+
 message GetTextRequest {
 }
 
@@ -76,6 +85,7 @@ service ManagerService {
 
 service ClipDataService {
   rpc GetItemAt (GetItemAtRequest) returns (GetItemAtResponse);
+  rpc NewPlainText (NewPlainTextRequest) returns (NewPlainTextResponse);
 }
 
 service ClipItemService {

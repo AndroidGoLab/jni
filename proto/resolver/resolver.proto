@@ -66,6 +66,14 @@ message GetColumnIndexResponse {
   int32 result = 1;
 }
 
+message ParseRequest {
+  string uri_string = 1;
+}
+
+message ParseResponse {
+  int64 result = 1;
+}
+
 message GetFdRequest {
 }
 
@@ -91,6 +99,10 @@ service CursorService {
   rpc GetInt (GetIntRequest) returns (GetIntResponse);
   rpc GetLong (GetLongRequest) returns (GetLongResponse);
   rpc GetColumnIndex (GetColumnIndexRequest) returns (GetColumnIndexResponse);
+}
+
+service UriService {
+  rpc Parse (ParseRequest) returns (ParseResponse);
 }
 
 service ParcelFDService {

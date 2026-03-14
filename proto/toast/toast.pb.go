@@ -95,15 +95,126 @@ func (*ShowResponse) Descriptor() ([]byte, []int) {
 	return file_proto_toast_toast_proto_rawDescGZIP(), []int{1}
 }
 
+type MakeTextRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ctx           int64                  `protobuf:"varint,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	Text          int64                  `protobuf:"varint,2,opt,name=text,proto3" json:"text,omitempty"`
+	Duration      int32                  `protobuf:"varint,3,opt,name=duration,proto3" json:"duration,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MakeTextRequest) Reset() {
+	*x = MakeTextRequest{}
+	mi := &file_proto_toast_toast_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MakeTextRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MakeTextRequest) ProtoMessage() {}
+
+func (x *MakeTextRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_toast_toast_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MakeTextRequest.ProtoReflect.Descriptor instead.
+func (*MakeTextRequest) Descriptor() ([]byte, []int) {
+	return file_proto_toast_toast_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *MakeTextRequest) GetCtx() int64 {
+	if x != nil {
+		return x.Ctx
+	}
+	return 0
+}
+
+func (x *MakeTextRequest) GetText() int64 {
+	if x != nil {
+		return x.Text
+	}
+	return 0
+}
+
+func (x *MakeTextRequest) GetDuration() int32 {
+	if x != nil {
+		return x.Duration
+	}
+	return 0
+}
+
+type MakeTextResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MakeTextResponse) Reset() {
+	*x = MakeTextResponse{}
+	mi := &file_proto_toast_toast_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MakeTextResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MakeTextResponse) ProtoMessage() {}
+
+func (x *MakeTextResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_toast_toast_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MakeTextResponse.ProtoReflect.Descriptor instead.
+func (*MakeTextResponse) Descriptor() ([]byte, []int) {
+	return file_proto_toast_toast_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *MakeTextResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
 var File_proto_toast_toast_proto protoreflect.FileDescriptor
 
 const file_proto_toast_toast_proto_rawDesc = "" +
 	"\n" +
 	"\x17proto/toast/toast.proto\x12\x05toast\"\r\n" +
 	"\vShowRequest\"\x0e\n" +
-	"\fShowResponse2?\n" +
+	"\fShowResponse\"S\n" +
+	"\x0fMakeTextRequest\x12\x10\n" +
+	"\x03ctx\x18\x01 \x01(\x03R\x03ctx\x12\x12\n" +
+	"\x04text\x18\x02 \x01(\x03R\x04text\x12\x1a\n" +
+	"\bduration\x18\x03 \x01(\x05R\bduration\"*\n" +
+	"\x10MakeTextResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result2|\n" +
 	"\fToastService\x12/\n" +
-	"\x04Show\x12\x12.toast.ShowRequest\x1a\x13.toast.ShowResponseB(Z&github.com/xaionaro-go/jni/proto/toastb\x06proto3"
+	"\x04Show\x12\x12.toast.ShowRequest\x1a\x13.toast.ShowResponse\x12;\n" +
+	"\bMakeText\x12\x16.toast.MakeTextRequest\x1a\x17.toast.MakeTextResponseB(Z&github.com/xaionaro-go/jni/proto/toastb\x06proto3"
 
 var (
 	file_proto_toast_toast_proto_rawDescOnce sync.Once
@@ -117,16 +228,20 @@ func file_proto_toast_toast_proto_rawDescGZIP() []byte {
 	return file_proto_toast_toast_proto_rawDescData
 }
 
-var file_proto_toast_toast_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_proto_toast_toast_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_proto_toast_toast_proto_goTypes = []any{
-	(*ShowRequest)(nil),  // 0: toast.ShowRequest
-	(*ShowResponse)(nil), // 1: toast.ShowResponse
+	(*ShowRequest)(nil),      // 0: toast.ShowRequest
+	(*ShowResponse)(nil),     // 1: toast.ShowResponse
+	(*MakeTextRequest)(nil),  // 2: toast.MakeTextRequest
+	(*MakeTextResponse)(nil), // 3: toast.MakeTextResponse
 }
 var file_proto_toast_toast_proto_depIdxs = []int32{
 	0, // 0: toast.ToastService.Show:input_type -> toast.ShowRequest
-	1, // 1: toast.ToastService.Show:output_type -> toast.ShowResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	2, // 1: toast.ToastService.MakeText:input_type -> toast.MakeTextRequest
+	1, // 2: toast.ToastService.Show:output_type -> toast.ShowResponse
+	3, // 3: toast.ToastService.MakeText:output_type -> toast.MakeTextResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -143,7 +258,7 @@ func file_proto_toast_toast_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_toast_toast_proto_rawDesc), len(file_proto_toast_toast_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

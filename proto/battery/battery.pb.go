@@ -12,6 +12,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
+	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -22,19 +23,563 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type GetLevelRawRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLevelRawRequest) Reset() {
+	*x = GetLevelRawRequest{}
+	mi := &file_proto_battery_battery_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLevelRawRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLevelRawRequest) ProtoMessage() {}
+
+func (x *GetLevelRawRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_battery_battery_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLevelRawRequest.ProtoReflect.Descriptor instead.
+func (*GetLevelRawRequest) Descriptor() ([]byte, []int) {
+	return file_proto_battery_battery_proto_rawDescGZIP(), []int{0}
+}
+
+type GetLevelRawResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLevelRawResponse) Reset() {
+	*x = GetLevelRawResponse{}
+	mi := &file_proto_battery_battery_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLevelRawResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLevelRawResponse) ProtoMessage() {}
+
+func (x *GetLevelRawResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_battery_battery_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLevelRawResponse.ProtoReflect.Descriptor instead.
+func (*GetLevelRawResponse) Descriptor() ([]byte, []int) {
+	return file_proto_battery_battery_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GetLevelRawResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetScaleRawRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetScaleRawRequest) Reset() {
+	*x = GetScaleRawRequest{}
+	mi := &file_proto_battery_battery_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetScaleRawRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetScaleRawRequest) ProtoMessage() {}
+
+func (x *GetScaleRawRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_battery_battery_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetScaleRawRequest.ProtoReflect.Descriptor instead.
+func (*GetScaleRawRequest) Descriptor() ([]byte, []int) {
+	return file_proto_battery_battery_proto_rawDescGZIP(), []int{2}
+}
+
+type GetScaleRawResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetScaleRawResponse) Reset() {
+	*x = GetScaleRawResponse{}
+	mi := &file_proto_battery_battery_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetScaleRawResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetScaleRawResponse) ProtoMessage() {}
+
+func (x *GetScaleRawResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_battery_battery_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetScaleRawResponse.ProtoReflect.Descriptor instead.
+func (*GetScaleRawResponse) Descriptor() ([]byte, []int) {
+	return file_proto_battery_battery_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetScaleRawResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetStatusRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetStatusRequest) Reset() {
+	*x = GetStatusRequest{}
+	mi := &file_proto_battery_battery_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetStatusRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetStatusRequest) ProtoMessage() {}
+
+func (x *GetStatusRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_battery_battery_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetStatusRequest.ProtoReflect.Descriptor instead.
+func (*GetStatusRequest) Descriptor() ([]byte, []int) {
+	return file_proto_battery_battery_proto_rawDescGZIP(), []int{4}
+}
+
+type GetStatusResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetStatusResponse) Reset() {
+	*x = GetStatusResponse{}
+	mi := &file_proto_battery_battery_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetStatusResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetStatusResponse) ProtoMessage() {}
+
+func (x *GetStatusResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_battery_battery_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetStatusResponse.ProtoReflect.Descriptor instead.
+func (*GetStatusResponse) Descriptor() ([]byte, []int) {
+	return file_proto_battery_battery_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetStatusResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetTemperatureRawRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTemperatureRawRequest) Reset() {
+	*x = GetTemperatureRawRequest{}
+	mi := &file_proto_battery_battery_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTemperatureRawRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTemperatureRawRequest) ProtoMessage() {}
+
+func (x *GetTemperatureRawRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_battery_battery_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTemperatureRawRequest.ProtoReflect.Descriptor instead.
+func (*GetTemperatureRawRequest) Descriptor() ([]byte, []int) {
+	return file_proto_battery_battery_proto_rawDescGZIP(), []int{6}
+}
+
+type GetTemperatureRawResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTemperatureRawResponse) Reset() {
+	*x = GetTemperatureRawResponse{}
+	mi := &file_proto_battery_battery_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTemperatureRawResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTemperatureRawResponse) ProtoMessage() {}
+
+func (x *GetTemperatureRawResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_battery_battery_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTemperatureRawResponse.ProtoReflect.Descriptor instead.
+func (*GetTemperatureRawResponse) Descriptor() ([]byte, []int) {
+	return file_proto_battery_battery_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetTemperatureRawResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetVoltageRawRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetVoltageRawRequest) Reset() {
+	*x = GetVoltageRawRequest{}
+	mi := &file_proto_battery_battery_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetVoltageRawRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetVoltageRawRequest) ProtoMessage() {}
+
+func (x *GetVoltageRawRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_battery_battery_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetVoltageRawRequest.ProtoReflect.Descriptor instead.
+func (*GetVoltageRawRequest) Descriptor() ([]byte, []int) {
+	return file_proto_battery_battery_proto_rawDescGZIP(), []int{8}
+}
+
+type GetVoltageRawResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetVoltageRawResponse) Reset() {
+	*x = GetVoltageRawResponse{}
+	mi := &file_proto_battery_battery_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetVoltageRawResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetVoltageRawResponse) ProtoMessage() {}
+
+func (x *GetVoltageRawResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_battery_battery_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetVoltageRawResponse.ProtoReflect.Descriptor instead.
+func (*GetVoltageRawResponse) Descriptor() ([]byte, []int) {
+	return file_proto_battery_battery_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetVoltageRawResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetPluggedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPluggedRequest) Reset() {
+	*x = GetPluggedRequest{}
+	mi := &file_proto_battery_battery_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPluggedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPluggedRequest) ProtoMessage() {}
+
+func (x *GetPluggedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_battery_battery_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPluggedRequest.ProtoReflect.Descriptor instead.
+func (*GetPluggedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_battery_battery_proto_rawDescGZIP(), []int{10}
+}
+
+type GetPluggedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPluggedResponse) Reset() {
+	*x = GetPluggedResponse{}
+	mi := &file_proto_battery_battery_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPluggedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPluggedResponse) ProtoMessage() {}
+
+func (x *GetPluggedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_battery_battery_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPluggedResponse.ProtoReflect.Descriptor instead.
+func (*GetPluggedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_battery_battery_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *GetPluggedResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
 var File_proto_battery_battery_proto protoreflect.FileDescriptor
 
 const file_proto_battery_battery_proto_rawDesc = "" +
 	"\n" +
-	"\x1bproto/battery/battery.proto\x12\abatteryB*Z(github.com/xaionaro-go/jni/proto/batteryb\x06proto3"
+	"\x1bproto/battery/battery.proto\x12\abattery\"\x14\n" +
+	"\x12GetLevelRawRequest\"-\n" +
+	"\x13GetLevelRawResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x14\n" +
+	"\x12GetScaleRawRequest\"-\n" +
+	"\x13GetScaleRawResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x12\n" +
+	"\x10GetStatusRequest\"+\n" +
+	"\x11GetStatusResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x1a\n" +
+	"\x18GetTemperatureRawRequest\"3\n" +
+	"\x19GetTemperatureRawResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x16\n" +
+	"\x14GetVoltageRawRequest\"/\n" +
+	"\x15GetVoltageRawResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x13\n" +
+	"\x11GetPluggedRequest\",\n" +
+	"\x12GetPluggedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result2\xe2\x03\n" +
+	"\x15BatteryManagerService\x12H\n" +
+	"\vGetLevelRaw\x12\x1b.battery.GetLevelRawRequest\x1a\x1c.battery.GetLevelRawResponse\x12H\n" +
+	"\vGetScaleRaw\x12\x1b.battery.GetScaleRawRequest\x1a\x1c.battery.GetScaleRawResponse\x12B\n" +
+	"\tGetStatus\x12\x19.battery.GetStatusRequest\x1a\x1a.battery.GetStatusResponse\x12Z\n" +
+	"\x11GetTemperatureRaw\x12!.battery.GetTemperatureRawRequest\x1a\".battery.GetTemperatureRawResponse\x12N\n" +
+	"\rGetVoltageRaw\x12\x1d.battery.GetVoltageRawRequest\x1a\x1e.battery.GetVoltageRawResponse\x12E\n" +
+	"\n" +
+	"GetPlugged\x12\x1a.battery.GetPluggedRequest\x1a\x1b.battery.GetPluggedResponseB*Z(github.com/xaionaro-go/jni/proto/batteryb\x06proto3"
 
-var file_proto_battery_battery_proto_goTypes = []any{}
+var (
+	file_proto_battery_battery_proto_rawDescOnce sync.Once
+	file_proto_battery_battery_proto_rawDescData []byte
+)
+
+func file_proto_battery_battery_proto_rawDescGZIP() []byte {
+	file_proto_battery_battery_proto_rawDescOnce.Do(func() {
+		file_proto_battery_battery_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_battery_battery_proto_rawDesc), len(file_proto_battery_battery_proto_rawDesc)))
+	})
+	return file_proto_battery_battery_proto_rawDescData
+}
+
+var file_proto_battery_battery_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_proto_battery_battery_proto_goTypes = []any{
+	(*GetLevelRawRequest)(nil),        // 0: battery.GetLevelRawRequest
+	(*GetLevelRawResponse)(nil),       // 1: battery.GetLevelRawResponse
+	(*GetScaleRawRequest)(nil),        // 2: battery.GetScaleRawRequest
+	(*GetScaleRawResponse)(nil),       // 3: battery.GetScaleRawResponse
+	(*GetStatusRequest)(nil),          // 4: battery.GetStatusRequest
+	(*GetStatusResponse)(nil),         // 5: battery.GetStatusResponse
+	(*GetTemperatureRawRequest)(nil),  // 6: battery.GetTemperatureRawRequest
+	(*GetTemperatureRawResponse)(nil), // 7: battery.GetTemperatureRawResponse
+	(*GetVoltageRawRequest)(nil),      // 8: battery.GetVoltageRawRequest
+	(*GetVoltageRawResponse)(nil),     // 9: battery.GetVoltageRawResponse
+	(*GetPluggedRequest)(nil),         // 10: battery.GetPluggedRequest
+	(*GetPluggedResponse)(nil),        // 11: battery.GetPluggedResponse
+}
 var file_proto_battery_battery_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0,  // 0: battery.BatteryManagerService.GetLevelRaw:input_type -> battery.GetLevelRawRequest
+	2,  // 1: battery.BatteryManagerService.GetScaleRaw:input_type -> battery.GetScaleRawRequest
+	4,  // 2: battery.BatteryManagerService.GetStatus:input_type -> battery.GetStatusRequest
+	6,  // 3: battery.BatteryManagerService.GetTemperatureRaw:input_type -> battery.GetTemperatureRawRequest
+	8,  // 4: battery.BatteryManagerService.GetVoltageRaw:input_type -> battery.GetVoltageRawRequest
+	10, // 5: battery.BatteryManagerService.GetPlugged:input_type -> battery.GetPluggedRequest
+	1,  // 6: battery.BatteryManagerService.GetLevelRaw:output_type -> battery.GetLevelRawResponse
+	3,  // 7: battery.BatteryManagerService.GetScaleRaw:output_type -> battery.GetScaleRawResponse
+	5,  // 8: battery.BatteryManagerService.GetStatus:output_type -> battery.GetStatusResponse
+	7,  // 9: battery.BatteryManagerService.GetTemperatureRaw:output_type -> battery.GetTemperatureRawResponse
+	9,  // 10: battery.BatteryManagerService.GetVoltageRaw:output_type -> battery.GetVoltageRawResponse
+	11, // 11: battery.BatteryManagerService.GetPlugged:output_type -> battery.GetPluggedResponse
+	6,  // [6:12] is the sub-list for method output_type
+	0,  // [0:6] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_battery_battery_proto_init() }
@@ -48,12 +593,13 @@ func file_proto_battery_battery_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_battery_battery_proto_rawDesc), len(file_proto_battery_battery_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   0,
+			NumMessages:   12,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_proto_battery_battery_proto_goTypes,
 		DependencyIndexes: file_proto_battery_battery_proto_depIdxs,
+		MessageInfos:      file_proto_battery_battery_proto_msgTypes,
 	}.Build()
 	File_proto_battery_battery_proto = out.File
 	file_proto_battery_battery_proto_goTypes = nil

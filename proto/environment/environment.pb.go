@@ -23,6 +23,654 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type GetRootDirectoryRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRootDirectoryRequest) Reset() {
+	*x = GetRootDirectoryRequest{}
+	mi := &file_proto_environment_environment_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRootDirectoryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRootDirectoryRequest) ProtoMessage() {}
+
+func (x *GetRootDirectoryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_environment_environment_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRootDirectoryRequest.ProtoReflect.Descriptor instead.
+func (*GetRootDirectoryRequest) Descriptor() ([]byte, []int) {
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{0}
+}
+
+type GetRootDirectoryResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRootDirectoryResponse) Reset() {
+	*x = GetRootDirectoryResponse{}
+	mi := &file_proto_environment_environment_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRootDirectoryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRootDirectoryResponse) ProtoMessage() {}
+
+func (x *GetRootDirectoryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_environment_environment_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRootDirectoryResponse.ProtoReflect.Descriptor instead.
+func (*GetRootDirectoryResponse) Descriptor() ([]byte, []int) {
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GetRootDirectoryResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetDataDirectoryRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDataDirectoryRequest) Reset() {
+	*x = GetDataDirectoryRequest{}
+	mi := &file_proto_environment_environment_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDataDirectoryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDataDirectoryRequest) ProtoMessage() {}
+
+func (x *GetDataDirectoryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_environment_environment_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDataDirectoryRequest.ProtoReflect.Descriptor instead.
+func (*GetDataDirectoryRequest) Descriptor() ([]byte, []int) {
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{2}
+}
+
+type GetDataDirectoryResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDataDirectoryResponse) Reset() {
+	*x = GetDataDirectoryResponse{}
+	mi := &file_proto_environment_environment_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDataDirectoryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDataDirectoryResponse) ProtoMessage() {}
+
+func (x *GetDataDirectoryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_environment_environment_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDataDirectoryResponse.ProtoReflect.Descriptor instead.
+func (*GetDataDirectoryResponse) Descriptor() ([]byte, []int) {
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetDataDirectoryResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetExternalStorageDirectoryRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetExternalStorageDirectoryRequest) Reset() {
+	*x = GetExternalStorageDirectoryRequest{}
+	mi := &file_proto_environment_environment_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetExternalStorageDirectoryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetExternalStorageDirectoryRequest) ProtoMessage() {}
+
+func (x *GetExternalStorageDirectoryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_environment_environment_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetExternalStorageDirectoryRequest.ProtoReflect.Descriptor instead.
+func (*GetExternalStorageDirectoryRequest) Descriptor() ([]byte, []int) {
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{4}
+}
+
+type GetExternalStorageDirectoryResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetExternalStorageDirectoryResponse) Reset() {
+	*x = GetExternalStorageDirectoryResponse{}
+	mi := &file_proto_environment_environment_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetExternalStorageDirectoryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetExternalStorageDirectoryResponse) ProtoMessage() {}
+
+func (x *GetExternalStorageDirectoryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_environment_environment_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetExternalStorageDirectoryResponse.ProtoReflect.Descriptor instead.
+func (*GetExternalStorageDirectoryResponse) Descriptor() ([]byte, []int) {
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetExternalStorageDirectoryResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetExternalStoragePublicDirectoryRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Typ           string                 `protobuf:"bytes,1,opt,name=typ,proto3" json:"typ,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetExternalStoragePublicDirectoryRequest) Reset() {
+	*x = GetExternalStoragePublicDirectoryRequest{}
+	mi := &file_proto_environment_environment_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetExternalStoragePublicDirectoryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetExternalStoragePublicDirectoryRequest) ProtoMessage() {}
+
+func (x *GetExternalStoragePublicDirectoryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_environment_environment_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetExternalStoragePublicDirectoryRequest.ProtoReflect.Descriptor instead.
+func (*GetExternalStoragePublicDirectoryRequest) Descriptor() ([]byte, []int) {
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetExternalStoragePublicDirectoryRequest) GetTyp() string {
+	if x != nil {
+		return x.Typ
+	}
+	return ""
+}
+
+type GetExternalStoragePublicDirectoryResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetExternalStoragePublicDirectoryResponse) Reset() {
+	*x = GetExternalStoragePublicDirectoryResponse{}
+	mi := &file_proto_environment_environment_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetExternalStoragePublicDirectoryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetExternalStoragePublicDirectoryResponse) ProtoMessage() {}
+
+func (x *GetExternalStoragePublicDirectoryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_environment_environment_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetExternalStoragePublicDirectoryResponse.ProtoReflect.Descriptor instead.
+func (*GetExternalStoragePublicDirectoryResponse) Descriptor() ([]byte, []int) {
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetExternalStoragePublicDirectoryResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetExternalStorageStateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetExternalStorageStateRequest) Reset() {
+	*x = GetExternalStorageStateRequest{}
+	mi := &file_proto_environment_environment_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetExternalStorageStateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetExternalStorageStateRequest) ProtoMessage() {}
+
+func (x *GetExternalStorageStateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_environment_environment_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetExternalStorageStateRequest.ProtoReflect.Descriptor instead.
+func (*GetExternalStorageStateRequest) Descriptor() ([]byte, []int) {
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{8}
+}
+
+type GetExternalStorageStateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetExternalStorageStateResponse) Reset() {
+	*x = GetExternalStorageStateResponse{}
+	mi := &file_proto_environment_environment_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetExternalStorageStateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetExternalStorageStateResponse) ProtoMessage() {}
+
+func (x *GetExternalStorageStateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_environment_environment_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetExternalStorageStateResponse.ProtoReflect.Descriptor instead.
+func (*GetExternalStorageStateResponse) Descriptor() ([]byte, []int) {
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetExternalStorageStateResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type IsExternalStorageRemovableRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsExternalStorageRemovableRequest) Reset() {
+	*x = IsExternalStorageRemovableRequest{}
+	mi := &file_proto_environment_environment_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsExternalStorageRemovableRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsExternalStorageRemovableRequest) ProtoMessage() {}
+
+func (x *IsExternalStorageRemovableRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_environment_environment_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsExternalStorageRemovableRequest.ProtoReflect.Descriptor instead.
+func (*IsExternalStorageRemovableRequest) Descriptor() ([]byte, []int) {
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{10}
+}
+
+type IsExternalStorageRemovableResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsExternalStorageRemovableResponse) Reset() {
+	*x = IsExternalStorageRemovableResponse{}
+	mi := &file_proto_environment_environment_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsExternalStorageRemovableResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsExternalStorageRemovableResponse) ProtoMessage() {}
+
+func (x *IsExternalStorageRemovableResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_environment_environment_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsExternalStorageRemovableResponse.ProtoReflect.Descriptor instead.
+func (*IsExternalStorageRemovableResponse) Descriptor() ([]byte, []int) {
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *IsExternalStorageRemovableResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsExternalStorageEmulatedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsExternalStorageEmulatedRequest) Reset() {
+	*x = IsExternalStorageEmulatedRequest{}
+	mi := &file_proto_environment_environment_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsExternalStorageEmulatedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsExternalStorageEmulatedRequest) ProtoMessage() {}
+
+func (x *IsExternalStorageEmulatedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_environment_environment_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsExternalStorageEmulatedRequest.ProtoReflect.Descriptor instead.
+func (*IsExternalStorageEmulatedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{12}
+}
+
+type IsExternalStorageEmulatedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsExternalStorageEmulatedResponse) Reset() {
+	*x = IsExternalStorageEmulatedResponse{}
+	mi := &file_proto_environment_environment_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsExternalStorageEmulatedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsExternalStorageEmulatedResponse) ProtoMessage() {}
+
+func (x *IsExternalStorageEmulatedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_environment_environment_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsExternalStorageEmulatedResponse.ProtoReflect.Descriptor instead.
+func (*IsExternalStorageEmulatedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *IsExternalStorageEmulatedResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsExternalStorageManagerRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsExternalStorageManagerRequest) Reset() {
+	*x = IsExternalStorageManagerRequest{}
+	mi := &file_proto_environment_environment_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsExternalStorageManagerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsExternalStorageManagerRequest) ProtoMessage() {}
+
+func (x *IsExternalStorageManagerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_environment_environment_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsExternalStorageManagerRequest.ProtoReflect.Descriptor instead.
+func (*IsExternalStorageManagerRequest) Descriptor() ([]byte, []int) {
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{14}
+}
+
+type IsExternalStorageManagerResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsExternalStorageManagerResponse) Reset() {
+	*x = IsExternalStorageManagerResponse{}
+	mi := &file_proto_environment_environment_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsExternalStorageManagerResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsExternalStorageManagerResponse) ProtoMessage() {}
+
+func (x *IsExternalStorageManagerResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_environment_environment_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsExternalStorageManagerResponse.ProtoReflect.Descriptor instead.
+func (*IsExternalStorageManagerResponse) Descriptor() ([]byte, []int) {
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *IsExternalStorageManagerResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
 type GetAbsolutePathRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -31,7 +679,7 @@ type GetAbsolutePathRequest struct {
 
 func (x *GetAbsolutePathRequest) Reset() {
 	*x = GetAbsolutePathRequest{}
-	mi := &file_proto_environment_environment_proto_msgTypes[0]
+	mi := &file_proto_environment_environment_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +691,7 @@ func (x *GetAbsolutePathRequest) String() string {
 func (*GetAbsolutePathRequest) ProtoMessage() {}
 
 func (x *GetAbsolutePathRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_environment_environment_proto_msgTypes[0]
+	mi := &file_proto_environment_environment_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +704,7 @@ func (x *GetAbsolutePathRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAbsolutePathRequest.ProtoReflect.Descriptor instead.
 func (*GetAbsolutePathRequest) Descriptor() ([]byte, []int) {
-	return file_proto_environment_environment_proto_rawDescGZIP(), []int{0}
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{16}
 }
 
 type GetAbsolutePathResponse struct {
@@ -68,7 +716,7 @@ type GetAbsolutePathResponse struct {
 
 func (x *GetAbsolutePathResponse) Reset() {
 	*x = GetAbsolutePathResponse{}
-	mi := &file_proto_environment_environment_proto_msgTypes[1]
+	mi := &file_proto_environment_environment_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -80,7 +728,7 @@ func (x *GetAbsolutePathResponse) String() string {
 func (*GetAbsolutePathResponse) ProtoMessage() {}
 
 func (x *GetAbsolutePathResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_environment_environment_proto_msgTypes[1]
+	mi := &file_proto_environment_environment_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -93,7 +741,7 @@ func (x *GetAbsolutePathResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAbsolutePathResponse.ProtoReflect.Descriptor instead.
 func (*GetAbsolutePathResponse) Descriptor() ([]byte, []int) {
-	return file_proto_environment_environment_proto_rawDescGZIP(), []int{1}
+	return file_proto_environment_environment_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetAbsolutePathResponse) GetResult() string {
@@ -107,10 +755,44 @@ var File_proto_environment_environment_proto protoreflect.FileDescriptor
 
 const file_proto_environment_environment_proto_rawDesc = "" +
 	"\n" +
-	"#proto/environment/environment.proto\x12\venvironment\"\x18\n" +
+	"#proto/environment/environment.proto\x12\venvironment\"\x19\n" +
+	"\x17GetRootDirectoryRequest\"2\n" +
+	"\x18GetRootDirectoryResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x19\n" +
+	"\x17GetDataDirectoryRequest\"2\n" +
+	"\x18GetDataDirectoryResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"$\n" +
+	"\"GetExternalStorageDirectoryRequest\"=\n" +
+	"#GetExternalStorageDirectoryResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"<\n" +
+	"(GetExternalStoragePublicDirectoryRequest\x12\x10\n" +
+	"\x03typ\x18\x01 \x01(\tR\x03typ\"C\n" +
+	")GetExternalStoragePublicDirectoryResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\" \n" +
+	"\x1eGetExternalStorageStateRequest\"9\n" +
+	"\x1fGetExternalStorageStateResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"#\n" +
+	"!IsExternalStorageRemovableRequest\"<\n" +
+	"\"IsExternalStorageRemovableResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\"\n" +
+	" IsExternalStorageEmulatedRequest\";\n" +
+	"!IsExternalStorageEmulatedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"!\n" +
+	"\x1fIsExternalStorageManagerRequest\":\n" +
+	" IsExternalStorageManagerResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x18\n" +
 	"\x16GetAbsolutePathRequest\"1\n" +
 	"\x17GetAbsolutePathResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\tR\x06result2o\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result2\xd8\a\n" +
+	"\x12EnvironmentService\x12_\n" +
+	"\x10GetRootDirectory\x12$.environment.GetRootDirectoryRequest\x1a%.environment.GetRootDirectoryResponse\x12_\n" +
+	"\x10GetDataDirectory\x12$.environment.GetDataDirectoryRequest\x1a%.environment.GetDataDirectoryResponse\x12\x80\x01\n" +
+	"\x1bGetExternalStorageDirectory\x12/.environment.GetExternalStorageDirectoryRequest\x1a0.environment.GetExternalStorageDirectoryResponse\x12\x92\x01\n" +
+	"!GetExternalStoragePublicDirectory\x125.environment.GetExternalStoragePublicDirectoryRequest\x1a6.environment.GetExternalStoragePublicDirectoryResponse\x12t\n" +
+	"\x17GetExternalStorageState\x12+.environment.GetExternalStorageStateRequest\x1a,.environment.GetExternalStorageStateResponse\x12}\n" +
+	"\x1aIsExternalStorageRemovable\x12..environment.IsExternalStorageRemovableRequest\x1a/.environment.IsExternalStorageRemovableResponse\x12z\n" +
+	"\x19IsExternalStorageEmulated\x12-.environment.IsExternalStorageEmulatedRequest\x1a..environment.IsExternalStorageEmulatedResponse\x12w\n" +
+	"\x18IsExternalStorageManager\x12,.environment.IsExternalStorageManagerRequest\x1a-.environment.IsExternalStorageManagerResponse2o\n" +
 	"\x0fJavaFileService\x12\\\n" +
 	"\x0fGetAbsolutePath\x12#.environment.GetAbsolutePathRequest\x1a$.environment.GetAbsolutePathResponseB.Z,github.com/xaionaro-go/jni/proto/environmentb\x06proto3"
 
@@ -126,19 +808,51 @@ func file_proto_environment_environment_proto_rawDescGZIP() []byte {
 	return file_proto_environment_environment_proto_rawDescData
 }
 
-var file_proto_environment_environment_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_proto_environment_environment_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_proto_environment_environment_proto_goTypes = []any{
-	(*GetAbsolutePathRequest)(nil),  // 0: environment.GetAbsolutePathRequest
-	(*GetAbsolutePathResponse)(nil), // 1: environment.GetAbsolutePathResponse
+	(*GetRootDirectoryRequest)(nil),                   // 0: environment.GetRootDirectoryRequest
+	(*GetRootDirectoryResponse)(nil),                  // 1: environment.GetRootDirectoryResponse
+	(*GetDataDirectoryRequest)(nil),                   // 2: environment.GetDataDirectoryRequest
+	(*GetDataDirectoryResponse)(nil),                  // 3: environment.GetDataDirectoryResponse
+	(*GetExternalStorageDirectoryRequest)(nil),        // 4: environment.GetExternalStorageDirectoryRequest
+	(*GetExternalStorageDirectoryResponse)(nil),       // 5: environment.GetExternalStorageDirectoryResponse
+	(*GetExternalStoragePublicDirectoryRequest)(nil),  // 6: environment.GetExternalStoragePublicDirectoryRequest
+	(*GetExternalStoragePublicDirectoryResponse)(nil), // 7: environment.GetExternalStoragePublicDirectoryResponse
+	(*GetExternalStorageStateRequest)(nil),            // 8: environment.GetExternalStorageStateRequest
+	(*GetExternalStorageStateResponse)(nil),           // 9: environment.GetExternalStorageStateResponse
+	(*IsExternalStorageRemovableRequest)(nil),         // 10: environment.IsExternalStorageRemovableRequest
+	(*IsExternalStorageRemovableResponse)(nil),        // 11: environment.IsExternalStorageRemovableResponse
+	(*IsExternalStorageEmulatedRequest)(nil),          // 12: environment.IsExternalStorageEmulatedRequest
+	(*IsExternalStorageEmulatedResponse)(nil),         // 13: environment.IsExternalStorageEmulatedResponse
+	(*IsExternalStorageManagerRequest)(nil),           // 14: environment.IsExternalStorageManagerRequest
+	(*IsExternalStorageManagerResponse)(nil),          // 15: environment.IsExternalStorageManagerResponse
+	(*GetAbsolutePathRequest)(nil),                    // 16: environment.GetAbsolutePathRequest
+	(*GetAbsolutePathResponse)(nil),                   // 17: environment.GetAbsolutePathResponse
 }
 var file_proto_environment_environment_proto_depIdxs = []int32{
-	0, // 0: environment.JavaFileService.GetAbsolutePath:input_type -> environment.GetAbsolutePathRequest
-	1, // 1: environment.JavaFileService.GetAbsolutePath:output_type -> environment.GetAbsolutePathResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0,  // 0: environment.EnvironmentService.GetRootDirectory:input_type -> environment.GetRootDirectoryRequest
+	2,  // 1: environment.EnvironmentService.GetDataDirectory:input_type -> environment.GetDataDirectoryRequest
+	4,  // 2: environment.EnvironmentService.GetExternalStorageDirectory:input_type -> environment.GetExternalStorageDirectoryRequest
+	6,  // 3: environment.EnvironmentService.GetExternalStoragePublicDirectory:input_type -> environment.GetExternalStoragePublicDirectoryRequest
+	8,  // 4: environment.EnvironmentService.GetExternalStorageState:input_type -> environment.GetExternalStorageStateRequest
+	10, // 5: environment.EnvironmentService.IsExternalStorageRemovable:input_type -> environment.IsExternalStorageRemovableRequest
+	12, // 6: environment.EnvironmentService.IsExternalStorageEmulated:input_type -> environment.IsExternalStorageEmulatedRequest
+	14, // 7: environment.EnvironmentService.IsExternalStorageManager:input_type -> environment.IsExternalStorageManagerRequest
+	16, // 8: environment.JavaFileService.GetAbsolutePath:input_type -> environment.GetAbsolutePathRequest
+	1,  // 9: environment.EnvironmentService.GetRootDirectory:output_type -> environment.GetRootDirectoryResponse
+	3,  // 10: environment.EnvironmentService.GetDataDirectory:output_type -> environment.GetDataDirectoryResponse
+	5,  // 11: environment.EnvironmentService.GetExternalStorageDirectory:output_type -> environment.GetExternalStorageDirectoryResponse
+	7,  // 12: environment.EnvironmentService.GetExternalStoragePublicDirectory:output_type -> environment.GetExternalStoragePublicDirectoryResponse
+	9,  // 13: environment.EnvironmentService.GetExternalStorageState:output_type -> environment.GetExternalStorageStateResponse
+	11, // 14: environment.EnvironmentService.IsExternalStorageRemovable:output_type -> environment.IsExternalStorageRemovableResponse
+	13, // 15: environment.EnvironmentService.IsExternalStorageEmulated:output_type -> environment.IsExternalStorageEmulatedResponse
+	15, // 16: environment.EnvironmentService.IsExternalStorageManager:output_type -> environment.IsExternalStorageManagerResponse
+	17, // 17: environment.JavaFileService.GetAbsolutePath:output_type -> environment.GetAbsolutePathResponse
+	9,  // [9:18] is the sub-list for method output_type
+	0,  // [0:9] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_environment_environment_proto_init() }
@@ -152,9 +866,9 @@ func file_proto_environment_environment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_environment_environment_proto_rawDesc), len(file_proto_environment_environment_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   18,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_proto_environment_environment_proto_goTypes,
 		DependencyIndexes: file_proto_environment_environment_proto_depIdxs,

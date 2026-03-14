@@ -134,6 +134,28 @@ var clipboardClipDataGetItemAtCmd = &cobra.Command{
 	},
 }
 
+var clipboardClipDataNewPlainTextCmd = &cobra.Command{
+	Use:   "new-plain-text",
+	Short: "NewPlainText RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewClipDataServiceClient(grpcConn)
+		req := &pb.NewPlainTextRequest{}
+		if v, err := cmd.Flags().GetInt64("label"); err == nil {
+			req.Label = v
+		}
+		if v, err := cmd.Flags().GetInt64("text"); err == nil {
+			req.Text = v
+		}
+		resp, err := client.NewPlainText(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 var clipboardClipItemCmd = &cobra.Command{
 	Use:   "clip-item",
 	Short: "ClipItemService operations",
@@ -202,6 +224,9 @@ func init() {
 	clipboardCmd.AddCommand(clipboardManagerCmd)
 	clipboardClipDataGetItemAtCmd.Flags().Int32("index", 0, "index (int32)")
 	clipboardClipDataCmd.AddCommand(clipboardClipDataGetItemAtCmd)
+	clipboardClipDataNewPlainTextCmd.Flags().Int64("label", 0, "label (int64)")
+	clipboardClipDataNewPlainTextCmd.Flags().Int64("text", 0, "text (int64)")
+	clipboardClipDataCmd.AddCommand(clipboardClipDataNewPlainTextCmd)
 	clipboardCmd.AddCommand(clipboardClipDataCmd)
 	clipboardClipItemCmd.AddCommand(clipboardClipItemGetTextCmd)
 	clipboardCmd.AddCommand(clipboardClipItemCmd)

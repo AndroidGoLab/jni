@@ -34,8 +34,37 @@ var toastToastShowCmd = &cobra.Command{
 	},
 }
 
+var toastToastMakeTextCmd = &cobra.Command{
+	Use:   "make-text",
+	Short: "MakeText RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewToastServiceClient(grpcConn)
+		req := &pb.MakeTextRequest{}
+		if v, err := cmd.Flags().GetInt64("ctx"); err == nil {
+			req.Ctx = v
+		}
+		if v, err := cmd.Flags().GetInt64("text"); err == nil {
+			req.Text = v
+		}
+		if v, err := cmd.Flags().GetInt32("duration"); err == nil {
+			req.Duration = v
+		}
+		resp, err := client.MakeText(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 func init() {
 	toastToastCmd.AddCommand(toastToastShowCmd)
+	toastToastMakeTextCmd.Flags().Int64("ctx", 0, "ctx (int64)")
+	toastToastMakeTextCmd.Flags().Int64("text", 0, "text (int64)")
+	toastToastMakeTextCmd.Flags().Int32("duration", 0, "duration (int32)")
+	toastToastCmd.AddCommand(toastToastMakeTextCmd)
 	toastCmd.AddCommand(toastToastCmd)
 	rootCmd.AddCommand(toastCmd)
 }

@@ -415,6 +415,108 @@ var CursorService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	UriService_Parse_FullMethodName = "/resolver.UriService/Parse"
+)
+
+// UriServiceClient is the client API for UriService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type UriServiceClient interface {
+	Parse(ctx context.Context, in *ParseRequest, opts ...grpc.CallOption) (*ParseResponse, error)
+}
+
+type uriServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewUriServiceClient(cc grpc.ClientConnInterface) UriServiceClient {
+	return &uriServiceClient{cc}
+}
+
+func (c *uriServiceClient) Parse(ctx context.Context, in *ParseRequest, opts ...grpc.CallOption) (*ParseResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ParseResponse)
+	err := c.cc.Invoke(ctx, UriService_Parse_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// UriServiceServer is the server API for UriService service.
+// All implementations must embed UnimplementedUriServiceServer
+// for forward compatibility.
+type UriServiceServer interface {
+	Parse(context.Context, *ParseRequest) (*ParseResponse, error)
+	mustEmbedUnimplementedUriServiceServer()
+}
+
+// UnimplementedUriServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedUriServiceServer struct{}
+
+func (UnimplementedUriServiceServer) Parse(context.Context, *ParseRequest) (*ParseResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Parse not implemented")
+}
+func (UnimplementedUriServiceServer) mustEmbedUnimplementedUriServiceServer() {}
+func (UnimplementedUriServiceServer) testEmbeddedByValue()                    {}
+
+// UnsafeUriServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to UriServiceServer will
+// result in compilation errors.
+type UnsafeUriServiceServer interface {
+	mustEmbedUnimplementedUriServiceServer()
+}
+
+func RegisterUriServiceServer(s grpc.ServiceRegistrar, srv UriServiceServer) {
+	// If the following call panics, it indicates UnimplementedUriServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&UriService_ServiceDesc, srv)
+}
+
+func _UriService_Parse_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ParseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UriServiceServer).Parse(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UriService_Parse_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UriServiceServer).Parse(ctx, req.(*ParseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// UriService_ServiceDesc is the grpc.ServiceDesc for UriService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var UriService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "resolver.UriService",
+	HandlerType: (*UriServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Parse",
+			Handler:    _UriService_Parse_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/resolver/resolver.proto",
+}
+
+const (
 	ParcelFDService_GetFd_FullMethodName    = "/resolver.ParcelFDService/GetFd"
 	ParcelFDService_DetachFd_FullMethodName = "/resolver.ParcelFDService/DetachFd"
 )

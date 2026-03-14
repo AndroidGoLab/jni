@@ -168,6 +168,30 @@ var resolverCursorGetColumnIndexCmd = &cobra.Command{
 	},
 }
 
+var resolverUriCmd = &cobra.Command{
+	Use:   "uri",
+	Short: "UriService operations",
+}
+
+var resolverUriParseCmd = &cobra.Command{
+	Use:   "parse",
+	Short: "Parse RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewUriServiceClient(grpcConn)
+		req := &pb.ParseRequest{}
+		if v, err := cmd.Flags().GetString("uri-string"); err == nil {
+			req.UriString = v
+		}
+		resp, err := client.Parse(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 var resolverParcelFDCmd = &cobra.Command{
 	Use:   "parcel-fd",
 	Short: "ParcelFDService operations",
@@ -226,6 +250,9 @@ func init() {
 	resolverCursorGetColumnIndexCmd.Flags().String("column-name", "", "column-name (string)")
 	resolverCursorCmd.AddCommand(resolverCursorGetColumnIndexCmd)
 	resolverCmd.AddCommand(resolverCursorCmd)
+	resolverUriParseCmd.Flags().String("uri-string", "", "uri-string (string)")
+	resolverUriCmd.AddCommand(resolverUriParseCmd)
+	resolverCmd.AddCommand(resolverUriCmd)
 	resolverParcelFDCmd.AddCommand(resolverParcelFDGetFdCmd)
 	resolverParcelFDCmd.AddCommand(resolverParcelFDDetachFdCmd)
 	resolverCmd.AddCommand(resolverParcelFDCmd)

@@ -127,6 +127,11 @@ func Merge(spec *Spec, overlay *Overlay) (*MergedSpec, error) {
 		GoImport: spec.GoImport,
 	}
 
+	// Inject spec-level intent_extras into the first class (battery pattern).
+	if len(spec.IntentExtras) > 0 && len(spec.Classes) > 0 {
+		spec.Classes[0].IntentExtras = append(spec.Classes[0].IntentExtras, spec.IntentExtras...)
+	}
+
 	for _, cls := range spec.Classes {
 		if cls.Kind == "data_class" {
 			dc, err := mergeDataClass(&cls, overlay)
@@ -136,6 +141,13 @@ func Merge(spec *Spec, overlay *Overlay) (*MergedSpec, error) {
 			merged.DataClasses = append(merged.DataClasses, *dc)
 			continue
 		}
+
+		// Promote static_fields to synthetic getter methods so they appear
+		// as RPCs in protogen output.
+		promoteStaticFieldsToMethods(&cls)
+
+		// Promote intent_extras to synthetic getter methods.
+		promoteIntentExtrasToMethods(&cls)
 
 		mc, err := mergeClass(&cls, overlay)
 		if err != nil {
@@ -157,6 +169,43 @@ func Merge(spec *Spec, overlay *Overlay) (*MergedSpec, error) {
 	return merged, nil
 }
 
+// promoteStaticFieldsToMethods converts StaticFields to synthetic getter
+// methods so they flow through protogen as RPCs (e.g. build.GetManufacturer).
+func promoteStaticFieldsToMethods(cls *Class) {
+	for _, sf := range cls.StaticFields {
+		goName := "Get" + sf.GoName
+		cls.Methods = append(cls.Methods, Method{
+			JavaMethod: sf.JavaField,
+			GoName:     goName,
+			Static:     true,
+			Returns:    sf.Returns,
+			Error:      true,
+		})
+	}
+}
+
+// promoteIntentExtrasToMethods converts IntentExtras to synthetic getter
+// methods so they flow through protogen as RPCs (e.g. battery.GetLevel).
+func promoteIntentExtrasToMethods(cls *Class) {
+	for _, ie := range cls.IntentExtras {
+		if ie.GoName == "" {
+			continue
+		}
+		goName := "Get" + strings.ToUpper(ie.GoName[:1]) + ie.GoName[1:]
+		jt := ie.JavaType
+		if jt == "" {
+			jt = "int"
+		}
+		cls.Methods = append(cls.Methods, Method{
+			JavaMethod: ie.JavaExtra,
+			GoName:     goName,
+			Static:     false,
+			Returns:    jt,
+			Error:      true,
+		})
+	}
+}
+
 func mergeClass(cls *Class, overlay *Overlay) (*MergedClass, error) {
 	mc := &MergedClass{
 		JavaClass:      cls.JavaClass,
@@ -168,7 +217,7 @@ func mergeClass(cls *Class, overlay *Overlay) (*MergedClass, error) {
 		Close:          cls.Close,
 	}
 
-	methods := cls.Methods
+	methods := cls.AllMethods()
 	if overlay != nil && len(overlay.ExtraMethods) > 0 {
 		methods = append(methods, overlay.ExtraMethods...)
 	}
