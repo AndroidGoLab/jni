@@ -76,7 +76,7 @@ func Scan(protoPackageDir string) GoNames {
 				names.MessageTypes[strings.ToLower(goType)] = goType
 			}
 		}
-		f.Close()
+		_ = f.Close()
 	}
 
 	return names

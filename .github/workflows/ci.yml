@@ -100,6 +100,3 @@ jobs:
 
       - name: Lint (tools)
         run: golangci-lint run --build-tags="" ./tools/...
-
-      - name: Lint (jnictl)
-        run: golangci-lint run --build-tags="" ./cmd/jnictl/

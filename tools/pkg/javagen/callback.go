@@ -21,21 +21,21 @@ func BuildCallbackDispatch(cb *MergedCallback) string {
 	var sb strings.Builder
 	sb.WriteString("switch methodName {\n")
 	for _, m := range cb.Methods {
-		sb.WriteString(fmt.Sprintf("\tcase %q:\n", m.JavaMethod))
+		fmt.Fprintf(&sb, "\tcase %q:\n", m.JavaMethod)
 		if len(m.Params) == 0 {
-			sb.WriteString(fmt.Sprintf("\t\tif cb.%s != nil {\n", m.GoField))
-			sb.WriteString(fmt.Sprintf("\t\t\tcb.%s()\n", m.GoField))
+			fmt.Fprintf(&sb, "\t\tif cb.%s != nil {\n", m.GoField)
+			fmt.Fprintf(&sb, "\t\t\tcb.%s()\n", m.GoField)
 			sb.WriteString("\t\t}\n")
 		} else {
 			for i, p := range m.Params {
-				sb.WriteString(fmt.Sprintf("\t\t%s\n", callbackArgConversion(p, i)))
+				fmt.Fprintf(&sb, "\t\t%s\n", callbackArgConversion(p, i))
 			}
-			sb.WriteString(fmt.Sprintf("\t\tif cb.%s != nil {\n", m.GoField))
+			fmt.Fprintf(&sb, "\t\tif cb.%s != nil {\n", m.GoField)
 			var argNames []string
 			for _, p := range m.Params {
 				argNames = append(argNames, p.GoName)
 			}
-			sb.WriteString(fmt.Sprintf("\t\t\tcb.%s(%s)\n", m.GoField, strings.Join(argNames, ", ")))
+			fmt.Fprintf(&sb, "\t\t\tcb.%s(%s)\n", m.GoField, strings.Join(argNames, ", "))
 			sb.WriteString("\t\t}\n")
 		}
 	}
@@ -47,12 +47,12 @@ func BuildCallbackDispatch(cb *MergedCallback) string {
 // fields for a callback interface.
 func BuildCallbackType(cb *MergedCallback) string {
 	var sb strings.Builder
-	sb.WriteString(fmt.Sprintf("type %s struct {\n", cb.GoType))
+	fmt.Fprintf(&sb, "type %s struct {\n", cb.GoType)
 	for _, m := range cb.Methods {
 		if m.GoParams == "" {
-			sb.WriteString(fmt.Sprintf("\t%s func()\n", m.GoField))
+			fmt.Fprintf(&sb, "\t%s func()\n", m.GoField)
 		} else {
-			sb.WriteString(fmt.Sprintf("\t%s func(%s)\n", m.GoField, m.GoParams))
+			fmt.Fprintf(&sb, "\t%s func(%s)\n", m.GoField, m.GoParams)
 		}
 	}
 	sb.WriteString("}")
