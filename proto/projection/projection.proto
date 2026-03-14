@@ -6,48 +6,17 @@ package projection;
 
 option go_package = "github.com/xaionaro-go/jni/proto/projection";
 
-message CreateScreenCaptureIntentRequest {
+message GetDisplayRequest {
 }
 
-message CreateScreenCaptureIntentResponse {
+message GetDisplayResponse {
   int64 result = 1;
 }
 
-message GetMediaProjectionRequest {
-  int32 result_code = 1;
-  int64 result_data = 2;
+message GetSurfaceRequest {
 }
 
-message GetMediaProjectionResponse {
-  int64 result = 1;
-}
-
-message StopRequest {
-}
-
-message StopResponse {
-}
-
-message RegisterCallbackRequest {
-  int64 callback = 1;
-  int64 handler = 2;
-}
-
-message RegisterCallbackResponse {
-}
-
-message CreateVirtualDisplayRawRequest {
-  string name = 1;
-  int32 width = 2;
-  int32 height = 3;
-  int32 dpi = 4;
-  int32 flags = 5;
-  int64 surface = 6;
-  int64 callback = 7;
-  int64 handler = 8;
-}
-
-message CreateVirtualDisplayRawResponse {
+message GetSurfaceResponse {
   int64 result = 1;
 }
 
@@ -57,32 +26,42 @@ message ReleaseRequest {
 message ReleaseResponse {
 }
 
-message ProjectionCallbackOnStopEvent {
+message ResizeRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
 }
 
-message ProjectionCallbackEvent {
-  optional ProjectionCallbackOnStopEvent on_stop = 1;
+message ResizeResponse {
 }
 
-message SubscribeProjectionCallbackRequest {
+message SetRotationRequest {
+  int32 arg0 = 1;
 }
 
-service ManagerService {
-  rpc CreateScreenCaptureIntent (CreateScreenCaptureIntentRequest) returns (CreateScreenCaptureIntentResponse);
-  rpc GetMediaProjection (GetMediaProjectionRequest) returns (GetMediaProjectionResponse);
+message SetRotationResponse {
 }
 
-service ProjectionService {
-  rpc Stop (StopRequest) returns (StopResponse);
-  rpc RegisterCallback (RegisterCallbackRequest) returns (RegisterCallbackResponse);
-  rpc CreateVirtualDisplayRaw (CreateVirtualDisplayRawRequest) returns (CreateVirtualDisplayRawResponse);
+message SetSurfaceRequest {
+  int64 arg0 = 1;
+}
+
+message SetSurfaceResponse {
+}
+
+message ToStringRequest {
+}
+
+message ToStringResponse {
+  string result = 1;
 }
 
 service VirtualDisplayService {
+  rpc GetDisplay (GetDisplayRequest) returns (GetDisplayResponse);
+  rpc GetSurface (GetSurfaceRequest) returns (GetSurfaceResponse);
   rpc Release (ReleaseRequest) returns (ReleaseResponse);
-}
-
-service ProjectionCallbackService {
-  // Server-streaming events from android.media.projection.MediaProjection$Callback
-  rpc SubscribeProjectionCallback (SubscribeProjectionCallbackRequest) returns (stream ProjectionCallbackEvent);
+  rpc Resize (ResizeRequest) returns (ResizeResponse);
+  rpc SetRotation (SetRotationRequest) returns (SetRotationResponse);
+  rpc SetSurface (SetSurfaceRequest) returns (SetSurfaceResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
 }

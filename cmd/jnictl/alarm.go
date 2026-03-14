@@ -13,206 +13,18 @@ var alarmCmd = &cobra.Command{
 	Short: "alarm service operations",
 }
 
-var alarmManagerCmd = &cobra.Command{
-	Use:   "manager",
-	Short: "ManagerService operations",
+var alarmAlarmManagerCmd = &cobra.Command{
+	Use:   "alarm-manager",
+	Short: "AlarmManagerService operations",
 }
 
-var alarmManagerSetRawCmd = &cobra.Command{
-	Use:   "set-raw",
-	Short: "SetRaw RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.SetRawRequest{}
-		if v, err := cmd.Flags().GetInt32("type"); err == nil {
-			req.Type_ = v
-		}
-		if v, err := cmd.Flags().GetInt64("trigger-at-millis"); err == nil {
-			req.TriggerAtMillis = v
-		}
-		if v, err := cmd.Flags().GetInt64("operation"); err == nil {
-			req.Operation = v
-		}
-		resp, err := client.SetRaw(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var alarmManagerSetExactRawCmd = &cobra.Command{
-	Use:   "set-exact-raw",
-	Short: "SetExactRaw RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.SetExactRawRequest{}
-		if v, err := cmd.Flags().GetInt32("type"); err == nil {
-			req.Type_ = v
-		}
-		if v, err := cmd.Flags().GetInt64("trigger-at-millis"); err == nil {
-			req.TriggerAtMillis = v
-		}
-		if v, err := cmd.Flags().GetInt64("operation"); err == nil {
-			req.Operation = v
-		}
-		resp, err := client.SetExactRaw(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var alarmManagerSetExactAndAllowWhileIdleRawCmd = &cobra.Command{
-	Use:   "set-exact-and-allow-while-idle-raw",
-	Short: "SetExactAndAllowWhileIdleRaw RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.SetExactAndAllowWhileIdleRawRequest{}
-		if v, err := cmd.Flags().GetInt32("type"); err == nil {
-			req.Type_ = v
-		}
-		if v, err := cmd.Flags().GetInt64("trigger-at-millis"); err == nil {
-			req.TriggerAtMillis = v
-		}
-		if v, err := cmd.Flags().GetInt64("operation"); err == nil {
-			req.Operation = v
-		}
-		resp, err := client.SetExactAndAllowWhileIdleRaw(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var alarmManagerSetRepeatingRawCmd = &cobra.Command{
-	Use:   "set-repeating-raw",
-	Short: "SetRepeatingRaw RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.SetRepeatingRawRequest{}
-		if v, err := cmd.Flags().GetInt32("type"); err == nil {
-			req.Type_ = v
-		}
-		if v, err := cmd.Flags().GetInt64("trigger-at-millis"); err == nil {
-			req.TriggerAtMillis = v
-		}
-		if v, err := cmd.Flags().GetInt64("interval-millis"); err == nil {
-			req.IntervalMillis = v
-		}
-		if v, err := cmd.Flags().GetInt64("operation"); err == nil {
-			req.Operation = v
-		}
-		resp, err := client.SetRepeatingRaw(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var alarmManagerSetWindowRawCmd = &cobra.Command{
-	Use:   "set-window-raw",
-	Short: "SetWindowRaw RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.SetWindowRawRequest{}
-		if v, err := cmd.Flags().GetInt32("type"); err == nil {
-			req.Type_ = v
-		}
-		if v, err := cmd.Flags().GetInt64("window-start-millis"); err == nil {
-			req.WindowStartMillis = v
-		}
-		if v, err := cmd.Flags().GetInt64("window-length-millis"); err == nil {
-			req.WindowLengthMillis = v
-		}
-		if v, err := cmd.Flags().GetInt64("operation"); err == nil {
-			req.Operation = v
-		}
-		resp, err := client.SetWindowRaw(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var alarmManagerSetAlarmClockRawCmd = &cobra.Command{
-	Use:   "set-alarm-clock-raw",
-	Short: "SetAlarmClockRaw RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.SetAlarmClockRawRequest{}
-		if v, err := cmd.Flags().GetInt64("info"); err == nil {
-			req.Info = v
-		}
-		if v, err := cmd.Flags().GetInt64("operation"); err == nil {
-			req.Operation = v
-		}
-		resp, err := client.SetAlarmClockRaw(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var alarmManagerCancelCmd = &cobra.Command{
-	Use:   "cancel",
-	Short: "Cancel RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.CancelRequest{}
-		if v, err := cmd.Flags().GetInt64("operation"); err == nil {
-			req.Operation = v
-		}
-		resp, err := client.Cancel(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var alarmManagerGetNextAlarmClockRawCmd = &cobra.Command{
-	Use:   "get-next-alarm-clock-raw",
-	Short: "GetNextAlarmClockRaw RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.GetNextAlarmClockRawRequest{}
-		resp, err := client.GetNextAlarmClockRaw(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var alarmManagerCanScheduleExactAlarmsCmd = &cobra.Command{
+var alarmAlarmManagerCanScheduleExactAlarmsCmd = &cobra.Command{
 	Use:   "can-schedule-exact-alarms",
 	Short: "CanScheduleExactAlarms RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
+		client := pb.NewAlarmManagerServiceClient(grpcConn)
 		req := &pb.CanScheduleExactAlarmsRequest{}
 		resp, err := client.CanScheduleExactAlarms(ctx, req)
 		if err != nil {
@@ -222,36 +34,489 @@ var alarmManagerCanScheduleExactAlarmsCmd = &cobra.Command{
 	},
 }
 
+var alarmAlarmManagerCancel1Cmd = &cobra.Command{
+	Use:   "cancel1",
+	Short: "Cancel1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerServiceClient(grpcConn)
+		req := &pb.Cancel1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.Cancel1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerCancel1_1Cmd = &cobra.Command{
+	Use:   "cancel1_1",
+	Short: "Cancel1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerServiceClient(grpcConn)
+		req := &pb.Cancel1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.Cancel1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerCancelAllCmd = &cobra.Command{
+	Use:   "cancel-all",
+	Short: "CancelAll RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerServiceClient(grpcConn)
+		req := &pb.CancelAllRequest{}
+		resp, err := client.CancelAll(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerGetNextAlarmClockCmd = &cobra.Command{
+	Use:   "get-next-alarm-clock",
+	Short: "GetNextAlarmClock RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerServiceClient(grpcConn)
+		req := &pb.GetNextAlarmClockRequest{}
+		resp, err := client.GetNextAlarmClock(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerSetCmd = &cobra.Command{
+	Use:   "set",
+	Short: "Set RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerServiceClient(grpcConn)
+		req := &pb.SetRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.Set(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerSetAlarmClockCmd = &cobra.Command{
+	Use:   "set-alarm-clock",
+	Short: "SetAlarmClock RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerServiceClient(grpcConn)
+		req := &pb.SetAlarmClockRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetAlarmClock(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerSetAndAllowWhileIdleCmd = &cobra.Command{
+	Use:   "set-and-allow-while-idle",
+	Short: "SetAndAllowWhileIdle RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerServiceClient(grpcConn)
+		req := &pb.SetAndAllowWhileIdleRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.SetAndAllowWhileIdle(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerSetExactCmd = &cobra.Command{
+	Use:   "set-exact",
+	Short: "SetExact RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerServiceClient(grpcConn)
+		req := &pb.SetExactRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.SetExact(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerSetExactAndAllowWhileIdleCmd = &cobra.Command{
+	Use:   "set-exact-and-allow-while-idle",
+	Short: "SetExactAndAllowWhileIdle RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerServiceClient(grpcConn)
+		req := &pb.SetExactAndAllowWhileIdleRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.SetExactAndAllowWhileIdle(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerSetInexactRepeatingCmd = &cobra.Command{
+	Use:   "set-inexact-repeating",
+	Short: "SetInexactRepeating RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerServiceClient(grpcConn)
+		req := &pb.SetInexactRepeatingRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.SetInexactRepeating(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerSetRepeatingCmd = &cobra.Command{
+	Use:   "set-repeating",
+	Short: "SetRepeating RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerServiceClient(grpcConn)
+		req := &pb.SetRepeatingRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.SetRepeating(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerSetTimeCmd = &cobra.Command{
+	Use:   "set-time",
+	Short: "SetTime RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerServiceClient(grpcConn)
+		req := &pb.SetTimeRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetTime(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerSetTimeZoneCmd = &cobra.Command{
+	Use:   "set-time-zone",
+	Short: "SetTimeZone RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerServiceClient(grpcConn)
+		req := &pb.SetTimeZoneRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetTimeZone(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerSetWindow4Cmd = &cobra.Command{
+	Use:   "set-window4",
+	Short: "SetWindow4 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerServiceClient(grpcConn)
+		req := &pb.SetWindow4Request{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.SetWindow4(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerSetWindow6_1Cmd = &cobra.Command{
+	Use:   "set-window6_1",
+	Short: "SetWindow6_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerServiceClient(grpcConn)
+		req := &pb.SetWindow6_1Request{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetString("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg5"); err == nil {
+			req.Arg5 = v
+		}
+		resp, err := client.SetWindow6_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerAlarmClockInfoCmd = &cobra.Command{
+	Use:   "alarm-manager-alarm-clock-info",
+	Short: "AlarmManagerAlarmClockInfoService operations",
+}
+
+var alarmAlarmManagerAlarmClockInfoDescribeContentsCmd = &cobra.Command{
+	Use:   "describe-contents",
+	Short: "DescribeContents RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerAlarmClockInfoServiceClient(grpcConn)
+		req := &pb.DescribeContentsRequest{}
+		resp, err := client.DescribeContents(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerAlarmClockInfoGetShowIntentCmd = &cobra.Command{
+	Use:   "get-show-intent",
+	Short: "GetShowIntent RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerAlarmClockInfoServiceClient(grpcConn)
+		req := &pb.GetShowIntentRequest{}
+		resp, err := client.GetShowIntent(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerAlarmClockInfoGetTriggerTimeCmd = &cobra.Command{
+	Use:   "get-trigger-time",
+	Short: "GetTriggerTime RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerAlarmClockInfoServiceClient(grpcConn)
+		req := &pb.GetTriggerTimeRequest{}
+		resp, err := client.GetTriggerTime(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var alarmAlarmManagerAlarmClockInfoWriteToParcelCmd = &cobra.Command{
+	Use:   "write-to-parcel",
+	Short: "WriteToParcel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAlarmManagerAlarmClockInfoServiceClient(grpcConn)
+		req := &pb.WriteToParcelRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.WriteToParcel(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 func init() {
-	alarmManagerSetRawCmd.Flags().Int32("type", 0, "type (int32)")
-	alarmManagerSetRawCmd.Flags().Int64("trigger-at-millis", 0, "trigger-at-millis (int64)")
-	alarmManagerSetRawCmd.Flags().Int64("operation", 0, "operation (int64)")
-	alarmManagerCmd.AddCommand(alarmManagerSetRawCmd)
-	alarmManagerSetExactRawCmd.Flags().Int32("type", 0, "type (int32)")
-	alarmManagerSetExactRawCmd.Flags().Int64("trigger-at-millis", 0, "trigger-at-millis (int64)")
-	alarmManagerSetExactRawCmd.Flags().Int64("operation", 0, "operation (int64)")
-	alarmManagerCmd.AddCommand(alarmManagerSetExactRawCmd)
-	alarmManagerSetExactAndAllowWhileIdleRawCmd.Flags().Int32("type", 0, "type (int32)")
-	alarmManagerSetExactAndAllowWhileIdleRawCmd.Flags().Int64("trigger-at-millis", 0, "trigger-at-millis (int64)")
-	alarmManagerSetExactAndAllowWhileIdleRawCmd.Flags().Int64("operation", 0, "operation (int64)")
-	alarmManagerCmd.AddCommand(alarmManagerSetExactAndAllowWhileIdleRawCmd)
-	alarmManagerSetRepeatingRawCmd.Flags().Int32("type", 0, "type (int32)")
-	alarmManagerSetRepeatingRawCmd.Flags().Int64("trigger-at-millis", 0, "trigger-at-millis (int64)")
-	alarmManagerSetRepeatingRawCmd.Flags().Int64("interval-millis", 0, "interval-millis (int64)")
-	alarmManagerSetRepeatingRawCmd.Flags().Int64("operation", 0, "operation (int64)")
-	alarmManagerCmd.AddCommand(alarmManagerSetRepeatingRawCmd)
-	alarmManagerSetWindowRawCmd.Flags().Int32("type", 0, "type (int32)")
-	alarmManagerSetWindowRawCmd.Flags().Int64("window-start-millis", 0, "window-start-millis (int64)")
-	alarmManagerSetWindowRawCmd.Flags().Int64("window-length-millis", 0, "window-length-millis (int64)")
-	alarmManagerSetWindowRawCmd.Flags().Int64("operation", 0, "operation (int64)")
-	alarmManagerCmd.AddCommand(alarmManagerSetWindowRawCmd)
-	alarmManagerSetAlarmClockRawCmd.Flags().Int64("info", 0, "info (int64)")
-	alarmManagerSetAlarmClockRawCmd.Flags().Int64("operation", 0, "operation (int64)")
-	alarmManagerCmd.AddCommand(alarmManagerSetAlarmClockRawCmd)
-	alarmManagerCancelCmd.Flags().Int64("operation", 0, "operation (int64)")
-	alarmManagerCmd.AddCommand(alarmManagerCancelCmd)
-	alarmManagerCmd.AddCommand(alarmManagerGetNextAlarmClockRawCmd)
-	alarmManagerCmd.AddCommand(alarmManagerCanScheduleExactAlarmsCmd)
-	alarmCmd.AddCommand(alarmManagerCmd)
+	alarmAlarmManagerCmd.AddCommand(alarmAlarmManagerCanScheduleExactAlarmsCmd)
+	alarmAlarmManagerCancel1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	alarmAlarmManagerCmd.AddCommand(alarmAlarmManagerCancel1Cmd)
+	alarmAlarmManagerCancel1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	alarmAlarmManagerCmd.AddCommand(alarmAlarmManagerCancel1_1Cmd)
+	alarmAlarmManagerCmd.AddCommand(alarmAlarmManagerCancelAllCmd)
+	alarmAlarmManagerCmd.AddCommand(alarmAlarmManagerGetNextAlarmClockCmd)
+	alarmAlarmManagerSetCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	alarmAlarmManagerSetCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	alarmAlarmManagerSetCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	alarmAlarmManagerCmd.AddCommand(alarmAlarmManagerSetCmd)
+	alarmAlarmManagerSetAlarmClockCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	alarmAlarmManagerSetAlarmClockCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	alarmAlarmManagerCmd.AddCommand(alarmAlarmManagerSetAlarmClockCmd)
+	alarmAlarmManagerSetAndAllowWhileIdleCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	alarmAlarmManagerSetAndAllowWhileIdleCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	alarmAlarmManagerSetAndAllowWhileIdleCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	alarmAlarmManagerCmd.AddCommand(alarmAlarmManagerSetAndAllowWhileIdleCmd)
+	alarmAlarmManagerSetExactCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	alarmAlarmManagerSetExactCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	alarmAlarmManagerSetExactCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	alarmAlarmManagerCmd.AddCommand(alarmAlarmManagerSetExactCmd)
+	alarmAlarmManagerSetExactAndAllowWhileIdleCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	alarmAlarmManagerSetExactAndAllowWhileIdleCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	alarmAlarmManagerSetExactAndAllowWhileIdleCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	alarmAlarmManagerCmd.AddCommand(alarmAlarmManagerSetExactAndAllowWhileIdleCmd)
+	alarmAlarmManagerSetInexactRepeatingCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	alarmAlarmManagerSetInexactRepeatingCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	alarmAlarmManagerSetInexactRepeatingCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	alarmAlarmManagerSetInexactRepeatingCmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	alarmAlarmManagerCmd.AddCommand(alarmAlarmManagerSetInexactRepeatingCmd)
+	alarmAlarmManagerSetRepeatingCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	alarmAlarmManagerSetRepeatingCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	alarmAlarmManagerSetRepeatingCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	alarmAlarmManagerSetRepeatingCmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	alarmAlarmManagerCmd.AddCommand(alarmAlarmManagerSetRepeatingCmd)
+	alarmAlarmManagerSetTimeCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	alarmAlarmManagerCmd.AddCommand(alarmAlarmManagerSetTimeCmd)
+	alarmAlarmManagerSetTimeZoneCmd.Flags().String("arg0", "", "arg0 (string)")
+	alarmAlarmManagerCmd.AddCommand(alarmAlarmManagerSetTimeZoneCmd)
+	alarmAlarmManagerSetWindow4Cmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	alarmAlarmManagerSetWindow4Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	alarmAlarmManagerSetWindow4Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	alarmAlarmManagerSetWindow4Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	alarmAlarmManagerCmd.AddCommand(alarmAlarmManagerSetWindow4Cmd)
+	alarmAlarmManagerSetWindow6_1Cmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	alarmAlarmManagerSetWindow6_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	alarmAlarmManagerSetWindow6_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	alarmAlarmManagerSetWindow6_1Cmd.Flags().String("arg3", "", "arg3 (string)")
+	alarmAlarmManagerSetWindow6_1Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
+	alarmAlarmManagerSetWindow6_1Cmd.Flags().Int64("arg5", 0, "arg5 (int64)")
+	alarmAlarmManagerCmd.AddCommand(alarmAlarmManagerSetWindow6_1Cmd)
+	alarmCmd.AddCommand(alarmAlarmManagerCmd)
+	alarmAlarmManagerAlarmClockInfoCmd.AddCommand(alarmAlarmManagerAlarmClockInfoDescribeContentsCmd)
+	alarmAlarmManagerAlarmClockInfoCmd.AddCommand(alarmAlarmManagerAlarmClockInfoGetShowIntentCmd)
+	alarmAlarmManagerAlarmClockInfoCmd.AddCommand(alarmAlarmManagerAlarmClockInfoGetTriggerTimeCmd)
+	alarmAlarmManagerAlarmClockInfoWriteToParcelCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	alarmAlarmManagerAlarmClockInfoWriteToParcelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	alarmAlarmManagerAlarmClockInfoCmd.AddCommand(alarmAlarmManagerAlarmClockInfoWriteToParcelCmd)
+	alarmCmd.AddCommand(alarmAlarmManagerAlarmClockInfoCmd)
 	rootCmd.AddCommand(alarmCmd)
 }

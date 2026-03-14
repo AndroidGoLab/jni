@@ -58,11 +58,11 @@ func TestBuildServerData_Location(t *testing.T) {
 	}
 
 	svc := data.Services[0]
-	if svc.GoType != "Manager" {
-		t.Errorf("Service GoType = %q, want %q", svc.GoType, "Manager")
+	if svc.GoType != "locationManager" {
+		t.Errorf("Service GoType = %q, want %q", svc.GoType, "locationManager")
 	}
-	if svc.ServiceName != "ManagerService" {
-		t.Errorf("Service ServiceName = %q, want %q", svc.ServiceName, "ManagerService")
+	if svc.ServiceName != "LocationManagerService" {
+		t.Errorf("Service ServiceName = %q, want %q", svc.ServiceName, "LocationManagerService")
 	}
 	if !svc.Close {
 		t.Error("Service Close should be true")
@@ -87,7 +87,7 @@ func TestBuildServerData_Location(t *testing.T) {
 	}
 }
 
-func TestBuildServerData_LocationMethod_DataClass(t *testing.T) {
+func TestBuildServerData_LocationMethod_Object(t *testing.T) {
 	root := findRepoRoot(t)
 	specPath := filepath.Join(root, "spec", "java", "location.yaml")
 	overlayPath := filepath.Join(root, "spec", "overlays", "java", "location.yaml")
@@ -119,20 +119,19 @@ func TestBuildServerData_LocationMethod_DataClass(t *testing.T) {
 		t.Fatal("GetLastKnownLocation method not found")
 	}
 
-	if m.ReturnKind != "data_class" {
-		t.Errorf("ReturnKind = %q, want %q", m.ReturnKind, "data_class")
+	// The new spec has no data_class kind; GetLastKnownLocation returns an
+	// android.location.Location object, which is treated as a plain object.
+	if m.ReturnKind != "object" {
+		t.Errorf("ReturnKind = %q, want %q", m.ReturnKind, "object")
 	}
-	if m.DataClass != "Location" {
-		t.Errorf("DataClass = %q, want %q", m.DataClass, "Location")
+	if m.DataClass != "" {
+		t.Errorf("DataClass = %q, want %q", m.DataClass, "")
 	}
 	if !m.HasResult {
 		t.Error("HasResult should be true")
 	}
 	if !m.HasError {
 		t.Error("HasError should be true")
-	}
-	if !strings.Contains(m.DataClassConversion, "extracted.Latitude") {
-		t.Errorf("DataClassConversion should reference extracted.Latitude, got: %s", m.DataClassConversion)
 	}
 }
 
@@ -170,15 +169,13 @@ func TestRenderServerToString_Location(t *testing.T) {
 		{"jni import", `"github.com/xaionaro-go/jni"`},
 		{"jnipkg import", `jnipkg "github.com/xaionaro-go/jni/location"`},
 		{"pb import", `pb "github.com/xaionaro-go/jni/proto/location"`},
-		{"struct type", "type ManagerServer struct"},
-		{"unimplemented embed", "pb.UnimplementedManagerServiceServer"},
-		{"method sig", "func (s *ManagerServer) GetLastKnownLocation"},
-		{"new manager", "jnipkg.NewManager(s.Ctx)"},
+		{"struct type", "type locationManagerServer struct"},
+		{"unimplemented embed", "pb.UnimplementedLocationManagerServiceServer"},
+		{"method sig", "func (s *locationManagerServer) GetLastKnownLocation"},
+		{"new manager", "jnipkg.NewlocationManager(s.Ctx)"},
 		{"defer close", "defer mgr.Close()"},
-		{"extract call", "jnipkg.ExtractLocation(env, result)"},
 		{"proto response", "&pb.GetLastKnownLocationResponse{"},
-		{"data class field", "extracted.Latitude"},
-		{"bool method", "func (s *ManagerServer) IsProviderEnabled"},
+		{"bool method", "func (s *locationManagerServer) IsProviderEnabled"},
 		{"bool result", "Result: result"},
 		{"error return", "status.Errorf(codes.Internal,"},
 	}
@@ -200,8 +197,8 @@ func TestGenerateServer_AllRealSpecs(t *testing.T) {
 	if err != nil {
 		t.Fatalf("glob specs: %v", err)
 	}
-	if len(specFiles) < 50 {
-		t.Fatalf("expected at least 50 spec files, found %d", len(specFiles))
+	if len(specFiles) < 40 {
+		t.Fatalf("expected at least 40 spec files, found %d", len(specFiles))
 	}
 
 	var generated, skipped int

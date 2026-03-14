@@ -6,570 +6,182 @@ package bluetooth;
 
 option go_package = "github.com/xaionaro-go/jni/proto/bluetooth";
 
-message Device {
-  string name = 1;
-  string address = 2;
-  int32 type = 3;
-  int32 bond_state = 4;
-  int64 uui_ds = 5;
+message AddDescriptorRequest {
+  int64 arg0 = 1;
 }
 
-message ScanResult {
-  Device device = 1;
-  int32 rssi = 2;
-  int64 record = 3;
-}
-
-message Service {
-  string uuid = 1;
-  int64 characteristics = 2;
-}
-
-message Characteristic {
-  string uuid = 1;
-  int32 properties = 2;
-  int64 descriptors = 3;
-  int64 value = 4;
-}
-
-message Descriptor {
-  string uuid = 1;
-}
-
-message IsEnabledRequest {
-}
-
-message IsEnabledResponse {
+message AddDescriptorResponse {
   bool result = 1;
 }
 
-message GetNameRequest {
+message DescribeContentsRequest {
 }
 
-message GetNameResponse {
+message DescribeContentsResponse {
+  int32 result = 1;
+}
+
+message GetDescriptorRequest {
+  int64 arg0 = 1;
+}
+
+message GetDescriptorResponse {
+  int64 result = 1;
+}
+
+message GetDescriptorsRequest {
+}
+
+message GetDescriptorsResponse {
+  int64 result = 1;
+}
+
+message GetFloatValueRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message GetFloatValueResponse {
+  int64 result = 1;
+}
+
+message GetInstanceIdRequest {
+}
+
+message GetInstanceIdResponse {
+  int32 result = 1;
+}
+
+message GetIntValueRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message GetIntValueResponse {
+  int64 result = 1;
+}
+
+message GetPermissionsRequest {
+}
+
+message GetPermissionsResponse {
+  int32 result = 1;
+}
+
+message GetPropertiesRequest {
+}
+
+message GetPropertiesResponse {
+  int32 result = 1;
+}
+
+message GetServiceRequest {
+}
+
+message GetServiceResponse {
+  int64 result = 1;
+}
+
+message GetStringValueRequest {
+  int32 arg0 = 1;
+}
+
+message GetStringValueResponse {
   string result = 1;
 }
 
-message GetAddressRequest {
+message GetUuidRequest {
 }
 
-message GetAddressResponse {
-  string result = 1;
-}
-
-message GetBondedDevicesRequest {
-}
-
-message GetBondedDevicesResponse {
+message GetUuidResponse {
   int64 result = 1;
 }
 
-message StartDiscoveryRequest {
+message GetValueRequest {
 }
 
-message StartDiscoveryResponse {
+message GetValueResponse {
+  int64 result = 1;
+}
+
+message GetWriteTypeRequest {
+}
+
+message GetWriteTypeResponse {
+  int32 result = 1;
+}
+
+message SetValue1Request {
+  int64 arg0 = 1;
+}
+
+message SetValue1Response {
   bool result = 1;
 }
 
-message CancelDiscoveryRequest {
+message SetValue3_1Request {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
 }
 
-message CancelDiscoveryResponse {
+message SetValue3_1Response {
   bool result = 1;
 }
 
-message GetLeScannerRequest {
+message SetValue4_2Request {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+  int32 arg3 = 4;
 }
 
-message GetLeScannerResponse {
-  int64 result = 1;
-}
-
-message GetLeAdvertiserRequest {
-}
-
-message GetLeAdvertiserResponse {
-  int64 result = 1;
-}
-
-message ListenRfcommRequest {
-  string name = 1;
-  int64 uuid = 2;
-}
-
-message ListenRfcommResponse {
-  int64 result = 1;
-}
-
-message ConnectRequest {
-}
-
-message ConnectResponse {
-}
-
-message GetInputStreamRequest {
-}
-
-message GetInputStreamResponse {
-  int64 result = 1;
-}
-
-message GetOutputStreamRequest {
-}
-
-message GetOutputStreamResponse {
-  int64 result = 1;
-}
-
-message RemoteDeviceRequest {
-}
-
-message RemoteDeviceResponse {
-  Device result = 1;
-}
-
-message AcceptRequest {
-  int32 timeout_ms = 1;
-}
-
-message AcceptResponse {
-  int64 result = 1;
-}
-
-message StartScanRequest {
-  int64 filters = 1;
-  int64 settings = 2;
-  int64 callback = 3;
-}
-
-message StartScanResponse {
-}
-
-message StopScanRequest {
-  int64 callback = 1;
-}
-
-message StopScanResponse {
-}
-
-message SetDeviceNameRequest {
-  string name = 1;
-}
-
-message SetDeviceNameResponse {
-  int64 result = 1;
-}
-
-message SetDeviceAddressRequest {
-  string address = 1;
-}
-
-message SetDeviceAddressResponse {
-  int64 result = 1;
-}
-
-message SetServiceUuidRequest {
-  int64 uuid = 1;
-}
-
-message SetServiceUuidResponse {
-  int64 result = 1;
-}
-
-message BuildRequest {
-}
-
-message BuildResponse {
-  int64 result = 1;
-}
-
-message SetScanModeRequest {
-  int32 mode = 1;
-}
-
-message SetScanModeResponse {
-  int64 result = 1;
-}
-
-message SetReportDelayRequest {
-  int64 delay_ms = 1;
-}
-
-message SetReportDelayResponse {
-  int64 result = 1;
-}
-
-message StartAdvertisingRequest {
-  int64 settings = 1;
-  int64 data = 2;
-  int64 callback = 3;
-}
-
-message StartAdvertisingResponse {
-}
-
-message StopAdvertisingRequest {
-  int64 callback = 1;
-}
-
-message StopAdvertisingResponse {
-}
-
-message SetAdvertiseModeRequest {
-  int32 mode = 1;
-}
-
-message SetAdvertiseModeResponse {
-  int64 result = 1;
-}
-
-message SetConnectableRequest {
-  bool connectable = 1;
-}
-
-message SetConnectableResponse {
-  int64 result = 1;
-}
-
-message SetTimeoutRequest {
-  int32 timeout_ms = 1;
-}
-
-message SetTimeoutResponse {
-  int64 result = 1;
-}
-
-message AddServiceUuidRequest {
-  int64 uuid = 1;
-}
-
-message AddServiceUuidResponse {
-  int64 result = 1;
-}
-
-message AddServiceDataRequest {
-  int64 uuid = 1;
-  int64 data = 2;
-}
-
-message AddServiceDataResponse {
-  int64 result = 1;
-}
-
-message AddManufacturerDataRequest {
-  int32 manufacturer_id = 1;
-  int64 data = 2;
-}
-
-message AddManufacturerDataResponse {
-  int64 result = 1;
-}
-
-message SetIncludeDeviceNameRequest {
-  bool include = 1;
-}
-
-message SetIncludeDeviceNameResponse {
-  int64 result = 1;
-}
-
-message SetIncludeTxPowerLevelRequest {
-  bool include = 1;
-}
-
-message SetIncludeTxPowerLevelResponse {
-  int64 result = 1;
-}
-
-message DiscoverServicesRequest {
-}
-
-message DiscoverServicesResponse {
+message SetValue4_2Response {
   bool result = 1;
 }
 
-message GetServicesRequest {
+message SetValue1_3Request {
+  string arg0 = 1;
 }
 
-message GetServicesResponse {
-  int64 result = 1;
-}
-
-message ReadCharacteristicRequest {
-  int64 characteristic = 1;
-}
-
-message ReadCharacteristicResponse {
+message SetValue1_3Response {
   bool result = 1;
 }
 
-message WriteCharacteristicRequest {
-  int64 characteristic = 1;
+message SetWriteTypeRequest {
+  int32 arg0 = 1;
 }
 
-message WriteCharacteristicResponse {
-  bool result = 1;
+message SetWriteTypeResponse {
 }
 
-message SetCharacteristicNotificationRequest {
-  int64 characteristic = 1;
-  bool enable = 2;
-}
-
-message SetCharacteristicNotificationResponse {
-  bool result = 1;
-}
-
-message RequestMtuRequest {
-  int32 mtu = 1;
-}
-
-message RequestMtuResponse {
-  bool result = 1;
-}
-
-message ReadRemoteRssiRequest {
-}
-
-message ReadRemoteRssiResponse {
-  bool result = 1;
-}
-
-message AddServiceRequest {
-  int64 service = 1;
-}
-
-message AddServiceResponse {
-  bool result = 1;
-}
-
-message NotifyCharacteristicRequest {
-  int64 device = 1;
-  int64 characteristic = 2;
-  bool confirm = 3;
-}
-
-message NotifyCharacteristicResponse {
-  bool result = 1;
-}
-
-message ScanCallbackOnScanResultEvent {
+message WriteToParcelRequest {
   int64 arg0 = 1;
-  int64 arg1 = 2;
+  int32 arg1 = 2;
 }
 
-message ScanCallbackOnScanFailedEvent {
-  int64 arg0 = 1;
+message WriteToParcelResponse {
 }
 
-message ScanCallbackEvent {
-  optional ScanCallbackOnScanResultEvent on_scan_result = 1;
-  optional ScanCallbackOnScanFailedEvent on_scan_failed = 2;
-}
-
-message SubscribeScanCallbackRequest {
-}
-
-message AdvertiseCallbackOnStartSuccessEvent {
-  int64 arg0 = 1;
-}
-
-message AdvertiseCallbackOnStartFailureEvent {
-  int64 arg0 = 1;
-}
-
-message AdvertiseCallbackEvent {
-  optional AdvertiseCallbackOnStartSuccessEvent on_start_success = 1;
-  optional AdvertiseCallbackOnStartFailureEvent on_start_failure = 2;
-}
-
-message SubscribeAdvertiseCallbackRequest {
-}
-
-message GattCallbackOnConnectionStateChangeEvent {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  int64 arg2 = 3;
-}
-
-message GattCallbackOnServicesDiscoveredEvent {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-}
-
-message GattCallbackOnCharacteristicReadEvent {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  int64 arg2 = 3;
-}
-
-message GattCallbackOnCharacteristicWriteEvent {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  int64 arg2 = 3;
-}
-
-message GattCallbackOnCharacteristicChangedEvent {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-}
-
-message GattCallbackOnMtuChangedEvent {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  int64 arg2 = 3;
-}
-
-message GattCallbackOnReadRemoteRssiEvent {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  int64 arg2 = 3;
-}
-
-message GattCallbackEvent {
-  optional GattCallbackOnConnectionStateChangeEvent on_connection_state_change = 1;
-  optional GattCallbackOnServicesDiscoveredEvent on_services_discovered = 2;
-  optional GattCallbackOnCharacteristicReadEvent on_characteristic_read = 3;
-  optional GattCallbackOnCharacteristicWriteEvent on_characteristic_write = 4;
-  optional GattCallbackOnCharacteristicChangedEvent on_characteristic_changed = 5;
-  optional GattCallbackOnMtuChangedEvent on_mtu_changed = 6;
-  optional GattCallbackOnReadRemoteRssiEvent on_read_remote_rssi = 7;
-}
-
-message SubscribeGattCallbackRequest {
-}
-
-message GattCallbackCommand {
-}
-
-message GattServerCallbackOnConnectionStateChangeEvent {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  int64 arg2 = 3;
-}
-
-message GattServerCallbackOnCharacteristicReadRequestEvent {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  int64 arg2 = 3;
-  int64 arg3 = 4;
-}
-
-message GattServerCallbackOnCharacteristicWriteRequestEvent {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  int64 arg2 = 3;
-  int64 arg3 = 4;
-  int64 arg4 = 5;
-  int64 arg5 = 6;
-  int64 arg6 = 7;
-}
-
-message GattServerCallbackEvent {
-  optional GattServerCallbackOnConnectionStateChangeEvent on_connection_state_change = 1;
-  optional GattServerCallbackOnCharacteristicReadRequestEvent on_characteristic_read_request = 2;
-  optional GattServerCallbackOnCharacteristicWriteRequestEvent on_characteristic_write_request = 3;
-}
-
-message SubscribeGattServerCallbackRequest {
-}
-
-message GattServerCallbackCommand {
-}
-
-service AdapterService {
-  rpc IsEnabled (IsEnabledRequest) returns (IsEnabledResponse);
-  rpc GetName (GetNameRequest) returns (GetNameResponse);
-  rpc GetAddress (GetAddressRequest) returns (GetAddressResponse);
-  rpc GetBondedDevices (GetBondedDevicesRequest) returns (GetBondedDevicesResponse);
-  rpc StartDiscovery (StartDiscoveryRequest) returns (StartDiscoveryResponse);
-  rpc CancelDiscovery (CancelDiscoveryRequest) returns (CancelDiscoveryResponse);
-  rpc GetLeScanner (GetLeScannerRequest) returns (GetLeScannerResponse);
-  rpc GetLeAdvertiser (GetLeAdvertiserRequest) returns (GetLeAdvertiserResponse);
-  rpc ListenRfcomm (ListenRfcommRequest) returns (ListenRfcommResponse);
-}
-
-service SocketService {
-  rpc Connect (ConnectRequest) returns (ConnectResponse);
-  rpc GetInputStream (GetInputStreamRequest) returns (GetInputStreamResponse);
-  rpc GetOutputStream (GetOutputStreamRequest) returns (GetOutputStreamResponse);
-  rpc RemoteDevice (RemoteDeviceRequest) returns (RemoteDeviceResponse);
-}
-
-service ServerSocketService {
-  rpc Accept (AcceptRequest) returns (AcceptResponse);
-}
-
-service LeScannerService {
-  rpc StartScan (StartScanRequest) returns (StartScanResponse);
-  rpc StopScan (StopScanRequest) returns (StopScanResponse);
-}
-
-service ScanFilterBuilderService {
-  rpc SetDeviceName (SetDeviceNameRequest) returns (SetDeviceNameResponse);
-  rpc SetDeviceAddress (SetDeviceAddressRequest) returns (SetDeviceAddressResponse);
-  rpc SetServiceUuid (SetServiceUuidRequest) returns (SetServiceUuidResponse);
-  rpc Build (BuildRequest) returns (BuildResponse);
-}
-
-service ScanSettingsBuilderService {
-  rpc SetScanMode (SetScanModeRequest) returns (SetScanModeResponse);
-  rpc SetReportDelay (SetReportDelayRequest) returns (SetReportDelayResponse);
-  rpc Build (BuildRequest) returns (BuildResponse);
-}
-
-service LeAdvertiserService {
-  rpc StartAdvertising (StartAdvertisingRequest) returns (StartAdvertisingResponse);
-  rpc StopAdvertising (StopAdvertisingRequest) returns (StopAdvertisingResponse);
-}
-
-service AdvertiseSettingsBuilderService {
-  rpc SetAdvertiseMode (SetAdvertiseModeRequest) returns (SetAdvertiseModeResponse);
-  rpc SetConnectable (SetConnectableRequest) returns (SetConnectableResponse);
-  rpc SetTimeout (SetTimeoutRequest) returns (SetTimeoutResponse);
-  rpc Build (BuildRequest) returns (BuildResponse);
-}
-
-service AdvertiseDataBuilderService {
-  rpc AddServiceUuid (AddServiceUuidRequest) returns (AddServiceUuidResponse);
-  rpc AddServiceData (AddServiceDataRequest) returns (AddServiceDataResponse);
-  rpc AddManufacturerData (AddManufacturerDataRequest) returns (AddManufacturerDataResponse);
-  rpc SetIncludeDeviceName (SetIncludeDeviceNameRequest) returns (SetIncludeDeviceNameResponse);
-  rpc SetIncludeTxPowerLevel (SetIncludeTxPowerLevelRequest) returns (SetIncludeTxPowerLevelResponse);
-  rpc Build (BuildRequest) returns (BuildResponse);
-}
-
-service GATTClientService {
-  rpc DiscoverServices (DiscoverServicesRequest) returns (DiscoverServicesResponse);
-  rpc GetServices (GetServicesRequest) returns (GetServicesResponse);
-  rpc ReadCharacteristic (ReadCharacteristicRequest) returns (ReadCharacteristicResponse);
-  rpc WriteCharacteristic (WriteCharacteristicRequest) returns (WriteCharacteristicResponse);
-  rpc SetCharacteristicNotification (SetCharacteristicNotificationRequest) returns (SetCharacteristicNotificationResponse);
-  rpc RequestMtu (RequestMtuRequest) returns (RequestMtuResponse);
-  rpc ReadRemoteRssi (ReadRemoteRssiRequest) returns (ReadRemoteRssiResponse);
-}
-
-service GATTServerService {
-  rpc AddService (AddServiceRequest) returns (AddServiceResponse);
-  rpc NotifyCharacteristic (NotifyCharacteristicRequest) returns (NotifyCharacteristicResponse);
-}
-
-service ScanCallbackService {
-  // Server-streaming events from android.bluetooth.le.ScanCallback
-  rpc SubscribeScanCallback (SubscribeScanCallbackRequest) returns (stream ScanCallbackEvent);
-}
-
-service AdvertiseCallbackService {
-  // Server-streaming events from android.bluetooth.le.AdvertiseCallback
-  rpc SubscribeAdvertiseCallback (SubscribeAdvertiseCallbackRequest) returns (stream AdvertiseCallbackEvent);
-}
-
-service GattCallbackService {
-  // Bidirectional streaming for android.bluetooth.BluetoothGattCallback
-  rpc GattCallbackStream (stream GattCallbackCommand) returns (stream GattCallbackEvent);
-}
-
-service GattServerCallbackService {
-  // Bidirectional streaming for android.bluetooth.BluetoothGattServerCallback
-  rpc GattServerCallbackStream (stream GattServerCallbackCommand) returns (stream GattServerCallbackEvent);
+service BluetoothGattCharacteristicService {
+  rpc AddDescriptor (AddDescriptorRequest) returns (AddDescriptorResponse);
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc GetDescriptor (GetDescriptorRequest) returns (GetDescriptorResponse);
+  rpc GetDescriptors (GetDescriptorsRequest) returns (GetDescriptorsResponse);
+  rpc GetFloatValue (GetFloatValueRequest) returns (GetFloatValueResponse);
+  rpc GetInstanceId (GetInstanceIdRequest) returns (GetInstanceIdResponse);
+  rpc GetIntValue (GetIntValueRequest) returns (GetIntValueResponse);
+  rpc GetPermissions (GetPermissionsRequest) returns (GetPermissionsResponse);
+  rpc GetProperties (GetPropertiesRequest) returns (GetPropertiesResponse);
+  rpc GetService (GetServiceRequest) returns (GetServiceResponse);
+  rpc GetStringValue (GetStringValueRequest) returns (GetStringValueResponse);
+  rpc GetUuid (GetUuidRequest) returns (GetUuidResponse);
+  rpc GetValue (GetValueRequest) returns (GetValueResponse);
+  rpc GetWriteType (GetWriteTypeRequest) returns (GetWriteTypeResponse);
+  rpc SetValue1 (SetValue1Request) returns (SetValue1Response);
+  rpc SetValue3_1 (SetValue3_1Request) returns (SetValue3_1Response);
+  rpc SetValue4_2 (SetValue4_2Request) returns (SetValue4_2Response);
+  rpc SetValue1_3 (SetValue1_3Request) returns (SetValue1_3Response);
+  rpc SetWriteType (SetWriteTypeRequest) returns (SetWriteTypeResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
 }

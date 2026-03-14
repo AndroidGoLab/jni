@@ -3,12 +3,9 @@
 package main
 
 import (
-	"fmt"
-	"io"
 
 	"github.com/spf13/cobra"
 	pb "github.com/xaionaro-go/jni/proto/nfc"
-	"google.golang.org/protobuf/encoding/protojson"
 )
 
 var nfcCmd = &cobra.Command{
@@ -16,20 +13,20 @@ var nfcCmd = &cobra.Command{
 	Short: "nfc service operations",
 }
 
-var nfcAdapterCmd = &cobra.Command{
-	Use:   "adapter",
-	Short: "AdapterService operations",
+var nfcNdefRecordCmd = &cobra.Command{
+	Use:   "ndef-record",
+	Short: "NdefRecordService operations",
 }
 
-var nfcAdapterIsEnabledCmd = &cobra.Command{
-	Use:   "is-enabled",
-	Short: "IsEnabled RPC",
+var nfcNdefRecordDescribeContentsCmd = &cobra.Command{
+	Use:   "describe-contents",
+	Short: "DescribeContents RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewAdapterServiceClient(grpcConn)
-		req := &pb.IsEnabledRequest{}
-		resp, err := client.IsEnabled(ctx, req)
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.DescribeContentsRequest{}
+		resp, err := client.DescribeContents(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -37,27 +34,18 @@ var nfcAdapterIsEnabledCmd = &cobra.Command{
 	},
 }
 
-var nfcAdapterEnableReaderModeCmd = &cobra.Command{
-	Use:   "enable-reader-mode",
-	Short: "EnableReaderMode RPC",
+var nfcNdefRecordEqualsCmd = &cobra.Command{
+	Use:   "equals",
+	Short: "Equals RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewAdapterServiceClient(grpcConn)
-		req := &pb.EnableReaderModeRequest{}
-		if v, err := cmd.Flags().GetInt64("activity"); err == nil {
-			req.Activity = v
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.EqualsRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("callback"); err == nil {
-			req.Callback = v
-		}
-		if v, err := cmd.Flags().GetInt32("flags"); err == nil {
-			req.Flags = v
-		}
-		if v, err := cmd.Flags().GetInt64("extras"); err == nil {
-			req.Extras = v
-		}
-		resp, err := client.EnableReaderMode(ctx, req)
+		resp, err := client.Equals(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -65,18 +53,15 @@ var nfcAdapterEnableReaderModeCmd = &cobra.Command{
 	},
 }
 
-var nfcAdapterDisableReaderModeCmd = &cobra.Command{
-	Use:   "disable-reader-mode",
-	Short: "DisableReaderMode RPC",
+var nfcNdefRecordGetIdCmd = &cobra.Command{
+	Use:   "get-id",
+	Short: "GetId RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewAdapterServiceClient(grpcConn)
-		req := &pb.DisableReaderModeRequest{}
-		if v, err := cmd.Flags().GetInt64("activity"); err == nil {
-			req.Activity = v
-		}
-		resp, err := client.DisableReaderMode(ctx, req)
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.GetIdRequest{}
+		resp, err := client.GetId(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -84,20 +69,15 @@ var nfcAdapterDisableReaderModeCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefMessageCmd = &cobra.Command{
-	Use:   "ndef-message",
-	Short: "NdefMessageService operations",
-}
-
-var nfcNdefMessageGetRecordsCmd = &cobra.Command{
-	Use:   "get-records",
-	Short: "GetRecords RPC",
+var nfcNdefRecordGetPayloadCmd = &cobra.Command{
+	Use:   "get-payload",
+	Short: "GetPayload RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefMessageServiceClient(grpcConn)
-		req := &pb.GetRecordsRequest{}
-		resp, err := client.GetRecords(ctx, req)
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.GetPayloadRequest{}
+		resp, err := client.GetPayload(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -105,20 +85,15 @@ var nfcNdefMessageGetRecordsCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefTagCmd = &cobra.Command{
-	Use:   "ndef-tag",
-	Short: "NdefTagService operations",
-}
-
-var nfcNdefTagConnectCmd = &cobra.Command{
-	Use:   "connect",
-	Short: "Connect RPC",
+var nfcNdefRecordGetTnfCmd = &cobra.Command{
+	Use:   "get-tnf",
+	Short: "GetTnf RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefTagServiceClient(grpcConn)
-		req := &pb.ConnectRequest{}
-		resp, err := client.Connect(ctx, req)
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.GetTnfRequest{}
+		resp, err := client.GetTnf(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -126,15 +101,15 @@ var nfcNdefTagConnectCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefTagGetNdefMessageRawCmd = &cobra.Command{
-	Use:   "get-ndef-message-raw",
-	Short: "GetNdefMessageRaw RPC",
+var nfcNdefRecordGetTypeCmd = &cobra.Command{
+	Use:   "get-type",
+	Short: "GetType RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefTagServiceClient(grpcConn)
-		req := &pb.GetNdefMessageRawRequest{}
-		resp, err := client.GetNdefMessageRaw(ctx, req)
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.GetTypeRequest{}
+		resp, err := client.GetType(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -142,18 +117,15 @@ var nfcNdefTagGetNdefMessageRawCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefTagWriteNdefMessageRawCmd = &cobra.Command{
-	Use:   "write-ndef-message-raw",
-	Short: "WriteNdefMessageRaw RPC",
+var nfcNdefRecordHashCodeCmd = &cobra.Command{
+	Use:   "hash-code",
+	Short: "HashCode RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefTagServiceClient(grpcConn)
-		req := &pb.WriteNdefMessageRawRequest{}
-		if v, err := cmd.Flags().GetInt64("msg"); err == nil {
-			req.Msg = v
-		}
-		resp, err := client.WriteNdefMessageRaw(ctx, req)
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.HashCodeRequest{}
+		resp, err := client.HashCode(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -161,15 +133,15 @@ var nfcNdefTagWriteNdefMessageRawCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefTagMakeReadOnlyCmd = &cobra.Command{
-	Use:   "make-read-only",
-	Short: "MakeReadOnly RPC",
+var nfcNdefRecordToByteArrayCmd = &cobra.Command{
+	Use:   "to-byte-array",
+	Short: "ToByteArray RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefTagServiceClient(grpcConn)
-		req := &pb.MakeReadOnlyRequest{}
-		resp, err := client.MakeReadOnly(ctx, req)
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.ToByteArrayRequest{}
+		resp, err := client.ToByteArray(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -177,15 +149,15 @@ var nfcNdefTagMakeReadOnlyCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefTagIsWritableCmd = &cobra.Command{
-	Use:   "is-writable",
-	Short: "IsWritable RPC",
+var nfcNdefRecordToMimeTypeCmd = &cobra.Command{
+	Use:   "to-mime-type",
+	Short: "ToMimeType RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefTagServiceClient(grpcConn)
-		req := &pb.IsWritableRequest{}
-		resp, err := client.IsWritable(ctx, req)
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.ToMimeTypeRequest{}
+		resp, err := client.ToMimeType(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -193,15 +165,15 @@ var nfcNdefTagIsWritableCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefTagGetMaxSizeCmd = &cobra.Command{
-	Use:   "get-max-size",
-	Short: "GetMaxSize RPC",
+var nfcNdefRecordToStringCmd = &cobra.Command{
+	Use:   "to-string",
+	Short: "ToString RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefTagServiceClient(grpcConn)
-		req := &pb.GetMaxSizeRequest{}
-		resp, err := client.GetMaxSize(ctx, req)
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.ToStringRequest{}
+		resp, err := client.ToString(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -209,15 +181,15 @@ var nfcNdefTagGetMaxSizeCmd = &cobra.Command{
 	},
 }
 
-var nfcNdefTagCloseCmd = &cobra.Command{
-	Use:   "close",
-	Short: "Close RPC",
+var nfcNdefRecordToUriCmd = &cobra.Command{
+	Use:   "to-uri",
+	Short: "ToUri RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewNdefTagServiceClient(grpcConn)
-		req := &pb.CloseRequest{}
-		resp, err := client.Close(ctx, req)
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.ToUriRequest{}
+		resp, err := client.ToUri(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -225,20 +197,21 @@ var nfcNdefTagCloseCmd = &cobra.Command{
 	},
 }
 
-var nfcIsoDepTagCmd = &cobra.Command{
-	Use:   "iso-dep-tag",
-	Short: "IsoDepTagService operations",
-}
-
-var nfcIsoDepTagConnectCmd = &cobra.Command{
-	Use:   "connect",
-	Short: "Connect RPC",
+var nfcNdefRecordWriteToParcelCmd = &cobra.Command{
+	Use:   "write-to-parcel",
+	Short: "WriteToParcel RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewIsoDepTagServiceClient(grpcConn)
-		req := &pb.ConnectRequest{}
-		resp, err := client.Connect(ctx, req)
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.WriteToParcelRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.WriteToParcel(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -246,18 +219,18 @@ var nfcIsoDepTagConnectCmd = &cobra.Command{
 	},
 }
 
-var nfcIsoDepTagTransceiveCmd = &cobra.Command{
-	Use:   "transceive",
-	Short: "Transceive RPC",
+var nfcNdefRecordCreateApplicationRecordCmd = &cobra.Command{
+	Use:   "create-application-record",
+	Short: "CreateApplicationRecord RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewIsoDepTagServiceClient(grpcConn)
-		req := &pb.TransceiveRequest{}
-		if v, err := cmd.Flags().GetInt64("data"); err == nil {
-			req.Data = v
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.CreateApplicationRecordRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		resp, err := client.Transceive(ctx, req)
+		resp, err := client.CreateApplicationRecord(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -265,18 +238,24 @@ var nfcIsoDepTagTransceiveCmd = &cobra.Command{
 	},
 }
 
-var nfcIsoDepTagSetTimeoutMsCmd = &cobra.Command{
-	Use:   "set-timeout-ms",
-	Short: "SetTimeoutMs RPC",
+var nfcNdefRecordCreateExternalCmd = &cobra.Command{
+	Use:   "create-external",
+	Short: "CreateExternal RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewIsoDepTagServiceClient(grpcConn)
-		req := &pb.SetTimeoutMsRequest{}
-		if v, err := cmd.Flags().GetInt32("timeout-ms"); err == nil {
-			req.TimeoutMs = v
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.CreateExternalRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		resp, err := client.SetTimeoutMs(ctx, req)
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.CreateExternal(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -284,15 +263,21 @@ var nfcIsoDepTagSetTimeoutMsCmd = &cobra.Command{
 	},
 }
 
-var nfcIsoDepTagGetMaxTransceiveLengthCmd = &cobra.Command{
-	Use:   "get-max-transceive-length",
-	Short: "GetMaxTransceiveLength RPC",
+var nfcNdefRecordCreateMimeCmd = &cobra.Command{
+	Use:   "create-mime",
+	Short: "CreateMime RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewIsoDepTagServiceClient(grpcConn)
-		req := &pb.GetMaxTransceiveLengthRequest{}
-		resp, err := client.GetMaxTransceiveLength(ctx, req)
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.CreateMimeRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.CreateMime(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -300,15 +285,21 @@ var nfcIsoDepTagGetMaxTransceiveLengthCmd = &cobra.Command{
 	},
 }
 
-var nfcIsoDepTagCloseCmd = &cobra.Command{
-	Use:   "close",
-	Short: "Close RPC",
+var nfcNdefRecordCreateTextRecordCmd = &cobra.Command{
+	Use:   "create-text-record",
+	Short: "CreateTextRecord RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewIsoDepTagServiceClient(grpcConn)
-		req := &pb.CloseRequest{}
-		resp, err := client.Close(ctx, req)
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.CreateTextRecordRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.CreateTextRecord(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -316,71 +307,76 @@ var nfcIsoDepTagCloseCmd = &cobra.Command{
 	},
 }
 
-var nfcReaderCallbackCmd = &cobra.Command{
-	Use:   "reader-callback",
-	Short: "ReaderCallbackService operations",
-}
-
-var nfcReaderCallbackSubscribeReaderCallbackCmd = &cobra.Command{
-	Use:   "subscribe-reader-callback",
-	Short: "SubscribeReaderCallback RPC",
+var nfcNdefRecordCreateUri1Cmd = &cobra.Command{
+	Use:   "create-uri1",
+	Short: "CreateUri1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewReaderCallbackServiceClient(grpcConn)
-		req := &pb.SubscribeReaderCallbackRequest{}
-		stream, err := client.SubscribeReaderCallback(ctx, req)
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.CreateUri1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.CreateUri1(ctx, req)
 		if err != nil {
 			return err
 		}
-		opts := protojson.MarshalOptions{Multiline: true, Indent: "  "}
-		for {
-			resp, err := stream.Recv()
-			if err == io.EOF {
-				return nil
-			}
-			if err != nil {
-				return err
-			}
-			data, err := opts.Marshal(resp)
-			if err != nil {
-				return err
-			}
-			fmt.Println(string(data))
+		return printProtoMessage(resp)
+	},
+}
+
+var nfcNdefRecordCreateUri1_1Cmd = &cobra.Command{
+	Use:   "create-uri1_1",
+	Short: "CreateUri1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNdefRecordServiceClient(grpcConn)
+		req := &pb.CreateUri1_1Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
+		resp, err := client.CreateUri1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
 	},
 }
 
 func init() {
-	nfcAdapterCmd.AddCommand(nfcAdapterIsEnabledCmd)
-	nfcAdapterEnableReaderModeCmd.Flags().Int64("activity", 0, "activity (int64)")
-	nfcAdapterEnableReaderModeCmd.Flags().Int64("callback", 0, "callback (int64)")
-	nfcAdapterEnableReaderModeCmd.Flags().Int32("flags", 0, "flags (int32)")
-	nfcAdapterEnableReaderModeCmd.Flags().Int64("extras", 0, "extras (int64)")
-	nfcAdapterCmd.AddCommand(nfcAdapterEnableReaderModeCmd)
-	nfcAdapterDisableReaderModeCmd.Flags().Int64("activity", 0, "activity (int64)")
-	nfcAdapterCmd.AddCommand(nfcAdapterDisableReaderModeCmd)
-	nfcCmd.AddCommand(nfcAdapterCmd)
-	nfcNdefMessageCmd.AddCommand(nfcNdefMessageGetRecordsCmd)
-	nfcCmd.AddCommand(nfcNdefMessageCmd)
-	nfcNdefTagCmd.AddCommand(nfcNdefTagConnectCmd)
-	nfcNdefTagCmd.AddCommand(nfcNdefTagGetNdefMessageRawCmd)
-	nfcNdefTagWriteNdefMessageRawCmd.Flags().Int64("msg", 0, "msg (int64)")
-	nfcNdefTagCmd.AddCommand(nfcNdefTagWriteNdefMessageRawCmd)
-	nfcNdefTagCmd.AddCommand(nfcNdefTagMakeReadOnlyCmd)
-	nfcNdefTagCmd.AddCommand(nfcNdefTagIsWritableCmd)
-	nfcNdefTagCmd.AddCommand(nfcNdefTagGetMaxSizeCmd)
-	nfcNdefTagCmd.AddCommand(nfcNdefTagCloseCmd)
-	nfcCmd.AddCommand(nfcNdefTagCmd)
-	nfcIsoDepTagCmd.AddCommand(nfcIsoDepTagConnectCmd)
-	nfcIsoDepTagTransceiveCmd.Flags().Int64("data", 0, "data (int64)")
-	nfcIsoDepTagCmd.AddCommand(nfcIsoDepTagTransceiveCmd)
-	nfcIsoDepTagSetTimeoutMsCmd.Flags().Int32("timeout-ms", 0, "timeout-ms (int32)")
-	nfcIsoDepTagCmd.AddCommand(nfcIsoDepTagSetTimeoutMsCmd)
-	nfcIsoDepTagCmd.AddCommand(nfcIsoDepTagGetMaxTransceiveLengthCmd)
-	nfcIsoDepTagCmd.AddCommand(nfcIsoDepTagCloseCmd)
-	nfcCmd.AddCommand(nfcIsoDepTagCmd)
-	nfcReaderCallbackCmd.AddCommand(nfcReaderCallbackSubscribeReaderCallbackCmd)
-	nfcCmd.AddCommand(nfcReaderCallbackCmd)
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordDescribeContentsCmd)
+	nfcNdefRecordEqualsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordEqualsCmd)
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordGetIdCmd)
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordGetPayloadCmd)
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordGetTnfCmd)
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordGetTypeCmd)
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordHashCodeCmd)
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordToByteArrayCmd)
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordToMimeTypeCmd)
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordToStringCmd)
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordToUriCmd)
+	nfcNdefRecordWriteToParcelCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nfcNdefRecordWriteToParcelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordWriteToParcelCmd)
+	nfcNdefRecordCreateApplicationRecordCmd.Flags().String("arg0", "", "arg0 (string)")
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordCreateApplicationRecordCmd)
+	nfcNdefRecordCreateExternalCmd.Flags().String("arg0", "", "arg0 (string)")
+	nfcNdefRecordCreateExternalCmd.Flags().String("arg1", "", "arg1 (string)")
+	nfcNdefRecordCreateExternalCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordCreateExternalCmd)
+	nfcNdefRecordCreateMimeCmd.Flags().String("arg0", "", "arg0 (string)")
+	nfcNdefRecordCreateMimeCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordCreateMimeCmd)
+	nfcNdefRecordCreateTextRecordCmd.Flags().String("arg0", "", "arg0 (string)")
+	nfcNdefRecordCreateTextRecordCmd.Flags().String("arg1", "", "arg1 (string)")
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordCreateTextRecordCmd)
+	nfcNdefRecordCreateUri1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordCreateUri1Cmd)
+	nfcNdefRecordCreateUri1_1Cmd.Flags().String("arg0", "", "arg0 (string)")
+	nfcNdefRecordCmd.AddCommand(nfcNdefRecordCreateUri1_1Cmd)
+	nfcCmd.AddCommand(nfcNdefRecordCmd)
 	rootCmd.AddCommand(nfcCmd)
 }

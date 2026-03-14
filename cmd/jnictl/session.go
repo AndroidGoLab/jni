@@ -3,12 +3,9 @@
 package main
 
 import (
-	"fmt"
-	"io"
 
 	"github.com/spf13/cobra"
 	pb "github.com/xaionaro-go/jni/proto/session"
-	"google.golang.org/protobuf/encoding/protojson"
 )
 
 var sessionCmd = &cobra.Command{
@@ -16,23 +13,26 @@ var sessionCmd = &cobra.Command{
 	Short: "session service operations",
 }
 
-var sessionManagerCmd = &cobra.Command{
-	Use:   "manager",
-	Short: "ManagerService operations",
+var sessionMediaControllerCmd = &cobra.Command{
+	Use:   "media-controller",
+	Short: "MediaControllerService operations",
 }
 
-var sessionManagerGetActiveSessionsRawCmd = &cobra.Command{
-	Use:   "get-active-sessions-raw",
-	Short: "GetActiveSessionsRaw RPC",
+var sessionMediaControllerAdjustVolumeCmd = &cobra.Command{
+	Use:   "adjust-volume",
+	Short: "AdjustVolume RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.GetActiveSessionsRawRequest{}
-		if v, err := cmd.Flags().GetInt64("notification-listener"); err == nil {
-			req.NotificationListener = v
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.AdjustVolumeRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		resp, err := client.GetActiveSessionsRaw(ctx, req)
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.AdjustVolume(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -40,21 +40,18 @@ var sessionManagerGetActiveSessionsRawCmd = &cobra.Command{
 	},
 }
 
-var sessionManagerAddOnActiveSessionsChangedListenerCmd = &cobra.Command{
-	Use:   "add-on-active-sessions-changed-listener",
-	Short: "AddOnActiveSessionsChangedListener RPC",
+var sessionMediaControllerDispatchMediaButtonEventCmd = &cobra.Command{
+	Use:   "dispatch-media-button-event",
+	Short: "DispatchMediaButtonEvent RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.AddOnActiveSessionsChangedListenerRequest{}
-		if v, err := cmd.Flags().GetInt64("listener"); err == nil {
-			req.Listener = v
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.DispatchMediaButtonEventRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("notification-listener"); err == nil {
-			req.NotificationListener = v
-		}
-		resp, err := client.AddOnActiveSessionsChangedListener(ctx, req)
+		resp, err := client.DispatchMediaButtonEvent(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -62,18 +59,15 @@ var sessionManagerAddOnActiveSessionsChangedListenerCmd = &cobra.Command{
 	},
 }
 
-var sessionManagerRemoveOnActiveSessionsChangedListenerCmd = &cobra.Command{
-	Use:   "remove-on-active-sessions-changed-listener",
-	Short: "RemoveOnActiveSessionsChangedListener RPC",
+var sessionMediaControllerGetExtrasCmd = &cobra.Command{
+	Use:   "get-extras",
+	Short: "GetExtras RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.RemoveOnActiveSessionsChangedListenerRequest{}
-		if v, err := cmd.Flags().GetInt64("listener"); err == nil {
-			req.Listener = v
-		}
-		resp, err := client.RemoveOnActiveSessionsChangedListener(ctx, req)
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.GetExtrasRequest{}
+		resp, err := client.GetExtras(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -81,51 +75,330 @@ var sessionManagerRemoveOnActiveSessionsChangedListenerCmd = &cobra.Command{
 	},
 }
 
-var sessionOnActiveSessionsChangedListenerCmd = &cobra.Command{
-	Use:   "on-active-sessions-changed-listener",
-	Short: "OnActiveSessionsChangedListenerService operations",
-}
-
-var sessionOnActiveSessionsChangedListenerSubscribeOnActiveSessionsChangedListenerCmd = &cobra.Command{
-	Use:   "subscribe-on-active-sessions-changed-listener",
-	Short: "SubscribeOnActiveSessionsChangedListener RPC",
+var sessionMediaControllerGetFlagsCmd = &cobra.Command{
+	Use:   "get-flags",
+	Short: "GetFlags RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewOnActiveSessionsChangedListenerServiceClient(grpcConn)
-		req := &pb.SubscribeOnActiveSessionsChangedListenerRequest{}
-		stream, err := client.SubscribeOnActiveSessionsChangedListener(ctx, req)
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.GetFlagsRequest{}
+		resp, err := client.GetFlags(ctx, req)
 		if err != nil {
 			return err
 		}
-		opts := protojson.MarshalOptions{Multiline: true, Indent: "  "}
-		for {
-			resp, err := stream.Recv()
-			if err == io.EOF {
-				return nil
-			}
-			if err != nil {
-				return err
-			}
-			data, err := opts.Marshal(resp)
-			if err != nil {
-				return err
-			}
-			fmt.Println(string(data))
+		return printProtoMessage(resp)
+	},
+}
+
+var sessionMediaControllerGetMetadataCmd = &cobra.Command{
+	Use:   "get-metadata",
+	Short: "GetMetadata RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.GetMetadataRequest{}
+		resp, err := client.GetMetadata(ctx, req)
+		if err != nil {
+			return err
 		}
+		return printProtoMessage(resp)
+	},
+}
+
+var sessionMediaControllerGetPackageNameCmd = &cobra.Command{
+	Use:   "get-package-name",
+	Short: "GetPackageName RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.GetPackageNameRequest{}
+		resp, err := client.GetPackageName(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var sessionMediaControllerGetPlaybackInfoCmd = &cobra.Command{
+	Use:   "get-playback-info",
+	Short: "GetPlaybackInfo RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.GetPlaybackInfoRequest{}
+		resp, err := client.GetPlaybackInfo(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var sessionMediaControllerGetPlaybackStateCmd = &cobra.Command{
+	Use:   "get-playback-state",
+	Short: "GetPlaybackState RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.GetPlaybackStateRequest{}
+		resp, err := client.GetPlaybackState(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var sessionMediaControllerGetQueueCmd = &cobra.Command{
+	Use:   "get-queue",
+	Short: "GetQueue RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.GetQueueRequest{}
+		resp, err := client.GetQueue(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var sessionMediaControllerGetQueueTitleCmd = &cobra.Command{
+	Use:   "get-queue-title",
+	Short: "GetQueueTitle RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.GetQueueTitleRequest{}
+		resp, err := client.GetQueueTitle(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var sessionMediaControllerGetRatingTypeCmd = &cobra.Command{
+	Use:   "get-rating-type",
+	Short: "GetRatingType RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.GetRatingTypeRequest{}
+		resp, err := client.GetRatingType(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var sessionMediaControllerGetSessionActivityCmd = &cobra.Command{
+	Use:   "get-session-activity",
+	Short: "GetSessionActivity RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.GetSessionActivityRequest{}
+		resp, err := client.GetSessionActivity(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var sessionMediaControllerGetSessionInfoCmd = &cobra.Command{
+	Use:   "get-session-info",
+	Short: "GetSessionInfo RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.GetSessionInfoRequest{}
+		resp, err := client.GetSessionInfo(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var sessionMediaControllerGetSessionTokenCmd = &cobra.Command{
+	Use:   "get-session-token",
+	Short: "GetSessionToken RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.GetSessionTokenRequest{}
+		resp, err := client.GetSessionToken(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var sessionMediaControllerGetTagCmd = &cobra.Command{
+	Use:   "get-tag",
+	Short: "GetTag RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.GetTagRequest{}
+		resp, err := client.GetTag(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var sessionMediaControllerGetTransportControlsCmd = &cobra.Command{
+	Use:   "get-transport-controls",
+	Short: "GetTransportControls RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.GetTransportControlsRequest{}
+		resp, err := client.GetTransportControls(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var sessionMediaControllerRegisterCallbackCmd = &cobra.Command{
+	Use:   "register-callback",
+	Short: "RegisterCallback RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.RegisterCallbackRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RegisterCallback(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var sessionMediaControllerSendCommandCmd = &cobra.Command{
+	Use:   "send-command",
+	Short: "SendCommand RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.SendCommandRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.SendCommand(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var sessionMediaControllerSetVolumeToCmd = &cobra.Command{
+	Use:   "set-volume-to",
+	Short: "SetVolumeTo RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.SetVolumeToRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetVolumeTo(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var sessionMediaControllerUnregisterCallbackCmd = &cobra.Command{
+	Use:   "unregister-callback",
+	Short: "UnregisterCallback RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaControllerServiceClient(grpcConn)
+		req := &pb.UnregisterCallbackRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.UnregisterCallback(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
 	},
 }
 
 func init() {
-	sessionManagerGetActiveSessionsRawCmd.Flags().Int64("notification-listener", 0, "notification-listener (int64)")
-	sessionManagerCmd.AddCommand(sessionManagerGetActiveSessionsRawCmd)
-	sessionManagerAddOnActiveSessionsChangedListenerCmd.Flags().Int64("listener", 0, "listener (int64)")
-	sessionManagerAddOnActiveSessionsChangedListenerCmd.Flags().Int64("notification-listener", 0, "notification-listener (int64)")
-	sessionManagerCmd.AddCommand(sessionManagerAddOnActiveSessionsChangedListenerCmd)
-	sessionManagerRemoveOnActiveSessionsChangedListenerCmd.Flags().Int64("listener", 0, "listener (int64)")
-	sessionManagerCmd.AddCommand(sessionManagerRemoveOnActiveSessionsChangedListenerCmd)
-	sessionCmd.AddCommand(sessionManagerCmd)
-	sessionOnActiveSessionsChangedListenerCmd.AddCommand(sessionOnActiveSessionsChangedListenerSubscribeOnActiveSessionsChangedListenerCmd)
-	sessionCmd.AddCommand(sessionOnActiveSessionsChangedListenerCmd)
+	sessionMediaControllerAdjustVolumeCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	sessionMediaControllerAdjustVolumeCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerAdjustVolumeCmd)
+	sessionMediaControllerDispatchMediaButtonEventCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerDispatchMediaButtonEventCmd)
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerGetExtrasCmd)
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerGetFlagsCmd)
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerGetMetadataCmd)
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerGetPackageNameCmd)
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerGetPlaybackInfoCmd)
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerGetPlaybackStateCmd)
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerGetQueueCmd)
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerGetQueueTitleCmd)
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerGetRatingTypeCmd)
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerGetSessionActivityCmd)
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerGetSessionInfoCmd)
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerGetSessionTokenCmd)
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerGetTagCmd)
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerGetTransportControlsCmd)
+	sessionMediaControllerRegisterCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerRegisterCallbackCmd)
+	sessionMediaControllerSendCommandCmd.Flags().String("arg0", "", "arg0 (string)")
+	sessionMediaControllerSendCommandCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	sessionMediaControllerSendCommandCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerSendCommandCmd)
+	sessionMediaControllerSetVolumeToCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	sessionMediaControllerSetVolumeToCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerSetVolumeToCmd)
+	sessionMediaControllerUnregisterCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	sessionMediaControllerCmd.AddCommand(sessionMediaControllerUnregisterCallbackCmd)
+	sessionCmd.AddCommand(sessionMediaControllerCmd)
 	rootCmd.AddCommand(sessionCmd)
 }

@@ -3,12 +3,9 @@
 package main
 
 import (
-	"fmt"
-	"io"
 
 	"github.com/spf13/cobra"
 	pb "github.com/xaionaro-go/jni/proto/companion"
-	"google.golang.org/protobuf/encoding/protojson"
 )
 
 var companionCmd = &cobra.Command{
@@ -16,29 +13,29 @@ var companionCmd = &cobra.Command{
 	Short: "companion service operations",
 }
 
-var companionManagerCmd = &cobra.Command{
-	Use:   "manager",
-	Short: "ManagerService operations",
+var companionCompanionDeviceManagerCmd = &cobra.Command{
+	Use:   "companion-device-manager",
+	Short: "CompanionDeviceManagerService operations",
 }
 
-var companionManagerAssociateRawCmd = &cobra.Command{
-	Use:   "associate-raw",
-	Short: "AssociateRaw RPC",
+var companionCompanionDeviceManagerAssociateCmd = &cobra.Command{
+	Use:   "associate",
+	Short: "Associate RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.AssociateRawRequest{}
-		if v, err := cmd.Flags().GetInt64("request"); err == nil {
-			req.Request = v
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.AssociateRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("callback"); err == nil {
-			req.Callback = v
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
 		}
-		if v, err := cmd.Flags().GetInt64("handler"); err == nil {
-			req.Handler = v
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
 		}
-		resp, err := client.AssociateRaw(ctx, req)
+		resp, err := client.Associate(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -46,18 +43,24 @@ var companionManagerAssociateRawCmd = &cobra.Command{
 	},
 }
 
-var companionManagerDisassociateByIdRawCmd = &cobra.Command{
-	Use:   "disassociate-by-id-raw",
-	Short: "DisassociateByIdRaw RPC",
+var companionCompanionDeviceManagerAttachSystemDataTransportCmd = &cobra.Command{
+	Use:   "attach-system-data-transport",
+	Short: "AttachSystemDataTransport RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.DisassociateByIdRawRequest{}
-		if v, err := cmd.Flags().GetInt32("association-id"); err == nil {
-			req.AssociationId = v
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.AttachSystemDataTransportRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		resp, err := client.DisassociateByIdRaw(ctx, req)
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.AttachSystemDataTransport(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -65,15 +68,15 @@ var companionManagerDisassociateByIdRawCmd = &cobra.Command{
 	},
 }
 
-var companionManagerGetAssociationsRawCmd = &cobra.Command{
-	Use:   "get-associations-raw",
-	Short: "GetAssociationsRaw RPC",
+var companionCompanionDeviceManagerBuildAssociationCancellationIntentCmd = &cobra.Command{
+	Use:   "build-association-cancellation-intent",
+	Short: "BuildAssociationCancellationIntent RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.GetAssociationsRawRequest{}
-		resp, err := client.GetAssociationsRaw(ctx, req)
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.BuildAssociationCancellationIntentRequest{}
+		resp, err := client.BuildAssociationCancellationIntent(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -81,23 +84,18 @@ var companionManagerGetAssociationsRawCmd = &cobra.Command{
 	},
 }
 
-var companionAssociationRequestBuilderCmd = &cobra.Command{
-	Use:   "association-request-builder",
-	Short: "AssociationRequestBuilderService operations",
-}
-
-var companionAssociationRequestBuilderSetSingleDeviceCmd = &cobra.Command{
-	Use:   "set-single-device",
-	Short: "SetSingleDevice RPC",
+var companionCompanionDeviceManagerBuildPermissionTransferUserConsentIntentCmd = &cobra.Command{
+	Use:   "build-permission-transfer-user-consent-intent",
+	Short: "BuildPermissionTransferUserConsentIntent RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewAssociationRequestBuilderServiceClient(grpcConn)
-		req := &pb.SetSingleDeviceRequest{}
-		if v, err := cmd.Flags().GetBool("single-device"); err == nil {
-			req.SingleDevice = v
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.BuildPermissionTransferUserConsentIntentRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		resp, err := client.SetSingleDevice(ctx, req)
+		resp, err := client.BuildPermissionTransferUserConsentIntent(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -105,18 +103,18 @@ var companionAssociationRequestBuilderSetSingleDeviceCmd = &cobra.Command{
 	},
 }
 
-var companionAssociationRequestBuilderAddDeviceFilterCmd = &cobra.Command{
-	Use:   "add-device-filter",
-	Short: "AddDeviceFilter RPC",
+var companionCompanionDeviceManagerDetachSystemDataTransportCmd = &cobra.Command{
+	Use:   "detach-system-data-transport",
+	Short: "DetachSystemDataTransport RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewAssociationRequestBuilderServiceClient(grpcConn)
-		req := &pb.AddDeviceFilterRequest{}
-		if v, err := cmd.Flags().GetInt64("filter"); err == nil {
-			req.Filter = v
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.DetachSystemDataTransportRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		resp, err := client.AddDeviceFilter(ctx, req)
+		resp, err := client.DetachSystemDataTransport(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -124,15 +122,21 @@ var companionAssociationRequestBuilderAddDeviceFilterCmd = &cobra.Command{
 	},
 }
 
-var companionAssociationRequestBuilderBuildCmd = &cobra.Command{
-	Use:   "build",
-	Short: "Build RPC",
+var companionCompanionDeviceManagerDisableSystemDataSyncForTypesCmd = &cobra.Command{
+	Use:   "disable-system-data-sync-for-types",
+	Short: "DisableSystemDataSyncForTypes RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewAssociationRequestBuilderServiceClient(grpcConn)
-		req := &pb.BuildRequest{}
-		resp, err := client.Build(ctx, req)
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.DisableSystemDataSyncForTypesRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.DisableSystemDataSyncForTypes(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -140,57 +144,350 @@ var companionAssociationRequestBuilderBuildCmd = &cobra.Command{
 	},
 }
 
-var companionCompanionCallbackCmd = &cobra.Command{
-	Use:   "companion-callback",
-	Short: "CompanionCallbackService operations",
-}
-
-var companionCompanionCallbackSubscribeCompanionCallbackCmd = &cobra.Command{
-	Use:   "subscribe-companion-callback",
-	Short: "SubscribeCompanionCallback RPC",
+var companionCompanionDeviceManagerDisassociate1Cmd = &cobra.Command{
+	Use:   "disassociate1",
+	Short: "Disassociate1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewCompanionCallbackServiceClient(grpcConn)
-		req := &pb.SubscribeCompanionCallbackRequest{}
-		stream, err := client.SubscribeCompanionCallback(ctx, req)
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.Disassociate1Request{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.Disassociate1(ctx, req)
 		if err != nil {
 			return err
 		}
-		opts := protojson.MarshalOptions{Multiline: true, Indent: "  "}
-		for {
-			resp, err := stream.Recv()
-			if err == io.EOF {
-				return nil
-			}
-			if err != nil {
-				return err
-			}
-			data, err := opts.Marshal(resp)
-			if err != nil {
-				return err
-			}
-			fmt.Println(string(data))
+		return printProtoMessage(resp)
+	},
+}
+
+var companionCompanionDeviceManagerDisassociate1_1Cmd = &cobra.Command{
+	Use:   "disassociate1_1",
+	Short: "Disassociate1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.Disassociate1_1Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
+		resp, err := client.Disassociate1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var companionCompanionDeviceManagerEnableSystemDataSyncForTypesCmd = &cobra.Command{
+	Use:   "enable-system-data-sync-for-types",
+	Short: "EnableSystemDataSyncForTypes RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.EnableSystemDataSyncForTypesRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.EnableSystemDataSyncForTypes(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var companionCompanionDeviceManagerGetAssociationsCmd = &cobra.Command{
+	Use:   "get-associations",
+	Short: "GetAssociations RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.GetAssociationsRequest{}
+		resp, err := client.GetAssociations(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var companionCompanionDeviceManagerGetMyAssociationsCmd = &cobra.Command{
+	Use:   "get-my-associations",
+	Short: "GetMyAssociations RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.GetMyAssociationsRequest{}
+		resp, err := client.GetMyAssociations(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var companionCompanionDeviceManagerHasNotificationAccessCmd = &cobra.Command{
+	Use:   "has-notification-access",
+	Short: "HasNotificationAccess RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.HasNotificationAccessRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.HasNotificationAccess(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var companionCompanionDeviceManagerIsPermissionTransferUserConsentedCmd = &cobra.Command{
+	Use:   "is-permission-transfer-user-consented",
+	Short: "IsPermissionTransferUserConsented RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.IsPermissionTransferUserConsentedRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.IsPermissionTransferUserConsented(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var companionCompanionDeviceManagerRemoveBondCmd = &cobra.Command{
+	Use:   "remove-bond",
+	Short: "RemoveBond RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.RemoveBondRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RemoveBond(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var companionCompanionDeviceManagerRequestNotificationAccessCmd = &cobra.Command{
+	Use:   "request-notification-access",
+	Short: "RequestNotificationAccess RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.RequestNotificationAccessRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RequestNotificationAccess(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var companionCompanionDeviceManagerSetDeviceIdCmd = &cobra.Command{
+	Use:   "set-device-id",
+	Short: "SetDeviceId RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.SetDeviceIdRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetDeviceId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var companionCompanionDeviceManagerStartObservingDevicePresence1Cmd = &cobra.Command{
+	Use:   "start-observing-device-presence1",
+	Short: "StartObservingDevicePresence1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.StartObservingDevicePresence1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.StartObservingDevicePresence1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var companionCompanionDeviceManagerStartObservingDevicePresence1_1Cmd = &cobra.Command{
+	Use:   "start-observing-device-presence1_1",
+	Short: "StartObservingDevicePresence1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.StartObservingDevicePresence1_1Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.StartObservingDevicePresence1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var companionCompanionDeviceManagerStartSystemDataTransferCmd = &cobra.Command{
+	Use:   "start-system-data-transfer",
+	Short: "StartSystemDataTransfer RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.StartSystemDataTransferRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.StartSystemDataTransfer(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var companionCompanionDeviceManagerStopObservingDevicePresence1Cmd = &cobra.Command{
+	Use:   "stop-observing-device-presence1",
+	Short: "StopObservingDevicePresence1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.StopObservingDevicePresence1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.StopObservingDevicePresence1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var companionCompanionDeviceManagerStopObservingDevicePresence1_1Cmd = &cobra.Command{
+	Use:   "stop-observing-device-presence1_1",
+	Short: "StopObservingDevicePresence1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCompanionDeviceManagerServiceClient(grpcConn)
+		req := &pb.StopObservingDevicePresence1_1Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.StopObservingDevicePresence1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
 	},
 }
 
 func init() {
-	companionManagerAssociateRawCmd.Flags().Int64("request", 0, "request (int64)")
-	companionManagerAssociateRawCmd.Flags().Int64("callback", 0, "callback (int64)")
-	companionManagerAssociateRawCmd.Flags().Int64("handler", 0, "handler (int64)")
-	companionManagerCmd.AddCommand(companionManagerAssociateRawCmd)
-	companionManagerDisassociateByIdRawCmd.Flags().Int32("association-id", 0, "association-id (int32)")
-	companionManagerCmd.AddCommand(companionManagerDisassociateByIdRawCmd)
-	companionManagerCmd.AddCommand(companionManagerGetAssociationsRawCmd)
-	companionCmd.AddCommand(companionManagerCmd)
-	companionAssociationRequestBuilderSetSingleDeviceCmd.Flags().Bool("single-device", false, "single-device (bool)")
-	companionAssociationRequestBuilderCmd.AddCommand(companionAssociationRequestBuilderSetSingleDeviceCmd)
-	companionAssociationRequestBuilderAddDeviceFilterCmd.Flags().Int64("filter", 0, "filter (int64)")
-	companionAssociationRequestBuilderCmd.AddCommand(companionAssociationRequestBuilderAddDeviceFilterCmd)
-	companionAssociationRequestBuilderCmd.AddCommand(companionAssociationRequestBuilderBuildCmd)
-	companionCmd.AddCommand(companionAssociationRequestBuilderCmd)
-	companionCompanionCallbackCmd.AddCommand(companionCompanionCallbackSubscribeCompanionCallbackCmd)
-	companionCmd.AddCommand(companionCompanionCallbackCmd)
+	companionCompanionDeviceManagerAssociateCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	companionCompanionDeviceManagerAssociateCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	companionCompanionDeviceManagerAssociateCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerAssociateCmd)
+	companionCompanionDeviceManagerAttachSystemDataTransportCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	companionCompanionDeviceManagerAttachSystemDataTransportCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	companionCompanionDeviceManagerAttachSystemDataTransportCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerAttachSystemDataTransportCmd)
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerBuildAssociationCancellationIntentCmd)
+	companionCompanionDeviceManagerBuildPermissionTransferUserConsentIntentCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerBuildPermissionTransferUserConsentIntentCmd)
+	companionCompanionDeviceManagerDetachSystemDataTransportCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerDetachSystemDataTransportCmd)
+	companionCompanionDeviceManagerDisableSystemDataSyncForTypesCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	companionCompanionDeviceManagerDisableSystemDataSyncForTypesCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerDisableSystemDataSyncForTypesCmd)
+	companionCompanionDeviceManagerDisassociate1Cmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerDisassociate1Cmd)
+	companionCompanionDeviceManagerDisassociate1_1Cmd.Flags().String("arg0", "", "arg0 (string)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerDisassociate1_1Cmd)
+	companionCompanionDeviceManagerEnableSystemDataSyncForTypesCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	companionCompanionDeviceManagerEnableSystemDataSyncForTypesCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerEnableSystemDataSyncForTypesCmd)
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerGetAssociationsCmd)
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerGetMyAssociationsCmd)
+	companionCompanionDeviceManagerHasNotificationAccessCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerHasNotificationAccessCmd)
+	companionCompanionDeviceManagerIsPermissionTransferUserConsentedCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerIsPermissionTransferUserConsentedCmd)
+	companionCompanionDeviceManagerRemoveBondCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerRemoveBondCmd)
+	companionCompanionDeviceManagerRequestNotificationAccessCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerRequestNotificationAccessCmd)
+	companionCompanionDeviceManagerSetDeviceIdCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	companionCompanionDeviceManagerSetDeviceIdCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerSetDeviceIdCmd)
+	companionCompanionDeviceManagerStartObservingDevicePresence1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerStartObservingDevicePresence1Cmd)
+	companionCompanionDeviceManagerStartObservingDevicePresence1_1Cmd.Flags().String("arg0", "", "arg0 (string)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerStartObservingDevicePresence1_1Cmd)
+	companionCompanionDeviceManagerStartSystemDataTransferCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	companionCompanionDeviceManagerStartSystemDataTransferCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	companionCompanionDeviceManagerStartSystemDataTransferCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	companionCompanionDeviceManagerStartSystemDataTransferCmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerStartSystemDataTransferCmd)
+	companionCompanionDeviceManagerStopObservingDevicePresence1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerStopObservingDevicePresence1Cmd)
+	companionCompanionDeviceManagerStopObservingDevicePresence1_1Cmd.Flags().String("arg0", "", "arg0 (string)")
+	companionCompanionDeviceManagerCmd.AddCommand(companionCompanionDeviceManagerStopObservingDevicePresence1_1Cmd)
+	companionCmd.AddCommand(companionCompanionDeviceManagerCmd)
 	rootCmd.AddCommand(companionCmd)
 }

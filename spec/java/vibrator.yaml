@@ -1,0 +1,125 @@
+package: vibrator
+go_import: github.com/xaionaro-go/jni/os/vibrator
+classes:
+    - java_class: android.os.Vibrator
+      go_type: vibrator
+      obtain: system_service
+      service_name: vibrator
+      close: true
+      methods:
+        - java_method: areEffectsSupported
+          go_name: AreEffectsSupported
+          params:
+            - java_type: int...
+              go_name: arg0
+          returns: '[I'
+          error: true
+        - java_method: areEnvelopeEffectsSupported
+          go_name: AreEnvelopeEffectsSupported
+          returns: boolean
+          error: true
+        - java_method: arePrimitivesSupported
+          go_name: ArePrimitivesSupported
+          params:
+            - java_type: int...
+              go_name: arg0
+          returns: boolean[]
+          error: true
+        - java_method: getEnvelopeEffectInfo
+          go_name: GetEnvelopeEffectInfo
+          returns: android.os.vibrator.VibratorEnvelopeEffectInfo
+          error: true
+        - java_method: getFrequencyProfile
+          go_name: GetFrequencyProfile
+          returns: android.os.vibrator.VibratorFrequencyProfile
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: int
+          error: true
+        - java_method: getPrimitiveDurations
+          go_name: GetPrimitiveDurations
+          params:
+            - java_type: int...
+              go_name: arg0
+          returns: '[I'
+          error: true
+        - java_method: getQFactor
+          go_name: GetQFactor
+          returns: float
+          error: true
+        - java_method: getResonantFrequency
+          go_name: GetResonantFrequency
+          returns: float
+          error: true
+        - java_method: vibrate
+          go_name: Vibrate1
+          params:
+            - java_type: android.os.VibrationEffect
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: vibrate
+          go_name: Vibrate2_1
+          params:
+            - java_type: android.os.VibrationEffect
+              go_name: arg0
+            - java_type: android.media.AudioAttributes
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: vibrate
+          go_name: Vibrate2_2
+          params:
+            - java_type: android.os.VibrationEffect
+              go_name: arg0
+            - java_type: android.os.VibrationAttributes
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: vibrate
+          go_name: Vibrate1_3
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: vibrate
+          go_name: Vibrate2_4
+          params:
+            - java_type: long
+              go_name: arg0
+            - java_type: android.media.AudioAttributes
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: vibrate
+          go_name: Vibrate2_5
+          params:
+            - java_type: '[J'
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: vibrate
+          go_name: Vibrate3_6
+          params:
+            - java_type: '[J'
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.media.AudioAttributes
+              go_name: arg2
+          returns: void
+          error: true
+constants:
+    - go_name: VibrationEffectSupportNo
+      value: "0"
+      go_type: int
+    - go_name: VibrationEffectSupportUnknown
+      value: "0"
+      go_type: int
+    - go_name: VibrationEffectSupportYes
+      value: "0"
+      go_type: int

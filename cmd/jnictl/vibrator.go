@@ -18,15 +18,18 @@ var vibratorVibratorCmd = &cobra.Command{
 	Short: "VibratorService operations",
 }
 
-var vibratorVibratorHasVibratorCmd = &cobra.Command{
-	Use:   "has-vibrator",
-	Short: "HasVibrator RPC",
+var vibratorVibratorAreEffectsSupportedCmd = &cobra.Command{
+	Use:   "are-effects-supported",
+	Short: "AreEffectsSupported RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewVibratorServiceClient(grpcConn)
-		req := &pb.HasVibratorRequest{}
-		resp, err := client.HasVibrator(ctx, req)
+		req := &pb.AreEffectsSupportedRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.AreEffectsSupported(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -34,18 +37,15 @@ var vibratorVibratorHasVibratorCmd = &cobra.Command{
 	},
 }
 
-var vibratorVibratorVibrateMsCmd = &cobra.Command{
-	Use:   "vibrate-ms",
-	Short: "VibrateMs RPC",
+var vibratorVibratorAreEnvelopeEffectsSupportedCmd = &cobra.Command{
+	Use:   "are-envelope-effects-supported",
+	Short: "AreEnvelopeEffectsSupported RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewVibratorServiceClient(grpcConn)
-		req := &pb.VibrateMsRequest{}
-		if v, err := cmd.Flags().GetInt64("milliseconds"); err == nil {
-			req.Milliseconds = v
-		}
-		resp, err := client.VibrateMs(ctx, req)
+		req := &pb.AreEnvelopeEffectsSupportedRequest{}
+		resp, err := client.AreEnvelopeEffectsSupported(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -53,21 +53,18 @@ var vibratorVibratorVibrateMsCmd = &cobra.Command{
 	},
 }
 
-var vibratorVibratorVibratePatternMsCmd = &cobra.Command{
-	Use:   "vibrate-pattern-ms",
-	Short: "VibratePatternMs RPC",
+var vibratorVibratorArePrimitivesSupportedCmd = &cobra.Command{
+	Use:   "are-primitives-supported",
+	Short: "ArePrimitivesSupported RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewVibratorServiceClient(grpcConn)
-		req := &pb.VibratePatternMsRequest{}
-		if v, err := cmd.Flags().GetInt64("pattern"); err == nil {
-			req.Pattern = v
+		req := &pb.ArePrimitivesSupportedRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt32("repeat"); err == nil {
-			req.Repeat = v
-		}
-		resp, err := client.VibratePatternMs(ctx, req)
+		resp, err := client.ArePrimitivesSupported(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -75,15 +72,249 @@ var vibratorVibratorVibratePatternMsCmd = &cobra.Command{
 	},
 }
 
-var vibratorVibratorCancelCmd = &cobra.Command{
-	Use:   "cancel",
-	Short: "Cancel RPC",
+var vibratorVibratorGetEnvelopeEffectInfoCmd = &cobra.Command{
+	Use:   "get-envelope-effect-info",
+	Short: "GetEnvelopeEffectInfo RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewVibratorServiceClient(grpcConn)
-		req := &pb.CancelRequest{}
-		resp, err := client.Cancel(ctx, req)
+		req := &pb.GetEnvelopeEffectInfoRequest{}
+		resp, err := client.GetEnvelopeEffectInfo(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var vibratorVibratorGetFrequencyProfileCmd = &cobra.Command{
+	Use:   "get-frequency-profile",
+	Short: "GetFrequencyProfile RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewVibratorServiceClient(grpcConn)
+		req := &pb.GetFrequencyProfileRequest{}
+		resp, err := client.GetFrequencyProfile(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var vibratorVibratorGetIdCmd = &cobra.Command{
+	Use:   "get-id",
+	Short: "GetId RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewVibratorServiceClient(grpcConn)
+		req := &pb.GetIdRequest{}
+		resp, err := client.GetId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var vibratorVibratorGetPrimitiveDurationsCmd = &cobra.Command{
+	Use:   "get-primitive-durations",
+	Short: "GetPrimitiveDurations RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewVibratorServiceClient(grpcConn)
+		req := &pb.GetPrimitiveDurationsRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetPrimitiveDurations(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var vibratorVibratorGetQFactorCmd = &cobra.Command{
+	Use:   "get-q-factor",
+	Short: "GetQFactor RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewVibratorServiceClient(grpcConn)
+		req := &pb.GetQFactorRequest{}
+		resp, err := client.GetQFactor(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var vibratorVibratorGetResonantFrequencyCmd = &cobra.Command{
+	Use:   "get-resonant-frequency",
+	Short: "GetResonantFrequency RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewVibratorServiceClient(grpcConn)
+		req := &pb.GetResonantFrequencyRequest{}
+		resp, err := client.GetResonantFrequency(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var vibratorVibratorVibrate1Cmd = &cobra.Command{
+	Use:   "vibrate1",
+	Short: "Vibrate1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewVibratorServiceClient(grpcConn)
+		req := &pb.Vibrate1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.Vibrate1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var vibratorVibratorVibrate2_1Cmd = &cobra.Command{
+	Use:   "vibrate2_1",
+	Short: "Vibrate2_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewVibratorServiceClient(grpcConn)
+		req := &pb.Vibrate2_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.Vibrate2_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var vibratorVibratorVibrate2_2Cmd = &cobra.Command{
+	Use:   "vibrate2_2",
+	Short: "Vibrate2_2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewVibratorServiceClient(grpcConn)
+		req := &pb.Vibrate2_2Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.Vibrate2_2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var vibratorVibratorVibrate1_3Cmd = &cobra.Command{
+	Use:   "vibrate1_3",
+	Short: "Vibrate1_3 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewVibratorServiceClient(grpcConn)
+		req := &pb.Vibrate1_3Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.Vibrate1_3(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var vibratorVibratorVibrate2_4Cmd = &cobra.Command{
+	Use:   "vibrate2_4",
+	Short: "Vibrate2_4 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewVibratorServiceClient(grpcConn)
+		req := &pb.Vibrate2_4Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.Vibrate2_4(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var vibratorVibratorVibrate2_5Cmd = &cobra.Command{
+	Use:   "vibrate2_5",
+	Short: "Vibrate2_5 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewVibratorServiceClient(grpcConn)
+		req := &pb.Vibrate2_5Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.Vibrate2_5(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var vibratorVibratorVibrate3_6Cmd = &cobra.Command{
+	Use:   "vibrate3_6",
+	Short: "Vibrate3_6 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewVibratorServiceClient(grpcConn)
+		req := &pb.Vibrate3_6Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.Vibrate3_6(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -92,13 +323,38 @@ var vibratorVibratorCancelCmd = &cobra.Command{
 }
 
 func init() {
-	vibratorVibratorCmd.AddCommand(vibratorVibratorHasVibratorCmd)
-	vibratorVibratorVibrateMsCmd.Flags().Int64("milliseconds", 0, "milliseconds (int64)")
-	vibratorVibratorCmd.AddCommand(vibratorVibratorVibrateMsCmd)
-	vibratorVibratorVibratePatternMsCmd.Flags().Int64("pattern", 0, "pattern (int64)")
-	vibratorVibratorVibratePatternMsCmd.Flags().Int32("repeat", 0, "repeat (int32)")
-	vibratorVibratorCmd.AddCommand(vibratorVibratorVibratePatternMsCmd)
-	vibratorVibratorCmd.AddCommand(vibratorVibratorCancelCmd)
+	vibratorVibratorAreEffectsSupportedCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	vibratorVibratorCmd.AddCommand(vibratorVibratorAreEffectsSupportedCmd)
+	vibratorVibratorCmd.AddCommand(vibratorVibratorAreEnvelopeEffectsSupportedCmd)
+	vibratorVibratorArePrimitivesSupportedCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	vibratorVibratorCmd.AddCommand(vibratorVibratorArePrimitivesSupportedCmd)
+	vibratorVibratorCmd.AddCommand(vibratorVibratorGetEnvelopeEffectInfoCmd)
+	vibratorVibratorCmd.AddCommand(vibratorVibratorGetFrequencyProfileCmd)
+	vibratorVibratorCmd.AddCommand(vibratorVibratorGetIdCmd)
+	vibratorVibratorGetPrimitiveDurationsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	vibratorVibratorCmd.AddCommand(vibratorVibratorGetPrimitiveDurationsCmd)
+	vibratorVibratorCmd.AddCommand(vibratorVibratorGetQFactorCmd)
+	vibratorVibratorCmd.AddCommand(vibratorVibratorGetResonantFrequencyCmd)
+	vibratorVibratorVibrate1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	vibratorVibratorCmd.AddCommand(vibratorVibratorVibrate1Cmd)
+	vibratorVibratorVibrate2_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	vibratorVibratorVibrate2_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	vibratorVibratorCmd.AddCommand(vibratorVibratorVibrate2_1Cmd)
+	vibratorVibratorVibrate2_2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	vibratorVibratorVibrate2_2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	vibratorVibratorCmd.AddCommand(vibratorVibratorVibrate2_2Cmd)
+	vibratorVibratorVibrate1_3Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	vibratorVibratorCmd.AddCommand(vibratorVibratorVibrate1_3Cmd)
+	vibratorVibratorVibrate2_4Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	vibratorVibratorVibrate2_4Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	vibratorVibratorCmd.AddCommand(vibratorVibratorVibrate2_4Cmd)
+	vibratorVibratorVibrate2_5Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	vibratorVibratorVibrate2_5Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	vibratorVibratorCmd.AddCommand(vibratorVibratorVibrate2_5Cmd)
+	vibratorVibratorVibrate3_6Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	vibratorVibratorVibrate3_6Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	vibratorVibratorVibrate3_6Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	vibratorVibratorCmd.AddCommand(vibratorVibratorVibrate3_6Cmd)
 	vibratorCmd.AddCommand(vibratorVibratorCmd)
 	rootCmd.AddCommand(vibratorCmd)
 }

@@ -21,253 +21,975 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ManagerService_GetManagerRaw_FullMethodName          = "/accounts.ManagerService/GetManagerRaw"
-	ManagerService_GetAccountsRaw_FullMethodName         = "/accounts.ManagerService/GetAccountsRaw"
-	ManagerService_GetAccountsByTypeRaw_FullMethodName   = "/accounts.ManagerService/GetAccountsByTypeRaw"
-	ManagerService_GetAuthTokenRaw_FullMethodName        = "/accounts.ManagerService/GetAuthTokenRaw"
-	ManagerService_InvalidateAuthTokenRaw_FullMethodName = "/accounts.ManagerService/InvalidateAuthTokenRaw"
+	AccountManagerService_AddAccountExplicitly3_FullMethodName           = "/accounts.AccountManagerService/AddAccountExplicitly3"
+	AccountManagerService_AddAccountExplicitly5_1_FullMethodName         = "/accounts.AccountManagerService/AddAccountExplicitly5_1"
+	AccountManagerService_BlockingGetAuthToken_FullMethodName            = "/accounts.AccountManagerService/BlockingGetAuthToken"
+	AccountManagerService_ClearPassword_FullMethodName                   = "/accounts.AccountManagerService/ClearPassword"
+	AccountManagerService_GetAccountVisibility_FullMethodName            = "/accounts.AccountManagerService/GetAccountVisibility"
+	AccountManagerService_GetAccounts_FullMethodName                     = "/accounts.AccountManagerService/GetAccounts"
+	AccountManagerService_GetAccountsByType_FullMethodName               = "/accounts.AccountManagerService/GetAccountsByType"
+	AccountManagerService_GetAccountsByTypeForPackage_FullMethodName     = "/accounts.AccountManagerService/GetAccountsByTypeForPackage"
+	AccountManagerService_GetAuthenticatorTypes_FullMethodName           = "/accounts.AccountManagerService/GetAuthenticatorTypes"
+	AccountManagerService_GetPassword_FullMethodName                     = "/accounts.AccountManagerService/GetPassword"
+	AccountManagerService_GetPreviousName_FullMethodName                 = "/accounts.AccountManagerService/GetPreviousName"
+	AccountManagerService_GetUserData_FullMethodName                     = "/accounts.AccountManagerService/GetUserData"
+	AccountManagerService_InvalidateAuthToken_FullMethodName             = "/accounts.AccountManagerService/InvalidateAuthToken"
+	AccountManagerService_NotifyAccountAuthenticated_FullMethodName      = "/accounts.AccountManagerService/NotifyAccountAuthenticated"
+	AccountManagerService_PeekAuthToken_FullMethodName                   = "/accounts.AccountManagerService/PeekAuthToken"
+	AccountManagerService_RemoveAccountExplicitly_FullMethodName         = "/accounts.AccountManagerService/RemoveAccountExplicitly"
+	AccountManagerService_RemoveOnAccountsUpdatedListener_FullMethodName = "/accounts.AccountManagerService/RemoveOnAccountsUpdatedListener"
+	AccountManagerService_SetAccountVisibility_FullMethodName            = "/accounts.AccountManagerService/SetAccountVisibility"
+	AccountManagerService_SetAuthToken_FullMethodName                    = "/accounts.AccountManagerService/SetAuthToken"
+	AccountManagerService_SetPassword_FullMethodName                     = "/accounts.AccountManagerService/SetPassword"
+	AccountManagerService_SetUserData_FullMethodName                     = "/accounts.AccountManagerService/SetUserData"
+	AccountManagerService_Get_FullMethodName                             = "/accounts.AccountManagerService/Get"
+	AccountManagerService_NewChooseAccountIntent8_FullMethodName         = "/accounts.AccountManagerService/NewChooseAccountIntent8"
+	AccountManagerService_NewChooseAccountIntent7_1_FullMethodName       = "/accounts.AccountManagerService/NewChooseAccountIntent7_1"
 )
 
-// ManagerServiceClient is the client API for ManagerService service.
+// AccountManagerServiceClient is the client API for AccountManagerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ManagerServiceClient interface {
-	GetManagerRaw(ctx context.Context, in *GetManagerRawRequest, opts ...grpc.CallOption) (*GetManagerRawResponse, error)
-	GetAccountsRaw(ctx context.Context, in *GetAccountsRawRequest, opts ...grpc.CallOption) (*GetAccountsRawResponse, error)
-	GetAccountsByTypeRaw(ctx context.Context, in *GetAccountsByTypeRawRequest, opts ...grpc.CallOption) (*GetAccountsByTypeRawResponse, error)
-	GetAuthTokenRaw(ctx context.Context, in *GetAuthTokenRawRequest, opts ...grpc.CallOption) (*GetAuthTokenRawResponse, error)
-	InvalidateAuthTokenRaw(ctx context.Context, in *InvalidateAuthTokenRawRequest, opts ...grpc.CallOption) (*InvalidateAuthTokenRawResponse, error)
+type AccountManagerServiceClient interface {
+	AddAccountExplicitly3(ctx context.Context, in *AddAccountExplicitly3Request, opts ...grpc.CallOption) (*AddAccountExplicitly3Response, error)
+	AddAccountExplicitly5_1(ctx context.Context, in *AddAccountExplicitly5_1Request, opts ...grpc.CallOption) (*AddAccountExplicitly5_1Response, error)
+	BlockingGetAuthToken(ctx context.Context, in *BlockingGetAuthTokenRequest, opts ...grpc.CallOption) (*BlockingGetAuthTokenResponse, error)
+	ClearPassword(ctx context.Context, in *ClearPasswordRequest, opts ...grpc.CallOption) (*ClearPasswordResponse, error)
+	GetAccountVisibility(ctx context.Context, in *GetAccountVisibilityRequest, opts ...grpc.CallOption) (*GetAccountVisibilityResponse, error)
+	GetAccounts(ctx context.Context, in *GetAccountsRequest, opts ...grpc.CallOption) (*GetAccountsResponse, error)
+	GetAccountsByType(ctx context.Context, in *GetAccountsByTypeRequest, opts ...grpc.CallOption) (*GetAccountsByTypeResponse, error)
+	GetAccountsByTypeForPackage(ctx context.Context, in *GetAccountsByTypeForPackageRequest, opts ...grpc.CallOption) (*GetAccountsByTypeForPackageResponse, error)
+	GetAuthenticatorTypes(ctx context.Context, in *GetAuthenticatorTypesRequest, opts ...grpc.CallOption) (*GetAuthenticatorTypesResponse, error)
+	GetPassword(ctx context.Context, in *GetPasswordRequest, opts ...grpc.CallOption) (*GetPasswordResponse, error)
+	GetPreviousName(ctx context.Context, in *GetPreviousNameRequest, opts ...grpc.CallOption) (*GetPreviousNameResponse, error)
+	GetUserData(ctx context.Context, in *GetUserDataRequest, opts ...grpc.CallOption) (*GetUserDataResponse, error)
+	InvalidateAuthToken(ctx context.Context, in *InvalidateAuthTokenRequest, opts ...grpc.CallOption) (*InvalidateAuthTokenResponse, error)
+	NotifyAccountAuthenticated(ctx context.Context, in *NotifyAccountAuthenticatedRequest, opts ...grpc.CallOption) (*NotifyAccountAuthenticatedResponse, error)
+	PeekAuthToken(ctx context.Context, in *PeekAuthTokenRequest, opts ...grpc.CallOption) (*PeekAuthTokenResponse, error)
+	RemoveAccountExplicitly(ctx context.Context, in *RemoveAccountExplicitlyRequest, opts ...grpc.CallOption) (*RemoveAccountExplicitlyResponse, error)
+	RemoveOnAccountsUpdatedListener(ctx context.Context, in *RemoveOnAccountsUpdatedListenerRequest, opts ...grpc.CallOption) (*RemoveOnAccountsUpdatedListenerResponse, error)
+	SetAccountVisibility(ctx context.Context, in *SetAccountVisibilityRequest, opts ...grpc.CallOption) (*SetAccountVisibilityResponse, error)
+	SetAuthToken(ctx context.Context, in *SetAuthTokenRequest, opts ...grpc.CallOption) (*SetAuthTokenResponse, error)
+	SetPassword(ctx context.Context, in *SetPasswordRequest, opts ...grpc.CallOption) (*SetPasswordResponse, error)
+	SetUserData(ctx context.Context, in *SetUserDataRequest, opts ...grpc.CallOption) (*SetUserDataResponse, error)
+	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error)
+	NewChooseAccountIntent8(ctx context.Context, in *NewChooseAccountIntent8Request, opts ...grpc.CallOption) (*NewChooseAccountIntent8Response, error)
+	NewChooseAccountIntent7_1(ctx context.Context, in *NewChooseAccountIntent7_1Request, opts ...grpc.CallOption) (*NewChooseAccountIntent7_1Response, error)
 }
 
-type managerServiceClient struct {
+type accountManagerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewManagerServiceClient(cc grpc.ClientConnInterface) ManagerServiceClient {
-	return &managerServiceClient{cc}
+func NewAccountManagerServiceClient(cc grpc.ClientConnInterface) AccountManagerServiceClient {
+	return &accountManagerServiceClient{cc}
 }
 
-func (c *managerServiceClient) GetManagerRaw(ctx context.Context, in *GetManagerRawRequest, opts ...grpc.CallOption) (*GetManagerRawResponse, error) {
+func (c *accountManagerServiceClient) AddAccountExplicitly3(ctx context.Context, in *AddAccountExplicitly3Request, opts ...grpc.CallOption) (*AddAccountExplicitly3Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetManagerRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_GetManagerRaw_FullMethodName, in, out, cOpts...)
+	out := new(AddAccountExplicitly3Response)
+	err := c.cc.Invoke(ctx, AccountManagerService_AddAccountExplicitly3_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) GetAccountsRaw(ctx context.Context, in *GetAccountsRawRequest, opts ...grpc.CallOption) (*GetAccountsRawResponse, error) {
+func (c *accountManagerServiceClient) AddAccountExplicitly5_1(ctx context.Context, in *AddAccountExplicitly5_1Request, opts ...grpc.CallOption) (*AddAccountExplicitly5_1Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAccountsRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_GetAccountsRaw_FullMethodName, in, out, cOpts...)
+	out := new(AddAccountExplicitly5_1Response)
+	err := c.cc.Invoke(ctx, AccountManagerService_AddAccountExplicitly5_1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) GetAccountsByTypeRaw(ctx context.Context, in *GetAccountsByTypeRawRequest, opts ...grpc.CallOption) (*GetAccountsByTypeRawResponse, error) {
+func (c *accountManagerServiceClient) BlockingGetAuthToken(ctx context.Context, in *BlockingGetAuthTokenRequest, opts ...grpc.CallOption) (*BlockingGetAuthTokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAccountsByTypeRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_GetAccountsByTypeRaw_FullMethodName, in, out, cOpts...)
+	out := new(BlockingGetAuthTokenResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_BlockingGetAuthToken_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) GetAuthTokenRaw(ctx context.Context, in *GetAuthTokenRawRequest, opts ...grpc.CallOption) (*GetAuthTokenRawResponse, error) {
+func (c *accountManagerServiceClient) ClearPassword(ctx context.Context, in *ClearPasswordRequest, opts ...grpc.CallOption) (*ClearPasswordResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAuthTokenRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_GetAuthTokenRaw_FullMethodName, in, out, cOpts...)
+	out := new(ClearPasswordResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_ClearPassword_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) InvalidateAuthTokenRaw(ctx context.Context, in *InvalidateAuthTokenRawRequest, opts ...grpc.CallOption) (*InvalidateAuthTokenRawResponse, error) {
+func (c *accountManagerServiceClient) GetAccountVisibility(ctx context.Context, in *GetAccountVisibilityRequest, opts ...grpc.CallOption) (*GetAccountVisibilityResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(InvalidateAuthTokenRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_InvalidateAuthTokenRaw_FullMethodName, in, out, cOpts...)
+	out := new(GetAccountVisibilityResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_GetAccountVisibility_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ManagerServiceServer is the server API for ManagerService service.
-// All implementations must embed UnimplementedManagerServiceServer
+func (c *accountManagerServiceClient) GetAccounts(ctx context.Context, in *GetAccountsRequest, opts ...grpc.CallOption) (*GetAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAccountsResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_GetAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) GetAccountsByType(ctx context.Context, in *GetAccountsByTypeRequest, opts ...grpc.CallOption) (*GetAccountsByTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAccountsByTypeResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_GetAccountsByType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) GetAccountsByTypeForPackage(ctx context.Context, in *GetAccountsByTypeForPackageRequest, opts ...grpc.CallOption) (*GetAccountsByTypeForPackageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAccountsByTypeForPackageResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_GetAccountsByTypeForPackage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) GetAuthenticatorTypes(ctx context.Context, in *GetAuthenticatorTypesRequest, opts ...grpc.CallOption) (*GetAuthenticatorTypesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAuthenticatorTypesResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_GetAuthenticatorTypes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) GetPassword(ctx context.Context, in *GetPasswordRequest, opts ...grpc.CallOption) (*GetPasswordResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPasswordResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_GetPassword_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) GetPreviousName(ctx context.Context, in *GetPreviousNameRequest, opts ...grpc.CallOption) (*GetPreviousNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPreviousNameResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_GetPreviousName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) GetUserData(ctx context.Context, in *GetUserDataRequest, opts ...grpc.CallOption) (*GetUserDataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserDataResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_GetUserData_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) InvalidateAuthToken(ctx context.Context, in *InvalidateAuthTokenRequest, opts ...grpc.CallOption) (*InvalidateAuthTokenResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InvalidateAuthTokenResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_InvalidateAuthToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) NotifyAccountAuthenticated(ctx context.Context, in *NotifyAccountAuthenticatedRequest, opts ...grpc.CallOption) (*NotifyAccountAuthenticatedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NotifyAccountAuthenticatedResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_NotifyAccountAuthenticated_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) PeekAuthToken(ctx context.Context, in *PeekAuthTokenRequest, opts ...grpc.CallOption) (*PeekAuthTokenResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PeekAuthTokenResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_PeekAuthToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) RemoveAccountExplicitly(ctx context.Context, in *RemoveAccountExplicitlyRequest, opts ...grpc.CallOption) (*RemoveAccountExplicitlyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveAccountExplicitlyResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_RemoveAccountExplicitly_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) RemoveOnAccountsUpdatedListener(ctx context.Context, in *RemoveOnAccountsUpdatedListenerRequest, opts ...grpc.CallOption) (*RemoveOnAccountsUpdatedListenerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveOnAccountsUpdatedListenerResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_RemoveOnAccountsUpdatedListener_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) SetAccountVisibility(ctx context.Context, in *SetAccountVisibilityRequest, opts ...grpc.CallOption) (*SetAccountVisibilityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetAccountVisibilityResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_SetAccountVisibility_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) SetAuthToken(ctx context.Context, in *SetAuthTokenRequest, opts ...grpc.CallOption) (*SetAuthTokenResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetAuthTokenResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_SetAuthToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) SetPassword(ctx context.Context, in *SetPasswordRequest, opts ...grpc.CallOption) (*SetPasswordResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetPasswordResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_SetPassword_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) SetUserData(ctx context.Context, in *SetUserDataRequest, opts ...grpc.CallOption) (*SetUserDataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetUserDataResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_SetUserData_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetResponse)
+	err := c.cc.Invoke(ctx, AccountManagerService_Get_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) NewChooseAccountIntent8(ctx context.Context, in *NewChooseAccountIntent8Request, opts ...grpc.CallOption) (*NewChooseAccountIntent8Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NewChooseAccountIntent8Response)
+	err := c.cc.Invoke(ctx, AccountManagerService_NewChooseAccountIntent8_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountManagerServiceClient) NewChooseAccountIntent7_1(ctx context.Context, in *NewChooseAccountIntent7_1Request, opts ...grpc.CallOption) (*NewChooseAccountIntent7_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NewChooseAccountIntent7_1Response)
+	err := c.cc.Invoke(ctx, AccountManagerService_NewChooseAccountIntent7_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AccountManagerServiceServer is the server API for AccountManagerService service.
+// All implementations must embed UnimplementedAccountManagerServiceServer
 // for forward compatibility.
-type ManagerServiceServer interface {
-	GetManagerRaw(context.Context, *GetManagerRawRequest) (*GetManagerRawResponse, error)
-	GetAccountsRaw(context.Context, *GetAccountsRawRequest) (*GetAccountsRawResponse, error)
-	GetAccountsByTypeRaw(context.Context, *GetAccountsByTypeRawRequest) (*GetAccountsByTypeRawResponse, error)
-	GetAuthTokenRaw(context.Context, *GetAuthTokenRawRequest) (*GetAuthTokenRawResponse, error)
-	InvalidateAuthTokenRaw(context.Context, *InvalidateAuthTokenRawRequest) (*InvalidateAuthTokenRawResponse, error)
-	mustEmbedUnimplementedManagerServiceServer()
+type AccountManagerServiceServer interface {
+	AddAccountExplicitly3(context.Context, *AddAccountExplicitly3Request) (*AddAccountExplicitly3Response, error)
+	AddAccountExplicitly5_1(context.Context, *AddAccountExplicitly5_1Request) (*AddAccountExplicitly5_1Response, error)
+	BlockingGetAuthToken(context.Context, *BlockingGetAuthTokenRequest) (*BlockingGetAuthTokenResponse, error)
+	ClearPassword(context.Context, *ClearPasswordRequest) (*ClearPasswordResponse, error)
+	GetAccountVisibility(context.Context, *GetAccountVisibilityRequest) (*GetAccountVisibilityResponse, error)
+	GetAccounts(context.Context, *GetAccountsRequest) (*GetAccountsResponse, error)
+	GetAccountsByType(context.Context, *GetAccountsByTypeRequest) (*GetAccountsByTypeResponse, error)
+	GetAccountsByTypeForPackage(context.Context, *GetAccountsByTypeForPackageRequest) (*GetAccountsByTypeForPackageResponse, error)
+	GetAuthenticatorTypes(context.Context, *GetAuthenticatorTypesRequest) (*GetAuthenticatorTypesResponse, error)
+	GetPassword(context.Context, *GetPasswordRequest) (*GetPasswordResponse, error)
+	GetPreviousName(context.Context, *GetPreviousNameRequest) (*GetPreviousNameResponse, error)
+	GetUserData(context.Context, *GetUserDataRequest) (*GetUserDataResponse, error)
+	InvalidateAuthToken(context.Context, *InvalidateAuthTokenRequest) (*InvalidateAuthTokenResponse, error)
+	NotifyAccountAuthenticated(context.Context, *NotifyAccountAuthenticatedRequest) (*NotifyAccountAuthenticatedResponse, error)
+	PeekAuthToken(context.Context, *PeekAuthTokenRequest) (*PeekAuthTokenResponse, error)
+	RemoveAccountExplicitly(context.Context, *RemoveAccountExplicitlyRequest) (*RemoveAccountExplicitlyResponse, error)
+	RemoveOnAccountsUpdatedListener(context.Context, *RemoveOnAccountsUpdatedListenerRequest) (*RemoveOnAccountsUpdatedListenerResponse, error)
+	SetAccountVisibility(context.Context, *SetAccountVisibilityRequest) (*SetAccountVisibilityResponse, error)
+	SetAuthToken(context.Context, *SetAuthTokenRequest) (*SetAuthTokenResponse, error)
+	SetPassword(context.Context, *SetPasswordRequest) (*SetPasswordResponse, error)
+	SetUserData(context.Context, *SetUserDataRequest) (*SetUserDataResponse, error)
+	Get(context.Context, *GetRequest) (*GetResponse, error)
+	NewChooseAccountIntent8(context.Context, *NewChooseAccountIntent8Request) (*NewChooseAccountIntent8Response, error)
+	NewChooseAccountIntent7_1(context.Context, *NewChooseAccountIntent7_1Request) (*NewChooseAccountIntent7_1Response, error)
+	mustEmbedUnimplementedAccountManagerServiceServer()
 }
 
-// UnimplementedManagerServiceServer must be embedded to have
+// UnimplementedAccountManagerServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedManagerServiceServer struct{}
+type UnimplementedAccountManagerServiceServer struct{}
 
-func (UnimplementedManagerServiceServer) GetManagerRaw(context.Context, *GetManagerRawRequest) (*GetManagerRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetManagerRaw not implemented")
+func (UnimplementedAccountManagerServiceServer) AddAccountExplicitly3(context.Context, *AddAccountExplicitly3Request) (*AddAccountExplicitly3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddAccountExplicitly3 not implemented")
 }
-func (UnimplementedManagerServiceServer) GetAccountsRaw(context.Context, *GetAccountsRawRequest) (*GetAccountsRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAccountsRaw not implemented")
+func (UnimplementedAccountManagerServiceServer) AddAccountExplicitly5_1(context.Context, *AddAccountExplicitly5_1Request) (*AddAccountExplicitly5_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddAccountExplicitly5_1 not implemented")
 }
-func (UnimplementedManagerServiceServer) GetAccountsByTypeRaw(context.Context, *GetAccountsByTypeRawRequest) (*GetAccountsByTypeRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAccountsByTypeRaw not implemented")
+func (UnimplementedAccountManagerServiceServer) BlockingGetAuthToken(context.Context, *BlockingGetAuthTokenRequest) (*BlockingGetAuthTokenResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BlockingGetAuthToken not implemented")
 }
-func (UnimplementedManagerServiceServer) GetAuthTokenRaw(context.Context, *GetAuthTokenRawRequest) (*GetAuthTokenRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAuthTokenRaw not implemented")
+func (UnimplementedAccountManagerServiceServer) ClearPassword(context.Context, *ClearPasswordRequest) (*ClearPasswordResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ClearPassword not implemented")
 }
-func (UnimplementedManagerServiceServer) InvalidateAuthTokenRaw(context.Context, *InvalidateAuthTokenRawRequest) (*InvalidateAuthTokenRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method InvalidateAuthTokenRaw not implemented")
+func (UnimplementedAccountManagerServiceServer) GetAccountVisibility(context.Context, *GetAccountVisibilityRequest) (*GetAccountVisibilityResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAccountVisibility not implemented")
 }
-func (UnimplementedManagerServiceServer) mustEmbedUnimplementedManagerServiceServer() {}
-func (UnimplementedManagerServiceServer) testEmbeddedByValue()                        {}
+func (UnimplementedAccountManagerServiceServer) GetAccounts(context.Context, *GetAccountsRequest) (*GetAccountsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAccounts not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) GetAccountsByType(context.Context, *GetAccountsByTypeRequest) (*GetAccountsByTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAccountsByType not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) GetAccountsByTypeForPackage(context.Context, *GetAccountsByTypeForPackageRequest) (*GetAccountsByTypeForPackageResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAccountsByTypeForPackage not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) GetAuthenticatorTypes(context.Context, *GetAuthenticatorTypesRequest) (*GetAuthenticatorTypesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAuthenticatorTypes not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) GetPassword(context.Context, *GetPasswordRequest) (*GetPasswordResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPassword not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) GetPreviousName(context.Context, *GetPreviousNameRequest) (*GetPreviousNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPreviousName not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) GetUserData(context.Context, *GetUserDataRequest) (*GetUserDataResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserData not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) InvalidateAuthToken(context.Context, *InvalidateAuthTokenRequest) (*InvalidateAuthTokenResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method InvalidateAuthToken not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) NotifyAccountAuthenticated(context.Context, *NotifyAccountAuthenticatedRequest) (*NotifyAccountAuthenticatedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method NotifyAccountAuthenticated not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) PeekAuthToken(context.Context, *PeekAuthTokenRequest) (*PeekAuthTokenResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PeekAuthToken not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) RemoveAccountExplicitly(context.Context, *RemoveAccountExplicitlyRequest) (*RemoveAccountExplicitlyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveAccountExplicitly not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) RemoveOnAccountsUpdatedListener(context.Context, *RemoveOnAccountsUpdatedListenerRequest) (*RemoveOnAccountsUpdatedListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveOnAccountsUpdatedListener not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) SetAccountVisibility(context.Context, *SetAccountVisibilityRequest) (*SetAccountVisibilityResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAccountVisibility not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) SetAuthToken(context.Context, *SetAuthTokenRequest) (*SetAuthTokenResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAuthToken not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) SetPassword(context.Context, *SetPasswordRequest) (*SetPasswordResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetPassword not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) SetUserData(context.Context, *SetUserDataRequest) (*SetUserDataResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetUserData not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) Get(context.Context, *GetRequest) (*GetResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) NewChooseAccountIntent8(context.Context, *NewChooseAccountIntent8Request) (*NewChooseAccountIntent8Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method NewChooseAccountIntent8 not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) NewChooseAccountIntent7_1(context.Context, *NewChooseAccountIntent7_1Request) (*NewChooseAccountIntent7_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method NewChooseAccountIntent7_1 not implemented")
+}
+func (UnimplementedAccountManagerServiceServer) mustEmbedUnimplementedAccountManagerServiceServer() {}
+func (UnimplementedAccountManagerServiceServer) testEmbeddedByValue()                               {}
 
-// UnsafeManagerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ManagerServiceServer will
+// UnsafeAccountManagerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AccountManagerServiceServer will
 // result in compilation errors.
-type UnsafeManagerServiceServer interface {
-	mustEmbedUnimplementedManagerServiceServer()
+type UnsafeAccountManagerServiceServer interface {
+	mustEmbedUnimplementedAccountManagerServiceServer()
 }
 
-func RegisterManagerServiceServer(s grpc.ServiceRegistrar, srv ManagerServiceServer) {
-	// If the following call panics, it indicates UnimplementedManagerServiceServer was
+func RegisterAccountManagerServiceServer(s grpc.ServiceRegistrar, srv AccountManagerServiceServer) {
+	// If the following call panics, it indicates UnimplementedAccountManagerServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ManagerService_ServiceDesc, srv)
+	s.RegisterService(&AccountManagerService_ServiceDesc, srv)
 }
 
-func _ManagerService_GetManagerRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetManagerRawRequest)
+func _AccountManagerService_AddAccountExplicitly3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddAccountExplicitly3Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetManagerRaw(ctx, in)
+		return srv.(AccountManagerServiceServer).AddAccountExplicitly3(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_GetManagerRaw_FullMethodName,
+		FullMethod: AccountManagerService_AddAccountExplicitly3_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetManagerRaw(ctx, req.(*GetManagerRawRequest))
+		return srv.(AccountManagerServiceServer).AddAccountExplicitly3(ctx, req.(*AddAccountExplicitly3Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_GetAccountsRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAccountsRawRequest)
+func _AccountManagerService_AddAccountExplicitly5_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddAccountExplicitly5_1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetAccountsRaw(ctx, in)
+		return srv.(AccountManagerServiceServer).AddAccountExplicitly5_1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_GetAccountsRaw_FullMethodName,
+		FullMethod: AccountManagerService_AddAccountExplicitly5_1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetAccountsRaw(ctx, req.(*GetAccountsRawRequest))
+		return srv.(AccountManagerServiceServer).AddAccountExplicitly5_1(ctx, req.(*AddAccountExplicitly5_1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_GetAccountsByTypeRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAccountsByTypeRawRequest)
+func _AccountManagerService_BlockingGetAuthToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BlockingGetAuthTokenRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetAccountsByTypeRaw(ctx, in)
+		return srv.(AccountManagerServiceServer).BlockingGetAuthToken(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_GetAccountsByTypeRaw_FullMethodName,
+		FullMethod: AccountManagerService_BlockingGetAuthToken_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetAccountsByTypeRaw(ctx, req.(*GetAccountsByTypeRawRequest))
+		return srv.(AccountManagerServiceServer).BlockingGetAuthToken(ctx, req.(*BlockingGetAuthTokenRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_GetAuthTokenRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAuthTokenRawRequest)
+func _AccountManagerService_ClearPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClearPasswordRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetAuthTokenRaw(ctx, in)
+		return srv.(AccountManagerServiceServer).ClearPassword(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_GetAuthTokenRaw_FullMethodName,
+		FullMethod: AccountManagerService_ClearPassword_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetAuthTokenRaw(ctx, req.(*GetAuthTokenRawRequest))
+		return srv.(AccountManagerServiceServer).ClearPassword(ctx, req.(*ClearPasswordRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_InvalidateAuthTokenRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InvalidateAuthTokenRawRequest)
+func _AccountManagerService_GetAccountVisibility_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountVisibilityRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).InvalidateAuthTokenRaw(ctx, in)
+		return srv.(AccountManagerServiceServer).GetAccountVisibility(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_InvalidateAuthTokenRaw_FullMethodName,
+		FullMethod: AccountManagerService_GetAccountVisibility_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).InvalidateAuthTokenRaw(ctx, req.(*InvalidateAuthTokenRawRequest))
+		return srv.(AccountManagerServiceServer).GetAccountVisibility(ctx, req.(*GetAccountVisibilityRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ManagerService_ServiceDesc is the grpc.ServiceDesc for ManagerService service.
+func _AccountManagerService_GetAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).GetAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_GetAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).GetAccounts(ctx, req.(*GetAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_GetAccountsByType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountsByTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).GetAccountsByType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_GetAccountsByType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).GetAccountsByType(ctx, req.(*GetAccountsByTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_GetAccountsByTypeForPackage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountsByTypeForPackageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).GetAccountsByTypeForPackage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_GetAccountsByTypeForPackage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).GetAccountsByTypeForPackage(ctx, req.(*GetAccountsByTypeForPackageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_GetAuthenticatorTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAuthenticatorTypesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).GetAuthenticatorTypes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_GetAuthenticatorTypes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).GetAuthenticatorTypes(ctx, req.(*GetAuthenticatorTypesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_GetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).GetPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_GetPassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).GetPassword(ctx, req.(*GetPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_GetPreviousName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPreviousNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).GetPreviousName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_GetPreviousName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).GetPreviousName(ctx, req.(*GetPreviousNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_GetUserData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).GetUserData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_GetUserData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).GetUserData(ctx, req.(*GetUserDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_InvalidateAuthToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InvalidateAuthTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).InvalidateAuthToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_InvalidateAuthToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).InvalidateAuthToken(ctx, req.(*InvalidateAuthTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_NotifyAccountAuthenticated_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NotifyAccountAuthenticatedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).NotifyAccountAuthenticated(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_NotifyAccountAuthenticated_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).NotifyAccountAuthenticated(ctx, req.(*NotifyAccountAuthenticatedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_PeekAuthToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PeekAuthTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).PeekAuthToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_PeekAuthToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).PeekAuthToken(ctx, req.(*PeekAuthTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_RemoveAccountExplicitly_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveAccountExplicitlyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).RemoveAccountExplicitly(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_RemoveAccountExplicitly_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).RemoveAccountExplicitly(ctx, req.(*RemoveAccountExplicitlyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_RemoveOnAccountsUpdatedListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveOnAccountsUpdatedListenerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).RemoveOnAccountsUpdatedListener(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_RemoveOnAccountsUpdatedListener_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).RemoveOnAccountsUpdatedListener(ctx, req.(*RemoveOnAccountsUpdatedListenerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_SetAccountVisibility_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAccountVisibilityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).SetAccountVisibility(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_SetAccountVisibility_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).SetAccountVisibility(ctx, req.(*SetAccountVisibilityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_SetAuthToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAuthTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).SetAuthToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_SetAuthToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).SetAuthToken(ctx, req.(*SetAuthTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_SetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).SetPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_SetPassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).SetPassword(ctx, req.(*SetPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_SetUserData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUserDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).SetUserData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_SetUserData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).SetUserData(ctx, req.(*SetUserDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).Get(ctx, req.(*GetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_NewChooseAccountIntent8_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NewChooseAccountIntent8Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).NewChooseAccountIntent8(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_NewChooseAccountIntent8_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).NewChooseAccountIntent8(ctx, req.(*NewChooseAccountIntent8Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountManagerService_NewChooseAccountIntent7_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NewChooseAccountIntent7_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountManagerServiceServer).NewChooseAccountIntent7_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountManagerService_NewChooseAccountIntent7_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountManagerServiceServer).NewChooseAccountIntent7_1(ctx, req.(*NewChooseAccountIntent7_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// AccountManagerService_ServiceDesc is the grpc.ServiceDesc for AccountManagerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ManagerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "accounts.ManagerService",
-	HandlerType: (*ManagerServiceServer)(nil),
+var AccountManagerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "accounts.AccountManagerService",
+	HandlerType: (*AccountManagerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetManagerRaw",
-			Handler:    _ManagerService_GetManagerRaw_Handler,
+			MethodName: "AddAccountExplicitly3",
+			Handler:    _AccountManagerService_AddAccountExplicitly3_Handler,
 		},
 		{
-			MethodName: "GetAccountsRaw",
-			Handler:    _ManagerService_GetAccountsRaw_Handler,
+			MethodName: "AddAccountExplicitly5_1",
+			Handler:    _AccountManagerService_AddAccountExplicitly5_1_Handler,
 		},
 		{
-			MethodName: "GetAccountsByTypeRaw",
-			Handler:    _ManagerService_GetAccountsByTypeRaw_Handler,
+			MethodName: "BlockingGetAuthToken",
+			Handler:    _AccountManagerService_BlockingGetAuthToken_Handler,
 		},
 		{
-			MethodName: "GetAuthTokenRaw",
-			Handler:    _ManagerService_GetAuthTokenRaw_Handler,
+			MethodName: "ClearPassword",
+			Handler:    _AccountManagerService_ClearPassword_Handler,
 		},
 		{
-			MethodName: "InvalidateAuthTokenRaw",
-			Handler:    _ManagerService_InvalidateAuthTokenRaw_Handler,
+			MethodName: "GetAccountVisibility",
+			Handler:    _AccountManagerService_GetAccountVisibility_Handler,
+		},
+		{
+			MethodName: "GetAccounts",
+			Handler:    _AccountManagerService_GetAccounts_Handler,
+		},
+		{
+			MethodName: "GetAccountsByType",
+			Handler:    _AccountManagerService_GetAccountsByType_Handler,
+		},
+		{
+			MethodName: "GetAccountsByTypeForPackage",
+			Handler:    _AccountManagerService_GetAccountsByTypeForPackage_Handler,
+		},
+		{
+			MethodName: "GetAuthenticatorTypes",
+			Handler:    _AccountManagerService_GetAuthenticatorTypes_Handler,
+		},
+		{
+			MethodName: "GetPassword",
+			Handler:    _AccountManagerService_GetPassword_Handler,
+		},
+		{
+			MethodName: "GetPreviousName",
+			Handler:    _AccountManagerService_GetPreviousName_Handler,
+		},
+		{
+			MethodName: "GetUserData",
+			Handler:    _AccountManagerService_GetUserData_Handler,
+		},
+		{
+			MethodName: "InvalidateAuthToken",
+			Handler:    _AccountManagerService_InvalidateAuthToken_Handler,
+		},
+		{
+			MethodName: "NotifyAccountAuthenticated",
+			Handler:    _AccountManagerService_NotifyAccountAuthenticated_Handler,
+		},
+		{
+			MethodName: "PeekAuthToken",
+			Handler:    _AccountManagerService_PeekAuthToken_Handler,
+		},
+		{
+			MethodName: "RemoveAccountExplicitly",
+			Handler:    _AccountManagerService_RemoveAccountExplicitly_Handler,
+		},
+		{
+			MethodName: "RemoveOnAccountsUpdatedListener",
+			Handler:    _AccountManagerService_RemoveOnAccountsUpdatedListener_Handler,
+		},
+		{
+			MethodName: "SetAccountVisibility",
+			Handler:    _AccountManagerService_SetAccountVisibility_Handler,
+		},
+		{
+			MethodName: "SetAuthToken",
+			Handler:    _AccountManagerService_SetAuthToken_Handler,
+		},
+		{
+			MethodName: "SetPassword",
+			Handler:    _AccountManagerService_SetPassword_Handler,
+		},
+		{
+			MethodName: "SetUserData",
+			Handler:    _AccountManagerService_SetUserData_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _AccountManagerService_Get_Handler,
+		},
+		{
+			MethodName: "NewChooseAccountIntent8",
+			Handler:    _AccountManagerService_NewChooseAccountIntent8_Handler,
+		},
+		{
+			MethodName: "NewChooseAccountIntent7_1",
+			Handler:    _AccountManagerService_NewChooseAccountIntent7_1_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

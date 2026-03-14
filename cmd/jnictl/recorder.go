@@ -3,12 +3,9 @@
 package main
 
 import (
-	"fmt"
-	"io"
 
 	"github.com/spf13/cobra"
 	pb "github.com/xaionaro-go/jni/proto/recorder"
-	"google.golang.org/protobuf/encoding/protojson"
 )
 
 var recorderCmd = &cobra.Command{
@@ -16,23 +13,20 @@ var recorderCmd = &cobra.Command{
 	Short: "recorder service operations",
 }
 
-var recorderRecorderCmd = &cobra.Command{
-	Use:   "recorder",
-	Short: "RecorderService operations",
+var recorderMediaRecorderCmd = &cobra.Command{
+	Use:   "media-recorder",
+	Short: "MediaRecorderService operations",
 }
 
-var recorderRecorderSetAudioSourceCmd = &cobra.Command{
-	Use:   "set-audio-source",
-	Short: "SetAudioSource RPC",
+var recorderMediaRecorderGetActiveMicrophonesCmd = &cobra.Command{
+	Use:   "get-active-microphones",
+	Short: "GetActiveMicrophones RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.SetAudioSourceRequest{}
-		if v, err := cmd.Flags().GetInt32("audio-source"); err == nil {
-			req.AudioSource = v
-		}
-		resp, err := client.SetAudioSource(ctx, req)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.GetActiveMicrophonesRequest{}
+		resp, err := client.GetActiveMicrophones(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -40,18 +34,15 @@ var recorderRecorderSetAudioSourceCmd = &cobra.Command{
 	},
 }
 
-var recorderRecorderSetVideoSourceCmd = &cobra.Command{
-	Use:   "set-video-source",
-	Short: "SetVideoSource RPC",
+var recorderMediaRecorderGetActiveRecordingConfigurationCmd = &cobra.Command{
+	Use:   "get-active-recording-configuration",
+	Short: "GetActiveRecordingConfiguration RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.SetVideoSourceRequest{}
-		if v, err := cmd.Flags().GetInt32("video-source"); err == nil {
-			req.VideoSource = v
-		}
-		resp, err := client.SetVideoSource(ctx, req)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.GetActiveRecordingConfigurationRequest{}
+		resp, err := client.GetActiveRecordingConfiguration(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -59,18 +50,15 @@ var recorderRecorderSetVideoSourceCmd = &cobra.Command{
 	},
 }
 
-var recorderRecorderSetOutputFormatCmd = &cobra.Command{
-	Use:   "set-output-format",
-	Short: "SetOutputFormat RPC",
+var recorderMediaRecorderGetLogSessionIdCmd = &cobra.Command{
+	Use:   "get-log-session-id",
+	Short: "GetLogSessionId RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.SetOutputFormatRequest{}
-		if v, err := cmd.Flags().GetInt32("output-format"); err == nil {
-			req.OutputFormat = v
-		}
-		resp, err := client.SetOutputFormat(ctx, req)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.GetLogSessionIdRequest{}
+		resp, err := client.GetLogSessionId(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -78,18 +66,15 @@ var recorderRecorderSetOutputFormatCmd = &cobra.Command{
 	},
 }
 
-var recorderRecorderSetAudioEncoderCmd = &cobra.Command{
-	Use:   "set-audio-encoder",
-	Short: "SetAudioEncoder RPC",
+var recorderMediaRecorderGetMetricsCmd = &cobra.Command{
+	Use:   "get-metrics",
+	Short: "GetMetrics RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.SetAudioEncoderRequest{}
-		if v, err := cmd.Flags().GetInt32("audio-encoder"); err == nil {
-			req.AudioEncoder = v
-		}
-		resp, err := client.SetAudioEncoder(ctx, req)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.GetMetricsRequest{}
+		resp, err := client.GetMetrics(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -97,18 +82,15 @@ var recorderRecorderSetAudioEncoderCmd = &cobra.Command{
 	},
 }
 
-var recorderRecorderSetVideoEncoderCmd = &cobra.Command{
-	Use:   "set-video-encoder",
-	Short: "SetVideoEncoder RPC",
+var recorderMediaRecorderGetPreferredDeviceCmd = &cobra.Command{
+	Use:   "get-preferred-device",
+	Short: "GetPreferredDevice RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.SetVideoEncoderRequest{}
-		if v, err := cmd.Flags().GetInt32("video-encoder"); err == nil {
-			req.VideoEncoder = v
-		}
-		resp, err := client.SetVideoEncoder(ctx, req)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.GetPreferredDeviceRequest{}
+		resp, err := client.GetPreferredDevice(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -116,18 +98,15 @@ var recorderRecorderSetVideoEncoderCmd = &cobra.Command{
 	},
 }
 
-var recorderRecorderSetOutputFileCmd = &cobra.Command{
-	Use:   "set-output-file",
-	Short: "SetOutputFile RPC",
+var recorderMediaRecorderGetRoutedDeviceCmd = &cobra.Command{
+	Use:   "get-routed-device",
+	Short: "GetRoutedDevice RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.SetOutputFileRequest{}
-		if v, err := cmd.Flags().GetString("path"); err == nil {
-			req.Path = v
-		}
-		resp, err := client.SetOutputFile(ctx, req)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.GetRoutedDeviceRequest{}
+		resp, err := client.GetRoutedDevice(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -135,21 +114,15 @@ var recorderRecorderSetOutputFileCmd = &cobra.Command{
 	},
 }
 
-var recorderRecorderSetVideoSizeCmd = &cobra.Command{
-	Use:   "set-video-size",
-	Short: "SetVideoSize RPC",
+var recorderMediaRecorderGetRoutedDevicesCmd = &cobra.Command{
+	Use:   "get-routed-devices",
+	Short: "GetRoutedDevices RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.SetVideoSizeRequest{}
-		if v, err := cmd.Flags().GetInt32("width"); err == nil {
-			req.Width = v
-		}
-		if v, err := cmd.Flags().GetInt32("height"); err == nil {
-			req.Height = v
-		}
-		resp, err := client.SetVideoSize(ctx, req)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.GetRoutedDevicesRequest{}
+		resp, err := client.GetRoutedDevices(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -157,108 +130,13 @@ var recorderRecorderSetVideoSizeCmd = &cobra.Command{
 	},
 }
 
-var recorderRecorderSetVideoFrameRateCmd = &cobra.Command{
-	Use:   "set-video-frame-rate",
-	Short: "SetVideoFrameRate RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.SetVideoFrameRateRequest{}
-		if v, err := cmd.Flags().GetInt32("rate"); err == nil {
-			req.Rate = v
-		}
-		resp, err := client.SetVideoFrameRate(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var recorderRecorderSetAudioSamplingRateCmd = &cobra.Command{
-	Use:   "set-audio-sampling-rate",
-	Short: "SetAudioSamplingRate RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.SetAudioSamplingRateRequest{}
-		if v, err := cmd.Flags().GetInt32("sampling-rate"); err == nil {
-			req.SamplingRate = v
-		}
-		resp, err := client.SetAudioSamplingRate(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var recorderRecorderSetAudioChannelsCmd = &cobra.Command{
-	Use:   "set-audio-channels",
-	Short: "SetAudioChannels RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.SetAudioChannelsRequest{}
-		if v, err := cmd.Flags().GetInt32("num-channels"); err == nil {
-			req.NumChannels = v
-		}
-		resp, err := client.SetAudioChannels(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var recorderRecorderSetMaxDurationMsCmd = &cobra.Command{
-	Use:   "set-max-duration-ms",
-	Short: "SetMaxDurationMs RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.SetMaxDurationMsRequest{}
-		if v, err := cmd.Flags().GetInt32("max-duration-ms"); err == nil {
-			req.MaxDurationMs = v
-		}
-		resp, err := client.SetMaxDurationMs(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var recorderRecorderSetMaxFileSizeCmd = &cobra.Command{
-	Use:   "set-max-file-size",
-	Short: "SetMaxFileSize RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.SetMaxFileSizeRequest{}
-		if v, err := cmd.Flags().GetInt64("max-file-size"); err == nil {
-			req.MaxFileSize = v
-		}
-		resp, err := client.SetMaxFileSize(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var recorderRecorderPrepareCmd = &cobra.Command{
+var recorderMediaRecorderPrepareCmd = &cobra.Command{
 	Use:   "prepare",
 	Short: "Prepare RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
 		req := &pb.PrepareRequest{}
 		resp, err := client.Prepare(ctx, req)
 		if err != nil {
@@ -268,15 +146,21 @@ var recorderRecorderPrepareCmd = &cobra.Command{
 	},
 }
 
-var recorderRecorderStartCmd = &cobra.Command{
-	Use:   "start",
-	Short: "Start RPC",
+var recorderMediaRecorderRegisterAudioRecordingCallbackCmd = &cobra.Command{
+	Use:   "register-audio-recording-callback",
+	Short: "RegisterAudioRecordingCallback RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.StartRequest{}
-		resp, err := client.Start(ctx, req)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.RegisterAudioRecordingCallbackRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.RegisterAudioRecordingCallback(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -284,15 +168,18 @@ var recorderRecorderStartCmd = &cobra.Command{
 	},
 }
 
-var recorderRecorderPauseCmd = &cobra.Command{
-	Use:   "pause",
-	Short: "Pause RPC",
+var recorderMediaRecorderRemoveOnRoutingChangedListenerCmd = &cobra.Command{
+	Use:   "remove-on-routing-changed-listener",
+	Short: "RemoveOnRoutingChangedListener RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.PauseRequest{}
-		resp, err := client.Pause(ctx, req)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.RemoveOnRoutingChangedListenerRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RemoveOnRoutingChangedListener(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -300,45 +187,13 @@ var recorderRecorderPauseCmd = &cobra.Command{
 	},
 }
 
-var recorderRecorderResumeCmd = &cobra.Command{
-	Use:   "resume",
-	Short: "Resume RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.ResumeRequest{}
-		resp, err := client.Resume(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var recorderRecorderStopCmd = &cobra.Command{
-	Use:   "stop",
-	Short: "Stop RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.StopRequest{}
-		resp, err := client.Stop(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var recorderRecorderResetCmd = &cobra.Command{
+var recorderMediaRecorderResetCmd = &cobra.Command{
 	Use:   "reset",
 	Short: "Reset RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
 		req := &pb.ResetRequest{}
 		resp, err := client.Reset(ctx, req)
 		if err != nil {
@@ -348,15 +203,18 @@ var recorderRecorderResetCmd = &cobra.Command{
 	},
 }
 
-var recorderRecorderReleaseCmd = &cobra.Command{
-	Use:   "release",
-	Short: "Release RPC",
+var recorderMediaRecorderSetAudioChannelsCmd = &cobra.Command{
+	Use:   "set-audio-channels",
+	Short: "SetAudioChannels RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.ReleaseRequest{}
-		resp, err := client.Release(ctx, req)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetAudioChannelsRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetAudioChannels(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -364,15 +222,18 @@ var recorderRecorderReleaseCmd = &cobra.Command{
 	},
 }
 
-var recorderRecorderGetMaxAmplitudeCmd = &cobra.Command{
-	Use:   "get-max-amplitude",
-	Short: "GetMaxAmplitude RPC",
+var recorderMediaRecorderSetAudioEncodingBitRateCmd = &cobra.Command{
+	Use:   "set-audio-encoding-bit-rate",
+	Short: "SetAudioEncodingBitRate RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
-		req := &pb.GetMaxAmplitudeRequest{}
-		resp, err := client.GetMaxAmplitude(ctx, req)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetAudioEncodingBitRateRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetAudioEncodingBitRate(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -380,16 +241,171 @@ var recorderRecorderGetMaxAmplitudeCmd = &cobra.Command{
 	},
 }
 
-var recorderRecorderSetOnErrorListenerCmd = &cobra.Command{
+var recorderMediaRecorderSetAudioProfileCmd = &cobra.Command{
+	Use:   "set-audio-profile",
+	Short: "SetAudioProfile RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetAudioProfileRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetAudioProfile(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetAudioSamplingRateCmd = &cobra.Command{
+	Use:   "set-audio-sampling-rate",
+	Short: "SetAudioSamplingRate RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetAudioSamplingRateRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetAudioSamplingRate(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetCaptureRateCmd = &cobra.Command{
+	Use:   "set-capture-rate",
+	Short: "SetCaptureRate RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetCaptureRateRequest{}
+		if v, err := cmd.Flags().GetFloat64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetCaptureRate(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetInputSurfaceCmd = &cobra.Command{
+	Use:   "set-input-surface",
+	Short: "SetInputSurface RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetInputSurfaceRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetInputSurface(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetLocationCmd = &cobra.Command{
+	Use:   "set-location",
+	Short: "SetLocation RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetLocationRequest{}
+		if v, err := cmd.Flags().GetFloat32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetFloat32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetLocation(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetLogSessionIdCmd = &cobra.Command{
+	Use:   "set-log-session-id",
+	Short: "SetLogSessionId RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetLogSessionIdRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetLogSessionId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetNextOutputFile1Cmd = &cobra.Command{
+	Use:   "set-next-output-file1",
+	Short: "SetNextOutputFile1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetNextOutputFile1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetNextOutputFile1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetNextOutputFile1_1Cmd = &cobra.Command{
+	Use:   "set-next-output-file1_1",
+	Short: "SetNextOutputFile1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetNextOutputFile1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetNextOutputFile1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetOnErrorListenerCmd = &cobra.Command{
 	Use:   "set-on-error-listener",
 	Short: "SetOnErrorListener RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
 		req := &pb.SetOnErrorListenerRequest{}
-		if v, err := cmd.Flags().GetInt64("listener"); err == nil {
-			req.Listener = v
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
 		resp, err := client.SetOnErrorListener(ctx, req)
 		if err != nil {
@@ -399,16 +415,16 @@ var recorderRecorderSetOnErrorListenerCmd = &cobra.Command{
 	},
 }
 
-var recorderRecorderSetOnInfoListenerCmd = &cobra.Command{
+var recorderMediaRecorderSetOnInfoListenerCmd = &cobra.Command{
 	Use:   "set-on-info-listener",
 	Short: "SetOnInfoListener RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRecorderServiceClient(grpcConn)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
 		req := &pb.SetOnInfoListenerRequest{}
-		if v, err := cmd.Flags().GetInt64("listener"); err == nil {
-			req.Listener = v
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
 		resp, err := client.SetOnInfoListener(ctx, req)
 		if err != nil {
@@ -418,118 +434,323 @@ var recorderRecorderSetOnInfoListenerCmd = &cobra.Command{
 	},
 }
 
-var recorderOnErrorListenerCmd = &cobra.Command{
-	Use:   "on-error-listener",
-	Short: "OnErrorListenerService operations",
-}
-
-var recorderOnErrorListenerSubscribeOnErrorListenerCmd = &cobra.Command{
-	Use:   "subscribe-on-error-listener",
-	Short: "SubscribeOnErrorListener RPC",
+var recorderMediaRecorderSetOrientationHintCmd = &cobra.Command{
+	Use:   "set-orientation-hint",
+	Short: "SetOrientationHint RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewOnErrorListenerServiceClient(grpcConn)
-		req := &pb.SubscribeOnErrorListenerRequest{}
-		stream, err := client.SubscribeOnErrorListener(ctx, req)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetOrientationHintRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetOrientationHint(ctx, req)
 		if err != nil {
 			return err
 		}
-		opts := protojson.MarshalOptions{Multiline: true, Indent: "  "}
-		for {
-			resp, err := stream.Recv()
-			if err == io.EOF {
-				return nil
-			}
-			if err != nil {
-				return err
-			}
-			data, err := opts.Marshal(resp)
-			if err != nil {
-				return err
-			}
-			fmt.Println(string(data))
-		}
+		return printProtoMessage(resp)
 	},
 }
 
-var recorderOnInfoListenerCmd = &cobra.Command{
-	Use:   "on-info-listener",
-	Short: "OnInfoListenerService operations",
-}
-
-var recorderOnInfoListenerSubscribeOnInfoListenerCmd = &cobra.Command{
-	Use:   "subscribe-on-info-listener",
-	Short: "SubscribeOnInfoListener RPC",
+var recorderMediaRecorderSetOutputFile1Cmd = &cobra.Command{
+	Use:   "set-output-file1",
+	Short: "SetOutputFile1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewOnInfoListenerServiceClient(grpcConn)
-		req := &pb.SubscribeOnInfoListenerRequest{}
-		stream, err := client.SubscribeOnInfoListener(ctx, req)
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetOutputFile1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetOutputFile1(ctx, req)
 		if err != nil {
 			return err
 		}
-		opts := protojson.MarshalOptions{Multiline: true, Indent: "  "}
-		for {
-			resp, err := stream.Recv()
-			if err == io.EOF {
-				return nil
-			}
-			if err != nil {
-				return err
-			}
-			data, err := opts.Marshal(resp)
-			if err != nil {
-				return err
-			}
-			fmt.Println(string(data))
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetOutputFile1_1Cmd = &cobra.Command{
+	Use:   "set-output-file1_1",
+	Short: "SetOutputFile1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetOutputFile1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
+		resp, err := client.SetOutputFile1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetOutputFile1_2Cmd = &cobra.Command{
+	Use:   "set-output-file1_2",
+	Short: "SetOutputFile1_2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetOutputFile1_2Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetOutputFile1_2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetPreferredDeviceCmd = &cobra.Command{
+	Use:   "set-preferred-device",
+	Short: "SetPreferredDevice RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetPreferredDeviceRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetPreferredDevice(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetPreferredMicrophoneDirectionCmd = &cobra.Command{
+	Use:   "set-preferred-microphone-direction",
+	Short: "SetPreferredMicrophoneDirection RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetPreferredMicrophoneDirectionRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetPreferredMicrophoneDirection(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetPreferredMicrophoneFieldDimensionCmd = &cobra.Command{
+	Use:   "set-preferred-microphone-field-dimension",
+	Short: "SetPreferredMicrophoneFieldDimension RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetPreferredMicrophoneFieldDimensionRequest{}
+		if v, err := cmd.Flags().GetFloat32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetPreferredMicrophoneFieldDimension(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetPreviewDisplayCmd = &cobra.Command{
+	Use:   "set-preview-display",
+	Short: "SetPreviewDisplay RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetPreviewDisplayRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetPreviewDisplay(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetProfileCmd = &cobra.Command{
+	Use:   "set-profile",
+	Short: "SetProfile RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetProfileRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetProfile(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetVideoEncodingBitRateCmd = &cobra.Command{
+	Use:   "set-video-encoding-bit-rate",
+	Short: "SetVideoEncodingBitRate RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetVideoEncodingBitRateRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetVideoEncodingBitRate(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetVideoEncodingProfileLevelCmd = &cobra.Command{
+	Use:   "set-video-encoding-profile-level",
+	Short: "SetVideoEncodingProfileLevel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetVideoEncodingProfileLevelRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetVideoEncodingProfileLevel(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderSetVideoProfileCmd = &cobra.Command{
+	Use:   "set-video-profile",
+	Short: "SetVideoProfile RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.SetVideoProfileRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetVideoProfile(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var recorderMediaRecorderUnregisterAudioRecordingCallbackCmd = &cobra.Command{
+	Use:   "unregister-audio-recording-callback",
+	Short: "UnregisterAudioRecordingCallback RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewMediaRecorderServiceClient(grpcConn)
+		req := &pb.UnregisterAudioRecordingCallbackRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.UnregisterAudioRecordingCallback(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
 	},
 }
 
 func init() {
-	recorderRecorderSetAudioSourceCmd.Flags().Int32("audio-source", 0, "audio-source (int32)")
-	recorderRecorderCmd.AddCommand(recorderRecorderSetAudioSourceCmd)
-	recorderRecorderSetVideoSourceCmd.Flags().Int32("video-source", 0, "video-source (int32)")
-	recorderRecorderCmd.AddCommand(recorderRecorderSetVideoSourceCmd)
-	recorderRecorderSetOutputFormatCmd.Flags().Int32("output-format", 0, "output-format (int32)")
-	recorderRecorderCmd.AddCommand(recorderRecorderSetOutputFormatCmd)
-	recorderRecorderSetAudioEncoderCmd.Flags().Int32("audio-encoder", 0, "audio-encoder (int32)")
-	recorderRecorderCmd.AddCommand(recorderRecorderSetAudioEncoderCmd)
-	recorderRecorderSetVideoEncoderCmd.Flags().Int32("video-encoder", 0, "video-encoder (int32)")
-	recorderRecorderCmd.AddCommand(recorderRecorderSetVideoEncoderCmd)
-	recorderRecorderSetOutputFileCmd.Flags().String("path", "", "path (string)")
-	recorderRecorderCmd.AddCommand(recorderRecorderSetOutputFileCmd)
-	recorderRecorderSetVideoSizeCmd.Flags().Int32("width", 0, "width (int32)")
-	recorderRecorderSetVideoSizeCmd.Flags().Int32("height", 0, "height (int32)")
-	recorderRecorderCmd.AddCommand(recorderRecorderSetVideoSizeCmd)
-	recorderRecorderSetVideoFrameRateCmd.Flags().Int32("rate", 0, "rate (int32)")
-	recorderRecorderCmd.AddCommand(recorderRecorderSetVideoFrameRateCmd)
-	recorderRecorderSetAudioSamplingRateCmd.Flags().Int32("sampling-rate", 0, "sampling-rate (int32)")
-	recorderRecorderCmd.AddCommand(recorderRecorderSetAudioSamplingRateCmd)
-	recorderRecorderSetAudioChannelsCmd.Flags().Int32("num-channels", 0, "num-channels (int32)")
-	recorderRecorderCmd.AddCommand(recorderRecorderSetAudioChannelsCmd)
-	recorderRecorderSetMaxDurationMsCmd.Flags().Int32("max-duration-ms", 0, "max-duration-ms (int32)")
-	recorderRecorderCmd.AddCommand(recorderRecorderSetMaxDurationMsCmd)
-	recorderRecorderSetMaxFileSizeCmd.Flags().Int64("max-file-size", 0, "max-file-size (int64)")
-	recorderRecorderCmd.AddCommand(recorderRecorderSetMaxFileSizeCmd)
-	recorderRecorderCmd.AddCommand(recorderRecorderPrepareCmd)
-	recorderRecorderCmd.AddCommand(recorderRecorderStartCmd)
-	recorderRecorderCmd.AddCommand(recorderRecorderPauseCmd)
-	recorderRecorderCmd.AddCommand(recorderRecorderResumeCmd)
-	recorderRecorderCmd.AddCommand(recorderRecorderStopCmd)
-	recorderRecorderCmd.AddCommand(recorderRecorderResetCmd)
-	recorderRecorderCmd.AddCommand(recorderRecorderReleaseCmd)
-	recorderRecorderCmd.AddCommand(recorderRecorderGetMaxAmplitudeCmd)
-	recorderRecorderSetOnErrorListenerCmd.Flags().Int64("listener", 0, "listener (int64)")
-	recorderRecorderCmd.AddCommand(recorderRecorderSetOnErrorListenerCmd)
-	recorderRecorderSetOnInfoListenerCmd.Flags().Int64("listener", 0, "listener (int64)")
-	recorderRecorderCmd.AddCommand(recorderRecorderSetOnInfoListenerCmd)
-	recorderCmd.AddCommand(recorderRecorderCmd)
-	recorderOnErrorListenerCmd.AddCommand(recorderOnErrorListenerSubscribeOnErrorListenerCmd)
-	recorderCmd.AddCommand(recorderOnErrorListenerCmd)
-	recorderOnInfoListenerCmd.AddCommand(recorderOnInfoListenerSubscribeOnInfoListenerCmd)
-	recorderCmd.AddCommand(recorderOnInfoListenerCmd)
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderGetActiveMicrophonesCmd)
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderGetActiveRecordingConfigurationCmd)
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderGetLogSessionIdCmd)
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderGetMetricsCmd)
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderGetPreferredDeviceCmd)
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderGetRoutedDeviceCmd)
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderGetRoutedDevicesCmd)
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderPrepareCmd)
+	recorderMediaRecorderRegisterAudioRecordingCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	recorderMediaRecorderRegisterAudioRecordingCallbackCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderRegisterAudioRecordingCallbackCmd)
+	recorderMediaRecorderRemoveOnRoutingChangedListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderRemoveOnRoutingChangedListenerCmd)
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderResetCmd)
+	recorderMediaRecorderSetAudioChannelsCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetAudioChannelsCmd)
+	recorderMediaRecorderSetAudioEncodingBitRateCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetAudioEncodingBitRateCmd)
+	recorderMediaRecorderSetAudioProfileCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetAudioProfileCmd)
+	recorderMediaRecorderSetAudioSamplingRateCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetAudioSamplingRateCmd)
+	recorderMediaRecorderSetCaptureRateCmd.Flags().Float64("arg0", 0, "arg0 (float64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetCaptureRateCmd)
+	recorderMediaRecorderSetInputSurfaceCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetInputSurfaceCmd)
+	recorderMediaRecorderSetLocationCmd.Flags().Float32("arg0", 0, "arg0 (float32)")
+	recorderMediaRecorderSetLocationCmd.Flags().Float32("arg1", 0, "arg1 (float32)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetLocationCmd)
+	recorderMediaRecorderSetLogSessionIdCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetLogSessionIdCmd)
+	recorderMediaRecorderSetNextOutputFile1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetNextOutputFile1Cmd)
+	recorderMediaRecorderSetNextOutputFile1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetNextOutputFile1_1Cmd)
+	recorderMediaRecorderSetOnErrorListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetOnErrorListenerCmd)
+	recorderMediaRecorderSetOnInfoListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetOnInfoListenerCmd)
+	recorderMediaRecorderSetOrientationHintCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetOrientationHintCmd)
+	recorderMediaRecorderSetOutputFile1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetOutputFile1Cmd)
+	recorderMediaRecorderSetOutputFile1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetOutputFile1_1Cmd)
+	recorderMediaRecorderSetOutputFile1_2Cmd.Flags().String("arg0", "", "arg0 (string)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetOutputFile1_2Cmd)
+	recorderMediaRecorderSetPreferredDeviceCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetPreferredDeviceCmd)
+	recorderMediaRecorderSetPreferredMicrophoneDirectionCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetPreferredMicrophoneDirectionCmd)
+	recorderMediaRecorderSetPreferredMicrophoneFieldDimensionCmd.Flags().Float32("arg0", 0, "arg0 (float32)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetPreferredMicrophoneFieldDimensionCmd)
+	recorderMediaRecorderSetPreviewDisplayCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetPreviewDisplayCmd)
+	recorderMediaRecorderSetProfileCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetProfileCmd)
+	recorderMediaRecorderSetVideoEncodingBitRateCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetVideoEncodingBitRateCmd)
+	recorderMediaRecorderSetVideoEncodingProfileLevelCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	recorderMediaRecorderSetVideoEncodingProfileLevelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetVideoEncodingProfileLevelCmd)
+	recorderMediaRecorderSetVideoProfileCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderSetVideoProfileCmd)
+	recorderMediaRecorderUnregisterAudioRecordingCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	recorderMediaRecorderCmd.AddCommand(recorderMediaRecorderUnregisterAudioRecordingCallbackCmd)
+	recorderCmd.AddCommand(recorderMediaRecorderCmd)
 	rootCmd.AddCommand(recorderCmd)
 }

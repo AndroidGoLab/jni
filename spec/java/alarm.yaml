@@ -1,0 +1,219 @@
+package: alarm
+go_import: github.com/xaionaro-go/jni/app/alarm
+classes:
+    - java_class: android.app.AlarmManager
+      go_type: alarmManager
+      obtain: system_service
+      service_name: alarm
+      close: true
+      methods:
+        - java_method: canScheduleExactAlarms
+          go_name: CanScheduleExactAlarms
+          returns: boolean
+          error: true
+        - java_method: cancel
+          go_name: Cancel1
+          params:
+            - java_type: android.app.AlarmManager$OnAlarmListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: cancel
+          go_name: Cancel1_1
+          params:
+            - java_type: android.app.PendingIntent
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: cancelAll
+          go_name: CancelAll
+          returns: void
+          error: true
+        - java_method: getNextAlarmClock
+          go_name: GetNextAlarmClock
+          returns: android.app.AlarmManager$AlarmClockInfo
+          error: true
+        - java_method: set
+          go_name: Set
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: android.app.PendingIntent
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setAlarmClock
+          go_name: SetAlarmClock
+          params:
+            - java_type: android.app.AlarmManager$AlarmClockInfo
+              go_name: arg0
+            - java_type: android.app.PendingIntent
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setAndAllowWhileIdle
+          go_name: SetAndAllowWhileIdle
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: android.app.PendingIntent
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setExact
+          go_name: SetExact
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: android.app.PendingIntent
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setExactAndAllowWhileIdle
+          go_name: SetExactAndAllowWhileIdle
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: android.app.PendingIntent
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setInexactRepeating
+          go_name: SetInexactRepeating
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: android.app.PendingIntent
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: setRepeating
+          go_name: SetRepeating
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: android.app.PendingIntent
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: setTime
+          go_name: SetTime
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTimeZone
+          go_name: SetTimeZone
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setWindow
+          go_name: SetWindow4
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: android.app.PendingIntent
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: setWindow
+          go_name: SetWindow6_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+            - java_type: java.util.concurrent.Executor
+              go_name: arg4
+            - java_type: android.app.AlarmManager$OnAlarmListener
+              go_name: arg5
+          returns: void
+          error: true
+    - java_class: android.app.AlarmManager$AlarmClockInfo
+      go_type: alarmManagerAlarmClockInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getShowIntent
+          go_name: GetShowIntent
+          returns: android.app.PendingIntent
+          error: true
+        - java_method: getTriggerTime
+          go_name: GetTriggerTime
+          returns: long
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+constants:
+    - go_name: ActionNextAlarmClockChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionScheduleExactAlarmPermissionStateChanged
+      value: '""'
+      go_type: string
+    - go_name: ElapsedRealtime
+      value: "0"
+      go_type: int
+    - go_name: ElapsedRealtimeWakeup
+      value: "0"
+      go_type: int
+    - go_name: IntervalDay
+      value: "0"
+      go_type: int64
+    - go_name: IntervalFifteenMinutes
+      value: "0"
+      go_type: int64
+    - go_name: IntervalHalfDay
+      value: "0"
+      go_type: int64
+    - go_name: IntervalHalfHour
+      value: "0"
+      go_type: int64
+    - go_name: IntervalHour
+      value: "0"
+      go_type: int64
+    - go_name: Rtc
+      value: "0"
+      go_type: int
+    - go_name: RtcWakeup
+      value: "0"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int

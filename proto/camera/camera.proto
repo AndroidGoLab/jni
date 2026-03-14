@@ -6,48 +6,138 @@ package camera;
 
 option go_package = "github.com/xaionaro-go/jni/proto/camera";
 
-message SetTorchModeRequest {
-  string camera_id = 1;
-  bool enabled = 2;
+message GetCameraCharacteristicsRequest {
+  string arg0 = 1;
 }
 
-message SetTorchModeResponse {
+message GetCameraCharacteristicsResponse {
+  int64 result = 1;
+}
+
+message GetCameraDeviceSetupRequest {
+  string arg0 = 1;
+}
+
+message GetCameraDeviceSetupResponse {
+  int64 result = 1;
+}
+
+message GetCameraExtensionCharacteristicsRequest {
+  string arg0 = 1;
+}
+
+message GetCameraExtensionCharacteristicsResponse {
+  int64 result = 1;
+}
+
+message GetCameraIdListRequest {
+}
+
+message GetCameraIdListResponse {
+  int64 result = 1;
+}
+
+message GetConcurrentCameraIdsRequest {
+}
+
+message GetConcurrentCameraIdsResponse {
+  int64 result = 1;
+}
+
+message GetTorchStrengthLevelRequest {
+  string arg0 = 1;
+}
+
+message GetTorchStrengthLevelResponse {
+  int32 result = 1;
+}
+
+message IsCameraDeviceSetupSupportedRequest {
+  string arg0 = 1;
+}
+
+message IsCameraDeviceSetupSupportedResponse {
+  bool result = 1;
+}
+
+message IsConcurrentSessionConfigurationSupportedRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message IsConcurrentSessionConfigurationSupportedResponse {
+  bool result = 1;
+}
+
+message OpenCameraRequest {
+  string arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message OpenCameraResponse {
+}
+
+message RegisterAvailabilityCallbackRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RegisterAvailabilityCallbackResponse {
 }
 
 message RegisterTorchCallbackRequest {
-  int64 callback = 1;
-  int64 handler = 2;
+  int64 arg0 = 1;
+  int64 arg1 = 2;
 }
 
 message RegisterTorchCallbackResponse {
 }
 
+message SetTorchModeRequest {
+  string arg0 = 1;
+  bool arg1 = 2;
+}
+
+message SetTorchModeResponse {
+}
+
+message TurnOnTorchWithStrengthLevelRequest {
+  string arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message TurnOnTorchWithStrengthLevelResponse {
+}
+
+message UnregisterAvailabilityCallbackRequest {
+  int64 arg0 = 1;
+}
+
+message UnregisterAvailabilityCallbackResponse {
+}
+
 message UnregisterTorchCallbackRequest {
-  int64 callback = 1;
+  int64 arg0 = 1;
 }
 
 message UnregisterTorchCallbackResponse {
 }
 
-message TorchCallbackOnTorchModeChangedEvent {
-  string arg0 = 1;
-  int64 arg1 = 2;
-}
-
-message TorchCallbackEvent {
-  optional TorchCallbackOnTorchModeChangedEvent on_torch_mode_changed = 1;
-}
-
-message SubscribeTorchCallbackRequest {
-}
-
-service ManagerService {
-  rpc SetTorchMode (SetTorchModeRequest) returns (SetTorchModeResponse);
+service CameraManagerService {
+  rpc GetCameraCharacteristics (GetCameraCharacteristicsRequest) returns (GetCameraCharacteristicsResponse);
+  rpc GetCameraDeviceSetup (GetCameraDeviceSetupRequest) returns (GetCameraDeviceSetupResponse);
+  rpc GetCameraExtensionCharacteristics (GetCameraExtensionCharacteristicsRequest) returns (GetCameraExtensionCharacteristicsResponse);
+  rpc GetCameraIdList (GetCameraIdListRequest) returns (GetCameraIdListResponse);
+  rpc GetConcurrentCameraIds (GetConcurrentCameraIdsRequest) returns (GetConcurrentCameraIdsResponse);
+  rpc GetTorchStrengthLevel (GetTorchStrengthLevelRequest) returns (GetTorchStrengthLevelResponse);
+  rpc IsCameraDeviceSetupSupported (IsCameraDeviceSetupSupportedRequest) returns (IsCameraDeviceSetupSupportedResponse);
+  rpc IsConcurrentSessionConfigurationSupported (IsConcurrentSessionConfigurationSupportedRequest) returns (IsConcurrentSessionConfigurationSupportedResponse);
+  rpc OpenCamera (OpenCameraRequest) returns (OpenCameraResponse);
+  rpc RegisterAvailabilityCallback (RegisterAvailabilityCallbackRequest) returns (RegisterAvailabilityCallbackResponse);
   rpc RegisterTorchCallback (RegisterTorchCallbackRequest) returns (RegisterTorchCallbackResponse);
+  rpc SetTorchMode (SetTorchModeRequest) returns (SetTorchModeResponse);
+  rpc TurnOnTorchWithStrengthLevel (TurnOnTorchWithStrengthLevelRequest) returns (TurnOnTorchWithStrengthLevelResponse);
+  rpc UnregisterAvailabilityCallback (UnregisterAvailabilityCallbackRequest) returns (UnregisterAvailabilityCallbackResponse);
   rpc UnregisterTorchCallback (UnregisterTorchCallbackRequest) returns (UnregisterTorchCallbackResponse);
-}
-
-service TorchCallbackService {
-  // Server-streaming events from android.hardware.camera2.CameraManager$TorchCallback
-  rpc SubscribeTorchCallback (SubscribeTorchCallbackRequest) returns (stream TorchCallbackEvent);
 }

@@ -6,52 +6,170 @@ package session;
 
 option go_package = "github.com/xaionaro-go/jni/proto/session";
 
-message MediaController {
-  string package_name = 1;
-  string tag = 2;
+message AdjustVolumeRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
 }
 
-message GetActiveSessionsRawRequest {
-  int64 notification_listener = 1;
+message AdjustVolumeResponse {
 }
 
-message GetActiveSessionsRawResponse {
-  int64 result = 1;
-}
-
-message AddOnActiveSessionsChangedListenerRequest {
-  int64 listener = 1;
-  int64 notification_listener = 2;
-}
-
-message AddOnActiveSessionsChangedListenerResponse {
-}
-
-message RemoveOnActiveSessionsChangedListenerRequest {
-  int64 listener = 1;
-}
-
-message RemoveOnActiveSessionsChangedListenerResponse {
-}
-
-message OnActiveSessionsChangedListenerOnChangedEvent {
+message DispatchMediaButtonEventRequest {
   int64 arg0 = 1;
 }
 
-message OnActiveSessionsChangedListenerEvent {
-  optional OnActiveSessionsChangedListenerOnChangedEvent on_changed = 1;
+message DispatchMediaButtonEventResponse {
+  bool result = 1;
 }
 
-message SubscribeOnActiveSessionsChangedListenerRequest {
+message GetExtrasRequest {
 }
 
-service ManagerService {
-  rpc GetActiveSessionsRaw (GetActiveSessionsRawRequest) returns (GetActiveSessionsRawResponse);
-  rpc AddOnActiveSessionsChangedListener (AddOnActiveSessionsChangedListenerRequest) returns (AddOnActiveSessionsChangedListenerResponse);
-  rpc RemoveOnActiveSessionsChangedListener (RemoveOnActiveSessionsChangedListenerRequest) returns (RemoveOnActiveSessionsChangedListenerResponse);
+message GetExtrasResponse {
+  int64 result = 1;
 }
 
-service OnActiveSessionsChangedListenerService {
-  // Server-streaming events from android.media.session.MediaSessionManager$OnActiveSessionsChangedListener
-  rpc SubscribeOnActiveSessionsChangedListener (SubscribeOnActiveSessionsChangedListenerRequest) returns (stream OnActiveSessionsChangedListenerEvent);
+message GetFlagsRequest {
+}
+
+message GetFlagsResponse {
+  int64 result = 1;
+}
+
+message GetMetadataRequest {
+}
+
+message GetMetadataResponse {
+  int64 result = 1;
+}
+
+message GetPackageNameRequest {
+}
+
+message GetPackageNameResponse {
+  string result = 1;
+}
+
+message GetPlaybackInfoRequest {
+}
+
+message GetPlaybackInfoResponse {
+  int64 result = 1;
+}
+
+message GetPlaybackStateRequest {
+}
+
+message GetPlaybackStateResponse {
+  int64 result = 1;
+}
+
+message GetQueueRequest {
+}
+
+message GetQueueResponse {
+  int64 result = 1;
+}
+
+message GetQueueTitleRequest {
+}
+
+message GetQueueTitleResponse {
+  string result = 1;
+}
+
+message GetRatingTypeRequest {
+}
+
+message GetRatingTypeResponse {
+  int32 result = 1;
+}
+
+message GetSessionActivityRequest {
+}
+
+message GetSessionActivityResponse {
+  int64 result = 1;
+}
+
+message GetSessionInfoRequest {
+}
+
+message GetSessionInfoResponse {
+  int64 result = 1;
+}
+
+message GetSessionTokenRequest {
+}
+
+message GetSessionTokenResponse {
+  int64 result = 1;
+}
+
+message GetTagRequest {
+}
+
+message GetTagResponse {
+  string result = 1;
+}
+
+message GetTransportControlsRequest {
+}
+
+message GetTransportControlsResponse {
+  int64 result = 1;
+}
+
+message RegisterCallbackRequest {
+  int64 arg0 = 1;
+}
+
+message RegisterCallbackResponse {
+}
+
+message SendCommandRequest {
+  string arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message SendCommandResponse {
+}
+
+message SetVolumeToRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message SetVolumeToResponse {
+}
+
+message UnregisterCallbackRequest {
+  int64 arg0 = 1;
+}
+
+message UnregisterCallbackResponse {
+}
+
+service MediaControllerService {
+  rpc AdjustVolume (AdjustVolumeRequest) returns (AdjustVolumeResponse);
+  rpc DispatchMediaButtonEvent (DispatchMediaButtonEventRequest) returns (DispatchMediaButtonEventResponse);
+  rpc GetExtras (GetExtrasRequest) returns (GetExtrasResponse);
+  rpc GetFlags (GetFlagsRequest) returns (GetFlagsResponse);
+  rpc GetMetadata (GetMetadataRequest) returns (GetMetadataResponse);
+  rpc GetPackageName (GetPackageNameRequest) returns (GetPackageNameResponse);
+  rpc GetPlaybackInfo (GetPlaybackInfoRequest) returns (GetPlaybackInfoResponse);
+  rpc GetPlaybackState (GetPlaybackStateRequest) returns (GetPlaybackStateResponse);
+  rpc GetQueue (GetQueueRequest) returns (GetQueueResponse);
+  rpc GetQueueTitle (GetQueueTitleRequest) returns (GetQueueTitleResponse);
+  rpc GetRatingType (GetRatingTypeRequest) returns (GetRatingTypeResponse);
+  rpc GetSessionActivity (GetSessionActivityRequest) returns (GetSessionActivityResponse);
+  rpc GetSessionInfo (GetSessionInfoRequest) returns (GetSessionInfoResponse);
+  rpc GetSessionToken (GetSessionTokenRequest) returns (GetSessionTokenResponse);
+  rpc GetTag (GetTagRequest) returns (GetTagResponse);
+  rpc GetTransportControls (GetTransportControlsRequest) returns (GetTransportControlsResponse);
+  rpc RegisterCallback (RegisterCallbackRequest) returns (RegisterCallbackResponse);
+  rpc SendCommand (SendCommandRequest) returns (SendCommandResponse);
+  rpc SetVolumeTo (SetVolumeToRequest) returns (SetVolumeToResponse);
+  rpc UnregisterCallback (UnregisterCallbackRequest) returns (UnregisterCallbackResponse);
 }

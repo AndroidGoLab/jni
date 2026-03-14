@@ -23,29 +23,29 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type AssociateRawRequest struct {
+type AssociateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Request       int64                  `protobuf:"varint,1,opt,name=request,proto3" json:"request,omitempty"`
-	Callback      int64                  `protobuf:"varint,2,opt,name=callback,proto3" json:"callback,omitempty"`
-	Handler       int64                  `protobuf:"varint,3,opt,name=handler,proto3" json:"handler,omitempty"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AssociateRawRequest) Reset() {
-	*x = AssociateRawRequest{}
+func (x *AssociateRequest) Reset() {
+	*x = AssociateRequest{}
 	mi := &file_proto_companion_companion_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AssociateRawRequest) String() string {
+func (x *AssociateRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AssociateRawRequest) ProtoMessage() {}
+func (*AssociateRequest) ProtoMessage() {}
 
-func (x *AssociateRawRequest) ProtoReflect() protoreflect.Message {
+func (x *AssociateRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_companion_companion_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -57,52 +57,52 @@ func (x *AssociateRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AssociateRawRequest.ProtoReflect.Descriptor instead.
-func (*AssociateRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use AssociateRequest.ProtoReflect.Descriptor instead.
+func (*AssociateRequest) Descriptor() ([]byte, []int) {
 	return file_proto_companion_companion_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *AssociateRawRequest) GetRequest() int64 {
+func (x *AssociateRequest) GetArg0() int64 {
 	if x != nil {
-		return x.Request
+		return x.Arg0
 	}
 	return 0
 }
 
-func (x *AssociateRawRequest) GetCallback() int64 {
+func (x *AssociateRequest) GetArg1() int64 {
 	if x != nil {
-		return x.Callback
+		return x.Arg1
 	}
 	return 0
 }
 
-func (x *AssociateRawRequest) GetHandler() int64 {
+func (x *AssociateRequest) GetArg2() int64 {
 	if x != nil {
-		return x.Handler
+		return x.Arg2
 	}
 	return 0
 }
 
-type AssociateRawResponse struct {
+type AssociateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AssociateRawResponse) Reset() {
-	*x = AssociateRawResponse{}
+func (x *AssociateResponse) Reset() {
+	*x = AssociateResponse{}
 	mi := &file_proto_companion_companion_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AssociateRawResponse) String() string {
+func (x *AssociateResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AssociateRawResponse) ProtoMessage() {}
+func (*AssociateResponse) ProtoMessage() {}
 
-func (x *AssociateRawResponse) ProtoReflect() protoreflect.Message {
+func (x *AssociateResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_companion_companion_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -114,32 +114,34 @@ func (x *AssociateRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AssociateRawResponse.ProtoReflect.Descriptor instead.
-func (*AssociateRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use AssociateResponse.ProtoReflect.Descriptor instead.
+func (*AssociateResponse) Descriptor() ([]byte, []int) {
 	return file_proto_companion_companion_proto_rawDescGZIP(), []int{1}
 }
 
-type DisassociateByIdRawRequest struct {
+type AttachSystemDataTransportRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AssociationId int32                  `protobuf:"varint,1,opt,name=association_id,json=associationId,proto3" json:"association_id,omitempty"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DisassociateByIdRawRequest) Reset() {
-	*x = DisassociateByIdRawRequest{}
+func (x *AttachSystemDataTransportRequest) Reset() {
+	*x = AttachSystemDataTransportRequest{}
 	mi := &file_proto_companion_companion_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DisassociateByIdRawRequest) String() string {
+func (x *AttachSystemDataTransportRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DisassociateByIdRawRequest) ProtoMessage() {}
+func (*AttachSystemDataTransportRequest) ProtoMessage() {}
 
-func (x *DisassociateByIdRawRequest) ProtoReflect() protoreflect.Message {
+func (x *AttachSystemDataTransportRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_companion_companion_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -151,38 +153,52 @@ func (x *DisassociateByIdRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DisassociateByIdRawRequest.ProtoReflect.Descriptor instead.
-func (*DisassociateByIdRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use AttachSystemDataTransportRequest.ProtoReflect.Descriptor instead.
+func (*AttachSystemDataTransportRequest) Descriptor() ([]byte, []int) {
 	return file_proto_companion_companion_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *DisassociateByIdRawRequest) GetAssociationId() int32 {
+func (x *AttachSystemDataTransportRequest) GetArg0() int32 {
 	if x != nil {
-		return x.AssociationId
+		return x.Arg0
 	}
 	return 0
 }
 
-type DisassociateByIdRawResponse struct {
+func (x *AttachSystemDataTransportRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *AttachSystemDataTransportRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type AttachSystemDataTransportResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DisassociateByIdRawResponse) Reset() {
-	*x = DisassociateByIdRawResponse{}
+func (x *AttachSystemDataTransportResponse) Reset() {
+	*x = AttachSystemDataTransportResponse{}
 	mi := &file_proto_companion_companion_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DisassociateByIdRawResponse) String() string {
+func (x *AttachSystemDataTransportResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DisassociateByIdRawResponse) ProtoMessage() {}
+func (*AttachSystemDataTransportResponse) ProtoMessage() {}
 
-func (x *DisassociateByIdRawResponse) ProtoReflect() protoreflect.Message {
+func (x *AttachSystemDataTransportResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_companion_companion_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -194,31 +210,31 @@ func (x *DisassociateByIdRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DisassociateByIdRawResponse.ProtoReflect.Descriptor instead.
-func (*DisassociateByIdRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use AttachSystemDataTransportResponse.ProtoReflect.Descriptor instead.
+func (*AttachSystemDataTransportResponse) Descriptor() ([]byte, []int) {
 	return file_proto_companion_companion_proto_rawDescGZIP(), []int{3}
 }
 
-type GetAssociationsRawRequest struct {
+type BuildAssociationCancellationIntentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetAssociationsRawRequest) Reset() {
-	*x = GetAssociationsRawRequest{}
+func (x *BuildAssociationCancellationIntentRequest) Reset() {
+	*x = BuildAssociationCancellationIntentRequest{}
 	mi := &file_proto_companion_companion_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetAssociationsRawRequest) String() string {
+func (x *BuildAssociationCancellationIntentRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetAssociationsRawRequest) ProtoMessage() {}
+func (*BuildAssociationCancellationIntentRequest) ProtoMessage() {}
 
-func (x *GetAssociationsRawRequest) ProtoReflect() protoreflect.Message {
+func (x *BuildAssociationCancellationIntentRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_companion_companion_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -230,32 +246,32 @@ func (x *GetAssociationsRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetAssociationsRawRequest.ProtoReflect.Descriptor instead.
-func (*GetAssociationsRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuildAssociationCancellationIntentRequest.ProtoReflect.Descriptor instead.
+func (*BuildAssociationCancellationIntentRequest) Descriptor() ([]byte, []int) {
 	return file_proto_companion_companion_proto_rawDescGZIP(), []int{4}
 }
 
-type GetAssociationsRawResponse struct {
+type BuildAssociationCancellationIntentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetAssociationsRawResponse) Reset() {
-	*x = GetAssociationsRawResponse{}
+func (x *BuildAssociationCancellationIntentResponse) Reset() {
+	*x = BuildAssociationCancellationIntentResponse{}
 	mi := &file_proto_companion_companion_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetAssociationsRawResponse) String() string {
+func (x *BuildAssociationCancellationIntentResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetAssociationsRawResponse) ProtoMessage() {}
+func (*BuildAssociationCancellationIntentResponse) ProtoMessage() {}
 
-func (x *GetAssociationsRawResponse) ProtoReflect() protoreflect.Message {
+func (x *BuildAssociationCancellationIntentResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_companion_companion_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -267,39 +283,39 @@ func (x *GetAssociationsRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetAssociationsRawResponse.ProtoReflect.Descriptor instead.
-func (*GetAssociationsRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuildAssociationCancellationIntentResponse.ProtoReflect.Descriptor instead.
+func (*BuildAssociationCancellationIntentResponse) Descriptor() ([]byte, []int) {
 	return file_proto_companion_companion_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *GetAssociationsRawResponse) GetResult() int64 {
+func (x *BuildAssociationCancellationIntentResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type SetSingleDeviceRequest struct {
+type BuildPermissionTransferUserConsentIntentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SingleDevice  bool                   `protobuf:"varint,1,opt,name=single_device,json=singleDevice,proto3" json:"single_device,omitempty"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetSingleDeviceRequest) Reset() {
-	*x = SetSingleDeviceRequest{}
+func (x *BuildPermissionTransferUserConsentIntentRequest) Reset() {
+	*x = BuildPermissionTransferUserConsentIntentRequest{}
 	mi := &file_proto_companion_companion_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetSingleDeviceRequest) String() string {
+func (x *BuildPermissionTransferUserConsentIntentRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetSingleDeviceRequest) ProtoMessage() {}
+func (*BuildPermissionTransferUserConsentIntentRequest) ProtoMessage() {}
 
-func (x *SetSingleDeviceRequest) ProtoReflect() protoreflect.Message {
+func (x *BuildPermissionTransferUserConsentIntentRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_companion_companion_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -311,40 +327,748 @@ func (x *SetSingleDeviceRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetSingleDeviceRequest.ProtoReflect.Descriptor instead.
-func (*SetSingleDeviceRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuildPermissionTransferUserConsentIntentRequest.ProtoReflect.Descriptor instead.
+func (*BuildPermissionTransferUserConsentIntentRequest) Descriptor() ([]byte, []int) {
 	return file_proto_companion_companion_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *SetSingleDeviceRequest) GetSingleDevice() bool {
+func (x *BuildPermissionTransferUserConsentIntentRequest) GetArg0() int32 {
 	if x != nil {
-		return x.SingleDevice
+		return x.Arg0
+	}
+	return 0
+}
+
+type BuildPermissionTransferUserConsentIntentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuildPermissionTransferUserConsentIntentResponse) Reset() {
+	*x = BuildPermissionTransferUserConsentIntentResponse{}
+	mi := &file_proto_companion_companion_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuildPermissionTransferUserConsentIntentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuildPermissionTransferUserConsentIntentResponse) ProtoMessage() {}
+
+func (x *BuildPermissionTransferUserConsentIntentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuildPermissionTransferUserConsentIntentResponse.ProtoReflect.Descriptor instead.
+func (*BuildPermissionTransferUserConsentIntentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *BuildPermissionTransferUserConsentIntentResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type DetachSystemDataTransportRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DetachSystemDataTransportRequest) Reset() {
+	*x = DetachSystemDataTransportRequest{}
+	mi := &file_proto_companion_companion_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DetachSystemDataTransportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DetachSystemDataTransportRequest) ProtoMessage() {}
+
+func (x *DetachSystemDataTransportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DetachSystemDataTransportRequest.ProtoReflect.Descriptor instead.
+func (*DetachSystemDataTransportRequest) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *DetachSystemDataTransportRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type DetachSystemDataTransportResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DetachSystemDataTransportResponse) Reset() {
+	*x = DetachSystemDataTransportResponse{}
+	mi := &file_proto_companion_companion_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DetachSystemDataTransportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DetachSystemDataTransportResponse) ProtoMessage() {}
+
+func (x *DetachSystemDataTransportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DetachSystemDataTransportResponse.ProtoReflect.Descriptor instead.
+func (*DetachSystemDataTransportResponse) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{9}
+}
+
+type DisableSystemDataSyncForTypesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int32                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisableSystemDataSyncForTypesRequest) Reset() {
+	*x = DisableSystemDataSyncForTypesRequest{}
+	mi := &file_proto_companion_companion_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableSystemDataSyncForTypesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableSystemDataSyncForTypesRequest) ProtoMessage() {}
+
+func (x *DisableSystemDataSyncForTypesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableSystemDataSyncForTypesRequest.ProtoReflect.Descriptor instead.
+func (*DisableSystemDataSyncForTypesRequest) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *DisableSystemDataSyncForTypesRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *DisableSystemDataSyncForTypesRequest) GetArg1() int32 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type DisableSystemDataSyncForTypesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisableSystemDataSyncForTypesResponse) Reset() {
+	*x = DisableSystemDataSyncForTypesResponse{}
+	mi := &file_proto_companion_companion_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableSystemDataSyncForTypesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableSystemDataSyncForTypesResponse) ProtoMessage() {}
+
+func (x *DisableSystemDataSyncForTypesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableSystemDataSyncForTypesResponse.ProtoReflect.Descriptor instead.
+func (*DisableSystemDataSyncForTypesResponse) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{11}
+}
+
+type Disassociate1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Disassociate1Request) Reset() {
+	*x = Disassociate1Request{}
+	mi := &file_proto_companion_companion_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Disassociate1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Disassociate1Request) ProtoMessage() {}
+
+func (x *Disassociate1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Disassociate1Request.ProtoReflect.Descriptor instead.
+func (*Disassociate1Request) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *Disassociate1Request) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type Disassociate1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Disassociate1Response) Reset() {
+	*x = Disassociate1Response{}
+	mi := &file_proto_companion_companion_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Disassociate1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Disassociate1Response) ProtoMessage() {}
+
+func (x *Disassociate1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Disassociate1Response.ProtoReflect.Descriptor instead.
+func (*Disassociate1Response) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{13}
+}
+
+type Disassociate1_1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Disassociate1_1Request) Reset() {
+	*x = Disassociate1_1Request{}
+	mi := &file_proto_companion_companion_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Disassociate1_1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Disassociate1_1Request) ProtoMessage() {}
+
+func (x *Disassociate1_1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Disassociate1_1Request.ProtoReflect.Descriptor instead.
+func (*Disassociate1_1Request) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *Disassociate1_1Request) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type Disassociate1_1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Disassociate1_1Response) Reset() {
+	*x = Disassociate1_1Response{}
+	mi := &file_proto_companion_companion_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Disassociate1_1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Disassociate1_1Response) ProtoMessage() {}
+
+func (x *Disassociate1_1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Disassociate1_1Response.ProtoReflect.Descriptor instead.
+func (*Disassociate1_1Response) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{15}
+}
+
+type EnableSystemDataSyncForTypesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int32                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnableSystemDataSyncForTypesRequest) Reset() {
+	*x = EnableSystemDataSyncForTypesRequest{}
+	mi := &file_proto_companion_companion_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableSystemDataSyncForTypesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableSystemDataSyncForTypesRequest) ProtoMessage() {}
+
+func (x *EnableSystemDataSyncForTypesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableSystemDataSyncForTypesRequest.ProtoReflect.Descriptor instead.
+func (*EnableSystemDataSyncForTypesRequest) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *EnableSystemDataSyncForTypesRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *EnableSystemDataSyncForTypesRequest) GetArg1() int32 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type EnableSystemDataSyncForTypesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnableSystemDataSyncForTypesResponse) Reset() {
+	*x = EnableSystemDataSyncForTypesResponse{}
+	mi := &file_proto_companion_companion_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableSystemDataSyncForTypesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableSystemDataSyncForTypesResponse) ProtoMessage() {}
+
+func (x *EnableSystemDataSyncForTypesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableSystemDataSyncForTypesResponse.ProtoReflect.Descriptor instead.
+func (*EnableSystemDataSyncForTypesResponse) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{17}
+}
+
+type GetAssociationsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAssociationsRequest) Reset() {
+	*x = GetAssociationsRequest{}
+	mi := &file_proto_companion_companion_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAssociationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAssociationsRequest) ProtoMessage() {}
+
+func (x *GetAssociationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAssociationsRequest.ProtoReflect.Descriptor instead.
+func (*GetAssociationsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{18}
+}
+
+type GetAssociationsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAssociationsResponse) Reset() {
+	*x = GetAssociationsResponse{}
+	mi := &file_proto_companion_companion_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAssociationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAssociationsResponse) ProtoMessage() {}
+
+func (x *GetAssociationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAssociationsResponse.ProtoReflect.Descriptor instead.
+func (*GetAssociationsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *GetAssociationsResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetMyAssociationsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMyAssociationsRequest) Reset() {
+	*x = GetMyAssociationsRequest{}
+	mi := &file_proto_companion_companion_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMyAssociationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMyAssociationsRequest) ProtoMessage() {}
+
+func (x *GetMyAssociationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMyAssociationsRequest.ProtoReflect.Descriptor instead.
+func (*GetMyAssociationsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{20}
+}
+
+type GetMyAssociationsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMyAssociationsResponse) Reset() {
+	*x = GetMyAssociationsResponse{}
+	mi := &file_proto_companion_companion_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMyAssociationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMyAssociationsResponse) ProtoMessage() {}
+
+func (x *GetMyAssociationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMyAssociationsResponse.ProtoReflect.Descriptor instead.
+func (*GetMyAssociationsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *GetMyAssociationsResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type HasNotificationAccessRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HasNotificationAccessRequest) Reset() {
+	*x = HasNotificationAccessRequest{}
+	mi := &file_proto_companion_companion_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HasNotificationAccessRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HasNotificationAccessRequest) ProtoMessage() {}
+
+func (x *HasNotificationAccessRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HasNotificationAccessRequest.ProtoReflect.Descriptor instead.
+func (*HasNotificationAccessRequest) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *HasNotificationAccessRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type HasNotificationAccessResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HasNotificationAccessResponse) Reset() {
+	*x = HasNotificationAccessResponse{}
+	mi := &file_proto_companion_companion_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HasNotificationAccessResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HasNotificationAccessResponse) ProtoMessage() {}
+
+func (x *HasNotificationAccessResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HasNotificationAccessResponse.ProtoReflect.Descriptor instead.
+func (*HasNotificationAccessResponse) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *HasNotificationAccessResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
 	}
 	return false
 }
 
-type SetSingleDeviceResponse struct {
+type IsPermissionTransferUserConsentedRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetSingleDeviceResponse) Reset() {
-	*x = SetSingleDeviceResponse{}
-	mi := &file_proto_companion_companion_proto_msgTypes[7]
+func (x *IsPermissionTransferUserConsentedRequest) Reset() {
+	*x = IsPermissionTransferUserConsentedRequest{}
+	mi := &file_proto_companion_companion_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetSingleDeviceResponse) String() string {
+func (x *IsPermissionTransferUserConsentedRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetSingleDeviceResponse) ProtoMessage() {}
+func (*IsPermissionTransferUserConsentedRequest) ProtoMessage() {}
 
-func (x *SetSingleDeviceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_companion_companion_proto_msgTypes[7]
+func (x *IsPermissionTransferUserConsentedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -355,252 +1079,40 @@ func (x *SetSingleDeviceResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetSingleDeviceResponse.ProtoReflect.Descriptor instead.
-func (*SetSingleDeviceResponse) Descriptor() ([]byte, []int) {
-	return file_proto_companion_companion_proto_rawDescGZIP(), []int{7}
+// Deprecated: Use IsPermissionTransferUserConsentedRequest.ProtoReflect.Descriptor instead.
+func (*IsPermissionTransferUserConsentedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *SetSingleDeviceResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type AddDeviceFilterRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Filter        int64                  `protobuf:"varint,1,opt,name=filter,proto3" json:"filter,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AddDeviceFilterRequest) Reset() {
-	*x = AddDeviceFilterRequest{}
-	mi := &file_proto_companion_companion_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AddDeviceFilterRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AddDeviceFilterRequest) ProtoMessage() {}
-
-func (x *AddDeviceFilterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_companion_companion_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AddDeviceFilterRequest.ProtoReflect.Descriptor instead.
-func (*AddDeviceFilterRequest) Descriptor() ([]byte, []int) {
-	return file_proto_companion_companion_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *AddDeviceFilterRequest) GetFilter() int64 {
-	if x != nil {
-		return x.Filter
-	}
-	return 0
-}
-
-type AddDeviceFilterResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AddDeviceFilterResponse) Reset() {
-	*x = AddDeviceFilterResponse{}
-	mi := &file_proto_companion_companion_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AddDeviceFilterResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AddDeviceFilterResponse) ProtoMessage() {}
-
-func (x *AddDeviceFilterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_companion_companion_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AddDeviceFilterResponse.ProtoReflect.Descriptor instead.
-func (*AddDeviceFilterResponse) Descriptor() ([]byte, []int) {
-	return file_proto_companion_companion_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *AddDeviceFilterResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type BuildRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *BuildRequest) Reset() {
-	*x = BuildRequest{}
-	mi := &file_proto_companion_companion_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BuildRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BuildRequest) ProtoMessage() {}
-
-func (x *BuildRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_companion_companion_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BuildRequest.ProtoReflect.Descriptor instead.
-func (*BuildRequest) Descriptor() ([]byte, []int) {
-	return file_proto_companion_companion_proto_rawDescGZIP(), []int{10}
-}
-
-type BuildResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *BuildResponse) Reset() {
-	*x = BuildResponse{}
-	mi := &file_proto_companion_companion_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BuildResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BuildResponse) ProtoMessage() {}
-
-func (x *BuildResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_companion_companion_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BuildResponse.ProtoReflect.Descriptor instead.
-func (*BuildResponse) Descriptor() ([]byte, []int) {
-	return file_proto_companion_companion_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *BuildResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type CompanionCallbackOnDeviceFoundEvent struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CompanionCallbackOnDeviceFoundEvent) Reset() {
-	*x = CompanionCallbackOnDeviceFoundEvent{}
-	mi := &file_proto_companion_companion_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CompanionCallbackOnDeviceFoundEvent) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CompanionCallbackOnDeviceFoundEvent) ProtoMessage() {}
-
-func (x *CompanionCallbackOnDeviceFoundEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_companion_companion_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CompanionCallbackOnDeviceFoundEvent.ProtoReflect.Descriptor instead.
-func (*CompanionCallbackOnDeviceFoundEvent) Descriptor() ([]byte, []int) {
-	return file_proto_companion_companion_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *CompanionCallbackOnDeviceFoundEvent) GetArg0() int64 {
+func (x *IsPermissionTransferUserConsentedRequest) GetArg0() int32 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-type CompanionCallbackOnFailureEvent struct {
+type IsPermissionTransferUserConsentedResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CompanionCallbackOnFailureEvent) Reset() {
-	*x = CompanionCallbackOnFailureEvent{}
-	mi := &file_proto_companion_companion_proto_msgTypes[13]
+func (x *IsPermissionTransferUserConsentedResponse) Reset() {
+	*x = IsPermissionTransferUserConsentedResponse{}
+	mi := &file_proto_companion_companion_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CompanionCallbackOnFailureEvent) String() string {
+func (x *IsPermissionTransferUserConsentedResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CompanionCallbackOnFailureEvent) ProtoMessage() {}
+func (*IsPermissionTransferUserConsentedResponse) ProtoMessage() {}
 
-func (x *CompanionCallbackOnFailureEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_companion_companion_proto_msgTypes[13]
+func (x *IsPermissionTransferUserConsentedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -611,41 +1123,84 @@ func (x *CompanionCallbackOnFailureEvent) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CompanionCallbackOnFailureEvent.ProtoReflect.Descriptor instead.
-func (*CompanionCallbackOnFailureEvent) Descriptor() ([]byte, []int) {
-	return file_proto_companion_companion_proto_rawDescGZIP(), []int{13}
+// Deprecated: Use IsPermissionTransferUserConsentedResponse.ProtoReflect.Descriptor instead.
+func (*IsPermissionTransferUserConsentedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{25}
 }
 
-func (x *CompanionCallbackOnFailureEvent) GetArg0() int64 {
+func (x *IsPermissionTransferUserConsentedResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type RemoveBondRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RemoveBondRequest) Reset() {
+	*x = RemoveBondRequest{}
+	mi := &file_proto_companion_companion_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RemoveBondRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveBondRequest) ProtoMessage() {}
+
+func (x *RemoveBondRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveBondRequest.ProtoReflect.Descriptor instead.
+func (*RemoveBondRequest) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *RemoveBondRequest) GetArg0() int32 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-type CompanionCallbackEvent struct {
-	state         protoimpl.MessageState               `protogen:"open.v1"`
-	OnDeviceFound *CompanionCallbackOnDeviceFoundEvent `protobuf:"bytes,1,opt,name=on_device_found,json=onDeviceFound,proto3,oneof" json:"on_device_found,omitempty"`
-	OnFailure     *CompanionCallbackOnFailureEvent     `protobuf:"bytes,2,opt,name=on_failure,json=onFailure,proto3,oneof" json:"on_failure,omitempty"`
+type RemoveBondResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CompanionCallbackEvent) Reset() {
-	*x = CompanionCallbackEvent{}
-	mi := &file_proto_companion_companion_proto_msgTypes[14]
+func (x *RemoveBondResponse) Reset() {
+	*x = RemoveBondResponse{}
+	mi := &file_proto_companion_companion_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CompanionCallbackEvent) String() string {
+func (x *RemoveBondResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CompanionCallbackEvent) ProtoMessage() {}
+func (*RemoveBondResponse) ProtoMessage() {}
 
-func (x *CompanionCallbackEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_companion_companion_proto_msgTypes[14]
+func (x *RemoveBondResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -656,46 +1211,83 @@ func (x *CompanionCallbackEvent) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CompanionCallbackEvent.ProtoReflect.Descriptor instead.
-func (*CompanionCallbackEvent) Descriptor() ([]byte, []int) {
-	return file_proto_companion_companion_proto_rawDescGZIP(), []int{14}
+// Deprecated: Use RemoveBondResponse.ProtoReflect.Descriptor instead.
+func (*RemoveBondResponse) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{27}
 }
 
-func (x *CompanionCallbackEvent) GetOnDeviceFound() *CompanionCallbackOnDeviceFoundEvent {
+func (x *RemoveBondResponse) GetResult() bool {
 	if x != nil {
-		return x.OnDeviceFound
+		return x.Result
 	}
-	return nil
+	return false
 }
 
-func (x *CompanionCallbackEvent) GetOnFailure() *CompanionCallbackOnFailureEvent {
+type RequestNotificationAccessRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestNotificationAccessRequest) Reset() {
+	*x = RequestNotificationAccessRequest{}
+	mi := &file_proto_companion_companion_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestNotificationAccessRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestNotificationAccessRequest) ProtoMessage() {}
+
+func (x *RequestNotificationAccessRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[28]
 	if x != nil {
-		return x.OnFailure
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
 	}
-	return nil
+	return mi.MessageOf(x)
 }
 
-type SubscribeCompanionCallbackRequest struct {
+// Deprecated: Use RequestNotificationAccessRequest.ProtoReflect.Descriptor instead.
+func (*RequestNotificationAccessRequest) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *RequestNotificationAccessRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type RequestNotificationAccessResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SubscribeCompanionCallbackRequest) Reset() {
-	*x = SubscribeCompanionCallbackRequest{}
-	mi := &file_proto_companion_companion_proto_msgTypes[15]
+func (x *RequestNotificationAccessResponse) Reset() {
+	*x = RequestNotificationAccessResponse{}
+	mi := &file_proto_companion_companion_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SubscribeCompanionCallbackRequest) String() string {
+func (x *RequestNotificationAccessResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SubscribeCompanionCallbackRequest) ProtoMessage() {}
+func (*RequestNotificationAccessResponse) ProtoMessage() {}
 
-func (x *SubscribeCompanionCallbackRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_companion_companion_proto_msgTypes[15]
+func (x *RequestNotificationAccessResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -706,59 +1298,628 @@ func (x *SubscribeCompanionCallbackRequest) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SubscribeCompanionCallbackRequest.ProtoReflect.Descriptor instead.
-func (*SubscribeCompanionCallbackRequest) Descriptor() ([]byte, []int) {
-	return file_proto_companion_companion_proto_rawDescGZIP(), []int{15}
+// Deprecated: Use RequestNotificationAccessResponse.ProtoReflect.Descriptor instead.
+func (*RequestNotificationAccessResponse) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{29}
+}
+
+type SetDeviceIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetDeviceIdRequest) Reset() {
+	*x = SetDeviceIdRequest{}
+	mi := &file_proto_companion_companion_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetDeviceIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetDeviceIdRequest) ProtoMessage() {}
+
+func (x *SetDeviceIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetDeviceIdRequest.ProtoReflect.Descriptor instead.
+func (*SetDeviceIdRequest) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *SetDeviceIdRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *SetDeviceIdRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type SetDeviceIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetDeviceIdResponse) Reset() {
+	*x = SetDeviceIdResponse{}
+	mi := &file_proto_companion_companion_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetDeviceIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetDeviceIdResponse) ProtoMessage() {}
+
+func (x *SetDeviceIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetDeviceIdResponse.ProtoReflect.Descriptor instead.
+func (*SetDeviceIdResponse) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{31}
+}
+
+type StartObservingDevicePresence1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartObservingDevicePresence1Request) Reset() {
+	*x = StartObservingDevicePresence1Request{}
+	mi := &file_proto_companion_companion_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartObservingDevicePresence1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartObservingDevicePresence1Request) ProtoMessage() {}
+
+func (x *StartObservingDevicePresence1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartObservingDevicePresence1Request.ProtoReflect.Descriptor instead.
+func (*StartObservingDevicePresence1Request) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *StartObservingDevicePresence1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type StartObservingDevicePresence1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartObservingDevicePresence1Response) Reset() {
+	*x = StartObservingDevicePresence1Response{}
+	mi := &file_proto_companion_companion_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartObservingDevicePresence1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartObservingDevicePresence1Response) ProtoMessage() {}
+
+func (x *StartObservingDevicePresence1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartObservingDevicePresence1Response.ProtoReflect.Descriptor instead.
+func (*StartObservingDevicePresence1Response) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{33}
+}
+
+type StartObservingDevicePresence1_1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartObservingDevicePresence1_1Request) Reset() {
+	*x = StartObservingDevicePresence1_1Request{}
+	mi := &file_proto_companion_companion_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartObservingDevicePresence1_1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartObservingDevicePresence1_1Request) ProtoMessage() {}
+
+func (x *StartObservingDevicePresence1_1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartObservingDevicePresence1_1Request.ProtoReflect.Descriptor instead.
+func (*StartObservingDevicePresence1_1Request) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *StartObservingDevicePresence1_1Request) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type StartObservingDevicePresence1_1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartObservingDevicePresence1_1Response) Reset() {
+	*x = StartObservingDevicePresence1_1Response{}
+	mi := &file_proto_companion_companion_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartObservingDevicePresence1_1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartObservingDevicePresence1_1Response) ProtoMessage() {}
+
+func (x *StartObservingDevicePresence1_1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartObservingDevicePresence1_1Response.ProtoReflect.Descriptor instead.
+func (*StartObservingDevicePresence1_1Response) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{35}
+}
+
+type StartSystemDataTransferRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartSystemDataTransferRequest) Reset() {
+	*x = StartSystemDataTransferRequest{}
+	mi := &file_proto_companion_companion_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartSystemDataTransferRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartSystemDataTransferRequest) ProtoMessage() {}
+
+func (x *StartSystemDataTransferRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartSystemDataTransferRequest.ProtoReflect.Descriptor instead.
+func (*StartSystemDataTransferRequest) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *StartSystemDataTransferRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *StartSystemDataTransferRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *StartSystemDataTransferRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+func (x *StartSystemDataTransferRequest) GetArg3() int64 {
+	if x != nil {
+		return x.Arg3
+	}
+	return 0
+}
+
+type StartSystemDataTransferResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartSystemDataTransferResponse) Reset() {
+	*x = StartSystemDataTransferResponse{}
+	mi := &file_proto_companion_companion_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartSystemDataTransferResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartSystemDataTransferResponse) ProtoMessage() {}
+
+func (x *StartSystemDataTransferResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartSystemDataTransferResponse.ProtoReflect.Descriptor instead.
+func (*StartSystemDataTransferResponse) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{37}
+}
+
+type StopObservingDevicePresence1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopObservingDevicePresence1Request) Reset() {
+	*x = StopObservingDevicePresence1Request{}
+	mi := &file_proto_companion_companion_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopObservingDevicePresence1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopObservingDevicePresence1Request) ProtoMessage() {}
+
+func (x *StopObservingDevicePresence1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopObservingDevicePresence1Request.ProtoReflect.Descriptor instead.
+func (*StopObservingDevicePresence1Request) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *StopObservingDevicePresence1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type StopObservingDevicePresence1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopObservingDevicePresence1Response) Reset() {
+	*x = StopObservingDevicePresence1Response{}
+	mi := &file_proto_companion_companion_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopObservingDevicePresence1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopObservingDevicePresence1Response) ProtoMessage() {}
+
+func (x *StopObservingDevicePresence1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopObservingDevicePresence1Response.ProtoReflect.Descriptor instead.
+func (*StopObservingDevicePresence1Response) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{39}
+}
+
+type StopObservingDevicePresence1_1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopObservingDevicePresence1_1Request) Reset() {
+	*x = StopObservingDevicePresence1_1Request{}
+	mi := &file_proto_companion_companion_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopObservingDevicePresence1_1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopObservingDevicePresence1_1Request) ProtoMessage() {}
+
+func (x *StopObservingDevicePresence1_1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopObservingDevicePresence1_1Request.ProtoReflect.Descriptor instead.
+func (*StopObservingDevicePresence1_1Request) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *StopObservingDevicePresence1_1Request) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type StopObservingDevicePresence1_1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopObservingDevicePresence1_1Response) Reset() {
+	*x = StopObservingDevicePresence1_1Response{}
+	mi := &file_proto_companion_companion_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopObservingDevicePresence1_1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopObservingDevicePresence1_1Response) ProtoMessage() {}
+
+func (x *StopObservingDevicePresence1_1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopObservingDevicePresence1_1Response.ProtoReflect.Descriptor instead.
+func (*StopObservingDevicePresence1_1Response) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{41}
 }
 
 var File_proto_companion_companion_proto protoreflect.FileDescriptor
 
 const file_proto_companion_companion_proto_rawDesc = "" +
 	"\n" +
-	"\x1fproto/companion/companion.proto\x12\tcompanion\"e\n" +
-	"\x13AssociateRawRequest\x12\x18\n" +
-	"\arequest\x18\x01 \x01(\x03R\arequest\x12\x1a\n" +
-	"\bcallback\x18\x02 \x01(\x03R\bcallback\x12\x18\n" +
-	"\ahandler\x18\x03 \x01(\x03R\ahandler\"\x16\n" +
-	"\x14AssociateRawResponse\"C\n" +
-	"\x1aDisassociateByIdRawRequest\x12%\n" +
-	"\x0eassociation_id\x18\x01 \x01(\x05R\rassociationId\"\x1d\n" +
-	"\x1bDisassociateByIdRawResponse\"\x1b\n" +
-	"\x19GetAssociationsRawRequest\"4\n" +
-	"\x1aGetAssociationsRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"=\n" +
-	"\x16SetSingleDeviceRequest\x12#\n" +
-	"\rsingle_device\x18\x01 \x01(\bR\fsingleDevice\"1\n" +
-	"\x17SetSingleDeviceResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"0\n" +
-	"\x16AddDeviceFilterRequest\x12\x16\n" +
-	"\x06filter\x18\x01 \x01(\x03R\x06filter\"1\n" +
-	"\x17AddDeviceFilterResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"\x0e\n" +
-	"\fBuildRequest\"'\n" +
-	"\rBuildResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"9\n" +
-	"#CompanionCallbackOnDeviceFoundEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"5\n" +
-	"\x1fCompanionCallbackOnFailureEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\xe8\x01\n" +
-	"\x16CompanionCallbackEvent\x12[\n" +
-	"\x0fon_device_found\x18\x01 \x01(\v2..companion.CompanionCallbackOnDeviceFoundEventH\x00R\ronDeviceFound\x88\x01\x01\x12N\n" +
+	"\x1fproto/companion/companion.proto\x12\tcompanion\"N\n" +
+	"\x10AssociateRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"\x13\n" +
+	"\x11AssociateResponse\"^\n" +
+	" AttachSystemDataTransportRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"#\n" +
+	"!AttachSystemDataTransportResponse\"+\n" +
+	")BuildAssociationCancellationIntentRequest\"D\n" +
+	"*BuildAssociationCancellationIntentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"E\n" +
+	"/BuildPermissionTransferUserConsentIntentRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"J\n" +
+	"0BuildPermissionTransferUserConsentIntentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"6\n" +
+	" DetachSystemDataTransportRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"#\n" +
+	"!DetachSystemDataTransportResponse\"N\n" +
+	"$DisableSystemDataSyncForTypesRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\"'\n" +
+	"%DisableSystemDataSyncForTypesResponse\"*\n" +
+	"\x14Disassociate1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"\x17\n" +
+	"\x15Disassociate1Response\",\n" +
+	"\x16Disassociate1_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"\x19\n" +
+	"\x17Disassociate1_1Response\"M\n" +
+	"#EnableSystemDataSyncForTypesRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\"&\n" +
+	"$EnableSystemDataSyncForTypesResponse\"\x18\n" +
+	"\x16GetAssociationsRequest\"1\n" +
+	"\x17GetAssociationsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x1a\n" +
+	"\x18GetMyAssociationsRequest\"3\n" +
+	"\x19GetMyAssociationsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"2\n" +
+	"\x1cHasNotificationAccessRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"7\n" +
+	"\x1dHasNotificationAccessResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\">\n" +
+	"(IsPermissionTransferUserConsentedRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"C\n" +
+	")IsPermissionTransferUserConsentedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"'\n" +
+	"\x11RemoveBondRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\",\n" +
+	"\x12RemoveBondResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"6\n" +
+	" RequestNotificationAccessRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"#\n" +
+	"!RequestNotificationAccessResponse\"<\n" +
+	"\x12SetDeviceIdRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x15\n" +
+	"\x13SetDeviceIdResponse\":\n" +
+	"$StartObservingDevicePresence1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"'\n" +
+	"%StartObservingDevicePresence1Response\"<\n" +
+	"&StartObservingDevicePresence1_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\")\n" +
+	"'StartObservingDevicePresence1_1Response\"p\n" +
+	"\x1eStartSystemDataTransferRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
+	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"!\n" +
+	"\x1fStartSystemDataTransferResponse\"9\n" +
+	"#StopObservingDevicePresence1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"&\n" +
+	"$StopObservingDevicePresence1Response\";\n" +
+	"%StopObservingDevicePresence1_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"(\n" +
+	"&StopObservingDevicePresence1_1Response2\x98\x13\n" +
+	"\x1dCompanionDeviceManagerService\x12F\n" +
+	"\tAssociate\x12\x1b.companion.AssociateRequest\x1a\x1c.companion.AssociateResponse\x12v\n" +
+	"\x19AttachSystemDataTransport\x12+.companion.AttachSystemDataTransportRequest\x1a,.companion.AttachSystemDataTransportResponse\x12\x91\x01\n" +
+	"\"BuildAssociationCancellationIntent\x124.companion.BuildAssociationCancellationIntentRequest\x1a5.companion.BuildAssociationCancellationIntentResponse\x12\xa3\x01\n" +
+	"(BuildPermissionTransferUserConsentIntent\x12:.companion.BuildPermissionTransferUserConsentIntentRequest\x1a;.companion.BuildPermissionTransferUserConsentIntentResponse\x12v\n" +
+	"\x19DetachSystemDataTransport\x12+.companion.DetachSystemDataTransportRequest\x1a,.companion.DetachSystemDataTransportResponse\x12\x82\x01\n" +
+	"\x1dDisableSystemDataSyncForTypes\x12/.companion.DisableSystemDataSyncForTypesRequest\x1a0.companion.DisableSystemDataSyncForTypesResponse\x12R\n" +
+	"\rDisassociate1\x12\x1f.companion.Disassociate1Request\x1a .companion.Disassociate1Response\x12X\n" +
+	"\x0fDisassociate1_1\x12!.companion.Disassociate1_1Request\x1a\".companion.Disassociate1_1Response\x12\x7f\n" +
+	"\x1cEnableSystemDataSyncForTypes\x12..companion.EnableSystemDataSyncForTypesRequest\x1a/.companion.EnableSystemDataSyncForTypesResponse\x12X\n" +
+	"\x0fGetAssociations\x12!.companion.GetAssociationsRequest\x1a\".companion.GetAssociationsResponse\x12^\n" +
+	"\x11GetMyAssociations\x12#.companion.GetMyAssociationsRequest\x1a$.companion.GetMyAssociationsResponse\x12j\n" +
+	"\x15HasNotificationAccess\x12'.companion.HasNotificationAccessRequest\x1a(.companion.HasNotificationAccessResponse\x12\x8e\x01\n" +
+	"!IsPermissionTransferUserConsented\x123.companion.IsPermissionTransferUserConsentedRequest\x1a4.companion.IsPermissionTransferUserConsentedResponse\x12I\n" +
 	"\n" +
-	"on_failure\x18\x02 \x01(\v2*.companion.CompanionCallbackOnFailureEventH\x01R\tonFailure\x88\x01\x01B\x12\n" +
-	"\x10_on_device_foundB\r\n" +
-	"\v_on_failure\"#\n" +
-	"!SubscribeCompanionCallbackRequest2\xaa\x02\n" +
-	"\x0eManagerService\x12O\n" +
-	"\fAssociateRaw\x12\x1e.companion.AssociateRawRequest\x1a\x1f.companion.AssociateRawResponse\x12d\n" +
-	"\x13DisassociateByIdRaw\x12%.companion.DisassociateByIdRawRequest\x1a&.companion.DisassociateByIdRawResponse\x12a\n" +
-	"\x12GetAssociationsRaw\x12$.companion.GetAssociationsRawRequest\x1a%.companion.GetAssociationsRawResponse2\x92\x02\n" +
-	" AssociationRequestBuilderService\x12X\n" +
-	"\x0fSetSingleDevice\x12!.companion.SetSingleDeviceRequest\x1a\".companion.SetSingleDeviceResponse\x12X\n" +
-	"\x0fAddDeviceFilter\x12!.companion.AddDeviceFilterRequest\x1a\".companion.AddDeviceFilterResponse\x12:\n" +
-	"\x05Build\x12\x17.companion.BuildRequest\x1a\x18.companion.BuildResponse2\x8b\x01\n" +
-	"\x18CompanionCallbackService\x12o\n" +
-	"\x1aSubscribeCompanionCallback\x12,.companion.SubscribeCompanionCallbackRequest\x1a!.companion.CompanionCallbackEvent0\x01B,Z*github.com/xaionaro-go/jni/proto/companionb\x06proto3"
+	"RemoveBond\x12\x1c.companion.RemoveBondRequest\x1a\x1d.companion.RemoveBondResponse\x12v\n" +
+	"\x19RequestNotificationAccess\x12+.companion.RequestNotificationAccessRequest\x1a,.companion.RequestNotificationAccessResponse\x12L\n" +
+	"\vSetDeviceId\x12\x1d.companion.SetDeviceIdRequest\x1a\x1e.companion.SetDeviceIdResponse\x12\x82\x01\n" +
+	"\x1dStartObservingDevicePresence1\x12/.companion.StartObservingDevicePresence1Request\x1a0.companion.StartObservingDevicePresence1Response\x12\x88\x01\n" +
+	"\x1fStartObservingDevicePresence1_1\x121.companion.StartObservingDevicePresence1_1Request\x1a2.companion.StartObservingDevicePresence1_1Response\x12p\n" +
+	"\x17StartSystemDataTransfer\x12).companion.StartSystemDataTransferRequest\x1a*.companion.StartSystemDataTransferResponse\x12\x7f\n" +
+	"\x1cStopObservingDevicePresence1\x12..companion.StopObservingDevicePresence1Request\x1a/.companion.StopObservingDevicePresence1Response\x12\x85\x01\n" +
+	"\x1eStopObservingDevicePresence1_1\x120.companion.StopObservingDevicePresence1_1Request\x1a1.companion.StopObservingDevicePresence1_1ResponseB,Z*github.com/xaionaro-go/jni/proto/companionb\x06proto3"
 
 var (
 	file_proto_companion_companion_proto_rawDescOnce sync.Once
@@ -772,47 +1933,99 @@ func file_proto_companion_companion_proto_rawDescGZIP() []byte {
 	return file_proto_companion_companion_proto_rawDescData
 }
 
-var file_proto_companion_companion_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_proto_companion_companion_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
 var file_proto_companion_companion_proto_goTypes = []any{
-	(*AssociateRawRequest)(nil),                 // 0: companion.AssociateRawRequest
-	(*AssociateRawResponse)(nil),                // 1: companion.AssociateRawResponse
-	(*DisassociateByIdRawRequest)(nil),          // 2: companion.DisassociateByIdRawRequest
-	(*DisassociateByIdRawResponse)(nil),         // 3: companion.DisassociateByIdRawResponse
-	(*GetAssociationsRawRequest)(nil),           // 4: companion.GetAssociationsRawRequest
-	(*GetAssociationsRawResponse)(nil),          // 5: companion.GetAssociationsRawResponse
-	(*SetSingleDeviceRequest)(nil),              // 6: companion.SetSingleDeviceRequest
-	(*SetSingleDeviceResponse)(nil),             // 7: companion.SetSingleDeviceResponse
-	(*AddDeviceFilterRequest)(nil),              // 8: companion.AddDeviceFilterRequest
-	(*AddDeviceFilterResponse)(nil),             // 9: companion.AddDeviceFilterResponse
-	(*BuildRequest)(nil),                        // 10: companion.BuildRequest
-	(*BuildResponse)(nil),                       // 11: companion.BuildResponse
-	(*CompanionCallbackOnDeviceFoundEvent)(nil), // 12: companion.CompanionCallbackOnDeviceFoundEvent
-	(*CompanionCallbackOnFailureEvent)(nil),     // 13: companion.CompanionCallbackOnFailureEvent
-	(*CompanionCallbackEvent)(nil),              // 14: companion.CompanionCallbackEvent
-	(*SubscribeCompanionCallbackRequest)(nil),   // 15: companion.SubscribeCompanionCallbackRequest
+	(*AssociateRequest)(nil),                                 // 0: companion.AssociateRequest
+	(*AssociateResponse)(nil),                                // 1: companion.AssociateResponse
+	(*AttachSystemDataTransportRequest)(nil),                 // 2: companion.AttachSystemDataTransportRequest
+	(*AttachSystemDataTransportResponse)(nil),                // 3: companion.AttachSystemDataTransportResponse
+	(*BuildAssociationCancellationIntentRequest)(nil),        // 4: companion.BuildAssociationCancellationIntentRequest
+	(*BuildAssociationCancellationIntentResponse)(nil),       // 5: companion.BuildAssociationCancellationIntentResponse
+	(*BuildPermissionTransferUserConsentIntentRequest)(nil),  // 6: companion.BuildPermissionTransferUserConsentIntentRequest
+	(*BuildPermissionTransferUserConsentIntentResponse)(nil), // 7: companion.BuildPermissionTransferUserConsentIntentResponse
+	(*DetachSystemDataTransportRequest)(nil),                 // 8: companion.DetachSystemDataTransportRequest
+	(*DetachSystemDataTransportResponse)(nil),                // 9: companion.DetachSystemDataTransportResponse
+	(*DisableSystemDataSyncForTypesRequest)(nil),             // 10: companion.DisableSystemDataSyncForTypesRequest
+	(*DisableSystemDataSyncForTypesResponse)(nil),            // 11: companion.DisableSystemDataSyncForTypesResponse
+	(*Disassociate1Request)(nil),                             // 12: companion.Disassociate1Request
+	(*Disassociate1Response)(nil),                            // 13: companion.Disassociate1Response
+	(*Disassociate1_1Request)(nil),                           // 14: companion.Disassociate1_1Request
+	(*Disassociate1_1Response)(nil),                          // 15: companion.Disassociate1_1Response
+	(*EnableSystemDataSyncForTypesRequest)(nil),              // 16: companion.EnableSystemDataSyncForTypesRequest
+	(*EnableSystemDataSyncForTypesResponse)(nil),             // 17: companion.EnableSystemDataSyncForTypesResponse
+	(*GetAssociationsRequest)(nil),                           // 18: companion.GetAssociationsRequest
+	(*GetAssociationsResponse)(nil),                          // 19: companion.GetAssociationsResponse
+	(*GetMyAssociationsRequest)(nil),                         // 20: companion.GetMyAssociationsRequest
+	(*GetMyAssociationsResponse)(nil),                        // 21: companion.GetMyAssociationsResponse
+	(*HasNotificationAccessRequest)(nil),                     // 22: companion.HasNotificationAccessRequest
+	(*HasNotificationAccessResponse)(nil),                    // 23: companion.HasNotificationAccessResponse
+	(*IsPermissionTransferUserConsentedRequest)(nil),         // 24: companion.IsPermissionTransferUserConsentedRequest
+	(*IsPermissionTransferUserConsentedResponse)(nil),        // 25: companion.IsPermissionTransferUserConsentedResponse
+	(*RemoveBondRequest)(nil),                                // 26: companion.RemoveBondRequest
+	(*RemoveBondResponse)(nil),                               // 27: companion.RemoveBondResponse
+	(*RequestNotificationAccessRequest)(nil),                 // 28: companion.RequestNotificationAccessRequest
+	(*RequestNotificationAccessResponse)(nil),                // 29: companion.RequestNotificationAccessResponse
+	(*SetDeviceIdRequest)(nil),                               // 30: companion.SetDeviceIdRequest
+	(*SetDeviceIdResponse)(nil),                              // 31: companion.SetDeviceIdResponse
+	(*StartObservingDevicePresence1Request)(nil),             // 32: companion.StartObservingDevicePresence1Request
+	(*StartObservingDevicePresence1Response)(nil),            // 33: companion.StartObservingDevicePresence1Response
+	(*StartObservingDevicePresence1_1Request)(nil),           // 34: companion.StartObservingDevicePresence1_1Request
+	(*StartObservingDevicePresence1_1Response)(nil),          // 35: companion.StartObservingDevicePresence1_1Response
+	(*StartSystemDataTransferRequest)(nil),                   // 36: companion.StartSystemDataTransferRequest
+	(*StartSystemDataTransferResponse)(nil),                  // 37: companion.StartSystemDataTransferResponse
+	(*StopObservingDevicePresence1Request)(nil),              // 38: companion.StopObservingDevicePresence1Request
+	(*StopObservingDevicePresence1Response)(nil),             // 39: companion.StopObservingDevicePresence1Response
+	(*StopObservingDevicePresence1_1Request)(nil),            // 40: companion.StopObservingDevicePresence1_1Request
+	(*StopObservingDevicePresence1_1Response)(nil),           // 41: companion.StopObservingDevicePresence1_1Response
 }
 var file_proto_companion_companion_proto_depIdxs = []int32{
-	12, // 0: companion.CompanionCallbackEvent.on_device_found:type_name -> companion.CompanionCallbackOnDeviceFoundEvent
-	13, // 1: companion.CompanionCallbackEvent.on_failure:type_name -> companion.CompanionCallbackOnFailureEvent
-	0,  // 2: companion.ManagerService.AssociateRaw:input_type -> companion.AssociateRawRequest
-	2,  // 3: companion.ManagerService.DisassociateByIdRaw:input_type -> companion.DisassociateByIdRawRequest
-	4,  // 4: companion.ManagerService.GetAssociationsRaw:input_type -> companion.GetAssociationsRawRequest
-	6,  // 5: companion.AssociationRequestBuilderService.SetSingleDevice:input_type -> companion.SetSingleDeviceRequest
-	8,  // 6: companion.AssociationRequestBuilderService.AddDeviceFilter:input_type -> companion.AddDeviceFilterRequest
-	10, // 7: companion.AssociationRequestBuilderService.Build:input_type -> companion.BuildRequest
-	15, // 8: companion.CompanionCallbackService.SubscribeCompanionCallback:input_type -> companion.SubscribeCompanionCallbackRequest
-	1,  // 9: companion.ManagerService.AssociateRaw:output_type -> companion.AssociateRawResponse
-	3,  // 10: companion.ManagerService.DisassociateByIdRaw:output_type -> companion.DisassociateByIdRawResponse
-	5,  // 11: companion.ManagerService.GetAssociationsRaw:output_type -> companion.GetAssociationsRawResponse
-	7,  // 12: companion.AssociationRequestBuilderService.SetSingleDevice:output_type -> companion.SetSingleDeviceResponse
-	9,  // 13: companion.AssociationRequestBuilderService.AddDeviceFilter:output_type -> companion.AddDeviceFilterResponse
-	11, // 14: companion.AssociationRequestBuilderService.Build:output_type -> companion.BuildResponse
-	14, // 15: companion.CompanionCallbackService.SubscribeCompanionCallback:output_type -> companion.CompanionCallbackEvent
-	9,  // [9:16] is the sub-list for method output_type
-	2,  // [2:9] is the sub-list for method input_type
-	2,  // [2:2] is the sub-list for extension type_name
-	2,  // [2:2] is the sub-list for extension extendee
-	0,  // [0:2] is the sub-list for field type_name
+	0,  // 0: companion.CompanionDeviceManagerService.Associate:input_type -> companion.AssociateRequest
+	2,  // 1: companion.CompanionDeviceManagerService.AttachSystemDataTransport:input_type -> companion.AttachSystemDataTransportRequest
+	4,  // 2: companion.CompanionDeviceManagerService.BuildAssociationCancellationIntent:input_type -> companion.BuildAssociationCancellationIntentRequest
+	6,  // 3: companion.CompanionDeviceManagerService.BuildPermissionTransferUserConsentIntent:input_type -> companion.BuildPermissionTransferUserConsentIntentRequest
+	8,  // 4: companion.CompanionDeviceManagerService.DetachSystemDataTransport:input_type -> companion.DetachSystemDataTransportRequest
+	10, // 5: companion.CompanionDeviceManagerService.DisableSystemDataSyncForTypes:input_type -> companion.DisableSystemDataSyncForTypesRequest
+	12, // 6: companion.CompanionDeviceManagerService.Disassociate1:input_type -> companion.Disassociate1Request
+	14, // 7: companion.CompanionDeviceManagerService.Disassociate1_1:input_type -> companion.Disassociate1_1Request
+	16, // 8: companion.CompanionDeviceManagerService.EnableSystemDataSyncForTypes:input_type -> companion.EnableSystemDataSyncForTypesRequest
+	18, // 9: companion.CompanionDeviceManagerService.GetAssociations:input_type -> companion.GetAssociationsRequest
+	20, // 10: companion.CompanionDeviceManagerService.GetMyAssociations:input_type -> companion.GetMyAssociationsRequest
+	22, // 11: companion.CompanionDeviceManagerService.HasNotificationAccess:input_type -> companion.HasNotificationAccessRequest
+	24, // 12: companion.CompanionDeviceManagerService.IsPermissionTransferUserConsented:input_type -> companion.IsPermissionTransferUserConsentedRequest
+	26, // 13: companion.CompanionDeviceManagerService.RemoveBond:input_type -> companion.RemoveBondRequest
+	28, // 14: companion.CompanionDeviceManagerService.RequestNotificationAccess:input_type -> companion.RequestNotificationAccessRequest
+	30, // 15: companion.CompanionDeviceManagerService.SetDeviceId:input_type -> companion.SetDeviceIdRequest
+	32, // 16: companion.CompanionDeviceManagerService.StartObservingDevicePresence1:input_type -> companion.StartObservingDevicePresence1Request
+	34, // 17: companion.CompanionDeviceManagerService.StartObservingDevicePresence1_1:input_type -> companion.StartObservingDevicePresence1_1Request
+	36, // 18: companion.CompanionDeviceManagerService.StartSystemDataTransfer:input_type -> companion.StartSystemDataTransferRequest
+	38, // 19: companion.CompanionDeviceManagerService.StopObservingDevicePresence1:input_type -> companion.StopObservingDevicePresence1Request
+	40, // 20: companion.CompanionDeviceManagerService.StopObservingDevicePresence1_1:input_type -> companion.StopObservingDevicePresence1_1Request
+	1,  // 21: companion.CompanionDeviceManagerService.Associate:output_type -> companion.AssociateResponse
+	3,  // 22: companion.CompanionDeviceManagerService.AttachSystemDataTransport:output_type -> companion.AttachSystemDataTransportResponse
+	5,  // 23: companion.CompanionDeviceManagerService.BuildAssociationCancellationIntent:output_type -> companion.BuildAssociationCancellationIntentResponse
+	7,  // 24: companion.CompanionDeviceManagerService.BuildPermissionTransferUserConsentIntent:output_type -> companion.BuildPermissionTransferUserConsentIntentResponse
+	9,  // 25: companion.CompanionDeviceManagerService.DetachSystemDataTransport:output_type -> companion.DetachSystemDataTransportResponse
+	11, // 26: companion.CompanionDeviceManagerService.DisableSystemDataSyncForTypes:output_type -> companion.DisableSystemDataSyncForTypesResponse
+	13, // 27: companion.CompanionDeviceManagerService.Disassociate1:output_type -> companion.Disassociate1Response
+	15, // 28: companion.CompanionDeviceManagerService.Disassociate1_1:output_type -> companion.Disassociate1_1Response
+	17, // 29: companion.CompanionDeviceManagerService.EnableSystemDataSyncForTypes:output_type -> companion.EnableSystemDataSyncForTypesResponse
+	19, // 30: companion.CompanionDeviceManagerService.GetAssociations:output_type -> companion.GetAssociationsResponse
+	21, // 31: companion.CompanionDeviceManagerService.GetMyAssociations:output_type -> companion.GetMyAssociationsResponse
+	23, // 32: companion.CompanionDeviceManagerService.HasNotificationAccess:output_type -> companion.HasNotificationAccessResponse
+	25, // 33: companion.CompanionDeviceManagerService.IsPermissionTransferUserConsented:output_type -> companion.IsPermissionTransferUserConsentedResponse
+	27, // 34: companion.CompanionDeviceManagerService.RemoveBond:output_type -> companion.RemoveBondResponse
+	29, // 35: companion.CompanionDeviceManagerService.RequestNotificationAccess:output_type -> companion.RequestNotificationAccessResponse
+	31, // 36: companion.CompanionDeviceManagerService.SetDeviceId:output_type -> companion.SetDeviceIdResponse
+	33, // 37: companion.CompanionDeviceManagerService.StartObservingDevicePresence1:output_type -> companion.StartObservingDevicePresence1Response
+	35, // 38: companion.CompanionDeviceManagerService.StartObservingDevicePresence1_1:output_type -> companion.StartObservingDevicePresence1_1Response
+	37, // 39: companion.CompanionDeviceManagerService.StartSystemDataTransfer:output_type -> companion.StartSystemDataTransferResponse
+	39, // 40: companion.CompanionDeviceManagerService.StopObservingDevicePresence1:output_type -> companion.StopObservingDevicePresence1Response
+	41, // 41: companion.CompanionDeviceManagerService.StopObservingDevicePresence1_1:output_type -> companion.StopObservingDevicePresence1_1Response
+	21, // [21:42] is the sub-list for method output_type
+	0,  // [0:21] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_companion_companion_proto_init() }
@@ -820,16 +2033,15 @@ func file_proto_companion_companion_proto_init() {
 	if File_proto_companion_companion_proto != nil {
 		return
 	}
-	file_proto_companion_companion_proto_msgTypes[14].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_companion_companion_proto_rawDesc), len(file_proto_companion_companion_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   16,
+			NumMessages:   42,
 			NumExtensions: 0,
-			NumServices:   3,
+			NumServices:   1,
 		},
 		GoTypes:           file_proto_companion_companion_proto_goTypes,
 		DependencyIndexes: file_proto_companion_companion_proto_depIdxs,

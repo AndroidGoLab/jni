@@ -21,1116 +21,1433 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	RecorderService_SetAudioSource_FullMethodName       = "/recorder.RecorderService/SetAudioSource"
-	RecorderService_SetVideoSource_FullMethodName       = "/recorder.RecorderService/SetVideoSource"
-	RecorderService_SetOutputFormat_FullMethodName      = "/recorder.RecorderService/SetOutputFormat"
-	RecorderService_SetAudioEncoder_FullMethodName      = "/recorder.RecorderService/SetAudioEncoder"
-	RecorderService_SetVideoEncoder_FullMethodName      = "/recorder.RecorderService/SetVideoEncoder"
-	RecorderService_SetOutputFile_FullMethodName        = "/recorder.RecorderService/SetOutputFile"
-	RecorderService_SetVideoSize_FullMethodName         = "/recorder.RecorderService/SetVideoSize"
-	RecorderService_SetVideoFrameRate_FullMethodName    = "/recorder.RecorderService/SetVideoFrameRate"
-	RecorderService_SetAudioSamplingRate_FullMethodName = "/recorder.RecorderService/SetAudioSamplingRate"
-	RecorderService_SetAudioChannels_FullMethodName     = "/recorder.RecorderService/SetAudioChannels"
-	RecorderService_SetMaxDurationMs_FullMethodName     = "/recorder.RecorderService/SetMaxDurationMs"
-	RecorderService_SetMaxFileSize_FullMethodName       = "/recorder.RecorderService/SetMaxFileSize"
-	RecorderService_Prepare_FullMethodName              = "/recorder.RecorderService/Prepare"
-	RecorderService_Start_FullMethodName                = "/recorder.RecorderService/Start"
-	RecorderService_Pause_FullMethodName                = "/recorder.RecorderService/Pause"
-	RecorderService_Resume_FullMethodName               = "/recorder.RecorderService/Resume"
-	RecorderService_Stop_FullMethodName                 = "/recorder.RecorderService/Stop"
-	RecorderService_Reset_FullMethodName                = "/recorder.RecorderService/Reset"
-	RecorderService_Release_FullMethodName              = "/recorder.RecorderService/Release"
-	RecorderService_GetMaxAmplitude_FullMethodName      = "/recorder.RecorderService/GetMaxAmplitude"
-	RecorderService_SetOnErrorListener_FullMethodName   = "/recorder.RecorderService/SetOnErrorListener"
-	RecorderService_SetOnInfoListener_FullMethodName    = "/recorder.RecorderService/SetOnInfoListener"
+	MediaRecorderService_GetActiveMicrophones_FullMethodName                 = "/recorder.MediaRecorderService/GetActiveMicrophones"
+	MediaRecorderService_GetActiveRecordingConfiguration_FullMethodName      = "/recorder.MediaRecorderService/GetActiveRecordingConfiguration"
+	MediaRecorderService_GetLogSessionId_FullMethodName                      = "/recorder.MediaRecorderService/GetLogSessionId"
+	MediaRecorderService_GetMetrics_FullMethodName                           = "/recorder.MediaRecorderService/GetMetrics"
+	MediaRecorderService_GetPreferredDevice_FullMethodName                   = "/recorder.MediaRecorderService/GetPreferredDevice"
+	MediaRecorderService_GetRoutedDevice_FullMethodName                      = "/recorder.MediaRecorderService/GetRoutedDevice"
+	MediaRecorderService_GetRoutedDevices_FullMethodName                     = "/recorder.MediaRecorderService/GetRoutedDevices"
+	MediaRecorderService_Prepare_FullMethodName                              = "/recorder.MediaRecorderService/Prepare"
+	MediaRecorderService_RegisterAudioRecordingCallback_FullMethodName       = "/recorder.MediaRecorderService/RegisterAudioRecordingCallback"
+	MediaRecorderService_RemoveOnRoutingChangedListener_FullMethodName       = "/recorder.MediaRecorderService/RemoveOnRoutingChangedListener"
+	MediaRecorderService_Reset_FullMethodName                                = "/recorder.MediaRecorderService/Reset"
+	MediaRecorderService_SetAudioChannels_FullMethodName                     = "/recorder.MediaRecorderService/SetAudioChannels"
+	MediaRecorderService_SetAudioEncodingBitRate_FullMethodName              = "/recorder.MediaRecorderService/SetAudioEncodingBitRate"
+	MediaRecorderService_SetAudioProfile_FullMethodName                      = "/recorder.MediaRecorderService/SetAudioProfile"
+	MediaRecorderService_SetAudioSamplingRate_FullMethodName                 = "/recorder.MediaRecorderService/SetAudioSamplingRate"
+	MediaRecorderService_SetCaptureRate_FullMethodName                       = "/recorder.MediaRecorderService/SetCaptureRate"
+	MediaRecorderService_SetInputSurface_FullMethodName                      = "/recorder.MediaRecorderService/SetInputSurface"
+	MediaRecorderService_SetLocation_FullMethodName                          = "/recorder.MediaRecorderService/SetLocation"
+	MediaRecorderService_SetLogSessionId_FullMethodName                      = "/recorder.MediaRecorderService/SetLogSessionId"
+	MediaRecorderService_SetNextOutputFile1_FullMethodName                   = "/recorder.MediaRecorderService/SetNextOutputFile1"
+	MediaRecorderService_SetNextOutputFile1_1_FullMethodName                 = "/recorder.MediaRecorderService/SetNextOutputFile1_1"
+	MediaRecorderService_SetOnErrorListener_FullMethodName                   = "/recorder.MediaRecorderService/SetOnErrorListener"
+	MediaRecorderService_SetOnInfoListener_FullMethodName                    = "/recorder.MediaRecorderService/SetOnInfoListener"
+	MediaRecorderService_SetOrientationHint_FullMethodName                   = "/recorder.MediaRecorderService/SetOrientationHint"
+	MediaRecorderService_SetOutputFile1_FullMethodName                       = "/recorder.MediaRecorderService/SetOutputFile1"
+	MediaRecorderService_SetOutputFile1_1_FullMethodName                     = "/recorder.MediaRecorderService/SetOutputFile1_1"
+	MediaRecorderService_SetOutputFile1_2_FullMethodName                     = "/recorder.MediaRecorderService/SetOutputFile1_2"
+	MediaRecorderService_SetPreferredDevice_FullMethodName                   = "/recorder.MediaRecorderService/SetPreferredDevice"
+	MediaRecorderService_SetPreferredMicrophoneDirection_FullMethodName      = "/recorder.MediaRecorderService/SetPreferredMicrophoneDirection"
+	MediaRecorderService_SetPreferredMicrophoneFieldDimension_FullMethodName = "/recorder.MediaRecorderService/SetPreferredMicrophoneFieldDimension"
+	MediaRecorderService_SetPreviewDisplay_FullMethodName                    = "/recorder.MediaRecorderService/SetPreviewDisplay"
+	MediaRecorderService_SetProfile_FullMethodName                           = "/recorder.MediaRecorderService/SetProfile"
+	MediaRecorderService_SetVideoEncodingBitRate_FullMethodName              = "/recorder.MediaRecorderService/SetVideoEncodingBitRate"
+	MediaRecorderService_SetVideoEncodingProfileLevel_FullMethodName         = "/recorder.MediaRecorderService/SetVideoEncodingProfileLevel"
+	MediaRecorderService_SetVideoProfile_FullMethodName                      = "/recorder.MediaRecorderService/SetVideoProfile"
+	MediaRecorderService_UnregisterAudioRecordingCallback_FullMethodName     = "/recorder.MediaRecorderService/UnregisterAudioRecordingCallback"
 )
 
-// RecorderServiceClient is the client API for RecorderService service.
+// MediaRecorderServiceClient is the client API for MediaRecorderService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type RecorderServiceClient interface {
-	SetAudioSource(ctx context.Context, in *SetAudioSourceRequest, opts ...grpc.CallOption) (*SetAudioSourceResponse, error)
-	SetVideoSource(ctx context.Context, in *SetVideoSourceRequest, opts ...grpc.CallOption) (*SetVideoSourceResponse, error)
-	SetOutputFormat(ctx context.Context, in *SetOutputFormatRequest, opts ...grpc.CallOption) (*SetOutputFormatResponse, error)
-	SetAudioEncoder(ctx context.Context, in *SetAudioEncoderRequest, opts ...grpc.CallOption) (*SetAudioEncoderResponse, error)
-	SetVideoEncoder(ctx context.Context, in *SetVideoEncoderRequest, opts ...grpc.CallOption) (*SetVideoEncoderResponse, error)
-	SetOutputFile(ctx context.Context, in *SetOutputFileRequest, opts ...grpc.CallOption) (*SetOutputFileResponse, error)
-	SetVideoSize(ctx context.Context, in *SetVideoSizeRequest, opts ...grpc.CallOption) (*SetVideoSizeResponse, error)
-	SetVideoFrameRate(ctx context.Context, in *SetVideoFrameRateRequest, opts ...grpc.CallOption) (*SetVideoFrameRateResponse, error)
-	SetAudioSamplingRate(ctx context.Context, in *SetAudioSamplingRateRequest, opts ...grpc.CallOption) (*SetAudioSamplingRateResponse, error)
-	SetAudioChannels(ctx context.Context, in *SetAudioChannelsRequest, opts ...grpc.CallOption) (*SetAudioChannelsResponse, error)
-	SetMaxDurationMs(ctx context.Context, in *SetMaxDurationMsRequest, opts ...grpc.CallOption) (*SetMaxDurationMsResponse, error)
-	SetMaxFileSize(ctx context.Context, in *SetMaxFileSizeRequest, opts ...grpc.CallOption) (*SetMaxFileSizeResponse, error)
+type MediaRecorderServiceClient interface {
+	GetActiveMicrophones(ctx context.Context, in *GetActiveMicrophonesRequest, opts ...grpc.CallOption) (*GetActiveMicrophonesResponse, error)
+	GetActiveRecordingConfiguration(ctx context.Context, in *GetActiveRecordingConfigurationRequest, opts ...grpc.CallOption) (*GetActiveRecordingConfigurationResponse, error)
+	GetLogSessionId(ctx context.Context, in *GetLogSessionIdRequest, opts ...grpc.CallOption) (*GetLogSessionIdResponse, error)
+	GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*GetMetricsResponse, error)
+	GetPreferredDevice(ctx context.Context, in *GetPreferredDeviceRequest, opts ...grpc.CallOption) (*GetPreferredDeviceResponse, error)
+	GetRoutedDevice(ctx context.Context, in *GetRoutedDeviceRequest, opts ...grpc.CallOption) (*GetRoutedDeviceResponse, error)
+	GetRoutedDevices(ctx context.Context, in *GetRoutedDevicesRequest, opts ...grpc.CallOption) (*GetRoutedDevicesResponse, error)
 	Prepare(ctx context.Context, in *PrepareRequest, opts ...grpc.CallOption) (*PrepareResponse, error)
-	Start(ctx context.Context, in *StartRequest, opts ...grpc.CallOption) (*StartResponse, error)
-	Pause(ctx context.Context, in *PauseRequest, opts ...grpc.CallOption) (*PauseResponse, error)
-	Resume(ctx context.Context, in *ResumeRequest, opts ...grpc.CallOption) (*ResumeResponse, error)
-	Stop(ctx context.Context, in *StopRequest, opts ...grpc.CallOption) (*StopResponse, error)
+	RegisterAudioRecordingCallback(ctx context.Context, in *RegisterAudioRecordingCallbackRequest, opts ...grpc.CallOption) (*RegisterAudioRecordingCallbackResponse, error)
+	RemoveOnRoutingChangedListener(ctx context.Context, in *RemoveOnRoutingChangedListenerRequest, opts ...grpc.CallOption) (*RemoveOnRoutingChangedListenerResponse, error)
 	Reset(ctx context.Context, in *ResetRequest, opts ...grpc.CallOption) (*ResetResponse, error)
-	Release(ctx context.Context, in *ReleaseRequest, opts ...grpc.CallOption) (*ReleaseResponse, error)
-	GetMaxAmplitude(ctx context.Context, in *GetMaxAmplitudeRequest, opts ...grpc.CallOption) (*GetMaxAmplitudeResponse, error)
+	SetAudioChannels(ctx context.Context, in *SetAudioChannelsRequest, opts ...grpc.CallOption) (*SetAudioChannelsResponse, error)
+	SetAudioEncodingBitRate(ctx context.Context, in *SetAudioEncodingBitRateRequest, opts ...grpc.CallOption) (*SetAudioEncodingBitRateResponse, error)
+	SetAudioProfile(ctx context.Context, in *SetAudioProfileRequest, opts ...grpc.CallOption) (*SetAudioProfileResponse, error)
+	SetAudioSamplingRate(ctx context.Context, in *SetAudioSamplingRateRequest, opts ...grpc.CallOption) (*SetAudioSamplingRateResponse, error)
+	SetCaptureRate(ctx context.Context, in *SetCaptureRateRequest, opts ...grpc.CallOption) (*SetCaptureRateResponse, error)
+	SetInputSurface(ctx context.Context, in *SetInputSurfaceRequest, opts ...grpc.CallOption) (*SetInputSurfaceResponse, error)
+	SetLocation(ctx context.Context, in *SetLocationRequest, opts ...grpc.CallOption) (*SetLocationResponse, error)
+	SetLogSessionId(ctx context.Context, in *SetLogSessionIdRequest, opts ...grpc.CallOption) (*SetLogSessionIdResponse, error)
+	SetNextOutputFile1(ctx context.Context, in *SetNextOutputFile1Request, opts ...grpc.CallOption) (*SetNextOutputFile1Response, error)
+	SetNextOutputFile1_1(ctx context.Context, in *SetNextOutputFile1_1Request, opts ...grpc.CallOption) (*SetNextOutputFile1_1Response, error)
 	SetOnErrorListener(ctx context.Context, in *SetOnErrorListenerRequest, opts ...grpc.CallOption) (*SetOnErrorListenerResponse, error)
 	SetOnInfoListener(ctx context.Context, in *SetOnInfoListenerRequest, opts ...grpc.CallOption) (*SetOnInfoListenerResponse, error)
+	SetOrientationHint(ctx context.Context, in *SetOrientationHintRequest, opts ...grpc.CallOption) (*SetOrientationHintResponse, error)
+	SetOutputFile1(ctx context.Context, in *SetOutputFile1Request, opts ...grpc.CallOption) (*SetOutputFile1Response, error)
+	SetOutputFile1_1(ctx context.Context, in *SetOutputFile1_1Request, opts ...grpc.CallOption) (*SetOutputFile1_1Response, error)
+	SetOutputFile1_2(ctx context.Context, in *SetOutputFile1_2Request, opts ...grpc.CallOption) (*SetOutputFile1_2Response, error)
+	SetPreferredDevice(ctx context.Context, in *SetPreferredDeviceRequest, opts ...grpc.CallOption) (*SetPreferredDeviceResponse, error)
+	SetPreferredMicrophoneDirection(ctx context.Context, in *SetPreferredMicrophoneDirectionRequest, opts ...grpc.CallOption) (*SetPreferredMicrophoneDirectionResponse, error)
+	SetPreferredMicrophoneFieldDimension(ctx context.Context, in *SetPreferredMicrophoneFieldDimensionRequest, opts ...grpc.CallOption) (*SetPreferredMicrophoneFieldDimensionResponse, error)
+	SetPreviewDisplay(ctx context.Context, in *SetPreviewDisplayRequest, opts ...grpc.CallOption) (*SetPreviewDisplayResponse, error)
+	SetProfile(ctx context.Context, in *SetProfileRequest, opts ...grpc.CallOption) (*SetProfileResponse, error)
+	SetVideoEncodingBitRate(ctx context.Context, in *SetVideoEncodingBitRateRequest, opts ...grpc.CallOption) (*SetVideoEncodingBitRateResponse, error)
+	SetVideoEncodingProfileLevel(ctx context.Context, in *SetVideoEncodingProfileLevelRequest, opts ...grpc.CallOption) (*SetVideoEncodingProfileLevelResponse, error)
+	SetVideoProfile(ctx context.Context, in *SetVideoProfileRequest, opts ...grpc.CallOption) (*SetVideoProfileResponse, error)
+	UnregisterAudioRecordingCallback(ctx context.Context, in *UnregisterAudioRecordingCallbackRequest, opts ...grpc.CallOption) (*UnregisterAudioRecordingCallbackResponse, error)
 }
 
-type recorderServiceClient struct {
+type mediaRecorderServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewRecorderServiceClient(cc grpc.ClientConnInterface) RecorderServiceClient {
-	return &recorderServiceClient{cc}
+func NewMediaRecorderServiceClient(cc grpc.ClientConnInterface) MediaRecorderServiceClient {
+	return &mediaRecorderServiceClient{cc}
 }
 
-func (c *recorderServiceClient) SetAudioSource(ctx context.Context, in *SetAudioSourceRequest, opts ...grpc.CallOption) (*SetAudioSourceResponse, error) {
+func (c *mediaRecorderServiceClient) GetActiveMicrophones(ctx context.Context, in *GetActiveMicrophonesRequest, opts ...grpc.CallOption) (*GetActiveMicrophonesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetAudioSourceResponse)
-	err := c.cc.Invoke(ctx, RecorderService_SetAudioSource_FullMethodName, in, out, cOpts...)
+	out := new(GetActiveMicrophonesResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_GetActiveMicrophones_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *recorderServiceClient) SetVideoSource(ctx context.Context, in *SetVideoSourceRequest, opts ...grpc.CallOption) (*SetVideoSourceResponse, error) {
+func (c *mediaRecorderServiceClient) GetActiveRecordingConfiguration(ctx context.Context, in *GetActiveRecordingConfigurationRequest, opts ...grpc.CallOption) (*GetActiveRecordingConfigurationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetVideoSourceResponse)
-	err := c.cc.Invoke(ctx, RecorderService_SetVideoSource_FullMethodName, in, out, cOpts...)
+	out := new(GetActiveRecordingConfigurationResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_GetActiveRecordingConfiguration_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *recorderServiceClient) SetOutputFormat(ctx context.Context, in *SetOutputFormatRequest, opts ...grpc.CallOption) (*SetOutputFormatResponse, error) {
+func (c *mediaRecorderServiceClient) GetLogSessionId(ctx context.Context, in *GetLogSessionIdRequest, opts ...grpc.CallOption) (*GetLogSessionIdResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetOutputFormatResponse)
-	err := c.cc.Invoke(ctx, RecorderService_SetOutputFormat_FullMethodName, in, out, cOpts...)
+	out := new(GetLogSessionIdResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_GetLogSessionId_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *recorderServiceClient) SetAudioEncoder(ctx context.Context, in *SetAudioEncoderRequest, opts ...grpc.CallOption) (*SetAudioEncoderResponse, error) {
+func (c *mediaRecorderServiceClient) GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*GetMetricsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetAudioEncoderResponse)
-	err := c.cc.Invoke(ctx, RecorderService_SetAudioEncoder_FullMethodName, in, out, cOpts...)
+	out := new(GetMetricsResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_GetMetrics_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *recorderServiceClient) SetVideoEncoder(ctx context.Context, in *SetVideoEncoderRequest, opts ...grpc.CallOption) (*SetVideoEncoderResponse, error) {
+func (c *mediaRecorderServiceClient) GetPreferredDevice(ctx context.Context, in *GetPreferredDeviceRequest, opts ...grpc.CallOption) (*GetPreferredDeviceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetVideoEncoderResponse)
-	err := c.cc.Invoke(ctx, RecorderService_SetVideoEncoder_FullMethodName, in, out, cOpts...)
+	out := new(GetPreferredDeviceResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_GetPreferredDevice_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *recorderServiceClient) SetOutputFile(ctx context.Context, in *SetOutputFileRequest, opts ...grpc.CallOption) (*SetOutputFileResponse, error) {
+func (c *mediaRecorderServiceClient) GetRoutedDevice(ctx context.Context, in *GetRoutedDeviceRequest, opts ...grpc.CallOption) (*GetRoutedDeviceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetOutputFileResponse)
-	err := c.cc.Invoke(ctx, RecorderService_SetOutputFile_FullMethodName, in, out, cOpts...)
+	out := new(GetRoutedDeviceResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_GetRoutedDevice_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *recorderServiceClient) SetVideoSize(ctx context.Context, in *SetVideoSizeRequest, opts ...grpc.CallOption) (*SetVideoSizeResponse, error) {
+func (c *mediaRecorderServiceClient) GetRoutedDevices(ctx context.Context, in *GetRoutedDevicesRequest, opts ...grpc.CallOption) (*GetRoutedDevicesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetVideoSizeResponse)
-	err := c.cc.Invoke(ctx, RecorderService_SetVideoSize_FullMethodName, in, out, cOpts...)
+	out := new(GetRoutedDevicesResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_GetRoutedDevices_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *recorderServiceClient) SetVideoFrameRate(ctx context.Context, in *SetVideoFrameRateRequest, opts ...grpc.CallOption) (*SetVideoFrameRateResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetVideoFrameRateResponse)
-	err := c.cc.Invoke(ctx, RecorderService_SetVideoFrameRate_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *recorderServiceClient) SetAudioSamplingRate(ctx context.Context, in *SetAudioSamplingRateRequest, opts ...grpc.CallOption) (*SetAudioSamplingRateResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetAudioSamplingRateResponse)
-	err := c.cc.Invoke(ctx, RecorderService_SetAudioSamplingRate_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *recorderServiceClient) SetAudioChannels(ctx context.Context, in *SetAudioChannelsRequest, opts ...grpc.CallOption) (*SetAudioChannelsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetAudioChannelsResponse)
-	err := c.cc.Invoke(ctx, RecorderService_SetAudioChannels_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *recorderServiceClient) SetMaxDurationMs(ctx context.Context, in *SetMaxDurationMsRequest, opts ...grpc.CallOption) (*SetMaxDurationMsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetMaxDurationMsResponse)
-	err := c.cc.Invoke(ctx, RecorderService_SetMaxDurationMs_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *recorderServiceClient) SetMaxFileSize(ctx context.Context, in *SetMaxFileSizeRequest, opts ...grpc.CallOption) (*SetMaxFileSizeResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetMaxFileSizeResponse)
-	err := c.cc.Invoke(ctx, RecorderService_SetMaxFileSize_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *recorderServiceClient) Prepare(ctx context.Context, in *PrepareRequest, opts ...grpc.CallOption) (*PrepareResponse, error) {
+func (c *mediaRecorderServiceClient) Prepare(ctx context.Context, in *PrepareRequest, opts ...grpc.CallOption) (*PrepareResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PrepareResponse)
-	err := c.cc.Invoke(ctx, RecorderService_Prepare_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, MediaRecorderService_Prepare_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *recorderServiceClient) Start(ctx context.Context, in *StartRequest, opts ...grpc.CallOption) (*StartResponse, error) {
+func (c *mediaRecorderServiceClient) RegisterAudioRecordingCallback(ctx context.Context, in *RegisterAudioRecordingCallbackRequest, opts ...grpc.CallOption) (*RegisterAudioRecordingCallbackResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StartResponse)
-	err := c.cc.Invoke(ctx, RecorderService_Start_FullMethodName, in, out, cOpts...)
+	out := new(RegisterAudioRecordingCallbackResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_RegisterAudioRecordingCallback_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *recorderServiceClient) Pause(ctx context.Context, in *PauseRequest, opts ...grpc.CallOption) (*PauseResponse, error) {
+func (c *mediaRecorderServiceClient) RemoveOnRoutingChangedListener(ctx context.Context, in *RemoveOnRoutingChangedListenerRequest, opts ...grpc.CallOption) (*RemoveOnRoutingChangedListenerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PauseResponse)
-	err := c.cc.Invoke(ctx, RecorderService_Pause_FullMethodName, in, out, cOpts...)
+	out := new(RemoveOnRoutingChangedListenerResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_RemoveOnRoutingChangedListener_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *recorderServiceClient) Resume(ctx context.Context, in *ResumeRequest, opts ...grpc.CallOption) (*ResumeResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ResumeResponse)
-	err := c.cc.Invoke(ctx, RecorderService_Resume_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *recorderServiceClient) Stop(ctx context.Context, in *StopRequest, opts ...grpc.CallOption) (*StopResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StopResponse)
-	err := c.cc.Invoke(ctx, RecorderService_Stop_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *recorderServiceClient) Reset(ctx context.Context, in *ResetRequest, opts ...grpc.CallOption) (*ResetResponse, error) {
+func (c *mediaRecorderServiceClient) Reset(ctx context.Context, in *ResetRequest, opts ...grpc.CallOption) (*ResetResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ResetResponse)
-	err := c.cc.Invoke(ctx, RecorderService_Reset_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, MediaRecorderService_Reset_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *recorderServiceClient) Release(ctx context.Context, in *ReleaseRequest, opts ...grpc.CallOption) (*ReleaseResponse, error) {
+func (c *mediaRecorderServiceClient) SetAudioChannels(ctx context.Context, in *SetAudioChannelsRequest, opts ...grpc.CallOption) (*SetAudioChannelsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ReleaseResponse)
-	err := c.cc.Invoke(ctx, RecorderService_Release_FullMethodName, in, out, cOpts...)
+	out := new(SetAudioChannelsResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetAudioChannels_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *recorderServiceClient) GetMaxAmplitude(ctx context.Context, in *GetMaxAmplitudeRequest, opts ...grpc.CallOption) (*GetMaxAmplitudeResponse, error) {
+func (c *mediaRecorderServiceClient) SetAudioEncodingBitRate(ctx context.Context, in *SetAudioEncodingBitRateRequest, opts ...grpc.CallOption) (*SetAudioEncodingBitRateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetMaxAmplitudeResponse)
-	err := c.cc.Invoke(ctx, RecorderService_GetMaxAmplitude_FullMethodName, in, out, cOpts...)
+	out := new(SetAudioEncodingBitRateResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetAudioEncodingBitRate_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *recorderServiceClient) SetOnErrorListener(ctx context.Context, in *SetOnErrorListenerRequest, opts ...grpc.CallOption) (*SetOnErrorListenerResponse, error) {
+func (c *mediaRecorderServiceClient) SetAudioProfile(ctx context.Context, in *SetAudioProfileRequest, opts ...grpc.CallOption) (*SetAudioProfileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetAudioProfileResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetAudioProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetAudioSamplingRate(ctx context.Context, in *SetAudioSamplingRateRequest, opts ...grpc.CallOption) (*SetAudioSamplingRateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetAudioSamplingRateResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetAudioSamplingRate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetCaptureRate(ctx context.Context, in *SetCaptureRateRequest, opts ...grpc.CallOption) (*SetCaptureRateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetCaptureRateResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetCaptureRate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetInputSurface(ctx context.Context, in *SetInputSurfaceRequest, opts ...grpc.CallOption) (*SetInputSurfaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetInputSurfaceResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetInputSurface_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetLocation(ctx context.Context, in *SetLocationRequest, opts ...grpc.CallOption) (*SetLocationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetLocationResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetLocation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetLogSessionId(ctx context.Context, in *SetLogSessionIdRequest, opts ...grpc.CallOption) (*SetLogSessionIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetLogSessionIdResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetLogSessionId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetNextOutputFile1(ctx context.Context, in *SetNextOutputFile1Request, opts ...grpc.CallOption) (*SetNextOutputFile1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetNextOutputFile1Response)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetNextOutputFile1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetNextOutputFile1_1(ctx context.Context, in *SetNextOutputFile1_1Request, opts ...grpc.CallOption) (*SetNextOutputFile1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetNextOutputFile1_1Response)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetNextOutputFile1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetOnErrorListener(ctx context.Context, in *SetOnErrorListenerRequest, opts ...grpc.CallOption) (*SetOnErrorListenerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SetOnErrorListenerResponse)
-	err := c.cc.Invoke(ctx, RecorderService_SetOnErrorListener_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetOnErrorListener_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *recorderServiceClient) SetOnInfoListener(ctx context.Context, in *SetOnInfoListenerRequest, opts ...grpc.CallOption) (*SetOnInfoListenerResponse, error) {
+func (c *mediaRecorderServiceClient) SetOnInfoListener(ctx context.Context, in *SetOnInfoListenerRequest, opts ...grpc.CallOption) (*SetOnInfoListenerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SetOnInfoListenerResponse)
-	err := c.cc.Invoke(ctx, RecorderService_SetOnInfoListener_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetOnInfoListener_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// RecorderServiceServer is the server API for RecorderService service.
-// All implementations must embed UnimplementedRecorderServiceServer
-// for forward compatibility.
-type RecorderServiceServer interface {
-	SetAudioSource(context.Context, *SetAudioSourceRequest) (*SetAudioSourceResponse, error)
-	SetVideoSource(context.Context, *SetVideoSourceRequest) (*SetVideoSourceResponse, error)
-	SetOutputFormat(context.Context, *SetOutputFormatRequest) (*SetOutputFormatResponse, error)
-	SetAudioEncoder(context.Context, *SetAudioEncoderRequest) (*SetAudioEncoderResponse, error)
-	SetVideoEncoder(context.Context, *SetVideoEncoderRequest) (*SetVideoEncoderResponse, error)
-	SetOutputFile(context.Context, *SetOutputFileRequest) (*SetOutputFileResponse, error)
-	SetVideoSize(context.Context, *SetVideoSizeRequest) (*SetVideoSizeResponse, error)
-	SetVideoFrameRate(context.Context, *SetVideoFrameRateRequest) (*SetVideoFrameRateResponse, error)
-	SetAudioSamplingRate(context.Context, *SetAudioSamplingRateRequest) (*SetAudioSamplingRateResponse, error)
-	SetAudioChannels(context.Context, *SetAudioChannelsRequest) (*SetAudioChannelsResponse, error)
-	SetMaxDurationMs(context.Context, *SetMaxDurationMsRequest) (*SetMaxDurationMsResponse, error)
-	SetMaxFileSize(context.Context, *SetMaxFileSizeRequest) (*SetMaxFileSizeResponse, error)
-	Prepare(context.Context, *PrepareRequest) (*PrepareResponse, error)
-	Start(context.Context, *StartRequest) (*StartResponse, error)
-	Pause(context.Context, *PauseRequest) (*PauseResponse, error)
-	Resume(context.Context, *ResumeRequest) (*ResumeResponse, error)
-	Stop(context.Context, *StopRequest) (*StopResponse, error)
-	Reset(context.Context, *ResetRequest) (*ResetResponse, error)
-	Release(context.Context, *ReleaseRequest) (*ReleaseResponse, error)
-	GetMaxAmplitude(context.Context, *GetMaxAmplitudeRequest) (*GetMaxAmplitudeResponse, error)
-	SetOnErrorListener(context.Context, *SetOnErrorListenerRequest) (*SetOnErrorListenerResponse, error)
-	SetOnInfoListener(context.Context, *SetOnInfoListenerRequest) (*SetOnInfoListenerResponse, error)
-	mustEmbedUnimplementedRecorderServiceServer()
+func (c *mediaRecorderServiceClient) SetOrientationHint(ctx context.Context, in *SetOrientationHintRequest, opts ...grpc.CallOption) (*SetOrientationHintResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetOrientationHintResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetOrientationHint_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
-// UnimplementedRecorderServiceServer must be embedded to have
+func (c *mediaRecorderServiceClient) SetOutputFile1(ctx context.Context, in *SetOutputFile1Request, opts ...grpc.CallOption) (*SetOutputFile1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetOutputFile1Response)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetOutputFile1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetOutputFile1_1(ctx context.Context, in *SetOutputFile1_1Request, opts ...grpc.CallOption) (*SetOutputFile1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetOutputFile1_1Response)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetOutputFile1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetOutputFile1_2(ctx context.Context, in *SetOutputFile1_2Request, opts ...grpc.CallOption) (*SetOutputFile1_2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetOutputFile1_2Response)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetOutputFile1_2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetPreferredDevice(ctx context.Context, in *SetPreferredDeviceRequest, opts ...grpc.CallOption) (*SetPreferredDeviceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetPreferredDeviceResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetPreferredDevice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetPreferredMicrophoneDirection(ctx context.Context, in *SetPreferredMicrophoneDirectionRequest, opts ...grpc.CallOption) (*SetPreferredMicrophoneDirectionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetPreferredMicrophoneDirectionResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetPreferredMicrophoneDirection_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetPreferredMicrophoneFieldDimension(ctx context.Context, in *SetPreferredMicrophoneFieldDimensionRequest, opts ...grpc.CallOption) (*SetPreferredMicrophoneFieldDimensionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetPreferredMicrophoneFieldDimensionResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetPreferredMicrophoneFieldDimension_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetPreviewDisplay(ctx context.Context, in *SetPreviewDisplayRequest, opts ...grpc.CallOption) (*SetPreviewDisplayResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetPreviewDisplayResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetPreviewDisplay_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetProfile(ctx context.Context, in *SetProfileRequest, opts ...grpc.CallOption) (*SetProfileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetProfileResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetVideoEncodingBitRate(ctx context.Context, in *SetVideoEncodingBitRateRequest, opts ...grpc.CallOption) (*SetVideoEncodingBitRateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetVideoEncodingBitRateResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetVideoEncodingBitRate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetVideoEncodingProfileLevel(ctx context.Context, in *SetVideoEncodingProfileLevelRequest, opts ...grpc.CallOption) (*SetVideoEncodingProfileLevelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetVideoEncodingProfileLevelResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetVideoEncodingProfileLevel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) SetVideoProfile(ctx context.Context, in *SetVideoProfileRequest, opts ...grpc.CallOption) (*SetVideoProfileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetVideoProfileResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_SetVideoProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mediaRecorderServiceClient) UnregisterAudioRecordingCallback(ctx context.Context, in *UnregisterAudioRecordingCallbackRequest, opts ...grpc.CallOption) (*UnregisterAudioRecordingCallbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnregisterAudioRecordingCallbackResponse)
+	err := c.cc.Invoke(ctx, MediaRecorderService_UnregisterAudioRecordingCallback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// MediaRecorderServiceServer is the server API for MediaRecorderService service.
+// All implementations must embed UnimplementedMediaRecorderServiceServer
+// for forward compatibility.
+type MediaRecorderServiceServer interface {
+	GetActiveMicrophones(context.Context, *GetActiveMicrophonesRequest) (*GetActiveMicrophonesResponse, error)
+	GetActiveRecordingConfiguration(context.Context, *GetActiveRecordingConfigurationRequest) (*GetActiveRecordingConfigurationResponse, error)
+	GetLogSessionId(context.Context, *GetLogSessionIdRequest) (*GetLogSessionIdResponse, error)
+	GetMetrics(context.Context, *GetMetricsRequest) (*GetMetricsResponse, error)
+	GetPreferredDevice(context.Context, *GetPreferredDeviceRequest) (*GetPreferredDeviceResponse, error)
+	GetRoutedDevice(context.Context, *GetRoutedDeviceRequest) (*GetRoutedDeviceResponse, error)
+	GetRoutedDevices(context.Context, *GetRoutedDevicesRequest) (*GetRoutedDevicesResponse, error)
+	Prepare(context.Context, *PrepareRequest) (*PrepareResponse, error)
+	RegisterAudioRecordingCallback(context.Context, *RegisterAudioRecordingCallbackRequest) (*RegisterAudioRecordingCallbackResponse, error)
+	RemoveOnRoutingChangedListener(context.Context, *RemoveOnRoutingChangedListenerRequest) (*RemoveOnRoutingChangedListenerResponse, error)
+	Reset(context.Context, *ResetRequest) (*ResetResponse, error)
+	SetAudioChannels(context.Context, *SetAudioChannelsRequest) (*SetAudioChannelsResponse, error)
+	SetAudioEncodingBitRate(context.Context, *SetAudioEncodingBitRateRequest) (*SetAudioEncodingBitRateResponse, error)
+	SetAudioProfile(context.Context, *SetAudioProfileRequest) (*SetAudioProfileResponse, error)
+	SetAudioSamplingRate(context.Context, *SetAudioSamplingRateRequest) (*SetAudioSamplingRateResponse, error)
+	SetCaptureRate(context.Context, *SetCaptureRateRequest) (*SetCaptureRateResponse, error)
+	SetInputSurface(context.Context, *SetInputSurfaceRequest) (*SetInputSurfaceResponse, error)
+	SetLocation(context.Context, *SetLocationRequest) (*SetLocationResponse, error)
+	SetLogSessionId(context.Context, *SetLogSessionIdRequest) (*SetLogSessionIdResponse, error)
+	SetNextOutputFile1(context.Context, *SetNextOutputFile1Request) (*SetNextOutputFile1Response, error)
+	SetNextOutputFile1_1(context.Context, *SetNextOutputFile1_1Request) (*SetNextOutputFile1_1Response, error)
+	SetOnErrorListener(context.Context, *SetOnErrorListenerRequest) (*SetOnErrorListenerResponse, error)
+	SetOnInfoListener(context.Context, *SetOnInfoListenerRequest) (*SetOnInfoListenerResponse, error)
+	SetOrientationHint(context.Context, *SetOrientationHintRequest) (*SetOrientationHintResponse, error)
+	SetOutputFile1(context.Context, *SetOutputFile1Request) (*SetOutputFile1Response, error)
+	SetOutputFile1_1(context.Context, *SetOutputFile1_1Request) (*SetOutputFile1_1Response, error)
+	SetOutputFile1_2(context.Context, *SetOutputFile1_2Request) (*SetOutputFile1_2Response, error)
+	SetPreferredDevice(context.Context, *SetPreferredDeviceRequest) (*SetPreferredDeviceResponse, error)
+	SetPreferredMicrophoneDirection(context.Context, *SetPreferredMicrophoneDirectionRequest) (*SetPreferredMicrophoneDirectionResponse, error)
+	SetPreferredMicrophoneFieldDimension(context.Context, *SetPreferredMicrophoneFieldDimensionRequest) (*SetPreferredMicrophoneFieldDimensionResponse, error)
+	SetPreviewDisplay(context.Context, *SetPreviewDisplayRequest) (*SetPreviewDisplayResponse, error)
+	SetProfile(context.Context, *SetProfileRequest) (*SetProfileResponse, error)
+	SetVideoEncodingBitRate(context.Context, *SetVideoEncodingBitRateRequest) (*SetVideoEncodingBitRateResponse, error)
+	SetVideoEncodingProfileLevel(context.Context, *SetVideoEncodingProfileLevelRequest) (*SetVideoEncodingProfileLevelResponse, error)
+	SetVideoProfile(context.Context, *SetVideoProfileRequest) (*SetVideoProfileResponse, error)
+	UnregisterAudioRecordingCallback(context.Context, *UnregisterAudioRecordingCallbackRequest) (*UnregisterAudioRecordingCallbackResponse, error)
+	mustEmbedUnimplementedMediaRecorderServiceServer()
+}
+
+// UnimplementedMediaRecorderServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedRecorderServiceServer struct{}
+type UnimplementedMediaRecorderServiceServer struct{}
 
-func (UnimplementedRecorderServiceServer) SetAudioSource(context.Context, *SetAudioSourceRequest) (*SetAudioSourceResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetAudioSource not implemented")
+func (UnimplementedMediaRecorderServiceServer) GetActiveMicrophones(context.Context, *GetActiveMicrophonesRequest) (*GetActiveMicrophonesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetActiveMicrophones not implemented")
 }
-func (UnimplementedRecorderServiceServer) SetVideoSource(context.Context, *SetVideoSourceRequest) (*SetVideoSourceResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetVideoSource not implemented")
+func (UnimplementedMediaRecorderServiceServer) GetActiveRecordingConfiguration(context.Context, *GetActiveRecordingConfigurationRequest) (*GetActiveRecordingConfigurationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetActiveRecordingConfiguration not implemented")
 }
-func (UnimplementedRecorderServiceServer) SetOutputFormat(context.Context, *SetOutputFormatRequest) (*SetOutputFormatResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetOutputFormat not implemented")
+func (UnimplementedMediaRecorderServiceServer) GetLogSessionId(context.Context, *GetLogSessionIdRequest) (*GetLogSessionIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLogSessionId not implemented")
 }
-func (UnimplementedRecorderServiceServer) SetAudioEncoder(context.Context, *SetAudioEncoderRequest) (*SetAudioEncoderResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetAudioEncoder not implemented")
+func (UnimplementedMediaRecorderServiceServer) GetMetrics(context.Context, *GetMetricsRequest) (*GetMetricsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMetrics not implemented")
 }
-func (UnimplementedRecorderServiceServer) SetVideoEncoder(context.Context, *SetVideoEncoderRequest) (*SetVideoEncoderResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetVideoEncoder not implemented")
+func (UnimplementedMediaRecorderServiceServer) GetPreferredDevice(context.Context, *GetPreferredDeviceRequest) (*GetPreferredDeviceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPreferredDevice not implemented")
 }
-func (UnimplementedRecorderServiceServer) SetOutputFile(context.Context, *SetOutputFileRequest) (*SetOutputFileResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetOutputFile not implemented")
+func (UnimplementedMediaRecorderServiceServer) GetRoutedDevice(context.Context, *GetRoutedDeviceRequest) (*GetRoutedDeviceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRoutedDevice not implemented")
 }
-func (UnimplementedRecorderServiceServer) SetVideoSize(context.Context, *SetVideoSizeRequest) (*SetVideoSizeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetVideoSize not implemented")
+func (UnimplementedMediaRecorderServiceServer) GetRoutedDevices(context.Context, *GetRoutedDevicesRequest) (*GetRoutedDevicesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRoutedDevices not implemented")
 }
-func (UnimplementedRecorderServiceServer) SetVideoFrameRate(context.Context, *SetVideoFrameRateRequest) (*SetVideoFrameRateResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetVideoFrameRate not implemented")
-}
-func (UnimplementedRecorderServiceServer) SetAudioSamplingRate(context.Context, *SetAudioSamplingRateRequest) (*SetAudioSamplingRateResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetAudioSamplingRate not implemented")
-}
-func (UnimplementedRecorderServiceServer) SetAudioChannels(context.Context, *SetAudioChannelsRequest) (*SetAudioChannelsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetAudioChannels not implemented")
-}
-func (UnimplementedRecorderServiceServer) SetMaxDurationMs(context.Context, *SetMaxDurationMsRequest) (*SetMaxDurationMsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetMaxDurationMs not implemented")
-}
-func (UnimplementedRecorderServiceServer) SetMaxFileSize(context.Context, *SetMaxFileSizeRequest) (*SetMaxFileSizeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetMaxFileSize not implemented")
-}
-func (UnimplementedRecorderServiceServer) Prepare(context.Context, *PrepareRequest) (*PrepareResponse, error) {
+func (UnimplementedMediaRecorderServiceServer) Prepare(context.Context, *PrepareRequest) (*PrepareResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Prepare not implemented")
 }
-func (UnimplementedRecorderServiceServer) Start(context.Context, *StartRequest) (*StartResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Start not implemented")
+func (UnimplementedMediaRecorderServiceServer) RegisterAudioRecordingCallback(context.Context, *RegisterAudioRecordingCallbackRequest) (*RegisterAudioRecordingCallbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterAudioRecordingCallback not implemented")
 }
-func (UnimplementedRecorderServiceServer) Pause(context.Context, *PauseRequest) (*PauseResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Pause not implemented")
+func (UnimplementedMediaRecorderServiceServer) RemoveOnRoutingChangedListener(context.Context, *RemoveOnRoutingChangedListenerRequest) (*RemoveOnRoutingChangedListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveOnRoutingChangedListener not implemented")
 }
-func (UnimplementedRecorderServiceServer) Resume(context.Context, *ResumeRequest) (*ResumeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Resume not implemented")
-}
-func (UnimplementedRecorderServiceServer) Stop(context.Context, *StopRequest) (*StopResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Stop not implemented")
-}
-func (UnimplementedRecorderServiceServer) Reset(context.Context, *ResetRequest) (*ResetResponse, error) {
+func (UnimplementedMediaRecorderServiceServer) Reset(context.Context, *ResetRequest) (*ResetResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Reset not implemented")
 }
-func (UnimplementedRecorderServiceServer) Release(context.Context, *ReleaseRequest) (*ReleaseResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Release not implemented")
+func (UnimplementedMediaRecorderServiceServer) SetAudioChannels(context.Context, *SetAudioChannelsRequest) (*SetAudioChannelsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAudioChannels not implemented")
 }
-func (UnimplementedRecorderServiceServer) GetMaxAmplitude(context.Context, *GetMaxAmplitudeRequest) (*GetMaxAmplitudeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetMaxAmplitude not implemented")
+func (UnimplementedMediaRecorderServiceServer) SetAudioEncodingBitRate(context.Context, *SetAudioEncodingBitRateRequest) (*SetAudioEncodingBitRateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAudioEncodingBitRate not implemented")
 }
-func (UnimplementedRecorderServiceServer) SetOnErrorListener(context.Context, *SetOnErrorListenerRequest) (*SetOnErrorListenerResponse, error) {
+func (UnimplementedMediaRecorderServiceServer) SetAudioProfile(context.Context, *SetAudioProfileRequest) (*SetAudioProfileResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAudioProfile not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetAudioSamplingRate(context.Context, *SetAudioSamplingRateRequest) (*SetAudioSamplingRateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAudioSamplingRate not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetCaptureRate(context.Context, *SetCaptureRateRequest) (*SetCaptureRateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetCaptureRate not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetInputSurface(context.Context, *SetInputSurfaceRequest) (*SetInputSurfaceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetInputSurface not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetLocation(context.Context, *SetLocationRequest) (*SetLocationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetLocation not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetLogSessionId(context.Context, *SetLogSessionIdRequest) (*SetLogSessionIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetLogSessionId not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetNextOutputFile1(context.Context, *SetNextOutputFile1Request) (*SetNextOutputFile1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetNextOutputFile1 not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetNextOutputFile1_1(context.Context, *SetNextOutputFile1_1Request) (*SetNextOutputFile1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetNextOutputFile1_1 not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetOnErrorListener(context.Context, *SetOnErrorListenerRequest) (*SetOnErrorListenerResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetOnErrorListener not implemented")
 }
-func (UnimplementedRecorderServiceServer) SetOnInfoListener(context.Context, *SetOnInfoListenerRequest) (*SetOnInfoListenerResponse, error) {
+func (UnimplementedMediaRecorderServiceServer) SetOnInfoListener(context.Context, *SetOnInfoListenerRequest) (*SetOnInfoListenerResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetOnInfoListener not implemented")
 }
-func (UnimplementedRecorderServiceServer) mustEmbedUnimplementedRecorderServiceServer() {}
-func (UnimplementedRecorderServiceServer) testEmbeddedByValue()                         {}
+func (UnimplementedMediaRecorderServiceServer) SetOrientationHint(context.Context, *SetOrientationHintRequest) (*SetOrientationHintResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetOrientationHint not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetOutputFile1(context.Context, *SetOutputFile1Request) (*SetOutputFile1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetOutputFile1 not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetOutputFile1_1(context.Context, *SetOutputFile1_1Request) (*SetOutputFile1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetOutputFile1_1 not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetOutputFile1_2(context.Context, *SetOutputFile1_2Request) (*SetOutputFile1_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetOutputFile1_2 not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetPreferredDevice(context.Context, *SetPreferredDeviceRequest) (*SetPreferredDeviceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetPreferredDevice not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetPreferredMicrophoneDirection(context.Context, *SetPreferredMicrophoneDirectionRequest) (*SetPreferredMicrophoneDirectionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetPreferredMicrophoneDirection not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetPreferredMicrophoneFieldDimension(context.Context, *SetPreferredMicrophoneFieldDimensionRequest) (*SetPreferredMicrophoneFieldDimensionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetPreferredMicrophoneFieldDimension not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetPreviewDisplay(context.Context, *SetPreviewDisplayRequest) (*SetPreviewDisplayResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetPreviewDisplay not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetProfile(context.Context, *SetProfileRequest) (*SetProfileResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetProfile not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetVideoEncodingBitRate(context.Context, *SetVideoEncodingBitRateRequest) (*SetVideoEncodingBitRateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetVideoEncodingBitRate not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetVideoEncodingProfileLevel(context.Context, *SetVideoEncodingProfileLevelRequest) (*SetVideoEncodingProfileLevelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetVideoEncodingProfileLevel not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) SetVideoProfile(context.Context, *SetVideoProfileRequest) (*SetVideoProfileResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetVideoProfile not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) UnregisterAudioRecordingCallback(context.Context, *UnregisterAudioRecordingCallbackRequest) (*UnregisterAudioRecordingCallbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnregisterAudioRecordingCallback not implemented")
+}
+func (UnimplementedMediaRecorderServiceServer) mustEmbedUnimplementedMediaRecorderServiceServer() {}
+func (UnimplementedMediaRecorderServiceServer) testEmbeddedByValue()                              {}
 
-// UnsafeRecorderServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to RecorderServiceServer will
+// UnsafeMediaRecorderServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MediaRecorderServiceServer will
 // result in compilation errors.
-type UnsafeRecorderServiceServer interface {
-	mustEmbedUnimplementedRecorderServiceServer()
+type UnsafeMediaRecorderServiceServer interface {
+	mustEmbedUnimplementedMediaRecorderServiceServer()
 }
 
-func RegisterRecorderServiceServer(s grpc.ServiceRegistrar, srv RecorderServiceServer) {
-	// If the following call panics, it indicates UnimplementedRecorderServiceServer was
+func RegisterMediaRecorderServiceServer(s grpc.ServiceRegistrar, srv MediaRecorderServiceServer) {
+	// If the following call panics, it indicates UnimplementedMediaRecorderServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&RecorderService_ServiceDesc, srv)
+	s.RegisterService(&MediaRecorderService_ServiceDesc, srv)
 }
 
-func _RecorderService_SetAudioSource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetAudioSourceRequest)
+func _MediaRecorderService_GetActiveMicrophones_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetActiveMicrophonesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RecorderServiceServer).SetAudioSource(ctx, in)
+		return srv.(MediaRecorderServiceServer).GetActiveMicrophones(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RecorderService_SetAudioSource_FullMethodName,
+		FullMethod: MediaRecorderService_GetActiveMicrophones_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).SetAudioSource(ctx, req.(*SetAudioSourceRequest))
+		return srv.(MediaRecorderServiceServer).GetActiveMicrophones(ctx, req.(*GetActiveMicrophonesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RecorderService_SetVideoSource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetVideoSourceRequest)
+func _MediaRecorderService_GetActiveRecordingConfiguration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetActiveRecordingConfigurationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RecorderServiceServer).SetVideoSource(ctx, in)
+		return srv.(MediaRecorderServiceServer).GetActiveRecordingConfiguration(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RecorderService_SetVideoSource_FullMethodName,
+		FullMethod: MediaRecorderService_GetActiveRecordingConfiguration_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).SetVideoSource(ctx, req.(*SetVideoSourceRequest))
+		return srv.(MediaRecorderServiceServer).GetActiveRecordingConfiguration(ctx, req.(*GetActiveRecordingConfigurationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RecorderService_SetOutputFormat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetOutputFormatRequest)
+func _MediaRecorderService_GetLogSessionId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLogSessionIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RecorderServiceServer).SetOutputFormat(ctx, in)
+		return srv.(MediaRecorderServiceServer).GetLogSessionId(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RecorderService_SetOutputFormat_FullMethodName,
+		FullMethod: MediaRecorderService_GetLogSessionId_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).SetOutputFormat(ctx, req.(*SetOutputFormatRequest))
+		return srv.(MediaRecorderServiceServer).GetLogSessionId(ctx, req.(*GetLogSessionIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RecorderService_SetAudioEncoder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetAudioEncoderRequest)
+func _MediaRecorderService_GetMetrics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMetricsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RecorderServiceServer).SetAudioEncoder(ctx, in)
+		return srv.(MediaRecorderServiceServer).GetMetrics(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RecorderService_SetAudioEncoder_FullMethodName,
+		FullMethod: MediaRecorderService_GetMetrics_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).SetAudioEncoder(ctx, req.(*SetAudioEncoderRequest))
+		return srv.(MediaRecorderServiceServer).GetMetrics(ctx, req.(*GetMetricsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RecorderService_SetVideoEncoder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetVideoEncoderRequest)
+func _MediaRecorderService_GetPreferredDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPreferredDeviceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RecorderServiceServer).SetVideoEncoder(ctx, in)
+		return srv.(MediaRecorderServiceServer).GetPreferredDevice(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RecorderService_SetVideoEncoder_FullMethodName,
+		FullMethod: MediaRecorderService_GetPreferredDevice_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).SetVideoEncoder(ctx, req.(*SetVideoEncoderRequest))
+		return srv.(MediaRecorderServiceServer).GetPreferredDevice(ctx, req.(*GetPreferredDeviceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RecorderService_SetOutputFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetOutputFileRequest)
+func _MediaRecorderService_GetRoutedDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRoutedDeviceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RecorderServiceServer).SetOutputFile(ctx, in)
+		return srv.(MediaRecorderServiceServer).GetRoutedDevice(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RecorderService_SetOutputFile_FullMethodName,
+		FullMethod: MediaRecorderService_GetRoutedDevice_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).SetOutputFile(ctx, req.(*SetOutputFileRequest))
+		return srv.(MediaRecorderServiceServer).GetRoutedDevice(ctx, req.(*GetRoutedDeviceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RecorderService_SetVideoSize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetVideoSizeRequest)
+func _MediaRecorderService_GetRoutedDevices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRoutedDevicesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RecorderServiceServer).SetVideoSize(ctx, in)
+		return srv.(MediaRecorderServiceServer).GetRoutedDevices(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RecorderService_SetVideoSize_FullMethodName,
+		FullMethod: MediaRecorderService_GetRoutedDevices_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).SetVideoSize(ctx, req.(*SetVideoSizeRequest))
+		return srv.(MediaRecorderServiceServer).GetRoutedDevices(ctx, req.(*GetRoutedDevicesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RecorderService_SetVideoFrameRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetVideoFrameRateRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RecorderServiceServer).SetVideoFrameRate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RecorderService_SetVideoFrameRate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).SetVideoFrameRate(ctx, req.(*SetVideoFrameRateRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RecorderService_SetAudioSamplingRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetAudioSamplingRateRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RecorderServiceServer).SetAudioSamplingRate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RecorderService_SetAudioSamplingRate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).SetAudioSamplingRate(ctx, req.(*SetAudioSamplingRateRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RecorderService_SetAudioChannels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetAudioChannelsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RecorderServiceServer).SetAudioChannels(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RecorderService_SetAudioChannels_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).SetAudioChannels(ctx, req.(*SetAudioChannelsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RecorderService_SetMaxDurationMs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetMaxDurationMsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RecorderServiceServer).SetMaxDurationMs(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RecorderService_SetMaxDurationMs_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).SetMaxDurationMs(ctx, req.(*SetMaxDurationMsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RecorderService_SetMaxFileSize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetMaxFileSizeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RecorderServiceServer).SetMaxFileSize(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RecorderService_SetMaxFileSize_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).SetMaxFileSize(ctx, req.(*SetMaxFileSizeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RecorderService_Prepare_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MediaRecorderService_Prepare_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PrepareRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RecorderServiceServer).Prepare(ctx, in)
+		return srv.(MediaRecorderServiceServer).Prepare(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RecorderService_Prepare_FullMethodName,
+		FullMethod: MediaRecorderService_Prepare_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).Prepare(ctx, req.(*PrepareRequest))
+		return srv.(MediaRecorderServiceServer).Prepare(ctx, req.(*PrepareRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RecorderService_Start_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartRequest)
+func _MediaRecorderService_RegisterAudioRecordingCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterAudioRecordingCallbackRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RecorderServiceServer).Start(ctx, in)
+		return srv.(MediaRecorderServiceServer).RegisterAudioRecordingCallback(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RecorderService_Start_FullMethodName,
+		FullMethod: MediaRecorderService_RegisterAudioRecordingCallback_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).Start(ctx, req.(*StartRequest))
+		return srv.(MediaRecorderServiceServer).RegisterAudioRecordingCallback(ctx, req.(*RegisterAudioRecordingCallbackRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RecorderService_Pause_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PauseRequest)
+func _MediaRecorderService_RemoveOnRoutingChangedListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveOnRoutingChangedListenerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RecorderServiceServer).Pause(ctx, in)
+		return srv.(MediaRecorderServiceServer).RemoveOnRoutingChangedListener(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RecorderService_Pause_FullMethodName,
+		FullMethod: MediaRecorderService_RemoveOnRoutingChangedListener_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).Pause(ctx, req.(*PauseRequest))
+		return srv.(MediaRecorderServiceServer).RemoveOnRoutingChangedListener(ctx, req.(*RemoveOnRoutingChangedListenerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RecorderService_Resume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ResumeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RecorderServiceServer).Resume(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RecorderService_Resume_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).Resume(ctx, req.(*ResumeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RecorderService_Stop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StopRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RecorderServiceServer).Stop(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RecorderService_Stop_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).Stop(ctx, req.(*StopRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RecorderService_Reset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MediaRecorderService_Reset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ResetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RecorderServiceServer).Reset(ctx, in)
+		return srv.(MediaRecorderServiceServer).Reset(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RecorderService_Reset_FullMethodName,
+		FullMethod: MediaRecorderService_Reset_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).Reset(ctx, req.(*ResetRequest))
+		return srv.(MediaRecorderServiceServer).Reset(ctx, req.(*ResetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RecorderService_Release_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReleaseRequest)
+func _MediaRecorderService_SetAudioChannels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAudioChannelsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RecorderServiceServer).Release(ctx, in)
+		return srv.(MediaRecorderServiceServer).SetAudioChannels(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RecorderService_Release_FullMethodName,
+		FullMethod: MediaRecorderService_SetAudioChannels_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).Release(ctx, req.(*ReleaseRequest))
+		return srv.(MediaRecorderServiceServer).SetAudioChannels(ctx, req.(*SetAudioChannelsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RecorderService_GetMaxAmplitude_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMaxAmplitudeRequest)
+func _MediaRecorderService_SetAudioEncodingBitRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAudioEncodingBitRateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RecorderServiceServer).GetMaxAmplitude(ctx, in)
+		return srv.(MediaRecorderServiceServer).SetAudioEncodingBitRate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RecorderService_GetMaxAmplitude_FullMethodName,
+		FullMethod: MediaRecorderService_SetAudioEncodingBitRate_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).GetMaxAmplitude(ctx, req.(*GetMaxAmplitudeRequest))
+		return srv.(MediaRecorderServiceServer).SetAudioEncodingBitRate(ctx, req.(*SetAudioEncodingBitRateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RecorderService_SetOnErrorListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MediaRecorderService_SetAudioProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAudioProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetAudioProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetAudioProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetAudioProfile(ctx, req.(*SetAudioProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetAudioSamplingRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAudioSamplingRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetAudioSamplingRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetAudioSamplingRate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetAudioSamplingRate(ctx, req.(*SetAudioSamplingRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetCaptureRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetCaptureRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetCaptureRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetCaptureRate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetCaptureRate(ctx, req.(*SetCaptureRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetInputSurface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetInputSurfaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetInputSurface(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetInputSurface_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetInputSurface(ctx, req.(*SetInputSurfaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetLocation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetLocationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetLocation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetLocation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetLocation(ctx, req.(*SetLocationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetLogSessionId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetLogSessionIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetLogSessionId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetLogSessionId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetLogSessionId(ctx, req.(*SetLogSessionIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetNextOutputFile1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetNextOutputFile1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetNextOutputFile1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetNextOutputFile1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetNextOutputFile1(ctx, req.(*SetNextOutputFile1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetNextOutputFile1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetNextOutputFile1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetNextOutputFile1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetNextOutputFile1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetNextOutputFile1_1(ctx, req.(*SetNextOutputFile1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetOnErrorListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetOnErrorListenerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RecorderServiceServer).SetOnErrorListener(ctx, in)
+		return srv.(MediaRecorderServiceServer).SetOnErrorListener(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RecorderService_SetOnErrorListener_FullMethodName,
+		FullMethod: MediaRecorderService_SetOnErrorListener_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).SetOnErrorListener(ctx, req.(*SetOnErrorListenerRequest))
+		return srv.(MediaRecorderServiceServer).SetOnErrorListener(ctx, req.(*SetOnErrorListenerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RecorderService_SetOnInfoListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MediaRecorderService_SetOnInfoListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetOnInfoListenerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RecorderServiceServer).SetOnInfoListener(ctx, in)
+		return srv.(MediaRecorderServiceServer).SetOnInfoListener(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RecorderService_SetOnInfoListener_FullMethodName,
+		FullMethod: MediaRecorderService_SetOnInfoListener_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RecorderServiceServer).SetOnInfoListener(ctx, req.(*SetOnInfoListenerRequest))
+		return srv.(MediaRecorderServiceServer).SetOnInfoListener(ctx, req.(*SetOnInfoListenerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// RecorderService_ServiceDesc is the grpc.ServiceDesc for RecorderService service.
+func _MediaRecorderService_SetOrientationHint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOrientationHintRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetOrientationHint(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetOrientationHint_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetOrientationHint(ctx, req.(*SetOrientationHintRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetOutputFile1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOutputFile1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetOutputFile1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetOutputFile1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetOutputFile1(ctx, req.(*SetOutputFile1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetOutputFile1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOutputFile1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetOutputFile1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetOutputFile1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetOutputFile1_1(ctx, req.(*SetOutputFile1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetOutputFile1_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOutputFile1_2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetOutputFile1_2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetOutputFile1_2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetOutputFile1_2(ctx, req.(*SetOutputFile1_2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetPreferredDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPreferredDeviceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetPreferredDevice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetPreferredDevice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetPreferredDevice(ctx, req.(*SetPreferredDeviceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetPreferredMicrophoneDirection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPreferredMicrophoneDirectionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetPreferredMicrophoneDirection(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetPreferredMicrophoneDirection_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetPreferredMicrophoneDirection(ctx, req.(*SetPreferredMicrophoneDirectionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetPreferredMicrophoneFieldDimension_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPreferredMicrophoneFieldDimensionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetPreferredMicrophoneFieldDimension(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetPreferredMicrophoneFieldDimension_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetPreferredMicrophoneFieldDimension(ctx, req.(*SetPreferredMicrophoneFieldDimensionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetPreviewDisplay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPreviewDisplayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetPreviewDisplay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetPreviewDisplay_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetPreviewDisplay(ctx, req.(*SetPreviewDisplayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetProfile(ctx, req.(*SetProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetVideoEncodingBitRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetVideoEncodingBitRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetVideoEncodingBitRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetVideoEncodingBitRate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetVideoEncodingBitRate(ctx, req.(*SetVideoEncodingBitRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetVideoEncodingProfileLevel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetVideoEncodingProfileLevelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetVideoEncodingProfileLevel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetVideoEncodingProfileLevel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetVideoEncodingProfileLevel(ctx, req.(*SetVideoEncodingProfileLevelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_SetVideoProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetVideoProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).SetVideoProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_SetVideoProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).SetVideoProfile(ctx, req.(*SetVideoProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MediaRecorderService_UnregisterAudioRecordingCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnregisterAudioRecordingCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaRecorderServiceServer).UnregisterAudioRecordingCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaRecorderService_UnregisterAudioRecordingCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaRecorderServiceServer).UnregisterAudioRecordingCallback(ctx, req.(*UnregisterAudioRecordingCallbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// MediaRecorderService_ServiceDesc is the grpc.ServiceDesc for MediaRecorderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var RecorderService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "recorder.RecorderService",
-	HandlerType: (*RecorderServiceServer)(nil),
+var MediaRecorderService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "recorder.MediaRecorderService",
+	HandlerType: (*MediaRecorderServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SetAudioSource",
-			Handler:    _RecorderService_SetAudioSource_Handler,
+			MethodName: "GetActiveMicrophones",
+			Handler:    _MediaRecorderService_GetActiveMicrophones_Handler,
 		},
 		{
-			MethodName: "SetVideoSource",
-			Handler:    _RecorderService_SetVideoSource_Handler,
+			MethodName: "GetActiveRecordingConfiguration",
+			Handler:    _MediaRecorderService_GetActiveRecordingConfiguration_Handler,
 		},
 		{
-			MethodName: "SetOutputFormat",
-			Handler:    _RecorderService_SetOutputFormat_Handler,
+			MethodName: "GetLogSessionId",
+			Handler:    _MediaRecorderService_GetLogSessionId_Handler,
 		},
 		{
-			MethodName: "SetAudioEncoder",
-			Handler:    _RecorderService_SetAudioEncoder_Handler,
+			MethodName: "GetMetrics",
+			Handler:    _MediaRecorderService_GetMetrics_Handler,
 		},
 		{
-			MethodName: "SetVideoEncoder",
-			Handler:    _RecorderService_SetVideoEncoder_Handler,
+			MethodName: "GetPreferredDevice",
+			Handler:    _MediaRecorderService_GetPreferredDevice_Handler,
 		},
 		{
-			MethodName: "SetOutputFile",
-			Handler:    _RecorderService_SetOutputFile_Handler,
+			MethodName: "GetRoutedDevice",
+			Handler:    _MediaRecorderService_GetRoutedDevice_Handler,
 		},
 		{
-			MethodName: "SetVideoSize",
-			Handler:    _RecorderService_SetVideoSize_Handler,
-		},
-		{
-			MethodName: "SetVideoFrameRate",
-			Handler:    _RecorderService_SetVideoFrameRate_Handler,
-		},
-		{
-			MethodName: "SetAudioSamplingRate",
-			Handler:    _RecorderService_SetAudioSamplingRate_Handler,
-		},
-		{
-			MethodName: "SetAudioChannels",
-			Handler:    _RecorderService_SetAudioChannels_Handler,
-		},
-		{
-			MethodName: "SetMaxDurationMs",
-			Handler:    _RecorderService_SetMaxDurationMs_Handler,
-		},
-		{
-			MethodName: "SetMaxFileSize",
-			Handler:    _RecorderService_SetMaxFileSize_Handler,
+			MethodName: "GetRoutedDevices",
+			Handler:    _MediaRecorderService_GetRoutedDevices_Handler,
 		},
 		{
 			MethodName: "Prepare",
-			Handler:    _RecorderService_Prepare_Handler,
+			Handler:    _MediaRecorderService_Prepare_Handler,
 		},
 		{
-			MethodName: "Start",
-			Handler:    _RecorderService_Start_Handler,
+			MethodName: "RegisterAudioRecordingCallback",
+			Handler:    _MediaRecorderService_RegisterAudioRecordingCallback_Handler,
 		},
 		{
-			MethodName: "Pause",
-			Handler:    _RecorderService_Pause_Handler,
-		},
-		{
-			MethodName: "Resume",
-			Handler:    _RecorderService_Resume_Handler,
-		},
-		{
-			MethodName: "Stop",
-			Handler:    _RecorderService_Stop_Handler,
+			MethodName: "RemoveOnRoutingChangedListener",
+			Handler:    _MediaRecorderService_RemoveOnRoutingChangedListener_Handler,
 		},
 		{
 			MethodName: "Reset",
-			Handler:    _RecorderService_Reset_Handler,
+			Handler:    _MediaRecorderService_Reset_Handler,
 		},
 		{
-			MethodName: "Release",
-			Handler:    _RecorderService_Release_Handler,
+			MethodName: "SetAudioChannels",
+			Handler:    _MediaRecorderService_SetAudioChannels_Handler,
 		},
 		{
-			MethodName: "GetMaxAmplitude",
-			Handler:    _RecorderService_GetMaxAmplitude_Handler,
+			MethodName: "SetAudioEncodingBitRate",
+			Handler:    _MediaRecorderService_SetAudioEncodingBitRate_Handler,
+		},
+		{
+			MethodName: "SetAudioProfile",
+			Handler:    _MediaRecorderService_SetAudioProfile_Handler,
+		},
+		{
+			MethodName: "SetAudioSamplingRate",
+			Handler:    _MediaRecorderService_SetAudioSamplingRate_Handler,
+		},
+		{
+			MethodName: "SetCaptureRate",
+			Handler:    _MediaRecorderService_SetCaptureRate_Handler,
+		},
+		{
+			MethodName: "SetInputSurface",
+			Handler:    _MediaRecorderService_SetInputSurface_Handler,
+		},
+		{
+			MethodName: "SetLocation",
+			Handler:    _MediaRecorderService_SetLocation_Handler,
+		},
+		{
+			MethodName: "SetLogSessionId",
+			Handler:    _MediaRecorderService_SetLogSessionId_Handler,
+		},
+		{
+			MethodName: "SetNextOutputFile1",
+			Handler:    _MediaRecorderService_SetNextOutputFile1_Handler,
+		},
+		{
+			MethodName: "SetNextOutputFile1_1",
+			Handler:    _MediaRecorderService_SetNextOutputFile1_1_Handler,
 		},
 		{
 			MethodName: "SetOnErrorListener",
-			Handler:    _RecorderService_SetOnErrorListener_Handler,
+			Handler:    _MediaRecorderService_SetOnErrorListener_Handler,
 		},
 		{
 			MethodName: "SetOnInfoListener",
-			Handler:    _RecorderService_SetOnInfoListener_Handler,
+			Handler:    _MediaRecorderService_SetOnInfoListener_Handler,
+		},
+		{
+			MethodName: "SetOrientationHint",
+			Handler:    _MediaRecorderService_SetOrientationHint_Handler,
+		},
+		{
+			MethodName: "SetOutputFile1",
+			Handler:    _MediaRecorderService_SetOutputFile1_Handler,
+		},
+		{
+			MethodName: "SetOutputFile1_1",
+			Handler:    _MediaRecorderService_SetOutputFile1_1_Handler,
+		},
+		{
+			MethodName: "SetOutputFile1_2",
+			Handler:    _MediaRecorderService_SetOutputFile1_2_Handler,
+		},
+		{
+			MethodName: "SetPreferredDevice",
+			Handler:    _MediaRecorderService_SetPreferredDevice_Handler,
+		},
+		{
+			MethodName: "SetPreferredMicrophoneDirection",
+			Handler:    _MediaRecorderService_SetPreferredMicrophoneDirection_Handler,
+		},
+		{
+			MethodName: "SetPreferredMicrophoneFieldDimension",
+			Handler:    _MediaRecorderService_SetPreferredMicrophoneFieldDimension_Handler,
+		},
+		{
+			MethodName: "SetPreviewDisplay",
+			Handler:    _MediaRecorderService_SetPreviewDisplay_Handler,
+		},
+		{
+			MethodName: "SetProfile",
+			Handler:    _MediaRecorderService_SetProfile_Handler,
+		},
+		{
+			MethodName: "SetVideoEncodingBitRate",
+			Handler:    _MediaRecorderService_SetVideoEncodingBitRate_Handler,
+		},
+		{
+			MethodName: "SetVideoEncodingProfileLevel",
+			Handler:    _MediaRecorderService_SetVideoEncodingProfileLevel_Handler,
+		},
+		{
+			MethodName: "SetVideoProfile",
+			Handler:    _MediaRecorderService_SetVideoProfile_Handler,
+		},
+		{
+			MethodName: "UnregisterAudioRecordingCallback",
+			Handler:    _MediaRecorderService_UnregisterAudioRecordingCallback_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/recorder/recorder.proto",
-}
-
-const (
-	OnErrorListenerService_SubscribeOnErrorListener_FullMethodName = "/recorder.OnErrorListenerService/SubscribeOnErrorListener"
-)
-
-// OnErrorListenerServiceClient is the client API for OnErrorListenerService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type OnErrorListenerServiceClient interface {
-	// Server-streaming events from android.media.MediaRecorder$OnErrorListener
-	SubscribeOnErrorListener(ctx context.Context, in *SubscribeOnErrorListenerRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[OnErrorListenerEvent], error)
-}
-
-type onErrorListenerServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewOnErrorListenerServiceClient(cc grpc.ClientConnInterface) OnErrorListenerServiceClient {
-	return &onErrorListenerServiceClient{cc}
-}
-
-func (c *onErrorListenerServiceClient) SubscribeOnErrorListener(ctx context.Context, in *SubscribeOnErrorListenerRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[OnErrorListenerEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &OnErrorListenerService_ServiceDesc.Streams[0], OnErrorListenerService_SubscribeOnErrorListener_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[SubscribeOnErrorListenerRequest, OnErrorListenerEvent]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type OnErrorListenerService_SubscribeOnErrorListenerClient = grpc.ServerStreamingClient[OnErrorListenerEvent]
-
-// OnErrorListenerServiceServer is the server API for OnErrorListenerService service.
-// All implementations must embed UnimplementedOnErrorListenerServiceServer
-// for forward compatibility.
-type OnErrorListenerServiceServer interface {
-	// Server-streaming events from android.media.MediaRecorder$OnErrorListener
-	SubscribeOnErrorListener(*SubscribeOnErrorListenerRequest, grpc.ServerStreamingServer[OnErrorListenerEvent]) error
-	mustEmbedUnimplementedOnErrorListenerServiceServer()
-}
-
-// UnimplementedOnErrorListenerServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedOnErrorListenerServiceServer struct{}
-
-func (UnimplementedOnErrorListenerServiceServer) SubscribeOnErrorListener(*SubscribeOnErrorListenerRequest, grpc.ServerStreamingServer[OnErrorListenerEvent]) error {
-	return status.Error(codes.Unimplemented, "method SubscribeOnErrorListener not implemented")
-}
-func (UnimplementedOnErrorListenerServiceServer) mustEmbedUnimplementedOnErrorListenerServiceServer() {
-}
-func (UnimplementedOnErrorListenerServiceServer) testEmbeddedByValue() {}
-
-// UnsafeOnErrorListenerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to OnErrorListenerServiceServer will
-// result in compilation errors.
-type UnsafeOnErrorListenerServiceServer interface {
-	mustEmbedUnimplementedOnErrorListenerServiceServer()
-}
-
-func RegisterOnErrorListenerServiceServer(s grpc.ServiceRegistrar, srv OnErrorListenerServiceServer) {
-	// If the following call panics, it indicates UnimplementedOnErrorListenerServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&OnErrorListenerService_ServiceDesc, srv)
-}
-
-func _OnErrorListenerService_SubscribeOnErrorListener_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeOnErrorListenerRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(OnErrorListenerServiceServer).SubscribeOnErrorListener(m, &grpc.GenericServerStream[SubscribeOnErrorListenerRequest, OnErrorListenerEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type OnErrorListenerService_SubscribeOnErrorListenerServer = grpc.ServerStreamingServer[OnErrorListenerEvent]
-
-// OnErrorListenerService_ServiceDesc is the grpc.ServiceDesc for OnErrorListenerService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var OnErrorListenerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "recorder.OnErrorListenerService",
-	HandlerType: (*OnErrorListenerServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "SubscribeOnErrorListener",
-			Handler:       _OnErrorListenerService_SubscribeOnErrorListener_Handler,
-			ServerStreams: true,
-		},
-	},
-	Metadata: "proto/recorder/recorder.proto",
-}
-
-const (
-	OnInfoListenerService_SubscribeOnInfoListener_FullMethodName = "/recorder.OnInfoListenerService/SubscribeOnInfoListener"
-)
-
-// OnInfoListenerServiceClient is the client API for OnInfoListenerService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type OnInfoListenerServiceClient interface {
-	// Server-streaming events from android.media.MediaRecorder$OnInfoListener
-	SubscribeOnInfoListener(ctx context.Context, in *SubscribeOnInfoListenerRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[OnInfoListenerEvent], error)
-}
-
-type onInfoListenerServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewOnInfoListenerServiceClient(cc grpc.ClientConnInterface) OnInfoListenerServiceClient {
-	return &onInfoListenerServiceClient{cc}
-}
-
-func (c *onInfoListenerServiceClient) SubscribeOnInfoListener(ctx context.Context, in *SubscribeOnInfoListenerRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[OnInfoListenerEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &OnInfoListenerService_ServiceDesc.Streams[0], OnInfoListenerService_SubscribeOnInfoListener_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[SubscribeOnInfoListenerRequest, OnInfoListenerEvent]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type OnInfoListenerService_SubscribeOnInfoListenerClient = grpc.ServerStreamingClient[OnInfoListenerEvent]
-
-// OnInfoListenerServiceServer is the server API for OnInfoListenerService service.
-// All implementations must embed UnimplementedOnInfoListenerServiceServer
-// for forward compatibility.
-type OnInfoListenerServiceServer interface {
-	// Server-streaming events from android.media.MediaRecorder$OnInfoListener
-	SubscribeOnInfoListener(*SubscribeOnInfoListenerRequest, grpc.ServerStreamingServer[OnInfoListenerEvent]) error
-	mustEmbedUnimplementedOnInfoListenerServiceServer()
-}
-
-// UnimplementedOnInfoListenerServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedOnInfoListenerServiceServer struct{}
-
-func (UnimplementedOnInfoListenerServiceServer) SubscribeOnInfoListener(*SubscribeOnInfoListenerRequest, grpc.ServerStreamingServer[OnInfoListenerEvent]) error {
-	return status.Error(codes.Unimplemented, "method SubscribeOnInfoListener not implemented")
-}
-func (UnimplementedOnInfoListenerServiceServer) mustEmbedUnimplementedOnInfoListenerServiceServer() {}
-func (UnimplementedOnInfoListenerServiceServer) testEmbeddedByValue()                               {}
-
-// UnsafeOnInfoListenerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to OnInfoListenerServiceServer will
-// result in compilation errors.
-type UnsafeOnInfoListenerServiceServer interface {
-	mustEmbedUnimplementedOnInfoListenerServiceServer()
-}
-
-func RegisterOnInfoListenerServiceServer(s grpc.ServiceRegistrar, srv OnInfoListenerServiceServer) {
-	// If the following call panics, it indicates UnimplementedOnInfoListenerServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&OnInfoListenerService_ServiceDesc, srv)
-}
-
-func _OnInfoListenerService_SubscribeOnInfoListener_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeOnInfoListenerRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(OnInfoListenerServiceServer).SubscribeOnInfoListener(m, &grpc.GenericServerStream[SubscribeOnInfoListenerRequest, OnInfoListenerEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type OnInfoListenerService_SubscribeOnInfoListenerServer = grpc.ServerStreamingServer[OnInfoListenerEvent]
-
-// OnInfoListenerService_ServiceDesc is the grpc.ServiceDesc for OnInfoListenerService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var OnInfoListenerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "recorder.OnInfoListenerService",
-	HandlerType: (*OnInfoListenerServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "SubscribeOnInfoListener",
-			Handler:       _OnInfoListenerService_SubscribeOnInfoListener_Handler,
-			ServerStreams: true,
-		},
-	},
 	Metadata: "proto/recorder/recorder.proto",
 }

@@ -1,0 +1,77 @@
+package: keyguard
+go_import: github.com/xaionaro-go/jni/os/keyguard
+classes:
+    - java_class: android.app.KeyguardManager
+      go_type: keyguardManager
+      obtain: system_service
+      service_name: keyguard
+      close: true
+      methods:
+        - java_method: addKeyguardLockedStateListener
+          go_name: AddKeyguardLockedStateListener
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.app.KeyguardManager$KeyguardLockedStateListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: createConfirmDeviceCredentialIntent
+          go_name: CreateConfirmDeviceCredentialIntent
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: exitKeyguardSecurely
+          go_name: ExitKeyguardSecurely
+          params:
+            - java_type: android.app.KeyguardManager$OnKeyguardExitResult
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: inKeyguardRestrictedInputMode
+          go_name: InKeyguardRestrictedInputMode
+          returns: boolean
+          error: true
+        - java_method: isDeviceLocked
+          go_name: IsDeviceLocked
+          returns: boolean
+          error: true
+        - java_method: isDeviceSecure
+          go_name: IsDeviceSecure
+          returns: boolean
+          error: true
+        - java_method: isKeyguardLocked
+          go_name: IsKeyguardLocked
+          returns: boolean
+          error: true
+        - java_method: isKeyguardSecure
+          go_name: IsKeyguardSecure
+          returns: boolean
+          error: true
+        - java_method: newKeyguardLock
+          go_name: NewKeyguardLock
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.KeyguardManager$KeyguardLock
+          error: true
+        - java_method: removeKeyguardLockedStateListener
+          go_name: RemoveKeyguardLockedStateListener
+          params:
+            - java_type: android.app.KeyguardManager$KeyguardLockedStateListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: requestDismissKeyguard
+          go_name: RequestDismissKeyguard
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+            - java_type: android.app.KeyguardManager$KeyguardDismissCallback
+              go_name: arg1
+          returns: void
+          error: true

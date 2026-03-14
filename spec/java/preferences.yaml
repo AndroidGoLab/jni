@@ -1,0 +1,7 @@
+package: preferences
+go_import: github.com/xaionaro-go/jni/content/preferences
+classes:
+    - java_class: android.content.SharedPreferences
+      go_type: sharedPreferences
+    - java_class: android.content.SharedPreferences$Editor
+      go_type: sharedPreferencesEditor

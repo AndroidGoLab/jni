@@ -13,20 +13,23 @@ var displayCmd = &cobra.Command{
 	Short: "display service operations",
 }
 
-var displayWindowManagerCmd = &cobra.Command{
-	Use:   "window-manager",
-	Short: "WindowManagerService operations",
+var displayDisplayMetricsCmd = &cobra.Command{
+	Use:   "display-metrics",
+	Short: "DisplayMetricsService operations",
 }
 
-var displayWindowManagerGetDefaultDisplayCmd = &cobra.Command{
-	Use:   "get-default-display",
-	Short: "GetDefaultDisplay RPC",
+var displayDisplayMetricsEquals1Cmd = &cobra.Command{
+	Use:   "equals1",
+	Short: "Equals1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewWindowManagerServiceClient(grpcConn)
-		req := &pb.GetDefaultDisplayRequest{}
-		resp, err := client.GetDefaultDisplay(ctx, req)
+		client := pb.NewDisplayMetricsServiceClient(grpcConn)
+		req := &pb.Equals1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.Equals1(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -34,20 +37,18 @@ var displayWindowManagerGetDefaultDisplayCmd = &cobra.Command{
 	},
 }
 
-var displayDisplayCmd = &cobra.Command{
-	Use:   "display",
-	Short: "DisplayService operations",
-}
-
-var displayDisplayGetRotationCmd = &cobra.Command{
-	Use:   "get-rotation",
-	Short: "GetRotation RPC",
+var displayDisplayMetricsEquals1_1Cmd = &cobra.Command{
+	Use:   "equals1_1",
+	Short: "Equals1_1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewDisplayServiceClient(grpcConn)
-		req := &pb.GetRotationRequest{}
-		resp, err := client.GetRotation(ctx, req)
+		client := pb.NewDisplayMetricsServiceClient(grpcConn)
+		req := &pb.Equals1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.Equals1_1(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -55,15 +56,15 @@ var displayDisplayGetRotationCmd = &cobra.Command{
 	},
 }
 
-var displayDisplayGetRefreshRateCmd = &cobra.Command{
-	Use:   "get-refresh-rate",
-	Short: "GetRefreshRate RPC",
+var displayDisplayMetricsHashCodeCmd = &cobra.Command{
+	Use:   "hash-code",
+	Short: "HashCode RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewDisplayServiceClient(grpcConn)
-		req := &pb.GetRefreshRateRequest{}
-		resp, err := client.GetRefreshRate(ctx, req)
+		client := pb.NewDisplayMetricsServiceClient(grpcConn)
+		req := &pb.HashCodeRequest{}
+		resp, err := client.HashCode(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -71,18 +72,18 @@ var displayDisplayGetRefreshRateCmd = &cobra.Command{
 	},
 }
 
-var displayDisplayGetMetricsCmd = &cobra.Command{
-	Use:   "get-metrics",
-	Short: "GetMetrics RPC",
+var displayDisplayMetricsSetToCmd = &cobra.Command{
+	Use:   "set-to",
+	Short: "SetTo RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewDisplayServiceClient(grpcConn)
-		req := &pb.GetMetricsRequest{}
-		if v, err := cmd.Flags().GetInt64("metrics"); err == nil {
-			req.Metrics = v
+		client := pb.NewDisplayMetricsServiceClient(grpcConn)
+		req := &pb.SetToRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		resp, err := client.GetMetrics(ctx, req)
+		resp, err := client.SetTo(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -90,18 +91,31 @@ var displayDisplayGetMetricsCmd = &cobra.Command{
 	},
 }
 
-var displayDisplayGetRealMetricsCmd = &cobra.Command{
-	Use:   "get-real-metrics",
-	Short: "GetRealMetrics RPC",
+var displayDisplayMetricsSetToDefaultsCmd = &cobra.Command{
+	Use:   "set-to-defaults",
+	Short: "SetToDefaults RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewDisplayServiceClient(grpcConn)
-		req := &pb.GetRealMetricsRequest{}
-		if v, err := cmd.Flags().GetInt64("metrics"); err == nil {
-			req.Metrics = v
+		client := pb.NewDisplayMetricsServiceClient(grpcConn)
+		req := &pb.SetToDefaultsRequest{}
+		resp, err := client.SetToDefaults(ctx, req)
+		if err != nil {
+			return err
 		}
-		resp, err := client.GetRealMetrics(ctx, req)
+		return printProtoMessage(resp)
+	},
+}
+
+var displayDisplayMetricsToStringCmd = &cobra.Command{
+	Use:   "to-string",
+	Short: "ToString RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDisplayMetricsServiceClient(grpcConn)
+		req := &pb.ToStringRequest{}
+		resp, err := client.ToString(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -110,14 +124,15 @@ var displayDisplayGetRealMetricsCmd = &cobra.Command{
 }
 
 func init() {
-	displayWindowManagerCmd.AddCommand(displayWindowManagerGetDefaultDisplayCmd)
-	displayCmd.AddCommand(displayWindowManagerCmd)
-	displayDisplayCmd.AddCommand(displayDisplayGetRotationCmd)
-	displayDisplayCmd.AddCommand(displayDisplayGetRefreshRateCmd)
-	displayDisplayGetMetricsCmd.Flags().Int64("metrics", 0, "metrics (int64)")
-	displayDisplayCmd.AddCommand(displayDisplayGetMetricsCmd)
-	displayDisplayGetRealMetricsCmd.Flags().Int64("metrics", 0, "metrics (int64)")
-	displayDisplayCmd.AddCommand(displayDisplayGetRealMetricsCmd)
-	displayCmd.AddCommand(displayDisplayCmd)
+	displayDisplayMetricsEquals1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	displayDisplayMetricsCmd.AddCommand(displayDisplayMetricsEquals1Cmd)
+	displayDisplayMetricsEquals1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	displayDisplayMetricsCmd.AddCommand(displayDisplayMetricsEquals1_1Cmd)
+	displayDisplayMetricsCmd.AddCommand(displayDisplayMetricsHashCodeCmd)
+	displayDisplayMetricsSetToCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	displayDisplayMetricsCmd.AddCommand(displayDisplayMetricsSetToCmd)
+	displayDisplayMetricsCmd.AddCommand(displayDisplayMetricsSetToDefaultsCmd)
+	displayDisplayMetricsCmd.AddCommand(displayDisplayMetricsToStringCmd)
+	displayCmd.AddCommand(displayDisplayMetricsCmd)
 	rootCmd.AddCommand(displayCmd)
 }

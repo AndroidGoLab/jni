@@ -18,15 +18,15 @@ var batteryBatteryManagerCmd = &cobra.Command{
 	Short: "BatteryManagerService operations",
 }
 
-var batteryBatteryManagerGetLevelRawCmd = &cobra.Command{
-	Use:   "get-level-raw",
-	Short: "GetLevelRaw RPC",
+var batteryBatteryManagerComputeChargeTimeRemainingCmd = &cobra.Command{
+	Use:   "compute-charge-time-remaining",
+	Short: "ComputeChargeTimeRemaining RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewBatteryManagerServiceClient(grpcConn)
-		req := &pb.GetLevelRawRequest{}
-		resp, err := client.GetLevelRaw(ctx, req)
+		req := &pb.ComputeChargeTimeRemainingRequest{}
+		resp, err := client.ComputeChargeTimeRemaining(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -34,15 +34,18 @@ var batteryBatteryManagerGetLevelRawCmd = &cobra.Command{
 	},
 }
 
-var batteryBatteryManagerGetScaleRawCmd = &cobra.Command{
-	Use:   "get-scale-raw",
-	Short: "GetScaleRaw RPC",
+var batteryBatteryManagerGetIntPropertyCmd = &cobra.Command{
+	Use:   "get-int-property",
+	Short: "GetIntProperty RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewBatteryManagerServiceClient(grpcConn)
-		req := &pb.GetScaleRawRequest{}
-		resp, err := client.GetScaleRaw(ctx, req)
+		req := &pb.GetIntPropertyRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetIntProperty(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -50,15 +53,18 @@ var batteryBatteryManagerGetScaleRawCmd = &cobra.Command{
 	},
 }
 
-var batteryBatteryManagerGetStatusCmd = &cobra.Command{
-	Use:   "get-status",
-	Short: "GetStatus RPC",
+var batteryBatteryManagerGetLongPropertyCmd = &cobra.Command{
+	Use:   "get-long-property",
+	Short: "GetLongProperty RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewBatteryManagerServiceClient(grpcConn)
-		req := &pb.GetStatusRequest{}
-		resp, err := client.GetStatus(ctx, req)
+		req := &pb.GetLongPropertyRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetLongProperty(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -66,15 +72,18 @@ var batteryBatteryManagerGetStatusCmd = &cobra.Command{
 	},
 }
 
-var batteryBatteryManagerGetTemperatureRawCmd = &cobra.Command{
-	Use:   "get-temperature-raw",
-	Short: "GetTemperatureRaw RPC",
+var batteryBatteryManagerGetStringPropertyCmd = &cobra.Command{
+	Use:   "get-string-property",
+	Short: "GetStringProperty RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewBatteryManagerServiceClient(grpcConn)
-		req := &pb.GetTemperatureRawRequest{}
-		resp, err := client.GetTemperatureRaw(ctx, req)
+		req := &pb.GetStringPropertyRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetStringProperty(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -82,31 +91,15 @@ var batteryBatteryManagerGetTemperatureRawCmd = &cobra.Command{
 	},
 }
 
-var batteryBatteryManagerGetVoltageRawCmd = &cobra.Command{
-	Use:   "get-voltage-raw",
-	Short: "GetVoltageRaw RPC",
+var batteryBatteryManagerIsChargingCmd = &cobra.Command{
+	Use:   "is-charging",
+	Short: "IsCharging RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewBatteryManagerServiceClient(grpcConn)
-		req := &pb.GetVoltageRawRequest{}
-		resp, err := client.GetVoltageRaw(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var batteryBatteryManagerGetPluggedCmd = &cobra.Command{
-	Use:   "get-plugged",
-	Short: "GetPlugged RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBatteryManagerServiceClient(grpcConn)
-		req := &pb.GetPluggedRequest{}
-		resp, err := client.GetPlugged(ctx, req)
+		req := &pb.IsChargingRequest{}
+		resp, err := client.IsCharging(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -115,12 +108,14 @@ var batteryBatteryManagerGetPluggedCmd = &cobra.Command{
 }
 
 func init() {
-	batteryBatteryManagerCmd.AddCommand(batteryBatteryManagerGetLevelRawCmd)
-	batteryBatteryManagerCmd.AddCommand(batteryBatteryManagerGetScaleRawCmd)
-	batteryBatteryManagerCmd.AddCommand(batteryBatteryManagerGetStatusCmd)
-	batteryBatteryManagerCmd.AddCommand(batteryBatteryManagerGetTemperatureRawCmd)
-	batteryBatteryManagerCmd.AddCommand(batteryBatteryManagerGetVoltageRawCmd)
-	batteryBatteryManagerCmd.AddCommand(batteryBatteryManagerGetPluggedCmd)
+	batteryBatteryManagerCmd.AddCommand(batteryBatteryManagerComputeChargeTimeRemainingCmd)
+	batteryBatteryManagerGetIntPropertyCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	batteryBatteryManagerCmd.AddCommand(batteryBatteryManagerGetIntPropertyCmd)
+	batteryBatteryManagerGetLongPropertyCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	batteryBatteryManagerCmd.AddCommand(batteryBatteryManagerGetLongPropertyCmd)
+	batteryBatteryManagerGetStringPropertyCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	batteryBatteryManagerCmd.AddCommand(batteryBatteryManagerGetStringPropertyCmd)
+	batteryBatteryManagerCmd.AddCommand(batteryBatteryManagerIsChargingCmd)
 	batteryCmd.AddCommand(batteryBatteryManagerCmd)
 	rootCmd.AddCommand(batteryCmd)
 }

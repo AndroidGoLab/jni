@@ -1,0 +1,129 @@
+package: environment
+go_import: github.com/xaionaro-go/jni/os/environment
+classes:
+    - java_class: android.os.Environment
+      go_type: environment
+      static_methods:
+        - java_method: getDataDirectory
+          go_name: GetDataDirectory
+          returns: java.io.File
+          error: true
+        - java_method: getDownloadCacheDirectory
+          go_name: GetDownloadCacheDirectory
+          returns: java.io.File
+          error: true
+        - java_method: getExternalStorageDirectory
+          go_name: GetExternalStorageDirectory
+          returns: java.io.File
+          error: true
+        - java_method: getExternalStoragePublicDirectory
+          go_name: GetExternalStoragePublicDirectory
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.io.File
+          error: true
+        - java_method: getExternalStorageState
+          go_name: GetExternalStorageState0
+          returns: String
+          error: true
+        - java_method: getExternalStorageState
+          go_name: GetExternalStorageState1_1
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getRootDirectory
+          go_name: GetRootDirectory
+          returns: java.io.File
+          error: true
+        - java_method: getStorageDirectory
+          go_name: GetStorageDirectory
+          returns: java.io.File
+          error: true
+        - java_method: getStorageState
+          go_name: GetStorageState
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: isExternalStorageEmulated
+          go_name: IsExternalStorageEmulated0
+          returns: boolean
+          error: true
+        - java_method: isExternalStorageEmulated
+          go_name: IsExternalStorageEmulated1_1
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isExternalStorageLegacy
+          go_name: IsExternalStorageLegacy0
+          returns: boolean
+          error: true
+        - java_method: isExternalStorageLegacy
+          go_name: IsExternalStorageLegacy1_1
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isExternalStorageManager
+          go_name: IsExternalStorageManager0
+          returns: boolean
+          error: true
+        - java_method: isExternalStorageManager
+          go_name: IsExternalStorageManager1_1
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isExternalStorageRemovable
+          go_name: IsExternalStorageRemovable0
+          returns: boolean
+          error: true
+        - java_method: isExternalStorageRemovable
+          go_name: IsExternalStorageRemovable1_1
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: boolean
+          error: true
+constants:
+    - go_name: MediaBadRemoval
+      value: '""'
+      go_type: string
+    - go_name: MediaChecking
+      value: '""'
+      go_type: string
+    - go_name: MediaEjecting
+      value: '""'
+      go_type: string
+    - go_name: MediaMounted
+      value: '""'
+      go_type: string
+    - go_name: MediaMountedReadOnly
+      value: '""'
+      go_type: string
+    - go_name: MediaNofs
+      value: '""'
+      go_type: string
+    - go_name: MediaRemoved
+      value: '""'
+      go_type: string
+    - go_name: MediaShared
+      value: '""'
+      go_type: string
+    - go_name: MediaUnknown
+      value: '""'
+      go_type: string
+    - go_name: MediaUnmountable
+      value: '""'
+      go_type: string
+    - go_name: MediaUnmounted
+      value: '""'
+      go_type: string

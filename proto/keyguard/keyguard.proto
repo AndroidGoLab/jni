@@ -6,17 +6,34 @@ package keyguard;
 
 option go_package = "github.com/xaionaro-go/jni/proto/keyguard";
 
-message IsKeyguardLockedRequest {
+message AddKeyguardLockedStateListenerRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
 }
 
-message IsKeyguardLockedResponse {
-  bool result = 1;
+message AddKeyguardLockedStateListenerResponse {
 }
 
-message IsKeyguardSecureRequest {
+message CreateConfirmDeviceCredentialIntentRequest {
+  string arg0 = 1;
+  string arg1 = 2;
 }
 
-message IsKeyguardSecureResponse {
+message CreateConfirmDeviceCredentialIntentResponse {
+  int64 result = 1;
+}
+
+message ExitKeyguardSecurelyRequest {
+  int64 arg0 = 1;
+}
+
+message ExitKeyguardSecurelyResponse {
+}
+
+message InKeyguardRestrictedInputModeRequest {
+}
+
+message InKeyguardRestrictedInputModeResponse {
   bool result = 1;
 }
 
@@ -34,67 +51,53 @@ message IsDeviceSecureResponse {
   bool result = 1;
 }
 
-message RequestDismissKeyguardRawRequest {
-  int64 activity = 1;
-  int64 callback = 2;
+message IsKeyguardLockedRequest {
 }
 
-message RequestDismissKeyguardRawResponse {
+message IsKeyguardLockedResponse {
+  bool result = 1;
 }
 
-message CreateConfirmDeviceCredentialIntentRawRequest {
-  int64 title = 1;
-  int64 description = 2;
+message IsKeyguardSecureRequest {
 }
 
-message CreateConfirmDeviceCredentialIntentRawResponse {
+message IsKeyguardSecureResponse {
+  bool result = 1;
+}
+
+message NewKeyguardLockRequest {
+  string arg0 = 1;
+}
+
+message NewKeyguardLockResponse {
   int64 result = 1;
 }
 
-message KeyguardDismissCallbackOnDismissSucceededEvent {
-}
-
-message KeyguardDismissCallbackOnDismissErrorEvent {
-}
-
-message KeyguardDismissCallbackOnDismissCancelledEvent {
-}
-
-message KeyguardDismissCallbackEvent {
-  optional KeyguardDismissCallbackOnDismissSucceededEvent on_dismiss_succeeded = 1;
-  optional KeyguardDismissCallbackOnDismissErrorEvent on_dismiss_error = 2;
-  optional KeyguardDismissCallbackOnDismissCancelledEvent on_dismiss_cancelled = 3;
-}
-
-message SubscribeKeyguardDismissCallbackRequest {
-}
-
-message KeyguardLockedStateListenerOnLockedStateChangedEvent {
+message RemoveKeyguardLockedStateListenerRequest {
   int64 arg0 = 1;
 }
 
-message KeyguardLockedStateListenerEvent {
-  optional KeyguardLockedStateListenerOnLockedStateChangedEvent on_locked_state_changed = 1;
+message RemoveKeyguardLockedStateListenerResponse {
 }
 
-message SubscribeKeyguardLockedStateListenerRequest {
+message RequestDismissKeyguardRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
 }
 
-service ManagerService {
-  rpc IsKeyguardLocked (IsKeyguardLockedRequest) returns (IsKeyguardLockedResponse);
-  rpc IsKeyguardSecure (IsKeyguardSecureRequest) returns (IsKeyguardSecureResponse);
+message RequestDismissKeyguardResponse {
+}
+
+service KeyguardManagerService {
+  rpc AddKeyguardLockedStateListener (AddKeyguardLockedStateListenerRequest) returns (AddKeyguardLockedStateListenerResponse);
+  rpc CreateConfirmDeviceCredentialIntent (CreateConfirmDeviceCredentialIntentRequest) returns (CreateConfirmDeviceCredentialIntentResponse);
+  rpc ExitKeyguardSecurely (ExitKeyguardSecurelyRequest) returns (ExitKeyguardSecurelyResponse);
+  rpc InKeyguardRestrictedInputMode (InKeyguardRestrictedInputModeRequest) returns (InKeyguardRestrictedInputModeResponse);
   rpc IsDeviceLocked (IsDeviceLockedRequest) returns (IsDeviceLockedResponse);
   rpc IsDeviceSecure (IsDeviceSecureRequest) returns (IsDeviceSecureResponse);
-  rpc RequestDismissKeyguardRaw (RequestDismissKeyguardRawRequest) returns (RequestDismissKeyguardRawResponse);
-  rpc CreateConfirmDeviceCredentialIntentRaw (CreateConfirmDeviceCredentialIntentRawRequest) returns (CreateConfirmDeviceCredentialIntentRawResponse);
-}
-
-service KeyguardDismissCallbackService {
-  // Server-streaming events from android.app.KeyguardManager.KeyguardDismissCallback
-  rpc SubscribeKeyguardDismissCallback (SubscribeKeyguardDismissCallbackRequest) returns (stream KeyguardDismissCallbackEvent);
-}
-
-service KeyguardLockedStateListenerService {
-  // Server-streaming events from android.app.KeyguardManager.KeyguardLockedStateListener
-  rpc SubscribeKeyguardLockedStateListener (SubscribeKeyguardLockedStateListenerRequest) returns (stream KeyguardLockedStateListenerEvent);
+  rpc IsKeyguardLocked (IsKeyguardLockedRequest) returns (IsKeyguardLockedResponse);
+  rpc IsKeyguardSecure (IsKeyguardSecureRequest) returns (IsKeyguardSecureResponse);
+  rpc NewKeyguardLock (NewKeyguardLockRequest) returns (NewKeyguardLockResponse);
+  rpc RemoveKeyguardLockedStateListener (RemoveKeyguardLockedStateListenerRequest) returns (RemoveKeyguardLockedStateListenerResponse);
+  rpc RequestDismissKeyguard (RequestDismissKeyguardRequest) returns (RequestDismissKeyguardResponse);
 }

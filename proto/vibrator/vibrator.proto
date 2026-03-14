@@ -6,37 +6,142 @@ package vibrator;
 
 option go_package = "github.com/xaionaro-go/jni/proto/vibrator";
 
-message HasVibratorRequest {
+message AreEffectsSupportedRequest {
+  int64 arg0 = 1;
 }
 
-message HasVibratorResponse {
+message AreEffectsSupportedResponse {
+  int64 result = 1;
+}
+
+message AreEnvelopeEffectsSupportedRequest {
+}
+
+message AreEnvelopeEffectsSupportedResponse {
   bool result = 1;
 }
 
-message VibrateMsRequest {
-  int64 milliseconds = 1;
+message ArePrimitivesSupportedRequest {
+  int64 arg0 = 1;
 }
 
-message VibrateMsResponse {
+message ArePrimitivesSupportedResponse {
+  int64 result = 1;
 }
 
-message VibratePatternMsRequest {
-  int64 pattern = 1;
-  int32 repeat = 2;
+message GetEnvelopeEffectInfoRequest {
 }
 
-message VibratePatternMsResponse {
+message GetEnvelopeEffectInfoResponse {
+  int64 result = 1;
 }
 
-message CancelRequest {
+message GetFrequencyProfileRequest {
 }
 
-message CancelResponse {
+message GetFrequencyProfileResponse {
+  int64 result = 1;
+}
+
+message GetIdRequest {
+}
+
+message GetIdResponse {
+  int32 result = 1;
+}
+
+message GetPrimitiveDurationsRequest {
+  int64 arg0 = 1;
+}
+
+message GetPrimitiveDurationsResponse {
+  int64 result = 1;
+}
+
+message GetQFactorRequest {
+}
+
+message GetQFactorResponse {
+  float result = 1;
+}
+
+message GetResonantFrequencyRequest {
+}
+
+message GetResonantFrequencyResponse {
+  float result = 1;
+}
+
+message Vibrate1Request {
+  int64 arg0 = 1;
+}
+
+message Vibrate1Response {
+}
+
+message Vibrate2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message Vibrate2_1Response {
+}
+
+message Vibrate2_2Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message Vibrate2_2Response {
+}
+
+message Vibrate1_3Request {
+  int64 arg0 = 1;
+}
+
+message Vibrate1_3Response {
+}
+
+message Vibrate2_4Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message Vibrate2_4Response {
+}
+
+message Vibrate2_5Request {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message Vibrate2_5Response {
+}
+
+message Vibrate3_6Request {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message Vibrate3_6Response {
 }
 
 service VibratorService {
-  rpc HasVibrator (HasVibratorRequest) returns (HasVibratorResponse);
-  rpc VibrateMs (VibrateMsRequest) returns (VibrateMsResponse);
-  rpc VibratePatternMs (VibratePatternMsRequest) returns (VibratePatternMsResponse);
-  rpc Cancel (CancelRequest) returns (CancelResponse);
+  rpc AreEffectsSupported (AreEffectsSupportedRequest) returns (AreEffectsSupportedResponse);
+  rpc AreEnvelopeEffectsSupported (AreEnvelopeEffectsSupportedRequest) returns (AreEnvelopeEffectsSupportedResponse);
+  rpc ArePrimitivesSupported (ArePrimitivesSupportedRequest) returns (ArePrimitivesSupportedResponse);
+  rpc GetEnvelopeEffectInfo (GetEnvelopeEffectInfoRequest) returns (GetEnvelopeEffectInfoResponse);
+  rpc GetFrequencyProfile (GetFrequencyProfileRequest) returns (GetFrequencyProfileResponse);
+  rpc GetId (GetIdRequest) returns (GetIdResponse);
+  rpc GetPrimitiveDurations (GetPrimitiveDurationsRequest) returns (GetPrimitiveDurationsResponse);
+  rpc GetQFactor (GetQFactorRequest) returns (GetQFactorResponse);
+  rpc GetResonantFrequency (GetResonantFrequencyRequest) returns (GetResonantFrequencyResponse);
+  rpc Vibrate1 (Vibrate1Request) returns (Vibrate1Response);
+  rpc Vibrate2_1 (Vibrate2_1Request) returns (Vibrate2_1Response);
+  rpc Vibrate2_2 (Vibrate2_2Request) returns (Vibrate2_2Response);
+  rpc Vibrate1_3 (Vibrate1_3Request) returns (Vibrate1_3Response);
+  rpc Vibrate2_4 (Vibrate2_4Request) returns (Vibrate2_4Response);
+  rpc Vibrate2_5 (Vibrate2_5Request) returns (Vibrate2_5Response);
+  rpc Vibrate3_6 (Vibrate3_6Request) returns (Vibrate3_6Response);
 }

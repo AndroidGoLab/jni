@@ -79,9 +79,9 @@ func GenerateSpec(
 	return spec, nil
 }
 
-// GenerateFromRefDir scans ref/ for .class files, groups them by Android
-// package, and generates YAML specs. extraClassPath is appended to the
-// javap -cp argument (e.g. android.jar for full type resolution).
+// GenerateFromRefDir scans ref/ for .class files and generates one YAML
+// spec per top-level class (inner classes are grouped with their parent).
+// extraClassPath is appended to the javap -cp argument.
 func GenerateFromRefDir(
 	refDir string,
 	extraClassPath string,
@@ -102,65 +102,84 @@ func GenerateFromRefDir(
 		return fmt.Errorf("walk %s: %w", refDir, err)
 	}
 
-	// Group class files by output package.
+	// Separate top-level classes from inner classes.
 	type classEntry struct {
 		className string
-		mapping   PackageMapping
+		filePath  string
 	}
-	pkgClasses := make(map[string][]classEntry)
+	topLevel := make(map[string]classEntry)       // parent class → entry
+	innerClasses := make(map[string][]classEntry) // parent class → inner entries
 
 	for _, cf := range classFiles {
 		rel, _ := filepath.Rel(refDir, cf)
 		className := strings.TrimSuffix(rel, ".class")
 		className = strings.ReplaceAll(className, "/", ".")
-		mapping := inferPackageMapping(className, goModule)
 
-		pkgClasses[mapping.Package] = append(pkgClasses[mapping.Package], classEntry{
-			className: className,
-			mapping:   mapping,
-		})
+		entry := classEntry{className: className, filePath: cf}
+
+		if strings.Contains(filepath.Base(cf), "$") {
+			// Inner class — group with parent.
+			parent := className[:strings.LastIndex(className, "$")]
+			innerClasses[parent] = append(innerClasses[parent], entry)
+		} else {
+			topLevel[className] = entry
+		}
 	}
 
 	if err := os.MkdirAll(outputDir, 0o755); err != nil {
 		return fmt.Errorf("mkdir %s: %w", outputDir, err)
 	}
 
-	for pkg, entries := range pkgClasses {
+	cp := refDir
+	if extraClassPath != "" {
+		cp = refDir + ":" + extraClassPath
+	}
+
+	for parentName, entry := range topLevel {
+		mapping := inferClassMapping(parentName, goModule)
+
 		spec := &SpecFile{
-			Package:  entries[0].mapping.Package,
-			GoImport: entries[0].mapping.GoImport,
+			Package:  mapping.Package,
+			GoImport: mapping.GoImport,
 		}
 
-		for _, entry := range entries {
-			cp := refDir
-			if extraClassPath != "" {
-				cp = refDir + ":" + extraClassPath
-			}
-			jc, err := RunJavap(cp, entry.className)
+		// Parse the top-level class.
+		jc, err := RunJavap(cp, entry.className)
+		if err != nil {
+			return fmt.Errorf("javap %s: %w", entry.className, err)
+		}
+		cls := classFromJavap(jc)
+		spec.Classes = append(spec.Classes, cls)
+		addConstants(spec, jc)
+
+		// Parse inner classes.
+		for _, inner := range innerClasses[parentName] {
+			ijc, err := RunJavap(cp, inner.className)
 			if err != nil {
-				return fmt.Errorf("javap %s: %w", entry.className, err)
+				return fmt.Errorf("javap %s: %w", inner.className, err)
 			}
-
-			cls := classFromJavap(jc)
-			spec.Classes = append(spec.Classes, cls)
-
-			// Add constants from the class.
-			for _, c := range jc.Constants {
-				spec.Constants = append(spec.Constants, SpecConstant{
-					GoName: javaConstantToGoName(c.Name),
-					Value:  inferConstantDefault(c.JavaType),
-					GoType: javaTypeToGoType(c.JavaType),
-				})
-			}
+			icls := classFromJavap(ijc)
+			spec.Classes = append(spec.Classes, icls)
+			addConstants(spec, ijc)
 		}
 
-		outPath := filepath.Join(outputDir, pkg+".yaml")
+		outPath := filepath.Join(outputDir, mapping.Package+".yaml")
 		if err := writeSpecFile(spec, outPath); err != nil {
 			return fmt.Errorf("write %s: %w", outPath, err)
 		}
 	}
 
 	return nil
+}
+
+func addConstants(spec *SpecFile, jc *JavapClass) {
+	for _, c := range jc.Constants {
+		spec.Constants = append(spec.Constants, SpecConstant{
+			GoName: javaConstantToGoName(c.Name),
+			Value:  inferConstantDefault(c.JavaType),
+			GoType: javaTypeToGoType(c.JavaType),
+		})
+	}
 }
 
 func classFromJavap(jc *JavapClass) SpecClass {
@@ -249,6 +268,152 @@ func hasUnsupportedParams(m JavapMethod) bool {
 		}
 	}
 	return false
+}
+
+// inferClassMapping derives the Go package name from a single Java class name.
+// E.g. "android.app.AlarmManager" → package "alarm", go_import ".../app/alarm".
+func inferClassMapping(className string, goModule string) PackageMapping {
+	// Known class → package mappings (primary service classes).
+	knownMappings := map[string]struct{ pkg, goPath string }{
+		"android.accounts.AccountManager":                   {"accounts", "accounts"},
+		"android.app.Activity":                              {"app", "app"},
+		"android.app.AlarmManager":                          {"alarm", "app/alarm"},
+		"android.app.DownloadManager":                       {"download", "app/download"},
+		"android.app.KeyguardManager":                       {"keyguard", "os/keyguard"},
+		"android.app.NotificationChannel":                   {"notification", "app/notification"},
+		"android.app.NotificationManager":                   {"notification", "app/notification"},
+		"android.app.PendingIntent":                         {"app", "app"},
+		"android.app.admin.DevicePolicyManager":             {"admin", "app/admin"},
+		"android.app.blob.BlobStoreManager":                 {"blob", "app/blob"},
+		"android.app.job.JobInfo":                           {"job", "app/job"},
+		"android.app.job.JobScheduler":                      {"job", "app/job"},
+		"android.app.role.RoleManager":                      {"role", "app/role"},
+		"android.app.usage.UsageStats":                      {"usage", "app/usage"},
+		"android.app.usage.UsageStatsManager":               {"usage", "app/usage"},
+		"android.bluetooth.BluetoothAdapter":                {"bluetooth", "bluetooth"},
+		"android.bluetooth.BluetoothDevice":                 {"bluetooth", "bluetooth"},
+		"android.bluetooth.BluetoothGatt":                   {"bluetooth", "bluetooth"},
+		"android.bluetooth.BluetoothGattCharacteristic":     {"bluetooth", "bluetooth"},
+		"android.bluetooth.BluetoothGattDescriptor":         {"bluetooth", "bluetooth"},
+		"android.bluetooth.BluetoothGattServer":             {"bluetooth", "bluetooth"},
+		"android.bluetooth.BluetoothGattService":            {"bluetooth", "bluetooth"},
+		"android.bluetooth.BluetoothServerSocket":           {"bluetooth", "bluetooth"},
+		"android.bluetooth.BluetoothSocket":                 {"bluetooth", "bluetooth"},
+		"android.bluetooth.le.BluetoothLeAdvertiser":        {"bluetooth_le", "bluetooth/le"},
+		"android.bluetooth.le.BluetoothLeScanner":           {"bluetooth_le", "bluetooth/le"},
+		"android.bluetooth.le.ScanFilter":                   {"bluetooth_le", "bluetooth/le"},
+		"android.bluetooth.le.ScanResult":                   {"bluetooth_le", "bluetooth/le"},
+		"android.bluetooth.le.ScanSettings":                 {"bluetooth_le", "bluetooth/le"},
+		"android.bluetooth.le.AdvertiseData":                {"bluetooth_le", "bluetooth/le"},
+		"android.bluetooth.le.AdvertiseSettings":            {"bluetooth_le", "bluetooth/le"},
+		"android.companion.AssociationRequest":              {"companion", "companion"},
+		"android.companion.CompanionDeviceManager":          {"companion", "companion"},
+		"android.content.BroadcastReceiver":                 {"content", "content"},
+		"android.content.ClipData":                          {"clipboard", "content/clipboard"},
+		"android.content.ClipboardManager":                  {"clipboard", "content/clipboard"},
+		"android.content.ContentResolver":                   {"resolver", "content/resolver"},
+		"android.content.Context":                           {"app", "app"},
+		"android.content.Intent":                            {"app", "app"},
+		"android.content.SharedPreferences":                 {"preferences", "content/preferences"},
+		"android.content.pm.PackageInfo":                    {"pm", "content/pm"},
+		"android.content.pm.PackageManager":                 {"pm", "content/pm"},
+		"android.database.Cursor":                           {"resolver", "content/resolver"},
+		"android.graphics.Bitmap":                           {"pdf", "graphics/pdf"},
+		"android.graphics.pdf.PdfRenderer":                  {"pdf", "graphics/pdf"},
+		"android.hardware.ConsumerIrManager":                {"ir", "hardware/ir"},
+		"android.hardware.biometrics.BiometricManager":      {"biometric", "hardware/biometric"},
+		"android.hardware.biometrics.BiometricPrompt":       {"biometric", "hardware/biometric"},
+		"android.hardware.camera2.CameraManager":            {"camera", "hardware/camera"},
+		"android.hardware.display.VirtualDisplay":           {"projection", "media/projection"},
+		"android.hardware.lights.Light":                     {"lights", "hardware/lights"},
+		"android.hardware.lights.LightState":                {"lights", "hardware/lights"},
+		"android.hardware.lights.LightsManager":             {"lights", "hardware/lights"},
+		"android.hardware.lights.LightsRequest":             {"lights", "hardware/lights"},
+		"android.hardware.usb.UsbDevice":                    {"usb", "hardware/usb"},
+		"android.hardware.usb.UsbDeviceConnection":          {"usb", "hardware/usb"},
+		"android.hardware.usb.UsbEndpoint":                  {"usb", "hardware/usb"},
+		"android.hardware.usb.UsbInterface":                 {"usb", "hardware/usb"},
+		"android.hardware.usb.UsbManager":                   {"usb", "hardware/usb"},
+		"android.location.GnssStatus":                       {"location", "location"},
+		"android.location.Location":                         {"location", "location"},
+		"android.location.LocationManager":                  {"location", "location"},
+		"android.location.altitude.AltitudeConverter":       {"altitude", "location/altitude"},
+		"android.media.AudioDeviceInfo":                     {"audiomanager", "media/audiomanager"},
+		"android.media.AudioFocusRequest":                   {"audiomanager", "media/audiomanager"},
+		"android.media.AudioManager":                        {"audiomanager", "media/audiomanager"},
+		"android.media.AudioRecord":                         {"audiorecord", "media/audiorecord"},
+		"android.media.MediaPlayer":                         {"player", "media/player"},
+		"android.media.MediaRecorder":                       {"recorder", "media/recorder"},
+		"android.media.RingtoneManager":                     {"ringtone", "media/ringtone"},
+		"android.media.projection.MediaProjection":          {"projection", "media/projection"},
+		"android.media.projection.MediaProjectionManager":   {"projection", "media/projection"},
+		"android.media.session.MediaController":             {"session", "media/session"},
+		"android.media.session.MediaSessionManager":         {"session", "media/session"},
+		"android.net.ConnectivityManager":                   {"net", "net"},
+		"android.net.NetworkCapabilities":                   {"net", "net"},
+		"android.net.Uri":                                   {"resolver", "content/resolver"},
+		"android.net.VpnService":                            {"vpn", "net/vpn"},
+		"android.net.nsd.NsdManager":                        {"nsd", "net/nsd"},
+		"android.net.nsd.NsdServiceInfo":                    {"nsd", "net/nsd"},
+		"android.net.wifi.ScanResult":                       {"wifi", "net/wifi"},
+		"android.net.wifi.WifiInfo":                         {"wifi", "net/wifi"},
+		"android.net.wifi.WifiManager":                      {"wifi", "net/wifi"},
+		"android.net.wifi.p2p.WifiP2pConfig":                {"wifi_p2p", "net/wifi/p2p"},
+		"android.net.wifi.p2p.WifiP2pDevice":                {"wifi_p2p", "net/wifi/p2p"},
+		"android.net.wifi.p2p.WifiP2pGroup":                 {"wifi_p2p", "net/wifi/p2p"},
+		"android.net.wifi.p2p.WifiP2pManager":               {"wifi_p2p", "net/wifi/p2p"},
+		"android.net.wifi.rtt.RangingRequest":               {"wifi_rtt", "net/wifi/rtt"},
+		"android.net.wifi.rtt.RangingResult":                {"wifi_rtt", "net/wifi/rtt"},
+		"android.net.wifi.rtt.WifiRttManager":               {"wifi_rtt", "net/wifi/rtt"},
+		"android.nfc.NdefMessage":                           {"nfc", "nfc"},
+		"android.nfc.NdefRecord":                            {"nfc", "nfc"},
+		"android.nfc.NfcAdapter":                            {"nfc", "nfc"},
+		"android.nfc.Tag":                                   {"nfc", "nfc"},
+		"android.nfc.tech.IsoDep":                           {"nfc", "nfc"},
+		"android.nfc.tech.Ndef":                             {"nfc", "nfc"},
+		"android.os.BatteryManager":                         {"battery", "os/battery"},
+		"android.os.Build":                                  {"build", "os/build"},
+		"android.os.Bundle":                                 {"app", "app"},
+		"android.os.CancellationSignal":                     {"app", "app"},
+		"android.os.Environment":                            {"environment", "os/environment"},
+		"android.os.ParcelFileDescriptor":                   {"pdf", "graphics/pdf"},
+		"android.os.PowerManager":                           {"power", "os/power"},
+		"android.os.Vibrator":                               {"vibrator", "os/vibrator"},
+		"android.os.storage.StorageManager":                 {"storage", "os/storage"},
+		"android.os.storage.StorageVolume":                  {"storage", "os/storage"},
+		"android.print.PrintJob":                            {"print", "print"},
+		"android.print.PrintJobInfo":                        {"print", "print"},
+		"android.print.PrintManager":                        {"print", "print"},
+		"android.provider.CalendarContract":                 {"calendar", "provider/calendar"},
+		"android.provider.ContactsContract":                 {"contacts", "provider/contacts"},
+		"android.provider.DocumentsContract":                {"documents", "provider/documents"},
+		"android.provider.MediaStore":                       {"mediastore", "provider/media"},
+		"android.provider.Settings":                         {"settings", "provider/settings"},
+		"android.se.omapi.Channel":                          {"omapi", "se/omapi"},
+		"android.se.omapi.Reader":                           {"omapi", "se/omapi"},
+		"android.se.omapi.SEService":                        {"omapi", "se/omapi"},
+		"android.se.omapi.Session":                          {"omapi", "se/omapi"},
+		"android.security.keystore.KeyGenParameterSpec":     {"keystore", "security/keystore"},
+		"android.service.notification.StatusBarNotification": {"notification", "app/notification"},
+		"android.speech.SpeechRecognizer":                   {"speech", "speech"},
+		"android.speech.tts.TextToSpeech":                   {"speech", "speech"},
+		"android.telecom.TelecomManager":                    {"telecom", "telecom"},
+		"android.telephony.TelephonyManager":                {"telephony", "telephony"},
+		"android.util.DisplayMetrics":                       {"display", "view/display"},
+		"android.view.Display":                              {"display", "view/display"},
+		"android.view.WindowManager":                        {"display", "view/display"},
+		"android.view.inputmethod.InputMethodManager":       {"inputmethod", "view/inputmethod"},
+		"android.widget.Toast":                              {"toast", "widget/toast"},
+	}
+
+	if m, ok := knownMappings[className]; ok {
+		return PackageMapping{
+			Package:  m.pkg,
+			GoImport: goModule + "/" + m.goPath,
+		}
+	}
+
+	return inferPackageMapping(className, goModule)
 }
 
 func inferPackageMapping(className string, goModule string) PackageMapping {
@@ -457,10 +622,14 @@ func javaMethodToGoName(name string) string {
 func inferGoType(fullClass string) string {
 	parts := strings.Split(fullClass, ".")
 	name := parts[len(parts)-1]
-	// Handle inner classes: Foo$Bar → Bar
+
+	// Handle inner classes: Foo$Bar → fooBar (include parent for uniqueness).
 	if idx := strings.LastIndex(name, "$"); idx >= 0 {
-		name = name[idx+1:]
+		parent := name[:idx]
+		child := name[idx+1:]
+		name = parent + child
 	}
+
 	// Unexport it (lowercase first letter).
 	return strings.ToLower(name[:1]) + name[1:]
 }

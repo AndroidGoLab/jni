@@ -1,0 +1,259 @@
+package: recorder
+go_import: github.com/xaionaro-go/jni/media/recorder
+classes:
+    - java_class: android.media.MediaRecorder
+      go_type: mediaRecorder
+      methods:
+        - java_method: getActiveMicrophones
+          go_name: GetActiveMicrophones
+          returns: java.util.List<android.media.MicrophoneInfo>
+          error: true
+        - java_method: getActiveRecordingConfiguration
+          go_name: GetActiveRecordingConfiguration
+          returns: android.media.AudioRecordingConfiguration
+          error: true
+        - java_method: getLogSessionId
+          go_name: GetLogSessionId
+          returns: android.media.metrics.LogSessionId
+          error: true
+        - java_method: getMetrics
+          go_name: GetMetrics
+          returns: android.os.PersistableBundle
+          error: true
+        - java_method: getPreferredDevice
+          go_name: GetPreferredDevice
+          returns: android.media.AudioDeviceInfo
+          error: true
+        - java_method: getRoutedDevice
+          go_name: GetRoutedDevice
+          returns: android.media.AudioDeviceInfo
+          error: true
+        - java_method: getRoutedDevices
+          go_name: GetRoutedDevices
+          returns: java.util.List<android.media.AudioDeviceInfo>
+          error: true
+        - java_method: prepare
+          go_name: Prepare
+          returns: void
+          error: true
+        - java_method: registerAudioRecordingCallback
+          go_name: RegisterAudioRecordingCallback
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.media.AudioManager$AudioRecordingCallback
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: removeOnRoutingChangedListener
+          go_name: RemoveOnRoutingChangedListener
+          params:
+            - java_type: android.media.AudioRouting$OnRoutingChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: reset
+          go_name: Reset
+          returns: void
+          error: true
+        - java_method: setAudioChannels
+          go_name: SetAudioChannels
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAudioEncodingBitRate
+          go_name: SetAudioEncodingBitRate
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAudioProfile
+          go_name: SetAudioProfile
+          params:
+            - java_type: android.media.EncoderProfiles$AudioProfile
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAudioSamplingRate
+          go_name: SetAudioSamplingRate
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setCaptureRate
+          go_name: SetCaptureRate
+          params:
+            - java_type: double
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setInputSurface
+          go_name: SetInputSurface
+          params:
+            - java_type: android.view.Surface
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setLocation
+          go_name: SetLocation
+          params:
+            - java_type: float
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setLogSessionId
+          go_name: SetLogSessionId
+          params:
+            - java_type: android.media.metrics.LogSessionId
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setNextOutputFile
+          go_name: SetNextOutputFile1
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setNextOutputFile
+          go_name: SetNextOutputFile1_1
+          params:
+            - java_type: java.io.FileDescriptor
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnErrorListener
+          go_name: SetOnErrorListener
+          params:
+            - java_type: android.media.MediaRecorder$OnErrorListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnInfoListener
+          go_name: SetOnInfoListener
+          params:
+            - java_type: android.media.MediaRecorder$OnInfoListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOrientationHint
+          go_name: SetOrientationHint
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOutputFile
+          go_name: SetOutputFile1
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOutputFile
+          go_name: SetOutputFile1_1
+          params:
+            - java_type: java.io.FileDescriptor
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOutputFile
+          go_name: SetOutputFile1_2
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPreferredDevice
+          go_name: SetPreferredDevice
+          params:
+            - java_type: android.media.AudioDeviceInfo
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setPreferredMicrophoneDirection
+          go_name: SetPreferredMicrophoneDirection
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setPreferredMicrophoneFieldDimension
+          go_name: SetPreferredMicrophoneFieldDimension
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setPreviewDisplay
+          go_name: SetPreviewDisplay
+          params:
+            - java_type: android.view.Surface
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setProfile
+          go_name: SetProfile
+          params:
+            - java_type: android.media.CamcorderProfile
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVideoEncodingBitRate
+          go_name: SetVideoEncodingBitRate
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVideoEncodingProfileLevel
+          go_name: SetVideoEncodingProfileLevel
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setVideoProfile
+          go_name: SetVideoProfile
+          params:
+            - java_type: android.media.EncoderProfiles$VideoProfile
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unregisterAudioRecordingCallback
+          go_name: UnregisterAudioRecordingCallback
+          params:
+            - java_type: android.media.AudioManager$AudioRecordingCallback
+              go_name: arg0
+          returns: void
+          error: true
+constants:
+    - go_name: MediaErrorServerDied
+      value: "0"
+      go_type: int
+    - go_name: MediaRecorderErrorUnknown
+      value: "0"
+      go_type: int
+    - go_name: MediaRecorderInfoMaxDurationReached
+      value: "0"
+      go_type: int
+    - go_name: MediaRecorderInfoMaxFilesizeApproaching
+      value: "0"
+      go_type: int
+    - go_name: MediaRecorderInfoMaxFilesizeReached
+      value: "0"
+      go_type: int
+    - go_name: MediaRecorderInfoNextOutputFileStarted
+      value: "0"
+      go_type: int
+    - go_name: MediaRecorderInfoUnknown
+      value: "0"
+      go_type: int

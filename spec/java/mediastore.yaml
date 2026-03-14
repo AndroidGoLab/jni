@@ -1,0 +1,464 @@
+package: mediastore
+go_import: github.com/xaionaro-go/jni/provider/media
+classes:
+    - java_class: android.provider.MediaStore
+      go_type: mediaStore
+      static_methods:
+        - java_method: canManageMedia
+          go_name: CanManageMedia
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: createDeleteRequest
+          go_name: CreateDeleteRequest
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: java.util.Collection<android.net.Uri>
+              go_name: arg1
+          returns: android.app.PendingIntent
+          error: true
+        - java_method: createFavoriteRequest
+          go_name: CreateFavoriteRequest
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: java.util.Collection<android.net.Uri>
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+          returns: android.app.PendingIntent
+          error: true
+        - java_method: createTrashRequest
+          go_name: CreateTrashRequest
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: java.util.Collection<android.net.Uri>
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+          returns: android.app.PendingIntent
+          error: true
+        - java_method: createWriteRequest
+          go_name: CreateWriteRequest
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: java.util.Collection<android.net.Uri>
+              go_name: arg1
+          returns: android.app.PendingIntent
+          error: true
+        - java_method: getDocumentUri
+          go_name: GetDocumentUri
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+        - java_method: getExternalVolumeNames
+          go_name: GetExternalVolumeNames
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: java.util.Set<java.lang.String>
+          error: true
+        - java_method: getGeneration
+          go_name: GetGeneration
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: long
+          error: true
+        - java_method: getMediaScannerUri
+          go_name: GetMediaScannerUri
+          returns: android.net.Uri
+          error: true
+        - java_method: getMediaUri
+          go_name: GetMediaUri
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+        - java_method: getOriginalMediaFormatFileDescriptor
+          go_name: GetOriginalMediaFormatFileDescriptor
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.os.ParcelFileDescriptor
+              go_name: arg1
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: getPickImagesMaxLimit
+          go_name: GetPickImagesMaxLimit
+          returns: int
+          error: true
+        - java_method: getRecentExternalVolumeNames
+          go_name: GetRecentExternalVolumeNames
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: java.util.Set<java.lang.String>
+          error: true
+        - java_method: getRedactedUri
+          go_name: GetRedactedUri2
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+        - java_method: getRedactedUri
+          go_name: GetRedactedUri2_1
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: java.util.List<android.net.Uri>
+              go_name: arg1
+          returns: java.util.List<android.net.Uri>
+          error: true
+        - java_method: getRequireOriginal
+          go_name: GetRequireOriginal
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getVersion
+          go_name: GetVersion1
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getVersion
+          go_name: GetVersion2_1
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: String
+          error: true
+        - java_method: getVolumeName
+          go_name: GetVolumeName
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: isCurrentCloudMediaProviderAuthority
+          go_name: IsCurrentCloudMediaProviderAuthority
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: isCurrentSystemGallery
+          go_name: IsCurrentSystemGallery
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: isSupportedCloudMediaProviderAuthority
+          go_name: IsSupportedCloudMediaProviderAuthority
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: markIsFavoriteStatus
+          go_name: MarkIsFavoriteStatus
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: java.util.Collection<android.net.Uri>
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: notifyCloudMediaChangedEvent
+          go_name: NotifyCloudMediaChangedEvent
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: openAssetFileDescriptor
+          go_name: OpenAssetFileDescriptor
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+            - java_type: android.os.CancellationSignal
+              go_name: arg3
+          returns: android.content.res.AssetFileDescriptor
+          error: true
+        - java_method: openFileDescriptor
+          go_name: OpenFileDescriptor
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+            - java_type: android.os.CancellationSignal
+              go_name: arg3
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: openTypedAssetFileDescriptor
+          go_name: OpenTypedAssetFileDescriptor
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+            - java_type: android.os.Bundle
+              go_name: arg3
+            - java_type: android.os.CancellationSignal
+              go_name: arg4
+          returns: android.content.res.AssetFileDescriptor
+          error: true
+        - java_method: setIncludePending
+          go_name: SetIncludePending
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: setRequireOriginal
+          go_name: SetRequireOriginal
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+constants:
+    - go_name: AccessMediaOwnerPackageNamePermission
+      value: '""'
+      go_type: string
+    - go_name: AccessOemMetadataPermission
+      value: '""'
+      go_type: string
+    - go_name: ActionImageCapture
+      value: '""'
+      go_type: string
+    - go_name: ActionImageCaptureSecure
+      value: '""'
+      go_type: string
+    - go_name: ActionMotionPhotoCapture
+      value: '""'
+      go_type: string
+    - go_name: ActionMotionPhotoCaptureSecure
+      value: '""'
+      go_type: string
+    - go_name: ActionPickImages
+      value: '""'
+      go_type: string
+    - go_name: ActionPickImagesSettings
+      value: '""'
+      go_type: string
+    - go_name: ActionReview
+      value: '""'
+      go_type: string
+    - go_name: ActionReviewSecure
+      value: '""'
+      go_type: string
+    - go_name: ActionVideoCapture
+      value: '""'
+      go_type: string
+    - go_name: Authority
+      value: '""'
+      go_type: string
+    - go_name: AuthorityUri
+      value: "0"
+      go_type: int
+    - go_name: ExtraAcceptOriginalMediaFormat
+      value: '""'
+      go_type: string
+    - go_name: ExtraBrightness
+      value: '""'
+      go_type: string
+    - go_name: ExtraDurationLimit
+      value: '""'
+      go_type: string
+    - go_name: ExtraFinishOnCompletion
+      value: '""'
+      go_type: string
+    - go_name: ExtraFullScreen
+      value: '""'
+      go_type: string
+    - go_name: ExtraMediaAlbum
+      value: '""'
+      go_type: string
+    - go_name: ExtraMediaArtist
+      value: '""'
+      go_type: string
+    - go_name: ExtraMediaCapabilities
+      value: '""'
+      go_type: string
+    - go_name: ExtraMediaCapabilitiesUid
+      value: '""'
+      go_type: string
+    - go_name: ExtraMediaFocus
+      value: '""'
+      go_type: string
+    - go_name: ExtraMediaGenre
+      value: '""'
+      go_type: string
+    - go_name: ExtraMediaPlaylist
+      value: '""'
+      go_type: string
+    - go_name: ExtraMediaRadioChannel
+      value: '""'
+      go_type: string
+    - go_name: ExtraMediaTitle
+      value: '""'
+      go_type: string
+    - go_name: ExtraOutput
+      value: '""'
+      go_type: string
+    - go_name: ExtraPickerPreSelectionUris
+      value: '""'
+      go_type: string
+    - go_name: ExtraPickImagesAccentColor
+      value: '""'
+      go_type: string
+    - go_name: ExtraPickImagesInOrder
+      value: '""'
+      go_type: string
+    - go_name: ExtraPickImagesLaunchTab
+      value: '""'
+      go_type: string
+    - go_name: ExtraPickImagesMax
+      value: '""'
+      go_type: string
+    - go_name: ExtraScreenOrientation
+      value: '""'
+      go_type: string
+    - go_name: ExtraShowActionIcons
+      value: '""'
+      go_type: string
+    - go_name: ExtraSizeLimit
+      value: '""'
+      go_type: string
+    - go_name: ExtraVideoQuality
+      value: '""'
+      go_type: string
+    - go_name: IntentActionMediaPlayFromSearch
+      value: '""'
+      go_type: string
+    - go_name: IntentActionMediaSearch
+      value: '""'
+      go_type: string
+    - go_name: IntentActionMusicPlayer
+      value: '""'
+      go_type: string
+    - go_name: IntentActionStillImageCamera
+      value: '""'
+      go_type: string
+    - go_name: IntentActionStillImageCameraSecure
+      value: '""'
+      go_type: string
+    - go_name: IntentActionTextOpenFromSearch
+      value: '""'
+      go_type: string
+    - go_name: IntentActionVideoCamera
+      value: '""'
+      go_type: string
+    - go_name: IntentActionVideoPlayFromSearch
+      value: '""'
+      go_type: string
+    - go_name: MatchDefault
+      value: "0"
+      go_type: int
+    - go_name: MatchExclude
+      value: "0"
+      go_type: int
+    - go_name: MatchInclude
+      value: "0"
+      go_type: int
+    - go_name: MatchOnly
+      value: "0"
+      go_type: int
+    - go_name: MediaIgnoreFilename
+      value: '""'
+      go_type: string
+    - go_name: MediaScannerVolume
+      value: '""'
+      go_type: string
+    - go_name: MetaDataReviewGalleryPrewarmService
+      value: '""'
+      go_type: string
+    - go_name: MetaDataStillImageCameraPrewarmService
+      value: '""'
+      go_type: string
+    - go_name: PickImagesTabAlbums
+      value: "0"
+      go_type: int
+    - go_name: PickImagesTabImages
+      value: "0"
+      go_type: int
+    - go_name: QueryArgIncludeRecentlyUnmountedVolumes
+      value: '""'
+      go_type: string
+    - go_name: QueryArgLatestSelectionOnly
+      value: '""'
+      go_type: string
+    - go_name: QueryArgMatchFavorite
+      value: '""'
+      go_type: string
+    - go_name: QueryArgMatchPending
+      value: '""'
+      go_type: string
+    - go_name: QueryArgMatchTrashed
+      value: '""'
+      go_type: string
+    - go_name: QueryArgMediaStandardSortOrder
+      value: '""'
+      go_type: string
+    - go_name: QueryArgRelatedUri
+      value: '""'
+      go_type: string
+    - go_name: UnknownString
+      value: '""'
+      go_type: string
+    - go_name: VolumeExternal
+      value: '""'
+      go_type: string
+    - go_name: VolumeExternalPrimary
+      value: '""'
+      go_type: string
+    - go_name: VolumeInternal
+      value: '""'
+      go_type: string

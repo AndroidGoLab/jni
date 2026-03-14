@@ -47,8 +47,8 @@ func TestAllJavaSpecs_LoadAndMerge(t *testing.T) {
 
 	t.Logf("found %d spec files", len(specs))
 
-	if len(specs) != 53 {
-		t.Errorf("expected 53 spec files, got %d", len(specs))
+	if len(specs) != 41 {
+		t.Errorf("expected 41 spec files, got %d", len(specs))
 	}
 
 	for _, specPath := range specs {
@@ -164,7 +164,7 @@ func TestGenerate_Idempotency(t *testing.T) {
 	outputDir2 := t.TempDir()
 
 	// Pick a representative subset to keep test time reasonable.
-	testSpecs := []string{"location", "bluetooth", "notification", "toast", "permission"}
+	testSpecs := []string{"location", "bluetooth", "notification", "widget", "content"}
 
 	for _, name := range testSpecs {
 		specPath := filepath.Join(specsDir, name+".yaml")
@@ -292,17 +292,18 @@ func TestGenerate_OutputFilePatterns(t *testing.T) {
 		unexpectFiles []string
 	}{
 		{
-			specName:    "location",
-			expectFiles: []string{"doc.go", "init.go", "manager.go", "callbacks.go", "location.go", "constants.go"},
+			specName:      "location",
+			expectFiles:   []string{"doc.go", "init.go", "location_manager.go", "location.go", "constants.go"},
+			unexpectFiles: []string{"callbacks.go"},
 		},
 		{
-			specName:      "toast",
+			specName:      "widget",
 			expectFiles:   []string{"doc.go", "init.go", "toast.go", "constants.go"},
 			unexpectFiles: []string{"callbacks.go"},
 		},
 		{
-			specName:      "permission",
-			expectFiles:   []string{"doc.go", "init.go", "constants.go", "context_compat.go", "activity_compat.go"},
+			specName:      "content",
+			expectFiles:   []string{"doc.go", "init.go", "constants.go"},
 			unexpectFiles: []string{"callbacks.go"},
 		},
 	}
@@ -362,25 +363,25 @@ func TestGenerate_ContentPatterns(t *testing.T) {
 		t.Error("doc.go missing generated header")
 	}
 
-	// Check manager.go has NewManager constructor and methods.
-	mgrGo := readFile(t, filepath.Join(pkgDir, "manager.go"))
-	if !strings.Contains(mgrGo, "type Manager struct") {
-		t.Error("manager.go missing Manager struct")
+	// Check location_manager.go has constructor and methods.
+	mgrGo := readFile(t, filepath.Join(pkgDir, "location_manager.go"))
+	if !strings.Contains(mgrGo, "type locationManager struct") {
+		t.Error("location_manager.go missing locationManager struct")
 	}
-	if !strings.Contains(mgrGo, "NewManager") {
-		t.Error("manager.go missing NewManager constructor")
+	if !strings.Contains(mgrGo, "NewlocationManager") {
+		t.Error("location_manager.go missing NewlocationManager constructor")
 	}
 	if !strings.Contains(mgrGo, "GetSystemService") {
-		t.Error("manager.go missing GetSystemService call")
+		t.Error("location_manager.go missing GetSystemService call")
 	}
-	if !strings.Contains(mgrGo, "func (m *Manager)") {
-		t.Error("manager.go missing Manager methods")
+	if !strings.Contains(mgrGo, "func (m *locationManager)") {
+		t.Error("location_manager.go missing locationManager methods")
 	}
 	if !strings.Contains(mgrGo, "m.VM.Do") {
-		t.Error("manager.go missing VM.Do pattern")
+		t.Error("location_manager.go missing VM.Do pattern")
 	}
 	if !strings.Contains(mgrGo, "ensureInit") {
-		t.Error("manager.go missing ensureInit call")
+		t.Error("location_manager.go missing ensureInit call")
 	}
 
 	// Check init.go has sync.Once initialization.
@@ -397,8 +398,8 @@ func TestGenerate_ContentPatterns(t *testing.T) {
 
 	// Check constants.go has expected values.
 	constGo := readFile(t, filepath.Join(pkgDir, "constants.go"))
-	if !strings.Contains(constGo, "GPS") {
-		t.Error("constants.go missing GPS constant")
+	if !strings.Contains(constGo, "Gps") {
+		t.Error("constants.go missing Gps constant")
 	}
 	if !strings.Contains(constGo, "Network") {
 		t.Error("constants.go missing Network constant")

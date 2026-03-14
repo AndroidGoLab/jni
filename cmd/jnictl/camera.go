@@ -3,12 +3,9 @@
 package main
 
 import (
-	"fmt"
-	"io"
 
 	"github.com/spf13/cobra"
 	pb "github.com/xaionaro-go/jni/proto/camera"
-	"google.golang.org/protobuf/encoding/protojson"
 )
 
 var cameraCmd = &cobra.Command{
@@ -16,26 +13,23 @@ var cameraCmd = &cobra.Command{
 	Short: "camera service operations",
 }
 
-var cameraManagerCmd = &cobra.Command{
-	Use:   "manager",
-	Short: "ManagerService operations",
+var cameraCameraManagerCmd = &cobra.Command{
+	Use:   "camera-manager",
+	Short: "CameraManagerService operations",
 }
 
-var cameraManagerSetTorchModeCmd = &cobra.Command{
-	Use:   "set-torch-mode",
-	Short: "SetTorchMode RPC",
+var cameraCameraManagerGetCameraCharacteristicsCmd = &cobra.Command{
+	Use:   "get-camera-characteristics",
+	Short: "GetCameraCharacteristics RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.SetTorchModeRequest{}
-		if v, err := cmd.Flags().GetString("camera-id"); err == nil {
-			req.CameraId = v
+		client := pb.NewCameraManagerServiceClient(grpcConn)
+		req := &pb.GetCameraCharacteristicsRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetBool("enabled"); err == nil {
-			req.Enabled = v
-		}
-		resp, err := client.SetTorchMode(ctx, req)
+		resp, err := client.GetCameraCharacteristics(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -43,19 +37,196 @@ var cameraManagerSetTorchModeCmd = &cobra.Command{
 	},
 }
 
-var cameraManagerRegisterTorchCallbackCmd = &cobra.Command{
+var cameraCameraManagerGetCameraDeviceSetupCmd = &cobra.Command{
+	Use:   "get-camera-device-setup",
+	Short: "GetCameraDeviceSetup RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCameraManagerServiceClient(grpcConn)
+		req := &pb.GetCameraDeviceSetupRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetCameraDeviceSetup(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var cameraCameraManagerGetCameraExtensionCharacteristicsCmd = &cobra.Command{
+	Use:   "get-camera-extension-characteristics",
+	Short: "GetCameraExtensionCharacteristics RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCameraManagerServiceClient(grpcConn)
+		req := &pb.GetCameraExtensionCharacteristicsRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetCameraExtensionCharacteristics(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var cameraCameraManagerGetCameraIdListCmd = &cobra.Command{
+	Use:   "get-camera-id-list",
+	Short: "GetCameraIdList RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCameraManagerServiceClient(grpcConn)
+		req := &pb.GetCameraIdListRequest{}
+		resp, err := client.GetCameraIdList(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var cameraCameraManagerGetConcurrentCameraIdsCmd = &cobra.Command{
+	Use:   "get-concurrent-camera-ids",
+	Short: "GetConcurrentCameraIds RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCameraManagerServiceClient(grpcConn)
+		req := &pb.GetConcurrentCameraIdsRequest{}
+		resp, err := client.GetConcurrentCameraIds(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var cameraCameraManagerGetTorchStrengthLevelCmd = &cobra.Command{
+	Use:   "get-torch-strength-level",
+	Short: "GetTorchStrengthLevel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCameraManagerServiceClient(grpcConn)
+		req := &pb.GetTorchStrengthLevelRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetTorchStrengthLevel(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var cameraCameraManagerIsCameraDeviceSetupSupportedCmd = &cobra.Command{
+	Use:   "is-camera-device-setup-supported",
+	Short: "IsCameraDeviceSetupSupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCameraManagerServiceClient(grpcConn)
+		req := &pb.IsCameraDeviceSetupSupportedRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.IsCameraDeviceSetupSupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var cameraCameraManagerIsConcurrentSessionConfigurationSupportedCmd = &cobra.Command{
+	Use:   "is-concurrent-session-configuration-supported",
+	Short: "IsConcurrentSessionConfigurationSupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCameraManagerServiceClient(grpcConn)
+		req := &pb.IsConcurrentSessionConfigurationSupportedRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.IsConcurrentSessionConfigurationSupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var cameraCameraManagerOpenCameraCmd = &cobra.Command{
+	Use:   "open-camera",
+	Short: "OpenCamera RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCameraManagerServiceClient(grpcConn)
+		req := &pb.OpenCameraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.OpenCamera(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var cameraCameraManagerRegisterAvailabilityCallbackCmd = &cobra.Command{
+	Use:   "register-availability-callback",
+	Short: "RegisterAvailabilityCallback RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCameraManagerServiceClient(grpcConn)
+		req := &pb.RegisterAvailabilityCallbackRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.RegisterAvailabilityCallback(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var cameraCameraManagerRegisterTorchCallbackCmd = &cobra.Command{
 	Use:   "register-torch-callback",
 	Short: "RegisterTorchCallback RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
+		client := pb.NewCameraManagerServiceClient(grpcConn)
 		req := &pb.RegisterTorchCallbackRequest{}
-		if v, err := cmd.Flags().GetInt64("callback"); err == nil {
-			req.Callback = v
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("handler"); err == nil {
-			req.Handler = v
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
 		}
 		resp, err := client.RegisterTorchCallback(ctx, req)
 		if err != nil {
@@ -65,16 +236,79 @@ var cameraManagerRegisterTorchCallbackCmd = &cobra.Command{
 	},
 }
 
-var cameraManagerUnregisterTorchCallbackCmd = &cobra.Command{
+var cameraCameraManagerSetTorchModeCmd = &cobra.Command{
+	Use:   "set-torch-mode",
+	Short: "SetTorchMode RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCameraManagerServiceClient(grpcConn)
+		req := &pb.SetTorchModeRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetTorchMode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var cameraCameraManagerTurnOnTorchWithStrengthLevelCmd = &cobra.Command{
+	Use:   "turn-on-torch-with-strength-level",
+	Short: "TurnOnTorchWithStrengthLevel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCameraManagerServiceClient(grpcConn)
+		req := &pb.TurnOnTorchWithStrengthLevelRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.TurnOnTorchWithStrengthLevel(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var cameraCameraManagerUnregisterAvailabilityCallbackCmd = &cobra.Command{
+	Use:   "unregister-availability-callback",
+	Short: "UnregisterAvailabilityCallback RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewCameraManagerServiceClient(grpcConn)
+		req := &pb.UnregisterAvailabilityCallbackRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.UnregisterAvailabilityCallback(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var cameraCameraManagerUnregisterTorchCallbackCmd = &cobra.Command{
 	Use:   "unregister-torch-callback",
 	Short: "UnregisterTorchCallback RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
+		client := pb.NewCameraManagerServiceClient(grpcConn)
 		req := &pb.UnregisterTorchCallbackRequest{}
-		if v, err := cmd.Flags().GetInt64("callback"); err == nil {
-			req.Callback = v
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
 		resp, err := client.UnregisterTorchCallback(ctx, req)
 		if err != nil {
@@ -84,52 +318,42 @@ var cameraManagerUnregisterTorchCallbackCmd = &cobra.Command{
 	},
 }
 
-var cameraTorchCallbackCmd = &cobra.Command{
-	Use:   "torch-callback",
-	Short: "TorchCallbackService operations",
-}
-
-var cameraTorchCallbackSubscribeTorchCallbackCmd = &cobra.Command{
-	Use:   "subscribe-torch-callback",
-	Short: "SubscribeTorchCallback RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewTorchCallbackServiceClient(grpcConn)
-		req := &pb.SubscribeTorchCallbackRequest{}
-		stream, err := client.SubscribeTorchCallback(ctx, req)
-		if err != nil {
-			return err
-		}
-		opts := protojson.MarshalOptions{Multiline: true, Indent: "  "}
-		for {
-			resp, err := stream.Recv()
-			if err == io.EOF {
-				return nil
-			}
-			if err != nil {
-				return err
-			}
-			data, err := opts.Marshal(resp)
-			if err != nil {
-				return err
-			}
-			fmt.Println(string(data))
-		}
-	},
-}
-
 func init() {
-	cameraManagerSetTorchModeCmd.Flags().String("camera-id", "", "camera-id (string)")
-	cameraManagerSetTorchModeCmd.Flags().Bool("enabled", false, "enabled (bool)")
-	cameraManagerCmd.AddCommand(cameraManagerSetTorchModeCmd)
-	cameraManagerRegisterTorchCallbackCmd.Flags().Int64("callback", 0, "callback (int64)")
-	cameraManagerRegisterTorchCallbackCmd.Flags().Int64("handler", 0, "handler (int64)")
-	cameraManagerCmd.AddCommand(cameraManagerRegisterTorchCallbackCmd)
-	cameraManagerUnregisterTorchCallbackCmd.Flags().Int64("callback", 0, "callback (int64)")
-	cameraManagerCmd.AddCommand(cameraManagerUnregisterTorchCallbackCmd)
-	cameraCmd.AddCommand(cameraManagerCmd)
-	cameraTorchCallbackCmd.AddCommand(cameraTorchCallbackSubscribeTorchCallbackCmd)
-	cameraCmd.AddCommand(cameraTorchCallbackCmd)
+	cameraCameraManagerGetCameraCharacteristicsCmd.Flags().String("arg0", "", "arg0 (string)")
+	cameraCameraManagerCmd.AddCommand(cameraCameraManagerGetCameraCharacteristicsCmd)
+	cameraCameraManagerGetCameraDeviceSetupCmd.Flags().String("arg0", "", "arg0 (string)")
+	cameraCameraManagerCmd.AddCommand(cameraCameraManagerGetCameraDeviceSetupCmd)
+	cameraCameraManagerGetCameraExtensionCharacteristicsCmd.Flags().String("arg0", "", "arg0 (string)")
+	cameraCameraManagerCmd.AddCommand(cameraCameraManagerGetCameraExtensionCharacteristicsCmd)
+	cameraCameraManagerCmd.AddCommand(cameraCameraManagerGetCameraIdListCmd)
+	cameraCameraManagerCmd.AddCommand(cameraCameraManagerGetConcurrentCameraIdsCmd)
+	cameraCameraManagerGetTorchStrengthLevelCmd.Flags().String("arg0", "", "arg0 (string)")
+	cameraCameraManagerCmd.AddCommand(cameraCameraManagerGetTorchStrengthLevelCmd)
+	cameraCameraManagerIsCameraDeviceSetupSupportedCmd.Flags().String("arg0", "", "arg0 (string)")
+	cameraCameraManagerCmd.AddCommand(cameraCameraManagerIsCameraDeviceSetupSupportedCmd)
+	cameraCameraManagerIsConcurrentSessionConfigurationSupportedCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	cameraCameraManagerIsConcurrentSessionConfigurationSupportedCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	cameraCameraManagerCmd.AddCommand(cameraCameraManagerIsConcurrentSessionConfigurationSupportedCmd)
+	cameraCameraManagerOpenCameraCmd.Flags().String("arg0", "", "arg0 (string)")
+	cameraCameraManagerOpenCameraCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	cameraCameraManagerOpenCameraCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	cameraCameraManagerCmd.AddCommand(cameraCameraManagerOpenCameraCmd)
+	cameraCameraManagerRegisterAvailabilityCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	cameraCameraManagerRegisterAvailabilityCallbackCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	cameraCameraManagerCmd.AddCommand(cameraCameraManagerRegisterAvailabilityCallbackCmd)
+	cameraCameraManagerRegisterTorchCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	cameraCameraManagerRegisterTorchCallbackCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	cameraCameraManagerCmd.AddCommand(cameraCameraManagerRegisterTorchCallbackCmd)
+	cameraCameraManagerSetTorchModeCmd.Flags().String("arg0", "", "arg0 (string)")
+	cameraCameraManagerSetTorchModeCmd.Flags().Bool("arg1", false, "arg1 (bool)")
+	cameraCameraManagerCmd.AddCommand(cameraCameraManagerSetTorchModeCmd)
+	cameraCameraManagerTurnOnTorchWithStrengthLevelCmd.Flags().String("arg0", "", "arg0 (string)")
+	cameraCameraManagerTurnOnTorchWithStrengthLevelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	cameraCameraManagerCmd.AddCommand(cameraCameraManagerTurnOnTorchWithStrengthLevelCmd)
+	cameraCameraManagerUnregisterAvailabilityCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	cameraCameraManagerCmd.AddCommand(cameraCameraManagerUnregisterAvailabilityCallbackCmd)
+	cameraCameraManagerUnregisterTorchCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	cameraCameraManagerCmd.AddCommand(cameraCameraManagerUnregisterTorchCallbackCmd)
+	cameraCmd.AddCommand(cameraCameraManagerCmd)
 	rootCmd.AddCommand(cameraCmd)
 }

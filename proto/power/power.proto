@@ -6,10 +6,128 @@ package power;
 
 option go_package = "github.com/xaionaro-go/jni/proto/power";
 
+message AddThermalHeadroomListener1Request {
+  int64 arg0 = 1;
+}
+
+message AddThermalHeadroomListener1Response {
+}
+
+message AddThermalHeadroomListener2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message AddThermalHeadroomListener2_1Response {
+}
+
+message AddThermalStatusListener1Request {
+  int64 arg0 = 1;
+}
+
+message AddThermalStatusListener1Response {
+}
+
+message AddThermalStatusListener2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message AddThermalStatusListener2_1Response {
+}
+
+message GetBatteryDischargePredictionRequest {
+}
+
+message GetBatteryDischargePredictionResponse {
+  int64 result = 1;
+}
+
+message GetCurrentThermalStatusRequest {
+}
+
+message GetCurrentThermalStatusResponse {
+  int32 result = 1;
+}
+
+message GetLocationPowerSaveModeRequest {
+}
+
+message GetLocationPowerSaveModeResponse {
+  int32 result = 1;
+}
+
+message GetThermalHeadroomRequest {
+  int32 arg0 = 1;
+}
+
+message GetThermalHeadroomResponse {
+  float result = 1;
+}
+
+message IsAllowedInLowPowerStandby1Request {
+  int32 arg0 = 1;
+}
+
+message IsAllowedInLowPowerStandby1Response {
+  bool result = 1;
+}
+
+message IsAllowedInLowPowerStandby1_1Request {
+  string arg0 = 1;
+}
+
+message IsAllowedInLowPowerStandby1_1Response {
+  bool result = 1;
+}
+
+message IsBatteryDischargePredictionPersonalizedRequest {
+}
+
+message IsBatteryDischargePredictionPersonalizedResponse {
+  bool result = 1;
+}
+
+message IsDeviceIdleModeRequest {
+}
+
+message IsDeviceIdleModeResponse {
+  bool result = 1;
+}
+
+message IsDeviceLightIdleModeRequest {
+}
+
+message IsDeviceLightIdleModeResponse {
+  bool result = 1;
+}
+
+message IsExemptFromLowPowerStandbyRequest {
+}
+
+message IsExemptFromLowPowerStandbyResponse {
+  bool result = 1;
+}
+
+message IsIgnoringBatteryOptimizationsRequest {
+  string arg0 = 1;
+}
+
+message IsIgnoringBatteryOptimizationsResponse {
+  bool result = 1;
+}
+
 message IsInteractiveRequest {
 }
 
 message IsInteractiveResponse {
+  bool result = 1;
+}
+
+message IsLowPowerStandbyEnabledRequest {
+}
+
+message IsLowPowerStandbyEnabledResponse {
   bool result = 1;
 }
 
@@ -20,35 +138,164 @@ message IsPowerSaveModeResponse {
   bool result = 1;
 }
 
+message IsRebootingUserspaceSupportedRequest {
+}
+
+message IsRebootingUserspaceSupportedResponse {
+  bool result = 1;
+}
+
+message IsScreenOnRequest {
+}
+
+message IsScreenOnResponse {
+  bool result = 1;
+}
+
+message IsSustainedPerformanceModeSupportedRequest {
+}
+
+message IsSustainedPerformanceModeSupportedResponse {
+  bool result = 1;
+}
+
+message IsWakeLockLevelSupportedRequest {
+  int32 arg0 = 1;
+}
+
+message IsWakeLockLevelSupportedResponse {
+  bool result = 1;
+}
+
 message NewWakeLockRequest {
-  int32 flags = 1;
-  string tag = 2;
+  int32 arg0 = 1;
+  string arg1 = 2;
 }
 
 message NewWakeLockResponse {
   int64 result = 1;
 }
 
-message AcquireMsRequest {
-  int64 timeout_ms = 1;
+message RebootRequest {
+  string arg0 = 1;
 }
 
-message AcquireMsResponse {
+message RebootResponse {
 }
 
-message ReleaseRequest {
+message RemoveThermalHeadroomListenerRequest {
+  int64 arg0 = 1;
 }
 
-message ReleaseResponse {
+message RemoveThermalHeadroomListenerResponse {
 }
 
-service ManagerService {
+message RemoveThermalStatusListenerRequest {
+  int64 arg0 = 1;
+}
+
+message RemoveThermalStatusListenerResponse {
+}
+
+message Acquire0Request {
+}
+
+message Acquire0Response {
+}
+
+message Acquire1_1Request {
+  int64 arg0 = 1;
+}
+
+message Acquire1_1Response {
+}
+
+message IsHeldRequest {
+}
+
+message IsHeldResponse {
+  bool result = 1;
+}
+
+message Release0Request {
+}
+
+message Release0Response {
+}
+
+message Release1_1Request {
+  int32 arg0 = 1;
+}
+
+message Release1_1Response {
+}
+
+message SetReferenceCountedRequest {
+  bool arg0 = 1;
+}
+
+message SetReferenceCountedResponse {
+}
+
+message SetStateListenerRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message SetStateListenerResponse {
+}
+
+message SetWorkSourceRequest {
+  int64 arg0 = 1;
+}
+
+message SetWorkSourceResponse {
+}
+
+message ToStringRequest {
+}
+
+message ToStringResponse {
+  string result = 1;
+}
+
+service PowerManagerService {
+  rpc AddThermalHeadroomListener1 (AddThermalHeadroomListener1Request) returns (AddThermalHeadroomListener1Response);
+  rpc AddThermalHeadroomListener2_1 (AddThermalHeadroomListener2_1Request) returns (AddThermalHeadroomListener2_1Response);
+  rpc AddThermalStatusListener1 (AddThermalStatusListener1Request) returns (AddThermalStatusListener1Response);
+  rpc AddThermalStatusListener2_1 (AddThermalStatusListener2_1Request) returns (AddThermalStatusListener2_1Response);
+  rpc GetBatteryDischargePrediction (GetBatteryDischargePredictionRequest) returns (GetBatteryDischargePredictionResponse);
+  rpc GetCurrentThermalStatus (GetCurrentThermalStatusRequest) returns (GetCurrentThermalStatusResponse);
+  rpc GetLocationPowerSaveMode (GetLocationPowerSaveModeRequest) returns (GetLocationPowerSaveModeResponse);
+  rpc GetThermalHeadroom (GetThermalHeadroomRequest) returns (GetThermalHeadroomResponse);
+  rpc IsAllowedInLowPowerStandby1 (IsAllowedInLowPowerStandby1Request) returns (IsAllowedInLowPowerStandby1Response);
+  rpc IsAllowedInLowPowerStandby1_1 (IsAllowedInLowPowerStandby1_1Request) returns (IsAllowedInLowPowerStandby1_1Response);
+  rpc IsBatteryDischargePredictionPersonalized (IsBatteryDischargePredictionPersonalizedRequest) returns (IsBatteryDischargePredictionPersonalizedResponse);
+  rpc IsDeviceIdleMode (IsDeviceIdleModeRequest) returns (IsDeviceIdleModeResponse);
+  rpc IsDeviceLightIdleMode (IsDeviceLightIdleModeRequest) returns (IsDeviceLightIdleModeResponse);
+  rpc IsExemptFromLowPowerStandby (IsExemptFromLowPowerStandbyRequest) returns (IsExemptFromLowPowerStandbyResponse);
+  rpc IsIgnoringBatteryOptimizations (IsIgnoringBatteryOptimizationsRequest) returns (IsIgnoringBatteryOptimizationsResponse);
   rpc IsInteractive (IsInteractiveRequest) returns (IsInteractiveResponse);
+  rpc IsLowPowerStandbyEnabled (IsLowPowerStandbyEnabledRequest) returns (IsLowPowerStandbyEnabledResponse);
   rpc IsPowerSaveMode (IsPowerSaveModeRequest) returns (IsPowerSaveModeResponse);
+  rpc IsRebootingUserspaceSupported (IsRebootingUserspaceSupportedRequest) returns (IsRebootingUserspaceSupportedResponse);
+  rpc IsScreenOn (IsScreenOnRequest) returns (IsScreenOnResponse);
+  rpc IsSustainedPerformanceModeSupported (IsSustainedPerformanceModeSupportedRequest) returns (IsSustainedPerformanceModeSupportedResponse);
+  rpc IsWakeLockLevelSupported (IsWakeLockLevelSupportedRequest) returns (IsWakeLockLevelSupportedResponse);
   rpc NewWakeLock (NewWakeLockRequest) returns (NewWakeLockResponse);
+  rpc Reboot (RebootRequest) returns (RebootResponse);
+  rpc RemoveThermalHeadroomListener (RemoveThermalHeadroomListenerRequest) returns (RemoveThermalHeadroomListenerResponse);
+  rpc RemoveThermalStatusListener (RemoveThermalStatusListenerRequest) returns (RemoveThermalStatusListenerResponse);
 }
 
-service WakeLockService {
-  rpc AcquireMs (AcquireMsRequest) returns (AcquireMsResponse);
-  rpc Release (ReleaseRequest) returns (ReleaseResponse);
+service PowerManagerWakeLockService {
+  rpc Acquire0 (Acquire0Request) returns (Acquire0Response);
+  rpc Acquire1_1 (Acquire1_1Request) returns (Acquire1_1Response);
+  rpc IsHeld (IsHeldRequest) returns (IsHeldResponse);
+  rpc Release0 (Release0Request) returns (Release0Response);
+  rpc Release1_1 (Release1_1Request) returns (Release1_1Response);
+  rpc SetReferenceCounted (SetReferenceCountedRequest) returns (SetReferenceCountedResponse);
+  rpc SetStateListener (SetStateListenerRequest) returns (SetStateListenerResponse);
+  rpc SetWorkSource (SetWorkSourceRequest) returns (SetWorkSourceResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
 }

@@ -6,81 +6,187 @@ package companion;
 
 option go_package = "github.com/xaionaro-go/jni/proto/companion";
 
-message AssociateRawRequest {
-  int64 request = 1;
-  int64 callback = 2;
-  int64 handler = 3;
+message AssociateRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
 }
 
-message AssociateRawResponse {
+message AssociateResponse {
 }
 
-message DisassociateByIdRawRequest {
-  int32 association_id = 1;
+message AttachSystemDataTransportRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
 }
 
-message DisassociateByIdRawResponse {
+message AttachSystemDataTransportResponse {
 }
 
-message GetAssociationsRawRequest {
+message BuildAssociationCancellationIntentRequest {
 }
 
-message GetAssociationsRawResponse {
+message BuildAssociationCancellationIntentResponse {
   int64 result = 1;
 }
 
-message SetSingleDeviceRequest {
-  bool single_device = 1;
+message BuildPermissionTransferUserConsentIntentRequest {
+  int32 arg0 = 1;
 }
 
-message SetSingleDeviceResponse {
+message BuildPermissionTransferUserConsentIntentResponse {
   int64 result = 1;
 }
 
-message AddDeviceFilterRequest {
-  int64 filter = 1;
+message DetachSystemDataTransportRequest {
+  int32 arg0 = 1;
 }
 
-message AddDeviceFilterResponse {
+message DetachSystemDataTransportResponse {
+}
+
+message DisableSystemDataSyncForTypesRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message DisableSystemDataSyncForTypesResponse {
+}
+
+message Disassociate1Request {
+  int32 arg0 = 1;
+}
+
+message Disassociate1Response {
+}
+
+message Disassociate1_1Request {
+  string arg0 = 1;
+}
+
+message Disassociate1_1Response {
+}
+
+message EnableSystemDataSyncForTypesRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message EnableSystemDataSyncForTypesResponse {
+}
+
+message GetAssociationsRequest {
+}
+
+message GetAssociationsResponse {
   int64 result = 1;
 }
 
-message BuildRequest {
+message GetMyAssociationsRequest {
 }
 
-message BuildResponse {
+message GetMyAssociationsResponse {
   int64 result = 1;
 }
 
-message CompanionCallbackOnDeviceFoundEvent {
+message HasNotificationAccessRequest {
   int64 arg0 = 1;
 }
 
-message CompanionCallbackOnFailureEvent {
+message HasNotificationAccessResponse {
+  bool result = 1;
+}
+
+message IsPermissionTransferUserConsentedRequest {
+  int32 arg0 = 1;
+}
+
+message IsPermissionTransferUserConsentedResponse {
+  bool result = 1;
+}
+
+message RemoveBondRequest {
+  int32 arg0 = 1;
+}
+
+message RemoveBondResponse {
+  bool result = 1;
+}
+
+message RequestNotificationAccessRequest {
   int64 arg0 = 1;
 }
 
-message CompanionCallbackEvent {
-  optional CompanionCallbackOnDeviceFoundEvent on_device_found = 1;
-  optional CompanionCallbackOnFailureEvent on_failure = 2;
+message RequestNotificationAccessResponse {
 }
 
-message SubscribeCompanionCallbackRequest {
+message SetDeviceIdRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
 }
 
-service ManagerService {
-  rpc AssociateRaw (AssociateRawRequest) returns (AssociateRawResponse);
-  rpc DisassociateByIdRaw (DisassociateByIdRawRequest) returns (DisassociateByIdRawResponse);
-  rpc GetAssociationsRaw (GetAssociationsRawRequest) returns (GetAssociationsRawResponse);
+message SetDeviceIdResponse {
 }
 
-service AssociationRequestBuilderService {
-  rpc SetSingleDevice (SetSingleDeviceRequest) returns (SetSingleDeviceResponse);
-  rpc AddDeviceFilter (AddDeviceFilterRequest) returns (AddDeviceFilterResponse);
-  rpc Build (BuildRequest) returns (BuildResponse);
+message StartObservingDevicePresence1Request {
+  int64 arg0 = 1;
 }
 
-service CompanionCallbackService {
-  // Server-streaming events from android.companion.CompanionDeviceManager$Callback
-  rpc SubscribeCompanionCallback (SubscribeCompanionCallbackRequest) returns (stream CompanionCallbackEvent);
+message StartObservingDevicePresence1Response {
+}
+
+message StartObservingDevicePresence1_1Request {
+  string arg0 = 1;
+}
+
+message StartObservingDevicePresence1_1Response {
+}
+
+message StartSystemDataTransferRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message StartSystemDataTransferResponse {
+}
+
+message StopObservingDevicePresence1Request {
+  int64 arg0 = 1;
+}
+
+message StopObservingDevicePresence1Response {
+}
+
+message StopObservingDevicePresence1_1Request {
+  string arg0 = 1;
+}
+
+message StopObservingDevicePresence1_1Response {
+}
+
+service CompanionDeviceManagerService {
+  rpc Associate (AssociateRequest) returns (AssociateResponse);
+  rpc AttachSystemDataTransport (AttachSystemDataTransportRequest) returns (AttachSystemDataTransportResponse);
+  rpc BuildAssociationCancellationIntent (BuildAssociationCancellationIntentRequest) returns (BuildAssociationCancellationIntentResponse);
+  rpc BuildPermissionTransferUserConsentIntent (BuildPermissionTransferUserConsentIntentRequest) returns (BuildPermissionTransferUserConsentIntentResponse);
+  rpc DetachSystemDataTransport (DetachSystemDataTransportRequest) returns (DetachSystemDataTransportResponse);
+  rpc DisableSystemDataSyncForTypes (DisableSystemDataSyncForTypesRequest) returns (DisableSystemDataSyncForTypesResponse);
+  rpc Disassociate1 (Disassociate1Request) returns (Disassociate1Response);
+  rpc Disassociate1_1 (Disassociate1_1Request) returns (Disassociate1_1Response);
+  rpc EnableSystemDataSyncForTypes (EnableSystemDataSyncForTypesRequest) returns (EnableSystemDataSyncForTypesResponse);
+  rpc GetAssociations (GetAssociationsRequest) returns (GetAssociationsResponse);
+  rpc GetMyAssociations (GetMyAssociationsRequest) returns (GetMyAssociationsResponse);
+  rpc HasNotificationAccess (HasNotificationAccessRequest) returns (HasNotificationAccessResponse);
+  rpc IsPermissionTransferUserConsented (IsPermissionTransferUserConsentedRequest) returns (IsPermissionTransferUserConsentedResponse);
+  rpc RemoveBond (RemoveBondRequest) returns (RemoveBondResponse);
+  rpc RequestNotificationAccess (RequestNotificationAccessRequest) returns (RequestNotificationAccessResponse);
+  rpc SetDeviceId (SetDeviceIdRequest) returns (SetDeviceIdResponse);
+  rpc StartObservingDevicePresence1 (StartObservingDevicePresence1Request) returns (StartObservingDevicePresence1Response);
+  rpc StartObservingDevicePresence1_1 (StartObservingDevicePresence1_1Request) returns (StartObservingDevicePresence1_1Response);
+  rpc StartSystemDataTransfer (StartSystemDataTransferRequest) returns (StartSystemDataTransferResponse);
+  rpc StopObservingDevicePresence1 (StopObservingDevicePresence1Request) returns (StopObservingDevicePresence1Response);
+  rpc StopObservingDevicePresence1_1 (StopObservingDevicePresence1_1Request) returns (StopObservingDevicePresence1_1Response);
 }

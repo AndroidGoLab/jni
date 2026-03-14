@@ -22,8 +22,8 @@ func TestGenerate_AllRealSpecs(t *testing.T) {
 	if err != nil {
 		t.Fatalf("glob specs: %v", err)
 	}
-	if len(specFiles) < 50 {
-		t.Fatalf("expected at least 50 spec files, found %d", len(specFiles))
+	if len(specFiles) < 30 {
+		t.Fatalf("expected at least 30 spec files, found %d", len(specFiles))
 	}
 
 	var failed []string

@@ -23,26 +23,26 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type IsConnectedRequest struct {
+type CloseRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IsConnectedRequest) Reset() {
-	*x = IsConnectedRequest{}
+func (x *CloseRequest) Reset() {
+	*x = CloseRequest{}
 	mi := &file_proto_omapi_omapi_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IsConnectedRequest) String() string {
+func (x *CloseRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IsConnectedRequest) ProtoMessage() {}
+func (*CloseRequest) ProtoMessage() {}
 
-func (x *IsConnectedRequest) ProtoReflect() protoreflect.Message {
+func (x *CloseRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_omapi_omapi_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -54,32 +54,31 @@ func (x *IsConnectedRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IsConnectedRequest.ProtoReflect.Descriptor instead.
-func (*IsConnectedRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CloseRequest.ProtoReflect.Descriptor instead.
+func (*CloseRequest) Descriptor() ([]byte, []int) {
 	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{0}
 }
 
-type IsConnectedResponse struct {
+type CloseResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IsConnectedResponse) Reset() {
-	*x = IsConnectedResponse{}
+func (x *CloseResponse) Reset() {
+	*x = CloseResponse{}
 	mi := &file_proto_omapi_omapi_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IsConnectedResponse) String() string {
+func (x *CloseResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IsConnectedResponse) ProtoMessage() {}
+func (*CloseResponse) ProtoMessage() {}
 
-func (x *IsConnectedResponse) ProtoReflect() protoreflect.Message {
+func (x *CloseResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_omapi_omapi_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -91,904 +90,9 @@ func (x *IsConnectedResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IsConnectedResponse.ProtoReflect.Descriptor instead.
-func (*IsConnectedResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use CloseResponse.ProtoReflect.Descriptor instead.
+func (*CloseResponse) Descriptor() ([]byte, []int) {
 	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *IsConnectedResponse) GetResult() bool {
-	if x != nil {
-		return x.Result
-	}
-	return false
-}
-
-type GetReadersRawRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetReadersRawRequest) Reset() {
-	*x = GetReadersRawRequest{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetReadersRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetReadersRawRequest) ProtoMessage() {}
-
-func (x *GetReadersRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetReadersRawRequest.ProtoReflect.Descriptor instead.
-func (*GetReadersRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{2}
-}
-
-type GetReadersRawResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetReadersRawResponse) Reset() {
-	*x = GetReadersRawResponse{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetReadersRawResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetReadersRawResponse) ProtoMessage() {}
-
-func (x *GetReadersRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetReadersRawResponse.ProtoReflect.Descriptor instead.
-func (*GetReadersRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *GetReadersRawResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type ShutdownRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ShutdownRequest) Reset() {
-	*x = ShutdownRequest{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ShutdownRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ShutdownRequest) ProtoMessage() {}
-
-func (x *ShutdownRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ShutdownRequest.ProtoReflect.Descriptor instead.
-func (*ShutdownRequest) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{4}
-}
-
-type ShutdownResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ShutdownResponse) Reset() {
-	*x = ShutdownResponse{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ShutdownResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ShutdownResponse) ProtoMessage() {}
-
-func (x *ShutdownResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ShutdownResponse.ProtoReflect.Descriptor instead.
-func (*ShutdownResponse) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{5}
-}
-
-type GetNameRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetNameRequest) Reset() {
-	*x = GetNameRequest{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetNameRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetNameRequest) ProtoMessage() {}
-
-func (x *GetNameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetNameRequest.ProtoReflect.Descriptor instead.
-func (*GetNameRequest) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{6}
-}
-
-type GetNameResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetNameResponse) Reset() {
-	*x = GetNameResponse{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetNameResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetNameResponse) ProtoMessage() {}
-
-func (x *GetNameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetNameResponse.ProtoReflect.Descriptor instead.
-func (*GetNameResponse) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *GetNameResponse) GetResult() string {
-	if x != nil {
-		return x.Result
-	}
-	return ""
-}
-
-type IsSecureElementPresentRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *IsSecureElementPresentRequest) Reset() {
-	*x = IsSecureElementPresentRequest{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *IsSecureElementPresentRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*IsSecureElementPresentRequest) ProtoMessage() {}
-
-func (x *IsSecureElementPresentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use IsSecureElementPresentRequest.ProtoReflect.Descriptor instead.
-func (*IsSecureElementPresentRequest) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{8}
-}
-
-type IsSecureElementPresentResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *IsSecureElementPresentResponse) Reset() {
-	*x = IsSecureElementPresentResponse{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *IsSecureElementPresentResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*IsSecureElementPresentResponse) ProtoMessage() {}
-
-func (x *IsSecureElementPresentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use IsSecureElementPresentResponse.ProtoReflect.Descriptor instead.
-func (*IsSecureElementPresentResponse) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *IsSecureElementPresentResponse) GetResult() bool {
-	if x != nil {
-		return x.Result
-	}
-	return false
-}
-
-type OpenSessionRawRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OpenSessionRawRequest) Reset() {
-	*x = OpenSessionRawRequest{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OpenSessionRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OpenSessionRawRequest) ProtoMessage() {}
-
-func (x *OpenSessionRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OpenSessionRawRequest.ProtoReflect.Descriptor instead.
-func (*OpenSessionRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{10}
-}
-
-type OpenSessionRawResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OpenSessionRawResponse) Reset() {
-	*x = OpenSessionRawResponse{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OpenSessionRawResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OpenSessionRawResponse) ProtoMessage() {}
-
-func (x *OpenSessionRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OpenSessionRawResponse.ProtoReflect.Descriptor instead.
-func (*OpenSessionRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *OpenSessionRawResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type OpenBasicChannelRawRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Aid           int64                  `protobuf:"varint,1,opt,name=aid,proto3" json:"aid,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OpenBasicChannelRawRequest) Reset() {
-	*x = OpenBasicChannelRawRequest{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OpenBasicChannelRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OpenBasicChannelRawRequest) ProtoMessage() {}
-
-func (x *OpenBasicChannelRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OpenBasicChannelRawRequest.ProtoReflect.Descriptor instead.
-func (*OpenBasicChannelRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *OpenBasicChannelRawRequest) GetAid() int64 {
-	if x != nil {
-		return x.Aid
-	}
-	return 0
-}
-
-type OpenBasicChannelRawResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OpenBasicChannelRawResponse) Reset() {
-	*x = OpenBasicChannelRawResponse{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OpenBasicChannelRawResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OpenBasicChannelRawResponse) ProtoMessage() {}
-
-func (x *OpenBasicChannelRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OpenBasicChannelRawResponse.ProtoReflect.Descriptor instead.
-func (*OpenBasicChannelRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *OpenBasicChannelRawResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type OpenLogicalChannelRawRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Aid           int64                  `protobuf:"varint,1,opt,name=aid,proto3" json:"aid,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OpenLogicalChannelRawRequest) Reset() {
-	*x = OpenLogicalChannelRawRequest{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OpenLogicalChannelRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OpenLogicalChannelRawRequest) ProtoMessage() {}
-
-func (x *OpenLogicalChannelRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OpenLogicalChannelRawRequest.ProtoReflect.Descriptor instead.
-func (*OpenLogicalChannelRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *OpenLogicalChannelRawRequest) GetAid() int64 {
-	if x != nil {
-		return x.Aid
-	}
-	return 0
-}
-
-type OpenLogicalChannelRawResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OpenLogicalChannelRawResponse) Reset() {
-	*x = OpenLogicalChannelRawResponse{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OpenLogicalChannelRawResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OpenLogicalChannelRawResponse) ProtoMessage() {}
-
-func (x *OpenLogicalChannelRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OpenLogicalChannelRawResponse.ProtoReflect.Descriptor instead.
-func (*OpenLogicalChannelRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *OpenLogicalChannelRawResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type GetATRRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetATRRequest) Reset() {
-	*x = GetATRRequest{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetATRRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetATRRequest) ProtoMessage() {}
-
-func (x *GetATRRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetATRRequest.ProtoReflect.Descriptor instead.
-func (*GetATRRequest) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{16}
-}
-
-type GetATRResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetATRResponse) Reset() {
-	*x = GetATRResponse{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[17]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetATRResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetATRResponse) ProtoMessage() {}
-
-func (x *GetATRResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[17]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetATRResponse.ProtoReflect.Descriptor instead.
-func (*GetATRResponse) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{17}
-}
-
-func (x *GetATRResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type CloseRawRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CloseRawRequest) Reset() {
-	*x = CloseRawRequest{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[18]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CloseRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CloseRawRequest) ProtoMessage() {}
-
-func (x *CloseRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[18]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CloseRawRequest.ProtoReflect.Descriptor instead.
-func (*CloseRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{18}
-}
-
-type CloseRawResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CloseRawResponse) Reset() {
-	*x = CloseRawResponse{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[19]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CloseRawResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CloseRawResponse) ProtoMessage() {}
-
-func (x *CloseRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[19]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CloseRawResponse.ProtoReflect.Descriptor instead.
-func (*CloseRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{19}
-}
-
-type TransmitRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Command       int64                  `protobuf:"varint,1,opt,name=command,proto3" json:"command,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *TransmitRequest) Reset() {
-	*x = TransmitRequest{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[20]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *TransmitRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TransmitRequest) ProtoMessage() {}
-
-func (x *TransmitRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[20]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TransmitRequest.ProtoReflect.Descriptor instead.
-func (*TransmitRequest) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{20}
-}
-
-func (x *TransmitRequest) GetCommand() int64 {
-	if x != nil {
-		return x.Command
-	}
-	return 0
-}
-
-type TransmitResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *TransmitResponse) Reset() {
-	*x = TransmitResponse{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[21]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *TransmitResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TransmitResponse) ProtoMessage() {}
-
-func (x *TransmitResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[21]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TransmitResponse.ProtoReflect.Descriptor instead.
-func (*TransmitResponse) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{21}
-}
-
-func (x *TransmitResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type SelectNextRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SelectNextRequest) Reset() {
-	*x = SelectNextRequest{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[22]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SelectNextRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SelectNextRequest) ProtoMessage() {}
-
-func (x *SelectNextRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[22]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SelectNextRequest.ProtoReflect.Descriptor instead.
-func (*SelectNextRequest) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{22}
-}
-
-type SelectNextResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SelectNextResponse) Reset() {
-	*x = SelectNextResponse{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[23]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SelectNextResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SelectNextResponse) ProtoMessage() {}
-
-func (x *SelectNextResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[23]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SelectNextResponse.ProtoReflect.Descriptor instead.
-func (*SelectNextResponse) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{23}
-}
-
-func (x *SelectNextResponse) GetResult() bool {
-	if x != nil {
-		return x.Result
-	}
-	return false
 }
 
 type GetSelectResponseRequest struct {
@@ -999,7 +103,7 @@ type GetSelectResponseRequest struct {
 
 func (x *GetSelectResponseRequest) Reset() {
 	*x = GetSelectResponseRequest{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[24]
+	mi := &file_proto_omapi_omapi_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1011,7 +115,7 @@ func (x *GetSelectResponseRequest) String() string {
 func (*GetSelectResponseRequest) ProtoMessage() {}
 
 func (x *GetSelectResponseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[24]
+	mi := &file_proto_omapi_omapi_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1024,7 +128,7 @@ func (x *GetSelectResponseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSelectResponseRequest.ProtoReflect.Descriptor instead.
 func (*GetSelectResponseRequest) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{24}
+	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{2}
 }
 
 type GetSelectResponseResponse struct {
@@ -1036,7 +140,7 @@ type GetSelectResponseResponse struct {
 
 func (x *GetSelectResponseResponse) Reset() {
 	*x = GetSelectResponseResponse{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[25]
+	mi := &file_proto_omapi_omapi_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1048,7 +152,7 @@ func (x *GetSelectResponseResponse) String() string {
 func (*GetSelectResponseResponse) ProtoMessage() {}
 
 func (x *GetSelectResponseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[25]
+	mi := &file_proto_omapi_omapi_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1061,10 +165,90 @@ func (x *GetSelectResponseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSelectResponseResponse.ProtoReflect.Descriptor instead.
 func (*GetSelectResponseResponse) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{25}
+	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetSelectResponseResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetSessionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSessionRequest) Reset() {
+	*x = GetSessionRequest{}
+	mi := &file_proto_omapi_omapi_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSessionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSessionRequest) ProtoMessage() {}
+
+func (x *GetSessionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_omapi_omapi_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSessionRequest.ProtoReflect.Descriptor instead.
+func (*GetSessionRequest) Descriptor() ([]byte, []int) {
+	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{4}
+}
+
+type GetSessionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSessionResponse) Reset() {
+	*x = GetSessionResponse{}
+	mi := &file_proto_omapi_omapi_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSessionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSessionResponse) ProtoMessage() {}
+
+func (x *GetSessionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_omapi_omapi_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSessionResponse.ProtoReflect.Descriptor instead.
+func (*GetSessionResponse) Descriptor() ([]byte, []int) {
+	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetSessionResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
@@ -1079,7 +263,7 @@ type IsBasicChannelRequest struct {
 
 func (x *IsBasicChannelRequest) Reset() {
 	*x = IsBasicChannelRequest{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[26]
+	mi := &file_proto_omapi_omapi_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1091,7 +275,7 @@ func (x *IsBasicChannelRequest) String() string {
 func (*IsBasicChannelRequest) ProtoMessage() {}
 
 func (x *IsBasicChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[26]
+	mi := &file_proto_omapi_omapi_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1104,7 +288,7 @@ func (x *IsBasicChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsBasicChannelRequest.ProtoReflect.Descriptor instead.
 func (*IsBasicChannelRequest) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{26}
+	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{6}
 }
 
 type IsBasicChannelResponse struct {
@@ -1116,7 +300,7 @@ type IsBasicChannelResponse struct {
 
 func (x *IsBasicChannelResponse) Reset() {
 	*x = IsBasicChannelResponse{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[27]
+	mi := &file_proto_omapi_omapi_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1128,7 +312,7 @@ func (x *IsBasicChannelResponse) String() string {
 func (*IsBasicChannelResponse) ProtoMessage() {}
 
 func (x *IsBasicChannelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[27]
+	mi := &file_proto_omapi_omapi_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1141,7 +325,7 @@ func (x *IsBasicChannelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsBasicChannelResponse.ProtoReflect.Descriptor instead.
 func (*IsBasicChannelResponse) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{27}
+	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *IsBasicChannelResponse) GetResult() bool {
@@ -1151,27 +335,27 @@ func (x *IsBasicChannelResponse) GetResult() bool {
 	return false
 }
 
-type OnConnectedListenerOnConnectedEvent struct {
+type IsOpenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *OnConnectedListenerOnConnectedEvent) Reset() {
-	*x = OnConnectedListenerOnConnectedEvent{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[28]
+func (x *IsOpenRequest) Reset() {
+	*x = IsOpenRequest{}
+	mi := &file_proto_omapi_omapi_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OnConnectedListenerOnConnectedEvent) String() string {
+func (x *IsOpenRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OnConnectedListenerOnConnectedEvent) ProtoMessage() {}
+func (*IsOpenRequest) ProtoMessage() {}
 
-func (x *OnConnectedListenerOnConnectedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[28]
+func (x *IsOpenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_omapi_omapi_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1182,33 +366,33 @@ func (x *OnConnectedListenerOnConnectedEvent) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OnConnectedListenerOnConnectedEvent.ProtoReflect.Descriptor instead.
-func (*OnConnectedListenerOnConnectedEvent) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{28}
+// Deprecated: Use IsOpenRequest.ProtoReflect.Descriptor instead.
+func (*IsOpenRequest) Descriptor() ([]byte, []int) {
+	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{8}
 }
 
-type OnConnectedListenerEvent struct {
-	state         protoimpl.MessageState               `protogen:"open.v1"`
-	OnConnected   *OnConnectedListenerOnConnectedEvent `protobuf:"bytes,1,opt,name=on_connected,json=onConnected,proto3,oneof" json:"on_connected,omitempty"`
+type IsOpenResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *OnConnectedListenerEvent) Reset() {
-	*x = OnConnectedListenerEvent{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[29]
+func (x *IsOpenResponse) Reset() {
+	*x = IsOpenResponse{}
+	mi := &file_proto_omapi_omapi_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OnConnectedListenerEvent) String() string {
+func (x *IsOpenResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OnConnectedListenerEvent) ProtoMessage() {}
+func (*IsOpenResponse) ProtoMessage() {}
 
-func (x *OnConnectedListenerEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[29]
+func (x *IsOpenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_omapi_omapi_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1219,39 +403,39 @@ func (x *OnConnectedListenerEvent) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OnConnectedListenerEvent.ProtoReflect.Descriptor instead.
-func (*OnConnectedListenerEvent) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{29}
+// Deprecated: Use IsOpenResponse.ProtoReflect.Descriptor instead.
+func (*IsOpenResponse) Descriptor() ([]byte, []int) {
+	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *OnConnectedListenerEvent) GetOnConnected() *OnConnectedListenerOnConnectedEvent {
+func (x *IsOpenResponse) GetResult() bool {
 	if x != nil {
-		return x.OnConnected
+		return x.Result
 	}
-	return nil
+	return false
 }
 
-type SubscribeOnConnectedListenerRequest struct {
+type SelectNextRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SubscribeOnConnectedListenerRequest) Reset() {
-	*x = SubscribeOnConnectedListenerRequest{}
-	mi := &file_proto_omapi_omapi_proto_msgTypes[30]
+func (x *SelectNextRequest) Reset() {
+	*x = SelectNextRequest{}
+	mi := &file_proto_omapi_omapi_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SubscribeOnConnectedListenerRequest) String() string {
+func (x *SelectNextRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SubscribeOnConnectedListenerRequest) ProtoMessage() {}
+func (*SelectNextRequest) ProtoMessage() {}
 
-func (x *SubscribeOnConnectedListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_omapi_omapi_proto_msgTypes[30]
+func (x *SelectNextRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_omapi_omapi_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1262,86 +446,179 @@ func (x *SubscribeOnConnectedListenerRequest) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SubscribeOnConnectedListenerRequest.ProtoReflect.Descriptor instead.
-func (*SubscribeOnConnectedListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{30}
+// Deprecated: Use SelectNextRequest.ProtoReflect.Descriptor instead.
+func (*SelectNextRequest) Descriptor() ([]byte, []int) {
+	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{10}
+}
+
+type SelectNextResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SelectNextResponse) Reset() {
+	*x = SelectNextResponse{}
+	mi := &file_proto_omapi_omapi_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SelectNextResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SelectNextResponse) ProtoMessage() {}
+
+func (x *SelectNextResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_omapi_omapi_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SelectNextResponse.ProtoReflect.Descriptor instead.
+func (*SelectNextResponse) Descriptor() ([]byte, []int) {
+	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *SelectNextResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type TransmitRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransmitRequest) Reset() {
+	*x = TransmitRequest{}
+	mi := &file_proto_omapi_omapi_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransmitRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransmitRequest) ProtoMessage() {}
+
+func (x *TransmitRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_omapi_omapi_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransmitRequest.ProtoReflect.Descriptor instead.
+func (*TransmitRequest) Descriptor() ([]byte, []int) {
+	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *TransmitRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type TransmitResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransmitResponse) Reset() {
+	*x = TransmitResponse{}
+	mi := &file_proto_omapi_omapi_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransmitResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransmitResponse) ProtoMessage() {}
+
+func (x *TransmitResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_omapi_omapi_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransmitResponse.ProtoReflect.Descriptor instead.
+func (*TransmitResponse) Descriptor() ([]byte, []int) {
+	return file_proto_omapi_omapi_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *TransmitResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
 }
 
 var File_proto_omapi_omapi_proto protoreflect.FileDescriptor
 
 const file_proto_omapi_omapi_proto_rawDesc = "" +
 	"\n" +
-	"\x17proto/omapi/omapi.proto\x12\x05omapi\"\x14\n" +
-	"\x12IsConnectedRequest\"-\n" +
-	"\x13IsConnectedResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"\x16\n" +
-	"\x14GetReadersRawRequest\"/\n" +
-	"\x15GetReadersRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"\x11\n" +
-	"\x0fShutdownRequest\"\x12\n" +
-	"\x10ShutdownResponse\"\x10\n" +
-	"\x0eGetNameRequest\")\n" +
-	"\x0fGetNameResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\tR\x06result\"\x1f\n" +
-	"\x1dIsSecureElementPresentRequest\"8\n" +
-	"\x1eIsSecureElementPresentResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"\x17\n" +
-	"\x15OpenSessionRawRequest\"0\n" +
-	"\x16OpenSessionRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\".\n" +
-	"\x1aOpenBasicChannelRawRequest\x12\x10\n" +
-	"\x03aid\x18\x01 \x01(\x03R\x03aid\"5\n" +
-	"\x1bOpenBasicChannelRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"0\n" +
-	"\x1cOpenLogicalChannelRawRequest\x12\x10\n" +
-	"\x03aid\x18\x01 \x01(\x03R\x03aid\"7\n" +
-	"\x1dOpenLogicalChannelRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"\x0f\n" +
-	"\rGetATRRequest\"(\n" +
-	"\x0eGetATRResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"\x11\n" +
-	"\x0fCloseRawRequest\"\x12\n" +
-	"\x10CloseRawResponse\"+\n" +
-	"\x0fTransmitRequest\x12\x18\n" +
-	"\acommand\x18\x01 \x01(\x03R\acommand\"*\n" +
-	"\x10TransmitResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"\x13\n" +
-	"\x11SelectNextRequest\",\n" +
-	"\x12SelectNextResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"\x1a\n" +
+	"\x17proto/omapi/omapi.proto\x12\x05omapi\"\x0e\n" +
+	"\fCloseRequest\"\x0f\n" +
+	"\rCloseResponse\"\x1a\n" +
 	"\x18GetSelectResponseRequest\"3\n" +
 	"\x19GetSelectResponseResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x13\n" +
+	"\x11GetSessionRequest\",\n" +
+	"\x12GetSessionResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\x03R\x06result\"\x17\n" +
 	"\x15IsBasicChannelRequest\"0\n" +
 	"\x16IsBasicChannelResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x0f\n" +
+	"\rIsOpenRequest\"(\n" +
+	"\x0eIsOpenResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x13\n" +
+	"\x11SelectNextRequest\",\n" +
+	"\x12SelectNextResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\bR\x06result\"%\n" +
-	"#OnConnectedListenerOnConnectedEvent\"\x7f\n" +
-	"\x18OnConnectedListenerEvent\x12R\n" +
-	"\fon_connected\x18\x01 \x01(\v2*.omapi.OnConnectedListenerOnConnectedEventH\x00R\vonConnected\x88\x01\x01B\x0f\n" +
-	"\r_on_connected\"%\n" +
-	"#SubscribeOnConnectedListenerRequest2\xdf\x01\n" +
-	"\x0eServiceService\x12D\n" +
-	"\vIsConnected\x12\x19.omapi.IsConnectedRequest\x1a\x1a.omapi.IsConnectedResponse\x12J\n" +
-	"\rGetReadersRaw\x12\x1b.omapi.GetReadersRawRequest\x1a\x1c.omapi.GetReadersRawResponse\x12;\n" +
-	"\bShutdown\x12\x16.omapi.ShutdownRequest\x1a\x17.omapi.ShutdownResponse2\xff\x01\n" +
-	"\rReaderService\x128\n" +
-	"\aGetName\x12\x15.omapi.GetNameRequest\x1a\x16.omapi.GetNameResponse\x12e\n" +
-	"\x16IsSecureElementPresent\x12$.omapi.IsSecureElementPresentRequest\x1a%.omapi.IsSecureElementPresentResponse\x12M\n" +
-	"\x0eOpenSessionRaw\x12\x1c.omapi.OpenSessionRawRequest\x1a\x1d.omapi.OpenSessionRawResponse2\xc6\x02\n" +
-	"\x0eSessionService\x12\\\n" +
-	"\x13OpenBasicChannelRaw\x12!.omapi.OpenBasicChannelRawRequest\x1a\".omapi.OpenBasicChannelRawResponse\x12b\n" +
-	"\x15OpenLogicalChannelRaw\x12#.omapi.OpenLogicalChannelRawRequest\x1a$.omapi.OpenLogicalChannelRawResponse\x125\n" +
-	"\x06GetATR\x12\x14.omapi.GetATRRequest\x1a\x15.omapi.GetATRResponse\x12;\n" +
-	"\bCloseRaw\x12\x16.omapi.CloseRawRequest\x1a\x17.omapi.CloseRawResponse2\xf4\x02\n" +
-	"\x0eChannelService\x12;\n" +
-	"\bTransmit\x12\x16.omapi.TransmitRequest\x1a\x17.omapi.TransmitResponse\x12A\n" +
+	"\x0fTransmitRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"*\n" +
+	"\x10TransmitResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result2\xe5\x03\n" +
+	"\x0eChannelService\x122\n" +
+	"\x05Close\x12\x13.omapi.CloseRequest\x1a\x14.omapi.CloseResponse\x12V\n" +
+	"\x11GetSelectResponse\x12\x1f.omapi.GetSelectResponseRequest\x1a .omapi.GetSelectResponseResponse\x12A\n" +
 	"\n" +
-	"SelectNext\x12\x18.omapi.SelectNextRequest\x1a\x19.omapi.SelectNextResponse\x12V\n" +
-	"\x11GetSelectResponse\x12\x1f.omapi.GetSelectResponseRequest\x1a .omapi.GetSelectResponseResponse\x12M\n" +
-	"\x0eIsBasicChannel\x12\x1c.omapi.IsBasicChannelRequest\x1a\x1d.omapi.IsBasicChannelResponse\x12;\n" +
-	"\bCloseRaw\x12\x16.omapi.CloseRawRequest\x1a\x17.omapi.CloseRawResponse2\x8b\x01\n" +
-	"\x1aOnConnectedListenerService\x12m\n" +
-	"\x1cSubscribeOnConnectedListener\x12*.omapi.SubscribeOnConnectedListenerRequest\x1a\x1f.omapi.OnConnectedListenerEvent0\x01B(Z&github.com/xaionaro-go/jni/proto/omapib\x06proto3"
+	"GetSession\x12\x18.omapi.GetSessionRequest\x1a\x19.omapi.GetSessionResponse\x12M\n" +
+	"\x0eIsBasicChannel\x12\x1c.omapi.IsBasicChannelRequest\x1a\x1d.omapi.IsBasicChannelResponse\x125\n" +
+	"\x06IsOpen\x12\x14.omapi.IsOpenRequest\x1a\x15.omapi.IsOpenResponse\x12A\n" +
+	"\n" +
+	"SelectNext\x12\x18.omapi.SelectNextRequest\x1a\x19.omapi.SelectNextResponse\x12;\n" +
+	"\bTransmit\x12\x16.omapi.TransmitRequest\x1a\x17.omapi.TransmitResponseB(Z&github.com/xaionaro-go/jni/proto/omapib\x06proto3"
 
 var (
 	file_proto_omapi_omapi_proto_rawDescOnce sync.Once
@@ -1355,79 +632,43 @@ func file_proto_omapi_omapi_proto_rawDescGZIP() []byte {
 	return file_proto_omapi_omapi_proto_rawDescData
 }
 
-var file_proto_omapi_omapi_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
+var file_proto_omapi_omapi_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_proto_omapi_omapi_proto_goTypes = []any{
-	(*IsConnectedRequest)(nil),                  // 0: omapi.IsConnectedRequest
-	(*IsConnectedResponse)(nil),                 // 1: omapi.IsConnectedResponse
-	(*GetReadersRawRequest)(nil),                // 2: omapi.GetReadersRawRequest
-	(*GetReadersRawResponse)(nil),               // 3: omapi.GetReadersRawResponse
-	(*ShutdownRequest)(nil),                     // 4: omapi.ShutdownRequest
-	(*ShutdownResponse)(nil),                    // 5: omapi.ShutdownResponse
-	(*GetNameRequest)(nil),                      // 6: omapi.GetNameRequest
-	(*GetNameResponse)(nil),                     // 7: omapi.GetNameResponse
-	(*IsSecureElementPresentRequest)(nil),       // 8: omapi.IsSecureElementPresentRequest
-	(*IsSecureElementPresentResponse)(nil),      // 9: omapi.IsSecureElementPresentResponse
-	(*OpenSessionRawRequest)(nil),               // 10: omapi.OpenSessionRawRequest
-	(*OpenSessionRawResponse)(nil),              // 11: omapi.OpenSessionRawResponse
-	(*OpenBasicChannelRawRequest)(nil),          // 12: omapi.OpenBasicChannelRawRequest
-	(*OpenBasicChannelRawResponse)(nil),         // 13: omapi.OpenBasicChannelRawResponse
-	(*OpenLogicalChannelRawRequest)(nil),        // 14: omapi.OpenLogicalChannelRawRequest
-	(*OpenLogicalChannelRawResponse)(nil),       // 15: omapi.OpenLogicalChannelRawResponse
-	(*GetATRRequest)(nil),                       // 16: omapi.GetATRRequest
-	(*GetATRResponse)(nil),                      // 17: omapi.GetATRResponse
-	(*CloseRawRequest)(nil),                     // 18: omapi.CloseRawRequest
-	(*CloseRawResponse)(nil),                    // 19: omapi.CloseRawResponse
-	(*TransmitRequest)(nil),                     // 20: omapi.TransmitRequest
-	(*TransmitResponse)(nil),                    // 21: omapi.TransmitResponse
-	(*SelectNextRequest)(nil),                   // 22: omapi.SelectNextRequest
-	(*SelectNextResponse)(nil),                  // 23: omapi.SelectNextResponse
-	(*GetSelectResponseRequest)(nil),            // 24: omapi.GetSelectResponseRequest
-	(*GetSelectResponseResponse)(nil),           // 25: omapi.GetSelectResponseResponse
-	(*IsBasicChannelRequest)(nil),               // 26: omapi.IsBasicChannelRequest
-	(*IsBasicChannelResponse)(nil),              // 27: omapi.IsBasicChannelResponse
-	(*OnConnectedListenerOnConnectedEvent)(nil), // 28: omapi.OnConnectedListenerOnConnectedEvent
-	(*OnConnectedListenerEvent)(nil),            // 29: omapi.OnConnectedListenerEvent
-	(*SubscribeOnConnectedListenerRequest)(nil), // 30: omapi.SubscribeOnConnectedListenerRequest
+	(*CloseRequest)(nil),              // 0: omapi.CloseRequest
+	(*CloseResponse)(nil),             // 1: omapi.CloseResponse
+	(*GetSelectResponseRequest)(nil),  // 2: omapi.GetSelectResponseRequest
+	(*GetSelectResponseResponse)(nil), // 3: omapi.GetSelectResponseResponse
+	(*GetSessionRequest)(nil),         // 4: omapi.GetSessionRequest
+	(*GetSessionResponse)(nil),        // 5: omapi.GetSessionResponse
+	(*IsBasicChannelRequest)(nil),     // 6: omapi.IsBasicChannelRequest
+	(*IsBasicChannelResponse)(nil),    // 7: omapi.IsBasicChannelResponse
+	(*IsOpenRequest)(nil),             // 8: omapi.IsOpenRequest
+	(*IsOpenResponse)(nil),            // 9: omapi.IsOpenResponse
+	(*SelectNextRequest)(nil),         // 10: omapi.SelectNextRequest
+	(*SelectNextResponse)(nil),        // 11: omapi.SelectNextResponse
+	(*TransmitRequest)(nil),           // 12: omapi.TransmitRequest
+	(*TransmitResponse)(nil),          // 13: omapi.TransmitResponse
 }
 var file_proto_omapi_omapi_proto_depIdxs = []int32{
-	28, // 0: omapi.OnConnectedListenerEvent.on_connected:type_name -> omapi.OnConnectedListenerOnConnectedEvent
-	0,  // 1: omapi.ServiceService.IsConnected:input_type -> omapi.IsConnectedRequest
-	2,  // 2: omapi.ServiceService.GetReadersRaw:input_type -> omapi.GetReadersRawRequest
-	4,  // 3: omapi.ServiceService.Shutdown:input_type -> omapi.ShutdownRequest
-	6,  // 4: omapi.ReaderService.GetName:input_type -> omapi.GetNameRequest
-	8,  // 5: omapi.ReaderService.IsSecureElementPresent:input_type -> omapi.IsSecureElementPresentRequest
-	10, // 6: omapi.ReaderService.OpenSessionRaw:input_type -> omapi.OpenSessionRawRequest
-	12, // 7: omapi.SessionService.OpenBasicChannelRaw:input_type -> omapi.OpenBasicChannelRawRequest
-	14, // 8: omapi.SessionService.OpenLogicalChannelRaw:input_type -> omapi.OpenLogicalChannelRawRequest
-	16, // 9: omapi.SessionService.GetATR:input_type -> omapi.GetATRRequest
-	18, // 10: omapi.SessionService.CloseRaw:input_type -> omapi.CloseRawRequest
-	20, // 11: omapi.ChannelService.Transmit:input_type -> omapi.TransmitRequest
-	22, // 12: omapi.ChannelService.SelectNext:input_type -> omapi.SelectNextRequest
-	24, // 13: omapi.ChannelService.GetSelectResponse:input_type -> omapi.GetSelectResponseRequest
-	26, // 14: omapi.ChannelService.IsBasicChannel:input_type -> omapi.IsBasicChannelRequest
-	18, // 15: omapi.ChannelService.CloseRaw:input_type -> omapi.CloseRawRequest
-	30, // 16: omapi.OnConnectedListenerService.SubscribeOnConnectedListener:input_type -> omapi.SubscribeOnConnectedListenerRequest
-	1,  // 17: omapi.ServiceService.IsConnected:output_type -> omapi.IsConnectedResponse
-	3,  // 18: omapi.ServiceService.GetReadersRaw:output_type -> omapi.GetReadersRawResponse
-	5,  // 19: omapi.ServiceService.Shutdown:output_type -> omapi.ShutdownResponse
-	7,  // 20: omapi.ReaderService.GetName:output_type -> omapi.GetNameResponse
-	9,  // 21: omapi.ReaderService.IsSecureElementPresent:output_type -> omapi.IsSecureElementPresentResponse
-	11, // 22: omapi.ReaderService.OpenSessionRaw:output_type -> omapi.OpenSessionRawResponse
-	13, // 23: omapi.SessionService.OpenBasicChannelRaw:output_type -> omapi.OpenBasicChannelRawResponse
-	15, // 24: omapi.SessionService.OpenLogicalChannelRaw:output_type -> omapi.OpenLogicalChannelRawResponse
-	17, // 25: omapi.SessionService.GetATR:output_type -> omapi.GetATRResponse
-	19, // 26: omapi.SessionService.CloseRaw:output_type -> omapi.CloseRawResponse
-	21, // 27: omapi.ChannelService.Transmit:output_type -> omapi.TransmitResponse
-	23, // 28: omapi.ChannelService.SelectNext:output_type -> omapi.SelectNextResponse
-	25, // 29: omapi.ChannelService.GetSelectResponse:output_type -> omapi.GetSelectResponseResponse
-	27, // 30: omapi.ChannelService.IsBasicChannel:output_type -> omapi.IsBasicChannelResponse
-	19, // 31: omapi.ChannelService.CloseRaw:output_type -> omapi.CloseRawResponse
-	29, // 32: omapi.OnConnectedListenerService.SubscribeOnConnectedListener:output_type -> omapi.OnConnectedListenerEvent
-	17, // [17:33] is the sub-list for method output_type
-	1,  // [1:17] is the sub-list for method input_type
-	1,  // [1:1] is the sub-list for extension type_name
-	1,  // [1:1] is the sub-list for extension extendee
-	0,  // [0:1] is the sub-list for field type_name
+	0,  // 0: omapi.ChannelService.Close:input_type -> omapi.CloseRequest
+	2,  // 1: omapi.ChannelService.GetSelectResponse:input_type -> omapi.GetSelectResponseRequest
+	4,  // 2: omapi.ChannelService.GetSession:input_type -> omapi.GetSessionRequest
+	6,  // 3: omapi.ChannelService.IsBasicChannel:input_type -> omapi.IsBasicChannelRequest
+	8,  // 4: omapi.ChannelService.IsOpen:input_type -> omapi.IsOpenRequest
+	10, // 5: omapi.ChannelService.SelectNext:input_type -> omapi.SelectNextRequest
+	12, // 6: omapi.ChannelService.Transmit:input_type -> omapi.TransmitRequest
+	1,  // 7: omapi.ChannelService.Close:output_type -> omapi.CloseResponse
+	3,  // 8: omapi.ChannelService.GetSelectResponse:output_type -> omapi.GetSelectResponseResponse
+	5,  // 9: omapi.ChannelService.GetSession:output_type -> omapi.GetSessionResponse
+	7,  // 10: omapi.ChannelService.IsBasicChannel:output_type -> omapi.IsBasicChannelResponse
+	9,  // 11: omapi.ChannelService.IsOpen:output_type -> omapi.IsOpenResponse
+	11, // 12: omapi.ChannelService.SelectNext:output_type -> omapi.SelectNextResponse
+	13, // 13: omapi.ChannelService.Transmit:output_type -> omapi.TransmitResponse
+	7,  // [7:14] is the sub-list for method output_type
+	0,  // [0:7] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_omapi_omapi_proto_init() }
@@ -1435,16 +676,15 @@ func file_proto_omapi_omapi_proto_init() {
 	if File_proto_omapi_omapi_proto != nil {
 		return
 	}
-	file_proto_omapi_omapi_proto_msgTypes[29].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_omapi_omapi_proto_rawDesc), len(file_proto_omapi_omapi_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   31,
+			NumMessages:   14,
 			NumExtensions: 0,
-			NumServices:   5,
+			NumServices:   1,
 		},
 		GoTypes:           file_proto_omapi_omapi_proto_goTypes,
 		DependencyIndexes: file_proto_omapi_omapi_proto_depIdxs,

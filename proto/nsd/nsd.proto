@@ -6,73 +6,46 @@ package nsd;
 
 option go_package = "github.com/xaionaro-go/jni/proto/nsd";
 
-message DiscoverServicesRawRequest {
-  string service_type = 1;
-  int32 protocol_type = 2;
-  int64 listener = 3;
+message DescribeContentsRequest {
 }
 
-message DiscoverServicesRawResponse {
+message DescribeContentsResponse {
+  int32 result = 1;
 }
 
-message StopServiceDiscoveryRawRequest {
-  int64 listener = 1;
+message GetHostRequest {
 }
 
-message StopServiceDiscoveryRawResponse {
+message GetHostResponse {
+  int64 result = 1;
 }
 
-message ResolveServiceRawRequest {
-  int64 service_info = 1;
-  int64 listener = 2;
+message GetHostAddressesRequest {
 }
 
-message ResolveServiceRawResponse {
+message GetHostAddressesResponse {
+  int64 result = 1;
 }
 
-message RegisterServiceRawRequest {
-  int64 service_info = 1;
-  int32 protocol_type = 2;
-  int64 listener = 3;
+message GetHostnameRequest {
 }
 
-message RegisterServiceRawResponse {
+message GetHostnameResponse {
+  string result = 1;
 }
 
-message UnregisterServiceRawRequest {
-  int64 listener = 1;
+message GetNetworkRequest {
 }
 
-message UnregisterServiceRawResponse {
+message GetNetworkResponse {
+  int64 result = 1;
 }
 
-message SetServiceNameRequest {
-  string name = 1;
+message GetPortRequest {
 }
 
-message SetServiceNameResponse {
-}
-
-message SetServiceTypeRequest {
-  string service_type = 1;
-}
-
-message SetServiceTypeResponse {
-}
-
-message SetPortRequest {
-  int32 port = 1;
-}
-
-message SetPortResponse {
-}
-
-message SetAttributeRequest {
-  string key = 1;
-  string value = 2;
-}
-
-message SetAttributeResponse {
+message GetPortResponse {
+  int32 result = 1;
 }
 
 message GetServiceNameRequest {
@@ -89,133 +62,111 @@ message GetServiceTypeResponse {
   string result = 1;
 }
 
-message GetHostRequest {
+message GetSubtypesRequest {
 }
 
-message GetHostResponse {
+message GetSubtypesResponse {
   int64 result = 1;
 }
 
-message GetPortRequest {
-}
-
-message GetPortResponse {
-  int32 result = 1;
-}
-
-message DiscoveryListenerOnServiceFoundEvent {
-  int64 arg0 = 1;
-}
-
-message DiscoveryListenerOnServiceLostEvent {
-  int64 arg0 = 1;
-}
-
-message DiscoveryListenerOnDiscoveryStartedEvent {
+message RemoveAttributeRequest {
   string arg0 = 1;
 }
 
-message DiscoveryListenerOnDiscoveryStoppedEvent {
+message RemoveAttributeResponse {
+}
+
+message SetAttributeRequest {
+  string arg0 = 1;
+  string arg1 = 2;
+}
+
+message SetAttributeResponse {
+}
+
+message SetHostRequest {
+  int64 arg0 = 1;
+}
+
+message SetHostResponse {
+}
+
+message SetHostAddressesRequest {
+  int64 arg0 = 1;
+}
+
+message SetHostAddressesResponse {
+}
+
+message SetNetworkRequest {
+  int64 arg0 = 1;
+}
+
+message SetNetworkResponse {
+}
+
+message SetPortRequest {
+  int32 arg0 = 1;
+}
+
+message SetPortResponse {
+}
+
+message SetServiceNameRequest {
   string arg0 = 1;
 }
 
-message DiscoveryListenerOnStartDiscoveryFailedEvent {
+message SetServiceNameResponse {
+}
+
+message SetServiceTypeRequest {
   string arg0 = 1;
-  int64 arg1 = 2;
 }
 
-message DiscoveryListenerOnStopDiscoveryFailedEvent {
-  string arg0 = 1;
-  int64 arg1 = 2;
+message SetServiceTypeResponse {
 }
 
-message DiscoveryListenerEvent {
-  optional DiscoveryListenerOnServiceFoundEvent on_service_found = 1;
-  optional DiscoveryListenerOnServiceLostEvent on_service_lost = 2;
-  optional DiscoveryListenerOnDiscoveryStartedEvent on_discovery_started = 3;
-  optional DiscoveryListenerOnDiscoveryStoppedEvent on_discovery_stopped = 4;
-  optional DiscoveryListenerOnStartDiscoveryFailedEvent on_start_discovery_failed = 5;
-  optional DiscoveryListenerOnStopDiscoveryFailedEvent on_stop_discovery_failed = 6;
-}
-
-message SubscribeDiscoveryListenerRequest {
-}
-
-message ResolveListenerOnServiceResolvedEvent {
+message SetSubtypesRequest {
   int64 arg0 = 1;
 }
 
-message ResolveListenerOnResolveFailedEvent {
+message SetSubtypesResponse {
+}
+
+message ToStringRequest {
+}
+
+message ToStringResponse {
+  string result = 1;
+}
+
+message WriteToParcelRequest {
   int64 arg0 = 1;
-  int64 arg1 = 2;
+  int32 arg1 = 2;
 }
 
-message ResolveListenerEvent {
-  optional ResolveListenerOnServiceResolvedEvent on_service_resolved = 1;
-  optional ResolveListenerOnResolveFailedEvent on_resolve_failed = 2;
-}
-
-message SubscribeResolveListenerRequest {
-}
-
-message RegistrationListenerOnServiceRegisteredEvent {
-  int64 arg0 = 1;
-}
-
-message RegistrationListenerOnRegistrationFailedEvent {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-}
-
-message RegistrationListenerOnServiceUnregisteredEvent {
-  int64 arg0 = 1;
-}
-
-message RegistrationListenerOnUnregistrationFailedEvent {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-}
-
-message RegistrationListenerEvent {
-  optional RegistrationListenerOnServiceRegisteredEvent on_service_registered = 1;
-  optional RegistrationListenerOnRegistrationFailedEvent on_registration_failed = 2;
-  optional RegistrationListenerOnServiceUnregisteredEvent on_service_unregistered = 3;
-  optional RegistrationListenerOnUnregistrationFailedEvent on_unregistration_failed = 4;
-}
-
-message SubscribeRegistrationListenerRequest {
-}
-
-service ManagerService {
-  rpc DiscoverServicesRaw (DiscoverServicesRawRequest) returns (DiscoverServicesRawResponse);
-  rpc StopServiceDiscoveryRaw (StopServiceDiscoveryRawRequest) returns (StopServiceDiscoveryRawResponse);
-  rpc ResolveServiceRaw (ResolveServiceRawRequest) returns (ResolveServiceRawResponse);
-  rpc RegisterServiceRaw (RegisterServiceRawRequest) returns (RegisterServiceRawResponse);
-  rpc UnregisterServiceRaw (UnregisterServiceRawRequest) returns (UnregisterServiceRawResponse);
+message WriteToParcelResponse {
 }
 
 service NsdServiceInfoService {
-  rpc SetServiceName (SetServiceNameRequest) returns (SetServiceNameResponse);
-  rpc SetServiceType (SetServiceTypeRequest) returns (SetServiceTypeResponse);
-  rpc SetPort (SetPortRequest) returns (SetPortResponse);
-  rpc SetAttribute (SetAttributeRequest) returns (SetAttributeResponse);
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc GetHost (GetHostRequest) returns (GetHostResponse);
+  rpc GetHostAddresses (GetHostAddressesRequest) returns (GetHostAddressesResponse);
+  rpc GetHostname (GetHostnameRequest) returns (GetHostnameResponse);
+  rpc GetNetwork (GetNetworkRequest) returns (GetNetworkResponse);
+  rpc GetPort (GetPortRequest) returns (GetPortResponse);
   rpc GetServiceName (GetServiceNameRequest) returns (GetServiceNameResponse);
   rpc GetServiceType (GetServiceTypeRequest) returns (GetServiceTypeResponse);
-  rpc GetHost (GetHostRequest) returns (GetHostResponse);
-  rpc GetPort (GetPortRequest) returns (GetPortResponse);
-}
-
-service DiscoveryListenerService {
-  // Server-streaming events from android.net.nsd.NsdManager$DiscoveryListener
-  rpc SubscribeDiscoveryListener (SubscribeDiscoveryListenerRequest) returns (stream DiscoveryListenerEvent);
-}
-
-service ResolveListenerService {
-  // Server-streaming events from android.net.nsd.NsdManager$ResolveListener
-  rpc SubscribeResolveListener (SubscribeResolveListenerRequest) returns (stream ResolveListenerEvent);
-}
-
-service RegistrationListenerService {
-  // Server-streaming events from android.net.nsd.NsdManager$RegistrationListener
-  rpc SubscribeRegistrationListener (SubscribeRegistrationListenerRequest) returns (stream RegistrationListenerEvent);
+  rpc GetSubtypes (GetSubtypesRequest) returns (GetSubtypesResponse);
+  rpc RemoveAttribute (RemoveAttributeRequest) returns (RemoveAttributeResponse);
+  rpc SetAttribute (SetAttributeRequest) returns (SetAttributeResponse);
+  rpc SetHost (SetHostRequest) returns (SetHostResponse);
+  rpc SetHostAddresses (SetHostAddressesRequest) returns (SetHostAddressesResponse);
+  rpc SetNetwork (SetNetworkRequest) returns (SetNetworkResponse);
+  rpc SetPort (SetPortRequest) returns (SetPortResponse);
+  rpc SetServiceName (SetServiceNameRequest) returns (SetServiceNameResponse);
+  rpc SetServiceType (SetServiceTypeRequest) returns (SetServiceTypeResponse);
+  rpc SetSubtypes (SetSubtypesRequest) returns (SetSubtypesResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
 }

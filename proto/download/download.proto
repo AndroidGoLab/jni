@@ -6,120 +6,279 @@ package download;
 
 option go_package = "github.com/xaionaro-go/jni/proto/download";
 
-message EnqueueRawRequest {
-  int64 request = 1;
+message AddCompletedDownload7Request {
+  string arg0 = 1;
+  string arg1 = 2;
+  bool arg2 = 3;
+  string arg3 = 4;
+  string arg4 = 5;
+  int64 arg5 = 6;
+  bool arg6 = 7;
 }
 
-message EnqueueRawResponse {
+message AddCompletedDownload7Response {
   int64 result = 1;
 }
 
-message RemoveRawRequest {
-  int64 ids = 1;
+message AddCompletedDownload9_1Request {
+  string arg0 = 1;
+  string arg1 = 2;
+  bool arg2 = 3;
+  string arg3 = 4;
+  string arg4 = 5;
+  int64 arg5 = 6;
+  bool arg6 = 7;
+  int64 arg7 = 8;
+  int64 arg8 = 9;
 }
 
-message RemoveRawResponse {
+message AddCompletedDownload9_1Response {
+  int64 result = 1;
+}
+
+message EnqueueRequest {
+  int64 arg0 = 1;
+}
+
+message EnqueueResponse {
+  int64 result = 1;
+}
+
+message GetMimeTypeForDownloadedFileRequest {
+  int64 arg0 = 1;
+}
+
+message GetMimeTypeForDownloadedFileResponse {
+  string result = 1;
+}
+
+message GetUriForDownloadedFileRequest {
+  int64 arg0 = 1;
+}
+
+message GetUriForDownloadedFileResponse {
+  int64 result = 1;
+}
+
+message OpenDownloadedFileRequest {
+  int64 arg0 = 1;
+}
+
+message OpenDownloadedFileResponse {
+  int64 result = 1;
+}
+
+message QueryRequest {
+  int64 arg0 = 1;
+}
+
+message QueryResponse {
+  int64 result = 1;
+}
+
+message RemoveRequest {
+  int64 arg0 = 1;
+}
+
+message RemoveResponse {
   int32 result = 1;
 }
 
-message QueryRawRequest {
-  int64 query = 1;
+message GetMaxBytesOverMobileRequest {
+  int64 arg0 = 1;
 }
 
-message QueryRawResponse {
+message GetMaxBytesOverMobileResponse {
   int64 result = 1;
 }
 
-message SetDestinationInExternalPublicDirRequest {
-  string dir_type = 1;
-  string sub_path = 2;
+message GetRecommendedMaxBytesOverMobileRequest {
+  int64 arg0 = 1;
 }
 
-message SetDestinationInExternalPublicDirResponse {
-  int64 result = 1;
-}
-
-message SetTitleRequest {
-  int64 title = 1;
-}
-
-message SetTitleResponse {
-  int64 result = 1;
-}
-
-message SetDescriptionRequest {
-  int64 description = 1;
-}
-
-message SetDescriptionResponse {
-  int64 result = 1;
-}
-
-message SetMimeTypeRequest {
-  string mime_type = 1;
-}
-
-message SetMimeTypeResponse {
+message GetRecommendedMaxBytesOverMobileResponse {
   int64 result = 1;
 }
 
 message SetFilterByIdRequest {
-  int64 ids = 1;
+  int64 arg0 = 1;
 }
 
 message SetFilterByIdResponse {
   int64 result = 1;
 }
 
-message MoveToFirstRequest {
+message SetFilterByStatusRequest {
+  int32 arg0 = 1;
 }
 
-message MoveToFirstResponse {
-  bool result = 1;
+message SetFilterByStatusResponse {
+  int64 result = 1;
 }
 
-message GetColumnIndexRequest {
-  string column_name = 1;
+message AddRequestHeaderRequest {
+  string arg0 = 1;
+  string arg1 = 2;
 }
 
-message GetColumnIndexResponse {
-  int32 result = 1;
+message AddRequestHeaderResponse {
+  int64 result = 1;
 }
 
-message GetIntRequest {
-  int32 column_index = 1;
+message AllowScanningByMediaScannerRequest {
 }
 
-message GetIntResponse {
-  int32 result = 1;
+message AllowScanningByMediaScannerResponse {
 }
 
-message CloseRequest {
+message SetAllowedNetworkTypesRequest {
+  int32 arg0 = 1;
 }
 
-message CloseResponse {
+message SetAllowedNetworkTypesResponse {
+  int64 result = 1;
 }
 
-service ManagerService {
-  rpc EnqueueRaw (EnqueueRawRequest) returns (EnqueueRawResponse);
-  rpc RemoveRaw (RemoveRawRequest) returns (RemoveRawResponse);
-  rpc QueryRaw (QueryRawRequest) returns (QueryRawResponse);
+message SetAllowedOverMeteredRequest {
+  bool arg0 = 1;
 }
 
-service DownloadRequestService {
-  rpc SetDestinationInExternalPublicDir (SetDestinationInExternalPublicDirRequest) returns (SetDestinationInExternalPublicDirResponse);
-  rpc SetTitle (SetTitleRequest) returns (SetTitleResponse);
-  rpc SetDescription (SetDescriptionRequest) returns (SetDescriptionResponse);
-  rpc SetMimeType (SetMimeTypeRequest) returns (SetMimeTypeResponse);
+message SetAllowedOverMeteredResponse {
+  int64 result = 1;
 }
 
-service DownloadQueryService {
+message SetAllowedOverRoamingRequest {
+  bool arg0 = 1;
+}
+
+message SetAllowedOverRoamingResponse {
+  int64 result = 1;
+}
+
+message SetDescriptionRequest {
+  string arg0 = 1;
+}
+
+message SetDescriptionResponse {
+  int64 result = 1;
+}
+
+message SetDestinationInExternalFilesDirRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
+  string arg2 = 3;
+}
+
+message SetDestinationInExternalFilesDirResponse {
+  int64 result = 1;
+}
+
+message SetDestinationInExternalPublicDirRequest {
+  string arg0 = 1;
+  string arg1 = 2;
+}
+
+message SetDestinationInExternalPublicDirResponse {
+  int64 result = 1;
+}
+
+message SetDestinationUriRequest {
+  int64 arg0 = 1;
+}
+
+message SetDestinationUriResponse {
+  int64 result = 1;
+}
+
+message SetMimeTypeRequest {
+  string arg0 = 1;
+}
+
+message SetMimeTypeResponse {
+  int64 result = 1;
+}
+
+message SetNotificationVisibilityRequest {
+  int32 arg0 = 1;
+}
+
+message SetNotificationVisibilityResponse {
+  int64 result = 1;
+}
+
+message SetRequiresChargingRequest {
+  bool arg0 = 1;
+}
+
+message SetRequiresChargingResponse {
+  int64 result = 1;
+}
+
+message SetRequiresDeviceIdleRequest {
+  bool arg0 = 1;
+}
+
+message SetRequiresDeviceIdleResponse {
+  int64 result = 1;
+}
+
+message SetShowRunningNotificationRequest {
+  bool arg0 = 1;
+}
+
+message SetShowRunningNotificationResponse {
+  int64 result = 1;
+}
+
+message SetTitleRequest {
+  string arg0 = 1;
+}
+
+message SetTitleResponse {
+  int64 result = 1;
+}
+
+message SetVisibleInDownloadsUiRequest {
+  bool arg0 = 1;
+}
+
+message SetVisibleInDownloadsUiResponse {
+  int64 result = 1;
+}
+
+service DownloadManagerService {
+  rpc AddCompletedDownload7 (AddCompletedDownload7Request) returns (AddCompletedDownload7Response);
+  rpc AddCompletedDownload9_1 (AddCompletedDownload9_1Request) returns (AddCompletedDownload9_1Response);
+  rpc Enqueue (EnqueueRequest) returns (EnqueueResponse);
+  rpc GetMimeTypeForDownloadedFile (GetMimeTypeForDownloadedFileRequest) returns (GetMimeTypeForDownloadedFileResponse);
+  rpc GetUriForDownloadedFile (GetUriForDownloadedFileRequest) returns (GetUriForDownloadedFileResponse);
+  rpc OpenDownloadedFile (OpenDownloadedFileRequest) returns (OpenDownloadedFileResponse);
+  rpc Query (QueryRequest) returns (QueryResponse);
+  rpc Remove (RemoveRequest) returns (RemoveResponse);
+  rpc GetMaxBytesOverMobile (GetMaxBytesOverMobileRequest) returns (GetMaxBytesOverMobileResponse);
+  rpc GetRecommendedMaxBytesOverMobile (GetRecommendedMaxBytesOverMobileRequest) returns (GetRecommendedMaxBytesOverMobileResponse);
+}
+
+service DownloadManagerQueryService {
   rpc SetFilterById (SetFilterByIdRequest) returns (SetFilterByIdResponse);
+  rpc SetFilterByStatus (SetFilterByStatusRequest) returns (SetFilterByStatusResponse);
 }
 
-service CursorService {
-  rpc MoveToFirst (MoveToFirstRequest) returns (MoveToFirstResponse);
-  rpc GetColumnIndex (GetColumnIndexRequest) returns (GetColumnIndexResponse);
-  rpc GetInt (GetIntRequest) returns (GetIntResponse);
-  rpc Close (CloseRequest) returns (CloseResponse);
+service DownloadManagerRequestService {
+  rpc AddRequestHeader (AddRequestHeaderRequest) returns (AddRequestHeaderResponse);
+  rpc AllowScanningByMediaScanner (AllowScanningByMediaScannerRequest) returns (AllowScanningByMediaScannerResponse);
+  rpc SetAllowedNetworkTypes (SetAllowedNetworkTypesRequest) returns (SetAllowedNetworkTypesResponse);
+  rpc SetAllowedOverMetered (SetAllowedOverMeteredRequest) returns (SetAllowedOverMeteredResponse);
+  rpc SetAllowedOverRoaming (SetAllowedOverRoamingRequest) returns (SetAllowedOverRoamingResponse);
+  rpc SetDescription (SetDescriptionRequest) returns (SetDescriptionResponse);
+  rpc SetDestinationInExternalFilesDir (SetDestinationInExternalFilesDirRequest) returns (SetDestinationInExternalFilesDirResponse);
+  rpc SetDestinationInExternalPublicDir (SetDestinationInExternalPublicDirRequest) returns (SetDestinationInExternalPublicDirResponse);
+  rpc SetDestinationUri (SetDestinationUriRequest) returns (SetDestinationUriResponse);
+  rpc SetMimeType (SetMimeTypeRequest) returns (SetMimeTypeResponse);
+  rpc SetNotificationVisibility (SetNotificationVisibilityRequest) returns (SetNotificationVisibilityResponse);
+  rpc SetRequiresCharging (SetRequiresChargingRequest) returns (SetRequiresChargingResponse);
+  rpc SetRequiresDeviceIdle (SetRequiresDeviceIdleRequest) returns (SetRequiresDeviceIdleResponse);
+  rpc SetShowRunningNotification (SetShowRunningNotificationRequest) returns (SetShowRunningNotificationResponse);
+  rpc SetTitle (SetTitleRequest) returns (SetTitleResponse);
+  rpc SetVisibleInDownloadsUi (SetVisibleInDownloadsUiRequest) returns (SetVisibleInDownloadsUiResponse);
 }

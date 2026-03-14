@@ -18,27 +18,21 @@ var documentsDocumentsContractCmd = &cobra.Command{
 	Short: "DocumentsContractService operations",
 }
 
-var documentsDocumentsContractCreateDocumentRawCmd = &cobra.Command{
-	Use:   "create-document-raw",
-	Short: "CreateDocumentRaw RPC",
+var documentsDocumentsContractBuildChildDocumentsUriCmd = &cobra.Command{
+	Use:   "build-child-documents-uri",
+	Short: "BuildChildDocumentsUri RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewDocumentsContractServiceClient(grpcConn)
-		req := &pb.CreateDocumentRawRequest{}
-		if v, err := cmd.Flags().GetInt64("resolver"); err == nil {
-			req.Resolver = v
+		req := &pb.BuildChildDocumentsUriRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("parent-uri"); err == nil {
-			req.ParentUri = v
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
 		}
-		if v, err := cmd.Flags().GetString("mime-type"); err == nil {
-			req.MimeType = v
-		}
-		if v, err := cmd.Flags().GetString("display-name"); err == nil {
-			req.DisplayName = v
-		}
-		resp, err := client.CreateDocumentRaw(ctx, req)
+		resp, err := client.BuildChildDocumentsUri(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -46,24 +40,21 @@ var documentsDocumentsContractCreateDocumentRawCmd = &cobra.Command{
 	},
 }
 
-var documentsDocumentsContractRenameDocumentRawCmd = &cobra.Command{
-	Use:   "rename-document-raw",
-	Short: "RenameDocumentRaw RPC",
+var documentsDocumentsContractBuildChildDocumentsUriUsingTreeCmd = &cobra.Command{
+	Use:   "build-child-documents-uri-using-tree",
+	Short: "BuildChildDocumentsUriUsingTree RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewDocumentsContractServiceClient(grpcConn)
-		req := &pb.RenameDocumentRawRequest{}
-		if v, err := cmd.Flags().GetInt64("resolver"); err == nil {
-			req.Resolver = v
+		req := &pb.BuildChildDocumentsUriUsingTreeRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("uri"); err == nil {
-			req.Uri = v
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
 		}
-		if v, err := cmd.Flags().GetString("display-name"); err == nil {
-			req.DisplayName = v
-		}
-		resp, err := client.RenameDocumentRaw(ctx, req)
+		resp, err := client.BuildChildDocumentsUriUsingTree(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -71,24 +62,21 @@ var documentsDocumentsContractRenameDocumentRawCmd = &cobra.Command{
 	},
 }
 
-var documentsDocumentsContractCopyDocumentRawCmd = &cobra.Command{
-	Use:   "copy-document-raw",
-	Short: "CopyDocumentRaw RPC",
+var documentsDocumentsContractBuildDocumentUriCmd = &cobra.Command{
+	Use:   "build-document-uri",
+	Short: "BuildDocumentUri RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewDocumentsContractServiceClient(grpcConn)
-		req := &pb.CopyDocumentRawRequest{}
-		if v, err := cmd.Flags().GetInt64("resolver"); err == nil {
-			req.Resolver = v
+		req := &pb.BuildDocumentUriRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("src-uri"); err == nil {
-			req.SrcUri = v
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
 		}
-		if v, err := cmd.Flags().GetInt64("dest-parent-uri"); err == nil {
-			req.DestParentUri = v
-		}
-		resp, err := client.CopyDocumentRaw(ctx, req)
+		resp, err := client.BuildDocumentUri(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -96,27 +84,21 @@ var documentsDocumentsContractCopyDocumentRawCmd = &cobra.Command{
 	},
 }
 
-var documentsDocumentsContractMoveDocumentRawCmd = &cobra.Command{
-	Use:   "move-document-raw",
-	Short: "MoveDocumentRaw RPC",
+var documentsDocumentsContractBuildDocumentUriUsingTreeCmd = &cobra.Command{
+	Use:   "build-document-uri-using-tree",
+	Short: "BuildDocumentUriUsingTree RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewDocumentsContractServiceClient(grpcConn)
-		req := &pb.MoveDocumentRawRequest{}
-		if v, err := cmd.Flags().GetInt64("resolver"); err == nil {
-			req.Resolver = v
+		req := &pb.BuildDocumentUriUsingTreeRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("src-uri"); err == nil {
-			req.SrcUri = v
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
 		}
-		if v, err := cmd.Flags().GetInt64("src-parent-uri"); err == nil {
-			req.SrcParentUri = v
-		}
-		if v, err := cmd.Flags().GetInt64("dest-parent-uri"); err == nil {
-			req.DestParentUri = v
-		}
-		resp, err := client.MoveDocumentRaw(ctx, req)
+		resp, err := client.BuildDocumentUriUsingTree(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -124,21 +106,21 @@ var documentsDocumentsContractMoveDocumentRawCmd = &cobra.Command{
 	},
 }
 
-var documentsDocumentsContractDeleteDocumentRawCmd = &cobra.Command{
-	Use:   "delete-document-raw",
-	Short: "DeleteDocumentRaw RPC",
+var documentsDocumentsContractBuildRecentDocumentsUriCmd = &cobra.Command{
+	Use:   "build-recent-documents-uri",
+	Short: "BuildRecentDocumentsUri RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewDocumentsContractServiceClient(grpcConn)
-		req := &pb.DeleteDocumentRawRequest{}
-		if v, err := cmd.Flags().GetInt64("resolver"); err == nil {
-			req.Resolver = v
+		req := &pb.BuildRecentDocumentsUriRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("uri"); err == nil {
-			req.Uri = v
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
 		}
-		resp, err := client.DeleteDocumentRaw(ctx, req)
+		resp, err := client.BuildRecentDocumentsUri(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -146,21 +128,545 @@ var documentsDocumentsContractDeleteDocumentRawCmd = &cobra.Command{
 	},
 }
 
-var documentsDocumentsContractIsDocumentUriRawCmd = &cobra.Command{
-	Use:   "is-document-uri-raw",
-	Short: "IsDocumentUriRaw RPC",
+var documentsDocumentsContractBuildRootUriCmd = &cobra.Command{
+	Use:   "build-root-uri",
+	Short: "BuildRootUri RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewDocumentsContractServiceClient(grpcConn)
-		req := &pb.IsDocumentUriRawRequest{}
-		if v, err := cmd.Flags().GetInt64("ctx"); err == nil {
-			req.Ctx = v
+		req := &pb.BuildRootUriRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("uri"); err == nil {
-			req.Uri = v
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
 		}
-		resp, err := client.IsDocumentUriRaw(ctx, req)
+		resp, err := client.BuildRootUri(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractBuildRootsUriCmd = &cobra.Command{
+	Use:   "build-roots-uri",
+	Short: "BuildRootsUri RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.BuildRootsUriRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.BuildRootsUri(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractBuildSearchDocumentsUriCmd = &cobra.Command{
+	Use:   "build-search-documents-uri",
+	Short: "BuildSearchDocumentsUri RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.BuildSearchDocumentsUriRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetString("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.BuildSearchDocumentsUri(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractBuildTreeDocumentUriCmd = &cobra.Command{
+	Use:   "build-tree-document-uri",
+	Short: "BuildTreeDocumentUri RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.BuildTreeDocumentUriRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.BuildTreeDocumentUri(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractCopyDocumentCmd = &cobra.Command{
+	Use:   "copy-document",
+	Short: "CopyDocument RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.CopyDocumentRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.CopyDocument(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractCreateDocumentCmd = &cobra.Command{
+	Use:   "create-document",
+	Short: "CreateDocument RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.CreateDocumentRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetString("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetString("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.CreateDocument(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractCreateWebLinkIntentCmd = &cobra.Command{
+	Use:   "create-web-link-intent",
+	Short: "CreateWebLinkIntent RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.CreateWebLinkIntentRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.CreateWebLinkIntent(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractDeleteDocumentCmd = &cobra.Command{
+	Use:   "delete-document",
+	Short: "DeleteDocument RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.DeleteDocumentRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.DeleteDocument(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractEjectRootCmd = &cobra.Command{
+	Use:   "eject-root",
+	Short: "EjectRoot RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.EjectRootRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.EjectRoot(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractFindDocumentPathCmd = &cobra.Command{
+	Use:   "find-document-path",
+	Short: "FindDocumentPath RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.FindDocumentPathRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.FindDocumentPath(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractGetDocumentIdCmd = &cobra.Command{
+	Use:   "get-document-id",
+	Short: "GetDocumentId RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.GetDocumentIdRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetDocumentId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractGetDocumentMetadataCmd = &cobra.Command{
+	Use:   "get-document-metadata",
+	Short: "GetDocumentMetadata RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.GetDocumentMetadataRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetDocumentMetadata(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractGetDocumentThumbnailCmd = &cobra.Command{
+	Use:   "get-document-thumbnail",
+	Short: "GetDocumentThumbnail RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.GetDocumentThumbnailRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.GetDocumentThumbnail(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractGetRootIdCmd = &cobra.Command{
+	Use:   "get-root-id",
+	Short: "GetRootId RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.GetRootIdRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetRootId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractGetSearchDocumentsQueryCmd = &cobra.Command{
+	Use:   "get-search-documents-query",
+	Short: "GetSearchDocumentsQuery RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.GetSearchDocumentsQueryRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetSearchDocumentsQuery(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractGetTreeDocumentIdCmd = &cobra.Command{
+	Use:   "get-tree-document-id",
+	Short: "GetTreeDocumentId RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.GetTreeDocumentIdRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetTreeDocumentId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractIsChildDocumentCmd = &cobra.Command{
+	Use:   "is-child-document",
+	Short: "IsChildDocument RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.IsChildDocumentRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.IsChildDocument(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractIsDocumentUriCmd = &cobra.Command{
+	Use:   "is-document-uri",
+	Short: "IsDocumentUri RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.IsDocumentUriRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.IsDocumentUri(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractIsRootUriCmd = &cobra.Command{
+	Use:   "is-root-uri",
+	Short: "IsRootUri RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.IsRootUriRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.IsRootUri(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractIsRootsUriCmd = &cobra.Command{
+	Use:   "is-roots-uri",
+	Short: "IsRootsUri RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.IsRootsUriRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.IsRootsUri(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractIsTreeUriCmd = &cobra.Command{
+	Use:   "is-tree-uri",
+	Short: "IsTreeUri RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.IsTreeUriRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.IsTreeUri(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractMoveDocumentCmd = &cobra.Command{
+	Use:   "move-document",
+	Short: "MoveDocument RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.MoveDocumentRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.MoveDocument(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractRemoveDocumentCmd = &cobra.Command{
+	Use:   "remove-document",
+	Short: "RemoveDocument RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.RemoveDocumentRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.RemoveDocument(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var documentsDocumentsContractRenameDocumentCmd = &cobra.Command{
+	Use:   "rename-document",
+	Short: "RenameDocument RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewDocumentsContractServiceClient(grpcConn)
+		req := &pb.RenameDocumentRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetString("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.RenameDocument(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -169,30 +675,99 @@ var documentsDocumentsContractIsDocumentUriRawCmd = &cobra.Command{
 }
 
 func init() {
-	documentsDocumentsContractCreateDocumentRawCmd.Flags().Int64("resolver", 0, "resolver (int64)")
-	documentsDocumentsContractCreateDocumentRawCmd.Flags().Int64("parent-uri", 0, "parent-uri (int64)")
-	documentsDocumentsContractCreateDocumentRawCmd.Flags().String("mime-type", "", "mime-type (string)")
-	documentsDocumentsContractCreateDocumentRawCmd.Flags().String("display-name", "", "display-name (string)")
-	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractCreateDocumentRawCmd)
-	documentsDocumentsContractRenameDocumentRawCmd.Flags().Int64("resolver", 0, "resolver (int64)")
-	documentsDocumentsContractRenameDocumentRawCmd.Flags().Int64("uri", 0, "uri (int64)")
-	documentsDocumentsContractRenameDocumentRawCmd.Flags().String("display-name", "", "display-name (string)")
-	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractRenameDocumentRawCmd)
-	documentsDocumentsContractCopyDocumentRawCmd.Flags().Int64("resolver", 0, "resolver (int64)")
-	documentsDocumentsContractCopyDocumentRawCmd.Flags().Int64("src-uri", 0, "src-uri (int64)")
-	documentsDocumentsContractCopyDocumentRawCmd.Flags().Int64("dest-parent-uri", 0, "dest-parent-uri (int64)")
-	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractCopyDocumentRawCmd)
-	documentsDocumentsContractMoveDocumentRawCmd.Flags().Int64("resolver", 0, "resolver (int64)")
-	documentsDocumentsContractMoveDocumentRawCmd.Flags().Int64("src-uri", 0, "src-uri (int64)")
-	documentsDocumentsContractMoveDocumentRawCmd.Flags().Int64("src-parent-uri", 0, "src-parent-uri (int64)")
-	documentsDocumentsContractMoveDocumentRawCmd.Flags().Int64("dest-parent-uri", 0, "dest-parent-uri (int64)")
-	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractMoveDocumentRawCmd)
-	documentsDocumentsContractDeleteDocumentRawCmd.Flags().Int64("resolver", 0, "resolver (int64)")
-	documentsDocumentsContractDeleteDocumentRawCmd.Flags().Int64("uri", 0, "uri (int64)")
-	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractDeleteDocumentRawCmd)
-	documentsDocumentsContractIsDocumentUriRawCmd.Flags().Int64("ctx", 0, "ctx (int64)")
-	documentsDocumentsContractIsDocumentUriRawCmd.Flags().Int64("uri", 0, "uri (int64)")
-	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractIsDocumentUriRawCmd)
+	documentsDocumentsContractBuildChildDocumentsUriCmd.Flags().String("arg0", "", "arg0 (string)")
+	documentsDocumentsContractBuildChildDocumentsUriCmd.Flags().String("arg1", "", "arg1 (string)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractBuildChildDocumentsUriCmd)
+	documentsDocumentsContractBuildChildDocumentsUriUsingTreeCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractBuildChildDocumentsUriUsingTreeCmd.Flags().String("arg1", "", "arg1 (string)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractBuildChildDocumentsUriUsingTreeCmd)
+	documentsDocumentsContractBuildDocumentUriCmd.Flags().String("arg0", "", "arg0 (string)")
+	documentsDocumentsContractBuildDocumentUriCmd.Flags().String("arg1", "", "arg1 (string)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractBuildDocumentUriCmd)
+	documentsDocumentsContractBuildDocumentUriUsingTreeCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractBuildDocumentUriUsingTreeCmd.Flags().String("arg1", "", "arg1 (string)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractBuildDocumentUriUsingTreeCmd)
+	documentsDocumentsContractBuildRecentDocumentsUriCmd.Flags().String("arg0", "", "arg0 (string)")
+	documentsDocumentsContractBuildRecentDocumentsUriCmd.Flags().String("arg1", "", "arg1 (string)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractBuildRecentDocumentsUriCmd)
+	documentsDocumentsContractBuildRootUriCmd.Flags().String("arg0", "", "arg0 (string)")
+	documentsDocumentsContractBuildRootUriCmd.Flags().String("arg1", "", "arg1 (string)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractBuildRootUriCmd)
+	documentsDocumentsContractBuildRootsUriCmd.Flags().String("arg0", "", "arg0 (string)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractBuildRootsUriCmd)
+	documentsDocumentsContractBuildSearchDocumentsUriCmd.Flags().String("arg0", "", "arg0 (string)")
+	documentsDocumentsContractBuildSearchDocumentsUriCmd.Flags().String("arg1", "", "arg1 (string)")
+	documentsDocumentsContractBuildSearchDocumentsUriCmd.Flags().String("arg2", "", "arg2 (string)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractBuildSearchDocumentsUriCmd)
+	documentsDocumentsContractBuildTreeDocumentUriCmd.Flags().String("arg0", "", "arg0 (string)")
+	documentsDocumentsContractBuildTreeDocumentUriCmd.Flags().String("arg1", "", "arg1 (string)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractBuildTreeDocumentUriCmd)
+	documentsDocumentsContractCopyDocumentCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractCopyDocumentCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	documentsDocumentsContractCopyDocumentCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractCopyDocumentCmd)
+	documentsDocumentsContractCreateDocumentCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractCreateDocumentCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	documentsDocumentsContractCreateDocumentCmd.Flags().String("arg2", "", "arg2 (string)")
+	documentsDocumentsContractCreateDocumentCmd.Flags().String("arg3", "", "arg3 (string)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractCreateDocumentCmd)
+	documentsDocumentsContractCreateWebLinkIntentCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractCreateWebLinkIntentCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	documentsDocumentsContractCreateWebLinkIntentCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractCreateWebLinkIntentCmd)
+	documentsDocumentsContractDeleteDocumentCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractDeleteDocumentCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractDeleteDocumentCmd)
+	documentsDocumentsContractEjectRootCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractEjectRootCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractEjectRootCmd)
+	documentsDocumentsContractFindDocumentPathCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractFindDocumentPathCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractFindDocumentPathCmd)
+	documentsDocumentsContractGetDocumentIdCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractGetDocumentIdCmd)
+	documentsDocumentsContractGetDocumentMetadataCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractGetDocumentMetadataCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractGetDocumentMetadataCmd)
+	documentsDocumentsContractGetDocumentThumbnailCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractGetDocumentThumbnailCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	documentsDocumentsContractGetDocumentThumbnailCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	documentsDocumentsContractGetDocumentThumbnailCmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractGetDocumentThumbnailCmd)
+	documentsDocumentsContractGetRootIdCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractGetRootIdCmd)
+	documentsDocumentsContractGetSearchDocumentsQueryCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractGetSearchDocumentsQueryCmd)
+	documentsDocumentsContractGetTreeDocumentIdCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractGetTreeDocumentIdCmd)
+	documentsDocumentsContractIsChildDocumentCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractIsChildDocumentCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	documentsDocumentsContractIsChildDocumentCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractIsChildDocumentCmd)
+	documentsDocumentsContractIsDocumentUriCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractIsDocumentUriCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractIsDocumentUriCmd)
+	documentsDocumentsContractIsRootUriCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractIsRootUriCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractIsRootUriCmd)
+	documentsDocumentsContractIsRootsUriCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractIsRootsUriCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractIsRootsUriCmd)
+	documentsDocumentsContractIsTreeUriCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractIsTreeUriCmd)
+	documentsDocumentsContractMoveDocumentCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractMoveDocumentCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	documentsDocumentsContractMoveDocumentCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	documentsDocumentsContractMoveDocumentCmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractMoveDocumentCmd)
+	documentsDocumentsContractRemoveDocumentCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractRemoveDocumentCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	documentsDocumentsContractRemoveDocumentCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractRemoveDocumentCmd)
+	documentsDocumentsContractRenameDocumentCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	documentsDocumentsContractRenameDocumentCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	documentsDocumentsContractRenameDocumentCmd.Flags().String("arg2", "", "arg2 (string)")
+	documentsDocumentsContractCmd.AddCommand(documentsDocumentsContractRenameDocumentCmd)
 	documentsCmd.AddCommand(documentsDocumentsContractCmd)
 	rootCmd.AddCommand(documentsCmd)
 }

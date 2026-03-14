@@ -21,332 +21,26 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ManagerService_CreateScreenCaptureIntent_FullMethodName = "/projection.ManagerService/CreateScreenCaptureIntent"
-	ManagerService_GetMediaProjection_FullMethodName        = "/projection.ManagerService/GetMediaProjection"
-)
-
-// ManagerServiceClient is the client API for ManagerService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ManagerServiceClient interface {
-	CreateScreenCaptureIntent(ctx context.Context, in *CreateScreenCaptureIntentRequest, opts ...grpc.CallOption) (*CreateScreenCaptureIntentResponse, error)
-	GetMediaProjection(ctx context.Context, in *GetMediaProjectionRequest, opts ...grpc.CallOption) (*GetMediaProjectionResponse, error)
-}
-
-type managerServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewManagerServiceClient(cc grpc.ClientConnInterface) ManagerServiceClient {
-	return &managerServiceClient{cc}
-}
-
-func (c *managerServiceClient) CreateScreenCaptureIntent(ctx context.Context, in *CreateScreenCaptureIntentRequest, opts ...grpc.CallOption) (*CreateScreenCaptureIntentResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateScreenCaptureIntentResponse)
-	err := c.cc.Invoke(ctx, ManagerService_CreateScreenCaptureIntent_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) GetMediaProjection(ctx context.Context, in *GetMediaProjectionRequest, opts ...grpc.CallOption) (*GetMediaProjectionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetMediaProjectionResponse)
-	err := c.cc.Invoke(ctx, ManagerService_GetMediaProjection_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// ManagerServiceServer is the server API for ManagerService service.
-// All implementations must embed UnimplementedManagerServiceServer
-// for forward compatibility.
-type ManagerServiceServer interface {
-	CreateScreenCaptureIntent(context.Context, *CreateScreenCaptureIntentRequest) (*CreateScreenCaptureIntentResponse, error)
-	GetMediaProjection(context.Context, *GetMediaProjectionRequest) (*GetMediaProjectionResponse, error)
-	mustEmbedUnimplementedManagerServiceServer()
-}
-
-// UnimplementedManagerServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedManagerServiceServer struct{}
-
-func (UnimplementedManagerServiceServer) CreateScreenCaptureIntent(context.Context, *CreateScreenCaptureIntentRequest) (*CreateScreenCaptureIntentResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateScreenCaptureIntent not implemented")
-}
-func (UnimplementedManagerServiceServer) GetMediaProjection(context.Context, *GetMediaProjectionRequest) (*GetMediaProjectionResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetMediaProjection not implemented")
-}
-func (UnimplementedManagerServiceServer) mustEmbedUnimplementedManagerServiceServer() {}
-func (UnimplementedManagerServiceServer) testEmbeddedByValue()                        {}
-
-// UnsafeManagerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ManagerServiceServer will
-// result in compilation errors.
-type UnsafeManagerServiceServer interface {
-	mustEmbedUnimplementedManagerServiceServer()
-}
-
-func RegisterManagerServiceServer(s grpc.ServiceRegistrar, srv ManagerServiceServer) {
-	// If the following call panics, it indicates UnimplementedManagerServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&ManagerService_ServiceDesc, srv)
-}
-
-func _ManagerService_CreateScreenCaptureIntent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateScreenCaptureIntentRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).CreateScreenCaptureIntent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_CreateScreenCaptureIntent_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).CreateScreenCaptureIntent(ctx, req.(*CreateScreenCaptureIntentRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_GetMediaProjection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMediaProjectionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetMediaProjection(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_GetMediaProjection_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetMediaProjection(ctx, req.(*GetMediaProjectionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// ManagerService_ServiceDesc is the grpc.ServiceDesc for ManagerService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var ManagerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "projection.ManagerService",
-	HandlerType: (*ManagerServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "CreateScreenCaptureIntent",
-			Handler:    _ManagerService_CreateScreenCaptureIntent_Handler,
-		},
-		{
-			MethodName: "GetMediaProjection",
-			Handler:    _ManagerService_GetMediaProjection_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/projection/projection.proto",
-}
-
-const (
-	ProjectionService_Stop_FullMethodName                    = "/projection.ProjectionService/Stop"
-	ProjectionService_RegisterCallback_FullMethodName        = "/projection.ProjectionService/RegisterCallback"
-	ProjectionService_CreateVirtualDisplayRaw_FullMethodName = "/projection.ProjectionService/CreateVirtualDisplayRaw"
-)
-
-// ProjectionServiceClient is the client API for ProjectionService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ProjectionServiceClient interface {
-	Stop(ctx context.Context, in *StopRequest, opts ...grpc.CallOption) (*StopResponse, error)
-	RegisterCallback(ctx context.Context, in *RegisterCallbackRequest, opts ...grpc.CallOption) (*RegisterCallbackResponse, error)
-	CreateVirtualDisplayRaw(ctx context.Context, in *CreateVirtualDisplayRawRequest, opts ...grpc.CallOption) (*CreateVirtualDisplayRawResponse, error)
-}
-
-type projectionServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewProjectionServiceClient(cc grpc.ClientConnInterface) ProjectionServiceClient {
-	return &projectionServiceClient{cc}
-}
-
-func (c *projectionServiceClient) Stop(ctx context.Context, in *StopRequest, opts ...grpc.CallOption) (*StopResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StopResponse)
-	err := c.cc.Invoke(ctx, ProjectionService_Stop_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *projectionServiceClient) RegisterCallback(ctx context.Context, in *RegisterCallbackRequest, opts ...grpc.CallOption) (*RegisterCallbackResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RegisterCallbackResponse)
-	err := c.cc.Invoke(ctx, ProjectionService_RegisterCallback_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *projectionServiceClient) CreateVirtualDisplayRaw(ctx context.Context, in *CreateVirtualDisplayRawRequest, opts ...grpc.CallOption) (*CreateVirtualDisplayRawResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateVirtualDisplayRawResponse)
-	err := c.cc.Invoke(ctx, ProjectionService_CreateVirtualDisplayRaw_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// ProjectionServiceServer is the server API for ProjectionService service.
-// All implementations must embed UnimplementedProjectionServiceServer
-// for forward compatibility.
-type ProjectionServiceServer interface {
-	Stop(context.Context, *StopRequest) (*StopResponse, error)
-	RegisterCallback(context.Context, *RegisterCallbackRequest) (*RegisterCallbackResponse, error)
-	CreateVirtualDisplayRaw(context.Context, *CreateVirtualDisplayRawRequest) (*CreateVirtualDisplayRawResponse, error)
-	mustEmbedUnimplementedProjectionServiceServer()
-}
-
-// UnimplementedProjectionServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedProjectionServiceServer struct{}
-
-func (UnimplementedProjectionServiceServer) Stop(context.Context, *StopRequest) (*StopResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Stop not implemented")
-}
-func (UnimplementedProjectionServiceServer) RegisterCallback(context.Context, *RegisterCallbackRequest) (*RegisterCallbackResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RegisterCallback not implemented")
-}
-func (UnimplementedProjectionServiceServer) CreateVirtualDisplayRaw(context.Context, *CreateVirtualDisplayRawRequest) (*CreateVirtualDisplayRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateVirtualDisplayRaw not implemented")
-}
-func (UnimplementedProjectionServiceServer) mustEmbedUnimplementedProjectionServiceServer() {}
-func (UnimplementedProjectionServiceServer) testEmbeddedByValue()                           {}
-
-// UnsafeProjectionServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ProjectionServiceServer will
-// result in compilation errors.
-type UnsafeProjectionServiceServer interface {
-	mustEmbedUnimplementedProjectionServiceServer()
-}
-
-func RegisterProjectionServiceServer(s grpc.ServiceRegistrar, srv ProjectionServiceServer) {
-	// If the following call panics, it indicates UnimplementedProjectionServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&ProjectionService_ServiceDesc, srv)
-}
-
-func _ProjectionService_Stop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StopRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProjectionServiceServer).Stop(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProjectionService_Stop_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectionServiceServer).Stop(ctx, req.(*StopRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProjectionService_RegisterCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RegisterCallbackRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProjectionServiceServer).RegisterCallback(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProjectionService_RegisterCallback_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectionServiceServer).RegisterCallback(ctx, req.(*RegisterCallbackRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProjectionService_CreateVirtualDisplayRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateVirtualDisplayRawRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProjectionServiceServer).CreateVirtualDisplayRaw(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProjectionService_CreateVirtualDisplayRaw_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProjectionServiceServer).CreateVirtualDisplayRaw(ctx, req.(*CreateVirtualDisplayRawRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// ProjectionService_ServiceDesc is the grpc.ServiceDesc for ProjectionService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var ProjectionService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "projection.ProjectionService",
-	HandlerType: (*ProjectionServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Stop",
-			Handler:    _ProjectionService_Stop_Handler,
-		},
-		{
-			MethodName: "RegisterCallback",
-			Handler:    _ProjectionService_RegisterCallback_Handler,
-		},
-		{
-			MethodName: "CreateVirtualDisplayRaw",
-			Handler:    _ProjectionService_CreateVirtualDisplayRaw_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/projection/projection.proto",
-}
-
-const (
-	VirtualDisplayService_Release_FullMethodName = "/projection.VirtualDisplayService/Release"
+	VirtualDisplayService_GetDisplay_FullMethodName  = "/projection.VirtualDisplayService/GetDisplay"
+	VirtualDisplayService_GetSurface_FullMethodName  = "/projection.VirtualDisplayService/GetSurface"
+	VirtualDisplayService_Release_FullMethodName     = "/projection.VirtualDisplayService/Release"
+	VirtualDisplayService_Resize_FullMethodName      = "/projection.VirtualDisplayService/Resize"
+	VirtualDisplayService_SetRotation_FullMethodName = "/projection.VirtualDisplayService/SetRotation"
+	VirtualDisplayService_SetSurface_FullMethodName  = "/projection.VirtualDisplayService/SetSurface"
+	VirtualDisplayService_ToString_FullMethodName    = "/projection.VirtualDisplayService/ToString"
 )
 
 // VirtualDisplayServiceClient is the client API for VirtualDisplayService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type VirtualDisplayServiceClient interface {
+	GetDisplay(ctx context.Context, in *GetDisplayRequest, opts ...grpc.CallOption) (*GetDisplayResponse, error)
+	GetSurface(ctx context.Context, in *GetSurfaceRequest, opts ...grpc.CallOption) (*GetSurfaceResponse, error)
 	Release(ctx context.Context, in *ReleaseRequest, opts ...grpc.CallOption) (*ReleaseResponse, error)
+	Resize(ctx context.Context, in *ResizeRequest, opts ...grpc.CallOption) (*ResizeResponse, error)
+	SetRotation(ctx context.Context, in *SetRotationRequest, opts ...grpc.CallOption) (*SetRotationResponse, error)
+	SetSurface(ctx context.Context, in *SetSurfaceRequest, opts ...grpc.CallOption) (*SetSurfaceResponse, error)
+	ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error)
 }
 
 type virtualDisplayServiceClient struct {
@@ -355,6 +49,26 @@ type virtualDisplayServiceClient struct {
 
 func NewVirtualDisplayServiceClient(cc grpc.ClientConnInterface) VirtualDisplayServiceClient {
 	return &virtualDisplayServiceClient{cc}
+}
+
+func (c *virtualDisplayServiceClient) GetDisplay(ctx context.Context, in *GetDisplayRequest, opts ...grpc.CallOption) (*GetDisplayResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDisplayResponse)
+	err := c.cc.Invoke(ctx, VirtualDisplayService_GetDisplay_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *virtualDisplayServiceClient) GetSurface(ctx context.Context, in *GetSurfaceRequest, opts ...grpc.CallOption) (*GetSurfaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSurfaceResponse)
+	err := c.cc.Invoke(ctx, VirtualDisplayService_GetSurface_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *virtualDisplayServiceClient) Release(ctx context.Context, in *ReleaseRequest, opts ...grpc.CallOption) (*ReleaseResponse, error) {
@@ -367,11 +81,57 @@ func (c *virtualDisplayServiceClient) Release(ctx context.Context, in *ReleaseRe
 	return out, nil
 }
 
+func (c *virtualDisplayServiceClient) Resize(ctx context.Context, in *ResizeRequest, opts ...grpc.CallOption) (*ResizeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResizeResponse)
+	err := c.cc.Invoke(ctx, VirtualDisplayService_Resize_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *virtualDisplayServiceClient) SetRotation(ctx context.Context, in *SetRotationRequest, opts ...grpc.CallOption) (*SetRotationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetRotationResponse)
+	err := c.cc.Invoke(ctx, VirtualDisplayService_SetRotation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *virtualDisplayServiceClient) SetSurface(ctx context.Context, in *SetSurfaceRequest, opts ...grpc.CallOption) (*SetSurfaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetSurfaceResponse)
+	err := c.cc.Invoke(ctx, VirtualDisplayService_SetSurface_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *virtualDisplayServiceClient) ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ToStringResponse)
+	err := c.cc.Invoke(ctx, VirtualDisplayService_ToString_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VirtualDisplayServiceServer is the server API for VirtualDisplayService service.
 // All implementations must embed UnimplementedVirtualDisplayServiceServer
 // for forward compatibility.
 type VirtualDisplayServiceServer interface {
+	GetDisplay(context.Context, *GetDisplayRequest) (*GetDisplayResponse, error)
+	GetSurface(context.Context, *GetSurfaceRequest) (*GetSurfaceResponse, error)
 	Release(context.Context, *ReleaseRequest) (*ReleaseResponse, error)
+	Resize(context.Context, *ResizeRequest) (*ResizeResponse, error)
+	SetRotation(context.Context, *SetRotationRequest) (*SetRotationResponse, error)
+	SetSurface(context.Context, *SetSurfaceRequest) (*SetSurfaceResponse, error)
+	ToString(context.Context, *ToStringRequest) (*ToStringResponse, error)
 	mustEmbedUnimplementedVirtualDisplayServiceServer()
 }
 
@@ -382,8 +142,26 @@ type VirtualDisplayServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedVirtualDisplayServiceServer struct{}
 
+func (UnimplementedVirtualDisplayServiceServer) GetDisplay(context.Context, *GetDisplayRequest) (*GetDisplayResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDisplay not implemented")
+}
+func (UnimplementedVirtualDisplayServiceServer) GetSurface(context.Context, *GetSurfaceRequest) (*GetSurfaceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSurface not implemented")
+}
 func (UnimplementedVirtualDisplayServiceServer) Release(context.Context, *ReleaseRequest) (*ReleaseResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Release not implemented")
+}
+func (UnimplementedVirtualDisplayServiceServer) Resize(context.Context, *ResizeRequest) (*ResizeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Resize not implemented")
+}
+func (UnimplementedVirtualDisplayServiceServer) SetRotation(context.Context, *SetRotationRequest) (*SetRotationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetRotation not implemented")
+}
+func (UnimplementedVirtualDisplayServiceServer) SetSurface(context.Context, *SetSurfaceRequest) (*SetSurfaceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetSurface not implemented")
+}
+func (UnimplementedVirtualDisplayServiceServer) ToString(context.Context, *ToStringRequest) (*ToStringResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ToString not implemented")
 }
 func (UnimplementedVirtualDisplayServiceServer) mustEmbedUnimplementedVirtualDisplayServiceServer() {}
 func (UnimplementedVirtualDisplayServiceServer) testEmbeddedByValue()                               {}
@@ -406,6 +184,42 @@ func RegisterVirtualDisplayServiceServer(s grpc.ServiceRegistrar, srv VirtualDis
 	s.RegisterService(&VirtualDisplayService_ServiceDesc, srv)
 }
 
+func _VirtualDisplayService_GetDisplay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDisplayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VirtualDisplayServiceServer).GetDisplay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VirtualDisplayService_GetDisplay_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VirtualDisplayServiceServer).GetDisplay(ctx, req.(*GetDisplayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VirtualDisplayService_GetSurface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSurfaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VirtualDisplayServiceServer).GetSurface(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VirtualDisplayService_GetSurface_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VirtualDisplayServiceServer).GetSurface(ctx, req.(*GetSurfaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _VirtualDisplayService_Release_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReleaseRequest)
 	if err := dec(in); err != nil {
@@ -424,6 +238,78 @@ func _VirtualDisplayService_Release_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _VirtualDisplayService_Resize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResizeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VirtualDisplayServiceServer).Resize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VirtualDisplayService_Resize_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VirtualDisplayServiceServer).Resize(ctx, req.(*ResizeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VirtualDisplayService_SetRotation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetRotationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VirtualDisplayServiceServer).SetRotation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VirtualDisplayService_SetRotation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VirtualDisplayServiceServer).SetRotation(ctx, req.(*SetRotationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VirtualDisplayService_SetSurface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetSurfaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VirtualDisplayServiceServer).SetSurface(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VirtualDisplayService_SetSurface_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VirtualDisplayServiceServer).SetSurface(ctx, req.(*SetSurfaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VirtualDisplayService_ToString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToStringRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VirtualDisplayServiceServer).ToString(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VirtualDisplayService_ToString_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VirtualDisplayServiceServer).ToString(ctx, req.(*ToStringRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // VirtualDisplayService_ServiceDesc is the grpc.ServiceDesc for VirtualDisplayService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -432,118 +318,34 @@ var VirtualDisplayService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*VirtualDisplayServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "GetDisplay",
+			Handler:    _VirtualDisplayService_GetDisplay_Handler,
+		},
+		{
+			MethodName: "GetSurface",
+			Handler:    _VirtualDisplayService_GetSurface_Handler,
+		},
+		{
 			MethodName: "Release",
 			Handler:    _VirtualDisplayService_Release_Handler,
 		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/projection/projection.proto",
-}
-
-const (
-	ProjectionCallbackService_SubscribeProjectionCallback_FullMethodName = "/projection.ProjectionCallbackService/SubscribeProjectionCallback"
-)
-
-// ProjectionCallbackServiceClient is the client API for ProjectionCallbackService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ProjectionCallbackServiceClient interface {
-	// Server-streaming events from android.media.projection.MediaProjection$Callback
-	SubscribeProjectionCallback(ctx context.Context, in *SubscribeProjectionCallbackRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ProjectionCallbackEvent], error)
-}
-
-type projectionCallbackServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewProjectionCallbackServiceClient(cc grpc.ClientConnInterface) ProjectionCallbackServiceClient {
-	return &projectionCallbackServiceClient{cc}
-}
-
-func (c *projectionCallbackServiceClient) SubscribeProjectionCallback(ctx context.Context, in *SubscribeProjectionCallbackRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ProjectionCallbackEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &ProjectionCallbackService_ServiceDesc.Streams[0], ProjectionCallbackService_SubscribeProjectionCallback_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[SubscribeProjectionCallbackRequest, ProjectionCallbackEvent]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type ProjectionCallbackService_SubscribeProjectionCallbackClient = grpc.ServerStreamingClient[ProjectionCallbackEvent]
-
-// ProjectionCallbackServiceServer is the server API for ProjectionCallbackService service.
-// All implementations must embed UnimplementedProjectionCallbackServiceServer
-// for forward compatibility.
-type ProjectionCallbackServiceServer interface {
-	// Server-streaming events from android.media.projection.MediaProjection$Callback
-	SubscribeProjectionCallback(*SubscribeProjectionCallbackRequest, grpc.ServerStreamingServer[ProjectionCallbackEvent]) error
-	mustEmbedUnimplementedProjectionCallbackServiceServer()
-}
-
-// UnimplementedProjectionCallbackServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedProjectionCallbackServiceServer struct{}
-
-func (UnimplementedProjectionCallbackServiceServer) SubscribeProjectionCallback(*SubscribeProjectionCallbackRequest, grpc.ServerStreamingServer[ProjectionCallbackEvent]) error {
-	return status.Error(codes.Unimplemented, "method SubscribeProjectionCallback not implemented")
-}
-func (UnimplementedProjectionCallbackServiceServer) mustEmbedUnimplementedProjectionCallbackServiceServer() {
-}
-func (UnimplementedProjectionCallbackServiceServer) testEmbeddedByValue() {}
-
-// UnsafeProjectionCallbackServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ProjectionCallbackServiceServer will
-// result in compilation errors.
-type UnsafeProjectionCallbackServiceServer interface {
-	mustEmbedUnimplementedProjectionCallbackServiceServer()
-}
-
-func RegisterProjectionCallbackServiceServer(s grpc.ServiceRegistrar, srv ProjectionCallbackServiceServer) {
-	// If the following call panics, it indicates UnimplementedProjectionCallbackServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&ProjectionCallbackService_ServiceDesc, srv)
-}
-
-func _ProjectionCallbackService_SubscribeProjectionCallback_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeProjectionCallbackRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ProjectionCallbackServiceServer).SubscribeProjectionCallback(m, &grpc.GenericServerStream[SubscribeProjectionCallbackRequest, ProjectionCallbackEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type ProjectionCallbackService_SubscribeProjectionCallbackServer = grpc.ServerStreamingServer[ProjectionCallbackEvent]
-
-// ProjectionCallbackService_ServiceDesc is the grpc.ServiceDesc for ProjectionCallbackService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var ProjectionCallbackService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "projection.ProjectionCallbackService",
-	HandlerType: (*ProjectionCallbackServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "SubscribeProjectionCallback",
-			Handler:       _ProjectionCallbackService_SubscribeProjectionCallback_Handler,
-			ServerStreams: true,
+			MethodName: "Resize",
+			Handler:    _VirtualDisplayService_Resize_Handler,
+		},
+		{
+			MethodName: "SetRotation",
+			Handler:    _VirtualDisplayService_SetRotation_Handler,
+		},
+		{
+			MethodName: "SetSurface",
+			Handler:    _VirtualDisplayService_SetSurface_Handler,
+		},
+		{
+			MethodName: "ToString",
+			Handler:    _VirtualDisplayService_ToString_Handler,
 		},
 	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "proto/projection/projection.proto",
 }

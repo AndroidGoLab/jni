@@ -6,134 +6,95 @@ package usb;
 
 option go_package = "github.com/xaionaro-go/jni/proto/usb";
 
-message UsbDevice {
-  string name = 1;
-  int32 vendor_id = 2;
-  int32 product_id = 3;
-  int32 device_id = 4;
-  int32 device_class = 5;
-  int32 device_subclass = 6;
-  int32 device_protocol = 7;
-  string manufacturer_name = 8;
-  string product_name = 9;
-  string serial_number = 10;
-  int32 interface_count = 11;
+message DescribeContentsRequest {
 }
 
-message UsbInterface {
-  int32 id = 1;
-  int32 class = 2;
-  int32 subclass = 3;
-  int32 protocol = 4;
-  int32 endpoint_count = 5;
-}
-
-message UsbEndpoint {
-  int32 address = 1;
-  int32 direction = 2;
-  int32 type = 3;
-  int32 max_packet = 4;
-}
-
-message GetDeviceListRequest {
-}
-
-message GetDeviceListResponse {
-  int64 result = 1;
-}
-
-message HasPermissionRequest {
-  int64 device = 1;
-}
-
-message HasPermissionResponse {
-  bool result = 1;
-}
-
-message RequestPermissionRequest {
-  int64 device = 1;
-  int64 pending_intent = 2;
-}
-
-message RequestPermissionResponse {
-}
-
-message OpenDeviceRequest {
-  int64 device = 1;
-}
-
-message OpenDeviceResponse {
-  int64 result = 1;
-}
-
-message ClaimInterfaceRequest {
-  int64 iface = 1;
-  bool force = 2;
-}
-
-message ClaimInterfaceResponse {
-  bool result = 1;
-}
-
-message ReleaseInterfaceRequest {
-  int64 iface = 1;
-}
-
-message ReleaseInterfaceResponse {
-  bool result = 1;
-}
-
-message BulkTransferRawRequest {
-  int64 endpoint = 1;
-  int64 buffer = 2;
-  int32 length = 3;
-  int32 timeout = 4;
-}
-
-message BulkTransferRawResponse {
+message DescribeContentsResponse {
   int32 result = 1;
 }
 
-message ControlTransferRawRequest {
-  int32 request_type = 1;
-  int32 request = 2;
-  int32 value = 3;
-  int32 index = 4;
-  int64 buffer = 5;
-  int32 length = 6;
-  int32 timeout = 7;
+message GetAlternateSettingRequest {
 }
 
-message ControlTransferRawResponse {
+message GetAlternateSettingResponse {
   int32 result = 1;
 }
 
-message GetFileDescriptorRequest {
+message GetEndpointRequest {
+  int32 arg0 = 1;
 }
 
-message GetFileDescriptorResponse {
-  int32 result = 1;
-}
-
-message GetRawDescriptorsRequest {
-}
-
-message GetRawDescriptorsResponse {
+message GetEndpointResponse {
   int64 result = 1;
 }
 
-service ManagerService {
-  rpc GetDeviceList (GetDeviceListRequest) returns (GetDeviceListResponse);
-  rpc HasPermission (HasPermissionRequest) returns (HasPermissionResponse);
-  rpc RequestPermission (RequestPermissionRequest) returns (RequestPermissionResponse);
-  rpc OpenDevice (OpenDeviceRequest) returns (OpenDeviceResponse);
+message GetEndpointCountRequest {
 }
 
-service ConnectionService {
-  rpc ClaimInterface (ClaimInterfaceRequest) returns (ClaimInterfaceResponse);
-  rpc ReleaseInterface (ReleaseInterfaceRequest) returns (ReleaseInterfaceResponse);
-  rpc BulkTransferRaw (BulkTransferRawRequest) returns (BulkTransferRawResponse);
-  rpc ControlTransferRaw (ControlTransferRawRequest) returns (ControlTransferRawResponse);
-  rpc GetFileDescriptor (GetFileDescriptorRequest) returns (GetFileDescriptorResponse);
-  rpc GetRawDescriptors (GetRawDescriptorsRequest) returns (GetRawDescriptorsResponse);
+message GetEndpointCountResponse {
+  int32 result = 1;
+}
+
+message GetIdRequest {
+}
+
+message GetIdResponse {
+  int32 result = 1;
+}
+
+message GetInterfaceClassRequest {
+}
+
+message GetInterfaceClassResponse {
+  int32 result = 1;
+}
+
+message GetInterfaceProtocolRequest {
+}
+
+message GetInterfaceProtocolResponse {
+  int32 result = 1;
+}
+
+message GetInterfaceSubclassRequest {
+}
+
+message GetInterfaceSubclassResponse {
+  int32 result = 1;
+}
+
+message GetNameRequest {
+}
+
+message GetNameResponse {
+  string result = 1;
+}
+
+message ToStringRequest {
+}
+
+message ToStringResponse {
+  string result = 1;
+}
+
+message WriteToParcelRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message WriteToParcelResponse {
+}
+
+service UsbInterfaceService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc GetAlternateSetting (GetAlternateSettingRequest) returns (GetAlternateSettingResponse);
+  rpc GetEndpoint (GetEndpointRequest) returns (GetEndpointResponse);
+  rpc GetEndpointCount (GetEndpointCountRequest) returns (GetEndpointCountResponse);
+  rpc GetId (GetIdRequest) returns (GetIdResponse);
+  rpc GetInterfaceClass (GetInterfaceClassRequest) returns (GetInterfaceClassResponse);
+  rpc GetInterfaceProtocol (GetInterfaceProtocolRequest) returns (GetInterfaceProtocolResponse);
+  rpc GetInterfaceSubclass (GetInterfaceSubclassRequest) returns (GetInterfaceSubclassResponse);
+  rpc GetName (GetNameRequest) returns (GetNameResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
 }

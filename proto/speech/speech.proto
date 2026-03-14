@@ -6,233 +6,116 @@ package speech;
 
 option go_package = "github.com/xaionaro-go/jni/proto/speech";
 
-message CreateRecognizerRequest {
-  int64 ctx = 1;
+message CancelRequest {
 }
 
-message CreateRecognizerResponse {
+message CancelResponse {
+}
+
+message CheckRecognitionSupportRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message CheckRecognitionSupportResponse {
+}
+
+message DestroyRequest {
+}
+
+message DestroyResponse {
+}
+
+message SetRecognitionListenerRequest {
+  int64 arg0 = 1;
+}
+
+message SetRecognitionListenerResponse {
+}
+
+message StartListeningRequest {
+  int64 arg0 = 1;
+}
+
+message StartListeningResponse {
+}
+
+message StopListeningRequest {
+}
+
+message StopListeningResponse {
+}
+
+message TriggerModelDownload1Request {
+  int64 arg0 = 1;
+}
+
+message TriggerModelDownload1Response {
+}
+
+message TriggerModelDownload3_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message TriggerModelDownload3_1Response {
+}
+
+message CreateOnDeviceSpeechRecognizerRequest {
+  int64 arg0 = 1;
+}
+
+message CreateOnDeviceSpeechRecognizerResponse {
   int64 result = 1;
 }
 
+message CreateSpeechRecognizer1Request {
+  int64 arg0 = 1;
+}
+
+message CreateSpeechRecognizer1Response {
+  int64 result = 1;
+}
+
+message CreateSpeechRecognizer2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message CreateSpeechRecognizer2_1Response {
+  int64 result = 1;
+}
+
+message IsOnDeviceRecognitionAvailableRequest {
+  int64 arg0 = 1;
+}
+
+message IsOnDeviceRecognitionAvailableResponse {
+  bool result = 1;
+}
+
 message IsRecognitionAvailableRequest {
-  int64 ctx = 1;
+  int64 arg0 = 1;
 }
 
 message IsRecognitionAvailableResponse {
   bool result = 1;
 }
 
-message SetRecognitionListenerRequest {
-  int64 listener = 1;
-}
-
-message SetRecognitionListenerResponse {
-}
-
-message StartListeningRawRequest {
-  int64 intent = 1;
-}
-
-message StartListeningRawResponse {
-}
-
-message StopListeningRawRequest {
-}
-
-message StopListeningRawResponse {
-}
-
-message CancelRawRequest {
-}
-
-message CancelRawResponse {
-}
-
-message DestroyRawRequest {
-}
-
-message DestroyRawResponse {
-}
-
-message SpeakRawRequest {
-  int64 text = 1;
-  int32 queue_mode = 2;
-  int64 params = 3;
-  string utterance_id = 4;
-}
-
-message SpeakRawResponse {
-  int32 result = 1;
-}
-
-message StopRawRequest {
-}
-
-message StopRawResponse {
-  int32 result = 1;
-}
-
-message IsSpeakingRawRequest {
-}
-
-message IsSpeakingRawResponse {
-  bool result = 1;
-}
-
-message SetLanguageRawRequest {
-  int64 locale = 1;
-}
-
-message SetLanguageRawResponse {
-  int32 result = 1;
-}
-
-message SetPitchRawRequest {
-  float pitch = 1;
-}
-
-message SetPitchRawResponse {
-  int32 result = 1;
-}
-
-message SetSpeechRateRawRequest {
-  float rate = 1;
-}
-
-message SetSpeechRateRawResponse {
-  int32 result = 1;
-}
-
-message GetAvailableLanguagesRawRequest {
-}
-
-message GetAvailableLanguagesRawResponse {
-  int64 result = 1;
-}
-
-message ShutdownRawRequest {
-}
-
-message ShutdownRawResponse {
-}
-
-message SetOnUtteranceProgressListenerRawRequest {
-  int64 listener = 1;
-}
-
-message SetOnUtteranceProgressListenerRawResponse {
-  int32 result = 1;
-}
-
-message RecognitionListenerOnResultsEvent {
-  int64 arg0 = 1;
-}
-
-message RecognitionListenerOnPartialResultsEvent {
-  int64 arg0 = 1;
-}
-
-message RecognitionListenerOnErrorEvent {
-  int64 arg0 = 1;
-}
-
-message RecognitionListenerOnReadyForSpeechEvent {
-  int64 arg0 = 1;
-}
-
-message RecognitionListenerOnBeginningOfSpeechEvent {
-}
-
-message RecognitionListenerOnEndOfSpeechEvent {
-}
-
-message RecognitionListenerOnRmsChangedEvent {
-  int64 arg0 = 1;
-}
-
-message RecognitionListenerOnBufferReceivedEvent {
-  int64 arg0 = 1;
-}
-
-message RecognitionListenerEvent {
-  optional RecognitionListenerOnResultsEvent on_results = 1;
-  optional RecognitionListenerOnPartialResultsEvent on_partial_results = 2;
-  optional RecognitionListenerOnErrorEvent on_error = 3;
-  optional RecognitionListenerOnReadyForSpeechEvent on_ready_for_speech = 4;
-  optional RecognitionListenerOnBeginningOfSpeechEvent on_beginning_of_speech = 5;
-  optional RecognitionListenerOnEndOfSpeechEvent on_end_of_speech = 6;
-  optional RecognitionListenerOnRmsChangedEvent on_rms_changed = 7;
-  optional RecognitionListenerOnBufferReceivedEvent on_buffer_received = 8;
-}
-
-message SubscribeRecognitionListenerRequest {
-}
-
-message TtsOnInitListenerOnInitEvent {
-  int64 arg0 = 1;
-}
-
-message TtsOnInitListenerEvent {
-  optional TtsOnInitListenerOnInitEvent on_init = 1;
-}
-
-message SubscribeTtsOnInitListenerRequest {
-}
-
-message UtteranceProgressListenerOnDoneEvent {
-  string arg0 = 1;
-}
-
-message UtteranceProgressListenerOnErrorEvent {
-  string arg0 = 1;
-}
-
-message UtteranceProgressListenerOnStartEvent {
-  string arg0 = 1;
-}
-
-message UtteranceProgressListenerEvent {
-  optional UtteranceProgressListenerOnDoneEvent on_done = 1;
-  optional UtteranceProgressListenerOnErrorEvent on_error = 2;
-  optional UtteranceProgressListenerOnStartEvent on_start = 3;
-}
-
-message SubscribeUtteranceProgressListenerRequest {
-}
-
-service RecognizerService {
-  rpc CreateRecognizer (CreateRecognizerRequest) returns (CreateRecognizerResponse);
-  rpc IsRecognitionAvailable (IsRecognitionAvailableRequest) returns (IsRecognitionAvailableResponse);
+service SpeechRecognizerService {
+  rpc Cancel (CancelRequest) returns (CancelResponse);
+  rpc CheckRecognitionSupport (CheckRecognitionSupportRequest) returns (CheckRecognitionSupportResponse);
+  rpc Destroy (DestroyRequest) returns (DestroyResponse);
   rpc SetRecognitionListener (SetRecognitionListenerRequest) returns (SetRecognitionListenerResponse);
-  rpc StartListeningRaw (StartListeningRawRequest) returns (StartListeningRawResponse);
-  rpc StopListeningRaw (StopListeningRawRequest) returns (StopListeningRawResponse);
-  rpc CancelRaw (CancelRawRequest) returns (CancelRawResponse);
-  rpc DestroyRaw (DestroyRawRequest) returns (DestroyRawResponse);
-}
-
-service TTSService {
-  rpc SpeakRaw (SpeakRawRequest) returns (SpeakRawResponse);
-  rpc StopRaw (StopRawRequest) returns (StopRawResponse);
-  rpc IsSpeakingRaw (IsSpeakingRawRequest) returns (IsSpeakingRawResponse);
-  rpc SetLanguageRaw (SetLanguageRawRequest) returns (SetLanguageRawResponse);
-  rpc SetPitchRaw (SetPitchRawRequest) returns (SetPitchRawResponse);
-  rpc SetSpeechRateRaw (SetSpeechRateRawRequest) returns (SetSpeechRateRawResponse);
-  rpc GetAvailableLanguagesRaw (GetAvailableLanguagesRawRequest) returns (GetAvailableLanguagesRawResponse);
-  rpc ShutdownRaw (ShutdownRawRequest) returns (ShutdownRawResponse);
-  rpc SetOnUtteranceProgressListenerRaw (SetOnUtteranceProgressListenerRawRequest) returns (SetOnUtteranceProgressListenerRawResponse);
-}
-
-service RecognitionListenerService {
-  // Server-streaming events from android.speech.RecognitionListener
-  rpc SubscribeRecognitionListener (SubscribeRecognitionListenerRequest) returns (stream RecognitionListenerEvent);
-}
-
-service TtsOnInitListenerService {
-  // Server-streaming events from android.speech.tts.TextToSpeech$OnInitListener
-  rpc SubscribeTtsOnInitListener (SubscribeTtsOnInitListenerRequest) returns (stream TtsOnInitListenerEvent);
-}
-
-service UtteranceProgressListenerService {
-  // Server-streaming events from android.speech.tts.UtteranceProgressListener
-  rpc SubscribeUtteranceProgressListener (SubscribeUtteranceProgressListenerRequest) returns (stream UtteranceProgressListenerEvent);
+  rpc StartListening (StartListeningRequest) returns (StartListeningResponse);
+  rpc StopListening (StopListeningRequest) returns (StopListeningResponse);
+  rpc TriggerModelDownload1 (TriggerModelDownload1Request) returns (TriggerModelDownload1Response);
+  rpc TriggerModelDownload3_1 (TriggerModelDownload3_1Request) returns (TriggerModelDownload3_1Response);
+  rpc CreateOnDeviceSpeechRecognizer (CreateOnDeviceSpeechRecognizerRequest) returns (CreateOnDeviceSpeechRecognizerResponse);
+  rpc CreateSpeechRecognizer1 (CreateSpeechRecognizer1Request) returns (CreateSpeechRecognizer1Response);
+  rpc CreateSpeechRecognizer2_1 (CreateSpeechRecognizer2_1Request) returns (CreateSpeechRecognizer2_1Response);
+  rpc IsOnDeviceRecognitionAvailable (IsOnDeviceRecognitionAvailableRequest) returns (IsOnDeviceRecognitionAvailableResponse);
+  rpc IsRecognitionAvailable (IsRecognitionAvailableRequest) returns (IsRecognitionAvailableResponse);
 }

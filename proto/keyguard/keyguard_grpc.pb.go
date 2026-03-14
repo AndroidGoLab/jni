@@ -21,509 +21,484 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ManagerService_IsKeyguardLocked_FullMethodName                       = "/keyguard.ManagerService/IsKeyguardLocked"
-	ManagerService_IsKeyguardSecure_FullMethodName                       = "/keyguard.ManagerService/IsKeyguardSecure"
-	ManagerService_IsDeviceLocked_FullMethodName                         = "/keyguard.ManagerService/IsDeviceLocked"
-	ManagerService_IsDeviceSecure_FullMethodName                         = "/keyguard.ManagerService/IsDeviceSecure"
-	ManagerService_RequestDismissKeyguardRaw_FullMethodName              = "/keyguard.ManagerService/RequestDismissKeyguardRaw"
-	ManagerService_CreateConfirmDeviceCredentialIntentRaw_FullMethodName = "/keyguard.ManagerService/CreateConfirmDeviceCredentialIntentRaw"
+	KeyguardManagerService_AddKeyguardLockedStateListener_FullMethodName      = "/keyguard.KeyguardManagerService/AddKeyguardLockedStateListener"
+	KeyguardManagerService_CreateConfirmDeviceCredentialIntent_FullMethodName = "/keyguard.KeyguardManagerService/CreateConfirmDeviceCredentialIntent"
+	KeyguardManagerService_ExitKeyguardSecurely_FullMethodName                = "/keyguard.KeyguardManagerService/ExitKeyguardSecurely"
+	KeyguardManagerService_InKeyguardRestrictedInputMode_FullMethodName       = "/keyguard.KeyguardManagerService/InKeyguardRestrictedInputMode"
+	KeyguardManagerService_IsDeviceLocked_FullMethodName                      = "/keyguard.KeyguardManagerService/IsDeviceLocked"
+	KeyguardManagerService_IsDeviceSecure_FullMethodName                      = "/keyguard.KeyguardManagerService/IsDeviceSecure"
+	KeyguardManagerService_IsKeyguardLocked_FullMethodName                    = "/keyguard.KeyguardManagerService/IsKeyguardLocked"
+	KeyguardManagerService_IsKeyguardSecure_FullMethodName                    = "/keyguard.KeyguardManagerService/IsKeyguardSecure"
+	KeyguardManagerService_NewKeyguardLock_FullMethodName                     = "/keyguard.KeyguardManagerService/NewKeyguardLock"
+	KeyguardManagerService_RemoveKeyguardLockedStateListener_FullMethodName   = "/keyguard.KeyguardManagerService/RemoveKeyguardLockedStateListener"
+	KeyguardManagerService_RequestDismissKeyguard_FullMethodName              = "/keyguard.KeyguardManagerService/RequestDismissKeyguard"
 )
 
-// ManagerServiceClient is the client API for ManagerService service.
+// KeyguardManagerServiceClient is the client API for KeyguardManagerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ManagerServiceClient interface {
-	IsKeyguardLocked(ctx context.Context, in *IsKeyguardLockedRequest, opts ...grpc.CallOption) (*IsKeyguardLockedResponse, error)
-	IsKeyguardSecure(ctx context.Context, in *IsKeyguardSecureRequest, opts ...grpc.CallOption) (*IsKeyguardSecureResponse, error)
+type KeyguardManagerServiceClient interface {
+	AddKeyguardLockedStateListener(ctx context.Context, in *AddKeyguardLockedStateListenerRequest, opts ...grpc.CallOption) (*AddKeyguardLockedStateListenerResponse, error)
+	CreateConfirmDeviceCredentialIntent(ctx context.Context, in *CreateConfirmDeviceCredentialIntentRequest, opts ...grpc.CallOption) (*CreateConfirmDeviceCredentialIntentResponse, error)
+	ExitKeyguardSecurely(ctx context.Context, in *ExitKeyguardSecurelyRequest, opts ...grpc.CallOption) (*ExitKeyguardSecurelyResponse, error)
+	InKeyguardRestrictedInputMode(ctx context.Context, in *InKeyguardRestrictedInputModeRequest, opts ...grpc.CallOption) (*InKeyguardRestrictedInputModeResponse, error)
 	IsDeviceLocked(ctx context.Context, in *IsDeviceLockedRequest, opts ...grpc.CallOption) (*IsDeviceLockedResponse, error)
 	IsDeviceSecure(ctx context.Context, in *IsDeviceSecureRequest, opts ...grpc.CallOption) (*IsDeviceSecureResponse, error)
-	RequestDismissKeyguardRaw(ctx context.Context, in *RequestDismissKeyguardRawRequest, opts ...grpc.CallOption) (*RequestDismissKeyguardRawResponse, error)
-	CreateConfirmDeviceCredentialIntentRaw(ctx context.Context, in *CreateConfirmDeviceCredentialIntentRawRequest, opts ...grpc.CallOption) (*CreateConfirmDeviceCredentialIntentRawResponse, error)
+	IsKeyguardLocked(ctx context.Context, in *IsKeyguardLockedRequest, opts ...grpc.CallOption) (*IsKeyguardLockedResponse, error)
+	IsKeyguardSecure(ctx context.Context, in *IsKeyguardSecureRequest, opts ...grpc.CallOption) (*IsKeyguardSecureResponse, error)
+	NewKeyguardLock(ctx context.Context, in *NewKeyguardLockRequest, opts ...grpc.CallOption) (*NewKeyguardLockResponse, error)
+	RemoveKeyguardLockedStateListener(ctx context.Context, in *RemoveKeyguardLockedStateListenerRequest, opts ...grpc.CallOption) (*RemoveKeyguardLockedStateListenerResponse, error)
+	RequestDismissKeyguard(ctx context.Context, in *RequestDismissKeyguardRequest, opts ...grpc.CallOption) (*RequestDismissKeyguardResponse, error)
 }
 
-type managerServiceClient struct {
+type keyguardManagerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewManagerServiceClient(cc grpc.ClientConnInterface) ManagerServiceClient {
-	return &managerServiceClient{cc}
+func NewKeyguardManagerServiceClient(cc grpc.ClientConnInterface) KeyguardManagerServiceClient {
+	return &keyguardManagerServiceClient{cc}
 }
 
-func (c *managerServiceClient) IsKeyguardLocked(ctx context.Context, in *IsKeyguardLockedRequest, opts ...grpc.CallOption) (*IsKeyguardLockedResponse, error) {
+func (c *keyguardManagerServiceClient) AddKeyguardLockedStateListener(ctx context.Context, in *AddKeyguardLockedStateListenerRequest, opts ...grpc.CallOption) (*AddKeyguardLockedStateListenerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(IsKeyguardLockedResponse)
-	err := c.cc.Invoke(ctx, ManagerService_IsKeyguardLocked_FullMethodName, in, out, cOpts...)
+	out := new(AddKeyguardLockedStateListenerResponse)
+	err := c.cc.Invoke(ctx, KeyguardManagerService_AddKeyguardLockedStateListener_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) IsKeyguardSecure(ctx context.Context, in *IsKeyguardSecureRequest, opts ...grpc.CallOption) (*IsKeyguardSecureResponse, error) {
+func (c *keyguardManagerServiceClient) CreateConfirmDeviceCredentialIntent(ctx context.Context, in *CreateConfirmDeviceCredentialIntentRequest, opts ...grpc.CallOption) (*CreateConfirmDeviceCredentialIntentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(IsKeyguardSecureResponse)
-	err := c.cc.Invoke(ctx, ManagerService_IsKeyguardSecure_FullMethodName, in, out, cOpts...)
+	out := new(CreateConfirmDeviceCredentialIntentResponse)
+	err := c.cc.Invoke(ctx, KeyguardManagerService_CreateConfirmDeviceCredentialIntent_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) IsDeviceLocked(ctx context.Context, in *IsDeviceLockedRequest, opts ...grpc.CallOption) (*IsDeviceLockedResponse, error) {
+func (c *keyguardManagerServiceClient) ExitKeyguardSecurely(ctx context.Context, in *ExitKeyguardSecurelyRequest, opts ...grpc.CallOption) (*ExitKeyguardSecurelyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExitKeyguardSecurelyResponse)
+	err := c.cc.Invoke(ctx, KeyguardManagerService_ExitKeyguardSecurely_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *keyguardManagerServiceClient) InKeyguardRestrictedInputMode(ctx context.Context, in *InKeyguardRestrictedInputModeRequest, opts ...grpc.CallOption) (*InKeyguardRestrictedInputModeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InKeyguardRestrictedInputModeResponse)
+	err := c.cc.Invoke(ctx, KeyguardManagerService_InKeyguardRestrictedInputMode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *keyguardManagerServiceClient) IsDeviceLocked(ctx context.Context, in *IsDeviceLockedRequest, opts ...grpc.CallOption) (*IsDeviceLockedResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IsDeviceLockedResponse)
-	err := c.cc.Invoke(ctx, ManagerService_IsDeviceLocked_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, KeyguardManagerService_IsDeviceLocked_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) IsDeviceSecure(ctx context.Context, in *IsDeviceSecureRequest, opts ...grpc.CallOption) (*IsDeviceSecureResponse, error) {
+func (c *keyguardManagerServiceClient) IsDeviceSecure(ctx context.Context, in *IsDeviceSecureRequest, opts ...grpc.CallOption) (*IsDeviceSecureResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IsDeviceSecureResponse)
-	err := c.cc.Invoke(ctx, ManagerService_IsDeviceSecure_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, KeyguardManagerService_IsDeviceSecure_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) RequestDismissKeyguardRaw(ctx context.Context, in *RequestDismissKeyguardRawRequest, opts ...grpc.CallOption) (*RequestDismissKeyguardRawResponse, error) {
+func (c *keyguardManagerServiceClient) IsKeyguardLocked(ctx context.Context, in *IsKeyguardLockedRequest, opts ...grpc.CallOption) (*IsKeyguardLockedResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RequestDismissKeyguardRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_RequestDismissKeyguardRaw_FullMethodName, in, out, cOpts...)
+	out := new(IsKeyguardLockedResponse)
+	err := c.cc.Invoke(ctx, KeyguardManagerService_IsKeyguardLocked_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) CreateConfirmDeviceCredentialIntentRaw(ctx context.Context, in *CreateConfirmDeviceCredentialIntentRawRequest, opts ...grpc.CallOption) (*CreateConfirmDeviceCredentialIntentRawResponse, error) {
+func (c *keyguardManagerServiceClient) IsKeyguardSecure(ctx context.Context, in *IsKeyguardSecureRequest, opts ...grpc.CallOption) (*IsKeyguardSecureResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateConfirmDeviceCredentialIntentRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_CreateConfirmDeviceCredentialIntentRaw_FullMethodName, in, out, cOpts...)
+	out := new(IsKeyguardSecureResponse)
+	err := c.cc.Invoke(ctx, KeyguardManagerService_IsKeyguardSecure_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ManagerServiceServer is the server API for ManagerService service.
-// All implementations must embed UnimplementedManagerServiceServer
+func (c *keyguardManagerServiceClient) NewKeyguardLock(ctx context.Context, in *NewKeyguardLockRequest, opts ...grpc.CallOption) (*NewKeyguardLockResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NewKeyguardLockResponse)
+	err := c.cc.Invoke(ctx, KeyguardManagerService_NewKeyguardLock_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *keyguardManagerServiceClient) RemoveKeyguardLockedStateListener(ctx context.Context, in *RemoveKeyguardLockedStateListenerRequest, opts ...grpc.CallOption) (*RemoveKeyguardLockedStateListenerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveKeyguardLockedStateListenerResponse)
+	err := c.cc.Invoke(ctx, KeyguardManagerService_RemoveKeyguardLockedStateListener_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *keyguardManagerServiceClient) RequestDismissKeyguard(ctx context.Context, in *RequestDismissKeyguardRequest, opts ...grpc.CallOption) (*RequestDismissKeyguardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestDismissKeyguardResponse)
+	err := c.cc.Invoke(ctx, KeyguardManagerService_RequestDismissKeyguard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// KeyguardManagerServiceServer is the server API for KeyguardManagerService service.
+// All implementations must embed UnimplementedKeyguardManagerServiceServer
 // for forward compatibility.
-type ManagerServiceServer interface {
-	IsKeyguardLocked(context.Context, *IsKeyguardLockedRequest) (*IsKeyguardLockedResponse, error)
-	IsKeyguardSecure(context.Context, *IsKeyguardSecureRequest) (*IsKeyguardSecureResponse, error)
+type KeyguardManagerServiceServer interface {
+	AddKeyguardLockedStateListener(context.Context, *AddKeyguardLockedStateListenerRequest) (*AddKeyguardLockedStateListenerResponse, error)
+	CreateConfirmDeviceCredentialIntent(context.Context, *CreateConfirmDeviceCredentialIntentRequest) (*CreateConfirmDeviceCredentialIntentResponse, error)
+	ExitKeyguardSecurely(context.Context, *ExitKeyguardSecurelyRequest) (*ExitKeyguardSecurelyResponse, error)
+	InKeyguardRestrictedInputMode(context.Context, *InKeyguardRestrictedInputModeRequest) (*InKeyguardRestrictedInputModeResponse, error)
 	IsDeviceLocked(context.Context, *IsDeviceLockedRequest) (*IsDeviceLockedResponse, error)
 	IsDeviceSecure(context.Context, *IsDeviceSecureRequest) (*IsDeviceSecureResponse, error)
-	RequestDismissKeyguardRaw(context.Context, *RequestDismissKeyguardRawRequest) (*RequestDismissKeyguardRawResponse, error)
-	CreateConfirmDeviceCredentialIntentRaw(context.Context, *CreateConfirmDeviceCredentialIntentRawRequest) (*CreateConfirmDeviceCredentialIntentRawResponse, error)
-	mustEmbedUnimplementedManagerServiceServer()
+	IsKeyguardLocked(context.Context, *IsKeyguardLockedRequest) (*IsKeyguardLockedResponse, error)
+	IsKeyguardSecure(context.Context, *IsKeyguardSecureRequest) (*IsKeyguardSecureResponse, error)
+	NewKeyguardLock(context.Context, *NewKeyguardLockRequest) (*NewKeyguardLockResponse, error)
+	RemoveKeyguardLockedStateListener(context.Context, *RemoveKeyguardLockedStateListenerRequest) (*RemoveKeyguardLockedStateListenerResponse, error)
+	RequestDismissKeyguard(context.Context, *RequestDismissKeyguardRequest) (*RequestDismissKeyguardResponse, error)
+	mustEmbedUnimplementedKeyguardManagerServiceServer()
 }
 
-// UnimplementedManagerServiceServer must be embedded to have
+// UnimplementedKeyguardManagerServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedManagerServiceServer struct{}
+type UnimplementedKeyguardManagerServiceServer struct{}
 
-func (UnimplementedManagerServiceServer) IsKeyguardLocked(context.Context, *IsKeyguardLockedRequest) (*IsKeyguardLockedResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method IsKeyguardLocked not implemented")
+func (UnimplementedKeyguardManagerServiceServer) AddKeyguardLockedStateListener(context.Context, *AddKeyguardLockedStateListenerRequest) (*AddKeyguardLockedStateListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddKeyguardLockedStateListener not implemented")
 }
-func (UnimplementedManagerServiceServer) IsKeyguardSecure(context.Context, *IsKeyguardSecureRequest) (*IsKeyguardSecureResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method IsKeyguardSecure not implemented")
+func (UnimplementedKeyguardManagerServiceServer) CreateConfirmDeviceCredentialIntent(context.Context, *CreateConfirmDeviceCredentialIntentRequest) (*CreateConfirmDeviceCredentialIntentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateConfirmDeviceCredentialIntent not implemented")
 }
-func (UnimplementedManagerServiceServer) IsDeviceLocked(context.Context, *IsDeviceLockedRequest) (*IsDeviceLockedResponse, error) {
+func (UnimplementedKeyguardManagerServiceServer) ExitKeyguardSecurely(context.Context, *ExitKeyguardSecurelyRequest) (*ExitKeyguardSecurelyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExitKeyguardSecurely not implemented")
+}
+func (UnimplementedKeyguardManagerServiceServer) InKeyguardRestrictedInputMode(context.Context, *InKeyguardRestrictedInputModeRequest) (*InKeyguardRestrictedInputModeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method InKeyguardRestrictedInputMode not implemented")
+}
+func (UnimplementedKeyguardManagerServiceServer) IsDeviceLocked(context.Context, *IsDeviceLockedRequest) (*IsDeviceLockedResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method IsDeviceLocked not implemented")
 }
-func (UnimplementedManagerServiceServer) IsDeviceSecure(context.Context, *IsDeviceSecureRequest) (*IsDeviceSecureResponse, error) {
+func (UnimplementedKeyguardManagerServiceServer) IsDeviceSecure(context.Context, *IsDeviceSecureRequest) (*IsDeviceSecureResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method IsDeviceSecure not implemented")
 }
-func (UnimplementedManagerServiceServer) RequestDismissKeyguardRaw(context.Context, *RequestDismissKeyguardRawRequest) (*RequestDismissKeyguardRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RequestDismissKeyguardRaw not implemented")
+func (UnimplementedKeyguardManagerServiceServer) IsKeyguardLocked(context.Context, *IsKeyguardLockedRequest) (*IsKeyguardLockedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsKeyguardLocked not implemented")
 }
-func (UnimplementedManagerServiceServer) CreateConfirmDeviceCredentialIntentRaw(context.Context, *CreateConfirmDeviceCredentialIntentRawRequest) (*CreateConfirmDeviceCredentialIntentRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateConfirmDeviceCredentialIntentRaw not implemented")
+func (UnimplementedKeyguardManagerServiceServer) IsKeyguardSecure(context.Context, *IsKeyguardSecureRequest) (*IsKeyguardSecureResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsKeyguardSecure not implemented")
 }
-func (UnimplementedManagerServiceServer) mustEmbedUnimplementedManagerServiceServer() {}
-func (UnimplementedManagerServiceServer) testEmbeddedByValue()                        {}
+func (UnimplementedKeyguardManagerServiceServer) NewKeyguardLock(context.Context, *NewKeyguardLockRequest) (*NewKeyguardLockResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method NewKeyguardLock not implemented")
+}
+func (UnimplementedKeyguardManagerServiceServer) RemoveKeyguardLockedStateListener(context.Context, *RemoveKeyguardLockedStateListenerRequest) (*RemoveKeyguardLockedStateListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveKeyguardLockedStateListener not implemented")
+}
+func (UnimplementedKeyguardManagerServiceServer) RequestDismissKeyguard(context.Context, *RequestDismissKeyguardRequest) (*RequestDismissKeyguardResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestDismissKeyguard not implemented")
+}
+func (UnimplementedKeyguardManagerServiceServer) mustEmbedUnimplementedKeyguardManagerServiceServer() {
+}
+func (UnimplementedKeyguardManagerServiceServer) testEmbeddedByValue() {}
 
-// UnsafeManagerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ManagerServiceServer will
+// UnsafeKeyguardManagerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to KeyguardManagerServiceServer will
 // result in compilation errors.
-type UnsafeManagerServiceServer interface {
-	mustEmbedUnimplementedManagerServiceServer()
+type UnsafeKeyguardManagerServiceServer interface {
+	mustEmbedUnimplementedKeyguardManagerServiceServer()
 }
 
-func RegisterManagerServiceServer(s grpc.ServiceRegistrar, srv ManagerServiceServer) {
-	// If the following call panics, it indicates UnimplementedManagerServiceServer was
+func RegisterKeyguardManagerServiceServer(s grpc.ServiceRegistrar, srv KeyguardManagerServiceServer) {
+	// If the following call panics, it indicates UnimplementedKeyguardManagerServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ManagerService_ServiceDesc, srv)
+	s.RegisterService(&KeyguardManagerService_ServiceDesc, srv)
 }
 
-func _ManagerService_IsKeyguardLocked_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IsKeyguardLockedRequest)
+func _KeyguardManagerService_AddKeyguardLockedStateListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddKeyguardLockedStateListenerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).IsKeyguardLocked(ctx, in)
+		return srv.(KeyguardManagerServiceServer).AddKeyguardLockedStateListener(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_IsKeyguardLocked_FullMethodName,
+		FullMethod: KeyguardManagerService_AddKeyguardLockedStateListener_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).IsKeyguardLocked(ctx, req.(*IsKeyguardLockedRequest))
+		return srv.(KeyguardManagerServiceServer).AddKeyguardLockedStateListener(ctx, req.(*AddKeyguardLockedStateListenerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_IsKeyguardSecure_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IsKeyguardSecureRequest)
+func _KeyguardManagerService_CreateConfirmDeviceCredentialIntent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateConfirmDeviceCredentialIntentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).IsKeyguardSecure(ctx, in)
+		return srv.(KeyguardManagerServiceServer).CreateConfirmDeviceCredentialIntent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_IsKeyguardSecure_FullMethodName,
+		FullMethod: KeyguardManagerService_CreateConfirmDeviceCredentialIntent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).IsKeyguardSecure(ctx, req.(*IsKeyguardSecureRequest))
+		return srv.(KeyguardManagerServiceServer).CreateConfirmDeviceCredentialIntent(ctx, req.(*CreateConfirmDeviceCredentialIntentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_IsDeviceLocked_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _KeyguardManagerService_ExitKeyguardSecurely_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExitKeyguardSecurelyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KeyguardManagerServiceServer).ExitKeyguardSecurely(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KeyguardManagerService_ExitKeyguardSecurely_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KeyguardManagerServiceServer).ExitKeyguardSecurely(ctx, req.(*ExitKeyguardSecurelyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KeyguardManagerService_InKeyguardRestrictedInputMode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InKeyguardRestrictedInputModeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KeyguardManagerServiceServer).InKeyguardRestrictedInputMode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KeyguardManagerService_InKeyguardRestrictedInputMode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KeyguardManagerServiceServer).InKeyguardRestrictedInputMode(ctx, req.(*InKeyguardRestrictedInputModeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KeyguardManagerService_IsDeviceLocked_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(IsDeviceLockedRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).IsDeviceLocked(ctx, in)
+		return srv.(KeyguardManagerServiceServer).IsDeviceLocked(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_IsDeviceLocked_FullMethodName,
+		FullMethod: KeyguardManagerService_IsDeviceLocked_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).IsDeviceLocked(ctx, req.(*IsDeviceLockedRequest))
+		return srv.(KeyguardManagerServiceServer).IsDeviceLocked(ctx, req.(*IsDeviceLockedRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_IsDeviceSecure_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _KeyguardManagerService_IsDeviceSecure_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(IsDeviceSecureRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).IsDeviceSecure(ctx, in)
+		return srv.(KeyguardManagerServiceServer).IsDeviceSecure(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_IsDeviceSecure_FullMethodName,
+		FullMethod: KeyguardManagerService_IsDeviceSecure_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).IsDeviceSecure(ctx, req.(*IsDeviceSecureRequest))
+		return srv.(KeyguardManagerServiceServer).IsDeviceSecure(ctx, req.(*IsDeviceSecureRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_RequestDismissKeyguardRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RequestDismissKeyguardRawRequest)
+func _KeyguardManagerService_IsKeyguardLocked_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsKeyguardLockedRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).RequestDismissKeyguardRaw(ctx, in)
+		return srv.(KeyguardManagerServiceServer).IsKeyguardLocked(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_RequestDismissKeyguardRaw_FullMethodName,
+		FullMethod: KeyguardManagerService_IsKeyguardLocked_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).RequestDismissKeyguardRaw(ctx, req.(*RequestDismissKeyguardRawRequest))
+		return srv.(KeyguardManagerServiceServer).IsKeyguardLocked(ctx, req.(*IsKeyguardLockedRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_CreateConfirmDeviceCredentialIntentRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateConfirmDeviceCredentialIntentRawRequest)
+func _KeyguardManagerService_IsKeyguardSecure_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsKeyguardSecureRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).CreateConfirmDeviceCredentialIntentRaw(ctx, in)
+		return srv.(KeyguardManagerServiceServer).IsKeyguardSecure(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_CreateConfirmDeviceCredentialIntentRaw_FullMethodName,
+		FullMethod: KeyguardManagerService_IsKeyguardSecure_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).CreateConfirmDeviceCredentialIntentRaw(ctx, req.(*CreateConfirmDeviceCredentialIntentRawRequest))
+		return srv.(KeyguardManagerServiceServer).IsKeyguardSecure(ctx, req.(*IsKeyguardSecureRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ManagerService_ServiceDesc is the grpc.ServiceDesc for ManagerService service.
+func _KeyguardManagerService_NewKeyguardLock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NewKeyguardLockRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KeyguardManagerServiceServer).NewKeyguardLock(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KeyguardManagerService_NewKeyguardLock_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KeyguardManagerServiceServer).NewKeyguardLock(ctx, req.(*NewKeyguardLockRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KeyguardManagerService_RemoveKeyguardLockedStateListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveKeyguardLockedStateListenerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KeyguardManagerServiceServer).RemoveKeyguardLockedStateListener(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KeyguardManagerService_RemoveKeyguardLockedStateListener_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KeyguardManagerServiceServer).RemoveKeyguardLockedStateListener(ctx, req.(*RemoveKeyguardLockedStateListenerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KeyguardManagerService_RequestDismissKeyguard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestDismissKeyguardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KeyguardManagerServiceServer).RequestDismissKeyguard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KeyguardManagerService_RequestDismissKeyguard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KeyguardManagerServiceServer).RequestDismissKeyguard(ctx, req.(*RequestDismissKeyguardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// KeyguardManagerService_ServiceDesc is the grpc.ServiceDesc for KeyguardManagerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ManagerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "keyguard.ManagerService",
-	HandlerType: (*ManagerServiceServer)(nil),
+var KeyguardManagerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "keyguard.KeyguardManagerService",
+	HandlerType: (*KeyguardManagerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "IsKeyguardLocked",
-			Handler:    _ManagerService_IsKeyguardLocked_Handler,
+			MethodName: "AddKeyguardLockedStateListener",
+			Handler:    _KeyguardManagerService_AddKeyguardLockedStateListener_Handler,
 		},
 		{
-			MethodName: "IsKeyguardSecure",
-			Handler:    _ManagerService_IsKeyguardSecure_Handler,
+			MethodName: "CreateConfirmDeviceCredentialIntent",
+			Handler:    _KeyguardManagerService_CreateConfirmDeviceCredentialIntent_Handler,
+		},
+		{
+			MethodName: "ExitKeyguardSecurely",
+			Handler:    _KeyguardManagerService_ExitKeyguardSecurely_Handler,
+		},
+		{
+			MethodName: "InKeyguardRestrictedInputMode",
+			Handler:    _KeyguardManagerService_InKeyguardRestrictedInputMode_Handler,
 		},
 		{
 			MethodName: "IsDeviceLocked",
-			Handler:    _ManagerService_IsDeviceLocked_Handler,
+			Handler:    _KeyguardManagerService_IsDeviceLocked_Handler,
 		},
 		{
 			MethodName: "IsDeviceSecure",
-			Handler:    _ManagerService_IsDeviceSecure_Handler,
+			Handler:    _KeyguardManagerService_IsDeviceSecure_Handler,
 		},
 		{
-			MethodName: "RequestDismissKeyguardRaw",
-			Handler:    _ManagerService_RequestDismissKeyguardRaw_Handler,
+			MethodName: "IsKeyguardLocked",
+			Handler:    _KeyguardManagerService_IsKeyguardLocked_Handler,
 		},
 		{
-			MethodName: "CreateConfirmDeviceCredentialIntentRaw",
-			Handler:    _ManagerService_CreateConfirmDeviceCredentialIntentRaw_Handler,
+			MethodName: "IsKeyguardSecure",
+			Handler:    _KeyguardManagerService_IsKeyguardSecure_Handler,
+		},
+		{
+			MethodName: "NewKeyguardLock",
+			Handler:    _KeyguardManagerService_NewKeyguardLock_Handler,
+		},
+		{
+			MethodName: "RemoveKeyguardLockedStateListener",
+			Handler:    _KeyguardManagerService_RemoveKeyguardLockedStateListener_Handler,
+		},
+		{
+			MethodName: "RequestDismissKeyguard",
+			Handler:    _KeyguardManagerService_RequestDismissKeyguard_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/keyguard/keyguard.proto",
-}
-
-const (
-	KeyguardDismissCallbackService_SubscribeKeyguardDismissCallback_FullMethodName = "/keyguard.KeyguardDismissCallbackService/SubscribeKeyguardDismissCallback"
-)
-
-// KeyguardDismissCallbackServiceClient is the client API for KeyguardDismissCallbackService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type KeyguardDismissCallbackServiceClient interface {
-	// Server-streaming events from android.app.KeyguardManager.KeyguardDismissCallback
-	SubscribeKeyguardDismissCallback(ctx context.Context, in *SubscribeKeyguardDismissCallbackRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[KeyguardDismissCallbackEvent], error)
-}
-
-type keyguardDismissCallbackServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewKeyguardDismissCallbackServiceClient(cc grpc.ClientConnInterface) KeyguardDismissCallbackServiceClient {
-	return &keyguardDismissCallbackServiceClient{cc}
-}
-
-func (c *keyguardDismissCallbackServiceClient) SubscribeKeyguardDismissCallback(ctx context.Context, in *SubscribeKeyguardDismissCallbackRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[KeyguardDismissCallbackEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &KeyguardDismissCallbackService_ServiceDesc.Streams[0], KeyguardDismissCallbackService_SubscribeKeyguardDismissCallback_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[SubscribeKeyguardDismissCallbackRequest, KeyguardDismissCallbackEvent]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type KeyguardDismissCallbackService_SubscribeKeyguardDismissCallbackClient = grpc.ServerStreamingClient[KeyguardDismissCallbackEvent]
-
-// KeyguardDismissCallbackServiceServer is the server API for KeyguardDismissCallbackService service.
-// All implementations must embed UnimplementedKeyguardDismissCallbackServiceServer
-// for forward compatibility.
-type KeyguardDismissCallbackServiceServer interface {
-	// Server-streaming events from android.app.KeyguardManager.KeyguardDismissCallback
-	SubscribeKeyguardDismissCallback(*SubscribeKeyguardDismissCallbackRequest, grpc.ServerStreamingServer[KeyguardDismissCallbackEvent]) error
-	mustEmbedUnimplementedKeyguardDismissCallbackServiceServer()
-}
-
-// UnimplementedKeyguardDismissCallbackServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedKeyguardDismissCallbackServiceServer struct{}
-
-func (UnimplementedKeyguardDismissCallbackServiceServer) SubscribeKeyguardDismissCallback(*SubscribeKeyguardDismissCallbackRequest, grpc.ServerStreamingServer[KeyguardDismissCallbackEvent]) error {
-	return status.Error(codes.Unimplemented, "method SubscribeKeyguardDismissCallback not implemented")
-}
-func (UnimplementedKeyguardDismissCallbackServiceServer) mustEmbedUnimplementedKeyguardDismissCallbackServiceServer() {
-}
-func (UnimplementedKeyguardDismissCallbackServiceServer) testEmbeddedByValue() {}
-
-// UnsafeKeyguardDismissCallbackServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to KeyguardDismissCallbackServiceServer will
-// result in compilation errors.
-type UnsafeKeyguardDismissCallbackServiceServer interface {
-	mustEmbedUnimplementedKeyguardDismissCallbackServiceServer()
-}
-
-func RegisterKeyguardDismissCallbackServiceServer(s grpc.ServiceRegistrar, srv KeyguardDismissCallbackServiceServer) {
-	// If the following call panics, it indicates UnimplementedKeyguardDismissCallbackServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&KeyguardDismissCallbackService_ServiceDesc, srv)
-}
-
-func _KeyguardDismissCallbackService_SubscribeKeyguardDismissCallback_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeKeyguardDismissCallbackRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(KeyguardDismissCallbackServiceServer).SubscribeKeyguardDismissCallback(m, &grpc.GenericServerStream[SubscribeKeyguardDismissCallbackRequest, KeyguardDismissCallbackEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type KeyguardDismissCallbackService_SubscribeKeyguardDismissCallbackServer = grpc.ServerStreamingServer[KeyguardDismissCallbackEvent]
-
-// KeyguardDismissCallbackService_ServiceDesc is the grpc.ServiceDesc for KeyguardDismissCallbackService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var KeyguardDismissCallbackService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "keyguard.KeyguardDismissCallbackService",
-	HandlerType: (*KeyguardDismissCallbackServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "SubscribeKeyguardDismissCallback",
-			Handler:       _KeyguardDismissCallbackService_SubscribeKeyguardDismissCallback_Handler,
-			ServerStreams: true,
-		},
-	},
-	Metadata: "proto/keyguard/keyguard.proto",
-}
-
-const (
-	KeyguardLockedStateListenerService_SubscribeKeyguardLockedStateListener_FullMethodName = "/keyguard.KeyguardLockedStateListenerService/SubscribeKeyguardLockedStateListener"
-)
-
-// KeyguardLockedStateListenerServiceClient is the client API for KeyguardLockedStateListenerService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type KeyguardLockedStateListenerServiceClient interface {
-	// Server-streaming events from android.app.KeyguardManager.KeyguardLockedStateListener
-	SubscribeKeyguardLockedStateListener(ctx context.Context, in *SubscribeKeyguardLockedStateListenerRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[KeyguardLockedStateListenerEvent], error)
-}
-
-type keyguardLockedStateListenerServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewKeyguardLockedStateListenerServiceClient(cc grpc.ClientConnInterface) KeyguardLockedStateListenerServiceClient {
-	return &keyguardLockedStateListenerServiceClient{cc}
-}
-
-func (c *keyguardLockedStateListenerServiceClient) SubscribeKeyguardLockedStateListener(ctx context.Context, in *SubscribeKeyguardLockedStateListenerRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[KeyguardLockedStateListenerEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &KeyguardLockedStateListenerService_ServiceDesc.Streams[0], KeyguardLockedStateListenerService_SubscribeKeyguardLockedStateListener_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[SubscribeKeyguardLockedStateListenerRequest, KeyguardLockedStateListenerEvent]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type KeyguardLockedStateListenerService_SubscribeKeyguardLockedStateListenerClient = grpc.ServerStreamingClient[KeyguardLockedStateListenerEvent]
-
-// KeyguardLockedStateListenerServiceServer is the server API for KeyguardLockedStateListenerService service.
-// All implementations must embed UnimplementedKeyguardLockedStateListenerServiceServer
-// for forward compatibility.
-type KeyguardLockedStateListenerServiceServer interface {
-	// Server-streaming events from android.app.KeyguardManager.KeyguardLockedStateListener
-	SubscribeKeyguardLockedStateListener(*SubscribeKeyguardLockedStateListenerRequest, grpc.ServerStreamingServer[KeyguardLockedStateListenerEvent]) error
-	mustEmbedUnimplementedKeyguardLockedStateListenerServiceServer()
-}
-
-// UnimplementedKeyguardLockedStateListenerServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedKeyguardLockedStateListenerServiceServer struct{}
-
-func (UnimplementedKeyguardLockedStateListenerServiceServer) SubscribeKeyguardLockedStateListener(*SubscribeKeyguardLockedStateListenerRequest, grpc.ServerStreamingServer[KeyguardLockedStateListenerEvent]) error {
-	return status.Error(codes.Unimplemented, "method SubscribeKeyguardLockedStateListener not implemented")
-}
-func (UnimplementedKeyguardLockedStateListenerServiceServer) mustEmbedUnimplementedKeyguardLockedStateListenerServiceServer() {
-}
-func (UnimplementedKeyguardLockedStateListenerServiceServer) testEmbeddedByValue() {}
-
-// UnsafeKeyguardLockedStateListenerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to KeyguardLockedStateListenerServiceServer will
-// result in compilation errors.
-type UnsafeKeyguardLockedStateListenerServiceServer interface {
-	mustEmbedUnimplementedKeyguardLockedStateListenerServiceServer()
-}
-
-func RegisterKeyguardLockedStateListenerServiceServer(s grpc.ServiceRegistrar, srv KeyguardLockedStateListenerServiceServer) {
-	// If the following call panics, it indicates UnimplementedKeyguardLockedStateListenerServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&KeyguardLockedStateListenerService_ServiceDesc, srv)
-}
-
-func _KeyguardLockedStateListenerService_SubscribeKeyguardLockedStateListener_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeKeyguardLockedStateListenerRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(KeyguardLockedStateListenerServiceServer).SubscribeKeyguardLockedStateListener(m, &grpc.GenericServerStream[SubscribeKeyguardLockedStateListenerRequest, KeyguardLockedStateListenerEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type KeyguardLockedStateListenerService_SubscribeKeyguardLockedStateListenerServer = grpc.ServerStreamingServer[KeyguardLockedStateListenerEvent]
-
-// KeyguardLockedStateListenerService_ServiceDesc is the grpc.ServiceDesc for KeyguardLockedStateListenerService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var KeyguardLockedStateListenerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "keyguard.KeyguardLockedStateListenerService",
-	HandlerType: (*KeyguardLockedStateListenerServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "SubscribeKeyguardLockedStateListener",
-			Handler:       _KeyguardLockedStateListenerService_SubscribeKeyguardLockedStateListener_Handler,
-			ServerStreams: true,
-		},
-	},
 	Metadata: "proto/keyguard/keyguard.proto",
 }

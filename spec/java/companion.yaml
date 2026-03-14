@@ -1,55 +1,6 @@
 package: companion
 go_import: github.com/xaionaro-go/jni/companion
 classes:
-    - java_class: android.companion.AssociationRequest$Builder
-      go_type: builder
-      methods:
-        - java_method: addDeviceFilter
-          go_name: AddDeviceFilter
-          params:
-            - java_type: android.companion.DeviceFilter<?>
-              go_name: arg0
-          returns: android.companion.AssociationRequest$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.companion.AssociationRequest
-          error: true
-        - java_method: setDeviceProfile
-          go_name: SetDeviceProfile
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.companion.AssociationRequest$Builder
-          error: true
-        - java_method: setDisplayName
-          go_name: SetDisplayName
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.companion.AssociationRequest$Builder
-          error: true
-        - java_method: setForceConfirmation
-          go_name: SetForceConfirmation
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.companion.AssociationRequest$Builder
-          error: true
-        - java_method: setSelfManaged
-          go_name: SetSelfManaged
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.companion.AssociationRequest$Builder
-          error: true
-        - java_method: setSingleDevice
-          go_name: SetSingleDevice
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.companion.AssociationRequest$Builder
-          error: true
     - java_class: android.companion.CompanionDeviceManager
       go_type: companionDeviceManager
       obtain: system_service

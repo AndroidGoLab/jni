@@ -21,635 +21,1432 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ResolverService_QueryRaw_FullMethodName              = "/resolver.ResolverService/QueryRaw"
-	ResolverService_OpenFileDescriptorRaw_FullMethodName = "/resolver.ResolverService/OpenFileDescriptorRaw"
+	ContentResolverService_ApplyBatch_FullMethodName                         = "/resolver.ContentResolverService/ApplyBatch"
+	ContentResolverService_CancelSync1_2_FullMethodName                      = "/resolver.ContentResolverService/CancelSync1_2"
+	ContentResolverService_GetOutgoingPersistedUriPermissions_FullMethodName = "/resolver.ContentResolverService/GetOutgoingPersistedUriPermissions"
+	ContentResolverService_GetPersistedUriPermissions_FullMethodName         = "/resolver.ContentResolverService/GetPersistedUriPermissions"
+	ContentResolverService_GetStreamTypes_FullMethodName                     = "/resolver.ContentResolverService/GetStreamTypes"
+	ContentResolverService_LoadThumbnail_FullMethodName                      = "/resolver.ContentResolverService/LoadThumbnail"
+	ContentResolverService_NotifyChange2_FullMethodName                      = "/resolver.ContentResolverService/NotifyChange2"
+	ContentResolverService_NotifyChange3_1_FullMethodName                    = "/resolver.ContentResolverService/NotifyChange3_1"
+	ContentResolverService_NotifyChange3_2_FullMethodName                    = "/resolver.ContentResolverService/NotifyChange3_2"
+	ContentResolverService_NotifyChange3_3_FullMethodName                    = "/resolver.ContentResolverService/NotifyChange3_3"
+	ContentResolverService_ReleasePersistableUriPermission_FullMethodName    = "/resolver.ContentResolverService/ReleasePersistableUriPermission"
+	ContentResolverService_StartSync_FullMethodName                          = "/resolver.ContentResolverService/StartSync"
+	ContentResolverService_TakePersistableUriPermission_FullMethodName       = "/resolver.ContentResolverService/TakePersistableUriPermission"
+	ContentResolverService_AddPeriodicSync_FullMethodName                    = "/resolver.ContentResolverService/AddPeriodicSync"
+	ContentResolverService_AddStatusChangeListener_FullMethodName            = "/resolver.ContentResolverService/AddStatusChangeListener"
+	ContentResolverService_CancelSync2_FullMethodName                        = "/resolver.ContentResolverService/CancelSync2"
+	ContentResolverService_CancelSync1_1_FullMethodName                      = "/resolver.ContentResolverService/CancelSync1_1"
+	ContentResolverService_GetCurrentSync_FullMethodName                     = "/resolver.ContentResolverService/GetCurrentSync"
+	ContentResolverService_GetCurrentSyncs_FullMethodName                    = "/resolver.ContentResolverService/GetCurrentSyncs"
+	ContentResolverService_GetIsSyncable_FullMethodName                      = "/resolver.ContentResolverService/GetIsSyncable"
+	ContentResolverService_GetMasterSyncAutomatically_FullMethodName         = "/resolver.ContentResolverService/GetMasterSyncAutomatically"
+	ContentResolverService_GetPeriodicSyncs_FullMethodName                   = "/resolver.ContentResolverService/GetPeriodicSyncs"
+	ContentResolverService_GetSyncAdapterTypes_FullMethodName                = "/resolver.ContentResolverService/GetSyncAdapterTypes"
+	ContentResolverService_GetSyncAutomatically_FullMethodName               = "/resolver.ContentResolverService/GetSyncAutomatically"
+	ContentResolverService_IsSyncActive_FullMethodName                       = "/resolver.ContentResolverService/IsSyncActive"
+	ContentResolverService_IsSyncPending_FullMethodName                      = "/resolver.ContentResolverService/IsSyncPending"
+	ContentResolverService_RemovePeriodicSync_FullMethodName                 = "/resolver.ContentResolverService/RemovePeriodicSync"
+	ContentResolverService_RemoveStatusChangeListener_FullMethodName         = "/resolver.ContentResolverService/RemoveStatusChangeListener"
+	ContentResolverService_RequestSync3_FullMethodName                       = "/resolver.ContentResolverService/RequestSync3"
+	ContentResolverService_RequestSync1_1_FullMethodName                     = "/resolver.ContentResolverService/RequestSync1_1"
+	ContentResolverService_SetIsSyncable_FullMethodName                      = "/resolver.ContentResolverService/SetIsSyncable"
+	ContentResolverService_SetMasterSyncAutomatically_FullMethodName         = "/resolver.ContentResolverService/SetMasterSyncAutomatically"
+	ContentResolverService_SetSyncAutomatically_FullMethodName               = "/resolver.ContentResolverService/SetSyncAutomatically"
+	ContentResolverService_ValidateSyncExtrasBundle_FullMethodName           = "/resolver.ContentResolverService/ValidateSyncExtrasBundle"
+	ContentResolverService_Wrap1_FullMethodName                              = "/resolver.ContentResolverService/Wrap1"
+	ContentResolverService_Wrap1_1_FullMethodName                            = "/resolver.ContentResolverService/Wrap1_1"
 )
 
-// ResolverServiceClient is the client API for ResolverService service.
+// ContentResolverServiceClient is the client API for ContentResolverService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ResolverServiceClient interface {
-	QueryRaw(ctx context.Context, in *QueryRawRequest, opts ...grpc.CallOption) (*QueryRawResponse, error)
-	OpenFileDescriptorRaw(ctx context.Context, in *OpenFileDescriptorRawRequest, opts ...grpc.CallOption) (*OpenFileDescriptorRawResponse, error)
+type ContentResolverServiceClient interface {
+	ApplyBatch(ctx context.Context, in *ApplyBatchRequest, opts ...grpc.CallOption) (*ApplyBatchResponse, error)
+	CancelSync1_2(ctx context.Context, in *CancelSync1_2Request, opts ...grpc.CallOption) (*CancelSync1_2Response, error)
+	GetOutgoingPersistedUriPermissions(ctx context.Context, in *GetOutgoingPersistedUriPermissionsRequest, opts ...grpc.CallOption) (*GetOutgoingPersistedUriPermissionsResponse, error)
+	GetPersistedUriPermissions(ctx context.Context, in *GetPersistedUriPermissionsRequest, opts ...grpc.CallOption) (*GetPersistedUriPermissionsResponse, error)
+	GetStreamTypes(ctx context.Context, in *GetStreamTypesRequest, opts ...grpc.CallOption) (*GetStreamTypesResponse, error)
+	LoadThumbnail(ctx context.Context, in *LoadThumbnailRequest, opts ...grpc.CallOption) (*LoadThumbnailResponse, error)
+	NotifyChange2(ctx context.Context, in *NotifyChange2Request, opts ...grpc.CallOption) (*NotifyChange2Response, error)
+	NotifyChange3_1(ctx context.Context, in *NotifyChange3_1Request, opts ...grpc.CallOption) (*NotifyChange3_1Response, error)
+	NotifyChange3_2(ctx context.Context, in *NotifyChange3_2Request, opts ...grpc.CallOption) (*NotifyChange3_2Response, error)
+	NotifyChange3_3(ctx context.Context, in *NotifyChange3_3Request, opts ...grpc.CallOption) (*NotifyChange3_3Response, error)
+	ReleasePersistableUriPermission(ctx context.Context, in *ReleasePersistableUriPermissionRequest, opts ...grpc.CallOption) (*ReleasePersistableUriPermissionResponse, error)
+	StartSync(ctx context.Context, in *StartSyncRequest, opts ...grpc.CallOption) (*StartSyncResponse, error)
+	TakePersistableUriPermission(ctx context.Context, in *TakePersistableUriPermissionRequest, opts ...grpc.CallOption) (*TakePersistableUriPermissionResponse, error)
+	AddPeriodicSync(ctx context.Context, in *AddPeriodicSyncRequest, opts ...grpc.CallOption) (*AddPeriodicSyncResponse, error)
+	AddStatusChangeListener(ctx context.Context, in *AddStatusChangeListenerRequest, opts ...grpc.CallOption) (*AddStatusChangeListenerResponse, error)
+	CancelSync2(ctx context.Context, in *CancelSync2Request, opts ...grpc.CallOption) (*CancelSync2Response, error)
+	CancelSync1_1(ctx context.Context, in *CancelSync1_1Request, opts ...grpc.CallOption) (*CancelSync1_1Response, error)
+	GetCurrentSync(ctx context.Context, in *GetCurrentSyncRequest, opts ...grpc.CallOption) (*GetCurrentSyncResponse, error)
+	GetCurrentSyncs(ctx context.Context, in *GetCurrentSyncsRequest, opts ...grpc.CallOption) (*GetCurrentSyncsResponse, error)
+	GetIsSyncable(ctx context.Context, in *GetIsSyncableRequest, opts ...grpc.CallOption) (*GetIsSyncableResponse, error)
+	GetMasterSyncAutomatically(ctx context.Context, in *GetMasterSyncAutomaticallyRequest, opts ...grpc.CallOption) (*GetMasterSyncAutomaticallyResponse, error)
+	GetPeriodicSyncs(ctx context.Context, in *GetPeriodicSyncsRequest, opts ...grpc.CallOption) (*GetPeriodicSyncsResponse, error)
+	GetSyncAdapterTypes(ctx context.Context, in *GetSyncAdapterTypesRequest, opts ...grpc.CallOption) (*GetSyncAdapterTypesResponse, error)
+	GetSyncAutomatically(ctx context.Context, in *GetSyncAutomaticallyRequest, opts ...grpc.CallOption) (*GetSyncAutomaticallyResponse, error)
+	IsSyncActive(ctx context.Context, in *IsSyncActiveRequest, opts ...grpc.CallOption) (*IsSyncActiveResponse, error)
+	IsSyncPending(ctx context.Context, in *IsSyncPendingRequest, opts ...grpc.CallOption) (*IsSyncPendingResponse, error)
+	RemovePeriodicSync(ctx context.Context, in *RemovePeriodicSyncRequest, opts ...grpc.CallOption) (*RemovePeriodicSyncResponse, error)
+	RemoveStatusChangeListener(ctx context.Context, in *RemoveStatusChangeListenerRequest, opts ...grpc.CallOption) (*RemoveStatusChangeListenerResponse, error)
+	RequestSync3(ctx context.Context, in *RequestSync3Request, opts ...grpc.CallOption) (*RequestSync3Response, error)
+	RequestSync1_1(ctx context.Context, in *RequestSync1_1Request, opts ...grpc.CallOption) (*RequestSync1_1Response, error)
+	SetIsSyncable(ctx context.Context, in *SetIsSyncableRequest, opts ...grpc.CallOption) (*SetIsSyncableResponse, error)
+	SetMasterSyncAutomatically(ctx context.Context, in *SetMasterSyncAutomaticallyRequest, opts ...grpc.CallOption) (*SetMasterSyncAutomaticallyResponse, error)
+	SetSyncAutomatically(ctx context.Context, in *SetSyncAutomaticallyRequest, opts ...grpc.CallOption) (*SetSyncAutomaticallyResponse, error)
+	ValidateSyncExtrasBundle(ctx context.Context, in *ValidateSyncExtrasBundleRequest, opts ...grpc.CallOption) (*ValidateSyncExtrasBundleResponse, error)
+	Wrap1(ctx context.Context, in *Wrap1Request, opts ...grpc.CallOption) (*Wrap1Response, error)
+	Wrap1_1(ctx context.Context, in *Wrap1_1Request, opts ...grpc.CallOption) (*Wrap1_1Response, error)
 }
 
-type resolverServiceClient struct {
+type contentResolverServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewResolverServiceClient(cc grpc.ClientConnInterface) ResolverServiceClient {
-	return &resolverServiceClient{cc}
+func NewContentResolverServiceClient(cc grpc.ClientConnInterface) ContentResolverServiceClient {
+	return &contentResolverServiceClient{cc}
 }
 
-func (c *resolverServiceClient) QueryRaw(ctx context.Context, in *QueryRawRequest, opts ...grpc.CallOption) (*QueryRawResponse, error) {
+func (c *contentResolverServiceClient) ApplyBatch(ctx context.Context, in *ApplyBatchRequest, opts ...grpc.CallOption) (*ApplyBatchResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(QueryRawResponse)
-	err := c.cc.Invoke(ctx, ResolverService_QueryRaw_FullMethodName, in, out, cOpts...)
+	out := new(ApplyBatchResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_ApplyBatch_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *resolverServiceClient) OpenFileDescriptorRaw(ctx context.Context, in *OpenFileDescriptorRawRequest, opts ...grpc.CallOption) (*OpenFileDescriptorRawResponse, error) {
+func (c *contentResolverServiceClient) CancelSync1_2(ctx context.Context, in *CancelSync1_2Request, opts ...grpc.CallOption) (*CancelSync1_2Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(OpenFileDescriptorRawResponse)
-	err := c.cc.Invoke(ctx, ResolverService_OpenFileDescriptorRaw_FullMethodName, in, out, cOpts...)
+	out := new(CancelSync1_2Response)
+	err := c.cc.Invoke(ctx, ContentResolverService_CancelSync1_2_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ResolverServiceServer is the server API for ResolverService service.
-// All implementations must embed UnimplementedResolverServiceServer
+func (c *contentResolverServiceClient) GetOutgoingPersistedUriPermissions(ctx context.Context, in *GetOutgoingPersistedUriPermissionsRequest, opts ...grpc.CallOption) (*GetOutgoingPersistedUriPermissionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOutgoingPersistedUriPermissionsResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_GetOutgoingPersistedUriPermissions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) GetPersistedUriPermissions(ctx context.Context, in *GetPersistedUriPermissionsRequest, opts ...grpc.CallOption) (*GetPersistedUriPermissionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPersistedUriPermissionsResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_GetPersistedUriPermissions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) GetStreamTypes(ctx context.Context, in *GetStreamTypesRequest, opts ...grpc.CallOption) (*GetStreamTypesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetStreamTypesResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_GetStreamTypes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) LoadThumbnail(ctx context.Context, in *LoadThumbnailRequest, opts ...grpc.CallOption) (*LoadThumbnailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LoadThumbnailResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_LoadThumbnail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) NotifyChange2(ctx context.Context, in *NotifyChange2Request, opts ...grpc.CallOption) (*NotifyChange2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NotifyChange2Response)
+	err := c.cc.Invoke(ctx, ContentResolverService_NotifyChange2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) NotifyChange3_1(ctx context.Context, in *NotifyChange3_1Request, opts ...grpc.CallOption) (*NotifyChange3_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NotifyChange3_1Response)
+	err := c.cc.Invoke(ctx, ContentResolverService_NotifyChange3_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) NotifyChange3_2(ctx context.Context, in *NotifyChange3_2Request, opts ...grpc.CallOption) (*NotifyChange3_2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NotifyChange3_2Response)
+	err := c.cc.Invoke(ctx, ContentResolverService_NotifyChange3_2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) NotifyChange3_3(ctx context.Context, in *NotifyChange3_3Request, opts ...grpc.CallOption) (*NotifyChange3_3Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NotifyChange3_3Response)
+	err := c.cc.Invoke(ctx, ContentResolverService_NotifyChange3_3_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) ReleasePersistableUriPermission(ctx context.Context, in *ReleasePersistableUriPermissionRequest, opts ...grpc.CallOption) (*ReleasePersistableUriPermissionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReleasePersistableUriPermissionResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_ReleasePersistableUriPermission_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) StartSync(ctx context.Context, in *StartSyncRequest, opts ...grpc.CallOption) (*StartSyncResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StartSyncResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_StartSync_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) TakePersistableUriPermission(ctx context.Context, in *TakePersistableUriPermissionRequest, opts ...grpc.CallOption) (*TakePersistableUriPermissionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TakePersistableUriPermissionResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_TakePersistableUriPermission_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) AddPeriodicSync(ctx context.Context, in *AddPeriodicSyncRequest, opts ...grpc.CallOption) (*AddPeriodicSyncResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddPeriodicSyncResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_AddPeriodicSync_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) AddStatusChangeListener(ctx context.Context, in *AddStatusChangeListenerRequest, opts ...grpc.CallOption) (*AddStatusChangeListenerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddStatusChangeListenerResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_AddStatusChangeListener_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) CancelSync2(ctx context.Context, in *CancelSync2Request, opts ...grpc.CallOption) (*CancelSync2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CancelSync2Response)
+	err := c.cc.Invoke(ctx, ContentResolverService_CancelSync2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) CancelSync1_1(ctx context.Context, in *CancelSync1_1Request, opts ...grpc.CallOption) (*CancelSync1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CancelSync1_1Response)
+	err := c.cc.Invoke(ctx, ContentResolverService_CancelSync1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) GetCurrentSync(ctx context.Context, in *GetCurrentSyncRequest, opts ...grpc.CallOption) (*GetCurrentSyncResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCurrentSyncResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_GetCurrentSync_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) GetCurrentSyncs(ctx context.Context, in *GetCurrentSyncsRequest, opts ...grpc.CallOption) (*GetCurrentSyncsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCurrentSyncsResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_GetCurrentSyncs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) GetIsSyncable(ctx context.Context, in *GetIsSyncableRequest, opts ...grpc.CallOption) (*GetIsSyncableResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetIsSyncableResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_GetIsSyncable_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) GetMasterSyncAutomatically(ctx context.Context, in *GetMasterSyncAutomaticallyRequest, opts ...grpc.CallOption) (*GetMasterSyncAutomaticallyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMasterSyncAutomaticallyResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_GetMasterSyncAutomatically_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) GetPeriodicSyncs(ctx context.Context, in *GetPeriodicSyncsRequest, opts ...grpc.CallOption) (*GetPeriodicSyncsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPeriodicSyncsResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_GetPeriodicSyncs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) GetSyncAdapterTypes(ctx context.Context, in *GetSyncAdapterTypesRequest, opts ...grpc.CallOption) (*GetSyncAdapterTypesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSyncAdapterTypesResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_GetSyncAdapterTypes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) GetSyncAutomatically(ctx context.Context, in *GetSyncAutomaticallyRequest, opts ...grpc.CallOption) (*GetSyncAutomaticallyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSyncAutomaticallyResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_GetSyncAutomatically_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) IsSyncActive(ctx context.Context, in *IsSyncActiveRequest, opts ...grpc.CallOption) (*IsSyncActiveResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsSyncActiveResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_IsSyncActive_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) IsSyncPending(ctx context.Context, in *IsSyncPendingRequest, opts ...grpc.CallOption) (*IsSyncPendingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsSyncPendingResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_IsSyncPending_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) RemovePeriodicSync(ctx context.Context, in *RemovePeriodicSyncRequest, opts ...grpc.CallOption) (*RemovePeriodicSyncResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemovePeriodicSyncResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_RemovePeriodicSync_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) RemoveStatusChangeListener(ctx context.Context, in *RemoveStatusChangeListenerRequest, opts ...grpc.CallOption) (*RemoveStatusChangeListenerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveStatusChangeListenerResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_RemoveStatusChangeListener_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) RequestSync3(ctx context.Context, in *RequestSync3Request, opts ...grpc.CallOption) (*RequestSync3Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestSync3Response)
+	err := c.cc.Invoke(ctx, ContentResolverService_RequestSync3_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) RequestSync1_1(ctx context.Context, in *RequestSync1_1Request, opts ...grpc.CallOption) (*RequestSync1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestSync1_1Response)
+	err := c.cc.Invoke(ctx, ContentResolverService_RequestSync1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) SetIsSyncable(ctx context.Context, in *SetIsSyncableRequest, opts ...grpc.CallOption) (*SetIsSyncableResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetIsSyncableResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_SetIsSyncable_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) SetMasterSyncAutomatically(ctx context.Context, in *SetMasterSyncAutomaticallyRequest, opts ...grpc.CallOption) (*SetMasterSyncAutomaticallyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetMasterSyncAutomaticallyResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_SetMasterSyncAutomatically_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) SetSyncAutomatically(ctx context.Context, in *SetSyncAutomaticallyRequest, opts ...grpc.CallOption) (*SetSyncAutomaticallyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetSyncAutomaticallyResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_SetSyncAutomatically_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) ValidateSyncExtrasBundle(ctx context.Context, in *ValidateSyncExtrasBundleRequest, opts ...grpc.CallOption) (*ValidateSyncExtrasBundleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ValidateSyncExtrasBundleResponse)
+	err := c.cc.Invoke(ctx, ContentResolverService_ValidateSyncExtrasBundle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) Wrap1(ctx context.Context, in *Wrap1Request, opts ...grpc.CallOption) (*Wrap1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Wrap1Response)
+	err := c.cc.Invoke(ctx, ContentResolverService_Wrap1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentResolverServiceClient) Wrap1_1(ctx context.Context, in *Wrap1_1Request, opts ...grpc.CallOption) (*Wrap1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Wrap1_1Response)
+	err := c.cc.Invoke(ctx, ContentResolverService_Wrap1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ContentResolverServiceServer is the server API for ContentResolverService service.
+// All implementations must embed UnimplementedContentResolverServiceServer
 // for forward compatibility.
-type ResolverServiceServer interface {
-	QueryRaw(context.Context, *QueryRawRequest) (*QueryRawResponse, error)
-	OpenFileDescriptorRaw(context.Context, *OpenFileDescriptorRawRequest) (*OpenFileDescriptorRawResponse, error)
-	mustEmbedUnimplementedResolverServiceServer()
+type ContentResolverServiceServer interface {
+	ApplyBatch(context.Context, *ApplyBatchRequest) (*ApplyBatchResponse, error)
+	CancelSync1_2(context.Context, *CancelSync1_2Request) (*CancelSync1_2Response, error)
+	GetOutgoingPersistedUriPermissions(context.Context, *GetOutgoingPersistedUriPermissionsRequest) (*GetOutgoingPersistedUriPermissionsResponse, error)
+	GetPersistedUriPermissions(context.Context, *GetPersistedUriPermissionsRequest) (*GetPersistedUriPermissionsResponse, error)
+	GetStreamTypes(context.Context, *GetStreamTypesRequest) (*GetStreamTypesResponse, error)
+	LoadThumbnail(context.Context, *LoadThumbnailRequest) (*LoadThumbnailResponse, error)
+	NotifyChange2(context.Context, *NotifyChange2Request) (*NotifyChange2Response, error)
+	NotifyChange3_1(context.Context, *NotifyChange3_1Request) (*NotifyChange3_1Response, error)
+	NotifyChange3_2(context.Context, *NotifyChange3_2Request) (*NotifyChange3_2Response, error)
+	NotifyChange3_3(context.Context, *NotifyChange3_3Request) (*NotifyChange3_3Response, error)
+	ReleasePersistableUriPermission(context.Context, *ReleasePersistableUriPermissionRequest) (*ReleasePersistableUriPermissionResponse, error)
+	StartSync(context.Context, *StartSyncRequest) (*StartSyncResponse, error)
+	TakePersistableUriPermission(context.Context, *TakePersistableUriPermissionRequest) (*TakePersistableUriPermissionResponse, error)
+	AddPeriodicSync(context.Context, *AddPeriodicSyncRequest) (*AddPeriodicSyncResponse, error)
+	AddStatusChangeListener(context.Context, *AddStatusChangeListenerRequest) (*AddStatusChangeListenerResponse, error)
+	CancelSync2(context.Context, *CancelSync2Request) (*CancelSync2Response, error)
+	CancelSync1_1(context.Context, *CancelSync1_1Request) (*CancelSync1_1Response, error)
+	GetCurrentSync(context.Context, *GetCurrentSyncRequest) (*GetCurrentSyncResponse, error)
+	GetCurrentSyncs(context.Context, *GetCurrentSyncsRequest) (*GetCurrentSyncsResponse, error)
+	GetIsSyncable(context.Context, *GetIsSyncableRequest) (*GetIsSyncableResponse, error)
+	GetMasterSyncAutomatically(context.Context, *GetMasterSyncAutomaticallyRequest) (*GetMasterSyncAutomaticallyResponse, error)
+	GetPeriodicSyncs(context.Context, *GetPeriodicSyncsRequest) (*GetPeriodicSyncsResponse, error)
+	GetSyncAdapterTypes(context.Context, *GetSyncAdapterTypesRequest) (*GetSyncAdapterTypesResponse, error)
+	GetSyncAutomatically(context.Context, *GetSyncAutomaticallyRequest) (*GetSyncAutomaticallyResponse, error)
+	IsSyncActive(context.Context, *IsSyncActiveRequest) (*IsSyncActiveResponse, error)
+	IsSyncPending(context.Context, *IsSyncPendingRequest) (*IsSyncPendingResponse, error)
+	RemovePeriodicSync(context.Context, *RemovePeriodicSyncRequest) (*RemovePeriodicSyncResponse, error)
+	RemoveStatusChangeListener(context.Context, *RemoveStatusChangeListenerRequest) (*RemoveStatusChangeListenerResponse, error)
+	RequestSync3(context.Context, *RequestSync3Request) (*RequestSync3Response, error)
+	RequestSync1_1(context.Context, *RequestSync1_1Request) (*RequestSync1_1Response, error)
+	SetIsSyncable(context.Context, *SetIsSyncableRequest) (*SetIsSyncableResponse, error)
+	SetMasterSyncAutomatically(context.Context, *SetMasterSyncAutomaticallyRequest) (*SetMasterSyncAutomaticallyResponse, error)
+	SetSyncAutomatically(context.Context, *SetSyncAutomaticallyRequest) (*SetSyncAutomaticallyResponse, error)
+	ValidateSyncExtrasBundle(context.Context, *ValidateSyncExtrasBundleRequest) (*ValidateSyncExtrasBundleResponse, error)
+	Wrap1(context.Context, *Wrap1Request) (*Wrap1Response, error)
+	Wrap1_1(context.Context, *Wrap1_1Request) (*Wrap1_1Response, error)
+	mustEmbedUnimplementedContentResolverServiceServer()
 }
 
-// UnimplementedResolverServiceServer must be embedded to have
+// UnimplementedContentResolverServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedResolverServiceServer struct{}
+type UnimplementedContentResolverServiceServer struct{}
 
-func (UnimplementedResolverServiceServer) QueryRaw(context.Context, *QueryRawRequest) (*QueryRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method QueryRaw not implemented")
+func (UnimplementedContentResolverServiceServer) ApplyBatch(context.Context, *ApplyBatchRequest) (*ApplyBatchResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ApplyBatch not implemented")
 }
-func (UnimplementedResolverServiceServer) OpenFileDescriptorRaw(context.Context, *OpenFileDescriptorRawRequest) (*OpenFileDescriptorRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method OpenFileDescriptorRaw not implemented")
+func (UnimplementedContentResolverServiceServer) CancelSync1_2(context.Context, *CancelSync1_2Request) (*CancelSync1_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CancelSync1_2 not implemented")
 }
-func (UnimplementedResolverServiceServer) mustEmbedUnimplementedResolverServiceServer() {}
-func (UnimplementedResolverServiceServer) testEmbeddedByValue()                         {}
+func (UnimplementedContentResolverServiceServer) GetOutgoingPersistedUriPermissions(context.Context, *GetOutgoingPersistedUriPermissionsRequest) (*GetOutgoingPersistedUriPermissionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOutgoingPersistedUriPermissions not implemented")
+}
+func (UnimplementedContentResolverServiceServer) GetPersistedUriPermissions(context.Context, *GetPersistedUriPermissionsRequest) (*GetPersistedUriPermissionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPersistedUriPermissions not implemented")
+}
+func (UnimplementedContentResolverServiceServer) GetStreamTypes(context.Context, *GetStreamTypesRequest) (*GetStreamTypesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetStreamTypes not implemented")
+}
+func (UnimplementedContentResolverServiceServer) LoadThumbnail(context.Context, *LoadThumbnailRequest) (*LoadThumbnailResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method LoadThumbnail not implemented")
+}
+func (UnimplementedContentResolverServiceServer) NotifyChange2(context.Context, *NotifyChange2Request) (*NotifyChange2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method NotifyChange2 not implemented")
+}
+func (UnimplementedContentResolverServiceServer) NotifyChange3_1(context.Context, *NotifyChange3_1Request) (*NotifyChange3_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method NotifyChange3_1 not implemented")
+}
+func (UnimplementedContentResolverServiceServer) NotifyChange3_2(context.Context, *NotifyChange3_2Request) (*NotifyChange3_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method NotifyChange3_2 not implemented")
+}
+func (UnimplementedContentResolverServiceServer) NotifyChange3_3(context.Context, *NotifyChange3_3Request) (*NotifyChange3_3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method NotifyChange3_3 not implemented")
+}
+func (UnimplementedContentResolverServiceServer) ReleasePersistableUriPermission(context.Context, *ReleasePersistableUriPermissionRequest) (*ReleasePersistableUriPermissionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReleasePersistableUriPermission not implemented")
+}
+func (UnimplementedContentResolverServiceServer) StartSync(context.Context, *StartSyncRequest) (*StartSyncResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartSync not implemented")
+}
+func (UnimplementedContentResolverServiceServer) TakePersistableUriPermission(context.Context, *TakePersistableUriPermissionRequest) (*TakePersistableUriPermissionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method TakePersistableUriPermission not implemented")
+}
+func (UnimplementedContentResolverServiceServer) AddPeriodicSync(context.Context, *AddPeriodicSyncRequest) (*AddPeriodicSyncResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddPeriodicSync not implemented")
+}
+func (UnimplementedContentResolverServiceServer) AddStatusChangeListener(context.Context, *AddStatusChangeListenerRequest) (*AddStatusChangeListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddStatusChangeListener not implemented")
+}
+func (UnimplementedContentResolverServiceServer) CancelSync2(context.Context, *CancelSync2Request) (*CancelSync2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CancelSync2 not implemented")
+}
+func (UnimplementedContentResolverServiceServer) CancelSync1_1(context.Context, *CancelSync1_1Request) (*CancelSync1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CancelSync1_1 not implemented")
+}
+func (UnimplementedContentResolverServiceServer) GetCurrentSync(context.Context, *GetCurrentSyncRequest) (*GetCurrentSyncResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCurrentSync not implemented")
+}
+func (UnimplementedContentResolverServiceServer) GetCurrentSyncs(context.Context, *GetCurrentSyncsRequest) (*GetCurrentSyncsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCurrentSyncs not implemented")
+}
+func (UnimplementedContentResolverServiceServer) GetIsSyncable(context.Context, *GetIsSyncableRequest) (*GetIsSyncableResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetIsSyncable not implemented")
+}
+func (UnimplementedContentResolverServiceServer) GetMasterSyncAutomatically(context.Context, *GetMasterSyncAutomaticallyRequest) (*GetMasterSyncAutomaticallyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMasterSyncAutomatically not implemented")
+}
+func (UnimplementedContentResolverServiceServer) GetPeriodicSyncs(context.Context, *GetPeriodicSyncsRequest) (*GetPeriodicSyncsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPeriodicSyncs not implemented")
+}
+func (UnimplementedContentResolverServiceServer) GetSyncAdapterTypes(context.Context, *GetSyncAdapterTypesRequest) (*GetSyncAdapterTypesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSyncAdapterTypes not implemented")
+}
+func (UnimplementedContentResolverServiceServer) GetSyncAutomatically(context.Context, *GetSyncAutomaticallyRequest) (*GetSyncAutomaticallyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSyncAutomatically not implemented")
+}
+func (UnimplementedContentResolverServiceServer) IsSyncActive(context.Context, *IsSyncActiveRequest) (*IsSyncActiveResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsSyncActive not implemented")
+}
+func (UnimplementedContentResolverServiceServer) IsSyncPending(context.Context, *IsSyncPendingRequest) (*IsSyncPendingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsSyncPending not implemented")
+}
+func (UnimplementedContentResolverServiceServer) RemovePeriodicSync(context.Context, *RemovePeriodicSyncRequest) (*RemovePeriodicSyncResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemovePeriodicSync not implemented")
+}
+func (UnimplementedContentResolverServiceServer) RemoveStatusChangeListener(context.Context, *RemoveStatusChangeListenerRequest) (*RemoveStatusChangeListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveStatusChangeListener not implemented")
+}
+func (UnimplementedContentResolverServiceServer) RequestSync3(context.Context, *RequestSync3Request) (*RequestSync3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestSync3 not implemented")
+}
+func (UnimplementedContentResolverServiceServer) RequestSync1_1(context.Context, *RequestSync1_1Request) (*RequestSync1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestSync1_1 not implemented")
+}
+func (UnimplementedContentResolverServiceServer) SetIsSyncable(context.Context, *SetIsSyncableRequest) (*SetIsSyncableResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetIsSyncable not implemented")
+}
+func (UnimplementedContentResolverServiceServer) SetMasterSyncAutomatically(context.Context, *SetMasterSyncAutomaticallyRequest) (*SetMasterSyncAutomaticallyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetMasterSyncAutomatically not implemented")
+}
+func (UnimplementedContentResolverServiceServer) SetSyncAutomatically(context.Context, *SetSyncAutomaticallyRequest) (*SetSyncAutomaticallyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetSyncAutomatically not implemented")
+}
+func (UnimplementedContentResolverServiceServer) ValidateSyncExtrasBundle(context.Context, *ValidateSyncExtrasBundleRequest) (*ValidateSyncExtrasBundleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ValidateSyncExtrasBundle not implemented")
+}
+func (UnimplementedContentResolverServiceServer) Wrap1(context.Context, *Wrap1Request) (*Wrap1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Wrap1 not implemented")
+}
+func (UnimplementedContentResolverServiceServer) Wrap1_1(context.Context, *Wrap1_1Request) (*Wrap1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Wrap1_1 not implemented")
+}
+func (UnimplementedContentResolverServiceServer) mustEmbedUnimplementedContentResolverServiceServer() {
+}
+func (UnimplementedContentResolverServiceServer) testEmbeddedByValue() {}
 
-// UnsafeResolverServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ResolverServiceServer will
+// UnsafeContentResolverServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ContentResolverServiceServer will
 // result in compilation errors.
-type UnsafeResolverServiceServer interface {
-	mustEmbedUnimplementedResolverServiceServer()
+type UnsafeContentResolverServiceServer interface {
+	mustEmbedUnimplementedContentResolverServiceServer()
 }
 
-func RegisterResolverServiceServer(s grpc.ServiceRegistrar, srv ResolverServiceServer) {
-	// If the following call panics, it indicates UnimplementedResolverServiceServer was
+func RegisterContentResolverServiceServer(s grpc.ServiceRegistrar, srv ContentResolverServiceServer) {
+	// If the following call panics, it indicates UnimplementedContentResolverServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ResolverService_ServiceDesc, srv)
+	s.RegisterService(&ContentResolverService_ServiceDesc, srv)
 }
 
-func _ResolverService_QueryRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryRawRequest)
+func _ContentResolverService_ApplyBatch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ApplyBatchRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ResolverServiceServer).QueryRaw(ctx, in)
+		return srv.(ContentResolverServiceServer).ApplyBatch(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ResolverService_QueryRaw_FullMethodName,
+		FullMethod: ContentResolverService_ApplyBatch_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ResolverServiceServer).QueryRaw(ctx, req.(*QueryRawRequest))
+		return srv.(ContentResolverServiceServer).ApplyBatch(ctx, req.(*ApplyBatchRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ResolverService_OpenFileDescriptorRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OpenFileDescriptorRawRequest)
+func _ContentResolverService_CancelSync1_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelSync1_2Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ResolverServiceServer).OpenFileDescriptorRaw(ctx, in)
+		return srv.(ContentResolverServiceServer).CancelSync1_2(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ResolverService_OpenFileDescriptorRaw_FullMethodName,
+		FullMethod: ContentResolverService_CancelSync1_2_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ResolverServiceServer).OpenFileDescriptorRaw(ctx, req.(*OpenFileDescriptorRawRequest))
+		return srv.(ContentResolverServiceServer).CancelSync1_2(ctx, req.(*CancelSync1_2Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ResolverService_ServiceDesc is the grpc.ServiceDesc for ResolverService service.
+func _ContentResolverService_GetOutgoingPersistedUriPermissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOutgoingPersistedUriPermissionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).GetOutgoingPersistedUriPermissions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_GetOutgoingPersistedUriPermissions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).GetOutgoingPersistedUriPermissions(ctx, req.(*GetOutgoingPersistedUriPermissionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_GetPersistedUriPermissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPersistedUriPermissionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).GetPersistedUriPermissions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_GetPersistedUriPermissions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).GetPersistedUriPermissions(ctx, req.(*GetPersistedUriPermissionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_GetStreamTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStreamTypesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).GetStreamTypes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_GetStreamTypes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).GetStreamTypes(ctx, req.(*GetStreamTypesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_LoadThumbnail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoadThumbnailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).LoadThumbnail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_LoadThumbnail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).LoadThumbnail(ctx, req.(*LoadThumbnailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_NotifyChange2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NotifyChange2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).NotifyChange2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_NotifyChange2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).NotifyChange2(ctx, req.(*NotifyChange2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_NotifyChange3_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NotifyChange3_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).NotifyChange3_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_NotifyChange3_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).NotifyChange3_1(ctx, req.(*NotifyChange3_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_NotifyChange3_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NotifyChange3_2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).NotifyChange3_2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_NotifyChange3_2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).NotifyChange3_2(ctx, req.(*NotifyChange3_2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_NotifyChange3_3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NotifyChange3_3Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).NotifyChange3_3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_NotifyChange3_3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).NotifyChange3_3(ctx, req.(*NotifyChange3_3Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_ReleasePersistableUriPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReleasePersistableUriPermissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).ReleasePersistableUriPermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_ReleasePersistableUriPermission_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).ReleasePersistableUriPermission(ctx, req.(*ReleasePersistableUriPermissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_StartSync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartSyncRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).StartSync(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_StartSync_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).StartSync(ctx, req.(*StartSyncRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_TakePersistableUriPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TakePersistableUriPermissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).TakePersistableUriPermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_TakePersistableUriPermission_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).TakePersistableUriPermission(ctx, req.(*TakePersistableUriPermissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_AddPeriodicSync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddPeriodicSyncRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).AddPeriodicSync(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_AddPeriodicSync_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).AddPeriodicSync(ctx, req.(*AddPeriodicSyncRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_AddStatusChangeListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddStatusChangeListenerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).AddStatusChangeListener(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_AddStatusChangeListener_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).AddStatusChangeListener(ctx, req.(*AddStatusChangeListenerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_CancelSync2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelSync2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).CancelSync2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_CancelSync2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).CancelSync2(ctx, req.(*CancelSync2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_CancelSync1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelSync1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).CancelSync1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_CancelSync1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).CancelSync1_1(ctx, req.(*CancelSync1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_GetCurrentSync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCurrentSyncRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).GetCurrentSync(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_GetCurrentSync_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).GetCurrentSync(ctx, req.(*GetCurrentSyncRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_GetCurrentSyncs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCurrentSyncsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).GetCurrentSyncs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_GetCurrentSyncs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).GetCurrentSyncs(ctx, req.(*GetCurrentSyncsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_GetIsSyncable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIsSyncableRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).GetIsSyncable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_GetIsSyncable_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).GetIsSyncable(ctx, req.(*GetIsSyncableRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_GetMasterSyncAutomatically_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMasterSyncAutomaticallyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).GetMasterSyncAutomatically(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_GetMasterSyncAutomatically_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).GetMasterSyncAutomatically(ctx, req.(*GetMasterSyncAutomaticallyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_GetPeriodicSyncs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPeriodicSyncsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).GetPeriodicSyncs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_GetPeriodicSyncs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).GetPeriodicSyncs(ctx, req.(*GetPeriodicSyncsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_GetSyncAdapterTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSyncAdapterTypesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).GetSyncAdapterTypes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_GetSyncAdapterTypes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).GetSyncAdapterTypes(ctx, req.(*GetSyncAdapterTypesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_GetSyncAutomatically_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSyncAutomaticallyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).GetSyncAutomatically(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_GetSyncAutomatically_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).GetSyncAutomatically(ctx, req.(*GetSyncAutomaticallyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_IsSyncActive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsSyncActiveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).IsSyncActive(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_IsSyncActive_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).IsSyncActive(ctx, req.(*IsSyncActiveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_IsSyncPending_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsSyncPendingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).IsSyncPending(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_IsSyncPending_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).IsSyncPending(ctx, req.(*IsSyncPendingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_RemovePeriodicSync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemovePeriodicSyncRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).RemovePeriodicSync(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_RemovePeriodicSync_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).RemovePeriodicSync(ctx, req.(*RemovePeriodicSyncRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_RemoveStatusChangeListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveStatusChangeListenerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).RemoveStatusChangeListener(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_RemoveStatusChangeListener_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).RemoveStatusChangeListener(ctx, req.(*RemoveStatusChangeListenerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_RequestSync3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestSync3Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).RequestSync3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_RequestSync3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).RequestSync3(ctx, req.(*RequestSync3Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_RequestSync1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestSync1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).RequestSync1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_RequestSync1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).RequestSync1_1(ctx, req.(*RequestSync1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_SetIsSyncable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetIsSyncableRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).SetIsSyncable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_SetIsSyncable_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).SetIsSyncable(ctx, req.(*SetIsSyncableRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_SetMasterSyncAutomatically_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetMasterSyncAutomaticallyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).SetMasterSyncAutomatically(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_SetMasterSyncAutomatically_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).SetMasterSyncAutomatically(ctx, req.(*SetMasterSyncAutomaticallyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_SetSyncAutomatically_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetSyncAutomaticallyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).SetSyncAutomatically(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_SetSyncAutomatically_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).SetSyncAutomatically(ctx, req.(*SetSyncAutomaticallyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_ValidateSyncExtrasBundle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ValidateSyncExtrasBundleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).ValidateSyncExtrasBundle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_ValidateSyncExtrasBundle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).ValidateSyncExtrasBundle(ctx, req.(*ValidateSyncExtrasBundleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_Wrap1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Wrap1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).Wrap1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_Wrap1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).Wrap1(ctx, req.(*Wrap1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentResolverService_Wrap1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Wrap1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentResolverServiceServer).Wrap1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ContentResolverService_Wrap1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentResolverServiceServer).Wrap1_1(ctx, req.(*Wrap1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ContentResolverService_ServiceDesc is the grpc.ServiceDesc for ContentResolverService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ResolverService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "resolver.ResolverService",
-	HandlerType: (*ResolverServiceServer)(nil),
+var ContentResolverService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "resolver.ContentResolverService",
+	HandlerType: (*ContentResolverServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "QueryRaw",
-			Handler:    _ResolverService_QueryRaw_Handler,
+			MethodName: "ApplyBatch",
+			Handler:    _ContentResolverService_ApplyBatch_Handler,
 		},
 		{
-			MethodName: "OpenFileDescriptorRaw",
-			Handler:    _ResolverService_OpenFileDescriptorRaw_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/resolver/resolver.proto",
-}
-
-const (
-	CursorService_MoveToNext_FullMethodName     = "/resolver.CursorService/MoveToNext"
-	CursorService_GetString_FullMethodName      = "/resolver.CursorService/GetString"
-	CursorService_GetInt_FullMethodName         = "/resolver.CursorService/GetInt"
-	CursorService_GetLong_FullMethodName        = "/resolver.CursorService/GetLong"
-	CursorService_GetColumnIndex_FullMethodName = "/resolver.CursorService/GetColumnIndex"
-)
-
-// CursorServiceClient is the client API for CursorService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type CursorServiceClient interface {
-	MoveToNext(ctx context.Context, in *MoveToNextRequest, opts ...grpc.CallOption) (*MoveToNextResponse, error)
-	GetString(ctx context.Context, in *GetStringRequest, opts ...grpc.CallOption) (*GetStringResponse, error)
-	GetInt(ctx context.Context, in *GetIntRequest, opts ...grpc.CallOption) (*GetIntResponse, error)
-	GetLong(ctx context.Context, in *GetLongRequest, opts ...grpc.CallOption) (*GetLongResponse, error)
-	GetColumnIndex(ctx context.Context, in *GetColumnIndexRequest, opts ...grpc.CallOption) (*GetColumnIndexResponse, error)
-}
-
-type cursorServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewCursorServiceClient(cc grpc.ClientConnInterface) CursorServiceClient {
-	return &cursorServiceClient{cc}
-}
-
-func (c *cursorServiceClient) MoveToNext(ctx context.Context, in *MoveToNextRequest, opts ...grpc.CallOption) (*MoveToNextResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(MoveToNextResponse)
-	err := c.cc.Invoke(ctx, CursorService_MoveToNext_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cursorServiceClient) GetString(ctx context.Context, in *GetStringRequest, opts ...grpc.CallOption) (*GetStringResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetStringResponse)
-	err := c.cc.Invoke(ctx, CursorService_GetString_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cursorServiceClient) GetInt(ctx context.Context, in *GetIntRequest, opts ...grpc.CallOption) (*GetIntResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetIntResponse)
-	err := c.cc.Invoke(ctx, CursorService_GetInt_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cursorServiceClient) GetLong(ctx context.Context, in *GetLongRequest, opts ...grpc.CallOption) (*GetLongResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetLongResponse)
-	err := c.cc.Invoke(ctx, CursorService_GetLong_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *cursorServiceClient) GetColumnIndex(ctx context.Context, in *GetColumnIndexRequest, opts ...grpc.CallOption) (*GetColumnIndexResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetColumnIndexResponse)
-	err := c.cc.Invoke(ctx, CursorService_GetColumnIndex_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// CursorServiceServer is the server API for CursorService service.
-// All implementations must embed UnimplementedCursorServiceServer
-// for forward compatibility.
-type CursorServiceServer interface {
-	MoveToNext(context.Context, *MoveToNextRequest) (*MoveToNextResponse, error)
-	GetString(context.Context, *GetStringRequest) (*GetStringResponse, error)
-	GetInt(context.Context, *GetIntRequest) (*GetIntResponse, error)
-	GetLong(context.Context, *GetLongRequest) (*GetLongResponse, error)
-	GetColumnIndex(context.Context, *GetColumnIndexRequest) (*GetColumnIndexResponse, error)
-	mustEmbedUnimplementedCursorServiceServer()
-}
-
-// UnimplementedCursorServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedCursorServiceServer struct{}
-
-func (UnimplementedCursorServiceServer) MoveToNext(context.Context, *MoveToNextRequest) (*MoveToNextResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method MoveToNext not implemented")
-}
-func (UnimplementedCursorServiceServer) GetString(context.Context, *GetStringRequest) (*GetStringResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetString not implemented")
-}
-func (UnimplementedCursorServiceServer) GetInt(context.Context, *GetIntRequest) (*GetIntResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetInt not implemented")
-}
-func (UnimplementedCursorServiceServer) GetLong(context.Context, *GetLongRequest) (*GetLongResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetLong not implemented")
-}
-func (UnimplementedCursorServiceServer) GetColumnIndex(context.Context, *GetColumnIndexRequest) (*GetColumnIndexResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetColumnIndex not implemented")
-}
-func (UnimplementedCursorServiceServer) mustEmbedUnimplementedCursorServiceServer() {}
-func (UnimplementedCursorServiceServer) testEmbeddedByValue()                       {}
-
-// UnsafeCursorServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to CursorServiceServer will
-// result in compilation errors.
-type UnsafeCursorServiceServer interface {
-	mustEmbedUnimplementedCursorServiceServer()
-}
-
-func RegisterCursorServiceServer(s grpc.ServiceRegistrar, srv CursorServiceServer) {
-	// If the following call panics, it indicates UnimplementedCursorServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&CursorService_ServiceDesc, srv)
-}
-
-func _CursorService_MoveToNext_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MoveToNextRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CursorServiceServer).MoveToNext(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CursorService_MoveToNext_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CursorServiceServer).MoveToNext(ctx, req.(*MoveToNextRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CursorService_GetString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetStringRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CursorServiceServer).GetString(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CursorService_GetString_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CursorServiceServer).GetString(ctx, req.(*GetStringRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CursorService_GetInt_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetIntRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CursorServiceServer).GetInt(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CursorService_GetInt_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CursorServiceServer).GetInt(ctx, req.(*GetIntRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CursorService_GetLong_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetLongRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CursorServiceServer).GetLong(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CursorService_GetLong_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CursorServiceServer).GetLong(ctx, req.(*GetLongRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CursorService_GetColumnIndex_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetColumnIndexRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CursorServiceServer).GetColumnIndex(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CursorService_GetColumnIndex_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CursorServiceServer).GetColumnIndex(ctx, req.(*GetColumnIndexRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// CursorService_ServiceDesc is the grpc.ServiceDesc for CursorService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var CursorService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "resolver.CursorService",
-	HandlerType: (*CursorServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "MoveToNext",
-			Handler:    _CursorService_MoveToNext_Handler,
+			MethodName: "CancelSync1_2",
+			Handler:    _ContentResolverService_CancelSync1_2_Handler,
 		},
 		{
-			MethodName: "GetString",
-			Handler:    _CursorService_GetString_Handler,
+			MethodName: "GetOutgoingPersistedUriPermissions",
+			Handler:    _ContentResolverService_GetOutgoingPersistedUriPermissions_Handler,
 		},
 		{
-			MethodName: "GetInt",
-			Handler:    _CursorService_GetInt_Handler,
+			MethodName: "GetPersistedUriPermissions",
+			Handler:    _ContentResolverService_GetPersistedUriPermissions_Handler,
 		},
 		{
-			MethodName: "GetLong",
-			Handler:    _CursorService_GetLong_Handler,
+			MethodName: "GetStreamTypes",
+			Handler:    _ContentResolverService_GetStreamTypes_Handler,
 		},
 		{
-			MethodName: "GetColumnIndex",
-			Handler:    _CursorService_GetColumnIndex_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/resolver/resolver.proto",
-}
-
-const (
-	UriService_Parse_FullMethodName = "/resolver.UriService/Parse"
-)
-
-// UriServiceClient is the client API for UriService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type UriServiceClient interface {
-	Parse(ctx context.Context, in *ParseRequest, opts ...grpc.CallOption) (*ParseResponse, error)
-}
-
-type uriServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewUriServiceClient(cc grpc.ClientConnInterface) UriServiceClient {
-	return &uriServiceClient{cc}
-}
-
-func (c *uriServiceClient) Parse(ctx context.Context, in *ParseRequest, opts ...grpc.CallOption) (*ParseResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ParseResponse)
-	err := c.cc.Invoke(ctx, UriService_Parse_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// UriServiceServer is the server API for UriService service.
-// All implementations must embed UnimplementedUriServiceServer
-// for forward compatibility.
-type UriServiceServer interface {
-	Parse(context.Context, *ParseRequest) (*ParseResponse, error)
-	mustEmbedUnimplementedUriServiceServer()
-}
-
-// UnimplementedUriServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedUriServiceServer struct{}
-
-func (UnimplementedUriServiceServer) Parse(context.Context, *ParseRequest) (*ParseResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Parse not implemented")
-}
-func (UnimplementedUriServiceServer) mustEmbedUnimplementedUriServiceServer() {}
-func (UnimplementedUriServiceServer) testEmbeddedByValue()                    {}
-
-// UnsafeUriServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to UriServiceServer will
-// result in compilation errors.
-type UnsafeUriServiceServer interface {
-	mustEmbedUnimplementedUriServiceServer()
-}
-
-func RegisterUriServiceServer(s grpc.ServiceRegistrar, srv UriServiceServer) {
-	// If the following call panics, it indicates UnimplementedUriServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&UriService_ServiceDesc, srv)
-}
-
-func _UriService_Parse_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ParseRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UriServiceServer).Parse(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UriService_Parse_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UriServiceServer).Parse(ctx, req.(*ParseRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// UriService_ServiceDesc is the grpc.ServiceDesc for UriService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var UriService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "resolver.UriService",
-	HandlerType: (*UriServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Parse",
-			Handler:    _UriService_Parse_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/resolver/resolver.proto",
-}
-
-const (
-	ParcelFDService_GetFd_FullMethodName    = "/resolver.ParcelFDService/GetFd"
-	ParcelFDService_DetachFd_FullMethodName = "/resolver.ParcelFDService/DetachFd"
-)
-
-// ParcelFDServiceClient is the client API for ParcelFDService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ParcelFDServiceClient interface {
-	GetFd(ctx context.Context, in *GetFdRequest, opts ...grpc.CallOption) (*GetFdResponse, error)
-	DetachFd(ctx context.Context, in *DetachFdRequest, opts ...grpc.CallOption) (*DetachFdResponse, error)
-}
-
-type parcelFDServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewParcelFDServiceClient(cc grpc.ClientConnInterface) ParcelFDServiceClient {
-	return &parcelFDServiceClient{cc}
-}
-
-func (c *parcelFDServiceClient) GetFd(ctx context.Context, in *GetFdRequest, opts ...grpc.CallOption) (*GetFdResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetFdResponse)
-	err := c.cc.Invoke(ctx, ParcelFDService_GetFd_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *parcelFDServiceClient) DetachFd(ctx context.Context, in *DetachFdRequest, opts ...grpc.CallOption) (*DetachFdResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DetachFdResponse)
-	err := c.cc.Invoke(ctx, ParcelFDService_DetachFd_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// ParcelFDServiceServer is the server API for ParcelFDService service.
-// All implementations must embed UnimplementedParcelFDServiceServer
-// for forward compatibility.
-type ParcelFDServiceServer interface {
-	GetFd(context.Context, *GetFdRequest) (*GetFdResponse, error)
-	DetachFd(context.Context, *DetachFdRequest) (*DetachFdResponse, error)
-	mustEmbedUnimplementedParcelFDServiceServer()
-}
-
-// UnimplementedParcelFDServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedParcelFDServiceServer struct{}
-
-func (UnimplementedParcelFDServiceServer) GetFd(context.Context, *GetFdRequest) (*GetFdResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetFd not implemented")
-}
-func (UnimplementedParcelFDServiceServer) DetachFd(context.Context, *DetachFdRequest) (*DetachFdResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method DetachFd not implemented")
-}
-func (UnimplementedParcelFDServiceServer) mustEmbedUnimplementedParcelFDServiceServer() {}
-func (UnimplementedParcelFDServiceServer) testEmbeddedByValue()                         {}
-
-// UnsafeParcelFDServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ParcelFDServiceServer will
-// result in compilation errors.
-type UnsafeParcelFDServiceServer interface {
-	mustEmbedUnimplementedParcelFDServiceServer()
-}
-
-func RegisterParcelFDServiceServer(s grpc.ServiceRegistrar, srv ParcelFDServiceServer) {
-	// If the following call panics, it indicates UnimplementedParcelFDServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&ParcelFDService_ServiceDesc, srv)
-}
-
-func _ParcelFDService_GetFd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetFdRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ParcelFDServiceServer).GetFd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ParcelFDService_GetFd_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParcelFDServiceServer).GetFd(ctx, req.(*GetFdRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ParcelFDService_DetachFd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DetachFdRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ParcelFDServiceServer).DetachFd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ParcelFDService_DetachFd_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ParcelFDServiceServer).DetachFd(ctx, req.(*DetachFdRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// ParcelFDService_ServiceDesc is the grpc.ServiceDesc for ParcelFDService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var ParcelFDService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "resolver.ParcelFDService",
-	HandlerType: (*ParcelFDServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "GetFd",
-			Handler:    _ParcelFDService_GetFd_Handler,
+			MethodName: "LoadThumbnail",
+			Handler:    _ContentResolverService_LoadThumbnail_Handler,
 		},
 		{
-			MethodName: "DetachFd",
-			Handler:    _ParcelFDService_DetachFd_Handler,
+			MethodName: "NotifyChange2",
+			Handler:    _ContentResolverService_NotifyChange2_Handler,
+		},
+		{
+			MethodName: "NotifyChange3_1",
+			Handler:    _ContentResolverService_NotifyChange3_1_Handler,
+		},
+		{
+			MethodName: "NotifyChange3_2",
+			Handler:    _ContentResolverService_NotifyChange3_2_Handler,
+		},
+		{
+			MethodName: "NotifyChange3_3",
+			Handler:    _ContentResolverService_NotifyChange3_3_Handler,
+		},
+		{
+			MethodName: "ReleasePersistableUriPermission",
+			Handler:    _ContentResolverService_ReleasePersistableUriPermission_Handler,
+		},
+		{
+			MethodName: "StartSync",
+			Handler:    _ContentResolverService_StartSync_Handler,
+		},
+		{
+			MethodName: "TakePersistableUriPermission",
+			Handler:    _ContentResolverService_TakePersistableUriPermission_Handler,
+		},
+		{
+			MethodName: "AddPeriodicSync",
+			Handler:    _ContentResolverService_AddPeriodicSync_Handler,
+		},
+		{
+			MethodName: "AddStatusChangeListener",
+			Handler:    _ContentResolverService_AddStatusChangeListener_Handler,
+		},
+		{
+			MethodName: "CancelSync2",
+			Handler:    _ContentResolverService_CancelSync2_Handler,
+		},
+		{
+			MethodName: "CancelSync1_1",
+			Handler:    _ContentResolverService_CancelSync1_1_Handler,
+		},
+		{
+			MethodName: "GetCurrentSync",
+			Handler:    _ContentResolverService_GetCurrentSync_Handler,
+		},
+		{
+			MethodName: "GetCurrentSyncs",
+			Handler:    _ContentResolverService_GetCurrentSyncs_Handler,
+		},
+		{
+			MethodName: "GetIsSyncable",
+			Handler:    _ContentResolverService_GetIsSyncable_Handler,
+		},
+		{
+			MethodName: "GetMasterSyncAutomatically",
+			Handler:    _ContentResolverService_GetMasterSyncAutomatically_Handler,
+		},
+		{
+			MethodName: "GetPeriodicSyncs",
+			Handler:    _ContentResolverService_GetPeriodicSyncs_Handler,
+		},
+		{
+			MethodName: "GetSyncAdapterTypes",
+			Handler:    _ContentResolverService_GetSyncAdapterTypes_Handler,
+		},
+		{
+			MethodName: "GetSyncAutomatically",
+			Handler:    _ContentResolverService_GetSyncAutomatically_Handler,
+		},
+		{
+			MethodName: "IsSyncActive",
+			Handler:    _ContentResolverService_IsSyncActive_Handler,
+		},
+		{
+			MethodName: "IsSyncPending",
+			Handler:    _ContentResolverService_IsSyncPending_Handler,
+		},
+		{
+			MethodName: "RemovePeriodicSync",
+			Handler:    _ContentResolverService_RemovePeriodicSync_Handler,
+		},
+		{
+			MethodName: "RemoveStatusChangeListener",
+			Handler:    _ContentResolverService_RemoveStatusChangeListener_Handler,
+		},
+		{
+			MethodName: "RequestSync3",
+			Handler:    _ContentResolverService_RequestSync3_Handler,
+		},
+		{
+			MethodName: "RequestSync1_1",
+			Handler:    _ContentResolverService_RequestSync1_1_Handler,
+		},
+		{
+			MethodName: "SetIsSyncable",
+			Handler:    _ContentResolverService_SetIsSyncable_Handler,
+		},
+		{
+			MethodName: "SetMasterSyncAutomatically",
+			Handler:    _ContentResolverService_SetMasterSyncAutomatically_Handler,
+		},
+		{
+			MethodName: "SetSyncAutomatically",
+			Handler:    _ContentResolverService_SetSyncAutomatically_Handler,
+		},
+		{
+			MethodName: "ValidateSyncExtrasBundle",
+			Handler:    _ContentResolverService_ValidateSyncExtrasBundle_Handler,
+		},
+		{
+			MethodName: "Wrap1",
+			Handler:    _ContentResolverService_Wrap1_Handler,
+		},
+		{
+			MethodName: "Wrap1_1",
+			Handler:    _ContentResolverService_Wrap1_1_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

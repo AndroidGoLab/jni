@@ -6,60 +6,330 @@ package telecom;
 
 option go_package = "github.com/xaionaro-go/jni/proto/telecom";
 
-message IsInCallRawRequest {
+message AcceptHandoverRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+  int64 arg2 = 3;
 }
 
-message IsInCallRawResponse {
+message AcceptHandoverResponse {
+}
+
+message AcceptRingingCall0Request {
+}
+
+message AcceptRingingCall0Response {
+}
+
+message AcceptRingingCall1_1Request {
+  int32 arg0 = 1;
+}
+
+message AcceptRingingCall1_1Response {
+}
+
+message AddCallRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+  int64 arg4 = 5;
+  int64 arg5 = 6;
+}
+
+message AddCallResponse {
+}
+
+message AddNewIncomingCallRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message AddNewIncomingCallResponse {
+}
+
+message AddNewIncomingConferenceRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message AddNewIncomingConferenceResponse {
+}
+
+message CancelMissedCallsNotificationRequest {
+}
+
+message CancelMissedCallsNotificationResponse {
+}
+
+message CreateManageBlockedNumbersIntentRequest {
+}
+
+message CreateManageBlockedNumbersIntentResponse {
+  int64 result = 1;
+}
+
+message EndCallRequest {
+}
+
+message EndCallResponse {
   bool result = 1;
 }
 
-message IsInManagedCallRawRequest {
+message GetAdnUriForPhoneAccountRequest {
+  int64 arg0 = 1;
 }
 
-message IsInManagedCallRawResponse {
-  bool result = 1;
+message GetAdnUriForPhoneAccountResponse {
+  int64 result = 1;
 }
 
-message GetDefaultDialerPackageRawRequest {
+message GetCallCapablePhoneAccountsRequest {
 }
 
-message GetDefaultDialerPackageRawResponse {
+message GetCallCapablePhoneAccountsResponse {
+  int64 result = 1;
+}
+
+message GetDefaultDialerPackageRequest {
+}
+
+message GetDefaultDialerPackageResponse {
   string result = 1;
 }
 
-message PlaceCallRawRequest {
-  int64 uri = 1;
-  int64 extras = 2;
+message GetDefaultOutgoingPhoneAccountRequest {
+  string arg0 = 1;
 }
 
-message PlaceCallRawResponse {
+message GetDefaultOutgoingPhoneAccountResponse {
+  int64 result = 1;
 }
 
-message SilenceRingerRawRequest {
+message GetLine1NumberRequest {
+  int64 arg0 = 1;
 }
 
-message SilenceRingerRawResponse {
+message GetLine1NumberResponse {
+  string result = 1;
 }
 
-message AcceptRingingCallRawRequest {
+message GetOwnSelfManagedPhoneAccountsRequest {
 }
 
-message AcceptRingingCallRawResponse {
+message GetOwnSelfManagedPhoneAccountsResponse {
+  int64 result = 1;
 }
 
-message EndCallRawRequest {
+message GetPhoneAccountRequest {
+  int64 arg0 = 1;
 }
 
-message EndCallRawResponse {
+message GetPhoneAccountResponse {
+  int64 result = 1;
+}
+
+message GetRegisteredPhoneAccountsRequest {
+}
+
+message GetRegisteredPhoneAccountsResponse {
+  int64 result = 1;
+}
+
+message GetSelfManagedPhoneAccountsRequest {
+}
+
+message GetSelfManagedPhoneAccountsResponse {
+  int64 result = 1;
+}
+
+message GetSimCallManagerRequest {
+}
+
+message GetSimCallManagerResponse {
+  int64 result = 1;
+}
+
+message GetSimCallManagerForSubscriptionRequest {
+  int32 arg0 = 1;
+}
+
+message GetSimCallManagerForSubscriptionResponse {
+  int64 result = 1;
+}
+
+message GetSystemDialerPackageRequest {
+}
+
+message GetSystemDialerPackageResponse {
+  string result = 1;
+}
+
+message GetUserSelectedOutgoingPhoneAccountRequest {
+}
+
+message GetUserSelectedOutgoingPhoneAccountResponse {
+  int64 result = 1;
+}
+
+message GetVoiceMailNumberRequest {
+  int64 arg0 = 1;
+}
+
+message GetVoiceMailNumberResponse {
+  string result = 1;
+}
+
+message HandleMmi1Request {
+  string arg0 = 1;
+}
+
+message HandleMmi1Response {
   bool result = 1;
 }
 
-service ManagerService {
-  rpc IsInCallRaw (IsInCallRawRequest) returns (IsInCallRawResponse);
-  rpc IsInManagedCallRaw (IsInManagedCallRawRequest) returns (IsInManagedCallRawResponse);
-  rpc GetDefaultDialerPackageRaw (GetDefaultDialerPackageRawRequest) returns (GetDefaultDialerPackageRawResponse);
-  rpc PlaceCallRaw (PlaceCallRawRequest) returns (PlaceCallRawResponse);
-  rpc SilenceRingerRaw (SilenceRingerRawRequest) returns (SilenceRingerRawResponse);
-  rpc AcceptRingingCallRaw (AcceptRingingCallRawRequest) returns (AcceptRingingCallRawResponse);
-  rpc EndCallRaw (EndCallRawRequest) returns (EndCallRawResponse);
+message HandleMmi2_1Request {
+  string arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message HandleMmi2_1Response {
+  bool result = 1;
+}
+
+message HasManageOngoingCallsPermissionRequest {
+}
+
+message HasManageOngoingCallsPermissionResponse {
+  bool result = 1;
+}
+
+message IsInCallRequest {
+}
+
+message IsInCallResponse {
+  bool result = 1;
+}
+
+message IsInManagedCallRequest {
+}
+
+message IsInManagedCallResponse {
+  bool result = 1;
+}
+
+message IsIncomingCallPermittedRequest {
+  int64 arg0 = 1;
+}
+
+message IsIncomingCallPermittedResponse {
+  bool result = 1;
+}
+
+message IsOutgoingCallPermittedRequest {
+  int64 arg0 = 1;
+}
+
+message IsOutgoingCallPermittedResponse {
+  bool result = 1;
+}
+
+message IsTtySupportedRequest {
+}
+
+message IsTtySupportedResponse {
+  bool result = 1;
+}
+
+message IsVoiceMailNumberRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
+}
+
+message IsVoiceMailNumberResponse {
+  bool result = 1;
+}
+
+message PlaceCallRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message PlaceCallResponse {
+}
+
+message RegisterPhoneAccountRequest {
+  int64 arg0 = 1;
+}
+
+message RegisterPhoneAccountResponse {
+}
+
+message ShowInCallScreenRequest {
+  bool arg0 = 1;
+}
+
+message ShowInCallScreenResponse {
+}
+
+message SilenceRingerRequest {
+}
+
+message SilenceRingerResponse {
+}
+
+message StartConferenceRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message StartConferenceResponse {
+}
+
+message UnregisterPhoneAccountRequest {
+  int64 arg0 = 1;
+}
+
+message UnregisterPhoneAccountResponse {
+}
+
+service TelecomManagerService {
+  rpc AcceptHandover (AcceptHandoverRequest) returns (AcceptHandoverResponse);
+  rpc AcceptRingingCall0 (AcceptRingingCall0Request) returns (AcceptRingingCall0Response);
+  rpc AcceptRingingCall1_1 (AcceptRingingCall1_1Request) returns (AcceptRingingCall1_1Response);
+  rpc AddCall (AddCallRequest) returns (AddCallResponse);
+  rpc AddNewIncomingCall (AddNewIncomingCallRequest) returns (AddNewIncomingCallResponse);
+  rpc AddNewIncomingConference (AddNewIncomingConferenceRequest) returns (AddNewIncomingConferenceResponse);
+  rpc CancelMissedCallsNotification (CancelMissedCallsNotificationRequest) returns (CancelMissedCallsNotificationResponse);
+  rpc CreateManageBlockedNumbersIntent (CreateManageBlockedNumbersIntentRequest) returns (CreateManageBlockedNumbersIntentResponse);
+  rpc EndCall (EndCallRequest) returns (EndCallResponse);
+  rpc GetAdnUriForPhoneAccount (GetAdnUriForPhoneAccountRequest) returns (GetAdnUriForPhoneAccountResponse);
+  rpc GetCallCapablePhoneAccounts (GetCallCapablePhoneAccountsRequest) returns (GetCallCapablePhoneAccountsResponse);
+  rpc GetDefaultDialerPackage (GetDefaultDialerPackageRequest) returns (GetDefaultDialerPackageResponse);
+  rpc GetDefaultOutgoingPhoneAccount (GetDefaultOutgoingPhoneAccountRequest) returns (GetDefaultOutgoingPhoneAccountResponse);
+  rpc GetLine1Number (GetLine1NumberRequest) returns (GetLine1NumberResponse);
+  rpc GetOwnSelfManagedPhoneAccounts (GetOwnSelfManagedPhoneAccountsRequest) returns (GetOwnSelfManagedPhoneAccountsResponse);
+  rpc GetPhoneAccount (GetPhoneAccountRequest) returns (GetPhoneAccountResponse);
+  rpc GetRegisteredPhoneAccounts (GetRegisteredPhoneAccountsRequest) returns (GetRegisteredPhoneAccountsResponse);
+  rpc GetSelfManagedPhoneAccounts (GetSelfManagedPhoneAccountsRequest) returns (GetSelfManagedPhoneAccountsResponse);
+  rpc GetSimCallManager (GetSimCallManagerRequest) returns (GetSimCallManagerResponse);
+  rpc GetSimCallManagerForSubscription (GetSimCallManagerForSubscriptionRequest) returns (GetSimCallManagerForSubscriptionResponse);
+  rpc GetSystemDialerPackage (GetSystemDialerPackageRequest) returns (GetSystemDialerPackageResponse);
+  rpc GetUserSelectedOutgoingPhoneAccount (GetUserSelectedOutgoingPhoneAccountRequest) returns (GetUserSelectedOutgoingPhoneAccountResponse);
+  rpc GetVoiceMailNumber (GetVoiceMailNumberRequest) returns (GetVoiceMailNumberResponse);
+  rpc HandleMmi1 (HandleMmi1Request) returns (HandleMmi1Response);
+  rpc HandleMmi2_1 (HandleMmi2_1Request) returns (HandleMmi2_1Response);
+  rpc HasManageOngoingCallsPermission (HasManageOngoingCallsPermissionRequest) returns (HasManageOngoingCallsPermissionResponse);
+  rpc IsInCall (IsInCallRequest) returns (IsInCallResponse);
+  rpc IsInManagedCall (IsInManagedCallRequest) returns (IsInManagedCallResponse);
+  rpc IsIncomingCallPermitted (IsIncomingCallPermittedRequest) returns (IsIncomingCallPermittedResponse);
+  rpc IsOutgoingCallPermitted (IsOutgoingCallPermittedRequest) returns (IsOutgoingCallPermittedResponse);
+  rpc IsTtySupported (IsTtySupportedRequest) returns (IsTtySupportedResponse);
+  rpc IsVoiceMailNumber (IsVoiceMailNumberRequest) returns (IsVoiceMailNumberResponse);
+  rpc PlaceCall (PlaceCallRequest) returns (PlaceCallResponse);
+  rpc RegisterPhoneAccount (RegisterPhoneAccountRequest) returns (RegisterPhoneAccountResponse);
+  rpc ShowInCallScreen (ShowInCallScreenRequest) returns (ShowInCallScreenResponse);
+  rpc SilenceRinger (SilenceRingerRequest) returns (SilenceRingerResponse);
+  rpc StartConference (StartConferenceRequest) returns (StartConferenceResponse);
+  rpc UnregisterPhoneAccount (UnregisterPhoneAccountRequest) returns (UnregisterPhoneAccountResponse);
 }

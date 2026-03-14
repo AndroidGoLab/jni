@@ -18,22 +18,6 @@ var environmentEnvironmentCmd = &cobra.Command{
 	Short: "EnvironmentService operations",
 }
 
-var environmentEnvironmentGetRootDirectoryCmd = &cobra.Command{
-	Use:   "get-root-directory",
-	Short: "GetRootDirectory RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewEnvironmentServiceClient(grpcConn)
-		req := &pb.GetRootDirectoryRequest{}
-		resp, err := client.GetRootDirectory(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
 var environmentEnvironmentGetDataDirectoryCmd = &cobra.Command{
 	Use:   "get-data-directory",
 	Short: "GetDataDirectory RPC",
@@ -43,6 +27,22 @@ var environmentEnvironmentGetDataDirectoryCmd = &cobra.Command{
 		client := pb.NewEnvironmentServiceClient(grpcConn)
 		req := &pb.GetDataDirectoryRequest{}
 		resp, err := client.GetDataDirectory(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var environmentEnvironmentGetDownloadCacheDirectoryCmd = &cobra.Command{
+	Use:   "get-download-cache-directory",
+	Short: "GetDownloadCacheDirectory RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewEnvironmentServiceClient(grpcConn)
+		req := &pb.GetDownloadCacheDirectoryRequest{}
+		resp, err := client.GetDownloadCacheDirectory(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -74,8 +74,8 @@ var environmentEnvironmentGetExternalStoragePublicDirectoryCmd = &cobra.Command{
 		defer cancel()
 		client := pb.NewEnvironmentServiceClient(grpcConn)
 		req := &pb.GetExternalStoragePublicDirectoryRequest{}
-		if v, err := cmd.Flags().GetString("typ"); err == nil {
-			req.Typ = v
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
 		resp, err := client.GetExternalStoragePublicDirectory(ctx, req)
 		if err != nil {
@@ -85,15 +85,15 @@ var environmentEnvironmentGetExternalStoragePublicDirectoryCmd = &cobra.Command{
 	},
 }
 
-var environmentEnvironmentGetExternalStorageStateCmd = &cobra.Command{
-	Use:   "get-external-storage-state",
-	Short: "GetExternalStorageState RPC",
+var environmentEnvironmentGetExternalStorageState0Cmd = &cobra.Command{
+	Use:   "get-external-storage-state0",
+	Short: "GetExternalStorageState0 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewEnvironmentServiceClient(grpcConn)
-		req := &pb.GetExternalStorageStateRequest{}
-		resp, err := client.GetExternalStorageState(ctx, req)
+		req := &pb.GetExternalStorageState0Request{}
+		resp, err := client.GetExternalStorageState0(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -101,15 +101,18 @@ var environmentEnvironmentGetExternalStorageStateCmd = &cobra.Command{
 	},
 }
 
-var environmentEnvironmentIsExternalStorageRemovableCmd = &cobra.Command{
-	Use:   "is-external-storage-removable",
-	Short: "IsExternalStorageRemovable RPC",
+var environmentEnvironmentGetExternalStorageState1_1Cmd = &cobra.Command{
+	Use:   "get-external-storage-state1_1",
+	Short: "GetExternalStorageState1_1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewEnvironmentServiceClient(grpcConn)
-		req := &pb.IsExternalStorageRemovableRequest{}
-		resp, err := client.IsExternalStorageRemovable(ctx, req)
+		req := &pb.GetExternalStorageState1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetExternalStorageState1_1(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -117,15 +120,15 @@ var environmentEnvironmentIsExternalStorageRemovableCmd = &cobra.Command{
 	},
 }
 
-var environmentEnvironmentIsExternalStorageEmulatedCmd = &cobra.Command{
-	Use:   "is-external-storage-emulated",
-	Short: "IsExternalStorageEmulated RPC",
+var environmentEnvironmentGetRootDirectoryCmd = &cobra.Command{
+	Use:   "get-root-directory",
+	Short: "GetRootDirectory RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewEnvironmentServiceClient(grpcConn)
-		req := &pb.IsExternalStorageEmulatedRequest{}
-		resp, err := client.IsExternalStorageEmulated(ctx, req)
+		req := &pb.GetRootDirectoryRequest{}
+		resp, err := client.GetRootDirectory(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -133,15 +136,15 @@ var environmentEnvironmentIsExternalStorageEmulatedCmd = &cobra.Command{
 	},
 }
 
-var environmentEnvironmentIsExternalStorageManagerCmd = &cobra.Command{
-	Use:   "is-external-storage-manager",
-	Short: "IsExternalStorageManager RPC",
+var environmentEnvironmentGetStorageDirectoryCmd = &cobra.Command{
+	Use:   "get-storage-directory",
+	Short: "GetStorageDirectory RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewEnvironmentServiceClient(grpcConn)
-		req := &pb.IsExternalStorageManagerRequest{}
-		resp, err := client.IsExternalStorageManager(ctx, req)
+		req := &pb.GetStorageDirectoryRequest{}
+		resp, err := client.GetStorageDirectory(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -149,20 +152,158 @@ var environmentEnvironmentIsExternalStorageManagerCmd = &cobra.Command{
 	},
 }
 
-var environmentJavaFileCmd = &cobra.Command{
-	Use:   "java-file",
-	Short: "JavaFileService operations",
-}
-
-var environmentJavaFileGetAbsolutePathCmd = &cobra.Command{
-	Use:   "get-absolute-path",
-	Short: "GetAbsolutePath RPC",
+var environmentEnvironmentGetStorageStateCmd = &cobra.Command{
+	Use:   "get-storage-state",
+	Short: "GetStorageState RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewJavaFileServiceClient(grpcConn)
-		req := &pb.GetAbsolutePathRequest{}
-		resp, err := client.GetAbsolutePath(ctx, req)
+		client := pb.NewEnvironmentServiceClient(grpcConn)
+		req := &pb.GetStorageStateRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetStorageState(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var environmentEnvironmentIsExternalStorageEmulated0Cmd = &cobra.Command{
+	Use:   "is-external-storage-emulated0",
+	Short: "IsExternalStorageEmulated0 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewEnvironmentServiceClient(grpcConn)
+		req := &pb.IsExternalStorageEmulated0Request{}
+		resp, err := client.IsExternalStorageEmulated0(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var environmentEnvironmentIsExternalStorageEmulated1_1Cmd = &cobra.Command{
+	Use:   "is-external-storage-emulated1_1",
+	Short: "IsExternalStorageEmulated1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewEnvironmentServiceClient(grpcConn)
+		req := &pb.IsExternalStorageEmulated1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.IsExternalStorageEmulated1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var environmentEnvironmentIsExternalStorageLegacy0Cmd = &cobra.Command{
+	Use:   "is-external-storage-legacy0",
+	Short: "IsExternalStorageLegacy0 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewEnvironmentServiceClient(grpcConn)
+		req := &pb.IsExternalStorageLegacy0Request{}
+		resp, err := client.IsExternalStorageLegacy0(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var environmentEnvironmentIsExternalStorageLegacy1_1Cmd = &cobra.Command{
+	Use:   "is-external-storage-legacy1_1",
+	Short: "IsExternalStorageLegacy1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewEnvironmentServiceClient(grpcConn)
+		req := &pb.IsExternalStorageLegacy1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.IsExternalStorageLegacy1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var environmentEnvironmentIsExternalStorageManager0Cmd = &cobra.Command{
+	Use:   "is-external-storage-manager0",
+	Short: "IsExternalStorageManager0 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewEnvironmentServiceClient(grpcConn)
+		req := &pb.IsExternalStorageManager0Request{}
+		resp, err := client.IsExternalStorageManager0(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var environmentEnvironmentIsExternalStorageManager1_1Cmd = &cobra.Command{
+	Use:   "is-external-storage-manager1_1",
+	Short: "IsExternalStorageManager1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewEnvironmentServiceClient(grpcConn)
+		req := &pb.IsExternalStorageManager1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.IsExternalStorageManager1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var environmentEnvironmentIsExternalStorageRemovable0Cmd = &cobra.Command{
+	Use:   "is-external-storage-removable0",
+	Short: "IsExternalStorageRemovable0 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewEnvironmentServiceClient(grpcConn)
+		req := &pb.IsExternalStorageRemovable0Request{}
+		resp, err := client.IsExternalStorageRemovable0(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var environmentEnvironmentIsExternalStorageRemovable1_1Cmd = &cobra.Command{
+	Use:   "is-external-storage-removable1_1",
+	Short: "IsExternalStorageRemovable1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewEnvironmentServiceClient(grpcConn)
+		req := &pb.IsExternalStorageRemovable1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.IsExternalStorageRemovable1_1(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -171,17 +312,30 @@ var environmentJavaFileGetAbsolutePathCmd = &cobra.Command{
 }
 
 func init() {
-	environmentEnvironmentCmd.AddCommand(environmentEnvironmentGetRootDirectoryCmd)
 	environmentEnvironmentCmd.AddCommand(environmentEnvironmentGetDataDirectoryCmd)
+	environmentEnvironmentCmd.AddCommand(environmentEnvironmentGetDownloadCacheDirectoryCmd)
 	environmentEnvironmentCmd.AddCommand(environmentEnvironmentGetExternalStorageDirectoryCmd)
-	environmentEnvironmentGetExternalStoragePublicDirectoryCmd.Flags().String("typ", "", "typ (string)")
+	environmentEnvironmentGetExternalStoragePublicDirectoryCmd.Flags().String("arg0", "", "arg0 (string)")
 	environmentEnvironmentCmd.AddCommand(environmentEnvironmentGetExternalStoragePublicDirectoryCmd)
-	environmentEnvironmentCmd.AddCommand(environmentEnvironmentGetExternalStorageStateCmd)
-	environmentEnvironmentCmd.AddCommand(environmentEnvironmentIsExternalStorageRemovableCmd)
-	environmentEnvironmentCmd.AddCommand(environmentEnvironmentIsExternalStorageEmulatedCmd)
-	environmentEnvironmentCmd.AddCommand(environmentEnvironmentIsExternalStorageManagerCmd)
+	environmentEnvironmentCmd.AddCommand(environmentEnvironmentGetExternalStorageState0Cmd)
+	environmentEnvironmentGetExternalStorageState1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	environmentEnvironmentCmd.AddCommand(environmentEnvironmentGetExternalStorageState1_1Cmd)
+	environmentEnvironmentCmd.AddCommand(environmentEnvironmentGetRootDirectoryCmd)
+	environmentEnvironmentCmd.AddCommand(environmentEnvironmentGetStorageDirectoryCmd)
+	environmentEnvironmentGetStorageStateCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	environmentEnvironmentCmd.AddCommand(environmentEnvironmentGetStorageStateCmd)
+	environmentEnvironmentCmd.AddCommand(environmentEnvironmentIsExternalStorageEmulated0Cmd)
+	environmentEnvironmentIsExternalStorageEmulated1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	environmentEnvironmentCmd.AddCommand(environmentEnvironmentIsExternalStorageEmulated1_1Cmd)
+	environmentEnvironmentCmd.AddCommand(environmentEnvironmentIsExternalStorageLegacy0Cmd)
+	environmentEnvironmentIsExternalStorageLegacy1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	environmentEnvironmentCmd.AddCommand(environmentEnvironmentIsExternalStorageLegacy1_1Cmd)
+	environmentEnvironmentCmd.AddCommand(environmentEnvironmentIsExternalStorageManager0Cmd)
+	environmentEnvironmentIsExternalStorageManager1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	environmentEnvironmentCmd.AddCommand(environmentEnvironmentIsExternalStorageManager1_1Cmd)
+	environmentEnvironmentCmd.AddCommand(environmentEnvironmentIsExternalStorageRemovable0Cmd)
+	environmentEnvironmentIsExternalStorageRemovable1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	environmentEnvironmentCmd.AddCommand(environmentEnvironmentIsExternalStorageRemovable1_1Cmd)
 	environmentCmd.AddCommand(environmentEnvironmentCmd)
-	environmentJavaFileCmd.AddCommand(environmentJavaFileGetAbsolutePathCmd)
-	environmentCmd.AddCommand(environmentJavaFileCmd)
 	rootCmd.AddCommand(environmentCmd)
 }

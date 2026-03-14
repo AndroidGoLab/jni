@@ -6,158 +6,161 @@ package nfc;
 
 option go_package = "github.com/xaionaro-go/jni/proto/nfc";
 
-message Tag {
-  int64 id = 1;
-  int64 tech_list = 2;
+message DescribeContentsRequest {
 }
 
-message NdefRecord {
-  int32 tnf = 1;
-  int64 type = 2;
-  int64 id = 3;
-  int64 payload = 4;
-}
-
-message IsEnabledRequest {
-}
-
-message IsEnabledResponse {
-  bool result = 1;
-}
-
-message EnableReaderModeRequest {
-  int64 activity = 1;
-  int64 callback = 2;
-  int32 flags = 3;
-  int64 extras = 4;
-}
-
-message EnableReaderModeResponse {
-}
-
-message DisableReaderModeRequest {
-  int64 activity = 1;
-}
-
-message DisableReaderModeResponse {
-}
-
-message GetRecordsRequest {
-}
-
-message GetRecordsResponse {
-  int64 result = 1;
-}
-
-message ConnectRequest {
-}
-
-message ConnectResponse {
-}
-
-message GetNdefMessageRawRequest {
-}
-
-message GetNdefMessageRawResponse {
-  int64 result = 1;
-}
-
-message WriteNdefMessageRawRequest {
-  int64 msg = 1;
-}
-
-message WriteNdefMessageRawResponse {
-}
-
-message MakeReadOnlyRequest {
-}
-
-message MakeReadOnlyResponse {
-  bool result = 1;
-}
-
-message IsWritableRequest {
-}
-
-message IsWritableResponse {
-  bool result = 1;
-}
-
-message GetMaxSizeRequest {
-}
-
-message GetMaxSizeResponse {
+message DescribeContentsResponse {
   int32 result = 1;
 }
 
-message CloseRequest {
-}
-
-message CloseResponse {
-}
-
-message TransceiveRequest {
-  int64 data = 1;
-}
-
-message TransceiveResponse {
-  int64 result = 1;
-}
-
-message SetTimeoutMsRequest {
-  int32 timeout_ms = 1;
-}
-
-message SetTimeoutMsResponse {
-}
-
-message GetMaxTransceiveLengthRequest {
-}
-
-message GetMaxTransceiveLengthResponse {
-  int32 result = 1;
-}
-
-message ReaderCallbackOnTagEvent {
+message EqualsRequest {
   int64 arg0 = 1;
 }
 
-message ReaderCallbackEvent {
-  optional ReaderCallbackOnTagEvent on_tag = 1;
+message EqualsResponse {
+  bool result = 1;
 }
 
-message SubscribeReaderCallbackRequest {
+message GetIdRequest {
 }
 
-service AdapterService {
-  rpc IsEnabled (IsEnabledRequest) returns (IsEnabledResponse);
-  rpc EnableReaderMode (EnableReaderModeRequest) returns (EnableReaderModeResponse);
-  rpc DisableReaderMode (DisableReaderModeRequest) returns (DisableReaderModeResponse);
+message GetIdResponse {
+  int64 result = 1;
 }
 
-service NdefMessageService {
-  rpc GetRecords (GetRecordsRequest) returns (GetRecordsResponse);
+message GetPayloadRequest {
 }
 
-service NdefTagService {
-  rpc Connect (ConnectRequest) returns (ConnectResponse);
-  rpc GetNdefMessageRaw (GetNdefMessageRawRequest) returns (GetNdefMessageRawResponse);
-  rpc WriteNdefMessageRaw (WriteNdefMessageRawRequest) returns (WriteNdefMessageRawResponse);
-  rpc MakeReadOnly (MakeReadOnlyRequest) returns (MakeReadOnlyResponse);
-  rpc IsWritable (IsWritableRequest) returns (IsWritableResponse);
-  rpc GetMaxSize (GetMaxSizeRequest) returns (GetMaxSizeResponse);
-  rpc Close (CloseRequest) returns (CloseResponse);
+message GetPayloadResponse {
+  int64 result = 1;
 }
 
-service IsoDepTagService {
-  rpc Connect (ConnectRequest) returns (ConnectResponse);
-  rpc Transceive (TransceiveRequest) returns (TransceiveResponse);
-  rpc SetTimeoutMs (SetTimeoutMsRequest) returns (SetTimeoutMsResponse);
-  rpc GetMaxTransceiveLength (GetMaxTransceiveLengthRequest) returns (GetMaxTransceiveLengthResponse);
-  rpc Close (CloseRequest) returns (CloseResponse);
+message GetTnfRequest {
 }
 
-service ReaderCallbackService {
-  // Server-streaming events from android.nfc.NfcAdapter$ReaderCallback
-  rpc SubscribeReaderCallback (SubscribeReaderCallbackRequest) returns (stream ReaderCallbackEvent);
+message GetTnfResponse {
+  int32 result = 1;
+}
+
+message GetTypeRequest {
+}
+
+message GetTypeResponse {
+  int64 result = 1;
+}
+
+message HashCodeRequest {
+}
+
+message HashCodeResponse {
+  int32 result = 1;
+}
+
+message ToByteArrayRequest {
+}
+
+message ToByteArrayResponse {
+  int64 result = 1;
+}
+
+message ToMimeTypeRequest {
+}
+
+message ToMimeTypeResponse {
+  string result = 1;
+}
+
+message ToStringRequest {
+}
+
+message ToStringResponse {
+  string result = 1;
+}
+
+message ToUriRequest {
+}
+
+message ToUriResponse {
+  int64 result = 1;
+}
+
+message WriteToParcelRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message WriteToParcelResponse {
+}
+
+message CreateApplicationRecordRequest {
+  string arg0 = 1;
+}
+
+message CreateApplicationRecordResponse {
+  int64 result = 1;
+}
+
+message CreateExternalRequest {
+  string arg0 = 1;
+  string arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message CreateExternalResponse {
+  int64 result = 1;
+}
+
+message CreateMimeRequest {
+  string arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message CreateMimeResponse {
+  int64 result = 1;
+}
+
+message CreateTextRecordRequest {
+  string arg0 = 1;
+  string arg1 = 2;
+}
+
+message CreateTextRecordResponse {
+  int64 result = 1;
+}
+
+message CreateUri1Request {
+  int64 arg0 = 1;
+}
+
+message CreateUri1Response {
+  int64 result = 1;
+}
+
+message CreateUri1_1Request {
+  string arg0 = 1;
+}
+
+message CreateUri1_1Response {
+  int64 result = 1;
+}
+
+service NdefRecordService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc Equals (EqualsRequest) returns (EqualsResponse);
+  rpc GetId (GetIdRequest) returns (GetIdResponse);
+  rpc GetPayload (GetPayloadRequest) returns (GetPayloadResponse);
+  rpc GetTnf (GetTnfRequest) returns (GetTnfResponse);
+  rpc GetType (GetTypeRequest) returns (GetTypeResponse);
+  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
+  rpc ToByteArray (ToByteArrayRequest) returns (ToByteArrayResponse);
+  rpc ToMimeType (ToMimeTypeRequest) returns (ToMimeTypeResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc ToUri (ToUriRequest) returns (ToUriResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+  rpc CreateApplicationRecord (CreateApplicationRecordRequest) returns (CreateApplicationRecordResponse);
+  rpc CreateExternal (CreateExternalRequest) returns (CreateExternalResponse);
+  rpc CreateMime (CreateMimeRequest) returns (CreateMimeResponse);
+  rpc CreateTextRecord (CreateTextRecordRequest) returns (CreateTextRecordResponse);
+  rpc CreateUri1 (CreateUri1Request) returns (CreateUri1Response);
+  rpc CreateUri1_1 (CreateUri1_1Request) returns (CreateUri1_1Response);
 }

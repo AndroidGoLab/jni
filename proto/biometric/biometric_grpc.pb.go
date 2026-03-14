@@ -21,409 +21,36 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ManagerService_CanAuthenticateRaw_FullMethodName = "/biometric.ManagerService/CanAuthenticateRaw"
-)
-
-// ManagerServiceClient is the client API for ManagerService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ManagerServiceClient interface {
-	CanAuthenticateRaw(ctx context.Context, in *CanAuthenticateRawRequest, opts ...grpc.CallOption) (*CanAuthenticateRawResponse, error)
-}
-
-type managerServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewManagerServiceClient(cc grpc.ClientConnInterface) ManagerServiceClient {
-	return &managerServiceClient{cc}
-}
-
-func (c *managerServiceClient) CanAuthenticateRaw(ctx context.Context, in *CanAuthenticateRawRequest, opts ...grpc.CallOption) (*CanAuthenticateRawResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CanAuthenticateRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_CanAuthenticateRaw_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// ManagerServiceServer is the server API for ManagerService service.
-// All implementations must embed UnimplementedManagerServiceServer
-// for forward compatibility.
-type ManagerServiceServer interface {
-	CanAuthenticateRaw(context.Context, *CanAuthenticateRawRequest) (*CanAuthenticateRawResponse, error)
-	mustEmbedUnimplementedManagerServiceServer()
-}
-
-// UnimplementedManagerServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedManagerServiceServer struct{}
-
-func (UnimplementedManagerServiceServer) CanAuthenticateRaw(context.Context, *CanAuthenticateRawRequest) (*CanAuthenticateRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CanAuthenticateRaw not implemented")
-}
-func (UnimplementedManagerServiceServer) mustEmbedUnimplementedManagerServiceServer() {}
-func (UnimplementedManagerServiceServer) testEmbeddedByValue()                        {}
-
-// UnsafeManagerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ManagerServiceServer will
-// result in compilation errors.
-type UnsafeManagerServiceServer interface {
-	mustEmbedUnimplementedManagerServiceServer()
-}
-
-func RegisterManagerServiceServer(s grpc.ServiceRegistrar, srv ManagerServiceServer) {
-	// If the following call panics, it indicates UnimplementedManagerServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&ManagerService_ServiceDesc, srv)
-}
-
-func _ManagerService_CanAuthenticateRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CanAuthenticateRawRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).CanAuthenticateRaw(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_CanAuthenticateRaw_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).CanAuthenticateRaw(ctx, req.(*CanAuthenticateRawRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// ManagerService_ServiceDesc is the grpc.ServiceDesc for ManagerService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var ManagerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "biometric.ManagerService",
-	HandlerType: (*ManagerServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "CanAuthenticateRaw",
-			Handler:    _ManagerService_CanAuthenticateRaw_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/biometric/biometric.proto",
-}
-
-const (
-	BiometricPromptBuilderService_SetTitle_FullMethodName                 = "/biometric.BiometricPromptBuilderService/SetTitle"
-	BiometricPromptBuilderService_SetSubtitle_FullMethodName              = "/biometric.BiometricPromptBuilderService/SetSubtitle"
-	BiometricPromptBuilderService_SetDescription_FullMethodName           = "/biometric.BiometricPromptBuilderService/SetDescription"
-	BiometricPromptBuilderService_SetNegativeButton_FullMethodName        = "/biometric.BiometricPromptBuilderService/SetNegativeButton"
-	BiometricPromptBuilderService_SetAllowedAuthenticators_FullMethodName = "/biometric.BiometricPromptBuilderService/SetAllowedAuthenticators"
-	BiometricPromptBuilderService_Build_FullMethodName                    = "/biometric.BiometricPromptBuilderService/Build"
-)
-
-// BiometricPromptBuilderServiceClient is the client API for BiometricPromptBuilderService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type BiometricPromptBuilderServiceClient interface {
-	SetTitle(ctx context.Context, in *SetTitleRequest, opts ...grpc.CallOption) (*SetTitleResponse, error)
-	SetSubtitle(ctx context.Context, in *SetSubtitleRequest, opts ...grpc.CallOption) (*SetSubtitleResponse, error)
-	SetDescription(ctx context.Context, in *SetDescriptionRequest, opts ...grpc.CallOption) (*SetDescriptionResponse, error)
-	SetNegativeButton(ctx context.Context, in *SetNegativeButtonRequest, opts ...grpc.CallOption) (*SetNegativeButtonResponse, error)
-	SetAllowedAuthenticators(ctx context.Context, in *SetAllowedAuthenticatorsRequest, opts ...grpc.CallOption) (*SetAllowedAuthenticatorsResponse, error)
-	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
-}
-
-type biometricPromptBuilderServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewBiometricPromptBuilderServiceClient(cc grpc.ClientConnInterface) BiometricPromptBuilderServiceClient {
-	return &biometricPromptBuilderServiceClient{cc}
-}
-
-func (c *biometricPromptBuilderServiceClient) SetTitle(ctx context.Context, in *SetTitleRequest, opts ...grpc.CallOption) (*SetTitleResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetTitleResponse)
-	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_SetTitle_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *biometricPromptBuilderServiceClient) SetSubtitle(ctx context.Context, in *SetSubtitleRequest, opts ...grpc.CallOption) (*SetSubtitleResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetSubtitleResponse)
-	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_SetSubtitle_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *biometricPromptBuilderServiceClient) SetDescription(ctx context.Context, in *SetDescriptionRequest, opts ...grpc.CallOption) (*SetDescriptionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetDescriptionResponse)
-	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_SetDescription_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *biometricPromptBuilderServiceClient) SetNegativeButton(ctx context.Context, in *SetNegativeButtonRequest, opts ...grpc.CallOption) (*SetNegativeButtonResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetNegativeButtonResponse)
-	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_SetNegativeButton_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *biometricPromptBuilderServiceClient) SetAllowedAuthenticators(ctx context.Context, in *SetAllowedAuthenticatorsRequest, opts ...grpc.CallOption) (*SetAllowedAuthenticatorsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetAllowedAuthenticatorsResponse)
-	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_SetAllowedAuthenticators_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *biometricPromptBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BuildResponse)
-	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_Build_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// BiometricPromptBuilderServiceServer is the server API for BiometricPromptBuilderService service.
-// All implementations must embed UnimplementedBiometricPromptBuilderServiceServer
-// for forward compatibility.
-type BiometricPromptBuilderServiceServer interface {
-	SetTitle(context.Context, *SetTitleRequest) (*SetTitleResponse, error)
-	SetSubtitle(context.Context, *SetSubtitleRequest) (*SetSubtitleResponse, error)
-	SetDescription(context.Context, *SetDescriptionRequest) (*SetDescriptionResponse, error)
-	SetNegativeButton(context.Context, *SetNegativeButtonRequest) (*SetNegativeButtonResponse, error)
-	SetAllowedAuthenticators(context.Context, *SetAllowedAuthenticatorsRequest) (*SetAllowedAuthenticatorsResponse, error)
-	Build(context.Context, *BuildRequest) (*BuildResponse, error)
-	mustEmbedUnimplementedBiometricPromptBuilderServiceServer()
-}
-
-// UnimplementedBiometricPromptBuilderServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedBiometricPromptBuilderServiceServer struct{}
-
-func (UnimplementedBiometricPromptBuilderServiceServer) SetTitle(context.Context, *SetTitleRequest) (*SetTitleResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetTitle not implemented")
-}
-func (UnimplementedBiometricPromptBuilderServiceServer) SetSubtitle(context.Context, *SetSubtitleRequest) (*SetSubtitleResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetSubtitle not implemented")
-}
-func (UnimplementedBiometricPromptBuilderServiceServer) SetDescription(context.Context, *SetDescriptionRequest) (*SetDescriptionResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetDescription not implemented")
-}
-func (UnimplementedBiometricPromptBuilderServiceServer) SetNegativeButton(context.Context, *SetNegativeButtonRequest) (*SetNegativeButtonResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetNegativeButton not implemented")
-}
-func (UnimplementedBiometricPromptBuilderServiceServer) SetAllowedAuthenticators(context.Context, *SetAllowedAuthenticatorsRequest) (*SetAllowedAuthenticatorsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetAllowedAuthenticators not implemented")
-}
-func (UnimplementedBiometricPromptBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
-}
-func (UnimplementedBiometricPromptBuilderServiceServer) mustEmbedUnimplementedBiometricPromptBuilderServiceServer() {
-}
-func (UnimplementedBiometricPromptBuilderServiceServer) testEmbeddedByValue() {}
-
-// UnsafeBiometricPromptBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to BiometricPromptBuilderServiceServer will
-// result in compilation errors.
-type UnsafeBiometricPromptBuilderServiceServer interface {
-	mustEmbedUnimplementedBiometricPromptBuilderServiceServer()
-}
-
-func RegisterBiometricPromptBuilderServiceServer(s grpc.ServiceRegistrar, srv BiometricPromptBuilderServiceServer) {
-	// If the following call panics, it indicates UnimplementedBiometricPromptBuilderServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&BiometricPromptBuilderService_ServiceDesc, srv)
-}
-
-func _BiometricPromptBuilderService_SetTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetTitleRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BiometricPromptBuilderServiceServer).SetTitle(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BiometricPromptBuilderService_SetTitle_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BiometricPromptBuilderServiceServer).SetTitle(ctx, req.(*SetTitleRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BiometricPromptBuilderService_SetSubtitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetSubtitleRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BiometricPromptBuilderServiceServer).SetSubtitle(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BiometricPromptBuilderService_SetSubtitle_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BiometricPromptBuilderServiceServer).SetSubtitle(ctx, req.(*SetSubtitleRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BiometricPromptBuilderService_SetDescription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetDescriptionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BiometricPromptBuilderServiceServer).SetDescription(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BiometricPromptBuilderService_SetDescription_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BiometricPromptBuilderServiceServer).SetDescription(ctx, req.(*SetDescriptionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BiometricPromptBuilderService_SetNegativeButton_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetNegativeButtonRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BiometricPromptBuilderServiceServer).SetNegativeButton(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BiometricPromptBuilderService_SetNegativeButton_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BiometricPromptBuilderServiceServer).SetNegativeButton(ctx, req.(*SetNegativeButtonRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BiometricPromptBuilderService_SetAllowedAuthenticators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetAllowedAuthenticatorsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BiometricPromptBuilderServiceServer).SetAllowedAuthenticators(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BiometricPromptBuilderService_SetAllowedAuthenticators_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BiometricPromptBuilderServiceServer).SetAllowedAuthenticators(ctx, req.(*SetAllowedAuthenticatorsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BiometricPromptBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BuildRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BiometricPromptBuilderServiceServer).Build(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BiometricPromptBuilderService_Build_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BiometricPromptBuilderServiceServer).Build(ctx, req.(*BuildRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// BiometricPromptBuilderService_ServiceDesc is the grpc.ServiceDesc for BiometricPromptBuilderService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var BiometricPromptBuilderService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "biometric.BiometricPromptBuilderService",
-	HandlerType: (*BiometricPromptBuilderServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "SetTitle",
-			Handler:    _BiometricPromptBuilderService_SetTitle_Handler,
-		},
-		{
-			MethodName: "SetSubtitle",
-			Handler:    _BiometricPromptBuilderService_SetSubtitle_Handler,
-		},
-		{
-			MethodName: "SetDescription",
-			Handler:    _BiometricPromptBuilderService_SetDescription_Handler,
-		},
-		{
-			MethodName: "SetNegativeButton",
-			Handler:    _BiometricPromptBuilderService_SetNegativeButton_Handler,
-		},
-		{
-			MethodName: "SetAllowedAuthenticators",
-			Handler:    _BiometricPromptBuilderService_SetAllowedAuthenticators_Handler,
-		},
-		{
-			MethodName: "Build",
-			Handler:    _BiometricPromptBuilderService_Build_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/biometric/biometric.proto",
-}
-
-const (
-	BiometricPromptService_Authenticate_FullMethodName = "/biometric.BiometricPromptService/Authenticate"
+	BiometricPromptService_Authenticate4_FullMethodName            = "/biometric.BiometricPromptService/Authenticate4"
+	BiometricPromptService_Authenticate3_1_FullMethodName          = "/biometric.BiometricPromptService/Authenticate3_1"
+	BiometricPromptService_GetAllowedAuthenticators_FullMethodName = "/biometric.BiometricPromptService/GetAllowedAuthenticators"
+	BiometricPromptService_GetContentView_FullMethodName           = "/biometric.BiometricPromptService/GetContentView"
+	BiometricPromptService_GetDescription_FullMethodName           = "/biometric.BiometricPromptService/GetDescription"
+	BiometricPromptService_GetLogoBitmap_FullMethodName            = "/biometric.BiometricPromptService/GetLogoBitmap"
+	BiometricPromptService_GetLogoDescription_FullMethodName       = "/biometric.BiometricPromptService/GetLogoDescription"
+	BiometricPromptService_GetLogoRes_FullMethodName               = "/biometric.BiometricPromptService/GetLogoRes"
+	BiometricPromptService_GetNegativeButtonText_FullMethodName    = "/biometric.BiometricPromptService/GetNegativeButtonText"
+	BiometricPromptService_GetSubtitle_FullMethodName              = "/biometric.BiometricPromptService/GetSubtitle"
+	BiometricPromptService_GetTitle_FullMethodName                 = "/biometric.BiometricPromptService/GetTitle"
+	BiometricPromptService_IsConfirmationRequired_FullMethodName   = "/biometric.BiometricPromptService/IsConfirmationRequired"
 )
 
 // BiometricPromptServiceClient is the client API for BiometricPromptService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BiometricPromptServiceClient interface {
-	Authenticate(ctx context.Context, in *AuthenticateRequest, opts ...grpc.CallOption) (*AuthenticateResponse, error)
+	Authenticate4(ctx context.Context, in *Authenticate4Request, opts ...grpc.CallOption) (*Authenticate4Response, error)
+	Authenticate3_1(ctx context.Context, in *Authenticate3_1Request, opts ...grpc.CallOption) (*Authenticate3_1Response, error)
+	GetAllowedAuthenticators(ctx context.Context, in *GetAllowedAuthenticatorsRequest, opts ...grpc.CallOption) (*GetAllowedAuthenticatorsResponse, error)
+	GetContentView(ctx context.Context, in *GetContentViewRequest, opts ...grpc.CallOption) (*GetContentViewResponse, error)
+	GetDescription(ctx context.Context, in *GetDescriptionRequest, opts ...grpc.CallOption) (*GetDescriptionResponse, error)
+	GetLogoBitmap(ctx context.Context, in *GetLogoBitmapRequest, opts ...grpc.CallOption) (*GetLogoBitmapResponse, error)
+	GetLogoDescription(ctx context.Context, in *GetLogoDescriptionRequest, opts ...grpc.CallOption) (*GetLogoDescriptionResponse, error)
+	GetLogoRes(ctx context.Context, in *GetLogoResRequest, opts ...grpc.CallOption) (*GetLogoResResponse, error)
+	GetNegativeButtonText(ctx context.Context, in *GetNegativeButtonTextRequest, opts ...grpc.CallOption) (*GetNegativeButtonTextResponse, error)
+	GetSubtitle(ctx context.Context, in *GetSubtitleRequest, opts ...grpc.CallOption) (*GetSubtitleResponse, error)
+	GetTitle(ctx context.Context, in *GetTitleRequest, opts ...grpc.CallOption) (*GetTitleResponse, error)
+	IsConfirmationRequired(ctx context.Context, in *IsConfirmationRequiredRequest, opts ...grpc.CallOption) (*IsConfirmationRequiredResponse, error)
 }
 
 type biometricPromptServiceClient struct {
@@ -434,10 +61,120 @@ func NewBiometricPromptServiceClient(cc grpc.ClientConnInterface) BiometricPromp
 	return &biometricPromptServiceClient{cc}
 }
 
-func (c *biometricPromptServiceClient) Authenticate(ctx context.Context, in *AuthenticateRequest, opts ...grpc.CallOption) (*AuthenticateResponse, error) {
+func (c *biometricPromptServiceClient) Authenticate4(ctx context.Context, in *Authenticate4Request, opts ...grpc.CallOption) (*Authenticate4Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AuthenticateResponse)
-	err := c.cc.Invoke(ctx, BiometricPromptService_Authenticate_FullMethodName, in, out, cOpts...)
+	out := new(Authenticate4Response)
+	err := c.cc.Invoke(ctx, BiometricPromptService_Authenticate4_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptServiceClient) Authenticate3_1(ctx context.Context, in *Authenticate3_1Request, opts ...grpc.CallOption) (*Authenticate3_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Authenticate3_1Response)
+	err := c.cc.Invoke(ctx, BiometricPromptService_Authenticate3_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptServiceClient) GetAllowedAuthenticators(ctx context.Context, in *GetAllowedAuthenticatorsRequest, opts ...grpc.CallOption) (*GetAllowedAuthenticatorsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAllowedAuthenticatorsResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptService_GetAllowedAuthenticators_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptServiceClient) GetContentView(ctx context.Context, in *GetContentViewRequest, opts ...grpc.CallOption) (*GetContentViewResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetContentViewResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptService_GetContentView_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptServiceClient) GetDescription(ctx context.Context, in *GetDescriptionRequest, opts ...grpc.CallOption) (*GetDescriptionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDescriptionResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptService_GetDescription_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptServiceClient) GetLogoBitmap(ctx context.Context, in *GetLogoBitmapRequest, opts ...grpc.CallOption) (*GetLogoBitmapResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLogoBitmapResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptService_GetLogoBitmap_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptServiceClient) GetLogoDescription(ctx context.Context, in *GetLogoDescriptionRequest, opts ...grpc.CallOption) (*GetLogoDescriptionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLogoDescriptionResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptService_GetLogoDescription_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptServiceClient) GetLogoRes(ctx context.Context, in *GetLogoResRequest, opts ...grpc.CallOption) (*GetLogoResResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLogoResResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptService_GetLogoRes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptServiceClient) GetNegativeButtonText(ctx context.Context, in *GetNegativeButtonTextRequest, opts ...grpc.CallOption) (*GetNegativeButtonTextResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNegativeButtonTextResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptService_GetNegativeButtonText_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptServiceClient) GetSubtitle(ctx context.Context, in *GetSubtitleRequest, opts ...grpc.CallOption) (*GetSubtitleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSubtitleResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptService_GetSubtitle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptServiceClient) GetTitle(ctx context.Context, in *GetTitleRequest, opts ...grpc.CallOption) (*GetTitleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTitleResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptService_GetTitle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptServiceClient) IsConfirmationRequired(ctx context.Context, in *IsConfirmationRequiredRequest, opts ...grpc.CallOption) (*IsConfirmationRequiredResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsConfirmationRequiredResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptService_IsConfirmationRequired_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -448,7 +185,18 @@ func (c *biometricPromptServiceClient) Authenticate(ctx context.Context, in *Aut
 // All implementations must embed UnimplementedBiometricPromptServiceServer
 // for forward compatibility.
 type BiometricPromptServiceServer interface {
-	Authenticate(context.Context, *AuthenticateRequest) (*AuthenticateResponse, error)
+	Authenticate4(context.Context, *Authenticate4Request) (*Authenticate4Response, error)
+	Authenticate3_1(context.Context, *Authenticate3_1Request) (*Authenticate3_1Response, error)
+	GetAllowedAuthenticators(context.Context, *GetAllowedAuthenticatorsRequest) (*GetAllowedAuthenticatorsResponse, error)
+	GetContentView(context.Context, *GetContentViewRequest) (*GetContentViewResponse, error)
+	GetDescription(context.Context, *GetDescriptionRequest) (*GetDescriptionResponse, error)
+	GetLogoBitmap(context.Context, *GetLogoBitmapRequest) (*GetLogoBitmapResponse, error)
+	GetLogoDescription(context.Context, *GetLogoDescriptionRequest) (*GetLogoDescriptionResponse, error)
+	GetLogoRes(context.Context, *GetLogoResRequest) (*GetLogoResResponse, error)
+	GetNegativeButtonText(context.Context, *GetNegativeButtonTextRequest) (*GetNegativeButtonTextResponse, error)
+	GetSubtitle(context.Context, *GetSubtitleRequest) (*GetSubtitleResponse, error)
+	GetTitle(context.Context, *GetTitleRequest) (*GetTitleResponse, error)
+	IsConfirmationRequired(context.Context, *IsConfirmationRequiredRequest) (*IsConfirmationRequiredResponse, error)
 	mustEmbedUnimplementedBiometricPromptServiceServer()
 }
 
@@ -459,8 +207,41 @@ type BiometricPromptServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBiometricPromptServiceServer struct{}
 
-func (UnimplementedBiometricPromptServiceServer) Authenticate(context.Context, *AuthenticateRequest) (*AuthenticateResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Authenticate not implemented")
+func (UnimplementedBiometricPromptServiceServer) Authenticate4(context.Context, *Authenticate4Request) (*Authenticate4Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Authenticate4 not implemented")
+}
+func (UnimplementedBiometricPromptServiceServer) Authenticate3_1(context.Context, *Authenticate3_1Request) (*Authenticate3_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Authenticate3_1 not implemented")
+}
+func (UnimplementedBiometricPromptServiceServer) GetAllowedAuthenticators(context.Context, *GetAllowedAuthenticatorsRequest) (*GetAllowedAuthenticatorsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAllowedAuthenticators not implemented")
+}
+func (UnimplementedBiometricPromptServiceServer) GetContentView(context.Context, *GetContentViewRequest) (*GetContentViewResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetContentView not implemented")
+}
+func (UnimplementedBiometricPromptServiceServer) GetDescription(context.Context, *GetDescriptionRequest) (*GetDescriptionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDescription not implemented")
+}
+func (UnimplementedBiometricPromptServiceServer) GetLogoBitmap(context.Context, *GetLogoBitmapRequest) (*GetLogoBitmapResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLogoBitmap not implemented")
+}
+func (UnimplementedBiometricPromptServiceServer) GetLogoDescription(context.Context, *GetLogoDescriptionRequest) (*GetLogoDescriptionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLogoDescription not implemented")
+}
+func (UnimplementedBiometricPromptServiceServer) GetLogoRes(context.Context, *GetLogoResRequest) (*GetLogoResResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLogoRes not implemented")
+}
+func (UnimplementedBiometricPromptServiceServer) GetNegativeButtonText(context.Context, *GetNegativeButtonTextRequest) (*GetNegativeButtonTextResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetNegativeButtonText not implemented")
+}
+func (UnimplementedBiometricPromptServiceServer) GetSubtitle(context.Context, *GetSubtitleRequest) (*GetSubtitleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSubtitle not implemented")
+}
+func (UnimplementedBiometricPromptServiceServer) GetTitle(context.Context, *GetTitleRequest) (*GetTitleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetTitle not implemented")
+}
+func (UnimplementedBiometricPromptServiceServer) IsConfirmationRequired(context.Context, *IsConfirmationRequiredRequest) (*IsConfirmationRequiredResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsConfirmationRequired not implemented")
 }
 func (UnimplementedBiometricPromptServiceServer) mustEmbedUnimplementedBiometricPromptServiceServer() {
 }
@@ -484,20 +265,218 @@ func RegisterBiometricPromptServiceServer(s grpc.ServiceRegistrar, srv Biometric
 	s.RegisterService(&BiometricPromptService_ServiceDesc, srv)
 }
 
-func _BiometricPromptService_Authenticate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AuthenticateRequest)
+func _BiometricPromptService_Authenticate4_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Authenticate4Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BiometricPromptServiceServer).Authenticate(ctx, in)
+		return srv.(BiometricPromptServiceServer).Authenticate4(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BiometricPromptService_Authenticate_FullMethodName,
+		FullMethod: BiometricPromptService_Authenticate4_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BiometricPromptServiceServer).Authenticate(ctx, req.(*AuthenticateRequest))
+		return srv.(BiometricPromptServiceServer).Authenticate4(ctx, req.(*Authenticate4Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptService_Authenticate3_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Authenticate3_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptServiceServer).Authenticate3_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptService_Authenticate3_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptServiceServer).Authenticate3_1(ctx, req.(*Authenticate3_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptService_GetAllowedAuthenticators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllowedAuthenticatorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptServiceServer).GetAllowedAuthenticators(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptService_GetAllowedAuthenticators_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptServiceServer).GetAllowedAuthenticators(ctx, req.(*GetAllowedAuthenticatorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptService_GetContentView_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetContentViewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptServiceServer).GetContentView(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptService_GetContentView_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptServiceServer).GetContentView(ctx, req.(*GetContentViewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptService_GetDescription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDescriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptServiceServer).GetDescription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptService_GetDescription_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptServiceServer).GetDescription(ctx, req.(*GetDescriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptService_GetLogoBitmap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLogoBitmapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptServiceServer).GetLogoBitmap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptService_GetLogoBitmap_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptServiceServer).GetLogoBitmap(ctx, req.(*GetLogoBitmapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptService_GetLogoDescription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLogoDescriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptServiceServer).GetLogoDescription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptService_GetLogoDescription_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptServiceServer).GetLogoDescription(ctx, req.(*GetLogoDescriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptService_GetLogoRes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLogoResRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptServiceServer).GetLogoRes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptService_GetLogoRes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptServiceServer).GetLogoRes(ctx, req.(*GetLogoResRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptService_GetNegativeButtonText_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNegativeButtonTextRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptServiceServer).GetNegativeButtonText(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptService_GetNegativeButtonText_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptServiceServer).GetNegativeButtonText(ctx, req.(*GetNegativeButtonTextRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptService_GetSubtitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSubtitleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptServiceServer).GetSubtitle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptService_GetSubtitle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptServiceServer).GetSubtitle(ctx, req.(*GetSubtitleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptService_GetTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTitleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptServiceServer).GetTitle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptService_GetTitle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptServiceServer).GetTitle(ctx, req.(*GetTitleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptService_IsConfirmationRequired_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsConfirmationRequiredRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptServiceServer).IsConfirmationRequired(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptService_IsConfirmationRequired_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptServiceServer).IsConfirmationRequired(ctx, req.(*IsConfirmationRequiredRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -510,8 +489,52 @@ var BiometricPromptService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*BiometricPromptServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Authenticate",
-			Handler:    _BiometricPromptService_Authenticate_Handler,
+			MethodName: "Authenticate4",
+			Handler:    _BiometricPromptService_Authenticate4_Handler,
+		},
+		{
+			MethodName: "Authenticate3_1",
+			Handler:    _BiometricPromptService_Authenticate3_1_Handler,
+		},
+		{
+			MethodName: "GetAllowedAuthenticators",
+			Handler:    _BiometricPromptService_GetAllowedAuthenticators_Handler,
+		},
+		{
+			MethodName: "GetContentView",
+			Handler:    _BiometricPromptService_GetContentView_Handler,
+		},
+		{
+			MethodName: "GetDescription",
+			Handler:    _BiometricPromptService_GetDescription_Handler,
+		},
+		{
+			MethodName: "GetLogoBitmap",
+			Handler:    _BiometricPromptService_GetLogoBitmap_Handler,
+		},
+		{
+			MethodName: "GetLogoDescription",
+			Handler:    _BiometricPromptService_GetLogoDescription_Handler,
+		},
+		{
+			MethodName: "GetLogoRes",
+			Handler:    _BiometricPromptService_GetLogoRes_Handler,
+		},
+		{
+			MethodName: "GetNegativeButtonText",
+			Handler:    _BiometricPromptService_GetNegativeButtonText_Handler,
+		},
+		{
+			MethodName: "GetSubtitle",
+			Handler:    _BiometricPromptService_GetSubtitle_Handler,
+		},
+		{
+			MethodName: "GetTitle",
+			Handler:    _BiometricPromptService_GetTitle_Handler,
+		},
+		{
+			MethodName: "IsConfirmationRequired",
+			Handler:    _BiometricPromptService_IsConfirmationRequired_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -519,320 +542,522 @@ var BiometricPromptService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	CancellationSignalService_Cancel_FullMethodName = "/biometric.CancellationSignalService/Cancel"
+	BiometricPromptBuilderService_Build_FullMethodName                      = "/biometric.BiometricPromptBuilderService/Build"
+	BiometricPromptBuilderService_SetAllowedAuthenticators_FullMethodName   = "/biometric.BiometricPromptBuilderService/SetAllowedAuthenticators"
+	BiometricPromptBuilderService_SetConfirmationRequired_FullMethodName    = "/biometric.BiometricPromptBuilderService/SetConfirmationRequired"
+	BiometricPromptBuilderService_SetContentView_FullMethodName             = "/biometric.BiometricPromptBuilderService/SetContentView"
+	BiometricPromptBuilderService_SetDescription_FullMethodName             = "/biometric.BiometricPromptBuilderService/SetDescription"
+	BiometricPromptBuilderService_SetDeviceCredentialAllowed_FullMethodName = "/biometric.BiometricPromptBuilderService/SetDeviceCredentialAllowed"
+	BiometricPromptBuilderService_SetLogoBitmap_FullMethodName              = "/biometric.BiometricPromptBuilderService/SetLogoBitmap"
+	BiometricPromptBuilderService_SetLogoDescription_FullMethodName         = "/biometric.BiometricPromptBuilderService/SetLogoDescription"
+	BiometricPromptBuilderService_SetLogoRes_FullMethodName                 = "/biometric.BiometricPromptBuilderService/SetLogoRes"
+	BiometricPromptBuilderService_SetNegativeButton_FullMethodName          = "/biometric.BiometricPromptBuilderService/SetNegativeButton"
+	BiometricPromptBuilderService_SetSubtitle_FullMethodName                = "/biometric.BiometricPromptBuilderService/SetSubtitle"
+	BiometricPromptBuilderService_SetTitle_FullMethodName                   = "/biometric.BiometricPromptBuilderService/SetTitle"
 )
 
-// CancellationSignalServiceClient is the client API for CancellationSignalService service.
+// BiometricPromptBuilderServiceClient is the client API for BiometricPromptBuilderService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type CancellationSignalServiceClient interface {
-	Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*CancelResponse, error)
+type BiometricPromptBuilderServiceClient interface {
+	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
+	SetAllowedAuthenticators(ctx context.Context, in *SetAllowedAuthenticatorsRequest, opts ...grpc.CallOption) (*SetAllowedAuthenticatorsResponse, error)
+	SetConfirmationRequired(ctx context.Context, in *SetConfirmationRequiredRequest, opts ...grpc.CallOption) (*SetConfirmationRequiredResponse, error)
+	SetContentView(ctx context.Context, in *SetContentViewRequest, opts ...grpc.CallOption) (*SetContentViewResponse, error)
+	SetDescription(ctx context.Context, in *SetDescriptionRequest, opts ...grpc.CallOption) (*SetDescriptionResponse, error)
+	SetDeviceCredentialAllowed(ctx context.Context, in *SetDeviceCredentialAllowedRequest, opts ...grpc.CallOption) (*SetDeviceCredentialAllowedResponse, error)
+	SetLogoBitmap(ctx context.Context, in *SetLogoBitmapRequest, opts ...grpc.CallOption) (*SetLogoBitmapResponse, error)
+	SetLogoDescription(ctx context.Context, in *SetLogoDescriptionRequest, opts ...grpc.CallOption) (*SetLogoDescriptionResponse, error)
+	SetLogoRes(ctx context.Context, in *SetLogoResRequest, opts ...grpc.CallOption) (*SetLogoResResponse, error)
+	SetNegativeButton(ctx context.Context, in *SetNegativeButtonRequest, opts ...grpc.CallOption) (*SetNegativeButtonResponse, error)
+	SetSubtitle(ctx context.Context, in *SetSubtitleRequest, opts ...grpc.CallOption) (*SetSubtitleResponse, error)
+	SetTitle(ctx context.Context, in *SetTitleRequest, opts ...grpc.CallOption) (*SetTitleResponse, error)
 }
 
-type cancellationSignalServiceClient struct {
+type biometricPromptBuilderServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewCancellationSignalServiceClient(cc grpc.ClientConnInterface) CancellationSignalServiceClient {
-	return &cancellationSignalServiceClient{cc}
+func NewBiometricPromptBuilderServiceClient(cc grpc.ClientConnInterface) BiometricPromptBuilderServiceClient {
+	return &biometricPromptBuilderServiceClient{cc}
 }
 
-func (c *cancellationSignalServiceClient) Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*CancelResponse, error) {
+func (c *biometricPromptBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CancelResponse)
-	err := c.cc.Invoke(ctx, CancellationSignalService_Cancel_FullMethodName, in, out, cOpts...)
+	out := new(BuildResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_Build_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// CancellationSignalServiceServer is the server API for CancellationSignalService service.
-// All implementations must embed UnimplementedCancellationSignalServiceServer
-// for forward compatibility.
-type CancellationSignalServiceServer interface {
-	Cancel(context.Context, *CancelRequest) (*CancelResponse, error)
-	mustEmbedUnimplementedCancellationSignalServiceServer()
+func (c *biometricPromptBuilderServiceClient) SetAllowedAuthenticators(ctx context.Context, in *SetAllowedAuthenticatorsRequest, opts ...grpc.CallOption) (*SetAllowedAuthenticatorsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetAllowedAuthenticatorsResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_SetAllowedAuthenticators_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
-// UnimplementedCancellationSignalServiceServer must be embedded to have
+func (c *biometricPromptBuilderServiceClient) SetConfirmationRequired(ctx context.Context, in *SetConfirmationRequiredRequest, opts ...grpc.CallOption) (*SetConfirmationRequiredResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetConfirmationRequiredResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_SetConfirmationRequired_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptBuilderServiceClient) SetContentView(ctx context.Context, in *SetContentViewRequest, opts ...grpc.CallOption) (*SetContentViewResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetContentViewResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_SetContentView_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptBuilderServiceClient) SetDescription(ctx context.Context, in *SetDescriptionRequest, opts ...grpc.CallOption) (*SetDescriptionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDescriptionResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_SetDescription_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptBuilderServiceClient) SetDeviceCredentialAllowed(ctx context.Context, in *SetDeviceCredentialAllowedRequest, opts ...grpc.CallOption) (*SetDeviceCredentialAllowedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDeviceCredentialAllowedResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_SetDeviceCredentialAllowed_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptBuilderServiceClient) SetLogoBitmap(ctx context.Context, in *SetLogoBitmapRequest, opts ...grpc.CallOption) (*SetLogoBitmapResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetLogoBitmapResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_SetLogoBitmap_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptBuilderServiceClient) SetLogoDescription(ctx context.Context, in *SetLogoDescriptionRequest, opts ...grpc.CallOption) (*SetLogoDescriptionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetLogoDescriptionResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_SetLogoDescription_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptBuilderServiceClient) SetLogoRes(ctx context.Context, in *SetLogoResRequest, opts ...grpc.CallOption) (*SetLogoResResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetLogoResResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_SetLogoRes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptBuilderServiceClient) SetNegativeButton(ctx context.Context, in *SetNegativeButtonRequest, opts ...grpc.CallOption) (*SetNegativeButtonResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetNegativeButtonResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_SetNegativeButton_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptBuilderServiceClient) SetSubtitle(ctx context.Context, in *SetSubtitleRequest, opts ...grpc.CallOption) (*SetSubtitleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetSubtitleResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_SetSubtitle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *biometricPromptBuilderServiceClient) SetTitle(ctx context.Context, in *SetTitleRequest, opts ...grpc.CallOption) (*SetTitleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetTitleResponse)
+	err := c.cc.Invoke(ctx, BiometricPromptBuilderService_SetTitle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// BiometricPromptBuilderServiceServer is the server API for BiometricPromptBuilderService service.
+// All implementations must embed UnimplementedBiometricPromptBuilderServiceServer
+// for forward compatibility.
+type BiometricPromptBuilderServiceServer interface {
+	Build(context.Context, *BuildRequest) (*BuildResponse, error)
+	SetAllowedAuthenticators(context.Context, *SetAllowedAuthenticatorsRequest) (*SetAllowedAuthenticatorsResponse, error)
+	SetConfirmationRequired(context.Context, *SetConfirmationRequiredRequest) (*SetConfirmationRequiredResponse, error)
+	SetContentView(context.Context, *SetContentViewRequest) (*SetContentViewResponse, error)
+	SetDescription(context.Context, *SetDescriptionRequest) (*SetDescriptionResponse, error)
+	SetDeviceCredentialAllowed(context.Context, *SetDeviceCredentialAllowedRequest) (*SetDeviceCredentialAllowedResponse, error)
+	SetLogoBitmap(context.Context, *SetLogoBitmapRequest) (*SetLogoBitmapResponse, error)
+	SetLogoDescription(context.Context, *SetLogoDescriptionRequest) (*SetLogoDescriptionResponse, error)
+	SetLogoRes(context.Context, *SetLogoResRequest) (*SetLogoResResponse, error)
+	SetNegativeButton(context.Context, *SetNegativeButtonRequest) (*SetNegativeButtonResponse, error)
+	SetSubtitle(context.Context, *SetSubtitleRequest) (*SetSubtitleResponse, error)
+	SetTitle(context.Context, *SetTitleRequest) (*SetTitleResponse, error)
+	mustEmbedUnimplementedBiometricPromptBuilderServiceServer()
+}
+
+// UnimplementedBiometricPromptBuilderServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedCancellationSignalServiceServer struct{}
+type UnimplementedBiometricPromptBuilderServiceServer struct{}
 
-func (UnimplementedCancellationSignalServiceServer) Cancel(context.Context, *CancelRequest) (*CancelResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Cancel not implemented")
+func (UnimplementedBiometricPromptBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
 }
-func (UnimplementedCancellationSignalServiceServer) mustEmbedUnimplementedCancellationSignalServiceServer() {
+func (UnimplementedBiometricPromptBuilderServiceServer) SetAllowedAuthenticators(context.Context, *SetAllowedAuthenticatorsRequest) (*SetAllowedAuthenticatorsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAllowedAuthenticators not implemented")
 }
-func (UnimplementedCancellationSignalServiceServer) testEmbeddedByValue() {}
+func (UnimplementedBiometricPromptBuilderServiceServer) SetConfirmationRequired(context.Context, *SetConfirmationRequiredRequest) (*SetConfirmationRequiredResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetConfirmationRequired not implemented")
+}
+func (UnimplementedBiometricPromptBuilderServiceServer) SetContentView(context.Context, *SetContentViewRequest) (*SetContentViewResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetContentView not implemented")
+}
+func (UnimplementedBiometricPromptBuilderServiceServer) SetDescription(context.Context, *SetDescriptionRequest) (*SetDescriptionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetDescription not implemented")
+}
+func (UnimplementedBiometricPromptBuilderServiceServer) SetDeviceCredentialAllowed(context.Context, *SetDeviceCredentialAllowedRequest) (*SetDeviceCredentialAllowedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetDeviceCredentialAllowed not implemented")
+}
+func (UnimplementedBiometricPromptBuilderServiceServer) SetLogoBitmap(context.Context, *SetLogoBitmapRequest) (*SetLogoBitmapResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetLogoBitmap not implemented")
+}
+func (UnimplementedBiometricPromptBuilderServiceServer) SetLogoDescription(context.Context, *SetLogoDescriptionRequest) (*SetLogoDescriptionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetLogoDescription not implemented")
+}
+func (UnimplementedBiometricPromptBuilderServiceServer) SetLogoRes(context.Context, *SetLogoResRequest) (*SetLogoResResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetLogoRes not implemented")
+}
+func (UnimplementedBiometricPromptBuilderServiceServer) SetNegativeButton(context.Context, *SetNegativeButtonRequest) (*SetNegativeButtonResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetNegativeButton not implemented")
+}
+func (UnimplementedBiometricPromptBuilderServiceServer) SetSubtitle(context.Context, *SetSubtitleRequest) (*SetSubtitleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetSubtitle not implemented")
+}
+func (UnimplementedBiometricPromptBuilderServiceServer) SetTitle(context.Context, *SetTitleRequest) (*SetTitleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetTitle not implemented")
+}
+func (UnimplementedBiometricPromptBuilderServiceServer) mustEmbedUnimplementedBiometricPromptBuilderServiceServer() {
+}
+func (UnimplementedBiometricPromptBuilderServiceServer) testEmbeddedByValue() {}
 
-// UnsafeCancellationSignalServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to CancellationSignalServiceServer will
+// UnsafeBiometricPromptBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BiometricPromptBuilderServiceServer will
 // result in compilation errors.
-type UnsafeCancellationSignalServiceServer interface {
-	mustEmbedUnimplementedCancellationSignalServiceServer()
+type UnsafeBiometricPromptBuilderServiceServer interface {
+	mustEmbedUnimplementedBiometricPromptBuilderServiceServer()
 }
 
-func RegisterCancellationSignalServiceServer(s grpc.ServiceRegistrar, srv CancellationSignalServiceServer) {
-	// If the following call panics, it indicates UnimplementedCancellationSignalServiceServer was
+func RegisterBiometricPromptBuilderServiceServer(s grpc.ServiceRegistrar, srv BiometricPromptBuilderServiceServer) {
+	// If the following call panics, it indicates UnimplementedBiometricPromptBuilderServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&CancellationSignalService_ServiceDesc, srv)
+	s.RegisterService(&BiometricPromptBuilderService_ServiceDesc, srv)
 }
 
-func _CancellationSignalService_Cancel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CancelRequest)
+func _BiometricPromptBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CancellationSignalServiceServer).Cancel(ctx, in)
+		return srv.(BiometricPromptBuilderServiceServer).Build(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: CancellationSignalService_Cancel_FullMethodName,
+		FullMethod: BiometricPromptBuilderService_Build_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CancellationSignalServiceServer).Cancel(ctx, req.(*CancelRequest))
+		return srv.(BiometricPromptBuilderServiceServer).Build(ctx, req.(*BuildRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// CancellationSignalService_ServiceDesc is the grpc.ServiceDesc for CancellationSignalService service.
+func _BiometricPromptBuilderService_SetAllowedAuthenticators_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAllowedAuthenticatorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptBuilderServiceServer).SetAllowedAuthenticators(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptBuilderService_SetAllowedAuthenticators_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptBuilderServiceServer).SetAllowedAuthenticators(ctx, req.(*SetAllowedAuthenticatorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptBuilderService_SetConfirmationRequired_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetConfirmationRequiredRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptBuilderServiceServer).SetConfirmationRequired(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptBuilderService_SetConfirmationRequired_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptBuilderServiceServer).SetConfirmationRequired(ctx, req.(*SetConfirmationRequiredRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptBuilderService_SetContentView_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetContentViewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptBuilderServiceServer).SetContentView(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptBuilderService_SetContentView_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptBuilderServiceServer).SetContentView(ctx, req.(*SetContentViewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptBuilderService_SetDescription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDescriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptBuilderServiceServer).SetDescription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptBuilderService_SetDescription_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptBuilderServiceServer).SetDescription(ctx, req.(*SetDescriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptBuilderService_SetDeviceCredentialAllowed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDeviceCredentialAllowedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptBuilderServiceServer).SetDeviceCredentialAllowed(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptBuilderService_SetDeviceCredentialAllowed_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptBuilderServiceServer).SetDeviceCredentialAllowed(ctx, req.(*SetDeviceCredentialAllowedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptBuilderService_SetLogoBitmap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetLogoBitmapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptBuilderServiceServer).SetLogoBitmap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptBuilderService_SetLogoBitmap_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptBuilderServiceServer).SetLogoBitmap(ctx, req.(*SetLogoBitmapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptBuilderService_SetLogoDescription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetLogoDescriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptBuilderServiceServer).SetLogoDescription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptBuilderService_SetLogoDescription_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptBuilderServiceServer).SetLogoDescription(ctx, req.(*SetLogoDescriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptBuilderService_SetLogoRes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetLogoResRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptBuilderServiceServer).SetLogoRes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptBuilderService_SetLogoRes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptBuilderServiceServer).SetLogoRes(ctx, req.(*SetLogoResRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptBuilderService_SetNegativeButton_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetNegativeButtonRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptBuilderServiceServer).SetNegativeButton(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptBuilderService_SetNegativeButton_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptBuilderServiceServer).SetNegativeButton(ctx, req.(*SetNegativeButtonRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptBuilderService_SetSubtitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetSubtitleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptBuilderServiceServer).SetSubtitle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptBuilderService_SetSubtitle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptBuilderServiceServer).SetSubtitle(ctx, req.(*SetSubtitleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BiometricPromptBuilderService_SetTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTitleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BiometricPromptBuilderServiceServer).SetTitle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BiometricPromptBuilderService_SetTitle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BiometricPromptBuilderServiceServer).SetTitle(ctx, req.(*SetTitleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// BiometricPromptBuilderService_ServiceDesc is the grpc.ServiceDesc for BiometricPromptBuilderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var CancellationSignalService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "biometric.CancellationSignalService",
-	HandlerType: (*CancellationSignalServiceServer)(nil),
+var BiometricPromptBuilderService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "biometric.BiometricPromptBuilderService",
+	HandlerType: (*BiometricPromptBuilderServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Cancel",
-			Handler:    _CancellationSignalService_Cancel_Handler,
+			MethodName: "Build",
+			Handler:    _BiometricPromptBuilderService_Build_Handler,
+		},
+		{
+			MethodName: "SetAllowedAuthenticators",
+			Handler:    _BiometricPromptBuilderService_SetAllowedAuthenticators_Handler,
+		},
+		{
+			MethodName: "SetConfirmationRequired",
+			Handler:    _BiometricPromptBuilderService_SetConfirmationRequired_Handler,
+		},
+		{
+			MethodName: "SetContentView",
+			Handler:    _BiometricPromptBuilderService_SetContentView_Handler,
+		},
+		{
+			MethodName: "SetDescription",
+			Handler:    _BiometricPromptBuilderService_SetDescription_Handler,
+		},
+		{
+			MethodName: "SetDeviceCredentialAllowed",
+			Handler:    _BiometricPromptBuilderService_SetDeviceCredentialAllowed_Handler,
+		},
+		{
+			MethodName: "SetLogoBitmap",
+			Handler:    _BiometricPromptBuilderService_SetLogoBitmap_Handler,
+		},
+		{
+			MethodName: "SetLogoDescription",
+			Handler:    _BiometricPromptBuilderService_SetLogoDescription_Handler,
+		},
+		{
+			MethodName: "SetLogoRes",
+			Handler:    _BiometricPromptBuilderService_SetLogoRes_Handler,
+		},
+		{
+			MethodName: "SetNegativeButton",
+			Handler:    _BiometricPromptBuilderService_SetNegativeButton_Handler,
+		},
+		{
+			MethodName: "SetSubtitle",
+			Handler:    _BiometricPromptBuilderService_SetSubtitle_Handler,
+		},
+		{
+			MethodName: "SetTitle",
+			Handler:    _BiometricPromptBuilderService_SetTitle_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/biometric/biometric.proto",
-}
-
-const (
-	AuthenticationCallbackService_SubscribeAuthenticationCallback_FullMethodName = "/biometric.AuthenticationCallbackService/SubscribeAuthenticationCallback"
-)
-
-// AuthenticationCallbackServiceClient is the client API for AuthenticationCallbackService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type AuthenticationCallbackServiceClient interface {
-	// Server-streaming events from android.hardware.biometrics.BiometricPrompt$AuthenticationCallback
-	SubscribeAuthenticationCallback(ctx context.Context, in *SubscribeAuthenticationCallbackRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[AuthenticationCallbackEvent], error)
-}
-
-type authenticationCallbackServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewAuthenticationCallbackServiceClient(cc grpc.ClientConnInterface) AuthenticationCallbackServiceClient {
-	return &authenticationCallbackServiceClient{cc}
-}
-
-func (c *authenticationCallbackServiceClient) SubscribeAuthenticationCallback(ctx context.Context, in *SubscribeAuthenticationCallbackRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[AuthenticationCallbackEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &AuthenticationCallbackService_ServiceDesc.Streams[0], AuthenticationCallbackService_SubscribeAuthenticationCallback_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[SubscribeAuthenticationCallbackRequest, AuthenticationCallbackEvent]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AuthenticationCallbackService_SubscribeAuthenticationCallbackClient = grpc.ServerStreamingClient[AuthenticationCallbackEvent]
-
-// AuthenticationCallbackServiceServer is the server API for AuthenticationCallbackService service.
-// All implementations must embed UnimplementedAuthenticationCallbackServiceServer
-// for forward compatibility.
-type AuthenticationCallbackServiceServer interface {
-	// Server-streaming events from android.hardware.biometrics.BiometricPrompt$AuthenticationCallback
-	SubscribeAuthenticationCallback(*SubscribeAuthenticationCallbackRequest, grpc.ServerStreamingServer[AuthenticationCallbackEvent]) error
-	mustEmbedUnimplementedAuthenticationCallbackServiceServer()
-}
-
-// UnimplementedAuthenticationCallbackServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedAuthenticationCallbackServiceServer struct{}
-
-func (UnimplementedAuthenticationCallbackServiceServer) SubscribeAuthenticationCallback(*SubscribeAuthenticationCallbackRequest, grpc.ServerStreamingServer[AuthenticationCallbackEvent]) error {
-	return status.Error(codes.Unimplemented, "method SubscribeAuthenticationCallback not implemented")
-}
-func (UnimplementedAuthenticationCallbackServiceServer) mustEmbedUnimplementedAuthenticationCallbackServiceServer() {
-}
-func (UnimplementedAuthenticationCallbackServiceServer) testEmbeddedByValue() {}
-
-// UnsafeAuthenticationCallbackServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to AuthenticationCallbackServiceServer will
-// result in compilation errors.
-type UnsafeAuthenticationCallbackServiceServer interface {
-	mustEmbedUnimplementedAuthenticationCallbackServiceServer()
-}
-
-func RegisterAuthenticationCallbackServiceServer(s grpc.ServiceRegistrar, srv AuthenticationCallbackServiceServer) {
-	// If the following call panics, it indicates UnimplementedAuthenticationCallbackServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&AuthenticationCallbackService_ServiceDesc, srv)
-}
-
-func _AuthenticationCallbackService_SubscribeAuthenticationCallback_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeAuthenticationCallbackRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(AuthenticationCallbackServiceServer).SubscribeAuthenticationCallback(m, &grpc.GenericServerStream[SubscribeAuthenticationCallbackRequest, AuthenticationCallbackEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AuthenticationCallbackService_SubscribeAuthenticationCallbackServer = grpc.ServerStreamingServer[AuthenticationCallbackEvent]
-
-// AuthenticationCallbackService_ServiceDesc is the grpc.ServiceDesc for AuthenticationCallbackService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var AuthenticationCallbackService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "biometric.AuthenticationCallbackService",
-	HandlerType: (*AuthenticationCallbackServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "SubscribeAuthenticationCallback",
-			Handler:       _AuthenticationCallbackService_SubscribeAuthenticationCallback_Handler,
-			ServerStreams: true,
-		},
-	},
-	Metadata: "proto/biometric/biometric.proto",
-}
-
-const (
-	OnClickListenerService_SubscribeOnClickListener_FullMethodName = "/biometric.OnClickListenerService/SubscribeOnClickListener"
-)
-
-// OnClickListenerServiceClient is the client API for OnClickListenerService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type OnClickListenerServiceClient interface {
-	// Server-streaming events from android.content.DialogInterface$OnClickListener
-	SubscribeOnClickListener(ctx context.Context, in *SubscribeOnClickListenerRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[OnClickListenerEvent], error)
-}
-
-type onClickListenerServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewOnClickListenerServiceClient(cc grpc.ClientConnInterface) OnClickListenerServiceClient {
-	return &onClickListenerServiceClient{cc}
-}
-
-func (c *onClickListenerServiceClient) SubscribeOnClickListener(ctx context.Context, in *SubscribeOnClickListenerRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[OnClickListenerEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &OnClickListenerService_ServiceDesc.Streams[0], OnClickListenerService_SubscribeOnClickListener_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[SubscribeOnClickListenerRequest, OnClickListenerEvent]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type OnClickListenerService_SubscribeOnClickListenerClient = grpc.ServerStreamingClient[OnClickListenerEvent]
-
-// OnClickListenerServiceServer is the server API for OnClickListenerService service.
-// All implementations must embed UnimplementedOnClickListenerServiceServer
-// for forward compatibility.
-type OnClickListenerServiceServer interface {
-	// Server-streaming events from android.content.DialogInterface$OnClickListener
-	SubscribeOnClickListener(*SubscribeOnClickListenerRequest, grpc.ServerStreamingServer[OnClickListenerEvent]) error
-	mustEmbedUnimplementedOnClickListenerServiceServer()
-}
-
-// UnimplementedOnClickListenerServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedOnClickListenerServiceServer struct{}
-
-func (UnimplementedOnClickListenerServiceServer) SubscribeOnClickListener(*SubscribeOnClickListenerRequest, grpc.ServerStreamingServer[OnClickListenerEvent]) error {
-	return status.Error(codes.Unimplemented, "method SubscribeOnClickListener not implemented")
-}
-func (UnimplementedOnClickListenerServiceServer) mustEmbedUnimplementedOnClickListenerServiceServer() {
-}
-func (UnimplementedOnClickListenerServiceServer) testEmbeddedByValue() {}
-
-// UnsafeOnClickListenerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to OnClickListenerServiceServer will
-// result in compilation errors.
-type UnsafeOnClickListenerServiceServer interface {
-	mustEmbedUnimplementedOnClickListenerServiceServer()
-}
-
-func RegisterOnClickListenerServiceServer(s grpc.ServiceRegistrar, srv OnClickListenerServiceServer) {
-	// If the following call panics, it indicates UnimplementedOnClickListenerServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&OnClickListenerService_ServiceDesc, srv)
-}
-
-func _OnClickListenerService_SubscribeOnClickListener_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeOnClickListenerRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(OnClickListenerServiceServer).SubscribeOnClickListener(m, &grpc.GenericServerStream[SubscribeOnClickListenerRequest, OnClickListenerEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type OnClickListenerService_SubscribeOnClickListenerServer = grpc.ServerStreamingServer[OnClickListenerEvent]
-
-// OnClickListenerService_ServiceDesc is the grpc.ServiceDesc for OnClickListenerService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var OnClickListenerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "biometric.OnClickListenerService",
-	HandlerType: (*OnClickListenerServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "SubscribeOnClickListener",
-			Handler:       _OnClickListenerService_SubscribeOnClickListener_Handler,
-			ServerStreams: true,
-		},
-	},
 	Metadata: "proto/biometric/biometric.proto",
 }

@@ -6,80 +6,6 @@ package alarm;
 
 option go_package = "github.com/xaionaro-go/jni/proto/alarm";
 
-message AlarmClockInfo {
-  int64 trigger_time = 1;
-  int64 show_intent = 2;
-}
-
-message SetRawRequest {
-  int32 type_ = 1;
-  int64 trigger_at_millis = 2;
-  int64 operation = 3;
-}
-
-message SetRawResponse {
-}
-
-message SetExactRawRequest {
-  int32 type_ = 1;
-  int64 trigger_at_millis = 2;
-  int64 operation = 3;
-}
-
-message SetExactRawResponse {
-}
-
-message SetExactAndAllowWhileIdleRawRequest {
-  int32 type_ = 1;
-  int64 trigger_at_millis = 2;
-  int64 operation = 3;
-}
-
-message SetExactAndAllowWhileIdleRawResponse {
-}
-
-message SetRepeatingRawRequest {
-  int32 type_ = 1;
-  int64 trigger_at_millis = 2;
-  int64 interval_millis = 3;
-  int64 operation = 4;
-}
-
-message SetRepeatingRawResponse {
-}
-
-message SetWindowRawRequest {
-  int32 type_ = 1;
-  int64 window_start_millis = 2;
-  int64 window_length_millis = 3;
-  int64 operation = 4;
-}
-
-message SetWindowRawResponse {
-}
-
-message SetAlarmClockRawRequest {
-  int64 info = 1;
-  int64 operation = 2;
-}
-
-message SetAlarmClockRawResponse {
-}
-
-message CancelRequest {
-  int64 operation = 1;
-}
-
-message CancelResponse {
-}
-
-message GetNextAlarmClockRawRequest {
-}
-
-message GetNextAlarmClockRawResponse {
-  AlarmClockInfo result = 1;
-}
-
 message CanScheduleExactAlarmsRequest {
 }
 
@@ -87,14 +13,184 @@ message CanScheduleExactAlarmsResponse {
   bool result = 1;
 }
 
-service ManagerService {
-  rpc SetRaw (SetRawRequest) returns (SetRawResponse);
-  rpc SetExactRaw (SetExactRawRequest) returns (SetExactRawResponse);
-  rpc SetExactAndAllowWhileIdleRaw (SetExactAndAllowWhileIdleRawRequest) returns (SetExactAndAllowWhileIdleRawResponse);
-  rpc SetRepeatingRaw (SetRepeatingRawRequest) returns (SetRepeatingRawResponse);
-  rpc SetWindowRaw (SetWindowRawRequest) returns (SetWindowRawResponse);
-  rpc SetAlarmClockRaw (SetAlarmClockRawRequest) returns (SetAlarmClockRawResponse);
-  rpc Cancel (CancelRequest) returns (CancelResponse);
-  rpc GetNextAlarmClockRaw (GetNextAlarmClockRawRequest) returns (GetNextAlarmClockRawResponse);
+message Cancel1Request {
+  int64 arg0 = 1;
+}
+
+message Cancel1Response {
+}
+
+message Cancel1_1Request {
+  int64 arg0 = 1;
+}
+
+message Cancel1_1Response {
+}
+
+message CancelAllRequest {
+}
+
+message CancelAllResponse {
+}
+
+message GetNextAlarmClockRequest {
+}
+
+message GetNextAlarmClockResponse {
+  int64 result = 1;
+}
+
+message SetRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message SetResponse {
+}
+
+message SetAlarmClockRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message SetAlarmClockResponse {
+}
+
+message SetAndAllowWhileIdleRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message SetAndAllowWhileIdleResponse {
+}
+
+message SetExactRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message SetExactResponse {
+}
+
+message SetExactAndAllowWhileIdleRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message SetExactAndAllowWhileIdleResponse {
+}
+
+message SetInexactRepeatingRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message SetInexactRepeatingResponse {
+}
+
+message SetRepeatingRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message SetRepeatingResponse {
+}
+
+message SetTimeRequest {
+  int64 arg0 = 1;
+}
+
+message SetTimeResponse {
+}
+
+message SetTimeZoneRequest {
+  string arg0 = 1;
+}
+
+message SetTimeZoneResponse {
+}
+
+message SetWindow4Request {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message SetWindow4Response {
+}
+
+message SetWindow6_1Request {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  string arg3 = 4;
+  int64 arg4 = 5;
+  int64 arg5 = 6;
+}
+
+message SetWindow6_1Response {
+}
+
+message DescribeContentsRequest {
+}
+
+message DescribeContentsResponse {
+  int32 result = 1;
+}
+
+message GetShowIntentRequest {
+}
+
+message GetShowIntentResponse {
+  int64 result = 1;
+}
+
+message GetTriggerTimeRequest {
+}
+
+message GetTriggerTimeResponse {
+  int64 result = 1;
+}
+
+message WriteToParcelRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message WriteToParcelResponse {
+}
+
+service AlarmManagerService {
   rpc CanScheduleExactAlarms (CanScheduleExactAlarmsRequest) returns (CanScheduleExactAlarmsResponse);
+  rpc Cancel1 (Cancel1Request) returns (Cancel1Response);
+  rpc Cancel1_1 (Cancel1_1Request) returns (Cancel1_1Response);
+  rpc CancelAll (CancelAllRequest) returns (CancelAllResponse);
+  rpc GetNextAlarmClock (GetNextAlarmClockRequest) returns (GetNextAlarmClockResponse);
+  rpc Set (SetRequest) returns (SetResponse);
+  rpc SetAlarmClock (SetAlarmClockRequest) returns (SetAlarmClockResponse);
+  rpc SetAndAllowWhileIdle (SetAndAllowWhileIdleRequest) returns (SetAndAllowWhileIdleResponse);
+  rpc SetExact (SetExactRequest) returns (SetExactResponse);
+  rpc SetExactAndAllowWhileIdle (SetExactAndAllowWhileIdleRequest) returns (SetExactAndAllowWhileIdleResponse);
+  rpc SetInexactRepeating (SetInexactRepeatingRequest) returns (SetInexactRepeatingResponse);
+  rpc SetRepeating (SetRepeatingRequest) returns (SetRepeatingResponse);
+  rpc SetTime (SetTimeRequest) returns (SetTimeResponse);
+  rpc SetTimeZone (SetTimeZoneRequest) returns (SetTimeZoneResponse);
+  rpc SetWindow4 (SetWindow4Request) returns (SetWindow4Response);
+  rpc SetWindow6_1 (SetWindow6_1Request) returns (SetWindow6_1Response);
+}
+
+service AlarmManagerAlarmClockInfoService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc GetShowIntent (GetShowIntentRequest) returns (GetShowIntentResponse);
+  rpc GetTriggerTime (GetTriggerTimeRequest) returns (GetTriggerTimeResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
 }

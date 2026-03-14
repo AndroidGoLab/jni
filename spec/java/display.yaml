@@ -1,314 +1,118 @@
 package: display
 go_import: github.com/xaionaro-go/jni/view/display
 classes:
-    - java_class: android.view.Display
-      go_type: display
+    - java_class: android.util.DisplayMetrics
+      go_type: displayMetrics
       methods:
-        - java_method: getAppVsyncOffsetNanos
-          go_name: GetAppVsyncOffsetNanos
-          returns: long
-          error: true
-        - java_method: getCurrentSizeRange
-          go_name: GetCurrentSizeRange
+        - java_method: equals
+          go_name: Equals1
           params:
-            - java_type: android.graphics.Point
+            - java_type: android.util.DisplayMetrics
               go_name: arg0
-            - java_type: android.graphics.Point
-              go_name: arg1
-          returns: void
+          returns: boolean
           error: true
-        - java_method: getCutout
-          go_name: GetCutout
-          returns: android.view.DisplayCutout
+        - java_method: equals
+          go_name: Equals1_1
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
           error: true
-        - java_method: getDeviceProductInfo
-          go_name: GetDeviceProductInfo
-          returns: android.hardware.display.DeviceProductInfo
-          error: true
-        - java_method: getDisplayId
-          go_name: GetDisplayId
+        - java_method: hashCode
+          go_name: HashCode
           returns: int
           error: true
-        - java_method: getFlags
-          go_name: GetFlags
-          returns: int
-          error: true
-        - java_method: getHdrCapabilities
-          go_name: GetHdrCapabilities
-          returns: android.view.Display$HdrCapabilities
-          error: true
-        - java_method: getHdrSdrRatio
-          go_name: GetHdrSdrRatio
-          returns: float
-          error: true
-        - java_method: getHeight
-          go_name: GetHeight
-          returns: int
-          error: true
-        - java_method: getHighestHdrSdrRatio
-          go_name: GetHighestHdrSdrRatio
-          returns: float
-          error: true
-        - java_method: getMetrics
-          go_name: GetMetrics
+        - java_method: setTo
+          go_name: SetTo
           params:
             - java_type: android.util.DisplayMetrics
               go_name: arg0
           returns: void
           error: true
-        - java_method: getMode
-          go_name: GetMode
-          returns: android.view.Display$Mode
-          error: true
-        - java_method: getName
-          go_name: GetName
-          returns: String
-          error: true
-        - java_method: getOrientation
-          go_name: GetOrientation
-          returns: int
-          error: true
-        - java_method: getOverlaySupport
-          go_name: GetOverlaySupport
-          returns: android.hardware.OverlayProperties
-          error: true
-        - java_method: getPixelFormat
-          go_name: GetPixelFormat
-          returns: int
-          error: true
-        - java_method: getPreferredWideGamutColorSpace
-          go_name: GetPreferredWideGamutColorSpace
-          returns: android.graphics.ColorSpace
-          error: true
-        - java_method: getPresentationDeadlineNanos
-          go_name: GetPresentationDeadlineNanos
-          returns: long
-          error: true
-        - java_method: getRealMetrics
-          go_name: GetRealMetrics
-          params:
-            - java_type: android.util.DisplayMetrics
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getRealSize
-          go_name: GetRealSize
-          params:
-            - java_type: android.graphics.Point
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getRectSize
-          go_name: GetRectSize
-          params:
-            - java_type: android.graphics.Rect
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getRefreshRate
-          go_name: GetRefreshRate
-          returns: float
-          error: true
-        - java_method: getRotation
-          go_name: GetRotation
-          returns: int
-          error: true
-        - java_method: getRoundedCorner
-          go_name: GetRoundedCorner
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.view.RoundedCorner
-          error: true
-        - java_method: getShape
-          go_name: GetShape
-          returns: android.view.DisplayShape
-          error: true
-        - java_method: getSize
-          go_name: GetSize
-          params:
-            - java_type: android.graphics.Point
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getState
-          go_name: GetState
-          returns: int
-          error: true
-        - java_method: getSuggestedFrameRate
-          go_name: GetSuggestedFrameRate
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: float
-          error: true
-        - java_method: getSupportedModes
-          go_name: GetSupportedModes
-          returns: android.view.Display$Mode[]
-          error: true
-        - java_method: getSupportedRefreshRates
-          go_name: GetSupportedRefreshRates
-          returns: float[]
-          error: true
-        - java_method: getWidth
-          go_name: GetWidth
-          returns: int
-          error: true
-        - java_method: hasArrSupport
-          go_name: HasArrSupport
-          returns: boolean
-          error: true
-        - java_method: isHdr
-          go_name: IsHdr
-          returns: boolean
-          error: true
-        - java_method: isHdrSdrRatioAvailable
-          go_name: IsHdrSdrRatioAvailable
-          returns: boolean
-          error: true
-        - java_method: isMinimalPostProcessingSupported
-          go_name: IsMinimalPostProcessingSupported
-          returns: boolean
-          error: true
-        - java_method: isValid
-          go_name: IsValid
-          returns: boolean
-          error: true
-        - java_method: isWideColorGamut
-          go_name: IsWideColorGamut
-          returns: boolean
-          error: true
-        - java_method: registerHdrSdrRatioChangedListener
-          go_name: RegisterHdrSdrRatioChangedListener
-          params:
-            - java_type: java.util.concurrent.Executor
-              go_name: arg0
-            - java_type: java.util.function.Consumer<android.view.Display>
-              go_name: arg1
+        - java_method: setToDefaults
+          go_name: SetToDefaults
           returns: void
           error: true
         - java_method: toString
           go_name: ToString
           returns: String
           error: true
-        - java_method: unregisterHdrSdrRatioChangedListener
-          go_name: UnregisterHdrSdrRatioChangedListener
-          params:
-            - java_type: java.util.function.Consumer<android.view.Display>
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.view.WindowManager
-      go_type: windowManager
-      obtain: system_service
-      service_name: window
-      close: true
 constants:
-    - go_name: DefaultDisplay
+    - go_name: Density140
       value: "0"
       go_type: int
-    - go_name: FlagPresentation
+    - go_name: Density180
       value: "0"
       go_type: int
-    - go_name: FlagPrivate
+    - go_name: Density200
       value: "0"
       go_type: int
-    - go_name: FlagRound
+    - go_name: Density220
       value: "0"
       go_type: int
-    - go_name: FlagSecure
+    - go_name: Density260
       value: "0"
       go_type: int
-    - go_name: FlagSupportsProtectedBuffers
+    - go_name: Density280
       value: "0"
       go_type: int
-    - go_name: FrameRateCategoryHigh
+    - go_name: Density300
       value: "0"
       go_type: int
-    - go_name: FrameRateCategoryNormal
+    - go_name: Density340
       value: "0"
       go_type: int
-    - go_name: InvalidDisplay
+    - go_name: Density360
       value: "0"
       go_type: int
-    - go_name: StateDoze
+    - go_name: Density390
       value: "0"
       go_type: int
-    - go_name: StateDozeSuspend
+    - go_name: Density400
       value: "0"
       go_type: int
-    - go_name: StateOff
+    - go_name: Density420
       value: "0"
       go_type: int
-    - go_name: StateOn
+    - go_name: Density440
       value: "0"
       go_type: int
-    - go_name: StateOnSuspend
+    - go_name: Density450
       value: "0"
       go_type: int
-    - go_name: StateUnknown
+    - go_name: Density520
       value: "0"
       go_type: int
-    - go_name: StateVr
+    - go_name: Density560
       value: "0"
       go_type: int
-    - go_name: CompatSmallCoverScreenOptIn
+    - go_name: Density600
       value: "0"
       go_type: int
-    - go_name: PropertyActivityEmbeddingAllowSystemOverride
-      value: '""'
-      go_type: string
-    - go_name: PropertyActivityEmbeddingSplitsEnabled
-      value: '""'
-      go_type: string
-    - go_name: PropertyCameraCompatAllowForceRotation
-      value: '""'
-      go_type: string
-    - go_name: PropertyCameraCompatAllowRefresh
-      value: '""'
-      go_type: string
-    - go_name: PropertyCameraCompatEnableRefreshViaPause
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowDisplayOrientationOverride
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowIgnoringOrientationRequestWhenLoopDetected
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowMinAspectRatioOverride
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowOrientationOverride
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowResizeableActivityOverrides
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowSandboxingViewBoundsApis
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowSmallCoverScreen
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowUserAspectRatioFullscreenOverride
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowUserAspectRatioOverride
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatEnableFakeFocus
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatIgnoreRequestedOrientation
-      value: '""'
-      go_type: string
-    - go_name: PropertySupportsMultiInstanceSystemUi
-      value: '""'
-      go_type: string
-    - go_name: ScreenRecordingStateNotVisible
+    - go_name: DensityDefault
       value: "0"
       go_type: int
-    - go_name: ScreenRecordingStateVisible
+    - go_name: DensityDeviceStable
+      value: "0"
+      go_type: int
+    - go_name: DensityHigh
+      value: "0"
+      go_type: int
+    - go_name: DensityLow
+      value: "0"
+      go_type: int
+    - go_name: DensityMedium
+      value: "0"
+      go_type: int
+    - go_name: DensityTv
+      value: "0"
+      go_type: int
+    - go_name: DensityXhigh
+      value: "0"
+      go_type: int
+    - go_name: DensityXxhigh
+      value: "0"
+      go_type: int
+    - go_name: DensityXxxhigh
       value: "0"
       go_type: int

@@ -21,139 +21,253 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ManagerService_GetLightsRaw_FullMethodName   = "/lights.ManagerService/GetLightsRaw"
-	ManagerService_OpenSessionRaw_FullMethodName = "/lights.ManagerService/OpenSessionRaw"
+	LightStateService_DescribeContents_FullMethodName = "/lights.LightStateService/DescribeContents"
+	LightStateService_GetColor_FullMethodName         = "/lights.LightStateService/GetColor"
+	LightStateService_GetPlayerId_FullMethodName      = "/lights.LightStateService/GetPlayerId"
+	LightStateService_ToString_FullMethodName         = "/lights.LightStateService/ToString"
+	LightStateService_WriteToParcel_FullMethodName    = "/lights.LightStateService/WriteToParcel"
 )
 
-// ManagerServiceClient is the client API for ManagerService service.
+// LightStateServiceClient is the client API for LightStateService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ManagerServiceClient interface {
-	GetLightsRaw(ctx context.Context, in *GetLightsRawRequest, opts ...grpc.CallOption) (*GetLightsRawResponse, error)
-	OpenSessionRaw(ctx context.Context, in *OpenSessionRawRequest, opts ...grpc.CallOption) (*OpenSessionRawResponse, error)
+type LightStateServiceClient interface {
+	DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error)
+	GetColor(ctx context.Context, in *GetColorRequest, opts ...grpc.CallOption) (*GetColorResponse, error)
+	GetPlayerId(ctx context.Context, in *GetPlayerIdRequest, opts ...grpc.CallOption) (*GetPlayerIdResponse, error)
+	ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error)
+	WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error)
 }
 
-type managerServiceClient struct {
+type lightStateServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewManagerServiceClient(cc grpc.ClientConnInterface) ManagerServiceClient {
-	return &managerServiceClient{cc}
+func NewLightStateServiceClient(cc grpc.ClientConnInterface) LightStateServiceClient {
+	return &lightStateServiceClient{cc}
 }
 
-func (c *managerServiceClient) GetLightsRaw(ctx context.Context, in *GetLightsRawRequest, opts ...grpc.CallOption) (*GetLightsRawResponse, error) {
+func (c *lightStateServiceClient) DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetLightsRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_GetLightsRaw_FullMethodName, in, out, cOpts...)
+	out := new(DescribeContentsResponse)
+	err := c.cc.Invoke(ctx, LightStateService_DescribeContents_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) OpenSessionRaw(ctx context.Context, in *OpenSessionRawRequest, opts ...grpc.CallOption) (*OpenSessionRawResponse, error) {
+func (c *lightStateServiceClient) GetColor(ctx context.Context, in *GetColorRequest, opts ...grpc.CallOption) (*GetColorResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(OpenSessionRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_OpenSessionRaw_FullMethodName, in, out, cOpts...)
+	out := new(GetColorResponse)
+	err := c.cc.Invoke(ctx, LightStateService_GetColor_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ManagerServiceServer is the server API for ManagerService service.
-// All implementations must embed UnimplementedManagerServiceServer
+func (c *lightStateServiceClient) GetPlayerId(ctx context.Context, in *GetPlayerIdRequest, opts ...grpc.CallOption) (*GetPlayerIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPlayerIdResponse)
+	err := c.cc.Invoke(ctx, LightStateService_GetPlayerId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lightStateServiceClient) ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ToStringResponse)
+	err := c.cc.Invoke(ctx, LightStateService_ToString_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lightStateServiceClient) WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteToParcelResponse)
+	err := c.cc.Invoke(ctx, LightStateService_WriteToParcel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// LightStateServiceServer is the server API for LightStateService service.
+// All implementations must embed UnimplementedLightStateServiceServer
 // for forward compatibility.
-type ManagerServiceServer interface {
-	GetLightsRaw(context.Context, *GetLightsRawRequest) (*GetLightsRawResponse, error)
-	OpenSessionRaw(context.Context, *OpenSessionRawRequest) (*OpenSessionRawResponse, error)
-	mustEmbedUnimplementedManagerServiceServer()
+type LightStateServiceServer interface {
+	DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error)
+	GetColor(context.Context, *GetColorRequest) (*GetColorResponse, error)
+	GetPlayerId(context.Context, *GetPlayerIdRequest) (*GetPlayerIdResponse, error)
+	ToString(context.Context, *ToStringRequest) (*ToStringResponse, error)
+	WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error)
+	mustEmbedUnimplementedLightStateServiceServer()
 }
 
-// UnimplementedManagerServiceServer must be embedded to have
+// UnimplementedLightStateServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedManagerServiceServer struct{}
+type UnimplementedLightStateServiceServer struct{}
 
-func (UnimplementedManagerServiceServer) GetLightsRaw(context.Context, *GetLightsRawRequest) (*GetLightsRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetLightsRaw not implemented")
+func (UnimplementedLightStateServiceServer) DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DescribeContents not implemented")
 }
-func (UnimplementedManagerServiceServer) OpenSessionRaw(context.Context, *OpenSessionRawRequest) (*OpenSessionRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method OpenSessionRaw not implemented")
+func (UnimplementedLightStateServiceServer) GetColor(context.Context, *GetColorRequest) (*GetColorResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetColor not implemented")
 }
-func (UnimplementedManagerServiceServer) mustEmbedUnimplementedManagerServiceServer() {}
-func (UnimplementedManagerServiceServer) testEmbeddedByValue()                        {}
+func (UnimplementedLightStateServiceServer) GetPlayerId(context.Context, *GetPlayerIdRequest) (*GetPlayerIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPlayerId not implemented")
+}
+func (UnimplementedLightStateServiceServer) ToString(context.Context, *ToStringRequest) (*ToStringResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ToString not implemented")
+}
+func (UnimplementedLightStateServiceServer) WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteToParcel not implemented")
+}
+func (UnimplementedLightStateServiceServer) mustEmbedUnimplementedLightStateServiceServer() {}
+func (UnimplementedLightStateServiceServer) testEmbeddedByValue()                           {}
 
-// UnsafeManagerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ManagerServiceServer will
+// UnsafeLightStateServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to LightStateServiceServer will
 // result in compilation errors.
-type UnsafeManagerServiceServer interface {
-	mustEmbedUnimplementedManagerServiceServer()
+type UnsafeLightStateServiceServer interface {
+	mustEmbedUnimplementedLightStateServiceServer()
 }
 
-func RegisterManagerServiceServer(s grpc.ServiceRegistrar, srv ManagerServiceServer) {
-	// If the following call panics, it indicates UnimplementedManagerServiceServer was
+func RegisterLightStateServiceServer(s grpc.ServiceRegistrar, srv LightStateServiceServer) {
+	// If the following call panics, it indicates UnimplementedLightStateServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ManagerService_ServiceDesc, srv)
+	s.RegisterService(&LightStateService_ServiceDesc, srv)
 }
 
-func _ManagerService_GetLightsRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetLightsRawRequest)
+func _LightStateService_DescribeContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeContentsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetLightsRaw(ctx, in)
+		return srv.(LightStateServiceServer).DescribeContents(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_GetLightsRaw_FullMethodName,
+		FullMethod: LightStateService_DescribeContents_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetLightsRaw(ctx, req.(*GetLightsRawRequest))
+		return srv.(LightStateServiceServer).DescribeContents(ctx, req.(*DescribeContentsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_OpenSessionRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OpenSessionRawRequest)
+func _LightStateService_GetColor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetColorRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).OpenSessionRaw(ctx, in)
+		return srv.(LightStateServiceServer).GetColor(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_OpenSessionRaw_FullMethodName,
+		FullMethod: LightStateService_GetColor_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).OpenSessionRaw(ctx, req.(*OpenSessionRawRequest))
+		return srv.(LightStateServiceServer).GetColor(ctx, req.(*GetColorRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ManagerService_ServiceDesc is the grpc.ServiceDesc for ManagerService service.
+func _LightStateService_GetPlayerId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPlayerIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LightStateServiceServer).GetPlayerId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LightStateService_GetPlayerId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LightStateServiceServer).GetPlayerId(ctx, req.(*GetPlayerIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LightStateService_ToString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToStringRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LightStateServiceServer).ToString(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LightStateService_ToString_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LightStateServiceServer).ToString(ctx, req.(*ToStringRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LightStateService_WriteToParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteToParcelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LightStateServiceServer).WriteToParcel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LightStateService_WriteToParcel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LightStateServiceServer).WriteToParcel(ctx, req.(*WriteToParcelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// LightStateService_ServiceDesc is the grpc.ServiceDesc for LightStateService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ManagerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "lights.ManagerService",
-	HandlerType: (*ManagerServiceServer)(nil),
+var LightStateService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "lights.LightStateService",
+	HandlerType: (*LightStateServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetLightsRaw",
-			Handler:    _ManagerService_GetLightsRaw_Handler,
+			MethodName: "DescribeContents",
+			Handler:    _LightStateService_DescribeContents_Handler,
 		},
 		{
-			MethodName: "OpenSessionRaw",
-			Handler:    _ManagerService_OpenSessionRaw_Handler,
+			MethodName: "GetColor",
+			Handler:    _LightStateService_GetColor_Handler,
+		},
+		{
+			MethodName: "GetPlayerId",
+			Handler:    _LightStateService_GetPlayerId_Handler,
+		},
+		{
+			MethodName: "ToString",
+			Handler:    _LightStateService_ToString_Handler,
+		},
+		{
+			MethodName: "WriteToParcel",
+			Handler:    _LightStateService_WriteToParcel_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -161,18 +275,18 @@ var ManagerService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	LightStateBuilderService_Build_FullMethodName       = "/lights.LightStateBuilderService/Build"
 	LightStateBuilderService_SetColor_FullMethodName    = "/lights.LightStateBuilderService/SetColor"
 	LightStateBuilderService_SetPlayerId_FullMethodName = "/lights.LightStateBuilderService/SetPlayerId"
-	LightStateBuilderService_Build_FullMethodName       = "/lights.LightStateBuilderService/Build"
 )
 
 // LightStateBuilderServiceClient is the client API for LightStateBuilderService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LightStateBuilderServiceClient interface {
+	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
 	SetColor(ctx context.Context, in *SetColorRequest, opts ...grpc.CallOption) (*SetColorResponse, error)
 	SetPlayerId(ctx context.Context, in *SetPlayerIdRequest, opts ...grpc.CallOption) (*SetPlayerIdResponse, error)
-	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
 }
 
 type lightStateBuilderServiceClient struct {
@@ -181,6 +295,16 @@ type lightStateBuilderServiceClient struct {
 
 func NewLightStateBuilderServiceClient(cc grpc.ClientConnInterface) LightStateBuilderServiceClient {
 	return &lightStateBuilderServiceClient{cc}
+}
+
+func (c *lightStateBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuildResponse)
+	err := c.cc.Invoke(ctx, LightStateBuilderService_Build_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *lightStateBuilderServiceClient) SetColor(ctx context.Context, in *SetColorRequest, opts ...grpc.CallOption) (*SetColorResponse, error) {
@@ -203,23 +327,13 @@ func (c *lightStateBuilderServiceClient) SetPlayerId(ctx context.Context, in *Se
 	return out, nil
 }
 
-func (c *lightStateBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BuildResponse)
-	err := c.cc.Invoke(ctx, LightStateBuilderService_Build_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // LightStateBuilderServiceServer is the server API for LightStateBuilderService service.
 // All implementations must embed UnimplementedLightStateBuilderServiceServer
 // for forward compatibility.
 type LightStateBuilderServiceServer interface {
+	Build(context.Context, *BuildRequest) (*BuildResponse, error)
 	SetColor(context.Context, *SetColorRequest) (*SetColorResponse, error)
 	SetPlayerId(context.Context, *SetPlayerIdRequest) (*SetPlayerIdResponse, error)
-	Build(context.Context, *BuildRequest) (*BuildResponse, error)
 	mustEmbedUnimplementedLightStateBuilderServiceServer()
 }
 
@@ -230,14 +344,14 @@ type LightStateBuilderServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedLightStateBuilderServiceServer struct{}
 
+func (UnimplementedLightStateBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
+}
 func (UnimplementedLightStateBuilderServiceServer) SetColor(context.Context, *SetColorRequest) (*SetColorResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetColor not implemented")
 }
 func (UnimplementedLightStateBuilderServiceServer) SetPlayerId(context.Context, *SetPlayerIdRequest) (*SetPlayerIdResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetPlayerId not implemented")
-}
-func (UnimplementedLightStateBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
 }
 func (UnimplementedLightStateBuilderServiceServer) mustEmbedUnimplementedLightStateBuilderServiceServer() {
 }
@@ -259,6 +373,24 @@ func RegisterLightStateBuilderServiceServer(s grpc.ServiceRegistrar, srv LightSt
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&LightStateBuilderService_ServiceDesc, srv)
+}
+
+func _LightStateBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LightStateBuilderServiceServer).Build(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LightStateBuilderService_Build_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LightStateBuilderServiceServer).Build(ctx, req.(*BuildRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _LightStateBuilderService_SetColor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -297,24 +429,6 @@ func _LightStateBuilderService_SetPlayerId_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
-func _LightStateBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BuildRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LightStateBuilderServiceServer).Build(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: LightStateBuilderService_Build_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LightStateBuilderServiceServer).Build(ctx, req.(*BuildRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // LightStateBuilderService_ServiceDesc is the grpc.ServiceDesc for LightStateBuilderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -323,335 +437,16 @@ var LightStateBuilderService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*LightStateBuilderServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "Build",
+			Handler:    _LightStateBuilderService_Build_Handler,
+		},
+		{
 			MethodName: "SetColor",
 			Handler:    _LightStateBuilderService_SetColor_Handler,
 		},
 		{
 			MethodName: "SetPlayerId",
 			Handler:    _LightStateBuilderService_SetPlayerId_Handler,
-		},
-		{
-			MethodName: "Build",
-			Handler:    _LightStateBuilderService_Build_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/lights/lights.proto",
-}
-
-const (
-	SessionService_RequestLightsRaw_FullMethodName = "/lights.SessionService/RequestLightsRaw"
-	SessionService_CloseRaw_FullMethodName         = "/lights.SessionService/CloseRaw"
-)
-
-// SessionServiceClient is the client API for SessionService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type SessionServiceClient interface {
-	RequestLightsRaw(ctx context.Context, in *RequestLightsRawRequest, opts ...grpc.CallOption) (*RequestLightsRawResponse, error)
-	CloseRaw(ctx context.Context, in *CloseRawRequest, opts ...grpc.CallOption) (*CloseRawResponse, error)
-}
-
-type sessionServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewSessionServiceClient(cc grpc.ClientConnInterface) SessionServiceClient {
-	return &sessionServiceClient{cc}
-}
-
-func (c *sessionServiceClient) RequestLightsRaw(ctx context.Context, in *RequestLightsRawRequest, opts ...grpc.CallOption) (*RequestLightsRawResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RequestLightsRawResponse)
-	err := c.cc.Invoke(ctx, SessionService_RequestLightsRaw_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *sessionServiceClient) CloseRaw(ctx context.Context, in *CloseRawRequest, opts ...grpc.CallOption) (*CloseRawResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CloseRawResponse)
-	err := c.cc.Invoke(ctx, SessionService_CloseRaw_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// SessionServiceServer is the server API for SessionService service.
-// All implementations must embed UnimplementedSessionServiceServer
-// for forward compatibility.
-type SessionServiceServer interface {
-	RequestLightsRaw(context.Context, *RequestLightsRawRequest) (*RequestLightsRawResponse, error)
-	CloseRaw(context.Context, *CloseRawRequest) (*CloseRawResponse, error)
-	mustEmbedUnimplementedSessionServiceServer()
-}
-
-// UnimplementedSessionServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedSessionServiceServer struct{}
-
-func (UnimplementedSessionServiceServer) RequestLightsRaw(context.Context, *RequestLightsRawRequest) (*RequestLightsRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RequestLightsRaw not implemented")
-}
-func (UnimplementedSessionServiceServer) CloseRaw(context.Context, *CloseRawRequest) (*CloseRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CloseRaw not implemented")
-}
-func (UnimplementedSessionServiceServer) mustEmbedUnimplementedSessionServiceServer() {}
-func (UnimplementedSessionServiceServer) testEmbeddedByValue()                        {}
-
-// UnsafeSessionServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to SessionServiceServer will
-// result in compilation errors.
-type UnsafeSessionServiceServer interface {
-	mustEmbedUnimplementedSessionServiceServer()
-}
-
-func RegisterSessionServiceServer(s grpc.ServiceRegistrar, srv SessionServiceServer) {
-	// If the following call panics, it indicates UnimplementedSessionServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&SessionService_ServiceDesc, srv)
-}
-
-func _SessionService_RequestLightsRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RequestLightsRawRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SessionServiceServer).RequestLightsRaw(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SessionService_RequestLightsRaw_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SessionServiceServer).RequestLightsRaw(ctx, req.(*RequestLightsRawRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SessionService_CloseRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CloseRawRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SessionServiceServer).CloseRaw(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SessionService_CloseRaw_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SessionServiceServer).CloseRaw(ctx, req.(*CloseRawRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// SessionService_ServiceDesc is the grpc.ServiceDesc for SessionService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var SessionService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "lights.SessionService",
-	HandlerType: (*SessionServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "RequestLightsRaw",
-			Handler:    _SessionService_RequestLightsRaw_Handler,
-		},
-		{
-			MethodName: "CloseRaw",
-			Handler:    _SessionService_CloseRaw_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/lights/lights.proto",
-}
-
-const (
-	LightsRequestBuilderService_AddLight_FullMethodName   = "/lights.LightsRequestBuilderService/AddLight"
-	LightsRequestBuilderService_ClearLight_FullMethodName = "/lights.LightsRequestBuilderService/ClearLight"
-	LightsRequestBuilderService_Build_FullMethodName      = "/lights.LightsRequestBuilderService/Build"
-)
-
-// LightsRequestBuilderServiceClient is the client API for LightsRequestBuilderService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type LightsRequestBuilderServiceClient interface {
-	AddLight(ctx context.Context, in *AddLightRequest, opts ...grpc.CallOption) (*AddLightResponse, error)
-	ClearLight(ctx context.Context, in *ClearLightRequest, opts ...grpc.CallOption) (*ClearLightResponse, error)
-	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
-}
-
-type lightsRequestBuilderServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewLightsRequestBuilderServiceClient(cc grpc.ClientConnInterface) LightsRequestBuilderServiceClient {
-	return &lightsRequestBuilderServiceClient{cc}
-}
-
-func (c *lightsRequestBuilderServiceClient) AddLight(ctx context.Context, in *AddLightRequest, opts ...grpc.CallOption) (*AddLightResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddLightResponse)
-	err := c.cc.Invoke(ctx, LightsRequestBuilderService_AddLight_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *lightsRequestBuilderServiceClient) ClearLight(ctx context.Context, in *ClearLightRequest, opts ...grpc.CallOption) (*ClearLightResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ClearLightResponse)
-	err := c.cc.Invoke(ctx, LightsRequestBuilderService_ClearLight_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *lightsRequestBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BuildResponse)
-	err := c.cc.Invoke(ctx, LightsRequestBuilderService_Build_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// LightsRequestBuilderServiceServer is the server API for LightsRequestBuilderService service.
-// All implementations must embed UnimplementedLightsRequestBuilderServiceServer
-// for forward compatibility.
-type LightsRequestBuilderServiceServer interface {
-	AddLight(context.Context, *AddLightRequest) (*AddLightResponse, error)
-	ClearLight(context.Context, *ClearLightRequest) (*ClearLightResponse, error)
-	Build(context.Context, *BuildRequest) (*BuildResponse, error)
-	mustEmbedUnimplementedLightsRequestBuilderServiceServer()
-}
-
-// UnimplementedLightsRequestBuilderServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedLightsRequestBuilderServiceServer struct{}
-
-func (UnimplementedLightsRequestBuilderServiceServer) AddLight(context.Context, *AddLightRequest) (*AddLightResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddLight not implemented")
-}
-func (UnimplementedLightsRequestBuilderServiceServer) ClearLight(context.Context, *ClearLightRequest) (*ClearLightResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ClearLight not implemented")
-}
-func (UnimplementedLightsRequestBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
-}
-func (UnimplementedLightsRequestBuilderServiceServer) mustEmbedUnimplementedLightsRequestBuilderServiceServer() {
-}
-func (UnimplementedLightsRequestBuilderServiceServer) testEmbeddedByValue() {}
-
-// UnsafeLightsRequestBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to LightsRequestBuilderServiceServer will
-// result in compilation errors.
-type UnsafeLightsRequestBuilderServiceServer interface {
-	mustEmbedUnimplementedLightsRequestBuilderServiceServer()
-}
-
-func RegisterLightsRequestBuilderServiceServer(s grpc.ServiceRegistrar, srv LightsRequestBuilderServiceServer) {
-	// If the following call panics, it indicates UnimplementedLightsRequestBuilderServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&LightsRequestBuilderService_ServiceDesc, srv)
-}
-
-func _LightsRequestBuilderService_AddLight_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddLightRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LightsRequestBuilderServiceServer).AddLight(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: LightsRequestBuilderService_AddLight_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LightsRequestBuilderServiceServer).AddLight(ctx, req.(*AddLightRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _LightsRequestBuilderService_ClearLight_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ClearLightRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LightsRequestBuilderServiceServer).ClearLight(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: LightsRequestBuilderService_ClearLight_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LightsRequestBuilderServiceServer).ClearLight(ctx, req.(*ClearLightRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _LightsRequestBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BuildRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LightsRequestBuilderServiceServer).Build(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: LightsRequestBuilderService_Build_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LightsRequestBuilderServiceServer).Build(ctx, req.(*BuildRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// LightsRequestBuilderService_ServiceDesc is the grpc.ServiceDesc for LightsRequestBuilderService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var LightsRequestBuilderService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "lights.LightsRequestBuilderService",
-	HandlerType: (*LightsRequestBuilderServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "AddLight",
-			Handler:    _LightsRequestBuilderService_AddLight_Handler,
-		},
-		{
-			MethodName: "ClearLight",
-			Handler:    _LightsRequestBuilderService_ClearLight_Handler,
-		},
-		{
-			MethodName: "Build",
-			Handler:    _LightsRequestBuilderService_Build_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

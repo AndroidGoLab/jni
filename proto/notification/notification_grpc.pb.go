@@ -21,390 +21,102 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ManagerService_AreNotificationsEnabled_FullMethodName    = "/notification.ManagerService/AreNotificationsEnabled"
-	ManagerService_CreateNotificationChannel_FullMethodName  = "/notification.ManagerService/CreateNotificationChannel"
-	ManagerService_DeleteNotificationChannel_FullMethodName  = "/notification.ManagerService/DeleteNotificationChannel"
-	ManagerService_GetNotificationChannelsRaw_FullMethodName = "/notification.ManagerService/GetNotificationChannelsRaw"
-	ManagerService_NotifyRaw_FullMethodName                  = "/notification.ManagerService/NotifyRaw"
-	ManagerService_Cancel_FullMethodName                     = "/notification.ManagerService/Cancel"
-	ManagerService_CancelAll_FullMethodName                  = "/notification.ManagerService/CancelAll"
-	ManagerService_GetActiveNotificationsRaw_FullMethodName  = "/notification.ManagerService/GetActiveNotificationsRaw"
-)
-
-// ManagerServiceClient is the client API for ManagerService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ManagerServiceClient interface {
-	AreNotificationsEnabled(ctx context.Context, in *AreNotificationsEnabledRequest, opts ...grpc.CallOption) (*AreNotificationsEnabledResponse, error)
-	CreateNotificationChannel(ctx context.Context, in *CreateNotificationChannelRequest, opts ...grpc.CallOption) (*CreateNotificationChannelResponse, error)
-	DeleteNotificationChannel(ctx context.Context, in *DeleteNotificationChannelRequest, opts ...grpc.CallOption) (*DeleteNotificationChannelResponse, error)
-	GetNotificationChannelsRaw(ctx context.Context, in *GetNotificationChannelsRawRequest, opts ...grpc.CallOption) (*GetNotificationChannelsRawResponse, error)
-	NotifyRaw(ctx context.Context, in *NotifyRawRequest, opts ...grpc.CallOption) (*NotifyRawResponse, error)
-	Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*CancelResponse, error)
-	CancelAll(ctx context.Context, in *CancelAllRequest, opts ...grpc.CallOption) (*CancelAllResponse, error)
-	GetActiveNotificationsRaw(ctx context.Context, in *GetActiveNotificationsRawRequest, opts ...grpc.CallOption) (*GetActiveNotificationsRawResponse, error)
-}
-
-type managerServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewManagerServiceClient(cc grpc.ClientConnInterface) ManagerServiceClient {
-	return &managerServiceClient{cc}
-}
-
-func (c *managerServiceClient) AreNotificationsEnabled(ctx context.Context, in *AreNotificationsEnabledRequest, opts ...grpc.CallOption) (*AreNotificationsEnabledResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AreNotificationsEnabledResponse)
-	err := c.cc.Invoke(ctx, ManagerService_AreNotificationsEnabled_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) CreateNotificationChannel(ctx context.Context, in *CreateNotificationChannelRequest, opts ...grpc.CallOption) (*CreateNotificationChannelResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateNotificationChannelResponse)
-	err := c.cc.Invoke(ctx, ManagerService_CreateNotificationChannel_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) DeleteNotificationChannel(ctx context.Context, in *DeleteNotificationChannelRequest, opts ...grpc.CallOption) (*DeleteNotificationChannelResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteNotificationChannelResponse)
-	err := c.cc.Invoke(ctx, ManagerService_DeleteNotificationChannel_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) GetNotificationChannelsRaw(ctx context.Context, in *GetNotificationChannelsRawRequest, opts ...grpc.CallOption) (*GetNotificationChannelsRawResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetNotificationChannelsRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_GetNotificationChannelsRaw_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) NotifyRaw(ctx context.Context, in *NotifyRawRequest, opts ...grpc.CallOption) (*NotifyRawResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(NotifyRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_NotifyRaw_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*CancelResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CancelResponse)
-	err := c.cc.Invoke(ctx, ManagerService_Cancel_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) CancelAll(ctx context.Context, in *CancelAllRequest, opts ...grpc.CallOption) (*CancelAllResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CancelAllResponse)
-	err := c.cc.Invoke(ctx, ManagerService_CancelAll_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) GetActiveNotificationsRaw(ctx context.Context, in *GetActiveNotificationsRawRequest, opts ...grpc.CallOption) (*GetActiveNotificationsRawResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetActiveNotificationsRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_GetActiveNotificationsRaw_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// ManagerServiceServer is the server API for ManagerService service.
-// All implementations must embed UnimplementedManagerServiceServer
-// for forward compatibility.
-type ManagerServiceServer interface {
-	AreNotificationsEnabled(context.Context, *AreNotificationsEnabledRequest) (*AreNotificationsEnabledResponse, error)
-	CreateNotificationChannel(context.Context, *CreateNotificationChannelRequest) (*CreateNotificationChannelResponse, error)
-	DeleteNotificationChannel(context.Context, *DeleteNotificationChannelRequest) (*DeleteNotificationChannelResponse, error)
-	GetNotificationChannelsRaw(context.Context, *GetNotificationChannelsRawRequest) (*GetNotificationChannelsRawResponse, error)
-	NotifyRaw(context.Context, *NotifyRawRequest) (*NotifyRawResponse, error)
-	Cancel(context.Context, *CancelRequest) (*CancelResponse, error)
-	CancelAll(context.Context, *CancelAllRequest) (*CancelAllResponse, error)
-	GetActiveNotificationsRaw(context.Context, *GetActiveNotificationsRawRequest) (*GetActiveNotificationsRawResponse, error)
-	mustEmbedUnimplementedManagerServiceServer()
-}
-
-// UnimplementedManagerServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedManagerServiceServer struct{}
-
-func (UnimplementedManagerServiceServer) AreNotificationsEnabled(context.Context, *AreNotificationsEnabledRequest) (*AreNotificationsEnabledResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AreNotificationsEnabled not implemented")
-}
-func (UnimplementedManagerServiceServer) CreateNotificationChannel(context.Context, *CreateNotificationChannelRequest) (*CreateNotificationChannelResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateNotificationChannel not implemented")
-}
-func (UnimplementedManagerServiceServer) DeleteNotificationChannel(context.Context, *DeleteNotificationChannelRequest) (*DeleteNotificationChannelResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method DeleteNotificationChannel not implemented")
-}
-func (UnimplementedManagerServiceServer) GetNotificationChannelsRaw(context.Context, *GetNotificationChannelsRawRequest) (*GetNotificationChannelsRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetNotificationChannelsRaw not implemented")
-}
-func (UnimplementedManagerServiceServer) NotifyRaw(context.Context, *NotifyRawRequest) (*NotifyRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method NotifyRaw not implemented")
-}
-func (UnimplementedManagerServiceServer) Cancel(context.Context, *CancelRequest) (*CancelResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Cancel not implemented")
-}
-func (UnimplementedManagerServiceServer) CancelAll(context.Context, *CancelAllRequest) (*CancelAllResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CancelAll not implemented")
-}
-func (UnimplementedManagerServiceServer) GetActiveNotificationsRaw(context.Context, *GetActiveNotificationsRawRequest) (*GetActiveNotificationsRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetActiveNotificationsRaw not implemented")
-}
-func (UnimplementedManagerServiceServer) mustEmbedUnimplementedManagerServiceServer() {}
-func (UnimplementedManagerServiceServer) testEmbeddedByValue()                        {}
-
-// UnsafeManagerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ManagerServiceServer will
-// result in compilation errors.
-type UnsafeManagerServiceServer interface {
-	mustEmbedUnimplementedManagerServiceServer()
-}
-
-func RegisterManagerServiceServer(s grpc.ServiceRegistrar, srv ManagerServiceServer) {
-	// If the following call panics, it indicates UnimplementedManagerServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&ManagerService_ServiceDesc, srv)
-}
-
-func _ManagerService_AreNotificationsEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AreNotificationsEnabledRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).AreNotificationsEnabled(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_AreNotificationsEnabled_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).AreNotificationsEnabled(ctx, req.(*AreNotificationsEnabledRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_CreateNotificationChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateNotificationChannelRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).CreateNotificationChannel(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_CreateNotificationChannel_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).CreateNotificationChannel(ctx, req.(*CreateNotificationChannelRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_DeleteNotificationChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteNotificationChannelRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).DeleteNotificationChannel(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_DeleteNotificationChannel_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).DeleteNotificationChannel(ctx, req.(*DeleteNotificationChannelRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_GetNotificationChannelsRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetNotificationChannelsRawRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetNotificationChannelsRaw(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_GetNotificationChannelsRaw_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetNotificationChannelsRaw(ctx, req.(*GetNotificationChannelsRawRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_NotifyRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NotifyRawRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).NotifyRaw(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_NotifyRaw_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).NotifyRaw(ctx, req.(*NotifyRawRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_Cancel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CancelRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).Cancel(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_Cancel_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).Cancel(ctx, req.(*CancelRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_CancelAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CancelAllRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).CancelAll(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_CancelAll_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).CancelAll(ctx, req.(*CancelAllRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_GetActiveNotificationsRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetActiveNotificationsRawRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetActiveNotificationsRaw(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_GetActiveNotificationsRaw_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetActiveNotificationsRaw(ctx, req.(*GetActiveNotificationsRawRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// ManagerService_ServiceDesc is the grpc.ServiceDesc for ManagerService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var ManagerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "notification.ManagerService",
-	HandlerType: (*ManagerServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "AreNotificationsEnabled",
-			Handler:    _ManagerService_AreNotificationsEnabled_Handler,
-		},
-		{
-			MethodName: "CreateNotificationChannel",
-			Handler:    _ManagerService_CreateNotificationChannel_Handler,
-		},
-		{
-			MethodName: "DeleteNotificationChannel",
-			Handler:    _ManagerService_DeleteNotificationChannel_Handler,
-		},
-		{
-			MethodName: "GetNotificationChannelsRaw",
-			Handler:    _ManagerService_GetNotificationChannelsRaw_Handler,
-		},
-		{
-			MethodName: "NotifyRaw",
-			Handler:    _ManagerService_NotifyRaw_Handler,
-		},
-		{
-			MethodName: "Cancel",
-			Handler:    _ManagerService_Cancel_Handler,
-		},
-		{
-			MethodName: "CancelAll",
-			Handler:    _ManagerService_CancelAll_Handler,
-		},
-		{
-			MethodName: "GetActiveNotificationsRaw",
-			Handler:    _ManagerService_GetActiveNotificationsRaw_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/notification/notification.proto",
-}
-
-const (
-	NotificationChannelService_SetDescription_FullMethodName = "/notification.NotificationChannelService/SetDescription"
-	NotificationChannelService_GetId_FullMethodName          = "/notification.NotificationChannelService/GetId"
-	NotificationChannelService_GetName_FullMethodName        = "/notification.NotificationChannelService/GetName"
-	NotificationChannelService_GetDescription_FullMethodName = "/notification.NotificationChannelService/GetDescription"
-	NotificationChannelService_GetImportance_FullMethodName  = "/notification.NotificationChannelService/GetImportance"
+	NotificationChannelService_CanBubble_FullMethodName               = "/notification.NotificationChannelService/CanBubble"
+	NotificationChannelService_CanBypassDnd_FullMethodName            = "/notification.NotificationChannelService/CanBypassDnd"
+	NotificationChannelService_CanShowBadge_FullMethodName            = "/notification.NotificationChannelService/CanShowBadge"
+	NotificationChannelService_DescribeContents_FullMethodName        = "/notification.NotificationChannelService/DescribeContents"
+	NotificationChannelService_EnableLights_FullMethodName            = "/notification.NotificationChannelService/EnableLights"
+	NotificationChannelService_EnableVibration_FullMethodName         = "/notification.NotificationChannelService/EnableVibration"
+	NotificationChannelService_Equals_FullMethodName                  = "/notification.NotificationChannelService/Equals"
+	NotificationChannelService_GetAudioAttributes_FullMethodName      = "/notification.NotificationChannelService/GetAudioAttributes"
+	NotificationChannelService_GetConversationId_FullMethodName       = "/notification.NotificationChannelService/GetConversationId"
+	NotificationChannelService_GetDescription_FullMethodName          = "/notification.NotificationChannelService/GetDescription"
+	NotificationChannelService_GetGroup_FullMethodName                = "/notification.NotificationChannelService/GetGroup"
+	NotificationChannelService_GetId_FullMethodName                   = "/notification.NotificationChannelService/GetId"
+	NotificationChannelService_GetImportance_FullMethodName           = "/notification.NotificationChannelService/GetImportance"
+	NotificationChannelService_GetLightColor_FullMethodName           = "/notification.NotificationChannelService/GetLightColor"
+	NotificationChannelService_GetLockscreenVisibility_FullMethodName = "/notification.NotificationChannelService/GetLockscreenVisibility"
+	NotificationChannelService_GetName_FullMethodName                 = "/notification.NotificationChannelService/GetName"
+	NotificationChannelService_GetParentChannelId_FullMethodName      = "/notification.NotificationChannelService/GetParentChannelId"
+	NotificationChannelService_GetSound_FullMethodName                = "/notification.NotificationChannelService/GetSound"
+	NotificationChannelService_GetVibrationEffect_FullMethodName      = "/notification.NotificationChannelService/GetVibrationEffect"
+	NotificationChannelService_GetVibrationPattern_FullMethodName     = "/notification.NotificationChannelService/GetVibrationPattern"
+	NotificationChannelService_HasUserSetImportance_FullMethodName    = "/notification.NotificationChannelService/HasUserSetImportance"
+	NotificationChannelService_HasUserSetSound_FullMethodName         = "/notification.NotificationChannelService/HasUserSetSound"
+	NotificationChannelService_HashCode_FullMethodName                = "/notification.NotificationChannelService/HashCode"
+	NotificationChannelService_IsBlockable_FullMethodName             = "/notification.NotificationChannelService/IsBlockable"
+	NotificationChannelService_IsConversation_FullMethodName          = "/notification.NotificationChannelService/IsConversation"
+	NotificationChannelService_IsDemoted_FullMethodName               = "/notification.NotificationChannelService/IsDemoted"
+	NotificationChannelService_IsImportantConversation_FullMethodName = "/notification.NotificationChannelService/IsImportantConversation"
+	NotificationChannelService_SetAllowBubbles_FullMethodName         = "/notification.NotificationChannelService/SetAllowBubbles"
+	NotificationChannelService_SetBlockable_FullMethodName            = "/notification.NotificationChannelService/SetBlockable"
+	NotificationChannelService_SetBypassDnd_FullMethodName            = "/notification.NotificationChannelService/SetBypassDnd"
+	NotificationChannelService_SetConversationId_FullMethodName       = "/notification.NotificationChannelService/SetConversationId"
+	NotificationChannelService_SetDescription_FullMethodName          = "/notification.NotificationChannelService/SetDescription"
+	NotificationChannelService_SetGroup_FullMethodName                = "/notification.NotificationChannelService/SetGroup"
+	NotificationChannelService_SetImportance_FullMethodName           = "/notification.NotificationChannelService/SetImportance"
+	NotificationChannelService_SetLightColor_FullMethodName           = "/notification.NotificationChannelService/SetLightColor"
+	NotificationChannelService_SetLockscreenVisibility_FullMethodName = "/notification.NotificationChannelService/SetLockscreenVisibility"
+	NotificationChannelService_SetName_FullMethodName                 = "/notification.NotificationChannelService/SetName"
+	NotificationChannelService_SetShowBadge_FullMethodName            = "/notification.NotificationChannelService/SetShowBadge"
+	NotificationChannelService_SetSound_FullMethodName                = "/notification.NotificationChannelService/SetSound"
+	NotificationChannelService_SetVibrationEffect_FullMethodName      = "/notification.NotificationChannelService/SetVibrationEffect"
+	NotificationChannelService_SetVibrationPattern_FullMethodName     = "/notification.NotificationChannelService/SetVibrationPattern"
+	NotificationChannelService_ShouldShowLights_FullMethodName        = "/notification.NotificationChannelService/ShouldShowLights"
+	NotificationChannelService_ShouldVibrate_FullMethodName           = "/notification.NotificationChannelService/ShouldVibrate"
+	NotificationChannelService_ToString_FullMethodName                = "/notification.NotificationChannelService/ToString"
+	NotificationChannelService_WriteToParcel_FullMethodName           = "/notification.NotificationChannelService/WriteToParcel"
 )
 
 // NotificationChannelServiceClient is the client API for NotificationChannelService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NotificationChannelServiceClient interface {
-	SetDescription(ctx context.Context, in *SetDescriptionRequest, opts ...grpc.CallOption) (*SetDescriptionResponse, error)
-	GetId(ctx context.Context, in *GetIdRequest, opts ...grpc.CallOption) (*GetIdResponse, error)
-	GetName(ctx context.Context, in *GetNameRequest, opts ...grpc.CallOption) (*GetNameResponse, error)
+	CanBubble(ctx context.Context, in *CanBubbleRequest, opts ...grpc.CallOption) (*CanBubbleResponse, error)
+	CanBypassDnd(ctx context.Context, in *CanBypassDndRequest, opts ...grpc.CallOption) (*CanBypassDndResponse, error)
+	CanShowBadge(ctx context.Context, in *CanShowBadgeRequest, opts ...grpc.CallOption) (*CanShowBadgeResponse, error)
+	DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error)
+	EnableLights(ctx context.Context, in *EnableLightsRequest, opts ...grpc.CallOption) (*EnableLightsResponse, error)
+	EnableVibration(ctx context.Context, in *EnableVibrationRequest, opts ...grpc.CallOption) (*EnableVibrationResponse, error)
+	Equals(ctx context.Context, in *EqualsRequest, opts ...grpc.CallOption) (*EqualsResponse, error)
+	GetAudioAttributes(ctx context.Context, in *GetAudioAttributesRequest, opts ...grpc.CallOption) (*GetAudioAttributesResponse, error)
+	GetConversationId(ctx context.Context, in *GetConversationIdRequest, opts ...grpc.CallOption) (*GetConversationIdResponse, error)
 	GetDescription(ctx context.Context, in *GetDescriptionRequest, opts ...grpc.CallOption) (*GetDescriptionResponse, error)
+	GetGroup(ctx context.Context, in *GetGroupRequest, opts ...grpc.CallOption) (*GetGroupResponse, error)
+	GetId(ctx context.Context, in *GetIdRequest, opts ...grpc.CallOption) (*GetIdResponse, error)
 	GetImportance(ctx context.Context, in *GetImportanceRequest, opts ...grpc.CallOption) (*GetImportanceResponse, error)
+	GetLightColor(ctx context.Context, in *GetLightColorRequest, opts ...grpc.CallOption) (*GetLightColorResponse, error)
+	GetLockscreenVisibility(ctx context.Context, in *GetLockscreenVisibilityRequest, opts ...grpc.CallOption) (*GetLockscreenVisibilityResponse, error)
+	GetName(ctx context.Context, in *GetNameRequest, opts ...grpc.CallOption) (*GetNameResponse, error)
+	GetParentChannelId(ctx context.Context, in *GetParentChannelIdRequest, opts ...grpc.CallOption) (*GetParentChannelIdResponse, error)
+	GetSound(ctx context.Context, in *GetSoundRequest, opts ...grpc.CallOption) (*GetSoundResponse, error)
+	GetVibrationEffect(ctx context.Context, in *GetVibrationEffectRequest, opts ...grpc.CallOption) (*GetVibrationEffectResponse, error)
+	GetVibrationPattern(ctx context.Context, in *GetVibrationPatternRequest, opts ...grpc.CallOption) (*GetVibrationPatternResponse, error)
+	HasUserSetImportance(ctx context.Context, in *HasUserSetImportanceRequest, opts ...grpc.CallOption) (*HasUserSetImportanceResponse, error)
+	HasUserSetSound(ctx context.Context, in *HasUserSetSoundRequest, opts ...grpc.CallOption) (*HasUserSetSoundResponse, error)
+	HashCode(ctx context.Context, in *HashCodeRequest, opts ...grpc.CallOption) (*HashCodeResponse, error)
+	IsBlockable(ctx context.Context, in *IsBlockableRequest, opts ...grpc.CallOption) (*IsBlockableResponse, error)
+	IsConversation(ctx context.Context, in *IsConversationRequest, opts ...grpc.CallOption) (*IsConversationResponse, error)
+	IsDemoted(ctx context.Context, in *IsDemotedRequest, opts ...grpc.CallOption) (*IsDemotedResponse, error)
+	IsImportantConversation(ctx context.Context, in *IsImportantConversationRequest, opts ...grpc.CallOption) (*IsImportantConversationResponse, error)
+	SetAllowBubbles(ctx context.Context, in *SetAllowBubblesRequest, opts ...grpc.CallOption) (*SetAllowBubblesResponse, error)
+	SetBlockable(ctx context.Context, in *SetBlockableRequest, opts ...grpc.CallOption) (*SetBlockableResponse, error)
+	SetBypassDnd(ctx context.Context, in *SetBypassDndRequest, opts ...grpc.CallOption) (*SetBypassDndResponse, error)
+	SetConversationId(ctx context.Context, in *SetConversationIdRequest, opts ...grpc.CallOption) (*SetConversationIdResponse, error)
+	SetDescription(ctx context.Context, in *SetDescriptionRequest, opts ...grpc.CallOption) (*SetDescriptionResponse, error)
+	SetGroup(ctx context.Context, in *SetGroupRequest, opts ...grpc.CallOption) (*SetGroupResponse, error)
+	SetImportance(ctx context.Context, in *SetImportanceRequest, opts ...grpc.CallOption) (*SetImportanceResponse, error)
+	SetLightColor(ctx context.Context, in *SetLightColorRequest, opts ...grpc.CallOption) (*SetLightColorResponse, error)
+	SetLockscreenVisibility(ctx context.Context, in *SetLockscreenVisibilityRequest, opts ...grpc.CallOption) (*SetLockscreenVisibilityResponse, error)
+	SetName(ctx context.Context, in *SetNameRequest, opts ...grpc.CallOption) (*SetNameResponse, error)
+	SetShowBadge(ctx context.Context, in *SetShowBadgeRequest, opts ...grpc.CallOption) (*SetShowBadgeResponse, error)
+	SetSound(ctx context.Context, in *SetSoundRequest, opts ...grpc.CallOption) (*SetSoundResponse, error)
+	SetVibrationEffect(ctx context.Context, in *SetVibrationEffectRequest, opts ...grpc.CallOption) (*SetVibrationEffectResponse, error)
+	SetVibrationPattern(ctx context.Context, in *SetVibrationPatternRequest, opts ...grpc.CallOption) (*SetVibrationPatternResponse, error)
+	ShouldShowLights(ctx context.Context, in *ShouldShowLightsRequest, opts ...grpc.CallOption) (*ShouldShowLightsResponse, error)
+	ShouldVibrate(ctx context.Context, in *ShouldVibrateRequest, opts ...grpc.CallOption) (*ShouldVibrateResponse, error)
+	ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error)
+	WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error)
 }
 
 type notificationChannelServiceClient struct {
@@ -415,30 +127,90 @@ func NewNotificationChannelServiceClient(cc grpc.ClientConnInterface) Notificati
 	return &notificationChannelServiceClient{cc}
 }
 
-func (c *notificationChannelServiceClient) SetDescription(ctx context.Context, in *SetDescriptionRequest, opts ...grpc.CallOption) (*SetDescriptionResponse, error) {
+func (c *notificationChannelServiceClient) CanBubble(ctx context.Context, in *CanBubbleRequest, opts ...grpc.CallOption) (*CanBubbleResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetDescriptionResponse)
-	err := c.cc.Invoke(ctx, NotificationChannelService_SetDescription_FullMethodName, in, out, cOpts...)
+	out := new(CanBubbleResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_CanBubble_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *notificationChannelServiceClient) GetId(ctx context.Context, in *GetIdRequest, opts ...grpc.CallOption) (*GetIdResponse, error) {
+func (c *notificationChannelServiceClient) CanBypassDnd(ctx context.Context, in *CanBypassDndRequest, opts ...grpc.CallOption) (*CanBypassDndResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetIdResponse)
-	err := c.cc.Invoke(ctx, NotificationChannelService_GetId_FullMethodName, in, out, cOpts...)
+	out := new(CanBypassDndResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_CanBypassDnd_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *notificationChannelServiceClient) GetName(ctx context.Context, in *GetNameRequest, opts ...grpc.CallOption) (*GetNameResponse, error) {
+func (c *notificationChannelServiceClient) CanShowBadge(ctx context.Context, in *CanShowBadgeRequest, opts ...grpc.CallOption) (*CanShowBadgeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetNameResponse)
-	err := c.cc.Invoke(ctx, NotificationChannelService_GetName_FullMethodName, in, out, cOpts...)
+	out := new(CanShowBadgeResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_CanShowBadge_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DescribeContentsResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_DescribeContents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) EnableLights(ctx context.Context, in *EnableLightsRequest, opts ...grpc.CallOption) (*EnableLightsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnableLightsResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_EnableLights_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) EnableVibration(ctx context.Context, in *EnableVibrationRequest, opts ...grpc.CallOption) (*EnableVibrationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnableVibrationResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_EnableVibration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) Equals(ctx context.Context, in *EqualsRequest, opts ...grpc.CallOption) (*EqualsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EqualsResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_Equals_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) GetAudioAttributes(ctx context.Context, in *GetAudioAttributesRequest, opts ...grpc.CallOption) (*GetAudioAttributesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAudioAttributesResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_GetAudioAttributes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) GetConversationId(ctx context.Context, in *GetConversationIdRequest, opts ...grpc.CallOption) (*GetConversationIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetConversationIdResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_GetConversationId_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -455,6 +227,26 @@ func (c *notificationChannelServiceClient) GetDescription(ctx context.Context, i
 	return out, nil
 }
 
+func (c *notificationChannelServiceClient) GetGroup(ctx context.Context, in *GetGroupRequest, opts ...grpc.CallOption) (*GetGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGroupResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_GetGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) GetId(ctx context.Context, in *GetIdRequest, opts ...grpc.CallOption) (*GetIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetIdResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_GetId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *notificationChannelServiceClient) GetImportance(ctx context.Context, in *GetImportanceRequest, opts ...grpc.CallOption) (*GetImportanceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetImportanceResponse)
@@ -465,15 +257,375 @@ func (c *notificationChannelServiceClient) GetImportance(ctx context.Context, in
 	return out, nil
 }
 
+func (c *notificationChannelServiceClient) GetLightColor(ctx context.Context, in *GetLightColorRequest, opts ...grpc.CallOption) (*GetLightColorResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLightColorResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_GetLightColor_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) GetLockscreenVisibility(ctx context.Context, in *GetLockscreenVisibilityRequest, opts ...grpc.CallOption) (*GetLockscreenVisibilityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLockscreenVisibilityResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_GetLockscreenVisibility_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) GetName(ctx context.Context, in *GetNameRequest, opts ...grpc.CallOption) (*GetNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNameResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_GetName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) GetParentChannelId(ctx context.Context, in *GetParentChannelIdRequest, opts ...grpc.CallOption) (*GetParentChannelIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetParentChannelIdResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_GetParentChannelId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) GetSound(ctx context.Context, in *GetSoundRequest, opts ...grpc.CallOption) (*GetSoundResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSoundResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_GetSound_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) GetVibrationEffect(ctx context.Context, in *GetVibrationEffectRequest, opts ...grpc.CallOption) (*GetVibrationEffectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetVibrationEffectResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_GetVibrationEffect_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) GetVibrationPattern(ctx context.Context, in *GetVibrationPatternRequest, opts ...grpc.CallOption) (*GetVibrationPatternResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetVibrationPatternResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_GetVibrationPattern_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) HasUserSetImportance(ctx context.Context, in *HasUserSetImportanceRequest, opts ...grpc.CallOption) (*HasUserSetImportanceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HasUserSetImportanceResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_HasUserSetImportance_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) HasUserSetSound(ctx context.Context, in *HasUserSetSoundRequest, opts ...grpc.CallOption) (*HasUserSetSoundResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HasUserSetSoundResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_HasUserSetSound_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) HashCode(ctx context.Context, in *HashCodeRequest, opts ...grpc.CallOption) (*HashCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HashCodeResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_HashCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) IsBlockable(ctx context.Context, in *IsBlockableRequest, opts ...grpc.CallOption) (*IsBlockableResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsBlockableResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_IsBlockable_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) IsConversation(ctx context.Context, in *IsConversationRequest, opts ...grpc.CallOption) (*IsConversationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsConversationResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_IsConversation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) IsDemoted(ctx context.Context, in *IsDemotedRequest, opts ...grpc.CallOption) (*IsDemotedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsDemotedResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_IsDemoted_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) IsImportantConversation(ctx context.Context, in *IsImportantConversationRequest, opts ...grpc.CallOption) (*IsImportantConversationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsImportantConversationResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_IsImportantConversation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) SetAllowBubbles(ctx context.Context, in *SetAllowBubblesRequest, opts ...grpc.CallOption) (*SetAllowBubblesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetAllowBubblesResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_SetAllowBubbles_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) SetBlockable(ctx context.Context, in *SetBlockableRequest, opts ...grpc.CallOption) (*SetBlockableResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetBlockableResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_SetBlockable_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) SetBypassDnd(ctx context.Context, in *SetBypassDndRequest, opts ...grpc.CallOption) (*SetBypassDndResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetBypassDndResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_SetBypassDnd_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) SetConversationId(ctx context.Context, in *SetConversationIdRequest, opts ...grpc.CallOption) (*SetConversationIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetConversationIdResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_SetConversationId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) SetDescription(ctx context.Context, in *SetDescriptionRequest, opts ...grpc.CallOption) (*SetDescriptionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDescriptionResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_SetDescription_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) SetGroup(ctx context.Context, in *SetGroupRequest, opts ...grpc.CallOption) (*SetGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetGroupResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_SetGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) SetImportance(ctx context.Context, in *SetImportanceRequest, opts ...grpc.CallOption) (*SetImportanceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetImportanceResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_SetImportance_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) SetLightColor(ctx context.Context, in *SetLightColorRequest, opts ...grpc.CallOption) (*SetLightColorResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetLightColorResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_SetLightColor_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) SetLockscreenVisibility(ctx context.Context, in *SetLockscreenVisibilityRequest, opts ...grpc.CallOption) (*SetLockscreenVisibilityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetLockscreenVisibilityResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_SetLockscreenVisibility_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) SetName(ctx context.Context, in *SetNameRequest, opts ...grpc.CallOption) (*SetNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetNameResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_SetName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) SetShowBadge(ctx context.Context, in *SetShowBadgeRequest, opts ...grpc.CallOption) (*SetShowBadgeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetShowBadgeResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_SetShowBadge_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) SetSound(ctx context.Context, in *SetSoundRequest, opts ...grpc.CallOption) (*SetSoundResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetSoundResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_SetSound_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) SetVibrationEffect(ctx context.Context, in *SetVibrationEffectRequest, opts ...grpc.CallOption) (*SetVibrationEffectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetVibrationEffectResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_SetVibrationEffect_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) SetVibrationPattern(ctx context.Context, in *SetVibrationPatternRequest, opts ...grpc.CallOption) (*SetVibrationPatternResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetVibrationPatternResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_SetVibrationPattern_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) ShouldShowLights(ctx context.Context, in *ShouldShowLightsRequest, opts ...grpc.CallOption) (*ShouldShowLightsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ShouldShowLightsResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_ShouldShowLights_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) ShouldVibrate(ctx context.Context, in *ShouldVibrateRequest, opts ...grpc.CallOption) (*ShouldVibrateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ShouldVibrateResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_ShouldVibrate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ToStringResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_ToString_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationChannelServiceClient) WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteToParcelResponse)
+	err := c.cc.Invoke(ctx, NotificationChannelService_WriteToParcel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NotificationChannelServiceServer is the server API for NotificationChannelService service.
 // All implementations must embed UnimplementedNotificationChannelServiceServer
 // for forward compatibility.
 type NotificationChannelServiceServer interface {
-	SetDescription(context.Context, *SetDescriptionRequest) (*SetDescriptionResponse, error)
-	GetId(context.Context, *GetIdRequest) (*GetIdResponse, error)
-	GetName(context.Context, *GetNameRequest) (*GetNameResponse, error)
+	CanBubble(context.Context, *CanBubbleRequest) (*CanBubbleResponse, error)
+	CanBypassDnd(context.Context, *CanBypassDndRequest) (*CanBypassDndResponse, error)
+	CanShowBadge(context.Context, *CanShowBadgeRequest) (*CanShowBadgeResponse, error)
+	DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error)
+	EnableLights(context.Context, *EnableLightsRequest) (*EnableLightsResponse, error)
+	EnableVibration(context.Context, *EnableVibrationRequest) (*EnableVibrationResponse, error)
+	Equals(context.Context, *EqualsRequest) (*EqualsResponse, error)
+	GetAudioAttributes(context.Context, *GetAudioAttributesRequest) (*GetAudioAttributesResponse, error)
+	GetConversationId(context.Context, *GetConversationIdRequest) (*GetConversationIdResponse, error)
 	GetDescription(context.Context, *GetDescriptionRequest) (*GetDescriptionResponse, error)
+	GetGroup(context.Context, *GetGroupRequest) (*GetGroupResponse, error)
+	GetId(context.Context, *GetIdRequest) (*GetIdResponse, error)
 	GetImportance(context.Context, *GetImportanceRequest) (*GetImportanceResponse, error)
+	GetLightColor(context.Context, *GetLightColorRequest) (*GetLightColorResponse, error)
+	GetLockscreenVisibility(context.Context, *GetLockscreenVisibilityRequest) (*GetLockscreenVisibilityResponse, error)
+	GetName(context.Context, *GetNameRequest) (*GetNameResponse, error)
+	GetParentChannelId(context.Context, *GetParentChannelIdRequest) (*GetParentChannelIdResponse, error)
+	GetSound(context.Context, *GetSoundRequest) (*GetSoundResponse, error)
+	GetVibrationEffect(context.Context, *GetVibrationEffectRequest) (*GetVibrationEffectResponse, error)
+	GetVibrationPattern(context.Context, *GetVibrationPatternRequest) (*GetVibrationPatternResponse, error)
+	HasUserSetImportance(context.Context, *HasUserSetImportanceRequest) (*HasUserSetImportanceResponse, error)
+	HasUserSetSound(context.Context, *HasUserSetSoundRequest) (*HasUserSetSoundResponse, error)
+	HashCode(context.Context, *HashCodeRequest) (*HashCodeResponse, error)
+	IsBlockable(context.Context, *IsBlockableRequest) (*IsBlockableResponse, error)
+	IsConversation(context.Context, *IsConversationRequest) (*IsConversationResponse, error)
+	IsDemoted(context.Context, *IsDemotedRequest) (*IsDemotedResponse, error)
+	IsImportantConversation(context.Context, *IsImportantConversationRequest) (*IsImportantConversationResponse, error)
+	SetAllowBubbles(context.Context, *SetAllowBubblesRequest) (*SetAllowBubblesResponse, error)
+	SetBlockable(context.Context, *SetBlockableRequest) (*SetBlockableResponse, error)
+	SetBypassDnd(context.Context, *SetBypassDndRequest) (*SetBypassDndResponse, error)
+	SetConversationId(context.Context, *SetConversationIdRequest) (*SetConversationIdResponse, error)
+	SetDescription(context.Context, *SetDescriptionRequest) (*SetDescriptionResponse, error)
+	SetGroup(context.Context, *SetGroupRequest) (*SetGroupResponse, error)
+	SetImportance(context.Context, *SetImportanceRequest) (*SetImportanceResponse, error)
+	SetLightColor(context.Context, *SetLightColorRequest) (*SetLightColorResponse, error)
+	SetLockscreenVisibility(context.Context, *SetLockscreenVisibilityRequest) (*SetLockscreenVisibilityResponse, error)
+	SetName(context.Context, *SetNameRequest) (*SetNameResponse, error)
+	SetShowBadge(context.Context, *SetShowBadgeRequest) (*SetShowBadgeResponse, error)
+	SetSound(context.Context, *SetSoundRequest) (*SetSoundResponse, error)
+	SetVibrationEffect(context.Context, *SetVibrationEffectRequest) (*SetVibrationEffectResponse, error)
+	SetVibrationPattern(context.Context, *SetVibrationPatternRequest) (*SetVibrationPatternResponse, error)
+	ShouldShowLights(context.Context, *ShouldShowLightsRequest) (*ShouldShowLightsResponse, error)
+	ShouldVibrate(context.Context, *ShouldVibrateRequest) (*ShouldVibrateResponse, error)
+	ToString(context.Context, *ToStringRequest) (*ToStringResponse, error)
+	WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error)
 	mustEmbedUnimplementedNotificationChannelServiceServer()
 }
 
@@ -484,20 +636,140 @@ type NotificationChannelServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedNotificationChannelServiceServer struct{}
 
-func (UnimplementedNotificationChannelServiceServer) SetDescription(context.Context, *SetDescriptionRequest) (*SetDescriptionResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetDescription not implemented")
+func (UnimplementedNotificationChannelServiceServer) CanBubble(context.Context, *CanBubbleRequest) (*CanBubbleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CanBubble not implemented")
 }
-func (UnimplementedNotificationChannelServiceServer) GetId(context.Context, *GetIdRequest) (*GetIdResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetId not implemented")
+func (UnimplementedNotificationChannelServiceServer) CanBypassDnd(context.Context, *CanBypassDndRequest) (*CanBypassDndResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CanBypassDnd not implemented")
 }
-func (UnimplementedNotificationChannelServiceServer) GetName(context.Context, *GetNameRequest) (*GetNameResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetName not implemented")
+func (UnimplementedNotificationChannelServiceServer) CanShowBadge(context.Context, *CanShowBadgeRequest) (*CanShowBadgeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CanShowBadge not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DescribeContents not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) EnableLights(context.Context, *EnableLightsRequest) (*EnableLightsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method EnableLights not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) EnableVibration(context.Context, *EnableVibrationRequest) (*EnableVibrationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method EnableVibration not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) Equals(context.Context, *EqualsRequest) (*EqualsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Equals not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) GetAudioAttributes(context.Context, *GetAudioAttributesRequest) (*GetAudioAttributesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAudioAttributes not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) GetConversationId(context.Context, *GetConversationIdRequest) (*GetConversationIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetConversationId not implemented")
 }
 func (UnimplementedNotificationChannelServiceServer) GetDescription(context.Context, *GetDescriptionRequest) (*GetDescriptionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetDescription not implemented")
 }
+func (UnimplementedNotificationChannelServiceServer) GetGroup(context.Context, *GetGroupRequest) (*GetGroupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGroup not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) GetId(context.Context, *GetIdRequest) (*GetIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetId not implemented")
+}
 func (UnimplementedNotificationChannelServiceServer) GetImportance(context.Context, *GetImportanceRequest) (*GetImportanceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetImportance not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) GetLightColor(context.Context, *GetLightColorRequest) (*GetLightColorResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLightColor not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) GetLockscreenVisibility(context.Context, *GetLockscreenVisibilityRequest) (*GetLockscreenVisibilityResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLockscreenVisibility not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) GetName(context.Context, *GetNameRequest) (*GetNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetName not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) GetParentChannelId(context.Context, *GetParentChannelIdRequest) (*GetParentChannelIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetParentChannelId not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) GetSound(context.Context, *GetSoundRequest) (*GetSoundResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSound not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) GetVibrationEffect(context.Context, *GetVibrationEffectRequest) (*GetVibrationEffectResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetVibrationEffect not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) GetVibrationPattern(context.Context, *GetVibrationPatternRequest) (*GetVibrationPatternResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetVibrationPattern not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) HasUserSetImportance(context.Context, *HasUserSetImportanceRequest) (*HasUserSetImportanceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method HasUserSetImportance not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) HasUserSetSound(context.Context, *HasUserSetSoundRequest) (*HasUserSetSoundResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method HasUserSetSound not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) HashCode(context.Context, *HashCodeRequest) (*HashCodeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method HashCode not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) IsBlockable(context.Context, *IsBlockableRequest) (*IsBlockableResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsBlockable not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) IsConversation(context.Context, *IsConversationRequest) (*IsConversationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsConversation not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) IsDemoted(context.Context, *IsDemotedRequest) (*IsDemotedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsDemoted not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) IsImportantConversation(context.Context, *IsImportantConversationRequest) (*IsImportantConversationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsImportantConversation not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) SetAllowBubbles(context.Context, *SetAllowBubblesRequest) (*SetAllowBubblesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAllowBubbles not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) SetBlockable(context.Context, *SetBlockableRequest) (*SetBlockableResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetBlockable not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) SetBypassDnd(context.Context, *SetBypassDndRequest) (*SetBypassDndResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetBypassDnd not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) SetConversationId(context.Context, *SetConversationIdRequest) (*SetConversationIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetConversationId not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) SetDescription(context.Context, *SetDescriptionRequest) (*SetDescriptionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetDescription not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) SetGroup(context.Context, *SetGroupRequest) (*SetGroupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetGroup not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) SetImportance(context.Context, *SetImportanceRequest) (*SetImportanceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetImportance not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) SetLightColor(context.Context, *SetLightColorRequest) (*SetLightColorResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetLightColor not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) SetLockscreenVisibility(context.Context, *SetLockscreenVisibilityRequest) (*SetLockscreenVisibilityResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetLockscreenVisibility not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) SetName(context.Context, *SetNameRequest) (*SetNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetName not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) SetShowBadge(context.Context, *SetShowBadgeRequest) (*SetShowBadgeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetShowBadge not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) SetSound(context.Context, *SetSoundRequest) (*SetSoundResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetSound not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) SetVibrationEffect(context.Context, *SetVibrationEffectRequest) (*SetVibrationEffectResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetVibrationEffect not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) SetVibrationPattern(context.Context, *SetVibrationPatternRequest) (*SetVibrationPatternResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetVibrationPattern not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) ShouldShowLights(context.Context, *ShouldShowLightsRequest) (*ShouldShowLightsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ShouldShowLights not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) ShouldVibrate(context.Context, *ShouldVibrateRequest) (*ShouldVibrateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ShouldVibrate not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) ToString(context.Context, *ToStringRequest) (*ToStringResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ToString not implemented")
+}
+func (UnimplementedNotificationChannelServiceServer) WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteToParcel not implemented")
 }
 func (UnimplementedNotificationChannelServiceServer) mustEmbedUnimplementedNotificationChannelServiceServer() {
 }
@@ -521,56 +793,164 @@ func RegisterNotificationChannelServiceServer(s grpc.ServiceRegistrar, srv Notif
 	s.RegisterService(&NotificationChannelService_ServiceDesc, srv)
 }
 
-func _NotificationChannelService_SetDescription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetDescriptionRequest)
+func _NotificationChannelService_CanBubble_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CanBubbleRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NotificationChannelServiceServer).SetDescription(ctx, in)
+		return srv.(NotificationChannelServiceServer).CanBubble(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NotificationChannelService_SetDescription_FullMethodName,
+		FullMethod: NotificationChannelService_CanBubble_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationChannelServiceServer).SetDescription(ctx, req.(*SetDescriptionRequest))
+		return srv.(NotificationChannelServiceServer).CanBubble(ctx, req.(*CanBubbleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NotificationChannelService_GetId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetIdRequest)
+func _NotificationChannelService_CanBypassDnd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CanBypassDndRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NotificationChannelServiceServer).GetId(ctx, in)
+		return srv.(NotificationChannelServiceServer).CanBypassDnd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NotificationChannelService_GetId_FullMethodName,
+		FullMethod: NotificationChannelService_CanBypassDnd_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationChannelServiceServer).GetId(ctx, req.(*GetIdRequest))
+		return srv.(NotificationChannelServiceServer).CanBypassDnd(ctx, req.(*CanBypassDndRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NotificationChannelService_GetName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetNameRequest)
+func _NotificationChannelService_CanShowBadge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CanShowBadgeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NotificationChannelServiceServer).GetName(ctx, in)
+		return srv.(NotificationChannelServiceServer).CanShowBadge(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: NotificationChannelService_GetName_FullMethodName,
+		FullMethod: NotificationChannelService_CanShowBadge_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationChannelServiceServer).GetName(ctx, req.(*GetNameRequest))
+		return srv.(NotificationChannelServiceServer).CanShowBadge(ctx, req.(*CanShowBadgeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_DescribeContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeContentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).DescribeContents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_DescribeContents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).DescribeContents(ctx, req.(*DescribeContentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_EnableLights_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnableLightsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).EnableLights(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_EnableLights_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).EnableLights(ctx, req.(*EnableLightsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_EnableVibration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnableVibrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).EnableVibration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_EnableVibration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).EnableVibration(ctx, req.(*EnableVibrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_Equals_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EqualsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).Equals(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_Equals_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).Equals(ctx, req.(*EqualsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_GetAudioAttributes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAudioAttributesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).GetAudioAttributes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_GetAudioAttributes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).GetAudioAttributes(ctx, req.(*GetAudioAttributesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_GetConversationId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConversationIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).GetConversationId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_GetConversationId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).GetConversationId(ctx, req.(*GetConversationIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -593,6 +973,42 @@ func _NotificationChannelService_GetDescription_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NotificationChannelService_GetGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).GetGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_GetGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).GetGroup(ctx, req.(*GetGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_GetId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).GetId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_GetId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).GetId(ctx, req.(*GetIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _NotificationChannelService_GetImportance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetImportanceRequest)
 	if err := dec(in); err != nil {
@@ -611,6 +1027,582 @@ func _NotificationChannelService_GetImportance_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NotificationChannelService_GetLightColor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLightColorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).GetLightColor(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_GetLightColor_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).GetLightColor(ctx, req.(*GetLightColorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_GetLockscreenVisibility_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLockscreenVisibilityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).GetLockscreenVisibility(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_GetLockscreenVisibility_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).GetLockscreenVisibility(ctx, req.(*GetLockscreenVisibilityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_GetName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).GetName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_GetName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).GetName(ctx, req.(*GetNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_GetParentChannelId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetParentChannelIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).GetParentChannelId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_GetParentChannelId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).GetParentChannelId(ctx, req.(*GetParentChannelIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_GetSound_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSoundRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).GetSound(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_GetSound_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).GetSound(ctx, req.(*GetSoundRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_GetVibrationEffect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetVibrationEffectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).GetVibrationEffect(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_GetVibrationEffect_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).GetVibrationEffect(ctx, req.(*GetVibrationEffectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_GetVibrationPattern_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetVibrationPatternRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).GetVibrationPattern(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_GetVibrationPattern_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).GetVibrationPattern(ctx, req.(*GetVibrationPatternRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_HasUserSetImportance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HasUserSetImportanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).HasUserSetImportance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_HasUserSetImportance_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).HasUserSetImportance(ctx, req.(*HasUserSetImportanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_HasUserSetSound_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HasUserSetSoundRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).HasUserSetSound(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_HasUserSetSound_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).HasUserSetSound(ctx, req.(*HasUserSetSoundRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_HashCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HashCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).HashCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_HashCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).HashCode(ctx, req.(*HashCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_IsBlockable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsBlockableRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).IsBlockable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_IsBlockable_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).IsBlockable(ctx, req.(*IsBlockableRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_IsConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsConversationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).IsConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_IsConversation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).IsConversation(ctx, req.(*IsConversationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_IsDemoted_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsDemotedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).IsDemoted(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_IsDemoted_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).IsDemoted(ctx, req.(*IsDemotedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_IsImportantConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsImportantConversationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).IsImportantConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_IsImportantConversation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).IsImportantConversation(ctx, req.(*IsImportantConversationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_SetAllowBubbles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAllowBubblesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).SetAllowBubbles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_SetAllowBubbles_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).SetAllowBubbles(ctx, req.(*SetAllowBubblesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_SetBlockable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetBlockableRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).SetBlockable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_SetBlockable_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).SetBlockable(ctx, req.(*SetBlockableRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_SetBypassDnd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetBypassDndRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).SetBypassDnd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_SetBypassDnd_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).SetBypassDnd(ctx, req.(*SetBypassDndRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_SetConversationId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetConversationIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).SetConversationId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_SetConversationId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).SetConversationId(ctx, req.(*SetConversationIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_SetDescription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDescriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).SetDescription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_SetDescription_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).SetDescription(ctx, req.(*SetDescriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_SetGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).SetGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_SetGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).SetGroup(ctx, req.(*SetGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_SetImportance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetImportanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).SetImportance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_SetImportance_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).SetImportance(ctx, req.(*SetImportanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_SetLightColor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetLightColorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).SetLightColor(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_SetLightColor_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).SetLightColor(ctx, req.(*SetLightColorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_SetLockscreenVisibility_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetLockscreenVisibilityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).SetLockscreenVisibility(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_SetLockscreenVisibility_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).SetLockscreenVisibility(ctx, req.(*SetLockscreenVisibilityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_SetName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).SetName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_SetName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).SetName(ctx, req.(*SetNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_SetShowBadge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetShowBadgeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).SetShowBadge(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_SetShowBadge_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).SetShowBadge(ctx, req.(*SetShowBadgeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_SetSound_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetSoundRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).SetSound(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_SetSound_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).SetSound(ctx, req.(*SetSoundRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_SetVibrationEffect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetVibrationEffectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).SetVibrationEffect(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_SetVibrationEffect_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).SetVibrationEffect(ctx, req.(*SetVibrationEffectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_SetVibrationPattern_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetVibrationPatternRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).SetVibrationPattern(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_SetVibrationPattern_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).SetVibrationPattern(ctx, req.(*SetVibrationPatternRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_ShouldShowLights_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShouldShowLightsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).ShouldShowLights(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_ShouldShowLights_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).ShouldShowLights(ctx, req.(*ShouldShowLightsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_ShouldVibrate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShouldVibrateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).ShouldVibrate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_ShouldVibrate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).ShouldVibrate(ctx, req.(*ShouldVibrateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_ToString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToStringRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).ToString(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_ToString_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).ToString(ctx, req.(*ToStringRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationChannelService_WriteToParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteToParcelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationChannelServiceServer).WriteToParcel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationChannelService_WriteToParcel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationChannelServiceServer).WriteToParcel(ctx, req.(*WriteToParcelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // NotificationChannelService_ServiceDesc is the grpc.ServiceDesc for NotificationChannelService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -619,609 +1611,184 @@ var NotificationChannelService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*NotificationChannelServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SetDescription",
-			Handler:    _NotificationChannelService_SetDescription_Handler,
+			MethodName: "CanBubble",
+			Handler:    _NotificationChannelService_CanBubble_Handler,
 		},
 		{
-			MethodName: "GetId",
-			Handler:    _NotificationChannelService_GetId_Handler,
+			MethodName: "CanBypassDnd",
+			Handler:    _NotificationChannelService_CanBypassDnd_Handler,
 		},
 		{
-			MethodName: "GetName",
-			Handler:    _NotificationChannelService_GetName_Handler,
+			MethodName: "CanShowBadge",
+			Handler:    _NotificationChannelService_CanShowBadge_Handler,
+		},
+		{
+			MethodName: "DescribeContents",
+			Handler:    _NotificationChannelService_DescribeContents_Handler,
+		},
+		{
+			MethodName: "EnableLights",
+			Handler:    _NotificationChannelService_EnableLights_Handler,
+		},
+		{
+			MethodName: "EnableVibration",
+			Handler:    _NotificationChannelService_EnableVibration_Handler,
+		},
+		{
+			MethodName: "Equals",
+			Handler:    _NotificationChannelService_Equals_Handler,
+		},
+		{
+			MethodName: "GetAudioAttributes",
+			Handler:    _NotificationChannelService_GetAudioAttributes_Handler,
+		},
+		{
+			MethodName: "GetConversationId",
+			Handler:    _NotificationChannelService_GetConversationId_Handler,
 		},
 		{
 			MethodName: "GetDescription",
 			Handler:    _NotificationChannelService_GetDescription_Handler,
 		},
 		{
+			MethodName: "GetGroup",
+			Handler:    _NotificationChannelService_GetGroup_Handler,
+		},
+		{
+			MethodName: "GetId",
+			Handler:    _NotificationChannelService_GetId_Handler,
+		},
+		{
 			MethodName: "GetImportance",
 			Handler:    _NotificationChannelService_GetImportance_Handler,
 		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/notification/notification.proto",
-}
-
-const (
-	NotificationBuilderService_SetContentTitle_FullMethodName  = "/notification.NotificationBuilderService/SetContentTitle"
-	NotificationBuilderService_SetContentText_FullMethodName   = "/notification.NotificationBuilderService/SetContentText"
-	NotificationBuilderService_SetSmallIcon_FullMethodName     = "/notification.NotificationBuilderService/SetSmallIcon"
-	NotificationBuilderService_SetContentIntent_FullMethodName = "/notification.NotificationBuilderService/SetContentIntent"
-	NotificationBuilderService_SetAutoCancel_FullMethodName    = "/notification.NotificationBuilderService/SetAutoCancel"
-	NotificationBuilderService_SetOngoing_FullMethodName       = "/notification.NotificationBuilderService/SetOngoing"
-	NotificationBuilderService_SetStyle_FullMethodName         = "/notification.NotificationBuilderService/SetStyle"
-	NotificationBuilderService_SetGroup_FullMethodName         = "/notification.NotificationBuilderService/SetGroup"
-	NotificationBuilderService_SetProgress_FullMethodName      = "/notification.NotificationBuilderService/SetProgress"
-	NotificationBuilderService_AddAction_FullMethodName        = "/notification.NotificationBuilderService/AddAction"
-	NotificationBuilderService_Build_FullMethodName            = "/notification.NotificationBuilderService/Build"
-)
-
-// NotificationBuilderServiceClient is the client API for NotificationBuilderService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type NotificationBuilderServiceClient interface {
-	SetContentTitle(ctx context.Context, in *SetContentTitleRequest, opts ...grpc.CallOption) (*SetContentTitleResponse, error)
-	SetContentText(ctx context.Context, in *SetContentTextRequest, opts ...grpc.CallOption) (*SetContentTextResponse, error)
-	SetSmallIcon(ctx context.Context, in *SetSmallIconRequest, opts ...grpc.CallOption) (*SetSmallIconResponse, error)
-	SetContentIntent(ctx context.Context, in *SetContentIntentRequest, opts ...grpc.CallOption) (*SetContentIntentResponse, error)
-	SetAutoCancel(ctx context.Context, in *SetAutoCancelRequest, opts ...grpc.CallOption) (*SetAutoCancelResponse, error)
-	SetOngoing(ctx context.Context, in *SetOngoingRequest, opts ...grpc.CallOption) (*SetOngoingResponse, error)
-	SetStyle(ctx context.Context, in *SetStyleRequest, opts ...grpc.CallOption) (*SetStyleResponse, error)
-	SetGroup(ctx context.Context, in *SetGroupRequest, opts ...grpc.CallOption) (*SetGroupResponse, error)
-	SetProgress(ctx context.Context, in *SetProgressRequest, opts ...grpc.CallOption) (*SetProgressResponse, error)
-	AddAction(ctx context.Context, in *AddActionRequest, opts ...grpc.CallOption) (*AddActionResponse, error)
-	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
-}
-
-type notificationBuilderServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewNotificationBuilderServiceClient(cc grpc.ClientConnInterface) NotificationBuilderServiceClient {
-	return &notificationBuilderServiceClient{cc}
-}
-
-func (c *notificationBuilderServiceClient) SetContentTitle(ctx context.Context, in *SetContentTitleRequest, opts ...grpc.CallOption) (*SetContentTitleResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetContentTitleResponse)
-	err := c.cc.Invoke(ctx, NotificationBuilderService_SetContentTitle_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *notificationBuilderServiceClient) SetContentText(ctx context.Context, in *SetContentTextRequest, opts ...grpc.CallOption) (*SetContentTextResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetContentTextResponse)
-	err := c.cc.Invoke(ctx, NotificationBuilderService_SetContentText_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *notificationBuilderServiceClient) SetSmallIcon(ctx context.Context, in *SetSmallIconRequest, opts ...grpc.CallOption) (*SetSmallIconResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetSmallIconResponse)
-	err := c.cc.Invoke(ctx, NotificationBuilderService_SetSmallIcon_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *notificationBuilderServiceClient) SetContentIntent(ctx context.Context, in *SetContentIntentRequest, opts ...grpc.CallOption) (*SetContentIntentResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetContentIntentResponse)
-	err := c.cc.Invoke(ctx, NotificationBuilderService_SetContentIntent_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *notificationBuilderServiceClient) SetAutoCancel(ctx context.Context, in *SetAutoCancelRequest, opts ...grpc.CallOption) (*SetAutoCancelResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetAutoCancelResponse)
-	err := c.cc.Invoke(ctx, NotificationBuilderService_SetAutoCancel_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *notificationBuilderServiceClient) SetOngoing(ctx context.Context, in *SetOngoingRequest, opts ...grpc.CallOption) (*SetOngoingResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetOngoingResponse)
-	err := c.cc.Invoke(ctx, NotificationBuilderService_SetOngoing_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *notificationBuilderServiceClient) SetStyle(ctx context.Context, in *SetStyleRequest, opts ...grpc.CallOption) (*SetStyleResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetStyleResponse)
-	err := c.cc.Invoke(ctx, NotificationBuilderService_SetStyle_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *notificationBuilderServiceClient) SetGroup(ctx context.Context, in *SetGroupRequest, opts ...grpc.CallOption) (*SetGroupResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetGroupResponse)
-	err := c.cc.Invoke(ctx, NotificationBuilderService_SetGroup_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *notificationBuilderServiceClient) SetProgress(ctx context.Context, in *SetProgressRequest, opts ...grpc.CallOption) (*SetProgressResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetProgressResponse)
-	err := c.cc.Invoke(ctx, NotificationBuilderService_SetProgress_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *notificationBuilderServiceClient) AddAction(ctx context.Context, in *AddActionRequest, opts ...grpc.CallOption) (*AddActionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddActionResponse)
-	err := c.cc.Invoke(ctx, NotificationBuilderService_AddAction_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *notificationBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BuildResponse)
-	err := c.cc.Invoke(ctx, NotificationBuilderService_Build_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// NotificationBuilderServiceServer is the server API for NotificationBuilderService service.
-// All implementations must embed UnimplementedNotificationBuilderServiceServer
-// for forward compatibility.
-type NotificationBuilderServiceServer interface {
-	SetContentTitle(context.Context, *SetContentTitleRequest) (*SetContentTitleResponse, error)
-	SetContentText(context.Context, *SetContentTextRequest) (*SetContentTextResponse, error)
-	SetSmallIcon(context.Context, *SetSmallIconRequest) (*SetSmallIconResponse, error)
-	SetContentIntent(context.Context, *SetContentIntentRequest) (*SetContentIntentResponse, error)
-	SetAutoCancel(context.Context, *SetAutoCancelRequest) (*SetAutoCancelResponse, error)
-	SetOngoing(context.Context, *SetOngoingRequest) (*SetOngoingResponse, error)
-	SetStyle(context.Context, *SetStyleRequest) (*SetStyleResponse, error)
-	SetGroup(context.Context, *SetGroupRequest) (*SetGroupResponse, error)
-	SetProgress(context.Context, *SetProgressRequest) (*SetProgressResponse, error)
-	AddAction(context.Context, *AddActionRequest) (*AddActionResponse, error)
-	Build(context.Context, *BuildRequest) (*BuildResponse, error)
-	mustEmbedUnimplementedNotificationBuilderServiceServer()
-}
-
-// UnimplementedNotificationBuilderServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedNotificationBuilderServiceServer struct{}
-
-func (UnimplementedNotificationBuilderServiceServer) SetContentTitle(context.Context, *SetContentTitleRequest) (*SetContentTitleResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetContentTitle not implemented")
-}
-func (UnimplementedNotificationBuilderServiceServer) SetContentText(context.Context, *SetContentTextRequest) (*SetContentTextResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetContentText not implemented")
-}
-func (UnimplementedNotificationBuilderServiceServer) SetSmallIcon(context.Context, *SetSmallIconRequest) (*SetSmallIconResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetSmallIcon not implemented")
-}
-func (UnimplementedNotificationBuilderServiceServer) SetContentIntent(context.Context, *SetContentIntentRequest) (*SetContentIntentResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetContentIntent not implemented")
-}
-func (UnimplementedNotificationBuilderServiceServer) SetAutoCancel(context.Context, *SetAutoCancelRequest) (*SetAutoCancelResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetAutoCancel not implemented")
-}
-func (UnimplementedNotificationBuilderServiceServer) SetOngoing(context.Context, *SetOngoingRequest) (*SetOngoingResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetOngoing not implemented")
-}
-func (UnimplementedNotificationBuilderServiceServer) SetStyle(context.Context, *SetStyleRequest) (*SetStyleResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetStyle not implemented")
-}
-func (UnimplementedNotificationBuilderServiceServer) SetGroup(context.Context, *SetGroupRequest) (*SetGroupResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetGroup not implemented")
-}
-func (UnimplementedNotificationBuilderServiceServer) SetProgress(context.Context, *SetProgressRequest) (*SetProgressResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetProgress not implemented")
-}
-func (UnimplementedNotificationBuilderServiceServer) AddAction(context.Context, *AddActionRequest) (*AddActionResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddAction not implemented")
-}
-func (UnimplementedNotificationBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
-}
-func (UnimplementedNotificationBuilderServiceServer) mustEmbedUnimplementedNotificationBuilderServiceServer() {
-}
-func (UnimplementedNotificationBuilderServiceServer) testEmbeddedByValue() {}
-
-// UnsafeNotificationBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to NotificationBuilderServiceServer will
-// result in compilation errors.
-type UnsafeNotificationBuilderServiceServer interface {
-	mustEmbedUnimplementedNotificationBuilderServiceServer()
-}
-
-func RegisterNotificationBuilderServiceServer(s grpc.ServiceRegistrar, srv NotificationBuilderServiceServer) {
-	// If the following call panics, it indicates UnimplementedNotificationBuilderServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&NotificationBuilderService_ServiceDesc, srv)
-}
-
-func _NotificationBuilderService_SetContentTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetContentTitleRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotificationBuilderServiceServer).SetContentTitle(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NotificationBuilderService_SetContentTitle_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationBuilderServiceServer).SetContentTitle(ctx, req.(*SetContentTitleRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NotificationBuilderService_SetContentText_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetContentTextRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotificationBuilderServiceServer).SetContentText(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NotificationBuilderService_SetContentText_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationBuilderServiceServer).SetContentText(ctx, req.(*SetContentTextRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NotificationBuilderService_SetSmallIcon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetSmallIconRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotificationBuilderServiceServer).SetSmallIcon(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NotificationBuilderService_SetSmallIcon_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationBuilderServiceServer).SetSmallIcon(ctx, req.(*SetSmallIconRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NotificationBuilderService_SetContentIntent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetContentIntentRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotificationBuilderServiceServer).SetContentIntent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NotificationBuilderService_SetContentIntent_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationBuilderServiceServer).SetContentIntent(ctx, req.(*SetContentIntentRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NotificationBuilderService_SetAutoCancel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetAutoCancelRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotificationBuilderServiceServer).SetAutoCancel(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NotificationBuilderService_SetAutoCancel_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationBuilderServiceServer).SetAutoCancel(ctx, req.(*SetAutoCancelRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NotificationBuilderService_SetOngoing_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetOngoingRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotificationBuilderServiceServer).SetOngoing(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NotificationBuilderService_SetOngoing_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationBuilderServiceServer).SetOngoing(ctx, req.(*SetOngoingRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NotificationBuilderService_SetStyle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetStyleRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotificationBuilderServiceServer).SetStyle(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NotificationBuilderService_SetStyle_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationBuilderServiceServer).SetStyle(ctx, req.(*SetStyleRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NotificationBuilderService_SetGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetGroupRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotificationBuilderServiceServer).SetGroup(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NotificationBuilderService_SetGroup_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationBuilderServiceServer).SetGroup(ctx, req.(*SetGroupRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NotificationBuilderService_SetProgress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetProgressRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotificationBuilderServiceServer).SetProgress(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NotificationBuilderService_SetProgress_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationBuilderServiceServer).SetProgress(ctx, req.(*SetProgressRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NotificationBuilderService_AddAction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddActionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotificationBuilderServiceServer).AddAction(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NotificationBuilderService_AddAction_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationBuilderServiceServer).AddAction(ctx, req.(*AddActionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NotificationBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BuildRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotificationBuilderServiceServer).Build(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NotificationBuilderService_Build_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotificationBuilderServiceServer).Build(ctx, req.(*BuildRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// NotificationBuilderService_ServiceDesc is the grpc.ServiceDesc for NotificationBuilderService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var NotificationBuilderService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "notification.NotificationBuilderService",
-	HandlerType: (*NotificationBuilderServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SetContentTitle",
-			Handler:    _NotificationBuilderService_SetContentTitle_Handler,
+			MethodName: "GetLightColor",
+			Handler:    _NotificationChannelService_GetLightColor_Handler,
 		},
 		{
-			MethodName: "SetContentText",
-			Handler:    _NotificationBuilderService_SetContentText_Handler,
+			MethodName: "GetLockscreenVisibility",
+			Handler:    _NotificationChannelService_GetLockscreenVisibility_Handler,
 		},
 		{
-			MethodName: "SetSmallIcon",
-			Handler:    _NotificationBuilderService_SetSmallIcon_Handler,
+			MethodName: "GetName",
+			Handler:    _NotificationChannelService_GetName_Handler,
 		},
 		{
-			MethodName: "SetContentIntent",
-			Handler:    _NotificationBuilderService_SetContentIntent_Handler,
+			MethodName: "GetParentChannelId",
+			Handler:    _NotificationChannelService_GetParentChannelId_Handler,
 		},
 		{
-			MethodName: "SetAutoCancel",
-			Handler:    _NotificationBuilderService_SetAutoCancel_Handler,
+			MethodName: "GetSound",
+			Handler:    _NotificationChannelService_GetSound_Handler,
 		},
 		{
-			MethodName: "SetOngoing",
-			Handler:    _NotificationBuilderService_SetOngoing_Handler,
+			MethodName: "GetVibrationEffect",
+			Handler:    _NotificationChannelService_GetVibrationEffect_Handler,
 		},
 		{
-			MethodName: "SetStyle",
-			Handler:    _NotificationBuilderService_SetStyle_Handler,
+			MethodName: "GetVibrationPattern",
+			Handler:    _NotificationChannelService_GetVibrationPattern_Handler,
+		},
+		{
+			MethodName: "HasUserSetImportance",
+			Handler:    _NotificationChannelService_HasUserSetImportance_Handler,
+		},
+		{
+			MethodName: "HasUserSetSound",
+			Handler:    _NotificationChannelService_HasUserSetSound_Handler,
+		},
+		{
+			MethodName: "HashCode",
+			Handler:    _NotificationChannelService_HashCode_Handler,
+		},
+		{
+			MethodName: "IsBlockable",
+			Handler:    _NotificationChannelService_IsBlockable_Handler,
+		},
+		{
+			MethodName: "IsConversation",
+			Handler:    _NotificationChannelService_IsConversation_Handler,
+		},
+		{
+			MethodName: "IsDemoted",
+			Handler:    _NotificationChannelService_IsDemoted_Handler,
+		},
+		{
+			MethodName: "IsImportantConversation",
+			Handler:    _NotificationChannelService_IsImportantConversation_Handler,
+		},
+		{
+			MethodName: "SetAllowBubbles",
+			Handler:    _NotificationChannelService_SetAllowBubbles_Handler,
+		},
+		{
+			MethodName: "SetBlockable",
+			Handler:    _NotificationChannelService_SetBlockable_Handler,
+		},
+		{
+			MethodName: "SetBypassDnd",
+			Handler:    _NotificationChannelService_SetBypassDnd_Handler,
+		},
+		{
+			MethodName: "SetConversationId",
+			Handler:    _NotificationChannelService_SetConversationId_Handler,
+		},
+		{
+			MethodName: "SetDescription",
+			Handler:    _NotificationChannelService_SetDescription_Handler,
 		},
 		{
 			MethodName: "SetGroup",
-			Handler:    _NotificationBuilderService_SetGroup_Handler,
+			Handler:    _NotificationChannelService_SetGroup_Handler,
 		},
 		{
-			MethodName: "SetProgress",
-			Handler:    _NotificationBuilderService_SetProgress_Handler,
+			MethodName: "SetImportance",
+			Handler:    _NotificationChannelService_SetImportance_Handler,
 		},
 		{
-			MethodName: "AddAction",
-			Handler:    _NotificationBuilderService_AddAction_Handler,
+			MethodName: "SetLightColor",
+			Handler:    _NotificationChannelService_SetLightColor_Handler,
 		},
 		{
-			MethodName: "Build",
-			Handler:    _NotificationBuilderService_Build_Handler,
+			MethodName: "SetLockscreenVisibility",
+			Handler:    _NotificationChannelService_SetLockscreenVisibility_Handler,
 		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/notification/notification.proto",
-}
-
-const (
-	BigTextStyleService_BigText_FullMethodName = "/notification.BigTextStyleService/BigText"
-)
-
-// BigTextStyleServiceClient is the client API for BigTextStyleService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type BigTextStyleServiceClient interface {
-	BigText(ctx context.Context, in *BigTextRequest, opts ...grpc.CallOption) (*BigTextResponse, error)
-}
-
-type bigTextStyleServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewBigTextStyleServiceClient(cc grpc.ClientConnInterface) BigTextStyleServiceClient {
-	return &bigTextStyleServiceClient{cc}
-}
-
-func (c *bigTextStyleServiceClient) BigText(ctx context.Context, in *BigTextRequest, opts ...grpc.CallOption) (*BigTextResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BigTextResponse)
-	err := c.cc.Invoke(ctx, BigTextStyleService_BigText_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// BigTextStyleServiceServer is the server API for BigTextStyleService service.
-// All implementations must embed UnimplementedBigTextStyleServiceServer
-// for forward compatibility.
-type BigTextStyleServiceServer interface {
-	BigText(context.Context, *BigTextRequest) (*BigTextResponse, error)
-	mustEmbedUnimplementedBigTextStyleServiceServer()
-}
-
-// UnimplementedBigTextStyleServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedBigTextStyleServiceServer struct{}
-
-func (UnimplementedBigTextStyleServiceServer) BigText(context.Context, *BigTextRequest) (*BigTextResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method BigText not implemented")
-}
-func (UnimplementedBigTextStyleServiceServer) mustEmbedUnimplementedBigTextStyleServiceServer() {}
-func (UnimplementedBigTextStyleServiceServer) testEmbeddedByValue()                             {}
-
-// UnsafeBigTextStyleServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to BigTextStyleServiceServer will
-// result in compilation errors.
-type UnsafeBigTextStyleServiceServer interface {
-	mustEmbedUnimplementedBigTextStyleServiceServer()
-}
-
-func RegisterBigTextStyleServiceServer(s grpc.ServiceRegistrar, srv BigTextStyleServiceServer) {
-	// If the following call panics, it indicates UnimplementedBigTextStyleServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&BigTextStyleService_ServiceDesc, srv)
-}
-
-func _BigTextStyleService_BigText_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BigTextRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BigTextStyleServiceServer).BigText(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BigTextStyleService_BigText_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BigTextStyleServiceServer).BigText(ctx, req.(*BigTextRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// BigTextStyleService_ServiceDesc is the grpc.ServiceDesc for BigTextStyleService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var BigTextStyleService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "notification.BigTextStyleService",
-	HandlerType: (*BigTextStyleServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "BigText",
-			Handler:    _BigTextStyleService_BigText_Handler,
+			MethodName: "SetName",
+			Handler:    _NotificationChannelService_SetName_Handler,
+		},
+		{
+			MethodName: "SetShowBadge",
+			Handler:    _NotificationChannelService_SetShowBadge_Handler,
+		},
+		{
+			MethodName: "SetSound",
+			Handler:    _NotificationChannelService_SetSound_Handler,
+		},
+		{
+			MethodName: "SetVibrationEffect",
+			Handler:    _NotificationChannelService_SetVibrationEffect_Handler,
+		},
+		{
+			MethodName: "SetVibrationPattern",
+			Handler:    _NotificationChannelService_SetVibrationPattern_Handler,
+		},
+		{
+			MethodName: "ShouldShowLights",
+			Handler:    _NotificationChannelService_ShouldShowLights_Handler,
+		},
+		{
+			MethodName: "ShouldVibrate",
+			Handler:    _NotificationChannelService_ShouldVibrate_Handler,
+		},
+		{
+			MethodName: "ToString",
+			Handler:    _NotificationChannelService_ToString_Handler,
+		},
+		{
+			MethodName: "WriteToParcel",
+			Handler:    _NotificationChannelService_WriteToParcel_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

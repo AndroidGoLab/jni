@@ -1,0 +1,37 @@
+package: ir
+go_import: github.com/xaionaro-go/jni/hardware/ir
+classes:
+    - java_class: android.hardware.ConsumerIrManager
+      go_type: consumerIrManager
+      obtain: system_service
+      service_name: consumer_ir
+      close: true
+      methods:
+        - java_method: getCarrierFrequencies
+          go_name: GetCarrierFrequencies
+          returns: android.hardware.ConsumerIrManager$CarrierFrequencyRange[]
+          error: true
+        - java_method: hasIrEmitter
+          go_name: HasIrEmitter
+          returns: boolean
+          error: true
+        - java_method: transmit
+          go_name: Transmit
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: '[I'
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.hardware.ConsumerIrManager$CarrierFrequencyRange
+      go_type: consumerIrManagerCarrierFrequencyRange
+      methods:
+        - java_method: getMaxFrequency
+          go_name: GetMaxFrequency
+          returns: int
+          error: true
+        - java_method: getMinFrequency
+          go_name: GetMinFrequency
+          returns: int
+          error: true

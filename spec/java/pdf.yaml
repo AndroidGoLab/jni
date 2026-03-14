@@ -1,178 +1,593 @@
 package: pdf
-go_import: github.com/xaionaro-go/jni/pdf
+go_import: github.com/xaionaro-go/jni/graphics/pdf
 classes:
-    - java_class: android.graphics.pdf.PdfRenderer$Page
-      go_type: page
+    - java_class: android.graphics.Bitmap
+      go_type: bitmap
       methods:
-        - java_method: applyEdit
-          go_name: ApplyEdit
-          params:
-            - java_type: android.graphics.pdf.models.FormEditRecord
-              go_name: arg0
-          returns: java.util.List<android.graphics.Rect>
+        - java_method: asShared
+          go_name: AsShared
+          returns: android.graphics.Bitmap
           error: true
-        - java_method: close
-          go_name: Close
+        - java_method: compress
+          go_name: Compress
+          params:
+            - java_type: android.graphics.Bitmap$CompressFormat
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: java.io.OutputStream
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: copy
+          go_name: Copy
+          params:
+            - java_type: android.graphics.Bitmap$Config
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: copyPixelsFromBuffer
+          go_name: CopyPixelsFromBuffer
+          params:
+            - java_type: java.nio.Buffer
+              go_name: arg0
           returns: void
           error: true
-        - java_method: getFormWidgetInfoAtIndex
-          go_name: GetFormWidgetInfoAtIndex
+        - java_method: copyPixelsToBuffer
+          go_name: CopyPixelsToBuffer
+          params:
+            - java_type: java.nio.Buffer
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: eraseColor
+          go_name: EraseColor1
           params:
             - java_type: int
               go_name: arg0
-          returns: android.graphics.pdf.models.FormWidgetInfo
+          returns: void
           error: true
-        - java_method: getFormWidgetInfoAtPosition
-          go_name: GetFormWidgetInfoAtPosition
+        - java_method: eraseColor
+          go_name: EraseColor1_1
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: extractAlpha
+          go_name: ExtractAlpha0
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: extractAlpha
+          go_name: ExtractAlpha2_1
+          params:
+            - java_type: android.graphics.Paint
+              go_name: arg0
+            - java_type: '[I'
+              go_name: arg1
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: getAllocationByteCount
+          go_name: GetAllocationByteCount
+          returns: int
+          error: true
+        - java_method: getByteCount
+          go_name: GetByteCount
+          returns: int
+          error: true
+        - java_method: getColor
+          go_name: GetColor
           params:
             - java_type: int
               go_name: arg0
             - java_type: int
               go_name: arg1
-          returns: android.graphics.pdf.models.FormWidgetInfo
+          returns: android.graphics.Color
           error: true
-        - java_method: getFormWidgetInfos
-          go_name: GetFormWidgetInfos0
-          returns: java.util.List<android.graphics.pdf.models.FormWidgetInfo>
+        - java_method: getColorSpace
+          go_name: GetColorSpace
+          returns: android.graphics.ColorSpace
           error: true
-        - java_method: getFormWidgetInfos
-          go_name: GetFormWidgetInfos1_1
-          params:
-            - java_type: '[I'
-              go_name: arg0
-          returns: java.util.List<android.graphics.pdf.models.FormWidgetInfo>
+        - java_method: getConfig
+          go_name: GetConfig
+          returns: android.graphics.Bitmap$Config
           error: true
-        - java_method: getGotoLinks
-          go_name: GetGotoLinks
-          returns: java.util.List<android.graphics.pdf.content.PdfPageGotoLinkContent>
+        - java_method: getDensity
+          go_name: GetDensity
+          returns: int
+          error: true
+        - java_method: getGainmap
+          go_name: GetGainmap
+          returns: android.graphics.Gainmap
+          error: true
+        - java_method: getGenerationId
+          go_name: GetGenerationId
+          returns: int
+          error: true
+        - java_method: getHardwareBuffer
+          go_name: GetHardwareBuffer
+          returns: android.hardware.HardwareBuffer
           error: true
         - java_method: getHeight
           go_name: GetHeight
           returns: int
           error: true
-        - java_method: getImageContents
-          go_name: GetImageContents
-          returns: java.util.List<android.graphics.pdf.content.PdfPageImageContent>
+        - java_method: getNinePatchChunk
+          go_name: GetNinePatchChunk
+          returns: '[B'
           error: true
-        - java_method: getIndex
-          go_name: GetIndex
+        - java_method: getPixel
+          go_name: GetPixel
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
           returns: int
           error: true
-        - java_method: getLinkContents
-          go_name: GetLinkContents
-          returns: java.util.List<android.graphics.pdf.content.PdfPageLinkContent>
+        - java_method: getPixels
+          go_name: GetPixels
+          params:
+            - java_type: '[I'
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+            - java_type: int
+              go_name: arg6
+          returns: void
           error: true
-        - java_method: getTextContents
-          go_name: GetTextContents
-          returns: java.util.List<android.graphics.pdf.content.PdfPageTextContent>
+        - java_method: getRowBytes
+          go_name: GetRowBytes
+          returns: int
+          error: true
+        - java_method: getScaledHeight
+          go_name: GetScaledHeight1
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getScaledHeight
+          go_name: GetScaledHeight1_1
+          params:
+            - java_type: android.util.DisplayMetrics
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getScaledHeight
+          go_name: GetScaledHeight1_2
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getScaledWidth
+          go_name: GetScaledWidth1
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getScaledWidth
+          go_name: GetScaledWidth1_1
+          params:
+            - java_type: android.util.DisplayMetrics
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getScaledWidth
+          go_name: GetScaledWidth1_2
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
           error: true
         - java_method: getWidth
           go_name: GetWidth
           returns: int
           error: true
-        - java_method: render
-          go_name: Render4
-          params:
-            - java_type: android.graphics.Bitmap
-              go_name: arg0
-            - java_type: android.graphics.Rect
-              go_name: arg1
-            - java_type: android.graphics.Matrix
-              go_name: arg2
-            - java_type: android.graphics.pdf.RenderParams
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: render
-          go_name: Render4_1
-          params:
-            - java_type: android.graphics.Bitmap
-              go_name: arg0
-            - java_type: android.graphics.Rect
-              go_name: arg1
-            - java_type: android.graphics.Matrix
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: searchText
-          go_name: SearchText
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.util.List<android.graphics.pdf.models.PageMatchBounds>
-          error: true
-        - java_method: selectContent
-          go_name: SelectContent
-          params:
-            - java_type: android.graphics.pdf.models.selection.SelectionBoundary
-              go_name: arg0
-            - java_type: android.graphics.pdf.models.selection.SelectionBoundary
-              go_name: arg1
-          returns: android.graphics.pdf.models.selection.PageSelection
-          error: true
-    - java_class: android.graphics.pdf.PdfRenderer
-      go_type: pdfRenderer
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: getDocumentLinearizationType
-          go_name: GetDocumentLinearizationType
-          returns: int
-          error: true
-        - java_method: getPageCount
-          go_name: GetPageCount
-          returns: int
-          error: true
-        - java_method: getPdfFormType
-          go_name: GetPdfFormType
-          returns: int
-          error: true
-        - java_method: openPage
-          go_name: OpenPage
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.graphics.pdf.PdfRenderer$Page
-          error: true
-        - java_method: shouldScaleForPrinting
-          go_name: ShouldScaleForPrinting
+        - java_method: hasAlpha
+          go_name: HasAlpha
           returns: boolean
           error: true
-        - java_method: write
-          go_name: Write
+        - java_method: hasGainmap
+          go_name: HasGainmap
+          returns: boolean
+          error: true
+        - java_method: hasMipMap
+          go_name: HasMipMap
+          returns: boolean
+          error: true
+        - java_method: isMutable
+          go_name: IsMutable
+          returns: boolean
+          error: true
+        - java_method: isPremultiplied
+          go_name: IsPremultiplied
+          returns: boolean
+          error: true
+        - java_method: isRecycled
+          go_name: IsRecycled
+          returns: boolean
+          error: true
+        - java_method: prepareToDraw
+          go_name: PrepareToDraw
+          returns: void
+          error: true
+        - java_method: reconfigure
+          go_name: Reconfigure
           params:
-            - java_type: android.os.ParcelFileDescriptor
+            - java_type: int
               go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.graphics.Bitmap$Config
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: recycle
+          go_name: Recycle
+          returns: void
+          error: true
+        - java_method: sameAs
+          go_name: SameAs
+          params:
+            - java_type: android.graphics.Bitmap
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setColorSpace
+          go_name: SetColorSpace
+          params:
+            - java_type: android.graphics.ColorSpace
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setConfig
+          go_name: SetConfig
+          params:
+            - java_type: android.graphics.Bitmap$Config
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDensity
+          go_name: SetDensity
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setGainmap
+          go_name: SetGainmap
+          params:
+            - java_type: android.graphics.Gainmap
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setHasAlpha
+          go_name: SetHasAlpha
+          params:
             - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setHasMipMap
+          go_name: SetHasMipMap
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setHeight
+          go_name: SetHeight
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPixel
+          go_name: SetPixel
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setPixels
+          go_name: SetPixels
+          params:
+            - java_type: '[I'
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+            - java_type: int
+              go_name: arg6
+          returns: void
+          error: true
+        - java_method: setPremultiplied
+          go_name: SetPremultiplied
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setWidth
+          go_name: SetWidth
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
               go_name: arg1
           returns: void
           error: true
+      static_methods:
+        - java_method: createBitmap
+          go_name: CreateBitmap1
+          params:
+            - java_type: android.graphics.Bitmap
+              go_name: arg0
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: createBitmap
+          go_name: CreateBitmap5_1
+          params:
+            - java_type: android.graphics.Bitmap
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: createBitmap
+          go_name: CreateBitmap7_2
+          params:
+            - java_type: android.graphics.Bitmap
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: android.graphics.Matrix
+              go_name: arg5
+            - java_type: boolean
+              go_name: arg6
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: createBitmap
+          go_name: CreateBitmap1_3
+          params:
+            - java_type: android.graphics.Picture
+              go_name: arg0
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: createBitmap
+          go_name: CreateBitmap4_4
+          params:
+            - java_type: android.graphics.Picture
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: android.graphics.Bitmap$Config
+              go_name: arg3
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: createBitmap
+          go_name: CreateBitmap4_5
+          params:
+            - java_type: android.util.DisplayMetrics
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: android.graphics.Bitmap$Config
+              go_name: arg3
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: createBitmap
+          go_name: CreateBitmap5_6
+          params:
+            - java_type: android.util.DisplayMetrics
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: android.graphics.Bitmap$Config
+              go_name: arg3
+            - java_type: boolean
+              go_name: arg4
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: createBitmap
+          go_name: CreateBitmap6_7
+          params:
+            - java_type: android.util.DisplayMetrics
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: android.graphics.Bitmap$Config
+              go_name: arg3
+            - java_type: boolean
+              go_name: arg4
+            - java_type: android.graphics.ColorSpace
+              go_name: arg5
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: createBitmap
+          go_name: CreateBitmap5_8
+          params:
+            - java_type: android.util.DisplayMetrics
+              go_name: arg0
+            - java_type: '[I'
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: android.graphics.Bitmap$Config
+              go_name: arg4
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: createBitmap
+          go_name: CreateBitmap7_9
+          params:
+            - java_type: android.util.DisplayMetrics
+              go_name: arg0
+            - java_type: '[I'
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+            - java_type: android.graphics.Bitmap$Config
+              go_name: arg6
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: createBitmap
+          go_name: CreateBitmap3_10
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.graphics.Bitmap$Config
+              go_name: arg2
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: createBitmap
+          go_name: CreateBitmap4_11
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.graphics.Bitmap$Config
+              go_name: arg2
+            - java_type: boolean
+              go_name: arg3
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: createBitmap
+          go_name: CreateBitmap5_12
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.graphics.Bitmap$Config
+              go_name: arg2
+            - java_type: boolean
+              go_name: arg3
+            - java_type: android.graphics.ColorSpace
+              go_name: arg4
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: createBitmap
+          go_name: CreateBitmap4_13
+          params:
+            - java_type: '[I'
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: android.graphics.Bitmap$Config
+              go_name: arg3
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: createBitmap
+          go_name: CreateBitmap6_14
+          params:
+            - java_type: '[I'
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: android.graphics.Bitmap$Config
+              go_name: arg5
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: createScaledBitmap
+          go_name: CreateScaledBitmap
+          params:
+            - java_type: android.graphics.Bitmap
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: boolean
+              go_name: arg3
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: wrapHardwareBuffer
+          go_name: WrapHardwareBuffer
+          params:
+            - java_type: android.hardware.HardwareBuffer
+              go_name: arg0
+            - java_type: android.graphics.ColorSpace
+              go_name: arg1
+          returns: android.graphics.Bitmap
+          error: true
 constants:
-    - go_name: RenderModeForDisplay
+    - go_name: Creator
       value: "0"
       go_type: int
-    - go_name: RenderModeForPrint
-      value: "0"
-      go_type: int
-    - go_name: DocumentLinearizedTypeLinearized
-      value: "0"
-      go_type: int
-    - go_name: DocumentLinearizedTypeNonLinearized
-      value: "0"
-      go_type: int
-    - go_name: PdfFormTypeAcroForm
-      value: "0"
-      go_type: int
-    - go_name: PdfFormTypeNone
-      value: "0"
-      go_type: int
-    - go_name: PdfFormTypeXfaForeground
-      value: "0"
-      go_type: int
-    - go_name: PdfFormTypeXfaFull
+    - go_name: DensityNone
       value: "0"
       go_type: int

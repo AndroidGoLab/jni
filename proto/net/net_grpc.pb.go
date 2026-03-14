@@ -21,504 +21,1510 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ManagerService_GetActiveNetworkRaw_FullMethodName               = "/net.ManagerService/GetActiveNetworkRaw"
-	ManagerService_GetNetworkCapabilitiesRaw_FullMethodName         = "/net.ManagerService/GetNetworkCapabilitiesRaw"
-	ManagerService_RegisterDefaultNetworkCallbackRaw_FullMethodName = "/net.ManagerService/RegisterDefaultNetworkCallbackRaw"
-	ManagerService_UnregisterNetworkCallbackRaw_FullMethodName      = "/net.ManagerService/UnregisterNetworkCallbackRaw"
+	ConnectivityManagerService_AddDefaultNetworkActiveListener_FullMethodName    = "/net.ConnectivityManagerService/AddDefaultNetworkActiveListener"
+	ConnectivityManagerService_BindProcessToNetwork_FullMethodName               = "/net.ConnectivityManagerService/BindProcessToNetwork"
+	ConnectivityManagerService_CreateSocketKeepalive_FullMethodName              = "/net.ConnectivityManagerService/CreateSocketKeepalive"
+	ConnectivityManagerService_GetActiveNetwork_FullMethodName                   = "/net.ConnectivityManagerService/GetActiveNetwork"
+	ConnectivityManagerService_GetActiveNetworkInfo_FullMethodName               = "/net.ConnectivityManagerService/GetActiveNetworkInfo"
+	ConnectivityManagerService_GetAllNetworkInfo_FullMethodName                  = "/net.ConnectivityManagerService/GetAllNetworkInfo"
+	ConnectivityManagerService_GetAllNetworks_FullMethodName                     = "/net.ConnectivityManagerService/GetAllNetworks"
+	ConnectivityManagerService_GetBackgroundDataSetting_FullMethodName           = "/net.ConnectivityManagerService/GetBackgroundDataSetting"
+	ConnectivityManagerService_GetBoundNetworkForProcess_FullMethodName          = "/net.ConnectivityManagerService/GetBoundNetworkForProcess"
+	ConnectivityManagerService_GetConnectionOwnerUid_FullMethodName              = "/net.ConnectivityManagerService/GetConnectionOwnerUid"
+	ConnectivityManagerService_GetDefaultProxy_FullMethodName                    = "/net.ConnectivityManagerService/GetDefaultProxy"
+	ConnectivityManagerService_GetLinkProperties_FullMethodName                  = "/net.ConnectivityManagerService/GetLinkProperties"
+	ConnectivityManagerService_GetMultipathPreference_FullMethodName             = "/net.ConnectivityManagerService/GetMultipathPreference"
+	ConnectivityManagerService_GetNetworkCapabilities_FullMethodName             = "/net.ConnectivityManagerService/GetNetworkCapabilities"
+	ConnectivityManagerService_GetNetworkInfo1_FullMethodName                    = "/net.ConnectivityManagerService/GetNetworkInfo1"
+	ConnectivityManagerService_GetNetworkInfo1_1_FullMethodName                  = "/net.ConnectivityManagerService/GetNetworkInfo1_1"
+	ConnectivityManagerService_GetNetworkPreference_FullMethodName               = "/net.ConnectivityManagerService/GetNetworkPreference"
+	ConnectivityManagerService_GetNetworkWatchlistConfigHash_FullMethodName      = "/net.ConnectivityManagerService/GetNetworkWatchlistConfigHash"
+	ConnectivityManagerService_GetRestrictBackgroundStatus_FullMethodName        = "/net.ConnectivityManagerService/GetRestrictBackgroundStatus"
+	ConnectivityManagerService_IsActiveNetworkMetered_FullMethodName             = "/net.ConnectivityManagerService/IsActiveNetworkMetered"
+	ConnectivityManagerService_IsDefaultNetworkActive_FullMethodName             = "/net.ConnectivityManagerService/IsDefaultNetworkActive"
+	ConnectivityManagerService_RegisterDefaultNetworkCallback_FullMethodName     = "/net.ConnectivityManagerService/RegisterDefaultNetworkCallback"
+	ConnectivityManagerService_RegisterNetworkCallback2_FullMethodName           = "/net.ConnectivityManagerService/RegisterNetworkCallback2"
+	ConnectivityManagerService_RegisterNetworkCallback2_1_FullMethodName         = "/net.ConnectivityManagerService/RegisterNetworkCallback2_1"
+	ConnectivityManagerService_ReleaseNetworkRequest_FullMethodName              = "/net.ConnectivityManagerService/ReleaseNetworkRequest"
+	ConnectivityManagerService_RemoveDefaultNetworkActiveListener_FullMethodName = "/net.ConnectivityManagerService/RemoveDefaultNetworkActiveListener"
+	ConnectivityManagerService_ReportBadNetwork_FullMethodName                   = "/net.ConnectivityManagerService/ReportBadNetwork"
+	ConnectivityManagerService_ReportNetworkConnectivity_FullMethodName          = "/net.ConnectivityManagerService/ReportNetworkConnectivity"
+	ConnectivityManagerService_RequestBandwidthUpdate_FullMethodName             = "/net.ConnectivityManagerService/RequestBandwidthUpdate"
+	ConnectivityManagerService_RequestNetwork2_FullMethodName                    = "/net.ConnectivityManagerService/RequestNetwork2"
+	ConnectivityManagerService_RequestNetwork2_1_FullMethodName                  = "/net.ConnectivityManagerService/RequestNetwork2_1"
+	ConnectivityManagerService_RequestNetwork3_2_FullMethodName                  = "/net.ConnectivityManagerService/RequestNetwork3_2"
+	ConnectivityManagerService_SetNetworkPreference_FullMethodName               = "/net.ConnectivityManagerService/SetNetworkPreference"
+	ConnectivityManagerService_UnregisterNetworkCallback1_FullMethodName         = "/net.ConnectivityManagerService/UnregisterNetworkCallback1"
+	ConnectivityManagerService_UnregisterNetworkCallback1_1_FullMethodName       = "/net.ConnectivityManagerService/UnregisterNetworkCallback1_1"
+	ConnectivityManagerService_GetProcessDefaultNetwork_FullMethodName           = "/net.ConnectivityManagerService/GetProcessDefaultNetwork"
+	ConnectivityManagerService_IsNetworkTypeValid_FullMethodName                 = "/net.ConnectivityManagerService/IsNetworkTypeValid"
+	ConnectivityManagerService_SetProcessDefaultNetwork_FullMethodName           = "/net.ConnectivityManagerService/SetProcessDefaultNetwork"
 )
 
-// ManagerServiceClient is the client API for ManagerService service.
+// ConnectivityManagerServiceClient is the client API for ConnectivityManagerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ManagerServiceClient interface {
-	GetActiveNetworkRaw(ctx context.Context, in *GetActiveNetworkRawRequest, opts ...grpc.CallOption) (*GetActiveNetworkRawResponse, error)
-	GetNetworkCapabilitiesRaw(ctx context.Context, in *GetNetworkCapabilitiesRawRequest, opts ...grpc.CallOption) (*GetNetworkCapabilitiesRawResponse, error)
-	RegisterDefaultNetworkCallbackRaw(ctx context.Context, in *RegisterDefaultNetworkCallbackRawRequest, opts ...grpc.CallOption) (*RegisterDefaultNetworkCallbackRawResponse, error)
-	UnregisterNetworkCallbackRaw(ctx context.Context, in *UnregisterNetworkCallbackRawRequest, opts ...grpc.CallOption) (*UnregisterNetworkCallbackRawResponse, error)
+type ConnectivityManagerServiceClient interface {
+	AddDefaultNetworkActiveListener(ctx context.Context, in *AddDefaultNetworkActiveListenerRequest, opts ...grpc.CallOption) (*AddDefaultNetworkActiveListenerResponse, error)
+	BindProcessToNetwork(ctx context.Context, in *BindProcessToNetworkRequest, opts ...grpc.CallOption) (*BindProcessToNetworkResponse, error)
+	CreateSocketKeepalive(ctx context.Context, in *CreateSocketKeepaliveRequest, opts ...grpc.CallOption) (*CreateSocketKeepaliveResponse, error)
+	GetActiveNetwork(ctx context.Context, in *GetActiveNetworkRequest, opts ...grpc.CallOption) (*GetActiveNetworkResponse, error)
+	GetActiveNetworkInfo(ctx context.Context, in *GetActiveNetworkInfoRequest, opts ...grpc.CallOption) (*GetActiveNetworkInfoResponse, error)
+	GetAllNetworkInfo(ctx context.Context, in *GetAllNetworkInfoRequest, opts ...grpc.CallOption) (*GetAllNetworkInfoResponse, error)
+	GetAllNetworks(ctx context.Context, in *GetAllNetworksRequest, opts ...grpc.CallOption) (*GetAllNetworksResponse, error)
+	GetBackgroundDataSetting(ctx context.Context, in *GetBackgroundDataSettingRequest, opts ...grpc.CallOption) (*GetBackgroundDataSettingResponse, error)
+	GetBoundNetworkForProcess(ctx context.Context, in *GetBoundNetworkForProcessRequest, opts ...grpc.CallOption) (*GetBoundNetworkForProcessResponse, error)
+	GetConnectionOwnerUid(ctx context.Context, in *GetConnectionOwnerUidRequest, opts ...grpc.CallOption) (*GetConnectionOwnerUidResponse, error)
+	GetDefaultProxy(ctx context.Context, in *GetDefaultProxyRequest, opts ...grpc.CallOption) (*GetDefaultProxyResponse, error)
+	GetLinkProperties(ctx context.Context, in *GetLinkPropertiesRequest, opts ...grpc.CallOption) (*GetLinkPropertiesResponse, error)
+	GetMultipathPreference(ctx context.Context, in *GetMultipathPreferenceRequest, opts ...grpc.CallOption) (*GetMultipathPreferenceResponse, error)
+	GetNetworkCapabilities(ctx context.Context, in *GetNetworkCapabilitiesRequest, opts ...grpc.CallOption) (*GetNetworkCapabilitiesResponse, error)
+	GetNetworkInfo1(ctx context.Context, in *GetNetworkInfo1Request, opts ...grpc.CallOption) (*GetNetworkInfo1Response, error)
+	GetNetworkInfo1_1(ctx context.Context, in *GetNetworkInfo1_1Request, opts ...grpc.CallOption) (*GetNetworkInfo1_1Response, error)
+	GetNetworkPreference(ctx context.Context, in *GetNetworkPreferenceRequest, opts ...grpc.CallOption) (*GetNetworkPreferenceResponse, error)
+	GetNetworkWatchlistConfigHash(ctx context.Context, in *GetNetworkWatchlistConfigHashRequest, opts ...grpc.CallOption) (*GetNetworkWatchlistConfigHashResponse, error)
+	GetRestrictBackgroundStatus(ctx context.Context, in *GetRestrictBackgroundStatusRequest, opts ...grpc.CallOption) (*GetRestrictBackgroundStatusResponse, error)
+	IsActiveNetworkMetered(ctx context.Context, in *IsActiveNetworkMeteredRequest, opts ...grpc.CallOption) (*IsActiveNetworkMeteredResponse, error)
+	IsDefaultNetworkActive(ctx context.Context, in *IsDefaultNetworkActiveRequest, opts ...grpc.CallOption) (*IsDefaultNetworkActiveResponse, error)
+	RegisterDefaultNetworkCallback(ctx context.Context, in *RegisterDefaultNetworkCallbackRequest, opts ...grpc.CallOption) (*RegisterDefaultNetworkCallbackResponse, error)
+	RegisterNetworkCallback2(ctx context.Context, in *RegisterNetworkCallback2Request, opts ...grpc.CallOption) (*RegisterNetworkCallback2Response, error)
+	RegisterNetworkCallback2_1(ctx context.Context, in *RegisterNetworkCallback2_1Request, opts ...grpc.CallOption) (*RegisterNetworkCallback2_1Response, error)
+	ReleaseNetworkRequest(ctx context.Context, in *ReleaseNetworkRequestRequest, opts ...grpc.CallOption) (*ReleaseNetworkRequestResponse, error)
+	RemoveDefaultNetworkActiveListener(ctx context.Context, in *RemoveDefaultNetworkActiveListenerRequest, opts ...grpc.CallOption) (*RemoveDefaultNetworkActiveListenerResponse, error)
+	ReportBadNetwork(ctx context.Context, in *ReportBadNetworkRequest, opts ...grpc.CallOption) (*ReportBadNetworkResponse, error)
+	ReportNetworkConnectivity(ctx context.Context, in *ReportNetworkConnectivityRequest, opts ...grpc.CallOption) (*ReportNetworkConnectivityResponse, error)
+	RequestBandwidthUpdate(ctx context.Context, in *RequestBandwidthUpdateRequest, opts ...grpc.CallOption) (*RequestBandwidthUpdateResponse, error)
+	RequestNetwork2(ctx context.Context, in *RequestNetwork2Request, opts ...grpc.CallOption) (*RequestNetwork2Response, error)
+	RequestNetwork2_1(ctx context.Context, in *RequestNetwork2_1Request, opts ...grpc.CallOption) (*RequestNetwork2_1Response, error)
+	RequestNetwork3_2(ctx context.Context, in *RequestNetwork3_2Request, opts ...grpc.CallOption) (*RequestNetwork3_2Response, error)
+	SetNetworkPreference(ctx context.Context, in *SetNetworkPreferenceRequest, opts ...grpc.CallOption) (*SetNetworkPreferenceResponse, error)
+	UnregisterNetworkCallback1(ctx context.Context, in *UnregisterNetworkCallback1Request, opts ...grpc.CallOption) (*UnregisterNetworkCallback1Response, error)
+	UnregisterNetworkCallback1_1(ctx context.Context, in *UnregisterNetworkCallback1_1Request, opts ...grpc.CallOption) (*UnregisterNetworkCallback1_1Response, error)
+	GetProcessDefaultNetwork(ctx context.Context, in *GetProcessDefaultNetworkRequest, opts ...grpc.CallOption) (*GetProcessDefaultNetworkResponse, error)
+	IsNetworkTypeValid(ctx context.Context, in *IsNetworkTypeValidRequest, opts ...grpc.CallOption) (*IsNetworkTypeValidResponse, error)
+	SetProcessDefaultNetwork(ctx context.Context, in *SetProcessDefaultNetworkRequest, opts ...grpc.CallOption) (*SetProcessDefaultNetworkResponse, error)
 }
 
-type managerServiceClient struct {
+type connectivityManagerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewManagerServiceClient(cc grpc.ClientConnInterface) ManagerServiceClient {
-	return &managerServiceClient{cc}
+func NewConnectivityManagerServiceClient(cc grpc.ClientConnInterface) ConnectivityManagerServiceClient {
+	return &connectivityManagerServiceClient{cc}
 }
 
-func (c *managerServiceClient) GetActiveNetworkRaw(ctx context.Context, in *GetActiveNetworkRawRequest, opts ...grpc.CallOption) (*GetActiveNetworkRawResponse, error) {
+func (c *connectivityManagerServiceClient) AddDefaultNetworkActiveListener(ctx context.Context, in *AddDefaultNetworkActiveListenerRequest, opts ...grpc.CallOption) (*AddDefaultNetworkActiveListenerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetActiveNetworkRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_GetActiveNetworkRaw_FullMethodName, in, out, cOpts...)
+	out := new(AddDefaultNetworkActiveListenerResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_AddDefaultNetworkActiveListener_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) GetNetworkCapabilitiesRaw(ctx context.Context, in *GetNetworkCapabilitiesRawRequest, opts ...grpc.CallOption) (*GetNetworkCapabilitiesRawResponse, error) {
+func (c *connectivityManagerServiceClient) BindProcessToNetwork(ctx context.Context, in *BindProcessToNetworkRequest, opts ...grpc.CallOption) (*BindProcessToNetworkResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetNetworkCapabilitiesRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_GetNetworkCapabilitiesRaw_FullMethodName, in, out, cOpts...)
+	out := new(BindProcessToNetworkResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_BindProcessToNetwork_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) RegisterDefaultNetworkCallbackRaw(ctx context.Context, in *RegisterDefaultNetworkCallbackRawRequest, opts ...grpc.CallOption) (*RegisterDefaultNetworkCallbackRawResponse, error) {
+func (c *connectivityManagerServiceClient) CreateSocketKeepalive(ctx context.Context, in *CreateSocketKeepaliveRequest, opts ...grpc.CallOption) (*CreateSocketKeepaliveResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RegisterDefaultNetworkCallbackRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_RegisterDefaultNetworkCallbackRaw_FullMethodName, in, out, cOpts...)
+	out := new(CreateSocketKeepaliveResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_CreateSocketKeepalive_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) UnregisterNetworkCallbackRaw(ctx context.Context, in *UnregisterNetworkCallbackRawRequest, opts ...grpc.CallOption) (*UnregisterNetworkCallbackRawResponse, error) {
+func (c *connectivityManagerServiceClient) GetActiveNetwork(ctx context.Context, in *GetActiveNetworkRequest, opts ...grpc.CallOption) (*GetActiveNetworkResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UnregisterNetworkCallbackRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_UnregisterNetworkCallbackRaw_FullMethodName, in, out, cOpts...)
+	out := new(GetActiveNetworkResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetActiveNetwork_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ManagerServiceServer is the server API for ManagerService service.
-// All implementations must embed UnimplementedManagerServiceServer
+func (c *connectivityManagerServiceClient) GetActiveNetworkInfo(ctx context.Context, in *GetActiveNetworkInfoRequest, opts ...grpc.CallOption) (*GetActiveNetworkInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetActiveNetworkInfoResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetActiveNetworkInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) GetAllNetworkInfo(ctx context.Context, in *GetAllNetworkInfoRequest, opts ...grpc.CallOption) (*GetAllNetworkInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAllNetworkInfoResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetAllNetworkInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) GetAllNetworks(ctx context.Context, in *GetAllNetworksRequest, opts ...grpc.CallOption) (*GetAllNetworksResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAllNetworksResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetAllNetworks_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) GetBackgroundDataSetting(ctx context.Context, in *GetBackgroundDataSettingRequest, opts ...grpc.CallOption) (*GetBackgroundDataSettingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBackgroundDataSettingResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetBackgroundDataSetting_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) GetBoundNetworkForProcess(ctx context.Context, in *GetBoundNetworkForProcessRequest, opts ...grpc.CallOption) (*GetBoundNetworkForProcessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBoundNetworkForProcessResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetBoundNetworkForProcess_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) GetConnectionOwnerUid(ctx context.Context, in *GetConnectionOwnerUidRequest, opts ...grpc.CallOption) (*GetConnectionOwnerUidResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetConnectionOwnerUidResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetConnectionOwnerUid_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) GetDefaultProxy(ctx context.Context, in *GetDefaultProxyRequest, opts ...grpc.CallOption) (*GetDefaultProxyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDefaultProxyResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetDefaultProxy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) GetLinkProperties(ctx context.Context, in *GetLinkPropertiesRequest, opts ...grpc.CallOption) (*GetLinkPropertiesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLinkPropertiesResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetLinkProperties_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) GetMultipathPreference(ctx context.Context, in *GetMultipathPreferenceRequest, opts ...grpc.CallOption) (*GetMultipathPreferenceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMultipathPreferenceResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetMultipathPreference_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) GetNetworkCapabilities(ctx context.Context, in *GetNetworkCapabilitiesRequest, opts ...grpc.CallOption) (*GetNetworkCapabilitiesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNetworkCapabilitiesResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetNetworkCapabilities_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) GetNetworkInfo1(ctx context.Context, in *GetNetworkInfo1Request, opts ...grpc.CallOption) (*GetNetworkInfo1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNetworkInfo1Response)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetNetworkInfo1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) GetNetworkInfo1_1(ctx context.Context, in *GetNetworkInfo1_1Request, opts ...grpc.CallOption) (*GetNetworkInfo1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNetworkInfo1_1Response)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetNetworkInfo1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) GetNetworkPreference(ctx context.Context, in *GetNetworkPreferenceRequest, opts ...grpc.CallOption) (*GetNetworkPreferenceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNetworkPreferenceResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetNetworkPreference_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) GetNetworkWatchlistConfigHash(ctx context.Context, in *GetNetworkWatchlistConfigHashRequest, opts ...grpc.CallOption) (*GetNetworkWatchlistConfigHashResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNetworkWatchlistConfigHashResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetNetworkWatchlistConfigHash_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) GetRestrictBackgroundStatus(ctx context.Context, in *GetRestrictBackgroundStatusRequest, opts ...grpc.CallOption) (*GetRestrictBackgroundStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRestrictBackgroundStatusResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetRestrictBackgroundStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) IsActiveNetworkMetered(ctx context.Context, in *IsActiveNetworkMeteredRequest, opts ...grpc.CallOption) (*IsActiveNetworkMeteredResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsActiveNetworkMeteredResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_IsActiveNetworkMetered_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) IsDefaultNetworkActive(ctx context.Context, in *IsDefaultNetworkActiveRequest, opts ...grpc.CallOption) (*IsDefaultNetworkActiveResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsDefaultNetworkActiveResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_IsDefaultNetworkActive_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) RegisterDefaultNetworkCallback(ctx context.Context, in *RegisterDefaultNetworkCallbackRequest, opts ...grpc.CallOption) (*RegisterDefaultNetworkCallbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterDefaultNetworkCallbackResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_RegisterDefaultNetworkCallback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) RegisterNetworkCallback2(ctx context.Context, in *RegisterNetworkCallback2Request, opts ...grpc.CallOption) (*RegisterNetworkCallback2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterNetworkCallback2Response)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_RegisterNetworkCallback2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) RegisterNetworkCallback2_1(ctx context.Context, in *RegisterNetworkCallback2_1Request, opts ...grpc.CallOption) (*RegisterNetworkCallback2_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterNetworkCallback2_1Response)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_RegisterNetworkCallback2_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) ReleaseNetworkRequest(ctx context.Context, in *ReleaseNetworkRequestRequest, opts ...grpc.CallOption) (*ReleaseNetworkRequestResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReleaseNetworkRequestResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_ReleaseNetworkRequest_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) RemoveDefaultNetworkActiveListener(ctx context.Context, in *RemoveDefaultNetworkActiveListenerRequest, opts ...grpc.CallOption) (*RemoveDefaultNetworkActiveListenerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveDefaultNetworkActiveListenerResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_RemoveDefaultNetworkActiveListener_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) ReportBadNetwork(ctx context.Context, in *ReportBadNetworkRequest, opts ...grpc.CallOption) (*ReportBadNetworkResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReportBadNetworkResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_ReportBadNetwork_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) ReportNetworkConnectivity(ctx context.Context, in *ReportNetworkConnectivityRequest, opts ...grpc.CallOption) (*ReportNetworkConnectivityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReportNetworkConnectivityResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_ReportNetworkConnectivity_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) RequestBandwidthUpdate(ctx context.Context, in *RequestBandwidthUpdateRequest, opts ...grpc.CallOption) (*RequestBandwidthUpdateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestBandwidthUpdateResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_RequestBandwidthUpdate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) RequestNetwork2(ctx context.Context, in *RequestNetwork2Request, opts ...grpc.CallOption) (*RequestNetwork2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestNetwork2Response)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_RequestNetwork2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) RequestNetwork2_1(ctx context.Context, in *RequestNetwork2_1Request, opts ...grpc.CallOption) (*RequestNetwork2_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestNetwork2_1Response)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_RequestNetwork2_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) RequestNetwork3_2(ctx context.Context, in *RequestNetwork3_2Request, opts ...grpc.CallOption) (*RequestNetwork3_2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestNetwork3_2Response)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_RequestNetwork3_2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) SetNetworkPreference(ctx context.Context, in *SetNetworkPreferenceRequest, opts ...grpc.CallOption) (*SetNetworkPreferenceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetNetworkPreferenceResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_SetNetworkPreference_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) UnregisterNetworkCallback1(ctx context.Context, in *UnregisterNetworkCallback1Request, opts ...grpc.CallOption) (*UnregisterNetworkCallback1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnregisterNetworkCallback1Response)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_UnregisterNetworkCallback1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) UnregisterNetworkCallback1_1(ctx context.Context, in *UnregisterNetworkCallback1_1Request, opts ...grpc.CallOption) (*UnregisterNetworkCallback1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnregisterNetworkCallback1_1Response)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_UnregisterNetworkCallback1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) GetProcessDefaultNetwork(ctx context.Context, in *GetProcessDefaultNetworkRequest, opts ...grpc.CallOption) (*GetProcessDefaultNetworkResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProcessDefaultNetworkResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_GetProcessDefaultNetwork_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) IsNetworkTypeValid(ctx context.Context, in *IsNetworkTypeValidRequest, opts ...grpc.CallOption) (*IsNetworkTypeValidResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsNetworkTypeValidResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_IsNetworkTypeValid_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *connectivityManagerServiceClient) SetProcessDefaultNetwork(ctx context.Context, in *SetProcessDefaultNetworkRequest, opts ...grpc.CallOption) (*SetProcessDefaultNetworkResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetProcessDefaultNetworkResponse)
+	err := c.cc.Invoke(ctx, ConnectivityManagerService_SetProcessDefaultNetwork_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ConnectivityManagerServiceServer is the server API for ConnectivityManagerService service.
+// All implementations must embed UnimplementedConnectivityManagerServiceServer
 // for forward compatibility.
-type ManagerServiceServer interface {
-	GetActiveNetworkRaw(context.Context, *GetActiveNetworkRawRequest) (*GetActiveNetworkRawResponse, error)
-	GetNetworkCapabilitiesRaw(context.Context, *GetNetworkCapabilitiesRawRequest) (*GetNetworkCapabilitiesRawResponse, error)
-	RegisterDefaultNetworkCallbackRaw(context.Context, *RegisterDefaultNetworkCallbackRawRequest) (*RegisterDefaultNetworkCallbackRawResponse, error)
-	UnregisterNetworkCallbackRaw(context.Context, *UnregisterNetworkCallbackRawRequest) (*UnregisterNetworkCallbackRawResponse, error)
-	mustEmbedUnimplementedManagerServiceServer()
+type ConnectivityManagerServiceServer interface {
+	AddDefaultNetworkActiveListener(context.Context, *AddDefaultNetworkActiveListenerRequest) (*AddDefaultNetworkActiveListenerResponse, error)
+	BindProcessToNetwork(context.Context, *BindProcessToNetworkRequest) (*BindProcessToNetworkResponse, error)
+	CreateSocketKeepalive(context.Context, *CreateSocketKeepaliveRequest) (*CreateSocketKeepaliveResponse, error)
+	GetActiveNetwork(context.Context, *GetActiveNetworkRequest) (*GetActiveNetworkResponse, error)
+	GetActiveNetworkInfo(context.Context, *GetActiveNetworkInfoRequest) (*GetActiveNetworkInfoResponse, error)
+	GetAllNetworkInfo(context.Context, *GetAllNetworkInfoRequest) (*GetAllNetworkInfoResponse, error)
+	GetAllNetworks(context.Context, *GetAllNetworksRequest) (*GetAllNetworksResponse, error)
+	GetBackgroundDataSetting(context.Context, *GetBackgroundDataSettingRequest) (*GetBackgroundDataSettingResponse, error)
+	GetBoundNetworkForProcess(context.Context, *GetBoundNetworkForProcessRequest) (*GetBoundNetworkForProcessResponse, error)
+	GetConnectionOwnerUid(context.Context, *GetConnectionOwnerUidRequest) (*GetConnectionOwnerUidResponse, error)
+	GetDefaultProxy(context.Context, *GetDefaultProxyRequest) (*GetDefaultProxyResponse, error)
+	GetLinkProperties(context.Context, *GetLinkPropertiesRequest) (*GetLinkPropertiesResponse, error)
+	GetMultipathPreference(context.Context, *GetMultipathPreferenceRequest) (*GetMultipathPreferenceResponse, error)
+	GetNetworkCapabilities(context.Context, *GetNetworkCapabilitiesRequest) (*GetNetworkCapabilitiesResponse, error)
+	GetNetworkInfo1(context.Context, *GetNetworkInfo1Request) (*GetNetworkInfo1Response, error)
+	GetNetworkInfo1_1(context.Context, *GetNetworkInfo1_1Request) (*GetNetworkInfo1_1Response, error)
+	GetNetworkPreference(context.Context, *GetNetworkPreferenceRequest) (*GetNetworkPreferenceResponse, error)
+	GetNetworkWatchlistConfigHash(context.Context, *GetNetworkWatchlistConfigHashRequest) (*GetNetworkWatchlistConfigHashResponse, error)
+	GetRestrictBackgroundStatus(context.Context, *GetRestrictBackgroundStatusRequest) (*GetRestrictBackgroundStatusResponse, error)
+	IsActiveNetworkMetered(context.Context, *IsActiveNetworkMeteredRequest) (*IsActiveNetworkMeteredResponse, error)
+	IsDefaultNetworkActive(context.Context, *IsDefaultNetworkActiveRequest) (*IsDefaultNetworkActiveResponse, error)
+	RegisterDefaultNetworkCallback(context.Context, *RegisterDefaultNetworkCallbackRequest) (*RegisterDefaultNetworkCallbackResponse, error)
+	RegisterNetworkCallback2(context.Context, *RegisterNetworkCallback2Request) (*RegisterNetworkCallback2Response, error)
+	RegisterNetworkCallback2_1(context.Context, *RegisterNetworkCallback2_1Request) (*RegisterNetworkCallback2_1Response, error)
+	ReleaseNetworkRequest(context.Context, *ReleaseNetworkRequestRequest) (*ReleaseNetworkRequestResponse, error)
+	RemoveDefaultNetworkActiveListener(context.Context, *RemoveDefaultNetworkActiveListenerRequest) (*RemoveDefaultNetworkActiveListenerResponse, error)
+	ReportBadNetwork(context.Context, *ReportBadNetworkRequest) (*ReportBadNetworkResponse, error)
+	ReportNetworkConnectivity(context.Context, *ReportNetworkConnectivityRequest) (*ReportNetworkConnectivityResponse, error)
+	RequestBandwidthUpdate(context.Context, *RequestBandwidthUpdateRequest) (*RequestBandwidthUpdateResponse, error)
+	RequestNetwork2(context.Context, *RequestNetwork2Request) (*RequestNetwork2Response, error)
+	RequestNetwork2_1(context.Context, *RequestNetwork2_1Request) (*RequestNetwork2_1Response, error)
+	RequestNetwork3_2(context.Context, *RequestNetwork3_2Request) (*RequestNetwork3_2Response, error)
+	SetNetworkPreference(context.Context, *SetNetworkPreferenceRequest) (*SetNetworkPreferenceResponse, error)
+	UnregisterNetworkCallback1(context.Context, *UnregisterNetworkCallback1Request) (*UnregisterNetworkCallback1Response, error)
+	UnregisterNetworkCallback1_1(context.Context, *UnregisterNetworkCallback1_1Request) (*UnregisterNetworkCallback1_1Response, error)
+	GetProcessDefaultNetwork(context.Context, *GetProcessDefaultNetworkRequest) (*GetProcessDefaultNetworkResponse, error)
+	IsNetworkTypeValid(context.Context, *IsNetworkTypeValidRequest) (*IsNetworkTypeValidResponse, error)
+	SetProcessDefaultNetwork(context.Context, *SetProcessDefaultNetworkRequest) (*SetProcessDefaultNetworkResponse, error)
+	mustEmbedUnimplementedConnectivityManagerServiceServer()
 }
 
-// UnimplementedManagerServiceServer must be embedded to have
+// UnimplementedConnectivityManagerServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedManagerServiceServer struct{}
+type UnimplementedConnectivityManagerServiceServer struct{}
 
-func (UnimplementedManagerServiceServer) GetActiveNetworkRaw(context.Context, *GetActiveNetworkRawRequest) (*GetActiveNetworkRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetActiveNetworkRaw not implemented")
+func (UnimplementedConnectivityManagerServiceServer) AddDefaultNetworkActiveListener(context.Context, *AddDefaultNetworkActiveListenerRequest) (*AddDefaultNetworkActiveListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddDefaultNetworkActiveListener not implemented")
 }
-func (UnimplementedManagerServiceServer) GetNetworkCapabilitiesRaw(context.Context, *GetNetworkCapabilitiesRawRequest) (*GetNetworkCapabilitiesRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetNetworkCapabilitiesRaw not implemented")
+func (UnimplementedConnectivityManagerServiceServer) BindProcessToNetwork(context.Context, *BindProcessToNetworkRequest) (*BindProcessToNetworkResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BindProcessToNetwork not implemented")
 }
-func (UnimplementedManagerServiceServer) RegisterDefaultNetworkCallbackRaw(context.Context, *RegisterDefaultNetworkCallbackRawRequest) (*RegisterDefaultNetworkCallbackRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RegisterDefaultNetworkCallbackRaw not implemented")
+func (UnimplementedConnectivityManagerServiceServer) CreateSocketKeepalive(context.Context, *CreateSocketKeepaliveRequest) (*CreateSocketKeepaliveResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateSocketKeepalive not implemented")
 }
-func (UnimplementedManagerServiceServer) UnregisterNetworkCallbackRaw(context.Context, *UnregisterNetworkCallbackRawRequest) (*UnregisterNetworkCallbackRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UnregisterNetworkCallbackRaw not implemented")
+func (UnimplementedConnectivityManagerServiceServer) GetActiveNetwork(context.Context, *GetActiveNetworkRequest) (*GetActiveNetworkResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetActiveNetwork not implemented")
 }
-func (UnimplementedManagerServiceServer) mustEmbedUnimplementedManagerServiceServer() {}
-func (UnimplementedManagerServiceServer) testEmbeddedByValue()                        {}
+func (UnimplementedConnectivityManagerServiceServer) GetActiveNetworkInfo(context.Context, *GetActiveNetworkInfoRequest) (*GetActiveNetworkInfoResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetActiveNetworkInfo not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) GetAllNetworkInfo(context.Context, *GetAllNetworkInfoRequest) (*GetAllNetworkInfoResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAllNetworkInfo not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) GetAllNetworks(context.Context, *GetAllNetworksRequest) (*GetAllNetworksResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAllNetworks not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) GetBackgroundDataSetting(context.Context, *GetBackgroundDataSettingRequest) (*GetBackgroundDataSettingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBackgroundDataSetting not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) GetBoundNetworkForProcess(context.Context, *GetBoundNetworkForProcessRequest) (*GetBoundNetworkForProcessResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBoundNetworkForProcess not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) GetConnectionOwnerUid(context.Context, *GetConnectionOwnerUidRequest) (*GetConnectionOwnerUidResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetConnectionOwnerUid not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) GetDefaultProxy(context.Context, *GetDefaultProxyRequest) (*GetDefaultProxyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDefaultProxy not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) GetLinkProperties(context.Context, *GetLinkPropertiesRequest) (*GetLinkPropertiesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLinkProperties not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) GetMultipathPreference(context.Context, *GetMultipathPreferenceRequest) (*GetMultipathPreferenceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMultipathPreference not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) GetNetworkCapabilities(context.Context, *GetNetworkCapabilitiesRequest) (*GetNetworkCapabilitiesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetNetworkCapabilities not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) GetNetworkInfo1(context.Context, *GetNetworkInfo1Request) (*GetNetworkInfo1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetNetworkInfo1 not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) GetNetworkInfo1_1(context.Context, *GetNetworkInfo1_1Request) (*GetNetworkInfo1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetNetworkInfo1_1 not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) GetNetworkPreference(context.Context, *GetNetworkPreferenceRequest) (*GetNetworkPreferenceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetNetworkPreference not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) GetNetworkWatchlistConfigHash(context.Context, *GetNetworkWatchlistConfigHashRequest) (*GetNetworkWatchlistConfigHashResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetNetworkWatchlistConfigHash not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) GetRestrictBackgroundStatus(context.Context, *GetRestrictBackgroundStatusRequest) (*GetRestrictBackgroundStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRestrictBackgroundStatus not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) IsActiveNetworkMetered(context.Context, *IsActiveNetworkMeteredRequest) (*IsActiveNetworkMeteredResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsActiveNetworkMetered not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) IsDefaultNetworkActive(context.Context, *IsDefaultNetworkActiveRequest) (*IsDefaultNetworkActiveResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsDefaultNetworkActive not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) RegisterDefaultNetworkCallback(context.Context, *RegisterDefaultNetworkCallbackRequest) (*RegisterDefaultNetworkCallbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterDefaultNetworkCallback not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) RegisterNetworkCallback2(context.Context, *RegisterNetworkCallback2Request) (*RegisterNetworkCallback2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterNetworkCallback2 not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) RegisterNetworkCallback2_1(context.Context, *RegisterNetworkCallback2_1Request) (*RegisterNetworkCallback2_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterNetworkCallback2_1 not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) ReleaseNetworkRequest(context.Context, *ReleaseNetworkRequestRequest) (*ReleaseNetworkRequestResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReleaseNetworkRequest not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) RemoveDefaultNetworkActiveListener(context.Context, *RemoveDefaultNetworkActiveListenerRequest) (*RemoveDefaultNetworkActiveListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveDefaultNetworkActiveListener not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) ReportBadNetwork(context.Context, *ReportBadNetworkRequest) (*ReportBadNetworkResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReportBadNetwork not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) ReportNetworkConnectivity(context.Context, *ReportNetworkConnectivityRequest) (*ReportNetworkConnectivityResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReportNetworkConnectivity not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) RequestBandwidthUpdate(context.Context, *RequestBandwidthUpdateRequest) (*RequestBandwidthUpdateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestBandwidthUpdate not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) RequestNetwork2(context.Context, *RequestNetwork2Request) (*RequestNetwork2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestNetwork2 not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) RequestNetwork2_1(context.Context, *RequestNetwork2_1Request) (*RequestNetwork2_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestNetwork2_1 not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) RequestNetwork3_2(context.Context, *RequestNetwork3_2Request) (*RequestNetwork3_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestNetwork3_2 not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) SetNetworkPreference(context.Context, *SetNetworkPreferenceRequest) (*SetNetworkPreferenceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetNetworkPreference not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) UnregisterNetworkCallback1(context.Context, *UnregisterNetworkCallback1Request) (*UnregisterNetworkCallback1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnregisterNetworkCallback1 not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) UnregisterNetworkCallback1_1(context.Context, *UnregisterNetworkCallback1_1Request) (*UnregisterNetworkCallback1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnregisterNetworkCallback1_1 not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) GetProcessDefaultNetwork(context.Context, *GetProcessDefaultNetworkRequest) (*GetProcessDefaultNetworkResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetProcessDefaultNetwork not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) IsNetworkTypeValid(context.Context, *IsNetworkTypeValidRequest) (*IsNetworkTypeValidResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsNetworkTypeValid not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) SetProcessDefaultNetwork(context.Context, *SetProcessDefaultNetworkRequest) (*SetProcessDefaultNetworkResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetProcessDefaultNetwork not implemented")
+}
+func (UnimplementedConnectivityManagerServiceServer) mustEmbedUnimplementedConnectivityManagerServiceServer() {
+}
+func (UnimplementedConnectivityManagerServiceServer) testEmbeddedByValue() {}
 
-// UnsafeManagerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ManagerServiceServer will
+// UnsafeConnectivityManagerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ConnectivityManagerServiceServer will
 // result in compilation errors.
-type UnsafeManagerServiceServer interface {
-	mustEmbedUnimplementedManagerServiceServer()
+type UnsafeConnectivityManagerServiceServer interface {
+	mustEmbedUnimplementedConnectivityManagerServiceServer()
 }
 
-func RegisterManagerServiceServer(s grpc.ServiceRegistrar, srv ManagerServiceServer) {
-	// If the following call panics, it indicates UnimplementedManagerServiceServer was
+func RegisterConnectivityManagerServiceServer(s grpc.ServiceRegistrar, srv ConnectivityManagerServiceServer) {
+	// If the following call panics, it indicates UnimplementedConnectivityManagerServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ManagerService_ServiceDesc, srv)
+	s.RegisterService(&ConnectivityManagerService_ServiceDesc, srv)
 }
 
-func _ManagerService_GetActiveNetworkRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetActiveNetworkRawRequest)
+func _ConnectivityManagerService_AddDefaultNetworkActiveListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddDefaultNetworkActiveListenerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetActiveNetworkRaw(ctx, in)
+		return srv.(ConnectivityManagerServiceServer).AddDefaultNetworkActiveListener(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_GetActiveNetworkRaw_FullMethodName,
+		FullMethod: ConnectivityManagerService_AddDefaultNetworkActiveListener_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetActiveNetworkRaw(ctx, req.(*GetActiveNetworkRawRequest))
+		return srv.(ConnectivityManagerServiceServer).AddDefaultNetworkActiveListener(ctx, req.(*AddDefaultNetworkActiveListenerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_GetNetworkCapabilitiesRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetNetworkCapabilitiesRawRequest)
+func _ConnectivityManagerService_BindProcessToNetwork_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BindProcessToNetworkRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetNetworkCapabilitiesRaw(ctx, in)
+		return srv.(ConnectivityManagerServiceServer).BindProcessToNetwork(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_GetNetworkCapabilitiesRaw_FullMethodName,
+		FullMethod: ConnectivityManagerService_BindProcessToNetwork_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetNetworkCapabilitiesRaw(ctx, req.(*GetNetworkCapabilitiesRawRequest))
+		return srv.(ConnectivityManagerServiceServer).BindProcessToNetwork(ctx, req.(*BindProcessToNetworkRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_RegisterDefaultNetworkCallbackRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RegisterDefaultNetworkCallbackRawRequest)
+func _ConnectivityManagerService_CreateSocketKeepalive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSocketKeepaliveRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).RegisterDefaultNetworkCallbackRaw(ctx, in)
+		return srv.(ConnectivityManagerServiceServer).CreateSocketKeepalive(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_RegisterDefaultNetworkCallbackRaw_FullMethodName,
+		FullMethod: ConnectivityManagerService_CreateSocketKeepalive_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).RegisterDefaultNetworkCallbackRaw(ctx, req.(*RegisterDefaultNetworkCallbackRawRequest))
+		return srv.(ConnectivityManagerServiceServer).CreateSocketKeepalive(ctx, req.(*CreateSocketKeepaliveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_UnregisterNetworkCallbackRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UnregisterNetworkCallbackRawRequest)
+func _ConnectivityManagerService_GetActiveNetwork_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetActiveNetworkRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).UnregisterNetworkCallbackRaw(ctx, in)
+		return srv.(ConnectivityManagerServiceServer).GetActiveNetwork(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_UnregisterNetworkCallbackRaw_FullMethodName,
+		FullMethod: ConnectivityManagerService_GetActiveNetwork_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).UnregisterNetworkCallbackRaw(ctx, req.(*UnregisterNetworkCallbackRawRequest))
+		return srv.(ConnectivityManagerServiceServer).GetActiveNetwork(ctx, req.(*GetActiveNetworkRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ManagerService_ServiceDesc is the grpc.ServiceDesc for ManagerService service.
+func _ConnectivityManagerService_GetActiveNetworkInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetActiveNetworkInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).GetActiveNetworkInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_GetActiveNetworkInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).GetActiveNetworkInfo(ctx, req.(*GetActiveNetworkInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_GetAllNetworkInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllNetworkInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).GetAllNetworkInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_GetAllNetworkInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).GetAllNetworkInfo(ctx, req.(*GetAllNetworkInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_GetAllNetworks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllNetworksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).GetAllNetworks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_GetAllNetworks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).GetAllNetworks(ctx, req.(*GetAllNetworksRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_GetBackgroundDataSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBackgroundDataSettingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).GetBackgroundDataSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_GetBackgroundDataSetting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).GetBackgroundDataSetting(ctx, req.(*GetBackgroundDataSettingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_GetBoundNetworkForProcess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBoundNetworkForProcessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).GetBoundNetworkForProcess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_GetBoundNetworkForProcess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).GetBoundNetworkForProcess(ctx, req.(*GetBoundNetworkForProcessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_GetConnectionOwnerUid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConnectionOwnerUidRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).GetConnectionOwnerUid(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_GetConnectionOwnerUid_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).GetConnectionOwnerUid(ctx, req.(*GetConnectionOwnerUidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_GetDefaultProxy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDefaultProxyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).GetDefaultProxy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_GetDefaultProxy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).GetDefaultProxy(ctx, req.(*GetDefaultProxyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_GetLinkProperties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLinkPropertiesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).GetLinkProperties(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_GetLinkProperties_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).GetLinkProperties(ctx, req.(*GetLinkPropertiesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_GetMultipathPreference_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMultipathPreferenceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).GetMultipathPreference(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_GetMultipathPreference_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).GetMultipathPreference(ctx, req.(*GetMultipathPreferenceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_GetNetworkCapabilities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNetworkCapabilitiesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).GetNetworkCapabilities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_GetNetworkCapabilities_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).GetNetworkCapabilities(ctx, req.(*GetNetworkCapabilitiesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_GetNetworkInfo1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNetworkInfo1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).GetNetworkInfo1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_GetNetworkInfo1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).GetNetworkInfo1(ctx, req.(*GetNetworkInfo1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_GetNetworkInfo1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNetworkInfo1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).GetNetworkInfo1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_GetNetworkInfo1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).GetNetworkInfo1_1(ctx, req.(*GetNetworkInfo1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_GetNetworkPreference_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNetworkPreferenceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).GetNetworkPreference(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_GetNetworkPreference_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).GetNetworkPreference(ctx, req.(*GetNetworkPreferenceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_GetNetworkWatchlistConfigHash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNetworkWatchlistConfigHashRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).GetNetworkWatchlistConfigHash(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_GetNetworkWatchlistConfigHash_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).GetNetworkWatchlistConfigHash(ctx, req.(*GetNetworkWatchlistConfigHashRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_GetRestrictBackgroundStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRestrictBackgroundStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).GetRestrictBackgroundStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_GetRestrictBackgroundStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).GetRestrictBackgroundStatus(ctx, req.(*GetRestrictBackgroundStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_IsActiveNetworkMetered_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsActiveNetworkMeteredRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).IsActiveNetworkMetered(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_IsActiveNetworkMetered_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).IsActiveNetworkMetered(ctx, req.(*IsActiveNetworkMeteredRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_IsDefaultNetworkActive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsDefaultNetworkActiveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).IsDefaultNetworkActive(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_IsDefaultNetworkActive_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).IsDefaultNetworkActive(ctx, req.(*IsDefaultNetworkActiveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_RegisterDefaultNetworkCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterDefaultNetworkCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).RegisterDefaultNetworkCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_RegisterDefaultNetworkCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).RegisterDefaultNetworkCallback(ctx, req.(*RegisterDefaultNetworkCallbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_RegisterNetworkCallback2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterNetworkCallback2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).RegisterNetworkCallback2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_RegisterNetworkCallback2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).RegisterNetworkCallback2(ctx, req.(*RegisterNetworkCallback2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_RegisterNetworkCallback2_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterNetworkCallback2_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).RegisterNetworkCallback2_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_RegisterNetworkCallback2_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).RegisterNetworkCallback2_1(ctx, req.(*RegisterNetworkCallback2_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_ReleaseNetworkRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReleaseNetworkRequestRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).ReleaseNetworkRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_ReleaseNetworkRequest_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).ReleaseNetworkRequest(ctx, req.(*ReleaseNetworkRequestRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_RemoveDefaultNetworkActiveListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveDefaultNetworkActiveListenerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).RemoveDefaultNetworkActiveListener(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_RemoveDefaultNetworkActiveListener_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).RemoveDefaultNetworkActiveListener(ctx, req.(*RemoveDefaultNetworkActiveListenerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_ReportBadNetwork_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReportBadNetworkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).ReportBadNetwork(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_ReportBadNetwork_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).ReportBadNetwork(ctx, req.(*ReportBadNetworkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_ReportNetworkConnectivity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReportNetworkConnectivityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).ReportNetworkConnectivity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_ReportNetworkConnectivity_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).ReportNetworkConnectivity(ctx, req.(*ReportNetworkConnectivityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_RequestBandwidthUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestBandwidthUpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).RequestBandwidthUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_RequestBandwidthUpdate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).RequestBandwidthUpdate(ctx, req.(*RequestBandwidthUpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_RequestNetwork2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestNetwork2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).RequestNetwork2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_RequestNetwork2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).RequestNetwork2(ctx, req.(*RequestNetwork2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_RequestNetwork2_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestNetwork2_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).RequestNetwork2_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_RequestNetwork2_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).RequestNetwork2_1(ctx, req.(*RequestNetwork2_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_RequestNetwork3_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestNetwork3_2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).RequestNetwork3_2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_RequestNetwork3_2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).RequestNetwork3_2(ctx, req.(*RequestNetwork3_2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_SetNetworkPreference_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetNetworkPreferenceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).SetNetworkPreference(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_SetNetworkPreference_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).SetNetworkPreference(ctx, req.(*SetNetworkPreferenceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_UnregisterNetworkCallback1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnregisterNetworkCallback1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).UnregisterNetworkCallback1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_UnregisterNetworkCallback1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).UnregisterNetworkCallback1(ctx, req.(*UnregisterNetworkCallback1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_UnregisterNetworkCallback1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnregisterNetworkCallback1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).UnregisterNetworkCallback1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_UnregisterNetworkCallback1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).UnregisterNetworkCallback1_1(ctx, req.(*UnregisterNetworkCallback1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_GetProcessDefaultNetwork_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProcessDefaultNetworkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).GetProcessDefaultNetwork(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_GetProcessDefaultNetwork_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).GetProcessDefaultNetwork(ctx, req.(*GetProcessDefaultNetworkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_IsNetworkTypeValid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsNetworkTypeValidRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).IsNetworkTypeValid(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_IsNetworkTypeValid_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).IsNetworkTypeValid(ctx, req.(*IsNetworkTypeValidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConnectivityManagerService_SetProcessDefaultNetwork_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetProcessDefaultNetworkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConnectivityManagerServiceServer).SetProcessDefaultNetwork(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConnectivityManagerService_SetProcessDefaultNetwork_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConnectivityManagerServiceServer).SetProcessDefaultNetwork(ctx, req.(*SetProcessDefaultNetworkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ConnectivityManagerService_ServiceDesc is the grpc.ServiceDesc for ConnectivityManagerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ManagerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "net.ManagerService",
-	HandlerType: (*ManagerServiceServer)(nil),
+var ConnectivityManagerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "net.ConnectivityManagerService",
+	HandlerType: (*ConnectivityManagerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetActiveNetworkRaw",
-			Handler:    _ManagerService_GetActiveNetworkRaw_Handler,
+			MethodName: "AddDefaultNetworkActiveListener",
+			Handler:    _ConnectivityManagerService_AddDefaultNetworkActiveListener_Handler,
 		},
 		{
-			MethodName: "GetNetworkCapabilitiesRaw",
-			Handler:    _ManagerService_GetNetworkCapabilitiesRaw_Handler,
+			MethodName: "BindProcessToNetwork",
+			Handler:    _ConnectivityManagerService_BindProcessToNetwork_Handler,
 		},
 		{
-			MethodName: "RegisterDefaultNetworkCallbackRaw",
-			Handler:    _ManagerService_RegisterDefaultNetworkCallbackRaw_Handler,
+			MethodName: "CreateSocketKeepalive",
+			Handler:    _ConnectivityManagerService_CreateSocketKeepalive_Handler,
 		},
 		{
-			MethodName: "UnregisterNetworkCallbackRaw",
-			Handler:    _ManagerService_UnregisterNetworkCallbackRaw_Handler,
+			MethodName: "GetActiveNetwork",
+			Handler:    _ConnectivityManagerService_GetActiveNetwork_Handler,
+		},
+		{
+			MethodName: "GetActiveNetworkInfo",
+			Handler:    _ConnectivityManagerService_GetActiveNetworkInfo_Handler,
+		},
+		{
+			MethodName: "GetAllNetworkInfo",
+			Handler:    _ConnectivityManagerService_GetAllNetworkInfo_Handler,
+		},
+		{
+			MethodName: "GetAllNetworks",
+			Handler:    _ConnectivityManagerService_GetAllNetworks_Handler,
+		},
+		{
+			MethodName: "GetBackgroundDataSetting",
+			Handler:    _ConnectivityManagerService_GetBackgroundDataSetting_Handler,
+		},
+		{
+			MethodName: "GetBoundNetworkForProcess",
+			Handler:    _ConnectivityManagerService_GetBoundNetworkForProcess_Handler,
+		},
+		{
+			MethodName: "GetConnectionOwnerUid",
+			Handler:    _ConnectivityManagerService_GetConnectionOwnerUid_Handler,
+		},
+		{
+			MethodName: "GetDefaultProxy",
+			Handler:    _ConnectivityManagerService_GetDefaultProxy_Handler,
+		},
+		{
+			MethodName: "GetLinkProperties",
+			Handler:    _ConnectivityManagerService_GetLinkProperties_Handler,
+		},
+		{
+			MethodName: "GetMultipathPreference",
+			Handler:    _ConnectivityManagerService_GetMultipathPreference_Handler,
+		},
+		{
+			MethodName: "GetNetworkCapabilities",
+			Handler:    _ConnectivityManagerService_GetNetworkCapabilities_Handler,
+		},
+		{
+			MethodName: "GetNetworkInfo1",
+			Handler:    _ConnectivityManagerService_GetNetworkInfo1_Handler,
+		},
+		{
+			MethodName: "GetNetworkInfo1_1",
+			Handler:    _ConnectivityManagerService_GetNetworkInfo1_1_Handler,
+		},
+		{
+			MethodName: "GetNetworkPreference",
+			Handler:    _ConnectivityManagerService_GetNetworkPreference_Handler,
+		},
+		{
+			MethodName: "GetNetworkWatchlistConfigHash",
+			Handler:    _ConnectivityManagerService_GetNetworkWatchlistConfigHash_Handler,
+		},
+		{
+			MethodName: "GetRestrictBackgroundStatus",
+			Handler:    _ConnectivityManagerService_GetRestrictBackgroundStatus_Handler,
+		},
+		{
+			MethodName: "IsActiveNetworkMetered",
+			Handler:    _ConnectivityManagerService_IsActiveNetworkMetered_Handler,
+		},
+		{
+			MethodName: "IsDefaultNetworkActive",
+			Handler:    _ConnectivityManagerService_IsDefaultNetworkActive_Handler,
+		},
+		{
+			MethodName: "RegisterDefaultNetworkCallback",
+			Handler:    _ConnectivityManagerService_RegisterDefaultNetworkCallback_Handler,
+		},
+		{
+			MethodName: "RegisterNetworkCallback2",
+			Handler:    _ConnectivityManagerService_RegisterNetworkCallback2_Handler,
+		},
+		{
+			MethodName: "RegisterNetworkCallback2_1",
+			Handler:    _ConnectivityManagerService_RegisterNetworkCallback2_1_Handler,
+		},
+		{
+			MethodName: "ReleaseNetworkRequest",
+			Handler:    _ConnectivityManagerService_ReleaseNetworkRequest_Handler,
+		},
+		{
+			MethodName: "RemoveDefaultNetworkActiveListener",
+			Handler:    _ConnectivityManagerService_RemoveDefaultNetworkActiveListener_Handler,
+		},
+		{
+			MethodName: "ReportBadNetwork",
+			Handler:    _ConnectivityManagerService_ReportBadNetwork_Handler,
+		},
+		{
+			MethodName: "ReportNetworkConnectivity",
+			Handler:    _ConnectivityManagerService_ReportNetworkConnectivity_Handler,
+		},
+		{
+			MethodName: "RequestBandwidthUpdate",
+			Handler:    _ConnectivityManagerService_RequestBandwidthUpdate_Handler,
+		},
+		{
+			MethodName: "RequestNetwork2",
+			Handler:    _ConnectivityManagerService_RequestNetwork2_Handler,
+		},
+		{
+			MethodName: "RequestNetwork2_1",
+			Handler:    _ConnectivityManagerService_RequestNetwork2_1_Handler,
+		},
+		{
+			MethodName: "RequestNetwork3_2",
+			Handler:    _ConnectivityManagerService_RequestNetwork3_2_Handler,
+		},
+		{
+			MethodName: "SetNetworkPreference",
+			Handler:    _ConnectivityManagerService_SetNetworkPreference_Handler,
+		},
+		{
+			MethodName: "UnregisterNetworkCallback1",
+			Handler:    _ConnectivityManagerService_UnregisterNetworkCallback1_Handler,
+		},
+		{
+			MethodName: "UnregisterNetworkCallback1_1",
+			Handler:    _ConnectivityManagerService_UnregisterNetworkCallback1_1_Handler,
+		},
+		{
+			MethodName: "GetProcessDefaultNetwork",
+			Handler:    _ConnectivityManagerService_GetProcessDefaultNetwork_Handler,
+		},
+		{
+			MethodName: "IsNetworkTypeValid",
+			Handler:    _ConnectivityManagerService_IsNetworkTypeValid_Handler,
+		},
+		{
+			MethodName: "SetProcessDefaultNetwork",
+			Handler:    _ConnectivityManagerService_SetProcessDefaultNetwork_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/net/net.proto",
-}
-
-const (
-	NetworkCapabilitiesService_HasTransport_FullMethodName = "/net.NetworkCapabilitiesService/HasTransport"
-	NetworkCapabilitiesService_GetLinkDown_FullMethodName  = "/net.NetworkCapabilitiesService/GetLinkDown"
-	NetworkCapabilitiesService_GetLinkUp_FullMethodName    = "/net.NetworkCapabilitiesService/GetLinkUp"
-)
-
-// NetworkCapabilitiesServiceClient is the client API for NetworkCapabilitiesService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type NetworkCapabilitiesServiceClient interface {
-	HasTransport(ctx context.Context, in *HasTransportRequest, opts ...grpc.CallOption) (*HasTransportResponse, error)
-	GetLinkDown(ctx context.Context, in *GetLinkDownRequest, opts ...grpc.CallOption) (*GetLinkDownResponse, error)
-	GetLinkUp(ctx context.Context, in *GetLinkUpRequest, opts ...grpc.CallOption) (*GetLinkUpResponse, error)
-}
-
-type networkCapabilitiesServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewNetworkCapabilitiesServiceClient(cc grpc.ClientConnInterface) NetworkCapabilitiesServiceClient {
-	return &networkCapabilitiesServiceClient{cc}
-}
-
-func (c *networkCapabilitiesServiceClient) HasTransport(ctx context.Context, in *HasTransportRequest, opts ...grpc.CallOption) (*HasTransportResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(HasTransportResponse)
-	err := c.cc.Invoke(ctx, NetworkCapabilitiesService_HasTransport_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *networkCapabilitiesServiceClient) GetLinkDown(ctx context.Context, in *GetLinkDownRequest, opts ...grpc.CallOption) (*GetLinkDownResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetLinkDownResponse)
-	err := c.cc.Invoke(ctx, NetworkCapabilitiesService_GetLinkDown_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *networkCapabilitiesServiceClient) GetLinkUp(ctx context.Context, in *GetLinkUpRequest, opts ...grpc.CallOption) (*GetLinkUpResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetLinkUpResponse)
-	err := c.cc.Invoke(ctx, NetworkCapabilitiesService_GetLinkUp_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// NetworkCapabilitiesServiceServer is the server API for NetworkCapabilitiesService service.
-// All implementations must embed UnimplementedNetworkCapabilitiesServiceServer
-// for forward compatibility.
-type NetworkCapabilitiesServiceServer interface {
-	HasTransport(context.Context, *HasTransportRequest) (*HasTransportResponse, error)
-	GetLinkDown(context.Context, *GetLinkDownRequest) (*GetLinkDownResponse, error)
-	GetLinkUp(context.Context, *GetLinkUpRequest) (*GetLinkUpResponse, error)
-	mustEmbedUnimplementedNetworkCapabilitiesServiceServer()
-}
-
-// UnimplementedNetworkCapabilitiesServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedNetworkCapabilitiesServiceServer struct{}
-
-func (UnimplementedNetworkCapabilitiesServiceServer) HasTransport(context.Context, *HasTransportRequest) (*HasTransportResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method HasTransport not implemented")
-}
-func (UnimplementedNetworkCapabilitiesServiceServer) GetLinkDown(context.Context, *GetLinkDownRequest) (*GetLinkDownResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetLinkDown not implemented")
-}
-func (UnimplementedNetworkCapabilitiesServiceServer) GetLinkUp(context.Context, *GetLinkUpRequest) (*GetLinkUpResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetLinkUp not implemented")
-}
-func (UnimplementedNetworkCapabilitiesServiceServer) mustEmbedUnimplementedNetworkCapabilitiesServiceServer() {
-}
-func (UnimplementedNetworkCapabilitiesServiceServer) testEmbeddedByValue() {}
-
-// UnsafeNetworkCapabilitiesServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to NetworkCapabilitiesServiceServer will
-// result in compilation errors.
-type UnsafeNetworkCapabilitiesServiceServer interface {
-	mustEmbedUnimplementedNetworkCapabilitiesServiceServer()
-}
-
-func RegisterNetworkCapabilitiesServiceServer(s grpc.ServiceRegistrar, srv NetworkCapabilitiesServiceServer) {
-	// If the following call panics, it indicates UnimplementedNetworkCapabilitiesServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&NetworkCapabilitiesService_ServiceDesc, srv)
-}
-
-func _NetworkCapabilitiesService_HasTransport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HasTransportRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NetworkCapabilitiesServiceServer).HasTransport(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NetworkCapabilitiesService_HasTransport_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NetworkCapabilitiesServiceServer).HasTransport(ctx, req.(*HasTransportRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NetworkCapabilitiesService_GetLinkDown_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetLinkDownRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NetworkCapabilitiesServiceServer).GetLinkDown(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NetworkCapabilitiesService_GetLinkDown_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NetworkCapabilitiesServiceServer).GetLinkDown(ctx, req.(*GetLinkDownRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NetworkCapabilitiesService_GetLinkUp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetLinkUpRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NetworkCapabilitiesServiceServer).GetLinkUp(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NetworkCapabilitiesService_GetLinkUp_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NetworkCapabilitiesServiceServer).GetLinkUp(ctx, req.(*GetLinkUpRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// NetworkCapabilitiesService_ServiceDesc is the grpc.ServiceDesc for NetworkCapabilitiesService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var NetworkCapabilitiesService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "net.NetworkCapabilitiesService",
-	HandlerType: (*NetworkCapabilitiesServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "HasTransport",
-			Handler:    _NetworkCapabilitiesService_HasTransport_Handler,
-		},
-		{
-			MethodName: "GetLinkDown",
-			Handler:    _NetworkCapabilitiesService_GetLinkDown_Handler,
-		},
-		{
-			MethodName: "GetLinkUp",
-			Handler:    _NetworkCapabilitiesService_GetLinkUp_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/net/net.proto",
-}
-
-const (
-	NetworkCallbackService_SubscribeNetworkCallback_FullMethodName = "/net.NetworkCallbackService/SubscribeNetworkCallback"
-)
-
-// NetworkCallbackServiceClient is the client API for NetworkCallbackService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type NetworkCallbackServiceClient interface {
-	// Server-streaming events from android.net.ConnectivityManager$NetworkCallback
-	SubscribeNetworkCallback(ctx context.Context, in *SubscribeNetworkCallbackRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[NetworkCallbackEvent], error)
-}
-
-type networkCallbackServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewNetworkCallbackServiceClient(cc grpc.ClientConnInterface) NetworkCallbackServiceClient {
-	return &networkCallbackServiceClient{cc}
-}
-
-func (c *networkCallbackServiceClient) SubscribeNetworkCallback(ctx context.Context, in *SubscribeNetworkCallbackRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[NetworkCallbackEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &NetworkCallbackService_ServiceDesc.Streams[0], NetworkCallbackService_SubscribeNetworkCallback_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[SubscribeNetworkCallbackRequest, NetworkCallbackEvent]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type NetworkCallbackService_SubscribeNetworkCallbackClient = grpc.ServerStreamingClient[NetworkCallbackEvent]
-
-// NetworkCallbackServiceServer is the server API for NetworkCallbackService service.
-// All implementations must embed UnimplementedNetworkCallbackServiceServer
-// for forward compatibility.
-type NetworkCallbackServiceServer interface {
-	// Server-streaming events from android.net.ConnectivityManager$NetworkCallback
-	SubscribeNetworkCallback(*SubscribeNetworkCallbackRequest, grpc.ServerStreamingServer[NetworkCallbackEvent]) error
-	mustEmbedUnimplementedNetworkCallbackServiceServer()
-}
-
-// UnimplementedNetworkCallbackServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedNetworkCallbackServiceServer struct{}
-
-func (UnimplementedNetworkCallbackServiceServer) SubscribeNetworkCallback(*SubscribeNetworkCallbackRequest, grpc.ServerStreamingServer[NetworkCallbackEvent]) error {
-	return status.Error(codes.Unimplemented, "method SubscribeNetworkCallback not implemented")
-}
-func (UnimplementedNetworkCallbackServiceServer) mustEmbedUnimplementedNetworkCallbackServiceServer() {
-}
-func (UnimplementedNetworkCallbackServiceServer) testEmbeddedByValue() {}
-
-// UnsafeNetworkCallbackServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to NetworkCallbackServiceServer will
-// result in compilation errors.
-type UnsafeNetworkCallbackServiceServer interface {
-	mustEmbedUnimplementedNetworkCallbackServiceServer()
-}
-
-func RegisterNetworkCallbackServiceServer(s grpc.ServiceRegistrar, srv NetworkCallbackServiceServer) {
-	// If the following call panics, it indicates UnimplementedNetworkCallbackServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&NetworkCallbackService_ServiceDesc, srv)
-}
-
-func _NetworkCallbackService_SubscribeNetworkCallback_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeNetworkCallbackRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(NetworkCallbackServiceServer).SubscribeNetworkCallback(m, &grpc.GenericServerStream[SubscribeNetworkCallbackRequest, NetworkCallbackEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type NetworkCallbackService_SubscribeNetworkCallbackServer = grpc.ServerStreamingServer[NetworkCallbackEvent]
-
-// NetworkCallbackService_ServiceDesc is the grpc.ServiceDesc for NetworkCallbackService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var NetworkCallbackService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "net.NetworkCallbackService",
-	HandlerType: (*NetworkCallbackServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "SubscribeNetworkCallback",
-			Handler:       _NetworkCallbackService_SubscribeNetworkCallback_Handler,
-			ServerStreams: true,
-		},
-	},
 	Metadata: "proto/net/net.proto",
 }

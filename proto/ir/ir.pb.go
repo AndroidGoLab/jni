@@ -23,28 +23,26 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type FrequencyRange struct {
+type GetCarrierFrequenciesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	MinFrequency  int32                  `protobuf:"varint,1,opt,name=min_frequency,json=minFrequency,proto3" json:"min_frequency,omitempty"`
-	MaxFrequency  int32                  `protobuf:"varint,2,opt,name=max_frequency,json=maxFrequency,proto3" json:"max_frequency,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *FrequencyRange) Reset() {
-	*x = FrequencyRange{}
+func (x *GetCarrierFrequenciesRequest) Reset() {
+	*x = GetCarrierFrequenciesRequest{}
 	mi := &file_proto_ir_ir_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *FrequencyRange) String() string {
+func (x *GetCarrierFrequenciesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FrequencyRange) ProtoMessage() {}
+func (*GetCarrierFrequenciesRequest) ProtoMessage() {}
 
-func (x *FrequencyRange) ProtoReflect() protoreflect.Message {
+func (x *GetCarrierFrequenciesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_ir_ir_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -56,21 +54,51 @@ func (x *FrequencyRange) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FrequencyRange.ProtoReflect.Descriptor instead.
-func (*FrequencyRange) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetCarrierFrequenciesRequest.ProtoReflect.Descriptor instead.
+func (*GetCarrierFrequenciesRequest) Descriptor() ([]byte, []int) {
 	return file_proto_ir_ir_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *FrequencyRange) GetMinFrequency() int32 {
-	if x != nil {
-		return x.MinFrequency
-	}
-	return 0
+type GetCarrierFrequenciesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *FrequencyRange) GetMaxFrequency() int32 {
+func (x *GetCarrierFrequenciesResponse) Reset() {
+	*x = GetCarrierFrequenciesResponse{}
+	mi := &file_proto_ir_ir_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCarrierFrequenciesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCarrierFrequenciesResponse) ProtoMessage() {}
+
+func (x *GetCarrierFrequenciesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_ir_ir_proto_msgTypes[1]
 	if x != nil {
-		return x.MaxFrequency
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCarrierFrequenciesResponse.ProtoReflect.Descriptor instead.
+func (*GetCarrierFrequenciesResponse) Descriptor() ([]byte, []int) {
+	return file_proto_ir_ir_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GetCarrierFrequenciesResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
 	}
 	return 0
 }
@@ -83,7 +111,7 @@ type HasIrEmitterRequest struct {
 
 func (x *HasIrEmitterRequest) Reset() {
 	*x = HasIrEmitterRequest{}
-	mi := &file_proto_ir_ir_proto_msgTypes[1]
+	mi := &file_proto_ir_ir_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -95,7 +123,7 @@ func (x *HasIrEmitterRequest) String() string {
 func (*HasIrEmitterRequest) ProtoMessage() {}
 
 func (x *HasIrEmitterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ir_ir_proto_msgTypes[1]
+	mi := &file_proto_ir_ir_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -108,7 +136,7 @@ func (x *HasIrEmitterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HasIrEmitterRequest.ProtoReflect.Descriptor instead.
 func (*HasIrEmitterRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ir_ir_proto_rawDescGZIP(), []int{1}
+	return file_proto_ir_ir_proto_rawDescGZIP(), []int{2}
 }
 
 type HasIrEmitterResponse struct {
@@ -120,7 +148,7 @@ type HasIrEmitterResponse struct {
 
 func (x *HasIrEmitterResponse) Reset() {
 	*x = HasIrEmitterResponse{}
-	mi := &file_proto_ir_ir_proto_msgTypes[2]
+	mi := &file_proto_ir_ir_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -132,7 +160,7 @@ func (x *HasIrEmitterResponse) String() string {
 func (*HasIrEmitterResponse) ProtoMessage() {}
 
 func (x *HasIrEmitterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ir_ir_proto_msgTypes[2]
+	mi := &file_proto_ir_ir_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -145,7 +173,7 @@ func (x *HasIrEmitterResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HasIrEmitterResponse.ProtoReflect.Descriptor instead.
 func (*HasIrEmitterResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ir_ir_proto_rawDescGZIP(), []int{2}
+	return file_proto_ir_ir_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *HasIrEmitterResponse) GetResult() bool {
@@ -155,97 +183,17 @@ func (x *HasIrEmitterResponse) GetResult() bool {
 	return false
 }
 
-type GetCarrierFrequenciesRawRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetCarrierFrequenciesRawRequest) Reset() {
-	*x = GetCarrierFrequenciesRawRequest{}
-	mi := &file_proto_ir_ir_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetCarrierFrequenciesRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetCarrierFrequenciesRawRequest) ProtoMessage() {}
-
-func (x *GetCarrierFrequenciesRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ir_ir_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetCarrierFrequenciesRawRequest.ProtoReflect.Descriptor instead.
-func (*GetCarrierFrequenciesRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ir_ir_proto_rawDescGZIP(), []int{3}
-}
-
-type GetCarrierFrequenciesRawResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetCarrierFrequenciesRawResponse) Reset() {
-	*x = GetCarrierFrequenciesRawResponse{}
-	mi := &file_proto_ir_ir_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetCarrierFrequenciesRawResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetCarrierFrequenciesRawResponse) ProtoMessage() {}
-
-func (x *GetCarrierFrequenciesRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ir_ir_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetCarrierFrequenciesRawResponse.ProtoReflect.Descriptor instead.
-func (*GetCarrierFrequenciesRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ir_ir_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *GetCarrierFrequenciesRawResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
 type TransmitRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	CarrierFrequency int32                  `protobuf:"varint,1,opt,name=carrier_frequency,json=carrierFrequency,proto3" json:"carrier_frequency,omitempty"`
-	Pattern          int64                  `protobuf:"varint,2,opt,name=pattern,proto3" json:"pattern,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TransmitRequest) Reset() {
 	*x = TransmitRequest{}
-	mi := &file_proto_ir_ir_proto_msgTypes[5]
+	mi := &file_proto_ir_ir_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -257,7 +205,7 @@ func (x *TransmitRequest) String() string {
 func (*TransmitRequest) ProtoMessage() {}
 
 func (x *TransmitRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ir_ir_proto_msgTypes[5]
+	mi := &file_proto_ir_ir_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -270,19 +218,19 @@ func (x *TransmitRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransmitRequest.ProtoReflect.Descriptor instead.
 func (*TransmitRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ir_ir_proto_rawDescGZIP(), []int{5}
+	return file_proto_ir_ir_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *TransmitRequest) GetCarrierFrequency() int32 {
+func (x *TransmitRequest) GetArg0() int32 {
 	if x != nil {
-		return x.CarrierFrequency
+		return x.Arg0
 	}
 	return 0
 }
 
-func (x *TransmitRequest) GetPattern() int64 {
+func (x *TransmitRequest) GetArg1() int64 {
 	if x != nil {
-		return x.Pattern
+		return x.Arg1
 	}
 	return 0
 }
@@ -295,7 +243,7 @@ type TransmitResponse struct {
 
 func (x *TransmitResponse) Reset() {
 	*x = TransmitResponse{}
-	mi := &file_proto_ir_ir_proto_msgTypes[6]
+	mi := &file_proto_ir_ir_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -307,7 +255,7 @@ func (x *TransmitResponse) String() string {
 func (*TransmitResponse) ProtoMessage() {}
 
 func (x *TransmitResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ir_ir_proto_msgTypes[6]
+	mi := &file_proto_ir_ir_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -320,31 +268,197 @@ func (x *TransmitResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransmitResponse.ProtoReflect.Descriptor instead.
 func (*TransmitResponse) Descriptor() ([]byte, []int) {
+	return file_proto_ir_ir_proto_rawDescGZIP(), []int{5}
+}
+
+type GetMaxFrequencyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMaxFrequencyRequest) Reset() {
+	*x = GetMaxFrequencyRequest{}
+	mi := &file_proto_ir_ir_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMaxFrequencyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMaxFrequencyRequest) ProtoMessage() {}
+
+func (x *GetMaxFrequencyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_ir_ir_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMaxFrequencyRequest.ProtoReflect.Descriptor instead.
+func (*GetMaxFrequencyRequest) Descriptor() ([]byte, []int) {
 	return file_proto_ir_ir_proto_rawDescGZIP(), []int{6}
+}
+
+type GetMaxFrequencyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMaxFrequencyResponse) Reset() {
+	*x = GetMaxFrequencyResponse{}
+	mi := &file_proto_ir_ir_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMaxFrequencyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMaxFrequencyResponse) ProtoMessage() {}
+
+func (x *GetMaxFrequencyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_ir_ir_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMaxFrequencyResponse.ProtoReflect.Descriptor instead.
+func (*GetMaxFrequencyResponse) Descriptor() ([]byte, []int) {
+	return file_proto_ir_ir_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetMaxFrequencyResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetMinFrequencyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMinFrequencyRequest) Reset() {
+	*x = GetMinFrequencyRequest{}
+	mi := &file_proto_ir_ir_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMinFrequencyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMinFrequencyRequest) ProtoMessage() {}
+
+func (x *GetMinFrequencyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_ir_ir_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMinFrequencyRequest.ProtoReflect.Descriptor instead.
+func (*GetMinFrequencyRequest) Descriptor() ([]byte, []int) {
+	return file_proto_ir_ir_proto_rawDescGZIP(), []int{8}
+}
+
+type GetMinFrequencyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMinFrequencyResponse) Reset() {
+	*x = GetMinFrequencyResponse{}
+	mi := &file_proto_ir_ir_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMinFrequencyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMinFrequencyResponse) ProtoMessage() {}
+
+func (x *GetMinFrequencyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_ir_ir_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMinFrequencyResponse.ProtoReflect.Descriptor instead.
+func (*GetMinFrequencyResponse) Descriptor() ([]byte, []int) {
+	return file_proto_ir_ir_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetMinFrequencyResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
 }
 
 var File_proto_ir_ir_proto protoreflect.FileDescriptor
 
 const file_proto_ir_ir_proto_rawDesc = "" +
 	"\n" +
-	"\x11proto/ir/ir.proto\x12\x02ir\"Z\n" +
-	"\x0eFrequencyRange\x12#\n" +
-	"\rmin_frequency\x18\x01 \x01(\x05R\fminFrequency\x12#\n" +
-	"\rmax_frequency\x18\x02 \x01(\x05R\fmaxFrequency\"\x15\n" +
+	"\x11proto/ir/ir.proto\x12\x02ir\"\x1e\n" +
+	"\x1cGetCarrierFrequenciesRequest\"7\n" +
+	"\x1dGetCarrierFrequenciesResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x15\n" +
 	"\x13HasIrEmitterRequest\".\n" +
 	"\x14HasIrEmitterResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"!\n" +
-	"\x1fGetCarrierFrequenciesRawRequest\":\n" +
-	" GetCarrierFrequenciesRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"X\n" +
-	"\x0fTransmitRequest\x12+\n" +
-	"\x11carrier_frequency\x18\x01 \x01(\x05R\x10carrierFrequency\x12\x18\n" +
-	"\apattern\x18\x02 \x01(\x03R\apattern\"\x12\n" +
-	"\x10TransmitResponse2\xf1\x01\n" +
-	"\x0eManagerService\x12A\n" +
-	"\fHasIrEmitter\x12\x17.ir.HasIrEmitterRequest\x1a\x18.ir.HasIrEmitterResponse\x12e\n" +
-	"\x18GetCarrierFrequenciesRaw\x12#.ir.GetCarrierFrequenciesRawRequest\x1a$.ir.GetCarrierFrequenciesRawResponse\x125\n" +
-	"\bTransmit\x12\x13.ir.TransmitRequest\x1a\x14.ir.TransmitResponseB%Z#github.com/xaionaro-go/jni/proto/irb\x06proto3"
+	"\x06result\x18\x01 \x01(\bR\x06result\"9\n" +
+	"\x0fTransmitRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x12\n" +
+	"\x10TransmitResponse\"\x18\n" +
+	"\x16GetMaxFrequencyRequest\"1\n" +
+	"\x17GetMaxFrequencyResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x18\n" +
+	"\x16GetMinFrequencyRequest\"1\n" +
+	"\x17GetMinFrequencyResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result2\xf2\x01\n" +
+	"\x18ConsumerIrManagerService\x12\\\n" +
+	"\x15GetCarrierFrequencies\x12 .ir.GetCarrierFrequenciesRequest\x1a!.ir.GetCarrierFrequenciesResponse\x12A\n" +
+	"\fHasIrEmitter\x12\x17.ir.HasIrEmitterRequest\x1a\x18.ir.HasIrEmitterResponse\x125\n" +
+	"\bTransmit\x12\x13.ir.TransmitRequest\x1a\x14.ir.TransmitResponse2\xc7\x01\n" +
+	"-ConsumerIrManagerCarrierFrequencyRangeService\x12J\n" +
+	"\x0fGetMaxFrequency\x12\x1a.ir.GetMaxFrequencyRequest\x1a\x1b.ir.GetMaxFrequencyResponse\x12J\n" +
+	"\x0fGetMinFrequency\x12\x1a.ir.GetMinFrequencyRequest\x1a\x1b.ir.GetMinFrequencyResponseB%Z#github.com/xaionaro-go/jni/proto/irb\x06proto3"
 
 var (
 	file_proto_ir_ir_proto_rawDescOnce sync.Once
@@ -358,25 +472,32 @@ func file_proto_ir_ir_proto_rawDescGZIP() []byte {
 	return file_proto_ir_ir_proto_rawDescData
 }
 
-var file_proto_ir_ir_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_proto_ir_ir_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_proto_ir_ir_proto_goTypes = []any{
-	(*FrequencyRange)(nil),                   // 0: ir.FrequencyRange
-	(*HasIrEmitterRequest)(nil),              // 1: ir.HasIrEmitterRequest
-	(*HasIrEmitterResponse)(nil),             // 2: ir.HasIrEmitterResponse
-	(*GetCarrierFrequenciesRawRequest)(nil),  // 3: ir.GetCarrierFrequenciesRawRequest
-	(*GetCarrierFrequenciesRawResponse)(nil), // 4: ir.GetCarrierFrequenciesRawResponse
-	(*TransmitRequest)(nil),                  // 5: ir.TransmitRequest
-	(*TransmitResponse)(nil),                 // 6: ir.TransmitResponse
+	(*GetCarrierFrequenciesRequest)(nil),  // 0: ir.GetCarrierFrequenciesRequest
+	(*GetCarrierFrequenciesResponse)(nil), // 1: ir.GetCarrierFrequenciesResponse
+	(*HasIrEmitterRequest)(nil),           // 2: ir.HasIrEmitterRequest
+	(*HasIrEmitterResponse)(nil),          // 3: ir.HasIrEmitterResponse
+	(*TransmitRequest)(nil),               // 4: ir.TransmitRequest
+	(*TransmitResponse)(nil),              // 5: ir.TransmitResponse
+	(*GetMaxFrequencyRequest)(nil),        // 6: ir.GetMaxFrequencyRequest
+	(*GetMaxFrequencyResponse)(nil),       // 7: ir.GetMaxFrequencyResponse
+	(*GetMinFrequencyRequest)(nil),        // 8: ir.GetMinFrequencyRequest
+	(*GetMinFrequencyResponse)(nil),       // 9: ir.GetMinFrequencyResponse
 }
 var file_proto_ir_ir_proto_depIdxs = []int32{
-	1, // 0: ir.ManagerService.HasIrEmitter:input_type -> ir.HasIrEmitterRequest
-	3, // 1: ir.ManagerService.GetCarrierFrequenciesRaw:input_type -> ir.GetCarrierFrequenciesRawRequest
-	5, // 2: ir.ManagerService.Transmit:input_type -> ir.TransmitRequest
-	2, // 3: ir.ManagerService.HasIrEmitter:output_type -> ir.HasIrEmitterResponse
-	4, // 4: ir.ManagerService.GetCarrierFrequenciesRaw:output_type -> ir.GetCarrierFrequenciesRawResponse
-	6, // 5: ir.ManagerService.Transmit:output_type -> ir.TransmitResponse
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
+	0, // 0: ir.ConsumerIrManagerService.GetCarrierFrequencies:input_type -> ir.GetCarrierFrequenciesRequest
+	2, // 1: ir.ConsumerIrManagerService.HasIrEmitter:input_type -> ir.HasIrEmitterRequest
+	4, // 2: ir.ConsumerIrManagerService.Transmit:input_type -> ir.TransmitRequest
+	6, // 3: ir.ConsumerIrManagerCarrierFrequencyRangeService.GetMaxFrequency:input_type -> ir.GetMaxFrequencyRequest
+	8, // 4: ir.ConsumerIrManagerCarrierFrequencyRangeService.GetMinFrequency:input_type -> ir.GetMinFrequencyRequest
+	1, // 5: ir.ConsumerIrManagerService.GetCarrierFrequencies:output_type -> ir.GetCarrierFrequenciesResponse
+	3, // 6: ir.ConsumerIrManagerService.HasIrEmitter:output_type -> ir.HasIrEmitterResponse
+	5, // 7: ir.ConsumerIrManagerService.Transmit:output_type -> ir.TransmitResponse
+	7, // 8: ir.ConsumerIrManagerCarrierFrequencyRangeService.GetMaxFrequency:output_type -> ir.GetMaxFrequencyResponse
+	9, // 9: ir.ConsumerIrManagerCarrierFrequencyRangeService.GetMinFrequency:output_type -> ir.GetMinFrequencyResponse
+	5, // [5:10] is the sub-list for method output_type
+	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -393,9 +514,9 @@ func file_proto_ir_ir_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_ir_ir_proto_rawDesc), len(file_proto_ir_ir_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   10,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_proto_ir_ir_proto_goTypes,
 		DependencyIndexes: file_proto_ir_ir_proto_depIdxs,
