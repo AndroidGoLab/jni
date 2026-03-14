@@ -1,4 +1,4 @@
-.PHONY: generate specs jni java proto protoc grpc cli clean lint test test-tools build list-commands
+.PHONY: generate specs jni java proto protoc grpc cli clean lint test test-tools test-e2e build build-server list-commands
 
 # JDK detection for host tests (jni.h and libjvm.so).
 JDK_HOME ?= $(shell readlink -f $$(which javac) 2>/dev/null | sed 's|/bin/javac$$||')
@@ -78,10 +78,22 @@ test:
 test-tools:
 	go test ./tools/...
 
-# Cross-compile for android/arm64 (requires NDK toolchain)
+# Cross-compile libraries for android/arm64 (requires NDK toolchain)
 build:
 	CGO_ENABLED=1 \
 	GOOS=android \
 	GOARCH=arm64 \
 	CC=$(shell echo $$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang) \
 	go build ./...
+
+# Cross-compile jniservice as c-shared library for Android
+build-server:
+	CGO_ENABLED=1 \
+	GOOS=android \
+	GOARCH=arm64 \
+	CC=$(shell echo $$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang) \
+	go build -buildmode=c-shared -o build/libjniservice.so ./cmd/jniservice/
+
+# Run E2E scenario tests (host-side, no emulator needed)
+test-e2e:
+	go test ./tests/e2e-grpc/ -v
