@@ -1,0 +1,107 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build release artifacts
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - goarch: arm64
+            android_abi: arm64-v8a
+            ndk_triple: aarch64-linux-android
+          - goarch: amd64
+            android_abi: x86_64
+            ndk_triple: x86_64-linux-android
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+          cache: true
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android NDK and build-tools
+        run: sdkmanager --install "ndk;27.0.12077973" "build-tools;35.0.0" "platforms;android-35"
+
+      - name: Build jnictl (linux)
+        env:
+          CGO_ENABLED: '0'
+          GOOS: linux
+          GOARCH: ${{ matrix.goarch }}
+        run: go build -o dist/jnictl-linux-${{ matrix.goarch }} ./cmd/jnictl/
+
+      - name: Build jnictl (android)
+        env:
+          CGO_ENABLED: '0'
+          GOOS: android
+          GOARCH: ${{ matrix.goarch }}
+        run: go build -o dist/jnictl-android-${{ matrix.goarch }} ./cmd/jnictl/
+
+      - name: Build jniservice shared library
+        env:
+          CGO_ENABLED: '1'
+          GOOS: android
+          GOARCH: ${{ matrix.goarch }}
+          NDK_HOME: /usr/local/lib/android/sdk/ndk/27.0.12077973
+          CC_TRIPLE: ${{ matrix.ndk_triple }}
+        run: |
+          CC=$NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/${CC_TRIPLE}30-clang \
+          go build -buildmode=c-shared \
+            -o dist/libjniservice-${{ matrix.android_abi }}.so \
+            ./cmd/jniservice/
+
+      - name: Compile Java wrapper and create classes.dex
+        env:
+          ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+        run: |
+          javac --release 17 -d dist cmd/jniservice/JNIService.java
+          $ANDROID_SDK_ROOT/build-tools/35.0.0/d8 \
+            --lib $ANDROID_SDK_ROOT/platforms/android-35/android.jar \
+            --output dist dist/JNIService.class
+          rm -f dist/JNIService.class
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ matrix.goarch }}
+          path: dist/
+
+  release:
+    name: Create GitHub release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+
+      - name: List artifacts
+        run: find artifacts -type f | sort
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            artifacts/**/*
