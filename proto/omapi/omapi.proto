@@ -6,95 +6,23 @@ package omapi;
 
 option go_package = "github.com/xaionaro-go/jni/proto/omapi";
 
-message IsConnectedRequest {
+message CloseRequest {
 }
 
-message IsConnectedResponse {
-  bool result = 1;
-}
-
-message GetReadersRawRequest {
-}
-
-message GetReadersRawResponse {
-  int64 result = 1;
-}
-
-message ShutdownRequest {
-}
-
-message ShutdownResponse {
-}
-
-message GetNameRequest {
-}
-
-message GetNameResponse {
-  string result = 1;
-}
-
-message IsSecureElementPresentRequest {
-}
-
-message IsSecureElementPresentResponse {
-  bool result = 1;
-}
-
-message OpenSessionRawRequest {
-}
-
-message OpenSessionRawResponse {
-  int64 result = 1;
-}
-
-message OpenBasicChannelRawRequest {
-  int64 aid = 1;
-}
-
-message OpenBasicChannelRawResponse {
-  int64 result = 1;
-}
-
-message OpenLogicalChannelRawRequest {
-  int64 aid = 1;
-}
-
-message OpenLogicalChannelRawResponse {
-  int64 result = 1;
-}
-
-message GetATRRequest {
-}
-
-message GetATRResponse {
-  int64 result = 1;
-}
-
-message CloseRawRequest {
-}
-
-message CloseRawResponse {
-}
-
-message TransmitRequest {
-  int64 command = 1;
-}
-
-message TransmitResponse {
-  int64 result = 1;
-}
-
-message SelectNextRequest {
-}
-
-message SelectNextResponse {
-  bool result = 1;
+message CloseResponse {
 }
 
 message GetSelectResponseRequest {
 }
 
 message GetSelectResponseResponse {
+  int64 result = 1;
+}
+
+message GetSessionRequest {
+}
+
+message GetSessionResponse {
   int64 result = 1;
 }
 
@@ -105,44 +33,34 @@ message IsBasicChannelResponse {
   bool result = 1;
 }
 
-message OnConnectedListenerOnConnectedEvent {
+message IsOpenRequest {
 }
 
-message OnConnectedListenerEvent {
-  optional OnConnectedListenerOnConnectedEvent on_connected = 1;
+message IsOpenResponse {
+  bool result = 1;
 }
 
-message SubscribeOnConnectedListenerRequest {
+message SelectNextRequest {
 }
 
-service ServiceService {
-  rpc IsConnected (IsConnectedRequest) returns (IsConnectedResponse);
-  rpc GetReadersRaw (GetReadersRawRequest) returns (GetReadersRawResponse);
-  rpc Shutdown (ShutdownRequest) returns (ShutdownResponse);
+message SelectNextResponse {
+  bool result = 1;
 }
 
-service ReaderService {
-  rpc GetName (GetNameRequest) returns (GetNameResponse);
-  rpc IsSecureElementPresent (IsSecureElementPresentRequest) returns (IsSecureElementPresentResponse);
-  rpc OpenSessionRaw (OpenSessionRawRequest) returns (OpenSessionRawResponse);
+message TransmitRequest {
+  int64 arg0 = 1;
 }
 
-service SessionService {
-  rpc OpenBasicChannelRaw (OpenBasicChannelRawRequest) returns (OpenBasicChannelRawResponse);
-  rpc OpenLogicalChannelRaw (OpenLogicalChannelRawRequest) returns (OpenLogicalChannelRawResponse);
-  rpc GetATR (GetATRRequest) returns (GetATRResponse);
-  rpc CloseRaw (CloseRawRequest) returns (CloseRawResponse);
+message TransmitResponse {
+  int64 result = 1;
 }
 
 service ChannelService {
-  rpc Transmit (TransmitRequest) returns (TransmitResponse);
-  rpc SelectNext (SelectNextRequest) returns (SelectNextResponse);
+  rpc Close (CloseRequest) returns (CloseResponse);
   rpc GetSelectResponse (GetSelectResponseRequest) returns (GetSelectResponseResponse);
+  rpc GetSession (GetSessionRequest) returns (GetSessionResponse);
   rpc IsBasicChannel (IsBasicChannelRequest) returns (IsBasicChannelResponse);
-  rpc CloseRaw (CloseRawRequest) returns (CloseRawResponse);
-}
-
-service OnConnectedListenerService {
-  // Server-streaming events from android.se.omapi.SEService$OnConnectedListener
-  rpc SubscribeOnConnectedListener (SubscribeOnConnectedListenerRequest) returns (stream OnConnectedListenerEvent);
+  rpc IsOpen (IsOpenRequest) returns (IsOpenResponse);
+  rpc SelectNext (SelectNextRequest) returns (SelectNextResponse);
+  rpc Transmit (TransmitRequest) returns (TransmitResponse);
 }

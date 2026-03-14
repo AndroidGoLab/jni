@@ -21,286 +21,635 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ManagerService_SetTorchMode_FullMethodName            = "/camera.ManagerService/SetTorchMode"
-	ManagerService_RegisterTorchCallback_FullMethodName   = "/camera.ManagerService/RegisterTorchCallback"
-	ManagerService_UnregisterTorchCallback_FullMethodName = "/camera.ManagerService/UnregisterTorchCallback"
+	CameraManagerService_GetCameraCharacteristics_FullMethodName                  = "/camera.CameraManagerService/GetCameraCharacteristics"
+	CameraManagerService_GetCameraDeviceSetup_FullMethodName                      = "/camera.CameraManagerService/GetCameraDeviceSetup"
+	CameraManagerService_GetCameraExtensionCharacteristics_FullMethodName         = "/camera.CameraManagerService/GetCameraExtensionCharacteristics"
+	CameraManagerService_GetCameraIdList_FullMethodName                           = "/camera.CameraManagerService/GetCameraIdList"
+	CameraManagerService_GetConcurrentCameraIds_FullMethodName                    = "/camera.CameraManagerService/GetConcurrentCameraIds"
+	CameraManagerService_GetTorchStrengthLevel_FullMethodName                     = "/camera.CameraManagerService/GetTorchStrengthLevel"
+	CameraManagerService_IsCameraDeviceSetupSupported_FullMethodName              = "/camera.CameraManagerService/IsCameraDeviceSetupSupported"
+	CameraManagerService_IsConcurrentSessionConfigurationSupported_FullMethodName = "/camera.CameraManagerService/IsConcurrentSessionConfigurationSupported"
+	CameraManagerService_OpenCamera_FullMethodName                                = "/camera.CameraManagerService/OpenCamera"
+	CameraManagerService_RegisterAvailabilityCallback_FullMethodName              = "/camera.CameraManagerService/RegisterAvailabilityCallback"
+	CameraManagerService_RegisterTorchCallback_FullMethodName                     = "/camera.CameraManagerService/RegisterTorchCallback"
+	CameraManagerService_SetTorchMode_FullMethodName                              = "/camera.CameraManagerService/SetTorchMode"
+	CameraManagerService_TurnOnTorchWithStrengthLevel_FullMethodName              = "/camera.CameraManagerService/TurnOnTorchWithStrengthLevel"
+	CameraManagerService_UnregisterAvailabilityCallback_FullMethodName            = "/camera.CameraManagerService/UnregisterAvailabilityCallback"
+	CameraManagerService_UnregisterTorchCallback_FullMethodName                   = "/camera.CameraManagerService/UnregisterTorchCallback"
 )
 
-// ManagerServiceClient is the client API for ManagerService service.
+// CameraManagerServiceClient is the client API for CameraManagerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ManagerServiceClient interface {
-	SetTorchMode(ctx context.Context, in *SetTorchModeRequest, opts ...grpc.CallOption) (*SetTorchModeResponse, error)
+type CameraManagerServiceClient interface {
+	GetCameraCharacteristics(ctx context.Context, in *GetCameraCharacteristicsRequest, opts ...grpc.CallOption) (*GetCameraCharacteristicsResponse, error)
+	GetCameraDeviceSetup(ctx context.Context, in *GetCameraDeviceSetupRequest, opts ...grpc.CallOption) (*GetCameraDeviceSetupResponse, error)
+	GetCameraExtensionCharacteristics(ctx context.Context, in *GetCameraExtensionCharacteristicsRequest, opts ...grpc.CallOption) (*GetCameraExtensionCharacteristicsResponse, error)
+	GetCameraIdList(ctx context.Context, in *GetCameraIdListRequest, opts ...grpc.CallOption) (*GetCameraIdListResponse, error)
+	GetConcurrentCameraIds(ctx context.Context, in *GetConcurrentCameraIdsRequest, opts ...grpc.CallOption) (*GetConcurrentCameraIdsResponse, error)
+	GetTorchStrengthLevel(ctx context.Context, in *GetTorchStrengthLevelRequest, opts ...grpc.CallOption) (*GetTorchStrengthLevelResponse, error)
+	IsCameraDeviceSetupSupported(ctx context.Context, in *IsCameraDeviceSetupSupportedRequest, opts ...grpc.CallOption) (*IsCameraDeviceSetupSupportedResponse, error)
+	IsConcurrentSessionConfigurationSupported(ctx context.Context, in *IsConcurrentSessionConfigurationSupportedRequest, opts ...grpc.CallOption) (*IsConcurrentSessionConfigurationSupportedResponse, error)
+	OpenCamera(ctx context.Context, in *OpenCameraRequest, opts ...grpc.CallOption) (*OpenCameraResponse, error)
+	RegisterAvailabilityCallback(ctx context.Context, in *RegisterAvailabilityCallbackRequest, opts ...grpc.CallOption) (*RegisterAvailabilityCallbackResponse, error)
 	RegisterTorchCallback(ctx context.Context, in *RegisterTorchCallbackRequest, opts ...grpc.CallOption) (*RegisterTorchCallbackResponse, error)
+	SetTorchMode(ctx context.Context, in *SetTorchModeRequest, opts ...grpc.CallOption) (*SetTorchModeResponse, error)
+	TurnOnTorchWithStrengthLevel(ctx context.Context, in *TurnOnTorchWithStrengthLevelRequest, opts ...grpc.CallOption) (*TurnOnTorchWithStrengthLevelResponse, error)
+	UnregisterAvailabilityCallback(ctx context.Context, in *UnregisterAvailabilityCallbackRequest, opts ...grpc.CallOption) (*UnregisterAvailabilityCallbackResponse, error)
 	UnregisterTorchCallback(ctx context.Context, in *UnregisterTorchCallbackRequest, opts ...grpc.CallOption) (*UnregisterTorchCallbackResponse, error)
 }
 
-type managerServiceClient struct {
+type cameraManagerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewManagerServiceClient(cc grpc.ClientConnInterface) ManagerServiceClient {
-	return &managerServiceClient{cc}
+func NewCameraManagerServiceClient(cc grpc.ClientConnInterface) CameraManagerServiceClient {
+	return &cameraManagerServiceClient{cc}
 }
 
-func (c *managerServiceClient) SetTorchMode(ctx context.Context, in *SetTorchModeRequest, opts ...grpc.CallOption) (*SetTorchModeResponse, error) {
+func (c *cameraManagerServiceClient) GetCameraCharacteristics(ctx context.Context, in *GetCameraCharacteristicsRequest, opts ...grpc.CallOption) (*GetCameraCharacteristicsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetTorchModeResponse)
-	err := c.cc.Invoke(ctx, ManagerService_SetTorchMode_FullMethodName, in, out, cOpts...)
+	out := new(GetCameraCharacteristicsResponse)
+	err := c.cc.Invoke(ctx, CameraManagerService_GetCameraCharacteristics_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) RegisterTorchCallback(ctx context.Context, in *RegisterTorchCallbackRequest, opts ...grpc.CallOption) (*RegisterTorchCallbackResponse, error) {
+func (c *cameraManagerServiceClient) GetCameraDeviceSetup(ctx context.Context, in *GetCameraDeviceSetupRequest, opts ...grpc.CallOption) (*GetCameraDeviceSetupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCameraDeviceSetupResponse)
+	err := c.cc.Invoke(ctx, CameraManagerService_GetCameraDeviceSetup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cameraManagerServiceClient) GetCameraExtensionCharacteristics(ctx context.Context, in *GetCameraExtensionCharacteristicsRequest, opts ...grpc.CallOption) (*GetCameraExtensionCharacteristicsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCameraExtensionCharacteristicsResponse)
+	err := c.cc.Invoke(ctx, CameraManagerService_GetCameraExtensionCharacteristics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cameraManagerServiceClient) GetCameraIdList(ctx context.Context, in *GetCameraIdListRequest, opts ...grpc.CallOption) (*GetCameraIdListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCameraIdListResponse)
+	err := c.cc.Invoke(ctx, CameraManagerService_GetCameraIdList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cameraManagerServiceClient) GetConcurrentCameraIds(ctx context.Context, in *GetConcurrentCameraIdsRequest, opts ...grpc.CallOption) (*GetConcurrentCameraIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetConcurrentCameraIdsResponse)
+	err := c.cc.Invoke(ctx, CameraManagerService_GetConcurrentCameraIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cameraManagerServiceClient) GetTorchStrengthLevel(ctx context.Context, in *GetTorchStrengthLevelRequest, opts ...grpc.CallOption) (*GetTorchStrengthLevelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTorchStrengthLevelResponse)
+	err := c.cc.Invoke(ctx, CameraManagerService_GetTorchStrengthLevel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cameraManagerServiceClient) IsCameraDeviceSetupSupported(ctx context.Context, in *IsCameraDeviceSetupSupportedRequest, opts ...grpc.CallOption) (*IsCameraDeviceSetupSupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsCameraDeviceSetupSupportedResponse)
+	err := c.cc.Invoke(ctx, CameraManagerService_IsCameraDeviceSetupSupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cameraManagerServiceClient) IsConcurrentSessionConfigurationSupported(ctx context.Context, in *IsConcurrentSessionConfigurationSupportedRequest, opts ...grpc.CallOption) (*IsConcurrentSessionConfigurationSupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsConcurrentSessionConfigurationSupportedResponse)
+	err := c.cc.Invoke(ctx, CameraManagerService_IsConcurrentSessionConfigurationSupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cameraManagerServiceClient) OpenCamera(ctx context.Context, in *OpenCameraRequest, opts ...grpc.CallOption) (*OpenCameraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OpenCameraResponse)
+	err := c.cc.Invoke(ctx, CameraManagerService_OpenCamera_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cameraManagerServiceClient) RegisterAvailabilityCallback(ctx context.Context, in *RegisterAvailabilityCallbackRequest, opts ...grpc.CallOption) (*RegisterAvailabilityCallbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterAvailabilityCallbackResponse)
+	err := c.cc.Invoke(ctx, CameraManagerService_RegisterAvailabilityCallback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cameraManagerServiceClient) RegisterTorchCallback(ctx context.Context, in *RegisterTorchCallbackRequest, opts ...grpc.CallOption) (*RegisterTorchCallbackResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RegisterTorchCallbackResponse)
-	err := c.cc.Invoke(ctx, ManagerService_RegisterTorchCallback_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, CameraManagerService_RegisterTorchCallback_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) UnregisterTorchCallback(ctx context.Context, in *UnregisterTorchCallbackRequest, opts ...grpc.CallOption) (*UnregisterTorchCallbackResponse, error) {
+func (c *cameraManagerServiceClient) SetTorchMode(ctx context.Context, in *SetTorchModeRequest, opts ...grpc.CallOption) (*SetTorchModeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetTorchModeResponse)
+	err := c.cc.Invoke(ctx, CameraManagerService_SetTorchMode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cameraManagerServiceClient) TurnOnTorchWithStrengthLevel(ctx context.Context, in *TurnOnTorchWithStrengthLevelRequest, opts ...grpc.CallOption) (*TurnOnTorchWithStrengthLevelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TurnOnTorchWithStrengthLevelResponse)
+	err := c.cc.Invoke(ctx, CameraManagerService_TurnOnTorchWithStrengthLevel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cameraManagerServiceClient) UnregisterAvailabilityCallback(ctx context.Context, in *UnregisterAvailabilityCallbackRequest, opts ...grpc.CallOption) (*UnregisterAvailabilityCallbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnregisterAvailabilityCallbackResponse)
+	err := c.cc.Invoke(ctx, CameraManagerService_UnregisterAvailabilityCallback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cameraManagerServiceClient) UnregisterTorchCallback(ctx context.Context, in *UnregisterTorchCallbackRequest, opts ...grpc.CallOption) (*UnregisterTorchCallbackResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UnregisterTorchCallbackResponse)
-	err := c.cc.Invoke(ctx, ManagerService_UnregisterTorchCallback_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, CameraManagerService_UnregisterTorchCallback_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ManagerServiceServer is the server API for ManagerService service.
-// All implementations must embed UnimplementedManagerServiceServer
+// CameraManagerServiceServer is the server API for CameraManagerService service.
+// All implementations must embed UnimplementedCameraManagerServiceServer
 // for forward compatibility.
-type ManagerServiceServer interface {
-	SetTorchMode(context.Context, *SetTorchModeRequest) (*SetTorchModeResponse, error)
+type CameraManagerServiceServer interface {
+	GetCameraCharacteristics(context.Context, *GetCameraCharacteristicsRequest) (*GetCameraCharacteristicsResponse, error)
+	GetCameraDeviceSetup(context.Context, *GetCameraDeviceSetupRequest) (*GetCameraDeviceSetupResponse, error)
+	GetCameraExtensionCharacteristics(context.Context, *GetCameraExtensionCharacteristicsRequest) (*GetCameraExtensionCharacteristicsResponse, error)
+	GetCameraIdList(context.Context, *GetCameraIdListRequest) (*GetCameraIdListResponse, error)
+	GetConcurrentCameraIds(context.Context, *GetConcurrentCameraIdsRequest) (*GetConcurrentCameraIdsResponse, error)
+	GetTorchStrengthLevel(context.Context, *GetTorchStrengthLevelRequest) (*GetTorchStrengthLevelResponse, error)
+	IsCameraDeviceSetupSupported(context.Context, *IsCameraDeviceSetupSupportedRequest) (*IsCameraDeviceSetupSupportedResponse, error)
+	IsConcurrentSessionConfigurationSupported(context.Context, *IsConcurrentSessionConfigurationSupportedRequest) (*IsConcurrentSessionConfigurationSupportedResponse, error)
+	OpenCamera(context.Context, *OpenCameraRequest) (*OpenCameraResponse, error)
+	RegisterAvailabilityCallback(context.Context, *RegisterAvailabilityCallbackRequest) (*RegisterAvailabilityCallbackResponse, error)
 	RegisterTorchCallback(context.Context, *RegisterTorchCallbackRequest) (*RegisterTorchCallbackResponse, error)
+	SetTorchMode(context.Context, *SetTorchModeRequest) (*SetTorchModeResponse, error)
+	TurnOnTorchWithStrengthLevel(context.Context, *TurnOnTorchWithStrengthLevelRequest) (*TurnOnTorchWithStrengthLevelResponse, error)
+	UnregisterAvailabilityCallback(context.Context, *UnregisterAvailabilityCallbackRequest) (*UnregisterAvailabilityCallbackResponse, error)
 	UnregisterTorchCallback(context.Context, *UnregisterTorchCallbackRequest) (*UnregisterTorchCallbackResponse, error)
-	mustEmbedUnimplementedManagerServiceServer()
+	mustEmbedUnimplementedCameraManagerServiceServer()
 }
 
-// UnimplementedManagerServiceServer must be embedded to have
+// UnimplementedCameraManagerServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedManagerServiceServer struct{}
+type UnimplementedCameraManagerServiceServer struct{}
 
-func (UnimplementedManagerServiceServer) SetTorchMode(context.Context, *SetTorchModeRequest) (*SetTorchModeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetTorchMode not implemented")
+func (UnimplementedCameraManagerServiceServer) GetCameraCharacteristics(context.Context, *GetCameraCharacteristicsRequest) (*GetCameraCharacteristicsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCameraCharacteristics not implemented")
 }
-func (UnimplementedManagerServiceServer) RegisterTorchCallback(context.Context, *RegisterTorchCallbackRequest) (*RegisterTorchCallbackResponse, error) {
+func (UnimplementedCameraManagerServiceServer) GetCameraDeviceSetup(context.Context, *GetCameraDeviceSetupRequest) (*GetCameraDeviceSetupResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCameraDeviceSetup not implemented")
+}
+func (UnimplementedCameraManagerServiceServer) GetCameraExtensionCharacteristics(context.Context, *GetCameraExtensionCharacteristicsRequest) (*GetCameraExtensionCharacteristicsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCameraExtensionCharacteristics not implemented")
+}
+func (UnimplementedCameraManagerServiceServer) GetCameraIdList(context.Context, *GetCameraIdListRequest) (*GetCameraIdListResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCameraIdList not implemented")
+}
+func (UnimplementedCameraManagerServiceServer) GetConcurrentCameraIds(context.Context, *GetConcurrentCameraIdsRequest) (*GetConcurrentCameraIdsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetConcurrentCameraIds not implemented")
+}
+func (UnimplementedCameraManagerServiceServer) GetTorchStrengthLevel(context.Context, *GetTorchStrengthLevelRequest) (*GetTorchStrengthLevelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetTorchStrengthLevel not implemented")
+}
+func (UnimplementedCameraManagerServiceServer) IsCameraDeviceSetupSupported(context.Context, *IsCameraDeviceSetupSupportedRequest) (*IsCameraDeviceSetupSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsCameraDeviceSetupSupported not implemented")
+}
+func (UnimplementedCameraManagerServiceServer) IsConcurrentSessionConfigurationSupported(context.Context, *IsConcurrentSessionConfigurationSupportedRequest) (*IsConcurrentSessionConfigurationSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsConcurrentSessionConfigurationSupported not implemented")
+}
+func (UnimplementedCameraManagerServiceServer) OpenCamera(context.Context, *OpenCameraRequest) (*OpenCameraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method OpenCamera not implemented")
+}
+func (UnimplementedCameraManagerServiceServer) RegisterAvailabilityCallback(context.Context, *RegisterAvailabilityCallbackRequest) (*RegisterAvailabilityCallbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterAvailabilityCallback not implemented")
+}
+func (UnimplementedCameraManagerServiceServer) RegisterTorchCallback(context.Context, *RegisterTorchCallbackRequest) (*RegisterTorchCallbackResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RegisterTorchCallback not implemented")
 }
-func (UnimplementedManagerServiceServer) UnregisterTorchCallback(context.Context, *UnregisterTorchCallbackRequest) (*UnregisterTorchCallbackResponse, error) {
+func (UnimplementedCameraManagerServiceServer) SetTorchMode(context.Context, *SetTorchModeRequest) (*SetTorchModeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetTorchMode not implemented")
+}
+func (UnimplementedCameraManagerServiceServer) TurnOnTorchWithStrengthLevel(context.Context, *TurnOnTorchWithStrengthLevelRequest) (*TurnOnTorchWithStrengthLevelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method TurnOnTorchWithStrengthLevel not implemented")
+}
+func (UnimplementedCameraManagerServiceServer) UnregisterAvailabilityCallback(context.Context, *UnregisterAvailabilityCallbackRequest) (*UnregisterAvailabilityCallbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnregisterAvailabilityCallback not implemented")
+}
+func (UnimplementedCameraManagerServiceServer) UnregisterTorchCallback(context.Context, *UnregisterTorchCallbackRequest) (*UnregisterTorchCallbackResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UnregisterTorchCallback not implemented")
 }
-func (UnimplementedManagerServiceServer) mustEmbedUnimplementedManagerServiceServer() {}
-func (UnimplementedManagerServiceServer) testEmbeddedByValue()                        {}
+func (UnimplementedCameraManagerServiceServer) mustEmbedUnimplementedCameraManagerServiceServer() {}
+func (UnimplementedCameraManagerServiceServer) testEmbeddedByValue()                              {}
 
-// UnsafeManagerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ManagerServiceServer will
+// UnsafeCameraManagerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CameraManagerServiceServer will
 // result in compilation errors.
-type UnsafeManagerServiceServer interface {
-	mustEmbedUnimplementedManagerServiceServer()
+type UnsafeCameraManagerServiceServer interface {
+	mustEmbedUnimplementedCameraManagerServiceServer()
 }
 
-func RegisterManagerServiceServer(s grpc.ServiceRegistrar, srv ManagerServiceServer) {
-	// If the following call panics, it indicates UnimplementedManagerServiceServer was
+func RegisterCameraManagerServiceServer(s grpc.ServiceRegistrar, srv CameraManagerServiceServer) {
+	// If the following call panics, it indicates UnimplementedCameraManagerServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ManagerService_ServiceDesc, srv)
+	s.RegisterService(&CameraManagerService_ServiceDesc, srv)
 }
 
-func _ManagerService_SetTorchMode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetTorchModeRequest)
+func _CameraManagerService_GetCameraCharacteristics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCameraCharacteristicsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).SetTorchMode(ctx, in)
+		return srv.(CameraManagerServiceServer).GetCameraCharacteristics(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_SetTorchMode_FullMethodName,
+		FullMethod: CameraManagerService_GetCameraCharacteristics_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).SetTorchMode(ctx, req.(*SetTorchModeRequest))
+		return srv.(CameraManagerServiceServer).GetCameraCharacteristics(ctx, req.(*GetCameraCharacteristicsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_RegisterTorchCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CameraManagerService_GetCameraDeviceSetup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCameraDeviceSetupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CameraManagerServiceServer).GetCameraDeviceSetup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CameraManagerService_GetCameraDeviceSetup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CameraManagerServiceServer).GetCameraDeviceSetup(ctx, req.(*GetCameraDeviceSetupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CameraManagerService_GetCameraExtensionCharacteristics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCameraExtensionCharacteristicsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CameraManagerServiceServer).GetCameraExtensionCharacteristics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CameraManagerService_GetCameraExtensionCharacteristics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CameraManagerServiceServer).GetCameraExtensionCharacteristics(ctx, req.(*GetCameraExtensionCharacteristicsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CameraManagerService_GetCameraIdList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCameraIdListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CameraManagerServiceServer).GetCameraIdList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CameraManagerService_GetCameraIdList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CameraManagerServiceServer).GetCameraIdList(ctx, req.(*GetCameraIdListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CameraManagerService_GetConcurrentCameraIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConcurrentCameraIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CameraManagerServiceServer).GetConcurrentCameraIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CameraManagerService_GetConcurrentCameraIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CameraManagerServiceServer).GetConcurrentCameraIds(ctx, req.(*GetConcurrentCameraIdsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CameraManagerService_GetTorchStrengthLevel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTorchStrengthLevelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CameraManagerServiceServer).GetTorchStrengthLevel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CameraManagerService_GetTorchStrengthLevel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CameraManagerServiceServer).GetTorchStrengthLevel(ctx, req.(*GetTorchStrengthLevelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CameraManagerService_IsCameraDeviceSetupSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsCameraDeviceSetupSupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CameraManagerServiceServer).IsCameraDeviceSetupSupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CameraManagerService_IsCameraDeviceSetupSupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CameraManagerServiceServer).IsCameraDeviceSetupSupported(ctx, req.(*IsCameraDeviceSetupSupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CameraManagerService_IsConcurrentSessionConfigurationSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsConcurrentSessionConfigurationSupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CameraManagerServiceServer).IsConcurrentSessionConfigurationSupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CameraManagerService_IsConcurrentSessionConfigurationSupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CameraManagerServiceServer).IsConcurrentSessionConfigurationSupported(ctx, req.(*IsConcurrentSessionConfigurationSupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CameraManagerService_OpenCamera_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OpenCameraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CameraManagerServiceServer).OpenCamera(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CameraManagerService_OpenCamera_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CameraManagerServiceServer).OpenCamera(ctx, req.(*OpenCameraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CameraManagerService_RegisterAvailabilityCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterAvailabilityCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CameraManagerServiceServer).RegisterAvailabilityCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CameraManagerService_RegisterAvailabilityCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CameraManagerServiceServer).RegisterAvailabilityCallback(ctx, req.(*RegisterAvailabilityCallbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CameraManagerService_RegisterTorchCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RegisterTorchCallbackRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).RegisterTorchCallback(ctx, in)
+		return srv.(CameraManagerServiceServer).RegisterTorchCallback(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_RegisterTorchCallback_FullMethodName,
+		FullMethod: CameraManagerService_RegisterTorchCallback_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).RegisterTorchCallback(ctx, req.(*RegisterTorchCallbackRequest))
+		return srv.(CameraManagerServiceServer).RegisterTorchCallback(ctx, req.(*RegisterTorchCallbackRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_UnregisterTorchCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CameraManagerService_SetTorchMode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTorchModeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CameraManagerServiceServer).SetTorchMode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CameraManagerService_SetTorchMode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CameraManagerServiceServer).SetTorchMode(ctx, req.(*SetTorchModeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CameraManagerService_TurnOnTorchWithStrengthLevel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TurnOnTorchWithStrengthLevelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CameraManagerServiceServer).TurnOnTorchWithStrengthLevel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CameraManagerService_TurnOnTorchWithStrengthLevel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CameraManagerServiceServer).TurnOnTorchWithStrengthLevel(ctx, req.(*TurnOnTorchWithStrengthLevelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CameraManagerService_UnregisterAvailabilityCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnregisterAvailabilityCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CameraManagerServiceServer).UnregisterAvailabilityCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CameraManagerService_UnregisterAvailabilityCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CameraManagerServiceServer).UnregisterAvailabilityCallback(ctx, req.(*UnregisterAvailabilityCallbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CameraManagerService_UnregisterTorchCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UnregisterTorchCallbackRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).UnregisterTorchCallback(ctx, in)
+		return srv.(CameraManagerServiceServer).UnregisterTorchCallback(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_UnregisterTorchCallback_FullMethodName,
+		FullMethod: CameraManagerService_UnregisterTorchCallback_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).UnregisterTorchCallback(ctx, req.(*UnregisterTorchCallbackRequest))
+		return srv.(CameraManagerServiceServer).UnregisterTorchCallback(ctx, req.(*UnregisterTorchCallbackRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ManagerService_ServiceDesc is the grpc.ServiceDesc for ManagerService service.
+// CameraManagerService_ServiceDesc is the grpc.ServiceDesc for CameraManagerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ManagerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "camera.ManagerService",
-	HandlerType: (*ManagerServiceServer)(nil),
+var CameraManagerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "camera.CameraManagerService",
+	HandlerType: (*CameraManagerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SetTorchMode",
-			Handler:    _ManagerService_SetTorchMode_Handler,
+			MethodName: "GetCameraCharacteristics",
+			Handler:    _CameraManagerService_GetCameraCharacteristics_Handler,
+		},
+		{
+			MethodName: "GetCameraDeviceSetup",
+			Handler:    _CameraManagerService_GetCameraDeviceSetup_Handler,
+		},
+		{
+			MethodName: "GetCameraExtensionCharacteristics",
+			Handler:    _CameraManagerService_GetCameraExtensionCharacteristics_Handler,
+		},
+		{
+			MethodName: "GetCameraIdList",
+			Handler:    _CameraManagerService_GetCameraIdList_Handler,
+		},
+		{
+			MethodName: "GetConcurrentCameraIds",
+			Handler:    _CameraManagerService_GetConcurrentCameraIds_Handler,
+		},
+		{
+			MethodName: "GetTorchStrengthLevel",
+			Handler:    _CameraManagerService_GetTorchStrengthLevel_Handler,
+		},
+		{
+			MethodName: "IsCameraDeviceSetupSupported",
+			Handler:    _CameraManagerService_IsCameraDeviceSetupSupported_Handler,
+		},
+		{
+			MethodName: "IsConcurrentSessionConfigurationSupported",
+			Handler:    _CameraManagerService_IsConcurrentSessionConfigurationSupported_Handler,
+		},
+		{
+			MethodName: "OpenCamera",
+			Handler:    _CameraManagerService_OpenCamera_Handler,
+		},
+		{
+			MethodName: "RegisterAvailabilityCallback",
+			Handler:    _CameraManagerService_RegisterAvailabilityCallback_Handler,
 		},
 		{
 			MethodName: "RegisterTorchCallback",
-			Handler:    _ManagerService_RegisterTorchCallback_Handler,
+			Handler:    _CameraManagerService_RegisterTorchCallback_Handler,
+		},
+		{
+			MethodName: "SetTorchMode",
+			Handler:    _CameraManagerService_SetTorchMode_Handler,
+		},
+		{
+			MethodName: "TurnOnTorchWithStrengthLevel",
+			Handler:    _CameraManagerService_TurnOnTorchWithStrengthLevel_Handler,
+		},
+		{
+			MethodName: "UnregisterAvailabilityCallback",
+			Handler:    _CameraManagerService_UnregisterAvailabilityCallback_Handler,
 		},
 		{
 			MethodName: "UnregisterTorchCallback",
-			Handler:    _ManagerService_UnregisterTorchCallback_Handler,
+			Handler:    _CameraManagerService_UnregisterTorchCallback_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/camera/camera.proto",
-}
-
-const (
-	TorchCallbackService_SubscribeTorchCallback_FullMethodName = "/camera.TorchCallbackService/SubscribeTorchCallback"
-)
-
-// TorchCallbackServiceClient is the client API for TorchCallbackService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type TorchCallbackServiceClient interface {
-	// Server-streaming events from android.hardware.camera2.CameraManager$TorchCallback
-	SubscribeTorchCallback(ctx context.Context, in *SubscribeTorchCallbackRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TorchCallbackEvent], error)
-}
-
-type torchCallbackServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewTorchCallbackServiceClient(cc grpc.ClientConnInterface) TorchCallbackServiceClient {
-	return &torchCallbackServiceClient{cc}
-}
-
-func (c *torchCallbackServiceClient) SubscribeTorchCallback(ctx context.Context, in *SubscribeTorchCallbackRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TorchCallbackEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &TorchCallbackService_ServiceDesc.Streams[0], TorchCallbackService_SubscribeTorchCallback_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[SubscribeTorchCallbackRequest, TorchCallbackEvent]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type TorchCallbackService_SubscribeTorchCallbackClient = grpc.ServerStreamingClient[TorchCallbackEvent]
-
-// TorchCallbackServiceServer is the server API for TorchCallbackService service.
-// All implementations must embed UnimplementedTorchCallbackServiceServer
-// for forward compatibility.
-type TorchCallbackServiceServer interface {
-	// Server-streaming events from android.hardware.camera2.CameraManager$TorchCallback
-	SubscribeTorchCallback(*SubscribeTorchCallbackRequest, grpc.ServerStreamingServer[TorchCallbackEvent]) error
-	mustEmbedUnimplementedTorchCallbackServiceServer()
-}
-
-// UnimplementedTorchCallbackServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedTorchCallbackServiceServer struct{}
-
-func (UnimplementedTorchCallbackServiceServer) SubscribeTorchCallback(*SubscribeTorchCallbackRequest, grpc.ServerStreamingServer[TorchCallbackEvent]) error {
-	return status.Error(codes.Unimplemented, "method SubscribeTorchCallback not implemented")
-}
-func (UnimplementedTorchCallbackServiceServer) mustEmbedUnimplementedTorchCallbackServiceServer() {}
-func (UnimplementedTorchCallbackServiceServer) testEmbeddedByValue()                              {}
-
-// UnsafeTorchCallbackServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to TorchCallbackServiceServer will
-// result in compilation errors.
-type UnsafeTorchCallbackServiceServer interface {
-	mustEmbedUnimplementedTorchCallbackServiceServer()
-}
-
-func RegisterTorchCallbackServiceServer(s grpc.ServiceRegistrar, srv TorchCallbackServiceServer) {
-	// If the following call panics, it indicates UnimplementedTorchCallbackServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&TorchCallbackService_ServiceDesc, srv)
-}
-
-func _TorchCallbackService_SubscribeTorchCallback_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeTorchCallbackRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(TorchCallbackServiceServer).SubscribeTorchCallback(m, &grpc.GenericServerStream[SubscribeTorchCallbackRequest, TorchCallbackEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type TorchCallbackService_SubscribeTorchCallbackServer = grpc.ServerStreamingServer[TorchCallbackEvent]
-
-// TorchCallbackService_ServiceDesc is the grpc.ServiceDesc for TorchCallbackService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var TorchCallbackService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "camera.TorchCallbackService",
-	HandlerType: (*TorchCallbackServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "SubscribeTorchCallback",
-			Handler:       _TorchCallbackService_SubscribeTorchCallback_Handler,
-			ServerStreams: true,
-		},
-	},
 	Metadata: "proto/camera/camera.proto",
 }

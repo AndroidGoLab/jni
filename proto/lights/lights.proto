@@ -6,40 +6,40 @@ package lights;
 
 option go_package = "github.com/xaionaro-go/jni/proto/lights";
 
-message Light {
-  int32 id = 1;
-  string name = 2;
-  int32 type = 3;
+message DescribeContentsRequest {
 }
 
-message GetLightsRawRequest {
+message DescribeContentsResponse {
+  int32 result = 1;
 }
 
-message GetLightsRawResponse {
-  int64 result = 1;
+message GetColorRequest {
 }
 
-message OpenSessionRawRequest {
+message GetColorResponse {
+  int32 result = 1;
 }
 
-message OpenSessionRawResponse {
-  int64 result = 1;
+message GetPlayerIdRequest {
 }
 
-message SetColorRequest {
-  int32 argb = 1;
+message GetPlayerIdResponse {
+  int32 result = 1;
 }
 
-message SetColorResponse {
-  int64 result = 1;
+message ToStringRequest {
 }
 
-message SetPlayerIdRequest {
-  int32 player_id = 1;
+message ToStringResponse {
+  string result = 1;
 }
 
-message SetPlayerIdResponse {
-  int64 result = 1;
+message WriteToParcelRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message WriteToParcelResponse {
 }
 
 message BuildRequest {
@@ -49,54 +49,32 @@ message BuildResponse {
   int64 result = 1;
 }
 
-message RequestLightsRawRequest {
-  int64 request = 1;
+message SetColorRequest {
+  int32 arg0 = 1;
 }
 
-message RequestLightsRawResponse {
-}
-
-message CloseRawRequest {
-}
-
-message CloseRawResponse {
-}
-
-message AddLightRequest {
-  int64 light = 1;
-  int64 state = 2;
-}
-
-message AddLightResponse {
+message SetColorResponse {
   int64 result = 1;
 }
 
-message ClearLightRequest {
-  int64 light = 1;
+message SetPlayerIdRequest {
+  int32 arg0 = 1;
 }
 
-message ClearLightResponse {
+message SetPlayerIdResponse {
   int64 result = 1;
 }
 
-service ManagerService {
-  rpc GetLightsRaw (GetLightsRawRequest) returns (GetLightsRawResponse);
-  rpc OpenSessionRaw (OpenSessionRawRequest) returns (OpenSessionRawResponse);
+service LightStateService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc GetColor (GetColorRequest) returns (GetColorResponse);
+  rpc GetPlayerId (GetPlayerIdRequest) returns (GetPlayerIdResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
 }
 
 service LightStateBuilderService {
+  rpc Build (BuildRequest) returns (BuildResponse);
   rpc SetColor (SetColorRequest) returns (SetColorResponse);
   rpc SetPlayerId (SetPlayerIdRequest) returns (SetPlayerIdResponse);
-  rpc Build (BuildRequest) returns (BuildResponse);
-}
-
-service SessionService {
-  rpc RequestLightsRaw (RequestLightsRawRequest) returns (RequestLightsRawResponse);
-  rpc CloseRaw (CloseRawRequest) returns (CloseRawResponse);
-}
-
-service LightsRequestBuilderService {
-  rpc AddLight (AddLightRequest) returns (AddLightResponse);
-  rpc ClearLight (ClearLightRequest) returns (ClearLightResponse);
-  rpc Build (BuildRequest) returns (BuildResponse);
 }

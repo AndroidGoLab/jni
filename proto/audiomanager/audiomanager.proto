@@ -6,80 +6,358 @@ package audiomanager;
 
 option go_package = "github.com/xaionaro-go/jni/proto/audiomanager";
 
-message AudioDeviceInfo {
-  int32 id = 1;
-  int32 type = 2;
-  string product_name = 3;
-  string address = 4;
-  bool is_source = 5;
-  bool is_sink = 6;
-  int64 sample_rates = 7;
-  int64 channel_counts = 8;
-  int64 encodings = 9;
+message AbandonAudioFocusRequest {
+  int64 arg0 = 1;
 }
 
-message GetDevicesRawRequest {
-  int32 flags = 1;
-}
-
-message GetDevicesRawResponse {
-  int64 result = 1;
-}
-
-message RegisterAudioDeviceCallbackRequest {
-  int64 callback = 1;
-  int64 handler = 2;
-}
-
-message RegisterAudioDeviceCallbackResponse {
-}
-
-message UnregisterAudioDeviceCallbackRequest {
-  int64 callback = 1;
-}
-
-message UnregisterAudioDeviceCallbackResponse {
-}
-
-message RequestAudioFocusRawRequest {
-  int64 request = 1;
-}
-
-message RequestAudioFocusRawResponse {
+message AbandonAudioFocusResponse {
   int32 result = 1;
 }
 
 message AbandonAudioFocusRequestRequest {
-  int64 request = 1;
+  int64 arg0 = 1;
 }
 
 message AbandonAudioFocusRequestResponse {
   int32 result = 1;
 }
 
+message AddOnCommunicationDeviceChangedListenerRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message AddOnCommunicationDeviceChangedListenerResponse {
+}
+
+message AddOnModeChangedListenerRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message AddOnModeChangedListenerResponse {
+}
+
+message AddOnPreferredMixerAttributesChangedListenerRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message AddOnPreferredMixerAttributesChangedListenerResponse {
+}
+
+message AdjustStreamVolumeRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message AdjustStreamVolumeResponse {
+}
+
+message AdjustSuggestedStreamVolumeRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message AdjustSuggestedStreamVolumeResponse {
+}
+
+message AdjustVolumeRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message AdjustVolumeResponse {
+}
+
+message AdjustVolumeGroupVolumeRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message AdjustVolumeGroupVolumeResponse {
+}
+
+message ClearCommunicationDeviceRequest {
+}
+
+message ClearCommunicationDeviceResponse {
+}
+
+message ClearPreferredMixerAttributesRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message ClearPreferredMixerAttributesResponse {
+  bool result = 1;
+}
+
+message DispatchMediaKeyEventRequest {
+  int64 arg0 = 1;
+}
+
+message DispatchMediaKeyEventResponse {
+}
+
+message GenerateAudioSessionIdRequest {
+}
+
+message GenerateAudioSessionIdResponse {
+  int32 result = 1;
+}
+
+message GetActivePlaybackConfigurationsRequest {
+}
+
+message GetActivePlaybackConfigurationsResponse {
+  int64 result = 1;
+}
+
+message GetActiveRecordingConfigurationsRequest {
+}
+
+message GetActiveRecordingConfigurationsResponse {
+  int64 result = 1;
+}
+
+message GetAllowedCapturePolicyRequest {
+}
+
+message GetAllowedCapturePolicyResponse {
+  int32 result = 1;
+}
+
+message GetAudioDevicesForAttributesRequest {
+  int64 arg0 = 1;
+}
+
+message GetAudioDevicesForAttributesResponse {
+  int64 result = 1;
+}
+
+message GetAudioHwSyncForSessionRequest {
+  int32 arg0 = 1;
+}
+
+message GetAudioHwSyncForSessionResponse {
+  int32 result = 1;
+}
+
+message GetAvailableCommunicationDevicesRequest {
+}
+
+message GetAvailableCommunicationDevicesResponse {
+  int64 result = 1;
+}
+
+message GetCommunicationDeviceRequest {
+}
+
+message GetCommunicationDeviceResponse {
+  int64 result = 1;
+}
+
+message GetDevicesRequest {
+  int32 arg0 = 1;
+}
+
+message GetDevicesResponse {
+  int64 result = 1;
+}
+
+message GetDirectProfilesForAttributesRequest {
+  int64 arg0 = 1;
+}
+
+message GetDirectProfilesForAttributesResponse {
+  int64 result = 1;
+}
+
+message GetEncodedSurroundModeRequest {
+}
+
+message GetEncodedSurroundModeResponse {
+  int32 result = 1;
+}
+
+message GetMicrophonesRequest {
+}
+
+message GetMicrophonesResponse {
+  int64 result = 1;
+}
+
+message GetModeRequest {
+}
+
+message GetModeResponse {
+  int32 result = 1;
+}
+
+message GetParametersRequest {
+  string arg0 = 1;
+}
+
+message GetParametersResponse {
+  string result = 1;
+}
+
+message GetPreferredMixerAttributesRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message GetPreferredMixerAttributesResponse {
+  int64 result = 1;
+}
+
+message GetPropertyRequest {
+  string arg0 = 1;
+}
+
+message GetPropertyResponse {
+  string result = 1;
+}
+
+message GetRingerModeRequest {
+}
+
+message GetRingerModeResponse {
+  int32 result = 1;
+}
+
+message GetRoutingRequest {
+  int32 arg0 = 1;
+}
+
+message GetRoutingResponse {
+  int32 result = 1;
+}
+
+message GetSpatializerRequest {
+}
+
+message GetSpatializerResponse {
+  int64 result = 1;
+}
+
+message GetStreamMaxVolumeRequest {
+  int32 arg0 = 1;
+}
+
+message GetStreamMaxVolumeResponse {
+  int32 result = 1;
+}
+
+message GetStreamMinVolumeRequest {
+  int32 arg0 = 1;
+}
+
+message GetStreamMinVolumeResponse {
+  int32 result = 1;
+}
+
 message GetStreamVolumeRequest {
-  int32 stream_type = 1;
+  int32 arg0 = 1;
 }
 
 message GetStreamVolumeResponse {
   int32 result = 1;
 }
 
-message SetStreamVolumeRequest {
-  int32 stream_type = 1;
-  int32 index = 2;
-  int32 flags = 3;
+message GetStreamVolumeDbRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
 }
 
-message SetStreamVolumeResponse {
+message GetStreamVolumeDbResponse {
+  float result = 1;
 }
 
-message GetStreamMaxVolumeRequest {
-  int32 stream_type = 1;
+message GetSupportedDeviceTypesRequest {
+  int32 arg0 = 1;
 }
 
-message GetStreamMaxVolumeResponse {
+message GetSupportedDeviceTypesResponse {
+  int64 result = 1;
+}
+
+message GetSupportedMixerAttributesRequest {
+  int64 arg0 = 1;
+}
+
+message GetSupportedMixerAttributesResponse {
+  int64 result = 1;
+}
+
+message GetVibrateSettingRequest {
+  int32 arg0 = 1;
+}
+
+message GetVibrateSettingResponse {
   int32 result = 1;
+}
+
+message GetVolumeGroupIdForAttributesRequest {
+  int64 arg0 = 1;
+}
+
+message GetVolumeGroupIdForAttributesResponse {
+  int32 result = 1;
+}
+
+message IsBluetoothA2dpOnRequest {
+}
+
+message IsBluetoothA2dpOnResponse {
+  bool result = 1;
+}
+
+message IsBluetoothScoAvailableOffCallRequest {
+}
+
+message IsBluetoothScoAvailableOffCallResponse {
+  bool result = 1;
+}
+
+message IsBluetoothScoOnRequest {
+}
+
+message IsBluetoothScoOnResponse {
+  bool result = 1;
+}
+
+message IsCallScreeningModeSupportedRequest {
+}
+
+message IsCallScreeningModeSupportedResponse {
+  bool result = 1;
+}
+
+message IsMicrophoneMuteRequest {
+}
+
+message IsMicrophoneMuteResponse {
+  bool result = 1;
+}
+
+message IsMusicActiveRequest {
+}
+
+message IsMusicActiveResponse {
+  bool result = 1;
+}
+
+message IsRampingRingerEnabledRequest {
+}
+
+message IsRampingRingerEnabledResponse {
+  bool result = 1;
 }
 
 message IsSpeakerphoneOnRequest {
@@ -89,79 +367,485 @@ message IsSpeakerphoneOnResponse {
   bool result = 1;
 }
 
+message IsStreamMuteRequest {
+  int32 arg0 = 1;
+}
+
+message IsStreamMuteResponse {
+  bool result = 1;
+}
+
+message IsSurroundFormatEnabledRequest {
+  int32 arg0 = 1;
+}
+
+message IsSurroundFormatEnabledResponse {
+  bool result = 1;
+}
+
+message IsVolumeFixedRequest {
+}
+
+message IsVolumeFixedResponse {
+  bool result = 1;
+}
+
+message IsVolumeGroupMutedRequest {
+  int32 arg0 = 1;
+}
+
+message IsVolumeGroupMutedResponse {
+  bool result = 1;
+}
+
+message IsWiredHeadsetOnRequest {
+}
+
+message IsWiredHeadsetOnResponse {
+  bool result = 1;
+}
+
+message LoadSoundEffectsRequest {
+}
+
+message LoadSoundEffectsResponse {
+}
+
+message PlaySoundEffect1Request {
+  int32 arg0 = 1;
+}
+
+message PlaySoundEffect1Response {
+}
+
+message PlaySoundEffect2_1Request {
+  int32 arg0 = 1;
+  float arg1 = 2;
+}
+
+message PlaySoundEffect2_1Response {
+}
+
+message RegisterMediaButtonEventReceiver1Request {
+  int64 arg0 = 1;
+}
+
+message RegisterMediaButtonEventReceiver1Response {
+}
+
+message RegisterMediaButtonEventReceiver1_1Request {
+  int64 arg0 = 1;
+}
+
+message RegisterMediaButtonEventReceiver1_1Response {
+}
+
+message RegisterRemoteControlClientRequest {
+  int64 arg0 = 1;
+}
+
+message RegisterRemoteControlClientResponse {
+}
+
+message RegisterRemoteControllerRequest {
+  int64 arg0 = 1;
+}
+
+message RegisterRemoteControllerResponse {
+  bool result = 1;
+}
+
+message RemoveOnCommunicationDeviceChangedListenerRequest {
+  int64 arg0 = 1;
+}
+
+message RemoveOnCommunicationDeviceChangedListenerResponse {
+}
+
+message RemoveOnModeChangedListenerRequest {
+  int64 arg0 = 1;
+}
+
+message RemoveOnModeChangedListenerResponse {
+}
+
+message RemoveOnPreferredMixerAttributesChangedListenerRequest {
+  int64 arg0 = 1;
+}
+
+message RemoveOnPreferredMixerAttributesChangedListenerResponse {
+}
+
+message RequestAudioFocus1Request {
+  int64 arg0 = 1;
+}
+
+message RequestAudioFocus1Response {
+  int32 result = 1;
+}
+
+message RequestAudioFocus3_1Request {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message RequestAudioFocus3_1Response {
+  int32 result = 1;
+}
+
+message SetAllowedCapturePolicyRequest {
+  int32 arg0 = 1;
+}
+
+message SetAllowedCapturePolicyResponse {
+}
+
+message SetBluetoothA2dpOnRequest {
+  bool arg0 = 1;
+}
+
+message SetBluetoothA2dpOnResponse {
+}
+
+message SetBluetoothScoOnRequest {
+  bool arg0 = 1;
+}
+
+message SetBluetoothScoOnResponse {
+}
+
+message SetCommunicationDeviceRequest {
+  int64 arg0 = 1;
+}
+
+message SetCommunicationDeviceResponse {
+  bool result = 1;
+}
+
+message SetEncodedSurroundModeRequest {
+  int32 arg0 = 1;
+}
+
+message SetEncodedSurroundModeResponse {
+  bool result = 1;
+}
+
+message SetMicrophoneMuteRequest {
+  bool arg0 = 1;
+}
+
+message SetMicrophoneMuteResponse {
+}
+
+message SetModeRequest {
+  int32 arg0 = 1;
+}
+
+message SetModeResponse {
+}
+
+message SetParametersRequest {
+  string arg0 = 1;
+}
+
+message SetParametersResponse {
+}
+
+message SetPreferredMixerAttributesRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message SetPreferredMixerAttributesResponse {
+  bool result = 1;
+}
+
+message SetRingerModeRequest {
+  int32 arg0 = 1;
+}
+
+message SetRingerModeResponse {
+}
+
+message SetRoutingRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message SetRoutingResponse {
+}
+
 message SetSpeakerphoneOnRequest {
-  bool on = 1;
+  bool arg0 = 1;
 }
 
 message SetSpeakerphoneOnResponse {
 }
 
-message SetOnAudioFocusChangeListenerRequest {
-  int64 listener = 1;
+message SetStreamMuteRequest {
+  int32 arg0 = 1;
+  bool arg1 = 2;
 }
 
-message SetOnAudioFocusChangeListenerResponse {
-  int64 result = 1;
+message SetStreamMuteResponse {
 }
 
-message BuildRequest {
+message SetStreamSoloRequest {
+  int32 arg0 = 1;
+  bool arg1 = 2;
 }
 
-message BuildResponse {
-  int64 result = 1;
+message SetStreamSoloResponse {
 }
 
-message AudioDeviceCallbackOnAddedEvent {
+message SetStreamVolumeRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message SetStreamVolumeResponse {
+}
+
+message SetSurroundFormatEnabledRequest {
+  int32 arg0 = 1;
+  bool arg1 = 2;
+}
+
+message SetSurroundFormatEnabledResponse {
+  bool result = 1;
+}
+
+message SetVibrateSettingRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message SetVibrateSettingResponse {
+}
+
+message SetWiredHeadsetOnRequest {
+  bool arg0 = 1;
+}
+
+message SetWiredHeadsetOnResponse {
+}
+
+message ShouldVibrateRequest {
+  int32 arg0 = 1;
+}
+
+message ShouldVibrateResponse {
+  bool result = 1;
+}
+
+message StartBluetoothScoRequest {
+}
+
+message StartBluetoothScoResponse {
+}
+
+message StopBluetoothScoRequest {
+}
+
+message StopBluetoothScoResponse {
+}
+
+message UnloadSoundEffectsRequest {
+}
+
+message UnloadSoundEffectsResponse {
+}
+
+message UnregisterAudioDeviceCallbackRequest {
   int64 arg0 = 1;
 }
 
-message AudioDeviceCallbackOnRemovedEvent {
+message UnregisterAudioDeviceCallbackResponse {
+}
+
+message UnregisterAudioPlaybackCallbackRequest {
   int64 arg0 = 1;
 }
 
-message AudioDeviceCallbackEvent {
-  optional AudioDeviceCallbackOnAddedEvent on_added = 1;
-  optional AudioDeviceCallbackOnRemovedEvent on_removed = 2;
+message UnregisterAudioPlaybackCallbackResponse {
 }
 
-message SubscribeAudioDeviceCallbackRequest {
-}
-
-message AudioFocusChangeListenerOnFocusChangeEvent {
+message UnregisterAudioRecordingCallbackRequest {
   int64 arg0 = 1;
 }
 
-message AudioFocusChangeListenerEvent {
-  optional AudioFocusChangeListenerOnFocusChangeEvent on_focus_change = 1;
+message UnregisterAudioRecordingCallbackResponse {
 }
 
-message SubscribeAudioFocusChangeListenerRequest {
+message UnregisterMediaButtonEventReceiver1Request {
+  int64 arg0 = 1;
 }
 
-service ManagerService {
-  rpc GetDevicesRaw (GetDevicesRawRequest) returns (GetDevicesRawResponse);
-  rpc RegisterAudioDeviceCallback (RegisterAudioDeviceCallbackRequest) returns (RegisterAudioDeviceCallbackResponse);
-  rpc UnregisterAudioDeviceCallback (UnregisterAudioDeviceCallbackRequest) returns (UnregisterAudioDeviceCallbackResponse);
-  rpc RequestAudioFocusRaw (RequestAudioFocusRawRequest) returns (RequestAudioFocusRawResponse);
-  rpc AbandonAudioFocusRequest (AbandonAudioFocusRequestRequest) returns (AbandonAudioFocusRequestResponse);
-  rpc GetStreamVolume (GetStreamVolumeRequest) returns (GetStreamVolumeResponse);
-  rpc SetStreamVolume (SetStreamVolumeRequest) returns (SetStreamVolumeResponse);
+message UnregisterMediaButtonEventReceiver1Response {
+}
+
+message UnregisterMediaButtonEventReceiver1_1Request {
+  int64 arg0 = 1;
+}
+
+message UnregisterMediaButtonEventReceiver1_1Response {
+}
+
+message UnregisterRemoteControlClientRequest {
+  int64 arg0 = 1;
+}
+
+message UnregisterRemoteControlClientResponse {
+}
+
+message UnregisterRemoteControllerRequest {
+  int64 arg0 = 1;
+}
+
+message UnregisterRemoteControllerResponse {
+}
+
+message GetDirectPlaybackSupportRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message GetDirectPlaybackSupportResponse {
+  int32 result = 1;
+}
+
+message GetPlaybackOffloadSupportRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message GetPlaybackOffloadSupportResponse {
+  int32 result = 1;
+}
+
+message IsHapticPlaybackSupportedRequest {
+}
+
+message IsHapticPlaybackSupportedResponse {
+  bool result = 1;
+}
+
+message IsOffloadedPlaybackSupportedRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message IsOffloadedPlaybackSupportedResponse {
+  bool result = 1;
+}
+
+message AbandonAudioFocusRequestOpRequest {
+  int64 arg0 = 1;
+}
+
+message AbandonAudioFocusRequestOpResponse {
+}
+
+service AudioManagerService {
+  rpc AbandonAudioFocus (AbandonAudioFocusRequest) returns (AbandonAudioFocusResponse);
+  rpc AbandonAudioFocusRequestOp (AbandonAudioFocusRequestOpRequest) returns (AbandonAudioFocusRequestOpResponse);
+  rpc AddOnCommunicationDeviceChangedListener (AddOnCommunicationDeviceChangedListenerRequest) returns (AddOnCommunicationDeviceChangedListenerResponse);
+  rpc AddOnModeChangedListener (AddOnModeChangedListenerRequest) returns (AddOnModeChangedListenerResponse);
+  rpc AddOnPreferredMixerAttributesChangedListener (AddOnPreferredMixerAttributesChangedListenerRequest) returns (AddOnPreferredMixerAttributesChangedListenerResponse);
+  rpc AdjustStreamVolume (AdjustStreamVolumeRequest) returns (AdjustStreamVolumeResponse);
+  rpc AdjustSuggestedStreamVolume (AdjustSuggestedStreamVolumeRequest) returns (AdjustSuggestedStreamVolumeResponse);
+  rpc AdjustVolume (AdjustVolumeRequest) returns (AdjustVolumeResponse);
+  rpc AdjustVolumeGroupVolume (AdjustVolumeGroupVolumeRequest) returns (AdjustVolumeGroupVolumeResponse);
+  rpc ClearCommunicationDevice (ClearCommunicationDeviceRequest) returns (ClearCommunicationDeviceResponse);
+  rpc ClearPreferredMixerAttributes (ClearPreferredMixerAttributesRequest) returns (ClearPreferredMixerAttributesResponse);
+  rpc DispatchMediaKeyEvent (DispatchMediaKeyEventRequest) returns (DispatchMediaKeyEventResponse);
+  rpc GenerateAudioSessionId (GenerateAudioSessionIdRequest) returns (GenerateAudioSessionIdResponse);
+  rpc GetActivePlaybackConfigurations (GetActivePlaybackConfigurationsRequest) returns (GetActivePlaybackConfigurationsResponse);
+  rpc GetActiveRecordingConfigurations (GetActiveRecordingConfigurationsRequest) returns (GetActiveRecordingConfigurationsResponse);
+  rpc GetAllowedCapturePolicy (GetAllowedCapturePolicyRequest) returns (GetAllowedCapturePolicyResponse);
+  rpc GetAudioDevicesForAttributes (GetAudioDevicesForAttributesRequest) returns (GetAudioDevicesForAttributesResponse);
+  rpc GetAudioHwSyncForSession (GetAudioHwSyncForSessionRequest) returns (GetAudioHwSyncForSessionResponse);
+  rpc GetAvailableCommunicationDevices (GetAvailableCommunicationDevicesRequest) returns (GetAvailableCommunicationDevicesResponse);
+  rpc GetCommunicationDevice (GetCommunicationDeviceRequest) returns (GetCommunicationDeviceResponse);
+  rpc GetDevices (GetDevicesRequest) returns (GetDevicesResponse);
+  rpc GetDirectProfilesForAttributes (GetDirectProfilesForAttributesRequest) returns (GetDirectProfilesForAttributesResponse);
+  rpc GetEncodedSurroundMode (GetEncodedSurroundModeRequest) returns (GetEncodedSurroundModeResponse);
+  rpc GetMicrophones (GetMicrophonesRequest) returns (GetMicrophonesResponse);
+  rpc GetMode (GetModeRequest) returns (GetModeResponse);
+  rpc GetParameters (GetParametersRequest) returns (GetParametersResponse);
+  rpc GetPreferredMixerAttributes (GetPreferredMixerAttributesRequest) returns (GetPreferredMixerAttributesResponse);
+  rpc GetProperty (GetPropertyRequest) returns (GetPropertyResponse);
+  rpc GetRingerMode (GetRingerModeRequest) returns (GetRingerModeResponse);
+  rpc GetRouting (GetRoutingRequest) returns (GetRoutingResponse);
+  rpc GetSpatializer (GetSpatializerRequest) returns (GetSpatializerResponse);
   rpc GetStreamMaxVolume (GetStreamMaxVolumeRequest) returns (GetStreamMaxVolumeResponse);
+  rpc GetStreamMinVolume (GetStreamMinVolumeRequest) returns (GetStreamMinVolumeResponse);
+  rpc GetStreamVolume (GetStreamVolumeRequest) returns (GetStreamVolumeResponse);
+  rpc GetStreamVolumeDb (GetStreamVolumeDbRequest) returns (GetStreamVolumeDbResponse);
+  rpc GetSupportedDeviceTypes (GetSupportedDeviceTypesRequest) returns (GetSupportedDeviceTypesResponse);
+  rpc GetSupportedMixerAttributes (GetSupportedMixerAttributesRequest) returns (GetSupportedMixerAttributesResponse);
+  rpc GetVibrateSetting (GetVibrateSettingRequest) returns (GetVibrateSettingResponse);
+  rpc GetVolumeGroupIdForAttributes (GetVolumeGroupIdForAttributesRequest) returns (GetVolumeGroupIdForAttributesResponse);
+  rpc IsBluetoothA2dpOn (IsBluetoothA2dpOnRequest) returns (IsBluetoothA2dpOnResponse);
+  rpc IsBluetoothScoAvailableOffCall (IsBluetoothScoAvailableOffCallRequest) returns (IsBluetoothScoAvailableOffCallResponse);
+  rpc IsBluetoothScoOn (IsBluetoothScoOnRequest) returns (IsBluetoothScoOnResponse);
+  rpc IsCallScreeningModeSupported (IsCallScreeningModeSupportedRequest) returns (IsCallScreeningModeSupportedResponse);
+  rpc IsMicrophoneMute (IsMicrophoneMuteRequest) returns (IsMicrophoneMuteResponse);
+  rpc IsMusicActive (IsMusicActiveRequest) returns (IsMusicActiveResponse);
+  rpc IsRampingRingerEnabled (IsRampingRingerEnabledRequest) returns (IsRampingRingerEnabledResponse);
   rpc IsSpeakerphoneOn (IsSpeakerphoneOnRequest) returns (IsSpeakerphoneOnResponse);
+  rpc IsStreamMute (IsStreamMuteRequest) returns (IsStreamMuteResponse);
+  rpc IsSurroundFormatEnabled (IsSurroundFormatEnabledRequest) returns (IsSurroundFormatEnabledResponse);
+  rpc IsVolumeFixed (IsVolumeFixedRequest) returns (IsVolumeFixedResponse);
+  rpc IsVolumeGroupMuted (IsVolumeGroupMutedRequest) returns (IsVolumeGroupMutedResponse);
+  rpc IsWiredHeadsetOn (IsWiredHeadsetOnRequest) returns (IsWiredHeadsetOnResponse);
+  rpc LoadSoundEffects (LoadSoundEffectsRequest) returns (LoadSoundEffectsResponse);
+  rpc PlaySoundEffect1 (PlaySoundEffect1Request) returns (PlaySoundEffect1Response);
+  rpc PlaySoundEffect2_1 (PlaySoundEffect2_1Request) returns (PlaySoundEffect2_1Response);
+  rpc RegisterMediaButtonEventReceiver1 (RegisterMediaButtonEventReceiver1Request) returns (RegisterMediaButtonEventReceiver1Response);
+  rpc RegisterMediaButtonEventReceiver1_1 (RegisterMediaButtonEventReceiver1_1Request) returns (RegisterMediaButtonEventReceiver1_1Response);
+  rpc RegisterRemoteControlClient (RegisterRemoteControlClientRequest) returns (RegisterRemoteControlClientResponse);
+  rpc RegisterRemoteController (RegisterRemoteControllerRequest) returns (RegisterRemoteControllerResponse);
+  rpc RemoveOnCommunicationDeviceChangedListener (RemoveOnCommunicationDeviceChangedListenerRequest) returns (RemoveOnCommunicationDeviceChangedListenerResponse);
+  rpc RemoveOnModeChangedListener (RemoveOnModeChangedListenerRequest) returns (RemoveOnModeChangedListenerResponse);
+  rpc RemoveOnPreferredMixerAttributesChangedListener (RemoveOnPreferredMixerAttributesChangedListenerRequest) returns (RemoveOnPreferredMixerAttributesChangedListenerResponse);
+  rpc RequestAudioFocus1 (RequestAudioFocus1Request) returns (RequestAudioFocus1Response);
+  rpc RequestAudioFocus3_1 (RequestAudioFocus3_1Request) returns (RequestAudioFocus3_1Response);
+  rpc SetAllowedCapturePolicy (SetAllowedCapturePolicyRequest) returns (SetAllowedCapturePolicyResponse);
+  rpc SetBluetoothA2dpOn (SetBluetoothA2dpOnRequest) returns (SetBluetoothA2dpOnResponse);
+  rpc SetBluetoothScoOn (SetBluetoothScoOnRequest) returns (SetBluetoothScoOnResponse);
+  rpc SetCommunicationDevice (SetCommunicationDeviceRequest) returns (SetCommunicationDeviceResponse);
+  rpc SetEncodedSurroundMode (SetEncodedSurroundModeRequest) returns (SetEncodedSurroundModeResponse);
+  rpc SetMicrophoneMute (SetMicrophoneMuteRequest) returns (SetMicrophoneMuteResponse);
+  rpc SetMode (SetModeRequest) returns (SetModeResponse);
+  rpc SetParameters (SetParametersRequest) returns (SetParametersResponse);
+  rpc SetPreferredMixerAttributes (SetPreferredMixerAttributesRequest) returns (SetPreferredMixerAttributesResponse);
+  rpc SetRingerMode (SetRingerModeRequest) returns (SetRingerModeResponse);
+  rpc SetRouting (SetRoutingRequest) returns (SetRoutingResponse);
   rpc SetSpeakerphoneOn (SetSpeakerphoneOnRequest) returns (SetSpeakerphoneOnResponse);
-}
-
-service AudioFocusRequestBuilderService {
-  rpc SetOnAudioFocusChangeListener (SetOnAudioFocusChangeListenerRequest) returns (SetOnAudioFocusChangeListenerResponse);
-  rpc Build (BuildRequest) returns (BuildResponse);
-}
-
-service AudioDeviceCallbackService {
-  // Server-streaming events from android.media.AudioDeviceCallback
-  rpc SubscribeAudioDeviceCallback (SubscribeAudioDeviceCallbackRequest) returns (stream AudioDeviceCallbackEvent);
-}
-
-service AudioFocusChangeListenerService {
-  // Server-streaming events from android.media.AudioManager$OnAudioFocusChangeListener
-  rpc SubscribeAudioFocusChangeListener (SubscribeAudioFocusChangeListenerRequest) returns (stream AudioFocusChangeListenerEvent);
+  rpc SetStreamMute (SetStreamMuteRequest) returns (SetStreamMuteResponse);
+  rpc SetStreamSolo (SetStreamSoloRequest) returns (SetStreamSoloResponse);
+  rpc SetStreamVolume (SetStreamVolumeRequest) returns (SetStreamVolumeResponse);
+  rpc SetSurroundFormatEnabled (SetSurroundFormatEnabledRequest) returns (SetSurroundFormatEnabledResponse);
+  rpc SetVibrateSetting (SetVibrateSettingRequest) returns (SetVibrateSettingResponse);
+  rpc SetWiredHeadsetOn (SetWiredHeadsetOnRequest) returns (SetWiredHeadsetOnResponse);
+  rpc ShouldVibrate (ShouldVibrateRequest) returns (ShouldVibrateResponse);
+  rpc StartBluetoothSco (StartBluetoothScoRequest) returns (StartBluetoothScoResponse);
+  rpc StopBluetoothSco (StopBluetoothScoRequest) returns (StopBluetoothScoResponse);
+  rpc UnloadSoundEffects (UnloadSoundEffectsRequest) returns (UnloadSoundEffectsResponse);
+  rpc UnregisterAudioDeviceCallback (UnregisterAudioDeviceCallbackRequest) returns (UnregisterAudioDeviceCallbackResponse);
+  rpc UnregisterAudioPlaybackCallback (UnregisterAudioPlaybackCallbackRequest) returns (UnregisterAudioPlaybackCallbackResponse);
+  rpc UnregisterAudioRecordingCallback (UnregisterAudioRecordingCallbackRequest) returns (UnregisterAudioRecordingCallbackResponse);
+  rpc UnregisterMediaButtonEventReceiver1 (UnregisterMediaButtonEventReceiver1Request) returns (UnregisterMediaButtonEventReceiver1Response);
+  rpc UnregisterMediaButtonEventReceiver1_1 (UnregisterMediaButtonEventReceiver1_1Request) returns (UnregisterMediaButtonEventReceiver1_1Response);
+  rpc UnregisterRemoteControlClient (UnregisterRemoteControlClientRequest) returns (UnregisterRemoteControlClientResponse);
+  rpc UnregisterRemoteController (UnregisterRemoteControllerRequest) returns (UnregisterRemoteControllerResponse);
+  rpc GetDirectPlaybackSupport (GetDirectPlaybackSupportRequest) returns (GetDirectPlaybackSupportResponse);
+  rpc GetPlaybackOffloadSupport (GetPlaybackOffloadSupportRequest) returns (GetPlaybackOffloadSupportResponse);
+  rpc IsHapticPlaybackSupported (IsHapticPlaybackSupportedRequest) returns (IsHapticPlaybackSupportedResponse);
+  rpc IsOffloadedPlaybackSupported (IsOffloadedPlaybackSupportedRequest) returns (IsOffloadedPlaybackSupportedResponse);
 }

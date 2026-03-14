@@ -6,88 +6,47 @@ package build;
 
 option go_package = "github.com/xaionaro-go/jni/proto/build";
 
-message GetManufacturerRequest {
+message GetFingerprintedPartitionsRequest {
 }
 
-message GetManufacturerResponse {
-  string result = 1;
+message GetFingerprintedPartitionsResponse {
+  int64 result = 1;
 }
 
-message GetModelRequest {
+message GetMajorSdkVersionRequest {
+  int32 arg0 = 1;
 }
 
-message GetModelResponse {
-  string result = 1;
-}
-
-message GetBrandRequest {
-}
-
-message GetBrandResponse {
-  string result = 1;
-}
-
-message GetDeviceRequest {
-}
-
-message GetDeviceResponse {
-  string result = 1;
-}
-
-message GetHardwareRequest {
-}
-
-message GetHardwareResponse {
-  string result = 1;
-}
-
-message GetProductRequest {
-}
-
-message GetProductResponse {
-  string result = 1;
-}
-
-message GetFingerprintRequest {
-}
-
-message GetFingerprintResponse {
-  string result = 1;
-}
-
-message GetIDRequest {
-}
-
-message GetIDResponse {
-  string result = 1;
-}
-
-message GetSDKIntRequest {
-}
-
-message GetSDKIntResponse {
+message GetMajorSdkVersionResponse {
   int32 result = 1;
 }
 
-message GetReleaseRequest {
+message GetMinorSdkVersionRequest {
+  int32 arg0 = 1;
 }
 
-message GetReleaseResponse {
+message GetMinorSdkVersionResponse {
+  int32 result = 1;
+}
+
+message GetRadioVersionRequest {
+}
+
+message GetRadioVersionResponse {
   string result = 1;
 }
 
-service BuildInfoService {
-  rpc GetManufacturer (GetManufacturerRequest) returns (GetManufacturerResponse);
-  rpc GetModel (GetModelRequest) returns (GetModelResponse);
-  rpc GetBrand (GetBrandRequest) returns (GetBrandResponse);
-  rpc GetDevice (GetDeviceRequest) returns (GetDeviceResponse);
-  rpc GetHardware (GetHardwareRequest) returns (GetHardwareResponse);
-  rpc GetProduct (GetProductRequest) returns (GetProductResponse);
-  rpc GetFingerprint (GetFingerprintRequest) returns (GetFingerprintResponse);
-  rpc GetID (GetIDRequest) returns (GetIDResponse);
+message GetSerialRequest {
 }
 
-service VersionInfoService {
-  rpc GetSDKInt (GetSDKIntRequest) returns (GetSDKIntResponse);
-  rpc GetRelease (GetReleaseRequest) returns (GetReleaseResponse);
+message GetSerialResponse {
+  string result = 1;
+}
+
+service BuildService {
+  rpc GetFingerprintedPartitions (GetFingerprintedPartitionsRequest) returns (GetFingerprintedPartitionsResponse);
+  rpc GetMajorSdkVersion (GetMajorSdkVersionRequest) returns (GetMajorSdkVersionResponse);
+  rpc GetMinorSdkVersion (GetMinorSdkVersionRequest) returns (GetMinorSdkVersionResponse);
+  rpc GetRadioVersion (GetRadioVersionRequest) returns (GetRadioVersionResponse);
+  rpc GetSerial (GetSerialRequest) returns (GetSerialResponse);
 }

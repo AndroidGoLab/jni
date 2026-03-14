@@ -6,71 +6,300 @@ package documents;
 
 option go_package = "github.com/xaionaro-go/jni/proto/documents";
 
-message CreateDocumentRawRequest {
-  int64 resolver = 1;
-  int64 parent_uri = 2;
-  string mime_type = 3;
-  string display_name = 4;
+message BuildChildDocumentsUriRequest {
+  string arg0 = 1;
+  string arg1 = 2;
 }
 
-message CreateDocumentRawResponse {
+message BuildChildDocumentsUriResponse {
   int64 result = 1;
 }
 
-message RenameDocumentRawRequest {
-  int64 resolver = 1;
-  int64 uri = 2;
-  string display_name = 3;
+message BuildChildDocumentsUriUsingTreeRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
 }
 
-message RenameDocumentRawResponse {
+message BuildChildDocumentsUriUsingTreeResponse {
   int64 result = 1;
 }
 
-message CopyDocumentRawRequest {
-  int64 resolver = 1;
-  int64 src_uri = 2;
-  int64 dest_parent_uri = 3;
+message BuildDocumentUriRequest {
+  string arg0 = 1;
+  string arg1 = 2;
 }
 
-message CopyDocumentRawResponse {
+message BuildDocumentUriResponse {
   int64 result = 1;
 }
 
-message MoveDocumentRawRequest {
-  int64 resolver = 1;
-  int64 src_uri = 2;
-  int64 src_parent_uri = 3;
-  int64 dest_parent_uri = 4;
+message BuildDocumentUriUsingTreeRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
 }
 
-message MoveDocumentRawResponse {
+message BuildDocumentUriUsingTreeResponse {
   int64 result = 1;
 }
 
-message DeleteDocumentRawRequest {
-  int64 resolver = 1;
-  int64 uri = 2;
+message BuildRecentDocumentsUriRequest {
+  string arg0 = 1;
+  string arg1 = 2;
 }
 
-message DeleteDocumentRawResponse {
+message BuildRecentDocumentsUriResponse {
+  int64 result = 1;
+}
+
+message BuildRootUriRequest {
+  string arg0 = 1;
+  string arg1 = 2;
+}
+
+message BuildRootUriResponse {
+  int64 result = 1;
+}
+
+message BuildRootsUriRequest {
+  string arg0 = 1;
+}
+
+message BuildRootsUriResponse {
+  int64 result = 1;
+}
+
+message BuildSearchDocumentsUriRequest {
+  string arg0 = 1;
+  string arg1 = 2;
+  string arg2 = 3;
+}
+
+message BuildSearchDocumentsUriResponse {
+  int64 result = 1;
+}
+
+message BuildTreeDocumentUriRequest {
+  string arg0 = 1;
+  string arg1 = 2;
+}
+
+message BuildTreeDocumentUriResponse {
+  int64 result = 1;
+}
+
+message CopyDocumentRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message CopyDocumentResponse {
+  int64 result = 1;
+}
+
+message CreateDocumentRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  string arg2 = 3;
+  string arg3 = 4;
+}
+
+message CreateDocumentResponse {
+  int64 result = 1;
+}
+
+message CreateWebLinkIntentRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message CreateWebLinkIntentResponse {
+  int64 result = 1;
+}
+
+message DeleteDocumentRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message DeleteDocumentResponse {
   bool result = 1;
 }
 
-message IsDocumentUriRawRequest {
-  int64 ctx = 1;
-  int64 uri = 2;
+message EjectRootRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
 }
 
-message IsDocumentUriRawResponse {
+message EjectRootResponse {
+}
+
+message FindDocumentPathRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message FindDocumentPathResponse {
+  int64 result = 1;
+}
+
+message GetDocumentIdRequest {
+  int64 arg0 = 1;
+}
+
+message GetDocumentIdResponse {
+  string result = 1;
+}
+
+message GetDocumentMetadataRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message GetDocumentMetadataResponse {
+  int64 result = 1;
+}
+
+message GetDocumentThumbnailRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message GetDocumentThumbnailResponse {
+  int64 result = 1;
+}
+
+message GetRootIdRequest {
+  int64 arg0 = 1;
+}
+
+message GetRootIdResponse {
+  string result = 1;
+}
+
+message GetSearchDocumentsQueryRequest {
+  int64 arg0 = 1;
+}
+
+message GetSearchDocumentsQueryResponse {
+  string result = 1;
+}
+
+message GetTreeDocumentIdRequest {
+  int64 arg0 = 1;
+}
+
+message GetTreeDocumentIdResponse {
+  string result = 1;
+}
+
+message IsChildDocumentRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message IsChildDocumentResponse {
   bool result = 1;
+}
+
+message IsDocumentUriRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message IsDocumentUriResponse {
+  bool result = 1;
+}
+
+message IsRootUriRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message IsRootUriResponse {
+  bool result = 1;
+}
+
+message IsRootsUriRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message IsRootsUriResponse {
+  bool result = 1;
+}
+
+message IsTreeUriRequest {
+  int64 arg0 = 1;
+}
+
+message IsTreeUriResponse {
+  bool result = 1;
+}
+
+message MoveDocumentRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message MoveDocumentResponse {
+  int64 result = 1;
+}
+
+message RemoveDocumentRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message RemoveDocumentResponse {
+  bool result = 1;
+}
+
+message RenameDocumentRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  string arg2 = 3;
+}
+
+message RenameDocumentResponse {
+  int64 result = 1;
 }
 
 service DocumentsContractService {
-  rpc CreateDocumentRaw (CreateDocumentRawRequest) returns (CreateDocumentRawResponse);
-  rpc RenameDocumentRaw (RenameDocumentRawRequest) returns (RenameDocumentRawResponse);
-  rpc CopyDocumentRaw (CopyDocumentRawRequest) returns (CopyDocumentRawResponse);
-  rpc MoveDocumentRaw (MoveDocumentRawRequest) returns (MoveDocumentRawResponse);
-  rpc DeleteDocumentRaw (DeleteDocumentRawRequest) returns (DeleteDocumentRawResponse);
-  rpc IsDocumentUriRaw (IsDocumentUriRawRequest) returns (IsDocumentUriRawResponse);
+  rpc BuildChildDocumentsUri (BuildChildDocumentsUriRequest) returns (BuildChildDocumentsUriResponse);
+  rpc BuildChildDocumentsUriUsingTree (BuildChildDocumentsUriUsingTreeRequest) returns (BuildChildDocumentsUriUsingTreeResponse);
+  rpc BuildDocumentUri (BuildDocumentUriRequest) returns (BuildDocumentUriResponse);
+  rpc BuildDocumentUriUsingTree (BuildDocumentUriUsingTreeRequest) returns (BuildDocumentUriUsingTreeResponse);
+  rpc BuildRecentDocumentsUri (BuildRecentDocumentsUriRequest) returns (BuildRecentDocumentsUriResponse);
+  rpc BuildRootUri (BuildRootUriRequest) returns (BuildRootUriResponse);
+  rpc BuildRootsUri (BuildRootsUriRequest) returns (BuildRootsUriResponse);
+  rpc BuildSearchDocumentsUri (BuildSearchDocumentsUriRequest) returns (BuildSearchDocumentsUriResponse);
+  rpc BuildTreeDocumentUri (BuildTreeDocumentUriRequest) returns (BuildTreeDocumentUriResponse);
+  rpc CopyDocument (CopyDocumentRequest) returns (CopyDocumentResponse);
+  rpc CreateDocument (CreateDocumentRequest) returns (CreateDocumentResponse);
+  rpc CreateWebLinkIntent (CreateWebLinkIntentRequest) returns (CreateWebLinkIntentResponse);
+  rpc DeleteDocument (DeleteDocumentRequest) returns (DeleteDocumentResponse);
+  rpc EjectRoot (EjectRootRequest) returns (EjectRootResponse);
+  rpc FindDocumentPath (FindDocumentPathRequest) returns (FindDocumentPathResponse);
+  rpc GetDocumentId (GetDocumentIdRequest) returns (GetDocumentIdResponse);
+  rpc GetDocumentMetadata (GetDocumentMetadataRequest) returns (GetDocumentMetadataResponse);
+  rpc GetDocumentThumbnail (GetDocumentThumbnailRequest) returns (GetDocumentThumbnailResponse);
+  rpc GetRootId (GetRootIdRequest) returns (GetRootIdResponse);
+  rpc GetSearchDocumentsQuery (GetSearchDocumentsQueryRequest) returns (GetSearchDocumentsQueryResponse);
+  rpc GetTreeDocumentId (GetTreeDocumentIdRequest) returns (GetTreeDocumentIdResponse);
+  rpc IsChildDocument (IsChildDocumentRequest) returns (IsChildDocumentResponse);
+  rpc IsDocumentUri (IsDocumentUriRequest) returns (IsDocumentUriResponse);
+  rpc IsRootUri (IsRootUriRequest) returns (IsRootUriResponse);
+  rpc IsRootsUri (IsRootsUriRequest) returns (IsRootsUriResponse);
+  rpc IsTreeUri (IsTreeUriRequest) returns (IsTreeUriResponse);
+  rpc MoveDocument (MoveDocumentRequest) returns (MoveDocumentResponse);
+  rpc RemoveDocument (RemoveDocumentRequest) returns (RemoveDocumentResponse);
+  rpc RenameDocument (RenameDocumentRequest) returns (RenameDocumentResponse);
 }

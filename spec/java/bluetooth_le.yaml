@@ -1,0 +1,104 @@
+package: bluetooth_le
+go_import: github.com/xaionaro-go/jni/bluetooth/le
+classes:
+    - java_class: android.bluetooth.le.ScanResult
+      go_type: scanResult
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAdvertisingSid
+          go_name: GetAdvertisingSid
+          returns: int
+          error: true
+        - java_method: getDataStatus
+          go_name: GetDataStatus
+          returns: int
+          error: true
+        - java_method: getDevice
+          go_name: GetDevice
+          returns: android.bluetooth.BluetoothDevice
+          error: true
+        - java_method: getPeriodicAdvertisingInterval
+          go_name: GetPeriodicAdvertisingInterval
+          returns: int
+          error: true
+        - java_method: getPrimaryPhy
+          go_name: GetPrimaryPhy
+          returns: int
+          error: true
+        - java_method: getRssi
+          go_name: GetRssi
+          returns: int
+          error: true
+        - java_method: getScanRecord
+          go_name: GetScanRecord
+          returns: android.bluetooth.le.ScanRecord
+          error: true
+        - java_method: getSecondaryPhy
+          go_name: GetSecondaryPhy
+          returns: int
+          error: true
+        - java_method: getTimestampNanos
+          go_name: GetTimestampNanos
+          returns: long
+          error: true
+        - java_method: getTxPower
+          go_name: GetTxPower
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isConnectable
+          go_name: IsConnectable
+          returns: boolean
+          error: true
+        - java_method: isLegacy
+          go_name: IsLegacy
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+constants:
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: DataComplete
+      value: "0"
+      go_type: int
+    - go_name: DataTruncated
+      value: "0"
+      go_type: int
+    - go_name: PeriodicIntervalNotPresent
+      value: "0"
+      go_type: int
+    - go_name: PhyUnused
+      value: "0"
+      go_type: int
+    - go_name: SidNotPresent
+      value: "0"
+      go_type: int
+    - go_name: TxPowerNotPresent
+      value: "0"
+      go_type: int

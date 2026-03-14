@@ -1,83 +1,6 @@
 package: wifi_rtt
 go_import: github.com/xaionaro-go/jni/net/wifi/rtt
 classes:
-    - java_class: android.net.wifi.rtt.RangingRequest$Builder
-      go_type: builder
-      methods:
-        - java_method: addAccessPoint
-          go_name: AddAccessPoint
-          params:
-            - java_type: android.net.wifi.ScanResult
-              go_name: arg0
-          returns: android.net.wifi.rtt.RangingRequest$Builder
-          error: true
-        - java_method: addAccessPoints
-          go_name: AddAccessPoints
-          params:
-            - java_type: java.util.List<android.net.wifi.ScanResult>
-              go_name: arg0
-          returns: android.net.wifi.rtt.RangingRequest$Builder
-          error: true
-        - java_method: addNon80211mcCapableAccessPoint
-          go_name: AddNon80211mcCapableAccessPoint
-          params:
-            - java_type: android.net.wifi.ScanResult
-              go_name: arg0
-          returns: android.net.wifi.rtt.RangingRequest$Builder
-          error: true
-        - java_method: addNon80211mcCapableAccessPoints
-          go_name: AddNon80211mcCapableAccessPoints
-          params:
-            - java_type: java.util.List<android.net.wifi.ScanResult>
-              go_name: arg0
-          returns: android.net.wifi.rtt.RangingRequest$Builder
-          error: true
-        - java_method: addResponder
-          go_name: AddResponder
-          params:
-            - java_type: android.net.wifi.rtt.ResponderConfig
-              go_name: arg0
-          returns: android.net.wifi.rtt.RangingRequest$Builder
-          error: true
-        - java_method: addResponders
-          go_name: AddResponders
-          params:
-            - java_type: java.util.List<android.net.wifi.rtt.ResponderConfig>
-              go_name: arg0
-          returns: android.net.wifi.rtt.RangingRequest$Builder
-          error: true
-        - java_method: addWifiAwarePeer
-          go_name: AddWifiAwarePeer1
-          params:
-            - java_type: android.net.MacAddress
-              go_name: arg0
-          returns: android.net.wifi.rtt.RangingRequest$Builder
-          error: true
-        - java_method: addWifiAwarePeer
-          go_name: AddWifiAwarePeer1_1
-          params:
-            - java_type: android.net.wifi.aware.PeerHandle
-              go_name: arg0
-          returns: android.net.wifi.rtt.RangingRequest$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.net.wifi.rtt.RangingRequest
-          error: true
-        - java_method: setRttBurstSize
-          go_name: SetRttBurstSize
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.net.wifi.rtt.RangingRequest$Builder
-          error: true
-        - java_method: setSecurityMode
-          go_name: SetSecurityMode
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.net.wifi.rtt.RangingRequest$Builder
-          error: true
     - java_class: android.net.wifi.rtt.RangingResult
       go_type: rangingResult
       methods:
@@ -221,31 +144,6 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.net.wifi.rtt.WifiRttManager
-      go_type: wifiRttManager
-      obtain: system_service
-      service_name: wifirtt
-      close: true
-      methods:
-        - java_method: getRttCharacteristics
-          go_name: GetRttCharacteristics
-          returns: android.os.Bundle
-          error: true
-        - java_method: isAvailable
-          go_name: IsAvailable
-          returns: boolean
-          error: true
-        - java_method: startRanging
-          go_name: StartRanging
-          params:
-            - java_type: android.net.wifi.rtt.RangingRequest
-              go_name: arg0
-            - java_type: java.util.concurrent.Executor
-              go_name: arg1
-            - java_type: android.net.wifi.rtt.RangingResultCallback
-              go_name: arg2
-          returns: void
-          error: true
 constants:
     - go_name: Creator
       value: "0"
@@ -262,30 +160,3 @@ constants:
     - go_name: Unspecified
       value: "0"
       go_type: int
-    - go_name: ActionWifiRttStateChanged
-      value: '""'
-      go_type: string
-    - go_name: CharacteristicsKeyBooleanLci
-      value: '""'
-      go_type: string
-    - go_name: CharacteristicsKeyBooleanLcr
-      value: '""'
-      go_type: string
-    - go_name: CharacteristicsKeyBooleanNtbInitiator
-      value: '""'
-      go_type: string
-    - go_name: CharacteristicsKeyBooleanOneSidedRtt
-      value: '""'
-      go_type: string
-    - go_name: CharacteristicsKeyBooleanRangingFrameProtectionSupported
-      value: '""'
-      go_type: string
-    - go_name: CharacteristicsKeyBooleanSecureHeLtfSupported
-      value: '""'
-      go_type: string
-    - go_name: CharacteristicsKeyBooleanStaResponder
-      value: '""'
-      go_type: string
-    - go_name: CharacteristicsKeyIntMaxSupportedSecureHeLtfProtoVersion
-      value: '""'
-      go_type: string

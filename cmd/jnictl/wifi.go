@@ -13,20 +13,20 @@ var wifiCmd = &cobra.Command{
 	Short: "wifi service operations",
 }
 
-var wifiManagerCmd = &cobra.Command{
-	Use:   "manager",
-	Short: "ManagerService operations",
+var wifiWifiInfoCmd = &cobra.Command{
+	Use:   "wifi-info",
+	Short: "WifiInfoService operations",
 }
 
-var wifiManagerIsEnabledCmd = &cobra.Command{
-	Use:   "is-enabled",
-	Short: "IsEnabled RPC",
+var wifiWifiInfoDescribeContentsCmd = &cobra.Command{
+	Use:   "describe-contents",
+	Short: "DescribeContents RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.IsEnabledRequest{}
-		resp, err := client.IsEnabled(ctx, req)
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.DescribeContentsRequest{}
+		resp, err := client.DescribeContents(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -34,15 +34,18 @@ var wifiManagerIsEnabledCmd = &cobra.Command{
 	},
 }
 
-var wifiManagerGetConnectionInfoRawCmd = &cobra.Command{
-	Use:   "get-connection-info-raw",
-	Short: "GetConnectionInfoRaw RPC",
+var wifiWifiInfoEqualsCmd = &cobra.Command{
+	Use:   "equals",
+	Short: "Equals RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.GetConnectionInfoRawRequest{}
-		resp, err := client.GetConnectionInfoRaw(ctx, req)
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.EqualsRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.Equals(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -50,15 +53,523 @@ var wifiManagerGetConnectionInfoRawCmd = &cobra.Command{
 	},
 }
 
-var wifiManagerGetScanResultsRawCmd = &cobra.Command{
-	Use:   "get-scan-results-raw",
-	Short: "GetScanResultsRaw RPC",
+var wifiWifiInfoGetAffiliatedMloLinksCmd = &cobra.Command{
+	Use:   "get-affiliated-mlo-links",
+	Short: "GetAffiliatedMloLinks RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.GetScanResultsRawRequest{}
-		resp, err := client.GetScanResultsRaw(ctx, req)
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetAffiliatedMloLinksRequest{}
+		resp, err := client.GetAffiliatedMloLinks(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetApMldMacAddressCmd = &cobra.Command{
+	Use:   "get-ap-mld-mac-address",
+	Short: "GetApMldMacAddress RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetApMldMacAddressRequest{}
+		resp, err := client.GetApMldMacAddress(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetApMloLinkIdCmd = &cobra.Command{
+	Use:   "get-ap-mlo-link-id",
+	Short: "GetApMloLinkId RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetApMloLinkIdRequest{}
+		resp, err := client.GetApMloLinkId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetApplicableRedactionsCmd = &cobra.Command{
+	Use:   "get-applicable-redactions",
+	Short: "GetApplicableRedactions RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetApplicableRedactionsRequest{}
+		resp, err := client.GetApplicableRedactions(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetAssociatedMloLinksCmd = &cobra.Command{
+	Use:   "get-associated-mlo-links",
+	Short: "GetAssociatedMloLinks RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetAssociatedMloLinksRequest{}
+		resp, err := client.GetAssociatedMloLinks(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetBSSIDCmd = &cobra.Command{
+	Use:   "get-bssid",
+	Short: "GetBSSID RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetBSSIDRequest{}
+		resp, err := client.GetBSSID(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetCurrentSecurityTypeCmd = &cobra.Command{
+	Use:   "get-current-security-type",
+	Short: "GetCurrentSecurityType RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetCurrentSecurityTypeRequest{}
+		resp, err := client.GetCurrentSecurityType(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetFrequencyCmd = &cobra.Command{
+	Use:   "get-frequency",
+	Short: "GetFrequency RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetFrequencyRequest{}
+		resp, err := client.GetFrequency(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetHiddenSSIDCmd = &cobra.Command{
+	Use:   "get-hidden-ssid",
+	Short: "GetHiddenSSID RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetHiddenSSIDRequest{}
+		resp, err := client.GetHiddenSSID(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetInformationElementsCmd = &cobra.Command{
+	Use:   "get-information-elements",
+	Short: "GetInformationElements RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetInformationElementsRequest{}
+		resp, err := client.GetInformationElements(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetIpAddressCmd = &cobra.Command{
+	Use:   "get-ip-address",
+	Short: "GetIpAddress RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetIpAddressRequest{}
+		resp, err := client.GetIpAddress(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetLinkSpeedCmd = &cobra.Command{
+	Use:   "get-link-speed",
+	Short: "GetLinkSpeed RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetLinkSpeedRequest{}
+		resp, err := client.GetLinkSpeed(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetMacAddressCmd = &cobra.Command{
+	Use:   "get-mac-address",
+	Short: "GetMacAddress RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetMacAddressRequest{}
+		resp, err := client.GetMacAddress(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetMaxSupportedRxLinkSpeedMbpsCmd = &cobra.Command{
+	Use:   "get-max-supported-rx-link-speed-mbps",
+	Short: "GetMaxSupportedRxLinkSpeedMbps RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetMaxSupportedRxLinkSpeedMbpsRequest{}
+		resp, err := client.GetMaxSupportedRxLinkSpeedMbps(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetMaxSupportedTxLinkSpeedMbpsCmd = &cobra.Command{
+	Use:   "get-max-supported-tx-link-speed-mbps",
+	Short: "GetMaxSupportedTxLinkSpeedMbps RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetMaxSupportedTxLinkSpeedMbpsRequest{}
+		resp, err := client.GetMaxSupportedTxLinkSpeedMbps(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetNetworkIdCmd = &cobra.Command{
+	Use:   "get-network-id",
+	Short: "GetNetworkId RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetNetworkIdRequest{}
+		resp, err := client.GetNetworkId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetPasspointFqdnCmd = &cobra.Command{
+	Use:   "get-passpoint-fqdn",
+	Short: "GetPasspointFqdn RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetPasspointFqdnRequest{}
+		resp, err := client.GetPasspointFqdn(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetPasspointProviderFriendlyNameCmd = &cobra.Command{
+	Use:   "get-passpoint-provider-friendly-name",
+	Short: "GetPasspointProviderFriendlyName RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetPasspointProviderFriendlyNameRequest{}
+		resp, err := client.GetPasspointProviderFriendlyName(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetPasspointUniqueIdCmd = &cobra.Command{
+	Use:   "get-passpoint-unique-id",
+	Short: "GetPasspointUniqueId RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetPasspointUniqueIdRequest{}
+		resp, err := client.GetPasspointUniqueId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetRssiCmd = &cobra.Command{
+	Use:   "get-rssi",
+	Short: "GetRssi RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetRssiRequest{}
+		resp, err := client.GetRssi(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetRxLinkSpeedMbpsCmd = &cobra.Command{
+	Use:   "get-rx-link-speed-mbps",
+	Short: "GetRxLinkSpeedMbps RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetRxLinkSpeedMbpsRequest{}
+		resp, err := client.GetRxLinkSpeedMbps(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetSSIDCmd = &cobra.Command{
+	Use:   "get-ssid",
+	Short: "GetSSID RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetSSIDRequest{}
+		resp, err := client.GetSSID(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetSubscriptionIdCmd = &cobra.Command{
+	Use:   "get-subscription-id",
+	Short: "GetSubscriptionId RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetSubscriptionIdRequest{}
+		resp, err := client.GetSubscriptionId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetSupplicantStateCmd = &cobra.Command{
+	Use:   "get-supplicant-state",
+	Short: "GetSupplicantState RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetSupplicantStateRequest{}
+		resp, err := client.GetSupplicantState(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetTxLinkSpeedMbpsCmd = &cobra.Command{
+	Use:   "get-tx-link-speed-mbps",
+	Short: "GetTxLinkSpeedMbps RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetTxLinkSpeedMbpsRequest{}
+		resp, err := client.GetTxLinkSpeedMbps(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetWifiStandardCmd = &cobra.Command{
+	Use:   "get-wifi-standard",
+	Short: "GetWifiStandard RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetWifiStandardRequest{}
+		resp, err := client.GetWifiStandard(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoHashCodeCmd = &cobra.Command{
+	Use:   "hash-code",
+	Short: "HashCode RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.HashCodeRequest{}
+		resp, err := client.HashCode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoIsRestrictedCmd = &cobra.Command{
+	Use:   "is-restricted",
+	Short: "IsRestricted RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.IsRestrictedRequest{}
+		resp, err := client.IsRestricted(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoMakeCopyCmd = &cobra.Command{
+	Use:   "make-copy",
+	Short: "MakeCopy RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.MakeCopyRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.MakeCopy(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoToStringCmd = &cobra.Command{
+	Use:   "to-string",
+	Short: "ToString RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.ToStringRequest{}
+		resp, err := client.ToString(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoWriteToParcelCmd = &cobra.Command{
+	Use:   "write-to-parcel",
+	Short: "WriteToParcel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.WriteToParcelRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.WriteToParcel(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifiWifiInfoGetDetailedStateOfCmd = &cobra.Command{
+	Use:   "get-detailed-state-of",
+	Short: "GetDetailedStateOf RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewWifiInfoServiceClient(grpcConn)
+		req := &pb.GetDetailedStateOfRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetDetailedStateOf(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -67,9 +578,45 @@ var wifiManagerGetScanResultsRawCmd = &cobra.Command{
 }
 
 func init() {
-	wifiManagerCmd.AddCommand(wifiManagerIsEnabledCmd)
-	wifiManagerCmd.AddCommand(wifiManagerGetConnectionInfoRawCmd)
-	wifiManagerCmd.AddCommand(wifiManagerGetScanResultsRawCmd)
-	wifiCmd.AddCommand(wifiManagerCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoDescribeContentsCmd)
+	wifiWifiInfoEqualsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoEqualsCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetAffiliatedMloLinksCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetApMldMacAddressCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetApMloLinkIdCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetApplicableRedactionsCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetAssociatedMloLinksCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetBSSIDCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetCurrentSecurityTypeCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetFrequencyCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetHiddenSSIDCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetInformationElementsCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetIpAddressCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetLinkSpeedCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetMacAddressCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetMaxSupportedRxLinkSpeedMbpsCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetMaxSupportedTxLinkSpeedMbpsCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetNetworkIdCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetPasspointFqdnCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetPasspointProviderFriendlyNameCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetPasspointUniqueIdCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetRssiCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetRxLinkSpeedMbpsCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetSSIDCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetSubscriptionIdCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetSupplicantStateCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetTxLinkSpeedMbpsCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetWifiStandardCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoHashCodeCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoIsRestrictedCmd)
+	wifiWifiInfoMakeCopyCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoMakeCopyCmd)
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoToStringCmd)
+	wifiWifiInfoWriteToParcelCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	wifiWifiInfoWriteToParcelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoWriteToParcelCmd)
+	wifiWifiInfoGetDetailedStateOfCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	wifiWifiInfoCmd.AddCommand(wifiWifiInfoGetDetailedStateOfCmd)
+	wifiCmd.AddCommand(wifiWifiInfoCmd)
 	rootCmd.AddCommand(wifiCmd)
 }

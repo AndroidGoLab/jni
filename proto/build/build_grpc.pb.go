@@ -21,507 +21,253 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BuildInfoService_GetManufacturer_FullMethodName = "/build.BuildInfoService/GetManufacturer"
-	BuildInfoService_GetModel_FullMethodName        = "/build.BuildInfoService/GetModel"
-	BuildInfoService_GetBrand_FullMethodName        = "/build.BuildInfoService/GetBrand"
-	BuildInfoService_GetDevice_FullMethodName       = "/build.BuildInfoService/GetDevice"
-	BuildInfoService_GetHardware_FullMethodName     = "/build.BuildInfoService/GetHardware"
-	BuildInfoService_GetProduct_FullMethodName      = "/build.BuildInfoService/GetProduct"
-	BuildInfoService_GetFingerprint_FullMethodName  = "/build.BuildInfoService/GetFingerprint"
-	BuildInfoService_GetID_FullMethodName           = "/build.BuildInfoService/GetID"
+	BuildService_GetFingerprintedPartitions_FullMethodName = "/build.BuildService/GetFingerprintedPartitions"
+	BuildService_GetMajorSdkVersion_FullMethodName         = "/build.BuildService/GetMajorSdkVersion"
+	BuildService_GetMinorSdkVersion_FullMethodName         = "/build.BuildService/GetMinorSdkVersion"
+	BuildService_GetRadioVersion_FullMethodName            = "/build.BuildService/GetRadioVersion"
+	BuildService_GetSerial_FullMethodName                  = "/build.BuildService/GetSerial"
 )
 
-// BuildInfoServiceClient is the client API for BuildInfoService service.
+// BuildServiceClient is the client API for BuildService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type BuildInfoServiceClient interface {
-	GetManufacturer(ctx context.Context, in *GetManufacturerRequest, opts ...grpc.CallOption) (*GetManufacturerResponse, error)
-	GetModel(ctx context.Context, in *GetModelRequest, opts ...grpc.CallOption) (*GetModelResponse, error)
-	GetBrand(ctx context.Context, in *GetBrandRequest, opts ...grpc.CallOption) (*GetBrandResponse, error)
-	GetDevice(ctx context.Context, in *GetDeviceRequest, opts ...grpc.CallOption) (*GetDeviceResponse, error)
-	GetHardware(ctx context.Context, in *GetHardwareRequest, opts ...grpc.CallOption) (*GetHardwareResponse, error)
-	GetProduct(ctx context.Context, in *GetProductRequest, opts ...grpc.CallOption) (*GetProductResponse, error)
-	GetFingerprint(ctx context.Context, in *GetFingerprintRequest, opts ...grpc.CallOption) (*GetFingerprintResponse, error)
-	GetID(ctx context.Context, in *GetIDRequest, opts ...grpc.CallOption) (*GetIDResponse, error)
+type BuildServiceClient interface {
+	GetFingerprintedPartitions(ctx context.Context, in *GetFingerprintedPartitionsRequest, opts ...grpc.CallOption) (*GetFingerprintedPartitionsResponse, error)
+	GetMajorSdkVersion(ctx context.Context, in *GetMajorSdkVersionRequest, opts ...grpc.CallOption) (*GetMajorSdkVersionResponse, error)
+	GetMinorSdkVersion(ctx context.Context, in *GetMinorSdkVersionRequest, opts ...grpc.CallOption) (*GetMinorSdkVersionResponse, error)
+	GetRadioVersion(ctx context.Context, in *GetRadioVersionRequest, opts ...grpc.CallOption) (*GetRadioVersionResponse, error)
+	GetSerial(ctx context.Context, in *GetSerialRequest, opts ...grpc.CallOption) (*GetSerialResponse, error)
 }
 
-type buildInfoServiceClient struct {
+type buildServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBuildInfoServiceClient(cc grpc.ClientConnInterface) BuildInfoServiceClient {
-	return &buildInfoServiceClient{cc}
+func NewBuildServiceClient(cc grpc.ClientConnInterface) BuildServiceClient {
+	return &buildServiceClient{cc}
 }
 
-func (c *buildInfoServiceClient) GetManufacturer(ctx context.Context, in *GetManufacturerRequest, opts ...grpc.CallOption) (*GetManufacturerResponse, error) {
+func (c *buildServiceClient) GetFingerprintedPartitions(ctx context.Context, in *GetFingerprintedPartitionsRequest, opts ...grpc.CallOption) (*GetFingerprintedPartitionsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetManufacturerResponse)
-	err := c.cc.Invoke(ctx, BuildInfoService_GetManufacturer_FullMethodName, in, out, cOpts...)
+	out := new(GetFingerprintedPartitionsResponse)
+	err := c.cc.Invoke(ctx, BuildService_GetFingerprintedPartitions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *buildInfoServiceClient) GetModel(ctx context.Context, in *GetModelRequest, opts ...grpc.CallOption) (*GetModelResponse, error) {
+func (c *buildServiceClient) GetMajorSdkVersion(ctx context.Context, in *GetMajorSdkVersionRequest, opts ...grpc.CallOption) (*GetMajorSdkVersionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetModelResponse)
-	err := c.cc.Invoke(ctx, BuildInfoService_GetModel_FullMethodName, in, out, cOpts...)
+	out := new(GetMajorSdkVersionResponse)
+	err := c.cc.Invoke(ctx, BuildService_GetMajorSdkVersion_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *buildInfoServiceClient) GetBrand(ctx context.Context, in *GetBrandRequest, opts ...grpc.CallOption) (*GetBrandResponse, error) {
+func (c *buildServiceClient) GetMinorSdkVersion(ctx context.Context, in *GetMinorSdkVersionRequest, opts ...grpc.CallOption) (*GetMinorSdkVersionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetBrandResponse)
-	err := c.cc.Invoke(ctx, BuildInfoService_GetBrand_FullMethodName, in, out, cOpts...)
+	out := new(GetMinorSdkVersionResponse)
+	err := c.cc.Invoke(ctx, BuildService_GetMinorSdkVersion_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *buildInfoServiceClient) GetDevice(ctx context.Context, in *GetDeviceRequest, opts ...grpc.CallOption) (*GetDeviceResponse, error) {
+func (c *buildServiceClient) GetRadioVersion(ctx context.Context, in *GetRadioVersionRequest, opts ...grpc.CallOption) (*GetRadioVersionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetDeviceResponse)
-	err := c.cc.Invoke(ctx, BuildInfoService_GetDevice_FullMethodName, in, out, cOpts...)
+	out := new(GetRadioVersionResponse)
+	err := c.cc.Invoke(ctx, BuildService_GetRadioVersion_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *buildInfoServiceClient) GetHardware(ctx context.Context, in *GetHardwareRequest, opts ...grpc.CallOption) (*GetHardwareResponse, error) {
+func (c *buildServiceClient) GetSerial(ctx context.Context, in *GetSerialRequest, opts ...grpc.CallOption) (*GetSerialResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetHardwareResponse)
-	err := c.cc.Invoke(ctx, BuildInfoService_GetHardware_FullMethodName, in, out, cOpts...)
+	out := new(GetSerialResponse)
+	err := c.cc.Invoke(ctx, BuildService_GetSerial_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *buildInfoServiceClient) GetProduct(ctx context.Context, in *GetProductRequest, opts ...grpc.CallOption) (*GetProductResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetProductResponse)
-	err := c.cc.Invoke(ctx, BuildInfoService_GetProduct_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *buildInfoServiceClient) GetFingerprint(ctx context.Context, in *GetFingerprintRequest, opts ...grpc.CallOption) (*GetFingerprintResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetFingerprintResponse)
-	err := c.cc.Invoke(ctx, BuildInfoService_GetFingerprint_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *buildInfoServiceClient) GetID(ctx context.Context, in *GetIDRequest, opts ...grpc.CallOption) (*GetIDResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetIDResponse)
-	err := c.cc.Invoke(ctx, BuildInfoService_GetID_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// BuildInfoServiceServer is the server API for BuildInfoService service.
-// All implementations must embed UnimplementedBuildInfoServiceServer
+// BuildServiceServer is the server API for BuildService service.
+// All implementations must embed UnimplementedBuildServiceServer
 // for forward compatibility.
-type BuildInfoServiceServer interface {
-	GetManufacturer(context.Context, *GetManufacturerRequest) (*GetManufacturerResponse, error)
-	GetModel(context.Context, *GetModelRequest) (*GetModelResponse, error)
-	GetBrand(context.Context, *GetBrandRequest) (*GetBrandResponse, error)
-	GetDevice(context.Context, *GetDeviceRequest) (*GetDeviceResponse, error)
-	GetHardware(context.Context, *GetHardwareRequest) (*GetHardwareResponse, error)
-	GetProduct(context.Context, *GetProductRequest) (*GetProductResponse, error)
-	GetFingerprint(context.Context, *GetFingerprintRequest) (*GetFingerprintResponse, error)
-	GetID(context.Context, *GetIDRequest) (*GetIDResponse, error)
-	mustEmbedUnimplementedBuildInfoServiceServer()
+type BuildServiceServer interface {
+	GetFingerprintedPartitions(context.Context, *GetFingerprintedPartitionsRequest) (*GetFingerprintedPartitionsResponse, error)
+	GetMajorSdkVersion(context.Context, *GetMajorSdkVersionRequest) (*GetMajorSdkVersionResponse, error)
+	GetMinorSdkVersion(context.Context, *GetMinorSdkVersionRequest) (*GetMinorSdkVersionResponse, error)
+	GetRadioVersion(context.Context, *GetRadioVersionRequest) (*GetRadioVersionResponse, error)
+	GetSerial(context.Context, *GetSerialRequest) (*GetSerialResponse, error)
+	mustEmbedUnimplementedBuildServiceServer()
 }
 
-// UnimplementedBuildInfoServiceServer must be embedded to have
+// UnimplementedBuildServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedBuildInfoServiceServer struct{}
+type UnimplementedBuildServiceServer struct{}
 
-func (UnimplementedBuildInfoServiceServer) GetManufacturer(context.Context, *GetManufacturerRequest) (*GetManufacturerResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetManufacturer not implemented")
+func (UnimplementedBuildServiceServer) GetFingerprintedPartitions(context.Context, *GetFingerprintedPartitionsRequest) (*GetFingerprintedPartitionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetFingerprintedPartitions not implemented")
 }
-func (UnimplementedBuildInfoServiceServer) GetModel(context.Context, *GetModelRequest) (*GetModelResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetModel not implemented")
+func (UnimplementedBuildServiceServer) GetMajorSdkVersion(context.Context, *GetMajorSdkVersionRequest) (*GetMajorSdkVersionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMajorSdkVersion not implemented")
 }
-func (UnimplementedBuildInfoServiceServer) GetBrand(context.Context, *GetBrandRequest) (*GetBrandResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetBrand not implemented")
+func (UnimplementedBuildServiceServer) GetMinorSdkVersion(context.Context, *GetMinorSdkVersionRequest) (*GetMinorSdkVersionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMinorSdkVersion not implemented")
 }
-func (UnimplementedBuildInfoServiceServer) GetDevice(context.Context, *GetDeviceRequest) (*GetDeviceResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetDevice not implemented")
+func (UnimplementedBuildServiceServer) GetRadioVersion(context.Context, *GetRadioVersionRequest) (*GetRadioVersionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRadioVersion not implemented")
 }
-func (UnimplementedBuildInfoServiceServer) GetHardware(context.Context, *GetHardwareRequest) (*GetHardwareResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetHardware not implemented")
+func (UnimplementedBuildServiceServer) GetSerial(context.Context, *GetSerialRequest) (*GetSerialResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSerial not implemented")
 }
-func (UnimplementedBuildInfoServiceServer) GetProduct(context.Context, *GetProductRequest) (*GetProductResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetProduct not implemented")
-}
-func (UnimplementedBuildInfoServiceServer) GetFingerprint(context.Context, *GetFingerprintRequest) (*GetFingerprintResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetFingerprint not implemented")
-}
-func (UnimplementedBuildInfoServiceServer) GetID(context.Context, *GetIDRequest) (*GetIDResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetID not implemented")
-}
-func (UnimplementedBuildInfoServiceServer) mustEmbedUnimplementedBuildInfoServiceServer() {}
-func (UnimplementedBuildInfoServiceServer) testEmbeddedByValue()                          {}
+func (UnimplementedBuildServiceServer) mustEmbedUnimplementedBuildServiceServer() {}
+func (UnimplementedBuildServiceServer) testEmbeddedByValue()                      {}
 
-// UnsafeBuildInfoServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to BuildInfoServiceServer will
+// UnsafeBuildServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BuildServiceServer will
 // result in compilation errors.
-type UnsafeBuildInfoServiceServer interface {
-	mustEmbedUnimplementedBuildInfoServiceServer()
+type UnsafeBuildServiceServer interface {
+	mustEmbedUnimplementedBuildServiceServer()
 }
 
-func RegisterBuildInfoServiceServer(s grpc.ServiceRegistrar, srv BuildInfoServiceServer) {
-	// If the following call panics, it indicates UnimplementedBuildInfoServiceServer was
+func RegisterBuildServiceServer(s grpc.ServiceRegistrar, srv BuildServiceServer) {
+	// If the following call panics, it indicates UnimplementedBuildServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&BuildInfoService_ServiceDesc, srv)
+	s.RegisterService(&BuildService_ServiceDesc, srv)
 }
 
-func _BuildInfoService_GetManufacturer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetManufacturerRequest)
+func _BuildService_GetFingerprintedPartitions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFingerprintedPartitionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BuildInfoServiceServer).GetManufacturer(ctx, in)
+		return srv.(BuildServiceServer).GetFingerprintedPartitions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BuildInfoService_GetManufacturer_FullMethodName,
+		FullMethod: BuildService_GetFingerprintedPartitions_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BuildInfoServiceServer).GetManufacturer(ctx, req.(*GetManufacturerRequest))
+		return srv.(BuildServiceServer).GetFingerprintedPartitions(ctx, req.(*GetFingerprintedPartitionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BuildInfoService_GetModel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetModelRequest)
+func _BuildService_GetMajorSdkVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMajorSdkVersionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BuildInfoServiceServer).GetModel(ctx, in)
+		return srv.(BuildServiceServer).GetMajorSdkVersion(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BuildInfoService_GetModel_FullMethodName,
+		FullMethod: BuildService_GetMajorSdkVersion_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BuildInfoServiceServer).GetModel(ctx, req.(*GetModelRequest))
+		return srv.(BuildServiceServer).GetMajorSdkVersion(ctx, req.(*GetMajorSdkVersionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BuildInfoService_GetBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetBrandRequest)
+func _BuildService_GetMinorSdkVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMinorSdkVersionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BuildInfoServiceServer).GetBrand(ctx, in)
+		return srv.(BuildServiceServer).GetMinorSdkVersion(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BuildInfoService_GetBrand_FullMethodName,
+		FullMethod: BuildService_GetMinorSdkVersion_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BuildInfoServiceServer).GetBrand(ctx, req.(*GetBrandRequest))
+		return srv.(BuildServiceServer).GetMinorSdkVersion(ctx, req.(*GetMinorSdkVersionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BuildInfoService_GetDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDeviceRequest)
+func _BuildService_GetRadioVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRadioVersionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BuildInfoServiceServer).GetDevice(ctx, in)
+		return srv.(BuildServiceServer).GetRadioVersion(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BuildInfoService_GetDevice_FullMethodName,
+		FullMethod: BuildService_GetRadioVersion_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BuildInfoServiceServer).GetDevice(ctx, req.(*GetDeviceRequest))
+		return srv.(BuildServiceServer).GetRadioVersion(ctx, req.(*GetRadioVersionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BuildInfoService_GetHardware_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetHardwareRequest)
+func _BuildService_GetSerial_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSerialRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BuildInfoServiceServer).GetHardware(ctx, in)
+		return srv.(BuildServiceServer).GetSerial(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BuildInfoService_GetHardware_FullMethodName,
+		FullMethod: BuildService_GetSerial_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BuildInfoServiceServer).GetHardware(ctx, req.(*GetHardwareRequest))
+		return srv.(BuildServiceServer).GetSerial(ctx, req.(*GetSerialRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BuildInfoService_GetProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetProductRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BuildInfoServiceServer).GetProduct(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BuildInfoService_GetProduct_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BuildInfoServiceServer).GetProduct(ctx, req.(*GetProductRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BuildInfoService_GetFingerprint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetFingerprintRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BuildInfoServiceServer).GetFingerprint(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BuildInfoService_GetFingerprint_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BuildInfoServiceServer).GetFingerprint(ctx, req.(*GetFingerprintRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BuildInfoService_GetID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetIDRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BuildInfoServiceServer).GetID(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BuildInfoService_GetID_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BuildInfoServiceServer).GetID(ctx, req.(*GetIDRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// BuildInfoService_ServiceDesc is the grpc.ServiceDesc for BuildInfoService service.
+// BuildService_ServiceDesc is the grpc.ServiceDesc for BuildService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var BuildInfoService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "build.BuildInfoService",
-	HandlerType: (*BuildInfoServiceServer)(nil),
+var BuildService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "build.BuildService",
+	HandlerType: (*BuildServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetManufacturer",
-			Handler:    _BuildInfoService_GetManufacturer_Handler,
+			MethodName: "GetFingerprintedPartitions",
+			Handler:    _BuildService_GetFingerprintedPartitions_Handler,
 		},
 		{
-			MethodName: "GetModel",
-			Handler:    _BuildInfoService_GetModel_Handler,
+			MethodName: "GetMajorSdkVersion",
+			Handler:    _BuildService_GetMajorSdkVersion_Handler,
 		},
 		{
-			MethodName: "GetBrand",
-			Handler:    _BuildInfoService_GetBrand_Handler,
+			MethodName: "GetMinorSdkVersion",
+			Handler:    _BuildService_GetMinorSdkVersion_Handler,
 		},
 		{
-			MethodName: "GetDevice",
-			Handler:    _BuildInfoService_GetDevice_Handler,
+			MethodName: "GetRadioVersion",
+			Handler:    _BuildService_GetRadioVersion_Handler,
 		},
 		{
-			MethodName: "GetHardware",
-			Handler:    _BuildInfoService_GetHardware_Handler,
-		},
-		{
-			MethodName: "GetProduct",
-			Handler:    _BuildInfoService_GetProduct_Handler,
-		},
-		{
-			MethodName: "GetFingerprint",
-			Handler:    _BuildInfoService_GetFingerprint_Handler,
-		},
-		{
-			MethodName: "GetID",
-			Handler:    _BuildInfoService_GetID_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/build/build.proto",
-}
-
-const (
-	VersionInfoService_GetSDKInt_FullMethodName  = "/build.VersionInfoService/GetSDKInt"
-	VersionInfoService_GetRelease_FullMethodName = "/build.VersionInfoService/GetRelease"
-)
-
-// VersionInfoServiceClient is the client API for VersionInfoService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type VersionInfoServiceClient interface {
-	GetSDKInt(ctx context.Context, in *GetSDKIntRequest, opts ...grpc.CallOption) (*GetSDKIntResponse, error)
-	GetRelease(ctx context.Context, in *GetReleaseRequest, opts ...grpc.CallOption) (*GetReleaseResponse, error)
-}
-
-type versionInfoServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewVersionInfoServiceClient(cc grpc.ClientConnInterface) VersionInfoServiceClient {
-	return &versionInfoServiceClient{cc}
-}
-
-func (c *versionInfoServiceClient) GetSDKInt(ctx context.Context, in *GetSDKIntRequest, opts ...grpc.CallOption) (*GetSDKIntResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetSDKIntResponse)
-	err := c.cc.Invoke(ctx, VersionInfoService_GetSDKInt_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *versionInfoServiceClient) GetRelease(ctx context.Context, in *GetReleaseRequest, opts ...grpc.CallOption) (*GetReleaseResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetReleaseResponse)
-	err := c.cc.Invoke(ctx, VersionInfoService_GetRelease_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// VersionInfoServiceServer is the server API for VersionInfoService service.
-// All implementations must embed UnimplementedVersionInfoServiceServer
-// for forward compatibility.
-type VersionInfoServiceServer interface {
-	GetSDKInt(context.Context, *GetSDKIntRequest) (*GetSDKIntResponse, error)
-	GetRelease(context.Context, *GetReleaseRequest) (*GetReleaseResponse, error)
-	mustEmbedUnimplementedVersionInfoServiceServer()
-}
-
-// UnimplementedVersionInfoServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedVersionInfoServiceServer struct{}
-
-func (UnimplementedVersionInfoServiceServer) GetSDKInt(context.Context, *GetSDKIntRequest) (*GetSDKIntResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetSDKInt not implemented")
-}
-func (UnimplementedVersionInfoServiceServer) GetRelease(context.Context, *GetReleaseRequest) (*GetReleaseResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetRelease not implemented")
-}
-func (UnimplementedVersionInfoServiceServer) mustEmbedUnimplementedVersionInfoServiceServer() {}
-func (UnimplementedVersionInfoServiceServer) testEmbeddedByValue()                            {}
-
-// UnsafeVersionInfoServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to VersionInfoServiceServer will
-// result in compilation errors.
-type UnsafeVersionInfoServiceServer interface {
-	mustEmbedUnimplementedVersionInfoServiceServer()
-}
-
-func RegisterVersionInfoServiceServer(s grpc.ServiceRegistrar, srv VersionInfoServiceServer) {
-	// If the following call panics, it indicates UnimplementedVersionInfoServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&VersionInfoService_ServiceDesc, srv)
-}
-
-func _VersionInfoService_GetSDKInt_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSDKIntRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VersionInfoServiceServer).GetSDKInt(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: VersionInfoService_GetSDKInt_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VersionInfoServiceServer).GetSDKInt(ctx, req.(*GetSDKIntRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _VersionInfoService_GetRelease_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetReleaseRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VersionInfoServiceServer).GetRelease(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: VersionInfoService_GetRelease_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VersionInfoServiceServer).GetRelease(ctx, req.(*GetReleaseRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// VersionInfoService_ServiceDesc is the grpc.ServiceDesc for VersionInfoService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var VersionInfoService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "build.VersionInfoService",
-	HandlerType: (*VersionInfoServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "GetSDKInt",
-			Handler:    _VersionInfoService_GetSDKInt_Handler,
-		},
-		{
-			MethodName: "GetRelease",
-			Handler:    _VersionInfoService_GetRelease_Handler,
+			MethodName: "GetSerial",
+			Handler:    _BuildService_GetSerial_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

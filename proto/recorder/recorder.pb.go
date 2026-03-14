@@ -23,27 +23,26 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type SetAudioSourceRequest struct {
+type GetActiveMicrophonesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AudioSource   int32                  `protobuf:"varint,1,opt,name=audio_source,json=audioSource,proto3" json:"audio_source,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetAudioSourceRequest) Reset() {
-	*x = SetAudioSourceRequest{}
+func (x *GetActiveMicrophonesRequest) Reset() {
+	*x = GetActiveMicrophonesRequest{}
 	mi := &file_proto_recorder_recorder_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetAudioSourceRequest) String() string {
+func (x *GetActiveMicrophonesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetAudioSourceRequest) ProtoMessage() {}
+func (*GetActiveMicrophonesRequest) ProtoMessage() {}
 
-func (x *SetAudioSourceRequest) ProtoReflect() protoreflect.Message {
+func (x *GetActiveMicrophonesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_recorder_recorder_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -55,38 +54,32 @@ func (x *SetAudioSourceRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetAudioSourceRequest.ProtoReflect.Descriptor instead.
-func (*SetAudioSourceRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetActiveMicrophonesRequest.ProtoReflect.Descriptor instead.
+func (*GetActiveMicrophonesRequest) Descriptor() ([]byte, []int) {
 	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *SetAudioSourceRequest) GetAudioSource() int32 {
-	if x != nil {
-		return x.AudioSource
-	}
-	return 0
-}
-
-type SetAudioSourceResponse struct {
+type GetActiveMicrophonesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetAudioSourceResponse) Reset() {
-	*x = SetAudioSourceResponse{}
+func (x *GetActiveMicrophonesResponse) Reset() {
+	*x = GetActiveMicrophonesResponse{}
 	mi := &file_proto_recorder_recorder_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetAudioSourceResponse) String() string {
+func (x *GetActiveMicrophonesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetAudioSourceResponse) ProtoMessage() {}
+func (*GetActiveMicrophonesResponse) ProtoMessage() {}
 
-func (x *SetAudioSourceResponse) ProtoReflect() protoreflect.Message {
+func (x *GetActiveMicrophonesResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_recorder_recorder_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -98,32 +91,38 @@ func (x *SetAudioSourceResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetAudioSourceResponse.ProtoReflect.Descriptor instead.
-func (*SetAudioSourceResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetActiveMicrophonesResponse.ProtoReflect.Descriptor instead.
+func (*GetActiveMicrophonesResponse) Descriptor() ([]byte, []int) {
 	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{1}
 }
 
-type SetVideoSourceRequest struct {
+func (x *GetActiveMicrophonesResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetActiveRecordingConfigurationRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	VideoSource   int32                  `protobuf:"varint,1,opt,name=video_source,json=videoSource,proto3" json:"video_source,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetVideoSourceRequest) Reset() {
-	*x = SetVideoSourceRequest{}
+func (x *GetActiveRecordingConfigurationRequest) Reset() {
+	*x = GetActiveRecordingConfigurationRequest{}
 	mi := &file_proto_recorder_recorder_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetVideoSourceRequest) String() string {
+func (x *GetActiveRecordingConfigurationRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetVideoSourceRequest) ProtoMessage() {}
+func (*GetActiveRecordingConfigurationRequest) ProtoMessage() {}
 
-func (x *SetVideoSourceRequest) ProtoReflect() protoreflect.Message {
+func (x *GetActiveRecordingConfigurationRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_recorder_recorder_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -135,38 +134,32 @@ func (x *SetVideoSourceRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetVideoSourceRequest.ProtoReflect.Descriptor instead.
-func (*SetVideoSourceRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetActiveRecordingConfigurationRequest.ProtoReflect.Descriptor instead.
+func (*GetActiveRecordingConfigurationRequest) Descriptor() ([]byte, []int) {
 	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *SetVideoSourceRequest) GetVideoSource() int32 {
-	if x != nil {
-		return x.VideoSource
-	}
-	return 0
-}
-
-type SetVideoSourceResponse struct {
+type GetActiveRecordingConfigurationResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetVideoSourceResponse) Reset() {
-	*x = SetVideoSourceResponse{}
+func (x *GetActiveRecordingConfigurationResponse) Reset() {
+	*x = GetActiveRecordingConfigurationResponse{}
 	mi := &file_proto_recorder_recorder_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetVideoSourceResponse) String() string {
+func (x *GetActiveRecordingConfigurationResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetVideoSourceResponse) ProtoMessage() {}
+func (*GetActiveRecordingConfigurationResponse) ProtoMessage() {}
 
-func (x *SetVideoSourceResponse) ProtoReflect() protoreflect.Message {
+func (x *GetActiveRecordingConfigurationResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_recorder_recorder_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -178,32 +171,38 @@ func (x *SetVideoSourceResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetVideoSourceResponse.ProtoReflect.Descriptor instead.
-func (*SetVideoSourceResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetActiveRecordingConfigurationResponse.ProtoReflect.Descriptor instead.
+func (*GetActiveRecordingConfigurationResponse) Descriptor() ([]byte, []int) {
 	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{3}
 }
 
-type SetOutputFormatRequest struct {
+func (x *GetActiveRecordingConfigurationResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetLogSessionIdRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OutputFormat  int32                  `protobuf:"varint,1,opt,name=output_format,json=outputFormat,proto3" json:"output_format,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetOutputFormatRequest) Reset() {
-	*x = SetOutputFormatRequest{}
+func (x *GetLogSessionIdRequest) Reset() {
+	*x = GetLogSessionIdRequest{}
 	mi := &file_proto_recorder_recorder_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetOutputFormatRequest) String() string {
+func (x *GetLogSessionIdRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetOutputFormatRequest) ProtoMessage() {}
+func (*GetLogSessionIdRequest) ProtoMessage() {}
 
-func (x *SetOutputFormatRequest) ProtoReflect() protoreflect.Message {
+func (x *GetLogSessionIdRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_recorder_recorder_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -215,38 +214,32 @@ func (x *SetOutputFormatRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetOutputFormatRequest.ProtoReflect.Descriptor instead.
-func (*SetOutputFormatRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetLogSessionIdRequest.ProtoReflect.Descriptor instead.
+func (*GetLogSessionIdRequest) Descriptor() ([]byte, []int) {
 	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *SetOutputFormatRequest) GetOutputFormat() int32 {
-	if x != nil {
-		return x.OutputFormat
-	}
-	return 0
-}
-
-type SetOutputFormatResponse struct {
+type GetLogSessionIdResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetOutputFormatResponse) Reset() {
-	*x = SetOutputFormatResponse{}
+func (x *GetLogSessionIdResponse) Reset() {
+	*x = GetLogSessionIdResponse{}
 	mi := &file_proto_recorder_recorder_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetOutputFormatResponse) String() string {
+func (x *GetLogSessionIdResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetOutputFormatResponse) ProtoMessage() {}
+func (*GetLogSessionIdResponse) ProtoMessage() {}
 
-func (x *SetOutputFormatResponse) ProtoReflect() protoreflect.Message {
+func (x *GetLogSessionIdResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_recorder_recorder_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -258,32 +251,38 @@ func (x *SetOutputFormatResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetOutputFormatResponse.ProtoReflect.Descriptor instead.
-func (*SetOutputFormatResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetLogSessionIdResponse.ProtoReflect.Descriptor instead.
+func (*GetLogSessionIdResponse) Descriptor() ([]byte, []int) {
 	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{5}
 }
 
-type SetAudioEncoderRequest struct {
+func (x *GetLogSessionIdResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetMetricsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AudioEncoder  int32                  `protobuf:"varint,1,opt,name=audio_encoder,json=audioEncoder,proto3" json:"audio_encoder,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetAudioEncoderRequest) Reset() {
-	*x = SetAudioEncoderRequest{}
+func (x *GetMetricsRequest) Reset() {
+	*x = GetMetricsRequest{}
 	mi := &file_proto_recorder_recorder_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetAudioEncoderRequest) String() string {
+func (x *GetMetricsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetAudioEncoderRequest) ProtoMessage() {}
+func (*GetMetricsRequest) ProtoMessage() {}
 
-func (x *SetAudioEncoderRequest) ProtoReflect() protoreflect.Message {
+func (x *GetMetricsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_recorder_recorder_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -295,38 +294,32 @@ func (x *SetAudioEncoderRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetAudioEncoderRequest.ProtoReflect.Descriptor instead.
-func (*SetAudioEncoderRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetMetricsRequest.ProtoReflect.Descriptor instead.
+func (*GetMetricsRequest) Descriptor() ([]byte, []int) {
 	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *SetAudioEncoderRequest) GetAudioEncoder() int32 {
-	if x != nil {
-		return x.AudioEncoder
-	}
-	return 0
-}
-
-type SetAudioEncoderResponse struct {
+type GetMetricsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetAudioEncoderResponse) Reset() {
-	*x = SetAudioEncoderResponse{}
+func (x *GetMetricsResponse) Reset() {
+	*x = GetMetricsResponse{}
 	mi := &file_proto_recorder_recorder_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetAudioEncoderResponse) String() string {
+func (x *GetMetricsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetAudioEncoderResponse) ProtoMessage() {}
+func (*GetMetricsResponse) ProtoMessage() {}
 
-func (x *SetAudioEncoderResponse) ProtoReflect() protoreflect.Message {
+func (x *GetMetricsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_recorder_recorder_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -338,32 +331,38 @@ func (x *SetAudioEncoderResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetAudioEncoderResponse.ProtoReflect.Descriptor instead.
-func (*SetAudioEncoderResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetMetricsResponse.ProtoReflect.Descriptor instead.
+func (*GetMetricsResponse) Descriptor() ([]byte, []int) {
 	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{7}
 }
 
-type SetVideoEncoderRequest struct {
+func (x *GetMetricsResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetPreferredDeviceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	VideoEncoder  int32                  `protobuf:"varint,1,opt,name=video_encoder,json=videoEncoder,proto3" json:"video_encoder,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetVideoEncoderRequest) Reset() {
-	*x = SetVideoEncoderRequest{}
+func (x *GetPreferredDeviceRequest) Reset() {
+	*x = GetPreferredDeviceRequest{}
 	mi := &file_proto_recorder_recorder_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetVideoEncoderRequest) String() string {
+func (x *GetPreferredDeviceRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetVideoEncoderRequest) ProtoMessage() {}
+func (*GetPreferredDeviceRequest) ProtoMessage() {}
 
-func (x *SetVideoEncoderRequest) ProtoReflect() protoreflect.Message {
+func (x *GetPreferredDeviceRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_recorder_recorder_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -375,38 +374,32 @@ func (x *SetVideoEncoderRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetVideoEncoderRequest.ProtoReflect.Descriptor instead.
-func (*SetVideoEncoderRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetPreferredDeviceRequest.ProtoReflect.Descriptor instead.
+func (*GetPreferredDeviceRequest) Descriptor() ([]byte, []int) {
 	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *SetVideoEncoderRequest) GetVideoEncoder() int32 {
-	if x != nil {
-		return x.VideoEncoder
-	}
-	return 0
-}
-
-type SetVideoEncoderResponse struct {
+type GetPreferredDeviceResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetVideoEncoderResponse) Reset() {
-	*x = SetVideoEncoderResponse{}
+func (x *GetPreferredDeviceResponse) Reset() {
+	*x = GetPreferredDeviceResponse{}
 	mi := &file_proto_recorder_recorder_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetVideoEncoderResponse) String() string {
+func (x *GetPreferredDeviceResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetVideoEncoderResponse) ProtoMessage() {}
+func (*GetPreferredDeviceResponse) ProtoMessage() {}
 
-func (x *SetVideoEncoderResponse) ProtoReflect() protoreflect.Message {
+func (x *GetPreferredDeviceResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_recorder_recorder_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -418,32 +411,38 @@ func (x *SetVideoEncoderResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetVideoEncoderResponse.ProtoReflect.Descriptor instead.
-func (*SetVideoEncoderResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetPreferredDeviceResponse.ProtoReflect.Descriptor instead.
+func (*GetPreferredDeviceResponse) Descriptor() ([]byte, []int) {
 	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{9}
 }
 
-type SetOutputFileRequest struct {
+func (x *GetPreferredDeviceResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetRoutedDeviceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Path          string                 `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetOutputFileRequest) Reset() {
-	*x = SetOutputFileRequest{}
+func (x *GetRoutedDeviceRequest) Reset() {
+	*x = GetRoutedDeviceRequest{}
 	mi := &file_proto_recorder_recorder_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetOutputFileRequest) String() string {
+func (x *GetRoutedDeviceRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetOutputFileRequest) ProtoMessage() {}
+func (*GetRoutedDeviceRequest) ProtoMessage() {}
 
-func (x *SetOutputFileRequest) ProtoReflect() protoreflect.Message {
+func (x *GetRoutedDeviceRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_recorder_recorder_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -455,38 +454,32 @@ func (x *SetOutputFileRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetOutputFileRequest.ProtoReflect.Descriptor instead.
-func (*SetOutputFileRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetRoutedDeviceRequest.ProtoReflect.Descriptor instead.
+func (*GetRoutedDeviceRequest) Descriptor() ([]byte, []int) {
 	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *SetOutputFileRequest) GetPath() string {
-	if x != nil {
-		return x.Path
-	}
-	return ""
-}
-
-type SetOutputFileResponse struct {
+type GetRoutedDeviceResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetOutputFileResponse) Reset() {
-	*x = SetOutputFileResponse{}
+func (x *GetRoutedDeviceResponse) Reset() {
+	*x = GetRoutedDeviceResponse{}
 	mi := &file_proto_recorder_recorder_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetOutputFileResponse) String() string {
+func (x *GetRoutedDeviceResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetOutputFileResponse) ProtoMessage() {}
+func (*GetRoutedDeviceResponse) ProtoMessage() {}
 
-func (x *SetOutputFileResponse) ProtoReflect() protoreflect.Message {
+func (x *GetRoutedDeviceResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_recorder_recorder_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -498,33 +491,38 @@ func (x *SetOutputFileResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetOutputFileResponse.ProtoReflect.Descriptor instead.
-func (*SetOutputFileResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetRoutedDeviceResponse.ProtoReflect.Descriptor instead.
+func (*GetRoutedDeviceResponse) Descriptor() ([]byte, []int) {
 	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{11}
 }
 
-type SetVideoSizeRequest struct {
+func (x *GetRoutedDeviceResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetRoutedDevicesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Width         int32                  `protobuf:"varint,1,opt,name=width,proto3" json:"width,omitempty"`
-	Height        int32                  `protobuf:"varint,2,opt,name=height,proto3" json:"height,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetVideoSizeRequest) Reset() {
-	*x = SetVideoSizeRequest{}
+func (x *GetRoutedDevicesRequest) Reset() {
+	*x = GetRoutedDevicesRequest{}
 	mi := &file_proto_recorder_recorder_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetVideoSizeRequest) String() string {
+func (x *GetRoutedDevicesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetVideoSizeRequest) ProtoMessage() {}
+func (*GetRoutedDevicesRequest) ProtoMessage() {}
 
-func (x *SetVideoSizeRequest) ProtoReflect() protoreflect.Message {
+func (x *GetRoutedDevicesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_recorder_recorder_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -536,45 +534,32 @@ func (x *SetVideoSizeRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetVideoSizeRequest.ProtoReflect.Descriptor instead.
-func (*SetVideoSizeRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetRoutedDevicesRequest.ProtoReflect.Descriptor instead.
+func (*GetRoutedDevicesRequest) Descriptor() ([]byte, []int) {
 	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *SetVideoSizeRequest) GetWidth() int32 {
-	if x != nil {
-		return x.Width
-	}
-	return 0
-}
-
-func (x *SetVideoSizeRequest) GetHeight() int32 {
-	if x != nil {
-		return x.Height
-	}
-	return 0
-}
-
-type SetVideoSizeResponse struct {
+type GetRoutedDevicesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetVideoSizeResponse) Reset() {
-	*x = SetVideoSizeResponse{}
+func (x *GetRoutedDevicesResponse) Reset() {
+	*x = GetRoutedDevicesResponse{}
 	mi := &file_proto_recorder_recorder_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetVideoSizeResponse) String() string {
+func (x *GetRoutedDevicesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetVideoSizeResponse) ProtoMessage() {}
+func (*GetRoutedDevicesResponse) ProtoMessage() {}
 
-func (x *SetVideoSizeResponse) ProtoReflect() protoreflect.Message {
+func (x *GetRoutedDevicesResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_recorder_recorder_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -586,409 +571,16 @@ func (x *SetVideoSizeResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetVideoSizeResponse.ProtoReflect.Descriptor instead.
-func (*SetVideoSizeResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetRoutedDevicesResponse.ProtoReflect.Descriptor instead.
+func (*GetRoutedDevicesResponse) Descriptor() ([]byte, []int) {
 	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{13}
 }
 
-type SetVideoFrameRateRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Rate          int32                  `protobuf:"varint,1,opt,name=rate,proto3" json:"rate,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetVideoFrameRateRequest) Reset() {
-	*x = SetVideoFrameRateRequest{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetVideoFrameRateRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetVideoFrameRateRequest) ProtoMessage() {}
-
-func (x *SetVideoFrameRateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[14]
+func (x *GetRoutedDevicesResponse) GetResult() int64 {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetVideoFrameRateRequest.ProtoReflect.Descriptor instead.
-func (*SetVideoFrameRateRequest) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *SetVideoFrameRateRequest) GetRate() int32 {
-	if x != nil {
-		return x.Rate
+		return x.Result
 	}
 	return 0
-}
-
-type SetVideoFrameRateResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetVideoFrameRateResponse) Reset() {
-	*x = SetVideoFrameRateResponse{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetVideoFrameRateResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetVideoFrameRateResponse) ProtoMessage() {}
-
-func (x *SetVideoFrameRateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetVideoFrameRateResponse.ProtoReflect.Descriptor instead.
-func (*SetVideoFrameRateResponse) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{15}
-}
-
-type SetAudioSamplingRateRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	SamplingRate  int32                  `protobuf:"varint,1,opt,name=sampling_rate,json=samplingRate,proto3" json:"sampling_rate,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetAudioSamplingRateRequest) Reset() {
-	*x = SetAudioSamplingRateRequest{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetAudioSamplingRateRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetAudioSamplingRateRequest) ProtoMessage() {}
-
-func (x *SetAudioSamplingRateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetAudioSamplingRateRequest.ProtoReflect.Descriptor instead.
-func (*SetAudioSamplingRateRequest) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{16}
-}
-
-func (x *SetAudioSamplingRateRequest) GetSamplingRate() int32 {
-	if x != nil {
-		return x.SamplingRate
-	}
-	return 0
-}
-
-type SetAudioSamplingRateResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetAudioSamplingRateResponse) Reset() {
-	*x = SetAudioSamplingRateResponse{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[17]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetAudioSamplingRateResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetAudioSamplingRateResponse) ProtoMessage() {}
-
-func (x *SetAudioSamplingRateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[17]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetAudioSamplingRateResponse.ProtoReflect.Descriptor instead.
-func (*SetAudioSamplingRateResponse) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{17}
-}
-
-type SetAudioChannelsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	NumChannels   int32                  `protobuf:"varint,1,opt,name=num_channels,json=numChannels,proto3" json:"num_channels,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetAudioChannelsRequest) Reset() {
-	*x = SetAudioChannelsRequest{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[18]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetAudioChannelsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetAudioChannelsRequest) ProtoMessage() {}
-
-func (x *SetAudioChannelsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[18]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetAudioChannelsRequest.ProtoReflect.Descriptor instead.
-func (*SetAudioChannelsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{18}
-}
-
-func (x *SetAudioChannelsRequest) GetNumChannels() int32 {
-	if x != nil {
-		return x.NumChannels
-	}
-	return 0
-}
-
-type SetAudioChannelsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetAudioChannelsResponse) Reset() {
-	*x = SetAudioChannelsResponse{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[19]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetAudioChannelsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetAudioChannelsResponse) ProtoMessage() {}
-
-func (x *SetAudioChannelsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[19]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetAudioChannelsResponse.ProtoReflect.Descriptor instead.
-func (*SetAudioChannelsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{19}
-}
-
-type SetMaxDurationMsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	MaxDurationMs int32                  `protobuf:"varint,1,opt,name=max_duration_ms,json=maxDurationMs,proto3" json:"max_duration_ms,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetMaxDurationMsRequest) Reset() {
-	*x = SetMaxDurationMsRequest{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[20]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetMaxDurationMsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetMaxDurationMsRequest) ProtoMessage() {}
-
-func (x *SetMaxDurationMsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[20]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetMaxDurationMsRequest.ProtoReflect.Descriptor instead.
-func (*SetMaxDurationMsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{20}
-}
-
-func (x *SetMaxDurationMsRequest) GetMaxDurationMs() int32 {
-	if x != nil {
-		return x.MaxDurationMs
-	}
-	return 0
-}
-
-type SetMaxDurationMsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetMaxDurationMsResponse) Reset() {
-	*x = SetMaxDurationMsResponse{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[21]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetMaxDurationMsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetMaxDurationMsResponse) ProtoMessage() {}
-
-func (x *SetMaxDurationMsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[21]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetMaxDurationMsResponse.ProtoReflect.Descriptor instead.
-func (*SetMaxDurationMsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{21}
-}
-
-type SetMaxFileSizeRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	MaxFileSize   int64                  `protobuf:"varint,1,opt,name=max_file_size,json=maxFileSize,proto3" json:"max_file_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetMaxFileSizeRequest) Reset() {
-	*x = SetMaxFileSizeRequest{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[22]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetMaxFileSizeRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetMaxFileSizeRequest) ProtoMessage() {}
-
-func (x *SetMaxFileSizeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[22]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetMaxFileSizeRequest.ProtoReflect.Descriptor instead.
-func (*SetMaxFileSizeRequest) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{22}
-}
-
-func (x *SetMaxFileSizeRequest) GetMaxFileSize() int64 {
-	if x != nil {
-		return x.MaxFileSize
-	}
-	return 0
-}
-
-type SetMaxFileSizeResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetMaxFileSizeResponse) Reset() {
-	*x = SetMaxFileSizeResponse{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[23]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetMaxFileSizeResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetMaxFileSizeResponse) ProtoMessage() {}
-
-func (x *SetMaxFileSizeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[23]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetMaxFileSizeResponse.ProtoReflect.Descriptor instead.
-func (*SetMaxFileSizeResponse) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{23}
 }
 
 type PrepareRequest struct {
@@ -999,7 +591,7 @@ type PrepareRequest struct {
 
 func (x *PrepareRequest) Reset() {
 	*x = PrepareRequest{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[24]
+	mi := &file_proto_recorder_recorder_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1011,7 +603,7 @@ func (x *PrepareRequest) String() string {
 func (*PrepareRequest) ProtoMessage() {}
 
 func (x *PrepareRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[24]
+	mi := &file_proto_recorder_recorder_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1024,7 +616,7 @@ func (x *PrepareRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PrepareRequest.ProtoReflect.Descriptor instead.
 func (*PrepareRequest) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{24}
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{14}
 }
 
 type PrepareResponse struct {
@@ -1035,7 +627,7 @@ type PrepareResponse struct {
 
 func (x *PrepareResponse) Reset() {
 	*x = PrepareResponse{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[25]
+	mi := &file_proto_recorder_recorder_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1047,7 +639,7 @@ func (x *PrepareResponse) String() string {
 func (*PrepareResponse) ProtoMessage() {}
 
 func (x *PrepareResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[25]
+	mi := &file_proto_recorder_recorder_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1060,30 +652,32 @@ func (x *PrepareResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PrepareResponse.ProtoReflect.Descriptor instead.
 func (*PrepareResponse) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{25}
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{15}
 }
 
-type StartRequest struct {
+type RegisterAudioRecordingCallbackRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StartRequest) Reset() {
-	*x = StartRequest{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[26]
+func (x *RegisterAudioRecordingCallbackRequest) Reset() {
+	*x = RegisterAudioRecordingCallbackRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StartRequest) String() string {
+func (x *RegisterAudioRecordingCallbackRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartRequest) ProtoMessage() {}
+func (*RegisterAudioRecordingCallbackRequest) ProtoMessage() {}
 
-func (x *StartRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[26]
+func (x *RegisterAudioRecordingCallbackRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1094,32 +688,46 @@ func (x *StartRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartRequest.ProtoReflect.Descriptor instead.
-func (*StartRequest) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{26}
+// Deprecated: Use RegisterAudioRecordingCallbackRequest.ProtoReflect.Descriptor instead.
+func (*RegisterAudioRecordingCallbackRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{16}
 }
 
-type StartResponse struct {
+func (x *RegisterAudioRecordingCallbackRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *RegisterAudioRecordingCallbackRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type RegisterAudioRecordingCallbackResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StartResponse) Reset() {
-	*x = StartResponse{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[27]
+func (x *RegisterAudioRecordingCallbackResponse) Reset() {
+	*x = RegisterAudioRecordingCallbackResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StartResponse) String() string {
+func (x *RegisterAudioRecordingCallbackResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartResponse) ProtoMessage() {}
+func (*RegisterAudioRecordingCallbackResponse) ProtoMessage() {}
 
-func (x *StartResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[27]
+func (x *RegisterAudioRecordingCallbackResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1130,32 +738,33 @@ func (x *StartResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartResponse.ProtoReflect.Descriptor instead.
-func (*StartResponse) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{27}
+// Deprecated: Use RegisterAudioRecordingCallbackResponse.ProtoReflect.Descriptor instead.
+func (*RegisterAudioRecordingCallbackResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{17}
 }
 
-type PauseRequest struct {
+type RemoveOnRoutingChangedListenerRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PauseRequest) Reset() {
-	*x = PauseRequest{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[28]
+func (x *RemoveOnRoutingChangedListenerRequest) Reset() {
+	*x = RemoveOnRoutingChangedListenerRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PauseRequest) String() string {
+func (x *RemoveOnRoutingChangedListenerRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PauseRequest) ProtoMessage() {}
+func (*RemoveOnRoutingChangedListenerRequest) ProtoMessage() {}
 
-func (x *PauseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[28]
+func (x *RemoveOnRoutingChangedListenerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1166,32 +775,39 @@ func (x *PauseRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PauseRequest.ProtoReflect.Descriptor instead.
-func (*PauseRequest) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{28}
+// Deprecated: Use RemoveOnRoutingChangedListenerRequest.ProtoReflect.Descriptor instead.
+func (*RemoveOnRoutingChangedListenerRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{18}
 }
 
-type PauseResponse struct {
+func (x *RemoveOnRoutingChangedListenerRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type RemoveOnRoutingChangedListenerResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PauseResponse) Reset() {
-	*x = PauseResponse{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[29]
+func (x *RemoveOnRoutingChangedListenerResponse) Reset() {
+	*x = RemoveOnRoutingChangedListenerResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PauseResponse) String() string {
+func (x *RemoveOnRoutingChangedListenerResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PauseResponse) ProtoMessage() {}
+func (*RemoveOnRoutingChangedListenerResponse) ProtoMessage() {}
 
-func (x *PauseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[29]
+func (x *RemoveOnRoutingChangedListenerResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1202,153 +818,9 @@ func (x *PauseResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PauseResponse.ProtoReflect.Descriptor instead.
-func (*PauseResponse) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{29}
-}
-
-type ResumeRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ResumeRequest) Reset() {
-	*x = ResumeRequest{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[30]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ResumeRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ResumeRequest) ProtoMessage() {}
-
-func (x *ResumeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[30]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ResumeRequest.ProtoReflect.Descriptor instead.
-func (*ResumeRequest) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{30}
-}
-
-type ResumeResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ResumeResponse) Reset() {
-	*x = ResumeResponse{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[31]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ResumeResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ResumeResponse) ProtoMessage() {}
-
-func (x *ResumeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[31]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ResumeResponse.ProtoReflect.Descriptor instead.
-func (*ResumeResponse) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{31}
-}
-
-type StopRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *StopRequest) Reset() {
-	*x = StopRequest{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[32]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StopRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StopRequest) ProtoMessage() {}
-
-func (x *StopRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[32]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StopRequest.ProtoReflect.Descriptor instead.
-func (*StopRequest) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{32}
-}
-
-type StopResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *StopResponse) Reset() {
-	*x = StopResponse{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[33]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StopResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StopResponse) ProtoMessage() {}
-
-func (x *StopResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[33]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StopResponse.ProtoReflect.Descriptor instead.
-func (*StopResponse) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{33}
+// Deprecated: Use RemoveOnRoutingChangedListenerResponse.ProtoReflect.Descriptor instead.
+func (*RemoveOnRoutingChangedListenerResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{19}
 }
 
 type ResetRequest struct {
@@ -1359,7 +831,7 @@ type ResetRequest struct {
 
 func (x *ResetRequest) Reset() {
 	*x = ResetRequest{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[34]
+	mi := &file_proto_recorder_recorder_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1371,7 +843,7 @@ func (x *ResetRequest) String() string {
 func (*ResetRequest) ProtoMessage() {}
 
 func (x *ResetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[34]
+	mi := &file_proto_recorder_recorder_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1384,7 +856,7 @@ func (x *ResetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResetRequest.ProtoReflect.Descriptor instead.
 func (*ResetRequest) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{34}
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{20}
 }
 
 type ResetResponse struct {
@@ -1395,7 +867,7 @@ type ResetResponse struct {
 
 func (x *ResetResponse) Reset() {
 	*x = ResetResponse{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[35]
+	mi := &file_proto_recorder_recorder_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1407,7 +879,7 @@ func (x *ResetResponse) String() string {
 func (*ResetResponse) ProtoMessage() {}
 
 func (x *ResetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[35]
+	mi := &file_proto_recorder_recorder_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1420,30 +892,31 @@ func (x *ResetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResetResponse.ProtoReflect.Descriptor instead.
 func (*ResetResponse) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{35}
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{21}
 }
 
-type ReleaseRequest struct {
+type SetAudioChannelsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ReleaseRequest) Reset() {
-	*x = ReleaseRequest{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[36]
+func (x *SetAudioChannelsRequest) Reset() {
+	*x = SetAudioChannelsRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ReleaseRequest) String() string {
+func (x *SetAudioChannelsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ReleaseRequest) ProtoMessage() {}
+func (*SetAudioChannelsRequest) ProtoMessage() {}
 
-func (x *ReleaseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[36]
+func (x *SetAudioChannelsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1454,137 +927,792 @@ func (x *ReleaseRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReleaseRequest.ProtoReflect.Descriptor instead.
-func (*ReleaseRequest) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{36}
+// Deprecated: Use SetAudioChannelsRequest.ProtoReflect.Descriptor instead.
+func (*SetAudioChannelsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{22}
 }
 
-type ReleaseResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ReleaseResponse) Reset() {
-	*x = ReleaseResponse{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[37]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ReleaseResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ReleaseResponse) ProtoMessage() {}
-
-func (x *ReleaseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[37]
+func (x *SetAudioChannelsRequest) GetArg0() int32 {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ReleaseResponse.ProtoReflect.Descriptor instead.
-func (*ReleaseResponse) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{37}
-}
-
-type GetMaxAmplitudeRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetMaxAmplitudeRequest) Reset() {
-	*x = GetMaxAmplitudeRequest{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[38]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetMaxAmplitudeRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetMaxAmplitudeRequest) ProtoMessage() {}
-
-func (x *GetMaxAmplitudeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[38]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetMaxAmplitudeRequest.ProtoReflect.Descriptor instead.
-func (*GetMaxAmplitudeRequest) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{38}
-}
-
-type GetMaxAmplitudeResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetMaxAmplitudeResponse) Reset() {
-	*x = GetMaxAmplitudeResponse{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[39]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetMaxAmplitudeResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetMaxAmplitudeResponse) ProtoMessage() {}
-
-func (x *GetMaxAmplitudeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[39]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetMaxAmplitudeResponse.ProtoReflect.Descriptor instead.
-func (*GetMaxAmplitudeResponse) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{39}
-}
-
-func (x *GetMaxAmplitudeResponse) GetResult() int32 {
-	if x != nil {
-		return x.Result
+		return x.Arg0
 	}
 	return 0
 }
 
+type SetAudioChannelsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAudioChannelsResponse) Reset() {
+	*x = SetAudioChannelsResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAudioChannelsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAudioChannelsResponse) ProtoMessage() {}
+
+func (x *SetAudioChannelsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAudioChannelsResponse.ProtoReflect.Descriptor instead.
+func (*SetAudioChannelsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{23}
+}
+
+type SetAudioEncodingBitRateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAudioEncodingBitRateRequest) Reset() {
+	*x = SetAudioEncodingBitRateRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAudioEncodingBitRateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAudioEncodingBitRateRequest) ProtoMessage() {}
+
+func (x *SetAudioEncodingBitRateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAudioEncodingBitRateRequest.ProtoReflect.Descriptor instead.
+func (*SetAudioEncodingBitRateRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *SetAudioEncodingBitRateRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetAudioEncodingBitRateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAudioEncodingBitRateResponse) Reset() {
+	*x = SetAudioEncodingBitRateResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAudioEncodingBitRateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAudioEncodingBitRateResponse) ProtoMessage() {}
+
+func (x *SetAudioEncodingBitRateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAudioEncodingBitRateResponse.ProtoReflect.Descriptor instead.
+func (*SetAudioEncodingBitRateResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{25}
+}
+
+type SetAudioProfileRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAudioProfileRequest) Reset() {
+	*x = SetAudioProfileRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAudioProfileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAudioProfileRequest) ProtoMessage() {}
+
+func (x *SetAudioProfileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAudioProfileRequest.ProtoReflect.Descriptor instead.
+func (*SetAudioProfileRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *SetAudioProfileRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetAudioProfileResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAudioProfileResponse) Reset() {
+	*x = SetAudioProfileResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAudioProfileResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAudioProfileResponse) ProtoMessage() {}
+
+func (x *SetAudioProfileResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAudioProfileResponse.ProtoReflect.Descriptor instead.
+func (*SetAudioProfileResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{27}
+}
+
+type SetAudioSamplingRateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAudioSamplingRateRequest) Reset() {
+	*x = SetAudioSamplingRateRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAudioSamplingRateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAudioSamplingRateRequest) ProtoMessage() {}
+
+func (x *SetAudioSamplingRateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAudioSamplingRateRequest.ProtoReflect.Descriptor instead.
+func (*SetAudioSamplingRateRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *SetAudioSamplingRateRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetAudioSamplingRateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAudioSamplingRateResponse) Reset() {
+	*x = SetAudioSamplingRateResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAudioSamplingRateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAudioSamplingRateResponse) ProtoMessage() {}
+
+func (x *SetAudioSamplingRateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAudioSamplingRateResponse.ProtoReflect.Descriptor instead.
+func (*SetAudioSamplingRateResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{29}
+}
+
+type SetCaptureRateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          float64                `protobuf:"fixed64,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetCaptureRateRequest) Reset() {
+	*x = SetCaptureRateRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetCaptureRateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetCaptureRateRequest) ProtoMessage() {}
+
+func (x *SetCaptureRateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetCaptureRateRequest.ProtoReflect.Descriptor instead.
+func (*SetCaptureRateRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *SetCaptureRateRequest) GetArg0() float64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetCaptureRateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetCaptureRateResponse) Reset() {
+	*x = SetCaptureRateResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetCaptureRateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetCaptureRateResponse) ProtoMessage() {}
+
+func (x *SetCaptureRateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetCaptureRateResponse.ProtoReflect.Descriptor instead.
+func (*SetCaptureRateResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{31}
+}
+
+type SetInputSurfaceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetInputSurfaceRequest) Reset() {
+	*x = SetInputSurfaceRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetInputSurfaceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetInputSurfaceRequest) ProtoMessage() {}
+
+func (x *SetInputSurfaceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetInputSurfaceRequest.ProtoReflect.Descriptor instead.
+func (*SetInputSurfaceRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *SetInputSurfaceRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetInputSurfaceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetInputSurfaceResponse) Reset() {
+	*x = SetInputSurfaceResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetInputSurfaceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetInputSurfaceResponse) ProtoMessage() {}
+
+func (x *SetInputSurfaceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetInputSurfaceResponse.ProtoReflect.Descriptor instead.
+func (*SetInputSurfaceResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{33}
+}
+
+type SetLocationRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          float32                `protobuf:"fixed32,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          float32                `protobuf:"fixed32,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetLocationRequest) Reset() {
+	*x = SetLocationRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetLocationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetLocationRequest) ProtoMessage() {}
+
+func (x *SetLocationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetLocationRequest.ProtoReflect.Descriptor instead.
+func (*SetLocationRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *SetLocationRequest) GetArg0() float32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *SetLocationRequest) GetArg1() float32 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type SetLocationResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetLocationResponse) Reset() {
+	*x = SetLocationResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetLocationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetLocationResponse) ProtoMessage() {}
+
+func (x *SetLocationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetLocationResponse.ProtoReflect.Descriptor instead.
+func (*SetLocationResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{35}
+}
+
+type SetLogSessionIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetLogSessionIdRequest) Reset() {
+	*x = SetLogSessionIdRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetLogSessionIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetLogSessionIdRequest) ProtoMessage() {}
+
+func (x *SetLogSessionIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetLogSessionIdRequest.ProtoReflect.Descriptor instead.
+func (*SetLogSessionIdRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *SetLogSessionIdRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetLogSessionIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetLogSessionIdResponse) Reset() {
+	*x = SetLogSessionIdResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetLogSessionIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetLogSessionIdResponse) ProtoMessage() {}
+
+func (x *SetLogSessionIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetLogSessionIdResponse.ProtoReflect.Descriptor instead.
+func (*SetLogSessionIdResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{37}
+}
+
+type SetNextOutputFile1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetNextOutputFile1Request) Reset() {
+	*x = SetNextOutputFile1Request{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetNextOutputFile1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetNextOutputFile1Request) ProtoMessage() {}
+
+func (x *SetNextOutputFile1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetNextOutputFile1Request.ProtoReflect.Descriptor instead.
+func (*SetNextOutputFile1Request) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *SetNextOutputFile1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetNextOutputFile1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetNextOutputFile1Response) Reset() {
+	*x = SetNextOutputFile1Response{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetNextOutputFile1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetNextOutputFile1Response) ProtoMessage() {}
+
+func (x *SetNextOutputFile1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetNextOutputFile1Response.ProtoReflect.Descriptor instead.
+func (*SetNextOutputFile1Response) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{39}
+}
+
+type SetNextOutputFile1_1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetNextOutputFile1_1Request) Reset() {
+	*x = SetNextOutputFile1_1Request{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetNextOutputFile1_1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetNextOutputFile1_1Request) ProtoMessage() {}
+
+func (x *SetNextOutputFile1_1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetNextOutputFile1_1Request.ProtoReflect.Descriptor instead.
+func (*SetNextOutputFile1_1Request) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *SetNextOutputFile1_1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetNextOutputFile1_1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetNextOutputFile1_1Response) Reset() {
+	*x = SetNextOutputFile1_1Response{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetNextOutputFile1_1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetNextOutputFile1_1Response) ProtoMessage() {}
+
+func (x *SetNextOutputFile1_1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetNextOutputFile1_1Response.ProtoReflect.Descriptor instead.
+func (*SetNextOutputFile1_1Response) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{41}
+}
+
 type SetOnErrorListenerRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Listener      int64                  `protobuf:"varint,1,opt,name=listener,proto3" json:"listener,omitempty"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SetOnErrorListenerRequest) Reset() {
 	*x = SetOnErrorListenerRequest{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[40]
+	mi := &file_proto_recorder_recorder_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1596,7 +1724,7 @@ func (x *SetOnErrorListenerRequest) String() string {
 func (*SetOnErrorListenerRequest) ProtoMessage() {}
 
 func (x *SetOnErrorListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[40]
+	mi := &file_proto_recorder_recorder_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1609,12 +1737,12 @@ func (x *SetOnErrorListenerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOnErrorListenerRequest.ProtoReflect.Descriptor instead.
 func (*SetOnErrorListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{40}
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{42}
 }
 
-func (x *SetOnErrorListenerRequest) GetListener() int64 {
+func (x *SetOnErrorListenerRequest) GetArg0() int64 {
 	if x != nil {
-		return x.Listener
+		return x.Arg0
 	}
 	return 0
 }
@@ -1627,7 +1755,7 @@ type SetOnErrorListenerResponse struct {
 
 func (x *SetOnErrorListenerResponse) Reset() {
 	*x = SetOnErrorListenerResponse{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[41]
+	mi := &file_proto_recorder_recorder_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1639,7 +1767,7 @@ func (x *SetOnErrorListenerResponse) String() string {
 func (*SetOnErrorListenerResponse) ProtoMessage() {}
 
 func (x *SetOnErrorListenerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[41]
+	mi := &file_proto_recorder_recorder_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1652,19 +1780,19 @@ func (x *SetOnErrorListenerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOnErrorListenerResponse.ProtoReflect.Descriptor instead.
 func (*SetOnErrorListenerResponse) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{41}
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{43}
 }
 
 type SetOnInfoListenerRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Listener      int64                  `protobuf:"varint,1,opt,name=listener,proto3" json:"listener,omitempty"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SetOnInfoListenerRequest) Reset() {
 	*x = SetOnInfoListenerRequest{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[42]
+	mi := &file_proto_recorder_recorder_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1676,7 +1804,7 @@ func (x *SetOnInfoListenerRequest) String() string {
 func (*SetOnInfoListenerRequest) ProtoMessage() {}
 
 func (x *SetOnInfoListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[42]
+	mi := &file_proto_recorder_recorder_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1689,12 +1817,12 @@ func (x *SetOnInfoListenerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOnInfoListenerRequest.ProtoReflect.Descriptor instead.
 func (*SetOnInfoListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{42}
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{44}
 }
 
-func (x *SetOnInfoListenerRequest) GetListener() int64 {
+func (x *SetOnInfoListenerRequest) GetArg0() int64 {
 	if x != nil {
-		return x.Listener
+		return x.Arg0
 	}
 	return 0
 }
@@ -1707,7 +1835,7 @@ type SetOnInfoListenerResponse struct {
 
 func (x *SetOnInfoListenerResponse) Reset() {
 	*x = SetOnInfoListenerResponse{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[43]
+	mi := &file_proto_recorder_recorder_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1719,7 +1847,7 @@ func (x *SetOnInfoListenerResponse) String() string {
 func (*SetOnInfoListenerResponse) ProtoMessage() {}
 
 func (x *SetOnInfoListenerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[43]
+	mi := &file_proto_recorder_recorder_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1732,133 +1860,30 @@ func (x *SetOnInfoListenerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOnInfoListenerResponse.ProtoReflect.Descriptor instead.
 func (*SetOnInfoListenerResponse) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{43}
-}
-
-type OnErrorListenerOnErrorEvent struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
-	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OnErrorListenerOnErrorEvent) Reset() {
-	*x = OnErrorListenerOnErrorEvent{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[44]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OnErrorListenerOnErrorEvent) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OnErrorListenerOnErrorEvent) ProtoMessage() {}
-
-func (x *OnErrorListenerOnErrorEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[44]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OnErrorListenerOnErrorEvent.ProtoReflect.Descriptor instead.
-func (*OnErrorListenerOnErrorEvent) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{44}
-}
-
-func (x *OnErrorListenerOnErrorEvent) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-func (x *OnErrorListenerOnErrorEvent) GetArg1() int64 {
-	if x != nil {
-		return x.Arg1
-	}
-	return 0
-}
-
-func (x *OnErrorListenerOnErrorEvent) GetArg2() int64 {
-	if x != nil {
-		return x.Arg2
-	}
-	return 0
-}
-
-type OnErrorListenerEvent struct {
-	state         protoimpl.MessageState       `protogen:"open.v1"`
-	OnError       *OnErrorListenerOnErrorEvent `protobuf:"bytes,1,opt,name=on_error,json=onError,proto3,oneof" json:"on_error,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OnErrorListenerEvent) Reset() {
-	*x = OnErrorListenerEvent{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[45]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OnErrorListenerEvent) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OnErrorListenerEvent) ProtoMessage() {}
-
-func (x *OnErrorListenerEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[45]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OnErrorListenerEvent.ProtoReflect.Descriptor instead.
-func (*OnErrorListenerEvent) Descriptor() ([]byte, []int) {
 	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{45}
 }
 
-func (x *OnErrorListenerEvent) GetOnError() *OnErrorListenerOnErrorEvent {
-	if x != nil {
-		return x.OnError
-	}
-	return nil
-}
-
-type SubscribeOnErrorListenerRequest struct {
+type SetOrientationHintRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SubscribeOnErrorListenerRequest) Reset() {
-	*x = SubscribeOnErrorListenerRequest{}
+func (x *SetOrientationHintRequest) Reset() {
+	*x = SetOrientationHintRequest{}
 	mi := &file_proto_recorder_recorder_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SubscribeOnErrorListenerRequest) String() string {
+func (x *SetOrientationHintRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SubscribeOnErrorListenerRequest) ProtoMessage() {}
+func (*SetOrientationHintRequest) ProtoMessage() {}
 
-func (x *SubscribeOnErrorListenerRequest) ProtoReflect() protoreflect.Message {
+func (x *SetOrientationHintRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_recorder_recorder_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1870,136 +1895,871 @@ func (x *SubscribeOnErrorListenerRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SubscribeOnErrorListenerRequest.ProtoReflect.Descriptor instead.
-func (*SubscribeOnErrorListenerRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetOrientationHintRequest.ProtoReflect.Descriptor instead.
+func (*SetOrientationHintRequest) Descriptor() ([]byte, []int) {
 	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{46}
 }
 
-type OnInfoListenerOnInfoEvent struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
-	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OnInfoListenerOnInfoEvent) Reset() {
-	*x = OnInfoListenerOnInfoEvent{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[47]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OnInfoListenerOnInfoEvent) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OnInfoListenerOnInfoEvent) ProtoMessage() {}
-
-func (x *OnInfoListenerOnInfoEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[47]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OnInfoListenerOnInfoEvent.ProtoReflect.Descriptor instead.
-func (*OnInfoListenerOnInfoEvent) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{47}
-}
-
-func (x *OnInfoListenerOnInfoEvent) GetArg0() int64 {
+func (x *SetOrientationHintRequest) GetArg0() int32 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-func (x *OnInfoListenerOnInfoEvent) GetArg1() int64 {
+type SetOrientationHintResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetOrientationHintResponse) Reset() {
+	*x = SetOrientationHintResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetOrientationHintResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetOrientationHintResponse) ProtoMessage() {}
+
+func (x *SetOrientationHintResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetOrientationHintResponse.ProtoReflect.Descriptor instead.
+func (*SetOrientationHintResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{47}
+}
+
+type SetOutputFile1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetOutputFile1Request) Reset() {
+	*x = SetOutputFile1Request{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetOutputFile1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetOutputFile1Request) ProtoMessage() {}
+
+func (x *SetOutputFile1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetOutputFile1Request.ProtoReflect.Descriptor instead.
+func (*SetOutputFile1Request) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *SetOutputFile1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetOutputFile1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetOutputFile1Response) Reset() {
+	*x = SetOutputFile1Response{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetOutputFile1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetOutputFile1Response) ProtoMessage() {}
+
+func (x *SetOutputFile1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetOutputFile1Response.ProtoReflect.Descriptor instead.
+func (*SetOutputFile1Response) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{49}
+}
+
+type SetOutputFile1_1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetOutputFile1_1Request) Reset() {
+	*x = SetOutputFile1_1Request{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetOutputFile1_1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetOutputFile1_1Request) ProtoMessage() {}
+
+func (x *SetOutputFile1_1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetOutputFile1_1Request.ProtoReflect.Descriptor instead.
+func (*SetOutputFile1_1Request) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *SetOutputFile1_1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetOutputFile1_1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetOutputFile1_1Response) Reset() {
+	*x = SetOutputFile1_1Response{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetOutputFile1_1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetOutputFile1_1Response) ProtoMessage() {}
+
+func (x *SetOutputFile1_1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetOutputFile1_1Response.ProtoReflect.Descriptor instead.
+func (*SetOutputFile1_1Response) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{51}
+}
+
+type SetOutputFile1_2Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetOutputFile1_2Request) Reset() {
+	*x = SetOutputFile1_2Request{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetOutputFile1_2Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetOutputFile1_2Request) ProtoMessage() {}
+
+func (x *SetOutputFile1_2Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetOutputFile1_2Request.ProtoReflect.Descriptor instead.
+func (*SetOutputFile1_2Request) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{52}
+}
+
+func (x *SetOutputFile1_2Request) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type SetOutputFile1_2Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetOutputFile1_2Response) Reset() {
+	*x = SetOutputFile1_2Response{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetOutputFile1_2Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetOutputFile1_2Response) ProtoMessage() {}
+
+func (x *SetOutputFile1_2Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetOutputFile1_2Response.ProtoReflect.Descriptor instead.
+func (*SetOutputFile1_2Response) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{53}
+}
+
+type SetPreferredDeviceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetPreferredDeviceRequest) Reset() {
+	*x = SetPreferredDeviceRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetPreferredDeviceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetPreferredDeviceRequest) ProtoMessage() {}
+
+func (x *SetPreferredDeviceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetPreferredDeviceRequest.ProtoReflect.Descriptor instead.
+func (*SetPreferredDeviceRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{54}
+}
+
+func (x *SetPreferredDeviceRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetPreferredDeviceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetPreferredDeviceResponse) Reset() {
+	*x = SetPreferredDeviceResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetPreferredDeviceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetPreferredDeviceResponse) ProtoMessage() {}
+
+func (x *SetPreferredDeviceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetPreferredDeviceResponse.ProtoReflect.Descriptor instead.
+func (*SetPreferredDeviceResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{55}
+}
+
+func (x *SetPreferredDeviceResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type SetPreferredMicrophoneDirectionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetPreferredMicrophoneDirectionRequest) Reset() {
+	*x = SetPreferredMicrophoneDirectionRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[56]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetPreferredMicrophoneDirectionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetPreferredMicrophoneDirectionRequest) ProtoMessage() {}
+
+func (x *SetPreferredMicrophoneDirectionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[56]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetPreferredMicrophoneDirectionRequest.ProtoReflect.Descriptor instead.
+func (*SetPreferredMicrophoneDirectionRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{56}
+}
+
+func (x *SetPreferredMicrophoneDirectionRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetPreferredMicrophoneDirectionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetPreferredMicrophoneDirectionResponse) Reset() {
+	*x = SetPreferredMicrophoneDirectionResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[57]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetPreferredMicrophoneDirectionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetPreferredMicrophoneDirectionResponse) ProtoMessage() {}
+
+func (x *SetPreferredMicrophoneDirectionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[57]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetPreferredMicrophoneDirectionResponse.ProtoReflect.Descriptor instead.
+func (*SetPreferredMicrophoneDirectionResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{57}
+}
+
+func (x *SetPreferredMicrophoneDirectionResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type SetPreferredMicrophoneFieldDimensionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          float32                `protobuf:"fixed32,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetPreferredMicrophoneFieldDimensionRequest) Reset() {
+	*x = SetPreferredMicrophoneFieldDimensionRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[58]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetPreferredMicrophoneFieldDimensionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetPreferredMicrophoneFieldDimensionRequest) ProtoMessage() {}
+
+func (x *SetPreferredMicrophoneFieldDimensionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[58]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetPreferredMicrophoneFieldDimensionRequest.ProtoReflect.Descriptor instead.
+func (*SetPreferredMicrophoneFieldDimensionRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{58}
+}
+
+func (x *SetPreferredMicrophoneFieldDimensionRequest) GetArg0() float32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetPreferredMicrophoneFieldDimensionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetPreferredMicrophoneFieldDimensionResponse) Reset() {
+	*x = SetPreferredMicrophoneFieldDimensionResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[59]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetPreferredMicrophoneFieldDimensionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetPreferredMicrophoneFieldDimensionResponse) ProtoMessage() {}
+
+func (x *SetPreferredMicrophoneFieldDimensionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[59]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetPreferredMicrophoneFieldDimensionResponse.ProtoReflect.Descriptor instead.
+func (*SetPreferredMicrophoneFieldDimensionResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{59}
+}
+
+func (x *SetPreferredMicrophoneFieldDimensionResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type SetPreviewDisplayRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetPreviewDisplayRequest) Reset() {
+	*x = SetPreviewDisplayRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[60]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetPreviewDisplayRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetPreviewDisplayRequest) ProtoMessage() {}
+
+func (x *SetPreviewDisplayRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[60]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetPreviewDisplayRequest.ProtoReflect.Descriptor instead.
+func (*SetPreviewDisplayRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{60}
+}
+
+func (x *SetPreviewDisplayRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetPreviewDisplayResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetPreviewDisplayResponse) Reset() {
+	*x = SetPreviewDisplayResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[61]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetPreviewDisplayResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetPreviewDisplayResponse) ProtoMessage() {}
+
+func (x *SetPreviewDisplayResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[61]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetPreviewDisplayResponse.ProtoReflect.Descriptor instead.
+func (*SetPreviewDisplayResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{61}
+}
+
+type SetProfileRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetProfileRequest) Reset() {
+	*x = SetProfileRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[62]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetProfileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetProfileRequest) ProtoMessage() {}
+
+func (x *SetProfileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[62]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetProfileRequest.ProtoReflect.Descriptor instead.
+func (*SetProfileRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{62}
+}
+
+func (x *SetProfileRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetProfileResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetProfileResponse) Reset() {
+	*x = SetProfileResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[63]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetProfileResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetProfileResponse) ProtoMessage() {}
+
+func (x *SetProfileResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[63]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetProfileResponse.ProtoReflect.Descriptor instead.
+func (*SetProfileResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{63}
+}
+
+type SetVideoEncodingBitRateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetVideoEncodingBitRateRequest) Reset() {
+	*x = SetVideoEncodingBitRateRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[64]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetVideoEncodingBitRateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetVideoEncodingBitRateRequest) ProtoMessage() {}
+
+func (x *SetVideoEncodingBitRateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[64]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetVideoEncodingBitRateRequest.ProtoReflect.Descriptor instead.
+func (*SetVideoEncodingBitRateRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{64}
+}
+
+func (x *SetVideoEncodingBitRateRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetVideoEncodingBitRateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetVideoEncodingBitRateResponse) Reset() {
+	*x = SetVideoEncodingBitRateResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[65]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetVideoEncodingBitRateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetVideoEncodingBitRateResponse) ProtoMessage() {}
+
+func (x *SetVideoEncodingBitRateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[65]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetVideoEncodingBitRateResponse.ProtoReflect.Descriptor instead.
+func (*SetVideoEncodingBitRateResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{65}
+}
+
+type SetVideoEncodingProfileLevelRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int32                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetVideoEncodingProfileLevelRequest) Reset() {
+	*x = SetVideoEncodingProfileLevelRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[66]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetVideoEncodingProfileLevelRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetVideoEncodingProfileLevelRequest) ProtoMessage() {}
+
+func (x *SetVideoEncodingProfileLevelRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[66]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetVideoEncodingProfileLevelRequest.ProtoReflect.Descriptor instead.
+func (*SetVideoEncodingProfileLevelRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{66}
+}
+
+func (x *SetVideoEncodingProfileLevelRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *SetVideoEncodingProfileLevelRequest) GetArg1() int32 {
 	if x != nil {
 		return x.Arg1
 	}
 	return 0
 }
 
-func (x *OnInfoListenerOnInfoEvent) GetArg2() int64 {
-	if x != nil {
-		return x.Arg2
-	}
-	return 0
-}
-
-type OnInfoListenerEvent struct {
-	state         protoimpl.MessageState     `protogen:"open.v1"`
-	OnInfo        *OnInfoListenerOnInfoEvent `protobuf:"bytes,1,opt,name=on_info,json=onInfo,proto3,oneof" json:"on_info,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OnInfoListenerEvent) Reset() {
-	*x = OnInfoListenerEvent{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[48]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OnInfoListenerEvent) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OnInfoListenerEvent) ProtoMessage() {}
-
-func (x *OnInfoListenerEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[48]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OnInfoListenerEvent.ProtoReflect.Descriptor instead.
-func (*OnInfoListenerEvent) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{48}
-}
-
-func (x *OnInfoListenerEvent) GetOnInfo() *OnInfoListenerOnInfoEvent {
-	if x != nil {
-		return x.OnInfo
-	}
-	return nil
-}
-
-type SubscribeOnInfoListenerRequest struct {
+type SetVideoEncodingProfileLevelResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SubscribeOnInfoListenerRequest) Reset() {
-	*x = SubscribeOnInfoListenerRequest{}
-	mi := &file_proto_recorder_recorder_proto_msgTypes[49]
+func (x *SetVideoEncodingProfileLevelResponse) Reset() {
+	*x = SetVideoEncodingProfileLevelResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SubscribeOnInfoListenerRequest) String() string {
+func (x *SetVideoEncodingProfileLevelResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SubscribeOnInfoListenerRequest) ProtoMessage() {}
+func (*SetVideoEncodingProfileLevelResponse) ProtoMessage() {}
 
-func (x *SubscribeOnInfoListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_recorder_recorder_proto_msgTypes[49]
+func (x *SetVideoEncodingProfileLevelResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2010,120 +2770,327 @@ func (x *SubscribeOnInfoListenerRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SubscribeOnInfoListenerRequest.ProtoReflect.Descriptor instead.
-func (*SubscribeOnInfoListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{49}
+// Deprecated: Use SetVideoEncodingProfileLevelResponse.ProtoReflect.Descriptor instead.
+func (*SetVideoEncodingProfileLevelResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{67}
+}
+
+type SetVideoProfileRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetVideoProfileRequest) Reset() {
+	*x = SetVideoProfileRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[68]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetVideoProfileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetVideoProfileRequest) ProtoMessage() {}
+
+func (x *SetVideoProfileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[68]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetVideoProfileRequest.ProtoReflect.Descriptor instead.
+func (*SetVideoProfileRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{68}
+}
+
+func (x *SetVideoProfileRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetVideoProfileResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetVideoProfileResponse) Reset() {
+	*x = SetVideoProfileResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[69]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetVideoProfileResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetVideoProfileResponse) ProtoMessage() {}
+
+func (x *SetVideoProfileResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[69]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetVideoProfileResponse.ProtoReflect.Descriptor instead.
+func (*SetVideoProfileResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{69}
+}
+
+type UnregisterAudioRecordingCallbackRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UnregisterAudioRecordingCallbackRequest) Reset() {
+	*x = UnregisterAudioRecordingCallbackRequest{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[70]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UnregisterAudioRecordingCallbackRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnregisterAudioRecordingCallbackRequest) ProtoMessage() {}
+
+func (x *UnregisterAudioRecordingCallbackRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[70]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnregisterAudioRecordingCallbackRequest.ProtoReflect.Descriptor instead.
+func (*UnregisterAudioRecordingCallbackRequest) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{70}
+}
+
+func (x *UnregisterAudioRecordingCallbackRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type UnregisterAudioRecordingCallbackResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UnregisterAudioRecordingCallbackResponse) Reset() {
+	*x = UnregisterAudioRecordingCallbackResponse{}
+	mi := &file_proto_recorder_recorder_proto_msgTypes[71]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UnregisterAudioRecordingCallbackResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnregisterAudioRecordingCallbackResponse) ProtoMessage() {}
+
+func (x *UnregisterAudioRecordingCallbackResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_recorder_recorder_proto_msgTypes[71]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnregisterAudioRecordingCallbackResponse.ProtoReflect.Descriptor instead.
+func (*UnregisterAudioRecordingCallbackResponse) Descriptor() ([]byte, []int) {
+	return file_proto_recorder_recorder_proto_rawDescGZIP(), []int{71}
 }
 
 var File_proto_recorder_recorder_proto protoreflect.FileDescriptor
 
 const file_proto_recorder_recorder_proto_rawDesc = "" +
 	"\n" +
-	"\x1dproto/recorder/recorder.proto\x12\brecorder\":\n" +
-	"\x15SetAudioSourceRequest\x12!\n" +
-	"\faudio_source\x18\x01 \x01(\x05R\vaudioSource\"\x18\n" +
-	"\x16SetAudioSourceResponse\":\n" +
-	"\x15SetVideoSourceRequest\x12!\n" +
-	"\fvideo_source\x18\x01 \x01(\x05R\vvideoSource\"\x18\n" +
-	"\x16SetVideoSourceResponse\"=\n" +
-	"\x16SetOutputFormatRequest\x12#\n" +
-	"\routput_format\x18\x01 \x01(\x05R\foutputFormat\"\x19\n" +
-	"\x17SetOutputFormatResponse\"=\n" +
-	"\x16SetAudioEncoderRequest\x12#\n" +
-	"\raudio_encoder\x18\x01 \x01(\x05R\faudioEncoder\"\x19\n" +
-	"\x17SetAudioEncoderResponse\"=\n" +
-	"\x16SetVideoEncoderRequest\x12#\n" +
-	"\rvideo_encoder\x18\x01 \x01(\x05R\fvideoEncoder\"\x19\n" +
-	"\x17SetVideoEncoderResponse\"*\n" +
-	"\x14SetOutputFileRequest\x12\x12\n" +
-	"\x04path\x18\x01 \x01(\tR\x04path\"\x17\n" +
-	"\x15SetOutputFileResponse\"C\n" +
-	"\x13SetVideoSizeRequest\x12\x14\n" +
-	"\x05width\x18\x01 \x01(\x05R\x05width\x12\x16\n" +
-	"\x06height\x18\x02 \x01(\x05R\x06height\"\x16\n" +
-	"\x14SetVideoSizeResponse\".\n" +
-	"\x18SetVideoFrameRateRequest\x12\x12\n" +
-	"\x04rate\x18\x01 \x01(\x05R\x04rate\"\x1b\n" +
-	"\x19SetVideoFrameRateResponse\"B\n" +
-	"\x1bSetAudioSamplingRateRequest\x12#\n" +
-	"\rsampling_rate\x18\x01 \x01(\x05R\fsamplingRate\"\x1e\n" +
-	"\x1cSetAudioSamplingRateResponse\"<\n" +
-	"\x17SetAudioChannelsRequest\x12!\n" +
-	"\fnum_channels\x18\x01 \x01(\x05R\vnumChannels\"\x1a\n" +
-	"\x18SetAudioChannelsResponse\"A\n" +
-	"\x17SetMaxDurationMsRequest\x12&\n" +
-	"\x0fmax_duration_ms\x18\x01 \x01(\x05R\rmaxDurationMs\"\x1a\n" +
-	"\x18SetMaxDurationMsResponse\";\n" +
-	"\x15SetMaxFileSizeRequest\x12\"\n" +
-	"\rmax_file_size\x18\x01 \x01(\x03R\vmaxFileSize\"\x18\n" +
-	"\x16SetMaxFileSizeResponse\"\x10\n" +
+	"\x1dproto/recorder/recorder.proto\x12\brecorder\"\x1d\n" +
+	"\x1bGetActiveMicrophonesRequest\"6\n" +
+	"\x1cGetActiveMicrophonesResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"(\n" +
+	"&GetActiveRecordingConfigurationRequest\"A\n" +
+	"'GetActiveRecordingConfigurationResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x18\n" +
+	"\x16GetLogSessionIdRequest\"1\n" +
+	"\x17GetLogSessionIdResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x13\n" +
+	"\x11GetMetricsRequest\",\n" +
+	"\x12GetMetricsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x1b\n" +
+	"\x19GetPreferredDeviceRequest\"4\n" +
+	"\x1aGetPreferredDeviceResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x18\n" +
+	"\x16GetRoutedDeviceRequest\"1\n" +
+	"\x17GetRoutedDeviceResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x19\n" +
+	"\x17GetRoutedDevicesRequest\"2\n" +
+	"\x18GetRoutedDevicesResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x10\n" +
 	"\x0ePrepareRequest\"\x11\n" +
-	"\x0fPrepareResponse\"\x0e\n" +
-	"\fStartRequest\"\x0f\n" +
-	"\rStartResponse\"\x0e\n" +
-	"\fPauseRequest\"\x0f\n" +
-	"\rPauseResponse\"\x0f\n" +
-	"\rResumeRequest\"\x10\n" +
-	"\x0eResumeResponse\"\r\n" +
-	"\vStopRequest\"\x0e\n" +
-	"\fStopResponse\"\x0e\n" +
+	"\x0fPrepareResponse\"O\n" +
+	"%RegisterAudioRecordingCallbackRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"(\n" +
+	"&RegisterAudioRecordingCallbackResponse\";\n" +
+	"%RemoveOnRoutingChangedListenerRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"(\n" +
+	"&RemoveOnRoutingChangedListenerResponse\"\x0e\n" +
 	"\fResetRequest\"\x0f\n" +
-	"\rResetResponse\"\x10\n" +
-	"\x0eReleaseRequest\"\x11\n" +
-	"\x0fReleaseResponse\"\x18\n" +
-	"\x16GetMaxAmplitudeRequest\"1\n" +
-	"\x17GetMaxAmplitudeResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x05R\x06result\"7\n" +
-	"\x19SetOnErrorListenerRequest\x12\x1a\n" +
-	"\blistener\x18\x01 \x01(\x03R\blistener\"\x1c\n" +
-	"\x1aSetOnErrorListenerResponse\"6\n" +
-	"\x18SetOnInfoListenerRequest\x12\x1a\n" +
-	"\blistener\x18\x01 \x01(\x03R\blistener\"\x1b\n" +
-	"\x19SetOnInfoListenerResponse\"Y\n" +
-	"\x1bOnErrorListenerOnErrorEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
-	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"j\n" +
-	"\x14OnErrorListenerEvent\x12E\n" +
-	"\bon_error\x18\x01 \x01(\v2%.recorder.OnErrorListenerOnErrorEventH\x00R\aonError\x88\x01\x01B\v\n" +
-	"\t_on_error\"!\n" +
-	"\x1fSubscribeOnErrorListenerRequest\"W\n" +
-	"\x19OnInfoListenerOnInfoEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
-	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"d\n" +
-	"\x13OnInfoListenerEvent\x12A\n" +
-	"\aon_info\x18\x01 \x01(\v2#.recorder.OnInfoListenerOnInfoEventH\x00R\x06onInfo\x88\x01\x01B\n" +
+	"\rResetResponse\"-\n" +
+	"\x17SetAudioChannelsRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"\x1a\n" +
+	"\x18SetAudioChannelsResponse\"4\n" +
+	"\x1eSetAudioEncodingBitRateRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"!\n" +
+	"\x1fSetAudioEncodingBitRateResponse\",\n" +
+	"\x16SetAudioProfileRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x19\n" +
+	"\x17SetAudioProfileResponse\"1\n" +
+	"\x1bSetAudioSamplingRateRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"\x1e\n" +
+	"\x1cSetAudioSamplingRateResponse\"+\n" +
+	"\x15SetCaptureRateRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x01R\x04arg0\"\x18\n" +
+	"\x16SetCaptureRateResponse\",\n" +
+	"\x16SetInputSurfaceRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x19\n" +
+	"\x17SetInputSurfaceResponse\"<\n" +
+	"\x12SetLocationRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x02R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x02R\x04arg1\"\x15\n" +
+	"\x13SetLocationResponse\",\n" +
+	"\x16SetLogSessionIdRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x19\n" +
+	"\x17SetLogSessionIdResponse\"/\n" +
+	"\x19SetNextOutputFile1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1c\n" +
+	"\x1aSetNextOutputFile1Response\"1\n" +
+	"\x1bSetNextOutputFile1_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1e\n" +
+	"\x1cSetNextOutputFile1_1Response\"/\n" +
+	"\x19SetOnErrorListenerRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1c\n" +
+	"\x1aSetOnErrorListenerResponse\".\n" +
+	"\x18SetOnInfoListenerRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1b\n" +
+	"\x19SetOnInfoListenerResponse\"/\n" +
+	"\x19SetOrientationHintRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"\x1c\n" +
+	"\x1aSetOrientationHintResponse\"+\n" +
+	"\x15SetOutputFile1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x18\n" +
+	"\x16SetOutputFile1Response\"-\n" +
+	"\x17SetOutputFile1_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1a\n" +
+	"\x18SetOutputFile1_1Response\"-\n" +
+	"\x17SetOutputFile1_2Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"\x1a\n" +
+	"\x18SetOutputFile1_2Response\"/\n" +
+	"\x19SetPreferredDeviceRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"4\n" +
+	"\x1aSetPreferredDeviceResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"<\n" +
+	"&SetPreferredMicrophoneDirectionRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"A\n" +
+	"'SetPreferredMicrophoneDirectionResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"A\n" +
+	"+SetPreferredMicrophoneFieldDimensionRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x02R\x04arg0\"F\n" +
+	",SetPreferredMicrophoneFieldDimensionResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\".\n" +
+	"\x18SetPreviewDisplayRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1b\n" +
+	"\x19SetPreviewDisplayResponse\"'\n" +
+	"\x11SetProfileRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x14\n" +
+	"\x12SetProfileResponse\"4\n" +
+	"\x1eSetVideoEncodingBitRateRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"!\n" +
+	"\x1fSetVideoEncodingBitRateResponse\"M\n" +
+	"#SetVideoEncodingProfileLevelRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\"&\n" +
+	"$SetVideoEncodingProfileLevelResponse\",\n" +
+	"\x16SetVideoProfileRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x19\n" +
+	"\x17SetVideoProfileResponse\"=\n" +
+	"'UnregisterAudioRecordingCallbackRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"*\n" +
+	"(UnregisterAudioRecordingCallbackResponse2\x8b\x1c\n" +
+	"\x14MediaRecorderService\x12e\n" +
+	"\x14GetActiveMicrophones\x12%.recorder.GetActiveMicrophonesRequest\x1a&.recorder.GetActiveMicrophonesResponse\x12\x86\x01\n" +
+	"\x1fGetActiveRecordingConfiguration\x120.recorder.GetActiveRecordingConfigurationRequest\x1a1.recorder.GetActiveRecordingConfigurationResponse\x12V\n" +
+	"\x0fGetLogSessionId\x12 .recorder.GetLogSessionIdRequest\x1a!.recorder.GetLogSessionIdResponse\x12G\n" +
 	"\n" +
-	"\b_on_info\" \n" +
-	"\x1eSubscribeOnInfoListenerRequest2\xed\r\n" +
-	"\x0fRecorderService\x12S\n" +
-	"\x0eSetAudioSource\x12\x1f.recorder.SetAudioSourceRequest\x1a .recorder.SetAudioSourceResponse\x12S\n" +
-	"\x0eSetVideoSource\x12\x1f.recorder.SetVideoSourceRequest\x1a .recorder.SetVideoSourceResponse\x12V\n" +
-	"\x0fSetOutputFormat\x12 .recorder.SetOutputFormatRequest\x1a!.recorder.SetOutputFormatResponse\x12V\n" +
-	"\x0fSetAudioEncoder\x12 .recorder.SetAudioEncoderRequest\x1a!.recorder.SetAudioEncoderResponse\x12V\n" +
-	"\x0fSetVideoEncoder\x12 .recorder.SetVideoEncoderRequest\x1a!.recorder.SetVideoEncoderResponse\x12P\n" +
-	"\rSetOutputFile\x12\x1e.recorder.SetOutputFileRequest\x1a\x1f.recorder.SetOutputFileResponse\x12M\n" +
-	"\fSetVideoSize\x12\x1d.recorder.SetVideoSizeRequest\x1a\x1e.recorder.SetVideoSizeResponse\x12\\\n" +
-	"\x11SetVideoFrameRate\x12\".recorder.SetVideoFrameRateRequest\x1a#.recorder.SetVideoFrameRateResponse\x12e\n" +
-	"\x14SetAudioSamplingRate\x12%.recorder.SetAudioSamplingRateRequest\x1a&.recorder.SetAudioSamplingRateResponse\x12Y\n" +
-	"\x10SetAudioChannels\x12!.recorder.SetAudioChannelsRequest\x1a\".recorder.SetAudioChannelsResponse\x12Y\n" +
-	"\x10SetMaxDurationMs\x12!.recorder.SetMaxDurationMsRequest\x1a\".recorder.SetMaxDurationMsResponse\x12S\n" +
-	"\x0eSetMaxFileSize\x12\x1f.recorder.SetMaxFileSizeRequest\x1a .recorder.SetMaxFileSizeResponse\x12>\n" +
-	"\aPrepare\x12\x18.recorder.PrepareRequest\x1a\x19.recorder.PrepareResponse\x128\n" +
-	"\x05Start\x12\x16.recorder.StartRequest\x1a\x17.recorder.StartResponse\x128\n" +
-	"\x05Pause\x12\x16.recorder.PauseRequest\x1a\x17.recorder.PauseResponse\x12;\n" +
-	"\x06Resume\x12\x17.recorder.ResumeRequest\x1a\x18.recorder.ResumeResponse\x125\n" +
-	"\x04Stop\x12\x15.recorder.StopRequest\x1a\x16.recorder.StopResponse\x128\n" +
-	"\x05Reset\x12\x16.recorder.ResetRequest\x1a\x17.recorder.ResetResponse\x12>\n" +
-	"\aRelease\x12\x18.recorder.ReleaseRequest\x1a\x19.recorder.ReleaseResponse\x12V\n" +
-	"\x0fGetMaxAmplitude\x12 .recorder.GetMaxAmplitudeRequest\x1a!.recorder.GetMaxAmplitudeResponse\x12_\n" +
+	"GetMetrics\x12\x1b.recorder.GetMetricsRequest\x1a\x1c.recorder.GetMetricsResponse\x12_\n" +
+	"\x12GetPreferredDevice\x12#.recorder.GetPreferredDeviceRequest\x1a$.recorder.GetPreferredDeviceResponse\x12V\n" +
+	"\x0fGetRoutedDevice\x12 .recorder.GetRoutedDeviceRequest\x1a!.recorder.GetRoutedDeviceResponse\x12Y\n" +
+	"\x10GetRoutedDevices\x12!.recorder.GetRoutedDevicesRequest\x1a\".recorder.GetRoutedDevicesResponse\x12>\n" +
+	"\aPrepare\x12\x18.recorder.PrepareRequest\x1a\x19.recorder.PrepareResponse\x12\x83\x01\n" +
+	"\x1eRegisterAudioRecordingCallback\x12/.recorder.RegisterAudioRecordingCallbackRequest\x1a0.recorder.RegisterAudioRecordingCallbackResponse\x12\x83\x01\n" +
+	"\x1eRemoveOnRoutingChangedListener\x12/.recorder.RemoveOnRoutingChangedListenerRequest\x1a0.recorder.RemoveOnRoutingChangedListenerResponse\x128\n" +
+	"\x05Reset\x12\x16.recorder.ResetRequest\x1a\x17.recorder.ResetResponse\x12Y\n" +
+	"\x10SetAudioChannels\x12!.recorder.SetAudioChannelsRequest\x1a\".recorder.SetAudioChannelsResponse\x12n\n" +
+	"\x17SetAudioEncodingBitRate\x12(.recorder.SetAudioEncodingBitRateRequest\x1a).recorder.SetAudioEncodingBitRateResponse\x12V\n" +
+	"\x0fSetAudioProfile\x12 .recorder.SetAudioProfileRequest\x1a!.recorder.SetAudioProfileResponse\x12e\n" +
+	"\x14SetAudioSamplingRate\x12%.recorder.SetAudioSamplingRateRequest\x1a&.recorder.SetAudioSamplingRateResponse\x12S\n" +
+	"\x0eSetCaptureRate\x12\x1f.recorder.SetCaptureRateRequest\x1a .recorder.SetCaptureRateResponse\x12V\n" +
+	"\x0fSetInputSurface\x12 .recorder.SetInputSurfaceRequest\x1a!.recorder.SetInputSurfaceResponse\x12J\n" +
+	"\vSetLocation\x12\x1c.recorder.SetLocationRequest\x1a\x1d.recorder.SetLocationResponse\x12V\n" +
+	"\x0fSetLogSessionId\x12 .recorder.SetLogSessionIdRequest\x1a!.recorder.SetLogSessionIdResponse\x12_\n" +
+	"\x12SetNextOutputFile1\x12#.recorder.SetNextOutputFile1Request\x1a$.recorder.SetNextOutputFile1Response\x12e\n" +
+	"\x14SetNextOutputFile1_1\x12%.recorder.SetNextOutputFile1_1Request\x1a&.recorder.SetNextOutputFile1_1Response\x12_\n" +
 	"\x12SetOnErrorListener\x12#.recorder.SetOnErrorListenerRequest\x1a$.recorder.SetOnErrorListenerResponse\x12\\\n" +
-	"\x11SetOnInfoListener\x12\".recorder.SetOnInfoListenerRequest\x1a#.recorder.SetOnInfoListenerResponse2\x81\x01\n" +
-	"\x16OnErrorListenerService\x12g\n" +
-	"\x18SubscribeOnErrorListener\x12).recorder.SubscribeOnErrorListenerRequest\x1a\x1e.recorder.OnErrorListenerEvent0\x012}\n" +
-	"\x15OnInfoListenerService\x12d\n" +
-	"\x17SubscribeOnInfoListener\x12(.recorder.SubscribeOnInfoListenerRequest\x1a\x1d.recorder.OnInfoListenerEvent0\x01B+Z)github.com/xaionaro-go/jni/proto/recorderb\x06proto3"
+	"\x11SetOnInfoListener\x12\".recorder.SetOnInfoListenerRequest\x1a#.recorder.SetOnInfoListenerResponse\x12_\n" +
+	"\x12SetOrientationHint\x12#.recorder.SetOrientationHintRequest\x1a$.recorder.SetOrientationHintResponse\x12S\n" +
+	"\x0eSetOutputFile1\x12\x1f.recorder.SetOutputFile1Request\x1a .recorder.SetOutputFile1Response\x12Y\n" +
+	"\x10SetOutputFile1_1\x12!.recorder.SetOutputFile1_1Request\x1a\".recorder.SetOutputFile1_1Response\x12Y\n" +
+	"\x10SetOutputFile1_2\x12!.recorder.SetOutputFile1_2Request\x1a\".recorder.SetOutputFile1_2Response\x12_\n" +
+	"\x12SetPreferredDevice\x12#.recorder.SetPreferredDeviceRequest\x1a$.recorder.SetPreferredDeviceResponse\x12\x86\x01\n" +
+	"\x1fSetPreferredMicrophoneDirection\x120.recorder.SetPreferredMicrophoneDirectionRequest\x1a1.recorder.SetPreferredMicrophoneDirectionResponse\x12\x95\x01\n" +
+	"$SetPreferredMicrophoneFieldDimension\x125.recorder.SetPreferredMicrophoneFieldDimensionRequest\x1a6.recorder.SetPreferredMicrophoneFieldDimensionResponse\x12\\\n" +
+	"\x11SetPreviewDisplay\x12\".recorder.SetPreviewDisplayRequest\x1a#.recorder.SetPreviewDisplayResponse\x12G\n" +
+	"\n" +
+	"SetProfile\x12\x1b.recorder.SetProfileRequest\x1a\x1c.recorder.SetProfileResponse\x12n\n" +
+	"\x17SetVideoEncodingBitRate\x12(.recorder.SetVideoEncodingBitRateRequest\x1a).recorder.SetVideoEncodingBitRateResponse\x12}\n" +
+	"\x1cSetVideoEncodingProfileLevel\x12-.recorder.SetVideoEncodingProfileLevelRequest\x1a..recorder.SetVideoEncodingProfileLevelResponse\x12V\n" +
+	"\x0fSetVideoProfile\x12 .recorder.SetVideoProfileRequest\x1a!.recorder.SetVideoProfileResponse\x12\x89\x01\n" +
+	" UnregisterAudioRecordingCallback\x121.recorder.UnregisterAudioRecordingCallbackRequest\x1a2.recorder.UnregisterAudioRecordingCallbackResponseB+Z)github.com/xaionaro-go/jni/proto/recorderb\x06proto3"
 
 var (
 	file_proto_recorder_recorder_proto_rawDescOnce sync.Once
@@ -2137,115 +3104,159 @@ func file_proto_recorder_recorder_proto_rawDescGZIP() []byte {
 	return file_proto_recorder_recorder_proto_rawDescData
 }
 
-var file_proto_recorder_recorder_proto_msgTypes = make([]protoimpl.MessageInfo, 50)
+var file_proto_recorder_recorder_proto_msgTypes = make([]protoimpl.MessageInfo, 72)
 var file_proto_recorder_recorder_proto_goTypes = []any{
-	(*SetAudioSourceRequest)(nil),           // 0: recorder.SetAudioSourceRequest
-	(*SetAudioSourceResponse)(nil),          // 1: recorder.SetAudioSourceResponse
-	(*SetVideoSourceRequest)(nil),           // 2: recorder.SetVideoSourceRequest
-	(*SetVideoSourceResponse)(nil),          // 3: recorder.SetVideoSourceResponse
-	(*SetOutputFormatRequest)(nil),          // 4: recorder.SetOutputFormatRequest
-	(*SetOutputFormatResponse)(nil),         // 5: recorder.SetOutputFormatResponse
-	(*SetAudioEncoderRequest)(nil),          // 6: recorder.SetAudioEncoderRequest
-	(*SetAudioEncoderResponse)(nil),         // 7: recorder.SetAudioEncoderResponse
-	(*SetVideoEncoderRequest)(nil),          // 8: recorder.SetVideoEncoderRequest
-	(*SetVideoEncoderResponse)(nil),         // 9: recorder.SetVideoEncoderResponse
-	(*SetOutputFileRequest)(nil),            // 10: recorder.SetOutputFileRequest
-	(*SetOutputFileResponse)(nil),           // 11: recorder.SetOutputFileResponse
-	(*SetVideoSizeRequest)(nil),             // 12: recorder.SetVideoSizeRequest
-	(*SetVideoSizeResponse)(nil),            // 13: recorder.SetVideoSizeResponse
-	(*SetVideoFrameRateRequest)(nil),        // 14: recorder.SetVideoFrameRateRequest
-	(*SetVideoFrameRateResponse)(nil),       // 15: recorder.SetVideoFrameRateResponse
-	(*SetAudioSamplingRateRequest)(nil),     // 16: recorder.SetAudioSamplingRateRequest
-	(*SetAudioSamplingRateResponse)(nil),    // 17: recorder.SetAudioSamplingRateResponse
-	(*SetAudioChannelsRequest)(nil),         // 18: recorder.SetAudioChannelsRequest
-	(*SetAudioChannelsResponse)(nil),        // 19: recorder.SetAudioChannelsResponse
-	(*SetMaxDurationMsRequest)(nil),         // 20: recorder.SetMaxDurationMsRequest
-	(*SetMaxDurationMsResponse)(nil),        // 21: recorder.SetMaxDurationMsResponse
-	(*SetMaxFileSizeRequest)(nil),           // 22: recorder.SetMaxFileSizeRequest
-	(*SetMaxFileSizeResponse)(nil),          // 23: recorder.SetMaxFileSizeResponse
-	(*PrepareRequest)(nil),                  // 24: recorder.PrepareRequest
-	(*PrepareResponse)(nil),                 // 25: recorder.PrepareResponse
-	(*StartRequest)(nil),                    // 26: recorder.StartRequest
-	(*StartResponse)(nil),                   // 27: recorder.StartResponse
-	(*PauseRequest)(nil),                    // 28: recorder.PauseRequest
-	(*PauseResponse)(nil),                   // 29: recorder.PauseResponse
-	(*ResumeRequest)(nil),                   // 30: recorder.ResumeRequest
-	(*ResumeResponse)(nil),                  // 31: recorder.ResumeResponse
-	(*StopRequest)(nil),                     // 32: recorder.StopRequest
-	(*StopResponse)(nil),                    // 33: recorder.StopResponse
-	(*ResetRequest)(nil),                    // 34: recorder.ResetRequest
-	(*ResetResponse)(nil),                   // 35: recorder.ResetResponse
-	(*ReleaseRequest)(nil),                  // 36: recorder.ReleaseRequest
-	(*ReleaseResponse)(nil),                 // 37: recorder.ReleaseResponse
-	(*GetMaxAmplitudeRequest)(nil),          // 38: recorder.GetMaxAmplitudeRequest
-	(*GetMaxAmplitudeResponse)(nil),         // 39: recorder.GetMaxAmplitudeResponse
-	(*SetOnErrorListenerRequest)(nil),       // 40: recorder.SetOnErrorListenerRequest
-	(*SetOnErrorListenerResponse)(nil),      // 41: recorder.SetOnErrorListenerResponse
-	(*SetOnInfoListenerRequest)(nil),        // 42: recorder.SetOnInfoListenerRequest
-	(*SetOnInfoListenerResponse)(nil),       // 43: recorder.SetOnInfoListenerResponse
-	(*OnErrorListenerOnErrorEvent)(nil),     // 44: recorder.OnErrorListenerOnErrorEvent
-	(*OnErrorListenerEvent)(nil),            // 45: recorder.OnErrorListenerEvent
-	(*SubscribeOnErrorListenerRequest)(nil), // 46: recorder.SubscribeOnErrorListenerRequest
-	(*OnInfoListenerOnInfoEvent)(nil),       // 47: recorder.OnInfoListenerOnInfoEvent
-	(*OnInfoListenerEvent)(nil),             // 48: recorder.OnInfoListenerEvent
-	(*SubscribeOnInfoListenerRequest)(nil),  // 49: recorder.SubscribeOnInfoListenerRequest
+	(*GetActiveMicrophonesRequest)(nil),                  // 0: recorder.GetActiveMicrophonesRequest
+	(*GetActiveMicrophonesResponse)(nil),                 // 1: recorder.GetActiveMicrophonesResponse
+	(*GetActiveRecordingConfigurationRequest)(nil),       // 2: recorder.GetActiveRecordingConfigurationRequest
+	(*GetActiveRecordingConfigurationResponse)(nil),      // 3: recorder.GetActiveRecordingConfigurationResponse
+	(*GetLogSessionIdRequest)(nil),                       // 4: recorder.GetLogSessionIdRequest
+	(*GetLogSessionIdResponse)(nil),                      // 5: recorder.GetLogSessionIdResponse
+	(*GetMetricsRequest)(nil),                            // 6: recorder.GetMetricsRequest
+	(*GetMetricsResponse)(nil),                           // 7: recorder.GetMetricsResponse
+	(*GetPreferredDeviceRequest)(nil),                    // 8: recorder.GetPreferredDeviceRequest
+	(*GetPreferredDeviceResponse)(nil),                   // 9: recorder.GetPreferredDeviceResponse
+	(*GetRoutedDeviceRequest)(nil),                       // 10: recorder.GetRoutedDeviceRequest
+	(*GetRoutedDeviceResponse)(nil),                      // 11: recorder.GetRoutedDeviceResponse
+	(*GetRoutedDevicesRequest)(nil),                      // 12: recorder.GetRoutedDevicesRequest
+	(*GetRoutedDevicesResponse)(nil),                     // 13: recorder.GetRoutedDevicesResponse
+	(*PrepareRequest)(nil),                               // 14: recorder.PrepareRequest
+	(*PrepareResponse)(nil),                              // 15: recorder.PrepareResponse
+	(*RegisterAudioRecordingCallbackRequest)(nil),        // 16: recorder.RegisterAudioRecordingCallbackRequest
+	(*RegisterAudioRecordingCallbackResponse)(nil),       // 17: recorder.RegisterAudioRecordingCallbackResponse
+	(*RemoveOnRoutingChangedListenerRequest)(nil),        // 18: recorder.RemoveOnRoutingChangedListenerRequest
+	(*RemoveOnRoutingChangedListenerResponse)(nil),       // 19: recorder.RemoveOnRoutingChangedListenerResponse
+	(*ResetRequest)(nil),                                 // 20: recorder.ResetRequest
+	(*ResetResponse)(nil),                                // 21: recorder.ResetResponse
+	(*SetAudioChannelsRequest)(nil),                      // 22: recorder.SetAudioChannelsRequest
+	(*SetAudioChannelsResponse)(nil),                     // 23: recorder.SetAudioChannelsResponse
+	(*SetAudioEncodingBitRateRequest)(nil),               // 24: recorder.SetAudioEncodingBitRateRequest
+	(*SetAudioEncodingBitRateResponse)(nil),              // 25: recorder.SetAudioEncodingBitRateResponse
+	(*SetAudioProfileRequest)(nil),                       // 26: recorder.SetAudioProfileRequest
+	(*SetAudioProfileResponse)(nil),                      // 27: recorder.SetAudioProfileResponse
+	(*SetAudioSamplingRateRequest)(nil),                  // 28: recorder.SetAudioSamplingRateRequest
+	(*SetAudioSamplingRateResponse)(nil),                 // 29: recorder.SetAudioSamplingRateResponse
+	(*SetCaptureRateRequest)(nil),                        // 30: recorder.SetCaptureRateRequest
+	(*SetCaptureRateResponse)(nil),                       // 31: recorder.SetCaptureRateResponse
+	(*SetInputSurfaceRequest)(nil),                       // 32: recorder.SetInputSurfaceRequest
+	(*SetInputSurfaceResponse)(nil),                      // 33: recorder.SetInputSurfaceResponse
+	(*SetLocationRequest)(nil),                           // 34: recorder.SetLocationRequest
+	(*SetLocationResponse)(nil),                          // 35: recorder.SetLocationResponse
+	(*SetLogSessionIdRequest)(nil),                       // 36: recorder.SetLogSessionIdRequest
+	(*SetLogSessionIdResponse)(nil),                      // 37: recorder.SetLogSessionIdResponse
+	(*SetNextOutputFile1Request)(nil),                    // 38: recorder.SetNextOutputFile1Request
+	(*SetNextOutputFile1Response)(nil),                   // 39: recorder.SetNextOutputFile1Response
+	(*SetNextOutputFile1_1Request)(nil),                  // 40: recorder.SetNextOutputFile1_1Request
+	(*SetNextOutputFile1_1Response)(nil),                 // 41: recorder.SetNextOutputFile1_1Response
+	(*SetOnErrorListenerRequest)(nil),                    // 42: recorder.SetOnErrorListenerRequest
+	(*SetOnErrorListenerResponse)(nil),                   // 43: recorder.SetOnErrorListenerResponse
+	(*SetOnInfoListenerRequest)(nil),                     // 44: recorder.SetOnInfoListenerRequest
+	(*SetOnInfoListenerResponse)(nil),                    // 45: recorder.SetOnInfoListenerResponse
+	(*SetOrientationHintRequest)(nil),                    // 46: recorder.SetOrientationHintRequest
+	(*SetOrientationHintResponse)(nil),                   // 47: recorder.SetOrientationHintResponse
+	(*SetOutputFile1Request)(nil),                        // 48: recorder.SetOutputFile1Request
+	(*SetOutputFile1Response)(nil),                       // 49: recorder.SetOutputFile1Response
+	(*SetOutputFile1_1Request)(nil),                      // 50: recorder.SetOutputFile1_1Request
+	(*SetOutputFile1_1Response)(nil),                     // 51: recorder.SetOutputFile1_1Response
+	(*SetOutputFile1_2Request)(nil),                      // 52: recorder.SetOutputFile1_2Request
+	(*SetOutputFile1_2Response)(nil),                     // 53: recorder.SetOutputFile1_2Response
+	(*SetPreferredDeviceRequest)(nil),                    // 54: recorder.SetPreferredDeviceRequest
+	(*SetPreferredDeviceResponse)(nil),                   // 55: recorder.SetPreferredDeviceResponse
+	(*SetPreferredMicrophoneDirectionRequest)(nil),       // 56: recorder.SetPreferredMicrophoneDirectionRequest
+	(*SetPreferredMicrophoneDirectionResponse)(nil),      // 57: recorder.SetPreferredMicrophoneDirectionResponse
+	(*SetPreferredMicrophoneFieldDimensionRequest)(nil),  // 58: recorder.SetPreferredMicrophoneFieldDimensionRequest
+	(*SetPreferredMicrophoneFieldDimensionResponse)(nil), // 59: recorder.SetPreferredMicrophoneFieldDimensionResponse
+	(*SetPreviewDisplayRequest)(nil),                     // 60: recorder.SetPreviewDisplayRequest
+	(*SetPreviewDisplayResponse)(nil),                    // 61: recorder.SetPreviewDisplayResponse
+	(*SetProfileRequest)(nil),                            // 62: recorder.SetProfileRequest
+	(*SetProfileResponse)(nil),                           // 63: recorder.SetProfileResponse
+	(*SetVideoEncodingBitRateRequest)(nil),               // 64: recorder.SetVideoEncodingBitRateRequest
+	(*SetVideoEncodingBitRateResponse)(nil),              // 65: recorder.SetVideoEncodingBitRateResponse
+	(*SetVideoEncodingProfileLevelRequest)(nil),          // 66: recorder.SetVideoEncodingProfileLevelRequest
+	(*SetVideoEncodingProfileLevelResponse)(nil),         // 67: recorder.SetVideoEncodingProfileLevelResponse
+	(*SetVideoProfileRequest)(nil),                       // 68: recorder.SetVideoProfileRequest
+	(*SetVideoProfileResponse)(nil),                      // 69: recorder.SetVideoProfileResponse
+	(*UnregisterAudioRecordingCallbackRequest)(nil),      // 70: recorder.UnregisterAudioRecordingCallbackRequest
+	(*UnregisterAudioRecordingCallbackResponse)(nil),     // 71: recorder.UnregisterAudioRecordingCallbackResponse
 }
 var file_proto_recorder_recorder_proto_depIdxs = []int32{
-	44, // 0: recorder.OnErrorListenerEvent.on_error:type_name -> recorder.OnErrorListenerOnErrorEvent
-	47, // 1: recorder.OnInfoListenerEvent.on_info:type_name -> recorder.OnInfoListenerOnInfoEvent
-	0,  // 2: recorder.RecorderService.SetAudioSource:input_type -> recorder.SetAudioSourceRequest
-	2,  // 3: recorder.RecorderService.SetVideoSource:input_type -> recorder.SetVideoSourceRequest
-	4,  // 4: recorder.RecorderService.SetOutputFormat:input_type -> recorder.SetOutputFormatRequest
-	6,  // 5: recorder.RecorderService.SetAudioEncoder:input_type -> recorder.SetAudioEncoderRequest
-	8,  // 6: recorder.RecorderService.SetVideoEncoder:input_type -> recorder.SetVideoEncoderRequest
-	10, // 7: recorder.RecorderService.SetOutputFile:input_type -> recorder.SetOutputFileRequest
-	12, // 8: recorder.RecorderService.SetVideoSize:input_type -> recorder.SetVideoSizeRequest
-	14, // 9: recorder.RecorderService.SetVideoFrameRate:input_type -> recorder.SetVideoFrameRateRequest
-	16, // 10: recorder.RecorderService.SetAudioSamplingRate:input_type -> recorder.SetAudioSamplingRateRequest
-	18, // 11: recorder.RecorderService.SetAudioChannels:input_type -> recorder.SetAudioChannelsRequest
-	20, // 12: recorder.RecorderService.SetMaxDurationMs:input_type -> recorder.SetMaxDurationMsRequest
-	22, // 13: recorder.RecorderService.SetMaxFileSize:input_type -> recorder.SetMaxFileSizeRequest
-	24, // 14: recorder.RecorderService.Prepare:input_type -> recorder.PrepareRequest
-	26, // 15: recorder.RecorderService.Start:input_type -> recorder.StartRequest
-	28, // 16: recorder.RecorderService.Pause:input_type -> recorder.PauseRequest
-	30, // 17: recorder.RecorderService.Resume:input_type -> recorder.ResumeRequest
-	32, // 18: recorder.RecorderService.Stop:input_type -> recorder.StopRequest
-	34, // 19: recorder.RecorderService.Reset:input_type -> recorder.ResetRequest
-	36, // 20: recorder.RecorderService.Release:input_type -> recorder.ReleaseRequest
-	38, // 21: recorder.RecorderService.GetMaxAmplitude:input_type -> recorder.GetMaxAmplitudeRequest
-	40, // 22: recorder.RecorderService.SetOnErrorListener:input_type -> recorder.SetOnErrorListenerRequest
-	42, // 23: recorder.RecorderService.SetOnInfoListener:input_type -> recorder.SetOnInfoListenerRequest
-	46, // 24: recorder.OnErrorListenerService.SubscribeOnErrorListener:input_type -> recorder.SubscribeOnErrorListenerRequest
-	49, // 25: recorder.OnInfoListenerService.SubscribeOnInfoListener:input_type -> recorder.SubscribeOnInfoListenerRequest
-	1,  // 26: recorder.RecorderService.SetAudioSource:output_type -> recorder.SetAudioSourceResponse
-	3,  // 27: recorder.RecorderService.SetVideoSource:output_type -> recorder.SetVideoSourceResponse
-	5,  // 28: recorder.RecorderService.SetOutputFormat:output_type -> recorder.SetOutputFormatResponse
-	7,  // 29: recorder.RecorderService.SetAudioEncoder:output_type -> recorder.SetAudioEncoderResponse
-	9,  // 30: recorder.RecorderService.SetVideoEncoder:output_type -> recorder.SetVideoEncoderResponse
-	11, // 31: recorder.RecorderService.SetOutputFile:output_type -> recorder.SetOutputFileResponse
-	13, // 32: recorder.RecorderService.SetVideoSize:output_type -> recorder.SetVideoSizeResponse
-	15, // 33: recorder.RecorderService.SetVideoFrameRate:output_type -> recorder.SetVideoFrameRateResponse
-	17, // 34: recorder.RecorderService.SetAudioSamplingRate:output_type -> recorder.SetAudioSamplingRateResponse
-	19, // 35: recorder.RecorderService.SetAudioChannels:output_type -> recorder.SetAudioChannelsResponse
-	21, // 36: recorder.RecorderService.SetMaxDurationMs:output_type -> recorder.SetMaxDurationMsResponse
-	23, // 37: recorder.RecorderService.SetMaxFileSize:output_type -> recorder.SetMaxFileSizeResponse
-	25, // 38: recorder.RecorderService.Prepare:output_type -> recorder.PrepareResponse
-	27, // 39: recorder.RecorderService.Start:output_type -> recorder.StartResponse
-	29, // 40: recorder.RecorderService.Pause:output_type -> recorder.PauseResponse
-	31, // 41: recorder.RecorderService.Resume:output_type -> recorder.ResumeResponse
-	33, // 42: recorder.RecorderService.Stop:output_type -> recorder.StopResponse
-	35, // 43: recorder.RecorderService.Reset:output_type -> recorder.ResetResponse
-	37, // 44: recorder.RecorderService.Release:output_type -> recorder.ReleaseResponse
-	39, // 45: recorder.RecorderService.GetMaxAmplitude:output_type -> recorder.GetMaxAmplitudeResponse
-	41, // 46: recorder.RecorderService.SetOnErrorListener:output_type -> recorder.SetOnErrorListenerResponse
-	43, // 47: recorder.RecorderService.SetOnInfoListener:output_type -> recorder.SetOnInfoListenerResponse
-	45, // 48: recorder.OnErrorListenerService.SubscribeOnErrorListener:output_type -> recorder.OnErrorListenerEvent
-	48, // 49: recorder.OnInfoListenerService.SubscribeOnInfoListener:output_type -> recorder.OnInfoListenerEvent
-	26, // [26:50] is the sub-list for method output_type
-	2,  // [2:26] is the sub-list for method input_type
-	2,  // [2:2] is the sub-list for extension type_name
-	2,  // [2:2] is the sub-list for extension extendee
-	0,  // [0:2] is the sub-list for field type_name
+	0,  // 0: recorder.MediaRecorderService.GetActiveMicrophones:input_type -> recorder.GetActiveMicrophonesRequest
+	2,  // 1: recorder.MediaRecorderService.GetActiveRecordingConfiguration:input_type -> recorder.GetActiveRecordingConfigurationRequest
+	4,  // 2: recorder.MediaRecorderService.GetLogSessionId:input_type -> recorder.GetLogSessionIdRequest
+	6,  // 3: recorder.MediaRecorderService.GetMetrics:input_type -> recorder.GetMetricsRequest
+	8,  // 4: recorder.MediaRecorderService.GetPreferredDevice:input_type -> recorder.GetPreferredDeviceRequest
+	10, // 5: recorder.MediaRecorderService.GetRoutedDevice:input_type -> recorder.GetRoutedDeviceRequest
+	12, // 6: recorder.MediaRecorderService.GetRoutedDevices:input_type -> recorder.GetRoutedDevicesRequest
+	14, // 7: recorder.MediaRecorderService.Prepare:input_type -> recorder.PrepareRequest
+	16, // 8: recorder.MediaRecorderService.RegisterAudioRecordingCallback:input_type -> recorder.RegisterAudioRecordingCallbackRequest
+	18, // 9: recorder.MediaRecorderService.RemoveOnRoutingChangedListener:input_type -> recorder.RemoveOnRoutingChangedListenerRequest
+	20, // 10: recorder.MediaRecorderService.Reset:input_type -> recorder.ResetRequest
+	22, // 11: recorder.MediaRecorderService.SetAudioChannels:input_type -> recorder.SetAudioChannelsRequest
+	24, // 12: recorder.MediaRecorderService.SetAudioEncodingBitRate:input_type -> recorder.SetAudioEncodingBitRateRequest
+	26, // 13: recorder.MediaRecorderService.SetAudioProfile:input_type -> recorder.SetAudioProfileRequest
+	28, // 14: recorder.MediaRecorderService.SetAudioSamplingRate:input_type -> recorder.SetAudioSamplingRateRequest
+	30, // 15: recorder.MediaRecorderService.SetCaptureRate:input_type -> recorder.SetCaptureRateRequest
+	32, // 16: recorder.MediaRecorderService.SetInputSurface:input_type -> recorder.SetInputSurfaceRequest
+	34, // 17: recorder.MediaRecorderService.SetLocation:input_type -> recorder.SetLocationRequest
+	36, // 18: recorder.MediaRecorderService.SetLogSessionId:input_type -> recorder.SetLogSessionIdRequest
+	38, // 19: recorder.MediaRecorderService.SetNextOutputFile1:input_type -> recorder.SetNextOutputFile1Request
+	40, // 20: recorder.MediaRecorderService.SetNextOutputFile1_1:input_type -> recorder.SetNextOutputFile1_1Request
+	42, // 21: recorder.MediaRecorderService.SetOnErrorListener:input_type -> recorder.SetOnErrorListenerRequest
+	44, // 22: recorder.MediaRecorderService.SetOnInfoListener:input_type -> recorder.SetOnInfoListenerRequest
+	46, // 23: recorder.MediaRecorderService.SetOrientationHint:input_type -> recorder.SetOrientationHintRequest
+	48, // 24: recorder.MediaRecorderService.SetOutputFile1:input_type -> recorder.SetOutputFile1Request
+	50, // 25: recorder.MediaRecorderService.SetOutputFile1_1:input_type -> recorder.SetOutputFile1_1Request
+	52, // 26: recorder.MediaRecorderService.SetOutputFile1_2:input_type -> recorder.SetOutputFile1_2Request
+	54, // 27: recorder.MediaRecorderService.SetPreferredDevice:input_type -> recorder.SetPreferredDeviceRequest
+	56, // 28: recorder.MediaRecorderService.SetPreferredMicrophoneDirection:input_type -> recorder.SetPreferredMicrophoneDirectionRequest
+	58, // 29: recorder.MediaRecorderService.SetPreferredMicrophoneFieldDimension:input_type -> recorder.SetPreferredMicrophoneFieldDimensionRequest
+	60, // 30: recorder.MediaRecorderService.SetPreviewDisplay:input_type -> recorder.SetPreviewDisplayRequest
+	62, // 31: recorder.MediaRecorderService.SetProfile:input_type -> recorder.SetProfileRequest
+	64, // 32: recorder.MediaRecorderService.SetVideoEncodingBitRate:input_type -> recorder.SetVideoEncodingBitRateRequest
+	66, // 33: recorder.MediaRecorderService.SetVideoEncodingProfileLevel:input_type -> recorder.SetVideoEncodingProfileLevelRequest
+	68, // 34: recorder.MediaRecorderService.SetVideoProfile:input_type -> recorder.SetVideoProfileRequest
+	70, // 35: recorder.MediaRecorderService.UnregisterAudioRecordingCallback:input_type -> recorder.UnregisterAudioRecordingCallbackRequest
+	1,  // 36: recorder.MediaRecorderService.GetActiveMicrophones:output_type -> recorder.GetActiveMicrophonesResponse
+	3,  // 37: recorder.MediaRecorderService.GetActiveRecordingConfiguration:output_type -> recorder.GetActiveRecordingConfigurationResponse
+	5,  // 38: recorder.MediaRecorderService.GetLogSessionId:output_type -> recorder.GetLogSessionIdResponse
+	7,  // 39: recorder.MediaRecorderService.GetMetrics:output_type -> recorder.GetMetricsResponse
+	9,  // 40: recorder.MediaRecorderService.GetPreferredDevice:output_type -> recorder.GetPreferredDeviceResponse
+	11, // 41: recorder.MediaRecorderService.GetRoutedDevice:output_type -> recorder.GetRoutedDeviceResponse
+	13, // 42: recorder.MediaRecorderService.GetRoutedDevices:output_type -> recorder.GetRoutedDevicesResponse
+	15, // 43: recorder.MediaRecorderService.Prepare:output_type -> recorder.PrepareResponse
+	17, // 44: recorder.MediaRecorderService.RegisterAudioRecordingCallback:output_type -> recorder.RegisterAudioRecordingCallbackResponse
+	19, // 45: recorder.MediaRecorderService.RemoveOnRoutingChangedListener:output_type -> recorder.RemoveOnRoutingChangedListenerResponse
+	21, // 46: recorder.MediaRecorderService.Reset:output_type -> recorder.ResetResponse
+	23, // 47: recorder.MediaRecorderService.SetAudioChannels:output_type -> recorder.SetAudioChannelsResponse
+	25, // 48: recorder.MediaRecorderService.SetAudioEncodingBitRate:output_type -> recorder.SetAudioEncodingBitRateResponse
+	27, // 49: recorder.MediaRecorderService.SetAudioProfile:output_type -> recorder.SetAudioProfileResponse
+	29, // 50: recorder.MediaRecorderService.SetAudioSamplingRate:output_type -> recorder.SetAudioSamplingRateResponse
+	31, // 51: recorder.MediaRecorderService.SetCaptureRate:output_type -> recorder.SetCaptureRateResponse
+	33, // 52: recorder.MediaRecorderService.SetInputSurface:output_type -> recorder.SetInputSurfaceResponse
+	35, // 53: recorder.MediaRecorderService.SetLocation:output_type -> recorder.SetLocationResponse
+	37, // 54: recorder.MediaRecorderService.SetLogSessionId:output_type -> recorder.SetLogSessionIdResponse
+	39, // 55: recorder.MediaRecorderService.SetNextOutputFile1:output_type -> recorder.SetNextOutputFile1Response
+	41, // 56: recorder.MediaRecorderService.SetNextOutputFile1_1:output_type -> recorder.SetNextOutputFile1_1Response
+	43, // 57: recorder.MediaRecorderService.SetOnErrorListener:output_type -> recorder.SetOnErrorListenerResponse
+	45, // 58: recorder.MediaRecorderService.SetOnInfoListener:output_type -> recorder.SetOnInfoListenerResponse
+	47, // 59: recorder.MediaRecorderService.SetOrientationHint:output_type -> recorder.SetOrientationHintResponse
+	49, // 60: recorder.MediaRecorderService.SetOutputFile1:output_type -> recorder.SetOutputFile1Response
+	51, // 61: recorder.MediaRecorderService.SetOutputFile1_1:output_type -> recorder.SetOutputFile1_1Response
+	53, // 62: recorder.MediaRecorderService.SetOutputFile1_2:output_type -> recorder.SetOutputFile1_2Response
+	55, // 63: recorder.MediaRecorderService.SetPreferredDevice:output_type -> recorder.SetPreferredDeviceResponse
+	57, // 64: recorder.MediaRecorderService.SetPreferredMicrophoneDirection:output_type -> recorder.SetPreferredMicrophoneDirectionResponse
+	59, // 65: recorder.MediaRecorderService.SetPreferredMicrophoneFieldDimension:output_type -> recorder.SetPreferredMicrophoneFieldDimensionResponse
+	61, // 66: recorder.MediaRecorderService.SetPreviewDisplay:output_type -> recorder.SetPreviewDisplayResponse
+	63, // 67: recorder.MediaRecorderService.SetProfile:output_type -> recorder.SetProfileResponse
+	65, // 68: recorder.MediaRecorderService.SetVideoEncodingBitRate:output_type -> recorder.SetVideoEncodingBitRateResponse
+	67, // 69: recorder.MediaRecorderService.SetVideoEncodingProfileLevel:output_type -> recorder.SetVideoEncodingProfileLevelResponse
+	69, // 70: recorder.MediaRecorderService.SetVideoProfile:output_type -> recorder.SetVideoProfileResponse
+	71, // 71: recorder.MediaRecorderService.UnregisterAudioRecordingCallback:output_type -> recorder.UnregisterAudioRecordingCallbackResponse
+	36, // [36:72] is the sub-list for method output_type
+	0,  // [0:36] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_recorder_recorder_proto_init() }
@@ -2253,17 +3264,15 @@ func file_proto_recorder_recorder_proto_init() {
 	if File_proto_recorder_recorder_proto != nil {
 		return
 	}
-	file_proto_recorder_recorder_proto_msgTypes[45].OneofWrappers = []any{}
-	file_proto_recorder_recorder_proto_msgTypes[48].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_recorder_recorder_proto_rawDesc), len(file_proto_recorder_recorder_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   50,
+			NumMessages:   72,
 			NumExtensions: 0,
-			NumServices:   3,
+			NumServices:   1,
 		},
 		GoTypes:           file_proto_recorder_recorder_proto_goTypes,
 		DependencyIndexes: file_proto_recorder_recorder_proto_depIdxs,

@@ -13,35 +13,26 @@ var resolverCmd = &cobra.Command{
 	Short: "resolver service operations",
 }
 
-var resolverResolverCmd = &cobra.Command{
-	Use:   "resolver",
-	Short: "ResolverService operations",
+var resolverContentResolverCmd = &cobra.Command{
+	Use:   "content-resolver",
+	Short: "ContentResolverService operations",
 }
 
-var resolverResolverQueryRawCmd = &cobra.Command{
-	Use:   "query-raw",
-	Short: "QueryRaw RPC",
+var resolverContentResolverApplyBatchCmd = &cobra.Command{
+	Use:   "apply-batch",
+	Short: "ApplyBatch RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewResolverServiceClient(grpcConn)
-		req := &pb.QueryRawRequest{}
-		if v, err := cmd.Flags().GetInt64("uri"); err == nil {
-			req.Uri = v
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.ApplyBatchRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("projection"); err == nil {
-			req.Projection = v
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
 		}
-		if v, err := cmd.Flags().GetString("selection"); err == nil {
-			req.Selection = v
-		}
-		if v, err := cmd.Flags().GetInt64("selection-args"); err == nil {
-			req.SelectionArgs = v
-		}
-		if v, err := cmd.Flags().GetString("sort-order"); err == nil {
-			req.SortOrder = v
-		}
-		resp, err := client.QueryRaw(ctx, req)
+		resp, err := client.ApplyBatch(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -49,21 +40,18 @@ var resolverResolverQueryRawCmd = &cobra.Command{
 	},
 }
 
-var resolverResolverOpenFileDescriptorRawCmd = &cobra.Command{
-	Use:   "open-file-descriptor-raw",
-	Short: "OpenFileDescriptorRaw RPC",
+var resolverContentResolverCancelSync1_2Cmd = &cobra.Command{
+	Use:   "cancel-sync1_2",
+	Short: "CancelSync1_2 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewResolverServiceClient(grpcConn)
-		req := &pb.OpenFileDescriptorRawRequest{}
-		if v, err := cmd.Flags().GetInt64("uri"); err == nil {
-			req.Uri = v
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.CancelSync1_2Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetString("mode"); err == nil {
-			req.Mode = v
-		}
-		resp, err := client.OpenFileDescriptorRaw(ctx, req)
+		resp, err := client.CancelSync1_2(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -71,20 +59,15 @@ var resolverResolverOpenFileDescriptorRawCmd = &cobra.Command{
 	},
 }
 
-var resolverCursorCmd = &cobra.Command{
-	Use:   "cursor",
-	Short: "CursorService operations",
-}
-
-var resolverCursorMoveToNextCmd = &cobra.Command{
-	Use:   "move-to-next",
-	Short: "MoveToNext RPC",
+var resolverContentResolverGetOutgoingPersistedUriPermissionsCmd = &cobra.Command{
+	Use:   "get-outgoing-persisted-uri-permissions",
+	Short: "GetOutgoingPersistedUriPermissions RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewCursorServiceClient(grpcConn)
-		req := &pb.MoveToNextRequest{}
-		resp, err := client.MoveToNext(ctx, req)
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.GetOutgoingPersistedUriPermissionsRequest{}
+		resp, err := client.GetOutgoingPersistedUriPermissions(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -92,18 +75,15 @@ var resolverCursorMoveToNextCmd = &cobra.Command{
 	},
 }
 
-var resolverCursorGetStringCmd = &cobra.Command{
-	Use:   "get-string",
-	Short: "GetString RPC",
+var resolverContentResolverGetPersistedUriPermissionsCmd = &cobra.Command{
+	Use:   "get-persisted-uri-permissions",
+	Short: "GetPersistedUriPermissions RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewCursorServiceClient(grpcConn)
-		req := &pb.GetStringRequest{}
-		if v, err := cmd.Flags().GetInt32("column-index"); err == nil {
-			req.ColumnIndex = v
-		}
-		resp, err := client.GetString(ctx, req)
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.GetPersistedUriPermissionsRequest{}
+		resp, err := client.GetPersistedUriPermissions(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -111,18 +91,21 @@ var resolverCursorGetStringCmd = &cobra.Command{
 	},
 }
 
-var resolverCursorGetIntCmd = &cobra.Command{
-	Use:   "get-int",
-	Short: "GetInt RPC",
+var resolverContentResolverGetStreamTypesCmd = &cobra.Command{
+	Use:   "get-stream-types",
+	Short: "GetStreamTypes RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewCursorServiceClient(grpcConn)
-		req := &pb.GetIntRequest{}
-		if v, err := cmd.Flags().GetInt32("column-index"); err == nil {
-			req.ColumnIndex = v
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.GetStreamTypesRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		resp, err := client.GetInt(ctx, req)
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetStreamTypes(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -130,18 +113,24 @@ var resolverCursorGetIntCmd = &cobra.Command{
 	},
 }
 
-var resolverCursorGetLongCmd = &cobra.Command{
-	Use:   "get-long",
-	Short: "GetLong RPC",
+var resolverContentResolverLoadThumbnailCmd = &cobra.Command{
+	Use:   "load-thumbnail",
+	Short: "LoadThumbnail RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewCursorServiceClient(grpcConn)
-		req := &pb.GetLongRequest{}
-		if v, err := cmd.Flags().GetInt32("column-index"); err == nil {
-			req.ColumnIndex = v
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.LoadThumbnailRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		resp, err := client.GetLong(ctx, req)
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.LoadThumbnail(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -149,18 +138,21 @@ var resolverCursorGetLongCmd = &cobra.Command{
 	},
 }
 
-var resolverCursorGetColumnIndexCmd = &cobra.Command{
-	Use:   "get-column-index",
-	Short: "GetColumnIndex RPC",
+var resolverContentResolverNotifyChange2Cmd = &cobra.Command{
+	Use:   "notify-change2",
+	Short: "NotifyChange2 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewCursorServiceClient(grpcConn)
-		req := &pb.GetColumnIndexRequest{}
-		if v, err := cmd.Flags().GetString("column-name"); err == nil {
-			req.ColumnName = v
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.NotifyChange2Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		resp, err := client.GetColumnIndex(ctx, req)
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.NotifyChange2(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -168,23 +160,24 @@ var resolverCursorGetColumnIndexCmd = &cobra.Command{
 	},
 }
 
-var resolverUriCmd = &cobra.Command{
-	Use:   "uri",
-	Short: "UriService operations",
-}
-
-var resolverUriParseCmd = &cobra.Command{
-	Use:   "parse",
-	Short: "Parse RPC",
+var resolverContentResolverNotifyChange3_1Cmd = &cobra.Command{
+	Use:   "notify-change3_1",
+	Short: "NotifyChange3_1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewUriServiceClient(grpcConn)
-		req := &pb.ParseRequest{}
-		if v, err := cmd.Flags().GetString("uri-string"); err == nil {
-			req.UriString = v
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.NotifyChange3_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		resp, err := client.Parse(ctx, req)
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.NotifyChange3_1(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -192,20 +185,24 @@ var resolverUriParseCmd = &cobra.Command{
 	},
 }
 
-var resolverParcelFDCmd = &cobra.Command{
-	Use:   "parcel-fd",
-	Short: "ParcelFDService operations",
-}
-
-var resolverParcelFDGetFdCmd = &cobra.Command{
-	Use:   "get-fd",
-	Short: "GetFd RPC",
+var resolverContentResolverNotifyChange3_2Cmd = &cobra.Command{
+	Use:   "notify-change3_2",
+	Short: "NotifyChange3_2 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewParcelFDServiceClient(grpcConn)
-		req := &pb.GetFdRequest{}
-		resp, err := client.GetFd(ctx, req)
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.NotifyChange3_2Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.NotifyChange3_2(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -213,15 +210,569 @@ var resolverParcelFDGetFdCmd = &cobra.Command{
 	},
 }
 
-var resolverParcelFDDetachFdCmd = &cobra.Command{
-	Use:   "detach-fd",
-	Short: "DetachFd RPC",
+var resolverContentResolverNotifyChange3_3Cmd = &cobra.Command{
+	Use:   "notify-change3_3",
+	Short: "NotifyChange3_3 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewParcelFDServiceClient(grpcConn)
-		req := &pb.DetachFdRequest{}
-		resp, err := client.DetachFd(ctx, req)
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.NotifyChange3_3Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.NotifyChange3_3(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverReleasePersistableUriPermissionCmd = &cobra.Command{
+	Use:   "release-persistable-uri-permission",
+	Short: "ReleasePersistableUriPermission RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.ReleasePersistableUriPermissionRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.ReleasePersistableUriPermission(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverStartSyncCmd = &cobra.Command{
+	Use:   "start-sync",
+	Short: "StartSync RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.StartSyncRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.StartSync(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverTakePersistableUriPermissionCmd = &cobra.Command{
+	Use:   "take-persistable-uri-permission",
+	Short: "TakePersistableUriPermission RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.TakePersistableUriPermissionRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.TakePersistableUriPermission(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverAddPeriodicSyncCmd = &cobra.Command{
+	Use:   "add-periodic-sync",
+	Short: "AddPeriodicSync RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.AddPeriodicSyncRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.AddPeriodicSync(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverAddStatusChangeListenerCmd = &cobra.Command{
+	Use:   "add-status-change-listener",
+	Short: "AddStatusChangeListener RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.AddStatusChangeListenerRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.AddStatusChangeListener(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverCancelSync2Cmd = &cobra.Command{
+	Use:   "cancel-sync2",
+	Short: "CancelSync2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.CancelSync2Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.CancelSync2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverCancelSync1_1Cmd = &cobra.Command{
+	Use:   "cancel-sync1_1",
+	Short: "CancelSync1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.CancelSync1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.CancelSync1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverGetCurrentSyncCmd = &cobra.Command{
+	Use:   "get-current-sync",
+	Short: "GetCurrentSync RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.GetCurrentSyncRequest{}
+		resp, err := client.GetCurrentSync(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverGetCurrentSyncsCmd = &cobra.Command{
+	Use:   "get-current-syncs",
+	Short: "GetCurrentSyncs RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.GetCurrentSyncsRequest{}
+		resp, err := client.GetCurrentSyncs(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverGetIsSyncableCmd = &cobra.Command{
+	Use:   "get-is-syncable",
+	Short: "GetIsSyncable RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.GetIsSyncableRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetIsSyncable(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverGetMasterSyncAutomaticallyCmd = &cobra.Command{
+	Use:   "get-master-sync-automatically",
+	Short: "GetMasterSyncAutomatically RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.GetMasterSyncAutomaticallyRequest{}
+		resp, err := client.GetMasterSyncAutomatically(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverGetPeriodicSyncsCmd = &cobra.Command{
+	Use:   "get-periodic-syncs",
+	Short: "GetPeriodicSyncs RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.GetPeriodicSyncsRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetPeriodicSyncs(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverGetSyncAdapterTypesCmd = &cobra.Command{
+	Use:   "get-sync-adapter-types",
+	Short: "GetSyncAdapterTypes RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.GetSyncAdapterTypesRequest{}
+		resp, err := client.GetSyncAdapterTypes(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverGetSyncAutomaticallyCmd = &cobra.Command{
+	Use:   "get-sync-automatically",
+	Short: "GetSyncAutomatically RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.GetSyncAutomaticallyRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetSyncAutomatically(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverIsSyncActiveCmd = &cobra.Command{
+	Use:   "is-sync-active",
+	Short: "IsSyncActive RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.IsSyncActiveRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.IsSyncActive(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverIsSyncPendingCmd = &cobra.Command{
+	Use:   "is-sync-pending",
+	Short: "IsSyncPending RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.IsSyncPendingRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.IsSyncPending(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverRemovePeriodicSyncCmd = &cobra.Command{
+	Use:   "remove-periodic-sync",
+	Short: "RemovePeriodicSync RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.RemovePeriodicSyncRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.RemovePeriodicSync(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverRemoveStatusChangeListenerCmd = &cobra.Command{
+	Use:   "remove-status-change-listener",
+	Short: "RemoveStatusChangeListener RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.RemoveStatusChangeListenerRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RemoveStatusChangeListener(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverRequestSync3Cmd = &cobra.Command{
+	Use:   "request-sync3",
+	Short: "RequestSync3 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.RequestSync3Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.RequestSync3(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverRequestSync1_1Cmd = &cobra.Command{
+	Use:   "request-sync1_1",
+	Short: "RequestSync1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.RequestSync1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RequestSync1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverSetIsSyncableCmd = &cobra.Command{
+	Use:   "set-is-syncable",
+	Short: "SetIsSyncable RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.SetIsSyncableRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.SetIsSyncable(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverSetMasterSyncAutomaticallyCmd = &cobra.Command{
+	Use:   "set-master-sync-automatically",
+	Short: "SetMasterSyncAutomatically RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.SetMasterSyncAutomaticallyRequest{}
+		if v, err := cmd.Flags().GetBool("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetMasterSyncAutomatically(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverSetSyncAutomaticallyCmd = &cobra.Command{
+	Use:   "set-sync-automatically",
+	Short: "SetSyncAutomatically RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.SetSyncAutomaticallyRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.SetSyncAutomatically(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverValidateSyncExtrasBundleCmd = &cobra.Command{
+	Use:   "validate-sync-extras-bundle",
+	Short: "ValidateSyncExtrasBundle RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.ValidateSyncExtrasBundleRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.ValidateSyncExtrasBundle(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverWrap1Cmd = &cobra.Command{
+	Use:   "wrap1",
+	Short: "Wrap1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.Wrap1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.Wrap1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var resolverContentResolverWrap1_1Cmd = &cobra.Command{
+	Use:   "wrap1_1",
+	Short: "Wrap1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewContentResolverServiceClient(grpcConn)
+		req := &pb.Wrap1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.Wrap1_1(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -230,31 +781,104 @@ var resolverParcelFDDetachFdCmd = &cobra.Command{
 }
 
 func init() {
-	resolverResolverQueryRawCmd.Flags().Int64("uri", 0, "uri (int64)")
-	resolverResolverQueryRawCmd.Flags().Int64("projection", 0, "projection (int64)")
-	resolverResolverQueryRawCmd.Flags().String("selection", "", "selection (string)")
-	resolverResolverQueryRawCmd.Flags().Int64("selection-args", 0, "selection-args (int64)")
-	resolverResolverQueryRawCmd.Flags().String("sort-order", "", "sort-order (string)")
-	resolverResolverCmd.AddCommand(resolverResolverQueryRawCmd)
-	resolverResolverOpenFileDescriptorRawCmd.Flags().Int64("uri", 0, "uri (int64)")
-	resolverResolverOpenFileDescriptorRawCmd.Flags().String("mode", "", "mode (string)")
-	resolverResolverCmd.AddCommand(resolverResolverOpenFileDescriptorRawCmd)
-	resolverCmd.AddCommand(resolverResolverCmd)
-	resolverCursorCmd.AddCommand(resolverCursorMoveToNextCmd)
-	resolverCursorGetStringCmd.Flags().Int32("column-index", 0, "column-index (int32)")
-	resolverCursorCmd.AddCommand(resolverCursorGetStringCmd)
-	resolverCursorGetIntCmd.Flags().Int32("column-index", 0, "column-index (int32)")
-	resolverCursorCmd.AddCommand(resolverCursorGetIntCmd)
-	resolverCursorGetLongCmd.Flags().Int32("column-index", 0, "column-index (int32)")
-	resolverCursorCmd.AddCommand(resolverCursorGetLongCmd)
-	resolverCursorGetColumnIndexCmd.Flags().String("column-name", "", "column-name (string)")
-	resolverCursorCmd.AddCommand(resolverCursorGetColumnIndexCmd)
-	resolverCmd.AddCommand(resolverCursorCmd)
-	resolverUriParseCmd.Flags().String("uri-string", "", "uri-string (string)")
-	resolverUriCmd.AddCommand(resolverUriParseCmd)
-	resolverCmd.AddCommand(resolverUriCmd)
-	resolverParcelFDCmd.AddCommand(resolverParcelFDGetFdCmd)
-	resolverParcelFDCmd.AddCommand(resolverParcelFDDetachFdCmd)
-	resolverCmd.AddCommand(resolverParcelFDCmd)
+	resolverContentResolverApplyBatchCmd.Flags().String("arg0", "", "arg0 (string)")
+	resolverContentResolverApplyBatchCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverApplyBatchCmd)
+	resolverContentResolverCancelSync1_2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverCancelSync1_2Cmd)
+	resolverContentResolverCmd.AddCommand(resolverContentResolverGetOutgoingPersistedUriPermissionsCmd)
+	resolverContentResolverCmd.AddCommand(resolverContentResolverGetPersistedUriPermissionsCmd)
+	resolverContentResolverGetStreamTypesCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverGetStreamTypesCmd.Flags().String("arg1", "", "arg1 (string)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverGetStreamTypesCmd)
+	resolverContentResolverLoadThumbnailCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverLoadThumbnailCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	resolverContentResolverLoadThumbnailCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverLoadThumbnailCmd)
+	resolverContentResolverNotifyChange2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverNotifyChange2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverNotifyChange2Cmd)
+	resolverContentResolverNotifyChange3_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverNotifyChange3_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	resolverContentResolverNotifyChange3_1Cmd.Flags().Bool("arg2", false, "arg2 (bool)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverNotifyChange3_1Cmd)
+	resolverContentResolverNotifyChange3_2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverNotifyChange3_2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	resolverContentResolverNotifyChange3_2Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverNotifyChange3_2Cmd)
+	resolverContentResolverNotifyChange3_3Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverNotifyChange3_3Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	resolverContentResolverNotifyChange3_3Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverNotifyChange3_3Cmd)
+	resolverContentResolverReleasePersistableUriPermissionCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverReleasePersistableUriPermissionCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverReleasePersistableUriPermissionCmd)
+	resolverContentResolverStartSyncCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverStartSyncCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverStartSyncCmd)
+	resolverContentResolverTakePersistableUriPermissionCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverTakePersistableUriPermissionCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverTakePersistableUriPermissionCmd)
+	resolverContentResolverAddPeriodicSyncCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverAddPeriodicSyncCmd.Flags().String("arg1", "", "arg1 (string)")
+	resolverContentResolverAddPeriodicSyncCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	resolverContentResolverAddPeriodicSyncCmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverAddPeriodicSyncCmd)
+	resolverContentResolverAddStatusChangeListenerCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	resolverContentResolverAddStatusChangeListenerCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverAddStatusChangeListenerCmd)
+	resolverContentResolverCancelSync2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverCancelSync2Cmd.Flags().String("arg1", "", "arg1 (string)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverCancelSync2Cmd)
+	resolverContentResolverCancelSync1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverCancelSync1_1Cmd)
+	resolverContentResolverCmd.AddCommand(resolverContentResolverGetCurrentSyncCmd)
+	resolverContentResolverCmd.AddCommand(resolverContentResolverGetCurrentSyncsCmd)
+	resolverContentResolverGetIsSyncableCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverGetIsSyncableCmd.Flags().String("arg1", "", "arg1 (string)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverGetIsSyncableCmd)
+	resolverContentResolverCmd.AddCommand(resolverContentResolverGetMasterSyncAutomaticallyCmd)
+	resolverContentResolverGetPeriodicSyncsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverGetPeriodicSyncsCmd.Flags().String("arg1", "", "arg1 (string)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverGetPeriodicSyncsCmd)
+	resolverContentResolverCmd.AddCommand(resolverContentResolverGetSyncAdapterTypesCmd)
+	resolverContentResolverGetSyncAutomaticallyCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverGetSyncAutomaticallyCmd.Flags().String("arg1", "", "arg1 (string)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverGetSyncAutomaticallyCmd)
+	resolverContentResolverIsSyncActiveCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverIsSyncActiveCmd.Flags().String("arg1", "", "arg1 (string)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverIsSyncActiveCmd)
+	resolverContentResolverIsSyncPendingCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverIsSyncPendingCmd.Flags().String("arg1", "", "arg1 (string)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverIsSyncPendingCmd)
+	resolverContentResolverRemovePeriodicSyncCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverRemovePeriodicSyncCmd.Flags().String("arg1", "", "arg1 (string)")
+	resolverContentResolverRemovePeriodicSyncCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverRemovePeriodicSyncCmd)
+	resolverContentResolverRemoveStatusChangeListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverRemoveStatusChangeListenerCmd)
+	resolverContentResolverRequestSync3Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverRequestSync3Cmd.Flags().String("arg1", "", "arg1 (string)")
+	resolverContentResolverRequestSync3Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverRequestSync3Cmd)
+	resolverContentResolverRequestSync1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverRequestSync1_1Cmd)
+	resolverContentResolverSetIsSyncableCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverSetIsSyncableCmd.Flags().String("arg1", "", "arg1 (string)")
+	resolverContentResolverSetIsSyncableCmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverSetIsSyncableCmd)
+	resolverContentResolverSetMasterSyncAutomaticallyCmd.Flags().Bool("arg0", false, "arg0 (bool)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverSetMasterSyncAutomaticallyCmd)
+	resolverContentResolverSetSyncAutomaticallyCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverSetSyncAutomaticallyCmd.Flags().String("arg1", "", "arg1 (string)")
+	resolverContentResolverSetSyncAutomaticallyCmd.Flags().Bool("arg2", false, "arg2 (bool)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverSetSyncAutomaticallyCmd)
+	resolverContentResolverValidateSyncExtrasBundleCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverValidateSyncExtrasBundleCmd)
+	resolverContentResolverWrap1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverWrap1Cmd)
+	resolverContentResolverWrap1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	resolverContentResolverCmd.AddCommand(resolverContentResolverWrap1_1Cmd)
+	resolverCmd.AddCommand(resolverContentResolverCmd)
 	rootCmd.AddCommand(resolverCmd)
 }

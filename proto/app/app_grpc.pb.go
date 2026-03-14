@@ -21,972 +21,264 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ContextService_GetSystemService_FullMethodName    = "/app.ContextService/GetSystemService"
-	ContextService_PackageName_FullMethodName         = "/app.ContextService/PackageName"
-	ContextService_ApplicationContext_FullMethodName  = "/app.ContextService/ApplicationContext"
-	ContextService_StartActivity_FullMethodName       = "/app.ContextService/StartActivity"
-	ContextService_SendBroadcast_FullMethodName       = "/app.ContextService/SendBroadcast"
-	ContextService_StartService_FullMethodName        = "/app.ContextService/StartService"
-	ContextService_RegisterReceiverRaw_FullMethodName = "/app.ContextService/RegisterReceiverRaw"
-	ContextService_UnregisterReceiver_FullMethodName  = "/app.ContextService/UnregisterReceiver"
-	ContextService_ContentResolver_FullMethodName     = "/app.ContextService/ContentResolver"
-	ContextService_PackageManager_FullMethodName      = "/app.ContextService/PackageManager"
-	ContextService_CacheDir_FullMethodName            = "/app.ContextService/CacheDir"
-	ContextService_FilesDir_FullMethodName            = "/app.ContextService/FilesDir"
-	ContextService_ExternalFilesDir_FullMethodName    = "/app.ContextService/ExternalFilesDir"
-	ContextService_ExternalCacheDir_FullMethodName    = "/app.ContextService/ExternalCacheDir"
-	ContextService_DataDir_FullMethodName             = "/app.ContextService/DataDir"
-)
-
-// ContextServiceClient is the client API for ContextService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ContextServiceClient interface {
-	GetSystemService(ctx context.Context, in *GetSystemServiceRequest, opts ...grpc.CallOption) (*GetSystemServiceResponse, error)
-	PackageName(ctx context.Context, in *PackageNameRequest, opts ...grpc.CallOption) (*PackageNameResponse, error)
-	ApplicationContext(ctx context.Context, in *ApplicationContextRequest, opts ...grpc.CallOption) (*ApplicationContextResponse, error)
-	StartActivity(ctx context.Context, in *StartActivityRequest, opts ...grpc.CallOption) (*StartActivityResponse, error)
-	SendBroadcast(ctx context.Context, in *SendBroadcastRequest, opts ...grpc.CallOption) (*SendBroadcastResponse, error)
-	StartService(ctx context.Context, in *StartServiceRequest, opts ...grpc.CallOption) (*StartServiceResponse, error)
-	RegisterReceiverRaw(ctx context.Context, in *RegisterReceiverRawRequest, opts ...grpc.CallOption) (*RegisterReceiverRawResponse, error)
-	UnregisterReceiver(ctx context.Context, in *UnregisterReceiverRequest, opts ...grpc.CallOption) (*UnregisterReceiverResponse, error)
-	ContentResolver(ctx context.Context, in *ContentResolverRequest, opts ...grpc.CallOption) (*ContentResolverResponse, error)
-	PackageManager(ctx context.Context, in *PackageManagerRequest, opts ...grpc.CallOption) (*PackageManagerResponse, error)
-	CacheDir(ctx context.Context, in *CacheDirRequest, opts ...grpc.CallOption) (*CacheDirResponse, error)
-	FilesDir(ctx context.Context, in *FilesDirRequest, opts ...grpc.CallOption) (*FilesDirResponse, error)
-	ExternalFilesDir(ctx context.Context, in *ExternalFilesDirRequest, opts ...grpc.CallOption) (*ExternalFilesDirResponse, error)
-	ExternalCacheDir(ctx context.Context, in *ExternalCacheDirRequest, opts ...grpc.CallOption) (*ExternalCacheDirResponse, error)
-	DataDir(ctx context.Context, in *DataDirRequest, opts ...grpc.CallOption) (*DataDirResponse, error)
-}
-
-type contextServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewContextServiceClient(cc grpc.ClientConnInterface) ContextServiceClient {
-	return &contextServiceClient{cc}
-}
-
-func (c *contextServiceClient) GetSystemService(ctx context.Context, in *GetSystemServiceRequest, opts ...grpc.CallOption) (*GetSystemServiceResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetSystemServiceResponse)
-	err := c.cc.Invoke(ctx, ContextService_GetSystemService_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contextServiceClient) PackageName(ctx context.Context, in *PackageNameRequest, opts ...grpc.CallOption) (*PackageNameResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PackageNameResponse)
-	err := c.cc.Invoke(ctx, ContextService_PackageName_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contextServiceClient) ApplicationContext(ctx context.Context, in *ApplicationContextRequest, opts ...grpc.CallOption) (*ApplicationContextResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ApplicationContextResponse)
-	err := c.cc.Invoke(ctx, ContextService_ApplicationContext_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contextServiceClient) StartActivity(ctx context.Context, in *StartActivityRequest, opts ...grpc.CallOption) (*StartActivityResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StartActivityResponse)
-	err := c.cc.Invoke(ctx, ContextService_StartActivity_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contextServiceClient) SendBroadcast(ctx context.Context, in *SendBroadcastRequest, opts ...grpc.CallOption) (*SendBroadcastResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SendBroadcastResponse)
-	err := c.cc.Invoke(ctx, ContextService_SendBroadcast_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contextServiceClient) StartService(ctx context.Context, in *StartServiceRequest, opts ...grpc.CallOption) (*StartServiceResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StartServiceResponse)
-	err := c.cc.Invoke(ctx, ContextService_StartService_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contextServiceClient) RegisterReceiverRaw(ctx context.Context, in *RegisterReceiverRawRequest, opts ...grpc.CallOption) (*RegisterReceiverRawResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RegisterReceiverRawResponse)
-	err := c.cc.Invoke(ctx, ContextService_RegisterReceiverRaw_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contextServiceClient) UnregisterReceiver(ctx context.Context, in *UnregisterReceiverRequest, opts ...grpc.CallOption) (*UnregisterReceiverResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UnregisterReceiverResponse)
-	err := c.cc.Invoke(ctx, ContextService_UnregisterReceiver_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contextServiceClient) ContentResolver(ctx context.Context, in *ContentResolverRequest, opts ...grpc.CallOption) (*ContentResolverResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ContentResolverResponse)
-	err := c.cc.Invoke(ctx, ContextService_ContentResolver_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contextServiceClient) PackageManager(ctx context.Context, in *PackageManagerRequest, opts ...grpc.CallOption) (*PackageManagerResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PackageManagerResponse)
-	err := c.cc.Invoke(ctx, ContextService_PackageManager_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contextServiceClient) CacheDir(ctx context.Context, in *CacheDirRequest, opts ...grpc.CallOption) (*CacheDirResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CacheDirResponse)
-	err := c.cc.Invoke(ctx, ContextService_CacheDir_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contextServiceClient) FilesDir(ctx context.Context, in *FilesDirRequest, opts ...grpc.CallOption) (*FilesDirResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(FilesDirResponse)
-	err := c.cc.Invoke(ctx, ContextService_FilesDir_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contextServiceClient) ExternalFilesDir(ctx context.Context, in *ExternalFilesDirRequest, opts ...grpc.CallOption) (*ExternalFilesDirResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ExternalFilesDirResponse)
-	err := c.cc.Invoke(ctx, ContextService_ExternalFilesDir_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contextServiceClient) ExternalCacheDir(ctx context.Context, in *ExternalCacheDirRequest, opts ...grpc.CallOption) (*ExternalCacheDirResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ExternalCacheDirResponse)
-	err := c.cc.Invoke(ctx, ContextService_ExternalCacheDir_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contextServiceClient) DataDir(ctx context.Context, in *DataDirRequest, opts ...grpc.CallOption) (*DataDirResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DataDirResponse)
-	err := c.cc.Invoke(ctx, ContextService_DataDir_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// ContextServiceServer is the server API for ContextService service.
-// All implementations must embed UnimplementedContextServiceServer
-// for forward compatibility.
-type ContextServiceServer interface {
-	GetSystemService(context.Context, *GetSystemServiceRequest) (*GetSystemServiceResponse, error)
-	PackageName(context.Context, *PackageNameRequest) (*PackageNameResponse, error)
-	ApplicationContext(context.Context, *ApplicationContextRequest) (*ApplicationContextResponse, error)
-	StartActivity(context.Context, *StartActivityRequest) (*StartActivityResponse, error)
-	SendBroadcast(context.Context, *SendBroadcastRequest) (*SendBroadcastResponse, error)
-	StartService(context.Context, *StartServiceRequest) (*StartServiceResponse, error)
-	RegisterReceiverRaw(context.Context, *RegisterReceiverRawRequest) (*RegisterReceiverRawResponse, error)
-	UnregisterReceiver(context.Context, *UnregisterReceiverRequest) (*UnregisterReceiverResponse, error)
-	ContentResolver(context.Context, *ContentResolverRequest) (*ContentResolverResponse, error)
-	PackageManager(context.Context, *PackageManagerRequest) (*PackageManagerResponse, error)
-	CacheDir(context.Context, *CacheDirRequest) (*CacheDirResponse, error)
-	FilesDir(context.Context, *FilesDirRequest) (*FilesDirResponse, error)
-	ExternalFilesDir(context.Context, *ExternalFilesDirRequest) (*ExternalFilesDirResponse, error)
-	ExternalCacheDir(context.Context, *ExternalCacheDirRequest) (*ExternalCacheDirResponse, error)
-	DataDir(context.Context, *DataDirRequest) (*DataDirResponse, error)
-	mustEmbedUnimplementedContextServiceServer()
-}
-
-// UnimplementedContextServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedContextServiceServer struct{}
-
-func (UnimplementedContextServiceServer) GetSystemService(context.Context, *GetSystemServiceRequest) (*GetSystemServiceResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetSystemService not implemented")
-}
-func (UnimplementedContextServiceServer) PackageName(context.Context, *PackageNameRequest) (*PackageNameResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method PackageName not implemented")
-}
-func (UnimplementedContextServiceServer) ApplicationContext(context.Context, *ApplicationContextRequest) (*ApplicationContextResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ApplicationContext not implemented")
-}
-func (UnimplementedContextServiceServer) StartActivity(context.Context, *StartActivityRequest) (*StartActivityResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method StartActivity not implemented")
-}
-func (UnimplementedContextServiceServer) SendBroadcast(context.Context, *SendBroadcastRequest) (*SendBroadcastResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SendBroadcast not implemented")
-}
-func (UnimplementedContextServiceServer) StartService(context.Context, *StartServiceRequest) (*StartServiceResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method StartService not implemented")
-}
-func (UnimplementedContextServiceServer) RegisterReceiverRaw(context.Context, *RegisterReceiverRawRequest) (*RegisterReceiverRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RegisterReceiverRaw not implemented")
-}
-func (UnimplementedContextServiceServer) UnregisterReceiver(context.Context, *UnregisterReceiverRequest) (*UnregisterReceiverResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UnregisterReceiver not implemented")
-}
-func (UnimplementedContextServiceServer) ContentResolver(context.Context, *ContentResolverRequest) (*ContentResolverResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ContentResolver not implemented")
-}
-func (UnimplementedContextServiceServer) PackageManager(context.Context, *PackageManagerRequest) (*PackageManagerResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method PackageManager not implemented")
-}
-func (UnimplementedContextServiceServer) CacheDir(context.Context, *CacheDirRequest) (*CacheDirResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CacheDir not implemented")
-}
-func (UnimplementedContextServiceServer) FilesDir(context.Context, *FilesDirRequest) (*FilesDirResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method FilesDir not implemented")
-}
-func (UnimplementedContextServiceServer) ExternalFilesDir(context.Context, *ExternalFilesDirRequest) (*ExternalFilesDirResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ExternalFilesDir not implemented")
-}
-func (UnimplementedContextServiceServer) ExternalCacheDir(context.Context, *ExternalCacheDirRequest) (*ExternalCacheDirResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ExternalCacheDir not implemented")
-}
-func (UnimplementedContextServiceServer) DataDir(context.Context, *DataDirRequest) (*DataDirResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method DataDir not implemented")
-}
-func (UnimplementedContextServiceServer) mustEmbedUnimplementedContextServiceServer() {}
-func (UnimplementedContextServiceServer) testEmbeddedByValue()                        {}
-
-// UnsafeContextServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ContextServiceServer will
-// result in compilation errors.
-type UnsafeContextServiceServer interface {
-	mustEmbedUnimplementedContextServiceServer()
-}
-
-func RegisterContextServiceServer(s grpc.ServiceRegistrar, srv ContextServiceServer) {
-	// If the following call panics, it indicates UnimplementedContextServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&ContextService_ServiceDesc, srv)
-}
-
-func _ContextService_GetSystemService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSystemServiceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContextServiceServer).GetSystemService(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ContextService_GetSystemService_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContextServiceServer).GetSystemService(ctx, req.(*GetSystemServiceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContextService_PackageName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PackageNameRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContextServiceServer).PackageName(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ContextService_PackageName_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContextServiceServer).PackageName(ctx, req.(*PackageNameRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContextService_ApplicationContext_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ApplicationContextRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContextServiceServer).ApplicationContext(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ContextService_ApplicationContext_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContextServiceServer).ApplicationContext(ctx, req.(*ApplicationContextRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContextService_StartActivity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartActivityRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContextServiceServer).StartActivity(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ContextService_StartActivity_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContextServiceServer).StartActivity(ctx, req.(*StartActivityRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContextService_SendBroadcast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SendBroadcastRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContextServiceServer).SendBroadcast(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ContextService_SendBroadcast_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContextServiceServer).SendBroadcast(ctx, req.(*SendBroadcastRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContextService_StartService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartServiceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContextServiceServer).StartService(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ContextService_StartService_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContextServiceServer).StartService(ctx, req.(*StartServiceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContextService_RegisterReceiverRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RegisterReceiverRawRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContextServiceServer).RegisterReceiverRaw(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ContextService_RegisterReceiverRaw_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContextServiceServer).RegisterReceiverRaw(ctx, req.(*RegisterReceiverRawRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContextService_UnregisterReceiver_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UnregisterReceiverRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContextServiceServer).UnregisterReceiver(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ContextService_UnregisterReceiver_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContextServiceServer).UnregisterReceiver(ctx, req.(*UnregisterReceiverRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContextService_ContentResolver_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ContentResolverRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContextServiceServer).ContentResolver(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ContextService_ContentResolver_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContextServiceServer).ContentResolver(ctx, req.(*ContentResolverRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContextService_PackageManager_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PackageManagerRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContextServiceServer).PackageManager(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ContextService_PackageManager_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContextServiceServer).PackageManager(ctx, req.(*PackageManagerRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContextService_CacheDir_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CacheDirRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContextServiceServer).CacheDir(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ContextService_CacheDir_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContextServiceServer).CacheDir(ctx, req.(*CacheDirRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContextService_FilesDir_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FilesDirRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContextServiceServer).FilesDir(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ContextService_FilesDir_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContextServiceServer).FilesDir(ctx, req.(*FilesDirRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContextService_ExternalFilesDir_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ExternalFilesDirRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContextServiceServer).ExternalFilesDir(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ContextService_ExternalFilesDir_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContextServiceServer).ExternalFilesDir(ctx, req.(*ExternalFilesDirRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContextService_ExternalCacheDir_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ExternalCacheDirRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContextServiceServer).ExternalCacheDir(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ContextService_ExternalCacheDir_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContextServiceServer).ExternalCacheDir(ctx, req.(*ExternalCacheDirRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContextService_DataDir_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DataDirRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContextServiceServer).DataDir(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ContextService_DataDir_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContextServiceServer).DataDir(ctx, req.(*DataDirRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// ContextService_ServiceDesc is the grpc.ServiceDesc for ContextService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var ContextService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "app.ContextService",
-	HandlerType: (*ContextServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "GetSystemService",
-			Handler:    _ContextService_GetSystemService_Handler,
-		},
-		{
-			MethodName: "PackageName",
-			Handler:    _ContextService_PackageName_Handler,
-		},
-		{
-			MethodName: "ApplicationContext",
-			Handler:    _ContextService_ApplicationContext_Handler,
-		},
-		{
-			MethodName: "StartActivity",
-			Handler:    _ContextService_StartActivity_Handler,
-		},
-		{
-			MethodName: "SendBroadcast",
-			Handler:    _ContextService_SendBroadcast_Handler,
-		},
-		{
-			MethodName: "StartService",
-			Handler:    _ContextService_StartService_Handler,
-		},
-		{
-			MethodName: "RegisterReceiverRaw",
-			Handler:    _ContextService_RegisterReceiverRaw_Handler,
-		},
-		{
-			MethodName: "UnregisterReceiver",
-			Handler:    _ContextService_UnregisterReceiver_Handler,
-		},
-		{
-			MethodName: "ContentResolver",
-			Handler:    _ContextService_ContentResolver_Handler,
-		},
-		{
-			MethodName: "PackageManager",
-			Handler:    _ContextService_PackageManager_Handler,
-		},
-		{
-			MethodName: "CacheDir",
-			Handler:    _ContextService_CacheDir_Handler,
-		},
-		{
-			MethodName: "FilesDir",
-			Handler:    _ContextService_FilesDir_Handler,
-		},
-		{
-			MethodName: "ExternalFilesDir",
-			Handler:    _ContextService_ExternalFilesDir_Handler,
-		},
-		{
-			MethodName: "ExternalCacheDir",
-			Handler:    _ContextService_ExternalCacheDir_Handler,
-		},
-		{
-			MethodName: "DataDir",
-			Handler:    _ContextService_DataDir_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/app/app.proto",
-}
-
-const (
-	ActivityService_Finish_FullMethodName                 = "/app.ActivityService/Finish"
-	ActivityService_GetIntent_FullMethodName              = "/app.ActivityService/GetIntent"
-	ActivityService_SetResult_FullMethodName              = "/app.ActivityService/SetResult"
-	ActivityService_GetWindow_FullMethodName              = "/app.ActivityService/GetWindow"
-	ActivityService_RunOnUiThread_FullMethodName          = "/app.ActivityService/RunOnUiThread"
-	ActivityService_StartActivityForResult_FullMethodName = "/app.ActivityService/StartActivityForResult"
-)
-
-// ActivityServiceClient is the client API for ActivityService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ActivityServiceClient interface {
-	Finish(ctx context.Context, in *FinishRequest, opts ...grpc.CallOption) (*FinishResponse, error)
-	GetIntent(ctx context.Context, in *GetIntentRequest, opts ...grpc.CallOption) (*GetIntentResponse, error)
-	SetResult(ctx context.Context, in *SetResultRequest, opts ...grpc.CallOption) (*SetResultResponse, error)
-	GetWindow(ctx context.Context, in *GetWindowRequest, opts ...grpc.CallOption) (*GetWindowResponse, error)
-	RunOnUiThread(ctx context.Context, in *RunOnUiThreadRequest, opts ...grpc.CallOption) (*RunOnUiThreadResponse, error)
-	StartActivityForResult(ctx context.Context, in *StartActivityForResultRequest, opts ...grpc.CallOption) (*StartActivityForResultResponse, error)
-}
-
-type activityServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewActivityServiceClient(cc grpc.ClientConnInterface) ActivityServiceClient {
-	return &activityServiceClient{cc}
-}
-
-func (c *activityServiceClient) Finish(ctx context.Context, in *FinishRequest, opts ...grpc.CallOption) (*FinishResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(FinishResponse)
-	err := c.cc.Invoke(ctx, ActivityService_Finish_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *activityServiceClient) GetIntent(ctx context.Context, in *GetIntentRequest, opts ...grpc.CallOption) (*GetIntentResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetIntentResponse)
-	err := c.cc.Invoke(ctx, ActivityService_GetIntent_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *activityServiceClient) SetResult(ctx context.Context, in *SetResultRequest, opts ...grpc.CallOption) (*SetResultResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetResultResponse)
-	err := c.cc.Invoke(ctx, ActivityService_SetResult_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *activityServiceClient) GetWindow(ctx context.Context, in *GetWindowRequest, opts ...grpc.CallOption) (*GetWindowResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetWindowResponse)
-	err := c.cc.Invoke(ctx, ActivityService_GetWindow_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *activityServiceClient) RunOnUiThread(ctx context.Context, in *RunOnUiThreadRequest, opts ...grpc.CallOption) (*RunOnUiThreadResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RunOnUiThreadResponse)
-	err := c.cc.Invoke(ctx, ActivityService_RunOnUiThread_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *activityServiceClient) StartActivityForResult(ctx context.Context, in *StartActivityForResultRequest, opts ...grpc.CallOption) (*StartActivityForResultResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StartActivityForResultResponse)
-	err := c.cc.Invoke(ctx, ActivityService_StartActivityForResult_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// ActivityServiceServer is the server API for ActivityService service.
-// All implementations must embed UnimplementedActivityServiceServer
-// for forward compatibility.
-type ActivityServiceServer interface {
-	Finish(context.Context, *FinishRequest) (*FinishResponse, error)
-	GetIntent(context.Context, *GetIntentRequest) (*GetIntentResponse, error)
-	SetResult(context.Context, *SetResultRequest) (*SetResultResponse, error)
-	GetWindow(context.Context, *GetWindowRequest) (*GetWindowResponse, error)
-	RunOnUiThread(context.Context, *RunOnUiThreadRequest) (*RunOnUiThreadResponse, error)
-	StartActivityForResult(context.Context, *StartActivityForResultRequest) (*StartActivityForResultResponse, error)
-	mustEmbedUnimplementedActivityServiceServer()
-}
-
-// UnimplementedActivityServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedActivityServiceServer struct{}
-
-func (UnimplementedActivityServiceServer) Finish(context.Context, *FinishRequest) (*FinishResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Finish not implemented")
-}
-func (UnimplementedActivityServiceServer) GetIntent(context.Context, *GetIntentRequest) (*GetIntentResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetIntent not implemented")
-}
-func (UnimplementedActivityServiceServer) SetResult(context.Context, *SetResultRequest) (*SetResultResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetResult not implemented")
-}
-func (UnimplementedActivityServiceServer) GetWindow(context.Context, *GetWindowRequest) (*GetWindowResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetWindow not implemented")
-}
-func (UnimplementedActivityServiceServer) RunOnUiThread(context.Context, *RunOnUiThreadRequest) (*RunOnUiThreadResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RunOnUiThread not implemented")
-}
-func (UnimplementedActivityServiceServer) StartActivityForResult(context.Context, *StartActivityForResultRequest) (*StartActivityForResultResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method StartActivityForResult not implemented")
-}
-func (UnimplementedActivityServiceServer) mustEmbedUnimplementedActivityServiceServer() {}
-func (UnimplementedActivityServiceServer) testEmbeddedByValue()                         {}
-
-// UnsafeActivityServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ActivityServiceServer will
-// result in compilation errors.
-type UnsafeActivityServiceServer interface {
-	mustEmbedUnimplementedActivityServiceServer()
-}
-
-func RegisterActivityServiceServer(s grpc.ServiceRegistrar, srv ActivityServiceServer) {
-	// If the following call panics, it indicates UnimplementedActivityServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&ActivityService_ServiceDesc, srv)
-}
-
-func _ActivityService_Finish_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FinishRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ActivityServiceServer).Finish(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ActivityService_Finish_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ActivityServiceServer).Finish(ctx, req.(*FinishRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ActivityService_GetIntent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetIntentRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ActivityServiceServer).GetIntent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ActivityService_GetIntent_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ActivityServiceServer).GetIntent(ctx, req.(*GetIntentRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ActivityService_SetResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetResultRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ActivityServiceServer).SetResult(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ActivityService_SetResult_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ActivityServiceServer).SetResult(ctx, req.(*SetResultRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ActivityService_GetWindow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetWindowRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ActivityServiceServer).GetWindow(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ActivityService_GetWindow_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ActivityServiceServer).GetWindow(ctx, req.(*GetWindowRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ActivityService_RunOnUiThread_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RunOnUiThreadRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ActivityServiceServer).RunOnUiThread(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ActivityService_RunOnUiThread_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ActivityServiceServer).RunOnUiThread(ctx, req.(*RunOnUiThreadRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ActivityService_StartActivityForResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartActivityForResultRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ActivityServiceServer).StartActivityForResult(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ActivityService_StartActivityForResult_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ActivityServiceServer).StartActivityForResult(ctx, req.(*StartActivityForResultRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// ActivityService_ServiceDesc is the grpc.ServiceDesc for ActivityService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var ActivityService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "app.ActivityService",
-	HandlerType: (*ActivityServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Finish",
-			Handler:    _ActivityService_Finish_Handler,
-		},
-		{
-			MethodName: "GetIntent",
-			Handler:    _ActivityService_GetIntent_Handler,
-		},
-		{
-			MethodName: "SetResult",
-			Handler:    _ActivityService_SetResult_Handler,
-		},
-		{
-			MethodName: "GetWindow",
-			Handler:    _ActivityService_GetWindow_Handler,
-		},
-		{
-			MethodName: "RunOnUiThread",
-			Handler:    _ActivityService_RunOnUiThread_Handler,
-		},
-		{
-			MethodName: "StartActivityForResult",
-			Handler:    _ActivityService_StartActivityForResult_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/app/app.proto",
-}
-
-const (
-	IntentService_SetAction_FullMethodName      = "/app.IntentService/SetAction"
-	IntentService_SetData_FullMethodName        = "/app.IntentService/SetData"
-	IntentService_SetComponent_FullMethodName   = "/app.IntentService/SetComponent"
-	IntentService_SetFlags_FullMethodName       = "/app.IntentService/SetFlags"
-	IntentService_AddFlags_FullMethodName       = "/app.IntentService/AddFlags"
-	IntentService_AddCategory_FullMethodName    = "/app.IntentService/AddCategory"
-	IntentService_SetPackage_FullMethodName     = "/app.IntentService/SetPackage"
-	IntentService_SetType_FullMethodName        = "/app.IntentService/SetType"
-	IntentService_GetAction_FullMethodName      = "/app.IntentService/GetAction"
-	IntentService_GetData_FullMethodName        = "/app.IntentService/GetData"
-	IntentService_GetStringExtra_FullMethodName = "/app.IntentService/GetStringExtra"
-	IntentService_GetBoolExtra_FullMethodName   = "/app.IntentService/GetBoolExtra"
-	IntentService_GetIntExtra_FullMethodName    = "/app.IntentService/GetIntExtra"
-	IntentService_PutStringExtra_FullMethodName = "/app.IntentService/PutStringExtra"
-	IntentService_PutIntExtra_FullMethodName    = "/app.IntentService/PutIntExtra"
-	IntentService_PutBoolExtra_FullMethodName   = "/app.IntentService/PutBoolExtra"
-	IntentService_PutLongExtra_FullMethodName   = "/app.IntentService/PutLongExtra"
+	IntentService_AddCategory_FullMethodName                    = "/app.IntentService/AddCategory"
+	IntentService_AddFlags_FullMethodName                       = "/app.IntentService/AddFlags"
+	IntentService_Clone_FullMethodName                          = "/app.IntentService/Clone"
+	IntentService_CloneFilter_FullMethodName                    = "/app.IntentService/CloneFilter"
+	IntentService_DescribeContents_FullMethodName               = "/app.IntentService/DescribeContents"
+	IntentService_FillIn_FullMethodName                         = "/app.IntentService/FillIn"
+	IntentService_FilterEquals_FullMethodName                   = "/app.IntentService/FilterEquals"
+	IntentService_FilterHashCode_FullMethodName                 = "/app.IntentService/FilterHashCode"
+	IntentService_GetAction_FullMethodName                      = "/app.IntentService/GetAction"
+	IntentService_GetBooleanArrayExtra_FullMethodName           = "/app.IntentService/GetBooleanArrayExtra"
+	IntentService_GetBooleanExtra_FullMethodName                = "/app.IntentService/GetBooleanExtra"
+	IntentService_GetBundleExtra_FullMethodName                 = "/app.IntentService/GetBundleExtra"
+	IntentService_GetByteArrayExtra_FullMethodName              = "/app.IntentService/GetByteArrayExtra"
+	IntentService_GetByteExtra_FullMethodName                   = "/app.IntentService/GetByteExtra"
+	IntentService_GetCategories_FullMethodName                  = "/app.IntentService/GetCategories"
+	IntentService_GetCharArrayExtra_FullMethodName              = "/app.IntentService/GetCharArrayExtra"
+	IntentService_GetCharExtra_FullMethodName                   = "/app.IntentService/GetCharExtra"
+	IntentService_GetCharSequenceArrayExtra_FullMethodName      = "/app.IntentService/GetCharSequenceArrayExtra"
+	IntentService_GetCharSequenceArrayListExtra_FullMethodName  = "/app.IntentService/GetCharSequenceArrayListExtra"
+	IntentService_GetCharSequenceExtra_FullMethodName           = "/app.IntentService/GetCharSequenceExtra"
+	IntentService_GetClipData_FullMethodName                    = "/app.IntentService/GetClipData"
+	IntentService_GetComponent_FullMethodName                   = "/app.IntentService/GetComponent"
+	IntentService_GetData_FullMethodName                        = "/app.IntentService/GetData"
+	IntentService_GetDataString_FullMethodName                  = "/app.IntentService/GetDataString"
+	IntentService_GetDoubleArrayExtra_FullMethodName            = "/app.IntentService/GetDoubleArrayExtra"
+	IntentService_GetDoubleExtra_FullMethodName                 = "/app.IntentService/GetDoubleExtra"
+	IntentService_GetExtras_FullMethodName                      = "/app.IntentService/GetExtras"
+	IntentService_GetFlags_FullMethodName                       = "/app.IntentService/GetFlags"
+	IntentService_GetFloatArrayExtra_FullMethodName             = "/app.IntentService/GetFloatArrayExtra"
+	IntentService_GetFloatExtra_FullMethodName                  = "/app.IntentService/GetFloatExtra"
+	IntentService_GetIdentifier_FullMethodName                  = "/app.IntentService/GetIdentifier"
+	IntentService_GetIntArrayExtra_FullMethodName               = "/app.IntentService/GetIntArrayExtra"
+	IntentService_GetIntExtra_FullMethodName                    = "/app.IntentService/GetIntExtra"
+	IntentService_GetIntegerArrayListExtra_FullMethodName       = "/app.IntentService/GetIntegerArrayListExtra"
+	IntentService_GetLongArrayExtra_FullMethodName              = "/app.IntentService/GetLongArrayExtra"
+	IntentService_GetLongExtra_FullMethodName                   = "/app.IntentService/GetLongExtra"
+	IntentService_GetPackage_FullMethodName                     = "/app.IntentService/GetPackage"
+	IntentService_GetParcelableArrayExtra_FullMethodName        = "/app.IntentService/GetParcelableArrayExtra"
+	IntentService_GetScheme_FullMethodName                      = "/app.IntentService/GetScheme"
+	IntentService_GetSelector_FullMethodName                    = "/app.IntentService/GetSelector"
+	IntentService_GetSerializableExtra_FullMethodName           = "/app.IntentService/GetSerializableExtra"
+	IntentService_GetShortArrayExtra_FullMethodName             = "/app.IntentService/GetShortArrayExtra"
+	IntentService_GetShortExtra_FullMethodName                  = "/app.IntentService/GetShortExtra"
+	IntentService_GetSourceBounds_FullMethodName                = "/app.IntentService/GetSourceBounds"
+	IntentService_GetStringArrayExtra_FullMethodName            = "/app.IntentService/GetStringArrayExtra"
+	IntentService_GetStringArrayListExtra_FullMethodName        = "/app.IntentService/GetStringArrayListExtra"
+	IntentService_GetStringExtra_FullMethodName                 = "/app.IntentService/GetStringExtra"
+	IntentService_GetType_FullMethodName                        = "/app.IntentService/GetType"
+	IntentService_HasCategory_FullMethodName                    = "/app.IntentService/HasCategory"
+	IntentService_HasExtra_FullMethodName                       = "/app.IntentService/HasExtra"
+	IntentService_HasFileDescriptors_FullMethodName             = "/app.IntentService/HasFileDescriptors"
+	IntentService_IsMismatchingFilter_FullMethodName            = "/app.IntentService/IsMismatchingFilter"
+	IntentService_PutCharSequenceArrayListExtra_FullMethodName  = "/app.IntentService/PutCharSequenceArrayListExtra"
+	IntentService_PutExtra2_FullMethodName                      = "/app.IntentService/PutExtra2"
+	IntentService_PutExtra2_1_FullMethodName                    = "/app.IntentService/PutExtra2_1"
+	IntentService_PutExtra2_2_FullMethodName                    = "/app.IntentService/PutExtra2_2"
+	IntentService_PutExtra2_3_FullMethodName                    = "/app.IntentService/PutExtra2_3"
+	IntentService_PutExtra2_4_FullMethodName                    = "/app.IntentService/PutExtra2_4"
+	IntentService_PutExtra2_5_FullMethodName                    = "/app.IntentService/PutExtra2_5"
+	IntentService_PutExtra2_6_FullMethodName                    = "/app.IntentService/PutExtra2_6"
+	IntentService_PutExtra2_7_FullMethodName                    = "/app.IntentService/PutExtra2_7"
+	IntentService_PutExtra2_8_FullMethodName                    = "/app.IntentService/PutExtra2_8"
+	IntentService_PutExtra2_9_FullMethodName                    = "/app.IntentService/PutExtra2_9"
+	IntentService_PutExtra2_10_FullMethodName                   = "/app.IntentService/PutExtra2_10"
+	IntentService_PutExtra2_11_FullMethodName                   = "/app.IntentService/PutExtra2_11"
+	IntentService_PutExtra2_12_FullMethodName                   = "/app.IntentService/PutExtra2_12"
+	IntentService_PutExtra2_13_FullMethodName                   = "/app.IntentService/PutExtra2_13"
+	IntentService_PutExtra2_14_FullMethodName                   = "/app.IntentService/PutExtra2_14"
+	IntentService_PutExtra2_15_FullMethodName                   = "/app.IntentService/PutExtra2_15"
+	IntentService_PutExtra2_16_FullMethodName                   = "/app.IntentService/PutExtra2_16"
+	IntentService_PutExtra2_17_FullMethodName                   = "/app.IntentService/PutExtra2_17"
+	IntentService_PutExtra2_18_FullMethodName                   = "/app.IntentService/PutExtra2_18"
+	IntentService_PutExtra2_19_FullMethodName                   = "/app.IntentService/PutExtra2_19"
+	IntentService_PutExtra2_20_FullMethodName                   = "/app.IntentService/PutExtra2_20"
+	IntentService_PutExtra2_21_FullMethodName                   = "/app.IntentService/PutExtra2_21"
+	IntentService_PutExtra2_22_FullMethodName                   = "/app.IntentService/PutExtra2_22"
+	IntentService_PutExtra2_23_FullMethodName                   = "/app.IntentService/PutExtra2_23"
+	IntentService_PutExtras1_FullMethodName                     = "/app.IntentService/PutExtras1"
+	IntentService_PutExtras1_1_FullMethodName                   = "/app.IntentService/PutExtras1_1"
+	IntentService_PutIntegerArrayListExtra_FullMethodName       = "/app.IntentService/PutIntegerArrayListExtra"
+	IntentService_PutParcelableArrayListExtra_FullMethodName    = "/app.IntentService/PutParcelableArrayListExtra"
+	IntentService_PutStringArrayListExtra_FullMethodName        = "/app.IntentService/PutStringArrayListExtra"
+	IntentService_ReadFromParcel_FullMethodName                 = "/app.IntentService/ReadFromParcel"
+	IntentService_RemoveCategory_FullMethodName                 = "/app.IntentService/RemoveCategory"
+	IntentService_RemoveExtra_FullMethodName                    = "/app.IntentService/RemoveExtra"
+	IntentService_RemoveFlags_FullMethodName                    = "/app.IntentService/RemoveFlags"
+	IntentService_RemoveLaunchSecurityProtection_FullMethodName = "/app.IntentService/RemoveLaunchSecurityProtection"
+	IntentService_ReplaceExtras1_FullMethodName                 = "/app.IntentService/ReplaceExtras1"
+	IntentService_ReplaceExtras1_1_FullMethodName               = "/app.IntentService/ReplaceExtras1_1"
+	IntentService_ResolveActivity_FullMethodName                = "/app.IntentService/ResolveActivity"
+	IntentService_ResolveActivityInfo_FullMethodName            = "/app.IntentService/ResolveActivityInfo"
+	IntentService_ResolveType1_FullMethodName                   = "/app.IntentService/ResolveType1"
+	IntentService_ResolveType1_1_FullMethodName                 = "/app.IntentService/ResolveType1_1"
+	IntentService_ResolveTypeIfNeeded_FullMethodName            = "/app.IntentService/ResolveTypeIfNeeded"
+	IntentService_SetAction_FullMethodName                      = "/app.IntentService/SetAction"
+	IntentService_SetClass_FullMethodName                       = "/app.IntentService/SetClass"
+	IntentService_SetClassName2_FullMethodName                  = "/app.IntentService/SetClassName2"
+	IntentService_SetClassName2_1_FullMethodName                = "/app.IntentService/SetClassName2_1"
+	IntentService_SetClipData_FullMethodName                    = "/app.IntentService/SetClipData"
+	IntentService_SetComponent_FullMethodName                   = "/app.IntentService/SetComponent"
+	IntentService_SetData_FullMethodName                        = "/app.IntentService/SetData"
+	IntentService_SetDataAndNormalize_FullMethodName            = "/app.IntentService/SetDataAndNormalize"
+	IntentService_SetDataAndType_FullMethodName                 = "/app.IntentService/SetDataAndType"
+	IntentService_SetDataAndTypeAndNormalize_FullMethodName     = "/app.IntentService/SetDataAndTypeAndNormalize"
+	IntentService_SetExtrasClassLoader_FullMethodName           = "/app.IntentService/SetExtrasClassLoader"
+	IntentService_SetFlags_FullMethodName                       = "/app.IntentService/SetFlags"
+	IntentService_SetIdentifier_FullMethodName                  = "/app.IntentService/SetIdentifier"
+	IntentService_SetPackage_FullMethodName                     = "/app.IntentService/SetPackage"
+	IntentService_SetSelector_FullMethodName                    = "/app.IntentService/SetSelector"
+	IntentService_SetSourceBounds_FullMethodName                = "/app.IntentService/SetSourceBounds"
+	IntentService_SetType_FullMethodName                        = "/app.IntentService/SetType"
+	IntentService_SetTypeAndNormalize_FullMethodName            = "/app.IntentService/SetTypeAndNormalize"
+	IntentService_ToString_FullMethodName                       = "/app.IntentService/ToString"
+	IntentService_ToURI_FullMethodName                          = "/app.IntentService/ToURI"
+	IntentService_ToUri_FullMethodName                          = "/app.IntentService/ToUri"
+	IntentService_WriteToParcel_FullMethodName                  = "/app.IntentService/WriteToParcel"
+	IntentService_CreateChooser2_FullMethodName                 = "/app.IntentService/CreateChooser2"
+	IntentService_CreateChooser3_1_FullMethodName               = "/app.IntentService/CreateChooser3_1"
+	IntentService_GetIntent_FullMethodName                      = "/app.IntentService/GetIntent"
+	IntentService_GetIntentOld_FullMethodName                   = "/app.IntentService/GetIntentOld"
+	IntentService_MakeMainActivity_FullMethodName               = "/app.IntentService/MakeMainActivity"
+	IntentService_MakeMainSelectorActivity_FullMethodName       = "/app.IntentService/MakeMainSelectorActivity"
+	IntentService_MakeRestartActivityTask_FullMethodName        = "/app.IntentService/MakeRestartActivityTask"
+	IntentService_NormalizeMimeType_FullMethodName              = "/app.IntentService/NormalizeMimeType"
+	IntentService_ParseIntent_FullMethodName                    = "/app.IntentService/ParseIntent"
+	IntentService_ParseUri_FullMethodName                       = "/app.IntentService/ParseUri"
 )
 
 // IntentServiceClient is the client API for IntentService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type IntentServiceClient interface {
-	SetAction(ctx context.Context, in *SetActionRequest, opts ...grpc.CallOption) (*SetActionResponse, error)
-	SetData(ctx context.Context, in *SetDataRequest, opts ...grpc.CallOption) (*SetDataResponse, error)
-	SetComponent(ctx context.Context, in *SetComponentRequest, opts ...grpc.CallOption) (*SetComponentResponse, error)
-	SetFlags(ctx context.Context, in *SetFlagsRequest, opts ...grpc.CallOption) (*SetFlagsResponse, error)
-	AddFlags(ctx context.Context, in *AddFlagsRequest, opts ...grpc.CallOption) (*AddFlagsResponse, error)
 	AddCategory(ctx context.Context, in *AddCategoryRequest, opts ...grpc.CallOption) (*AddCategoryResponse, error)
-	SetPackage(ctx context.Context, in *SetPackageRequest, opts ...grpc.CallOption) (*SetPackageResponse, error)
-	SetType(ctx context.Context, in *SetTypeRequest, opts ...grpc.CallOption) (*SetTypeResponse, error)
+	AddFlags(ctx context.Context, in *AddFlagsRequest, opts ...grpc.CallOption) (*AddFlagsResponse, error)
+	Clone(ctx context.Context, in *CloneRequest, opts ...grpc.CallOption) (*CloneResponse, error)
+	CloneFilter(ctx context.Context, in *CloneFilterRequest, opts ...grpc.CallOption) (*CloneFilterResponse, error)
+	DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error)
+	FillIn(ctx context.Context, in *FillInRequest, opts ...grpc.CallOption) (*FillInResponse, error)
+	FilterEquals(ctx context.Context, in *FilterEqualsRequest, opts ...grpc.CallOption) (*FilterEqualsResponse, error)
+	FilterHashCode(ctx context.Context, in *FilterHashCodeRequest, opts ...grpc.CallOption) (*FilterHashCodeResponse, error)
 	GetAction(ctx context.Context, in *GetActionRequest, opts ...grpc.CallOption) (*GetActionResponse, error)
+	GetBooleanArrayExtra(ctx context.Context, in *GetBooleanArrayExtraRequest, opts ...grpc.CallOption) (*GetBooleanArrayExtraResponse, error)
+	GetBooleanExtra(ctx context.Context, in *GetBooleanExtraRequest, opts ...grpc.CallOption) (*GetBooleanExtraResponse, error)
+	GetBundleExtra(ctx context.Context, in *GetBundleExtraRequest, opts ...grpc.CallOption) (*GetBundleExtraResponse, error)
+	GetByteArrayExtra(ctx context.Context, in *GetByteArrayExtraRequest, opts ...grpc.CallOption) (*GetByteArrayExtraResponse, error)
+	GetByteExtra(ctx context.Context, in *GetByteExtraRequest, opts ...grpc.CallOption) (*GetByteExtraResponse, error)
+	GetCategories(ctx context.Context, in *GetCategoriesRequest, opts ...grpc.CallOption) (*GetCategoriesResponse, error)
+	GetCharArrayExtra(ctx context.Context, in *GetCharArrayExtraRequest, opts ...grpc.CallOption) (*GetCharArrayExtraResponse, error)
+	GetCharExtra(ctx context.Context, in *GetCharExtraRequest, opts ...grpc.CallOption) (*GetCharExtraResponse, error)
+	GetCharSequenceArrayExtra(ctx context.Context, in *GetCharSequenceArrayExtraRequest, opts ...grpc.CallOption) (*GetCharSequenceArrayExtraResponse, error)
+	GetCharSequenceArrayListExtra(ctx context.Context, in *GetCharSequenceArrayListExtraRequest, opts ...grpc.CallOption) (*GetCharSequenceArrayListExtraResponse, error)
+	GetCharSequenceExtra(ctx context.Context, in *GetCharSequenceExtraRequest, opts ...grpc.CallOption) (*GetCharSequenceExtraResponse, error)
+	GetClipData(ctx context.Context, in *GetClipDataRequest, opts ...grpc.CallOption) (*GetClipDataResponse, error)
+	GetComponent(ctx context.Context, in *GetComponentRequest, opts ...grpc.CallOption) (*GetComponentResponse, error)
 	GetData(ctx context.Context, in *GetDataRequest, opts ...grpc.CallOption) (*GetDataResponse, error)
-	GetStringExtra(ctx context.Context, in *GetStringExtraRequest, opts ...grpc.CallOption) (*GetStringExtraResponse, error)
-	GetBoolExtra(ctx context.Context, in *GetBoolExtraRequest, opts ...grpc.CallOption) (*GetBoolExtraResponse, error)
+	GetDataString(ctx context.Context, in *GetDataStringRequest, opts ...grpc.CallOption) (*GetDataStringResponse, error)
+	GetDoubleArrayExtra(ctx context.Context, in *GetDoubleArrayExtraRequest, opts ...grpc.CallOption) (*GetDoubleArrayExtraResponse, error)
+	GetDoubleExtra(ctx context.Context, in *GetDoubleExtraRequest, opts ...grpc.CallOption) (*GetDoubleExtraResponse, error)
+	GetExtras(ctx context.Context, in *GetExtrasRequest, opts ...grpc.CallOption) (*GetExtrasResponse, error)
+	GetFlags(ctx context.Context, in *GetFlagsRequest, opts ...grpc.CallOption) (*GetFlagsResponse, error)
+	GetFloatArrayExtra(ctx context.Context, in *GetFloatArrayExtraRequest, opts ...grpc.CallOption) (*GetFloatArrayExtraResponse, error)
+	GetFloatExtra(ctx context.Context, in *GetFloatExtraRequest, opts ...grpc.CallOption) (*GetFloatExtraResponse, error)
+	GetIdentifier(ctx context.Context, in *GetIdentifierRequest, opts ...grpc.CallOption) (*GetIdentifierResponse, error)
+	GetIntArrayExtra(ctx context.Context, in *GetIntArrayExtraRequest, opts ...grpc.CallOption) (*GetIntArrayExtraResponse, error)
 	GetIntExtra(ctx context.Context, in *GetIntExtraRequest, opts ...grpc.CallOption) (*GetIntExtraResponse, error)
-	PutStringExtra(ctx context.Context, in *PutStringExtraRequest, opts ...grpc.CallOption) (*PutStringExtraResponse, error)
-	PutIntExtra(ctx context.Context, in *PutIntExtraRequest, opts ...grpc.CallOption) (*PutIntExtraResponse, error)
-	PutBoolExtra(ctx context.Context, in *PutBoolExtraRequest, opts ...grpc.CallOption) (*PutBoolExtraResponse, error)
-	PutLongExtra(ctx context.Context, in *PutLongExtraRequest, opts ...grpc.CallOption) (*PutLongExtraResponse, error)
+	GetIntegerArrayListExtra(ctx context.Context, in *GetIntegerArrayListExtraRequest, opts ...grpc.CallOption) (*GetIntegerArrayListExtraResponse, error)
+	GetLongArrayExtra(ctx context.Context, in *GetLongArrayExtraRequest, opts ...grpc.CallOption) (*GetLongArrayExtraResponse, error)
+	GetLongExtra(ctx context.Context, in *GetLongExtraRequest, opts ...grpc.CallOption) (*GetLongExtraResponse, error)
+	GetPackage(ctx context.Context, in *GetPackageRequest, opts ...grpc.CallOption) (*GetPackageResponse, error)
+	GetParcelableArrayExtra(ctx context.Context, in *GetParcelableArrayExtraRequest, opts ...grpc.CallOption) (*GetParcelableArrayExtraResponse, error)
+	GetScheme(ctx context.Context, in *GetSchemeRequest, opts ...grpc.CallOption) (*GetSchemeResponse, error)
+	GetSelector(ctx context.Context, in *GetSelectorRequest, opts ...grpc.CallOption) (*GetSelectorResponse, error)
+	GetSerializableExtra(ctx context.Context, in *GetSerializableExtraRequest, opts ...grpc.CallOption) (*GetSerializableExtraResponse, error)
+	GetShortArrayExtra(ctx context.Context, in *GetShortArrayExtraRequest, opts ...grpc.CallOption) (*GetShortArrayExtraResponse, error)
+	GetShortExtra(ctx context.Context, in *GetShortExtraRequest, opts ...grpc.CallOption) (*GetShortExtraResponse, error)
+	GetSourceBounds(ctx context.Context, in *GetSourceBoundsRequest, opts ...grpc.CallOption) (*GetSourceBoundsResponse, error)
+	GetStringArrayExtra(ctx context.Context, in *GetStringArrayExtraRequest, opts ...grpc.CallOption) (*GetStringArrayExtraResponse, error)
+	GetStringArrayListExtra(ctx context.Context, in *GetStringArrayListExtraRequest, opts ...grpc.CallOption) (*GetStringArrayListExtraResponse, error)
+	GetStringExtra(ctx context.Context, in *GetStringExtraRequest, opts ...grpc.CallOption) (*GetStringExtraResponse, error)
+	GetType(ctx context.Context, in *GetTypeRequest, opts ...grpc.CallOption) (*GetTypeResponse, error)
+	HasCategory(ctx context.Context, in *HasCategoryRequest, opts ...grpc.CallOption) (*HasCategoryResponse, error)
+	HasExtra(ctx context.Context, in *HasExtraRequest, opts ...grpc.CallOption) (*HasExtraResponse, error)
+	HasFileDescriptors(ctx context.Context, in *HasFileDescriptorsRequest, opts ...grpc.CallOption) (*HasFileDescriptorsResponse, error)
+	IsMismatchingFilter(ctx context.Context, in *IsMismatchingFilterRequest, opts ...grpc.CallOption) (*IsMismatchingFilterResponse, error)
+	PutCharSequenceArrayListExtra(ctx context.Context, in *PutCharSequenceArrayListExtraRequest, opts ...grpc.CallOption) (*PutCharSequenceArrayListExtraResponse, error)
+	PutExtra2(ctx context.Context, in *PutExtra2Request, opts ...grpc.CallOption) (*PutExtra2Response, error)
+	PutExtra2_1(ctx context.Context, in *PutExtra2_1Request, opts ...grpc.CallOption) (*PutExtra2_1Response, error)
+	PutExtra2_2(ctx context.Context, in *PutExtra2_2Request, opts ...grpc.CallOption) (*PutExtra2_2Response, error)
+	PutExtra2_3(ctx context.Context, in *PutExtra2_3Request, opts ...grpc.CallOption) (*PutExtra2_3Response, error)
+	PutExtra2_4(ctx context.Context, in *PutExtra2_4Request, opts ...grpc.CallOption) (*PutExtra2_4Response, error)
+	PutExtra2_5(ctx context.Context, in *PutExtra2_5Request, opts ...grpc.CallOption) (*PutExtra2_5Response, error)
+	PutExtra2_6(ctx context.Context, in *PutExtra2_6Request, opts ...grpc.CallOption) (*PutExtra2_6Response, error)
+	PutExtra2_7(ctx context.Context, in *PutExtra2_7Request, opts ...grpc.CallOption) (*PutExtra2_7Response, error)
+	PutExtra2_8(ctx context.Context, in *PutExtra2_8Request, opts ...grpc.CallOption) (*PutExtra2_8Response, error)
+	PutExtra2_9(ctx context.Context, in *PutExtra2_9Request, opts ...grpc.CallOption) (*PutExtra2_9Response, error)
+	PutExtra2_10(ctx context.Context, in *PutExtra2_10Request, opts ...grpc.CallOption) (*PutExtra2_10Response, error)
+	PutExtra2_11(ctx context.Context, in *PutExtra2_11Request, opts ...grpc.CallOption) (*PutExtra2_11Response, error)
+	PutExtra2_12(ctx context.Context, in *PutExtra2_12Request, opts ...grpc.CallOption) (*PutExtra2_12Response, error)
+	PutExtra2_13(ctx context.Context, in *PutExtra2_13Request, opts ...grpc.CallOption) (*PutExtra2_13Response, error)
+	PutExtra2_14(ctx context.Context, in *PutExtra2_14Request, opts ...grpc.CallOption) (*PutExtra2_14Response, error)
+	PutExtra2_15(ctx context.Context, in *PutExtra2_15Request, opts ...grpc.CallOption) (*PutExtra2_15Response, error)
+	PutExtra2_16(ctx context.Context, in *PutExtra2_16Request, opts ...grpc.CallOption) (*PutExtra2_16Response, error)
+	PutExtra2_17(ctx context.Context, in *PutExtra2_17Request, opts ...grpc.CallOption) (*PutExtra2_17Response, error)
+	PutExtra2_18(ctx context.Context, in *PutExtra2_18Request, opts ...grpc.CallOption) (*PutExtra2_18Response, error)
+	PutExtra2_19(ctx context.Context, in *PutExtra2_19Request, opts ...grpc.CallOption) (*PutExtra2_19Response, error)
+	PutExtra2_20(ctx context.Context, in *PutExtra2_20Request, opts ...grpc.CallOption) (*PutExtra2_20Response, error)
+	PutExtra2_21(ctx context.Context, in *PutExtra2_21Request, opts ...grpc.CallOption) (*PutExtra2_21Response, error)
+	PutExtra2_22(ctx context.Context, in *PutExtra2_22Request, opts ...grpc.CallOption) (*PutExtra2_22Response, error)
+	PutExtra2_23(ctx context.Context, in *PutExtra2_23Request, opts ...grpc.CallOption) (*PutExtra2_23Response, error)
+	PutExtras1(ctx context.Context, in *PutExtras1Request, opts ...grpc.CallOption) (*PutExtras1Response, error)
+	PutExtras1_1(ctx context.Context, in *PutExtras1_1Request, opts ...grpc.CallOption) (*PutExtras1_1Response, error)
+	PutIntegerArrayListExtra(ctx context.Context, in *PutIntegerArrayListExtraRequest, opts ...grpc.CallOption) (*PutIntegerArrayListExtraResponse, error)
+	PutParcelableArrayListExtra(ctx context.Context, in *PutParcelableArrayListExtraRequest, opts ...grpc.CallOption) (*PutParcelableArrayListExtraResponse, error)
+	PutStringArrayListExtra(ctx context.Context, in *PutStringArrayListExtraRequest, opts ...grpc.CallOption) (*PutStringArrayListExtraResponse, error)
+	ReadFromParcel(ctx context.Context, in *ReadFromParcelRequest, opts ...grpc.CallOption) (*ReadFromParcelResponse, error)
+	RemoveCategory(ctx context.Context, in *RemoveCategoryRequest, opts ...grpc.CallOption) (*RemoveCategoryResponse, error)
+	RemoveExtra(ctx context.Context, in *RemoveExtraRequest, opts ...grpc.CallOption) (*RemoveExtraResponse, error)
+	RemoveFlags(ctx context.Context, in *RemoveFlagsRequest, opts ...grpc.CallOption) (*RemoveFlagsResponse, error)
+	RemoveLaunchSecurityProtection(ctx context.Context, in *RemoveLaunchSecurityProtectionRequest, opts ...grpc.CallOption) (*RemoveLaunchSecurityProtectionResponse, error)
+	ReplaceExtras1(ctx context.Context, in *ReplaceExtras1Request, opts ...grpc.CallOption) (*ReplaceExtras1Response, error)
+	ReplaceExtras1_1(ctx context.Context, in *ReplaceExtras1_1Request, opts ...grpc.CallOption) (*ReplaceExtras1_1Response, error)
+	ResolveActivity(ctx context.Context, in *ResolveActivityRequest, opts ...grpc.CallOption) (*ResolveActivityResponse, error)
+	ResolveActivityInfo(ctx context.Context, in *ResolveActivityInfoRequest, opts ...grpc.CallOption) (*ResolveActivityInfoResponse, error)
+	ResolveType1(ctx context.Context, in *ResolveType1Request, opts ...grpc.CallOption) (*ResolveType1Response, error)
+	ResolveType1_1(ctx context.Context, in *ResolveType1_1Request, opts ...grpc.CallOption) (*ResolveType1_1Response, error)
+	ResolveTypeIfNeeded(ctx context.Context, in *ResolveTypeIfNeededRequest, opts ...grpc.CallOption) (*ResolveTypeIfNeededResponse, error)
+	SetAction(ctx context.Context, in *SetActionRequest, opts ...grpc.CallOption) (*SetActionResponse, error)
+	SetClass(ctx context.Context, in *SetClassRequest, opts ...grpc.CallOption) (*SetClassResponse, error)
+	SetClassName2(ctx context.Context, in *SetClassName2Request, opts ...grpc.CallOption) (*SetClassName2Response, error)
+	SetClassName2_1(ctx context.Context, in *SetClassName2_1Request, opts ...grpc.CallOption) (*SetClassName2_1Response, error)
+	SetClipData(ctx context.Context, in *SetClipDataRequest, opts ...grpc.CallOption) (*SetClipDataResponse, error)
+	SetComponent(ctx context.Context, in *SetComponentRequest, opts ...grpc.CallOption) (*SetComponentResponse, error)
+	SetData(ctx context.Context, in *SetDataRequest, opts ...grpc.CallOption) (*SetDataResponse, error)
+	SetDataAndNormalize(ctx context.Context, in *SetDataAndNormalizeRequest, opts ...grpc.CallOption) (*SetDataAndNormalizeResponse, error)
+	SetDataAndType(ctx context.Context, in *SetDataAndTypeRequest, opts ...grpc.CallOption) (*SetDataAndTypeResponse, error)
+	SetDataAndTypeAndNormalize(ctx context.Context, in *SetDataAndTypeAndNormalizeRequest, opts ...grpc.CallOption) (*SetDataAndTypeAndNormalizeResponse, error)
+	SetExtrasClassLoader(ctx context.Context, in *SetExtrasClassLoaderRequest, opts ...grpc.CallOption) (*SetExtrasClassLoaderResponse, error)
+	SetFlags(ctx context.Context, in *SetFlagsRequest, opts ...grpc.CallOption) (*SetFlagsResponse, error)
+	SetIdentifier(ctx context.Context, in *SetIdentifierRequest, opts ...grpc.CallOption) (*SetIdentifierResponse, error)
+	SetPackage(ctx context.Context, in *SetPackageRequest, opts ...grpc.CallOption) (*SetPackageResponse, error)
+	SetSelector(ctx context.Context, in *SetSelectorRequest, opts ...grpc.CallOption) (*SetSelectorResponse, error)
+	SetSourceBounds(ctx context.Context, in *SetSourceBoundsRequest, opts ...grpc.CallOption) (*SetSourceBoundsResponse, error)
+	SetType(ctx context.Context, in *SetTypeRequest, opts ...grpc.CallOption) (*SetTypeResponse, error)
+	SetTypeAndNormalize(ctx context.Context, in *SetTypeAndNormalizeRequest, opts ...grpc.CallOption) (*SetTypeAndNormalizeResponse, error)
+	ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error)
+	ToURI(ctx context.Context, in *ToURIRequest, opts ...grpc.CallOption) (*ToURIResponse, error)
+	ToUri(ctx context.Context, in *ToUriRequest, opts ...grpc.CallOption) (*ToUriResponse, error)
+	WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error)
+	CreateChooser2(ctx context.Context, in *CreateChooser2Request, opts ...grpc.CallOption) (*CreateChooser2Response, error)
+	CreateChooser3_1(ctx context.Context, in *CreateChooser3_1Request, opts ...grpc.CallOption) (*CreateChooser3_1Response, error)
+	GetIntent(ctx context.Context, in *GetIntentRequest, opts ...grpc.CallOption) (*GetIntentResponse, error)
+	GetIntentOld(ctx context.Context, in *GetIntentOldRequest, opts ...grpc.CallOption) (*GetIntentOldResponse, error)
+	MakeMainActivity(ctx context.Context, in *MakeMainActivityRequest, opts ...grpc.CallOption) (*MakeMainActivityResponse, error)
+	MakeMainSelectorActivity(ctx context.Context, in *MakeMainSelectorActivityRequest, opts ...grpc.CallOption) (*MakeMainSelectorActivityResponse, error)
+	MakeRestartActivityTask(ctx context.Context, in *MakeRestartActivityTaskRequest, opts ...grpc.CallOption) (*MakeRestartActivityTaskResponse, error)
+	NormalizeMimeType(ctx context.Context, in *NormalizeMimeTypeRequest, opts ...grpc.CallOption) (*NormalizeMimeTypeResponse, error)
+	ParseIntent(ctx context.Context, in *ParseIntentRequest, opts ...grpc.CallOption) (*ParseIntentResponse, error)
+	ParseUri(ctx context.Context, in *ParseUriRequest, opts ...grpc.CallOption) (*ParseUriResponse, error)
 }
 
 type intentServiceClient struct {
@@ -997,40 +289,10 @@ func NewIntentServiceClient(cc grpc.ClientConnInterface) IntentServiceClient {
 	return &intentServiceClient{cc}
 }
 
-func (c *intentServiceClient) SetAction(ctx context.Context, in *SetActionRequest, opts ...grpc.CallOption) (*SetActionResponse, error) {
+func (c *intentServiceClient) AddCategory(ctx context.Context, in *AddCategoryRequest, opts ...grpc.CallOption) (*AddCategoryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetActionResponse)
-	err := c.cc.Invoke(ctx, IntentService_SetAction_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *intentServiceClient) SetData(ctx context.Context, in *SetDataRequest, opts ...grpc.CallOption) (*SetDataResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetDataResponse)
-	err := c.cc.Invoke(ctx, IntentService_SetData_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *intentServiceClient) SetComponent(ctx context.Context, in *SetComponentRequest, opts ...grpc.CallOption) (*SetComponentResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetComponentResponse)
-	err := c.cc.Invoke(ctx, IntentService_SetComponent_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *intentServiceClient) SetFlags(ctx context.Context, in *SetFlagsRequest, opts ...grpc.CallOption) (*SetFlagsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetFlagsResponse)
-	err := c.cc.Invoke(ctx, IntentService_SetFlags_FullMethodName, in, out, cOpts...)
+	out := new(AddCategoryResponse)
+	err := c.cc.Invoke(ctx, IntentService_AddCategory_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1047,30 +309,60 @@ func (c *intentServiceClient) AddFlags(ctx context.Context, in *AddFlagsRequest,
 	return out, nil
 }
 
-func (c *intentServiceClient) AddCategory(ctx context.Context, in *AddCategoryRequest, opts ...grpc.CallOption) (*AddCategoryResponse, error) {
+func (c *intentServiceClient) Clone(ctx context.Context, in *CloneRequest, opts ...grpc.CallOption) (*CloneResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddCategoryResponse)
-	err := c.cc.Invoke(ctx, IntentService_AddCategory_FullMethodName, in, out, cOpts...)
+	out := new(CloneResponse)
+	err := c.cc.Invoke(ctx, IntentService_Clone_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *intentServiceClient) SetPackage(ctx context.Context, in *SetPackageRequest, opts ...grpc.CallOption) (*SetPackageResponse, error) {
+func (c *intentServiceClient) CloneFilter(ctx context.Context, in *CloneFilterRequest, opts ...grpc.CallOption) (*CloneFilterResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetPackageResponse)
-	err := c.cc.Invoke(ctx, IntentService_SetPackage_FullMethodName, in, out, cOpts...)
+	out := new(CloneFilterResponse)
+	err := c.cc.Invoke(ctx, IntentService_CloneFilter_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *intentServiceClient) SetType(ctx context.Context, in *SetTypeRequest, opts ...grpc.CallOption) (*SetTypeResponse, error) {
+func (c *intentServiceClient) DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetTypeResponse)
-	err := c.cc.Invoke(ctx, IntentService_SetType_FullMethodName, in, out, cOpts...)
+	out := new(DescribeContentsResponse)
+	err := c.cc.Invoke(ctx, IntentService_DescribeContents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) FillIn(ctx context.Context, in *FillInRequest, opts ...grpc.CallOption) (*FillInResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FillInResponse)
+	err := c.cc.Invoke(ctx, IntentService_FillIn_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) FilterEquals(ctx context.Context, in *FilterEqualsRequest, opts ...grpc.CallOption) (*FilterEqualsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FilterEqualsResponse)
+	err := c.cc.Invoke(ctx, IntentService_FilterEquals_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) FilterHashCode(ctx context.Context, in *FilterHashCodeRequest, opts ...grpc.CallOption) (*FilterHashCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FilterHashCodeResponse)
+	err := c.cc.Invoke(ctx, IntentService_FilterHashCode_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1087,6 +379,136 @@ func (c *intentServiceClient) GetAction(ctx context.Context, in *GetActionReques
 	return out, nil
 }
 
+func (c *intentServiceClient) GetBooleanArrayExtra(ctx context.Context, in *GetBooleanArrayExtraRequest, opts ...grpc.CallOption) (*GetBooleanArrayExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBooleanArrayExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetBooleanArrayExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetBooleanExtra(ctx context.Context, in *GetBooleanExtraRequest, opts ...grpc.CallOption) (*GetBooleanExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBooleanExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetBooleanExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetBundleExtra(ctx context.Context, in *GetBundleExtraRequest, opts ...grpc.CallOption) (*GetBundleExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBundleExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetBundleExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetByteArrayExtra(ctx context.Context, in *GetByteArrayExtraRequest, opts ...grpc.CallOption) (*GetByteArrayExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetByteArrayExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetByteArrayExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetByteExtra(ctx context.Context, in *GetByteExtraRequest, opts ...grpc.CallOption) (*GetByteExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetByteExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetByteExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetCategories(ctx context.Context, in *GetCategoriesRequest, opts ...grpc.CallOption) (*GetCategoriesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCategoriesResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetCategories_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetCharArrayExtra(ctx context.Context, in *GetCharArrayExtraRequest, opts ...grpc.CallOption) (*GetCharArrayExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCharArrayExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetCharArrayExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetCharExtra(ctx context.Context, in *GetCharExtraRequest, opts ...grpc.CallOption) (*GetCharExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCharExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetCharExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetCharSequenceArrayExtra(ctx context.Context, in *GetCharSequenceArrayExtraRequest, opts ...grpc.CallOption) (*GetCharSequenceArrayExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCharSequenceArrayExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetCharSequenceArrayExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetCharSequenceArrayListExtra(ctx context.Context, in *GetCharSequenceArrayListExtraRequest, opts ...grpc.CallOption) (*GetCharSequenceArrayListExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCharSequenceArrayListExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetCharSequenceArrayListExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetCharSequenceExtra(ctx context.Context, in *GetCharSequenceExtraRequest, opts ...grpc.CallOption) (*GetCharSequenceExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCharSequenceExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetCharSequenceExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetClipData(ctx context.Context, in *GetClipDataRequest, opts ...grpc.CallOption) (*GetClipDataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetClipDataResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetClipData_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetComponent(ctx context.Context, in *GetComponentRequest, opts ...grpc.CallOption) (*GetComponentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetComponentResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetComponent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *intentServiceClient) GetData(ctx context.Context, in *GetDataRequest, opts ...grpc.CallOption) (*GetDataResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetDataResponse)
@@ -1097,20 +519,90 @@ func (c *intentServiceClient) GetData(ctx context.Context, in *GetDataRequest, o
 	return out, nil
 }
 
-func (c *intentServiceClient) GetStringExtra(ctx context.Context, in *GetStringExtraRequest, opts ...grpc.CallOption) (*GetStringExtraResponse, error) {
+func (c *intentServiceClient) GetDataString(ctx context.Context, in *GetDataStringRequest, opts ...grpc.CallOption) (*GetDataStringResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetStringExtraResponse)
-	err := c.cc.Invoke(ctx, IntentService_GetStringExtra_FullMethodName, in, out, cOpts...)
+	out := new(GetDataStringResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetDataString_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *intentServiceClient) GetBoolExtra(ctx context.Context, in *GetBoolExtraRequest, opts ...grpc.CallOption) (*GetBoolExtraResponse, error) {
+func (c *intentServiceClient) GetDoubleArrayExtra(ctx context.Context, in *GetDoubleArrayExtraRequest, opts ...grpc.CallOption) (*GetDoubleArrayExtraResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetBoolExtraResponse)
-	err := c.cc.Invoke(ctx, IntentService_GetBoolExtra_FullMethodName, in, out, cOpts...)
+	out := new(GetDoubleArrayExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetDoubleArrayExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetDoubleExtra(ctx context.Context, in *GetDoubleExtraRequest, opts ...grpc.CallOption) (*GetDoubleExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDoubleExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetDoubleExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetExtras(ctx context.Context, in *GetExtrasRequest, opts ...grpc.CallOption) (*GetExtrasResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetExtrasResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetExtras_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetFlags(ctx context.Context, in *GetFlagsRequest, opts ...grpc.CallOption) (*GetFlagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetFlagsResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetFlags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetFloatArrayExtra(ctx context.Context, in *GetFloatArrayExtraRequest, opts ...grpc.CallOption) (*GetFloatArrayExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetFloatArrayExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetFloatArrayExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetFloatExtra(ctx context.Context, in *GetFloatExtraRequest, opts ...grpc.CallOption) (*GetFloatExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetFloatExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetFloatExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetIdentifier(ctx context.Context, in *GetIdentifierRequest, opts ...grpc.CallOption) (*GetIdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetIdentifierResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetIdentifier_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetIntArrayExtra(ctx context.Context, in *GetIntArrayExtraRequest, opts ...grpc.CallOption) (*GetIntArrayExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetIntArrayExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetIntArrayExtra_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1127,40 +619,930 @@ func (c *intentServiceClient) GetIntExtra(ctx context.Context, in *GetIntExtraRe
 	return out, nil
 }
 
-func (c *intentServiceClient) PutStringExtra(ctx context.Context, in *PutStringExtraRequest, opts ...grpc.CallOption) (*PutStringExtraResponse, error) {
+func (c *intentServiceClient) GetIntegerArrayListExtra(ctx context.Context, in *GetIntegerArrayListExtraRequest, opts ...grpc.CallOption) (*GetIntegerArrayListExtraResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PutStringExtraResponse)
-	err := c.cc.Invoke(ctx, IntentService_PutStringExtra_FullMethodName, in, out, cOpts...)
+	out := new(GetIntegerArrayListExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetIntegerArrayListExtra_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *intentServiceClient) PutIntExtra(ctx context.Context, in *PutIntExtraRequest, opts ...grpc.CallOption) (*PutIntExtraResponse, error) {
+func (c *intentServiceClient) GetLongArrayExtra(ctx context.Context, in *GetLongArrayExtraRequest, opts ...grpc.CallOption) (*GetLongArrayExtraResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PutIntExtraResponse)
-	err := c.cc.Invoke(ctx, IntentService_PutIntExtra_FullMethodName, in, out, cOpts...)
+	out := new(GetLongArrayExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetLongArrayExtra_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *intentServiceClient) PutBoolExtra(ctx context.Context, in *PutBoolExtraRequest, opts ...grpc.CallOption) (*PutBoolExtraResponse, error) {
+func (c *intentServiceClient) GetLongExtra(ctx context.Context, in *GetLongExtraRequest, opts ...grpc.CallOption) (*GetLongExtraResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PutBoolExtraResponse)
-	err := c.cc.Invoke(ctx, IntentService_PutBoolExtra_FullMethodName, in, out, cOpts...)
+	out := new(GetLongExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetLongExtra_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *intentServiceClient) PutLongExtra(ctx context.Context, in *PutLongExtraRequest, opts ...grpc.CallOption) (*PutLongExtraResponse, error) {
+func (c *intentServiceClient) GetPackage(ctx context.Context, in *GetPackageRequest, opts ...grpc.CallOption) (*GetPackageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PutLongExtraResponse)
-	err := c.cc.Invoke(ctx, IntentService_PutLongExtra_FullMethodName, in, out, cOpts...)
+	out := new(GetPackageResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetPackage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetParcelableArrayExtra(ctx context.Context, in *GetParcelableArrayExtraRequest, opts ...grpc.CallOption) (*GetParcelableArrayExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetParcelableArrayExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetParcelableArrayExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetScheme(ctx context.Context, in *GetSchemeRequest, opts ...grpc.CallOption) (*GetSchemeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSchemeResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetScheme_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetSelector(ctx context.Context, in *GetSelectorRequest, opts ...grpc.CallOption) (*GetSelectorResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSelectorResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetSelector_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetSerializableExtra(ctx context.Context, in *GetSerializableExtraRequest, opts ...grpc.CallOption) (*GetSerializableExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSerializableExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetSerializableExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetShortArrayExtra(ctx context.Context, in *GetShortArrayExtraRequest, opts ...grpc.CallOption) (*GetShortArrayExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetShortArrayExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetShortArrayExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetShortExtra(ctx context.Context, in *GetShortExtraRequest, opts ...grpc.CallOption) (*GetShortExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetShortExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetShortExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetSourceBounds(ctx context.Context, in *GetSourceBoundsRequest, opts ...grpc.CallOption) (*GetSourceBoundsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSourceBoundsResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetSourceBounds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetStringArrayExtra(ctx context.Context, in *GetStringArrayExtraRequest, opts ...grpc.CallOption) (*GetStringArrayExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetStringArrayExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetStringArrayExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetStringArrayListExtra(ctx context.Context, in *GetStringArrayListExtraRequest, opts ...grpc.CallOption) (*GetStringArrayListExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetStringArrayListExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetStringArrayListExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetStringExtra(ctx context.Context, in *GetStringExtraRequest, opts ...grpc.CallOption) (*GetStringExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetStringExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetStringExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetType(ctx context.Context, in *GetTypeRequest, opts ...grpc.CallOption) (*GetTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTypeResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) HasCategory(ctx context.Context, in *HasCategoryRequest, opts ...grpc.CallOption) (*HasCategoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HasCategoryResponse)
+	err := c.cc.Invoke(ctx, IntentService_HasCategory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) HasExtra(ctx context.Context, in *HasExtraRequest, opts ...grpc.CallOption) (*HasExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HasExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_HasExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) HasFileDescriptors(ctx context.Context, in *HasFileDescriptorsRequest, opts ...grpc.CallOption) (*HasFileDescriptorsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HasFileDescriptorsResponse)
+	err := c.cc.Invoke(ctx, IntentService_HasFileDescriptors_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) IsMismatchingFilter(ctx context.Context, in *IsMismatchingFilterRequest, opts ...grpc.CallOption) (*IsMismatchingFilterResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsMismatchingFilterResponse)
+	err := c.cc.Invoke(ctx, IntentService_IsMismatchingFilter_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutCharSequenceArrayListExtra(ctx context.Context, in *PutCharSequenceArrayListExtraRequest, opts ...grpc.CallOption) (*PutCharSequenceArrayListExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutCharSequenceArrayListExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_PutCharSequenceArrayListExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2(ctx context.Context, in *PutExtra2Request, opts ...grpc.CallOption) (*PutExtra2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_1(ctx context.Context, in *PutExtra2_1Request, opts ...grpc.CallOption) (*PutExtra2_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_1Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_2(ctx context.Context, in *PutExtra2_2Request, opts ...grpc.CallOption) (*PutExtra2_2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_2Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_3(ctx context.Context, in *PutExtra2_3Request, opts ...grpc.CallOption) (*PutExtra2_3Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_3Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_3_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_4(ctx context.Context, in *PutExtra2_4Request, opts ...grpc.CallOption) (*PutExtra2_4Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_4Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_4_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_5(ctx context.Context, in *PutExtra2_5Request, opts ...grpc.CallOption) (*PutExtra2_5Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_5Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_5_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_6(ctx context.Context, in *PutExtra2_6Request, opts ...grpc.CallOption) (*PutExtra2_6Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_6Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_6_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_7(ctx context.Context, in *PutExtra2_7Request, opts ...grpc.CallOption) (*PutExtra2_7Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_7Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_7_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_8(ctx context.Context, in *PutExtra2_8Request, opts ...grpc.CallOption) (*PutExtra2_8Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_8Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_8_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_9(ctx context.Context, in *PutExtra2_9Request, opts ...grpc.CallOption) (*PutExtra2_9Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_9Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_9_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_10(ctx context.Context, in *PutExtra2_10Request, opts ...grpc.CallOption) (*PutExtra2_10Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_10Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_10_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_11(ctx context.Context, in *PutExtra2_11Request, opts ...grpc.CallOption) (*PutExtra2_11Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_11Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_11_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_12(ctx context.Context, in *PutExtra2_12Request, opts ...grpc.CallOption) (*PutExtra2_12Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_12Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_12_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_13(ctx context.Context, in *PutExtra2_13Request, opts ...grpc.CallOption) (*PutExtra2_13Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_13Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_13_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_14(ctx context.Context, in *PutExtra2_14Request, opts ...grpc.CallOption) (*PutExtra2_14Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_14Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_14_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_15(ctx context.Context, in *PutExtra2_15Request, opts ...grpc.CallOption) (*PutExtra2_15Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_15Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_15_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_16(ctx context.Context, in *PutExtra2_16Request, opts ...grpc.CallOption) (*PutExtra2_16Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_16Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_16_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_17(ctx context.Context, in *PutExtra2_17Request, opts ...grpc.CallOption) (*PutExtra2_17Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_17Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_17_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_18(ctx context.Context, in *PutExtra2_18Request, opts ...grpc.CallOption) (*PutExtra2_18Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_18Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_18_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_19(ctx context.Context, in *PutExtra2_19Request, opts ...grpc.CallOption) (*PutExtra2_19Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_19Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_19_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_20(ctx context.Context, in *PutExtra2_20Request, opts ...grpc.CallOption) (*PutExtra2_20Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_20Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_20_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_21(ctx context.Context, in *PutExtra2_21Request, opts ...grpc.CallOption) (*PutExtra2_21Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_21Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_21_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_22(ctx context.Context, in *PutExtra2_22Request, opts ...grpc.CallOption) (*PutExtra2_22Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_22Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_22_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtra2_23(ctx context.Context, in *PutExtra2_23Request, opts ...grpc.CallOption) (*PutExtra2_23Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtra2_23Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtra2_23_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtras1(ctx context.Context, in *PutExtras1Request, opts ...grpc.CallOption) (*PutExtras1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtras1Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtras1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutExtras1_1(ctx context.Context, in *PutExtras1_1Request, opts ...grpc.CallOption) (*PutExtras1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutExtras1_1Response)
+	err := c.cc.Invoke(ctx, IntentService_PutExtras1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutIntegerArrayListExtra(ctx context.Context, in *PutIntegerArrayListExtraRequest, opts ...grpc.CallOption) (*PutIntegerArrayListExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutIntegerArrayListExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_PutIntegerArrayListExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutParcelableArrayListExtra(ctx context.Context, in *PutParcelableArrayListExtraRequest, opts ...grpc.CallOption) (*PutParcelableArrayListExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutParcelableArrayListExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_PutParcelableArrayListExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) PutStringArrayListExtra(ctx context.Context, in *PutStringArrayListExtraRequest, opts ...grpc.CallOption) (*PutStringArrayListExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PutStringArrayListExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_PutStringArrayListExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) ReadFromParcel(ctx context.Context, in *ReadFromParcelRequest, opts ...grpc.CallOption) (*ReadFromParcelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReadFromParcelResponse)
+	err := c.cc.Invoke(ctx, IntentService_ReadFromParcel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) RemoveCategory(ctx context.Context, in *RemoveCategoryRequest, opts ...grpc.CallOption) (*RemoveCategoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveCategoryResponse)
+	err := c.cc.Invoke(ctx, IntentService_RemoveCategory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) RemoveExtra(ctx context.Context, in *RemoveExtraRequest, opts ...grpc.CallOption) (*RemoveExtraResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveExtraResponse)
+	err := c.cc.Invoke(ctx, IntentService_RemoveExtra_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) RemoveFlags(ctx context.Context, in *RemoveFlagsRequest, opts ...grpc.CallOption) (*RemoveFlagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveFlagsResponse)
+	err := c.cc.Invoke(ctx, IntentService_RemoveFlags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) RemoveLaunchSecurityProtection(ctx context.Context, in *RemoveLaunchSecurityProtectionRequest, opts ...grpc.CallOption) (*RemoveLaunchSecurityProtectionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveLaunchSecurityProtectionResponse)
+	err := c.cc.Invoke(ctx, IntentService_RemoveLaunchSecurityProtection_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) ReplaceExtras1(ctx context.Context, in *ReplaceExtras1Request, opts ...grpc.CallOption) (*ReplaceExtras1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReplaceExtras1Response)
+	err := c.cc.Invoke(ctx, IntentService_ReplaceExtras1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) ReplaceExtras1_1(ctx context.Context, in *ReplaceExtras1_1Request, opts ...grpc.CallOption) (*ReplaceExtras1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReplaceExtras1_1Response)
+	err := c.cc.Invoke(ctx, IntentService_ReplaceExtras1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) ResolveActivity(ctx context.Context, in *ResolveActivityRequest, opts ...grpc.CallOption) (*ResolveActivityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResolveActivityResponse)
+	err := c.cc.Invoke(ctx, IntentService_ResolveActivity_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) ResolveActivityInfo(ctx context.Context, in *ResolveActivityInfoRequest, opts ...grpc.CallOption) (*ResolveActivityInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResolveActivityInfoResponse)
+	err := c.cc.Invoke(ctx, IntentService_ResolveActivityInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) ResolveType1(ctx context.Context, in *ResolveType1Request, opts ...grpc.CallOption) (*ResolveType1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResolveType1Response)
+	err := c.cc.Invoke(ctx, IntentService_ResolveType1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) ResolveType1_1(ctx context.Context, in *ResolveType1_1Request, opts ...grpc.CallOption) (*ResolveType1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResolveType1_1Response)
+	err := c.cc.Invoke(ctx, IntentService_ResolveType1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) ResolveTypeIfNeeded(ctx context.Context, in *ResolveTypeIfNeededRequest, opts ...grpc.CallOption) (*ResolveTypeIfNeededResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResolveTypeIfNeededResponse)
+	err := c.cc.Invoke(ctx, IntentService_ResolveTypeIfNeeded_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetAction(ctx context.Context, in *SetActionRequest, opts ...grpc.CallOption) (*SetActionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetActionResponse)
+	err := c.cc.Invoke(ctx, IntentService_SetAction_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetClass(ctx context.Context, in *SetClassRequest, opts ...grpc.CallOption) (*SetClassResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetClassResponse)
+	err := c.cc.Invoke(ctx, IntentService_SetClass_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetClassName2(ctx context.Context, in *SetClassName2Request, opts ...grpc.CallOption) (*SetClassName2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetClassName2Response)
+	err := c.cc.Invoke(ctx, IntentService_SetClassName2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetClassName2_1(ctx context.Context, in *SetClassName2_1Request, opts ...grpc.CallOption) (*SetClassName2_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetClassName2_1Response)
+	err := c.cc.Invoke(ctx, IntentService_SetClassName2_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetClipData(ctx context.Context, in *SetClipDataRequest, opts ...grpc.CallOption) (*SetClipDataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetClipDataResponse)
+	err := c.cc.Invoke(ctx, IntentService_SetClipData_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetComponent(ctx context.Context, in *SetComponentRequest, opts ...grpc.CallOption) (*SetComponentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetComponentResponse)
+	err := c.cc.Invoke(ctx, IntentService_SetComponent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetData(ctx context.Context, in *SetDataRequest, opts ...grpc.CallOption) (*SetDataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDataResponse)
+	err := c.cc.Invoke(ctx, IntentService_SetData_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetDataAndNormalize(ctx context.Context, in *SetDataAndNormalizeRequest, opts ...grpc.CallOption) (*SetDataAndNormalizeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDataAndNormalizeResponse)
+	err := c.cc.Invoke(ctx, IntentService_SetDataAndNormalize_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetDataAndType(ctx context.Context, in *SetDataAndTypeRequest, opts ...grpc.CallOption) (*SetDataAndTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDataAndTypeResponse)
+	err := c.cc.Invoke(ctx, IntentService_SetDataAndType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetDataAndTypeAndNormalize(ctx context.Context, in *SetDataAndTypeAndNormalizeRequest, opts ...grpc.CallOption) (*SetDataAndTypeAndNormalizeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDataAndTypeAndNormalizeResponse)
+	err := c.cc.Invoke(ctx, IntentService_SetDataAndTypeAndNormalize_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetExtrasClassLoader(ctx context.Context, in *SetExtrasClassLoaderRequest, opts ...grpc.CallOption) (*SetExtrasClassLoaderResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetExtrasClassLoaderResponse)
+	err := c.cc.Invoke(ctx, IntentService_SetExtrasClassLoader_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetFlags(ctx context.Context, in *SetFlagsRequest, opts ...grpc.CallOption) (*SetFlagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetFlagsResponse)
+	err := c.cc.Invoke(ctx, IntentService_SetFlags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetIdentifier(ctx context.Context, in *SetIdentifierRequest, opts ...grpc.CallOption) (*SetIdentifierResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetIdentifierResponse)
+	err := c.cc.Invoke(ctx, IntentService_SetIdentifier_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetPackage(ctx context.Context, in *SetPackageRequest, opts ...grpc.CallOption) (*SetPackageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetPackageResponse)
+	err := c.cc.Invoke(ctx, IntentService_SetPackage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetSelector(ctx context.Context, in *SetSelectorRequest, opts ...grpc.CallOption) (*SetSelectorResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetSelectorResponse)
+	err := c.cc.Invoke(ctx, IntentService_SetSelector_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetSourceBounds(ctx context.Context, in *SetSourceBoundsRequest, opts ...grpc.CallOption) (*SetSourceBoundsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetSourceBoundsResponse)
+	err := c.cc.Invoke(ctx, IntentService_SetSourceBounds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetType(ctx context.Context, in *SetTypeRequest, opts ...grpc.CallOption) (*SetTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetTypeResponse)
+	err := c.cc.Invoke(ctx, IntentService_SetType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) SetTypeAndNormalize(ctx context.Context, in *SetTypeAndNormalizeRequest, opts ...grpc.CallOption) (*SetTypeAndNormalizeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetTypeAndNormalizeResponse)
+	err := c.cc.Invoke(ctx, IntentService_SetTypeAndNormalize_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ToStringResponse)
+	err := c.cc.Invoke(ctx, IntentService_ToString_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) ToURI(ctx context.Context, in *ToURIRequest, opts ...grpc.CallOption) (*ToURIResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ToURIResponse)
+	err := c.cc.Invoke(ctx, IntentService_ToURI_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) ToUri(ctx context.Context, in *ToUriRequest, opts ...grpc.CallOption) (*ToUriResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ToUriResponse)
+	err := c.cc.Invoke(ctx, IntentService_ToUri_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteToParcelResponse)
+	err := c.cc.Invoke(ctx, IntentService_WriteToParcel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) CreateChooser2(ctx context.Context, in *CreateChooser2Request, opts ...grpc.CallOption) (*CreateChooser2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateChooser2Response)
+	err := c.cc.Invoke(ctx, IntentService_CreateChooser2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) CreateChooser3_1(ctx context.Context, in *CreateChooser3_1Request, opts ...grpc.CallOption) (*CreateChooser3_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateChooser3_1Response)
+	err := c.cc.Invoke(ctx, IntentService_CreateChooser3_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetIntent(ctx context.Context, in *GetIntentRequest, opts ...grpc.CallOption) (*GetIntentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetIntentResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetIntent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) GetIntentOld(ctx context.Context, in *GetIntentOldRequest, opts ...grpc.CallOption) (*GetIntentOldResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetIntentOldResponse)
+	err := c.cc.Invoke(ctx, IntentService_GetIntentOld_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) MakeMainActivity(ctx context.Context, in *MakeMainActivityRequest, opts ...grpc.CallOption) (*MakeMainActivityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MakeMainActivityResponse)
+	err := c.cc.Invoke(ctx, IntentService_MakeMainActivity_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) MakeMainSelectorActivity(ctx context.Context, in *MakeMainSelectorActivityRequest, opts ...grpc.CallOption) (*MakeMainSelectorActivityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MakeMainSelectorActivityResponse)
+	err := c.cc.Invoke(ctx, IntentService_MakeMainSelectorActivity_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) MakeRestartActivityTask(ctx context.Context, in *MakeRestartActivityTaskRequest, opts ...grpc.CallOption) (*MakeRestartActivityTaskResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MakeRestartActivityTaskResponse)
+	err := c.cc.Invoke(ctx, IntentService_MakeRestartActivityTask_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) NormalizeMimeType(ctx context.Context, in *NormalizeMimeTypeRequest, opts ...grpc.CallOption) (*NormalizeMimeTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NormalizeMimeTypeResponse)
+	err := c.cc.Invoke(ctx, IntentService_NormalizeMimeType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) ParseIntent(ctx context.Context, in *ParseIntentRequest, opts ...grpc.CallOption) (*ParseIntentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ParseIntentResponse)
+	err := c.cc.Invoke(ctx, IntentService_ParseIntent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *intentServiceClient) ParseUri(ctx context.Context, in *ParseUriRequest, opts ...grpc.CallOption) (*ParseUriResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ParseUriResponse)
+	err := c.cc.Invoke(ctx, IntentService_ParseUri_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1171,23 +1553,132 @@ func (c *intentServiceClient) PutLongExtra(ctx context.Context, in *PutLongExtra
 // All implementations must embed UnimplementedIntentServiceServer
 // for forward compatibility.
 type IntentServiceServer interface {
-	SetAction(context.Context, *SetActionRequest) (*SetActionResponse, error)
-	SetData(context.Context, *SetDataRequest) (*SetDataResponse, error)
-	SetComponent(context.Context, *SetComponentRequest) (*SetComponentResponse, error)
-	SetFlags(context.Context, *SetFlagsRequest) (*SetFlagsResponse, error)
-	AddFlags(context.Context, *AddFlagsRequest) (*AddFlagsResponse, error)
 	AddCategory(context.Context, *AddCategoryRequest) (*AddCategoryResponse, error)
-	SetPackage(context.Context, *SetPackageRequest) (*SetPackageResponse, error)
-	SetType(context.Context, *SetTypeRequest) (*SetTypeResponse, error)
+	AddFlags(context.Context, *AddFlagsRequest) (*AddFlagsResponse, error)
+	Clone(context.Context, *CloneRequest) (*CloneResponse, error)
+	CloneFilter(context.Context, *CloneFilterRequest) (*CloneFilterResponse, error)
+	DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error)
+	FillIn(context.Context, *FillInRequest) (*FillInResponse, error)
+	FilterEquals(context.Context, *FilterEqualsRequest) (*FilterEqualsResponse, error)
+	FilterHashCode(context.Context, *FilterHashCodeRequest) (*FilterHashCodeResponse, error)
 	GetAction(context.Context, *GetActionRequest) (*GetActionResponse, error)
+	GetBooleanArrayExtra(context.Context, *GetBooleanArrayExtraRequest) (*GetBooleanArrayExtraResponse, error)
+	GetBooleanExtra(context.Context, *GetBooleanExtraRequest) (*GetBooleanExtraResponse, error)
+	GetBundleExtra(context.Context, *GetBundleExtraRequest) (*GetBundleExtraResponse, error)
+	GetByteArrayExtra(context.Context, *GetByteArrayExtraRequest) (*GetByteArrayExtraResponse, error)
+	GetByteExtra(context.Context, *GetByteExtraRequest) (*GetByteExtraResponse, error)
+	GetCategories(context.Context, *GetCategoriesRequest) (*GetCategoriesResponse, error)
+	GetCharArrayExtra(context.Context, *GetCharArrayExtraRequest) (*GetCharArrayExtraResponse, error)
+	GetCharExtra(context.Context, *GetCharExtraRequest) (*GetCharExtraResponse, error)
+	GetCharSequenceArrayExtra(context.Context, *GetCharSequenceArrayExtraRequest) (*GetCharSequenceArrayExtraResponse, error)
+	GetCharSequenceArrayListExtra(context.Context, *GetCharSequenceArrayListExtraRequest) (*GetCharSequenceArrayListExtraResponse, error)
+	GetCharSequenceExtra(context.Context, *GetCharSequenceExtraRequest) (*GetCharSequenceExtraResponse, error)
+	GetClipData(context.Context, *GetClipDataRequest) (*GetClipDataResponse, error)
+	GetComponent(context.Context, *GetComponentRequest) (*GetComponentResponse, error)
 	GetData(context.Context, *GetDataRequest) (*GetDataResponse, error)
-	GetStringExtra(context.Context, *GetStringExtraRequest) (*GetStringExtraResponse, error)
-	GetBoolExtra(context.Context, *GetBoolExtraRequest) (*GetBoolExtraResponse, error)
+	GetDataString(context.Context, *GetDataStringRequest) (*GetDataStringResponse, error)
+	GetDoubleArrayExtra(context.Context, *GetDoubleArrayExtraRequest) (*GetDoubleArrayExtraResponse, error)
+	GetDoubleExtra(context.Context, *GetDoubleExtraRequest) (*GetDoubleExtraResponse, error)
+	GetExtras(context.Context, *GetExtrasRequest) (*GetExtrasResponse, error)
+	GetFlags(context.Context, *GetFlagsRequest) (*GetFlagsResponse, error)
+	GetFloatArrayExtra(context.Context, *GetFloatArrayExtraRequest) (*GetFloatArrayExtraResponse, error)
+	GetFloatExtra(context.Context, *GetFloatExtraRequest) (*GetFloatExtraResponse, error)
+	GetIdentifier(context.Context, *GetIdentifierRequest) (*GetIdentifierResponse, error)
+	GetIntArrayExtra(context.Context, *GetIntArrayExtraRequest) (*GetIntArrayExtraResponse, error)
 	GetIntExtra(context.Context, *GetIntExtraRequest) (*GetIntExtraResponse, error)
-	PutStringExtra(context.Context, *PutStringExtraRequest) (*PutStringExtraResponse, error)
-	PutIntExtra(context.Context, *PutIntExtraRequest) (*PutIntExtraResponse, error)
-	PutBoolExtra(context.Context, *PutBoolExtraRequest) (*PutBoolExtraResponse, error)
-	PutLongExtra(context.Context, *PutLongExtraRequest) (*PutLongExtraResponse, error)
+	GetIntegerArrayListExtra(context.Context, *GetIntegerArrayListExtraRequest) (*GetIntegerArrayListExtraResponse, error)
+	GetLongArrayExtra(context.Context, *GetLongArrayExtraRequest) (*GetLongArrayExtraResponse, error)
+	GetLongExtra(context.Context, *GetLongExtraRequest) (*GetLongExtraResponse, error)
+	GetPackage(context.Context, *GetPackageRequest) (*GetPackageResponse, error)
+	GetParcelableArrayExtra(context.Context, *GetParcelableArrayExtraRequest) (*GetParcelableArrayExtraResponse, error)
+	GetScheme(context.Context, *GetSchemeRequest) (*GetSchemeResponse, error)
+	GetSelector(context.Context, *GetSelectorRequest) (*GetSelectorResponse, error)
+	GetSerializableExtra(context.Context, *GetSerializableExtraRequest) (*GetSerializableExtraResponse, error)
+	GetShortArrayExtra(context.Context, *GetShortArrayExtraRequest) (*GetShortArrayExtraResponse, error)
+	GetShortExtra(context.Context, *GetShortExtraRequest) (*GetShortExtraResponse, error)
+	GetSourceBounds(context.Context, *GetSourceBoundsRequest) (*GetSourceBoundsResponse, error)
+	GetStringArrayExtra(context.Context, *GetStringArrayExtraRequest) (*GetStringArrayExtraResponse, error)
+	GetStringArrayListExtra(context.Context, *GetStringArrayListExtraRequest) (*GetStringArrayListExtraResponse, error)
+	GetStringExtra(context.Context, *GetStringExtraRequest) (*GetStringExtraResponse, error)
+	GetType(context.Context, *GetTypeRequest) (*GetTypeResponse, error)
+	HasCategory(context.Context, *HasCategoryRequest) (*HasCategoryResponse, error)
+	HasExtra(context.Context, *HasExtraRequest) (*HasExtraResponse, error)
+	HasFileDescriptors(context.Context, *HasFileDescriptorsRequest) (*HasFileDescriptorsResponse, error)
+	IsMismatchingFilter(context.Context, *IsMismatchingFilterRequest) (*IsMismatchingFilterResponse, error)
+	PutCharSequenceArrayListExtra(context.Context, *PutCharSequenceArrayListExtraRequest) (*PutCharSequenceArrayListExtraResponse, error)
+	PutExtra2(context.Context, *PutExtra2Request) (*PutExtra2Response, error)
+	PutExtra2_1(context.Context, *PutExtra2_1Request) (*PutExtra2_1Response, error)
+	PutExtra2_2(context.Context, *PutExtra2_2Request) (*PutExtra2_2Response, error)
+	PutExtra2_3(context.Context, *PutExtra2_3Request) (*PutExtra2_3Response, error)
+	PutExtra2_4(context.Context, *PutExtra2_4Request) (*PutExtra2_4Response, error)
+	PutExtra2_5(context.Context, *PutExtra2_5Request) (*PutExtra2_5Response, error)
+	PutExtra2_6(context.Context, *PutExtra2_6Request) (*PutExtra2_6Response, error)
+	PutExtra2_7(context.Context, *PutExtra2_7Request) (*PutExtra2_7Response, error)
+	PutExtra2_8(context.Context, *PutExtra2_8Request) (*PutExtra2_8Response, error)
+	PutExtra2_9(context.Context, *PutExtra2_9Request) (*PutExtra2_9Response, error)
+	PutExtra2_10(context.Context, *PutExtra2_10Request) (*PutExtra2_10Response, error)
+	PutExtra2_11(context.Context, *PutExtra2_11Request) (*PutExtra2_11Response, error)
+	PutExtra2_12(context.Context, *PutExtra2_12Request) (*PutExtra2_12Response, error)
+	PutExtra2_13(context.Context, *PutExtra2_13Request) (*PutExtra2_13Response, error)
+	PutExtra2_14(context.Context, *PutExtra2_14Request) (*PutExtra2_14Response, error)
+	PutExtra2_15(context.Context, *PutExtra2_15Request) (*PutExtra2_15Response, error)
+	PutExtra2_16(context.Context, *PutExtra2_16Request) (*PutExtra2_16Response, error)
+	PutExtra2_17(context.Context, *PutExtra2_17Request) (*PutExtra2_17Response, error)
+	PutExtra2_18(context.Context, *PutExtra2_18Request) (*PutExtra2_18Response, error)
+	PutExtra2_19(context.Context, *PutExtra2_19Request) (*PutExtra2_19Response, error)
+	PutExtra2_20(context.Context, *PutExtra2_20Request) (*PutExtra2_20Response, error)
+	PutExtra2_21(context.Context, *PutExtra2_21Request) (*PutExtra2_21Response, error)
+	PutExtra2_22(context.Context, *PutExtra2_22Request) (*PutExtra2_22Response, error)
+	PutExtra2_23(context.Context, *PutExtra2_23Request) (*PutExtra2_23Response, error)
+	PutExtras1(context.Context, *PutExtras1Request) (*PutExtras1Response, error)
+	PutExtras1_1(context.Context, *PutExtras1_1Request) (*PutExtras1_1Response, error)
+	PutIntegerArrayListExtra(context.Context, *PutIntegerArrayListExtraRequest) (*PutIntegerArrayListExtraResponse, error)
+	PutParcelableArrayListExtra(context.Context, *PutParcelableArrayListExtraRequest) (*PutParcelableArrayListExtraResponse, error)
+	PutStringArrayListExtra(context.Context, *PutStringArrayListExtraRequest) (*PutStringArrayListExtraResponse, error)
+	ReadFromParcel(context.Context, *ReadFromParcelRequest) (*ReadFromParcelResponse, error)
+	RemoveCategory(context.Context, *RemoveCategoryRequest) (*RemoveCategoryResponse, error)
+	RemoveExtra(context.Context, *RemoveExtraRequest) (*RemoveExtraResponse, error)
+	RemoveFlags(context.Context, *RemoveFlagsRequest) (*RemoveFlagsResponse, error)
+	RemoveLaunchSecurityProtection(context.Context, *RemoveLaunchSecurityProtectionRequest) (*RemoveLaunchSecurityProtectionResponse, error)
+	ReplaceExtras1(context.Context, *ReplaceExtras1Request) (*ReplaceExtras1Response, error)
+	ReplaceExtras1_1(context.Context, *ReplaceExtras1_1Request) (*ReplaceExtras1_1Response, error)
+	ResolveActivity(context.Context, *ResolveActivityRequest) (*ResolveActivityResponse, error)
+	ResolveActivityInfo(context.Context, *ResolveActivityInfoRequest) (*ResolveActivityInfoResponse, error)
+	ResolveType1(context.Context, *ResolveType1Request) (*ResolveType1Response, error)
+	ResolveType1_1(context.Context, *ResolveType1_1Request) (*ResolveType1_1Response, error)
+	ResolveTypeIfNeeded(context.Context, *ResolveTypeIfNeededRequest) (*ResolveTypeIfNeededResponse, error)
+	SetAction(context.Context, *SetActionRequest) (*SetActionResponse, error)
+	SetClass(context.Context, *SetClassRequest) (*SetClassResponse, error)
+	SetClassName2(context.Context, *SetClassName2Request) (*SetClassName2Response, error)
+	SetClassName2_1(context.Context, *SetClassName2_1Request) (*SetClassName2_1Response, error)
+	SetClipData(context.Context, *SetClipDataRequest) (*SetClipDataResponse, error)
+	SetComponent(context.Context, *SetComponentRequest) (*SetComponentResponse, error)
+	SetData(context.Context, *SetDataRequest) (*SetDataResponse, error)
+	SetDataAndNormalize(context.Context, *SetDataAndNormalizeRequest) (*SetDataAndNormalizeResponse, error)
+	SetDataAndType(context.Context, *SetDataAndTypeRequest) (*SetDataAndTypeResponse, error)
+	SetDataAndTypeAndNormalize(context.Context, *SetDataAndTypeAndNormalizeRequest) (*SetDataAndTypeAndNormalizeResponse, error)
+	SetExtrasClassLoader(context.Context, *SetExtrasClassLoaderRequest) (*SetExtrasClassLoaderResponse, error)
+	SetFlags(context.Context, *SetFlagsRequest) (*SetFlagsResponse, error)
+	SetIdentifier(context.Context, *SetIdentifierRequest) (*SetIdentifierResponse, error)
+	SetPackage(context.Context, *SetPackageRequest) (*SetPackageResponse, error)
+	SetSelector(context.Context, *SetSelectorRequest) (*SetSelectorResponse, error)
+	SetSourceBounds(context.Context, *SetSourceBoundsRequest) (*SetSourceBoundsResponse, error)
+	SetType(context.Context, *SetTypeRequest) (*SetTypeResponse, error)
+	SetTypeAndNormalize(context.Context, *SetTypeAndNormalizeRequest) (*SetTypeAndNormalizeResponse, error)
+	ToString(context.Context, *ToStringRequest) (*ToStringResponse, error)
+	ToURI(context.Context, *ToURIRequest) (*ToURIResponse, error)
+	ToUri(context.Context, *ToUriRequest) (*ToUriResponse, error)
+	WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error)
+	CreateChooser2(context.Context, *CreateChooser2Request) (*CreateChooser2Response, error)
+	CreateChooser3_1(context.Context, *CreateChooser3_1Request) (*CreateChooser3_1Response, error)
+	GetIntent(context.Context, *GetIntentRequest) (*GetIntentResponse, error)
+	GetIntentOld(context.Context, *GetIntentOldRequest) (*GetIntentOldResponse, error)
+	MakeMainActivity(context.Context, *MakeMainActivityRequest) (*MakeMainActivityResponse, error)
+	MakeMainSelectorActivity(context.Context, *MakeMainSelectorActivityRequest) (*MakeMainSelectorActivityResponse, error)
+	MakeRestartActivityTask(context.Context, *MakeRestartActivityTaskRequest) (*MakeRestartActivityTaskResponse, error)
+	NormalizeMimeType(context.Context, *NormalizeMimeTypeRequest) (*NormalizeMimeTypeResponse, error)
+	ParseIntent(context.Context, *ParseIntentRequest) (*ParseIntentResponse, error)
+	ParseUri(context.Context, *ParseUriRequest) (*ParseUriResponse, error)
 	mustEmbedUnimplementedIntentServiceServer()
 }
 
@@ -1198,56 +1689,383 @@ type IntentServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedIntentServiceServer struct{}
 
-func (UnimplementedIntentServiceServer) SetAction(context.Context, *SetActionRequest) (*SetActionResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetAction not implemented")
-}
-func (UnimplementedIntentServiceServer) SetData(context.Context, *SetDataRequest) (*SetDataResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetData not implemented")
-}
-func (UnimplementedIntentServiceServer) SetComponent(context.Context, *SetComponentRequest) (*SetComponentResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetComponent not implemented")
-}
-func (UnimplementedIntentServiceServer) SetFlags(context.Context, *SetFlagsRequest) (*SetFlagsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetFlags not implemented")
+func (UnimplementedIntentServiceServer) AddCategory(context.Context, *AddCategoryRequest) (*AddCategoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddCategory not implemented")
 }
 func (UnimplementedIntentServiceServer) AddFlags(context.Context, *AddFlagsRequest) (*AddFlagsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method AddFlags not implemented")
 }
-func (UnimplementedIntentServiceServer) AddCategory(context.Context, *AddCategoryRequest) (*AddCategoryResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddCategory not implemented")
+func (UnimplementedIntentServiceServer) Clone(context.Context, *CloneRequest) (*CloneResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Clone not implemented")
 }
-func (UnimplementedIntentServiceServer) SetPackage(context.Context, *SetPackageRequest) (*SetPackageResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetPackage not implemented")
+func (UnimplementedIntentServiceServer) CloneFilter(context.Context, *CloneFilterRequest) (*CloneFilterResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CloneFilter not implemented")
 }
-func (UnimplementedIntentServiceServer) SetType(context.Context, *SetTypeRequest) (*SetTypeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetType not implemented")
+func (UnimplementedIntentServiceServer) DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DescribeContents not implemented")
+}
+func (UnimplementedIntentServiceServer) FillIn(context.Context, *FillInRequest) (*FillInResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FillIn not implemented")
+}
+func (UnimplementedIntentServiceServer) FilterEquals(context.Context, *FilterEqualsRequest) (*FilterEqualsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FilterEquals not implemented")
+}
+func (UnimplementedIntentServiceServer) FilterHashCode(context.Context, *FilterHashCodeRequest) (*FilterHashCodeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FilterHashCode not implemented")
 }
 func (UnimplementedIntentServiceServer) GetAction(context.Context, *GetActionRequest) (*GetActionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAction not implemented")
 }
+func (UnimplementedIntentServiceServer) GetBooleanArrayExtra(context.Context, *GetBooleanArrayExtraRequest) (*GetBooleanArrayExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBooleanArrayExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetBooleanExtra(context.Context, *GetBooleanExtraRequest) (*GetBooleanExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBooleanExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetBundleExtra(context.Context, *GetBundleExtraRequest) (*GetBundleExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBundleExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetByteArrayExtra(context.Context, *GetByteArrayExtraRequest) (*GetByteArrayExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetByteArrayExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetByteExtra(context.Context, *GetByteExtraRequest) (*GetByteExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetByteExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetCategories(context.Context, *GetCategoriesRequest) (*GetCategoriesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCategories not implemented")
+}
+func (UnimplementedIntentServiceServer) GetCharArrayExtra(context.Context, *GetCharArrayExtraRequest) (*GetCharArrayExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCharArrayExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetCharExtra(context.Context, *GetCharExtraRequest) (*GetCharExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCharExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetCharSequenceArrayExtra(context.Context, *GetCharSequenceArrayExtraRequest) (*GetCharSequenceArrayExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCharSequenceArrayExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetCharSequenceArrayListExtra(context.Context, *GetCharSequenceArrayListExtraRequest) (*GetCharSequenceArrayListExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCharSequenceArrayListExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetCharSequenceExtra(context.Context, *GetCharSequenceExtraRequest) (*GetCharSequenceExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCharSequenceExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetClipData(context.Context, *GetClipDataRequest) (*GetClipDataResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetClipData not implemented")
+}
+func (UnimplementedIntentServiceServer) GetComponent(context.Context, *GetComponentRequest) (*GetComponentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetComponent not implemented")
+}
 func (UnimplementedIntentServiceServer) GetData(context.Context, *GetDataRequest) (*GetDataResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetData not implemented")
 }
-func (UnimplementedIntentServiceServer) GetStringExtra(context.Context, *GetStringExtraRequest) (*GetStringExtraResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetStringExtra not implemented")
+func (UnimplementedIntentServiceServer) GetDataString(context.Context, *GetDataStringRequest) (*GetDataStringResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDataString not implemented")
 }
-func (UnimplementedIntentServiceServer) GetBoolExtra(context.Context, *GetBoolExtraRequest) (*GetBoolExtraResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetBoolExtra not implemented")
+func (UnimplementedIntentServiceServer) GetDoubleArrayExtra(context.Context, *GetDoubleArrayExtraRequest) (*GetDoubleArrayExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDoubleArrayExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetDoubleExtra(context.Context, *GetDoubleExtraRequest) (*GetDoubleExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDoubleExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetExtras(context.Context, *GetExtrasRequest) (*GetExtrasResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetExtras not implemented")
+}
+func (UnimplementedIntentServiceServer) GetFlags(context.Context, *GetFlagsRequest) (*GetFlagsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetFlags not implemented")
+}
+func (UnimplementedIntentServiceServer) GetFloatArrayExtra(context.Context, *GetFloatArrayExtraRequest) (*GetFloatArrayExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetFloatArrayExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetFloatExtra(context.Context, *GetFloatExtraRequest) (*GetFloatExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetFloatExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetIdentifier(context.Context, *GetIdentifierRequest) (*GetIdentifierResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetIdentifier not implemented")
+}
+func (UnimplementedIntentServiceServer) GetIntArrayExtra(context.Context, *GetIntArrayExtraRequest) (*GetIntArrayExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetIntArrayExtra not implemented")
 }
 func (UnimplementedIntentServiceServer) GetIntExtra(context.Context, *GetIntExtraRequest) (*GetIntExtraResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetIntExtra not implemented")
 }
-func (UnimplementedIntentServiceServer) PutStringExtra(context.Context, *PutStringExtraRequest) (*PutStringExtraResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method PutStringExtra not implemented")
+func (UnimplementedIntentServiceServer) GetIntegerArrayListExtra(context.Context, *GetIntegerArrayListExtraRequest) (*GetIntegerArrayListExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetIntegerArrayListExtra not implemented")
 }
-func (UnimplementedIntentServiceServer) PutIntExtra(context.Context, *PutIntExtraRequest) (*PutIntExtraResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method PutIntExtra not implemented")
+func (UnimplementedIntentServiceServer) GetLongArrayExtra(context.Context, *GetLongArrayExtraRequest) (*GetLongArrayExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLongArrayExtra not implemented")
 }
-func (UnimplementedIntentServiceServer) PutBoolExtra(context.Context, *PutBoolExtraRequest) (*PutBoolExtraResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method PutBoolExtra not implemented")
+func (UnimplementedIntentServiceServer) GetLongExtra(context.Context, *GetLongExtraRequest) (*GetLongExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLongExtra not implemented")
 }
-func (UnimplementedIntentServiceServer) PutLongExtra(context.Context, *PutLongExtraRequest) (*PutLongExtraResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method PutLongExtra not implemented")
+func (UnimplementedIntentServiceServer) GetPackage(context.Context, *GetPackageRequest) (*GetPackageResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPackage not implemented")
+}
+func (UnimplementedIntentServiceServer) GetParcelableArrayExtra(context.Context, *GetParcelableArrayExtraRequest) (*GetParcelableArrayExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetParcelableArrayExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetScheme(context.Context, *GetSchemeRequest) (*GetSchemeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetScheme not implemented")
+}
+func (UnimplementedIntentServiceServer) GetSelector(context.Context, *GetSelectorRequest) (*GetSelectorResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSelector not implemented")
+}
+func (UnimplementedIntentServiceServer) GetSerializableExtra(context.Context, *GetSerializableExtraRequest) (*GetSerializableExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSerializableExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetShortArrayExtra(context.Context, *GetShortArrayExtraRequest) (*GetShortArrayExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetShortArrayExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetShortExtra(context.Context, *GetShortExtraRequest) (*GetShortExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetShortExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetSourceBounds(context.Context, *GetSourceBoundsRequest) (*GetSourceBoundsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSourceBounds not implemented")
+}
+func (UnimplementedIntentServiceServer) GetStringArrayExtra(context.Context, *GetStringArrayExtraRequest) (*GetStringArrayExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetStringArrayExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetStringArrayListExtra(context.Context, *GetStringArrayListExtraRequest) (*GetStringArrayListExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetStringArrayListExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetStringExtra(context.Context, *GetStringExtraRequest) (*GetStringExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetStringExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) GetType(context.Context, *GetTypeRequest) (*GetTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetType not implemented")
+}
+func (UnimplementedIntentServiceServer) HasCategory(context.Context, *HasCategoryRequest) (*HasCategoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method HasCategory not implemented")
+}
+func (UnimplementedIntentServiceServer) HasExtra(context.Context, *HasExtraRequest) (*HasExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method HasExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) HasFileDescriptors(context.Context, *HasFileDescriptorsRequest) (*HasFileDescriptorsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method HasFileDescriptors not implemented")
+}
+func (UnimplementedIntentServiceServer) IsMismatchingFilter(context.Context, *IsMismatchingFilterRequest) (*IsMismatchingFilterResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsMismatchingFilter not implemented")
+}
+func (UnimplementedIntentServiceServer) PutCharSequenceArrayListExtra(context.Context, *PutCharSequenceArrayListExtraRequest) (*PutCharSequenceArrayListExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutCharSequenceArrayListExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2(context.Context, *PutExtra2Request) (*PutExtra2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_1(context.Context, *PutExtra2_1Request) (*PutExtra2_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_1 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_2(context.Context, *PutExtra2_2Request) (*PutExtra2_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_2 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_3(context.Context, *PutExtra2_3Request) (*PutExtra2_3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_3 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_4(context.Context, *PutExtra2_4Request) (*PutExtra2_4Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_4 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_5(context.Context, *PutExtra2_5Request) (*PutExtra2_5Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_5 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_6(context.Context, *PutExtra2_6Request) (*PutExtra2_6Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_6 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_7(context.Context, *PutExtra2_7Request) (*PutExtra2_7Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_7 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_8(context.Context, *PutExtra2_8Request) (*PutExtra2_8Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_8 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_9(context.Context, *PutExtra2_9Request) (*PutExtra2_9Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_9 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_10(context.Context, *PutExtra2_10Request) (*PutExtra2_10Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_10 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_11(context.Context, *PutExtra2_11Request) (*PutExtra2_11Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_11 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_12(context.Context, *PutExtra2_12Request) (*PutExtra2_12Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_12 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_13(context.Context, *PutExtra2_13Request) (*PutExtra2_13Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_13 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_14(context.Context, *PutExtra2_14Request) (*PutExtra2_14Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_14 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_15(context.Context, *PutExtra2_15Request) (*PutExtra2_15Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_15 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_16(context.Context, *PutExtra2_16Request) (*PutExtra2_16Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_16 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_17(context.Context, *PutExtra2_17Request) (*PutExtra2_17Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_17 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_18(context.Context, *PutExtra2_18Request) (*PutExtra2_18Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_18 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_19(context.Context, *PutExtra2_19Request) (*PutExtra2_19Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_19 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_20(context.Context, *PutExtra2_20Request) (*PutExtra2_20Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_20 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_21(context.Context, *PutExtra2_21Request) (*PutExtra2_21Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_21 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_22(context.Context, *PutExtra2_22Request) (*PutExtra2_22Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_22 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtra2_23(context.Context, *PutExtra2_23Request) (*PutExtra2_23Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtra2_23 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtras1(context.Context, *PutExtras1Request) (*PutExtras1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtras1 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutExtras1_1(context.Context, *PutExtras1_1Request) (*PutExtras1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutExtras1_1 not implemented")
+}
+func (UnimplementedIntentServiceServer) PutIntegerArrayListExtra(context.Context, *PutIntegerArrayListExtraRequest) (*PutIntegerArrayListExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutIntegerArrayListExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) PutParcelableArrayListExtra(context.Context, *PutParcelableArrayListExtraRequest) (*PutParcelableArrayListExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutParcelableArrayListExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) PutStringArrayListExtra(context.Context, *PutStringArrayListExtraRequest) (*PutStringArrayListExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PutStringArrayListExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) ReadFromParcel(context.Context, *ReadFromParcelRequest) (*ReadFromParcelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReadFromParcel not implemented")
+}
+func (UnimplementedIntentServiceServer) RemoveCategory(context.Context, *RemoveCategoryRequest) (*RemoveCategoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveCategory not implemented")
+}
+func (UnimplementedIntentServiceServer) RemoveExtra(context.Context, *RemoveExtraRequest) (*RemoveExtraResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveExtra not implemented")
+}
+func (UnimplementedIntentServiceServer) RemoveFlags(context.Context, *RemoveFlagsRequest) (*RemoveFlagsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveFlags not implemented")
+}
+func (UnimplementedIntentServiceServer) RemoveLaunchSecurityProtection(context.Context, *RemoveLaunchSecurityProtectionRequest) (*RemoveLaunchSecurityProtectionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveLaunchSecurityProtection not implemented")
+}
+func (UnimplementedIntentServiceServer) ReplaceExtras1(context.Context, *ReplaceExtras1Request) (*ReplaceExtras1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReplaceExtras1 not implemented")
+}
+func (UnimplementedIntentServiceServer) ReplaceExtras1_1(context.Context, *ReplaceExtras1_1Request) (*ReplaceExtras1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReplaceExtras1_1 not implemented")
+}
+func (UnimplementedIntentServiceServer) ResolveActivity(context.Context, *ResolveActivityRequest) (*ResolveActivityResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResolveActivity not implemented")
+}
+func (UnimplementedIntentServiceServer) ResolveActivityInfo(context.Context, *ResolveActivityInfoRequest) (*ResolveActivityInfoResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResolveActivityInfo not implemented")
+}
+func (UnimplementedIntentServiceServer) ResolveType1(context.Context, *ResolveType1Request) (*ResolveType1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResolveType1 not implemented")
+}
+func (UnimplementedIntentServiceServer) ResolveType1_1(context.Context, *ResolveType1_1Request) (*ResolveType1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResolveType1_1 not implemented")
+}
+func (UnimplementedIntentServiceServer) ResolveTypeIfNeeded(context.Context, *ResolveTypeIfNeededRequest) (*ResolveTypeIfNeededResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResolveTypeIfNeeded not implemented")
+}
+func (UnimplementedIntentServiceServer) SetAction(context.Context, *SetActionRequest) (*SetActionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAction not implemented")
+}
+func (UnimplementedIntentServiceServer) SetClass(context.Context, *SetClassRequest) (*SetClassResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetClass not implemented")
+}
+func (UnimplementedIntentServiceServer) SetClassName2(context.Context, *SetClassName2Request) (*SetClassName2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetClassName2 not implemented")
+}
+func (UnimplementedIntentServiceServer) SetClassName2_1(context.Context, *SetClassName2_1Request) (*SetClassName2_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetClassName2_1 not implemented")
+}
+func (UnimplementedIntentServiceServer) SetClipData(context.Context, *SetClipDataRequest) (*SetClipDataResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetClipData not implemented")
+}
+func (UnimplementedIntentServiceServer) SetComponent(context.Context, *SetComponentRequest) (*SetComponentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetComponent not implemented")
+}
+func (UnimplementedIntentServiceServer) SetData(context.Context, *SetDataRequest) (*SetDataResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetData not implemented")
+}
+func (UnimplementedIntentServiceServer) SetDataAndNormalize(context.Context, *SetDataAndNormalizeRequest) (*SetDataAndNormalizeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetDataAndNormalize not implemented")
+}
+func (UnimplementedIntentServiceServer) SetDataAndType(context.Context, *SetDataAndTypeRequest) (*SetDataAndTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetDataAndType not implemented")
+}
+func (UnimplementedIntentServiceServer) SetDataAndTypeAndNormalize(context.Context, *SetDataAndTypeAndNormalizeRequest) (*SetDataAndTypeAndNormalizeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetDataAndTypeAndNormalize not implemented")
+}
+func (UnimplementedIntentServiceServer) SetExtrasClassLoader(context.Context, *SetExtrasClassLoaderRequest) (*SetExtrasClassLoaderResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetExtrasClassLoader not implemented")
+}
+func (UnimplementedIntentServiceServer) SetFlags(context.Context, *SetFlagsRequest) (*SetFlagsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetFlags not implemented")
+}
+func (UnimplementedIntentServiceServer) SetIdentifier(context.Context, *SetIdentifierRequest) (*SetIdentifierResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetIdentifier not implemented")
+}
+func (UnimplementedIntentServiceServer) SetPackage(context.Context, *SetPackageRequest) (*SetPackageResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetPackage not implemented")
+}
+func (UnimplementedIntentServiceServer) SetSelector(context.Context, *SetSelectorRequest) (*SetSelectorResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetSelector not implemented")
+}
+func (UnimplementedIntentServiceServer) SetSourceBounds(context.Context, *SetSourceBoundsRequest) (*SetSourceBoundsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetSourceBounds not implemented")
+}
+func (UnimplementedIntentServiceServer) SetType(context.Context, *SetTypeRequest) (*SetTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetType not implemented")
+}
+func (UnimplementedIntentServiceServer) SetTypeAndNormalize(context.Context, *SetTypeAndNormalizeRequest) (*SetTypeAndNormalizeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetTypeAndNormalize not implemented")
+}
+func (UnimplementedIntentServiceServer) ToString(context.Context, *ToStringRequest) (*ToStringResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ToString not implemented")
+}
+func (UnimplementedIntentServiceServer) ToURI(context.Context, *ToURIRequest) (*ToURIResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ToURI not implemented")
+}
+func (UnimplementedIntentServiceServer) ToUri(context.Context, *ToUriRequest) (*ToUriResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ToUri not implemented")
+}
+func (UnimplementedIntentServiceServer) WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteToParcel not implemented")
+}
+func (UnimplementedIntentServiceServer) CreateChooser2(context.Context, *CreateChooser2Request) (*CreateChooser2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateChooser2 not implemented")
+}
+func (UnimplementedIntentServiceServer) CreateChooser3_1(context.Context, *CreateChooser3_1Request) (*CreateChooser3_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateChooser3_1 not implemented")
+}
+func (UnimplementedIntentServiceServer) GetIntent(context.Context, *GetIntentRequest) (*GetIntentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetIntent not implemented")
+}
+func (UnimplementedIntentServiceServer) GetIntentOld(context.Context, *GetIntentOldRequest) (*GetIntentOldResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetIntentOld not implemented")
+}
+func (UnimplementedIntentServiceServer) MakeMainActivity(context.Context, *MakeMainActivityRequest) (*MakeMainActivityResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method MakeMainActivity not implemented")
+}
+func (UnimplementedIntentServiceServer) MakeMainSelectorActivity(context.Context, *MakeMainSelectorActivityRequest) (*MakeMainSelectorActivityResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method MakeMainSelectorActivity not implemented")
+}
+func (UnimplementedIntentServiceServer) MakeRestartActivityTask(context.Context, *MakeRestartActivityTaskRequest) (*MakeRestartActivityTaskResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method MakeRestartActivityTask not implemented")
+}
+func (UnimplementedIntentServiceServer) NormalizeMimeType(context.Context, *NormalizeMimeTypeRequest) (*NormalizeMimeTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method NormalizeMimeType not implemented")
+}
+func (UnimplementedIntentServiceServer) ParseIntent(context.Context, *ParseIntentRequest) (*ParseIntentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ParseIntent not implemented")
+}
+func (UnimplementedIntentServiceServer) ParseUri(context.Context, *ParseUriRequest) (*ParseUriResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ParseUri not implemented")
 }
 func (UnimplementedIntentServiceServer) mustEmbedUnimplementedIntentServiceServer() {}
 func (UnimplementedIntentServiceServer) testEmbeddedByValue()                       {}
@@ -1270,74 +2088,20 @@ func RegisterIntentServiceServer(s grpc.ServiceRegistrar, srv IntentServiceServe
 	s.RegisterService(&IntentService_ServiceDesc, srv)
 }
 
-func _IntentService_SetAction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetActionRequest)
+func _IntentService_AddCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddCategoryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IntentServiceServer).SetAction(ctx, in)
+		return srv.(IntentServiceServer).AddCategory(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IntentService_SetAction_FullMethodName,
+		FullMethod: IntentService_AddCategory_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntentServiceServer).SetAction(ctx, req.(*SetActionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IntentService_SetData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetDataRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IntentServiceServer).SetData(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IntentService_SetData_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntentServiceServer).SetData(ctx, req.(*SetDataRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IntentService_SetComponent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetComponentRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IntentServiceServer).SetComponent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IntentService_SetComponent_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntentServiceServer).SetComponent(ctx, req.(*SetComponentRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IntentService_SetFlags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetFlagsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IntentServiceServer).SetFlags(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IntentService_SetFlags_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntentServiceServer).SetFlags(ctx, req.(*SetFlagsRequest))
+		return srv.(IntentServiceServer).AddCategory(ctx, req.(*AddCategoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1360,56 +2124,110 @@ func _IntentService_AddFlags_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IntentService_AddCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddCategoryRequest)
+func _IntentService_Clone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CloneRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IntentServiceServer).AddCategory(ctx, in)
+		return srv.(IntentServiceServer).Clone(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IntentService_AddCategory_FullMethodName,
+		FullMethod: IntentService_Clone_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntentServiceServer).AddCategory(ctx, req.(*AddCategoryRequest))
+		return srv.(IntentServiceServer).Clone(ctx, req.(*CloneRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IntentService_SetPackage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetPackageRequest)
+func _IntentService_CloneFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CloneFilterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IntentServiceServer).SetPackage(ctx, in)
+		return srv.(IntentServiceServer).CloneFilter(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IntentService_SetPackage_FullMethodName,
+		FullMethod: IntentService_CloneFilter_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntentServiceServer).SetPackage(ctx, req.(*SetPackageRequest))
+		return srv.(IntentServiceServer).CloneFilter(ctx, req.(*CloneFilterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IntentService_SetType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetTypeRequest)
+func _IntentService_DescribeContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeContentsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IntentServiceServer).SetType(ctx, in)
+		return srv.(IntentServiceServer).DescribeContents(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IntentService_SetType_FullMethodName,
+		FullMethod: IntentService_DescribeContents_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntentServiceServer).SetType(ctx, req.(*SetTypeRequest))
+		return srv.(IntentServiceServer).DescribeContents(ctx, req.(*DescribeContentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_FillIn_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FillInRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).FillIn(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_FillIn_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).FillIn(ctx, req.(*FillInRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_FilterEquals_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FilterEqualsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).FilterEquals(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_FilterEquals_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).FilterEquals(ctx, req.(*FilterEqualsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_FilterHashCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FilterHashCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).FilterHashCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_FilterHashCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).FilterHashCode(ctx, req.(*FilterHashCodeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1432,6 +2250,240 @@ func _IntentService_GetAction_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IntentService_GetBooleanArrayExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBooleanArrayExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetBooleanArrayExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetBooleanArrayExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetBooleanArrayExtra(ctx, req.(*GetBooleanArrayExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetBooleanExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBooleanExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetBooleanExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetBooleanExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetBooleanExtra(ctx, req.(*GetBooleanExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetBundleExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBundleExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetBundleExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetBundleExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetBundleExtra(ctx, req.(*GetBundleExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetByteArrayExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetByteArrayExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetByteArrayExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetByteArrayExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetByteArrayExtra(ctx, req.(*GetByteArrayExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetByteExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetByteExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetByteExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetByteExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetByteExtra(ctx, req.(*GetByteExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetCategories_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCategoriesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetCategories(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetCategories_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetCategories(ctx, req.(*GetCategoriesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetCharArrayExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCharArrayExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetCharArrayExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetCharArrayExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetCharArrayExtra(ctx, req.(*GetCharArrayExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetCharExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCharExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetCharExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetCharExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetCharExtra(ctx, req.(*GetCharExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetCharSequenceArrayExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCharSequenceArrayExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetCharSequenceArrayExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetCharSequenceArrayExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetCharSequenceArrayExtra(ctx, req.(*GetCharSequenceArrayExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetCharSequenceArrayListExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCharSequenceArrayListExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetCharSequenceArrayListExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetCharSequenceArrayListExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetCharSequenceArrayListExtra(ctx, req.(*GetCharSequenceArrayListExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetCharSequenceExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCharSequenceExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetCharSequenceExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetCharSequenceExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetCharSequenceExtra(ctx, req.(*GetCharSequenceExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetClipData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetClipDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetClipData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetClipData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetClipData(ctx, req.(*GetClipDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetComponent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetComponentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetComponent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetComponent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetComponent(ctx, req.(*GetComponentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _IntentService_GetData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetDataRequest)
 	if err := dec(in); err != nil {
@@ -1450,38 +2502,164 @@ func _IntentService_GetData_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IntentService_GetStringExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetStringExtraRequest)
+func _IntentService_GetDataString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDataStringRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IntentServiceServer).GetStringExtra(ctx, in)
+		return srv.(IntentServiceServer).GetDataString(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IntentService_GetStringExtra_FullMethodName,
+		FullMethod: IntentService_GetDataString_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntentServiceServer).GetStringExtra(ctx, req.(*GetStringExtraRequest))
+		return srv.(IntentServiceServer).GetDataString(ctx, req.(*GetDataStringRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IntentService_GetBoolExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetBoolExtraRequest)
+func _IntentService_GetDoubleArrayExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDoubleArrayExtraRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IntentServiceServer).GetBoolExtra(ctx, in)
+		return srv.(IntentServiceServer).GetDoubleArrayExtra(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IntentService_GetBoolExtra_FullMethodName,
+		FullMethod: IntentService_GetDoubleArrayExtra_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntentServiceServer).GetBoolExtra(ctx, req.(*GetBoolExtraRequest))
+		return srv.(IntentServiceServer).GetDoubleArrayExtra(ctx, req.(*GetDoubleArrayExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetDoubleExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDoubleExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetDoubleExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetDoubleExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetDoubleExtra(ctx, req.(*GetDoubleExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetExtras_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetExtrasRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetExtras(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetExtras_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetExtras(ctx, req.(*GetExtrasRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetFlags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFlagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetFlags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetFlags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetFlags(ctx, req.(*GetFlagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetFloatArrayExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFloatArrayExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetFloatArrayExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetFloatArrayExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetFloatArrayExtra(ctx, req.(*GetFloatArrayExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetFloatExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFloatExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetFloatExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetFloatExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetFloatExtra(ctx, req.(*GetFloatExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetIdentifier_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIdentifierRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetIdentifier(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetIdentifier_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetIdentifier(ctx, req.(*GetIdentifierRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetIntArrayExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIntArrayExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetIntArrayExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetIntArrayExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetIntArrayExtra(ctx, req.(*GetIntArrayExtraRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1504,74 +2682,1676 @@ func _IntentService_GetIntExtra_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IntentService_PutStringExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PutStringExtraRequest)
+func _IntentService_GetIntegerArrayListExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIntegerArrayListExtraRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IntentServiceServer).PutStringExtra(ctx, in)
+		return srv.(IntentServiceServer).GetIntegerArrayListExtra(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IntentService_PutStringExtra_FullMethodName,
+		FullMethod: IntentService_GetIntegerArrayListExtra_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntentServiceServer).PutStringExtra(ctx, req.(*PutStringExtraRequest))
+		return srv.(IntentServiceServer).GetIntegerArrayListExtra(ctx, req.(*GetIntegerArrayListExtraRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IntentService_PutIntExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PutIntExtraRequest)
+func _IntentService_GetLongArrayExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLongArrayExtraRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IntentServiceServer).PutIntExtra(ctx, in)
+		return srv.(IntentServiceServer).GetLongArrayExtra(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IntentService_PutIntExtra_FullMethodName,
+		FullMethod: IntentService_GetLongArrayExtra_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntentServiceServer).PutIntExtra(ctx, req.(*PutIntExtraRequest))
+		return srv.(IntentServiceServer).GetLongArrayExtra(ctx, req.(*GetLongArrayExtraRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IntentService_PutBoolExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PutBoolExtraRequest)
+func _IntentService_GetLongExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLongExtraRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IntentServiceServer).PutBoolExtra(ctx, in)
+		return srv.(IntentServiceServer).GetLongExtra(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IntentService_PutBoolExtra_FullMethodName,
+		FullMethod: IntentService_GetLongExtra_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntentServiceServer).PutBoolExtra(ctx, req.(*PutBoolExtraRequest))
+		return srv.(IntentServiceServer).GetLongExtra(ctx, req.(*GetLongExtraRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _IntentService_PutLongExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PutLongExtraRequest)
+func _IntentService_GetPackage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPackageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IntentServiceServer).PutLongExtra(ctx, in)
+		return srv.(IntentServiceServer).GetPackage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: IntentService_PutLongExtra_FullMethodName,
+		FullMethod: IntentService_GetPackage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntentServiceServer).PutLongExtra(ctx, req.(*PutLongExtraRequest))
+		return srv.(IntentServiceServer).GetPackage(ctx, req.(*GetPackageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetParcelableArrayExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetParcelableArrayExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetParcelableArrayExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetParcelableArrayExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetParcelableArrayExtra(ctx, req.(*GetParcelableArrayExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetScheme_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSchemeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetScheme(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetScheme_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetScheme(ctx, req.(*GetSchemeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetSelector_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSelectorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetSelector(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetSelector_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetSelector(ctx, req.(*GetSelectorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetSerializableExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSerializableExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetSerializableExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetSerializableExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetSerializableExtra(ctx, req.(*GetSerializableExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetShortArrayExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetShortArrayExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetShortArrayExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetShortArrayExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetShortArrayExtra(ctx, req.(*GetShortArrayExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetShortExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetShortExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetShortExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetShortExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetShortExtra(ctx, req.(*GetShortExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetSourceBounds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSourceBoundsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetSourceBounds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetSourceBounds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetSourceBounds(ctx, req.(*GetSourceBoundsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetStringArrayExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStringArrayExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetStringArrayExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetStringArrayExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetStringArrayExtra(ctx, req.(*GetStringArrayExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetStringArrayListExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStringArrayListExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetStringArrayListExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetStringArrayListExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetStringArrayListExtra(ctx, req.(*GetStringArrayListExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetStringExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStringExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetStringExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetStringExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetStringExtra(ctx, req.(*GetStringExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetType(ctx, req.(*GetTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_HasCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HasCategoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).HasCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_HasCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).HasCategory(ctx, req.(*HasCategoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_HasExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HasExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).HasExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_HasExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).HasExtra(ctx, req.(*HasExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_HasFileDescriptors_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HasFileDescriptorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).HasFileDescriptors(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_HasFileDescriptors_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).HasFileDescriptors(ctx, req.(*HasFileDescriptorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_IsMismatchingFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsMismatchingFilterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).IsMismatchingFilter(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_IsMismatchingFilter_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).IsMismatchingFilter(ctx, req.(*IsMismatchingFilterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutCharSequenceArrayListExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutCharSequenceArrayListExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutCharSequenceArrayListExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutCharSequenceArrayListExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutCharSequenceArrayListExtra(ctx, req.(*PutCharSequenceArrayListExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2(ctx, req.(*PutExtra2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_1(ctx, req.(*PutExtra2_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_2(ctx, req.(*PutExtra2_2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_3Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_3(ctx, req.(*PutExtra2_3Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_4_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_4Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_4(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_4_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_4(ctx, req.(*PutExtra2_4Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_5_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_5Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_5(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_5_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_5(ctx, req.(*PutExtra2_5Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_6_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_6Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_6(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_6_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_6(ctx, req.(*PutExtra2_6Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_7_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_7Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_7(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_7_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_7(ctx, req.(*PutExtra2_7Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_8_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_8Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_8(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_8_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_8(ctx, req.(*PutExtra2_8Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_9_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_9Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_9(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_9_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_9(ctx, req.(*PutExtra2_9Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_10_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_10Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_10(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_10_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_10(ctx, req.(*PutExtra2_10Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_11_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_11Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_11(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_11_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_11(ctx, req.(*PutExtra2_11Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_12_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_12Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_12(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_12_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_12(ctx, req.(*PutExtra2_12Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_13_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_13Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_13(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_13_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_13(ctx, req.(*PutExtra2_13Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_14_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_14Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_14(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_14_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_14(ctx, req.(*PutExtra2_14Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_15_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_15Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_15(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_15_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_15(ctx, req.(*PutExtra2_15Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_16_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_16Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_16(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_16_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_16(ctx, req.(*PutExtra2_16Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_17_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_17Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_17(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_17_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_17(ctx, req.(*PutExtra2_17Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_18_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_18Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_18(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_18_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_18(ctx, req.(*PutExtra2_18Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_19_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_19Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_19(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_19_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_19(ctx, req.(*PutExtra2_19Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_20_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_20Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_20(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_20_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_20(ctx, req.(*PutExtra2_20Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_21_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_21Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_21(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_21_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_21(ctx, req.(*PutExtra2_21Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_22_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_22Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_22(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_22_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_22(ctx, req.(*PutExtra2_22Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtra2_23_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtra2_23Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtra2_23(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtra2_23_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtra2_23(ctx, req.(*PutExtra2_23Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtras1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtras1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtras1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtras1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtras1(ctx, req.(*PutExtras1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutExtras1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutExtras1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutExtras1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutExtras1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutExtras1_1(ctx, req.(*PutExtras1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutIntegerArrayListExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutIntegerArrayListExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutIntegerArrayListExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutIntegerArrayListExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutIntegerArrayListExtra(ctx, req.(*PutIntegerArrayListExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutParcelableArrayListExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutParcelableArrayListExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutParcelableArrayListExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutParcelableArrayListExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutParcelableArrayListExtra(ctx, req.(*PutParcelableArrayListExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_PutStringArrayListExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PutStringArrayListExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).PutStringArrayListExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_PutStringArrayListExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).PutStringArrayListExtra(ctx, req.(*PutStringArrayListExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_ReadFromParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadFromParcelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).ReadFromParcel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_ReadFromParcel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).ReadFromParcel(ctx, req.(*ReadFromParcelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_RemoveCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveCategoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).RemoveCategory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_RemoveCategory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).RemoveCategory(ctx, req.(*RemoveCategoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_RemoveExtra_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveExtraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).RemoveExtra(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_RemoveExtra_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).RemoveExtra(ctx, req.(*RemoveExtraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_RemoveFlags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveFlagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).RemoveFlags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_RemoveFlags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).RemoveFlags(ctx, req.(*RemoveFlagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_RemoveLaunchSecurityProtection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveLaunchSecurityProtectionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).RemoveLaunchSecurityProtection(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_RemoveLaunchSecurityProtection_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).RemoveLaunchSecurityProtection(ctx, req.(*RemoveLaunchSecurityProtectionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_ReplaceExtras1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReplaceExtras1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).ReplaceExtras1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_ReplaceExtras1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).ReplaceExtras1(ctx, req.(*ReplaceExtras1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_ReplaceExtras1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReplaceExtras1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).ReplaceExtras1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_ReplaceExtras1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).ReplaceExtras1_1(ctx, req.(*ReplaceExtras1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_ResolveActivity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveActivityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).ResolveActivity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_ResolveActivity_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).ResolveActivity(ctx, req.(*ResolveActivityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_ResolveActivityInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveActivityInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).ResolveActivityInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_ResolveActivityInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).ResolveActivityInfo(ctx, req.(*ResolveActivityInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_ResolveType1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveType1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).ResolveType1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_ResolveType1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).ResolveType1(ctx, req.(*ResolveType1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_ResolveType1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveType1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).ResolveType1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_ResolveType1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).ResolveType1_1(ctx, req.(*ResolveType1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_ResolveTypeIfNeeded_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveTypeIfNeededRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).ResolveTypeIfNeeded(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_ResolveTypeIfNeeded_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).ResolveTypeIfNeeded(ctx, req.(*ResolveTypeIfNeededRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetAction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetActionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetAction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetAction_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetAction(ctx, req.(*SetActionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetClass_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetClassRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetClass(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetClass_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetClass(ctx, req.(*SetClassRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetClassName2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetClassName2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetClassName2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetClassName2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetClassName2(ctx, req.(*SetClassName2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetClassName2_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetClassName2_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetClassName2_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetClassName2_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetClassName2_1(ctx, req.(*SetClassName2_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetClipData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetClipDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetClipData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetClipData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetClipData(ctx, req.(*SetClipDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetComponent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetComponentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetComponent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetComponent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetComponent(ctx, req.(*SetComponentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetData(ctx, req.(*SetDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetDataAndNormalize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDataAndNormalizeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetDataAndNormalize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetDataAndNormalize_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetDataAndNormalize(ctx, req.(*SetDataAndNormalizeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetDataAndType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDataAndTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetDataAndType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetDataAndType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetDataAndType(ctx, req.(*SetDataAndTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetDataAndTypeAndNormalize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDataAndTypeAndNormalizeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetDataAndTypeAndNormalize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetDataAndTypeAndNormalize_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetDataAndTypeAndNormalize(ctx, req.(*SetDataAndTypeAndNormalizeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetExtrasClassLoader_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetExtrasClassLoaderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetExtrasClassLoader(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetExtrasClassLoader_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetExtrasClassLoader(ctx, req.(*SetExtrasClassLoaderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetFlags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetFlagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetFlags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetFlags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetFlags(ctx, req.(*SetFlagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetIdentifier_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetIdentifierRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetIdentifier(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetIdentifier_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetIdentifier(ctx, req.(*SetIdentifierRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetPackage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPackageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetPackage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetPackage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetPackage(ctx, req.(*SetPackageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetSelector_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetSelectorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetSelector(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetSelector_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetSelector(ctx, req.(*SetSelectorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetSourceBounds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetSourceBoundsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetSourceBounds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetSourceBounds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetSourceBounds(ctx, req.(*SetSourceBoundsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetType(ctx, req.(*SetTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_SetTypeAndNormalize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTypeAndNormalizeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).SetTypeAndNormalize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_SetTypeAndNormalize_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).SetTypeAndNormalize(ctx, req.(*SetTypeAndNormalizeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_ToString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToStringRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).ToString(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_ToString_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).ToString(ctx, req.(*ToStringRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_ToURI_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToURIRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).ToURI(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_ToURI_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).ToURI(ctx, req.(*ToURIRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_ToUri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToUriRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).ToUri(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_ToUri_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).ToUri(ctx, req.(*ToUriRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_WriteToParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteToParcelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).WriteToParcel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_WriteToParcel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).WriteToParcel(ctx, req.(*WriteToParcelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_CreateChooser2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateChooser2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).CreateChooser2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_CreateChooser2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).CreateChooser2(ctx, req.(*CreateChooser2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_CreateChooser3_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateChooser3_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).CreateChooser3_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_CreateChooser3_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).CreateChooser3_1(ctx, req.(*CreateChooser3_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetIntent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIntentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetIntent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetIntent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetIntent(ctx, req.(*GetIntentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_GetIntentOld_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIntentOldRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).GetIntentOld(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_GetIntentOld_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).GetIntentOld(ctx, req.(*GetIntentOldRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_MakeMainActivity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MakeMainActivityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).MakeMainActivity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_MakeMainActivity_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).MakeMainActivity(ctx, req.(*MakeMainActivityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_MakeMainSelectorActivity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MakeMainSelectorActivityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).MakeMainSelectorActivity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_MakeMainSelectorActivity_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).MakeMainSelectorActivity(ctx, req.(*MakeMainSelectorActivityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_MakeRestartActivityTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MakeRestartActivityTaskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).MakeRestartActivityTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_MakeRestartActivityTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).MakeRestartActivityTask(ctx, req.(*MakeRestartActivityTaskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_NormalizeMimeType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NormalizeMimeTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).NormalizeMimeType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_NormalizeMimeType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).NormalizeMimeType(ctx, req.(*NormalizeMimeTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_ParseIntent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ParseIntentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).ParseIntent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_ParseIntent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).ParseIntent(ctx, req.(*ParseIntentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntentService_ParseUri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ParseUriRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntentServiceServer).ParseUri(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IntentService_ParseUri_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntentServiceServer).ParseUri(ctx, req.(*ParseUriRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1584,467 +4364,510 @@ var IntentService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*IntentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SetAction",
-			Handler:    _IntentService_SetAction_Handler,
-		},
-		{
-			MethodName: "SetData",
-			Handler:    _IntentService_SetData_Handler,
-		},
-		{
-			MethodName: "SetComponent",
-			Handler:    _IntentService_SetComponent_Handler,
-		},
-		{
-			MethodName: "SetFlags",
-			Handler:    _IntentService_SetFlags_Handler,
+			MethodName: "AddCategory",
+			Handler:    _IntentService_AddCategory_Handler,
 		},
 		{
 			MethodName: "AddFlags",
 			Handler:    _IntentService_AddFlags_Handler,
 		},
 		{
-			MethodName: "AddCategory",
-			Handler:    _IntentService_AddCategory_Handler,
+			MethodName: "Clone",
+			Handler:    _IntentService_Clone_Handler,
 		},
 		{
-			MethodName: "SetPackage",
-			Handler:    _IntentService_SetPackage_Handler,
+			MethodName: "CloneFilter",
+			Handler:    _IntentService_CloneFilter_Handler,
 		},
 		{
-			MethodName: "SetType",
-			Handler:    _IntentService_SetType_Handler,
+			MethodName: "DescribeContents",
+			Handler:    _IntentService_DescribeContents_Handler,
+		},
+		{
+			MethodName: "FillIn",
+			Handler:    _IntentService_FillIn_Handler,
+		},
+		{
+			MethodName: "FilterEquals",
+			Handler:    _IntentService_FilterEquals_Handler,
+		},
+		{
+			MethodName: "FilterHashCode",
+			Handler:    _IntentService_FilterHashCode_Handler,
 		},
 		{
 			MethodName: "GetAction",
 			Handler:    _IntentService_GetAction_Handler,
 		},
 		{
+			MethodName: "GetBooleanArrayExtra",
+			Handler:    _IntentService_GetBooleanArrayExtra_Handler,
+		},
+		{
+			MethodName: "GetBooleanExtra",
+			Handler:    _IntentService_GetBooleanExtra_Handler,
+		},
+		{
+			MethodName: "GetBundleExtra",
+			Handler:    _IntentService_GetBundleExtra_Handler,
+		},
+		{
+			MethodName: "GetByteArrayExtra",
+			Handler:    _IntentService_GetByteArrayExtra_Handler,
+		},
+		{
+			MethodName: "GetByteExtra",
+			Handler:    _IntentService_GetByteExtra_Handler,
+		},
+		{
+			MethodName: "GetCategories",
+			Handler:    _IntentService_GetCategories_Handler,
+		},
+		{
+			MethodName: "GetCharArrayExtra",
+			Handler:    _IntentService_GetCharArrayExtra_Handler,
+		},
+		{
+			MethodName: "GetCharExtra",
+			Handler:    _IntentService_GetCharExtra_Handler,
+		},
+		{
+			MethodName: "GetCharSequenceArrayExtra",
+			Handler:    _IntentService_GetCharSequenceArrayExtra_Handler,
+		},
+		{
+			MethodName: "GetCharSequenceArrayListExtra",
+			Handler:    _IntentService_GetCharSequenceArrayListExtra_Handler,
+		},
+		{
+			MethodName: "GetCharSequenceExtra",
+			Handler:    _IntentService_GetCharSequenceExtra_Handler,
+		},
+		{
+			MethodName: "GetClipData",
+			Handler:    _IntentService_GetClipData_Handler,
+		},
+		{
+			MethodName: "GetComponent",
+			Handler:    _IntentService_GetComponent_Handler,
+		},
+		{
 			MethodName: "GetData",
 			Handler:    _IntentService_GetData_Handler,
 		},
 		{
-			MethodName: "GetStringExtra",
-			Handler:    _IntentService_GetStringExtra_Handler,
+			MethodName: "GetDataString",
+			Handler:    _IntentService_GetDataString_Handler,
 		},
 		{
-			MethodName: "GetBoolExtra",
-			Handler:    _IntentService_GetBoolExtra_Handler,
+			MethodName: "GetDoubleArrayExtra",
+			Handler:    _IntentService_GetDoubleArrayExtra_Handler,
+		},
+		{
+			MethodName: "GetDoubleExtra",
+			Handler:    _IntentService_GetDoubleExtra_Handler,
+		},
+		{
+			MethodName: "GetExtras",
+			Handler:    _IntentService_GetExtras_Handler,
+		},
+		{
+			MethodName: "GetFlags",
+			Handler:    _IntentService_GetFlags_Handler,
+		},
+		{
+			MethodName: "GetFloatArrayExtra",
+			Handler:    _IntentService_GetFloatArrayExtra_Handler,
+		},
+		{
+			MethodName: "GetFloatExtra",
+			Handler:    _IntentService_GetFloatExtra_Handler,
+		},
+		{
+			MethodName: "GetIdentifier",
+			Handler:    _IntentService_GetIdentifier_Handler,
+		},
+		{
+			MethodName: "GetIntArrayExtra",
+			Handler:    _IntentService_GetIntArrayExtra_Handler,
 		},
 		{
 			MethodName: "GetIntExtra",
 			Handler:    _IntentService_GetIntExtra_Handler,
 		},
 		{
-			MethodName: "PutStringExtra",
-			Handler:    _IntentService_PutStringExtra_Handler,
+			MethodName: "GetIntegerArrayListExtra",
+			Handler:    _IntentService_GetIntegerArrayListExtra_Handler,
 		},
 		{
-			MethodName: "PutIntExtra",
-			Handler:    _IntentService_PutIntExtra_Handler,
+			MethodName: "GetLongArrayExtra",
+			Handler:    _IntentService_GetLongArrayExtra_Handler,
 		},
 		{
-			MethodName: "PutBoolExtra",
-			Handler:    _IntentService_PutBoolExtra_Handler,
+			MethodName: "GetLongExtra",
+			Handler:    _IntentService_GetLongExtra_Handler,
 		},
 		{
-			MethodName: "PutLongExtra",
-			Handler:    _IntentService_PutLongExtra_Handler,
+			MethodName: "GetPackage",
+			Handler:    _IntentService_GetPackage_Handler,
+		},
+		{
+			MethodName: "GetParcelableArrayExtra",
+			Handler:    _IntentService_GetParcelableArrayExtra_Handler,
+		},
+		{
+			MethodName: "GetScheme",
+			Handler:    _IntentService_GetScheme_Handler,
+		},
+		{
+			MethodName: "GetSelector",
+			Handler:    _IntentService_GetSelector_Handler,
+		},
+		{
+			MethodName: "GetSerializableExtra",
+			Handler:    _IntentService_GetSerializableExtra_Handler,
+		},
+		{
+			MethodName: "GetShortArrayExtra",
+			Handler:    _IntentService_GetShortArrayExtra_Handler,
+		},
+		{
+			MethodName: "GetShortExtra",
+			Handler:    _IntentService_GetShortExtra_Handler,
+		},
+		{
+			MethodName: "GetSourceBounds",
+			Handler:    _IntentService_GetSourceBounds_Handler,
+		},
+		{
+			MethodName: "GetStringArrayExtra",
+			Handler:    _IntentService_GetStringArrayExtra_Handler,
+		},
+		{
+			MethodName: "GetStringArrayListExtra",
+			Handler:    _IntentService_GetStringArrayListExtra_Handler,
+		},
+		{
+			MethodName: "GetStringExtra",
+			Handler:    _IntentService_GetStringExtra_Handler,
+		},
+		{
+			MethodName: "GetType",
+			Handler:    _IntentService_GetType_Handler,
+		},
+		{
+			MethodName: "HasCategory",
+			Handler:    _IntentService_HasCategory_Handler,
+		},
+		{
+			MethodName: "HasExtra",
+			Handler:    _IntentService_HasExtra_Handler,
+		},
+		{
+			MethodName: "HasFileDescriptors",
+			Handler:    _IntentService_HasFileDescriptors_Handler,
+		},
+		{
+			MethodName: "IsMismatchingFilter",
+			Handler:    _IntentService_IsMismatchingFilter_Handler,
+		},
+		{
+			MethodName: "PutCharSequenceArrayListExtra",
+			Handler:    _IntentService_PutCharSequenceArrayListExtra_Handler,
+		},
+		{
+			MethodName: "PutExtra2",
+			Handler:    _IntentService_PutExtra2_Handler,
+		},
+		{
+			MethodName: "PutExtra2_1",
+			Handler:    _IntentService_PutExtra2_1_Handler,
+		},
+		{
+			MethodName: "PutExtra2_2",
+			Handler:    _IntentService_PutExtra2_2_Handler,
+		},
+		{
+			MethodName: "PutExtra2_3",
+			Handler:    _IntentService_PutExtra2_3_Handler,
+		},
+		{
+			MethodName: "PutExtra2_4",
+			Handler:    _IntentService_PutExtra2_4_Handler,
+		},
+		{
+			MethodName: "PutExtra2_5",
+			Handler:    _IntentService_PutExtra2_5_Handler,
+		},
+		{
+			MethodName: "PutExtra2_6",
+			Handler:    _IntentService_PutExtra2_6_Handler,
+		},
+		{
+			MethodName: "PutExtra2_7",
+			Handler:    _IntentService_PutExtra2_7_Handler,
+		},
+		{
+			MethodName: "PutExtra2_8",
+			Handler:    _IntentService_PutExtra2_8_Handler,
+		},
+		{
+			MethodName: "PutExtra2_9",
+			Handler:    _IntentService_PutExtra2_9_Handler,
+		},
+		{
+			MethodName: "PutExtra2_10",
+			Handler:    _IntentService_PutExtra2_10_Handler,
+		},
+		{
+			MethodName: "PutExtra2_11",
+			Handler:    _IntentService_PutExtra2_11_Handler,
+		},
+		{
+			MethodName: "PutExtra2_12",
+			Handler:    _IntentService_PutExtra2_12_Handler,
+		},
+		{
+			MethodName: "PutExtra2_13",
+			Handler:    _IntentService_PutExtra2_13_Handler,
+		},
+		{
+			MethodName: "PutExtra2_14",
+			Handler:    _IntentService_PutExtra2_14_Handler,
+		},
+		{
+			MethodName: "PutExtra2_15",
+			Handler:    _IntentService_PutExtra2_15_Handler,
+		},
+		{
+			MethodName: "PutExtra2_16",
+			Handler:    _IntentService_PutExtra2_16_Handler,
+		},
+		{
+			MethodName: "PutExtra2_17",
+			Handler:    _IntentService_PutExtra2_17_Handler,
+		},
+		{
+			MethodName: "PutExtra2_18",
+			Handler:    _IntentService_PutExtra2_18_Handler,
+		},
+		{
+			MethodName: "PutExtra2_19",
+			Handler:    _IntentService_PutExtra2_19_Handler,
+		},
+		{
+			MethodName: "PutExtra2_20",
+			Handler:    _IntentService_PutExtra2_20_Handler,
+		},
+		{
+			MethodName: "PutExtra2_21",
+			Handler:    _IntentService_PutExtra2_21_Handler,
+		},
+		{
+			MethodName: "PutExtra2_22",
+			Handler:    _IntentService_PutExtra2_22_Handler,
+		},
+		{
+			MethodName: "PutExtra2_23",
+			Handler:    _IntentService_PutExtra2_23_Handler,
+		},
+		{
+			MethodName: "PutExtras1",
+			Handler:    _IntentService_PutExtras1_Handler,
+		},
+		{
+			MethodName: "PutExtras1_1",
+			Handler:    _IntentService_PutExtras1_1_Handler,
+		},
+		{
+			MethodName: "PutIntegerArrayListExtra",
+			Handler:    _IntentService_PutIntegerArrayListExtra_Handler,
+		},
+		{
+			MethodName: "PutParcelableArrayListExtra",
+			Handler:    _IntentService_PutParcelableArrayListExtra_Handler,
+		},
+		{
+			MethodName: "PutStringArrayListExtra",
+			Handler:    _IntentService_PutStringArrayListExtra_Handler,
+		},
+		{
+			MethodName: "ReadFromParcel",
+			Handler:    _IntentService_ReadFromParcel_Handler,
+		},
+		{
+			MethodName: "RemoveCategory",
+			Handler:    _IntentService_RemoveCategory_Handler,
+		},
+		{
+			MethodName: "RemoveExtra",
+			Handler:    _IntentService_RemoveExtra_Handler,
+		},
+		{
+			MethodName: "RemoveFlags",
+			Handler:    _IntentService_RemoveFlags_Handler,
+		},
+		{
+			MethodName: "RemoveLaunchSecurityProtection",
+			Handler:    _IntentService_RemoveLaunchSecurityProtection_Handler,
+		},
+		{
+			MethodName: "ReplaceExtras1",
+			Handler:    _IntentService_ReplaceExtras1_Handler,
+		},
+		{
+			MethodName: "ReplaceExtras1_1",
+			Handler:    _IntentService_ReplaceExtras1_1_Handler,
+		},
+		{
+			MethodName: "ResolveActivity",
+			Handler:    _IntentService_ResolveActivity_Handler,
+		},
+		{
+			MethodName: "ResolveActivityInfo",
+			Handler:    _IntentService_ResolveActivityInfo_Handler,
+		},
+		{
+			MethodName: "ResolveType1",
+			Handler:    _IntentService_ResolveType1_Handler,
+		},
+		{
+			MethodName: "ResolveType1_1",
+			Handler:    _IntentService_ResolveType1_1_Handler,
+		},
+		{
+			MethodName: "ResolveTypeIfNeeded",
+			Handler:    _IntentService_ResolveTypeIfNeeded_Handler,
+		},
+		{
+			MethodName: "SetAction",
+			Handler:    _IntentService_SetAction_Handler,
+		},
+		{
+			MethodName: "SetClass",
+			Handler:    _IntentService_SetClass_Handler,
+		},
+		{
+			MethodName: "SetClassName2",
+			Handler:    _IntentService_SetClassName2_Handler,
+		},
+		{
+			MethodName: "SetClassName2_1",
+			Handler:    _IntentService_SetClassName2_1_Handler,
+		},
+		{
+			MethodName: "SetClipData",
+			Handler:    _IntentService_SetClipData_Handler,
+		},
+		{
+			MethodName: "SetComponent",
+			Handler:    _IntentService_SetComponent_Handler,
+		},
+		{
+			MethodName: "SetData",
+			Handler:    _IntentService_SetData_Handler,
+		},
+		{
+			MethodName: "SetDataAndNormalize",
+			Handler:    _IntentService_SetDataAndNormalize_Handler,
+		},
+		{
+			MethodName: "SetDataAndType",
+			Handler:    _IntentService_SetDataAndType_Handler,
+		},
+		{
+			MethodName: "SetDataAndTypeAndNormalize",
+			Handler:    _IntentService_SetDataAndTypeAndNormalize_Handler,
+		},
+		{
+			MethodName: "SetExtrasClassLoader",
+			Handler:    _IntentService_SetExtrasClassLoader_Handler,
+		},
+		{
+			MethodName: "SetFlags",
+			Handler:    _IntentService_SetFlags_Handler,
+		},
+		{
+			MethodName: "SetIdentifier",
+			Handler:    _IntentService_SetIdentifier_Handler,
+		},
+		{
+			MethodName: "SetPackage",
+			Handler:    _IntentService_SetPackage_Handler,
+		},
+		{
+			MethodName: "SetSelector",
+			Handler:    _IntentService_SetSelector_Handler,
+		},
+		{
+			MethodName: "SetSourceBounds",
+			Handler:    _IntentService_SetSourceBounds_Handler,
+		},
+		{
+			MethodName: "SetType",
+			Handler:    _IntentService_SetType_Handler,
+		},
+		{
+			MethodName: "SetTypeAndNormalize",
+			Handler:    _IntentService_SetTypeAndNormalize_Handler,
+		},
+		{
+			MethodName: "ToString",
+			Handler:    _IntentService_ToString_Handler,
+		},
+		{
+			MethodName: "ToURI",
+			Handler:    _IntentService_ToURI_Handler,
+		},
+		{
+			MethodName: "ToUri",
+			Handler:    _IntentService_ToUri_Handler,
+		},
+		{
+			MethodName: "WriteToParcel",
+			Handler:    _IntentService_WriteToParcel_Handler,
+		},
+		{
+			MethodName: "CreateChooser2",
+			Handler:    _IntentService_CreateChooser2_Handler,
+		},
+		{
+			MethodName: "CreateChooser3_1",
+			Handler:    _IntentService_CreateChooser3_1_Handler,
+		},
+		{
+			MethodName: "GetIntent",
+			Handler:    _IntentService_GetIntent_Handler,
+		},
+		{
+			MethodName: "GetIntentOld",
+			Handler:    _IntentService_GetIntentOld_Handler,
+		},
+		{
+			MethodName: "MakeMainActivity",
+			Handler:    _IntentService_MakeMainActivity_Handler,
+		},
+		{
+			MethodName: "MakeMainSelectorActivity",
+			Handler:    _IntentService_MakeMainSelectorActivity_Handler,
+		},
+		{
+			MethodName: "MakeRestartActivityTask",
+			Handler:    _IntentService_MakeRestartActivityTask_Handler,
+		},
+		{
+			MethodName: "NormalizeMimeType",
+			Handler:    _IntentService_NormalizeMimeType_Handler,
+		},
+		{
+			MethodName: "ParseIntent",
+			Handler:    _IntentService_ParseIntent_Handler,
+		},
+		{
+			MethodName: "ParseUri",
+			Handler:    _IntentService_ParseUri_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/app/app.proto",
-}
-
-const (
-	PendingIntentService_NewPendingActivity_FullMethodName  = "/app.PendingIntentService/NewPendingActivity"
-	PendingIntentService_NewPendingBroadcast_FullMethodName = "/app.PendingIntentService/NewPendingBroadcast"
-	PendingIntentService_NewPendingService_FullMethodName   = "/app.PendingIntentService/NewPendingService"
-)
-
-// PendingIntentServiceClient is the client API for PendingIntentService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type PendingIntentServiceClient interface {
-	NewPendingActivity(ctx context.Context, in *NewPendingActivityRequest, opts ...grpc.CallOption) (*NewPendingActivityResponse, error)
-	NewPendingBroadcast(ctx context.Context, in *NewPendingBroadcastRequest, opts ...grpc.CallOption) (*NewPendingBroadcastResponse, error)
-	NewPendingService(ctx context.Context, in *NewPendingServiceRequest, opts ...grpc.CallOption) (*NewPendingServiceResponse, error)
-}
-
-type pendingIntentServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewPendingIntentServiceClient(cc grpc.ClientConnInterface) PendingIntentServiceClient {
-	return &pendingIntentServiceClient{cc}
-}
-
-func (c *pendingIntentServiceClient) NewPendingActivity(ctx context.Context, in *NewPendingActivityRequest, opts ...grpc.CallOption) (*NewPendingActivityResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(NewPendingActivityResponse)
-	err := c.cc.Invoke(ctx, PendingIntentService_NewPendingActivity_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pendingIntentServiceClient) NewPendingBroadcast(ctx context.Context, in *NewPendingBroadcastRequest, opts ...grpc.CallOption) (*NewPendingBroadcastResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(NewPendingBroadcastResponse)
-	err := c.cc.Invoke(ctx, PendingIntentService_NewPendingBroadcast_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pendingIntentServiceClient) NewPendingService(ctx context.Context, in *NewPendingServiceRequest, opts ...grpc.CallOption) (*NewPendingServiceResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(NewPendingServiceResponse)
-	err := c.cc.Invoke(ctx, PendingIntentService_NewPendingService_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// PendingIntentServiceServer is the server API for PendingIntentService service.
-// All implementations must embed UnimplementedPendingIntentServiceServer
-// for forward compatibility.
-type PendingIntentServiceServer interface {
-	NewPendingActivity(context.Context, *NewPendingActivityRequest) (*NewPendingActivityResponse, error)
-	NewPendingBroadcast(context.Context, *NewPendingBroadcastRequest) (*NewPendingBroadcastResponse, error)
-	NewPendingService(context.Context, *NewPendingServiceRequest) (*NewPendingServiceResponse, error)
-	mustEmbedUnimplementedPendingIntentServiceServer()
-}
-
-// UnimplementedPendingIntentServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedPendingIntentServiceServer struct{}
-
-func (UnimplementedPendingIntentServiceServer) NewPendingActivity(context.Context, *NewPendingActivityRequest) (*NewPendingActivityResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method NewPendingActivity not implemented")
-}
-func (UnimplementedPendingIntentServiceServer) NewPendingBroadcast(context.Context, *NewPendingBroadcastRequest) (*NewPendingBroadcastResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method NewPendingBroadcast not implemented")
-}
-func (UnimplementedPendingIntentServiceServer) NewPendingService(context.Context, *NewPendingServiceRequest) (*NewPendingServiceResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method NewPendingService not implemented")
-}
-func (UnimplementedPendingIntentServiceServer) mustEmbedUnimplementedPendingIntentServiceServer() {}
-func (UnimplementedPendingIntentServiceServer) testEmbeddedByValue()                              {}
-
-// UnsafePendingIntentServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to PendingIntentServiceServer will
-// result in compilation errors.
-type UnsafePendingIntentServiceServer interface {
-	mustEmbedUnimplementedPendingIntentServiceServer()
-}
-
-func RegisterPendingIntentServiceServer(s grpc.ServiceRegistrar, srv PendingIntentServiceServer) {
-	// If the following call panics, it indicates UnimplementedPendingIntentServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&PendingIntentService_ServiceDesc, srv)
-}
-
-func _PendingIntentService_NewPendingActivity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NewPendingActivityRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PendingIntentServiceServer).NewPendingActivity(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PendingIntentService_NewPendingActivity_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PendingIntentServiceServer).NewPendingActivity(ctx, req.(*NewPendingActivityRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PendingIntentService_NewPendingBroadcast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NewPendingBroadcastRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PendingIntentServiceServer).NewPendingBroadcast(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PendingIntentService_NewPendingBroadcast_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PendingIntentServiceServer).NewPendingBroadcast(ctx, req.(*NewPendingBroadcastRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PendingIntentService_NewPendingService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NewPendingServiceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PendingIntentServiceServer).NewPendingService(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PendingIntentService_NewPendingService_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PendingIntentServiceServer).NewPendingService(ctx, req.(*NewPendingServiceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// PendingIntentService_ServiceDesc is the grpc.ServiceDesc for PendingIntentService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var PendingIntentService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "app.PendingIntentService",
-	HandlerType: (*PendingIntentServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "NewPendingActivity",
-			Handler:    _PendingIntentService_NewPendingActivity_Handler,
-		},
-		{
-			MethodName: "NewPendingBroadcast",
-			Handler:    _PendingIntentService_NewPendingBroadcast_Handler,
-		},
-		{
-			MethodName: "NewPendingService",
-			Handler:    _PendingIntentService_NewPendingService_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/app/app.proto",
-}
-
-const (
-	BroadcastReceiverService_SubscribeBroadcastReceiver_FullMethodName = "/app.BroadcastReceiverService/SubscribeBroadcastReceiver"
-)
-
-// BroadcastReceiverServiceClient is the client API for BroadcastReceiverService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type BroadcastReceiverServiceClient interface {
-	// Server-streaming events from android.content.BroadcastReceiver
-	SubscribeBroadcastReceiver(ctx context.Context, in *SubscribeBroadcastReceiverRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[BroadcastReceiverEvent], error)
-}
-
-type broadcastReceiverServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewBroadcastReceiverServiceClient(cc grpc.ClientConnInterface) BroadcastReceiverServiceClient {
-	return &broadcastReceiverServiceClient{cc}
-}
-
-func (c *broadcastReceiverServiceClient) SubscribeBroadcastReceiver(ctx context.Context, in *SubscribeBroadcastReceiverRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[BroadcastReceiverEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &BroadcastReceiverService_ServiceDesc.Streams[0], BroadcastReceiverService_SubscribeBroadcastReceiver_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[SubscribeBroadcastReceiverRequest, BroadcastReceiverEvent]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type BroadcastReceiverService_SubscribeBroadcastReceiverClient = grpc.ServerStreamingClient[BroadcastReceiverEvent]
-
-// BroadcastReceiverServiceServer is the server API for BroadcastReceiverService service.
-// All implementations must embed UnimplementedBroadcastReceiverServiceServer
-// for forward compatibility.
-type BroadcastReceiverServiceServer interface {
-	// Server-streaming events from android.content.BroadcastReceiver
-	SubscribeBroadcastReceiver(*SubscribeBroadcastReceiverRequest, grpc.ServerStreamingServer[BroadcastReceiverEvent]) error
-	mustEmbedUnimplementedBroadcastReceiverServiceServer()
-}
-
-// UnimplementedBroadcastReceiverServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedBroadcastReceiverServiceServer struct{}
-
-func (UnimplementedBroadcastReceiverServiceServer) SubscribeBroadcastReceiver(*SubscribeBroadcastReceiverRequest, grpc.ServerStreamingServer[BroadcastReceiverEvent]) error {
-	return status.Error(codes.Unimplemented, "method SubscribeBroadcastReceiver not implemented")
-}
-func (UnimplementedBroadcastReceiverServiceServer) mustEmbedUnimplementedBroadcastReceiverServiceServer() {
-}
-func (UnimplementedBroadcastReceiverServiceServer) testEmbeddedByValue() {}
-
-// UnsafeBroadcastReceiverServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to BroadcastReceiverServiceServer will
-// result in compilation errors.
-type UnsafeBroadcastReceiverServiceServer interface {
-	mustEmbedUnimplementedBroadcastReceiverServiceServer()
-}
-
-func RegisterBroadcastReceiverServiceServer(s grpc.ServiceRegistrar, srv BroadcastReceiverServiceServer) {
-	// If the following call panics, it indicates UnimplementedBroadcastReceiverServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&BroadcastReceiverService_ServiceDesc, srv)
-}
-
-func _BroadcastReceiverService_SubscribeBroadcastReceiver_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeBroadcastReceiverRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(BroadcastReceiverServiceServer).SubscribeBroadcastReceiver(m, &grpc.GenericServerStream[SubscribeBroadcastReceiverRequest, BroadcastReceiverEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type BroadcastReceiverService_SubscribeBroadcastReceiverServer = grpc.ServerStreamingServer[BroadcastReceiverEvent]
-
-// BroadcastReceiverService_ServiceDesc is the grpc.ServiceDesc for BroadcastReceiverService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var BroadcastReceiverService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "app.BroadcastReceiverService",
-	HandlerType: (*BroadcastReceiverServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "SubscribeBroadcastReceiver",
-			Handler:       _BroadcastReceiverService_SubscribeBroadcastReceiver_Handler,
-			ServerStreams: true,
-		},
-	},
-	Metadata: "proto/app/app.proto",
-}
-
-const (
-	RunnableService_SubscribeRunnable_FullMethodName = "/app.RunnableService/SubscribeRunnable"
-)
-
-// RunnableServiceClient is the client API for RunnableService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type RunnableServiceClient interface {
-	// Server-streaming events from java.lang.Runnable
-	SubscribeRunnable(ctx context.Context, in *SubscribeRunnableRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[RunnableEvent], error)
-}
-
-type runnableServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewRunnableServiceClient(cc grpc.ClientConnInterface) RunnableServiceClient {
-	return &runnableServiceClient{cc}
-}
-
-func (c *runnableServiceClient) SubscribeRunnable(ctx context.Context, in *SubscribeRunnableRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[RunnableEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &RunnableService_ServiceDesc.Streams[0], RunnableService_SubscribeRunnable_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[SubscribeRunnableRequest, RunnableEvent]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type RunnableService_SubscribeRunnableClient = grpc.ServerStreamingClient[RunnableEvent]
-
-// RunnableServiceServer is the server API for RunnableService service.
-// All implementations must embed UnimplementedRunnableServiceServer
-// for forward compatibility.
-type RunnableServiceServer interface {
-	// Server-streaming events from java.lang.Runnable
-	SubscribeRunnable(*SubscribeRunnableRequest, grpc.ServerStreamingServer[RunnableEvent]) error
-	mustEmbedUnimplementedRunnableServiceServer()
-}
-
-// UnimplementedRunnableServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedRunnableServiceServer struct{}
-
-func (UnimplementedRunnableServiceServer) SubscribeRunnable(*SubscribeRunnableRequest, grpc.ServerStreamingServer[RunnableEvent]) error {
-	return status.Error(codes.Unimplemented, "method SubscribeRunnable not implemented")
-}
-func (UnimplementedRunnableServiceServer) mustEmbedUnimplementedRunnableServiceServer() {}
-func (UnimplementedRunnableServiceServer) testEmbeddedByValue()                         {}
-
-// UnsafeRunnableServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to RunnableServiceServer will
-// result in compilation errors.
-type UnsafeRunnableServiceServer interface {
-	mustEmbedUnimplementedRunnableServiceServer()
-}
-
-func RegisterRunnableServiceServer(s grpc.ServiceRegistrar, srv RunnableServiceServer) {
-	// If the following call panics, it indicates UnimplementedRunnableServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&RunnableService_ServiceDesc, srv)
-}
-
-func _RunnableService_SubscribeRunnable_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeRunnableRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(RunnableServiceServer).SubscribeRunnable(m, &grpc.GenericServerStream[SubscribeRunnableRequest, RunnableEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type RunnableService_SubscribeRunnableServer = grpc.ServerStreamingServer[RunnableEvent]
-
-// RunnableService_ServiceDesc is the grpc.ServiceDesc for RunnableService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var RunnableService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "app.RunnableService",
-	HandlerType: (*RunnableServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "SubscribeRunnable",
-			Handler:       _RunnableService_SubscribeRunnable_Handler,
-			ServerStreams: true,
-		},
-	},
 	Metadata: "proto/app/app.proto",
 }

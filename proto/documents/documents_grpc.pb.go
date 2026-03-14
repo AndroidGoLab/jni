@@ -21,24 +21,70 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DocumentsContractService_CreateDocumentRaw_FullMethodName = "/documents.DocumentsContractService/CreateDocumentRaw"
-	DocumentsContractService_RenameDocumentRaw_FullMethodName = "/documents.DocumentsContractService/RenameDocumentRaw"
-	DocumentsContractService_CopyDocumentRaw_FullMethodName   = "/documents.DocumentsContractService/CopyDocumentRaw"
-	DocumentsContractService_MoveDocumentRaw_FullMethodName   = "/documents.DocumentsContractService/MoveDocumentRaw"
-	DocumentsContractService_DeleteDocumentRaw_FullMethodName = "/documents.DocumentsContractService/DeleteDocumentRaw"
-	DocumentsContractService_IsDocumentUriRaw_FullMethodName  = "/documents.DocumentsContractService/IsDocumentUriRaw"
+	DocumentsContractService_BuildChildDocumentsUri_FullMethodName          = "/documents.DocumentsContractService/BuildChildDocumentsUri"
+	DocumentsContractService_BuildChildDocumentsUriUsingTree_FullMethodName = "/documents.DocumentsContractService/BuildChildDocumentsUriUsingTree"
+	DocumentsContractService_BuildDocumentUri_FullMethodName                = "/documents.DocumentsContractService/BuildDocumentUri"
+	DocumentsContractService_BuildDocumentUriUsingTree_FullMethodName       = "/documents.DocumentsContractService/BuildDocumentUriUsingTree"
+	DocumentsContractService_BuildRecentDocumentsUri_FullMethodName         = "/documents.DocumentsContractService/BuildRecentDocumentsUri"
+	DocumentsContractService_BuildRootUri_FullMethodName                    = "/documents.DocumentsContractService/BuildRootUri"
+	DocumentsContractService_BuildRootsUri_FullMethodName                   = "/documents.DocumentsContractService/BuildRootsUri"
+	DocumentsContractService_BuildSearchDocumentsUri_FullMethodName         = "/documents.DocumentsContractService/BuildSearchDocumentsUri"
+	DocumentsContractService_BuildTreeDocumentUri_FullMethodName            = "/documents.DocumentsContractService/BuildTreeDocumentUri"
+	DocumentsContractService_CopyDocument_FullMethodName                    = "/documents.DocumentsContractService/CopyDocument"
+	DocumentsContractService_CreateDocument_FullMethodName                  = "/documents.DocumentsContractService/CreateDocument"
+	DocumentsContractService_CreateWebLinkIntent_FullMethodName             = "/documents.DocumentsContractService/CreateWebLinkIntent"
+	DocumentsContractService_DeleteDocument_FullMethodName                  = "/documents.DocumentsContractService/DeleteDocument"
+	DocumentsContractService_EjectRoot_FullMethodName                       = "/documents.DocumentsContractService/EjectRoot"
+	DocumentsContractService_FindDocumentPath_FullMethodName                = "/documents.DocumentsContractService/FindDocumentPath"
+	DocumentsContractService_GetDocumentId_FullMethodName                   = "/documents.DocumentsContractService/GetDocumentId"
+	DocumentsContractService_GetDocumentMetadata_FullMethodName             = "/documents.DocumentsContractService/GetDocumentMetadata"
+	DocumentsContractService_GetDocumentThumbnail_FullMethodName            = "/documents.DocumentsContractService/GetDocumentThumbnail"
+	DocumentsContractService_GetRootId_FullMethodName                       = "/documents.DocumentsContractService/GetRootId"
+	DocumentsContractService_GetSearchDocumentsQuery_FullMethodName         = "/documents.DocumentsContractService/GetSearchDocumentsQuery"
+	DocumentsContractService_GetTreeDocumentId_FullMethodName               = "/documents.DocumentsContractService/GetTreeDocumentId"
+	DocumentsContractService_IsChildDocument_FullMethodName                 = "/documents.DocumentsContractService/IsChildDocument"
+	DocumentsContractService_IsDocumentUri_FullMethodName                   = "/documents.DocumentsContractService/IsDocumentUri"
+	DocumentsContractService_IsRootUri_FullMethodName                       = "/documents.DocumentsContractService/IsRootUri"
+	DocumentsContractService_IsRootsUri_FullMethodName                      = "/documents.DocumentsContractService/IsRootsUri"
+	DocumentsContractService_IsTreeUri_FullMethodName                       = "/documents.DocumentsContractService/IsTreeUri"
+	DocumentsContractService_MoveDocument_FullMethodName                    = "/documents.DocumentsContractService/MoveDocument"
+	DocumentsContractService_RemoveDocument_FullMethodName                  = "/documents.DocumentsContractService/RemoveDocument"
+	DocumentsContractService_RenameDocument_FullMethodName                  = "/documents.DocumentsContractService/RenameDocument"
 )
 
 // DocumentsContractServiceClient is the client API for DocumentsContractService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DocumentsContractServiceClient interface {
-	CreateDocumentRaw(ctx context.Context, in *CreateDocumentRawRequest, opts ...grpc.CallOption) (*CreateDocumentRawResponse, error)
-	RenameDocumentRaw(ctx context.Context, in *RenameDocumentRawRequest, opts ...grpc.CallOption) (*RenameDocumentRawResponse, error)
-	CopyDocumentRaw(ctx context.Context, in *CopyDocumentRawRequest, opts ...grpc.CallOption) (*CopyDocumentRawResponse, error)
-	MoveDocumentRaw(ctx context.Context, in *MoveDocumentRawRequest, opts ...grpc.CallOption) (*MoveDocumentRawResponse, error)
-	DeleteDocumentRaw(ctx context.Context, in *DeleteDocumentRawRequest, opts ...grpc.CallOption) (*DeleteDocumentRawResponse, error)
-	IsDocumentUriRaw(ctx context.Context, in *IsDocumentUriRawRequest, opts ...grpc.CallOption) (*IsDocumentUriRawResponse, error)
+	BuildChildDocumentsUri(ctx context.Context, in *BuildChildDocumentsUriRequest, opts ...grpc.CallOption) (*BuildChildDocumentsUriResponse, error)
+	BuildChildDocumentsUriUsingTree(ctx context.Context, in *BuildChildDocumentsUriUsingTreeRequest, opts ...grpc.CallOption) (*BuildChildDocumentsUriUsingTreeResponse, error)
+	BuildDocumentUri(ctx context.Context, in *BuildDocumentUriRequest, opts ...grpc.CallOption) (*BuildDocumentUriResponse, error)
+	BuildDocumentUriUsingTree(ctx context.Context, in *BuildDocumentUriUsingTreeRequest, opts ...grpc.CallOption) (*BuildDocumentUriUsingTreeResponse, error)
+	BuildRecentDocumentsUri(ctx context.Context, in *BuildRecentDocumentsUriRequest, opts ...grpc.CallOption) (*BuildRecentDocumentsUriResponse, error)
+	BuildRootUri(ctx context.Context, in *BuildRootUriRequest, opts ...grpc.CallOption) (*BuildRootUriResponse, error)
+	BuildRootsUri(ctx context.Context, in *BuildRootsUriRequest, opts ...grpc.CallOption) (*BuildRootsUriResponse, error)
+	BuildSearchDocumentsUri(ctx context.Context, in *BuildSearchDocumentsUriRequest, opts ...grpc.CallOption) (*BuildSearchDocumentsUriResponse, error)
+	BuildTreeDocumentUri(ctx context.Context, in *BuildTreeDocumentUriRequest, opts ...grpc.CallOption) (*BuildTreeDocumentUriResponse, error)
+	CopyDocument(ctx context.Context, in *CopyDocumentRequest, opts ...grpc.CallOption) (*CopyDocumentResponse, error)
+	CreateDocument(ctx context.Context, in *CreateDocumentRequest, opts ...grpc.CallOption) (*CreateDocumentResponse, error)
+	CreateWebLinkIntent(ctx context.Context, in *CreateWebLinkIntentRequest, opts ...grpc.CallOption) (*CreateWebLinkIntentResponse, error)
+	DeleteDocument(ctx context.Context, in *DeleteDocumentRequest, opts ...grpc.CallOption) (*DeleteDocumentResponse, error)
+	EjectRoot(ctx context.Context, in *EjectRootRequest, opts ...grpc.CallOption) (*EjectRootResponse, error)
+	FindDocumentPath(ctx context.Context, in *FindDocumentPathRequest, opts ...grpc.CallOption) (*FindDocumentPathResponse, error)
+	GetDocumentId(ctx context.Context, in *GetDocumentIdRequest, opts ...grpc.CallOption) (*GetDocumentIdResponse, error)
+	GetDocumentMetadata(ctx context.Context, in *GetDocumentMetadataRequest, opts ...grpc.CallOption) (*GetDocumentMetadataResponse, error)
+	GetDocumentThumbnail(ctx context.Context, in *GetDocumentThumbnailRequest, opts ...grpc.CallOption) (*GetDocumentThumbnailResponse, error)
+	GetRootId(ctx context.Context, in *GetRootIdRequest, opts ...grpc.CallOption) (*GetRootIdResponse, error)
+	GetSearchDocumentsQuery(ctx context.Context, in *GetSearchDocumentsQueryRequest, opts ...grpc.CallOption) (*GetSearchDocumentsQueryResponse, error)
+	GetTreeDocumentId(ctx context.Context, in *GetTreeDocumentIdRequest, opts ...grpc.CallOption) (*GetTreeDocumentIdResponse, error)
+	IsChildDocument(ctx context.Context, in *IsChildDocumentRequest, opts ...grpc.CallOption) (*IsChildDocumentResponse, error)
+	IsDocumentUri(ctx context.Context, in *IsDocumentUriRequest, opts ...grpc.CallOption) (*IsDocumentUriResponse, error)
+	IsRootUri(ctx context.Context, in *IsRootUriRequest, opts ...grpc.CallOption) (*IsRootUriResponse, error)
+	IsRootsUri(ctx context.Context, in *IsRootsUriRequest, opts ...grpc.CallOption) (*IsRootsUriResponse, error)
+	IsTreeUri(ctx context.Context, in *IsTreeUriRequest, opts ...grpc.CallOption) (*IsTreeUriResponse, error)
+	MoveDocument(ctx context.Context, in *MoveDocumentRequest, opts ...grpc.CallOption) (*MoveDocumentResponse, error)
+	RemoveDocument(ctx context.Context, in *RemoveDocumentRequest, opts ...grpc.CallOption) (*RemoveDocumentResponse, error)
+	RenameDocument(ctx context.Context, in *RenameDocumentRequest, opts ...grpc.CallOption) (*RenameDocumentResponse, error)
 }
 
 type documentsContractServiceClient struct {
@@ -49,60 +95,290 @@ func NewDocumentsContractServiceClient(cc grpc.ClientConnInterface) DocumentsCon
 	return &documentsContractServiceClient{cc}
 }
 
-func (c *documentsContractServiceClient) CreateDocumentRaw(ctx context.Context, in *CreateDocumentRawRequest, opts ...grpc.CallOption) (*CreateDocumentRawResponse, error) {
+func (c *documentsContractServiceClient) BuildChildDocumentsUri(ctx context.Context, in *BuildChildDocumentsUriRequest, opts ...grpc.CallOption) (*BuildChildDocumentsUriResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateDocumentRawResponse)
-	err := c.cc.Invoke(ctx, DocumentsContractService_CreateDocumentRaw_FullMethodName, in, out, cOpts...)
+	out := new(BuildChildDocumentsUriResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_BuildChildDocumentsUri_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *documentsContractServiceClient) RenameDocumentRaw(ctx context.Context, in *RenameDocumentRawRequest, opts ...grpc.CallOption) (*RenameDocumentRawResponse, error) {
+func (c *documentsContractServiceClient) BuildChildDocumentsUriUsingTree(ctx context.Context, in *BuildChildDocumentsUriUsingTreeRequest, opts ...grpc.CallOption) (*BuildChildDocumentsUriUsingTreeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RenameDocumentRawResponse)
-	err := c.cc.Invoke(ctx, DocumentsContractService_RenameDocumentRaw_FullMethodName, in, out, cOpts...)
+	out := new(BuildChildDocumentsUriUsingTreeResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_BuildChildDocumentsUriUsingTree_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *documentsContractServiceClient) CopyDocumentRaw(ctx context.Context, in *CopyDocumentRawRequest, opts ...grpc.CallOption) (*CopyDocumentRawResponse, error) {
+func (c *documentsContractServiceClient) BuildDocumentUri(ctx context.Context, in *BuildDocumentUriRequest, opts ...grpc.CallOption) (*BuildDocumentUriResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CopyDocumentRawResponse)
-	err := c.cc.Invoke(ctx, DocumentsContractService_CopyDocumentRaw_FullMethodName, in, out, cOpts...)
+	out := new(BuildDocumentUriResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_BuildDocumentUri_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *documentsContractServiceClient) MoveDocumentRaw(ctx context.Context, in *MoveDocumentRawRequest, opts ...grpc.CallOption) (*MoveDocumentRawResponse, error) {
+func (c *documentsContractServiceClient) BuildDocumentUriUsingTree(ctx context.Context, in *BuildDocumentUriUsingTreeRequest, opts ...grpc.CallOption) (*BuildDocumentUriUsingTreeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(MoveDocumentRawResponse)
-	err := c.cc.Invoke(ctx, DocumentsContractService_MoveDocumentRaw_FullMethodName, in, out, cOpts...)
+	out := new(BuildDocumentUriUsingTreeResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_BuildDocumentUriUsingTree_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *documentsContractServiceClient) DeleteDocumentRaw(ctx context.Context, in *DeleteDocumentRawRequest, opts ...grpc.CallOption) (*DeleteDocumentRawResponse, error) {
+func (c *documentsContractServiceClient) BuildRecentDocumentsUri(ctx context.Context, in *BuildRecentDocumentsUriRequest, opts ...grpc.CallOption) (*BuildRecentDocumentsUriResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteDocumentRawResponse)
-	err := c.cc.Invoke(ctx, DocumentsContractService_DeleteDocumentRaw_FullMethodName, in, out, cOpts...)
+	out := new(BuildRecentDocumentsUriResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_BuildRecentDocumentsUri_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *documentsContractServiceClient) IsDocumentUriRaw(ctx context.Context, in *IsDocumentUriRawRequest, opts ...grpc.CallOption) (*IsDocumentUriRawResponse, error) {
+func (c *documentsContractServiceClient) BuildRootUri(ctx context.Context, in *BuildRootUriRequest, opts ...grpc.CallOption) (*BuildRootUriResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(IsDocumentUriRawResponse)
-	err := c.cc.Invoke(ctx, DocumentsContractService_IsDocumentUriRaw_FullMethodName, in, out, cOpts...)
+	out := new(BuildRootUriResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_BuildRootUri_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) BuildRootsUri(ctx context.Context, in *BuildRootsUriRequest, opts ...grpc.CallOption) (*BuildRootsUriResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuildRootsUriResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_BuildRootsUri_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) BuildSearchDocumentsUri(ctx context.Context, in *BuildSearchDocumentsUriRequest, opts ...grpc.CallOption) (*BuildSearchDocumentsUriResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuildSearchDocumentsUriResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_BuildSearchDocumentsUri_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) BuildTreeDocumentUri(ctx context.Context, in *BuildTreeDocumentUriRequest, opts ...grpc.CallOption) (*BuildTreeDocumentUriResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuildTreeDocumentUriResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_BuildTreeDocumentUri_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) CopyDocument(ctx context.Context, in *CopyDocumentRequest, opts ...grpc.CallOption) (*CopyDocumentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CopyDocumentResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_CopyDocument_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) CreateDocument(ctx context.Context, in *CreateDocumentRequest, opts ...grpc.CallOption) (*CreateDocumentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateDocumentResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_CreateDocument_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) CreateWebLinkIntent(ctx context.Context, in *CreateWebLinkIntentRequest, opts ...grpc.CallOption) (*CreateWebLinkIntentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateWebLinkIntentResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_CreateWebLinkIntent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) DeleteDocument(ctx context.Context, in *DeleteDocumentRequest, opts ...grpc.CallOption) (*DeleteDocumentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteDocumentResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_DeleteDocument_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) EjectRoot(ctx context.Context, in *EjectRootRequest, opts ...grpc.CallOption) (*EjectRootResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EjectRootResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_EjectRoot_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) FindDocumentPath(ctx context.Context, in *FindDocumentPathRequest, opts ...grpc.CallOption) (*FindDocumentPathResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FindDocumentPathResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_FindDocumentPath_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) GetDocumentId(ctx context.Context, in *GetDocumentIdRequest, opts ...grpc.CallOption) (*GetDocumentIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDocumentIdResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_GetDocumentId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) GetDocumentMetadata(ctx context.Context, in *GetDocumentMetadataRequest, opts ...grpc.CallOption) (*GetDocumentMetadataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDocumentMetadataResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_GetDocumentMetadata_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) GetDocumentThumbnail(ctx context.Context, in *GetDocumentThumbnailRequest, opts ...grpc.CallOption) (*GetDocumentThumbnailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDocumentThumbnailResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_GetDocumentThumbnail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) GetRootId(ctx context.Context, in *GetRootIdRequest, opts ...grpc.CallOption) (*GetRootIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRootIdResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_GetRootId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) GetSearchDocumentsQuery(ctx context.Context, in *GetSearchDocumentsQueryRequest, opts ...grpc.CallOption) (*GetSearchDocumentsQueryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSearchDocumentsQueryResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_GetSearchDocumentsQuery_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) GetTreeDocumentId(ctx context.Context, in *GetTreeDocumentIdRequest, opts ...grpc.CallOption) (*GetTreeDocumentIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTreeDocumentIdResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_GetTreeDocumentId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) IsChildDocument(ctx context.Context, in *IsChildDocumentRequest, opts ...grpc.CallOption) (*IsChildDocumentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsChildDocumentResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_IsChildDocument_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) IsDocumentUri(ctx context.Context, in *IsDocumentUriRequest, opts ...grpc.CallOption) (*IsDocumentUriResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsDocumentUriResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_IsDocumentUri_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) IsRootUri(ctx context.Context, in *IsRootUriRequest, opts ...grpc.CallOption) (*IsRootUriResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsRootUriResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_IsRootUri_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) IsRootsUri(ctx context.Context, in *IsRootsUriRequest, opts ...grpc.CallOption) (*IsRootsUriResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsRootsUriResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_IsRootsUri_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) IsTreeUri(ctx context.Context, in *IsTreeUriRequest, opts ...grpc.CallOption) (*IsTreeUriResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsTreeUriResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_IsTreeUri_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) MoveDocument(ctx context.Context, in *MoveDocumentRequest, opts ...grpc.CallOption) (*MoveDocumentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MoveDocumentResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_MoveDocument_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) RemoveDocument(ctx context.Context, in *RemoveDocumentRequest, opts ...grpc.CallOption) (*RemoveDocumentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveDocumentResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_RemoveDocument_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *documentsContractServiceClient) RenameDocument(ctx context.Context, in *RenameDocumentRequest, opts ...grpc.CallOption) (*RenameDocumentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RenameDocumentResponse)
+	err := c.cc.Invoke(ctx, DocumentsContractService_RenameDocument_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -113,12 +389,35 @@ func (c *documentsContractServiceClient) IsDocumentUriRaw(ctx context.Context, i
 // All implementations must embed UnimplementedDocumentsContractServiceServer
 // for forward compatibility.
 type DocumentsContractServiceServer interface {
-	CreateDocumentRaw(context.Context, *CreateDocumentRawRequest) (*CreateDocumentRawResponse, error)
-	RenameDocumentRaw(context.Context, *RenameDocumentRawRequest) (*RenameDocumentRawResponse, error)
-	CopyDocumentRaw(context.Context, *CopyDocumentRawRequest) (*CopyDocumentRawResponse, error)
-	MoveDocumentRaw(context.Context, *MoveDocumentRawRequest) (*MoveDocumentRawResponse, error)
-	DeleteDocumentRaw(context.Context, *DeleteDocumentRawRequest) (*DeleteDocumentRawResponse, error)
-	IsDocumentUriRaw(context.Context, *IsDocumentUriRawRequest) (*IsDocumentUriRawResponse, error)
+	BuildChildDocumentsUri(context.Context, *BuildChildDocumentsUriRequest) (*BuildChildDocumentsUriResponse, error)
+	BuildChildDocumentsUriUsingTree(context.Context, *BuildChildDocumentsUriUsingTreeRequest) (*BuildChildDocumentsUriUsingTreeResponse, error)
+	BuildDocumentUri(context.Context, *BuildDocumentUriRequest) (*BuildDocumentUriResponse, error)
+	BuildDocumentUriUsingTree(context.Context, *BuildDocumentUriUsingTreeRequest) (*BuildDocumentUriUsingTreeResponse, error)
+	BuildRecentDocumentsUri(context.Context, *BuildRecentDocumentsUriRequest) (*BuildRecentDocumentsUriResponse, error)
+	BuildRootUri(context.Context, *BuildRootUriRequest) (*BuildRootUriResponse, error)
+	BuildRootsUri(context.Context, *BuildRootsUriRequest) (*BuildRootsUriResponse, error)
+	BuildSearchDocumentsUri(context.Context, *BuildSearchDocumentsUriRequest) (*BuildSearchDocumentsUriResponse, error)
+	BuildTreeDocumentUri(context.Context, *BuildTreeDocumentUriRequest) (*BuildTreeDocumentUriResponse, error)
+	CopyDocument(context.Context, *CopyDocumentRequest) (*CopyDocumentResponse, error)
+	CreateDocument(context.Context, *CreateDocumentRequest) (*CreateDocumentResponse, error)
+	CreateWebLinkIntent(context.Context, *CreateWebLinkIntentRequest) (*CreateWebLinkIntentResponse, error)
+	DeleteDocument(context.Context, *DeleteDocumentRequest) (*DeleteDocumentResponse, error)
+	EjectRoot(context.Context, *EjectRootRequest) (*EjectRootResponse, error)
+	FindDocumentPath(context.Context, *FindDocumentPathRequest) (*FindDocumentPathResponse, error)
+	GetDocumentId(context.Context, *GetDocumentIdRequest) (*GetDocumentIdResponse, error)
+	GetDocumentMetadata(context.Context, *GetDocumentMetadataRequest) (*GetDocumentMetadataResponse, error)
+	GetDocumentThumbnail(context.Context, *GetDocumentThumbnailRequest) (*GetDocumentThumbnailResponse, error)
+	GetRootId(context.Context, *GetRootIdRequest) (*GetRootIdResponse, error)
+	GetSearchDocumentsQuery(context.Context, *GetSearchDocumentsQueryRequest) (*GetSearchDocumentsQueryResponse, error)
+	GetTreeDocumentId(context.Context, *GetTreeDocumentIdRequest) (*GetTreeDocumentIdResponse, error)
+	IsChildDocument(context.Context, *IsChildDocumentRequest) (*IsChildDocumentResponse, error)
+	IsDocumentUri(context.Context, *IsDocumentUriRequest) (*IsDocumentUriResponse, error)
+	IsRootUri(context.Context, *IsRootUriRequest) (*IsRootUriResponse, error)
+	IsRootsUri(context.Context, *IsRootsUriRequest) (*IsRootsUriResponse, error)
+	IsTreeUri(context.Context, *IsTreeUriRequest) (*IsTreeUriResponse, error)
+	MoveDocument(context.Context, *MoveDocumentRequest) (*MoveDocumentResponse, error)
+	RemoveDocument(context.Context, *RemoveDocumentRequest) (*RemoveDocumentResponse, error)
+	RenameDocument(context.Context, *RenameDocumentRequest) (*RenameDocumentResponse, error)
 	mustEmbedUnimplementedDocumentsContractServiceServer()
 }
 
@@ -129,23 +428,92 @@ type DocumentsContractServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedDocumentsContractServiceServer struct{}
 
-func (UnimplementedDocumentsContractServiceServer) CreateDocumentRaw(context.Context, *CreateDocumentRawRequest) (*CreateDocumentRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateDocumentRaw not implemented")
+func (UnimplementedDocumentsContractServiceServer) BuildChildDocumentsUri(context.Context, *BuildChildDocumentsUriRequest) (*BuildChildDocumentsUriResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BuildChildDocumentsUri not implemented")
 }
-func (UnimplementedDocumentsContractServiceServer) RenameDocumentRaw(context.Context, *RenameDocumentRawRequest) (*RenameDocumentRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RenameDocumentRaw not implemented")
+func (UnimplementedDocumentsContractServiceServer) BuildChildDocumentsUriUsingTree(context.Context, *BuildChildDocumentsUriUsingTreeRequest) (*BuildChildDocumentsUriUsingTreeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BuildChildDocumentsUriUsingTree not implemented")
 }
-func (UnimplementedDocumentsContractServiceServer) CopyDocumentRaw(context.Context, *CopyDocumentRawRequest) (*CopyDocumentRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CopyDocumentRaw not implemented")
+func (UnimplementedDocumentsContractServiceServer) BuildDocumentUri(context.Context, *BuildDocumentUriRequest) (*BuildDocumentUriResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BuildDocumentUri not implemented")
 }
-func (UnimplementedDocumentsContractServiceServer) MoveDocumentRaw(context.Context, *MoveDocumentRawRequest) (*MoveDocumentRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method MoveDocumentRaw not implemented")
+func (UnimplementedDocumentsContractServiceServer) BuildDocumentUriUsingTree(context.Context, *BuildDocumentUriUsingTreeRequest) (*BuildDocumentUriUsingTreeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BuildDocumentUriUsingTree not implemented")
 }
-func (UnimplementedDocumentsContractServiceServer) DeleteDocumentRaw(context.Context, *DeleteDocumentRawRequest) (*DeleteDocumentRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method DeleteDocumentRaw not implemented")
+func (UnimplementedDocumentsContractServiceServer) BuildRecentDocumentsUri(context.Context, *BuildRecentDocumentsUriRequest) (*BuildRecentDocumentsUriResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BuildRecentDocumentsUri not implemented")
 }
-func (UnimplementedDocumentsContractServiceServer) IsDocumentUriRaw(context.Context, *IsDocumentUriRawRequest) (*IsDocumentUriRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method IsDocumentUriRaw not implemented")
+func (UnimplementedDocumentsContractServiceServer) BuildRootUri(context.Context, *BuildRootUriRequest) (*BuildRootUriResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BuildRootUri not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) BuildRootsUri(context.Context, *BuildRootsUriRequest) (*BuildRootsUriResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BuildRootsUri not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) BuildSearchDocumentsUri(context.Context, *BuildSearchDocumentsUriRequest) (*BuildSearchDocumentsUriResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BuildSearchDocumentsUri not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) BuildTreeDocumentUri(context.Context, *BuildTreeDocumentUriRequest) (*BuildTreeDocumentUriResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BuildTreeDocumentUri not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) CopyDocument(context.Context, *CopyDocumentRequest) (*CopyDocumentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CopyDocument not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) CreateDocument(context.Context, *CreateDocumentRequest) (*CreateDocumentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateDocument not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) CreateWebLinkIntent(context.Context, *CreateWebLinkIntentRequest) (*CreateWebLinkIntentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateWebLinkIntent not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) DeleteDocument(context.Context, *DeleteDocumentRequest) (*DeleteDocumentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteDocument not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) EjectRoot(context.Context, *EjectRootRequest) (*EjectRootResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method EjectRoot not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) FindDocumentPath(context.Context, *FindDocumentPathRequest) (*FindDocumentPathResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FindDocumentPath not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) GetDocumentId(context.Context, *GetDocumentIdRequest) (*GetDocumentIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDocumentId not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) GetDocumentMetadata(context.Context, *GetDocumentMetadataRequest) (*GetDocumentMetadataResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDocumentMetadata not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) GetDocumentThumbnail(context.Context, *GetDocumentThumbnailRequest) (*GetDocumentThumbnailResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDocumentThumbnail not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) GetRootId(context.Context, *GetRootIdRequest) (*GetRootIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRootId not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) GetSearchDocumentsQuery(context.Context, *GetSearchDocumentsQueryRequest) (*GetSearchDocumentsQueryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSearchDocumentsQuery not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) GetTreeDocumentId(context.Context, *GetTreeDocumentIdRequest) (*GetTreeDocumentIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetTreeDocumentId not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) IsChildDocument(context.Context, *IsChildDocumentRequest) (*IsChildDocumentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsChildDocument not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) IsDocumentUri(context.Context, *IsDocumentUriRequest) (*IsDocumentUriResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsDocumentUri not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) IsRootUri(context.Context, *IsRootUriRequest) (*IsRootUriResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsRootUri not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) IsRootsUri(context.Context, *IsRootsUriRequest) (*IsRootsUriResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsRootsUri not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) IsTreeUri(context.Context, *IsTreeUriRequest) (*IsTreeUriResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsTreeUri not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) MoveDocument(context.Context, *MoveDocumentRequest) (*MoveDocumentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method MoveDocument not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) RemoveDocument(context.Context, *RemoveDocumentRequest) (*RemoveDocumentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveDocument not implemented")
+}
+func (UnimplementedDocumentsContractServiceServer) RenameDocument(context.Context, *RenameDocumentRequest) (*RenameDocumentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RenameDocument not implemented")
 }
 func (UnimplementedDocumentsContractServiceServer) mustEmbedUnimplementedDocumentsContractServiceServer() {
 }
@@ -169,110 +537,524 @@ func RegisterDocumentsContractServiceServer(s grpc.ServiceRegistrar, srv Documen
 	s.RegisterService(&DocumentsContractService_ServiceDesc, srv)
 }
 
-func _DocumentsContractService_CreateDocumentRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateDocumentRawRequest)
+func _DocumentsContractService_BuildChildDocumentsUri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildChildDocumentsUriRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DocumentsContractServiceServer).CreateDocumentRaw(ctx, in)
+		return srv.(DocumentsContractServiceServer).BuildChildDocumentsUri(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DocumentsContractService_CreateDocumentRaw_FullMethodName,
+		FullMethod: DocumentsContractService_BuildChildDocumentsUri_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DocumentsContractServiceServer).CreateDocumentRaw(ctx, req.(*CreateDocumentRawRequest))
+		return srv.(DocumentsContractServiceServer).BuildChildDocumentsUri(ctx, req.(*BuildChildDocumentsUriRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DocumentsContractService_RenameDocumentRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RenameDocumentRawRequest)
+func _DocumentsContractService_BuildChildDocumentsUriUsingTree_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildChildDocumentsUriUsingTreeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DocumentsContractServiceServer).RenameDocumentRaw(ctx, in)
+		return srv.(DocumentsContractServiceServer).BuildChildDocumentsUriUsingTree(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DocumentsContractService_RenameDocumentRaw_FullMethodName,
+		FullMethod: DocumentsContractService_BuildChildDocumentsUriUsingTree_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DocumentsContractServiceServer).RenameDocumentRaw(ctx, req.(*RenameDocumentRawRequest))
+		return srv.(DocumentsContractServiceServer).BuildChildDocumentsUriUsingTree(ctx, req.(*BuildChildDocumentsUriUsingTreeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DocumentsContractService_CopyDocumentRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CopyDocumentRawRequest)
+func _DocumentsContractService_BuildDocumentUri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildDocumentUriRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DocumentsContractServiceServer).CopyDocumentRaw(ctx, in)
+		return srv.(DocumentsContractServiceServer).BuildDocumentUri(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DocumentsContractService_CopyDocumentRaw_FullMethodName,
+		FullMethod: DocumentsContractService_BuildDocumentUri_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DocumentsContractServiceServer).CopyDocumentRaw(ctx, req.(*CopyDocumentRawRequest))
+		return srv.(DocumentsContractServiceServer).BuildDocumentUri(ctx, req.(*BuildDocumentUriRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DocumentsContractService_MoveDocumentRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MoveDocumentRawRequest)
+func _DocumentsContractService_BuildDocumentUriUsingTree_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildDocumentUriUsingTreeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DocumentsContractServiceServer).MoveDocumentRaw(ctx, in)
+		return srv.(DocumentsContractServiceServer).BuildDocumentUriUsingTree(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DocumentsContractService_MoveDocumentRaw_FullMethodName,
+		FullMethod: DocumentsContractService_BuildDocumentUriUsingTree_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DocumentsContractServiceServer).MoveDocumentRaw(ctx, req.(*MoveDocumentRawRequest))
+		return srv.(DocumentsContractServiceServer).BuildDocumentUriUsingTree(ctx, req.(*BuildDocumentUriUsingTreeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DocumentsContractService_DeleteDocumentRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteDocumentRawRequest)
+func _DocumentsContractService_BuildRecentDocumentsUri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildRecentDocumentsUriRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DocumentsContractServiceServer).DeleteDocumentRaw(ctx, in)
+		return srv.(DocumentsContractServiceServer).BuildRecentDocumentsUri(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DocumentsContractService_DeleteDocumentRaw_FullMethodName,
+		FullMethod: DocumentsContractService_BuildRecentDocumentsUri_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DocumentsContractServiceServer).DeleteDocumentRaw(ctx, req.(*DeleteDocumentRawRequest))
+		return srv.(DocumentsContractServiceServer).BuildRecentDocumentsUri(ctx, req.(*BuildRecentDocumentsUriRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DocumentsContractService_IsDocumentUriRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IsDocumentUriRawRequest)
+func _DocumentsContractService_BuildRootUri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildRootUriRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DocumentsContractServiceServer).IsDocumentUriRaw(ctx, in)
+		return srv.(DocumentsContractServiceServer).BuildRootUri(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DocumentsContractService_IsDocumentUriRaw_FullMethodName,
+		FullMethod: DocumentsContractService_BuildRootUri_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DocumentsContractServiceServer).IsDocumentUriRaw(ctx, req.(*IsDocumentUriRawRequest))
+		return srv.(DocumentsContractServiceServer).BuildRootUri(ctx, req.(*BuildRootUriRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_BuildRootsUri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildRootsUriRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).BuildRootsUri(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_BuildRootsUri_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).BuildRootsUri(ctx, req.(*BuildRootsUriRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_BuildSearchDocumentsUri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildSearchDocumentsUriRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).BuildSearchDocumentsUri(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_BuildSearchDocumentsUri_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).BuildSearchDocumentsUri(ctx, req.(*BuildSearchDocumentsUriRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_BuildTreeDocumentUri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildTreeDocumentUriRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).BuildTreeDocumentUri(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_BuildTreeDocumentUri_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).BuildTreeDocumentUri(ctx, req.(*BuildTreeDocumentUriRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_CopyDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CopyDocumentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).CopyDocument(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_CopyDocument_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).CopyDocument(ctx, req.(*CopyDocumentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_CreateDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDocumentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).CreateDocument(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_CreateDocument_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).CreateDocument(ctx, req.(*CreateDocumentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_CreateWebLinkIntent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateWebLinkIntentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).CreateWebLinkIntent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_CreateWebLinkIntent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).CreateWebLinkIntent(ctx, req.(*CreateWebLinkIntentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_DeleteDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDocumentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).DeleteDocument(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_DeleteDocument_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).DeleteDocument(ctx, req.(*DeleteDocumentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_EjectRoot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EjectRootRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).EjectRoot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_EjectRoot_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).EjectRoot(ctx, req.(*EjectRootRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_FindDocumentPath_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FindDocumentPathRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).FindDocumentPath(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_FindDocumentPath_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).FindDocumentPath(ctx, req.(*FindDocumentPathRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_GetDocumentId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDocumentIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).GetDocumentId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_GetDocumentId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).GetDocumentId(ctx, req.(*GetDocumentIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_GetDocumentMetadata_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDocumentMetadataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).GetDocumentMetadata(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_GetDocumentMetadata_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).GetDocumentMetadata(ctx, req.(*GetDocumentMetadataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_GetDocumentThumbnail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDocumentThumbnailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).GetDocumentThumbnail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_GetDocumentThumbnail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).GetDocumentThumbnail(ctx, req.(*GetDocumentThumbnailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_GetRootId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRootIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).GetRootId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_GetRootId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).GetRootId(ctx, req.(*GetRootIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_GetSearchDocumentsQuery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSearchDocumentsQueryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).GetSearchDocumentsQuery(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_GetSearchDocumentsQuery_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).GetSearchDocumentsQuery(ctx, req.(*GetSearchDocumentsQueryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_GetTreeDocumentId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTreeDocumentIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).GetTreeDocumentId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_GetTreeDocumentId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).GetTreeDocumentId(ctx, req.(*GetTreeDocumentIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_IsChildDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsChildDocumentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).IsChildDocument(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_IsChildDocument_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).IsChildDocument(ctx, req.(*IsChildDocumentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_IsDocumentUri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsDocumentUriRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).IsDocumentUri(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_IsDocumentUri_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).IsDocumentUri(ctx, req.(*IsDocumentUriRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_IsRootUri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsRootUriRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).IsRootUri(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_IsRootUri_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).IsRootUri(ctx, req.(*IsRootUriRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_IsRootsUri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsRootsUriRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).IsRootsUri(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_IsRootsUri_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).IsRootsUri(ctx, req.(*IsRootsUriRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_IsTreeUri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsTreeUriRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).IsTreeUri(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_IsTreeUri_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).IsTreeUri(ctx, req.(*IsTreeUriRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_MoveDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MoveDocumentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).MoveDocument(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_MoveDocument_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).MoveDocument(ctx, req.(*MoveDocumentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_RemoveDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveDocumentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).RemoveDocument(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_RemoveDocument_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).RemoveDocument(ctx, req.(*RemoveDocumentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DocumentsContractService_RenameDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RenameDocumentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DocumentsContractServiceServer).RenameDocument(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DocumentsContractService_RenameDocument_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DocumentsContractServiceServer).RenameDocument(ctx, req.(*RenameDocumentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -285,28 +1067,120 @@ var DocumentsContractService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*DocumentsContractServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreateDocumentRaw",
-			Handler:    _DocumentsContractService_CreateDocumentRaw_Handler,
+			MethodName: "BuildChildDocumentsUri",
+			Handler:    _DocumentsContractService_BuildChildDocumentsUri_Handler,
 		},
 		{
-			MethodName: "RenameDocumentRaw",
-			Handler:    _DocumentsContractService_RenameDocumentRaw_Handler,
+			MethodName: "BuildChildDocumentsUriUsingTree",
+			Handler:    _DocumentsContractService_BuildChildDocumentsUriUsingTree_Handler,
 		},
 		{
-			MethodName: "CopyDocumentRaw",
-			Handler:    _DocumentsContractService_CopyDocumentRaw_Handler,
+			MethodName: "BuildDocumentUri",
+			Handler:    _DocumentsContractService_BuildDocumentUri_Handler,
 		},
 		{
-			MethodName: "MoveDocumentRaw",
-			Handler:    _DocumentsContractService_MoveDocumentRaw_Handler,
+			MethodName: "BuildDocumentUriUsingTree",
+			Handler:    _DocumentsContractService_BuildDocumentUriUsingTree_Handler,
 		},
 		{
-			MethodName: "DeleteDocumentRaw",
-			Handler:    _DocumentsContractService_DeleteDocumentRaw_Handler,
+			MethodName: "BuildRecentDocumentsUri",
+			Handler:    _DocumentsContractService_BuildRecentDocumentsUri_Handler,
 		},
 		{
-			MethodName: "IsDocumentUriRaw",
-			Handler:    _DocumentsContractService_IsDocumentUriRaw_Handler,
+			MethodName: "BuildRootUri",
+			Handler:    _DocumentsContractService_BuildRootUri_Handler,
+		},
+		{
+			MethodName: "BuildRootsUri",
+			Handler:    _DocumentsContractService_BuildRootsUri_Handler,
+		},
+		{
+			MethodName: "BuildSearchDocumentsUri",
+			Handler:    _DocumentsContractService_BuildSearchDocumentsUri_Handler,
+		},
+		{
+			MethodName: "BuildTreeDocumentUri",
+			Handler:    _DocumentsContractService_BuildTreeDocumentUri_Handler,
+		},
+		{
+			MethodName: "CopyDocument",
+			Handler:    _DocumentsContractService_CopyDocument_Handler,
+		},
+		{
+			MethodName: "CreateDocument",
+			Handler:    _DocumentsContractService_CreateDocument_Handler,
+		},
+		{
+			MethodName: "CreateWebLinkIntent",
+			Handler:    _DocumentsContractService_CreateWebLinkIntent_Handler,
+		},
+		{
+			MethodName: "DeleteDocument",
+			Handler:    _DocumentsContractService_DeleteDocument_Handler,
+		},
+		{
+			MethodName: "EjectRoot",
+			Handler:    _DocumentsContractService_EjectRoot_Handler,
+		},
+		{
+			MethodName: "FindDocumentPath",
+			Handler:    _DocumentsContractService_FindDocumentPath_Handler,
+		},
+		{
+			MethodName: "GetDocumentId",
+			Handler:    _DocumentsContractService_GetDocumentId_Handler,
+		},
+		{
+			MethodName: "GetDocumentMetadata",
+			Handler:    _DocumentsContractService_GetDocumentMetadata_Handler,
+		},
+		{
+			MethodName: "GetDocumentThumbnail",
+			Handler:    _DocumentsContractService_GetDocumentThumbnail_Handler,
+		},
+		{
+			MethodName: "GetRootId",
+			Handler:    _DocumentsContractService_GetRootId_Handler,
+		},
+		{
+			MethodName: "GetSearchDocumentsQuery",
+			Handler:    _DocumentsContractService_GetSearchDocumentsQuery_Handler,
+		},
+		{
+			MethodName: "GetTreeDocumentId",
+			Handler:    _DocumentsContractService_GetTreeDocumentId_Handler,
+		},
+		{
+			MethodName: "IsChildDocument",
+			Handler:    _DocumentsContractService_IsChildDocument_Handler,
+		},
+		{
+			MethodName: "IsDocumentUri",
+			Handler:    _DocumentsContractService_IsDocumentUri_Handler,
+		},
+		{
+			MethodName: "IsRootUri",
+			Handler:    _DocumentsContractService_IsRootUri_Handler,
+		},
+		{
+			MethodName: "IsRootsUri",
+			Handler:    _DocumentsContractService_IsRootsUri_Handler,
+		},
+		{
+			MethodName: "IsTreeUri",
+			Handler:    _DocumentsContractService_IsTreeUri_Handler,
+		},
+		{
+			MethodName: "MoveDocument",
+			Handler:    _DocumentsContractService_MoveDocument_Handler,
+		},
+		{
+			MethodName: "RemoveDocument",
+			Handler:    _DocumentsContractService_RemoveDocument_Handler,
+		},
+		{
+			MethodName: "RenameDocument",
+			Handler:    _DocumentsContractService_RenameDocument_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

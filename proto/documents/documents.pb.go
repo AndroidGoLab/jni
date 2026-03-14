@@ -23,30 +23,28 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type CreateDocumentRawRequest struct {
+type BuildChildDocumentsUriRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Resolver      int64                  `protobuf:"varint,1,opt,name=resolver,proto3" json:"resolver,omitempty"`
-	ParentUri     int64                  `protobuf:"varint,2,opt,name=parent_uri,json=parentUri,proto3" json:"parent_uri,omitempty"`
-	MimeType      string                 `protobuf:"bytes,3,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
-	DisplayName   string                 `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateDocumentRawRequest) Reset() {
-	*x = CreateDocumentRawRequest{}
+func (x *BuildChildDocumentsUriRequest) Reset() {
+	*x = BuildChildDocumentsUriRequest{}
 	mi := &file_proto_documents_documents_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateDocumentRawRequest) String() string {
+func (x *BuildChildDocumentsUriRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateDocumentRawRequest) ProtoMessage() {}
+func (*BuildChildDocumentsUriRequest) ProtoMessage() {}
 
-func (x *CreateDocumentRawRequest) ProtoReflect() protoreflect.Message {
+func (x *BuildChildDocumentsUriRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_documents_documents_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -58,60 +56,46 @@ func (x *CreateDocumentRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateDocumentRawRequest.ProtoReflect.Descriptor instead.
-func (*CreateDocumentRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuildChildDocumentsUriRequest.ProtoReflect.Descriptor instead.
+func (*BuildChildDocumentsUriRequest) Descriptor() ([]byte, []int) {
 	return file_proto_documents_documents_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *CreateDocumentRawRequest) GetResolver() int64 {
+func (x *BuildChildDocumentsUriRequest) GetArg0() string {
 	if x != nil {
-		return x.Resolver
-	}
-	return 0
-}
-
-func (x *CreateDocumentRawRequest) GetParentUri() int64 {
-	if x != nil {
-		return x.ParentUri
-	}
-	return 0
-}
-
-func (x *CreateDocumentRawRequest) GetMimeType() string {
-	if x != nil {
-		return x.MimeType
+		return x.Arg0
 	}
 	return ""
 }
 
-func (x *CreateDocumentRawRequest) GetDisplayName() string {
+func (x *BuildChildDocumentsUriRequest) GetArg1() string {
 	if x != nil {
-		return x.DisplayName
+		return x.Arg1
 	}
 	return ""
 }
 
-type CreateDocumentRawResponse struct {
+type BuildChildDocumentsUriResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateDocumentRawResponse) Reset() {
-	*x = CreateDocumentRawResponse{}
+func (x *BuildChildDocumentsUriResponse) Reset() {
+	*x = BuildChildDocumentsUriResponse{}
 	mi := &file_proto_documents_documents_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateDocumentRawResponse) String() string {
+func (x *BuildChildDocumentsUriResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateDocumentRawResponse) ProtoMessage() {}
+func (*BuildChildDocumentsUriResponse) ProtoMessage() {}
 
-func (x *CreateDocumentRawResponse) ProtoReflect() protoreflect.Message {
+func (x *BuildChildDocumentsUriResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_documents_documents_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -123,41 +107,40 @@ func (x *CreateDocumentRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateDocumentRawResponse.ProtoReflect.Descriptor instead.
-func (*CreateDocumentRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuildChildDocumentsUriResponse.ProtoReflect.Descriptor instead.
+func (*BuildChildDocumentsUriResponse) Descriptor() ([]byte, []int) {
 	return file_proto_documents_documents_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CreateDocumentRawResponse) GetResult() int64 {
+func (x *BuildChildDocumentsUriResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type RenameDocumentRawRequest struct {
+type BuildChildDocumentsUriUsingTreeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Resolver      int64                  `protobuf:"varint,1,opt,name=resolver,proto3" json:"resolver,omitempty"`
-	Uri           int64                  `protobuf:"varint,2,opt,name=uri,proto3" json:"uri,omitempty"`
-	DisplayName   string                 `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RenameDocumentRawRequest) Reset() {
-	*x = RenameDocumentRawRequest{}
+func (x *BuildChildDocumentsUriUsingTreeRequest) Reset() {
+	*x = BuildChildDocumentsUriUsingTreeRequest{}
 	mi := &file_proto_documents_documents_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RenameDocumentRawRequest) String() string {
+func (x *BuildChildDocumentsUriUsingTreeRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RenameDocumentRawRequest) ProtoMessage() {}
+func (*BuildChildDocumentsUriUsingTreeRequest) ProtoMessage() {}
 
-func (x *RenameDocumentRawRequest) ProtoReflect() protoreflect.Message {
+func (x *BuildChildDocumentsUriUsingTreeRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_documents_documents_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -169,53 +152,46 @@ func (x *RenameDocumentRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RenameDocumentRawRequest.ProtoReflect.Descriptor instead.
-func (*RenameDocumentRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuildChildDocumentsUriUsingTreeRequest.ProtoReflect.Descriptor instead.
+func (*BuildChildDocumentsUriUsingTreeRequest) Descriptor() ([]byte, []int) {
 	return file_proto_documents_documents_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *RenameDocumentRawRequest) GetResolver() int64 {
+func (x *BuildChildDocumentsUriUsingTreeRequest) GetArg0() int64 {
 	if x != nil {
-		return x.Resolver
+		return x.Arg0
 	}
 	return 0
 }
 
-func (x *RenameDocumentRawRequest) GetUri() int64 {
+func (x *BuildChildDocumentsUriUsingTreeRequest) GetArg1() string {
 	if x != nil {
-		return x.Uri
-	}
-	return 0
-}
-
-func (x *RenameDocumentRawRequest) GetDisplayName() string {
-	if x != nil {
-		return x.DisplayName
+		return x.Arg1
 	}
 	return ""
 }
 
-type RenameDocumentRawResponse struct {
+type BuildChildDocumentsUriUsingTreeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RenameDocumentRawResponse) Reset() {
-	*x = RenameDocumentRawResponse{}
+func (x *BuildChildDocumentsUriUsingTreeResponse) Reset() {
+	*x = BuildChildDocumentsUriUsingTreeResponse{}
 	mi := &file_proto_documents_documents_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RenameDocumentRawResponse) String() string {
+func (x *BuildChildDocumentsUriUsingTreeResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RenameDocumentRawResponse) ProtoMessage() {}
+func (*BuildChildDocumentsUriUsingTreeResponse) ProtoMessage() {}
 
-func (x *RenameDocumentRawResponse) ProtoReflect() protoreflect.Message {
+func (x *BuildChildDocumentsUriUsingTreeResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_documents_documents_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -227,41 +203,40 @@ func (x *RenameDocumentRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RenameDocumentRawResponse.ProtoReflect.Descriptor instead.
-func (*RenameDocumentRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuildChildDocumentsUriUsingTreeResponse.ProtoReflect.Descriptor instead.
+func (*BuildChildDocumentsUriUsingTreeResponse) Descriptor() ([]byte, []int) {
 	return file_proto_documents_documents_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *RenameDocumentRawResponse) GetResult() int64 {
+func (x *BuildChildDocumentsUriUsingTreeResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type CopyDocumentRawRequest struct {
+type BuildDocumentUriRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Resolver      int64                  `protobuf:"varint,1,opt,name=resolver,proto3" json:"resolver,omitempty"`
-	SrcUri        int64                  `protobuf:"varint,2,opt,name=src_uri,json=srcUri,proto3" json:"src_uri,omitempty"`
-	DestParentUri int64                  `protobuf:"varint,3,opt,name=dest_parent_uri,json=destParentUri,proto3" json:"dest_parent_uri,omitempty"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CopyDocumentRawRequest) Reset() {
-	*x = CopyDocumentRawRequest{}
+func (x *BuildDocumentUriRequest) Reset() {
+	*x = BuildDocumentUriRequest{}
 	mi := &file_proto_documents_documents_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CopyDocumentRawRequest) String() string {
+func (x *BuildDocumentUriRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CopyDocumentRawRequest) ProtoMessage() {}
+func (*BuildDocumentUriRequest) ProtoMessage() {}
 
-func (x *CopyDocumentRawRequest) ProtoReflect() protoreflect.Message {
+func (x *BuildDocumentUriRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_documents_documents_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -273,53 +248,46 @@ func (x *CopyDocumentRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CopyDocumentRawRequest.ProtoReflect.Descriptor instead.
-func (*CopyDocumentRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuildDocumentUriRequest.ProtoReflect.Descriptor instead.
+func (*BuildDocumentUriRequest) Descriptor() ([]byte, []int) {
 	return file_proto_documents_documents_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *CopyDocumentRawRequest) GetResolver() int64 {
+func (x *BuildDocumentUriRequest) GetArg0() string {
 	if x != nil {
-		return x.Resolver
+		return x.Arg0
 	}
-	return 0
+	return ""
 }
 
-func (x *CopyDocumentRawRequest) GetSrcUri() int64 {
+func (x *BuildDocumentUriRequest) GetArg1() string {
 	if x != nil {
-		return x.SrcUri
+		return x.Arg1
 	}
-	return 0
+	return ""
 }
 
-func (x *CopyDocumentRawRequest) GetDestParentUri() int64 {
-	if x != nil {
-		return x.DestParentUri
-	}
-	return 0
-}
-
-type CopyDocumentRawResponse struct {
+type BuildDocumentUriResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CopyDocumentRawResponse) Reset() {
-	*x = CopyDocumentRawResponse{}
+func (x *BuildDocumentUriResponse) Reset() {
+	*x = BuildDocumentUriResponse{}
 	mi := &file_proto_documents_documents_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CopyDocumentRawResponse) String() string {
+func (x *BuildDocumentUriResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CopyDocumentRawResponse) ProtoMessage() {}
+func (*BuildDocumentUriResponse) ProtoMessage() {}
 
-func (x *CopyDocumentRawResponse) ProtoReflect() protoreflect.Message {
+func (x *BuildDocumentUriResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_documents_documents_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -331,42 +299,40 @@ func (x *CopyDocumentRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CopyDocumentRawResponse.ProtoReflect.Descriptor instead.
-func (*CopyDocumentRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuildDocumentUriResponse.ProtoReflect.Descriptor instead.
+func (*BuildDocumentUriResponse) Descriptor() ([]byte, []int) {
 	return file_proto_documents_documents_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *CopyDocumentRawResponse) GetResult() int64 {
+func (x *BuildDocumentUriResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type MoveDocumentRawRequest struct {
+type BuildDocumentUriUsingTreeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Resolver      int64                  `protobuf:"varint,1,opt,name=resolver,proto3" json:"resolver,omitempty"`
-	SrcUri        int64                  `protobuf:"varint,2,opt,name=src_uri,json=srcUri,proto3" json:"src_uri,omitempty"`
-	SrcParentUri  int64                  `protobuf:"varint,3,opt,name=src_parent_uri,json=srcParentUri,proto3" json:"src_parent_uri,omitempty"`
-	DestParentUri int64                  `protobuf:"varint,4,opt,name=dest_parent_uri,json=destParentUri,proto3" json:"dest_parent_uri,omitempty"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *MoveDocumentRawRequest) Reset() {
-	*x = MoveDocumentRawRequest{}
+func (x *BuildDocumentUriUsingTreeRequest) Reset() {
+	*x = BuildDocumentUriUsingTreeRequest{}
 	mi := &file_proto_documents_documents_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *MoveDocumentRawRequest) String() string {
+func (x *BuildDocumentUriUsingTreeRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MoveDocumentRawRequest) ProtoMessage() {}
+func (*BuildDocumentUriUsingTreeRequest) ProtoMessage() {}
 
-func (x *MoveDocumentRawRequest) ProtoReflect() protoreflect.Message {
+func (x *BuildDocumentUriUsingTreeRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_documents_documents_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -378,60 +344,46 @@ func (x *MoveDocumentRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MoveDocumentRawRequest.ProtoReflect.Descriptor instead.
-func (*MoveDocumentRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuildDocumentUriUsingTreeRequest.ProtoReflect.Descriptor instead.
+func (*BuildDocumentUriUsingTreeRequest) Descriptor() ([]byte, []int) {
 	return file_proto_documents_documents_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *MoveDocumentRawRequest) GetResolver() int64 {
+func (x *BuildDocumentUriUsingTreeRequest) GetArg0() int64 {
 	if x != nil {
-		return x.Resolver
+		return x.Arg0
 	}
 	return 0
 }
 
-func (x *MoveDocumentRawRequest) GetSrcUri() int64 {
+func (x *BuildDocumentUriUsingTreeRequest) GetArg1() string {
 	if x != nil {
-		return x.SrcUri
+		return x.Arg1
 	}
-	return 0
+	return ""
 }
 
-func (x *MoveDocumentRawRequest) GetSrcParentUri() int64 {
-	if x != nil {
-		return x.SrcParentUri
-	}
-	return 0
-}
-
-func (x *MoveDocumentRawRequest) GetDestParentUri() int64 {
-	if x != nil {
-		return x.DestParentUri
-	}
-	return 0
-}
-
-type MoveDocumentRawResponse struct {
+type BuildDocumentUriUsingTreeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *MoveDocumentRawResponse) Reset() {
-	*x = MoveDocumentRawResponse{}
+func (x *BuildDocumentUriUsingTreeResponse) Reset() {
+	*x = BuildDocumentUriUsingTreeResponse{}
 	mi := &file_proto_documents_documents_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *MoveDocumentRawResponse) String() string {
+func (x *BuildDocumentUriUsingTreeResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MoveDocumentRawResponse) ProtoMessage() {}
+func (*BuildDocumentUriUsingTreeResponse) ProtoMessage() {}
 
-func (x *MoveDocumentRawResponse) ProtoReflect() protoreflect.Message {
+func (x *BuildDocumentUriUsingTreeResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_documents_documents_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -443,40 +395,40 @@ func (x *MoveDocumentRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MoveDocumentRawResponse.ProtoReflect.Descriptor instead.
-func (*MoveDocumentRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuildDocumentUriUsingTreeResponse.ProtoReflect.Descriptor instead.
+func (*BuildDocumentUriUsingTreeResponse) Descriptor() ([]byte, []int) {
 	return file_proto_documents_documents_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *MoveDocumentRawResponse) GetResult() int64 {
+func (x *BuildDocumentUriUsingTreeResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type DeleteDocumentRawRequest struct {
+type BuildRecentDocumentsUriRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Resolver      int64                  `protobuf:"varint,1,opt,name=resolver,proto3" json:"resolver,omitempty"`
-	Uri           int64                  `protobuf:"varint,2,opt,name=uri,proto3" json:"uri,omitempty"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DeleteDocumentRawRequest) Reset() {
-	*x = DeleteDocumentRawRequest{}
+func (x *BuildRecentDocumentsUriRequest) Reset() {
+	*x = BuildRecentDocumentsUriRequest{}
 	mi := &file_proto_documents_documents_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DeleteDocumentRawRequest) String() string {
+func (x *BuildRecentDocumentsUriRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeleteDocumentRawRequest) ProtoMessage() {}
+func (*BuildRecentDocumentsUriRequest) ProtoMessage() {}
 
-func (x *DeleteDocumentRawRequest) ProtoReflect() protoreflect.Message {
+func (x *BuildRecentDocumentsUriRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_documents_documents_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -488,46 +440,46 @@ func (x *DeleteDocumentRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteDocumentRawRequest.ProtoReflect.Descriptor instead.
-func (*DeleteDocumentRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuildRecentDocumentsUriRequest.ProtoReflect.Descriptor instead.
+func (*BuildRecentDocumentsUriRequest) Descriptor() ([]byte, []int) {
 	return file_proto_documents_documents_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *DeleteDocumentRawRequest) GetResolver() int64 {
+func (x *BuildRecentDocumentsUriRequest) GetArg0() string {
 	if x != nil {
-		return x.Resolver
+		return x.Arg0
 	}
-	return 0
+	return ""
 }
 
-func (x *DeleteDocumentRawRequest) GetUri() int64 {
+func (x *BuildRecentDocumentsUriRequest) GetArg1() string {
 	if x != nil {
-		return x.Uri
+		return x.Arg1
 	}
-	return 0
+	return ""
 }
 
-type DeleteDocumentRawResponse struct {
+type BuildRecentDocumentsUriResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DeleteDocumentRawResponse) Reset() {
-	*x = DeleteDocumentRawResponse{}
+func (x *BuildRecentDocumentsUriResponse) Reset() {
+	*x = BuildRecentDocumentsUriResponse{}
 	mi := &file_proto_documents_documents_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DeleteDocumentRawResponse) String() string {
+func (x *BuildRecentDocumentsUriResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeleteDocumentRawResponse) ProtoMessage() {}
+func (*BuildRecentDocumentsUriResponse) ProtoMessage() {}
 
-func (x *DeleteDocumentRawResponse) ProtoReflect() protoreflect.Message {
+func (x *BuildRecentDocumentsUriResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_documents_documents_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -539,40 +491,40 @@ func (x *DeleteDocumentRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteDocumentRawResponse.ProtoReflect.Descriptor instead.
-func (*DeleteDocumentRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuildRecentDocumentsUriResponse.ProtoReflect.Descriptor instead.
+func (*BuildRecentDocumentsUriResponse) Descriptor() ([]byte, []int) {
 	return file_proto_documents_documents_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *DeleteDocumentRawResponse) GetResult() bool {
+func (x *BuildRecentDocumentsUriResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
-	return false
+	return 0
 }
 
-type IsDocumentUriRawRequest struct {
+type BuildRootUriRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ctx           int64                  `protobuf:"varint,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	Uri           int64                  `protobuf:"varint,2,opt,name=uri,proto3" json:"uri,omitempty"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IsDocumentUriRawRequest) Reset() {
-	*x = IsDocumentUriRawRequest{}
+func (x *BuildRootUriRequest) Reset() {
+	*x = BuildRootUriRequest{}
 	mi := &file_proto_documents_documents_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IsDocumentUriRawRequest) String() string {
+func (x *BuildRootUriRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IsDocumentUriRawRequest) ProtoMessage() {}
+func (*BuildRootUriRequest) ProtoMessage() {}
 
-func (x *IsDocumentUriRawRequest) ProtoReflect() protoreflect.Message {
+func (x *BuildRootUriRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_documents_documents_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -584,47 +536,751 @@ func (x *IsDocumentUriRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IsDocumentUriRawRequest.ProtoReflect.Descriptor instead.
-func (*IsDocumentUriRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuildRootUriRequest.ProtoReflect.Descriptor instead.
+func (*BuildRootUriRequest) Descriptor() ([]byte, []int) {
 	return file_proto_documents_documents_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *IsDocumentUriRawRequest) GetCtx() int64 {
+func (x *BuildRootUriRequest) GetArg0() string {
 	if x != nil {
-		return x.Ctx
+		return x.Arg0
+	}
+	return ""
+}
+
+func (x *BuildRootUriRequest) GetArg1() string {
+	if x != nil {
+		return x.Arg1
+	}
+	return ""
+}
+
+type BuildRootUriResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuildRootUriResponse) Reset() {
+	*x = BuildRootUriResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuildRootUriResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuildRootUriResponse) ProtoMessage() {}
+
+func (x *BuildRootUriResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuildRootUriResponse.ProtoReflect.Descriptor instead.
+func (*BuildRootUriResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *BuildRootUriResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
 	}
 	return 0
 }
 
-func (x *IsDocumentUriRawRequest) GetUri() int64 {
+type BuildRootsUriRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuildRootsUriRequest) Reset() {
+	*x = BuildRootsUriRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuildRootsUriRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuildRootsUriRequest) ProtoMessage() {}
+
+func (x *BuildRootsUriRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[12]
 	if x != nil {
-		return x.Uri
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuildRootsUriRequest.ProtoReflect.Descriptor instead.
+func (*BuildRootsUriRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *BuildRootsUriRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type BuildRootsUriResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuildRootsUriResponse) Reset() {
+	*x = BuildRootsUriResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuildRootsUriResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuildRootsUriResponse) ProtoMessage() {}
+
+func (x *BuildRootsUriResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuildRootsUriResponse.ProtoReflect.Descriptor instead.
+func (*BuildRootsUriResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *BuildRootsUriResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
 	}
 	return 0
 }
 
-type IsDocumentUriRawResponse struct {
+type BuildSearchDocumentsUriRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          string                 `protobuf:"bytes,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuildSearchDocumentsUriRequest) Reset() {
+	*x = BuildSearchDocumentsUriRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuildSearchDocumentsUriRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuildSearchDocumentsUriRequest) ProtoMessage() {}
+
+func (x *BuildSearchDocumentsUriRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuildSearchDocumentsUriRequest.ProtoReflect.Descriptor instead.
+func (*BuildSearchDocumentsUriRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *BuildSearchDocumentsUriRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+func (x *BuildSearchDocumentsUriRequest) GetArg1() string {
+	if x != nil {
+		return x.Arg1
+	}
+	return ""
+}
+
+func (x *BuildSearchDocumentsUriRequest) GetArg2() string {
+	if x != nil {
+		return x.Arg2
+	}
+	return ""
+}
+
+type BuildSearchDocumentsUriResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuildSearchDocumentsUriResponse) Reset() {
+	*x = BuildSearchDocumentsUriResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuildSearchDocumentsUriResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuildSearchDocumentsUriResponse) ProtoMessage() {}
+
+func (x *BuildSearchDocumentsUriResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuildSearchDocumentsUriResponse.ProtoReflect.Descriptor instead.
+func (*BuildSearchDocumentsUriResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *BuildSearchDocumentsUriResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type BuildTreeDocumentUriRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuildTreeDocumentUriRequest) Reset() {
+	*x = BuildTreeDocumentUriRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuildTreeDocumentUriRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuildTreeDocumentUriRequest) ProtoMessage() {}
+
+func (x *BuildTreeDocumentUriRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuildTreeDocumentUriRequest.ProtoReflect.Descriptor instead.
+func (*BuildTreeDocumentUriRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *BuildTreeDocumentUriRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+func (x *BuildTreeDocumentUriRequest) GetArg1() string {
+	if x != nil {
+		return x.Arg1
+	}
+	return ""
+}
+
+type BuildTreeDocumentUriResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuildTreeDocumentUriResponse) Reset() {
+	*x = BuildTreeDocumentUriResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuildTreeDocumentUriResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuildTreeDocumentUriResponse) ProtoMessage() {}
+
+func (x *BuildTreeDocumentUriResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuildTreeDocumentUriResponse.ProtoReflect.Descriptor instead.
+func (*BuildTreeDocumentUriResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *BuildTreeDocumentUriResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type CopyDocumentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CopyDocumentRequest) Reset() {
+	*x = CopyDocumentRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CopyDocumentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CopyDocumentRequest) ProtoMessage() {}
+
+func (x *CopyDocumentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CopyDocumentRequest.ProtoReflect.Descriptor instead.
+func (*CopyDocumentRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *CopyDocumentRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *CopyDocumentRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *CopyDocumentRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type CopyDocumentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CopyDocumentResponse) Reset() {
+	*x = CopyDocumentResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CopyDocumentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CopyDocumentResponse) ProtoMessage() {}
+
+func (x *CopyDocumentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CopyDocumentResponse.ProtoReflect.Descriptor instead.
+func (*CopyDocumentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *CopyDocumentResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type CreateDocumentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          string                 `protobuf:"bytes,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	Arg3          string                 `protobuf:"bytes,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateDocumentRequest) Reset() {
+	*x = CreateDocumentRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateDocumentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateDocumentRequest) ProtoMessage() {}
+
+func (x *CreateDocumentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateDocumentRequest.ProtoReflect.Descriptor instead.
+func (*CreateDocumentRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *CreateDocumentRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *CreateDocumentRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *CreateDocumentRequest) GetArg2() string {
+	if x != nil {
+		return x.Arg2
+	}
+	return ""
+}
+
+func (x *CreateDocumentRequest) GetArg3() string {
+	if x != nil {
+		return x.Arg3
+	}
+	return ""
+}
+
+type CreateDocumentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateDocumentResponse) Reset() {
+	*x = CreateDocumentResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateDocumentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateDocumentResponse) ProtoMessage() {}
+
+func (x *CreateDocumentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateDocumentResponse.ProtoReflect.Descriptor instead.
+func (*CreateDocumentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *CreateDocumentResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type CreateWebLinkIntentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateWebLinkIntentRequest) Reset() {
+	*x = CreateWebLinkIntentRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateWebLinkIntentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateWebLinkIntentRequest) ProtoMessage() {}
+
+func (x *CreateWebLinkIntentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateWebLinkIntentRequest.ProtoReflect.Descriptor instead.
+func (*CreateWebLinkIntentRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *CreateWebLinkIntentRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *CreateWebLinkIntentRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *CreateWebLinkIntentRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type CreateWebLinkIntentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateWebLinkIntentResponse) Reset() {
+	*x = CreateWebLinkIntentResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateWebLinkIntentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateWebLinkIntentResponse) ProtoMessage() {}
+
+func (x *CreateWebLinkIntentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateWebLinkIntentResponse.ProtoReflect.Descriptor instead.
+func (*CreateWebLinkIntentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *CreateWebLinkIntentResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type DeleteDocumentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteDocumentRequest) Reset() {
+	*x = DeleteDocumentRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteDocumentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteDocumentRequest) ProtoMessage() {}
+
+func (x *DeleteDocumentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteDocumentRequest.ProtoReflect.Descriptor instead.
+func (*DeleteDocumentRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *DeleteDocumentRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *DeleteDocumentRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type DeleteDocumentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IsDocumentUriRawResponse) Reset() {
-	*x = IsDocumentUriRawResponse{}
-	mi := &file_proto_documents_documents_proto_msgTypes[11]
+func (x *DeleteDocumentResponse) Reset() {
+	*x = DeleteDocumentResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IsDocumentUriRawResponse) String() string {
+func (x *DeleteDocumentResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IsDocumentUriRawResponse) ProtoMessage() {}
+func (*DeleteDocumentResponse) ProtoMessage() {}
 
-func (x *IsDocumentUriRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_documents_documents_proto_msgTypes[11]
+func (x *DeleteDocumentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -635,67 +1291,1748 @@ func (x *IsDocumentUriRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IsDocumentUriRawResponse.ProtoReflect.Descriptor instead.
-func (*IsDocumentUriRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_documents_documents_proto_rawDescGZIP(), []int{11}
+// Deprecated: Use DeleteDocumentResponse.ProtoReflect.Descriptor instead.
+func (*DeleteDocumentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{25}
 }
 
-func (x *IsDocumentUriRawResponse) GetResult() bool {
+func (x *DeleteDocumentResponse) GetResult() bool {
 	if x != nil {
 		return x.Result
 	}
 	return false
+}
+
+type EjectRootRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EjectRootRequest) Reset() {
+	*x = EjectRootRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EjectRootRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EjectRootRequest) ProtoMessage() {}
+
+func (x *EjectRootRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EjectRootRequest.ProtoReflect.Descriptor instead.
+func (*EjectRootRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *EjectRootRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *EjectRootRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type EjectRootResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EjectRootResponse) Reset() {
+	*x = EjectRootResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EjectRootResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EjectRootResponse) ProtoMessage() {}
+
+func (x *EjectRootResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EjectRootResponse.ProtoReflect.Descriptor instead.
+func (*EjectRootResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{27}
+}
+
+type FindDocumentPathRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FindDocumentPathRequest) Reset() {
+	*x = FindDocumentPathRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FindDocumentPathRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FindDocumentPathRequest) ProtoMessage() {}
+
+func (x *FindDocumentPathRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FindDocumentPathRequest.ProtoReflect.Descriptor instead.
+func (*FindDocumentPathRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *FindDocumentPathRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *FindDocumentPathRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type FindDocumentPathResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FindDocumentPathResponse) Reset() {
+	*x = FindDocumentPathResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FindDocumentPathResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FindDocumentPathResponse) ProtoMessage() {}
+
+func (x *FindDocumentPathResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FindDocumentPathResponse.ProtoReflect.Descriptor instead.
+func (*FindDocumentPathResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *FindDocumentPathResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetDocumentIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDocumentIdRequest) Reset() {
+	*x = GetDocumentIdRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDocumentIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDocumentIdRequest) ProtoMessage() {}
+
+func (x *GetDocumentIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDocumentIdRequest.ProtoReflect.Descriptor instead.
+func (*GetDocumentIdRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *GetDocumentIdRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type GetDocumentIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDocumentIdResponse) Reset() {
+	*x = GetDocumentIdResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDocumentIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDocumentIdResponse) ProtoMessage() {}
+
+func (x *GetDocumentIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDocumentIdResponse.ProtoReflect.Descriptor instead.
+func (*GetDocumentIdResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *GetDocumentIdResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetDocumentMetadataRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDocumentMetadataRequest) Reset() {
+	*x = GetDocumentMetadataRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDocumentMetadataRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDocumentMetadataRequest) ProtoMessage() {}
+
+func (x *GetDocumentMetadataRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDocumentMetadataRequest.ProtoReflect.Descriptor instead.
+func (*GetDocumentMetadataRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *GetDocumentMetadataRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *GetDocumentMetadataRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type GetDocumentMetadataResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDocumentMetadataResponse) Reset() {
+	*x = GetDocumentMetadataResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDocumentMetadataResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDocumentMetadataResponse) ProtoMessage() {}
+
+func (x *GetDocumentMetadataResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDocumentMetadataResponse.ProtoReflect.Descriptor instead.
+func (*GetDocumentMetadataResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *GetDocumentMetadataResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetDocumentThumbnailRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDocumentThumbnailRequest) Reset() {
+	*x = GetDocumentThumbnailRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDocumentThumbnailRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDocumentThumbnailRequest) ProtoMessage() {}
+
+func (x *GetDocumentThumbnailRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDocumentThumbnailRequest.ProtoReflect.Descriptor instead.
+func (*GetDocumentThumbnailRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *GetDocumentThumbnailRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *GetDocumentThumbnailRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *GetDocumentThumbnailRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+func (x *GetDocumentThumbnailRequest) GetArg3() int64 {
+	if x != nil {
+		return x.Arg3
+	}
+	return 0
+}
+
+type GetDocumentThumbnailResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDocumentThumbnailResponse) Reset() {
+	*x = GetDocumentThumbnailResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDocumentThumbnailResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDocumentThumbnailResponse) ProtoMessage() {}
+
+func (x *GetDocumentThumbnailResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDocumentThumbnailResponse.ProtoReflect.Descriptor instead.
+func (*GetDocumentThumbnailResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *GetDocumentThumbnailResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetRootIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRootIdRequest) Reset() {
+	*x = GetRootIdRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRootIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRootIdRequest) ProtoMessage() {}
+
+func (x *GetRootIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRootIdRequest.ProtoReflect.Descriptor instead.
+func (*GetRootIdRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *GetRootIdRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type GetRootIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRootIdResponse) Reset() {
+	*x = GetRootIdResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRootIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRootIdResponse) ProtoMessage() {}
+
+func (x *GetRootIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRootIdResponse.ProtoReflect.Descriptor instead.
+func (*GetRootIdResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *GetRootIdResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetSearchDocumentsQueryRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSearchDocumentsQueryRequest) Reset() {
+	*x = GetSearchDocumentsQueryRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSearchDocumentsQueryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSearchDocumentsQueryRequest) ProtoMessage() {}
+
+func (x *GetSearchDocumentsQueryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSearchDocumentsQueryRequest.ProtoReflect.Descriptor instead.
+func (*GetSearchDocumentsQueryRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *GetSearchDocumentsQueryRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type GetSearchDocumentsQueryResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSearchDocumentsQueryResponse) Reset() {
+	*x = GetSearchDocumentsQueryResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSearchDocumentsQueryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSearchDocumentsQueryResponse) ProtoMessage() {}
+
+func (x *GetSearchDocumentsQueryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSearchDocumentsQueryResponse.ProtoReflect.Descriptor instead.
+func (*GetSearchDocumentsQueryResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *GetSearchDocumentsQueryResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetTreeDocumentIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTreeDocumentIdRequest) Reset() {
+	*x = GetTreeDocumentIdRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTreeDocumentIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTreeDocumentIdRequest) ProtoMessage() {}
+
+func (x *GetTreeDocumentIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTreeDocumentIdRequest.ProtoReflect.Descriptor instead.
+func (*GetTreeDocumentIdRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *GetTreeDocumentIdRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type GetTreeDocumentIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTreeDocumentIdResponse) Reset() {
+	*x = GetTreeDocumentIdResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTreeDocumentIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTreeDocumentIdResponse) ProtoMessage() {}
+
+func (x *GetTreeDocumentIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTreeDocumentIdResponse.ProtoReflect.Descriptor instead.
+func (*GetTreeDocumentIdResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *GetTreeDocumentIdResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type IsChildDocumentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsChildDocumentRequest) Reset() {
+	*x = IsChildDocumentRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsChildDocumentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsChildDocumentRequest) ProtoMessage() {}
+
+func (x *IsChildDocumentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsChildDocumentRequest.ProtoReflect.Descriptor instead.
+func (*IsChildDocumentRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *IsChildDocumentRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *IsChildDocumentRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *IsChildDocumentRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type IsChildDocumentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsChildDocumentResponse) Reset() {
+	*x = IsChildDocumentResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsChildDocumentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsChildDocumentResponse) ProtoMessage() {}
+
+func (x *IsChildDocumentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsChildDocumentResponse.ProtoReflect.Descriptor instead.
+func (*IsChildDocumentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *IsChildDocumentResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsDocumentUriRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsDocumentUriRequest) Reset() {
+	*x = IsDocumentUriRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsDocumentUriRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsDocumentUriRequest) ProtoMessage() {}
+
+func (x *IsDocumentUriRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsDocumentUriRequest.ProtoReflect.Descriptor instead.
+func (*IsDocumentUriRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *IsDocumentUriRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *IsDocumentUriRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type IsDocumentUriResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsDocumentUriResponse) Reset() {
+	*x = IsDocumentUriResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsDocumentUriResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsDocumentUriResponse) ProtoMessage() {}
+
+func (x *IsDocumentUriResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsDocumentUriResponse.ProtoReflect.Descriptor instead.
+func (*IsDocumentUriResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *IsDocumentUriResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsRootUriRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsRootUriRequest) Reset() {
+	*x = IsRootUriRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsRootUriRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsRootUriRequest) ProtoMessage() {}
+
+func (x *IsRootUriRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsRootUriRequest.ProtoReflect.Descriptor instead.
+func (*IsRootUriRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *IsRootUriRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *IsRootUriRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type IsRootUriResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsRootUriResponse) Reset() {
+	*x = IsRootUriResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsRootUriResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsRootUriResponse) ProtoMessage() {}
+
+func (x *IsRootUriResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsRootUriResponse.ProtoReflect.Descriptor instead.
+func (*IsRootUriResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{47}
+}
+
+func (x *IsRootUriResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsRootsUriRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsRootsUriRequest) Reset() {
+	*x = IsRootsUriRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsRootsUriRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsRootsUriRequest) ProtoMessage() {}
+
+func (x *IsRootsUriRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsRootsUriRequest.ProtoReflect.Descriptor instead.
+func (*IsRootsUriRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *IsRootsUriRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *IsRootsUriRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type IsRootsUriResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsRootsUriResponse) Reset() {
+	*x = IsRootsUriResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsRootsUriResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsRootsUriResponse) ProtoMessage() {}
+
+func (x *IsRootsUriResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsRootsUriResponse.ProtoReflect.Descriptor instead.
+func (*IsRootsUriResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *IsRootsUriResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsTreeUriRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsTreeUriRequest) Reset() {
+	*x = IsTreeUriRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsTreeUriRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsTreeUriRequest) ProtoMessage() {}
+
+func (x *IsTreeUriRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsTreeUriRequest.ProtoReflect.Descriptor instead.
+func (*IsTreeUriRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *IsTreeUriRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type IsTreeUriResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsTreeUriResponse) Reset() {
+	*x = IsTreeUriResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsTreeUriResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsTreeUriResponse) ProtoMessage() {}
+
+func (x *IsTreeUriResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsTreeUriResponse.ProtoReflect.Descriptor instead.
+func (*IsTreeUriResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{51}
+}
+
+func (x *IsTreeUriResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type MoveDocumentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MoveDocumentRequest) Reset() {
+	*x = MoveDocumentRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MoveDocumentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MoveDocumentRequest) ProtoMessage() {}
+
+func (x *MoveDocumentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MoveDocumentRequest.ProtoReflect.Descriptor instead.
+func (*MoveDocumentRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{52}
+}
+
+func (x *MoveDocumentRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *MoveDocumentRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *MoveDocumentRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+func (x *MoveDocumentRequest) GetArg3() int64 {
+	if x != nil {
+		return x.Arg3
+	}
+	return 0
+}
+
+type MoveDocumentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MoveDocumentResponse) Reset() {
+	*x = MoveDocumentResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MoveDocumentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MoveDocumentResponse) ProtoMessage() {}
+
+func (x *MoveDocumentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MoveDocumentResponse.ProtoReflect.Descriptor instead.
+func (*MoveDocumentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{53}
+}
+
+func (x *MoveDocumentResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type RemoveDocumentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RemoveDocumentRequest) Reset() {
+	*x = RemoveDocumentRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RemoveDocumentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveDocumentRequest) ProtoMessage() {}
+
+func (x *RemoveDocumentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveDocumentRequest.ProtoReflect.Descriptor instead.
+func (*RemoveDocumentRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{54}
+}
+
+func (x *RemoveDocumentRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *RemoveDocumentRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *RemoveDocumentRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type RemoveDocumentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RemoveDocumentResponse) Reset() {
+	*x = RemoveDocumentResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RemoveDocumentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveDocumentResponse) ProtoMessage() {}
+
+func (x *RemoveDocumentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveDocumentResponse.ProtoReflect.Descriptor instead.
+func (*RemoveDocumentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{55}
+}
+
+func (x *RemoveDocumentResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type RenameDocumentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          string                 `protobuf:"bytes,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RenameDocumentRequest) Reset() {
+	*x = RenameDocumentRequest{}
+	mi := &file_proto_documents_documents_proto_msgTypes[56]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RenameDocumentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RenameDocumentRequest) ProtoMessage() {}
+
+func (x *RenameDocumentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[56]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RenameDocumentRequest.ProtoReflect.Descriptor instead.
+func (*RenameDocumentRequest) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{56}
+}
+
+func (x *RenameDocumentRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *RenameDocumentRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *RenameDocumentRequest) GetArg2() string {
+	if x != nil {
+		return x.Arg2
+	}
+	return ""
+}
+
+type RenameDocumentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RenameDocumentResponse) Reset() {
+	*x = RenameDocumentResponse{}
+	mi := &file_proto_documents_documents_proto_msgTypes[57]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RenameDocumentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RenameDocumentResponse) ProtoMessage() {}
+
+func (x *RenameDocumentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_documents_documents_proto_msgTypes[57]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RenameDocumentResponse.ProtoReflect.Descriptor instead.
+func (*RenameDocumentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_documents_documents_proto_rawDescGZIP(), []int{57}
+}
+
+func (x *RenameDocumentResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
 }
 
 var File_proto_documents_documents_proto protoreflect.FileDescriptor
 
 const file_proto_documents_documents_proto_rawDesc = "" +
 	"\n" +
-	"\x1fproto/documents/documents.proto\x12\tdocuments\"\x95\x01\n" +
-	"\x18CreateDocumentRawRequest\x12\x1a\n" +
-	"\bresolver\x18\x01 \x01(\x03R\bresolver\x12\x1d\n" +
-	"\n" +
-	"parent_uri\x18\x02 \x01(\x03R\tparentUri\x12\x1b\n" +
-	"\tmime_type\x18\x03 \x01(\tR\bmimeType\x12!\n" +
-	"\fdisplay_name\x18\x04 \x01(\tR\vdisplayName\"3\n" +
-	"\x19CreateDocumentRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"k\n" +
-	"\x18RenameDocumentRawRequest\x12\x1a\n" +
-	"\bresolver\x18\x01 \x01(\x03R\bresolver\x12\x10\n" +
-	"\x03uri\x18\x02 \x01(\x03R\x03uri\x12!\n" +
-	"\fdisplay_name\x18\x03 \x01(\tR\vdisplayName\"3\n" +
-	"\x19RenameDocumentRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"u\n" +
-	"\x16CopyDocumentRawRequest\x12\x1a\n" +
-	"\bresolver\x18\x01 \x01(\x03R\bresolver\x12\x17\n" +
-	"\asrc_uri\x18\x02 \x01(\x03R\x06srcUri\x12&\n" +
-	"\x0fdest_parent_uri\x18\x03 \x01(\x03R\rdestParentUri\"1\n" +
-	"\x17CopyDocumentRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"\x9b\x01\n" +
-	"\x16MoveDocumentRawRequest\x12\x1a\n" +
-	"\bresolver\x18\x01 \x01(\x03R\bresolver\x12\x17\n" +
-	"\asrc_uri\x18\x02 \x01(\x03R\x06srcUri\x12$\n" +
-	"\x0esrc_parent_uri\x18\x03 \x01(\x03R\fsrcParentUri\x12&\n" +
-	"\x0fdest_parent_uri\x18\x04 \x01(\x03R\rdestParentUri\"1\n" +
-	"\x17MoveDocumentRawResponse\x12\x16\n" +
+	"\x1fproto/documents/documents.proto\x12\tdocuments\"G\n" +
+	"\x1dBuildChildDocumentsUriRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\tR\x04arg1\"8\n" +
+	"\x1eBuildChildDocumentsUriResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"P\n" +
+	"&BuildChildDocumentsUriUsingTreeRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\tR\x04arg1\"A\n" +
+	"'BuildChildDocumentsUriUsingTreeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"A\n" +
+	"\x17BuildDocumentUriRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\tR\x04arg1\"2\n" +
+	"\x18BuildDocumentUriResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"J\n" +
+	" BuildDocumentUriUsingTreeRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\tR\x04arg1\";\n" +
+	"!BuildDocumentUriUsingTreeResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\x03R\x06result\"H\n" +
-	"\x18DeleteDocumentRawRequest\x12\x1a\n" +
-	"\bresolver\x18\x01 \x01(\x03R\bresolver\x12\x10\n" +
-	"\x03uri\x18\x02 \x01(\x03R\x03uri\"3\n" +
-	"\x19DeleteDocumentRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"=\n" +
-	"\x17IsDocumentUriRawRequest\x12\x10\n" +
-	"\x03ctx\x18\x01 \x01(\x03R\x03ctx\x12\x10\n" +
-	"\x03uri\x18\x02 \x01(\x03R\x03uri\"2\n" +
-	"\x18IsDocumentUriRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result2\xcb\x04\n" +
-	"\x18DocumentsContractService\x12^\n" +
-	"\x11CreateDocumentRaw\x12#.documents.CreateDocumentRawRequest\x1a$.documents.CreateDocumentRawResponse\x12^\n" +
-	"\x11RenameDocumentRaw\x12#.documents.RenameDocumentRawRequest\x1a$.documents.RenameDocumentRawResponse\x12X\n" +
-	"\x0fCopyDocumentRaw\x12!.documents.CopyDocumentRawRequest\x1a\".documents.CopyDocumentRawResponse\x12X\n" +
-	"\x0fMoveDocumentRaw\x12!.documents.MoveDocumentRawRequest\x1a\".documents.MoveDocumentRawResponse\x12^\n" +
-	"\x11DeleteDocumentRaw\x12#.documents.DeleteDocumentRawRequest\x1a$.documents.DeleteDocumentRawResponse\x12[\n" +
-	"\x10IsDocumentUriRaw\x12\".documents.IsDocumentUriRawRequest\x1a#.documents.IsDocumentUriRawResponseB,Z*github.com/xaionaro-go/jni/proto/documentsb\x06proto3"
+	"\x1eBuildRecentDocumentsUriRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\tR\x04arg1\"9\n" +
+	"\x1fBuildRecentDocumentsUriResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"=\n" +
+	"\x13BuildRootUriRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\tR\x04arg1\".\n" +
+	"\x14BuildRootUriResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"*\n" +
+	"\x14BuildRootsUriRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"/\n" +
+	"\x15BuildRootsUriResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\\\n" +
+	"\x1eBuildSearchDocumentsUriRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\tR\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\tR\x04arg2\"9\n" +
+	"\x1fBuildSearchDocumentsUriResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"E\n" +
+	"\x1bBuildTreeDocumentUriRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\tR\x04arg1\"6\n" +
+	"\x1cBuildTreeDocumentUriResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"Q\n" +
+	"\x13CopyDocumentRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\".\n" +
+	"\x14CopyDocumentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"g\n" +
+	"\x15CreateDocumentRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\tR\x04arg2\x12\x12\n" +
+	"\x04arg3\x18\x04 \x01(\tR\x04arg3\"0\n" +
+	"\x16CreateDocumentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"X\n" +
+	"\x1aCreateWebLinkIntentRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"5\n" +
+	"\x1bCreateWebLinkIntentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"?\n" +
+	"\x15DeleteDocumentRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"0\n" +
+	"\x16DeleteDocumentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\":\n" +
+	"\x10EjectRootRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x13\n" +
+	"\x11EjectRootResponse\"A\n" +
+	"\x17FindDocumentPathRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"2\n" +
+	"\x18FindDocumentPathResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"*\n" +
+	"\x14GetDocumentIdRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"/\n" +
+	"\x15GetDocumentIdResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"D\n" +
+	"\x1aGetDocumentMetadataRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"5\n" +
+	"\x1bGetDocumentMetadataResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"m\n" +
+	"\x1bGetDocumentThumbnailRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
+	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"6\n" +
+	"\x1cGetDocumentThumbnailResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"&\n" +
+	"\x10GetRootIdRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"+\n" +
+	"\x11GetRootIdResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"4\n" +
+	"\x1eGetSearchDocumentsQueryRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"9\n" +
+	"\x1fGetSearchDocumentsQueryResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\".\n" +
+	"\x18GetTreeDocumentIdRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"3\n" +
+	"\x19GetTreeDocumentIdResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"T\n" +
+	"\x16IsChildDocumentRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"1\n" +
+	"\x17IsChildDocumentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\">\n" +
+	"\x14IsDocumentUriRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"/\n" +
+	"\x15IsDocumentUriResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\":\n" +
+	"\x10IsRootUriRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"+\n" +
+	"\x11IsRootUriResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\";\n" +
+	"\x11IsRootsUriRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\",\n" +
+	"\x12IsRootsUriResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"&\n" +
+	"\x10IsTreeUriRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"+\n" +
+	"\x11IsTreeUriResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"e\n" +
+	"\x13MoveDocumentRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
+	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\".\n" +
+	"\x14MoveDocumentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"S\n" +
+	"\x15RemoveDocumentRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"0\n" +
+	"\x16RemoveDocumentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"S\n" +
+	"\x15RenameDocumentRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\tR\x04arg2\"0\n" +
+	"\x16RenameDocumentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result2\xaa\x15\n" +
+	"\x18DocumentsContractService\x12m\n" +
+	"\x16BuildChildDocumentsUri\x12(.documents.BuildChildDocumentsUriRequest\x1a).documents.BuildChildDocumentsUriResponse\x12\x88\x01\n" +
+	"\x1fBuildChildDocumentsUriUsingTree\x121.documents.BuildChildDocumentsUriUsingTreeRequest\x1a2.documents.BuildChildDocumentsUriUsingTreeResponse\x12[\n" +
+	"\x10BuildDocumentUri\x12\".documents.BuildDocumentUriRequest\x1a#.documents.BuildDocumentUriResponse\x12v\n" +
+	"\x19BuildDocumentUriUsingTree\x12+.documents.BuildDocumentUriUsingTreeRequest\x1a,.documents.BuildDocumentUriUsingTreeResponse\x12p\n" +
+	"\x17BuildRecentDocumentsUri\x12).documents.BuildRecentDocumentsUriRequest\x1a*.documents.BuildRecentDocumentsUriResponse\x12O\n" +
+	"\fBuildRootUri\x12\x1e.documents.BuildRootUriRequest\x1a\x1f.documents.BuildRootUriResponse\x12R\n" +
+	"\rBuildRootsUri\x12\x1f.documents.BuildRootsUriRequest\x1a .documents.BuildRootsUriResponse\x12p\n" +
+	"\x17BuildSearchDocumentsUri\x12).documents.BuildSearchDocumentsUriRequest\x1a*.documents.BuildSearchDocumentsUriResponse\x12g\n" +
+	"\x14BuildTreeDocumentUri\x12&.documents.BuildTreeDocumentUriRequest\x1a'.documents.BuildTreeDocumentUriResponse\x12O\n" +
+	"\fCopyDocument\x12\x1e.documents.CopyDocumentRequest\x1a\x1f.documents.CopyDocumentResponse\x12U\n" +
+	"\x0eCreateDocument\x12 .documents.CreateDocumentRequest\x1a!.documents.CreateDocumentResponse\x12d\n" +
+	"\x13CreateWebLinkIntent\x12%.documents.CreateWebLinkIntentRequest\x1a&.documents.CreateWebLinkIntentResponse\x12U\n" +
+	"\x0eDeleteDocument\x12 .documents.DeleteDocumentRequest\x1a!.documents.DeleteDocumentResponse\x12F\n" +
+	"\tEjectRoot\x12\x1b.documents.EjectRootRequest\x1a\x1c.documents.EjectRootResponse\x12[\n" +
+	"\x10FindDocumentPath\x12\".documents.FindDocumentPathRequest\x1a#.documents.FindDocumentPathResponse\x12R\n" +
+	"\rGetDocumentId\x12\x1f.documents.GetDocumentIdRequest\x1a .documents.GetDocumentIdResponse\x12d\n" +
+	"\x13GetDocumentMetadata\x12%.documents.GetDocumentMetadataRequest\x1a&.documents.GetDocumentMetadataResponse\x12g\n" +
+	"\x14GetDocumentThumbnail\x12&.documents.GetDocumentThumbnailRequest\x1a'.documents.GetDocumentThumbnailResponse\x12F\n" +
+	"\tGetRootId\x12\x1b.documents.GetRootIdRequest\x1a\x1c.documents.GetRootIdResponse\x12p\n" +
+	"\x17GetSearchDocumentsQuery\x12).documents.GetSearchDocumentsQueryRequest\x1a*.documents.GetSearchDocumentsQueryResponse\x12^\n" +
+	"\x11GetTreeDocumentId\x12#.documents.GetTreeDocumentIdRequest\x1a$.documents.GetTreeDocumentIdResponse\x12X\n" +
+	"\x0fIsChildDocument\x12!.documents.IsChildDocumentRequest\x1a\".documents.IsChildDocumentResponse\x12R\n" +
+	"\rIsDocumentUri\x12\x1f.documents.IsDocumentUriRequest\x1a .documents.IsDocumentUriResponse\x12F\n" +
+	"\tIsRootUri\x12\x1b.documents.IsRootUriRequest\x1a\x1c.documents.IsRootUriResponse\x12I\n" +
+	"\n" +
+	"IsRootsUri\x12\x1c.documents.IsRootsUriRequest\x1a\x1d.documents.IsRootsUriResponse\x12F\n" +
+	"\tIsTreeUri\x12\x1b.documents.IsTreeUriRequest\x1a\x1c.documents.IsTreeUriResponse\x12O\n" +
+	"\fMoveDocument\x12\x1e.documents.MoveDocumentRequest\x1a\x1f.documents.MoveDocumentResponse\x12U\n" +
+	"\x0eRemoveDocument\x12 .documents.RemoveDocumentRequest\x1a!.documents.RemoveDocumentResponse\x12U\n" +
+	"\x0eRenameDocument\x12 .documents.RenameDocumentRequest\x1a!.documents.RenameDocumentResponseB,Z*github.com/xaionaro-go/jni/proto/documentsb\x06proto3"
 
 var (
 	file_proto_documents_documents_proto_rawDescOnce sync.Once
@@ -709,36 +3046,128 @@ func file_proto_documents_documents_proto_rawDescGZIP() []byte {
 	return file_proto_documents_documents_proto_rawDescData
 }
 
-var file_proto_documents_documents_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_proto_documents_documents_proto_msgTypes = make([]protoimpl.MessageInfo, 58)
 var file_proto_documents_documents_proto_goTypes = []any{
-	(*CreateDocumentRawRequest)(nil),  // 0: documents.CreateDocumentRawRequest
-	(*CreateDocumentRawResponse)(nil), // 1: documents.CreateDocumentRawResponse
-	(*RenameDocumentRawRequest)(nil),  // 2: documents.RenameDocumentRawRequest
-	(*RenameDocumentRawResponse)(nil), // 3: documents.RenameDocumentRawResponse
-	(*CopyDocumentRawRequest)(nil),    // 4: documents.CopyDocumentRawRequest
-	(*CopyDocumentRawResponse)(nil),   // 5: documents.CopyDocumentRawResponse
-	(*MoveDocumentRawRequest)(nil),    // 6: documents.MoveDocumentRawRequest
-	(*MoveDocumentRawResponse)(nil),   // 7: documents.MoveDocumentRawResponse
-	(*DeleteDocumentRawRequest)(nil),  // 8: documents.DeleteDocumentRawRequest
-	(*DeleteDocumentRawResponse)(nil), // 9: documents.DeleteDocumentRawResponse
-	(*IsDocumentUriRawRequest)(nil),   // 10: documents.IsDocumentUriRawRequest
-	(*IsDocumentUriRawResponse)(nil),  // 11: documents.IsDocumentUriRawResponse
+	(*BuildChildDocumentsUriRequest)(nil),           // 0: documents.BuildChildDocumentsUriRequest
+	(*BuildChildDocumentsUriResponse)(nil),          // 1: documents.BuildChildDocumentsUriResponse
+	(*BuildChildDocumentsUriUsingTreeRequest)(nil),  // 2: documents.BuildChildDocumentsUriUsingTreeRequest
+	(*BuildChildDocumentsUriUsingTreeResponse)(nil), // 3: documents.BuildChildDocumentsUriUsingTreeResponse
+	(*BuildDocumentUriRequest)(nil),                 // 4: documents.BuildDocumentUriRequest
+	(*BuildDocumentUriResponse)(nil),                // 5: documents.BuildDocumentUriResponse
+	(*BuildDocumentUriUsingTreeRequest)(nil),        // 6: documents.BuildDocumentUriUsingTreeRequest
+	(*BuildDocumentUriUsingTreeResponse)(nil),       // 7: documents.BuildDocumentUriUsingTreeResponse
+	(*BuildRecentDocumentsUriRequest)(nil),          // 8: documents.BuildRecentDocumentsUriRequest
+	(*BuildRecentDocumentsUriResponse)(nil),         // 9: documents.BuildRecentDocumentsUriResponse
+	(*BuildRootUriRequest)(nil),                     // 10: documents.BuildRootUriRequest
+	(*BuildRootUriResponse)(nil),                    // 11: documents.BuildRootUriResponse
+	(*BuildRootsUriRequest)(nil),                    // 12: documents.BuildRootsUriRequest
+	(*BuildRootsUriResponse)(nil),                   // 13: documents.BuildRootsUriResponse
+	(*BuildSearchDocumentsUriRequest)(nil),          // 14: documents.BuildSearchDocumentsUriRequest
+	(*BuildSearchDocumentsUriResponse)(nil),         // 15: documents.BuildSearchDocumentsUriResponse
+	(*BuildTreeDocumentUriRequest)(nil),             // 16: documents.BuildTreeDocumentUriRequest
+	(*BuildTreeDocumentUriResponse)(nil),            // 17: documents.BuildTreeDocumentUriResponse
+	(*CopyDocumentRequest)(nil),                     // 18: documents.CopyDocumentRequest
+	(*CopyDocumentResponse)(nil),                    // 19: documents.CopyDocumentResponse
+	(*CreateDocumentRequest)(nil),                   // 20: documents.CreateDocumentRequest
+	(*CreateDocumentResponse)(nil),                  // 21: documents.CreateDocumentResponse
+	(*CreateWebLinkIntentRequest)(nil),              // 22: documents.CreateWebLinkIntentRequest
+	(*CreateWebLinkIntentResponse)(nil),             // 23: documents.CreateWebLinkIntentResponse
+	(*DeleteDocumentRequest)(nil),                   // 24: documents.DeleteDocumentRequest
+	(*DeleteDocumentResponse)(nil),                  // 25: documents.DeleteDocumentResponse
+	(*EjectRootRequest)(nil),                        // 26: documents.EjectRootRequest
+	(*EjectRootResponse)(nil),                       // 27: documents.EjectRootResponse
+	(*FindDocumentPathRequest)(nil),                 // 28: documents.FindDocumentPathRequest
+	(*FindDocumentPathResponse)(nil),                // 29: documents.FindDocumentPathResponse
+	(*GetDocumentIdRequest)(nil),                    // 30: documents.GetDocumentIdRequest
+	(*GetDocumentIdResponse)(nil),                   // 31: documents.GetDocumentIdResponse
+	(*GetDocumentMetadataRequest)(nil),              // 32: documents.GetDocumentMetadataRequest
+	(*GetDocumentMetadataResponse)(nil),             // 33: documents.GetDocumentMetadataResponse
+	(*GetDocumentThumbnailRequest)(nil),             // 34: documents.GetDocumentThumbnailRequest
+	(*GetDocumentThumbnailResponse)(nil),            // 35: documents.GetDocumentThumbnailResponse
+	(*GetRootIdRequest)(nil),                        // 36: documents.GetRootIdRequest
+	(*GetRootIdResponse)(nil),                       // 37: documents.GetRootIdResponse
+	(*GetSearchDocumentsQueryRequest)(nil),          // 38: documents.GetSearchDocumentsQueryRequest
+	(*GetSearchDocumentsQueryResponse)(nil),         // 39: documents.GetSearchDocumentsQueryResponse
+	(*GetTreeDocumentIdRequest)(nil),                // 40: documents.GetTreeDocumentIdRequest
+	(*GetTreeDocumentIdResponse)(nil),               // 41: documents.GetTreeDocumentIdResponse
+	(*IsChildDocumentRequest)(nil),                  // 42: documents.IsChildDocumentRequest
+	(*IsChildDocumentResponse)(nil),                 // 43: documents.IsChildDocumentResponse
+	(*IsDocumentUriRequest)(nil),                    // 44: documents.IsDocumentUriRequest
+	(*IsDocumentUriResponse)(nil),                   // 45: documents.IsDocumentUriResponse
+	(*IsRootUriRequest)(nil),                        // 46: documents.IsRootUriRequest
+	(*IsRootUriResponse)(nil),                       // 47: documents.IsRootUriResponse
+	(*IsRootsUriRequest)(nil),                       // 48: documents.IsRootsUriRequest
+	(*IsRootsUriResponse)(nil),                      // 49: documents.IsRootsUriResponse
+	(*IsTreeUriRequest)(nil),                        // 50: documents.IsTreeUriRequest
+	(*IsTreeUriResponse)(nil),                       // 51: documents.IsTreeUriResponse
+	(*MoveDocumentRequest)(nil),                     // 52: documents.MoveDocumentRequest
+	(*MoveDocumentResponse)(nil),                    // 53: documents.MoveDocumentResponse
+	(*RemoveDocumentRequest)(nil),                   // 54: documents.RemoveDocumentRequest
+	(*RemoveDocumentResponse)(nil),                  // 55: documents.RemoveDocumentResponse
+	(*RenameDocumentRequest)(nil),                   // 56: documents.RenameDocumentRequest
+	(*RenameDocumentResponse)(nil),                  // 57: documents.RenameDocumentResponse
 }
 var file_proto_documents_documents_proto_depIdxs = []int32{
-	0,  // 0: documents.DocumentsContractService.CreateDocumentRaw:input_type -> documents.CreateDocumentRawRequest
-	2,  // 1: documents.DocumentsContractService.RenameDocumentRaw:input_type -> documents.RenameDocumentRawRequest
-	4,  // 2: documents.DocumentsContractService.CopyDocumentRaw:input_type -> documents.CopyDocumentRawRequest
-	6,  // 3: documents.DocumentsContractService.MoveDocumentRaw:input_type -> documents.MoveDocumentRawRequest
-	8,  // 4: documents.DocumentsContractService.DeleteDocumentRaw:input_type -> documents.DeleteDocumentRawRequest
-	10, // 5: documents.DocumentsContractService.IsDocumentUriRaw:input_type -> documents.IsDocumentUriRawRequest
-	1,  // 6: documents.DocumentsContractService.CreateDocumentRaw:output_type -> documents.CreateDocumentRawResponse
-	3,  // 7: documents.DocumentsContractService.RenameDocumentRaw:output_type -> documents.RenameDocumentRawResponse
-	5,  // 8: documents.DocumentsContractService.CopyDocumentRaw:output_type -> documents.CopyDocumentRawResponse
-	7,  // 9: documents.DocumentsContractService.MoveDocumentRaw:output_type -> documents.MoveDocumentRawResponse
-	9,  // 10: documents.DocumentsContractService.DeleteDocumentRaw:output_type -> documents.DeleteDocumentRawResponse
-	11, // 11: documents.DocumentsContractService.IsDocumentUriRaw:output_type -> documents.IsDocumentUriRawResponse
-	6,  // [6:12] is the sub-list for method output_type
-	0,  // [0:6] is the sub-list for method input_type
+	0,  // 0: documents.DocumentsContractService.BuildChildDocumentsUri:input_type -> documents.BuildChildDocumentsUriRequest
+	2,  // 1: documents.DocumentsContractService.BuildChildDocumentsUriUsingTree:input_type -> documents.BuildChildDocumentsUriUsingTreeRequest
+	4,  // 2: documents.DocumentsContractService.BuildDocumentUri:input_type -> documents.BuildDocumentUriRequest
+	6,  // 3: documents.DocumentsContractService.BuildDocumentUriUsingTree:input_type -> documents.BuildDocumentUriUsingTreeRequest
+	8,  // 4: documents.DocumentsContractService.BuildRecentDocumentsUri:input_type -> documents.BuildRecentDocumentsUriRequest
+	10, // 5: documents.DocumentsContractService.BuildRootUri:input_type -> documents.BuildRootUriRequest
+	12, // 6: documents.DocumentsContractService.BuildRootsUri:input_type -> documents.BuildRootsUriRequest
+	14, // 7: documents.DocumentsContractService.BuildSearchDocumentsUri:input_type -> documents.BuildSearchDocumentsUriRequest
+	16, // 8: documents.DocumentsContractService.BuildTreeDocumentUri:input_type -> documents.BuildTreeDocumentUriRequest
+	18, // 9: documents.DocumentsContractService.CopyDocument:input_type -> documents.CopyDocumentRequest
+	20, // 10: documents.DocumentsContractService.CreateDocument:input_type -> documents.CreateDocumentRequest
+	22, // 11: documents.DocumentsContractService.CreateWebLinkIntent:input_type -> documents.CreateWebLinkIntentRequest
+	24, // 12: documents.DocumentsContractService.DeleteDocument:input_type -> documents.DeleteDocumentRequest
+	26, // 13: documents.DocumentsContractService.EjectRoot:input_type -> documents.EjectRootRequest
+	28, // 14: documents.DocumentsContractService.FindDocumentPath:input_type -> documents.FindDocumentPathRequest
+	30, // 15: documents.DocumentsContractService.GetDocumentId:input_type -> documents.GetDocumentIdRequest
+	32, // 16: documents.DocumentsContractService.GetDocumentMetadata:input_type -> documents.GetDocumentMetadataRequest
+	34, // 17: documents.DocumentsContractService.GetDocumentThumbnail:input_type -> documents.GetDocumentThumbnailRequest
+	36, // 18: documents.DocumentsContractService.GetRootId:input_type -> documents.GetRootIdRequest
+	38, // 19: documents.DocumentsContractService.GetSearchDocumentsQuery:input_type -> documents.GetSearchDocumentsQueryRequest
+	40, // 20: documents.DocumentsContractService.GetTreeDocumentId:input_type -> documents.GetTreeDocumentIdRequest
+	42, // 21: documents.DocumentsContractService.IsChildDocument:input_type -> documents.IsChildDocumentRequest
+	44, // 22: documents.DocumentsContractService.IsDocumentUri:input_type -> documents.IsDocumentUriRequest
+	46, // 23: documents.DocumentsContractService.IsRootUri:input_type -> documents.IsRootUriRequest
+	48, // 24: documents.DocumentsContractService.IsRootsUri:input_type -> documents.IsRootsUriRequest
+	50, // 25: documents.DocumentsContractService.IsTreeUri:input_type -> documents.IsTreeUriRequest
+	52, // 26: documents.DocumentsContractService.MoveDocument:input_type -> documents.MoveDocumentRequest
+	54, // 27: documents.DocumentsContractService.RemoveDocument:input_type -> documents.RemoveDocumentRequest
+	56, // 28: documents.DocumentsContractService.RenameDocument:input_type -> documents.RenameDocumentRequest
+	1,  // 29: documents.DocumentsContractService.BuildChildDocumentsUri:output_type -> documents.BuildChildDocumentsUriResponse
+	3,  // 30: documents.DocumentsContractService.BuildChildDocumentsUriUsingTree:output_type -> documents.BuildChildDocumentsUriUsingTreeResponse
+	5,  // 31: documents.DocumentsContractService.BuildDocumentUri:output_type -> documents.BuildDocumentUriResponse
+	7,  // 32: documents.DocumentsContractService.BuildDocumentUriUsingTree:output_type -> documents.BuildDocumentUriUsingTreeResponse
+	9,  // 33: documents.DocumentsContractService.BuildRecentDocumentsUri:output_type -> documents.BuildRecentDocumentsUriResponse
+	11, // 34: documents.DocumentsContractService.BuildRootUri:output_type -> documents.BuildRootUriResponse
+	13, // 35: documents.DocumentsContractService.BuildRootsUri:output_type -> documents.BuildRootsUriResponse
+	15, // 36: documents.DocumentsContractService.BuildSearchDocumentsUri:output_type -> documents.BuildSearchDocumentsUriResponse
+	17, // 37: documents.DocumentsContractService.BuildTreeDocumentUri:output_type -> documents.BuildTreeDocumentUriResponse
+	19, // 38: documents.DocumentsContractService.CopyDocument:output_type -> documents.CopyDocumentResponse
+	21, // 39: documents.DocumentsContractService.CreateDocument:output_type -> documents.CreateDocumentResponse
+	23, // 40: documents.DocumentsContractService.CreateWebLinkIntent:output_type -> documents.CreateWebLinkIntentResponse
+	25, // 41: documents.DocumentsContractService.DeleteDocument:output_type -> documents.DeleteDocumentResponse
+	27, // 42: documents.DocumentsContractService.EjectRoot:output_type -> documents.EjectRootResponse
+	29, // 43: documents.DocumentsContractService.FindDocumentPath:output_type -> documents.FindDocumentPathResponse
+	31, // 44: documents.DocumentsContractService.GetDocumentId:output_type -> documents.GetDocumentIdResponse
+	33, // 45: documents.DocumentsContractService.GetDocumentMetadata:output_type -> documents.GetDocumentMetadataResponse
+	35, // 46: documents.DocumentsContractService.GetDocumentThumbnail:output_type -> documents.GetDocumentThumbnailResponse
+	37, // 47: documents.DocumentsContractService.GetRootId:output_type -> documents.GetRootIdResponse
+	39, // 48: documents.DocumentsContractService.GetSearchDocumentsQuery:output_type -> documents.GetSearchDocumentsQueryResponse
+	41, // 49: documents.DocumentsContractService.GetTreeDocumentId:output_type -> documents.GetTreeDocumentIdResponse
+	43, // 50: documents.DocumentsContractService.IsChildDocument:output_type -> documents.IsChildDocumentResponse
+	45, // 51: documents.DocumentsContractService.IsDocumentUri:output_type -> documents.IsDocumentUriResponse
+	47, // 52: documents.DocumentsContractService.IsRootUri:output_type -> documents.IsRootUriResponse
+	49, // 53: documents.DocumentsContractService.IsRootsUri:output_type -> documents.IsRootsUriResponse
+	51, // 54: documents.DocumentsContractService.IsTreeUri:output_type -> documents.IsTreeUriResponse
+	53, // 55: documents.DocumentsContractService.MoveDocument:output_type -> documents.MoveDocumentResponse
+	55, // 56: documents.DocumentsContractService.RemoveDocument:output_type -> documents.RemoveDocumentResponse
+	57, // 57: documents.DocumentsContractService.RenameDocument:output_type -> documents.RenameDocumentResponse
+	29, // [29:58] is the sub-list for method output_type
+	0,  // [0:29] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -755,7 +3184,7 @@ func file_proto_documents_documents_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_documents_documents_proto_rawDesc), len(file_proto_documents_documents_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   58,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

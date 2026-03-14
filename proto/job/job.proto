@@ -6,164 +6,64 @@ package job;
 
 option go_package = "github.com/xaionaro-go/jni/proto/job";
 
-message JobInfoJava {
-  int32 id = 1;
-  int64 service = 2;
-  int32 network_type = 3;
-  bool require_charging = 4;
-  bool require_device_idle = 5;
-  bool require_battery_not_low = 6;
-  bool require_storage_not_low = 7;
-  int64 interval_millis = 8;
-  int64 min_latency_millis = 9;
-  int64 max_delay_millis = 10;
-  bool persisted = 11;
-  int64 initial_backoff_millis = 12;
-  int32 backoff_policy = 13;
+message CanRunUserInitiatedJobsRequest {
 }
 
-message ScheduleRawRequest {
-  int64 job = 1;
+message CanRunUserInitiatedJobsResponse {
+  bool result = 1;
 }
 
-message ScheduleRawResponse {
+message CancelInAllNamespacesRequest {
+}
+
+message CancelInAllNamespacesResponse {
+}
+
+message ForNamespaceRequest {
+  string arg0 = 1;
+}
+
+message ForNamespaceResponse {
+  int64 result = 1;
+}
+
+message GetNamespaceRequest {
+}
+
+message GetNamespaceResponse {
+  string result = 1;
+}
+
+message GetPendingJobReasonRequest {
+  int32 arg0 = 1;
+}
+
+message GetPendingJobReasonResponse {
   int32 result = 1;
 }
 
-message CancelRequest {
-  int32 job_id = 1;
+message GetPendingJobReasonsRequest {
+  int32 arg0 = 1;
 }
 
-message CancelResponse {
-}
-
-message CancelAllRequest {
-}
-
-message CancelAllResponse {
-}
-
-message GetPendingJobRawRequest {
-  int32 job_id = 1;
-}
-
-message GetPendingJobRawResponse {
-  JobInfoJava result = 1;
-}
-
-message GetAllPendingJobsRawRequest {
-}
-
-message GetAllPendingJobsRawResponse {
+message GetPendingJobReasonsResponse {
   int64 result = 1;
 }
 
-message SetRequiredNetworkTypeRequest {
-  int32 network_type = 1;
+message GetPendingJobReasonsHistoryRequest {
+  int32 arg0 = 1;
 }
 
-message SetRequiredNetworkTypeResponse {
+message GetPendingJobReasonsHistoryResponse {
   int64 result = 1;
 }
 
-message SetRequiresChargingRequest {
-  bool requires_charging = 1;
-}
-
-message SetRequiresChargingResponse {
-  int64 result = 1;
-}
-
-message SetRequiresDeviceIdleRequest {
-  bool requires_device_idle = 1;
-}
-
-message SetRequiresDeviceIdleResponse {
-  int64 result = 1;
-}
-
-message SetRequiresBatteryNotLowRequest {
-  bool requires_battery_not_low = 1;
-}
-
-message SetRequiresBatteryNotLowResponse {
-  int64 result = 1;
-}
-
-message SetRequiresStorageNotLowRequest {
-  bool requires_storage_not_low = 1;
-}
-
-message SetRequiresStorageNotLowResponse {
-  int64 result = 1;
-}
-
-message SetPeriodicRequest {
-  int64 interval_millis = 1;
-}
-
-message SetPeriodicResponse {
-  int64 result = 1;
-}
-
-message SetMinimumLatencyRequest {
-  int64 min_latency_millis = 1;
-}
-
-message SetMinimumLatencyResponse {
-  int64 result = 1;
-}
-
-message SetOverrideDeadlineRequest {
-  int64 max_execution_delay_millis = 1;
-}
-
-message SetOverrideDeadlineResponse {
-  int64 result = 1;
-}
-
-message SetPersistedRequest {
-  bool is_persisted = 1;
-}
-
-message SetPersistedResponse {
-  int64 result = 1;
-}
-
-message SetBackoffCriteriaRequest {
-  int64 initial_backoff_millis = 1;
-  int32 backoff_policy = 2;
-}
-
-message SetBackoffCriteriaResponse {
-  int64 result = 1;
-}
-
-message BuildRequest {
-}
-
-message BuildResponse {
-  JobInfoJava result = 1;
-}
-
-service SchedulerService {
-  rpc ScheduleRaw (ScheduleRawRequest) returns (ScheduleRawResponse);
-  rpc Cancel (CancelRequest) returns (CancelResponse);
-  rpc CancelAll (CancelAllRequest) returns (CancelAllResponse);
-  rpc GetPendingJobRaw (GetPendingJobRawRequest) returns (GetPendingJobRawResponse);
-  rpc GetAllPendingJobsRaw (GetAllPendingJobsRawRequest) returns (GetAllPendingJobsRawResponse);
-}
-
-service JobInfoBuilderService {
-  rpc SetRequiredNetworkType (SetRequiredNetworkTypeRequest) returns (SetRequiredNetworkTypeResponse);
-  rpc SetRequiresCharging (SetRequiresChargingRequest) returns (SetRequiresChargingResponse);
-  rpc SetRequiresDeviceIdle (SetRequiresDeviceIdleRequest) returns (SetRequiresDeviceIdleResponse);
-  rpc SetRequiresBatteryNotLow (SetRequiresBatteryNotLowRequest) returns (SetRequiresBatteryNotLowResponse);
-  rpc SetRequiresStorageNotLow (SetRequiresStorageNotLowRequest) returns (SetRequiresStorageNotLowResponse);
-  rpc SetPeriodic (SetPeriodicRequest) returns (SetPeriodicResponse);
-  rpc SetMinimumLatency (SetMinimumLatencyRequest) returns (SetMinimumLatencyResponse);
-  rpc SetOverrideDeadline (SetOverrideDeadlineRequest) returns (SetOverrideDeadlineResponse);
-  rpc SetPersisted (SetPersistedRequest) returns (SetPersistedResponse);
-  rpc SetBackoffCriteria (SetBackoffCriteriaRequest) returns (SetBackoffCriteriaResponse);
-  rpc Build (BuildRequest) returns (BuildResponse);
+service JobSchedulerService {
+  rpc CanRunUserInitiatedJobs (CanRunUserInitiatedJobsRequest) returns (CanRunUserInitiatedJobsResponse);
+  rpc CancelInAllNamespaces (CancelInAllNamespacesRequest) returns (CancelInAllNamespacesResponse);
+  rpc ForNamespace (ForNamespaceRequest) returns (ForNamespaceResponse);
+  rpc GetNamespace (GetNamespaceRequest) returns (GetNamespaceResponse);
+  rpc GetPendingJobReason (GetPendingJobReasonRequest) returns (GetPendingJobReasonResponse);
+  rpc GetPendingJobReasons (GetPendingJobReasonsRequest) returns (GetPendingJobReasonsResponse);
+  rpc GetPendingJobReasonsHistory (GetPendingJobReasonsHistoryRequest) returns (GetPendingJobReasonsHistoryResponse);
 }

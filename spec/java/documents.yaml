@@ -1,0 +1,334 @@
+package: documents
+go_import: github.com/xaionaro-go/jni/provider/documents
+classes:
+    - java_class: android.provider.DocumentsContract
+      go_type: documentsContract
+      static_methods:
+        - java_method: buildChildDocumentsUri
+          go_name: BuildChildDocumentsUri
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+        - java_method: buildChildDocumentsUriUsingTree
+          go_name: BuildChildDocumentsUriUsingTree
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+        - java_method: buildDocumentUri
+          go_name: BuildDocumentUri
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+        - java_method: buildDocumentUriUsingTree
+          go_name: BuildDocumentUriUsingTree
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+        - java_method: buildRecentDocumentsUri
+          go_name: BuildRecentDocumentsUri
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+        - java_method: buildRootUri
+          go_name: BuildRootUri
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+        - java_method: buildRootsUri
+          go_name: BuildRootsUri
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: buildSearchDocumentsUri
+          go_name: BuildSearchDocumentsUri
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: android.net.Uri
+          error: true
+        - java_method: buildTreeDocumentUri
+          go_name: BuildTreeDocumentUri
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+        - java_method: copyDocument
+          go_name: CopyDocument
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: android.net.Uri
+              go_name: arg2
+          returns: android.net.Uri
+          error: true
+        - java_method: createDocument
+          go_name: CreateDocument
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+          returns: android.net.Uri
+          error: true
+        - java_method: createWebLinkIntent
+          go_name: CreateWebLinkIntent
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: android.content.IntentSender
+          error: true
+        - java_method: deleteDocument
+          go_name: DeleteDocument
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: ejectRoot
+          go_name: EjectRoot
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: findDocumentPath
+          go_name: FindDocumentPath
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: android.provider.DocumentsContract$Path
+          error: true
+        - java_method: getDocumentId
+          go_name: GetDocumentId
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getDocumentMetadata
+          go_name: GetDocumentMetadata
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: android.os.Bundle
+          error: true
+        - java_method: getDocumentThumbnail
+          go_name: GetDocumentThumbnail
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: android.graphics.Point
+              go_name: arg2
+            - java_type: android.os.CancellationSignal
+              go_name: arg3
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: getRootId
+          go_name: GetRootId
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getSearchDocumentsQuery
+          go_name: GetSearchDocumentsQuery
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getTreeDocumentId
+          go_name: GetTreeDocumentId
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: isChildDocument
+          go_name: IsChildDocument
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: android.net.Uri
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: isDocumentUri
+          go_name: IsDocumentUri
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: isRootUri
+          go_name: IsRootUri
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: isRootsUri
+          go_name: IsRootsUri
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: isTreeUri
+          go_name: IsTreeUri
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: moveDocument
+          go_name: MoveDocument
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: android.net.Uri
+              go_name: arg2
+            - java_type: android.net.Uri
+              go_name: arg3
+          returns: android.net.Uri
+          error: true
+        - java_method: removeDocument
+          go_name: RemoveDocument
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: android.net.Uri
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: renameDocument
+          go_name: RenameDocument
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: android.net.Uri
+          error: true
+constants:
+    - go_name: ActionDocumentSettings
+      value: '""'
+      go_type: string
+    - go_name: ExtraError
+      value: '""'
+      go_type: string
+    - go_name: ExtraExcludeSelf
+      value: '""'
+      go_type: string
+    - go_name: ExtraInfo
+      value: '""'
+      go_type: string
+    - go_name: ExtraInitialUri
+      value: '""'
+      go_type: string
+    - go_name: ExtraLoading
+      value: '""'
+      go_type: string
+    - go_name: ExtraOrientation
+      value: '""'
+      go_type: string
+    - go_name: ExtraPrompt
+      value: '""'
+      go_type: string
+    - go_name: MetadataExif
+      value: '""'
+      go_type: string
+    - go_name: MetadataTreeCount
+      value: '""'
+      go_type: string
+    - go_name: MetadataTreeSize
+      value: '""'
+      go_type: string
+    - go_name: MetadataTypes
+      value: '""'
+      go_type: string
+    - go_name: ProviderInterface
+      value: '""'
+      go_type: string
+    - go_name: QueryArgDisplayName
+      value: '""'
+      go_type: string
+    - go_name: QueryArgExcludeMedia
+      value: '""'
+      go_type: string
+    - go_name: QueryArgFileSizeOver
+      value: '""'
+      go_type: string
+    - go_name: QueryArgLastModifiedAfter
+      value: '""'
+      go_type: string
+    - go_name: QueryArgMimeTypes
+      value: '""'
+      go_type: string

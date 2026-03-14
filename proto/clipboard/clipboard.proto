@@ -6,11 +6,17 @@ package clipboard;
 
 option go_package = "github.com/xaionaro-go/jni/proto/clipboard";
 
-message SetPrimaryClipRequest {
-  int64 clip = 1;
+message AddPrimaryClipChangedListenerRequest {
+  int64 arg0 = 1;
 }
 
-message SetPrimaryClipResponse {
+message AddPrimaryClipChangedListenerResponse {
+}
+
+message ClearPrimaryClipRequest {
+}
+
+message ClearPrimaryClipResponse {
 }
 
 message GetPrimaryClipRequest {
@@ -20,41 +26,10 @@ message GetPrimaryClipResponse {
   int64 result = 1;
 }
 
-message HasPrimaryClipRequest {
+message GetPrimaryClipDescriptionRequest {
 }
 
-message HasPrimaryClipResponse {
-  bool result = 1;
-}
-
-message AddListenerRequest {
-  int64 listener = 1;
-}
-
-message AddListenerResponse {
-}
-
-message RemoveListenerRequest {
-  int64 listener = 1;
-}
-
-message RemoveListenerResponse {
-}
-
-message GetItemAtRequest {
-  int32 index = 1;
-}
-
-message GetItemAtResponse {
-  int64 result = 1;
-}
-
-message NewPlainTextRequest {
-  int64 label = 1;
-  int64 text = 2;
-}
-
-message NewPlainTextResponse {
+message GetPrimaryClipDescriptionResponse {
   int64 result = 1;
 }
 
@@ -62,37 +37,53 @@ message GetTextRequest {
 }
 
 message GetTextResponse {
-  int64 result = 1;
+  string result = 1;
 }
 
-message ClipChangedListenerOnChangedEvent {
+message HasPrimaryClipRequest {
 }
 
-message ClipChangedListenerEvent {
-  optional ClipChangedListenerOnChangedEvent on_changed = 1;
+message HasPrimaryClipResponse {
+  bool result = 1;
 }
 
-message SubscribeClipChangedListenerRequest {
+message HasTextRequest {
 }
 
-service ManagerService {
-  rpc SetPrimaryClip (SetPrimaryClipRequest) returns (SetPrimaryClipResponse);
+message HasTextResponse {
+  bool result = 1;
+}
+
+message RemovePrimaryClipChangedListenerRequest {
+  int64 arg0 = 1;
+}
+
+message RemovePrimaryClipChangedListenerResponse {
+}
+
+message SetPrimaryClipRequest {
+  int64 arg0 = 1;
+}
+
+message SetPrimaryClipResponse {
+}
+
+message SetTextRequest {
+  string arg0 = 1;
+}
+
+message SetTextResponse {
+}
+
+service ClipboardManagerService {
+  rpc AddPrimaryClipChangedListener (AddPrimaryClipChangedListenerRequest) returns (AddPrimaryClipChangedListenerResponse);
+  rpc ClearPrimaryClip (ClearPrimaryClipRequest) returns (ClearPrimaryClipResponse);
   rpc GetPrimaryClip (GetPrimaryClipRequest) returns (GetPrimaryClipResponse);
-  rpc HasPrimaryClip (HasPrimaryClipRequest) returns (HasPrimaryClipResponse);
-  rpc AddListener (AddListenerRequest) returns (AddListenerResponse);
-  rpc RemoveListener (RemoveListenerRequest) returns (RemoveListenerResponse);
-}
-
-service ClipDataService {
-  rpc GetItemAt (GetItemAtRequest) returns (GetItemAtResponse);
-  rpc NewPlainText (NewPlainTextRequest) returns (NewPlainTextResponse);
-}
-
-service ClipItemService {
+  rpc GetPrimaryClipDescription (GetPrimaryClipDescriptionRequest) returns (GetPrimaryClipDescriptionResponse);
   rpc GetText (GetTextRequest) returns (GetTextResponse);
-}
-
-service ClipChangedListenerService {
-  // Server-streaming events from android.content.ClipboardManager$OnPrimaryClipChangedListener
-  rpc SubscribeClipChangedListener (SubscribeClipChangedListenerRequest) returns (stream ClipChangedListenerEvent);
+  rpc HasPrimaryClip (HasPrimaryClipRequest) returns (HasPrimaryClipResponse);
+  rpc HasText (HasTextRequest) returns (HasTextResponse);
+  rpc RemovePrimaryClipChangedListener (RemovePrimaryClipChangedListenerRequest) returns (RemovePrimaryClipChangedListenerResponse);
+  rpc SetPrimaryClip (SetPrimaryClipRequest) returns (SetPrimaryClipResponse);
+  rpc SetText (SetTextRequest) returns (SetTextResponse);
 }

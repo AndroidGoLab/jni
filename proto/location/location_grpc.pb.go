@@ -21,693 +21,2574 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ManagerService_GetLastKnownLocation_FullMethodName            = "/location.ManagerService/GetLastKnownLocation"
-	ManagerService_IsProviderEnabled_FullMethodName               = "/location.ManagerService/IsProviderEnabled"
-	ManagerService_GetProvidersRaw_FullMethodName                 = "/location.ManagerService/GetProvidersRaw"
-	ManagerService_RequestLocationUpdatesRaw_FullMethodName       = "/location.ManagerService/RequestLocationUpdatesRaw"
-	ManagerService_RemoveUpdatesRaw_FullMethodName                = "/location.ManagerService/RemoveUpdatesRaw"
-	ManagerService_GetCurrentLocationRaw_FullMethodName           = "/location.ManagerService/GetCurrentLocationRaw"
-	ManagerService_RegisterGnssStatusCallbackRaw_FullMethodName   = "/location.ManagerService/RegisterGnssStatusCallbackRaw"
-	ManagerService_UnregisterGnssStatusCallbackRaw_FullMethodName = "/location.ManagerService/UnregisterGnssStatusCallbackRaw"
+	LocationManagerService_AddGpsStatusListener_FullMethodName                     = "/location.LocationManagerService/AddGpsStatusListener"
+	LocationManagerService_AddNmeaListener1_FullMethodName                         = "/location.LocationManagerService/AddNmeaListener1"
+	LocationManagerService_AddNmeaListener1_1_FullMethodName                       = "/location.LocationManagerService/AddNmeaListener1_1"
+	LocationManagerService_AddNmeaListener2_2_FullMethodName                       = "/location.LocationManagerService/AddNmeaListener2_2"
+	LocationManagerService_AddProximityAlert_FullMethodName                        = "/location.LocationManagerService/AddProximityAlert"
+	LocationManagerService_AddTestProvider2_FullMethodName                         = "/location.LocationManagerService/AddTestProvider2"
+	LocationManagerService_AddTestProvider3_1_FullMethodName                       = "/location.LocationManagerService/AddTestProvider3_1"
+	LocationManagerService_AddTestProvider10_2_FullMethodName                      = "/location.LocationManagerService/AddTestProvider10_2"
+	LocationManagerService_ClearTestProviderEnabled_FullMethodName                 = "/location.LocationManagerService/ClearTestProviderEnabled"
+	LocationManagerService_ClearTestProviderLocation_FullMethodName                = "/location.LocationManagerService/ClearTestProviderLocation"
+	LocationManagerService_ClearTestProviderStatus_FullMethodName                  = "/location.LocationManagerService/ClearTestProviderStatus"
+	LocationManagerService_GetAllProviders_FullMethodName                          = "/location.LocationManagerService/GetAllProviders"
+	LocationManagerService_GetBestProvider_FullMethodName                          = "/location.LocationManagerService/GetBestProvider"
+	LocationManagerService_GetCurrentLocation5_FullMethodName                      = "/location.LocationManagerService/GetCurrentLocation5"
+	LocationManagerService_GetCurrentLocation4_1_FullMethodName                    = "/location.LocationManagerService/GetCurrentLocation4_1"
+	LocationManagerService_GetGnssAntennaInfos_FullMethodName                      = "/location.LocationManagerService/GetGnssAntennaInfos"
+	LocationManagerService_GetGnssCapabilities_FullMethodName                      = "/location.LocationManagerService/GetGnssCapabilities"
+	LocationManagerService_GetGnssHardwareModelName_FullMethodName                 = "/location.LocationManagerService/GetGnssHardwareModelName"
+	LocationManagerService_GetGnssYearOfHardware_FullMethodName                    = "/location.LocationManagerService/GetGnssYearOfHardware"
+	LocationManagerService_GetGpsStatus_FullMethodName                             = "/location.LocationManagerService/GetGpsStatus"
+	LocationManagerService_GetLastKnownLocation_FullMethodName                     = "/location.LocationManagerService/GetLastKnownLocation"
+	LocationManagerService_GetProvider_FullMethodName                              = "/location.LocationManagerService/GetProvider"
+	LocationManagerService_GetProviderProperties_FullMethodName                    = "/location.LocationManagerService/GetProviderProperties"
+	LocationManagerService_GetProviders2_FullMethodName                            = "/location.LocationManagerService/GetProviders2"
+	LocationManagerService_GetProviders1_1_FullMethodName                          = "/location.LocationManagerService/GetProviders1_1"
+	LocationManagerService_HasProvider_FullMethodName                              = "/location.LocationManagerService/HasProvider"
+	LocationManagerService_IsLocationEnabled_FullMethodName                        = "/location.LocationManagerService/IsLocationEnabled"
+	LocationManagerService_IsProviderEnabled_FullMethodName                        = "/location.LocationManagerService/IsProviderEnabled"
+	LocationManagerService_RegisterAntennaInfoListener_FullMethodName              = "/location.LocationManagerService/RegisterAntennaInfoListener"
+	LocationManagerService_RegisterGnssMeasurementsCallback3_FullMethodName        = "/location.LocationManagerService/RegisterGnssMeasurementsCallback3"
+	LocationManagerService_RegisterGnssMeasurementsCallback1_1_FullMethodName      = "/location.LocationManagerService/RegisterGnssMeasurementsCallback1_1"
+	LocationManagerService_RegisterGnssMeasurementsCallback2_2_FullMethodName      = "/location.LocationManagerService/RegisterGnssMeasurementsCallback2_2"
+	LocationManagerService_RegisterGnssNavigationMessageCallback1_FullMethodName   = "/location.LocationManagerService/RegisterGnssNavigationMessageCallback1"
+	LocationManagerService_RegisterGnssNavigationMessageCallback2_1_FullMethodName = "/location.LocationManagerService/RegisterGnssNavigationMessageCallback2_1"
+	LocationManagerService_RegisterGnssStatusCallback1_FullMethodName              = "/location.LocationManagerService/RegisterGnssStatusCallback1"
+	LocationManagerService_RegisterGnssStatusCallback2_1_FullMethodName            = "/location.LocationManagerService/RegisterGnssStatusCallback2_1"
+	LocationManagerService_RemoveGpsStatusListener_FullMethodName                  = "/location.LocationManagerService/RemoveGpsStatusListener"
+	LocationManagerService_RemoveNmeaListener1_FullMethodName                      = "/location.LocationManagerService/RemoveNmeaListener1"
+	LocationManagerService_RemoveNmeaListener1_1_FullMethodName                    = "/location.LocationManagerService/RemoveNmeaListener1_1"
+	LocationManagerService_RemoveProximityAlert_FullMethodName                     = "/location.LocationManagerService/RemoveProximityAlert"
+	LocationManagerService_RemoveTestProvider_FullMethodName                       = "/location.LocationManagerService/RemoveTestProvider"
+	LocationManagerService_RemoveUpdates1_FullMethodName                           = "/location.LocationManagerService/RemoveUpdates1"
+	LocationManagerService_RemoveUpdates1_1_FullMethodName                         = "/location.LocationManagerService/RemoveUpdates1_1"
+	LocationManagerService_RequestFlush3_FullMethodName                            = "/location.LocationManagerService/RequestFlush3"
+	LocationManagerService_RequestFlush3_1_FullMethodName                          = "/location.LocationManagerService/RequestFlush3_1"
+	LocationManagerService_RequestLocationUpdates3_FullMethodName                  = "/location.LocationManagerService/RequestLocationUpdates3"
+	LocationManagerService_RequestLocationUpdates4_1_FullMethodName                = "/location.LocationManagerService/RequestLocationUpdates4_1"
+	LocationManagerService_RequestLocationUpdates4_2_FullMethodName                = "/location.LocationManagerService/RequestLocationUpdates4_2"
+	LocationManagerService_RequestLocationUpdates4_3_FullMethodName                = "/location.LocationManagerService/RequestLocationUpdates4_3"
+	LocationManagerService_RequestLocationUpdates5_4_FullMethodName                = "/location.LocationManagerService/RequestLocationUpdates5_4"
+	LocationManagerService_RequestLocationUpdates5_5_FullMethodName                = "/location.LocationManagerService/RequestLocationUpdates5_5"
+	LocationManagerService_RequestLocationUpdates4_6_FullMethodName                = "/location.LocationManagerService/RequestLocationUpdates4_6"
+	LocationManagerService_RequestLocationUpdates5_7_FullMethodName                = "/location.LocationManagerService/RequestLocationUpdates5_7"
+	LocationManagerService_RequestLocationUpdates5_8_FullMethodName                = "/location.LocationManagerService/RequestLocationUpdates5_8"
+	LocationManagerService_RequestSingleUpdate2_FullMethodName                     = "/location.LocationManagerService/RequestSingleUpdate2"
+	LocationManagerService_RequestSingleUpdate3_1_FullMethodName                   = "/location.LocationManagerService/RequestSingleUpdate3_1"
+	LocationManagerService_RequestSingleUpdate2_2_FullMethodName                   = "/location.LocationManagerService/RequestSingleUpdate2_2"
+	LocationManagerService_RequestSingleUpdate3_3_FullMethodName                   = "/location.LocationManagerService/RequestSingleUpdate3_3"
+	LocationManagerService_SendExtraCommand_FullMethodName                         = "/location.LocationManagerService/SendExtraCommand"
+	LocationManagerService_SetTestProviderEnabled_FullMethodName                   = "/location.LocationManagerService/SetTestProviderEnabled"
+	LocationManagerService_SetTestProviderLocation_FullMethodName                  = "/location.LocationManagerService/SetTestProviderLocation"
+	LocationManagerService_SetTestProviderStatus_FullMethodName                    = "/location.LocationManagerService/SetTestProviderStatus"
+	LocationManagerService_UnregisterAntennaInfoListener_FullMethodName            = "/location.LocationManagerService/UnregisterAntennaInfoListener"
+	LocationManagerService_UnregisterGnssMeasurementsCallback_FullMethodName       = "/location.LocationManagerService/UnregisterGnssMeasurementsCallback"
+	LocationManagerService_UnregisterGnssNavigationMessageCallback_FullMethodName  = "/location.LocationManagerService/UnregisterGnssNavigationMessageCallback"
+	LocationManagerService_UnregisterGnssStatusCallback_FullMethodName             = "/location.LocationManagerService/UnregisterGnssStatusCallback"
 )
 
-// ManagerServiceClient is the client API for ManagerService service.
+// LocationManagerServiceClient is the client API for LocationManagerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ManagerServiceClient interface {
+type LocationManagerServiceClient interface {
+	AddGpsStatusListener(ctx context.Context, in *AddGpsStatusListenerRequest, opts ...grpc.CallOption) (*AddGpsStatusListenerResponse, error)
+	AddNmeaListener1(ctx context.Context, in *AddNmeaListener1Request, opts ...grpc.CallOption) (*AddNmeaListener1Response, error)
+	AddNmeaListener1_1(ctx context.Context, in *AddNmeaListener1_1Request, opts ...grpc.CallOption) (*AddNmeaListener1_1Response, error)
+	AddNmeaListener2_2(ctx context.Context, in *AddNmeaListener2_2Request, opts ...grpc.CallOption) (*AddNmeaListener2_2Response, error)
+	AddProximityAlert(ctx context.Context, in *AddProximityAlertRequest, opts ...grpc.CallOption) (*AddProximityAlertResponse, error)
+	AddTestProvider2(ctx context.Context, in *AddTestProvider2Request, opts ...grpc.CallOption) (*AddTestProvider2Response, error)
+	AddTestProvider3_1(ctx context.Context, in *AddTestProvider3_1Request, opts ...grpc.CallOption) (*AddTestProvider3_1Response, error)
+	AddTestProvider10_2(ctx context.Context, in *AddTestProvider10_2Request, opts ...grpc.CallOption) (*AddTestProvider10_2Response, error)
+	ClearTestProviderEnabled(ctx context.Context, in *ClearTestProviderEnabledRequest, opts ...grpc.CallOption) (*ClearTestProviderEnabledResponse, error)
+	ClearTestProviderLocation(ctx context.Context, in *ClearTestProviderLocationRequest, opts ...grpc.CallOption) (*ClearTestProviderLocationResponse, error)
+	ClearTestProviderStatus(ctx context.Context, in *ClearTestProviderStatusRequest, opts ...grpc.CallOption) (*ClearTestProviderStatusResponse, error)
+	GetAllProviders(ctx context.Context, in *GetAllProvidersRequest, opts ...grpc.CallOption) (*GetAllProvidersResponse, error)
+	GetBestProvider(ctx context.Context, in *GetBestProviderRequest, opts ...grpc.CallOption) (*GetBestProviderResponse, error)
+	GetCurrentLocation5(ctx context.Context, in *GetCurrentLocation5Request, opts ...grpc.CallOption) (*GetCurrentLocation5Response, error)
+	GetCurrentLocation4_1(ctx context.Context, in *GetCurrentLocation4_1Request, opts ...grpc.CallOption) (*GetCurrentLocation4_1Response, error)
+	GetGnssAntennaInfos(ctx context.Context, in *GetGnssAntennaInfosRequest, opts ...grpc.CallOption) (*GetGnssAntennaInfosResponse, error)
+	GetGnssCapabilities(ctx context.Context, in *GetGnssCapabilitiesRequest, opts ...grpc.CallOption) (*GetGnssCapabilitiesResponse, error)
+	GetGnssHardwareModelName(ctx context.Context, in *GetGnssHardwareModelNameRequest, opts ...grpc.CallOption) (*GetGnssHardwareModelNameResponse, error)
+	GetGnssYearOfHardware(ctx context.Context, in *GetGnssYearOfHardwareRequest, opts ...grpc.CallOption) (*GetGnssYearOfHardwareResponse, error)
+	GetGpsStatus(ctx context.Context, in *GetGpsStatusRequest, opts ...grpc.CallOption) (*GetGpsStatusResponse, error)
 	GetLastKnownLocation(ctx context.Context, in *GetLastKnownLocationRequest, opts ...grpc.CallOption) (*GetLastKnownLocationResponse, error)
+	GetProvider(ctx context.Context, in *GetProviderRequest, opts ...grpc.CallOption) (*GetProviderResponse, error)
+	GetProviderProperties(ctx context.Context, in *GetProviderPropertiesRequest, opts ...grpc.CallOption) (*GetProviderPropertiesResponse, error)
+	GetProviders2(ctx context.Context, in *GetProviders2Request, opts ...grpc.CallOption) (*GetProviders2Response, error)
+	GetProviders1_1(ctx context.Context, in *GetProviders1_1Request, opts ...grpc.CallOption) (*GetProviders1_1Response, error)
+	HasProvider(ctx context.Context, in *HasProviderRequest, opts ...grpc.CallOption) (*HasProviderResponse, error)
+	IsLocationEnabled(ctx context.Context, in *IsLocationEnabledRequest, opts ...grpc.CallOption) (*IsLocationEnabledResponse, error)
 	IsProviderEnabled(ctx context.Context, in *IsProviderEnabledRequest, opts ...grpc.CallOption) (*IsProviderEnabledResponse, error)
-	GetProvidersRaw(ctx context.Context, in *GetProvidersRawRequest, opts ...grpc.CallOption) (*GetProvidersRawResponse, error)
-	RequestLocationUpdatesRaw(ctx context.Context, in *RequestLocationUpdatesRawRequest, opts ...grpc.CallOption) (*RequestLocationUpdatesRawResponse, error)
-	RemoveUpdatesRaw(ctx context.Context, in *RemoveUpdatesRawRequest, opts ...grpc.CallOption) (*RemoveUpdatesRawResponse, error)
-	GetCurrentLocationRaw(ctx context.Context, in *GetCurrentLocationRawRequest, opts ...grpc.CallOption) (*GetCurrentLocationRawResponse, error)
-	RegisterGnssStatusCallbackRaw(ctx context.Context, in *RegisterGnssStatusCallbackRawRequest, opts ...grpc.CallOption) (*RegisterGnssStatusCallbackRawResponse, error)
-	UnregisterGnssStatusCallbackRaw(ctx context.Context, in *UnregisterGnssStatusCallbackRawRequest, opts ...grpc.CallOption) (*UnregisterGnssStatusCallbackRawResponse, error)
+	RegisterAntennaInfoListener(ctx context.Context, in *RegisterAntennaInfoListenerRequest, opts ...grpc.CallOption) (*RegisterAntennaInfoListenerResponse, error)
+	RegisterGnssMeasurementsCallback3(ctx context.Context, in *RegisterGnssMeasurementsCallback3Request, opts ...grpc.CallOption) (*RegisterGnssMeasurementsCallback3Response, error)
+	RegisterGnssMeasurementsCallback1_1(ctx context.Context, in *RegisterGnssMeasurementsCallback1_1Request, opts ...grpc.CallOption) (*RegisterGnssMeasurementsCallback1_1Response, error)
+	RegisterGnssMeasurementsCallback2_2(ctx context.Context, in *RegisterGnssMeasurementsCallback2_2Request, opts ...grpc.CallOption) (*RegisterGnssMeasurementsCallback2_2Response, error)
+	RegisterGnssNavigationMessageCallback1(ctx context.Context, in *RegisterGnssNavigationMessageCallback1Request, opts ...grpc.CallOption) (*RegisterGnssNavigationMessageCallback1Response, error)
+	RegisterGnssNavigationMessageCallback2_1(ctx context.Context, in *RegisterGnssNavigationMessageCallback2_1Request, opts ...grpc.CallOption) (*RegisterGnssNavigationMessageCallback2_1Response, error)
+	RegisterGnssStatusCallback1(ctx context.Context, in *RegisterGnssStatusCallback1Request, opts ...grpc.CallOption) (*RegisterGnssStatusCallback1Response, error)
+	RegisterGnssStatusCallback2_1(ctx context.Context, in *RegisterGnssStatusCallback2_1Request, opts ...grpc.CallOption) (*RegisterGnssStatusCallback2_1Response, error)
+	RemoveGpsStatusListener(ctx context.Context, in *RemoveGpsStatusListenerRequest, opts ...grpc.CallOption) (*RemoveGpsStatusListenerResponse, error)
+	RemoveNmeaListener1(ctx context.Context, in *RemoveNmeaListener1Request, opts ...grpc.CallOption) (*RemoveNmeaListener1Response, error)
+	RemoveNmeaListener1_1(ctx context.Context, in *RemoveNmeaListener1_1Request, opts ...grpc.CallOption) (*RemoveNmeaListener1_1Response, error)
+	RemoveProximityAlert(ctx context.Context, in *RemoveProximityAlertRequest, opts ...grpc.CallOption) (*RemoveProximityAlertResponse, error)
+	RemoveTestProvider(ctx context.Context, in *RemoveTestProviderRequest, opts ...grpc.CallOption) (*RemoveTestProviderResponse, error)
+	RemoveUpdates1(ctx context.Context, in *RemoveUpdates1Request, opts ...grpc.CallOption) (*RemoveUpdates1Response, error)
+	RemoveUpdates1_1(ctx context.Context, in *RemoveUpdates1_1Request, opts ...grpc.CallOption) (*RemoveUpdates1_1Response, error)
+	RequestFlush3(ctx context.Context, in *RequestFlush3Request, opts ...grpc.CallOption) (*RequestFlush3Response, error)
+	RequestFlush3_1(ctx context.Context, in *RequestFlush3_1Request, opts ...grpc.CallOption) (*RequestFlush3_1Response, error)
+	RequestLocationUpdates3(ctx context.Context, in *RequestLocationUpdates3Request, opts ...grpc.CallOption) (*RequestLocationUpdates3Response, error)
+	RequestLocationUpdates4_1(ctx context.Context, in *RequestLocationUpdates4_1Request, opts ...grpc.CallOption) (*RequestLocationUpdates4_1Response, error)
+	RequestLocationUpdates4_2(ctx context.Context, in *RequestLocationUpdates4_2Request, opts ...grpc.CallOption) (*RequestLocationUpdates4_2Response, error)
+	RequestLocationUpdates4_3(ctx context.Context, in *RequestLocationUpdates4_3Request, opts ...grpc.CallOption) (*RequestLocationUpdates4_3Response, error)
+	RequestLocationUpdates5_4(ctx context.Context, in *RequestLocationUpdates5_4Request, opts ...grpc.CallOption) (*RequestLocationUpdates5_4Response, error)
+	RequestLocationUpdates5_5(ctx context.Context, in *RequestLocationUpdates5_5Request, opts ...grpc.CallOption) (*RequestLocationUpdates5_5Response, error)
+	RequestLocationUpdates4_6(ctx context.Context, in *RequestLocationUpdates4_6Request, opts ...grpc.CallOption) (*RequestLocationUpdates4_6Response, error)
+	RequestLocationUpdates5_7(ctx context.Context, in *RequestLocationUpdates5_7Request, opts ...grpc.CallOption) (*RequestLocationUpdates5_7Response, error)
+	RequestLocationUpdates5_8(ctx context.Context, in *RequestLocationUpdates5_8Request, opts ...grpc.CallOption) (*RequestLocationUpdates5_8Response, error)
+	RequestSingleUpdate2(ctx context.Context, in *RequestSingleUpdate2Request, opts ...grpc.CallOption) (*RequestSingleUpdate2Response, error)
+	RequestSingleUpdate3_1(ctx context.Context, in *RequestSingleUpdate3_1Request, opts ...grpc.CallOption) (*RequestSingleUpdate3_1Response, error)
+	RequestSingleUpdate2_2(ctx context.Context, in *RequestSingleUpdate2_2Request, opts ...grpc.CallOption) (*RequestSingleUpdate2_2Response, error)
+	RequestSingleUpdate3_3(ctx context.Context, in *RequestSingleUpdate3_3Request, opts ...grpc.CallOption) (*RequestSingleUpdate3_3Response, error)
+	SendExtraCommand(ctx context.Context, in *SendExtraCommandRequest, opts ...grpc.CallOption) (*SendExtraCommandResponse, error)
+	SetTestProviderEnabled(ctx context.Context, in *SetTestProviderEnabledRequest, opts ...grpc.CallOption) (*SetTestProviderEnabledResponse, error)
+	SetTestProviderLocation(ctx context.Context, in *SetTestProviderLocationRequest, opts ...grpc.CallOption) (*SetTestProviderLocationResponse, error)
+	SetTestProviderStatus(ctx context.Context, in *SetTestProviderStatusRequest, opts ...grpc.CallOption) (*SetTestProviderStatusResponse, error)
+	UnregisterAntennaInfoListener(ctx context.Context, in *UnregisterAntennaInfoListenerRequest, opts ...grpc.CallOption) (*UnregisterAntennaInfoListenerResponse, error)
+	UnregisterGnssMeasurementsCallback(ctx context.Context, in *UnregisterGnssMeasurementsCallbackRequest, opts ...grpc.CallOption) (*UnregisterGnssMeasurementsCallbackResponse, error)
+	UnregisterGnssNavigationMessageCallback(ctx context.Context, in *UnregisterGnssNavigationMessageCallbackRequest, opts ...grpc.CallOption) (*UnregisterGnssNavigationMessageCallbackResponse, error)
+	UnregisterGnssStatusCallback(ctx context.Context, in *UnregisterGnssStatusCallbackRequest, opts ...grpc.CallOption) (*UnregisterGnssStatusCallbackResponse, error)
 }
 
-type managerServiceClient struct {
+type locationManagerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewManagerServiceClient(cc grpc.ClientConnInterface) ManagerServiceClient {
-	return &managerServiceClient{cc}
+func NewLocationManagerServiceClient(cc grpc.ClientConnInterface) LocationManagerServiceClient {
+	return &locationManagerServiceClient{cc}
 }
 
-func (c *managerServiceClient) GetLastKnownLocation(ctx context.Context, in *GetLastKnownLocationRequest, opts ...grpc.CallOption) (*GetLastKnownLocationResponse, error) {
+func (c *locationManagerServiceClient) AddGpsStatusListener(ctx context.Context, in *AddGpsStatusListenerRequest, opts ...grpc.CallOption) (*AddGpsStatusListenerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddGpsStatusListenerResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_AddGpsStatusListener_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) AddNmeaListener1(ctx context.Context, in *AddNmeaListener1Request, opts ...grpc.CallOption) (*AddNmeaListener1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddNmeaListener1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_AddNmeaListener1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) AddNmeaListener1_1(ctx context.Context, in *AddNmeaListener1_1Request, opts ...grpc.CallOption) (*AddNmeaListener1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddNmeaListener1_1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_AddNmeaListener1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) AddNmeaListener2_2(ctx context.Context, in *AddNmeaListener2_2Request, opts ...grpc.CallOption) (*AddNmeaListener2_2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddNmeaListener2_2Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_AddNmeaListener2_2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) AddProximityAlert(ctx context.Context, in *AddProximityAlertRequest, opts ...grpc.CallOption) (*AddProximityAlertResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddProximityAlertResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_AddProximityAlert_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) AddTestProvider2(ctx context.Context, in *AddTestProvider2Request, opts ...grpc.CallOption) (*AddTestProvider2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddTestProvider2Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_AddTestProvider2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) AddTestProvider3_1(ctx context.Context, in *AddTestProvider3_1Request, opts ...grpc.CallOption) (*AddTestProvider3_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddTestProvider3_1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_AddTestProvider3_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) AddTestProvider10_2(ctx context.Context, in *AddTestProvider10_2Request, opts ...grpc.CallOption) (*AddTestProvider10_2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddTestProvider10_2Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_AddTestProvider10_2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) ClearTestProviderEnabled(ctx context.Context, in *ClearTestProviderEnabledRequest, opts ...grpc.CallOption) (*ClearTestProviderEnabledResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ClearTestProviderEnabledResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_ClearTestProviderEnabled_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) ClearTestProviderLocation(ctx context.Context, in *ClearTestProviderLocationRequest, opts ...grpc.CallOption) (*ClearTestProviderLocationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ClearTestProviderLocationResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_ClearTestProviderLocation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) ClearTestProviderStatus(ctx context.Context, in *ClearTestProviderStatusRequest, opts ...grpc.CallOption) (*ClearTestProviderStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ClearTestProviderStatusResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_ClearTestProviderStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) GetAllProviders(ctx context.Context, in *GetAllProvidersRequest, opts ...grpc.CallOption) (*GetAllProvidersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAllProvidersResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_GetAllProviders_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) GetBestProvider(ctx context.Context, in *GetBestProviderRequest, opts ...grpc.CallOption) (*GetBestProviderResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBestProviderResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_GetBestProvider_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) GetCurrentLocation5(ctx context.Context, in *GetCurrentLocation5Request, opts ...grpc.CallOption) (*GetCurrentLocation5Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCurrentLocation5Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_GetCurrentLocation5_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) GetCurrentLocation4_1(ctx context.Context, in *GetCurrentLocation4_1Request, opts ...grpc.CallOption) (*GetCurrentLocation4_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCurrentLocation4_1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_GetCurrentLocation4_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) GetGnssAntennaInfos(ctx context.Context, in *GetGnssAntennaInfosRequest, opts ...grpc.CallOption) (*GetGnssAntennaInfosResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGnssAntennaInfosResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_GetGnssAntennaInfos_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) GetGnssCapabilities(ctx context.Context, in *GetGnssCapabilitiesRequest, opts ...grpc.CallOption) (*GetGnssCapabilitiesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGnssCapabilitiesResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_GetGnssCapabilities_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) GetGnssHardwareModelName(ctx context.Context, in *GetGnssHardwareModelNameRequest, opts ...grpc.CallOption) (*GetGnssHardwareModelNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGnssHardwareModelNameResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_GetGnssHardwareModelName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) GetGnssYearOfHardware(ctx context.Context, in *GetGnssYearOfHardwareRequest, opts ...grpc.CallOption) (*GetGnssYearOfHardwareResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGnssYearOfHardwareResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_GetGnssYearOfHardware_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) GetGpsStatus(ctx context.Context, in *GetGpsStatusRequest, opts ...grpc.CallOption) (*GetGpsStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGpsStatusResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_GetGpsStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) GetLastKnownLocation(ctx context.Context, in *GetLastKnownLocationRequest, opts ...grpc.CallOption) (*GetLastKnownLocationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetLastKnownLocationResponse)
-	err := c.cc.Invoke(ctx, ManagerService_GetLastKnownLocation_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, LocationManagerService_GetLastKnownLocation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) IsProviderEnabled(ctx context.Context, in *IsProviderEnabledRequest, opts ...grpc.CallOption) (*IsProviderEnabledResponse, error) {
+func (c *locationManagerServiceClient) GetProvider(ctx context.Context, in *GetProviderRequest, opts ...grpc.CallOption) (*GetProviderResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProviderResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_GetProvider_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) GetProviderProperties(ctx context.Context, in *GetProviderPropertiesRequest, opts ...grpc.CallOption) (*GetProviderPropertiesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProviderPropertiesResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_GetProviderProperties_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) GetProviders2(ctx context.Context, in *GetProviders2Request, opts ...grpc.CallOption) (*GetProviders2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProviders2Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_GetProviders2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) GetProviders1_1(ctx context.Context, in *GetProviders1_1Request, opts ...grpc.CallOption) (*GetProviders1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProviders1_1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_GetProviders1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) HasProvider(ctx context.Context, in *HasProviderRequest, opts ...grpc.CallOption) (*HasProviderResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HasProviderResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_HasProvider_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) IsLocationEnabled(ctx context.Context, in *IsLocationEnabledRequest, opts ...grpc.CallOption) (*IsLocationEnabledResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsLocationEnabledResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_IsLocationEnabled_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) IsProviderEnabled(ctx context.Context, in *IsProviderEnabledRequest, opts ...grpc.CallOption) (*IsProviderEnabledResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(IsProviderEnabledResponse)
-	err := c.cc.Invoke(ctx, ManagerService_IsProviderEnabled_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, LocationManagerService_IsProviderEnabled_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) GetProvidersRaw(ctx context.Context, in *GetProvidersRawRequest, opts ...grpc.CallOption) (*GetProvidersRawResponse, error) {
+func (c *locationManagerServiceClient) RegisterAntennaInfoListener(ctx context.Context, in *RegisterAntennaInfoListenerRequest, opts ...grpc.CallOption) (*RegisterAntennaInfoListenerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetProvidersRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_GetProvidersRaw_FullMethodName, in, out, cOpts...)
+	out := new(RegisterAntennaInfoListenerResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_RegisterAntennaInfoListener_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) RequestLocationUpdatesRaw(ctx context.Context, in *RequestLocationUpdatesRawRequest, opts ...grpc.CallOption) (*RequestLocationUpdatesRawResponse, error) {
+func (c *locationManagerServiceClient) RegisterGnssMeasurementsCallback3(ctx context.Context, in *RegisterGnssMeasurementsCallback3Request, opts ...grpc.CallOption) (*RegisterGnssMeasurementsCallback3Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RequestLocationUpdatesRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_RequestLocationUpdatesRaw_FullMethodName, in, out, cOpts...)
+	out := new(RegisterGnssMeasurementsCallback3Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RegisterGnssMeasurementsCallback3_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) RemoveUpdatesRaw(ctx context.Context, in *RemoveUpdatesRawRequest, opts ...grpc.CallOption) (*RemoveUpdatesRawResponse, error) {
+func (c *locationManagerServiceClient) RegisterGnssMeasurementsCallback1_1(ctx context.Context, in *RegisterGnssMeasurementsCallback1_1Request, opts ...grpc.CallOption) (*RegisterGnssMeasurementsCallback1_1Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RemoveUpdatesRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_RemoveUpdatesRaw_FullMethodName, in, out, cOpts...)
+	out := new(RegisterGnssMeasurementsCallback1_1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RegisterGnssMeasurementsCallback1_1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) GetCurrentLocationRaw(ctx context.Context, in *GetCurrentLocationRawRequest, opts ...grpc.CallOption) (*GetCurrentLocationRawResponse, error) {
+func (c *locationManagerServiceClient) RegisterGnssMeasurementsCallback2_2(ctx context.Context, in *RegisterGnssMeasurementsCallback2_2Request, opts ...grpc.CallOption) (*RegisterGnssMeasurementsCallback2_2Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetCurrentLocationRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_GetCurrentLocationRaw_FullMethodName, in, out, cOpts...)
+	out := new(RegisterGnssMeasurementsCallback2_2Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RegisterGnssMeasurementsCallback2_2_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) RegisterGnssStatusCallbackRaw(ctx context.Context, in *RegisterGnssStatusCallbackRawRequest, opts ...grpc.CallOption) (*RegisterGnssStatusCallbackRawResponse, error) {
+func (c *locationManagerServiceClient) RegisterGnssNavigationMessageCallback1(ctx context.Context, in *RegisterGnssNavigationMessageCallback1Request, opts ...grpc.CallOption) (*RegisterGnssNavigationMessageCallback1Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RegisterGnssStatusCallbackRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_RegisterGnssStatusCallbackRaw_FullMethodName, in, out, cOpts...)
+	out := new(RegisterGnssNavigationMessageCallback1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RegisterGnssNavigationMessageCallback1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) UnregisterGnssStatusCallbackRaw(ctx context.Context, in *UnregisterGnssStatusCallbackRawRequest, opts ...grpc.CallOption) (*UnregisterGnssStatusCallbackRawResponse, error) {
+func (c *locationManagerServiceClient) RegisterGnssNavigationMessageCallback2_1(ctx context.Context, in *RegisterGnssNavigationMessageCallback2_1Request, opts ...grpc.CallOption) (*RegisterGnssNavigationMessageCallback2_1Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UnregisterGnssStatusCallbackRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_UnregisterGnssStatusCallbackRaw_FullMethodName, in, out, cOpts...)
+	out := new(RegisterGnssNavigationMessageCallback2_1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RegisterGnssNavigationMessageCallback2_1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ManagerServiceServer is the server API for ManagerService service.
-// All implementations must embed UnimplementedManagerServiceServer
+func (c *locationManagerServiceClient) RegisterGnssStatusCallback1(ctx context.Context, in *RegisterGnssStatusCallback1Request, opts ...grpc.CallOption) (*RegisterGnssStatusCallback1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterGnssStatusCallback1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RegisterGnssStatusCallback1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RegisterGnssStatusCallback2_1(ctx context.Context, in *RegisterGnssStatusCallback2_1Request, opts ...grpc.CallOption) (*RegisterGnssStatusCallback2_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterGnssStatusCallback2_1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RegisterGnssStatusCallback2_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RemoveGpsStatusListener(ctx context.Context, in *RemoveGpsStatusListenerRequest, opts ...grpc.CallOption) (*RemoveGpsStatusListenerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveGpsStatusListenerResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_RemoveGpsStatusListener_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RemoveNmeaListener1(ctx context.Context, in *RemoveNmeaListener1Request, opts ...grpc.CallOption) (*RemoveNmeaListener1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveNmeaListener1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RemoveNmeaListener1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RemoveNmeaListener1_1(ctx context.Context, in *RemoveNmeaListener1_1Request, opts ...grpc.CallOption) (*RemoveNmeaListener1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveNmeaListener1_1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RemoveNmeaListener1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RemoveProximityAlert(ctx context.Context, in *RemoveProximityAlertRequest, opts ...grpc.CallOption) (*RemoveProximityAlertResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveProximityAlertResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_RemoveProximityAlert_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RemoveTestProvider(ctx context.Context, in *RemoveTestProviderRequest, opts ...grpc.CallOption) (*RemoveTestProviderResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveTestProviderResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_RemoveTestProvider_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RemoveUpdates1(ctx context.Context, in *RemoveUpdates1Request, opts ...grpc.CallOption) (*RemoveUpdates1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveUpdates1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RemoveUpdates1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RemoveUpdates1_1(ctx context.Context, in *RemoveUpdates1_1Request, opts ...grpc.CallOption) (*RemoveUpdates1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveUpdates1_1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RemoveUpdates1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RequestFlush3(ctx context.Context, in *RequestFlush3Request, opts ...grpc.CallOption) (*RequestFlush3Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestFlush3Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RequestFlush3_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RequestFlush3_1(ctx context.Context, in *RequestFlush3_1Request, opts ...grpc.CallOption) (*RequestFlush3_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestFlush3_1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RequestFlush3_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RequestLocationUpdates3(ctx context.Context, in *RequestLocationUpdates3Request, opts ...grpc.CallOption) (*RequestLocationUpdates3Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestLocationUpdates3Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RequestLocationUpdates3_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RequestLocationUpdates4_1(ctx context.Context, in *RequestLocationUpdates4_1Request, opts ...grpc.CallOption) (*RequestLocationUpdates4_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestLocationUpdates4_1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RequestLocationUpdates4_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RequestLocationUpdates4_2(ctx context.Context, in *RequestLocationUpdates4_2Request, opts ...grpc.CallOption) (*RequestLocationUpdates4_2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestLocationUpdates4_2Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RequestLocationUpdates4_2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RequestLocationUpdates4_3(ctx context.Context, in *RequestLocationUpdates4_3Request, opts ...grpc.CallOption) (*RequestLocationUpdates4_3Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestLocationUpdates4_3Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RequestLocationUpdates4_3_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RequestLocationUpdates5_4(ctx context.Context, in *RequestLocationUpdates5_4Request, opts ...grpc.CallOption) (*RequestLocationUpdates5_4Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestLocationUpdates5_4Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RequestLocationUpdates5_4_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RequestLocationUpdates5_5(ctx context.Context, in *RequestLocationUpdates5_5Request, opts ...grpc.CallOption) (*RequestLocationUpdates5_5Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestLocationUpdates5_5Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RequestLocationUpdates5_5_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RequestLocationUpdates4_6(ctx context.Context, in *RequestLocationUpdates4_6Request, opts ...grpc.CallOption) (*RequestLocationUpdates4_6Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestLocationUpdates4_6Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RequestLocationUpdates4_6_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RequestLocationUpdates5_7(ctx context.Context, in *RequestLocationUpdates5_7Request, opts ...grpc.CallOption) (*RequestLocationUpdates5_7Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestLocationUpdates5_7Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RequestLocationUpdates5_7_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RequestLocationUpdates5_8(ctx context.Context, in *RequestLocationUpdates5_8Request, opts ...grpc.CallOption) (*RequestLocationUpdates5_8Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestLocationUpdates5_8Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RequestLocationUpdates5_8_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RequestSingleUpdate2(ctx context.Context, in *RequestSingleUpdate2Request, opts ...grpc.CallOption) (*RequestSingleUpdate2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestSingleUpdate2Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RequestSingleUpdate2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RequestSingleUpdate3_1(ctx context.Context, in *RequestSingleUpdate3_1Request, opts ...grpc.CallOption) (*RequestSingleUpdate3_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestSingleUpdate3_1Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RequestSingleUpdate3_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RequestSingleUpdate2_2(ctx context.Context, in *RequestSingleUpdate2_2Request, opts ...grpc.CallOption) (*RequestSingleUpdate2_2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestSingleUpdate2_2Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RequestSingleUpdate2_2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) RequestSingleUpdate3_3(ctx context.Context, in *RequestSingleUpdate3_3Request, opts ...grpc.CallOption) (*RequestSingleUpdate3_3Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestSingleUpdate3_3Response)
+	err := c.cc.Invoke(ctx, LocationManagerService_RequestSingleUpdate3_3_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) SendExtraCommand(ctx context.Context, in *SendExtraCommandRequest, opts ...grpc.CallOption) (*SendExtraCommandResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendExtraCommandResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_SendExtraCommand_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) SetTestProviderEnabled(ctx context.Context, in *SetTestProviderEnabledRequest, opts ...grpc.CallOption) (*SetTestProviderEnabledResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetTestProviderEnabledResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_SetTestProviderEnabled_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) SetTestProviderLocation(ctx context.Context, in *SetTestProviderLocationRequest, opts ...grpc.CallOption) (*SetTestProviderLocationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetTestProviderLocationResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_SetTestProviderLocation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) SetTestProviderStatus(ctx context.Context, in *SetTestProviderStatusRequest, opts ...grpc.CallOption) (*SetTestProviderStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetTestProviderStatusResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_SetTestProviderStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) UnregisterAntennaInfoListener(ctx context.Context, in *UnregisterAntennaInfoListenerRequest, opts ...grpc.CallOption) (*UnregisterAntennaInfoListenerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnregisterAntennaInfoListenerResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_UnregisterAntennaInfoListener_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) UnregisterGnssMeasurementsCallback(ctx context.Context, in *UnregisterGnssMeasurementsCallbackRequest, opts ...grpc.CallOption) (*UnregisterGnssMeasurementsCallbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnregisterGnssMeasurementsCallbackResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_UnregisterGnssMeasurementsCallback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) UnregisterGnssNavigationMessageCallback(ctx context.Context, in *UnregisterGnssNavigationMessageCallbackRequest, opts ...grpc.CallOption) (*UnregisterGnssNavigationMessageCallbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnregisterGnssNavigationMessageCallbackResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_UnregisterGnssNavigationMessageCallback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *locationManagerServiceClient) UnregisterGnssStatusCallback(ctx context.Context, in *UnregisterGnssStatusCallbackRequest, opts ...grpc.CallOption) (*UnregisterGnssStatusCallbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnregisterGnssStatusCallbackResponse)
+	err := c.cc.Invoke(ctx, LocationManagerService_UnregisterGnssStatusCallback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// LocationManagerServiceServer is the server API for LocationManagerService service.
+// All implementations must embed UnimplementedLocationManagerServiceServer
 // for forward compatibility.
-type ManagerServiceServer interface {
+type LocationManagerServiceServer interface {
+	AddGpsStatusListener(context.Context, *AddGpsStatusListenerRequest) (*AddGpsStatusListenerResponse, error)
+	AddNmeaListener1(context.Context, *AddNmeaListener1Request) (*AddNmeaListener1Response, error)
+	AddNmeaListener1_1(context.Context, *AddNmeaListener1_1Request) (*AddNmeaListener1_1Response, error)
+	AddNmeaListener2_2(context.Context, *AddNmeaListener2_2Request) (*AddNmeaListener2_2Response, error)
+	AddProximityAlert(context.Context, *AddProximityAlertRequest) (*AddProximityAlertResponse, error)
+	AddTestProvider2(context.Context, *AddTestProvider2Request) (*AddTestProvider2Response, error)
+	AddTestProvider3_1(context.Context, *AddTestProvider3_1Request) (*AddTestProvider3_1Response, error)
+	AddTestProvider10_2(context.Context, *AddTestProvider10_2Request) (*AddTestProvider10_2Response, error)
+	ClearTestProviderEnabled(context.Context, *ClearTestProviderEnabledRequest) (*ClearTestProviderEnabledResponse, error)
+	ClearTestProviderLocation(context.Context, *ClearTestProviderLocationRequest) (*ClearTestProviderLocationResponse, error)
+	ClearTestProviderStatus(context.Context, *ClearTestProviderStatusRequest) (*ClearTestProviderStatusResponse, error)
+	GetAllProviders(context.Context, *GetAllProvidersRequest) (*GetAllProvidersResponse, error)
+	GetBestProvider(context.Context, *GetBestProviderRequest) (*GetBestProviderResponse, error)
+	GetCurrentLocation5(context.Context, *GetCurrentLocation5Request) (*GetCurrentLocation5Response, error)
+	GetCurrentLocation4_1(context.Context, *GetCurrentLocation4_1Request) (*GetCurrentLocation4_1Response, error)
+	GetGnssAntennaInfos(context.Context, *GetGnssAntennaInfosRequest) (*GetGnssAntennaInfosResponse, error)
+	GetGnssCapabilities(context.Context, *GetGnssCapabilitiesRequest) (*GetGnssCapabilitiesResponse, error)
+	GetGnssHardwareModelName(context.Context, *GetGnssHardwareModelNameRequest) (*GetGnssHardwareModelNameResponse, error)
+	GetGnssYearOfHardware(context.Context, *GetGnssYearOfHardwareRequest) (*GetGnssYearOfHardwareResponse, error)
+	GetGpsStatus(context.Context, *GetGpsStatusRequest) (*GetGpsStatusResponse, error)
 	GetLastKnownLocation(context.Context, *GetLastKnownLocationRequest) (*GetLastKnownLocationResponse, error)
+	GetProvider(context.Context, *GetProviderRequest) (*GetProviderResponse, error)
+	GetProviderProperties(context.Context, *GetProviderPropertiesRequest) (*GetProviderPropertiesResponse, error)
+	GetProviders2(context.Context, *GetProviders2Request) (*GetProviders2Response, error)
+	GetProviders1_1(context.Context, *GetProviders1_1Request) (*GetProviders1_1Response, error)
+	HasProvider(context.Context, *HasProviderRequest) (*HasProviderResponse, error)
+	IsLocationEnabled(context.Context, *IsLocationEnabledRequest) (*IsLocationEnabledResponse, error)
 	IsProviderEnabled(context.Context, *IsProviderEnabledRequest) (*IsProviderEnabledResponse, error)
-	GetProvidersRaw(context.Context, *GetProvidersRawRequest) (*GetProvidersRawResponse, error)
-	RequestLocationUpdatesRaw(context.Context, *RequestLocationUpdatesRawRequest) (*RequestLocationUpdatesRawResponse, error)
-	RemoveUpdatesRaw(context.Context, *RemoveUpdatesRawRequest) (*RemoveUpdatesRawResponse, error)
-	GetCurrentLocationRaw(context.Context, *GetCurrentLocationRawRequest) (*GetCurrentLocationRawResponse, error)
-	RegisterGnssStatusCallbackRaw(context.Context, *RegisterGnssStatusCallbackRawRequest) (*RegisterGnssStatusCallbackRawResponse, error)
-	UnregisterGnssStatusCallbackRaw(context.Context, *UnregisterGnssStatusCallbackRawRequest) (*UnregisterGnssStatusCallbackRawResponse, error)
-	mustEmbedUnimplementedManagerServiceServer()
+	RegisterAntennaInfoListener(context.Context, *RegisterAntennaInfoListenerRequest) (*RegisterAntennaInfoListenerResponse, error)
+	RegisterGnssMeasurementsCallback3(context.Context, *RegisterGnssMeasurementsCallback3Request) (*RegisterGnssMeasurementsCallback3Response, error)
+	RegisterGnssMeasurementsCallback1_1(context.Context, *RegisterGnssMeasurementsCallback1_1Request) (*RegisterGnssMeasurementsCallback1_1Response, error)
+	RegisterGnssMeasurementsCallback2_2(context.Context, *RegisterGnssMeasurementsCallback2_2Request) (*RegisterGnssMeasurementsCallback2_2Response, error)
+	RegisterGnssNavigationMessageCallback1(context.Context, *RegisterGnssNavigationMessageCallback1Request) (*RegisterGnssNavigationMessageCallback1Response, error)
+	RegisterGnssNavigationMessageCallback2_1(context.Context, *RegisterGnssNavigationMessageCallback2_1Request) (*RegisterGnssNavigationMessageCallback2_1Response, error)
+	RegisterGnssStatusCallback1(context.Context, *RegisterGnssStatusCallback1Request) (*RegisterGnssStatusCallback1Response, error)
+	RegisterGnssStatusCallback2_1(context.Context, *RegisterGnssStatusCallback2_1Request) (*RegisterGnssStatusCallback2_1Response, error)
+	RemoveGpsStatusListener(context.Context, *RemoveGpsStatusListenerRequest) (*RemoveGpsStatusListenerResponse, error)
+	RemoveNmeaListener1(context.Context, *RemoveNmeaListener1Request) (*RemoveNmeaListener1Response, error)
+	RemoveNmeaListener1_1(context.Context, *RemoveNmeaListener1_1Request) (*RemoveNmeaListener1_1Response, error)
+	RemoveProximityAlert(context.Context, *RemoveProximityAlertRequest) (*RemoveProximityAlertResponse, error)
+	RemoveTestProvider(context.Context, *RemoveTestProviderRequest) (*RemoveTestProviderResponse, error)
+	RemoveUpdates1(context.Context, *RemoveUpdates1Request) (*RemoveUpdates1Response, error)
+	RemoveUpdates1_1(context.Context, *RemoveUpdates1_1Request) (*RemoveUpdates1_1Response, error)
+	RequestFlush3(context.Context, *RequestFlush3Request) (*RequestFlush3Response, error)
+	RequestFlush3_1(context.Context, *RequestFlush3_1Request) (*RequestFlush3_1Response, error)
+	RequestLocationUpdates3(context.Context, *RequestLocationUpdates3Request) (*RequestLocationUpdates3Response, error)
+	RequestLocationUpdates4_1(context.Context, *RequestLocationUpdates4_1Request) (*RequestLocationUpdates4_1Response, error)
+	RequestLocationUpdates4_2(context.Context, *RequestLocationUpdates4_2Request) (*RequestLocationUpdates4_2Response, error)
+	RequestLocationUpdates4_3(context.Context, *RequestLocationUpdates4_3Request) (*RequestLocationUpdates4_3Response, error)
+	RequestLocationUpdates5_4(context.Context, *RequestLocationUpdates5_4Request) (*RequestLocationUpdates5_4Response, error)
+	RequestLocationUpdates5_5(context.Context, *RequestLocationUpdates5_5Request) (*RequestLocationUpdates5_5Response, error)
+	RequestLocationUpdates4_6(context.Context, *RequestLocationUpdates4_6Request) (*RequestLocationUpdates4_6Response, error)
+	RequestLocationUpdates5_7(context.Context, *RequestLocationUpdates5_7Request) (*RequestLocationUpdates5_7Response, error)
+	RequestLocationUpdates5_8(context.Context, *RequestLocationUpdates5_8Request) (*RequestLocationUpdates5_8Response, error)
+	RequestSingleUpdate2(context.Context, *RequestSingleUpdate2Request) (*RequestSingleUpdate2Response, error)
+	RequestSingleUpdate3_1(context.Context, *RequestSingleUpdate3_1Request) (*RequestSingleUpdate3_1Response, error)
+	RequestSingleUpdate2_2(context.Context, *RequestSingleUpdate2_2Request) (*RequestSingleUpdate2_2Response, error)
+	RequestSingleUpdate3_3(context.Context, *RequestSingleUpdate3_3Request) (*RequestSingleUpdate3_3Response, error)
+	SendExtraCommand(context.Context, *SendExtraCommandRequest) (*SendExtraCommandResponse, error)
+	SetTestProviderEnabled(context.Context, *SetTestProviderEnabledRequest) (*SetTestProviderEnabledResponse, error)
+	SetTestProviderLocation(context.Context, *SetTestProviderLocationRequest) (*SetTestProviderLocationResponse, error)
+	SetTestProviderStatus(context.Context, *SetTestProviderStatusRequest) (*SetTestProviderStatusResponse, error)
+	UnregisterAntennaInfoListener(context.Context, *UnregisterAntennaInfoListenerRequest) (*UnregisterAntennaInfoListenerResponse, error)
+	UnregisterGnssMeasurementsCallback(context.Context, *UnregisterGnssMeasurementsCallbackRequest) (*UnregisterGnssMeasurementsCallbackResponse, error)
+	UnregisterGnssNavigationMessageCallback(context.Context, *UnregisterGnssNavigationMessageCallbackRequest) (*UnregisterGnssNavigationMessageCallbackResponse, error)
+	UnregisterGnssStatusCallback(context.Context, *UnregisterGnssStatusCallbackRequest) (*UnregisterGnssStatusCallbackResponse, error)
+	mustEmbedUnimplementedLocationManagerServiceServer()
 }
 
-// UnimplementedManagerServiceServer must be embedded to have
+// UnimplementedLocationManagerServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedManagerServiceServer struct{}
+type UnimplementedLocationManagerServiceServer struct{}
 
-func (UnimplementedManagerServiceServer) GetLastKnownLocation(context.Context, *GetLastKnownLocationRequest) (*GetLastKnownLocationResponse, error) {
+func (UnimplementedLocationManagerServiceServer) AddGpsStatusListener(context.Context, *AddGpsStatusListenerRequest) (*AddGpsStatusListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddGpsStatusListener not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) AddNmeaListener1(context.Context, *AddNmeaListener1Request) (*AddNmeaListener1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddNmeaListener1 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) AddNmeaListener1_1(context.Context, *AddNmeaListener1_1Request) (*AddNmeaListener1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddNmeaListener1_1 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) AddNmeaListener2_2(context.Context, *AddNmeaListener2_2Request) (*AddNmeaListener2_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddNmeaListener2_2 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) AddProximityAlert(context.Context, *AddProximityAlertRequest) (*AddProximityAlertResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddProximityAlert not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) AddTestProvider2(context.Context, *AddTestProvider2Request) (*AddTestProvider2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddTestProvider2 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) AddTestProvider3_1(context.Context, *AddTestProvider3_1Request) (*AddTestProvider3_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddTestProvider3_1 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) AddTestProvider10_2(context.Context, *AddTestProvider10_2Request) (*AddTestProvider10_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddTestProvider10_2 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) ClearTestProviderEnabled(context.Context, *ClearTestProviderEnabledRequest) (*ClearTestProviderEnabledResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ClearTestProviderEnabled not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) ClearTestProviderLocation(context.Context, *ClearTestProviderLocationRequest) (*ClearTestProviderLocationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ClearTestProviderLocation not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) ClearTestProviderStatus(context.Context, *ClearTestProviderStatusRequest) (*ClearTestProviderStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ClearTestProviderStatus not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) GetAllProviders(context.Context, *GetAllProvidersRequest) (*GetAllProvidersResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAllProviders not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) GetBestProvider(context.Context, *GetBestProviderRequest) (*GetBestProviderResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBestProvider not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) GetCurrentLocation5(context.Context, *GetCurrentLocation5Request) (*GetCurrentLocation5Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCurrentLocation5 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) GetCurrentLocation4_1(context.Context, *GetCurrentLocation4_1Request) (*GetCurrentLocation4_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCurrentLocation4_1 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) GetGnssAntennaInfos(context.Context, *GetGnssAntennaInfosRequest) (*GetGnssAntennaInfosResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGnssAntennaInfos not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) GetGnssCapabilities(context.Context, *GetGnssCapabilitiesRequest) (*GetGnssCapabilitiesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGnssCapabilities not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) GetGnssHardwareModelName(context.Context, *GetGnssHardwareModelNameRequest) (*GetGnssHardwareModelNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGnssHardwareModelName not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) GetGnssYearOfHardware(context.Context, *GetGnssYearOfHardwareRequest) (*GetGnssYearOfHardwareResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGnssYearOfHardware not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) GetGpsStatus(context.Context, *GetGpsStatusRequest) (*GetGpsStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGpsStatus not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) GetLastKnownLocation(context.Context, *GetLastKnownLocationRequest) (*GetLastKnownLocationResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetLastKnownLocation not implemented")
 }
-func (UnimplementedManagerServiceServer) IsProviderEnabled(context.Context, *IsProviderEnabledRequest) (*IsProviderEnabledResponse, error) {
+func (UnimplementedLocationManagerServiceServer) GetProvider(context.Context, *GetProviderRequest) (*GetProviderResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetProvider not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) GetProviderProperties(context.Context, *GetProviderPropertiesRequest) (*GetProviderPropertiesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetProviderProperties not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) GetProviders2(context.Context, *GetProviders2Request) (*GetProviders2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetProviders2 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) GetProviders1_1(context.Context, *GetProviders1_1Request) (*GetProviders1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetProviders1_1 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) HasProvider(context.Context, *HasProviderRequest) (*HasProviderResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method HasProvider not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) IsLocationEnabled(context.Context, *IsLocationEnabledRequest) (*IsLocationEnabledResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsLocationEnabled not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) IsProviderEnabled(context.Context, *IsProviderEnabledRequest) (*IsProviderEnabledResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method IsProviderEnabled not implemented")
 }
-func (UnimplementedManagerServiceServer) GetProvidersRaw(context.Context, *GetProvidersRawRequest) (*GetProvidersRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetProvidersRaw not implemented")
+func (UnimplementedLocationManagerServiceServer) RegisterAntennaInfoListener(context.Context, *RegisterAntennaInfoListenerRequest) (*RegisterAntennaInfoListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterAntennaInfoListener not implemented")
 }
-func (UnimplementedManagerServiceServer) RequestLocationUpdatesRaw(context.Context, *RequestLocationUpdatesRawRequest) (*RequestLocationUpdatesRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RequestLocationUpdatesRaw not implemented")
+func (UnimplementedLocationManagerServiceServer) RegisterGnssMeasurementsCallback3(context.Context, *RegisterGnssMeasurementsCallback3Request) (*RegisterGnssMeasurementsCallback3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterGnssMeasurementsCallback3 not implemented")
 }
-func (UnimplementedManagerServiceServer) RemoveUpdatesRaw(context.Context, *RemoveUpdatesRawRequest) (*RemoveUpdatesRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RemoveUpdatesRaw not implemented")
+func (UnimplementedLocationManagerServiceServer) RegisterGnssMeasurementsCallback1_1(context.Context, *RegisterGnssMeasurementsCallback1_1Request) (*RegisterGnssMeasurementsCallback1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterGnssMeasurementsCallback1_1 not implemented")
 }
-func (UnimplementedManagerServiceServer) GetCurrentLocationRaw(context.Context, *GetCurrentLocationRawRequest) (*GetCurrentLocationRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetCurrentLocationRaw not implemented")
+func (UnimplementedLocationManagerServiceServer) RegisterGnssMeasurementsCallback2_2(context.Context, *RegisterGnssMeasurementsCallback2_2Request) (*RegisterGnssMeasurementsCallback2_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterGnssMeasurementsCallback2_2 not implemented")
 }
-func (UnimplementedManagerServiceServer) RegisterGnssStatusCallbackRaw(context.Context, *RegisterGnssStatusCallbackRawRequest) (*RegisterGnssStatusCallbackRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RegisterGnssStatusCallbackRaw not implemented")
+func (UnimplementedLocationManagerServiceServer) RegisterGnssNavigationMessageCallback1(context.Context, *RegisterGnssNavigationMessageCallback1Request) (*RegisterGnssNavigationMessageCallback1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterGnssNavigationMessageCallback1 not implemented")
 }
-func (UnimplementedManagerServiceServer) UnregisterGnssStatusCallbackRaw(context.Context, *UnregisterGnssStatusCallbackRawRequest) (*UnregisterGnssStatusCallbackRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method UnregisterGnssStatusCallbackRaw not implemented")
+func (UnimplementedLocationManagerServiceServer) RegisterGnssNavigationMessageCallback2_1(context.Context, *RegisterGnssNavigationMessageCallback2_1Request) (*RegisterGnssNavigationMessageCallback2_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterGnssNavigationMessageCallback2_1 not implemented")
 }
-func (UnimplementedManagerServiceServer) mustEmbedUnimplementedManagerServiceServer() {}
-func (UnimplementedManagerServiceServer) testEmbeddedByValue()                        {}
+func (UnimplementedLocationManagerServiceServer) RegisterGnssStatusCallback1(context.Context, *RegisterGnssStatusCallback1Request) (*RegisterGnssStatusCallback1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterGnssStatusCallback1 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RegisterGnssStatusCallback2_1(context.Context, *RegisterGnssStatusCallback2_1Request) (*RegisterGnssStatusCallback2_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterGnssStatusCallback2_1 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RemoveGpsStatusListener(context.Context, *RemoveGpsStatusListenerRequest) (*RemoveGpsStatusListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveGpsStatusListener not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RemoveNmeaListener1(context.Context, *RemoveNmeaListener1Request) (*RemoveNmeaListener1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveNmeaListener1 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RemoveNmeaListener1_1(context.Context, *RemoveNmeaListener1_1Request) (*RemoveNmeaListener1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveNmeaListener1_1 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RemoveProximityAlert(context.Context, *RemoveProximityAlertRequest) (*RemoveProximityAlertResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveProximityAlert not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RemoveTestProvider(context.Context, *RemoveTestProviderRequest) (*RemoveTestProviderResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveTestProvider not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RemoveUpdates1(context.Context, *RemoveUpdates1Request) (*RemoveUpdates1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveUpdates1 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RemoveUpdates1_1(context.Context, *RemoveUpdates1_1Request) (*RemoveUpdates1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveUpdates1_1 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RequestFlush3(context.Context, *RequestFlush3Request) (*RequestFlush3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestFlush3 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RequestFlush3_1(context.Context, *RequestFlush3_1Request) (*RequestFlush3_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestFlush3_1 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RequestLocationUpdates3(context.Context, *RequestLocationUpdates3Request) (*RequestLocationUpdates3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestLocationUpdates3 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RequestLocationUpdates4_1(context.Context, *RequestLocationUpdates4_1Request) (*RequestLocationUpdates4_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestLocationUpdates4_1 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RequestLocationUpdates4_2(context.Context, *RequestLocationUpdates4_2Request) (*RequestLocationUpdates4_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestLocationUpdates4_2 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RequestLocationUpdates4_3(context.Context, *RequestLocationUpdates4_3Request) (*RequestLocationUpdates4_3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestLocationUpdates4_3 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RequestLocationUpdates5_4(context.Context, *RequestLocationUpdates5_4Request) (*RequestLocationUpdates5_4Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestLocationUpdates5_4 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RequestLocationUpdates5_5(context.Context, *RequestLocationUpdates5_5Request) (*RequestLocationUpdates5_5Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestLocationUpdates5_5 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RequestLocationUpdates4_6(context.Context, *RequestLocationUpdates4_6Request) (*RequestLocationUpdates4_6Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestLocationUpdates4_6 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RequestLocationUpdates5_7(context.Context, *RequestLocationUpdates5_7Request) (*RequestLocationUpdates5_7Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestLocationUpdates5_7 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RequestLocationUpdates5_8(context.Context, *RequestLocationUpdates5_8Request) (*RequestLocationUpdates5_8Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestLocationUpdates5_8 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RequestSingleUpdate2(context.Context, *RequestSingleUpdate2Request) (*RequestSingleUpdate2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestSingleUpdate2 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RequestSingleUpdate3_1(context.Context, *RequestSingleUpdate3_1Request) (*RequestSingleUpdate3_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestSingleUpdate3_1 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RequestSingleUpdate2_2(context.Context, *RequestSingleUpdate2_2Request) (*RequestSingleUpdate2_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestSingleUpdate2_2 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) RequestSingleUpdate3_3(context.Context, *RequestSingleUpdate3_3Request) (*RequestSingleUpdate3_3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestSingleUpdate3_3 not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) SendExtraCommand(context.Context, *SendExtraCommandRequest) (*SendExtraCommandResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SendExtraCommand not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) SetTestProviderEnabled(context.Context, *SetTestProviderEnabledRequest) (*SetTestProviderEnabledResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetTestProviderEnabled not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) SetTestProviderLocation(context.Context, *SetTestProviderLocationRequest) (*SetTestProviderLocationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetTestProviderLocation not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) SetTestProviderStatus(context.Context, *SetTestProviderStatusRequest) (*SetTestProviderStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetTestProviderStatus not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) UnregisterAntennaInfoListener(context.Context, *UnregisterAntennaInfoListenerRequest) (*UnregisterAntennaInfoListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnregisterAntennaInfoListener not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) UnregisterGnssMeasurementsCallback(context.Context, *UnregisterGnssMeasurementsCallbackRequest) (*UnregisterGnssMeasurementsCallbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnregisterGnssMeasurementsCallback not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) UnregisterGnssNavigationMessageCallback(context.Context, *UnregisterGnssNavigationMessageCallbackRequest) (*UnregisterGnssNavigationMessageCallbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnregisterGnssNavigationMessageCallback not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) UnregisterGnssStatusCallback(context.Context, *UnregisterGnssStatusCallbackRequest) (*UnregisterGnssStatusCallbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnregisterGnssStatusCallback not implemented")
+}
+func (UnimplementedLocationManagerServiceServer) mustEmbedUnimplementedLocationManagerServiceServer() {
+}
+func (UnimplementedLocationManagerServiceServer) testEmbeddedByValue() {}
 
-// UnsafeManagerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ManagerServiceServer will
+// UnsafeLocationManagerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to LocationManagerServiceServer will
 // result in compilation errors.
-type UnsafeManagerServiceServer interface {
-	mustEmbedUnimplementedManagerServiceServer()
+type UnsafeLocationManagerServiceServer interface {
+	mustEmbedUnimplementedLocationManagerServiceServer()
 }
 
-func RegisterManagerServiceServer(s grpc.ServiceRegistrar, srv ManagerServiceServer) {
-	// If the following call panics, it indicates UnimplementedManagerServiceServer was
+func RegisterLocationManagerServiceServer(s grpc.ServiceRegistrar, srv LocationManagerServiceServer) {
+	// If the following call panics, it indicates UnimplementedLocationManagerServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ManagerService_ServiceDesc, srv)
+	s.RegisterService(&LocationManagerService_ServiceDesc, srv)
 }
 
-func _ManagerService_GetLastKnownLocation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _LocationManagerService_AddGpsStatusListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddGpsStatusListenerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).AddGpsStatusListener(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_AddGpsStatusListener_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).AddGpsStatusListener(ctx, req.(*AddGpsStatusListenerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_AddNmeaListener1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddNmeaListener1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).AddNmeaListener1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_AddNmeaListener1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).AddNmeaListener1(ctx, req.(*AddNmeaListener1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_AddNmeaListener1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddNmeaListener1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).AddNmeaListener1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_AddNmeaListener1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).AddNmeaListener1_1(ctx, req.(*AddNmeaListener1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_AddNmeaListener2_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddNmeaListener2_2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).AddNmeaListener2_2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_AddNmeaListener2_2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).AddNmeaListener2_2(ctx, req.(*AddNmeaListener2_2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_AddProximityAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddProximityAlertRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).AddProximityAlert(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_AddProximityAlert_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).AddProximityAlert(ctx, req.(*AddProximityAlertRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_AddTestProvider2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddTestProvider2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).AddTestProvider2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_AddTestProvider2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).AddTestProvider2(ctx, req.(*AddTestProvider2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_AddTestProvider3_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddTestProvider3_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).AddTestProvider3_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_AddTestProvider3_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).AddTestProvider3_1(ctx, req.(*AddTestProvider3_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_AddTestProvider10_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddTestProvider10_2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).AddTestProvider10_2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_AddTestProvider10_2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).AddTestProvider10_2(ctx, req.(*AddTestProvider10_2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_ClearTestProviderEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClearTestProviderEnabledRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).ClearTestProviderEnabled(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_ClearTestProviderEnabled_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).ClearTestProviderEnabled(ctx, req.(*ClearTestProviderEnabledRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_ClearTestProviderLocation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClearTestProviderLocationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).ClearTestProviderLocation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_ClearTestProviderLocation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).ClearTestProviderLocation(ctx, req.(*ClearTestProviderLocationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_ClearTestProviderStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClearTestProviderStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).ClearTestProviderStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_ClearTestProviderStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).ClearTestProviderStatus(ctx, req.(*ClearTestProviderStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_GetAllProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllProvidersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).GetAllProviders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_GetAllProviders_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).GetAllProviders(ctx, req.(*GetAllProvidersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_GetBestProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBestProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).GetBestProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_GetBestProvider_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).GetBestProvider(ctx, req.(*GetBestProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_GetCurrentLocation5_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCurrentLocation5Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).GetCurrentLocation5(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_GetCurrentLocation5_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).GetCurrentLocation5(ctx, req.(*GetCurrentLocation5Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_GetCurrentLocation4_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCurrentLocation4_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).GetCurrentLocation4_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_GetCurrentLocation4_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).GetCurrentLocation4_1(ctx, req.(*GetCurrentLocation4_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_GetGnssAntennaInfos_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGnssAntennaInfosRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).GetGnssAntennaInfos(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_GetGnssAntennaInfos_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).GetGnssAntennaInfos(ctx, req.(*GetGnssAntennaInfosRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_GetGnssCapabilities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGnssCapabilitiesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).GetGnssCapabilities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_GetGnssCapabilities_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).GetGnssCapabilities(ctx, req.(*GetGnssCapabilitiesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_GetGnssHardwareModelName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGnssHardwareModelNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).GetGnssHardwareModelName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_GetGnssHardwareModelName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).GetGnssHardwareModelName(ctx, req.(*GetGnssHardwareModelNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_GetGnssYearOfHardware_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGnssYearOfHardwareRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).GetGnssYearOfHardware(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_GetGnssYearOfHardware_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).GetGnssYearOfHardware(ctx, req.(*GetGnssYearOfHardwareRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_GetGpsStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGpsStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).GetGpsStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_GetGpsStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).GetGpsStatus(ctx, req.(*GetGpsStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_GetLastKnownLocation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetLastKnownLocationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetLastKnownLocation(ctx, in)
+		return srv.(LocationManagerServiceServer).GetLastKnownLocation(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_GetLastKnownLocation_FullMethodName,
+		FullMethod: LocationManagerService_GetLastKnownLocation_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetLastKnownLocation(ctx, req.(*GetLastKnownLocationRequest))
+		return srv.(LocationManagerServiceServer).GetLastKnownLocation(ctx, req.(*GetLastKnownLocationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_IsProviderEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _LocationManagerService_GetProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).GetProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_GetProvider_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).GetProvider(ctx, req.(*GetProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_GetProviderProperties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProviderPropertiesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).GetProviderProperties(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_GetProviderProperties_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).GetProviderProperties(ctx, req.(*GetProviderPropertiesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_GetProviders2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProviders2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).GetProviders2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_GetProviders2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).GetProviders2(ctx, req.(*GetProviders2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_GetProviders1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProviders1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).GetProviders1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_GetProviders1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).GetProviders1_1(ctx, req.(*GetProviders1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_HasProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HasProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).HasProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_HasProvider_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).HasProvider(ctx, req.(*HasProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_IsLocationEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsLocationEnabledRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).IsLocationEnabled(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_IsLocationEnabled_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).IsLocationEnabled(ctx, req.(*IsLocationEnabledRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_IsProviderEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(IsProviderEnabledRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).IsProviderEnabled(ctx, in)
+		return srv.(LocationManagerServiceServer).IsProviderEnabled(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_IsProviderEnabled_FullMethodName,
+		FullMethod: LocationManagerService_IsProviderEnabled_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).IsProviderEnabled(ctx, req.(*IsProviderEnabledRequest))
+		return srv.(LocationManagerServiceServer).IsProviderEnabled(ctx, req.(*IsProviderEnabledRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_GetProvidersRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetProvidersRawRequest)
+func _LocationManagerService_RegisterAntennaInfoListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterAntennaInfoListenerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetProvidersRaw(ctx, in)
+		return srv.(LocationManagerServiceServer).RegisterAntennaInfoListener(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_GetProvidersRaw_FullMethodName,
+		FullMethod: LocationManagerService_RegisterAntennaInfoListener_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetProvidersRaw(ctx, req.(*GetProvidersRawRequest))
+		return srv.(LocationManagerServiceServer).RegisterAntennaInfoListener(ctx, req.(*RegisterAntennaInfoListenerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_RequestLocationUpdatesRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RequestLocationUpdatesRawRequest)
+func _LocationManagerService_RegisterGnssMeasurementsCallback3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterGnssMeasurementsCallback3Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).RequestLocationUpdatesRaw(ctx, in)
+		return srv.(LocationManagerServiceServer).RegisterGnssMeasurementsCallback3(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_RequestLocationUpdatesRaw_FullMethodName,
+		FullMethod: LocationManagerService_RegisterGnssMeasurementsCallback3_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).RequestLocationUpdatesRaw(ctx, req.(*RequestLocationUpdatesRawRequest))
+		return srv.(LocationManagerServiceServer).RegisterGnssMeasurementsCallback3(ctx, req.(*RegisterGnssMeasurementsCallback3Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_RemoveUpdatesRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoveUpdatesRawRequest)
+func _LocationManagerService_RegisterGnssMeasurementsCallback1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterGnssMeasurementsCallback1_1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).RemoveUpdatesRaw(ctx, in)
+		return srv.(LocationManagerServiceServer).RegisterGnssMeasurementsCallback1_1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_RemoveUpdatesRaw_FullMethodName,
+		FullMethod: LocationManagerService_RegisterGnssMeasurementsCallback1_1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).RemoveUpdatesRaw(ctx, req.(*RemoveUpdatesRawRequest))
+		return srv.(LocationManagerServiceServer).RegisterGnssMeasurementsCallback1_1(ctx, req.(*RegisterGnssMeasurementsCallback1_1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_GetCurrentLocationRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCurrentLocationRawRequest)
+func _LocationManagerService_RegisterGnssMeasurementsCallback2_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterGnssMeasurementsCallback2_2Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetCurrentLocationRaw(ctx, in)
+		return srv.(LocationManagerServiceServer).RegisterGnssMeasurementsCallback2_2(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_GetCurrentLocationRaw_FullMethodName,
+		FullMethod: LocationManagerService_RegisterGnssMeasurementsCallback2_2_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetCurrentLocationRaw(ctx, req.(*GetCurrentLocationRawRequest))
+		return srv.(LocationManagerServiceServer).RegisterGnssMeasurementsCallback2_2(ctx, req.(*RegisterGnssMeasurementsCallback2_2Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_RegisterGnssStatusCallbackRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RegisterGnssStatusCallbackRawRequest)
+func _LocationManagerService_RegisterGnssNavigationMessageCallback1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterGnssNavigationMessageCallback1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).RegisterGnssStatusCallbackRaw(ctx, in)
+		return srv.(LocationManagerServiceServer).RegisterGnssNavigationMessageCallback1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_RegisterGnssStatusCallbackRaw_FullMethodName,
+		FullMethod: LocationManagerService_RegisterGnssNavigationMessageCallback1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).RegisterGnssStatusCallbackRaw(ctx, req.(*RegisterGnssStatusCallbackRawRequest))
+		return srv.(LocationManagerServiceServer).RegisterGnssNavigationMessageCallback1(ctx, req.(*RegisterGnssNavigationMessageCallback1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_UnregisterGnssStatusCallbackRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UnregisterGnssStatusCallbackRawRequest)
+func _LocationManagerService_RegisterGnssNavigationMessageCallback2_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterGnssNavigationMessageCallback2_1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).UnregisterGnssStatusCallbackRaw(ctx, in)
+		return srv.(LocationManagerServiceServer).RegisterGnssNavigationMessageCallback2_1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_UnregisterGnssStatusCallbackRaw_FullMethodName,
+		FullMethod: LocationManagerService_RegisterGnssNavigationMessageCallback2_1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).UnregisterGnssStatusCallbackRaw(ctx, req.(*UnregisterGnssStatusCallbackRawRequest))
+		return srv.(LocationManagerServiceServer).RegisterGnssNavigationMessageCallback2_1(ctx, req.(*RegisterGnssNavigationMessageCallback2_1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ManagerService_ServiceDesc is the grpc.ServiceDesc for ManagerService service.
+func _LocationManagerService_RegisterGnssStatusCallback1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterGnssStatusCallback1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RegisterGnssStatusCallback1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RegisterGnssStatusCallback1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RegisterGnssStatusCallback1(ctx, req.(*RegisterGnssStatusCallback1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RegisterGnssStatusCallback2_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterGnssStatusCallback2_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RegisterGnssStatusCallback2_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RegisterGnssStatusCallback2_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RegisterGnssStatusCallback2_1(ctx, req.(*RegisterGnssStatusCallback2_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RemoveGpsStatusListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveGpsStatusListenerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RemoveGpsStatusListener(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RemoveGpsStatusListener_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RemoveGpsStatusListener(ctx, req.(*RemoveGpsStatusListenerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RemoveNmeaListener1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveNmeaListener1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RemoveNmeaListener1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RemoveNmeaListener1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RemoveNmeaListener1(ctx, req.(*RemoveNmeaListener1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RemoveNmeaListener1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveNmeaListener1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RemoveNmeaListener1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RemoveNmeaListener1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RemoveNmeaListener1_1(ctx, req.(*RemoveNmeaListener1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RemoveProximityAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveProximityAlertRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RemoveProximityAlert(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RemoveProximityAlert_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RemoveProximityAlert(ctx, req.(*RemoveProximityAlertRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RemoveTestProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveTestProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RemoveTestProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RemoveTestProvider_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RemoveTestProvider(ctx, req.(*RemoveTestProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RemoveUpdates1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveUpdates1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RemoveUpdates1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RemoveUpdates1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RemoveUpdates1(ctx, req.(*RemoveUpdates1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RemoveUpdates1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveUpdates1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RemoveUpdates1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RemoveUpdates1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RemoveUpdates1_1(ctx, req.(*RemoveUpdates1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RequestFlush3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestFlush3Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RequestFlush3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RequestFlush3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RequestFlush3(ctx, req.(*RequestFlush3Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RequestFlush3_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestFlush3_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RequestFlush3_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RequestFlush3_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RequestFlush3_1(ctx, req.(*RequestFlush3_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RequestLocationUpdates3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestLocationUpdates3Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RequestLocationUpdates3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates3(ctx, req.(*RequestLocationUpdates3Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RequestLocationUpdates4_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestLocationUpdates4_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates4_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RequestLocationUpdates4_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates4_1(ctx, req.(*RequestLocationUpdates4_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RequestLocationUpdates4_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestLocationUpdates4_2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates4_2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RequestLocationUpdates4_2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates4_2(ctx, req.(*RequestLocationUpdates4_2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RequestLocationUpdates4_3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestLocationUpdates4_3Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates4_3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RequestLocationUpdates4_3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates4_3(ctx, req.(*RequestLocationUpdates4_3Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RequestLocationUpdates5_4_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestLocationUpdates5_4Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates5_4(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RequestLocationUpdates5_4_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates5_4(ctx, req.(*RequestLocationUpdates5_4Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RequestLocationUpdates5_5_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestLocationUpdates5_5Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates5_5(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RequestLocationUpdates5_5_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates5_5(ctx, req.(*RequestLocationUpdates5_5Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RequestLocationUpdates4_6_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestLocationUpdates4_6Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates4_6(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RequestLocationUpdates4_6_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates4_6(ctx, req.(*RequestLocationUpdates4_6Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RequestLocationUpdates5_7_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestLocationUpdates5_7Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates5_7(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RequestLocationUpdates5_7_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates5_7(ctx, req.(*RequestLocationUpdates5_7Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RequestLocationUpdates5_8_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestLocationUpdates5_8Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates5_8(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RequestLocationUpdates5_8_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RequestLocationUpdates5_8(ctx, req.(*RequestLocationUpdates5_8Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RequestSingleUpdate2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestSingleUpdate2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RequestSingleUpdate2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RequestSingleUpdate2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RequestSingleUpdate2(ctx, req.(*RequestSingleUpdate2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RequestSingleUpdate3_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestSingleUpdate3_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RequestSingleUpdate3_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RequestSingleUpdate3_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RequestSingleUpdate3_1(ctx, req.(*RequestSingleUpdate3_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RequestSingleUpdate2_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestSingleUpdate2_2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RequestSingleUpdate2_2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RequestSingleUpdate2_2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RequestSingleUpdate2_2(ctx, req.(*RequestSingleUpdate2_2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_RequestSingleUpdate3_3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestSingleUpdate3_3Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).RequestSingleUpdate3_3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_RequestSingleUpdate3_3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).RequestSingleUpdate3_3(ctx, req.(*RequestSingleUpdate3_3Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_SendExtraCommand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendExtraCommandRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).SendExtraCommand(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_SendExtraCommand_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).SendExtraCommand(ctx, req.(*SendExtraCommandRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_SetTestProviderEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTestProviderEnabledRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).SetTestProviderEnabled(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_SetTestProviderEnabled_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).SetTestProviderEnabled(ctx, req.(*SetTestProviderEnabledRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_SetTestProviderLocation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTestProviderLocationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).SetTestProviderLocation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_SetTestProviderLocation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).SetTestProviderLocation(ctx, req.(*SetTestProviderLocationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_SetTestProviderStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTestProviderStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).SetTestProviderStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_SetTestProviderStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).SetTestProviderStatus(ctx, req.(*SetTestProviderStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_UnregisterAntennaInfoListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnregisterAntennaInfoListenerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).UnregisterAntennaInfoListener(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_UnregisterAntennaInfoListener_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).UnregisterAntennaInfoListener(ctx, req.(*UnregisterAntennaInfoListenerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_UnregisterGnssMeasurementsCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnregisterGnssMeasurementsCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).UnregisterGnssMeasurementsCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_UnregisterGnssMeasurementsCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).UnregisterGnssMeasurementsCallback(ctx, req.(*UnregisterGnssMeasurementsCallbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_UnregisterGnssNavigationMessageCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnregisterGnssNavigationMessageCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).UnregisterGnssNavigationMessageCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_UnregisterGnssNavigationMessageCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).UnregisterGnssNavigationMessageCallback(ctx, req.(*UnregisterGnssNavigationMessageCallbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LocationManagerService_UnregisterGnssStatusCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnregisterGnssStatusCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationManagerServiceServer).UnregisterGnssStatusCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationManagerService_UnregisterGnssStatusCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationManagerServiceServer).UnregisterGnssStatusCallback(ctx, req.(*UnregisterGnssStatusCallbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// LocationManagerService_ServiceDesc is the grpc.ServiceDesc for LocationManagerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ManagerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "location.ManagerService",
-	HandlerType: (*ManagerServiceServer)(nil),
+var LocationManagerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "location.LocationManagerService",
+	HandlerType: (*LocationManagerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "AddGpsStatusListener",
+			Handler:    _LocationManagerService_AddGpsStatusListener_Handler,
+		},
+		{
+			MethodName: "AddNmeaListener1",
+			Handler:    _LocationManagerService_AddNmeaListener1_Handler,
+		},
+		{
+			MethodName: "AddNmeaListener1_1",
+			Handler:    _LocationManagerService_AddNmeaListener1_1_Handler,
+		},
+		{
+			MethodName: "AddNmeaListener2_2",
+			Handler:    _LocationManagerService_AddNmeaListener2_2_Handler,
+		},
+		{
+			MethodName: "AddProximityAlert",
+			Handler:    _LocationManagerService_AddProximityAlert_Handler,
+		},
+		{
+			MethodName: "AddTestProvider2",
+			Handler:    _LocationManagerService_AddTestProvider2_Handler,
+		},
+		{
+			MethodName: "AddTestProvider3_1",
+			Handler:    _LocationManagerService_AddTestProvider3_1_Handler,
+		},
+		{
+			MethodName: "AddTestProvider10_2",
+			Handler:    _LocationManagerService_AddTestProvider10_2_Handler,
+		},
+		{
+			MethodName: "ClearTestProviderEnabled",
+			Handler:    _LocationManagerService_ClearTestProviderEnabled_Handler,
+		},
+		{
+			MethodName: "ClearTestProviderLocation",
+			Handler:    _LocationManagerService_ClearTestProviderLocation_Handler,
+		},
+		{
+			MethodName: "ClearTestProviderStatus",
+			Handler:    _LocationManagerService_ClearTestProviderStatus_Handler,
+		},
+		{
+			MethodName: "GetAllProviders",
+			Handler:    _LocationManagerService_GetAllProviders_Handler,
+		},
+		{
+			MethodName: "GetBestProvider",
+			Handler:    _LocationManagerService_GetBestProvider_Handler,
+		},
+		{
+			MethodName: "GetCurrentLocation5",
+			Handler:    _LocationManagerService_GetCurrentLocation5_Handler,
+		},
+		{
+			MethodName: "GetCurrentLocation4_1",
+			Handler:    _LocationManagerService_GetCurrentLocation4_1_Handler,
+		},
+		{
+			MethodName: "GetGnssAntennaInfos",
+			Handler:    _LocationManagerService_GetGnssAntennaInfos_Handler,
+		},
+		{
+			MethodName: "GetGnssCapabilities",
+			Handler:    _LocationManagerService_GetGnssCapabilities_Handler,
+		},
+		{
+			MethodName: "GetGnssHardwareModelName",
+			Handler:    _LocationManagerService_GetGnssHardwareModelName_Handler,
+		},
+		{
+			MethodName: "GetGnssYearOfHardware",
+			Handler:    _LocationManagerService_GetGnssYearOfHardware_Handler,
+		},
+		{
+			MethodName: "GetGpsStatus",
+			Handler:    _LocationManagerService_GetGpsStatus_Handler,
+		},
+		{
 			MethodName: "GetLastKnownLocation",
-			Handler:    _ManagerService_GetLastKnownLocation_Handler,
+			Handler:    _LocationManagerService_GetLastKnownLocation_Handler,
+		},
+		{
+			MethodName: "GetProvider",
+			Handler:    _LocationManagerService_GetProvider_Handler,
+		},
+		{
+			MethodName: "GetProviderProperties",
+			Handler:    _LocationManagerService_GetProviderProperties_Handler,
+		},
+		{
+			MethodName: "GetProviders2",
+			Handler:    _LocationManagerService_GetProviders2_Handler,
+		},
+		{
+			MethodName: "GetProviders1_1",
+			Handler:    _LocationManagerService_GetProviders1_1_Handler,
+		},
+		{
+			MethodName: "HasProvider",
+			Handler:    _LocationManagerService_HasProvider_Handler,
+		},
+		{
+			MethodName: "IsLocationEnabled",
+			Handler:    _LocationManagerService_IsLocationEnabled_Handler,
 		},
 		{
 			MethodName: "IsProviderEnabled",
-			Handler:    _ManagerService_IsProviderEnabled_Handler,
+			Handler:    _LocationManagerService_IsProviderEnabled_Handler,
 		},
 		{
-			MethodName: "GetProvidersRaw",
-			Handler:    _ManagerService_GetProvidersRaw_Handler,
+			MethodName: "RegisterAntennaInfoListener",
+			Handler:    _LocationManagerService_RegisterAntennaInfoListener_Handler,
 		},
 		{
-			MethodName: "RequestLocationUpdatesRaw",
-			Handler:    _ManagerService_RequestLocationUpdatesRaw_Handler,
+			MethodName: "RegisterGnssMeasurementsCallback3",
+			Handler:    _LocationManagerService_RegisterGnssMeasurementsCallback3_Handler,
 		},
 		{
-			MethodName: "RemoveUpdatesRaw",
-			Handler:    _ManagerService_RemoveUpdatesRaw_Handler,
+			MethodName: "RegisterGnssMeasurementsCallback1_1",
+			Handler:    _LocationManagerService_RegisterGnssMeasurementsCallback1_1_Handler,
 		},
 		{
-			MethodName: "GetCurrentLocationRaw",
-			Handler:    _ManagerService_GetCurrentLocationRaw_Handler,
+			MethodName: "RegisterGnssMeasurementsCallback2_2",
+			Handler:    _LocationManagerService_RegisterGnssMeasurementsCallback2_2_Handler,
 		},
 		{
-			MethodName: "RegisterGnssStatusCallbackRaw",
-			Handler:    _ManagerService_RegisterGnssStatusCallbackRaw_Handler,
+			MethodName: "RegisterGnssNavigationMessageCallback1",
+			Handler:    _LocationManagerService_RegisterGnssNavigationMessageCallback1_Handler,
 		},
 		{
-			MethodName: "UnregisterGnssStatusCallbackRaw",
-			Handler:    _ManagerService_UnregisterGnssStatusCallbackRaw_Handler,
+			MethodName: "RegisterGnssNavigationMessageCallback2_1",
+			Handler:    _LocationManagerService_RegisterGnssNavigationMessageCallback2_1_Handler,
+		},
+		{
+			MethodName: "RegisterGnssStatusCallback1",
+			Handler:    _LocationManagerService_RegisterGnssStatusCallback1_Handler,
+		},
+		{
+			MethodName: "RegisterGnssStatusCallback2_1",
+			Handler:    _LocationManagerService_RegisterGnssStatusCallback2_1_Handler,
+		},
+		{
+			MethodName: "RemoveGpsStatusListener",
+			Handler:    _LocationManagerService_RemoveGpsStatusListener_Handler,
+		},
+		{
+			MethodName: "RemoveNmeaListener1",
+			Handler:    _LocationManagerService_RemoveNmeaListener1_Handler,
+		},
+		{
+			MethodName: "RemoveNmeaListener1_1",
+			Handler:    _LocationManagerService_RemoveNmeaListener1_1_Handler,
+		},
+		{
+			MethodName: "RemoveProximityAlert",
+			Handler:    _LocationManagerService_RemoveProximityAlert_Handler,
+		},
+		{
+			MethodName: "RemoveTestProvider",
+			Handler:    _LocationManagerService_RemoveTestProvider_Handler,
+		},
+		{
+			MethodName: "RemoveUpdates1",
+			Handler:    _LocationManagerService_RemoveUpdates1_Handler,
+		},
+		{
+			MethodName: "RemoveUpdates1_1",
+			Handler:    _LocationManagerService_RemoveUpdates1_1_Handler,
+		},
+		{
+			MethodName: "RequestFlush3",
+			Handler:    _LocationManagerService_RequestFlush3_Handler,
+		},
+		{
+			MethodName: "RequestFlush3_1",
+			Handler:    _LocationManagerService_RequestFlush3_1_Handler,
+		},
+		{
+			MethodName: "RequestLocationUpdates3",
+			Handler:    _LocationManagerService_RequestLocationUpdates3_Handler,
+		},
+		{
+			MethodName: "RequestLocationUpdates4_1",
+			Handler:    _LocationManagerService_RequestLocationUpdates4_1_Handler,
+		},
+		{
+			MethodName: "RequestLocationUpdates4_2",
+			Handler:    _LocationManagerService_RequestLocationUpdates4_2_Handler,
+		},
+		{
+			MethodName: "RequestLocationUpdates4_3",
+			Handler:    _LocationManagerService_RequestLocationUpdates4_3_Handler,
+		},
+		{
+			MethodName: "RequestLocationUpdates5_4",
+			Handler:    _LocationManagerService_RequestLocationUpdates5_4_Handler,
+		},
+		{
+			MethodName: "RequestLocationUpdates5_5",
+			Handler:    _LocationManagerService_RequestLocationUpdates5_5_Handler,
+		},
+		{
+			MethodName: "RequestLocationUpdates4_6",
+			Handler:    _LocationManagerService_RequestLocationUpdates4_6_Handler,
+		},
+		{
+			MethodName: "RequestLocationUpdates5_7",
+			Handler:    _LocationManagerService_RequestLocationUpdates5_7_Handler,
+		},
+		{
+			MethodName: "RequestLocationUpdates5_8",
+			Handler:    _LocationManagerService_RequestLocationUpdates5_8_Handler,
+		},
+		{
+			MethodName: "RequestSingleUpdate2",
+			Handler:    _LocationManagerService_RequestSingleUpdate2_Handler,
+		},
+		{
+			MethodName: "RequestSingleUpdate3_1",
+			Handler:    _LocationManagerService_RequestSingleUpdate3_1_Handler,
+		},
+		{
+			MethodName: "RequestSingleUpdate2_2",
+			Handler:    _LocationManagerService_RequestSingleUpdate2_2_Handler,
+		},
+		{
+			MethodName: "RequestSingleUpdate3_3",
+			Handler:    _LocationManagerService_RequestSingleUpdate3_3_Handler,
+		},
+		{
+			MethodName: "SendExtraCommand",
+			Handler:    _LocationManagerService_SendExtraCommand_Handler,
+		},
+		{
+			MethodName: "SetTestProviderEnabled",
+			Handler:    _LocationManagerService_SetTestProviderEnabled_Handler,
+		},
+		{
+			MethodName: "SetTestProviderLocation",
+			Handler:    _LocationManagerService_SetTestProviderLocation_Handler,
+		},
+		{
+			MethodName: "SetTestProviderStatus",
+			Handler:    _LocationManagerService_SetTestProviderStatus_Handler,
+		},
+		{
+			MethodName: "UnregisterAntennaInfoListener",
+			Handler:    _LocationManagerService_UnregisterAntennaInfoListener_Handler,
+		},
+		{
+			MethodName: "UnregisterGnssMeasurementsCallback",
+			Handler:    _LocationManagerService_UnregisterGnssMeasurementsCallback_Handler,
+		},
+		{
+			MethodName: "UnregisterGnssNavigationMessageCallback",
+			Handler:    _LocationManagerService_UnregisterGnssNavigationMessageCallback_Handler,
+		},
+		{
+			MethodName: "UnregisterGnssStatusCallback",
+			Handler:    _LocationManagerService_UnregisterGnssStatusCallback_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/location/location.proto",
-}
-
-const (
-	LocationListenerService_SubscribeLocationListener_FullMethodName = "/location.LocationListenerService/SubscribeLocationListener"
-)
-
-// LocationListenerServiceClient is the client API for LocationListenerService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type LocationListenerServiceClient interface {
-	// Server-streaming events from android.location.LocationListener
-	SubscribeLocationListener(ctx context.Context, in *SubscribeLocationListenerRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[LocationListenerEvent], error)
-}
-
-type locationListenerServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewLocationListenerServiceClient(cc grpc.ClientConnInterface) LocationListenerServiceClient {
-	return &locationListenerServiceClient{cc}
-}
-
-func (c *locationListenerServiceClient) SubscribeLocationListener(ctx context.Context, in *SubscribeLocationListenerRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[LocationListenerEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &LocationListenerService_ServiceDesc.Streams[0], LocationListenerService_SubscribeLocationListener_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[SubscribeLocationListenerRequest, LocationListenerEvent]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type LocationListenerService_SubscribeLocationListenerClient = grpc.ServerStreamingClient[LocationListenerEvent]
-
-// LocationListenerServiceServer is the server API for LocationListenerService service.
-// All implementations must embed UnimplementedLocationListenerServiceServer
-// for forward compatibility.
-type LocationListenerServiceServer interface {
-	// Server-streaming events from android.location.LocationListener
-	SubscribeLocationListener(*SubscribeLocationListenerRequest, grpc.ServerStreamingServer[LocationListenerEvent]) error
-	mustEmbedUnimplementedLocationListenerServiceServer()
-}
-
-// UnimplementedLocationListenerServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedLocationListenerServiceServer struct{}
-
-func (UnimplementedLocationListenerServiceServer) SubscribeLocationListener(*SubscribeLocationListenerRequest, grpc.ServerStreamingServer[LocationListenerEvent]) error {
-	return status.Error(codes.Unimplemented, "method SubscribeLocationListener not implemented")
-}
-func (UnimplementedLocationListenerServiceServer) mustEmbedUnimplementedLocationListenerServiceServer() {
-}
-func (UnimplementedLocationListenerServiceServer) testEmbeddedByValue() {}
-
-// UnsafeLocationListenerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to LocationListenerServiceServer will
-// result in compilation errors.
-type UnsafeLocationListenerServiceServer interface {
-	mustEmbedUnimplementedLocationListenerServiceServer()
-}
-
-func RegisterLocationListenerServiceServer(s grpc.ServiceRegistrar, srv LocationListenerServiceServer) {
-	// If the following call panics, it indicates UnimplementedLocationListenerServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&LocationListenerService_ServiceDesc, srv)
-}
-
-func _LocationListenerService_SubscribeLocationListener_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeLocationListenerRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(LocationListenerServiceServer).SubscribeLocationListener(m, &grpc.GenericServerStream[SubscribeLocationListenerRequest, LocationListenerEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type LocationListenerService_SubscribeLocationListenerServer = grpc.ServerStreamingServer[LocationListenerEvent]
-
-// LocationListenerService_ServiceDesc is the grpc.ServiceDesc for LocationListenerService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var LocationListenerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "location.LocationListenerService",
-	HandlerType: (*LocationListenerServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "SubscribeLocationListener",
-			Handler:       _LocationListenerService_SubscribeLocationListener_Handler,
-			ServerStreams: true,
-		},
-	},
-	Metadata: "proto/location/location.proto",
-}
-
-const (
-	GnssStatusCallbackService_SubscribeGnssStatusCallback_FullMethodName = "/location.GnssStatusCallbackService/SubscribeGnssStatusCallback"
-)
-
-// GnssStatusCallbackServiceClient is the client API for GnssStatusCallbackService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type GnssStatusCallbackServiceClient interface {
-	// Server-streaming events from android.location.GnssStatus$Callback
-	SubscribeGnssStatusCallback(ctx context.Context, in *SubscribeGnssStatusCallbackRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GnssStatusCallbackEvent], error)
-}
-
-type gnssStatusCallbackServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewGnssStatusCallbackServiceClient(cc grpc.ClientConnInterface) GnssStatusCallbackServiceClient {
-	return &gnssStatusCallbackServiceClient{cc}
-}
-
-func (c *gnssStatusCallbackServiceClient) SubscribeGnssStatusCallback(ctx context.Context, in *SubscribeGnssStatusCallbackRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GnssStatusCallbackEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &GnssStatusCallbackService_ServiceDesc.Streams[0], GnssStatusCallbackService_SubscribeGnssStatusCallback_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[SubscribeGnssStatusCallbackRequest, GnssStatusCallbackEvent]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type GnssStatusCallbackService_SubscribeGnssStatusCallbackClient = grpc.ServerStreamingClient[GnssStatusCallbackEvent]
-
-// GnssStatusCallbackServiceServer is the server API for GnssStatusCallbackService service.
-// All implementations must embed UnimplementedGnssStatusCallbackServiceServer
-// for forward compatibility.
-type GnssStatusCallbackServiceServer interface {
-	// Server-streaming events from android.location.GnssStatus$Callback
-	SubscribeGnssStatusCallback(*SubscribeGnssStatusCallbackRequest, grpc.ServerStreamingServer[GnssStatusCallbackEvent]) error
-	mustEmbedUnimplementedGnssStatusCallbackServiceServer()
-}
-
-// UnimplementedGnssStatusCallbackServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedGnssStatusCallbackServiceServer struct{}
-
-func (UnimplementedGnssStatusCallbackServiceServer) SubscribeGnssStatusCallback(*SubscribeGnssStatusCallbackRequest, grpc.ServerStreamingServer[GnssStatusCallbackEvent]) error {
-	return status.Error(codes.Unimplemented, "method SubscribeGnssStatusCallback not implemented")
-}
-func (UnimplementedGnssStatusCallbackServiceServer) mustEmbedUnimplementedGnssStatusCallbackServiceServer() {
-}
-func (UnimplementedGnssStatusCallbackServiceServer) testEmbeddedByValue() {}
-
-// UnsafeGnssStatusCallbackServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to GnssStatusCallbackServiceServer will
-// result in compilation errors.
-type UnsafeGnssStatusCallbackServiceServer interface {
-	mustEmbedUnimplementedGnssStatusCallbackServiceServer()
-}
-
-func RegisterGnssStatusCallbackServiceServer(s grpc.ServiceRegistrar, srv GnssStatusCallbackServiceServer) {
-	// If the following call panics, it indicates UnimplementedGnssStatusCallbackServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&GnssStatusCallbackService_ServiceDesc, srv)
-}
-
-func _GnssStatusCallbackService_SubscribeGnssStatusCallback_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeGnssStatusCallbackRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(GnssStatusCallbackServiceServer).SubscribeGnssStatusCallback(m, &grpc.GenericServerStream[SubscribeGnssStatusCallbackRequest, GnssStatusCallbackEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type GnssStatusCallbackService_SubscribeGnssStatusCallbackServer = grpc.ServerStreamingServer[GnssStatusCallbackEvent]
-
-// GnssStatusCallbackService_ServiceDesc is the grpc.ServiceDesc for GnssStatusCallbackService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var GnssStatusCallbackService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "location.GnssStatusCallbackService",
-	HandlerType: (*GnssStatusCallbackServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "SubscribeGnssStatusCallback",
-			Handler:       _GnssStatusCallbackService_SubscribeGnssStatusCallback_Handler,
-			ServerStreams: true,
-		},
-	},
-	Metadata: "proto/location/location.proto",
-}
-
-const (
-	LocationConsumerService_SubscribeLocationConsumer_FullMethodName = "/location.LocationConsumerService/SubscribeLocationConsumer"
-)
-
-// LocationConsumerServiceClient is the client API for LocationConsumerService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type LocationConsumerServiceClient interface {
-	// Server-streaming events from java.util.function.Consumer
-	SubscribeLocationConsumer(ctx context.Context, in *SubscribeLocationConsumerRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[LocationConsumerEvent], error)
-}
-
-type locationConsumerServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewLocationConsumerServiceClient(cc grpc.ClientConnInterface) LocationConsumerServiceClient {
-	return &locationConsumerServiceClient{cc}
-}
-
-func (c *locationConsumerServiceClient) SubscribeLocationConsumer(ctx context.Context, in *SubscribeLocationConsumerRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[LocationConsumerEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &LocationConsumerService_ServiceDesc.Streams[0], LocationConsumerService_SubscribeLocationConsumer_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[SubscribeLocationConsumerRequest, LocationConsumerEvent]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type LocationConsumerService_SubscribeLocationConsumerClient = grpc.ServerStreamingClient[LocationConsumerEvent]
-
-// LocationConsumerServiceServer is the server API for LocationConsumerService service.
-// All implementations must embed UnimplementedLocationConsumerServiceServer
-// for forward compatibility.
-type LocationConsumerServiceServer interface {
-	// Server-streaming events from java.util.function.Consumer
-	SubscribeLocationConsumer(*SubscribeLocationConsumerRequest, grpc.ServerStreamingServer[LocationConsumerEvent]) error
-	mustEmbedUnimplementedLocationConsumerServiceServer()
-}
-
-// UnimplementedLocationConsumerServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedLocationConsumerServiceServer struct{}
-
-func (UnimplementedLocationConsumerServiceServer) SubscribeLocationConsumer(*SubscribeLocationConsumerRequest, grpc.ServerStreamingServer[LocationConsumerEvent]) error {
-	return status.Error(codes.Unimplemented, "method SubscribeLocationConsumer not implemented")
-}
-func (UnimplementedLocationConsumerServiceServer) mustEmbedUnimplementedLocationConsumerServiceServer() {
-}
-func (UnimplementedLocationConsumerServiceServer) testEmbeddedByValue() {}
-
-// UnsafeLocationConsumerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to LocationConsumerServiceServer will
-// result in compilation errors.
-type UnsafeLocationConsumerServiceServer interface {
-	mustEmbedUnimplementedLocationConsumerServiceServer()
-}
-
-func RegisterLocationConsumerServiceServer(s grpc.ServiceRegistrar, srv LocationConsumerServiceServer) {
-	// If the following call panics, it indicates UnimplementedLocationConsumerServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&LocationConsumerService_ServiceDesc, srv)
-}
-
-func _LocationConsumerService_SubscribeLocationConsumer_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeLocationConsumerRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(LocationConsumerServiceServer).SubscribeLocationConsumer(m, &grpc.GenericServerStream[SubscribeLocationConsumerRequest, LocationConsumerEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type LocationConsumerService_SubscribeLocationConsumerServer = grpc.ServerStreamingServer[LocationConsumerEvent]
-
-// LocationConsumerService_ServiceDesc is the grpc.ServiceDesc for LocationConsumerService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var LocationConsumerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "location.LocationConsumerService",
-	HandlerType: (*LocationConsumerServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "SubscribeLocationConsumer",
-			Handler:       _LocationConsumerService_SubscribeLocationConsumer_Handler,
-			ServerStreams: true,
-		},
-	},
 	Metadata: "proto/location/location.proto",
 }

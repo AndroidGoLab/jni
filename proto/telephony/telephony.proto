@@ -6,45 +6,126 @@ package telephony;
 
 option go_package = "github.com/xaionaro-go/jni/proto/telephony";
 
-message GetNetworkOperatorNameRequest {
+message CanChangeDtmfToneLengthRequest {
 }
 
-message GetNetworkOperatorNameResponse {
-  string result = 1;
-}
-
-message GetNetworkOperatorRequest {
-}
-
-message GetNetworkOperatorResponse {
-  string result = 1;
-}
-
-message GetPhoneTypeRequest {
-}
-
-message GetPhoneTypeResponse {
-  int32 result = 1;
-}
-
-message GetSimStateRequest {
-}
-
-message GetSimStateResponse {
-  int32 result = 1;
-}
-
-message IsNetworkRoamingRequest {
-}
-
-message IsNetworkRoamingResponse {
+message CanChangeDtmfToneLengthResponse {
   bool result = 1;
 }
 
-message GetDataStateRequest {
+message ClearSignalStrengthUpdateRequestRequest {
+  int64 arg0 = 1;
 }
 
-message GetDataStateResponse {
+message ClearSignalStrengthUpdateRequestResponse {
+}
+
+message CreateForPhoneAccountHandleRequest {
+  int64 arg0 = 1;
+}
+
+message CreateForPhoneAccountHandleResponse {
+  int64 result = 1;
+}
+
+message CreateForSubscriptionIdRequest {
+  int32 arg0 = 1;
+}
+
+message CreateForSubscriptionIdResponse {
+  int64 result = 1;
+}
+
+message DoesSwitchMultiSimConfigTriggerRebootRequest {
+}
+
+message DoesSwitchMultiSimConfigTriggerRebootResponse {
+  bool result = 1;
+}
+
+message GetActiveModemCountRequest {
+}
+
+message GetActiveModemCountResponse {
+  int32 result = 1;
+}
+
+message GetAllCellInfoRequest {
+}
+
+message GetAllCellInfoResponse {
+  int64 result = 1;
+}
+
+message GetAllowedNetworkTypesForReasonRequest {
+  int32 arg0 = 1;
+}
+
+message GetAllowedNetworkTypesForReasonResponse {
+  int64 result = 1;
+}
+
+message GetCallComposerStatusRequest {
+}
+
+message GetCallComposerStatusResponse {
+  int32 result = 1;
+}
+
+message GetCallStateRequest {
+}
+
+message GetCallStateResponse {
+  int32 result = 1;
+}
+
+message GetCallStateForSubscriptionRequest {
+}
+
+message GetCallStateForSubscriptionResponse {
+  int32 result = 1;
+}
+
+message GetCardIdForDefaultEuiccRequest {
+}
+
+message GetCardIdForDefaultEuiccResponse {
+  int32 result = 1;
+}
+
+message GetCarrierConfigRequest {
+}
+
+message GetCarrierConfigResponse {
+  int64 result = 1;
+}
+
+message GetCarrierIdFromSimMccMncRequest {
+}
+
+message GetCarrierIdFromSimMccMncResponse {
+  int32 result = 1;
+}
+
+message GetCarrierRestrictionStatusRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message GetCarrierRestrictionStatusResponse {
+}
+
+message GetCellLocationRequest {
+}
+
+message GetCellLocationResponse {
+  int64 result = 1;
+}
+
+message GetDataActivityRequest {
+}
+
+message GetDataActivityResponse {
   int32 result = 1;
 }
 
@@ -55,12 +136,1087 @@ message GetDataNetworkTypeResponse {
   int32 result = 1;
 }
 
-service ManagerService {
-  rpc GetNetworkOperatorName (GetNetworkOperatorNameRequest) returns (GetNetworkOperatorNameResponse);
-  rpc GetNetworkOperator (GetNetworkOperatorRequest) returns (GetNetworkOperatorResponse);
-  rpc GetPhoneType (GetPhoneTypeRequest) returns (GetPhoneTypeResponse);
-  rpc GetSimState (GetSimStateRequest) returns (GetSimStateResponse);
-  rpc IsNetworkRoaming (IsNetworkRoamingRequest) returns (IsNetworkRoamingResponse);
-  rpc GetDataState (GetDataStateRequest) returns (GetDataStateResponse);
+message GetDataStateRequest {
+}
+
+message GetDataStateResponse {
+  int32 result = 1;
+}
+
+message GetDeviceId0Request {
+}
+
+message GetDeviceId0Response {
+  string result = 1;
+}
+
+message GetDeviceId1_1Request {
+  int32 arg0 = 1;
+}
+
+message GetDeviceId1_1Response {
+  string result = 1;
+}
+
+message GetDeviceSoftwareVersionRequest {
+}
+
+message GetDeviceSoftwareVersionResponse {
+  string result = 1;
+}
+
+message GetEquivalentHomePlmnsRequest {
+}
+
+message GetEquivalentHomePlmnsResponse {
+  int64 result = 1;
+}
+
+message GetForbiddenPlmnsRequest {
+}
+
+message GetForbiddenPlmnsResponse {
+  int64 result = 1;
+}
+
+message GetGroupIdLevel1Request {
+}
+
+message GetGroupIdLevel1Response {
+  string result = 1;
+}
+
+message GetIccAuthenticationRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  string arg2 = 3;
+}
+
+message GetIccAuthenticationResponse {
+  string result = 1;
+}
+
+message GetImei0Request {
+}
+
+message GetImei0Response {
+  string result = 1;
+}
+
+message GetImei1_1Request {
+  int32 arg0 = 1;
+}
+
+message GetImei1_1Response {
+  string result = 1;
+}
+
+message GetLine1NumberRequest {
+}
+
+message GetLine1NumberResponse {
+  string result = 1;
+}
+
+message GetManualNetworkSelectionPlmnRequest {
+}
+
+message GetManualNetworkSelectionPlmnResponse {
+  string result = 1;
+}
+
+message GetManufacturerCode0Request {
+}
+
+message GetManufacturerCode0Response {
+  string result = 1;
+}
+
+message GetManufacturerCode1_1Request {
+  int32 arg0 = 1;
+}
+
+message GetManufacturerCode1_1Response {
+  string result = 1;
+}
+
+message GetMeid0Request {
+}
+
+message GetMeid0Response {
+  string result = 1;
+}
+
+message GetMeid1_1Request {
+  int32 arg0 = 1;
+}
+
+message GetMeid1_1Response {
+  string result = 1;
+}
+
+message GetMmsUAProfUrlRequest {
+}
+
+message GetMmsUAProfUrlResponse {
+  string result = 1;
+}
+
+message GetMmsUserAgentRequest {
+}
+
+message GetMmsUserAgentResponse {
+  string result = 1;
+}
+
+message GetNaiRequest {
+}
+
+message GetNaiResponse {
+  string result = 1;
+}
+
+message GetNetworkCountryIso0Request {
+}
+
+message GetNetworkCountryIso0Response {
+  string result = 1;
+}
+
+message GetNetworkCountryIso1_1Request {
+  int32 arg0 = 1;
+}
+
+message GetNetworkCountryIso1_1Response {
+  string result = 1;
+}
+
+message GetNetworkOperatorRequest {
+}
+
+message GetNetworkOperatorResponse {
+  string result = 1;
+}
+
+message GetNetworkOperatorNameRequest {
+}
+
+message GetNetworkOperatorNameResponse {
+  string result = 1;
+}
+
+message GetNetworkSelectionModeRequest {
+}
+
+message GetNetworkSelectionModeResponse {
+  int32 result = 1;
+}
+
+message GetNetworkSlicingConfigurationRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message GetNetworkSlicingConfigurationResponse {
+}
+
+message GetNetworkSpecifierRequest {
+}
+
+message GetNetworkSpecifierResponse {
+  string result = 1;
+}
+
+message GetNetworkTypeRequest {
+}
+
+message GetNetworkTypeResponse {
+  int32 result = 1;
+}
+
+message GetPhoneAccountHandleRequest {
+}
+
+message GetPhoneAccountHandleResponse {
+  int64 result = 1;
+}
+
+message GetPhoneCountRequest {
+}
+
+message GetPhoneCountResponse {
+  int32 result = 1;
+}
+
+message GetPhoneTypeRequest {
+}
+
+message GetPhoneTypeResponse {
+  int32 result = 1;
+}
+
+message GetPreferredOpportunisticDataSubscriptionRequest {
+}
+
+message GetPreferredOpportunisticDataSubscriptionResponse {
+  int32 result = 1;
+}
+
+message GetPrimaryImeiRequest {
+}
+
+message GetPrimaryImeiResponse {
+  string result = 1;
+}
+
+message GetServiceState0Request {
+}
+
+message GetServiceState0Response {
+  int64 result = 1;
+}
+
+message GetServiceState1_1Request {
+  int32 arg0 = 1;
+}
+
+message GetServiceState1_1Response {
+  int64 result = 1;
+}
+
+message GetSignalStrengthRequest {
+}
+
+message GetSignalStrengthResponse {
+  int64 result = 1;
+}
+
+message GetSimCarrierIdRequest {
+}
+
+message GetSimCarrierIdResponse {
+  int32 result = 1;
+}
+
+message GetSimCarrierIdNameRequest {
+}
+
+message GetSimCarrierIdNameResponse {
+  string result = 1;
+}
+
+message GetSimCountryIsoRequest {
+}
+
+message GetSimCountryIsoResponse {
+  string result = 1;
+}
+
+message GetSimOperatorRequest {
+}
+
+message GetSimOperatorResponse {
+  string result = 1;
+}
+
+message GetSimOperatorNameRequest {
+}
+
+message GetSimOperatorNameResponse {
+  string result = 1;
+}
+
+message GetSimSerialNumberRequest {
+}
+
+message GetSimSerialNumberResponse {
+  string result = 1;
+}
+
+message GetSimSpecificCarrierIdRequest {
+}
+
+message GetSimSpecificCarrierIdResponse {
+  int32 result = 1;
+}
+
+message GetSimSpecificCarrierIdNameRequest {
+}
+
+message GetSimSpecificCarrierIdNameResponse {
+  string result = 1;
+}
+
+message GetSimState0Request {
+}
+
+message GetSimState0Response {
+  int32 result = 1;
+}
+
+message GetSimState1_1Request {
+  int32 arg0 = 1;
+}
+
+message GetSimState1_1Response {
+  int32 result = 1;
+}
+
+message GetSubscriberIdRequest {
+}
+
+message GetSubscriberIdResponse {
+  string result = 1;
+}
+
+message GetSubscriptionId0Request {
+}
+
+message GetSubscriptionId0Response {
+  int32 result = 1;
+}
+
+message GetSubscriptionId1_1Request {
+  int64 arg0 = 1;
+}
+
+message GetSubscriptionId1_1Response {
+  int32 result = 1;
+}
+
+message GetSupportedModemCountRequest {
+}
+
+message GetSupportedModemCountResponse {
+  int32 result = 1;
+}
+
+message GetSupportedRadioAccessFamilyRequest {
+}
+
+message GetSupportedRadioAccessFamilyResponse {
+  int64 result = 1;
+}
+
+message GetTypeAllocationCode0Request {
+}
+
+message GetTypeAllocationCode0Response {
+  string result = 1;
+}
+
+message GetTypeAllocationCode1_1Request {
+  int32 arg0 = 1;
+}
+
+message GetTypeAllocationCode1_1Response {
+  string result = 1;
+}
+
+message GetUiccCardsInfoRequest {
+}
+
+message GetUiccCardsInfoResponse {
+  int64 result = 1;
+}
+
+message GetVisualVoicemailPackageNameRequest {
+}
+
+message GetVisualVoicemailPackageNameResponse {
+  string result = 1;
+}
+
+message GetVoiceMailAlphaTagRequest {
+}
+
+message GetVoiceMailAlphaTagResponse {
+  string result = 1;
+}
+
+message GetVoiceMailNumberRequest {
+}
+
+message GetVoiceMailNumberResponse {
+  string result = 1;
+}
+
+message GetVoiceNetworkTypeRequest {
+}
+
+message GetVoiceNetworkTypeResponse {
+  int32 result = 1;
+}
+
+message GetVoicemailRingtoneUriRequest {
+  int64 arg0 = 1;
+}
+
+message GetVoicemailRingtoneUriResponse {
+  int64 result = 1;
+}
+
+message HasCarrierPrivilegesRequest {
+}
+
+message HasCarrierPrivilegesResponse {
+  bool result = 1;
+}
+
+message HasIccCardRequest {
+}
+
+message HasIccCardResponse {
+  bool result = 1;
+}
+
+message IccCloseLogicalChannelRequest {
+  int32 arg0 = 1;
+}
+
+message IccCloseLogicalChannelResponse {
+  bool result = 1;
+}
+
+message IccExchangeSimIORequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+  int32 arg3 = 4;
+  int32 arg4 = 5;
+  string arg5 = 6;
+}
+
+message IccExchangeSimIOResponse {
+  int64 result = 1;
+}
+
+message IccOpenLogicalChannel1Request {
+  string arg0 = 1;
+}
+
+message IccOpenLogicalChannel1Response {
+  int64 result = 1;
+}
+
+message IccOpenLogicalChannel2_1Request {
+  string arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message IccOpenLogicalChannel2_1Response {
+  int64 result = 1;
+}
+
+message IccTransmitApduBasicChannelRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+  int32 arg3 = 4;
+  int32 arg4 = 5;
+  string arg5 = 6;
+}
+
+message IccTransmitApduBasicChannelResponse {
+  string result = 1;
+}
+
+message IccTransmitApduLogicalChannelRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+  int32 arg3 = 4;
+  int32 arg4 = 5;
+  int32 arg5 = 6;
+  string arg6 = 7;
+}
+
+message IccTransmitApduLogicalChannelResponse {
+  string result = 1;
+}
+
+message IsConcurrentVoiceAndDataSupportedRequest {
+}
+
+message IsConcurrentVoiceAndDataSupportedResponse {
+  bool result = 1;
+}
+
+message IsDataCapableRequest {
+}
+
+message IsDataCapableResponse {
+  bool result = 1;
+}
+
+message IsDataConnectionAllowedRequest {
+}
+
+message IsDataConnectionAllowedResponse {
+  bool result = 1;
+}
+
+message IsDataEnabledRequest {
+}
+
+message IsDataEnabledResponse {
+  bool result = 1;
+}
+
+message IsDataEnabledForReasonRequest {
+  int32 arg0 = 1;
+}
+
+message IsDataEnabledForReasonResponse {
+  bool result = 1;
+}
+
+message IsDataRoamingEnabledRequest {
+}
+
+message IsDataRoamingEnabledResponse {
+  bool result = 1;
+}
+
+message IsDeviceSmsCapableRequest {
+}
+
+message IsDeviceSmsCapableResponse {
+  bool result = 1;
+}
+
+message IsDeviceVoiceCapableRequest {
+}
+
+message IsDeviceVoiceCapableResponse {
+  bool result = 1;
+}
+
+message IsEmergencyNumberRequest {
+  string arg0 = 1;
+}
+
+message IsEmergencyNumberResponse {
+  bool result = 1;
+}
+
+message IsHearingAidCompatibilitySupportedRequest {
+}
+
+message IsHearingAidCompatibilitySupportedResponse {
+  bool result = 1;
+}
+
+message IsManualNetworkSelectionAllowedRequest {
+}
+
+message IsManualNetworkSelectionAllowedResponse {
+  bool result = 1;
+}
+
+message IsModemEnabledForSlotRequest {
+  int32 arg0 = 1;
+}
+
+message IsModemEnabledForSlotResponse {
+  bool result = 1;
+}
+
+message IsMultiSimSupportedRequest {
+}
+
+message IsMultiSimSupportedResponse {
+  int32 result = 1;
+}
+
+message IsNetworkRoamingRequest {
+}
+
+message IsNetworkRoamingResponse {
+  bool result = 1;
+}
+
+message IsPremiumCapabilityAvailableForPurchaseRequest {
+  int32 arg0 = 1;
+}
+
+message IsPremiumCapabilityAvailableForPurchaseResponse {
+  bool result = 1;
+}
+
+message IsRadioInterfaceCapabilitySupportedRequest {
+  string arg0 = 1;
+}
+
+message IsRadioInterfaceCapabilitySupportedResponse {
+  bool result = 1;
+}
+
+message IsRttSupportedRequest {
+}
+
+message IsRttSupportedResponse {
+  bool result = 1;
+}
+
+message IsSmsCapableRequest {
+}
+
+message IsSmsCapableResponse {
+  bool result = 1;
+}
+
+message IsTtyModeSupportedRequest {
+}
+
+message IsTtyModeSupportedResponse {
+  bool result = 1;
+}
+
+message IsVoiceCapableRequest {
+}
+
+message IsVoiceCapableResponse {
+  bool result = 1;
+}
+
+message IsVoicemailVibrationEnabledRequest {
+  int64 arg0 = 1;
+}
+
+message IsVoicemailVibrationEnabledResponse {
+  bool result = 1;
+}
+
+message IsWorldPhoneRequest {
+}
+
+message IsWorldPhoneResponse {
+  bool result = 1;
+}
+
+message ListenRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message ListenResponse {
+}
+
+message PurchasePremiumCapabilityRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message PurchasePremiumCapabilityResponse {
+}
+
+message RebootModemRequest {
+}
+
+message RebootModemResponse {
+}
+
+message RegisterTelephonyCallback3Request {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message RegisterTelephonyCallback3Response {
+}
+
+message RegisterTelephonyCallback2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RegisterTelephonyCallback2_1Response {
+}
+
+message RequestCellInfoUpdateRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RequestCellInfoUpdateResponse {
+}
+
+message RequestNetworkScan3Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message RequestNetworkScan3Response {
+  int64 result = 1;
+}
+
+message RequestNetworkScan4_1Request {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message RequestNetworkScan4_1Response {
+  int64 result = 1;
+}
+
+message SendDialerSpecialCodeRequest {
+  string arg0 = 1;
+}
+
+message SendDialerSpecialCodeResponse {
+}
+
+message SendEnvelopeWithStatusRequest {
+  string arg0 = 1;
+}
+
+message SendEnvelopeWithStatusResponse {
+  string result = 1;
+}
+
+message SendVisualVoicemailSmsRequest {
+  string arg0 = 1;
+  int32 arg1 = 2;
+  string arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message SendVisualVoicemailSmsResponse {
+}
+
+message SetAllowedNetworkTypesForReasonRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message SetAllowedNetworkTypesForReasonResponse {
+}
+
+message SetCallComposerStatusRequest {
+  int32 arg0 = 1;
+}
+
+message SetCallComposerStatusResponse {
+}
+
+message SetDataEnabledRequest {
+  bool arg0 = 1;
+}
+
+message SetDataEnabledResponse {
+}
+
+message SetDataEnabledForReasonRequest {
+  int32 arg0 = 1;
+  bool arg1 = 2;
+}
+
+message SetDataEnabledForReasonResponse {
+}
+
+message SetForbiddenPlmnsRequest {
+  int64 arg0 = 1;
+}
+
+message SetForbiddenPlmnsResponse {
+  int32 result = 1;
+}
+
+message SetLine1NumberForDisplayRequest {
+  string arg0 = 1;
+  string arg1 = 2;
+}
+
+message SetLine1NumberForDisplayResponse {
+  bool result = 1;
+}
+
+message SetNetworkSelectionModeAutomaticRequest {
+}
+
+message SetNetworkSelectionModeAutomaticResponse {
+}
+
+message SetNetworkSelectionModeManual2Request {
+  string arg0 = 1;
+  bool arg1 = 2;
+}
+
+message SetNetworkSelectionModeManual2Response {
+  bool result = 1;
+}
+
+message SetNetworkSelectionModeManual3_1Request {
+  string arg0 = 1;
+  bool arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message SetNetworkSelectionModeManual3_1Response {
+  bool result = 1;
+}
+
+message SetOperatorBrandOverrideRequest {
+  string arg0 = 1;
+}
+
+message SetOperatorBrandOverrideResponse {
+  bool result = 1;
+}
+
+message SetPreferredNetworkTypeToGlobalRequest {
+}
+
+message SetPreferredNetworkTypeToGlobalResponse {
+  bool result = 1;
+}
+
+message SetPreferredOpportunisticDataSubscriptionRequest {
+  int32 arg0 = 1;
+  bool arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message SetPreferredOpportunisticDataSubscriptionResponse {
+}
+
+message SetSignalStrengthUpdateRequestRequest {
+  int64 arg0 = 1;
+}
+
+message SetSignalStrengthUpdateRequestResponse {
+}
+
+message SetVisualVoicemailSmsFilterSettingsRequest {
+  int64 arg0 = 1;
+}
+
+message SetVisualVoicemailSmsFilterSettingsResponse {
+}
+
+message SetVoiceMailNumberRequest {
+  string arg0 = 1;
+  string arg1 = 2;
+}
+
+message SetVoiceMailNumberResponse {
+  bool result = 1;
+}
+
+message SetVoicemailRingtoneUriRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message SetVoicemailRingtoneUriResponse {
+}
+
+message SetVoicemailVibrationEnabledRequest {
+  int64 arg0 = 1;
+  bool arg1 = 2;
+}
+
+message SetVoicemailVibrationEnabledResponse {
+}
+
+message SwitchMultiSimConfigRequest {
+  int32 arg0 = 1;
+}
+
+message SwitchMultiSimConfigResponse {
+}
+
+message UnregisterTelephonyCallbackRequest {
+  int64 arg0 = 1;
+}
+
+message UnregisterTelephonyCallbackResponse {
+}
+
+message UpdateAvailableNetworksRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message UpdateAvailableNetworksResponse {
+}
+
+message UploadCallComposerPicture5Request {
+  int64 arg0 = 1;
+  string arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+  int64 arg4 = 5;
+}
+
+message UploadCallComposerPicture5Response {
+}
+
+message UploadCallComposerPicture5_1Request {
+  int64 arg0 = 1;
+  string arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+  int64 arg4 = 5;
+}
+
+message UploadCallComposerPicture5_1Response {
+}
+
+message GetMaximumCallComposerPictureSizeRequest {
+}
+
+message GetMaximumCallComposerPictureSizeResponse {
+  int64 result = 1;
+}
+
+service TelephonyManagerService {
+  rpc CanChangeDtmfToneLength (CanChangeDtmfToneLengthRequest) returns (CanChangeDtmfToneLengthResponse);
+  rpc ClearSignalStrengthUpdateRequest (ClearSignalStrengthUpdateRequestRequest) returns (ClearSignalStrengthUpdateRequestResponse);
+  rpc CreateForPhoneAccountHandle (CreateForPhoneAccountHandleRequest) returns (CreateForPhoneAccountHandleResponse);
+  rpc CreateForSubscriptionId (CreateForSubscriptionIdRequest) returns (CreateForSubscriptionIdResponse);
+  rpc DoesSwitchMultiSimConfigTriggerReboot (DoesSwitchMultiSimConfigTriggerRebootRequest) returns (DoesSwitchMultiSimConfigTriggerRebootResponse);
+  rpc GetActiveModemCount (GetActiveModemCountRequest) returns (GetActiveModemCountResponse);
+  rpc GetAllCellInfo (GetAllCellInfoRequest) returns (GetAllCellInfoResponse);
+  rpc GetAllowedNetworkTypesForReason (GetAllowedNetworkTypesForReasonRequest) returns (GetAllowedNetworkTypesForReasonResponse);
+  rpc GetCallComposerStatus (GetCallComposerStatusRequest) returns (GetCallComposerStatusResponse);
+  rpc GetCallState (GetCallStateRequest) returns (GetCallStateResponse);
+  rpc GetCallStateForSubscription (GetCallStateForSubscriptionRequest) returns (GetCallStateForSubscriptionResponse);
+  rpc GetCardIdForDefaultEuicc (GetCardIdForDefaultEuiccRequest) returns (GetCardIdForDefaultEuiccResponse);
+  rpc GetCarrierConfig (GetCarrierConfigRequest) returns (GetCarrierConfigResponse);
+  rpc GetCarrierIdFromSimMccMnc (GetCarrierIdFromSimMccMncRequest) returns (GetCarrierIdFromSimMccMncResponse);
+  rpc GetCarrierRestrictionStatus (GetCarrierRestrictionStatusRequest) returns (GetCarrierRestrictionStatusResponse);
+  rpc GetCellLocation (GetCellLocationRequest) returns (GetCellLocationResponse);
+  rpc GetDataActivity (GetDataActivityRequest) returns (GetDataActivityResponse);
   rpc GetDataNetworkType (GetDataNetworkTypeRequest) returns (GetDataNetworkTypeResponse);
+  rpc GetDataState (GetDataStateRequest) returns (GetDataStateResponse);
+  rpc GetDeviceId0 (GetDeviceId0Request) returns (GetDeviceId0Response);
+  rpc GetDeviceId1_1 (GetDeviceId1_1Request) returns (GetDeviceId1_1Response);
+  rpc GetDeviceSoftwareVersion (GetDeviceSoftwareVersionRequest) returns (GetDeviceSoftwareVersionResponse);
+  rpc GetEquivalentHomePlmns (GetEquivalentHomePlmnsRequest) returns (GetEquivalentHomePlmnsResponse);
+  rpc GetForbiddenPlmns (GetForbiddenPlmnsRequest) returns (GetForbiddenPlmnsResponse);
+  rpc GetGroupIdLevel1 (GetGroupIdLevel1Request) returns (GetGroupIdLevel1Response);
+  rpc GetIccAuthentication (GetIccAuthenticationRequest) returns (GetIccAuthenticationResponse);
+  rpc GetImei0 (GetImei0Request) returns (GetImei0Response);
+  rpc GetImei1_1 (GetImei1_1Request) returns (GetImei1_1Response);
+  rpc GetLine1Number (GetLine1NumberRequest) returns (GetLine1NumberResponse);
+  rpc GetManualNetworkSelectionPlmn (GetManualNetworkSelectionPlmnRequest) returns (GetManualNetworkSelectionPlmnResponse);
+  rpc GetManufacturerCode0 (GetManufacturerCode0Request) returns (GetManufacturerCode0Response);
+  rpc GetManufacturerCode1_1 (GetManufacturerCode1_1Request) returns (GetManufacturerCode1_1Response);
+  rpc GetMeid0 (GetMeid0Request) returns (GetMeid0Response);
+  rpc GetMeid1_1 (GetMeid1_1Request) returns (GetMeid1_1Response);
+  rpc GetMmsUAProfUrl (GetMmsUAProfUrlRequest) returns (GetMmsUAProfUrlResponse);
+  rpc GetMmsUserAgent (GetMmsUserAgentRequest) returns (GetMmsUserAgentResponse);
+  rpc GetNai (GetNaiRequest) returns (GetNaiResponse);
+  rpc GetNetworkCountryIso0 (GetNetworkCountryIso0Request) returns (GetNetworkCountryIso0Response);
+  rpc GetNetworkCountryIso1_1 (GetNetworkCountryIso1_1Request) returns (GetNetworkCountryIso1_1Response);
+  rpc GetNetworkOperator (GetNetworkOperatorRequest) returns (GetNetworkOperatorResponse);
+  rpc GetNetworkOperatorName (GetNetworkOperatorNameRequest) returns (GetNetworkOperatorNameResponse);
+  rpc GetNetworkSelectionMode (GetNetworkSelectionModeRequest) returns (GetNetworkSelectionModeResponse);
+  rpc GetNetworkSlicingConfiguration (GetNetworkSlicingConfigurationRequest) returns (GetNetworkSlicingConfigurationResponse);
+  rpc GetNetworkSpecifier (GetNetworkSpecifierRequest) returns (GetNetworkSpecifierResponse);
+  rpc GetNetworkType (GetNetworkTypeRequest) returns (GetNetworkTypeResponse);
+  rpc GetPhoneAccountHandle (GetPhoneAccountHandleRequest) returns (GetPhoneAccountHandleResponse);
+  rpc GetPhoneCount (GetPhoneCountRequest) returns (GetPhoneCountResponse);
+  rpc GetPhoneType (GetPhoneTypeRequest) returns (GetPhoneTypeResponse);
+  rpc GetPreferredOpportunisticDataSubscription (GetPreferredOpportunisticDataSubscriptionRequest) returns (GetPreferredOpportunisticDataSubscriptionResponse);
+  rpc GetPrimaryImei (GetPrimaryImeiRequest) returns (GetPrimaryImeiResponse);
+  rpc GetServiceState0 (GetServiceState0Request) returns (GetServiceState0Response);
+  rpc GetServiceState1_1 (GetServiceState1_1Request) returns (GetServiceState1_1Response);
+  rpc GetSignalStrength (GetSignalStrengthRequest) returns (GetSignalStrengthResponse);
+  rpc GetSimCarrierId (GetSimCarrierIdRequest) returns (GetSimCarrierIdResponse);
+  rpc GetSimCarrierIdName (GetSimCarrierIdNameRequest) returns (GetSimCarrierIdNameResponse);
+  rpc GetSimCountryIso (GetSimCountryIsoRequest) returns (GetSimCountryIsoResponse);
+  rpc GetSimOperator (GetSimOperatorRequest) returns (GetSimOperatorResponse);
+  rpc GetSimOperatorName (GetSimOperatorNameRequest) returns (GetSimOperatorNameResponse);
+  rpc GetSimSerialNumber (GetSimSerialNumberRequest) returns (GetSimSerialNumberResponse);
+  rpc GetSimSpecificCarrierId (GetSimSpecificCarrierIdRequest) returns (GetSimSpecificCarrierIdResponse);
+  rpc GetSimSpecificCarrierIdName (GetSimSpecificCarrierIdNameRequest) returns (GetSimSpecificCarrierIdNameResponse);
+  rpc GetSimState0 (GetSimState0Request) returns (GetSimState0Response);
+  rpc GetSimState1_1 (GetSimState1_1Request) returns (GetSimState1_1Response);
+  rpc GetSubscriberId (GetSubscriberIdRequest) returns (GetSubscriberIdResponse);
+  rpc GetSubscriptionId0 (GetSubscriptionId0Request) returns (GetSubscriptionId0Response);
+  rpc GetSubscriptionId1_1 (GetSubscriptionId1_1Request) returns (GetSubscriptionId1_1Response);
+  rpc GetSupportedModemCount (GetSupportedModemCountRequest) returns (GetSupportedModemCountResponse);
+  rpc GetSupportedRadioAccessFamily (GetSupportedRadioAccessFamilyRequest) returns (GetSupportedRadioAccessFamilyResponse);
+  rpc GetTypeAllocationCode0 (GetTypeAllocationCode0Request) returns (GetTypeAllocationCode0Response);
+  rpc GetTypeAllocationCode1_1 (GetTypeAllocationCode1_1Request) returns (GetTypeAllocationCode1_1Response);
+  rpc GetUiccCardsInfo (GetUiccCardsInfoRequest) returns (GetUiccCardsInfoResponse);
+  rpc GetVisualVoicemailPackageName (GetVisualVoicemailPackageNameRequest) returns (GetVisualVoicemailPackageNameResponse);
+  rpc GetVoiceMailAlphaTag (GetVoiceMailAlphaTagRequest) returns (GetVoiceMailAlphaTagResponse);
+  rpc GetVoiceMailNumber (GetVoiceMailNumberRequest) returns (GetVoiceMailNumberResponse);
+  rpc GetVoiceNetworkType (GetVoiceNetworkTypeRequest) returns (GetVoiceNetworkTypeResponse);
+  rpc GetVoicemailRingtoneUri (GetVoicemailRingtoneUriRequest) returns (GetVoicemailRingtoneUriResponse);
+  rpc HasCarrierPrivileges (HasCarrierPrivilegesRequest) returns (HasCarrierPrivilegesResponse);
+  rpc HasIccCard (HasIccCardRequest) returns (HasIccCardResponse);
+  rpc IccCloseLogicalChannel (IccCloseLogicalChannelRequest) returns (IccCloseLogicalChannelResponse);
+  rpc IccExchangeSimIO (IccExchangeSimIORequest) returns (IccExchangeSimIOResponse);
+  rpc IccOpenLogicalChannel1 (IccOpenLogicalChannel1Request) returns (IccOpenLogicalChannel1Response);
+  rpc IccOpenLogicalChannel2_1 (IccOpenLogicalChannel2_1Request) returns (IccOpenLogicalChannel2_1Response);
+  rpc IccTransmitApduBasicChannel (IccTransmitApduBasicChannelRequest) returns (IccTransmitApduBasicChannelResponse);
+  rpc IccTransmitApduLogicalChannel (IccTransmitApduLogicalChannelRequest) returns (IccTransmitApduLogicalChannelResponse);
+  rpc IsConcurrentVoiceAndDataSupported (IsConcurrentVoiceAndDataSupportedRequest) returns (IsConcurrentVoiceAndDataSupportedResponse);
+  rpc IsDataCapable (IsDataCapableRequest) returns (IsDataCapableResponse);
+  rpc IsDataConnectionAllowed (IsDataConnectionAllowedRequest) returns (IsDataConnectionAllowedResponse);
+  rpc IsDataEnabled (IsDataEnabledRequest) returns (IsDataEnabledResponse);
+  rpc IsDataEnabledForReason (IsDataEnabledForReasonRequest) returns (IsDataEnabledForReasonResponse);
+  rpc IsDataRoamingEnabled (IsDataRoamingEnabledRequest) returns (IsDataRoamingEnabledResponse);
+  rpc IsDeviceSmsCapable (IsDeviceSmsCapableRequest) returns (IsDeviceSmsCapableResponse);
+  rpc IsDeviceVoiceCapable (IsDeviceVoiceCapableRequest) returns (IsDeviceVoiceCapableResponse);
+  rpc IsEmergencyNumber (IsEmergencyNumberRequest) returns (IsEmergencyNumberResponse);
+  rpc IsHearingAidCompatibilitySupported (IsHearingAidCompatibilitySupportedRequest) returns (IsHearingAidCompatibilitySupportedResponse);
+  rpc IsManualNetworkSelectionAllowed (IsManualNetworkSelectionAllowedRequest) returns (IsManualNetworkSelectionAllowedResponse);
+  rpc IsModemEnabledForSlot (IsModemEnabledForSlotRequest) returns (IsModemEnabledForSlotResponse);
+  rpc IsMultiSimSupported (IsMultiSimSupportedRequest) returns (IsMultiSimSupportedResponse);
+  rpc IsNetworkRoaming (IsNetworkRoamingRequest) returns (IsNetworkRoamingResponse);
+  rpc IsPremiumCapabilityAvailableForPurchase (IsPremiumCapabilityAvailableForPurchaseRequest) returns (IsPremiumCapabilityAvailableForPurchaseResponse);
+  rpc IsRadioInterfaceCapabilitySupported (IsRadioInterfaceCapabilitySupportedRequest) returns (IsRadioInterfaceCapabilitySupportedResponse);
+  rpc IsRttSupported (IsRttSupportedRequest) returns (IsRttSupportedResponse);
+  rpc IsSmsCapable (IsSmsCapableRequest) returns (IsSmsCapableResponse);
+  rpc IsTtyModeSupported (IsTtyModeSupportedRequest) returns (IsTtyModeSupportedResponse);
+  rpc IsVoiceCapable (IsVoiceCapableRequest) returns (IsVoiceCapableResponse);
+  rpc IsVoicemailVibrationEnabled (IsVoicemailVibrationEnabledRequest) returns (IsVoicemailVibrationEnabledResponse);
+  rpc IsWorldPhone (IsWorldPhoneRequest) returns (IsWorldPhoneResponse);
+  rpc Listen (ListenRequest) returns (ListenResponse);
+  rpc PurchasePremiumCapability (PurchasePremiumCapabilityRequest) returns (PurchasePremiumCapabilityResponse);
+  rpc RebootModem (RebootModemRequest) returns (RebootModemResponse);
+  rpc RegisterTelephonyCallback3 (RegisterTelephonyCallback3Request) returns (RegisterTelephonyCallback3Response);
+  rpc RegisterTelephonyCallback2_1 (RegisterTelephonyCallback2_1Request) returns (RegisterTelephonyCallback2_1Response);
+  rpc RequestCellInfoUpdate (RequestCellInfoUpdateRequest) returns (RequestCellInfoUpdateResponse);
+  rpc RequestNetworkScan3 (RequestNetworkScan3Request) returns (RequestNetworkScan3Response);
+  rpc RequestNetworkScan4_1 (RequestNetworkScan4_1Request) returns (RequestNetworkScan4_1Response);
+  rpc SendDialerSpecialCode (SendDialerSpecialCodeRequest) returns (SendDialerSpecialCodeResponse);
+  rpc SendEnvelopeWithStatus (SendEnvelopeWithStatusRequest) returns (SendEnvelopeWithStatusResponse);
+  rpc SendVisualVoicemailSms (SendVisualVoicemailSmsRequest) returns (SendVisualVoicemailSmsResponse);
+  rpc SetAllowedNetworkTypesForReason (SetAllowedNetworkTypesForReasonRequest) returns (SetAllowedNetworkTypesForReasonResponse);
+  rpc SetCallComposerStatus (SetCallComposerStatusRequest) returns (SetCallComposerStatusResponse);
+  rpc SetDataEnabled (SetDataEnabledRequest) returns (SetDataEnabledResponse);
+  rpc SetDataEnabledForReason (SetDataEnabledForReasonRequest) returns (SetDataEnabledForReasonResponse);
+  rpc SetForbiddenPlmns (SetForbiddenPlmnsRequest) returns (SetForbiddenPlmnsResponse);
+  rpc SetLine1NumberForDisplay (SetLine1NumberForDisplayRequest) returns (SetLine1NumberForDisplayResponse);
+  rpc SetNetworkSelectionModeAutomatic (SetNetworkSelectionModeAutomaticRequest) returns (SetNetworkSelectionModeAutomaticResponse);
+  rpc SetNetworkSelectionModeManual2 (SetNetworkSelectionModeManual2Request) returns (SetNetworkSelectionModeManual2Response);
+  rpc SetNetworkSelectionModeManual3_1 (SetNetworkSelectionModeManual3_1Request) returns (SetNetworkSelectionModeManual3_1Response);
+  rpc SetOperatorBrandOverride (SetOperatorBrandOverrideRequest) returns (SetOperatorBrandOverrideResponse);
+  rpc SetPreferredNetworkTypeToGlobal (SetPreferredNetworkTypeToGlobalRequest) returns (SetPreferredNetworkTypeToGlobalResponse);
+  rpc SetPreferredOpportunisticDataSubscription (SetPreferredOpportunisticDataSubscriptionRequest) returns (SetPreferredOpportunisticDataSubscriptionResponse);
+  rpc SetSignalStrengthUpdateRequest (SetSignalStrengthUpdateRequestRequest) returns (SetSignalStrengthUpdateRequestResponse);
+  rpc SetVisualVoicemailSmsFilterSettings (SetVisualVoicemailSmsFilterSettingsRequest) returns (SetVisualVoicemailSmsFilterSettingsResponse);
+  rpc SetVoiceMailNumber (SetVoiceMailNumberRequest) returns (SetVoiceMailNumberResponse);
+  rpc SetVoicemailRingtoneUri (SetVoicemailRingtoneUriRequest) returns (SetVoicemailRingtoneUriResponse);
+  rpc SetVoicemailVibrationEnabled (SetVoicemailVibrationEnabledRequest) returns (SetVoicemailVibrationEnabledResponse);
+  rpc SwitchMultiSimConfig (SwitchMultiSimConfigRequest) returns (SwitchMultiSimConfigResponse);
+  rpc UnregisterTelephonyCallback (UnregisterTelephonyCallbackRequest) returns (UnregisterTelephonyCallbackResponse);
+  rpc UpdateAvailableNetworks (UpdateAvailableNetworksRequest) returns (UpdateAvailableNetworksResponse);
+  rpc UploadCallComposerPicture5 (UploadCallComposerPicture5Request) returns (UploadCallComposerPicture5Response);
+  rpc UploadCallComposerPicture5_1 (UploadCallComposerPicture5_1Request) returns (UploadCallComposerPicture5_1Response);
+  rpc GetMaximumCallComposerPictureSize (GetMaximumCallComposerPictureSizeRequest) returns (GetMaximumCallComposerPictureSizeResponse);
 }

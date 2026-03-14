@@ -13,20 +13,20 @@ var printCmd = &cobra.Command{
 	Short: "print service operations",
 }
 
-var printManagerCmd = &cobra.Command{
-	Use:   "manager",
-	Short: "ManagerService operations",
+var printPrintManagerCmd = &cobra.Command{
+	Use:   "print-manager",
+	Short: "PrintManagerService operations",
 }
 
-var printManagerGetPrintJobsRawCmd = &cobra.Command{
-	Use:   "get-print-jobs-raw",
-	Short: "GetPrintJobsRaw RPC",
+var printPrintManagerGetPrintJobsCmd = &cobra.Command{
+	Use:   "get-print-jobs",
+	Short: "GetPrintJobs RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.GetPrintJobsRawRequest{}
-		resp, err := client.GetPrintJobsRaw(ctx, req)
+		client := pb.NewPrintManagerServiceClient(grpcConn)
+		req := &pb.GetPrintJobsRequest{}
+		resp, err := client.GetPrintJobs(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -34,24 +34,43 @@ var printManagerGetPrintJobsRawCmd = &cobra.Command{
 	},
 }
 
-var printManagerPrintRawCmd = &cobra.Command{
-	Use:   "print-raw",
-	Short: "PrintRaw RPC",
+var printPrintManagerIsPrintServiceEnabledCmd = &cobra.Command{
+	Use:   "is-print-service-enabled",
+	Short: "IsPrintServiceEnabled RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.PrintRawRequest{}
-		if v, err := cmd.Flags().GetString("job-name"); err == nil {
-			req.JobName = v
+		client := pb.NewPrintManagerServiceClient(grpcConn)
+		req := &pb.IsPrintServiceEnabledRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("adapter"); err == nil {
-			req.Adapter = v
+		resp, err := client.IsPrintServiceEnabled(ctx, req)
+		if err != nil {
+			return err
 		}
-		if v, err := cmd.Flags().GetInt64("attributes"); err == nil {
-			req.Attributes = v
+		return printProtoMessage(resp)
+	},
+}
+
+var printPrintManagerPrintCmd = &cobra.Command{
+	Use:   "print",
+	Short: "Print RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewPrintManagerServiceClient(grpcConn)
+		req := &pb.PrintRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		resp, err := client.PrintRaw(ctx, req)
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.Print(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -60,11 +79,13 @@ var printManagerPrintRawCmd = &cobra.Command{
 }
 
 func init() {
-	printManagerCmd.AddCommand(printManagerGetPrintJobsRawCmd)
-	printManagerPrintRawCmd.Flags().String("job-name", "", "job-name (string)")
-	printManagerPrintRawCmd.Flags().Int64("adapter", 0, "adapter (int64)")
-	printManagerPrintRawCmd.Flags().Int64("attributes", 0, "attributes (int64)")
-	printManagerCmd.AddCommand(printManagerPrintRawCmd)
-	printCmd.AddCommand(printManagerCmd)
+	printPrintManagerCmd.AddCommand(printPrintManagerGetPrintJobsCmd)
+	printPrintManagerIsPrintServiceEnabledCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	printPrintManagerCmd.AddCommand(printPrintManagerIsPrintServiceEnabledCmd)
+	printPrintManagerPrintCmd.Flags().String("arg0", "", "arg0 (string)")
+	printPrintManagerPrintCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	printPrintManagerPrintCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	printPrintManagerCmd.AddCommand(printPrintManagerPrintCmd)
+	printCmd.AddCommand(printPrintManagerCmd)
 	rootCmd.AddCommand(printCmd)
 }

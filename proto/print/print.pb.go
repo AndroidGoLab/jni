@@ -23,27 +23,26 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type PrintJob struct {
+type GetPrintJobsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Info          *PrintJobInfo          `protobuf:"bytes,1,opt,name=info,proto3" json:"info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PrintJob) Reset() {
-	*x = PrintJob{}
+func (x *GetPrintJobsRequest) Reset() {
+	*x = GetPrintJobsRequest{}
 	mi := &file_proto_print_print_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PrintJob) String() string {
+func (x *GetPrintJobsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrintJob) ProtoMessage() {}
+func (*GetPrintJobsRequest) ProtoMessage() {}
 
-func (x *PrintJob) ProtoReflect() protoreflect.Message {
+func (x *GetPrintJobsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_print_print_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -55,128 +54,33 @@ func (x *PrintJob) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrintJob.ProtoReflect.Descriptor instead.
-func (*PrintJob) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetPrintJobsRequest.ProtoReflect.Descriptor instead.
+func (*GetPrintJobsRequest) Descriptor() ([]byte, []int) {
 	return file_proto_print_print_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *PrintJob) GetInfo() *PrintJobInfo {
-	if x != nil {
-		return x.Info
-	}
-	return nil
-}
-
-type PrintJobInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Label         string                 `protobuf:"bytes,1,opt,name=label,proto3" json:"label,omitempty"`
-	State         int32                  `protobuf:"varint,2,opt,name=state,proto3" json:"state,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *PrintJobInfo) Reset() {
-	*x = PrintJobInfo{}
-	mi := &file_proto_print_print_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PrintJobInfo) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PrintJobInfo) ProtoMessage() {}
-
-func (x *PrintJobInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_print_print_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PrintJobInfo.ProtoReflect.Descriptor instead.
-func (*PrintJobInfo) Descriptor() ([]byte, []int) {
-	return file_proto_print_print_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *PrintJobInfo) GetLabel() string {
-	if x != nil {
-		return x.Label
-	}
-	return ""
-}
-
-func (x *PrintJobInfo) GetState() int32 {
-	if x != nil {
-		return x.State
-	}
-	return 0
-}
-
-type GetPrintJobsRawRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetPrintJobsRawRequest) Reset() {
-	*x = GetPrintJobsRawRequest{}
-	mi := &file_proto_print_print_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetPrintJobsRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetPrintJobsRawRequest) ProtoMessage() {}
-
-func (x *GetPrintJobsRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_print_print_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetPrintJobsRawRequest.ProtoReflect.Descriptor instead.
-func (*GetPrintJobsRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_print_print_proto_rawDescGZIP(), []int{2}
-}
-
-type GetPrintJobsRawResponse struct {
+type GetPrintJobsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetPrintJobsRawResponse) Reset() {
-	*x = GetPrintJobsRawResponse{}
-	mi := &file_proto_print_print_proto_msgTypes[3]
+func (x *GetPrintJobsResponse) Reset() {
+	*x = GetPrintJobsResponse{}
+	mi := &file_proto_print_print_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetPrintJobsRawResponse) String() string {
+func (x *GetPrintJobsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetPrintJobsRawResponse) ProtoMessage() {}
+func (*GetPrintJobsResponse) ProtoMessage() {}
 
-func (x *GetPrintJobsRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_print_print_proto_msgTypes[3]
+func (x *GetPrintJobsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_print_print_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -187,41 +91,129 @@ func (x *GetPrintJobsRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetPrintJobsRawResponse.ProtoReflect.Descriptor instead.
-func (*GetPrintJobsRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_print_print_proto_rawDescGZIP(), []int{3}
+// Deprecated: Use GetPrintJobsResponse.ProtoReflect.Descriptor instead.
+func (*GetPrintJobsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_print_print_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *GetPrintJobsRawResponse) GetResult() int64 {
+func (x *GetPrintJobsResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type PrintRawRequest struct {
+type IsPrintServiceEnabledRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	JobName       string                 `protobuf:"bytes,1,opt,name=job_name,json=jobName,proto3" json:"job_name,omitempty"`
-	Adapter       int64                  `protobuf:"varint,2,opt,name=adapter,proto3" json:"adapter,omitempty"`
-	Attributes    int64                  `protobuf:"varint,3,opt,name=attributes,proto3" json:"attributes,omitempty"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PrintRawRequest) Reset() {
-	*x = PrintRawRequest{}
+func (x *IsPrintServiceEnabledRequest) Reset() {
+	*x = IsPrintServiceEnabledRequest{}
+	mi := &file_proto_print_print_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsPrintServiceEnabledRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsPrintServiceEnabledRequest) ProtoMessage() {}
+
+func (x *IsPrintServiceEnabledRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_print_print_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsPrintServiceEnabledRequest.ProtoReflect.Descriptor instead.
+func (*IsPrintServiceEnabledRequest) Descriptor() ([]byte, []int) {
+	return file_proto_print_print_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *IsPrintServiceEnabledRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type IsPrintServiceEnabledResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsPrintServiceEnabledResponse) Reset() {
+	*x = IsPrintServiceEnabledResponse{}
+	mi := &file_proto_print_print_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsPrintServiceEnabledResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsPrintServiceEnabledResponse) ProtoMessage() {}
+
+func (x *IsPrintServiceEnabledResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_print_print_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsPrintServiceEnabledResponse.ProtoReflect.Descriptor instead.
+func (*IsPrintServiceEnabledResponse) Descriptor() ([]byte, []int) {
+	return file_proto_print_print_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *IsPrintServiceEnabledResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type PrintRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PrintRequest) Reset() {
+	*x = PrintRequest{}
 	mi := &file_proto_print_print_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PrintRawRequest) String() string {
+func (x *PrintRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrintRawRequest) ProtoMessage() {}
+func (*PrintRequest) ProtoMessage() {}
 
-func (x *PrintRawRequest) ProtoReflect() protoreflect.Message {
+func (x *PrintRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_print_print_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -233,53 +225,53 @@ func (x *PrintRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrintRawRequest.ProtoReflect.Descriptor instead.
-func (*PrintRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use PrintRequest.ProtoReflect.Descriptor instead.
+func (*PrintRequest) Descriptor() ([]byte, []int) {
 	return file_proto_print_print_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *PrintRawRequest) GetJobName() string {
+func (x *PrintRequest) GetArg0() string {
 	if x != nil {
-		return x.JobName
+		return x.Arg0
 	}
 	return ""
 }
 
-func (x *PrintRawRequest) GetAdapter() int64 {
+func (x *PrintRequest) GetArg1() int64 {
 	if x != nil {
-		return x.Adapter
+		return x.Arg1
 	}
 	return 0
 }
 
-func (x *PrintRawRequest) GetAttributes() int64 {
+func (x *PrintRequest) GetArg2() int64 {
 	if x != nil {
-		return x.Attributes
+		return x.Arg2
 	}
 	return 0
 }
 
-type PrintRawResponse struct {
+type PrintResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        *PrintJob              `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PrintRawResponse) Reset() {
-	*x = PrintRawResponse{}
+func (x *PrintResponse) Reset() {
+	*x = PrintResponse{}
 	mi := &file_proto_print_print_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PrintRawResponse) String() string {
+func (x *PrintResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PrintRawResponse) ProtoMessage() {}
+func (*PrintResponse) ProtoMessage() {}
 
-func (x *PrintRawResponse) ProtoReflect() protoreflect.Message {
+func (x *PrintResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_print_print_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -291,42 +283,40 @@ func (x *PrintRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrintRawResponse.ProtoReflect.Descriptor instead.
-func (*PrintRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use PrintResponse.ProtoReflect.Descriptor instead.
+func (*PrintResponse) Descriptor() ([]byte, []int) {
 	return file_proto_print_print_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *PrintRawResponse) GetResult() *PrintJob {
+func (x *PrintResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
-	return nil
+	return 0
 }
 
 var File_proto_print_print_proto protoreflect.FileDescriptor
 
 const file_proto_print_print_proto_rawDesc = "" +
 	"\n" +
-	"\x17proto/print/print.proto\x12\x05print\"3\n" +
-	"\bPrintJob\x12'\n" +
-	"\x04info\x18\x01 \x01(\v2\x13.print.PrintJobInfoR\x04info\":\n" +
-	"\fPrintJobInfo\x12\x14\n" +
-	"\x05label\x18\x01 \x01(\tR\x05label\x12\x14\n" +
-	"\x05state\x18\x02 \x01(\x05R\x05state\"\x18\n" +
-	"\x16GetPrintJobsRawRequest\"1\n" +
-	"\x17GetPrintJobsRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"f\n" +
-	"\x0fPrintRawRequest\x12\x19\n" +
-	"\bjob_name\x18\x01 \x01(\tR\ajobName\x12\x18\n" +
-	"\aadapter\x18\x02 \x01(\x03R\aadapter\x12\x1e\n" +
-	"\n" +
-	"attributes\x18\x03 \x01(\x03R\n" +
-	"attributes\";\n" +
-	"\x10PrintRawResponse\x12'\n" +
-	"\x06result\x18\x01 \x01(\v2\x0f.print.PrintJobR\x06result2\x9f\x01\n" +
-	"\x0eManagerService\x12P\n" +
-	"\x0fGetPrintJobsRaw\x12\x1d.print.GetPrintJobsRawRequest\x1a\x1e.print.GetPrintJobsRawResponse\x12;\n" +
-	"\bPrintRaw\x12\x16.print.PrintRawRequest\x1a\x17.print.PrintRawResponseB(Z&github.com/xaionaro-go/jni/proto/printb\x06proto3"
+	"\x17proto/print/print.proto\x12\x05print\"\x15\n" +
+	"\x13GetPrintJobsRequest\".\n" +
+	"\x14GetPrintJobsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"2\n" +
+	"\x1cIsPrintServiceEnabledRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"7\n" +
+	"\x1dIsPrintServiceEnabledResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"J\n" +
+	"\fPrintRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"'\n" +
+	"\rPrintResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result2\xf6\x01\n" +
+	"\x13PrintManagerService\x12G\n" +
+	"\fGetPrintJobs\x12\x1a.print.GetPrintJobsRequest\x1a\x1b.print.GetPrintJobsResponse\x12b\n" +
+	"\x15IsPrintServiceEnabled\x12#.print.IsPrintServiceEnabledRequest\x1a$.print.IsPrintServiceEnabledResponse\x122\n" +
+	"\x05Print\x12\x13.print.PrintRequest\x1a\x14.print.PrintResponseB(Z&github.com/xaionaro-go/jni/proto/printb\x06proto3"
 
 var (
 	file_proto_print_print_proto_rawDescOnce sync.Once
@@ -342,25 +332,25 @@ func file_proto_print_print_proto_rawDescGZIP() []byte {
 
 var file_proto_print_print_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_proto_print_print_proto_goTypes = []any{
-	(*PrintJob)(nil),                // 0: print.PrintJob
-	(*PrintJobInfo)(nil),            // 1: print.PrintJobInfo
-	(*GetPrintJobsRawRequest)(nil),  // 2: print.GetPrintJobsRawRequest
-	(*GetPrintJobsRawResponse)(nil), // 3: print.GetPrintJobsRawResponse
-	(*PrintRawRequest)(nil),         // 4: print.PrintRawRequest
-	(*PrintRawResponse)(nil),        // 5: print.PrintRawResponse
+	(*GetPrintJobsRequest)(nil),           // 0: print.GetPrintJobsRequest
+	(*GetPrintJobsResponse)(nil),          // 1: print.GetPrintJobsResponse
+	(*IsPrintServiceEnabledRequest)(nil),  // 2: print.IsPrintServiceEnabledRequest
+	(*IsPrintServiceEnabledResponse)(nil), // 3: print.IsPrintServiceEnabledResponse
+	(*PrintRequest)(nil),                  // 4: print.PrintRequest
+	(*PrintResponse)(nil),                 // 5: print.PrintResponse
 }
 var file_proto_print_print_proto_depIdxs = []int32{
-	1, // 0: print.PrintJob.info:type_name -> print.PrintJobInfo
-	0, // 1: print.PrintRawResponse.result:type_name -> print.PrintJob
-	2, // 2: print.ManagerService.GetPrintJobsRaw:input_type -> print.GetPrintJobsRawRequest
-	4, // 3: print.ManagerService.PrintRaw:input_type -> print.PrintRawRequest
-	3, // 4: print.ManagerService.GetPrintJobsRaw:output_type -> print.GetPrintJobsRawResponse
-	5, // 5: print.ManagerService.PrintRaw:output_type -> print.PrintRawResponse
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	0, // 0: print.PrintManagerService.GetPrintJobs:input_type -> print.GetPrintJobsRequest
+	2, // 1: print.PrintManagerService.IsPrintServiceEnabled:input_type -> print.IsPrintServiceEnabledRequest
+	4, // 2: print.PrintManagerService.Print:input_type -> print.PrintRequest
+	1, // 3: print.PrintManagerService.GetPrintJobs:output_type -> print.GetPrintJobsResponse
+	3, // 4: print.PrintManagerService.IsPrintServiceEnabled:output_type -> print.IsPrintServiceEnabledResponse
+	5, // 5: print.PrintManagerService.Print:output_type -> print.PrintResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
+	0, // [0:0] is the sub-list for extension type_name
+	0, // [0:0] is the sub-list for extension extendee
+	0, // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_print_print_proto_init() }

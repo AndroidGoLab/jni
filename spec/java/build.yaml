@@ -1,0 +1,155 @@
+package: build
+go_import: github.com/xaionaro-go/jni/os/build
+classes:
+    - java_class: android.os.Build
+      go_type: build
+      static_methods:
+        - java_method: getFingerprintedPartitions
+          go_name: GetFingerprintedPartitions
+          returns: java.util.List<android.os.Build$Partition>
+          error: true
+        - java_method: getMajorSdkVersion
+          go_name: GetMajorSdkVersion
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getMinorSdkVersion
+          go_name: GetMinorSdkVersion
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getRadioVersion
+          go_name: GetRadioVersion
+          returns: String
+          error: true
+        - java_method: getSerial
+          go_name: GetSerial
+          returns: String
+          error: true
+    - java_class: android.os.Build$VERSION
+      go_type: buildVERSION
+constants:
+    - go_name: Board
+      value: '""'
+      go_type: string
+    - go_name: Bootloader
+      value: '""'
+      go_type: string
+    - go_name: Brand
+      value: '""'
+      go_type: string
+    - go_name: CpuAbi
+      value: '""'
+      go_type: string
+    - go_name: CpuAbi2
+      value: '""'
+      go_type: string
+    - go_name: Device
+      value: '""'
+      go_type: string
+    - go_name: Display
+      value: '""'
+      go_type: string
+    - go_name: Fingerprint
+      value: '""'
+      go_type: string
+    - go_name: Hardware
+      value: '""'
+      go_type: string
+    - go_name: Host
+      value: '""'
+      go_type: string
+    - go_name: Id
+      value: '""'
+      go_type: string
+    - go_name: Manufacturer
+      value: '""'
+      go_type: string
+    - go_name: Model
+      value: '""'
+      go_type: string
+    - go_name: OdmSku
+      value: '""'
+      go_type: string
+    - go_name: Product
+      value: '""'
+      go_type: string
+    - go_name: Radio
+      value: '""'
+      go_type: string
+    - go_name: Serial
+      value: '""'
+      go_type: string
+    - go_name: Sku
+      value: '""'
+      go_type: string
+    - go_name: SocManufacturer
+      value: '""'
+      go_type: string
+    - go_name: SocModel
+      value: '""'
+      go_type: string
+    - go_name: Supported32BitAbis
+      value: "0"
+      go_type: int
+    - go_name: Supported64BitAbis
+      value: "0"
+      go_type: int
+    - go_name: SupportedAbis
+      value: "0"
+      go_type: int
+    - go_name: Tags
+      value: '""'
+      go_type: string
+    - go_name: Time
+      value: "0"
+      go_type: int64
+    - go_name: Type
+      value: '""'
+      go_type: string
+    - go_name: Unknown
+      value: '""'
+      go_type: string
+    - go_name: User
+      value: '""'
+      go_type: string
+    - go_name: BaseOs
+      value: '""'
+      go_type: string
+    - go_name: Codename
+      value: '""'
+      go_type: string
+    - go_name: Incremental
+      value: '""'
+      go_type: string
+    - go_name: MediaPerformanceClass
+      value: "0"
+      go_type: int
+    - go_name: PreviewSdkInt
+      value: "0"
+      go_type: int
+    - go_name: Release
+      value: '""'
+      go_type: string
+    - go_name: ReleaseOrCodename
+      value: '""'
+      go_type: string
+    - go_name: ReleaseOrPreviewDisplay
+      value: '""'
+      go_type: string
+    - go_name: Sdk
+      value: '""'
+      go_type: string
+    - go_name: SdkInt
+      value: "0"
+      go_type: int
+    - go_name: SdkIntFull
+      value: "0"
+      go_type: int
+    - go_name: SecurityPatch
+      value: '""'
+      go_type: string

@@ -13,26 +13,23 @@ var inputmethodCmd = &cobra.Command{
 	Short: "inputmethod service operations",
 }
 
-var inputmethodManagerCmd = &cobra.Command{
-	Use:   "manager",
-	Short: "ManagerService operations",
+var inputmethodInputMethodManagerCmd = &cobra.Command{
+	Use:   "input-method-manager",
+	Short: "InputMethodManagerService operations",
 }
 
-var inputmethodManagerShowSoftInputCmd = &cobra.Command{
-	Use:   "show-soft-input",
-	Short: "ShowSoftInput RPC",
+var inputmethodInputMethodManagerAcceptStylusHandwritingDelegation1Cmd = &cobra.Command{
+	Use:   "accept-stylus-handwriting-delegation1",
+	Short: "AcceptStylusHandwritingDelegation1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.ShowSoftInputRequest{}
-		if v, err := cmd.Flags().GetInt64("view"); err == nil {
-			req.View = v
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.AcceptStylusHandwritingDelegation1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt32("flags"); err == nil {
-			req.Flags = v
-		}
-		resp, err := client.ShowSoftInput(ctx, req)
+		resp, err := client.AcceptStylusHandwritingDelegation1(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -40,21 +37,1132 @@ var inputmethodManagerShowSoftInputCmd = &cobra.Command{
 	},
 }
 
-var inputmethodManagerHideSoftInputFromWindowCmd = &cobra.Command{
-	Use:   "hide-soft-input-from-window",
-	Short: "HideSoftInputFromWindow RPC",
+var inputmethodInputMethodManagerAcceptStylusHandwritingDelegation2_1Cmd = &cobra.Command{
+	Use:   "accept-stylus-handwriting-delegation2_1",
+	Short: "AcceptStylusHandwritingDelegation2_1 RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.HideSoftInputFromWindowRequest{}
-		if v, err := cmd.Flags().GetInt64("window-token"); err == nil {
-			req.WindowToken = v
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.AcceptStylusHandwritingDelegation2_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt32("flags"); err == nil {
-			req.Flags = v
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
 		}
-		resp, err := client.HideSoftInputFromWindow(ctx, req)
+		resp, err := client.AcceptStylusHandwritingDelegation2_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerAcceptStylusHandwritingDelegation5_2Cmd = &cobra.Command{
+	Use:   "accept-stylus-handwriting-delegation5_2",
+	Short: "AcceptStylusHandwritingDelegation5_2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.AcceptStylusHandwritingDelegation5_2Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		resp, err := client.AcceptStylusHandwritingDelegation5_2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerAcceptStylusHandwritingDelegation4_3Cmd = &cobra.Command{
+	Use:   "accept-stylus-handwriting-delegation4_3",
+	Short: "AcceptStylusHandwritingDelegation4_3 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.AcceptStylusHandwritingDelegation4_3Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.AcceptStylusHandwritingDelegation4_3(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerDispatchKeyEventFromInputMethodCmd = &cobra.Command{
+	Use:   "dispatch-key-event-from-input-method",
+	Short: "DispatchKeyEventFromInputMethod RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.DispatchKeyEventFromInputMethodRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.DispatchKeyEventFromInputMethod(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerDisplayCompletionsCmd = &cobra.Command{
+	Use:   "display-completions",
+	Short: "DisplayCompletions RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.DisplayCompletionsRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.DisplayCompletions(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerGetCurrentInputMethodInfoCmd = &cobra.Command{
+	Use:   "get-current-input-method-info",
+	Short: "GetCurrentInputMethodInfo RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.GetCurrentInputMethodInfoRequest{}
+		resp, err := client.GetCurrentInputMethodInfo(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerGetCurrentInputMethodSubtypeCmd = &cobra.Command{
+	Use:   "get-current-input-method-subtype",
+	Short: "GetCurrentInputMethodSubtype RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.GetCurrentInputMethodSubtypeRequest{}
+		resp, err := client.GetCurrentInputMethodSubtype(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerGetEnabledInputMethodListCmd = &cobra.Command{
+	Use:   "get-enabled-input-method-list",
+	Short: "GetEnabledInputMethodList RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.GetEnabledInputMethodListRequest{}
+		resp, err := client.GetEnabledInputMethodList(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerGetEnabledInputMethodSubtypeListCmd = &cobra.Command{
+	Use:   "get-enabled-input-method-subtype-list",
+	Short: "GetEnabledInputMethodSubtypeList RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.GetEnabledInputMethodSubtypeListRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetEnabledInputMethodSubtypeList(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerGetInputMethodListCmd = &cobra.Command{
+	Use:   "get-input-method-list",
+	Short: "GetInputMethodList RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.GetInputMethodListRequest{}
+		resp, err := client.GetInputMethodList(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerGetLastInputMethodSubtypeCmd = &cobra.Command{
+	Use:   "get-last-input-method-subtype",
+	Short: "GetLastInputMethodSubtype RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.GetLastInputMethodSubtypeRequest{}
+		resp, err := client.GetLastInputMethodSubtype(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerHideSoftInputFromInputMethodCmd = &cobra.Command{
+	Use:   "hide-soft-input-from-input-method",
+	Short: "HideSoftInputFromInputMethod RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.HideSoftInputFromInputMethodRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.HideSoftInputFromInputMethod(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerHideSoftInputFromWindow2Cmd = &cobra.Command{
+	Use:   "hide-soft-input-from-window2",
+	Short: "HideSoftInputFromWindow2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.HideSoftInputFromWindow2Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.HideSoftInputFromWindow2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerHideSoftInputFromWindow3_1Cmd = &cobra.Command{
+	Use:   "hide-soft-input-from-window3_1",
+	Short: "HideSoftInputFromWindow3_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.HideSoftInputFromWindow3_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.HideSoftInputFromWindow3_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerHideStatusIconCmd = &cobra.Command{
+	Use:   "hide-status-icon",
+	Short: "HideStatusIcon RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.HideStatusIconRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.HideStatusIcon(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerInvalidateInputCmd = &cobra.Command{
+	Use:   "invalidate-input",
+	Short: "InvalidateInput RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.InvalidateInputRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.InvalidateInput(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerIsAcceptingTextCmd = &cobra.Command{
+	Use:   "is-accepting-text",
+	Short: "IsAcceptingText RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.IsAcceptingTextRequest{}
+		resp, err := client.IsAcceptingText(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerIsActive0Cmd = &cobra.Command{
+	Use:   "is-active0",
+	Short: "IsActive0 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.IsActive0Request{}
+		resp, err := client.IsActive0(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerIsActive1_1Cmd = &cobra.Command{
+	Use:   "is-active1_1",
+	Short: "IsActive1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.IsActive1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.IsActive1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerIsConnectionlessStylusHandwritingAvailableCmd = &cobra.Command{
+	Use:   "is-connectionless-stylus-handwriting-available",
+	Short: "IsConnectionlessStylusHandwritingAvailable RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.IsConnectionlessStylusHandwritingAvailableRequest{}
+		resp, err := client.IsConnectionlessStylusHandwritingAvailable(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerIsFullscreenModeCmd = &cobra.Command{
+	Use:   "is-fullscreen-mode",
+	Short: "IsFullscreenMode RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.IsFullscreenModeRequest{}
+		resp, err := client.IsFullscreenMode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerIsInputMethodSuppressingSpellCheckerCmd = &cobra.Command{
+	Use:   "is-input-method-suppressing-spell-checker",
+	Short: "IsInputMethodSuppressingSpellChecker RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.IsInputMethodSuppressingSpellCheckerRequest{}
+		resp, err := client.IsInputMethodSuppressingSpellChecker(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerIsStylusHandwritingAvailableCmd = &cobra.Command{
+	Use:   "is-stylus-handwriting-available",
+	Short: "IsStylusHandwritingAvailable RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.IsStylusHandwritingAvailableRequest{}
+		resp, err := client.IsStylusHandwritingAvailable(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerIsWatchingCursorCmd = &cobra.Command{
+	Use:   "is-watching-cursor",
+	Short: "IsWatchingCursor RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.IsWatchingCursorRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.IsWatchingCursor(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerPrepareStylusHandwritingDelegation1Cmd = &cobra.Command{
+	Use:   "prepare-stylus-handwriting-delegation1",
+	Short: "PrepareStylusHandwritingDelegation1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.PrepareStylusHandwritingDelegation1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.PrepareStylusHandwritingDelegation1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerPrepareStylusHandwritingDelegation2_1Cmd = &cobra.Command{
+	Use:   "prepare-stylus-handwriting-delegation2_1",
+	Short: "PrepareStylusHandwritingDelegation2_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.PrepareStylusHandwritingDelegation2_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PrepareStylusHandwritingDelegation2_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerRestartInputCmd = &cobra.Command{
+	Use:   "restart-input",
+	Short: "RestartInput RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.RestartInputRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RestartInput(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerSendAppPrivateCommandCmd = &cobra.Command{
+	Use:   "send-app-private-command",
+	Short: "SendAppPrivateCommand RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.SendAppPrivateCommandRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.SendAppPrivateCommand(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerSetAdditionalInputMethodSubtypesCmd = &cobra.Command{
+	Use:   "set-additional-input-method-subtypes",
+	Short: "SetAdditionalInputMethodSubtypes RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.SetAdditionalInputMethodSubtypesRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetAdditionalInputMethodSubtypes(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerSetCurrentInputMethodSubtypeCmd = &cobra.Command{
+	Use:   "set-current-input-method-subtype",
+	Short: "SetCurrentInputMethodSubtype RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.SetCurrentInputMethodSubtypeRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetCurrentInputMethodSubtype(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerSetExplicitlyEnabledInputMethodSubtypesCmd = &cobra.Command{
+	Use:   "set-explicitly-enabled-input-method-subtypes",
+	Short: "SetExplicitlyEnabledInputMethodSubtypes RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.SetExplicitlyEnabledInputMethodSubtypesRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetExplicitlyEnabledInputMethodSubtypes(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerSetInputMethodCmd = &cobra.Command{
+	Use:   "set-input-method",
+	Short: "SetInputMethod RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.SetInputMethodRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetInputMethod(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerSetInputMethodAndSubtypeCmd = &cobra.Command{
+	Use:   "set-input-method-and-subtype",
+	Short: "SetInputMethodAndSubtype RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.SetInputMethodAndSubtypeRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.SetInputMethodAndSubtype(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerShouldOfferSwitchingToNextInputMethodCmd = &cobra.Command{
+	Use:   "should-offer-switching-to-next-input-method",
+	Short: "ShouldOfferSwitchingToNextInputMethod RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.ShouldOfferSwitchingToNextInputMethodRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.ShouldOfferSwitchingToNextInputMethod(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerShowInputMethodAndSubtypeEnablerCmd = &cobra.Command{
+	Use:   "show-input-method-and-subtype-enabler",
+	Short: "ShowInputMethodAndSubtypeEnabler RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.ShowInputMethodAndSubtypeEnablerRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.ShowInputMethodAndSubtypeEnabler(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerShowInputMethodPickerCmd = &cobra.Command{
+	Use:   "show-input-method-picker",
+	Short: "ShowInputMethodPicker RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.ShowInputMethodPickerRequest{}
+		resp, err := client.ShowInputMethodPicker(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerShowSoftInput2Cmd = &cobra.Command{
+	Use:   "show-soft-input2",
+	Short: "ShowSoftInput2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.ShowSoftInput2Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.ShowSoftInput2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerShowSoftInput3_1Cmd = &cobra.Command{
+	Use:   "show-soft-input3_1",
+	Short: "ShowSoftInput3_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.ShowSoftInput3_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.ShowSoftInput3_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerShowSoftInputFromInputMethodCmd = &cobra.Command{
+	Use:   "show-soft-input-from-input-method",
+	Short: "ShowSoftInputFromInputMethod RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.ShowSoftInputFromInputMethodRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.ShowSoftInputFromInputMethod(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerShowStatusIconCmd = &cobra.Command{
+	Use:   "show-status-icon",
+	Short: "ShowStatusIcon RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.ShowStatusIconRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.ShowStatusIcon(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerStartConnectionlessStylusHandwritingCmd = &cobra.Command{
+	Use:   "start-connectionless-stylus-handwriting",
+	Short: "StartConnectionlessStylusHandwriting RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.StartConnectionlessStylusHandwritingRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.StartConnectionlessStylusHandwriting(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerStartConnectionlessStylusHandwritingForDelegation5Cmd = &cobra.Command{
+	Use:   "start-connectionless-stylus-handwriting-for-delegation5",
+	Short: "StartConnectionlessStylusHandwritingForDelegation5 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.StartConnectionlessStylusHandwritingForDelegation5Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetString("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		resp, err := client.StartConnectionlessStylusHandwritingForDelegation5(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerStartConnectionlessStylusHandwritingForDelegation4_1Cmd = &cobra.Command{
+	Use:   "start-connectionless-stylus-handwriting-for-delegation4_1",
+	Short: "StartConnectionlessStylusHandwritingForDelegation4_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.StartConnectionlessStylusHandwritingForDelegation4_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.StartConnectionlessStylusHandwritingForDelegation4_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerStartStylusHandwritingCmd = &cobra.Command{
+	Use:   "start-stylus-handwriting",
+	Short: "StartStylusHandwriting RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.StartStylusHandwritingRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.StartStylusHandwriting(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerSwitchToLastInputMethodCmd = &cobra.Command{
+	Use:   "switch-to-last-input-method",
+	Short: "SwitchToLastInputMethod RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.SwitchToLastInputMethodRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SwitchToLastInputMethod(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerSwitchToNextInputMethodCmd = &cobra.Command{
+	Use:   "switch-to-next-input-method",
+	Short: "SwitchToNextInputMethod RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.SwitchToNextInputMethodRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SwitchToNextInputMethod(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerToggleSoftInputCmd = &cobra.Command{
+	Use:   "toggle-soft-input",
+	Short: "ToggleSoftInput RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.ToggleSoftInputRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.ToggleSoftInput(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerToggleSoftInputFromWindowCmd = &cobra.Command{
+	Use:   "toggle-soft-input-from-window",
+	Short: "ToggleSoftInputFromWindow RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.ToggleSoftInputFromWindowRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.ToggleSoftInputFromWindow(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerUpdateCursorCmd = &cobra.Command{
+	Use:   "update-cursor",
+	Short: "UpdateCursor RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.UpdateCursorRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		resp, err := client.UpdateCursor(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerUpdateCursorAnchorInfoCmd = &cobra.Command{
+	Use:   "update-cursor-anchor-info",
+	Short: "UpdateCursorAnchorInfo RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.UpdateCursorAnchorInfoRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.UpdateCursorAnchorInfo(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerUpdateExtractedTextCmd = &cobra.Command{
+	Use:   "update-extracted-text",
+	Short: "UpdateExtractedText RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.UpdateExtractedTextRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.UpdateExtractedText(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerUpdateSelectionCmd = &cobra.Command{
+	Use:   "update-selection",
+	Short: "UpdateSelection RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.UpdateSelectionRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		resp, err := client.UpdateSelection(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var inputmethodInputMethodManagerViewClickedCmd = &cobra.Command{
+	Use:   "view-clicked",
+	Short: "ViewClicked RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewInputMethodManagerServiceClient(grpcConn)
+		req := &pb.ViewClickedRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.ViewClicked(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -63,12 +1171,156 @@ var inputmethodManagerHideSoftInputFromWindowCmd = &cobra.Command{
 }
 
 func init() {
-	inputmethodManagerShowSoftInputCmd.Flags().Int64("view", 0, "view (int64)")
-	inputmethodManagerShowSoftInputCmd.Flags().Int32("flags", 0, "flags (int32)")
-	inputmethodManagerCmd.AddCommand(inputmethodManagerShowSoftInputCmd)
-	inputmethodManagerHideSoftInputFromWindowCmd.Flags().Int64("window-token", 0, "window-token (int64)")
-	inputmethodManagerHideSoftInputFromWindowCmd.Flags().Int32("flags", 0, "flags (int32)")
-	inputmethodManagerCmd.AddCommand(inputmethodManagerHideSoftInputFromWindowCmd)
-	inputmethodCmd.AddCommand(inputmethodManagerCmd)
+	inputmethodInputMethodManagerAcceptStylusHandwritingDelegation1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerAcceptStylusHandwritingDelegation1Cmd)
+	inputmethodInputMethodManagerAcceptStylusHandwritingDelegation2_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerAcceptStylusHandwritingDelegation2_1Cmd.Flags().String("arg1", "", "arg1 (string)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerAcceptStylusHandwritingDelegation2_1Cmd)
+	inputmethodInputMethodManagerAcceptStylusHandwritingDelegation5_2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerAcceptStylusHandwritingDelegation5_2Cmd.Flags().String("arg1", "", "arg1 (string)")
+	inputmethodInputMethodManagerAcceptStylusHandwritingDelegation5_2Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	inputmethodInputMethodManagerAcceptStylusHandwritingDelegation5_2Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	inputmethodInputMethodManagerAcceptStylusHandwritingDelegation5_2Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerAcceptStylusHandwritingDelegation5_2Cmd)
+	inputmethodInputMethodManagerAcceptStylusHandwritingDelegation4_3Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerAcceptStylusHandwritingDelegation4_3Cmd.Flags().String("arg1", "", "arg1 (string)")
+	inputmethodInputMethodManagerAcceptStylusHandwritingDelegation4_3Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	inputmethodInputMethodManagerAcceptStylusHandwritingDelegation4_3Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerAcceptStylusHandwritingDelegation4_3Cmd)
+	inputmethodInputMethodManagerDispatchKeyEventFromInputMethodCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerDispatchKeyEventFromInputMethodCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerDispatchKeyEventFromInputMethodCmd)
+	inputmethodInputMethodManagerDisplayCompletionsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerDisplayCompletionsCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerDisplayCompletionsCmd)
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerGetCurrentInputMethodInfoCmd)
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerGetCurrentInputMethodSubtypeCmd)
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerGetEnabledInputMethodListCmd)
+	inputmethodInputMethodManagerGetEnabledInputMethodSubtypeListCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerGetEnabledInputMethodSubtypeListCmd.Flags().Bool("arg1", false, "arg1 (bool)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerGetEnabledInputMethodSubtypeListCmd)
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerGetInputMethodListCmd)
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerGetLastInputMethodSubtypeCmd)
+	inputmethodInputMethodManagerHideSoftInputFromInputMethodCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerHideSoftInputFromInputMethodCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerHideSoftInputFromInputMethodCmd)
+	inputmethodInputMethodManagerHideSoftInputFromWindow2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerHideSoftInputFromWindow2Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerHideSoftInputFromWindow2Cmd)
+	inputmethodInputMethodManagerHideSoftInputFromWindow3_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerHideSoftInputFromWindow3_1Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	inputmethodInputMethodManagerHideSoftInputFromWindow3_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerHideSoftInputFromWindow3_1Cmd)
+	inputmethodInputMethodManagerHideStatusIconCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerHideStatusIconCmd)
+	inputmethodInputMethodManagerInvalidateInputCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerInvalidateInputCmd)
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerIsAcceptingTextCmd)
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerIsActive0Cmd)
+	inputmethodInputMethodManagerIsActive1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerIsActive1_1Cmd)
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerIsConnectionlessStylusHandwritingAvailableCmd)
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerIsFullscreenModeCmd)
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerIsInputMethodSuppressingSpellCheckerCmd)
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerIsStylusHandwritingAvailableCmd)
+	inputmethodInputMethodManagerIsWatchingCursorCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerIsWatchingCursorCmd)
+	inputmethodInputMethodManagerPrepareStylusHandwritingDelegation1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerPrepareStylusHandwritingDelegation1Cmd)
+	inputmethodInputMethodManagerPrepareStylusHandwritingDelegation2_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerPrepareStylusHandwritingDelegation2_1Cmd.Flags().String("arg1", "", "arg1 (string)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerPrepareStylusHandwritingDelegation2_1Cmd)
+	inputmethodInputMethodManagerRestartInputCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerRestartInputCmd)
+	inputmethodInputMethodManagerSendAppPrivateCommandCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerSendAppPrivateCommandCmd.Flags().String("arg1", "", "arg1 (string)")
+	inputmethodInputMethodManagerSendAppPrivateCommandCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerSendAppPrivateCommandCmd)
+	inputmethodInputMethodManagerSetAdditionalInputMethodSubtypesCmd.Flags().String("arg0", "", "arg0 (string)")
+	inputmethodInputMethodManagerSetAdditionalInputMethodSubtypesCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerSetAdditionalInputMethodSubtypesCmd)
+	inputmethodInputMethodManagerSetCurrentInputMethodSubtypeCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerSetCurrentInputMethodSubtypeCmd)
+	inputmethodInputMethodManagerSetExplicitlyEnabledInputMethodSubtypesCmd.Flags().String("arg0", "", "arg0 (string)")
+	inputmethodInputMethodManagerSetExplicitlyEnabledInputMethodSubtypesCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerSetExplicitlyEnabledInputMethodSubtypesCmd)
+	inputmethodInputMethodManagerSetInputMethodCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerSetInputMethodCmd.Flags().String("arg1", "", "arg1 (string)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerSetInputMethodCmd)
+	inputmethodInputMethodManagerSetInputMethodAndSubtypeCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerSetInputMethodAndSubtypeCmd.Flags().String("arg1", "", "arg1 (string)")
+	inputmethodInputMethodManagerSetInputMethodAndSubtypeCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerSetInputMethodAndSubtypeCmd)
+	inputmethodInputMethodManagerShouldOfferSwitchingToNextInputMethodCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerShouldOfferSwitchingToNextInputMethodCmd)
+	inputmethodInputMethodManagerShowInputMethodAndSubtypeEnablerCmd.Flags().String("arg0", "", "arg0 (string)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerShowInputMethodAndSubtypeEnablerCmd)
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerShowInputMethodPickerCmd)
+	inputmethodInputMethodManagerShowSoftInput2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerShowSoftInput2Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerShowSoftInput2Cmd)
+	inputmethodInputMethodManagerShowSoftInput3_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerShowSoftInput3_1Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	inputmethodInputMethodManagerShowSoftInput3_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerShowSoftInput3_1Cmd)
+	inputmethodInputMethodManagerShowSoftInputFromInputMethodCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerShowSoftInputFromInputMethodCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerShowSoftInputFromInputMethodCmd)
+	inputmethodInputMethodManagerShowStatusIconCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerShowStatusIconCmd.Flags().String("arg1", "", "arg1 (string)")
+	inputmethodInputMethodManagerShowStatusIconCmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerShowStatusIconCmd)
+	inputmethodInputMethodManagerStartConnectionlessStylusHandwritingCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerStartConnectionlessStylusHandwritingCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	inputmethodInputMethodManagerStartConnectionlessStylusHandwritingCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	inputmethodInputMethodManagerStartConnectionlessStylusHandwritingCmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerStartConnectionlessStylusHandwritingCmd)
+	inputmethodInputMethodManagerStartConnectionlessStylusHandwritingForDelegation5Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerStartConnectionlessStylusHandwritingForDelegation5Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	inputmethodInputMethodManagerStartConnectionlessStylusHandwritingForDelegation5Cmd.Flags().String("arg2", "", "arg2 (string)")
+	inputmethodInputMethodManagerStartConnectionlessStylusHandwritingForDelegation5Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	inputmethodInputMethodManagerStartConnectionlessStylusHandwritingForDelegation5Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerStartConnectionlessStylusHandwritingForDelegation5Cmd)
+	inputmethodInputMethodManagerStartConnectionlessStylusHandwritingForDelegation4_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerStartConnectionlessStylusHandwritingForDelegation4_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	inputmethodInputMethodManagerStartConnectionlessStylusHandwritingForDelegation4_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	inputmethodInputMethodManagerStartConnectionlessStylusHandwritingForDelegation4_1Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerStartConnectionlessStylusHandwritingForDelegation4_1Cmd)
+	inputmethodInputMethodManagerStartStylusHandwritingCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerStartStylusHandwritingCmd)
+	inputmethodInputMethodManagerSwitchToLastInputMethodCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerSwitchToLastInputMethodCmd)
+	inputmethodInputMethodManagerSwitchToNextInputMethodCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerSwitchToNextInputMethodCmd.Flags().Bool("arg1", false, "arg1 (bool)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerSwitchToNextInputMethodCmd)
+	inputmethodInputMethodManagerToggleSoftInputCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	inputmethodInputMethodManagerToggleSoftInputCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerToggleSoftInputCmd)
+	inputmethodInputMethodManagerToggleSoftInputFromWindowCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerToggleSoftInputFromWindowCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	inputmethodInputMethodManagerToggleSoftInputFromWindowCmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerToggleSoftInputFromWindowCmd)
+	inputmethodInputMethodManagerUpdateCursorCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerUpdateCursorCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	inputmethodInputMethodManagerUpdateCursorCmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	inputmethodInputMethodManagerUpdateCursorCmd.Flags().Int32("arg3", 0, "arg3 (int32)")
+	inputmethodInputMethodManagerUpdateCursorCmd.Flags().Int32("arg4", 0, "arg4 (int32)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerUpdateCursorCmd)
+	inputmethodInputMethodManagerUpdateCursorAnchorInfoCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerUpdateCursorAnchorInfoCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerUpdateCursorAnchorInfoCmd)
+	inputmethodInputMethodManagerUpdateExtractedTextCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerUpdateExtractedTextCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	inputmethodInputMethodManagerUpdateExtractedTextCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerUpdateExtractedTextCmd)
+	inputmethodInputMethodManagerUpdateSelectionCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerUpdateSelectionCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	inputmethodInputMethodManagerUpdateSelectionCmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	inputmethodInputMethodManagerUpdateSelectionCmd.Flags().Int32("arg3", 0, "arg3 (int32)")
+	inputmethodInputMethodManagerUpdateSelectionCmd.Flags().Int32("arg4", 0, "arg4 (int32)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerUpdateSelectionCmd)
+	inputmethodInputMethodManagerViewClickedCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	inputmethodInputMethodManagerCmd.AddCommand(inputmethodInputMethodManagerViewClickedCmd)
+	inputmethodCmd.AddCommand(inputmethodInputMethodManagerCmd)
 	rootCmd.AddCommand(inputmethodCmd)
 }

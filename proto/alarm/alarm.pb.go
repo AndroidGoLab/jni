@@ -23,802 +23,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type AlarmClockInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TriggerTime   int64                  `protobuf:"varint,1,opt,name=trigger_time,json=triggerTime,proto3" json:"trigger_time,omitempty"`
-	ShowIntent    int64                  `protobuf:"varint,2,opt,name=show_intent,json=showIntent,proto3" json:"show_intent,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AlarmClockInfo) Reset() {
-	*x = AlarmClockInfo{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AlarmClockInfo) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AlarmClockInfo) ProtoMessage() {}
-
-func (x *AlarmClockInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AlarmClockInfo.ProtoReflect.Descriptor instead.
-func (*AlarmClockInfo) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *AlarmClockInfo) GetTriggerTime() int64 {
-	if x != nil {
-		return x.TriggerTime
-	}
-	return 0
-}
-
-func (x *AlarmClockInfo) GetShowIntent() int64 {
-	if x != nil {
-		return x.ShowIntent
-	}
-	return 0
-}
-
-type SetRawRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Type_           int32                  `protobuf:"varint,1,opt,name=type_,json=type,proto3" json:"type_,omitempty"`
-	TriggerAtMillis int64                  `protobuf:"varint,2,opt,name=trigger_at_millis,json=triggerAtMillis,proto3" json:"trigger_at_millis,omitempty"`
-	Operation       int64                  `protobuf:"varint,3,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *SetRawRequest) Reset() {
-	*x = SetRawRequest{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetRawRequest) ProtoMessage() {}
-
-func (x *SetRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetRawRequest.ProtoReflect.Descriptor instead.
-func (*SetRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *SetRawRequest) GetType_() int32 {
-	if x != nil {
-		return x.Type_
-	}
-	return 0
-}
-
-func (x *SetRawRequest) GetTriggerAtMillis() int64 {
-	if x != nil {
-		return x.TriggerAtMillis
-	}
-	return 0
-}
-
-func (x *SetRawRequest) GetOperation() int64 {
-	if x != nil {
-		return x.Operation
-	}
-	return 0
-}
-
-type SetRawResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetRawResponse) Reset() {
-	*x = SetRawResponse{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetRawResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetRawResponse) ProtoMessage() {}
-
-func (x *SetRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetRawResponse.ProtoReflect.Descriptor instead.
-func (*SetRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{2}
-}
-
-type SetExactRawRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Type_           int32                  `protobuf:"varint,1,opt,name=type_,json=type,proto3" json:"type_,omitempty"`
-	TriggerAtMillis int64                  `protobuf:"varint,2,opt,name=trigger_at_millis,json=triggerAtMillis,proto3" json:"trigger_at_millis,omitempty"`
-	Operation       int64                  `protobuf:"varint,3,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *SetExactRawRequest) Reset() {
-	*x = SetExactRawRequest{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetExactRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetExactRawRequest) ProtoMessage() {}
-
-func (x *SetExactRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetExactRawRequest.ProtoReflect.Descriptor instead.
-func (*SetExactRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *SetExactRawRequest) GetType_() int32 {
-	if x != nil {
-		return x.Type_
-	}
-	return 0
-}
-
-func (x *SetExactRawRequest) GetTriggerAtMillis() int64 {
-	if x != nil {
-		return x.TriggerAtMillis
-	}
-	return 0
-}
-
-func (x *SetExactRawRequest) GetOperation() int64 {
-	if x != nil {
-		return x.Operation
-	}
-	return 0
-}
-
-type SetExactRawResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetExactRawResponse) Reset() {
-	*x = SetExactRawResponse{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetExactRawResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetExactRawResponse) ProtoMessage() {}
-
-func (x *SetExactRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetExactRawResponse.ProtoReflect.Descriptor instead.
-func (*SetExactRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{4}
-}
-
-type SetExactAndAllowWhileIdleRawRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Type_           int32                  `protobuf:"varint,1,opt,name=type_,json=type,proto3" json:"type_,omitempty"`
-	TriggerAtMillis int64                  `protobuf:"varint,2,opt,name=trigger_at_millis,json=triggerAtMillis,proto3" json:"trigger_at_millis,omitempty"`
-	Operation       int64                  `protobuf:"varint,3,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *SetExactAndAllowWhileIdleRawRequest) Reset() {
-	*x = SetExactAndAllowWhileIdleRawRequest{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetExactAndAllowWhileIdleRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetExactAndAllowWhileIdleRawRequest) ProtoMessage() {}
-
-func (x *SetExactAndAllowWhileIdleRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetExactAndAllowWhileIdleRawRequest.ProtoReflect.Descriptor instead.
-func (*SetExactAndAllowWhileIdleRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *SetExactAndAllowWhileIdleRawRequest) GetType_() int32 {
-	if x != nil {
-		return x.Type_
-	}
-	return 0
-}
-
-func (x *SetExactAndAllowWhileIdleRawRequest) GetTriggerAtMillis() int64 {
-	if x != nil {
-		return x.TriggerAtMillis
-	}
-	return 0
-}
-
-func (x *SetExactAndAllowWhileIdleRawRequest) GetOperation() int64 {
-	if x != nil {
-		return x.Operation
-	}
-	return 0
-}
-
-type SetExactAndAllowWhileIdleRawResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetExactAndAllowWhileIdleRawResponse) Reset() {
-	*x = SetExactAndAllowWhileIdleRawResponse{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetExactAndAllowWhileIdleRawResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetExactAndAllowWhileIdleRawResponse) ProtoMessage() {}
-
-func (x *SetExactAndAllowWhileIdleRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetExactAndAllowWhileIdleRawResponse.ProtoReflect.Descriptor instead.
-func (*SetExactAndAllowWhileIdleRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{6}
-}
-
-type SetRepeatingRawRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Type_           int32                  `protobuf:"varint,1,opt,name=type_,json=type,proto3" json:"type_,omitempty"`
-	TriggerAtMillis int64                  `protobuf:"varint,2,opt,name=trigger_at_millis,json=triggerAtMillis,proto3" json:"trigger_at_millis,omitempty"`
-	IntervalMillis  int64                  `protobuf:"varint,3,opt,name=interval_millis,json=intervalMillis,proto3" json:"interval_millis,omitempty"`
-	Operation       int64                  `protobuf:"varint,4,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *SetRepeatingRawRequest) Reset() {
-	*x = SetRepeatingRawRequest{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetRepeatingRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetRepeatingRawRequest) ProtoMessage() {}
-
-func (x *SetRepeatingRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetRepeatingRawRequest.ProtoReflect.Descriptor instead.
-func (*SetRepeatingRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *SetRepeatingRawRequest) GetType_() int32 {
-	if x != nil {
-		return x.Type_
-	}
-	return 0
-}
-
-func (x *SetRepeatingRawRequest) GetTriggerAtMillis() int64 {
-	if x != nil {
-		return x.TriggerAtMillis
-	}
-	return 0
-}
-
-func (x *SetRepeatingRawRequest) GetIntervalMillis() int64 {
-	if x != nil {
-		return x.IntervalMillis
-	}
-	return 0
-}
-
-func (x *SetRepeatingRawRequest) GetOperation() int64 {
-	if x != nil {
-		return x.Operation
-	}
-	return 0
-}
-
-type SetRepeatingRawResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetRepeatingRawResponse) Reset() {
-	*x = SetRepeatingRawResponse{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetRepeatingRawResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetRepeatingRawResponse) ProtoMessage() {}
-
-func (x *SetRepeatingRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetRepeatingRawResponse.ProtoReflect.Descriptor instead.
-func (*SetRepeatingRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{8}
-}
-
-type SetWindowRawRequest struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Type_              int32                  `protobuf:"varint,1,opt,name=type_,json=type,proto3" json:"type_,omitempty"`
-	WindowStartMillis  int64                  `protobuf:"varint,2,opt,name=window_start_millis,json=windowStartMillis,proto3" json:"window_start_millis,omitempty"`
-	WindowLengthMillis int64                  `protobuf:"varint,3,opt,name=window_length_millis,json=windowLengthMillis,proto3" json:"window_length_millis,omitempty"`
-	Operation          int64                  `protobuf:"varint,4,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
-
-func (x *SetWindowRawRequest) Reset() {
-	*x = SetWindowRawRequest{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetWindowRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetWindowRawRequest) ProtoMessage() {}
-
-func (x *SetWindowRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetWindowRawRequest.ProtoReflect.Descriptor instead.
-func (*SetWindowRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *SetWindowRawRequest) GetType_() int32 {
-	if x != nil {
-		return x.Type_
-	}
-	return 0
-}
-
-func (x *SetWindowRawRequest) GetWindowStartMillis() int64 {
-	if x != nil {
-		return x.WindowStartMillis
-	}
-	return 0
-}
-
-func (x *SetWindowRawRequest) GetWindowLengthMillis() int64 {
-	if x != nil {
-		return x.WindowLengthMillis
-	}
-	return 0
-}
-
-func (x *SetWindowRawRequest) GetOperation() int64 {
-	if x != nil {
-		return x.Operation
-	}
-	return 0
-}
-
-type SetWindowRawResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetWindowRawResponse) Reset() {
-	*x = SetWindowRawResponse{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetWindowRawResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetWindowRawResponse) ProtoMessage() {}
-
-func (x *SetWindowRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetWindowRawResponse.ProtoReflect.Descriptor instead.
-func (*SetWindowRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{10}
-}
-
-type SetAlarmClockRawRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Info          int64                  `protobuf:"varint,1,opt,name=info,proto3" json:"info,omitempty"`
-	Operation     int64                  `protobuf:"varint,2,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetAlarmClockRawRequest) Reset() {
-	*x = SetAlarmClockRawRequest{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetAlarmClockRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetAlarmClockRawRequest) ProtoMessage() {}
-
-func (x *SetAlarmClockRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetAlarmClockRawRequest.ProtoReflect.Descriptor instead.
-func (*SetAlarmClockRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *SetAlarmClockRawRequest) GetInfo() int64 {
-	if x != nil {
-		return x.Info
-	}
-	return 0
-}
-
-func (x *SetAlarmClockRawRequest) GetOperation() int64 {
-	if x != nil {
-		return x.Operation
-	}
-	return 0
-}
-
-type SetAlarmClockRawResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetAlarmClockRawResponse) Reset() {
-	*x = SetAlarmClockRawResponse{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetAlarmClockRawResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetAlarmClockRawResponse) ProtoMessage() {}
-
-func (x *SetAlarmClockRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetAlarmClockRawResponse.ProtoReflect.Descriptor instead.
-func (*SetAlarmClockRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{12}
-}
-
-type CancelRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Operation     int64                  `protobuf:"varint,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CancelRequest) Reset() {
-	*x = CancelRequest{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CancelRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CancelRequest) ProtoMessage() {}
-
-func (x *CancelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CancelRequest.ProtoReflect.Descriptor instead.
-func (*CancelRequest) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *CancelRequest) GetOperation() int64 {
-	if x != nil {
-		return x.Operation
-	}
-	return 0
-}
-
-type CancelResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CancelResponse) Reset() {
-	*x = CancelResponse{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CancelResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CancelResponse) ProtoMessage() {}
-
-func (x *CancelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CancelResponse.ProtoReflect.Descriptor instead.
-func (*CancelResponse) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{14}
-}
-
-type GetNextAlarmClockRawRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetNextAlarmClockRawRequest) Reset() {
-	*x = GetNextAlarmClockRawRequest{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetNextAlarmClockRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetNextAlarmClockRawRequest) ProtoMessage() {}
-
-func (x *GetNextAlarmClockRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetNextAlarmClockRawRequest.ProtoReflect.Descriptor instead.
-func (*GetNextAlarmClockRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{15}
-}
-
-type GetNextAlarmClockRawResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        *AlarmClockInfo        `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetNextAlarmClockRawResponse) Reset() {
-	*x = GetNextAlarmClockRawResponse{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetNextAlarmClockRawResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetNextAlarmClockRawResponse) ProtoMessage() {}
-
-func (x *GetNextAlarmClockRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetNextAlarmClockRawResponse.ProtoReflect.Descriptor instead.
-func (*GetNextAlarmClockRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{16}
-}
-
-func (x *GetNextAlarmClockRawResponse) GetResult() *AlarmClockInfo {
-	if x != nil {
-		return x.Result
-	}
-	return nil
-}
-
 type CanScheduleExactAlarmsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -827,7 +31,7 @@ type CanScheduleExactAlarmsRequest struct {
 
 func (x *CanScheduleExactAlarmsRequest) Reset() {
 	*x = CanScheduleExactAlarmsRequest{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[17]
+	mi := &file_proto_alarm_alarm_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -839,7 +43,7 @@ func (x *CanScheduleExactAlarmsRequest) String() string {
 func (*CanScheduleExactAlarmsRequest) ProtoMessage() {}
 
 func (x *CanScheduleExactAlarmsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[17]
+	mi := &file_proto_alarm_alarm_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -852,7 +56,7 @@ func (x *CanScheduleExactAlarmsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CanScheduleExactAlarmsRequest.ProtoReflect.Descriptor instead.
 func (*CanScheduleExactAlarmsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{17}
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{0}
 }
 
 type CanScheduleExactAlarmsResponse struct {
@@ -864,7 +68,7 @@ type CanScheduleExactAlarmsResponse struct {
 
 func (x *CanScheduleExactAlarmsResponse) Reset() {
 	*x = CanScheduleExactAlarmsResponse{}
-	mi := &file_proto_alarm_alarm_proto_msgTypes[18]
+	mi := &file_proto_alarm_alarm_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -876,7 +80,7 @@ func (x *CanScheduleExactAlarmsResponse) String() string {
 func (*CanScheduleExactAlarmsResponse) ProtoMessage() {}
 
 func (x *CanScheduleExactAlarmsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_alarm_alarm_proto_msgTypes[18]
+	mi := &file_proto_alarm_alarm_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -889,7 +93,7 @@ func (x *CanScheduleExactAlarmsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CanScheduleExactAlarmsResponse.ProtoReflect.Descriptor instead.
 func (*CanScheduleExactAlarmsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{18}
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CanScheduleExactAlarmsResponse) GetResult() bool {
@@ -899,65 +103,1822 @@ func (x *CanScheduleExactAlarmsResponse) GetResult() bool {
 	return false
 }
 
+type Cancel1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Cancel1Request) Reset() {
+	*x = Cancel1Request{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Cancel1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Cancel1Request) ProtoMessage() {}
+
+func (x *Cancel1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Cancel1Request.ProtoReflect.Descriptor instead.
+func (*Cancel1Request) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Cancel1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type Cancel1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Cancel1Response) Reset() {
+	*x = Cancel1Response{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Cancel1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Cancel1Response) ProtoMessage() {}
+
+func (x *Cancel1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Cancel1Response.ProtoReflect.Descriptor instead.
+func (*Cancel1Response) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{3}
+}
+
+type Cancel1_1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Cancel1_1Request) Reset() {
+	*x = Cancel1_1Request{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Cancel1_1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Cancel1_1Request) ProtoMessage() {}
+
+func (x *Cancel1_1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Cancel1_1Request.ProtoReflect.Descriptor instead.
+func (*Cancel1_1Request) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *Cancel1_1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type Cancel1_1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Cancel1_1Response) Reset() {
+	*x = Cancel1_1Response{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Cancel1_1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Cancel1_1Response) ProtoMessage() {}
+
+func (x *Cancel1_1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Cancel1_1Response.ProtoReflect.Descriptor instead.
+func (*Cancel1_1Response) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{5}
+}
+
+type CancelAllRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CancelAllRequest) Reset() {
+	*x = CancelAllRequest{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelAllRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelAllRequest) ProtoMessage() {}
+
+func (x *CancelAllRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelAllRequest.ProtoReflect.Descriptor instead.
+func (*CancelAllRequest) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{6}
+}
+
+type CancelAllResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CancelAllResponse) Reset() {
+	*x = CancelAllResponse{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelAllResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelAllResponse) ProtoMessage() {}
+
+func (x *CancelAllResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelAllResponse.ProtoReflect.Descriptor instead.
+func (*CancelAllResponse) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{7}
+}
+
+type GetNextAlarmClockRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNextAlarmClockRequest) Reset() {
+	*x = GetNextAlarmClockRequest{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNextAlarmClockRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNextAlarmClockRequest) ProtoMessage() {}
+
+func (x *GetNextAlarmClockRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNextAlarmClockRequest.ProtoReflect.Descriptor instead.
+func (*GetNextAlarmClockRequest) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{8}
+}
+
+type GetNextAlarmClockResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNextAlarmClockResponse) Reset() {
+	*x = GetNextAlarmClockResponse{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNextAlarmClockResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNextAlarmClockResponse) ProtoMessage() {}
+
+func (x *GetNextAlarmClockResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNextAlarmClockResponse.ProtoReflect.Descriptor instead.
+func (*GetNextAlarmClockResponse) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetNextAlarmClockResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetRequest) Reset() {
+	*x = SetRequest{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetRequest) ProtoMessage() {}
+
+func (x *SetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetRequest.ProtoReflect.Descriptor instead.
+func (*SetRequest) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *SetRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *SetRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *SetRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type SetResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetResponse) Reset() {
+	*x = SetResponse{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetResponse) ProtoMessage() {}
+
+func (x *SetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetResponse.ProtoReflect.Descriptor instead.
+func (*SetResponse) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{11}
+}
+
+type SetAlarmClockRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAlarmClockRequest) Reset() {
+	*x = SetAlarmClockRequest{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAlarmClockRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAlarmClockRequest) ProtoMessage() {}
+
+func (x *SetAlarmClockRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAlarmClockRequest.ProtoReflect.Descriptor instead.
+func (*SetAlarmClockRequest) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *SetAlarmClockRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *SetAlarmClockRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type SetAlarmClockResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAlarmClockResponse) Reset() {
+	*x = SetAlarmClockResponse{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAlarmClockResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAlarmClockResponse) ProtoMessage() {}
+
+func (x *SetAlarmClockResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAlarmClockResponse.ProtoReflect.Descriptor instead.
+func (*SetAlarmClockResponse) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{13}
+}
+
+type SetAndAllowWhileIdleRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAndAllowWhileIdleRequest) Reset() {
+	*x = SetAndAllowWhileIdleRequest{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAndAllowWhileIdleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAndAllowWhileIdleRequest) ProtoMessage() {}
+
+func (x *SetAndAllowWhileIdleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAndAllowWhileIdleRequest.ProtoReflect.Descriptor instead.
+func (*SetAndAllowWhileIdleRequest) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *SetAndAllowWhileIdleRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *SetAndAllowWhileIdleRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *SetAndAllowWhileIdleRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type SetAndAllowWhileIdleResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAndAllowWhileIdleResponse) Reset() {
+	*x = SetAndAllowWhileIdleResponse{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAndAllowWhileIdleResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAndAllowWhileIdleResponse) ProtoMessage() {}
+
+func (x *SetAndAllowWhileIdleResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAndAllowWhileIdleResponse.ProtoReflect.Descriptor instead.
+func (*SetAndAllowWhileIdleResponse) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{15}
+}
+
+type SetExactRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetExactRequest) Reset() {
+	*x = SetExactRequest{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetExactRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetExactRequest) ProtoMessage() {}
+
+func (x *SetExactRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetExactRequest.ProtoReflect.Descriptor instead.
+func (*SetExactRequest) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *SetExactRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *SetExactRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *SetExactRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type SetExactResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetExactResponse) Reset() {
+	*x = SetExactResponse{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetExactResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetExactResponse) ProtoMessage() {}
+
+func (x *SetExactResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetExactResponse.ProtoReflect.Descriptor instead.
+func (*SetExactResponse) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{17}
+}
+
+type SetExactAndAllowWhileIdleRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetExactAndAllowWhileIdleRequest) Reset() {
+	*x = SetExactAndAllowWhileIdleRequest{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetExactAndAllowWhileIdleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetExactAndAllowWhileIdleRequest) ProtoMessage() {}
+
+func (x *SetExactAndAllowWhileIdleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetExactAndAllowWhileIdleRequest.ProtoReflect.Descriptor instead.
+func (*SetExactAndAllowWhileIdleRequest) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *SetExactAndAllowWhileIdleRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *SetExactAndAllowWhileIdleRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *SetExactAndAllowWhileIdleRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type SetExactAndAllowWhileIdleResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetExactAndAllowWhileIdleResponse) Reset() {
+	*x = SetExactAndAllowWhileIdleResponse{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetExactAndAllowWhileIdleResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetExactAndAllowWhileIdleResponse) ProtoMessage() {}
+
+func (x *SetExactAndAllowWhileIdleResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetExactAndAllowWhileIdleResponse.ProtoReflect.Descriptor instead.
+func (*SetExactAndAllowWhileIdleResponse) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{19}
+}
+
+type SetInexactRepeatingRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetInexactRepeatingRequest) Reset() {
+	*x = SetInexactRepeatingRequest{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetInexactRepeatingRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetInexactRepeatingRequest) ProtoMessage() {}
+
+func (x *SetInexactRepeatingRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetInexactRepeatingRequest.ProtoReflect.Descriptor instead.
+func (*SetInexactRepeatingRequest) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *SetInexactRepeatingRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *SetInexactRepeatingRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *SetInexactRepeatingRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+func (x *SetInexactRepeatingRequest) GetArg3() int64 {
+	if x != nil {
+		return x.Arg3
+	}
+	return 0
+}
+
+type SetInexactRepeatingResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetInexactRepeatingResponse) Reset() {
+	*x = SetInexactRepeatingResponse{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetInexactRepeatingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetInexactRepeatingResponse) ProtoMessage() {}
+
+func (x *SetInexactRepeatingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetInexactRepeatingResponse.ProtoReflect.Descriptor instead.
+func (*SetInexactRepeatingResponse) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{21}
+}
+
+type SetRepeatingRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetRepeatingRequest) Reset() {
+	*x = SetRepeatingRequest{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetRepeatingRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetRepeatingRequest) ProtoMessage() {}
+
+func (x *SetRepeatingRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetRepeatingRequest.ProtoReflect.Descriptor instead.
+func (*SetRepeatingRequest) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *SetRepeatingRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *SetRepeatingRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *SetRepeatingRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+func (x *SetRepeatingRequest) GetArg3() int64 {
+	if x != nil {
+		return x.Arg3
+	}
+	return 0
+}
+
+type SetRepeatingResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetRepeatingResponse) Reset() {
+	*x = SetRepeatingResponse{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetRepeatingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetRepeatingResponse) ProtoMessage() {}
+
+func (x *SetRepeatingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetRepeatingResponse.ProtoReflect.Descriptor instead.
+func (*SetRepeatingResponse) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{23}
+}
+
+type SetTimeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetTimeRequest) Reset() {
+	*x = SetTimeRequest{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetTimeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetTimeRequest) ProtoMessage() {}
+
+func (x *SetTimeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetTimeRequest.ProtoReflect.Descriptor instead.
+func (*SetTimeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *SetTimeRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetTimeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetTimeResponse) Reset() {
+	*x = SetTimeResponse{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetTimeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetTimeResponse) ProtoMessage() {}
+
+func (x *SetTimeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetTimeResponse.ProtoReflect.Descriptor instead.
+func (*SetTimeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{25}
+}
+
+type SetTimeZoneRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetTimeZoneRequest) Reset() {
+	*x = SetTimeZoneRequest{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetTimeZoneRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetTimeZoneRequest) ProtoMessage() {}
+
+func (x *SetTimeZoneRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetTimeZoneRequest.ProtoReflect.Descriptor instead.
+func (*SetTimeZoneRequest) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *SetTimeZoneRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type SetTimeZoneResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetTimeZoneResponse) Reset() {
+	*x = SetTimeZoneResponse{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetTimeZoneResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetTimeZoneResponse) ProtoMessage() {}
+
+func (x *SetTimeZoneResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetTimeZoneResponse.ProtoReflect.Descriptor instead.
+func (*SetTimeZoneResponse) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{27}
+}
+
+type SetWindow4Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetWindow4Request) Reset() {
+	*x = SetWindow4Request{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetWindow4Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetWindow4Request) ProtoMessage() {}
+
+func (x *SetWindow4Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetWindow4Request.ProtoReflect.Descriptor instead.
+func (*SetWindow4Request) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *SetWindow4Request) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *SetWindow4Request) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *SetWindow4Request) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+func (x *SetWindow4Request) GetArg3() int64 {
+	if x != nil {
+		return x.Arg3
+	}
+	return 0
+}
+
+type SetWindow4Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetWindow4Response) Reset() {
+	*x = SetWindow4Response{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetWindow4Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetWindow4Response) ProtoMessage() {}
+
+func (x *SetWindow4Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetWindow4Response.ProtoReflect.Descriptor instead.
+func (*SetWindow4Response) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{29}
+}
+
+type SetWindow6_1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	Arg3          string                 `protobuf:"bytes,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
+	Arg4          int64                  `protobuf:"varint,5,opt,name=arg4,proto3" json:"arg4,omitempty"`
+	Arg5          int64                  `protobuf:"varint,6,opt,name=arg5,proto3" json:"arg5,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetWindow6_1Request) Reset() {
+	*x = SetWindow6_1Request{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetWindow6_1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetWindow6_1Request) ProtoMessage() {}
+
+func (x *SetWindow6_1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetWindow6_1Request.ProtoReflect.Descriptor instead.
+func (*SetWindow6_1Request) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *SetWindow6_1Request) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *SetWindow6_1Request) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *SetWindow6_1Request) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+func (x *SetWindow6_1Request) GetArg3() string {
+	if x != nil {
+		return x.Arg3
+	}
+	return ""
+}
+
+func (x *SetWindow6_1Request) GetArg4() int64 {
+	if x != nil {
+		return x.Arg4
+	}
+	return 0
+}
+
+func (x *SetWindow6_1Request) GetArg5() int64 {
+	if x != nil {
+		return x.Arg5
+	}
+	return 0
+}
+
+type SetWindow6_1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetWindow6_1Response) Reset() {
+	*x = SetWindow6_1Response{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetWindow6_1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetWindow6_1Response) ProtoMessage() {}
+
+func (x *SetWindow6_1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetWindow6_1Response.ProtoReflect.Descriptor instead.
+func (*SetWindow6_1Response) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{31}
+}
+
+type DescribeContentsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DescribeContentsRequest) Reset() {
+	*x = DescribeContentsRequest{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DescribeContentsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DescribeContentsRequest) ProtoMessage() {}
+
+func (x *DescribeContentsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DescribeContentsRequest.ProtoReflect.Descriptor instead.
+func (*DescribeContentsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{32}
+}
+
+type DescribeContentsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DescribeContentsResponse) Reset() {
+	*x = DescribeContentsResponse{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DescribeContentsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DescribeContentsResponse) ProtoMessage() {}
+
+func (x *DescribeContentsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DescribeContentsResponse.ProtoReflect.Descriptor instead.
+func (*DescribeContentsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *DescribeContentsResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetShowIntentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetShowIntentRequest) Reset() {
+	*x = GetShowIntentRequest{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetShowIntentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetShowIntentRequest) ProtoMessage() {}
+
+func (x *GetShowIntentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetShowIntentRequest.ProtoReflect.Descriptor instead.
+func (*GetShowIntentRequest) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{34}
+}
+
+type GetShowIntentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetShowIntentResponse) Reset() {
+	*x = GetShowIntentResponse{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetShowIntentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetShowIntentResponse) ProtoMessage() {}
+
+func (x *GetShowIntentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetShowIntentResponse.ProtoReflect.Descriptor instead.
+func (*GetShowIntentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *GetShowIntentResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetTriggerTimeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTriggerTimeRequest) Reset() {
+	*x = GetTriggerTimeRequest{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTriggerTimeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTriggerTimeRequest) ProtoMessage() {}
+
+func (x *GetTriggerTimeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTriggerTimeRequest.ProtoReflect.Descriptor instead.
+func (*GetTriggerTimeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{36}
+}
+
+type GetTriggerTimeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTriggerTimeResponse) Reset() {
+	*x = GetTriggerTimeResponse{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTriggerTimeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTriggerTimeResponse) ProtoMessage() {}
+
+func (x *GetTriggerTimeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTriggerTimeResponse.ProtoReflect.Descriptor instead.
+func (*GetTriggerTimeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *GetTriggerTimeResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type WriteToParcelRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int32                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WriteToParcelRequest) Reset() {
+	*x = WriteToParcelRequest{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WriteToParcelRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WriteToParcelRequest) ProtoMessage() {}
+
+func (x *WriteToParcelRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WriteToParcelRequest.ProtoReflect.Descriptor instead.
+func (*WriteToParcelRequest) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *WriteToParcelRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *WriteToParcelRequest) GetArg1() int32 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type WriteToParcelResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WriteToParcelResponse) Reset() {
+	*x = WriteToParcelResponse{}
+	mi := &file_proto_alarm_alarm_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WriteToParcelResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WriteToParcelResponse) ProtoMessage() {}
+
+func (x *WriteToParcelResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_alarm_alarm_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WriteToParcelResponse.ProtoReflect.Descriptor instead.
+func (*WriteToParcelResponse) Descriptor() ([]byte, []int) {
+	return file_proto_alarm_alarm_proto_rawDescGZIP(), []int{39}
+}
+
 var File_proto_alarm_alarm_proto protoreflect.FileDescriptor
 
 const file_proto_alarm_alarm_proto_rawDesc = "" +
 	"\n" +
-	"\x17proto/alarm/alarm.proto\x12\x05alarm\"T\n" +
-	"\x0eAlarmClockInfo\x12!\n" +
-	"\ftrigger_time\x18\x01 \x01(\x03R\vtriggerTime\x12\x1f\n" +
-	"\vshow_intent\x18\x02 \x01(\x03R\n" +
-	"showIntent\"n\n" +
-	"\rSetRawRequest\x12\x13\n" +
-	"\x05type_\x18\x01 \x01(\x05R\x04type\x12*\n" +
-	"\x11trigger_at_millis\x18\x02 \x01(\x03R\x0ftriggerAtMillis\x12\x1c\n" +
-	"\toperation\x18\x03 \x01(\x03R\toperation\"\x10\n" +
-	"\x0eSetRawResponse\"s\n" +
-	"\x12SetExactRawRequest\x12\x13\n" +
-	"\x05type_\x18\x01 \x01(\x05R\x04type\x12*\n" +
-	"\x11trigger_at_millis\x18\x02 \x01(\x03R\x0ftriggerAtMillis\x12\x1c\n" +
-	"\toperation\x18\x03 \x01(\x03R\toperation\"\x15\n" +
-	"\x13SetExactRawResponse\"\x84\x01\n" +
-	"#SetExactAndAllowWhileIdleRawRequest\x12\x13\n" +
-	"\x05type_\x18\x01 \x01(\x05R\x04type\x12*\n" +
-	"\x11trigger_at_millis\x18\x02 \x01(\x03R\x0ftriggerAtMillis\x12\x1c\n" +
-	"\toperation\x18\x03 \x01(\x03R\toperation\"&\n" +
-	"$SetExactAndAllowWhileIdleRawResponse\"\xa0\x01\n" +
-	"\x16SetRepeatingRawRequest\x12\x13\n" +
-	"\x05type_\x18\x01 \x01(\x05R\x04type\x12*\n" +
-	"\x11trigger_at_millis\x18\x02 \x01(\x03R\x0ftriggerAtMillis\x12'\n" +
-	"\x0finterval_millis\x18\x03 \x01(\x03R\x0eintervalMillis\x12\x1c\n" +
-	"\toperation\x18\x04 \x01(\x03R\toperation\"\x19\n" +
-	"\x17SetRepeatingRawResponse\"\xaa\x01\n" +
-	"\x13SetWindowRawRequest\x12\x13\n" +
-	"\x05type_\x18\x01 \x01(\x05R\x04type\x12.\n" +
-	"\x13window_start_millis\x18\x02 \x01(\x03R\x11windowStartMillis\x120\n" +
-	"\x14window_length_millis\x18\x03 \x01(\x03R\x12windowLengthMillis\x12\x1c\n" +
-	"\toperation\x18\x04 \x01(\x03R\toperation\"\x16\n" +
-	"\x14SetWindowRawResponse\"K\n" +
-	"\x17SetAlarmClockRawRequest\x12\x12\n" +
-	"\x04info\x18\x01 \x01(\x03R\x04info\x12\x1c\n" +
-	"\toperation\x18\x02 \x01(\x03R\toperation\"\x1a\n" +
-	"\x18SetAlarmClockRawResponse\"-\n" +
-	"\rCancelRequest\x12\x1c\n" +
-	"\toperation\x18\x01 \x01(\x03R\toperation\"\x10\n" +
-	"\x0eCancelResponse\"\x1d\n" +
-	"\x1bGetNextAlarmClockRawRequest\"M\n" +
-	"\x1cGetNextAlarmClockRawResponse\x12-\n" +
-	"\x06result\x18\x01 \x01(\v2\x15.alarm.AlarmClockInfoR\x06result\"\x1f\n" +
+	"\x17proto/alarm/alarm.proto\x12\x05alarm\"\x1f\n" +
 	"\x1dCanScheduleExactAlarmsRequest\"8\n" +
 	"\x1eCanScheduleExactAlarmsResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result2\xf5\x05\n" +
-	"\x0eManagerService\x125\n" +
-	"\x06SetRaw\x12\x14.alarm.SetRawRequest\x1a\x15.alarm.SetRawResponse\x12D\n" +
-	"\vSetExactRaw\x12\x19.alarm.SetExactRawRequest\x1a\x1a.alarm.SetExactRawResponse\x12w\n" +
-	"\x1cSetExactAndAllowWhileIdleRaw\x12*.alarm.SetExactAndAllowWhileIdleRawRequest\x1a+.alarm.SetExactAndAllowWhileIdleRawResponse\x12P\n" +
-	"\x0fSetRepeatingRaw\x12\x1d.alarm.SetRepeatingRawRequest\x1a\x1e.alarm.SetRepeatingRawResponse\x12G\n" +
-	"\fSetWindowRaw\x12\x1a.alarm.SetWindowRawRequest\x1a\x1b.alarm.SetWindowRawResponse\x12S\n" +
-	"\x10SetAlarmClockRaw\x12\x1e.alarm.SetAlarmClockRawRequest\x1a\x1f.alarm.SetAlarmClockRawResponse\x125\n" +
-	"\x06Cancel\x12\x14.alarm.CancelRequest\x1a\x15.alarm.CancelResponse\x12_\n" +
-	"\x14GetNextAlarmClockRaw\x12\".alarm.GetNextAlarmClockRawRequest\x1a#.alarm.GetNextAlarmClockRawResponse\x12e\n" +
-	"\x16CanScheduleExactAlarms\x12$.alarm.CanScheduleExactAlarmsRequest\x1a%.alarm.CanScheduleExactAlarmsResponseB(Z&github.com/xaionaro-go/jni/proto/alarmb\x06proto3"
+	"\x06result\x18\x01 \x01(\bR\x06result\"$\n" +
+	"\x0eCancel1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x11\n" +
+	"\x0fCancel1Response\"&\n" +
+	"\x10Cancel1_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x13\n" +
+	"\x11Cancel1_1Response\"\x12\n" +
+	"\x10CancelAllRequest\"\x13\n" +
+	"\x11CancelAllResponse\"\x1a\n" +
+	"\x18GetNextAlarmClockRequest\"3\n" +
+	"\x19GetNextAlarmClockResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"H\n" +
+	"\n" +
+	"SetRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"\r\n" +
+	"\vSetResponse\">\n" +
+	"\x14SetAlarmClockRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x17\n" +
+	"\x15SetAlarmClockResponse\"Y\n" +
+	"\x1bSetAndAllowWhileIdleRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"\x1e\n" +
+	"\x1cSetAndAllowWhileIdleResponse\"M\n" +
+	"\x0fSetExactRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"\x12\n" +
+	"\x10SetExactResponse\"^\n" +
+	" SetExactAndAllowWhileIdleRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"#\n" +
+	"!SetExactAndAllowWhileIdleResponse\"l\n" +
+	"\x1aSetInexactRepeatingRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
+	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"\x1d\n" +
+	"\x1bSetInexactRepeatingResponse\"e\n" +
+	"\x13SetRepeatingRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
+	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"\x16\n" +
+	"\x14SetRepeatingResponse\"$\n" +
+	"\x0eSetTimeRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x11\n" +
+	"\x0fSetTimeResponse\"(\n" +
+	"\x12SetTimeZoneRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"\x15\n" +
+	"\x13SetTimeZoneResponse\"c\n" +
+	"\x11SetWindow4Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
+	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"\x14\n" +
+	"\x12SetWindow4Response\"\x8d\x01\n" +
+	"\x13SetWindow6_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
+	"\x04arg3\x18\x04 \x01(\tR\x04arg3\x12\x12\n" +
+	"\x04arg4\x18\x05 \x01(\x03R\x04arg4\x12\x12\n" +
+	"\x04arg5\x18\x06 \x01(\x03R\x04arg5\"\x16\n" +
+	"\x14SetWindow6_1Response\"\x19\n" +
+	"\x17DescribeContentsRequest\"2\n" +
+	"\x18DescribeContentsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x16\n" +
+	"\x14GetShowIntentRequest\"/\n" +
+	"\x15GetShowIntentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x17\n" +
+	"\x15GetTriggerTimeRequest\"0\n" +
+	"\x16GetTriggerTimeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\">\n" +
+	"\x14WriteToParcelRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\"\x17\n" +
+	"\x15WriteToParcelResponse2\xc9\t\n" +
+	"\x13AlarmManagerService\x12e\n" +
+	"\x16CanScheduleExactAlarms\x12$.alarm.CanScheduleExactAlarmsRequest\x1a%.alarm.CanScheduleExactAlarmsResponse\x128\n" +
+	"\aCancel1\x12\x15.alarm.Cancel1Request\x1a\x16.alarm.Cancel1Response\x12>\n" +
+	"\tCancel1_1\x12\x17.alarm.Cancel1_1Request\x1a\x18.alarm.Cancel1_1Response\x12>\n" +
+	"\tCancelAll\x12\x17.alarm.CancelAllRequest\x1a\x18.alarm.CancelAllResponse\x12V\n" +
+	"\x11GetNextAlarmClock\x12\x1f.alarm.GetNextAlarmClockRequest\x1a .alarm.GetNextAlarmClockResponse\x12,\n" +
+	"\x03Set\x12\x11.alarm.SetRequest\x1a\x12.alarm.SetResponse\x12J\n" +
+	"\rSetAlarmClock\x12\x1b.alarm.SetAlarmClockRequest\x1a\x1c.alarm.SetAlarmClockResponse\x12_\n" +
+	"\x14SetAndAllowWhileIdle\x12\".alarm.SetAndAllowWhileIdleRequest\x1a#.alarm.SetAndAllowWhileIdleResponse\x12;\n" +
+	"\bSetExact\x12\x16.alarm.SetExactRequest\x1a\x17.alarm.SetExactResponse\x12n\n" +
+	"\x19SetExactAndAllowWhileIdle\x12'.alarm.SetExactAndAllowWhileIdleRequest\x1a(.alarm.SetExactAndAllowWhileIdleResponse\x12\\\n" +
+	"\x13SetInexactRepeating\x12!.alarm.SetInexactRepeatingRequest\x1a\".alarm.SetInexactRepeatingResponse\x12G\n" +
+	"\fSetRepeating\x12\x1a.alarm.SetRepeatingRequest\x1a\x1b.alarm.SetRepeatingResponse\x128\n" +
+	"\aSetTime\x12\x15.alarm.SetTimeRequest\x1a\x16.alarm.SetTimeResponse\x12D\n" +
+	"\vSetTimeZone\x12\x19.alarm.SetTimeZoneRequest\x1a\x1a.alarm.SetTimeZoneResponse\x12A\n" +
+	"\n" +
+	"SetWindow4\x12\x18.alarm.SetWindow4Request\x1a\x19.alarm.SetWindow4Response\x12G\n" +
+	"\fSetWindow6_1\x12\x1a.alarm.SetWindow6_1Request\x1a\x1b.alarm.SetWindow6_1Response2\xdf\x02\n" +
+	"!AlarmManagerAlarmClockInfoService\x12S\n" +
+	"\x10DescribeContents\x12\x1e.alarm.DescribeContentsRequest\x1a\x1f.alarm.DescribeContentsResponse\x12J\n" +
+	"\rGetShowIntent\x12\x1b.alarm.GetShowIntentRequest\x1a\x1c.alarm.GetShowIntentResponse\x12M\n" +
+	"\x0eGetTriggerTime\x12\x1c.alarm.GetTriggerTimeRequest\x1a\x1d.alarm.GetTriggerTimeResponse\x12J\n" +
+	"\rWriteToParcel\x12\x1b.alarm.WriteToParcelRequest\x1a\x1c.alarm.WriteToParcelResponseB(Z&github.com/xaionaro-go/jni/proto/alarmb\x06proto3"
 
 var (
 	file_proto_alarm_alarm_proto_rawDescOnce sync.Once
@@ -971,53 +1932,95 @@ func file_proto_alarm_alarm_proto_rawDescGZIP() []byte {
 	return file_proto_alarm_alarm_proto_rawDescData
 }
 
-var file_proto_alarm_alarm_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_proto_alarm_alarm_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
 var file_proto_alarm_alarm_proto_goTypes = []any{
-	(*AlarmClockInfo)(nil),                       // 0: alarm.AlarmClockInfo
-	(*SetRawRequest)(nil),                        // 1: alarm.SetRawRequest
-	(*SetRawResponse)(nil),                       // 2: alarm.SetRawResponse
-	(*SetExactRawRequest)(nil),                   // 3: alarm.SetExactRawRequest
-	(*SetExactRawResponse)(nil),                  // 4: alarm.SetExactRawResponse
-	(*SetExactAndAllowWhileIdleRawRequest)(nil),  // 5: alarm.SetExactAndAllowWhileIdleRawRequest
-	(*SetExactAndAllowWhileIdleRawResponse)(nil), // 6: alarm.SetExactAndAllowWhileIdleRawResponse
-	(*SetRepeatingRawRequest)(nil),               // 7: alarm.SetRepeatingRawRequest
-	(*SetRepeatingRawResponse)(nil),              // 8: alarm.SetRepeatingRawResponse
-	(*SetWindowRawRequest)(nil),                  // 9: alarm.SetWindowRawRequest
-	(*SetWindowRawResponse)(nil),                 // 10: alarm.SetWindowRawResponse
-	(*SetAlarmClockRawRequest)(nil),              // 11: alarm.SetAlarmClockRawRequest
-	(*SetAlarmClockRawResponse)(nil),             // 12: alarm.SetAlarmClockRawResponse
-	(*CancelRequest)(nil),                        // 13: alarm.CancelRequest
-	(*CancelResponse)(nil),                       // 14: alarm.CancelResponse
-	(*GetNextAlarmClockRawRequest)(nil),          // 15: alarm.GetNextAlarmClockRawRequest
-	(*GetNextAlarmClockRawResponse)(nil),         // 16: alarm.GetNextAlarmClockRawResponse
-	(*CanScheduleExactAlarmsRequest)(nil),        // 17: alarm.CanScheduleExactAlarmsRequest
-	(*CanScheduleExactAlarmsResponse)(nil),       // 18: alarm.CanScheduleExactAlarmsResponse
+	(*CanScheduleExactAlarmsRequest)(nil),     // 0: alarm.CanScheduleExactAlarmsRequest
+	(*CanScheduleExactAlarmsResponse)(nil),    // 1: alarm.CanScheduleExactAlarmsResponse
+	(*Cancel1Request)(nil),                    // 2: alarm.Cancel1Request
+	(*Cancel1Response)(nil),                   // 3: alarm.Cancel1Response
+	(*Cancel1_1Request)(nil),                  // 4: alarm.Cancel1_1Request
+	(*Cancel1_1Response)(nil),                 // 5: alarm.Cancel1_1Response
+	(*CancelAllRequest)(nil),                  // 6: alarm.CancelAllRequest
+	(*CancelAllResponse)(nil),                 // 7: alarm.CancelAllResponse
+	(*GetNextAlarmClockRequest)(nil),          // 8: alarm.GetNextAlarmClockRequest
+	(*GetNextAlarmClockResponse)(nil),         // 9: alarm.GetNextAlarmClockResponse
+	(*SetRequest)(nil),                        // 10: alarm.SetRequest
+	(*SetResponse)(nil),                       // 11: alarm.SetResponse
+	(*SetAlarmClockRequest)(nil),              // 12: alarm.SetAlarmClockRequest
+	(*SetAlarmClockResponse)(nil),             // 13: alarm.SetAlarmClockResponse
+	(*SetAndAllowWhileIdleRequest)(nil),       // 14: alarm.SetAndAllowWhileIdleRequest
+	(*SetAndAllowWhileIdleResponse)(nil),      // 15: alarm.SetAndAllowWhileIdleResponse
+	(*SetExactRequest)(nil),                   // 16: alarm.SetExactRequest
+	(*SetExactResponse)(nil),                  // 17: alarm.SetExactResponse
+	(*SetExactAndAllowWhileIdleRequest)(nil),  // 18: alarm.SetExactAndAllowWhileIdleRequest
+	(*SetExactAndAllowWhileIdleResponse)(nil), // 19: alarm.SetExactAndAllowWhileIdleResponse
+	(*SetInexactRepeatingRequest)(nil),        // 20: alarm.SetInexactRepeatingRequest
+	(*SetInexactRepeatingResponse)(nil),       // 21: alarm.SetInexactRepeatingResponse
+	(*SetRepeatingRequest)(nil),               // 22: alarm.SetRepeatingRequest
+	(*SetRepeatingResponse)(nil),              // 23: alarm.SetRepeatingResponse
+	(*SetTimeRequest)(nil),                    // 24: alarm.SetTimeRequest
+	(*SetTimeResponse)(nil),                   // 25: alarm.SetTimeResponse
+	(*SetTimeZoneRequest)(nil),                // 26: alarm.SetTimeZoneRequest
+	(*SetTimeZoneResponse)(nil),               // 27: alarm.SetTimeZoneResponse
+	(*SetWindow4Request)(nil),                 // 28: alarm.SetWindow4Request
+	(*SetWindow4Response)(nil),                // 29: alarm.SetWindow4Response
+	(*SetWindow6_1Request)(nil),               // 30: alarm.SetWindow6_1Request
+	(*SetWindow6_1Response)(nil),              // 31: alarm.SetWindow6_1Response
+	(*DescribeContentsRequest)(nil),           // 32: alarm.DescribeContentsRequest
+	(*DescribeContentsResponse)(nil),          // 33: alarm.DescribeContentsResponse
+	(*GetShowIntentRequest)(nil),              // 34: alarm.GetShowIntentRequest
+	(*GetShowIntentResponse)(nil),             // 35: alarm.GetShowIntentResponse
+	(*GetTriggerTimeRequest)(nil),             // 36: alarm.GetTriggerTimeRequest
+	(*GetTriggerTimeResponse)(nil),            // 37: alarm.GetTriggerTimeResponse
+	(*WriteToParcelRequest)(nil),              // 38: alarm.WriteToParcelRequest
+	(*WriteToParcelResponse)(nil),             // 39: alarm.WriteToParcelResponse
 }
 var file_proto_alarm_alarm_proto_depIdxs = []int32{
-	0,  // 0: alarm.GetNextAlarmClockRawResponse.result:type_name -> alarm.AlarmClockInfo
-	1,  // 1: alarm.ManagerService.SetRaw:input_type -> alarm.SetRawRequest
-	3,  // 2: alarm.ManagerService.SetExactRaw:input_type -> alarm.SetExactRawRequest
-	5,  // 3: alarm.ManagerService.SetExactAndAllowWhileIdleRaw:input_type -> alarm.SetExactAndAllowWhileIdleRawRequest
-	7,  // 4: alarm.ManagerService.SetRepeatingRaw:input_type -> alarm.SetRepeatingRawRequest
-	9,  // 5: alarm.ManagerService.SetWindowRaw:input_type -> alarm.SetWindowRawRequest
-	11, // 6: alarm.ManagerService.SetAlarmClockRaw:input_type -> alarm.SetAlarmClockRawRequest
-	13, // 7: alarm.ManagerService.Cancel:input_type -> alarm.CancelRequest
-	15, // 8: alarm.ManagerService.GetNextAlarmClockRaw:input_type -> alarm.GetNextAlarmClockRawRequest
-	17, // 9: alarm.ManagerService.CanScheduleExactAlarms:input_type -> alarm.CanScheduleExactAlarmsRequest
-	2,  // 10: alarm.ManagerService.SetRaw:output_type -> alarm.SetRawResponse
-	4,  // 11: alarm.ManagerService.SetExactRaw:output_type -> alarm.SetExactRawResponse
-	6,  // 12: alarm.ManagerService.SetExactAndAllowWhileIdleRaw:output_type -> alarm.SetExactAndAllowWhileIdleRawResponse
-	8,  // 13: alarm.ManagerService.SetRepeatingRaw:output_type -> alarm.SetRepeatingRawResponse
-	10, // 14: alarm.ManagerService.SetWindowRaw:output_type -> alarm.SetWindowRawResponse
-	12, // 15: alarm.ManagerService.SetAlarmClockRaw:output_type -> alarm.SetAlarmClockRawResponse
-	14, // 16: alarm.ManagerService.Cancel:output_type -> alarm.CancelResponse
-	16, // 17: alarm.ManagerService.GetNextAlarmClockRaw:output_type -> alarm.GetNextAlarmClockRawResponse
-	18, // 18: alarm.ManagerService.CanScheduleExactAlarms:output_type -> alarm.CanScheduleExactAlarmsResponse
-	10, // [10:19] is the sub-list for method output_type
-	1,  // [1:10] is the sub-list for method input_type
-	1,  // [1:1] is the sub-list for extension type_name
-	1,  // [1:1] is the sub-list for extension extendee
-	0,  // [0:1] is the sub-list for field type_name
+	0,  // 0: alarm.AlarmManagerService.CanScheduleExactAlarms:input_type -> alarm.CanScheduleExactAlarmsRequest
+	2,  // 1: alarm.AlarmManagerService.Cancel1:input_type -> alarm.Cancel1Request
+	4,  // 2: alarm.AlarmManagerService.Cancel1_1:input_type -> alarm.Cancel1_1Request
+	6,  // 3: alarm.AlarmManagerService.CancelAll:input_type -> alarm.CancelAllRequest
+	8,  // 4: alarm.AlarmManagerService.GetNextAlarmClock:input_type -> alarm.GetNextAlarmClockRequest
+	10, // 5: alarm.AlarmManagerService.Set:input_type -> alarm.SetRequest
+	12, // 6: alarm.AlarmManagerService.SetAlarmClock:input_type -> alarm.SetAlarmClockRequest
+	14, // 7: alarm.AlarmManagerService.SetAndAllowWhileIdle:input_type -> alarm.SetAndAllowWhileIdleRequest
+	16, // 8: alarm.AlarmManagerService.SetExact:input_type -> alarm.SetExactRequest
+	18, // 9: alarm.AlarmManagerService.SetExactAndAllowWhileIdle:input_type -> alarm.SetExactAndAllowWhileIdleRequest
+	20, // 10: alarm.AlarmManagerService.SetInexactRepeating:input_type -> alarm.SetInexactRepeatingRequest
+	22, // 11: alarm.AlarmManagerService.SetRepeating:input_type -> alarm.SetRepeatingRequest
+	24, // 12: alarm.AlarmManagerService.SetTime:input_type -> alarm.SetTimeRequest
+	26, // 13: alarm.AlarmManagerService.SetTimeZone:input_type -> alarm.SetTimeZoneRequest
+	28, // 14: alarm.AlarmManagerService.SetWindow4:input_type -> alarm.SetWindow4Request
+	30, // 15: alarm.AlarmManagerService.SetWindow6_1:input_type -> alarm.SetWindow6_1Request
+	32, // 16: alarm.AlarmManagerAlarmClockInfoService.DescribeContents:input_type -> alarm.DescribeContentsRequest
+	34, // 17: alarm.AlarmManagerAlarmClockInfoService.GetShowIntent:input_type -> alarm.GetShowIntentRequest
+	36, // 18: alarm.AlarmManagerAlarmClockInfoService.GetTriggerTime:input_type -> alarm.GetTriggerTimeRequest
+	38, // 19: alarm.AlarmManagerAlarmClockInfoService.WriteToParcel:input_type -> alarm.WriteToParcelRequest
+	1,  // 20: alarm.AlarmManagerService.CanScheduleExactAlarms:output_type -> alarm.CanScheduleExactAlarmsResponse
+	3,  // 21: alarm.AlarmManagerService.Cancel1:output_type -> alarm.Cancel1Response
+	5,  // 22: alarm.AlarmManagerService.Cancel1_1:output_type -> alarm.Cancel1_1Response
+	7,  // 23: alarm.AlarmManagerService.CancelAll:output_type -> alarm.CancelAllResponse
+	9,  // 24: alarm.AlarmManagerService.GetNextAlarmClock:output_type -> alarm.GetNextAlarmClockResponse
+	11, // 25: alarm.AlarmManagerService.Set:output_type -> alarm.SetResponse
+	13, // 26: alarm.AlarmManagerService.SetAlarmClock:output_type -> alarm.SetAlarmClockResponse
+	15, // 27: alarm.AlarmManagerService.SetAndAllowWhileIdle:output_type -> alarm.SetAndAllowWhileIdleResponse
+	17, // 28: alarm.AlarmManagerService.SetExact:output_type -> alarm.SetExactResponse
+	19, // 29: alarm.AlarmManagerService.SetExactAndAllowWhileIdle:output_type -> alarm.SetExactAndAllowWhileIdleResponse
+	21, // 30: alarm.AlarmManagerService.SetInexactRepeating:output_type -> alarm.SetInexactRepeatingResponse
+	23, // 31: alarm.AlarmManagerService.SetRepeating:output_type -> alarm.SetRepeatingResponse
+	25, // 32: alarm.AlarmManagerService.SetTime:output_type -> alarm.SetTimeResponse
+	27, // 33: alarm.AlarmManagerService.SetTimeZone:output_type -> alarm.SetTimeZoneResponse
+	29, // 34: alarm.AlarmManagerService.SetWindow4:output_type -> alarm.SetWindow4Response
+	31, // 35: alarm.AlarmManagerService.SetWindow6_1:output_type -> alarm.SetWindow6_1Response
+	33, // 36: alarm.AlarmManagerAlarmClockInfoService.DescribeContents:output_type -> alarm.DescribeContentsResponse
+	35, // 37: alarm.AlarmManagerAlarmClockInfoService.GetShowIntent:output_type -> alarm.GetShowIntentResponse
+	37, // 38: alarm.AlarmManagerAlarmClockInfoService.GetTriggerTime:output_type -> alarm.GetTriggerTimeResponse
+	39, // 39: alarm.AlarmManagerAlarmClockInfoService.WriteToParcel:output_type -> alarm.WriteToParcelResponse
+	20, // [20:40] is the sub-list for method output_type
+	0,  // [0:20] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_alarm_alarm_proto_init() }
@@ -1031,9 +2034,9 @@ func file_proto_alarm_alarm_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_alarm_alarm_proto_rawDesc), len(file_proto_alarm_alarm_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   19,
+			NumMessages:   40,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_proto_alarm_alarm_proto_goTypes,
 		DependencyIndexes: file_proto_alarm_alarm_proto_depIdxs,

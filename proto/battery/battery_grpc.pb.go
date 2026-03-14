@@ -21,24 +21,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BatteryManagerService_GetLevelRaw_FullMethodName       = "/battery.BatteryManagerService/GetLevelRaw"
-	BatteryManagerService_GetScaleRaw_FullMethodName       = "/battery.BatteryManagerService/GetScaleRaw"
-	BatteryManagerService_GetStatus_FullMethodName         = "/battery.BatteryManagerService/GetStatus"
-	BatteryManagerService_GetTemperatureRaw_FullMethodName = "/battery.BatteryManagerService/GetTemperatureRaw"
-	BatteryManagerService_GetVoltageRaw_FullMethodName     = "/battery.BatteryManagerService/GetVoltageRaw"
-	BatteryManagerService_GetPlugged_FullMethodName        = "/battery.BatteryManagerService/GetPlugged"
+	BatteryManagerService_ComputeChargeTimeRemaining_FullMethodName = "/battery.BatteryManagerService/ComputeChargeTimeRemaining"
+	BatteryManagerService_GetIntProperty_FullMethodName             = "/battery.BatteryManagerService/GetIntProperty"
+	BatteryManagerService_GetLongProperty_FullMethodName            = "/battery.BatteryManagerService/GetLongProperty"
+	BatteryManagerService_GetStringProperty_FullMethodName          = "/battery.BatteryManagerService/GetStringProperty"
+	BatteryManagerService_IsCharging_FullMethodName                 = "/battery.BatteryManagerService/IsCharging"
 )
 
 // BatteryManagerServiceClient is the client API for BatteryManagerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BatteryManagerServiceClient interface {
-	GetLevelRaw(ctx context.Context, in *GetLevelRawRequest, opts ...grpc.CallOption) (*GetLevelRawResponse, error)
-	GetScaleRaw(ctx context.Context, in *GetScaleRawRequest, opts ...grpc.CallOption) (*GetScaleRawResponse, error)
-	GetStatus(ctx context.Context, in *GetStatusRequest, opts ...grpc.CallOption) (*GetStatusResponse, error)
-	GetTemperatureRaw(ctx context.Context, in *GetTemperatureRawRequest, opts ...grpc.CallOption) (*GetTemperatureRawResponse, error)
-	GetVoltageRaw(ctx context.Context, in *GetVoltageRawRequest, opts ...grpc.CallOption) (*GetVoltageRawResponse, error)
-	GetPlugged(ctx context.Context, in *GetPluggedRequest, opts ...grpc.CallOption) (*GetPluggedResponse, error)
+	ComputeChargeTimeRemaining(ctx context.Context, in *ComputeChargeTimeRemainingRequest, opts ...grpc.CallOption) (*ComputeChargeTimeRemainingResponse, error)
+	GetIntProperty(ctx context.Context, in *GetIntPropertyRequest, opts ...grpc.CallOption) (*GetIntPropertyResponse, error)
+	GetLongProperty(ctx context.Context, in *GetLongPropertyRequest, opts ...grpc.CallOption) (*GetLongPropertyResponse, error)
+	GetStringProperty(ctx context.Context, in *GetStringPropertyRequest, opts ...grpc.CallOption) (*GetStringPropertyResponse, error)
+	IsCharging(ctx context.Context, in *IsChargingRequest, opts ...grpc.CallOption) (*IsChargingResponse, error)
 }
 
 type batteryManagerServiceClient struct {
@@ -49,60 +47,50 @@ func NewBatteryManagerServiceClient(cc grpc.ClientConnInterface) BatteryManagerS
 	return &batteryManagerServiceClient{cc}
 }
 
-func (c *batteryManagerServiceClient) GetLevelRaw(ctx context.Context, in *GetLevelRawRequest, opts ...grpc.CallOption) (*GetLevelRawResponse, error) {
+func (c *batteryManagerServiceClient) ComputeChargeTimeRemaining(ctx context.Context, in *ComputeChargeTimeRemainingRequest, opts ...grpc.CallOption) (*ComputeChargeTimeRemainingResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetLevelRawResponse)
-	err := c.cc.Invoke(ctx, BatteryManagerService_GetLevelRaw_FullMethodName, in, out, cOpts...)
+	out := new(ComputeChargeTimeRemainingResponse)
+	err := c.cc.Invoke(ctx, BatteryManagerService_ComputeChargeTimeRemaining_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *batteryManagerServiceClient) GetScaleRaw(ctx context.Context, in *GetScaleRawRequest, opts ...grpc.CallOption) (*GetScaleRawResponse, error) {
+func (c *batteryManagerServiceClient) GetIntProperty(ctx context.Context, in *GetIntPropertyRequest, opts ...grpc.CallOption) (*GetIntPropertyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetScaleRawResponse)
-	err := c.cc.Invoke(ctx, BatteryManagerService_GetScaleRaw_FullMethodName, in, out, cOpts...)
+	out := new(GetIntPropertyResponse)
+	err := c.cc.Invoke(ctx, BatteryManagerService_GetIntProperty_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *batteryManagerServiceClient) GetStatus(ctx context.Context, in *GetStatusRequest, opts ...grpc.CallOption) (*GetStatusResponse, error) {
+func (c *batteryManagerServiceClient) GetLongProperty(ctx context.Context, in *GetLongPropertyRequest, opts ...grpc.CallOption) (*GetLongPropertyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetStatusResponse)
-	err := c.cc.Invoke(ctx, BatteryManagerService_GetStatus_FullMethodName, in, out, cOpts...)
+	out := new(GetLongPropertyResponse)
+	err := c.cc.Invoke(ctx, BatteryManagerService_GetLongProperty_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *batteryManagerServiceClient) GetTemperatureRaw(ctx context.Context, in *GetTemperatureRawRequest, opts ...grpc.CallOption) (*GetTemperatureRawResponse, error) {
+func (c *batteryManagerServiceClient) GetStringProperty(ctx context.Context, in *GetStringPropertyRequest, opts ...grpc.CallOption) (*GetStringPropertyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetTemperatureRawResponse)
-	err := c.cc.Invoke(ctx, BatteryManagerService_GetTemperatureRaw_FullMethodName, in, out, cOpts...)
+	out := new(GetStringPropertyResponse)
+	err := c.cc.Invoke(ctx, BatteryManagerService_GetStringProperty_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *batteryManagerServiceClient) GetVoltageRaw(ctx context.Context, in *GetVoltageRawRequest, opts ...grpc.CallOption) (*GetVoltageRawResponse, error) {
+func (c *batteryManagerServiceClient) IsCharging(ctx context.Context, in *IsChargingRequest, opts ...grpc.CallOption) (*IsChargingResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetVoltageRawResponse)
-	err := c.cc.Invoke(ctx, BatteryManagerService_GetVoltageRaw_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *batteryManagerServiceClient) GetPlugged(ctx context.Context, in *GetPluggedRequest, opts ...grpc.CallOption) (*GetPluggedResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPluggedResponse)
-	err := c.cc.Invoke(ctx, BatteryManagerService_GetPlugged_FullMethodName, in, out, cOpts...)
+	out := new(IsChargingResponse)
+	err := c.cc.Invoke(ctx, BatteryManagerService_IsCharging_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -113,12 +101,11 @@ func (c *batteryManagerServiceClient) GetPlugged(ctx context.Context, in *GetPlu
 // All implementations must embed UnimplementedBatteryManagerServiceServer
 // for forward compatibility.
 type BatteryManagerServiceServer interface {
-	GetLevelRaw(context.Context, *GetLevelRawRequest) (*GetLevelRawResponse, error)
-	GetScaleRaw(context.Context, *GetScaleRawRequest) (*GetScaleRawResponse, error)
-	GetStatus(context.Context, *GetStatusRequest) (*GetStatusResponse, error)
-	GetTemperatureRaw(context.Context, *GetTemperatureRawRequest) (*GetTemperatureRawResponse, error)
-	GetVoltageRaw(context.Context, *GetVoltageRawRequest) (*GetVoltageRawResponse, error)
-	GetPlugged(context.Context, *GetPluggedRequest) (*GetPluggedResponse, error)
+	ComputeChargeTimeRemaining(context.Context, *ComputeChargeTimeRemainingRequest) (*ComputeChargeTimeRemainingResponse, error)
+	GetIntProperty(context.Context, *GetIntPropertyRequest) (*GetIntPropertyResponse, error)
+	GetLongProperty(context.Context, *GetLongPropertyRequest) (*GetLongPropertyResponse, error)
+	GetStringProperty(context.Context, *GetStringPropertyRequest) (*GetStringPropertyResponse, error)
+	IsCharging(context.Context, *IsChargingRequest) (*IsChargingResponse, error)
 	mustEmbedUnimplementedBatteryManagerServiceServer()
 }
 
@@ -129,23 +116,20 @@ type BatteryManagerServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBatteryManagerServiceServer struct{}
 
-func (UnimplementedBatteryManagerServiceServer) GetLevelRaw(context.Context, *GetLevelRawRequest) (*GetLevelRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetLevelRaw not implemented")
+func (UnimplementedBatteryManagerServiceServer) ComputeChargeTimeRemaining(context.Context, *ComputeChargeTimeRemainingRequest) (*ComputeChargeTimeRemainingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ComputeChargeTimeRemaining not implemented")
 }
-func (UnimplementedBatteryManagerServiceServer) GetScaleRaw(context.Context, *GetScaleRawRequest) (*GetScaleRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetScaleRaw not implemented")
+func (UnimplementedBatteryManagerServiceServer) GetIntProperty(context.Context, *GetIntPropertyRequest) (*GetIntPropertyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetIntProperty not implemented")
 }
-func (UnimplementedBatteryManagerServiceServer) GetStatus(context.Context, *GetStatusRequest) (*GetStatusResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetStatus not implemented")
+func (UnimplementedBatteryManagerServiceServer) GetLongProperty(context.Context, *GetLongPropertyRequest) (*GetLongPropertyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLongProperty not implemented")
 }
-func (UnimplementedBatteryManagerServiceServer) GetTemperatureRaw(context.Context, *GetTemperatureRawRequest) (*GetTemperatureRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetTemperatureRaw not implemented")
+func (UnimplementedBatteryManagerServiceServer) GetStringProperty(context.Context, *GetStringPropertyRequest) (*GetStringPropertyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetStringProperty not implemented")
 }
-func (UnimplementedBatteryManagerServiceServer) GetVoltageRaw(context.Context, *GetVoltageRawRequest) (*GetVoltageRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetVoltageRaw not implemented")
-}
-func (UnimplementedBatteryManagerServiceServer) GetPlugged(context.Context, *GetPluggedRequest) (*GetPluggedResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetPlugged not implemented")
+func (UnimplementedBatteryManagerServiceServer) IsCharging(context.Context, *IsChargingRequest) (*IsChargingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsCharging not implemented")
 }
 func (UnimplementedBatteryManagerServiceServer) mustEmbedUnimplementedBatteryManagerServiceServer() {}
 func (UnimplementedBatteryManagerServiceServer) testEmbeddedByValue()                               {}
@@ -168,110 +152,92 @@ func RegisterBatteryManagerServiceServer(s grpc.ServiceRegistrar, srv BatteryMan
 	s.RegisterService(&BatteryManagerService_ServiceDesc, srv)
 }
 
-func _BatteryManagerService_GetLevelRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetLevelRawRequest)
+func _BatteryManagerService_ComputeChargeTimeRemaining_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ComputeChargeTimeRemainingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BatteryManagerServiceServer).GetLevelRaw(ctx, in)
+		return srv.(BatteryManagerServiceServer).ComputeChargeTimeRemaining(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BatteryManagerService_GetLevelRaw_FullMethodName,
+		FullMethod: BatteryManagerService_ComputeChargeTimeRemaining_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BatteryManagerServiceServer).GetLevelRaw(ctx, req.(*GetLevelRawRequest))
+		return srv.(BatteryManagerServiceServer).ComputeChargeTimeRemaining(ctx, req.(*ComputeChargeTimeRemainingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BatteryManagerService_GetScaleRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetScaleRawRequest)
+func _BatteryManagerService_GetIntProperty_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIntPropertyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BatteryManagerServiceServer).GetScaleRaw(ctx, in)
+		return srv.(BatteryManagerServiceServer).GetIntProperty(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BatteryManagerService_GetScaleRaw_FullMethodName,
+		FullMethod: BatteryManagerService_GetIntProperty_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BatteryManagerServiceServer).GetScaleRaw(ctx, req.(*GetScaleRawRequest))
+		return srv.(BatteryManagerServiceServer).GetIntProperty(ctx, req.(*GetIntPropertyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BatteryManagerService_GetStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetStatusRequest)
+func _BatteryManagerService_GetLongProperty_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLongPropertyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BatteryManagerServiceServer).GetStatus(ctx, in)
+		return srv.(BatteryManagerServiceServer).GetLongProperty(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BatteryManagerService_GetStatus_FullMethodName,
+		FullMethod: BatteryManagerService_GetLongProperty_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BatteryManagerServiceServer).GetStatus(ctx, req.(*GetStatusRequest))
+		return srv.(BatteryManagerServiceServer).GetLongProperty(ctx, req.(*GetLongPropertyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BatteryManagerService_GetTemperatureRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTemperatureRawRequest)
+func _BatteryManagerService_GetStringProperty_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStringPropertyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BatteryManagerServiceServer).GetTemperatureRaw(ctx, in)
+		return srv.(BatteryManagerServiceServer).GetStringProperty(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BatteryManagerService_GetTemperatureRaw_FullMethodName,
+		FullMethod: BatteryManagerService_GetStringProperty_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BatteryManagerServiceServer).GetTemperatureRaw(ctx, req.(*GetTemperatureRawRequest))
+		return srv.(BatteryManagerServiceServer).GetStringProperty(ctx, req.(*GetStringPropertyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BatteryManagerService_GetVoltageRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetVoltageRawRequest)
+func _BatteryManagerService_IsCharging_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsChargingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BatteryManagerServiceServer).GetVoltageRaw(ctx, in)
+		return srv.(BatteryManagerServiceServer).IsCharging(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BatteryManagerService_GetVoltageRaw_FullMethodName,
+		FullMethod: BatteryManagerService_IsCharging_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BatteryManagerServiceServer).GetVoltageRaw(ctx, req.(*GetVoltageRawRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BatteryManagerService_GetPlugged_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPluggedRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BatteryManagerServiceServer).GetPlugged(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BatteryManagerService_GetPlugged_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BatteryManagerServiceServer).GetPlugged(ctx, req.(*GetPluggedRequest))
+		return srv.(BatteryManagerServiceServer).IsCharging(ctx, req.(*IsChargingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -284,28 +250,24 @@ var BatteryManagerService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*BatteryManagerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetLevelRaw",
-			Handler:    _BatteryManagerService_GetLevelRaw_Handler,
+			MethodName: "ComputeChargeTimeRemaining",
+			Handler:    _BatteryManagerService_ComputeChargeTimeRemaining_Handler,
 		},
 		{
-			MethodName: "GetScaleRaw",
-			Handler:    _BatteryManagerService_GetScaleRaw_Handler,
+			MethodName: "GetIntProperty",
+			Handler:    _BatteryManagerService_GetIntProperty_Handler,
 		},
 		{
-			MethodName: "GetStatus",
-			Handler:    _BatteryManagerService_GetStatus_Handler,
+			MethodName: "GetLongProperty",
+			Handler:    _BatteryManagerService_GetLongProperty_Handler,
 		},
 		{
-			MethodName: "GetTemperatureRaw",
-			Handler:    _BatteryManagerService_GetTemperatureRaw_Handler,
+			MethodName: "GetStringProperty",
+			Handler:    _BatteryManagerService_GetStringProperty_Handler,
 		},
 		{
-			MethodName: "GetVoltageRaw",
-			Handler:    _BatteryManagerService_GetVoltageRaw_Handler,
-		},
-		{
-			MethodName: "GetPlugged",
-			Handler:    _BatteryManagerService_GetPlugged_Handler,
+			MethodName: "IsCharging",
+			Handler:    _BatteryManagerService_IsCharging_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

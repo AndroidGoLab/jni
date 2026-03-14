@@ -1,0 +1,174 @@
+package: battery
+go_import: github.com/xaionaro-go/jni/os/battery
+classes:
+    - java_class: android.os.BatteryManager
+      go_type: batteryManager
+      obtain: system_service
+      service_name: batterymanager
+      close: true
+      methods:
+        - java_method: computeChargeTimeRemaining
+          go_name: ComputeChargeTimeRemaining
+          returns: long
+          error: true
+        - java_method: getIntProperty
+          go_name: GetIntProperty
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getLongProperty
+          go_name: GetLongProperty
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getStringProperty
+          go_name: GetStringProperty
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: isCharging
+          go_name: IsCharging
+          returns: boolean
+          error: true
+constants:
+    - go_name: ActionCharging
+      value: '""'
+      go_type: string
+    - go_name: ActionDischarging
+      value: '""'
+      go_type: string
+    - go_name: BatteryCapacityLevelCritical
+      value: "0"
+      go_type: int
+    - go_name: BatteryCapacityLevelFull
+      value: "0"
+      go_type: int
+    - go_name: BatteryCapacityLevelHigh
+      value: "0"
+      go_type: int
+    - go_name: BatteryCapacityLevelLow
+      value: "0"
+      go_type: int
+    - go_name: BatteryCapacityLevelNormal
+      value: "0"
+      go_type: int
+    - go_name: BatteryCapacityLevelUnknown
+      value: "0"
+      go_type: int
+    - go_name: BatteryCapacityLevelUnsupported
+      value: "0"
+      go_type: int
+    - go_name: BatteryHealthCold
+      value: "0"
+      go_type: int
+    - go_name: BatteryHealthDead
+      value: "0"
+      go_type: int
+    - go_name: BatteryHealthGood
+      value: "0"
+      go_type: int
+    - go_name: BatteryHealthOverheat
+      value: "0"
+      go_type: int
+    - go_name: BatteryHealthOverVoltage
+      value: "0"
+      go_type: int
+    - go_name: BatteryHealthUnknown
+      value: "0"
+      go_type: int
+    - go_name: BatteryHealthUnspecifiedFailure
+      value: "0"
+      go_type: int
+    - go_name: BatteryPluggedAc
+      value: "0"
+      go_type: int
+    - go_name: BatteryPluggedDock
+      value: "0"
+      go_type: int
+    - go_name: BatteryPluggedUsb
+      value: "0"
+      go_type: int
+    - go_name: BatteryPluggedWireless
+      value: "0"
+      go_type: int
+    - go_name: BatteryPropertyCapacity
+      value: "0"
+      go_type: int
+    - go_name: BatteryPropertyChargeCounter
+      value: "0"
+      go_type: int
+    - go_name: BatteryPropertyCurrentAverage
+      value: "0"
+      go_type: int
+    - go_name: BatteryPropertyCurrentNow
+      value: "0"
+      go_type: int
+    - go_name: BatteryPropertyEnergyCounter
+      value: "0"
+      go_type: int
+    - go_name: BatteryPropertyStatus
+      value: "0"
+      go_type: int
+    - go_name: BatteryStatusCharging
+      value: "0"
+      go_type: int
+    - go_name: BatteryStatusDischarging
+      value: "0"
+      go_type: int
+    - go_name: BatteryStatusFull
+      value: "0"
+      go_type: int
+    - go_name: BatteryStatusNotCharging
+      value: "0"
+      go_type: int
+    - go_name: BatteryStatusUnknown
+      value: "0"
+      go_type: int
+    - go_name: ExtraBatteryLow
+      value: '""'
+      go_type: string
+    - go_name: ExtraCapacityLevel
+      value: '""'
+      go_type: string
+    - go_name: ExtraChargingStatus
+      value: '""'
+      go_type: string
+    - go_name: ExtraCycleCount
+      value: '""'
+      go_type: string
+    - go_name: ExtraHealth
+      value: '""'
+      go_type: string
+    - go_name: ExtraIconSmall
+      value: '""'
+      go_type: string
+    - go_name: ExtraLevel
+      value: '""'
+      go_type: string
+    - go_name: ExtraPlugged
+      value: '""'
+      go_type: string
+    - go_name: ExtraPresent
+      value: '""'
+      go_type: string
+    - go_name: ExtraScale
+      value: '""'
+      go_type: string
+    - go_name: ExtraStatus
+      value: '""'
+      go_type: string
+    - go_name: ExtraTechnology
+      value: '""'
+      go_type: string
+    - go_name: ExtraTemperature
+      value: '""'
+      go_type: string
+    - go_name: ExtraVoltage
+      value: '""'
+      go_type: string

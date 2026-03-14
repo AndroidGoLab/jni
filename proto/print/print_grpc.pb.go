@@ -21,139 +21,177 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ManagerService_GetPrintJobsRaw_FullMethodName = "/print.ManagerService/GetPrintJobsRaw"
-	ManagerService_PrintRaw_FullMethodName        = "/print.ManagerService/PrintRaw"
+	PrintManagerService_GetPrintJobs_FullMethodName          = "/print.PrintManagerService/GetPrintJobs"
+	PrintManagerService_IsPrintServiceEnabled_FullMethodName = "/print.PrintManagerService/IsPrintServiceEnabled"
+	PrintManagerService_Print_FullMethodName                 = "/print.PrintManagerService/Print"
 )
 
-// ManagerServiceClient is the client API for ManagerService service.
+// PrintManagerServiceClient is the client API for PrintManagerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ManagerServiceClient interface {
-	GetPrintJobsRaw(ctx context.Context, in *GetPrintJobsRawRequest, opts ...grpc.CallOption) (*GetPrintJobsRawResponse, error)
-	PrintRaw(ctx context.Context, in *PrintRawRequest, opts ...grpc.CallOption) (*PrintRawResponse, error)
+type PrintManagerServiceClient interface {
+	GetPrintJobs(ctx context.Context, in *GetPrintJobsRequest, opts ...grpc.CallOption) (*GetPrintJobsResponse, error)
+	IsPrintServiceEnabled(ctx context.Context, in *IsPrintServiceEnabledRequest, opts ...grpc.CallOption) (*IsPrintServiceEnabledResponse, error)
+	Print(ctx context.Context, in *PrintRequest, opts ...grpc.CallOption) (*PrintResponse, error)
 }
 
-type managerServiceClient struct {
+type printManagerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewManagerServiceClient(cc grpc.ClientConnInterface) ManagerServiceClient {
-	return &managerServiceClient{cc}
+func NewPrintManagerServiceClient(cc grpc.ClientConnInterface) PrintManagerServiceClient {
+	return &printManagerServiceClient{cc}
 }
 
-func (c *managerServiceClient) GetPrintJobsRaw(ctx context.Context, in *GetPrintJobsRawRequest, opts ...grpc.CallOption) (*GetPrintJobsRawResponse, error) {
+func (c *printManagerServiceClient) GetPrintJobs(ctx context.Context, in *GetPrintJobsRequest, opts ...grpc.CallOption) (*GetPrintJobsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPrintJobsRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_GetPrintJobsRaw_FullMethodName, in, out, cOpts...)
+	out := new(GetPrintJobsResponse)
+	err := c.cc.Invoke(ctx, PrintManagerService_GetPrintJobs_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) PrintRaw(ctx context.Context, in *PrintRawRequest, opts ...grpc.CallOption) (*PrintRawResponse, error) {
+func (c *printManagerServiceClient) IsPrintServiceEnabled(ctx context.Context, in *IsPrintServiceEnabledRequest, opts ...grpc.CallOption) (*IsPrintServiceEnabledResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PrintRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_PrintRaw_FullMethodName, in, out, cOpts...)
+	out := new(IsPrintServiceEnabledResponse)
+	err := c.cc.Invoke(ctx, PrintManagerService_IsPrintServiceEnabled_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ManagerServiceServer is the server API for ManagerService service.
-// All implementations must embed UnimplementedManagerServiceServer
+func (c *printManagerServiceClient) Print(ctx context.Context, in *PrintRequest, opts ...grpc.CallOption) (*PrintResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PrintResponse)
+	err := c.cc.Invoke(ctx, PrintManagerService_Print_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PrintManagerServiceServer is the server API for PrintManagerService service.
+// All implementations must embed UnimplementedPrintManagerServiceServer
 // for forward compatibility.
-type ManagerServiceServer interface {
-	GetPrintJobsRaw(context.Context, *GetPrintJobsRawRequest) (*GetPrintJobsRawResponse, error)
-	PrintRaw(context.Context, *PrintRawRequest) (*PrintRawResponse, error)
-	mustEmbedUnimplementedManagerServiceServer()
+type PrintManagerServiceServer interface {
+	GetPrintJobs(context.Context, *GetPrintJobsRequest) (*GetPrintJobsResponse, error)
+	IsPrintServiceEnabled(context.Context, *IsPrintServiceEnabledRequest) (*IsPrintServiceEnabledResponse, error)
+	Print(context.Context, *PrintRequest) (*PrintResponse, error)
+	mustEmbedUnimplementedPrintManagerServiceServer()
 }
 
-// UnimplementedManagerServiceServer must be embedded to have
+// UnimplementedPrintManagerServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedManagerServiceServer struct{}
+type UnimplementedPrintManagerServiceServer struct{}
 
-func (UnimplementedManagerServiceServer) GetPrintJobsRaw(context.Context, *GetPrintJobsRawRequest) (*GetPrintJobsRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetPrintJobsRaw not implemented")
+func (UnimplementedPrintManagerServiceServer) GetPrintJobs(context.Context, *GetPrintJobsRequest) (*GetPrintJobsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPrintJobs not implemented")
 }
-func (UnimplementedManagerServiceServer) PrintRaw(context.Context, *PrintRawRequest) (*PrintRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method PrintRaw not implemented")
+func (UnimplementedPrintManagerServiceServer) IsPrintServiceEnabled(context.Context, *IsPrintServiceEnabledRequest) (*IsPrintServiceEnabledResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsPrintServiceEnabled not implemented")
 }
-func (UnimplementedManagerServiceServer) mustEmbedUnimplementedManagerServiceServer() {}
-func (UnimplementedManagerServiceServer) testEmbeddedByValue()                        {}
+func (UnimplementedPrintManagerServiceServer) Print(context.Context, *PrintRequest) (*PrintResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Print not implemented")
+}
+func (UnimplementedPrintManagerServiceServer) mustEmbedUnimplementedPrintManagerServiceServer() {}
+func (UnimplementedPrintManagerServiceServer) testEmbeddedByValue()                             {}
 
-// UnsafeManagerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ManagerServiceServer will
+// UnsafePrintManagerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PrintManagerServiceServer will
 // result in compilation errors.
-type UnsafeManagerServiceServer interface {
-	mustEmbedUnimplementedManagerServiceServer()
+type UnsafePrintManagerServiceServer interface {
+	mustEmbedUnimplementedPrintManagerServiceServer()
 }
 
-func RegisterManagerServiceServer(s grpc.ServiceRegistrar, srv ManagerServiceServer) {
-	// If the following call panics, it indicates UnimplementedManagerServiceServer was
+func RegisterPrintManagerServiceServer(s grpc.ServiceRegistrar, srv PrintManagerServiceServer) {
+	// If the following call panics, it indicates UnimplementedPrintManagerServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ManagerService_ServiceDesc, srv)
+	s.RegisterService(&PrintManagerService_ServiceDesc, srv)
 }
 
-func _ManagerService_GetPrintJobsRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPrintJobsRawRequest)
+func _PrintManagerService_GetPrintJobs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPrintJobsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetPrintJobsRaw(ctx, in)
+		return srv.(PrintManagerServiceServer).GetPrintJobs(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_GetPrintJobsRaw_FullMethodName,
+		FullMethod: PrintManagerService_GetPrintJobs_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetPrintJobsRaw(ctx, req.(*GetPrintJobsRawRequest))
+		return srv.(PrintManagerServiceServer).GetPrintJobs(ctx, req.(*GetPrintJobsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_PrintRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PrintRawRequest)
+func _PrintManagerService_IsPrintServiceEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsPrintServiceEnabledRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).PrintRaw(ctx, in)
+		return srv.(PrintManagerServiceServer).IsPrintServiceEnabled(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_PrintRaw_FullMethodName,
+		FullMethod: PrintManagerService_IsPrintServiceEnabled_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).PrintRaw(ctx, req.(*PrintRawRequest))
+		return srv.(PrintManagerServiceServer).IsPrintServiceEnabled(ctx, req.(*IsPrintServiceEnabledRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ManagerService_ServiceDesc is the grpc.ServiceDesc for ManagerService service.
+func _PrintManagerService_Print_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PrintRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrintManagerServiceServer).Print(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrintManagerService_Print_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrintManagerServiceServer).Print(ctx, req.(*PrintRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// PrintManagerService_ServiceDesc is the grpc.ServiceDesc for PrintManagerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ManagerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "print.ManagerService",
-	HandlerType: (*ManagerServiceServer)(nil),
+var PrintManagerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "print.PrintManagerService",
+	HandlerType: (*PrintManagerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetPrintJobsRaw",
-			Handler:    _ManagerService_GetPrintJobsRaw_Handler,
+			MethodName: "GetPrintJobs",
+			Handler:    _PrintManagerService_GetPrintJobs_Handler,
 		},
 		{
-			MethodName: "PrintRaw",
-			Handler:    _ManagerService_PrintRaw_Handler,
+			MethodName: "IsPrintServiceEnabled",
+			Handler:    _PrintManagerService_IsPrintServiceEnabled_Handler,
+		},
+		{
+			MethodName: "Print",
+			Handler:    _PrintManagerService_Print_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

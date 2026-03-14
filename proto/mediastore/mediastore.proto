@@ -6,56 +6,293 @@ package mediastore;
 
 option go_package = "github.com/xaionaro-go/jni/proto/mediastore";
 
-message GetExternalVolumeNamesRawRequest {
-  int64 ctx = 1;
+message CanManageMediaRequest {
+  int64 arg0 = 1;
 }
 
-message GetExternalVolumeNamesRawResponse {
+message CanManageMediaResponse {
+  bool result = 1;
+}
+
+message CreateDeleteRequestRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message CreateDeleteRequestResponse {
   int64 result = 1;
 }
 
-message CreateWriteRequestRawRequest {
-  int64 resolver = 1;
-  int64 uris = 2;
+message CreateFavoriteRequestRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  bool arg2 = 3;
 }
 
-message CreateWriteRequestRawResponse {
+message CreateFavoriteRequestResponse {
   int64 result = 1;
 }
 
-message CreateTrashRequestRawRequest {
-  int64 resolver = 1;
-  int64 uris = 2;
-  bool trash = 3;
+message CreateTrashRequestRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  bool arg2 = 3;
 }
 
-message CreateTrashRequestRawResponse {
+message CreateTrashRequestResponse {
   int64 result = 1;
 }
 
-message CreateDeleteRequestRawRequest {
-  int64 resolver = 1;
-  int64 uris = 2;
+message CreateWriteRequestRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
 }
 
-message CreateDeleteRequestRawResponse {
+message CreateWriteRequestResponse {
   int64 result = 1;
 }
 
-message CreateFavoriteRequestRawRequest {
-  int64 resolver = 1;
-  int64 uris = 2;
-  bool favorite = 3;
+message GetDocumentUriRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
 }
 
-message CreateFavoriteRequestRawResponse {
+message GetDocumentUriResponse {
+  int64 result = 1;
+}
+
+message GetExternalVolumeNamesRequest {
+  int64 arg0 = 1;
+}
+
+message GetExternalVolumeNamesResponse {
+  int64 result = 1;
+}
+
+message GetGenerationRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
+}
+
+message GetGenerationResponse {
+  int64 result = 1;
+}
+
+message GetMediaScannerUriRequest {
+}
+
+message GetMediaScannerUriResponse {
+  int64 result = 1;
+}
+
+message GetMediaUriRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message GetMediaUriResponse {
+  int64 result = 1;
+}
+
+message GetOriginalMediaFormatFileDescriptorRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message GetOriginalMediaFormatFileDescriptorResponse {
+  int64 result = 1;
+}
+
+message GetPickImagesMaxLimitRequest {
+}
+
+message GetPickImagesMaxLimitResponse {
+  int32 result = 1;
+}
+
+message GetRecentExternalVolumeNamesRequest {
+  int64 arg0 = 1;
+}
+
+message GetRecentExternalVolumeNamesResponse {
+  int64 result = 1;
+}
+
+message GetRedactedUri2Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message GetRedactedUri2Response {
+  int64 result = 1;
+}
+
+message GetRedactedUri2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message GetRedactedUri2_1Response {
+  int64 result = 1;
+}
+
+message GetRequireOriginalRequest {
+  int64 arg0 = 1;
+}
+
+message GetRequireOriginalResponse {
+  bool result = 1;
+}
+
+message GetVersion1Request {
+  int64 arg0 = 1;
+}
+
+message GetVersion1Response {
+  string result = 1;
+}
+
+message GetVersion2_1Request {
+  int64 arg0 = 1;
+  string arg1 = 2;
+}
+
+message GetVersion2_1Response {
+  string result = 1;
+}
+
+message GetVolumeNameRequest {
+  int64 arg0 = 1;
+}
+
+message GetVolumeNameResponse {
+  string result = 1;
+}
+
+message IsCurrentCloudMediaProviderAuthorityRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
+}
+
+message IsCurrentCloudMediaProviderAuthorityResponse {
+  bool result = 1;
+}
+
+message IsCurrentSystemGalleryRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+  string arg2 = 3;
+}
+
+message IsCurrentSystemGalleryResponse {
+  bool result = 1;
+}
+
+message IsSupportedCloudMediaProviderAuthorityRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
+}
+
+message IsSupportedCloudMediaProviderAuthorityResponse {
+  bool result = 1;
+}
+
+message MarkIsFavoriteStatusRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  bool arg2 = 3;
+}
+
+message MarkIsFavoriteStatusResponse {
+}
+
+message NotifyCloudMediaChangedEventRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
+  string arg2 = 3;
+}
+
+message NotifyCloudMediaChangedEventResponse {
+}
+
+message OpenAssetFileDescriptorRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  string arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message OpenAssetFileDescriptorResponse {
+  int64 result = 1;
+}
+
+message OpenFileDescriptorRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  string arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message OpenFileDescriptorResponse {
+  int64 result = 1;
+}
+
+message OpenTypedAssetFileDescriptorRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  string arg2 = 3;
+  int64 arg3 = 4;
+  int64 arg4 = 5;
+}
+
+message OpenTypedAssetFileDescriptorResponse {
+  int64 result = 1;
+}
+
+message SetIncludePendingRequest {
+  int64 arg0 = 1;
+}
+
+message SetIncludePendingResponse {
+  int64 result = 1;
+}
+
+message SetRequireOriginalRequest {
+  int64 arg0 = 1;
+}
+
+message SetRequireOriginalResponse {
   int64 result = 1;
 }
 
 service MediaStoreService {
-  rpc GetExternalVolumeNamesRaw (GetExternalVolumeNamesRawRequest) returns (GetExternalVolumeNamesRawResponse);
-  rpc CreateWriteRequestRaw (CreateWriteRequestRawRequest) returns (CreateWriteRequestRawResponse);
-  rpc CreateTrashRequestRaw (CreateTrashRequestRawRequest) returns (CreateTrashRequestRawResponse);
-  rpc CreateDeleteRequestRaw (CreateDeleteRequestRawRequest) returns (CreateDeleteRequestRawResponse);
-  rpc CreateFavoriteRequestRaw (CreateFavoriteRequestRawRequest) returns (CreateFavoriteRequestRawResponse);
+  rpc CanManageMedia (CanManageMediaRequest) returns (CanManageMediaResponse);
+  rpc CreateDeleteRequest (CreateDeleteRequestRequest) returns (CreateDeleteRequestResponse);
+  rpc CreateFavoriteRequest (CreateFavoriteRequestRequest) returns (CreateFavoriteRequestResponse);
+  rpc CreateTrashRequest (CreateTrashRequestRequest) returns (CreateTrashRequestResponse);
+  rpc CreateWriteRequest (CreateWriteRequestRequest) returns (CreateWriteRequestResponse);
+  rpc GetDocumentUri (GetDocumentUriRequest) returns (GetDocumentUriResponse);
+  rpc GetExternalVolumeNames (GetExternalVolumeNamesRequest) returns (GetExternalVolumeNamesResponse);
+  rpc GetGeneration (GetGenerationRequest) returns (GetGenerationResponse);
+  rpc GetMediaScannerUri (GetMediaScannerUriRequest) returns (GetMediaScannerUriResponse);
+  rpc GetMediaUri (GetMediaUriRequest) returns (GetMediaUriResponse);
+  rpc GetOriginalMediaFormatFileDescriptor (GetOriginalMediaFormatFileDescriptorRequest) returns (GetOriginalMediaFormatFileDescriptorResponse);
+  rpc GetPickImagesMaxLimit (GetPickImagesMaxLimitRequest) returns (GetPickImagesMaxLimitResponse);
+  rpc GetRecentExternalVolumeNames (GetRecentExternalVolumeNamesRequest) returns (GetRecentExternalVolumeNamesResponse);
+  rpc GetRedactedUri2 (GetRedactedUri2Request) returns (GetRedactedUri2Response);
+  rpc GetRedactedUri2_1 (GetRedactedUri2_1Request) returns (GetRedactedUri2_1Response);
+  rpc GetRequireOriginal (GetRequireOriginalRequest) returns (GetRequireOriginalResponse);
+  rpc GetVersion1 (GetVersion1Request) returns (GetVersion1Response);
+  rpc GetVersion2_1 (GetVersion2_1Request) returns (GetVersion2_1Response);
+  rpc GetVolumeName (GetVolumeNameRequest) returns (GetVolumeNameResponse);
+  rpc IsCurrentCloudMediaProviderAuthority (IsCurrentCloudMediaProviderAuthorityRequest) returns (IsCurrentCloudMediaProviderAuthorityResponse);
+  rpc IsCurrentSystemGallery (IsCurrentSystemGalleryRequest) returns (IsCurrentSystemGalleryResponse);
+  rpc IsSupportedCloudMediaProviderAuthority (IsSupportedCloudMediaProviderAuthorityRequest) returns (IsSupportedCloudMediaProviderAuthorityResponse);
+  rpc MarkIsFavoriteStatus (MarkIsFavoriteStatusRequest) returns (MarkIsFavoriteStatusResponse);
+  rpc NotifyCloudMediaChangedEvent (NotifyCloudMediaChangedEventRequest) returns (NotifyCloudMediaChangedEventResponse);
+  rpc OpenAssetFileDescriptor (OpenAssetFileDescriptorRequest) returns (OpenAssetFileDescriptorResponse);
+  rpc OpenFileDescriptor (OpenFileDescriptorRequest) returns (OpenFileDescriptorResponse);
+  rpc OpenTypedAssetFileDescriptor (OpenTypedAssetFileDescriptorRequest) returns (OpenTypedAssetFileDescriptorResponse);
+  rpc SetIncludePending (SetIncludePendingRequest) returns (SetIncludePendingResponse);
+  rpc SetRequireOriginal (SetRequireOriginalRequest) returns (SetRequireOriginalResponse);
 }

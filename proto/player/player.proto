@@ -6,19 +6,150 @@ package player;
 
 option go_package = "github.com/xaionaro-go/jni/proto/player";
 
-message SetDataSourcePathRequest {
-  string path = 1;
+message AddTimedTextSource3Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  string arg2 = 3;
 }
 
-message SetDataSourcePathResponse {
+message AddTimedTextSource3Response {
 }
 
-message SetDataSourceUriRequest {
-  int64 ctx = 1;
-  int64 uri = 2;
+message AddTimedTextSource2_1Request {
+  int64 arg0 = 1;
+  string arg1 = 2;
 }
 
-message SetDataSourceUriResponse {
+message AddTimedTextSource2_1Response {
+}
+
+message AddTimedTextSource4_2Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  string arg3 = 4;
+}
+
+message AddTimedTextSource4_2Response {
+}
+
+message AddTimedTextSource2_3Request {
+  string arg0 = 1;
+  string arg1 = 2;
+}
+
+message AddTimedTextSource2_3Response {
+}
+
+message ClearOnMediaTimeDiscontinuityListenerRequest {
+}
+
+message ClearOnMediaTimeDiscontinuityListenerResponse {
+}
+
+message ClearOnSubtitleDataListenerRequest {
+}
+
+message ClearOnSubtitleDataListenerResponse {
+}
+
+message CreateVolumeShaperRequest {
+  int64 arg0 = 1;
+}
+
+message CreateVolumeShaperResponse {
+  int64 result = 1;
+}
+
+message DeselectTrackRequest {
+  int32 arg0 = 1;
+}
+
+message DeselectTrackResponse {
+}
+
+message GetDrmInfoRequest {
+}
+
+message GetDrmInfoResponse {
+  int64 result = 1;
+}
+
+message GetDrmPropertyStringRequest {
+  string arg0 = 1;
+}
+
+message GetDrmPropertyStringResponse {
+  string result = 1;
+}
+
+message GetKeyRequestRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  string arg2 = 3;
+  int32 arg3 = 4;
+  int64 arg4 = 5;
+  int64 arg5 = 6;
+}
+
+message GetKeyRequestResponse {
+  int64 result = 1;
+}
+
+message GetMetricsRequest {
+}
+
+message GetMetricsResponse {
+  int64 result = 1;
+}
+
+message GetPreferredDeviceRequest {
+}
+
+message GetPreferredDeviceResponse {
+  int64 result = 1;
+}
+
+message GetRoutedDeviceRequest {
+}
+
+message GetRoutedDeviceResponse {
+  int64 result = 1;
+}
+
+message GetRoutedDevicesRequest {
+}
+
+message GetRoutedDevicesResponse {
+  int64 result = 1;
+}
+
+message GetSelectedTrackRequest {
+  int32 arg0 = 1;
+}
+
+message GetSelectedTrackResponse {
+  int32 result = 1;
+}
+
+message GetTimestampRequest {
+}
+
+message GetTimestampResponse {
+  int64 result = 1;
+}
+
+message GetTrackInfoRequest {
+}
+
+message GetTrackInfoResponse {
+  int64 result = 1;
+}
+
+message PauseRequest {
+}
+
+message PauseResponse {
 }
 
 message PrepareRequest {
@@ -33,86 +164,20 @@ message PrepareAsyncRequest {
 message PrepareAsyncResponse {
 }
 
-message StartRequest {
+message PrepareDrmRequest {
+  int64 arg0 = 1;
 }
 
-message StartResponse {
+message PrepareDrmResponse {
 }
 
-message PauseRequest {
+message ProvideKeyResponseRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
 }
 
-message PauseResponse {
-}
-
-message StopRequest {
-}
-
-message StopResponse {
-}
-
-message SeekToRequest {
-  int32 msec = 1;
-}
-
-message SeekToResponse {
-}
-
-message GetDurationRequest {
-}
-
-message GetDurationResponse {
-  int32 result = 1;
-}
-
-message GetCurrentPositionRequest {
-}
-
-message GetCurrentPositionResponse {
-  int32 result = 1;
-}
-
-message IsPlayingRequest {
-}
-
-message IsPlayingResponse {
-  bool result = 1;
-}
-
-message SetVolumeRequest {
-  float left_volume = 1;
-  float right_volume = 2;
-}
-
-message SetVolumeResponse {
-}
-
-message SetLoopingRequest {
-  bool looping = 1;
-}
-
-message SetLoopingResponse {
-}
-
-message SetOnCompletionListenerRequest {
-  int64 listener = 1;
-}
-
-message SetOnCompletionListenerResponse {
-}
-
-message SetOnErrorListenerRequest {
-  int64 listener = 1;
-}
-
-message SetOnErrorListenerResponse {
-}
-
-message SetOnPreparedListenerRequest {
-  int64 listener = 1;
-}
-
-message SetOnPreparedListenerResponse {
+message ProvideKeyResponseResponse {
+  int64 result = 1;
 }
 
 message ReleaseRequest {
@@ -121,79 +186,440 @@ message ReleaseRequest {
 message ReleaseResponse {
 }
 
+message ReleaseDrmRequest {
+}
+
+message ReleaseDrmResponse {
+}
+
+message RemoveOnRoutingChangedListenerRequest {
+  int64 arg0 = 1;
+}
+
+message RemoveOnRoutingChangedListenerResponse {
+}
+
 message ResetRequest {
 }
 
 message ResetResponse {
 }
 
-message OnCompletionListenerOnCompletionEvent {
+message RestoreKeysRequest {
   int64 arg0 = 1;
 }
 
-message OnCompletionListenerEvent {
-  optional OnCompletionListenerOnCompletionEvent on_completion = 1;
+message RestoreKeysResponse {
 }
 
-message SubscribeOnCompletionListenerRequest {
+message SeekTo1Request {
+  int32 arg0 = 1;
 }
 
-message OnErrorListenerOnErrorEvent {
+message SeekTo1Response {
+}
+
+message SeekTo2_1Request {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message SeekTo2_1Response {
+}
+
+message SelectTrackRequest {
+  int32 arg0 = 1;
+}
+
+message SelectTrackResponse {
+}
+
+message SetAudioAttributesRequest {
+  int64 arg0 = 1;
+}
+
+message SetAudioAttributesResponse {
+}
+
+message SetAudioSessionIdRequest {
+  int32 arg0 = 1;
+}
+
+message SetAudioSessionIdResponse {
+}
+
+message SetAudioStreamTypeRequest {
+  int32 arg0 = 1;
+}
+
+message SetAudioStreamTypeResponse {
+}
+
+message SetAuxEffectSendLevelRequest {
+  float arg0 = 1;
+}
+
+message SetAuxEffectSendLevelResponse {
+}
+
+message SetDataSource2Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message SetDataSource2Response {
+}
+
+message SetDataSource4_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message SetDataSource4_1Response {
+}
+
+message SetDataSource5_2Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+  int64 arg4 = 5;
+}
+
+message SetDataSource5_2Response {
+}
+
+message SetDataSource1_3Request {
+  int64 arg0 = 1;
+}
+
+message SetDataSource1_3Response {
+}
+
+message SetDataSource1_4Request {
+  int64 arg0 = 1;
+}
+
+message SetDataSource1_4Response {
+}
+
+message SetDataSource1_5Request {
+  int64 arg0 = 1;
+}
+
+message SetDataSource1_5Response {
+}
+
+message SetDataSource3_6Request {
   int64 arg0 = 1;
   int64 arg1 = 2;
   int64 arg2 = 3;
 }
 
-message OnErrorListenerEvent {
-  optional OnErrorListenerOnErrorEvent on_error = 1;
+message SetDataSource3_6Response {
 }
 
-message SubscribeOnErrorListenerRequest {
+message SetDataSource1_7Request {
+  string arg0 = 1;
 }
 
-message OnPreparedListenerOnPreparedEvent {
+message SetDataSource1_7Response {
+}
+
+message SetDisplayRequest {
   int64 arg0 = 1;
 }
 
-message OnPreparedListenerEvent {
-  optional OnPreparedListenerOnPreparedEvent on_prepared = 1;
+message SetDisplayResponse {
 }
 
-message SubscribeOnPreparedListenerRequest {
+message SetDrmPropertyStringRequest {
+  string arg0 = 1;
+  string arg1 = 2;
 }
 
-service PlayerService {
-  rpc SetDataSourcePath (SetDataSourcePathRequest) returns (SetDataSourcePathResponse);
-  rpc SetDataSourceUri (SetDataSourceUriRequest) returns (SetDataSourceUriResponse);
+message SetDrmPropertyStringResponse {
+}
+
+message SetOnBufferingUpdateListenerRequest {
+  int64 arg0 = 1;
+}
+
+message SetOnBufferingUpdateListenerResponse {
+}
+
+message SetOnCompletionListenerRequest {
+  int64 arg0 = 1;
+}
+
+message SetOnCompletionListenerResponse {
+}
+
+message SetOnDrmConfigHelperRequest {
+  int64 arg0 = 1;
+}
+
+message SetOnDrmConfigHelperResponse {
+}
+
+message SetOnDrmInfoListenerRequest {
+  int64 arg0 = 1;
+}
+
+message SetOnDrmInfoListenerResponse {
+}
+
+message SetOnDrmPreparedListenerRequest {
+  int64 arg0 = 1;
+}
+
+message SetOnDrmPreparedListenerResponse {
+}
+
+message SetOnErrorListenerRequest {
+  int64 arg0 = 1;
+}
+
+message SetOnErrorListenerResponse {
+}
+
+message SetOnInfoListenerRequest {
+  int64 arg0 = 1;
+}
+
+message SetOnInfoListenerResponse {
+}
+
+message SetOnMediaTimeDiscontinuityListenerRequest {
+  int64 arg0 = 1;
+}
+
+message SetOnMediaTimeDiscontinuityListenerResponse {
+}
+
+message SetOnPreparedListenerRequest {
+  int64 arg0 = 1;
+}
+
+message SetOnPreparedListenerResponse {
+}
+
+message SetOnSeekCompleteListenerRequest {
+  int64 arg0 = 1;
+}
+
+message SetOnSeekCompleteListenerResponse {
+}
+
+message SetOnSubtitleDataListenerRequest {
+  int64 arg0 = 1;
+}
+
+message SetOnSubtitleDataListenerResponse {
+}
+
+message SetOnTimedMetaDataAvailableListenerRequest {
+  int64 arg0 = 1;
+}
+
+message SetOnTimedMetaDataAvailableListenerResponse {
+}
+
+message SetOnTimedTextListenerRequest {
+  int64 arg0 = 1;
+}
+
+message SetOnTimedTextListenerResponse {
+}
+
+message SetOnVideoSizeChangedListenerRequest {
+  int64 arg0 = 1;
+}
+
+message SetOnVideoSizeChangedListenerResponse {
+}
+
+message SetPreferredDeviceRequest {
+  int64 arg0 = 1;
+}
+
+message SetPreferredDeviceResponse {
+  bool result = 1;
+}
+
+message SetScreenOnWhilePlayingRequest {
+  bool arg0 = 1;
+}
+
+message SetScreenOnWhilePlayingResponse {
+}
+
+message SetSurfaceRequest {
+  int64 arg0 = 1;
+}
+
+message SetSurfaceResponse {
+}
+
+message SetVideoScalingModeRequest {
+  int32 arg0 = 1;
+}
+
+message SetVideoScalingModeResponse {
+}
+
+message SetVolumeRequest {
+  float arg0 = 1;
+  float arg1 = 2;
+}
+
+message SetVolumeResponse {
+}
+
+message SetWakeModeRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message SetWakeModeResponse {
+}
+
+message StartRequest {
+}
+
+message StartResponse {
+}
+
+message StopRequest {
+}
+
+message StopResponse {
+}
+
+message Create2Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message Create2Response {
+  int64 result = 1;
+}
+
+message Create3_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message Create3_1Response {
+  int64 result = 1;
+}
+
+message Create5_2Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+  int32 arg4 = 5;
+}
+
+message Create5_2Response {
+  int64 result = 1;
+}
+
+message Create2_3Request {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message Create2_3Response {
+  int64 result = 1;
+}
+
+message Create4_4Request {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+  int64 arg2 = 3;
+  int32 arg3 = 4;
+}
+
+message Create4_4Response {
+  int64 result = 1;
+}
+
+service MediaPlayerService {
+  rpc AddTimedTextSource3 (AddTimedTextSource3Request) returns (AddTimedTextSource3Response);
+  rpc AddTimedTextSource2_1 (AddTimedTextSource2_1Request) returns (AddTimedTextSource2_1Response);
+  rpc AddTimedTextSource4_2 (AddTimedTextSource4_2Request) returns (AddTimedTextSource4_2Response);
+  rpc AddTimedTextSource2_3 (AddTimedTextSource2_3Request) returns (AddTimedTextSource2_3Response);
+  rpc ClearOnMediaTimeDiscontinuityListener (ClearOnMediaTimeDiscontinuityListenerRequest) returns (ClearOnMediaTimeDiscontinuityListenerResponse);
+  rpc ClearOnSubtitleDataListener (ClearOnSubtitleDataListenerRequest) returns (ClearOnSubtitleDataListenerResponse);
+  rpc CreateVolumeShaper (CreateVolumeShaperRequest) returns (CreateVolumeShaperResponse);
+  rpc DeselectTrack (DeselectTrackRequest) returns (DeselectTrackResponse);
+  rpc GetDrmInfo (GetDrmInfoRequest) returns (GetDrmInfoResponse);
+  rpc GetDrmPropertyString (GetDrmPropertyStringRequest) returns (GetDrmPropertyStringResponse);
+  rpc GetKeyRequest (GetKeyRequestRequest) returns (GetKeyRequestResponse);
+  rpc GetMetrics (GetMetricsRequest) returns (GetMetricsResponse);
+  rpc GetPreferredDevice (GetPreferredDeviceRequest) returns (GetPreferredDeviceResponse);
+  rpc GetRoutedDevice (GetRoutedDeviceRequest) returns (GetRoutedDeviceResponse);
+  rpc GetRoutedDevices (GetRoutedDevicesRequest) returns (GetRoutedDevicesResponse);
+  rpc GetSelectedTrack (GetSelectedTrackRequest) returns (GetSelectedTrackResponse);
+  rpc GetTimestamp (GetTimestampRequest) returns (GetTimestampResponse);
+  rpc GetTrackInfo (GetTrackInfoRequest) returns (GetTrackInfoResponse);
+  rpc Pause (PauseRequest) returns (PauseResponse);
   rpc Prepare (PrepareRequest) returns (PrepareResponse);
   rpc PrepareAsync (PrepareAsyncRequest) returns (PrepareAsyncResponse);
-  rpc Start (StartRequest) returns (StartResponse);
-  rpc Pause (PauseRequest) returns (PauseResponse);
-  rpc Stop (StopRequest) returns (StopResponse);
-  rpc SeekTo (SeekToRequest) returns (SeekToResponse);
-  rpc GetDuration (GetDurationRequest) returns (GetDurationResponse);
-  rpc GetCurrentPosition (GetCurrentPositionRequest) returns (GetCurrentPositionResponse);
-  rpc IsPlaying (IsPlayingRequest) returns (IsPlayingResponse);
-  rpc SetVolume (SetVolumeRequest) returns (SetVolumeResponse);
-  rpc SetLooping (SetLoopingRequest) returns (SetLoopingResponse);
-  rpc SetOnCompletionListener (SetOnCompletionListenerRequest) returns (SetOnCompletionListenerResponse);
-  rpc SetOnErrorListener (SetOnErrorListenerRequest) returns (SetOnErrorListenerResponse);
-  rpc SetOnPreparedListener (SetOnPreparedListenerRequest) returns (SetOnPreparedListenerResponse);
+  rpc PrepareDrm (PrepareDrmRequest) returns (PrepareDrmResponse);
+  rpc ProvideKeyResponse (ProvideKeyResponseRequest) returns (ProvideKeyResponseResponse);
   rpc Release (ReleaseRequest) returns (ReleaseResponse);
+  rpc ReleaseDrm (ReleaseDrmRequest) returns (ReleaseDrmResponse);
+  rpc RemoveOnRoutingChangedListener (RemoveOnRoutingChangedListenerRequest) returns (RemoveOnRoutingChangedListenerResponse);
   rpc Reset (ResetRequest) returns (ResetResponse);
-}
-
-service OnCompletionListenerService {
-  // Server-streaming events from android.media.MediaPlayer$OnCompletionListener
-  rpc SubscribeOnCompletionListener (SubscribeOnCompletionListenerRequest) returns (stream OnCompletionListenerEvent);
-}
-
-service OnErrorListenerService {
-  // Server-streaming events from android.media.MediaPlayer$OnErrorListener
-  rpc SubscribeOnErrorListener (SubscribeOnErrorListenerRequest) returns (stream OnErrorListenerEvent);
-}
-
-service OnPreparedListenerService {
-  // Server-streaming events from android.media.MediaPlayer$OnPreparedListener
-  rpc SubscribeOnPreparedListener (SubscribeOnPreparedListenerRequest) returns (stream OnPreparedListenerEvent);
+  rpc RestoreKeys (RestoreKeysRequest) returns (RestoreKeysResponse);
+  rpc SeekTo1 (SeekTo1Request) returns (SeekTo1Response);
+  rpc SeekTo2_1 (SeekTo2_1Request) returns (SeekTo2_1Response);
+  rpc SelectTrack (SelectTrackRequest) returns (SelectTrackResponse);
+  rpc SetAudioAttributes (SetAudioAttributesRequest) returns (SetAudioAttributesResponse);
+  rpc SetAudioSessionId (SetAudioSessionIdRequest) returns (SetAudioSessionIdResponse);
+  rpc SetAudioStreamType (SetAudioStreamTypeRequest) returns (SetAudioStreamTypeResponse);
+  rpc SetAuxEffectSendLevel (SetAuxEffectSendLevelRequest) returns (SetAuxEffectSendLevelResponse);
+  rpc SetDataSource2 (SetDataSource2Request) returns (SetDataSource2Response);
+  rpc SetDataSource4_1 (SetDataSource4_1Request) returns (SetDataSource4_1Response);
+  rpc SetDataSource5_2 (SetDataSource5_2Request) returns (SetDataSource5_2Response);
+  rpc SetDataSource1_3 (SetDataSource1_3Request) returns (SetDataSource1_3Response);
+  rpc SetDataSource1_4 (SetDataSource1_4Request) returns (SetDataSource1_4Response);
+  rpc SetDataSource1_5 (SetDataSource1_5Request) returns (SetDataSource1_5Response);
+  rpc SetDataSource3_6 (SetDataSource3_6Request) returns (SetDataSource3_6Response);
+  rpc SetDataSource1_7 (SetDataSource1_7Request) returns (SetDataSource1_7Response);
+  rpc SetDisplay (SetDisplayRequest) returns (SetDisplayResponse);
+  rpc SetDrmPropertyString (SetDrmPropertyStringRequest) returns (SetDrmPropertyStringResponse);
+  rpc SetOnBufferingUpdateListener (SetOnBufferingUpdateListenerRequest) returns (SetOnBufferingUpdateListenerResponse);
+  rpc SetOnCompletionListener (SetOnCompletionListenerRequest) returns (SetOnCompletionListenerResponse);
+  rpc SetOnDrmConfigHelper (SetOnDrmConfigHelperRequest) returns (SetOnDrmConfigHelperResponse);
+  rpc SetOnDrmInfoListener (SetOnDrmInfoListenerRequest) returns (SetOnDrmInfoListenerResponse);
+  rpc SetOnDrmPreparedListener (SetOnDrmPreparedListenerRequest) returns (SetOnDrmPreparedListenerResponse);
+  rpc SetOnErrorListener (SetOnErrorListenerRequest) returns (SetOnErrorListenerResponse);
+  rpc SetOnInfoListener (SetOnInfoListenerRequest) returns (SetOnInfoListenerResponse);
+  rpc SetOnMediaTimeDiscontinuityListener (SetOnMediaTimeDiscontinuityListenerRequest) returns (SetOnMediaTimeDiscontinuityListenerResponse);
+  rpc SetOnPreparedListener (SetOnPreparedListenerRequest) returns (SetOnPreparedListenerResponse);
+  rpc SetOnSeekCompleteListener (SetOnSeekCompleteListenerRequest) returns (SetOnSeekCompleteListenerResponse);
+  rpc SetOnSubtitleDataListener (SetOnSubtitleDataListenerRequest) returns (SetOnSubtitleDataListenerResponse);
+  rpc SetOnTimedMetaDataAvailableListener (SetOnTimedMetaDataAvailableListenerRequest) returns (SetOnTimedMetaDataAvailableListenerResponse);
+  rpc SetOnTimedTextListener (SetOnTimedTextListenerRequest) returns (SetOnTimedTextListenerResponse);
+  rpc SetOnVideoSizeChangedListener (SetOnVideoSizeChangedListenerRequest) returns (SetOnVideoSizeChangedListenerResponse);
+  rpc SetPreferredDevice (SetPreferredDeviceRequest) returns (SetPreferredDeviceResponse);
+  rpc SetScreenOnWhilePlaying (SetScreenOnWhilePlayingRequest) returns (SetScreenOnWhilePlayingResponse);
+  rpc SetSurface (SetSurfaceRequest) returns (SetSurfaceResponse);
+  rpc SetVideoScalingMode (SetVideoScalingModeRequest) returns (SetVideoScalingModeResponse);
+  rpc SetVolume (SetVolumeRequest) returns (SetVolumeResponse);
+  rpc SetWakeMode (SetWakeModeRequest) returns (SetWakeModeResponse);
+  rpc Start (StartRequest) returns (StartResponse);
+  rpc Stop (StopRequest) returns (StopResponse);
+  rpc Create2 (Create2Request) returns (Create2Response);
+  rpc Create3_1 (Create3_1Request) returns (Create3_1Response);
+  rpc Create5_2 (Create5_2Request) returns (Create5_2Response);
+  rpc Create2_3 (Create2_3Request) returns (Create2_3Response);
+  rpc Create4_4 (Create4_4Request) returns (Create4_4Response);
 }

@@ -6,9 +6,11 @@ package ir;
 
 option go_package = "github.com/xaionaro-go/jni/proto/ir";
 
-message FrequencyRange {
-  int32 min_frequency = 1;
-  int32 max_frequency = 2;
+message GetCarrierFrequenciesRequest {
+}
+
+message GetCarrierFrequenciesResponse {
+  int64 result = 1;
 }
 
 message HasIrEmitterRequest {
@@ -18,23 +20,35 @@ message HasIrEmitterResponse {
   bool result = 1;
 }
 
-message GetCarrierFrequenciesRawRequest {
-}
-
-message GetCarrierFrequenciesRawResponse {
-  int64 result = 1;
-}
-
 message TransmitRequest {
-  int32 carrier_frequency = 1;
-  int64 pattern = 2;
+  int32 arg0 = 1;
+  int64 arg1 = 2;
 }
 
 message TransmitResponse {
 }
 
-service ManagerService {
+message GetMaxFrequencyRequest {
+}
+
+message GetMaxFrequencyResponse {
+  int32 result = 1;
+}
+
+message GetMinFrequencyRequest {
+}
+
+message GetMinFrequencyResponse {
+  int32 result = 1;
+}
+
+service ConsumerIrManagerService {
+  rpc GetCarrierFrequencies (GetCarrierFrequenciesRequest) returns (GetCarrierFrequenciesResponse);
   rpc HasIrEmitter (HasIrEmitterRequest) returns (HasIrEmitterResponse);
-  rpc GetCarrierFrequenciesRaw (GetCarrierFrequenciesRawRequest) returns (GetCarrierFrequenciesRawResponse);
   rpc Transmit (TransmitRequest) returns (TransmitResponse);
+}
+
+service ConsumerIrManagerCarrierFrequencyRangeService {
+  rpc GetMaxFrequency (GetMaxFrequencyRequest) returns (GetMaxFrequencyResponse);
+  rpc GetMinFrequency (GetMinFrequencyRequest) returns (GetMinFrequencyResponse);
 }

@@ -23,27 +23,26 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type StatusBarNotification struct {
+type CanBubbleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StatusBarNotification) Reset() {
-	*x = StatusBarNotification{}
+func (x *CanBubbleRequest) Reset() {
+	*x = CanBubbleRequest{}
 	mi := &file_proto_notification_notification_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StatusBarNotification) String() string {
+func (x *CanBubbleRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StatusBarNotification) ProtoMessage() {}
+func (*CanBubbleRequest) ProtoMessage() {}
 
-func (x *StatusBarNotification) ProtoReflect() protoreflect.Message {
+func (x *CanBubbleRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -55,76 +54,33 @@ func (x *StatusBarNotification) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StatusBarNotification.ProtoReflect.Descriptor instead.
-func (*StatusBarNotification) Descriptor() ([]byte, []int) {
+// Deprecated: Use CanBubbleRequest.ProtoReflect.Descriptor instead.
+func (*CanBubbleRequest) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *StatusBarNotification) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-type AreNotificationsEnabledRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AreNotificationsEnabledRequest) Reset() {
-	*x = AreNotificationsEnabledRequest{}
-	mi := &file_proto_notification_notification_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AreNotificationsEnabledRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AreNotificationsEnabledRequest) ProtoMessage() {}
-
-func (x *AreNotificationsEnabledRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AreNotificationsEnabledRequest.ProtoReflect.Descriptor instead.
-func (*AreNotificationsEnabledRequest) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{1}
-}
-
-type AreNotificationsEnabledResponse struct {
+type CanBubbleResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AreNotificationsEnabledResponse) Reset() {
-	*x = AreNotificationsEnabledResponse{}
-	mi := &file_proto_notification_notification_proto_msgTypes[2]
+func (x *CanBubbleResponse) Reset() {
+	*x = CanBubbleResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AreNotificationsEnabledResponse) String() string {
+func (x *CanBubbleResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AreNotificationsEnabledResponse) ProtoMessage() {}
+func (*CanBubbleResponse) ProtoMessage() {}
 
-func (x *AreNotificationsEnabledResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[2]
+func (x *CanBubbleResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -135,39 +91,75 @@ func (x *AreNotificationsEnabledResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AreNotificationsEnabledResponse.ProtoReflect.Descriptor instead.
-func (*AreNotificationsEnabledResponse) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{2}
+// Deprecated: Use CanBubbleResponse.ProtoReflect.Descriptor instead.
+func (*CanBubbleResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *AreNotificationsEnabledResponse) GetResult() bool {
+func (x *CanBubbleResponse) GetResult() bool {
 	if x != nil {
 		return x.Result
 	}
 	return false
 }
 
-type CreateNotificationChannelRequest struct {
+type CanBypassDndRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Channel       int64                  `protobuf:"varint,1,opt,name=channel,proto3" json:"channel,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateNotificationChannelRequest) Reset() {
-	*x = CreateNotificationChannelRequest{}
+func (x *CanBypassDndRequest) Reset() {
+	*x = CanBypassDndRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CanBypassDndRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CanBypassDndRequest) ProtoMessage() {}
+
+func (x *CanBypassDndRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CanBypassDndRequest.ProtoReflect.Descriptor instead.
+func (*CanBypassDndRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{2}
+}
+
+type CanBypassDndResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CanBypassDndResponse) Reset() {
+	*x = CanBypassDndResponse{}
 	mi := &file_proto_notification_notification_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateNotificationChannelRequest) String() string {
+func (x *CanBypassDndResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateNotificationChannelRequest) ProtoMessage() {}
+func (*CanBypassDndResponse) ProtoMessage() {}
 
-func (x *CreateNotificationChannelRequest) ProtoReflect() protoreflect.Message {
+func (x *CanBypassDndResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -179,38 +171,38 @@ func (x *CreateNotificationChannelRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateNotificationChannelRequest.ProtoReflect.Descriptor instead.
-func (*CreateNotificationChannelRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CanBypassDndResponse.ProtoReflect.Descriptor instead.
+func (*CanBypassDndResponse) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *CreateNotificationChannelRequest) GetChannel() int64 {
+func (x *CanBypassDndResponse) GetResult() bool {
 	if x != nil {
-		return x.Channel
+		return x.Result
 	}
-	return 0
+	return false
 }
 
-type CreateNotificationChannelResponse struct {
+type CanShowBadgeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateNotificationChannelResponse) Reset() {
-	*x = CreateNotificationChannelResponse{}
+func (x *CanShowBadgeRequest) Reset() {
+	*x = CanShowBadgeRequest{}
 	mi := &file_proto_notification_notification_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateNotificationChannelResponse) String() string {
+func (x *CanShowBadgeRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateNotificationChannelResponse) ProtoMessage() {}
+func (*CanShowBadgeRequest) ProtoMessage() {}
 
-func (x *CreateNotificationChannelResponse) ProtoReflect() protoreflect.Message {
+func (x *CanShowBadgeRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -222,32 +214,32 @@ func (x *CreateNotificationChannelResponse) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateNotificationChannelResponse.ProtoReflect.Descriptor instead.
-func (*CreateNotificationChannelResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use CanShowBadgeRequest.ProtoReflect.Descriptor instead.
+func (*CanShowBadgeRequest) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{4}
 }
 
-type DeleteNotificationChannelRequest struct {
+type CanShowBadgeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ChannelId     string                 `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DeleteNotificationChannelRequest) Reset() {
-	*x = DeleteNotificationChannelRequest{}
+func (x *CanShowBadgeResponse) Reset() {
+	*x = CanShowBadgeResponse{}
 	mi := &file_proto_notification_notification_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DeleteNotificationChannelRequest) String() string {
+func (x *CanShowBadgeResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeleteNotificationChannelRequest) ProtoMessage() {}
+func (*CanShowBadgeResponse) ProtoMessage() {}
 
-func (x *DeleteNotificationChannelRequest) ProtoReflect() protoreflect.Message {
+func (x *CanShowBadgeResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -259,38 +251,38 @@ func (x *DeleteNotificationChannelRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteNotificationChannelRequest.ProtoReflect.Descriptor instead.
-func (*DeleteNotificationChannelRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CanShowBadgeResponse.ProtoReflect.Descriptor instead.
+func (*CanShowBadgeResponse) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *DeleteNotificationChannelRequest) GetChannelId() string {
+func (x *CanShowBadgeResponse) GetResult() bool {
 	if x != nil {
-		return x.ChannelId
+		return x.Result
 	}
-	return ""
+	return false
 }
 
-type DeleteNotificationChannelResponse struct {
+type DescribeContentsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DeleteNotificationChannelResponse) Reset() {
-	*x = DeleteNotificationChannelResponse{}
+func (x *DescribeContentsRequest) Reset() {
+	*x = DescribeContentsRequest{}
 	mi := &file_proto_notification_notification_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DeleteNotificationChannelResponse) String() string {
+func (x *DescribeContentsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeleteNotificationChannelResponse) ProtoMessage() {}
+func (*DescribeContentsRequest) ProtoMessage() {}
 
-func (x *DeleteNotificationChannelResponse) ProtoReflect() protoreflect.Message {
+func (x *DescribeContentsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -302,31 +294,32 @@ func (x *DeleteNotificationChannelResponse) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteNotificationChannelResponse.ProtoReflect.Descriptor instead.
-func (*DeleteNotificationChannelResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use DescribeContentsRequest.ProtoReflect.Descriptor instead.
+func (*DescribeContentsRequest) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{6}
 }
 
-type GetNotificationChannelsRawRequest struct {
+type DescribeContentsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetNotificationChannelsRawRequest) Reset() {
-	*x = GetNotificationChannelsRawRequest{}
+func (x *DescribeContentsResponse) Reset() {
+	*x = DescribeContentsResponse{}
 	mi := &file_proto_notification_notification_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetNotificationChannelsRawRequest) String() string {
+func (x *DescribeContentsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetNotificationChannelsRawRequest) ProtoMessage() {}
+func (*DescribeContentsResponse) ProtoMessage() {}
 
-func (x *GetNotificationChannelsRawRequest) ProtoReflect() protoreflect.Message {
+func (x *DescribeContentsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -338,32 +331,39 @@ func (x *GetNotificationChannelsRawRequest) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetNotificationChannelsRawRequest.ProtoReflect.Descriptor instead.
-func (*GetNotificationChannelsRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DescribeContentsResponse.ProtoReflect.Descriptor instead.
+func (*DescribeContentsResponse) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{7}
 }
 
-type GetNotificationChannelsRawResponse struct {
+func (x *DescribeContentsResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type EnableLightsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetNotificationChannelsRawResponse) Reset() {
-	*x = GetNotificationChannelsRawResponse{}
+func (x *EnableLightsRequest) Reset() {
+	*x = EnableLightsRequest{}
 	mi := &file_proto_notification_notification_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetNotificationChannelsRawResponse) String() string {
+func (x *EnableLightsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetNotificationChannelsRawResponse) ProtoMessage() {}
+func (*EnableLightsRequest) ProtoMessage() {}
 
-func (x *GetNotificationChannelsRawResponse) ProtoReflect() protoreflect.Message {
+func (x *EnableLightsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -375,40 +375,38 @@ func (x *GetNotificationChannelsRawResponse) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetNotificationChannelsRawResponse.ProtoReflect.Descriptor instead.
-func (*GetNotificationChannelsRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use EnableLightsRequest.ProtoReflect.Descriptor instead.
+func (*EnableLightsRequest) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *GetNotificationChannelsRawResponse) GetResult() int64 {
+func (x *EnableLightsRequest) GetArg0() bool {
 	if x != nil {
-		return x.Result
+		return x.Arg0
 	}
-	return 0
+	return false
 }
 
-type NotifyRawRequest struct {
+type EnableLightsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Notification  int64                  `protobuf:"varint,2,opt,name=notification,proto3" json:"notification,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *NotifyRawRequest) Reset() {
-	*x = NotifyRawRequest{}
+func (x *EnableLightsResponse) Reset() {
+	*x = EnableLightsResponse{}
 	mi := &file_proto_notification_notification_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *NotifyRawRequest) String() string {
+func (x *EnableLightsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*NotifyRawRequest) ProtoMessage() {}
+func (*EnableLightsResponse) ProtoMessage() {}
 
-func (x *NotifyRawRequest) ProtoReflect() protoreflect.Message {
+func (x *EnableLightsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -420,45 +418,32 @@ func (x *NotifyRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use NotifyRawRequest.ProtoReflect.Descriptor instead.
-func (*NotifyRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use EnableLightsResponse.ProtoReflect.Descriptor instead.
+func (*EnableLightsResponse) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *NotifyRawRequest) GetId() int32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *NotifyRawRequest) GetNotification() int64 {
-	if x != nil {
-		return x.Notification
-	}
-	return 0
-}
-
-type NotifyRawResponse struct {
+type EnableVibrationRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *NotifyRawResponse) Reset() {
-	*x = NotifyRawResponse{}
+func (x *EnableVibrationRequest) Reset() {
+	*x = EnableVibrationRequest{}
 	mi := &file_proto_notification_notification_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *NotifyRawResponse) String() string {
+func (x *EnableVibrationRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*NotifyRawResponse) ProtoMessage() {}
+func (*EnableVibrationRequest) ProtoMessage() {}
 
-func (x *NotifyRawResponse) ProtoReflect() protoreflect.Message {
+func (x *EnableVibrationRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -470,32 +455,38 @@ func (x *NotifyRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use NotifyRawResponse.ProtoReflect.Descriptor instead.
-func (*NotifyRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use EnableVibrationRequest.ProtoReflect.Descriptor instead.
+func (*EnableVibrationRequest) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{10}
 }
 
-type CancelRequest struct {
+func (x *EnableVibrationRequest) GetArg0() bool {
+	if x != nil {
+		return x.Arg0
+	}
+	return false
+}
+
+type EnableVibrationResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CancelRequest) Reset() {
-	*x = CancelRequest{}
+func (x *EnableVibrationResponse) Reset() {
+	*x = EnableVibrationResponse{}
 	mi := &file_proto_notification_notification_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CancelRequest) String() string {
+func (x *EnableVibrationResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CancelRequest) ProtoMessage() {}
+func (*EnableVibrationResponse) ProtoMessage() {}
 
-func (x *CancelRequest) ProtoReflect() protoreflect.Message {
+func (x *EnableVibrationResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -507,74 +498,76 @@ func (x *CancelRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CancelRequest.ProtoReflect.Descriptor instead.
-func (*CancelRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use EnableVibrationResponse.ProtoReflect.Descriptor instead.
+func (*EnableVibrationResponse) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *CancelRequest) GetId() int32 {
+type EqualsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EqualsRequest) Reset() {
+	*x = EqualsRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EqualsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EqualsRequest) ProtoMessage() {}
+
+func (x *EqualsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[12]
 	if x != nil {
-		return x.Id
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EqualsRequest.ProtoReflect.Descriptor instead.
+func (*EqualsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *EqualsRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
 	}
 	return 0
 }
 
-type CancelResponse struct {
+type EqualsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CancelResponse) Reset() {
-	*x = CancelResponse{}
-	mi := &file_proto_notification_notification_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CancelResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CancelResponse) ProtoMessage() {}
-
-func (x *CancelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CancelResponse.ProtoReflect.Descriptor instead.
-func (*CancelResponse) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{12}
-}
-
-type CancelAllRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CancelAllRequest) Reset() {
-	*x = CancelAllRequest{}
+func (x *EqualsResponse) Reset() {
+	*x = EqualsResponse{}
 	mi := &file_proto_notification_notification_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CancelAllRequest) String() string {
+func (x *EqualsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CancelAllRequest) ProtoMessage() {}
+func (*EqualsResponse) ProtoMessage() {}
 
-func (x *CancelAllRequest) ProtoReflect() protoreflect.Message {
+func (x *EqualsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -586,31 +579,38 @@ func (x *CancelAllRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CancelAllRequest.ProtoReflect.Descriptor instead.
-func (*CancelAllRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use EqualsResponse.ProtoReflect.Descriptor instead.
+func (*EqualsResponse) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{13}
 }
 
-type CancelAllResponse struct {
+func (x *EqualsResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type GetAudioAttributesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CancelAllResponse) Reset() {
-	*x = CancelAllResponse{}
+func (x *GetAudioAttributesRequest) Reset() {
+	*x = GetAudioAttributesRequest{}
 	mi := &file_proto_notification_notification_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CancelAllResponse) String() string {
+func (x *GetAudioAttributesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CancelAllResponse) ProtoMessage() {}
+func (*GetAudioAttributesRequest) ProtoMessage() {}
 
-func (x *CancelAllResponse) ProtoReflect() protoreflect.Message {
+func (x *GetAudioAttributesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -622,69 +622,33 @@ func (x *CancelAllResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CancelAllResponse.ProtoReflect.Descriptor instead.
-func (*CancelAllResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetAudioAttributesRequest.ProtoReflect.Descriptor instead.
+func (*GetAudioAttributesRequest) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{14}
 }
 
-type GetActiveNotificationsRawRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetActiveNotificationsRawRequest) Reset() {
-	*x = GetActiveNotificationsRawRequest{}
-	mi := &file_proto_notification_notification_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetActiveNotificationsRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetActiveNotificationsRawRequest) ProtoMessage() {}
-
-func (x *GetActiveNotificationsRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetActiveNotificationsRawRequest.ProtoReflect.Descriptor instead.
-func (*GetActiveNotificationsRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{15}
-}
-
-type GetActiveNotificationsRawResponse struct {
+type GetAudioAttributesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetActiveNotificationsRawResponse) Reset() {
-	*x = GetActiveNotificationsRawResponse{}
-	mi := &file_proto_notification_notification_proto_msgTypes[16]
+func (x *GetAudioAttributesResponse) Reset() {
+	*x = GetAudioAttributesResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetActiveNotificationsRawResponse) String() string {
+func (x *GetAudioAttributesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetActiveNotificationsRawResponse) ProtoMessage() {}
+func (*GetAudioAttributesResponse) ProtoMessage() {}
 
-func (x *GetActiveNotificationsRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[16]
+func (x *GetAudioAttributesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -695,40 +659,39 @@ func (x *GetActiveNotificationsRawResponse) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetActiveNotificationsRawResponse.ProtoReflect.Descriptor instead.
-func (*GetActiveNotificationsRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{16}
+// Deprecated: Use GetAudioAttributesResponse.ProtoReflect.Descriptor instead.
+func (*GetAudioAttributesResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *GetActiveNotificationsRawResponse) GetResult() int64 {
+func (x *GetAudioAttributesResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type SetDescriptionRequest struct {
+type GetConversationIdRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Description   string                 `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetDescriptionRequest) Reset() {
-	*x = SetDescriptionRequest{}
-	mi := &file_proto_notification_notification_proto_msgTypes[17]
+func (x *GetConversationIdRequest) Reset() {
+	*x = GetConversationIdRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetDescriptionRequest) String() string {
+func (x *GetConversationIdRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetDescriptionRequest) ProtoMessage() {}
+func (*GetConversationIdRequest) ProtoMessage() {}
 
-func (x *SetDescriptionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[17]
+func (x *GetConversationIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -739,112 +702,33 @@ func (x *SetDescriptionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetDescriptionRequest.ProtoReflect.Descriptor instead.
-func (*SetDescriptionRequest) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{17}
+// Deprecated: Use GetConversationIdRequest.ProtoReflect.Descriptor instead.
+func (*GetConversationIdRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *SetDescriptionRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-type SetDescriptionResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetDescriptionResponse) Reset() {
-	*x = SetDescriptionResponse{}
-	mi := &file_proto_notification_notification_proto_msgTypes[18]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetDescriptionResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetDescriptionResponse) ProtoMessage() {}
-
-func (x *SetDescriptionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[18]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetDescriptionResponse.ProtoReflect.Descriptor instead.
-func (*SetDescriptionResponse) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{18}
-}
-
-type GetIdRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetIdRequest) Reset() {
-	*x = GetIdRequest{}
-	mi := &file_proto_notification_notification_proto_msgTypes[19]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetIdRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetIdRequest) ProtoMessage() {}
-
-func (x *GetIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[19]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetIdRequest.ProtoReflect.Descriptor instead.
-func (*GetIdRequest) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{19}
-}
-
-type GetIdResponse struct {
+type GetConversationIdResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetIdResponse) Reset() {
-	*x = GetIdResponse{}
-	mi := &file_proto_notification_notification_proto_msgTypes[20]
+func (x *GetConversationIdResponse) Reset() {
+	*x = GetConversationIdResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetIdResponse) String() string {
+func (x *GetConversationIdResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetIdResponse) ProtoMessage() {}
+func (*GetConversationIdResponse) ProtoMessage() {}
 
-func (x *GetIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[20]
+func (x *GetConversationIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -855,96 +739,16 @@ func (x *GetIdResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetIdResponse.ProtoReflect.Descriptor instead.
-func (*GetIdResponse) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{20}
+// Deprecated: Use GetConversationIdResponse.ProtoReflect.Descriptor instead.
+func (*GetConversationIdResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *GetIdResponse) GetResult() string {
+func (x *GetConversationIdResponse) GetResult() string {
 	if x != nil {
 		return x.Result
 	}
 	return ""
-}
-
-type GetNameRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetNameRequest) Reset() {
-	*x = GetNameRequest{}
-	mi := &file_proto_notification_notification_proto_msgTypes[21]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetNameRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetNameRequest) ProtoMessage() {}
-
-func (x *GetNameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[21]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetNameRequest.ProtoReflect.Descriptor instead.
-func (*GetNameRequest) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{21}
-}
-
-type GetNameResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetNameResponse) Reset() {
-	*x = GetNameResponse{}
-	mi := &file_proto_notification_notification_proto_msgTypes[22]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetNameResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetNameResponse) ProtoMessage() {}
-
-func (x *GetNameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[22]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetNameResponse.ProtoReflect.Descriptor instead.
-func (*GetNameResponse) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{22}
-}
-
-func (x *GetNameResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
 }
 
 type GetDescriptionRequest struct {
@@ -955,7 +759,7 @@ type GetDescriptionRequest struct {
 
 func (x *GetDescriptionRequest) Reset() {
 	*x = GetDescriptionRequest{}
-	mi := &file_proto_notification_notification_proto_msgTypes[23]
+	mi := &file_proto_notification_notification_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -967,7 +771,7 @@ func (x *GetDescriptionRequest) String() string {
 func (*GetDescriptionRequest) ProtoMessage() {}
 
 func (x *GetDescriptionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[23]
+	mi := &file_proto_notification_notification_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -980,7 +784,7 @@ func (x *GetDescriptionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDescriptionRequest.ProtoReflect.Descriptor instead.
 func (*GetDescriptionRequest) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{23}
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{18}
 }
 
 type GetDescriptionResponse struct {
@@ -992,7 +796,7 @@ type GetDescriptionResponse struct {
 
 func (x *GetDescriptionResponse) Reset() {
 	*x = GetDescriptionResponse{}
-	mi := &file_proto_notification_notification_proto_msgTypes[24]
+	mi := &file_proto_notification_notification_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1004,7 +808,7 @@ func (x *GetDescriptionResponse) String() string {
 func (*GetDescriptionResponse) ProtoMessage() {}
 
 func (x *GetDescriptionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[24]
+	mi := &file_proto_notification_notification_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1017,10 +821,170 @@ func (x *GetDescriptionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDescriptionResponse.ProtoReflect.Descriptor instead.
 func (*GetDescriptionResponse) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{24}
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *GetDescriptionResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetGroupRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetGroupRequest) Reset() {
+	*x = GetGroupRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetGroupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetGroupRequest) ProtoMessage() {}
+
+func (x *GetGroupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetGroupRequest.ProtoReflect.Descriptor instead.
+func (*GetGroupRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{20}
+}
+
+type GetGroupResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetGroupResponse) Reset() {
+	*x = GetGroupResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetGroupResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetGroupResponse) ProtoMessage() {}
+
+func (x *GetGroupResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetGroupResponse.ProtoReflect.Descriptor instead.
+func (*GetGroupResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *GetGroupResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetIdRequest) Reset() {
+	*x = GetIdRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetIdRequest) ProtoMessage() {}
+
+func (x *GetIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetIdRequest.ProtoReflect.Descriptor instead.
+func (*GetIdRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{22}
+}
+
+type GetIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetIdResponse) Reset() {
+	*x = GetIdResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetIdResponse) ProtoMessage() {}
+
+func (x *GetIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetIdResponse.ProtoReflect.Descriptor instead.
+func (*GetIdResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *GetIdResponse) GetResult() string {
 	if x != nil {
 		return x.Result
 	}
@@ -1035,7 +999,7 @@ type GetImportanceRequest struct {
 
 func (x *GetImportanceRequest) Reset() {
 	*x = GetImportanceRequest{}
-	mi := &file_proto_notification_notification_proto_msgTypes[25]
+	mi := &file_proto_notification_notification_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1047,7 +1011,7 @@ func (x *GetImportanceRequest) String() string {
 func (*GetImportanceRequest) ProtoMessage() {}
 
 func (x *GetImportanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[25]
+	mi := &file_proto_notification_notification_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1060,7 +1024,7 @@ func (x *GetImportanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetImportanceRequest.ProtoReflect.Descriptor instead.
 func (*GetImportanceRequest) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{25}
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{24}
 }
 
 type GetImportanceResponse struct {
@@ -1072,7 +1036,7 @@ type GetImportanceResponse struct {
 
 func (x *GetImportanceResponse) Reset() {
 	*x = GetImportanceResponse{}
-	mi := &file_proto_notification_notification_proto_msgTypes[26]
+	mi := &file_proto_notification_notification_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1084,7 +1048,7 @@ func (x *GetImportanceResponse) String() string {
 func (*GetImportanceResponse) ProtoMessage() {}
 
 func (x *GetImportanceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[26]
+	mi := &file_proto_notification_notification_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1097,7 +1061,7 @@ func (x *GetImportanceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetImportanceResponse.ProtoReflect.Descriptor instead.
 func (*GetImportanceResponse) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{26}
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *GetImportanceResponse) GetResult() int32 {
@@ -1107,27 +1071,63 @@ func (x *GetImportanceResponse) GetResult() int32 {
 	return 0
 }
 
-type SetContentTitleRequest struct {
+type GetLightColorRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Title         int64                  `protobuf:"varint,1,opt,name=title,proto3" json:"title,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetContentTitleRequest) Reset() {
-	*x = SetContentTitleRequest{}
+func (x *GetLightColorRequest) Reset() {
+	*x = GetLightColorRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLightColorRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLightColorRequest) ProtoMessage() {}
+
+func (x *GetLightColorRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLightColorRequest.ProtoReflect.Descriptor instead.
+func (*GetLightColorRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{26}
+}
+
+type GetLightColorResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLightColorResponse) Reset() {
+	*x = GetLightColorResponse{}
 	mi := &file_proto_notification_notification_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetContentTitleRequest) String() string {
+func (x *GetLightColorResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetContentTitleRequest) ProtoMessage() {}
+func (*GetLightColorResponse) ProtoMessage() {}
 
-func (x *SetContentTitleRequest) ProtoReflect() protoreflect.Message {
+func (x *GetLightColorResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1139,39 +1139,38 @@ func (x *SetContentTitleRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetContentTitleRequest.ProtoReflect.Descriptor instead.
-func (*SetContentTitleRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetLightColorResponse.ProtoReflect.Descriptor instead.
+func (*GetLightColorResponse) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{27}
 }
 
-func (x *SetContentTitleRequest) GetTitle() int64 {
+func (x *GetLightColorResponse) GetResult() int32 {
 	if x != nil {
-		return x.Title
+		return x.Result
 	}
 	return 0
 }
 
-type SetContentTitleResponse struct {
+type GetLockscreenVisibilityRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetContentTitleResponse) Reset() {
-	*x = SetContentTitleResponse{}
+func (x *GetLockscreenVisibilityRequest) Reset() {
+	*x = GetLockscreenVisibilityRequest{}
 	mi := &file_proto_notification_notification_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetContentTitleResponse) String() string {
+func (x *GetLockscreenVisibilityRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetContentTitleResponse) ProtoMessage() {}
+func (*GetLockscreenVisibilityRequest) ProtoMessage() {}
 
-func (x *SetContentTitleResponse) ProtoReflect() protoreflect.Message {
+func (x *GetLockscreenVisibilityRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1183,39 +1182,32 @@ func (x *SetContentTitleResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetContentTitleResponse.ProtoReflect.Descriptor instead.
-func (*SetContentTitleResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetLockscreenVisibilityRequest.ProtoReflect.Descriptor instead.
+func (*GetLockscreenVisibilityRequest) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{28}
 }
 
-func (x *SetContentTitleResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type SetContentTextRequest struct {
+type GetLockscreenVisibilityResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Text          int64                  `protobuf:"varint,1,opt,name=text,proto3" json:"text,omitempty"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetContentTextRequest) Reset() {
-	*x = SetContentTextRequest{}
+func (x *GetLockscreenVisibilityResponse) Reset() {
+	*x = GetLockscreenVisibilityResponse{}
 	mi := &file_proto_notification_notification_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetContentTextRequest) String() string {
+func (x *GetLockscreenVisibilityResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetContentTextRequest) ProtoMessage() {}
+func (*GetLockscreenVisibilityResponse) ProtoMessage() {}
 
-func (x *SetContentTextRequest) ProtoReflect() protoreflect.Message {
+func (x *GetLockscreenVisibilityResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1227,39 +1219,38 @@ func (x *SetContentTextRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetContentTextRequest.ProtoReflect.Descriptor instead.
-func (*SetContentTextRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetLockscreenVisibilityResponse.ProtoReflect.Descriptor instead.
+func (*GetLockscreenVisibilityResponse) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{29}
 }
 
-func (x *SetContentTextRequest) GetText() int64 {
+func (x *GetLockscreenVisibilityResponse) GetResult() int32 {
 	if x != nil {
-		return x.Text
+		return x.Result
 	}
 	return 0
 }
 
-type SetContentTextResponse struct {
+type GetNameRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetContentTextResponse) Reset() {
-	*x = SetContentTextResponse{}
+func (x *GetNameRequest) Reset() {
+	*x = GetNameRequest{}
 	mi := &file_proto_notification_notification_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetContentTextResponse) String() string {
+func (x *GetNameRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetContentTextResponse) ProtoMessage() {}
+func (*GetNameRequest) ProtoMessage() {}
 
-func (x *SetContentTextResponse) ProtoReflect() protoreflect.Message {
+func (x *GetNameRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1271,39 +1262,32 @@ func (x *SetContentTextResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetContentTextResponse.ProtoReflect.Descriptor instead.
-func (*SetContentTextResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetNameRequest.ProtoReflect.Descriptor instead.
+func (*GetNameRequest) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{30}
 }
 
-func (x *SetContentTextResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type SetSmallIconRequest struct {
+type GetNameResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ResId         int32                  `protobuf:"varint,1,opt,name=res_id,json=resId,proto3" json:"res_id,omitempty"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetSmallIconRequest) Reset() {
-	*x = SetSmallIconRequest{}
+func (x *GetNameResponse) Reset() {
+	*x = GetNameResponse{}
 	mi := &file_proto_notification_notification_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetSmallIconRequest) String() string {
+func (x *GetNameResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetSmallIconRequest) ProtoMessage() {}
+func (*GetNameResponse) ProtoMessage() {}
 
-func (x *SetSmallIconRequest) ProtoReflect() protoreflect.Message {
+func (x *GetNameResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1315,39 +1299,38 @@ func (x *SetSmallIconRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetSmallIconRequest.ProtoReflect.Descriptor instead.
-func (*SetSmallIconRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetNameResponse.ProtoReflect.Descriptor instead.
+func (*GetNameResponse) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{31}
 }
 
-func (x *SetSmallIconRequest) GetResId() int32 {
+func (x *GetNameResponse) GetResult() string {
 	if x != nil {
-		return x.ResId
+		return x.Result
 	}
-	return 0
+	return ""
 }
 
-type SetSmallIconResponse struct {
+type GetParentChannelIdRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetSmallIconResponse) Reset() {
-	*x = SetSmallIconResponse{}
+func (x *GetParentChannelIdRequest) Reset() {
+	*x = GetParentChannelIdRequest{}
 	mi := &file_proto_notification_notification_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetSmallIconResponse) String() string {
+func (x *GetParentChannelIdRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetSmallIconResponse) ProtoMessage() {}
+func (*GetParentChannelIdRequest) ProtoMessage() {}
 
-func (x *SetSmallIconResponse) ProtoReflect() protoreflect.Message {
+func (x *GetParentChannelIdRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1359,39 +1342,32 @@ func (x *SetSmallIconResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetSmallIconResponse.ProtoReflect.Descriptor instead.
-func (*SetSmallIconResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetParentChannelIdRequest.ProtoReflect.Descriptor instead.
+func (*GetParentChannelIdRequest) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{32}
 }
 
-func (x *SetSmallIconResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type SetContentIntentRequest struct {
+type GetParentChannelIdResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Intent        int64                  `protobuf:"varint,1,opt,name=intent,proto3" json:"intent,omitempty"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetContentIntentRequest) Reset() {
-	*x = SetContentIntentRequest{}
+func (x *GetParentChannelIdResponse) Reset() {
+	*x = GetParentChannelIdResponse{}
 	mi := &file_proto_notification_notification_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetContentIntentRequest) String() string {
+func (x *GetParentChannelIdResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetContentIntentRequest) ProtoMessage() {}
+func (*GetParentChannelIdResponse) ProtoMessage() {}
 
-func (x *SetContentIntentRequest) ProtoReflect() protoreflect.Message {
+func (x *GetParentChannelIdResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1403,39 +1379,38 @@ func (x *SetContentIntentRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetContentIntentRequest.ProtoReflect.Descriptor instead.
-func (*SetContentIntentRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetParentChannelIdResponse.ProtoReflect.Descriptor instead.
+func (*GetParentChannelIdResponse) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{33}
 }
 
-func (x *SetContentIntentRequest) GetIntent() int64 {
+func (x *GetParentChannelIdResponse) GetResult() string {
 	if x != nil {
-		return x.Intent
+		return x.Result
 	}
-	return 0
+	return ""
 }
 
-type SetContentIntentResponse struct {
+type GetSoundRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetContentIntentResponse) Reset() {
-	*x = SetContentIntentResponse{}
+func (x *GetSoundRequest) Reset() {
+	*x = GetSoundRequest{}
 	mi := &file_proto_notification_notification_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetContentIntentResponse) String() string {
+func (x *GetSoundRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetContentIntentResponse) ProtoMessage() {}
+func (*GetSoundRequest) ProtoMessage() {}
 
-func (x *SetContentIntentResponse) ProtoReflect() protoreflect.Message {
+func (x *GetSoundRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1447,39 +1422,32 @@ func (x *SetContentIntentResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetContentIntentResponse.ProtoReflect.Descriptor instead.
-func (*SetContentIntentResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetSoundRequest.ProtoReflect.Descriptor instead.
+func (*GetSoundRequest) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{34}
 }
 
-func (x *SetContentIntentResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type SetAutoCancelRequest struct {
+type GetSoundResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AutoCancel    bool                   `protobuf:"varint,1,opt,name=auto_cancel,json=autoCancel,proto3" json:"auto_cancel,omitempty"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetAutoCancelRequest) Reset() {
-	*x = SetAutoCancelRequest{}
+func (x *GetSoundResponse) Reset() {
+	*x = GetSoundResponse{}
 	mi := &file_proto_notification_notification_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetAutoCancelRequest) String() string {
+func (x *GetSoundResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetAutoCancelRequest) ProtoMessage() {}
+func (*GetSoundResponse) ProtoMessage() {}
 
-func (x *SetAutoCancelRequest) ProtoReflect() protoreflect.Message {
+func (x *GetSoundResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1491,39 +1459,38 @@ func (x *SetAutoCancelRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetAutoCancelRequest.ProtoReflect.Descriptor instead.
-func (*SetAutoCancelRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetSoundResponse.ProtoReflect.Descriptor instead.
+func (*GetSoundResponse) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{35}
 }
 
-func (x *SetAutoCancelRequest) GetAutoCancel() bool {
+func (x *GetSoundResponse) GetResult() int64 {
 	if x != nil {
-		return x.AutoCancel
+		return x.Result
 	}
-	return false
+	return 0
 }
 
-type SetAutoCancelResponse struct {
+type GetVibrationEffectRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetAutoCancelResponse) Reset() {
-	*x = SetAutoCancelResponse{}
+func (x *GetVibrationEffectRequest) Reset() {
+	*x = GetVibrationEffectRequest{}
 	mi := &file_proto_notification_notification_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetAutoCancelResponse) String() string {
+func (x *GetVibrationEffectRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetAutoCancelResponse) ProtoMessage() {}
+func (*GetVibrationEffectRequest) ProtoMessage() {}
 
-func (x *SetAutoCancelResponse) ProtoReflect() protoreflect.Message {
+func (x *GetVibrationEffectRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1535,39 +1502,32 @@ func (x *SetAutoCancelResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetAutoCancelResponse.ProtoReflect.Descriptor instead.
-func (*SetAutoCancelResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetVibrationEffectRequest.ProtoReflect.Descriptor instead.
+func (*GetVibrationEffectRequest) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{36}
 }
 
-func (x *SetAutoCancelResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type SetOngoingRequest struct {
+type GetVibrationEffectResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ongoing       bool                   `protobuf:"varint,1,opt,name=ongoing,proto3" json:"ongoing,omitempty"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetOngoingRequest) Reset() {
-	*x = SetOngoingRequest{}
+func (x *GetVibrationEffectResponse) Reset() {
+	*x = GetVibrationEffectResponse{}
 	mi := &file_proto_notification_notification_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetOngoingRequest) String() string {
+func (x *GetVibrationEffectResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetOngoingRequest) ProtoMessage() {}
+func (*GetVibrationEffectResponse) ProtoMessage() {}
 
-func (x *SetOngoingRequest) ProtoReflect() protoreflect.Message {
+func (x *GetVibrationEffectResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_notification_notification_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1579,40 +1539,199 @@ func (x *SetOngoingRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetOngoingRequest.ProtoReflect.Descriptor instead.
-func (*SetOngoingRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetVibrationEffectResponse.ProtoReflect.Descriptor instead.
+func (*GetVibrationEffectResponse) Descriptor() ([]byte, []int) {
 	return file_proto_notification_notification_proto_rawDescGZIP(), []int{37}
 }
 
-func (x *SetOngoingRequest) GetOngoing() bool {
+func (x *GetVibrationEffectResponse) GetResult() int64 {
 	if x != nil {
-		return x.Ongoing
+		return x.Result
+	}
+	return 0
+}
+
+type GetVibrationPatternRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetVibrationPatternRequest) Reset() {
+	*x = GetVibrationPatternRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetVibrationPatternRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetVibrationPatternRequest) ProtoMessage() {}
+
+func (x *GetVibrationPatternRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetVibrationPatternRequest.ProtoReflect.Descriptor instead.
+func (*GetVibrationPatternRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{38}
+}
+
+type GetVibrationPatternResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetVibrationPatternResponse) Reset() {
+	*x = GetVibrationPatternResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetVibrationPatternResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetVibrationPatternResponse) ProtoMessage() {}
+
+func (x *GetVibrationPatternResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetVibrationPatternResponse.ProtoReflect.Descriptor instead.
+func (*GetVibrationPatternResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *GetVibrationPatternResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type HasUserSetImportanceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HasUserSetImportanceRequest) Reset() {
+	*x = HasUserSetImportanceRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HasUserSetImportanceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HasUserSetImportanceRequest) ProtoMessage() {}
+
+func (x *HasUserSetImportanceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HasUserSetImportanceRequest.ProtoReflect.Descriptor instead.
+func (*HasUserSetImportanceRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{40}
+}
+
+type HasUserSetImportanceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HasUserSetImportanceResponse) Reset() {
+	*x = HasUserSetImportanceResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HasUserSetImportanceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HasUserSetImportanceResponse) ProtoMessage() {}
+
+func (x *HasUserSetImportanceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HasUserSetImportanceResponse.ProtoReflect.Descriptor instead.
+func (*HasUserSetImportanceResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *HasUserSetImportanceResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
 	}
 	return false
 }
 
-type SetOngoingResponse struct {
+type HasUserSetSoundRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetOngoingResponse) Reset() {
-	*x = SetOngoingResponse{}
-	mi := &file_proto_notification_notification_proto_msgTypes[38]
+func (x *HasUserSetSoundRequest) Reset() {
+	*x = HasUserSetSoundRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetOngoingResponse) String() string {
+func (x *HasUserSetSoundRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetOngoingResponse) ProtoMessage() {}
+func (*HasUserSetSoundRequest) ProtoMessage() {}
 
-func (x *SetOngoingResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[38]
+func (x *HasUserSetSoundRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1623,40 +1742,156 @@ func (x *SetOngoingResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetOngoingResponse.ProtoReflect.Descriptor instead.
-func (*SetOngoingResponse) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{38}
+// Deprecated: Use HasUserSetSoundRequest.ProtoReflect.Descriptor instead.
+func (*HasUserSetSoundRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{42}
 }
 
-func (x *SetOngoingResponse) GetResult() int64 {
+type HasUserSetSoundResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HasUserSetSoundResponse) Reset() {
+	*x = HasUserSetSoundResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HasUserSetSoundResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HasUserSetSoundResponse) ProtoMessage() {}
+
+func (x *HasUserSetSoundResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HasUserSetSoundResponse.ProtoReflect.Descriptor instead.
+func (*HasUserSetSoundResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *HasUserSetSoundResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type HashCodeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HashCodeRequest) Reset() {
+	*x = HashCodeRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HashCodeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HashCodeRequest) ProtoMessage() {}
+
+func (x *HashCodeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HashCodeRequest.ProtoReflect.Descriptor instead.
+func (*HashCodeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{44}
+}
+
+type HashCodeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HashCodeResponse) Reset() {
+	*x = HashCodeResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HashCodeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HashCodeResponse) ProtoMessage() {}
+
+func (x *HashCodeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HashCodeResponse.ProtoReflect.Descriptor instead.
+func (*HashCodeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *HashCodeResponse) GetResult() int32 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type SetStyleRequest struct {
+type IsBlockableRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Style         int64                  `protobuf:"varint,1,opt,name=style,proto3" json:"style,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetStyleRequest) Reset() {
-	*x = SetStyleRequest{}
-	mi := &file_proto_notification_notification_proto_msgTypes[39]
+func (x *IsBlockableRequest) Reset() {
+	*x = IsBlockableRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetStyleRequest) String() string {
+func (x *IsBlockableRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetStyleRequest) ProtoMessage() {}
+func (*IsBlockableRequest) ProtoMessage() {}
 
-func (x *SetStyleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[39]
+func (x *IsBlockableRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1667,40 +1902,33 @@ func (x *SetStyleRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetStyleRequest.ProtoReflect.Descriptor instead.
-func (*SetStyleRequest) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{39}
+// Deprecated: Use IsBlockableRequest.ProtoReflect.Descriptor instead.
+func (*IsBlockableRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{46}
 }
 
-func (x *SetStyleRequest) GetStyle() int64 {
-	if x != nil {
-		return x.Style
-	}
-	return 0
-}
-
-type SetStyleResponse struct {
+type IsBlockableResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetStyleResponse) Reset() {
-	*x = SetStyleResponse{}
-	mi := &file_proto_notification_notification_proto_msgTypes[40]
+func (x *IsBlockableResponse) Reset() {
+	*x = IsBlockableResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetStyleResponse) String() string {
+func (x *IsBlockableResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetStyleResponse) ProtoMessage() {}
+func (*IsBlockableResponse) ProtoMessage() {}
 
-func (x *SetStyleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[40]
+func (x *IsBlockableResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1711,28 +1939,676 @@ func (x *SetStyleResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetStyleResponse.ProtoReflect.Descriptor instead.
-func (*SetStyleResponse) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{40}
+// Deprecated: Use IsBlockableResponse.ProtoReflect.Descriptor instead.
+func (*IsBlockableResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{47}
 }
 
-func (x *SetStyleResponse) GetResult() int64 {
+func (x *IsBlockableResponse) GetResult() bool {
 	if x != nil {
 		return x.Result
 	}
-	return 0
+	return false
+}
+
+type IsConversationRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsConversationRequest) Reset() {
+	*x = IsConversationRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsConversationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsConversationRequest) ProtoMessage() {}
+
+func (x *IsConversationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsConversationRequest.ProtoReflect.Descriptor instead.
+func (*IsConversationRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{48}
+}
+
+type IsConversationResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsConversationResponse) Reset() {
+	*x = IsConversationResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsConversationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsConversationResponse) ProtoMessage() {}
+
+func (x *IsConversationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsConversationResponse.ProtoReflect.Descriptor instead.
+func (*IsConversationResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *IsConversationResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsDemotedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsDemotedRequest) Reset() {
+	*x = IsDemotedRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsDemotedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsDemotedRequest) ProtoMessage() {}
+
+func (x *IsDemotedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsDemotedRequest.ProtoReflect.Descriptor instead.
+func (*IsDemotedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{50}
+}
+
+type IsDemotedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsDemotedResponse) Reset() {
+	*x = IsDemotedResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsDemotedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsDemotedResponse) ProtoMessage() {}
+
+func (x *IsDemotedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsDemotedResponse.ProtoReflect.Descriptor instead.
+func (*IsDemotedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{51}
+}
+
+func (x *IsDemotedResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsImportantConversationRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsImportantConversationRequest) Reset() {
+	*x = IsImportantConversationRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsImportantConversationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsImportantConversationRequest) ProtoMessage() {}
+
+func (x *IsImportantConversationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsImportantConversationRequest.ProtoReflect.Descriptor instead.
+func (*IsImportantConversationRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{52}
+}
+
+type IsImportantConversationResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsImportantConversationResponse) Reset() {
+	*x = IsImportantConversationResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsImportantConversationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsImportantConversationResponse) ProtoMessage() {}
+
+func (x *IsImportantConversationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsImportantConversationResponse.ProtoReflect.Descriptor instead.
+func (*IsImportantConversationResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{53}
+}
+
+func (x *IsImportantConversationResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type SetAllowBubblesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAllowBubblesRequest) Reset() {
+	*x = SetAllowBubblesRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAllowBubblesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAllowBubblesRequest) ProtoMessage() {}
+
+func (x *SetAllowBubblesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAllowBubblesRequest.ProtoReflect.Descriptor instead.
+func (*SetAllowBubblesRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{54}
+}
+
+func (x *SetAllowBubblesRequest) GetArg0() bool {
+	if x != nil {
+		return x.Arg0
+	}
+	return false
+}
+
+type SetAllowBubblesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAllowBubblesResponse) Reset() {
+	*x = SetAllowBubblesResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAllowBubblesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAllowBubblesResponse) ProtoMessage() {}
+
+func (x *SetAllowBubblesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAllowBubblesResponse.ProtoReflect.Descriptor instead.
+func (*SetAllowBubblesResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{55}
+}
+
+type SetBlockableRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetBlockableRequest) Reset() {
+	*x = SetBlockableRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[56]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetBlockableRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetBlockableRequest) ProtoMessage() {}
+
+func (x *SetBlockableRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[56]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetBlockableRequest.ProtoReflect.Descriptor instead.
+func (*SetBlockableRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{56}
+}
+
+func (x *SetBlockableRequest) GetArg0() bool {
+	if x != nil {
+		return x.Arg0
+	}
+	return false
+}
+
+type SetBlockableResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetBlockableResponse) Reset() {
+	*x = SetBlockableResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[57]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetBlockableResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetBlockableResponse) ProtoMessage() {}
+
+func (x *SetBlockableResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[57]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetBlockableResponse.ProtoReflect.Descriptor instead.
+func (*SetBlockableResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{57}
+}
+
+type SetBypassDndRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetBypassDndRequest) Reset() {
+	*x = SetBypassDndRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[58]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetBypassDndRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetBypassDndRequest) ProtoMessage() {}
+
+func (x *SetBypassDndRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[58]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetBypassDndRequest.ProtoReflect.Descriptor instead.
+func (*SetBypassDndRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{58}
+}
+
+func (x *SetBypassDndRequest) GetArg0() bool {
+	if x != nil {
+		return x.Arg0
+	}
+	return false
+}
+
+type SetBypassDndResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetBypassDndResponse) Reset() {
+	*x = SetBypassDndResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[59]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetBypassDndResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetBypassDndResponse) ProtoMessage() {}
+
+func (x *SetBypassDndResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[59]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetBypassDndResponse.ProtoReflect.Descriptor instead.
+func (*SetBypassDndResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{59}
+}
+
+type SetConversationIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetConversationIdRequest) Reset() {
+	*x = SetConversationIdRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[60]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetConversationIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetConversationIdRequest) ProtoMessage() {}
+
+func (x *SetConversationIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[60]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetConversationIdRequest.ProtoReflect.Descriptor instead.
+func (*SetConversationIdRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{60}
+}
+
+func (x *SetConversationIdRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+func (x *SetConversationIdRequest) GetArg1() string {
+	if x != nil {
+		return x.Arg1
+	}
+	return ""
+}
+
+type SetConversationIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetConversationIdResponse) Reset() {
+	*x = SetConversationIdResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[61]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetConversationIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetConversationIdResponse) ProtoMessage() {}
+
+func (x *SetConversationIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[61]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetConversationIdResponse.ProtoReflect.Descriptor instead.
+func (*SetConversationIdResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{61}
+}
+
+type SetDescriptionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetDescriptionRequest) Reset() {
+	*x = SetDescriptionRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[62]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetDescriptionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetDescriptionRequest) ProtoMessage() {}
+
+func (x *SetDescriptionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[62]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetDescriptionRequest.ProtoReflect.Descriptor instead.
+func (*SetDescriptionRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{62}
+}
+
+func (x *SetDescriptionRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type SetDescriptionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetDescriptionResponse) Reset() {
+	*x = SetDescriptionResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[63]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetDescriptionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetDescriptionResponse) ProtoMessage() {}
+
+func (x *SetDescriptionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[63]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetDescriptionResponse.ProtoReflect.Descriptor instead.
+func (*SetDescriptionResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{63}
 }
 
 type SetGroupRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	GroupKey      string                 `protobuf:"bytes,1,opt,name=group_key,json=groupKey,proto3" json:"group_key,omitempty"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SetGroupRequest) Reset() {
 	*x = SetGroupRequest{}
-	mi := &file_proto_notification_notification_proto_msgTypes[41]
+	mi := &file_proto_notification_notification_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1744,7 +2620,7 @@ func (x *SetGroupRequest) String() string {
 func (*SetGroupRequest) ProtoMessage() {}
 
 func (x *SetGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[41]
+	mi := &file_proto_notification_notification_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1757,26 +2633,25 @@ func (x *SetGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetGroupRequest.ProtoReflect.Descriptor instead.
 func (*SetGroupRequest) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{41}
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{64}
 }
 
-func (x *SetGroupRequest) GetGroupKey() string {
+func (x *SetGroupRequest) GetArg0() string {
 	if x != nil {
-		return x.GroupKey
+		return x.Arg0
 	}
 	return ""
 }
 
 type SetGroupResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SetGroupResponse) Reset() {
 	*x = SetGroupResponse{}
-	mi := &file_proto_notification_notification_proto_msgTypes[42]
+	mi := &file_proto_notification_notification_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1788,7 +2663,7 @@ func (x *SetGroupResponse) String() string {
 func (*SetGroupResponse) ProtoMessage() {}
 
 func (x *SetGroupResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[42]
+	mi := &file_proto_notification_notification_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1801,40 +2676,31 @@ func (x *SetGroupResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetGroupResponse.ProtoReflect.Descriptor instead.
 func (*SetGroupResponse) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{42}
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{65}
 }
 
-func (x *SetGroupResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type SetProgressRequest struct {
+type SetImportanceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Max           int32                  `protobuf:"varint,1,opt,name=max,proto3" json:"max,omitempty"`
-	Progress      int32                  `protobuf:"varint,2,opt,name=progress,proto3" json:"progress,omitempty"`
-	Indeterminate bool                   `protobuf:"varint,3,opt,name=indeterminate,proto3" json:"indeterminate,omitempty"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetProgressRequest) Reset() {
-	*x = SetProgressRequest{}
-	mi := &file_proto_notification_notification_proto_msgTypes[43]
+func (x *SetImportanceRequest) Reset() {
+	*x = SetImportanceRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetProgressRequest) String() string {
+func (x *SetImportanceRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetProgressRequest) ProtoMessage() {}
+func (*SetImportanceRequest) ProtoMessage() {}
 
-func (x *SetProgressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[43]
+func (x *SetImportanceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1845,54 +2711,359 @@ func (x *SetProgressRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetProgressRequest.ProtoReflect.Descriptor instead.
-func (*SetProgressRequest) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{43}
+// Deprecated: Use SetImportanceRequest.ProtoReflect.Descriptor instead.
+func (*SetImportanceRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{66}
 }
 
-func (x *SetProgressRequest) GetMax() int32 {
+func (x *SetImportanceRequest) GetArg0() int32 {
 	if x != nil {
-		return x.Max
+		return x.Arg0
 	}
 	return 0
 }
 
-func (x *SetProgressRequest) GetProgress() int32 {
+type SetImportanceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetImportanceResponse) Reset() {
+	*x = SetImportanceResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[67]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetImportanceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetImportanceResponse) ProtoMessage() {}
+
+func (x *SetImportanceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[67]
 	if x != nil {
-		return x.Progress
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetImportanceResponse.ProtoReflect.Descriptor instead.
+func (*SetImportanceResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{67}
+}
+
+type SetLightColorRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetLightColorRequest) Reset() {
+	*x = SetLightColorRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[68]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetLightColorRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetLightColorRequest) ProtoMessage() {}
+
+func (x *SetLightColorRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[68]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetLightColorRequest.ProtoReflect.Descriptor instead.
+func (*SetLightColorRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{68}
+}
+
+func (x *SetLightColorRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
 	}
 	return 0
 }
 
-func (x *SetProgressRequest) GetIndeterminate() bool {
+type SetLightColorResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetLightColorResponse) Reset() {
+	*x = SetLightColorResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[69]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetLightColorResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetLightColorResponse) ProtoMessage() {}
+
+func (x *SetLightColorResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[69]
 	if x != nil {
-		return x.Indeterminate
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetLightColorResponse.ProtoReflect.Descriptor instead.
+func (*SetLightColorResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{69}
+}
+
+type SetLockscreenVisibilityRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetLockscreenVisibilityRequest) Reset() {
+	*x = SetLockscreenVisibilityRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[70]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetLockscreenVisibilityRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetLockscreenVisibilityRequest) ProtoMessage() {}
+
+func (x *SetLockscreenVisibilityRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[70]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetLockscreenVisibilityRequest.ProtoReflect.Descriptor instead.
+func (*SetLockscreenVisibilityRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{70}
+}
+
+func (x *SetLockscreenVisibilityRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetLockscreenVisibilityResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetLockscreenVisibilityResponse) Reset() {
+	*x = SetLockscreenVisibilityResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[71]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetLockscreenVisibilityResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetLockscreenVisibilityResponse) ProtoMessage() {}
+
+func (x *SetLockscreenVisibilityResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[71]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetLockscreenVisibilityResponse.ProtoReflect.Descriptor instead.
+func (*SetLockscreenVisibilityResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{71}
+}
+
+type SetNameRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetNameRequest) Reset() {
+	*x = SetNameRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[72]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetNameRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetNameRequest) ProtoMessage() {}
+
+func (x *SetNameRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[72]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetNameRequest.ProtoReflect.Descriptor instead.
+func (*SetNameRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{72}
+}
+
+func (x *SetNameRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type SetNameResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetNameResponse) Reset() {
+	*x = SetNameResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[73]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetNameResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetNameResponse) ProtoMessage() {}
+
+func (x *SetNameResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[73]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetNameResponse.ProtoReflect.Descriptor instead.
+func (*SetNameResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{73}
+}
+
+type SetShowBadgeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetShowBadgeRequest) Reset() {
+	*x = SetShowBadgeRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[74]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetShowBadgeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetShowBadgeRequest) ProtoMessage() {}
+
+func (x *SetShowBadgeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[74]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetShowBadgeRequest.ProtoReflect.Descriptor instead.
+func (*SetShowBadgeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{74}
+}
+
+func (x *SetShowBadgeRequest) GetArg0() bool {
+	if x != nil {
+		return x.Arg0
 	}
 	return false
 }
 
-type SetProgressResponse struct {
+type SetShowBadgeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetProgressResponse) Reset() {
-	*x = SetProgressResponse{}
-	mi := &file_proto_notification_notification_proto_msgTypes[44]
+func (x *SetShowBadgeResponse) Reset() {
+	*x = SetShowBadgeResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetProgressResponse) String() string {
+func (x *SetShowBadgeResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetProgressResponse) ProtoMessage() {}
+func (*SetShowBadgeResponse) ProtoMessage() {}
 
-func (x *SetProgressResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[44]
+func (x *SetShowBadgeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1903,42 +3074,360 @@ func (x *SetProgressResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetProgressResponse.ProtoReflect.Descriptor instead.
-func (*SetProgressResponse) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{44}
+// Deprecated: Use SetShowBadgeResponse.ProtoReflect.Descriptor instead.
+func (*SetShowBadgeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{75}
 }
 
-func (x *SetProgressResponse) GetResult() int64 {
+type SetSoundRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetSoundRequest) Reset() {
+	*x = SetSoundRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[76]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetSoundRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetSoundRequest) ProtoMessage() {}
+
+func (x *SetSoundRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[76]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetSoundRequest.ProtoReflect.Descriptor instead.
+func (*SetSoundRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{76}
+}
+
+func (x *SetSoundRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *SetSoundRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type SetSoundResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetSoundResponse) Reset() {
+	*x = SetSoundResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[77]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetSoundResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetSoundResponse) ProtoMessage() {}
+
+func (x *SetSoundResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[77]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetSoundResponse.ProtoReflect.Descriptor instead.
+func (*SetSoundResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{77}
+}
+
+type SetVibrationEffectRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetVibrationEffectRequest) Reset() {
+	*x = SetVibrationEffectRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[78]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetVibrationEffectRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetVibrationEffectRequest) ProtoMessage() {}
+
+func (x *SetVibrationEffectRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[78]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetVibrationEffectRequest.ProtoReflect.Descriptor instead.
+func (*SetVibrationEffectRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{78}
+}
+
+func (x *SetVibrationEffectRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetVibrationEffectResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetVibrationEffectResponse) Reset() {
+	*x = SetVibrationEffectResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[79]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetVibrationEffectResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetVibrationEffectResponse) ProtoMessage() {}
+
+func (x *SetVibrationEffectResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[79]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetVibrationEffectResponse.ProtoReflect.Descriptor instead.
+func (*SetVibrationEffectResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{79}
+}
+
+type SetVibrationPatternRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetVibrationPatternRequest) Reset() {
+	*x = SetVibrationPatternRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[80]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetVibrationPatternRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetVibrationPatternRequest) ProtoMessage() {}
+
+func (x *SetVibrationPatternRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[80]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetVibrationPatternRequest.ProtoReflect.Descriptor instead.
+func (*SetVibrationPatternRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{80}
+}
+
+func (x *SetVibrationPatternRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetVibrationPatternResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetVibrationPatternResponse) Reset() {
+	*x = SetVibrationPatternResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[81]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetVibrationPatternResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetVibrationPatternResponse) ProtoMessage() {}
+
+func (x *SetVibrationPatternResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[81]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetVibrationPatternResponse.ProtoReflect.Descriptor instead.
+func (*SetVibrationPatternResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{81}
+}
+
+type ShouldShowLightsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShouldShowLightsRequest) Reset() {
+	*x = ShouldShowLightsRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[82]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShouldShowLightsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShouldShowLightsRequest) ProtoMessage() {}
+
+func (x *ShouldShowLightsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[82]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShouldShowLightsRequest.ProtoReflect.Descriptor instead.
+func (*ShouldShowLightsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{82}
+}
+
+type ShouldShowLightsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShouldShowLightsResponse) Reset() {
+	*x = ShouldShowLightsResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[83]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShouldShowLightsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShouldShowLightsResponse) ProtoMessage() {}
+
+func (x *ShouldShowLightsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[83]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShouldShowLightsResponse.ProtoReflect.Descriptor instead.
+func (*ShouldShowLightsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{83}
+}
+
+func (x *ShouldShowLightsResponse) GetResult() bool {
 	if x != nil {
 		return x.Result
 	}
-	return 0
+	return false
 }
 
-type AddActionRequest struct {
+type ShouldVibrateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Icon          int32                  `protobuf:"varint,1,opt,name=icon,proto3" json:"icon,omitempty"`
-	Title         int64                  `protobuf:"varint,2,opt,name=title,proto3" json:"title,omitempty"`
-	Intent        int64                  `protobuf:"varint,3,opt,name=intent,proto3" json:"intent,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AddActionRequest) Reset() {
-	*x = AddActionRequest{}
-	mi := &file_proto_notification_notification_proto_msgTypes[45]
+func (x *ShouldVibrateRequest) Reset() {
+	*x = ShouldVibrateRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AddActionRequest) String() string {
+func (x *ShouldVibrateRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AddActionRequest) ProtoMessage() {}
+func (*ShouldVibrateRequest) ProtoMessage() {}
 
-func (x *AddActionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[45]
+func (x *ShouldVibrateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1949,54 +3438,33 @@ func (x *AddActionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddActionRequest.ProtoReflect.Descriptor instead.
-func (*AddActionRequest) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{45}
+// Deprecated: Use ShouldVibrateRequest.ProtoReflect.Descriptor instead.
+func (*ShouldVibrateRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{84}
 }
 
-func (x *AddActionRequest) GetIcon() int32 {
-	if x != nil {
-		return x.Icon
-	}
-	return 0
-}
-
-func (x *AddActionRequest) GetTitle() int64 {
-	if x != nil {
-		return x.Title
-	}
-	return 0
-}
-
-func (x *AddActionRequest) GetIntent() int64 {
-	if x != nil {
-		return x.Intent
-	}
-	return 0
-}
-
-type AddActionResponse struct {
+type ShouldVibrateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AddActionResponse) Reset() {
-	*x = AddActionResponse{}
-	mi := &file_proto_notification_notification_proto_msgTypes[46]
+func (x *ShouldVibrateResponse) Reset() {
+	*x = ShouldVibrateResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AddActionResponse) String() string {
+func (x *ShouldVibrateResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AddActionResponse) ProtoMessage() {}
+func (*ShouldVibrateResponse) ProtoMessage() {}
 
-func (x *AddActionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[46]
+func (x *ShouldVibrateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2007,39 +3475,39 @@ func (x *AddActionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddActionResponse.ProtoReflect.Descriptor instead.
-func (*AddActionResponse) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{46}
+// Deprecated: Use ShouldVibrateResponse.ProtoReflect.Descriptor instead.
+func (*ShouldVibrateResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{85}
 }
 
-func (x *AddActionResponse) GetResult() int64 {
+func (x *ShouldVibrateResponse) GetResult() bool {
 	if x != nil {
 		return x.Result
 	}
-	return 0
+	return false
 }
 
-type BuildRequest struct {
+type ToStringRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *BuildRequest) Reset() {
-	*x = BuildRequest{}
-	mi := &file_proto_notification_notification_proto_msgTypes[47]
+func (x *ToStringRequest) Reset() {
+	*x = ToStringRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *BuildRequest) String() string {
+func (x *ToStringRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*BuildRequest) ProtoMessage() {}
+func (*ToStringRequest) ProtoMessage() {}
 
-func (x *BuildRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[47]
+func (x *ToStringRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2050,33 +3518,33 @@ func (x *BuildRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BuildRequest.ProtoReflect.Descriptor instead.
-func (*BuildRequest) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{47}
+// Deprecated: Use ToStringRequest.ProtoReflect.Descriptor instead.
+func (*ToStringRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{86}
 }
 
-type BuildResponse struct {
+type ToStringResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *BuildResponse) Reset() {
-	*x = BuildResponse{}
-	mi := &file_proto_notification_notification_proto_msgTypes[48]
+func (x *ToStringResponse) Reset() {
+	*x = ToStringResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *BuildResponse) String() string {
+func (x *ToStringResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*BuildResponse) ProtoMessage() {}
+func (*ToStringResponse) ProtoMessage() {}
 
-func (x *BuildResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[48]
+func (x *ToStringResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2087,40 +3555,41 @@ func (x *BuildResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BuildResponse.ProtoReflect.Descriptor instead.
-func (*BuildResponse) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{48}
+// Deprecated: Use ToStringResponse.ProtoReflect.Descriptor instead.
+func (*ToStringResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{87}
 }
 
-func (x *BuildResponse) GetResult() int64 {
+func (x *ToStringResponse) GetResult() string {
 	if x != nil {
 		return x.Result
 	}
-	return 0
+	return ""
 }
 
-type BigTextRequest struct {
+type WriteToParcelRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Text          int64                  `protobuf:"varint,1,opt,name=text,proto3" json:"text,omitempty"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int32                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *BigTextRequest) Reset() {
-	*x = BigTextRequest{}
-	mi := &file_proto_notification_notification_proto_msgTypes[49]
+func (x *WriteToParcelRequest) Reset() {
+	*x = WriteToParcelRequest{}
+	mi := &file_proto_notification_notification_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *BigTextRequest) String() string {
+func (x *WriteToParcelRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*BigTextRequest) ProtoMessage() {}
+func (*WriteToParcelRequest) ProtoMessage() {}
 
-func (x *BigTextRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[49]
+func (x *WriteToParcelRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2131,40 +3600,46 @@ func (x *BigTextRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BigTextRequest.ProtoReflect.Descriptor instead.
-func (*BigTextRequest) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{49}
+// Deprecated: Use WriteToParcelRequest.ProtoReflect.Descriptor instead.
+func (*WriteToParcelRequest) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{88}
 }
 
-func (x *BigTextRequest) GetText() int64 {
+func (x *WriteToParcelRequest) GetArg0() int64 {
 	if x != nil {
-		return x.Text
+		return x.Arg0
 	}
 	return 0
 }
 
-type BigTextResponse struct {
+func (x *WriteToParcelRequest) GetArg1() int32 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type WriteToParcelResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *BigTextResponse) Reset() {
-	*x = BigTextResponse{}
-	mi := &file_proto_notification_notification_proto_msgTypes[50]
+func (x *WriteToParcelResponse) Reset() {
+	*x = WriteToParcelResponse{}
+	mi := &file_proto_notification_notification_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *BigTextResponse) String() string {
+func (x *WriteToParcelResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*BigTextResponse) ProtoMessage() {}
+func (*WriteToParcelResponse) ProtoMessage() {}
 
-func (x *BigTextResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_notification_notification_proto_msgTypes[50]
+func (x *WriteToParcelResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_notification_notification_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2175,147 +3650,201 @@ func (x *BigTextResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BigTextResponse.ProtoReflect.Descriptor instead.
-func (*BigTextResponse) Descriptor() ([]byte, []int) {
-	return file_proto_notification_notification_proto_rawDescGZIP(), []int{50}
-}
-
-func (x *BigTextResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
+// Deprecated: Use WriteToParcelResponse.ProtoReflect.Descriptor instead.
+func (*WriteToParcelResponse) Descriptor() ([]byte, []int) {
+	return file_proto_notification_notification_proto_rawDescGZIP(), []int{89}
 }
 
 var File_proto_notification_notification_proto protoreflect.FileDescriptor
 
 const file_proto_notification_notification_proto_rawDesc = "" +
 	"\n" +
-	"%proto/notification/notification.proto\x12\fnotification\"'\n" +
-	"\x15StatusBarNotification\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\" \n" +
-	"\x1eAreNotificationsEnabledRequest\"9\n" +
-	"\x1fAreNotificationsEnabledResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"<\n" +
-	" CreateNotificationChannelRequest\x12\x18\n" +
-	"\achannel\x18\x01 \x01(\x03R\achannel\"#\n" +
-	"!CreateNotificationChannelResponse\"A\n" +
-	" DeleteNotificationChannelRequest\x12\x1d\n" +
-	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"#\n" +
-	"!DeleteNotificationChannelResponse\"#\n" +
-	"!GetNotificationChannelsRawRequest\"<\n" +
-	"\"GetNotificationChannelsRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"F\n" +
-	"\x10NotifyRawRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\x12\"\n" +
-	"\fnotification\x18\x02 \x01(\x03R\fnotification\"\x13\n" +
-	"\x11NotifyRawResponse\"\x1f\n" +
-	"\rCancelRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x05R\x02id\"\x10\n" +
-	"\x0eCancelResponse\"\x12\n" +
-	"\x10CancelAllRequest\"\x13\n" +
-	"\x11CancelAllResponse\"\"\n" +
-	" GetActiveNotificationsRawRequest\";\n" +
-	"!GetActiveNotificationsRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"9\n" +
-	"\x15SetDescriptionRequest\x12 \n" +
-	"\vdescription\x18\x01 \x01(\tR\vdescription\"\x18\n" +
-	"\x16SetDescriptionResponse\"\x0e\n" +
-	"\fGetIdRequest\"'\n" +
-	"\rGetIdResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\tR\x06result\"\x10\n" +
-	"\x0eGetNameRequest\")\n" +
-	"\x0fGetNameResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"\x17\n" +
+	"%proto/notification/notification.proto\x12\fnotification\"\x12\n" +
+	"\x10CanBubbleRequest\"+\n" +
+	"\x11CanBubbleResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x15\n" +
+	"\x13CanBypassDndRequest\".\n" +
+	"\x14CanBypassDndResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x15\n" +
+	"\x13CanShowBadgeRequest\".\n" +
+	"\x14CanShowBadgeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x19\n" +
+	"\x17DescribeContentsRequest\"2\n" +
+	"\x18DescribeContentsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\")\n" +
+	"\x13EnableLightsRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"\x16\n" +
+	"\x14EnableLightsResponse\",\n" +
+	"\x16EnableVibrationRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"\x19\n" +
+	"\x17EnableVibrationResponse\"#\n" +
+	"\rEqualsRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"(\n" +
+	"\x0eEqualsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x1b\n" +
+	"\x19GetAudioAttributesRequest\"4\n" +
+	"\x1aGetAudioAttributesResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x1a\n" +
+	"\x18GetConversationIdRequest\"3\n" +
+	"\x19GetConversationIdResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x17\n" +
 	"\x15GetDescriptionRequest\"0\n" +
 	"\x16GetDescriptionResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x11\n" +
+	"\x0fGetGroupRequest\"*\n" +
+	"\x10GetGroupResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x0e\n" +
+	"\fGetIdRequest\"'\n" +
+	"\rGetIdResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\tR\x06result\"\x16\n" +
 	"\x14GetImportanceRequest\"/\n" +
 	"\x15GetImportanceResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x05R\x06result\".\n" +
-	"\x16SetContentTitleRequest\x12\x14\n" +
-	"\x05title\x18\x01 \x01(\x03R\x05title\"1\n" +
-	"\x17SetContentTitleResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"+\n" +
-	"\x15SetContentTextRequest\x12\x12\n" +
-	"\x04text\x18\x01 \x01(\x03R\x04text\"0\n" +
-	"\x16SetContentTextResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\",\n" +
-	"\x13SetSmallIconRequest\x12\x15\n" +
-	"\x06res_id\x18\x01 \x01(\x05R\x05resId\".\n" +
-	"\x14SetSmallIconResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"1\n" +
-	"\x17SetContentIntentRequest\x12\x16\n" +
-	"\x06intent\x18\x01 \x01(\x03R\x06intent\"2\n" +
-	"\x18SetContentIntentResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"7\n" +
-	"\x14SetAutoCancelRequest\x12\x1f\n" +
-	"\vauto_cancel\x18\x01 \x01(\bR\n" +
-	"autoCancel\"/\n" +
-	"\x15SetAutoCancelResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"-\n" +
-	"\x11SetOngoingRequest\x12\x18\n" +
-	"\aongoing\x18\x01 \x01(\bR\aongoing\",\n" +
-	"\x12SetOngoingResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"'\n" +
-	"\x0fSetStyleRequest\x12\x14\n" +
-	"\x05style\x18\x01 \x01(\x03R\x05style\"*\n" +
-	"\x10SetStyleResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\".\n" +
-	"\x0fSetGroupRequest\x12\x1b\n" +
-	"\tgroup_key\x18\x01 \x01(\tR\bgroupKey\"*\n" +
-	"\x10SetGroupResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"h\n" +
-	"\x12SetProgressRequest\x12\x10\n" +
-	"\x03max\x18\x01 \x01(\x05R\x03max\x12\x1a\n" +
-	"\bprogress\x18\x02 \x01(\x05R\bprogress\x12$\n" +
-	"\rindeterminate\x18\x03 \x01(\bR\rindeterminate\"-\n" +
-	"\x13SetProgressResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"T\n" +
-	"\x10AddActionRequest\x12\x12\n" +
-	"\x04icon\x18\x01 \x01(\x05R\x04icon\x12\x14\n" +
-	"\x05title\x18\x02 \x01(\x03R\x05title\x12\x16\n" +
-	"\x06intent\x18\x03 \x01(\x03R\x06intent\"+\n" +
-	"\x11AddActionResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"\x0e\n" +
-	"\fBuildRequest\"'\n" +
-	"\rBuildResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"$\n" +
-	"\x0eBigTextRequest\x12\x12\n" +
-	"\x04text\x18\x01 \x01(\x03R\x04text\")\n" +
-	"\x0fBigTextResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result2\xe4\x06\n" +
-	"\x0eManagerService\x12v\n" +
-	"\x17AreNotificationsEnabled\x12,.notification.AreNotificationsEnabledRequest\x1a-.notification.AreNotificationsEnabledResponse\x12|\n" +
-	"\x19CreateNotificationChannel\x12..notification.CreateNotificationChannelRequest\x1a/.notification.CreateNotificationChannelResponse\x12|\n" +
-	"\x19DeleteNotificationChannel\x12..notification.DeleteNotificationChannelRequest\x1a/.notification.DeleteNotificationChannelResponse\x12\x7f\n" +
-	"\x1aGetNotificationChannelsRaw\x12/.notification.GetNotificationChannelsRawRequest\x1a0.notification.GetNotificationChannelsRawResponse\x12L\n" +
-	"\tNotifyRaw\x12\x1e.notification.NotifyRawRequest\x1a\x1f.notification.NotifyRawResponse\x12C\n" +
-	"\x06Cancel\x12\x1b.notification.CancelRequest\x1a\x1c.notification.CancelResponse\x12L\n" +
-	"\tCancelAll\x12\x1e.notification.CancelAllRequest\x1a\x1f.notification.CancelAllResponse\x12|\n" +
-	"\x19GetActiveNotificationsRaw\x12..notification.GetActiveNotificationsRawRequest\x1a/.notification.GetActiveNotificationsRawResponse2\xba\x03\n" +
-	"\x1aNotificationChannelService\x12[\n" +
-	"\x0eSetDescription\x12#.notification.SetDescriptionRequest\x1a$.notification.SetDescriptionResponse\x12@\n" +
-	"\x05GetId\x12\x1a.notification.GetIdRequest\x1a\x1b.notification.GetIdResponse\x12F\n" +
-	"\aGetName\x12\x1c.notification.GetNameRequest\x1a\x1d.notification.GetNameResponse\x12[\n" +
-	"\x0eGetDescription\x12#.notification.GetDescriptionRequest\x1a$.notification.GetDescriptionResponse\x12X\n" +
-	"\rGetImportance\x12\".notification.GetImportanceRequest\x1a#.notification.GetImportanceResponse2\xb8\a\n" +
-	"\x1aNotificationBuilderService\x12^\n" +
-	"\x0fSetContentTitle\x12$.notification.SetContentTitleRequest\x1a%.notification.SetContentTitleResponse\x12[\n" +
-	"\x0eSetContentText\x12#.notification.SetContentTextRequest\x1a$.notification.SetContentTextResponse\x12U\n" +
-	"\fSetSmallIcon\x12!.notification.SetSmallIconRequest\x1a\".notification.SetSmallIconResponse\x12a\n" +
-	"\x10SetContentIntent\x12%.notification.SetContentIntentRequest\x1a&.notification.SetContentIntentResponse\x12X\n" +
-	"\rSetAutoCancel\x12\".notification.SetAutoCancelRequest\x1a#.notification.SetAutoCancelResponse\x12O\n" +
-	"\n" +
-	"SetOngoing\x12\x1f.notification.SetOngoingRequest\x1a .notification.SetOngoingResponse\x12I\n" +
-	"\bSetStyle\x12\x1d.notification.SetStyleRequest\x1a\x1e.notification.SetStyleResponse\x12I\n" +
-	"\bSetGroup\x12\x1d.notification.SetGroupRequest\x1a\x1e.notification.SetGroupResponse\x12R\n" +
-	"\vSetProgress\x12 .notification.SetProgressRequest\x1a!.notification.SetProgressResponse\x12L\n" +
-	"\tAddAction\x12\x1e.notification.AddActionRequest\x1a\x1f.notification.AddActionResponse\x12@\n" +
-	"\x05Build\x12\x1a.notification.BuildRequest\x1a\x1b.notification.BuildResponse2]\n" +
-	"\x13BigTextStyleService\x12F\n" +
-	"\aBigText\x12\x1c.notification.BigTextRequest\x1a\x1d.notification.BigTextResponseB/Z-github.com/xaionaro-go/jni/proto/notificationb\x06proto3"
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x16\n" +
+	"\x14GetLightColorRequest\"/\n" +
+	"\x15GetLightColorResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\" \n" +
+	"\x1eGetLockscreenVisibilityRequest\"9\n" +
+	"\x1fGetLockscreenVisibilityResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x10\n" +
+	"\x0eGetNameRequest\")\n" +
+	"\x0fGetNameResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x1b\n" +
+	"\x19GetParentChannelIdRequest\"4\n" +
+	"\x1aGetParentChannelIdResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x11\n" +
+	"\x0fGetSoundRequest\"*\n" +
+	"\x10GetSoundResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x1b\n" +
+	"\x19GetVibrationEffectRequest\"4\n" +
+	"\x1aGetVibrationEffectResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x1c\n" +
+	"\x1aGetVibrationPatternRequest\"5\n" +
+	"\x1bGetVibrationPatternResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x1d\n" +
+	"\x1bHasUserSetImportanceRequest\"6\n" +
+	"\x1cHasUserSetImportanceResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x18\n" +
+	"\x16HasUserSetSoundRequest\"1\n" +
+	"\x17HasUserSetSoundResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x11\n" +
+	"\x0fHashCodeRequest\"*\n" +
+	"\x10HashCodeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x14\n" +
+	"\x12IsBlockableRequest\"-\n" +
+	"\x13IsBlockableResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x17\n" +
+	"\x15IsConversationRequest\"0\n" +
+	"\x16IsConversationResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x12\n" +
+	"\x10IsDemotedRequest\"+\n" +
+	"\x11IsDemotedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\" \n" +
+	"\x1eIsImportantConversationRequest\"9\n" +
+	"\x1fIsImportantConversationResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\",\n" +
+	"\x16SetAllowBubblesRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"\x19\n" +
+	"\x17SetAllowBubblesResponse\")\n" +
+	"\x13SetBlockableRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"\x16\n" +
+	"\x14SetBlockableResponse\")\n" +
+	"\x13SetBypassDndRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"\x16\n" +
+	"\x14SetBypassDndResponse\"B\n" +
+	"\x18SetConversationIdRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\tR\x04arg1\"\x1b\n" +
+	"\x19SetConversationIdResponse\"+\n" +
+	"\x15SetDescriptionRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"\x18\n" +
+	"\x16SetDescriptionResponse\"%\n" +
+	"\x0fSetGroupRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"\x12\n" +
+	"\x10SetGroupResponse\"*\n" +
+	"\x14SetImportanceRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"\x17\n" +
+	"\x15SetImportanceResponse\"*\n" +
+	"\x14SetLightColorRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"\x17\n" +
+	"\x15SetLightColorResponse\"4\n" +
+	"\x1eSetLockscreenVisibilityRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"!\n" +
+	"\x1fSetLockscreenVisibilityResponse\"$\n" +
+	"\x0eSetNameRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"\x11\n" +
+	"\x0fSetNameResponse\")\n" +
+	"\x13SetShowBadgeRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"\x16\n" +
+	"\x14SetShowBadgeResponse\"9\n" +
+	"\x0fSetSoundRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x12\n" +
+	"\x10SetSoundResponse\"/\n" +
+	"\x19SetVibrationEffectRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1c\n" +
+	"\x1aSetVibrationEffectResponse\"0\n" +
+	"\x1aSetVibrationPatternRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1d\n" +
+	"\x1bSetVibrationPatternResponse\"\x19\n" +
+	"\x17ShouldShowLightsRequest\"2\n" +
+	"\x18ShouldShowLightsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x16\n" +
+	"\x14ShouldVibrateRequest\"/\n" +
+	"\x15ShouldVibrateResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x11\n" +
+	"\x0fToStringRequest\"*\n" +
+	"\x10ToStringResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\">\n" +
+	"\x14WriteToParcelRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\"\x17\n" +
+	"\x15WriteToParcelResponse2\xa7 \n" +
+	"\x1aNotificationChannelService\x12L\n" +
+	"\tCanBubble\x12\x1e.notification.CanBubbleRequest\x1a\x1f.notification.CanBubbleResponse\x12U\n" +
+	"\fCanBypassDnd\x12!.notification.CanBypassDndRequest\x1a\".notification.CanBypassDndResponse\x12U\n" +
+	"\fCanShowBadge\x12!.notification.CanShowBadgeRequest\x1a\".notification.CanShowBadgeResponse\x12a\n" +
+	"\x10DescribeContents\x12%.notification.DescribeContentsRequest\x1a&.notification.DescribeContentsResponse\x12U\n" +
+	"\fEnableLights\x12!.notification.EnableLightsRequest\x1a\".notification.EnableLightsResponse\x12^\n" +
+	"\x0fEnableVibration\x12$.notification.EnableVibrationRequest\x1a%.notification.EnableVibrationResponse\x12C\n" +
+	"\x06Equals\x12\x1b.notification.EqualsRequest\x1a\x1c.notification.EqualsResponse\x12g\n" +
+	"\x12GetAudioAttributes\x12'.notification.GetAudioAttributesRequest\x1a(.notification.GetAudioAttributesResponse\x12d\n" +
+	"\x11GetConversationId\x12&.notification.GetConversationIdRequest\x1a'.notification.GetConversationIdResponse\x12[\n" +
+	"\x0eGetDescription\x12#.notification.GetDescriptionRequest\x1a$.notification.GetDescriptionResponse\x12I\n" +
+	"\bGetGroup\x12\x1d.notification.GetGroupRequest\x1a\x1e.notification.GetGroupResponse\x12@\n" +
+	"\x05GetId\x12\x1a.notification.GetIdRequest\x1a\x1b.notification.GetIdResponse\x12X\n" +
+	"\rGetImportance\x12\".notification.GetImportanceRequest\x1a#.notification.GetImportanceResponse\x12X\n" +
+	"\rGetLightColor\x12\".notification.GetLightColorRequest\x1a#.notification.GetLightColorResponse\x12v\n" +
+	"\x17GetLockscreenVisibility\x12,.notification.GetLockscreenVisibilityRequest\x1a-.notification.GetLockscreenVisibilityResponse\x12F\n" +
+	"\aGetName\x12\x1c.notification.GetNameRequest\x1a\x1d.notification.GetNameResponse\x12g\n" +
+	"\x12GetParentChannelId\x12'.notification.GetParentChannelIdRequest\x1a(.notification.GetParentChannelIdResponse\x12I\n" +
+	"\bGetSound\x12\x1d.notification.GetSoundRequest\x1a\x1e.notification.GetSoundResponse\x12g\n" +
+	"\x12GetVibrationEffect\x12'.notification.GetVibrationEffectRequest\x1a(.notification.GetVibrationEffectResponse\x12j\n" +
+	"\x13GetVibrationPattern\x12(.notification.GetVibrationPatternRequest\x1a).notification.GetVibrationPatternResponse\x12m\n" +
+	"\x14HasUserSetImportance\x12).notification.HasUserSetImportanceRequest\x1a*.notification.HasUserSetImportanceResponse\x12^\n" +
+	"\x0fHasUserSetSound\x12$.notification.HasUserSetSoundRequest\x1a%.notification.HasUserSetSoundResponse\x12I\n" +
+	"\bHashCode\x12\x1d.notification.HashCodeRequest\x1a\x1e.notification.HashCodeResponse\x12R\n" +
+	"\vIsBlockable\x12 .notification.IsBlockableRequest\x1a!.notification.IsBlockableResponse\x12[\n" +
+	"\x0eIsConversation\x12#.notification.IsConversationRequest\x1a$.notification.IsConversationResponse\x12L\n" +
+	"\tIsDemoted\x12\x1e.notification.IsDemotedRequest\x1a\x1f.notification.IsDemotedResponse\x12v\n" +
+	"\x17IsImportantConversation\x12,.notification.IsImportantConversationRequest\x1a-.notification.IsImportantConversationResponse\x12^\n" +
+	"\x0fSetAllowBubbles\x12$.notification.SetAllowBubblesRequest\x1a%.notification.SetAllowBubblesResponse\x12U\n" +
+	"\fSetBlockable\x12!.notification.SetBlockableRequest\x1a\".notification.SetBlockableResponse\x12U\n" +
+	"\fSetBypassDnd\x12!.notification.SetBypassDndRequest\x1a\".notification.SetBypassDndResponse\x12d\n" +
+	"\x11SetConversationId\x12&.notification.SetConversationIdRequest\x1a'.notification.SetConversationIdResponse\x12[\n" +
+	"\x0eSetDescription\x12#.notification.SetDescriptionRequest\x1a$.notification.SetDescriptionResponse\x12I\n" +
+	"\bSetGroup\x12\x1d.notification.SetGroupRequest\x1a\x1e.notification.SetGroupResponse\x12X\n" +
+	"\rSetImportance\x12\".notification.SetImportanceRequest\x1a#.notification.SetImportanceResponse\x12X\n" +
+	"\rSetLightColor\x12\".notification.SetLightColorRequest\x1a#.notification.SetLightColorResponse\x12v\n" +
+	"\x17SetLockscreenVisibility\x12,.notification.SetLockscreenVisibilityRequest\x1a-.notification.SetLockscreenVisibilityResponse\x12F\n" +
+	"\aSetName\x12\x1c.notification.SetNameRequest\x1a\x1d.notification.SetNameResponse\x12U\n" +
+	"\fSetShowBadge\x12!.notification.SetShowBadgeRequest\x1a\".notification.SetShowBadgeResponse\x12I\n" +
+	"\bSetSound\x12\x1d.notification.SetSoundRequest\x1a\x1e.notification.SetSoundResponse\x12g\n" +
+	"\x12SetVibrationEffect\x12'.notification.SetVibrationEffectRequest\x1a(.notification.SetVibrationEffectResponse\x12j\n" +
+	"\x13SetVibrationPattern\x12(.notification.SetVibrationPatternRequest\x1a).notification.SetVibrationPatternResponse\x12a\n" +
+	"\x10ShouldShowLights\x12%.notification.ShouldShowLightsRequest\x1a&.notification.ShouldShowLightsResponse\x12X\n" +
+	"\rShouldVibrate\x12\".notification.ShouldVibrateRequest\x1a#.notification.ShouldVibrateResponse\x12I\n" +
+	"\bToString\x12\x1d.notification.ToStringRequest\x1a\x1e.notification.ToStringResponse\x12X\n" +
+	"\rWriteToParcel\x12\".notification.WriteToParcelRequest\x1a#.notification.WriteToParcelResponseB/Z-github.com/xaionaro-go/jni/proto/notificationb\x06proto3"
 
 var (
 	file_proto_notification_notification_proto_rawDescOnce sync.Once
@@ -2329,113 +3858,192 @@ func file_proto_notification_notification_proto_rawDescGZIP() []byte {
 	return file_proto_notification_notification_proto_rawDescData
 }
 
-var file_proto_notification_notification_proto_msgTypes = make([]protoimpl.MessageInfo, 51)
+var file_proto_notification_notification_proto_msgTypes = make([]protoimpl.MessageInfo, 90)
 var file_proto_notification_notification_proto_goTypes = []any{
-	(*StatusBarNotification)(nil),              // 0: notification.StatusBarNotification
-	(*AreNotificationsEnabledRequest)(nil),     // 1: notification.AreNotificationsEnabledRequest
-	(*AreNotificationsEnabledResponse)(nil),    // 2: notification.AreNotificationsEnabledResponse
-	(*CreateNotificationChannelRequest)(nil),   // 3: notification.CreateNotificationChannelRequest
-	(*CreateNotificationChannelResponse)(nil),  // 4: notification.CreateNotificationChannelResponse
-	(*DeleteNotificationChannelRequest)(nil),   // 5: notification.DeleteNotificationChannelRequest
-	(*DeleteNotificationChannelResponse)(nil),  // 6: notification.DeleteNotificationChannelResponse
-	(*GetNotificationChannelsRawRequest)(nil),  // 7: notification.GetNotificationChannelsRawRequest
-	(*GetNotificationChannelsRawResponse)(nil), // 8: notification.GetNotificationChannelsRawResponse
-	(*NotifyRawRequest)(nil),                   // 9: notification.NotifyRawRequest
-	(*NotifyRawResponse)(nil),                  // 10: notification.NotifyRawResponse
-	(*CancelRequest)(nil),                      // 11: notification.CancelRequest
-	(*CancelResponse)(nil),                     // 12: notification.CancelResponse
-	(*CancelAllRequest)(nil),                   // 13: notification.CancelAllRequest
-	(*CancelAllResponse)(nil),                  // 14: notification.CancelAllResponse
-	(*GetActiveNotificationsRawRequest)(nil),   // 15: notification.GetActiveNotificationsRawRequest
-	(*GetActiveNotificationsRawResponse)(nil),  // 16: notification.GetActiveNotificationsRawResponse
-	(*SetDescriptionRequest)(nil),              // 17: notification.SetDescriptionRequest
-	(*SetDescriptionResponse)(nil),             // 18: notification.SetDescriptionResponse
-	(*GetIdRequest)(nil),                       // 19: notification.GetIdRequest
-	(*GetIdResponse)(nil),                      // 20: notification.GetIdResponse
-	(*GetNameRequest)(nil),                     // 21: notification.GetNameRequest
-	(*GetNameResponse)(nil),                    // 22: notification.GetNameResponse
-	(*GetDescriptionRequest)(nil),              // 23: notification.GetDescriptionRequest
-	(*GetDescriptionResponse)(nil),             // 24: notification.GetDescriptionResponse
-	(*GetImportanceRequest)(nil),               // 25: notification.GetImportanceRequest
-	(*GetImportanceResponse)(nil),              // 26: notification.GetImportanceResponse
-	(*SetContentTitleRequest)(nil),             // 27: notification.SetContentTitleRequest
-	(*SetContentTitleResponse)(nil),            // 28: notification.SetContentTitleResponse
-	(*SetContentTextRequest)(nil),              // 29: notification.SetContentTextRequest
-	(*SetContentTextResponse)(nil),             // 30: notification.SetContentTextResponse
-	(*SetSmallIconRequest)(nil),                // 31: notification.SetSmallIconRequest
-	(*SetSmallIconResponse)(nil),               // 32: notification.SetSmallIconResponse
-	(*SetContentIntentRequest)(nil),            // 33: notification.SetContentIntentRequest
-	(*SetContentIntentResponse)(nil),           // 34: notification.SetContentIntentResponse
-	(*SetAutoCancelRequest)(nil),               // 35: notification.SetAutoCancelRequest
-	(*SetAutoCancelResponse)(nil),              // 36: notification.SetAutoCancelResponse
-	(*SetOngoingRequest)(nil),                  // 37: notification.SetOngoingRequest
-	(*SetOngoingResponse)(nil),                 // 38: notification.SetOngoingResponse
-	(*SetStyleRequest)(nil),                    // 39: notification.SetStyleRequest
-	(*SetStyleResponse)(nil),                   // 40: notification.SetStyleResponse
-	(*SetGroupRequest)(nil),                    // 41: notification.SetGroupRequest
-	(*SetGroupResponse)(nil),                   // 42: notification.SetGroupResponse
-	(*SetProgressRequest)(nil),                 // 43: notification.SetProgressRequest
-	(*SetProgressResponse)(nil),                // 44: notification.SetProgressResponse
-	(*AddActionRequest)(nil),                   // 45: notification.AddActionRequest
-	(*AddActionResponse)(nil),                  // 46: notification.AddActionResponse
-	(*BuildRequest)(nil),                       // 47: notification.BuildRequest
-	(*BuildResponse)(nil),                      // 48: notification.BuildResponse
-	(*BigTextRequest)(nil),                     // 49: notification.BigTextRequest
-	(*BigTextResponse)(nil),                    // 50: notification.BigTextResponse
+	(*CanBubbleRequest)(nil),                // 0: notification.CanBubbleRequest
+	(*CanBubbleResponse)(nil),               // 1: notification.CanBubbleResponse
+	(*CanBypassDndRequest)(nil),             // 2: notification.CanBypassDndRequest
+	(*CanBypassDndResponse)(nil),            // 3: notification.CanBypassDndResponse
+	(*CanShowBadgeRequest)(nil),             // 4: notification.CanShowBadgeRequest
+	(*CanShowBadgeResponse)(nil),            // 5: notification.CanShowBadgeResponse
+	(*DescribeContentsRequest)(nil),         // 6: notification.DescribeContentsRequest
+	(*DescribeContentsResponse)(nil),        // 7: notification.DescribeContentsResponse
+	(*EnableLightsRequest)(nil),             // 8: notification.EnableLightsRequest
+	(*EnableLightsResponse)(nil),            // 9: notification.EnableLightsResponse
+	(*EnableVibrationRequest)(nil),          // 10: notification.EnableVibrationRequest
+	(*EnableVibrationResponse)(nil),         // 11: notification.EnableVibrationResponse
+	(*EqualsRequest)(nil),                   // 12: notification.EqualsRequest
+	(*EqualsResponse)(nil),                  // 13: notification.EqualsResponse
+	(*GetAudioAttributesRequest)(nil),       // 14: notification.GetAudioAttributesRequest
+	(*GetAudioAttributesResponse)(nil),      // 15: notification.GetAudioAttributesResponse
+	(*GetConversationIdRequest)(nil),        // 16: notification.GetConversationIdRequest
+	(*GetConversationIdResponse)(nil),       // 17: notification.GetConversationIdResponse
+	(*GetDescriptionRequest)(nil),           // 18: notification.GetDescriptionRequest
+	(*GetDescriptionResponse)(nil),          // 19: notification.GetDescriptionResponse
+	(*GetGroupRequest)(nil),                 // 20: notification.GetGroupRequest
+	(*GetGroupResponse)(nil),                // 21: notification.GetGroupResponse
+	(*GetIdRequest)(nil),                    // 22: notification.GetIdRequest
+	(*GetIdResponse)(nil),                   // 23: notification.GetIdResponse
+	(*GetImportanceRequest)(nil),            // 24: notification.GetImportanceRequest
+	(*GetImportanceResponse)(nil),           // 25: notification.GetImportanceResponse
+	(*GetLightColorRequest)(nil),            // 26: notification.GetLightColorRequest
+	(*GetLightColorResponse)(nil),           // 27: notification.GetLightColorResponse
+	(*GetLockscreenVisibilityRequest)(nil),  // 28: notification.GetLockscreenVisibilityRequest
+	(*GetLockscreenVisibilityResponse)(nil), // 29: notification.GetLockscreenVisibilityResponse
+	(*GetNameRequest)(nil),                  // 30: notification.GetNameRequest
+	(*GetNameResponse)(nil),                 // 31: notification.GetNameResponse
+	(*GetParentChannelIdRequest)(nil),       // 32: notification.GetParentChannelIdRequest
+	(*GetParentChannelIdResponse)(nil),      // 33: notification.GetParentChannelIdResponse
+	(*GetSoundRequest)(nil),                 // 34: notification.GetSoundRequest
+	(*GetSoundResponse)(nil),                // 35: notification.GetSoundResponse
+	(*GetVibrationEffectRequest)(nil),       // 36: notification.GetVibrationEffectRequest
+	(*GetVibrationEffectResponse)(nil),      // 37: notification.GetVibrationEffectResponse
+	(*GetVibrationPatternRequest)(nil),      // 38: notification.GetVibrationPatternRequest
+	(*GetVibrationPatternResponse)(nil),     // 39: notification.GetVibrationPatternResponse
+	(*HasUserSetImportanceRequest)(nil),     // 40: notification.HasUserSetImportanceRequest
+	(*HasUserSetImportanceResponse)(nil),    // 41: notification.HasUserSetImportanceResponse
+	(*HasUserSetSoundRequest)(nil),          // 42: notification.HasUserSetSoundRequest
+	(*HasUserSetSoundResponse)(nil),         // 43: notification.HasUserSetSoundResponse
+	(*HashCodeRequest)(nil),                 // 44: notification.HashCodeRequest
+	(*HashCodeResponse)(nil),                // 45: notification.HashCodeResponse
+	(*IsBlockableRequest)(nil),              // 46: notification.IsBlockableRequest
+	(*IsBlockableResponse)(nil),             // 47: notification.IsBlockableResponse
+	(*IsConversationRequest)(nil),           // 48: notification.IsConversationRequest
+	(*IsConversationResponse)(nil),          // 49: notification.IsConversationResponse
+	(*IsDemotedRequest)(nil),                // 50: notification.IsDemotedRequest
+	(*IsDemotedResponse)(nil),               // 51: notification.IsDemotedResponse
+	(*IsImportantConversationRequest)(nil),  // 52: notification.IsImportantConversationRequest
+	(*IsImportantConversationResponse)(nil), // 53: notification.IsImportantConversationResponse
+	(*SetAllowBubblesRequest)(nil),          // 54: notification.SetAllowBubblesRequest
+	(*SetAllowBubblesResponse)(nil),         // 55: notification.SetAllowBubblesResponse
+	(*SetBlockableRequest)(nil),             // 56: notification.SetBlockableRequest
+	(*SetBlockableResponse)(nil),            // 57: notification.SetBlockableResponse
+	(*SetBypassDndRequest)(nil),             // 58: notification.SetBypassDndRequest
+	(*SetBypassDndResponse)(nil),            // 59: notification.SetBypassDndResponse
+	(*SetConversationIdRequest)(nil),        // 60: notification.SetConversationIdRequest
+	(*SetConversationIdResponse)(nil),       // 61: notification.SetConversationIdResponse
+	(*SetDescriptionRequest)(nil),           // 62: notification.SetDescriptionRequest
+	(*SetDescriptionResponse)(nil),          // 63: notification.SetDescriptionResponse
+	(*SetGroupRequest)(nil),                 // 64: notification.SetGroupRequest
+	(*SetGroupResponse)(nil),                // 65: notification.SetGroupResponse
+	(*SetImportanceRequest)(nil),            // 66: notification.SetImportanceRequest
+	(*SetImportanceResponse)(nil),           // 67: notification.SetImportanceResponse
+	(*SetLightColorRequest)(nil),            // 68: notification.SetLightColorRequest
+	(*SetLightColorResponse)(nil),           // 69: notification.SetLightColorResponse
+	(*SetLockscreenVisibilityRequest)(nil),  // 70: notification.SetLockscreenVisibilityRequest
+	(*SetLockscreenVisibilityResponse)(nil), // 71: notification.SetLockscreenVisibilityResponse
+	(*SetNameRequest)(nil),                  // 72: notification.SetNameRequest
+	(*SetNameResponse)(nil),                 // 73: notification.SetNameResponse
+	(*SetShowBadgeRequest)(nil),             // 74: notification.SetShowBadgeRequest
+	(*SetShowBadgeResponse)(nil),            // 75: notification.SetShowBadgeResponse
+	(*SetSoundRequest)(nil),                 // 76: notification.SetSoundRequest
+	(*SetSoundResponse)(nil),                // 77: notification.SetSoundResponse
+	(*SetVibrationEffectRequest)(nil),       // 78: notification.SetVibrationEffectRequest
+	(*SetVibrationEffectResponse)(nil),      // 79: notification.SetVibrationEffectResponse
+	(*SetVibrationPatternRequest)(nil),      // 80: notification.SetVibrationPatternRequest
+	(*SetVibrationPatternResponse)(nil),     // 81: notification.SetVibrationPatternResponse
+	(*ShouldShowLightsRequest)(nil),         // 82: notification.ShouldShowLightsRequest
+	(*ShouldShowLightsResponse)(nil),        // 83: notification.ShouldShowLightsResponse
+	(*ShouldVibrateRequest)(nil),            // 84: notification.ShouldVibrateRequest
+	(*ShouldVibrateResponse)(nil),           // 85: notification.ShouldVibrateResponse
+	(*ToStringRequest)(nil),                 // 86: notification.ToStringRequest
+	(*ToStringResponse)(nil),                // 87: notification.ToStringResponse
+	(*WriteToParcelRequest)(nil),            // 88: notification.WriteToParcelRequest
+	(*WriteToParcelResponse)(nil),           // 89: notification.WriteToParcelResponse
 }
 var file_proto_notification_notification_proto_depIdxs = []int32{
-	1,  // 0: notification.ManagerService.AreNotificationsEnabled:input_type -> notification.AreNotificationsEnabledRequest
-	3,  // 1: notification.ManagerService.CreateNotificationChannel:input_type -> notification.CreateNotificationChannelRequest
-	5,  // 2: notification.ManagerService.DeleteNotificationChannel:input_type -> notification.DeleteNotificationChannelRequest
-	7,  // 3: notification.ManagerService.GetNotificationChannelsRaw:input_type -> notification.GetNotificationChannelsRawRequest
-	9,  // 4: notification.ManagerService.NotifyRaw:input_type -> notification.NotifyRawRequest
-	11, // 5: notification.ManagerService.Cancel:input_type -> notification.CancelRequest
-	13, // 6: notification.ManagerService.CancelAll:input_type -> notification.CancelAllRequest
-	15, // 7: notification.ManagerService.GetActiveNotificationsRaw:input_type -> notification.GetActiveNotificationsRawRequest
-	17, // 8: notification.NotificationChannelService.SetDescription:input_type -> notification.SetDescriptionRequest
-	19, // 9: notification.NotificationChannelService.GetId:input_type -> notification.GetIdRequest
-	21, // 10: notification.NotificationChannelService.GetName:input_type -> notification.GetNameRequest
-	23, // 11: notification.NotificationChannelService.GetDescription:input_type -> notification.GetDescriptionRequest
-	25, // 12: notification.NotificationChannelService.GetImportance:input_type -> notification.GetImportanceRequest
-	27, // 13: notification.NotificationBuilderService.SetContentTitle:input_type -> notification.SetContentTitleRequest
-	29, // 14: notification.NotificationBuilderService.SetContentText:input_type -> notification.SetContentTextRequest
-	31, // 15: notification.NotificationBuilderService.SetSmallIcon:input_type -> notification.SetSmallIconRequest
-	33, // 16: notification.NotificationBuilderService.SetContentIntent:input_type -> notification.SetContentIntentRequest
-	35, // 17: notification.NotificationBuilderService.SetAutoCancel:input_type -> notification.SetAutoCancelRequest
-	37, // 18: notification.NotificationBuilderService.SetOngoing:input_type -> notification.SetOngoingRequest
-	39, // 19: notification.NotificationBuilderService.SetStyle:input_type -> notification.SetStyleRequest
-	41, // 20: notification.NotificationBuilderService.SetGroup:input_type -> notification.SetGroupRequest
-	43, // 21: notification.NotificationBuilderService.SetProgress:input_type -> notification.SetProgressRequest
-	45, // 22: notification.NotificationBuilderService.AddAction:input_type -> notification.AddActionRequest
-	47, // 23: notification.NotificationBuilderService.Build:input_type -> notification.BuildRequest
-	49, // 24: notification.BigTextStyleService.BigText:input_type -> notification.BigTextRequest
-	2,  // 25: notification.ManagerService.AreNotificationsEnabled:output_type -> notification.AreNotificationsEnabledResponse
-	4,  // 26: notification.ManagerService.CreateNotificationChannel:output_type -> notification.CreateNotificationChannelResponse
-	6,  // 27: notification.ManagerService.DeleteNotificationChannel:output_type -> notification.DeleteNotificationChannelResponse
-	8,  // 28: notification.ManagerService.GetNotificationChannelsRaw:output_type -> notification.GetNotificationChannelsRawResponse
-	10, // 29: notification.ManagerService.NotifyRaw:output_type -> notification.NotifyRawResponse
-	12, // 30: notification.ManagerService.Cancel:output_type -> notification.CancelResponse
-	14, // 31: notification.ManagerService.CancelAll:output_type -> notification.CancelAllResponse
-	16, // 32: notification.ManagerService.GetActiveNotificationsRaw:output_type -> notification.GetActiveNotificationsRawResponse
-	18, // 33: notification.NotificationChannelService.SetDescription:output_type -> notification.SetDescriptionResponse
-	20, // 34: notification.NotificationChannelService.GetId:output_type -> notification.GetIdResponse
-	22, // 35: notification.NotificationChannelService.GetName:output_type -> notification.GetNameResponse
-	24, // 36: notification.NotificationChannelService.GetDescription:output_type -> notification.GetDescriptionResponse
-	26, // 37: notification.NotificationChannelService.GetImportance:output_type -> notification.GetImportanceResponse
-	28, // 38: notification.NotificationBuilderService.SetContentTitle:output_type -> notification.SetContentTitleResponse
-	30, // 39: notification.NotificationBuilderService.SetContentText:output_type -> notification.SetContentTextResponse
-	32, // 40: notification.NotificationBuilderService.SetSmallIcon:output_type -> notification.SetSmallIconResponse
-	34, // 41: notification.NotificationBuilderService.SetContentIntent:output_type -> notification.SetContentIntentResponse
-	36, // 42: notification.NotificationBuilderService.SetAutoCancel:output_type -> notification.SetAutoCancelResponse
-	38, // 43: notification.NotificationBuilderService.SetOngoing:output_type -> notification.SetOngoingResponse
-	40, // 44: notification.NotificationBuilderService.SetStyle:output_type -> notification.SetStyleResponse
-	42, // 45: notification.NotificationBuilderService.SetGroup:output_type -> notification.SetGroupResponse
-	44, // 46: notification.NotificationBuilderService.SetProgress:output_type -> notification.SetProgressResponse
-	46, // 47: notification.NotificationBuilderService.AddAction:output_type -> notification.AddActionResponse
-	48, // 48: notification.NotificationBuilderService.Build:output_type -> notification.BuildResponse
-	50, // 49: notification.BigTextStyleService.BigText:output_type -> notification.BigTextResponse
-	25, // [25:50] is the sub-list for method output_type
-	0,  // [0:25] is the sub-list for method input_type
+	0,  // 0: notification.NotificationChannelService.CanBubble:input_type -> notification.CanBubbleRequest
+	2,  // 1: notification.NotificationChannelService.CanBypassDnd:input_type -> notification.CanBypassDndRequest
+	4,  // 2: notification.NotificationChannelService.CanShowBadge:input_type -> notification.CanShowBadgeRequest
+	6,  // 3: notification.NotificationChannelService.DescribeContents:input_type -> notification.DescribeContentsRequest
+	8,  // 4: notification.NotificationChannelService.EnableLights:input_type -> notification.EnableLightsRequest
+	10, // 5: notification.NotificationChannelService.EnableVibration:input_type -> notification.EnableVibrationRequest
+	12, // 6: notification.NotificationChannelService.Equals:input_type -> notification.EqualsRequest
+	14, // 7: notification.NotificationChannelService.GetAudioAttributes:input_type -> notification.GetAudioAttributesRequest
+	16, // 8: notification.NotificationChannelService.GetConversationId:input_type -> notification.GetConversationIdRequest
+	18, // 9: notification.NotificationChannelService.GetDescription:input_type -> notification.GetDescriptionRequest
+	20, // 10: notification.NotificationChannelService.GetGroup:input_type -> notification.GetGroupRequest
+	22, // 11: notification.NotificationChannelService.GetId:input_type -> notification.GetIdRequest
+	24, // 12: notification.NotificationChannelService.GetImportance:input_type -> notification.GetImportanceRequest
+	26, // 13: notification.NotificationChannelService.GetLightColor:input_type -> notification.GetLightColorRequest
+	28, // 14: notification.NotificationChannelService.GetLockscreenVisibility:input_type -> notification.GetLockscreenVisibilityRequest
+	30, // 15: notification.NotificationChannelService.GetName:input_type -> notification.GetNameRequest
+	32, // 16: notification.NotificationChannelService.GetParentChannelId:input_type -> notification.GetParentChannelIdRequest
+	34, // 17: notification.NotificationChannelService.GetSound:input_type -> notification.GetSoundRequest
+	36, // 18: notification.NotificationChannelService.GetVibrationEffect:input_type -> notification.GetVibrationEffectRequest
+	38, // 19: notification.NotificationChannelService.GetVibrationPattern:input_type -> notification.GetVibrationPatternRequest
+	40, // 20: notification.NotificationChannelService.HasUserSetImportance:input_type -> notification.HasUserSetImportanceRequest
+	42, // 21: notification.NotificationChannelService.HasUserSetSound:input_type -> notification.HasUserSetSoundRequest
+	44, // 22: notification.NotificationChannelService.HashCode:input_type -> notification.HashCodeRequest
+	46, // 23: notification.NotificationChannelService.IsBlockable:input_type -> notification.IsBlockableRequest
+	48, // 24: notification.NotificationChannelService.IsConversation:input_type -> notification.IsConversationRequest
+	50, // 25: notification.NotificationChannelService.IsDemoted:input_type -> notification.IsDemotedRequest
+	52, // 26: notification.NotificationChannelService.IsImportantConversation:input_type -> notification.IsImportantConversationRequest
+	54, // 27: notification.NotificationChannelService.SetAllowBubbles:input_type -> notification.SetAllowBubblesRequest
+	56, // 28: notification.NotificationChannelService.SetBlockable:input_type -> notification.SetBlockableRequest
+	58, // 29: notification.NotificationChannelService.SetBypassDnd:input_type -> notification.SetBypassDndRequest
+	60, // 30: notification.NotificationChannelService.SetConversationId:input_type -> notification.SetConversationIdRequest
+	62, // 31: notification.NotificationChannelService.SetDescription:input_type -> notification.SetDescriptionRequest
+	64, // 32: notification.NotificationChannelService.SetGroup:input_type -> notification.SetGroupRequest
+	66, // 33: notification.NotificationChannelService.SetImportance:input_type -> notification.SetImportanceRequest
+	68, // 34: notification.NotificationChannelService.SetLightColor:input_type -> notification.SetLightColorRequest
+	70, // 35: notification.NotificationChannelService.SetLockscreenVisibility:input_type -> notification.SetLockscreenVisibilityRequest
+	72, // 36: notification.NotificationChannelService.SetName:input_type -> notification.SetNameRequest
+	74, // 37: notification.NotificationChannelService.SetShowBadge:input_type -> notification.SetShowBadgeRequest
+	76, // 38: notification.NotificationChannelService.SetSound:input_type -> notification.SetSoundRequest
+	78, // 39: notification.NotificationChannelService.SetVibrationEffect:input_type -> notification.SetVibrationEffectRequest
+	80, // 40: notification.NotificationChannelService.SetVibrationPattern:input_type -> notification.SetVibrationPatternRequest
+	82, // 41: notification.NotificationChannelService.ShouldShowLights:input_type -> notification.ShouldShowLightsRequest
+	84, // 42: notification.NotificationChannelService.ShouldVibrate:input_type -> notification.ShouldVibrateRequest
+	86, // 43: notification.NotificationChannelService.ToString:input_type -> notification.ToStringRequest
+	88, // 44: notification.NotificationChannelService.WriteToParcel:input_type -> notification.WriteToParcelRequest
+	1,  // 45: notification.NotificationChannelService.CanBubble:output_type -> notification.CanBubbleResponse
+	3,  // 46: notification.NotificationChannelService.CanBypassDnd:output_type -> notification.CanBypassDndResponse
+	5,  // 47: notification.NotificationChannelService.CanShowBadge:output_type -> notification.CanShowBadgeResponse
+	7,  // 48: notification.NotificationChannelService.DescribeContents:output_type -> notification.DescribeContentsResponse
+	9,  // 49: notification.NotificationChannelService.EnableLights:output_type -> notification.EnableLightsResponse
+	11, // 50: notification.NotificationChannelService.EnableVibration:output_type -> notification.EnableVibrationResponse
+	13, // 51: notification.NotificationChannelService.Equals:output_type -> notification.EqualsResponse
+	15, // 52: notification.NotificationChannelService.GetAudioAttributes:output_type -> notification.GetAudioAttributesResponse
+	17, // 53: notification.NotificationChannelService.GetConversationId:output_type -> notification.GetConversationIdResponse
+	19, // 54: notification.NotificationChannelService.GetDescription:output_type -> notification.GetDescriptionResponse
+	21, // 55: notification.NotificationChannelService.GetGroup:output_type -> notification.GetGroupResponse
+	23, // 56: notification.NotificationChannelService.GetId:output_type -> notification.GetIdResponse
+	25, // 57: notification.NotificationChannelService.GetImportance:output_type -> notification.GetImportanceResponse
+	27, // 58: notification.NotificationChannelService.GetLightColor:output_type -> notification.GetLightColorResponse
+	29, // 59: notification.NotificationChannelService.GetLockscreenVisibility:output_type -> notification.GetLockscreenVisibilityResponse
+	31, // 60: notification.NotificationChannelService.GetName:output_type -> notification.GetNameResponse
+	33, // 61: notification.NotificationChannelService.GetParentChannelId:output_type -> notification.GetParentChannelIdResponse
+	35, // 62: notification.NotificationChannelService.GetSound:output_type -> notification.GetSoundResponse
+	37, // 63: notification.NotificationChannelService.GetVibrationEffect:output_type -> notification.GetVibrationEffectResponse
+	39, // 64: notification.NotificationChannelService.GetVibrationPattern:output_type -> notification.GetVibrationPatternResponse
+	41, // 65: notification.NotificationChannelService.HasUserSetImportance:output_type -> notification.HasUserSetImportanceResponse
+	43, // 66: notification.NotificationChannelService.HasUserSetSound:output_type -> notification.HasUserSetSoundResponse
+	45, // 67: notification.NotificationChannelService.HashCode:output_type -> notification.HashCodeResponse
+	47, // 68: notification.NotificationChannelService.IsBlockable:output_type -> notification.IsBlockableResponse
+	49, // 69: notification.NotificationChannelService.IsConversation:output_type -> notification.IsConversationResponse
+	51, // 70: notification.NotificationChannelService.IsDemoted:output_type -> notification.IsDemotedResponse
+	53, // 71: notification.NotificationChannelService.IsImportantConversation:output_type -> notification.IsImportantConversationResponse
+	55, // 72: notification.NotificationChannelService.SetAllowBubbles:output_type -> notification.SetAllowBubblesResponse
+	57, // 73: notification.NotificationChannelService.SetBlockable:output_type -> notification.SetBlockableResponse
+	59, // 74: notification.NotificationChannelService.SetBypassDnd:output_type -> notification.SetBypassDndResponse
+	61, // 75: notification.NotificationChannelService.SetConversationId:output_type -> notification.SetConversationIdResponse
+	63, // 76: notification.NotificationChannelService.SetDescription:output_type -> notification.SetDescriptionResponse
+	65, // 77: notification.NotificationChannelService.SetGroup:output_type -> notification.SetGroupResponse
+	67, // 78: notification.NotificationChannelService.SetImportance:output_type -> notification.SetImportanceResponse
+	69, // 79: notification.NotificationChannelService.SetLightColor:output_type -> notification.SetLightColorResponse
+	71, // 80: notification.NotificationChannelService.SetLockscreenVisibility:output_type -> notification.SetLockscreenVisibilityResponse
+	73, // 81: notification.NotificationChannelService.SetName:output_type -> notification.SetNameResponse
+	75, // 82: notification.NotificationChannelService.SetShowBadge:output_type -> notification.SetShowBadgeResponse
+	77, // 83: notification.NotificationChannelService.SetSound:output_type -> notification.SetSoundResponse
+	79, // 84: notification.NotificationChannelService.SetVibrationEffect:output_type -> notification.SetVibrationEffectResponse
+	81, // 85: notification.NotificationChannelService.SetVibrationPattern:output_type -> notification.SetVibrationPatternResponse
+	83, // 86: notification.NotificationChannelService.ShouldShowLights:output_type -> notification.ShouldShowLightsResponse
+	85, // 87: notification.NotificationChannelService.ShouldVibrate:output_type -> notification.ShouldVibrateResponse
+	87, // 88: notification.NotificationChannelService.ToString:output_type -> notification.ToStringResponse
+	89, // 89: notification.NotificationChannelService.WriteToParcel:output_type -> notification.WriteToParcelResponse
+	45, // [45:90] is the sub-list for method output_type
+	0,  // [0:45] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -2452,9 +4060,9 @@ func file_proto_notification_notification_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_notification_notification_proto_rawDesc), len(file_proto_notification_notification_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   51,
+			NumMessages:   90,
 			NumExtensions: 0,
-			NumServices:   4,
+			NumServices:   1,
 		},
 		GoTypes:           file_proto_notification_notification_proto_goTypes,
 		DependencyIndexes: file_proto_notification_notification_proto_depIdxs,

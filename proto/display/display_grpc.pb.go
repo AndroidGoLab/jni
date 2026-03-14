@@ -21,317 +21,291 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	WindowManagerService_GetDefaultDisplay_FullMethodName = "/display.WindowManagerService/GetDefaultDisplay"
+	DisplayMetricsService_Equals1_FullMethodName       = "/display.DisplayMetricsService/Equals1"
+	DisplayMetricsService_Equals1_1_FullMethodName     = "/display.DisplayMetricsService/Equals1_1"
+	DisplayMetricsService_HashCode_FullMethodName      = "/display.DisplayMetricsService/HashCode"
+	DisplayMetricsService_SetTo_FullMethodName         = "/display.DisplayMetricsService/SetTo"
+	DisplayMetricsService_SetToDefaults_FullMethodName = "/display.DisplayMetricsService/SetToDefaults"
+	DisplayMetricsService_ToString_FullMethodName      = "/display.DisplayMetricsService/ToString"
 )
 
-// WindowManagerServiceClient is the client API for WindowManagerService service.
+// DisplayMetricsServiceClient is the client API for DisplayMetricsService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type WindowManagerServiceClient interface {
-	GetDefaultDisplay(ctx context.Context, in *GetDefaultDisplayRequest, opts ...grpc.CallOption) (*GetDefaultDisplayResponse, error)
+type DisplayMetricsServiceClient interface {
+	Equals1(ctx context.Context, in *Equals1Request, opts ...grpc.CallOption) (*Equals1Response, error)
+	Equals1_1(ctx context.Context, in *Equals1_1Request, opts ...grpc.CallOption) (*Equals1_1Response, error)
+	HashCode(ctx context.Context, in *HashCodeRequest, opts ...grpc.CallOption) (*HashCodeResponse, error)
+	SetTo(ctx context.Context, in *SetToRequest, opts ...grpc.CallOption) (*SetToResponse, error)
+	SetToDefaults(ctx context.Context, in *SetToDefaultsRequest, opts ...grpc.CallOption) (*SetToDefaultsResponse, error)
+	ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error)
 }
 
-type windowManagerServiceClient struct {
+type displayMetricsServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewWindowManagerServiceClient(cc grpc.ClientConnInterface) WindowManagerServiceClient {
-	return &windowManagerServiceClient{cc}
+func NewDisplayMetricsServiceClient(cc grpc.ClientConnInterface) DisplayMetricsServiceClient {
+	return &displayMetricsServiceClient{cc}
 }
 
-func (c *windowManagerServiceClient) GetDefaultDisplay(ctx context.Context, in *GetDefaultDisplayRequest, opts ...grpc.CallOption) (*GetDefaultDisplayResponse, error) {
+func (c *displayMetricsServiceClient) Equals1(ctx context.Context, in *Equals1Request, opts ...grpc.CallOption) (*Equals1Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetDefaultDisplayResponse)
-	err := c.cc.Invoke(ctx, WindowManagerService_GetDefaultDisplay_FullMethodName, in, out, cOpts...)
+	out := new(Equals1Response)
+	err := c.cc.Invoke(ctx, DisplayMetricsService_Equals1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// WindowManagerServiceServer is the server API for WindowManagerService service.
-// All implementations must embed UnimplementedWindowManagerServiceServer
-// for forward compatibility.
-type WindowManagerServiceServer interface {
-	GetDefaultDisplay(context.Context, *GetDefaultDisplayRequest) (*GetDefaultDisplayResponse, error)
-	mustEmbedUnimplementedWindowManagerServiceServer()
+func (c *displayMetricsServiceClient) Equals1_1(ctx context.Context, in *Equals1_1Request, opts ...grpc.CallOption) (*Equals1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Equals1_1Response)
+	err := c.cc.Invoke(ctx, DisplayMetricsService_Equals1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
-// UnimplementedWindowManagerServiceServer must be embedded to have
+func (c *displayMetricsServiceClient) HashCode(ctx context.Context, in *HashCodeRequest, opts ...grpc.CallOption) (*HashCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HashCodeResponse)
+	err := c.cc.Invoke(ctx, DisplayMetricsService_HashCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayMetricsServiceClient) SetTo(ctx context.Context, in *SetToRequest, opts ...grpc.CallOption) (*SetToResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetToResponse)
+	err := c.cc.Invoke(ctx, DisplayMetricsService_SetTo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayMetricsServiceClient) SetToDefaults(ctx context.Context, in *SetToDefaultsRequest, opts ...grpc.CallOption) (*SetToDefaultsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetToDefaultsResponse)
+	err := c.cc.Invoke(ctx, DisplayMetricsService_SetToDefaults_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *displayMetricsServiceClient) ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ToStringResponse)
+	err := c.cc.Invoke(ctx, DisplayMetricsService_ToString_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DisplayMetricsServiceServer is the server API for DisplayMetricsService service.
+// All implementations must embed UnimplementedDisplayMetricsServiceServer
+// for forward compatibility.
+type DisplayMetricsServiceServer interface {
+	Equals1(context.Context, *Equals1Request) (*Equals1Response, error)
+	Equals1_1(context.Context, *Equals1_1Request) (*Equals1_1Response, error)
+	HashCode(context.Context, *HashCodeRequest) (*HashCodeResponse, error)
+	SetTo(context.Context, *SetToRequest) (*SetToResponse, error)
+	SetToDefaults(context.Context, *SetToDefaultsRequest) (*SetToDefaultsResponse, error)
+	ToString(context.Context, *ToStringRequest) (*ToStringResponse, error)
+	mustEmbedUnimplementedDisplayMetricsServiceServer()
+}
+
+// UnimplementedDisplayMetricsServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedWindowManagerServiceServer struct{}
+type UnimplementedDisplayMetricsServiceServer struct{}
 
-func (UnimplementedWindowManagerServiceServer) GetDefaultDisplay(context.Context, *GetDefaultDisplayRequest) (*GetDefaultDisplayResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetDefaultDisplay not implemented")
+func (UnimplementedDisplayMetricsServiceServer) Equals1(context.Context, *Equals1Request) (*Equals1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Equals1 not implemented")
 }
-func (UnimplementedWindowManagerServiceServer) mustEmbedUnimplementedWindowManagerServiceServer() {}
-func (UnimplementedWindowManagerServiceServer) testEmbeddedByValue()                              {}
+func (UnimplementedDisplayMetricsServiceServer) Equals1_1(context.Context, *Equals1_1Request) (*Equals1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Equals1_1 not implemented")
+}
+func (UnimplementedDisplayMetricsServiceServer) HashCode(context.Context, *HashCodeRequest) (*HashCodeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method HashCode not implemented")
+}
+func (UnimplementedDisplayMetricsServiceServer) SetTo(context.Context, *SetToRequest) (*SetToResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetTo not implemented")
+}
+func (UnimplementedDisplayMetricsServiceServer) SetToDefaults(context.Context, *SetToDefaultsRequest) (*SetToDefaultsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetToDefaults not implemented")
+}
+func (UnimplementedDisplayMetricsServiceServer) ToString(context.Context, *ToStringRequest) (*ToStringResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ToString not implemented")
+}
+func (UnimplementedDisplayMetricsServiceServer) mustEmbedUnimplementedDisplayMetricsServiceServer() {}
+func (UnimplementedDisplayMetricsServiceServer) testEmbeddedByValue()                               {}
 
-// UnsafeWindowManagerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to WindowManagerServiceServer will
+// UnsafeDisplayMetricsServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DisplayMetricsServiceServer will
 // result in compilation errors.
-type UnsafeWindowManagerServiceServer interface {
-	mustEmbedUnimplementedWindowManagerServiceServer()
+type UnsafeDisplayMetricsServiceServer interface {
+	mustEmbedUnimplementedDisplayMetricsServiceServer()
 }
 
-func RegisterWindowManagerServiceServer(s grpc.ServiceRegistrar, srv WindowManagerServiceServer) {
-	// If the following call panics, it indicates UnimplementedWindowManagerServiceServer was
+func RegisterDisplayMetricsServiceServer(s grpc.ServiceRegistrar, srv DisplayMetricsServiceServer) {
+	// If the following call panics, it indicates UnimplementedDisplayMetricsServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&WindowManagerService_ServiceDesc, srv)
+	s.RegisterService(&DisplayMetricsService_ServiceDesc, srv)
 }
 
-func _WindowManagerService_GetDefaultDisplay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDefaultDisplayRequest)
+func _DisplayMetricsService_Equals1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Equals1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WindowManagerServiceServer).GetDefaultDisplay(ctx, in)
+		return srv.(DisplayMetricsServiceServer).Equals1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: WindowManagerService_GetDefaultDisplay_FullMethodName,
+		FullMethod: DisplayMetricsService_Equals1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WindowManagerServiceServer).GetDefaultDisplay(ctx, req.(*GetDefaultDisplayRequest))
+		return srv.(DisplayMetricsServiceServer).Equals1(ctx, req.(*Equals1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// WindowManagerService_ServiceDesc is the grpc.ServiceDesc for WindowManagerService service.
+func _DisplayMetricsService_Equals1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Equals1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayMetricsServiceServer).Equals1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayMetricsService_Equals1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayMetricsServiceServer).Equals1_1(ctx, req.(*Equals1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayMetricsService_HashCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HashCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayMetricsServiceServer).HashCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayMetricsService_HashCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayMetricsServiceServer).HashCode(ctx, req.(*HashCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayMetricsService_SetTo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetToRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayMetricsServiceServer).SetTo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayMetricsService_SetTo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayMetricsServiceServer).SetTo(ctx, req.(*SetToRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayMetricsService_SetToDefaults_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetToDefaultsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayMetricsServiceServer).SetToDefaults(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayMetricsService_SetToDefaults_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayMetricsServiceServer).SetToDefaults(ctx, req.(*SetToDefaultsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DisplayMetricsService_ToString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToStringRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DisplayMetricsServiceServer).ToString(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DisplayMetricsService_ToString_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DisplayMetricsServiceServer).ToString(ctx, req.(*ToStringRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// DisplayMetricsService_ServiceDesc is the grpc.ServiceDesc for DisplayMetricsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var WindowManagerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "display.WindowManagerService",
-	HandlerType: (*WindowManagerServiceServer)(nil),
+var DisplayMetricsService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "display.DisplayMetricsService",
+	HandlerType: (*DisplayMetricsServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetDefaultDisplay",
-			Handler:    _WindowManagerService_GetDefaultDisplay_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/display/display.proto",
-}
-
-const (
-	DisplayService_GetRotation_FullMethodName    = "/display.DisplayService/GetRotation"
-	DisplayService_GetRefreshRate_FullMethodName = "/display.DisplayService/GetRefreshRate"
-	DisplayService_GetMetrics_FullMethodName     = "/display.DisplayService/GetMetrics"
-	DisplayService_GetRealMetrics_FullMethodName = "/display.DisplayService/GetRealMetrics"
-)
-
-// DisplayServiceClient is the client API for DisplayService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type DisplayServiceClient interface {
-	GetRotation(ctx context.Context, in *GetRotationRequest, opts ...grpc.CallOption) (*GetRotationResponse, error)
-	GetRefreshRate(ctx context.Context, in *GetRefreshRateRequest, opts ...grpc.CallOption) (*GetRefreshRateResponse, error)
-	GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*GetMetricsResponse, error)
-	GetRealMetrics(ctx context.Context, in *GetRealMetricsRequest, opts ...grpc.CallOption) (*GetRealMetricsResponse, error)
-}
-
-type displayServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewDisplayServiceClient(cc grpc.ClientConnInterface) DisplayServiceClient {
-	return &displayServiceClient{cc}
-}
-
-func (c *displayServiceClient) GetRotation(ctx context.Context, in *GetRotationRequest, opts ...grpc.CallOption) (*GetRotationResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetRotationResponse)
-	err := c.cc.Invoke(ctx, DisplayService_GetRotation_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *displayServiceClient) GetRefreshRate(ctx context.Context, in *GetRefreshRateRequest, opts ...grpc.CallOption) (*GetRefreshRateResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetRefreshRateResponse)
-	err := c.cc.Invoke(ctx, DisplayService_GetRefreshRate_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *displayServiceClient) GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*GetMetricsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetMetricsResponse)
-	err := c.cc.Invoke(ctx, DisplayService_GetMetrics_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *displayServiceClient) GetRealMetrics(ctx context.Context, in *GetRealMetricsRequest, opts ...grpc.CallOption) (*GetRealMetricsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetRealMetricsResponse)
-	err := c.cc.Invoke(ctx, DisplayService_GetRealMetrics_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// DisplayServiceServer is the server API for DisplayService service.
-// All implementations must embed UnimplementedDisplayServiceServer
-// for forward compatibility.
-type DisplayServiceServer interface {
-	GetRotation(context.Context, *GetRotationRequest) (*GetRotationResponse, error)
-	GetRefreshRate(context.Context, *GetRefreshRateRequest) (*GetRefreshRateResponse, error)
-	GetMetrics(context.Context, *GetMetricsRequest) (*GetMetricsResponse, error)
-	GetRealMetrics(context.Context, *GetRealMetricsRequest) (*GetRealMetricsResponse, error)
-	mustEmbedUnimplementedDisplayServiceServer()
-}
-
-// UnimplementedDisplayServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedDisplayServiceServer struct{}
-
-func (UnimplementedDisplayServiceServer) GetRotation(context.Context, *GetRotationRequest) (*GetRotationResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetRotation not implemented")
-}
-func (UnimplementedDisplayServiceServer) GetRefreshRate(context.Context, *GetRefreshRateRequest) (*GetRefreshRateResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetRefreshRate not implemented")
-}
-func (UnimplementedDisplayServiceServer) GetMetrics(context.Context, *GetMetricsRequest) (*GetMetricsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetMetrics not implemented")
-}
-func (UnimplementedDisplayServiceServer) GetRealMetrics(context.Context, *GetRealMetricsRequest) (*GetRealMetricsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetRealMetrics not implemented")
-}
-func (UnimplementedDisplayServiceServer) mustEmbedUnimplementedDisplayServiceServer() {}
-func (UnimplementedDisplayServiceServer) testEmbeddedByValue()                        {}
-
-// UnsafeDisplayServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to DisplayServiceServer will
-// result in compilation errors.
-type UnsafeDisplayServiceServer interface {
-	mustEmbedUnimplementedDisplayServiceServer()
-}
-
-func RegisterDisplayServiceServer(s grpc.ServiceRegistrar, srv DisplayServiceServer) {
-	// If the following call panics, it indicates UnimplementedDisplayServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&DisplayService_ServiceDesc, srv)
-}
-
-func _DisplayService_GetRotation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRotationRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DisplayServiceServer).GetRotation(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DisplayService_GetRotation_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DisplayServiceServer).GetRotation(ctx, req.(*GetRotationRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DisplayService_GetRefreshRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRefreshRateRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DisplayServiceServer).GetRefreshRate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DisplayService_GetRefreshRate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DisplayServiceServer).GetRefreshRate(ctx, req.(*GetRefreshRateRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DisplayService_GetMetrics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMetricsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DisplayServiceServer).GetMetrics(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DisplayService_GetMetrics_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DisplayServiceServer).GetMetrics(ctx, req.(*GetMetricsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DisplayService_GetRealMetrics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRealMetricsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DisplayServiceServer).GetRealMetrics(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DisplayService_GetRealMetrics_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DisplayServiceServer).GetRealMetrics(ctx, req.(*GetRealMetricsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// DisplayService_ServiceDesc is the grpc.ServiceDesc for DisplayService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var DisplayService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "display.DisplayService",
-	HandlerType: (*DisplayServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "GetRotation",
-			Handler:    _DisplayService_GetRotation_Handler,
+			MethodName: "Equals1",
+			Handler:    _DisplayMetricsService_Equals1_Handler,
 		},
 		{
-			MethodName: "GetRefreshRate",
-			Handler:    _DisplayService_GetRefreshRate_Handler,
+			MethodName: "Equals1_1",
+			Handler:    _DisplayMetricsService_Equals1_1_Handler,
 		},
 		{
-			MethodName: "GetMetrics",
-			Handler:    _DisplayService_GetMetrics_Handler,
+			MethodName: "HashCode",
+			Handler:    _DisplayMetricsService_HashCode_Handler,
 		},
 		{
-			MethodName: "GetRealMetrics",
-			Handler:    _DisplayService_GetRealMetrics_Handler,
+			MethodName: "SetTo",
+			Handler:    _DisplayMetricsService_SetTo_Handler,
+		},
+		{
+			MethodName: "SetToDefaults",
+			Handler:    _DisplayMetricsService_SetToDefaults_Handler,
+		},
+		{
+			MethodName: "ToString",
+			Handler:    _DisplayMetricsService_ToString_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

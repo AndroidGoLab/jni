@@ -21,735 +21,329 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	SchedulerService_ScheduleRaw_FullMethodName          = "/job.SchedulerService/ScheduleRaw"
-	SchedulerService_Cancel_FullMethodName               = "/job.SchedulerService/Cancel"
-	SchedulerService_CancelAll_FullMethodName            = "/job.SchedulerService/CancelAll"
-	SchedulerService_GetPendingJobRaw_FullMethodName     = "/job.SchedulerService/GetPendingJobRaw"
-	SchedulerService_GetAllPendingJobsRaw_FullMethodName = "/job.SchedulerService/GetAllPendingJobsRaw"
+	JobSchedulerService_CanRunUserInitiatedJobs_FullMethodName     = "/job.JobSchedulerService/CanRunUserInitiatedJobs"
+	JobSchedulerService_CancelInAllNamespaces_FullMethodName       = "/job.JobSchedulerService/CancelInAllNamespaces"
+	JobSchedulerService_ForNamespace_FullMethodName                = "/job.JobSchedulerService/ForNamespace"
+	JobSchedulerService_GetNamespace_FullMethodName                = "/job.JobSchedulerService/GetNamespace"
+	JobSchedulerService_GetPendingJobReason_FullMethodName         = "/job.JobSchedulerService/GetPendingJobReason"
+	JobSchedulerService_GetPendingJobReasons_FullMethodName        = "/job.JobSchedulerService/GetPendingJobReasons"
+	JobSchedulerService_GetPendingJobReasonsHistory_FullMethodName = "/job.JobSchedulerService/GetPendingJobReasonsHistory"
 )
 
-// SchedulerServiceClient is the client API for SchedulerService service.
+// JobSchedulerServiceClient is the client API for JobSchedulerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type SchedulerServiceClient interface {
-	ScheduleRaw(ctx context.Context, in *ScheduleRawRequest, opts ...grpc.CallOption) (*ScheduleRawResponse, error)
-	Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*CancelResponse, error)
-	CancelAll(ctx context.Context, in *CancelAllRequest, opts ...grpc.CallOption) (*CancelAllResponse, error)
-	GetPendingJobRaw(ctx context.Context, in *GetPendingJobRawRequest, opts ...grpc.CallOption) (*GetPendingJobRawResponse, error)
-	GetAllPendingJobsRaw(ctx context.Context, in *GetAllPendingJobsRawRequest, opts ...grpc.CallOption) (*GetAllPendingJobsRawResponse, error)
+type JobSchedulerServiceClient interface {
+	CanRunUserInitiatedJobs(ctx context.Context, in *CanRunUserInitiatedJobsRequest, opts ...grpc.CallOption) (*CanRunUserInitiatedJobsResponse, error)
+	CancelInAllNamespaces(ctx context.Context, in *CancelInAllNamespacesRequest, opts ...grpc.CallOption) (*CancelInAllNamespacesResponse, error)
+	ForNamespace(ctx context.Context, in *ForNamespaceRequest, opts ...grpc.CallOption) (*ForNamespaceResponse, error)
+	GetNamespace(ctx context.Context, in *GetNamespaceRequest, opts ...grpc.CallOption) (*GetNamespaceResponse, error)
+	GetPendingJobReason(ctx context.Context, in *GetPendingJobReasonRequest, opts ...grpc.CallOption) (*GetPendingJobReasonResponse, error)
+	GetPendingJobReasons(ctx context.Context, in *GetPendingJobReasonsRequest, opts ...grpc.CallOption) (*GetPendingJobReasonsResponse, error)
+	GetPendingJobReasonsHistory(ctx context.Context, in *GetPendingJobReasonsHistoryRequest, opts ...grpc.CallOption) (*GetPendingJobReasonsHistoryResponse, error)
 }
 
-type schedulerServiceClient struct {
+type jobSchedulerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewSchedulerServiceClient(cc grpc.ClientConnInterface) SchedulerServiceClient {
-	return &schedulerServiceClient{cc}
+func NewJobSchedulerServiceClient(cc grpc.ClientConnInterface) JobSchedulerServiceClient {
+	return &jobSchedulerServiceClient{cc}
 }
 
-func (c *schedulerServiceClient) ScheduleRaw(ctx context.Context, in *ScheduleRawRequest, opts ...grpc.CallOption) (*ScheduleRawResponse, error) {
+func (c *jobSchedulerServiceClient) CanRunUserInitiatedJobs(ctx context.Context, in *CanRunUserInitiatedJobsRequest, opts ...grpc.CallOption) (*CanRunUserInitiatedJobsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ScheduleRawResponse)
-	err := c.cc.Invoke(ctx, SchedulerService_ScheduleRaw_FullMethodName, in, out, cOpts...)
+	out := new(CanRunUserInitiatedJobsResponse)
+	err := c.cc.Invoke(ctx, JobSchedulerService_CanRunUserInitiatedJobs_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *schedulerServiceClient) Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*CancelResponse, error) {
+func (c *jobSchedulerServiceClient) CancelInAllNamespaces(ctx context.Context, in *CancelInAllNamespacesRequest, opts ...grpc.CallOption) (*CancelInAllNamespacesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CancelResponse)
-	err := c.cc.Invoke(ctx, SchedulerService_Cancel_FullMethodName, in, out, cOpts...)
+	out := new(CancelInAllNamespacesResponse)
+	err := c.cc.Invoke(ctx, JobSchedulerService_CancelInAllNamespaces_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *schedulerServiceClient) CancelAll(ctx context.Context, in *CancelAllRequest, opts ...grpc.CallOption) (*CancelAllResponse, error) {
+func (c *jobSchedulerServiceClient) ForNamespace(ctx context.Context, in *ForNamespaceRequest, opts ...grpc.CallOption) (*ForNamespaceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CancelAllResponse)
-	err := c.cc.Invoke(ctx, SchedulerService_CancelAll_FullMethodName, in, out, cOpts...)
+	out := new(ForNamespaceResponse)
+	err := c.cc.Invoke(ctx, JobSchedulerService_ForNamespace_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *schedulerServiceClient) GetPendingJobRaw(ctx context.Context, in *GetPendingJobRawRequest, opts ...grpc.CallOption) (*GetPendingJobRawResponse, error) {
+func (c *jobSchedulerServiceClient) GetNamespace(ctx context.Context, in *GetNamespaceRequest, opts ...grpc.CallOption) (*GetNamespaceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPendingJobRawResponse)
-	err := c.cc.Invoke(ctx, SchedulerService_GetPendingJobRaw_FullMethodName, in, out, cOpts...)
+	out := new(GetNamespaceResponse)
+	err := c.cc.Invoke(ctx, JobSchedulerService_GetNamespace_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *schedulerServiceClient) GetAllPendingJobsRaw(ctx context.Context, in *GetAllPendingJobsRawRequest, opts ...grpc.CallOption) (*GetAllPendingJobsRawResponse, error) {
+func (c *jobSchedulerServiceClient) GetPendingJobReason(ctx context.Context, in *GetPendingJobReasonRequest, opts ...grpc.CallOption) (*GetPendingJobReasonResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAllPendingJobsRawResponse)
-	err := c.cc.Invoke(ctx, SchedulerService_GetAllPendingJobsRaw_FullMethodName, in, out, cOpts...)
+	out := new(GetPendingJobReasonResponse)
+	err := c.cc.Invoke(ctx, JobSchedulerService_GetPendingJobReason_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// SchedulerServiceServer is the server API for SchedulerService service.
-// All implementations must embed UnimplementedSchedulerServiceServer
+func (c *jobSchedulerServiceClient) GetPendingJobReasons(ctx context.Context, in *GetPendingJobReasonsRequest, opts ...grpc.CallOption) (*GetPendingJobReasonsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPendingJobReasonsResponse)
+	err := c.cc.Invoke(ctx, JobSchedulerService_GetPendingJobReasons_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobSchedulerServiceClient) GetPendingJobReasonsHistory(ctx context.Context, in *GetPendingJobReasonsHistoryRequest, opts ...grpc.CallOption) (*GetPendingJobReasonsHistoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPendingJobReasonsHistoryResponse)
+	err := c.cc.Invoke(ctx, JobSchedulerService_GetPendingJobReasonsHistory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// JobSchedulerServiceServer is the server API for JobSchedulerService service.
+// All implementations must embed UnimplementedJobSchedulerServiceServer
 // for forward compatibility.
-type SchedulerServiceServer interface {
-	ScheduleRaw(context.Context, *ScheduleRawRequest) (*ScheduleRawResponse, error)
-	Cancel(context.Context, *CancelRequest) (*CancelResponse, error)
-	CancelAll(context.Context, *CancelAllRequest) (*CancelAllResponse, error)
-	GetPendingJobRaw(context.Context, *GetPendingJobRawRequest) (*GetPendingJobRawResponse, error)
-	GetAllPendingJobsRaw(context.Context, *GetAllPendingJobsRawRequest) (*GetAllPendingJobsRawResponse, error)
-	mustEmbedUnimplementedSchedulerServiceServer()
+type JobSchedulerServiceServer interface {
+	CanRunUserInitiatedJobs(context.Context, *CanRunUserInitiatedJobsRequest) (*CanRunUserInitiatedJobsResponse, error)
+	CancelInAllNamespaces(context.Context, *CancelInAllNamespacesRequest) (*CancelInAllNamespacesResponse, error)
+	ForNamespace(context.Context, *ForNamespaceRequest) (*ForNamespaceResponse, error)
+	GetNamespace(context.Context, *GetNamespaceRequest) (*GetNamespaceResponse, error)
+	GetPendingJobReason(context.Context, *GetPendingJobReasonRequest) (*GetPendingJobReasonResponse, error)
+	GetPendingJobReasons(context.Context, *GetPendingJobReasonsRequest) (*GetPendingJobReasonsResponse, error)
+	GetPendingJobReasonsHistory(context.Context, *GetPendingJobReasonsHistoryRequest) (*GetPendingJobReasonsHistoryResponse, error)
+	mustEmbedUnimplementedJobSchedulerServiceServer()
 }
 
-// UnimplementedSchedulerServiceServer must be embedded to have
+// UnimplementedJobSchedulerServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedSchedulerServiceServer struct{}
+type UnimplementedJobSchedulerServiceServer struct{}
 
-func (UnimplementedSchedulerServiceServer) ScheduleRaw(context.Context, *ScheduleRawRequest) (*ScheduleRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ScheduleRaw not implemented")
+func (UnimplementedJobSchedulerServiceServer) CanRunUserInitiatedJobs(context.Context, *CanRunUserInitiatedJobsRequest) (*CanRunUserInitiatedJobsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CanRunUserInitiatedJobs not implemented")
 }
-func (UnimplementedSchedulerServiceServer) Cancel(context.Context, *CancelRequest) (*CancelResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Cancel not implemented")
+func (UnimplementedJobSchedulerServiceServer) CancelInAllNamespaces(context.Context, *CancelInAllNamespacesRequest) (*CancelInAllNamespacesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CancelInAllNamespaces not implemented")
 }
-func (UnimplementedSchedulerServiceServer) CancelAll(context.Context, *CancelAllRequest) (*CancelAllResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CancelAll not implemented")
+func (UnimplementedJobSchedulerServiceServer) ForNamespace(context.Context, *ForNamespaceRequest) (*ForNamespaceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ForNamespace not implemented")
 }
-func (UnimplementedSchedulerServiceServer) GetPendingJobRaw(context.Context, *GetPendingJobRawRequest) (*GetPendingJobRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetPendingJobRaw not implemented")
+func (UnimplementedJobSchedulerServiceServer) GetNamespace(context.Context, *GetNamespaceRequest) (*GetNamespaceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetNamespace not implemented")
 }
-func (UnimplementedSchedulerServiceServer) GetAllPendingJobsRaw(context.Context, *GetAllPendingJobsRawRequest) (*GetAllPendingJobsRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAllPendingJobsRaw not implemented")
+func (UnimplementedJobSchedulerServiceServer) GetPendingJobReason(context.Context, *GetPendingJobReasonRequest) (*GetPendingJobReasonResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPendingJobReason not implemented")
 }
-func (UnimplementedSchedulerServiceServer) mustEmbedUnimplementedSchedulerServiceServer() {}
-func (UnimplementedSchedulerServiceServer) testEmbeddedByValue()                          {}
+func (UnimplementedJobSchedulerServiceServer) GetPendingJobReasons(context.Context, *GetPendingJobReasonsRequest) (*GetPendingJobReasonsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPendingJobReasons not implemented")
+}
+func (UnimplementedJobSchedulerServiceServer) GetPendingJobReasonsHistory(context.Context, *GetPendingJobReasonsHistoryRequest) (*GetPendingJobReasonsHistoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPendingJobReasonsHistory not implemented")
+}
+func (UnimplementedJobSchedulerServiceServer) mustEmbedUnimplementedJobSchedulerServiceServer() {}
+func (UnimplementedJobSchedulerServiceServer) testEmbeddedByValue()                             {}
 
-// UnsafeSchedulerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to SchedulerServiceServer will
+// UnsafeJobSchedulerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to JobSchedulerServiceServer will
 // result in compilation errors.
-type UnsafeSchedulerServiceServer interface {
-	mustEmbedUnimplementedSchedulerServiceServer()
+type UnsafeJobSchedulerServiceServer interface {
+	mustEmbedUnimplementedJobSchedulerServiceServer()
 }
 
-func RegisterSchedulerServiceServer(s grpc.ServiceRegistrar, srv SchedulerServiceServer) {
-	// If the following call panics, it indicates UnimplementedSchedulerServiceServer was
+func RegisterJobSchedulerServiceServer(s grpc.ServiceRegistrar, srv JobSchedulerServiceServer) {
+	// If the following call panics, it indicates UnimplementedJobSchedulerServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&SchedulerService_ServiceDesc, srv)
+	s.RegisterService(&JobSchedulerService_ServiceDesc, srv)
 }
 
-func _SchedulerService_ScheduleRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ScheduleRawRequest)
+func _JobSchedulerService_CanRunUserInitiatedJobs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CanRunUserInitiatedJobsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SchedulerServiceServer).ScheduleRaw(ctx, in)
+		return srv.(JobSchedulerServiceServer).CanRunUserInitiatedJobs(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SchedulerService_ScheduleRaw_FullMethodName,
+		FullMethod: JobSchedulerService_CanRunUserInitiatedJobs_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SchedulerServiceServer).ScheduleRaw(ctx, req.(*ScheduleRawRequest))
+		return srv.(JobSchedulerServiceServer).CanRunUserInitiatedJobs(ctx, req.(*CanRunUserInitiatedJobsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SchedulerService_Cancel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CancelRequest)
+func _JobSchedulerService_CancelInAllNamespaces_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelInAllNamespacesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SchedulerServiceServer).Cancel(ctx, in)
+		return srv.(JobSchedulerServiceServer).CancelInAllNamespaces(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SchedulerService_Cancel_FullMethodName,
+		FullMethod: JobSchedulerService_CancelInAllNamespaces_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SchedulerServiceServer).Cancel(ctx, req.(*CancelRequest))
+		return srv.(JobSchedulerServiceServer).CancelInAllNamespaces(ctx, req.(*CancelInAllNamespacesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SchedulerService_CancelAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CancelAllRequest)
+func _JobSchedulerService_ForNamespace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ForNamespaceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SchedulerServiceServer).CancelAll(ctx, in)
+		return srv.(JobSchedulerServiceServer).ForNamespace(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SchedulerService_CancelAll_FullMethodName,
+		FullMethod: JobSchedulerService_ForNamespace_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SchedulerServiceServer).CancelAll(ctx, req.(*CancelAllRequest))
+		return srv.(JobSchedulerServiceServer).ForNamespace(ctx, req.(*ForNamespaceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SchedulerService_GetPendingJobRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPendingJobRawRequest)
+func _JobSchedulerService_GetNamespace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNamespaceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SchedulerServiceServer).GetPendingJobRaw(ctx, in)
+		return srv.(JobSchedulerServiceServer).GetNamespace(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SchedulerService_GetPendingJobRaw_FullMethodName,
+		FullMethod: JobSchedulerService_GetNamespace_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SchedulerServiceServer).GetPendingJobRaw(ctx, req.(*GetPendingJobRawRequest))
+		return srv.(JobSchedulerServiceServer).GetNamespace(ctx, req.(*GetNamespaceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SchedulerService_GetAllPendingJobsRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAllPendingJobsRawRequest)
+func _JobSchedulerService_GetPendingJobReason_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPendingJobReasonRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SchedulerServiceServer).GetAllPendingJobsRaw(ctx, in)
+		return srv.(JobSchedulerServiceServer).GetPendingJobReason(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SchedulerService_GetAllPendingJobsRaw_FullMethodName,
+		FullMethod: JobSchedulerService_GetPendingJobReason_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SchedulerServiceServer).GetAllPendingJobsRaw(ctx, req.(*GetAllPendingJobsRawRequest))
+		return srv.(JobSchedulerServiceServer).GetPendingJobReason(ctx, req.(*GetPendingJobReasonRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// SchedulerService_ServiceDesc is the grpc.ServiceDesc for SchedulerService service.
+func _JobSchedulerService_GetPendingJobReasons_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPendingJobReasonsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobSchedulerServiceServer).GetPendingJobReasons(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobSchedulerService_GetPendingJobReasons_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobSchedulerServiceServer).GetPendingJobReasons(ctx, req.(*GetPendingJobReasonsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _JobSchedulerService_GetPendingJobReasonsHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPendingJobReasonsHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobSchedulerServiceServer).GetPendingJobReasonsHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobSchedulerService_GetPendingJobReasonsHistory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobSchedulerServiceServer).GetPendingJobReasonsHistory(ctx, req.(*GetPendingJobReasonsHistoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// JobSchedulerService_ServiceDesc is the grpc.ServiceDesc for JobSchedulerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var SchedulerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "job.SchedulerService",
-	HandlerType: (*SchedulerServiceServer)(nil),
+var JobSchedulerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "job.JobSchedulerService",
+	HandlerType: (*JobSchedulerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ScheduleRaw",
-			Handler:    _SchedulerService_ScheduleRaw_Handler,
+			MethodName: "CanRunUserInitiatedJobs",
+			Handler:    _JobSchedulerService_CanRunUserInitiatedJobs_Handler,
 		},
 		{
-			MethodName: "Cancel",
-			Handler:    _SchedulerService_Cancel_Handler,
+			MethodName: "CancelInAllNamespaces",
+			Handler:    _JobSchedulerService_CancelInAllNamespaces_Handler,
 		},
 		{
-			MethodName: "CancelAll",
-			Handler:    _SchedulerService_CancelAll_Handler,
+			MethodName: "ForNamespace",
+			Handler:    _JobSchedulerService_ForNamespace_Handler,
 		},
 		{
-			MethodName: "GetPendingJobRaw",
-			Handler:    _SchedulerService_GetPendingJobRaw_Handler,
+			MethodName: "GetNamespace",
+			Handler:    _JobSchedulerService_GetNamespace_Handler,
 		},
 		{
-			MethodName: "GetAllPendingJobsRaw",
-			Handler:    _SchedulerService_GetAllPendingJobsRaw_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/job/job.proto",
-}
-
-const (
-	JobInfoBuilderService_SetRequiredNetworkType_FullMethodName   = "/job.JobInfoBuilderService/SetRequiredNetworkType"
-	JobInfoBuilderService_SetRequiresCharging_FullMethodName      = "/job.JobInfoBuilderService/SetRequiresCharging"
-	JobInfoBuilderService_SetRequiresDeviceIdle_FullMethodName    = "/job.JobInfoBuilderService/SetRequiresDeviceIdle"
-	JobInfoBuilderService_SetRequiresBatteryNotLow_FullMethodName = "/job.JobInfoBuilderService/SetRequiresBatteryNotLow"
-	JobInfoBuilderService_SetRequiresStorageNotLow_FullMethodName = "/job.JobInfoBuilderService/SetRequiresStorageNotLow"
-	JobInfoBuilderService_SetPeriodic_FullMethodName              = "/job.JobInfoBuilderService/SetPeriodic"
-	JobInfoBuilderService_SetMinimumLatency_FullMethodName        = "/job.JobInfoBuilderService/SetMinimumLatency"
-	JobInfoBuilderService_SetOverrideDeadline_FullMethodName      = "/job.JobInfoBuilderService/SetOverrideDeadline"
-	JobInfoBuilderService_SetPersisted_FullMethodName             = "/job.JobInfoBuilderService/SetPersisted"
-	JobInfoBuilderService_SetBackoffCriteria_FullMethodName       = "/job.JobInfoBuilderService/SetBackoffCriteria"
-	JobInfoBuilderService_Build_FullMethodName                    = "/job.JobInfoBuilderService/Build"
-)
-
-// JobInfoBuilderServiceClient is the client API for JobInfoBuilderService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type JobInfoBuilderServiceClient interface {
-	SetRequiredNetworkType(ctx context.Context, in *SetRequiredNetworkTypeRequest, opts ...grpc.CallOption) (*SetRequiredNetworkTypeResponse, error)
-	SetRequiresCharging(ctx context.Context, in *SetRequiresChargingRequest, opts ...grpc.CallOption) (*SetRequiresChargingResponse, error)
-	SetRequiresDeviceIdle(ctx context.Context, in *SetRequiresDeviceIdleRequest, opts ...grpc.CallOption) (*SetRequiresDeviceIdleResponse, error)
-	SetRequiresBatteryNotLow(ctx context.Context, in *SetRequiresBatteryNotLowRequest, opts ...grpc.CallOption) (*SetRequiresBatteryNotLowResponse, error)
-	SetRequiresStorageNotLow(ctx context.Context, in *SetRequiresStorageNotLowRequest, opts ...grpc.CallOption) (*SetRequiresStorageNotLowResponse, error)
-	SetPeriodic(ctx context.Context, in *SetPeriodicRequest, opts ...grpc.CallOption) (*SetPeriodicResponse, error)
-	SetMinimumLatency(ctx context.Context, in *SetMinimumLatencyRequest, opts ...grpc.CallOption) (*SetMinimumLatencyResponse, error)
-	SetOverrideDeadline(ctx context.Context, in *SetOverrideDeadlineRequest, opts ...grpc.CallOption) (*SetOverrideDeadlineResponse, error)
-	SetPersisted(ctx context.Context, in *SetPersistedRequest, opts ...grpc.CallOption) (*SetPersistedResponse, error)
-	SetBackoffCriteria(ctx context.Context, in *SetBackoffCriteriaRequest, opts ...grpc.CallOption) (*SetBackoffCriteriaResponse, error)
-	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
-}
-
-type jobInfoBuilderServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewJobInfoBuilderServiceClient(cc grpc.ClientConnInterface) JobInfoBuilderServiceClient {
-	return &jobInfoBuilderServiceClient{cc}
-}
-
-func (c *jobInfoBuilderServiceClient) SetRequiredNetworkType(ctx context.Context, in *SetRequiredNetworkTypeRequest, opts ...grpc.CallOption) (*SetRequiredNetworkTypeResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetRequiredNetworkTypeResponse)
-	err := c.cc.Invoke(ctx, JobInfoBuilderService_SetRequiredNetworkType_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *jobInfoBuilderServiceClient) SetRequiresCharging(ctx context.Context, in *SetRequiresChargingRequest, opts ...grpc.CallOption) (*SetRequiresChargingResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetRequiresChargingResponse)
-	err := c.cc.Invoke(ctx, JobInfoBuilderService_SetRequiresCharging_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *jobInfoBuilderServiceClient) SetRequiresDeviceIdle(ctx context.Context, in *SetRequiresDeviceIdleRequest, opts ...grpc.CallOption) (*SetRequiresDeviceIdleResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetRequiresDeviceIdleResponse)
-	err := c.cc.Invoke(ctx, JobInfoBuilderService_SetRequiresDeviceIdle_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *jobInfoBuilderServiceClient) SetRequiresBatteryNotLow(ctx context.Context, in *SetRequiresBatteryNotLowRequest, opts ...grpc.CallOption) (*SetRequiresBatteryNotLowResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetRequiresBatteryNotLowResponse)
-	err := c.cc.Invoke(ctx, JobInfoBuilderService_SetRequiresBatteryNotLow_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *jobInfoBuilderServiceClient) SetRequiresStorageNotLow(ctx context.Context, in *SetRequiresStorageNotLowRequest, opts ...grpc.CallOption) (*SetRequiresStorageNotLowResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetRequiresStorageNotLowResponse)
-	err := c.cc.Invoke(ctx, JobInfoBuilderService_SetRequiresStorageNotLow_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *jobInfoBuilderServiceClient) SetPeriodic(ctx context.Context, in *SetPeriodicRequest, opts ...grpc.CallOption) (*SetPeriodicResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetPeriodicResponse)
-	err := c.cc.Invoke(ctx, JobInfoBuilderService_SetPeriodic_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *jobInfoBuilderServiceClient) SetMinimumLatency(ctx context.Context, in *SetMinimumLatencyRequest, opts ...grpc.CallOption) (*SetMinimumLatencyResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetMinimumLatencyResponse)
-	err := c.cc.Invoke(ctx, JobInfoBuilderService_SetMinimumLatency_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *jobInfoBuilderServiceClient) SetOverrideDeadline(ctx context.Context, in *SetOverrideDeadlineRequest, opts ...grpc.CallOption) (*SetOverrideDeadlineResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetOverrideDeadlineResponse)
-	err := c.cc.Invoke(ctx, JobInfoBuilderService_SetOverrideDeadline_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *jobInfoBuilderServiceClient) SetPersisted(ctx context.Context, in *SetPersistedRequest, opts ...grpc.CallOption) (*SetPersistedResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetPersistedResponse)
-	err := c.cc.Invoke(ctx, JobInfoBuilderService_SetPersisted_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *jobInfoBuilderServiceClient) SetBackoffCriteria(ctx context.Context, in *SetBackoffCriteriaRequest, opts ...grpc.CallOption) (*SetBackoffCriteriaResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetBackoffCriteriaResponse)
-	err := c.cc.Invoke(ctx, JobInfoBuilderService_SetBackoffCriteria_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *jobInfoBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BuildResponse)
-	err := c.cc.Invoke(ctx, JobInfoBuilderService_Build_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// JobInfoBuilderServiceServer is the server API for JobInfoBuilderService service.
-// All implementations must embed UnimplementedJobInfoBuilderServiceServer
-// for forward compatibility.
-type JobInfoBuilderServiceServer interface {
-	SetRequiredNetworkType(context.Context, *SetRequiredNetworkTypeRequest) (*SetRequiredNetworkTypeResponse, error)
-	SetRequiresCharging(context.Context, *SetRequiresChargingRequest) (*SetRequiresChargingResponse, error)
-	SetRequiresDeviceIdle(context.Context, *SetRequiresDeviceIdleRequest) (*SetRequiresDeviceIdleResponse, error)
-	SetRequiresBatteryNotLow(context.Context, *SetRequiresBatteryNotLowRequest) (*SetRequiresBatteryNotLowResponse, error)
-	SetRequiresStorageNotLow(context.Context, *SetRequiresStorageNotLowRequest) (*SetRequiresStorageNotLowResponse, error)
-	SetPeriodic(context.Context, *SetPeriodicRequest) (*SetPeriodicResponse, error)
-	SetMinimumLatency(context.Context, *SetMinimumLatencyRequest) (*SetMinimumLatencyResponse, error)
-	SetOverrideDeadline(context.Context, *SetOverrideDeadlineRequest) (*SetOverrideDeadlineResponse, error)
-	SetPersisted(context.Context, *SetPersistedRequest) (*SetPersistedResponse, error)
-	SetBackoffCriteria(context.Context, *SetBackoffCriteriaRequest) (*SetBackoffCriteriaResponse, error)
-	Build(context.Context, *BuildRequest) (*BuildResponse, error)
-	mustEmbedUnimplementedJobInfoBuilderServiceServer()
-}
-
-// UnimplementedJobInfoBuilderServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedJobInfoBuilderServiceServer struct{}
-
-func (UnimplementedJobInfoBuilderServiceServer) SetRequiredNetworkType(context.Context, *SetRequiredNetworkTypeRequest) (*SetRequiredNetworkTypeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetRequiredNetworkType not implemented")
-}
-func (UnimplementedJobInfoBuilderServiceServer) SetRequiresCharging(context.Context, *SetRequiresChargingRequest) (*SetRequiresChargingResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetRequiresCharging not implemented")
-}
-func (UnimplementedJobInfoBuilderServiceServer) SetRequiresDeviceIdle(context.Context, *SetRequiresDeviceIdleRequest) (*SetRequiresDeviceIdleResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetRequiresDeviceIdle not implemented")
-}
-func (UnimplementedJobInfoBuilderServiceServer) SetRequiresBatteryNotLow(context.Context, *SetRequiresBatteryNotLowRequest) (*SetRequiresBatteryNotLowResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetRequiresBatteryNotLow not implemented")
-}
-func (UnimplementedJobInfoBuilderServiceServer) SetRequiresStorageNotLow(context.Context, *SetRequiresStorageNotLowRequest) (*SetRequiresStorageNotLowResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetRequiresStorageNotLow not implemented")
-}
-func (UnimplementedJobInfoBuilderServiceServer) SetPeriodic(context.Context, *SetPeriodicRequest) (*SetPeriodicResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetPeriodic not implemented")
-}
-func (UnimplementedJobInfoBuilderServiceServer) SetMinimumLatency(context.Context, *SetMinimumLatencyRequest) (*SetMinimumLatencyResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetMinimumLatency not implemented")
-}
-func (UnimplementedJobInfoBuilderServiceServer) SetOverrideDeadline(context.Context, *SetOverrideDeadlineRequest) (*SetOverrideDeadlineResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetOverrideDeadline not implemented")
-}
-func (UnimplementedJobInfoBuilderServiceServer) SetPersisted(context.Context, *SetPersistedRequest) (*SetPersistedResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetPersisted not implemented")
-}
-func (UnimplementedJobInfoBuilderServiceServer) SetBackoffCriteria(context.Context, *SetBackoffCriteriaRequest) (*SetBackoffCriteriaResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetBackoffCriteria not implemented")
-}
-func (UnimplementedJobInfoBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
-}
-func (UnimplementedJobInfoBuilderServiceServer) mustEmbedUnimplementedJobInfoBuilderServiceServer() {}
-func (UnimplementedJobInfoBuilderServiceServer) testEmbeddedByValue()                               {}
-
-// UnsafeJobInfoBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to JobInfoBuilderServiceServer will
-// result in compilation errors.
-type UnsafeJobInfoBuilderServiceServer interface {
-	mustEmbedUnimplementedJobInfoBuilderServiceServer()
-}
-
-func RegisterJobInfoBuilderServiceServer(s grpc.ServiceRegistrar, srv JobInfoBuilderServiceServer) {
-	// If the following call panics, it indicates UnimplementedJobInfoBuilderServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&JobInfoBuilderService_ServiceDesc, srv)
-}
-
-func _JobInfoBuilderService_SetRequiredNetworkType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetRequiredNetworkTypeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobInfoBuilderServiceServer).SetRequiredNetworkType(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: JobInfoBuilderService_SetRequiredNetworkType_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobInfoBuilderServiceServer).SetRequiredNetworkType(ctx, req.(*SetRequiredNetworkTypeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _JobInfoBuilderService_SetRequiresCharging_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetRequiresChargingRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobInfoBuilderServiceServer).SetRequiresCharging(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: JobInfoBuilderService_SetRequiresCharging_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobInfoBuilderServiceServer).SetRequiresCharging(ctx, req.(*SetRequiresChargingRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _JobInfoBuilderService_SetRequiresDeviceIdle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetRequiresDeviceIdleRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobInfoBuilderServiceServer).SetRequiresDeviceIdle(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: JobInfoBuilderService_SetRequiresDeviceIdle_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobInfoBuilderServiceServer).SetRequiresDeviceIdle(ctx, req.(*SetRequiresDeviceIdleRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _JobInfoBuilderService_SetRequiresBatteryNotLow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetRequiresBatteryNotLowRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobInfoBuilderServiceServer).SetRequiresBatteryNotLow(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: JobInfoBuilderService_SetRequiresBatteryNotLow_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobInfoBuilderServiceServer).SetRequiresBatteryNotLow(ctx, req.(*SetRequiresBatteryNotLowRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _JobInfoBuilderService_SetRequiresStorageNotLow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetRequiresStorageNotLowRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobInfoBuilderServiceServer).SetRequiresStorageNotLow(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: JobInfoBuilderService_SetRequiresStorageNotLow_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobInfoBuilderServiceServer).SetRequiresStorageNotLow(ctx, req.(*SetRequiresStorageNotLowRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _JobInfoBuilderService_SetPeriodic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetPeriodicRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobInfoBuilderServiceServer).SetPeriodic(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: JobInfoBuilderService_SetPeriodic_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobInfoBuilderServiceServer).SetPeriodic(ctx, req.(*SetPeriodicRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _JobInfoBuilderService_SetMinimumLatency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetMinimumLatencyRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobInfoBuilderServiceServer).SetMinimumLatency(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: JobInfoBuilderService_SetMinimumLatency_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobInfoBuilderServiceServer).SetMinimumLatency(ctx, req.(*SetMinimumLatencyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _JobInfoBuilderService_SetOverrideDeadline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetOverrideDeadlineRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobInfoBuilderServiceServer).SetOverrideDeadline(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: JobInfoBuilderService_SetOverrideDeadline_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobInfoBuilderServiceServer).SetOverrideDeadline(ctx, req.(*SetOverrideDeadlineRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _JobInfoBuilderService_SetPersisted_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetPersistedRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobInfoBuilderServiceServer).SetPersisted(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: JobInfoBuilderService_SetPersisted_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobInfoBuilderServiceServer).SetPersisted(ctx, req.(*SetPersistedRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _JobInfoBuilderService_SetBackoffCriteria_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetBackoffCriteriaRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobInfoBuilderServiceServer).SetBackoffCriteria(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: JobInfoBuilderService_SetBackoffCriteria_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobInfoBuilderServiceServer).SetBackoffCriteria(ctx, req.(*SetBackoffCriteriaRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _JobInfoBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BuildRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobInfoBuilderServiceServer).Build(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: JobInfoBuilderService_Build_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobInfoBuilderServiceServer).Build(ctx, req.(*BuildRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// JobInfoBuilderService_ServiceDesc is the grpc.ServiceDesc for JobInfoBuilderService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var JobInfoBuilderService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "job.JobInfoBuilderService",
-	HandlerType: (*JobInfoBuilderServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "SetRequiredNetworkType",
-			Handler:    _JobInfoBuilderService_SetRequiredNetworkType_Handler,
+			MethodName: "GetPendingJobReason",
+			Handler:    _JobSchedulerService_GetPendingJobReason_Handler,
 		},
 		{
-			MethodName: "SetRequiresCharging",
-			Handler:    _JobInfoBuilderService_SetRequiresCharging_Handler,
+			MethodName: "GetPendingJobReasons",
+			Handler:    _JobSchedulerService_GetPendingJobReasons_Handler,
 		},
 		{
-			MethodName: "SetRequiresDeviceIdle",
-			Handler:    _JobInfoBuilderService_SetRequiresDeviceIdle_Handler,
-		},
-		{
-			MethodName: "SetRequiresBatteryNotLow",
-			Handler:    _JobInfoBuilderService_SetRequiresBatteryNotLow_Handler,
-		},
-		{
-			MethodName: "SetRequiresStorageNotLow",
-			Handler:    _JobInfoBuilderService_SetRequiresStorageNotLow_Handler,
-		},
-		{
-			MethodName: "SetPeriodic",
-			Handler:    _JobInfoBuilderService_SetPeriodic_Handler,
-		},
-		{
-			MethodName: "SetMinimumLatency",
-			Handler:    _JobInfoBuilderService_SetMinimumLatency_Handler,
-		},
-		{
-			MethodName: "SetOverrideDeadline",
-			Handler:    _JobInfoBuilderService_SetOverrideDeadline_Handler,
-		},
-		{
-			MethodName: "SetPersisted",
-			Handler:    _JobInfoBuilderService_SetPersisted_Handler,
-		},
-		{
-			MethodName: "SetBackoffCriteria",
-			Handler:    _JobInfoBuilderService_SetBackoffCriteria_Handler,
-		},
-		{
-			MethodName: "Build",
-			Handler:    _JobInfoBuilderService_Build_Handler,
+			MethodName: "GetPendingJobReasonsHistory",
+			Handler:    _JobSchedulerService_GetPendingJobReasonsHistory_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

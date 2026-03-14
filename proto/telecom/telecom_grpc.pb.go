@@ -21,329 +21,1507 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ManagerService_IsInCallRaw_FullMethodName                = "/telecom.ManagerService/IsInCallRaw"
-	ManagerService_IsInManagedCallRaw_FullMethodName         = "/telecom.ManagerService/IsInManagedCallRaw"
-	ManagerService_GetDefaultDialerPackageRaw_FullMethodName = "/telecom.ManagerService/GetDefaultDialerPackageRaw"
-	ManagerService_PlaceCallRaw_FullMethodName               = "/telecom.ManagerService/PlaceCallRaw"
-	ManagerService_SilenceRingerRaw_FullMethodName           = "/telecom.ManagerService/SilenceRingerRaw"
-	ManagerService_AcceptRingingCallRaw_FullMethodName       = "/telecom.ManagerService/AcceptRingingCallRaw"
-	ManagerService_EndCallRaw_FullMethodName                 = "/telecom.ManagerService/EndCallRaw"
+	TelecomManagerService_AcceptHandover_FullMethodName                      = "/telecom.TelecomManagerService/AcceptHandover"
+	TelecomManagerService_AcceptRingingCall0_FullMethodName                  = "/telecom.TelecomManagerService/AcceptRingingCall0"
+	TelecomManagerService_AcceptRingingCall1_1_FullMethodName                = "/telecom.TelecomManagerService/AcceptRingingCall1_1"
+	TelecomManagerService_AddCall_FullMethodName                             = "/telecom.TelecomManagerService/AddCall"
+	TelecomManagerService_AddNewIncomingCall_FullMethodName                  = "/telecom.TelecomManagerService/AddNewIncomingCall"
+	TelecomManagerService_AddNewIncomingConference_FullMethodName            = "/telecom.TelecomManagerService/AddNewIncomingConference"
+	TelecomManagerService_CancelMissedCallsNotification_FullMethodName       = "/telecom.TelecomManagerService/CancelMissedCallsNotification"
+	TelecomManagerService_CreateManageBlockedNumbersIntent_FullMethodName    = "/telecom.TelecomManagerService/CreateManageBlockedNumbersIntent"
+	TelecomManagerService_EndCall_FullMethodName                             = "/telecom.TelecomManagerService/EndCall"
+	TelecomManagerService_GetAdnUriForPhoneAccount_FullMethodName            = "/telecom.TelecomManagerService/GetAdnUriForPhoneAccount"
+	TelecomManagerService_GetCallCapablePhoneAccounts_FullMethodName         = "/telecom.TelecomManagerService/GetCallCapablePhoneAccounts"
+	TelecomManagerService_GetDefaultDialerPackage_FullMethodName             = "/telecom.TelecomManagerService/GetDefaultDialerPackage"
+	TelecomManagerService_GetDefaultOutgoingPhoneAccount_FullMethodName      = "/telecom.TelecomManagerService/GetDefaultOutgoingPhoneAccount"
+	TelecomManagerService_GetLine1Number_FullMethodName                      = "/telecom.TelecomManagerService/GetLine1Number"
+	TelecomManagerService_GetOwnSelfManagedPhoneAccounts_FullMethodName      = "/telecom.TelecomManagerService/GetOwnSelfManagedPhoneAccounts"
+	TelecomManagerService_GetPhoneAccount_FullMethodName                     = "/telecom.TelecomManagerService/GetPhoneAccount"
+	TelecomManagerService_GetRegisteredPhoneAccounts_FullMethodName          = "/telecom.TelecomManagerService/GetRegisteredPhoneAccounts"
+	TelecomManagerService_GetSelfManagedPhoneAccounts_FullMethodName         = "/telecom.TelecomManagerService/GetSelfManagedPhoneAccounts"
+	TelecomManagerService_GetSimCallManager_FullMethodName                   = "/telecom.TelecomManagerService/GetSimCallManager"
+	TelecomManagerService_GetSimCallManagerForSubscription_FullMethodName    = "/telecom.TelecomManagerService/GetSimCallManagerForSubscription"
+	TelecomManagerService_GetSystemDialerPackage_FullMethodName              = "/telecom.TelecomManagerService/GetSystemDialerPackage"
+	TelecomManagerService_GetUserSelectedOutgoingPhoneAccount_FullMethodName = "/telecom.TelecomManagerService/GetUserSelectedOutgoingPhoneAccount"
+	TelecomManagerService_GetVoiceMailNumber_FullMethodName                  = "/telecom.TelecomManagerService/GetVoiceMailNumber"
+	TelecomManagerService_HandleMmi1_FullMethodName                          = "/telecom.TelecomManagerService/HandleMmi1"
+	TelecomManagerService_HandleMmi2_1_FullMethodName                        = "/telecom.TelecomManagerService/HandleMmi2_1"
+	TelecomManagerService_HasManageOngoingCallsPermission_FullMethodName     = "/telecom.TelecomManagerService/HasManageOngoingCallsPermission"
+	TelecomManagerService_IsInCall_FullMethodName                            = "/telecom.TelecomManagerService/IsInCall"
+	TelecomManagerService_IsInManagedCall_FullMethodName                     = "/telecom.TelecomManagerService/IsInManagedCall"
+	TelecomManagerService_IsIncomingCallPermitted_FullMethodName             = "/telecom.TelecomManagerService/IsIncomingCallPermitted"
+	TelecomManagerService_IsOutgoingCallPermitted_FullMethodName             = "/telecom.TelecomManagerService/IsOutgoingCallPermitted"
+	TelecomManagerService_IsTtySupported_FullMethodName                      = "/telecom.TelecomManagerService/IsTtySupported"
+	TelecomManagerService_IsVoiceMailNumber_FullMethodName                   = "/telecom.TelecomManagerService/IsVoiceMailNumber"
+	TelecomManagerService_PlaceCall_FullMethodName                           = "/telecom.TelecomManagerService/PlaceCall"
+	TelecomManagerService_RegisterPhoneAccount_FullMethodName                = "/telecom.TelecomManagerService/RegisterPhoneAccount"
+	TelecomManagerService_ShowInCallScreen_FullMethodName                    = "/telecom.TelecomManagerService/ShowInCallScreen"
+	TelecomManagerService_SilenceRinger_FullMethodName                       = "/telecom.TelecomManagerService/SilenceRinger"
+	TelecomManagerService_StartConference_FullMethodName                     = "/telecom.TelecomManagerService/StartConference"
+	TelecomManagerService_UnregisterPhoneAccount_FullMethodName              = "/telecom.TelecomManagerService/UnregisterPhoneAccount"
 )
 
-// ManagerServiceClient is the client API for ManagerService service.
+// TelecomManagerServiceClient is the client API for TelecomManagerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ManagerServiceClient interface {
-	IsInCallRaw(ctx context.Context, in *IsInCallRawRequest, opts ...grpc.CallOption) (*IsInCallRawResponse, error)
-	IsInManagedCallRaw(ctx context.Context, in *IsInManagedCallRawRequest, opts ...grpc.CallOption) (*IsInManagedCallRawResponse, error)
-	GetDefaultDialerPackageRaw(ctx context.Context, in *GetDefaultDialerPackageRawRequest, opts ...grpc.CallOption) (*GetDefaultDialerPackageRawResponse, error)
-	PlaceCallRaw(ctx context.Context, in *PlaceCallRawRequest, opts ...grpc.CallOption) (*PlaceCallRawResponse, error)
-	SilenceRingerRaw(ctx context.Context, in *SilenceRingerRawRequest, opts ...grpc.CallOption) (*SilenceRingerRawResponse, error)
-	AcceptRingingCallRaw(ctx context.Context, in *AcceptRingingCallRawRequest, opts ...grpc.CallOption) (*AcceptRingingCallRawResponse, error)
-	EndCallRaw(ctx context.Context, in *EndCallRawRequest, opts ...grpc.CallOption) (*EndCallRawResponse, error)
+type TelecomManagerServiceClient interface {
+	AcceptHandover(ctx context.Context, in *AcceptHandoverRequest, opts ...grpc.CallOption) (*AcceptHandoverResponse, error)
+	AcceptRingingCall0(ctx context.Context, in *AcceptRingingCall0Request, opts ...grpc.CallOption) (*AcceptRingingCall0Response, error)
+	AcceptRingingCall1_1(ctx context.Context, in *AcceptRingingCall1_1Request, opts ...grpc.CallOption) (*AcceptRingingCall1_1Response, error)
+	AddCall(ctx context.Context, in *AddCallRequest, opts ...grpc.CallOption) (*AddCallResponse, error)
+	AddNewIncomingCall(ctx context.Context, in *AddNewIncomingCallRequest, opts ...grpc.CallOption) (*AddNewIncomingCallResponse, error)
+	AddNewIncomingConference(ctx context.Context, in *AddNewIncomingConferenceRequest, opts ...grpc.CallOption) (*AddNewIncomingConferenceResponse, error)
+	CancelMissedCallsNotification(ctx context.Context, in *CancelMissedCallsNotificationRequest, opts ...grpc.CallOption) (*CancelMissedCallsNotificationResponse, error)
+	CreateManageBlockedNumbersIntent(ctx context.Context, in *CreateManageBlockedNumbersIntentRequest, opts ...grpc.CallOption) (*CreateManageBlockedNumbersIntentResponse, error)
+	EndCall(ctx context.Context, in *EndCallRequest, opts ...grpc.CallOption) (*EndCallResponse, error)
+	GetAdnUriForPhoneAccount(ctx context.Context, in *GetAdnUriForPhoneAccountRequest, opts ...grpc.CallOption) (*GetAdnUriForPhoneAccountResponse, error)
+	GetCallCapablePhoneAccounts(ctx context.Context, in *GetCallCapablePhoneAccountsRequest, opts ...grpc.CallOption) (*GetCallCapablePhoneAccountsResponse, error)
+	GetDefaultDialerPackage(ctx context.Context, in *GetDefaultDialerPackageRequest, opts ...grpc.CallOption) (*GetDefaultDialerPackageResponse, error)
+	GetDefaultOutgoingPhoneAccount(ctx context.Context, in *GetDefaultOutgoingPhoneAccountRequest, opts ...grpc.CallOption) (*GetDefaultOutgoingPhoneAccountResponse, error)
+	GetLine1Number(ctx context.Context, in *GetLine1NumberRequest, opts ...grpc.CallOption) (*GetLine1NumberResponse, error)
+	GetOwnSelfManagedPhoneAccounts(ctx context.Context, in *GetOwnSelfManagedPhoneAccountsRequest, opts ...grpc.CallOption) (*GetOwnSelfManagedPhoneAccountsResponse, error)
+	GetPhoneAccount(ctx context.Context, in *GetPhoneAccountRequest, opts ...grpc.CallOption) (*GetPhoneAccountResponse, error)
+	GetRegisteredPhoneAccounts(ctx context.Context, in *GetRegisteredPhoneAccountsRequest, opts ...grpc.CallOption) (*GetRegisteredPhoneAccountsResponse, error)
+	GetSelfManagedPhoneAccounts(ctx context.Context, in *GetSelfManagedPhoneAccountsRequest, opts ...grpc.CallOption) (*GetSelfManagedPhoneAccountsResponse, error)
+	GetSimCallManager(ctx context.Context, in *GetSimCallManagerRequest, opts ...grpc.CallOption) (*GetSimCallManagerResponse, error)
+	GetSimCallManagerForSubscription(ctx context.Context, in *GetSimCallManagerForSubscriptionRequest, opts ...grpc.CallOption) (*GetSimCallManagerForSubscriptionResponse, error)
+	GetSystemDialerPackage(ctx context.Context, in *GetSystemDialerPackageRequest, opts ...grpc.CallOption) (*GetSystemDialerPackageResponse, error)
+	GetUserSelectedOutgoingPhoneAccount(ctx context.Context, in *GetUserSelectedOutgoingPhoneAccountRequest, opts ...grpc.CallOption) (*GetUserSelectedOutgoingPhoneAccountResponse, error)
+	GetVoiceMailNumber(ctx context.Context, in *GetVoiceMailNumberRequest, opts ...grpc.CallOption) (*GetVoiceMailNumberResponse, error)
+	HandleMmi1(ctx context.Context, in *HandleMmi1Request, opts ...grpc.CallOption) (*HandleMmi1Response, error)
+	HandleMmi2_1(ctx context.Context, in *HandleMmi2_1Request, opts ...grpc.CallOption) (*HandleMmi2_1Response, error)
+	HasManageOngoingCallsPermission(ctx context.Context, in *HasManageOngoingCallsPermissionRequest, opts ...grpc.CallOption) (*HasManageOngoingCallsPermissionResponse, error)
+	IsInCall(ctx context.Context, in *IsInCallRequest, opts ...grpc.CallOption) (*IsInCallResponse, error)
+	IsInManagedCall(ctx context.Context, in *IsInManagedCallRequest, opts ...grpc.CallOption) (*IsInManagedCallResponse, error)
+	IsIncomingCallPermitted(ctx context.Context, in *IsIncomingCallPermittedRequest, opts ...grpc.CallOption) (*IsIncomingCallPermittedResponse, error)
+	IsOutgoingCallPermitted(ctx context.Context, in *IsOutgoingCallPermittedRequest, opts ...grpc.CallOption) (*IsOutgoingCallPermittedResponse, error)
+	IsTtySupported(ctx context.Context, in *IsTtySupportedRequest, opts ...grpc.CallOption) (*IsTtySupportedResponse, error)
+	IsVoiceMailNumber(ctx context.Context, in *IsVoiceMailNumberRequest, opts ...grpc.CallOption) (*IsVoiceMailNumberResponse, error)
+	PlaceCall(ctx context.Context, in *PlaceCallRequest, opts ...grpc.CallOption) (*PlaceCallResponse, error)
+	RegisterPhoneAccount(ctx context.Context, in *RegisterPhoneAccountRequest, opts ...grpc.CallOption) (*RegisterPhoneAccountResponse, error)
+	ShowInCallScreen(ctx context.Context, in *ShowInCallScreenRequest, opts ...grpc.CallOption) (*ShowInCallScreenResponse, error)
+	SilenceRinger(ctx context.Context, in *SilenceRingerRequest, opts ...grpc.CallOption) (*SilenceRingerResponse, error)
+	StartConference(ctx context.Context, in *StartConferenceRequest, opts ...grpc.CallOption) (*StartConferenceResponse, error)
+	UnregisterPhoneAccount(ctx context.Context, in *UnregisterPhoneAccountRequest, opts ...grpc.CallOption) (*UnregisterPhoneAccountResponse, error)
 }
 
-type managerServiceClient struct {
+type telecomManagerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewManagerServiceClient(cc grpc.ClientConnInterface) ManagerServiceClient {
-	return &managerServiceClient{cc}
+func NewTelecomManagerServiceClient(cc grpc.ClientConnInterface) TelecomManagerServiceClient {
+	return &telecomManagerServiceClient{cc}
 }
 
-func (c *managerServiceClient) IsInCallRaw(ctx context.Context, in *IsInCallRawRequest, opts ...grpc.CallOption) (*IsInCallRawResponse, error) {
+func (c *telecomManagerServiceClient) AcceptHandover(ctx context.Context, in *AcceptHandoverRequest, opts ...grpc.CallOption) (*AcceptHandoverResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(IsInCallRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_IsInCallRaw_FullMethodName, in, out, cOpts...)
+	out := new(AcceptHandoverResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_AcceptHandover_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) IsInManagedCallRaw(ctx context.Context, in *IsInManagedCallRawRequest, opts ...grpc.CallOption) (*IsInManagedCallRawResponse, error) {
+func (c *telecomManagerServiceClient) AcceptRingingCall0(ctx context.Context, in *AcceptRingingCall0Request, opts ...grpc.CallOption) (*AcceptRingingCall0Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(IsInManagedCallRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_IsInManagedCallRaw_FullMethodName, in, out, cOpts...)
+	out := new(AcceptRingingCall0Response)
+	err := c.cc.Invoke(ctx, TelecomManagerService_AcceptRingingCall0_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) GetDefaultDialerPackageRaw(ctx context.Context, in *GetDefaultDialerPackageRawRequest, opts ...grpc.CallOption) (*GetDefaultDialerPackageRawResponse, error) {
+func (c *telecomManagerServiceClient) AcceptRingingCall1_1(ctx context.Context, in *AcceptRingingCall1_1Request, opts ...grpc.CallOption) (*AcceptRingingCall1_1Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetDefaultDialerPackageRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_GetDefaultDialerPackageRaw_FullMethodName, in, out, cOpts...)
+	out := new(AcceptRingingCall1_1Response)
+	err := c.cc.Invoke(ctx, TelecomManagerService_AcceptRingingCall1_1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) PlaceCallRaw(ctx context.Context, in *PlaceCallRawRequest, opts ...grpc.CallOption) (*PlaceCallRawResponse, error) {
+func (c *telecomManagerServiceClient) AddCall(ctx context.Context, in *AddCallRequest, opts ...grpc.CallOption) (*AddCallResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PlaceCallRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_PlaceCallRaw_FullMethodName, in, out, cOpts...)
+	out := new(AddCallResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_AddCall_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) SilenceRingerRaw(ctx context.Context, in *SilenceRingerRawRequest, opts ...grpc.CallOption) (*SilenceRingerRawResponse, error) {
+func (c *telecomManagerServiceClient) AddNewIncomingCall(ctx context.Context, in *AddNewIncomingCallRequest, opts ...grpc.CallOption) (*AddNewIncomingCallResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SilenceRingerRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_SilenceRingerRaw_FullMethodName, in, out, cOpts...)
+	out := new(AddNewIncomingCallResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_AddNewIncomingCall_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) AcceptRingingCallRaw(ctx context.Context, in *AcceptRingingCallRawRequest, opts ...grpc.CallOption) (*AcceptRingingCallRawResponse, error) {
+func (c *telecomManagerServiceClient) AddNewIncomingConference(ctx context.Context, in *AddNewIncomingConferenceRequest, opts ...grpc.CallOption) (*AddNewIncomingConferenceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AcceptRingingCallRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_AcceptRingingCallRaw_FullMethodName, in, out, cOpts...)
+	out := new(AddNewIncomingConferenceResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_AddNewIncomingConference_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) EndCallRaw(ctx context.Context, in *EndCallRawRequest, opts ...grpc.CallOption) (*EndCallRawResponse, error) {
+func (c *telecomManagerServiceClient) CancelMissedCallsNotification(ctx context.Context, in *CancelMissedCallsNotificationRequest, opts ...grpc.CallOption) (*CancelMissedCallsNotificationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(EndCallRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_EndCallRaw_FullMethodName, in, out, cOpts...)
+	out := new(CancelMissedCallsNotificationResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_CancelMissedCallsNotification_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ManagerServiceServer is the server API for ManagerService service.
-// All implementations must embed UnimplementedManagerServiceServer
+func (c *telecomManagerServiceClient) CreateManageBlockedNumbersIntent(ctx context.Context, in *CreateManageBlockedNumbersIntentRequest, opts ...grpc.CallOption) (*CreateManageBlockedNumbersIntentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateManageBlockedNumbersIntentResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_CreateManageBlockedNumbersIntent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) EndCall(ctx context.Context, in *EndCallRequest, opts ...grpc.CallOption) (*EndCallResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EndCallResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_EndCall_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) GetAdnUriForPhoneAccount(ctx context.Context, in *GetAdnUriForPhoneAccountRequest, opts ...grpc.CallOption) (*GetAdnUriForPhoneAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAdnUriForPhoneAccountResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_GetAdnUriForPhoneAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) GetCallCapablePhoneAccounts(ctx context.Context, in *GetCallCapablePhoneAccountsRequest, opts ...grpc.CallOption) (*GetCallCapablePhoneAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCallCapablePhoneAccountsResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_GetCallCapablePhoneAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) GetDefaultDialerPackage(ctx context.Context, in *GetDefaultDialerPackageRequest, opts ...grpc.CallOption) (*GetDefaultDialerPackageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDefaultDialerPackageResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_GetDefaultDialerPackage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) GetDefaultOutgoingPhoneAccount(ctx context.Context, in *GetDefaultOutgoingPhoneAccountRequest, opts ...grpc.CallOption) (*GetDefaultOutgoingPhoneAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDefaultOutgoingPhoneAccountResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_GetDefaultOutgoingPhoneAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) GetLine1Number(ctx context.Context, in *GetLine1NumberRequest, opts ...grpc.CallOption) (*GetLine1NumberResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLine1NumberResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_GetLine1Number_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) GetOwnSelfManagedPhoneAccounts(ctx context.Context, in *GetOwnSelfManagedPhoneAccountsRequest, opts ...grpc.CallOption) (*GetOwnSelfManagedPhoneAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOwnSelfManagedPhoneAccountsResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_GetOwnSelfManagedPhoneAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) GetPhoneAccount(ctx context.Context, in *GetPhoneAccountRequest, opts ...grpc.CallOption) (*GetPhoneAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPhoneAccountResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_GetPhoneAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) GetRegisteredPhoneAccounts(ctx context.Context, in *GetRegisteredPhoneAccountsRequest, opts ...grpc.CallOption) (*GetRegisteredPhoneAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRegisteredPhoneAccountsResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_GetRegisteredPhoneAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) GetSelfManagedPhoneAccounts(ctx context.Context, in *GetSelfManagedPhoneAccountsRequest, opts ...grpc.CallOption) (*GetSelfManagedPhoneAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSelfManagedPhoneAccountsResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_GetSelfManagedPhoneAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) GetSimCallManager(ctx context.Context, in *GetSimCallManagerRequest, opts ...grpc.CallOption) (*GetSimCallManagerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSimCallManagerResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_GetSimCallManager_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) GetSimCallManagerForSubscription(ctx context.Context, in *GetSimCallManagerForSubscriptionRequest, opts ...grpc.CallOption) (*GetSimCallManagerForSubscriptionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSimCallManagerForSubscriptionResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_GetSimCallManagerForSubscription_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) GetSystemDialerPackage(ctx context.Context, in *GetSystemDialerPackageRequest, opts ...grpc.CallOption) (*GetSystemDialerPackageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSystemDialerPackageResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_GetSystemDialerPackage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) GetUserSelectedOutgoingPhoneAccount(ctx context.Context, in *GetUserSelectedOutgoingPhoneAccountRequest, opts ...grpc.CallOption) (*GetUserSelectedOutgoingPhoneAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserSelectedOutgoingPhoneAccountResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_GetUserSelectedOutgoingPhoneAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) GetVoiceMailNumber(ctx context.Context, in *GetVoiceMailNumberRequest, opts ...grpc.CallOption) (*GetVoiceMailNumberResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetVoiceMailNumberResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_GetVoiceMailNumber_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) HandleMmi1(ctx context.Context, in *HandleMmi1Request, opts ...grpc.CallOption) (*HandleMmi1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HandleMmi1Response)
+	err := c.cc.Invoke(ctx, TelecomManagerService_HandleMmi1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) HandleMmi2_1(ctx context.Context, in *HandleMmi2_1Request, opts ...grpc.CallOption) (*HandleMmi2_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HandleMmi2_1Response)
+	err := c.cc.Invoke(ctx, TelecomManagerService_HandleMmi2_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) HasManageOngoingCallsPermission(ctx context.Context, in *HasManageOngoingCallsPermissionRequest, opts ...grpc.CallOption) (*HasManageOngoingCallsPermissionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HasManageOngoingCallsPermissionResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_HasManageOngoingCallsPermission_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) IsInCall(ctx context.Context, in *IsInCallRequest, opts ...grpc.CallOption) (*IsInCallResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsInCallResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_IsInCall_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) IsInManagedCall(ctx context.Context, in *IsInManagedCallRequest, opts ...grpc.CallOption) (*IsInManagedCallResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsInManagedCallResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_IsInManagedCall_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) IsIncomingCallPermitted(ctx context.Context, in *IsIncomingCallPermittedRequest, opts ...grpc.CallOption) (*IsIncomingCallPermittedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsIncomingCallPermittedResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_IsIncomingCallPermitted_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) IsOutgoingCallPermitted(ctx context.Context, in *IsOutgoingCallPermittedRequest, opts ...grpc.CallOption) (*IsOutgoingCallPermittedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsOutgoingCallPermittedResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_IsOutgoingCallPermitted_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) IsTtySupported(ctx context.Context, in *IsTtySupportedRequest, opts ...grpc.CallOption) (*IsTtySupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsTtySupportedResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_IsTtySupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) IsVoiceMailNumber(ctx context.Context, in *IsVoiceMailNumberRequest, opts ...grpc.CallOption) (*IsVoiceMailNumberResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsVoiceMailNumberResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_IsVoiceMailNumber_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) PlaceCall(ctx context.Context, in *PlaceCallRequest, opts ...grpc.CallOption) (*PlaceCallResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PlaceCallResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_PlaceCall_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) RegisterPhoneAccount(ctx context.Context, in *RegisterPhoneAccountRequest, opts ...grpc.CallOption) (*RegisterPhoneAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterPhoneAccountResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_RegisterPhoneAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) ShowInCallScreen(ctx context.Context, in *ShowInCallScreenRequest, opts ...grpc.CallOption) (*ShowInCallScreenResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ShowInCallScreenResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_ShowInCallScreen_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) SilenceRinger(ctx context.Context, in *SilenceRingerRequest, opts ...grpc.CallOption) (*SilenceRingerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SilenceRingerResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_SilenceRinger_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) StartConference(ctx context.Context, in *StartConferenceRequest, opts ...grpc.CallOption) (*StartConferenceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StartConferenceResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_StartConference_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *telecomManagerServiceClient) UnregisterPhoneAccount(ctx context.Context, in *UnregisterPhoneAccountRequest, opts ...grpc.CallOption) (*UnregisterPhoneAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnregisterPhoneAccountResponse)
+	err := c.cc.Invoke(ctx, TelecomManagerService_UnregisterPhoneAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TelecomManagerServiceServer is the server API for TelecomManagerService service.
+// All implementations must embed UnimplementedTelecomManagerServiceServer
 // for forward compatibility.
-type ManagerServiceServer interface {
-	IsInCallRaw(context.Context, *IsInCallRawRequest) (*IsInCallRawResponse, error)
-	IsInManagedCallRaw(context.Context, *IsInManagedCallRawRequest) (*IsInManagedCallRawResponse, error)
-	GetDefaultDialerPackageRaw(context.Context, *GetDefaultDialerPackageRawRequest) (*GetDefaultDialerPackageRawResponse, error)
-	PlaceCallRaw(context.Context, *PlaceCallRawRequest) (*PlaceCallRawResponse, error)
-	SilenceRingerRaw(context.Context, *SilenceRingerRawRequest) (*SilenceRingerRawResponse, error)
-	AcceptRingingCallRaw(context.Context, *AcceptRingingCallRawRequest) (*AcceptRingingCallRawResponse, error)
-	EndCallRaw(context.Context, *EndCallRawRequest) (*EndCallRawResponse, error)
-	mustEmbedUnimplementedManagerServiceServer()
+type TelecomManagerServiceServer interface {
+	AcceptHandover(context.Context, *AcceptHandoverRequest) (*AcceptHandoverResponse, error)
+	AcceptRingingCall0(context.Context, *AcceptRingingCall0Request) (*AcceptRingingCall0Response, error)
+	AcceptRingingCall1_1(context.Context, *AcceptRingingCall1_1Request) (*AcceptRingingCall1_1Response, error)
+	AddCall(context.Context, *AddCallRequest) (*AddCallResponse, error)
+	AddNewIncomingCall(context.Context, *AddNewIncomingCallRequest) (*AddNewIncomingCallResponse, error)
+	AddNewIncomingConference(context.Context, *AddNewIncomingConferenceRequest) (*AddNewIncomingConferenceResponse, error)
+	CancelMissedCallsNotification(context.Context, *CancelMissedCallsNotificationRequest) (*CancelMissedCallsNotificationResponse, error)
+	CreateManageBlockedNumbersIntent(context.Context, *CreateManageBlockedNumbersIntentRequest) (*CreateManageBlockedNumbersIntentResponse, error)
+	EndCall(context.Context, *EndCallRequest) (*EndCallResponse, error)
+	GetAdnUriForPhoneAccount(context.Context, *GetAdnUriForPhoneAccountRequest) (*GetAdnUriForPhoneAccountResponse, error)
+	GetCallCapablePhoneAccounts(context.Context, *GetCallCapablePhoneAccountsRequest) (*GetCallCapablePhoneAccountsResponse, error)
+	GetDefaultDialerPackage(context.Context, *GetDefaultDialerPackageRequest) (*GetDefaultDialerPackageResponse, error)
+	GetDefaultOutgoingPhoneAccount(context.Context, *GetDefaultOutgoingPhoneAccountRequest) (*GetDefaultOutgoingPhoneAccountResponse, error)
+	GetLine1Number(context.Context, *GetLine1NumberRequest) (*GetLine1NumberResponse, error)
+	GetOwnSelfManagedPhoneAccounts(context.Context, *GetOwnSelfManagedPhoneAccountsRequest) (*GetOwnSelfManagedPhoneAccountsResponse, error)
+	GetPhoneAccount(context.Context, *GetPhoneAccountRequest) (*GetPhoneAccountResponse, error)
+	GetRegisteredPhoneAccounts(context.Context, *GetRegisteredPhoneAccountsRequest) (*GetRegisteredPhoneAccountsResponse, error)
+	GetSelfManagedPhoneAccounts(context.Context, *GetSelfManagedPhoneAccountsRequest) (*GetSelfManagedPhoneAccountsResponse, error)
+	GetSimCallManager(context.Context, *GetSimCallManagerRequest) (*GetSimCallManagerResponse, error)
+	GetSimCallManagerForSubscription(context.Context, *GetSimCallManagerForSubscriptionRequest) (*GetSimCallManagerForSubscriptionResponse, error)
+	GetSystemDialerPackage(context.Context, *GetSystemDialerPackageRequest) (*GetSystemDialerPackageResponse, error)
+	GetUserSelectedOutgoingPhoneAccount(context.Context, *GetUserSelectedOutgoingPhoneAccountRequest) (*GetUserSelectedOutgoingPhoneAccountResponse, error)
+	GetVoiceMailNumber(context.Context, *GetVoiceMailNumberRequest) (*GetVoiceMailNumberResponse, error)
+	HandleMmi1(context.Context, *HandleMmi1Request) (*HandleMmi1Response, error)
+	HandleMmi2_1(context.Context, *HandleMmi2_1Request) (*HandleMmi2_1Response, error)
+	HasManageOngoingCallsPermission(context.Context, *HasManageOngoingCallsPermissionRequest) (*HasManageOngoingCallsPermissionResponse, error)
+	IsInCall(context.Context, *IsInCallRequest) (*IsInCallResponse, error)
+	IsInManagedCall(context.Context, *IsInManagedCallRequest) (*IsInManagedCallResponse, error)
+	IsIncomingCallPermitted(context.Context, *IsIncomingCallPermittedRequest) (*IsIncomingCallPermittedResponse, error)
+	IsOutgoingCallPermitted(context.Context, *IsOutgoingCallPermittedRequest) (*IsOutgoingCallPermittedResponse, error)
+	IsTtySupported(context.Context, *IsTtySupportedRequest) (*IsTtySupportedResponse, error)
+	IsVoiceMailNumber(context.Context, *IsVoiceMailNumberRequest) (*IsVoiceMailNumberResponse, error)
+	PlaceCall(context.Context, *PlaceCallRequest) (*PlaceCallResponse, error)
+	RegisterPhoneAccount(context.Context, *RegisterPhoneAccountRequest) (*RegisterPhoneAccountResponse, error)
+	ShowInCallScreen(context.Context, *ShowInCallScreenRequest) (*ShowInCallScreenResponse, error)
+	SilenceRinger(context.Context, *SilenceRingerRequest) (*SilenceRingerResponse, error)
+	StartConference(context.Context, *StartConferenceRequest) (*StartConferenceResponse, error)
+	UnregisterPhoneAccount(context.Context, *UnregisterPhoneAccountRequest) (*UnregisterPhoneAccountResponse, error)
+	mustEmbedUnimplementedTelecomManagerServiceServer()
 }
 
-// UnimplementedManagerServiceServer must be embedded to have
+// UnimplementedTelecomManagerServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedManagerServiceServer struct{}
+type UnimplementedTelecomManagerServiceServer struct{}
 
-func (UnimplementedManagerServiceServer) IsInCallRaw(context.Context, *IsInCallRawRequest) (*IsInCallRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method IsInCallRaw not implemented")
+func (UnimplementedTelecomManagerServiceServer) AcceptHandover(context.Context, *AcceptHandoverRequest) (*AcceptHandoverResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AcceptHandover not implemented")
 }
-func (UnimplementedManagerServiceServer) IsInManagedCallRaw(context.Context, *IsInManagedCallRawRequest) (*IsInManagedCallRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method IsInManagedCallRaw not implemented")
+func (UnimplementedTelecomManagerServiceServer) AcceptRingingCall0(context.Context, *AcceptRingingCall0Request) (*AcceptRingingCall0Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AcceptRingingCall0 not implemented")
 }
-func (UnimplementedManagerServiceServer) GetDefaultDialerPackageRaw(context.Context, *GetDefaultDialerPackageRawRequest) (*GetDefaultDialerPackageRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetDefaultDialerPackageRaw not implemented")
+func (UnimplementedTelecomManagerServiceServer) AcceptRingingCall1_1(context.Context, *AcceptRingingCall1_1Request) (*AcceptRingingCall1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AcceptRingingCall1_1 not implemented")
 }
-func (UnimplementedManagerServiceServer) PlaceCallRaw(context.Context, *PlaceCallRawRequest) (*PlaceCallRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method PlaceCallRaw not implemented")
+func (UnimplementedTelecomManagerServiceServer) AddCall(context.Context, *AddCallRequest) (*AddCallResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddCall not implemented")
 }
-func (UnimplementedManagerServiceServer) SilenceRingerRaw(context.Context, *SilenceRingerRawRequest) (*SilenceRingerRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SilenceRingerRaw not implemented")
+func (UnimplementedTelecomManagerServiceServer) AddNewIncomingCall(context.Context, *AddNewIncomingCallRequest) (*AddNewIncomingCallResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddNewIncomingCall not implemented")
 }
-func (UnimplementedManagerServiceServer) AcceptRingingCallRaw(context.Context, *AcceptRingingCallRawRequest) (*AcceptRingingCallRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AcceptRingingCallRaw not implemented")
+func (UnimplementedTelecomManagerServiceServer) AddNewIncomingConference(context.Context, *AddNewIncomingConferenceRequest) (*AddNewIncomingConferenceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddNewIncomingConference not implemented")
 }
-func (UnimplementedManagerServiceServer) EndCallRaw(context.Context, *EndCallRawRequest) (*EndCallRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method EndCallRaw not implemented")
+func (UnimplementedTelecomManagerServiceServer) CancelMissedCallsNotification(context.Context, *CancelMissedCallsNotificationRequest) (*CancelMissedCallsNotificationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CancelMissedCallsNotification not implemented")
 }
-func (UnimplementedManagerServiceServer) mustEmbedUnimplementedManagerServiceServer() {}
-func (UnimplementedManagerServiceServer) testEmbeddedByValue()                        {}
+func (UnimplementedTelecomManagerServiceServer) CreateManageBlockedNumbersIntent(context.Context, *CreateManageBlockedNumbersIntentRequest) (*CreateManageBlockedNumbersIntentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateManageBlockedNumbersIntent not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) EndCall(context.Context, *EndCallRequest) (*EndCallResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method EndCall not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) GetAdnUriForPhoneAccount(context.Context, *GetAdnUriForPhoneAccountRequest) (*GetAdnUriForPhoneAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAdnUriForPhoneAccount not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) GetCallCapablePhoneAccounts(context.Context, *GetCallCapablePhoneAccountsRequest) (*GetCallCapablePhoneAccountsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCallCapablePhoneAccounts not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) GetDefaultDialerPackage(context.Context, *GetDefaultDialerPackageRequest) (*GetDefaultDialerPackageResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDefaultDialerPackage not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) GetDefaultOutgoingPhoneAccount(context.Context, *GetDefaultOutgoingPhoneAccountRequest) (*GetDefaultOutgoingPhoneAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDefaultOutgoingPhoneAccount not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) GetLine1Number(context.Context, *GetLine1NumberRequest) (*GetLine1NumberResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLine1Number not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) GetOwnSelfManagedPhoneAccounts(context.Context, *GetOwnSelfManagedPhoneAccountsRequest) (*GetOwnSelfManagedPhoneAccountsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOwnSelfManagedPhoneAccounts not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) GetPhoneAccount(context.Context, *GetPhoneAccountRequest) (*GetPhoneAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPhoneAccount not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) GetRegisteredPhoneAccounts(context.Context, *GetRegisteredPhoneAccountsRequest) (*GetRegisteredPhoneAccountsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRegisteredPhoneAccounts not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) GetSelfManagedPhoneAccounts(context.Context, *GetSelfManagedPhoneAccountsRequest) (*GetSelfManagedPhoneAccountsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSelfManagedPhoneAccounts not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) GetSimCallManager(context.Context, *GetSimCallManagerRequest) (*GetSimCallManagerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSimCallManager not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) GetSimCallManagerForSubscription(context.Context, *GetSimCallManagerForSubscriptionRequest) (*GetSimCallManagerForSubscriptionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSimCallManagerForSubscription not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) GetSystemDialerPackage(context.Context, *GetSystemDialerPackageRequest) (*GetSystemDialerPackageResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSystemDialerPackage not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) GetUserSelectedOutgoingPhoneAccount(context.Context, *GetUserSelectedOutgoingPhoneAccountRequest) (*GetUserSelectedOutgoingPhoneAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserSelectedOutgoingPhoneAccount not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) GetVoiceMailNumber(context.Context, *GetVoiceMailNumberRequest) (*GetVoiceMailNumberResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetVoiceMailNumber not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) HandleMmi1(context.Context, *HandleMmi1Request) (*HandleMmi1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method HandleMmi1 not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) HandleMmi2_1(context.Context, *HandleMmi2_1Request) (*HandleMmi2_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method HandleMmi2_1 not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) HasManageOngoingCallsPermission(context.Context, *HasManageOngoingCallsPermissionRequest) (*HasManageOngoingCallsPermissionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method HasManageOngoingCallsPermission not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) IsInCall(context.Context, *IsInCallRequest) (*IsInCallResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsInCall not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) IsInManagedCall(context.Context, *IsInManagedCallRequest) (*IsInManagedCallResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsInManagedCall not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) IsIncomingCallPermitted(context.Context, *IsIncomingCallPermittedRequest) (*IsIncomingCallPermittedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsIncomingCallPermitted not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) IsOutgoingCallPermitted(context.Context, *IsOutgoingCallPermittedRequest) (*IsOutgoingCallPermittedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsOutgoingCallPermitted not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) IsTtySupported(context.Context, *IsTtySupportedRequest) (*IsTtySupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsTtySupported not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) IsVoiceMailNumber(context.Context, *IsVoiceMailNumberRequest) (*IsVoiceMailNumberResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsVoiceMailNumber not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) PlaceCall(context.Context, *PlaceCallRequest) (*PlaceCallResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PlaceCall not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) RegisterPhoneAccount(context.Context, *RegisterPhoneAccountRequest) (*RegisterPhoneAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterPhoneAccount not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) ShowInCallScreen(context.Context, *ShowInCallScreenRequest) (*ShowInCallScreenResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ShowInCallScreen not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) SilenceRinger(context.Context, *SilenceRingerRequest) (*SilenceRingerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SilenceRinger not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) StartConference(context.Context, *StartConferenceRequest) (*StartConferenceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartConference not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) UnregisterPhoneAccount(context.Context, *UnregisterPhoneAccountRequest) (*UnregisterPhoneAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnregisterPhoneAccount not implemented")
+}
+func (UnimplementedTelecomManagerServiceServer) mustEmbedUnimplementedTelecomManagerServiceServer() {}
+func (UnimplementedTelecomManagerServiceServer) testEmbeddedByValue()                               {}
 
-// UnsafeManagerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ManagerServiceServer will
+// UnsafeTelecomManagerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TelecomManagerServiceServer will
 // result in compilation errors.
-type UnsafeManagerServiceServer interface {
-	mustEmbedUnimplementedManagerServiceServer()
+type UnsafeTelecomManagerServiceServer interface {
+	mustEmbedUnimplementedTelecomManagerServiceServer()
 }
 
-func RegisterManagerServiceServer(s grpc.ServiceRegistrar, srv ManagerServiceServer) {
-	// If the following call panics, it indicates UnimplementedManagerServiceServer was
+func RegisterTelecomManagerServiceServer(s grpc.ServiceRegistrar, srv TelecomManagerServiceServer) {
+	// If the following call panics, it indicates UnimplementedTelecomManagerServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ManagerService_ServiceDesc, srv)
+	s.RegisterService(&TelecomManagerService_ServiceDesc, srv)
 }
 
-func _ManagerService_IsInCallRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IsInCallRawRequest)
+func _TelecomManagerService_AcceptHandover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AcceptHandoverRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).IsInCallRaw(ctx, in)
+		return srv.(TelecomManagerServiceServer).AcceptHandover(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_IsInCallRaw_FullMethodName,
+		FullMethod: TelecomManagerService_AcceptHandover_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).IsInCallRaw(ctx, req.(*IsInCallRawRequest))
+		return srv.(TelecomManagerServiceServer).AcceptHandover(ctx, req.(*AcceptHandoverRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_IsInManagedCallRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IsInManagedCallRawRequest)
+func _TelecomManagerService_AcceptRingingCall0_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AcceptRingingCall0Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).IsInManagedCallRaw(ctx, in)
+		return srv.(TelecomManagerServiceServer).AcceptRingingCall0(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_IsInManagedCallRaw_FullMethodName,
+		FullMethod: TelecomManagerService_AcceptRingingCall0_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).IsInManagedCallRaw(ctx, req.(*IsInManagedCallRawRequest))
+		return srv.(TelecomManagerServiceServer).AcceptRingingCall0(ctx, req.(*AcceptRingingCall0Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_GetDefaultDialerPackageRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDefaultDialerPackageRawRequest)
+func _TelecomManagerService_AcceptRingingCall1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AcceptRingingCall1_1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetDefaultDialerPackageRaw(ctx, in)
+		return srv.(TelecomManagerServiceServer).AcceptRingingCall1_1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_GetDefaultDialerPackageRaw_FullMethodName,
+		FullMethod: TelecomManagerService_AcceptRingingCall1_1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetDefaultDialerPackageRaw(ctx, req.(*GetDefaultDialerPackageRawRequest))
+		return srv.(TelecomManagerServiceServer).AcceptRingingCall1_1(ctx, req.(*AcceptRingingCall1_1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_PlaceCallRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PlaceCallRawRequest)
+func _TelecomManagerService_AddCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddCallRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).PlaceCallRaw(ctx, in)
+		return srv.(TelecomManagerServiceServer).AddCall(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_PlaceCallRaw_FullMethodName,
+		FullMethod: TelecomManagerService_AddCall_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).PlaceCallRaw(ctx, req.(*PlaceCallRawRequest))
+		return srv.(TelecomManagerServiceServer).AddCall(ctx, req.(*AddCallRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_SilenceRingerRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SilenceRingerRawRequest)
+func _TelecomManagerService_AddNewIncomingCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddNewIncomingCallRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).SilenceRingerRaw(ctx, in)
+		return srv.(TelecomManagerServiceServer).AddNewIncomingCall(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_SilenceRingerRaw_FullMethodName,
+		FullMethod: TelecomManagerService_AddNewIncomingCall_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).SilenceRingerRaw(ctx, req.(*SilenceRingerRawRequest))
+		return srv.(TelecomManagerServiceServer).AddNewIncomingCall(ctx, req.(*AddNewIncomingCallRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_AcceptRingingCallRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AcceptRingingCallRawRequest)
+func _TelecomManagerService_AddNewIncomingConference_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddNewIncomingConferenceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).AcceptRingingCallRaw(ctx, in)
+		return srv.(TelecomManagerServiceServer).AddNewIncomingConference(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_AcceptRingingCallRaw_FullMethodName,
+		FullMethod: TelecomManagerService_AddNewIncomingConference_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).AcceptRingingCallRaw(ctx, req.(*AcceptRingingCallRawRequest))
+		return srv.(TelecomManagerServiceServer).AddNewIncomingConference(ctx, req.(*AddNewIncomingConferenceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_EndCallRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EndCallRawRequest)
+func _TelecomManagerService_CancelMissedCallsNotification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelMissedCallsNotificationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).EndCallRaw(ctx, in)
+		return srv.(TelecomManagerServiceServer).CancelMissedCallsNotification(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_EndCallRaw_FullMethodName,
+		FullMethod: TelecomManagerService_CancelMissedCallsNotification_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).EndCallRaw(ctx, req.(*EndCallRawRequest))
+		return srv.(TelecomManagerServiceServer).CancelMissedCallsNotification(ctx, req.(*CancelMissedCallsNotificationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ManagerService_ServiceDesc is the grpc.ServiceDesc for ManagerService service.
+func _TelecomManagerService_CreateManageBlockedNumbersIntent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateManageBlockedNumbersIntentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).CreateManageBlockedNumbersIntent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_CreateManageBlockedNumbersIntent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).CreateManageBlockedNumbersIntent(ctx, req.(*CreateManageBlockedNumbersIntentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_EndCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EndCallRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).EndCall(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_EndCall_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).EndCall(ctx, req.(*EndCallRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_GetAdnUriForPhoneAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAdnUriForPhoneAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).GetAdnUriForPhoneAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_GetAdnUriForPhoneAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).GetAdnUriForPhoneAccount(ctx, req.(*GetAdnUriForPhoneAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_GetCallCapablePhoneAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCallCapablePhoneAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).GetCallCapablePhoneAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_GetCallCapablePhoneAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).GetCallCapablePhoneAccounts(ctx, req.(*GetCallCapablePhoneAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_GetDefaultDialerPackage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDefaultDialerPackageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).GetDefaultDialerPackage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_GetDefaultDialerPackage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).GetDefaultDialerPackage(ctx, req.(*GetDefaultDialerPackageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_GetDefaultOutgoingPhoneAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDefaultOutgoingPhoneAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).GetDefaultOutgoingPhoneAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_GetDefaultOutgoingPhoneAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).GetDefaultOutgoingPhoneAccount(ctx, req.(*GetDefaultOutgoingPhoneAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_GetLine1Number_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLine1NumberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).GetLine1Number(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_GetLine1Number_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).GetLine1Number(ctx, req.(*GetLine1NumberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_GetOwnSelfManagedPhoneAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOwnSelfManagedPhoneAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).GetOwnSelfManagedPhoneAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_GetOwnSelfManagedPhoneAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).GetOwnSelfManagedPhoneAccounts(ctx, req.(*GetOwnSelfManagedPhoneAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_GetPhoneAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPhoneAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).GetPhoneAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_GetPhoneAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).GetPhoneAccount(ctx, req.(*GetPhoneAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_GetRegisteredPhoneAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRegisteredPhoneAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).GetRegisteredPhoneAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_GetRegisteredPhoneAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).GetRegisteredPhoneAccounts(ctx, req.(*GetRegisteredPhoneAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_GetSelfManagedPhoneAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSelfManagedPhoneAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).GetSelfManagedPhoneAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_GetSelfManagedPhoneAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).GetSelfManagedPhoneAccounts(ctx, req.(*GetSelfManagedPhoneAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_GetSimCallManager_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSimCallManagerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).GetSimCallManager(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_GetSimCallManager_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).GetSimCallManager(ctx, req.(*GetSimCallManagerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_GetSimCallManagerForSubscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSimCallManagerForSubscriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).GetSimCallManagerForSubscription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_GetSimCallManagerForSubscription_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).GetSimCallManagerForSubscription(ctx, req.(*GetSimCallManagerForSubscriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_GetSystemDialerPackage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSystemDialerPackageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).GetSystemDialerPackage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_GetSystemDialerPackage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).GetSystemDialerPackage(ctx, req.(*GetSystemDialerPackageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_GetUserSelectedOutgoingPhoneAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserSelectedOutgoingPhoneAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).GetUserSelectedOutgoingPhoneAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_GetUserSelectedOutgoingPhoneAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).GetUserSelectedOutgoingPhoneAccount(ctx, req.(*GetUserSelectedOutgoingPhoneAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_GetVoiceMailNumber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetVoiceMailNumberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).GetVoiceMailNumber(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_GetVoiceMailNumber_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).GetVoiceMailNumber(ctx, req.(*GetVoiceMailNumberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_HandleMmi1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HandleMmi1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).HandleMmi1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_HandleMmi1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).HandleMmi1(ctx, req.(*HandleMmi1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_HandleMmi2_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HandleMmi2_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).HandleMmi2_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_HandleMmi2_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).HandleMmi2_1(ctx, req.(*HandleMmi2_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_HasManageOngoingCallsPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HasManageOngoingCallsPermissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).HasManageOngoingCallsPermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_HasManageOngoingCallsPermission_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).HasManageOngoingCallsPermission(ctx, req.(*HasManageOngoingCallsPermissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_IsInCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsInCallRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).IsInCall(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_IsInCall_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).IsInCall(ctx, req.(*IsInCallRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_IsInManagedCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsInManagedCallRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).IsInManagedCall(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_IsInManagedCall_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).IsInManagedCall(ctx, req.(*IsInManagedCallRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_IsIncomingCallPermitted_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsIncomingCallPermittedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).IsIncomingCallPermitted(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_IsIncomingCallPermitted_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).IsIncomingCallPermitted(ctx, req.(*IsIncomingCallPermittedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_IsOutgoingCallPermitted_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsOutgoingCallPermittedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).IsOutgoingCallPermitted(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_IsOutgoingCallPermitted_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).IsOutgoingCallPermitted(ctx, req.(*IsOutgoingCallPermittedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_IsTtySupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsTtySupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).IsTtySupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_IsTtySupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).IsTtySupported(ctx, req.(*IsTtySupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_IsVoiceMailNumber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsVoiceMailNumberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).IsVoiceMailNumber(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_IsVoiceMailNumber_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).IsVoiceMailNumber(ctx, req.(*IsVoiceMailNumberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_PlaceCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PlaceCallRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).PlaceCall(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_PlaceCall_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).PlaceCall(ctx, req.(*PlaceCallRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_RegisterPhoneAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterPhoneAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).RegisterPhoneAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_RegisterPhoneAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).RegisterPhoneAccount(ctx, req.(*RegisterPhoneAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_ShowInCallScreen_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShowInCallScreenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).ShowInCallScreen(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_ShowInCallScreen_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).ShowInCallScreen(ctx, req.(*ShowInCallScreenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_SilenceRinger_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SilenceRingerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).SilenceRinger(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_SilenceRinger_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).SilenceRinger(ctx, req.(*SilenceRingerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_StartConference_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartConferenceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).StartConference(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_StartConference_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).StartConference(ctx, req.(*StartConferenceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TelecomManagerService_UnregisterPhoneAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnregisterPhoneAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TelecomManagerServiceServer).UnregisterPhoneAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TelecomManagerService_UnregisterPhoneAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TelecomManagerServiceServer).UnregisterPhoneAccount(ctx, req.(*UnregisterPhoneAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// TelecomManagerService_ServiceDesc is the grpc.ServiceDesc for TelecomManagerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ManagerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "telecom.ManagerService",
-	HandlerType: (*ManagerServiceServer)(nil),
+var TelecomManagerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "telecom.TelecomManagerService",
+	HandlerType: (*TelecomManagerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "IsInCallRaw",
-			Handler:    _ManagerService_IsInCallRaw_Handler,
+			MethodName: "AcceptHandover",
+			Handler:    _TelecomManagerService_AcceptHandover_Handler,
 		},
 		{
-			MethodName: "IsInManagedCallRaw",
-			Handler:    _ManagerService_IsInManagedCallRaw_Handler,
+			MethodName: "AcceptRingingCall0",
+			Handler:    _TelecomManagerService_AcceptRingingCall0_Handler,
 		},
 		{
-			MethodName: "GetDefaultDialerPackageRaw",
-			Handler:    _ManagerService_GetDefaultDialerPackageRaw_Handler,
+			MethodName: "AcceptRingingCall1_1",
+			Handler:    _TelecomManagerService_AcceptRingingCall1_1_Handler,
 		},
 		{
-			MethodName: "PlaceCallRaw",
-			Handler:    _ManagerService_PlaceCallRaw_Handler,
+			MethodName: "AddCall",
+			Handler:    _TelecomManagerService_AddCall_Handler,
 		},
 		{
-			MethodName: "SilenceRingerRaw",
-			Handler:    _ManagerService_SilenceRingerRaw_Handler,
+			MethodName: "AddNewIncomingCall",
+			Handler:    _TelecomManagerService_AddNewIncomingCall_Handler,
 		},
 		{
-			MethodName: "AcceptRingingCallRaw",
-			Handler:    _ManagerService_AcceptRingingCallRaw_Handler,
+			MethodName: "AddNewIncomingConference",
+			Handler:    _TelecomManagerService_AddNewIncomingConference_Handler,
 		},
 		{
-			MethodName: "EndCallRaw",
-			Handler:    _ManagerService_EndCallRaw_Handler,
+			MethodName: "CancelMissedCallsNotification",
+			Handler:    _TelecomManagerService_CancelMissedCallsNotification_Handler,
+		},
+		{
+			MethodName: "CreateManageBlockedNumbersIntent",
+			Handler:    _TelecomManagerService_CreateManageBlockedNumbersIntent_Handler,
+		},
+		{
+			MethodName: "EndCall",
+			Handler:    _TelecomManagerService_EndCall_Handler,
+		},
+		{
+			MethodName: "GetAdnUriForPhoneAccount",
+			Handler:    _TelecomManagerService_GetAdnUriForPhoneAccount_Handler,
+		},
+		{
+			MethodName: "GetCallCapablePhoneAccounts",
+			Handler:    _TelecomManagerService_GetCallCapablePhoneAccounts_Handler,
+		},
+		{
+			MethodName: "GetDefaultDialerPackage",
+			Handler:    _TelecomManagerService_GetDefaultDialerPackage_Handler,
+		},
+		{
+			MethodName: "GetDefaultOutgoingPhoneAccount",
+			Handler:    _TelecomManagerService_GetDefaultOutgoingPhoneAccount_Handler,
+		},
+		{
+			MethodName: "GetLine1Number",
+			Handler:    _TelecomManagerService_GetLine1Number_Handler,
+		},
+		{
+			MethodName: "GetOwnSelfManagedPhoneAccounts",
+			Handler:    _TelecomManagerService_GetOwnSelfManagedPhoneAccounts_Handler,
+		},
+		{
+			MethodName: "GetPhoneAccount",
+			Handler:    _TelecomManagerService_GetPhoneAccount_Handler,
+		},
+		{
+			MethodName: "GetRegisteredPhoneAccounts",
+			Handler:    _TelecomManagerService_GetRegisteredPhoneAccounts_Handler,
+		},
+		{
+			MethodName: "GetSelfManagedPhoneAccounts",
+			Handler:    _TelecomManagerService_GetSelfManagedPhoneAccounts_Handler,
+		},
+		{
+			MethodName: "GetSimCallManager",
+			Handler:    _TelecomManagerService_GetSimCallManager_Handler,
+		},
+		{
+			MethodName: "GetSimCallManagerForSubscription",
+			Handler:    _TelecomManagerService_GetSimCallManagerForSubscription_Handler,
+		},
+		{
+			MethodName: "GetSystemDialerPackage",
+			Handler:    _TelecomManagerService_GetSystemDialerPackage_Handler,
+		},
+		{
+			MethodName: "GetUserSelectedOutgoingPhoneAccount",
+			Handler:    _TelecomManagerService_GetUserSelectedOutgoingPhoneAccount_Handler,
+		},
+		{
+			MethodName: "GetVoiceMailNumber",
+			Handler:    _TelecomManagerService_GetVoiceMailNumber_Handler,
+		},
+		{
+			MethodName: "HandleMmi1",
+			Handler:    _TelecomManagerService_HandleMmi1_Handler,
+		},
+		{
+			MethodName: "HandleMmi2_1",
+			Handler:    _TelecomManagerService_HandleMmi2_1_Handler,
+		},
+		{
+			MethodName: "HasManageOngoingCallsPermission",
+			Handler:    _TelecomManagerService_HasManageOngoingCallsPermission_Handler,
+		},
+		{
+			MethodName: "IsInCall",
+			Handler:    _TelecomManagerService_IsInCall_Handler,
+		},
+		{
+			MethodName: "IsInManagedCall",
+			Handler:    _TelecomManagerService_IsInManagedCall_Handler,
+		},
+		{
+			MethodName: "IsIncomingCallPermitted",
+			Handler:    _TelecomManagerService_IsIncomingCallPermitted_Handler,
+		},
+		{
+			MethodName: "IsOutgoingCallPermitted",
+			Handler:    _TelecomManagerService_IsOutgoingCallPermitted_Handler,
+		},
+		{
+			MethodName: "IsTtySupported",
+			Handler:    _TelecomManagerService_IsTtySupported_Handler,
+		},
+		{
+			MethodName: "IsVoiceMailNumber",
+			Handler:    _TelecomManagerService_IsVoiceMailNumber_Handler,
+		},
+		{
+			MethodName: "PlaceCall",
+			Handler:    _TelecomManagerService_PlaceCall_Handler,
+		},
+		{
+			MethodName: "RegisterPhoneAccount",
+			Handler:    _TelecomManagerService_RegisterPhoneAccount_Handler,
+		},
+		{
+			MethodName: "ShowInCallScreen",
+			Handler:    _TelecomManagerService_ShowInCallScreen_Handler,
+		},
+		{
+			MethodName: "SilenceRinger",
+			Handler:    _TelecomManagerService_SilenceRinger_Handler,
+		},
+		{
+			MethodName: "StartConference",
+			Handler:    _TelecomManagerService_StartConference_Handler,
+		},
+		{
+			MethodName: "UnregisterPhoneAccount",
+			Handler:    _TelecomManagerService_UnregisterPhoneAccount_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

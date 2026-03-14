@@ -21,405 +21,888 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ManagerService_SetRaw_FullMethodName                       = "/alarm.ManagerService/SetRaw"
-	ManagerService_SetExactRaw_FullMethodName                  = "/alarm.ManagerService/SetExactRaw"
-	ManagerService_SetExactAndAllowWhileIdleRaw_FullMethodName = "/alarm.ManagerService/SetExactAndAllowWhileIdleRaw"
-	ManagerService_SetRepeatingRaw_FullMethodName              = "/alarm.ManagerService/SetRepeatingRaw"
-	ManagerService_SetWindowRaw_FullMethodName                 = "/alarm.ManagerService/SetWindowRaw"
-	ManagerService_SetAlarmClockRaw_FullMethodName             = "/alarm.ManagerService/SetAlarmClockRaw"
-	ManagerService_Cancel_FullMethodName                       = "/alarm.ManagerService/Cancel"
-	ManagerService_GetNextAlarmClockRaw_FullMethodName         = "/alarm.ManagerService/GetNextAlarmClockRaw"
-	ManagerService_CanScheduleExactAlarms_FullMethodName       = "/alarm.ManagerService/CanScheduleExactAlarms"
+	AlarmManagerService_CanScheduleExactAlarms_FullMethodName    = "/alarm.AlarmManagerService/CanScheduleExactAlarms"
+	AlarmManagerService_Cancel1_FullMethodName                   = "/alarm.AlarmManagerService/Cancel1"
+	AlarmManagerService_Cancel1_1_FullMethodName                 = "/alarm.AlarmManagerService/Cancel1_1"
+	AlarmManagerService_CancelAll_FullMethodName                 = "/alarm.AlarmManagerService/CancelAll"
+	AlarmManagerService_GetNextAlarmClock_FullMethodName         = "/alarm.AlarmManagerService/GetNextAlarmClock"
+	AlarmManagerService_Set_FullMethodName                       = "/alarm.AlarmManagerService/Set"
+	AlarmManagerService_SetAlarmClock_FullMethodName             = "/alarm.AlarmManagerService/SetAlarmClock"
+	AlarmManagerService_SetAndAllowWhileIdle_FullMethodName      = "/alarm.AlarmManagerService/SetAndAllowWhileIdle"
+	AlarmManagerService_SetExact_FullMethodName                  = "/alarm.AlarmManagerService/SetExact"
+	AlarmManagerService_SetExactAndAllowWhileIdle_FullMethodName = "/alarm.AlarmManagerService/SetExactAndAllowWhileIdle"
+	AlarmManagerService_SetInexactRepeating_FullMethodName       = "/alarm.AlarmManagerService/SetInexactRepeating"
+	AlarmManagerService_SetRepeating_FullMethodName              = "/alarm.AlarmManagerService/SetRepeating"
+	AlarmManagerService_SetTime_FullMethodName                   = "/alarm.AlarmManagerService/SetTime"
+	AlarmManagerService_SetTimeZone_FullMethodName               = "/alarm.AlarmManagerService/SetTimeZone"
+	AlarmManagerService_SetWindow4_FullMethodName                = "/alarm.AlarmManagerService/SetWindow4"
+	AlarmManagerService_SetWindow6_1_FullMethodName              = "/alarm.AlarmManagerService/SetWindow6_1"
 )
 
-// ManagerServiceClient is the client API for ManagerService service.
+// AlarmManagerServiceClient is the client API for AlarmManagerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ManagerServiceClient interface {
-	SetRaw(ctx context.Context, in *SetRawRequest, opts ...grpc.CallOption) (*SetRawResponse, error)
-	SetExactRaw(ctx context.Context, in *SetExactRawRequest, opts ...grpc.CallOption) (*SetExactRawResponse, error)
-	SetExactAndAllowWhileIdleRaw(ctx context.Context, in *SetExactAndAllowWhileIdleRawRequest, opts ...grpc.CallOption) (*SetExactAndAllowWhileIdleRawResponse, error)
-	SetRepeatingRaw(ctx context.Context, in *SetRepeatingRawRequest, opts ...grpc.CallOption) (*SetRepeatingRawResponse, error)
-	SetWindowRaw(ctx context.Context, in *SetWindowRawRequest, opts ...grpc.CallOption) (*SetWindowRawResponse, error)
-	SetAlarmClockRaw(ctx context.Context, in *SetAlarmClockRawRequest, opts ...grpc.CallOption) (*SetAlarmClockRawResponse, error)
-	Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*CancelResponse, error)
-	GetNextAlarmClockRaw(ctx context.Context, in *GetNextAlarmClockRawRequest, opts ...grpc.CallOption) (*GetNextAlarmClockRawResponse, error)
+type AlarmManagerServiceClient interface {
 	CanScheduleExactAlarms(ctx context.Context, in *CanScheduleExactAlarmsRequest, opts ...grpc.CallOption) (*CanScheduleExactAlarmsResponse, error)
+	Cancel1(ctx context.Context, in *Cancel1Request, opts ...grpc.CallOption) (*Cancel1Response, error)
+	Cancel1_1(ctx context.Context, in *Cancel1_1Request, opts ...grpc.CallOption) (*Cancel1_1Response, error)
+	CancelAll(ctx context.Context, in *CancelAllRequest, opts ...grpc.CallOption) (*CancelAllResponse, error)
+	GetNextAlarmClock(ctx context.Context, in *GetNextAlarmClockRequest, opts ...grpc.CallOption) (*GetNextAlarmClockResponse, error)
+	Set(ctx context.Context, in *SetRequest, opts ...grpc.CallOption) (*SetResponse, error)
+	SetAlarmClock(ctx context.Context, in *SetAlarmClockRequest, opts ...grpc.CallOption) (*SetAlarmClockResponse, error)
+	SetAndAllowWhileIdle(ctx context.Context, in *SetAndAllowWhileIdleRequest, opts ...grpc.CallOption) (*SetAndAllowWhileIdleResponse, error)
+	SetExact(ctx context.Context, in *SetExactRequest, opts ...grpc.CallOption) (*SetExactResponse, error)
+	SetExactAndAllowWhileIdle(ctx context.Context, in *SetExactAndAllowWhileIdleRequest, opts ...grpc.CallOption) (*SetExactAndAllowWhileIdleResponse, error)
+	SetInexactRepeating(ctx context.Context, in *SetInexactRepeatingRequest, opts ...grpc.CallOption) (*SetInexactRepeatingResponse, error)
+	SetRepeating(ctx context.Context, in *SetRepeatingRequest, opts ...grpc.CallOption) (*SetRepeatingResponse, error)
+	SetTime(ctx context.Context, in *SetTimeRequest, opts ...grpc.CallOption) (*SetTimeResponse, error)
+	SetTimeZone(ctx context.Context, in *SetTimeZoneRequest, opts ...grpc.CallOption) (*SetTimeZoneResponse, error)
+	SetWindow4(ctx context.Context, in *SetWindow4Request, opts ...grpc.CallOption) (*SetWindow4Response, error)
+	SetWindow6_1(ctx context.Context, in *SetWindow6_1Request, opts ...grpc.CallOption) (*SetWindow6_1Response, error)
 }
 
-type managerServiceClient struct {
+type alarmManagerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewManagerServiceClient(cc grpc.ClientConnInterface) ManagerServiceClient {
-	return &managerServiceClient{cc}
+func NewAlarmManagerServiceClient(cc grpc.ClientConnInterface) AlarmManagerServiceClient {
+	return &alarmManagerServiceClient{cc}
 }
 
-func (c *managerServiceClient) SetRaw(ctx context.Context, in *SetRawRequest, opts ...grpc.CallOption) (*SetRawResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_SetRaw_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) SetExactRaw(ctx context.Context, in *SetExactRawRequest, opts ...grpc.CallOption) (*SetExactRawResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetExactRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_SetExactRaw_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) SetExactAndAllowWhileIdleRaw(ctx context.Context, in *SetExactAndAllowWhileIdleRawRequest, opts ...grpc.CallOption) (*SetExactAndAllowWhileIdleRawResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetExactAndAllowWhileIdleRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_SetExactAndAllowWhileIdleRaw_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) SetRepeatingRaw(ctx context.Context, in *SetRepeatingRawRequest, opts ...grpc.CallOption) (*SetRepeatingRawResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetRepeatingRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_SetRepeatingRaw_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) SetWindowRaw(ctx context.Context, in *SetWindowRawRequest, opts ...grpc.CallOption) (*SetWindowRawResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetWindowRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_SetWindowRaw_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) SetAlarmClockRaw(ctx context.Context, in *SetAlarmClockRawRequest, opts ...grpc.CallOption) (*SetAlarmClockRawResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetAlarmClockRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_SetAlarmClockRaw_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*CancelResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CancelResponse)
-	err := c.cc.Invoke(ctx, ManagerService_Cancel_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) GetNextAlarmClockRaw(ctx context.Context, in *GetNextAlarmClockRawRequest, opts ...grpc.CallOption) (*GetNextAlarmClockRawResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetNextAlarmClockRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_GetNextAlarmClockRaw_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *managerServiceClient) CanScheduleExactAlarms(ctx context.Context, in *CanScheduleExactAlarmsRequest, opts ...grpc.CallOption) (*CanScheduleExactAlarmsResponse, error) {
+func (c *alarmManagerServiceClient) CanScheduleExactAlarms(ctx context.Context, in *CanScheduleExactAlarmsRequest, opts ...grpc.CallOption) (*CanScheduleExactAlarmsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CanScheduleExactAlarmsResponse)
-	err := c.cc.Invoke(ctx, ManagerService_CanScheduleExactAlarms_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AlarmManagerService_CanScheduleExactAlarms_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ManagerServiceServer is the server API for ManagerService service.
-// All implementations must embed UnimplementedManagerServiceServer
-// for forward compatibility.
-type ManagerServiceServer interface {
-	SetRaw(context.Context, *SetRawRequest) (*SetRawResponse, error)
-	SetExactRaw(context.Context, *SetExactRawRequest) (*SetExactRawResponse, error)
-	SetExactAndAllowWhileIdleRaw(context.Context, *SetExactAndAllowWhileIdleRawRequest) (*SetExactAndAllowWhileIdleRawResponse, error)
-	SetRepeatingRaw(context.Context, *SetRepeatingRawRequest) (*SetRepeatingRawResponse, error)
-	SetWindowRaw(context.Context, *SetWindowRawRequest) (*SetWindowRawResponse, error)
-	SetAlarmClockRaw(context.Context, *SetAlarmClockRawRequest) (*SetAlarmClockRawResponse, error)
-	Cancel(context.Context, *CancelRequest) (*CancelResponse, error)
-	GetNextAlarmClockRaw(context.Context, *GetNextAlarmClockRawRequest) (*GetNextAlarmClockRawResponse, error)
-	CanScheduleExactAlarms(context.Context, *CanScheduleExactAlarmsRequest) (*CanScheduleExactAlarmsResponse, error)
-	mustEmbedUnimplementedManagerServiceServer()
+func (c *alarmManagerServiceClient) Cancel1(ctx context.Context, in *Cancel1Request, opts ...grpc.CallOption) (*Cancel1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Cancel1Response)
+	err := c.cc.Invoke(ctx, AlarmManagerService_Cancel1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
-// UnimplementedManagerServiceServer must be embedded to have
+func (c *alarmManagerServiceClient) Cancel1_1(ctx context.Context, in *Cancel1_1Request, opts ...grpc.CallOption) (*Cancel1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Cancel1_1Response)
+	err := c.cc.Invoke(ctx, AlarmManagerService_Cancel1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alarmManagerServiceClient) CancelAll(ctx context.Context, in *CancelAllRequest, opts ...grpc.CallOption) (*CancelAllResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CancelAllResponse)
+	err := c.cc.Invoke(ctx, AlarmManagerService_CancelAll_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alarmManagerServiceClient) GetNextAlarmClock(ctx context.Context, in *GetNextAlarmClockRequest, opts ...grpc.CallOption) (*GetNextAlarmClockResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNextAlarmClockResponse)
+	err := c.cc.Invoke(ctx, AlarmManagerService_GetNextAlarmClock_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alarmManagerServiceClient) Set(ctx context.Context, in *SetRequest, opts ...grpc.CallOption) (*SetResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetResponse)
+	err := c.cc.Invoke(ctx, AlarmManagerService_Set_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alarmManagerServiceClient) SetAlarmClock(ctx context.Context, in *SetAlarmClockRequest, opts ...grpc.CallOption) (*SetAlarmClockResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetAlarmClockResponse)
+	err := c.cc.Invoke(ctx, AlarmManagerService_SetAlarmClock_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alarmManagerServiceClient) SetAndAllowWhileIdle(ctx context.Context, in *SetAndAllowWhileIdleRequest, opts ...grpc.CallOption) (*SetAndAllowWhileIdleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetAndAllowWhileIdleResponse)
+	err := c.cc.Invoke(ctx, AlarmManagerService_SetAndAllowWhileIdle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alarmManagerServiceClient) SetExact(ctx context.Context, in *SetExactRequest, opts ...grpc.CallOption) (*SetExactResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetExactResponse)
+	err := c.cc.Invoke(ctx, AlarmManagerService_SetExact_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alarmManagerServiceClient) SetExactAndAllowWhileIdle(ctx context.Context, in *SetExactAndAllowWhileIdleRequest, opts ...grpc.CallOption) (*SetExactAndAllowWhileIdleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetExactAndAllowWhileIdleResponse)
+	err := c.cc.Invoke(ctx, AlarmManagerService_SetExactAndAllowWhileIdle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alarmManagerServiceClient) SetInexactRepeating(ctx context.Context, in *SetInexactRepeatingRequest, opts ...grpc.CallOption) (*SetInexactRepeatingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetInexactRepeatingResponse)
+	err := c.cc.Invoke(ctx, AlarmManagerService_SetInexactRepeating_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alarmManagerServiceClient) SetRepeating(ctx context.Context, in *SetRepeatingRequest, opts ...grpc.CallOption) (*SetRepeatingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetRepeatingResponse)
+	err := c.cc.Invoke(ctx, AlarmManagerService_SetRepeating_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alarmManagerServiceClient) SetTime(ctx context.Context, in *SetTimeRequest, opts ...grpc.CallOption) (*SetTimeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetTimeResponse)
+	err := c.cc.Invoke(ctx, AlarmManagerService_SetTime_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alarmManagerServiceClient) SetTimeZone(ctx context.Context, in *SetTimeZoneRequest, opts ...grpc.CallOption) (*SetTimeZoneResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetTimeZoneResponse)
+	err := c.cc.Invoke(ctx, AlarmManagerService_SetTimeZone_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alarmManagerServiceClient) SetWindow4(ctx context.Context, in *SetWindow4Request, opts ...grpc.CallOption) (*SetWindow4Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetWindow4Response)
+	err := c.cc.Invoke(ctx, AlarmManagerService_SetWindow4_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alarmManagerServiceClient) SetWindow6_1(ctx context.Context, in *SetWindow6_1Request, opts ...grpc.CallOption) (*SetWindow6_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetWindow6_1Response)
+	err := c.cc.Invoke(ctx, AlarmManagerService_SetWindow6_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AlarmManagerServiceServer is the server API for AlarmManagerService service.
+// All implementations must embed UnimplementedAlarmManagerServiceServer
+// for forward compatibility.
+type AlarmManagerServiceServer interface {
+	CanScheduleExactAlarms(context.Context, *CanScheduleExactAlarmsRequest) (*CanScheduleExactAlarmsResponse, error)
+	Cancel1(context.Context, *Cancel1Request) (*Cancel1Response, error)
+	Cancel1_1(context.Context, *Cancel1_1Request) (*Cancel1_1Response, error)
+	CancelAll(context.Context, *CancelAllRequest) (*CancelAllResponse, error)
+	GetNextAlarmClock(context.Context, *GetNextAlarmClockRequest) (*GetNextAlarmClockResponse, error)
+	Set(context.Context, *SetRequest) (*SetResponse, error)
+	SetAlarmClock(context.Context, *SetAlarmClockRequest) (*SetAlarmClockResponse, error)
+	SetAndAllowWhileIdle(context.Context, *SetAndAllowWhileIdleRequest) (*SetAndAllowWhileIdleResponse, error)
+	SetExact(context.Context, *SetExactRequest) (*SetExactResponse, error)
+	SetExactAndAllowWhileIdle(context.Context, *SetExactAndAllowWhileIdleRequest) (*SetExactAndAllowWhileIdleResponse, error)
+	SetInexactRepeating(context.Context, *SetInexactRepeatingRequest) (*SetInexactRepeatingResponse, error)
+	SetRepeating(context.Context, *SetRepeatingRequest) (*SetRepeatingResponse, error)
+	SetTime(context.Context, *SetTimeRequest) (*SetTimeResponse, error)
+	SetTimeZone(context.Context, *SetTimeZoneRequest) (*SetTimeZoneResponse, error)
+	SetWindow4(context.Context, *SetWindow4Request) (*SetWindow4Response, error)
+	SetWindow6_1(context.Context, *SetWindow6_1Request) (*SetWindow6_1Response, error)
+	mustEmbedUnimplementedAlarmManagerServiceServer()
+}
+
+// UnimplementedAlarmManagerServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedManagerServiceServer struct{}
+type UnimplementedAlarmManagerServiceServer struct{}
 
-func (UnimplementedManagerServiceServer) SetRaw(context.Context, *SetRawRequest) (*SetRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetRaw not implemented")
-}
-func (UnimplementedManagerServiceServer) SetExactRaw(context.Context, *SetExactRawRequest) (*SetExactRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetExactRaw not implemented")
-}
-func (UnimplementedManagerServiceServer) SetExactAndAllowWhileIdleRaw(context.Context, *SetExactAndAllowWhileIdleRawRequest) (*SetExactAndAllowWhileIdleRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetExactAndAllowWhileIdleRaw not implemented")
-}
-func (UnimplementedManagerServiceServer) SetRepeatingRaw(context.Context, *SetRepeatingRawRequest) (*SetRepeatingRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetRepeatingRaw not implemented")
-}
-func (UnimplementedManagerServiceServer) SetWindowRaw(context.Context, *SetWindowRawRequest) (*SetWindowRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetWindowRaw not implemented")
-}
-func (UnimplementedManagerServiceServer) SetAlarmClockRaw(context.Context, *SetAlarmClockRawRequest) (*SetAlarmClockRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetAlarmClockRaw not implemented")
-}
-func (UnimplementedManagerServiceServer) Cancel(context.Context, *CancelRequest) (*CancelResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Cancel not implemented")
-}
-func (UnimplementedManagerServiceServer) GetNextAlarmClockRaw(context.Context, *GetNextAlarmClockRawRequest) (*GetNextAlarmClockRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetNextAlarmClockRaw not implemented")
-}
-func (UnimplementedManagerServiceServer) CanScheduleExactAlarms(context.Context, *CanScheduleExactAlarmsRequest) (*CanScheduleExactAlarmsResponse, error) {
+func (UnimplementedAlarmManagerServiceServer) CanScheduleExactAlarms(context.Context, *CanScheduleExactAlarmsRequest) (*CanScheduleExactAlarmsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CanScheduleExactAlarms not implemented")
 }
-func (UnimplementedManagerServiceServer) mustEmbedUnimplementedManagerServiceServer() {}
-func (UnimplementedManagerServiceServer) testEmbeddedByValue()                        {}
+func (UnimplementedAlarmManagerServiceServer) Cancel1(context.Context, *Cancel1Request) (*Cancel1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Cancel1 not implemented")
+}
+func (UnimplementedAlarmManagerServiceServer) Cancel1_1(context.Context, *Cancel1_1Request) (*Cancel1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Cancel1_1 not implemented")
+}
+func (UnimplementedAlarmManagerServiceServer) CancelAll(context.Context, *CancelAllRequest) (*CancelAllResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CancelAll not implemented")
+}
+func (UnimplementedAlarmManagerServiceServer) GetNextAlarmClock(context.Context, *GetNextAlarmClockRequest) (*GetNextAlarmClockResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetNextAlarmClock not implemented")
+}
+func (UnimplementedAlarmManagerServiceServer) Set(context.Context, *SetRequest) (*SetResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Set not implemented")
+}
+func (UnimplementedAlarmManagerServiceServer) SetAlarmClock(context.Context, *SetAlarmClockRequest) (*SetAlarmClockResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAlarmClock not implemented")
+}
+func (UnimplementedAlarmManagerServiceServer) SetAndAllowWhileIdle(context.Context, *SetAndAllowWhileIdleRequest) (*SetAndAllowWhileIdleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAndAllowWhileIdle not implemented")
+}
+func (UnimplementedAlarmManagerServiceServer) SetExact(context.Context, *SetExactRequest) (*SetExactResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetExact not implemented")
+}
+func (UnimplementedAlarmManagerServiceServer) SetExactAndAllowWhileIdle(context.Context, *SetExactAndAllowWhileIdleRequest) (*SetExactAndAllowWhileIdleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetExactAndAllowWhileIdle not implemented")
+}
+func (UnimplementedAlarmManagerServiceServer) SetInexactRepeating(context.Context, *SetInexactRepeatingRequest) (*SetInexactRepeatingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetInexactRepeating not implemented")
+}
+func (UnimplementedAlarmManagerServiceServer) SetRepeating(context.Context, *SetRepeatingRequest) (*SetRepeatingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetRepeating not implemented")
+}
+func (UnimplementedAlarmManagerServiceServer) SetTime(context.Context, *SetTimeRequest) (*SetTimeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetTime not implemented")
+}
+func (UnimplementedAlarmManagerServiceServer) SetTimeZone(context.Context, *SetTimeZoneRequest) (*SetTimeZoneResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetTimeZone not implemented")
+}
+func (UnimplementedAlarmManagerServiceServer) SetWindow4(context.Context, *SetWindow4Request) (*SetWindow4Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetWindow4 not implemented")
+}
+func (UnimplementedAlarmManagerServiceServer) SetWindow6_1(context.Context, *SetWindow6_1Request) (*SetWindow6_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetWindow6_1 not implemented")
+}
+func (UnimplementedAlarmManagerServiceServer) mustEmbedUnimplementedAlarmManagerServiceServer() {}
+func (UnimplementedAlarmManagerServiceServer) testEmbeddedByValue()                             {}
 
-// UnsafeManagerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ManagerServiceServer will
+// UnsafeAlarmManagerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AlarmManagerServiceServer will
 // result in compilation errors.
-type UnsafeManagerServiceServer interface {
-	mustEmbedUnimplementedManagerServiceServer()
+type UnsafeAlarmManagerServiceServer interface {
+	mustEmbedUnimplementedAlarmManagerServiceServer()
 }
 
-func RegisterManagerServiceServer(s grpc.ServiceRegistrar, srv ManagerServiceServer) {
-	// If the following call panics, it indicates UnimplementedManagerServiceServer was
+func RegisterAlarmManagerServiceServer(s grpc.ServiceRegistrar, srv AlarmManagerServiceServer) {
+	// If the following call panics, it indicates UnimplementedAlarmManagerServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ManagerService_ServiceDesc, srv)
+	s.RegisterService(&AlarmManagerService_ServiceDesc, srv)
 }
 
-func _ManagerService_SetRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetRawRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).SetRaw(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_SetRaw_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).SetRaw(ctx, req.(*SetRawRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_SetExactRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetExactRawRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).SetExactRaw(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_SetExactRaw_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).SetExactRaw(ctx, req.(*SetExactRawRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_SetExactAndAllowWhileIdleRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetExactAndAllowWhileIdleRawRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).SetExactAndAllowWhileIdleRaw(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_SetExactAndAllowWhileIdleRaw_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).SetExactAndAllowWhileIdleRaw(ctx, req.(*SetExactAndAllowWhileIdleRawRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_SetRepeatingRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetRepeatingRawRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).SetRepeatingRaw(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_SetRepeatingRaw_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).SetRepeatingRaw(ctx, req.(*SetRepeatingRawRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_SetWindowRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetWindowRawRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).SetWindowRaw(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_SetWindowRaw_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).SetWindowRaw(ctx, req.(*SetWindowRawRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_SetAlarmClockRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetAlarmClockRawRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).SetAlarmClockRaw(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_SetAlarmClockRaw_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).SetAlarmClockRaw(ctx, req.(*SetAlarmClockRawRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_Cancel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CancelRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).Cancel(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_Cancel_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).Cancel(ctx, req.(*CancelRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_GetNextAlarmClockRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetNextAlarmClockRawRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ManagerServiceServer).GetNextAlarmClockRaw(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ManagerService_GetNextAlarmClockRaw_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).GetNextAlarmClockRaw(ctx, req.(*GetNextAlarmClockRawRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ManagerService_CanScheduleExactAlarms_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AlarmManagerService_CanScheduleExactAlarms_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CanScheduleExactAlarmsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).CanScheduleExactAlarms(ctx, in)
+		return srv.(AlarmManagerServiceServer).CanScheduleExactAlarms(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_CanScheduleExactAlarms_FullMethodName,
+		FullMethod: AlarmManagerService_CanScheduleExactAlarms_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).CanScheduleExactAlarms(ctx, req.(*CanScheduleExactAlarmsRequest))
+		return srv.(AlarmManagerServiceServer).CanScheduleExactAlarms(ctx, req.(*CanScheduleExactAlarmsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ManagerService_ServiceDesc is the grpc.ServiceDesc for ManagerService service.
+func _AlarmManagerService_Cancel1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Cancel1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerServiceServer).Cancel1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerService_Cancel1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerServiceServer).Cancel1(ctx, req.(*Cancel1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerService_Cancel1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Cancel1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerServiceServer).Cancel1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerService_Cancel1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerServiceServer).Cancel1_1(ctx, req.(*Cancel1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerService_CancelAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelAllRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerServiceServer).CancelAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerService_CancelAll_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerServiceServer).CancelAll(ctx, req.(*CancelAllRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerService_GetNextAlarmClock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNextAlarmClockRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerServiceServer).GetNextAlarmClock(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerService_GetNextAlarmClock_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerServiceServer).GetNextAlarmClock(ctx, req.(*GetNextAlarmClockRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerService_Set_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerServiceServer).Set(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerService_Set_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerServiceServer).Set(ctx, req.(*SetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerService_SetAlarmClock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAlarmClockRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerServiceServer).SetAlarmClock(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerService_SetAlarmClock_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerServiceServer).SetAlarmClock(ctx, req.(*SetAlarmClockRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerService_SetAndAllowWhileIdle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAndAllowWhileIdleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerServiceServer).SetAndAllowWhileIdle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerService_SetAndAllowWhileIdle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerServiceServer).SetAndAllowWhileIdle(ctx, req.(*SetAndAllowWhileIdleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerService_SetExact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetExactRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerServiceServer).SetExact(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerService_SetExact_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerServiceServer).SetExact(ctx, req.(*SetExactRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerService_SetExactAndAllowWhileIdle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetExactAndAllowWhileIdleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerServiceServer).SetExactAndAllowWhileIdle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerService_SetExactAndAllowWhileIdle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerServiceServer).SetExactAndAllowWhileIdle(ctx, req.(*SetExactAndAllowWhileIdleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerService_SetInexactRepeating_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetInexactRepeatingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerServiceServer).SetInexactRepeating(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerService_SetInexactRepeating_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerServiceServer).SetInexactRepeating(ctx, req.(*SetInexactRepeatingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerService_SetRepeating_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetRepeatingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerServiceServer).SetRepeating(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerService_SetRepeating_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerServiceServer).SetRepeating(ctx, req.(*SetRepeatingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerService_SetTime_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTimeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerServiceServer).SetTime(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerService_SetTime_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerServiceServer).SetTime(ctx, req.(*SetTimeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerService_SetTimeZone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTimeZoneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerServiceServer).SetTimeZone(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerService_SetTimeZone_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerServiceServer).SetTimeZone(ctx, req.(*SetTimeZoneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerService_SetWindow4_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetWindow4Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerServiceServer).SetWindow4(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerService_SetWindow4_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerServiceServer).SetWindow4(ctx, req.(*SetWindow4Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerService_SetWindow6_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetWindow6_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerServiceServer).SetWindow6_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerService_SetWindow6_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerServiceServer).SetWindow6_1(ctx, req.(*SetWindow6_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// AlarmManagerService_ServiceDesc is the grpc.ServiceDesc for AlarmManagerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ManagerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "alarm.ManagerService",
-	HandlerType: (*ManagerServiceServer)(nil),
+var AlarmManagerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "alarm.AlarmManagerService",
+	HandlerType: (*AlarmManagerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SetRaw",
-			Handler:    _ManagerService_SetRaw_Handler,
-		},
-		{
-			MethodName: "SetExactRaw",
-			Handler:    _ManagerService_SetExactRaw_Handler,
-		},
-		{
-			MethodName: "SetExactAndAllowWhileIdleRaw",
-			Handler:    _ManagerService_SetExactAndAllowWhileIdleRaw_Handler,
-		},
-		{
-			MethodName: "SetRepeatingRaw",
-			Handler:    _ManagerService_SetRepeatingRaw_Handler,
-		},
-		{
-			MethodName: "SetWindowRaw",
-			Handler:    _ManagerService_SetWindowRaw_Handler,
-		},
-		{
-			MethodName: "SetAlarmClockRaw",
-			Handler:    _ManagerService_SetAlarmClockRaw_Handler,
-		},
-		{
-			MethodName: "Cancel",
-			Handler:    _ManagerService_Cancel_Handler,
-		},
-		{
-			MethodName: "GetNextAlarmClockRaw",
-			Handler:    _ManagerService_GetNextAlarmClockRaw_Handler,
-		},
-		{
 			MethodName: "CanScheduleExactAlarms",
-			Handler:    _ManagerService_CanScheduleExactAlarms_Handler,
+			Handler:    _AlarmManagerService_CanScheduleExactAlarms_Handler,
+		},
+		{
+			MethodName: "Cancel1",
+			Handler:    _AlarmManagerService_Cancel1_Handler,
+		},
+		{
+			MethodName: "Cancel1_1",
+			Handler:    _AlarmManagerService_Cancel1_1_Handler,
+		},
+		{
+			MethodName: "CancelAll",
+			Handler:    _AlarmManagerService_CancelAll_Handler,
+		},
+		{
+			MethodName: "GetNextAlarmClock",
+			Handler:    _AlarmManagerService_GetNextAlarmClock_Handler,
+		},
+		{
+			MethodName: "Set",
+			Handler:    _AlarmManagerService_Set_Handler,
+		},
+		{
+			MethodName: "SetAlarmClock",
+			Handler:    _AlarmManagerService_SetAlarmClock_Handler,
+		},
+		{
+			MethodName: "SetAndAllowWhileIdle",
+			Handler:    _AlarmManagerService_SetAndAllowWhileIdle_Handler,
+		},
+		{
+			MethodName: "SetExact",
+			Handler:    _AlarmManagerService_SetExact_Handler,
+		},
+		{
+			MethodName: "SetExactAndAllowWhileIdle",
+			Handler:    _AlarmManagerService_SetExactAndAllowWhileIdle_Handler,
+		},
+		{
+			MethodName: "SetInexactRepeating",
+			Handler:    _AlarmManagerService_SetInexactRepeating_Handler,
+		},
+		{
+			MethodName: "SetRepeating",
+			Handler:    _AlarmManagerService_SetRepeating_Handler,
+		},
+		{
+			MethodName: "SetTime",
+			Handler:    _AlarmManagerService_SetTime_Handler,
+		},
+		{
+			MethodName: "SetTimeZone",
+			Handler:    _AlarmManagerService_SetTimeZone_Handler,
+		},
+		{
+			MethodName: "SetWindow4",
+			Handler:    _AlarmManagerService_SetWindow4_Handler,
+		},
+		{
+			MethodName: "SetWindow6_1",
+			Handler:    _AlarmManagerService_SetWindow6_1_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/alarm/alarm.proto",
+}
+
+const (
+	AlarmManagerAlarmClockInfoService_DescribeContents_FullMethodName = "/alarm.AlarmManagerAlarmClockInfoService/DescribeContents"
+	AlarmManagerAlarmClockInfoService_GetShowIntent_FullMethodName    = "/alarm.AlarmManagerAlarmClockInfoService/GetShowIntent"
+	AlarmManagerAlarmClockInfoService_GetTriggerTime_FullMethodName   = "/alarm.AlarmManagerAlarmClockInfoService/GetTriggerTime"
+	AlarmManagerAlarmClockInfoService_WriteToParcel_FullMethodName    = "/alarm.AlarmManagerAlarmClockInfoService/WriteToParcel"
+)
+
+// AlarmManagerAlarmClockInfoServiceClient is the client API for AlarmManagerAlarmClockInfoService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type AlarmManagerAlarmClockInfoServiceClient interface {
+	DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error)
+	GetShowIntent(ctx context.Context, in *GetShowIntentRequest, opts ...grpc.CallOption) (*GetShowIntentResponse, error)
+	GetTriggerTime(ctx context.Context, in *GetTriggerTimeRequest, opts ...grpc.CallOption) (*GetTriggerTimeResponse, error)
+	WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error)
+}
+
+type alarmManagerAlarmClockInfoServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAlarmManagerAlarmClockInfoServiceClient(cc grpc.ClientConnInterface) AlarmManagerAlarmClockInfoServiceClient {
+	return &alarmManagerAlarmClockInfoServiceClient{cc}
+}
+
+func (c *alarmManagerAlarmClockInfoServiceClient) DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DescribeContentsResponse)
+	err := c.cc.Invoke(ctx, AlarmManagerAlarmClockInfoService_DescribeContents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alarmManagerAlarmClockInfoServiceClient) GetShowIntent(ctx context.Context, in *GetShowIntentRequest, opts ...grpc.CallOption) (*GetShowIntentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetShowIntentResponse)
+	err := c.cc.Invoke(ctx, AlarmManagerAlarmClockInfoService_GetShowIntent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alarmManagerAlarmClockInfoServiceClient) GetTriggerTime(ctx context.Context, in *GetTriggerTimeRequest, opts ...grpc.CallOption) (*GetTriggerTimeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTriggerTimeResponse)
+	err := c.cc.Invoke(ctx, AlarmManagerAlarmClockInfoService_GetTriggerTime_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alarmManagerAlarmClockInfoServiceClient) WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteToParcelResponse)
+	err := c.cc.Invoke(ctx, AlarmManagerAlarmClockInfoService_WriteToParcel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AlarmManagerAlarmClockInfoServiceServer is the server API for AlarmManagerAlarmClockInfoService service.
+// All implementations must embed UnimplementedAlarmManagerAlarmClockInfoServiceServer
+// for forward compatibility.
+type AlarmManagerAlarmClockInfoServiceServer interface {
+	DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error)
+	GetShowIntent(context.Context, *GetShowIntentRequest) (*GetShowIntentResponse, error)
+	GetTriggerTime(context.Context, *GetTriggerTimeRequest) (*GetTriggerTimeResponse, error)
+	WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error)
+	mustEmbedUnimplementedAlarmManagerAlarmClockInfoServiceServer()
+}
+
+// UnimplementedAlarmManagerAlarmClockInfoServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedAlarmManagerAlarmClockInfoServiceServer struct{}
+
+func (UnimplementedAlarmManagerAlarmClockInfoServiceServer) DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DescribeContents not implemented")
+}
+func (UnimplementedAlarmManagerAlarmClockInfoServiceServer) GetShowIntent(context.Context, *GetShowIntentRequest) (*GetShowIntentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetShowIntent not implemented")
+}
+func (UnimplementedAlarmManagerAlarmClockInfoServiceServer) GetTriggerTime(context.Context, *GetTriggerTimeRequest) (*GetTriggerTimeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetTriggerTime not implemented")
+}
+func (UnimplementedAlarmManagerAlarmClockInfoServiceServer) WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteToParcel not implemented")
+}
+func (UnimplementedAlarmManagerAlarmClockInfoServiceServer) mustEmbedUnimplementedAlarmManagerAlarmClockInfoServiceServer() {
+}
+func (UnimplementedAlarmManagerAlarmClockInfoServiceServer) testEmbeddedByValue() {}
+
+// UnsafeAlarmManagerAlarmClockInfoServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AlarmManagerAlarmClockInfoServiceServer will
+// result in compilation errors.
+type UnsafeAlarmManagerAlarmClockInfoServiceServer interface {
+	mustEmbedUnimplementedAlarmManagerAlarmClockInfoServiceServer()
+}
+
+func RegisterAlarmManagerAlarmClockInfoServiceServer(s grpc.ServiceRegistrar, srv AlarmManagerAlarmClockInfoServiceServer) {
+	// If the following call panics, it indicates UnimplementedAlarmManagerAlarmClockInfoServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&AlarmManagerAlarmClockInfoService_ServiceDesc, srv)
+}
+
+func _AlarmManagerAlarmClockInfoService_DescribeContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeContentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerAlarmClockInfoServiceServer).DescribeContents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerAlarmClockInfoService_DescribeContents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerAlarmClockInfoServiceServer).DescribeContents(ctx, req.(*DescribeContentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerAlarmClockInfoService_GetShowIntent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetShowIntentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerAlarmClockInfoServiceServer).GetShowIntent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerAlarmClockInfoService_GetShowIntent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerAlarmClockInfoServiceServer).GetShowIntent(ctx, req.(*GetShowIntentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerAlarmClockInfoService_GetTriggerTime_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTriggerTimeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerAlarmClockInfoServiceServer).GetTriggerTime(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerAlarmClockInfoService_GetTriggerTime_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerAlarmClockInfoServiceServer).GetTriggerTime(ctx, req.(*GetTriggerTimeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AlarmManagerAlarmClockInfoService_WriteToParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteToParcelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlarmManagerAlarmClockInfoServiceServer).WriteToParcel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlarmManagerAlarmClockInfoService_WriteToParcel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlarmManagerAlarmClockInfoServiceServer).WriteToParcel(ctx, req.(*WriteToParcelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// AlarmManagerAlarmClockInfoService_ServiceDesc is the grpc.ServiceDesc for AlarmManagerAlarmClockInfoService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var AlarmManagerAlarmClockInfoService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "alarm.AlarmManagerAlarmClockInfoService",
+	HandlerType: (*AlarmManagerAlarmClockInfoServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "DescribeContents",
+			Handler:    _AlarmManagerAlarmClockInfoService_DescribeContents_Handler,
+		},
+		{
+			MethodName: "GetShowIntent",
+			Handler:    _AlarmManagerAlarmClockInfoService_GetShowIntent_Handler,
+		},
+		{
+			MethodName: "GetTriggerTime",
+			Handler:    _AlarmManagerAlarmClockInfoService_GetTriggerTime_Handler,
+		},
+		{
+			MethodName: "WriteToParcel",
+			Handler:    _AlarmManagerAlarmClockInfoService_WriteToParcel_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -13,20 +13,20 @@ var usbCmd = &cobra.Command{
 	Short: "usb service operations",
 }
 
-var usbManagerCmd = &cobra.Command{
-	Use:   "manager",
-	Short: "ManagerService operations",
+var usbUsbInterfaceCmd = &cobra.Command{
+	Use:   "usb-interface",
+	Short: "UsbInterfaceService operations",
 }
 
-var usbManagerGetDeviceListCmd = &cobra.Command{
-	Use:   "get-device-list",
-	Short: "GetDeviceList RPC",
+var usbUsbInterfaceDescribeContentsCmd = &cobra.Command{
+	Use:   "describe-contents",
+	Short: "DescribeContents RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.GetDeviceListRequest{}
-		resp, err := client.GetDeviceList(ctx, req)
+		client := pb.NewUsbInterfaceServiceClient(grpcConn)
+		req := &pb.DescribeContentsRequest{}
+		resp, err := client.DescribeContents(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -34,18 +34,15 @@ var usbManagerGetDeviceListCmd = &cobra.Command{
 	},
 }
 
-var usbManagerHasPermissionCmd = &cobra.Command{
-	Use:   "has-permission",
-	Short: "HasPermission RPC",
+var usbUsbInterfaceGetAlternateSettingCmd = &cobra.Command{
+	Use:   "get-alternate-setting",
+	Short: "GetAlternateSetting RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.HasPermissionRequest{}
-		if v, err := cmd.Flags().GetInt64("device"); err == nil {
-			req.Device = v
-		}
-		resp, err := client.HasPermission(ctx, req)
+		client := pb.NewUsbInterfaceServiceClient(grpcConn)
+		req := &pb.GetAlternateSettingRequest{}
+		resp, err := client.GetAlternateSetting(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -53,21 +50,18 @@ var usbManagerHasPermissionCmd = &cobra.Command{
 	},
 }
 
-var usbManagerRequestPermissionCmd = &cobra.Command{
-	Use:   "request-permission",
-	Short: "RequestPermission RPC",
+var usbUsbInterfaceGetEndpointCmd = &cobra.Command{
+	Use:   "get-endpoint",
+	Short: "GetEndpoint RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.RequestPermissionRequest{}
-		if v, err := cmd.Flags().GetInt64("device"); err == nil {
-			req.Device = v
+		client := pb.NewUsbInterfaceServiceClient(grpcConn)
+		req := &pb.GetEndpointRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt64("pending-intent"); err == nil {
-			req.PendingIntent = v
-		}
-		resp, err := client.RequestPermission(ctx, req)
+		resp, err := client.GetEndpoint(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -75,18 +69,15 @@ var usbManagerRequestPermissionCmd = &cobra.Command{
 	},
 }
 
-var usbManagerOpenDeviceCmd = &cobra.Command{
-	Use:   "open-device",
-	Short: "OpenDevice RPC",
+var usbUsbInterfaceGetEndpointCountCmd = &cobra.Command{
+	Use:   "get-endpoint-count",
+	Short: "GetEndpointCount RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.OpenDeviceRequest{}
-		if v, err := cmd.Flags().GetInt64("device"); err == nil {
-			req.Device = v
-		}
-		resp, err := client.OpenDevice(ctx, req)
+		client := pb.NewUsbInterfaceServiceClient(grpcConn)
+		req := &pb.GetEndpointCountRequest{}
+		resp, err := client.GetEndpointCount(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -94,26 +85,15 @@ var usbManagerOpenDeviceCmd = &cobra.Command{
 	},
 }
 
-var usbConnectionCmd = &cobra.Command{
-	Use:   "connection",
-	Short: "ConnectionService operations",
-}
-
-var usbConnectionClaimInterfaceCmd = &cobra.Command{
-	Use:   "claim-interface",
-	Short: "ClaimInterface RPC",
+var usbUsbInterfaceGetIdCmd = &cobra.Command{
+	Use:   "get-id",
+	Short: "GetId RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewConnectionServiceClient(grpcConn)
-		req := &pb.ClaimInterfaceRequest{}
-		if v, err := cmd.Flags().GetInt64("iface"); err == nil {
-			req.Iface = v
-		}
-		if v, err := cmd.Flags().GetBool("force"); err == nil {
-			req.Force = v
-		}
-		resp, err := client.ClaimInterface(ctx, req)
+		client := pb.NewUsbInterfaceServiceClient(grpcConn)
+		req := &pb.GetIdRequest{}
+		resp, err := client.GetId(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -121,18 +101,15 @@ var usbConnectionClaimInterfaceCmd = &cobra.Command{
 	},
 }
 
-var usbConnectionReleaseInterfaceCmd = &cobra.Command{
-	Use:   "release-interface",
-	Short: "ReleaseInterface RPC",
+var usbUsbInterfaceGetInterfaceClassCmd = &cobra.Command{
+	Use:   "get-interface-class",
+	Short: "GetInterfaceClass RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewConnectionServiceClient(grpcConn)
-		req := &pb.ReleaseInterfaceRequest{}
-		if v, err := cmd.Flags().GetInt64("iface"); err == nil {
-			req.Iface = v
-		}
-		resp, err := client.ReleaseInterface(ctx, req)
+		client := pb.NewUsbInterfaceServiceClient(grpcConn)
+		req := &pb.GetInterfaceClassRequest{}
+		resp, err := client.GetInterfaceClass(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -140,27 +117,15 @@ var usbConnectionReleaseInterfaceCmd = &cobra.Command{
 	},
 }
 
-var usbConnectionBulkTransferRawCmd = &cobra.Command{
-	Use:   "bulk-transfer-raw",
-	Short: "BulkTransferRaw RPC",
+var usbUsbInterfaceGetInterfaceProtocolCmd = &cobra.Command{
+	Use:   "get-interface-protocol",
+	Short: "GetInterfaceProtocol RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewConnectionServiceClient(grpcConn)
-		req := &pb.BulkTransferRawRequest{}
-		if v, err := cmd.Flags().GetInt64("endpoint"); err == nil {
-			req.Endpoint = v
-		}
-		if v, err := cmd.Flags().GetInt64("buffer"); err == nil {
-			req.Buffer = v
-		}
-		if v, err := cmd.Flags().GetInt32("length"); err == nil {
-			req.Length = v
-		}
-		if v, err := cmd.Flags().GetInt32("timeout"); err == nil {
-			req.Timeout = v
-		}
-		resp, err := client.BulkTransferRaw(ctx, req)
+		client := pb.NewUsbInterfaceServiceClient(grpcConn)
+		req := &pb.GetInterfaceProtocolRequest{}
+		resp, err := client.GetInterfaceProtocol(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -168,36 +133,15 @@ var usbConnectionBulkTransferRawCmd = &cobra.Command{
 	},
 }
 
-var usbConnectionControlTransferRawCmd = &cobra.Command{
-	Use:   "control-transfer-raw",
-	Short: "ControlTransferRaw RPC",
+var usbUsbInterfaceGetInterfaceSubclassCmd = &cobra.Command{
+	Use:   "get-interface-subclass",
+	Short: "GetInterfaceSubclass RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewConnectionServiceClient(grpcConn)
-		req := &pb.ControlTransferRawRequest{}
-		if v, err := cmd.Flags().GetInt32("request-type"); err == nil {
-			req.RequestType = v
-		}
-		if v, err := cmd.Flags().GetInt32("request"); err == nil {
-			req.Request = v
-		}
-		if v, err := cmd.Flags().GetInt32("value"); err == nil {
-			req.Value = v
-		}
-		if v, err := cmd.Flags().GetInt32("index"); err == nil {
-			req.Index = v
-		}
-		if v, err := cmd.Flags().GetInt64("buffer"); err == nil {
-			req.Buffer = v
-		}
-		if v, err := cmd.Flags().GetInt32("length"); err == nil {
-			req.Length = v
-		}
-		if v, err := cmd.Flags().GetInt32("timeout"); err == nil {
-			req.Timeout = v
-		}
-		resp, err := client.ControlTransferRaw(ctx, req)
+		client := pb.NewUsbInterfaceServiceClient(grpcConn)
+		req := &pb.GetInterfaceSubclassRequest{}
+		resp, err := client.GetInterfaceSubclass(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -205,15 +149,15 @@ var usbConnectionControlTransferRawCmd = &cobra.Command{
 	},
 }
 
-var usbConnectionGetFileDescriptorCmd = &cobra.Command{
-	Use:   "get-file-descriptor",
-	Short: "GetFileDescriptor RPC",
+var usbUsbInterfaceGetNameCmd = &cobra.Command{
+	Use:   "get-name",
+	Short: "GetName RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewConnectionServiceClient(grpcConn)
-		req := &pb.GetFileDescriptorRequest{}
-		resp, err := client.GetFileDescriptor(ctx, req)
+		client := pb.NewUsbInterfaceServiceClient(grpcConn)
+		req := &pb.GetNameRequest{}
+		resp, err := client.GetName(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -221,15 +165,37 @@ var usbConnectionGetFileDescriptorCmd = &cobra.Command{
 	},
 }
 
-var usbConnectionGetRawDescriptorsCmd = &cobra.Command{
-	Use:   "get-raw-descriptors",
-	Short: "GetRawDescriptors RPC",
+var usbUsbInterfaceToStringCmd = &cobra.Command{
+	Use:   "to-string",
+	Short: "ToString RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewConnectionServiceClient(grpcConn)
-		req := &pb.GetRawDescriptorsRequest{}
-		resp, err := client.GetRawDescriptors(ctx, req)
+		client := pb.NewUsbInterfaceServiceClient(grpcConn)
+		req := &pb.ToStringRequest{}
+		resp, err := client.ToString(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var usbUsbInterfaceWriteToParcelCmd = &cobra.Command{
+	Use:   "write-to-parcel",
+	Short: "WriteToParcel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewUsbInterfaceServiceClient(grpcConn)
+		req := &pb.WriteToParcelRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.WriteToParcel(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -238,35 +204,20 @@ var usbConnectionGetRawDescriptorsCmd = &cobra.Command{
 }
 
 func init() {
-	usbManagerCmd.AddCommand(usbManagerGetDeviceListCmd)
-	usbManagerHasPermissionCmd.Flags().Int64("device", 0, "device (int64)")
-	usbManagerCmd.AddCommand(usbManagerHasPermissionCmd)
-	usbManagerRequestPermissionCmd.Flags().Int64("device", 0, "device (int64)")
-	usbManagerRequestPermissionCmd.Flags().Int64("pending-intent", 0, "pending-intent (int64)")
-	usbManagerCmd.AddCommand(usbManagerRequestPermissionCmd)
-	usbManagerOpenDeviceCmd.Flags().Int64("device", 0, "device (int64)")
-	usbManagerCmd.AddCommand(usbManagerOpenDeviceCmd)
-	usbCmd.AddCommand(usbManagerCmd)
-	usbConnectionClaimInterfaceCmd.Flags().Int64("iface", 0, "iface (int64)")
-	usbConnectionClaimInterfaceCmd.Flags().Bool("force", false, "force (bool)")
-	usbConnectionCmd.AddCommand(usbConnectionClaimInterfaceCmd)
-	usbConnectionReleaseInterfaceCmd.Flags().Int64("iface", 0, "iface (int64)")
-	usbConnectionCmd.AddCommand(usbConnectionReleaseInterfaceCmd)
-	usbConnectionBulkTransferRawCmd.Flags().Int64("endpoint", 0, "endpoint (int64)")
-	usbConnectionBulkTransferRawCmd.Flags().Int64("buffer", 0, "buffer (int64)")
-	usbConnectionBulkTransferRawCmd.Flags().Int32("length", 0, "length (int32)")
-	usbConnectionBulkTransferRawCmd.Flags().Int32("timeout", 0, "timeout (int32)")
-	usbConnectionCmd.AddCommand(usbConnectionBulkTransferRawCmd)
-	usbConnectionControlTransferRawCmd.Flags().Int32("request-type", 0, "request-type (int32)")
-	usbConnectionControlTransferRawCmd.Flags().Int32("request", 0, "request (int32)")
-	usbConnectionControlTransferRawCmd.Flags().Int32("value", 0, "value (int32)")
-	usbConnectionControlTransferRawCmd.Flags().Int32("index", 0, "index (int32)")
-	usbConnectionControlTransferRawCmd.Flags().Int64("buffer", 0, "buffer (int64)")
-	usbConnectionControlTransferRawCmd.Flags().Int32("length", 0, "length (int32)")
-	usbConnectionControlTransferRawCmd.Flags().Int32("timeout", 0, "timeout (int32)")
-	usbConnectionCmd.AddCommand(usbConnectionControlTransferRawCmd)
-	usbConnectionCmd.AddCommand(usbConnectionGetFileDescriptorCmd)
-	usbConnectionCmd.AddCommand(usbConnectionGetRawDescriptorsCmd)
-	usbCmd.AddCommand(usbConnectionCmd)
+	usbUsbInterfaceCmd.AddCommand(usbUsbInterfaceDescribeContentsCmd)
+	usbUsbInterfaceCmd.AddCommand(usbUsbInterfaceGetAlternateSettingCmd)
+	usbUsbInterfaceGetEndpointCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	usbUsbInterfaceCmd.AddCommand(usbUsbInterfaceGetEndpointCmd)
+	usbUsbInterfaceCmd.AddCommand(usbUsbInterfaceGetEndpointCountCmd)
+	usbUsbInterfaceCmd.AddCommand(usbUsbInterfaceGetIdCmd)
+	usbUsbInterfaceCmd.AddCommand(usbUsbInterfaceGetInterfaceClassCmd)
+	usbUsbInterfaceCmd.AddCommand(usbUsbInterfaceGetInterfaceProtocolCmd)
+	usbUsbInterfaceCmd.AddCommand(usbUsbInterfaceGetInterfaceSubclassCmd)
+	usbUsbInterfaceCmd.AddCommand(usbUsbInterfaceGetNameCmd)
+	usbUsbInterfaceCmd.AddCommand(usbUsbInterfaceToStringCmd)
+	usbUsbInterfaceWriteToParcelCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	usbUsbInterfaceWriteToParcelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	usbUsbInterfaceCmd.AddCommand(usbUsbInterfaceWriteToParcelCmd)
+	usbCmd.AddCommand(usbUsbInterfaceCmd)
 	rootCmd.AddCommand(usbCmd)
 }

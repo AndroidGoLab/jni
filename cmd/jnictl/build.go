@@ -13,20 +13,20 @@ var buildCmd = &cobra.Command{
 	Short: "build service operations",
 }
 
-var buildBuildInfoCmd = &cobra.Command{
-	Use:   "build-info",
-	Short: "BuildInfoService operations",
+var buildBuildCmd = &cobra.Command{
+	Use:   "build",
+	Short: "BuildService operations",
 }
 
-var buildBuildInfoGetManufacturerCmd = &cobra.Command{
-	Use:   "get-manufacturer",
-	Short: "GetManufacturer RPC",
+var buildBuildGetFingerprintedPartitionsCmd = &cobra.Command{
+	Use:   "get-fingerprinted-partitions",
+	Short: "GetFingerprintedPartitions RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBuildInfoServiceClient(grpcConn)
-		req := &pb.GetManufacturerRequest{}
-		resp, err := client.GetManufacturer(ctx, req)
+		client := pb.NewBuildServiceClient(grpcConn)
+		req := &pb.GetFingerprintedPartitionsRequest{}
+		resp, err := client.GetFingerprintedPartitions(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -34,15 +34,18 @@ var buildBuildInfoGetManufacturerCmd = &cobra.Command{
 	},
 }
 
-var buildBuildInfoGetModelCmd = &cobra.Command{
-	Use:   "get-model",
-	Short: "GetModel RPC",
+var buildBuildGetMajorSdkVersionCmd = &cobra.Command{
+	Use:   "get-major-sdk-version",
+	Short: "GetMajorSdkVersion RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBuildInfoServiceClient(grpcConn)
-		req := &pb.GetModelRequest{}
-		resp, err := client.GetModel(ctx, req)
+		client := pb.NewBuildServiceClient(grpcConn)
+		req := &pb.GetMajorSdkVersionRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetMajorSdkVersion(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -50,15 +53,18 @@ var buildBuildInfoGetModelCmd = &cobra.Command{
 	},
 }
 
-var buildBuildInfoGetBrandCmd = &cobra.Command{
-	Use:   "get-brand",
-	Short: "GetBrand RPC",
+var buildBuildGetMinorSdkVersionCmd = &cobra.Command{
+	Use:   "get-minor-sdk-version",
+	Short: "GetMinorSdkVersion RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBuildInfoServiceClient(grpcConn)
-		req := &pb.GetBrandRequest{}
-		resp, err := client.GetBrand(ctx, req)
+		client := pb.NewBuildServiceClient(grpcConn)
+		req := &pb.GetMinorSdkVersionRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetMinorSdkVersion(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -66,15 +72,15 @@ var buildBuildInfoGetBrandCmd = &cobra.Command{
 	},
 }
 
-var buildBuildInfoGetDeviceCmd = &cobra.Command{
-	Use:   "get-device",
-	Short: "GetDevice RPC",
+var buildBuildGetRadioVersionCmd = &cobra.Command{
+	Use:   "get-radio-version",
+	Short: "GetRadioVersion RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBuildInfoServiceClient(grpcConn)
-		req := &pb.GetDeviceRequest{}
-		resp, err := client.GetDevice(ctx, req)
+		client := pb.NewBuildServiceClient(grpcConn)
+		req := &pb.GetRadioVersionRequest{}
+		resp, err := client.GetRadioVersion(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -82,100 +88,15 @@ var buildBuildInfoGetDeviceCmd = &cobra.Command{
 	},
 }
 
-var buildBuildInfoGetHardwareCmd = &cobra.Command{
-	Use:   "get-hardware",
-	Short: "GetHardware RPC",
+var buildBuildGetSerialCmd = &cobra.Command{
+	Use:   "get-serial",
+	Short: "GetSerial RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBuildInfoServiceClient(grpcConn)
-		req := &pb.GetHardwareRequest{}
-		resp, err := client.GetHardware(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var buildBuildInfoGetProductCmd = &cobra.Command{
-	Use:   "get-product",
-	Short: "GetProduct RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBuildInfoServiceClient(grpcConn)
-		req := &pb.GetProductRequest{}
-		resp, err := client.GetProduct(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var buildBuildInfoGetFingerprintCmd = &cobra.Command{
-	Use:   "get-fingerprint",
-	Short: "GetFingerprint RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBuildInfoServiceClient(grpcConn)
-		req := &pb.GetFingerprintRequest{}
-		resp, err := client.GetFingerprint(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var buildBuildInfoGetIDCmd = &cobra.Command{
-	Use:   "get-id",
-	Short: "GetID RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewBuildInfoServiceClient(grpcConn)
-		req := &pb.GetIDRequest{}
-		resp, err := client.GetID(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var buildVersionInfoCmd = &cobra.Command{
-	Use:   "version-info",
-	Short: "VersionInfoService operations",
-}
-
-var buildVersionInfoGetSDKIntCmd = &cobra.Command{
-	Use:   "get-sdk-int",
-	Short: "GetSDKInt RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewVersionInfoServiceClient(grpcConn)
-		req := &pb.GetSDKIntRequest{}
-		resp, err := client.GetSDKInt(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var buildVersionInfoGetReleaseCmd = &cobra.Command{
-	Use:   "get-release",
-	Short: "GetRelease RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewVersionInfoServiceClient(grpcConn)
-		req := &pb.GetReleaseRequest{}
-		resp, err := client.GetRelease(ctx, req)
+		client := pb.NewBuildServiceClient(grpcConn)
+		req := &pb.GetSerialRequest{}
+		resp, err := client.GetSerial(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -184,17 +105,13 @@ var buildVersionInfoGetReleaseCmd = &cobra.Command{
 }
 
 func init() {
-	buildBuildInfoCmd.AddCommand(buildBuildInfoGetManufacturerCmd)
-	buildBuildInfoCmd.AddCommand(buildBuildInfoGetModelCmd)
-	buildBuildInfoCmd.AddCommand(buildBuildInfoGetBrandCmd)
-	buildBuildInfoCmd.AddCommand(buildBuildInfoGetDeviceCmd)
-	buildBuildInfoCmd.AddCommand(buildBuildInfoGetHardwareCmd)
-	buildBuildInfoCmd.AddCommand(buildBuildInfoGetProductCmd)
-	buildBuildInfoCmd.AddCommand(buildBuildInfoGetFingerprintCmd)
-	buildBuildInfoCmd.AddCommand(buildBuildInfoGetIDCmd)
-	buildCmd.AddCommand(buildBuildInfoCmd)
-	buildVersionInfoCmd.AddCommand(buildVersionInfoGetSDKIntCmd)
-	buildVersionInfoCmd.AddCommand(buildVersionInfoGetReleaseCmd)
-	buildCmd.AddCommand(buildVersionInfoCmd)
+	buildBuildCmd.AddCommand(buildBuildGetFingerprintedPartitionsCmd)
+	buildBuildGetMajorSdkVersionCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	buildBuildCmd.AddCommand(buildBuildGetMajorSdkVersionCmd)
+	buildBuildGetMinorSdkVersionCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	buildBuildCmd.AddCommand(buildBuildGetMinorSdkVersionCmd)
+	buildBuildCmd.AddCommand(buildBuildGetRadioVersionCmd)
+	buildBuildCmd.AddCommand(buildBuildGetSerialCmd)
+	buildCmd.AddCommand(buildBuildCmd)
 	rootCmd.AddCommand(buildCmd)
 }

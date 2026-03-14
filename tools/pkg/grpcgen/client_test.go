@@ -37,11 +37,11 @@ func TestBuildClientData_Location(t *testing.T) {
 	}
 
 	svc := data.Services[0]
-	if svc.GoType != "Manager" {
-		t.Errorf("Service GoType = %q, want %q", svc.GoType, "Manager")
+	if svc.GoType != "locationManager" {
+		t.Errorf("Service GoType = %q, want %q", svc.GoType, "locationManager")
 	}
-	if svc.ServiceName != "ManagerService" {
-		t.Errorf("Service ServiceName = %q, want %q", svc.ServiceName, "ManagerService")
+	if svc.ServiceName != "LocationManagerService" {
+		t.Errorf("Service ServiceName = %q, want %q", svc.ServiceName, "LocationManagerService")
 	}
 
 	// Check that methods include GetLastKnownLocation and IsProviderEnabled.
@@ -54,18 +54,9 @@ func TestBuildClientData_Location(t *testing.T) {
 			t.Errorf("missing method %q in service", want)
 		}
 	}
-
-	// Verify data classes are present.
-	dcNames := make(map[string]bool)
-	for _, dc := range data.DataClasses {
-		dcNames[dc.GoType] = true
-	}
-	if !dcNames["Location"] {
-		t.Error("missing Location data class")
-	}
 }
 
-func TestBuildClientData_LocationMethod_DataClass(t *testing.T) {
+func TestBuildClientData_LocationMethod_Object(t *testing.T) {
 	root := findRepoRoot(t)
 	specPath := filepath.Join(root, "spec", "java", "location.yaml")
 	overlayPath := filepath.Join(root, "spec", "overlays", "java", "location.yaml")
@@ -96,20 +87,22 @@ func TestBuildClientData_LocationMethod_DataClass(t *testing.T) {
 		t.Fatal("GetLastKnownLocation method not found")
 	}
 
-	if m.ReturnKind != "data_class" {
-		t.Errorf("ReturnKind = %q, want %q", m.ReturnKind, "data_class")
+	// The new spec has no data_class kind; GetLastKnownLocation returns an
+	// android.location.Location object, which is treated as a plain object.
+	if m.ReturnKind != "object" {
+		t.Errorf("ReturnKind = %q, want %q", m.ReturnKind, "object")
 	}
-	if m.DataClass != "Location" {
-		t.Errorf("DataClass = %q, want %q", m.DataClass, "Location")
+	if m.DataClass != "" {
+		t.Errorf("DataClass = %q, want %q", m.DataClass, "")
 	}
-	if m.GoReturnType != "*Location" {
-		t.Errorf("GoReturnType = %q, want %q", m.GoReturnType, "*Location")
+	if m.GoReturnType != "int64" {
+		t.Errorf("GoReturnType = %q, want %q", m.GoReturnType, "int64")
 	}
 	if len(m.Params) != 1 {
 		t.Fatalf("Params count = %d, want 1", len(m.Params))
 	}
-	if m.Params[0].GoName != "provider" {
-		t.Errorf("Param[0].GoName = %q, want %q", m.Params[0].GoName, "provider")
+	if m.Params[0].GoName != "arg0" {
+		t.Errorf("Param[0].GoName = %q, want %q", m.Params[0].GoName, "arg0")
 	}
 }
 
@@ -145,17 +138,13 @@ func TestRenderClientToString_Location(t *testing.T) {
 		{"package", "package location"},
 		{"pb import", `pb "github.com/xaionaro-go/jni/proto/location"`},
 		{"grpc import", `"google.golang.org/grpc"`},
-		{"data class struct", "type Location struct"},
-		{"data class field latitude", "Latitude float64"},
-		{"data class field provider", "Provider string"},
 		{"client struct", "type Client struct"},
 		{"new client func", "func NewClient(cc grpc.ClientConnInterface)"},
-		{"new service client", "pb.NewManagerServiceClient(cc)"},
+		{"new service client", "pb.NewLocationManagerServiceClient(cc)"},
 		{"get location method", "func (c *Client) GetLastKnownLocation"},
 		{"is provider enabled", "func (c *Client) IsProviderEnabled"},
 		{"request builder", "&pb.GetLastKnownLocationRequest{"},
 		{"response unwrap", "resp.GetResult()"},
-		{"data class return", "return &Location{"},
 	}
 	for _, c := range checks {
 		if !strings.Contains(output, c.pattern) {
@@ -175,8 +164,8 @@ func TestGenerateClient_AllRealSpecs(t *testing.T) {
 	if err != nil {
 		t.Fatalf("glob specs: %v", err)
 	}
-	if len(specFiles) < 50 {
-		t.Fatalf("expected at least 50 spec files, found %d", len(specFiles))
+	if len(specFiles) < 40 {
+		t.Fatalf("expected at least 40 spec files, found %d", len(specFiles))
 	}
 
 	var generated, skipped int

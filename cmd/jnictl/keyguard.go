@@ -3,12 +3,9 @@
 package main
 
 import (
-	"fmt"
-	"io"
 
 	"github.com/spf13/cobra"
 	pb "github.com/xaionaro-go/jni/proto/keyguard"
-	"google.golang.org/protobuf/encoding/protojson"
 )
 
 var keyguardCmd = &cobra.Command{
@@ -16,20 +13,26 @@ var keyguardCmd = &cobra.Command{
 	Short: "keyguard service operations",
 }
 
-var keyguardManagerCmd = &cobra.Command{
-	Use:   "manager",
-	Short: "ManagerService operations",
+var keyguardKeyguardManagerCmd = &cobra.Command{
+	Use:   "keyguard-manager",
+	Short: "KeyguardManagerService operations",
 }
 
-var keyguardManagerIsKeyguardLockedCmd = &cobra.Command{
-	Use:   "is-keyguard-locked",
-	Short: "IsKeyguardLocked RPC",
+var keyguardKeyguardManagerAddKeyguardLockedStateListenerCmd = &cobra.Command{
+	Use:   "add-keyguard-locked-state-listener",
+	Short: "AddKeyguardLockedStateListener RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.IsKeyguardLockedRequest{}
-		resp, err := client.IsKeyguardLocked(ctx, req)
+		client := pb.NewKeyguardManagerServiceClient(grpcConn)
+		req := &pb.AddKeyguardLockedStateListenerRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.AddKeyguardLockedStateListener(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -37,15 +40,21 @@ var keyguardManagerIsKeyguardLockedCmd = &cobra.Command{
 	},
 }
 
-var keyguardManagerIsKeyguardSecureCmd = &cobra.Command{
-	Use:   "is-keyguard-secure",
-	Short: "IsKeyguardSecure RPC",
+var keyguardKeyguardManagerCreateConfirmDeviceCredentialIntentCmd = &cobra.Command{
+	Use:   "create-confirm-device-credential-intent",
+	Short: "CreateConfirmDeviceCredentialIntent RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.IsKeyguardSecureRequest{}
-		resp, err := client.IsKeyguardSecure(ctx, req)
+		client := pb.NewKeyguardManagerServiceClient(grpcConn)
+		req := &pb.CreateConfirmDeviceCredentialIntentRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.CreateConfirmDeviceCredentialIntent(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -53,13 +62,48 @@ var keyguardManagerIsKeyguardSecureCmd = &cobra.Command{
 	},
 }
 
-var keyguardManagerIsDeviceLockedCmd = &cobra.Command{
+var keyguardKeyguardManagerExitKeyguardSecurelyCmd = &cobra.Command{
+	Use:   "exit-keyguard-securely",
+	Short: "ExitKeyguardSecurely RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewKeyguardManagerServiceClient(grpcConn)
+		req := &pb.ExitKeyguardSecurelyRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.ExitKeyguardSecurely(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var keyguardKeyguardManagerInKeyguardRestrictedInputModeCmd = &cobra.Command{
+	Use:   "in-keyguard-restricted-input-mode",
+	Short: "InKeyguardRestrictedInputMode RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewKeyguardManagerServiceClient(grpcConn)
+		req := &pb.InKeyguardRestrictedInputModeRequest{}
+		resp, err := client.InKeyguardRestrictedInputMode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var keyguardKeyguardManagerIsDeviceLockedCmd = &cobra.Command{
 	Use:   "is-device-locked",
 	Short: "IsDeviceLocked RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
+		client := pb.NewKeyguardManagerServiceClient(grpcConn)
 		req := &pb.IsDeviceLockedRequest{}
 		resp, err := client.IsDeviceLocked(ctx, req)
 		if err != nil {
@@ -69,13 +113,13 @@ var keyguardManagerIsDeviceLockedCmd = &cobra.Command{
 	},
 }
 
-var keyguardManagerIsDeviceSecureCmd = &cobra.Command{
+var keyguardKeyguardManagerIsDeviceSecureCmd = &cobra.Command{
 	Use:   "is-device-secure",
 	Short: "IsDeviceSecure RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
+		client := pb.NewKeyguardManagerServiceClient(grpcConn)
 		req := &pb.IsDeviceSecureRequest{}
 		resp, err := client.IsDeviceSecure(ctx, req)
 		if err != nil {
@@ -85,21 +129,15 @@ var keyguardManagerIsDeviceSecureCmd = &cobra.Command{
 	},
 }
 
-var keyguardManagerRequestDismissKeyguardRawCmd = &cobra.Command{
-	Use:   "request-dismiss-keyguard-raw",
-	Short: "RequestDismissKeyguardRaw RPC",
+var keyguardKeyguardManagerIsKeyguardLockedCmd = &cobra.Command{
+	Use:   "is-keyguard-locked",
+	Short: "IsKeyguardLocked RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.RequestDismissKeyguardRawRequest{}
-		if v, err := cmd.Flags().GetInt64("activity"); err == nil {
-			req.Activity = v
-		}
-		if v, err := cmd.Flags().GetInt64("callback"); err == nil {
-			req.Callback = v
-		}
-		resp, err := client.RequestDismissKeyguardRaw(ctx, req)
+		client := pb.NewKeyguardManagerServiceClient(grpcConn)
+		req := &pb.IsKeyguardLockedRequest{}
+		resp, err := client.IsKeyguardLocked(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -107,21 +145,15 @@ var keyguardManagerRequestDismissKeyguardRawCmd = &cobra.Command{
 	},
 }
 
-var keyguardManagerCreateConfirmDeviceCredentialIntentRawCmd = &cobra.Command{
-	Use:   "create-confirm-device-credential-intent-raw",
-	Short: "CreateConfirmDeviceCredentialIntentRaw RPC",
+var keyguardKeyguardManagerIsKeyguardSecureCmd = &cobra.Command{
+	Use:   "is-keyguard-secure",
+	Short: "IsKeyguardSecure RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.CreateConfirmDeviceCredentialIntentRawRequest{}
-		if v, err := cmd.Flags().GetInt64("title"); err == nil {
-			req.Title = v
-		}
-		if v, err := cmd.Flags().GetInt64("description"); err == nil {
-			req.Description = v
-		}
-		resp, err := client.CreateConfirmDeviceCredentialIntentRaw(ctx, req)
+		client := pb.NewKeyguardManagerServiceClient(grpcConn)
+		req := &pb.IsKeyguardSecureRequest{}
+		resp, err := client.IsKeyguardSecure(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -129,91 +161,87 @@ var keyguardManagerCreateConfirmDeviceCredentialIntentRawCmd = &cobra.Command{
 	},
 }
 
-var keyguardKeyguardDismissCallbackCmd = &cobra.Command{
-	Use:   "keyguard-dismiss-callback",
-	Short: "KeyguardDismissCallbackService operations",
-}
-
-var keyguardKeyguardDismissCallbackSubscribeKeyguardDismissCallbackCmd = &cobra.Command{
-	Use:   "subscribe-keyguard-dismiss-callback",
-	Short: "SubscribeKeyguardDismissCallback RPC",
+var keyguardKeyguardManagerNewKeyguardLockCmd = &cobra.Command{
+	Use:   "new-keyguard-lock",
+	Short: "NewKeyguardLock RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewKeyguardDismissCallbackServiceClient(grpcConn)
-		req := &pb.SubscribeKeyguardDismissCallbackRequest{}
-		stream, err := client.SubscribeKeyguardDismissCallback(ctx, req)
+		client := pb.NewKeyguardManagerServiceClient(grpcConn)
+		req := &pb.NewKeyguardLockRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.NewKeyguardLock(ctx, req)
 		if err != nil {
 			return err
 		}
-		opts := protojson.MarshalOptions{Multiline: true, Indent: "  "}
-		for {
-			resp, err := stream.Recv()
-			if err == io.EOF {
-				return nil
-			}
-			if err != nil {
-				return err
-			}
-			data, err := opts.Marshal(resp)
-			if err != nil {
-				return err
-			}
-			fmt.Println(string(data))
-		}
+		return printProtoMessage(resp)
 	},
 }
 
-var keyguardKeyguardLockedStateListenerCmd = &cobra.Command{
-	Use:   "keyguard-locked-state-listener",
-	Short: "KeyguardLockedStateListenerService operations",
-}
-
-var keyguardKeyguardLockedStateListenerSubscribeKeyguardLockedStateListenerCmd = &cobra.Command{
-	Use:   "subscribe-keyguard-locked-state-listener",
-	Short: "SubscribeKeyguardLockedStateListener RPC",
+var keyguardKeyguardManagerRemoveKeyguardLockedStateListenerCmd = &cobra.Command{
+	Use:   "remove-keyguard-locked-state-listener",
+	Short: "RemoveKeyguardLockedStateListener RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewKeyguardLockedStateListenerServiceClient(grpcConn)
-		req := &pb.SubscribeKeyguardLockedStateListenerRequest{}
-		stream, err := client.SubscribeKeyguardLockedStateListener(ctx, req)
+		client := pb.NewKeyguardManagerServiceClient(grpcConn)
+		req := &pb.RemoveKeyguardLockedStateListenerRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RemoveKeyguardLockedStateListener(ctx, req)
 		if err != nil {
 			return err
 		}
-		opts := protojson.MarshalOptions{Multiline: true, Indent: "  "}
-		for {
-			resp, err := stream.Recv()
-			if err == io.EOF {
-				return nil
-			}
-			if err != nil {
-				return err
-			}
-			data, err := opts.Marshal(resp)
-			if err != nil {
-				return err
-			}
-			fmt.Println(string(data))
+		return printProtoMessage(resp)
+	},
+}
+
+var keyguardKeyguardManagerRequestDismissKeyguardCmd = &cobra.Command{
+	Use:   "request-dismiss-keyguard",
+	Short: "RequestDismissKeyguard RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewKeyguardManagerServiceClient(grpcConn)
+		req := &pb.RequestDismissKeyguardRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.RequestDismissKeyguard(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
 	},
 }
 
 func init() {
-	keyguardManagerCmd.AddCommand(keyguardManagerIsKeyguardLockedCmd)
-	keyguardManagerCmd.AddCommand(keyguardManagerIsKeyguardSecureCmd)
-	keyguardManagerCmd.AddCommand(keyguardManagerIsDeviceLockedCmd)
-	keyguardManagerCmd.AddCommand(keyguardManagerIsDeviceSecureCmd)
-	keyguardManagerRequestDismissKeyguardRawCmd.Flags().Int64("activity", 0, "activity (int64)")
-	keyguardManagerRequestDismissKeyguardRawCmd.Flags().Int64("callback", 0, "callback (int64)")
-	keyguardManagerCmd.AddCommand(keyguardManagerRequestDismissKeyguardRawCmd)
-	keyguardManagerCreateConfirmDeviceCredentialIntentRawCmd.Flags().Int64("title", 0, "title (int64)")
-	keyguardManagerCreateConfirmDeviceCredentialIntentRawCmd.Flags().Int64("description", 0, "description (int64)")
-	keyguardManagerCmd.AddCommand(keyguardManagerCreateConfirmDeviceCredentialIntentRawCmd)
-	keyguardCmd.AddCommand(keyguardManagerCmd)
-	keyguardKeyguardDismissCallbackCmd.AddCommand(keyguardKeyguardDismissCallbackSubscribeKeyguardDismissCallbackCmd)
-	keyguardCmd.AddCommand(keyguardKeyguardDismissCallbackCmd)
-	keyguardKeyguardLockedStateListenerCmd.AddCommand(keyguardKeyguardLockedStateListenerSubscribeKeyguardLockedStateListenerCmd)
-	keyguardCmd.AddCommand(keyguardKeyguardLockedStateListenerCmd)
+	keyguardKeyguardManagerAddKeyguardLockedStateListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	keyguardKeyguardManagerAddKeyguardLockedStateListenerCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	keyguardKeyguardManagerCmd.AddCommand(keyguardKeyguardManagerAddKeyguardLockedStateListenerCmd)
+	keyguardKeyguardManagerCreateConfirmDeviceCredentialIntentCmd.Flags().String("arg0", "", "arg0 (string)")
+	keyguardKeyguardManagerCreateConfirmDeviceCredentialIntentCmd.Flags().String("arg1", "", "arg1 (string)")
+	keyguardKeyguardManagerCmd.AddCommand(keyguardKeyguardManagerCreateConfirmDeviceCredentialIntentCmd)
+	keyguardKeyguardManagerExitKeyguardSecurelyCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	keyguardKeyguardManagerCmd.AddCommand(keyguardKeyguardManagerExitKeyguardSecurelyCmd)
+	keyguardKeyguardManagerCmd.AddCommand(keyguardKeyguardManagerInKeyguardRestrictedInputModeCmd)
+	keyguardKeyguardManagerCmd.AddCommand(keyguardKeyguardManagerIsDeviceLockedCmd)
+	keyguardKeyguardManagerCmd.AddCommand(keyguardKeyguardManagerIsDeviceSecureCmd)
+	keyguardKeyguardManagerCmd.AddCommand(keyguardKeyguardManagerIsKeyguardLockedCmd)
+	keyguardKeyguardManagerCmd.AddCommand(keyguardKeyguardManagerIsKeyguardSecureCmd)
+	keyguardKeyguardManagerNewKeyguardLockCmd.Flags().String("arg0", "", "arg0 (string)")
+	keyguardKeyguardManagerCmd.AddCommand(keyguardKeyguardManagerNewKeyguardLockCmd)
+	keyguardKeyguardManagerRemoveKeyguardLockedStateListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	keyguardKeyguardManagerCmd.AddCommand(keyguardKeyguardManagerRemoveKeyguardLockedStateListenerCmd)
+	keyguardKeyguardManagerRequestDismissKeyguardCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	keyguardKeyguardManagerRequestDismissKeyguardCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	keyguardKeyguardManagerCmd.AddCommand(keyguardKeyguardManagerRequestDismissKeyguardCmd)
+	keyguardCmd.AddCommand(keyguardKeyguardManagerCmd)
 	rootCmd.AddCommand(keyguardCmd)
 }

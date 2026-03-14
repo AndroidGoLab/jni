@@ -1,0 +1,302 @@
+package: power
+go_import: github.com/xaionaro-go/jni/os/power
+classes:
+    - java_class: android.os.PowerManager
+      go_type: powerManager
+      obtain: system_service
+      service_name: power
+      close: true
+      methods:
+        - java_method: addThermalHeadroomListener
+          go_name: AddThermalHeadroomListener1
+          params:
+            - java_type: android.os.PowerManager$OnThermalHeadroomChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: addThermalHeadroomListener
+          go_name: AddThermalHeadroomListener2_1
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.os.PowerManager$OnThermalHeadroomChangedListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: addThermalStatusListener
+          go_name: AddThermalStatusListener1
+          params:
+            - java_type: android.os.PowerManager$OnThermalStatusChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: addThermalStatusListener
+          go_name: AddThermalStatusListener2_1
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.os.PowerManager$OnThermalStatusChangedListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: getBatteryDischargePrediction
+          go_name: GetBatteryDischargePrediction
+          returns: java.time.Duration
+          error: true
+        - java_method: getCurrentThermalStatus
+          go_name: GetCurrentThermalStatus
+          returns: int
+          error: true
+        - java_method: getLocationPowerSaveMode
+          go_name: GetLocationPowerSaveMode
+          returns: int
+          error: true
+        - java_method: getThermalHeadroom
+          go_name: GetThermalHeadroom
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: float
+          error: true
+        - java_method: isAllowedInLowPowerStandby
+          go_name: IsAllowedInLowPowerStandby1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isAllowedInLowPowerStandby
+          go_name: IsAllowedInLowPowerStandby1_1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isBatteryDischargePredictionPersonalized
+          go_name: IsBatteryDischargePredictionPersonalized
+          returns: boolean
+          error: true
+        - java_method: isDeviceIdleMode
+          go_name: IsDeviceIdleMode
+          returns: boolean
+          error: true
+        - java_method: isDeviceLightIdleMode
+          go_name: IsDeviceLightIdleMode
+          returns: boolean
+          error: true
+        - java_method: isExemptFromLowPowerStandby
+          go_name: IsExemptFromLowPowerStandby
+          returns: boolean
+          error: true
+        - java_method: isIgnoringBatteryOptimizations
+          go_name: IsIgnoringBatteryOptimizations
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isInteractive
+          go_name: IsInteractive
+          returns: boolean
+          error: true
+        - java_method: isLowPowerStandbyEnabled
+          go_name: IsLowPowerStandbyEnabled
+          returns: boolean
+          error: true
+        - java_method: isPowerSaveMode
+          go_name: IsPowerSaveMode
+          returns: boolean
+          error: true
+        - java_method: isRebootingUserspaceSupported
+          go_name: IsRebootingUserspaceSupported
+          returns: boolean
+          error: true
+        - java_method: isScreenOn
+          go_name: IsScreenOn
+          returns: boolean
+          error: true
+        - java_method: isSustainedPerformanceModeSupported
+          go_name: IsSustainedPerformanceModeSupported
+          returns: boolean
+          error: true
+        - java_method: isWakeLockLevelSupported
+          go_name: IsWakeLockLevelSupported
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: newWakeLock
+          go_name: NewWakeLock
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.os.PowerManager$WakeLock
+          error: true
+        - java_method: reboot
+          go_name: Reboot
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeThermalHeadroomListener
+          go_name: RemoveThermalHeadroomListener
+          params:
+            - java_type: android.os.PowerManager$OnThermalHeadroomChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeThermalStatusListener
+          go_name: RemoveThermalStatusListener
+          params:
+            - java_type: android.os.PowerManager$OnThermalStatusChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.os.PowerManager$WakeLock
+      go_type: powerManagerWakeLock
+      methods:
+        - java_method: acquire
+          go_name: Acquire0
+          returns: void
+          error: true
+        - java_method: acquire
+          go_name: Acquire1_1
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: isHeld
+          go_name: IsHeld
+          returns: boolean
+          error: true
+        - java_method: release
+          go_name: Release0
+          returns: void
+          error: true
+        - java_method: release
+          go_name: Release1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setReferenceCounted
+          go_name: SetReferenceCounted
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setStateListener
+          go_name: SetStateListener
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.os.PowerManager$WakeLockStateListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setWorkSource
+          go_name: SetWorkSource
+          params:
+            - java_type: android.os.WorkSource
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+constants:
+    - go_name: AcquireCausesWakeup
+      value: "0"
+      go_type: int
+    - go_name: ActionDeviceIdleModeChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionDeviceLightIdleModeChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionLowPowerStandbyEnabledChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionLowPowerStandbyPolicyChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionPowerSaveModeChanged
+      value: '""'
+      go_type: string
+    - go_name: FeatureWakeOnLanInLowPowerStandby
+      value: '""'
+      go_type: string
+    - go_name: FullWakeLock
+      value: "0"
+      go_type: int
+    - go_name: LocationModeAllDisabledWhenScreenOff
+      value: "0"
+      go_type: int
+    - go_name: LocationModeForegroundOnly
+      value: "0"
+      go_type: int
+    - go_name: LocationModeGpsDisabledWhenScreenOff
+      value: "0"
+      go_type: int
+    - go_name: LocationModeNoChange
+      value: "0"
+      go_type: int
+    - go_name: LocationModeThrottleRequestsWhenScreenOff
+      value: "0"
+      go_type: int
+    - go_name: LowPowerStandbyAllowedReasonOngoingCall
+      value: "0"
+      go_type: int
+    - go_name: LowPowerStandbyAllowedReasonTempPowerSaveAllowlist
+      value: "0"
+      go_type: int
+    - go_name: LowPowerStandbyAllowedReasonVoiceInteraction
+      value: "0"
+      go_type: int
+    - go_name: OnAfterRelease
+      value: "0"
+      go_type: int
+    - go_name: PartialWakeLock
+      value: "0"
+      go_type: int
+    - go_name: ProximityScreenOffWakeLock
+      value: "0"
+      go_type: int
+    - go_name: ReleaseFlagWaitForNoProximity
+      value: "0"
+      go_type: int
+    - go_name: ScreenBrightWakeLock
+      value: "0"
+      go_type: int
+    - go_name: ScreenDimWakeLock
+      value: "0"
+      go_type: int
+    - go_name: ThermalStatusCritical
+      value: "0"
+      go_type: int
+    - go_name: ThermalStatusEmergency
+      value: "0"
+      go_type: int
+    - go_name: ThermalStatusLight
+      value: "0"
+      go_type: int
+    - go_name: ThermalStatusModerate
+      value: "0"
+      go_type: int
+    - go_name: ThermalStatusNone
+      value: "0"
+      go_type: int
+    - go_name: ThermalStatusSevere
+      value: "0"
+      go_type: int
+    - go_name: ThermalStatusShutdown
+      value: "0"
+      go_type: int

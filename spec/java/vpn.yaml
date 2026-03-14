@@ -1,0 +1,60 @@
+package: vpn
+go_import: github.com/xaionaro-go/jni/net/vpn
+classes:
+    - java_class: android.net.VpnService
+      go_type: vpnService
+      methods:
+        - java_method: onBind
+          go_name: OnBind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: onRevoke
+          go_name: OnRevoke
+          returns: void
+          error: true
+        - java_method: protect
+          go_name: Protect1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: protect
+          go_name: Protect1_1
+          params:
+            - java_type: java.net.DatagramSocket
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: protect
+          go_name: Protect1_2
+          params:
+            - java_type: java.net.Socket
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setUnderlyingNetworks
+          go_name: SetUnderlyingNetworks
+          params:
+            - java_type: android.net.Network[]
+              go_name: arg0
+          returns: boolean
+          error: true
+      static_methods:
+        - java_method: prepare
+          go_name: Prepare
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+constants:
+    - go_name: ServiceInterface
+      value: '""'
+      go_type: string
+    - go_name: ServiceMetaDataSupportsAlwaysOn
+      value: '""'
+      go_type: string

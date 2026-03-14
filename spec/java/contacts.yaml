@@ -1,0 +1,47 @@
+package: contacts
+go_import: github.com/xaionaro-go/jni/provider/contacts
+classes:
+    - java_class: android.provider.ContactsContract
+      go_type: contactsContract
+      static_methods:
+        - java_method: isProfileId
+          go_name: IsProfileId
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: boolean
+          error: true
+constants:
+    - go_name: Authority
+      value: '""'
+      go_type: string
+    - go_name: AuthorityUri
+      value: "0"
+      go_type: int
+    - go_name: CallerIsSyncadapter
+      value: '""'
+      go_type: string
+    - go_name: DeferredSnippeting
+      value: '""'
+      go_type: string
+    - go_name: DeferredSnippetingQuery
+      value: '""'
+      go_type: string
+    - go_name: DirectoryParamKey
+      value: '""'
+      go_type: string
+    - go_name: LimitParamKey
+      value: '""'
+      go_type: string
+    - go_name: PrimaryAccountName
+      value: '""'
+      go_type: string
+    - go_name: PrimaryAccountType
+      value: '""'
+      go_type: string
+    - go_name: RemoveDuplicateEntries
+      value: '""'
+      go_type: string
+    - go_name: StrequentPhoneOnly
+      value: '""'
+      go_type: string

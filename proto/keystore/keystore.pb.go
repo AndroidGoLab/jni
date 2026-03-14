@@ -23,27 +23,26 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type LoadRequest struct {
+type BuildRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Param         int64                  `protobuf:"varint,1,opt,name=param,proto3" json:"param,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *LoadRequest) Reset() {
-	*x = LoadRequest{}
+func (x *BuildRequest) Reset() {
+	*x = BuildRequest{}
 	mi := &file_proto_keystore_keystore_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *LoadRequest) String() string {
+func (x *BuildRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*LoadRequest) ProtoMessage() {}
+func (*BuildRequest) ProtoMessage() {}
 
-func (x *LoadRequest) ProtoReflect() protoreflect.Message {
+func (x *BuildRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keystore_keystore_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -55,38 +54,32 @@ func (x *LoadRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LoadRequest.ProtoReflect.Descriptor instead.
-func (*LoadRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuildRequest.ProtoReflect.Descriptor instead.
+func (*BuildRequest) Descriptor() ([]byte, []int) {
 	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *LoadRequest) GetParam() int64 {
-	if x != nil {
-		return x.Param
-	}
-	return 0
-}
-
-type LoadResponse struct {
+type BuildResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *LoadResponse) Reset() {
-	*x = LoadResponse{}
+func (x *BuildResponse) Reset() {
+	*x = BuildResponse{}
 	mi := &file_proto_keystore_keystore_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *LoadResponse) String() string {
+func (x *BuildResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*LoadResponse) ProtoMessage() {}
+func (*BuildResponse) ProtoMessage() {}
 
-func (x *LoadResponse) ProtoReflect() protoreflect.Message {
+func (x *BuildResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keystore_keystore_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -98,32 +91,39 @@ func (x *LoadResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LoadResponse.ProtoReflect.Descriptor instead.
-func (*LoadResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use BuildResponse.ProtoReflect.Descriptor instead.
+func (*BuildResponse) Descriptor() ([]byte, []int) {
 	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{1}
 }
 
-type ContainsAliasRequest struct {
+func (x *BuildResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetAlgorithmParameterSpecRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Alias         string                 `protobuf:"bytes,1,opt,name=alias,proto3" json:"alias,omitempty"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ContainsAliasRequest) Reset() {
-	*x = ContainsAliasRequest{}
+func (x *SetAlgorithmParameterSpecRequest) Reset() {
+	*x = SetAlgorithmParameterSpecRequest{}
 	mi := &file_proto_keystore_keystore_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ContainsAliasRequest) String() string {
+func (x *SetAlgorithmParameterSpecRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ContainsAliasRequest) ProtoMessage() {}
+func (*SetAlgorithmParameterSpecRequest) ProtoMessage() {}
 
-func (x *ContainsAliasRequest) ProtoReflect() protoreflect.Message {
+func (x *SetAlgorithmParameterSpecRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keystore_keystore_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -135,39 +135,39 @@ func (x *ContainsAliasRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ContainsAliasRequest.ProtoReflect.Descriptor instead.
-func (*ContainsAliasRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetAlgorithmParameterSpecRequest.ProtoReflect.Descriptor instead.
+func (*SetAlgorithmParameterSpecRequest) Descriptor() ([]byte, []int) {
 	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *ContainsAliasRequest) GetAlias() string {
+func (x *SetAlgorithmParameterSpecRequest) GetArg0() int64 {
 	if x != nil {
-		return x.Alias
+		return x.Arg0
 	}
-	return ""
+	return 0
 }
 
-type ContainsAliasResponse struct {
+type SetAlgorithmParameterSpecResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ContainsAliasResponse) Reset() {
-	*x = ContainsAliasResponse{}
+func (x *SetAlgorithmParameterSpecResponse) Reset() {
+	*x = SetAlgorithmParameterSpecResponse{}
 	mi := &file_proto_keystore_keystore_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ContainsAliasResponse) String() string {
+func (x *SetAlgorithmParameterSpecResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ContainsAliasResponse) ProtoMessage() {}
+func (*SetAlgorithmParameterSpecResponse) ProtoMessage() {}
 
-func (x *ContainsAliasResponse) ProtoReflect() protoreflect.Message {
+func (x *SetAlgorithmParameterSpecResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keystore_keystore_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -179,39 +179,39 @@ func (x *ContainsAliasResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ContainsAliasResponse.ProtoReflect.Descriptor instead.
-func (*ContainsAliasResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetAlgorithmParameterSpecResponse.ProtoReflect.Descriptor instead.
+func (*SetAlgorithmParameterSpecResponse) Descriptor() ([]byte, []int) {
 	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *ContainsAliasResponse) GetResult() bool {
+func (x *SetAlgorithmParameterSpecResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
-	return false
+	return 0
 }
 
-type DeleteEntryRequest struct {
+type SetAttestKeyAliasRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Alias         string                 `protobuf:"bytes,1,opt,name=alias,proto3" json:"alias,omitempty"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DeleteEntryRequest) Reset() {
-	*x = DeleteEntryRequest{}
+func (x *SetAttestKeyAliasRequest) Reset() {
+	*x = SetAttestKeyAliasRequest{}
 	mi := &file_proto_keystore_keystore_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DeleteEntryRequest) String() string {
+func (x *SetAttestKeyAliasRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeleteEntryRequest) ProtoMessage() {}
+func (*SetAttestKeyAliasRequest) ProtoMessage() {}
 
-func (x *DeleteEntryRequest) ProtoReflect() protoreflect.Message {
+func (x *SetAttestKeyAliasRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keystore_keystore_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -223,38 +223,39 @@ func (x *DeleteEntryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteEntryRequest.ProtoReflect.Descriptor instead.
-func (*DeleteEntryRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetAttestKeyAliasRequest.ProtoReflect.Descriptor instead.
+func (*SetAttestKeyAliasRequest) Descriptor() ([]byte, []int) {
 	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *DeleteEntryRequest) GetAlias() string {
+func (x *SetAttestKeyAliasRequest) GetArg0() string {
 	if x != nil {
-		return x.Alias
+		return x.Arg0
 	}
 	return ""
 }
 
-type DeleteEntryResponse struct {
+type SetAttestKeyAliasResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DeleteEntryResponse) Reset() {
-	*x = DeleteEntryResponse{}
+func (x *SetAttestKeyAliasResponse) Reset() {
+	*x = SetAttestKeyAliasResponse{}
 	mi := &file_proto_keystore_keystore_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DeleteEntryResponse) String() string {
+func (x *SetAttestKeyAliasResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeleteEntryResponse) ProtoMessage() {}
+func (*SetAttestKeyAliasResponse) ProtoMessage() {}
 
-func (x *DeleteEntryResponse) ProtoReflect() protoreflect.Message {
+func (x *SetAttestKeyAliasResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keystore_keystore_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -266,31 +267,39 @@ func (x *DeleteEntryResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteEntryResponse.ProtoReflect.Descriptor instead.
-func (*DeleteEntryResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetAttestKeyAliasResponse.ProtoReflect.Descriptor instead.
+func (*SetAttestKeyAliasResponse) Descriptor() ([]byte, []int) {
 	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{5}
 }
 
-type AliasesRawRequest struct {
+func (x *SetAttestKeyAliasResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetAttestationChallengeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AliasesRawRequest) Reset() {
-	*x = AliasesRawRequest{}
+func (x *SetAttestationChallengeRequest) Reset() {
+	*x = SetAttestationChallengeRequest{}
 	mi := &file_proto_keystore_keystore_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AliasesRawRequest) String() string {
+func (x *SetAttestationChallengeRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AliasesRawRequest) ProtoMessage() {}
+func (*SetAttestationChallengeRequest) ProtoMessage() {}
 
-func (x *AliasesRawRequest) ProtoReflect() protoreflect.Message {
+func (x *SetAttestationChallengeRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keystore_keystore_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -302,32 +311,39 @@ func (x *AliasesRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AliasesRawRequest.ProtoReflect.Descriptor instead.
-func (*AliasesRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetAttestationChallengeRequest.ProtoReflect.Descriptor instead.
+func (*SetAttestationChallengeRequest) Descriptor() ([]byte, []int) {
 	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{6}
 }
 
-type AliasesRawResponse struct {
+func (x *SetAttestationChallengeRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetAttestationChallengeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AliasesRawResponse) Reset() {
-	*x = AliasesRawResponse{}
+func (x *SetAttestationChallengeResponse) Reset() {
+	*x = SetAttestationChallengeResponse{}
 	mi := &file_proto_keystore_keystore_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AliasesRawResponse) String() string {
+func (x *SetAttestationChallengeResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AliasesRawResponse) ProtoMessage() {}
+func (*SetAttestationChallengeResponse) ProtoMessage() {}
 
-func (x *AliasesRawResponse) ProtoReflect() protoreflect.Message {
+func (x *SetAttestationChallengeResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keystore_keystore_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -339,196 +355,12 @@ func (x *AliasesRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AliasesRawResponse.ProtoReflect.Descriptor instead.
-func (*AliasesRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetAttestationChallengeResponse.ProtoReflect.Descriptor instead.
+func (*SetAttestationChallengeResponse) Descriptor() ([]byte, []int) {
 	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *AliasesRawResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type GetEntryRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Alias         string                 `protobuf:"bytes,1,opt,name=alias,proto3" json:"alias,omitempty"`
-	Param         int64                  `protobuf:"varint,2,opt,name=param,proto3" json:"param,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetEntryRequest) Reset() {
-	*x = GetEntryRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetEntryRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetEntryRequest) ProtoMessage() {}
-
-func (x *GetEntryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetEntryRequest.ProtoReflect.Descriptor instead.
-func (*GetEntryRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *GetEntryRequest) GetAlias() string {
-	if x != nil {
-		return x.Alias
-	}
-	return ""
-}
-
-func (x *GetEntryRequest) GetParam() int64 {
-	if x != nil {
-		return x.Param
-	}
-	return 0
-}
-
-type GetEntryResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetEntryResponse) Reset() {
-	*x = GetEntryResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetEntryResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetEntryResponse) ProtoMessage() {}
-
-func (x *GetEntryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetEntryResponse.ProtoReflect.Descriptor instead.
-func (*GetEntryResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *GetEntryResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type SetKeySizeRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	KeySize       int32                  `protobuf:"varint,1,opt,name=key_size,json=keySize,proto3" json:"key_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetKeySizeRequest) Reset() {
-	*x = SetKeySizeRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetKeySizeRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetKeySizeRequest) ProtoMessage() {}
-
-func (x *SetKeySizeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetKeySizeRequest.ProtoReflect.Descriptor instead.
-func (*SetKeySizeRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *SetKeySizeRequest) GetKeySize() int32 {
-	if x != nil {
-		return x.KeySize
-	}
-	return 0
-}
-
-type SetKeySizeResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetKeySizeResponse) Reset() {
-	*x = SetKeySizeResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetKeySizeResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetKeySizeResponse) ProtoMessage() {}
-
-func (x *SetKeySizeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetKeySizeResponse.ProtoReflect.Descriptor instead.
-func (*SetKeySizeResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *SetKeySizeResponse) GetResult() int64 {
+func (x *SetAttestationChallengeResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
@@ -537,14 +369,14 @@ func (x *SetKeySizeResponse) GetResult() int64 {
 
 type SetBlockModesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BlockModes    int64                  `protobuf:"varint,1,opt,name=block_modes,json=blockModes,proto3" json:"block_modes,omitempty"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SetBlockModesRequest) Reset() {
 	*x = SetBlockModesRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[12]
+	mi := &file_proto_keystore_keystore_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -556,7 +388,7 @@ func (x *SetBlockModesRequest) String() string {
 func (*SetBlockModesRequest) ProtoMessage() {}
 
 func (x *SetBlockModesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[12]
+	mi := &file_proto_keystore_keystore_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -569,12 +401,12 @@ func (x *SetBlockModesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetBlockModesRequest.ProtoReflect.Descriptor instead.
 func (*SetBlockModesRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{12}
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *SetBlockModesRequest) GetBlockModes() int64 {
+func (x *SetBlockModesRequest) GetArg0() int64 {
 	if x != nil {
-		return x.BlockModes
+		return x.Arg0
 	}
 	return 0
 }
@@ -588,7 +420,7 @@ type SetBlockModesResponse struct {
 
 func (x *SetBlockModesResponse) Reset() {
 	*x = SetBlockModesResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[13]
+	mi := &file_proto_keystore_keystore_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -600,7 +432,7 @@ func (x *SetBlockModesResponse) String() string {
 func (*SetBlockModesResponse) ProtoMessage() {}
 
 func (x *SetBlockModesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[13]
+	mi := &file_proto_keystore_keystore_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -613,7 +445,7 @@ func (x *SetBlockModesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetBlockModesResponse.ProtoReflect.Descriptor instead.
 func (*SetBlockModesResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{13}
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *SetBlockModesResponse) GetResult() int64 {
@@ -623,28 +455,28 @@ func (x *SetBlockModesResponse) GetResult() int64 {
 	return 0
 }
 
-type SetEncryptionPaddingsRequest struct {
+type SetCertificateNotAfterRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Paddings      int64                  `protobuf:"varint,1,opt,name=paddings,proto3" json:"paddings,omitempty"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetEncryptionPaddingsRequest) Reset() {
-	*x = SetEncryptionPaddingsRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[14]
+func (x *SetCertificateNotAfterRequest) Reset() {
+	*x = SetCertificateNotAfterRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetEncryptionPaddingsRequest) String() string {
+func (x *SetCertificateNotAfterRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetEncryptionPaddingsRequest) ProtoMessage() {}
+func (*SetCertificateNotAfterRequest) ProtoMessage() {}
 
-func (x *SetEncryptionPaddingsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[14]
+func (x *SetCertificateNotAfterRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -655,40 +487,40 @@ func (x *SetEncryptionPaddingsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetEncryptionPaddingsRequest.ProtoReflect.Descriptor instead.
-func (*SetEncryptionPaddingsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{14}
+// Deprecated: Use SetCertificateNotAfterRequest.ProtoReflect.Descriptor instead.
+func (*SetCertificateNotAfterRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *SetEncryptionPaddingsRequest) GetPaddings() int64 {
+func (x *SetCertificateNotAfterRequest) GetArg0() int64 {
 	if x != nil {
-		return x.Paddings
+		return x.Arg0
 	}
 	return 0
 }
 
-type SetEncryptionPaddingsResponse struct {
+type SetCertificateNotAfterResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetEncryptionPaddingsResponse) Reset() {
-	*x = SetEncryptionPaddingsResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[15]
+func (x *SetCertificateNotAfterResponse) Reset() {
+	*x = SetCertificateNotAfterResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetEncryptionPaddingsResponse) String() string {
+func (x *SetCertificateNotAfterResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetEncryptionPaddingsResponse) ProtoMessage() {}
+func (*SetCertificateNotAfterResponse) ProtoMessage() {}
 
-func (x *SetEncryptionPaddingsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[15]
+func (x *SetCertificateNotAfterResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -699,40 +531,40 @@ func (x *SetEncryptionPaddingsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetEncryptionPaddingsResponse.ProtoReflect.Descriptor instead.
-func (*SetEncryptionPaddingsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{15}
+// Deprecated: Use SetCertificateNotAfterResponse.ProtoReflect.Descriptor instead.
+func (*SetCertificateNotAfterResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *SetEncryptionPaddingsResponse) GetResult() int64 {
+func (x *SetCertificateNotAfterResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type SetSignaturePaddingsRequest struct {
+type SetCertificateNotBeforeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Paddings      int64                  `protobuf:"varint,1,opt,name=paddings,proto3" json:"paddings,omitempty"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetSignaturePaddingsRequest) Reset() {
-	*x = SetSignaturePaddingsRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[16]
+func (x *SetCertificateNotBeforeRequest) Reset() {
+	*x = SetCertificateNotBeforeRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetSignaturePaddingsRequest) String() string {
+func (x *SetCertificateNotBeforeRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetSignaturePaddingsRequest) ProtoMessage() {}
+func (*SetCertificateNotBeforeRequest) ProtoMessage() {}
 
-func (x *SetSignaturePaddingsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[16]
+func (x *SetCertificateNotBeforeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -743,39 +575,215 @@ func (x *SetSignaturePaddingsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetSignaturePaddingsRequest.ProtoReflect.Descriptor instead.
-func (*SetSignaturePaddingsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{16}
+// Deprecated: Use SetCertificateNotBeforeRequest.ProtoReflect.Descriptor instead.
+func (*SetCertificateNotBeforeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *SetSignaturePaddingsRequest) GetPaddings() int64 {
+func (x *SetCertificateNotBeforeRequest) GetArg0() int64 {
 	if x != nil {
-		return x.Paddings
+		return x.Arg0
 	}
 	return 0
 }
 
-type SetSignaturePaddingsResponse struct {
+type SetCertificateNotBeforeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetSignaturePaddingsResponse) Reset() {
-	*x = SetSignaturePaddingsResponse{}
+func (x *SetCertificateNotBeforeResponse) Reset() {
+	*x = SetCertificateNotBeforeResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetCertificateNotBeforeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetCertificateNotBeforeResponse) ProtoMessage() {}
+
+func (x *SetCertificateNotBeforeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetCertificateNotBeforeResponse.ProtoReflect.Descriptor instead.
+func (*SetCertificateNotBeforeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *SetCertificateNotBeforeResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetCertificateSerialNumberRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetCertificateSerialNumberRequest) Reset() {
+	*x = SetCertificateSerialNumberRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetCertificateSerialNumberRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetCertificateSerialNumberRequest) ProtoMessage() {}
+
+func (x *SetCertificateSerialNumberRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetCertificateSerialNumberRequest.ProtoReflect.Descriptor instead.
+func (*SetCertificateSerialNumberRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *SetCertificateSerialNumberRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetCertificateSerialNumberResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetCertificateSerialNumberResponse) Reset() {
+	*x = SetCertificateSerialNumberResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetCertificateSerialNumberResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetCertificateSerialNumberResponse) ProtoMessage() {}
+
+func (x *SetCertificateSerialNumberResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetCertificateSerialNumberResponse.ProtoReflect.Descriptor instead.
+func (*SetCertificateSerialNumberResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *SetCertificateSerialNumberResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetCertificateSubjectRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetCertificateSubjectRequest) Reset() {
+	*x = SetCertificateSubjectRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetCertificateSubjectRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetCertificateSubjectRequest) ProtoMessage() {}
+
+func (x *SetCertificateSubjectRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetCertificateSubjectRequest.ProtoReflect.Descriptor instead.
+func (*SetCertificateSubjectRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *SetCertificateSubjectRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetCertificateSubjectResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetCertificateSubjectResponse) Reset() {
+	*x = SetCertificateSubjectResponse{}
 	mi := &file_proto_keystore_keystore_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetSignaturePaddingsResponse) String() string {
+func (x *SetCertificateSubjectResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetSignaturePaddingsResponse) ProtoMessage() {}
+func (*SetCertificateSubjectResponse) ProtoMessage() {}
 
-func (x *SetSignaturePaddingsResponse) ProtoReflect() protoreflect.Message {
+func (x *SetCertificateSubjectResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keystore_keystore_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -787,12 +795,100 @@ func (x *SetSignaturePaddingsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetSignaturePaddingsResponse.ProtoReflect.Descriptor instead.
-func (*SetSignaturePaddingsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetCertificateSubjectResponse.ProtoReflect.Descriptor instead.
+func (*SetCertificateSubjectResponse) Descriptor() ([]byte, []int) {
 	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *SetSignaturePaddingsResponse) GetResult() int64 {
+func (x *SetCertificateSubjectResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetDevicePropertiesAttestationIncludedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetDevicePropertiesAttestationIncludedRequest) Reset() {
+	*x = SetDevicePropertiesAttestationIncludedRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetDevicePropertiesAttestationIncludedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetDevicePropertiesAttestationIncludedRequest) ProtoMessage() {}
+
+func (x *SetDevicePropertiesAttestationIncludedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetDevicePropertiesAttestationIncludedRequest.ProtoReflect.Descriptor instead.
+func (*SetDevicePropertiesAttestationIncludedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *SetDevicePropertiesAttestationIncludedRequest) GetArg0() bool {
+	if x != nil {
+		return x.Arg0
+	}
+	return false
+}
+
+type SetDevicePropertiesAttestationIncludedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetDevicePropertiesAttestationIncludedResponse) Reset() {
+	*x = SetDevicePropertiesAttestationIncludedResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetDevicePropertiesAttestationIncludedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetDevicePropertiesAttestationIncludedResponse) ProtoMessage() {}
+
+func (x *SetDevicePropertiesAttestationIncludedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetDevicePropertiesAttestationIncludedResponse.ProtoReflect.Descriptor instead.
+func (*SetDevicePropertiesAttestationIncludedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *SetDevicePropertiesAttestationIncludedResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
@@ -801,14 +897,14 @@ func (x *SetSignaturePaddingsResponse) GetResult() int64 {
 
 type SetDigestsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Digests       int64                  `protobuf:"varint,1,opt,name=digests,proto3" json:"digests,omitempty"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SetDigestsRequest) Reset() {
 	*x = SetDigestsRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[18]
+	mi := &file_proto_keystore_keystore_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -820,7 +916,7 @@ func (x *SetDigestsRequest) String() string {
 func (*SetDigestsRequest) ProtoMessage() {}
 
 func (x *SetDigestsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[18]
+	mi := &file_proto_keystore_keystore_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -833,12 +929,12 @@ func (x *SetDigestsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetDigestsRequest.ProtoReflect.Descriptor instead.
 func (*SetDigestsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{18}
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *SetDigestsRequest) GetDigests() int64 {
+func (x *SetDigestsRequest) GetArg0() int64 {
 	if x != nil {
-		return x.Digests
+		return x.Arg0
 	}
 	return 0
 }
@@ -852,7 +948,7 @@ type SetDigestsResponse struct {
 
 func (x *SetDigestsResponse) Reset() {
 	*x = SetDigestsResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[19]
+	mi := &file_proto_keystore_keystore_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -864,7 +960,7 @@ func (x *SetDigestsResponse) String() string {
 func (*SetDigestsResponse) ProtoMessage() {}
 
 func (x *SetDigestsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[19]
+	mi := &file_proto_keystore_keystore_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -877,7 +973,7 @@ func (x *SetDigestsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetDigestsResponse.ProtoReflect.Descriptor instead.
 func (*SetDigestsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{19}
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *SetDigestsResponse) GetResult() int64 {
@@ -887,115 +983,27 @@ func (x *SetDigestsResponse) GetResult() int64 {
 	return 0
 }
 
-type SetUserAuthenticationRequiredRequest struct {
+type SetEncryptionPaddingsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Required      bool                   `protobuf:"varint,1,opt,name=required,proto3" json:"required,omitempty"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetUserAuthenticationRequiredRequest) Reset() {
-	*x = SetUserAuthenticationRequiredRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[20]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetUserAuthenticationRequiredRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetUserAuthenticationRequiredRequest) ProtoMessage() {}
-
-func (x *SetUserAuthenticationRequiredRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[20]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetUserAuthenticationRequiredRequest.ProtoReflect.Descriptor instead.
-func (*SetUserAuthenticationRequiredRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{20}
-}
-
-func (x *SetUserAuthenticationRequiredRequest) GetRequired() bool {
-	if x != nil {
-		return x.Required
-	}
-	return false
-}
-
-type SetUserAuthenticationRequiredResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetUserAuthenticationRequiredResponse) Reset() {
-	*x = SetUserAuthenticationRequiredResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[21]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetUserAuthenticationRequiredResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetUserAuthenticationRequiredResponse) ProtoMessage() {}
-
-func (x *SetUserAuthenticationRequiredResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[21]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetUserAuthenticationRequiredResponse.ProtoReflect.Descriptor instead.
-func (*SetUserAuthenticationRequiredResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{21}
-}
-
-func (x *SetUserAuthenticationRequiredResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type SetUserAuthenticationValidityDurationSecondsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Seconds       int32                  `protobuf:"varint,1,opt,name=seconds,proto3" json:"seconds,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetUserAuthenticationValidityDurationSecondsRequest) Reset() {
-	*x = SetUserAuthenticationValidityDurationSecondsRequest{}
+func (x *SetEncryptionPaddingsRequest) Reset() {
+	*x = SetEncryptionPaddingsRequest{}
 	mi := &file_proto_keystore_keystore_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetUserAuthenticationValidityDurationSecondsRequest) String() string {
+func (x *SetEncryptionPaddingsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetUserAuthenticationValidityDurationSecondsRequest) ProtoMessage() {}
+func (*SetEncryptionPaddingsRequest) ProtoMessage() {}
 
-func (x *SetUserAuthenticationValidityDurationSecondsRequest) ProtoReflect() protoreflect.Message {
+func (x *SetEncryptionPaddingsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keystore_keystore_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1007,39 +1015,39 @@ func (x *SetUserAuthenticationValidityDurationSecondsRequest) ProtoReflect() pro
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetUserAuthenticationValidityDurationSecondsRequest.ProtoReflect.Descriptor instead.
-func (*SetUserAuthenticationValidityDurationSecondsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetEncryptionPaddingsRequest.ProtoReflect.Descriptor instead.
+func (*SetEncryptionPaddingsRequest) Descriptor() ([]byte, []int) {
 	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{22}
 }
 
-func (x *SetUserAuthenticationValidityDurationSecondsRequest) GetSeconds() int32 {
+func (x *SetEncryptionPaddingsRequest) GetArg0() int64 {
 	if x != nil {
-		return x.Seconds
+		return x.Arg0
 	}
 	return 0
 }
 
-type SetUserAuthenticationValidityDurationSecondsResponse struct {
+type SetEncryptionPaddingsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetUserAuthenticationValidityDurationSecondsResponse) Reset() {
-	*x = SetUserAuthenticationValidityDurationSecondsResponse{}
+func (x *SetEncryptionPaddingsResponse) Reset() {
+	*x = SetEncryptionPaddingsResponse{}
 	mi := &file_proto_keystore_keystore_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetUserAuthenticationValidityDurationSecondsResponse) String() string {
+func (x *SetEncryptionPaddingsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetUserAuthenticationValidityDurationSecondsResponse) ProtoMessage() {}
+func (*SetEncryptionPaddingsResponse) ProtoMessage() {}
 
-func (x *SetUserAuthenticationValidityDurationSecondsResponse) ProtoReflect() protoreflect.Message {
+func (x *SetEncryptionPaddingsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keystore_keystore_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1051,12 +1059,12 @@ func (x *SetUserAuthenticationValidityDurationSecondsResponse) ProtoReflect() pr
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetUserAuthenticationValidityDurationSecondsResponse.ProtoReflect.Descriptor instead.
-func (*SetUserAuthenticationValidityDurationSecondsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetEncryptionPaddingsResponse.ProtoReflect.Descriptor instead.
+func (*SetEncryptionPaddingsResponse) Descriptor() ([]byte, []int) {
 	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{23}
 }
 
-func (x *SetUserAuthenticationValidityDurationSecondsResponse) GetResult() int64 {
+func (x *SetEncryptionPaddingsResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
@@ -1065,7 +1073,7 @@ func (x *SetUserAuthenticationValidityDurationSecondsResponse) GetResult() int64
 
 type SetInvalidatedByBiometricEnrollmentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Invalidated   bool                   `protobuf:"varint,1,opt,name=invalidated,proto3" json:"invalidated,omitempty"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1100,9 +1108,9 @@ func (*SetInvalidatedByBiometricEnrollmentRequest) Descriptor() ([]byte, []int) 
 	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *SetInvalidatedByBiometricEnrollmentRequest) GetInvalidated() bool {
+func (x *SetInvalidatedByBiometricEnrollmentRequest) GetArg0() bool {
 	if x != nil {
-		return x.Invalidated
+		return x.Arg0
 	}
 	return false
 }
@@ -1151,16 +1159,896 @@ func (x *SetInvalidatedByBiometricEnrollmentResponse) GetResult() int64 {
 	return 0
 }
 
+type SetIsStrongBoxBackedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetIsStrongBoxBackedRequest) Reset() {
+	*x = SetIsStrongBoxBackedRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetIsStrongBoxBackedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetIsStrongBoxBackedRequest) ProtoMessage() {}
+
+func (x *SetIsStrongBoxBackedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetIsStrongBoxBackedRequest.ProtoReflect.Descriptor instead.
+func (*SetIsStrongBoxBackedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *SetIsStrongBoxBackedRequest) GetArg0() bool {
+	if x != nil {
+		return x.Arg0
+	}
+	return false
+}
+
+type SetIsStrongBoxBackedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetIsStrongBoxBackedResponse) Reset() {
+	*x = SetIsStrongBoxBackedResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetIsStrongBoxBackedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetIsStrongBoxBackedResponse) ProtoMessage() {}
+
+func (x *SetIsStrongBoxBackedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetIsStrongBoxBackedResponse.ProtoReflect.Descriptor instead.
+func (*SetIsStrongBoxBackedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *SetIsStrongBoxBackedResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetKeySizeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetKeySizeRequest) Reset() {
+	*x = SetKeySizeRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetKeySizeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetKeySizeRequest) ProtoMessage() {}
+
+func (x *SetKeySizeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetKeySizeRequest.ProtoReflect.Descriptor instead.
+func (*SetKeySizeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *SetKeySizeRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetKeySizeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetKeySizeResponse) Reset() {
+	*x = SetKeySizeResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetKeySizeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetKeySizeResponse) ProtoMessage() {}
+
+func (x *SetKeySizeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetKeySizeResponse.ProtoReflect.Descriptor instead.
+func (*SetKeySizeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *SetKeySizeResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetKeyValidityEndRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetKeyValidityEndRequest) Reset() {
+	*x = SetKeyValidityEndRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetKeyValidityEndRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetKeyValidityEndRequest) ProtoMessage() {}
+
+func (x *SetKeyValidityEndRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetKeyValidityEndRequest.ProtoReflect.Descriptor instead.
+func (*SetKeyValidityEndRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *SetKeyValidityEndRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetKeyValidityEndResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetKeyValidityEndResponse) Reset() {
+	*x = SetKeyValidityEndResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetKeyValidityEndResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetKeyValidityEndResponse) ProtoMessage() {}
+
+func (x *SetKeyValidityEndResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetKeyValidityEndResponse.ProtoReflect.Descriptor instead.
+func (*SetKeyValidityEndResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *SetKeyValidityEndResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetKeyValidityForConsumptionEndRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetKeyValidityForConsumptionEndRequest) Reset() {
+	*x = SetKeyValidityForConsumptionEndRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetKeyValidityForConsumptionEndRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetKeyValidityForConsumptionEndRequest) ProtoMessage() {}
+
+func (x *SetKeyValidityForConsumptionEndRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetKeyValidityForConsumptionEndRequest.ProtoReflect.Descriptor instead.
+func (*SetKeyValidityForConsumptionEndRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *SetKeyValidityForConsumptionEndRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetKeyValidityForConsumptionEndResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetKeyValidityForConsumptionEndResponse) Reset() {
+	*x = SetKeyValidityForConsumptionEndResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetKeyValidityForConsumptionEndResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetKeyValidityForConsumptionEndResponse) ProtoMessage() {}
+
+func (x *SetKeyValidityForConsumptionEndResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetKeyValidityForConsumptionEndResponse.ProtoReflect.Descriptor instead.
+func (*SetKeyValidityForConsumptionEndResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *SetKeyValidityForConsumptionEndResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetKeyValidityForOriginationEndRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetKeyValidityForOriginationEndRequest) Reset() {
+	*x = SetKeyValidityForOriginationEndRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetKeyValidityForOriginationEndRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetKeyValidityForOriginationEndRequest) ProtoMessage() {}
+
+func (x *SetKeyValidityForOriginationEndRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetKeyValidityForOriginationEndRequest.ProtoReflect.Descriptor instead.
+func (*SetKeyValidityForOriginationEndRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *SetKeyValidityForOriginationEndRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetKeyValidityForOriginationEndResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetKeyValidityForOriginationEndResponse) Reset() {
+	*x = SetKeyValidityForOriginationEndResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetKeyValidityForOriginationEndResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetKeyValidityForOriginationEndResponse) ProtoMessage() {}
+
+func (x *SetKeyValidityForOriginationEndResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetKeyValidityForOriginationEndResponse.ProtoReflect.Descriptor instead.
+func (*SetKeyValidityForOriginationEndResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *SetKeyValidityForOriginationEndResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetKeyValidityStartRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetKeyValidityStartRequest) Reset() {
+	*x = SetKeyValidityStartRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetKeyValidityStartRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetKeyValidityStartRequest) ProtoMessage() {}
+
+func (x *SetKeyValidityStartRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetKeyValidityStartRequest.ProtoReflect.Descriptor instead.
+func (*SetKeyValidityStartRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *SetKeyValidityStartRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetKeyValidityStartResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetKeyValidityStartResponse) Reset() {
+	*x = SetKeyValidityStartResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetKeyValidityStartResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetKeyValidityStartResponse) ProtoMessage() {}
+
+func (x *SetKeyValidityStartResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetKeyValidityStartResponse.ProtoReflect.Descriptor instead.
+func (*SetKeyValidityStartResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *SetKeyValidityStartResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetMaxUsageCountRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetMaxUsageCountRequest) Reset() {
+	*x = SetMaxUsageCountRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetMaxUsageCountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetMaxUsageCountRequest) ProtoMessage() {}
+
+func (x *SetMaxUsageCountRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetMaxUsageCountRequest.ProtoReflect.Descriptor instead.
+func (*SetMaxUsageCountRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *SetMaxUsageCountRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetMaxUsageCountResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetMaxUsageCountResponse) Reset() {
+	*x = SetMaxUsageCountResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetMaxUsageCountResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetMaxUsageCountResponse) ProtoMessage() {}
+
+func (x *SetMaxUsageCountResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetMaxUsageCountResponse.ProtoReflect.Descriptor instead.
+func (*SetMaxUsageCountResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *SetMaxUsageCountResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetMgf1DigestsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetMgf1DigestsRequest) Reset() {
+	*x = SetMgf1DigestsRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetMgf1DigestsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetMgf1DigestsRequest) ProtoMessage() {}
+
+func (x *SetMgf1DigestsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetMgf1DigestsRequest.ProtoReflect.Descriptor instead.
+func (*SetMgf1DigestsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *SetMgf1DigestsRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetMgf1DigestsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetMgf1DigestsResponse) Reset() {
+	*x = SetMgf1DigestsResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetMgf1DigestsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetMgf1DigestsResponse) ProtoMessage() {}
+
+func (x *SetMgf1DigestsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetMgf1DigestsResponse.ProtoReflect.Descriptor instead.
+func (*SetMgf1DigestsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *SetMgf1DigestsResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetRandomizedEncryptionRequiredRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetRandomizedEncryptionRequiredRequest) Reset() {
+	*x = SetRandomizedEncryptionRequiredRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetRandomizedEncryptionRequiredRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetRandomizedEncryptionRequiredRequest) ProtoMessage() {}
+
+func (x *SetRandomizedEncryptionRequiredRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetRandomizedEncryptionRequiredRequest.ProtoReflect.Descriptor instead.
+func (*SetRandomizedEncryptionRequiredRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *SetRandomizedEncryptionRequiredRequest) GetArg0() bool {
+	if x != nil {
+		return x.Arg0
+	}
+	return false
+}
+
+type SetRandomizedEncryptionRequiredResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetRandomizedEncryptionRequiredResponse) Reset() {
+	*x = SetRandomizedEncryptionRequiredResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetRandomizedEncryptionRequiredResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetRandomizedEncryptionRequiredResponse) ProtoMessage() {}
+
+func (x *SetRandomizedEncryptionRequiredResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetRandomizedEncryptionRequiredResponse.ProtoReflect.Descriptor instead.
+func (*SetRandomizedEncryptionRequiredResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *SetRandomizedEncryptionRequiredResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetSignaturePaddingsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetSignaturePaddingsRequest) Reset() {
+	*x = SetSignaturePaddingsRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetSignaturePaddingsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetSignaturePaddingsRequest) ProtoMessage() {}
+
+func (x *SetSignaturePaddingsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetSignaturePaddingsRequest.ProtoReflect.Descriptor instead.
+func (*SetSignaturePaddingsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *SetSignaturePaddingsRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetSignaturePaddingsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetSignaturePaddingsResponse) Reset() {
+	*x = SetSignaturePaddingsResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetSignaturePaddingsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetSignaturePaddingsResponse) ProtoMessage() {}
+
+func (x *SetSignaturePaddingsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetSignaturePaddingsResponse.ProtoReflect.Descriptor instead.
+func (*SetSignaturePaddingsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *SetSignaturePaddingsResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
 type SetUnlockedDeviceRequiredRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Required      bool                   `protobuf:"varint,1,opt,name=required,proto3" json:"required,omitempty"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SetUnlockedDeviceRequiredRequest) Reset() {
 	*x = SetUnlockedDeviceRequiredRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[26]
+	mi := &file_proto_keystore_keystore_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1172,7 +2060,7 @@ func (x *SetUnlockedDeviceRequiredRequest) String() string {
 func (*SetUnlockedDeviceRequiredRequest) ProtoMessage() {}
 
 func (x *SetUnlockedDeviceRequiredRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[26]
+	mi := &file_proto_keystore_keystore_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1185,12 +2073,12 @@ func (x *SetUnlockedDeviceRequiredRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetUnlockedDeviceRequiredRequest.ProtoReflect.Descriptor instead.
 func (*SetUnlockedDeviceRequiredRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{26}
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{46}
 }
 
-func (x *SetUnlockedDeviceRequiredRequest) GetRequired() bool {
+func (x *SetUnlockedDeviceRequiredRequest) GetArg0() bool {
 	if x != nil {
-		return x.Required
+		return x.Arg0
 	}
 	return false
 }
@@ -1204,7 +2092,7 @@ type SetUnlockedDeviceRequiredResponse struct {
 
 func (x *SetUnlockedDeviceRequiredResponse) Reset() {
 	*x = SetUnlockedDeviceRequiredResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[27]
+	mi := &file_proto_keystore_keystore_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1216,7 +2104,7 @@ func (x *SetUnlockedDeviceRequiredResponse) String() string {
 func (*SetUnlockedDeviceRequiredResponse) ProtoMessage() {}
 
 func (x *SetUnlockedDeviceRequiredResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[27]
+	mi := &file_proto_keystore_keystore_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1229,7 +2117,7 @@ func (x *SetUnlockedDeviceRequiredResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use SetUnlockedDeviceRequiredResponse.ProtoReflect.Descriptor instead.
 func (*SetUnlockedDeviceRequiredResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{27}
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *SetUnlockedDeviceRequiredResponse) GetResult() int64 {
@@ -1239,859 +2127,28 @@ func (x *SetUnlockedDeviceRequiredResponse) GetResult() int64 {
 	return 0
 }
 
-type BuildRequest struct {
+type SetUserAuthenticationParametersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int32                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *BuildRequest) Reset() {
-	*x = BuildRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[28]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BuildRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BuildRequest) ProtoMessage() {}
-
-func (x *BuildRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[28]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BuildRequest.ProtoReflect.Descriptor instead.
-func (*BuildRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{28}
-}
-
-type BuildResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *BuildResponse) Reset() {
-	*x = BuildResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[29]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BuildResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BuildResponse) ProtoMessage() {}
-
-func (x *BuildResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[29]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BuildResponse.ProtoReflect.Descriptor instead.
-func (*BuildResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{29}
-}
-
-func (x *BuildResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type InitRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Params        int64                  `protobuf:"varint,1,opt,name=params,proto3" json:"params,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InitRequest) Reset() {
-	*x = InitRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[30]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InitRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InitRequest) ProtoMessage() {}
-
-func (x *InitRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[30]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InitRequest.ProtoReflect.Descriptor instead.
-func (*InitRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{30}
-}
-
-func (x *InitRequest) GetParams() int64 {
-	if x != nil {
-		return x.Params
-	}
-	return 0
-}
-
-type InitResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InitResponse) Reset() {
-	*x = InitResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[31]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InitResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InitResponse) ProtoMessage() {}
-
-func (x *InitResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[31]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InitResponse.ProtoReflect.Descriptor instead.
-func (*InitResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{31}
-}
-
-type GenerateKeyRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GenerateKeyRequest) Reset() {
-	*x = GenerateKeyRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[32]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GenerateKeyRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GenerateKeyRequest) ProtoMessage() {}
-
-func (x *GenerateKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[32]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GenerateKeyRequest.ProtoReflect.Descriptor instead.
-func (*GenerateKeyRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{32}
-}
-
-type GenerateKeyResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GenerateKeyResponse) Reset() {
-	*x = GenerateKeyResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[33]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GenerateKeyResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GenerateKeyResponse) ProtoMessage() {}
-
-func (x *GenerateKeyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[33]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GenerateKeyResponse.ProtoReflect.Descriptor instead.
-func (*GenerateKeyResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{33}
-}
-
-func (x *GenerateKeyResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type InitializeRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Params        int64                  `protobuf:"varint,1,opt,name=params,proto3" json:"params,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InitializeRequest) Reset() {
-	*x = InitializeRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[34]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InitializeRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InitializeRequest) ProtoMessage() {}
-
-func (x *InitializeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[34]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InitializeRequest.ProtoReflect.Descriptor instead.
-func (*InitializeRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{34}
-}
-
-func (x *InitializeRequest) GetParams() int64 {
-	if x != nil {
-		return x.Params
-	}
-	return 0
-}
-
-type InitializeResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InitializeResponse) Reset() {
-	*x = InitializeResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[35]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InitializeResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InitializeResponse) ProtoMessage() {}
-
-func (x *InitializeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[35]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InitializeResponse.ProtoReflect.Descriptor instead.
-func (*InitializeResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{35}
-}
-
-type GenerateKeyPairRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GenerateKeyPairRequest) Reset() {
-	*x = GenerateKeyPairRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[36]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GenerateKeyPairRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GenerateKeyPairRequest) ProtoMessage() {}
-
-func (x *GenerateKeyPairRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[36]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GenerateKeyPairRequest.ProtoReflect.Descriptor instead.
-func (*GenerateKeyPairRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{36}
-}
-
-type GenerateKeyPairResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GenerateKeyPairResponse) Reset() {
-	*x = GenerateKeyPairResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[37]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GenerateKeyPairResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GenerateKeyPairResponse) ProtoMessage() {}
-
-func (x *GenerateKeyPairResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[37]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GenerateKeyPairResponse.ProtoReflect.Descriptor instead.
-func (*GenerateKeyPairResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{37}
-}
-
-func (x *GenerateKeyPairResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type InitWithKeyRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Opmode        int32                  `protobuf:"varint,1,opt,name=opmode,proto3" json:"opmode,omitempty"`
-	Key           int64                  `protobuf:"varint,2,opt,name=key,proto3" json:"key,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InitWithKeyRequest) Reset() {
-	*x = InitWithKeyRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[38]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InitWithKeyRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InitWithKeyRequest) ProtoMessage() {}
-
-func (x *InitWithKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[38]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InitWithKeyRequest.ProtoReflect.Descriptor instead.
-func (*InitWithKeyRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{38}
-}
-
-func (x *InitWithKeyRequest) GetOpmode() int32 {
-	if x != nil {
-		return x.Opmode
-	}
-	return 0
-}
-
-func (x *InitWithKeyRequest) GetKey() int64 {
-	if x != nil {
-		return x.Key
-	}
-	return 0
-}
-
-type InitWithKeyResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InitWithKeyResponse) Reset() {
-	*x = InitWithKeyResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[39]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InitWithKeyResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InitWithKeyResponse) ProtoMessage() {}
-
-func (x *InitWithKeyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[39]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InitWithKeyResponse.ProtoReflect.Descriptor instead.
-func (*InitWithKeyResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{39}
-}
-
-type InitWithKeyAndParamsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Opmode        int32                  `protobuf:"varint,1,opt,name=opmode,proto3" json:"opmode,omitempty"`
-	Key           int64                  `protobuf:"varint,2,opt,name=key,proto3" json:"key,omitempty"`
-	Params        int64                  `protobuf:"varint,3,opt,name=params,proto3" json:"params,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InitWithKeyAndParamsRequest) Reset() {
-	*x = InitWithKeyAndParamsRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[40]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InitWithKeyAndParamsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InitWithKeyAndParamsRequest) ProtoMessage() {}
-
-func (x *InitWithKeyAndParamsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[40]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InitWithKeyAndParamsRequest.ProtoReflect.Descriptor instead.
-func (*InitWithKeyAndParamsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{40}
-}
-
-func (x *InitWithKeyAndParamsRequest) GetOpmode() int32 {
-	if x != nil {
-		return x.Opmode
-	}
-	return 0
-}
-
-func (x *InitWithKeyAndParamsRequest) GetKey() int64 {
-	if x != nil {
-		return x.Key
-	}
-	return 0
-}
-
-func (x *InitWithKeyAndParamsRequest) GetParams() int64 {
-	if x != nil {
-		return x.Params
-	}
-	return 0
-}
-
-type InitWithKeyAndParamsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InitWithKeyAndParamsResponse) Reset() {
-	*x = InitWithKeyAndParamsResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[41]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InitWithKeyAndParamsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InitWithKeyAndParamsResponse) ProtoMessage() {}
-
-func (x *InitWithKeyAndParamsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[41]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InitWithKeyAndParamsResponse.ProtoReflect.Descriptor instead.
-func (*InitWithKeyAndParamsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{41}
-}
-
-type DoFinalRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Input         int64                  `protobuf:"varint,1,opt,name=input,proto3" json:"input,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DoFinalRequest) Reset() {
-	*x = DoFinalRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[42]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DoFinalRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DoFinalRequest) ProtoMessage() {}
-
-func (x *DoFinalRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[42]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DoFinalRequest.ProtoReflect.Descriptor instead.
-func (*DoFinalRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{42}
-}
-
-func (x *DoFinalRequest) GetInput() int64 {
-	if x != nil {
-		return x.Input
-	}
-	return 0
-}
-
-type DoFinalResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DoFinalResponse) Reset() {
-	*x = DoFinalResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[43]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DoFinalResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DoFinalResponse) ProtoMessage() {}
-
-func (x *DoFinalResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[43]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DoFinalResponse.ProtoReflect.Descriptor instead.
-func (*DoFinalResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{43}
-}
-
-func (x *DoFinalResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type GetIVRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetIVRequest) Reset() {
-	*x = GetIVRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[44]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetIVRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetIVRequest) ProtoMessage() {}
-
-func (x *GetIVRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[44]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetIVRequest.ProtoReflect.Descriptor instead.
-func (*GetIVRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{44}
-}
-
-type GetIVResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetIVResponse) Reset() {
-	*x = GetIVResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[45]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetIVResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetIVResponse) ProtoMessage() {}
-
-func (x *GetIVResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[45]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetIVResponse.ProtoReflect.Descriptor instead.
-func (*GetIVResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{45}
-}
-
-func (x *GetIVResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type InitSignRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PrivateKey    int64                  `protobuf:"varint,1,opt,name=private_key,json=privateKey,proto3" json:"private_key,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InitSignRequest) Reset() {
-	*x = InitSignRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[46]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InitSignRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InitSignRequest) ProtoMessage() {}
-
-func (x *InitSignRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[46]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InitSignRequest.ProtoReflect.Descriptor instead.
-func (*InitSignRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{46}
-}
-
-func (x *InitSignRequest) GetPrivateKey() int64 {
-	if x != nil {
-		return x.PrivateKey
-	}
-	return 0
-}
-
-type InitSignResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InitSignResponse) Reset() {
-	*x = InitSignResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[47]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InitSignResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InitSignResponse) ProtoMessage() {}
-
-func (x *InitSignResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[47]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InitSignResponse.ProtoReflect.Descriptor instead.
-func (*InitSignResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{47}
-}
-
-type InitVerifyRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PublicKey     int64                  `protobuf:"varint,1,opt,name=public_key,json=publicKey,proto3" json:"public_key,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InitVerifyRequest) Reset() {
-	*x = InitVerifyRequest{}
+func (x *SetUserAuthenticationParametersRequest) Reset() {
+	*x = SetUserAuthenticationParametersRequest{}
 	mi := &file_proto_keystore_keystore_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *InitVerifyRequest) String() string {
+func (x *SetUserAuthenticationParametersRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*InitVerifyRequest) ProtoMessage() {}
+func (*SetUserAuthenticationParametersRequest) ProtoMessage() {}
 
-func (x *InitVerifyRequest) ProtoReflect() protoreflect.Message {
+func (x *SetUserAuthenticationParametersRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keystore_keystore_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2103,191 +2160,222 @@ func (x *InitVerifyRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use InitVerifyRequest.ProtoReflect.Descriptor instead.
-func (*InitVerifyRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetUserAuthenticationParametersRequest.ProtoReflect.Descriptor instead.
+func (*SetUserAuthenticationParametersRequest) Descriptor() ([]byte, []int) {
 	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{48}
 }
 
-func (x *InitVerifyRequest) GetPublicKey() int64 {
+func (x *SetUserAuthenticationParametersRequest) GetArg0() int32 {
 	if x != nil {
-		return x.PublicKey
+		return x.Arg0
 	}
 	return 0
 }
 
-type InitVerifyResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InitVerifyResponse) Reset() {
-	*x = InitVerifyResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[49]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InitVerifyResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InitVerifyResponse) ProtoMessage() {}
-
-func (x *InitVerifyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[49]
+func (x *SetUserAuthenticationParametersRequest) GetArg1() int32 {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use InitVerifyResponse.ProtoReflect.Descriptor instead.
-func (*InitVerifyResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{49}
-}
-
-type UpdateRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          int64                  `protobuf:"varint,1,opt,name=data,proto3" json:"data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateRequest) Reset() {
-	*x = UpdateRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[50]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateRequest) ProtoMessage() {}
-
-func (x *UpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[50]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateRequest.ProtoReflect.Descriptor instead.
-func (*UpdateRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{50}
-}
-
-func (x *UpdateRequest) GetData() int64 {
-	if x != nil {
-		return x.Data
+		return x.Arg1
 	}
 	return 0
 }
 
-type UpdateResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateResponse) Reset() {
-	*x = UpdateResponse{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[51]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateResponse) ProtoMessage() {}
-
-func (x *UpdateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[51]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateResponse.ProtoReflect.Descriptor instead.
-func (*UpdateResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{51}
-}
-
-type SignRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SignRequest) Reset() {
-	*x = SignRequest{}
-	mi := &file_proto_keystore_keystore_proto_msgTypes[52]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SignRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SignRequest) ProtoMessage() {}
-
-func (x *SignRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keystore_keystore_proto_msgTypes[52]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SignRequest.ProtoReflect.Descriptor instead.
-func (*SignRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{52}
-}
-
-type SignResponse struct {
+type SetUserAuthenticationParametersResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SignResponse) Reset() {
-	*x = SignResponse{}
+func (x *SetUserAuthenticationParametersResponse) Reset() {
+	*x = SetUserAuthenticationParametersResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetUserAuthenticationParametersResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetUserAuthenticationParametersResponse) ProtoMessage() {}
+
+func (x *SetUserAuthenticationParametersResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetUserAuthenticationParametersResponse.ProtoReflect.Descriptor instead.
+func (*SetUserAuthenticationParametersResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *SetUserAuthenticationParametersResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetUserAuthenticationRequiredRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetUserAuthenticationRequiredRequest) Reset() {
+	*x = SetUserAuthenticationRequiredRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetUserAuthenticationRequiredRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetUserAuthenticationRequiredRequest) ProtoMessage() {}
+
+func (x *SetUserAuthenticationRequiredRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetUserAuthenticationRequiredRequest.ProtoReflect.Descriptor instead.
+func (*SetUserAuthenticationRequiredRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *SetUserAuthenticationRequiredRequest) GetArg0() bool {
+	if x != nil {
+		return x.Arg0
+	}
+	return false
+}
+
+type SetUserAuthenticationRequiredResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetUserAuthenticationRequiredResponse) Reset() {
+	*x = SetUserAuthenticationRequiredResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetUserAuthenticationRequiredResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetUserAuthenticationRequiredResponse) ProtoMessage() {}
+
+func (x *SetUserAuthenticationRequiredResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetUserAuthenticationRequiredResponse.ProtoReflect.Descriptor instead.
+func (*SetUserAuthenticationRequiredResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{51}
+}
+
+func (x *SetUserAuthenticationRequiredResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetUserAuthenticationValidWhileOnBodyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetUserAuthenticationValidWhileOnBodyRequest) Reset() {
+	*x = SetUserAuthenticationValidWhileOnBodyRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetUserAuthenticationValidWhileOnBodyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetUserAuthenticationValidWhileOnBodyRequest) ProtoMessage() {}
+
+func (x *SetUserAuthenticationValidWhileOnBodyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetUserAuthenticationValidWhileOnBodyRequest.ProtoReflect.Descriptor instead.
+func (*SetUserAuthenticationValidWhileOnBodyRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{52}
+}
+
+func (x *SetUserAuthenticationValidWhileOnBodyRequest) GetArg0() bool {
+	if x != nil {
+		return x.Arg0
+	}
+	return false
+}
+
+type SetUserAuthenticationValidWhileOnBodyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetUserAuthenticationValidWhileOnBodyResponse) Reset() {
+	*x = SetUserAuthenticationValidWhileOnBodyResponse{}
 	mi := &file_proto_keystore_keystore_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SignResponse) String() string {
+func (x *SetUserAuthenticationValidWhileOnBodyResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SignResponse) ProtoMessage() {}
+func (*SetUserAuthenticationValidWhileOnBodyResponse) ProtoMessage() {}
 
-func (x *SignResponse) ProtoReflect() protoreflect.Message {
+func (x *SetUserAuthenticationValidWhileOnBodyResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keystore_keystore_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2299,39 +2387,39 @@ func (x *SignResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SignResponse.ProtoReflect.Descriptor instead.
-func (*SignResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetUserAuthenticationValidWhileOnBodyResponse.ProtoReflect.Descriptor instead.
+func (*SetUserAuthenticationValidWhileOnBodyResponse) Descriptor() ([]byte, []int) {
 	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{53}
 }
 
-func (x *SignResponse) GetResult() int64 {
+func (x *SetUserAuthenticationValidWhileOnBodyResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type VerifyRequest struct {
+type SetUserAuthenticationValidityDurationSecondsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Signature     int64                  `protobuf:"varint,1,opt,name=signature,proto3" json:"signature,omitempty"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *VerifyRequest) Reset() {
-	*x = VerifyRequest{}
+func (x *SetUserAuthenticationValidityDurationSecondsRequest) Reset() {
+	*x = SetUserAuthenticationValidityDurationSecondsRequest{}
 	mi := &file_proto_keystore_keystore_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *VerifyRequest) String() string {
+func (x *SetUserAuthenticationValidityDurationSecondsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*VerifyRequest) ProtoMessage() {}
+func (*SetUserAuthenticationValidityDurationSecondsRequest) ProtoMessage() {}
 
-func (x *VerifyRequest) ProtoReflect() protoreflect.Message {
+func (x *SetUserAuthenticationValidityDurationSecondsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keystore_keystore_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2343,39 +2431,39 @@ func (x *VerifyRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use VerifyRequest.ProtoReflect.Descriptor instead.
-func (*VerifyRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetUserAuthenticationValidityDurationSecondsRequest.ProtoReflect.Descriptor instead.
+func (*SetUserAuthenticationValidityDurationSecondsRequest) Descriptor() ([]byte, []int) {
 	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{54}
 }
 
-func (x *VerifyRequest) GetSignature() int64 {
+func (x *SetUserAuthenticationValidityDurationSecondsRequest) GetArg0() int32 {
 	if x != nil {
-		return x.Signature
+		return x.Arg0
 	}
 	return 0
 }
 
-type VerifyResponse struct {
+type SetUserAuthenticationValidityDurationSecondsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *VerifyResponse) Reset() {
-	*x = VerifyResponse{}
+func (x *SetUserAuthenticationValidityDurationSecondsResponse) Reset() {
+	*x = SetUserAuthenticationValidityDurationSecondsResponse{}
 	mi := &file_proto_keystore_keystore_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *VerifyResponse) String() string {
+func (x *SetUserAuthenticationValidityDurationSecondsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*VerifyResponse) ProtoMessage() {}
+func (*SetUserAuthenticationValidityDurationSecondsResponse) ProtoMessage() {}
 
-func (x *VerifyResponse) ProtoReflect() protoreflect.Message {
+func (x *SetUserAuthenticationValidityDurationSecondsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keystore_keystore_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2387,166 +2475,352 @@ func (x *VerifyResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use VerifyResponse.ProtoReflect.Descriptor instead.
-func (*VerifyResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetUserAuthenticationValidityDurationSecondsResponse.ProtoReflect.Descriptor instead.
+func (*SetUserAuthenticationValidityDurationSecondsResponse) Descriptor() ([]byte, []int) {
 	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{55}
 }
 
-func (x *VerifyResponse) GetResult() bool {
+func (x *SetUserAuthenticationValidityDurationSecondsResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
+	return 0
+}
+
+type SetUserConfirmationRequiredRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetUserConfirmationRequiredRequest) Reset() {
+	*x = SetUserConfirmationRequiredRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[56]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetUserConfirmationRequiredRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetUserConfirmationRequiredRequest) ProtoMessage() {}
+
+func (x *SetUserConfirmationRequiredRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[56]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetUserConfirmationRequiredRequest.ProtoReflect.Descriptor instead.
+func (*SetUserConfirmationRequiredRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{56}
+}
+
+func (x *SetUserConfirmationRequiredRequest) GetArg0() bool {
+	if x != nil {
+		return x.Arg0
+	}
 	return false
+}
+
+type SetUserConfirmationRequiredResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetUserConfirmationRequiredResponse) Reset() {
+	*x = SetUserConfirmationRequiredResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[57]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetUserConfirmationRequiredResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetUserConfirmationRequiredResponse) ProtoMessage() {}
+
+func (x *SetUserConfirmationRequiredResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[57]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetUserConfirmationRequiredResponse.ProtoReflect.Descriptor instead.
+func (*SetUserConfirmationRequiredResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{57}
+}
+
+func (x *SetUserConfirmationRequiredResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetUserPresenceRequiredRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetUserPresenceRequiredRequest) Reset() {
+	*x = SetUserPresenceRequiredRequest{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[58]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetUserPresenceRequiredRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetUserPresenceRequiredRequest) ProtoMessage() {}
+
+func (x *SetUserPresenceRequiredRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[58]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetUserPresenceRequiredRequest.ProtoReflect.Descriptor instead.
+func (*SetUserPresenceRequiredRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{58}
+}
+
+func (x *SetUserPresenceRequiredRequest) GetArg0() bool {
+	if x != nil {
+		return x.Arg0
+	}
+	return false
+}
+
+type SetUserPresenceRequiredResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetUserPresenceRequiredResponse) Reset() {
+	*x = SetUserPresenceRequiredResponse{}
+	mi := &file_proto_keystore_keystore_proto_msgTypes[59]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetUserPresenceRequiredResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetUserPresenceRequiredResponse) ProtoMessage() {}
+
+func (x *SetUserPresenceRequiredResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keystore_keystore_proto_msgTypes[59]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetUserPresenceRequiredResponse.ProtoReflect.Descriptor instead.
+func (*SetUserPresenceRequiredResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keystore_keystore_proto_rawDescGZIP(), []int{59}
+}
+
+func (x *SetUserPresenceRequiredResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
 }
 
 var File_proto_keystore_keystore_proto protoreflect.FileDescriptor
 
 const file_proto_keystore_keystore_proto_rawDesc = "" +
 	"\n" +
-	"\x1dproto/keystore/keystore.proto\x12\bkeystore\"#\n" +
-	"\vLoadRequest\x12\x14\n" +
-	"\x05param\x18\x01 \x01(\x03R\x05param\"\x0e\n" +
-	"\fLoadResponse\",\n" +
-	"\x14ContainsAliasRequest\x12\x14\n" +
-	"\x05alias\x18\x01 \x01(\tR\x05alias\"/\n" +
-	"\x15ContainsAliasResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"*\n" +
-	"\x12DeleteEntryRequest\x12\x14\n" +
-	"\x05alias\x18\x01 \x01(\tR\x05alias\"\x15\n" +
-	"\x13DeleteEntryResponse\"\x13\n" +
-	"\x11AliasesRawRequest\",\n" +
-	"\x12AliasesRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"=\n" +
-	"\x0fGetEntryRequest\x12\x14\n" +
-	"\x05alias\x18\x01 \x01(\tR\x05alias\x12\x14\n" +
-	"\x05param\x18\x02 \x01(\x03R\x05param\"*\n" +
-	"\x10GetEntryResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\".\n" +
-	"\x11SetKeySizeRequest\x12\x19\n" +
-	"\bkey_size\x18\x01 \x01(\x05R\akeySize\",\n" +
-	"\x12SetKeySizeResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"7\n" +
-	"\x14SetBlockModesRequest\x12\x1f\n" +
-	"\vblock_modes\x18\x01 \x01(\x03R\n" +
-	"blockModes\"/\n" +
-	"\x15SetBlockModesResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\":\n" +
-	"\x1cSetEncryptionPaddingsRequest\x12\x1a\n" +
-	"\bpaddings\x18\x01 \x01(\x03R\bpaddings\"7\n" +
-	"\x1dSetEncryptionPaddingsResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"9\n" +
-	"\x1bSetSignaturePaddingsRequest\x12\x1a\n" +
-	"\bpaddings\x18\x01 \x01(\x03R\bpaddings\"6\n" +
-	"\x1cSetSignaturePaddingsResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"-\n" +
-	"\x11SetDigestsRequest\x12\x18\n" +
-	"\adigests\x18\x01 \x01(\x03R\adigests\",\n" +
-	"\x12SetDigestsResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"B\n" +
-	"$SetUserAuthenticationRequiredRequest\x12\x1a\n" +
-	"\brequired\x18\x01 \x01(\bR\brequired\"?\n" +
-	"%SetUserAuthenticationRequiredResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"O\n" +
-	"3SetUserAuthenticationValidityDurationSecondsRequest\x12\x18\n" +
-	"\aseconds\x18\x01 \x01(\x05R\aseconds\"N\n" +
-	"4SetUserAuthenticationValidityDurationSecondsResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"N\n" +
-	"*SetInvalidatedByBiometricEnrollmentRequest\x12 \n" +
-	"\vinvalidated\x18\x01 \x01(\bR\vinvalidated\"E\n" +
-	"+SetInvalidatedByBiometricEnrollmentResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\">\n" +
-	" SetUnlockedDeviceRequiredRequest\x12\x1a\n" +
-	"\brequired\x18\x01 \x01(\bR\brequired\";\n" +
-	"!SetUnlockedDeviceRequiredResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"\x0e\n" +
+	"\x1dproto/keystore/keystore.proto\x12\bkeystore\"\x0e\n" +
 	"\fBuildRequest\"'\n" +
 	"\rBuildResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"%\n" +
-	"\vInitRequest\x12\x16\n" +
-	"\x06params\x18\x01 \x01(\x03R\x06params\"\x0e\n" +
-	"\fInitResponse\"\x14\n" +
-	"\x12GenerateKeyRequest\"-\n" +
-	"\x13GenerateKeyResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"+\n" +
-	"\x11InitializeRequest\x12\x16\n" +
-	"\x06params\x18\x01 \x01(\x03R\x06params\"\x14\n" +
-	"\x12InitializeResponse\"\x18\n" +
-	"\x16GenerateKeyPairRequest\"1\n" +
-	"\x17GenerateKeyPairResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\">\n" +
-	"\x12InitWithKeyRequest\x12\x16\n" +
-	"\x06opmode\x18\x01 \x01(\x05R\x06opmode\x12\x10\n" +
-	"\x03key\x18\x02 \x01(\x03R\x03key\"\x15\n" +
-	"\x13InitWithKeyResponse\"_\n" +
-	"\x1bInitWithKeyAndParamsRequest\x12\x16\n" +
-	"\x06opmode\x18\x01 \x01(\x05R\x06opmode\x12\x10\n" +
-	"\x03key\x18\x02 \x01(\x03R\x03key\x12\x16\n" +
-	"\x06params\x18\x03 \x01(\x03R\x06params\"\x1e\n" +
-	"\x1cInitWithKeyAndParamsResponse\"&\n" +
-	"\x0eDoFinalRequest\x12\x14\n" +
-	"\x05input\x18\x01 \x01(\x03R\x05input\")\n" +
-	"\x0fDoFinalResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"\x0e\n" +
-	"\fGetIVRequest\"'\n" +
-	"\rGetIVResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"6\n" +
+	" SetAlgorithmParameterSpecRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\";\n" +
+	"!SetAlgorithmParameterSpecResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\".\n" +
+	"\x18SetAttestKeyAliasRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"3\n" +
+	"\x19SetAttestKeyAliasResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"4\n" +
+	"\x1eSetAttestationChallengeRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"9\n" +
+	"\x1fSetAttestationChallengeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"*\n" +
+	"\x14SetBlockModesRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"/\n" +
+	"\x15SetBlockModesResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"3\n" +
+	"\x1dSetCertificateNotAfterRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"8\n" +
+	"\x1eSetCertificateNotAfterResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"4\n" +
+	"\x1eSetCertificateNotBeforeRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"9\n" +
+	"\x1fSetCertificateNotBeforeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"7\n" +
+	"!SetCertificateSerialNumberRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"<\n" +
+	"\"SetCertificateSerialNumberResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\x03R\x06result\"2\n" +
-	"\x0fInitSignRequest\x12\x1f\n" +
-	"\vprivate_key\x18\x01 \x01(\x03R\n" +
-	"privateKey\"\x12\n" +
-	"\x10InitSignResponse\"2\n" +
-	"\x11InitVerifyRequest\x12\x1d\n" +
-	"\n" +
-	"public_key\x18\x01 \x01(\x03R\tpublicKey\"\x14\n" +
-	"\x12InitVerifyResponse\"#\n" +
-	"\rUpdateRequest\x12\x12\n" +
-	"\x04data\x18\x01 \x01(\x03R\x04data\"\x10\n" +
-	"\x0eUpdateResponse\"\r\n" +
-	"\vSignRequest\"&\n" +
-	"\fSignResponse\x12\x16\n" +
+	"\x1cSetCertificateSubjectRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"7\n" +
+	"\x1dSetCertificateSubjectResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"C\n" +
+	"-SetDevicePropertiesAttestationIncludedRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"H\n" +
+	".SetDevicePropertiesAttestationIncludedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"'\n" +
+	"\x11SetDigestsRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\",\n" +
+	"\x12SetDigestsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"2\n" +
+	"\x1cSetEncryptionPaddingsRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"7\n" +
+	"\x1dSetEncryptionPaddingsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"@\n" +
+	"*SetInvalidatedByBiometricEnrollmentRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"E\n" +
+	"+SetInvalidatedByBiometricEnrollmentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"1\n" +
+	"\x1bSetIsStrongBoxBackedRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"6\n" +
+	"\x1cSetIsStrongBoxBackedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"'\n" +
+	"\x11SetKeySizeRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\",\n" +
+	"\x12SetKeySizeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\".\n" +
+	"\x18SetKeyValidityEndRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"3\n" +
+	"\x19SetKeyValidityEndResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"<\n" +
+	"&SetKeyValidityForConsumptionEndRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"A\n" +
+	"'SetKeyValidityForConsumptionEndResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"<\n" +
+	"&SetKeyValidityForOriginationEndRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"A\n" +
+	"'SetKeyValidityForOriginationEndResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"0\n" +
+	"\x1aSetKeyValidityStartRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"5\n" +
+	"\x1bSetKeyValidityStartResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\x03R\x06result\"-\n" +
-	"\rVerifyRequest\x12\x1c\n" +
-	"\tsignature\x18\x01 \x01(\x03R\tsignature\"(\n" +
-	"\x0eVerifyResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result2\xf6\x02\n" +
-	"\x13KeyStoreJavaService\x125\n" +
-	"\x04Load\x12\x15.keystore.LoadRequest\x1a\x16.keystore.LoadResponse\x12P\n" +
-	"\rContainsAlias\x12\x1e.keystore.ContainsAliasRequest\x1a\x1f.keystore.ContainsAliasResponse\x12J\n" +
-	"\vDeleteEntry\x12\x1c.keystore.DeleteEntryRequest\x1a\x1d.keystore.DeleteEntryResponse\x12G\n" +
+	"\x17SetMaxUsageCountRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"2\n" +
+	"\x18SetMaxUsageCountResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"+\n" +
+	"\x15SetMgf1DigestsRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"0\n" +
+	"\x16SetMgf1DigestsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"<\n" +
+	"&SetRandomizedEncryptionRequiredRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"A\n" +
+	"'SetRandomizedEncryptionRequiredResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"1\n" +
+	"\x1bSetSignaturePaddingsRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"6\n" +
+	"\x1cSetSignaturePaddingsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"6\n" +
+	" SetUnlockedDeviceRequiredRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\";\n" +
+	"!SetUnlockedDeviceRequiredResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"P\n" +
+	"&SetUserAuthenticationParametersRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\"A\n" +
+	"'SetUserAuthenticationParametersResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\":\n" +
+	"$SetUserAuthenticationRequiredRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"?\n" +
+	"%SetUserAuthenticationRequiredResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"B\n" +
+	",SetUserAuthenticationValidWhileOnBodyRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"G\n" +
+	"-SetUserAuthenticationValidWhileOnBodyResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"I\n" +
+	"3SetUserAuthenticationValidityDurationSecondsRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"N\n" +
+	"4SetUserAuthenticationValidityDurationSecondsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"8\n" +
+	"\"SetUserConfirmationRequiredRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"=\n" +
+	"#SetUserConfirmationRequiredResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"4\n" +
+	"\x1eSetUserPresenceRequiredRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"9\n" +
+	"\x1fSetUserPresenceRequiredResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result2\xf6\x1a\n" +
+	"!KeyGenParameterSpecBuilderService\x128\n" +
+	"\x05Build\x12\x16.keystore.BuildRequest\x1a\x17.keystore.BuildResponse\x12t\n" +
+	"\x19SetAlgorithmParameterSpec\x12*.keystore.SetAlgorithmParameterSpecRequest\x1a+.keystore.SetAlgorithmParameterSpecResponse\x12\\\n" +
+	"\x11SetAttestKeyAlias\x12\".keystore.SetAttestKeyAliasRequest\x1a#.keystore.SetAttestKeyAliasResponse\x12n\n" +
+	"\x17SetAttestationChallenge\x12(.keystore.SetAttestationChallengeRequest\x1a).keystore.SetAttestationChallengeResponse\x12P\n" +
+	"\rSetBlockModes\x12\x1e.keystore.SetBlockModesRequest\x1a\x1f.keystore.SetBlockModesResponse\x12k\n" +
+	"\x16SetCertificateNotAfter\x12'.keystore.SetCertificateNotAfterRequest\x1a(.keystore.SetCertificateNotAfterResponse\x12n\n" +
+	"\x17SetCertificateNotBefore\x12(.keystore.SetCertificateNotBeforeRequest\x1a).keystore.SetCertificateNotBeforeResponse\x12w\n" +
+	"\x1aSetCertificateSerialNumber\x12+.keystore.SetCertificateSerialNumberRequest\x1a,.keystore.SetCertificateSerialNumberResponse\x12h\n" +
+	"\x15SetCertificateSubject\x12&.keystore.SetCertificateSubjectRequest\x1a'.keystore.SetCertificateSubjectResponse\x12\x9b\x01\n" +
+	"&SetDevicePropertiesAttestationIncluded\x127.keystore.SetDevicePropertiesAttestationIncludedRequest\x1a8.keystore.SetDevicePropertiesAttestationIncludedResponse\x12G\n" +
 	"\n" +
-	"AliasesRaw\x12\x1b.keystore.AliasesRawRequest\x1a\x1c.keystore.AliasesRawResponse\x12A\n" +
-	"\bGetEntry\x12\x19.keystore.GetEntryRequest\x1a\x1a.keystore.GetEntryResponse2\xc8\b\n" +
-	"\x19KeyGenParamBuilderService\x12G\n" +
+	"SetDigests\x12\x1b.keystore.SetDigestsRequest\x1a\x1c.keystore.SetDigestsResponse\x12h\n" +
+	"\x15SetEncryptionPaddings\x12&.keystore.SetEncryptionPaddingsRequest\x1a'.keystore.SetEncryptionPaddingsResponse\x12\x92\x01\n" +
+	"#SetInvalidatedByBiometricEnrollment\x124.keystore.SetInvalidatedByBiometricEnrollmentRequest\x1a5.keystore.SetInvalidatedByBiometricEnrollmentResponse\x12e\n" +
+	"\x14SetIsStrongBoxBacked\x12%.keystore.SetIsStrongBoxBackedRequest\x1a&.keystore.SetIsStrongBoxBackedResponse\x12G\n" +
 	"\n" +
-	"SetKeySize\x12\x1b.keystore.SetKeySizeRequest\x1a\x1c.keystore.SetKeySizeResponse\x12P\n" +
-	"\rSetBlockModes\x12\x1e.keystore.SetBlockModesRequest\x1a\x1f.keystore.SetBlockModesResponse\x12h\n" +
-	"\x15SetEncryptionPaddings\x12&.keystore.SetEncryptionPaddingsRequest\x1a'.keystore.SetEncryptionPaddingsResponse\x12e\n" +
-	"\x14SetSignaturePaddings\x12%.keystore.SetSignaturePaddingsRequest\x1a&.keystore.SetSignaturePaddingsResponse\x12G\n" +
-	"\n" +
-	"SetDigests\x12\x1b.keystore.SetDigestsRequest\x1a\x1c.keystore.SetDigestsResponse\x12\x80\x01\n" +
-	"\x1dSetUserAuthenticationRequired\x12..keystore.SetUserAuthenticationRequiredRequest\x1a/.keystore.SetUserAuthenticationRequiredResponse\x12\xad\x01\n" +
-	",SetUserAuthenticationValidityDurationSeconds\x12=.keystore.SetUserAuthenticationValidityDurationSecondsRequest\x1a>.keystore.SetUserAuthenticationValidityDurationSecondsResponse\x12\x92\x01\n" +
-	"#SetInvalidatedByBiometricEnrollment\x124.keystore.SetInvalidatedByBiometricEnrollmentRequest\x1a5.keystore.SetInvalidatedByBiometricEnrollmentResponse\x12t\n" +
-	"\x19SetUnlockedDeviceRequired\x12*.keystore.SetUnlockedDeviceRequiredRequest\x1a+.keystore.SetUnlockedDeviceRequiredResponse\x128\n" +
-	"\x05Build\x12\x16.keystore.BuildRequest\x1a\x17.keystore.BuildResponse2\x9c\x01\n" +
-	"\x17KeyGeneratorJavaService\x125\n" +
-	"\x04Init\x12\x15.keystore.InitRequest\x1a\x16.keystore.InitResponse\x12J\n" +
-	"\vGenerateKey\x12\x1c.keystore.GenerateKeyRequest\x1a\x1d.keystore.GenerateKeyResponse2\xbe\x01\n" +
-	"\x1bKeyPairGeneratorJavaService\x12G\n" +
-	"\n" +
-	"Initialize\x12\x1b.keystore.InitializeRequest\x1a\x1c.keystore.InitializeResponse\x12V\n" +
-	"\x0fGenerateKeyPair\x12 .keystore.GenerateKeyPairRequest\x1a!.keystore.GenerateKeyPairResponse2\xc0\x02\n" +
-	"\x11CipherJavaService\x12J\n" +
-	"\vInitWithKey\x12\x1c.keystore.InitWithKeyRequest\x1a\x1d.keystore.InitWithKeyResponse\x12e\n" +
-	"\x14InitWithKeyAndParams\x12%.keystore.InitWithKeyAndParamsRequest\x1a&.keystore.InitWithKeyAndParamsResponse\x12>\n" +
-	"\aDoFinal\x12\x18.keystore.DoFinalRequest\x1a\x19.keystore.DoFinalResponse\x128\n" +
-	"\x05GetIV\x12\x16.keystore.GetIVRequest\x1a\x17.keystore.GetIVResponse2\xd3\x02\n" +
-	"\x14SignatureJavaService\x12A\n" +
-	"\bInitSign\x12\x19.keystore.InitSignRequest\x1a\x1a.keystore.InitSignResponse\x12G\n" +
-	"\n" +
-	"InitVerify\x12\x1b.keystore.InitVerifyRequest\x1a\x1c.keystore.InitVerifyResponse\x12;\n" +
-	"\x06Update\x12\x17.keystore.UpdateRequest\x1a\x18.keystore.UpdateResponse\x125\n" +
-	"\x04Sign\x12\x15.keystore.SignRequest\x1a\x16.keystore.SignResponse\x12;\n" +
-	"\x06Verify\x12\x17.keystore.VerifyRequest\x1a\x18.keystore.VerifyResponseB+Z)github.com/xaionaro-go/jni/proto/keystoreb\x06proto3"
+	"SetKeySize\x12\x1b.keystore.SetKeySizeRequest\x1a\x1c.keystore.SetKeySizeResponse\x12\\\n" +
+	"\x11SetKeyValidityEnd\x12\".keystore.SetKeyValidityEndRequest\x1a#.keystore.SetKeyValidityEndResponse\x12\x86\x01\n" +
+	"\x1fSetKeyValidityForConsumptionEnd\x120.keystore.SetKeyValidityForConsumptionEndRequest\x1a1.keystore.SetKeyValidityForConsumptionEndResponse\x12\x86\x01\n" +
+	"\x1fSetKeyValidityForOriginationEnd\x120.keystore.SetKeyValidityForOriginationEndRequest\x1a1.keystore.SetKeyValidityForOriginationEndResponse\x12b\n" +
+	"\x13SetKeyValidityStart\x12$.keystore.SetKeyValidityStartRequest\x1a%.keystore.SetKeyValidityStartResponse\x12Y\n" +
+	"\x10SetMaxUsageCount\x12!.keystore.SetMaxUsageCountRequest\x1a\".keystore.SetMaxUsageCountResponse\x12S\n" +
+	"\x0eSetMgf1Digests\x12\x1f.keystore.SetMgf1DigestsRequest\x1a .keystore.SetMgf1DigestsResponse\x12\x86\x01\n" +
+	"\x1fSetRandomizedEncryptionRequired\x120.keystore.SetRandomizedEncryptionRequiredRequest\x1a1.keystore.SetRandomizedEncryptionRequiredResponse\x12e\n" +
+	"\x14SetSignaturePaddings\x12%.keystore.SetSignaturePaddingsRequest\x1a&.keystore.SetSignaturePaddingsResponse\x12t\n" +
+	"\x19SetUnlockedDeviceRequired\x12*.keystore.SetUnlockedDeviceRequiredRequest\x1a+.keystore.SetUnlockedDeviceRequiredResponse\x12\x86\x01\n" +
+	"\x1fSetUserAuthenticationParameters\x120.keystore.SetUserAuthenticationParametersRequest\x1a1.keystore.SetUserAuthenticationParametersResponse\x12\x80\x01\n" +
+	"\x1dSetUserAuthenticationRequired\x12..keystore.SetUserAuthenticationRequiredRequest\x1a/.keystore.SetUserAuthenticationRequiredResponse\x12\x98\x01\n" +
+	"%SetUserAuthenticationValidWhileOnBody\x126.keystore.SetUserAuthenticationValidWhileOnBodyRequest\x1a7.keystore.SetUserAuthenticationValidWhileOnBodyResponse\x12\xad\x01\n" +
+	",SetUserAuthenticationValidityDurationSeconds\x12=.keystore.SetUserAuthenticationValidityDurationSecondsRequest\x1a>.keystore.SetUserAuthenticationValidityDurationSecondsResponse\x12z\n" +
+	"\x1bSetUserConfirmationRequired\x12,.keystore.SetUserConfirmationRequiredRequest\x1a-.keystore.SetUserConfirmationRequiredResponse\x12n\n" +
+	"\x17SetUserPresenceRequired\x12(.keystore.SetUserPresenceRequiredRequest\x1a).keystore.SetUserPresenceRequiredResponseB+Z)github.com/xaionaro-go/jni/proto/keystoreb\x06proto3"
 
 var (
 	file_proto_keystore_keystore_proto_rawDescOnce sync.Once
@@ -2560,124 +2834,132 @@ func file_proto_keystore_keystore_proto_rawDescGZIP() []byte {
 	return file_proto_keystore_keystore_proto_rawDescData
 }
 
-var file_proto_keystore_keystore_proto_msgTypes = make([]protoimpl.MessageInfo, 56)
+var file_proto_keystore_keystore_proto_msgTypes = make([]protoimpl.MessageInfo, 60)
 var file_proto_keystore_keystore_proto_goTypes = []any{
-	(*LoadRequest)(nil),                                          // 0: keystore.LoadRequest
-	(*LoadResponse)(nil),                                         // 1: keystore.LoadResponse
-	(*ContainsAliasRequest)(nil),                                 // 2: keystore.ContainsAliasRequest
-	(*ContainsAliasResponse)(nil),                                // 3: keystore.ContainsAliasResponse
-	(*DeleteEntryRequest)(nil),                                   // 4: keystore.DeleteEntryRequest
-	(*DeleteEntryResponse)(nil),                                  // 5: keystore.DeleteEntryResponse
-	(*AliasesRawRequest)(nil),                                    // 6: keystore.AliasesRawRequest
-	(*AliasesRawResponse)(nil),                                   // 7: keystore.AliasesRawResponse
-	(*GetEntryRequest)(nil),                                      // 8: keystore.GetEntryRequest
-	(*GetEntryResponse)(nil),                                     // 9: keystore.GetEntryResponse
-	(*SetKeySizeRequest)(nil),                                    // 10: keystore.SetKeySizeRequest
-	(*SetKeySizeResponse)(nil),                                   // 11: keystore.SetKeySizeResponse
-	(*SetBlockModesRequest)(nil),                                 // 12: keystore.SetBlockModesRequest
-	(*SetBlockModesResponse)(nil),                                // 13: keystore.SetBlockModesResponse
-	(*SetEncryptionPaddingsRequest)(nil),                         // 14: keystore.SetEncryptionPaddingsRequest
-	(*SetEncryptionPaddingsResponse)(nil),                        // 15: keystore.SetEncryptionPaddingsResponse
-	(*SetSignaturePaddingsRequest)(nil),                          // 16: keystore.SetSignaturePaddingsRequest
-	(*SetSignaturePaddingsResponse)(nil),                         // 17: keystore.SetSignaturePaddingsResponse
-	(*SetDigestsRequest)(nil),                                    // 18: keystore.SetDigestsRequest
-	(*SetDigestsResponse)(nil),                                   // 19: keystore.SetDigestsResponse
-	(*SetUserAuthenticationRequiredRequest)(nil),                 // 20: keystore.SetUserAuthenticationRequiredRequest
-	(*SetUserAuthenticationRequiredResponse)(nil),                // 21: keystore.SetUserAuthenticationRequiredResponse
-	(*SetUserAuthenticationValidityDurationSecondsRequest)(nil),  // 22: keystore.SetUserAuthenticationValidityDurationSecondsRequest
-	(*SetUserAuthenticationValidityDurationSecondsResponse)(nil), // 23: keystore.SetUserAuthenticationValidityDurationSecondsResponse
+	(*BuildRequest)(nil),                                         // 0: keystore.BuildRequest
+	(*BuildResponse)(nil),                                        // 1: keystore.BuildResponse
+	(*SetAlgorithmParameterSpecRequest)(nil),                     // 2: keystore.SetAlgorithmParameterSpecRequest
+	(*SetAlgorithmParameterSpecResponse)(nil),                    // 3: keystore.SetAlgorithmParameterSpecResponse
+	(*SetAttestKeyAliasRequest)(nil),                             // 4: keystore.SetAttestKeyAliasRequest
+	(*SetAttestKeyAliasResponse)(nil),                            // 5: keystore.SetAttestKeyAliasResponse
+	(*SetAttestationChallengeRequest)(nil),                       // 6: keystore.SetAttestationChallengeRequest
+	(*SetAttestationChallengeResponse)(nil),                      // 7: keystore.SetAttestationChallengeResponse
+	(*SetBlockModesRequest)(nil),                                 // 8: keystore.SetBlockModesRequest
+	(*SetBlockModesResponse)(nil),                                // 9: keystore.SetBlockModesResponse
+	(*SetCertificateNotAfterRequest)(nil),                        // 10: keystore.SetCertificateNotAfterRequest
+	(*SetCertificateNotAfterResponse)(nil),                       // 11: keystore.SetCertificateNotAfterResponse
+	(*SetCertificateNotBeforeRequest)(nil),                       // 12: keystore.SetCertificateNotBeforeRequest
+	(*SetCertificateNotBeforeResponse)(nil),                      // 13: keystore.SetCertificateNotBeforeResponse
+	(*SetCertificateSerialNumberRequest)(nil),                    // 14: keystore.SetCertificateSerialNumberRequest
+	(*SetCertificateSerialNumberResponse)(nil),                   // 15: keystore.SetCertificateSerialNumberResponse
+	(*SetCertificateSubjectRequest)(nil),                         // 16: keystore.SetCertificateSubjectRequest
+	(*SetCertificateSubjectResponse)(nil),                        // 17: keystore.SetCertificateSubjectResponse
+	(*SetDevicePropertiesAttestationIncludedRequest)(nil),        // 18: keystore.SetDevicePropertiesAttestationIncludedRequest
+	(*SetDevicePropertiesAttestationIncludedResponse)(nil),       // 19: keystore.SetDevicePropertiesAttestationIncludedResponse
+	(*SetDigestsRequest)(nil),                                    // 20: keystore.SetDigestsRequest
+	(*SetDigestsResponse)(nil),                                   // 21: keystore.SetDigestsResponse
+	(*SetEncryptionPaddingsRequest)(nil),                         // 22: keystore.SetEncryptionPaddingsRequest
+	(*SetEncryptionPaddingsResponse)(nil),                        // 23: keystore.SetEncryptionPaddingsResponse
 	(*SetInvalidatedByBiometricEnrollmentRequest)(nil),           // 24: keystore.SetInvalidatedByBiometricEnrollmentRequest
 	(*SetInvalidatedByBiometricEnrollmentResponse)(nil),          // 25: keystore.SetInvalidatedByBiometricEnrollmentResponse
-	(*SetUnlockedDeviceRequiredRequest)(nil),                     // 26: keystore.SetUnlockedDeviceRequiredRequest
-	(*SetUnlockedDeviceRequiredResponse)(nil),                    // 27: keystore.SetUnlockedDeviceRequiredResponse
-	(*BuildRequest)(nil),                                         // 28: keystore.BuildRequest
-	(*BuildResponse)(nil),                                        // 29: keystore.BuildResponse
-	(*InitRequest)(nil),                                          // 30: keystore.InitRequest
-	(*InitResponse)(nil),                                         // 31: keystore.InitResponse
-	(*GenerateKeyRequest)(nil),                                   // 32: keystore.GenerateKeyRequest
-	(*GenerateKeyResponse)(nil),                                  // 33: keystore.GenerateKeyResponse
-	(*InitializeRequest)(nil),                                    // 34: keystore.InitializeRequest
-	(*InitializeResponse)(nil),                                   // 35: keystore.InitializeResponse
-	(*GenerateKeyPairRequest)(nil),                               // 36: keystore.GenerateKeyPairRequest
-	(*GenerateKeyPairResponse)(nil),                              // 37: keystore.GenerateKeyPairResponse
-	(*InitWithKeyRequest)(nil),                                   // 38: keystore.InitWithKeyRequest
-	(*InitWithKeyResponse)(nil),                                  // 39: keystore.InitWithKeyResponse
-	(*InitWithKeyAndParamsRequest)(nil),                          // 40: keystore.InitWithKeyAndParamsRequest
-	(*InitWithKeyAndParamsResponse)(nil),                         // 41: keystore.InitWithKeyAndParamsResponse
-	(*DoFinalRequest)(nil),                                       // 42: keystore.DoFinalRequest
-	(*DoFinalResponse)(nil),                                      // 43: keystore.DoFinalResponse
-	(*GetIVRequest)(nil),                                         // 44: keystore.GetIVRequest
-	(*GetIVResponse)(nil),                                        // 45: keystore.GetIVResponse
-	(*InitSignRequest)(nil),                                      // 46: keystore.InitSignRequest
-	(*InitSignResponse)(nil),                                     // 47: keystore.InitSignResponse
-	(*InitVerifyRequest)(nil),                                    // 48: keystore.InitVerifyRequest
-	(*InitVerifyResponse)(nil),                                   // 49: keystore.InitVerifyResponse
-	(*UpdateRequest)(nil),                                        // 50: keystore.UpdateRequest
-	(*UpdateResponse)(nil),                                       // 51: keystore.UpdateResponse
-	(*SignRequest)(nil),                                          // 52: keystore.SignRequest
-	(*SignResponse)(nil),                                         // 53: keystore.SignResponse
-	(*VerifyRequest)(nil),                                        // 54: keystore.VerifyRequest
-	(*VerifyResponse)(nil),                                       // 55: keystore.VerifyResponse
+	(*SetIsStrongBoxBackedRequest)(nil),                          // 26: keystore.SetIsStrongBoxBackedRequest
+	(*SetIsStrongBoxBackedResponse)(nil),                         // 27: keystore.SetIsStrongBoxBackedResponse
+	(*SetKeySizeRequest)(nil),                                    // 28: keystore.SetKeySizeRequest
+	(*SetKeySizeResponse)(nil),                                   // 29: keystore.SetKeySizeResponse
+	(*SetKeyValidityEndRequest)(nil),                             // 30: keystore.SetKeyValidityEndRequest
+	(*SetKeyValidityEndResponse)(nil),                            // 31: keystore.SetKeyValidityEndResponse
+	(*SetKeyValidityForConsumptionEndRequest)(nil),               // 32: keystore.SetKeyValidityForConsumptionEndRequest
+	(*SetKeyValidityForConsumptionEndResponse)(nil),              // 33: keystore.SetKeyValidityForConsumptionEndResponse
+	(*SetKeyValidityForOriginationEndRequest)(nil),               // 34: keystore.SetKeyValidityForOriginationEndRequest
+	(*SetKeyValidityForOriginationEndResponse)(nil),              // 35: keystore.SetKeyValidityForOriginationEndResponse
+	(*SetKeyValidityStartRequest)(nil),                           // 36: keystore.SetKeyValidityStartRequest
+	(*SetKeyValidityStartResponse)(nil),                          // 37: keystore.SetKeyValidityStartResponse
+	(*SetMaxUsageCountRequest)(nil),                              // 38: keystore.SetMaxUsageCountRequest
+	(*SetMaxUsageCountResponse)(nil),                             // 39: keystore.SetMaxUsageCountResponse
+	(*SetMgf1DigestsRequest)(nil),                                // 40: keystore.SetMgf1DigestsRequest
+	(*SetMgf1DigestsResponse)(nil),                               // 41: keystore.SetMgf1DigestsResponse
+	(*SetRandomizedEncryptionRequiredRequest)(nil),               // 42: keystore.SetRandomizedEncryptionRequiredRequest
+	(*SetRandomizedEncryptionRequiredResponse)(nil),              // 43: keystore.SetRandomizedEncryptionRequiredResponse
+	(*SetSignaturePaddingsRequest)(nil),                          // 44: keystore.SetSignaturePaddingsRequest
+	(*SetSignaturePaddingsResponse)(nil),                         // 45: keystore.SetSignaturePaddingsResponse
+	(*SetUnlockedDeviceRequiredRequest)(nil),                     // 46: keystore.SetUnlockedDeviceRequiredRequest
+	(*SetUnlockedDeviceRequiredResponse)(nil),                    // 47: keystore.SetUnlockedDeviceRequiredResponse
+	(*SetUserAuthenticationParametersRequest)(nil),               // 48: keystore.SetUserAuthenticationParametersRequest
+	(*SetUserAuthenticationParametersResponse)(nil),              // 49: keystore.SetUserAuthenticationParametersResponse
+	(*SetUserAuthenticationRequiredRequest)(nil),                 // 50: keystore.SetUserAuthenticationRequiredRequest
+	(*SetUserAuthenticationRequiredResponse)(nil),                // 51: keystore.SetUserAuthenticationRequiredResponse
+	(*SetUserAuthenticationValidWhileOnBodyRequest)(nil),         // 52: keystore.SetUserAuthenticationValidWhileOnBodyRequest
+	(*SetUserAuthenticationValidWhileOnBodyResponse)(nil),        // 53: keystore.SetUserAuthenticationValidWhileOnBodyResponse
+	(*SetUserAuthenticationValidityDurationSecondsRequest)(nil),  // 54: keystore.SetUserAuthenticationValidityDurationSecondsRequest
+	(*SetUserAuthenticationValidityDurationSecondsResponse)(nil), // 55: keystore.SetUserAuthenticationValidityDurationSecondsResponse
+	(*SetUserConfirmationRequiredRequest)(nil),                   // 56: keystore.SetUserConfirmationRequiredRequest
+	(*SetUserConfirmationRequiredResponse)(nil),                  // 57: keystore.SetUserConfirmationRequiredResponse
+	(*SetUserPresenceRequiredRequest)(nil),                       // 58: keystore.SetUserPresenceRequiredRequest
+	(*SetUserPresenceRequiredResponse)(nil),                      // 59: keystore.SetUserPresenceRequiredResponse
 }
 var file_proto_keystore_keystore_proto_depIdxs = []int32{
-	0,  // 0: keystore.KeyStoreJavaService.Load:input_type -> keystore.LoadRequest
-	2,  // 1: keystore.KeyStoreJavaService.ContainsAlias:input_type -> keystore.ContainsAliasRequest
-	4,  // 2: keystore.KeyStoreJavaService.DeleteEntry:input_type -> keystore.DeleteEntryRequest
-	6,  // 3: keystore.KeyStoreJavaService.AliasesRaw:input_type -> keystore.AliasesRawRequest
-	8,  // 4: keystore.KeyStoreJavaService.GetEntry:input_type -> keystore.GetEntryRequest
-	10, // 5: keystore.KeyGenParamBuilderService.SetKeySize:input_type -> keystore.SetKeySizeRequest
-	12, // 6: keystore.KeyGenParamBuilderService.SetBlockModes:input_type -> keystore.SetBlockModesRequest
-	14, // 7: keystore.KeyGenParamBuilderService.SetEncryptionPaddings:input_type -> keystore.SetEncryptionPaddingsRequest
-	16, // 8: keystore.KeyGenParamBuilderService.SetSignaturePaddings:input_type -> keystore.SetSignaturePaddingsRequest
-	18, // 9: keystore.KeyGenParamBuilderService.SetDigests:input_type -> keystore.SetDigestsRequest
-	20, // 10: keystore.KeyGenParamBuilderService.SetUserAuthenticationRequired:input_type -> keystore.SetUserAuthenticationRequiredRequest
-	22, // 11: keystore.KeyGenParamBuilderService.SetUserAuthenticationValidityDurationSeconds:input_type -> keystore.SetUserAuthenticationValidityDurationSecondsRequest
-	24, // 12: keystore.KeyGenParamBuilderService.SetInvalidatedByBiometricEnrollment:input_type -> keystore.SetInvalidatedByBiometricEnrollmentRequest
-	26, // 13: keystore.KeyGenParamBuilderService.SetUnlockedDeviceRequired:input_type -> keystore.SetUnlockedDeviceRequiredRequest
-	28, // 14: keystore.KeyGenParamBuilderService.Build:input_type -> keystore.BuildRequest
-	30, // 15: keystore.KeyGeneratorJavaService.Init:input_type -> keystore.InitRequest
-	32, // 16: keystore.KeyGeneratorJavaService.GenerateKey:input_type -> keystore.GenerateKeyRequest
-	34, // 17: keystore.KeyPairGeneratorJavaService.Initialize:input_type -> keystore.InitializeRequest
-	36, // 18: keystore.KeyPairGeneratorJavaService.GenerateKeyPair:input_type -> keystore.GenerateKeyPairRequest
-	38, // 19: keystore.CipherJavaService.InitWithKey:input_type -> keystore.InitWithKeyRequest
-	40, // 20: keystore.CipherJavaService.InitWithKeyAndParams:input_type -> keystore.InitWithKeyAndParamsRequest
-	42, // 21: keystore.CipherJavaService.DoFinal:input_type -> keystore.DoFinalRequest
-	44, // 22: keystore.CipherJavaService.GetIV:input_type -> keystore.GetIVRequest
-	46, // 23: keystore.SignatureJavaService.InitSign:input_type -> keystore.InitSignRequest
-	48, // 24: keystore.SignatureJavaService.InitVerify:input_type -> keystore.InitVerifyRequest
-	50, // 25: keystore.SignatureJavaService.Update:input_type -> keystore.UpdateRequest
-	52, // 26: keystore.SignatureJavaService.Sign:input_type -> keystore.SignRequest
-	54, // 27: keystore.SignatureJavaService.Verify:input_type -> keystore.VerifyRequest
-	1,  // 28: keystore.KeyStoreJavaService.Load:output_type -> keystore.LoadResponse
-	3,  // 29: keystore.KeyStoreJavaService.ContainsAlias:output_type -> keystore.ContainsAliasResponse
-	5,  // 30: keystore.KeyStoreJavaService.DeleteEntry:output_type -> keystore.DeleteEntryResponse
-	7,  // 31: keystore.KeyStoreJavaService.AliasesRaw:output_type -> keystore.AliasesRawResponse
-	9,  // 32: keystore.KeyStoreJavaService.GetEntry:output_type -> keystore.GetEntryResponse
-	11, // 33: keystore.KeyGenParamBuilderService.SetKeySize:output_type -> keystore.SetKeySizeResponse
-	13, // 34: keystore.KeyGenParamBuilderService.SetBlockModes:output_type -> keystore.SetBlockModesResponse
-	15, // 35: keystore.KeyGenParamBuilderService.SetEncryptionPaddings:output_type -> keystore.SetEncryptionPaddingsResponse
-	17, // 36: keystore.KeyGenParamBuilderService.SetSignaturePaddings:output_type -> keystore.SetSignaturePaddingsResponse
-	19, // 37: keystore.KeyGenParamBuilderService.SetDigests:output_type -> keystore.SetDigestsResponse
-	21, // 38: keystore.KeyGenParamBuilderService.SetUserAuthenticationRequired:output_type -> keystore.SetUserAuthenticationRequiredResponse
-	23, // 39: keystore.KeyGenParamBuilderService.SetUserAuthenticationValidityDurationSeconds:output_type -> keystore.SetUserAuthenticationValidityDurationSecondsResponse
-	25, // 40: keystore.KeyGenParamBuilderService.SetInvalidatedByBiometricEnrollment:output_type -> keystore.SetInvalidatedByBiometricEnrollmentResponse
-	27, // 41: keystore.KeyGenParamBuilderService.SetUnlockedDeviceRequired:output_type -> keystore.SetUnlockedDeviceRequiredResponse
-	29, // 42: keystore.KeyGenParamBuilderService.Build:output_type -> keystore.BuildResponse
-	31, // 43: keystore.KeyGeneratorJavaService.Init:output_type -> keystore.InitResponse
-	33, // 44: keystore.KeyGeneratorJavaService.GenerateKey:output_type -> keystore.GenerateKeyResponse
-	35, // 45: keystore.KeyPairGeneratorJavaService.Initialize:output_type -> keystore.InitializeResponse
-	37, // 46: keystore.KeyPairGeneratorJavaService.GenerateKeyPair:output_type -> keystore.GenerateKeyPairResponse
-	39, // 47: keystore.CipherJavaService.InitWithKey:output_type -> keystore.InitWithKeyResponse
-	41, // 48: keystore.CipherJavaService.InitWithKeyAndParams:output_type -> keystore.InitWithKeyAndParamsResponse
-	43, // 49: keystore.CipherJavaService.DoFinal:output_type -> keystore.DoFinalResponse
-	45, // 50: keystore.CipherJavaService.GetIV:output_type -> keystore.GetIVResponse
-	47, // 51: keystore.SignatureJavaService.InitSign:output_type -> keystore.InitSignResponse
-	49, // 52: keystore.SignatureJavaService.InitVerify:output_type -> keystore.InitVerifyResponse
-	51, // 53: keystore.SignatureJavaService.Update:output_type -> keystore.UpdateResponse
-	53, // 54: keystore.SignatureJavaService.Sign:output_type -> keystore.SignResponse
-	55, // 55: keystore.SignatureJavaService.Verify:output_type -> keystore.VerifyResponse
-	28, // [28:56] is the sub-list for method output_type
-	0,  // [0:28] is the sub-list for method input_type
+	0,  // 0: keystore.KeyGenParameterSpecBuilderService.Build:input_type -> keystore.BuildRequest
+	2,  // 1: keystore.KeyGenParameterSpecBuilderService.SetAlgorithmParameterSpec:input_type -> keystore.SetAlgorithmParameterSpecRequest
+	4,  // 2: keystore.KeyGenParameterSpecBuilderService.SetAttestKeyAlias:input_type -> keystore.SetAttestKeyAliasRequest
+	6,  // 3: keystore.KeyGenParameterSpecBuilderService.SetAttestationChallenge:input_type -> keystore.SetAttestationChallengeRequest
+	8,  // 4: keystore.KeyGenParameterSpecBuilderService.SetBlockModes:input_type -> keystore.SetBlockModesRequest
+	10, // 5: keystore.KeyGenParameterSpecBuilderService.SetCertificateNotAfter:input_type -> keystore.SetCertificateNotAfterRequest
+	12, // 6: keystore.KeyGenParameterSpecBuilderService.SetCertificateNotBefore:input_type -> keystore.SetCertificateNotBeforeRequest
+	14, // 7: keystore.KeyGenParameterSpecBuilderService.SetCertificateSerialNumber:input_type -> keystore.SetCertificateSerialNumberRequest
+	16, // 8: keystore.KeyGenParameterSpecBuilderService.SetCertificateSubject:input_type -> keystore.SetCertificateSubjectRequest
+	18, // 9: keystore.KeyGenParameterSpecBuilderService.SetDevicePropertiesAttestationIncluded:input_type -> keystore.SetDevicePropertiesAttestationIncludedRequest
+	20, // 10: keystore.KeyGenParameterSpecBuilderService.SetDigests:input_type -> keystore.SetDigestsRequest
+	22, // 11: keystore.KeyGenParameterSpecBuilderService.SetEncryptionPaddings:input_type -> keystore.SetEncryptionPaddingsRequest
+	24, // 12: keystore.KeyGenParameterSpecBuilderService.SetInvalidatedByBiometricEnrollment:input_type -> keystore.SetInvalidatedByBiometricEnrollmentRequest
+	26, // 13: keystore.KeyGenParameterSpecBuilderService.SetIsStrongBoxBacked:input_type -> keystore.SetIsStrongBoxBackedRequest
+	28, // 14: keystore.KeyGenParameterSpecBuilderService.SetKeySize:input_type -> keystore.SetKeySizeRequest
+	30, // 15: keystore.KeyGenParameterSpecBuilderService.SetKeyValidityEnd:input_type -> keystore.SetKeyValidityEndRequest
+	32, // 16: keystore.KeyGenParameterSpecBuilderService.SetKeyValidityForConsumptionEnd:input_type -> keystore.SetKeyValidityForConsumptionEndRequest
+	34, // 17: keystore.KeyGenParameterSpecBuilderService.SetKeyValidityForOriginationEnd:input_type -> keystore.SetKeyValidityForOriginationEndRequest
+	36, // 18: keystore.KeyGenParameterSpecBuilderService.SetKeyValidityStart:input_type -> keystore.SetKeyValidityStartRequest
+	38, // 19: keystore.KeyGenParameterSpecBuilderService.SetMaxUsageCount:input_type -> keystore.SetMaxUsageCountRequest
+	40, // 20: keystore.KeyGenParameterSpecBuilderService.SetMgf1Digests:input_type -> keystore.SetMgf1DigestsRequest
+	42, // 21: keystore.KeyGenParameterSpecBuilderService.SetRandomizedEncryptionRequired:input_type -> keystore.SetRandomizedEncryptionRequiredRequest
+	44, // 22: keystore.KeyGenParameterSpecBuilderService.SetSignaturePaddings:input_type -> keystore.SetSignaturePaddingsRequest
+	46, // 23: keystore.KeyGenParameterSpecBuilderService.SetUnlockedDeviceRequired:input_type -> keystore.SetUnlockedDeviceRequiredRequest
+	48, // 24: keystore.KeyGenParameterSpecBuilderService.SetUserAuthenticationParameters:input_type -> keystore.SetUserAuthenticationParametersRequest
+	50, // 25: keystore.KeyGenParameterSpecBuilderService.SetUserAuthenticationRequired:input_type -> keystore.SetUserAuthenticationRequiredRequest
+	52, // 26: keystore.KeyGenParameterSpecBuilderService.SetUserAuthenticationValidWhileOnBody:input_type -> keystore.SetUserAuthenticationValidWhileOnBodyRequest
+	54, // 27: keystore.KeyGenParameterSpecBuilderService.SetUserAuthenticationValidityDurationSeconds:input_type -> keystore.SetUserAuthenticationValidityDurationSecondsRequest
+	56, // 28: keystore.KeyGenParameterSpecBuilderService.SetUserConfirmationRequired:input_type -> keystore.SetUserConfirmationRequiredRequest
+	58, // 29: keystore.KeyGenParameterSpecBuilderService.SetUserPresenceRequired:input_type -> keystore.SetUserPresenceRequiredRequest
+	1,  // 30: keystore.KeyGenParameterSpecBuilderService.Build:output_type -> keystore.BuildResponse
+	3,  // 31: keystore.KeyGenParameterSpecBuilderService.SetAlgorithmParameterSpec:output_type -> keystore.SetAlgorithmParameterSpecResponse
+	5,  // 32: keystore.KeyGenParameterSpecBuilderService.SetAttestKeyAlias:output_type -> keystore.SetAttestKeyAliasResponse
+	7,  // 33: keystore.KeyGenParameterSpecBuilderService.SetAttestationChallenge:output_type -> keystore.SetAttestationChallengeResponse
+	9,  // 34: keystore.KeyGenParameterSpecBuilderService.SetBlockModes:output_type -> keystore.SetBlockModesResponse
+	11, // 35: keystore.KeyGenParameterSpecBuilderService.SetCertificateNotAfter:output_type -> keystore.SetCertificateNotAfterResponse
+	13, // 36: keystore.KeyGenParameterSpecBuilderService.SetCertificateNotBefore:output_type -> keystore.SetCertificateNotBeforeResponse
+	15, // 37: keystore.KeyGenParameterSpecBuilderService.SetCertificateSerialNumber:output_type -> keystore.SetCertificateSerialNumberResponse
+	17, // 38: keystore.KeyGenParameterSpecBuilderService.SetCertificateSubject:output_type -> keystore.SetCertificateSubjectResponse
+	19, // 39: keystore.KeyGenParameterSpecBuilderService.SetDevicePropertiesAttestationIncluded:output_type -> keystore.SetDevicePropertiesAttestationIncludedResponse
+	21, // 40: keystore.KeyGenParameterSpecBuilderService.SetDigests:output_type -> keystore.SetDigestsResponse
+	23, // 41: keystore.KeyGenParameterSpecBuilderService.SetEncryptionPaddings:output_type -> keystore.SetEncryptionPaddingsResponse
+	25, // 42: keystore.KeyGenParameterSpecBuilderService.SetInvalidatedByBiometricEnrollment:output_type -> keystore.SetInvalidatedByBiometricEnrollmentResponse
+	27, // 43: keystore.KeyGenParameterSpecBuilderService.SetIsStrongBoxBacked:output_type -> keystore.SetIsStrongBoxBackedResponse
+	29, // 44: keystore.KeyGenParameterSpecBuilderService.SetKeySize:output_type -> keystore.SetKeySizeResponse
+	31, // 45: keystore.KeyGenParameterSpecBuilderService.SetKeyValidityEnd:output_type -> keystore.SetKeyValidityEndResponse
+	33, // 46: keystore.KeyGenParameterSpecBuilderService.SetKeyValidityForConsumptionEnd:output_type -> keystore.SetKeyValidityForConsumptionEndResponse
+	35, // 47: keystore.KeyGenParameterSpecBuilderService.SetKeyValidityForOriginationEnd:output_type -> keystore.SetKeyValidityForOriginationEndResponse
+	37, // 48: keystore.KeyGenParameterSpecBuilderService.SetKeyValidityStart:output_type -> keystore.SetKeyValidityStartResponse
+	39, // 49: keystore.KeyGenParameterSpecBuilderService.SetMaxUsageCount:output_type -> keystore.SetMaxUsageCountResponse
+	41, // 50: keystore.KeyGenParameterSpecBuilderService.SetMgf1Digests:output_type -> keystore.SetMgf1DigestsResponse
+	43, // 51: keystore.KeyGenParameterSpecBuilderService.SetRandomizedEncryptionRequired:output_type -> keystore.SetRandomizedEncryptionRequiredResponse
+	45, // 52: keystore.KeyGenParameterSpecBuilderService.SetSignaturePaddings:output_type -> keystore.SetSignaturePaddingsResponse
+	47, // 53: keystore.KeyGenParameterSpecBuilderService.SetUnlockedDeviceRequired:output_type -> keystore.SetUnlockedDeviceRequiredResponse
+	49, // 54: keystore.KeyGenParameterSpecBuilderService.SetUserAuthenticationParameters:output_type -> keystore.SetUserAuthenticationParametersResponse
+	51, // 55: keystore.KeyGenParameterSpecBuilderService.SetUserAuthenticationRequired:output_type -> keystore.SetUserAuthenticationRequiredResponse
+	53, // 56: keystore.KeyGenParameterSpecBuilderService.SetUserAuthenticationValidWhileOnBody:output_type -> keystore.SetUserAuthenticationValidWhileOnBodyResponse
+	55, // 57: keystore.KeyGenParameterSpecBuilderService.SetUserAuthenticationValidityDurationSeconds:output_type -> keystore.SetUserAuthenticationValidityDurationSecondsResponse
+	57, // 58: keystore.KeyGenParameterSpecBuilderService.SetUserConfirmationRequired:output_type -> keystore.SetUserConfirmationRequiredResponse
+	59, // 59: keystore.KeyGenParameterSpecBuilderService.SetUserPresenceRequired:output_type -> keystore.SetUserPresenceRequiredResponse
+	30, // [30:60] is the sub-list for method output_type
+	0,  // [0:30] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -2694,9 +2976,9 @@ func file_proto_keystore_keystore_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_keystore_keystore_proto_rawDesc), len(file_proto_keystore_keystore_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   56,
+			NumMessages:   60,
 			NumExtensions: 0,
-			NumServices:   6,
+			NumServices:   1,
 		},
 		GoTypes:           file_proto_keystore_keystore_proto_goTypes,
 		DependencyIndexes: file_proto_keystore_keystore_proto_depIdxs,

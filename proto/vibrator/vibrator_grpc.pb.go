@@ -21,20 +21,44 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	VibratorService_HasVibrator_FullMethodName      = "/vibrator.VibratorService/HasVibrator"
-	VibratorService_VibrateMs_FullMethodName        = "/vibrator.VibratorService/VibrateMs"
-	VibratorService_VibratePatternMs_FullMethodName = "/vibrator.VibratorService/VibratePatternMs"
-	VibratorService_Cancel_FullMethodName           = "/vibrator.VibratorService/Cancel"
+	VibratorService_AreEffectsSupported_FullMethodName         = "/vibrator.VibratorService/AreEffectsSupported"
+	VibratorService_AreEnvelopeEffectsSupported_FullMethodName = "/vibrator.VibratorService/AreEnvelopeEffectsSupported"
+	VibratorService_ArePrimitivesSupported_FullMethodName      = "/vibrator.VibratorService/ArePrimitivesSupported"
+	VibratorService_GetEnvelopeEffectInfo_FullMethodName       = "/vibrator.VibratorService/GetEnvelopeEffectInfo"
+	VibratorService_GetFrequencyProfile_FullMethodName         = "/vibrator.VibratorService/GetFrequencyProfile"
+	VibratorService_GetId_FullMethodName                       = "/vibrator.VibratorService/GetId"
+	VibratorService_GetPrimitiveDurations_FullMethodName       = "/vibrator.VibratorService/GetPrimitiveDurations"
+	VibratorService_GetQFactor_FullMethodName                  = "/vibrator.VibratorService/GetQFactor"
+	VibratorService_GetResonantFrequency_FullMethodName        = "/vibrator.VibratorService/GetResonantFrequency"
+	VibratorService_Vibrate1_FullMethodName                    = "/vibrator.VibratorService/Vibrate1"
+	VibratorService_Vibrate2_1_FullMethodName                  = "/vibrator.VibratorService/Vibrate2_1"
+	VibratorService_Vibrate2_2_FullMethodName                  = "/vibrator.VibratorService/Vibrate2_2"
+	VibratorService_Vibrate1_3_FullMethodName                  = "/vibrator.VibratorService/Vibrate1_3"
+	VibratorService_Vibrate2_4_FullMethodName                  = "/vibrator.VibratorService/Vibrate2_4"
+	VibratorService_Vibrate2_5_FullMethodName                  = "/vibrator.VibratorService/Vibrate2_5"
+	VibratorService_Vibrate3_6_FullMethodName                  = "/vibrator.VibratorService/Vibrate3_6"
 )
 
 // VibratorServiceClient is the client API for VibratorService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type VibratorServiceClient interface {
-	HasVibrator(ctx context.Context, in *HasVibratorRequest, opts ...grpc.CallOption) (*HasVibratorResponse, error)
-	VibrateMs(ctx context.Context, in *VibrateMsRequest, opts ...grpc.CallOption) (*VibrateMsResponse, error)
-	VibratePatternMs(ctx context.Context, in *VibratePatternMsRequest, opts ...grpc.CallOption) (*VibratePatternMsResponse, error)
-	Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*CancelResponse, error)
+	AreEffectsSupported(ctx context.Context, in *AreEffectsSupportedRequest, opts ...grpc.CallOption) (*AreEffectsSupportedResponse, error)
+	AreEnvelopeEffectsSupported(ctx context.Context, in *AreEnvelopeEffectsSupportedRequest, opts ...grpc.CallOption) (*AreEnvelopeEffectsSupportedResponse, error)
+	ArePrimitivesSupported(ctx context.Context, in *ArePrimitivesSupportedRequest, opts ...grpc.CallOption) (*ArePrimitivesSupportedResponse, error)
+	GetEnvelopeEffectInfo(ctx context.Context, in *GetEnvelopeEffectInfoRequest, opts ...grpc.CallOption) (*GetEnvelopeEffectInfoResponse, error)
+	GetFrequencyProfile(ctx context.Context, in *GetFrequencyProfileRequest, opts ...grpc.CallOption) (*GetFrequencyProfileResponse, error)
+	GetId(ctx context.Context, in *GetIdRequest, opts ...grpc.CallOption) (*GetIdResponse, error)
+	GetPrimitiveDurations(ctx context.Context, in *GetPrimitiveDurationsRequest, opts ...grpc.CallOption) (*GetPrimitiveDurationsResponse, error)
+	GetQFactor(ctx context.Context, in *GetQFactorRequest, opts ...grpc.CallOption) (*GetQFactorResponse, error)
+	GetResonantFrequency(ctx context.Context, in *GetResonantFrequencyRequest, opts ...grpc.CallOption) (*GetResonantFrequencyResponse, error)
+	Vibrate1(ctx context.Context, in *Vibrate1Request, opts ...grpc.CallOption) (*Vibrate1Response, error)
+	Vibrate2_1(ctx context.Context, in *Vibrate2_1Request, opts ...grpc.CallOption) (*Vibrate2_1Response, error)
+	Vibrate2_2(ctx context.Context, in *Vibrate2_2Request, opts ...grpc.CallOption) (*Vibrate2_2Response, error)
+	Vibrate1_3(ctx context.Context, in *Vibrate1_3Request, opts ...grpc.CallOption) (*Vibrate1_3Response, error)
+	Vibrate2_4(ctx context.Context, in *Vibrate2_4Request, opts ...grpc.CallOption) (*Vibrate2_4Response, error)
+	Vibrate2_5(ctx context.Context, in *Vibrate2_5Request, opts ...grpc.CallOption) (*Vibrate2_5Response, error)
+	Vibrate3_6(ctx context.Context, in *Vibrate3_6Request, opts ...grpc.CallOption) (*Vibrate3_6Response, error)
 }
 
 type vibratorServiceClient struct {
@@ -45,40 +69,160 @@ func NewVibratorServiceClient(cc grpc.ClientConnInterface) VibratorServiceClient
 	return &vibratorServiceClient{cc}
 }
 
-func (c *vibratorServiceClient) HasVibrator(ctx context.Context, in *HasVibratorRequest, opts ...grpc.CallOption) (*HasVibratorResponse, error) {
+func (c *vibratorServiceClient) AreEffectsSupported(ctx context.Context, in *AreEffectsSupportedRequest, opts ...grpc.CallOption) (*AreEffectsSupportedResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(HasVibratorResponse)
-	err := c.cc.Invoke(ctx, VibratorService_HasVibrator_FullMethodName, in, out, cOpts...)
+	out := new(AreEffectsSupportedResponse)
+	err := c.cc.Invoke(ctx, VibratorService_AreEffectsSupported_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *vibratorServiceClient) VibrateMs(ctx context.Context, in *VibrateMsRequest, opts ...grpc.CallOption) (*VibrateMsResponse, error) {
+func (c *vibratorServiceClient) AreEnvelopeEffectsSupported(ctx context.Context, in *AreEnvelopeEffectsSupportedRequest, opts ...grpc.CallOption) (*AreEnvelopeEffectsSupportedResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(VibrateMsResponse)
-	err := c.cc.Invoke(ctx, VibratorService_VibrateMs_FullMethodName, in, out, cOpts...)
+	out := new(AreEnvelopeEffectsSupportedResponse)
+	err := c.cc.Invoke(ctx, VibratorService_AreEnvelopeEffectsSupported_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *vibratorServiceClient) VibratePatternMs(ctx context.Context, in *VibratePatternMsRequest, opts ...grpc.CallOption) (*VibratePatternMsResponse, error) {
+func (c *vibratorServiceClient) ArePrimitivesSupported(ctx context.Context, in *ArePrimitivesSupportedRequest, opts ...grpc.CallOption) (*ArePrimitivesSupportedResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(VibratePatternMsResponse)
-	err := c.cc.Invoke(ctx, VibratorService_VibratePatternMs_FullMethodName, in, out, cOpts...)
+	out := new(ArePrimitivesSupportedResponse)
+	err := c.cc.Invoke(ctx, VibratorService_ArePrimitivesSupported_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *vibratorServiceClient) Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*CancelResponse, error) {
+func (c *vibratorServiceClient) GetEnvelopeEffectInfo(ctx context.Context, in *GetEnvelopeEffectInfoRequest, opts ...grpc.CallOption) (*GetEnvelopeEffectInfoResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CancelResponse)
-	err := c.cc.Invoke(ctx, VibratorService_Cancel_FullMethodName, in, out, cOpts...)
+	out := new(GetEnvelopeEffectInfoResponse)
+	err := c.cc.Invoke(ctx, VibratorService_GetEnvelopeEffectInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vibratorServiceClient) GetFrequencyProfile(ctx context.Context, in *GetFrequencyProfileRequest, opts ...grpc.CallOption) (*GetFrequencyProfileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetFrequencyProfileResponse)
+	err := c.cc.Invoke(ctx, VibratorService_GetFrequencyProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vibratorServiceClient) GetId(ctx context.Context, in *GetIdRequest, opts ...grpc.CallOption) (*GetIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetIdResponse)
+	err := c.cc.Invoke(ctx, VibratorService_GetId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vibratorServiceClient) GetPrimitiveDurations(ctx context.Context, in *GetPrimitiveDurationsRequest, opts ...grpc.CallOption) (*GetPrimitiveDurationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPrimitiveDurationsResponse)
+	err := c.cc.Invoke(ctx, VibratorService_GetPrimitiveDurations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vibratorServiceClient) GetQFactor(ctx context.Context, in *GetQFactorRequest, opts ...grpc.CallOption) (*GetQFactorResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetQFactorResponse)
+	err := c.cc.Invoke(ctx, VibratorService_GetQFactor_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vibratorServiceClient) GetResonantFrequency(ctx context.Context, in *GetResonantFrequencyRequest, opts ...grpc.CallOption) (*GetResonantFrequencyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetResonantFrequencyResponse)
+	err := c.cc.Invoke(ctx, VibratorService_GetResonantFrequency_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vibratorServiceClient) Vibrate1(ctx context.Context, in *Vibrate1Request, opts ...grpc.CallOption) (*Vibrate1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Vibrate1Response)
+	err := c.cc.Invoke(ctx, VibratorService_Vibrate1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vibratorServiceClient) Vibrate2_1(ctx context.Context, in *Vibrate2_1Request, opts ...grpc.CallOption) (*Vibrate2_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Vibrate2_1Response)
+	err := c.cc.Invoke(ctx, VibratorService_Vibrate2_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vibratorServiceClient) Vibrate2_2(ctx context.Context, in *Vibrate2_2Request, opts ...grpc.CallOption) (*Vibrate2_2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Vibrate2_2Response)
+	err := c.cc.Invoke(ctx, VibratorService_Vibrate2_2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vibratorServiceClient) Vibrate1_3(ctx context.Context, in *Vibrate1_3Request, opts ...grpc.CallOption) (*Vibrate1_3Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Vibrate1_3Response)
+	err := c.cc.Invoke(ctx, VibratorService_Vibrate1_3_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vibratorServiceClient) Vibrate2_4(ctx context.Context, in *Vibrate2_4Request, opts ...grpc.CallOption) (*Vibrate2_4Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Vibrate2_4Response)
+	err := c.cc.Invoke(ctx, VibratorService_Vibrate2_4_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vibratorServiceClient) Vibrate2_5(ctx context.Context, in *Vibrate2_5Request, opts ...grpc.CallOption) (*Vibrate2_5Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Vibrate2_5Response)
+	err := c.cc.Invoke(ctx, VibratorService_Vibrate2_5_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vibratorServiceClient) Vibrate3_6(ctx context.Context, in *Vibrate3_6Request, opts ...grpc.CallOption) (*Vibrate3_6Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Vibrate3_6Response)
+	err := c.cc.Invoke(ctx, VibratorService_Vibrate3_6_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -89,10 +233,22 @@ func (c *vibratorServiceClient) Cancel(ctx context.Context, in *CancelRequest, o
 // All implementations must embed UnimplementedVibratorServiceServer
 // for forward compatibility.
 type VibratorServiceServer interface {
-	HasVibrator(context.Context, *HasVibratorRequest) (*HasVibratorResponse, error)
-	VibrateMs(context.Context, *VibrateMsRequest) (*VibrateMsResponse, error)
-	VibratePatternMs(context.Context, *VibratePatternMsRequest) (*VibratePatternMsResponse, error)
-	Cancel(context.Context, *CancelRequest) (*CancelResponse, error)
+	AreEffectsSupported(context.Context, *AreEffectsSupportedRequest) (*AreEffectsSupportedResponse, error)
+	AreEnvelopeEffectsSupported(context.Context, *AreEnvelopeEffectsSupportedRequest) (*AreEnvelopeEffectsSupportedResponse, error)
+	ArePrimitivesSupported(context.Context, *ArePrimitivesSupportedRequest) (*ArePrimitivesSupportedResponse, error)
+	GetEnvelopeEffectInfo(context.Context, *GetEnvelopeEffectInfoRequest) (*GetEnvelopeEffectInfoResponse, error)
+	GetFrequencyProfile(context.Context, *GetFrequencyProfileRequest) (*GetFrequencyProfileResponse, error)
+	GetId(context.Context, *GetIdRequest) (*GetIdResponse, error)
+	GetPrimitiveDurations(context.Context, *GetPrimitiveDurationsRequest) (*GetPrimitiveDurationsResponse, error)
+	GetQFactor(context.Context, *GetQFactorRequest) (*GetQFactorResponse, error)
+	GetResonantFrequency(context.Context, *GetResonantFrequencyRequest) (*GetResonantFrequencyResponse, error)
+	Vibrate1(context.Context, *Vibrate1Request) (*Vibrate1Response, error)
+	Vibrate2_1(context.Context, *Vibrate2_1Request) (*Vibrate2_1Response, error)
+	Vibrate2_2(context.Context, *Vibrate2_2Request) (*Vibrate2_2Response, error)
+	Vibrate1_3(context.Context, *Vibrate1_3Request) (*Vibrate1_3Response, error)
+	Vibrate2_4(context.Context, *Vibrate2_4Request) (*Vibrate2_4Response, error)
+	Vibrate2_5(context.Context, *Vibrate2_5Request) (*Vibrate2_5Response, error)
+	Vibrate3_6(context.Context, *Vibrate3_6Request) (*Vibrate3_6Response, error)
 	mustEmbedUnimplementedVibratorServiceServer()
 }
 
@@ -103,17 +259,53 @@ type VibratorServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedVibratorServiceServer struct{}
 
-func (UnimplementedVibratorServiceServer) HasVibrator(context.Context, *HasVibratorRequest) (*HasVibratorResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method HasVibrator not implemented")
+func (UnimplementedVibratorServiceServer) AreEffectsSupported(context.Context, *AreEffectsSupportedRequest) (*AreEffectsSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AreEffectsSupported not implemented")
 }
-func (UnimplementedVibratorServiceServer) VibrateMs(context.Context, *VibrateMsRequest) (*VibrateMsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method VibrateMs not implemented")
+func (UnimplementedVibratorServiceServer) AreEnvelopeEffectsSupported(context.Context, *AreEnvelopeEffectsSupportedRequest) (*AreEnvelopeEffectsSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AreEnvelopeEffectsSupported not implemented")
 }
-func (UnimplementedVibratorServiceServer) VibratePatternMs(context.Context, *VibratePatternMsRequest) (*VibratePatternMsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method VibratePatternMs not implemented")
+func (UnimplementedVibratorServiceServer) ArePrimitivesSupported(context.Context, *ArePrimitivesSupportedRequest) (*ArePrimitivesSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ArePrimitivesSupported not implemented")
 }
-func (UnimplementedVibratorServiceServer) Cancel(context.Context, *CancelRequest) (*CancelResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Cancel not implemented")
+func (UnimplementedVibratorServiceServer) GetEnvelopeEffectInfo(context.Context, *GetEnvelopeEffectInfoRequest) (*GetEnvelopeEffectInfoResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetEnvelopeEffectInfo not implemented")
+}
+func (UnimplementedVibratorServiceServer) GetFrequencyProfile(context.Context, *GetFrequencyProfileRequest) (*GetFrequencyProfileResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetFrequencyProfile not implemented")
+}
+func (UnimplementedVibratorServiceServer) GetId(context.Context, *GetIdRequest) (*GetIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetId not implemented")
+}
+func (UnimplementedVibratorServiceServer) GetPrimitiveDurations(context.Context, *GetPrimitiveDurationsRequest) (*GetPrimitiveDurationsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPrimitiveDurations not implemented")
+}
+func (UnimplementedVibratorServiceServer) GetQFactor(context.Context, *GetQFactorRequest) (*GetQFactorResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetQFactor not implemented")
+}
+func (UnimplementedVibratorServiceServer) GetResonantFrequency(context.Context, *GetResonantFrequencyRequest) (*GetResonantFrequencyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetResonantFrequency not implemented")
+}
+func (UnimplementedVibratorServiceServer) Vibrate1(context.Context, *Vibrate1Request) (*Vibrate1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Vibrate1 not implemented")
+}
+func (UnimplementedVibratorServiceServer) Vibrate2_1(context.Context, *Vibrate2_1Request) (*Vibrate2_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Vibrate2_1 not implemented")
+}
+func (UnimplementedVibratorServiceServer) Vibrate2_2(context.Context, *Vibrate2_2Request) (*Vibrate2_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Vibrate2_2 not implemented")
+}
+func (UnimplementedVibratorServiceServer) Vibrate1_3(context.Context, *Vibrate1_3Request) (*Vibrate1_3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Vibrate1_3 not implemented")
+}
+func (UnimplementedVibratorServiceServer) Vibrate2_4(context.Context, *Vibrate2_4Request) (*Vibrate2_4Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Vibrate2_4 not implemented")
+}
+func (UnimplementedVibratorServiceServer) Vibrate2_5(context.Context, *Vibrate2_5Request) (*Vibrate2_5Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Vibrate2_5 not implemented")
+}
+func (UnimplementedVibratorServiceServer) Vibrate3_6(context.Context, *Vibrate3_6Request) (*Vibrate3_6Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Vibrate3_6 not implemented")
 }
 func (UnimplementedVibratorServiceServer) mustEmbedUnimplementedVibratorServiceServer() {}
 func (UnimplementedVibratorServiceServer) testEmbeddedByValue()                         {}
@@ -136,74 +328,290 @@ func RegisterVibratorServiceServer(s grpc.ServiceRegistrar, srv VibratorServiceS
 	s.RegisterService(&VibratorService_ServiceDesc, srv)
 }
 
-func _VibratorService_HasVibrator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HasVibratorRequest)
+func _VibratorService_AreEffectsSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AreEffectsSupportedRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(VibratorServiceServer).HasVibrator(ctx, in)
+		return srv.(VibratorServiceServer).AreEffectsSupported(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: VibratorService_HasVibrator_FullMethodName,
+		FullMethod: VibratorService_AreEffectsSupported_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VibratorServiceServer).HasVibrator(ctx, req.(*HasVibratorRequest))
+		return srv.(VibratorServiceServer).AreEffectsSupported(ctx, req.(*AreEffectsSupportedRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _VibratorService_VibrateMs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(VibrateMsRequest)
+func _VibratorService_AreEnvelopeEffectsSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AreEnvelopeEffectsSupportedRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(VibratorServiceServer).VibrateMs(ctx, in)
+		return srv.(VibratorServiceServer).AreEnvelopeEffectsSupported(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: VibratorService_VibrateMs_FullMethodName,
+		FullMethod: VibratorService_AreEnvelopeEffectsSupported_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VibratorServiceServer).VibrateMs(ctx, req.(*VibrateMsRequest))
+		return srv.(VibratorServiceServer).AreEnvelopeEffectsSupported(ctx, req.(*AreEnvelopeEffectsSupportedRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _VibratorService_VibratePatternMs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(VibratePatternMsRequest)
+func _VibratorService_ArePrimitivesSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ArePrimitivesSupportedRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(VibratorServiceServer).VibratePatternMs(ctx, in)
+		return srv.(VibratorServiceServer).ArePrimitivesSupported(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: VibratorService_VibratePatternMs_FullMethodName,
+		FullMethod: VibratorService_ArePrimitivesSupported_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VibratorServiceServer).VibratePatternMs(ctx, req.(*VibratePatternMsRequest))
+		return srv.(VibratorServiceServer).ArePrimitivesSupported(ctx, req.(*ArePrimitivesSupportedRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _VibratorService_Cancel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CancelRequest)
+func _VibratorService_GetEnvelopeEffectInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEnvelopeEffectInfoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(VibratorServiceServer).Cancel(ctx, in)
+		return srv.(VibratorServiceServer).GetEnvelopeEffectInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: VibratorService_Cancel_FullMethodName,
+		FullMethod: VibratorService_GetEnvelopeEffectInfo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VibratorServiceServer).Cancel(ctx, req.(*CancelRequest))
+		return srv.(VibratorServiceServer).GetEnvelopeEffectInfo(ctx, req.(*GetEnvelopeEffectInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VibratorService_GetFrequencyProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFrequencyProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VibratorServiceServer).GetFrequencyProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VibratorService_GetFrequencyProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VibratorServiceServer).GetFrequencyProfile(ctx, req.(*GetFrequencyProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VibratorService_GetId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VibratorServiceServer).GetId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VibratorService_GetId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VibratorServiceServer).GetId(ctx, req.(*GetIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VibratorService_GetPrimitiveDurations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPrimitiveDurationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VibratorServiceServer).GetPrimitiveDurations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VibratorService_GetPrimitiveDurations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VibratorServiceServer).GetPrimitiveDurations(ctx, req.(*GetPrimitiveDurationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VibratorService_GetQFactor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetQFactorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VibratorServiceServer).GetQFactor(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VibratorService_GetQFactor_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VibratorServiceServer).GetQFactor(ctx, req.(*GetQFactorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VibratorService_GetResonantFrequency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetResonantFrequencyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VibratorServiceServer).GetResonantFrequency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VibratorService_GetResonantFrequency_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VibratorServiceServer).GetResonantFrequency(ctx, req.(*GetResonantFrequencyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VibratorService_Vibrate1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Vibrate1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VibratorServiceServer).Vibrate1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VibratorService_Vibrate1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VibratorServiceServer).Vibrate1(ctx, req.(*Vibrate1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VibratorService_Vibrate2_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Vibrate2_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VibratorServiceServer).Vibrate2_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VibratorService_Vibrate2_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VibratorServiceServer).Vibrate2_1(ctx, req.(*Vibrate2_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VibratorService_Vibrate2_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Vibrate2_2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VibratorServiceServer).Vibrate2_2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VibratorService_Vibrate2_2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VibratorServiceServer).Vibrate2_2(ctx, req.(*Vibrate2_2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VibratorService_Vibrate1_3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Vibrate1_3Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VibratorServiceServer).Vibrate1_3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VibratorService_Vibrate1_3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VibratorServiceServer).Vibrate1_3(ctx, req.(*Vibrate1_3Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VibratorService_Vibrate2_4_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Vibrate2_4Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VibratorServiceServer).Vibrate2_4(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VibratorService_Vibrate2_4_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VibratorServiceServer).Vibrate2_4(ctx, req.(*Vibrate2_4Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VibratorService_Vibrate2_5_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Vibrate2_5Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VibratorServiceServer).Vibrate2_5(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VibratorService_Vibrate2_5_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VibratorServiceServer).Vibrate2_5(ctx, req.(*Vibrate2_5Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VibratorService_Vibrate3_6_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Vibrate3_6Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VibratorServiceServer).Vibrate3_6(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VibratorService_Vibrate3_6_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VibratorServiceServer).Vibrate3_6(ctx, req.(*Vibrate3_6Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -216,20 +624,68 @@ var VibratorService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*VibratorServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "HasVibrator",
-			Handler:    _VibratorService_HasVibrator_Handler,
+			MethodName: "AreEffectsSupported",
+			Handler:    _VibratorService_AreEffectsSupported_Handler,
 		},
 		{
-			MethodName: "VibrateMs",
-			Handler:    _VibratorService_VibrateMs_Handler,
+			MethodName: "AreEnvelopeEffectsSupported",
+			Handler:    _VibratorService_AreEnvelopeEffectsSupported_Handler,
 		},
 		{
-			MethodName: "VibratePatternMs",
-			Handler:    _VibratorService_VibratePatternMs_Handler,
+			MethodName: "ArePrimitivesSupported",
+			Handler:    _VibratorService_ArePrimitivesSupported_Handler,
 		},
 		{
-			MethodName: "Cancel",
-			Handler:    _VibratorService_Cancel_Handler,
+			MethodName: "GetEnvelopeEffectInfo",
+			Handler:    _VibratorService_GetEnvelopeEffectInfo_Handler,
+		},
+		{
+			MethodName: "GetFrequencyProfile",
+			Handler:    _VibratorService_GetFrequencyProfile_Handler,
+		},
+		{
+			MethodName: "GetId",
+			Handler:    _VibratorService_GetId_Handler,
+		},
+		{
+			MethodName: "GetPrimitiveDurations",
+			Handler:    _VibratorService_GetPrimitiveDurations_Handler,
+		},
+		{
+			MethodName: "GetQFactor",
+			Handler:    _VibratorService_GetQFactor_Handler,
+		},
+		{
+			MethodName: "GetResonantFrequency",
+			Handler:    _VibratorService_GetResonantFrequency_Handler,
+		},
+		{
+			MethodName: "Vibrate1",
+			Handler:    _VibratorService_Vibrate1_Handler,
+		},
+		{
+			MethodName: "Vibrate2_1",
+			Handler:    _VibratorService_Vibrate2_1_Handler,
+		},
+		{
+			MethodName: "Vibrate2_2",
+			Handler:    _VibratorService_Vibrate2_2_Handler,
+		},
+		{
+			MethodName: "Vibrate1_3",
+			Handler:    _VibratorService_Vibrate1_3_Handler,
+		},
+		{
+			MethodName: "Vibrate2_4",
+			Handler:    _VibratorService_Vibrate2_4_Handler,
+		},
+		{
+			MethodName: "Vibrate2_5",
+			Handler:    _VibratorService_Vibrate2_5_Handler,
+		},
+		{
+			MethodName: "Vibrate3_6",
+			Handler:    _VibratorService_Vibrate3_6_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

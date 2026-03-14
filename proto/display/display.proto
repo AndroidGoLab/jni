@@ -6,48 +6,54 @@ package display;
 
 option go_package = "github.com/xaionaro-go/jni/proto/display";
 
-message GetDefaultDisplayRequest {
+message Equals1Request {
+  int64 arg0 = 1;
 }
 
-message GetDefaultDisplayResponse {
-  int64 result = 1;
+message Equals1Response {
+  bool result = 1;
 }
 
-message GetRotationRequest {
+message Equals1_1Request {
+  int64 arg0 = 1;
 }
 
-message GetRotationResponse {
+message Equals1_1Response {
+  bool result = 1;
+}
+
+message HashCodeRequest {
+}
+
+message HashCodeResponse {
   int32 result = 1;
 }
 
-message GetRefreshRateRequest {
+message SetToRequest {
+  int64 arg0 = 1;
 }
 
-message GetRefreshRateResponse {
-  float result = 1;
+message SetToResponse {
 }
 
-message GetMetricsRequest {
-  int64 metrics = 1;
+message SetToDefaultsRequest {
 }
 
-message GetMetricsResponse {
+message SetToDefaultsResponse {
 }
 
-message GetRealMetricsRequest {
-  int64 metrics = 1;
+message ToStringRequest {
 }
 
-message GetRealMetricsResponse {
+message ToStringResponse {
+  string result = 1;
 }
 
-service WindowManagerService {
-  rpc GetDefaultDisplay (GetDefaultDisplayRequest) returns (GetDefaultDisplayResponse);
-}
-
-service DisplayService {
-  rpc GetRotation (GetRotationRequest) returns (GetRotationResponse);
-  rpc GetRefreshRate (GetRefreshRateRequest) returns (GetRefreshRateResponse);
-  rpc GetMetrics (GetMetricsRequest) returns (GetMetricsResponse);
-  rpc GetRealMetrics (GetRealMetricsRequest) returns (GetRealMetricsResponse);
+service DisplayMetricsService {
+  rpc Equals1 (Equals1Request) returns (Equals1Response);
+  rpc Equals1_1 (Equals1_1Request) returns (Equals1_1Response);
+  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
+  rpc SetTo (SetToRequest) returns (SetToResponse);
+  rpc SetToDefaults (SetToDefaultsRequest) returns (SetToDefaultsResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
 }

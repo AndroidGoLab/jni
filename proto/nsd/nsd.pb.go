@@ -23,29 +23,26 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type DiscoverServicesRawRequest struct {
+type DescribeContentsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ServiceType   string                 `protobuf:"bytes,1,opt,name=service_type,json=serviceType,proto3" json:"service_type,omitempty"`
-	ProtocolType  int32                  `protobuf:"varint,2,opt,name=protocol_type,json=protocolType,proto3" json:"protocol_type,omitempty"`
-	Listener      int64                  `protobuf:"varint,3,opt,name=listener,proto3" json:"listener,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DiscoverServicesRawRequest) Reset() {
-	*x = DiscoverServicesRawRequest{}
+func (x *DescribeContentsRequest) Reset() {
+	*x = DescribeContentsRequest{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DiscoverServicesRawRequest) String() string {
+func (x *DescribeContentsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DiscoverServicesRawRequest) ProtoMessage() {}
+func (*DescribeContentsRequest) ProtoMessage() {}
 
-func (x *DiscoverServicesRawRequest) ProtoReflect() protoreflect.Message {
+func (x *DescribeContentsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -57,52 +54,32 @@ func (x *DiscoverServicesRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DiscoverServicesRawRequest.ProtoReflect.Descriptor instead.
-func (*DiscoverServicesRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DescribeContentsRequest.ProtoReflect.Descriptor instead.
+func (*DescribeContentsRequest) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *DiscoverServicesRawRequest) GetServiceType() string {
-	if x != nil {
-		return x.ServiceType
-	}
-	return ""
-}
-
-func (x *DiscoverServicesRawRequest) GetProtocolType() int32 {
-	if x != nil {
-		return x.ProtocolType
-	}
-	return 0
-}
-
-func (x *DiscoverServicesRawRequest) GetListener() int64 {
-	if x != nil {
-		return x.Listener
-	}
-	return 0
-}
-
-type DiscoverServicesRawResponse struct {
+type DescribeContentsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DiscoverServicesRawResponse) Reset() {
-	*x = DiscoverServicesRawResponse{}
+func (x *DescribeContentsResponse) Reset() {
+	*x = DescribeContentsResponse{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DiscoverServicesRawResponse) String() string {
+func (x *DescribeContentsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DiscoverServicesRawResponse) ProtoMessage() {}
+func (*DescribeContentsResponse) ProtoMessage() {}
 
-func (x *DiscoverServicesRawResponse) ProtoReflect() protoreflect.Message {
+func (x *DescribeContentsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -114,32 +91,38 @@ func (x *DiscoverServicesRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DiscoverServicesRawResponse.ProtoReflect.Descriptor instead.
-func (*DiscoverServicesRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use DescribeContentsResponse.ProtoReflect.Descriptor instead.
+func (*DescribeContentsResponse) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{1}
 }
 
-type StopServiceDiscoveryRawRequest struct {
+func (x *DescribeContentsResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetHostRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Listener      int64                  `protobuf:"varint,1,opt,name=listener,proto3" json:"listener,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StopServiceDiscoveryRawRequest) Reset() {
-	*x = StopServiceDiscoveryRawRequest{}
+func (x *GetHostRequest) Reset() {
+	*x = GetHostRequest{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StopServiceDiscoveryRawRequest) String() string {
+func (x *GetHostRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StopServiceDiscoveryRawRequest) ProtoMessage() {}
+func (*GetHostRequest) ProtoMessage() {}
 
-func (x *StopServiceDiscoveryRawRequest) ProtoReflect() protoreflect.Message {
+func (x *GetHostRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -151,38 +134,32 @@ func (x *StopServiceDiscoveryRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StopServiceDiscoveryRawRequest.ProtoReflect.Descriptor instead.
-func (*StopServiceDiscoveryRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetHostRequest.ProtoReflect.Descriptor instead.
+func (*GetHostRequest) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *StopServiceDiscoveryRawRequest) GetListener() int64 {
-	if x != nil {
-		return x.Listener
-	}
-	return 0
-}
-
-type StopServiceDiscoveryRawResponse struct {
+type GetHostResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StopServiceDiscoveryRawResponse) Reset() {
-	*x = StopServiceDiscoveryRawResponse{}
+func (x *GetHostResponse) Reset() {
+	*x = GetHostResponse{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StopServiceDiscoveryRawResponse) String() string {
+func (x *GetHostResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StopServiceDiscoveryRawResponse) ProtoMessage() {}
+func (*GetHostResponse) ProtoMessage() {}
 
-func (x *StopServiceDiscoveryRawResponse) ProtoReflect() protoreflect.Message {
+func (x *GetHostResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -194,33 +171,38 @@ func (x *StopServiceDiscoveryRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StopServiceDiscoveryRawResponse.ProtoReflect.Descriptor instead.
-func (*StopServiceDiscoveryRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetHostResponse.ProtoReflect.Descriptor instead.
+func (*GetHostResponse) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{3}
 }
 
-type ResolveServiceRawRequest struct {
+func (x *GetHostResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetHostAddressesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ServiceInfo   int64                  `protobuf:"varint,1,opt,name=service_info,json=serviceInfo,proto3" json:"service_info,omitempty"`
-	Listener      int64                  `protobuf:"varint,2,opt,name=listener,proto3" json:"listener,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ResolveServiceRawRequest) Reset() {
-	*x = ResolveServiceRawRequest{}
+func (x *GetHostAddressesRequest) Reset() {
+	*x = GetHostAddressesRequest{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ResolveServiceRawRequest) String() string {
+func (x *GetHostAddressesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ResolveServiceRawRequest) ProtoMessage() {}
+func (*GetHostAddressesRequest) ProtoMessage() {}
 
-func (x *ResolveServiceRawRequest) ProtoReflect() protoreflect.Message {
+func (x *GetHostAddressesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -232,45 +214,32 @@ func (x *ResolveServiceRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResolveServiceRawRequest.ProtoReflect.Descriptor instead.
-func (*ResolveServiceRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetHostAddressesRequest.ProtoReflect.Descriptor instead.
+func (*GetHostAddressesRequest) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *ResolveServiceRawRequest) GetServiceInfo() int64 {
-	if x != nil {
-		return x.ServiceInfo
-	}
-	return 0
-}
-
-func (x *ResolveServiceRawRequest) GetListener() int64 {
-	if x != nil {
-		return x.Listener
-	}
-	return 0
-}
-
-type ResolveServiceRawResponse struct {
+type GetHostAddressesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ResolveServiceRawResponse) Reset() {
-	*x = ResolveServiceRawResponse{}
+func (x *GetHostAddressesResponse) Reset() {
+	*x = GetHostAddressesResponse{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ResolveServiceRawResponse) String() string {
+func (x *GetHostAddressesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ResolveServiceRawResponse) ProtoMessage() {}
+func (*GetHostAddressesResponse) ProtoMessage() {}
 
-func (x *ResolveServiceRawResponse) ProtoReflect() protoreflect.Message {
+func (x *GetHostAddressesResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -282,34 +251,38 @@ func (x *ResolveServiceRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResolveServiceRawResponse.ProtoReflect.Descriptor instead.
-func (*ResolveServiceRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetHostAddressesResponse.ProtoReflect.Descriptor instead.
+func (*GetHostAddressesResponse) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{5}
 }
 
-type RegisterServiceRawRequest struct {
+func (x *GetHostAddressesResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetHostnameRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ServiceInfo   int64                  `protobuf:"varint,1,opt,name=service_info,json=serviceInfo,proto3" json:"service_info,omitempty"`
-	ProtocolType  int32                  `protobuf:"varint,2,opt,name=protocol_type,json=protocolType,proto3" json:"protocol_type,omitempty"`
-	Listener      int64                  `protobuf:"varint,3,opt,name=listener,proto3" json:"listener,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RegisterServiceRawRequest) Reset() {
-	*x = RegisterServiceRawRequest{}
+func (x *GetHostnameRequest) Reset() {
+	*x = GetHostnameRequest{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RegisterServiceRawRequest) String() string {
+func (x *GetHostnameRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RegisterServiceRawRequest) ProtoMessage() {}
+func (*GetHostnameRequest) ProtoMessage() {}
 
-func (x *RegisterServiceRawRequest) ProtoReflect() protoreflect.Message {
+func (x *GetHostnameRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -321,52 +294,32 @@ func (x *RegisterServiceRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RegisterServiceRawRequest.ProtoReflect.Descriptor instead.
-func (*RegisterServiceRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetHostnameRequest.ProtoReflect.Descriptor instead.
+func (*GetHostnameRequest) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *RegisterServiceRawRequest) GetServiceInfo() int64 {
-	if x != nil {
-		return x.ServiceInfo
-	}
-	return 0
-}
-
-func (x *RegisterServiceRawRequest) GetProtocolType() int32 {
-	if x != nil {
-		return x.ProtocolType
-	}
-	return 0
-}
-
-func (x *RegisterServiceRawRequest) GetListener() int64 {
-	if x != nil {
-		return x.Listener
-	}
-	return 0
-}
-
-type RegisterServiceRawResponse struct {
+type GetHostnameResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RegisterServiceRawResponse) Reset() {
-	*x = RegisterServiceRawResponse{}
+func (x *GetHostnameResponse) Reset() {
+	*x = GetHostnameResponse{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RegisterServiceRawResponse) String() string {
+func (x *GetHostnameResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RegisterServiceRawResponse) ProtoMessage() {}
+func (*GetHostnameResponse) ProtoMessage() {}
 
-func (x *RegisterServiceRawResponse) ProtoReflect() protoreflect.Message {
+func (x *GetHostnameResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -378,32 +331,38 @@ func (x *RegisterServiceRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RegisterServiceRawResponse.ProtoReflect.Descriptor instead.
-func (*RegisterServiceRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetHostnameResponse.ProtoReflect.Descriptor instead.
+func (*GetHostnameResponse) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{7}
 }
 
-type UnregisterServiceRawRequest struct {
+func (x *GetHostnameResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetNetworkRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Listener      int64                  `protobuf:"varint,1,opt,name=listener,proto3" json:"listener,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UnregisterServiceRawRequest) Reset() {
-	*x = UnregisterServiceRawRequest{}
+func (x *GetNetworkRequest) Reset() {
+	*x = GetNetworkRequest{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UnregisterServiceRawRequest) String() string {
+func (x *GetNetworkRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UnregisterServiceRawRequest) ProtoMessage() {}
+func (*GetNetworkRequest) ProtoMessage() {}
 
-func (x *UnregisterServiceRawRequest) ProtoReflect() protoreflect.Message {
+func (x *GetNetworkRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -415,38 +374,32 @@ func (x *UnregisterServiceRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UnregisterServiceRawRequest.ProtoReflect.Descriptor instead.
-func (*UnregisterServiceRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetNetworkRequest.ProtoReflect.Descriptor instead.
+func (*GetNetworkRequest) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *UnregisterServiceRawRequest) GetListener() int64 {
-	if x != nil {
-		return x.Listener
-	}
-	return 0
-}
-
-type UnregisterServiceRawResponse struct {
+type GetNetworkResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UnregisterServiceRawResponse) Reset() {
-	*x = UnregisterServiceRawResponse{}
+func (x *GetNetworkResponse) Reset() {
+	*x = GetNetworkResponse{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UnregisterServiceRawResponse) String() string {
+func (x *GetNetworkResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UnregisterServiceRawResponse) ProtoMessage() {}
+func (*GetNetworkResponse) ProtoMessage() {}
 
-func (x *UnregisterServiceRawResponse) ProtoReflect() protoreflect.Message {
+func (x *GetNetworkResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -458,236 +411,39 @@ func (x *UnregisterServiceRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UnregisterServiceRawResponse.ProtoReflect.Descriptor instead.
-func (*UnregisterServiceRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetNetworkResponse.ProtoReflect.Descriptor instead.
+func (*GetNetworkResponse) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{9}
 }
 
-type SetServiceNameRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetServiceNameRequest) Reset() {
-	*x = SetServiceNameRequest{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetServiceNameRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetServiceNameRequest) ProtoMessage() {}
-
-func (x *SetServiceNameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[10]
+func (x *GetNetworkResponse) GetResult() int64 {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetServiceNameRequest.ProtoReflect.Descriptor instead.
-func (*SetServiceNameRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *SetServiceNameRequest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-type SetServiceNameResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetServiceNameResponse) Reset() {
-	*x = SetServiceNameResponse{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetServiceNameResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetServiceNameResponse) ProtoMessage() {}
-
-func (x *SetServiceNameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetServiceNameResponse.ProtoReflect.Descriptor instead.
-func (*SetServiceNameResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{11}
-}
-
-type SetServiceTypeRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ServiceType   string                 `protobuf:"bytes,1,opt,name=service_type,json=serviceType,proto3" json:"service_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetServiceTypeRequest) Reset() {
-	*x = SetServiceTypeRequest{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetServiceTypeRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetServiceTypeRequest) ProtoMessage() {}
-
-func (x *SetServiceTypeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetServiceTypeRequest.ProtoReflect.Descriptor instead.
-func (*SetServiceTypeRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *SetServiceTypeRequest) GetServiceType() string {
-	if x != nil {
-		return x.ServiceType
-	}
-	return ""
-}
-
-type SetServiceTypeResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetServiceTypeResponse) Reset() {
-	*x = SetServiceTypeResponse{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetServiceTypeResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetServiceTypeResponse) ProtoMessage() {}
-
-func (x *SetServiceTypeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetServiceTypeResponse.ProtoReflect.Descriptor instead.
-func (*SetServiceTypeResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{13}
-}
-
-type SetPortRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Port          int32                  `protobuf:"varint,1,opt,name=port,proto3" json:"port,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetPortRequest) Reset() {
-	*x = SetPortRequest{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetPortRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetPortRequest) ProtoMessage() {}
-
-func (x *SetPortRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetPortRequest.ProtoReflect.Descriptor instead.
-func (*SetPortRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *SetPortRequest) GetPort() int32 {
-	if x != nil {
-		return x.Port
+		return x.Result
 	}
 	return 0
 }
 
-type SetPortResponse struct {
+type GetPortRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetPortResponse) Reset() {
-	*x = SetPortResponse{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[15]
+func (x *GetPortRequest) Reset() {
+	*x = GetPortRequest{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetPortResponse) String() string {
+func (x *GetPortRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetPortResponse) ProtoMessage() {}
+func (*GetPortRequest) ProtoMessage() {}
 
-func (x *SetPortResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[15]
+func (x *GetPortRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -698,34 +454,33 @@ func (x *SetPortResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetPortResponse.ProtoReflect.Descriptor instead.
-func (*SetPortResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{15}
+// Deprecated: Use GetPortRequest.ProtoReflect.Descriptor instead.
+func (*GetPortRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{10}
 }
 
-type SetAttributeRequest struct {
+type GetPortResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Value         string                 `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetAttributeRequest) Reset() {
-	*x = SetAttributeRequest{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[16]
+func (x *GetPortResponse) Reset() {
+	*x = GetPortResponse{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetAttributeRequest) String() string {
+func (x *GetPortResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetAttributeRequest) ProtoMessage() {}
+func (*GetPortResponse) ProtoMessage() {}
 
-func (x *SetAttributeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[16]
+func (x *GetPortResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -736,59 +491,16 @@ func (x *SetAttributeRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetAttributeRequest.ProtoReflect.Descriptor instead.
-func (*SetAttributeRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{16}
+// Deprecated: Use GetPortResponse.ProtoReflect.Descriptor instead.
+func (*GetPortResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *SetAttributeRequest) GetKey() string {
+func (x *GetPortResponse) GetResult() int32 {
 	if x != nil {
-		return x.Key
+		return x.Result
 	}
-	return ""
-}
-
-func (x *SetAttributeRequest) GetValue() string {
-	if x != nil {
-		return x.Value
-	}
-	return ""
-}
-
-type SetAttributeResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetAttributeResponse) Reset() {
-	*x = SetAttributeResponse{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[17]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetAttributeResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetAttributeResponse) ProtoMessage() {}
-
-func (x *SetAttributeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[17]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetAttributeResponse.ProtoReflect.Descriptor instead.
-func (*SetAttributeResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{17}
+	return 0
 }
 
 type GetServiceNameRequest struct {
@@ -799,7 +511,7 @@ type GetServiceNameRequest struct {
 
 func (x *GetServiceNameRequest) Reset() {
 	*x = GetServiceNameRequest{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[18]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -811,7 +523,7 @@ func (x *GetServiceNameRequest) String() string {
 func (*GetServiceNameRequest) ProtoMessage() {}
 
 func (x *GetServiceNameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[18]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -824,7 +536,7 @@ func (x *GetServiceNameRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetServiceNameRequest.ProtoReflect.Descriptor instead.
 func (*GetServiceNameRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{18}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{12}
 }
 
 type GetServiceNameResponse struct {
@@ -836,7 +548,7 @@ type GetServiceNameResponse struct {
 
 func (x *GetServiceNameResponse) Reset() {
 	*x = GetServiceNameResponse{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[19]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -848,7 +560,7 @@ func (x *GetServiceNameResponse) String() string {
 func (*GetServiceNameResponse) ProtoMessage() {}
 
 func (x *GetServiceNameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[19]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -861,7 +573,7 @@ func (x *GetServiceNameResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetServiceNameResponse.ProtoReflect.Descriptor instead.
 func (*GetServiceNameResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{19}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetServiceNameResponse) GetResult() string {
@@ -879,7 +591,7 @@ type GetServiceTypeRequest struct {
 
 func (x *GetServiceTypeRequest) Reset() {
 	*x = GetServiceTypeRequest{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[20]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -891,7 +603,7 @@ func (x *GetServiceTypeRequest) String() string {
 func (*GetServiceTypeRequest) ProtoMessage() {}
 
 func (x *GetServiceTypeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[20]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -904,7 +616,7 @@ func (x *GetServiceTypeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetServiceTypeRequest.ProtoReflect.Descriptor instead.
 func (*GetServiceTypeRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{20}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{14}
 }
 
 type GetServiceTypeResponse struct {
@@ -916,7 +628,7 @@ type GetServiceTypeResponse struct {
 
 func (x *GetServiceTypeResponse) Reset() {
 	*x = GetServiceTypeResponse{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[21]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -928,7 +640,7 @@ func (x *GetServiceTypeResponse) String() string {
 func (*GetServiceTypeResponse) ProtoMessage() {}
 
 func (x *GetServiceTypeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[21]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -941,7 +653,7 @@ func (x *GetServiceTypeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetServiceTypeResponse.ProtoReflect.Descriptor instead.
 func (*GetServiceTypeResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{21}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetServiceTypeResponse) GetResult() string {
@@ -951,27 +663,27 @@ func (x *GetServiceTypeResponse) GetResult() string {
 	return ""
 }
 
-type GetHostRequest struct {
+type GetSubtypesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetHostRequest) Reset() {
-	*x = GetHostRequest{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[22]
+func (x *GetSubtypesRequest) Reset() {
+	*x = GetSubtypesRequest{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetHostRequest) String() string {
+func (x *GetSubtypesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetHostRequest) ProtoMessage() {}
+func (*GetSubtypesRequest) ProtoMessage() {}
 
-func (x *GetHostRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[22]
+func (x *GetSubtypesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -982,32 +694,287 @@ func (x *GetHostRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetHostRequest.ProtoReflect.Descriptor instead.
-func (*GetHostRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{22}
+// Deprecated: Use GetSubtypesRequest.ProtoReflect.Descriptor instead.
+func (*GetSubtypesRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{16}
 }
 
-type GetHostResponse struct {
+type GetSubtypesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetHostResponse) Reset() {
-	*x = GetHostResponse{}
+func (x *GetSubtypesResponse) Reset() {
+	*x = GetSubtypesResponse{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSubtypesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSubtypesResponse) ProtoMessage() {}
+
+func (x *GetSubtypesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSubtypesResponse.ProtoReflect.Descriptor instead.
+func (*GetSubtypesResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *GetSubtypesResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type RemoveAttributeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RemoveAttributeRequest) Reset() {
+	*x = RemoveAttributeRequest{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RemoveAttributeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveAttributeRequest) ProtoMessage() {}
+
+func (x *RemoveAttributeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveAttributeRequest.ProtoReflect.Descriptor instead.
+func (*RemoveAttributeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *RemoveAttributeRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type RemoveAttributeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RemoveAttributeResponse) Reset() {
+	*x = RemoveAttributeResponse{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RemoveAttributeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveAttributeResponse) ProtoMessage() {}
+
+func (x *RemoveAttributeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveAttributeResponse.ProtoReflect.Descriptor instead.
+func (*RemoveAttributeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{19}
+}
+
+type SetAttributeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAttributeRequest) Reset() {
+	*x = SetAttributeRequest{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAttributeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAttributeRequest) ProtoMessage() {}
+
+func (x *SetAttributeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAttributeRequest.ProtoReflect.Descriptor instead.
+func (*SetAttributeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *SetAttributeRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+func (x *SetAttributeRequest) GetArg1() string {
+	if x != nil {
+		return x.Arg1
+	}
+	return ""
+}
+
+type SetAttributeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAttributeResponse) Reset() {
+	*x = SetAttributeResponse{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAttributeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAttributeResponse) ProtoMessage() {}
+
+func (x *SetAttributeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAttributeResponse.ProtoReflect.Descriptor instead.
+func (*SetAttributeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{21}
+}
+
+type SetHostRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetHostRequest) Reset() {
+	*x = SetHostRequest{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetHostRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetHostRequest) ProtoMessage() {}
+
+func (x *SetHostRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetHostRequest.ProtoReflect.Descriptor instead.
+func (*SetHostRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *SetHostRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetHostResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetHostResponse) Reset() {
+	*x = SetHostResponse{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetHostResponse) String() string {
+func (x *SetHostResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetHostResponse) ProtoMessage() {}
+func (*SetHostResponse) ProtoMessage() {}
 
-func (x *GetHostResponse) ProtoReflect() protoreflect.Message {
+func (x *SetHostResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1019,38 +986,32 @@ func (x *GetHostResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetHostResponse.ProtoReflect.Descriptor instead.
-func (*GetHostResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetHostResponse.ProtoReflect.Descriptor instead.
+func (*SetHostResponse) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{23}
 }
 
-func (x *GetHostResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type GetPortRequest struct {
+type SetHostAddressesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetPortRequest) Reset() {
-	*x = GetPortRequest{}
+func (x *SetHostAddressesRequest) Reset() {
+	*x = SetHostAddressesRequest{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetPortRequest) String() string {
+func (x *SetHostAddressesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetPortRequest) ProtoMessage() {}
+func (*SetHostAddressesRequest) ProtoMessage() {}
 
-func (x *GetPortRequest) ProtoReflect() protoreflect.Message {
+func (x *SetHostAddressesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1062,32 +1023,38 @@ func (x *GetPortRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetPortRequest.ProtoReflect.Descriptor instead.
-func (*GetPortRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetHostAddressesRequest.ProtoReflect.Descriptor instead.
+func (*SetHostAddressesRequest) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{24}
 }
 
-type GetPortResponse struct {
+func (x *SetHostAddressesRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetHostAddressesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetPortResponse) Reset() {
-	*x = GetPortResponse{}
+func (x *SetHostAddressesResponse) Reset() {
+	*x = SetHostAddressesResponse{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetPortResponse) String() string {
+func (x *SetHostAddressesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetPortResponse) ProtoMessage() {}
+func (*SetHostAddressesResponse) ProtoMessage() {}
 
-func (x *GetPortResponse) ProtoReflect() protoreflect.Message {
+func (x *SetHostAddressesResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1099,39 +1066,32 @@ func (x *GetPortResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetPortResponse.ProtoReflect.Descriptor instead.
-func (*GetPortResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetHostAddressesResponse.ProtoReflect.Descriptor instead.
+func (*SetHostAddressesResponse) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{25}
 }
 
-func (x *GetPortResponse) GetResult() int32 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type DiscoveryListenerOnServiceFoundEvent struct {
+type SetNetworkRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DiscoveryListenerOnServiceFoundEvent) Reset() {
-	*x = DiscoveryListenerOnServiceFoundEvent{}
+func (x *SetNetworkRequest) Reset() {
+	*x = SetNetworkRequest{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DiscoveryListenerOnServiceFoundEvent) String() string {
+func (x *SetNetworkRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DiscoveryListenerOnServiceFoundEvent) ProtoMessage() {}
+func (*SetNetworkRequest) ProtoMessage() {}
 
-func (x *DiscoveryListenerOnServiceFoundEvent) ProtoReflect() protoreflect.Message {
+func (x *SetNetworkRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1143,39 +1103,38 @@ func (x *DiscoveryListenerOnServiceFoundEvent) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DiscoveryListenerOnServiceFoundEvent.ProtoReflect.Descriptor instead.
-func (*DiscoveryListenerOnServiceFoundEvent) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetNetworkRequest.ProtoReflect.Descriptor instead.
+func (*SetNetworkRequest) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{26}
 }
 
-func (x *DiscoveryListenerOnServiceFoundEvent) GetArg0() int64 {
+func (x *SetNetworkRequest) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-type DiscoveryListenerOnServiceLostEvent struct {
+type SetNetworkResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DiscoveryListenerOnServiceLostEvent) Reset() {
-	*x = DiscoveryListenerOnServiceLostEvent{}
+func (x *SetNetworkResponse) Reset() {
+	*x = SetNetworkResponse{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DiscoveryListenerOnServiceLostEvent) String() string {
+func (x *SetNetworkResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DiscoveryListenerOnServiceLostEvent) ProtoMessage() {}
+func (*SetNetworkResponse) ProtoMessage() {}
 
-func (x *DiscoveryListenerOnServiceLostEvent) ProtoReflect() protoreflect.Message {
+func (x *SetNetworkResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1187,39 +1146,32 @@ func (x *DiscoveryListenerOnServiceLostEvent) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DiscoveryListenerOnServiceLostEvent.ProtoReflect.Descriptor instead.
-func (*DiscoveryListenerOnServiceLostEvent) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetNetworkResponse.ProtoReflect.Descriptor instead.
+func (*SetNetworkResponse) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{27}
 }
 
-func (x *DiscoveryListenerOnServiceLostEvent) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type DiscoveryListenerOnDiscoveryStartedEvent struct {
+type SetPortRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DiscoveryListenerOnDiscoveryStartedEvent) Reset() {
-	*x = DiscoveryListenerOnDiscoveryStartedEvent{}
+func (x *SetPortRequest) Reset() {
+	*x = SetPortRequest{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DiscoveryListenerOnDiscoveryStartedEvent) String() string {
+func (x *SetPortRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DiscoveryListenerOnDiscoveryStartedEvent) ProtoMessage() {}
+func (*SetPortRequest) ProtoMessage() {}
 
-func (x *DiscoveryListenerOnDiscoveryStartedEvent) ProtoReflect() protoreflect.Message {
+func (x *SetPortRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1231,39 +1183,38 @@ func (x *DiscoveryListenerOnDiscoveryStartedEvent) ProtoReflect() protoreflect.M
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DiscoveryListenerOnDiscoveryStartedEvent.ProtoReflect.Descriptor instead.
-func (*DiscoveryListenerOnDiscoveryStartedEvent) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetPortRequest.ProtoReflect.Descriptor instead.
+func (*SetPortRequest) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{28}
 }
 
-func (x *DiscoveryListenerOnDiscoveryStartedEvent) GetArg0() string {
+func (x *SetPortRequest) GetArg0() int32 {
 	if x != nil {
 		return x.Arg0
 	}
-	return ""
+	return 0
 }
 
-type DiscoveryListenerOnDiscoveryStoppedEvent struct {
+type SetPortResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DiscoveryListenerOnDiscoveryStoppedEvent) Reset() {
-	*x = DiscoveryListenerOnDiscoveryStoppedEvent{}
+func (x *SetPortResponse) Reset() {
+	*x = SetPortResponse{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DiscoveryListenerOnDiscoveryStoppedEvent) String() string {
+func (x *SetPortResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DiscoveryListenerOnDiscoveryStoppedEvent) ProtoMessage() {}
+func (*SetPortResponse) ProtoMessage() {}
 
-func (x *DiscoveryListenerOnDiscoveryStoppedEvent) ProtoReflect() protoreflect.Message {
+func (x *SetPortResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1275,40 +1226,32 @@ func (x *DiscoveryListenerOnDiscoveryStoppedEvent) ProtoReflect() protoreflect.M
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DiscoveryListenerOnDiscoveryStoppedEvent.ProtoReflect.Descriptor instead.
-func (*DiscoveryListenerOnDiscoveryStoppedEvent) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetPortResponse.ProtoReflect.Descriptor instead.
+func (*SetPortResponse) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{29}
 }
 
-func (x *DiscoveryListenerOnDiscoveryStoppedEvent) GetArg0() string {
-	if x != nil {
-		return x.Arg0
-	}
-	return ""
-}
-
-type DiscoveryListenerOnStartDiscoveryFailedEvent struct {
+type SetServiceNameRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DiscoveryListenerOnStartDiscoveryFailedEvent) Reset() {
-	*x = DiscoveryListenerOnStartDiscoveryFailedEvent{}
+func (x *SetServiceNameRequest) Reset() {
+	*x = SetServiceNameRequest{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DiscoveryListenerOnStartDiscoveryFailedEvent) String() string {
+func (x *SetServiceNameRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DiscoveryListenerOnStartDiscoveryFailedEvent) ProtoMessage() {}
+func (*SetServiceNameRequest) ProtoMessage() {}
 
-func (x *DiscoveryListenerOnStartDiscoveryFailedEvent) ProtoReflect() protoreflect.Message {
+func (x *SetServiceNameRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1320,47 +1263,38 @@ func (x *DiscoveryListenerOnStartDiscoveryFailedEvent) ProtoReflect() protorefle
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DiscoveryListenerOnStartDiscoveryFailedEvent.ProtoReflect.Descriptor instead.
-func (*DiscoveryListenerOnStartDiscoveryFailedEvent) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetServiceNameRequest.ProtoReflect.Descriptor instead.
+func (*SetServiceNameRequest) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{30}
 }
 
-func (x *DiscoveryListenerOnStartDiscoveryFailedEvent) GetArg0() string {
+func (x *SetServiceNameRequest) GetArg0() string {
 	if x != nil {
 		return x.Arg0
 	}
 	return ""
 }
 
-func (x *DiscoveryListenerOnStartDiscoveryFailedEvent) GetArg1() int64 {
-	if x != nil {
-		return x.Arg1
-	}
-	return 0
-}
-
-type DiscoveryListenerOnStopDiscoveryFailedEvent struct {
+type SetServiceNameResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DiscoveryListenerOnStopDiscoveryFailedEvent) Reset() {
-	*x = DiscoveryListenerOnStopDiscoveryFailedEvent{}
+func (x *SetServiceNameResponse) Reset() {
+	*x = SetServiceNameResponse{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DiscoveryListenerOnStopDiscoveryFailedEvent) String() string {
+func (x *SetServiceNameResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DiscoveryListenerOnStopDiscoveryFailedEvent) ProtoMessage() {}
+func (*SetServiceNameResponse) ProtoMessage() {}
 
-func (x *DiscoveryListenerOnStopDiscoveryFailedEvent) ProtoReflect() protoreflect.Message {
+func (x *SetServiceNameResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1372,129 +1306,75 @@ func (x *DiscoveryListenerOnStopDiscoveryFailedEvent) ProtoReflect() protoreflec
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DiscoveryListenerOnStopDiscoveryFailedEvent.ProtoReflect.Descriptor instead.
-func (*DiscoveryListenerOnStopDiscoveryFailedEvent) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetServiceNameResponse.ProtoReflect.Descriptor instead.
+func (*SetServiceNameResponse) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{31}
 }
 
-func (x *DiscoveryListenerOnStopDiscoveryFailedEvent) GetArg0() string {
+type SetServiceTypeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetServiceTypeRequest) Reset() {
+	*x = SetServiceTypeRequest{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetServiceTypeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetServiceTypeRequest) ProtoMessage() {}
+
+func (x *SetServiceTypeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetServiceTypeRequest.ProtoReflect.Descriptor instead.
+func (*SetServiceTypeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *SetServiceTypeRequest) GetArg0() string {
 	if x != nil {
 		return x.Arg0
 	}
 	return ""
 }
 
-func (x *DiscoveryListenerOnStopDiscoveryFailedEvent) GetArg1() int64 {
-	if x != nil {
-		return x.Arg1
-	}
-	return 0
-}
-
-type DiscoveryListenerEvent struct {
-	state                  protoimpl.MessageState                        `protogen:"open.v1"`
-	OnServiceFound         *DiscoveryListenerOnServiceFoundEvent         `protobuf:"bytes,1,opt,name=on_service_found,json=onServiceFound,proto3,oneof" json:"on_service_found,omitempty"`
-	OnServiceLost          *DiscoveryListenerOnServiceLostEvent          `protobuf:"bytes,2,opt,name=on_service_lost,json=onServiceLost,proto3,oneof" json:"on_service_lost,omitempty"`
-	OnDiscoveryStarted     *DiscoveryListenerOnDiscoveryStartedEvent     `protobuf:"bytes,3,opt,name=on_discovery_started,json=onDiscoveryStarted,proto3,oneof" json:"on_discovery_started,omitempty"`
-	OnDiscoveryStopped     *DiscoveryListenerOnDiscoveryStoppedEvent     `protobuf:"bytes,4,opt,name=on_discovery_stopped,json=onDiscoveryStopped,proto3,oneof" json:"on_discovery_stopped,omitempty"`
-	OnStartDiscoveryFailed *DiscoveryListenerOnStartDiscoveryFailedEvent `protobuf:"bytes,5,opt,name=on_start_discovery_failed,json=onStartDiscoveryFailed,proto3,oneof" json:"on_start_discovery_failed,omitempty"`
-	OnStopDiscoveryFailed  *DiscoveryListenerOnStopDiscoveryFailedEvent  `protobuf:"bytes,6,opt,name=on_stop_discovery_failed,json=onStopDiscoveryFailed,proto3,oneof" json:"on_stop_discovery_failed,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
-}
-
-func (x *DiscoveryListenerEvent) Reset() {
-	*x = DiscoveryListenerEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[32]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DiscoveryListenerEvent) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DiscoveryListenerEvent) ProtoMessage() {}
-
-func (x *DiscoveryListenerEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[32]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DiscoveryListenerEvent.ProtoReflect.Descriptor instead.
-func (*DiscoveryListenerEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{32}
-}
-
-func (x *DiscoveryListenerEvent) GetOnServiceFound() *DiscoveryListenerOnServiceFoundEvent {
-	if x != nil {
-		return x.OnServiceFound
-	}
-	return nil
-}
-
-func (x *DiscoveryListenerEvent) GetOnServiceLost() *DiscoveryListenerOnServiceLostEvent {
-	if x != nil {
-		return x.OnServiceLost
-	}
-	return nil
-}
-
-func (x *DiscoveryListenerEvent) GetOnDiscoveryStarted() *DiscoveryListenerOnDiscoveryStartedEvent {
-	if x != nil {
-		return x.OnDiscoveryStarted
-	}
-	return nil
-}
-
-func (x *DiscoveryListenerEvent) GetOnDiscoveryStopped() *DiscoveryListenerOnDiscoveryStoppedEvent {
-	if x != nil {
-		return x.OnDiscoveryStopped
-	}
-	return nil
-}
-
-func (x *DiscoveryListenerEvent) GetOnStartDiscoveryFailed() *DiscoveryListenerOnStartDiscoveryFailedEvent {
-	if x != nil {
-		return x.OnStartDiscoveryFailed
-	}
-	return nil
-}
-
-func (x *DiscoveryListenerEvent) GetOnStopDiscoveryFailed() *DiscoveryListenerOnStopDiscoveryFailedEvent {
-	if x != nil {
-		return x.OnStopDiscoveryFailed
-	}
-	return nil
-}
-
-type SubscribeDiscoveryListenerRequest struct {
+type SetServiceTypeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SubscribeDiscoveryListenerRequest) Reset() {
-	*x = SubscribeDiscoveryListenerRequest{}
+func (x *SetServiceTypeResponse) Reset() {
+	*x = SetServiceTypeResponse{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SubscribeDiscoveryListenerRequest) String() string {
+func (x *SetServiceTypeResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SubscribeDiscoveryListenerRequest) ProtoMessage() {}
+func (*SetServiceTypeResponse) ProtoMessage() {}
 
-func (x *SubscribeDiscoveryListenerRequest) ProtoReflect() protoreflect.Message {
+func (x *SetServiceTypeResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1506,32 +1386,32 @@ func (x *SubscribeDiscoveryListenerRequest) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SubscribeDiscoveryListenerRequest.ProtoReflect.Descriptor instead.
-func (*SubscribeDiscoveryListenerRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetServiceTypeResponse.ProtoReflect.Descriptor instead.
+func (*SetServiceTypeResponse) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{33}
 }
 
-type ResolveListenerOnServiceResolvedEvent struct {
+type SetSubtypesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ResolveListenerOnServiceResolvedEvent) Reset() {
-	*x = ResolveListenerOnServiceResolvedEvent{}
+func (x *SetSubtypesRequest) Reset() {
+	*x = SetSubtypesRequest{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ResolveListenerOnServiceResolvedEvent) String() string {
+func (x *SetSubtypesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ResolveListenerOnServiceResolvedEvent) ProtoMessage() {}
+func (*SetSubtypesRequest) ProtoMessage() {}
 
-func (x *ResolveListenerOnServiceResolvedEvent) ProtoReflect() protoreflect.Message {
+func (x *SetSubtypesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1543,40 +1423,38 @@ func (x *ResolveListenerOnServiceResolvedEvent) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResolveListenerOnServiceResolvedEvent.ProtoReflect.Descriptor instead.
-func (*ResolveListenerOnServiceResolvedEvent) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetSubtypesRequest.ProtoReflect.Descriptor instead.
+func (*SetSubtypesRequest) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{34}
 }
 
-func (x *ResolveListenerOnServiceResolvedEvent) GetArg0() int64 {
+func (x *SetSubtypesRequest) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-type ResolveListenerOnResolveFailedEvent struct {
+type SetSubtypesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ResolveListenerOnResolveFailedEvent) Reset() {
-	*x = ResolveListenerOnResolveFailedEvent{}
+func (x *SetSubtypesResponse) Reset() {
+	*x = SetSubtypesResponse{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ResolveListenerOnResolveFailedEvent) String() string {
+func (x *SetSubtypesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ResolveListenerOnResolveFailedEvent) ProtoMessage() {}
+func (*SetSubtypesResponse) ProtoMessage() {}
 
-func (x *ResolveListenerOnResolveFailedEvent) ProtoReflect() protoreflect.Message {
+func (x *SetSubtypesResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1588,47 +1466,31 @@ func (x *ResolveListenerOnResolveFailedEvent) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResolveListenerOnResolveFailedEvent.ProtoReflect.Descriptor instead.
-func (*ResolveListenerOnResolveFailedEvent) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetSubtypesResponse.ProtoReflect.Descriptor instead.
+func (*SetSubtypesResponse) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{35}
 }
 
-func (x *ResolveListenerOnResolveFailedEvent) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
+type ToStringRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ResolveListenerOnResolveFailedEvent) GetArg1() int64 {
-	if x != nil {
-		return x.Arg1
-	}
-	return 0
-}
-
-type ResolveListenerEvent struct {
-	state             protoimpl.MessageState                 `protogen:"open.v1"`
-	OnServiceResolved *ResolveListenerOnServiceResolvedEvent `protobuf:"bytes,1,opt,name=on_service_resolved,json=onServiceResolved,proto3,oneof" json:"on_service_resolved,omitempty"`
-	OnResolveFailed   *ResolveListenerOnResolveFailedEvent   `protobuf:"bytes,2,opt,name=on_resolve_failed,json=onResolveFailed,proto3,oneof" json:"on_resolve_failed,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
-}
-
-func (x *ResolveListenerEvent) Reset() {
-	*x = ResolveListenerEvent{}
+func (x *ToStringRequest) Reset() {
+	*x = ToStringRequest{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ResolveListenerEvent) String() string {
+func (x *ToStringRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ResolveListenerEvent) ProtoMessage() {}
+func (*ToStringRequest) ProtoMessage() {}
 
-func (x *ResolveListenerEvent) ProtoReflect() protoreflect.Message {
+func (x *ToStringRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1640,45 +1502,32 @@ func (x *ResolveListenerEvent) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResolveListenerEvent.ProtoReflect.Descriptor instead.
-func (*ResolveListenerEvent) Descriptor() ([]byte, []int) {
+// Deprecated: Use ToStringRequest.ProtoReflect.Descriptor instead.
+func (*ToStringRequest) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{36}
 }
 
-func (x *ResolveListenerEvent) GetOnServiceResolved() *ResolveListenerOnServiceResolvedEvent {
-	if x != nil {
-		return x.OnServiceResolved
-	}
-	return nil
-}
-
-func (x *ResolveListenerEvent) GetOnResolveFailed() *ResolveListenerOnResolveFailedEvent {
-	if x != nil {
-		return x.OnResolveFailed
-	}
-	return nil
-}
-
-type SubscribeResolveListenerRequest struct {
+type ToStringResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SubscribeResolveListenerRequest) Reset() {
-	*x = SubscribeResolveListenerRequest{}
+func (x *ToStringResponse) Reset() {
+	*x = ToStringResponse{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SubscribeResolveListenerRequest) String() string {
+func (x *ToStringResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SubscribeResolveListenerRequest) ProtoMessage() {}
+func (*ToStringResponse) ProtoMessage() {}
 
-func (x *SubscribeResolveListenerRequest) ProtoReflect() protoreflect.Message {
+func (x *ToStringResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1690,32 +1539,40 @@ func (x *SubscribeResolveListenerRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SubscribeResolveListenerRequest.ProtoReflect.Descriptor instead.
-func (*SubscribeResolveListenerRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ToStringResponse.ProtoReflect.Descriptor instead.
+func (*ToStringResponse) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{37}
 }
 
-type RegistrationListenerOnServiceRegisteredEvent struct {
+func (x *ToStringResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type WriteToParcelRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int32                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RegistrationListenerOnServiceRegisteredEvent) Reset() {
-	*x = RegistrationListenerOnServiceRegisteredEvent{}
+func (x *WriteToParcelRequest) Reset() {
+	*x = WriteToParcelRequest{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RegistrationListenerOnServiceRegisteredEvent) String() string {
+func (x *WriteToParcelRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RegistrationListenerOnServiceRegisteredEvent) ProtoMessage() {}
+func (*WriteToParcelRequest) ProtoMessage() {}
 
-func (x *RegistrationListenerOnServiceRegisteredEvent) ProtoReflect() protoreflect.Message {
+func (x *WriteToParcelRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1727,40 +1584,45 @@ func (x *RegistrationListenerOnServiceRegisteredEvent) ProtoReflect() protorefle
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RegistrationListenerOnServiceRegisteredEvent.ProtoReflect.Descriptor instead.
-func (*RegistrationListenerOnServiceRegisteredEvent) Descriptor() ([]byte, []int) {
+// Deprecated: Use WriteToParcelRequest.ProtoReflect.Descriptor instead.
+func (*WriteToParcelRequest) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{38}
 }
 
-func (x *RegistrationListenerOnServiceRegisteredEvent) GetArg0() int64 {
+func (x *WriteToParcelRequest) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-type RegistrationListenerOnRegistrationFailedEvent struct {
+func (x *WriteToParcelRequest) GetArg1() int32 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type WriteToParcelResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RegistrationListenerOnRegistrationFailedEvent) Reset() {
-	*x = RegistrationListenerOnRegistrationFailedEvent{}
+func (x *WriteToParcelResponse) Reset() {
+	*x = WriteToParcelResponse{}
 	mi := &file_proto_nsd_nsd_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RegistrationListenerOnRegistrationFailedEvent) String() string {
+func (x *WriteToParcelResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RegistrationListenerOnRegistrationFailedEvent) ProtoMessage() {}
+func (*WriteToParcelResponse) ProtoMessage() {}
 
-func (x *RegistrationListenerOnRegistrationFailedEvent) ProtoReflect() protoreflect.Message {
+func (x *WriteToParcelResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_nsd_nsd_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1772,355 +1634,102 @@ func (x *RegistrationListenerOnRegistrationFailedEvent) ProtoReflect() protorefl
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RegistrationListenerOnRegistrationFailedEvent.ProtoReflect.Descriptor instead.
-func (*RegistrationListenerOnRegistrationFailedEvent) Descriptor() ([]byte, []int) {
+// Deprecated: Use WriteToParcelResponse.ProtoReflect.Descriptor instead.
+func (*WriteToParcelResponse) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{39}
-}
-
-func (x *RegistrationListenerOnRegistrationFailedEvent) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-func (x *RegistrationListenerOnRegistrationFailedEvent) GetArg1() int64 {
-	if x != nil {
-		return x.Arg1
-	}
-	return 0
-}
-
-type RegistrationListenerOnServiceUnregisteredEvent struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RegistrationListenerOnServiceUnregisteredEvent) Reset() {
-	*x = RegistrationListenerOnServiceUnregisteredEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[40]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RegistrationListenerOnServiceUnregisteredEvent) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RegistrationListenerOnServiceUnregisteredEvent) ProtoMessage() {}
-
-func (x *RegistrationListenerOnServiceUnregisteredEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[40]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RegistrationListenerOnServiceUnregisteredEvent.ProtoReflect.Descriptor instead.
-func (*RegistrationListenerOnServiceUnregisteredEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{40}
-}
-
-func (x *RegistrationListenerOnServiceUnregisteredEvent) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type RegistrationListenerOnUnregistrationFailedEvent struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
-	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RegistrationListenerOnUnregistrationFailedEvent) Reset() {
-	*x = RegistrationListenerOnUnregistrationFailedEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[41]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RegistrationListenerOnUnregistrationFailedEvent) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RegistrationListenerOnUnregistrationFailedEvent) ProtoMessage() {}
-
-func (x *RegistrationListenerOnUnregistrationFailedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[41]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RegistrationListenerOnUnregistrationFailedEvent.ProtoReflect.Descriptor instead.
-func (*RegistrationListenerOnUnregistrationFailedEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{41}
-}
-
-func (x *RegistrationListenerOnUnregistrationFailedEvent) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-func (x *RegistrationListenerOnUnregistrationFailedEvent) GetArg1() int64 {
-	if x != nil {
-		return x.Arg1
-	}
-	return 0
-}
-
-type RegistrationListenerEvent struct {
-	state                  protoimpl.MessageState                           `protogen:"open.v1"`
-	OnServiceRegistered    *RegistrationListenerOnServiceRegisteredEvent    `protobuf:"bytes,1,opt,name=on_service_registered,json=onServiceRegistered,proto3,oneof" json:"on_service_registered,omitempty"`
-	OnRegistrationFailed   *RegistrationListenerOnRegistrationFailedEvent   `protobuf:"bytes,2,opt,name=on_registration_failed,json=onRegistrationFailed,proto3,oneof" json:"on_registration_failed,omitempty"`
-	OnServiceUnregistered  *RegistrationListenerOnServiceUnregisteredEvent  `protobuf:"bytes,3,opt,name=on_service_unregistered,json=onServiceUnregistered,proto3,oneof" json:"on_service_unregistered,omitempty"`
-	OnUnregistrationFailed *RegistrationListenerOnUnregistrationFailedEvent `protobuf:"bytes,4,opt,name=on_unregistration_failed,json=onUnregistrationFailed,proto3,oneof" json:"on_unregistration_failed,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
-}
-
-func (x *RegistrationListenerEvent) Reset() {
-	*x = RegistrationListenerEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[42]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RegistrationListenerEvent) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RegistrationListenerEvent) ProtoMessage() {}
-
-func (x *RegistrationListenerEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[42]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RegistrationListenerEvent.ProtoReflect.Descriptor instead.
-func (*RegistrationListenerEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{42}
-}
-
-func (x *RegistrationListenerEvent) GetOnServiceRegistered() *RegistrationListenerOnServiceRegisteredEvent {
-	if x != nil {
-		return x.OnServiceRegistered
-	}
-	return nil
-}
-
-func (x *RegistrationListenerEvent) GetOnRegistrationFailed() *RegistrationListenerOnRegistrationFailedEvent {
-	if x != nil {
-		return x.OnRegistrationFailed
-	}
-	return nil
-}
-
-func (x *RegistrationListenerEvent) GetOnServiceUnregistered() *RegistrationListenerOnServiceUnregisteredEvent {
-	if x != nil {
-		return x.OnServiceUnregistered
-	}
-	return nil
-}
-
-func (x *RegistrationListenerEvent) GetOnUnregistrationFailed() *RegistrationListenerOnUnregistrationFailedEvent {
-	if x != nil {
-		return x.OnUnregistrationFailed
-	}
-	return nil
-}
-
-type SubscribeRegistrationListenerRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SubscribeRegistrationListenerRequest) Reset() {
-	*x = SubscribeRegistrationListenerRequest{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[43]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SubscribeRegistrationListenerRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SubscribeRegistrationListenerRequest) ProtoMessage() {}
-
-func (x *SubscribeRegistrationListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[43]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SubscribeRegistrationListenerRequest.ProtoReflect.Descriptor instead.
-func (*SubscribeRegistrationListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{43}
 }
 
 var File_proto_nsd_nsd_proto protoreflect.FileDescriptor
 
 const file_proto_nsd_nsd_proto_rawDesc = "" +
 	"\n" +
-	"\x13proto/nsd/nsd.proto\x12\x03nsd\"\x80\x01\n" +
-	"\x1aDiscoverServicesRawRequest\x12!\n" +
-	"\fservice_type\x18\x01 \x01(\tR\vserviceType\x12#\n" +
-	"\rprotocol_type\x18\x02 \x01(\x05R\fprotocolType\x12\x1a\n" +
-	"\blistener\x18\x03 \x01(\x03R\blistener\"\x1d\n" +
-	"\x1bDiscoverServicesRawResponse\"<\n" +
-	"\x1eStopServiceDiscoveryRawRequest\x12\x1a\n" +
-	"\blistener\x18\x01 \x01(\x03R\blistener\"!\n" +
-	"\x1fStopServiceDiscoveryRawResponse\"Y\n" +
-	"\x18ResolveServiceRawRequest\x12!\n" +
-	"\fservice_info\x18\x01 \x01(\x03R\vserviceInfo\x12\x1a\n" +
-	"\blistener\x18\x02 \x01(\x03R\blistener\"\x1b\n" +
-	"\x19ResolveServiceRawResponse\"\x7f\n" +
-	"\x19RegisterServiceRawRequest\x12!\n" +
-	"\fservice_info\x18\x01 \x01(\x03R\vserviceInfo\x12#\n" +
-	"\rprotocol_type\x18\x02 \x01(\x05R\fprotocolType\x12\x1a\n" +
-	"\blistener\x18\x03 \x01(\x03R\blistener\"\x1c\n" +
-	"\x1aRegisterServiceRawResponse\"9\n" +
-	"\x1bUnregisterServiceRawRequest\x12\x1a\n" +
-	"\blistener\x18\x01 \x01(\x03R\blistener\"\x1e\n" +
-	"\x1cUnregisterServiceRawResponse\"+\n" +
-	"\x15SetServiceNameRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\x18\n" +
-	"\x16SetServiceNameResponse\":\n" +
-	"\x15SetServiceTypeRequest\x12!\n" +
-	"\fservice_type\x18\x01 \x01(\tR\vserviceType\"\x18\n" +
-	"\x16SetServiceTypeResponse\"$\n" +
-	"\x0eSetPortRequest\x12\x12\n" +
-	"\x04port\x18\x01 \x01(\x05R\x04port\"\x11\n" +
-	"\x0fSetPortResponse\"=\n" +
-	"\x13SetAttributeRequest\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value\"\x16\n" +
-	"\x14SetAttributeResponse\"\x17\n" +
+	"\x13proto/nsd/nsd.proto\x12\x03nsd\"\x19\n" +
+	"\x17DescribeContentsRequest\"2\n" +
+	"\x18DescribeContentsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x10\n" +
+	"\x0eGetHostRequest\")\n" +
+	"\x0fGetHostResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x19\n" +
+	"\x17GetHostAddressesRequest\"2\n" +
+	"\x18GetHostAddressesResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x14\n" +
+	"\x12GetHostnameRequest\"-\n" +
+	"\x13GetHostnameResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x13\n" +
+	"\x11GetNetworkRequest\",\n" +
+	"\x12GetNetworkResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x10\n" +
+	"\x0eGetPortRequest\")\n" +
+	"\x0fGetPortResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x17\n" +
 	"\x15GetServiceNameRequest\"0\n" +
 	"\x16GetServiceNameResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\tR\x06result\"\x17\n" +
 	"\x15GetServiceTypeRequest\"0\n" +
 	"\x16GetServiceTypeResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\tR\x06result\"\x10\n" +
-	"\x0eGetHostRequest\")\n" +
-	"\x0fGetHostResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"\x10\n" +
-	"\x0eGetPortRequest\")\n" +
-	"\x0fGetPortResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x05R\x06result\":\n" +
-	"$DiscoveryListenerOnServiceFoundEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"9\n" +
-	"#DiscoveryListenerOnServiceLostEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\">\n" +
-	"(DiscoveryListenerOnDiscoveryStartedEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\tR\x04arg0\">\n" +
-	"(DiscoveryListenerOnDiscoveryStoppedEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"V\n" +
-	",DiscoveryListenerOnStartDiscoveryFailedEvent\x12\x12\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x14\n" +
+	"\x12GetSubtypesRequest\"-\n" +
+	"\x13GetSubtypesResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\",\n" +
+	"\x16RemoveAttributeRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"\x19\n" +
+	"\x17RemoveAttributeResponse\"=\n" +
+	"\x13SetAttributeRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"U\n" +
-	"+DiscoveryListenerOnStopDiscoveryFailedEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x8e\x06\n" +
-	"\x16DiscoveryListenerEvent\x12X\n" +
-	"\x10on_service_found\x18\x01 \x01(\v2).nsd.DiscoveryListenerOnServiceFoundEventH\x00R\x0eonServiceFound\x88\x01\x01\x12U\n" +
-	"\x0fon_service_lost\x18\x02 \x01(\v2(.nsd.DiscoveryListenerOnServiceLostEventH\x01R\ronServiceLost\x88\x01\x01\x12d\n" +
-	"\x14on_discovery_started\x18\x03 \x01(\v2-.nsd.DiscoveryListenerOnDiscoveryStartedEventH\x02R\x12onDiscoveryStarted\x88\x01\x01\x12d\n" +
-	"\x14on_discovery_stopped\x18\x04 \x01(\v2-.nsd.DiscoveryListenerOnDiscoveryStoppedEventH\x03R\x12onDiscoveryStopped\x88\x01\x01\x12q\n" +
-	"\x19on_start_discovery_failed\x18\x05 \x01(\v21.nsd.DiscoveryListenerOnStartDiscoveryFailedEventH\x04R\x16onStartDiscoveryFailed\x88\x01\x01\x12n\n" +
-	"\x18on_stop_discovery_failed\x18\x06 \x01(\v20.nsd.DiscoveryListenerOnStopDiscoveryFailedEventH\x05R\x15onStopDiscoveryFailed\x88\x01\x01B\x13\n" +
-	"\x11_on_service_foundB\x12\n" +
-	"\x10_on_service_lostB\x17\n" +
-	"\x15_on_discovery_startedB\x17\n" +
-	"\x15_on_discovery_stoppedB\x1c\n" +
-	"\x1a_on_start_discovery_failedB\x1b\n" +
-	"\x19_on_stop_discovery_failed\"#\n" +
-	"!SubscribeDiscoveryListenerRequest\";\n" +
-	"%ResolveListenerOnServiceResolvedEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"M\n" +
-	"#ResolveListenerOnResolveFailedEvent\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\tR\x04arg1\"\x16\n" +
+	"\x14SetAttributeResponse\"$\n" +
+	"\x0eSetHostRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x11\n" +
+	"\x0fSetHostResponse\"-\n" +
+	"\x17SetHostAddressesRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1a\n" +
+	"\x18SetHostAddressesResponse\"'\n" +
+	"\x11SetNetworkRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x14\n" +
+	"\x12SetNetworkResponse\"$\n" +
+	"\x0eSetPortRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"\x11\n" +
+	"\x0fSetPortResponse\"+\n" +
+	"\x15SetServiceNameRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"\x18\n" +
+	"\x16SetServiceNameResponse\"+\n" +
+	"\x15SetServiceTypeRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"\x18\n" +
+	"\x16SetServiceTypeResponse\"(\n" +
+	"\x12SetSubtypesRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x15\n" +
+	"\x13SetSubtypesResponse\"\x11\n" +
+	"\x0fToStringRequest\"*\n" +
+	"\x10ToStringResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\">\n" +
+	"\x14WriteToParcelRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x80\x02\n" +
-	"\x14ResolveListenerEvent\x12_\n" +
-	"\x13on_service_resolved\x18\x01 \x01(\v2*.nsd.ResolveListenerOnServiceResolvedEventH\x00R\x11onServiceResolved\x88\x01\x01\x12Y\n" +
-	"\x11on_resolve_failed\x18\x02 \x01(\v2(.nsd.ResolveListenerOnResolveFailedEventH\x01R\x0fonResolveFailed\x88\x01\x01B\x16\n" +
-	"\x14_on_service_resolvedB\x14\n" +
-	"\x12_on_resolve_failed\"!\n" +
-	"\x1fSubscribeResolveListenerRequest\"B\n" +
-	",RegistrationListenerOnServiceRegisteredEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"W\n" +
-	"-RegistrationListenerOnRegistrationFailedEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"D\n" +
-	".RegistrationListenerOnServiceUnregisteredEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"Y\n" +
-	"/RegistrationListenerOnUnregistrationFailedEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\xcb\x04\n" +
-	"\x19RegistrationListenerEvent\x12j\n" +
-	"\x15on_service_registered\x18\x01 \x01(\v21.nsd.RegistrationListenerOnServiceRegisteredEventH\x00R\x13onServiceRegistered\x88\x01\x01\x12m\n" +
-	"\x16on_registration_failed\x18\x02 \x01(\v22.nsd.RegistrationListenerOnRegistrationFailedEventH\x01R\x14onRegistrationFailed\x88\x01\x01\x12p\n" +
-	"\x17on_service_unregistered\x18\x03 \x01(\v23.nsd.RegistrationListenerOnServiceUnregisteredEventH\x02R\x15onServiceUnregistered\x88\x01\x01\x12s\n" +
-	"\x18on_unregistration_failed\x18\x04 \x01(\v24.nsd.RegistrationListenerOnUnregistrationFailedEventH\x03R\x16onUnregistrationFailed\x88\x01\x01B\x18\n" +
-	"\x16_on_service_registeredB\x19\n" +
-	"\x17_on_registration_failedB\x1a\n" +
-	"\x18_on_service_unregisteredB\x1b\n" +
-	"\x19_on_unregistration_failed\"&\n" +
-	"$SubscribeRegistrationListenerRequest2\xd8\x03\n" +
-	"\x0eManagerService\x12X\n" +
-	"\x13DiscoverServicesRaw\x12\x1f.nsd.DiscoverServicesRawRequest\x1a .nsd.DiscoverServicesRawResponse\x12d\n" +
-	"\x17StopServiceDiscoveryRaw\x12#.nsd.StopServiceDiscoveryRawRequest\x1a$.nsd.StopServiceDiscoveryRawResponse\x12R\n" +
-	"\x11ResolveServiceRaw\x12\x1d.nsd.ResolveServiceRawRequest\x1a\x1e.nsd.ResolveServiceRawResponse\x12U\n" +
-	"\x12RegisterServiceRaw\x12\x1e.nsd.RegisterServiceRawRequest\x1a\x1f.nsd.RegisterServiceRawResponse\x12[\n" +
-	"\x14UnregisterServiceRaw\x12 .nsd.UnregisterServiceRawRequest\x1a!.nsd.UnregisterServiceRawResponse2\xaa\x04\n" +
-	"\x15NsdServiceInfoService\x12I\n" +
-	"\x0eSetServiceName\x12\x1a.nsd.SetServiceNameRequest\x1a\x1b.nsd.SetServiceNameResponse\x12I\n" +
-	"\x0eSetServiceType\x12\x1a.nsd.SetServiceTypeRequest\x1a\x1b.nsd.SetServiceTypeResponse\x124\n" +
-	"\aSetPort\x12\x13.nsd.SetPortRequest\x1a\x14.nsd.SetPortResponse\x12C\n" +
-	"\fSetAttribute\x12\x18.nsd.SetAttributeRequest\x1a\x19.nsd.SetAttributeResponse\x12I\n" +
+	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\"\x17\n" +
+	"\x15WriteToParcelResponse2\xe6\n" +
+	"\n" +
+	"\x15NsdServiceInfoService\x12O\n" +
+	"\x10DescribeContents\x12\x1c.nsd.DescribeContentsRequest\x1a\x1d.nsd.DescribeContentsResponse\x124\n" +
+	"\aGetHost\x12\x13.nsd.GetHostRequest\x1a\x14.nsd.GetHostResponse\x12O\n" +
+	"\x10GetHostAddresses\x12\x1c.nsd.GetHostAddressesRequest\x1a\x1d.nsd.GetHostAddressesResponse\x12@\n" +
+	"\vGetHostname\x12\x17.nsd.GetHostnameRequest\x1a\x18.nsd.GetHostnameResponse\x12=\n" +
+	"\n" +
+	"GetNetwork\x12\x16.nsd.GetNetworkRequest\x1a\x17.nsd.GetNetworkResponse\x124\n" +
+	"\aGetPort\x12\x13.nsd.GetPortRequest\x1a\x14.nsd.GetPortResponse\x12I\n" +
 	"\x0eGetServiceName\x12\x1a.nsd.GetServiceNameRequest\x1a\x1b.nsd.GetServiceNameResponse\x12I\n" +
-	"\x0eGetServiceType\x12\x1a.nsd.GetServiceTypeRequest\x1a\x1b.nsd.GetServiceTypeResponse\x124\n" +
-	"\aGetHost\x12\x13.nsd.GetHostRequest\x1a\x14.nsd.GetHostResponse\x124\n" +
-	"\aGetPort\x12\x13.nsd.GetPortRequest\x1a\x14.nsd.GetPortResponse2\x7f\n" +
-	"\x18DiscoveryListenerService\x12c\n" +
-	"\x1aSubscribeDiscoveryListener\x12&.nsd.SubscribeDiscoveryListenerRequest\x1a\x1b.nsd.DiscoveryListenerEvent0\x012w\n" +
-	"\x16ResolveListenerService\x12]\n" +
-	"\x18SubscribeResolveListener\x12$.nsd.SubscribeResolveListenerRequest\x1a\x19.nsd.ResolveListenerEvent0\x012\x8b\x01\n" +
-	"\x1bRegistrationListenerService\x12l\n" +
-	"\x1dSubscribeRegistrationListener\x12).nsd.SubscribeRegistrationListenerRequest\x1a\x1e.nsd.RegistrationListenerEvent0\x01B&Z$github.com/xaionaro-go/jni/proto/nsdb\x06proto3"
+	"\x0eGetServiceType\x12\x1a.nsd.GetServiceTypeRequest\x1a\x1b.nsd.GetServiceTypeResponse\x12@\n" +
+	"\vGetSubtypes\x12\x17.nsd.GetSubtypesRequest\x1a\x18.nsd.GetSubtypesResponse\x12L\n" +
+	"\x0fRemoveAttribute\x12\x1b.nsd.RemoveAttributeRequest\x1a\x1c.nsd.RemoveAttributeResponse\x12C\n" +
+	"\fSetAttribute\x12\x18.nsd.SetAttributeRequest\x1a\x19.nsd.SetAttributeResponse\x124\n" +
+	"\aSetHost\x12\x13.nsd.SetHostRequest\x1a\x14.nsd.SetHostResponse\x12O\n" +
+	"\x10SetHostAddresses\x12\x1c.nsd.SetHostAddressesRequest\x1a\x1d.nsd.SetHostAddressesResponse\x12=\n" +
+	"\n" +
+	"SetNetwork\x12\x16.nsd.SetNetworkRequest\x1a\x17.nsd.SetNetworkResponse\x124\n" +
+	"\aSetPort\x12\x13.nsd.SetPortRequest\x1a\x14.nsd.SetPortResponse\x12I\n" +
+	"\x0eSetServiceName\x12\x1a.nsd.SetServiceNameRequest\x1a\x1b.nsd.SetServiceNameResponse\x12I\n" +
+	"\x0eSetServiceType\x12\x1a.nsd.SetServiceTypeRequest\x1a\x1b.nsd.SetServiceTypeResponse\x12@\n" +
+	"\vSetSubtypes\x12\x17.nsd.SetSubtypesRequest\x1a\x18.nsd.SetSubtypesResponse\x127\n" +
+	"\bToString\x12\x14.nsd.ToStringRequest\x1a\x15.nsd.ToStringResponse\x12F\n" +
+	"\rWriteToParcel\x12\x19.nsd.WriteToParcelRequest\x1a\x1a.nsd.WriteToParcelResponseB&Z$github.com/xaionaro-go/jni/proto/nsdb\x06proto3"
 
 var (
 	file_proto_nsd_nsd_proto_rawDescOnce sync.Once
@@ -2134,103 +1743,95 @@ func file_proto_nsd_nsd_proto_rawDescGZIP() []byte {
 	return file_proto_nsd_nsd_proto_rawDescData
 }
 
-var file_proto_nsd_nsd_proto_msgTypes = make([]protoimpl.MessageInfo, 44)
+var file_proto_nsd_nsd_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
 var file_proto_nsd_nsd_proto_goTypes = []any{
-	(*DiscoverServicesRawRequest)(nil),                      // 0: nsd.DiscoverServicesRawRequest
-	(*DiscoverServicesRawResponse)(nil),                     // 1: nsd.DiscoverServicesRawResponse
-	(*StopServiceDiscoveryRawRequest)(nil),                  // 2: nsd.StopServiceDiscoveryRawRequest
-	(*StopServiceDiscoveryRawResponse)(nil),                 // 3: nsd.StopServiceDiscoveryRawResponse
-	(*ResolveServiceRawRequest)(nil),                        // 4: nsd.ResolveServiceRawRequest
-	(*ResolveServiceRawResponse)(nil),                       // 5: nsd.ResolveServiceRawResponse
-	(*RegisterServiceRawRequest)(nil),                       // 6: nsd.RegisterServiceRawRequest
-	(*RegisterServiceRawResponse)(nil),                      // 7: nsd.RegisterServiceRawResponse
-	(*UnregisterServiceRawRequest)(nil),                     // 8: nsd.UnregisterServiceRawRequest
-	(*UnregisterServiceRawResponse)(nil),                    // 9: nsd.UnregisterServiceRawResponse
-	(*SetServiceNameRequest)(nil),                           // 10: nsd.SetServiceNameRequest
-	(*SetServiceNameResponse)(nil),                          // 11: nsd.SetServiceNameResponse
-	(*SetServiceTypeRequest)(nil),                           // 12: nsd.SetServiceTypeRequest
-	(*SetServiceTypeResponse)(nil),                          // 13: nsd.SetServiceTypeResponse
-	(*SetPortRequest)(nil),                                  // 14: nsd.SetPortRequest
-	(*SetPortResponse)(nil),                                 // 15: nsd.SetPortResponse
-	(*SetAttributeRequest)(nil),                             // 16: nsd.SetAttributeRequest
-	(*SetAttributeResponse)(nil),                            // 17: nsd.SetAttributeResponse
-	(*GetServiceNameRequest)(nil),                           // 18: nsd.GetServiceNameRequest
-	(*GetServiceNameResponse)(nil),                          // 19: nsd.GetServiceNameResponse
-	(*GetServiceTypeRequest)(nil),                           // 20: nsd.GetServiceTypeRequest
-	(*GetServiceTypeResponse)(nil),                          // 21: nsd.GetServiceTypeResponse
-	(*GetHostRequest)(nil),                                  // 22: nsd.GetHostRequest
-	(*GetHostResponse)(nil),                                 // 23: nsd.GetHostResponse
-	(*GetPortRequest)(nil),                                  // 24: nsd.GetPortRequest
-	(*GetPortResponse)(nil),                                 // 25: nsd.GetPortResponse
-	(*DiscoveryListenerOnServiceFoundEvent)(nil),            // 26: nsd.DiscoveryListenerOnServiceFoundEvent
-	(*DiscoveryListenerOnServiceLostEvent)(nil),             // 27: nsd.DiscoveryListenerOnServiceLostEvent
-	(*DiscoveryListenerOnDiscoveryStartedEvent)(nil),        // 28: nsd.DiscoveryListenerOnDiscoveryStartedEvent
-	(*DiscoveryListenerOnDiscoveryStoppedEvent)(nil),        // 29: nsd.DiscoveryListenerOnDiscoveryStoppedEvent
-	(*DiscoveryListenerOnStartDiscoveryFailedEvent)(nil),    // 30: nsd.DiscoveryListenerOnStartDiscoveryFailedEvent
-	(*DiscoveryListenerOnStopDiscoveryFailedEvent)(nil),     // 31: nsd.DiscoveryListenerOnStopDiscoveryFailedEvent
-	(*DiscoveryListenerEvent)(nil),                          // 32: nsd.DiscoveryListenerEvent
-	(*SubscribeDiscoveryListenerRequest)(nil),               // 33: nsd.SubscribeDiscoveryListenerRequest
-	(*ResolveListenerOnServiceResolvedEvent)(nil),           // 34: nsd.ResolveListenerOnServiceResolvedEvent
-	(*ResolveListenerOnResolveFailedEvent)(nil),             // 35: nsd.ResolveListenerOnResolveFailedEvent
-	(*ResolveListenerEvent)(nil),                            // 36: nsd.ResolveListenerEvent
-	(*SubscribeResolveListenerRequest)(nil),                 // 37: nsd.SubscribeResolveListenerRequest
-	(*RegistrationListenerOnServiceRegisteredEvent)(nil),    // 38: nsd.RegistrationListenerOnServiceRegisteredEvent
-	(*RegistrationListenerOnRegistrationFailedEvent)(nil),   // 39: nsd.RegistrationListenerOnRegistrationFailedEvent
-	(*RegistrationListenerOnServiceUnregisteredEvent)(nil),  // 40: nsd.RegistrationListenerOnServiceUnregisteredEvent
-	(*RegistrationListenerOnUnregistrationFailedEvent)(nil), // 41: nsd.RegistrationListenerOnUnregistrationFailedEvent
-	(*RegistrationListenerEvent)(nil),                       // 42: nsd.RegistrationListenerEvent
-	(*SubscribeRegistrationListenerRequest)(nil),            // 43: nsd.SubscribeRegistrationListenerRequest
+	(*DescribeContentsRequest)(nil),  // 0: nsd.DescribeContentsRequest
+	(*DescribeContentsResponse)(nil), // 1: nsd.DescribeContentsResponse
+	(*GetHostRequest)(nil),           // 2: nsd.GetHostRequest
+	(*GetHostResponse)(nil),          // 3: nsd.GetHostResponse
+	(*GetHostAddressesRequest)(nil),  // 4: nsd.GetHostAddressesRequest
+	(*GetHostAddressesResponse)(nil), // 5: nsd.GetHostAddressesResponse
+	(*GetHostnameRequest)(nil),       // 6: nsd.GetHostnameRequest
+	(*GetHostnameResponse)(nil),      // 7: nsd.GetHostnameResponse
+	(*GetNetworkRequest)(nil),        // 8: nsd.GetNetworkRequest
+	(*GetNetworkResponse)(nil),       // 9: nsd.GetNetworkResponse
+	(*GetPortRequest)(nil),           // 10: nsd.GetPortRequest
+	(*GetPortResponse)(nil),          // 11: nsd.GetPortResponse
+	(*GetServiceNameRequest)(nil),    // 12: nsd.GetServiceNameRequest
+	(*GetServiceNameResponse)(nil),   // 13: nsd.GetServiceNameResponse
+	(*GetServiceTypeRequest)(nil),    // 14: nsd.GetServiceTypeRequest
+	(*GetServiceTypeResponse)(nil),   // 15: nsd.GetServiceTypeResponse
+	(*GetSubtypesRequest)(nil),       // 16: nsd.GetSubtypesRequest
+	(*GetSubtypesResponse)(nil),      // 17: nsd.GetSubtypesResponse
+	(*RemoveAttributeRequest)(nil),   // 18: nsd.RemoveAttributeRequest
+	(*RemoveAttributeResponse)(nil),  // 19: nsd.RemoveAttributeResponse
+	(*SetAttributeRequest)(nil),      // 20: nsd.SetAttributeRequest
+	(*SetAttributeResponse)(nil),     // 21: nsd.SetAttributeResponse
+	(*SetHostRequest)(nil),           // 22: nsd.SetHostRequest
+	(*SetHostResponse)(nil),          // 23: nsd.SetHostResponse
+	(*SetHostAddressesRequest)(nil),  // 24: nsd.SetHostAddressesRequest
+	(*SetHostAddressesResponse)(nil), // 25: nsd.SetHostAddressesResponse
+	(*SetNetworkRequest)(nil),        // 26: nsd.SetNetworkRequest
+	(*SetNetworkResponse)(nil),       // 27: nsd.SetNetworkResponse
+	(*SetPortRequest)(nil),           // 28: nsd.SetPortRequest
+	(*SetPortResponse)(nil),          // 29: nsd.SetPortResponse
+	(*SetServiceNameRequest)(nil),    // 30: nsd.SetServiceNameRequest
+	(*SetServiceNameResponse)(nil),   // 31: nsd.SetServiceNameResponse
+	(*SetServiceTypeRequest)(nil),    // 32: nsd.SetServiceTypeRequest
+	(*SetServiceTypeResponse)(nil),   // 33: nsd.SetServiceTypeResponse
+	(*SetSubtypesRequest)(nil),       // 34: nsd.SetSubtypesRequest
+	(*SetSubtypesResponse)(nil),      // 35: nsd.SetSubtypesResponse
+	(*ToStringRequest)(nil),          // 36: nsd.ToStringRequest
+	(*ToStringResponse)(nil),         // 37: nsd.ToStringResponse
+	(*WriteToParcelRequest)(nil),     // 38: nsd.WriteToParcelRequest
+	(*WriteToParcelResponse)(nil),    // 39: nsd.WriteToParcelResponse
 }
 var file_proto_nsd_nsd_proto_depIdxs = []int32{
-	26, // 0: nsd.DiscoveryListenerEvent.on_service_found:type_name -> nsd.DiscoveryListenerOnServiceFoundEvent
-	27, // 1: nsd.DiscoveryListenerEvent.on_service_lost:type_name -> nsd.DiscoveryListenerOnServiceLostEvent
-	28, // 2: nsd.DiscoveryListenerEvent.on_discovery_started:type_name -> nsd.DiscoveryListenerOnDiscoveryStartedEvent
-	29, // 3: nsd.DiscoveryListenerEvent.on_discovery_stopped:type_name -> nsd.DiscoveryListenerOnDiscoveryStoppedEvent
-	30, // 4: nsd.DiscoveryListenerEvent.on_start_discovery_failed:type_name -> nsd.DiscoveryListenerOnStartDiscoveryFailedEvent
-	31, // 5: nsd.DiscoveryListenerEvent.on_stop_discovery_failed:type_name -> nsd.DiscoveryListenerOnStopDiscoveryFailedEvent
-	34, // 6: nsd.ResolveListenerEvent.on_service_resolved:type_name -> nsd.ResolveListenerOnServiceResolvedEvent
-	35, // 7: nsd.ResolveListenerEvent.on_resolve_failed:type_name -> nsd.ResolveListenerOnResolveFailedEvent
-	38, // 8: nsd.RegistrationListenerEvent.on_service_registered:type_name -> nsd.RegistrationListenerOnServiceRegisteredEvent
-	39, // 9: nsd.RegistrationListenerEvent.on_registration_failed:type_name -> nsd.RegistrationListenerOnRegistrationFailedEvent
-	40, // 10: nsd.RegistrationListenerEvent.on_service_unregistered:type_name -> nsd.RegistrationListenerOnServiceUnregisteredEvent
-	41, // 11: nsd.RegistrationListenerEvent.on_unregistration_failed:type_name -> nsd.RegistrationListenerOnUnregistrationFailedEvent
-	0,  // 12: nsd.ManagerService.DiscoverServicesRaw:input_type -> nsd.DiscoverServicesRawRequest
-	2,  // 13: nsd.ManagerService.StopServiceDiscoveryRaw:input_type -> nsd.StopServiceDiscoveryRawRequest
-	4,  // 14: nsd.ManagerService.ResolveServiceRaw:input_type -> nsd.ResolveServiceRawRequest
-	6,  // 15: nsd.ManagerService.RegisterServiceRaw:input_type -> nsd.RegisterServiceRawRequest
-	8,  // 16: nsd.ManagerService.UnregisterServiceRaw:input_type -> nsd.UnregisterServiceRawRequest
-	10, // 17: nsd.NsdServiceInfoService.SetServiceName:input_type -> nsd.SetServiceNameRequest
-	12, // 18: nsd.NsdServiceInfoService.SetServiceType:input_type -> nsd.SetServiceTypeRequest
-	14, // 19: nsd.NsdServiceInfoService.SetPort:input_type -> nsd.SetPortRequest
-	16, // 20: nsd.NsdServiceInfoService.SetAttribute:input_type -> nsd.SetAttributeRequest
-	18, // 21: nsd.NsdServiceInfoService.GetServiceName:input_type -> nsd.GetServiceNameRequest
-	20, // 22: nsd.NsdServiceInfoService.GetServiceType:input_type -> nsd.GetServiceTypeRequest
-	22, // 23: nsd.NsdServiceInfoService.GetHost:input_type -> nsd.GetHostRequest
-	24, // 24: nsd.NsdServiceInfoService.GetPort:input_type -> nsd.GetPortRequest
-	33, // 25: nsd.DiscoveryListenerService.SubscribeDiscoveryListener:input_type -> nsd.SubscribeDiscoveryListenerRequest
-	37, // 26: nsd.ResolveListenerService.SubscribeResolveListener:input_type -> nsd.SubscribeResolveListenerRequest
-	43, // 27: nsd.RegistrationListenerService.SubscribeRegistrationListener:input_type -> nsd.SubscribeRegistrationListenerRequest
-	1,  // 28: nsd.ManagerService.DiscoverServicesRaw:output_type -> nsd.DiscoverServicesRawResponse
-	3,  // 29: nsd.ManagerService.StopServiceDiscoveryRaw:output_type -> nsd.StopServiceDiscoveryRawResponse
-	5,  // 30: nsd.ManagerService.ResolveServiceRaw:output_type -> nsd.ResolveServiceRawResponse
-	7,  // 31: nsd.ManagerService.RegisterServiceRaw:output_type -> nsd.RegisterServiceRawResponse
-	9,  // 32: nsd.ManagerService.UnregisterServiceRaw:output_type -> nsd.UnregisterServiceRawResponse
-	11, // 33: nsd.NsdServiceInfoService.SetServiceName:output_type -> nsd.SetServiceNameResponse
-	13, // 34: nsd.NsdServiceInfoService.SetServiceType:output_type -> nsd.SetServiceTypeResponse
-	15, // 35: nsd.NsdServiceInfoService.SetPort:output_type -> nsd.SetPortResponse
-	17, // 36: nsd.NsdServiceInfoService.SetAttribute:output_type -> nsd.SetAttributeResponse
-	19, // 37: nsd.NsdServiceInfoService.GetServiceName:output_type -> nsd.GetServiceNameResponse
-	21, // 38: nsd.NsdServiceInfoService.GetServiceType:output_type -> nsd.GetServiceTypeResponse
-	23, // 39: nsd.NsdServiceInfoService.GetHost:output_type -> nsd.GetHostResponse
-	25, // 40: nsd.NsdServiceInfoService.GetPort:output_type -> nsd.GetPortResponse
-	32, // 41: nsd.DiscoveryListenerService.SubscribeDiscoveryListener:output_type -> nsd.DiscoveryListenerEvent
-	36, // 42: nsd.ResolveListenerService.SubscribeResolveListener:output_type -> nsd.ResolveListenerEvent
-	42, // 43: nsd.RegistrationListenerService.SubscribeRegistrationListener:output_type -> nsd.RegistrationListenerEvent
-	28, // [28:44] is the sub-list for method output_type
-	12, // [12:28] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	0,  // 0: nsd.NsdServiceInfoService.DescribeContents:input_type -> nsd.DescribeContentsRequest
+	2,  // 1: nsd.NsdServiceInfoService.GetHost:input_type -> nsd.GetHostRequest
+	4,  // 2: nsd.NsdServiceInfoService.GetHostAddresses:input_type -> nsd.GetHostAddressesRequest
+	6,  // 3: nsd.NsdServiceInfoService.GetHostname:input_type -> nsd.GetHostnameRequest
+	8,  // 4: nsd.NsdServiceInfoService.GetNetwork:input_type -> nsd.GetNetworkRequest
+	10, // 5: nsd.NsdServiceInfoService.GetPort:input_type -> nsd.GetPortRequest
+	12, // 6: nsd.NsdServiceInfoService.GetServiceName:input_type -> nsd.GetServiceNameRequest
+	14, // 7: nsd.NsdServiceInfoService.GetServiceType:input_type -> nsd.GetServiceTypeRequest
+	16, // 8: nsd.NsdServiceInfoService.GetSubtypes:input_type -> nsd.GetSubtypesRequest
+	18, // 9: nsd.NsdServiceInfoService.RemoveAttribute:input_type -> nsd.RemoveAttributeRequest
+	20, // 10: nsd.NsdServiceInfoService.SetAttribute:input_type -> nsd.SetAttributeRequest
+	22, // 11: nsd.NsdServiceInfoService.SetHost:input_type -> nsd.SetHostRequest
+	24, // 12: nsd.NsdServiceInfoService.SetHostAddresses:input_type -> nsd.SetHostAddressesRequest
+	26, // 13: nsd.NsdServiceInfoService.SetNetwork:input_type -> nsd.SetNetworkRequest
+	28, // 14: nsd.NsdServiceInfoService.SetPort:input_type -> nsd.SetPortRequest
+	30, // 15: nsd.NsdServiceInfoService.SetServiceName:input_type -> nsd.SetServiceNameRequest
+	32, // 16: nsd.NsdServiceInfoService.SetServiceType:input_type -> nsd.SetServiceTypeRequest
+	34, // 17: nsd.NsdServiceInfoService.SetSubtypes:input_type -> nsd.SetSubtypesRequest
+	36, // 18: nsd.NsdServiceInfoService.ToString:input_type -> nsd.ToStringRequest
+	38, // 19: nsd.NsdServiceInfoService.WriteToParcel:input_type -> nsd.WriteToParcelRequest
+	1,  // 20: nsd.NsdServiceInfoService.DescribeContents:output_type -> nsd.DescribeContentsResponse
+	3,  // 21: nsd.NsdServiceInfoService.GetHost:output_type -> nsd.GetHostResponse
+	5,  // 22: nsd.NsdServiceInfoService.GetHostAddresses:output_type -> nsd.GetHostAddressesResponse
+	7,  // 23: nsd.NsdServiceInfoService.GetHostname:output_type -> nsd.GetHostnameResponse
+	9,  // 24: nsd.NsdServiceInfoService.GetNetwork:output_type -> nsd.GetNetworkResponse
+	11, // 25: nsd.NsdServiceInfoService.GetPort:output_type -> nsd.GetPortResponse
+	13, // 26: nsd.NsdServiceInfoService.GetServiceName:output_type -> nsd.GetServiceNameResponse
+	15, // 27: nsd.NsdServiceInfoService.GetServiceType:output_type -> nsd.GetServiceTypeResponse
+	17, // 28: nsd.NsdServiceInfoService.GetSubtypes:output_type -> nsd.GetSubtypesResponse
+	19, // 29: nsd.NsdServiceInfoService.RemoveAttribute:output_type -> nsd.RemoveAttributeResponse
+	21, // 30: nsd.NsdServiceInfoService.SetAttribute:output_type -> nsd.SetAttributeResponse
+	23, // 31: nsd.NsdServiceInfoService.SetHost:output_type -> nsd.SetHostResponse
+	25, // 32: nsd.NsdServiceInfoService.SetHostAddresses:output_type -> nsd.SetHostAddressesResponse
+	27, // 33: nsd.NsdServiceInfoService.SetNetwork:output_type -> nsd.SetNetworkResponse
+	29, // 34: nsd.NsdServiceInfoService.SetPort:output_type -> nsd.SetPortResponse
+	31, // 35: nsd.NsdServiceInfoService.SetServiceName:output_type -> nsd.SetServiceNameResponse
+	33, // 36: nsd.NsdServiceInfoService.SetServiceType:output_type -> nsd.SetServiceTypeResponse
+	35, // 37: nsd.NsdServiceInfoService.SetSubtypes:output_type -> nsd.SetSubtypesResponse
+	37, // 38: nsd.NsdServiceInfoService.ToString:output_type -> nsd.ToStringResponse
+	39, // 39: nsd.NsdServiceInfoService.WriteToParcel:output_type -> nsd.WriteToParcelResponse
+	20, // [20:40] is the sub-list for method output_type
+	0,  // [0:20] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_nsd_nsd_proto_init() }
@@ -2238,18 +1839,15 @@ func file_proto_nsd_nsd_proto_init() {
 	if File_proto_nsd_nsd_proto != nil {
 		return
 	}
-	file_proto_nsd_nsd_proto_msgTypes[32].OneofWrappers = []any{}
-	file_proto_nsd_nsd_proto_msgTypes[36].OneofWrappers = []any{}
-	file_proto_nsd_nsd_proto_msgTypes[42].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_nsd_nsd_proto_rawDesc), len(file_proto_nsd_nsd_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   44,
+			NumMessages:   40,
 			NumExtensions: 0,
-			NumServices:   5,
+			NumServices:   1,
 		},
 		GoTypes:           file_proto_nsd_nsd_proto_goTypes,
 		DependencyIndexes: file_proto_nsd_nsd_proto_depIdxs,

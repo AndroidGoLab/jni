@@ -6,17 +6,17 @@ package environment;
 
 option go_package = "github.com/xaionaro-go/jni/proto/environment";
 
-message GetRootDirectoryRequest {
-}
-
-message GetRootDirectoryResponse {
-  int64 result = 1;
-}
-
 message GetDataDirectoryRequest {
 }
 
 message GetDataDirectoryResponse {
+  int64 result = 1;
+}
+
+message GetDownloadCacheDirectoryRequest {
+}
+
+message GetDownloadCacheDirectoryResponse {
   int64 result = 1;
 }
 
@@ -28,59 +28,126 @@ message GetExternalStorageDirectoryResponse {
 }
 
 message GetExternalStoragePublicDirectoryRequest {
-  string typ = 1;
+  string arg0 = 1;
 }
 
 message GetExternalStoragePublicDirectoryResponse {
   int64 result = 1;
 }
 
-message GetExternalStorageStateRequest {
+message GetExternalStorageState0Request {
 }
 
-message GetExternalStorageStateResponse {
+message GetExternalStorageState0Response {
   string result = 1;
 }
 
-message IsExternalStorageRemovableRequest {
+message GetExternalStorageState1_1Request {
+  int64 arg0 = 1;
 }
 
-message IsExternalStorageRemovableResponse {
-  bool result = 1;
-}
-
-message IsExternalStorageEmulatedRequest {
-}
-
-message IsExternalStorageEmulatedResponse {
-  bool result = 1;
-}
-
-message IsExternalStorageManagerRequest {
-}
-
-message IsExternalStorageManagerResponse {
-  bool result = 1;
-}
-
-message GetAbsolutePathRequest {
-}
-
-message GetAbsolutePathResponse {
+message GetExternalStorageState1_1Response {
   string result = 1;
+}
+
+message GetRootDirectoryRequest {
+}
+
+message GetRootDirectoryResponse {
+  int64 result = 1;
+}
+
+message GetStorageDirectoryRequest {
+}
+
+message GetStorageDirectoryResponse {
+  int64 result = 1;
+}
+
+message GetStorageStateRequest {
+  int64 arg0 = 1;
+}
+
+message GetStorageStateResponse {
+  string result = 1;
+}
+
+message IsExternalStorageEmulated0Request {
+}
+
+message IsExternalStorageEmulated0Response {
+  bool result = 1;
+}
+
+message IsExternalStorageEmulated1_1Request {
+  int64 arg0 = 1;
+}
+
+message IsExternalStorageEmulated1_1Response {
+  bool result = 1;
+}
+
+message IsExternalStorageLegacy0Request {
+}
+
+message IsExternalStorageLegacy0Response {
+  bool result = 1;
+}
+
+message IsExternalStorageLegacy1_1Request {
+  int64 arg0 = 1;
+}
+
+message IsExternalStorageLegacy1_1Response {
+  bool result = 1;
+}
+
+message IsExternalStorageManager0Request {
+}
+
+message IsExternalStorageManager0Response {
+  bool result = 1;
+}
+
+message IsExternalStorageManager1_1Request {
+  int64 arg0 = 1;
+}
+
+message IsExternalStorageManager1_1Response {
+  bool result = 1;
+}
+
+message IsExternalStorageRemovable0Request {
+}
+
+message IsExternalStorageRemovable0Response {
+  bool result = 1;
+}
+
+message IsExternalStorageRemovable1_1Request {
+  int64 arg0 = 1;
+}
+
+message IsExternalStorageRemovable1_1Response {
+  bool result = 1;
 }
 
 service EnvironmentService {
-  rpc GetRootDirectory (GetRootDirectoryRequest) returns (GetRootDirectoryResponse);
   rpc GetDataDirectory (GetDataDirectoryRequest) returns (GetDataDirectoryResponse);
+  rpc GetDownloadCacheDirectory (GetDownloadCacheDirectoryRequest) returns (GetDownloadCacheDirectoryResponse);
   rpc GetExternalStorageDirectory (GetExternalStorageDirectoryRequest) returns (GetExternalStorageDirectoryResponse);
   rpc GetExternalStoragePublicDirectory (GetExternalStoragePublicDirectoryRequest) returns (GetExternalStoragePublicDirectoryResponse);
-  rpc GetExternalStorageState (GetExternalStorageStateRequest) returns (GetExternalStorageStateResponse);
-  rpc IsExternalStorageRemovable (IsExternalStorageRemovableRequest) returns (IsExternalStorageRemovableResponse);
-  rpc IsExternalStorageEmulated (IsExternalStorageEmulatedRequest) returns (IsExternalStorageEmulatedResponse);
-  rpc IsExternalStorageManager (IsExternalStorageManagerRequest) returns (IsExternalStorageManagerResponse);
-}
-
-service JavaFileService {
-  rpc GetAbsolutePath (GetAbsolutePathRequest) returns (GetAbsolutePathResponse);
+  rpc GetExternalStorageState0 (GetExternalStorageState0Request) returns (GetExternalStorageState0Response);
+  rpc GetExternalStorageState1_1 (GetExternalStorageState1_1Request) returns (GetExternalStorageState1_1Response);
+  rpc GetRootDirectory (GetRootDirectoryRequest) returns (GetRootDirectoryResponse);
+  rpc GetStorageDirectory (GetStorageDirectoryRequest) returns (GetStorageDirectoryResponse);
+  rpc GetStorageState (GetStorageStateRequest) returns (GetStorageStateResponse);
+  rpc IsExternalStorageEmulated0 (IsExternalStorageEmulated0Request) returns (IsExternalStorageEmulated0Response);
+  rpc IsExternalStorageEmulated1_1 (IsExternalStorageEmulated1_1Request) returns (IsExternalStorageEmulated1_1Response);
+  rpc IsExternalStorageLegacy0 (IsExternalStorageLegacy0Request) returns (IsExternalStorageLegacy0Response);
+  rpc IsExternalStorageLegacy1_1 (IsExternalStorageLegacy1_1Request) returns (IsExternalStorageLegacy1_1Response);
+  rpc IsExternalStorageManager0 (IsExternalStorageManager0Request) returns (IsExternalStorageManager0Response);
+  rpc IsExternalStorageManager1_1 (IsExternalStorageManager1_1Request) returns (IsExternalStorageManager1_1Response);
+  rpc IsExternalStorageRemovable0 (IsExternalStorageRemovable0Request) returns (IsExternalStorageRemovable0Response);
+  rpc IsExternalStorageRemovable1_1 (IsExternalStorageRemovable1_1Request) returns (IsExternalStorageRemovable1_1Response);
 }

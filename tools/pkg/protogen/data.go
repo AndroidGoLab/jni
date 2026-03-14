@@ -139,6 +139,48 @@ func BuildProtoData(merged *javagen.MergedSpec, goModule string) *ProtoData {
 		appendUniqueMessages(msgs)
 	}
 
+	// 4. Fix RPC names that collide with message names. Proto3 shares
+	// the namespace between services, messages, and enums within a
+	// package. Append "_" suffix to the colliding RPC name.
+	allNames := make(map[string]bool, len(data.Messages))
+	for _, m := range data.Messages {
+		allNames[m.Name] = true
+	}
+	for _, e := range data.Enums {
+		allNames[e.Name] = true
+	}
+	for si := range data.Services {
+		for ri := range data.Services[si].RPCs {
+			rpc := &data.Services[si].RPCs[ri]
+			if !allNames[rpc.Name] {
+				continue
+			}
+
+			// Find the original request message to copy its fields.
+			var origFields []ProtoField
+			for _, m := range data.Messages {
+				if m.Name == rpc.InputType {
+					origFields = m.Fields
+					break
+				}
+			}
+
+			newName := rpc.Name + "Op"
+			newReq := newName + "Request"
+			newResp := newName + "Response"
+
+			// Create renamed request/response messages.
+			data.Messages = append(data.Messages,
+				ProtoMessage{Name: newReq, Fields: origFields},
+				ProtoMessage{Name: newResp},
+			)
+
+			rpc.Name = newName
+			rpc.InputType = newReq
+			rpc.OutputType = newResp
+		}
+	}
+
 	return data
 }
 

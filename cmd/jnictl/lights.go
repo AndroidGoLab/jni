@@ -13,20 +13,20 @@ var lightsCmd = &cobra.Command{
 	Short: "lights service operations",
 }
 
-var lightsManagerCmd = &cobra.Command{
-	Use:   "manager",
-	Short: "ManagerService operations",
+var lightsLightStateCmd = &cobra.Command{
+	Use:   "light-state",
+	Short: "LightStateService operations",
 }
 
-var lightsManagerGetLightsRawCmd = &cobra.Command{
-	Use:   "get-lights-raw",
-	Short: "GetLightsRaw RPC",
+var lightsLightStateDescribeContentsCmd = &cobra.Command{
+	Use:   "describe-contents",
+	Short: "DescribeContents RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.GetLightsRawRequest{}
-		resp, err := client.GetLightsRaw(ctx, req)
+		client := pb.NewLightStateServiceClient(grpcConn)
+		req := &pb.DescribeContentsRequest{}
+		resp, err := client.DescribeContents(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -34,15 +34,69 @@ var lightsManagerGetLightsRawCmd = &cobra.Command{
 	},
 }
 
-var lightsManagerOpenSessionRawCmd = &cobra.Command{
-	Use:   "open-session-raw",
-	Short: "OpenSessionRaw RPC",
+var lightsLightStateGetColorCmd = &cobra.Command{
+	Use:   "get-color",
+	Short: "GetColor RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewManagerServiceClient(grpcConn)
-		req := &pb.OpenSessionRawRequest{}
-		resp, err := client.OpenSessionRaw(ctx, req)
+		client := pb.NewLightStateServiceClient(grpcConn)
+		req := &pb.GetColorRequest{}
+		resp, err := client.GetColor(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var lightsLightStateGetPlayerIdCmd = &cobra.Command{
+	Use:   "get-player-id",
+	Short: "GetPlayerId RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLightStateServiceClient(grpcConn)
+		req := &pb.GetPlayerIdRequest{}
+		resp, err := client.GetPlayerId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var lightsLightStateToStringCmd = &cobra.Command{
+	Use:   "to-string",
+	Short: "ToString RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLightStateServiceClient(grpcConn)
+		req := &pb.ToStringRequest{}
+		resp, err := client.ToString(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var lightsLightStateWriteToParcelCmd = &cobra.Command{
+	Use:   "write-to-parcel",
+	Short: "WriteToParcel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewLightStateServiceClient(grpcConn)
+		req := &pb.WriteToParcelRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.WriteToParcel(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -53,44 +107,6 @@ var lightsManagerOpenSessionRawCmd = &cobra.Command{
 var lightsLightStateBuilderCmd = &cobra.Command{
 	Use:   "light-state-builder",
 	Short: "LightStateBuilderService operations",
-}
-
-var lightsLightStateBuilderSetColorCmd = &cobra.Command{
-	Use:   "set-color",
-	Short: "SetColor RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLightStateBuilderServiceClient(grpcConn)
-		req := &pb.SetColorRequest{}
-		if v, err := cmd.Flags().GetInt32("argb"); err == nil {
-			req.Argb = v
-		}
-		resp, err := client.SetColor(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var lightsLightStateBuilderSetPlayerIdCmd = &cobra.Command{
-	Use:   "set-player-id",
-	Short: "SetPlayerId RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLightStateBuilderServiceClient(grpcConn)
-		req := &pb.SetPlayerIdRequest{}
-		if v, err := cmd.Flags().GetInt32("player-id"); err == nil {
-			req.PlayerId = v
-		}
-		resp, err := client.SetPlayerId(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
 }
 
 var lightsLightStateBuilderBuildCmd = &cobra.Command{
@@ -109,23 +125,18 @@ var lightsLightStateBuilderBuildCmd = &cobra.Command{
 	},
 }
 
-var lightsSessionCmd = &cobra.Command{
-	Use:   "session",
-	Short: "SessionService operations",
-}
-
-var lightsSessionRequestLightsRawCmd = &cobra.Command{
-	Use:   "request-lights-raw",
-	Short: "RequestLightsRaw RPC",
+var lightsLightStateBuilderSetColorCmd = &cobra.Command{
+	Use:   "set-color",
+	Short: "SetColor RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewSessionServiceClient(grpcConn)
-		req := &pb.RequestLightsRawRequest{}
-		if v, err := cmd.Flags().GetInt64("request"); err == nil {
-			req.Request = v
+		client := pb.NewLightStateBuilderServiceClient(grpcConn)
+		req := &pb.SetColorRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		resp, err := client.RequestLightsRaw(ctx, req)
+		resp, err := client.SetColor(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -133,77 +144,18 @@ var lightsSessionRequestLightsRawCmd = &cobra.Command{
 	},
 }
 
-var lightsSessionCloseRawCmd = &cobra.Command{
-	Use:   "close-raw",
-	Short: "CloseRaw RPC",
+var lightsLightStateBuilderSetPlayerIdCmd = &cobra.Command{
+	Use:   "set-player-id",
+	Short: "SetPlayerId RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewSessionServiceClient(grpcConn)
-		req := &pb.CloseRawRequest{}
-		resp, err := client.CloseRaw(ctx, req)
-		if err != nil {
-			return err
+		client := pb.NewLightStateBuilderServiceClient(grpcConn)
+		req := &pb.SetPlayerIdRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		return printProtoMessage(resp)
-	},
-}
-
-var lightsLightsRequestBuilderCmd = &cobra.Command{
-	Use:   "lights-request-builder",
-	Short: "LightsRequestBuilderService operations",
-}
-
-var lightsLightsRequestBuilderAddLightCmd = &cobra.Command{
-	Use:   "add-light",
-	Short: "AddLight RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLightsRequestBuilderServiceClient(grpcConn)
-		req := &pb.AddLightRequest{}
-		if v, err := cmd.Flags().GetInt64("light"); err == nil {
-			req.Light = v
-		}
-		if v, err := cmd.Flags().GetInt64("state"); err == nil {
-			req.State = v
-		}
-		resp, err := client.AddLight(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var lightsLightsRequestBuilderClearLightCmd = &cobra.Command{
-	Use:   "clear-light",
-	Short: "ClearLight RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLightsRequestBuilderServiceClient(grpcConn)
-		req := &pb.ClearLightRequest{}
-		if v, err := cmd.Flags().GetInt64("light"); err == nil {
-			req.Light = v
-		}
-		resp, err := client.ClearLight(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var lightsLightsRequestBuilderBuildCmd = &cobra.Command{
-	Use:   "build",
-	Short: "Build RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewLightsRequestBuilderServiceClient(grpcConn)
-		req := &pb.BuildRequest{}
-		resp, err := client.Build(ctx, req)
+		resp, err := client.SetPlayerId(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -212,25 +164,19 @@ var lightsLightsRequestBuilderBuildCmd = &cobra.Command{
 }
 
 func init() {
-	lightsManagerCmd.AddCommand(lightsManagerGetLightsRawCmd)
-	lightsManagerCmd.AddCommand(lightsManagerOpenSessionRawCmd)
-	lightsCmd.AddCommand(lightsManagerCmd)
-	lightsLightStateBuilderSetColorCmd.Flags().Int32("argb", 0, "argb (int32)")
-	lightsLightStateBuilderCmd.AddCommand(lightsLightStateBuilderSetColorCmd)
-	lightsLightStateBuilderSetPlayerIdCmd.Flags().Int32("player-id", 0, "player-id (int32)")
-	lightsLightStateBuilderCmd.AddCommand(lightsLightStateBuilderSetPlayerIdCmd)
+	lightsLightStateCmd.AddCommand(lightsLightStateDescribeContentsCmd)
+	lightsLightStateCmd.AddCommand(lightsLightStateGetColorCmd)
+	lightsLightStateCmd.AddCommand(lightsLightStateGetPlayerIdCmd)
+	lightsLightStateCmd.AddCommand(lightsLightStateToStringCmd)
+	lightsLightStateWriteToParcelCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	lightsLightStateWriteToParcelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	lightsLightStateCmd.AddCommand(lightsLightStateWriteToParcelCmd)
+	lightsCmd.AddCommand(lightsLightStateCmd)
 	lightsLightStateBuilderCmd.AddCommand(lightsLightStateBuilderBuildCmd)
+	lightsLightStateBuilderSetColorCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	lightsLightStateBuilderCmd.AddCommand(lightsLightStateBuilderSetColorCmd)
+	lightsLightStateBuilderSetPlayerIdCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	lightsLightStateBuilderCmd.AddCommand(lightsLightStateBuilderSetPlayerIdCmd)
 	lightsCmd.AddCommand(lightsLightStateBuilderCmd)
-	lightsSessionRequestLightsRawCmd.Flags().Int64("request", 0, "request (int64)")
-	lightsSessionCmd.AddCommand(lightsSessionRequestLightsRawCmd)
-	lightsSessionCmd.AddCommand(lightsSessionCloseRawCmd)
-	lightsCmd.AddCommand(lightsSessionCmd)
-	lightsLightsRequestBuilderAddLightCmd.Flags().Int64("light", 0, "light (int64)")
-	lightsLightsRequestBuilderAddLightCmd.Flags().Int64("state", 0, "state (int64)")
-	lightsLightsRequestBuilderCmd.AddCommand(lightsLightsRequestBuilderAddLightCmd)
-	lightsLightsRequestBuilderClearLightCmd.Flags().Int64("light", 0, "light (int64)")
-	lightsLightsRequestBuilderCmd.AddCommand(lightsLightsRequestBuilderClearLightCmd)
-	lightsLightsRequestBuilderCmd.AddCommand(lightsLightsRequestBuilderBuildCmd)
-	lightsCmd.AddCommand(lightsLightsRequestBuilderCmd)
 	rootCmd.AddCommand(lightsCmd)
 }

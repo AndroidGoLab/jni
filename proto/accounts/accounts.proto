@@ -6,59 +6,246 @@ package accounts;
 
 option go_package = "github.com/xaionaro-go/jni/proto/accounts";
 
-message Account {
-  string name = 1;
-  string type = 2;
+message AddAccountExplicitly3Request {
+  int64 arg0 = 1;
+  string arg1 = 2;
+  int64 arg2 = 3;
 }
 
-message GetManagerRawRequest {
-  int64 ctx = 1;
+message AddAccountExplicitly3Response {
+  bool result = 1;
 }
 
-message GetManagerRawResponse {
+message AddAccountExplicitly5_1Request {
+  int64 arg0 = 1;
+  string arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+  int64 arg4 = 5;
+}
+
+message AddAccountExplicitly5_1Response {
+  bool result = 1;
+}
+
+message BlockingGetAuthTokenRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
+  bool arg2 = 3;
+}
+
+message BlockingGetAuthTokenResponse {
+  string result = 1;
+}
+
+message ClearPasswordRequest {
+  int64 arg0 = 1;
+}
+
+message ClearPasswordResponse {
+}
+
+message GetAccountVisibilityRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
+}
+
+message GetAccountVisibilityResponse {
+  int32 result = 1;
+}
+
+message GetAccountsRequest {
+}
+
+message GetAccountsResponse {
   int64 result = 1;
 }
 
-message GetAccountsRawRequest {
+message GetAccountsByTypeRequest {
+  string arg0 = 1;
 }
 
-message GetAccountsRawResponse {
+message GetAccountsByTypeResponse {
   int64 result = 1;
 }
 
-message GetAccountsByTypeRawRequest {
-  string account_type = 1;
+message GetAccountsByTypeForPackageRequest {
+  string arg0 = 1;
+  string arg1 = 2;
 }
 
-message GetAccountsByTypeRawResponse {
+message GetAccountsByTypeForPackageResponse {
   int64 result = 1;
 }
 
-message GetAuthTokenRawRequest {
-  int64 account = 1;
-  string auth_token_type = 2;
-  int64 options = 3;
-  int64 activity = 4;
-  int64 callback = 5;
-  int64 handler = 6;
+message GetAuthenticatorTypesRequest {
 }
 
-message GetAuthTokenRawResponse {
+message GetAuthenticatorTypesResponse {
   int64 result = 1;
 }
 
-message InvalidateAuthTokenRawRequest {
-  string account_type = 1;
-  string auth_token = 2;
+message GetPasswordRequest {
+  int64 arg0 = 1;
 }
 
-message InvalidateAuthTokenRawResponse {
+message GetPasswordResponse {
+  string result = 1;
 }
 
-service ManagerService {
-  rpc GetManagerRaw (GetManagerRawRequest) returns (GetManagerRawResponse);
-  rpc GetAccountsRaw (GetAccountsRawRequest) returns (GetAccountsRawResponse);
-  rpc GetAccountsByTypeRaw (GetAccountsByTypeRawRequest) returns (GetAccountsByTypeRawResponse);
-  rpc GetAuthTokenRaw (GetAuthTokenRawRequest) returns (GetAuthTokenRawResponse);
-  rpc InvalidateAuthTokenRaw (InvalidateAuthTokenRawRequest) returns (InvalidateAuthTokenRawResponse);
+message GetPreviousNameRequest {
+  int64 arg0 = 1;
+}
+
+message GetPreviousNameResponse {
+  string result = 1;
+}
+
+message GetUserDataRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
+}
+
+message GetUserDataResponse {
+  string result = 1;
+}
+
+message InvalidateAuthTokenRequest {
+  string arg0 = 1;
+  string arg1 = 2;
+}
+
+message InvalidateAuthTokenResponse {
+}
+
+message NotifyAccountAuthenticatedRequest {
+  int64 arg0 = 1;
+}
+
+message NotifyAccountAuthenticatedResponse {
+  bool result = 1;
+}
+
+message PeekAuthTokenRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
+}
+
+message PeekAuthTokenResponse {
+  string result = 1;
+}
+
+message RemoveAccountExplicitlyRequest {
+  int64 arg0 = 1;
+}
+
+message RemoveAccountExplicitlyResponse {
+  bool result = 1;
+}
+
+message RemoveOnAccountsUpdatedListenerRequest {
+  int64 arg0 = 1;
+}
+
+message RemoveOnAccountsUpdatedListenerResponse {
+}
+
+message SetAccountVisibilityRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message SetAccountVisibilityResponse {
+  bool result = 1;
+}
+
+message SetAuthTokenRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
+  string arg2 = 3;
+}
+
+message SetAuthTokenResponse {
+}
+
+message SetPasswordRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
+}
+
+message SetPasswordResponse {
+}
+
+message SetUserDataRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
+  string arg2 = 3;
+}
+
+message SetUserDataResponse {
+}
+
+message GetRequest {
+  int64 arg0 = 1;
+}
+
+message GetResponse {
+  int64 result = 1;
+}
+
+message NewChooseAccountIntent8Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  bool arg3 = 4;
+  string arg4 = 5;
+  string arg5 = 6;
+  int64 arg6 = 7;
+  int64 arg7 = 8;
+}
+
+message NewChooseAccountIntent8Response {
+  int64 result = 1;
+}
+
+message NewChooseAccountIntent7_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  string arg3 = 4;
+  string arg4 = 5;
+  int64 arg5 = 6;
+  int64 arg6 = 7;
+}
+
+message NewChooseAccountIntent7_1Response {
+  int64 result = 1;
+}
+
+service AccountManagerService {
+  rpc AddAccountExplicitly3 (AddAccountExplicitly3Request) returns (AddAccountExplicitly3Response);
+  rpc AddAccountExplicitly5_1 (AddAccountExplicitly5_1Request) returns (AddAccountExplicitly5_1Response);
+  rpc BlockingGetAuthToken (BlockingGetAuthTokenRequest) returns (BlockingGetAuthTokenResponse);
+  rpc ClearPassword (ClearPasswordRequest) returns (ClearPasswordResponse);
+  rpc GetAccountVisibility (GetAccountVisibilityRequest) returns (GetAccountVisibilityResponse);
+  rpc GetAccounts (GetAccountsRequest) returns (GetAccountsResponse);
+  rpc GetAccountsByType (GetAccountsByTypeRequest) returns (GetAccountsByTypeResponse);
+  rpc GetAccountsByTypeForPackage (GetAccountsByTypeForPackageRequest) returns (GetAccountsByTypeForPackageResponse);
+  rpc GetAuthenticatorTypes (GetAuthenticatorTypesRequest) returns (GetAuthenticatorTypesResponse);
+  rpc GetPassword (GetPasswordRequest) returns (GetPasswordResponse);
+  rpc GetPreviousName (GetPreviousNameRequest) returns (GetPreviousNameResponse);
+  rpc GetUserData (GetUserDataRequest) returns (GetUserDataResponse);
+  rpc InvalidateAuthToken (InvalidateAuthTokenRequest) returns (InvalidateAuthTokenResponse);
+  rpc NotifyAccountAuthenticated (NotifyAccountAuthenticatedRequest) returns (NotifyAccountAuthenticatedResponse);
+  rpc PeekAuthToken (PeekAuthTokenRequest) returns (PeekAuthTokenResponse);
+  rpc RemoveAccountExplicitly (RemoveAccountExplicitlyRequest) returns (RemoveAccountExplicitlyResponse);
+  rpc RemoveOnAccountsUpdatedListener (RemoveOnAccountsUpdatedListenerRequest) returns (RemoveOnAccountsUpdatedListenerResponse);
+  rpc SetAccountVisibility (SetAccountVisibilityRequest) returns (SetAccountVisibilityResponse);
+  rpc SetAuthToken (SetAuthTokenRequest) returns (SetAuthTokenResponse);
+  rpc SetPassword (SetPasswordRequest) returns (SetPasswordResponse);
+  rpc SetUserData (SetUserDataRequest) returns (SetUserDataResponse);
+  rpc Get (GetRequest) returns (GetResponse);
+  rpc NewChooseAccountIntent8 (NewChooseAccountIntent8Request) returns (NewChooseAccountIntent8Response);
+  rpc NewChooseAccountIntent7_1 (NewChooseAccountIntent7_1Request) returns (NewChooseAccountIntent7_1Response);
 }

@@ -1,0 +1,372 @@
+package: download
+go_import: github.com/xaionaro-go/jni/app/download
+classes:
+    - java_class: android.app.DownloadManager
+      go_type: downloadManager
+      methods:
+        - java_method: addCompletedDownload
+          go_name: AddCompletedDownload7
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+            - java_type: String
+              go_name: arg4
+            - java_type: long
+              go_name: arg5
+            - java_type: boolean
+              go_name: arg6
+          returns: long
+          error: true
+        - java_method: addCompletedDownload
+          go_name: AddCompletedDownload9_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+            - java_type: String
+              go_name: arg4
+            - java_type: long
+              go_name: arg5
+            - java_type: boolean
+              go_name: arg6
+            - java_type: android.net.Uri
+              go_name: arg7
+            - java_type: android.net.Uri
+              go_name: arg8
+          returns: long
+          error: true
+        - java_method: enqueue
+          go_name: Enqueue
+          params:
+            - java_type: android.app.DownloadManager$Request
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getMimeTypeForDownloadedFile
+          go_name: GetMimeTypeForDownloadedFile
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getUriForDownloadedFile
+          go_name: GetUriForDownloadedFile
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: openDownloadedFile
+          go_name: OpenDownloadedFile
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: query
+          go_name: Query
+          params:
+            - java_type: android.app.DownloadManager$Query
+              go_name: arg0
+          returns: android.database.Cursor
+          error: true
+        - java_method: remove
+          go_name: Remove
+          params:
+            - java_type: long...
+              go_name: arg0
+          returns: int
+          error: true
+      static_methods:
+        - java_method: getMaxBytesOverMobile
+          go_name: GetMaxBytesOverMobile
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: java.lang.Long
+          error: true
+        - java_method: getRecommendedMaxBytesOverMobile
+          go_name: GetRecommendedMaxBytesOverMobile
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: java.lang.Long
+          error: true
+    - java_class: android.app.DownloadManager$Query
+      go_type: downloadManagerQuery
+      methods:
+        - java_method: setFilterById
+          go_name: SetFilterById
+          params:
+            - java_type: long...
+              go_name: arg0
+          returns: android.app.DownloadManager$Query
+          error: true
+        - java_method: setFilterByStatus
+          go_name: SetFilterByStatus
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.app.DownloadManager$Query
+          error: true
+    - java_class: android.app.DownloadManager$Request
+      go_type: downloadManagerRequest
+      methods:
+        - java_method: addRequestHeader
+          go_name: AddRequestHeader
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: allowScanningByMediaScanner
+          go_name: AllowScanningByMediaScanner
+          returns: void
+          error: true
+        - java_method: setAllowedNetworkTypes
+          go_name: SetAllowedNetworkTypes
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setAllowedOverMetered
+          go_name: SetAllowedOverMetered
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setAllowedOverRoaming
+          go_name: SetAllowedOverRoaming
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setDescription
+          go_name: SetDescription
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setDestinationInExternalFilesDir
+          go_name: SetDestinationInExternalFilesDir
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setDestinationInExternalPublicDir
+          go_name: SetDestinationInExternalPublicDir
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setDestinationUri
+          go_name: SetDestinationUri
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setMimeType
+          go_name: SetMimeType
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setNotificationVisibility
+          go_name: SetNotificationVisibility
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setRequiresCharging
+          go_name: SetRequiresCharging
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setRequiresDeviceIdle
+          go_name: SetRequiresDeviceIdle
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setShowRunningNotification
+          go_name: SetShowRunningNotification
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setTitle
+          go_name: SetTitle
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+        - java_method: setVisibleInDownloadsUi
+          go_name: SetVisibleInDownloadsUi
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.app.DownloadManager$Request
+          error: true
+constants:
+    - go_name: ActionDownloadComplete
+      value: '""'
+      go_type: string
+    - go_name: ActionNotificationClicked
+      value: '""'
+      go_type: string
+    - go_name: ActionViewDownloads
+      value: '""'
+      go_type: string
+    - go_name: ColumnBytesDownloadedSoFar
+      value: '""'
+      go_type: string
+    - go_name: ColumnDescription
+      value: '""'
+      go_type: string
+    - go_name: ColumnId
+      value: '""'
+      go_type: string
+    - go_name: ColumnLastModifiedTimestamp
+      value: '""'
+      go_type: string
+    - go_name: ColumnLocalFilename
+      value: '""'
+      go_type: string
+    - go_name: ColumnLocalUri
+      value: '""'
+      go_type: string
+    - go_name: ColumnMediaproviderUri
+      value: '""'
+      go_type: string
+    - go_name: ColumnMediaType
+      value: '""'
+      go_type: string
+    - go_name: ColumnReason
+      value: '""'
+      go_type: string
+    - go_name: ColumnStatus
+      value: '""'
+      go_type: string
+    - go_name: ColumnTitle
+      value: '""'
+      go_type: string
+    - go_name: ColumnTotalSizeBytes
+      value: '""'
+      go_type: string
+    - go_name: ColumnUri
+      value: '""'
+      go_type: string
+    - go_name: ErrorCannotResume
+      value: "0"
+      go_type: int
+    - go_name: ErrorDeviceNotFound
+      value: "0"
+      go_type: int
+    - go_name: ErrorFileAlreadyExists
+      value: "0"
+      go_type: int
+    - go_name: ErrorFileError
+      value: "0"
+      go_type: int
+    - go_name: ErrorHttpDataError
+      value: "0"
+      go_type: int
+    - go_name: ErrorInsufficientSpace
+      value: "0"
+      go_type: int
+    - go_name: ErrorTooManyRedirects
+      value: "0"
+      go_type: int
+    - go_name: ErrorUnhandledHttpCode
+      value: "0"
+      go_type: int
+    - go_name: ErrorUnknown
+      value: "0"
+      go_type: int
+    - go_name: ExtraDownloadId
+      value: '""'
+      go_type: string
+    - go_name: ExtraNotificationClickDownloadIds
+      value: '""'
+      go_type: string
+    - go_name: IntentExtrasSortBySize
+      value: '""'
+      go_type: string
+    - go_name: PausedQueuedForWifi
+      value: "0"
+      go_type: int
+    - go_name: PausedUnknown
+      value: "0"
+      go_type: int
+    - go_name: PausedWaitingForNetwork
+      value: "0"
+      go_type: int
+    - go_name: PausedWaitingToRetry
+      value: "0"
+      go_type: int
+    - go_name: StatusFailed
+      value: "0"
+      go_type: int
+    - go_name: StatusPaused
+      value: "0"
+      go_type: int
+    - go_name: StatusPending
+      value: "0"
+      go_type: int
+    - go_name: StatusRunning
+      value: "0"
+      go_type: int
+    - go_name: StatusSuccessful
+      value: "0"
+      go_type: int
+    - go_name: NetworkMobile
+      value: "0"
+      go_type: int
+    - go_name: NetworkWifi
+      value: "0"
+      go_type: int
+    - go_name: VisibilityHidden
+      value: "0"
+      go_type: int
+    - go_name: VisibilityVisible
+      value: "0"
+      go_type: int
+    - go_name: VisibilityVisibleNotifyCompleted
+      value: "0"
+      go_type: int
+    - go_name: VisibilityVisibleNotifyOnlyCompletion
+      value: "0"
+      go_type: int

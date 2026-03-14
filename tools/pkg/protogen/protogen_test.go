@@ -71,7 +71,7 @@ func TestGenerate_MultipleSpecs(t *testing.T) {
 	outputDir := t.TempDir()
 	goModule := "github.com/xaionaro-go/jni"
 
-	specs := []string{"location", "bluetooth", "toast"}
+	specs := []string{"location", "bluetooth", "widget"}
 	for _, name := range specs {
 		specPath := filepath.Join(root, "spec", "java", name+".yaml")
 		overlayPath := filepath.Join(root, "spec", "overlays", "java", name+".yaml")

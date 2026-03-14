@@ -3,12 +3,9 @@
 package main
 
 import (
-	"fmt"
-	"io"
 
 	"github.com/spf13/cobra"
 	pb "github.com/xaionaro-go/jni/proto/app"
-	"google.golang.org/protobuf/encoding/protojson"
 )
 
 var appCmd = &cobra.Command{
@@ -16,465 +13,23 @@ var appCmd = &cobra.Command{
 	Short: "app service operations",
 }
 
-var appContextCmd = &cobra.Command{
-	Use:   "context",
-	Short: "ContextService operations",
-}
-
-var appContextGetSystemServiceCmd = &cobra.Command{
-	Use:   "get-system-service",
-	Short: "GetSystemService RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewContextServiceClient(grpcConn)
-		req := &pb.GetSystemServiceRequest{}
-		if v, err := cmd.Flags().GetString("name"); err == nil {
-			req.Name = v
-		}
-		resp, err := client.GetSystemService(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appContextPackageNameCmd = &cobra.Command{
-	Use:   "package-name",
-	Short: "PackageName RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewContextServiceClient(grpcConn)
-		req := &pb.PackageNameRequest{}
-		resp, err := client.PackageName(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appContextApplicationContextCmd = &cobra.Command{
-	Use:   "application-context",
-	Short: "ApplicationContext RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewContextServiceClient(grpcConn)
-		req := &pb.ApplicationContextRequest{}
-		resp, err := client.ApplicationContext(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appContextStartActivityCmd = &cobra.Command{
-	Use:   "start-activity",
-	Short: "StartActivity RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewContextServiceClient(grpcConn)
-		req := &pb.StartActivityRequest{}
-		if v, err := cmd.Flags().GetInt64("intent"); err == nil {
-			req.Intent = v
-		}
-		resp, err := client.StartActivity(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appContextSendBroadcastCmd = &cobra.Command{
-	Use:   "send-broadcast",
-	Short: "SendBroadcast RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewContextServiceClient(grpcConn)
-		req := &pb.SendBroadcastRequest{}
-		if v, err := cmd.Flags().GetInt64("intent"); err == nil {
-			req.Intent = v
-		}
-		resp, err := client.SendBroadcast(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appContextStartServiceCmd = &cobra.Command{
-	Use:   "start-service",
-	Short: "StartService RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewContextServiceClient(grpcConn)
-		req := &pb.StartServiceRequest{}
-		if v, err := cmd.Flags().GetInt64("intent"); err == nil {
-			req.Intent = v
-		}
-		resp, err := client.StartService(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appContextRegisterReceiverRawCmd = &cobra.Command{
-	Use:   "register-receiver-raw",
-	Short: "RegisterReceiverRaw RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewContextServiceClient(grpcConn)
-		req := &pb.RegisterReceiverRawRequest{}
-		if v, err := cmd.Flags().GetInt64("receiver"); err == nil {
-			req.Receiver = v
-		}
-		if v, err := cmd.Flags().GetInt64("filter"); err == nil {
-			req.Filter = v
-		}
-		resp, err := client.RegisterReceiverRaw(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appContextUnregisterReceiverCmd = &cobra.Command{
-	Use:   "unregister-receiver",
-	Short: "UnregisterReceiver RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewContextServiceClient(grpcConn)
-		req := &pb.UnregisterReceiverRequest{}
-		if v, err := cmd.Flags().GetInt64("receiver"); err == nil {
-			req.Receiver = v
-		}
-		resp, err := client.UnregisterReceiver(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appContextContentResolverCmd = &cobra.Command{
-	Use:   "content-resolver",
-	Short: "ContentResolver RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewContextServiceClient(grpcConn)
-		req := &pb.ContentResolverRequest{}
-		resp, err := client.ContentResolver(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appContextPackageManagerCmd = &cobra.Command{
-	Use:   "package-manager",
-	Short: "PackageManager RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewContextServiceClient(grpcConn)
-		req := &pb.PackageManagerRequest{}
-		resp, err := client.PackageManager(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appContextCacheDirCmd = &cobra.Command{
-	Use:   "cache-dir",
-	Short: "CacheDir RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewContextServiceClient(grpcConn)
-		req := &pb.CacheDirRequest{}
-		resp, err := client.CacheDir(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appContextFilesDirCmd = &cobra.Command{
-	Use:   "files-dir",
-	Short: "FilesDir RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewContextServiceClient(grpcConn)
-		req := &pb.FilesDirRequest{}
-		resp, err := client.FilesDir(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appContextExternalFilesDirCmd = &cobra.Command{
-	Use:   "external-files-dir",
-	Short: "ExternalFilesDir RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewContextServiceClient(grpcConn)
-		req := &pb.ExternalFilesDirRequest{}
-		if v, err := cmd.Flags().GetString("typ"); err == nil {
-			req.Typ = v
-		}
-		resp, err := client.ExternalFilesDir(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appContextExternalCacheDirCmd = &cobra.Command{
-	Use:   "external-cache-dir",
-	Short: "ExternalCacheDir RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewContextServiceClient(grpcConn)
-		req := &pb.ExternalCacheDirRequest{}
-		resp, err := client.ExternalCacheDir(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appContextDataDirCmd = &cobra.Command{
-	Use:   "data-dir",
-	Short: "DataDir RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewContextServiceClient(grpcConn)
-		req := &pb.DataDirRequest{}
-		resp, err := client.DataDir(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appActivityCmd = &cobra.Command{
-	Use:   "activity",
-	Short: "ActivityService operations",
-}
-
-var appActivityFinishCmd = &cobra.Command{
-	Use:   "finish",
-	Short: "Finish RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewActivityServiceClient(grpcConn)
-		req := &pb.FinishRequest{}
-		resp, err := client.Finish(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appActivityGetIntentCmd = &cobra.Command{
-	Use:   "get-intent",
-	Short: "GetIntent RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewActivityServiceClient(grpcConn)
-		req := &pb.GetIntentRequest{}
-		resp, err := client.GetIntent(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appActivitySetResultCmd = &cobra.Command{
-	Use:   "set-result",
-	Short: "SetResult RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewActivityServiceClient(grpcConn)
-		req := &pb.SetResultRequest{}
-		if v, err := cmd.Flags().GetInt32("result-code"); err == nil {
-			req.ResultCode = v
-		}
-		if v, err := cmd.Flags().GetInt64("data"); err == nil {
-			req.Data = v
-		}
-		resp, err := client.SetResult(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appActivityGetWindowCmd = &cobra.Command{
-	Use:   "get-window",
-	Short: "GetWindow RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewActivityServiceClient(grpcConn)
-		req := &pb.GetWindowRequest{}
-		resp, err := client.GetWindow(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appActivityRunOnUiThreadCmd = &cobra.Command{
-	Use:   "run-on-ui-thread",
-	Short: "RunOnUiThread RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewActivityServiceClient(grpcConn)
-		req := &pb.RunOnUiThreadRequest{}
-		if v, err := cmd.Flags().GetInt64("fn"); err == nil {
-			req.Fn = v
-		}
-		resp, err := client.RunOnUiThread(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appActivityStartActivityForResultCmd = &cobra.Command{
-	Use:   "start-activity-for-result",
-	Short: "StartActivityForResult RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewActivityServiceClient(grpcConn)
-		req := &pb.StartActivityForResultRequest{}
-		if v, err := cmd.Flags().GetInt64("intent"); err == nil {
-			req.Intent = v
-		}
-		if v, err := cmd.Flags().GetInt32("request-code"); err == nil {
-			req.RequestCode = v
-		}
-		resp, err := client.StartActivityForResult(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
 var appIntentCmd = &cobra.Command{
 	Use:   "intent",
 	Short: "IntentService operations",
 }
 
-var appIntentSetActionCmd = &cobra.Command{
-	Use:   "set-action",
-	Short: "SetAction RPC",
+var appIntentAddCategoryCmd = &cobra.Command{
+	Use:   "add-category",
+	Short: "AddCategory RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewIntentServiceClient(grpcConn)
-		req := &pb.SetActionRequest{}
-		if v, err := cmd.Flags().GetString("action"); err == nil {
-			req.Action = v
+		req := &pb.AddCategoryRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		resp, err := client.SetAction(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appIntentSetDataCmd = &cobra.Command{
-	Use:   "set-data",
-	Short: "SetData RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewIntentServiceClient(grpcConn)
-		req := &pb.SetDataRequest{}
-		if v, err := cmd.Flags().GetInt64("uri"); err == nil {
-			req.Uri = v
-		}
-		resp, err := client.SetData(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appIntentSetComponentCmd = &cobra.Command{
-	Use:   "set-component",
-	Short: "SetComponent RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewIntentServiceClient(grpcConn)
-		req := &pb.SetComponentRequest{}
-		if v, err := cmd.Flags().GetInt64("component"); err == nil {
-			req.Component = v
-		}
-		resp, err := client.SetComponent(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var appIntentSetFlagsCmd = &cobra.Command{
-	Use:   "set-flags",
-	Short: "SetFlags RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewIntentServiceClient(grpcConn)
-		req := &pb.SetFlagsRequest{}
-		if v, err := cmd.Flags().GetInt32("flags"); err == nil {
-			req.Flags = v
-		}
-		resp, err := client.SetFlags(ctx, req)
+		resp, err := client.AddCategory(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -490,8 +45,8 @@ var appIntentAddFlagsCmd = &cobra.Command{
 		defer cancel()
 		client := pb.NewIntentServiceClient(grpcConn)
 		req := &pb.AddFlagsRequest{}
-		if v, err := cmd.Flags().GetInt32("flags"); err == nil {
-			req.Flags = v
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
 		}
 		resp, err := client.AddFlags(ctx, req)
 		if err != nil {
@@ -501,18 +56,15 @@ var appIntentAddFlagsCmd = &cobra.Command{
 	},
 }
 
-var appIntentAddCategoryCmd = &cobra.Command{
-	Use:   "add-category",
-	Short: "AddCategory RPC",
+var appIntentCloneCmd = &cobra.Command{
+	Use:   "clone",
+	Short: "Clone RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewIntentServiceClient(grpcConn)
-		req := &pb.AddCategoryRequest{}
-		if v, err := cmd.Flags().GetString("category"); err == nil {
-			req.Category = v
-		}
-		resp, err := client.AddCategory(ctx, req)
+		req := &pb.CloneRequest{}
+		resp, err := client.Clone(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -520,18 +72,15 @@ var appIntentAddCategoryCmd = &cobra.Command{
 	},
 }
 
-var appIntentSetPackageCmd = &cobra.Command{
-	Use:   "set-package",
-	Short: "SetPackage RPC",
+var appIntentCloneFilterCmd = &cobra.Command{
+	Use:   "clone-filter",
+	Short: "CloneFilter RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewIntentServiceClient(grpcConn)
-		req := &pb.SetPackageRequest{}
-		if v, err := cmd.Flags().GetString("pkg"); err == nil {
-			req.Pkg = v
-		}
-		resp, err := client.SetPackage(ctx, req)
+		req := &pb.CloneFilterRequest{}
+		resp, err := client.CloneFilter(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -539,18 +88,72 @@ var appIntentSetPackageCmd = &cobra.Command{
 	},
 }
 
-var appIntentSetTypeCmd = &cobra.Command{
-	Use:   "set-type",
-	Short: "SetType RPC",
+var appIntentDescribeContentsCmd = &cobra.Command{
+	Use:   "describe-contents",
+	Short: "DescribeContents RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewIntentServiceClient(grpcConn)
-		req := &pb.SetTypeRequest{}
-		if v, err := cmd.Flags().GetString("mime-type"); err == nil {
-			req.MimeType = v
+		req := &pb.DescribeContentsRequest{}
+		resp, err := client.DescribeContents(ctx, req)
+		if err != nil {
+			return err
 		}
-		resp, err := client.SetType(ctx, req)
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentFillInCmd = &cobra.Command{
+	Use:   "fill-in",
+	Short: "FillIn RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.FillInRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.FillIn(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentFilterEqualsCmd = &cobra.Command{
+	Use:   "filter-equals",
+	Short: "FilterEquals RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.FilterEqualsRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.FilterEquals(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentFilterHashCodeCmd = &cobra.Command{
+	Use:   "filter-hash-code",
+	Short: "FilterHashCode RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.FilterHashCodeRequest{}
+		resp, err := client.FilterHashCode(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -574,6 +177,253 @@ var appIntentGetActionCmd = &cobra.Command{
 	},
 }
 
+var appIntentGetBooleanArrayExtraCmd = &cobra.Command{
+	Use:   "get-boolean-array-extra",
+	Short: "GetBooleanArrayExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetBooleanArrayExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetBooleanArrayExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetBooleanExtraCmd = &cobra.Command{
+	Use:   "get-boolean-extra",
+	Short: "GetBooleanExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetBooleanExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetBooleanExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetBundleExtraCmd = &cobra.Command{
+	Use:   "get-bundle-extra",
+	Short: "GetBundleExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetBundleExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetBundleExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetByteArrayExtraCmd = &cobra.Command{
+	Use:   "get-byte-array-extra",
+	Short: "GetByteArrayExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetByteArrayExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetByteArrayExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetByteExtraCmd = &cobra.Command{
+	Use:   "get-byte-extra",
+	Short: "GetByteExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetByteExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetUint32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetByteExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetCategoriesCmd = &cobra.Command{
+	Use:   "get-categories",
+	Short: "GetCategories RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetCategoriesRequest{}
+		resp, err := client.GetCategories(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetCharArrayExtraCmd = &cobra.Command{
+	Use:   "get-char-array-extra",
+	Short: "GetCharArrayExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetCharArrayExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetCharArrayExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetCharExtraCmd = &cobra.Command{
+	Use:   "get-char-extra",
+	Short: "GetCharExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetCharExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetUint32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetCharExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetCharSequenceArrayExtraCmd = &cobra.Command{
+	Use:   "get-char-sequence-array-extra",
+	Short: "GetCharSequenceArrayExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetCharSequenceArrayExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetCharSequenceArrayExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetCharSequenceArrayListExtraCmd = &cobra.Command{
+	Use:   "get-char-sequence-array-list-extra",
+	Short: "GetCharSequenceArrayListExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetCharSequenceArrayListExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetCharSequenceArrayListExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetCharSequenceExtraCmd = &cobra.Command{
+	Use:   "get-char-sequence-extra",
+	Short: "GetCharSequenceExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetCharSequenceExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetCharSequenceExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetClipDataCmd = &cobra.Command{
+	Use:   "get-clip-data",
+	Short: "GetClipData RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetClipDataRequest{}
+		resp, err := client.GetClipData(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetComponentCmd = &cobra.Command{
+	Use:   "get-component",
+	Short: "GetComponent RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetComponentRequest{}
+		resp, err := client.GetComponent(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 var appIntentGetDataCmd = &cobra.Command{
 	Use:   "get-data",
 	Short: "GetData RPC",
@@ -590,18 +440,15 @@ var appIntentGetDataCmd = &cobra.Command{
 	},
 }
 
-var appIntentGetStringExtraCmd = &cobra.Command{
-	Use:   "get-string-extra",
-	Short: "GetStringExtra RPC",
+var appIntentGetDataStringCmd = &cobra.Command{
+	Use:   "get-data-string",
+	Short: "GetDataString RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewIntentServiceClient(grpcConn)
-		req := &pb.GetStringExtraRequest{}
-		if v, err := cmd.Flags().GetString("key"); err == nil {
-			req.Key = v
-		}
-		resp, err := client.GetStringExtra(ctx, req)
+		req := &pb.GetDataStringRequest{}
+		resp, err := client.GetDataString(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -609,21 +456,148 @@ var appIntentGetStringExtraCmd = &cobra.Command{
 	},
 }
 
-var appIntentGetBoolExtraCmd = &cobra.Command{
-	Use:   "get-bool-extra",
-	Short: "GetBoolExtra RPC",
+var appIntentGetDoubleArrayExtraCmd = &cobra.Command{
+	Use:   "get-double-array-extra",
+	Short: "GetDoubleArrayExtra RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewIntentServiceClient(grpcConn)
-		req := &pb.GetBoolExtraRequest{}
-		if v, err := cmd.Flags().GetString("key"); err == nil {
-			req.Key = v
+		req := &pb.GetDoubleArrayExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetBool("default-val"); err == nil {
-			req.DefaultVal = v
+		resp, err := client.GetDoubleArrayExtra(ctx, req)
+		if err != nil {
+			return err
 		}
-		resp, err := client.GetBoolExtra(ctx, req)
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetDoubleExtraCmd = &cobra.Command{
+	Use:   "get-double-extra",
+	Short: "GetDoubleExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetDoubleExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetFloat64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetDoubleExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetExtrasCmd = &cobra.Command{
+	Use:   "get-extras",
+	Short: "GetExtras RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetExtrasRequest{}
+		resp, err := client.GetExtras(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetFlagsCmd = &cobra.Command{
+	Use:   "get-flags",
+	Short: "GetFlags RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetFlagsRequest{}
+		resp, err := client.GetFlags(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetFloatArrayExtraCmd = &cobra.Command{
+	Use:   "get-float-array-extra",
+	Short: "GetFloatArrayExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetFloatArrayExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetFloatArrayExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetFloatExtraCmd = &cobra.Command{
+	Use:   "get-float-extra",
+	Short: "GetFloatExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetFloatExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetFloat32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetFloatExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetIdentifierCmd = &cobra.Command{
+	Use:   "get-identifier",
+	Short: "GetIdentifier RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetIdentifierRequest{}
+		resp, err := client.GetIdentifier(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetIntArrayExtraCmd = &cobra.Command{
+	Use:   "get-int-array-extra",
+	Short: "GetIntArrayExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetIntArrayExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetIntArrayExtra(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -639,11 +613,11 @@ var appIntentGetIntExtraCmd = &cobra.Command{
 		defer cancel()
 		client := pb.NewIntentServiceClient(grpcConn)
 		req := &pb.GetIntExtraRequest{}
-		if v, err := cmd.Flags().GetString("key"); err == nil {
-			req.Key = v
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt32("default-val"); err == nil {
-			req.DefaultVal = v
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
 		}
 		resp, err := client.GetIntExtra(ctx, req)
 		if err != nil {
@@ -653,21 +627,18 @@ var appIntentGetIntExtraCmd = &cobra.Command{
 	},
 }
 
-var appIntentPutStringExtraCmd = &cobra.Command{
-	Use:   "put-string-extra",
-	Short: "PutStringExtra RPC",
+var appIntentGetIntegerArrayListExtraCmd = &cobra.Command{
+	Use:   "get-integer-array-list-extra",
+	Short: "GetIntegerArrayListExtra RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewIntentServiceClient(grpcConn)
-		req := &pb.PutStringExtraRequest{}
-		if v, err := cmd.Flags().GetString("key"); err == nil {
-			req.Key = v
+		req := &pb.GetIntegerArrayListExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetString("value"); err == nil {
-			req.Value = v
-		}
-		resp, err := client.PutStringExtra(ctx, req)
+		resp, err := client.GetIntegerArrayListExtra(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -675,21 +646,18 @@ var appIntentPutStringExtraCmd = &cobra.Command{
 	},
 }
 
-var appIntentPutIntExtraCmd = &cobra.Command{
-	Use:   "put-int-extra",
-	Short: "PutIntExtra RPC",
+var appIntentGetLongArrayExtraCmd = &cobra.Command{
+	Use:   "get-long-array-extra",
+	Short: "GetLongArrayExtra RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewIntentServiceClient(grpcConn)
-		req := &pb.PutIntExtraRequest{}
-		if v, err := cmd.Flags().GetString("key"); err == nil {
-			req.Key = v
+		req := &pb.GetLongArrayExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt32("value"); err == nil {
-			req.Value = v
-		}
-		resp, err := client.PutIntExtra(ctx, req)
+		resp, err := client.GetLongArrayExtra(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -697,21 +665,21 @@ var appIntentPutIntExtraCmd = &cobra.Command{
 	},
 }
 
-var appIntentPutBoolExtraCmd = &cobra.Command{
-	Use:   "put-bool-extra",
-	Short: "PutBoolExtra RPC",
+var appIntentGetLongExtraCmd = &cobra.Command{
+	Use:   "get-long-extra",
+	Short: "GetLongExtra RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewIntentServiceClient(grpcConn)
-		req := &pb.PutBoolExtraRequest{}
-		if v, err := cmd.Flags().GetString("key"); err == nil {
-			req.Key = v
+		req := &pb.GetLongExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetBool("value"); err == nil {
-			req.Value = v
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
 		}
-		resp, err := client.PutBoolExtra(ctx, req)
+		resp, err := client.GetLongExtra(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -719,21 +687,15 @@ var appIntentPutBoolExtraCmd = &cobra.Command{
 	},
 }
 
-var appIntentPutLongExtraCmd = &cobra.Command{
-	Use:   "put-long-extra",
-	Short: "PutLongExtra RPC",
+var appIntentGetPackageCmd = &cobra.Command{
+	Use:   "get-package",
+	Short: "GetPackage RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewIntentServiceClient(grpcConn)
-		req := &pb.PutLongExtraRequest{}
-		if v, err := cmd.Flags().GetString("key"); err == nil {
-			req.Key = v
-		}
-		if v, err := cmd.Flags().GetInt64("value"); err == nil {
-			req.Value = v
-		}
-		resp, err := client.PutLongExtra(ctx, req)
+		req := &pb.GetPackageRequest{}
+		resp, err := client.GetPackage(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -741,32 +703,18 @@ var appIntentPutLongExtraCmd = &cobra.Command{
 	},
 }
 
-var appPendingIntentCmd = &cobra.Command{
-	Use:   "pending-intent",
-	Short: "PendingIntentService operations",
-}
-
-var appPendingIntentNewPendingActivityCmd = &cobra.Command{
-	Use:   "new-pending-activity",
-	Short: "NewPendingActivity RPC",
+var appIntentGetParcelableArrayExtraCmd = &cobra.Command{
+	Use:   "get-parcelable-array-extra",
+	Short: "GetParcelableArrayExtra RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPendingIntentServiceClient(grpcConn)
-		req := &pb.NewPendingActivityRequest{}
-		if v, err := cmd.Flags().GetInt64("ctx"); err == nil {
-			req.Ctx = v
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetParcelableArrayExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		if v, err := cmd.Flags().GetInt32("request-code"); err == nil {
-			req.RequestCode = v
-		}
-		if v, err := cmd.Flags().GetInt64("intent"); err == nil {
-			req.Intent = v
-		}
-		if v, err := cmd.Flags().GetInt32("flags"); err == nil {
-			req.Flags = v
-		}
-		resp, err := client.NewPendingActivity(ctx, req)
+		resp, err := client.GetParcelableArrayExtra(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -774,27 +722,15 @@ var appPendingIntentNewPendingActivityCmd = &cobra.Command{
 	},
 }
 
-var appPendingIntentNewPendingBroadcastCmd = &cobra.Command{
-	Use:   "new-pending-broadcast",
-	Short: "NewPendingBroadcast RPC",
+var appIntentGetSchemeCmd = &cobra.Command{
+	Use:   "get-scheme",
+	Short: "GetScheme RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPendingIntentServiceClient(grpcConn)
-		req := &pb.NewPendingBroadcastRequest{}
-		if v, err := cmd.Flags().GetInt64("ctx"); err == nil {
-			req.Ctx = v
-		}
-		if v, err := cmd.Flags().GetInt32("request-code"); err == nil {
-			req.RequestCode = v
-		}
-		if v, err := cmd.Flags().GetInt64("intent"); err == nil {
-			req.Intent = v
-		}
-		if v, err := cmd.Flags().GetInt32("flags"); err == nil {
-			req.Flags = v
-		}
-		resp, err := client.NewPendingBroadcast(ctx, req)
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetSchemeRequest{}
+		resp, err := client.GetScheme(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -802,27 +738,15 @@ var appPendingIntentNewPendingBroadcastCmd = &cobra.Command{
 	},
 }
 
-var appPendingIntentNewPendingServiceCmd = &cobra.Command{
-	Use:   "new-pending-service",
-	Short: "NewPendingService RPC",
+var appIntentGetSelectorCmd = &cobra.Command{
+	Use:   "get-selector",
+	Short: "GetSelector RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPendingIntentServiceClient(grpcConn)
-		req := &pb.NewPendingServiceRequest{}
-		if v, err := cmd.Flags().GetInt64("ctx"); err == nil {
-			req.Ctx = v
-		}
-		if v, err := cmd.Flags().GetInt32("request-code"); err == nil {
-			req.RequestCode = v
-		}
-		if v, err := cmd.Flags().GetInt64("intent"); err == nil {
-			req.Intent = v
-		}
-		if v, err := cmd.Flags().GetInt32("flags"); err == nil {
-			req.Flags = v
-		}
-		resp, err := client.NewPendingService(ctx, req)
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetSelectorRequest{}
+		resp, err := client.GetSelector(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -830,171 +754,2029 @@ var appPendingIntentNewPendingServiceCmd = &cobra.Command{
 	},
 }
 
-var appBroadcastReceiverCmd = &cobra.Command{
-	Use:   "broadcast-receiver",
-	Short: "BroadcastReceiverService operations",
-}
-
-var appBroadcastReceiverSubscribeBroadcastReceiverCmd = &cobra.Command{
-	Use:   "subscribe-broadcast-receiver",
-	Short: "SubscribeBroadcastReceiver RPC",
+var appIntentGetSerializableExtraCmd = &cobra.Command{
+	Use:   "get-serializable-extra",
+	Short: "GetSerializableExtra RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewBroadcastReceiverServiceClient(grpcConn)
-		req := &pb.SubscribeBroadcastReceiverRequest{}
-		stream, err := client.SubscribeBroadcastReceiver(ctx, req)
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetSerializableExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetSerializableExtra(ctx, req)
 		if err != nil {
 			return err
 		}
-		opts := protojson.MarshalOptions{Multiline: true, Indent: "  "}
-		for {
-			resp, err := stream.Recv()
-			if err == io.EOF {
-				return nil
-			}
-			if err != nil {
-				return err
-			}
-			data, err := opts.Marshal(resp)
-			if err != nil {
-				return err
-			}
-			fmt.Println(string(data))
-		}
+		return printProtoMessage(resp)
 	},
 }
 
-var appRunnableCmd = &cobra.Command{
-	Use:   "runnable",
-	Short: "RunnableService operations",
-}
-
-var appRunnableSubscribeRunnableCmd = &cobra.Command{
-	Use:   "subscribe-runnable",
-	Short: "SubscribeRunnable RPC",
+var appIntentGetShortArrayExtraCmd = &cobra.Command{
+	Use:   "get-short-array-extra",
+	Short: "GetShortArrayExtra RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRunnableServiceClient(grpcConn)
-		req := &pb.SubscribeRunnableRequest{}
-		stream, err := client.SubscribeRunnable(ctx, req)
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetShortArrayExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetShortArrayExtra(ctx, req)
 		if err != nil {
 			return err
 		}
-		opts := protojson.MarshalOptions{Multiline: true, Indent: "  "}
-		for {
-			resp, err := stream.Recv()
-			if err == io.EOF {
-				return nil
-			}
-			if err != nil {
-				return err
-			}
-			data, err := opts.Marshal(resp)
-			if err != nil {
-				return err
-			}
-			fmt.Println(string(data))
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetShortExtraCmd = &cobra.Command{
+	Use:   "get-short-extra",
+	Short: "GetShortExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetShortExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
 		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetShortExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetSourceBoundsCmd = &cobra.Command{
+	Use:   "get-source-bounds",
+	Short: "GetSourceBounds RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetSourceBoundsRequest{}
+		resp, err := client.GetSourceBounds(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetStringArrayExtraCmd = &cobra.Command{
+	Use:   "get-string-array-extra",
+	Short: "GetStringArrayExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetStringArrayExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetStringArrayExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetStringArrayListExtraCmd = &cobra.Command{
+	Use:   "get-string-array-list-extra",
+	Short: "GetStringArrayListExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetStringArrayListExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetStringArrayListExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetStringExtraCmd = &cobra.Command{
+	Use:   "get-string-extra",
+	Short: "GetStringExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetStringExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetStringExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetTypeCmd = &cobra.Command{
+	Use:   "get-type",
+	Short: "GetType RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetTypeRequest{}
+		resp, err := client.GetType(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentHasCategoryCmd = &cobra.Command{
+	Use:   "has-category",
+	Short: "HasCategory RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.HasCategoryRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.HasCategory(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentHasExtraCmd = &cobra.Command{
+	Use:   "has-extra",
+	Short: "HasExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.HasExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.HasExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentHasFileDescriptorsCmd = &cobra.Command{
+	Use:   "has-file-descriptors",
+	Short: "HasFileDescriptors RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.HasFileDescriptorsRequest{}
+		resp, err := client.HasFileDescriptors(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentIsMismatchingFilterCmd = &cobra.Command{
+	Use:   "is-mismatching-filter",
+	Short: "IsMismatchingFilter RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.IsMismatchingFilterRequest{}
+		resp, err := client.IsMismatchingFilter(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutCharSequenceArrayListExtraCmd = &cobra.Command{
+	Use:   "put-char-sequence-array-list-extra",
+	Short: "PutCharSequenceArrayListExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutCharSequenceArrayListExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutCharSequenceArrayListExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2Cmd = &cobra.Command{
+	Use:   "put-extra2",
+	Short: "PutExtra2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_1Cmd = &cobra.Command{
+	Use:   "put-extra2_1",
+	Short: "PutExtra2_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_1Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_2Cmd = &cobra.Command{
+	Use:   "put-extra2_2",
+	Short: "PutExtra2_2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_2Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_3Cmd = &cobra.Command{
+	Use:   "put-extra2_3",
+	Short: "PutExtra2_3 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_3Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_3(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_4Cmd = &cobra.Command{
+	Use:   "put-extra2_4",
+	Short: "PutExtra2_4 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_4Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_4(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_5Cmd = &cobra.Command{
+	Use:   "put-extra2_5",
+	Short: "PutExtra2_5 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_5Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetUint32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_5(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_6Cmd = &cobra.Command{
+	Use:   "put-extra2_6",
+	Short: "PutExtra2_6 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_6Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_6(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_7Cmd = &cobra.Command{
+	Use:   "put-extra2_7",
+	Short: "PutExtra2_7 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_7Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetUint32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_7(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_8Cmd = &cobra.Command{
+	Use:   "put-extra2_8",
+	Short: "PutExtra2_8 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_8Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_8(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_9Cmd = &cobra.Command{
+	Use:   "put-extra2_9",
+	Short: "PutExtra2_9 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_9Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetFloat64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_9(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_10Cmd = &cobra.Command{
+	Use:   "put-extra2_10",
+	Short: "PutExtra2_10 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_10Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_10(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_11Cmd = &cobra.Command{
+	Use:   "put-extra2_11",
+	Short: "PutExtra2_11 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_11Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetFloat32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_11(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_12Cmd = &cobra.Command{
+	Use:   "put-extra2_12",
+	Short: "PutExtra2_12 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_12Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_12(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_13Cmd = &cobra.Command{
+	Use:   "put-extra2_13",
+	Short: "PutExtra2_13 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_13Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_13(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_14Cmd = &cobra.Command{
+	Use:   "put-extra2_14",
+	Short: "PutExtra2_14 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_14Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_14(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_15Cmd = &cobra.Command{
+	Use:   "put-extra2_15",
+	Short: "PutExtra2_15 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_15Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_15(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_16Cmd = &cobra.Command{
+	Use:   "put-extra2_16",
+	Short: "PutExtra2_16 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_16Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_16(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_17Cmd = &cobra.Command{
+	Use:   "put-extra2_17",
+	Short: "PutExtra2_17 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_17Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_17(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_18Cmd = &cobra.Command{
+	Use:   "put-extra2_18",
+	Short: "PutExtra2_18 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_18Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_18(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_19Cmd = &cobra.Command{
+	Use:   "put-extra2_19",
+	Short: "PutExtra2_19 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_19Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_19(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_20Cmd = &cobra.Command{
+	Use:   "put-extra2_20",
+	Short: "PutExtra2_20 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_20Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_20(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_21Cmd = &cobra.Command{
+	Use:   "put-extra2_21",
+	Short: "PutExtra2_21 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_21Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_21(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_22Cmd = &cobra.Command{
+	Use:   "put-extra2_22",
+	Short: "PutExtra2_22 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_22Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_22(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtra2_23Cmd = &cobra.Command{
+	Use:   "put-extra2_23",
+	Short: "PutExtra2_23 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtra2_23Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutExtra2_23(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtras1Cmd = &cobra.Command{
+	Use:   "put-extras1",
+	Short: "PutExtras1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtras1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.PutExtras1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutExtras1_1Cmd = &cobra.Command{
+	Use:   "put-extras1_1",
+	Short: "PutExtras1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutExtras1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.PutExtras1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutIntegerArrayListExtraCmd = &cobra.Command{
+	Use:   "put-integer-array-list-extra",
+	Short: "PutIntegerArrayListExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutIntegerArrayListExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutIntegerArrayListExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutParcelableArrayListExtraCmd = &cobra.Command{
+	Use:   "put-parcelable-array-list-extra",
+	Short: "PutParcelableArrayListExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutParcelableArrayListExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutParcelableArrayListExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentPutStringArrayListExtraCmd = &cobra.Command{
+	Use:   "put-string-array-list-extra",
+	Short: "PutStringArrayListExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.PutStringArrayListExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PutStringArrayListExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentReadFromParcelCmd = &cobra.Command{
+	Use:   "read-from-parcel",
+	Short: "ReadFromParcel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.ReadFromParcelRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.ReadFromParcel(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentRemoveCategoryCmd = &cobra.Command{
+	Use:   "remove-category",
+	Short: "RemoveCategory RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.RemoveCategoryRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RemoveCategory(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentRemoveExtraCmd = &cobra.Command{
+	Use:   "remove-extra",
+	Short: "RemoveExtra RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.RemoveExtraRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RemoveExtra(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentRemoveFlagsCmd = &cobra.Command{
+	Use:   "remove-flags",
+	Short: "RemoveFlags RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.RemoveFlagsRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RemoveFlags(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentRemoveLaunchSecurityProtectionCmd = &cobra.Command{
+	Use:   "remove-launch-security-protection",
+	Short: "RemoveLaunchSecurityProtection RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.RemoveLaunchSecurityProtectionRequest{}
+		resp, err := client.RemoveLaunchSecurityProtection(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentReplaceExtras1Cmd = &cobra.Command{
+	Use:   "replace-extras1",
+	Short: "ReplaceExtras1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.ReplaceExtras1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.ReplaceExtras1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentReplaceExtras1_1Cmd = &cobra.Command{
+	Use:   "replace-extras1_1",
+	Short: "ReplaceExtras1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.ReplaceExtras1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.ReplaceExtras1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentResolveActivityCmd = &cobra.Command{
+	Use:   "resolve-activity",
+	Short: "ResolveActivity RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.ResolveActivityRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.ResolveActivity(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentResolveActivityInfoCmd = &cobra.Command{
+	Use:   "resolve-activity-info",
+	Short: "ResolveActivityInfo RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.ResolveActivityInfoRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.ResolveActivityInfo(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentResolveType1Cmd = &cobra.Command{
+	Use:   "resolve-type1",
+	Short: "ResolveType1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.ResolveType1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.ResolveType1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentResolveType1_1Cmd = &cobra.Command{
+	Use:   "resolve-type1_1",
+	Short: "ResolveType1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.ResolveType1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.ResolveType1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentResolveTypeIfNeededCmd = &cobra.Command{
+	Use:   "resolve-type-if-needed",
+	Short: "ResolveTypeIfNeeded RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.ResolveTypeIfNeededRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.ResolveTypeIfNeeded(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetActionCmd = &cobra.Command{
+	Use:   "set-action",
+	Short: "SetAction RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetActionRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetAction(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetClassCmd = &cobra.Command{
+	Use:   "set-class",
+	Short: "SetClass RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetClassRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetClass(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetClassName2Cmd = &cobra.Command{
+	Use:   "set-class-name2",
+	Short: "SetClassName2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetClassName2Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetClassName2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetClassName2_1Cmd = &cobra.Command{
+	Use:   "set-class-name2_1",
+	Short: "SetClassName2_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetClassName2_1Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetClassName2_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetClipDataCmd = &cobra.Command{
+	Use:   "set-clip-data",
+	Short: "SetClipData RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetClipDataRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetClipData(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetComponentCmd = &cobra.Command{
+	Use:   "set-component",
+	Short: "SetComponent RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetComponentRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetComponent(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetDataCmd = &cobra.Command{
+	Use:   "set-data",
+	Short: "SetData RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetDataRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetData(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetDataAndNormalizeCmd = &cobra.Command{
+	Use:   "set-data-and-normalize",
+	Short: "SetDataAndNormalize RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetDataAndNormalizeRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetDataAndNormalize(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetDataAndTypeCmd = &cobra.Command{
+	Use:   "set-data-and-type",
+	Short: "SetDataAndType RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetDataAndTypeRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetDataAndType(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetDataAndTypeAndNormalizeCmd = &cobra.Command{
+	Use:   "set-data-and-type-and-normalize",
+	Short: "SetDataAndTypeAndNormalize RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetDataAndTypeAndNormalizeRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetDataAndTypeAndNormalize(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetExtrasClassLoaderCmd = &cobra.Command{
+	Use:   "set-extras-class-loader",
+	Short: "SetExtrasClassLoader RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetExtrasClassLoaderRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetExtrasClassLoader(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetFlagsCmd = &cobra.Command{
+	Use:   "set-flags",
+	Short: "SetFlags RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetFlagsRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetFlags(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetIdentifierCmd = &cobra.Command{
+	Use:   "set-identifier",
+	Short: "SetIdentifier RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetIdentifierRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetIdentifier(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetPackageCmd = &cobra.Command{
+	Use:   "set-package",
+	Short: "SetPackage RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetPackageRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetPackage(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetSelectorCmd = &cobra.Command{
+	Use:   "set-selector",
+	Short: "SetSelector RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetSelectorRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetSelector(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetSourceBoundsCmd = &cobra.Command{
+	Use:   "set-source-bounds",
+	Short: "SetSourceBounds RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetSourceBoundsRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetSourceBounds(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetTypeCmd = &cobra.Command{
+	Use:   "set-type",
+	Short: "SetType RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetTypeRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetType(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentSetTypeAndNormalizeCmd = &cobra.Command{
+	Use:   "set-type-and-normalize",
+	Short: "SetTypeAndNormalize RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.SetTypeAndNormalizeRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetTypeAndNormalize(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentToStringCmd = &cobra.Command{
+	Use:   "to-string",
+	Short: "ToString RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.ToStringRequest{}
+		resp, err := client.ToString(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentToURICmd = &cobra.Command{
+	Use:   "to-uri",
+	Short: "ToURI RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.ToURIRequest{}
+		resp, err := client.ToURI(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentToUriCmd = &cobra.Command{
+	Use:   "to-uri",
+	Short: "ToUri RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.ToUriRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.ToUri(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentWriteToParcelCmd = &cobra.Command{
+	Use:   "write-to-parcel",
+	Short: "WriteToParcel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.WriteToParcelRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.WriteToParcel(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentCreateChooser2Cmd = &cobra.Command{
+	Use:   "create-chooser2",
+	Short: "CreateChooser2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.CreateChooser2Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.CreateChooser2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentCreateChooser3_1Cmd = &cobra.Command{
+	Use:   "create-chooser3_1",
+	Short: "CreateChooser3_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.CreateChooser3_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.CreateChooser3_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetIntentCmd = &cobra.Command{
+	Use:   "get-intent",
+	Short: "GetIntent RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetIntentRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetIntent(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentGetIntentOldCmd = &cobra.Command{
+	Use:   "get-intent-old",
+	Short: "GetIntentOld RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.GetIntentOldRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetIntentOld(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentMakeMainActivityCmd = &cobra.Command{
+	Use:   "make-main-activity",
+	Short: "MakeMainActivity RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.MakeMainActivityRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.MakeMainActivity(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentMakeMainSelectorActivityCmd = &cobra.Command{
+	Use:   "make-main-selector-activity",
+	Short: "MakeMainSelectorActivity RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.MakeMainSelectorActivityRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetString("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.MakeMainSelectorActivity(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentMakeRestartActivityTaskCmd = &cobra.Command{
+	Use:   "make-restart-activity-task",
+	Short: "MakeRestartActivityTask RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.MakeRestartActivityTaskRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.MakeRestartActivityTask(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentNormalizeMimeTypeCmd = &cobra.Command{
+	Use:   "normalize-mime-type",
+	Short: "NormalizeMimeType RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.NormalizeMimeTypeRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.NormalizeMimeType(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentParseIntentCmd = &cobra.Command{
+	Use:   "parse-intent",
+	Short: "ParseIntent RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.ParseIntentRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.ParseIntent(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var appIntentParseUriCmd = &cobra.Command{
+	Use:   "parse-uri",
+	Short: "ParseUri RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewIntentServiceClient(grpcConn)
+		req := &pb.ParseUriRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.ParseUri(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
 	},
 }
 
 func init() {
-	appContextGetSystemServiceCmd.Flags().String("name", "", "name (string)")
-	appContextCmd.AddCommand(appContextGetSystemServiceCmd)
-	appContextCmd.AddCommand(appContextPackageNameCmd)
-	appContextCmd.AddCommand(appContextApplicationContextCmd)
-	appContextStartActivityCmd.Flags().Int64("intent", 0, "intent (int64)")
-	appContextCmd.AddCommand(appContextStartActivityCmd)
-	appContextSendBroadcastCmd.Flags().Int64("intent", 0, "intent (int64)")
-	appContextCmd.AddCommand(appContextSendBroadcastCmd)
-	appContextStartServiceCmd.Flags().Int64("intent", 0, "intent (int64)")
-	appContextCmd.AddCommand(appContextStartServiceCmd)
-	appContextRegisterReceiverRawCmd.Flags().Int64("receiver", 0, "receiver (int64)")
-	appContextRegisterReceiverRawCmd.Flags().Int64("filter", 0, "filter (int64)")
-	appContextCmd.AddCommand(appContextRegisterReceiverRawCmd)
-	appContextUnregisterReceiverCmd.Flags().Int64("receiver", 0, "receiver (int64)")
-	appContextCmd.AddCommand(appContextUnregisterReceiverCmd)
-	appContextCmd.AddCommand(appContextContentResolverCmd)
-	appContextCmd.AddCommand(appContextPackageManagerCmd)
-	appContextCmd.AddCommand(appContextCacheDirCmd)
-	appContextCmd.AddCommand(appContextFilesDirCmd)
-	appContextExternalFilesDirCmd.Flags().String("typ", "", "typ (string)")
-	appContextCmd.AddCommand(appContextExternalFilesDirCmd)
-	appContextCmd.AddCommand(appContextExternalCacheDirCmd)
-	appContextCmd.AddCommand(appContextDataDirCmd)
-	appCmd.AddCommand(appContextCmd)
-	appActivityCmd.AddCommand(appActivityFinishCmd)
-	appActivityCmd.AddCommand(appActivityGetIntentCmd)
-	appActivitySetResultCmd.Flags().Int32("result-code", 0, "result-code (int32)")
-	appActivitySetResultCmd.Flags().Int64("data", 0, "data (int64)")
-	appActivityCmd.AddCommand(appActivitySetResultCmd)
-	appActivityCmd.AddCommand(appActivityGetWindowCmd)
-	appActivityRunOnUiThreadCmd.Flags().Int64("fn", 0, "fn (int64)")
-	appActivityCmd.AddCommand(appActivityRunOnUiThreadCmd)
-	appActivityStartActivityForResultCmd.Flags().Int64("intent", 0, "intent (int64)")
-	appActivityStartActivityForResultCmd.Flags().Int32("request-code", 0, "request-code (int32)")
-	appActivityCmd.AddCommand(appActivityStartActivityForResultCmd)
-	appCmd.AddCommand(appActivityCmd)
-	appIntentSetActionCmd.Flags().String("action", "", "action (string)")
-	appIntentCmd.AddCommand(appIntentSetActionCmd)
-	appIntentSetDataCmd.Flags().Int64("uri", 0, "uri (int64)")
-	appIntentCmd.AddCommand(appIntentSetDataCmd)
-	appIntentSetComponentCmd.Flags().Int64("component", 0, "component (int64)")
-	appIntentCmd.AddCommand(appIntentSetComponentCmd)
-	appIntentSetFlagsCmd.Flags().Int32("flags", 0, "flags (int32)")
-	appIntentCmd.AddCommand(appIntentSetFlagsCmd)
-	appIntentAddFlagsCmd.Flags().Int32("flags", 0, "flags (int32)")
-	appIntentCmd.AddCommand(appIntentAddFlagsCmd)
-	appIntentAddCategoryCmd.Flags().String("category", "", "category (string)")
+	appIntentAddCategoryCmd.Flags().String("arg0", "", "arg0 (string)")
 	appIntentCmd.AddCommand(appIntentAddCategoryCmd)
-	appIntentSetPackageCmd.Flags().String("pkg", "", "pkg (string)")
-	appIntentCmd.AddCommand(appIntentSetPackageCmd)
-	appIntentSetTypeCmd.Flags().String("mime-type", "", "mime-type (string)")
-	appIntentCmd.AddCommand(appIntentSetTypeCmd)
+	appIntentAddFlagsCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	appIntentCmd.AddCommand(appIntentAddFlagsCmd)
+	appIntentCmd.AddCommand(appIntentCloneCmd)
+	appIntentCmd.AddCommand(appIntentCloneFilterCmd)
+	appIntentCmd.AddCommand(appIntentDescribeContentsCmd)
+	appIntentFillInCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentFillInCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	appIntentCmd.AddCommand(appIntentFillInCmd)
+	appIntentFilterEqualsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentFilterEqualsCmd)
+	appIntentCmd.AddCommand(appIntentFilterHashCodeCmd)
 	appIntentCmd.AddCommand(appIntentGetActionCmd)
+	appIntentGetBooleanArrayExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetBooleanArrayExtraCmd)
+	appIntentGetBooleanExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentGetBooleanExtraCmd.Flags().Bool("arg1", false, "arg1 (bool)")
+	appIntentCmd.AddCommand(appIntentGetBooleanExtraCmd)
+	appIntentGetBundleExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetBundleExtraCmd)
+	appIntentGetByteArrayExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetByteArrayExtraCmd)
+	appIntentGetByteExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentGetByteExtraCmd.Flags().Uint32("arg1", 0, "arg1 (uint32)")
+	appIntentCmd.AddCommand(appIntentGetByteExtraCmd)
+	appIntentCmd.AddCommand(appIntentGetCategoriesCmd)
+	appIntentGetCharArrayExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetCharArrayExtraCmd)
+	appIntentGetCharExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentGetCharExtraCmd.Flags().Uint32("arg1", 0, "arg1 (uint32)")
+	appIntentCmd.AddCommand(appIntentGetCharExtraCmd)
+	appIntentGetCharSequenceArrayExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetCharSequenceArrayExtraCmd)
+	appIntentGetCharSequenceArrayListExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetCharSequenceArrayListExtraCmd)
+	appIntentGetCharSequenceExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetCharSequenceExtraCmd)
+	appIntentCmd.AddCommand(appIntentGetClipDataCmd)
+	appIntentCmd.AddCommand(appIntentGetComponentCmd)
 	appIntentCmd.AddCommand(appIntentGetDataCmd)
-	appIntentGetStringExtraCmd.Flags().String("key", "", "key (string)")
-	appIntentCmd.AddCommand(appIntentGetStringExtraCmd)
-	appIntentGetBoolExtraCmd.Flags().String("key", "", "key (string)")
-	appIntentGetBoolExtraCmd.Flags().Bool("default-val", false, "default-val (bool)")
-	appIntentCmd.AddCommand(appIntentGetBoolExtraCmd)
-	appIntentGetIntExtraCmd.Flags().String("key", "", "key (string)")
-	appIntentGetIntExtraCmd.Flags().Int32("default-val", 0, "default-val (int32)")
+	appIntentCmd.AddCommand(appIntentGetDataStringCmd)
+	appIntentGetDoubleArrayExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetDoubleArrayExtraCmd)
+	appIntentGetDoubleExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentGetDoubleExtraCmd.Flags().Float64("arg1", 0, "arg1 (float64)")
+	appIntentCmd.AddCommand(appIntentGetDoubleExtraCmd)
+	appIntentCmd.AddCommand(appIntentGetExtrasCmd)
+	appIntentCmd.AddCommand(appIntentGetFlagsCmd)
+	appIntentGetFloatArrayExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetFloatArrayExtraCmd)
+	appIntentGetFloatExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentGetFloatExtraCmd.Flags().Float32("arg1", 0, "arg1 (float32)")
+	appIntentCmd.AddCommand(appIntentGetFloatExtraCmd)
+	appIntentCmd.AddCommand(appIntentGetIdentifierCmd)
+	appIntentGetIntArrayExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetIntArrayExtraCmd)
+	appIntentGetIntExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentGetIntExtraCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
 	appIntentCmd.AddCommand(appIntentGetIntExtraCmd)
-	appIntentPutStringExtraCmd.Flags().String("key", "", "key (string)")
-	appIntentPutStringExtraCmd.Flags().String("value", "", "value (string)")
-	appIntentCmd.AddCommand(appIntentPutStringExtraCmd)
-	appIntentPutIntExtraCmd.Flags().String("key", "", "key (string)")
-	appIntentPutIntExtraCmd.Flags().Int32("value", 0, "value (int32)")
-	appIntentCmd.AddCommand(appIntentPutIntExtraCmd)
-	appIntentPutBoolExtraCmd.Flags().String("key", "", "key (string)")
-	appIntentPutBoolExtraCmd.Flags().Bool("value", false, "value (bool)")
-	appIntentCmd.AddCommand(appIntentPutBoolExtraCmd)
-	appIntentPutLongExtraCmd.Flags().String("key", "", "key (string)")
-	appIntentPutLongExtraCmd.Flags().Int64("value", 0, "value (int64)")
-	appIntentCmd.AddCommand(appIntentPutLongExtraCmd)
+	appIntentGetIntegerArrayListExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetIntegerArrayListExtraCmd)
+	appIntentGetLongArrayExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetLongArrayExtraCmd)
+	appIntentGetLongExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentGetLongExtraCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentGetLongExtraCmd)
+	appIntentCmd.AddCommand(appIntentGetPackageCmd)
+	appIntentGetParcelableArrayExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetParcelableArrayExtraCmd)
+	appIntentCmd.AddCommand(appIntentGetSchemeCmd)
+	appIntentCmd.AddCommand(appIntentGetSelectorCmd)
+	appIntentGetSerializableExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetSerializableExtraCmd)
+	appIntentGetShortArrayExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetShortArrayExtraCmd)
+	appIntentGetShortExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentGetShortExtraCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	appIntentCmd.AddCommand(appIntentGetShortExtraCmd)
+	appIntentCmd.AddCommand(appIntentGetSourceBoundsCmd)
+	appIntentGetStringArrayExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetStringArrayExtraCmd)
+	appIntentGetStringArrayListExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetStringArrayListExtraCmd)
+	appIntentGetStringExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetStringExtraCmd)
+	appIntentCmd.AddCommand(appIntentGetTypeCmd)
+	appIntentHasCategoryCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentHasCategoryCmd)
+	appIntentHasExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentHasExtraCmd)
+	appIntentCmd.AddCommand(appIntentHasFileDescriptorsCmd)
+	appIntentCmd.AddCommand(appIntentIsMismatchingFilterCmd)
+	appIntentPutCharSequenceArrayListExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutCharSequenceArrayListExtraCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutCharSequenceArrayListExtraCmd)
+	appIntentPutExtra2Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtra2Cmd)
+	appIntentPutExtra2_1Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_1Cmd)
+	appIntentPutExtra2_2Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_2Cmd)
+	appIntentPutExtra2_3Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_3Cmd.Flags().Bool("arg1", false, "arg1 (bool)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_3Cmd)
+	appIntentPutExtra2_4Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_4Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_4Cmd)
+	appIntentPutExtra2_5Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_5Cmd.Flags().Uint32("arg1", 0, "arg1 (uint32)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_5Cmd)
+	appIntentPutExtra2_6Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_6Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_6Cmd)
+	appIntentPutExtra2_7Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_7Cmd.Flags().Uint32("arg1", 0, "arg1 (uint32)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_7Cmd)
+	appIntentPutExtra2_8Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_8Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_8Cmd)
+	appIntentPutExtra2_9Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_9Cmd.Flags().Float64("arg1", 0, "arg1 (float64)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_9Cmd)
+	appIntentPutExtra2_10Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_10Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_10Cmd)
+	appIntentPutExtra2_11Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_11Cmd.Flags().Float32("arg1", 0, "arg1 (float32)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_11Cmd)
+	appIntentPutExtra2_12Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_12Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_12Cmd)
+	appIntentPutExtra2_13Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_13Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_13Cmd)
+	appIntentPutExtra2_14Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_14Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_14Cmd)
+	appIntentPutExtra2_15Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_15Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_15Cmd)
+	appIntentPutExtra2_16Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_16Cmd.Flags().String("arg1", "", "arg1 (string)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_16Cmd)
+	appIntentPutExtra2_17Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_17Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_17Cmd)
+	appIntentPutExtra2_18Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_18Cmd.Flags().String("arg1", "", "arg1 (string)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_18Cmd)
+	appIntentPutExtra2_19Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_19Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_19Cmd)
+	appIntentPutExtra2_20Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_20Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_20Cmd)
+	appIntentPutExtra2_21Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_21Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_21Cmd)
+	appIntentPutExtra2_22Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_22Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_22Cmd)
+	appIntentPutExtra2_23Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutExtra2_23Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtra2_23Cmd)
+	appIntentPutExtras1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtras1Cmd)
+	appIntentPutExtras1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentPutExtras1_1Cmd)
+	appIntentPutIntegerArrayListExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutIntegerArrayListExtraCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutIntegerArrayListExtraCmd)
+	appIntentPutParcelableArrayListExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutParcelableArrayListExtraCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutParcelableArrayListExtraCmd)
+	appIntentPutStringArrayListExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentPutStringArrayListExtraCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentPutStringArrayListExtraCmd)
+	appIntentReadFromParcelCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentReadFromParcelCmd)
+	appIntentRemoveCategoryCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentRemoveCategoryCmd)
+	appIntentRemoveExtraCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentRemoveExtraCmd)
+	appIntentRemoveFlagsCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	appIntentCmd.AddCommand(appIntentRemoveFlagsCmd)
+	appIntentCmd.AddCommand(appIntentRemoveLaunchSecurityProtectionCmd)
+	appIntentReplaceExtras1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentReplaceExtras1Cmd)
+	appIntentReplaceExtras1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentReplaceExtras1_1Cmd)
+	appIntentResolveActivityCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentResolveActivityCmd)
+	appIntentResolveActivityInfoCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentResolveActivityInfoCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	appIntentCmd.AddCommand(appIntentResolveActivityInfoCmd)
+	appIntentResolveType1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentResolveType1Cmd)
+	appIntentResolveType1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentResolveType1_1Cmd)
+	appIntentResolveTypeIfNeededCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentResolveTypeIfNeededCmd)
+	appIntentSetActionCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentSetActionCmd)
+	appIntentSetClassCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentSetClassCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentCmd.AddCommand(appIntentSetClassCmd)
+	appIntentSetClassName2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentSetClassName2Cmd.Flags().String("arg1", "", "arg1 (string)")
+	appIntentCmd.AddCommand(appIntentSetClassName2Cmd)
+	appIntentSetClassName2_1Cmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentSetClassName2_1Cmd.Flags().String("arg1", "", "arg1 (string)")
+	appIntentCmd.AddCommand(appIntentSetClassName2_1Cmd)
+	appIntentSetClipDataCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentSetClipDataCmd)
+	appIntentSetComponentCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentSetComponentCmd)
+	appIntentSetDataCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentSetDataCmd)
+	appIntentSetDataAndNormalizeCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentSetDataAndNormalizeCmd)
+	appIntentSetDataAndTypeCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentSetDataAndTypeCmd.Flags().String("arg1", "", "arg1 (string)")
+	appIntentCmd.AddCommand(appIntentSetDataAndTypeCmd)
+	appIntentSetDataAndTypeAndNormalizeCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentSetDataAndTypeAndNormalizeCmd.Flags().String("arg1", "", "arg1 (string)")
+	appIntentCmd.AddCommand(appIntentSetDataAndTypeAndNormalizeCmd)
+	appIntentSetExtrasClassLoaderCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentSetExtrasClassLoaderCmd)
+	appIntentSetFlagsCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	appIntentCmd.AddCommand(appIntentSetFlagsCmd)
+	appIntentSetIdentifierCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentSetIdentifierCmd)
+	appIntentSetPackageCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentSetPackageCmd)
+	appIntentSetSelectorCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentSetSelectorCmd)
+	appIntentSetSourceBoundsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentSetSourceBoundsCmd)
+	appIntentSetTypeCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentSetTypeCmd)
+	appIntentSetTypeAndNormalizeCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentSetTypeAndNormalizeCmd)
+	appIntentCmd.AddCommand(appIntentToStringCmd)
+	appIntentCmd.AddCommand(appIntentToURICmd)
+	appIntentToUriCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	appIntentCmd.AddCommand(appIntentToUriCmd)
+	appIntentWriteToParcelCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentWriteToParcelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	appIntentCmd.AddCommand(appIntentWriteToParcelCmd)
+	appIntentCreateChooser2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCreateChooser2Cmd.Flags().String("arg1", "", "arg1 (string)")
+	appIntentCmd.AddCommand(appIntentCreateChooser2Cmd)
+	appIntentCreateChooser3_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCreateChooser3_1Cmd.Flags().String("arg1", "", "arg1 (string)")
+	appIntentCreateChooser3_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	appIntentCmd.AddCommand(appIntentCreateChooser3_1Cmd)
+	appIntentGetIntentCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetIntentCmd)
+	appIntentGetIntentOldCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentGetIntentOldCmd)
+	appIntentMakeMainActivityCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentMakeMainActivityCmd)
+	appIntentMakeMainSelectorActivityCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentMakeMainSelectorActivityCmd.Flags().String("arg1", "", "arg1 (string)")
+	appIntentCmd.AddCommand(appIntentMakeMainSelectorActivityCmd)
+	appIntentMakeRestartActivityTaskCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentCmd.AddCommand(appIntentMakeRestartActivityTaskCmd)
+	appIntentNormalizeMimeTypeCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentCmd.AddCommand(appIntentNormalizeMimeTypeCmd)
+	appIntentParseIntentCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	appIntentParseIntentCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	appIntentParseIntentCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	appIntentCmd.AddCommand(appIntentParseIntentCmd)
+	appIntentParseUriCmd.Flags().String("arg0", "", "arg0 (string)")
+	appIntentParseUriCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	appIntentCmd.AddCommand(appIntentParseUriCmd)
 	appCmd.AddCommand(appIntentCmd)
-	appPendingIntentNewPendingActivityCmd.Flags().Int64("ctx", 0, "ctx (int64)")
-	appPendingIntentNewPendingActivityCmd.Flags().Int32("request-code", 0, "request-code (int32)")
-	appPendingIntentNewPendingActivityCmd.Flags().Int64("intent", 0, "intent (int64)")
-	appPendingIntentNewPendingActivityCmd.Flags().Int32("flags", 0, "flags (int32)")
-	appPendingIntentCmd.AddCommand(appPendingIntentNewPendingActivityCmd)
-	appPendingIntentNewPendingBroadcastCmd.Flags().Int64("ctx", 0, "ctx (int64)")
-	appPendingIntentNewPendingBroadcastCmd.Flags().Int32("request-code", 0, "request-code (int32)")
-	appPendingIntentNewPendingBroadcastCmd.Flags().Int64("intent", 0, "intent (int64)")
-	appPendingIntentNewPendingBroadcastCmd.Flags().Int32("flags", 0, "flags (int32)")
-	appPendingIntentCmd.AddCommand(appPendingIntentNewPendingBroadcastCmd)
-	appPendingIntentNewPendingServiceCmd.Flags().Int64("ctx", 0, "ctx (int64)")
-	appPendingIntentNewPendingServiceCmd.Flags().Int32("request-code", 0, "request-code (int32)")
-	appPendingIntentNewPendingServiceCmd.Flags().Int64("intent", 0, "intent (int64)")
-	appPendingIntentNewPendingServiceCmd.Flags().Int32("flags", 0, "flags (int32)")
-	appPendingIntentCmd.AddCommand(appPendingIntentNewPendingServiceCmd)
-	appCmd.AddCommand(appPendingIntentCmd)
-	appBroadcastReceiverCmd.AddCommand(appBroadcastReceiverSubscribeBroadcastReceiverCmd)
-	appCmd.AddCommand(appBroadcastReceiverCmd)
-	appRunnableCmd.AddCommand(appRunnableSubscribeRunnableCmd)
-	appCmd.AddCommand(appRunnableCmd)
 	rootCmd.AddCommand(appCmd)
 }

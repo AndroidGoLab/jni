@@ -21,2793 +21,826 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AdapterService_IsEnabled_FullMethodName        = "/bluetooth.AdapterService/IsEnabled"
-	AdapterService_GetName_FullMethodName          = "/bluetooth.AdapterService/GetName"
-	AdapterService_GetAddress_FullMethodName       = "/bluetooth.AdapterService/GetAddress"
-	AdapterService_GetBondedDevices_FullMethodName = "/bluetooth.AdapterService/GetBondedDevices"
-	AdapterService_StartDiscovery_FullMethodName   = "/bluetooth.AdapterService/StartDiscovery"
-	AdapterService_CancelDiscovery_FullMethodName  = "/bluetooth.AdapterService/CancelDiscovery"
-	AdapterService_GetLeScanner_FullMethodName     = "/bluetooth.AdapterService/GetLeScanner"
-	AdapterService_GetLeAdvertiser_FullMethodName  = "/bluetooth.AdapterService/GetLeAdvertiser"
-	AdapterService_ListenRfcomm_FullMethodName     = "/bluetooth.AdapterService/ListenRfcomm"
+	BluetoothGattCharacteristicService_AddDescriptor_FullMethodName    = "/bluetooth.BluetoothGattCharacteristicService/AddDescriptor"
+	BluetoothGattCharacteristicService_DescribeContents_FullMethodName = "/bluetooth.BluetoothGattCharacteristicService/DescribeContents"
+	BluetoothGattCharacteristicService_GetDescriptor_FullMethodName    = "/bluetooth.BluetoothGattCharacteristicService/GetDescriptor"
+	BluetoothGattCharacteristicService_GetDescriptors_FullMethodName   = "/bluetooth.BluetoothGattCharacteristicService/GetDescriptors"
+	BluetoothGattCharacteristicService_GetFloatValue_FullMethodName    = "/bluetooth.BluetoothGattCharacteristicService/GetFloatValue"
+	BluetoothGattCharacteristicService_GetInstanceId_FullMethodName    = "/bluetooth.BluetoothGattCharacteristicService/GetInstanceId"
+	BluetoothGattCharacteristicService_GetIntValue_FullMethodName      = "/bluetooth.BluetoothGattCharacteristicService/GetIntValue"
+	BluetoothGattCharacteristicService_GetPermissions_FullMethodName   = "/bluetooth.BluetoothGattCharacteristicService/GetPermissions"
+	BluetoothGattCharacteristicService_GetProperties_FullMethodName    = "/bluetooth.BluetoothGattCharacteristicService/GetProperties"
+	BluetoothGattCharacteristicService_GetService_FullMethodName       = "/bluetooth.BluetoothGattCharacteristicService/GetService"
+	BluetoothGattCharacteristicService_GetStringValue_FullMethodName   = "/bluetooth.BluetoothGattCharacteristicService/GetStringValue"
+	BluetoothGattCharacteristicService_GetUuid_FullMethodName          = "/bluetooth.BluetoothGattCharacteristicService/GetUuid"
+	BluetoothGattCharacteristicService_GetValue_FullMethodName         = "/bluetooth.BluetoothGattCharacteristicService/GetValue"
+	BluetoothGattCharacteristicService_GetWriteType_FullMethodName     = "/bluetooth.BluetoothGattCharacteristicService/GetWriteType"
+	BluetoothGattCharacteristicService_SetValue1_FullMethodName        = "/bluetooth.BluetoothGattCharacteristicService/SetValue1"
+	BluetoothGattCharacteristicService_SetValue3_1_FullMethodName      = "/bluetooth.BluetoothGattCharacteristicService/SetValue3_1"
+	BluetoothGattCharacteristicService_SetValue4_2_FullMethodName      = "/bluetooth.BluetoothGattCharacteristicService/SetValue4_2"
+	BluetoothGattCharacteristicService_SetValue1_3_FullMethodName      = "/bluetooth.BluetoothGattCharacteristicService/SetValue1_3"
+	BluetoothGattCharacteristicService_SetWriteType_FullMethodName     = "/bluetooth.BluetoothGattCharacteristicService/SetWriteType"
+	BluetoothGattCharacteristicService_WriteToParcel_FullMethodName    = "/bluetooth.BluetoothGattCharacteristicService/WriteToParcel"
 )
 
-// AdapterServiceClient is the client API for AdapterService service.
+// BluetoothGattCharacteristicServiceClient is the client API for BluetoothGattCharacteristicService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type AdapterServiceClient interface {
-	IsEnabled(ctx context.Context, in *IsEnabledRequest, opts ...grpc.CallOption) (*IsEnabledResponse, error)
-	GetName(ctx context.Context, in *GetNameRequest, opts ...grpc.CallOption) (*GetNameResponse, error)
-	GetAddress(ctx context.Context, in *GetAddressRequest, opts ...grpc.CallOption) (*GetAddressResponse, error)
-	GetBondedDevices(ctx context.Context, in *GetBondedDevicesRequest, opts ...grpc.CallOption) (*GetBondedDevicesResponse, error)
-	StartDiscovery(ctx context.Context, in *StartDiscoveryRequest, opts ...grpc.CallOption) (*StartDiscoveryResponse, error)
-	CancelDiscovery(ctx context.Context, in *CancelDiscoveryRequest, opts ...grpc.CallOption) (*CancelDiscoveryResponse, error)
-	GetLeScanner(ctx context.Context, in *GetLeScannerRequest, opts ...grpc.CallOption) (*GetLeScannerResponse, error)
-	GetLeAdvertiser(ctx context.Context, in *GetLeAdvertiserRequest, opts ...grpc.CallOption) (*GetLeAdvertiserResponse, error)
-	ListenRfcomm(ctx context.Context, in *ListenRfcommRequest, opts ...grpc.CallOption) (*ListenRfcommResponse, error)
+type BluetoothGattCharacteristicServiceClient interface {
+	AddDescriptor(ctx context.Context, in *AddDescriptorRequest, opts ...grpc.CallOption) (*AddDescriptorResponse, error)
+	DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error)
+	GetDescriptor(ctx context.Context, in *GetDescriptorRequest, opts ...grpc.CallOption) (*GetDescriptorResponse, error)
+	GetDescriptors(ctx context.Context, in *GetDescriptorsRequest, opts ...grpc.CallOption) (*GetDescriptorsResponse, error)
+	GetFloatValue(ctx context.Context, in *GetFloatValueRequest, opts ...grpc.CallOption) (*GetFloatValueResponse, error)
+	GetInstanceId(ctx context.Context, in *GetInstanceIdRequest, opts ...grpc.CallOption) (*GetInstanceIdResponse, error)
+	GetIntValue(ctx context.Context, in *GetIntValueRequest, opts ...grpc.CallOption) (*GetIntValueResponse, error)
+	GetPermissions(ctx context.Context, in *GetPermissionsRequest, opts ...grpc.CallOption) (*GetPermissionsResponse, error)
+	GetProperties(ctx context.Context, in *GetPropertiesRequest, opts ...grpc.CallOption) (*GetPropertiesResponse, error)
+	GetService(ctx context.Context, in *GetServiceRequest, opts ...grpc.CallOption) (*GetServiceResponse, error)
+	GetStringValue(ctx context.Context, in *GetStringValueRequest, opts ...grpc.CallOption) (*GetStringValueResponse, error)
+	GetUuid(ctx context.Context, in *GetUuidRequest, opts ...grpc.CallOption) (*GetUuidResponse, error)
+	GetValue(ctx context.Context, in *GetValueRequest, opts ...grpc.CallOption) (*GetValueResponse, error)
+	GetWriteType(ctx context.Context, in *GetWriteTypeRequest, opts ...grpc.CallOption) (*GetWriteTypeResponse, error)
+	SetValue1(ctx context.Context, in *SetValue1Request, opts ...grpc.CallOption) (*SetValue1Response, error)
+	SetValue3_1(ctx context.Context, in *SetValue3_1Request, opts ...grpc.CallOption) (*SetValue3_1Response, error)
+	SetValue4_2(ctx context.Context, in *SetValue4_2Request, opts ...grpc.CallOption) (*SetValue4_2Response, error)
+	SetValue1_3(ctx context.Context, in *SetValue1_3Request, opts ...grpc.CallOption) (*SetValue1_3Response, error)
+	SetWriteType(ctx context.Context, in *SetWriteTypeRequest, opts ...grpc.CallOption) (*SetWriteTypeResponse, error)
+	WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error)
 }
 
-type adapterServiceClient struct {
+type bluetoothGattCharacteristicServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewAdapterServiceClient(cc grpc.ClientConnInterface) AdapterServiceClient {
-	return &adapterServiceClient{cc}
+func NewBluetoothGattCharacteristicServiceClient(cc grpc.ClientConnInterface) BluetoothGattCharacteristicServiceClient {
+	return &bluetoothGattCharacteristicServiceClient{cc}
 }
 
-func (c *adapterServiceClient) IsEnabled(ctx context.Context, in *IsEnabledRequest, opts ...grpc.CallOption) (*IsEnabledResponse, error) {
+func (c *bluetoothGattCharacteristicServiceClient) AddDescriptor(ctx context.Context, in *AddDescriptorRequest, opts ...grpc.CallOption) (*AddDescriptorResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(IsEnabledResponse)
-	err := c.cc.Invoke(ctx, AdapterService_IsEnabled_FullMethodName, in, out, cOpts...)
+	out := new(AddDescriptorResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_AddDescriptor_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adapterServiceClient) GetName(ctx context.Context, in *GetNameRequest, opts ...grpc.CallOption) (*GetNameResponse, error) {
+func (c *bluetoothGattCharacteristicServiceClient) DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetNameResponse)
-	err := c.cc.Invoke(ctx, AdapterService_GetName_FullMethodName, in, out, cOpts...)
+	out := new(DescribeContentsResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_DescribeContents_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adapterServiceClient) GetAddress(ctx context.Context, in *GetAddressRequest, opts ...grpc.CallOption) (*GetAddressResponse, error) {
+func (c *bluetoothGattCharacteristicServiceClient) GetDescriptor(ctx context.Context, in *GetDescriptorRequest, opts ...grpc.CallOption) (*GetDescriptorResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAddressResponse)
-	err := c.cc.Invoke(ctx, AdapterService_GetAddress_FullMethodName, in, out, cOpts...)
+	out := new(GetDescriptorResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetDescriptor_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adapterServiceClient) GetBondedDevices(ctx context.Context, in *GetBondedDevicesRequest, opts ...grpc.CallOption) (*GetBondedDevicesResponse, error) {
+func (c *bluetoothGattCharacteristicServiceClient) GetDescriptors(ctx context.Context, in *GetDescriptorsRequest, opts ...grpc.CallOption) (*GetDescriptorsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetBondedDevicesResponse)
-	err := c.cc.Invoke(ctx, AdapterService_GetBondedDevices_FullMethodName, in, out, cOpts...)
+	out := new(GetDescriptorsResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetDescriptors_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adapterServiceClient) StartDiscovery(ctx context.Context, in *StartDiscoveryRequest, opts ...grpc.CallOption) (*StartDiscoveryResponse, error) {
+func (c *bluetoothGattCharacteristicServiceClient) GetFloatValue(ctx context.Context, in *GetFloatValueRequest, opts ...grpc.CallOption) (*GetFloatValueResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StartDiscoveryResponse)
-	err := c.cc.Invoke(ctx, AdapterService_StartDiscovery_FullMethodName, in, out, cOpts...)
+	out := new(GetFloatValueResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetFloatValue_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adapterServiceClient) CancelDiscovery(ctx context.Context, in *CancelDiscoveryRequest, opts ...grpc.CallOption) (*CancelDiscoveryResponse, error) {
+func (c *bluetoothGattCharacteristicServiceClient) GetInstanceId(ctx context.Context, in *GetInstanceIdRequest, opts ...grpc.CallOption) (*GetInstanceIdResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CancelDiscoveryResponse)
-	err := c.cc.Invoke(ctx, AdapterService_CancelDiscovery_FullMethodName, in, out, cOpts...)
+	out := new(GetInstanceIdResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetInstanceId_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adapterServiceClient) GetLeScanner(ctx context.Context, in *GetLeScannerRequest, opts ...grpc.CallOption) (*GetLeScannerResponse, error) {
+func (c *bluetoothGattCharacteristicServiceClient) GetIntValue(ctx context.Context, in *GetIntValueRequest, opts ...grpc.CallOption) (*GetIntValueResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetLeScannerResponse)
-	err := c.cc.Invoke(ctx, AdapterService_GetLeScanner_FullMethodName, in, out, cOpts...)
+	out := new(GetIntValueResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetIntValue_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adapterServiceClient) GetLeAdvertiser(ctx context.Context, in *GetLeAdvertiserRequest, opts ...grpc.CallOption) (*GetLeAdvertiserResponse, error) {
+func (c *bluetoothGattCharacteristicServiceClient) GetPermissions(ctx context.Context, in *GetPermissionsRequest, opts ...grpc.CallOption) (*GetPermissionsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetLeAdvertiserResponse)
-	err := c.cc.Invoke(ctx, AdapterService_GetLeAdvertiser_FullMethodName, in, out, cOpts...)
+	out := new(GetPermissionsResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetPermissions_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adapterServiceClient) ListenRfcomm(ctx context.Context, in *ListenRfcommRequest, opts ...grpc.CallOption) (*ListenRfcommResponse, error) {
+func (c *bluetoothGattCharacteristicServiceClient) GetProperties(ctx context.Context, in *GetPropertiesRequest, opts ...grpc.CallOption) (*GetPropertiesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListenRfcommResponse)
-	err := c.cc.Invoke(ctx, AdapterService_ListenRfcomm_FullMethodName, in, out, cOpts...)
+	out := new(GetPropertiesResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetProperties_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// AdapterServiceServer is the server API for AdapterService service.
-// All implementations must embed UnimplementedAdapterServiceServer
+func (c *bluetoothGattCharacteristicServiceClient) GetService(ctx context.Context, in *GetServiceRequest, opts ...grpc.CallOption) (*GetServiceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetServiceResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetService_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) GetStringValue(ctx context.Context, in *GetStringValueRequest, opts ...grpc.CallOption) (*GetStringValueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetStringValueResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetStringValue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) GetUuid(ctx context.Context, in *GetUuidRequest, opts ...grpc.CallOption) (*GetUuidResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUuidResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetUuid_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) GetValue(ctx context.Context, in *GetValueRequest, opts ...grpc.CallOption) (*GetValueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetValueResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetValue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) GetWriteType(ctx context.Context, in *GetWriteTypeRequest, opts ...grpc.CallOption) (*GetWriteTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWriteTypeResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetWriteType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) SetValue1(ctx context.Context, in *SetValue1Request, opts ...grpc.CallOption) (*SetValue1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetValue1Response)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_SetValue1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) SetValue3_1(ctx context.Context, in *SetValue3_1Request, opts ...grpc.CallOption) (*SetValue3_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetValue3_1Response)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_SetValue3_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) SetValue4_2(ctx context.Context, in *SetValue4_2Request, opts ...grpc.CallOption) (*SetValue4_2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetValue4_2Response)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_SetValue4_2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) SetValue1_3(ctx context.Context, in *SetValue1_3Request, opts ...grpc.CallOption) (*SetValue1_3Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetValue1_3Response)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_SetValue1_3_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) SetWriteType(ctx context.Context, in *SetWriteTypeRequest, opts ...grpc.CallOption) (*SetWriteTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetWriteTypeResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_SetWriteType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteToParcelResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_WriteToParcel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// BluetoothGattCharacteristicServiceServer is the server API for BluetoothGattCharacteristicService service.
+// All implementations must embed UnimplementedBluetoothGattCharacteristicServiceServer
 // for forward compatibility.
-type AdapterServiceServer interface {
-	IsEnabled(context.Context, *IsEnabledRequest) (*IsEnabledResponse, error)
-	GetName(context.Context, *GetNameRequest) (*GetNameResponse, error)
-	GetAddress(context.Context, *GetAddressRequest) (*GetAddressResponse, error)
-	GetBondedDevices(context.Context, *GetBondedDevicesRequest) (*GetBondedDevicesResponse, error)
-	StartDiscovery(context.Context, *StartDiscoveryRequest) (*StartDiscoveryResponse, error)
-	CancelDiscovery(context.Context, *CancelDiscoveryRequest) (*CancelDiscoveryResponse, error)
-	GetLeScanner(context.Context, *GetLeScannerRequest) (*GetLeScannerResponse, error)
-	GetLeAdvertiser(context.Context, *GetLeAdvertiserRequest) (*GetLeAdvertiserResponse, error)
-	ListenRfcomm(context.Context, *ListenRfcommRequest) (*ListenRfcommResponse, error)
-	mustEmbedUnimplementedAdapterServiceServer()
+type BluetoothGattCharacteristicServiceServer interface {
+	AddDescriptor(context.Context, *AddDescriptorRequest) (*AddDescriptorResponse, error)
+	DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error)
+	GetDescriptor(context.Context, *GetDescriptorRequest) (*GetDescriptorResponse, error)
+	GetDescriptors(context.Context, *GetDescriptorsRequest) (*GetDescriptorsResponse, error)
+	GetFloatValue(context.Context, *GetFloatValueRequest) (*GetFloatValueResponse, error)
+	GetInstanceId(context.Context, *GetInstanceIdRequest) (*GetInstanceIdResponse, error)
+	GetIntValue(context.Context, *GetIntValueRequest) (*GetIntValueResponse, error)
+	GetPermissions(context.Context, *GetPermissionsRequest) (*GetPermissionsResponse, error)
+	GetProperties(context.Context, *GetPropertiesRequest) (*GetPropertiesResponse, error)
+	GetService(context.Context, *GetServiceRequest) (*GetServiceResponse, error)
+	GetStringValue(context.Context, *GetStringValueRequest) (*GetStringValueResponse, error)
+	GetUuid(context.Context, *GetUuidRequest) (*GetUuidResponse, error)
+	GetValue(context.Context, *GetValueRequest) (*GetValueResponse, error)
+	GetWriteType(context.Context, *GetWriteTypeRequest) (*GetWriteTypeResponse, error)
+	SetValue1(context.Context, *SetValue1Request) (*SetValue1Response, error)
+	SetValue3_1(context.Context, *SetValue3_1Request) (*SetValue3_1Response, error)
+	SetValue4_2(context.Context, *SetValue4_2Request) (*SetValue4_2Response, error)
+	SetValue1_3(context.Context, *SetValue1_3Request) (*SetValue1_3Response, error)
+	SetWriteType(context.Context, *SetWriteTypeRequest) (*SetWriteTypeResponse, error)
+	WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error)
+	mustEmbedUnimplementedBluetoothGattCharacteristicServiceServer()
 }
 
-// UnimplementedAdapterServiceServer must be embedded to have
+// UnimplementedBluetoothGattCharacteristicServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedAdapterServiceServer struct{}
+type UnimplementedBluetoothGattCharacteristicServiceServer struct{}
 
-func (UnimplementedAdapterServiceServer) IsEnabled(context.Context, *IsEnabledRequest) (*IsEnabledResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method IsEnabled not implemented")
+func (UnimplementedBluetoothGattCharacteristicServiceServer) AddDescriptor(context.Context, *AddDescriptorRequest) (*AddDescriptorResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddDescriptor not implemented")
 }
-func (UnimplementedAdapterServiceServer) GetName(context.Context, *GetNameRequest) (*GetNameResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetName not implemented")
+func (UnimplementedBluetoothGattCharacteristicServiceServer) DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DescribeContents not implemented")
 }
-func (UnimplementedAdapterServiceServer) GetAddress(context.Context, *GetAddressRequest) (*GetAddressResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAddress not implemented")
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetDescriptor(context.Context, *GetDescriptorRequest) (*GetDescriptorResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDescriptor not implemented")
 }
-func (UnimplementedAdapterServiceServer) GetBondedDevices(context.Context, *GetBondedDevicesRequest) (*GetBondedDevicesResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetBondedDevices not implemented")
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetDescriptors(context.Context, *GetDescriptorsRequest) (*GetDescriptorsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDescriptors not implemented")
 }
-func (UnimplementedAdapterServiceServer) StartDiscovery(context.Context, *StartDiscoveryRequest) (*StartDiscoveryResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method StartDiscovery not implemented")
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetFloatValue(context.Context, *GetFloatValueRequest) (*GetFloatValueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetFloatValue not implemented")
 }
-func (UnimplementedAdapterServiceServer) CancelDiscovery(context.Context, *CancelDiscoveryRequest) (*CancelDiscoveryResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method CancelDiscovery not implemented")
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetInstanceId(context.Context, *GetInstanceIdRequest) (*GetInstanceIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetInstanceId not implemented")
 }
-func (UnimplementedAdapterServiceServer) GetLeScanner(context.Context, *GetLeScannerRequest) (*GetLeScannerResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetLeScanner not implemented")
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetIntValue(context.Context, *GetIntValueRequest) (*GetIntValueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetIntValue not implemented")
 }
-func (UnimplementedAdapterServiceServer) GetLeAdvertiser(context.Context, *GetLeAdvertiserRequest) (*GetLeAdvertiserResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetLeAdvertiser not implemented")
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetPermissions(context.Context, *GetPermissionsRequest) (*GetPermissionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPermissions not implemented")
 }
-func (UnimplementedAdapterServiceServer) ListenRfcomm(context.Context, *ListenRfcommRequest) (*ListenRfcommResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListenRfcomm not implemented")
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetProperties(context.Context, *GetPropertiesRequest) (*GetPropertiesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetProperties not implemented")
 }
-func (UnimplementedAdapterServiceServer) mustEmbedUnimplementedAdapterServiceServer() {}
-func (UnimplementedAdapterServiceServer) testEmbeddedByValue()                        {}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetService(context.Context, *GetServiceRequest) (*GetServiceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetService not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetStringValue(context.Context, *GetStringValueRequest) (*GetStringValueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetStringValue not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetUuid(context.Context, *GetUuidRequest) (*GetUuidResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUuid not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetValue(context.Context, *GetValueRequest) (*GetValueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetValue not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetWriteType(context.Context, *GetWriteTypeRequest) (*GetWriteTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetWriteType not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) SetValue1(context.Context, *SetValue1Request) (*SetValue1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetValue1 not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) SetValue3_1(context.Context, *SetValue3_1Request) (*SetValue3_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetValue3_1 not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) SetValue4_2(context.Context, *SetValue4_2Request) (*SetValue4_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetValue4_2 not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) SetValue1_3(context.Context, *SetValue1_3Request) (*SetValue1_3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetValue1_3 not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) SetWriteType(context.Context, *SetWriteTypeRequest) (*SetWriteTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetWriteType not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteToParcel not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) mustEmbedUnimplementedBluetoothGattCharacteristicServiceServer() {
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) testEmbeddedByValue() {}
 
-// UnsafeAdapterServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to AdapterServiceServer will
+// UnsafeBluetoothGattCharacteristicServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BluetoothGattCharacteristicServiceServer will
 // result in compilation errors.
-type UnsafeAdapterServiceServer interface {
-	mustEmbedUnimplementedAdapterServiceServer()
+type UnsafeBluetoothGattCharacteristicServiceServer interface {
+	mustEmbedUnimplementedBluetoothGattCharacteristicServiceServer()
 }
 
-func RegisterAdapterServiceServer(s grpc.ServiceRegistrar, srv AdapterServiceServer) {
-	// If the following call panics, it indicates UnimplementedAdapterServiceServer was
+func RegisterBluetoothGattCharacteristicServiceServer(s grpc.ServiceRegistrar, srv BluetoothGattCharacteristicServiceServer) {
+	// If the following call panics, it indicates UnimplementedBluetoothGattCharacteristicServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&AdapterService_ServiceDesc, srv)
+	s.RegisterService(&BluetoothGattCharacteristicService_ServiceDesc, srv)
 }
 
-func _AdapterService_IsEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IsEnabledRequest)
+func _BluetoothGattCharacteristicService_AddDescriptor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddDescriptorRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdapterServiceServer).IsEnabled(ctx, in)
+		return srv.(BluetoothGattCharacteristicServiceServer).AddDescriptor(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AdapterService_IsEnabled_FullMethodName,
+		FullMethod: BluetoothGattCharacteristicService_AddDescriptor_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdapterServiceServer).IsEnabled(ctx, req.(*IsEnabledRequest))
+		return srv.(BluetoothGattCharacteristicServiceServer).AddDescriptor(ctx, req.(*AddDescriptorRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AdapterService_GetName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetNameRequest)
+func _BluetoothGattCharacteristicService_DescribeContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeContentsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdapterServiceServer).GetName(ctx, in)
+		return srv.(BluetoothGattCharacteristicServiceServer).DescribeContents(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AdapterService_GetName_FullMethodName,
+		FullMethod: BluetoothGattCharacteristicService_DescribeContents_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdapterServiceServer).GetName(ctx, req.(*GetNameRequest))
+		return srv.(BluetoothGattCharacteristicServiceServer).DescribeContents(ctx, req.(*DescribeContentsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AdapterService_GetAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAddressRequest)
+func _BluetoothGattCharacteristicService_GetDescriptor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDescriptorRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdapterServiceServer).GetAddress(ctx, in)
+		return srv.(BluetoothGattCharacteristicServiceServer).GetDescriptor(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AdapterService_GetAddress_FullMethodName,
+		FullMethod: BluetoothGattCharacteristicService_GetDescriptor_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdapterServiceServer).GetAddress(ctx, req.(*GetAddressRequest))
+		return srv.(BluetoothGattCharacteristicServiceServer).GetDescriptor(ctx, req.(*GetDescriptorRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AdapterService_GetBondedDevices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetBondedDevicesRequest)
+func _BluetoothGattCharacteristicService_GetDescriptors_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDescriptorsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdapterServiceServer).GetBondedDevices(ctx, in)
+		return srv.(BluetoothGattCharacteristicServiceServer).GetDescriptors(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AdapterService_GetBondedDevices_FullMethodName,
+		FullMethod: BluetoothGattCharacteristicService_GetDescriptors_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdapterServiceServer).GetBondedDevices(ctx, req.(*GetBondedDevicesRequest))
+		return srv.(BluetoothGattCharacteristicServiceServer).GetDescriptors(ctx, req.(*GetDescriptorsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AdapterService_StartDiscovery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartDiscoveryRequest)
+func _BluetoothGattCharacteristicService_GetFloatValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFloatValueRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdapterServiceServer).StartDiscovery(ctx, in)
+		return srv.(BluetoothGattCharacteristicServiceServer).GetFloatValue(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AdapterService_StartDiscovery_FullMethodName,
+		FullMethod: BluetoothGattCharacteristicService_GetFloatValue_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdapterServiceServer).StartDiscovery(ctx, req.(*StartDiscoveryRequest))
+		return srv.(BluetoothGattCharacteristicServiceServer).GetFloatValue(ctx, req.(*GetFloatValueRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AdapterService_CancelDiscovery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CancelDiscoveryRequest)
+func _BluetoothGattCharacteristicService_GetInstanceId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInstanceIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdapterServiceServer).CancelDiscovery(ctx, in)
+		return srv.(BluetoothGattCharacteristicServiceServer).GetInstanceId(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AdapterService_CancelDiscovery_FullMethodName,
+		FullMethod: BluetoothGattCharacteristicService_GetInstanceId_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdapterServiceServer).CancelDiscovery(ctx, req.(*CancelDiscoveryRequest))
+		return srv.(BluetoothGattCharacteristicServiceServer).GetInstanceId(ctx, req.(*GetInstanceIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AdapterService_GetLeScanner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetLeScannerRequest)
+func _BluetoothGattCharacteristicService_GetIntValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIntValueRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdapterServiceServer).GetLeScanner(ctx, in)
+		return srv.(BluetoothGattCharacteristicServiceServer).GetIntValue(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AdapterService_GetLeScanner_FullMethodName,
+		FullMethod: BluetoothGattCharacteristicService_GetIntValue_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdapterServiceServer).GetLeScanner(ctx, req.(*GetLeScannerRequest))
+		return srv.(BluetoothGattCharacteristicServiceServer).GetIntValue(ctx, req.(*GetIntValueRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AdapterService_GetLeAdvertiser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetLeAdvertiserRequest)
+func _BluetoothGattCharacteristicService_GetPermissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPermissionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdapterServiceServer).GetLeAdvertiser(ctx, in)
+		return srv.(BluetoothGattCharacteristicServiceServer).GetPermissions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AdapterService_GetLeAdvertiser_FullMethodName,
+		FullMethod: BluetoothGattCharacteristicService_GetPermissions_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdapterServiceServer).GetLeAdvertiser(ctx, req.(*GetLeAdvertiserRequest))
+		return srv.(BluetoothGattCharacteristicServiceServer).GetPermissions(ctx, req.(*GetPermissionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AdapterService_ListenRfcomm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListenRfcommRequest)
+func _BluetoothGattCharacteristicService_GetProperties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPropertiesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdapterServiceServer).ListenRfcomm(ctx, in)
+		return srv.(BluetoothGattCharacteristicServiceServer).GetProperties(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AdapterService_ListenRfcomm_FullMethodName,
+		FullMethod: BluetoothGattCharacteristicService_GetProperties_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdapterServiceServer).ListenRfcomm(ctx, req.(*ListenRfcommRequest))
+		return srv.(BluetoothGattCharacteristicServiceServer).GetProperties(ctx, req.(*GetPropertiesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// AdapterService_ServiceDesc is the grpc.ServiceDesc for AdapterService service.
+func _BluetoothGattCharacteristicService_GetService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetServiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetService(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetService_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetService(ctx, req.(*GetServiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_GetStringValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStringValueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetStringValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetStringValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetStringValue(ctx, req.(*GetStringValueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_GetUuid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUuidRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetUuid(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetUuid_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetUuid(ctx, req.(*GetUuidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_GetValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetValueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetValue(ctx, req.(*GetValueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_GetWriteType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWriteTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetWriteType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetWriteType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetWriteType(ctx, req.(*GetWriteTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_SetValue1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetValue1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetValue1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_SetValue1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetValue1(ctx, req.(*SetValue1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_SetValue3_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetValue3_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetValue3_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_SetValue3_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetValue3_1(ctx, req.(*SetValue3_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_SetValue4_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetValue4_2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetValue4_2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_SetValue4_2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetValue4_2(ctx, req.(*SetValue4_2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_SetValue1_3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetValue1_3Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetValue1_3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_SetValue1_3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetValue1_3(ctx, req.(*SetValue1_3Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_SetWriteType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetWriteTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetWriteType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_SetWriteType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetWriteType(ctx, req.(*SetWriteTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_WriteToParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteToParcelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).WriteToParcel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_WriteToParcel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).WriteToParcel(ctx, req.(*WriteToParcelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// BluetoothGattCharacteristicService_ServiceDesc is the grpc.ServiceDesc for BluetoothGattCharacteristicService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var AdapterService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth.AdapterService",
-	HandlerType: (*AdapterServiceServer)(nil),
+var BluetoothGattCharacteristicService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bluetooth.BluetoothGattCharacteristicService",
+	HandlerType: (*BluetoothGattCharacteristicServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "IsEnabled",
-			Handler:    _AdapterService_IsEnabled_Handler,
+			MethodName: "AddDescriptor",
+			Handler:    _BluetoothGattCharacteristicService_AddDescriptor_Handler,
 		},
 		{
-			MethodName: "GetName",
-			Handler:    _AdapterService_GetName_Handler,
+			MethodName: "DescribeContents",
+			Handler:    _BluetoothGattCharacteristicService_DescribeContents_Handler,
 		},
 		{
-			MethodName: "GetAddress",
-			Handler:    _AdapterService_GetAddress_Handler,
+			MethodName: "GetDescriptor",
+			Handler:    _BluetoothGattCharacteristicService_GetDescriptor_Handler,
 		},
 		{
-			MethodName: "GetBondedDevices",
-			Handler:    _AdapterService_GetBondedDevices_Handler,
+			MethodName: "GetDescriptors",
+			Handler:    _BluetoothGattCharacteristicService_GetDescriptors_Handler,
 		},
 		{
-			MethodName: "StartDiscovery",
-			Handler:    _AdapterService_StartDiscovery_Handler,
+			MethodName: "GetFloatValue",
+			Handler:    _BluetoothGattCharacteristicService_GetFloatValue_Handler,
 		},
 		{
-			MethodName: "CancelDiscovery",
-			Handler:    _AdapterService_CancelDiscovery_Handler,
+			MethodName: "GetInstanceId",
+			Handler:    _BluetoothGattCharacteristicService_GetInstanceId_Handler,
 		},
 		{
-			MethodName: "GetLeScanner",
-			Handler:    _AdapterService_GetLeScanner_Handler,
+			MethodName: "GetIntValue",
+			Handler:    _BluetoothGattCharacteristicService_GetIntValue_Handler,
 		},
 		{
-			MethodName: "GetLeAdvertiser",
-			Handler:    _AdapterService_GetLeAdvertiser_Handler,
+			MethodName: "GetPermissions",
+			Handler:    _BluetoothGattCharacteristicService_GetPermissions_Handler,
 		},
 		{
-			MethodName: "ListenRfcomm",
-			Handler:    _AdapterService_ListenRfcomm_Handler,
+			MethodName: "GetProperties",
+			Handler:    _BluetoothGattCharacteristicService_GetProperties_Handler,
+		},
+		{
+			MethodName: "GetService",
+			Handler:    _BluetoothGattCharacteristicService_GetService_Handler,
+		},
+		{
+			MethodName: "GetStringValue",
+			Handler:    _BluetoothGattCharacteristicService_GetStringValue_Handler,
+		},
+		{
+			MethodName: "GetUuid",
+			Handler:    _BluetoothGattCharacteristicService_GetUuid_Handler,
+		},
+		{
+			MethodName: "GetValue",
+			Handler:    _BluetoothGattCharacteristicService_GetValue_Handler,
+		},
+		{
+			MethodName: "GetWriteType",
+			Handler:    _BluetoothGattCharacteristicService_GetWriteType_Handler,
+		},
+		{
+			MethodName: "SetValue1",
+			Handler:    _BluetoothGattCharacteristicService_SetValue1_Handler,
+		},
+		{
+			MethodName: "SetValue3_1",
+			Handler:    _BluetoothGattCharacteristicService_SetValue3_1_Handler,
+		},
+		{
+			MethodName: "SetValue4_2",
+			Handler:    _BluetoothGattCharacteristicService_SetValue4_2_Handler,
+		},
+		{
+			MethodName: "SetValue1_3",
+			Handler:    _BluetoothGattCharacteristicService_SetValue1_3_Handler,
+		},
+		{
+			MethodName: "SetWriteType",
+			Handler:    _BluetoothGattCharacteristicService_SetWriteType_Handler,
+		},
+		{
+			MethodName: "WriteToParcel",
+			Handler:    _BluetoothGattCharacteristicService_WriteToParcel_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/bluetooth/bluetooth.proto",
-}
-
-const (
-	SocketService_Connect_FullMethodName         = "/bluetooth.SocketService/Connect"
-	SocketService_GetInputStream_FullMethodName  = "/bluetooth.SocketService/GetInputStream"
-	SocketService_GetOutputStream_FullMethodName = "/bluetooth.SocketService/GetOutputStream"
-	SocketService_RemoteDevice_FullMethodName    = "/bluetooth.SocketService/RemoteDevice"
-)
-
-// SocketServiceClient is the client API for SocketService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type SocketServiceClient interface {
-	Connect(ctx context.Context, in *ConnectRequest, opts ...grpc.CallOption) (*ConnectResponse, error)
-	GetInputStream(ctx context.Context, in *GetInputStreamRequest, opts ...grpc.CallOption) (*GetInputStreamResponse, error)
-	GetOutputStream(ctx context.Context, in *GetOutputStreamRequest, opts ...grpc.CallOption) (*GetOutputStreamResponse, error)
-	RemoteDevice(ctx context.Context, in *RemoteDeviceRequest, opts ...grpc.CallOption) (*RemoteDeviceResponse, error)
-}
-
-type socketServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewSocketServiceClient(cc grpc.ClientConnInterface) SocketServiceClient {
-	return &socketServiceClient{cc}
-}
-
-func (c *socketServiceClient) Connect(ctx context.Context, in *ConnectRequest, opts ...grpc.CallOption) (*ConnectResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ConnectResponse)
-	err := c.cc.Invoke(ctx, SocketService_Connect_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *socketServiceClient) GetInputStream(ctx context.Context, in *GetInputStreamRequest, opts ...grpc.CallOption) (*GetInputStreamResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetInputStreamResponse)
-	err := c.cc.Invoke(ctx, SocketService_GetInputStream_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *socketServiceClient) GetOutputStream(ctx context.Context, in *GetOutputStreamRequest, opts ...grpc.CallOption) (*GetOutputStreamResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetOutputStreamResponse)
-	err := c.cc.Invoke(ctx, SocketService_GetOutputStream_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *socketServiceClient) RemoteDevice(ctx context.Context, in *RemoteDeviceRequest, opts ...grpc.CallOption) (*RemoteDeviceResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RemoteDeviceResponse)
-	err := c.cc.Invoke(ctx, SocketService_RemoteDevice_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// SocketServiceServer is the server API for SocketService service.
-// All implementations must embed UnimplementedSocketServiceServer
-// for forward compatibility.
-type SocketServiceServer interface {
-	Connect(context.Context, *ConnectRequest) (*ConnectResponse, error)
-	GetInputStream(context.Context, *GetInputStreamRequest) (*GetInputStreamResponse, error)
-	GetOutputStream(context.Context, *GetOutputStreamRequest) (*GetOutputStreamResponse, error)
-	RemoteDevice(context.Context, *RemoteDeviceRequest) (*RemoteDeviceResponse, error)
-	mustEmbedUnimplementedSocketServiceServer()
-}
-
-// UnimplementedSocketServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedSocketServiceServer struct{}
-
-func (UnimplementedSocketServiceServer) Connect(context.Context, *ConnectRequest) (*ConnectResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Connect not implemented")
-}
-func (UnimplementedSocketServiceServer) GetInputStream(context.Context, *GetInputStreamRequest) (*GetInputStreamResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetInputStream not implemented")
-}
-func (UnimplementedSocketServiceServer) GetOutputStream(context.Context, *GetOutputStreamRequest) (*GetOutputStreamResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetOutputStream not implemented")
-}
-func (UnimplementedSocketServiceServer) RemoteDevice(context.Context, *RemoteDeviceRequest) (*RemoteDeviceResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RemoteDevice not implemented")
-}
-func (UnimplementedSocketServiceServer) mustEmbedUnimplementedSocketServiceServer() {}
-func (UnimplementedSocketServiceServer) testEmbeddedByValue()                       {}
-
-// UnsafeSocketServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to SocketServiceServer will
-// result in compilation errors.
-type UnsafeSocketServiceServer interface {
-	mustEmbedUnimplementedSocketServiceServer()
-}
-
-func RegisterSocketServiceServer(s grpc.ServiceRegistrar, srv SocketServiceServer) {
-	// If the following call panics, it indicates UnimplementedSocketServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&SocketService_ServiceDesc, srv)
-}
-
-func _SocketService_Connect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ConnectRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SocketServiceServer).Connect(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SocketService_Connect_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SocketServiceServer).Connect(ctx, req.(*ConnectRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SocketService_GetInputStream_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetInputStreamRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SocketServiceServer).GetInputStream(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SocketService_GetInputStream_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SocketServiceServer).GetInputStream(ctx, req.(*GetInputStreamRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SocketService_GetOutputStream_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOutputStreamRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SocketServiceServer).GetOutputStream(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SocketService_GetOutputStream_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SocketServiceServer).GetOutputStream(ctx, req.(*GetOutputStreamRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SocketService_RemoteDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoteDeviceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SocketServiceServer).RemoteDevice(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SocketService_RemoteDevice_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SocketServiceServer).RemoteDevice(ctx, req.(*RemoteDeviceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// SocketService_ServiceDesc is the grpc.ServiceDesc for SocketService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var SocketService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth.SocketService",
-	HandlerType: (*SocketServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Connect",
-			Handler:    _SocketService_Connect_Handler,
-		},
-		{
-			MethodName: "GetInputStream",
-			Handler:    _SocketService_GetInputStream_Handler,
-		},
-		{
-			MethodName: "GetOutputStream",
-			Handler:    _SocketService_GetOutputStream_Handler,
-		},
-		{
-			MethodName: "RemoteDevice",
-			Handler:    _SocketService_RemoteDevice_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/bluetooth/bluetooth.proto",
-}
-
-const (
-	ServerSocketService_Accept_FullMethodName = "/bluetooth.ServerSocketService/Accept"
-)
-
-// ServerSocketServiceClient is the client API for ServerSocketService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ServerSocketServiceClient interface {
-	Accept(ctx context.Context, in *AcceptRequest, opts ...grpc.CallOption) (*AcceptResponse, error)
-}
-
-type serverSocketServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewServerSocketServiceClient(cc grpc.ClientConnInterface) ServerSocketServiceClient {
-	return &serverSocketServiceClient{cc}
-}
-
-func (c *serverSocketServiceClient) Accept(ctx context.Context, in *AcceptRequest, opts ...grpc.CallOption) (*AcceptResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AcceptResponse)
-	err := c.cc.Invoke(ctx, ServerSocketService_Accept_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// ServerSocketServiceServer is the server API for ServerSocketService service.
-// All implementations must embed UnimplementedServerSocketServiceServer
-// for forward compatibility.
-type ServerSocketServiceServer interface {
-	Accept(context.Context, *AcceptRequest) (*AcceptResponse, error)
-	mustEmbedUnimplementedServerSocketServiceServer()
-}
-
-// UnimplementedServerSocketServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedServerSocketServiceServer struct{}
-
-func (UnimplementedServerSocketServiceServer) Accept(context.Context, *AcceptRequest) (*AcceptResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Accept not implemented")
-}
-func (UnimplementedServerSocketServiceServer) mustEmbedUnimplementedServerSocketServiceServer() {}
-func (UnimplementedServerSocketServiceServer) testEmbeddedByValue()                             {}
-
-// UnsafeServerSocketServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ServerSocketServiceServer will
-// result in compilation errors.
-type UnsafeServerSocketServiceServer interface {
-	mustEmbedUnimplementedServerSocketServiceServer()
-}
-
-func RegisterServerSocketServiceServer(s grpc.ServiceRegistrar, srv ServerSocketServiceServer) {
-	// If the following call panics, it indicates UnimplementedServerSocketServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&ServerSocketService_ServiceDesc, srv)
-}
-
-func _ServerSocketService_Accept_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AcceptRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServerSocketServiceServer).Accept(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ServerSocketService_Accept_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServerSocketServiceServer).Accept(ctx, req.(*AcceptRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// ServerSocketService_ServiceDesc is the grpc.ServiceDesc for ServerSocketService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var ServerSocketService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth.ServerSocketService",
-	HandlerType: (*ServerSocketServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Accept",
-			Handler:    _ServerSocketService_Accept_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/bluetooth/bluetooth.proto",
-}
-
-const (
-	LeScannerService_StartScan_FullMethodName = "/bluetooth.LeScannerService/StartScan"
-	LeScannerService_StopScan_FullMethodName  = "/bluetooth.LeScannerService/StopScan"
-)
-
-// LeScannerServiceClient is the client API for LeScannerService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type LeScannerServiceClient interface {
-	StartScan(ctx context.Context, in *StartScanRequest, opts ...grpc.CallOption) (*StartScanResponse, error)
-	StopScan(ctx context.Context, in *StopScanRequest, opts ...grpc.CallOption) (*StopScanResponse, error)
-}
-
-type leScannerServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewLeScannerServiceClient(cc grpc.ClientConnInterface) LeScannerServiceClient {
-	return &leScannerServiceClient{cc}
-}
-
-func (c *leScannerServiceClient) StartScan(ctx context.Context, in *StartScanRequest, opts ...grpc.CallOption) (*StartScanResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StartScanResponse)
-	err := c.cc.Invoke(ctx, LeScannerService_StartScan_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *leScannerServiceClient) StopScan(ctx context.Context, in *StopScanRequest, opts ...grpc.CallOption) (*StopScanResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StopScanResponse)
-	err := c.cc.Invoke(ctx, LeScannerService_StopScan_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// LeScannerServiceServer is the server API for LeScannerService service.
-// All implementations must embed UnimplementedLeScannerServiceServer
-// for forward compatibility.
-type LeScannerServiceServer interface {
-	StartScan(context.Context, *StartScanRequest) (*StartScanResponse, error)
-	StopScan(context.Context, *StopScanRequest) (*StopScanResponse, error)
-	mustEmbedUnimplementedLeScannerServiceServer()
-}
-
-// UnimplementedLeScannerServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedLeScannerServiceServer struct{}
-
-func (UnimplementedLeScannerServiceServer) StartScan(context.Context, *StartScanRequest) (*StartScanResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method StartScan not implemented")
-}
-func (UnimplementedLeScannerServiceServer) StopScan(context.Context, *StopScanRequest) (*StopScanResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method StopScan not implemented")
-}
-func (UnimplementedLeScannerServiceServer) mustEmbedUnimplementedLeScannerServiceServer() {}
-func (UnimplementedLeScannerServiceServer) testEmbeddedByValue()                          {}
-
-// UnsafeLeScannerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to LeScannerServiceServer will
-// result in compilation errors.
-type UnsafeLeScannerServiceServer interface {
-	mustEmbedUnimplementedLeScannerServiceServer()
-}
-
-func RegisterLeScannerServiceServer(s grpc.ServiceRegistrar, srv LeScannerServiceServer) {
-	// If the following call panics, it indicates UnimplementedLeScannerServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&LeScannerService_ServiceDesc, srv)
-}
-
-func _LeScannerService_StartScan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartScanRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LeScannerServiceServer).StartScan(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: LeScannerService_StartScan_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LeScannerServiceServer).StartScan(ctx, req.(*StartScanRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _LeScannerService_StopScan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StopScanRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LeScannerServiceServer).StopScan(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: LeScannerService_StopScan_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LeScannerServiceServer).StopScan(ctx, req.(*StopScanRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// LeScannerService_ServiceDesc is the grpc.ServiceDesc for LeScannerService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var LeScannerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth.LeScannerService",
-	HandlerType: (*LeScannerServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "StartScan",
-			Handler:    _LeScannerService_StartScan_Handler,
-		},
-		{
-			MethodName: "StopScan",
-			Handler:    _LeScannerService_StopScan_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/bluetooth/bluetooth.proto",
-}
-
-const (
-	ScanFilterBuilderService_SetDeviceName_FullMethodName    = "/bluetooth.ScanFilterBuilderService/SetDeviceName"
-	ScanFilterBuilderService_SetDeviceAddress_FullMethodName = "/bluetooth.ScanFilterBuilderService/SetDeviceAddress"
-	ScanFilterBuilderService_SetServiceUuid_FullMethodName   = "/bluetooth.ScanFilterBuilderService/SetServiceUuid"
-	ScanFilterBuilderService_Build_FullMethodName            = "/bluetooth.ScanFilterBuilderService/Build"
-)
-
-// ScanFilterBuilderServiceClient is the client API for ScanFilterBuilderService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ScanFilterBuilderServiceClient interface {
-	SetDeviceName(ctx context.Context, in *SetDeviceNameRequest, opts ...grpc.CallOption) (*SetDeviceNameResponse, error)
-	SetDeviceAddress(ctx context.Context, in *SetDeviceAddressRequest, opts ...grpc.CallOption) (*SetDeviceAddressResponse, error)
-	SetServiceUuid(ctx context.Context, in *SetServiceUuidRequest, opts ...grpc.CallOption) (*SetServiceUuidResponse, error)
-	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
-}
-
-type scanFilterBuilderServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewScanFilterBuilderServiceClient(cc grpc.ClientConnInterface) ScanFilterBuilderServiceClient {
-	return &scanFilterBuilderServiceClient{cc}
-}
-
-func (c *scanFilterBuilderServiceClient) SetDeviceName(ctx context.Context, in *SetDeviceNameRequest, opts ...grpc.CallOption) (*SetDeviceNameResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetDeviceNameResponse)
-	err := c.cc.Invoke(ctx, ScanFilterBuilderService_SetDeviceName_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *scanFilterBuilderServiceClient) SetDeviceAddress(ctx context.Context, in *SetDeviceAddressRequest, opts ...grpc.CallOption) (*SetDeviceAddressResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetDeviceAddressResponse)
-	err := c.cc.Invoke(ctx, ScanFilterBuilderService_SetDeviceAddress_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *scanFilterBuilderServiceClient) SetServiceUuid(ctx context.Context, in *SetServiceUuidRequest, opts ...grpc.CallOption) (*SetServiceUuidResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetServiceUuidResponse)
-	err := c.cc.Invoke(ctx, ScanFilterBuilderService_SetServiceUuid_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *scanFilterBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BuildResponse)
-	err := c.cc.Invoke(ctx, ScanFilterBuilderService_Build_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// ScanFilterBuilderServiceServer is the server API for ScanFilterBuilderService service.
-// All implementations must embed UnimplementedScanFilterBuilderServiceServer
-// for forward compatibility.
-type ScanFilterBuilderServiceServer interface {
-	SetDeviceName(context.Context, *SetDeviceNameRequest) (*SetDeviceNameResponse, error)
-	SetDeviceAddress(context.Context, *SetDeviceAddressRequest) (*SetDeviceAddressResponse, error)
-	SetServiceUuid(context.Context, *SetServiceUuidRequest) (*SetServiceUuidResponse, error)
-	Build(context.Context, *BuildRequest) (*BuildResponse, error)
-	mustEmbedUnimplementedScanFilterBuilderServiceServer()
-}
-
-// UnimplementedScanFilterBuilderServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedScanFilterBuilderServiceServer struct{}
-
-func (UnimplementedScanFilterBuilderServiceServer) SetDeviceName(context.Context, *SetDeviceNameRequest) (*SetDeviceNameResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetDeviceName not implemented")
-}
-func (UnimplementedScanFilterBuilderServiceServer) SetDeviceAddress(context.Context, *SetDeviceAddressRequest) (*SetDeviceAddressResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetDeviceAddress not implemented")
-}
-func (UnimplementedScanFilterBuilderServiceServer) SetServiceUuid(context.Context, *SetServiceUuidRequest) (*SetServiceUuidResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetServiceUuid not implemented")
-}
-func (UnimplementedScanFilterBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
-}
-func (UnimplementedScanFilterBuilderServiceServer) mustEmbedUnimplementedScanFilterBuilderServiceServer() {
-}
-func (UnimplementedScanFilterBuilderServiceServer) testEmbeddedByValue() {}
-
-// UnsafeScanFilterBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ScanFilterBuilderServiceServer will
-// result in compilation errors.
-type UnsafeScanFilterBuilderServiceServer interface {
-	mustEmbedUnimplementedScanFilterBuilderServiceServer()
-}
-
-func RegisterScanFilterBuilderServiceServer(s grpc.ServiceRegistrar, srv ScanFilterBuilderServiceServer) {
-	// If the following call panics, it indicates UnimplementedScanFilterBuilderServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&ScanFilterBuilderService_ServiceDesc, srv)
-}
-
-func _ScanFilterBuilderService_SetDeviceName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetDeviceNameRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanFilterBuilderServiceServer).SetDeviceName(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanFilterBuilderService_SetDeviceName_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanFilterBuilderServiceServer).SetDeviceName(ctx, req.(*SetDeviceNameRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ScanFilterBuilderService_SetDeviceAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetDeviceAddressRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanFilterBuilderServiceServer).SetDeviceAddress(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanFilterBuilderService_SetDeviceAddress_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanFilterBuilderServiceServer).SetDeviceAddress(ctx, req.(*SetDeviceAddressRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ScanFilterBuilderService_SetServiceUuid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetServiceUuidRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanFilterBuilderServiceServer).SetServiceUuid(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanFilterBuilderService_SetServiceUuid_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanFilterBuilderServiceServer).SetServiceUuid(ctx, req.(*SetServiceUuidRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ScanFilterBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BuildRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanFilterBuilderServiceServer).Build(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanFilterBuilderService_Build_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanFilterBuilderServiceServer).Build(ctx, req.(*BuildRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// ScanFilterBuilderService_ServiceDesc is the grpc.ServiceDesc for ScanFilterBuilderService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var ScanFilterBuilderService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth.ScanFilterBuilderService",
-	HandlerType: (*ScanFilterBuilderServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "SetDeviceName",
-			Handler:    _ScanFilterBuilderService_SetDeviceName_Handler,
-		},
-		{
-			MethodName: "SetDeviceAddress",
-			Handler:    _ScanFilterBuilderService_SetDeviceAddress_Handler,
-		},
-		{
-			MethodName: "SetServiceUuid",
-			Handler:    _ScanFilterBuilderService_SetServiceUuid_Handler,
-		},
-		{
-			MethodName: "Build",
-			Handler:    _ScanFilterBuilderService_Build_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/bluetooth/bluetooth.proto",
-}
-
-const (
-	ScanSettingsBuilderService_SetScanMode_FullMethodName    = "/bluetooth.ScanSettingsBuilderService/SetScanMode"
-	ScanSettingsBuilderService_SetReportDelay_FullMethodName = "/bluetooth.ScanSettingsBuilderService/SetReportDelay"
-	ScanSettingsBuilderService_Build_FullMethodName          = "/bluetooth.ScanSettingsBuilderService/Build"
-)
-
-// ScanSettingsBuilderServiceClient is the client API for ScanSettingsBuilderService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ScanSettingsBuilderServiceClient interface {
-	SetScanMode(ctx context.Context, in *SetScanModeRequest, opts ...grpc.CallOption) (*SetScanModeResponse, error)
-	SetReportDelay(ctx context.Context, in *SetReportDelayRequest, opts ...grpc.CallOption) (*SetReportDelayResponse, error)
-	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
-}
-
-type scanSettingsBuilderServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewScanSettingsBuilderServiceClient(cc grpc.ClientConnInterface) ScanSettingsBuilderServiceClient {
-	return &scanSettingsBuilderServiceClient{cc}
-}
-
-func (c *scanSettingsBuilderServiceClient) SetScanMode(ctx context.Context, in *SetScanModeRequest, opts ...grpc.CallOption) (*SetScanModeResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetScanModeResponse)
-	err := c.cc.Invoke(ctx, ScanSettingsBuilderService_SetScanMode_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *scanSettingsBuilderServiceClient) SetReportDelay(ctx context.Context, in *SetReportDelayRequest, opts ...grpc.CallOption) (*SetReportDelayResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetReportDelayResponse)
-	err := c.cc.Invoke(ctx, ScanSettingsBuilderService_SetReportDelay_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *scanSettingsBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BuildResponse)
-	err := c.cc.Invoke(ctx, ScanSettingsBuilderService_Build_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// ScanSettingsBuilderServiceServer is the server API for ScanSettingsBuilderService service.
-// All implementations must embed UnimplementedScanSettingsBuilderServiceServer
-// for forward compatibility.
-type ScanSettingsBuilderServiceServer interface {
-	SetScanMode(context.Context, *SetScanModeRequest) (*SetScanModeResponse, error)
-	SetReportDelay(context.Context, *SetReportDelayRequest) (*SetReportDelayResponse, error)
-	Build(context.Context, *BuildRequest) (*BuildResponse, error)
-	mustEmbedUnimplementedScanSettingsBuilderServiceServer()
-}
-
-// UnimplementedScanSettingsBuilderServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedScanSettingsBuilderServiceServer struct{}
-
-func (UnimplementedScanSettingsBuilderServiceServer) SetScanMode(context.Context, *SetScanModeRequest) (*SetScanModeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetScanMode not implemented")
-}
-func (UnimplementedScanSettingsBuilderServiceServer) SetReportDelay(context.Context, *SetReportDelayRequest) (*SetReportDelayResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetReportDelay not implemented")
-}
-func (UnimplementedScanSettingsBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
-}
-func (UnimplementedScanSettingsBuilderServiceServer) mustEmbedUnimplementedScanSettingsBuilderServiceServer() {
-}
-func (UnimplementedScanSettingsBuilderServiceServer) testEmbeddedByValue() {}
-
-// UnsafeScanSettingsBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ScanSettingsBuilderServiceServer will
-// result in compilation errors.
-type UnsafeScanSettingsBuilderServiceServer interface {
-	mustEmbedUnimplementedScanSettingsBuilderServiceServer()
-}
-
-func RegisterScanSettingsBuilderServiceServer(s grpc.ServiceRegistrar, srv ScanSettingsBuilderServiceServer) {
-	// If the following call panics, it indicates UnimplementedScanSettingsBuilderServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&ScanSettingsBuilderService_ServiceDesc, srv)
-}
-
-func _ScanSettingsBuilderService_SetScanMode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetScanModeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanSettingsBuilderServiceServer).SetScanMode(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanSettingsBuilderService_SetScanMode_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanSettingsBuilderServiceServer).SetScanMode(ctx, req.(*SetScanModeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ScanSettingsBuilderService_SetReportDelay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetReportDelayRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanSettingsBuilderServiceServer).SetReportDelay(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanSettingsBuilderService_SetReportDelay_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanSettingsBuilderServiceServer).SetReportDelay(ctx, req.(*SetReportDelayRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ScanSettingsBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BuildRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ScanSettingsBuilderServiceServer).Build(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ScanSettingsBuilderService_Build_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ScanSettingsBuilderServiceServer).Build(ctx, req.(*BuildRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// ScanSettingsBuilderService_ServiceDesc is the grpc.ServiceDesc for ScanSettingsBuilderService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var ScanSettingsBuilderService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth.ScanSettingsBuilderService",
-	HandlerType: (*ScanSettingsBuilderServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "SetScanMode",
-			Handler:    _ScanSettingsBuilderService_SetScanMode_Handler,
-		},
-		{
-			MethodName: "SetReportDelay",
-			Handler:    _ScanSettingsBuilderService_SetReportDelay_Handler,
-		},
-		{
-			MethodName: "Build",
-			Handler:    _ScanSettingsBuilderService_Build_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/bluetooth/bluetooth.proto",
-}
-
-const (
-	LeAdvertiserService_StartAdvertising_FullMethodName = "/bluetooth.LeAdvertiserService/StartAdvertising"
-	LeAdvertiserService_StopAdvertising_FullMethodName  = "/bluetooth.LeAdvertiserService/StopAdvertising"
-)
-
-// LeAdvertiserServiceClient is the client API for LeAdvertiserService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type LeAdvertiserServiceClient interface {
-	StartAdvertising(ctx context.Context, in *StartAdvertisingRequest, opts ...grpc.CallOption) (*StartAdvertisingResponse, error)
-	StopAdvertising(ctx context.Context, in *StopAdvertisingRequest, opts ...grpc.CallOption) (*StopAdvertisingResponse, error)
-}
-
-type leAdvertiserServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewLeAdvertiserServiceClient(cc grpc.ClientConnInterface) LeAdvertiserServiceClient {
-	return &leAdvertiserServiceClient{cc}
-}
-
-func (c *leAdvertiserServiceClient) StartAdvertising(ctx context.Context, in *StartAdvertisingRequest, opts ...grpc.CallOption) (*StartAdvertisingResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StartAdvertisingResponse)
-	err := c.cc.Invoke(ctx, LeAdvertiserService_StartAdvertising_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *leAdvertiserServiceClient) StopAdvertising(ctx context.Context, in *StopAdvertisingRequest, opts ...grpc.CallOption) (*StopAdvertisingResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(StopAdvertisingResponse)
-	err := c.cc.Invoke(ctx, LeAdvertiserService_StopAdvertising_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// LeAdvertiserServiceServer is the server API for LeAdvertiserService service.
-// All implementations must embed UnimplementedLeAdvertiserServiceServer
-// for forward compatibility.
-type LeAdvertiserServiceServer interface {
-	StartAdvertising(context.Context, *StartAdvertisingRequest) (*StartAdvertisingResponse, error)
-	StopAdvertising(context.Context, *StopAdvertisingRequest) (*StopAdvertisingResponse, error)
-	mustEmbedUnimplementedLeAdvertiserServiceServer()
-}
-
-// UnimplementedLeAdvertiserServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedLeAdvertiserServiceServer struct{}
-
-func (UnimplementedLeAdvertiserServiceServer) StartAdvertising(context.Context, *StartAdvertisingRequest) (*StartAdvertisingResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method StartAdvertising not implemented")
-}
-func (UnimplementedLeAdvertiserServiceServer) StopAdvertising(context.Context, *StopAdvertisingRequest) (*StopAdvertisingResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method StopAdvertising not implemented")
-}
-func (UnimplementedLeAdvertiserServiceServer) mustEmbedUnimplementedLeAdvertiserServiceServer() {}
-func (UnimplementedLeAdvertiserServiceServer) testEmbeddedByValue()                             {}
-
-// UnsafeLeAdvertiserServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to LeAdvertiserServiceServer will
-// result in compilation errors.
-type UnsafeLeAdvertiserServiceServer interface {
-	mustEmbedUnimplementedLeAdvertiserServiceServer()
-}
-
-func RegisterLeAdvertiserServiceServer(s grpc.ServiceRegistrar, srv LeAdvertiserServiceServer) {
-	// If the following call panics, it indicates UnimplementedLeAdvertiserServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&LeAdvertiserService_ServiceDesc, srv)
-}
-
-func _LeAdvertiserService_StartAdvertising_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartAdvertisingRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LeAdvertiserServiceServer).StartAdvertising(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: LeAdvertiserService_StartAdvertising_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LeAdvertiserServiceServer).StartAdvertising(ctx, req.(*StartAdvertisingRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _LeAdvertiserService_StopAdvertising_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StopAdvertisingRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LeAdvertiserServiceServer).StopAdvertising(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: LeAdvertiserService_StopAdvertising_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LeAdvertiserServiceServer).StopAdvertising(ctx, req.(*StopAdvertisingRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// LeAdvertiserService_ServiceDesc is the grpc.ServiceDesc for LeAdvertiserService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var LeAdvertiserService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth.LeAdvertiserService",
-	HandlerType: (*LeAdvertiserServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "StartAdvertising",
-			Handler:    _LeAdvertiserService_StartAdvertising_Handler,
-		},
-		{
-			MethodName: "StopAdvertising",
-			Handler:    _LeAdvertiserService_StopAdvertising_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/bluetooth/bluetooth.proto",
-}
-
-const (
-	AdvertiseSettingsBuilderService_SetAdvertiseMode_FullMethodName = "/bluetooth.AdvertiseSettingsBuilderService/SetAdvertiseMode"
-	AdvertiseSettingsBuilderService_SetConnectable_FullMethodName   = "/bluetooth.AdvertiseSettingsBuilderService/SetConnectable"
-	AdvertiseSettingsBuilderService_SetTimeout_FullMethodName       = "/bluetooth.AdvertiseSettingsBuilderService/SetTimeout"
-	AdvertiseSettingsBuilderService_Build_FullMethodName            = "/bluetooth.AdvertiseSettingsBuilderService/Build"
-)
-
-// AdvertiseSettingsBuilderServiceClient is the client API for AdvertiseSettingsBuilderService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type AdvertiseSettingsBuilderServiceClient interface {
-	SetAdvertiseMode(ctx context.Context, in *SetAdvertiseModeRequest, opts ...grpc.CallOption) (*SetAdvertiseModeResponse, error)
-	SetConnectable(ctx context.Context, in *SetConnectableRequest, opts ...grpc.CallOption) (*SetConnectableResponse, error)
-	SetTimeout(ctx context.Context, in *SetTimeoutRequest, opts ...grpc.CallOption) (*SetTimeoutResponse, error)
-	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
-}
-
-type advertiseSettingsBuilderServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewAdvertiseSettingsBuilderServiceClient(cc grpc.ClientConnInterface) AdvertiseSettingsBuilderServiceClient {
-	return &advertiseSettingsBuilderServiceClient{cc}
-}
-
-func (c *advertiseSettingsBuilderServiceClient) SetAdvertiseMode(ctx context.Context, in *SetAdvertiseModeRequest, opts ...grpc.CallOption) (*SetAdvertiseModeResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetAdvertiseModeResponse)
-	err := c.cc.Invoke(ctx, AdvertiseSettingsBuilderService_SetAdvertiseMode_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *advertiseSettingsBuilderServiceClient) SetConnectable(ctx context.Context, in *SetConnectableRequest, opts ...grpc.CallOption) (*SetConnectableResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetConnectableResponse)
-	err := c.cc.Invoke(ctx, AdvertiseSettingsBuilderService_SetConnectable_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *advertiseSettingsBuilderServiceClient) SetTimeout(ctx context.Context, in *SetTimeoutRequest, opts ...grpc.CallOption) (*SetTimeoutResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetTimeoutResponse)
-	err := c.cc.Invoke(ctx, AdvertiseSettingsBuilderService_SetTimeout_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *advertiseSettingsBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BuildResponse)
-	err := c.cc.Invoke(ctx, AdvertiseSettingsBuilderService_Build_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// AdvertiseSettingsBuilderServiceServer is the server API for AdvertiseSettingsBuilderService service.
-// All implementations must embed UnimplementedAdvertiseSettingsBuilderServiceServer
-// for forward compatibility.
-type AdvertiseSettingsBuilderServiceServer interface {
-	SetAdvertiseMode(context.Context, *SetAdvertiseModeRequest) (*SetAdvertiseModeResponse, error)
-	SetConnectable(context.Context, *SetConnectableRequest) (*SetConnectableResponse, error)
-	SetTimeout(context.Context, *SetTimeoutRequest) (*SetTimeoutResponse, error)
-	Build(context.Context, *BuildRequest) (*BuildResponse, error)
-	mustEmbedUnimplementedAdvertiseSettingsBuilderServiceServer()
-}
-
-// UnimplementedAdvertiseSettingsBuilderServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedAdvertiseSettingsBuilderServiceServer struct{}
-
-func (UnimplementedAdvertiseSettingsBuilderServiceServer) SetAdvertiseMode(context.Context, *SetAdvertiseModeRequest) (*SetAdvertiseModeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetAdvertiseMode not implemented")
-}
-func (UnimplementedAdvertiseSettingsBuilderServiceServer) SetConnectable(context.Context, *SetConnectableRequest) (*SetConnectableResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetConnectable not implemented")
-}
-func (UnimplementedAdvertiseSettingsBuilderServiceServer) SetTimeout(context.Context, *SetTimeoutRequest) (*SetTimeoutResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetTimeout not implemented")
-}
-func (UnimplementedAdvertiseSettingsBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
-}
-func (UnimplementedAdvertiseSettingsBuilderServiceServer) mustEmbedUnimplementedAdvertiseSettingsBuilderServiceServer() {
-}
-func (UnimplementedAdvertiseSettingsBuilderServiceServer) testEmbeddedByValue() {}
-
-// UnsafeAdvertiseSettingsBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to AdvertiseSettingsBuilderServiceServer will
-// result in compilation errors.
-type UnsafeAdvertiseSettingsBuilderServiceServer interface {
-	mustEmbedUnimplementedAdvertiseSettingsBuilderServiceServer()
-}
-
-func RegisterAdvertiseSettingsBuilderServiceServer(s grpc.ServiceRegistrar, srv AdvertiseSettingsBuilderServiceServer) {
-	// If the following call panics, it indicates UnimplementedAdvertiseSettingsBuilderServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&AdvertiseSettingsBuilderService_ServiceDesc, srv)
-}
-
-func _AdvertiseSettingsBuilderService_SetAdvertiseMode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetAdvertiseModeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdvertiseSettingsBuilderServiceServer).SetAdvertiseMode(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AdvertiseSettingsBuilderService_SetAdvertiseMode_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdvertiseSettingsBuilderServiceServer).SetAdvertiseMode(ctx, req.(*SetAdvertiseModeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AdvertiseSettingsBuilderService_SetConnectable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetConnectableRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdvertiseSettingsBuilderServiceServer).SetConnectable(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AdvertiseSettingsBuilderService_SetConnectable_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdvertiseSettingsBuilderServiceServer).SetConnectable(ctx, req.(*SetConnectableRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AdvertiseSettingsBuilderService_SetTimeout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetTimeoutRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdvertiseSettingsBuilderServiceServer).SetTimeout(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AdvertiseSettingsBuilderService_SetTimeout_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdvertiseSettingsBuilderServiceServer).SetTimeout(ctx, req.(*SetTimeoutRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AdvertiseSettingsBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BuildRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdvertiseSettingsBuilderServiceServer).Build(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AdvertiseSettingsBuilderService_Build_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdvertiseSettingsBuilderServiceServer).Build(ctx, req.(*BuildRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// AdvertiseSettingsBuilderService_ServiceDesc is the grpc.ServiceDesc for AdvertiseSettingsBuilderService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var AdvertiseSettingsBuilderService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth.AdvertiseSettingsBuilderService",
-	HandlerType: (*AdvertiseSettingsBuilderServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "SetAdvertiseMode",
-			Handler:    _AdvertiseSettingsBuilderService_SetAdvertiseMode_Handler,
-		},
-		{
-			MethodName: "SetConnectable",
-			Handler:    _AdvertiseSettingsBuilderService_SetConnectable_Handler,
-		},
-		{
-			MethodName: "SetTimeout",
-			Handler:    _AdvertiseSettingsBuilderService_SetTimeout_Handler,
-		},
-		{
-			MethodName: "Build",
-			Handler:    _AdvertiseSettingsBuilderService_Build_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/bluetooth/bluetooth.proto",
-}
-
-const (
-	AdvertiseDataBuilderService_AddServiceUuid_FullMethodName         = "/bluetooth.AdvertiseDataBuilderService/AddServiceUuid"
-	AdvertiseDataBuilderService_AddServiceData_FullMethodName         = "/bluetooth.AdvertiseDataBuilderService/AddServiceData"
-	AdvertiseDataBuilderService_AddManufacturerData_FullMethodName    = "/bluetooth.AdvertiseDataBuilderService/AddManufacturerData"
-	AdvertiseDataBuilderService_SetIncludeDeviceName_FullMethodName   = "/bluetooth.AdvertiseDataBuilderService/SetIncludeDeviceName"
-	AdvertiseDataBuilderService_SetIncludeTxPowerLevel_FullMethodName = "/bluetooth.AdvertiseDataBuilderService/SetIncludeTxPowerLevel"
-	AdvertiseDataBuilderService_Build_FullMethodName                  = "/bluetooth.AdvertiseDataBuilderService/Build"
-)
-
-// AdvertiseDataBuilderServiceClient is the client API for AdvertiseDataBuilderService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type AdvertiseDataBuilderServiceClient interface {
-	AddServiceUuid(ctx context.Context, in *AddServiceUuidRequest, opts ...grpc.CallOption) (*AddServiceUuidResponse, error)
-	AddServiceData(ctx context.Context, in *AddServiceDataRequest, opts ...grpc.CallOption) (*AddServiceDataResponse, error)
-	AddManufacturerData(ctx context.Context, in *AddManufacturerDataRequest, opts ...grpc.CallOption) (*AddManufacturerDataResponse, error)
-	SetIncludeDeviceName(ctx context.Context, in *SetIncludeDeviceNameRequest, opts ...grpc.CallOption) (*SetIncludeDeviceNameResponse, error)
-	SetIncludeTxPowerLevel(ctx context.Context, in *SetIncludeTxPowerLevelRequest, opts ...grpc.CallOption) (*SetIncludeTxPowerLevelResponse, error)
-	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
-}
-
-type advertiseDataBuilderServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewAdvertiseDataBuilderServiceClient(cc grpc.ClientConnInterface) AdvertiseDataBuilderServiceClient {
-	return &advertiseDataBuilderServiceClient{cc}
-}
-
-func (c *advertiseDataBuilderServiceClient) AddServiceUuid(ctx context.Context, in *AddServiceUuidRequest, opts ...grpc.CallOption) (*AddServiceUuidResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddServiceUuidResponse)
-	err := c.cc.Invoke(ctx, AdvertiseDataBuilderService_AddServiceUuid_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *advertiseDataBuilderServiceClient) AddServiceData(ctx context.Context, in *AddServiceDataRequest, opts ...grpc.CallOption) (*AddServiceDataResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddServiceDataResponse)
-	err := c.cc.Invoke(ctx, AdvertiseDataBuilderService_AddServiceData_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *advertiseDataBuilderServiceClient) AddManufacturerData(ctx context.Context, in *AddManufacturerDataRequest, opts ...grpc.CallOption) (*AddManufacturerDataResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddManufacturerDataResponse)
-	err := c.cc.Invoke(ctx, AdvertiseDataBuilderService_AddManufacturerData_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *advertiseDataBuilderServiceClient) SetIncludeDeviceName(ctx context.Context, in *SetIncludeDeviceNameRequest, opts ...grpc.CallOption) (*SetIncludeDeviceNameResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetIncludeDeviceNameResponse)
-	err := c.cc.Invoke(ctx, AdvertiseDataBuilderService_SetIncludeDeviceName_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *advertiseDataBuilderServiceClient) SetIncludeTxPowerLevel(ctx context.Context, in *SetIncludeTxPowerLevelRequest, opts ...grpc.CallOption) (*SetIncludeTxPowerLevelResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetIncludeTxPowerLevelResponse)
-	err := c.cc.Invoke(ctx, AdvertiseDataBuilderService_SetIncludeTxPowerLevel_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *advertiseDataBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BuildResponse)
-	err := c.cc.Invoke(ctx, AdvertiseDataBuilderService_Build_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// AdvertiseDataBuilderServiceServer is the server API for AdvertiseDataBuilderService service.
-// All implementations must embed UnimplementedAdvertiseDataBuilderServiceServer
-// for forward compatibility.
-type AdvertiseDataBuilderServiceServer interface {
-	AddServiceUuid(context.Context, *AddServiceUuidRequest) (*AddServiceUuidResponse, error)
-	AddServiceData(context.Context, *AddServiceDataRequest) (*AddServiceDataResponse, error)
-	AddManufacturerData(context.Context, *AddManufacturerDataRequest) (*AddManufacturerDataResponse, error)
-	SetIncludeDeviceName(context.Context, *SetIncludeDeviceNameRequest) (*SetIncludeDeviceNameResponse, error)
-	SetIncludeTxPowerLevel(context.Context, *SetIncludeTxPowerLevelRequest) (*SetIncludeTxPowerLevelResponse, error)
-	Build(context.Context, *BuildRequest) (*BuildResponse, error)
-	mustEmbedUnimplementedAdvertiseDataBuilderServiceServer()
-}
-
-// UnimplementedAdvertiseDataBuilderServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedAdvertiseDataBuilderServiceServer struct{}
-
-func (UnimplementedAdvertiseDataBuilderServiceServer) AddServiceUuid(context.Context, *AddServiceUuidRequest) (*AddServiceUuidResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddServiceUuid not implemented")
-}
-func (UnimplementedAdvertiseDataBuilderServiceServer) AddServiceData(context.Context, *AddServiceDataRequest) (*AddServiceDataResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddServiceData not implemented")
-}
-func (UnimplementedAdvertiseDataBuilderServiceServer) AddManufacturerData(context.Context, *AddManufacturerDataRequest) (*AddManufacturerDataResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddManufacturerData not implemented")
-}
-func (UnimplementedAdvertiseDataBuilderServiceServer) SetIncludeDeviceName(context.Context, *SetIncludeDeviceNameRequest) (*SetIncludeDeviceNameResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetIncludeDeviceName not implemented")
-}
-func (UnimplementedAdvertiseDataBuilderServiceServer) SetIncludeTxPowerLevel(context.Context, *SetIncludeTxPowerLevelRequest) (*SetIncludeTxPowerLevelResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetIncludeTxPowerLevel not implemented")
-}
-func (UnimplementedAdvertiseDataBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
-}
-func (UnimplementedAdvertiseDataBuilderServiceServer) mustEmbedUnimplementedAdvertiseDataBuilderServiceServer() {
-}
-func (UnimplementedAdvertiseDataBuilderServiceServer) testEmbeddedByValue() {}
-
-// UnsafeAdvertiseDataBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to AdvertiseDataBuilderServiceServer will
-// result in compilation errors.
-type UnsafeAdvertiseDataBuilderServiceServer interface {
-	mustEmbedUnimplementedAdvertiseDataBuilderServiceServer()
-}
-
-func RegisterAdvertiseDataBuilderServiceServer(s grpc.ServiceRegistrar, srv AdvertiseDataBuilderServiceServer) {
-	// If the following call panics, it indicates UnimplementedAdvertiseDataBuilderServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&AdvertiseDataBuilderService_ServiceDesc, srv)
-}
-
-func _AdvertiseDataBuilderService_AddServiceUuid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddServiceUuidRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdvertiseDataBuilderServiceServer).AddServiceUuid(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AdvertiseDataBuilderService_AddServiceUuid_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdvertiseDataBuilderServiceServer).AddServiceUuid(ctx, req.(*AddServiceUuidRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AdvertiseDataBuilderService_AddServiceData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddServiceDataRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdvertiseDataBuilderServiceServer).AddServiceData(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AdvertiseDataBuilderService_AddServiceData_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdvertiseDataBuilderServiceServer).AddServiceData(ctx, req.(*AddServiceDataRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AdvertiseDataBuilderService_AddManufacturerData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddManufacturerDataRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdvertiseDataBuilderServiceServer).AddManufacturerData(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AdvertiseDataBuilderService_AddManufacturerData_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdvertiseDataBuilderServiceServer).AddManufacturerData(ctx, req.(*AddManufacturerDataRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AdvertiseDataBuilderService_SetIncludeDeviceName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetIncludeDeviceNameRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdvertiseDataBuilderServiceServer).SetIncludeDeviceName(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AdvertiseDataBuilderService_SetIncludeDeviceName_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdvertiseDataBuilderServiceServer).SetIncludeDeviceName(ctx, req.(*SetIncludeDeviceNameRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AdvertiseDataBuilderService_SetIncludeTxPowerLevel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetIncludeTxPowerLevelRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdvertiseDataBuilderServiceServer).SetIncludeTxPowerLevel(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AdvertiseDataBuilderService_SetIncludeTxPowerLevel_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdvertiseDataBuilderServiceServer).SetIncludeTxPowerLevel(ctx, req.(*SetIncludeTxPowerLevelRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AdvertiseDataBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BuildRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdvertiseDataBuilderServiceServer).Build(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AdvertiseDataBuilderService_Build_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdvertiseDataBuilderServiceServer).Build(ctx, req.(*BuildRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// AdvertiseDataBuilderService_ServiceDesc is the grpc.ServiceDesc for AdvertiseDataBuilderService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var AdvertiseDataBuilderService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth.AdvertiseDataBuilderService",
-	HandlerType: (*AdvertiseDataBuilderServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "AddServiceUuid",
-			Handler:    _AdvertiseDataBuilderService_AddServiceUuid_Handler,
-		},
-		{
-			MethodName: "AddServiceData",
-			Handler:    _AdvertiseDataBuilderService_AddServiceData_Handler,
-		},
-		{
-			MethodName: "AddManufacturerData",
-			Handler:    _AdvertiseDataBuilderService_AddManufacturerData_Handler,
-		},
-		{
-			MethodName: "SetIncludeDeviceName",
-			Handler:    _AdvertiseDataBuilderService_SetIncludeDeviceName_Handler,
-		},
-		{
-			MethodName: "SetIncludeTxPowerLevel",
-			Handler:    _AdvertiseDataBuilderService_SetIncludeTxPowerLevel_Handler,
-		},
-		{
-			MethodName: "Build",
-			Handler:    _AdvertiseDataBuilderService_Build_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/bluetooth/bluetooth.proto",
-}
-
-const (
-	GATTClientService_DiscoverServices_FullMethodName              = "/bluetooth.GATTClientService/DiscoverServices"
-	GATTClientService_GetServices_FullMethodName                   = "/bluetooth.GATTClientService/GetServices"
-	GATTClientService_ReadCharacteristic_FullMethodName            = "/bluetooth.GATTClientService/ReadCharacteristic"
-	GATTClientService_WriteCharacteristic_FullMethodName           = "/bluetooth.GATTClientService/WriteCharacteristic"
-	GATTClientService_SetCharacteristicNotification_FullMethodName = "/bluetooth.GATTClientService/SetCharacteristicNotification"
-	GATTClientService_RequestMtu_FullMethodName                    = "/bluetooth.GATTClientService/RequestMtu"
-	GATTClientService_ReadRemoteRssi_FullMethodName                = "/bluetooth.GATTClientService/ReadRemoteRssi"
-)
-
-// GATTClientServiceClient is the client API for GATTClientService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type GATTClientServiceClient interface {
-	DiscoverServices(ctx context.Context, in *DiscoverServicesRequest, opts ...grpc.CallOption) (*DiscoverServicesResponse, error)
-	GetServices(ctx context.Context, in *GetServicesRequest, opts ...grpc.CallOption) (*GetServicesResponse, error)
-	ReadCharacteristic(ctx context.Context, in *ReadCharacteristicRequest, opts ...grpc.CallOption) (*ReadCharacteristicResponse, error)
-	WriteCharacteristic(ctx context.Context, in *WriteCharacteristicRequest, opts ...grpc.CallOption) (*WriteCharacteristicResponse, error)
-	SetCharacteristicNotification(ctx context.Context, in *SetCharacteristicNotificationRequest, opts ...grpc.CallOption) (*SetCharacteristicNotificationResponse, error)
-	RequestMtu(ctx context.Context, in *RequestMtuRequest, opts ...grpc.CallOption) (*RequestMtuResponse, error)
-	ReadRemoteRssi(ctx context.Context, in *ReadRemoteRssiRequest, opts ...grpc.CallOption) (*ReadRemoteRssiResponse, error)
-}
-
-type gATTClientServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewGATTClientServiceClient(cc grpc.ClientConnInterface) GATTClientServiceClient {
-	return &gATTClientServiceClient{cc}
-}
-
-func (c *gATTClientServiceClient) DiscoverServices(ctx context.Context, in *DiscoverServicesRequest, opts ...grpc.CallOption) (*DiscoverServicesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DiscoverServicesResponse)
-	err := c.cc.Invoke(ctx, GATTClientService_DiscoverServices_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *gATTClientServiceClient) GetServices(ctx context.Context, in *GetServicesRequest, opts ...grpc.CallOption) (*GetServicesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetServicesResponse)
-	err := c.cc.Invoke(ctx, GATTClientService_GetServices_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *gATTClientServiceClient) ReadCharacteristic(ctx context.Context, in *ReadCharacteristicRequest, opts ...grpc.CallOption) (*ReadCharacteristicResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ReadCharacteristicResponse)
-	err := c.cc.Invoke(ctx, GATTClientService_ReadCharacteristic_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *gATTClientServiceClient) WriteCharacteristic(ctx context.Context, in *WriteCharacteristicRequest, opts ...grpc.CallOption) (*WriteCharacteristicResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(WriteCharacteristicResponse)
-	err := c.cc.Invoke(ctx, GATTClientService_WriteCharacteristic_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *gATTClientServiceClient) SetCharacteristicNotification(ctx context.Context, in *SetCharacteristicNotificationRequest, opts ...grpc.CallOption) (*SetCharacteristicNotificationResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetCharacteristicNotificationResponse)
-	err := c.cc.Invoke(ctx, GATTClientService_SetCharacteristicNotification_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *gATTClientServiceClient) RequestMtu(ctx context.Context, in *RequestMtuRequest, opts ...grpc.CallOption) (*RequestMtuResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RequestMtuResponse)
-	err := c.cc.Invoke(ctx, GATTClientService_RequestMtu_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *gATTClientServiceClient) ReadRemoteRssi(ctx context.Context, in *ReadRemoteRssiRequest, opts ...grpc.CallOption) (*ReadRemoteRssiResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ReadRemoteRssiResponse)
-	err := c.cc.Invoke(ctx, GATTClientService_ReadRemoteRssi_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// GATTClientServiceServer is the server API for GATTClientService service.
-// All implementations must embed UnimplementedGATTClientServiceServer
-// for forward compatibility.
-type GATTClientServiceServer interface {
-	DiscoverServices(context.Context, *DiscoverServicesRequest) (*DiscoverServicesResponse, error)
-	GetServices(context.Context, *GetServicesRequest) (*GetServicesResponse, error)
-	ReadCharacteristic(context.Context, *ReadCharacteristicRequest) (*ReadCharacteristicResponse, error)
-	WriteCharacteristic(context.Context, *WriteCharacteristicRequest) (*WriteCharacteristicResponse, error)
-	SetCharacteristicNotification(context.Context, *SetCharacteristicNotificationRequest) (*SetCharacteristicNotificationResponse, error)
-	RequestMtu(context.Context, *RequestMtuRequest) (*RequestMtuResponse, error)
-	ReadRemoteRssi(context.Context, *ReadRemoteRssiRequest) (*ReadRemoteRssiResponse, error)
-	mustEmbedUnimplementedGATTClientServiceServer()
-}
-
-// UnimplementedGATTClientServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedGATTClientServiceServer struct{}
-
-func (UnimplementedGATTClientServiceServer) DiscoverServices(context.Context, *DiscoverServicesRequest) (*DiscoverServicesResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method DiscoverServices not implemented")
-}
-func (UnimplementedGATTClientServiceServer) GetServices(context.Context, *GetServicesRequest) (*GetServicesResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetServices not implemented")
-}
-func (UnimplementedGATTClientServiceServer) ReadCharacteristic(context.Context, *ReadCharacteristicRequest) (*ReadCharacteristicResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ReadCharacteristic not implemented")
-}
-func (UnimplementedGATTClientServiceServer) WriteCharacteristic(context.Context, *WriteCharacteristicRequest) (*WriteCharacteristicResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method WriteCharacteristic not implemented")
-}
-func (UnimplementedGATTClientServiceServer) SetCharacteristicNotification(context.Context, *SetCharacteristicNotificationRequest) (*SetCharacteristicNotificationResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetCharacteristicNotification not implemented")
-}
-func (UnimplementedGATTClientServiceServer) RequestMtu(context.Context, *RequestMtuRequest) (*RequestMtuResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RequestMtu not implemented")
-}
-func (UnimplementedGATTClientServiceServer) ReadRemoteRssi(context.Context, *ReadRemoteRssiRequest) (*ReadRemoteRssiResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ReadRemoteRssi not implemented")
-}
-func (UnimplementedGATTClientServiceServer) mustEmbedUnimplementedGATTClientServiceServer() {}
-func (UnimplementedGATTClientServiceServer) testEmbeddedByValue()                           {}
-
-// UnsafeGATTClientServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to GATTClientServiceServer will
-// result in compilation errors.
-type UnsafeGATTClientServiceServer interface {
-	mustEmbedUnimplementedGATTClientServiceServer()
-}
-
-func RegisterGATTClientServiceServer(s grpc.ServiceRegistrar, srv GATTClientServiceServer) {
-	// If the following call panics, it indicates UnimplementedGATTClientServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&GATTClientService_ServiceDesc, srv)
-}
-
-func _GATTClientService_DiscoverServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DiscoverServicesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GATTClientServiceServer).DiscoverServices(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GATTClientService_DiscoverServices_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GATTClientServiceServer).DiscoverServices(ctx, req.(*DiscoverServicesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GATTClientService_GetServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetServicesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GATTClientServiceServer).GetServices(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GATTClientService_GetServices_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GATTClientServiceServer).GetServices(ctx, req.(*GetServicesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GATTClientService_ReadCharacteristic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReadCharacteristicRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GATTClientServiceServer).ReadCharacteristic(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GATTClientService_ReadCharacteristic_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GATTClientServiceServer).ReadCharacteristic(ctx, req.(*ReadCharacteristicRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GATTClientService_WriteCharacteristic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(WriteCharacteristicRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GATTClientServiceServer).WriteCharacteristic(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GATTClientService_WriteCharacteristic_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GATTClientServiceServer).WriteCharacteristic(ctx, req.(*WriteCharacteristicRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GATTClientService_SetCharacteristicNotification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetCharacteristicNotificationRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GATTClientServiceServer).SetCharacteristicNotification(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GATTClientService_SetCharacteristicNotification_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GATTClientServiceServer).SetCharacteristicNotification(ctx, req.(*SetCharacteristicNotificationRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GATTClientService_RequestMtu_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RequestMtuRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GATTClientServiceServer).RequestMtu(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GATTClientService_RequestMtu_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GATTClientServiceServer).RequestMtu(ctx, req.(*RequestMtuRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GATTClientService_ReadRemoteRssi_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReadRemoteRssiRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GATTClientServiceServer).ReadRemoteRssi(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GATTClientService_ReadRemoteRssi_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GATTClientServiceServer).ReadRemoteRssi(ctx, req.(*ReadRemoteRssiRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// GATTClientService_ServiceDesc is the grpc.ServiceDesc for GATTClientService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var GATTClientService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth.GATTClientService",
-	HandlerType: (*GATTClientServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "DiscoverServices",
-			Handler:    _GATTClientService_DiscoverServices_Handler,
-		},
-		{
-			MethodName: "GetServices",
-			Handler:    _GATTClientService_GetServices_Handler,
-		},
-		{
-			MethodName: "ReadCharacteristic",
-			Handler:    _GATTClientService_ReadCharacteristic_Handler,
-		},
-		{
-			MethodName: "WriteCharacteristic",
-			Handler:    _GATTClientService_WriteCharacteristic_Handler,
-		},
-		{
-			MethodName: "SetCharacteristicNotification",
-			Handler:    _GATTClientService_SetCharacteristicNotification_Handler,
-		},
-		{
-			MethodName: "RequestMtu",
-			Handler:    _GATTClientService_RequestMtu_Handler,
-		},
-		{
-			MethodName: "ReadRemoteRssi",
-			Handler:    _GATTClientService_ReadRemoteRssi_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/bluetooth/bluetooth.proto",
-}
-
-const (
-	GATTServerService_AddService_FullMethodName           = "/bluetooth.GATTServerService/AddService"
-	GATTServerService_NotifyCharacteristic_FullMethodName = "/bluetooth.GATTServerService/NotifyCharacteristic"
-)
-
-// GATTServerServiceClient is the client API for GATTServerService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type GATTServerServiceClient interface {
-	AddService(ctx context.Context, in *AddServiceRequest, opts ...grpc.CallOption) (*AddServiceResponse, error)
-	NotifyCharacteristic(ctx context.Context, in *NotifyCharacteristicRequest, opts ...grpc.CallOption) (*NotifyCharacteristicResponse, error)
-}
-
-type gATTServerServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewGATTServerServiceClient(cc grpc.ClientConnInterface) GATTServerServiceClient {
-	return &gATTServerServiceClient{cc}
-}
-
-func (c *gATTServerServiceClient) AddService(ctx context.Context, in *AddServiceRequest, opts ...grpc.CallOption) (*AddServiceResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddServiceResponse)
-	err := c.cc.Invoke(ctx, GATTServerService_AddService_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *gATTServerServiceClient) NotifyCharacteristic(ctx context.Context, in *NotifyCharacteristicRequest, opts ...grpc.CallOption) (*NotifyCharacteristicResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(NotifyCharacteristicResponse)
-	err := c.cc.Invoke(ctx, GATTServerService_NotifyCharacteristic_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// GATTServerServiceServer is the server API for GATTServerService service.
-// All implementations must embed UnimplementedGATTServerServiceServer
-// for forward compatibility.
-type GATTServerServiceServer interface {
-	AddService(context.Context, *AddServiceRequest) (*AddServiceResponse, error)
-	NotifyCharacteristic(context.Context, *NotifyCharacteristicRequest) (*NotifyCharacteristicResponse, error)
-	mustEmbedUnimplementedGATTServerServiceServer()
-}
-
-// UnimplementedGATTServerServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedGATTServerServiceServer struct{}
-
-func (UnimplementedGATTServerServiceServer) AddService(context.Context, *AddServiceRequest) (*AddServiceResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddService not implemented")
-}
-func (UnimplementedGATTServerServiceServer) NotifyCharacteristic(context.Context, *NotifyCharacteristicRequest) (*NotifyCharacteristicResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method NotifyCharacteristic not implemented")
-}
-func (UnimplementedGATTServerServiceServer) mustEmbedUnimplementedGATTServerServiceServer() {}
-func (UnimplementedGATTServerServiceServer) testEmbeddedByValue()                           {}
-
-// UnsafeGATTServerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to GATTServerServiceServer will
-// result in compilation errors.
-type UnsafeGATTServerServiceServer interface {
-	mustEmbedUnimplementedGATTServerServiceServer()
-}
-
-func RegisterGATTServerServiceServer(s grpc.ServiceRegistrar, srv GATTServerServiceServer) {
-	// If the following call panics, it indicates UnimplementedGATTServerServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&GATTServerService_ServiceDesc, srv)
-}
-
-func _GATTServerService_AddService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddServiceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GATTServerServiceServer).AddService(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GATTServerService_AddService_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GATTServerServiceServer).AddService(ctx, req.(*AddServiceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GATTServerService_NotifyCharacteristic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NotifyCharacteristicRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GATTServerServiceServer).NotifyCharacteristic(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GATTServerService_NotifyCharacteristic_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GATTServerServiceServer).NotifyCharacteristic(ctx, req.(*NotifyCharacteristicRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// GATTServerService_ServiceDesc is the grpc.ServiceDesc for GATTServerService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var GATTServerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth.GATTServerService",
-	HandlerType: (*GATTServerServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "AddService",
-			Handler:    _GATTServerService_AddService_Handler,
-		},
-		{
-			MethodName: "NotifyCharacteristic",
-			Handler:    _GATTServerService_NotifyCharacteristic_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/bluetooth/bluetooth.proto",
-}
-
-const (
-	ScanCallbackService_SubscribeScanCallback_FullMethodName = "/bluetooth.ScanCallbackService/SubscribeScanCallback"
-)
-
-// ScanCallbackServiceClient is the client API for ScanCallbackService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ScanCallbackServiceClient interface {
-	// Server-streaming events from android.bluetooth.le.ScanCallback
-	SubscribeScanCallback(ctx context.Context, in *SubscribeScanCallbackRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ScanCallbackEvent], error)
-}
-
-type scanCallbackServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewScanCallbackServiceClient(cc grpc.ClientConnInterface) ScanCallbackServiceClient {
-	return &scanCallbackServiceClient{cc}
-}
-
-func (c *scanCallbackServiceClient) SubscribeScanCallback(ctx context.Context, in *SubscribeScanCallbackRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ScanCallbackEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &ScanCallbackService_ServiceDesc.Streams[0], ScanCallbackService_SubscribeScanCallback_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[SubscribeScanCallbackRequest, ScanCallbackEvent]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type ScanCallbackService_SubscribeScanCallbackClient = grpc.ServerStreamingClient[ScanCallbackEvent]
-
-// ScanCallbackServiceServer is the server API for ScanCallbackService service.
-// All implementations must embed UnimplementedScanCallbackServiceServer
-// for forward compatibility.
-type ScanCallbackServiceServer interface {
-	// Server-streaming events from android.bluetooth.le.ScanCallback
-	SubscribeScanCallback(*SubscribeScanCallbackRequest, grpc.ServerStreamingServer[ScanCallbackEvent]) error
-	mustEmbedUnimplementedScanCallbackServiceServer()
-}
-
-// UnimplementedScanCallbackServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedScanCallbackServiceServer struct{}
-
-func (UnimplementedScanCallbackServiceServer) SubscribeScanCallback(*SubscribeScanCallbackRequest, grpc.ServerStreamingServer[ScanCallbackEvent]) error {
-	return status.Error(codes.Unimplemented, "method SubscribeScanCallback not implemented")
-}
-func (UnimplementedScanCallbackServiceServer) mustEmbedUnimplementedScanCallbackServiceServer() {}
-func (UnimplementedScanCallbackServiceServer) testEmbeddedByValue()                             {}
-
-// UnsafeScanCallbackServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ScanCallbackServiceServer will
-// result in compilation errors.
-type UnsafeScanCallbackServiceServer interface {
-	mustEmbedUnimplementedScanCallbackServiceServer()
-}
-
-func RegisterScanCallbackServiceServer(s grpc.ServiceRegistrar, srv ScanCallbackServiceServer) {
-	// If the following call panics, it indicates UnimplementedScanCallbackServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&ScanCallbackService_ServiceDesc, srv)
-}
-
-func _ScanCallbackService_SubscribeScanCallback_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeScanCallbackRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ScanCallbackServiceServer).SubscribeScanCallback(m, &grpc.GenericServerStream[SubscribeScanCallbackRequest, ScanCallbackEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type ScanCallbackService_SubscribeScanCallbackServer = grpc.ServerStreamingServer[ScanCallbackEvent]
-
-// ScanCallbackService_ServiceDesc is the grpc.ServiceDesc for ScanCallbackService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var ScanCallbackService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth.ScanCallbackService",
-	HandlerType: (*ScanCallbackServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "SubscribeScanCallback",
-			Handler:       _ScanCallbackService_SubscribeScanCallback_Handler,
-			ServerStreams: true,
-		},
-	},
-	Metadata: "proto/bluetooth/bluetooth.proto",
-}
-
-const (
-	AdvertiseCallbackService_SubscribeAdvertiseCallback_FullMethodName = "/bluetooth.AdvertiseCallbackService/SubscribeAdvertiseCallback"
-)
-
-// AdvertiseCallbackServiceClient is the client API for AdvertiseCallbackService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type AdvertiseCallbackServiceClient interface {
-	// Server-streaming events from android.bluetooth.le.AdvertiseCallback
-	SubscribeAdvertiseCallback(ctx context.Context, in *SubscribeAdvertiseCallbackRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[AdvertiseCallbackEvent], error)
-}
-
-type advertiseCallbackServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewAdvertiseCallbackServiceClient(cc grpc.ClientConnInterface) AdvertiseCallbackServiceClient {
-	return &advertiseCallbackServiceClient{cc}
-}
-
-func (c *advertiseCallbackServiceClient) SubscribeAdvertiseCallback(ctx context.Context, in *SubscribeAdvertiseCallbackRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[AdvertiseCallbackEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &AdvertiseCallbackService_ServiceDesc.Streams[0], AdvertiseCallbackService_SubscribeAdvertiseCallback_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[SubscribeAdvertiseCallbackRequest, AdvertiseCallbackEvent]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AdvertiseCallbackService_SubscribeAdvertiseCallbackClient = grpc.ServerStreamingClient[AdvertiseCallbackEvent]
-
-// AdvertiseCallbackServiceServer is the server API for AdvertiseCallbackService service.
-// All implementations must embed UnimplementedAdvertiseCallbackServiceServer
-// for forward compatibility.
-type AdvertiseCallbackServiceServer interface {
-	// Server-streaming events from android.bluetooth.le.AdvertiseCallback
-	SubscribeAdvertiseCallback(*SubscribeAdvertiseCallbackRequest, grpc.ServerStreamingServer[AdvertiseCallbackEvent]) error
-	mustEmbedUnimplementedAdvertiseCallbackServiceServer()
-}
-
-// UnimplementedAdvertiseCallbackServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedAdvertiseCallbackServiceServer struct{}
-
-func (UnimplementedAdvertiseCallbackServiceServer) SubscribeAdvertiseCallback(*SubscribeAdvertiseCallbackRequest, grpc.ServerStreamingServer[AdvertiseCallbackEvent]) error {
-	return status.Error(codes.Unimplemented, "method SubscribeAdvertiseCallback not implemented")
-}
-func (UnimplementedAdvertiseCallbackServiceServer) mustEmbedUnimplementedAdvertiseCallbackServiceServer() {
-}
-func (UnimplementedAdvertiseCallbackServiceServer) testEmbeddedByValue() {}
-
-// UnsafeAdvertiseCallbackServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to AdvertiseCallbackServiceServer will
-// result in compilation errors.
-type UnsafeAdvertiseCallbackServiceServer interface {
-	mustEmbedUnimplementedAdvertiseCallbackServiceServer()
-}
-
-func RegisterAdvertiseCallbackServiceServer(s grpc.ServiceRegistrar, srv AdvertiseCallbackServiceServer) {
-	// If the following call panics, it indicates UnimplementedAdvertiseCallbackServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&AdvertiseCallbackService_ServiceDesc, srv)
-}
-
-func _AdvertiseCallbackService_SubscribeAdvertiseCallback_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SubscribeAdvertiseCallbackRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(AdvertiseCallbackServiceServer).SubscribeAdvertiseCallback(m, &grpc.GenericServerStream[SubscribeAdvertiseCallbackRequest, AdvertiseCallbackEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AdvertiseCallbackService_SubscribeAdvertiseCallbackServer = grpc.ServerStreamingServer[AdvertiseCallbackEvent]
-
-// AdvertiseCallbackService_ServiceDesc is the grpc.ServiceDesc for AdvertiseCallbackService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var AdvertiseCallbackService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth.AdvertiseCallbackService",
-	HandlerType: (*AdvertiseCallbackServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "SubscribeAdvertiseCallback",
-			Handler:       _AdvertiseCallbackService_SubscribeAdvertiseCallback_Handler,
-			ServerStreams: true,
-		},
-	},
-	Metadata: "proto/bluetooth/bluetooth.proto",
-}
-
-const (
-	GattCallbackService_GattCallbackStream_FullMethodName = "/bluetooth.GattCallbackService/GattCallbackStream"
-)
-
-// GattCallbackServiceClient is the client API for GattCallbackService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type GattCallbackServiceClient interface {
-	// Bidirectional streaming for android.bluetooth.BluetoothGattCallback
-	GattCallbackStream(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[GattCallbackCommand, GattCallbackEvent], error)
-}
-
-type gattCallbackServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewGattCallbackServiceClient(cc grpc.ClientConnInterface) GattCallbackServiceClient {
-	return &gattCallbackServiceClient{cc}
-}
-
-func (c *gattCallbackServiceClient) GattCallbackStream(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[GattCallbackCommand, GattCallbackEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &GattCallbackService_ServiceDesc.Streams[0], GattCallbackService_GattCallbackStream_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[GattCallbackCommand, GattCallbackEvent]{ClientStream: stream}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type GattCallbackService_GattCallbackStreamClient = grpc.BidiStreamingClient[GattCallbackCommand, GattCallbackEvent]
-
-// GattCallbackServiceServer is the server API for GattCallbackService service.
-// All implementations must embed UnimplementedGattCallbackServiceServer
-// for forward compatibility.
-type GattCallbackServiceServer interface {
-	// Bidirectional streaming for android.bluetooth.BluetoothGattCallback
-	GattCallbackStream(grpc.BidiStreamingServer[GattCallbackCommand, GattCallbackEvent]) error
-	mustEmbedUnimplementedGattCallbackServiceServer()
-}
-
-// UnimplementedGattCallbackServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedGattCallbackServiceServer struct{}
-
-func (UnimplementedGattCallbackServiceServer) GattCallbackStream(grpc.BidiStreamingServer[GattCallbackCommand, GattCallbackEvent]) error {
-	return status.Error(codes.Unimplemented, "method GattCallbackStream not implemented")
-}
-func (UnimplementedGattCallbackServiceServer) mustEmbedUnimplementedGattCallbackServiceServer() {}
-func (UnimplementedGattCallbackServiceServer) testEmbeddedByValue()                             {}
-
-// UnsafeGattCallbackServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to GattCallbackServiceServer will
-// result in compilation errors.
-type UnsafeGattCallbackServiceServer interface {
-	mustEmbedUnimplementedGattCallbackServiceServer()
-}
-
-func RegisterGattCallbackServiceServer(s grpc.ServiceRegistrar, srv GattCallbackServiceServer) {
-	// If the following call panics, it indicates UnimplementedGattCallbackServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&GattCallbackService_ServiceDesc, srv)
-}
-
-func _GattCallbackService_GattCallbackStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(GattCallbackServiceServer).GattCallbackStream(&grpc.GenericServerStream[GattCallbackCommand, GattCallbackEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type GattCallbackService_GattCallbackStreamServer = grpc.BidiStreamingServer[GattCallbackCommand, GattCallbackEvent]
-
-// GattCallbackService_ServiceDesc is the grpc.ServiceDesc for GattCallbackService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var GattCallbackService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth.GattCallbackService",
-	HandlerType: (*GattCallbackServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "GattCallbackStream",
-			Handler:       _GattCallbackService_GattCallbackStream_Handler,
-			ServerStreams: true,
-			ClientStreams: true,
-		},
-	},
-	Metadata: "proto/bluetooth/bluetooth.proto",
-}
-
-const (
-	GattServerCallbackService_GattServerCallbackStream_FullMethodName = "/bluetooth.GattServerCallbackService/GattServerCallbackStream"
-)
-
-// GattServerCallbackServiceClient is the client API for GattServerCallbackService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type GattServerCallbackServiceClient interface {
-	// Bidirectional streaming for android.bluetooth.BluetoothGattServerCallback
-	GattServerCallbackStream(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[GattServerCallbackCommand, GattServerCallbackEvent], error)
-}
-
-type gattServerCallbackServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewGattServerCallbackServiceClient(cc grpc.ClientConnInterface) GattServerCallbackServiceClient {
-	return &gattServerCallbackServiceClient{cc}
-}
-
-func (c *gattServerCallbackServiceClient) GattServerCallbackStream(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[GattServerCallbackCommand, GattServerCallbackEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &GattServerCallbackService_ServiceDesc.Streams[0], GattServerCallbackService_GattServerCallbackStream_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[GattServerCallbackCommand, GattServerCallbackEvent]{ClientStream: stream}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type GattServerCallbackService_GattServerCallbackStreamClient = grpc.BidiStreamingClient[GattServerCallbackCommand, GattServerCallbackEvent]
-
-// GattServerCallbackServiceServer is the server API for GattServerCallbackService service.
-// All implementations must embed UnimplementedGattServerCallbackServiceServer
-// for forward compatibility.
-type GattServerCallbackServiceServer interface {
-	// Bidirectional streaming for android.bluetooth.BluetoothGattServerCallback
-	GattServerCallbackStream(grpc.BidiStreamingServer[GattServerCallbackCommand, GattServerCallbackEvent]) error
-	mustEmbedUnimplementedGattServerCallbackServiceServer()
-}
-
-// UnimplementedGattServerCallbackServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedGattServerCallbackServiceServer struct{}
-
-func (UnimplementedGattServerCallbackServiceServer) GattServerCallbackStream(grpc.BidiStreamingServer[GattServerCallbackCommand, GattServerCallbackEvent]) error {
-	return status.Error(codes.Unimplemented, "method GattServerCallbackStream not implemented")
-}
-func (UnimplementedGattServerCallbackServiceServer) mustEmbedUnimplementedGattServerCallbackServiceServer() {
-}
-func (UnimplementedGattServerCallbackServiceServer) testEmbeddedByValue() {}
-
-// UnsafeGattServerCallbackServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to GattServerCallbackServiceServer will
-// result in compilation errors.
-type UnsafeGattServerCallbackServiceServer interface {
-	mustEmbedUnimplementedGattServerCallbackServiceServer()
-}
-
-func RegisterGattServerCallbackServiceServer(s grpc.ServiceRegistrar, srv GattServerCallbackServiceServer) {
-	// If the following call panics, it indicates UnimplementedGattServerCallbackServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&GattServerCallbackService_ServiceDesc, srv)
-}
-
-func _GattServerCallbackService_GattServerCallbackStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(GattServerCallbackServiceServer).GattServerCallbackStream(&grpc.GenericServerStream[GattServerCallbackCommand, GattServerCallbackEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type GattServerCallbackService_GattServerCallbackStreamServer = grpc.BidiStreamingServer[GattServerCallbackCommand, GattServerCallbackEvent]
-
-// GattServerCallbackService_ServiceDesc is the grpc.ServiceDesc for GattServerCallbackService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var GattServerCallbackService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "bluetooth.GattServerCallbackService",
-	HandlerType: (*GattServerCallbackServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "GattServerCallbackStream",
-			Handler:       _GattServerCallbackService_GattServerCallbackStream_Handler,
-			ServerStreams: true,
-			ClientStreams: true,
-		},
-	},
 	Metadata: "proto/bluetooth/bluetooth.proto",
 }

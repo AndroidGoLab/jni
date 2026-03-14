@@ -21,177 +21,444 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ManagerService_EnqueueRaw_FullMethodName = "/download.ManagerService/EnqueueRaw"
-	ManagerService_RemoveRaw_FullMethodName  = "/download.ManagerService/RemoveRaw"
-	ManagerService_QueryRaw_FullMethodName   = "/download.ManagerService/QueryRaw"
+	DownloadManagerService_AddCompletedDownload7_FullMethodName            = "/download.DownloadManagerService/AddCompletedDownload7"
+	DownloadManagerService_AddCompletedDownload9_1_FullMethodName          = "/download.DownloadManagerService/AddCompletedDownload9_1"
+	DownloadManagerService_Enqueue_FullMethodName                          = "/download.DownloadManagerService/Enqueue"
+	DownloadManagerService_GetMimeTypeForDownloadedFile_FullMethodName     = "/download.DownloadManagerService/GetMimeTypeForDownloadedFile"
+	DownloadManagerService_GetUriForDownloadedFile_FullMethodName          = "/download.DownloadManagerService/GetUriForDownloadedFile"
+	DownloadManagerService_OpenDownloadedFile_FullMethodName               = "/download.DownloadManagerService/OpenDownloadedFile"
+	DownloadManagerService_Query_FullMethodName                            = "/download.DownloadManagerService/Query"
+	DownloadManagerService_Remove_FullMethodName                           = "/download.DownloadManagerService/Remove"
+	DownloadManagerService_GetMaxBytesOverMobile_FullMethodName            = "/download.DownloadManagerService/GetMaxBytesOverMobile"
+	DownloadManagerService_GetRecommendedMaxBytesOverMobile_FullMethodName = "/download.DownloadManagerService/GetRecommendedMaxBytesOverMobile"
 )
 
-// ManagerServiceClient is the client API for ManagerService service.
+// DownloadManagerServiceClient is the client API for DownloadManagerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ManagerServiceClient interface {
-	EnqueueRaw(ctx context.Context, in *EnqueueRawRequest, opts ...grpc.CallOption) (*EnqueueRawResponse, error)
-	RemoveRaw(ctx context.Context, in *RemoveRawRequest, opts ...grpc.CallOption) (*RemoveRawResponse, error)
-	QueryRaw(ctx context.Context, in *QueryRawRequest, opts ...grpc.CallOption) (*QueryRawResponse, error)
+type DownloadManagerServiceClient interface {
+	AddCompletedDownload7(ctx context.Context, in *AddCompletedDownload7Request, opts ...grpc.CallOption) (*AddCompletedDownload7Response, error)
+	AddCompletedDownload9_1(ctx context.Context, in *AddCompletedDownload9_1Request, opts ...grpc.CallOption) (*AddCompletedDownload9_1Response, error)
+	Enqueue(ctx context.Context, in *EnqueueRequest, opts ...grpc.CallOption) (*EnqueueResponse, error)
+	GetMimeTypeForDownloadedFile(ctx context.Context, in *GetMimeTypeForDownloadedFileRequest, opts ...grpc.CallOption) (*GetMimeTypeForDownloadedFileResponse, error)
+	GetUriForDownloadedFile(ctx context.Context, in *GetUriForDownloadedFileRequest, opts ...grpc.CallOption) (*GetUriForDownloadedFileResponse, error)
+	OpenDownloadedFile(ctx context.Context, in *OpenDownloadedFileRequest, opts ...grpc.CallOption) (*OpenDownloadedFileResponse, error)
+	Query(ctx context.Context, in *QueryRequest, opts ...grpc.CallOption) (*QueryResponse, error)
+	Remove(ctx context.Context, in *RemoveRequest, opts ...grpc.CallOption) (*RemoveResponse, error)
+	GetMaxBytesOverMobile(ctx context.Context, in *GetMaxBytesOverMobileRequest, opts ...grpc.CallOption) (*GetMaxBytesOverMobileResponse, error)
+	GetRecommendedMaxBytesOverMobile(ctx context.Context, in *GetRecommendedMaxBytesOverMobileRequest, opts ...grpc.CallOption) (*GetRecommendedMaxBytesOverMobileResponse, error)
 }
 
-type managerServiceClient struct {
+type downloadManagerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewManagerServiceClient(cc grpc.ClientConnInterface) ManagerServiceClient {
-	return &managerServiceClient{cc}
+func NewDownloadManagerServiceClient(cc grpc.ClientConnInterface) DownloadManagerServiceClient {
+	return &downloadManagerServiceClient{cc}
 }
 
-func (c *managerServiceClient) EnqueueRaw(ctx context.Context, in *EnqueueRawRequest, opts ...grpc.CallOption) (*EnqueueRawResponse, error) {
+func (c *downloadManagerServiceClient) AddCompletedDownload7(ctx context.Context, in *AddCompletedDownload7Request, opts ...grpc.CallOption) (*AddCompletedDownload7Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(EnqueueRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_EnqueueRaw_FullMethodName, in, out, cOpts...)
+	out := new(AddCompletedDownload7Response)
+	err := c.cc.Invoke(ctx, DownloadManagerService_AddCompletedDownload7_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) RemoveRaw(ctx context.Context, in *RemoveRawRequest, opts ...grpc.CallOption) (*RemoveRawResponse, error) {
+func (c *downloadManagerServiceClient) AddCompletedDownload9_1(ctx context.Context, in *AddCompletedDownload9_1Request, opts ...grpc.CallOption) (*AddCompletedDownload9_1Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RemoveRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_RemoveRaw_FullMethodName, in, out, cOpts...)
+	out := new(AddCompletedDownload9_1Response)
+	err := c.cc.Invoke(ctx, DownloadManagerService_AddCompletedDownload9_1_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *managerServiceClient) QueryRaw(ctx context.Context, in *QueryRawRequest, opts ...grpc.CallOption) (*QueryRawResponse, error) {
+func (c *downloadManagerServiceClient) Enqueue(ctx context.Context, in *EnqueueRequest, opts ...grpc.CallOption) (*EnqueueResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(QueryRawResponse)
-	err := c.cc.Invoke(ctx, ManagerService_QueryRaw_FullMethodName, in, out, cOpts...)
+	out := new(EnqueueResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerService_Enqueue_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ManagerServiceServer is the server API for ManagerService service.
-// All implementations must embed UnimplementedManagerServiceServer
+func (c *downloadManagerServiceClient) GetMimeTypeForDownloadedFile(ctx context.Context, in *GetMimeTypeForDownloadedFileRequest, opts ...grpc.CallOption) (*GetMimeTypeForDownloadedFileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMimeTypeForDownloadedFileResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerService_GetMimeTypeForDownloadedFile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerServiceClient) GetUriForDownloadedFile(ctx context.Context, in *GetUriForDownloadedFileRequest, opts ...grpc.CallOption) (*GetUriForDownloadedFileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUriForDownloadedFileResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerService_GetUriForDownloadedFile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerServiceClient) OpenDownloadedFile(ctx context.Context, in *OpenDownloadedFileRequest, opts ...grpc.CallOption) (*OpenDownloadedFileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OpenDownloadedFileResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerService_OpenDownloadedFile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerServiceClient) Query(ctx context.Context, in *QueryRequest, opts ...grpc.CallOption) (*QueryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(QueryResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerService_Query_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerServiceClient) Remove(ctx context.Context, in *RemoveRequest, opts ...grpc.CallOption) (*RemoveResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerService_Remove_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerServiceClient) GetMaxBytesOverMobile(ctx context.Context, in *GetMaxBytesOverMobileRequest, opts ...grpc.CallOption) (*GetMaxBytesOverMobileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMaxBytesOverMobileResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerService_GetMaxBytesOverMobile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerServiceClient) GetRecommendedMaxBytesOverMobile(ctx context.Context, in *GetRecommendedMaxBytesOverMobileRequest, opts ...grpc.CallOption) (*GetRecommendedMaxBytesOverMobileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRecommendedMaxBytesOverMobileResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerService_GetRecommendedMaxBytesOverMobile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DownloadManagerServiceServer is the server API for DownloadManagerService service.
+// All implementations must embed UnimplementedDownloadManagerServiceServer
 // for forward compatibility.
-type ManagerServiceServer interface {
-	EnqueueRaw(context.Context, *EnqueueRawRequest) (*EnqueueRawResponse, error)
-	RemoveRaw(context.Context, *RemoveRawRequest) (*RemoveRawResponse, error)
-	QueryRaw(context.Context, *QueryRawRequest) (*QueryRawResponse, error)
-	mustEmbedUnimplementedManagerServiceServer()
+type DownloadManagerServiceServer interface {
+	AddCompletedDownload7(context.Context, *AddCompletedDownload7Request) (*AddCompletedDownload7Response, error)
+	AddCompletedDownload9_1(context.Context, *AddCompletedDownload9_1Request) (*AddCompletedDownload9_1Response, error)
+	Enqueue(context.Context, *EnqueueRequest) (*EnqueueResponse, error)
+	GetMimeTypeForDownloadedFile(context.Context, *GetMimeTypeForDownloadedFileRequest) (*GetMimeTypeForDownloadedFileResponse, error)
+	GetUriForDownloadedFile(context.Context, *GetUriForDownloadedFileRequest) (*GetUriForDownloadedFileResponse, error)
+	OpenDownloadedFile(context.Context, *OpenDownloadedFileRequest) (*OpenDownloadedFileResponse, error)
+	Query(context.Context, *QueryRequest) (*QueryResponse, error)
+	Remove(context.Context, *RemoveRequest) (*RemoveResponse, error)
+	GetMaxBytesOverMobile(context.Context, *GetMaxBytesOverMobileRequest) (*GetMaxBytesOverMobileResponse, error)
+	GetRecommendedMaxBytesOverMobile(context.Context, *GetRecommendedMaxBytesOverMobileRequest) (*GetRecommendedMaxBytesOverMobileResponse, error)
+	mustEmbedUnimplementedDownloadManagerServiceServer()
 }
 
-// UnimplementedManagerServiceServer must be embedded to have
+// UnimplementedDownloadManagerServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedManagerServiceServer struct{}
+type UnimplementedDownloadManagerServiceServer struct{}
 
-func (UnimplementedManagerServiceServer) EnqueueRaw(context.Context, *EnqueueRawRequest) (*EnqueueRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method EnqueueRaw not implemented")
+func (UnimplementedDownloadManagerServiceServer) AddCompletedDownload7(context.Context, *AddCompletedDownload7Request) (*AddCompletedDownload7Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddCompletedDownload7 not implemented")
 }
-func (UnimplementedManagerServiceServer) RemoveRaw(context.Context, *RemoveRawRequest) (*RemoveRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method RemoveRaw not implemented")
+func (UnimplementedDownloadManagerServiceServer) AddCompletedDownload9_1(context.Context, *AddCompletedDownload9_1Request) (*AddCompletedDownload9_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddCompletedDownload9_1 not implemented")
 }
-func (UnimplementedManagerServiceServer) QueryRaw(context.Context, *QueryRawRequest) (*QueryRawResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method QueryRaw not implemented")
+func (UnimplementedDownloadManagerServiceServer) Enqueue(context.Context, *EnqueueRequest) (*EnqueueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Enqueue not implemented")
 }
-func (UnimplementedManagerServiceServer) mustEmbedUnimplementedManagerServiceServer() {}
-func (UnimplementedManagerServiceServer) testEmbeddedByValue()                        {}
+func (UnimplementedDownloadManagerServiceServer) GetMimeTypeForDownloadedFile(context.Context, *GetMimeTypeForDownloadedFileRequest) (*GetMimeTypeForDownloadedFileResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMimeTypeForDownloadedFile not implemented")
+}
+func (UnimplementedDownloadManagerServiceServer) GetUriForDownloadedFile(context.Context, *GetUriForDownloadedFileRequest) (*GetUriForDownloadedFileResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUriForDownloadedFile not implemented")
+}
+func (UnimplementedDownloadManagerServiceServer) OpenDownloadedFile(context.Context, *OpenDownloadedFileRequest) (*OpenDownloadedFileResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method OpenDownloadedFile not implemented")
+}
+func (UnimplementedDownloadManagerServiceServer) Query(context.Context, *QueryRequest) (*QueryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Query not implemented")
+}
+func (UnimplementedDownloadManagerServiceServer) Remove(context.Context, *RemoveRequest) (*RemoveResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Remove not implemented")
+}
+func (UnimplementedDownloadManagerServiceServer) GetMaxBytesOverMobile(context.Context, *GetMaxBytesOverMobileRequest) (*GetMaxBytesOverMobileResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMaxBytesOverMobile not implemented")
+}
+func (UnimplementedDownloadManagerServiceServer) GetRecommendedMaxBytesOverMobile(context.Context, *GetRecommendedMaxBytesOverMobileRequest) (*GetRecommendedMaxBytesOverMobileResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRecommendedMaxBytesOverMobile not implemented")
+}
+func (UnimplementedDownloadManagerServiceServer) mustEmbedUnimplementedDownloadManagerServiceServer() {
+}
+func (UnimplementedDownloadManagerServiceServer) testEmbeddedByValue() {}
 
-// UnsafeManagerServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ManagerServiceServer will
+// UnsafeDownloadManagerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DownloadManagerServiceServer will
 // result in compilation errors.
-type UnsafeManagerServiceServer interface {
-	mustEmbedUnimplementedManagerServiceServer()
+type UnsafeDownloadManagerServiceServer interface {
+	mustEmbedUnimplementedDownloadManagerServiceServer()
 }
 
-func RegisterManagerServiceServer(s grpc.ServiceRegistrar, srv ManagerServiceServer) {
-	// If the following call panics, it indicates UnimplementedManagerServiceServer was
+func RegisterDownloadManagerServiceServer(s grpc.ServiceRegistrar, srv DownloadManagerServiceServer) {
+	// If the following call panics, it indicates UnimplementedDownloadManagerServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&ManagerService_ServiceDesc, srv)
+	s.RegisterService(&DownloadManagerService_ServiceDesc, srv)
 }
 
-func _ManagerService_EnqueueRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EnqueueRawRequest)
+func _DownloadManagerService_AddCompletedDownload7_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddCompletedDownload7Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).EnqueueRaw(ctx, in)
+		return srv.(DownloadManagerServiceServer).AddCompletedDownload7(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_EnqueueRaw_FullMethodName,
+		FullMethod: DownloadManagerService_AddCompletedDownload7_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).EnqueueRaw(ctx, req.(*EnqueueRawRequest))
+		return srv.(DownloadManagerServiceServer).AddCompletedDownload7(ctx, req.(*AddCompletedDownload7Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_RemoveRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoveRawRequest)
+func _DownloadManagerService_AddCompletedDownload9_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddCompletedDownload9_1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).RemoveRaw(ctx, in)
+		return srv.(DownloadManagerServiceServer).AddCompletedDownload9_1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_RemoveRaw_FullMethodName,
+		FullMethod: DownloadManagerService_AddCompletedDownload9_1_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).RemoveRaw(ctx, req.(*RemoveRawRequest))
+		return srv.(DownloadManagerServiceServer).AddCompletedDownload9_1(ctx, req.(*AddCompletedDownload9_1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ManagerService_QueryRaw_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryRawRequest)
+func _DownloadManagerService_Enqueue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnqueueRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ManagerServiceServer).QueryRaw(ctx, in)
+		return srv.(DownloadManagerServiceServer).Enqueue(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ManagerService_QueryRaw_FullMethodName,
+		FullMethod: DownloadManagerService_Enqueue_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ManagerServiceServer).QueryRaw(ctx, req.(*QueryRawRequest))
+		return srv.(DownloadManagerServiceServer).Enqueue(ctx, req.(*EnqueueRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ManagerService_ServiceDesc is the grpc.ServiceDesc for ManagerService service.
+func _DownloadManagerService_GetMimeTypeForDownloadedFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMimeTypeForDownloadedFileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerServiceServer).GetMimeTypeForDownloadedFile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerService_GetMimeTypeForDownloadedFile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerServiceServer).GetMimeTypeForDownloadedFile(ctx, req.(*GetMimeTypeForDownloadedFileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerService_GetUriForDownloadedFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUriForDownloadedFileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerServiceServer).GetUriForDownloadedFile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerService_GetUriForDownloadedFile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerServiceServer).GetUriForDownloadedFile(ctx, req.(*GetUriForDownloadedFileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerService_OpenDownloadedFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OpenDownloadedFileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerServiceServer).OpenDownloadedFile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerService_OpenDownloadedFile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerServiceServer).OpenDownloadedFile(ctx, req.(*OpenDownloadedFileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerService_Query_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerServiceServer).Query(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerService_Query_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerServiceServer).Query(ctx, req.(*QueryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerService_Remove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerServiceServer).Remove(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerService_Remove_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerServiceServer).Remove(ctx, req.(*RemoveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerService_GetMaxBytesOverMobile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMaxBytesOverMobileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerServiceServer).GetMaxBytesOverMobile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerService_GetMaxBytesOverMobile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerServiceServer).GetMaxBytesOverMobile(ctx, req.(*GetMaxBytesOverMobileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerService_GetRecommendedMaxBytesOverMobile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRecommendedMaxBytesOverMobileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerServiceServer).GetRecommendedMaxBytesOverMobile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerService_GetRecommendedMaxBytesOverMobile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerServiceServer).GetRecommendedMaxBytesOverMobile(ctx, req.(*GetRecommendedMaxBytesOverMobileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// DownloadManagerService_ServiceDesc is the grpc.ServiceDesc for DownloadManagerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ManagerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "download.ManagerService",
-	HandlerType: (*ManagerServiceServer)(nil),
+var DownloadManagerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "download.DownloadManagerService",
+	HandlerType: (*DownloadManagerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "EnqueueRaw",
-			Handler:    _ManagerService_EnqueueRaw_Handler,
+			MethodName: "AddCompletedDownload7",
+			Handler:    _DownloadManagerService_AddCompletedDownload7_Handler,
 		},
 		{
-			MethodName: "RemoveRaw",
-			Handler:    _ManagerService_RemoveRaw_Handler,
+			MethodName: "AddCompletedDownload9_1",
+			Handler:    _DownloadManagerService_AddCompletedDownload9_1_Handler,
 		},
 		{
-			MethodName: "QueryRaw",
-			Handler:    _ManagerService_QueryRaw_Handler,
+			MethodName: "Enqueue",
+			Handler:    _DownloadManagerService_Enqueue_Handler,
+		},
+		{
+			MethodName: "GetMimeTypeForDownloadedFile",
+			Handler:    _DownloadManagerService_GetMimeTypeForDownloadedFile_Handler,
+		},
+		{
+			MethodName: "GetUriForDownloadedFile",
+			Handler:    _DownloadManagerService_GetUriForDownloadedFile_Handler,
+		},
+		{
+			MethodName: "OpenDownloadedFile",
+			Handler:    _DownloadManagerService_OpenDownloadedFile_Handler,
+		},
+		{
+			MethodName: "Query",
+			Handler:    _DownloadManagerService_Query_Handler,
+		},
+		{
+			MethodName: "Remove",
+			Handler:    _DownloadManagerService_Remove_Handler,
+		},
+		{
+			MethodName: "GetMaxBytesOverMobile",
+			Handler:    _DownloadManagerService_GetMaxBytesOverMobile_Handler,
+		},
+		{
+			MethodName: "GetRecommendedMaxBytesOverMobile",
+			Handler:    _DownloadManagerService_GetRecommendedMaxBytesOverMobile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -199,318 +466,140 @@ var ManagerService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	DownloadRequestService_SetDestinationInExternalPublicDir_FullMethodName = "/download.DownloadRequestService/SetDestinationInExternalPublicDir"
-	DownloadRequestService_SetTitle_FullMethodName                          = "/download.DownloadRequestService/SetTitle"
-	DownloadRequestService_SetDescription_FullMethodName                    = "/download.DownloadRequestService/SetDescription"
-	DownloadRequestService_SetMimeType_FullMethodName                       = "/download.DownloadRequestService/SetMimeType"
+	DownloadManagerQueryService_SetFilterById_FullMethodName     = "/download.DownloadManagerQueryService/SetFilterById"
+	DownloadManagerQueryService_SetFilterByStatus_FullMethodName = "/download.DownloadManagerQueryService/SetFilterByStatus"
 )
 
-// DownloadRequestServiceClient is the client API for DownloadRequestService service.
+// DownloadManagerQueryServiceClient is the client API for DownloadManagerQueryService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type DownloadRequestServiceClient interface {
-	SetDestinationInExternalPublicDir(ctx context.Context, in *SetDestinationInExternalPublicDirRequest, opts ...grpc.CallOption) (*SetDestinationInExternalPublicDirResponse, error)
-	SetTitle(ctx context.Context, in *SetTitleRequest, opts ...grpc.CallOption) (*SetTitleResponse, error)
-	SetDescription(ctx context.Context, in *SetDescriptionRequest, opts ...grpc.CallOption) (*SetDescriptionResponse, error)
-	SetMimeType(ctx context.Context, in *SetMimeTypeRequest, opts ...grpc.CallOption) (*SetMimeTypeResponse, error)
-}
-
-type downloadRequestServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewDownloadRequestServiceClient(cc grpc.ClientConnInterface) DownloadRequestServiceClient {
-	return &downloadRequestServiceClient{cc}
-}
-
-func (c *downloadRequestServiceClient) SetDestinationInExternalPublicDir(ctx context.Context, in *SetDestinationInExternalPublicDirRequest, opts ...grpc.CallOption) (*SetDestinationInExternalPublicDirResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetDestinationInExternalPublicDirResponse)
-	err := c.cc.Invoke(ctx, DownloadRequestService_SetDestinationInExternalPublicDir_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *downloadRequestServiceClient) SetTitle(ctx context.Context, in *SetTitleRequest, opts ...grpc.CallOption) (*SetTitleResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetTitleResponse)
-	err := c.cc.Invoke(ctx, DownloadRequestService_SetTitle_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *downloadRequestServiceClient) SetDescription(ctx context.Context, in *SetDescriptionRequest, opts ...grpc.CallOption) (*SetDescriptionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetDescriptionResponse)
-	err := c.cc.Invoke(ctx, DownloadRequestService_SetDescription_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *downloadRequestServiceClient) SetMimeType(ctx context.Context, in *SetMimeTypeRequest, opts ...grpc.CallOption) (*SetMimeTypeResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetMimeTypeResponse)
-	err := c.cc.Invoke(ctx, DownloadRequestService_SetMimeType_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// DownloadRequestServiceServer is the server API for DownloadRequestService service.
-// All implementations must embed UnimplementedDownloadRequestServiceServer
-// for forward compatibility.
-type DownloadRequestServiceServer interface {
-	SetDestinationInExternalPublicDir(context.Context, *SetDestinationInExternalPublicDirRequest) (*SetDestinationInExternalPublicDirResponse, error)
-	SetTitle(context.Context, *SetTitleRequest) (*SetTitleResponse, error)
-	SetDescription(context.Context, *SetDescriptionRequest) (*SetDescriptionResponse, error)
-	SetMimeType(context.Context, *SetMimeTypeRequest) (*SetMimeTypeResponse, error)
-	mustEmbedUnimplementedDownloadRequestServiceServer()
-}
-
-// UnimplementedDownloadRequestServiceServer must be embedded to have
-// forward compatible implementations.
-//
-// NOTE: this should be embedded by value instead of pointer to avoid a nil
-// pointer dereference when methods are called.
-type UnimplementedDownloadRequestServiceServer struct{}
-
-func (UnimplementedDownloadRequestServiceServer) SetDestinationInExternalPublicDir(context.Context, *SetDestinationInExternalPublicDirRequest) (*SetDestinationInExternalPublicDirResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetDestinationInExternalPublicDir not implemented")
-}
-func (UnimplementedDownloadRequestServiceServer) SetTitle(context.Context, *SetTitleRequest) (*SetTitleResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetTitle not implemented")
-}
-func (UnimplementedDownloadRequestServiceServer) SetDescription(context.Context, *SetDescriptionRequest) (*SetDescriptionResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetDescription not implemented")
-}
-func (UnimplementedDownloadRequestServiceServer) SetMimeType(context.Context, *SetMimeTypeRequest) (*SetMimeTypeResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SetMimeType not implemented")
-}
-func (UnimplementedDownloadRequestServiceServer) mustEmbedUnimplementedDownloadRequestServiceServer() {
-}
-func (UnimplementedDownloadRequestServiceServer) testEmbeddedByValue() {}
-
-// UnsafeDownloadRequestServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to DownloadRequestServiceServer will
-// result in compilation errors.
-type UnsafeDownloadRequestServiceServer interface {
-	mustEmbedUnimplementedDownloadRequestServiceServer()
-}
-
-func RegisterDownloadRequestServiceServer(s grpc.ServiceRegistrar, srv DownloadRequestServiceServer) {
-	// If the following call panics, it indicates UnimplementedDownloadRequestServiceServer was
-	// embedded by pointer and is nil.  This will cause panics if an
-	// unimplemented method is ever invoked, so we test this at initialization
-	// time to prevent it from happening at runtime later due to I/O.
-	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
-		t.testEmbeddedByValue()
-	}
-	s.RegisterService(&DownloadRequestService_ServiceDesc, srv)
-}
-
-func _DownloadRequestService_SetDestinationInExternalPublicDir_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetDestinationInExternalPublicDirRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DownloadRequestServiceServer).SetDestinationInExternalPublicDir(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DownloadRequestService_SetDestinationInExternalPublicDir_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DownloadRequestServiceServer).SetDestinationInExternalPublicDir(ctx, req.(*SetDestinationInExternalPublicDirRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DownloadRequestService_SetTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetTitleRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DownloadRequestServiceServer).SetTitle(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DownloadRequestService_SetTitle_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DownloadRequestServiceServer).SetTitle(ctx, req.(*SetTitleRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DownloadRequestService_SetDescription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetDescriptionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DownloadRequestServiceServer).SetDescription(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DownloadRequestService_SetDescription_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DownloadRequestServiceServer).SetDescription(ctx, req.(*SetDescriptionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DownloadRequestService_SetMimeType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetMimeTypeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DownloadRequestServiceServer).SetMimeType(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DownloadRequestService_SetMimeType_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DownloadRequestServiceServer).SetMimeType(ctx, req.(*SetMimeTypeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// DownloadRequestService_ServiceDesc is the grpc.ServiceDesc for DownloadRequestService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var DownloadRequestService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "download.DownloadRequestService",
-	HandlerType: (*DownloadRequestServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "SetDestinationInExternalPublicDir",
-			Handler:    _DownloadRequestService_SetDestinationInExternalPublicDir_Handler,
-		},
-		{
-			MethodName: "SetTitle",
-			Handler:    _DownloadRequestService_SetTitle_Handler,
-		},
-		{
-			MethodName: "SetDescription",
-			Handler:    _DownloadRequestService_SetDescription_Handler,
-		},
-		{
-			MethodName: "SetMimeType",
-			Handler:    _DownloadRequestService_SetMimeType_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/download/download.proto",
-}
-
-const (
-	DownloadQueryService_SetFilterById_FullMethodName = "/download.DownloadQueryService/SetFilterById"
-)
-
-// DownloadQueryServiceClient is the client API for DownloadQueryService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type DownloadQueryServiceClient interface {
+type DownloadManagerQueryServiceClient interface {
 	SetFilterById(ctx context.Context, in *SetFilterByIdRequest, opts ...grpc.CallOption) (*SetFilterByIdResponse, error)
+	SetFilterByStatus(ctx context.Context, in *SetFilterByStatusRequest, opts ...grpc.CallOption) (*SetFilterByStatusResponse, error)
 }
 
-type downloadQueryServiceClient struct {
+type downloadManagerQueryServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewDownloadQueryServiceClient(cc grpc.ClientConnInterface) DownloadQueryServiceClient {
-	return &downloadQueryServiceClient{cc}
+func NewDownloadManagerQueryServiceClient(cc grpc.ClientConnInterface) DownloadManagerQueryServiceClient {
+	return &downloadManagerQueryServiceClient{cc}
 }
 
-func (c *downloadQueryServiceClient) SetFilterById(ctx context.Context, in *SetFilterByIdRequest, opts ...grpc.CallOption) (*SetFilterByIdResponse, error) {
+func (c *downloadManagerQueryServiceClient) SetFilterById(ctx context.Context, in *SetFilterByIdRequest, opts ...grpc.CallOption) (*SetFilterByIdResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SetFilterByIdResponse)
-	err := c.cc.Invoke(ctx, DownloadQueryService_SetFilterById_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, DownloadManagerQueryService_SetFilterById_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// DownloadQueryServiceServer is the server API for DownloadQueryService service.
-// All implementations must embed UnimplementedDownloadQueryServiceServer
-// for forward compatibility.
-type DownloadQueryServiceServer interface {
-	SetFilterById(context.Context, *SetFilterByIdRequest) (*SetFilterByIdResponse, error)
-	mustEmbedUnimplementedDownloadQueryServiceServer()
+func (c *downloadManagerQueryServiceClient) SetFilterByStatus(ctx context.Context, in *SetFilterByStatusRequest, opts ...grpc.CallOption) (*SetFilterByStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetFilterByStatusResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerQueryService_SetFilterByStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
-// UnimplementedDownloadQueryServiceServer must be embedded to have
+// DownloadManagerQueryServiceServer is the server API for DownloadManagerQueryService service.
+// All implementations must embed UnimplementedDownloadManagerQueryServiceServer
+// for forward compatibility.
+type DownloadManagerQueryServiceServer interface {
+	SetFilterById(context.Context, *SetFilterByIdRequest) (*SetFilterByIdResponse, error)
+	SetFilterByStatus(context.Context, *SetFilterByStatusRequest) (*SetFilterByStatusResponse, error)
+	mustEmbedUnimplementedDownloadManagerQueryServiceServer()
+}
+
+// UnimplementedDownloadManagerQueryServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedDownloadQueryServiceServer struct{}
+type UnimplementedDownloadManagerQueryServiceServer struct{}
 
-func (UnimplementedDownloadQueryServiceServer) SetFilterById(context.Context, *SetFilterByIdRequest) (*SetFilterByIdResponse, error) {
+func (UnimplementedDownloadManagerQueryServiceServer) SetFilterById(context.Context, *SetFilterByIdRequest) (*SetFilterByIdResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SetFilterById not implemented")
 }
-func (UnimplementedDownloadQueryServiceServer) mustEmbedUnimplementedDownloadQueryServiceServer() {}
-func (UnimplementedDownloadQueryServiceServer) testEmbeddedByValue()                              {}
+func (UnimplementedDownloadManagerQueryServiceServer) SetFilterByStatus(context.Context, *SetFilterByStatusRequest) (*SetFilterByStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetFilterByStatus not implemented")
+}
+func (UnimplementedDownloadManagerQueryServiceServer) mustEmbedUnimplementedDownloadManagerQueryServiceServer() {
+}
+func (UnimplementedDownloadManagerQueryServiceServer) testEmbeddedByValue() {}
 
-// UnsafeDownloadQueryServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to DownloadQueryServiceServer will
+// UnsafeDownloadManagerQueryServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DownloadManagerQueryServiceServer will
 // result in compilation errors.
-type UnsafeDownloadQueryServiceServer interface {
-	mustEmbedUnimplementedDownloadQueryServiceServer()
+type UnsafeDownloadManagerQueryServiceServer interface {
+	mustEmbedUnimplementedDownloadManagerQueryServiceServer()
 }
 
-func RegisterDownloadQueryServiceServer(s grpc.ServiceRegistrar, srv DownloadQueryServiceServer) {
-	// If the following call panics, it indicates UnimplementedDownloadQueryServiceServer was
+func RegisterDownloadManagerQueryServiceServer(s grpc.ServiceRegistrar, srv DownloadManagerQueryServiceServer) {
+	// If the following call panics, it indicates UnimplementedDownloadManagerQueryServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&DownloadQueryService_ServiceDesc, srv)
+	s.RegisterService(&DownloadManagerQueryService_ServiceDesc, srv)
 }
 
-func _DownloadQueryService_SetFilterById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _DownloadManagerQueryService_SetFilterById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetFilterByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DownloadQueryServiceServer).SetFilterById(ctx, in)
+		return srv.(DownloadManagerQueryServiceServer).SetFilterById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DownloadQueryService_SetFilterById_FullMethodName,
+		FullMethod: DownloadManagerQueryService_SetFilterById_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DownloadQueryServiceServer).SetFilterById(ctx, req.(*SetFilterByIdRequest))
+		return srv.(DownloadManagerQueryServiceServer).SetFilterById(ctx, req.(*SetFilterByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// DownloadQueryService_ServiceDesc is the grpc.ServiceDesc for DownloadQueryService service.
+func _DownloadManagerQueryService_SetFilterByStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetFilterByStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerQueryServiceServer).SetFilterByStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerQueryService_SetFilterByStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerQueryServiceServer).SetFilterByStatus(ctx, req.(*SetFilterByStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// DownloadManagerQueryService_ServiceDesc is the grpc.ServiceDesc for DownloadManagerQueryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var DownloadQueryService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "download.DownloadQueryService",
-	HandlerType: (*DownloadQueryServiceServer)(nil),
+var DownloadManagerQueryService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "download.DownloadManagerQueryService",
+	HandlerType: (*DownloadManagerQueryServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "SetFilterById",
-			Handler:    _DownloadQueryService_SetFilterById_Handler,
+			Handler:    _DownloadManagerQueryService_SetFilterById_Handler,
+		},
+		{
+			MethodName: "SetFilterByStatus",
+			Handler:    _DownloadManagerQueryService_SetFilterByStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -518,215 +607,672 @@ var DownloadQueryService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	CursorService_MoveToFirst_FullMethodName    = "/download.CursorService/MoveToFirst"
-	CursorService_GetColumnIndex_FullMethodName = "/download.CursorService/GetColumnIndex"
-	CursorService_GetInt_FullMethodName         = "/download.CursorService/GetInt"
-	CursorService_Close_FullMethodName          = "/download.CursorService/Close"
+	DownloadManagerRequestService_AddRequestHeader_FullMethodName                  = "/download.DownloadManagerRequestService/AddRequestHeader"
+	DownloadManagerRequestService_AllowScanningByMediaScanner_FullMethodName       = "/download.DownloadManagerRequestService/AllowScanningByMediaScanner"
+	DownloadManagerRequestService_SetAllowedNetworkTypes_FullMethodName            = "/download.DownloadManagerRequestService/SetAllowedNetworkTypes"
+	DownloadManagerRequestService_SetAllowedOverMetered_FullMethodName             = "/download.DownloadManagerRequestService/SetAllowedOverMetered"
+	DownloadManagerRequestService_SetAllowedOverRoaming_FullMethodName             = "/download.DownloadManagerRequestService/SetAllowedOverRoaming"
+	DownloadManagerRequestService_SetDescription_FullMethodName                    = "/download.DownloadManagerRequestService/SetDescription"
+	DownloadManagerRequestService_SetDestinationInExternalFilesDir_FullMethodName  = "/download.DownloadManagerRequestService/SetDestinationInExternalFilesDir"
+	DownloadManagerRequestService_SetDestinationInExternalPublicDir_FullMethodName = "/download.DownloadManagerRequestService/SetDestinationInExternalPublicDir"
+	DownloadManagerRequestService_SetDestinationUri_FullMethodName                 = "/download.DownloadManagerRequestService/SetDestinationUri"
+	DownloadManagerRequestService_SetMimeType_FullMethodName                       = "/download.DownloadManagerRequestService/SetMimeType"
+	DownloadManagerRequestService_SetNotificationVisibility_FullMethodName         = "/download.DownloadManagerRequestService/SetNotificationVisibility"
+	DownloadManagerRequestService_SetRequiresCharging_FullMethodName               = "/download.DownloadManagerRequestService/SetRequiresCharging"
+	DownloadManagerRequestService_SetRequiresDeviceIdle_FullMethodName             = "/download.DownloadManagerRequestService/SetRequiresDeviceIdle"
+	DownloadManagerRequestService_SetShowRunningNotification_FullMethodName        = "/download.DownloadManagerRequestService/SetShowRunningNotification"
+	DownloadManagerRequestService_SetTitle_FullMethodName                          = "/download.DownloadManagerRequestService/SetTitle"
+	DownloadManagerRequestService_SetVisibleInDownloadsUi_FullMethodName           = "/download.DownloadManagerRequestService/SetVisibleInDownloadsUi"
 )
 
-// CursorServiceClient is the client API for CursorService service.
+// DownloadManagerRequestServiceClient is the client API for DownloadManagerRequestService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type CursorServiceClient interface {
-	MoveToFirst(ctx context.Context, in *MoveToFirstRequest, opts ...grpc.CallOption) (*MoveToFirstResponse, error)
-	GetColumnIndex(ctx context.Context, in *GetColumnIndexRequest, opts ...grpc.CallOption) (*GetColumnIndexResponse, error)
-	GetInt(ctx context.Context, in *GetIntRequest, opts ...grpc.CallOption) (*GetIntResponse, error)
-	Close(ctx context.Context, in *CloseRequest, opts ...grpc.CallOption) (*CloseResponse, error)
+type DownloadManagerRequestServiceClient interface {
+	AddRequestHeader(ctx context.Context, in *AddRequestHeaderRequest, opts ...grpc.CallOption) (*AddRequestHeaderResponse, error)
+	AllowScanningByMediaScanner(ctx context.Context, in *AllowScanningByMediaScannerRequest, opts ...grpc.CallOption) (*AllowScanningByMediaScannerResponse, error)
+	SetAllowedNetworkTypes(ctx context.Context, in *SetAllowedNetworkTypesRequest, opts ...grpc.CallOption) (*SetAllowedNetworkTypesResponse, error)
+	SetAllowedOverMetered(ctx context.Context, in *SetAllowedOverMeteredRequest, opts ...grpc.CallOption) (*SetAllowedOverMeteredResponse, error)
+	SetAllowedOverRoaming(ctx context.Context, in *SetAllowedOverRoamingRequest, opts ...grpc.CallOption) (*SetAllowedOverRoamingResponse, error)
+	SetDescription(ctx context.Context, in *SetDescriptionRequest, opts ...grpc.CallOption) (*SetDescriptionResponse, error)
+	SetDestinationInExternalFilesDir(ctx context.Context, in *SetDestinationInExternalFilesDirRequest, opts ...grpc.CallOption) (*SetDestinationInExternalFilesDirResponse, error)
+	SetDestinationInExternalPublicDir(ctx context.Context, in *SetDestinationInExternalPublicDirRequest, opts ...grpc.CallOption) (*SetDestinationInExternalPublicDirResponse, error)
+	SetDestinationUri(ctx context.Context, in *SetDestinationUriRequest, opts ...grpc.CallOption) (*SetDestinationUriResponse, error)
+	SetMimeType(ctx context.Context, in *SetMimeTypeRequest, opts ...grpc.CallOption) (*SetMimeTypeResponse, error)
+	SetNotificationVisibility(ctx context.Context, in *SetNotificationVisibilityRequest, opts ...grpc.CallOption) (*SetNotificationVisibilityResponse, error)
+	SetRequiresCharging(ctx context.Context, in *SetRequiresChargingRequest, opts ...grpc.CallOption) (*SetRequiresChargingResponse, error)
+	SetRequiresDeviceIdle(ctx context.Context, in *SetRequiresDeviceIdleRequest, opts ...grpc.CallOption) (*SetRequiresDeviceIdleResponse, error)
+	SetShowRunningNotification(ctx context.Context, in *SetShowRunningNotificationRequest, opts ...grpc.CallOption) (*SetShowRunningNotificationResponse, error)
+	SetTitle(ctx context.Context, in *SetTitleRequest, opts ...grpc.CallOption) (*SetTitleResponse, error)
+	SetVisibleInDownloadsUi(ctx context.Context, in *SetVisibleInDownloadsUiRequest, opts ...grpc.CallOption) (*SetVisibleInDownloadsUiResponse, error)
 }
 
-type cursorServiceClient struct {
+type downloadManagerRequestServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewCursorServiceClient(cc grpc.ClientConnInterface) CursorServiceClient {
-	return &cursorServiceClient{cc}
+func NewDownloadManagerRequestServiceClient(cc grpc.ClientConnInterface) DownloadManagerRequestServiceClient {
+	return &downloadManagerRequestServiceClient{cc}
 }
 
-func (c *cursorServiceClient) MoveToFirst(ctx context.Context, in *MoveToFirstRequest, opts ...grpc.CallOption) (*MoveToFirstResponse, error) {
+func (c *downloadManagerRequestServiceClient) AddRequestHeader(ctx context.Context, in *AddRequestHeaderRequest, opts ...grpc.CallOption) (*AddRequestHeaderResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(MoveToFirstResponse)
-	err := c.cc.Invoke(ctx, CursorService_MoveToFirst_FullMethodName, in, out, cOpts...)
+	out := new(AddRequestHeaderResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerRequestService_AddRequestHeader_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *cursorServiceClient) GetColumnIndex(ctx context.Context, in *GetColumnIndexRequest, opts ...grpc.CallOption) (*GetColumnIndexResponse, error) {
+func (c *downloadManagerRequestServiceClient) AllowScanningByMediaScanner(ctx context.Context, in *AllowScanningByMediaScannerRequest, opts ...grpc.CallOption) (*AllowScanningByMediaScannerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetColumnIndexResponse)
-	err := c.cc.Invoke(ctx, CursorService_GetColumnIndex_FullMethodName, in, out, cOpts...)
+	out := new(AllowScanningByMediaScannerResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerRequestService_AllowScanningByMediaScanner_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *cursorServiceClient) GetInt(ctx context.Context, in *GetIntRequest, opts ...grpc.CallOption) (*GetIntResponse, error) {
+func (c *downloadManagerRequestServiceClient) SetAllowedNetworkTypes(ctx context.Context, in *SetAllowedNetworkTypesRequest, opts ...grpc.CallOption) (*SetAllowedNetworkTypesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetIntResponse)
-	err := c.cc.Invoke(ctx, CursorService_GetInt_FullMethodName, in, out, cOpts...)
+	out := new(SetAllowedNetworkTypesResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerRequestService_SetAllowedNetworkTypes_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *cursorServiceClient) Close(ctx context.Context, in *CloseRequest, opts ...grpc.CallOption) (*CloseResponse, error) {
+func (c *downloadManagerRequestServiceClient) SetAllowedOverMetered(ctx context.Context, in *SetAllowedOverMeteredRequest, opts ...grpc.CallOption) (*SetAllowedOverMeteredResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CloseResponse)
-	err := c.cc.Invoke(ctx, CursorService_Close_FullMethodName, in, out, cOpts...)
+	out := new(SetAllowedOverMeteredResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerRequestService_SetAllowedOverMetered_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// CursorServiceServer is the server API for CursorService service.
-// All implementations must embed UnimplementedCursorServiceServer
+func (c *downloadManagerRequestServiceClient) SetAllowedOverRoaming(ctx context.Context, in *SetAllowedOverRoamingRequest, opts ...grpc.CallOption) (*SetAllowedOverRoamingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetAllowedOverRoamingResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerRequestService_SetAllowedOverRoaming_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerRequestServiceClient) SetDescription(ctx context.Context, in *SetDescriptionRequest, opts ...grpc.CallOption) (*SetDescriptionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDescriptionResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerRequestService_SetDescription_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerRequestServiceClient) SetDestinationInExternalFilesDir(ctx context.Context, in *SetDestinationInExternalFilesDirRequest, opts ...grpc.CallOption) (*SetDestinationInExternalFilesDirResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDestinationInExternalFilesDirResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerRequestService_SetDestinationInExternalFilesDir_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerRequestServiceClient) SetDestinationInExternalPublicDir(ctx context.Context, in *SetDestinationInExternalPublicDirRequest, opts ...grpc.CallOption) (*SetDestinationInExternalPublicDirResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDestinationInExternalPublicDirResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerRequestService_SetDestinationInExternalPublicDir_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerRequestServiceClient) SetDestinationUri(ctx context.Context, in *SetDestinationUriRequest, opts ...grpc.CallOption) (*SetDestinationUriResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDestinationUriResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerRequestService_SetDestinationUri_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerRequestServiceClient) SetMimeType(ctx context.Context, in *SetMimeTypeRequest, opts ...grpc.CallOption) (*SetMimeTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetMimeTypeResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerRequestService_SetMimeType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerRequestServiceClient) SetNotificationVisibility(ctx context.Context, in *SetNotificationVisibilityRequest, opts ...grpc.CallOption) (*SetNotificationVisibilityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetNotificationVisibilityResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerRequestService_SetNotificationVisibility_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerRequestServiceClient) SetRequiresCharging(ctx context.Context, in *SetRequiresChargingRequest, opts ...grpc.CallOption) (*SetRequiresChargingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetRequiresChargingResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerRequestService_SetRequiresCharging_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerRequestServiceClient) SetRequiresDeviceIdle(ctx context.Context, in *SetRequiresDeviceIdleRequest, opts ...grpc.CallOption) (*SetRequiresDeviceIdleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetRequiresDeviceIdleResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerRequestService_SetRequiresDeviceIdle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerRequestServiceClient) SetShowRunningNotification(ctx context.Context, in *SetShowRunningNotificationRequest, opts ...grpc.CallOption) (*SetShowRunningNotificationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetShowRunningNotificationResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerRequestService_SetShowRunningNotification_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerRequestServiceClient) SetTitle(ctx context.Context, in *SetTitleRequest, opts ...grpc.CallOption) (*SetTitleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetTitleResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerRequestService_SetTitle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *downloadManagerRequestServiceClient) SetVisibleInDownloadsUi(ctx context.Context, in *SetVisibleInDownloadsUiRequest, opts ...grpc.CallOption) (*SetVisibleInDownloadsUiResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetVisibleInDownloadsUiResponse)
+	err := c.cc.Invoke(ctx, DownloadManagerRequestService_SetVisibleInDownloadsUi_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DownloadManagerRequestServiceServer is the server API for DownloadManagerRequestService service.
+// All implementations must embed UnimplementedDownloadManagerRequestServiceServer
 // for forward compatibility.
-type CursorServiceServer interface {
-	MoveToFirst(context.Context, *MoveToFirstRequest) (*MoveToFirstResponse, error)
-	GetColumnIndex(context.Context, *GetColumnIndexRequest) (*GetColumnIndexResponse, error)
-	GetInt(context.Context, *GetIntRequest) (*GetIntResponse, error)
-	Close(context.Context, *CloseRequest) (*CloseResponse, error)
-	mustEmbedUnimplementedCursorServiceServer()
+type DownloadManagerRequestServiceServer interface {
+	AddRequestHeader(context.Context, *AddRequestHeaderRequest) (*AddRequestHeaderResponse, error)
+	AllowScanningByMediaScanner(context.Context, *AllowScanningByMediaScannerRequest) (*AllowScanningByMediaScannerResponse, error)
+	SetAllowedNetworkTypes(context.Context, *SetAllowedNetworkTypesRequest) (*SetAllowedNetworkTypesResponse, error)
+	SetAllowedOverMetered(context.Context, *SetAllowedOverMeteredRequest) (*SetAllowedOverMeteredResponse, error)
+	SetAllowedOverRoaming(context.Context, *SetAllowedOverRoamingRequest) (*SetAllowedOverRoamingResponse, error)
+	SetDescription(context.Context, *SetDescriptionRequest) (*SetDescriptionResponse, error)
+	SetDestinationInExternalFilesDir(context.Context, *SetDestinationInExternalFilesDirRequest) (*SetDestinationInExternalFilesDirResponse, error)
+	SetDestinationInExternalPublicDir(context.Context, *SetDestinationInExternalPublicDirRequest) (*SetDestinationInExternalPublicDirResponse, error)
+	SetDestinationUri(context.Context, *SetDestinationUriRequest) (*SetDestinationUriResponse, error)
+	SetMimeType(context.Context, *SetMimeTypeRequest) (*SetMimeTypeResponse, error)
+	SetNotificationVisibility(context.Context, *SetNotificationVisibilityRequest) (*SetNotificationVisibilityResponse, error)
+	SetRequiresCharging(context.Context, *SetRequiresChargingRequest) (*SetRequiresChargingResponse, error)
+	SetRequiresDeviceIdle(context.Context, *SetRequiresDeviceIdleRequest) (*SetRequiresDeviceIdleResponse, error)
+	SetShowRunningNotification(context.Context, *SetShowRunningNotificationRequest) (*SetShowRunningNotificationResponse, error)
+	SetTitle(context.Context, *SetTitleRequest) (*SetTitleResponse, error)
+	SetVisibleInDownloadsUi(context.Context, *SetVisibleInDownloadsUiRequest) (*SetVisibleInDownloadsUiResponse, error)
+	mustEmbedUnimplementedDownloadManagerRequestServiceServer()
 }
 
-// UnimplementedCursorServiceServer must be embedded to have
+// UnimplementedDownloadManagerRequestServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedCursorServiceServer struct{}
+type UnimplementedDownloadManagerRequestServiceServer struct{}
 
-func (UnimplementedCursorServiceServer) MoveToFirst(context.Context, *MoveToFirstRequest) (*MoveToFirstResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method MoveToFirst not implemented")
+func (UnimplementedDownloadManagerRequestServiceServer) AddRequestHeader(context.Context, *AddRequestHeaderRequest) (*AddRequestHeaderResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddRequestHeader not implemented")
 }
-func (UnimplementedCursorServiceServer) GetColumnIndex(context.Context, *GetColumnIndexRequest) (*GetColumnIndexResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetColumnIndex not implemented")
+func (UnimplementedDownloadManagerRequestServiceServer) AllowScanningByMediaScanner(context.Context, *AllowScanningByMediaScannerRequest) (*AllowScanningByMediaScannerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AllowScanningByMediaScanner not implemented")
 }
-func (UnimplementedCursorServiceServer) GetInt(context.Context, *GetIntRequest) (*GetIntResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetInt not implemented")
+func (UnimplementedDownloadManagerRequestServiceServer) SetAllowedNetworkTypes(context.Context, *SetAllowedNetworkTypesRequest) (*SetAllowedNetworkTypesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAllowedNetworkTypes not implemented")
 }
-func (UnimplementedCursorServiceServer) Close(context.Context, *CloseRequest) (*CloseResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method Close not implemented")
+func (UnimplementedDownloadManagerRequestServiceServer) SetAllowedOverMetered(context.Context, *SetAllowedOverMeteredRequest) (*SetAllowedOverMeteredResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAllowedOverMetered not implemented")
 }
-func (UnimplementedCursorServiceServer) mustEmbedUnimplementedCursorServiceServer() {}
-func (UnimplementedCursorServiceServer) testEmbeddedByValue()                       {}
+func (UnimplementedDownloadManagerRequestServiceServer) SetAllowedOverRoaming(context.Context, *SetAllowedOverRoamingRequest) (*SetAllowedOverRoamingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAllowedOverRoaming not implemented")
+}
+func (UnimplementedDownloadManagerRequestServiceServer) SetDescription(context.Context, *SetDescriptionRequest) (*SetDescriptionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetDescription not implemented")
+}
+func (UnimplementedDownloadManagerRequestServiceServer) SetDestinationInExternalFilesDir(context.Context, *SetDestinationInExternalFilesDirRequest) (*SetDestinationInExternalFilesDirResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetDestinationInExternalFilesDir not implemented")
+}
+func (UnimplementedDownloadManagerRequestServiceServer) SetDestinationInExternalPublicDir(context.Context, *SetDestinationInExternalPublicDirRequest) (*SetDestinationInExternalPublicDirResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetDestinationInExternalPublicDir not implemented")
+}
+func (UnimplementedDownloadManagerRequestServiceServer) SetDestinationUri(context.Context, *SetDestinationUriRequest) (*SetDestinationUriResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetDestinationUri not implemented")
+}
+func (UnimplementedDownloadManagerRequestServiceServer) SetMimeType(context.Context, *SetMimeTypeRequest) (*SetMimeTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetMimeType not implemented")
+}
+func (UnimplementedDownloadManagerRequestServiceServer) SetNotificationVisibility(context.Context, *SetNotificationVisibilityRequest) (*SetNotificationVisibilityResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetNotificationVisibility not implemented")
+}
+func (UnimplementedDownloadManagerRequestServiceServer) SetRequiresCharging(context.Context, *SetRequiresChargingRequest) (*SetRequiresChargingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetRequiresCharging not implemented")
+}
+func (UnimplementedDownloadManagerRequestServiceServer) SetRequiresDeviceIdle(context.Context, *SetRequiresDeviceIdleRequest) (*SetRequiresDeviceIdleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetRequiresDeviceIdle not implemented")
+}
+func (UnimplementedDownloadManagerRequestServiceServer) SetShowRunningNotification(context.Context, *SetShowRunningNotificationRequest) (*SetShowRunningNotificationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetShowRunningNotification not implemented")
+}
+func (UnimplementedDownloadManagerRequestServiceServer) SetTitle(context.Context, *SetTitleRequest) (*SetTitleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetTitle not implemented")
+}
+func (UnimplementedDownloadManagerRequestServiceServer) SetVisibleInDownloadsUi(context.Context, *SetVisibleInDownloadsUiRequest) (*SetVisibleInDownloadsUiResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetVisibleInDownloadsUi not implemented")
+}
+func (UnimplementedDownloadManagerRequestServiceServer) mustEmbedUnimplementedDownloadManagerRequestServiceServer() {
+}
+func (UnimplementedDownloadManagerRequestServiceServer) testEmbeddedByValue() {}
 
-// UnsafeCursorServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to CursorServiceServer will
+// UnsafeDownloadManagerRequestServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DownloadManagerRequestServiceServer will
 // result in compilation errors.
-type UnsafeCursorServiceServer interface {
-	mustEmbedUnimplementedCursorServiceServer()
+type UnsafeDownloadManagerRequestServiceServer interface {
+	mustEmbedUnimplementedDownloadManagerRequestServiceServer()
 }
 
-func RegisterCursorServiceServer(s grpc.ServiceRegistrar, srv CursorServiceServer) {
-	// If the following call panics, it indicates UnimplementedCursorServiceServer was
+func RegisterDownloadManagerRequestServiceServer(s grpc.ServiceRegistrar, srv DownloadManagerRequestServiceServer) {
+	// If the following call panics, it indicates UnimplementedDownloadManagerRequestServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&CursorService_ServiceDesc, srv)
+	s.RegisterService(&DownloadManagerRequestService_ServiceDesc, srv)
 }
 
-func _CursorService_MoveToFirst_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MoveToFirstRequest)
+func _DownloadManagerRequestService_AddRequestHeader_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddRequestHeaderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CursorServiceServer).MoveToFirst(ctx, in)
+		return srv.(DownloadManagerRequestServiceServer).AddRequestHeader(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: CursorService_MoveToFirst_FullMethodName,
+		FullMethod: DownloadManagerRequestService_AddRequestHeader_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CursorServiceServer).MoveToFirst(ctx, req.(*MoveToFirstRequest))
+		return srv.(DownloadManagerRequestServiceServer).AddRequestHeader(ctx, req.(*AddRequestHeaderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CursorService_GetColumnIndex_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetColumnIndexRequest)
+func _DownloadManagerRequestService_AllowScanningByMediaScanner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AllowScanningByMediaScannerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CursorServiceServer).GetColumnIndex(ctx, in)
+		return srv.(DownloadManagerRequestServiceServer).AllowScanningByMediaScanner(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: CursorService_GetColumnIndex_FullMethodName,
+		FullMethod: DownloadManagerRequestService_AllowScanningByMediaScanner_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CursorServiceServer).GetColumnIndex(ctx, req.(*GetColumnIndexRequest))
+		return srv.(DownloadManagerRequestServiceServer).AllowScanningByMediaScanner(ctx, req.(*AllowScanningByMediaScannerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CursorService_GetInt_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetIntRequest)
+func _DownloadManagerRequestService_SetAllowedNetworkTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAllowedNetworkTypesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CursorServiceServer).GetInt(ctx, in)
+		return srv.(DownloadManagerRequestServiceServer).SetAllowedNetworkTypes(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: CursorService_GetInt_FullMethodName,
+		FullMethod: DownloadManagerRequestService_SetAllowedNetworkTypes_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CursorServiceServer).GetInt(ctx, req.(*GetIntRequest))
+		return srv.(DownloadManagerRequestServiceServer).SetAllowedNetworkTypes(ctx, req.(*SetAllowedNetworkTypesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CursorService_Close_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CloseRequest)
+func _DownloadManagerRequestService_SetAllowedOverMetered_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAllowedOverMeteredRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CursorServiceServer).Close(ctx, in)
+		return srv.(DownloadManagerRequestServiceServer).SetAllowedOverMetered(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: CursorService_Close_FullMethodName,
+		FullMethod: DownloadManagerRequestService_SetAllowedOverMetered_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CursorServiceServer).Close(ctx, req.(*CloseRequest))
+		return srv.(DownloadManagerRequestServiceServer).SetAllowedOverMetered(ctx, req.(*SetAllowedOverMeteredRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// CursorService_ServiceDesc is the grpc.ServiceDesc for CursorService service.
+func _DownloadManagerRequestService_SetAllowedOverRoaming_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAllowedOverRoamingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerRequestServiceServer).SetAllowedOverRoaming(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerRequestService_SetAllowedOverRoaming_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerRequestServiceServer).SetAllowedOverRoaming(ctx, req.(*SetAllowedOverRoamingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerRequestService_SetDescription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDescriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerRequestServiceServer).SetDescription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerRequestService_SetDescription_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerRequestServiceServer).SetDescription(ctx, req.(*SetDescriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerRequestService_SetDestinationInExternalFilesDir_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDestinationInExternalFilesDirRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerRequestServiceServer).SetDestinationInExternalFilesDir(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerRequestService_SetDestinationInExternalFilesDir_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerRequestServiceServer).SetDestinationInExternalFilesDir(ctx, req.(*SetDestinationInExternalFilesDirRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerRequestService_SetDestinationInExternalPublicDir_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDestinationInExternalPublicDirRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerRequestServiceServer).SetDestinationInExternalPublicDir(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerRequestService_SetDestinationInExternalPublicDir_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerRequestServiceServer).SetDestinationInExternalPublicDir(ctx, req.(*SetDestinationInExternalPublicDirRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerRequestService_SetDestinationUri_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDestinationUriRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerRequestServiceServer).SetDestinationUri(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerRequestService_SetDestinationUri_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerRequestServiceServer).SetDestinationUri(ctx, req.(*SetDestinationUriRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerRequestService_SetMimeType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetMimeTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerRequestServiceServer).SetMimeType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerRequestService_SetMimeType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerRequestServiceServer).SetMimeType(ctx, req.(*SetMimeTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerRequestService_SetNotificationVisibility_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetNotificationVisibilityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerRequestServiceServer).SetNotificationVisibility(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerRequestService_SetNotificationVisibility_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerRequestServiceServer).SetNotificationVisibility(ctx, req.(*SetNotificationVisibilityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerRequestService_SetRequiresCharging_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetRequiresChargingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerRequestServiceServer).SetRequiresCharging(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerRequestService_SetRequiresCharging_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerRequestServiceServer).SetRequiresCharging(ctx, req.(*SetRequiresChargingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerRequestService_SetRequiresDeviceIdle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetRequiresDeviceIdleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerRequestServiceServer).SetRequiresDeviceIdle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerRequestService_SetRequiresDeviceIdle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerRequestServiceServer).SetRequiresDeviceIdle(ctx, req.(*SetRequiresDeviceIdleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerRequestService_SetShowRunningNotification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetShowRunningNotificationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerRequestServiceServer).SetShowRunningNotification(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerRequestService_SetShowRunningNotification_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerRequestServiceServer).SetShowRunningNotification(ctx, req.(*SetShowRunningNotificationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerRequestService_SetTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTitleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerRequestServiceServer).SetTitle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerRequestService_SetTitle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerRequestServiceServer).SetTitle(ctx, req.(*SetTitleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DownloadManagerRequestService_SetVisibleInDownloadsUi_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetVisibleInDownloadsUiRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DownloadManagerRequestServiceServer).SetVisibleInDownloadsUi(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DownloadManagerRequestService_SetVisibleInDownloadsUi_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DownloadManagerRequestServiceServer).SetVisibleInDownloadsUi(ctx, req.(*SetVisibleInDownloadsUiRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// DownloadManagerRequestService_ServiceDesc is the grpc.ServiceDesc for DownloadManagerRequestService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var CursorService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "download.CursorService",
-	HandlerType: (*CursorServiceServer)(nil),
+var DownloadManagerRequestService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "download.DownloadManagerRequestService",
+	HandlerType: (*DownloadManagerRequestServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "MoveToFirst",
-			Handler:    _CursorService_MoveToFirst_Handler,
+			MethodName: "AddRequestHeader",
+			Handler:    _DownloadManagerRequestService_AddRequestHeader_Handler,
 		},
 		{
-			MethodName: "GetColumnIndex",
-			Handler:    _CursorService_GetColumnIndex_Handler,
+			MethodName: "AllowScanningByMediaScanner",
+			Handler:    _DownloadManagerRequestService_AllowScanningByMediaScanner_Handler,
 		},
 		{
-			MethodName: "GetInt",
-			Handler:    _CursorService_GetInt_Handler,
+			MethodName: "SetAllowedNetworkTypes",
+			Handler:    _DownloadManagerRequestService_SetAllowedNetworkTypes_Handler,
 		},
 		{
-			MethodName: "Close",
-			Handler:    _CursorService_Close_Handler,
+			MethodName: "SetAllowedOverMetered",
+			Handler:    _DownloadManagerRequestService_SetAllowedOverMetered_Handler,
+		},
+		{
+			MethodName: "SetAllowedOverRoaming",
+			Handler:    _DownloadManagerRequestService_SetAllowedOverRoaming_Handler,
+		},
+		{
+			MethodName: "SetDescription",
+			Handler:    _DownloadManagerRequestService_SetDescription_Handler,
+		},
+		{
+			MethodName: "SetDestinationInExternalFilesDir",
+			Handler:    _DownloadManagerRequestService_SetDestinationInExternalFilesDir_Handler,
+		},
+		{
+			MethodName: "SetDestinationInExternalPublicDir",
+			Handler:    _DownloadManagerRequestService_SetDestinationInExternalPublicDir_Handler,
+		},
+		{
+			MethodName: "SetDestinationUri",
+			Handler:    _DownloadManagerRequestService_SetDestinationUri_Handler,
+		},
+		{
+			MethodName: "SetMimeType",
+			Handler:    _DownloadManagerRequestService_SetMimeType_Handler,
+		},
+		{
+			MethodName: "SetNotificationVisibility",
+			Handler:    _DownloadManagerRequestService_SetNotificationVisibility_Handler,
+		},
+		{
+			MethodName: "SetRequiresCharging",
+			Handler:    _DownloadManagerRequestService_SetRequiresCharging_Handler,
+		},
+		{
+			MethodName: "SetRequiresDeviceIdle",
+			Handler:    _DownloadManagerRequestService_SetRequiresDeviceIdle_Handler,
+		},
+		{
+			MethodName: "SetShowRunningNotification",
+			Handler:    _DownloadManagerRequestService_SetShowRunningNotification_Handler,
+		},
+		{
+			MethodName: "SetTitle",
+			Handler:    _DownloadManagerRequestService_SetTitle_Handler,
+		},
+		{
+			MethodName: "SetVisibleInDownloadsUi",
+			Handler:    _DownloadManagerRequestService_SetVisibleInDownloadsUi_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

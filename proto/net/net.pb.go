@@ -23,26 +23,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type GetActiveNetworkRawRequest struct {
+type AddDefaultNetworkActiveListenerRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetActiveNetworkRawRequest) Reset() {
-	*x = GetActiveNetworkRawRequest{}
+func (x *AddDefaultNetworkActiveListenerRequest) Reset() {
+	*x = AddDefaultNetworkActiveListenerRequest{}
 	mi := &file_proto_net_net_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetActiveNetworkRawRequest) String() string {
+func (x *AddDefaultNetworkActiveListenerRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetActiveNetworkRawRequest) ProtoMessage() {}
+func (*AddDefaultNetworkActiveListenerRequest) ProtoMessage() {}
 
-func (x *GetActiveNetworkRawRequest) ProtoReflect() protoreflect.Message {
+func (x *AddDefaultNetworkActiveListenerRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_net_net_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -54,32 +55,38 @@ func (x *GetActiveNetworkRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetActiveNetworkRawRequest.ProtoReflect.Descriptor instead.
-func (*GetActiveNetworkRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddDefaultNetworkActiveListenerRequest.ProtoReflect.Descriptor instead.
+func (*AddDefaultNetworkActiveListenerRequest) Descriptor() ([]byte, []int) {
 	return file_proto_net_net_proto_rawDescGZIP(), []int{0}
 }
 
-type GetActiveNetworkRawResponse struct {
+func (x *AddDefaultNetworkActiveListenerRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type AddDefaultNetworkActiveListenerResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetActiveNetworkRawResponse) Reset() {
-	*x = GetActiveNetworkRawResponse{}
+func (x *AddDefaultNetworkActiveListenerResponse) Reset() {
+	*x = AddDefaultNetworkActiveListenerResponse{}
 	mi := &file_proto_net_net_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetActiveNetworkRawResponse) String() string {
+func (x *AddDefaultNetworkActiveListenerResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetActiveNetworkRawResponse) ProtoMessage() {}
+func (*AddDefaultNetworkActiveListenerResponse) ProtoMessage() {}
 
-func (x *GetActiveNetworkRawResponse) ProtoReflect() protoreflect.Message {
+func (x *AddDefaultNetworkActiveListenerResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_net_net_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -91,39 +98,32 @@ func (x *GetActiveNetworkRawResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetActiveNetworkRawResponse.ProtoReflect.Descriptor instead.
-func (*GetActiveNetworkRawResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddDefaultNetworkActiveListenerResponse.ProtoReflect.Descriptor instead.
+func (*AddDefaultNetworkActiveListenerResponse) Descriptor() ([]byte, []int) {
 	return file_proto_net_net_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *GetActiveNetworkRawResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type GetNetworkCapabilitiesRawRequest struct {
+type BindProcessToNetworkRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Network       int64                  `protobuf:"varint,1,opt,name=network,proto3" json:"network,omitempty"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetNetworkCapabilitiesRawRequest) Reset() {
-	*x = GetNetworkCapabilitiesRawRequest{}
+func (x *BindProcessToNetworkRequest) Reset() {
+	*x = BindProcessToNetworkRequest{}
 	mi := &file_proto_net_net_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetNetworkCapabilitiesRawRequest) String() string {
+func (x *BindProcessToNetworkRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetNetworkCapabilitiesRawRequest) ProtoMessage() {}
+func (*BindProcessToNetworkRequest) ProtoMessage() {}
 
-func (x *GetNetworkCapabilitiesRawRequest) ProtoReflect() protoreflect.Message {
+func (x *BindProcessToNetworkRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_net_net_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -135,288 +135,40 @@ func (x *GetNetworkCapabilitiesRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetNetworkCapabilitiesRawRequest.ProtoReflect.Descriptor instead.
-func (*GetNetworkCapabilitiesRawRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use BindProcessToNetworkRequest.ProtoReflect.Descriptor instead.
+func (*BindProcessToNetworkRequest) Descriptor() ([]byte, []int) {
 	return file_proto_net_net_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *GetNetworkCapabilitiesRawRequest) GetNetwork() int64 {
+func (x *BindProcessToNetworkRequest) GetArg0() int64 {
 	if x != nil {
-		return x.Network
+		return x.Arg0
 	}
 	return 0
 }
 
-type GetNetworkCapabilitiesRawResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetNetworkCapabilitiesRawResponse) Reset() {
-	*x = GetNetworkCapabilitiesRawResponse{}
-	mi := &file_proto_net_net_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetNetworkCapabilitiesRawResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetNetworkCapabilitiesRawResponse) ProtoMessage() {}
-
-func (x *GetNetworkCapabilitiesRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_net_net_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetNetworkCapabilitiesRawResponse.ProtoReflect.Descriptor instead.
-func (*GetNetworkCapabilitiesRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_net_net_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *GetNetworkCapabilitiesRawResponse) GetResult() int64 {
-	if x != nil {
-		return x.Result
-	}
-	return 0
-}
-
-type RegisterDefaultNetworkCallbackRawRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Callback      int64                  `protobuf:"varint,1,opt,name=callback,proto3" json:"callback,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RegisterDefaultNetworkCallbackRawRequest) Reset() {
-	*x = RegisterDefaultNetworkCallbackRawRequest{}
-	mi := &file_proto_net_net_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RegisterDefaultNetworkCallbackRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RegisterDefaultNetworkCallbackRawRequest) ProtoMessage() {}
-
-func (x *RegisterDefaultNetworkCallbackRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_net_net_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RegisterDefaultNetworkCallbackRawRequest.ProtoReflect.Descriptor instead.
-func (*RegisterDefaultNetworkCallbackRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_net_net_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *RegisterDefaultNetworkCallbackRawRequest) GetCallback() int64 {
-	if x != nil {
-		return x.Callback
-	}
-	return 0
-}
-
-type RegisterDefaultNetworkCallbackRawResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RegisterDefaultNetworkCallbackRawResponse) Reset() {
-	*x = RegisterDefaultNetworkCallbackRawResponse{}
-	mi := &file_proto_net_net_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RegisterDefaultNetworkCallbackRawResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RegisterDefaultNetworkCallbackRawResponse) ProtoMessage() {}
-
-func (x *RegisterDefaultNetworkCallbackRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_net_net_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RegisterDefaultNetworkCallbackRawResponse.ProtoReflect.Descriptor instead.
-func (*RegisterDefaultNetworkCallbackRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_net_net_proto_rawDescGZIP(), []int{5}
-}
-
-type UnregisterNetworkCallbackRawRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Callback      int64                  `protobuf:"varint,1,opt,name=callback,proto3" json:"callback,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UnregisterNetworkCallbackRawRequest) Reset() {
-	*x = UnregisterNetworkCallbackRawRequest{}
-	mi := &file_proto_net_net_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UnregisterNetworkCallbackRawRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UnregisterNetworkCallbackRawRequest) ProtoMessage() {}
-
-func (x *UnregisterNetworkCallbackRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_net_net_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UnregisterNetworkCallbackRawRequest.ProtoReflect.Descriptor instead.
-func (*UnregisterNetworkCallbackRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_net_net_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *UnregisterNetworkCallbackRawRequest) GetCallback() int64 {
-	if x != nil {
-		return x.Callback
-	}
-	return 0
-}
-
-type UnregisterNetworkCallbackRawResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UnregisterNetworkCallbackRawResponse) Reset() {
-	*x = UnregisterNetworkCallbackRawResponse{}
-	mi := &file_proto_net_net_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UnregisterNetworkCallbackRawResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UnregisterNetworkCallbackRawResponse) ProtoMessage() {}
-
-func (x *UnregisterNetworkCallbackRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_net_net_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UnregisterNetworkCallbackRawResponse.ProtoReflect.Descriptor instead.
-func (*UnregisterNetworkCallbackRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_net_net_proto_rawDescGZIP(), []int{7}
-}
-
-type HasTransportRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Transport     int32                  `protobuf:"varint,1,opt,name=transport,proto3" json:"transport,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *HasTransportRequest) Reset() {
-	*x = HasTransportRequest{}
-	mi := &file_proto_net_net_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *HasTransportRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*HasTransportRequest) ProtoMessage() {}
-
-func (x *HasTransportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_net_net_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use HasTransportRequest.ProtoReflect.Descriptor instead.
-func (*HasTransportRequest) Descriptor() ([]byte, []int) {
-	return file_proto_net_net_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *HasTransportRequest) GetTransport() int32 {
-	if x != nil {
-		return x.Transport
-	}
-	return 0
-}
-
-type HasTransportResponse struct {
+type BindProcessToNetworkResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *HasTransportResponse) Reset() {
-	*x = HasTransportResponse{}
-	mi := &file_proto_net_net_proto_msgTypes[9]
+func (x *BindProcessToNetworkResponse) Reset() {
+	*x = BindProcessToNetworkResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *HasTransportResponse) String() string {
+func (x *BindProcessToNetworkResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HasTransportResponse) ProtoMessage() {}
+func (*BindProcessToNetworkResponse) ProtoMessage() {}
 
-func (x *HasTransportResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_net_net_proto_msgTypes[9]
+func (x *BindProcessToNetworkResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -427,38 +179,326 @@ func (x *HasTransportResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HasTransportResponse.ProtoReflect.Descriptor instead.
-func (*HasTransportResponse) Descriptor() ([]byte, []int) {
-	return file_proto_net_net_proto_rawDescGZIP(), []int{9}
+// Deprecated: Use BindProcessToNetworkResponse.ProtoReflect.Descriptor instead.
+func (*BindProcessToNetworkResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *HasTransportResponse) GetResult() bool {
+func (x *BindProcessToNetworkResponse) GetResult() bool {
 	if x != nil {
 		return x.Result
 	}
 	return false
 }
 
-type GetLinkDownRequest struct {
+type CreateSocketKeepaliveRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
+	Arg4          int64                  `protobuf:"varint,5,opt,name=arg4,proto3" json:"arg4,omitempty"`
+	Arg5          int64                  `protobuf:"varint,6,opt,name=arg5,proto3" json:"arg5,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSocketKeepaliveRequest) Reset() {
+	*x = CreateSocketKeepaliveRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSocketKeepaliveRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSocketKeepaliveRequest) ProtoMessage() {}
+
+func (x *CreateSocketKeepaliveRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSocketKeepaliveRequest.ProtoReflect.Descriptor instead.
+func (*CreateSocketKeepaliveRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CreateSocketKeepaliveRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *CreateSocketKeepaliveRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *CreateSocketKeepaliveRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+func (x *CreateSocketKeepaliveRequest) GetArg3() int64 {
+	if x != nil {
+		return x.Arg3
+	}
+	return 0
+}
+
+func (x *CreateSocketKeepaliveRequest) GetArg4() int64 {
+	if x != nil {
+		return x.Arg4
+	}
+	return 0
+}
+
+func (x *CreateSocketKeepaliveRequest) GetArg5() int64 {
+	if x != nil {
+		return x.Arg5
+	}
+	return 0
+}
+
+type CreateSocketKeepaliveResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSocketKeepaliveResponse) Reset() {
+	*x = CreateSocketKeepaliveResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSocketKeepaliveResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSocketKeepaliveResponse) ProtoMessage() {}
+
+func (x *CreateSocketKeepaliveResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSocketKeepaliveResponse.ProtoReflect.Descriptor instead.
+func (*CreateSocketKeepaliveResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CreateSocketKeepaliveResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetActiveNetworkRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetLinkDownRequest) Reset() {
-	*x = GetLinkDownRequest{}
+func (x *GetActiveNetworkRequest) Reset() {
+	*x = GetActiveNetworkRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetActiveNetworkRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetActiveNetworkRequest) ProtoMessage() {}
+
+func (x *GetActiveNetworkRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetActiveNetworkRequest.ProtoReflect.Descriptor instead.
+func (*GetActiveNetworkRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{6}
+}
+
+type GetActiveNetworkResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetActiveNetworkResponse) Reset() {
+	*x = GetActiveNetworkResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetActiveNetworkResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetActiveNetworkResponse) ProtoMessage() {}
+
+func (x *GetActiveNetworkResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetActiveNetworkResponse.ProtoReflect.Descriptor instead.
+func (*GetActiveNetworkResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetActiveNetworkResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetActiveNetworkInfoRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetActiveNetworkInfoRequest) Reset() {
+	*x = GetActiveNetworkInfoRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetActiveNetworkInfoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetActiveNetworkInfoRequest) ProtoMessage() {}
+
+func (x *GetActiveNetworkInfoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetActiveNetworkInfoRequest.ProtoReflect.Descriptor instead.
+func (*GetActiveNetworkInfoRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{8}
+}
+
+type GetActiveNetworkInfoResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetActiveNetworkInfoResponse) Reset() {
+	*x = GetActiveNetworkInfoResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetActiveNetworkInfoResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetActiveNetworkInfoResponse) ProtoMessage() {}
+
+func (x *GetActiveNetworkInfoResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetActiveNetworkInfoResponse.ProtoReflect.Descriptor instead.
+func (*GetActiveNetworkInfoResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetActiveNetworkInfoResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetAllNetworkInfoRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAllNetworkInfoRequest) Reset() {
+	*x = GetAllNetworkInfoRequest{}
 	mi := &file_proto_net_net_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetLinkDownRequest) String() string {
+func (x *GetAllNetworkInfoRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetLinkDownRequest) ProtoMessage() {}
+func (*GetAllNetworkInfoRequest) ProtoMessage() {}
 
-func (x *GetLinkDownRequest) ProtoReflect() protoreflect.Message {
+func (x *GetAllNetworkInfoRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_net_net_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -470,32 +510,32 @@ func (x *GetLinkDownRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetLinkDownRequest.ProtoReflect.Descriptor instead.
-func (*GetLinkDownRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetAllNetworkInfoRequest.ProtoReflect.Descriptor instead.
+func (*GetAllNetworkInfoRequest) Descriptor() ([]byte, []int) {
 	return file_proto_net_net_proto_rawDescGZIP(), []int{10}
 }
 
-type GetLinkDownResponse struct {
+type GetAllNetworkInfoResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetLinkDownResponse) Reset() {
-	*x = GetLinkDownResponse{}
+func (x *GetAllNetworkInfoResponse) Reset() {
+	*x = GetAllNetworkInfoResponse{}
 	mi := &file_proto_net_net_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetLinkDownResponse) String() string {
+func (x *GetAllNetworkInfoResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetLinkDownResponse) ProtoMessage() {}
+func (*GetAllNetworkInfoResponse) ProtoMessage() {}
 
-func (x *GetLinkDownResponse) ProtoReflect() protoreflect.Message {
+func (x *GetAllNetworkInfoResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_net_net_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -507,38 +547,38 @@ func (x *GetLinkDownResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetLinkDownResponse.ProtoReflect.Descriptor instead.
-func (*GetLinkDownResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetAllNetworkInfoResponse.ProtoReflect.Descriptor instead.
+func (*GetAllNetworkInfoResponse) Descriptor() ([]byte, []int) {
 	return file_proto_net_net_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *GetLinkDownResponse) GetResult() int32 {
+func (x *GetAllNetworkInfoResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type GetLinkUpRequest struct {
+type GetAllNetworksRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetLinkUpRequest) Reset() {
-	*x = GetLinkUpRequest{}
+func (x *GetAllNetworksRequest) Reset() {
+	*x = GetAllNetworksRequest{}
 	mi := &file_proto_net_net_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetLinkUpRequest) String() string {
+func (x *GetAllNetworksRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetLinkUpRequest) ProtoMessage() {}
+func (*GetAllNetworksRequest) ProtoMessage() {}
 
-func (x *GetLinkUpRequest) ProtoReflect() protoreflect.Message {
+func (x *GetAllNetworksRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_net_net_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -550,33 +590,297 @@ func (x *GetLinkUpRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetLinkUpRequest.ProtoReflect.Descriptor instead.
-func (*GetLinkUpRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetAllNetworksRequest.ProtoReflect.Descriptor instead.
+func (*GetAllNetworksRequest) Descriptor() ([]byte, []int) {
 	return file_proto_net_net_proto_rawDescGZIP(), []int{12}
 }
 
-type GetLinkUpResponse struct {
+type GetAllNetworksResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAllNetworksResponse) Reset() {
+	*x = GetAllNetworksResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAllNetworksResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAllNetworksResponse) ProtoMessage() {}
+
+func (x *GetAllNetworksResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAllNetworksResponse.ProtoReflect.Descriptor instead.
+func (*GetAllNetworksResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GetAllNetworksResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetBackgroundDataSettingRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBackgroundDataSettingRequest) Reset() {
+	*x = GetBackgroundDataSettingRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBackgroundDataSettingRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBackgroundDataSettingRequest) ProtoMessage() {}
+
+func (x *GetBackgroundDataSettingRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBackgroundDataSettingRequest.ProtoReflect.Descriptor instead.
+func (*GetBackgroundDataSettingRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{14}
+}
+
+type GetBackgroundDataSettingResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBackgroundDataSettingResponse) Reset() {
+	*x = GetBackgroundDataSettingResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBackgroundDataSettingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBackgroundDataSettingResponse) ProtoMessage() {}
+
+func (x *GetBackgroundDataSettingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBackgroundDataSettingResponse.ProtoReflect.Descriptor instead.
+func (*GetBackgroundDataSettingResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *GetBackgroundDataSettingResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type GetBoundNetworkForProcessRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBoundNetworkForProcessRequest) Reset() {
+	*x = GetBoundNetworkForProcessRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBoundNetworkForProcessRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBoundNetworkForProcessRequest) ProtoMessage() {}
+
+func (x *GetBoundNetworkForProcessRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBoundNetworkForProcessRequest.ProtoReflect.Descriptor instead.
+func (*GetBoundNetworkForProcessRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{16}
+}
+
+type GetBoundNetworkForProcessResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBoundNetworkForProcessResponse) Reset() {
+	*x = GetBoundNetworkForProcessResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBoundNetworkForProcessResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBoundNetworkForProcessResponse) ProtoMessage() {}
+
+func (x *GetBoundNetworkForProcessResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBoundNetworkForProcessResponse.ProtoReflect.Descriptor instead.
+func (*GetBoundNetworkForProcessResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *GetBoundNetworkForProcessResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetConnectionOwnerUidRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetConnectionOwnerUidRequest) Reset() {
+	*x = GetConnectionOwnerUidRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetConnectionOwnerUidRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetConnectionOwnerUidRequest) ProtoMessage() {}
+
+func (x *GetConnectionOwnerUidRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetConnectionOwnerUidRequest.ProtoReflect.Descriptor instead.
+func (*GetConnectionOwnerUidRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *GetConnectionOwnerUidRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *GetConnectionOwnerUidRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *GetConnectionOwnerUidRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type GetConnectionOwnerUidResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetLinkUpResponse) Reset() {
-	*x = GetLinkUpResponse{}
-	mi := &file_proto_net_net_proto_msgTypes[13]
+func (x *GetConnectionOwnerUidResponse) Reset() {
+	*x = GetConnectionOwnerUidResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetLinkUpResponse) String() string {
+func (x *GetConnectionOwnerUidResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetLinkUpResponse) ProtoMessage() {}
+func (*GetConnectionOwnerUidResponse) ProtoMessage() {}
 
-func (x *GetLinkUpResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_net_net_proto_msgTypes[13]
+func (x *GetConnectionOwnerUidResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -587,40 +891,39 @@ func (x *GetLinkUpResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetLinkUpResponse.ProtoReflect.Descriptor instead.
-func (*GetLinkUpResponse) Descriptor() ([]byte, []int) {
-	return file_proto_net_net_proto_rawDescGZIP(), []int{13}
+// Deprecated: Use GetConnectionOwnerUidResponse.ProtoReflect.Descriptor instead.
+func (*GetConnectionOwnerUidResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{19}
 }
 
-func (x *GetLinkUpResponse) GetResult() int32 {
+func (x *GetConnectionOwnerUidResponse) GetResult() int32 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type NetworkCallbackOnAvailableEvent struct {
+type GetDefaultProxyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *NetworkCallbackOnAvailableEvent) Reset() {
-	*x = NetworkCallbackOnAvailableEvent{}
-	mi := &file_proto_net_net_proto_msgTypes[14]
+func (x *GetDefaultProxyRequest) Reset() {
+	*x = GetDefaultProxyRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *NetworkCallbackOnAvailableEvent) String() string {
+func (x *GetDefaultProxyRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*NetworkCallbackOnAvailableEvent) ProtoMessage() {}
+func (*GetDefaultProxyRequest) ProtoMessage() {}
 
-func (x *NetworkCallbackOnAvailableEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_net_net_proto_msgTypes[14]
+func (x *GetDefaultProxyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -631,40 +934,33 @@ func (x *NetworkCallbackOnAvailableEvent) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use NetworkCallbackOnAvailableEvent.ProtoReflect.Descriptor instead.
-func (*NetworkCallbackOnAvailableEvent) Descriptor() ([]byte, []int) {
-	return file_proto_net_net_proto_rawDescGZIP(), []int{14}
+// Deprecated: Use GetDefaultProxyRequest.ProtoReflect.Descriptor instead.
+func (*GetDefaultProxyRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *NetworkCallbackOnAvailableEvent) GetArg0() int64 {
-	if x != nil {
-		return x.Arg0
-	}
-	return 0
-}
-
-type NetworkCallbackOnLostEvent struct {
+type GetDefaultProxyResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *NetworkCallbackOnLostEvent) Reset() {
-	*x = NetworkCallbackOnLostEvent{}
-	mi := &file_proto_net_net_proto_msgTypes[15]
+func (x *GetDefaultProxyResponse) Reset() {
+	*x = GetDefaultProxyResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *NetworkCallbackOnLostEvent) String() string {
+func (x *GetDefaultProxyResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*NetworkCallbackOnLostEvent) ProtoMessage() {}
+func (*GetDefaultProxyResponse) ProtoMessage() {}
 
-func (x *NetworkCallbackOnLostEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_net_net_proto_msgTypes[15]
+func (x *GetDefaultProxyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -675,19 +971,939 @@ func (x *NetworkCallbackOnLostEvent) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use NetworkCallbackOnLostEvent.ProtoReflect.Descriptor instead.
-func (*NetworkCallbackOnLostEvent) Descriptor() ([]byte, []int) {
-	return file_proto_net_net_proto_rawDescGZIP(), []int{15}
+// Deprecated: Use GetDefaultProxyResponse.ProtoReflect.Descriptor instead.
+func (*GetDefaultProxyResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *NetworkCallbackOnLostEvent) GetArg0() int64 {
+func (x *GetDefaultProxyResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetLinkPropertiesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLinkPropertiesRequest) Reset() {
+	*x = GetLinkPropertiesRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLinkPropertiesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLinkPropertiesRequest) ProtoMessage() {}
+
+func (x *GetLinkPropertiesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLinkPropertiesRequest.ProtoReflect.Descriptor instead.
+func (*GetLinkPropertiesRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *GetLinkPropertiesRequest) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-type NetworkCallbackOnCapabilitiesChangedEvent struct {
+type GetLinkPropertiesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLinkPropertiesResponse) Reset() {
+	*x = GetLinkPropertiesResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLinkPropertiesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLinkPropertiesResponse) ProtoMessage() {}
+
+func (x *GetLinkPropertiesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLinkPropertiesResponse.ProtoReflect.Descriptor instead.
+func (*GetLinkPropertiesResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *GetLinkPropertiesResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetMultipathPreferenceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMultipathPreferenceRequest) Reset() {
+	*x = GetMultipathPreferenceRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMultipathPreferenceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMultipathPreferenceRequest) ProtoMessage() {}
+
+func (x *GetMultipathPreferenceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMultipathPreferenceRequest.ProtoReflect.Descriptor instead.
+func (*GetMultipathPreferenceRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *GetMultipathPreferenceRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type GetMultipathPreferenceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMultipathPreferenceResponse) Reset() {
+	*x = GetMultipathPreferenceResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMultipathPreferenceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMultipathPreferenceResponse) ProtoMessage() {}
+
+func (x *GetMultipathPreferenceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMultipathPreferenceResponse.ProtoReflect.Descriptor instead.
+func (*GetMultipathPreferenceResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *GetMultipathPreferenceResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetNetworkCapabilitiesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNetworkCapabilitiesRequest) Reset() {
+	*x = GetNetworkCapabilitiesRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNetworkCapabilitiesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNetworkCapabilitiesRequest) ProtoMessage() {}
+
+func (x *GetNetworkCapabilitiesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNetworkCapabilitiesRequest.ProtoReflect.Descriptor instead.
+func (*GetNetworkCapabilitiesRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *GetNetworkCapabilitiesRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type GetNetworkCapabilitiesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNetworkCapabilitiesResponse) Reset() {
+	*x = GetNetworkCapabilitiesResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNetworkCapabilitiesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNetworkCapabilitiesResponse) ProtoMessage() {}
+
+func (x *GetNetworkCapabilitiesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNetworkCapabilitiesResponse.ProtoReflect.Descriptor instead.
+func (*GetNetworkCapabilitiesResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *GetNetworkCapabilitiesResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetNetworkInfo1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNetworkInfo1Request) Reset() {
+	*x = GetNetworkInfo1Request{}
+	mi := &file_proto_net_net_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNetworkInfo1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNetworkInfo1Request) ProtoMessage() {}
+
+func (x *GetNetworkInfo1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNetworkInfo1Request.ProtoReflect.Descriptor instead.
+func (*GetNetworkInfo1Request) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *GetNetworkInfo1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type GetNetworkInfo1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNetworkInfo1Response) Reset() {
+	*x = GetNetworkInfo1Response{}
+	mi := &file_proto_net_net_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNetworkInfo1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNetworkInfo1Response) ProtoMessage() {}
+
+func (x *GetNetworkInfo1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNetworkInfo1Response.ProtoReflect.Descriptor instead.
+func (*GetNetworkInfo1Response) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *GetNetworkInfo1Response) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetNetworkInfo1_1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNetworkInfo1_1Request) Reset() {
+	*x = GetNetworkInfo1_1Request{}
+	mi := &file_proto_net_net_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNetworkInfo1_1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNetworkInfo1_1Request) ProtoMessage() {}
+
+func (x *GetNetworkInfo1_1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNetworkInfo1_1Request.ProtoReflect.Descriptor instead.
+func (*GetNetworkInfo1_1Request) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *GetNetworkInfo1_1Request) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type GetNetworkInfo1_1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNetworkInfo1_1Response) Reset() {
+	*x = GetNetworkInfo1_1Response{}
+	mi := &file_proto_net_net_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNetworkInfo1_1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNetworkInfo1_1Response) ProtoMessage() {}
+
+func (x *GetNetworkInfo1_1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNetworkInfo1_1Response.ProtoReflect.Descriptor instead.
+func (*GetNetworkInfo1_1Response) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *GetNetworkInfo1_1Response) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetNetworkPreferenceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNetworkPreferenceRequest) Reset() {
+	*x = GetNetworkPreferenceRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNetworkPreferenceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNetworkPreferenceRequest) ProtoMessage() {}
+
+func (x *GetNetworkPreferenceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNetworkPreferenceRequest.ProtoReflect.Descriptor instead.
+func (*GetNetworkPreferenceRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{32}
+}
+
+type GetNetworkPreferenceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNetworkPreferenceResponse) Reset() {
+	*x = GetNetworkPreferenceResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNetworkPreferenceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNetworkPreferenceResponse) ProtoMessage() {}
+
+func (x *GetNetworkPreferenceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNetworkPreferenceResponse.ProtoReflect.Descriptor instead.
+func (*GetNetworkPreferenceResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *GetNetworkPreferenceResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetNetworkWatchlistConfigHashRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNetworkWatchlistConfigHashRequest) Reset() {
+	*x = GetNetworkWatchlistConfigHashRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNetworkWatchlistConfigHashRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNetworkWatchlistConfigHashRequest) ProtoMessage() {}
+
+func (x *GetNetworkWatchlistConfigHashRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNetworkWatchlistConfigHashRequest.ProtoReflect.Descriptor instead.
+func (*GetNetworkWatchlistConfigHashRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{34}
+}
+
+type GetNetworkWatchlistConfigHashResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNetworkWatchlistConfigHashResponse) Reset() {
+	*x = GetNetworkWatchlistConfigHashResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNetworkWatchlistConfigHashResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNetworkWatchlistConfigHashResponse) ProtoMessage() {}
+
+func (x *GetNetworkWatchlistConfigHashResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNetworkWatchlistConfigHashResponse.ProtoReflect.Descriptor instead.
+func (*GetNetworkWatchlistConfigHashResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *GetNetworkWatchlistConfigHashResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetRestrictBackgroundStatusRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRestrictBackgroundStatusRequest) Reset() {
+	*x = GetRestrictBackgroundStatusRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRestrictBackgroundStatusRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRestrictBackgroundStatusRequest) ProtoMessage() {}
+
+func (x *GetRestrictBackgroundStatusRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRestrictBackgroundStatusRequest.ProtoReflect.Descriptor instead.
+func (*GetRestrictBackgroundStatusRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{36}
+}
+
+type GetRestrictBackgroundStatusResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRestrictBackgroundStatusResponse) Reset() {
+	*x = GetRestrictBackgroundStatusResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRestrictBackgroundStatusResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRestrictBackgroundStatusResponse) ProtoMessage() {}
+
+func (x *GetRestrictBackgroundStatusResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRestrictBackgroundStatusResponse.ProtoReflect.Descriptor instead.
+func (*GetRestrictBackgroundStatusResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *GetRestrictBackgroundStatusResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type IsActiveNetworkMeteredRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsActiveNetworkMeteredRequest) Reset() {
+	*x = IsActiveNetworkMeteredRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsActiveNetworkMeteredRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsActiveNetworkMeteredRequest) ProtoMessage() {}
+
+func (x *IsActiveNetworkMeteredRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsActiveNetworkMeteredRequest.ProtoReflect.Descriptor instead.
+func (*IsActiveNetworkMeteredRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{38}
+}
+
+type IsActiveNetworkMeteredResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsActiveNetworkMeteredResponse) Reset() {
+	*x = IsActiveNetworkMeteredResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsActiveNetworkMeteredResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsActiveNetworkMeteredResponse) ProtoMessage() {}
+
+func (x *IsActiveNetworkMeteredResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsActiveNetworkMeteredResponse.ProtoReflect.Descriptor instead.
+func (*IsActiveNetworkMeteredResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *IsActiveNetworkMeteredResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsDefaultNetworkActiveRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsDefaultNetworkActiveRequest) Reset() {
+	*x = IsDefaultNetworkActiveRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsDefaultNetworkActiveRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsDefaultNetworkActiveRequest) ProtoMessage() {}
+
+func (x *IsDefaultNetworkActiveRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsDefaultNetworkActiveRequest.ProtoReflect.Descriptor instead.
+func (*IsDefaultNetworkActiveRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{40}
+}
+
+type IsDefaultNetworkActiveResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsDefaultNetworkActiveResponse) Reset() {
+	*x = IsDefaultNetworkActiveResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsDefaultNetworkActiveResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsDefaultNetworkActiveResponse) ProtoMessage() {}
+
+func (x *IsDefaultNetworkActiveResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsDefaultNetworkActiveResponse.ProtoReflect.Descriptor instead.
+func (*IsDefaultNetworkActiveResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *IsDefaultNetworkActiveResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type RegisterDefaultNetworkCallbackRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterDefaultNetworkCallbackRequest) Reset() {
+	*x = RegisterDefaultNetworkCallbackRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterDefaultNetworkCallbackRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterDefaultNetworkCallbackRequest) ProtoMessage() {}
+
+func (x *RegisterDefaultNetworkCallbackRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterDefaultNetworkCallbackRequest.ProtoReflect.Descriptor instead.
+func (*RegisterDefaultNetworkCallbackRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *RegisterDefaultNetworkCallbackRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type RegisterDefaultNetworkCallbackResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterDefaultNetworkCallbackResponse) Reset() {
+	*x = RegisterDefaultNetworkCallbackResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterDefaultNetworkCallbackResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterDefaultNetworkCallbackResponse) ProtoMessage() {}
+
+func (x *RegisterDefaultNetworkCallbackResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterDefaultNetworkCallbackResponse.ProtoReflect.Descriptor instead.
+func (*RegisterDefaultNetworkCallbackResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{43}
+}
+
+type RegisterNetworkCallback2Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
@@ -695,21 +1911,21 @@ type NetworkCallbackOnCapabilitiesChangedEvent struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *NetworkCallbackOnCapabilitiesChangedEvent) Reset() {
-	*x = NetworkCallbackOnCapabilitiesChangedEvent{}
-	mi := &file_proto_net_net_proto_msgTypes[16]
+func (x *RegisterNetworkCallback2Request) Reset() {
+	*x = RegisterNetworkCallback2Request{}
+	mi := &file_proto_net_net_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *NetworkCallbackOnCapabilitiesChangedEvent) String() string {
+func (x *RegisterNetworkCallback2Request) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*NetworkCallbackOnCapabilitiesChangedEvent) ProtoMessage() {}
+func (*RegisterNetworkCallback2Request) ProtoMessage() {}
 
-func (x *NetworkCallbackOnCapabilitiesChangedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_net_net_proto_msgTypes[16]
+func (x *RegisterNetworkCallback2Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -720,106 +1936,46 @@ func (x *NetworkCallbackOnCapabilitiesChangedEvent) ProtoReflect() protoreflect.
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use NetworkCallbackOnCapabilitiesChangedEvent.ProtoReflect.Descriptor instead.
-func (*NetworkCallbackOnCapabilitiesChangedEvent) Descriptor() ([]byte, []int) {
-	return file_proto_net_net_proto_rawDescGZIP(), []int{16}
+// Deprecated: Use RegisterNetworkCallback2Request.ProtoReflect.Descriptor instead.
+func (*RegisterNetworkCallback2Request) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{44}
 }
 
-func (x *NetworkCallbackOnCapabilitiesChangedEvent) GetArg0() int64 {
+func (x *RegisterNetworkCallback2Request) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-func (x *NetworkCallbackOnCapabilitiesChangedEvent) GetArg1() int64 {
+func (x *RegisterNetworkCallback2Request) GetArg1() int64 {
 	if x != nil {
 		return x.Arg1
 	}
 	return 0
 }
 
-type NetworkCallbackEvent struct {
-	state                 protoimpl.MessageState                     `protogen:"open.v1"`
-	OnAvailable           *NetworkCallbackOnAvailableEvent           `protobuf:"bytes,1,opt,name=on_available,json=onAvailable,proto3,oneof" json:"on_available,omitempty"`
-	OnLost                *NetworkCallbackOnLostEvent                `protobuf:"bytes,2,opt,name=on_lost,json=onLost,proto3,oneof" json:"on_lost,omitempty"`
-	OnCapabilitiesChanged *NetworkCallbackOnCapabilitiesChangedEvent `protobuf:"bytes,3,opt,name=on_capabilities_changed,json=onCapabilitiesChanged,proto3,oneof" json:"on_capabilities_changed,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *NetworkCallbackEvent) Reset() {
-	*x = NetworkCallbackEvent{}
-	mi := &file_proto_net_net_proto_msgTypes[17]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *NetworkCallbackEvent) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*NetworkCallbackEvent) ProtoMessage() {}
-
-func (x *NetworkCallbackEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_net_net_proto_msgTypes[17]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use NetworkCallbackEvent.ProtoReflect.Descriptor instead.
-func (*NetworkCallbackEvent) Descriptor() ([]byte, []int) {
-	return file_proto_net_net_proto_rawDescGZIP(), []int{17}
-}
-
-func (x *NetworkCallbackEvent) GetOnAvailable() *NetworkCallbackOnAvailableEvent {
-	if x != nil {
-		return x.OnAvailable
-	}
-	return nil
-}
-
-func (x *NetworkCallbackEvent) GetOnLost() *NetworkCallbackOnLostEvent {
-	if x != nil {
-		return x.OnLost
-	}
-	return nil
-}
-
-func (x *NetworkCallbackEvent) GetOnCapabilitiesChanged() *NetworkCallbackOnCapabilitiesChangedEvent {
-	if x != nil {
-		return x.OnCapabilitiesChanged
-	}
-	return nil
-}
-
-type SubscribeNetworkCallbackRequest struct {
+type RegisterNetworkCallback2Response struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SubscribeNetworkCallbackRequest) Reset() {
-	*x = SubscribeNetworkCallbackRequest{}
-	mi := &file_proto_net_net_proto_msgTypes[18]
+func (x *RegisterNetworkCallback2Response) Reset() {
+	*x = RegisterNetworkCallback2Response{}
+	mi := &file_proto_net_net_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SubscribeNetworkCallbackRequest) String() string {
+func (x *RegisterNetworkCallback2Response) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SubscribeNetworkCallbackRequest) ProtoMessage() {}
+func (*RegisterNetworkCallback2Response) ProtoMessage() {}
 
-func (x *SubscribeNetworkCallbackRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_net_net_proto_msgTypes[18]
+func (x *RegisterNetworkCallback2Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -830,66 +1986,1466 @@ func (x *SubscribeNetworkCallbackRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SubscribeNetworkCallbackRequest.ProtoReflect.Descriptor instead.
-func (*SubscribeNetworkCallbackRequest) Descriptor() ([]byte, []int) {
-	return file_proto_net_net_proto_rawDescGZIP(), []int{18}
+// Deprecated: Use RegisterNetworkCallback2Response.ProtoReflect.Descriptor instead.
+func (*RegisterNetworkCallback2Response) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{45}
+}
+
+type RegisterNetworkCallback2_1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterNetworkCallback2_1Request) Reset() {
+	*x = RegisterNetworkCallback2_1Request{}
+	mi := &file_proto_net_net_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterNetworkCallback2_1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterNetworkCallback2_1Request) ProtoMessage() {}
+
+func (x *RegisterNetworkCallback2_1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterNetworkCallback2_1Request.ProtoReflect.Descriptor instead.
+func (*RegisterNetworkCallback2_1Request) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *RegisterNetworkCallback2_1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *RegisterNetworkCallback2_1Request) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type RegisterNetworkCallback2_1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RegisterNetworkCallback2_1Response) Reset() {
+	*x = RegisterNetworkCallback2_1Response{}
+	mi := &file_proto_net_net_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegisterNetworkCallback2_1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegisterNetworkCallback2_1Response) ProtoMessage() {}
+
+func (x *RegisterNetworkCallback2_1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegisterNetworkCallback2_1Response.ProtoReflect.Descriptor instead.
+func (*RegisterNetworkCallback2_1Response) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{47}
+}
+
+type ReleaseNetworkRequestRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReleaseNetworkRequestRequest) Reset() {
+	*x = ReleaseNetworkRequestRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReleaseNetworkRequestRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReleaseNetworkRequestRequest) ProtoMessage() {}
+
+func (x *ReleaseNetworkRequestRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReleaseNetworkRequestRequest.ProtoReflect.Descriptor instead.
+func (*ReleaseNetworkRequestRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *ReleaseNetworkRequestRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type ReleaseNetworkRequestResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReleaseNetworkRequestResponse) Reset() {
+	*x = ReleaseNetworkRequestResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReleaseNetworkRequestResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReleaseNetworkRequestResponse) ProtoMessage() {}
+
+func (x *ReleaseNetworkRequestResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReleaseNetworkRequestResponse.ProtoReflect.Descriptor instead.
+func (*ReleaseNetworkRequestResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{49}
+}
+
+type RemoveDefaultNetworkActiveListenerRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RemoveDefaultNetworkActiveListenerRequest) Reset() {
+	*x = RemoveDefaultNetworkActiveListenerRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RemoveDefaultNetworkActiveListenerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveDefaultNetworkActiveListenerRequest) ProtoMessage() {}
+
+func (x *RemoveDefaultNetworkActiveListenerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveDefaultNetworkActiveListenerRequest.ProtoReflect.Descriptor instead.
+func (*RemoveDefaultNetworkActiveListenerRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *RemoveDefaultNetworkActiveListenerRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type RemoveDefaultNetworkActiveListenerResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RemoveDefaultNetworkActiveListenerResponse) Reset() {
+	*x = RemoveDefaultNetworkActiveListenerResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RemoveDefaultNetworkActiveListenerResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveDefaultNetworkActiveListenerResponse) ProtoMessage() {}
+
+func (x *RemoveDefaultNetworkActiveListenerResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveDefaultNetworkActiveListenerResponse.ProtoReflect.Descriptor instead.
+func (*RemoveDefaultNetworkActiveListenerResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{51}
+}
+
+type ReportBadNetworkRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReportBadNetworkRequest) Reset() {
+	*x = ReportBadNetworkRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReportBadNetworkRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReportBadNetworkRequest) ProtoMessage() {}
+
+func (x *ReportBadNetworkRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReportBadNetworkRequest.ProtoReflect.Descriptor instead.
+func (*ReportBadNetworkRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{52}
+}
+
+func (x *ReportBadNetworkRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type ReportBadNetworkResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReportBadNetworkResponse) Reset() {
+	*x = ReportBadNetworkResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReportBadNetworkResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReportBadNetworkResponse) ProtoMessage() {}
+
+func (x *ReportBadNetworkResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReportBadNetworkResponse.ProtoReflect.Descriptor instead.
+func (*ReportBadNetworkResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{53}
+}
+
+type ReportNetworkConnectivityRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          bool                   `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReportNetworkConnectivityRequest) Reset() {
+	*x = ReportNetworkConnectivityRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReportNetworkConnectivityRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReportNetworkConnectivityRequest) ProtoMessage() {}
+
+func (x *ReportNetworkConnectivityRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReportNetworkConnectivityRequest.ProtoReflect.Descriptor instead.
+func (*ReportNetworkConnectivityRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{54}
+}
+
+func (x *ReportNetworkConnectivityRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *ReportNetworkConnectivityRequest) GetArg1() bool {
+	if x != nil {
+		return x.Arg1
+	}
+	return false
+}
+
+type ReportNetworkConnectivityResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReportNetworkConnectivityResponse) Reset() {
+	*x = ReportNetworkConnectivityResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReportNetworkConnectivityResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReportNetworkConnectivityResponse) ProtoMessage() {}
+
+func (x *ReportNetworkConnectivityResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReportNetworkConnectivityResponse.ProtoReflect.Descriptor instead.
+func (*ReportNetworkConnectivityResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{55}
+}
+
+type RequestBandwidthUpdateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestBandwidthUpdateRequest) Reset() {
+	*x = RequestBandwidthUpdateRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[56]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestBandwidthUpdateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestBandwidthUpdateRequest) ProtoMessage() {}
+
+func (x *RequestBandwidthUpdateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[56]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestBandwidthUpdateRequest.ProtoReflect.Descriptor instead.
+func (*RequestBandwidthUpdateRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{56}
+}
+
+func (x *RequestBandwidthUpdateRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type RequestBandwidthUpdateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestBandwidthUpdateResponse) Reset() {
+	*x = RequestBandwidthUpdateResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[57]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestBandwidthUpdateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestBandwidthUpdateResponse) ProtoMessage() {}
+
+func (x *RequestBandwidthUpdateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[57]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestBandwidthUpdateResponse.ProtoReflect.Descriptor instead.
+func (*RequestBandwidthUpdateResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{57}
+}
+
+func (x *RequestBandwidthUpdateResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type RequestNetwork2Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestNetwork2Request) Reset() {
+	*x = RequestNetwork2Request{}
+	mi := &file_proto_net_net_proto_msgTypes[58]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestNetwork2Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestNetwork2Request) ProtoMessage() {}
+
+func (x *RequestNetwork2Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[58]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestNetwork2Request.ProtoReflect.Descriptor instead.
+func (*RequestNetwork2Request) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{58}
+}
+
+func (x *RequestNetwork2Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *RequestNetwork2Request) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type RequestNetwork2Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestNetwork2Response) Reset() {
+	*x = RequestNetwork2Response{}
+	mi := &file_proto_net_net_proto_msgTypes[59]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestNetwork2Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestNetwork2Response) ProtoMessage() {}
+
+func (x *RequestNetwork2Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[59]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestNetwork2Response.ProtoReflect.Descriptor instead.
+func (*RequestNetwork2Response) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{59}
+}
+
+type RequestNetwork2_1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestNetwork2_1Request) Reset() {
+	*x = RequestNetwork2_1Request{}
+	mi := &file_proto_net_net_proto_msgTypes[60]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestNetwork2_1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestNetwork2_1Request) ProtoMessage() {}
+
+func (x *RequestNetwork2_1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[60]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestNetwork2_1Request.ProtoReflect.Descriptor instead.
+func (*RequestNetwork2_1Request) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{60}
+}
+
+func (x *RequestNetwork2_1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *RequestNetwork2_1Request) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type RequestNetwork2_1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestNetwork2_1Response) Reset() {
+	*x = RequestNetwork2_1Response{}
+	mi := &file_proto_net_net_proto_msgTypes[61]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestNetwork2_1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestNetwork2_1Response) ProtoMessage() {}
+
+func (x *RequestNetwork2_1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[61]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestNetwork2_1Response.ProtoReflect.Descriptor instead.
+func (*RequestNetwork2_1Response) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{61}
+}
+
+type RequestNetwork3_2Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int32                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestNetwork3_2Request) Reset() {
+	*x = RequestNetwork3_2Request{}
+	mi := &file_proto_net_net_proto_msgTypes[62]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestNetwork3_2Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestNetwork3_2Request) ProtoMessage() {}
+
+func (x *RequestNetwork3_2Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[62]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestNetwork3_2Request.ProtoReflect.Descriptor instead.
+func (*RequestNetwork3_2Request) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{62}
+}
+
+func (x *RequestNetwork3_2Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *RequestNetwork3_2Request) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *RequestNetwork3_2Request) GetArg2() int32 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type RequestNetwork3_2Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestNetwork3_2Response) Reset() {
+	*x = RequestNetwork3_2Response{}
+	mi := &file_proto_net_net_proto_msgTypes[63]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestNetwork3_2Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestNetwork3_2Response) ProtoMessage() {}
+
+func (x *RequestNetwork3_2Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[63]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestNetwork3_2Response.ProtoReflect.Descriptor instead.
+func (*RequestNetwork3_2Response) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{63}
+}
+
+type SetNetworkPreferenceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetNetworkPreferenceRequest) Reset() {
+	*x = SetNetworkPreferenceRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[64]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetNetworkPreferenceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetNetworkPreferenceRequest) ProtoMessage() {}
+
+func (x *SetNetworkPreferenceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[64]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetNetworkPreferenceRequest.ProtoReflect.Descriptor instead.
+func (*SetNetworkPreferenceRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{64}
+}
+
+func (x *SetNetworkPreferenceRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetNetworkPreferenceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetNetworkPreferenceResponse) Reset() {
+	*x = SetNetworkPreferenceResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[65]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetNetworkPreferenceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetNetworkPreferenceResponse) ProtoMessage() {}
+
+func (x *SetNetworkPreferenceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[65]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetNetworkPreferenceResponse.ProtoReflect.Descriptor instead.
+func (*SetNetworkPreferenceResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{65}
+}
+
+type UnregisterNetworkCallback1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UnregisterNetworkCallback1Request) Reset() {
+	*x = UnregisterNetworkCallback1Request{}
+	mi := &file_proto_net_net_proto_msgTypes[66]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UnregisterNetworkCallback1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnregisterNetworkCallback1Request) ProtoMessage() {}
+
+func (x *UnregisterNetworkCallback1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[66]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnregisterNetworkCallback1Request.ProtoReflect.Descriptor instead.
+func (*UnregisterNetworkCallback1Request) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{66}
+}
+
+func (x *UnregisterNetworkCallback1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type UnregisterNetworkCallback1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UnregisterNetworkCallback1Response) Reset() {
+	*x = UnregisterNetworkCallback1Response{}
+	mi := &file_proto_net_net_proto_msgTypes[67]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UnregisterNetworkCallback1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnregisterNetworkCallback1Response) ProtoMessage() {}
+
+func (x *UnregisterNetworkCallback1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[67]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnregisterNetworkCallback1Response.ProtoReflect.Descriptor instead.
+func (*UnregisterNetworkCallback1Response) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{67}
+}
+
+type UnregisterNetworkCallback1_1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UnregisterNetworkCallback1_1Request) Reset() {
+	*x = UnregisterNetworkCallback1_1Request{}
+	mi := &file_proto_net_net_proto_msgTypes[68]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UnregisterNetworkCallback1_1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnregisterNetworkCallback1_1Request) ProtoMessage() {}
+
+func (x *UnregisterNetworkCallback1_1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[68]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnregisterNetworkCallback1_1Request.ProtoReflect.Descriptor instead.
+func (*UnregisterNetworkCallback1_1Request) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{68}
+}
+
+func (x *UnregisterNetworkCallback1_1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type UnregisterNetworkCallback1_1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UnregisterNetworkCallback1_1Response) Reset() {
+	*x = UnregisterNetworkCallback1_1Response{}
+	mi := &file_proto_net_net_proto_msgTypes[69]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UnregisterNetworkCallback1_1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnregisterNetworkCallback1_1Response) ProtoMessage() {}
+
+func (x *UnregisterNetworkCallback1_1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[69]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnregisterNetworkCallback1_1Response.ProtoReflect.Descriptor instead.
+func (*UnregisterNetworkCallback1_1Response) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{69}
+}
+
+type GetProcessDefaultNetworkRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetProcessDefaultNetworkRequest) Reset() {
+	*x = GetProcessDefaultNetworkRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[70]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetProcessDefaultNetworkRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetProcessDefaultNetworkRequest) ProtoMessage() {}
+
+func (x *GetProcessDefaultNetworkRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[70]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetProcessDefaultNetworkRequest.ProtoReflect.Descriptor instead.
+func (*GetProcessDefaultNetworkRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{70}
+}
+
+type GetProcessDefaultNetworkResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetProcessDefaultNetworkResponse) Reset() {
+	*x = GetProcessDefaultNetworkResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[71]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetProcessDefaultNetworkResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetProcessDefaultNetworkResponse) ProtoMessage() {}
+
+func (x *GetProcessDefaultNetworkResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[71]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetProcessDefaultNetworkResponse.ProtoReflect.Descriptor instead.
+func (*GetProcessDefaultNetworkResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{71}
+}
+
+func (x *GetProcessDefaultNetworkResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type IsNetworkTypeValidRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsNetworkTypeValidRequest) Reset() {
+	*x = IsNetworkTypeValidRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[72]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsNetworkTypeValidRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsNetworkTypeValidRequest) ProtoMessage() {}
+
+func (x *IsNetworkTypeValidRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[72]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsNetworkTypeValidRequest.ProtoReflect.Descriptor instead.
+func (*IsNetworkTypeValidRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{72}
+}
+
+func (x *IsNetworkTypeValidRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type IsNetworkTypeValidResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsNetworkTypeValidResponse) Reset() {
+	*x = IsNetworkTypeValidResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[73]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsNetworkTypeValidResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsNetworkTypeValidResponse) ProtoMessage() {}
+
+func (x *IsNetworkTypeValidResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[73]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsNetworkTypeValidResponse.ProtoReflect.Descriptor instead.
+func (*IsNetworkTypeValidResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{73}
+}
+
+func (x *IsNetworkTypeValidResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type SetProcessDefaultNetworkRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetProcessDefaultNetworkRequest) Reset() {
+	*x = SetProcessDefaultNetworkRequest{}
+	mi := &file_proto_net_net_proto_msgTypes[74]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetProcessDefaultNetworkRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetProcessDefaultNetworkRequest) ProtoMessage() {}
+
+func (x *SetProcessDefaultNetworkRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[74]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetProcessDefaultNetworkRequest.ProtoReflect.Descriptor instead.
+func (*SetProcessDefaultNetworkRequest) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{74}
+}
+
+func (x *SetProcessDefaultNetworkRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetProcessDefaultNetworkResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetProcessDefaultNetworkResponse) Reset() {
+	*x = SetProcessDefaultNetworkResponse{}
+	mi := &file_proto_net_net_proto_msgTypes[75]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetProcessDefaultNetworkResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetProcessDefaultNetworkResponse) ProtoMessage() {}
+
+func (x *SetProcessDefaultNetworkResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_net_net_proto_msgTypes[75]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetProcessDefaultNetworkResponse.ProtoReflect.Descriptor instead.
+func (*SetProcessDefaultNetworkResponse) Descriptor() ([]byte, []int) {
+	return file_proto_net_net_proto_rawDescGZIP(), []int{75}
+}
+
+func (x *SetProcessDefaultNetworkResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
 }
 
 var File_proto_net_net_proto protoreflect.FileDescriptor
 
 const file_proto_net_net_proto_rawDesc = "" +
 	"\n" +
-	"\x13proto/net/net.proto\x12\x03net\"\x1c\n" +
-	"\x1aGetActiveNetworkRawRequest\"5\n" +
-	"\x1bGetActiveNetworkRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"<\n" +
-	" GetNetworkCapabilitiesRawRequest\x12\x18\n" +
-	"\anetwork\x18\x01 \x01(\x03R\anetwork\";\n" +
-	"!GetNetworkCapabilitiesRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"F\n" +
-	"(RegisterDefaultNetworkCallbackRawRequest\x12\x1a\n" +
-	"\bcallback\x18\x01 \x01(\x03R\bcallback\"+\n" +
-	")RegisterDefaultNetworkCallbackRawResponse\"A\n" +
-	"#UnregisterNetworkCallbackRawRequest\x12\x1a\n" +
-	"\bcallback\x18\x01 \x01(\x03R\bcallback\"&\n" +
-	"$UnregisterNetworkCallbackRawResponse\"3\n" +
-	"\x13HasTransportRequest\x12\x1c\n" +
-	"\ttransport\x18\x01 \x01(\x05R\ttransport\".\n" +
-	"\x14HasTransportResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"\x14\n" +
-	"\x12GetLinkDownRequest\"-\n" +
-	"\x13GetLinkDownResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x05R\x06result\"\x12\n" +
-	"\x10GetLinkUpRequest\"+\n" +
-	"\x11GetLinkUpResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x05R\x06result\"5\n" +
-	"\x1fNetworkCallbackOnAvailableEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"0\n" +
-	"\x1aNetworkCallbackOnLostEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"S\n" +
-	")NetworkCallbackOnCapabilitiesChangedEvent\x12\x12\n" +
+	"\x13proto/net/net.proto\x12\x03net\"<\n" +
+	"&AddDefaultNetworkActiveListenerRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\")\n" +
+	"'AddDefaultNetworkActiveListenerResponse\"1\n" +
+	"\x1bBindProcessToNetworkRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"6\n" +
+	"\x1cBindProcessToNetworkResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x96\x01\n" +
+	"\x1cCreateSocketKeepaliveRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
-	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\xc9\x02\n" +
-	"\x14NetworkCallbackEvent\x12L\n" +
-	"\fon_available\x18\x01 \x01(\v2$.net.NetworkCallbackOnAvailableEventH\x00R\vonAvailable\x88\x01\x01\x12=\n" +
-	"\aon_lost\x18\x02 \x01(\v2\x1f.net.NetworkCallbackOnLostEventH\x01R\x06onLost\x88\x01\x01\x12k\n" +
-	"\x17on_capabilities_changed\x18\x03 \x01(\v2..net.NetworkCallbackOnCapabilitiesChangedEventH\x02R\x15onCapabilitiesChanged\x88\x01\x01B\x0f\n" +
-	"\r_on_availableB\n" +
-	"\n" +
-	"\b_on_lostB\x1a\n" +
-	"\x18_on_capabilities_changed\"!\n" +
-	"\x1fSubscribeNetworkCallbackRequest2\xd0\x03\n" +
-	"\x0eManagerService\x12X\n" +
-	"\x13GetActiveNetworkRaw\x12\x1f.net.GetActiveNetworkRawRequest\x1a .net.GetActiveNetworkRawResponse\x12j\n" +
-	"\x19GetNetworkCapabilitiesRaw\x12%.net.GetNetworkCapabilitiesRawRequest\x1a&.net.GetNetworkCapabilitiesRawResponse\x12\x82\x01\n" +
-	"!RegisterDefaultNetworkCallbackRaw\x12-.net.RegisterDefaultNetworkCallbackRawRequest\x1a..net.RegisterDefaultNetworkCallbackRawResponse\x12s\n" +
-	"\x1cUnregisterNetworkCallbackRaw\x12(.net.UnregisterNetworkCallbackRawRequest\x1a).net.UnregisterNetworkCallbackRawResponse2\xdf\x01\n" +
-	"\x1aNetworkCapabilitiesService\x12C\n" +
-	"\fHasTransport\x12\x18.net.HasTransportRequest\x1a\x19.net.HasTransportResponse\x12@\n" +
-	"\vGetLinkDown\x12\x17.net.GetLinkDownRequest\x1a\x18.net.GetLinkDownResponse\x12:\n" +
-	"\tGetLinkUp\x12\x15.net.GetLinkUpRequest\x1a\x16.net.GetLinkUpResponse2w\n" +
-	"\x16NetworkCallbackService\x12]\n" +
-	"\x18SubscribeNetworkCallback\x12$.net.SubscribeNetworkCallbackRequest\x1a\x19.net.NetworkCallbackEvent0\x01B&Z$github.com/xaionaro-go/jni/proto/netb\x06proto3"
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
+	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\x12\x12\n" +
+	"\x04arg4\x18\x05 \x01(\x03R\x04arg4\x12\x12\n" +
+	"\x04arg5\x18\x06 \x01(\x03R\x04arg5\"7\n" +
+	"\x1dCreateSocketKeepaliveResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x19\n" +
+	"\x17GetActiveNetworkRequest\"2\n" +
+	"\x18GetActiveNetworkResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x1d\n" +
+	"\x1bGetActiveNetworkInfoRequest\"6\n" +
+	"\x1cGetActiveNetworkInfoResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x1a\n" +
+	"\x18GetAllNetworkInfoRequest\"3\n" +
+	"\x19GetAllNetworkInfoResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x17\n" +
+	"\x15GetAllNetworksRequest\"0\n" +
+	"\x16GetAllNetworksResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"!\n" +
+	"\x1fGetBackgroundDataSettingRequest\":\n" +
+	" GetBackgroundDataSettingResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\"\n" +
+	" GetBoundNetworkForProcessRequest\";\n" +
+	"!GetBoundNetworkForProcessResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"Z\n" +
+	"\x1cGetConnectionOwnerUidRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"7\n" +
+	"\x1dGetConnectionOwnerUidResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x18\n" +
+	"\x16GetDefaultProxyRequest\"1\n" +
+	"\x17GetDefaultProxyResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\".\n" +
+	"\x18GetLinkPropertiesRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"3\n" +
+	"\x19GetLinkPropertiesResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"3\n" +
+	"\x1dGetMultipathPreferenceRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"8\n" +
+	"\x1eGetMultipathPreferenceResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"3\n" +
+	"\x1dGetNetworkCapabilitiesRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"8\n" +
+	"\x1eGetNetworkCapabilitiesResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\",\n" +
+	"\x16GetNetworkInfo1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"1\n" +
+	"\x17GetNetworkInfo1Response\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\".\n" +
+	"\x18GetNetworkInfo1_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"3\n" +
+	"\x19GetNetworkInfo1_1Response\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x1d\n" +
+	"\x1bGetNetworkPreferenceRequest\"6\n" +
+	"\x1cGetNetworkPreferenceResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"&\n" +
+	"$GetNetworkWatchlistConfigHashRequest\"?\n" +
+	"%GetNetworkWatchlistConfigHashResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"$\n" +
+	"\"GetRestrictBackgroundStatusRequest\"=\n" +
+	"#GetRestrictBackgroundStatusResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x1f\n" +
+	"\x1dIsActiveNetworkMeteredRequest\"8\n" +
+	"\x1eIsActiveNetworkMeteredResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x1f\n" +
+	"\x1dIsDefaultNetworkActiveRequest\"8\n" +
+	"\x1eIsDefaultNetworkActiveResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\";\n" +
+	"%RegisterDefaultNetworkCallbackRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"(\n" +
+	"&RegisterDefaultNetworkCallbackResponse\"I\n" +
+	"\x1fRegisterNetworkCallback2Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\"\n" +
+	" RegisterNetworkCallback2Response\"K\n" +
+	"!RegisterNetworkCallback2_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"$\n" +
+	"\"RegisterNetworkCallback2_1Response\"2\n" +
+	"\x1cReleaseNetworkRequestRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1f\n" +
+	"\x1dReleaseNetworkRequestResponse\"?\n" +
+	")RemoveDefaultNetworkActiveListenerRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\",\n" +
+	"*RemoveDefaultNetworkActiveListenerResponse\"-\n" +
+	"\x17ReportBadNetworkRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1a\n" +
+	"\x18ReportBadNetworkResponse\"J\n" +
+	" ReportNetworkConnectivityRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\bR\x04arg1\"#\n" +
+	"!ReportNetworkConnectivityResponse\"3\n" +
+	"\x1dRequestBandwidthUpdateRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"8\n" +
+	"\x1eRequestBandwidthUpdateResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"@\n" +
+	"\x16RequestNetwork2Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x19\n" +
+	"\x17RequestNetwork2Response\"B\n" +
+	"\x18RequestNetwork2_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"\x1b\n" +
+	"\x19RequestNetwork2_1Response\"V\n" +
+	"\x18RequestNetwork3_2Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x05R\x04arg2\"\x1b\n" +
+	"\x19RequestNetwork3_2Response\"1\n" +
+	"\x1bSetNetworkPreferenceRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"\x1e\n" +
+	"\x1cSetNetworkPreferenceResponse\"7\n" +
+	"!UnregisterNetworkCallback1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"$\n" +
+	"\"UnregisterNetworkCallback1Response\"9\n" +
+	"#UnregisterNetworkCallback1_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"&\n" +
+	"$UnregisterNetworkCallback1_1Response\"!\n" +
+	"\x1fGetProcessDefaultNetworkRequest\":\n" +
+	" GetProcessDefaultNetworkResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"/\n" +
+	"\x19IsNetworkTypeValidRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"4\n" +
+	"\x1aIsNetworkTypeValidResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"5\n" +
+	"\x1fSetProcessDefaultNetworkRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\":\n" +
+	" SetProcessDefaultNetworkResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result2\xab\x1d\n" +
+	"\x1aConnectivityManagerService\x12|\n" +
+	"\x1fAddDefaultNetworkActiveListener\x12+.net.AddDefaultNetworkActiveListenerRequest\x1a,.net.AddDefaultNetworkActiveListenerResponse\x12[\n" +
+	"\x14BindProcessToNetwork\x12 .net.BindProcessToNetworkRequest\x1a!.net.BindProcessToNetworkResponse\x12^\n" +
+	"\x15CreateSocketKeepalive\x12!.net.CreateSocketKeepaliveRequest\x1a\".net.CreateSocketKeepaliveResponse\x12O\n" +
+	"\x10GetActiveNetwork\x12\x1c.net.GetActiveNetworkRequest\x1a\x1d.net.GetActiveNetworkResponse\x12[\n" +
+	"\x14GetActiveNetworkInfo\x12 .net.GetActiveNetworkInfoRequest\x1a!.net.GetActiveNetworkInfoResponse\x12R\n" +
+	"\x11GetAllNetworkInfo\x12\x1d.net.GetAllNetworkInfoRequest\x1a\x1e.net.GetAllNetworkInfoResponse\x12I\n" +
+	"\x0eGetAllNetworks\x12\x1a.net.GetAllNetworksRequest\x1a\x1b.net.GetAllNetworksResponse\x12g\n" +
+	"\x18GetBackgroundDataSetting\x12$.net.GetBackgroundDataSettingRequest\x1a%.net.GetBackgroundDataSettingResponse\x12j\n" +
+	"\x19GetBoundNetworkForProcess\x12%.net.GetBoundNetworkForProcessRequest\x1a&.net.GetBoundNetworkForProcessResponse\x12^\n" +
+	"\x15GetConnectionOwnerUid\x12!.net.GetConnectionOwnerUidRequest\x1a\".net.GetConnectionOwnerUidResponse\x12L\n" +
+	"\x0fGetDefaultProxy\x12\x1b.net.GetDefaultProxyRequest\x1a\x1c.net.GetDefaultProxyResponse\x12R\n" +
+	"\x11GetLinkProperties\x12\x1d.net.GetLinkPropertiesRequest\x1a\x1e.net.GetLinkPropertiesResponse\x12a\n" +
+	"\x16GetMultipathPreference\x12\".net.GetMultipathPreferenceRequest\x1a#.net.GetMultipathPreferenceResponse\x12a\n" +
+	"\x16GetNetworkCapabilities\x12\".net.GetNetworkCapabilitiesRequest\x1a#.net.GetNetworkCapabilitiesResponse\x12L\n" +
+	"\x0fGetNetworkInfo1\x12\x1b.net.GetNetworkInfo1Request\x1a\x1c.net.GetNetworkInfo1Response\x12R\n" +
+	"\x11GetNetworkInfo1_1\x12\x1d.net.GetNetworkInfo1_1Request\x1a\x1e.net.GetNetworkInfo1_1Response\x12[\n" +
+	"\x14GetNetworkPreference\x12 .net.GetNetworkPreferenceRequest\x1a!.net.GetNetworkPreferenceResponse\x12v\n" +
+	"\x1dGetNetworkWatchlistConfigHash\x12).net.GetNetworkWatchlistConfigHashRequest\x1a*.net.GetNetworkWatchlistConfigHashResponse\x12p\n" +
+	"\x1bGetRestrictBackgroundStatus\x12'.net.GetRestrictBackgroundStatusRequest\x1a(.net.GetRestrictBackgroundStatusResponse\x12a\n" +
+	"\x16IsActiveNetworkMetered\x12\".net.IsActiveNetworkMeteredRequest\x1a#.net.IsActiveNetworkMeteredResponse\x12a\n" +
+	"\x16IsDefaultNetworkActive\x12\".net.IsDefaultNetworkActiveRequest\x1a#.net.IsDefaultNetworkActiveResponse\x12y\n" +
+	"\x1eRegisterDefaultNetworkCallback\x12*.net.RegisterDefaultNetworkCallbackRequest\x1a+.net.RegisterDefaultNetworkCallbackResponse\x12g\n" +
+	"\x18RegisterNetworkCallback2\x12$.net.RegisterNetworkCallback2Request\x1a%.net.RegisterNetworkCallback2Response\x12m\n" +
+	"\x1aRegisterNetworkCallback2_1\x12&.net.RegisterNetworkCallback2_1Request\x1a'.net.RegisterNetworkCallback2_1Response\x12^\n" +
+	"\x15ReleaseNetworkRequest\x12!.net.ReleaseNetworkRequestRequest\x1a\".net.ReleaseNetworkRequestResponse\x12\x85\x01\n" +
+	"\"RemoveDefaultNetworkActiveListener\x12..net.RemoveDefaultNetworkActiveListenerRequest\x1a/.net.RemoveDefaultNetworkActiveListenerResponse\x12O\n" +
+	"\x10ReportBadNetwork\x12\x1c.net.ReportBadNetworkRequest\x1a\x1d.net.ReportBadNetworkResponse\x12j\n" +
+	"\x19ReportNetworkConnectivity\x12%.net.ReportNetworkConnectivityRequest\x1a&.net.ReportNetworkConnectivityResponse\x12a\n" +
+	"\x16RequestBandwidthUpdate\x12\".net.RequestBandwidthUpdateRequest\x1a#.net.RequestBandwidthUpdateResponse\x12L\n" +
+	"\x0fRequestNetwork2\x12\x1b.net.RequestNetwork2Request\x1a\x1c.net.RequestNetwork2Response\x12R\n" +
+	"\x11RequestNetwork2_1\x12\x1d.net.RequestNetwork2_1Request\x1a\x1e.net.RequestNetwork2_1Response\x12R\n" +
+	"\x11RequestNetwork3_2\x12\x1d.net.RequestNetwork3_2Request\x1a\x1e.net.RequestNetwork3_2Response\x12[\n" +
+	"\x14SetNetworkPreference\x12 .net.SetNetworkPreferenceRequest\x1a!.net.SetNetworkPreferenceResponse\x12m\n" +
+	"\x1aUnregisterNetworkCallback1\x12&.net.UnregisterNetworkCallback1Request\x1a'.net.UnregisterNetworkCallback1Response\x12s\n" +
+	"\x1cUnregisterNetworkCallback1_1\x12(.net.UnregisterNetworkCallback1_1Request\x1a).net.UnregisterNetworkCallback1_1Response\x12g\n" +
+	"\x18GetProcessDefaultNetwork\x12$.net.GetProcessDefaultNetworkRequest\x1a%.net.GetProcessDefaultNetworkResponse\x12U\n" +
+	"\x12IsNetworkTypeValid\x12\x1e.net.IsNetworkTypeValidRequest\x1a\x1f.net.IsNetworkTypeValidResponse\x12g\n" +
+	"\x18SetProcessDefaultNetwork\x12$.net.SetProcessDefaultNetworkRequest\x1a%.net.SetProcessDefaultNetworkResponseB&Z$github.com/xaionaro-go/jni/proto/netb\x06proto3"
 
 var (
 	file_proto_net_net_proto_rawDescOnce sync.Once
@@ -903,53 +3459,167 @@ func file_proto_net_net_proto_rawDescGZIP() []byte {
 	return file_proto_net_net_proto_rawDescData
 }
 
-var file_proto_net_net_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_proto_net_net_proto_msgTypes = make([]protoimpl.MessageInfo, 76)
 var file_proto_net_net_proto_goTypes = []any{
-	(*GetActiveNetworkRawRequest)(nil),                // 0: net.GetActiveNetworkRawRequest
-	(*GetActiveNetworkRawResponse)(nil),               // 1: net.GetActiveNetworkRawResponse
-	(*GetNetworkCapabilitiesRawRequest)(nil),          // 2: net.GetNetworkCapabilitiesRawRequest
-	(*GetNetworkCapabilitiesRawResponse)(nil),         // 3: net.GetNetworkCapabilitiesRawResponse
-	(*RegisterDefaultNetworkCallbackRawRequest)(nil),  // 4: net.RegisterDefaultNetworkCallbackRawRequest
-	(*RegisterDefaultNetworkCallbackRawResponse)(nil), // 5: net.RegisterDefaultNetworkCallbackRawResponse
-	(*UnregisterNetworkCallbackRawRequest)(nil),       // 6: net.UnregisterNetworkCallbackRawRequest
-	(*UnregisterNetworkCallbackRawResponse)(nil),      // 7: net.UnregisterNetworkCallbackRawResponse
-	(*HasTransportRequest)(nil),                       // 8: net.HasTransportRequest
-	(*HasTransportResponse)(nil),                      // 9: net.HasTransportResponse
-	(*GetLinkDownRequest)(nil),                        // 10: net.GetLinkDownRequest
-	(*GetLinkDownResponse)(nil),                       // 11: net.GetLinkDownResponse
-	(*GetLinkUpRequest)(nil),                          // 12: net.GetLinkUpRequest
-	(*GetLinkUpResponse)(nil),                         // 13: net.GetLinkUpResponse
-	(*NetworkCallbackOnAvailableEvent)(nil),           // 14: net.NetworkCallbackOnAvailableEvent
-	(*NetworkCallbackOnLostEvent)(nil),                // 15: net.NetworkCallbackOnLostEvent
-	(*NetworkCallbackOnCapabilitiesChangedEvent)(nil), // 16: net.NetworkCallbackOnCapabilitiesChangedEvent
-	(*NetworkCallbackEvent)(nil),                      // 17: net.NetworkCallbackEvent
-	(*SubscribeNetworkCallbackRequest)(nil),           // 18: net.SubscribeNetworkCallbackRequest
+	(*AddDefaultNetworkActiveListenerRequest)(nil),     // 0: net.AddDefaultNetworkActiveListenerRequest
+	(*AddDefaultNetworkActiveListenerResponse)(nil),    // 1: net.AddDefaultNetworkActiveListenerResponse
+	(*BindProcessToNetworkRequest)(nil),                // 2: net.BindProcessToNetworkRequest
+	(*BindProcessToNetworkResponse)(nil),               // 3: net.BindProcessToNetworkResponse
+	(*CreateSocketKeepaliveRequest)(nil),               // 4: net.CreateSocketKeepaliveRequest
+	(*CreateSocketKeepaliveResponse)(nil),              // 5: net.CreateSocketKeepaliveResponse
+	(*GetActiveNetworkRequest)(nil),                    // 6: net.GetActiveNetworkRequest
+	(*GetActiveNetworkResponse)(nil),                   // 7: net.GetActiveNetworkResponse
+	(*GetActiveNetworkInfoRequest)(nil),                // 8: net.GetActiveNetworkInfoRequest
+	(*GetActiveNetworkInfoResponse)(nil),               // 9: net.GetActiveNetworkInfoResponse
+	(*GetAllNetworkInfoRequest)(nil),                   // 10: net.GetAllNetworkInfoRequest
+	(*GetAllNetworkInfoResponse)(nil),                  // 11: net.GetAllNetworkInfoResponse
+	(*GetAllNetworksRequest)(nil),                      // 12: net.GetAllNetworksRequest
+	(*GetAllNetworksResponse)(nil),                     // 13: net.GetAllNetworksResponse
+	(*GetBackgroundDataSettingRequest)(nil),            // 14: net.GetBackgroundDataSettingRequest
+	(*GetBackgroundDataSettingResponse)(nil),           // 15: net.GetBackgroundDataSettingResponse
+	(*GetBoundNetworkForProcessRequest)(nil),           // 16: net.GetBoundNetworkForProcessRequest
+	(*GetBoundNetworkForProcessResponse)(nil),          // 17: net.GetBoundNetworkForProcessResponse
+	(*GetConnectionOwnerUidRequest)(nil),               // 18: net.GetConnectionOwnerUidRequest
+	(*GetConnectionOwnerUidResponse)(nil),              // 19: net.GetConnectionOwnerUidResponse
+	(*GetDefaultProxyRequest)(nil),                     // 20: net.GetDefaultProxyRequest
+	(*GetDefaultProxyResponse)(nil),                    // 21: net.GetDefaultProxyResponse
+	(*GetLinkPropertiesRequest)(nil),                   // 22: net.GetLinkPropertiesRequest
+	(*GetLinkPropertiesResponse)(nil),                  // 23: net.GetLinkPropertiesResponse
+	(*GetMultipathPreferenceRequest)(nil),              // 24: net.GetMultipathPreferenceRequest
+	(*GetMultipathPreferenceResponse)(nil),             // 25: net.GetMultipathPreferenceResponse
+	(*GetNetworkCapabilitiesRequest)(nil),              // 26: net.GetNetworkCapabilitiesRequest
+	(*GetNetworkCapabilitiesResponse)(nil),             // 27: net.GetNetworkCapabilitiesResponse
+	(*GetNetworkInfo1Request)(nil),                     // 28: net.GetNetworkInfo1Request
+	(*GetNetworkInfo1Response)(nil),                    // 29: net.GetNetworkInfo1Response
+	(*GetNetworkInfo1_1Request)(nil),                   // 30: net.GetNetworkInfo1_1Request
+	(*GetNetworkInfo1_1Response)(nil),                  // 31: net.GetNetworkInfo1_1Response
+	(*GetNetworkPreferenceRequest)(nil),                // 32: net.GetNetworkPreferenceRequest
+	(*GetNetworkPreferenceResponse)(nil),               // 33: net.GetNetworkPreferenceResponse
+	(*GetNetworkWatchlistConfigHashRequest)(nil),       // 34: net.GetNetworkWatchlistConfigHashRequest
+	(*GetNetworkWatchlistConfigHashResponse)(nil),      // 35: net.GetNetworkWatchlistConfigHashResponse
+	(*GetRestrictBackgroundStatusRequest)(nil),         // 36: net.GetRestrictBackgroundStatusRequest
+	(*GetRestrictBackgroundStatusResponse)(nil),        // 37: net.GetRestrictBackgroundStatusResponse
+	(*IsActiveNetworkMeteredRequest)(nil),              // 38: net.IsActiveNetworkMeteredRequest
+	(*IsActiveNetworkMeteredResponse)(nil),             // 39: net.IsActiveNetworkMeteredResponse
+	(*IsDefaultNetworkActiveRequest)(nil),              // 40: net.IsDefaultNetworkActiveRequest
+	(*IsDefaultNetworkActiveResponse)(nil),             // 41: net.IsDefaultNetworkActiveResponse
+	(*RegisterDefaultNetworkCallbackRequest)(nil),      // 42: net.RegisterDefaultNetworkCallbackRequest
+	(*RegisterDefaultNetworkCallbackResponse)(nil),     // 43: net.RegisterDefaultNetworkCallbackResponse
+	(*RegisterNetworkCallback2Request)(nil),            // 44: net.RegisterNetworkCallback2Request
+	(*RegisterNetworkCallback2Response)(nil),           // 45: net.RegisterNetworkCallback2Response
+	(*RegisterNetworkCallback2_1Request)(nil),          // 46: net.RegisterNetworkCallback2_1Request
+	(*RegisterNetworkCallback2_1Response)(nil),         // 47: net.RegisterNetworkCallback2_1Response
+	(*ReleaseNetworkRequestRequest)(nil),               // 48: net.ReleaseNetworkRequestRequest
+	(*ReleaseNetworkRequestResponse)(nil),              // 49: net.ReleaseNetworkRequestResponse
+	(*RemoveDefaultNetworkActiveListenerRequest)(nil),  // 50: net.RemoveDefaultNetworkActiveListenerRequest
+	(*RemoveDefaultNetworkActiveListenerResponse)(nil), // 51: net.RemoveDefaultNetworkActiveListenerResponse
+	(*ReportBadNetworkRequest)(nil),                    // 52: net.ReportBadNetworkRequest
+	(*ReportBadNetworkResponse)(nil),                   // 53: net.ReportBadNetworkResponse
+	(*ReportNetworkConnectivityRequest)(nil),           // 54: net.ReportNetworkConnectivityRequest
+	(*ReportNetworkConnectivityResponse)(nil),          // 55: net.ReportNetworkConnectivityResponse
+	(*RequestBandwidthUpdateRequest)(nil),              // 56: net.RequestBandwidthUpdateRequest
+	(*RequestBandwidthUpdateResponse)(nil),             // 57: net.RequestBandwidthUpdateResponse
+	(*RequestNetwork2Request)(nil),                     // 58: net.RequestNetwork2Request
+	(*RequestNetwork2Response)(nil),                    // 59: net.RequestNetwork2Response
+	(*RequestNetwork2_1Request)(nil),                   // 60: net.RequestNetwork2_1Request
+	(*RequestNetwork2_1Response)(nil),                  // 61: net.RequestNetwork2_1Response
+	(*RequestNetwork3_2Request)(nil),                   // 62: net.RequestNetwork3_2Request
+	(*RequestNetwork3_2Response)(nil),                  // 63: net.RequestNetwork3_2Response
+	(*SetNetworkPreferenceRequest)(nil),                // 64: net.SetNetworkPreferenceRequest
+	(*SetNetworkPreferenceResponse)(nil),               // 65: net.SetNetworkPreferenceResponse
+	(*UnregisterNetworkCallback1Request)(nil),          // 66: net.UnregisterNetworkCallback1Request
+	(*UnregisterNetworkCallback1Response)(nil),         // 67: net.UnregisterNetworkCallback1Response
+	(*UnregisterNetworkCallback1_1Request)(nil),        // 68: net.UnregisterNetworkCallback1_1Request
+	(*UnregisterNetworkCallback1_1Response)(nil),       // 69: net.UnregisterNetworkCallback1_1Response
+	(*GetProcessDefaultNetworkRequest)(nil),            // 70: net.GetProcessDefaultNetworkRequest
+	(*GetProcessDefaultNetworkResponse)(nil),           // 71: net.GetProcessDefaultNetworkResponse
+	(*IsNetworkTypeValidRequest)(nil),                  // 72: net.IsNetworkTypeValidRequest
+	(*IsNetworkTypeValidResponse)(nil),                 // 73: net.IsNetworkTypeValidResponse
+	(*SetProcessDefaultNetworkRequest)(nil),            // 74: net.SetProcessDefaultNetworkRequest
+	(*SetProcessDefaultNetworkResponse)(nil),           // 75: net.SetProcessDefaultNetworkResponse
 }
 var file_proto_net_net_proto_depIdxs = []int32{
-	14, // 0: net.NetworkCallbackEvent.on_available:type_name -> net.NetworkCallbackOnAvailableEvent
-	15, // 1: net.NetworkCallbackEvent.on_lost:type_name -> net.NetworkCallbackOnLostEvent
-	16, // 2: net.NetworkCallbackEvent.on_capabilities_changed:type_name -> net.NetworkCallbackOnCapabilitiesChangedEvent
-	0,  // 3: net.ManagerService.GetActiveNetworkRaw:input_type -> net.GetActiveNetworkRawRequest
-	2,  // 4: net.ManagerService.GetNetworkCapabilitiesRaw:input_type -> net.GetNetworkCapabilitiesRawRequest
-	4,  // 5: net.ManagerService.RegisterDefaultNetworkCallbackRaw:input_type -> net.RegisterDefaultNetworkCallbackRawRequest
-	6,  // 6: net.ManagerService.UnregisterNetworkCallbackRaw:input_type -> net.UnregisterNetworkCallbackRawRequest
-	8,  // 7: net.NetworkCapabilitiesService.HasTransport:input_type -> net.HasTransportRequest
-	10, // 8: net.NetworkCapabilitiesService.GetLinkDown:input_type -> net.GetLinkDownRequest
-	12, // 9: net.NetworkCapabilitiesService.GetLinkUp:input_type -> net.GetLinkUpRequest
-	18, // 10: net.NetworkCallbackService.SubscribeNetworkCallback:input_type -> net.SubscribeNetworkCallbackRequest
-	1,  // 11: net.ManagerService.GetActiveNetworkRaw:output_type -> net.GetActiveNetworkRawResponse
-	3,  // 12: net.ManagerService.GetNetworkCapabilitiesRaw:output_type -> net.GetNetworkCapabilitiesRawResponse
-	5,  // 13: net.ManagerService.RegisterDefaultNetworkCallbackRaw:output_type -> net.RegisterDefaultNetworkCallbackRawResponse
-	7,  // 14: net.ManagerService.UnregisterNetworkCallbackRaw:output_type -> net.UnregisterNetworkCallbackRawResponse
-	9,  // 15: net.NetworkCapabilitiesService.HasTransport:output_type -> net.HasTransportResponse
-	11, // 16: net.NetworkCapabilitiesService.GetLinkDown:output_type -> net.GetLinkDownResponse
-	13, // 17: net.NetworkCapabilitiesService.GetLinkUp:output_type -> net.GetLinkUpResponse
-	17, // 18: net.NetworkCallbackService.SubscribeNetworkCallback:output_type -> net.NetworkCallbackEvent
-	11, // [11:19] is the sub-list for method output_type
-	3,  // [3:11] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	0,  // 0: net.ConnectivityManagerService.AddDefaultNetworkActiveListener:input_type -> net.AddDefaultNetworkActiveListenerRequest
+	2,  // 1: net.ConnectivityManagerService.BindProcessToNetwork:input_type -> net.BindProcessToNetworkRequest
+	4,  // 2: net.ConnectivityManagerService.CreateSocketKeepalive:input_type -> net.CreateSocketKeepaliveRequest
+	6,  // 3: net.ConnectivityManagerService.GetActiveNetwork:input_type -> net.GetActiveNetworkRequest
+	8,  // 4: net.ConnectivityManagerService.GetActiveNetworkInfo:input_type -> net.GetActiveNetworkInfoRequest
+	10, // 5: net.ConnectivityManagerService.GetAllNetworkInfo:input_type -> net.GetAllNetworkInfoRequest
+	12, // 6: net.ConnectivityManagerService.GetAllNetworks:input_type -> net.GetAllNetworksRequest
+	14, // 7: net.ConnectivityManagerService.GetBackgroundDataSetting:input_type -> net.GetBackgroundDataSettingRequest
+	16, // 8: net.ConnectivityManagerService.GetBoundNetworkForProcess:input_type -> net.GetBoundNetworkForProcessRequest
+	18, // 9: net.ConnectivityManagerService.GetConnectionOwnerUid:input_type -> net.GetConnectionOwnerUidRequest
+	20, // 10: net.ConnectivityManagerService.GetDefaultProxy:input_type -> net.GetDefaultProxyRequest
+	22, // 11: net.ConnectivityManagerService.GetLinkProperties:input_type -> net.GetLinkPropertiesRequest
+	24, // 12: net.ConnectivityManagerService.GetMultipathPreference:input_type -> net.GetMultipathPreferenceRequest
+	26, // 13: net.ConnectivityManagerService.GetNetworkCapabilities:input_type -> net.GetNetworkCapabilitiesRequest
+	28, // 14: net.ConnectivityManagerService.GetNetworkInfo1:input_type -> net.GetNetworkInfo1Request
+	30, // 15: net.ConnectivityManagerService.GetNetworkInfo1_1:input_type -> net.GetNetworkInfo1_1Request
+	32, // 16: net.ConnectivityManagerService.GetNetworkPreference:input_type -> net.GetNetworkPreferenceRequest
+	34, // 17: net.ConnectivityManagerService.GetNetworkWatchlistConfigHash:input_type -> net.GetNetworkWatchlistConfigHashRequest
+	36, // 18: net.ConnectivityManagerService.GetRestrictBackgroundStatus:input_type -> net.GetRestrictBackgroundStatusRequest
+	38, // 19: net.ConnectivityManagerService.IsActiveNetworkMetered:input_type -> net.IsActiveNetworkMeteredRequest
+	40, // 20: net.ConnectivityManagerService.IsDefaultNetworkActive:input_type -> net.IsDefaultNetworkActiveRequest
+	42, // 21: net.ConnectivityManagerService.RegisterDefaultNetworkCallback:input_type -> net.RegisterDefaultNetworkCallbackRequest
+	44, // 22: net.ConnectivityManagerService.RegisterNetworkCallback2:input_type -> net.RegisterNetworkCallback2Request
+	46, // 23: net.ConnectivityManagerService.RegisterNetworkCallback2_1:input_type -> net.RegisterNetworkCallback2_1Request
+	48, // 24: net.ConnectivityManagerService.ReleaseNetworkRequest:input_type -> net.ReleaseNetworkRequestRequest
+	50, // 25: net.ConnectivityManagerService.RemoveDefaultNetworkActiveListener:input_type -> net.RemoveDefaultNetworkActiveListenerRequest
+	52, // 26: net.ConnectivityManagerService.ReportBadNetwork:input_type -> net.ReportBadNetworkRequest
+	54, // 27: net.ConnectivityManagerService.ReportNetworkConnectivity:input_type -> net.ReportNetworkConnectivityRequest
+	56, // 28: net.ConnectivityManagerService.RequestBandwidthUpdate:input_type -> net.RequestBandwidthUpdateRequest
+	58, // 29: net.ConnectivityManagerService.RequestNetwork2:input_type -> net.RequestNetwork2Request
+	60, // 30: net.ConnectivityManagerService.RequestNetwork2_1:input_type -> net.RequestNetwork2_1Request
+	62, // 31: net.ConnectivityManagerService.RequestNetwork3_2:input_type -> net.RequestNetwork3_2Request
+	64, // 32: net.ConnectivityManagerService.SetNetworkPreference:input_type -> net.SetNetworkPreferenceRequest
+	66, // 33: net.ConnectivityManagerService.UnregisterNetworkCallback1:input_type -> net.UnregisterNetworkCallback1Request
+	68, // 34: net.ConnectivityManagerService.UnregisterNetworkCallback1_1:input_type -> net.UnregisterNetworkCallback1_1Request
+	70, // 35: net.ConnectivityManagerService.GetProcessDefaultNetwork:input_type -> net.GetProcessDefaultNetworkRequest
+	72, // 36: net.ConnectivityManagerService.IsNetworkTypeValid:input_type -> net.IsNetworkTypeValidRequest
+	74, // 37: net.ConnectivityManagerService.SetProcessDefaultNetwork:input_type -> net.SetProcessDefaultNetworkRequest
+	1,  // 38: net.ConnectivityManagerService.AddDefaultNetworkActiveListener:output_type -> net.AddDefaultNetworkActiveListenerResponse
+	3,  // 39: net.ConnectivityManagerService.BindProcessToNetwork:output_type -> net.BindProcessToNetworkResponse
+	5,  // 40: net.ConnectivityManagerService.CreateSocketKeepalive:output_type -> net.CreateSocketKeepaliveResponse
+	7,  // 41: net.ConnectivityManagerService.GetActiveNetwork:output_type -> net.GetActiveNetworkResponse
+	9,  // 42: net.ConnectivityManagerService.GetActiveNetworkInfo:output_type -> net.GetActiveNetworkInfoResponse
+	11, // 43: net.ConnectivityManagerService.GetAllNetworkInfo:output_type -> net.GetAllNetworkInfoResponse
+	13, // 44: net.ConnectivityManagerService.GetAllNetworks:output_type -> net.GetAllNetworksResponse
+	15, // 45: net.ConnectivityManagerService.GetBackgroundDataSetting:output_type -> net.GetBackgroundDataSettingResponse
+	17, // 46: net.ConnectivityManagerService.GetBoundNetworkForProcess:output_type -> net.GetBoundNetworkForProcessResponse
+	19, // 47: net.ConnectivityManagerService.GetConnectionOwnerUid:output_type -> net.GetConnectionOwnerUidResponse
+	21, // 48: net.ConnectivityManagerService.GetDefaultProxy:output_type -> net.GetDefaultProxyResponse
+	23, // 49: net.ConnectivityManagerService.GetLinkProperties:output_type -> net.GetLinkPropertiesResponse
+	25, // 50: net.ConnectivityManagerService.GetMultipathPreference:output_type -> net.GetMultipathPreferenceResponse
+	27, // 51: net.ConnectivityManagerService.GetNetworkCapabilities:output_type -> net.GetNetworkCapabilitiesResponse
+	29, // 52: net.ConnectivityManagerService.GetNetworkInfo1:output_type -> net.GetNetworkInfo1Response
+	31, // 53: net.ConnectivityManagerService.GetNetworkInfo1_1:output_type -> net.GetNetworkInfo1_1Response
+	33, // 54: net.ConnectivityManagerService.GetNetworkPreference:output_type -> net.GetNetworkPreferenceResponse
+	35, // 55: net.ConnectivityManagerService.GetNetworkWatchlistConfigHash:output_type -> net.GetNetworkWatchlistConfigHashResponse
+	37, // 56: net.ConnectivityManagerService.GetRestrictBackgroundStatus:output_type -> net.GetRestrictBackgroundStatusResponse
+	39, // 57: net.ConnectivityManagerService.IsActiveNetworkMetered:output_type -> net.IsActiveNetworkMeteredResponse
+	41, // 58: net.ConnectivityManagerService.IsDefaultNetworkActive:output_type -> net.IsDefaultNetworkActiveResponse
+	43, // 59: net.ConnectivityManagerService.RegisterDefaultNetworkCallback:output_type -> net.RegisterDefaultNetworkCallbackResponse
+	45, // 60: net.ConnectivityManagerService.RegisterNetworkCallback2:output_type -> net.RegisterNetworkCallback2Response
+	47, // 61: net.ConnectivityManagerService.RegisterNetworkCallback2_1:output_type -> net.RegisterNetworkCallback2_1Response
+	49, // 62: net.ConnectivityManagerService.ReleaseNetworkRequest:output_type -> net.ReleaseNetworkRequestResponse
+	51, // 63: net.ConnectivityManagerService.RemoveDefaultNetworkActiveListener:output_type -> net.RemoveDefaultNetworkActiveListenerResponse
+	53, // 64: net.ConnectivityManagerService.ReportBadNetwork:output_type -> net.ReportBadNetworkResponse
+	55, // 65: net.ConnectivityManagerService.ReportNetworkConnectivity:output_type -> net.ReportNetworkConnectivityResponse
+	57, // 66: net.ConnectivityManagerService.RequestBandwidthUpdate:output_type -> net.RequestBandwidthUpdateResponse
+	59, // 67: net.ConnectivityManagerService.RequestNetwork2:output_type -> net.RequestNetwork2Response
+	61, // 68: net.ConnectivityManagerService.RequestNetwork2_1:output_type -> net.RequestNetwork2_1Response
+	63, // 69: net.ConnectivityManagerService.RequestNetwork3_2:output_type -> net.RequestNetwork3_2Response
+	65, // 70: net.ConnectivityManagerService.SetNetworkPreference:output_type -> net.SetNetworkPreferenceResponse
+	67, // 71: net.ConnectivityManagerService.UnregisterNetworkCallback1:output_type -> net.UnregisterNetworkCallback1Response
+	69, // 72: net.ConnectivityManagerService.UnregisterNetworkCallback1_1:output_type -> net.UnregisterNetworkCallback1_1Response
+	71, // 73: net.ConnectivityManagerService.GetProcessDefaultNetwork:output_type -> net.GetProcessDefaultNetworkResponse
+	73, // 74: net.ConnectivityManagerService.IsNetworkTypeValid:output_type -> net.IsNetworkTypeValidResponse
+	75, // 75: net.ConnectivityManagerService.SetProcessDefaultNetwork:output_type -> net.SetProcessDefaultNetworkResponse
+	38, // [38:76] is the sub-list for method output_type
+	0,  // [0:38] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_net_net_proto_init() }
@@ -957,16 +3627,15 @@ func file_proto_net_net_proto_init() {
 	if File_proto_net_net_proto != nil {
 		return
 	}
-	file_proto_net_net_proto_msgTypes[17].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_net_net_proto_rawDesc), len(file_proto_net_net_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   19,
+			NumMessages:   76,
 			NumExtensions: 0,
-			NumServices:   3,
+			NumServices:   1,
 		},
 		GoTypes:           file_proto_net_net_proto_goTypes,
 		DependencyIndexes: file_proto_net_net_proto_depIdxs,

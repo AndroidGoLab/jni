@@ -13,20 +13,20 @@ var pdfCmd = &cobra.Command{
 	Short: "pdf service operations",
 }
 
-var pdfRendererCmd = &cobra.Command{
-	Use:   "renderer",
-	Short: "RendererService operations",
+var pdfBitmapCmd = &cobra.Command{
+	Use:   "bitmap",
+	Short: "BitmapService operations",
 }
 
-var pdfRendererGetPageCountCmd = &cobra.Command{
-	Use:   "get-page-count",
-	Short: "GetPageCount RPC",
+var pdfBitmapAsSharedCmd = &cobra.Command{
+	Use:   "as-shared",
+	Short: "AsShared RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRendererServiceClient(grpcConn)
-		req := &pb.GetPageCountRequest{}
-		resp, err := client.GetPageCount(ctx, req)
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.AsSharedRequest{}
+		resp, err := client.AsShared(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -34,18 +34,24 @@ var pdfRendererGetPageCountCmd = &cobra.Command{
 	},
 }
 
-var pdfRendererOpenPageRawCmd = &cobra.Command{
-	Use:   "open-page-raw",
-	Short: "OpenPageRaw RPC",
+var pdfBitmapCompressCmd = &cobra.Command{
+	Use:   "compress",
+	Short: "Compress RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRendererServiceClient(grpcConn)
-		req := &pb.OpenPageRawRequest{}
-		if v, err := cmd.Flags().GetInt32("index"); err == nil {
-			req.Index = v
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CompressRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		resp, err := client.OpenPageRaw(ctx, req)
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.Compress(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -53,15 +59,21 @@ var pdfRendererOpenPageRawCmd = &cobra.Command{
 	},
 }
 
-var pdfRendererCloseRawCmd = &cobra.Command{
-	Use:   "close-raw",
-	Short: "CloseRaw RPC",
+var pdfBitmapCopyCmd = &cobra.Command{
+	Use:   "copy",
+	Short: "Copy RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewRendererServiceClient(grpcConn)
-		req := &pb.CloseRawRequest{}
-		resp, err := client.CloseRaw(ctx, req)
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CopyRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.Copy(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -69,20 +81,18 @@ var pdfRendererCloseRawCmd = &cobra.Command{
 	},
 }
 
-var pdfPageCmd = &cobra.Command{
-	Use:   "page",
-	Short: "PageService operations",
-}
-
-var pdfPageGetWidthCmd = &cobra.Command{
-	Use:   "get-width",
-	Short: "GetWidth RPC",
+var pdfBitmapCopyPixelsFromBufferCmd = &cobra.Command{
+	Use:   "copy-pixels-from-buffer",
+	Short: "CopyPixelsFromBuffer RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPageServiceClient(grpcConn)
-		req := &pb.GetWidthRequest{}
-		resp, err := client.GetWidth(ctx, req)
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CopyPixelsFromBufferRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.CopyPixelsFromBuffer(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -90,13 +100,274 @@ var pdfPageGetWidthCmd = &cobra.Command{
 	},
 }
 
-var pdfPageGetHeightCmd = &cobra.Command{
+var pdfBitmapCopyPixelsToBufferCmd = &cobra.Command{
+	Use:   "copy-pixels-to-buffer",
+	Short: "CopyPixelsToBuffer RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CopyPixelsToBufferRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.CopyPixelsToBuffer(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapDescribeContentsCmd = &cobra.Command{
+	Use:   "describe-contents",
+	Short: "DescribeContents RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.DescribeContentsRequest{}
+		resp, err := client.DescribeContents(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapEraseColor1Cmd = &cobra.Command{
+	Use:   "erase-color1",
+	Short: "EraseColor1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.EraseColor1Request{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.EraseColor1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapEraseColor1_1Cmd = &cobra.Command{
+	Use:   "erase-color1_1",
+	Short: "EraseColor1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.EraseColor1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.EraseColor1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapExtractAlpha0Cmd = &cobra.Command{
+	Use:   "extract-alpha0",
+	Short: "ExtractAlpha0 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.ExtractAlpha0Request{}
+		resp, err := client.ExtractAlpha0(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapExtractAlpha2_1Cmd = &cobra.Command{
+	Use:   "extract-alpha2_1",
+	Short: "ExtractAlpha2_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.ExtractAlpha2_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.ExtractAlpha2_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetAllocationByteCountCmd = &cobra.Command{
+	Use:   "get-allocation-byte-count",
+	Short: "GetAllocationByteCount RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetAllocationByteCountRequest{}
+		resp, err := client.GetAllocationByteCount(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetByteCountCmd = &cobra.Command{
+	Use:   "get-byte-count",
+	Short: "GetByteCount RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetByteCountRequest{}
+		resp, err := client.GetByteCount(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetColorCmd = &cobra.Command{
+	Use:   "get-color",
+	Short: "GetColor RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetColorRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetColor(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetColorSpaceCmd = &cobra.Command{
+	Use:   "get-color-space",
+	Short: "GetColorSpace RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetColorSpaceRequest{}
+		resp, err := client.GetColorSpace(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetConfigCmd = &cobra.Command{
+	Use:   "get-config",
+	Short: "GetConfig RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetConfigRequest{}
+		resp, err := client.GetConfig(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetDensityCmd = &cobra.Command{
+	Use:   "get-density",
+	Short: "GetDensity RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetDensityRequest{}
+		resp, err := client.GetDensity(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetGainmapCmd = &cobra.Command{
+	Use:   "get-gainmap",
+	Short: "GetGainmap RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetGainmapRequest{}
+		resp, err := client.GetGainmap(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetGenerationIdCmd = &cobra.Command{
+	Use:   "get-generation-id",
+	Short: "GetGenerationId RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetGenerationIdRequest{}
+		resp, err := client.GetGenerationId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetHardwareBufferCmd = &cobra.Command{
+	Use:   "get-hardware-buffer",
+	Short: "GetHardwareBuffer RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetHardwareBufferRequest{}
+		resp, err := client.GetHardwareBuffer(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetHeightCmd = &cobra.Command{
 	Use:   "get-height",
 	Short: "GetHeight RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
-		client := pb.NewPageServiceClient(grpcConn)
+		client := pb.NewBitmapServiceClient(grpcConn)
 		req := &pb.GetHeightRequest{}
 		resp, err := client.GetHeight(ctx, req)
 		if err != nil {
@@ -106,100 +377,15 @@ var pdfPageGetHeightCmd = &cobra.Command{
 	},
 }
 
-var pdfPageRenderRawCmd = &cobra.Command{
-	Use:   "render-raw",
-	Short: "RenderRaw RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewPageServiceClient(grpcConn)
-		req := &pb.RenderRawRequest{}
-		if v, err := cmd.Flags().GetInt64("bitmap"); err == nil {
-			req.Bitmap = v
-		}
-		if v, err := cmd.Flags().GetInt64("dest-clip"); err == nil {
-			req.DestClip = v
-		}
-		if v, err := cmd.Flags().GetInt64("transform"); err == nil {
-			req.Transform = v
-		}
-		if v, err := cmd.Flags().GetInt32("render-mode"); err == nil {
-			req.RenderMode = v
-		}
-		resp, err := client.RenderRaw(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var pdfPageCloseRawCmd = &cobra.Command{
-	Use:   "close-raw",
-	Short: "CloseRaw RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewPageServiceClient(grpcConn)
-		req := &pb.CloseRawRequest{}
-		resp, err := client.CloseRaw(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var pdfParcelFileDescriptorCmd = &cobra.Command{
-	Use:   "parcel-file-descriptor",
-	Short: "ParcelFileDescriptorService operations",
-}
-
-var pdfParcelFileDescriptorOpenRawCmd = &cobra.Command{
-	Use:   "open-raw",
-	Short: "OpenRaw RPC",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		ctx, cancel := requestContext(cmd)
-		defer cancel()
-		client := pb.NewParcelFileDescriptorServiceClient(grpcConn)
-		req := &pb.OpenRawRequest{}
-		if v, err := cmd.Flags().GetInt64("file"); err == nil {
-			req.File = v
-		}
-		if v, err := cmd.Flags().GetInt32("mode"); err == nil {
-			req.Mode = v
-		}
-		resp, err := client.OpenRaw(ctx, req)
-		if err != nil {
-			return err
-		}
-		return printProtoMessage(resp)
-	},
-}
-
-var pdfBitmapCmd = &cobra.Command{
-	Use:   "bitmap",
-	Short: "BitmapService operations",
-}
-
-var pdfBitmapCreateBitmapRawCmd = &cobra.Command{
-	Use:   "create-bitmap-raw",
-	Short: "CreateBitmapRaw RPC",
+var pdfBitmapGetNinePatchChunkCmd = &cobra.Command{
+	Use:   "get-nine-patch-chunk",
+	Short: "GetNinePatchChunk RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewBitmapServiceClient(grpcConn)
-		req := &pb.CreateBitmapRawRequest{}
-		if v, err := cmd.Flags().GetInt32("width"); err == nil {
-			req.Width = v
-		}
-		if v, err := cmd.Flags().GetInt32("height"); err == nil {
-			req.Height = v
-		}
-		if v, err := cmd.Flags().GetInt64("config"); err == nil {
-			req.Config = v
-		}
-		resp, err := client.CreateBitmapRaw(ctx, req)
+		req := &pb.GetNinePatchChunkRequest{}
+		resp, err := client.GetNinePatchChunk(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -207,18 +393,1122 @@ var pdfBitmapCreateBitmapRawCmd = &cobra.Command{
 	},
 }
 
-var pdfBitmapCopyPixelsToBufferRawCmd = &cobra.Command{
-	Use:   "copy-pixels-to-buffer-raw",
-	Short: "CopyPixelsToBufferRaw RPC",
+var pdfBitmapGetPixelCmd = &cobra.Command{
+	Use:   "get-pixel",
+	Short: "GetPixel RPC",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 		client := pb.NewBitmapServiceClient(grpcConn)
-		req := &pb.CopyPixelsToBufferRawRequest{}
-		if v, err := cmd.Flags().GetInt64("buffer"); err == nil {
-			req.Buffer = v
+		req := &pb.GetPixelRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
 		}
-		resp, err := client.CopyPixelsToBufferRaw(ctx, req)
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetPixel(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetPixelsCmd = &cobra.Command{
+	Use:   "get-pixels",
+	Short: "GetPixels RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetPixelsRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg5"); err == nil {
+			req.Arg5 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg6"); err == nil {
+			req.Arg6 = v
+		}
+		resp, err := client.GetPixels(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetRowBytesCmd = &cobra.Command{
+	Use:   "get-row-bytes",
+	Short: "GetRowBytes RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetRowBytesRequest{}
+		resp, err := client.GetRowBytes(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetScaledHeight1Cmd = &cobra.Command{
+	Use:   "get-scaled-height1",
+	Short: "GetScaledHeight1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetScaledHeight1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetScaledHeight1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetScaledHeight1_1Cmd = &cobra.Command{
+	Use:   "get-scaled-height1_1",
+	Short: "GetScaledHeight1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetScaledHeight1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetScaledHeight1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetScaledHeight1_2Cmd = &cobra.Command{
+	Use:   "get-scaled-height1_2",
+	Short: "GetScaledHeight1_2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetScaledHeight1_2Request{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetScaledHeight1_2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetScaledWidth1Cmd = &cobra.Command{
+	Use:   "get-scaled-width1",
+	Short: "GetScaledWidth1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetScaledWidth1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetScaledWidth1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetScaledWidth1_1Cmd = &cobra.Command{
+	Use:   "get-scaled-width1_1",
+	Short: "GetScaledWidth1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetScaledWidth1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetScaledWidth1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetScaledWidth1_2Cmd = &cobra.Command{
+	Use:   "get-scaled-width1_2",
+	Short: "GetScaledWidth1_2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetScaledWidth1_2Request{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetScaledWidth1_2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapGetWidthCmd = &cobra.Command{
+	Use:   "get-width",
+	Short: "GetWidth RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.GetWidthRequest{}
+		resp, err := client.GetWidth(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapHasAlphaCmd = &cobra.Command{
+	Use:   "has-alpha",
+	Short: "HasAlpha RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.HasAlphaRequest{}
+		resp, err := client.HasAlpha(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapHasGainmapCmd = &cobra.Command{
+	Use:   "has-gainmap",
+	Short: "HasGainmap RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.HasGainmapRequest{}
+		resp, err := client.HasGainmap(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapHasMipMapCmd = &cobra.Command{
+	Use:   "has-mip-map",
+	Short: "HasMipMap RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.HasMipMapRequest{}
+		resp, err := client.HasMipMap(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapIsMutableCmd = &cobra.Command{
+	Use:   "is-mutable",
+	Short: "IsMutable RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.IsMutableRequest{}
+		resp, err := client.IsMutable(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapIsPremultipliedCmd = &cobra.Command{
+	Use:   "is-premultiplied",
+	Short: "IsPremultiplied RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.IsPremultipliedRequest{}
+		resp, err := client.IsPremultiplied(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapIsRecycledCmd = &cobra.Command{
+	Use:   "is-recycled",
+	Short: "IsRecycled RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.IsRecycledRequest{}
+		resp, err := client.IsRecycled(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapPrepareToDrawCmd = &cobra.Command{
+	Use:   "prepare-to-draw",
+	Short: "PrepareToDraw RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.PrepareToDrawRequest{}
+		resp, err := client.PrepareToDraw(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapReconfigureCmd = &cobra.Command{
+	Use:   "reconfigure",
+	Short: "Reconfigure RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.ReconfigureRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.Reconfigure(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapRecycleCmd = &cobra.Command{
+	Use:   "recycle",
+	Short: "Recycle RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.RecycleRequest{}
+		resp, err := client.Recycle(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapSameAsCmd = &cobra.Command{
+	Use:   "same-as",
+	Short: "SameAs RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.SameAsRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SameAs(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapSetColorSpaceCmd = &cobra.Command{
+	Use:   "set-color-space",
+	Short: "SetColorSpace RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.SetColorSpaceRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetColorSpace(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapSetConfigCmd = &cobra.Command{
+	Use:   "set-config",
+	Short: "SetConfig RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.SetConfigRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetConfig(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapSetDensityCmd = &cobra.Command{
+	Use:   "set-density",
+	Short: "SetDensity RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.SetDensityRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetDensity(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapSetGainmapCmd = &cobra.Command{
+	Use:   "set-gainmap",
+	Short: "SetGainmap RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.SetGainmapRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetGainmap(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapSetHasAlphaCmd = &cobra.Command{
+	Use:   "set-has-alpha",
+	Short: "SetHasAlpha RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.SetHasAlphaRequest{}
+		if v, err := cmd.Flags().GetBool("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetHasAlpha(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapSetHasMipMapCmd = &cobra.Command{
+	Use:   "set-has-mip-map",
+	Short: "SetHasMipMap RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.SetHasMipMapRequest{}
+		if v, err := cmd.Flags().GetBool("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetHasMipMap(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapSetHeightCmd = &cobra.Command{
+	Use:   "set-height",
+	Short: "SetHeight RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.SetHeightRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetHeight(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapSetPixelCmd = &cobra.Command{
+	Use:   "set-pixel",
+	Short: "SetPixel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.SetPixelRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.SetPixel(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapSetPixelsCmd = &cobra.Command{
+	Use:   "set-pixels",
+	Short: "SetPixels RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.SetPixelsRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg5"); err == nil {
+			req.Arg5 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg6"); err == nil {
+			req.Arg6 = v
+		}
+		resp, err := client.SetPixels(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapSetPremultipliedCmd = &cobra.Command{
+	Use:   "set-premultiplied",
+	Short: "SetPremultiplied RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.SetPremultipliedRequest{}
+		if v, err := cmd.Flags().GetBool("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetPremultiplied(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapSetWidthCmd = &cobra.Command{
+	Use:   "set-width",
+	Short: "SetWidth RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.SetWidthRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetWidth(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapWriteToParcelCmd = &cobra.Command{
+	Use:   "write-to-parcel",
+	Short: "WriteToParcel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.WriteToParcelRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.WriteToParcel(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapCreateBitmap1Cmd = &cobra.Command{
+	Use:   "create-bitmap1",
+	Short: "CreateBitmap1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CreateBitmap1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.CreateBitmap1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapCreateBitmap5_1Cmd = &cobra.Command{
+	Use:   "create-bitmap5_1",
+	Short: "CreateBitmap5_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CreateBitmap5_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		resp, err := client.CreateBitmap5_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapCreateBitmap7_2Cmd = &cobra.Command{
+	Use:   "create-bitmap7_2",
+	Short: "CreateBitmap7_2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CreateBitmap7_2Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg5"); err == nil {
+			req.Arg5 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg6"); err == nil {
+			req.Arg6 = v
+		}
+		resp, err := client.CreateBitmap7_2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapCreateBitmap1_3Cmd = &cobra.Command{
+	Use:   "create-bitmap1_3",
+	Short: "CreateBitmap1_3 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CreateBitmap1_3Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.CreateBitmap1_3(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapCreateBitmap4_4Cmd = &cobra.Command{
+	Use:   "create-bitmap4_4",
+	Short: "CreateBitmap4_4 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CreateBitmap4_4Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.CreateBitmap4_4(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapCreateBitmap4_5Cmd = &cobra.Command{
+	Use:   "create-bitmap4_5",
+	Short: "CreateBitmap4_5 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CreateBitmap4_5Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.CreateBitmap4_5(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapCreateBitmap5_6Cmd = &cobra.Command{
+	Use:   "create-bitmap5_6",
+	Short: "CreateBitmap5_6 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CreateBitmap5_6Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		resp, err := client.CreateBitmap5_6(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapCreateBitmap6_7Cmd = &cobra.Command{
+	Use:   "create-bitmap6_7",
+	Short: "CreateBitmap6_7 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CreateBitmap6_7Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg5"); err == nil {
+			req.Arg5 = v
+		}
+		resp, err := client.CreateBitmap6_7(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapCreateBitmap5_8Cmd = &cobra.Command{
+	Use:   "create-bitmap5_8",
+	Short: "CreateBitmap5_8 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CreateBitmap5_8Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		resp, err := client.CreateBitmap5_8(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapCreateBitmap7_9Cmd = &cobra.Command{
+	Use:   "create-bitmap7_9",
+	Short: "CreateBitmap7_9 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CreateBitmap7_9Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg5"); err == nil {
+			req.Arg5 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg6"); err == nil {
+			req.Arg6 = v
+		}
+		resp, err := client.CreateBitmap7_9(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapCreateBitmap3_10Cmd = &cobra.Command{
+	Use:   "create-bitmap3_10",
+	Short: "CreateBitmap3_10 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CreateBitmap3_10Request{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.CreateBitmap3_10(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapCreateBitmap4_11Cmd = &cobra.Command{
+	Use:   "create-bitmap4_11",
+	Short: "CreateBitmap4_11 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CreateBitmap4_11Request{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.CreateBitmap4_11(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapCreateBitmap5_12Cmd = &cobra.Command{
+	Use:   "create-bitmap5_12",
+	Short: "CreateBitmap5_12 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CreateBitmap5_12Request{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		resp, err := client.CreateBitmap5_12(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapCreateBitmap4_13Cmd = &cobra.Command{
+	Use:   "create-bitmap4_13",
+	Short: "CreateBitmap4_13 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CreateBitmap4_13Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.CreateBitmap4_13(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapCreateBitmap6_14Cmd = &cobra.Command{
+	Use:   "create-bitmap6_14",
+	Short: "CreateBitmap6_14 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CreateBitmap6_14Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg5"); err == nil {
+			req.Arg5 = v
+		}
+		resp, err := client.CreateBitmap6_14(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapCreateScaledBitmapCmd = &cobra.Command{
+	Use:   "create-scaled-bitmap",
+	Short: "CreateScaledBitmap RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.CreateScaledBitmapRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.CreateScaledBitmap(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var pdfBitmapWrapHardwareBufferCmd = &cobra.Command{
+	Use:   "wrap-hardware-buffer",
+	Short: "WrapHardwareBuffer RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewBitmapServiceClient(grpcConn)
+		req := &pb.WrapHardwareBufferRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.WrapHardwareBuffer(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -227,30 +1517,202 @@ var pdfBitmapCopyPixelsToBufferRawCmd = &cobra.Command{
 }
 
 func init() {
-	pdfRendererCmd.AddCommand(pdfRendererGetPageCountCmd)
-	pdfRendererOpenPageRawCmd.Flags().Int32("index", 0, "index (int32)")
-	pdfRendererCmd.AddCommand(pdfRendererOpenPageRawCmd)
-	pdfRendererCmd.AddCommand(pdfRendererCloseRawCmd)
-	pdfCmd.AddCommand(pdfRendererCmd)
-	pdfPageCmd.AddCommand(pdfPageGetWidthCmd)
-	pdfPageCmd.AddCommand(pdfPageGetHeightCmd)
-	pdfPageRenderRawCmd.Flags().Int64("bitmap", 0, "bitmap (int64)")
-	pdfPageRenderRawCmd.Flags().Int64("dest-clip", 0, "dest-clip (int64)")
-	pdfPageRenderRawCmd.Flags().Int64("transform", 0, "transform (int64)")
-	pdfPageRenderRawCmd.Flags().Int32("render-mode", 0, "render-mode (int32)")
-	pdfPageCmd.AddCommand(pdfPageRenderRawCmd)
-	pdfPageCmd.AddCommand(pdfPageCloseRawCmd)
-	pdfCmd.AddCommand(pdfPageCmd)
-	pdfParcelFileDescriptorOpenRawCmd.Flags().Int64("file", 0, "file (int64)")
-	pdfParcelFileDescriptorOpenRawCmd.Flags().Int32("mode", 0, "mode (int32)")
-	pdfParcelFileDescriptorCmd.AddCommand(pdfParcelFileDescriptorOpenRawCmd)
-	pdfCmd.AddCommand(pdfParcelFileDescriptorCmd)
-	pdfBitmapCreateBitmapRawCmd.Flags().Int32("width", 0, "width (int32)")
-	pdfBitmapCreateBitmapRawCmd.Flags().Int32("height", 0, "height (int32)")
-	pdfBitmapCreateBitmapRawCmd.Flags().Int64("config", 0, "config (int64)")
-	pdfBitmapCmd.AddCommand(pdfBitmapCreateBitmapRawCmd)
-	pdfBitmapCopyPixelsToBufferRawCmd.Flags().Int64("buffer", 0, "buffer (int64)")
-	pdfBitmapCmd.AddCommand(pdfBitmapCopyPixelsToBufferRawCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapAsSharedCmd)
+	pdfBitmapCompressCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCompressCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapCompressCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCompressCmd)
+	pdfBitmapCopyCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCopyCmd.Flags().Bool("arg1", false, "arg1 (bool)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCopyCmd)
+	pdfBitmapCopyPixelsFromBufferCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCopyPixelsFromBufferCmd)
+	pdfBitmapCopyPixelsToBufferCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCopyPixelsToBufferCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapDescribeContentsCmd)
+	pdfBitmapEraseColor1Cmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	pdfBitmapCmd.AddCommand(pdfBitmapEraseColor1Cmd)
+	pdfBitmapEraseColor1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapEraseColor1_1Cmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapExtractAlpha0Cmd)
+	pdfBitmapExtractAlpha2_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapExtractAlpha2_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapExtractAlpha2_1Cmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapGetAllocationByteCountCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapGetByteCountCmd)
+	pdfBitmapGetColorCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	pdfBitmapGetColorCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapCmd.AddCommand(pdfBitmapGetColorCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapGetColorSpaceCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapGetConfigCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapGetDensityCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapGetGainmapCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapGetGenerationIdCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapGetHardwareBufferCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapGetHeightCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapGetNinePatchChunkCmd)
+	pdfBitmapGetPixelCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	pdfBitmapGetPixelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapCmd.AddCommand(pdfBitmapGetPixelCmd)
+	pdfBitmapGetPixelsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapGetPixelsCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapGetPixelsCmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	pdfBitmapGetPixelsCmd.Flags().Int32("arg3", 0, "arg3 (int32)")
+	pdfBitmapGetPixelsCmd.Flags().Int32("arg4", 0, "arg4 (int32)")
+	pdfBitmapGetPixelsCmd.Flags().Int32("arg5", 0, "arg5 (int32)")
+	pdfBitmapGetPixelsCmd.Flags().Int32("arg6", 0, "arg6 (int32)")
+	pdfBitmapCmd.AddCommand(pdfBitmapGetPixelsCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapGetRowBytesCmd)
+	pdfBitmapGetScaledHeight1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapGetScaledHeight1Cmd)
+	pdfBitmapGetScaledHeight1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapGetScaledHeight1_1Cmd)
+	pdfBitmapGetScaledHeight1_2Cmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	pdfBitmapCmd.AddCommand(pdfBitmapGetScaledHeight1_2Cmd)
+	pdfBitmapGetScaledWidth1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapGetScaledWidth1Cmd)
+	pdfBitmapGetScaledWidth1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapGetScaledWidth1_1Cmd)
+	pdfBitmapGetScaledWidth1_2Cmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	pdfBitmapCmd.AddCommand(pdfBitmapGetScaledWidth1_2Cmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapGetWidthCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapHasAlphaCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapHasGainmapCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapHasMipMapCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapIsMutableCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapIsPremultipliedCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapIsRecycledCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapPrepareToDrawCmd)
+	pdfBitmapReconfigureCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	pdfBitmapReconfigureCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapReconfigureCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapReconfigureCmd)
+	pdfBitmapCmd.AddCommand(pdfBitmapRecycleCmd)
+	pdfBitmapSameAsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapSameAsCmd)
+	pdfBitmapSetColorSpaceCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapSetColorSpaceCmd)
+	pdfBitmapSetConfigCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapSetConfigCmd)
+	pdfBitmapSetDensityCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	pdfBitmapCmd.AddCommand(pdfBitmapSetDensityCmd)
+	pdfBitmapSetGainmapCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapSetGainmapCmd)
+	pdfBitmapSetHasAlphaCmd.Flags().Bool("arg0", false, "arg0 (bool)")
+	pdfBitmapCmd.AddCommand(pdfBitmapSetHasAlphaCmd)
+	pdfBitmapSetHasMipMapCmd.Flags().Bool("arg0", false, "arg0 (bool)")
+	pdfBitmapCmd.AddCommand(pdfBitmapSetHasMipMapCmd)
+	pdfBitmapSetHeightCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	pdfBitmapCmd.AddCommand(pdfBitmapSetHeightCmd)
+	pdfBitmapSetPixelCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	pdfBitmapSetPixelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapSetPixelCmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	pdfBitmapCmd.AddCommand(pdfBitmapSetPixelCmd)
+	pdfBitmapSetPixelsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapSetPixelsCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapSetPixelsCmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	pdfBitmapSetPixelsCmd.Flags().Int32("arg3", 0, "arg3 (int32)")
+	pdfBitmapSetPixelsCmd.Flags().Int32("arg4", 0, "arg4 (int32)")
+	pdfBitmapSetPixelsCmd.Flags().Int32("arg5", 0, "arg5 (int32)")
+	pdfBitmapSetPixelsCmd.Flags().Int32("arg6", 0, "arg6 (int32)")
+	pdfBitmapCmd.AddCommand(pdfBitmapSetPixelsCmd)
+	pdfBitmapSetPremultipliedCmd.Flags().Bool("arg0", false, "arg0 (bool)")
+	pdfBitmapCmd.AddCommand(pdfBitmapSetPremultipliedCmd)
+	pdfBitmapSetWidthCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	pdfBitmapCmd.AddCommand(pdfBitmapSetWidthCmd)
+	pdfBitmapWriteToParcelCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapWriteToParcelCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapCmd.AddCommand(pdfBitmapWriteToParcelCmd)
+	pdfBitmapCreateBitmap1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCreateBitmap1Cmd)
+	pdfBitmapCreateBitmap5_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCreateBitmap5_1Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapCreateBitmap5_1Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	pdfBitmapCreateBitmap5_1Cmd.Flags().Int32("arg3", 0, "arg3 (int32)")
+	pdfBitmapCreateBitmap5_1Cmd.Flags().Int32("arg4", 0, "arg4 (int32)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCreateBitmap5_1Cmd)
+	pdfBitmapCreateBitmap7_2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCreateBitmap7_2Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapCreateBitmap7_2Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	pdfBitmapCreateBitmap7_2Cmd.Flags().Int32("arg3", 0, "arg3 (int32)")
+	pdfBitmapCreateBitmap7_2Cmd.Flags().Int32("arg4", 0, "arg4 (int32)")
+	pdfBitmapCreateBitmap7_2Cmd.Flags().Int64("arg5", 0, "arg5 (int64)")
+	pdfBitmapCreateBitmap7_2Cmd.Flags().Bool("arg6", false, "arg6 (bool)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCreateBitmap7_2Cmd)
+	pdfBitmapCreateBitmap1_3Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCreateBitmap1_3Cmd)
+	pdfBitmapCreateBitmap4_4Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCreateBitmap4_4Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapCreateBitmap4_4Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	pdfBitmapCreateBitmap4_4Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCreateBitmap4_4Cmd)
+	pdfBitmapCreateBitmap4_5Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCreateBitmap4_5Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapCreateBitmap4_5Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	pdfBitmapCreateBitmap4_5Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCreateBitmap4_5Cmd)
+	pdfBitmapCreateBitmap5_6Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCreateBitmap5_6Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapCreateBitmap5_6Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	pdfBitmapCreateBitmap5_6Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	pdfBitmapCreateBitmap5_6Cmd.Flags().Bool("arg4", false, "arg4 (bool)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCreateBitmap5_6Cmd)
+	pdfBitmapCreateBitmap6_7Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCreateBitmap6_7Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapCreateBitmap6_7Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	pdfBitmapCreateBitmap6_7Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	pdfBitmapCreateBitmap6_7Cmd.Flags().Bool("arg4", false, "arg4 (bool)")
+	pdfBitmapCreateBitmap6_7Cmd.Flags().Int64("arg5", 0, "arg5 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCreateBitmap6_7Cmd)
+	pdfBitmapCreateBitmap5_8Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCreateBitmap5_8Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	pdfBitmapCreateBitmap5_8Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	pdfBitmapCreateBitmap5_8Cmd.Flags().Int32("arg3", 0, "arg3 (int32)")
+	pdfBitmapCreateBitmap5_8Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCreateBitmap5_8Cmd)
+	pdfBitmapCreateBitmap7_9Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCreateBitmap7_9Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	pdfBitmapCreateBitmap7_9Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	pdfBitmapCreateBitmap7_9Cmd.Flags().Int32("arg3", 0, "arg3 (int32)")
+	pdfBitmapCreateBitmap7_9Cmd.Flags().Int32("arg4", 0, "arg4 (int32)")
+	pdfBitmapCreateBitmap7_9Cmd.Flags().Int32("arg5", 0, "arg5 (int32)")
+	pdfBitmapCreateBitmap7_9Cmd.Flags().Int64("arg6", 0, "arg6 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCreateBitmap7_9Cmd)
+	pdfBitmapCreateBitmap3_10Cmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	pdfBitmapCreateBitmap3_10Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapCreateBitmap3_10Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCreateBitmap3_10Cmd)
+	pdfBitmapCreateBitmap4_11Cmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	pdfBitmapCreateBitmap4_11Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapCreateBitmap4_11Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	pdfBitmapCreateBitmap4_11Cmd.Flags().Bool("arg3", false, "arg3 (bool)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCreateBitmap4_11Cmd)
+	pdfBitmapCreateBitmap5_12Cmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	pdfBitmapCreateBitmap5_12Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapCreateBitmap5_12Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	pdfBitmapCreateBitmap5_12Cmd.Flags().Bool("arg3", false, "arg3 (bool)")
+	pdfBitmapCreateBitmap5_12Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCreateBitmap5_12Cmd)
+	pdfBitmapCreateBitmap4_13Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCreateBitmap4_13Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapCreateBitmap4_13Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	pdfBitmapCreateBitmap4_13Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCreateBitmap4_13Cmd)
+	pdfBitmapCreateBitmap6_14Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCreateBitmap6_14Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapCreateBitmap6_14Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	pdfBitmapCreateBitmap6_14Cmd.Flags().Int32("arg3", 0, "arg3 (int32)")
+	pdfBitmapCreateBitmap6_14Cmd.Flags().Int32("arg4", 0, "arg4 (int32)")
+	pdfBitmapCreateBitmap6_14Cmd.Flags().Int64("arg5", 0, "arg5 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCreateBitmap6_14Cmd)
+	pdfBitmapCreateScaledBitmapCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapCreateScaledBitmapCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	pdfBitmapCreateScaledBitmapCmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	pdfBitmapCreateScaledBitmapCmd.Flags().Bool("arg3", false, "arg3 (bool)")
+	pdfBitmapCmd.AddCommand(pdfBitmapCreateScaledBitmapCmd)
+	pdfBitmapWrapHardwareBufferCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	pdfBitmapWrapHardwareBufferCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	pdfBitmapCmd.AddCommand(pdfBitmapWrapHardwareBufferCmd)
 	pdfCmd.AddCommand(pdfBitmapCmd)
 	rootCmd.AddCommand(pdfCmd)
 }

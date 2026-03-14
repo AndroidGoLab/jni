@@ -6,91 +6,96 @@ package wifi_p2p;
 
 option go_package = "github.com/xaionaro-go/jni/proto/wifi_p2p";
 
-message Device {
-  string name = 1;
-  string address = 2;
-  int32 status = 3;
+message DescribeContentsRequest {
 }
 
-message Group {
-  string network_name = 1;
-  string passphrase = 2;
-  bool is_owner = 3;
+message DescribeContentsResponse {
+  int32 result = 1;
 }
 
-message InitializeRawRequest {
-  int64 ctx = 1;
-  int64 looper = 2;
-  int64 listener = 3;
+message EqualsRequest {
+  int64 arg0 = 1;
 }
 
-message InitializeRawResponse {
+message EqualsResponse {
+  bool result = 1;
+}
+
+message GetIpAddressRequest {
+}
+
+message GetIpAddressResponse {
   int64 result = 1;
 }
 
-message DiscoverPeersRawRequest {
-  int64 channel = 1;
-  int64 listener = 2;
+message GetVendorElementsRequest {
 }
 
-message DiscoverPeersRawResponse {
+message GetVendorElementsResponse {
+  int64 result = 1;
 }
 
-message StopPeerDiscoveryRawRequest {
-  int64 channel = 1;
-  int64 listener = 2;
+message GetWfdInfoRequest {
 }
 
-message StopPeerDiscoveryRawResponse {
+message GetWfdInfoResponse {
+  int64 result = 1;
 }
 
-message ConnectRawRequest {
-  int64 channel = 1;
-  int64 config = 2;
-  int64 listener = 3;
+message HashCodeRequest {
 }
 
-message ConnectRawResponse {
+message HashCodeResponse {
+  int32 result = 1;
 }
 
-message CancelConnectRawRequest {
-  int64 channel = 1;
-  int64 listener = 2;
+message IsGroupOwnerRequest {
 }
 
-message CancelConnectRawResponse {
+message IsGroupOwnerResponse {
+  bool result = 1;
 }
 
-message CreateGroupRawRequest {
-  int64 channel = 1;
-  int64 listener = 2;
+message IsOpportunisticBootstrappingMethodSupportedRequest {
 }
 
-message CreateGroupRawResponse {
+message IsOpportunisticBootstrappingMethodSupportedResponse {
+  bool result = 1;
 }
 
-message RemoveGroupRawRequest {
-  int64 channel = 1;
-  int64 listener = 2;
+message IsPassphraseDisplayBootstrappingMethodSupportedRequest {
 }
 
-message RemoveGroupRawResponse {
+message IsPassphraseDisplayBootstrappingMethodSupportedResponse {
+  bool result = 1;
 }
 
-message RequestConnectionInfoRawRequest {
-  int64 channel = 1;
-  int64 listener = 2;
+message IsPassphraseKeypadBootstrappingMethodSupportedRequest {
 }
 
-message RequestConnectionInfoRawResponse {
+message IsPassphraseKeypadBootstrappingMethodSupportedResponse {
+  bool result = 1;
 }
 
-message RequestPeersRawRequest {
-  int64 channel = 1;
-  int64 listener = 2;
+message IsPinCodeDisplayBootstrappingMethodSupportedRequest {
 }
 
-message RequestPeersRawResponse {
+message IsPinCodeDisplayBootstrappingMethodSupportedResponse {
+  bool result = 1;
+}
+
+message IsPinCodeKeypadBootstrappingMethodSupportedRequest {
+}
+
+message IsPinCodeKeypadBootstrappingMethodSupportedResponse {
+  bool result = 1;
+}
+
+message IsServiceDiscoveryCapableRequest {
+}
+
+message IsServiceDiscoveryCapableResponse {
+  bool result = 1;
 }
 
 message ToStringRequest {
@@ -100,85 +105,60 @@ message ToStringResponse {
   string result = 1;
 }
 
-message ActionListenerOnSuccessEvent {
-}
-
-message ActionListenerOnFailureEvent {
+message UpdateRequest {
   int64 arg0 = 1;
 }
 
-message ActionListenerEvent {
-  optional ActionListenerOnSuccessEvent on_success = 1;
-  optional ActionListenerOnFailureEvent on_failure = 2;
+message UpdateResponse {
 }
 
-message SubscribeActionListenerRequest {
+message WpsDisplaySupportedRequest {
 }
 
-message PeerListListenerOnPeersAvailableEvent {
+message WpsDisplaySupportedResponse {
+  bool result = 1;
+}
+
+message WpsKeypadSupportedRequest {
+}
+
+message WpsKeypadSupportedResponse {
+  bool result = 1;
+}
+
+message WpsPbcSupportedRequest {
+}
+
+message WpsPbcSupportedResponse {
+  bool result = 1;
+}
+
+message WriteToParcelRequest {
   int64 arg0 = 1;
+  int32 arg1 = 2;
 }
 
-message PeerListListenerEvent {
-  optional PeerListListenerOnPeersAvailableEvent on_peers_available = 1;
+message WriteToParcelResponse {
 }
 
-message SubscribePeerListListenerRequest {
-}
-
-message ConnectionInfoListenerOnConnectionInfoAvailableEvent {
-  int64 arg0 = 1;
-}
-
-message ConnectionInfoListenerEvent {
-  optional ConnectionInfoListenerOnConnectionInfoAvailableEvent on_connection_info_available = 1;
-}
-
-message SubscribeConnectionInfoListenerRequest {
-}
-
-message ChannelListenerOnChannelDisconnectedEvent {
-}
-
-message ChannelListenerEvent {
-  optional ChannelListenerOnChannelDisconnectedEvent on_channel_disconnected = 1;
-}
-
-message SubscribeChannelListenerRequest {
-}
-
-service ManagerService {
-  rpc InitializeRaw (InitializeRawRequest) returns (InitializeRawResponse);
-  rpc DiscoverPeersRaw (DiscoverPeersRawRequest) returns (DiscoverPeersRawResponse);
-  rpc StopPeerDiscoveryRaw (StopPeerDiscoveryRawRequest) returns (StopPeerDiscoveryRawResponse);
-  rpc ConnectRaw (ConnectRawRequest) returns (ConnectRawResponse);
-  rpc CancelConnectRaw (CancelConnectRawRequest) returns (CancelConnectRawResponse);
-  rpc CreateGroupRaw (CreateGroupRawRequest) returns (CreateGroupRawResponse);
-  rpc RemoveGroupRaw (RemoveGroupRawRequest) returns (RemoveGroupRawResponse);
-  rpc RequestConnectionInfoRaw (RequestConnectionInfoRawRequest) returns (RequestConnectionInfoRawResponse);
-  rpc RequestPeersRaw (RequestPeersRawRequest) returns (RequestPeersRawResponse);
-}
-
-service P2pConfigService {
+service WifiP2pDeviceService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc Equals (EqualsRequest) returns (EqualsResponse);
+  rpc GetIpAddress (GetIpAddressRequest) returns (GetIpAddressResponse);
+  rpc GetVendorElements (GetVendorElementsRequest) returns (GetVendorElementsResponse);
+  rpc GetWfdInfo (GetWfdInfoRequest) returns (GetWfdInfoResponse);
+  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
+  rpc IsGroupOwner (IsGroupOwnerRequest) returns (IsGroupOwnerResponse);
+  rpc IsOpportunisticBootstrappingMethodSupported (IsOpportunisticBootstrappingMethodSupportedRequest) returns (IsOpportunisticBootstrappingMethodSupportedResponse);
+  rpc IsPassphraseDisplayBootstrappingMethodSupported (IsPassphraseDisplayBootstrappingMethodSupportedRequest) returns (IsPassphraseDisplayBootstrappingMethodSupportedResponse);
+  rpc IsPassphraseKeypadBootstrappingMethodSupported (IsPassphraseKeypadBootstrappingMethodSupportedRequest) returns (IsPassphraseKeypadBootstrappingMethodSupportedResponse);
+  rpc IsPinCodeDisplayBootstrappingMethodSupported (IsPinCodeDisplayBootstrappingMethodSupportedRequest) returns (IsPinCodeDisplayBootstrappingMethodSupportedResponse);
+  rpc IsPinCodeKeypadBootstrappingMethodSupported (IsPinCodeKeypadBootstrappingMethodSupportedRequest) returns (IsPinCodeKeypadBootstrappingMethodSupportedResponse);
+  rpc IsServiceDiscoveryCapable (IsServiceDiscoveryCapableRequest) returns (IsServiceDiscoveryCapableResponse);
   rpc ToString (ToStringRequest) returns (ToStringResponse);
-}
-
-service ActionListenerService {
-  // Server-streaming events from android.net.wifi.p2p.WifiP2pManager$ActionListener
-  rpc SubscribeActionListener (SubscribeActionListenerRequest) returns (stream ActionListenerEvent);
-}
-
-service PeerListListenerService {
-  // Server-streaming events from android.net.wifi.p2p.WifiP2pManager$PeerListListener
-  rpc SubscribePeerListListener (SubscribePeerListListenerRequest) returns (stream PeerListListenerEvent);
-}
-
-service ConnectionInfoListenerService {
-  // Server-streaming events from android.net.wifi.p2p.WifiP2pManager$ConnectionInfoListener
-  rpc SubscribeConnectionInfoListener (SubscribeConnectionInfoListenerRequest) returns (stream ConnectionInfoListenerEvent);
-}
-
-service ChannelListenerService {
-  // Server-streaming events from android.net.wifi.p2p.WifiP2pManager$ChannelListener
-  rpc SubscribeChannelListener (SubscribeChannelListenerRequest) returns (stream ChannelListenerEvent);
+  rpc Update (UpdateRequest) returns (UpdateResponse);
+  rpc WpsDisplaySupported (WpsDisplaySupportedRequest) returns (WpsDisplaySupportedResponse);
+  rpc WpsKeypadSupported (WpsKeypadSupportedRequest) returns (WpsKeypadSupportedResponse);
+  rpc WpsPbcSupported (WpsPbcSupportedRequest) returns (WpsPbcSupportedResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
 }

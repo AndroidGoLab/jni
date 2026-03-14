@@ -23,26 +23,28 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type IsKeyguardLockedRequest struct {
+type AddKeyguardLockedStateListenerRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IsKeyguardLockedRequest) Reset() {
-	*x = IsKeyguardLockedRequest{}
+func (x *AddKeyguardLockedStateListenerRequest) Reset() {
+	*x = AddKeyguardLockedStateListenerRequest{}
 	mi := &file_proto_keyguard_keyguard_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IsKeyguardLockedRequest) String() string {
+func (x *AddKeyguardLockedStateListenerRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IsKeyguardLockedRequest) ProtoMessage() {}
+func (*AddKeyguardLockedStateListenerRequest) ProtoMessage() {}
 
-func (x *IsKeyguardLockedRequest) ProtoReflect() protoreflect.Message {
+func (x *AddKeyguardLockedStateListenerRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keyguard_keyguard_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -54,32 +56,45 @@ func (x *IsKeyguardLockedRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IsKeyguardLockedRequest.ProtoReflect.Descriptor instead.
-func (*IsKeyguardLockedRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddKeyguardLockedStateListenerRequest.ProtoReflect.Descriptor instead.
+func (*AddKeyguardLockedStateListenerRequest) Descriptor() ([]byte, []int) {
 	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{0}
 }
 
-type IsKeyguardLockedResponse struct {
+func (x *AddKeyguardLockedStateListenerRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *AddKeyguardLockedStateListenerRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type AddKeyguardLockedStateListenerResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IsKeyguardLockedResponse) Reset() {
-	*x = IsKeyguardLockedResponse{}
+func (x *AddKeyguardLockedStateListenerResponse) Reset() {
+	*x = AddKeyguardLockedStateListenerResponse{}
 	mi := &file_proto_keyguard_keyguard_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IsKeyguardLockedResponse) String() string {
+func (x *AddKeyguardLockedStateListenerResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IsKeyguardLockedResponse) ProtoMessage() {}
+func (*AddKeyguardLockedStateListenerResponse) ProtoMessage() {}
 
-func (x *IsKeyguardLockedResponse) ProtoReflect() protoreflect.Message {
+func (x *AddKeyguardLockedStateListenerResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keyguard_keyguard_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -91,38 +106,33 @@ func (x *IsKeyguardLockedResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IsKeyguardLockedResponse.ProtoReflect.Descriptor instead.
-func (*IsKeyguardLockedResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddKeyguardLockedStateListenerResponse.ProtoReflect.Descriptor instead.
+func (*AddKeyguardLockedStateListenerResponse) Descriptor() ([]byte, []int) {
 	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *IsKeyguardLockedResponse) GetResult() bool {
-	if x != nil {
-		return x.Result
-	}
-	return false
-}
-
-type IsKeyguardSecureRequest struct {
+type CreateConfirmDeviceCredentialIntentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IsKeyguardSecureRequest) Reset() {
-	*x = IsKeyguardSecureRequest{}
+func (x *CreateConfirmDeviceCredentialIntentRequest) Reset() {
+	*x = CreateConfirmDeviceCredentialIntentRequest{}
 	mi := &file_proto_keyguard_keyguard_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IsKeyguardSecureRequest) String() string {
+func (x *CreateConfirmDeviceCredentialIntentRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IsKeyguardSecureRequest) ProtoMessage() {}
+func (*CreateConfirmDeviceCredentialIntentRequest) ProtoMessage() {}
 
-func (x *IsKeyguardSecureRequest) ProtoReflect() protoreflect.Message {
+func (x *CreateConfirmDeviceCredentialIntentRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keyguard_keyguard_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -134,33 +144,207 @@ func (x *IsKeyguardSecureRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IsKeyguardSecureRequest.ProtoReflect.Descriptor instead.
-func (*IsKeyguardSecureRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateConfirmDeviceCredentialIntentRequest.ProtoReflect.Descriptor instead.
+func (*CreateConfirmDeviceCredentialIntentRequest) Descriptor() ([]byte, []int) {
 	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{2}
 }
 
-type IsKeyguardSecureResponse struct {
+func (x *CreateConfirmDeviceCredentialIntentRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+func (x *CreateConfirmDeviceCredentialIntentRequest) GetArg1() string {
+	if x != nil {
+		return x.Arg1
+	}
+	return ""
+}
+
+type CreateConfirmDeviceCredentialIntentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateConfirmDeviceCredentialIntentResponse) Reset() {
+	*x = CreateConfirmDeviceCredentialIntentResponse{}
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateConfirmDeviceCredentialIntentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateConfirmDeviceCredentialIntentResponse) ProtoMessage() {}
+
+func (x *CreateConfirmDeviceCredentialIntentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateConfirmDeviceCredentialIntentResponse.ProtoReflect.Descriptor instead.
+func (*CreateConfirmDeviceCredentialIntentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CreateConfirmDeviceCredentialIntentResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type ExitKeyguardSecurelyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExitKeyguardSecurelyRequest) Reset() {
+	*x = ExitKeyguardSecurelyRequest{}
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExitKeyguardSecurelyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExitKeyguardSecurelyRequest) ProtoMessage() {}
+
+func (x *ExitKeyguardSecurelyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExitKeyguardSecurelyRequest.ProtoReflect.Descriptor instead.
+func (*ExitKeyguardSecurelyRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ExitKeyguardSecurelyRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type ExitKeyguardSecurelyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExitKeyguardSecurelyResponse) Reset() {
+	*x = ExitKeyguardSecurelyResponse{}
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExitKeyguardSecurelyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExitKeyguardSecurelyResponse) ProtoMessage() {}
+
+func (x *ExitKeyguardSecurelyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExitKeyguardSecurelyResponse.ProtoReflect.Descriptor instead.
+func (*ExitKeyguardSecurelyResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{5}
+}
+
+type InKeyguardRestrictedInputModeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InKeyguardRestrictedInputModeRequest) Reset() {
+	*x = InKeyguardRestrictedInputModeRequest{}
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InKeyguardRestrictedInputModeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InKeyguardRestrictedInputModeRequest) ProtoMessage() {}
+
+func (x *InKeyguardRestrictedInputModeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InKeyguardRestrictedInputModeRequest.ProtoReflect.Descriptor instead.
+func (*InKeyguardRestrictedInputModeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{6}
+}
+
+type InKeyguardRestrictedInputModeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IsKeyguardSecureResponse) Reset() {
-	*x = IsKeyguardSecureResponse{}
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[3]
+func (x *InKeyguardRestrictedInputModeResponse) Reset() {
+	*x = InKeyguardRestrictedInputModeResponse{}
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IsKeyguardSecureResponse) String() string {
+func (x *InKeyguardRestrictedInputModeResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IsKeyguardSecureResponse) ProtoMessage() {}
+func (*InKeyguardRestrictedInputModeResponse) ProtoMessage() {}
 
-func (x *IsKeyguardSecureResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[3]
+func (x *InKeyguardRestrictedInputModeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -171,12 +355,12 @@ func (x *IsKeyguardSecureResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IsKeyguardSecureResponse.ProtoReflect.Descriptor instead.
-func (*IsKeyguardSecureResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{3}
+// Deprecated: Use InKeyguardRestrictedInputModeResponse.ProtoReflect.Descriptor instead.
+func (*InKeyguardRestrictedInputModeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *IsKeyguardSecureResponse) GetResult() bool {
+func (x *InKeyguardRestrictedInputModeResponse) GetResult() bool {
 	if x != nil {
 		return x.Result
 	}
@@ -191,7 +375,7 @@ type IsDeviceLockedRequest struct {
 
 func (x *IsDeviceLockedRequest) Reset() {
 	*x = IsDeviceLockedRequest{}
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[4]
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -203,7 +387,7 @@ func (x *IsDeviceLockedRequest) String() string {
 func (*IsDeviceLockedRequest) ProtoMessage() {}
 
 func (x *IsDeviceLockedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[4]
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -216,7 +400,7 @@ func (x *IsDeviceLockedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsDeviceLockedRequest.ProtoReflect.Descriptor instead.
 func (*IsDeviceLockedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{4}
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{8}
 }
 
 type IsDeviceLockedResponse struct {
@@ -228,7 +412,7 @@ type IsDeviceLockedResponse struct {
 
 func (x *IsDeviceLockedResponse) Reset() {
 	*x = IsDeviceLockedResponse{}
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[5]
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -240,7 +424,7 @@ func (x *IsDeviceLockedResponse) String() string {
 func (*IsDeviceLockedResponse) ProtoMessage() {}
 
 func (x *IsDeviceLockedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[5]
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -253,7 +437,7 @@ func (x *IsDeviceLockedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsDeviceLockedResponse.ProtoReflect.Descriptor instead.
 func (*IsDeviceLockedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{5}
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *IsDeviceLockedResponse) GetResult() bool {
@@ -271,7 +455,7 @@ type IsDeviceSecureRequest struct {
 
 func (x *IsDeviceSecureRequest) Reset() {
 	*x = IsDeviceSecureRequest{}
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[6]
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -283,7 +467,7 @@ func (x *IsDeviceSecureRequest) String() string {
 func (*IsDeviceSecureRequest) ProtoMessage() {}
 
 func (x *IsDeviceSecureRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[6]
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -296,7 +480,7 @@ func (x *IsDeviceSecureRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsDeviceSecureRequest.ProtoReflect.Descriptor instead.
 func (*IsDeviceSecureRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{6}
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{10}
 }
 
 type IsDeviceSecureResponse struct {
@@ -308,7 +492,7 @@ type IsDeviceSecureResponse struct {
 
 func (x *IsDeviceSecureResponse) Reset() {
 	*x = IsDeviceSecureResponse{}
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[7]
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -320,7 +504,7 @@ func (x *IsDeviceSecureResponse) String() string {
 func (*IsDeviceSecureResponse) ProtoMessage() {}
 
 func (x *IsDeviceSecureResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[7]
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -333,7 +517,7 @@ func (x *IsDeviceSecureResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsDeviceSecureResponse.ProtoReflect.Descriptor instead.
 func (*IsDeviceSecureResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{7}
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *IsDeviceSecureResponse) GetResult() bool {
@@ -343,29 +527,27 @@ func (x *IsDeviceSecureResponse) GetResult() bool {
 	return false
 }
 
-type RequestDismissKeyguardRawRequest struct {
+type IsKeyguardLockedRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Activity      int64                  `protobuf:"varint,1,opt,name=activity,proto3" json:"activity,omitempty"`
-	Callback      int64                  `protobuf:"varint,2,opt,name=callback,proto3" json:"callback,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RequestDismissKeyguardRawRequest) Reset() {
-	*x = RequestDismissKeyguardRawRequest{}
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[8]
+func (x *IsKeyguardLockedRequest) Reset() {
+	*x = IsKeyguardLockedRequest{}
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RequestDismissKeyguardRawRequest) String() string {
+func (x *IsKeyguardLockedRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RequestDismissKeyguardRawRequest) ProtoMessage() {}
+func (*IsKeyguardLockedRequest) ProtoMessage() {}
 
-func (x *RequestDismissKeyguardRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[8]
+func (x *IsKeyguardLockedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -376,46 +558,33 @@ func (x *RequestDismissKeyguardRawRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RequestDismissKeyguardRawRequest.ProtoReflect.Descriptor instead.
-func (*RequestDismissKeyguardRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{8}
+// Deprecated: Use IsKeyguardLockedRequest.ProtoReflect.Descriptor instead.
+func (*IsKeyguardLockedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *RequestDismissKeyguardRawRequest) GetActivity() int64 {
-	if x != nil {
-		return x.Activity
-	}
-	return 0
-}
-
-func (x *RequestDismissKeyguardRawRequest) GetCallback() int64 {
-	if x != nil {
-		return x.Callback
-	}
-	return 0
-}
-
-type RequestDismissKeyguardRawResponse struct {
+type IsKeyguardLockedResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RequestDismissKeyguardRawResponse) Reset() {
-	*x = RequestDismissKeyguardRawResponse{}
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[9]
+func (x *IsKeyguardLockedResponse) Reset() {
+	*x = IsKeyguardLockedResponse{}
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RequestDismissKeyguardRawResponse) String() string {
+func (x *IsKeyguardLockedResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RequestDismissKeyguardRawResponse) ProtoMessage() {}
+func (*IsKeyguardLockedResponse) ProtoMessage() {}
 
-func (x *RequestDismissKeyguardRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[9]
+func (x *IsKeyguardLockedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -426,34 +595,39 @@ func (x *RequestDismissKeyguardRawResponse) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RequestDismissKeyguardRawResponse.ProtoReflect.Descriptor instead.
-func (*RequestDismissKeyguardRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{9}
+// Deprecated: Use IsKeyguardLockedResponse.ProtoReflect.Descriptor instead.
+func (*IsKeyguardLockedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{13}
 }
 
-type CreateConfirmDeviceCredentialIntentRawRequest struct {
+func (x *IsKeyguardLockedResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsKeyguardSecureRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Title         int64                  `protobuf:"varint,1,opt,name=title,proto3" json:"title,omitempty"`
-	Description   int64                  `protobuf:"varint,2,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateConfirmDeviceCredentialIntentRawRequest) Reset() {
-	*x = CreateConfirmDeviceCredentialIntentRawRequest{}
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[10]
+func (x *IsKeyguardSecureRequest) Reset() {
+	*x = IsKeyguardSecureRequest{}
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateConfirmDeviceCredentialIntentRawRequest) String() string {
+func (x *IsKeyguardSecureRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateConfirmDeviceCredentialIntentRawRequest) ProtoMessage() {}
+func (*IsKeyguardSecureRequest) ProtoMessage() {}
 
-func (x *CreateConfirmDeviceCredentialIntentRawRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[10]
+func (x *IsKeyguardSecureRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -464,47 +638,121 @@ func (x *CreateConfirmDeviceCredentialIntentRawRequest) ProtoReflect() protorefl
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateConfirmDeviceCredentialIntentRawRequest.ProtoReflect.Descriptor instead.
-func (*CreateConfirmDeviceCredentialIntentRawRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{10}
+// Deprecated: Use IsKeyguardSecureRequest.ProtoReflect.Descriptor instead.
+func (*IsKeyguardSecureRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *CreateConfirmDeviceCredentialIntentRawRequest) GetTitle() int64 {
+type IsKeyguardSecureResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsKeyguardSecureResponse) Reset() {
+	*x = IsKeyguardSecureResponse{}
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsKeyguardSecureResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsKeyguardSecureResponse) ProtoMessage() {}
+
+func (x *IsKeyguardSecureResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[15]
 	if x != nil {
-		return x.Title
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
 	}
-	return 0
+	return mi.MessageOf(x)
 }
 
-func (x *CreateConfirmDeviceCredentialIntentRawRequest) GetDescription() int64 {
+// Deprecated: Use IsKeyguardSecureResponse.ProtoReflect.Descriptor instead.
+func (*IsKeyguardSecureResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *IsKeyguardSecureResponse) GetResult() bool {
 	if x != nil {
-		return x.Description
+		return x.Result
 	}
-	return 0
+	return false
 }
 
-type CreateConfirmDeviceCredentialIntentRawResponse struct {
+type NewKeyguardLockRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NewKeyguardLockRequest) Reset() {
+	*x = NewKeyguardLockRequest{}
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NewKeyguardLockRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewKeyguardLockRequest) ProtoMessage() {}
+
+func (x *NewKeyguardLockRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewKeyguardLockRequest.ProtoReflect.Descriptor instead.
+func (*NewKeyguardLockRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *NewKeyguardLockRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type NewKeyguardLockResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateConfirmDeviceCredentialIntentRawResponse) Reset() {
-	*x = CreateConfirmDeviceCredentialIntentRawResponse{}
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[11]
+func (x *NewKeyguardLockResponse) Reset() {
+	*x = NewKeyguardLockResponse{}
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateConfirmDeviceCredentialIntentRawResponse) String() string {
+func (x *NewKeyguardLockResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateConfirmDeviceCredentialIntentRawResponse) ProtoMessage() {}
+func (*NewKeyguardLockResponse) ProtoMessage() {}
 
-func (x *CreateConfirmDeviceCredentialIntentRawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[11]
+func (x *NewKeyguardLockResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -515,244 +763,40 @@ func (x *CreateConfirmDeviceCredentialIntentRawResponse) ProtoReflect() protoref
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateConfirmDeviceCredentialIntentRawResponse.ProtoReflect.Descriptor instead.
-func (*CreateConfirmDeviceCredentialIntentRawResponse) Descriptor() ([]byte, []int) {
-	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{11}
+// Deprecated: Use NewKeyguardLockResponse.ProtoReflect.Descriptor instead.
+func (*NewKeyguardLockResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *CreateConfirmDeviceCredentialIntentRawResponse) GetResult() int64 {
+func (x *NewKeyguardLockResponse) GetResult() int64 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-type KeyguardDismissCallbackOnDismissSucceededEvent struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *KeyguardDismissCallbackOnDismissSucceededEvent) Reset() {
-	*x = KeyguardDismissCallbackOnDismissSucceededEvent{}
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *KeyguardDismissCallbackOnDismissSucceededEvent) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*KeyguardDismissCallbackOnDismissSucceededEvent) ProtoMessage() {}
-
-func (x *KeyguardDismissCallbackOnDismissSucceededEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use KeyguardDismissCallbackOnDismissSucceededEvent.ProtoReflect.Descriptor instead.
-func (*KeyguardDismissCallbackOnDismissSucceededEvent) Descriptor() ([]byte, []int) {
-	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{12}
-}
-
-type KeyguardDismissCallbackOnDismissErrorEvent struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *KeyguardDismissCallbackOnDismissErrorEvent) Reset() {
-	*x = KeyguardDismissCallbackOnDismissErrorEvent{}
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *KeyguardDismissCallbackOnDismissErrorEvent) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*KeyguardDismissCallbackOnDismissErrorEvent) ProtoMessage() {}
-
-func (x *KeyguardDismissCallbackOnDismissErrorEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use KeyguardDismissCallbackOnDismissErrorEvent.ProtoReflect.Descriptor instead.
-func (*KeyguardDismissCallbackOnDismissErrorEvent) Descriptor() ([]byte, []int) {
-	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{13}
-}
-
-type KeyguardDismissCallbackOnDismissCancelledEvent struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *KeyguardDismissCallbackOnDismissCancelledEvent) Reset() {
-	*x = KeyguardDismissCallbackOnDismissCancelledEvent{}
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *KeyguardDismissCallbackOnDismissCancelledEvent) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*KeyguardDismissCallbackOnDismissCancelledEvent) ProtoMessage() {}
-
-func (x *KeyguardDismissCallbackOnDismissCancelledEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use KeyguardDismissCallbackOnDismissCancelledEvent.ProtoReflect.Descriptor instead.
-func (*KeyguardDismissCallbackOnDismissCancelledEvent) Descriptor() ([]byte, []int) {
-	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{14}
-}
-
-type KeyguardDismissCallbackEvent struct {
-	state              protoimpl.MessageState                          `protogen:"open.v1"`
-	OnDismissSucceeded *KeyguardDismissCallbackOnDismissSucceededEvent `protobuf:"bytes,1,opt,name=on_dismiss_succeeded,json=onDismissSucceeded,proto3,oneof" json:"on_dismiss_succeeded,omitempty"`
-	OnDismissError     *KeyguardDismissCallbackOnDismissErrorEvent     `protobuf:"bytes,2,opt,name=on_dismiss_error,json=onDismissError,proto3,oneof" json:"on_dismiss_error,omitempty"`
-	OnDismissCancelled *KeyguardDismissCallbackOnDismissCancelledEvent `protobuf:"bytes,3,opt,name=on_dismiss_cancelled,json=onDismissCancelled,proto3,oneof" json:"on_dismiss_cancelled,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
-
-func (x *KeyguardDismissCallbackEvent) Reset() {
-	*x = KeyguardDismissCallbackEvent{}
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *KeyguardDismissCallbackEvent) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*KeyguardDismissCallbackEvent) ProtoMessage() {}
-
-func (x *KeyguardDismissCallbackEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use KeyguardDismissCallbackEvent.ProtoReflect.Descriptor instead.
-func (*KeyguardDismissCallbackEvent) Descriptor() ([]byte, []int) {
-	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *KeyguardDismissCallbackEvent) GetOnDismissSucceeded() *KeyguardDismissCallbackOnDismissSucceededEvent {
-	if x != nil {
-		return x.OnDismissSucceeded
-	}
-	return nil
-}
-
-func (x *KeyguardDismissCallbackEvent) GetOnDismissError() *KeyguardDismissCallbackOnDismissErrorEvent {
-	if x != nil {
-		return x.OnDismissError
-	}
-	return nil
-}
-
-func (x *KeyguardDismissCallbackEvent) GetOnDismissCancelled() *KeyguardDismissCallbackOnDismissCancelledEvent {
-	if x != nil {
-		return x.OnDismissCancelled
-	}
-	return nil
-}
-
-type SubscribeKeyguardDismissCallbackRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SubscribeKeyguardDismissCallbackRequest) Reset() {
-	*x = SubscribeKeyguardDismissCallbackRequest{}
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SubscribeKeyguardDismissCallbackRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SubscribeKeyguardDismissCallbackRequest) ProtoMessage() {}
-
-func (x *SubscribeKeyguardDismissCallbackRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SubscribeKeyguardDismissCallbackRequest.ProtoReflect.Descriptor instead.
-func (*SubscribeKeyguardDismissCallbackRequest) Descriptor() ([]byte, []int) {
-	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{16}
-}
-
-type KeyguardLockedStateListenerOnLockedStateChangedEvent struct {
+type RemoveKeyguardLockedStateListenerRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *KeyguardLockedStateListenerOnLockedStateChangedEvent) Reset() {
-	*x = KeyguardLockedStateListenerOnLockedStateChangedEvent{}
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[17]
+func (x *RemoveKeyguardLockedStateListenerRequest) Reset() {
+	*x = RemoveKeyguardLockedStateListenerRequest{}
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *KeyguardLockedStateListenerOnLockedStateChangedEvent) String() string {
+func (x *RemoveKeyguardLockedStateListenerRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*KeyguardLockedStateListenerOnLockedStateChangedEvent) ProtoMessage() {}
+func (*RemoveKeyguardLockedStateListenerRequest) ProtoMessage() {}
 
-func (x *KeyguardLockedStateListenerOnLockedStateChangedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[17]
+func (x *RemoveKeyguardLockedStateListenerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -763,82 +807,38 @@ func (x *KeyguardLockedStateListenerOnLockedStateChangedEvent) ProtoReflect() pr
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use KeyguardLockedStateListenerOnLockedStateChangedEvent.ProtoReflect.Descriptor instead.
-func (*KeyguardLockedStateListenerOnLockedStateChangedEvent) Descriptor() ([]byte, []int) {
-	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{17}
+// Deprecated: Use RemoveKeyguardLockedStateListenerRequest.ProtoReflect.Descriptor instead.
+func (*RemoveKeyguardLockedStateListenerRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *KeyguardLockedStateListenerOnLockedStateChangedEvent) GetArg0() int64 {
+func (x *RemoveKeyguardLockedStateListenerRequest) GetArg0() int64 {
 	if x != nil {
 		return x.Arg0
 	}
 	return 0
 }
 
-type KeyguardLockedStateListenerEvent struct {
-	state                protoimpl.MessageState                                `protogen:"open.v1"`
-	OnLockedStateChanged *KeyguardLockedStateListenerOnLockedStateChangedEvent `protobuf:"bytes,1,opt,name=on_locked_state_changed,json=onLockedStateChanged,proto3,oneof" json:"on_locked_state_changed,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
-}
-
-func (x *KeyguardLockedStateListenerEvent) Reset() {
-	*x = KeyguardLockedStateListenerEvent{}
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[18]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *KeyguardLockedStateListenerEvent) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*KeyguardLockedStateListenerEvent) ProtoMessage() {}
-
-func (x *KeyguardLockedStateListenerEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_keyguard_keyguard_proto_msgTypes[18]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use KeyguardLockedStateListenerEvent.ProtoReflect.Descriptor instead.
-func (*KeyguardLockedStateListenerEvent) Descriptor() ([]byte, []int) {
-	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{18}
-}
-
-func (x *KeyguardLockedStateListenerEvent) GetOnLockedStateChanged() *KeyguardLockedStateListenerOnLockedStateChangedEvent {
-	if x != nil {
-		return x.OnLockedStateChanged
-	}
-	return nil
-}
-
-type SubscribeKeyguardLockedStateListenerRequest struct {
+type RemoveKeyguardLockedStateListenerResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SubscribeKeyguardLockedStateListenerRequest) Reset() {
-	*x = SubscribeKeyguardLockedStateListenerRequest{}
+func (x *RemoveKeyguardLockedStateListenerResponse) Reset() {
+	*x = RemoveKeyguardLockedStateListenerResponse{}
 	mi := &file_proto_keyguard_keyguard_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SubscribeKeyguardLockedStateListenerRequest) String() string {
+func (x *RemoveKeyguardLockedStateListenerResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SubscribeKeyguardLockedStateListenerRequest) ProtoMessage() {}
+func (*RemoveKeyguardLockedStateListenerResponse) ProtoMessage() {}
 
-func (x *SubscribeKeyguardLockedStateListenerRequest) ProtoReflect() protoreflect.Message {
+func (x *RemoveKeyguardLockedStateListenerResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_keyguard_keyguard_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -850,65 +850,154 @@ func (x *SubscribeKeyguardLockedStateListenerRequest) ProtoReflect() protoreflec
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SubscribeKeyguardLockedStateListenerRequest.ProtoReflect.Descriptor instead.
-func (*SubscribeKeyguardLockedStateListenerRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use RemoveKeyguardLockedStateListenerResponse.ProtoReflect.Descriptor instead.
+func (*RemoveKeyguardLockedStateListenerResponse) Descriptor() ([]byte, []int) {
 	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{19}
+}
+
+type RequestDismissKeyguardRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestDismissKeyguardRequest) Reset() {
+	*x = RequestDismissKeyguardRequest{}
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestDismissKeyguardRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestDismissKeyguardRequest) ProtoMessage() {}
+
+func (x *RequestDismissKeyguardRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestDismissKeyguardRequest.ProtoReflect.Descriptor instead.
+func (*RequestDismissKeyguardRequest) Descriptor() ([]byte, []int) {
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *RequestDismissKeyguardRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *RequestDismissKeyguardRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type RequestDismissKeyguardResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RequestDismissKeyguardResponse) Reset() {
+	*x = RequestDismissKeyguardResponse{}
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RequestDismissKeyguardResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RequestDismissKeyguardResponse) ProtoMessage() {}
+
+func (x *RequestDismissKeyguardResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_keyguard_keyguard_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RequestDismissKeyguardResponse.ProtoReflect.Descriptor instead.
+func (*RequestDismissKeyguardResponse) Descriptor() ([]byte, []int) {
+	return file_proto_keyguard_keyguard_proto_rawDescGZIP(), []int{21}
 }
 
 var File_proto_keyguard_keyguard_proto protoreflect.FileDescriptor
 
 const file_proto_keyguard_keyguard_proto_rawDesc = "" +
 	"\n" +
-	"\x1dproto/keyguard/keyguard.proto\x12\bkeyguard\"\x19\n" +
-	"\x17IsKeyguardLockedRequest\"2\n" +
-	"\x18IsKeyguardLockedResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"\x19\n" +
-	"\x17IsKeyguardSecureRequest\"2\n" +
-	"\x18IsKeyguardSecureResponse\x12\x16\n" +
+	"\x1dproto/keyguard/keyguard.proto\x12\bkeyguard\"O\n" +
+	"%AddKeyguardLockedStateListenerRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"(\n" +
+	"&AddKeyguardLockedStateListenerResponse\"T\n" +
+	"*CreateConfirmDeviceCredentialIntentRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\tR\x04arg1\"E\n" +
+	"+CreateConfirmDeviceCredentialIntentResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"1\n" +
+	"\x1bExitKeyguardSecurelyRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1e\n" +
+	"\x1cExitKeyguardSecurelyResponse\"&\n" +
+	"$InKeyguardRestrictedInputModeRequest\"?\n" +
+	"%InKeyguardRestrictedInputModeResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\bR\x06result\"\x17\n" +
 	"\x15IsDeviceLockedRequest\"0\n" +
 	"\x16IsDeviceLockedResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\bR\x06result\"\x17\n" +
 	"\x15IsDeviceSecureRequest\"0\n" +
 	"\x16IsDeviceSecureResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\bR\x06result\"Z\n" +
-	" RequestDismissKeyguardRawRequest\x12\x1a\n" +
-	"\bactivity\x18\x01 \x01(\x03R\bactivity\x12\x1a\n" +
-	"\bcallback\x18\x02 \x01(\x03R\bcallback\"#\n" +
-	"!RequestDismissKeyguardRawResponse\"g\n" +
-	"-CreateConfirmDeviceCredentialIntentRawRequest\x12\x14\n" +
-	"\x05title\x18\x01 \x01(\x03R\x05title\x12 \n" +
-	"\vdescription\x18\x02 \x01(\x03R\vdescription\"H\n" +
-	".CreateConfirmDeviceCredentialIntentRawResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result\"0\n" +
-	".KeyguardDismissCallbackOnDismissSucceededEvent\",\n" +
-	"*KeyguardDismissCallbackOnDismissErrorEvent\"0\n" +
-	".KeyguardDismissCallbackOnDismissCancelledEvent\"\xac\x03\n" +
-	"\x1cKeyguardDismissCallbackEvent\x12o\n" +
-	"\x14on_dismiss_succeeded\x18\x01 \x01(\v28.keyguard.KeyguardDismissCallbackOnDismissSucceededEventH\x00R\x12onDismissSucceeded\x88\x01\x01\x12c\n" +
-	"\x10on_dismiss_error\x18\x02 \x01(\v24.keyguard.KeyguardDismissCallbackOnDismissErrorEventH\x01R\x0eonDismissError\x88\x01\x01\x12o\n" +
-	"\x14on_dismiss_cancelled\x18\x03 \x01(\v28.keyguard.KeyguardDismissCallbackOnDismissCancelledEventH\x02R\x12onDismissCancelled\x88\x01\x01B\x17\n" +
-	"\x15_on_dismiss_succeededB\x13\n" +
-	"\x11_on_dismiss_errorB\x17\n" +
-	"\x15_on_dismiss_cancelled\")\n" +
-	"'SubscribeKeyguardDismissCallbackRequest\"J\n" +
-	"4KeyguardLockedStateListenerOnLockedStateChangedEvent\x12\x12\n" +
-	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\xba\x01\n" +
-	" KeyguardLockedStateListenerEvent\x12z\n" +
-	"\x17on_locked_state_changed\x18\x01 \x01(\v2>.keyguard.KeyguardLockedStateListenerOnLockedStateChangedEventH\x00R\x14onLockedStateChanged\x88\x01\x01B\x1a\n" +
-	"\x18_on_locked_state_changed\"-\n" +
-	"+SubscribeKeyguardLockedStateListenerRequest2\x84\x05\n" +
-	"\x0eManagerService\x12Y\n" +
-	"\x10IsKeyguardLocked\x12!.keyguard.IsKeyguardLockedRequest\x1a\".keyguard.IsKeyguardLockedResponse\x12Y\n" +
-	"\x10IsKeyguardSecure\x12!.keyguard.IsKeyguardSecureRequest\x1a\".keyguard.IsKeyguardSecureResponse\x12S\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x19\n" +
+	"\x17IsKeyguardLockedRequest\"2\n" +
+	"\x18IsKeyguardLockedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x19\n" +
+	"\x17IsKeyguardSecureRequest\"2\n" +
+	"\x18IsKeyguardSecureResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\",\n" +
+	"\x16NewKeyguardLockRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"1\n" +
+	"\x17NewKeyguardLockResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\">\n" +
+	"(RemoveKeyguardLockedStateListenerRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"+\n" +
+	")RemoveKeyguardLockedStateListenerResponse\"G\n" +
+	"\x1dRequestDismissKeyguardRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\" \n" +
+	"\x1eRequestDismissKeyguardResponse2\xd1\t\n" +
+	"\x16KeyguardManagerService\x12\x83\x01\n" +
+	"\x1eAddKeyguardLockedStateListener\x12/.keyguard.AddKeyguardLockedStateListenerRequest\x1a0.keyguard.AddKeyguardLockedStateListenerResponse\x12\x92\x01\n" +
+	"#CreateConfirmDeviceCredentialIntent\x124.keyguard.CreateConfirmDeviceCredentialIntentRequest\x1a5.keyguard.CreateConfirmDeviceCredentialIntentResponse\x12e\n" +
+	"\x14ExitKeyguardSecurely\x12%.keyguard.ExitKeyguardSecurelyRequest\x1a&.keyguard.ExitKeyguardSecurelyResponse\x12\x80\x01\n" +
+	"\x1dInKeyguardRestrictedInputMode\x12..keyguard.InKeyguardRestrictedInputModeRequest\x1a/.keyguard.InKeyguardRestrictedInputModeResponse\x12S\n" +
 	"\x0eIsDeviceLocked\x12\x1f.keyguard.IsDeviceLockedRequest\x1a .keyguard.IsDeviceLockedResponse\x12S\n" +
-	"\x0eIsDeviceSecure\x12\x1f.keyguard.IsDeviceSecureRequest\x1a .keyguard.IsDeviceSecureResponse\x12t\n" +
-	"\x19RequestDismissKeyguardRaw\x12*.keyguard.RequestDismissKeyguardRawRequest\x1a+.keyguard.RequestDismissKeyguardRawResponse\x12\x9b\x01\n" +
-	"&CreateConfirmDeviceCredentialIntentRaw\x127.keyguard.CreateConfirmDeviceCredentialIntentRawRequest\x1a8.keyguard.CreateConfirmDeviceCredentialIntentRawResponse2\xa1\x01\n" +
-	"\x1eKeyguardDismissCallbackService\x12\x7f\n" +
-	" SubscribeKeyguardDismissCallback\x121.keyguard.SubscribeKeyguardDismissCallbackRequest\x1a&.keyguard.KeyguardDismissCallbackEvent0\x012\xb2\x01\n" +
-	"\"KeyguardLockedStateListenerService\x12\x8b\x01\n" +
-	"$SubscribeKeyguardLockedStateListener\x125.keyguard.SubscribeKeyguardLockedStateListenerRequest\x1a*.keyguard.KeyguardLockedStateListenerEvent0\x01B+Z)github.com/xaionaro-go/jni/proto/keyguardb\x06proto3"
+	"\x0eIsDeviceSecure\x12\x1f.keyguard.IsDeviceSecureRequest\x1a .keyguard.IsDeviceSecureResponse\x12Y\n" +
+	"\x10IsKeyguardLocked\x12!.keyguard.IsKeyguardLockedRequest\x1a\".keyguard.IsKeyguardLockedResponse\x12Y\n" +
+	"\x10IsKeyguardSecure\x12!.keyguard.IsKeyguardSecureRequest\x1a\".keyguard.IsKeyguardSecureResponse\x12V\n" +
+	"\x0fNewKeyguardLock\x12 .keyguard.NewKeyguardLockRequest\x1a!.keyguard.NewKeyguardLockResponse\x12\x8c\x01\n" +
+	"!RemoveKeyguardLockedStateListener\x122.keyguard.RemoveKeyguardLockedStateListenerRequest\x1a3.keyguard.RemoveKeyguardLockedStateListenerResponse\x12k\n" +
+	"\x16RequestDismissKeyguard\x12'.keyguard.RequestDismissKeyguardRequest\x1a(.keyguard.RequestDismissKeyguardResponseB+Z)github.com/xaionaro-go/jni/proto/keyguardb\x06proto3"
 
 var (
 	file_proto_keyguard_keyguard_proto_rawDescOnce sync.Once
@@ -922,55 +1011,59 @@ func file_proto_keyguard_keyguard_proto_rawDescGZIP() []byte {
 	return file_proto_keyguard_keyguard_proto_rawDescData
 }
 
-var file_proto_keyguard_keyguard_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_proto_keyguard_keyguard_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_proto_keyguard_keyguard_proto_goTypes = []any{
-	(*IsKeyguardLockedRequest)(nil),                              // 0: keyguard.IsKeyguardLockedRequest
-	(*IsKeyguardLockedResponse)(nil),                             // 1: keyguard.IsKeyguardLockedResponse
-	(*IsKeyguardSecureRequest)(nil),                              // 2: keyguard.IsKeyguardSecureRequest
-	(*IsKeyguardSecureResponse)(nil),                             // 3: keyguard.IsKeyguardSecureResponse
-	(*IsDeviceLockedRequest)(nil),                                // 4: keyguard.IsDeviceLockedRequest
-	(*IsDeviceLockedResponse)(nil),                               // 5: keyguard.IsDeviceLockedResponse
-	(*IsDeviceSecureRequest)(nil),                                // 6: keyguard.IsDeviceSecureRequest
-	(*IsDeviceSecureResponse)(nil),                               // 7: keyguard.IsDeviceSecureResponse
-	(*RequestDismissKeyguardRawRequest)(nil),                     // 8: keyguard.RequestDismissKeyguardRawRequest
-	(*RequestDismissKeyguardRawResponse)(nil),                    // 9: keyguard.RequestDismissKeyguardRawResponse
-	(*CreateConfirmDeviceCredentialIntentRawRequest)(nil),        // 10: keyguard.CreateConfirmDeviceCredentialIntentRawRequest
-	(*CreateConfirmDeviceCredentialIntentRawResponse)(nil),       // 11: keyguard.CreateConfirmDeviceCredentialIntentRawResponse
-	(*KeyguardDismissCallbackOnDismissSucceededEvent)(nil),       // 12: keyguard.KeyguardDismissCallbackOnDismissSucceededEvent
-	(*KeyguardDismissCallbackOnDismissErrorEvent)(nil),           // 13: keyguard.KeyguardDismissCallbackOnDismissErrorEvent
-	(*KeyguardDismissCallbackOnDismissCancelledEvent)(nil),       // 14: keyguard.KeyguardDismissCallbackOnDismissCancelledEvent
-	(*KeyguardDismissCallbackEvent)(nil),                         // 15: keyguard.KeyguardDismissCallbackEvent
-	(*SubscribeKeyguardDismissCallbackRequest)(nil),              // 16: keyguard.SubscribeKeyguardDismissCallbackRequest
-	(*KeyguardLockedStateListenerOnLockedStateChangedEvent)(nil), // 17: keyguard.KeyguardLockedStateListenerOnLockedStateChangedEvent
-	(*KeyguardLockedStateListenerEvent)(nil),                     // 18: keyguard.KeyguardLockedStateListenerEvent
-	(*SubscribeKeyguardLockedStateListenerRequest)(nil),          // 19: keyguard.SubscribeKeyguardLockedStateListenerRequest
+	(*AddKeyguardLockedStateListenerRequest)(nil),       // 0: keyguard.AddKeyguardLockedStateListenerRequest
+	(*AddKeyguardLockedStateListenerResponse)(nil),      // 1: keyguard.AddKeyguardLockedStateListenerResponse
+	(*CreateConfirmDeviceCredentialIntentRequest)(nil),  // 2: keyguard.CreateConfirmDeviceCredentialIntentRequest
+	(*CreateConfirmDeviceCredentialIntentResponse)(nil), // 3: keyguard.CreateConfirmDeviceCredentialIntentResponse
+	(*ExitKeyguardSecurelyRequest)(nil),                 // 4: keyguard.ExitKeyguardSecurelyRequest
+	(*ExitKeyguardSecurelyResponse)(nil),                // 5: keyguard.ExitKeyguardSecurelyResponse
+	(*InKeyguardRestrictedInputModeRequest)(nil),        // 6: keyguard.InKeyguardRestrictedInputModeRequest
+	(*InKeyguardRestrictedInputModeResponse)(nil),       // 7: keyguard.InKeyguardRestrictedInputModeResponse
+	(*IsDeviceLockedRequest)(nil),                       // 8: keyguard.IsDeviceLockedRequest
+	(*IsDeviceLockedResponse)(nil),                      // 9: keyguard.IsDeviceLockedResponse
+	(*IsDeviceSecureRequest)(nil),                       // 10: keyguard.IsDeviceSecureRequest
+	(*IsDeviceSecureResponse)(nil),                      // 11: keyguard.IsDeviceSecureResponse
+	(*IsKeyguardLockedRequest)(nil),                     // 12: keyguard.IsKeyguardLockedRequest
+	(*IsKeyguardLockedResponse)(nil),                    // 13: keyguard.IsKeyguardLockedResponse
+	(*IsKeyguardSecureRequest)(nil),                     // 14: keyguard.IsKeyguardSecureRequest
+	(*IsKeyguardSecureResponse)(nil),                    // 15: keyguard.IsKeyguardSecureResponse
+	(*NewKeyguardLockRequest)(nil),                      // 16: keyguard.NewKeyguardLockRequest
+	(*NewKeyguardLockResponse)(nil),                     // 17: keyguard.NewKeyguardLockResponse
+	(*RemoveKeyguardLockedStateListenerRequest)(nil),    // 18: keyguard.RemoveKeyguardLockedStateListenerRequest
+	(*RemoveKeyguardLockedStateListenerResponse)(nil),   // 19: keyguard.RemoveKeyguardLockedStateListenerResponse
+	(*RequestDismissKeyguardRequest)(nil),               // 20: keyguard.RequestDismissKeyguardRequest
+	(*RequestDismissKeyguardResponse)(nil),              // 21: keyguard.RequestDismissKeyguardResponse
 }
 var file_proto_keyguard_keyguard_proto_depIdxs = []int32{
-	12, // 0: keyguard.KeyguardDismissCallbackEvent.on_dismiss_succeeded:type_name -> keyguard.KeyguardDismissCallbackOnDismissSucceededEvent
-	13, // 1: keyguard.KeyguardDismissCallbackEvent.on_dismiss_error:type_name -> keyguard.KeyguardDismissCallbackOnDismissErrorEvent
-	14, // 2: keyguard.KeyguardDismissCallbackEvent.on_dismiss_cancelled:type_name -> keyguard.KeyguardDismissCallbackOnDismissCancelledEvent
-	17, // 3: keyguard.KeyguardLockedStateListenerEvent.on_locked_state_changed:type_name -> keyguard.KeyguardLockedStateListenerOnLockedStateChangedEvent
-	0,  // 4: keyguard.ManagerService.IsKeyguardLocked:input_type -> keyguard.IsKeyguardLockedRequest
-	2,  // 5: keyguard.ManagerService.IsKeyguardSecure:input_type -> keyguard.IsKeyguardSecureRequest
-	4,  // 6: keyguard.ManagerService.IsDeviceLocked:input_type -> keyguard.IsDeviceLockedRequest
-	6,  // 7: keyguard.ManagerService.IsDeviceSecure:input_type -> keyguard.IsDeviceSecureRequest
-	8,  // 8: keyguard.ManagerService.RequestDismissKeyguardRaw:input_type -> keyguard.RequestDismissKeyguardRawRequest
-	10, // 9: keyguard.ManagerService.CreateConfirmDeviceCredentialIntentRaw:input_type -> keyguard.CreateConfirmDeviceCredentialIntentRawRequest
-	16, // 10: keyguard.KeyguardDismissCallbackService.SubscribeKeyguardDismissCallback:input_type -> keyguard.SubscribeKeyguardDismissCallbackRequest
-	19, // 11: keyguard.KeyguardLockedStateListenerService.SubscribeKeyguardLockedStateListener:input_type -> keyguard.SubscribeKeyguardLockedStateListenerRequest
-	1,  // 12: keyguard.ManagerService.IsKeyguardLocked:output_type -> keyguard.IsKeyguardLockedResponse
-	3,  // 13: keyguard.ManagerService.IsKeyguardSecure:output_type -> keyguard.IsKeyguardSecureResponse
-	5,  // 14: keyguard.ManagerService.IsDeviceLocked:output_type -> keyguard.IsDeviceLockedResponse
-	7,  // 15: keyguard.ManagerService.IsDeviceSecure:output_type -> keyguard.IsDeviceSecureResponse
-	9,  // 16: keyguard.ManagerService.RequestDismissKeyguardRaw:output_type -> keyguard.RequestDismissKeyguardRawResponse
-	11, // 17: keyguard.ManagerService.CreateConfirmDeviceCredentialIntentRaw:output_type -> keyguard.CreateConfirmDeviceCredentialIntentRawResponse
-	15, // 18: keyguard.KeyguardDismissCallbackService.SubscribeKeyguardDismissCallback:output_type -> keyguard.KeyguardDismissCallbackEvent
-	18, // 19: keyguard.KeyguardLockedStateListenerService.SubscribeKeyguardLockedStateListener:output_type -> keyguard.KeyguardLockedStateListenerEvent
-	12, // [12:20] is the sub-list for method output_type
-	4,  // [4:12] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	0,  // 0: keyguard.KeyguardManagerService.AddKeyguardLockedStateListener:input_type -> keyguard.AddKeyguardLockedStateListenerRequest
+	2,  // 1: keyguard.KeyguardManagerService.CreateConfirmDeviceCredentialIntent:input_type -> keyguard.CreateConfirmDeviceCredentialIntentRequest
+	4,  // 2: keyguard.KeyguardManagerService.ExitKeyguardSecurely:input_type -> keyguard.ExitKeyguardSecurelyRequest
+	6,  // 3: keyguard.KeyguardManagerService.InKeyguardRestrictedInputMode:input_type -> keyguard.InKeyguardRestrictedInputModeRequest
+	8,  // 4: keyguard.KeyguardManagerService.IsDeviceLocked:input_type -> keyguard.IsDeviceLockedRequest
+	10, // 5: keyguard.KeyguardManagerService.IsDeviceSecure:input_type -> keyguard.IsDeviceSecureRequest
+	12, // 6: keyguard.KeyguardManagerService.IsKeyguardLocked:input_type -> keyguard.IsKeyguardLockedRequest
+	14, // 7: keyguard.KeyguardManagerService.IsKeyguardSecure:input_type -> keyguard.IsKeyguardSecureRequest
+	16, // 8: keyguard.KeyguardManagerService.NewKeyguardLock:input_type -> keyguard.NewKeyguardLockRequest
+	18, // 9: keyguard.KeyguardManagerService.RemoveKeyguardLockedStateListener:input_type -> keyguard.RemoveKeyguardLockedStateListenerRequest
+	20, // 10: keyguard.KeyguardManagerService.RequestDismissKeyguard:input_type -> keyguard.RequestDismissKeyguardRequest
+	1,  // 11: keyguard.KeyguardManagerService.AddKeyguardLockedStateListener:output_type -> keyguard.AddKeyguardLockedStateListenerResponse
+	3,  // 12: keyguard.KeyguardManagerService.CreateConfirmDeviceCredentialIntent:output_type -> keyguard.CreateConfirmDeviceCredentialIntentResponse
+	5,  // 13: keyguard.KeyguardManagerService.ExitKeyguardSecurely:output_type -> keyguard.ExitKeyguardSecurelyResponse
+	7,  // 14: keyguard.KeyguardManagerService.InKeyguardRestrictedInputMode:output_type -> keyguard.InKeyguardRestrictedInputModeResponse
+	9,  // 15: keyguard.KeyguardManagerService.IsDeviceLocked:output_type -> keyguard.IsDeviceLockedResponse
+	11, // 16: keyguard.KeyguardManagerService.IsDeviceSecure:output_type -> keyguard.IsDeviceSecureResponse
+	13, // 17: keyguard.KeyguardManagerService.IsKeyguardLocked:output_type -> keyguard.IsKeyguardLockedResponse
+	15, // 18: keyguard.KeyguardManagerService.IsKeyguardSecure:output_type -> keyguard.IsKeyguardSecureResponse
+	17, // 19: keyguard.KeyguardManagerService.NewKeyguardLock:output_type -> keyguard.NewKeyguardLockResponse
+	19, // 20: keyguard.KeyguardManagerService.RemoveKeyguardLockedStateListener:output_type -> keyguard.RemoveKeyguardLockedStateListenerResponse
+	21, // 21: keyguard.KeyguardManagerService.RequestDismissKeyguard:output_type -> keyguard.RequestDismissKeyguardResponse
+	11, // [11:22] is the sub-list for method output_type
+	0,  // [0:11] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_keyguard_keyguard_proto_init() }
@@ -978,17 +1071,15 @@ func file_proto_keyguard_keyguard_proto_init() {
 	if File_proto_keyguard_keyguard_proto != nil {
 		return
 	}
-	file_proto_keyguard_keyguard_proto_msgTypes[15].OneofWrappers = []any{}
-	file_proto_keyguard_keyguard_proto_msgTypes[18].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_keyguard_keyguard_proto_rawDesc), len(file_proto_keyguard_keyguard_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   20,
+			NumMessages:   22,
 			NumExtensions: 0,
-			NumServices:   3,
+			NumServices:   1,
 		},
 		GoTypes:           file_proto_keyguard_keyguard_proto_goTypes,
 		DependencyIndexes: file_proto_keyguard_keyguard_proto_depIdxs,
