@@ -1,0 +1,2645 @@
+package: media
+go_import: github.com/xaionaro-go/jni/media
+classes:
+    - java_class: android.media.AudioDeviceInfo
+      go_type: audioDeviceInfo
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAddress
+          go_name: GetAddress
+          returns: String
+          error: true
+        - java_method: getAudioDescriptors
+          go_name: GetAudioDescriptors
+          returns: java.util.List<android.media.AudioDescriptor>
+          error: true
+        - java_method: getAudioProfiles
+          go_name: GetAudioProfiles
+          returns: java.util.List<android.media.AudioProfile>
+          error: true
+        - java_method: getChannelCounts
+          go_name: GetChannelCounts
+          returns: '[I'
+          error: true
+        - java_method: getChannelIndexMasks
+          go_name: GetChannelIndexMasks
+          returns: '[I'
+          error: true
+        - java_method: getChannelMasks
+          go_name: GetChannelMasks
+          returns: '[I'
+          error: true
+        - java_method: getEncapsulationMetadataTypes
+          go_name: GetEncapsulationMetadataTypes
+          returns: '[I'
+          error: true
+        - java_method: getEncapsulationModes
+          go_name: GetEncapsulationModes
+          returns: '[I'
+          error: true
+        - java_method: getEncodings
+          go_name: GetEncodings
+          returns: '[I'
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: int
+          error: true
+        - java_method: getProductName
+          go_name: GetProductName
+          returns: String
+          error: true
+        - java_method: getSampleRates
+          go_name: GetSampleRates
+          returns: '[I'
+          error: true
+        - java_method: getSpeakerLayoutChannelMask
+          go_name: GetSpeakerLayoutChannelMask
+          returns: int
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isSink
+          go_name: IsSink
+          returns: boolean
+          error: true
+        - java_method: isSource
+          go_name: IsSource
+          returns: boolean
+          error: true
+    - java_class: android.media.AudioFocusRequest$Builder
+      go_type: builder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.media.AudioFocusRequest
+          error: true
+        - java_method: setAcceptsDelayedFocusGain
+          go_name: SetAcceptsDelayedFocusGain
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.media.AudioFocusRequest$Builder
+          error: true
+        - java_method: setAudioAttributes
+          go_name: SetAudioAttributes
+          params:
+            - java_type: android.media.AudioAttributes
+              go_name: arg0
+          returns: android.media.AudioFocusRequest$Builder
+          error: true
+        - java_method: setFocusGain
+          go_name: SetFocusGain
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.media.AudioFocusRequest$Builder
+          error: true
+        - java_method: setForceDucking
+          go_name: SetForceDucking
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.media.AudioFocusRequest$Builder
+          error: true
+        - java_method: setOnAudioFocusChangeListener
+          go_name: SetOnAudioFocusChangeListener
+          params:
+            - java_type: android.media.AudioManager$OnAudioFocusChangeListener
+              go_name: arg0
+          returns: android.media.AudioFocusRequest$Builder
+          error: true
+        - java_method: setWillPauseWhenDucked
+          go_name: SetWillPauseWhenDucked
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.media.AudioFocusRequest$Builder
+          error: true
+    - java_class: android.media.AudioManager
+      go_type: audioManager
+      obtain: system_service
+      service_name: audio
+      close: true
+      methods:
+        - java_method: abandonAudioFocus
+          go_name: AbandonAudioFocus
+          params:
+            - java_type: android.media.AudioManager$OnAudioFocusChangeListener
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: abandonAudioFocusRequest
+          go_name: AbandonAudioFocusRequest
+          params:
+            - java_type: android.media.AudioFocusRequest
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: addOnCommunicationDeviceChangedListener
+          go_name: AddOnCommunicationDeviceChangedListener
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.media.AudioManager$OnCommunicationDeviceChangedListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: addOnModeChangedListener
+          go_name: AddOnModeChangedListener
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.media.AudioManager$OnModeChangedListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: addOnPreferredMixerAttributesChangedListener
+          go_name: AddOnPreferredMixerAttributesChangedListener
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.media.AudioManager$OnPreferredMixerAttributesChangedListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: adjustStreamVolume
+          go_name: AdjustStreamVolume
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: adjustSuggestedStreamVolume
+          go_name: AdjustSuggestedStreamVolume
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: adjustVolume
+          go_name: AdjustVolume
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: adjustVolumeGroupVolume
+          go_name: AdjustVolumeGroupVolume
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: clearCommunicationDevice
+          go_name: ClearCommunicationDevice
+          returns: void
+          error: true
+        - java_method: clearPreferredMixerAttributes
+          go_name: ClearPreferredMixerAttributes
+          params:
+            - java_type: android.media.AudioAttributes
+              go_name: arg0
+            - java_type: android.media.AudioDeviceInfo
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: dispatchMediaKeyEvent
+          go_name: DispatchMediaKeyEvent
+          params:
+            - java_type: android.view.KeyEvent
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: generateAudioSessionId
+          go_name: GenerateAudioSessionId
+          returns: int
+          error: true
+        - java_method: getActivePlaybackConfigurations
+          go_name: GetActivePlaybackConfigurations
+          returns: java.util.List<android.media.AudioPlaybackConfiguration>
+          error: true
+        - java_method: getActiveRecordingConfigurations
+          go_name: GetActiveRecordingConfigurations
+          returns: java.util.List<android.media.AudioRecordingConfiguration>
+          error: true
+        - java_method: getAllowedCapturePolicy
+          go_name: GetAllowedCapturePolicy
+          returns: int
+          error: true
+        - java_method: getAudioDevicesForAttributes
+          go_name: GetAudioDevicesForAttributes
+          params:
+            - java_type: android.media.AudioAttributes
+              go_name: arg0
+          returns: java.util.List<android.media.AudioDeviceInfo>
+          error: true
+        - java_method: getAudioHwSyncForSession
+          go_name: GetAudioHwSyncForSession
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getAvailableCommunicationDevices
+          go_name: GetAvailableCommunicationDevices
+          returns: java.util.List<android.media.AudioDeviceInfo>
+          error: true
+        - java_method: getCommunicationDevice
+          go_name: GetCommunicationDevice
+          returns: android.media.AudioDeviceInfo
+          error: true
+        - java_method: getDevices
+          go_name: GetDevices
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.media.AudioDeviceInfo[]
+          error: true
+        - java_method: getDirectProfilesForAttributes
+          go_name: GetDirectProfilesForAttributes
+          params:
+            - java_type: android.media.AudioAttributes
+              go_name: arg0
+          returns: java.util.List<android.media.AudioProfile>
+          error: true
+        - java_method: getEncodedSurroundMode
+          go_name: GetEncodedSurroundMode
+          returns: int
+          error: true
+        - java_method: getMicrophones
+          go_name: GetMicrophones
+          returns: java.util.List<android.media.MicrophoneInfo>
+          error: true
+        - java_method: getMode
+          go_name: GetMode
+          returns: int
+          error: true
+        - java_method: getParameters
+          go_name: GetParameters
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getPreferredMixerAttributes
+          go_name: GetPreferredMixerAttributes
+          params:
+            - java_type: android.media.AudioAttributes
+              go_name: arg0
+            - java_type: android.media.AudioDeviceInfo
+              go_name: arg1
+          returns: android.media.AudioMixerAttributes
+          error: true
+        - java_method: getProperty
+          go_name: GetProperty
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getRingerMode
+          go_name: GetRingerMode
+          returns: int
+          error: true
+        - java_method: getRouting
+          go_name: GetRouting
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getSpatializer
+          go_name: GetSpatializer
+          returns: android.media.Spatializer
+          error: true
+        - java_method: getStreamMaxVolume
+          go_name: GetStreamMaxVolume
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getStreamMinVolume
+          go_name: GetStreamMinVolume
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getStreamVolume
+          go_name: GetStreamVolume
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getStreamVolumeDb
+          go_name: GetStreamVolumeDb
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: float
+          error: true
+        - java_method: getSupportedDeviceTypes
+          go_name: GetSupportedDeviceTypes
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: java.util.Set<java.lang.Integer>
+          error: true
+        - java_method: getSupportedMixerAttributes
+          go_name: GetSupportedMixerAttributes
+          params:
+            - java_type: android.media.AudioDeviceInfo
+              go_name: arg0
+          returns: java.util.List<android.media.AudioMixerAttributes>
+          error: true
+        - java_method: getVibrateSetting
+          go_name: GetVibrateSetting
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getVolumeGroupIdForAttributes
+          go_name: GetVolumeGroupIdForAttributes
+          params:
+            - java_type: android.media.AudioAttributes
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: isBluetoothA2dpOn
+          go_name: IsBluetoothA2dpOn
+          returns: boolean
+          error: true
+        - java_method: isBluetoothScoAvailableOffCall
+          go_name: IsBluetoothScoAvailableOffCall
+          returns: boolean
+          error: true
+        - java_method: isBluetoothScoOn
+          go_name: IsBluetoothScoOn
+          returns: boolean
+          error: true
+        - java_method: isCallScreeningModeSupported
+          go_name: IsCallScreeningModeSupported
+          returns: boolean
+          error: true
+        - java_method: isMicrophoneMute
+          go_name: IsMicrophoneMute
+          returns: boolean
+          error: true
+        - java_method: isMusicActive
+          go_name: IsMusicActive
+          returns: boolean
+          error: true
+        - java_method: isRampingRingerEnabled
+          go_name: IsRampingRingerEnabled
+          returns: boolean
+          error: true
+        - java_method: isSpeakerphoneOn
+          go_name: IsSpeakerphoneOn
+          returns: boolean
+          error: true
+        - java_method: isStreamMute
+          go_name: IsStreamMute
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isSurroundFormatEnabled
+          go_name: IsSurroundFormatEnabled
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isVolumeFixed
+          go_name: IsVolumeFixed
+          returns: boolean
+          error: true
+        - java_method: isVolumeGroupMuted
+          go_name: IsVolumeGroupMuted
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isWiredHeadsetOn
+          go_name: IsWiredHeadsetOn
+          returns: boolean
+          error: true
+        - java_method: loadSoundEffects
+          go_name: LoadSoundEffects
+          returns: void
+          error: true
+        - java_method: playSoundEffect
+          go_name: PlaySoundEffect1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: playSoundEffect
+          go_name: PlaySoundEffect2_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: registerMediaButtonEventReceiver
+          go_name: RegisterMediaButtonEventReceiver1
+          params:
+            - java_type: android.app.PendingIntent
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: registerMediaButtonEventReceiver
+          go_name: RegisterMediaButtonEventReceiver1_1
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: registerRemoteControlClient
+          go_name: RegisterRemoteControlClient
+          params:
+            - java_type: android.media.RemoteControlClient
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: registerRemoteController
+          go_name: RegisterRemoteController
+          params:
+            - java_type: android.media.RemoteController
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: removeOnCommunicationDeviceChangedListener
+          go_name: RemoveOnCommunicationDeviceChangedListener
+          params:
+            - java_type: android.media.AudioManager$OnCommunicationDeviceChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeOnModeChangedListener
+          go_name: RemoveOnModeChangedListener
+          params:
+            - java_type: android.media.AudioManager$OnModeChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeOnPreferredMixerAttributesChangedListener
+          go_name: RemoveOnPreferredMixerAttributesChangedListener
+          params:
+            - java_type: android.media.AudioManager$OnPreferredMixerAttributesChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: requestAudioFocus
+          go_name: RequestAudioFocus1
+          params:
+            - java_type: android.media.AudioFocusRequest
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: requestAudioFocus
+          go_name: RequestAudioFocus3_1
+          params:
+            - java_type: android.media.AudioManager$OnAudioFocusChangeListener
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: int
+          error: true
+        - java_method: setAllowedCapturePolicy
+          go_name: SetAllowedCapturePolicy
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setBluetoothA2dpOn
+          go_name: SetBluetoothA2dpOn
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setBluetoothScoOn
+          go_name: SetBluetoothScoOn
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setCommunicationDevice
+          go_name: SetCommunicationDevice
+          params:
+            - java_type: android.media.AudioDeviceInfo
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setEncodedSurroundMode
+          go_name: SetEncodedSurroundMode
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setMicrophoneMute
+          go_name: SetMicrophoneMute
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setMode
+          go_name: SetMode
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setParameters
+          go_name: SetParameters
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPreferredMixerAttributes
+          go_name: SetPreferredMixerAttributes
+          params:
+            - java_type: android.media.AudioAttributes
+              go_name: arg0
+            - java_type: android.media.AudioDeviceInfo
+              go_name: arg1
+            - java_type: android.media.AudioMixerAttributes
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: setRingerMode
+          go_name: SetRingerMode
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setRouting
+          go_name: SetRouting
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setSpeakerphoneOn
+          go_name: SetSpeakerphoneOn
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setStreamMute
+          go_name: SetStreamMute
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setStreamSolo
+          go_name: SetStreamSolo
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setStreamVolume
+          go_name: SetStreamVolume
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setSurroundFormatEnabled
+          go_name: SetSurroundFormatEnabled
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: setVibrateSetting
+          go_name: SetVibrateSetting
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setWiredHeadsetOn
+          go_name: SetWiredHeadsetOn
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: shouldVibrate
+          go_name: ShouldVibrate
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: startBluetoothSco
+          go_name: StartBluetoothSco
+          returns: void
+          error: true
+        - java_method: stopBluetoothSco
+          go_name: StopBluetoothSco
+          returns: void
+          error: true
+        - java_method: unloadSoundEffects
+          go_name: UnloadSoundEffects
+          returns: void
+          error: true
+        - java_method: unregisterAudioDeviceCallback
+          go_name: UnregisterAudioDeviceCallback
+          params:
+            - java_type: android.media.AudioDeviceCallback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unregisterAudioPlaybackCallback
+          go_name: UnregisterAudioPlaybackCallback
+          params:
+            - java_type: android.media.AudioManager$AudioPlaybackCallback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unregisterAudioRecordingCallback
+          go_name: UnregisterAudioRecordingCallback
+          params:
+            - java_type: android.media.AudioManager$AudioRecordingCallback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unregisterMediaButtonEventReceiver
+          go_name: UnregisterMediaButtonEventReceiver1
+          params:
+            - java_type: android.app.PendingIntent
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unregisterMediaButtonEventReceiver
+          go_name: UnregisterMediaButtonEventReceiver1_1
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unregisterRemoteControlClient
+          go_name: UnregisterRemoteControlClient
+          params:
+            - java_type: android.media.RemoteControlClient
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unregisterRemoteController
+          go_name: UnregisterRemoteController
+          params:
+            - java_type: android.media.RemoteController
+              go_name: arg0
+          returns: void
+          error: true
+      static_methods:
+        - java_method: getDirectPlaybackSupport
+          go_name: GetDirectPlaybackSupport
+          params:
+            - java_type: android.media.AudioFormat
+              go_name: arg0
+            - java_type: android.media.AudioAttributes
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: getPlaybackOffloadSupport
+          go_name: GetPlaybackOffloadSupport
+          params:
+            - java_type: android.media.AudioFormat
+              go_name: arg0
+            - java_type: android.media.AudioAttributes
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: isHapticPlaybackSupported
+          go_name: IsHapticPlaybackSupported
+          returns: boolean
+          error: true
+        - java_method: isOffloadedPlaybackSupported
+          go_name: IsOffloadedPlaybackSupported
+          params:
+            - java_type: android.media.AudioFormat
+              go_name: arg0
+            - java_type: android.media.AudioAttributes
+              go_name: arg1
+          returns: boolean
+          error: true
+    - java_class: android.media.AudioRecord
+      go_type: audioRecord
+      methods:
+        - java_method: getActiveMicrophones
+          go_name: GetActiveMicrophones
+          returns: java.util.List<android.media.MicrophoneInfo>
+          error: true
+        - java_method: getActiveRecordingConfiguration
+          go_name: GetActiveRecordingConfiguration
+          returns: android.media.AudioRecordingConfiguration
+          error: true
+        - java_method: getAudioFormat
+          go_name: GetAudioFormat
+          returns: int
+          error: true
+        - java_method: getAudioSessionId
+          go_name: GetAudioSessionId
+          returns: int
+          error: true
+        - java_method: getAudioSource
+          go_name: GetAudioSource
+          returns: int
+          error: true
+        - java_method: getBufferSizeInFrames
+          go_name: GetBufferSizeInFrames
+          returns: int
+          error: true
+        - java_method: getChannelConfiguration
+          go_name: GetChannelConfiguration
+          returns: int
+          error: true
+        - java_method: getChannelCount
+          go_name: GetChannelCount
+          returns: int
+          error: true
+        - java_method: getFormat
+          go_name: GetFormat
+          returns: android.media.AudioFormat
+          error: true
+        - java_method: getLogSessionId
+          go_name: GetLogSessionId
+          returns: android.media.metrics.LogSessionId
+          error: true
+        - java_method: getMetrics
+          go_name: GetMetrics
+          returns: android.os.PersistableBundle
+          error: true
+        - java_method: getNotificationMarkerPosition
+          go_name: GetNotificationMarkerPosition
+          returns: int
+          error: true
+        - java_method: getPositionNotificationPeriod
+          go_name: GetPositionNotificationPeriod
+          returns: int
+          error: true
+        - java_method: getPreferredDevice
+          go_name: GetPreferredDevice
+          returns: android.media.AudioDeviceInfo
+          error: true
+        - java_method: getRecordingState
+          go_name: GetRecordingState
+          returns: int
+          error: true
+        - java_method: getRoutedDevice
+          go_name: GetRoutedDevice
+          returns: android.media.AudioDeviceInfo
+          error: true
+        - java_method: getRoutedDevices
+          go_name: GetRoutedDevices
+          returns: java.util.List<android.media.AudioDeviceInfo>
+          error: true
+        - java_method: getSampleRate
+          go_name: GetSampleRate
+          returns: int
+          error: true
+        - java_method: getState
+          go_name: GetState
+          returns: int
+          error: true
+        - java_method: getTimestamp
+          go_name: GetTimestamp
+          params:
+            - java_type: android.media.AudioTimestamp
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: isPrivacySensitive
+          go_name: IsPrivacySensitive
+          returns: boolean
+          error: true
+        - java_method: read
+          go_name: Read3
+          params:
+            - java_type: '[B'
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: int
+          error: true
+        - java_method: read
+          go_name: Read4_1
+          params:
+            - java_type: '[B'
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: int
+          error: true
+        - java_method: read
+          go_name: Read4_2
+          params:
+            - java_type: float[]
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: int
+          error: true
+        - java_method: read
+          go_name: Read3_3
+          params:
+            - java_type: short[]
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: int
+          error: true
+        - java_method: read
+          go_name: Read4_4
+          params:
+            - java_type: short[]
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: int
+          error: true
+        - java_method: registerAudioRecordingCallback
+          go_name: RegisterAudioRecordingCallback
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.media.AudioManager$AudioRecordingCallback
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: release
+          go_name: Release
+          returns: void
+          error: true
+        - java_method: removeOnRoutingChangedListener
+          go_name: RemoveOnRoutingChangedListener1
+          params:
+            - java_type: android.media.AudioRecord$OnRoutingChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeOnRoutingChangedListener
+          go_name: RemoveOnRoutingChangedListener1_1
+          params:
+            - java_type: android.media.AudioRouting$OnRoutingChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setLogSessionId
+          go_name: SetLogSessionId
+          params:
+            - java_type: android.media.metrics.LogSessionId
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setNotificationMarkerPosition
+          go_name: SetNotificationMarkerPosition
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: setPositionNotificationPeriod
+          go_name: SetPositionNotificationPeriod
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: setPreferredDevice
+          go_name: SetPreferredDevice
+          params:
+            - java_type: android.media.AudioDeviceInfo
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setPreferredMicrophoneDirection
+          go_name: SetPreferredMicrophoneDirection
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setPreferredMicrophoneFieldDimension
+          go_name: SetPreferredMicrophoneFieldDimension
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setRecordPositionUpdateListener
+          go_name: SetRecordPositionUpdateListener
+          params:
+            - java_type: android.media.AudioRecord$OnRecordPositionUpdateListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: startRecording
+          go_name: StartRecording0
+          returns: void
+          error: true
+        - java_method: startRecording
+          go_name: StartRecording1_1
+          params:
+            - java_type: android.media.MediaSyncEvent
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: stop
+          go_name: Stop
+          returns: void
+          error: true
+        - java_method: unregisterAudioRecordingCallback
+          go_name: UnregisterAudioRecordingCallback
+          params:
+            - java_type: android.media.AudioManager$AudioRecordingCallback
+              go_name: arg0
+          returns: void
+          error: true
+      static_methods:
+        - java_method: getMinBufferSize
+          go_name: GetMinBufferSize
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: int
+          error: true
+    - java_class: android.media.MediaPlayer
+      go_type: mediaPlayer
+      methods:
+        - java_method: addTimedTextSource
+          go_name: AddTimedTextSource3
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: addTimedTextSource
+          go_name: AddTimedTextSource2_1
+          params:
+            - java_type: java.io.FileDescriptor
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: addTimedTextSource
+          go_name: AddTimedTextSource4_2
+          params:
+            - java_type: java.io.FileDescriptor
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: addTimedTextSource
+          go_name: AddTimedTextSource2_3
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: clearOnMediaTimeDiscontinuityListener
+          go_name: ClearOnMediaTimeDiscontinuityListener
+          returns: void
+          error: true
+        - java_method: clearOnSubtitleDataListener
+          go_name: ClearOnSubtitleDataListener
+          returns: void
+          error: true
+        - java_method: createVolumeShaper
+          go_name: CreateVolumeShaper
+          params:
+            - java_type: android.media.VolumeShaper$Configuration
+              go_name: arg0
+          returns: android.media.VolumeShaper
+          error: true
+        - java_method: deselectTrack
+          go_name: DeselectTrack
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getDrmInfo
+          go_name: GetDrmInfo
+          returns: android.media.MediaPlayer$DrmInfo
+          error: true
+        - java_method: getDrmPropertyString
+          go_name: GetDrmPropertyString
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getKeyRequest
+          go_name: GetKeyRequest
+          params:
+            - java_type: '[B'
+              go_name: arg0
+            - java_type: '[B'
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: java.util.Map<java.lang.String
+              go_name: arg4
+            - java_type: java.lang.String>
+              go_name: arg5
+          returns: android.media.MediaDrm$KeyRequest
+          error: true
+        - java_method: getMetrics
+          go_name: GetMetrics
+          returns: android.os.PersistableBundle
+          error: true
+        - java_method: getPreferredDevice
+          go_name: GetPreferredDevice
+          returns: android.media.AudioDeviceInfo
+          error: true
+        - java_method: getRoutedDevice
+          go_name: GetRoutedDevice
+          returns: android.media.AudioDeviceInfo
+          error: true
+        - java_method: getRoutedDevices
+          go_name: GetRoutedDevices
+          returns: java.util.List<android.media.AudioDeviceInfo>
+          error: true
+        - java_method: getSelectedTrack
+          go_name: GetSelectedTrack
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getTimestamp
+          go_name: GetTimestamp
+          returns: android.media.MediaTimestamp
+          error: true
+        - java_method: getTrackInfo
+          go_name: GetTrackInfo
+          returns: android.media.MediaPlayer$TrackInfo[]
+          error: true
+        - java_method: pause
+          go_name: Pause
+          returns: void
+          error: true
+        - java_method: prepare
+          go_name: Prepare
+          returns: void
+          error: true
+        - java_method: prepareAsync
+          go_name: PrepareAsync
+          returns: void
+          error: true
+        - java_method: prepareDrm
+          go_name: PrepareDrm
+          params:
+            - java_type: java.util.UUID
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: provideKeyResponse
+          go_name: ProvideKeyResponse
+          params:
+            - java_type: '[B'
+              go_name: arg0
+            - java_type: '[B'
+              go_name: arg1
+          returns: '[B'
+          error: true
+        - java_method: release
+          go_name: Release
+          returns: void
+          error: true
+        - java_method: releaseDrm
+          go_name: ReleaseDrm
+          returns: void
+          error: true
+        - java_method: removeOnRoutingChangedListener
+          go_name: RemoveOnRoutingChangedListener
+          params:
+            - java_type: android.media.AudioRouting$OnRoutingChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: reset
+          go_name: Reset
+          returns: void
+          error: true
+        - java_method: restoreKeys
+          go_name: RestoreKeys
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: seekTo
+          go_name: SeekTo1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: seekTo
+          go_name: SeekTo2_1
+          params:
+            - java_type: long
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: selectTrack
+          go_name: SelectTrack
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAudioAttributes
+          go_name: SetAudioAttributes
+          params:
+            - java_type: android.media.AudioAttributes
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAudioSessionId
+          go_name: SetAudioSessionId
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAudioStreamType
+          go_name: SetAudioStreamType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAuxEffectSendLevel
+          go_name: SetAuxEffectSendLevel
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDataSource
+          go_name: SetDataSource2
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setDataSource
+          go_name: SetDataSource4_1
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: java.util.Map<java.lang.String
+              go_name: arg2
+            - java_type: java.lang.String>
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: setDataSource
+          go_name: SetDataSource5_2
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: java.util.Map<java.lang.String
+              go_name: arg2
+            - java_type: java.lang.String>
+              go_name: arg3
+            - java_type: java.util.List<java.net.HttpCookie>
+              go_name: arg4
+          returns: void
+          error: true
+        - java_method: setDataSource
+          go_name: SetDataSource1_3
+          params:
+            - java_type: android.content.res.AssetFileDescriptor
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDataSource
+          go_name: SetDataSource1_4
+          params:
+            - java_type: android.media.MediaDataSource
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDataSource
+          go_name: SetDataSource1_5
+          params:
+            - java_type: java.io.FileDescriptor
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDataSource
+          go_name: SetDataSource3_6
+          params:
+            - java_type: java.io.FileDescriptor
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setDataSource
+          go_name: SetDataSource1_7
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDisplay
+          go_name: SetDisplay
+          params:
+            - java_type: android.view.SurfaceHolder
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDrmPropertyString
+          go_name: SetDrmPropertyString
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setOnBufferingUpdateListener
+          go_name: SetOnBufferingUpdateListener
+          params:
+            - java_type: android.media.MediaPlayer$OnBufferingUpdateListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnCompletionListener
+          go_name: SetOnCompletionListener
+          params:
+            - java_type: android.media.MediaPlayer$OnCompletionListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnDrmConfigHelper
+          go_name: SetOnDrmConfigHelper
+          params:
+            - java_type: android.media.MediaPlayer$OnDrmConfigHelper
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnDrmInfoListener
+          go_name: SetOnDrmInfoListener
+          params:
+            - java_type: android.media.MediaPlayer$OnDrmInfoListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnDrmPreparedListener
+          go_name: SetOnDrmPreparedListener
+          params:
+            - java_type: android.media.MediaPlayer$OnDrmPreparedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnErrorListener
+          go_name: SetOnErrorListener
+          params:
+            - java_type: android.media.MediaPlayer$OnErrorListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnInfoListener
+          go_name: SetOnInfoListener
+          params:
+            - java_type: android.media.MediaPlayer$OnInfoListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnMediaTimeDiscontinuityListener
+          go_name: SetOnMediaTimeDiscontinuityListener
+          params:
+            - java_type: android.media.MediaPlayer$OnMediaTimeDiscontinuityListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnPreparedListener
+          go_name: SetOnPreparedListener
+          params:
+            - java_type: android.media.MediaPlayer$OnPreparedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnSeekCompleteListener
+          go_name: SetOnSeekCompleteListener
+          params:
+            - java_type: android.media.MediaPlayer$OnSeekCompleteListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnSubtitleDataListener
+          go_name: SetOnSubtitleDataListener
+          params:
+            - java_type: android.media.MediaPlayer$OnSubtitleDataListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnTimedMetaDataAvailableListener
+          go_name: SetOnTimedMetaDataAvailableListener
+          params:
+            - java_type: android.media.MediaPlayer$OnTimedMetaDataAvailableListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnTimedTextListener
+          go_name: SetOnTimedTextListener
+          params:
+            - java_type: android.media.MediaPlayer$OnTimedTextListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnVideoSizeChangedListener
+          go_name: SetOnVideoSizeChangedListener
+          params:
+            - java_type: android.media.MediaPlayer$OnVideoSizeChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPreferredDevice
+          go_name: SetPreferredDevice
+          params:
+            - java_type: android.media.AudioDeviceInfo
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setScreenOnWhilePlaying
+          go_name: SetScreenOnWhilePlaying
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setSurface
+          go_name: SetSurface
+          params:
+            - java_type: android.view.Surface
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVideoScalingMode
+          go_name: SetVideoScalingMode
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVolume
+          go_name: SetVolume
+          params:
+            - java_type: float
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setWakeMode
+          go_name: SetWakeMode
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: start
+          go_name: Start
+          returns: void
+          error: true
+        - java_method: stop
+          go_name: Stop
+          returns: void
+          error: true
+      static_methods:
+        - java_method: create
+          go_name: Create2
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: android.media.MediaPlayer
+          error: true
+        - java_method: create
+          go_name: Create3_1
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: android.view.SurfaceHolder
+              go_name: arg2
+          returns: android.media.MediaPlayer
+          error: true
+        - java_method: create
+          go_name: Create5_2
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: android.view.SurfaceHolder
+              go_name: arg2
+            - java_type: android.media.AudioAttributes
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+          returns: android.media.MediaPlayer
+          error: true
+        - java_method: create
+          go_name: Create2_3
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.media.MediaPlayer
+          error: true
+        - java_method: create
+          go_name: Create4_4
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.media.AudioAttributes
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: android.media.MediaPlayer
+          error: true
+    - java_class: android.media.MediaRecorder
+      go_type: mediaRecorder
+      methods:
+        - java_method: getActiveMicrophones
+          go_name: GetActiveMicrophones
+          returns: java.util.List<android.media.MicrophoneInfo>
+          error: true
+        - java_method: getActiveRecordingConfiguration
+          go_name: GetActiveRecordingConfiguration
+          returns: android.media.AudioRecordingConfiguration
+          error: true
+        - java_method: getLogSessionId
+          go_name: GetLogSessionId
+          returns: android.media.metrics.LogSessionId
+          error: true
+        - java_method: getMetrics
+          go_name: GetMetrics
+          returns: android.os.PersistableBundle
+          error: true
+        - java_method: getPreferredDevice
+          go_name: GetPreferredDevice
+          returns: android.media.AudioDeviceInfo
+          error: true
+        - java_method: getRoutedDevice
+          go_name: GetRoutedDevice
+          returns: android.media.AudioDeviceInfo
+          error: true
+        - java_method: getRoutedDevices
+          go_name: GetRoutedDevices
+          returns: java.util.List<android.media.AudioDeviceInfo>
+          error: true
+        - java_method: prepare
+          go_name: Prepare
+          returns: void
+          error: true
+        - java_method: registerAudioRecordingCallback
+          go_name: RegisterAudioRecordingCallback
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.media.AudioManager$AudioRecordingCallback
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: removeOnRoutingChangedListener
+          go_name: RemoveOnRoutingChangedListener
+          params:
+            - java_type: android.media.AudioRouting$OnRoutingChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: reset
+          go_name: Reset
+          returns: void
+          error: true
+        - java_method: setAudioChannels
+          go_name: SetAudioChannels
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAudioEncodingBitRate
+          go_name: SetAudioEncodingBitRate
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAudioProfile
+          go_name: SetAudioProfile
+          params:
+            - java_type: android.media.EncoderProfiles$AudioProfile
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAudioSamplingRate
+          go_name: SetAudioSamplingRate
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setCaptureRate
+          go_name: SetCaptureRate
+          params:
+            - java_type: double
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setInputSurface
+          go_name: SetInputSurface
+          params:
+            - java_type: android.view.Surface
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setLocation
+          go_name: SetLocation
+          params:
+            - java_type: float
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setLogSessionId
+          go_name: SetLogSessionId
+          params:
+            - java_type: android.media.metrics.LogSessionId
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setNextOutputFile
+          go_name: SetNextOutputFile1
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setNextOutputFile
+          go_name: SetNextOutputFile1_1
+          params:
+            - java_type: java.io.FileDescriptor
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnErrorListener
+          go_name: SetOnErrorListener
+          params:
+            - java_type: android.media.MediaRecorder$OnErrorListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnInfoListener
+          go_name: SetOnInfoListener
+          params:
+            - java_type: android.media.MediaRecorder$OnInfoListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOrientationHint
+          go_name: SetOrientationHint
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOutputFile
+          go_name: SetOutputFile1
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOutputFile
+          go_name: SetOutputFile1_1
+          params:
+            - java_type: java.io.FileDescriptor
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOutputFile
+          go_name: SetOutputFile1_2
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPreferredDevice
+          go_name: SetPreferredDevice
+          params:
+            - java_type: android.media.AudioDeviceInfo
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setPreferredMicrophoneDirection
+          go_name: SetPreferredMicrophoneDirection
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setPreferredMicrophoneFieldDimension
+          go_name: SetPreferredMicrophoneFieldDimension
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setPreviewDisplay
+          go_name: SetPreviewDisplay
+          params:
+            - java_type: android.view.Surface
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setProfile
+          go_name: SetProfile
+          params:
+            - java_type: android.media.CamcorderProfile
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVideoEncodingBitRate
+          go_name: SetVideoEncodingBitRate
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVideoEncodingProfileLevel
+          go_name: SetVideoEncodingProfileLevel
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setVideoProfile
+          go_name: SetVideoProfile
+          params:
+            - java_type: android.media.EncoderProfiles$VideoProfile
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unregisterAudioRecordingCallback
+          go_name: UnregisterAudioRecordingCallback
+          params:
+            - java_type: android.media.AudioManager$AudioRecordingCallback
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.media.RingtoneManager
+      go_type: ringtoneManager
+      methods:
+        - java_method: getCursor
+          go_name: GetCursor
+          returns: android.database.Cursor
+          error: true
+        - java_method: getIncludeDrm
+          go_name: GetIncludeDrm
+          returns: boolean
+          error: true
+        - java_method: getRingtone
+          go_name: GetRingtone1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.media.Ringtone
+          error: true
+        - java_method: getRingtonePosition
+          go_name: GetRingtonePosition
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getRingtoneUri
+          go_name: GetRingtoneUri
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: getStopPreviousRingtone
+          go_name: GetStopPreviousRingtone
+          returns: boolean
+          error: true
+        - java_method: hasHapticChannels
+          go_name: HasHapticChannels1_2
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: inferStreamType
+          go_name: InferStreamType
+          returns: int
+          error: true
+        - java_method: setIncludeDrm
+          go_name: SetIncludeDrm
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setStopPreviousRingtone
+          go_name: SetStopPreviousRingtone
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setType
+          go_name: SetType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: stopPreviousRingtone
+          go_name: StopPreviousRingtone
+          returns: void
+          error: true
+      static_methods:
+        - java_method: getActualDefaultRingtoneUri
+          go_name: GetActualDefaultRingtoneUri
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+        - java_method: getDefaultType
+          go_name: GetDefaultType
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getDefaultUri
+          go_name: GetDefaultUri
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: getRingtone
+          go_name: GetRingtone2
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: android.media.Ringtone
+          error: true
+        - java_method: getValidRingtoneUri
+          go_name: GetValidRingtoneUri
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: hasHapticChannels
+          go_name: HasHapticChannels2
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: hasHapticChannels
+          go_name: HasHapticChannels1_1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isDefault
+          go_name: IsDefault
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: openDefaultRingtoneUri
+          go_name: OpenDefaultRingtoneUri
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: android.content.res.AssetFileDescriptor
+          error: true
+        - java_method: setActualDefaultRingtoneUri
+          go_name: SetActualDefaultRingtoneUri
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.net.Uri
+              go_name: arg2
+          returns: void
+          error: true
+    - java_class: android.media.projection.MediaProjection
+      go_type: mediaProjection
+      methods:
+        - java_method: stop
+          go_name: Stop
+          returns: void
+          error: true
+        - java_method: unregisterCallback
+          go_name: UnregisterCallback
+          params:
+            - java_type: android.media.projection.MediaProjection$Callback
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.media.projection.MediaProjectionManager
+      go_type: mediaProjectionManager
+      obtain: system_service
+      service_name: media_projection
+      close: true
+      methods:
+        - java_method: createScreenCaptureIntent
+          go_name: CreateScreenCaptureIntent0
+          returns: android.content.Intent
+          error: true
+        - java_method: createScreenCaptureIntent
+          go_name: CreateScreenCaptureIntent1_1
+          params:
+            - java_type: android.media.projection.MediaProjectionConfig
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: getMediaProjection
+          go_name: GetMediaProjection
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+          returns: android.media.projection.MediaProjection
+          error: true
+constants:
+    - go_name: TypeAuxLine
+      value: "0"
+      go_type: int
+    - go_name: TypeBleBroadcast
+      value: "0"
+      go_type: int
+    - go_name: TypeBleHeadset
+      value: "0"
+      go_type: int
+    - go_name: TypeBleSpeaker
+      value: "0"
+      go_type: int
+    - go_name: TypeBluetoothA2dp
+      value: "0"
+      go_type: int
+    - go_name: TypeBluetoothSco
+      value: "0"
+      go_type: int
+    - go_name: TypeBuiltinEarpiece
+      value: "0"
+      go_type: int
+    - go_name: TypeBuiltinMic
+      value: "0"
+      go_type: int
+    - go_name: TypeBuiltinSpeaker
+      value: "0"
+      go_type: int
+    - go_name: TypeBuiltinSpeakerSafe
+      value: "0"
+      go_type: int
+    - go_name: TypeBus
+      value: "0"
+      go_type: int
+    - go_name: TypeDock
+      value: "0"
+      go_type: int
+    - go_name: TypeDockAnalog
+      value: "0"
+      go_type: int
+    - go_name: TypeFm
+      value: "0"
+      go_type: int
+    - go_name: TypeFmTuner
+      value: "0"
+      go_type: int
+    - go_name: TypeHdmi
+      value: "0"
+      go_type: int
+    - go_name: TypeHdmiArc
+      value: "0"
+      go_type: int
+    - go_name: TypeHdmiEarc
+      value: "0"
+      go_type: int
+    - go_name: TypeHearingAid
+      value: "0"
+      go_type: int
+    - go_name: TypeIp
+      value: "0"
+      go_type: int
+    - go_name: TypeLineAnalog
+      value: "0"
+      go_type: int
+    - go_name: TypeLineDigital
+      value: "0"
+      go_type: int
+    - go_name: TypeMultichannelGroup
+      value: "0"
+      go_type: int
+    - go_name: TypeRemoteSubmix
+      value: "0"
+      go_type: int
+    - go_name: TypeTelephony
+      value: "0"
+      go_type: int
+    - go_name: TypeTvTuner
+      value: "0"
+      go_type: int
+    - go_name: TypeUnknown
+      value: "0"
+      go_type: int
+    - go_name: TypeUsbAccessory
+      value: "0"
+      go_type: int
+    - go_name: TypeUsbDevice
+      value: "0"
+      go_type: int
+    - go_name: TypeUsbHeadset
+      value: "0"
+      go_type: int
+    - go_name: TypeWiredHeadphones
+      value: "0"
+      go_type: int
+    - go_name: TypeWiredHeadset
+      value: "0"
+      go_type: int
+    - go_name: ActionAudioBecomingNoisy
+      value: '""'
+      go_type: string
+    - go_name: ActionHdmiAudioPlug
+      value: '""'
+      go_type: string
+    - go_name: ActionHeadsetPlug
+      value: '""'
+      go_type: string
+    - go_name: ActionMicrophoneMuteChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionScoAudioStateChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionScoAudioStateUpdated
+      value: '""'
+      go_type: string
+    - go_name: ActionSpeakerphoneStateChanged
+      value: '""'
+      go_type: string
+    - go_name: AdjustLower
+      value: "0"
+      go_type: int
+    - go_name: AdjustMute
+      value: "0"
+      go_type: int
+    - go_name: AdjustRaise
+      value: "0"
+      go_type: int
+    - go_name: AdjustSame
+      value: "0"
+      go_type: int
+    - go_name: AdjustToggleMute
+      value: "0"
+      go_type: int
+    - go_name: AdjustUnmute
+      value: "0"
+      go_type: int
+    - go_name: AudiofocusGain
+      value: "0"
+      go_type: int
+    - go_name: AudiofocusGainTransient
+      value: "0"
+      go_type: int
+    - go_name: AudiofocusGainTransientExclusive
+      value: "0"
+      go_type: int
+    - go_name: AudiofocusGainTransientMayDuck
+      value: "0"
+      go_type: int
+    - go_name: AudiofocusLoss
+      value: "0"
+      go_type: int
+    - go_name: AudiofocusLossTransient
+      value: "0"
+      go_type: int
+    - go_name: AudiofocusLossTransientCanDuck
+      value: "0"
+      go_type: int
+    - go_name: AudiofocusNone
+      value: "0"
+      go_type: int
+    - go_name: AudiofocusRequestDelayed
+      value: "0"
+      go_type: int
+    - go_name: AudiofocusRequestFailed
+      value: "0"
+      go_type: int
+    - go_name: AudiofocusRequestGranted
+      value: "0"
+      go_type: int
+    - go_name: AudioSessionIdGenerate
+      value: "0"
+      go_type: int
+    - go_name: DirectPlaybackBitstreamSupported
+      value: "0"
+      go_type: int
+    - go_name: DirectPlaybackNotSupported
+      value: "0"
+      go_type: int
+    - go_name: DirectPlaybackOffloadGaplessSupported
+      value: "0"
+      go_type: int
+    - go_name: DirectPlaybackOffloadSupported
+      value: "0"
+      go_type: int
+    - go_name: EncodedSurroundOutputAlways
+      value: "0"
+      go_type: int
+    - go_name: EncodedSurroundOutputAuto
+      value: "0"
+      go_type: int
+    - go_name: EncodedSurroundOutputManual
+      value: "0"
+      go_type: int
+    - go_name: EncodedSurroundOutputNever
+      value: "0"
+      go_type: int
+    - go_name: EncodedSurroundOutputUnknown
+      value: "0"
+      go_type: int
+    - go_name: Error
+      value: "0"
+      go_type: int
+    - go_name: ErrorDeadObject
+      value: "0"
+      go_type: int
+    - go_name: ExtraAudioPlugState
+      value: '""'
+      go_type: string
+    - go_name: ExtraEncodings
+      value: '""'
+      go_type: string
+    - go_name: ExtraMaxChannelCount
+      value: '""'
+      go_type: string
+    - go_name: ExtraRingerMode
+      value: '""'
+      go_type: string
+    - go_name: ExtraScoAudioPreviousState
+      value: '""'
+      go_type: string
+    - go_name: ExtraScoAudioState
+      value: '""'
+      go_type: string
+    - go_name: ExtraVibrateSetting
+      value: '""'
+      go_type: string
+    - go_name: ExtraVibrateType
+      value: '""'
+      go_type: string
+    - go_name: FlagAllowRingerModes
+      value: "0"
+      go_type: int
+    - go_name: FlagPlaySound
+      value: "0"
+      go_type: int
+    - go_name: FlagRemoveSoundAndVibrate
+      value: "0"
+      go_type: int
+    - go_name: FlagShowUi
+      value: "0"
+      go_type: int
+    - go_name: FlagVibrate
+      value: "0"
+      go_type: int
+    - go_name: FxBack
+      value: "0"
+      go_type: int
+    - go_name: FxFocusNavigationDown
+      value: "0"
+      go_type: int
+    - go_name: FxFocusNavigationLeft
+      value: "0"
+      go_type: int
+    - go_name: FxFocusNavigationRight
+      value: "0"
+      go_type: int
+    - go_name: FxFocusNavigationUp
+      value: "0"
+      go_type: int
+    - go_name: FxKeypressDelete
+      value: "0"
+      go_type: int
+    - go_name: FxKeypressInvalid
+      value: "0"
+      go_type: int
+    - go_name: FxKeypressReturn
+      value: "0"
+      go_type: int
+    - go_name: FxKeypressSpacebar
+      value: "0"
+      go_type: int
+    - go_name: FxKeypressStandard
+      value: "0"
+      go_type: int
+    - go_name: FxKeyClick
+      value: "0"
+      go_type: int
+    - go_name: GetDevicesAll
+      value: "0"
+      go_type: int
+    - go_name: GetDevicesInputs
+      value: "0"
+      go_type: int
+    - go_name: GetDevicesOutputs
+      value: "0"
+      go_type: int
+    - go_name: ModeCallRedirect
+      value: "0"
+      go_type: int
+    - go_name: ModeCallScreening
+      value: "0"
+      go_type: int
+    - go_name: ModeCommunicationRedirect
+      value: "0"
+      go_type: int
+    - go_name: ModeCurrent
+      value: "0"
+      go_type: int
+    - go_name: ModeInvalid
+      value: "0"
+      go_type: int
+    - go_name: ModeInCall
+      value: "0"
+      go_type: int
+    - go_name: ModeInCommunication
+      value: "0"
+      go_type: int
+    - go_name: ModeNormal
+      value: "0"
+      go_type: int
+    - go_name: ModeRingtone
+      value: "0"
+      go_type: int
+    - go_name: NumStreams
+      value: "0"
+      go_type: int
+    - go_name: PlaybackOffloadGaplessSupported
+      value: "0"
+      go_type: int
+    - go_name: PlaybackOffloadNotSupported
+      value: "0"
+      go_type: int
+    - go_name: PlaybackOffloadSupported
+      value: "0"
+      go_type: int
+    - go_name: PropertyOutputFramesPerBuffer
+      value: '""'
+      go_type: string
+    - go_name: PropertyOutputSampleRate
+      value: '""'
+      go_type: string
+    - go_name: PropertySupportAudioSourceUnprocessed
+      value: '""'
+      go_type: string
+    - go_name: PropertySupportMicNearUltrasound
+      value: '""'
+      go_type: string
+    - go_name: PropertySupportSpeakerNearUltrasound
+      value: '""'
+      go_type: string
+    - go_name: RingerModeChangedAction
+      value: '""'
+      go_type: string
+    - go_name: RingerModeNormal
+      value: "0"
+      go_type: int
+    - go_name: RingerModeSilent
+      value: "0"
+      go_type: int
+    - go_name: RingerModeVibrate
+      value: "0"
+      go_type: int
+    - go_name: RouteAll
+      value: "0"
+      go_type: int
+    - go_name: RouteBluetooth
+      value: "0"
+      go_type: int
+    - go_name: RouteBluetoothA2dp
+      value: "0"
+      go_type: int
+    - go_name: RouteBluetoothSco
+      value: "0"
+      go_type: int
+    - go_name: RouteEarpiece
+      value: "0"
+      go_type: int
+    - go_name: RouteHeadset
+      value: "0"
+      go_type: int
+    - go_name: RouteSpeaker
+      value: "0"
+      go_type: int
+    - go_name: ScoAudioStateConnected
+      value: "0"
+      go_type: int
+    - go_name: ScoAudioStateConnecting
+      value: "0"
+      go_type: int
+    - go_name: ScoAudioStateDisconnected
+      value: "0"
+      go_type: int
+    - go_name: ScoAudioStateError
+      value: "0"
+      go_type: int
+    - go_name: StreamAccessibility
+      value: "0"
+      go_type: int
+    - go_name: StreamAlarm
+      value: "0"
+      go_type: int
+    - go_name: StreamDtmf
+      value: "0"
+      go_type: int
+    - go_name: StreamMusic
+      value: "0"
+      go_type: int
+    - go_name: StreamNotification
+      value: "0"
+      go_type: int
+    - go_name: StreamRing
+      value: "0"
+      go_type: int
+    - go_name: StreamSystem
+      value: "0"
+      go_type: int
+    - go_name: StreamVoiceCall
+      value: "0"
+      go_type: int
+    - go_name: UseDefaultStreamType
+      value: "0"
+      go_type: int
+    - go_name: VibrateSettingChangedAction
+      value: '""'
+      go_type: string
+    - go_name: VibrateSettingOff
+      value: "0"
+      go_type: int
+    - go_name: VibrateSettingOn
+      value: "0"
+      go_type: int
+    - go_name: VibrateSettingOnlySilent
+      value: "0"
+      go_type: int
+    - go_name: VibrateTypeNotification
+      value: "0"
+      go_type: int
+    - go_name: VibrateTypeRinger
+      value: "0"
+      go_type: int
+    - go_name: Error
+      value: "0"
+      go_type: int
+    - go_name: ErrorBadValue
+      value: "0"
+      go_type: int
+    - go_name: ErrorDeadObject
+      value: "0"
+      go_type: int
+    - go_name: ErrorInvalidOperation
+      value: "0"
+      go_type: int
+    - go_name: ReadBlocking
+      value: "0"
+      go_type: int
+    - go_name: ReadNonBlocking
+      value: "0"
+      go_type: int
+    - go_name: RecordstateRecording
+      value: "0"
+      go_type: int
+    - go_name: RecordstateStopped
+      value: "0"
+      go_type: int
+    - go_name: StateInitialized
+      value: "0"
+      go_type: int
+    - go_name: StateUninitialized
+      value: "0"
+      go_type: int
+    - go_name: Success
+      value: "0"
+      go_type: int
+    - go_name: MediaErrorIo
+      value: "0"
+      go_type: int
+    - go_name: MediaErrorMalformed
+      value: "0"
+      go_type: int
+    - go_name: MediaErrorNotValidForProgressivePlayback
+      value: "0"
+      go_type: int
+    - go_name: MediaErrorServerDied
+      value: "0"
+      go_type: int
+    - go_name: MediaErrorTimedOut
+      value: "0"
+      go_type: int
+    - go_name: MediaErrorUnknown
+      value: "0"
+      go_type: int
+    - go_name: MediaErrorUnsupported
+      value: "0"
+      go_type: int
+    - go_name: MediaInfoAudioNotPlaying
+      value: "0"
+      go_type: int
+    - go_name: MediaInfoBadInterleaving
+      value: "0"
+      go_type: int
+    - go_name: MediaInfoBufferingEnd
+      value: "0"
+      go_type: int
+    - go_name: MediaInfoBufferingStart
+      value: "0"
+      go_type: int
+    - go_name: MediaInfoMetadataUpdate
+      value: "0"
+      go_type: int
+    - go_name: MediaInfoNotSeekable
+      value: "0"
+      go_type: int
+    - go_name: MediaInfoStartedAsNext
+      value: "0"
+      go_type: int
+    - go_name: MediaInfoSubtitleTimedOut
+      value: "0"
+      go_type: int
+    - go_name: MediaInfoUnknown
+      value: "0"
+      go_type: int
+    - go_name: MediaInfoUnsupportedSubtitle
+      value: "0"
+      go_type: int
+    - go_name: MediaInfoVideoNotPlaying
+      value: "0"
+      go_type: int
+    - go_name: MediaInfoVideoRenderingStart
+      value: "0"
+      go_type: int
+    - go_name: MediaInfoVideoTrackLagging
+      value: "0"
+      go_type: int
+    - go_name: MediaMimetypeTextSubrip
+      value: '""'
+      go_type: string
+    - go_name: PrepareDrmStatusPreparationError
+      value: "0"
+      go_type: int
+    - go_name: PrepareDrmStatusProvisioningNetworkError
+      value: "0"
+      go_type: int
+    - go_name: PrepareDrmStatusProvisioningServerError
+      value: "0"
+      go_type: int
+    - go_name: PrepareDrmStatusSuccess
+      value: "0"
+      go_type: int
+    - go_name: SeekClosest
+      value: "0"
+      go_type: int
+    - go_name: SeekClosestSync
+      value: "0"
+      go_type: int
+    - go_name: SeekNextSync
+      value: "0"
+      go_type: int
+    - go_name: SeekPreviousSync
+      value: "0"
+      go_type: int
+    - go_name: VideoScalingModeScaleToFit
+      value: "0"
+      go_type: int
+    - go_name: VideoScalingModeScaleToFitWithCropping
+      value: "0"
+      go_type: int
+    - go_name: MediaErrorServerDied
+      value: "0"
+      go_type: int
+    - go_name: MediaRecorderErrorUnknown
+      value: "0"
+      go_type: int
+    - go_name: MediaRecorderInfoMaxDurationReached
+      value: "0"
+      go_type: int
+    - go_name: MediaRecorderInfoMaxFilesizeApproaching
+      value: "0"
+      go_type: int
+    - go_name: MediaRecorderInfoMaxFilesizeReached
+      value: "0"
+      go_type: int
+    - go_name: MediaRecorderInfoNextOutputFileStarted
+      value: "0"
+      go_type: int
+    - go_name: MediaRecorderInfoUnknown
+      value: "0"
+      go_type: int
+    - go_name: ActionRingtonePicker
+      value: '""'
+      go_type: string
+    - go_name: ExtraRingtoneDefaultUri
+      value: '""'
+      go_type: string
+    - go_name: ExtraRingtoneExistingUri
+      value: '""'
+      go_type: string
+    - go_name: ExtraRingtoneIncludeDrm
+      value: '""'
+      go_type: string
+    - go_name: ExtraRingtonePickedUri
+      value: '""'
+      go_type: string
+    - go_name: ExtraRingtoneShowDefault
+      value: '""'
+      go_type: string
+    - go_name: ExtraRingtoneShowSilent
+      value: '""'
+      go_type: string
+    - go_name: ExtraRingtoneTitle
+      value: '""'
+      go_type: string
+    - go_name: ExtraRingtoneType
+      value: '""'
+      go_type: string
+    - go_name: IdColumnIndex
+      value: "0"
+      go_type: int
+    - go_name: TitleColumnIndex
+      value: "0"
+      go_type: int
+    - go_name: TypeAlarm
+      value: "0"
+      go_type: int
+    - go_name: TypeAll
+      value: "0"
+      go_type: int
+    - go_name: TypeNotification
+      value: "0"
+      go_type: int
+    - go_name: TypeRingtone
+      value: "0"
+      go_type: int
+    - go_name: UriColumnIndex
+      value: "0"
+      go_type: int

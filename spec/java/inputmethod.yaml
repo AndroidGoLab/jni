@@ -1,26 +1,487 @@
 package: inputmethod
-go_import: "github.com/xaionaro-go/jni/view/inputmethod"
-
+go_import: github.com/xaionaro-go/jni/view/inputmethod
 classes:
-  - java_class: android.view.inputmethod.InputMethodManager
-    go_type: Manager
-    obtain: system_service
-    service_name: "input_method"
-    close: true
-
-    methods:
-      - java_method: showSoftInput
-        params:
-          - { java_type: android.view.View, go_name: view }
-          - { java_type: int, go_name: flags }
-        returns: boolean
-        go_name: showSoftInput
-        error: true
-
-      - java_method: hideSoftInputFromWindow
-        params:
-          - { java_type: android.os.IBinder, go_name: windowToken }
-          - { java_type: int, go_name: flags }
-        returns: boolean
-        go_name: hideSoftInputFromWindow
-        error: true
+    - java_class: android.view.inputmethod.InputMethodManager
+      go_type: inputMethodManager
+      obtain: system_service
+      service_name: input_method
+      close: true
+      methods:
+        - java_method: acceptStylusHandwritingDelegation
+          go_name: AcceptStylusHandwritingDelegation1
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: acceptStylusHandwritingDelegation
+          go_name: AcceptStylusHandwritingDelegation2_1
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: acceptStylusHandwritingDelegation
+          go_name: AcceptStylusHandwritingDelegation5_2
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: java.util.concurrent.Executor
+              go_name: arg3
+            - java_type: java.util.function.Consumer<java.lang.Boolean>
+              go_name: arg4
+          returns: void
+          error: true
+        - java_method: acceptStylusHandwritingDelegation
+          go_name: AcceptStylusHandwritingDelegation4_3
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: java.util.concurrent.Executor
+              go_name: arg2
+            - java_type: java.util.function.Consumer<java.lang.Boolean>
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: dispatchKeyEventFromInputMethod
+          go_name: DispatchKeyEventFromInputMethod
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: android.view.KeyEvent
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: displayCompletions
+          go_name: DisplayCompletions
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: android.view.inputmethod.CompletionInfo[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: getCurrentInputMethodInfo
+          go_name: GetCurrentInputMethodInfo
+          returns: android.view.inputmethod.InputMethodInfo
+          error: true
+        - java_method: getCurrentInputMethodSubtype
+          go_name: GetCurrentInputMethodSubtype
+          returns: android.view.inputmethod.InputMethodSubtype
+          error: true
+        - java_method: getEnabledInputMethodList
+          go_name: GetEnabledInputMethodList
+          returns: java.util.List<android.view.inputmethod.InputMethodInfo>
+          error: true
+        - java_method: getEnabledInputMethodSubtypeList
+          go_name: GetEnabledInputMethodSubtypeList
+          params:
+            - java_type: android.view.inputmethod.InputMethodInfo
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: java.util.List<android.view.inputmethod.InputMethodSubtype>
+          error: true
+        - java_method: getInputMethodList
+          go_name: GetInputMethodList
+          returns: java.util.List<android.view.inputmethod.InputMethodInfo>
+          error: true
+        - java_method: getLastInputMethodSubtype
+          go_name: GetLastInputMethodSubtype
+          returns: android.view.inputmethod.InputMethodSubtype
+          error: true
+        - java_method: hideSoftInputFromInputMethod
+          go_name: HideSoftInputFromInputMethod
+          params:
+            - java_type: android.os.IBinder
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: hideSoftInputFromWindow
+          go_name: HideSoftInputFromWindow2
+          params:
+            - java_type: android.os.IBinder
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: hideSoftInputFromWindow
+          go_name: HideSoftInputFromWindow3_1
+          params:
+            - java_type: android.os.IBinder
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.os.ResultReceiver
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: hideStatusIcon
+          go_name: HideStatusIcon
+          params:
+            - java_type: android.os.IBinder
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: invalidateInput
+          go_name: InvalidateInput
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: isAcceptingText
+          go_name: IsAcceptingText
+          returns: boolean
+          error: true
+        - java_method: isActive
+          go_name: IsActive0
+          returns: boolean
+          error: true
+        - java_method: isActive
+          go_name: IsActive1_1
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isConnectionlessStylusHandwritingAvailable
+          go_name: IsConnectionlessStylusHandwritingAvailable
+          returns: boolean
+          error: true
+        - java_method: isFullscreenMode
+          go_name: IsFullscreenMode
+          returns: boolean
+          error: true
+        - java_method: isInputMethodSuppressingSpellChecker
+          go_name: IsInputMethodSuppressingSpellChecker
+          returns: boolean
+          error: true
+        - java_method: isStylusHandwritingAvailable
+          go_name: IsStylusHandwritingAvailable
+          returns: boolean
+          error: true
+        - java_method: isWatchingCursor
+          go_name: IsWatchingCursor
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: prepareStylusHandwritingDelegation
+          go_name: PrepareStylusHandwritingDelegation1
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: prepareStylusHandwritingDelegation
+          go_name: PrepareStylusHandwritingDelegation2_1
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: restartInput
+          go_name: RestartInput
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: sendAppPrivateCommand
+          go_name: SendAppPrivateCommand
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setAdditionalInputMethodSubtypes
+          go_name: SetAdditionalInputMethodSubtypes
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.view.inputmethod.InputMethodSubtype[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setCurrentInputMethodSubtype
+          go_name: SetCurrentInputMethodSubtype
+          params:
+            - java_type: android.view.inputmethod.InputMethodSubtype
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setExplicitlyEnabledInputMethodSubtypes
+          go_name: SetExplicitlyEnabledInputMethodSubtypes
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: '[I'
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setInputMethod
+          go_name: SetInputMethod
+          params:
+            - java_type: android.os.IBinder
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setInputMethodAndSubtype
+          go_name: SetInputMethodAndSubtype
+          params:
+            - java_type: android.os.IBinder
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.view.inputmethod.InputMethodSubtype
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: shouldOfferSwitchingToNextInputMethod
+          go_name: ShouldOfferSwitchingToNextInputMethod
+          params:
+            - java_type: android.os.IBinder
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: showInputMethodAndSubtypeEnabler
+          go_name: ShowInputMethodAndSubtypeEnabler
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: showInputMethodPicker
+          go_name: ShowInputMethodPicker
+          returns: void
+          error: true
+        - java_method: showSoftInput
+          go_name: ShowSoftInput2
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: showSoftInput
+          go_name: ShowSoftInput3_1
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.os.ResultReceiver
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: showSoftInputFromInputMethod
+          go_name: ShowSoftInputFromInputMethod
+          params:
+            - java_type: android.os.IBinder
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: showStatusIcon
+          go_name: ShowStatusIcon
+          params:
+            - java_type: android.os.IBinder
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: startConnectionlessStylusHandwriting
+          go_name: StartConnectionlessStylusHandwriting
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: android.view.inputmethod.CursorAnchorInfo
+              go_name: arg1
+            - java_type: java.util.concurrent.Executor
+              go_name: arg2
+            - java_type: android.view.inputmethod.ConnectionlessHandwritingCallback
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: startConnectionlessStylusHandwritingForDelegation
+          go_name: StartConnectionlessStylusHandwritingForDelegation5
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: android.view.inputmethod.CursorAnchorInfo
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+            - java_type: java.util.concurrent.Executor
+              go_name: arg3
+            - java_type: android.view.inputmethod.ConnectionlessHandwritingCallback
+              go_name: arg4
+          returns: void
+          error: true
+        - java_method: startConnectionlessStylusHandwritingForDelegation
+          go_name: StartConnectionlessStylusHandwritingForDelegation4_1
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: android.view.inputmethod.CursorAnchorInfo
+              go_name: arg1
+            - java_type: java.util.concurrent.Executor
+              go_name: arg2
+            - java_type: android.view.inputmethod.ConnectionlessHandwritingCallback
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: startStylusHandwriting
+          go_name: StartStylusHandwriting
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: switchToLastInputMethod
+          go_name: SwitchToLastInputMethod
+          params:
+            - java_type: android.os.IBinder
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: switchToNextInputMethod
+          go_name: SwitchToNextInputMethod
+          params:
+            - java_type: android.os.IBinder
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: toggleSoftInput
+          go_name: ToggleSoftInput
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: toggleSoftInputFromWindow
+          go_name: ToggleSoftInputFromWindow
+          params:
+            - java_type: android.os.IBinder
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: updateCursor
+          go_name: UpdateCursor
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+          returns: void
+          error: true
+        - java_method: updateCursorAnchorInfo
+          go_name: UpdateCursorAnchorInfo
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: android.view.inputmethod.CursorAnchorInfo
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: updateExtractedText
+          go_name: UpdateExtractedText
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.view.inputmethod.ExtractedText
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: updateSelection
+          go_name: UpdateSelection
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+          returns: void
+          error: true
+        - java_method: viewClicked
+          go_name: ViewClicked
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: void
+          error: true
+constants:
+    - go_name: HandwritingDelegateFlagHomeDelegatorAllowed
+      value: "0"
+      go_type: int
+    - go_name: HideImplicitOnly
+      value: "0"
+      go_type: int
+    - go_name: HideNotAlways
+      value: "0"
+      go_type: int
+    - go_name: ResultHidden
+      value: "0"
+      go_type: int
+    - go_name: ResultShown
+      value: "0"
+      go_type: int
+    - go_name: ResultUnchangedHidden
+      value: "0"
+      go_type: int
+    - go_name: ResultUnchangedShown
+      value: "0"
+      go_type: int
+    - go_name: ShowForced
+      value: "0"
+      go_type: int
+    - go_name: ShowImplicit
+      value: "0"
+      go_type: int

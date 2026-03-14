@@ -1,123 +1,151 @@
 package: omapi
-go_import: "github.com/xaionaro-go/jni/se/omapi"
-
+go_import: github.com/xaionaro-go/jni/se/omapi
 classes:
-  - java_class: android.se.omapi.SEService
-    go_type: Service
-    obtain: constructor
-    close: true
-    methods:
-      - java_method: isConnected
-        go_name: IsConnected
-        params: []
-        returns: boolean
-        error: false
-
-      - java_method: getReaders
-        go_name: getReadersRaw
-        params: []
-        returns: "android.se.omapi.Reader[]"
-        error: true
-
-      - java_method: shutdown
-        go_name: Shutdown
-        params: []
-        returns: void
-        error: false
-
-  - java_class: android.se.omapi.Reader
-    go_type: Reader
-    close: false
-    methods:
-      - java_method: getName
-        go_name: GetName
-        params: []
-        returns: String
-        error: false
-
-      - java_method: isSecureElementPresent
-        go_name: IsSecureElementPresent
-        params: []
-        returns: boolean
-        error: true
-
-      - java_method: openSession
-        go_name: openSessionRaw
-        params: []
-        returns: android.se.omapi.Session
-        error: true
-
-  - java_class: android.se.omapi.Session
-    go_type: Session
-    close: true
-    methods:
-      - java_method: openBasicChannel
-        go_name: openBasicChannelRaw
-        params:
-          - { java_type: "byte[]", go_name: aid }
-        returns: android.se.omapi.Channel
-        error: true
-
-      - java_method: openLogicalChannel
-        go_name: openLogicalChannelRaw
-        params:
-          - { java_type: "byte[]", go_name: aid }
-        returns: android.se.omapi.Channel
-        error: true
-
-      - java_method: getATR
-        go_name: GetATR
-        params: []
-        returns: "byte[]"
-        error: false
-
-      - java_method: close
-        go_name: closeRaw
-        params: []
-        returns: void
-        error: false
-
-  - java_class: android.se.omapi.Channel
-    go_type: Channel
-    close: true
-    methods:
-      - java_method: transmit
-        go_name: Transmit
-        params:
-          - { java_type: "byte[]", go_name: command }
-        returns: "byte[]"
-        error: true
-
-      - java_method: selectNext
-        go_name: SelectNext
-        params: []
-        returns: boolean
-        error: true
-
-      - java_method: getSelectResponse
-        go_name: GetSelectResponse
-        params: []
-        returns: "byte[]"
-        error: false
-
-      - java_method: isBasicChannel
-        go_name: IsBasicChannel
-        params: []
-        returns: boolean
-        error: false
-
-      - java_method: close
-        go_name: closeRaw
-        params: []
-        returns: void
-        error: false
-
-constants: []
-
-callbacks:
-  - java_interface: android.se.omapi.SEService$OnConnectedListener
-    go_type: onConnectedListener
-    methods:
-      - java_method: onConnected
-        params: []
-        go_field: OnConnected
+    - java_class: android.se.omapi.Channel
+      go_type: channel
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: getSelectResponse
+          go_name: GetSelectResponse
+          returns: '[B'
+          error: true
+        - java_method: getSession
+          go_name: GetSession
+          returns: android.se.omapi.Session
+          error: true
+        - java_method: isBasicChannel
+          go_name: IsBasicChannel
+          returns: boolean
+          error: true
+        - java_method: isOpen
+          go_name: IsOpen
+          returns: boolean
+          error: true
+        - java_method: selectNext
+          go_name: SelectNext
+          returns: boolean
+          error: true
+        - java_method: transmit
+          go_name: Transmit
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: '[B'
+          error: true
+    - java_class: android.se.omapi.Reader
+      go_type: reader
+      methods:
+        - java_method: closeSessions
+          go_name: CloseSessions
+          returns: void
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: getSEService
+          go_name: GetSEService
+          returns: android.se.omapi.SEService
+          error: true
+        - java_method: isSecureElementPresent
+          go_name: IsSecureElementPresent
+          returns: boolean
+          error: true
+        - java_method: openSession
+          go_name: OpenSession
+          returns: android.se.omapi.Session
+          error: true
+    - java_class: android.se.omapi.SEService
+      go_type: sEService
+      methods:
+        - java_method: getReaders
+          go_name: GetReaders
+          returns: android.se.omapi.Reader[]
+          error: true
+        - java_method: getUiccReader
+          go_name: GetUiccReader
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.se.omapi.Reader
+          error: true
+        - java_method: getVersion
+          go_name: GetVersion
+          returns: String
+          error: true
+        - java_method: isConnected
+          go_name: IsConnected
+          returns: boolean
+          error: true
+        - java_method: shutdown
+          go_name: Shutdown
+          returns: void
+          error: true
+    - java_class: android.se.omapi.Session
+      go_type: session
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: closeChannels
+          go_name: CloseChannels
+          returns: void
+          error: true
+        - java_method: getATR
+          go_name: GetATR
+          returns: '[B'
+          error: true
+        - java_method: getReader
+          go_name: GetReader
+          returns: android.se.omapi.Reader
+          error: true
+        - java_method: isClosed
+          go_name: IsClosed
+          returns: boolean
+          error: true
+        - java_method: openBasicChannel
+          go_name: OpenBasicChannel1
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: android.se.omapi.Channel
+          error: true
+        - java_method: openBasicChannel
+          go_name: OpenBasicChannel2_1
+          params:
+            - java_type: '[B'
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+          returns: android.se.omapi.Channel
+          error: true
+        - java_method: openLogicalChannel
+          go_name: OpenLogicalChannel1
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: android.se.omapi.Channel
+          error: true
+        - java_method: openLogicalChannel
+          go_name: OpenLogicalChannel2_1
+          params:
+            - java_type: '[B'
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+          returns: android.se.omapi.Channel
+          error: true
+constants:
+    - go_name: ActionSecureElementStateChanged
+      value: '""'
+      go_type: string
+    - go_name: ExtraReaderName
+      value: '""'
+      go_type: string
+    - go_name: ExtraReaderState
+      value: '""'
+      go_type: string

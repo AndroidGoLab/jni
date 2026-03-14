@@ -1,0 +1,1491 @@
+package: os
+go_import: github.com/xaionaro-go/jni/os
+classes:
+    - java_class: android.os.BatteryManager
+      go_type: batteryManager
+      obtain: system_service
+      service_name: batterymanager
+      close: true
+      methods:
+        - java_method: computeChargeTimeRemaining
+          go_name: ComputeChargeTimeRemaining
+          returns: long
+          error: true
+        - java_method: getIntProperty
+          go_name: GetIntProperty
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getLongProperty
+          go_name: GetLongProperty
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getStringProperty
+          go_name: GetStringProperty
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: isCharging
+          go_name: IsCharging
+          returns: boolean
+          error: true
+    - java_class: android.os.Build$VERSION
+      go_type: vERSION
+    - java_class: android.os.Build
+      go_type: build
+      static_methods:
+        - java_method: getFingerprintedPartitions
+          go_name: GetFingerprintedPartitions
+          returns: java.util.List<android.os.Build$Partition>
+          error: true
+        - java_method: getMajorSdkVersion
+          go_name: GetMajorSdkVersion
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getMinorSdkVersion
+          go_name: GetMinorSdkVersion
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getRadioVersion
+          go_name: GetRadioVersion
+          returns: String
+          error: true
+        - java_method: getSerial
+          go_name: GetSerial
+          returns: String
+          error: true
+    - java_class: android.os.Bundle
+      go_type: bundle
+      methods:
+        - java_method: clear
+          go_name: Clear
+          returns: void
+          error: true
+        - java_method: clone
+          go_name: Clone
+          returns: java.lang.Object
+          error: true
+        - java_method: deepCopy
+          go_name: DeepCopy
+          returns: android.os.Bundle
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getBinder
+          go_name: GetBinder
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: getBundle
+          go_name: GetBundle
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.os.Bundle
+          error: true
+        - java_method: getByte
+          go_name: GetByte1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: byte
+          error: true
+        - java_method: getByte
+          go_name: GetByte2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+          returns: java.lang.Byte
+          error: true
+        - java_method: getByteArray
+          go_name: GetByteArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: '[B'
+          error: true
+        - java_method: getChar
+          go_name: GetChar1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: char
+          error: true
+        - java_method: getChar
+          go_name: GetChar2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: char
+              go_name: arg1
+          returns: char
+          error: true
+        - java_method: getCharArray
+          go_name: GetCharArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: char[]
+          error: true
+        - java_method: getCharSequence
+          go_name: GetCharSequence1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getCharSequence
+          go_name: GetCharSequence2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: String
+          error: true
+        - java_method: getCharSequenceArray
+          go_name: GetCharSequenceArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.lang.CharSequence[]
+          error: true
+        - java_method: getCharSequenceArrayList
+          go_name: GetCharSequenceArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.ArrayList<java.lang.CharSequence>
+          error: true
+        - java_method: getClassLoader
+          go_name: GetClassLoader
+          returns: java.lang.ClassLoader
+          error: true
+        - java_method: getFloat
+          go_name: GetFloat1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: float
+          error: true
+        - java_method: getFloat
+          go_name: GetFloat2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+          returns: float
+          error: true
+        - java_method: getFloatArray
+          go_name: GetFloatArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: float[]
+          error: true
+        - java_method: getIntegerArrayList
+          go_name: GetIntegerArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.ArrayList<java.lang.Integer>
+          error: true
+        - java_method: getParcelableArray
+          go_name: GetParcelableArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.os.Parcelable[]
+          error: true
+        - java_method: getSerializable
+          go_name: GetSerializable
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.io.Serializable
+          error: true
+        - java_method: getShort
+          go_name: GetShort1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: short
+          error: true
+        - java_method: getShort
+          go_name: GetShort2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: short
+              go_name: arg1
+          returns: short
+          error: true
+        - java_method: getShortArray
+          go_name: GetShortArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: short[]
+          error: true
+        - java_method: getSize
+          go_name: GetSize
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.util.Size
+          error: true
+        - java_method: getSizeF
+          go_name: GetSizeF
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.util.SizeF
+          error: true
+        - java_method: getStringArrayList
+          go_name: GetStringArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.ArrayList<java.lang.String>
+          error: true
+        - java_method: hasFileDescriptors
+          go_name: HasFileDescriptors
+          returns: boolean
+          error: true
+        - java_method: putAll
+          go_name: PutAll
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: putBinder
+          go_name: PutBinder
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.IBinder
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putBundle
+          go_name: PutBundle
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putByte
+          go_name: PutByte
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putByteArray
+          go_name: PutByteArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: '[B'
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putChar
+          go_name: PutChar
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: char
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putCharArray
+          go_name: PutCharArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: char[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putCharSequence
+          go_name: PutCharSequence
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putCharSequenceArray
+          go_name: PutCharSequenceArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.CharSequence[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putCharSequenceArrayList
+          go_name: PutCharSequenceArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<java.lang.CharSequence>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putFloat
+          go_name: PutFloat
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putFloatArray
+          go_name: PutFloatArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: float[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putIntegerArrayList
+          go_name: PutIntegerArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<java.lang.Integer>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putParcelable
+          go_name: PutParcelable
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Parcelable
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putParcelableArray
+          go_name: PutParcelableArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Parcelable[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putParcelableArrayList
+          go_name: PutParcelableArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<? extends android.os.Parcelable>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putSerializable
+          go_name: PutSerializable
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.io.Serializable
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putShort
+          go_name: PutShort
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: short
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putShortArray
+          go_name: PutShortArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: short[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putSize
+          go_name: PutSize
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.util.Size
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putSizeF
+          go_name: PutSizeF
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.util.SizeF
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putSparseParcelableArray
+          go_name: PutSparseParcelableArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.util.SparseArray<? extends android.os.Parcelable>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putStringArrayList
+          go_name: PutStringArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<java.lang.String>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: readFromParcel
+          go_name: ReadFromParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: remove
+          go_name: Remove
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setClassLoader
+          go_name: SetClassLoader
+          params:
+            - java_type: java.lang.ClassLoader
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.os.CancellationSignal
+      go_type: cancellationSignal
+      methods:
+        - java_method: cancel
+          go_name: Cancel
+          returns: void
+          error: true
+        - java_method: isCanceled
+          go_name: IsCanceled
+          returns: boolean
+          error: true
+        - java_method: setOnCancelListener
+          go_name: SetOnCancelListener
+          params:
+            - java_type: android.os.CancellationSignal$OnCancelListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: throwIfCanceled
+          go_name: ThrowIfCanceled
+          returns: void
+          error: true
+    - java_class: android.os.Environment
+      go_type: environment
+      static_methods:
+        - java_method: getDataDirectory
+          go_name: GetDataDirectory
+          returns: java.io.File
+          error: true
+        - java_method: getDownloadCacheDirectory
+          go_name: GetDownloadCacheDirectory
+          returns: java.io.File
+          error: true
+        - java_method: getExternalStorageDirectory
+          go_name: GetExternalStorageDirectory
+          returns: java.io.File
+          error: true
+        - java_method: getExternalStoragePublicDirectory
+          go_name: GetExternalStoragePublicDirectory
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.io.File
+          error: true
+        - java_method: getExternalStorageState
+          go_name: GetExternalStorageState0
+          returns: String
+          error: true
+        - java_method: getExternalStorageState
+          go_name: GetExternalStorageState1_1
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getRootDirectory
+          go_name: GetRootDirectory
+          returns: java.io.File
+          error: true
+        - java_method: getStorageDirectory
+          go_name: GetStorageDirectory
+          returns: java.io.File
+          error: true
+        - java_method: getStorageState
+          go_name: GetStorageState
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: isExternalStorageEmulated
+          go_name: IsExternalStorageEmulated0
+          returns: boolean
+          error: true
+        - java_method: isExternalStorageEmulated
+          go_name: IsExternalStorageEmulated1_1
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isExternalStorageLegacy
+          go_name: IsExternalStorageLegacy0
+          returns: boolean
+          error: true
+        - java_method: isExternalStorageLegacy
+          go_name: IsExternalStorageLegacy1_1
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isExternalStorageManager
+          go_name: IsExternalStorageManager0
+          returns: boolean
+          error: true
+        - java_method: isExternalStorageManager
+          go_name: IsExternalStorageManager1_1
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isExternalStorageRemovable
+          go_name: IsExternalStorageRemovable0
+          returns: boolean
+          error: true
+        - java_method: isExternalStorageRemovable
+          go_name: IsExternalStorageRemovable1_1
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: boolean
+          error: true
+    - java_class: android.os.ParcelFileDescriptor
+      go_type: parcelFileDescriptor
+      methods:
+        - java_method: canDetectErrors
+          go_name: CanDetectErrors
+          returns: boolean
+          error: true
+        - java_method: checkError
+          go_name: CheckError
+          returns: void
+          error: true
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: closeWithError
+          go_name: CloseWithError
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: detachFd
+          go_name: DetachFd
+          returns: int
+          error: true
+        - java_method: dup
+          go_name: Dup0
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: getFd
+          go_name: GetFd
+          returns: int
+          error: true
+        - java_method: getFileDescriptor
+          go_name: GetFileDescriptor
+          returns: java.io.FileDescriptor
+          error: true
+        - java_method: getStatSize
+          go_name: GetStatSize
+          returns: long
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: adoptFd
+          go_name: AdoptFd
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: createPipe
+          go_name: CreatePipe
+          returns: android.os.ParcelFileDescriptor[]
+          error: true
+        - java_method: createReliablePipe
+          go_name: CreateReliablePipe
+          returns: android.os.ParcelFileDescriptor[]
+          error: true
+        - java_method: createReliableSocketPair
+          go_name: CreateReliableSocketPair
+          returns: android.os.ParcelFileDescriptor[]
+          error: true
+        - java_method: createSocketPair
+          go_name: CreateSocketPair
+          returns: android.os.ParcelFileDescriptor[]
+          error: true
+        - java_method: dup
+          go_name: Dup1_1
+          params:
+            - java_type: java.io.FileDescriptor
+              go_name: arg0
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: fromDatagramSocket
+          go_name: FromDatagramSocket
+          params:
+            - java_type: java.net.DatagramSocket
+              go_name: arg0
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: fromFd
+          go_name: FromFd
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: fromSocket
+          go_name: FromSocket
+          params:
+            - java_type: java.net.Socket
+              go_name: arg0
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: open
+          go_name: Open
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: parseMode
+          go_name: ParseMode
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: int
+          error: true
+    - java_class: android.os.PowerManager$WakeLock
+      go_type: wakeLock
+      methods:
+        - java_method: acquire
+          go_name: Acquire0
+          returns: void
+          error: true
+        - java_method: acquire
+          go_name: Acquire1_1
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: isHeld
+          go_name: IsHeld
+          returns: boolean
+          error: true
+        - java_method: release
+          go_name: Release0
+          returns: void
+          error: true
+        - java_method: release
+          go_name: Release1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setReferenceCounted
+          go_name: SetReferenceCounted
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setStateListener
+          go_name: SetStateListener
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.os.PowerManager$WakeLockStateListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setWorkSource
+          go_name: SetWorkSource
+          params:
+            - java_type: android.os.WorkSource
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.os.PowerManager
+      go_type: powerManager
+      obtain: system_service
+      service_name: power
+      close: true
+      methods:
+        - java_method: addThermalHeadroomListener
+          go_name: AddThermalHeadroomListener1
+          params:
+            - java_type: android.os.PowerManager$OnThermalHeadroomChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: addThermalHeadroomListener
+          go_name: AddThermalHeadroomListener2_1
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.os.PowerManager$OnThermalHeadroomChangedListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: addThermalStatusListener
+          go_name: AddThermalStatusListener1
+          params:
+            - java_type: android.os.PowerManager$OnThermalStatusChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: addThermalStatusListener
+          go_name: AddThermalStatusListener2_1
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.os.PowerManager$OnThermalStatusChangedListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: getBatteryDischargePrediction
+          go_name: GetBatteryDischargePrediction
+          returns: java.time.Duration
+          error: true
+        - java_method: getCurrentThermalStatus
+          go_name: GetCurrentThermalStatus
+          returns: int
+          error: true
+        - java_method: getLocationPowerSaveMode
+          go_name: GetLocationPowerSaveMode
+          returns: int
+          error: true
+        - java_method: getThermalHeadroom
+          go_name: GetThermalHeadroom
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: float
+          error: true
+        - java_method: isAllowedInLowPowerStandby
+          go_name: IsAllowedInLowPowerStandby1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isAllowedInLowPowerStandby
+          go_name: IsAllowedInLowPowerStandby1_1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isBatteryDischargePredictionPersonalized
+          go_name: IsBatteryDischargePredictionPersonalized
+          returns: boolean
+          error: true
+        - java_method: isDeviceIdleMode
+          go_name: IsDeviceIdleMode
+          returns: boolean
+          error: true
+        - java_method: isDeviceLightIdleMode
+          go_name: IsDeviceLightIdleMode
+          returns: boolean
+          error: true
+        - java_method: isExemptFromLowPowerStandby
+          go_name: IsExemptFromLowPowerStandby
+          returns: boolean
+          error: true
+        - java_method: isIgnoringBatteryOptimizations
+          go_name: IsIgnoringBatteryOptimizations
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isInteractive
+          go_name: IsInteractive
+          returns: boolean
+          error: true
+        - java_method: isLowPowerStandbyEnabled
+          go_name: IsLowPowerStandbyEnabled
+          returns: boolean
+          error: true
+        - java_method: isPowerSaveMode
+          go_name: IsPowerSaveMode
+          returns: boolean
+          error: true
+        - java_method: isRebootingUserspaceSupported
+          go_name: IsRebootingUserspaceSupported
+          returns: boolean
+          error: true
+        - java_method: isScreenOn
+          go_name: IsScreenOn
+          returns: boolean
+          error: true
+        - java_method: isSustainedPerformanceModeSupported
+          go_name: IsSustainedPerformanceModeSupported
+          returns: boolean
+          error: true
+        - java_method: isWakeLockLevelSupported
+          go_name: IsWakeLockLevelSupported
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: newWakeLock
+          go_name: NewWakeLock
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.os.PowerManager$WakeLock
+          error: true
+        - java_method: reboot
+          go_name: Reboot
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeThermalHeadroomListener
+          go_name: RemoveThermalHeadroomListener
+          params:
+            - java_type: android.os.PowerManager$OnThermalHeadroomChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeThermalStatusListener
+          go_name: RemoveThermalStatusListener
+          params:
+            - java_type: android.os.PowerManager$OnThermalStatusChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.os.Vibrator
+      go_type: vibrator
+      obtain: system_service
+      service_name: vibrator
+      close: true
+      methods:
+        - java_method: areEffectsSupported
+          go_name: AreEffectsSupported
+          params:
+            - java_type: int...
+              go_name: arg0
+          returns: '[I'
+          error: true
+        - java_method: areEnvelopeEffectsSupported
+          go_name: AreEnvelopeEffectsSupported
+          returns: boolean
+          error: true
+        - java_method: arePrimitivesSupported
+          go_name: ArePrimitivesSupported
+          params:
+            - java_type: int...
+              go_name: arg0
+          returns: boolean[]
+          error: true
+        - java_method: getEnvelopeEffectInfo
+          go_name: GetEnvelopeEffectInfo
+          returns: android.os.vibrator.VibratorEnvelopeEffectInfo
+          error: true
+        - java_method: getFrequencyProfile
+          go_name: GetFrequencyProfile
+          returns: android.os.vibrator.VibratorFrequencyProfile
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: int
+          error: true
+        - java_method: getPrimitiveDurations
+          go_name: GetPrimitiveDurations
+          params:
+            - java_type: int...
+              go_name: arg0
+          returns: '[I'
+          error: true
+        - java_method: getQFactor
+          go_name: GetQFactor
+          returns: float
+          error: true
+        - java_method: getResonantFrequency
+          go_name: GetResonantFrequency
+          returns: float
+          error: true
+        - java_method: vibrate
+          go_name: Vibrate1
+          params:
+            - java_type: android.os.VibrationEffect
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: vibrate
+          go_name: Vibrate2_1
+          params:
+            - java_type: android.os.VibrationEffect
+              go_name: arg0
+            - java_type: android.media.AudioAttributes
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: vibrate
+          go_name: Vibrate2_2
+          params:
+            - java_type: android.os.VibrationEffect
+              go_name: arg0
+            - java_type: android.os.VibrationAttributes
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: vibrate
+          go_name: Vibrate1_3
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: vibrate
+          go_name: Vibrate2_4
+          params:
+            - java_type: long
+              go_name: arg0
+            - java_type: android.media.AudioAttributes
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: vibrate
+          go_name: Vibrate2_5
+          params:
+            - java_type: '[J'
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: vibrate
+          go_name: Vibrate3_6
+          params:
+            - java_type: '[J'
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.media.AudioAttributes
+              go_name: arg2
+          returns: void
+          error: true
+constants:
+    - go_name: ActionCharging
+      value: '""'
+      go_type: string
+    - go_name: ActionDischarging
+      value: '""'
+      go_type: string
+    - go_name: BatteryCapacityLevelCritical
+      value: "0"
+      go_type: int
+    - go_name: BatteryCapacityLevelFull
+      value: "0"
+      go_type: int
+    - go_name: BatteryCapacityLevelHigh
+      value: "0"
+      go_type: int
+    - go_name: BatteryCapacityLevelLow
+      value: "0"
+      go_type: int
+    - go_name: BatteryCapacityLevelNormal
+      value: "0"
+      go_type: int
+    - go_name: BatteryCapacityLevelUnknown
+      value: "0"
+      go_type: int
+    - go_name: BatteryCapacityLevelUnsupported
+      value: "0"
+      go_type: int
+    - go_name: BatteryHealthCold
+      value: "0"
+      go_type: int
+    - go_name: BatteryHealthDead
+      value: "0"
+      go_type: int
+    - go_name: BatteryHealthGood
+      value: "0"
+      go_type: int
+    - go_name: BatteryHealthOverheat
+      value: "0"
+      go_type: int
+    - go_name: BatteryHealthOverVoltage
+      value: "0"
+      go_type: int
+    - go_name: BatteryHealthUnknown
+      value: "0"
+      go_type: int
+    - go_name: BatteryHealthUnspecifiedFailure
+      value: "0"
+      go_type: int
+    - go_name: BatteryPluggedAc
+      value: "0"
+      go_type: int
+    - go_name: BatteryPluggedDock
+      value: "0"
+      go_type: int
+    - go_name: BatteryPluggedUsb
+      value: "0"
+      go_type: int
+    - go_name: BatteryPluggedWireless
+      value: "0"
+      go_type: int
+    - go_name: BatteryPropertyCapacity
+      value: "0"
+      go_type: int
+    - go_name: BatteryPropertyChargeCounter
+      value: "0"
+      go_type: int
+    - go_name: BatteryPropertyCurrentAverage
+      value: "0"
+      go_type: int
+    - go_name: BatteryPropertyCurrentNow
+      value: "0"
+      go_type: int
+    - go_name: BatteryPropertyEnergyCounter
+      value: "0"
+      go_type: int
+    - go_name: BatteryPropertyStatus
+      value: "0"
+      go_type: int
+    - go_name: BatteryStatusCharging
+      value: "0"
+      go_type: int
+    - go_name: BatteryStatusDischarging
+      value: "0"
+      go_type: int
+    - go_name: BatteryStatusFull
+      value: "0"
+      go_type: int
+    - go_name: BatteryStatusNotCharging
+      value: "0"
+      go_type: int
+    - go_name: BatteryStatusUnknown
+      value: "0"
+      go_type: int
+    - go_name: ExtraBatteryLow
+      value: '""'
+      go_type: string
+    - go_name: ExtraCapacityLevel
+      value: '""'
+      go_type: string
+    - go_name: ExtraChargingStatus
+      value: '""'
+      go_type: string
+    - go_name: ExtraCycleCount
+      value: '""'
+      go_type: string
+    - go_name: ExtraHealth
+      value: '""'
+      go_type: string
+    - go_name: ExtraIconSmall
+      value: '""'
+      go_type: string
+    - go_name: ExtraLevel
+      value: '""'
+      go_type: string
+    - go_name: ExtraPlugged
+      value: '""'
+      go_type: string
+    - go_name: ExtraPresent
+      value: '""'
+      go_type: string
+    - go_name: ExtraScale
+      value: '""'
+      go_type: string
+    - go_name: ExtraStatus
+      value: '""'
+      go_type: string
+    - go_name: ExtraTechnology
+      value: '""'
+      go_type: string
+    - go_name: ExtraTemperature
+      value: '""'
+      go_type: string
+    - go_name: ExtraVoltage
+      value: '""'
+      go_type: string
+    - go_name: BaseOs
+      value: '""'
+      go_type: string
+    - go_name: Codename
+      value: '""'
+      go_type: string
+    - go_name: Incremental
+      value: '""'
+      go_type: string
+    - go_name: MediaPerformanceClass
+      value: "0"
+      go_type: int
+    - go_name: PreviewSdkInt
+      value: "0"
+      go_type: int
+    - go_name: Release
+      value: '""'
+      go_type: string
+    - go_name: ReleaseOrCodename
+      value: '""'
+      go_type: string
+    - go_name: ReleaseOrPreviewDisplay
+      value: '""'
+      go_type: string
+    - go_name: Sdk
+      value: '""'
+      go_type: string
+    - go_name: SdkInt
+      value: "0"
+      go_type: int
+    - go_name: SdkIntFull
+      value: "0"
+      go_type: int
+    - go_name: SecurityPatch
+      value: '""'
+      go_type: string
+    - go_name: Board
+      value: '""'
+      go_type: string
+    - go_name: Bootloader
+      value: '""'
+      go_type: string
+    - go_name: Brand
+      value: '""'
+      go_type: string
+    - go_name: CpuAbi
+      value: '""'
+      go_type: string
+    - go_name: CpuAbi2
+      value: '""'
+      go_type: string
+    - go_name: Device
+      value: '""'
+      go_type: string
+    - go_name: Display
+      value: '""'
+      go_type: string
+    - go_name: Fingerprint
+      value: '""'
+      go_type: string
+    - go_name: Hardware
+      value: '""'
+      go_type: string
+    - go_name: Host
+      value: '""'
+      go_type: string
+    - go_name: Id
+      value: '""'
+      go_type: string
+    - go_name: Manufacturer
+      value: '""'
+      go_type: string
+    - go_name: Model
+      value: '""'
+      go_type: string
+    - go_name: OdmSku
+      value: '""'
+      go_type: string
+    - go_name: Product
+      value: '""'
+      go_type: string
+    - go_name: Radio
+      value: '""'
+      go_type: string
+    - go_name: Serial
+      value: '""'
+      go_type: string
+    - go_name: Sku
+      value: '""'
+      go_type: string
+    - go_name: SocManufacturer
+      value: '""'
+      go_type: string
+    - go_name: SocModel
+      value: '""'
+      go_type: string
+    - go_name: Supported32BitAbis
+      value: "0"
+      go_type: int
+    - go_name: Supported64BitAbis
+      value: "0"
+      go_type: int
+    - go_name: SupportedAbis
+      value: "0"
+      go_type: int
+    - go_name: Tags
+      value: '""'
+      go_type: string
+    - go_name: Time
+      value: "0"
+      go_type: int64
+    - go_name: Type
+      value: '""'
+      go_type: string
+    - go_name: Unknown
+      value: '""'
+      go_type: string
+    - go_name: User
+      value: '""'
+      go_type: string
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: Empty
+      value: "0"
+      go_type: int
+    - go_name: MediaBadRemoval
+      value: '""'
+      go_type: string
+    - go_name: MediaChecking
+      value: '""'
+      go_type: string
+    - go_name: MediaEjecting
+      value: '""'
+      go_type: string
+    - go_name: MediaMounted
+      value: '""'
+      go_type: string
+    - go_name: MediaMountedReadOnly
+      value: '""'
+      go_type: string
+    - go_name: MediaNofs
+      value: '""'
+      go_type: string
+    - go_name: MediaRemoved
+      value: '""'
+      go_type: string
+    - go_name: MediaShared
+      value: '""'
+      go_type: string
+    - go_name: MediaUnknown
+      value: '""'
+      go_type: string
+    - go_name: MediaUnmountable
+      value: '""'
+      go_type: string
+    - go_name: MediaUnmounted
+      value: '""'
+      go_type: string
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: ModeAppend
+      value: "0"
+      go_type: int
+    - go_name: ModeCreate
+      value: "0"
+      go_type: int
+    - go_name: ModeReadOnly
+      value: "0"
+      go_type: int
+    - go_name: ModeReadWrite
+      value: "0"
+      go_type: int
+    - go_name: ModeTruncate
+      value: "0"
+      go_type: int
+    - go_name: ModeWorldReadable
+      value: "0"
+      go_type: int
+    - go_name: ModeWorldWriteable
+      value: "0"
+      go_type: int
+    - go_name: ModeWriteOnly
+      value: "0"
+      go_type: int
+    - go_name: AcquireCausesWakeup
+      value: "0"
+      go_type: int
+    - go_name: ActionDeviceIdleModeChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionDeviceLightIdleModeChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionLowPowerStandbyEnabledChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionLowPowerStandbyPolicyChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionPowerSaveModeChanged
+      value: '""'
+      go_type: string
+    - go_name: FeatureWakeOnLanInLowPowerStandby
+      value: '""'
+      go_type: string
+    - go_name: FullWakeLock
+      value: "0"
+      go_type: int
+    - go_name: LocationModeAllDisabledWhenScreenOff
+      value: "0"
+      go_type: int
+    - go_name: LocationModeForegroundOnly
+      value: "0"
+      go_type: int
+    - go_name: LocationModeGpsDisabledWhenScreenOff
+      value: "0"
+      go_type: int
+    - go_name: LocationModeNoChange
+      value: "0"
+      go_type: int
+    - go_name: LocationModeThrottleRequestsWhenScreenOff
+      value: "0"
+      go_type: int
+    - go_name: LowPowerStandbyAllowedReasonOngoingCall
+      value: "0"
+      go_type: int
+    - go_name: LowPowerStandbyAllowedReasonTempPowerSaveAllowlist
+      value: "0"
+      go_type: int
+    - go_name: LowPowerStandbyAllowedReasonVoiceInteraction
+      value: "0"
+      go_type: int
+    - go_name: OnAfterRelease
+      value: "0"
+      go_type: int
+    - go_name: PartialWakeLock
+      value: "0"
+      go_type: int
+    - go_name: ProximityScreenOffWakeLock
+      value: "0"
+      go_type: int
+    - go_name: ReleaseFlagWaitForNoProximity
+      value: "0"
+      go_type: int
+    - go_name: ScreenBrightWakeLock
+      value: "0"
+      go_type: int
+    - go_name: ScreenDimWakeLock
+      value: "0"
+      go_type: int
+    - go_name: ThermalStatusCritical
+      value: "0"
+      go_type: int
+    - go_name: ThermalStatusEmergency
+      value: "0"
+      go_type: int
+    - go_name: ThermalStatusLight
+      value: "0"
+      go_type: int
+    - go_name: ThermalStatusModerate
+      value: "0"
+      go_type: int
+    - go_name: ThermalStatusNone
+      value: "0"
+      go_type: int
+    - go_name: ThermalStatusSevere
+      value: "0"
+      go_type: int
+    - go_name: ThermalStatusShutdown
+      value: "0"
+      go_type: int
+    - go_name: VibrationEffectSupportNo
+      value: "0"
+      go_type: int
+    - go_name: VibrationEffectSupportUnknown
+      value: "0"
+      go_type: int
+    - go_name: VibrationEffectSupportYes
+      value: "0"
+      go_type: int

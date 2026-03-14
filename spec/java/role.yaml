@@ -1,0 +1,61 @@
+package: role
+go_import: github.com/xaionaro-go/jni/app/role
+classes:
+    - java_class: android.app.role.RoleManager
+      go_type: roleManager
+      obtain: system_service
+      service_name: role
+      close: true
+      methods:
+        - java_method: createRequestRoleIntent
+          go_name: CreateRequestRoleIntent
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: isRoleAvailable
+          go_name: IsRoleAvailable
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isRoleHeld
+          go_name: IsRoleHeld
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+constants:
+    - go_name: RoleAssistant
+      value: '""'
+      go_type: string
+    - go_name: RoleBrowser
+      value: '""'
+      go_type: string
+    - go_name: RoleCallRedirection
+      value: '""'
+      go_type: string
+    - go_name: RoleCallScreening
+      value: '""'
+      go_type: string
+    - go_name: RoleDialer
+      value: '""'
+      go_type: string
+    - go_name: RoleEmergency
+      value: '""'
+      go_type: string
+    - go_name: RoleHome
+      value: '""'
+      go_type: string
+    - go_name: RoleNotes
+      value: '""'
+      go_type: string
+    - go_name: RoleSms
+      value: '""'
+      go_type: string
+    - go_name: RoleWallet
+      value: '""'
+      go_type: string

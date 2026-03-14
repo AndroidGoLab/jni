@@ -1,0 +1,386 @@
+package: tts
+go_import: github.com/xaionaro-go/jni/tts
+classes:
+    - java_class: android.speech.tts.TextToSpeech
+      go_type: textToSpeech
+      methods:
+        - java_method: addEarcon
+          go_name: AddEarcon2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: addEarcon
+          go_name: AddEarcon2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.io.File
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: addEarcon
+          go_name: AddEarcon2_2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: addEarcon
+          go_name: AddEarcon3_3
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: int
+          error: true
+        - java_method: addSpeech
+          go_name: AddSpeech2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: addSpeech
+          go_name: AddSpeech2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.io.File
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: addSpeech
+          go_name: AddSpeech3_2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: int
+          error: true
+        - java_method: addSpeech
+          go_name: AddSpeech2_3
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: addSpeech
+          go_name: AddSpeech3_4
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: int
+          error: true
+        - java_method: areDefaultsEnforced
+          go_name: AreDefaultsEnforced
+          returns: boolean
+          error: true
+        - java_method: getAvailableLanguages
+          go_name: GetAvailableLanguages
+          returns: java.util.Set<java.util.Locale>
+          error: true
+        - java_method: getDefaultEngine
+          go_name: GetDefaultEngine
+          returns: String
+          error: true
+        - java_method: getDefaultLanguage
+          go_name: GetDefaultLanguage
+          returns: java.util.Locale
+          error: true
+        - java_method: getDefaultVoice
+          go_name: GetDefaultVoice
+          returns: android.speech.tts.Voice
+          error: true
+        - java_method: getEngines
+          go_name: GetEngines
+          returns: java.util.List<android.speech.tts.TextToSpeech$EngineInfo>
+          error: true
+        - java_method: getFeatures
+          go_name: GetFeatures
+          params:
+            - java_type: java.util.Locale
+              go_name: arg0
+          returns: java.util.Set<java.lang.String>
+          error: true
+        - java_method: getLanguage
+          go_name: GetLanguage
+          returns: java.util.Locale
+          error: true
+        - java_method: getVoice
+          go_name: GetVoice
+          returns: android.speech.tts.Voice
+          error: true
+        - java_method: getVoices
+          go_name: GetVoices
+          returns: java.util.Set<android.speech.tts.Voice>
+          error: true
+        - java_method: isLanguageAvailable
+          go_name: IsLanguageAvailable
+          params:
+            - java_type: java.util.Locale
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: isSpeaking
+          go_name: IsSpeaking
+          returns: boolean
+          error: true
+        - java_method: playEarcon
+          go_name: PlayEarcon4
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+          returns: int
+          error: true
+        - java_method: playEarcon
+          go_name: PlayEarcon4_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: java.util.HashMap<java.lang.String
+              go_name: arg2
+            - java_type: java.lang.String>
+              go_name: arg3
+          returns: int
+          error: true
+        - java_method: playSilence
+          go_name: PlaySilence
+          params:
+            - java_type: long
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: java.util.HashMap<java.lang.String
+              go_name: arg2
+            - java_type: java.lang.String>
+              go_name: arg3
+          returns: int
+          error: true
+        - java_method: playSilentUtterance
+          go_name: PlaySilentUtterance
+          params:
+            - java_type: long
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: int
+          error: true
+        - java_method: setAudioAttributes
+          go_name: SetAudioAttributes
+          params:
+            - java_type: android.media.AudioAttributes
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: setEngineByPackageName
+          go_name: SetEngineByPackageName
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: setLanguage
+          go_name: SetLanguage
+          params:
+            - java_type: java.util.Locale
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: setOnUtteranceCompletedListener
+          go_name: SetOnUtteranceCompletedListener
+          params:
+            - java_type: android.speech.tts.TextToSpeech$OnUtteranceCompletedListener
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: setOnUtteranceProgressListener
+          go_name: SetOnUtteranceProgressListener
+          params:
+            - java_type: android.speech.tts.UtteranceProgressListener
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: setPitch
+          go_name: SetPitch
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: setSpeechRate
+          go_name: SetSpeechRate
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: setVoice
+          go_name: SetVoice
+          params:
+            - java_type: android.speech.tts.Voice
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: shutdown
+          go_name: Shutdown
+          returns: void
+          error: true
+        - java_method: speak
+          go_name: Speak4
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+          returns: int
+          error: true
+        - java_method: speak
+          go_name: Speak4_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: java.util.HashMap<java.lang.String
+              go_name: arg2
+            - java_type: java.lang.String>
+              go_name: arg3
+          returns: int
+          error: true
+        - java_method: stop
+          go_name: Stop
+          returns: int
+          error: true
+        - java_method: synthesizeToFile
+          go_name: SynthesizeToFile4
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+            - java_type: android.os.ParcelFileDescriptor
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+          returns: int
+          error: true
+        - java_method: synthesizeToFile
+          go_name: SynthesizeToFile4_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+            - java_type: java.io.File
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+          returns: int
+          error: true
+        - java_method: synthesizeToFile
+          go_name: SynthesizeToFile4_2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.HashMap<java.lang.String
+              go_name: arg1
+            - java_type: java.lang.String>
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+          returns: int
+          error: true
+      static_methods:
+        - java_method: getMaxSpeechInputLength
+          go_name: GetMaxSpeechInputLength
+          returns: int
+          error: true
+constants:
+    - go_name: ActionTtsQueueProcessingCompleted
+      value: '""'
+      go_type: string
+    - go_name: Error
+      value: "0"
+      go_type: int
+    - go_name: ErrorInvalidRequest
+      value: "0"
+      go_type: int
+    - go_name: ErrorNetwork
+      value: "0"
+      go_type: int
+    - go_name: ErrorNetworkTimeout
+      value: "0"
+      go_type: int
+    - go_name: ErrorNotInstalledYet
+      value: "0"
+      go_type: int
+    - go_name: ErrorOutput
+      value: "0"
+      go_type: int
+    - go_name: ErrorService
+      value: "0"
+      go_type: int
+    - go_name: ErrorSynthesis
+      value: "0"
+      go_type: int
+    - go_name: LangAvailable
+      value: "0"
+      go_type: int
+    - go_name: LangCountryAvailable
+      value: "0"
+      go_type: int
+    - go_name: LangCountryVarAvailable
+      value: "0"
+      go_type: int
+    - go_name: LangMissingData
+      value: "0"
+      go_type: int
+    - go_name: LangNotSupported
+      value: "0"
+      go_type: int
+    - go_name: QueueAdd
+      value: "0"
+      go_type: int
+    - go_name: QueueFlush
+      value: "0"
+      go_type: int
+    - go_name: Stopped
+      value: "0"
+      go_type: int
+    - go_name: Success
+      value: "0"
+      go_type: int

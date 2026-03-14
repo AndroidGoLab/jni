@@ -1,110 +1,165 @@
 package: lights
-go_import: "github.com/xaionaro-go/jni/hardware/lights"
-
+go_import: github.com/xaionaro-go/jni/hardware/lights
 classes:
-  - java_class: android.hardware.lights.LightsManager
-    go_type: Manager
-    obtain: system_service
-    service_name: "lights"
-    close: false
-    methods:
-      - java_method: getLights
-        go_name: getLightsRaw
-        params: []
-        returns: java.util.List
-        error: true
-
-      - java_method: openSession
-        go_name: openSessionRaw
-        params: []
-        returns: android.hardware.lights.LightsManager$LightsSession
-        error: true
-
-  - java_class: android.hardware.lights.Light
-    go_type: Light
-    kind: data_class
-    fields:
-      - { java_method: getId, returns: int, go_name: ID, go_type: int }
-      - { java_method: getName, returns: String, go_name: Name, go_type: string }
-      - { java_method: getType, returns: int, go_name: Type, go_type: int }
-
-  - java_class: android.hardware.lights.LightState
-    go_type: LightState
-    kind: builder
-    obtain: builder
-    methods: []
-
-  - java_class: android.hardware.lights.LightState$Builder
-    go_type: lightStateBuilder
-    kind: builder
-    methods:
-      - java_method: setColor
-        go_name: setColor
-        params:
-          - { java_type: int, go_name: argb }
-        returns: android.hardware.lights.LightState$Builder
-
-      - java_method: setPlayerId
-        go_name: setPlayerId
-        params:
-          - { java_type: int, go_name: playerId }
-        returns: android.hardware.lights.LightState$Builder
-
-      - java_method: build
-        go_name: build
-        params: []
-        returns: android.hardware.lights.LightState
-
-  - java_class: android.hardware.lights.LightsManager$LightsSession
-    go_type: Session
-    close: true
-    methods:
-      - java_method: requestLights
-        go_name: requestLightsRaw
-        params:
-          - { java_type: android.hardware.lights.LightsRequest, go_name: request }
-        returns: void
-        error: true
-
-      - java_method: close
-        go_name: closeRaw
-        params: []
-        returns: void
-        error: true
-
-  - java_class: android.hardware.lights.LightsRequest$Builder
-    go_type: lightsRequestBuilder
-    kind: builder
-    methods:
-      - java_method: addLight
-        go_name: addLight
-        params:
-          - { java_type: android.hardware.lights.Light, go_name: light }
-          - { java_type: android.hardware.lights.LightState, go_name: state }
-        returns: android.hardware.lights.LightsRequest$Builder
-
-      - java_method: clearLight
-        go_name: clearLight
-        params:
-          - { java_type: android.hardware.lights.Light, go_name: light }
-        returns: android.hardware.lights.LightsRequest$Builder
-
-      - java_method: build
-        go_name: build
-        params: []
-        returns: android.hardware.lights.LightsRequest
-
+    - java_class: android.hardware.lights.Light
+      go_type: light
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: int
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: getOrdinal
+          go_name: GetOrdinal
+          returns: int
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: int
+          error: true
+        - java_method: hasBrightnessControl
+          go_name: HasBrightnessControl
+          returns: boolean
+          error: true
+        - java_method: hasRgbControl
+          go_name: HasRgbControl
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.hardware.lights.LightState$Builder
+      go_type: builder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.hardware.lights.LightState
+          error: true
+        - java_method: setColor
+          go_name: SetColor
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.hardware.lights.LightState$Builder
+          error: true
+        - java_method: setPlayerId
+          go_name: SetPlayerId
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.hardware.lights.LightState$Builder
+          error: true
+    - java_class: android.hardware.lights.LightState
+      go_type: lightState
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getColor
+          go_name: GetColor
+          returns: int
+          error: true
+        - java_method: getPlayerId
+          go_name: GetPlayerId
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.hardware.lights.LightsManager$LightsSession
+      go_type: lightsSession
+    - java_class: android.hardware.lights.LightsManager
+      go_type: lightsManager
+      obtain: system_service
+      service_name: lights
+      close: true
+    - java_class: android.hardware.lights.LightsRequest$Builder
+      go_type: builder
+      methods:
+        - java_method: addLight
+          go_name: AddLight
+          params:
+            - java_type: android.hardware.lights.Light
+              go_name: arg0
+            - java_type: android.hardware.lights.LightState
+              go_name: arg1
+          returns: android.hardware.lights.LightsRequest$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.hardware.lights.LightsRequest
+          error: true
+        - java_method: clearLight
+          go_name: ClearLight
+          params:
+            - java_type: android.hardware.lights.Light
+              go_name: arg0
+          returns: android.hardware.lights.LightsRequest$Builder
+          error: true
 constants:
-  # Light types
-  - { go_name: LightTypeBacklight, value: 0, go_type: int }
-  - { go_name: LightTypeKeyboard, value: 1, go_type: int }
-  - { go_name: LightTypeButtons, value: 2, go_type: int }
-  - { go_name: LightTypeBattery, value: 3, go_type: int }
-  - { go_name: LightTypeNotifications, value: 4, go_type: int }
-  - { go_name: LightTypeAttention, value: 5, go_type: int }
-  - { go_name: LightTypePlayer1, value: 8, go_type: int }
-  - { go_name: LightTypePlayer2, value: 9, go_type: int }
-  - { go_name: LightTypePlayer3, value: 10, go_type: int }
-  - { go_name: LightTypePlayer4, value: 11, go_type: int }
-
-callbacks: []
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: LightCapabilityBrightness
+      value: "0"
+      go_type: int
+    - go_name: LightCapabilityColorRgb
+      value: "0"
+      go_type: int
+    - go_name: LightCapabilityRgb
+      value: "0"
+      go_type: int
+    - go_name: LightTypeInput
+      value: "0"
+      go_type: int
+    - go_name: LightTypeKeyboardBacklight
+      value: "0"
+      go_type: int
+    - go_name: LightTypeMicrophone
+      value: "0"
+      go_type: int
+    - go_name: LightTypePlayerId
+      value: "0"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int

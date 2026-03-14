@@ -1,0 +1,2861 @@
+package: admin
+go_import: github.com/xaionaro-go/jni/app/admin
+classes:
+    - java_class: android.app.admin.DevicePolicyManager
+      go_type: devicePolicyManager
+      obtain: system_service
+      service_name: device_policy
+      close: true
+      methods:
+        - java_method: acknowledgeDeviceCompliant
+          go_name: AcknowledgeDeviceCompliant
+          returns: void
+          error: true
+        - java_method: addCrossProfileIntentFilter
+          go_name: AddCrossProfileIntentFilter
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.content.IntentFilter
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: addCrossProfileWidgetProvider
+          go_name: AddCrossProfileWidgetProvider
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: addOverrideApn
+          go_name: AddOverrideApn
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.telephony.data.ApnSetting
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: addPersistentPreferredActivity
+          go_name: AddPersistentPreferredActivity
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.content.IntentFilter
+              go_name: arg1
+            - java_type: android.content.ComponentName
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: addUserRestriction
+          go_name: AddUserRestriction
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: addUserRestrictionGlobally
+          go_name: AddUserRestrictionGlobally
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: bindDeviceAdminServiceAsUser
+          go_name: BindDeviceAdminServiceAsUser5
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+            - java_type: android.content.ServiceConnection
+              go_name: arg2
+            - java_type: android.content.Context$BindServiceFlags
+              go_name: arg3
+            - java_type: android.os.UserHandle
+              go_name: arg4
+          returns: boolean
+          error: true
+        - java_method: bindDeviceAdminServiceAsUser
+          go_name: BindDeviceAdminServiceAsUser5_1
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+            - java_type: android.content.ServiceConnection
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: android.os.UserHandle
+              go_name: arg4
+          returns: boolean
+          error: true
+        - java_method: canAdminGrantSensorsPermissions
+          go_name: CanAdminGrantSensorsPermissions
+          returns: boolean
+          error: true
+        - java_method: canUsbDataSignalingBeDisabled
+          go_name: CanUsbDataSignalingBeDisabled
+          returns: boolean
+          error: true
+        - java_method: clearApplicationUserData
+          go_name: ClearApplicationUserData
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: java.util.concurrent.Executor
+              go_name: arg2
+            - java_type: android.app.admin.DevicePolicyManager$OnClearApplicationUserDataListener
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: clearCrossProfileIntentFilters
+          go_name: ClearCrossProfileIntentFilters
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: clearDeviceOwnerApp
+          go_name: ClearDeviceOwnerApp
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: clearPackagePersistentPreferredActivities
+          go_name: ClearPackagePersistentPreferredActivities
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: clearProfileOwner
+          go_name: ClearProfileOwner
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: clearResetPasswordToken
+          go_name: ClearResetPasswordToken
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: clearUserRestriction
+          go_name: ClearUserRestriction
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: createAdminSupportIntent
+          go_name: CreateAdminSupportIntent
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: createAndManageUser
+          go_name: CreateAndManageUser
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.content.ComponentName
+              go_name: arg2
+            - java_type: android.os.PersistableBundle
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+          returns: android.os.UserHandle
+          error: true
+        - java_method: enableSystemApp
+          go_name: EnableSystemApp2
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: enableSystemApp
+          go_name: EnableSystemApp2_1
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: generateKeyPair
+          go_name: GenerateKeyPair
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.security.keystore.KeyGenParameterSpec
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: android.security.AttestedKeyPair
+          error: true
+        - java_method: getAccountTypesWithManagementDisabled
+          go_name: GetAccountTypesWithManagementDisabled
+          returns: java.lang.String[]
+          error: true
+        - java_method: getActiveAdmins
+          go_name: GetActiveAdmins
+          returns: java.util.List<android.content.ComponentName>
+          error: true
+        - java_method: getAffiliationIds
+          go_name: GetAffiliationIds
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.Set<java.lang.String>
+          error: true
+        - java_method: getAlwaysOnVpnLockdownWhitelist
+          go_name: GetAlwaysOnVpnLockdownWhitelist
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.Set<java.lang.String>
+          error: true
+        - java_method: getAlwaysOnVpnPackage
+          go_name: GetAlwaysOnVpnPackage
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getAppFunctionsPolicy
+          go_name: GetAppFunctionsPolicy
+          returns: int
+          error: true
+        - java_method: getApplicationRestrictions
+          go_name: GetApplicationRestrictions
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.os.Bundle
+          error: true
+        - java_method: getApplicationRestrictionsManagingPackage
+          go_name: GetApplicationRestrictionsManagingPackage
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getAutoTimeEnabled
+          go_name: GetAutoTimeEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAutoTimePolicy
+          go_name: GetAutoTimePolicy
+          returns: int
+          error: true
+        - java_method: getAutoTimeRequired
+          go_name: GetAutoTimeRequired
+          returns: boolean
+          error: true
+        - java_method: getAutoTimeZoneEnabled
+          go_name: GetAutoTimeZoneEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAutoTimeZonePolicy
+          go_name: GetAutoTimeZonePolicy
+          returns: int
+          error: true
+        - java_method: getBindDeviceAdminTargetUsers
+          go_name: GetBindDeviceAdminTargetUsers
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.List<android.os.UserHandle>
+          error: true
+        - java_method: getBluetoothContactSharingDisabled
+          go_name: GetBluetoothContactSharingDisabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getCameraDisabled
+          go_name: GetCameraDisabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getCertInstallerPackage
+          go_name: GetCertInstallerPackage
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getContentProtectionPolicy
+          go_name: GetContentProtectionPolicy
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getCredentialManagerPolicy
+          go_name: GetCredentialManagerPolicy
+          returns: android.app.admin.PackagePolicy
+          error: true
+        - java_method: getCrossProfileCalendarPackages
+          go_name: GetCrossProfileCalendarPackages
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.Set<java.lang.String>
+          error: true
+        - java_method: getCrossProfileCallerIdDisabled
+          go_name: GetCrossProfileCallerIdDisabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getCrossProfileContactsSearchDisabled
+          go_name: GetCrossProfileContactsSearchDisabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getCrossProfilePackages
+          go_name: GetCrossProfilePackages
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.Set<java.lang.String>
+          error: true
+        - java_method: getCrossProfileWidgetProviders
+          go_name: GetCrossProfileWidgetProviders
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getCurrentFailedPasswordAttempts
+          go_name: GetCurrentFailedPasswordAttempts
+          returns: int
+          error: true
+        - java_method: getDelegatePackages
+          go_name: GetDelegatePackages
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getDelegatedScopes
+          go_name: GetDelegatedScopes
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getDeviceOwnerLockScreenInfo
+          go_name: GetDeviceOwnerLockScreenInfo
+          returns: String
+          error: true
+        - java_method: getDevicePolicyManagementRoleHolderPackage
+          go_name: GetDevicePolicyManagementRoleHolderPackage
+          returns: String
+          error: true
+        - java_method: getEndUserSessionMessage
+          go_name: GetEndUserSessionMessage
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getEnrollmentSpecificId
+          go_name: GetEnrollmentSpecificId
+          returns: String
+          error: true
+        - java_method: getFactoryResetProtectionPolicy
+          go_name: GetFactoryResetProtectionPolicy
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: android.app.admin.FactoryResetProtectionPolicy
+          error: true
+        - java_method: getGlobalPrivateDnsHost
+          go_name: GetGlobalPrivateDnsHost
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getGlobalPrivateDnsMode
+          go_name: GetGlobalPrivateDnsMode
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getInstalledCaCerts
+          go_name: GetInstalledCaCerts
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.List<byte[]>
+          error: true
+        - java_method: getKeepUninstalledPackages
+          go_name: GetKeepUninstalledPackages
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getKeyguardDisabledFeatures
+          go_name: GetKeyguardDisabledFeatures
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getLockTaskFeatures
+          go_name: GetLockTaskFeatures
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getLockTaskPackages
+          go_name: GetLockTaskPackages
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.lang.String[]
+          error: true
+        - java_method: getLongSupportMessage
+          go_name: GetLongSupportMessage
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getManagedProfileCallerIdAccessPolicy
+          go_name: GetManagedProfileCallerIdAccessPolicy
+          returns: android.app.admin.PackagePolicy
+          error: true
+        - java_method: getManagedProfileContactsAccessPolicy
+          go_name: GetManagedProfileContactsAccessPolicy
+          returns: android.app.admin.PackagePolicy
+          error: true
+        - java_method: getManagedProfileMaximumTimeOff
+          go_name: GetManagedProfileMaximumTimeOff
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getManagedSubscriptionsPolicy
+          go_name: GetManagedSubscriptionsPolicy
+          returns: android.app.admin.ManagedSubscriptionsPolicy
+          error: true
+        - java_method: getMaximumFailedPasswordsForWipe
+          go_name: GetMaximumFailedPasswordsForWipe
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getMaximumTimeToLock
+          go_name: GetMaximumTimeToLock
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getMeteredDataDisabledPackages
+          go_name: GetMeteredDataDisabledPackages
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getMinimumRequiredWifiSecurityLevel
+          go_name: GetMinimumRequiredWifiSecurityLevel
+          returns: int
+          error: true
+        - java_method: getMtePolicy
+          go_name: GetMtePolicy
+          returns: int
+          error: true
+        - java_method: getNearbyAppStreamingPolicy
+          go_name: GetNearbyAppStreamingPolicy
+          returns: int
+          error: true
+        - java_method: getNearbyNotificationStreamingPolicy
+          go_name: GetNearbyNotificationStreamingPolicy
+          returns: int
+          error: true
+        - java_method: getOrganizationColor
+          go_name: GetOrganizationColor
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getOrganizationName
+          go_name: GetOrganizationName
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getOverrideApns
+          go_name: GetOverrideApns
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.List<android.telephony.data.ApnSetting>
+          error: true
+        - java_method: getParentProfileInstance
+          go_name: GetParentProfileInstance
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: android.app.admin.DevicePolicyManager
+          error: true
+        - java_method: getPasswordComplexity
+          go_name: GetPasswordComplexity
+          returns: int
+          error: true
+        - java_method: getPasswordExpiration
+          go_name: GetPasswordExpiration
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getPasswordExpirationTimeout
+          go_name: GetPasswordExpirationTimeout
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getPasswordHistoryLength
+          go_name: GetPasswordHistoryLength
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getPasswordMaximumLength
+          go_name: GetPasswordMaximumLength
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getPasswordMinimumLength
+          go_name: GetPasswordMinimumLength
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getPasswordMinimumLetters
+          go_name: GetPasswordMinimumLetters
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getPasswordMinimumLowerCase
+          go_name: GetPasswordMinimumLowerCase
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getPasswordMinimumNonLetter
+          go_name: GetPasswordMinimumNonLetter
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getPasswordMinimumNumeric
+          go_name: GetPasswordMinimumNumeric
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getPasswordMinimumSymbols
+          go_name: GetPasswordMinimumSymbols
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getPasswordMinimumUpperCase
+          go_name: GetPasswordMinimumUpperCase
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getPasswordQuality
+          go_name: GetPasswordQuality
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getPendingSystemUpdate
+          go_name: GetPendingSystemUpdate
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: android.app.admin.SystemUpdateInfo
+          error: true
+        - java_method: getPermissionGrantState
+          go_name: GetPermissionGrantState
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: int
+          error: true
+        - java_method: getPermissionPolicy
+          go_name: GetPermissionPolicy
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getPermittedAccessibilityServices
+          go_name: GetPermittedAccessibilityServices
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getPermittedCrossProfileNotificationListeners
+          go_name: GetPermittedCrossProfileNotificationListeners
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getPermittedInputMethods
+          go_name: GetPermittedInputMethods
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getPersonalAppsSuspendedReasons
+          go_name: GetPersonalAppsSuspendedReasons
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getPreferentialNetworkServiceConfigs
+          go_name: GetPreferentialNetworkServiceConfigs
+          returns: java.util.List<android.app.admin.PreferentialNetworkServiceConfig>
+          error: true
+        - java_method: getRequiredPasswordComplexity
+          go_name: GetRequiredPasswordComplexity
+          returns: int
+          error: true
+        - java_method: getRequiredStrongAuthTimeout
+          go_name: GetRequiredStrongAuthTimeout
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getResources
+          go_name: GetResources
+          returns: android.app.admin.DevicePolicyResourcesManager
+          error: true
+        - java_method: getScreenCaptureDisabled
+          go_name: GetScreenCaptureDisabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getSecondaryUsers
+          go_name: GetSecondaryUsers
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.List<android.os.UserHandle>
+          error: true
+        - java_method: getShortSupportMessage
+          go_name: GetShortSupportMessage
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getStartUserSessionMessage
+          go_name: GetStartUserSessionMessage
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getStorageEncryption
+          go_name: GetStorageEncryption
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getStorageEncryptionStatus
+          go_name: GetStorageEncryptionStatus
+          returns: int
+          error: true
+        - java_method: getSubscriptionIds
+          go_name: GetSubscriptionIds
+          returns: java.util.Set<java.lang.Integer>
+          error: true
+        - java_method: getSystemUpdatePolicy
+          go_name: GetSystemUpdatePolicy
+          returns: android.app.admin.SystemUpdatePolicy
+          error: true
+        - java_method: getTransferOwnershipBundle
+          go_name: GetTransferOwnershipBundle
+          returns: android.os.PersistableBundle
+          error: true
+        - java_method: getTrustAgentConfiguration
+          go_name: GetTrustAgentConfiguration
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.content.ComponentName
+              go_name: arg1
+          returns: java.util.List<android.os.PersistableBundle>
+          error: true
+        - java_method: getUserControlDisabledPackages
+          go_name: GetUserControlDisabledPackages
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getUserRestrictions
+          go_name: GetUserRestrictions
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: android.os.Bundle
+          error: true
+        - java_method: getUserRestrictionsGlobally
+          go_name: GetUserRestrictionsGlobally
+          returns: android.os.Bundle
+          error: true
+        - java_method: getWifiMacAddress
+          go_name: GetWifiMacAddress
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getWifiSsidPolicy
+          go_name: GetWifiSsidPolicy
+          returns: android.app.admin.WifiSsidPolicy
+          error: true
+        - java_method: grantKeyPairToApp
+          go_name: GrantKeyPairToApp
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: grantKeyPairToWifiAuth
+          go_name: GrantKeyPairToWifiAuth
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasCaCertInstalled
+          go_name: HasCaCertInstalled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: '[B'
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: hasGrantedPolicy
+          go_name: HasGrantedPolicy
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: hasKeyPair
+          go_name: HasKeyPair
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasLockdownAdminConfiguredNetworks
+          go_name: HasLockdownAdminConfiguredNetworks
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: installCaCert
+          go_name: InstallCaCert
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: '[B'
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: installExistingPackage
+          go_name: InstallExistingPackage
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: installKeyPair
+          go_name: InstallKeyPair4
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: java.security.PrivateKey
+              go_name: arg1
+            - java_type: java.security.cert.Certificate
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+          returns: boolean
+          error: true
+        - java_method: installKeyPair
+          go_name: InstallKeyPair5_1
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: java.security.PrivateKey
+              go_name: arg1
+            - java_type: java.security.cert.Certificate[]
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+            - java_type: boolean
+              go_name: arg4
+          returns: boolean
+          error: true
+        - java_method: installKeyPair
+          go_name: InstallKeyPair5_2
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: java.security.PrivateKey
+              go_name: arg1
+            - java_type: java.security.cert.Certificate[]
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+          returns: boolean
+          error: true
+        - java_method: installSystemUpdate
+          go_name: InstallSystemUpdate
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: java.util.concurrent.Executor
+              go_name: arg2
+            - java_type: android.app.admin.DevicePolicyManager$InstallSystemUpdateCallback
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: isActivePasswordSufficient
+          go_name: IsActivePasswordSufficient
+          returns: boolean
+          error: true
+        - java_method: isActivePasswordSufficientForDeviceRequirement
+          go_name: IsActivePasswordSufficientForDeviceRequirement
+          returns: boolean
+          error: true
+        - java_method: isAdminActive
+          go_name: IsAdminActive
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isAffiliatedUser
+          go_name: IsAffiliatedUser
+          returns: boolean
+          error: true
+        - java_method: isAlwaysOnVpnLockdownEnabled
+          go_name: IsAlwaysOnVpnLockdownEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isApplicationHidden
+          go_name: IsApplicationHidden
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: isBackupServiceEnabled
+          go_name: IsBackupServiceEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isCallerApplicationRestrictionsManagingPackage
+          go_name: IsCallerApplicationRestrictionsManagingPackage
+          returns: boolean
+          error: true
+        - java_method: isCommonCriteriaModeEnabled
+          go_name: IsCommonCriteriaModeEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isComplianceAcknowledgementRequired
+          go_name: IsComplianceAcknowledgementRequired
+          returns: boolean
+          error: true
+        - java_method: isDeviceFinanced
+          go_name: IsDeviceFinanced
+          returns: boolean
+          error: true
+        - java_method: isDeviceIdAttestationSupported
+          go_name: IsDeviceIdAttestationSupported
+          returns: boolean
+          error: true
+        - java_method: isDeviceOwnerApp
+          go_name: IsDeviceOwnerApp
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isEphemeralUser
+          go_name: IsEphemeralUser
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isKeyPairGrantedToWifiAuth
+          go_name: IsKeyPairGrantedToWifiAuth
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isLockTaskPermitted
+          go_name: IsLockTaskPermitted
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isLogoutEnabled
+          go_name: IsLogoutEnabled
+          returns: boolean
+          error: true
+        - java_method: isManagedProfile
+          go_name: IsManagedProfile
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isMasterVolumeMuted
+          go_name: IsMasterVolumeMuted
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isNetworkLoggingEnabled
+          go_name: IsNetworkLoggingEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isOrganizationOwnedDeviceWithManagedProfile
+          go_name: IsOrganizationOwnedDeviceWithManagedProfile
+          returns: boolean
+          error: true
+        - java_method: isOverrideApnEnabled
+          go_name: IsOverrideApnEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isPackageSuspended
+          go_name: IsPackageSuspended
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: isPreferentialNetworkServiceEnabled
+          go_name: IsPreferentialNetworkServiceEnabled
+          returns: boolean
+          error: true
+        - java_method: isProfileOwnerApp
+          go_name: IsProfileOwnerApp
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isProvisioningAllowed
+          go_name: IsProvisioningAllowed
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isResetPasswordTokenActive
+          go_name: IsResetPasswordTokenActive
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isSafeOperation
+          go_name: IsSafeOperation
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isSecurityLoggingEnabled
+          go_name: IsSecurityLoggingEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isStatusBarDisabled
+          go_name: IsStatusBarDisabled
+          returns: boolean
+          error: true
+        - java_method: isUninstallBlocked
+          go_name: IsUninstallBlocked
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: isUniqueDeviceAttestationSupported
+          go_name: IsUniqueDeviceAttestationSupported
+          returns: boolean
+          error: true
+        - java_method: isUsbDataSignalingEnabled
+          go_name: IsUsbDataSignalingEnabled
+          returns: boolean
+          error: true
+        - java_method: isUsingUnifiedPassword
+          go_name: IsUsingUnifiedPassword
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: listForegroundAffiliatedUsers
+          go_name: ListForegroundAffiliatedUsers
+          returns: java.util.List<android.os.UserHandle>
+          error: true
+        - java_method: lockNow
+          go_name: LockNow0
+          returns: void
+          error: true
+        - java_method: lockNow
+          go_name: LockNow1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: logoutUser
+          go_name: LogoutUser
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: reboot
+          go_name: Reboot
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeActiveAdmin
+          go_name: RemoveActiveAdmin
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeCrossProfileWidgetProvider
+          go_name: RemoveCrossProfileWidgetProvider
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: removeKeyPair
+          go_name: RemoveKeyPair
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: removeOverrideApn
+          go_name: RemoveOverrideApn
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: removeUser
+          go_name: RemoveUser
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.os.UserHandle
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: requestBugreport
+          go_name: RequestBugreport
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: resetPassword
+          go_name: ResetPassword
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: resetPasswordWithToken
+          go_name: ResetPasswordWithToken
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: '[B'
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: boolean
+          error: true
+        - java_method: retrieveNetworkLogs
+          go_name: RetrieveNetworkLogs
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: java.util.List<android.app.admin.NetworkEvent>
+          error: true
+        - java_method: retrievePreRebootSecurityLogs
+          go_name: RetrievePreRebootSecurityLogs
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.List<android.app.admin.SecurityLog$SecurityEvent>
+          error: true
+        - java_method: retrieveSecurityLogs
+          go_name: RetrieveSecurityLogs
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.List<android.app.admin.SecurityLog$SecurityEvent>
+          error: true
+        - java_method: revokeKeyPairFromApp
+          go_name: RevokeKeyPairFromApp
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: revokeKeyPairFromWifiAuth
+          go_name: RevokeKeyPairFromWifiAuth
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setAccountManagementDisabled
+          go_name: SetAccountManagementDisabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setAffiliationIds
+          go_name: SetAffiliationIds
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: java.util.Set<java.lang.String>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setAlwaysOnVpnPackage
+          go_name: SetAlwaysOnVpnPackage3
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setAlwaysOnVpnPackage
+          go_name: SetAlwaysOnVpnPackage4_1
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+            - java_type: java.util.Set<java.lang.String>
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: setAppFunctionsPolicy
+          go_name: SetAppFunctionsPolicy
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setApplicationHidden
+          go_name: SetApplicationHidden
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: setApplicationRestrictions
+          go_name: SetApplicationRestrictions
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setApplicationRestrictionsManagingPackage
+          go_name: SetApplicationRestrictionsManagingPackage
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setAutoTimeEnabled
+          go_name: SetAutoTimeEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setAutoTimePolicy
+          go_name: SetAutoTimePolicy
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAutoTimeRequired
+          go_name: SetAutoTimeRequired
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setAutoTimeZoneEnabled
+          go_name: SetAutoTimeZoneEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setAutoTimeZonePolicy
+          go_name: SetAutoTimeZonePolicy
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setBackupServiceEnabled
+          go_name: SetBackupServiceEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setBluetoothContactSharingDisabled
+          go_name: SetBluetoothContactSharingDisabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setCameraDisabled
+          go_name: SetCameraDisabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setCertInstallerPackage
+          go_name: SetCertInstallerPackage
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setCommonCriteriaModeEnabled
+          go_name: SetCommonCriteriaModeEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setConfiguredNetworksLockdownState
+          go_name: SetConfiguredNetworksLockdownState
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setContentProtectionPolicy
+          go_name: SetContentProtectionPolicy
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setCredentialManagerPolicy
+          go_name: SetCredentialManagerPolicy
+          params:
+            - java_type: android.app.admin.PackagePolicy
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setCrossProfileCalendarPackages
+          go_name: SetCrossProfileCalendarPackages
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: java.util.Set<java.lang.String>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setCrossProfileCallerIdDisabled
+          go_name: SetCrossProfileCallerIdDisabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setCrossProfileContactsSearchDisabled
+          go_name: SetCrossProfileContactsSearchDisabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setCrossProfilePackages
+          go_name: SetCrossProfilePackages
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: java.util.Set<java.lang.String>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setDefaultDialerApplication
+          go_name: SetDefaultDialerApplication
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDefaultSmsApplication
+          go_name: SetDefaultSmsApplication
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setDelegatedScopes
+          go_name: SetDelegatedScopes
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: java.util.List<java.lang.String>
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setDeviceOwnerLockScreenInfo
+          go_name: SetDeviceOwnerLockScreenInfo
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setEndUserSessionMessage
+          go_name: SetEndUserSessionMessage
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setFactoryResetProtectionPolicy
+          go_name: SetFactoryResetProtectionPolicy
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.app.admin.FactoryResetProtectionPolicy
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setGlobalPrivateDnsModeOpportunistic
+          go_name: SetGlobalPrivateDnsModeOpportunistic
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: setGlobalPrivateDnsModeSpecifiedHost
+          go_name: SetGlobalPrivateDnsModeSpecifiedHost
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: setGlobalSetting
+          go_name: SetGlobalSetting
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setKeepUninstalledPackages
+          go_name: SetKeepUninstalledPackages
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: java.util.List<java.lang.String>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setKeyPairCertificate
+          go_name: SetKeyPairCertificate
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: java.util.List<java.security.cert.Certificate>
+              go_name: arg2
+            - java_type: boolean
+              go_name: arg3
+          returns: boolean
+          error: true
+        - java_method: setKeyguardDisabled
+          go_name: SetKeyguardDisabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: setKeyguardDisabledFeatures
+          go_name: SetKeyguardDisabledFeatures
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setLocationEnabled
+          go_name: SetLocationEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setLockTaskFeatures
+          go_name: SetLockTaskFeatures
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setLockTaskPackages
+          go_name: SetLockTaskPackages
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: java.lang.String[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setLogoutEnabled
+          go_name: SetLogoutEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setLongSupportMessage
+          go_name: SetLongSupportMessage
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setManagedProfileCallerIdAccessPolicy
+          go_name: SetManagedProfileCallerIdAccessPolicy
+          params:
+            - java_type: android.app.admin.PackagePolicy
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setManagedProfileContactsAccessPolicy
+          go_name: SetManagedProfileContactsAccessPolicy
+          params:
+            - java_type: android.app.admin.PackagePolicy
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setManagedProfileMaximumTimeOff
+          go_name: SetManagedProfileMaximumTimeOff
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setManagedSubscriptionsPolicy
+          go_name: SetManagedSubscriptionsPolicy
+          params:
+            - java_type: android.app.admin.ManagedSubscriptionsPolicy
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setMasterVolumeMuted
+          go_name: SetMasterVolumeMuted
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setMaximumFailedPasswordsForWipe
+          go_name: SetMaximumFailedPasswordsForWipe
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setMaximumTimeToLock
+          go_name: SetMaximumTimeToLock
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setMeteredDataDisabledPackages
+          go_name: SetMeteredDataDisabledPackages
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: java.util.List<java.lang.String>
+              go_name: arg1
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: setMinimumRequiredWifiSecurityLevel
+          go_name: SetMinimumRequiredWifiSecurityLevel
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setMtePolicy
+          go_name: SetMtePolicy
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setNearbyAppStreamingPolicy
+          go_name: SetNearbyAppStreamingPolicy
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setNearbyNotificationStreamingPolicy
+          go_name: SetNearbyNotificationStreamingPolicy
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setNetworkLoggingEnabled
+          go_name: SetNetworkLoggingEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setOrganizationColor
+          go_name: SetOrganizationColor
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setOrganizationId
+          go_name: SetOrganizationId
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOrganizationName
+          go_name: SetOrganizationName
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setOverrideApnsEnabled
+          go_name: SetOverrideApnsEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setPackagesSuspended
+          go_name: SetPackagesSuspended
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: java.lang.String[]
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+          returns: java.lang.String[]
+          error: true
+        - java_method: setPasswordExpirationTimeout
+          go_name: SetPasswordExpirationTimeout
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setPasswordHistoryLength
+          go_name: SetPasswordHistoryLength
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setPasswordMinimumLength
+          go_name: SetPasswordMinimumLength
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setPasswordMinimumLetters
+          go_name: SetPasswordMinimumLetters
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setPasswordMinimumLowerCase
+          go_name: SetPasswordMinimumLowerCase
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setPasswordMinimumNonLetter
+          go_name: SetPasswordMinimumNonLetter
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setPasswordMinimumNumeric
+          go_name: SetPasswordMinimumNumeric
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setPasswordMinimumSymbols
+          go_name: SetPasswordMinimumSymbols
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setPasswordMinimumUpperCase
+          go_name: SetPasswordMinimumUpperCase
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setPasswordQuality
+          go_name: SetPasswordQuality
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setPermissionGrantState
+          go_name: SetPermissionGrantState
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: boolean
+          error: true
+        - java_method: setPermissionPolicy
+          go_name: SetPermissionPolicy
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setPermittedAccessibilityServices
+          go_name: SetPermittedAccessibilityServices
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: java.util.List<java.lang.String>
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: setPermittedCrossProfileNotificationListeners
+          go_name: SetPermittedCrossProfileNotificationListeners
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: java.util.List<java.lang.String>
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: setPermittedInputMethods
+          go_name: SetPermittedInputMethods
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: java.util.List<java.lang.String>
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: setPersonalAppsSuspended
+          go_name: SetPersonalAppsSuspended
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setPreferentialNetworkServiceConfigs
+          go_name: SetPreferentialNetworkServiceConfigs
+          params:
+            - java_type: java.util.List<android.app.admin.PreferentialNetworkServiceConfig>
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPreferentialNetworkServiceEnabled
+          go_name: SetPreferentialNetworkServiceEnabled
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setProfileEnabled
+          go_name: SetProfileEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setProfileName
+          go_name: SetProfileName
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setRecommendedGlobalProxy
+          go_name: SetRecommendedGlobalProxy
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.net.ProxyInfo
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setRequiredPasswordComplexity
+          go_name: SetRequiredPasswordComplexity
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setRequiredStrongAuthTimeout
+          go_name: SetRequiredStrongAuthTimeout
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setResetPasswordToken
+          go_name: SetResetPasswordToken
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: '[B'
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: setRestrictionsProvider
+          go_name: SetRestrictionsProvider
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.content.ComponentName
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setScreenCaptureDisabled
+          go_name: SetScreenCaptureDisabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setSecureSetting
+          go_name: SetSecureSetting
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setSecurityLoggingEnabled
+          go_name: SetSecurityLoggingEnabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setShortSupportMessage
+          go_name: SetShortSupportMessage
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setStartUserSessionMessage
+          go_name: SetStartUserSessionMessage
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setStatusBarDisabled
+          go_name: SetStatusBarDisabled
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: setStorageEncryption
+          go_name: SetStorageEncryption
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: setSystemSetting
+          go_name: SetSystemSetting
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setSystemUpdatePolicy
+          go_name: SetSystemUpdatePolicy
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.app.admin.SystemUpdatePolicy
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setTime
+          go_name: SetTime
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: setTimeZone
+          go_name: SetTimeZone
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: setTrustAgentConfiguration
+          go_name: SetTrustAgentConfiguration
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.content.ComponentName
+              go_name: arg1
+            - java_type: android.os.PersistableBundle
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setUninstallBlocked
+          go_name: SetUninstallBlocked
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setUsbDataSignalingEnabled
+          go_name: SetUsbDataSignalingEnabled
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setUserControlDisabledPackages
+          go_name: SetUserControlDisabledPackages
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: java.util.List<java.lang.String>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setUserIcon
+          go_name: SetUserIcon
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.graphics.Bitmap
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setWifiSsidPolicy
+          go_name: SetWifiSsidPolicy
+          params:
+            - java_type: android.app.admin.WifiSsidPolicy
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: startUserInBackground
+          go_name: StartUserInBackground
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.os.UserHandle
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: stopUser
+          go_name: StopUser
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.os.UserHandle
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: switchUser
+          go_name: SwitchUser
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.os.UserHandle
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: transferOwnership
+          go_name: TransferOwnership
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.content.ComponentName
+              go_name: arg1
+            - java_type: android.os.PersistableBundle
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: uninstallAllUserCaCerts
+          go_name: UninstallAllUserCaCerts
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: uninstallCaCert
+          go_name: UninstallCaCert
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: '[B'
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: updateOverrideApn
+          go_name: UpdateOverrideApn
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.telephony.data.ApnSetting
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: wipeData
+          go_name: WipeData1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: wipeData
+          go_name: WipeData2_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: wipeDevice
+          go_name: WipeDevice
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+      static_methods:
+        - java_method: isMtePolicyEnforced
+          go_name: IsMtePolicyEnforced
+          returns: boolean
+          error: true
+constants:
+    - go_name: ActionAddDeviceAdmin
+      value: '""'
+      go_type: string
+    - go_name: ActionAdminPolicyCompliance
+      value: '""'
+      go_type: string
+    - go_name: ActionApplicationDelegationScopesChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionCheckPolicyCompliance
+      value: '""'
+      go_type: string
+    - go_name: ActionDeviceAdminService
+      value: '""'
+      go_type: string
+    - go_name: ActionDeviceFinancingStateChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionDeviceOwnerChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionDevicePolicyResourceUpdated
+      value: '""'
+      go_type: string
+    - go_name: ActionGetProvisioningMode
+      value: '""'
+      go_type: string
+    - go_name: ActionManagedProfileProvisioned
+      value: '""'
+      go_type: string
+    - go_name: ActionProfileOwnerChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionProvisioningSuccessful
+      value: '""'
+      go_type: string
+    - go_name: ActionProvisionManagedDevice
+      value: '""'
+      go_type: string
+    - go_name: ActionProvisionManagedProfile
+      value: '""'
+      go_type: string
+    - go_name: ActionSetNewParentProfilePassword
+      value: '""'
+      go_type: string
+    - go_name: ActionSetNewPassword
+      value: '""'
+      go_type: string
+    - go_name: ActionStartEncryption
+      value: '""'
+      go_type: string
+    - go_name: ActionSystemUpdatePolicyChanged
+      value: '""'
+      go_type: string
+    - go_name: AppFunctionsDisabled
+      value: "0"
+      go_type: int
+    - go_name: AppFunctionsDisabledCrossProfile
+      value: "0"
+      go_type: int
+    - go_name: AppFunctionsNotControlledByPolicy
+      value: "0"
+      go_type: int
+    - go_name: AutoTimeDisabled
+      value: "0"
+      go_type: int
+    - go_name: AutoTimeEnabled
+      value: "0"
+      go_type: int
+    - go_name: AutoTimeNotControlledByPolicy
+      value: "0"
+      go_type: int
+    - go_name: AutoTimeZoneDisabled
+      value: "0"
+      go_type: int
+    - go_name: AutoTimeZoneEnabled
+      value: "0"
+      go_type: int
+    - go_name: AutoTimeZoneNotControlledByPolicy
+      value: "0"
+      go_type: int
+    - go_name: ContentProtectionDisabled
+      value: "0"
+      go_type: int
+    - go_name: ContentProtectionEnabled
+      value: "0"
+      go_type: int
+    - go_name: ContentProtectionNotControlledByPolicy
+      value: "0"
+      go_type: int
+    - go_name: DelegationAppRestrictions
+      value: '""'
+      go_type: string
+    - go_name: DelegationBlockUninstall
+      value: '""'
+      go_type: string
+    - go_name: DelegationCertInstall
+      value: '""'
+      go_type: string
+    - go_name: DelegationCertSelection
+      value: '""'
+      go_type: string
+    - go_name: DelegationEnableSystemApp
+      value: '""'
+      go_type: string
+    - go_name: DelegationInstallExistingPackage
+      value: '""'
+      go_type: string
+    - go_name: DelegationKeepUninstalledPackages
+      value: '""'
+      go_type: string
+    - go_name: DelegationNetworkLogging
+      value: '""'
+      go_type: string
+    - go_name: DelegationPackageAccess
+      value: '""'
+      go_type: string
+    - go_name: DelegationPermissionGrant
+      value: '""'
+      go_type: string
+    - go_name: DelegationSecurityLogging
+      value: '""'
+      go_type: string
+    - go_name: EncryptionStatusActivating
+      value: "0"
+      go_type: int
+    - go_name: EncryptionStatusActive
+      value: "0"
+      go_type: int
+    - go_name: EncryptionStatusActiveDefaultKey
+      value: "0"
+      go_type: int
+    - go_name: EncryptionStatusActivePerUser
+      value: "0"
+      go_type: int
+    - go_name: EncryptionStatusInactive
+      value: "0"
+      go_type: int
+    - go_name: EncryptionStatusUnsupported
+      value: "0"
+      go_type: int
+    - go_name: ExtraAddExplanation
+      value: '""'
+      go_type: string
+    - go_name: ExtraDelegationScopes
+      value: '""'
+      go_type: string
+    - go_name: ExtraDeviceAdmin
+      value: '""'
+      go_type: string
+    - go_name: ExtraDevicePasswordRequirementOnly
+      value: '""'
+      go_type: string
+    - go_name: ExtraPasswordComplexity
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningAccountToMigrate
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningAdminExtrasBundle
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningAllowedProvisioningModes
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningAllowOffline
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningDeviceAdminComponentName
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningDeviceAdminMinimumVersionCode
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningDeviceAdminPackageChecksum
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningDeviceAdminPackageDownloadCookieHeader
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningDeviceAdminPackageDownloadLocation
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningDeviceAdminPackageName
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningDeviceAdminSignatureChecksum
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningDisclaimers
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningDisclaimerContent
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningDisclaimerHeader
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningEmailAddress
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningImei
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningKeepAccountOnMigration
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningKeepScreenOn
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningLeaveAllSystemAppsEnabled
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningLocale
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningLocalTime
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningLogoUri
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningMainColor
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningMode
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningSensorsPermissionGrantOptOut
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningSerialNumber
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningShouldLaunchResultIntent
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningSkipEducationScreens
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningSkipEncryption
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningSkipUserConsent
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningTimeZone
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningUseMobileData
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningWifiAnonymousIdentity
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningWifiCaCertificate
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningWifiDomain
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningWifiEapMethod
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningWifiHidden
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningWifiIdentity
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningWifiPacUrl
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningWifiPassword
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningWifiPhase2Auth
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningWifiProxyBypass
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningWifiProxyHost
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningWifiProxyPort
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningWifiSecurityType
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningWifiSsid
+      value: '""'
+      go_type: string
+    - go_name: ExtraProvisioningWifiUserCertificate
+      value: '""'
+      go_type: string
+    - go_name: ExtraResourceIds
+      value: '""'
+      go_type: string
+    - go_name: ExtraResourceType
+      value: '""'
+      go_type: string
+    - go_name: ExtraResourceTypeDrawable
+      value: "0"
+      go_type: int
+    - go_name: ExtraResourceTypeString
+      value: "0"
+      go_type: int
+    - go_name: ExtraResultLaunchIntent
+      value: '""'
+      go_type: string
+    - go_name: FlagEvictCredentialEncryptionKey
+      value: "0"
+      go_type: int
+    - go_name: FlagManagedCanAccessParent
+      value: "0"
+      go_type: int
+    - go_name: FlagParentCanAccessManaged
+      value: "0"
+      go_type: int
+    - go_name: IdTypeBaseInfo
+      value: "0"
+      go_type: int
+    - go_name: IdTypeImei
+      value: "0"
+      go_type: int
+    - go_name: IdTypeIndividualAttestation
+      value: "0"
+      go_type: int
+    - go_name: IdTypeMeid
+      value: "0"
+      go_type: int
+    - go_name: IdTypeSerial
+      value: "0"
+      go_type: int
+    - go_name: InstallkeyRequestCredentialsAccess
+      value: "0"
+      go_type: int
+    - go_name: InstallkeySetUserSelectable
+      value: "0"
+      go_type: int
+    - go_name: KeyguardDisableBiometrics
+      value: "0"
+      go_type: int
+    - go_name: KeyguardDisableFace
+      value: "0"
+      go_type: int
+    - go_name: KeyguardDisableFeaturesAll
+      value: "0"
+      go_type: int
+    - go_name: KeyguardDisableFeaturesNone
+      value: "0"
+      go_type: int
+    - go_name: KeyguardDisableFingerprint
+      value: "0"
+      go_type: int
+    - go_name: KeyguardDisableIris
+      value: "0"
+      go_type: int
+    - go_name: KeyguardDisableRemoteInput
+      value: "0"
+      go_type: int
+    - go_name: KeyguardDisableSecureCamera
+      value: "0"
+      go_type: int
+    - go_name: KeyguardDisableSecureNotifications
+      value: "0"
+      go_type: int
+    - go_name: KeyguardDisableShortcutsAll
+      value: "0"
+      go_type: int
+    - go_name: KeyguardDisableTrustAgents
+      value: "0"
+      go_type: int
+    - go_name: KeyguardDisableUnredactedNotifications
+      value: "0"
+      go_type: int
+    - go_name: KeyguardDisableWidgetsAll
+      value: "0"
+      go_type: int
+    - go_name: LeaveAllSystemAppsEnabled
+      value: "0"
+      go_type: int
+    - go_name: LockTaskFeatureBlockActivityStartInTask
+      value: "0"
+      go_type: int
+    - go_name: LockTaskFeatureGlobalActions
+      value: "0"
+      go_type: int
+    - go_name: LockTaskFeatureHome
+      value: "0"
+      go_type: int
+    - go_name: LockTaskFeatureKeyguard
+      value: "0"
+      go_type: int
+    - go_name: LockTaskFeatureNone
+      value: "0"
+      go_type: int
+    - go_name: LockTaskFeatureNotifications
+      value: "0"
+      go_type: int
+    - go_name: LockTaskFeatureOverview
+      value: "0"
+      go_type: int
+    - go_name: LockTaskFeatureSystemInfo
+      value: "0"
+      go_type: int
+    - go_name: MakeUserEphemeral
+      value: "0"
+      go_type: int
+    - go_name: MimeTypeProvisioningNfc
+      value: '""'
+      go_type: string
+    - go_name: MteDisabled
+      value: "0"
+      go_type: int
+    - go_name: MteEnabled
+      value: "0"
+      go_type: int
+    - go_name: MteNotControlledByPolicy
+      value: "0"
+      go_type: int
+    - go_name: NearbyStreamingDisabled
+      value: "0"
+      go_type: int
+    - go_name: NearbyStreamingEnabled
+      value: "0"
+      go_type: int
+    - go_name: NearbyStreamingNotControlledByPolicy
+      value: "0"
+      go_type: int
+    - go_name: NearbyStreamingSameManagedAccountOnly
+      value: "0"
+      go_type: int
+    - go_name: OperationSafetyReasonDrivingDistraction
+      value: "0"
+      go_type: int
+    - go_name: PasswordComplexityHigh
+      value: "0"
+      go_type: int
+    - go_name: PasswordComplexityLow
+      value: "0"
+      go_type: int
+    - go_name: PasswordComplexityMedium
+      value: "0"
+      go_type: int
+    - go_name: PasswordComplexityNone
+      value: "0"
+      go_type: int
+    - go_name: PasswordQualityAlphabetic
+      value: "0"
+      go_type: int
+    - go_name: PasswordQualityAlphanumeric
+      value: "0"
+      go_type: int
+    - go_name: PasswordQualityBiometricWeak
+      value: "0"
+      go_type: int
+    - go_name: PasswordQualityComplex
+      value: "0"
+      go_type: int
+    - go_name: PasswordQualityNumeric
+      value: "0"
+      go_type: int
+    - go_name: PasswordQualityNumericComplex
+      value: "0"
+      go_type: int
+    - go_name: PasswordQualitySomething
+      value: "0"
+      go_type: int
+    - go_name: PasswordQualityUnspecified
+      value: "0"
+      go_type: int
+    - go_name: PermissionGrantStateDefault
+      value: "0"
+      go_type: int
+    - go_name: PermissionGrantStateDenied
+      value: "0"
+      go_type: int
+    - go_name: PermissionGrantStateGranted
+      value: "0"
+      go_type: int
+    - go_name: PermissionPolicyAutoDeny
+      value: "0"
+      go_type: int
+    - go_name: PermissionPolicyAutoGrant
+      value: "0"
+      go_type: int
+    - go_name: PermissionPolicyPrompt
+      value: "0"
+      go_type: int
+    - go_name: PersonalAppsNotSuspended
+      value: "0"
+      go_type: int
+    - go_name: PersonalAppsSuspendedExplicitly
+      value: "0"
+      go_type: int
+    - go_name: PersonalAppsSuspendedProfileTimeout
+      value: "0"
+      go_type: int
+    - go_name: PolicyDisableCamera
+      value: '""'
+      go_type: string
+    - go_name: PolicyDisableScreenCapture
+      value: '""'
+      go_type: string
+    - go_name: PrivateDnsModeOff
+      value: "0"
+      go_type: int
+    - go_name: PrivateDnsModeOpportunistic
+      value: "0"
+      go_type: int
+    - go_name: PrivateDnsModeProviderHostname
+      value: "0"
+      go_type: int
+    - go_name: PrivateDnsModeUnknown
+      value: "0"
+      go_type: int
+    - go_name: PrivateDnsSetErrorFailureSetting
+      value: "0"
+      go_type: int
+    - go_name: PrivateDnsSetErrorHostNotServing
+      value: "0"
+      go_type: int
+    - go_name: PrivateDnsSetNoError
+      value: "0"
+      go_type: int
+    - go_name: ProvisioningModeFullyManagedDevice
+      value: "0"
+      go_type: int
+    - go_name: ProvisioningModeManagedProfile
+      value: "0"
+      go_type: int
+    - go_name: ProvisioningModeManagedProfileOnPersonalDevice
+      value: "0"
+      go_type: int
+    - go_name: ResetPasswordDoNotAskCredentialsOnBoot
+      value: "0"
+      go_type: int
+    - go_name: ResetPasswordRequireEntry
+      value: "0"
+      go_type: int
+    - go_name: SkipSetupWizard
+      value: "0"
+      go_type: int
+    - go_name: WifiSecurityEnterprise192
+      value: "0"
+      go_type: int
+    - go_name: WifiSecurityEnterpriseEap
+      value: "0"
+      go_type: int
+    - go_name: WifiSecurityOpen
+      value: "0"
+      go_type: int
+    - go_name: WifiSecurityPersonal
+      value: "0"
+      go_type: int
+    - go_name: WipeEuicc
+      value: "0"
+      go_type: int
+    - go_name: WipeExternalStorage
+      value: "0"
+      go_type: int
+    - go_name: WipeResetProtectionData
+      value: "0"
+      go_type: int
+    - go_name: WipeSilently
+      value: "0"
+      go_type: int

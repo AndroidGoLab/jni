@@ -1,39 +1,122 @@
 package: camera
-go_import: "github.com/xaionaro-go/jni/hardware/camera"
-
+go_import: github.com/xaionaro-go/jni/hardware/camera
 classes:
-  - java_class: android.hardware.camera2.CameraManager
-    go_type: Manager
-    obtain: system_service
-    service_name: "camera"
-    close: true
-
-    methods:
-      - java_method: setTorchMode
-        params:
-          - { java_type: String, go_name: cameraId }
-          - { java_type: boolean, go_name: enabled }
-        returns: void
-        go_name: setTorchMode
-        error: true
-
-      - java_method: registerTorchCallback
-        params:
-          - { java_type: android.hardware.camera2.CameraManager$TorchCallback, go_name: callback }
-          - { java_type: android.os.Handler, go_name: handler }
-        returns: void
-        go_name: registerTorchCallback
-        error: true
-
-      - java_method: unregisterTorchCallback
-        params: [{ java_type: android.hardware.camera2.CameraManager$TorchCallback, go_name: callback }]
-        returns: void
-        go_name: unregisterTorchCallback
-        error: true
-
-callbacks:
-  - java_interface: android.hardware.camera2.CameraManager$TorchCallback
-    go_type: torchCallback
-    kind: abstract_class
-    methods:
-      - { java_method: onTorchModeChanged, params: [String, boolean], go_field: OnTorchModeChanged }
+    - java_class: android.hardware.camera2.CameraManager
+      go_type: cameraManager
+      obtain: system_service
+      service_name: camera
+      close: true
+      methods:
+        - java_method: getCameraCharacteristics
+          go_name: GetCameraCharacteristics
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.hardware.camera2.CameraCharacteristics
+          error: true
+        - java_method: getCameraDeviceSetup
+          go_name: GetCameraDeviceSetup
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.hardware.camera2.CameraDevice$CameraDeviceSetup
+          error: true
+        - java_method: getCameraExtensionCharacteristics
+          go_name: GetCameraExtensionCharacteristics
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.hardware.camera2.CameraExtensionCharacteristics
+          error: true
+        - java_method: getCameraIdList
+          go_name: GetCameraIdList
+          returns: java.lang.String[]
+          error: true
+        - java_method: getConcurrentCameraIds
+          go_name: GetConcurrentCameraIds
+          returns: java.util.Set<java.util.Set<java.lang.String>>
+          error: true
+        - java_method: getTorchStrengthLevel
+          go_name: GetTorchStrengthLevel
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: isCameraDeviceSetupSupported
+          go_name: IsCameraDeviceSetupSupported
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isConcurrentSessionConfigurationSupported
+          go_name: IsConcurrentSessionConfigurationSupported
+          params:
+            - java_type: java.util.Map<java.lang.String
+              go_name: arg0
+            - java_type: android.hardware.camera2.params.SessionConfiguration>
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: openCamera
+          go_name: OpenCamera
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: android.hardware.camera2.CameraDevice$StateCallback
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: registerAvailabilityCallback
+          go_name: RegisterAvailabilityCallback
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.hardware.camera2.CameraManager$AvailabilityCallback
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: registerTorchCallback
+          go_name: RegisterTorchCallback
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.hardware.camera2.CameraManager$TorchCallback
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setTorchMode
+          go_name: SetTorchMode
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: turnOnTorchWithStrengthLevel
+          go_name: TurnOnTorchWithStrengthLevel
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: unregisterAvailabilityCallback
+          go_name: UnregisterAvailabilityCallback
+          params:
+            - java_type: android.hardware.camera2.CameraManager$AvailabilityCallback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unregisterTorchCallback
+          go_name: UnregisterTorchCallback
+          params:
+            - java_type: android.hardware.camera2.CameraManager$TorchCallback
+              go_name: arg0
+          returns: void
+          error: true

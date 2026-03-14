@@ -1,0 +1,22 @@
+package: altitude
+go_import: github.com/xaionaro-go/jni/location/altitude
+classes:
+    - java_class: android.location.altitude.AltitudeConverter
+      go_type: altitudeConverter
+      methods:
+        - java_method: addMslAltitudeToLocation
+          go_name: AddMslAltitudeToLocation
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.location.Location
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: tryAddMslAltitudeToLocation
+          go_name: TryAddMslAltitudeToLocation
+          params:
+            - java_type: android.location.Location
+              go_name: arg0
+          returns: boolean
+          error: true
