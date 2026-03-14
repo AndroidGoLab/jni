@@ -113,6 +113,198 @@ var keystoreKeyStoreJavaGetEntryCmd = &cobra.Command{
 	},
 }
 
+var keystoreKeyGenParamBuilderCmd = &cobra.Command{
+	Use:   "key-gen-param-builder",
+	Short: "KeyGenParamBuilderService operations",
+}
+
+var keystoreKeyGenParamBuilderSetKeySizeCmd = &cobra.Command{
+	Use:   "set-key-size",
+	Short: "SetKeySize RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewKeyGenParamBuilderServiceClient(grpcConn)
+		req := &pb.SetKeySizeRequest{}
+		if v, err := cmd.Flags().GetInt32("key-size"); err == nil {
+			req.KeySize = v
+		}
+		resp, err := client.SetKeySize(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var keystoreKeyGenParamBuilderSetBlockModesCmd = &cobra.Command{
+	Use:   "set-block-modes",
+	Short: "SetBlockModes RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewKeyGenParamBuilderServiceClient(grpcConn)
+		req := &pb.SetBlockModesRequest{}
+		if v, err := cmd.Flags().GetInt64("block-modes"); err == nil {
+			req.BlockModes = v
+		}
+		resp, err := client.SetBlockModes(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var keystoreKeyGenParamBuilderSetEncryptionPaddingsCmd = &cobra.Command{
+	Use:   "set-encryption-paddings",
+	Short: "SetEncryptionPaddings RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewKeyGenParamBuilderServiceClient(grpcConn)
+		req := &pb.SetEncryptionPaddingsRequest{}
+		if v, err := cmd.Flags().GetInt64("paddings"); err == nil {
+			req.Paddings = v
+		}
+		resp, err := client.SetEncryptionPaddings(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var keystoreKeyGenParamBuilderSetSignaturePaddingsCmd = &cobra.Command{
+	Use:   "set-signature-paddings",
+	Short: "SetSignaturePaddings RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewKeyGenParamBuilderServiceClient(grpcConn)
+		req := &pb.SetSignaturePaddingsRequest{}
+		if v, err := cmd.Flags().GetInt64("paddings"); err == nil {
+			req.Paddings = v
+		}
+		resp, err := client.SetSignaturePaddings(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var keystoreKeyGenParamBuilderSetDigestsCmd = &cobra.Command{
+	Use:   "set-digests",
+	Short: "SetDigests RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewKeyGenParamBuilderServiceClient(grpcConn)
+		req := &pb.SetDigestsRequest{}
+		if v, err := cmd.Flags().GetInt64("digests"); err == nil {
+			req.Digests = v
+		}
+		resp, err := client.SetDigests(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var keystoreKeyGenParamBuilderSetUserAuthenticationRequiredCmd = &cobra.Command{
+	Use:   "set-user-authentication-required",
+	Short: "SetUserAuthenticationRequired RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewKeyGenParamBuilderServiceClient(grpcConn)
+		req := &pb.SetUserAuthenticationRequiredRequest{}
+		if v, err := cmd.Flags().GetBool("required"); err == nil {
+			req.Required = v
+		}
+		resp, err := client.SetUserAuthenticationRequired(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var keystoreKeyGenParamBuilderSetUserAuthenticationValidityDurationSecondsCmd = &cobra.Command{
+	Use:   "set-user-authentication-validity-duration-seconds",
+	Short: "SetUserAuthenticationValidityDurationSeconds RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewKeyGenParamBuilderServiceClient(grpcConn)
+		req := &pb.SetUserAuthenticationValidityDurationSecondsRequest{}
+		if v, err := cmd.Flags().GetInt32("seconds"); err == nil {
+			req.Seconds = v
+		}
+		resp, err := client.SetUserAuthenticationValidityDurationSeconds(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var keystoreKeyGenParamBuilderSetInvalidatedByBiometricEnrollmentCmd = &cobra.Command{
+	Use:   "set-invalidated-by-biometric-enrollment",
+	Short: "SetInvalidatedByBiometricEnrollment RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewKeyGenParamBuilderServiceClient(grpcConn)
+		req := &pb.SetInvalidatedByBiometricEnrollmentRequest{}
+		if v, err := cmd.Flags().GetBool("invalidated"); err == nil {
+			req.Invalidated = v
+		}
+		resp, err := client.SetInvalidatedByBiometricEnrollment(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var keystoreKeyGenParamBuilderSetUnlockedDeviceRequiredCmd = &cobra.Command{
+	Use:   "set-unlocked-device-required",
+	Short: "SetUnlockedDeviceRequired RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewKeyGenParamBuilderServiceClient(grpcConn)
+		req := &pb.SetUnlockedDeviceRequiredRequest{}
+		if v, err := cmd.Flags().GetBool("required"); err == nil {
+			req.Required = v
+		}
+		resp, err := client.SetUnlockedDeviceRequired(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var keystoreKeyGenParamBuilderBuildCmd = &cobra.Command{
+	Use:   "build",
+	Short: "Build RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewKeyGenParamBuilderServiceClient(grpcConn)
+		req := &pb.BuildRequest{}
+		resp, err := client.Build(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 var keystoreKeyGeneratorJavaCmd = &cobra.Command{
 	Use:   "key-generator-java",
 	Short: "KeyGeneratorJavaService operations",
@@ -389,6 +581,26 @@ func init() {
 	keystoreKeyStoreJavaGetEntryCmd.Flags().Int64("param", 0, "param (int64)")
 	keystoreKeyStoreJavaCmd.AddCommand(keystoreKeyStoreJavaGetEntryCmd)
 	keystoreCmd.AddCommand(keystoreKeyStoreJavaCmd)
+	keystoreKeyGenParamBuilderSetKeySizeCmd.Flags().Int32("key-size", 0, "key-size (int32)")
+	keystoreKeyGenParamBuilderCmd.AddCommand(keystoreKeyGenParamBuilderSetKeySizeCmd)
+	keystoreKeyGenParamBuilderSetBlockModesCmd.Flags().Int64("block-modes", 0, "block-modes (int64)")
+	keystoreKeyGenParamBuilderCmd.AddCommand(keystoreKeyGenParamBuilderSetBlockModesCmd)
+	keystoreKeyGenParamBuilderSetEncryptionPaddingsCmd.Flags().Int64("paddings", 0, "paddings (int64)")
+	keystoreKeyGenParamBuilderCmd.AddCommand(keystoreKeyGenParamBuilderSetEncryptionPaddingsCmd)
+	keystoreKeyGenParamBuilderSetSignaturePaddingsCmd.Flags().Int64("paddings", 0, "paddings (int64)")
+	keystoreKeyGenParamBuilderCmd.AddCommand(keystoreKeyGenParamBuilderSetSignaturePaddingsCmd)
+	keystoreKeyGenParamBuilderSetDigestsCmd.Flags().Int64("digests", 0, "digests (int64)")
+	keystoreKeyGenParamBuilderCmd.AddCommand(keystoreKeyGenParamBuilderSetDigestsCmd)
+	keystoreKeyGenParamBuilderSetUserAuthenticationRequiredCmd.Flags().Bool("required", false, "required (bool)")
+	keystoreKeyGenParamBuilderCmd.AddCommand(keystoreKeyGenParamBuilderSetUserAuthenticationRequiredCmd)
+	keystoreKeyGenParamBuilderSetUserAuthenticationValidityDurationSecondsCmd.Flags().Int32("seconds", 0, "seconds (int32)")
+	keystoreKeyGenParamBuilderCmd.AddCommand(keystoreKeyGenParamBuilderSetUserAuthenticationValidityDurationSecondsCmd)
+	keystoreKeyGenParamBuilderSetInvalidatedByBiometricEnrollmentCmd.Flags().Bool("invalidated", false, "invalidated (bool)")
+	keystoreKeyGenParamBuilderCmd.AddCommand(keystoreKeyGenParamBuilderSetInvalidatedByBiometricEnrollmentCmd)
+	keystoreKeyGenParamBuilderSetUnlockedDeviceRequiredCmd.Flags().Bool("required", false, "required (bool)")
+	keystoreKeyGenParamBuilderCmd.AddCommand(keystoreKeyGenParamBuilderSetUnlockedDeviceRequiredCmd)
+	keystoreKeyGenParamBuilderCmd.AddCommand(keystoreKeyGenParamBuilderBuildCmd)
+	keystoreCmd.AddCommand(keystoreKeyGenParamBuilderCmd)
 	keystoreKeyGeneratorJavaInitCmd.Flags().Int64("params", 0, "params (int64)")
 	keystoreKeyGeneratorJavaCmd.AddCommand(keystoreKeyGeneratorJavaInitCmd)
 	keystoreKeyGeneratorJavaCmd.AddCommand(keystoreKeyGeneratorJavaGenerateKeyCmd)

@@ -313,6 +313,143 @@ var bluetoothLeScannerStopScanCmd = &cobra.Command{
 	},
 }
 
+var bluetoothScanFilterBuilderCmd = &cobra.Command{
+	Use:   "scan-filter-builder",
+	Short: "ScanFilterBuilderService operations",
+}
+
+var bluetoothScanFilterBuilderSetDeviceNameCmd = &cobra.Command{
+	Use:   "set-device-name",
+	Short: "SetDeviceName RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewScanFilterBuilderServiceClient(grpcConn)
+		req := &pb.SetDeviceNameRequest{}
+		if v, err := cmd.Flags().GetString("name"); err == nil {
+			req.Name = v
+		}
+		resp, err := client.SetDeviceName(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothScanFilterBuilderSetDeviceAddressCmd = &cobra.Command{
+	Use:   "set-device-address",
+	Short: "SetDeviceAddress RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewScanFilterBuilderServiceClient(grpcConn)
+		req := &pb.SetDeviceAddressRequest{}
+		if v, err := cmd.Flags().GetString("address"); err == nil {
+			req.Address = v
+		}
+		resp, err := client.SetDeviceAddress(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothScanFilterBuilderSetServiceUuidCmd = &cobra.Command{
+	Use:   "set-service-uuid",
+	Short: "SetServiceUuid RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewScanFilterBuilderServiceClient(grpcConn)
+		req := &pb.SetServiceUuidRequest{}
+		if v, err := cmd.Flags().GetInt64("uuid"); err == nil {
+			req.Uuid = v
+		}
+		resp, err := client.SetServiceUuid(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothScanFilterBuilderBuildCmd = &cobra.Command{
+	Use:   "build",
+	Short: "Build RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewScanFilterBuilderServiceClient(grpcConn)
+		req := &pb.BuildRequest{}
+		resp, err := client.Build(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothScanSettingsBuilderCmd = &cobra.Command{
+	Use:   "scan-settings-builder",
+	Short: "ScanSettingsBuilderService operations",
+}
+
+var bluetoothScanSettingsBuilderSetScanModeCmd = &cobra.Command{
+	Use:   "set-scan-mode",
+	Short: "SetScanMode RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewScanSettingsBuilderServiceClient(grpcConn)
+		req := &pb.SetScanModeRequest{}
+		if v, err := cmd.Flags().GetInt32("mode"); err == nil {
+			req.Mode = v
+		}
+		resp, err := client.SetScanMode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothScanSettingsBuilderSetReportDelayCmd = &cobra.Command{
+	Use:   "set-report-delay",
+	Short: "SetReportDelay RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewScanSettingsBuilderServiceClient(grpcConn)
+		req := &pb.SetReportDelayRequest{}
+		if v, err := cmd.Flags().GetInt64("delay-ms"); err == nil {
+			req.DelayMs = v
+		}
+		resp, err := client.SetReportDelay(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothScanSettingsBuilderBuildCmd = &cobra.Command{
+	Use:   "build",
+	Short: "Build RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewScanSettingsBuilderServiceClient(grpcConn)
+		req := &pb.BuildRequest{}
+		resp, err := client.Build(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 var bluetoothLeAdvertiserCmd = &cobra.Command{
 	Use:   "le-advertiser",
 	Short: "LeAdvertiserService operations",
@@ -355,6 +492,206 @@ var bluetoothLeAdvertiserStopAdvertisingCmd = &cobra.Command{
 			req.Callback = v
 		}
 		resp, err := client.StopAdvertising(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothAdvertiseSettingsBuilderCmd = &cobra.Command{
+	Use:   "advertise-settings-builder",
+	Short: "AdvertiseSettingsBuilderService operations",
+}
+
+var bluetoothAdvertiseSettingsBuilderSetAdvertiseModeCmd = &cobra.Command{
+	Use:   "set-advertise-mode",
+	Short: "SetAdvertiseMode RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAdvertiseSettingsBuilderServiceClient(grpcConn)
+		req := &pb.SetAdvertiseModeRequest{}
+		if v, err := cmd.Flags().GetInt32("mode"); err == nil {
+			req.Mode = v
+		}
+		resp, err := client.SetAdvertiseMode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothAdvertiseSettingsBuilderSetConnectableCmd = &cobra.Command{
+	Use:   "set-connectable",
+	Short: "SetConnectable RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAdvertiseSettingsBuilderServiceClient(grpcConn)
+		req := &pb.SetConnectableRequest{}
+		if v, err := cmd.Flags().GetBool("connectable"); err == nil {
+			req.Connectable = v
+		}
+		resp, err := client.SetConnectable(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothAdvertiseSettingsBuilderSetTimeoutCmd = &cobra.Command{
+	Use:   "set-timeout",
+	Short: "SetTimeout RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAdvertiseSettingsBuilderServiceClient(grpcConn)
+		req := &pb.SetTimeoutRequest{}
+		if v, err := cmd.Flags().GetInt32("timeout-ms"); err == nil {
+			req.TimeoutMs = v
+		}
+		resp, err := client.SetTimeout(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothAdvertiseSettingsBuilderBuildCmd = &cobra.Command{
+	Use:   "build",
+	Short: "Build RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAdvertiseSettingsBuilderServiceClient(grpcConn)
+		req := &pb.BuildRequest{}
+		resp, err := client.Build(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothAdvertiseDataBuilderCmd = &cobra.Command{
+	Use:   "advertise-data-builder",
+	Short: "AdvertiseDataBuilderService operations",
+}
+
+var bluetoothAdvertiseDataBuilderAddServiceUuidCmd = &cobra.Command{
+	Use:   "add-service-uuid",
+	Short: "AddServiceUuid RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAdvertiseDataBuilderServiceClient(grpcConn)
+		req := &pb.AddServiceUuidRequest{}
+		if v, err := cmd.Flags().GetInt64("uuid"); err == nil {
+			req.Uuid = v
+		}
+		resp, err := client.AddServiceUuid(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothAdvertiseDataBuilderAddServiceDataCmd = &cobra.Command{
+	Use:   "add-service-data",
+	Short: "AddServiceData RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAdvertiseDataBuilderServiceClient(grpcConn)
+		req := &pb.AddServiceDataRequest{}
+		if v, err := cmd.Flags().GetInt64("uuid"); err == nil {
+			req.Uuid = v
+		}
+		if v, err := cmd.Flags().GetInt64("data"); err == nil {
+			req.Data = v
+		}
+		resp, err := client.AddServiceData(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothAdvertiseDataBuilderAddManufacturerDataCmd = &cobra.Command{
+	Use:   "add-manufacturer-data",
+	Short: "AddManufacturerData RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAdvertiseDataBuilderServiceClient(grpcConn)
+		req := &pb.AddManufacturerDataRequest{}
+		if v, err := cmd.Flags().GetInt32("manufacturer-id"); err == nil {
+			req.ManufacturerId = v
+		}
+		if v, err := cmd.Flags().GetInt64("data"); err == nil {
+			req.Data = v
+		}
+		resp, err := client.AddManufacturerData(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothAdvertiseDataBuilderSetIncludeDeviceNameCmd = &cobra.Command{
+	Use:   "set-include-device-name",
+	Short: "SetIncludeDeviceName RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAdvertiseDataBuilderServiceClient(grpcConn)
+		req := &pb.SetIncludeDeviceNameRequest{}
+		if v, err := cmd.Flags().GetBool("include"); err == nil {
+			req.Include = v
+		}
+		resp, err := client.SetIncludeDeviceName(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothAdvertiseDataBuilderSetIncludeTxPowerLevelCmd = &cobra.Command{
+	Use:   "set-include-tx-power-level",
+	Short: "SetIncludeTxPowerLevel RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAdvertiseDataBuilderServiceClient(grpcConn)
+		req := &pb.SetIncludeTxPowerLevelRequest{}
+		if v, err := cmd.Flags().GetBool("include"); err == nil {
+			req.Include = v
+		}
+		resp, err := client.SetIncludeTxPowerLevel(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var bluetoothAdvertiseDataBuilderBuildCmd = &cobra.Command{
+	Use:   "build",
+	Short: "Build RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAdvertiseDataBuilderServiceClient(grpcConn)
+		req := &pb.BuildRequest{}
+		resp, err := client.Build(ctx, req)
 		if err != nil {
 			return err
 		}
@@ -641,6 +978,20 @@ func init() {
 	bluetoothLeScannerStopScanCmd.Flags().Int64("callback", 0, "callback (int64)")
 	bluetoothLeScannerCmd.AddCommand(bluetoothLeScannerStopScanCmd)
 	bluetoothCmd.AddCommand(bluetoothLeScannerCmd)
+	bluetoothScanFilterBuilderSetDeviceNameCmd.Flags().String("name", "", "name (string)")
+	bluetoothScanFilterBuilderCmd.AddCommand(bluetoothScanFilterBuilderSetDeviceNameCmd)
+	bluetoothScanFilterBuilderSetDeviceAddressCmd.Flags().String("address", "", "address (string)")
+	bluetoothScanFilterBuilderCmd.AddCommand(bluetoothScanFilterBuilderSetDeviceAddressCmd)
+	bluetoothScanFilterBuilderSetServiceUuidCmd.Flags().Int64("uuid", 0, "uuid (int64)")
+	bluetoothScanFilterBuilderCmd.AddCommand(bluetoothScanFilterBuilderSetServiceUuidCmd)
+	bluetoothScanFilterBuilderCmd.AddCommand(bluetoothScanFilterBuilderBuildCmd)
+	bluetoothCmd.AddCommand(bluetoothScanFilterBuilderCmd)
+	bluetoothScanSettingsBuilderSetScanModeCmd.Flags().Int32("mode", 0, "mode (int32)")
+	bluetoothScanSettingsBuilderCmd.AddCommand(bluetoothScanSettingsBuilderSetScanModeCmd)
+	bluetoothScanSettingsBuilderSetReportDelayCmd.Flags().Int64("delay-ms", 0, "delay-ms (int64)")
+	bluetoothScanSettingsBuilderCmd.AddCommand(bluetoothScanSettingsBuilderSetReportDelayCmd)
+	bluetoothScanSettingsBuilderCmd.AddCommand(bluetoothScanSettingsBuilderBuildCmd)
+	bluetoothCmd.AddCommand(bluetoothScanSettingsBuilderCmd)
 	bluetoothLeAdvertiserStartAdvertisingCmd.Flags().Int64("settings", 0, "settings (int64)")
 	bluetoothLeAdvertiserStartAdvertisingCmd.Flags().Int64("data", 0, "data (int64)")
 	bluetoothLeAdvertiserStartAdvertisingCmd.Flags().Int64("callback", 0, "callback (int64)")
@@ -648,6 +999,28 @@ func init() {
 	bluetoothLeAdvertiserStopAdvertisingCmd.Flags().Int64("callback", 0, "callback (int64)")
 	bluetoothLeAdvertiserCmd.AddCommand(bluetoothLeAdvertiserStopAdvertisingCmd)
 	bluetoothCmd.AddCommand(bluetoothLeAdvertiserCmd)
+	bluetoothAdvertiseSettingsBuilderSetAdvertiseModeCmd.Flags().Int32("mode", 0, "mode (int32)")
+	bluetoothAdvertiseSettingsBuilderCmd.AddCommand(bluetoothAdvertiseSettingsBuilderSetAdvertiseModeCmd)
+	bluetoothAdvertiseSettingsBuilderSetConnectableCmd.Flags().Bool("connectable", false, "connectable (bool)")
+	bluetoothAdvertiseSettingsBuilderCmd.AddCommand(bluetoothAdvertiseSettingsBuilderSetConnectableCmd)
+	bluetoothAdvertiseSettingsBuilderSetTimeoutCmd.Flags().Int32("timeout-ms", 0, "timeout-ms (int32)")
+	bluetoothAdvertiseSettingsBuilderCmd.AddCommand(bluetoothAdvertiseSettingsBuilderSetTimeoutCmd)
+	bluetoothAdvertiseSettingsBuilderCmd.AddCommand(bluetoothAdvertiseSettingsBuilderBuildCmd)
+	bluetoothCmd.AddCommand(bluetoothAdvertiseSettingsBuilderCmd)
+	bluetoothAdvertiseDataBuilderAddServiceUuidCmd.Flags().Int64("uuid", 0, "uuid (int64)")
+	bluetoothAdvertiseDataBuilderCmd.AddCommand(bluetoothAdvertiseDataBuilderAddServiceUuidCmd)
+	bluetoothAdvertiseDataBuilderAddServiceDataCmd.Flags().Int64("uuid", 0, "uuid (int64)")
+	bluetoothAdvertiseDataBuilderAddServiceDataCmd.Flags().Int64("data", 0, "data (int64)")
+	bluetoothAdvertiseDataBuilderCmd.AddCommand(bluetoothAdvertiseDataBuilderAddServiceDataCmd)
+	bluetoothAdvertiseDataBuilderAddManufacturerDataCmd.Flags().Int32("manufacturer-id", 0, "manufacturer-id (int32)")
+	bluetoothAdvertiseDataBuilderAddManufacturerDataCmd.Flags().Int64("data", 0, "data (int64)")
+	bluetoothAdvertiseDataBuilderCmd.AddCommand(bluetoothAdvertiseDataBuilderAddManufacturerDataCmd)
+	bluetoothAdvertiseDataBuilderSetIncludeDeviceNameCmd.Flags().Bool("include", false, "include (bool)")
+	bluetoothAdvertiseDataBuilderCmd.AddCommand(bluetoothAdvertiseDataBuilderSetIncludeDeviceNameCmd)
+	bluetoothAdvertiseDataBuilderSetIncludeTxPowerLevelCmd.Flags().Bool("include", false, "include (bool)")
+	bluetoothAdvertiseDataBuilderCmd.AddCommand(bluetoothAdvertiseDataBuilderSetIncludeTxPowerLevelCmd)
+	bluetoothAdvertiseDataBuilderCmd.AddCommand(bluetoothAdvertiseDataBuilderBuildCmd)
+	bluetoothCmd.AddCommand(bluetoothAdvertiseDataBuilderCmd)
 	bluetoothGATTClientCmd.AddCommand(bluetoothGATTClientDiscoverServicesCmd)
 	bluetoothGATTClientCmd.AddCommand(bluetoothGATTClientGetServicesCmd)
 	bluetoothGATTClientReadCharacteristicCmd.Flags().Int64("characteristic", 0, "characteristic (int64)")

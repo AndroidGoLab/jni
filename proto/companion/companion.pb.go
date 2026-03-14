@@ -279,6 +279,262 @@ func (x *GetAssociationsRawResponse) GetResult() int64 {
 	return 0
 }
 
+type SetSingleDeviceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SingleDevice  bool                   `protobuf:"varint,1,opt,name=single_device,json=singleDevice,proto3" json:"single_device,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetSingleDeviceRequest) Reset() {
+	*x = SetSingleDeviceRequest{}
+	mi := &file_proto_companion_companion_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetSingleDeviceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetSingleDeviceRequest) ProtoMessage() {}
+
+func (x *SetSingleDeviceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetSingleDeviceRequest.ProtoReflect.Descriptor instead.
+func (*SetSingleDeviceRequest) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *SetSingleDeviceRequest) GetSingleDevice() bool {
+	if x != nil {
+		return x.SingleDevice
+	}
+	return false
+}
+
+type SetSingleDeviceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetSingleDeviceResponse) Reset() {
+	*x = SetSingleDeviceResponse{}
+	mi := &file_proto_companion_companion_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetSingleDeviceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetSingleDeviceResponse) ProtoMessage() {}
+
+func (x *SetSingleDeviceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetSingleDeviceResponse.ProtoReflect.Descriptor instead.
+func (*SetSingleDeviceResponse) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *SetSingleDeviceResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type AddDeviceFilterRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filter        int64                  `protobuf:"varint,1,opt,name=filter,proto3" json:"filter,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddDeviceFilterRequest) Reset() {
+	*x = AddDeviceFilterRequest{}
+	mi := &file_proto_companion_companion_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddDeviceFilterRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddDeviceFilterRequest) ProtoMessage() {}
+
+func (x *AddDeviceFilterRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddDeviceFilterRequest.ProtoReflect.Descriptor instead.
+func (*AddDeviceFilterRequest) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *AddDeviceFilterRequest) GetFilter() int64 {
+	if x != nil {
+		return x.Filter
+	}
+	return 0
+}
+
+type AddDeviceFilterResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddDeviceFilterResponse) Reset() {
+	*x = AddDeviceFilterResponse{}
+	mi := &file_proto_companion_companion_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddDeviceFilterResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddDeviceFilterResponse) ProtoMessage() {}
+
+func (x *AddDeviceFilterResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddDeviceFilterResponse.ProtoReflect.Descriptor instead.
+func (*AddDeviceFilterResponse) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *AddDeviceFilterResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type BuildRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuildRequest) Reset() {
+	*x = BuildRequest{}
+	mi := &file_proto_companion_companion_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuildRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuildRequest) ProtoMessage() {}
+
+func (x *BuildRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuildRequest.ProtoReflect.Descriptor instead.
+func (*BuildRequest) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{10}
+}
+
+type BuildResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuildResponse) Reset() {
+	*x = BuildResponse{}
+	mi := &file_proto_companion_companion_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuildResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuildResponse) ProtoMessage() {}
+
+func (x *BuildResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_companion_companion_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuildResponse.ProtoReflect.Descriptor instead.
+func (*BuildResponse) Descriptor() ([]byte, []int) {
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *BuildResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
 type CompanionCallbackOnDeviceFoundEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
@@ -288,7 +544,7 @@ type CompanionCallbackOnDeviceFoundEvent struct {
 
 func (x *CompanionCallbackOnDeviceFoundEvent) Reset() {
 	*x = CompanionCallbackOnDeviceFoundEvent{}
-	mi := &file_proto_companion_companion_proto_msgTypes[6]
+	mi := &file_proto_companion_companion_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -300,7 +556,7 @@ func (x *CompanionCallbackOnDeviceFoundEvent) String() string {
 func (*CompanionCallbackOnDeviceFoundEvent) ProtoMessage() {}
 
 func (x *CompanionCallbackOnDeviceFoundEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_companion_companion_proto_msgTypes[6]
+	mi := &file_proto_companion_companion_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -313,7 +569,7 @@ func (x *CompanionCallbackOnDeviceFoundEvent) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use CompanionCallbackOnDeviceFoundEvent.ProtoReflect.Descriptor instead.
 func (*CompanionCallbackOnDeviceFoundEvent) Descriptor() ([]byte, []int) {
-	return file_proto_companion_companion_proto_rawDescGZIP(), []int{6}
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *CompanionCallbackOnDeviceFoundEvent) GetArg0() int64 {
@@ -332,7 +588,7 @@ type CompanionCallbackOnFailureEvent struct {
 
 func (x *CompanionCallbackOnFailureEvent) Reset() {
 	*x = CompanionCallbackOnFailureEvent{}
-	mi := &file_proto_companion_companion_proto_msgTypes[7]
+	mi := &file_proto_companion_companion_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -344,7 +600,7 @@ func (x *CompanionCallbackOnFailureEvent) String() string {
 func (*CompanionCallbackOnFailureEvent) ProtoMessage() {}
 
 func (x *CompanionCallbackOnFailureEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_companion_companion_proto_msgTypes[7]
+	mi := &file_proto_companion_companion_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -357,7 +613,7 @@ func (x *CompanionCallbackOnFailureEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CompanionCallbackOnFailureEvent.ProtoReflect.Descriptor instead.
 func (*CompanionCallbackOnFailureEvent) Descriptor() ([]byte, []int) {
-	return file_proto_companion_companion_proto_rawDescGZIP(), []int{7}
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *CompanionCallbackOnFailureEvent) GetArg0() int64 {
@@ -377,7 +633,7 @@ type CompanionCallbackEvent struct {
 
 func (x *CompanionCallbackEvent) Reset() {
 	*x = CompanionCallbackEvent{}
-	mi := &file_proto_companion_companion_proto_msgTypes[8]
+	mi := &file_proto_companion_companion_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -389,7 +645,7 @@ func (x *CompanionCallbackEvent) String() string {
 func (*CompanionCallbackEvent) ProtoMessage() {}
 
 func (x *CompanionCallbackEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_companion_companion_proto_msgTypes[8]
+	mi := &file_proto_companion_companion_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -402,7 +658,7 @@ func (x *CompanionCallbackEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CompanionCallbackEvent.ProtoReflect.Descriptor instead.
 func (*CompanionCallbackEvent) Descriptor() ([]byte, []int) {
-	return file_proto_companion_companion_proto_rawDescGZIP(), []int{8}
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *CompanionCallbackEvent) GetOnDeviceFound() *CompanionCallbackOnDeviceFoundEvent {
@@ -427,7 +683,7 @@ type SubscribeCompanionCallbackRequest struct {
 
 func (x *SubscribeCompanionCallbackRequest) Reset() {
 	*x = SubscribeCompanionCallbackRequest{}
-	mi := &file_proto_companion_companion_proto_msgTypes[9]
+	mi := &file_proto_companion_companion_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -439,7 +695,7 @@ func (x *SubscribeCompanionCallbackRequest) String() string {
 func (*SubscribeCompanionCallbackRequest) ProtoMessage() {}
 
 func (x *SubscribeCompanionCallbackRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_companion_companion_proto_msgTypes[9]
+	mi := &file_proto_companion_companion_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -452,7 +708,7 @@ func (x *SubscribeCompanionCallbackRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use SubscribeCompanionCallbackRequest.ProtoReflect.Descriptor instead.
 func (*SubscribeCompanionCallbackRequest) Descriptor() ([]byte, []int) {
-	return file_proto_companion_companion_proto_rawDescGZIP(), []int{9}
+	return file_proto_companion_companion_proto_rawDescGZIP(), []int{15}
 }
 
 var File_proto_companion_companion_proto protoreflect.FileDescriptor
@@ -470,6 +726,17 @@ const file_proto_companion_companion_proto_rawDesc = "" +
 	"\x1bDisassociateByIdRawResponse\"\x1b\n" +
 	"\x19GetAssociationsRawRequest\"4\n" +
 	"\x1aGetAssociationsRawResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"=\n" +
+	"\x16SetSingleDeviceRequest\x12#\n" +
+	"\rsingle_device\x18\x01 \x01(\bR\fsingleDevice\"1\n" +
+	"\x17SetSingleDeviceResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"0\n" +
+	"\x16AddDeviceFilterRequest\x12\x16\n" +
+	"\x06filter\x18\x01 \x01(\x03R\x06filter\"1\n" +
+	"\x17AddDeviceFilterResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x0e\n" +
+	"\fBuildRequest\"'\n" +
+	"\rBuildResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\x03R\x06result\"9\n" +
 	"#CompanionCallbackOnDeviceFoundEvent\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"5\n" +
@@ -485,7 +752,11 @@ const file_proto_companion_companion_proto_rawDesc = "" +
 	"\x0eManagerService\x12O\n" +
 	"\fAssociateRaw\x12\x1e.companion.AssociateRawRequest\x1a\x1f.companion.AssociateRawResponse\x12d\n" +
 	"\x13DisassociateByIdRaw\x12%.companion.DisassociateByIdRawRequest\x1a&.companion.DisassociateByIdRawResponse\x12a\n" +
-	"\x12GetAssociationsRaw\x12$.companion.GetAssociationsRawRequest\x1a%.companion.GetAssociationsRawResponse2\x8b\x01\n" +
+	"\x12GetAssociationsRaw\x12$.companion.GetAssociationsRawRequest\x1a%.companion.GetAssociationsRawResponse2\x92\x02\n" +
+	" AssociationRequestBuilderService\x12X\n" +
+	"\x0fSetSingleDevice\x12!.companion.SetSingleDeviceRequest\x1a\".companion.SetSingleDeviceResponse\x12X\n" +
+	"\x0fAddDeviceFilter\x12!.companion.AddDeviceFilterRequest\x1a\".companion.AddDeviceFilterResponse\x12:\n" +
+	"\x05Build\x12\x17.companion.BuildRequest\x1a\x18.companion.BuildResponse2\x8b\x01\n" +
 	"\x18CompanionCallbackService\x12o\n" +
 	"\x1aSubscribeCompanionCallback\x12,.companion.SubscribeCompanionCallbackRequest\x1a!.companion.CompanionCallbackEvent0\x01B,Z*github.com/xaionaro-go/jni/proto/companionb\x06proto3"
 
@@ -501,7 +772,7 @@ func file_proto_companion_companion_proto_rawDescGZIP() []byte {
 	return file_proto_companion_companion_proto_rawDescData
 }
 
-var file_proto_companion_companion_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_proto_companion_companion_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_proto_companion_companion_proto_goTypes = []any{
 	(*AssociateRawRequest)(nil),                 // 0: companion.AssociateRawRequest
 	(*AssociateRawResponse)(nil),                // 1: companion.AssociateRawResponse
@@ -509,27 +780,39 @@ var file_proto_companion_companion_proto_goTypes = []any{
 	(*DisassociateByIdRawResponse)(nil),         // 3: companion.DisassociateByIdRawResponse
 	(*GetAssociationsRawRequest)(nil),           // 4: companion.GetAssociationsRawRequest
 	(*GetAssociationsRawResponse)(nil),          // 5: companion.GetAssociationsRawResponse
-	(*CompanionCallbackOnDeviceFoundEvent)(nil), // 6: companion.CompanionCallbackOnDeviceFoundEvent
-	(*CompanionCallbackOnFailureEvent)(nil),     // 7: companion.CompanionCallbackOnFailureEvent
-	(*CompanionCallbackEvent)(nil),              // 8: companion.CompanionCallbackEvent
-	(*SubscribeCompanionCallbackRequest)(nil),   // 9: companion.SubscribeCompanionCallbackRequest
+	(*SetSingleDeviceRequest)(nil),              // 6: companion.SetSingleDeviceRequest
+	(*SetSingleDeviceResponse)(nil),             // 7: companion.SetSingleDeviceResponse
+	(*AddDeviceFilterRequest)(nil),              // 8: companion.AddDeviceFilterRequest
+	(*AddDeviceFilterResponse)(nil),             // 9: companion.AddDeviceFilterResponse
+	(*BuildRequest)(nil),                        // 10: companion.BuildRequest
+	(*BuildResponse)(nil),                       // 11: companion.BuildResponse
+	(*CompanionCallbackOnDeviceFoundEvent)(nil), // 12: companion.CompanionCallbackOnDeviceFoundEvent
+	(*CompanionCallbackOnFailureEvent)(nil),     // 13: companion.CompanionCallbackOnFailureEvent
+	(*CompanionCallbackEvent)(nil),              // 14: companion.CompanionCallbackEvent
+	(*SubscribeCompanionCallbackRequest)(nil),   // 15: companion.SubscribeCompanionCallbackRequest
 }
 var file_proto_companion_companion_proto_depIdxs = []int32{
-	6, // 0: companion.CompanionCallbackEvent.on_device_found:type_name -> companion.CompanionCallbackOnDeviceFoundEvent
-	7, // 1: companion.CompanionCallbackEvent.on_failure:type_name -> companion.CompanionCallbackOnFailureEvent
-	0, // 2: companion.ManagerService.AssociateRaw:input_type -> companion.AssociateRawRequest
-	2, // 3: companion.ManagerService.DisassociateByIdRaw:input_type -> companion.DisassociateByIdRawRequest
-	4, // 4: companion.ManagerService.GetAssociationsRaw:input_type -> companion.GetAssociationsRawRequest
-	9, // 5: companion.CompanionCallbackService.SubscribeCompanionCallback:input_type -> companion.SubscribeCompanionCallbackRequest
-	1, // 6: companion.ManagerService.AssociateRaw:output_type -> companion.AssociateRawResponse
-	3, // 7: companion.ManagerService.DisassociateByIdRaw:output_type -> companion.DisassociateByIdRawResponse
-	5, // 8: companion.ManagerService.GetAssociationsRaw:output_type -> companion.GetAssociationsRawResponse
-	8, // 9: companion.CompanionCallbackService.SubscribeCompanionCallback:output_type -> companion.CompanionCallbackEvent
-	6, // [6:10] is the sub-list for method output_type
-	2, // [2:6] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	12, // 0: companion.CompanionCallbackEvent.on_device_found:type_name -> companion.CompanionCallbackOnDeviceFoundEvent
+	13, // 1: companion.CompanionCallbackEvent.on_failure:type_name -> companion.CompanionCallbackOnFailureEvent
+	0,  // 2: companion.ManagerService.AssociateRaw:input_type -> companion.AssociateRawRequest
+	2,  // 3: companion.ManagerService.DisassociateByIdRaw:input_type -> companion.DisassociateByIdRawRequest
+	4,  // 4: companion.ManagerService.GetAssociationsRaw:input_type -> companion.GetAssociationsRawRequest
+	6,  // 5: companion.AssociationRequestBuilderService.SetSingleDevice:input_type -> companion.SetSingleDeviceRequest
+	8,  // 6: companion.AssociationRequestBuilderService.AddDeviceFilter:input_type -> companion.AddDeviceFilterRequest
+	10, // 7: companion.AssociationRequestBuilderService.Build:input_type -> companion.BuildRequest
+	15, // 8: companion.CompanionCallbackService.SubscribeCompanionCallback:input_type -> companion.SubscribeCompanionCallbackRequest
+	1,  // 9: companion.ManagerService.AssociateRaw:output_type -> companion.AssociateRawResponse
+	3,  // 10: companion.ManagerService.DisassociateByIdRaw:output_type -> companion.DisassociateByIdRawResponse
+	5,  // 11: companion.ManagerService.GetAssociationsRaw:output_type -> companion.GetAssociationsRawResponse
+	7,  // 12: companion.AssociationRequestBuilderService.SetSingleDevice:output_type -> companion.SetSingleDeviceResponse
+	9,  // 13: companion.AssociationRequestBuilderService.AddDeviceFilter:output_type -> companion.AddDeviceFilterResponse
+	11, // 14: companion.AssociationRequestBuilderService.Build:output_type -> companion.BuildResponse
+	14, // 15: companion.CompanionCallbackService.SubscribeCompanionCallback:output_type -> companion.CompanionCallbackEvent
+	9,  // [9:16] is the sub-list for method output_type
+	2,  // [2:9] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_proto_companion_companion_proto_init() }
@@ -537,16 +820,16 @@ func file_proto_companion_companion_proto_init() {
 	if File_proto_companion_companion_proto != nil {
 		return
 	}
-	file_proto_companion_companion_proto_msgTypes[8].OneofWrappers = []any{}
+	file_proto_companion_companion_proto_msgTypes[14].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_companion_companion_proto_rawDesc), len(file_proto_companion_companion_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   16,
 			NumExtensions: 0,
-			NumServices:   2,
+			NumServices:   3,
 		},
 		GoTypes:           file_proto_companion_companion_proto_goTypes,
 		DependencyIndexes: file_proto_companion_companion_proto_depIdxs,

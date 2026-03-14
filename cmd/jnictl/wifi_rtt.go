@@ -62,6 +62,46 @@ var wifirttManagerStartRangingRawCmd = &cobra.Command{
 	},
 }
 
+var wifirttRangingRequestBuilderCmd = &cobra.Command{
+	Use:   "ranging-request-builder",
+	Short: "RangingRequestBuilderService operations",
+}
+
+var wifirttRangingRequestBuilderAddAccessPointCmd = &cobra.Command{
+	Use:   "add-access-point",
+	Short: "AddAccessPoint RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewRangingRequestBuilderServiceClient(grpcConn)
+		req := &pb.AddAccessPointRequest{}
+		if v, err := cmd.Flags().GetInt64("scan-result"); err == nil {
+			req.ScanResult = v
+		}
+		resp, err := client.AddAccessPoint(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var wifirttRangingRequestBuilderBuildCmd = &cobra.Command{
+	Use:   "build",
+	Short: "Build RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewRangingRequestBuilderServiceClient(grpcConn)
+		req := &pb.BuildRequest{}
+		resp, err := client.Build(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 var wifirttRangingResultCallbackCmd = &cobra.Command{
 	Use:   "ranging-result-callback",
 	Short: "RangingResultCallbackService operations",
@@ -104,6 +144,10 @@ func init() {
 	wifirttManagerStartRangingRawCmd.Flags().Int64("callback", 0, "callback (int64)")
 	wifirttManagerCmd.AddCommand(wifirttManagerStartRangingRawCmd)
 	wifirttCmd.AddCommand(wifirttManagerCmd)
+	wifirttRangingRequestBuilderAddAccessPointCmd.Flags().Int64("scan-result", 0, "scan-result (int64)")
+	wifirttRangingRequestBuilderCmd.AddCommand(wifirttRangingRequestBuilderAddAccessPointCmd)
+	wifirttRangingRequestBuilderCmd.AddCommand(wifirttRangingRequestBuilderBuildCmd)
+	wifirttCmd.AddCommand(wifirttRangingRequestBuilderCmd)
 	wifirttRangingResultCallbackCmd.AddCommand(wifirttRangingResultCallbackSubscribeRangingResultCallbackCmd)
 	wifirttCmd.AddCommand(wifirttRangingResultCallbackCmd)
 	rootCmd.AddCommand(wifirttCmd)

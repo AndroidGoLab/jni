@@ -427,6 +427,108 @@ var ManagerService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	P2PConfigService_ToString_FullMethodName = "/wifi_p2p.P2pConfigService/ToString"
+)
+
+// P2PConfigServiceClient is the client API for P2PConfigService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type P2PConfigServiceClient interface {
+	ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error)
+}
+
+type p2PConfigServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewP2PConfigServiceClient(cc grpc.ClientConnInterface) P2PConfigServiceClient {
+	return &p2PConfigServiceClient{cc}
+}
+
+func (c *p2PConfigServiceClient) ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ToStringResponse)
+	err := c.cc.Invoke(ctx, P2PConfigService_ToString_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// P2PConfigServiceServer is the server API for P2PConfigService service.
+// All implementations must embed UnimplementedP2PConfigServiceServer
+// for forward compatibility.
+type P2PConfigServiceServer interface {
+	ToString(context.Context, *ToStringRequest) (*ToStringResponse, error)
+	mustEmbedUnimplementedP2PConfigServiceServer()
+}
+
+// UnimplementedP2PConfigServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedP2PConfigServiceServer struct{}
+
+func (UnimplementedP2PConfigServiceServer) ToString(context.Context, *ToStringRequest) (*ToStringResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ToString not implemented")
+}
+func (UnimplementedP2PConfigServiceServer) mustEmbedUnimplementedP2PConfigServiceServer() {}
+func (UnimplementedP2PConfigServiceServer) testEmbeddedByValue()                          {}
+
+// UnsafeP2PConfigServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to P2PConfigServiceServer will
+// result in compilation errors.
+type UnsafeP2PConfigServiceServer interface {
+	mustEmbedUnimplementedP2PConfigServiceServer()
+}
+
+func RegisterP2PConfigServiceServer(s grpc.ServiceRegistrar, srv P2PConfigServiceServer) {
+	// If the following call panics, it indicates UnimplementedP2PConfigServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&P2PConfigService_ServiceDesc, srv)
+}
+
+func _P2PConfigService_ToString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToStringRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(P2PConfigServiceServer).ToString(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: P2PConfigService_ToString_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(P2PConfigServiceServer).ToString(ctx, req.(*ToStringRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// P2PConfigService_ServiceDesc is the grpc.ServiceDesc for P2PConfigService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var P2PConfigService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "wifi_p2p.P2pConfigService",
+	HandlerType: (*P2PConfigServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ToString",
+			Handler:    _P2PConfigService_ToString_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/wifi_p2p/wifi_p2p.proto",
+}
+
+const (
 	ActionListenerService_SubscribeActionListener_FullMethodName = "/wifi_p2p.ActionListenerService/SubscribeActionListener"
 )
 

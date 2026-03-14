@@ -47,8 +47,14 @@ type CLIFlag struct {
 }
 
 // buildCLIPackage converts ProtoData into a CLIPackage.
+// goClientNames maps lowercase service name → actual Go service name from
+// the compiled proto stubs (to handle protoc naming quirks like P2p → P2P).
 // Returns nil if there are no usable RPCs.
-func buildCLIPackage(pd *protogen.ProtoData, goModule string) *CLIPackage {
+func buildCLIPackage(
+	pd *protogen.ProtoData,
+	goModule string,
+	goClientNames map[string]string,
+) *CLIPackage {
 	msgFields := buildMessageFieldMap(pd)
 
 	pkg := &CLIPackage{
@@ -58,7 +64,7 @@ func buildCLIPackage(pd *protogen.ProtoData, goModule string) *CLIPackage {
 	}
 
 	for _, svc := range pd.Services {
-		cliSvc := buildCLIService(svc, msgFields)
+		cliSvc := buildCLIService(svc, msgFields, goClientNames)
 		if len(cliSvc.Commands) == 0 {
 			continue
 		}
@@ -84,10 +90,19 @@ func buildMessageFieldMap(pd *protogen.ProtoData) map[string][]protogen.ProtoFie
 func buildCLIService(
 	svc protogen.ProtoService,
 	msgFields map[string][]protogen.ProtoField,
+	goClientNames map[string]string,
 ) CLIService {
 	svcName := strings.TrimSuffix(svc.Name, "Service")
+
+	// Resolve the actual Go service name from compiled proto stubs.
+	// Protoc may rename e.g. "P2pConfigService" → "P2PConfigService".
+	goServiceName := svc.Name
+	if resolved, ok := goClientNames[strings.ToLower(svc.Name)]; ok {
+		goServiceName = resolved
+	}
+
 	cs := CLIService{
-		ProtoServiceName: svc.Name,
+		ProtoServiceName: goServiceName,
 		CobraName:        toKebabCase(svcName),
 		VarName:          svcName,
 		Short:            svc.Name + " operations",

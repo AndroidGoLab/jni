@@ -885,6 +885,402 @@ var LeScannerService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	ScanFilterBuilderService_SetDeviceName_FullMethodName    = "/bluetooth.ScanFilterBuilderService/SetDeviceName"
+	ScanFilterBuilderService_SetDeviceAddress_FullMethodName = "/bluetooth.ScanFilterBuilderService/SetDeviceAddress"
+	ScanFilterBuilderService_SetServiceUuid_FullMethodName   = "/bluetooth.ScanFilterBuilderService/SetServiceUuid"
+	ScanFilterBuilderService_Build_FullMethodName            = "/bluetooth.ScanFilterBuilderService/Build"
+)
+
+// ScanFilterBuilderServiceClient is the client API for ScanFilterBuilderService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ScanFilterBuilderServiceClient interface {
+	SetDeviceName(ctx context.Context, in *SetDeviceNameRequest, opts ...grpc.CallOption) (*SetDeviceNameResponse, error)
+	SetDeviceAddress(ctx context.Context, in *SetDeviceAddressRequest, opts ...grpc.CallOption) (*SetDeviceAddressResponse, error)
+	SetServiceUuid(ctx context.Context, in *SetServiceUuidRequest, opts ...grpc.CallOption) (*SetServiceUuidResponse, error)
+	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
+}
+
+type scanFilterBuilderServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewScanFilterBuilderServiceClient(cc grpc.ClientConnInterface) ScanFilterBuilderServiceClient {
+	return &scanFilterBuilderServiceClient{cc}
+}
+
+func (c *scanFilterBuilderServiceClient) SetDeviceName(ctx context.Context, in *SetDeviceNameRequest, opts ...grpc.CallOption) (*SetDeviceNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDeviceNameResponse)
+	err := c.cc.Invoke(ctx, ScanFilterBuilderService_SetDeviceName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanFilterBuilderServiceClient) SetDeviceAddress(ctx context.Context, in *SetDeviceAddressRequest, opts ...grpc.CallOption) (*SetDeviceAddressResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDeviceAddressResponse)
+	err := c.cc.Invoke(ctx, ScanFilterBuilderService_SetDeviceAddress_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanFilterBuilderServiceClient) SetServiceUuid(ctx context.Context, in *SetServiceUuidRequest, opts ...grpc.CallOption) (*SetServiceUuidResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetServiceUuidResponse)
+	err := c.cc.Invoke(ctx, ScanFilterBuilderService_SetServiceUuid_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanFilterBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuildResponse)
+	err := c.cc.Invoke(ctx, ScanFilterBuilderService_Build_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ScanFilterBuilderServiceServer is the server API for ScanFilterBuilderService service.
+// All implementations must embed UnimplementedScanFilterBuilderServiceServer
+// for forward compatibility.
+type ScanFilterBuilderServiceServer interface {
+	SetDeviceName(context.Context, *SetDeviceNameRequest) (*SetDeviceNameResponse, error)
+	SetDeviceAddress(context.Context, *SetDeviceAddressRequest) (*SetDeviceAddressResponse, error)
+	SetServiceUuid(context.Context, *SetServiceUuidRequest) (*SetServiceUuidResponse, error)
+	Build(context.Context, *BuildRequest) (*BuildResponse, error)
+	mustEmbedUnimplementedScanFilterBuilderServiceServer()
+}
+
+// UnimplementedScanFilterBuilderServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedScanFilterBuilderServiceServer struct{}
+
+func (UnimplementedScanFilterBuilderServiceServer) SetDeviceName(context.Context, *SetDeviceNameRequest) (*SetDeviceNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetDeviceName not implemented")
+}
+func (UnimplementedScanFilterBuilderServiceServer) SetDeviceAddress(context.Context, *SetDeviceAddressRequest) (*SetDeviceAddressResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetDeviceAddress not implemented")
+}
+func (UnimplementedScanFilterBuilderServiceServer) SetServiceUuid(context.Context, *SetServiceUuidRequest) (*SetServiceUuidResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetServiceUuid not implemented")
+}
+func (UnimplementedScanFilterBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
+}
+func (UnimplementedScanFilterBuilderServiceServer) mustEmbedUnimplementedScanFilterBuilderServiceServer() {
+}
+func (UnimplementedScanFilterBuilderServiceServer) testEmbeddedByValue() {}
+
+// UnsafeScanFilterBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ScanFilterBuilderServiceServer will
+// result in compilation errors.
+type UnsafeScanFilterBuilderServiceServer interface {
+	mustEmbedUnimplementedScanFilterBuilderServiceServer()
+}
+
+func RegisterScanFilterBuilderServiceServer(s grpc.ServiceRegistrar, srv ScanFilterBuilderServiceServer) {
+	// If the following call panics, it indicates UnimplementedScanFilterBuilderServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&ScanFilterBuilderService_ServiceDesc, srv)
+}
+
+func _ScanFilterBuilderService_SetDeviceName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDeviceNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanFilterBuilderServiceServer).SetDeviceName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanFilterBuilderService_SetDeviceName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanFilterBuilderServiceServer).SetDeviceName(ctx, req.(*SetDeviceNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanFilterBuilderService_SetDeviceAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDeviceAddressRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanFilterBuilderServiceServer).SetDeviceAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanFilterBuilderService_SetDeviceAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanFilterBuilderServiceServer).SetDeviceAddress(ctx, req.(*SetDeviceAddressRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanFilterBuilderService_SetServiceUuid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetServiceUuidRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanFilterBuilderServiceServer).SetServiceUuid(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanFilterBuilderService_SetServiceUuid_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanFilterBuilderServiceServer).SetServiceUuid(ctx, req.(*SetServiceUuidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanFilterBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanFilterBuilderServiceServer).Build(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanFilterBuilderService_Build_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanFilterBuilderServiceServer).Build(ctx, req.(*BuildRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ScanFilterBuilderService_ServiceDesc is the grpc.ServiceDesc for ScanFilterBuilderService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ScanFilterBuilderService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bluetooth.ScanFilterBuilderService",
+	HandlerType: (*ScanFilterBuilderServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SetDeviceName",
+			Handler:    _ScanFilterBuilderService_SetDeviceName_Handler,
+		},
+		{
+			MethodName: "SetDeviceAddress",
+			Handler:    _ScanFilterBuilderService_SetDeviceAddress_Handler,
+		},
+		{
+			MethodName: "SetServiceUuid",
+			Handler:    _ScanFilterBuilderService_SetServiceUuid_Handler,
+		},
+		{
+			MethodName: "Build",
+			Handler:    _ScanFilterBuilderService_Build_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/bluetooth/bluetooth.proto",
+}
+
+const (
+	ScanSettingsBuilderService_SetScanMode_FullMethodName    = "/bluetooth.ScanSettingsBuilderService/SetScanMode"
+	ScanSettingsBuilderService_SetReportDelay_FullMethodName = "/bluetooth.ScanSettingsBuilderService/SetReportDelay"
+	ScanSettingsBuilderService_Build_FullMethodName          = "/bluetooth.ScanSettingsBuilderService/Build"
+)
+
+// ScanSettingsBuilderServiceClient is the client API for ScanSettingsBuilderService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ScanSettingsBuilderServiceClient interface {
+	SetScanMode(ctx context.Context, in *SetScanModeRequest, opts ...grpc.CallOption) (*SetScanModeResponse, error)
+	SetReportDelay(ctx context.Context, in *SetReportDelayRequest, opts ...grpc.CallOption) (*SetReportDelayResponse, error)
+	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
+}
+
+type scanSettingsBuilderServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewScanSettingsBuilderServiceClient(cc grpc.ClientConnInterface) ScanSettingsBuilderServiceClient {
+	return &scanSettingsBuilderServiceClient{cc}
+}
+
+func (c *scanSettingsBuilderServiceClient) SetScanMode(ctx context.Context, in *SetScanModeRequest, opts ...grpc.CallOption) (*SetScanModeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetScanModeResponse)
+	err := c.cc.Invoke(ctx, ScanSettingsBuilderService_SetScanMode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanSettingsBuilderServiceClient) SetReportDelay(ctx context.Context, in *SetReportDelayRequest, opts ...grpc.CallOption) (*SetReportDelayResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetReportDelayResponse)
+	err := c.cc.Invoke(ctx, ScanSettingsBuilderService_SetReportDelay_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanSettingsBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuildResponse)
+	err := c.cc.Invoke(ctx, ScanSettingsBuilderService_Build_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ScanSettingsBuilderServiceServer is the server API for ScanSettingsBuilderService service.
+// All implementations must embed UnimplementedScanSettingsBuilderServiceServer
+// for forward compatibility.
+type ScanSettingsBuilderServiceServer interface {
+	SetScanMode(context.Context, *SetScanModeRequest) (*SetScanModeResponse, error)
+	SetReportDelay(context.Context, *SetReportDelayRequest) (*SetReportDelayResponse, error)
+	Build(context.Context, *BuildRequest) (*BuildResponse, error)
+	mustEmbedUnimplementedScanSettingsBuilderServiceServer()
+}
+
+// UnimplementedScanSettingsBuilderServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedScanSettingsBuilderServiceServer struct{}
+
+func (UnimplementedScanSettingsBuilderServiceServer) SetScanMode(context.Context, *SetScanModeRequest) (*SetScanModeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetScanMode not implemented")
+}
+func (UnimplementedScanSettingsBuilderServiceServer) SetReportDelay(context.Context, *SetReportDelayRequest) (*SetReportDelayResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetReportDelay not implemented")
+}
+func (UnimplementedScanSettingsBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
+}
+func (UnimplementedScanSettingsBuilderServiceServer) mustEmbedUnimplementedScanSettingsBuilderServiceServer() {
+}
+func (UnimplementedScanSettingsBuilderServiceServer) testEmbeddedByValue() {}
+
+// UnsafeScanSettingsBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ScanSettingsBuilderServiceServer will
+// result in compilation errors.
+type UnsafeScanSettingsBuilderServiceServer interface {
+	mustEmbedUnimplementedScanSettingsBuilderServiceServer()
+}
+
+func RegisterScanSettingsBuilderServiceServer(s grpc.ServiceRegistrar, srv ScanSettingsBuilderServiceServer) {
+	// If the following call panics, it indicates UnimplementedScanSettingsBuilderServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&ScanSettingsBuilderService_ServiceDesc, srv)
+}
+
+func _ScanSettingsBuilderService_SetScanMode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetScanModeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanSettingsBuilderServiceServer).SetScanMode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanSettingsBuilderService_SetScanMode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanSettingsBuilderServiceServer).SetScanMode(ctx, req.(*SetScanModeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanSettingsBuilderService_SetReportDelay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetReportDelayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanSettingsBuilderServiceServer).SetReportDelay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanSettingsBuilderService_SetReportDelay_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanSettingsBuilderServiceServer).SetReportDelay(ctx, req.(*SetReportDelayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanSettingsBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanSettingsBuilderServiceServer).Build(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanSettingsBuilderService_Build_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanSettingsBuilderServiceServer).Build(ctx, req.(*BuildRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ScanSettingsBuilderService_ServiceDesc is the grpc.ServiceDesc for ScanSettingsBuilderService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ScanSettingsBuilderService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bluetooth.ScanSettingsBuilderService",
+	HandlerType: (*ScanSettingsBuilderServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SetScanMode",
+			Handler:    _ScanSettingsBuilderService_SetScanMode_Handler,
+		},
+		{
+			MethodName: "SetReportDelay",
+			Handler:    _ScanSettingsBuilderService_SetReportDelay_Handler,
+		},
+		{
+			MethodName: "Build",
+			Handler:    _ScanSettingsBuilderService_Build_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/bluetooth/bluetooth.proto",
+}
+
+const (
 	LeAdvertiserService_StartAdvertising_FullMethodName = "/bluetooth.LeAdvertiserService/StartAdvertising"
 	LeAdvertiserService_StopAdvertising_FullMethodName  = "/bluetooth.LeAdvertiserService/StopAdvertising"
 )
@@ -1018,6 +1414,516 @@ var LeAdvertiserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StopAdvertising",
 			Handler:    _LeAdvertiserService_StopAdvertising_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/bluetooth/bluetooth.proto",
+}
+
+const (
+	AdvertiseSettingsBuilderService_SetAdvertiseMode_FullMethodName = "/bluetooth.AdvertiseSettingsBuilderService/SetAdvertiseMode"
+	AdvertiseSettingsBuilderService_SetConnectable_FullMethodName   = "/bluetooth.AdvertiseSettingsBuilderService/SetConnectable"
+	AdvertiseSettingsBuilderService_SetTimeout_FullMethodName       = "/bluetooth.AdvertiseSettingsBuilderService/SetTimeout"
+	AdvertiseSettingsBuilderService_Build_FullMethodName            = "/bluetooth.AdvertiseSettingsBuilderService/Build"
+)
+
+// AdvertiseSettingsBuilderServiceClient is the client API for AdvertiseSettingsBuilderService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type AdvertiseSettingsBuilderServiceClient interface {
+	SetAdvertiseMode(ctx context.Context, in *SetAdvertiseModeRequest, opts ...grpc.CallOption) (*SetAdvertiseModeResponse, error)
+	SetConnectable(ctx context.Context, in *SetConnectableRequest, opts ...grpc.CallOption) (*SetConnectableResponse, error)
+	SetTimeout(ctx context.Context, in *SetTimeoutRequest, opts ...grpc.CallOption) (*SetTimeoutResponse, error)
+	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
+}
+
+type advertiseSettingsBuilderServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAdvertiseSettingsBuilderServiceClient(cc grpc.ClientConnInterface) AdvertiseSettingsBuilderServiceClient {
+	return &advertiseSettingsBuilderServiceClient{cc}
+}
+
+func (c *advertiseSettingsBuilderServiceClient) SetAdvertiseMode(ctx context.Context, in *SetAdvertiseModeRequest, opts ...grpc.CallOption) (*SetAdvertiseModeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetAdvertiseModeResponse)
+	err := c.cc.Invoke(ctx, AdvertiseSettingsBuilderService_SetAdvertiseMode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *advertiseSettingsBuilderServiceClient) SetConnectable(ctx context.Context, in *SetConnectableRequest, opts ...grpc.CallOption) (*SetConnectableResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetConnectableResponse)
+	err := c.cc.Invoke(ctx, AdvertiseSettingsBuilderService_SetConnectable_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *advertiseSettingsBuilderServiceClient) SetTimeout(ctx context.Context, in *SetTimeoutRequest, opts ...grpc.CallOption) (*SetTimeoutResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetTimeoutResponse)
+	err := c.cc.Invoke(ctx, AdvertiseSettingsBuilderService_SetTimeout_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *advertiseSettingsBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuildResponse)
+	err := c.cc.Invoke(ctx, AdvertiseSettingsBuilderService_Build_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AdvertiseSettingsBuilderServiceServer is the server API for AdvertiseSettingsBuilderService service.
+// All implementations must embed UnimplementedAdvertiseSettingsBuilderServiceServer
+// for forward compatibility.
+type AdvertiseSettingsBuilderServiceServer interface {
+	SetAdvertiseMode(context.Context, *SetAdvertiseModeRequest) (*SetAdvertiseModeResponse, error)
+	SetConnectable(context.Context, *SetConnectableRequest) (*SetConnectableResponse, error)
+	SetTimeout(context.Context, *SetTimeoutRequest) (*SetTimeoutResponse, error)
+	Build(context.Context, *BuildRequest) (*BuildResponse, error)
+	mustEmbedUnimplementedAdvertiseSettingsBuilderServiceServer()
+}
+
+// UnimplementedAdvertiseSettingsBuilderServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedAdvertiseSettingsBuilderServiceServer struct{}
+
+func (UnimplementedAdvertiseSettingsBuilderServiceServer) SetAdvertiseMode(context.Context, *SetAdvertiseModeRequest) (*SetAdvertiseModeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAdvertiseMode not implemented")
+}
+func (UnimplementedAdvertiseSettingsBuilderServiceServer) SetConnectable(context.Context, *SetConnectableRequest) (*SetConnectableResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetConnectable not implemented")
+}
+func (UnimplementedAdvertiseSettingsBuilderServiceServer) SetTimeout(context.Context, *SetTimeoutRequest) (*SetTimeoutResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetTimeout not implemented")
+}
+func (UnimplementedAdvertiseSettingsBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
+}
+func (UnimplementedAdvertiseSettingsBuilderServiceServer) mustEmbedUnimplementedAdvertiseSettingsBuilderServiceServer() {
+}
+func (UnimplementedAdvertiseSettingsBuilderServiceServer) testEmbeddedByValue() {}
+
+// UnsafeAdvertiseSettingsBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AdvertiseSettingsBuilderServiceServer will
+// result in compilation errors.
+type UnsafeAdvertiseSettingsBuilderServiceServer interface {
+	mustEmbedUnimplementedAdvertiseSettingsBuilderServiceServer()
+}
+
+func RegisterAdvertiseSettingsBuilderServiceServer(s grpc.ServiceRegistrar, srv AdvertiseSettingsBuilderServiceServer) {
+	// If the following call panics, it indicates UnimplementedAdvertiseSettingsBuilderServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&AdvertiseSettingsBuilderService_ServiceDesc, srv)
+}
+
+func _AdvertiseSettingsBuilderService_SetAdvertiseMode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAdvertiseModeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdvertiseSettingsBuilderServiceServer).SetAdvertiseMode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AdvertiseSettingsBuilderService_SetAdvertiseMode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdvertiseSettingsBuilderServiceServer).SetAdvertiseMode(ctx, req.(*SetAdvertiseModeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdvertiseSettingsBuilderService_SetConnectable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetConnectableRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdvertiseSettingsBuilderServiceServer).SetConnectable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AdvertiseSettingsBuilderService_SetConnectable_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdvertiseSettingsBuilderServiceServer).SetConnectable(ctx, req.(*SetConnectableRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdvertiseSettingsBuilderService_SetTimeout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTimeoutRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdvertiseSettingsBuilderServiceServer).SetTimeout(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AdvertiseSettingsBuilderService_SetTimeout_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdvertiseSettingsBuilderServiceServer).SetTimeout(ctx, req.(*SetTimeoutRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdvertiseSettingsBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdvertiseSettingsBuilderServiceServer).Build(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AdvertiseSettingsBuilderService_Build_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdvertiseSettingsBuilderServiceServer).Build(ctx, req.(*BuildRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// AdvertiseSettingsBuilderService_ServiceDesc is the grpc.ServiceDesc for AdvertiseSettingsBuilderService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var AdvertiseSettingsBuilderService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bluetooth.AdvertiseSettingsBuilderService",
+	HandlerType: (*AdvertiseSettingsBuilderServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SetAdvertiseMode",
+			Handler:    _AdvertiseSettingsBuilderService_SetAdvertiseMode_Handler,
+		},
+		{
+			MethodName: "SetConnectable",
+			Handler:    _AdvertiseSettingsBuilderService_SetConnectable_Handler,
+		},
+		{
+			MethodName: "SetTimeout",
+			Handler:    _AdvertiseSettingsBuilderService_SetTimeout_Handler,
+		},
+		{
+			MethodName: "Build",
+			Handler:    _AdvertiseSettingsBuilderService_Build_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/bluetooth/bluetooth.proto",
+}
+
+const (
+	AdvertiseDataBuilderService_AddServiceUuid_FullMethodName         = "/bluetooth.AdvertiseDataBuilderService/AddServiceUuid"
+	AdvertiseDataBuilderService_AddServiceData_FullMethodName         = "/bluetooth.AdvertiseDataBuilderService/AddServiceData"
+	AdvertiseDataBuilderService_AddManufacturerData_FullMethodName    = "/bluetooth.AdvertiseDataBuilderService/AddManufacturerData"
+	AdvertiseDataBuilderService_SetIncludeDeviceName_FullMethodName   = "/bluetooth.AdvertiseDataBuilderService/SetIncludeDeviceName"
+	AdvertiseDataBuilderService_SetIncludeTxPowerLevel_FullMethodName = "/bluetooth.AdvertiseDataBuilderService/SetIncludeTxPowerLevel"
+	AdvertiseDataBuilderService_Build_FullMethodName                  = "/bluetooth.AdvertiseDataBuilderService/Build"
+)
+
+// AdvertiseDataBuilderServiceClient is the client API for AdvertiseDataBuilderService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type AdvertiseDataBuilderServiceClient interface {
+	AddServiceUuid(ctx context.Context, in *AddServiceUuidRequest, opts ...grpc.CallOption) (*AddServiceUuidResponse, error)
+	AddServiceData(ctx context.Context, in *AddServiceDataRequest, opts ...grpc.CallOption) (*AddServiceDataResponse, error)
+	AddManufacturerData(ctx context.Context, in *AddManufacturerDataRequest, opts ...grpc.CallOption) (*AddManufacturerDataResponse, error)
+	SetIncludeDeviceName(ctx context.Context, in *SetIncludeDeviceNameRequest, opts ...grpc.CallOption) (*SetIncludeDeviceNameResponse, error)
+	SetIncludeTxPowerLevel(ctx context.Context, in *SetIncludeTxPowerLevelRequest, opts ...grpc.CallOption) (*SetIncludeTxPowerLevelResponse, error)
+	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
+}
+
+type advertiseDataBuilderServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAdvertiseDataBuilderServiceClient(cc grpc.ClientConnInterface) AdvertiseDataBuilderServiceClient {
+	return &advertiseDataBuilderServiceClient{cc}
+}
+
+func (c *advertiseDataBuilderServiceClient) AddServiceUuid(ctx context.Context, in *AddServiceUuidRequest, opts ...grpc.CallOption) (*AddServiceUuidResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddServiceUuidResponse)
+	err := c.cc.Invoke(ctx, AdvertiseDataBuilderService_AddServiceUuid_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *advertiseDataBuilderServiceClient) AddServiceData(ctx context.Context, in *AddServiceDataRequest, opts ...grpc.CallOption) (*AddServiceDataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddServiceDataResponse)
+	err := c.cc.Invoke(ctx, AdvertiseDataBuilderService_AddServiceData_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *advertiseDataBuilderServiceClient) AddManufacturerData(ctx context.Context, in *AddManufacturerDataRequest, opts ...grpc.CallOption) (*AddManufacturerDataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddManufacturerDataResponse)
+	err := c.cc.Invoke(ctx, AdvertiseDataBuilderService_AddManufacturerData_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *advertiseDataBuilderServiceClient) SetIncludeDeviceName(ctx context.Context, in *SetIncludeDeviceNameRequest, opts ...grpc.CallOption) (*SetIncludeDeviceNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetIncludeDeviceNameResponse)
+	err := c.cc.Invoke(ctx, AdvertiseDataBuilderService_SetIncludeDeviceName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *advertiseDataBuilderServiceClient) SetIncludeTxPowerLevel(ctx context.Context, in *SetIncludeTxPowerLevelRequest, opts ...grpc.CallOption) (*SetIncludeTxPowerLevelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetIncludeTxPowerLevelResponse)
+	err := c.cc.Invoke(ctx, AdvertiseDataBuilderService_SetIncludeTxPowerLevel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *advertiseDataBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuildResponse)
+	err := c.cc.Invoke(ctx, AdvertiseDataBuilderService_Build_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AdvertiseDataBuilderServiceServer is the server API for AdvertiseDataBuilderService service.
+// All implementations must embed UnimplementedAdvertiseDataBuilderServiceServer
+// for forward compatibility.
+type AdvertiseDataBuilderServiceServer interface {
+	AddServiceUuid(context.Context, *AddServiceUuidRequest) (*AddServiceUuidResponse, error)
+	AddServiceData(context.Context, *AddServiceDataRequest) (*AddServiceDataResponse, error)
+	AddManufacturerData(context.Context, *AddManufacturerDataRequest) (*AddManufacturerDataResponse, error)
+	SetIncludeDeviceName(context.Context, *SetIncludeDeviceNameRequest) (*SetIncludeDeviceNameResponse, error)
+	SetIncludeTxPowerLevel(context.Context, *SetIncludeTxPowerLevelRequest) (*SetIncludeTxPowerLevelResponse, error)
+	Build(context.Context, *BuildRequest) (*BuildResponse, error)
+	mustEmbedUnimplementedAdvertiseDataBuilderServiceServer()
+}
+
+// UnimplementedAdvertiseDataBuilderServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedAdvertiseDataBuilderServiceServer struct{}
+
+func (UnimplementedAdvertiseDataBuilderServiceServer) AddServiceUuid(context.Context, *AddServiceUuidRequest) (*AddServiceUuidResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddServiceUuid not implemented")
+}
+func (UnimplementedAdvertiseDataBuilderServiceServer) AddServiceData(context.Context, *AddServiceDataRequest) (*AddServiceDataResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddServiceData not implemented")
+}
+func (UnimplementedAdvertiseDataBuilderServiceServer) AddManufacturerData(context.Context, *AddManufacturerDataRequest) (*AddManufacturerDataResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddManufacturerData not implemented")
+}
+func (UnimplementedAdvertiseDataBuilderServiceServer) SetIncludeDeviceName(context.Context, *SetIncludeDeviceNameRequest) (*SetIncludeDeviceNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetIncludeDeviceName not implemented")
+}
+func (UnimplementedAdvertiseDataBuilderServiceServer) SetIncludeTxPowerLevel(context.Context, *SetIncludeTxPowerLevelRequest) (*SetIncludeTxPowerLevelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetIncludeTxPowerLevel not implemented")
+}
+func (UnimplementedAdvertiseDataBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
+}
+func (UnimplementedAdvertiseDataBuilderServiceServer) mustEmbedUnimplementedAdvertiseDataBuilderServiceServer() {
+}
+func (UnimplementedAdvertiseDataBuilderServiceServer) testEmbeddedByValue() {}
+
+// UnsafeAdvertiseDataBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AdvertiseDataBuilderServiceServer will
+// result in compilation errors.
+type UnsafeAdvertiseDataBuilderServiceServer interface {
+	mustEmbedUnimplementedAdvertiseDataBuilderServiceServer()
+}
+
+func RegisterAdvertiseDataBuilderServiceServer(s grpc.ServiceRegistrar, srv AdvertiseDataBuilderServiceServer) {
+	// If the following call panics, it indicates UnimplementedAdvertiseDataBuilderServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&AdvertiseDataBuilderService_ServiceDesc, srv)
+}
+
+func _AdvertiseDataBuilderService_AddServiceUuid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddServiceUuidRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdvertiseDataBuilderServiceServer).AddServiceUuid(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AdvertiseDataBuilderService_AddServiceUuid_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdvertiseDataBuilderServiceServer).AddServiceUuid(ctx, req.(*AddServiceUuidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdvertiseDataBuilderService_AddServiceData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddServiceDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdvertiseDataBuilderServiceServer).AddServiceData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AdvertiseDataBuilderService_AddServiceData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdvertiseDataBuilderServiceServer).AddServiceData(ctx, req.(*AddServiceDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdvertiseDataBuilderService_AddManufacturerData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddManufacturerDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdvertiseDataBuilderServiceServer).AddManufacturerData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AdvertiseDataBuilderService_AddManufacturerData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdvertiseDataBuilderServiceServer).AddManufacturerData(ctx, req.(*AddManufacturerDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdvertiseDataBuilderService_SetIncludeDeviceName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetIncludeDeviceNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdvertiseDataBuilderServiceServer).SetIncludeDeviceName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AdvertiseDataBuilderService_SetIncludeDeviceName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdvertiseDataBuilderServiceServer).SetIncludeDeviceName(ctx, req.(*SetIncludeDeviceNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdvertiseDataBuilderService_SetIncludeTxPowerLevel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetIncludeTxPowerLevelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdvertiseDataBuilderServiceServer).SetIncludeTxPowerLevel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AdvertiseDataBuilderService_SetIncludeTxPowerLevel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdvertiseDataBuilderServiceServer).SetIncludeTxPowerLevel(ctx, req.(*SetIncludeTxPowerLevelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AdvertiseDataBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdvertiseDataBuilderServiceServer).Build(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AdvertiseDataBuilderService_Build_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdvertiseDataBuilderServiceServer).Build(ctx, req.(*BuildRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// AdvertiseDataBuilderService_ServiceDesc is the grpc.ServiceDesc for AdvertiseDataBuilderService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var AdvertiseDataBuilderService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bluetooth.AdvertiseDataBuilderService",
+	HandlerType: (*AdvertiseDataBuilderServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddServiceUuid",
+			Handler:    _AdvertiseDataBuilderService_AddServiceUuid_Handler,
+		},
+		{
+			MethodName: "AddServiceData",
+			Handler:    _AdvertiseDataBuilderService_AddServiceData_Handler,
+		},
+		{
+			MethodName: "AddManufacturerData",
+			Handler:    _AdvertiseDataBuilderService_AddManufacturerData_Handler,
+		},
+		{
+			MethodName: "SetIncludeDeviceName",
+			Handler:    _AdvertiseDataBuilderService_SetIncludeDeviceName_Handler,
+		},
+		{
+			MethodName: "SetIncludeTxPowerLevel",
+			Handler:    _AdvertiseDataBuilderService_SetIncludeTxPowerLevel_Handler,
+		},
+		{
+			MethodName: "Build",
+			Handler:    _AdvertiseDataBuilderService_Build_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

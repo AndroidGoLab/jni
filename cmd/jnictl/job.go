@@ -107,6 +107,220 @@ var jobSchedulerGetAllPendingJobsRawCmd = &cobra.Command{
 	},
 }
 
+var jobJobInfoBuilderCmd = &cobra.Command{
+	Use:   "job-info-builder",
+	Short: "JobInfoBuilderService operations",
+}
+
+var jobJobInfoBuilderSetRequiredNetworkTypeCmd = &cobra.Command{
+	Use:   "set-required-network-type",
+	Short: "SetRequiredNetworkType RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobInfoBuilderServiceClient(grpcConn)
+		req := &pb.SetRequiredNetworkTypeRequest{}
+		if v, err := cmd.Flags().GetInt32("network-type"); err == nil {
+			req.NetworkType = v
+		}
+		resp, err := client.SetRequiredNetworkType(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var jobJobInfoBuilderSetRequiresChargingCmd = &cobra.Command{
+	Use:   "set-requires-charging",
+	Short: "SetRequiresCharging RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobInfoBuilderServiceClient(grpcConn)
+		req := &pb.SetRequiresChargingRequest{}
+		if v, err := cmd.Flags().GetBool("requires-charging"); err == nil {
+			req.RequiresCharging = v
+		}
+		resp, err := client.SetRequiresCharging(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var jobJobInfoBuilderSetRequiresDeviceIdleCmd = &cobra.Command{
+	Use:   "set-requires-device-idle",
+	Short: "SetRequiresDeviceIdle RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobInfoBuilderServiceClient(grpcConn)
+		req := &pb.SetRequiresDeviceIdleRequest{}
+		if v, err := cmd.Flags().GetBool("requires-device-idle"); err == nil {
+			req.RequiresDeviceIdle = v
+		}
+		resp, err := client.SetRequiresDeviceIdle(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var jobJobInfoBuilderSetRequiresBatteryNotLowCmd = &cobra.Command{
+	Use:   "set-requires-battery-not-low",
+	Short: "SetRequiresBatteryNotLow RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobInfoBuilderServiceClient(grpcConn)
+		req := &pb.SetRequiresBatteryNotLowRequest{}
+		if v, err := cmd.Flags().GetBool("requires-battery-not-low"); err == nil {
+			req.RequiresBatteryNotLow = v
+		}
+		resp, err := client.SetRequiresBatteryNotLow(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var jobJobInfoBuilderSetRequiresStorageNotLowCmd = &cobra.Command{
+	Use:   "set-requires-storage-not-low",
+	Short: "SetRequiresStorageNotLow RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobInfoBuilderServiceClient(grpcConn)
+		req := &pb.SetRequiresStorageNotLowRequest{}
+		if v, err := cmd.Flags().GetBool("requires-storage-not-low"); err == nil {
+			req.RequiresStorageNotLow = v
+		}
+		resp, err := client.SetRequiresStorageNotLow(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var jobJobInfoBuilderSetPeriodicCmd = &cobra.Command{
+	Use:   "set-periodic",
+	Short: "SetPeriodic RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobInfoBuilderServiceClient(grpcConn)
+		req := &pb.SetPeriodicRequest{}
+		if v, err := cmd.Flags().GetInt64("interval-millis"); err == nil {
+			req.IntervalMillis = v
+		}
+		resp, err := client.SetPeriodic(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var jobJobInfoBuilderSetMinimumLatencyCmd = &cobra.Command{
+	Use:   "set-minimum-latency",
+	Short: "SetMinimumLatency RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobInfoBuilderServiceClient(grpcConn)
+		req := &pb.SetMinimumLatencyRequest{}
+		if v, err := cmd.Flags().GetInt64("min-latency-millis"); err == nil {
+			req.MinLatencyMillis = v
+		}
+		resp, err := client.SetMinimumLatency(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var jobJobInfoBuilderSetOverrideDeadlineCmd = &cobra.Command{
+	Use:   "set-override-deadline",
+	Short: "SetOverrideDeadline RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobInfoBuilderServiceClient(grpcConn)
+		req := &pb.SetOverrideDeadlineRequest{}
+		if v, err := cmd.Flags().GetInt64("max-execution-delay-millis"); err == nil {
+			req.MaxExecutionDelayMillis = v
+		}
+		resp, err := client.SetOverrideDeadline(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var jobJobInfoBuilderSetPersistedCmd = &cobra.Command{
+	Use:   "set-persisted",
+	Short: "SetPersisted RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobInfoBuilderServiceClient(grpcConn)
+		req := &pb.SetPersistedRequest{}
+		if v, err := cmd.Flags().GetBool("is-persisted"); err == nil {
+			req.IsPersisted = v
+		}
+		resp, err := client.SetPersisted(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var jobJobInfoBuilderSetBackoffCriteriaCmd = &cobra.Command{
+	Use:   "set-backoff-criteria",
+	Short: "SetBackoffCriteria RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobInfoBuilderServiceClient(grpcConn)
+		req := &pb.SetBackoffCriteriaRequest{}
+		if v, err := cmd.Flags().GetInt64("initial-backoff-millis"); err == nil {
+			req.InitialBackoffMillis = v
+		}
+		if v, err := cmd.Flags().GetInt32("backoff-policy"); err == nil {
+			req.BackoffPolicy = v
+		}
+		resp, err := client.SetBackoffCriteria(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var jobJobInfoBuilderBuildCmd = &cobra.Command{
+	Use:   "build",
+	Short: "Build RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobInfoBuilderServiceClient(grpcConn)
+		req := &pb.BuildRequest{}
+		resp, err := client.Build(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 func init() {
 	jobSchedulerScheduleRawCmd.Flags().Int64("job", 0, "job (int64)")
 	jobSchedulerCmd.AddCommand(jobSchedulerScheduleRawCmd)
@@ -117,5 +331,28 @@ func init() {
 	jobSchedulerCmd.AddCommand(jobSchedulerGetPendingJobRawCmd)
 	jobSchedulerCmd.AddCommand(jobSchedulerGetAllPendingJobsRawCmd)
 	jobCmd.AddCommand(jobSchedulerCmd)
+	jobJobInfoBuilderSetRequiredNetworkTypeCmd.Flags().Int32("network-type", 0, "network-type (int32)")
+	jobJobInfoBuilderCmd.AddCommand(jobJobInfoBuilderSetRequiredNetworkTypeCmd)
+	jobJobInfoBuilderSetRequiresChargingCmd.Flags().Bool("requires-charging", false, "requires-charging (bool)")
+	jobJobInfoBuilderCmd.AddCommand(jobJobInfoBuilderSetRequiresChargingCmd)
+	jobJobInfoBuilderSetRequiresDeviceIdleCmd.Flags().Bool("requires-device-idle", false, "requires-device-idle (bool)")
+	jobJobInfoBuilderCmd.AddCommand(jobJobInfoBuilderSetRequiresDeviceIdleCmd)
+	jobJobInfoBuilderSetRequiresBatteryNotLowCmd.Flags().Bool("requires-battery-not-low", false, "requires-battery-not-low (bool)")
+	jobJobInfoBuilderCmd.AddCommand(jobJobInfoBuilderSetRequiresBatteryNotLowCmd)
+	jobJobInfoBuilderSetRequiresStorageNotLowCmd.Flags().Bool("requires-storage-not-low", false, "requires-storage-not-low (bool)")
+	jobJobInfoBuilderCmd.AddCommand(jobJobInfoBuilderSetRequiresStorageNotLowCmd)
+	jobJobInfoBuilderSetPeriodicCmd.Flags().Int64("interval-millis", 0, "interval-millis (int64)")
+	jobJobInfoBuilderCmd.AddCommand(jobJobInfoBuilderSetPeriodicCmd)
+	jobJobInfoBuilderSetMinimumLatencyCmd.Flags().Int64("min-latency-millis", 0, "min-latency-millis (int64)")
+	jobJobInfoBuilderCmd.AddCommand(jobJobInfoBuilderSetMinimumLatencyCmd)
+	jobJobInfoBuilderSetOverrideDeadlineCmd.Flags().Int64("max-execution-delay-millis", 0, "max-execution-delay-millis (int64)")
+	jobJobInfoBuilderCmd.AddCommand(jobJobInfoBuilderSetOverrideDeadlineCmd)
+	jobJobInfoBuilderSetPersistedCmd.Flags().Bool("is-persisted", false, "is-persisted (bool)")
+	jobJobInfoBuilderCmd.AddCommand(jobJobInfoBuilderSetPersistedCmd)
+	jobJobInfoBuilderSetBackoffCriteriaCmd.Flags().Int64("initial-backoff-millis", 0, "initial-backoff-millis (int64)")
+	jobJobInfoBuilderSetBackoffCriteriaCmd.Flags().Int32("backoff-policy", 0, "backoff-policy (int32)")
+	jobJobInfoBuilderCmd.AddCommand(jobJobInfoBuilderSetBackoffCriteriaCmd)
+	jobJobInfoBuilderCmd.AddCommand(jobJobInfoBuilderBuildCmd)
+	jobCmd.AddCommand(jobJobInfoBuilderCmd)
 	rootCmd.AddCommand(jobCmd)
 }

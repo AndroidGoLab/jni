@@ -152,6 +152,53 @@ message StopScanRequest {
 message StopScanResponse {
 }
 
+message SetDeviceNameRequest {
+  string name = 1;
+}
+
+message SetDeviceNameResponse {
+  int64 result = 1;
+}
+
+message SetDeviceAddressRequest {
+  string address = 1;
+}
+
+message SetDeviceAddressResponse {
+  int64 result = 1;
+}
+
+message SetServiceUuidRequest {
+  int64 uuid = 1;
+}
+
+message SetServiceUuidResponse {
+  int64 result = 1;
+}
+
+message BuildRequest {
+}
+
+message BuildResponse {
+  int64 result = 1;
+}
+
+message SetScanModeRequest {
+  int32 mode = 1;
+}
+
+message SetScanModeResponse {
+  int64 result = 1;
+}
+
+message SetReportDelayRequest {
+  int64 delay_ms = 1;
+}
+
+message SetReportDelayResponse {
+  int64 result = 1;
+}
+
 message StartAdvertisingRequest {
   int64 settings = 1;
   int64 data = 2;
@@ -166,6 +213,72 @@ message StopAdvertisingRequest {
 }
 
 message StopAdvertisingResponse {
+}
+
+message SetAdvertiseModeRequest {
+  int32 mode = 1;
+}
+
+message SetAdvertiseModeResponse {
+  int64 result = 1;
+}
+
+message SetConnectableRequest {
+  bool connectable = 1;
+}
+
+message SetConnectableResponse {
+  int64 result = 1;
+}
+
+message SetTimeoutRequest {
+  int32 timeout_ms = 1;
+}
+
+message SetTimeoutResponse {
+  int64 result = 1;
+}
+
+message AddServiceUuidRequest {
+  int64 uuid = 1;
+}
+
+message AddServiceUuidResponse {
+  int64 result = 1;
+}
+
+message AddServiceDataRequest {
+  int64 uuid = 1;
+  int64 data = 2;
+}
+
+message AddServiceDataResponse {
+  int64 result = 1;
+}
+
+message AddManufacturerDataRequest {
+  int32 manufacturer_id = 1;
+  int64 data = 2;
+}
+
+message AddManufacturerDataResponse {
+  int64 result = 1;
+}
+
+message SetIncludeDeviceNameRequest {
+  bool include = 1;
+}
+
+message SetIncludeDeviceNameResponse {
+  int64 result = 1;
+}
+
+message SetIncludeTxPowerLevelRequest {
+  bool include = 1;
+}
+
+message SetIncludeTxPowerLevelResponse {
+  int64 result = 1;
 }
 
 message DiscoverServicesRequest {
@@ -392,9 +505,38 @@ service LeScannerService {
   rpc StopScan (StopScanRequest) returns (StopScanResponse);
 }
 
+service ScanFilterBuilderService {
+  rpc SetDeviceName (SetDeviceNameRequest) returns (SetDeviceNameResponse);
+  rpc SetDeviceAddress (SetDeviceAddressRequest) returns (SetDeviceAddressResponse);
+  rpc SetServiceUuid (SetServiceUuidRequest) returns (SetServiceUuidResponse);
+  rpc Build (BuildRequest) returns (BuildResponse);
+}
+
+service ScanSettingsBuilderService {
+  rpc SetScanMode (SetScanModeRequest) returns (SetScanModeResponse);
+  rpc SetReportDelay (SetReportDelayRequest) returns (SetReportDelayResponse);
+  rpc Build (BuildRequest) returns (BuildResponse);
+}
+
 service LeAdvertiserService {
   rpc StartAdvertising (StartAdvertisingRequest) returns (StartAdvertisingResponse);
   rpc StopAdvertising (StopAdvertisingRequest) returns (StopAdvertisingResponse);
+}
+
+service AdvertiseSettingsBuilderService {
+  rpc SetAdvertiseMode (SetAdvertiseModeRequest) returns (SetAdvertiseModeResponse);
+  rpc SetConnectable (SetConnectableRequest) returns (SetConnectableResponse);
+  rpc SetTimeout (SetTimeoutRequest) returns (SetTimeoutResponse);
+  rpc Build (BuildRequest) returns (BuildResponse);
+}
+
+service AdvertiseDataBuilderService {
+  rpc AddServiceUuid (AddServiceUuidRequest) returns (AddServiceUuidResponse);
+  rpc AddServiceData (AddServiceDataRequest) returns (AddServiceDataResponse);
+  rpc AddManufacturerData (AddManufacturerDataRequest) returns (AddManufacturerDataResponse);
+  rpc SetIncludeDeviceName (SetIncludeDeviceNameRequest) returns (SetIncludeDeviceNameResponse);
+  rpc SetIncludeTxPowerLevel (SetIncludeTxPowerLevelRequest) returns (SetIncludeTxPowerLevelResponse);
+  rpc Build (BuildRequest) returns (BuildResponse);
 }
 
 service GATTClientService {

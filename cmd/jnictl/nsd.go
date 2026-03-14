@@ -131,6 +131,154 @@ var nsdManagerUnregisterServiceRawCmd = &cobra.Command{
 	},
 }
 
+var nsdNsdServiceInfoCmd = &cobra.Command{
+	Use:   "nsd-service-info",
+	Short: "NsdServiceInfoService operations",
+}
+
+var nsdNsdServiceInfoSetServiceNameCmd = &cobra.Command{
+	Use:   "set-service-name",
+	Short: "SetServiceName RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdServiceInfoServiceClient(grpcConn)
+		req := &pb.SetServiceNameRequest{}
+		if v, err := cmd.Flags().GetString("name"); err == nil {
+			req.Name = v
+		}
+		resp, err := client.SetServiceName(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdServiceInfoSetServiceTypeCmd = &cobra.Command{
+	Use:   "set-service-type",
+	Short: "SetServiceType RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdServiceInfoServiceClient(grpcConn)
+		req := &pb.SetServiceTypeRequest{}
+		if v, err := cmd.Flags().GetString("service-type"); err == nil {
+			req.ServiceType = v
+		}
+		resp, err := client.SetServiceType(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdServiceInfoSetPortCmd = &cobra.Command{
+	Use:   "set-port",
+	Short: "SetPort RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdServiceInfoServiceClient(grpcConn)
+		req := &pb.SetPortRequest{}
+		if v, err := cmd.Flags().GetInt32("port"); err == nil {
+			req.Port = v
+		}
+		resp, err := client.SetPort(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdServiceInfoSetAttributeCmd = &cobra.Command{
+	Use:   "set-attribute",
+	Short: "SetAttribute RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdServiceInfoServiceClient(grpcConn)
+		req := &pb.SetAttributeRequest{}
+		if v, err := cmd.Flags().GetString("key"); err == nil {
+			req.Key = v
+		}
+		if v, err := cmd.Flags().GetString("value"); err == nil {
+			req.Value = v
+		}
+		resp, err := client.SetAttribute(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdServiceInfoGetServiceNameCmd = &cobra.Command{
+	Use:   "get-service-name",
+	Short: "GetServiceName RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdServiceInfoServiceClient(grpcConn)
+		req := &pb.GetServiceNameRequest{}
+		resp, err := client.GetServiceName(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdServiceInfoGetServiceTypeCmd = &cobra.Command{
+	Use:   "get-service-type",
+	Short: "GetServiceType RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdServiceInfoServiceClient(grpcConn)
+		req := &pb.GetServiceTypeRequest{}
+		resp, err := client.GetServiceType(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdServiceInfoGetHostCmd = &cobra.Command{
+	Use:   "get-host",
+	Short: "GetHost RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdServiceInfoServiceClient(grpcConn)
+		req := &pb.GetHostRequest{}
+		resp, err := client.GetHost(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdServiceInfoGetPortCmd = &cobra.Command{
+	Use:   "get-port",
+	Short: "GetPort RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdServiceInfoServiceClient(grpcConn)
+		req := &pb.GetPortRequest{}
+		resp, err := client.GetPort(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 var nsdDiscoveryListenerCmd = &cobra.Command{
 	Use:   "discovery-listener",
 	Short: "DiscoveryListenerService operations",
@@ -253,6 +401,20 @@ func init() {
 	nsdManagerUnregisterServiceRawCmd.Flags().Int64("listener", 0, "listener (int64)")
 	nsdManagerCmd.AddCommand(nsdManagerUnregisterServiceRawCmd)
 	nsdCmd.AddCommand(nsdManagerCmd)
+	nsdNsdServiceInfoSetServiceNameCmd.Flags().String("name", "", "name (string)")
+	nsdNsdServiceInfoCmd.AddCommand(nsdNsdServiceInfoSetServiceNameCmd)
+	nsdNsdServiceInfoSetServiceTypeCmd.Flags().String("service-type", "", "service-type (string)")
+	nsdNsdServiceInfoCmd.AddCommand(nsdNsdServiceInfoSetServiceTypeCmd)
+	nsdNsdServiceInfoSetPortCmd.Flags().Int32("port", 0, "port (int32)")
+	nsdNsdServiceInfoCmd.AddCommand(nsdNsdServiceInfoSetPortCmd)
+	nsdNsdServiceInfoSetAttributeCmd.Flags().String("key", "", "key (string)")
+	nsdNsdServiceInfoSetAttributeCmd.Flags().String("value", "", "value (string)")
+	nsdNsdServiceInfoCmd.AddCommand(nsdNsdServiceInfoSetAttributeCmd)
+	nsdNsdServiceInfoCmd.AddCommand(nsdNsdServiceInfoGetServiceNameCmd)
+	nsdNsdServiceInfoCmd.AddCommand(nsdNsdServiceInfoGetServiceTypeCmd)
+	nsdNsdServiceInfoCmd.AddCommand(nsdNsdServiceInfoGetHostCmd)
+	nsdNsdServiceInfoCmd.AddCommand(nsdNsdServiceInfoGetPortCmd)
+	nsdCmd.AddCommand(nsdNsdServiceInfoCmd)
 	nsdDiscoveryListenerCmd.AddCommand(nsdDiscoveryListenerSubscribeDiscoveryListenerCmd)
 	nsdCmd.AddCommand(nsdDiscoveryListenerCmd)
 	nsdResolveListenerCmd.AddCommand(nsdResolveListenerSubscribeResolveListenerCmd)

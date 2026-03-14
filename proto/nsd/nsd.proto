@@ -46,6 +46,63 @@ message UnregisterServiceRawRequest {
 message UnregisterServiceRawResponse {
 }
 
+message SetServiceNameRequest {
+  string name = 1;
+}
+
+message SetServiceNameResponse {
+}
+
+message SetServiceTypeRequest {
+  string service_type = 1;
+}
+
+message SetServiceTypeResponse {
+}
+
+message SetPortRequest {
+  int32 port = 1;
+}
+
+message SetPortResponse {
+}
+
+message SetAttributeRequest {
+  string key = 1;
+  string value = 2;
+}
+
+message SetAttributeResponse {
+}
+
+message GetServiceNameRequest {
+}
+
+message GetServiceNameResponse {
+  string result = 1;
+}
+
+message GetServiceTypeRequest {
+}
+
+message GetServiceTypeResponse {
+  string result = 1;
+}
+
+message GetHostRequest {
+}
+
+message GetHostResponse {
+  int64 result = 1;
+}
+
+message GetPortRequest {
+}
+
+message GetPortResponse {
+  int32 result = 1;
+}
+
 message DiscoveryListenerOnServiceFoundEvent {
   int64 arg0 = 1;
 }
@@ -135,6 +192,17 @@ service ManagerService {
   rpc ResolveServiceRaw (ResolveServiceRawRequest) returns (ResolveServiceRawResponse);
   rpc RegisterServiceRaw (RegisterServiceRawRequest) returns (RegisterServiceRawResponse);
   rpc UnregisterServiceRaw (UnregisterServiceRawRequest) returns (UnregisterServiceRawResponse);
+}
+
+service NsdServiceInfoService {
+  rpc SetServiceName (SetServiceNameRequest) returns (SetServiceNameResponse);
+  rpc SetServiceType (SetServiceTypeRequest) returns (SetServiceTypeResponse);
+  rpc SetPort (SetPortRequest) returns (SetPortResponse);
+  rpc SetAttribute (SetAttributeRequest) returns (SetAttributeResponse);
+  rpc GetServiceName (GetServiceNameRequest) returns (GetServiceNameResponse);
+  rpc GetServiceType (GetServiceTypeRequest) returns (GetServiceTypeResponse);
+  rpc GetHost (GetHostRequest) returns (GetHostResponse);
+  rpc GetPort (GetPortRequest) returns (GetPortResponse);
 }
 
 service DiscoveryListenerService {

@@ -225,6 +225,27 @@ var wifip2pManagerRequestPeersRawCmd = &cobra.Command{
 	},
 }
 
+var wifip2pP2pConfigCmd = &cobra.Command{
+	Use:   "p2p-config",
+	Short: "P2pConfigService operations",
+}
+
+var wifip2pP2pConfigToStringCmd = &cobra.Command{
+	Use:   "to-string",
+	Short: "ToString RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewP2PConfigServiceClient(grpcConn)
+		req := &pb.ToStringRequest{}
+		resp, err := client.ToString(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 var wifip2pActionListenerCmd = &cobra.Command{
 	Use:   "action-listener",
 	Short: "ActionListenerService operations",
@@ -396,6 +417,8 @@ func init() {
 	wifip2pManagerRequestPeersRawCmd.Flags().Int64("listener", 0, "listener (int64)")
 	wifip2pManagerCmd.AddCommand(wifip2pManagerRequestPeersRawCmd)
 	wifip2pCmd.AddCommand(wifip2pManagerCmd)
+	wifip2pP2pConfigCmd.AddCommand(wifip2pP2pConfigToStringCmd)
+	wifip2pCmd.AddCommand(wifip2pP2pConfigCmd)
 	wifip2pActionListenerCmd.AddCommand(wifip2pActionListenerSubscribeActionListenerCmd)
 	wifip2pCmd.AddCommand(wifip2pActionListenerCmd)
 	wifip2pPeerListListenerCmd.AddCommand(wifip2pPeerListListenerSubscribePeerListListenerCmd)

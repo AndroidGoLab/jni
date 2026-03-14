@@ -93,6 +93,13 @@ message RequestPeersRawRequest {
 message RequestPeersRawResponse {
 }
 
+message ToStringRequest {
+}
+
+message ToStringResponse {
+  string result = 1;
+}
+
 message ActionListenerOnSuccessEvent {
 }
 
@@ -150,6 +157,10 @@ service ManagerService {
   rpc RemoveGroupRaw (RemoveGroupRawRequest) returns (RemoveGroupRawResponse);
   rpc RequestConnectionInfoRaw (RequestConnectionInfoRawRequest) returns (RequestConnectionInfoRawResponse);
   rpc RequestPeersRaw (RequestPeersRawRequest) returns (RequestPeersRawResponse);
+}
+
+service P2pConfigService {
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
 }
 
 service ActionListenerService {

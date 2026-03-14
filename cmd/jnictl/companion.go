@@ -81,6 +81,65 @@ var companionManagerGetAssociationsRawCmd = &cobra.Command{
 	},
 }
 
+var companionAssociationRequestBuilderCmd = &cobra.Command{
+	Use:   "association-request-builder",
+	Short: "AssociationRequestBuilderService operations",
+}
+
+var companionAssociationRequestBuilderSetSingleDeviceCmd = &cobra.Command{
+	Use:   "set-single-device",
+	Short: "SetSingleDevice RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAssociationRequestBuilderServiceClient(grpcConn)
+		req := &pb.SetSingleDeviceRequest{}
+		if v, err := cmd.Flags().GetBool("single-device"); err == nil {
+			req.SingleDevice = v
+		}
+		resp, err := client.SetSingleDevice(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var companionAssociationRequestBuilderAddDeviceFilterCmd = &cobra.Command{
+	Use:   "add-device-filter",
+	Short: "AddDeviceFilter RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAssociationRequestBuilderServiceClient(grpcConn)
+		req := &pb.AddDeviceFilterRequest{}
+		if v, err := cmd.Flags().GetInt64("filter"); err == nil {
+			req.Filter = v
+		}
+		resp, err := client.AddDeviceFilter(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var companionAssociationRequestBuilderBuildCmd = &cobra.Command{
+	Use:   "build",
+	Short: "Build RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAssociationRequestBuilderServiceClient(grpcConn)
+		req := &pb.BuildRequest{}
+		resp, err := client.Build(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 var companionCompanionCallbackCmd = &cobra.Command{
 	Use:   "companion-callback",
 	Short: "CompanionCallbackService operations",
@@ -125,6 +184,12 @@ func init() {
 	companionManagerCmd.AddCommand(companionManagerDisassociateByIdRawCmd)
 	companionManagerCmd.AddCommand(companionManagerGetAssociationsRawCmd)
 	companionCmd.AddCommand(companionManagerCmd)
+	companionAssociationRequestBuilderSetSingleDeviceCmd.Flags().Bool("single-device", false, "single-device (bool)")
+	companionAssociationRequestBuilderCmd.AddCommand(companionAssociationRequestBuilderSetSingleDeviceCmd)
+	companionAssociationRequestBuilderAddDeviceFilterCmd.Flags().Int64("filter", 0, "filter (int64)")
+	companionAssociationRequestBuilderCmd.AddCommand(companionAssociationRequestBuilderAddDeviceFilterCmd)
+	companionAssociationRequestBuilderCmd.AddCommand(companionAssociationRequestBuilderBuildCmd)
+	companionCmd.AddCommand(companionAssociationRequestBuilderCmd)
 	companionCompanionCallbackCmd.AddCommand(companionCompanionCallbackSubscribeCompanionCallbackCmd)
 	companionCmd.AddCommand(companionCompanionCallbackCmd)
 	rootCmd.AddCommand(companionCmd)

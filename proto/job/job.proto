@@ -58,10 +58,112 @@ message GetAllPendingJobsRawResponse {
   int64 result = 1;
 }
 
+message SetRequiredNetworkTypeRequest {
+  int32 network_type = 1;
+}
+
+message SetRequiredNetworkTypeResponse {
+  int64 result = 1;
+}
+
+message SetRequiresChargingRequest {
+  bool requires_charging = 1;
+}
+
+message SetRequiresChargingResponse {
+  int64 result = 1;
+}
+
+message SetRequiresDeviceIdleRequest {
+  bool requires_device_idle = 1;
+}
+
+message SetRequiresDeviceIdleResponse {
+  int64 result = 1;
+}
+
+message SetRequiresBatteryNotLowRequest {
+  bool requires_battery_not_low = 1;
+}
+
+message SetRequiresBatteryNotLowResponse {
+  int64 result = 1;
+}
+
+message SetRequiresStorageNotLowRequest {
+  bool requires_storage_not_low = 1;
+}
+
+message SetRequiresStorageNotLowResponse {
+  int64 result = 1;
+}
+
+message SetPeriodicRequest {
+  int64 interval_millis = 1;
+}
+
+message SetPeriodicResponse {
+  int64 result = 1;
+}
+
+message SetMinimumLatencyRequest {
+  int64 min_latency_millis = 1;
+}
+
+message SetMinimumLatencyResponse {
+  int64 result = 1;
+}
+
+message SetOverrideDeadlineRequest {
+  int64 max_execution_delay_millis = 1;
+}
+
+message SetOverrideDeadlineResponse {
+  int64 result = 1;
+}
+
+message SetPersistedRequest {
+  bool is_persisted = 1;
+}
+
+message SetPersistedResponse {
+  int64 result = 1;
+}
+
+message SetBackoffCriteriaRequest {
+  int64 initial_backoff_millis = 1;
+  int32 backoff_policy = 2;
+}
+
+message SetBackoffCriteriaResponse {
+  int64 result = 1;
+}
+
+message BuildRequest {
+}
+
+message BuildResponse {
+  JobInfoJava result = 1;
+}
+
 service SchedulerService {
   rpc ScheduleRaw (ScheduleRawRequest) returns (ScheduleRawResponse);
   rpc Cancel (CancelRequest) returns (CancelResponse);
   rpc CancelAll (CancelAllRequest) returns (CancelAllResponse);
   rpc GetPendingJobRaw (GetPendingJobRawRequest) returns (GetPendingJobRawResponse);
   rpc GetAllPendingJobsRaw (GetAllPendingJobsRawRequest) returns (GetAllPendingJobsRawResponse);
+}
+
+service JobInfoBuilderService {
+  rpc SetRequiredNetworkType (SetRequiredNetworkTypeRequest) returns (SetRequiredNetworkTypeResponse);
+  rpc SetRequiresCharging (SetRequiresChargingRequest) returns (SetRequiresChargingResponse);
+  rpc SetRequiresDeviceIdle (SetRequiresDeviceIdleRequest) returns (SetRequiresDeviceIdleResponse);
+  rpc SetRequiresBatteryNotLow (SetRequiresBatteryNotLowRequest) returns (SetRequiresBatteryNotLowResponse);
+  rpc SetRequiresStorageNotLow (SetRequiresStorageNotLowRequest) returns (SetRequiresStorageNotLowResponse);
+  rpc SetPeriodic (SetPeriodicRequest) returns (SetPeriodicResponse);
+  rpc SetMinimumLatency (SetMinimumLatencyRequest) returns (SetMinimumLatencyResponse);
+  rpc SetOverrideDeadline (SetOverrideDeadlineRequest) returns (SetOverrideDeadlineResponse);
+  rpc SetPersisted (SetPersistedRequest) returns (SetPersistedResponse);
+  rpc SetBackoffCriteria (SetBackoffCriteriaRequest) returns (SetBackoffCriteriaResponse);
+  rpc Build (BuildRequest) returns (BuildResponse);
 }
