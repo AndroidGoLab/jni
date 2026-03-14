@@ -1,0 +1,135 @@
+go_name_overrides:
+  # Context methods — idiomatic Go names
+  "android.content.Context.getSystemService": GetSystemService
+  "android.content.Context.getPackageName": PackageName
+  "android.content.Context.getApplicationContext": ApplicationContext
+  "android.content.Context.getFilesDir": FilesDir
+  "android.content.Context.getCacheDir": CacheDir
+  "android.content.Context.getExternalFilesDir": ExternalFilesDir
+  "android.content.Context.getExternalCacheDir": ExternalCacheDir
+  "android.content.Context.getDataDir": DataDir
+  "android.content.Context.getContentResolver": ContentResolver
+  "android.content.Context.getPackageManager": PackageManager
+  "android.content.Context.startActivity": StartActivity
+  "android.content.Context.sendBroadcast": SendBroadcast
+  "android.content.Context.startService": StartService
+  "android.content.Context.registerReceiver": RegisterReceiverRaw
+  "android.content.Context.unregisterReceiver": UnregisterReceiver
+
+  # Activity methods
+  "android.app.Activity.finish": Finish
+  "android.app.Activity.getIntent": GetIntent
+  "android.app.Activity.setResult": SetResult
+  "android.app.Activity.getWindow": GetWindow
+  "android.app.Activity.runOnUiThread": RunOnUiThread
+  "android.app.Activity.startActivityForResult": StartActivityForResult
+
+  # Intent methods
+  "android.content.Intent.setAction": SetAction
+  "android.content.Intent.setData": SetData
+  "android.content.Intent.setComponent": SetComponent
+  "android.content.Intent.setFlags": SetFlags
+  "android.content.Intent.addFlags": AddFlags
+  "android.content.Intent.addCategory": AddCategory
+  "android.content.Intent.setPackage": SetPackage
+  "android.content.Intent.setType": SetType
+  "android.content.Intent.getAction": GetAction
+  "android.content.Intent.getData": GetData
+  "android.content.Intent.getStringExtra": GetStringExtra
+  "android.content.Intent.getBooleanExtra": GetBoolExtra
+  "android.content.Intent.getIntExtra": GetIntExtra
+
+  # PendingIntent static factories
+  "android.app.PendingIntent.getActivity": NewPendingActivity
+  "android.app.PendingIntent.getBroadcast": NewPendingBroadcast
+  "android.app.PendingIntent.getService": NewPendingService
+
+  # Bundle methods
+  "android.os.Bundle.getString": GetString
+  "android.os.Bundle.getInt": GetInt
+  "android.os.Bundle.getBoolean": GetBool
+  "android.os.Bundle.getLong": GetLong
+  "android.os.Bundle.getFloat": GetFloat
+  "android.os.Bundle.getDouble": GetDouble
+
+method_grouping:
+  # Context: group file-path methods together
+  context_file_paths:
+    - FilesDir
+    - CacheDir
+    - ExternalFilesDir
+    - ExternalCacheDir
+    - DataDir
+  context_intents:
+    - StartActivity
+    - SendBroadcast
+    - StartService
+  context_receivers:
+    - RegisterReceiverRaw
+    - UnregisterReceiver
+  intent_setters:
+    - SetAction
+    - SetData
+    - SetComponent
+    - SetFlags
+    - AddFlags
+    - AddCategory
+    - SetPackage
+    - SetType
+    - PutStringExtra
+    - PutIntExtra
+    - PutBoolExtra
+    - PutLongExtra
+  intent_getters:
+    - GetAction
+    - GetData
+    - GetStringExtra
+    - GetBoolExtra
+    - GetIntExtra
+  bundle_getters:
+    - GetString
+    - GetInt
+    - GetBool
+    - GetLong
+    - GetFloat
+    - GetDouble
+  bundle_putters:
+    - PutString
+    - PutInt
+    - PutBool
+    - PutLong
+    - PutFloat
+    - PutDouble
+    - PutStringArray
+
+type_overrides:
+  # File-path methods return string after getAbsolutePath() transform
+  "android.content.Context.FilesDir.returns": string
+  "android.content.Context.CacheDir.returns": string
+  "android.content.Context.ExternalFilesDir.returns": string
+  "android.content.Context.ExternalCacheDir.returns": string
+  "android.content.Context.DataDir.returns": string
+  # ContentResolver returns raw JNI object
+  "android.content.Context.ContentResolver.returns": "*jni.Object"
+  # Intent.SetData accepts Go string, converts to Uri internally
+  "android.content.Intent.SetData.params.uri": string
+  # Intent.GetData returns Go string via Uri.toString()
+  "android.content.Intent.GetData.returns": string
+  # Activity extends Context
+  "android.app.Activity.extends": Context
+  # RunOnUiThread accepts Go func(), wraps as Runnable
+  "android.app.Activity.RunOnUiThread.params.fn": "func()"
+  # Context constructor signature
+  "android.content.Context.constructor.params": "*jni.VM, unsafe.Pointer"
+  "android.app.Activity.constructor.params": "*jni.VM, unsafe.Pointer"
+
+conversion_funcs:
+  file_to_path:
+    to_go: "getAbsolutePath"
+    to_java: ""
+  string_to_uri:
+    to_go: "toString"
+    to_java: "Uri.parse"
+  wrap_as_runnable:
+    to_go: ""
+    to_java: "jni.NewProxy(java.lang.Runnable)"

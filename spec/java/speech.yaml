@@ -1,0 +1,177 @@
+package: speech
+go_import: "github.com/xaionaro-go/jni/speech"
+
+classes:
+  # ---------- android.speech.SpeechRecognizer ----------
+  - java_class: android.speech.SpeechRecognizer
+    go_type: Recognizer
+    obtain: static_factory
+    close: true
+
+    methods:
+      - java_method: createSpeechRecognizer
+        go_name: createRecognizer
+        static: true
+        params:
+          - java_type: android.content.Context
+            go_name: ctx
+        returns: android.speech.SpeechRecognizer
+        error: true
+
+      - java_method: isRecognitionAvailable
+        go_name: isRecognitionAvailable
+        static: true
+        params:
+          - java_type: android.content.Context
+            go_name: ctx
+        returns: boolean
+        error: false
+
+      - java_method: setRecognitionListener
+        go_name: setRecognitionListener
+        params:
+          - java_type: android.speech.RecognitionListener
+            go_name: listener
+        returns: void
+        error: true
+
+      - java_method: startListening
+        go_name: startListeningRaw
+        params:
+          - java_type: android.content.Intent
+            go_name: intent
+        returns: void
+        error: true
+
+      - java_method: stopListening
+        go_name: stopListeningRaw
+        params: []
+        returns: void
+        error: true
+
+      - java_method: cancel
+        go_name: cancelRaw
+        params: []
+        returns: void
+        error: true
+
+      - java_method: destroy
+        go_name: destroyRaw
+        params: []
+        returns: void
+        error: true
+
+  # ---------- android.speech.tts.TextToSpeech ----------
+  - java_class: android.speech.tts.TextToSpeech
+    go_type: TTS
+    obtain: constructor
+    close: true
+
+    methods:
+      - java_method: speak
+        go_name: speakRaw
+        params:
+          - { java_type: java.lang.CharSequence, go_name: text }
+          - { java_type: int, go_name: queueMode }
+          - { java_type: android.os.Bundle, go_name: params }
+          - { java_type: String, go_name: utteranceId }
+        returns: int
+        error: true
+
+      - java_method: stop
+        go_name: stopRaw
+        params: []
+        returns: int
+        error: true
+
+      - java_method: isSpeaking
+        go_name: isSpeakingRaw
+        params: []
+        returns: boolean
+        error: true
+
+      - java_method: setLanguage
+        go_name: setLanguageRaw
+        params:
+          - java_type: java.util.Locale
+            go_name: locale
+        returns: int
+        error: true
+
+      - java_method: setPitch
+        go_name: setPitchRaw
+        params:
+          - java_type: float
+            go_name: pitch
+        returns: int
+        error: true
+
+      - java_method: setSpeechRate
+        go_name: setSpeechRateRaw
+        params:
+          - java_type: float
+            go_name: rate
+        returns: int
+        error: true
+
+      - java_method: getAvailableLanguages
+        go_name: getAvailableLanguagesRaw
+        params: []
+        returns: java.util.Set
+        error: true
+
+      - java_method: shutdown
+        go_name: shutdownRaw
+        params: []
+        returns: void
+        error: false
+
+      - java_method: setOnUtteranceProgressListener
+        go_name: setOnUtteranceProgressListenerRaw
+        params:
+          - java_type: android.speech.tts.UtteranceProgressListener
+            go_name: listener
+        returns: int
+        error: true
+
+callbacks:
+  - java_interface: android.speech.RecognitionListener
+    go_type: recognitionListener
+    methods:
+      - { java_method: onResults, params: [android.os.Bundle], go_field: OnResults }
+      - { java_method: onPartialResults, params: [android.os.Bundle], go_field: OnPartialResults }
+      - { java_method: onError, params: [int], go_field: OnError }
+      - { java_method: onReadyForSpeech, params: [android.os.Bundle], go_field: OnReadyForSpeech }
+      - { java_method: onBeginningOfSpeech, params: [], go_field: OnBeginningOfSpeech }
+      - { java_method: onEndOfSpeech, params: [], go_field: OnEndOfSpeech }
+      - { java_method: onRmsChanged, params: [float], go_field: OnRmsChanged }
+      - { java_method: onBufferReceived, params: ["byte[]"], go_field: OnBufferReceived }
+
+  - java_interface: android.speech.tts.TextToSpeech$OnInitListener
+    go_type: ttsOnInitListener
+    methods:
+      - { java_method: onInit, params: [int], go_field: OnInit }
+
+  - java_interface: android.speech.tts.UtteranceProgressListener
+    go_type: utteranceProgressListener
+    abstract_class: true
+    methods:
+      - { java_method: onDone, params: [String], go_field: OnDone }
+      - { java_method: onError, params: [String], go_field: OnError }
+      - { java_method: onStart, params: [String], go_field: OnStart }
+
+constants:
+  # SpeechRecognizer error codes
+  - { go_name: ErrNetworkTimeout, value: "1", go_type: int }
+  - { go_name: ErrNetwork, value: "2", go_type: int }
+  - { go_name: ErrAudio, value: "3", go_type: int }
+  - { go_name: ErrServer, value: "4", go_type: int }
+  - { go_name: ErrClient, value: "5", go_type: int }
+  - { go_name: ErrSpeechTimeout, value: "6", go_type: int }
+  - { go_name: ErrNoMatch, value: "7", go_type: int }
+  - { go_name: ErrBusy, value: "8", go_type: int }
+  - { go_name: ErrInsufficientPermissions, value: "9", go_type: int }
+
+  # TTS queue modes
+  - { go_name: QueueFlush, value: "0", go_type: int }
+  - { go_name: QueueAdd, value: "1", go_type: int }

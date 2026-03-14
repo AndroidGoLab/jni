@@ -1,0 +1,18 @@
+// Package {{.Package}} provides Go bindings for {{.JavaPackageDesc}}.
+package {{.Package}}
+
+import (
+	"fmt"
+	"sync"
+	"unsafe"
+
+	"github.com/xaionaro-go/jni"
+)
+
+// Ensure imports are used.
+var (
+	_ = fmt.Errorf
+	_ sync.Once
+	_ = unsafe.Pointer(nil)
+	_ *jni.Env
+)

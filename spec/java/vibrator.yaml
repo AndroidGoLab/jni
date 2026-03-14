@@ -1,0 +1,38 @@
+package: vibrator
+go_import: "github.com/xaionaro-go/jni/os/vibrator"
+
+classes:
+  - java_class: android.os.Vibrator
+    go_type: Vibrator
+    obtain: system_service
+    service_name: "vibrator"
+    close: false
+
+    methods:
+      - java_method: hasVibrator
+        returns: boolean
+        go_name: HasVibrator
+        error: true
+
+      - java_method: vibrate
+        params: [{ java_type: long, go_name: milliseconds }]
+        returns: void
+        go_name: vibrateMs
+        error: true
+
+      - java_method: vibrate
+        params:
+          - { java_type: "long[]", go_name: pattern }
+          - { java_type: int, go_name: repeat }
+        returns: void
+        go_name: vibratePatternMs
+        error: true
+        overload_suffix: Pattern
+
+      - java_method: cancel
+        returns: void
+        go_name: Cancel
+        error: true
+
+constants: []
+callbacks: []

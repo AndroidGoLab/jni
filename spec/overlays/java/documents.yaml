@@ -1,0 +1,86 @@
+overlays:
+  - target: documents
+    synthetic_functions:
+      - go_name: CreateOpenDocumentIntent
+        go_signature: "func CreateOpenDocumentIntent(mimeTypes []string, multiple bool) *app.Intent"
+        doc: "Creates an intent to open a document picker."
+        implementation:
+          - "Create new Intent with action ACTION_OPEN_DOCUMENT"
+          - "Set EXTRA_MIME_TYPES string array from mimeTypes"
+          - "Set EXTRA_ALLOW_MULTIPLE boolean from multiple"
+          - "Add category CATEGORY_OPENABLE"
+
+      - go_name: CreateOpenDocumentTreeIntent
+        go_signature: "func CreateOpenDocumentTreeIntent() *app.Intent"
+        doc: "Creates an intent to open a directory picker."
+        implementation:
+          - "Create new Intent with action ACTION_OPEN_DOCUMENT_TREE"
+
+      - go_name: CreateNewDocumentIntent
+        go_signature: "func CreateNewDocumentIntent(mimeType, title string) *app.Intent"
+        doc: "Creates an intent to create a new document."
+        implementation:
+          - "Create new Intent with action ACTION_CREATE_DOCUMENT"
+          - "Set type to mimeType"
+          - "Set EXTRA_TITLE to title"
+          - "Add category CATEGORY_OPENABLE"
+
+      - go_name: CreateDocument
+        go_signature: "func CreateDocument(ctx *app.Context, parentURI, mimeType, displayName string) (string, error)"
+        doc: "Creates a new document under the given parent URI."
+        implementation:
+          - "Parse parentURI to android.net.Uri via Uri.parse()"
+          - "Get ContentResolver from ctx"
+          - "Call DocumentsContract.createDocument(resolver, parentUri, mimeType, displayName)"
+          - "Return result Uri as string via Uri.toString()"
+
+      - go_name: RenameDocument
+        go_signature: "func RenameDocument(ctx *app.Context, uri, displayName string) (string, error)"
+        doc: "Renames a document."
+        implementation:
+          - "Parse uri to android.net.Uri"
+          - "Get ContentResolver from ctx"
+          - "Call DocumentsContract.renameDocument(resolver, uri, displayName)"
+          - "Return result Uri as string"
+
+      - go_name: CopyDocument
+        go_signature: "func CopyDocument(ctx *app.Context, srcURI, destParentURI string) (string, error)"
+        doc: "Copies a document to a new parent."
+        implementation:
+          - "Parse srcURI and destParentURI to android.net.Uri"
+          - "Get ContentResolver from ctx"
+          - "Call DocumentsContract.copyDocument(resolver, srcUri, destParentUri)"
+          - "Return result Uri as string"
+
+      - go_name: MoveDocument
+        go_signature: "func MoveDocument(ctx *app.Context, srcURI, srcParentURI, destParentURI string) (string, error)"
+        doc: "Moves a document from one parent to another."
+        implementation:
+          - "Parse srcURI, srcParentURI, destParentURI to android.net.Uri"
+          - "Get ContentResolver from ctx"
+          - "Call DocumentsContract.moveDocument(resolver, srcUri, srcParentUri, destParentUri)"
+          - "Return result Uri as string"
+
+      - go_name: DeleteDocument
+        go_signature: "func DeleteDocument(ctx *app.Context, uri string) error"
+        doc: "Deletes a document."
+        implementation:
+          - "Parse uri to android.net.Uri"
+          - "Get ContentResolver from ctx"
+          - "Call DocumentsContract.deleteDocument(resolver, uri)"
+
+      - go_name: IsDocumentURI
+        go_signature: "func IsDocumentURI(ctx *app.Context, uri string) bool"
+        doc: "Returns whether the given URI refers to a document."
+        implementation:
+          - "Parse uri to android.net.Uri"
+          - "Call DocumentsContract.isDocumentUri(ctx, uri)"
+          - "Return boolean result"
+
+conversion_funcs:
+  string_to_uri:
+    to_java: "android.net.Uri.parse(String)"
+    to_go: "Uri.toString()"
+
+imports:
+  - '"github.com/xaionaro-go/jni/app"'

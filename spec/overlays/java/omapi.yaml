@@ -1,0 +1,51 @@
+overlays:
+  - target: Service
+    constructor:
+      go_name: NewService
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+      implementation_notes: |
+        1. Create OnConnectedListener that signals a channel/WaitGroup
+        2. Create Executor (e.g. main thread executor)
+        3. Construct SEService(ctx, executor, listener)
+        4. Block until OnConnectedListener.onConnected() fires (or timeout)
+        5. Return *Service wrapping the SEService JNI object
+
+    composite_methods:
+      - go_name: GetReaders
+        doc: "Returns the available secure element readers."
+        params: []
+        returns: { go_type: "[]*Reader", error: true }
+        implementation_notes: |
+          1. Call getReadersRaw() to get Reader[]
+          2. Wrap each JNI object as *Reader
+          3. Return []*Reader
+
+  - target: Reader
+    composite_methods:
+      - go_name: OpenSession
+        doc: "Opens a session to the secure element on this reader."
+        params: []
+        returns: { go_type: "*Session", error: true }
+        implementation_notes: |
+          Call openSessionRaw() and wrap as *Session
+
+  - target: Session
+    composite_methods:
+      - go_name: OpenBasicChannel
+        doc: "Opens a basic channel to the applet identified by the given AID."
+        params:
+          - { go_name: aid, go_type: "[]byte" }
+        returns: { go_type: "*Channel", error: true }
+        implementation_notes: |
+          Call openBasicChannelRaw(aid) and wrap as *Channel
+
+      - go_name: OpenLogicalChannel
+        doc: "Opens a logical channel to the applet identified by the given AID."
+        params:
+          - { go_name: aid, go_type: "[]byte" }
+        returns: { go_type: "*Channel", error: true }
+        implementation_notes: |
+          Call openLogicalChannelRaw(aid) and wrap as *Channel
+
+imports:
+  - '"github.com/xaionaro-go/jni/app"'

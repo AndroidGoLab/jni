@@ -1,0 +1,27 @@
+package: permission
+go_import: "github.com/xaionaro-go/jni/content/permission"
+
+overrides:
+  # Expose as package-level functions, not struct methods
+  androidx.core.content.ContextCompat:
+    static_as_package_func: true
+    methods:
+      checkSelfPermission:
+        go_name: Check
+        doc: "Check returns true if the permission is granted"
+        return_transform: "permission_granted"
+        # checkSelfPermission returns 0 (GRANTED) or -1 (DENIED)
+        # transform: return result == 0
+
+  androidx.core.app.ActivityCompat:
+    static_as_package_func: true
+    methods:
+      requestPermissions:
+        go_name: Request
+        doc: "Request prompts the user for the specified permissions"
+
+transforms:
+  permission_granted:
+    doc: "Convert int return (0=GRANTED, -1=DENIED) to bool"
+    go_type: bool
+    expression: "result == 0"

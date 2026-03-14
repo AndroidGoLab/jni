@@ -1,0 +1,68 @@
+package: companion
+go_import: "github.com/xaionaro-go/jni/companion"
+
+classes:
+  - java_class: android.companion.CompanionDeviceManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "companion_device"
+    close: false
+    methods:
+      - java_method: associate
+        go_name: associateRaw
+        params:
+          - { java_type: android.companion.AssociationRequest, go_name: request }
+          - { java_type: android.companion.CompanionDeviceManager$Callback, go_name: callback }
+          - { java_type: android.os.Handler, go_name: handler }
+        returns: void
+        error: true
+
+      - java_method: disassociate
+        go_name: disassociateByIdRaw
+        params:
+          - { java_type: int, go_name: associationId }
+        returns: void
+        error: true
+
+      - java_method: getAssociations
+        go_name: getAssociationsRaw
+        params: []
+        returns: java.util.List
+        error: true
+
+  - java_class: android.companion.AssociationRequest$Builder
+    go_type: associationRequestBuilder
+    kind: builder
+    methods:
+      - java_method: setSingleDevice
+        go_name: setSingleDevice
+        params:
+          - { java_type: boolean, go_name: singleDevice }
+        returns: android.companion.AssociationRequest$Builder
+
+      - java_method: addDeviceFilter
+        go_name: addDeviceFilter
+        params:
+          - { java_type: android.companion.DeviceFilter, go_name: filter }
+        returns: android.companion.AssociationRequest$Builder
+
+      - java_method: build
+        go_name: build
+        params: []
+        returns: android.companion.AssociationRequest
+
+constants: []
+
+callbacks:
+  - java_interface: android.companion.CompanionDeviceManager$Callback
+    go_type: companionCallback
+    methods:
+      - java_method: onDeviceFound
+        params:
+          - android.content.IntentSender
+        go_field: OnDeviceFound
+
+      - java_method: onFailure
+        params:
+          - java.lang.CharSequence
+        go_field: OnFailure

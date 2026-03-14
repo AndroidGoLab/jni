@@ -1,0 +1,18 @@
+overlays:
+  - target: Manager
+    composite_methods:
+      - go_name: GetCarrierFrequencies
+        doc: "Returns the available carrier frequency ranges for the IR emitter."
+        params: []
+        returns: { go_type: "[]FrequencyRange", error: true }
+        implementation_notes: |
+          1. Call getCarrierFrequenciesRaw() to get CarrierFrequencyRange[]
+          2. Iterate array, extract getMinFrequency() and getMaxFrequency() for each
+          3. Collect into []FrequencyRange
+
+custom_types:
+  - go_name: FrequencyRange
+    doc: "Carrier frequency range supported by the IR emitter."
+    fields:
+      - { go_name: MinFrequency, go_type: int, doc: "Minimum frequency in Hz" }
+      - { go_name: MaxFrequency, go_type: int, doc: "Maximum frequency in Hz" }

@@ -1,0 +1,26 @@
+package: inputmethod
+go_import: "github.com/xaionaro-go/jni/view/inputmethod"
+
+classes:
+  - java_class: android.view.inputmethod.InputMethodManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "input_method"
+    close: true
+
+    methods:
+      - java_method: showSoftInput
+        params:
+          - { java_type: android.view.View, go_name: view }
+          - { java_type: int, go_name: flags }
+        returns: boolean
+        go_name: showSoftInput
+        error: true
+
+      - java_method: hideSoftInputFromWindow
+        params:
+          - { java_type: android.os.IBinder, go_name: windowToken }
+          - { java_type: int, go_name: flags }
+        returns: boolean
+        go_name: hideSoftInputFromWindow
+        error: true

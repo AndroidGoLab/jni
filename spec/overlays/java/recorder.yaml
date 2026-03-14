@@ -1,0 +1,127 @@
+package: recorder
+go_import: "github.com/xaionaro-go/jni/media/recorder"
+
+go_types:
+  - go_name: AudioSource
+    doc: "Audio recording source"
+    base_type: int
+
+  - go_name: VideoSource
+    doc: "Video recording source"
+    base_type: int
+
+  - go_name: OutputFormat
+    doc: "Recording output format"
+    base_type: int
+
+overrides:
+  android.media.MediaRecorder:
+    constructor:
+      go_name: New
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+      implementation_notes: |
+        Use MediaRecorder(Context) constructor (API 31+).
+        For older APIs, fall back to no-arg constructor.
+
+    composite_methods:
+      - go_name: SetAudioSource
+        params: [{ go_name: src, go_type: AudioSource }]
+        returns: { error: true }
+
+      - go_name: SetVideoSource
+        params: [{ go_name: src, go_type: VideoSource }]
+        returns: { error: true }
+
+      - go_name: SetOutputFormat
+        params: [{ go_name: fmt, go_type: OutputFormat }]
+        returns: { error: true }
+
+      - go_name: SetAudioEncoder
+        params: [{ go_name: encoder, go_type: int }]
+        returns: { error: true }
+
+      - go_name: SetVideoEncoder
+        params: [{ go_name: encoder, go_type: int }]
+        returns: { error: true }
+
+      - go_name: SetOutputFile
+        params: [{ go_name: path, go_type: string }]
+        returns: { error: true }
+
+      - go_name: SetVideoSize
+        params:
+          - { go_name: width, go_type: int }
+          - { go_name: height, go_type: int }
+        returns: { error: true }
+
+      - go_name: SetVideoFrameRate
+        params: [{ go_name: fps, go_type: int }]
+        returns: { error: true }
+
+      - go_name: SetAudioSamplingRate
+        params: [{ go_name: rate, go_type: int }]
+        returns: { error: true }
+
+      - go_name: SetAudioChannels
+        params: [{ go_name: channels, go_type: int }]
+        returns: { error: true }
+
+      - go_name: SetMaxDuration
+        doc: "Set maximum recording duration"
+        params: [{ go_name: d, go_type: "time.Duration" }]
+        returns: { error: true }
+        implementation_notes: |
+          Convert time.Duration to milliseconds, call setMaxDurationMs(ms)
+
+      - go_name: SetMaxFileSize
+        params: [{ go_name: bytes, go_type: int64 }]
+        returns: { error: true }
+
+      - go_name: Prepare
+        params: []
+        returns: { error: true }
+
+      - go_name: Start
+        params: []
+        returns: { error: true }
+
+      - go_name: Pause
+        params: []
+        returns: { error: true }
+
+      - go_name: Resume
+        params: []
+        returns: { error: true }
+
+      - go_name: Stop
+        params: []
+        returns: { error: true }
+
+      - go_name: Reset
+        params: []
+        returns: { error: true }
+
+      - go_name: Release
+        params: []
+        returns: { error: true }
+
+      - go_name: GetMaxAmplitude
+        doc: "Get max amplitude since last call (VU meter)"
+        params: []
+        returns: { go_type: int, error: true }
+
+      - go_name: OnError
+        doc: "Set callback for recording errors"
+        params: [{ go_name: fn, go_type: "func(what, extra int)" }]
+        implementation_notes: |
+          Create OnErrorListener, call setOnErrorListener
+
+      - go_name: OnInfo
+        doc: "Set callback for recording info events"
+        params: [{ go_name: fn, go_type: "func(what, extra int)" }]
+        implementation_notes: |
+          Create OnInfoListener, call setOnInfoListener
+
+imports:
+  - "github.com/xaionaro-go/jni/app"
+  - "time"

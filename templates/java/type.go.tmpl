@@ -1,0 +1,59 @@
+package {{.Package}}
+
+import (
+	"fmt"
+	"unsafe"
+
+	"github.com/xaionaro-go/jni"
+{{- if ne .Package "app"}}
+	"github.com/xaionaro-go/jni/app"
+{{- end}}
+)
+
+// Ensure imports are used.
+var (
+	_ = fmt.Errorf
+	_ = unsafe.Pointer(nil)
+{{- if ne .Package "app"}}
+	_ *app.Context
+{{- end}}
+)
+
+// {{.GoType}} holds data extracted from {{.JavaClass}}.
+type {{.GoType}} struct {
+{{range .Fields}}	{{.GoName}} {{.GoType}}
+{{end}}}
+
+// Extract{{.GoType}} extracts all fields from a {{.JavaClass}} JNI object.
+func Extract{{.GoType}}(env *jni.Env, obj *jni.Object) (*{{.GoType}}, error) {
+	if err := ensureInit(env); err != nil {
+		return nil, err
+	}
+	var result {{.GoType}}
+	{{range .Fields}}
+	{
+		{{- if .IsField}}
+		raw := env.Get{{.CallSuffix}}Field(obj, fid{{$.GoType}}{{.GoName}})
+		{{- else}}
+		raw, err := env.Call{{.CallSuffix}}Method(obj, mid{{$.GoType}}{{.GoName}})
+		if err != nil {
+			return nil, fmt.Errorf("{{$.GoType}}.{{.GoName}}: %w", err)
+		}
+		{{- end}}
+		{{- if eq .CallSuffix "Boolean"}}
+		result.{{.GoName}} = raw != 0
+		{{- else if eq .CallSuffix "Object"}}
+		{{- if eq .GoType "string"}}
+		result.{{.GoName}} = env.GoString((*jni.String)(unsafe.Pointer(raw)))
+		{{- else if eq .GoType "*jni.Object"}}
+		result.{{.GoName}} = raw
+		{{- else}}
+		_ = raw // TODO: conversion to {{.GoType}} requires manual wrapper
+		{{- end}}
+		{{- else}}
+		result.{{.GoName}} = {{.GoType}}(raw)
+		{{- end}}
+	}
+	{{end}}
+	return &result, nil
+}

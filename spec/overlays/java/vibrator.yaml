@@ -1,0 +1,21 @@
+overlays:
+  - target: Vibrator
+    method_overlays:
+      - go_name: Vibrate
+        original: vibrateMs
+        go_signature: "func (v *Vibrator) Vibrate(d time.Duration) error"
+        transform: "convert d to milliseconds (d.Milliseconds()), call vibrateMs(ms)"
+        doc: "Vibrates for the specified duration."
+
+      - go_name: VibratePattern
+        original: vibratePatternMs
+        go_signature: "func (v *Vibrator) VibratePattern(pattern []time.Duration, repeat int) error"
+        transform: |
+          Convert each element in pattern from time.Duration to int64 milliseconds.
+          Build a []int64 (long[]) from the converted values.
+          Call vibratePatternMs(msPattern, repeat).
+          repeat: -1 means no repeat, 0+ is the index to start repeating from.
+        doc: "Vibrates with a pattern. Each element alternates between off/on durations."
+
+imports:
+  - "time"

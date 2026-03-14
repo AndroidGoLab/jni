@@ -1,0 +1,59 @@
+overlays:
+  - target: Manager
+    constructor:
+      go_name: NewManager
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+      implementation_notes: |
+        Call AccountManager.get(ctx) to obtain the manager instance.
+
+    composite_methods:
+      - go_name: GetAccounts
+        doc: "Returns all accounts visible to the caller."
+        params: []
+        returns: { go_type: "[]Account", error: true }
+        implementation_notes: |
+          1. Call getAccountsRaw() to get Account[]
+          2. Iterate array, extract name and type fields for each
+          3. Collect into []Account
+
+      - go_name: GetAccountsByType
+        doc: "Returns accounts of the specified type."
+        params:
+          - { go_name: accountType, go_type: string }
+        returns: { go_type: "[]Account", error: true }
+        implementation_notes: |
+          1. Call getAccountsByTypeRaw(accountType) to get Account[]
+          2. Iterate array, extract name and type fields for each
+          3. Collect into []Account
+
+      - go_name: GetAuthToken
+        doc: "Gets an auth token for the specified account. Blocks until token is available."
+        params:
+          - { go_name: account, go_type: Account }
+          - { go_name: authTokenType, go_type: string }
+          - { go_name: activity, go_type: "*app.Activity" }
+        returns: { go_type: string, error: true }
+        implementation_notes: |
+          1. Create android.accounts.Account from account.Name and account.Type
+          2. Call getAuthTokenRaw(account, authTokenType, null, activity, null, null)
+          3. Get AccountManagerFuture, call .getResult() to block
+          4. Extract token string from result Bundle via key KEY_AUTHTOKEN
+
+      - go_name: InvalidateAuthToken
+        doc: "Removes an auth token from the cache."
+        params:
+          - { go_name: accountType, go_type: string }
+          - { go_name: authToken, go_type: string }
+        returns: { go_type: "", error: true }
+        implementation_notes: |
+          Call invalidateAuthTokenRaw(accountType, authToken)
+
+custom_types:
+  - go_name: Account
+    doc: "An account on the device."
+    fields:
+      - { go_name: Name, go_type: string, doc: "Account name (e.g. email address)" }
+      - { go_name: Type, go_type: string, doc: "Account type (e.g. com.google)" }
+
+imports:
+  - '"github.com/xaionaro-go/jni/app"'

@@ -1,0 +1,40 @@
+package: pm
+go_import: "github.com/xaionaro-go/jni/content/pm"
+
+overrides:
+  android.content.pm.PackageManager:
+    constructor:
+      go_name: NewManager
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+
+    composite_methods:
+      - go_name: GetPackageInfo
+        doc: "Get package info for the specified package name"
+        params: [{ go_name: pkg, go_type: string }]
+        returns: { go_type: "*PackageInfo", error: true }
+        implementation_notes: |
+          Call getPackageInfoRaw(pkg, 0), extract fields into PackageInfo struct
+
+      - go_name: GetInstalledPackages
+        doc: "List all installed packages"
+        params: []
+        returns: { go_type: "[]PackageInfo", error: true }
+        implementation_notes: |
+          Call getInstalledPackagesRaw(0), iterate List, extract each PackageInfo
+
+      - go_name: ResolveActivity
+        doc: "Check if an Intent can be handled"
+        params:
+          - { go_name: action, go_type: string }
+          - { go_name: data, go_type: string }
+        returns: { go_type: bool, error: true }
+        implementation_notes: |
+          Create Intent with action+data, call resolveActivityRaw(intent, 0)
+          Return true if result is non-null
+
+  android.content.pm.PackageInfo:
+    doc: "Package information"
+    # firstInstallTime and lastUpdateTime are public fields, not methods
+    field_access:
+      FirstInstall: { java_access: field }
+      LastUpdate: { java_access: field }

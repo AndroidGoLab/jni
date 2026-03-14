@@ -1,0 +1,43 @@
+overlays:
+  - target: Renderer
+    composite_methods:
+      - go_name: OpenFile
+        doc: "Opens a PDF file by path and returns a Renderer."
+        go_signature: "func OpenFile(path string) (*Renderer, error)"
+        implementation:
+          - "Create java.io.File from path string"
+          - "Call ParcelFileDescriptor.open(file, MODE_READ_ONLY)"
+          - "Create PdfRenderer(parcelFd)"
+          - "Return Renderer wrapping the JNI object"
+
+      - go_name: OpenFD
+        doc: "Opens a PDF from a file descriptor and returns a Renderer."
+        go_signature: "func OpenFD(fd int) (*Renderer, error)"
+        implementation:
+          - "Call ParcelFileDescriptor.adoptFd(fd)"
+          - "Create PdfRenderer(parcelFd)"
+          - "Return Renderer wrapping the JNI object"
+
+  - target: Page
+    method_overlays:
+      - go_name: Render
+        original: renderRaw
+        go_signature: "func (p *Page) Render(buf []byte, width, height, stride int) error"
+        transform: |
+          1. Create Bitmap via Bitmap.createBitmap(width, height, ARGB_8888)
+          2. Call page.render(bitmap, null, null, RENDER_MODE_FOR_DISPLAY)
+          3. Create ByteBuffer via ByteBuffer.allocateDirect(len(buf))
+          4. Call bitmap.copyPixelsToBuffer(byteBuffer)
+          5. Copy ByteBuffer contents into buf []byte
+          6. Recycle bitmap
+        doc: "Renders the page into an ARGB_8888 pixel buffer."
+
+conversion_funcs:
+  file_path_to_pfd:
+    to_java: |
+      new java.io.File(path) -> ParcelFileDescriptor.open(file, MODE_READ_ONLY)
+    to_go: ""
+  bitmap_to_bytes:
+    to_java: ""
+    to_go: |
+      Bitmap.createBitmap(w, h, ARGB_8888) -> render -> copyPixelsToBuffer -> byte[]

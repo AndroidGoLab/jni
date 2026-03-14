@@ -1,0 +1,93 @@
+package: job
+go_import: "github.com/xaionaro-go/jni/app/job"
+
+go_types:
+  NetworkType:
+    underlying: int
+    doc: "NetworkType specifies the required network connectivity for a job"
+
+  JobInfo:
+    kind: struct
+    doc: "JobInfo describes a background job's constraints and timing"
+    fields:
+      - { go_name: ID, go_type: int32 }
+      - { go_name: ServiceClassName, go_type: string, doc: "Fully-qualified Java class name of the JobService" }
+      - { go_name: RequiredNetwork, go_type: NetworkType }
+      - { go_name: RequireCharging, go_type: bool }
+      - { go_name: RequireDeviceIdle, go_type: bool }
+      - { go_name: RequireBatteryNotLow, go_type: bool }
+      - { go_name: RequireStorageNotLow, go_type: bool }
+      - { go_name: Periodic, go_type: "time.Duration", doc: "0 = one-shot" }
+      - { go_name: MinLatency, go_type: "time.Duration" }
+      - { go_name: MaxDelay, go_type: "time.Duration" }
+      - { go_name: Persistent, go_type: bool, doc: "Survive reboot" }
+      - { go_name: BackoffInitial, go_type: "time.Duration" }
+      - { go_name: BackoffExponential, go_type: bool }
+
+overrides:
+  android.app.job.JobScheduler:
+    constructor:
+      go_name: NewScheduler
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+
+    composite_methods:
+      - go_name: Schedule
+        doc: "Schedule a job with the given constraints. Returns ResultSuccess or ResultFailure."
+        params: [{ go_name: job, go_type: JobInfo }]
+        returns: { go_type: int, error: true }
+        implementation_notes: |
+          Create ComponentName from job.ServiceClassName.
+          Create JobInfo.Builder(job.ID, componentName).
+          Set each field via builder methods:
+            - setRequiredNetworkType(int(job.RequiredNetwork))
+            - setRequiresCharging(job.RequireCharging)
+            - setRequiresDeviceIdle(job.RequireDeviceIdle)
+            - setRequiresBatteryNotLow(job.RequireBatteryNotLow)
+            - setRequiresStorageNotLow(job.RequireStorageNotLow)
+            - if Periodic > 0: setPeriodic(job.Periodic.Milliseconds())
+            - if MinLatency > 0: setMinimumLatency(job.MinLatency.Milliseconds())
+            - if MaxDelay > 0: setOverrideDeadline(job.MaxDelay.Milliseconds())
+            - setPersisted(job.Persistent)
+            - if BackoffInitial > 0: setBackoffCriteria(job.BackoffInitial.Milliseconds(), policy)
+              where policy = BACKOFF_POLICY_EXPONENTIAL if BackoffExponential, else LINEAR
+          Call build() then scheduleRaw(builtJobInfo).
+
+      - go_name: GetPendingJob
+        doc: "Get a pending job by ID, or nil if not found"
+        params: [{ go_name: jobID, go_type: int32 }]
+        returns: { go_type: "*JobInfo", error: true }
+        implementation_notes: |
+          Call getPendingJobRaw(int(jobID)). If null, return nil.
+          Extract fields from Java JobInfo into Go JobInfo struct.
+          Convert millis fields to time.Duration.
+
+      - go_name: GetAllPendingJobs
+        doc: "Get all pending jobs scheduled by this application"
+        params: []
+        returns: { go_type: "[]JobInfo", error: true }
+        implementation_notes: |
+          Call getAllPendingJobsRaw(). Iterate List, extract each JobInfo.
+          Convert millis to time.Duration for each.
+
+  android.app.job.JobInfo:
+    doc: "Internal Java JobInfo extraction"
+    extract_to: JobInfo
+    field_transforms:
+      IntervalMillis: { go_field: Periodic, transform: millis_to_duration }
+      MinLatencyMillis: { go_field: MinLatency, transform: millis_to_duration }
+      MaxDelayMillis: { go_field: MaxDelay, transform: millis_to_duration }
+      InitialBackoffMillis: { go_field: BackoffInitial, transform: millis_to_duration }
+      BackoffPolicy: { go_field: BackoffExponential, transform: "policy == 1" }
+      NetworkType: { go_field: RequiredNetwork, transform: "NetworkType(raw)" }
+
+transforms:
+  millis_to_duration:
+    doc: "Convert milliseconds (int64) to time.Duration"
+    expression: "time.Duration(ms) * time.Millisecond"
+  duration_to_millis:
+    doc: "Convert time.Duration to milliseconds (int64)"
+    expression: "int64(d / time.Millisecond)"
+
+imports:
+  - "time"
+  - "github.com/xaionaro-go/jni/app"

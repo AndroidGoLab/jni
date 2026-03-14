@@ -1,0 +1,41 @@
+overlays:
+  - target: environment
+    doc: "All methods become package-level functions. File objects are converted to string paths."
+    synthetic_functions:
+      - go_name: GetRootDirectory
+        go_signature: "func GetRootDirectory() string"
+        implementation: "call getRootDirectory(), then getAbsolutePath() on the returned File"
+
+      - go_name: GetDataDirectory
+        go_signature: "func GetDataDirectory() string"
+        implementation: "call getDataDirectory(), then getAbsolutePath()"
+
+      - go_name: GetExternalStorageDirectory
+        go_signature: "func GetExternalStorageDirectory() string"
+        implementation: "call getExternalStorageDirectory(), then getAbsolutePath()"
+
+      - go_name: GetExternalStoragePublicDirectory
+        go_signature: "func GetExternalStoragePublicDirectory(typ string) string"
+        implementation: "call getExternalStoragePublicDirectory(typ), then getAbsolutePath()"
+
+      - go_name: GetExternalStorageState
+        go_signature: "func GetExternalStorageState() string"
+        implementation: "call getExternalStorageState() directly (already returns String)"
+
+      - go_name: IsExternalStorageRemovable
+        go_signature: "func IsExternalStorageRemovable() bool"
+        implementation: "call isExternalStorageRemovable() directly"
+
+      - go_name: IsExternalStorageEmulated
+        go_signature: "func IsExternalStorageEmulated() bool"
+        implementation: "call isExternalStorageEmulated() directly"
+
+      - go_name: IsExternalStorageManager
+        go_signature: "func IsExternalStorageManager() bool"
+        implementation: "call isExternalStorageManager() directly"
+
+    note: |
+      Environment methods are static and require a *jni.VM (not *app.Context).
+      The generated package needs a global VM reference, set during init or via a
+      package-level Init(vm) function. javagen should detect obtain: static_methods
+      and generate package-level functions rather than methods on a struct.

@@ -1,0 +1,30 @@
+package: camera
+go_import: "github.com/xaionaro-go/jni/hardware/camera"
+
+overrides:
+  android.hardware.camera2.CameraManager:
+    constructor:
+      go_name: NewManager
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+
+    composite_methods:
+      - go_name: SetTorchMode
+        doc: "Enable or disable the flashlight torch for a camera"
+        params:
+          - { go_name: cameraID, go_type: string }
+          - { go_name: enabled, go_type: bool }
+        returns: { error: true }
+        implementation_notes: |
+          Direct delegation to setTorchMode(cameraID, enabled)
+
+      - go_name: OnTorchModeChanged
+        doc: "Register callback for torch mode changes"
+        params: [{ go_name: fn, go_type: "func(cameraID string, enabled bool)" }]
+        returns: { go_type: "cancel func()", error: true }
+        implementation_notes: |
+          1. Create TorchCallback with onTorchModeChanged forwarding to fn(cameraID, enabled)
+          2. Call registerTorchCallback(callback, nil)
+          3. Return cancel func that calls unregisterTorchCallback(callback)
+
+imports:
+  - "github.com/xaionaro-go/jni/app"

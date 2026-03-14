@@ -1,0 +1,54 @@
+package: telecom
+go_import: "github.com/xaionaro-go/jni/telecom"
+
+classes:
+  - java_class: android.telecom.TelecomManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "telecom"
+    close: false
+
+    methods:
+      - java_method: isInCall
+        go_name: isInCallRaw
+        params: []
+        returns: boolean
+        error: true
+
+      - java_method: isInManagedCall
+        go_name: isInManagedCallRaw
+        params: []
+        returns: boolean
+        error: true
+
+      - java_method: getDefaultDialerPackage
+        go_name: getDefaultDialerPackageRaw
+        params: []
+        returns: String
+        error: true
+
+      - java_method: placeCall
+        go_name: placeCallRaw
+        params:
+          - { java_type: android.net.Uri, go_name: uri }
+          - { java_type: android.os.Bundle, go_name: extras }
+        returns: void
+        error: true
+
+      - java_method: silenceRinger
+        go_name: silenceRingerRaw
+        params: []
+        returns: void
+        error: true
+
+      - java_method: acceptRingingCall
+        go_name: acceptRingingCallRaw
+        params: []
+        returns: void
+        error: true
+
+      - java_method: endCall
+        go_name: endCallRaw
+        params: []
+        returns: boolean
+        error: true

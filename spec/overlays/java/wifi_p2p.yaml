@@ -1,0 +1,97 @@
+package: wifi_p2p
+go_import: "github.com/xaionaro-go/jni/net/wifi/p2p"
+
+overrides:
+  android.net.wifi.p2p.WifiP2pManager:
+    constructor:
+      go_name: NewManager
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+      implementation_notes: |
+        1. Get WifiP2pManager via getSystemService("wifip2p")
+        2. Call initialize(ctx, mainLooper, channelListener) → Channel
+        3. Store Channel internally in Manager struct (hidden from Go API)
+
+    composite_methods:
+      - go_name: DiscoverPeers
+        doc: "DiscoverPeers starts Wi-Fi P2P peer discovery, returns cancel function"
+        params:
+          - { go_name: onFound, go_type: "func([]Device)" }
+        returns: { go_type: "cancel func()", error: true }
+        implementation_notes: |
+          1. Create ActionListener proxy for discoverPeers result
+          2. Call discoverPeersRaw(channel, actionListener)
+          3. Wait for onSuccess/onFailure
+          4. Periodically call requestPeersRaw(channel, peerListListener) to get device list
+          5. PeerListListener.onPeersAvailable: iterate WifiP2pDeviceList → []Device, call onFound
+          6. Return cancel that calls stopPeerDiscoveryRaw(channel, actionListener)
+
+      - go_name: Connect
+        doc: "Connect initiates a P2P connection to a peer by MAC address"
+        params: [{ go_name: address, go_type: string }]
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          1. Create WifiP2pConfig, set deviceAddress field to address
+          2. Create ActionListener proxy
+          3. Call connectRaw(channel, config, listener)
+          4. Wait for onSuccess/onFailure, return error accordingly
+
+      - go_name: CancelConnect
+        doc: "CancelConnect cancels an ongoing P2P connection attempt"
+        params: []
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Create ActionListener, call cancelConnectRaw(channel, listener), wait for result.
+
+      - go_name: CreateGroup
+        doc: "CreateGroup creates a P2P group (makes this device the group owner)"
+        params: []
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Create ActionListener, call createGroupRaw(channel, listener), wait for result.
+
+      - go_name: RemoveGroup
+        doc: "RemoveGroup removes the current P2P group"
+        params: []
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Create ActionListener, call removeGroupRaw(channel, listener), wait for result.
+
+      - go_name: GetConnectionInfo
+        doc: "GetConnectionInfo returns the current P2P group information"
+        params: []
+        returns: { go_type: "*Group", error: true }
+        implementation_notes: |
+          1. Create ConnectionInfoListener proxy
+          2. Call requestConnectionInfoRaw(channel, listener)
+          3. onConnectionInfoAvailable: extract WifiP2pInfo → Group
+          4. Return *Group
+
+      - go_name: OnConnectionChanged
+        doc: "OnConnectionChanged registers for P2P connection state changes"
+        params:
+          - { go_name: fn, go_type: "func(*Group)" }
+        returns: { go_type: "cancel func()", error: true }
+        implementation_notes: |
+          1. Register BroadcastReceiver for WIFI_P2P_CONNECTION_CHANGED_ACTION
+          2. On broadcast: call requestConnectionInfoRaw to get current group info
+          3. Extract Group, call fn
+          4. Return cancel that unregisters the BroadcastReceiver
+
+  android.net.wifi.p2p.WifiP2pDevice:
+    doc: "Wi-Fi P2P peer device"
+
+  android.net.wifi.p2p.WifiP2pGroup:
+    doc: "Wi-Fi P2P group information"
+    extra_fields:
+      - go_name: Owner
+        go_type: Device
+        doc: "Group owner device"
+        derived_from: "getOwner()"
+        implementation_notes: |
+          Call getOwner() → WifiP2pDevice, extract fields into Device
+      - go_name: Clients
+        go_type: "[]Device"
+        doc: "Client devices in the group"
+        derived_from: "getClientList()"
+        implementation_notes: |
+          Call getClientList() → Collection<WifiP2pDevice>, iterate and extract each into Device

@@ -1,0 +1,39 @@
+package: camera
+go_import: "github.com/xaionaro-go/jni/hardware/camera"
+
+classes:
+  - java_class: android.hardware.camera2.CameraManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "camera"
+    close: true
+
+    methods:
+      - java_method: setTorchMode
+        params:
+          - { java_type: String, go_name: cameraId }
+          - { java_type: boolean, go_name: enabled }
+        returns: void
+        go_name: setTorchMode
+        error: true
+
+      - java_method: registerTorchCallback
+        params:
+          - { java_type: android.hardware.camera2.CameraManager$TorchCallback, go_name: callback }
+          - { java_type: android.os.Handler, go_name: handler }
+        returns: void
+        go_name: registerTorchCallback
+        error: true
+
+      - java_method: unregisterTorchCallback
+        params: [{ java_type: android.hardware.camera2.CameraManager$TorchCallback, go_name: callback }]
+        returns: void
+        go_name: unregisterTorchCallback
+        error: true
+
+callbacks:
+  - java_interface: android.hardware.camera2.CameraManager$TorchCallback
+    go_type: torchCallback
+    kind: abstract_class
+    methods:
+      - { java_method: onTorchModeChanged, params: [String, boolean], go_field: OnTorchModeChanged }

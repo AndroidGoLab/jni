@@ -1,0 +1,62 @@
+package: telecom
+go_import: "github.com/xaionaro-go/jni/telecom"
+
+overrides:
+  android.telecom.TelecomManager:
+    constructor:
+      go_name: NewManager
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+
+    composite_methods:
+      - go_name: IsInCall
+        doc: "IsInCall returns whether the device is currently in a phone call"
+        params: []
+        returns: { go_type: bool, error: true }
+        implementation_notes: |
+          Call isInCallRaw()
+
+      - go_name: IsInManagedCall
+        doc: "IsInManagedCall returns whether the device is in a managed call"
+        params: []
+        returns: { go_type: bool, error: true }
+        implementation_notes: |
+          Call isInManagedCallRaw()
+
+      - go_name: GetDefaultDialerPackage
+        doc: "GetDefaultDialerPackage returns the package name of the default dialer app"
+        params: []
+        returns: { go_type: string, error: true }
+        implementation_notes: |
+          Call getDefaultDialerPackageRaw()
+
+      - go_name: PlaceCall
+        doc: "PlaceCall initiates a phone call (requires CALL_PHONE permission)"
+        params:
+          - { go_name: uri, go_type: string }
+          - { go_name: extras, go_type: "*app.Bundle" }
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          1. Parse uri string to android.net.Uri via Uri.parse(uri)
+          2. Pass extras Bundle (may be nil → null)
+          3. Call placeCallRaw(parsedUri, extras)
+
+      - go_name: SilenceRinger
+        doc: "SilenceRinger silences the ringer if a call is ringing"
+        params: []
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Call silenceRingerRaw()
+
+      - go_name: AcceptRingingCall
+        doc: "AcceptRingingCall accepts a ringing call"
+        params: []
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Call acceptRingingCallRaw()
+
+      - go_name: EndCall
+        doc: "EndCall ends the current call (deprecated API 29+ but widely used)"
+        params: []
+        returns: { go_type: bool, error: true }
+        implementation_notes: |
+          Call endCallRaw(). Returns true if the call was ended.

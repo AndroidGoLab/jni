@@ -1,0 +1,120 @@
+package: alarm
+go_import: "github.com/xaionaro-go/jni/app/alarm"
+
+go_types:
+  AlarmType:
+    underlying: int
+    doc: "AlarmType specifies the clock and wakeup behavior for an alarm"
+
+  AlarmClock:
+    kind: struct
+    doc: "AlarmClock represents a scheduled alarm clock with trigger time and display intent"
+    fields:
+      - { go_name: TriggerTime, go_type: "time.Time" }
+      - { go_name: ShowIntent, go_type: "*app.PendingIntent" }
+
+overrides:
+  android.app.AlarmManager:
+    constructor:
+      go_name: NewManager
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+
+    composite_methods:
+      - go_name: Set
+        doc: "Set a one-time alarm at the specified time"
+        params:
+          - { go_name: typ, go_type: AlarmType }
+          - { go_name: triggerAt, go_type: "time.Time" }
+          - { go_name: intent, go_type: "*app.PendingIntent" }
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Convert time.Time to unix millis via triggerAt.UnixMilli().
+          Call setRaw(int(typ), millis, intent).
+
+      - go_name: SetExact
+        doc: "Set an exact alarm that fires at precisely the specified time"
+        params:
+          - { go_name: typ, go_type: AlarmType }
+          - { go_name: triggerAt, go_type: "time.Time" }
+          - { go_name: intent, go_type: "*app.PendingIntent" }
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Convert time.Time to unix millis. Call setExactRaw.
+
+      - go_name: SetExactAndAllowWhileIdle
+        doc: "Set an exact alarm that can fire during Doze mode"
+        params:
+          - { go_name: typ, go_type: AlarmType }
+          - { go_name: triggerAt, go_type: "time.Time" }
+          - { go_name: intent, go_type: "*app.PendingIntent" }
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Convert time.Time to unix millis. Call setExactAndAllowWhileIdleRaw.
+
+      - go_name: SetRepeating
+        doc: "Set a repeating alarm"
+        params:
+          - { go_name: typ, go_type: AlarmType }
+          - { go_name: triggerAt, go_type: "time.Time" }
+          - { go_name: interval, go_type: "time.Duration" }
+          - { go_name: intent, go_type: "*app.PendingIntent" }
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Convert time.Time to unix millis, time.Duration to millis via int64(interval/time.Millisecond).
+          Call setRepeatingRaw.
+
+      - go_name: SetWindow
+        doc: "Set an alarm within a time window (allows battery optimization)"
+        params:
+          - { go_name: typ, go_type: AlarmType }
+          - { go_name: windowStart, go_type: "time.Time" }
+          - { go_name: window, go_type: "time.Duration" }
+          - { go_name: intent, go_type: "*app.PendingIntent" }
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Convert windowStart to unix millis, window to millis. Call setWindowRaw.
+
+      - go_name: SetAlarmClock
+        doc: "Set an alarm clock that shows in the system alarm UI"
+        params:
+          - { go_name: triggerAt, go_type: "time.Time" }
+          - { go_name: showIntent, go_type: "*app.PendingIntent" }
+          - { go_name: pendingIntent, go_type: "*app.PendingIntent" }
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Create AlarmClockInfo(triggerAt.UnixMilli(), showIntent).
+          Call setAlarmClockRaw(info, pendingIntent).
+
+      - go_name: GetNextAlarmClock
+        doc: "Get the next scheduled alarm clock, or nil if none"
+        params: []
+        returns: { go_type: "*AlarmClock", error: true }
+        implementation_notes: |
+          Call getNextAlarmClockRaw. If null, return nil.
+          Extract TriggerTime via time.UnixMilli(getTriggerTime()),
+          extract ShowIntent. Return &AlarmClock{}.
+
+      - go_name: CancelAll
+        doc: "Cancel all alarms set by this application"
+        params: []
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Note: Android AlarmManager has no cancelAll() method.
+          This is a convenience method that should be documented as requiring
+          the caller to track and cancel individual PendingIntents.
+          Remove this method if not feasible; rely on Cancel(intent) instead.
+
+transforms:
+  time_to_millis:
+    doc: "Convert time.Time to Unix milliseconds (int64)"
+    expression: "t.UnixMilli()"
+  duration_to_millis:
+    doc: "Convert time.Duration to milliseconds (int64)"
+    expression: "int64(d / time.Millisecond)"
+  millis_to_time:
+    doc: "Convert Unix milliseconds to time.Time"
+    expression: "time.UnixMilli(ms)"
+
+imports:
+  - "time"
+  - "github.com/xaionaro-go/jni/app"

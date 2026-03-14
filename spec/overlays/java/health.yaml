@@ -1,0 +1,128 @@
+overlays:
+  - target: Manager
+    constructor:
+      go_name: NewManager
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+      implementation_notes: |
+        Call HealthConnectClient.getOrCreate(ctx) to obtain the client instance.
+        Wraps Kotlin suspend function via runBlocking {} or ListenableFuture adapter.
+
+    composite_methods:
+      - go_name: InsertSteps
+        doc: "Inserts step count records."
+        params:
+          - { go_name: records, go_type: "[]StepsRecord" }
+        returns: { go_type: "", error: true }
+        implementation_notes: |
+          1. For each StepsRecord, create StepsRecord Java object:
+             StepsRecord(startTime=Instant, startZoneOffset=null, endTime=Instant, endZoneOffset=null, count=long)
+          2. Collect into List<Record>
+          3. Call insertRecordsRaw(records) via runBlocking wrapper
+
+      - go_name: ReadSteps
+        doc: "Reads step count records in the given time range."
+        params:
+          - { go_name: start, go_type: time.Time }
+          - { go_name: end, go_type: time.Time }
+        returns: { go_type: "[]StepsRecord", error: true }
+        implementation_notes: |
+          1. Create TimeRangeFilter.between(start.toInstant(), end.toInstant())
+          2. Create ReadRecordsRequest<StepsRecord>(timeRangeFilter)
+          3. Call readRecordsRaw(request) via runBlocking wrapper
+          4. Iterate response.getRecords(), extract fields into []StepsRecord
+
+      - go_name: InsertHeartRate
+        doc: "Inserts heart rate records."
+        params:
+          - { go_name: records, go_type: "[]HeartRateRecord" }
+        returns: { go_type: "", error: true }
+        implementation_notes: |
+          1. For each HeartRateRecord, create Java HeartRateRecord with samples
+          2. Collect into List<Record>
+          3. Call insertRecordsRaw(records) via runBlocking wrapper
+
+      - go_name: ReadHeartRate
+        doc: "Reads heart rate records in the given time range."
+        params:
+          - { go_name: start, go_type: time.Time }
+          - { go_name: end, go_type: time.Time }
+        returns: { go_type: "[]HeartRateRecord", error: true }
+        implementation_notes: |
+          1. Create TimeRangeFilter and ReadRecordsRequest<HeartRateRecord>
+          2. Call readRecordsRaw via runBlocking wrapper
+          3. Extract records with samples into []HeartRateRecord
+
+      - go_name: AggregateSteps
+        doc: "Aggregates step count data in the given time range."
+        params:
+          - { go_name: start, go_type: time.Time }
+          - { go_name: end, go_type: time.Time }
+        returns: { go_type: "*AggregateResult", error: true }
+        implementation_notes: |
+          1. Create AggregateRequest with StepsRecord.COUNT_TOTAL metric
+          2. Create TimeRangeFilter
+          3. Call aggregateRaw via runBlocking wrapper
+          4. Extract result value
+
+      - go_name: AggregateHeartRate
+        doc: "Aggregates heart rate data in the given time range."
+        params:
+          - { go_name: start, go_type: time.Time }
+          - { go_name: end, go_type: time.Time }
+        returns: { go_type: "*AggregateResult", error: true }
+        implementation_notes: |
+          1. Create AggregateRequest with HeartRateRecord.BPM_AVG, BPM_MIN, BPM_MAX metrics
+          2. Create TimeRangeFilter
+          3. Call aggregateRaw via runBlocking wrapper
+          4. Extract result values
+
+      - go_name: DeleteRecords
+        doc: "Deletes records of the specified type in the given time range."
+        params:
+          - { go_name: typ, go_type: RecordType }
+          - { go_name: start, go_type: time.Time }
+          - { go_name: end, go_type: time.Time }
+        returns: { go_type: "", error: true }
+        implementation_notes: |
+          1. Map RecordType string to Kotlin KClass for the record type
+          2. Create TimeRangeFilter.between(start, end)
+          3. Call deleteRecordsRaw(kclass, timeRange) via runBlocking wrapper
+
+async_wrapping:
+  strategy: "runBlocking"
+  note: "All HealthConnectClient methods are Kotlin suspend functions. Wrap with kotlinx.coroutines.runBlocking {}."
+
+custom_types:
+  - go_name: RecordType
+    underlying: string
+    doc: "Health record type identifier."
+
+  - go_name: StepsRecord
+    doc: "Step count record."
+    fields:
+      - { go_name: StartTime, go_type: time.Time, doc: "Start time of the measurement period" }
+      - { go_name: EndTime, go_type: time.Time, doc: "End time of the measurement period" }
+      - { go_name: Count, go_type: int64, doc: "Number of steps" }
+
+  - go_name: HeartRateSample
+    doc: "A single heart rate measurement."
+    fields:
+      - { go_name: Time, go_type: time.Time, doc: "Time of the measurement" }
+      - { go_name: BPM, go_type: int64, doc: "Beats per minute" }
+
+  - go_name: HeartRateRecord
+    doc: "Heart rate record with samples."
+    fields:
+      - { go_name: StartTime, go_type: time.Time, doc: "Start time of the measurement period" }
+      - { go_name: EndTime, go_type: time.Time, doc: "End time of the measurement period" }
+      - { go_name: Samples, go_type: "[]HeartRateSample", doc: "Individual heart rate samples" }
+
+  - go_name: AggregateResult
+    doc: "Aggregated health data result."
+    fields:
+      - { go_name: LongValues, go_type: "map[string]int64", doc: "Aggregated long values (e.g. step count)" }
+      - { go_name: DoubleValues, go_type: "map[string]float64", doc: "Aggregated double values (e.g. avg BPM)" }
+
+imports:
+  - '"github.com/xaionaro-go/jni/app"'
+  - '"time"'

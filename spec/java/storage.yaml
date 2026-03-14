@@ -1,0 +1,66 @@
+package: storage
+go_import: "github.com/xaionaro-go/jni/os/storage"
+
+classes:
+  - java_class: android.os.storage.StorageManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "storage"
+    close: false
+
+    methods:
+      - java_method: getStorageVolumes
+        returns: java.util.List
+        generic_type: android.os.storage.StorageVolume
+        go_name: getStorageVolumes  # internal, overlay extracts to []Volume
+        error: true
+
+      - java_method: getPrimaryStorageVolume
+        returns: android.os.storage.StorageVolume
+        go_name: getPrimaryStorageVolume  # internal
+        error: true
+
+      - java_method: getAllocatableBytes
+        params: [{ java_type: java.util.UUID, go_name: storageUuid }]
+        returns: long
+        go_name: getAllocatableBytes  # internal, overlay handles UUID
+        error: true
+
+      - java_method: allocateBytes
+        params:
+          - { java_type: java.util.UUID, go_name: storageUuid }
+          - { java_type: long, go_name: bytes }
+        returns: void
+        go_name: allocateBytes  # internal
+        error: true
+
+      - java_method: getCacheSizeBytes
+        params: [{ java_type: java.util.UUID, go_name: storageUuid }]
+        returns: long
+        go_name: getCacheSizeBytes  # internal
+        error: true
+
+      - java_method: getCacheQuotaBytes
+        params: [{ java_type: java.util.UUID, go_name: storageUuid }]
+        returns: long
+        go_name: getCacheQuotaBytes  # internal
+        error: true
+
+  - java_class: android.os.storage.StorageVolume
+    go_type: Volume
+    kind: data_class
+    fields:
+      - { java_method: getUuid, returns: String, go_name: UUID, go_type: string }
+      - { java_method: getState, returns: String, go_name: State, go_type: string }
+      - { java_method: isPrimary, returns: boolean, go_name: IsPrimary, go_type: bool }
+      - { java_method: isRemovable, returns: boolean, go_name: IsRemovable, go_type: bool }
+      - { java_method: isEmulated, returns: boolean, go_name: IsEmulated, go_type: bool }
+    methods:
+      - java_method: getDescription
+        params: [{ java_type: android.content.Context, go_name: ctx }]
+        returns: String
+        go_name: getDescription
+        error: true
+
+constants: []
+callbacks: []

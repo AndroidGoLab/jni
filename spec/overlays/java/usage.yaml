@@ -1,0 +1,31 @@
+overlays:
+  - target: Manager
+    composite_methods:
+      - go_name: QueryUsageStats
+        doc: "Queries usage statistics for the given interval and time range."
+        params:
+          - { go_name: interval, go_type: Interval }
+          - { go_name: begin, go_type: time.Time }
+          - { go_name: end, go_type: time.Time }
+        returns: { go_type: "[]Stats", error: true }
+        implementation_notes: |
+          1. Convert begin and end from time.Time to Unix millis via begin.UnixMilli()
+          2. Call queryUsageStatsRaw(int(interval), beginMs, endMs)
+          3. Iterate List<UsageStats>, extract fields into []Stats
+
+custom_types:
+  - go_name: Interval
+    underlying: int
+    doc: "Usage stats query interval type."
+
+  - go_name: Stats
+    doc: "Usage statistics for a single package."
+    fields:
+      - { go_name: PackageName, go_type: string, doc: "Package name of the app" }
+      - { go_name: FirstTimestamp, go_type: int64, doc: "First timestamp in Unix millis" }
+      - { go_name: LastTimestamp, go_type: int64, doc: "Last timestamp in Unix millis" }
+      - { go_name: TotalTimeVisible, go_type: int64, doc: "Total time visible in millis" }
+      - { go_name: TotalTimeForeground, go_type: int64, doc: "Total time in foreground in millis" }
+
+imports:
+  - '"time"'

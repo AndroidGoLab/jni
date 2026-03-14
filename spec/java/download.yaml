@@ -1,0 +1,101 @@
+package: download
+go_import: "github.com/xaionaro-go/jni/app/download"
+
+classes:
+  - java_class: android.app.DownloadManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "download"
+    close: true
+
+    methods:
+      - java_method: enqueue
+        params: [{ java_type: android.app.DownloadManager$Request, go_name: request }]
+        returns: long
+        go_name: enqueueRaw
+        error: true
+
+      - java_method: remove
+        params: [{ java_type: "long[]", go_name: ids }]
+        returns: int
+        go_name: removeRaw
+        error: true
+
+      - java_method: query
+        params: [{ java_type: android.app.DownloadManager$Query, go_name: query }]
+        returns: android.database.Cursor
+        go_name: queryRaw
+        error: true
+
+  - java_class: android.app.DownloadManager$Request
+    go_type: downloadRequest  # internal
+    obtain: constructor
+    constructor_params:
+      - { java_type: android.net.Uri, go_name: uri }
+
+    methods:
+      - java_method: setDestinationInExternalPublicDir
+        params:
+          - { java_type: String, go_name: dirType }
+          - { java_type: String, go_name: subPath }
+        returns: android.app.DownloadManager$Request
+        go_name: setDestinationInExternalPublicDir
+
+      - java_method: setTitle
+        params: [{ java_type: java.lang.CharSequence, go_name: title }]
+        returns: android.app.DownloadManager$Request
+        go_name: setTitle
+
+      - java_method: setDescription
+        params: [{ java_type: java.lang.CharSequence, go_name: description }]
+        returns: android.app.DownloadManager$Request
+        go_name: setDescription
+
+      - java_method: setMimeType
+        params: [{ java_type: String, go_name: mimeType }]
+        returns: android.app.DownloadManager$Request
+        go_name: setMimeType
+
+  - java_class: android.app.DownloadManager$Query
+    go_type: downloadQuery  # internal
+    obtain: constructor
+    constructor_params: []
+
+    methods:
+      - java_method: setFilterById
+        params: [{ java_type: "long[]", go_name: ids }]
+        returns: android.app.DownloadManager$Query
+        go_name: setFilterById
+
+  - java_class: android.database.Cursor
+    go_type: cursor  # internal, used to extract download status
+    kind: intermediate
+
+    methods:
+      - java_method: moveToFirst
+        params: []
+        returns: boolean
+        go_name: moveToFirst
+
+      - java_method: getColumnIndex
+        params: [{ java_type: String, go_name: columnName }]
+        returns: int
+        go_name: getColumnIndex
+
+      - java_method: getInt
+        params: [{ java_type: int, go_name: columnIndex }]
+        returns: int
+        go_name: getInt
+
+      - java_method: close
+        params: []
+        returns: void
+        go_name: close
+
+constants:
+  # STATUS column values
+  - { go_name: StatusPending, value: "1", go_type: int }
+  - { go_name: StatusRunning, value: "2", go_type: int }
+  - { go_name: StatusPaused, value: "4", go_type: int }
+  - { go_name: StatusSuccessful, value: "8", go_type: int }
+  - { go_name: StatusFailed, value: "16", go_type: int }

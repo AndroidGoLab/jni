@@ -1,0 +1,89 @@
+package: location
+go_import: "github.com/xaionaro-go/jni/location"
+
+overrides:
+  android.location.LocationManager:
+    constructor:
+      go_name: NewManager
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+
+    composite_methods:
+      # GetProviders: unwrap List<String> to []string
+      - go_name: GetProviders
+        doc: "GetProviders returns available location provider names"
+        params: []
+        returns: { go_type: "[]string", error: true }
+        implementation_notes: |
+          Call getProvidersRaw(true), iterate Java List, extract each String
+
+      # RequestUpdates: combines requestLocationUpdates + removeUpdates into cancel pattern
+      - go_name: RequestUpdates
+        doc: "RequestUpdates starts continuous location updates, returns cancel function"
+        params:
+          - { go_name: opts, go_type: UpdateOptions }
+          - { go_name: onLocation, go_type: "func(Location)" }
+        returns: { go_type: "cancel func()", error: true }
+        implementation_notes: |
+          1. Create LocationListener proxy via jni.NewProxy
+          2. In onLocationChanged: extract Location data class fields, call onLocation
+          3. Call requestLocationUpdatesRaw(opts.Provider, opts.MinInterval.Milliseconds(), opts.MinDistance, listener)
+          4. Return cancel function that calls removeUpdatesRaw(listener) + releases proxy
+
+      # GetCurrentLocation: API 30+ single active fix
+      - go_name: GetCurrentLocation
+        doc: "GetCurrentLocation requests a single location fix (API 30+)"
+        params: [{ go_name: provider, go_type: string }]
+        returns: { go_type: "*Location", error: true }
+        min_api: 30
+        implementation_notes: |
+          1. Create CancellationSignal
+          2. Create Consumer proxy that sends Location to a channel
+          3. Call getCurrentLocationRaw with main executor
+          4. Block on channel, extract Location fields
+          5. Return *Location
+
+      # OnGnssStatus: GNSS satellite status with cancel
+      - go_name: OnGnssStatus
+        doc: "OnGnssStatus registers for GNSS satellite status updates"
+        params:
+          - { go_name: onStarted, go_type: "func()" }
+          - { go_name: onStopped, go_type: "func()" }
+          - { go_name: onSatellites, go_type: "func([]GnssSatellite)" }
+        returns: { go_type: "cancel func()", error: true }
+        implementation_notes: |
+          1. Create GnssStatus.Callback proxy
+          2. onSatelliteStatusChanged: iterate GnssStatus (getSatelliteCount + per-index getters) → []GnssSatellite
+          3. Call registerGnssStatusCallbackRaw with main executor
+          4. Return cancel that calls unregisterGnssStatusCallbackRaw
+
+  # GnssStatus: iterated into []GnssSatellite
+  android.location.GnssStatus:
+    iterate_to:
+      go_name: GnssSatellite
+      doc: "GNSS satellite information"
+      iterate_pattern: |
+        count = getSatelliteCount()
+        for i := 0; i < count; i++ {
+          satellite.Svid = getSvid(i)
+          satellite.Constellation = getConstellationType(i)
+          ...
+        }
+
+# Custom Go types defined in overlay
+custom_types:
+  - go_name: UpdateOptions
+    doc: "Options for continuous location updates"
+    fields:
+      - { go_name: Provider,    go_type: string,        doc: "Location provider (GPS, Network, Passive)" }
+      - { go_name: MinInterval, go_type: time.Duration, doc: "Minimum time between updates" }
+      - { go_name: MinDistance,  go_type: float32,       doc: "Minimum distance between updates in meters" }
+
+  - go_name: GnssSatellite
+    doc: "GNSS satellite status"
+    fields:
+      - { go_name: Svid,          go_type: int32,   doc: "Satellite vehicle ID" }
+      - { go_name: Constellation, go_type: int32,   doc: "GPS(1), SBAS(2), GLONASS(3), QZSS(4), BEIDOU(5), GALILEO(6)" }
+      - { go_name: Elevation,     go_type: float32, doc: "Elevation in degrees" }
+      - { go_name: Azimuth,       go_type: float32, doc: "Azimuth in degrees" }
+      - { go_name: Cn0DbHz,       go_type: float32, doc: "Carrier-to-noise density" }
+      - { go_name: UsedInFix,     go_type: bool,    doc: "Whether used in current fix" }

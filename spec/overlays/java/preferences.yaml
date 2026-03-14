@@ -1,0 +1,36 @@
+overlays:
+  - target: Preferences
+    synthetic_methods:
+      # Each Put method wraps: edit() -> putX(key, value) -> apply()
+      - go_name: PutString
+        go_signature: "func (p *Preferences) PutString(key, value string) error"
+        implementation: "editor = edit(); editor.putString(key, value); editor.apply()"
+
+      - go_name: PutInt
+        go_signature: "func (p *Preferences) PutInt(key string, value int32) error"
+        implementation: "editor = edit(); editor.putInt(key, value); editor.apply()"
+
+      - go_name: PutBool
+        go_signature: "func (p *Preferences) PutBool(key string, value bool) error"
+        implementation: "editor = edit(); editor.putBoolean(key, value); editor.apply()"
+
+      - go_name: PutFloat
+        go_signature: "func (p *Preferences) PutFloat(key string, value float32) error"
+        implementation: "editor = edit(); editor.putFloat(key, value); editor.apply()"
+
+      - go_name: PutLong
+        go_signature: "func (p *Preferences) PutLong(key string, value int64) error"
+        implementation: "editor = edit(); editor.putLong(key, value); editor.apply()"
+
+      - go_name: Remove
+        go_signature: "func (p *Preferences) Remove(key string) error"
+        implementation: "editor = edit(); editor.remove(key); editor.apply()"
+
+      - go_name: Clear
+        go_signature: "func (p *Preferences) Clear() error"
+        implementation: "editor = edit(); editor.clear(); editor.apply()"
+
+    constructor_overlay:
+      go_name: Open
+      go_signature: "func Open(ctx *app.Context, name string) (*Preferences, error)"
+      doc: "Opens a SharedPreferences file by name. Uses MODE_PRIVATE (0)."

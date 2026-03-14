@@ -1,0 +1,187 @@
+package {{.Package}}
+
+import (
+	"fmt"
+	"unsafe"
+
+	"github.com/xaionaro-go/jni"
+{{- if ne .Package "app"}}
+	"github.com/xaionaro-go/jni/app"
+{{- end}}
+)
+
+// Ensure imports are used.
+var (
+	_ = fmt.Errorf
+	_ = unsafe.Pointer(nil)
+{{- if ne .Package "app"}}
+	_ *app.Context
+{{- end}}
+)
+
+{{- if eq .Obtain "system_service"}}
+
+// {{.GoType}} wraps {{.JavaClass}}.
+type {{.GoType}} struct {
+	VM  *jni.VM
+	Ctx *app.Context
+	Obj *jni.GlobalRef
+}
+
+// New{{.GoType}} obtains {{.JavaClass}} from the Android system service manager.
+func New{{.GoType}}(ctx *app.Context) (*{{.GoType}}, error) {
+	if ctx == nil {
+		return nil, fmt.Errorf("{{.GoType}}: nil Context")
+	}
+	var mgr {{.GoType}}
+	mgr.VM = ctx.VM
+	mgr.Ctx = ctx
+
+	err := mgr.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		svc, err := ctx.GetSystemService("{{.ServiceName}}")
+		if err != nil {
+			return err
+		}
+		if svc == nil || svc.Ref() == 0 {
+			return fmt.Errorf("{{.ServiceName}} service not available")
+		}
+		mgr.Obj = env.NewGlobalRef(svc)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &mgr, nil
+}
+{{- end}}
+{{- if eq .Obtain "constructor"}}
+
+// {{.GoType}} wraps {{.JavaClass}}.
+type {{.GoType}} struct {
+	VM  *jni.VM
+	Obj *jni.GlobalRef
+}
+
+// New{{.GoType}} creates a new {{.JavaClass}} instance.
+func New{{.GoType}}(vm *jni.VM) (*{{.GoType}}, error) {
+	var t {{.GoType}}
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(cls{{.GoType}})), mid{{.GoType}}Init)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+{{- end}}
+{{- if eq .Obtain "static_factory"}}
+
+// {{.GoType}} wraps {{.JavaClass}}.
+type {{.GoType}} struct {
+	VM  *jni.VM
+	Obj *jni.GlobalRef
+}
+{{- end}}
+{{- if and (ne .Obtain "system_service") (ne .Obtain "constructor") (ne .Obtain "static_factory") (ne .Obtain "static_fields")}}
+
+// {{.GoType}} wraps {{.JavaClass}}.
+type {{.GoType}} struct {
+	VM  *jni.VM
+	Obj *jni.GlobalRef
+}
+{{- end}}
+{{- if eq .Obtain "static_fields"}}
+
+// {{.GoType}} holds static field values from {{.JavaClass}}.
+type {{.GoType}} struct {
+{{range .Methods}}	{{.GoName}} {{.GoReturn}}
+{{end}}}
+
+// Get{{title .GoType}} reads all static fields from {{.JavaClass}}.
+func Get{{title .GoType}}(vm *jni.VM) (*{{.GoType}}, error) {
+	var info {{.GoType}}
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &info, nil
+}
+{{- end}}
+
+{{- if .Close}}
+
+// Close releases the global reference to the underlying Java object.
+// After Close, the {{.GoType}} must not be used.
+func (m *{{.GoType}}) Close() {
+	if m.Obj != nil {
+		m.VM.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(m.Obj)
+			m.Obj = nil
+			return nil
+		})
+	}
+}
+{{- end}}
+
+{{range .Methods}}
+// {{.GoName}} calls {{$.JavaClass}}.{{.JavaMethod}}.
+func (m *{{$.GoType}}) {{.GoName}}({{.GoParamList}}) {{.GoReturnList}} {
+	{{.GoReturnVars}}
+	{{if .HasError}}var callErr error{{end}}
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			{{if .HasError}}callErr = err{{end}}
+			return err
+		}
+{{range .Params}}		{{paramConversionCode .}}
+{{end}}
+{{- if eq .ReturnKind "void"}}		{{if .HasError}}callErr = {{end}}env.Call{{if .Static}}Static{{end}}VoidMethod(
+			{{if .Static}}(*jni.Class)(unsafe.Pointer(cls{{$.GoType}})){{else}}m.Obj{{end}},
+			mid{{$.GoType}}{{.GoName}}{{.JNIArgs}},
+		)
+{{else if eq .ReturnKind "string"}}		resultObj, {{if .HasError}}callErr{{else}}_{{end}} := env.Call{{if .Static}}Static{{end}}ObjectMethod(
+			{{if .Static}}(*jni.Class)(unsafe.Pointer(cls{{$.GoType}})){{else}}m.Obj{{end}},
+			mid{{$.GoType}}{{.GoName}}{{.JNIArgs}},
+		)
+		{{if .HasError}}if callErr != nil {
+			return callErr
+		}{{end}}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+{{else if eq .ReturnKind "bool"}}		resultRaw, {{if .HasError}}callErr{{else}}_{{end}} := env.Call{{if .Static}}Static{{end}}BooleanMethod(
+			{{if .Static}}(*jni.Class)(unsafe.Pointer(cls{{$.GoType}})){{else}}m.Obj{{end}},
+			mid{{$.GoType}}{{.GoName}}{{.JNIArgs}},
+		)
+		{{if .HasError}}if callErr != nil {
+			return callErr
+		}{{end}}
+		result = resultRaw != 0
+{{else}}		{{if .HasError}}result, callErr = env.Call{{if .Static}}Static{{end}}{{.CallSuffix}}Method({{else}}result, _ = env.Call{{if .Static}}Static{{end}}{{.CallSuffix}}Method({{end}}
+			{{if .Static}}(*jni.Class)(unsafe.Pointer(cls{{$.GoType}})){{else}}m.Obj{{end}},
+			mid{{$.GoType}}{{.GoName}}{{.JNIArgs}},
+		)
+		{{if .HasError}}if callErr != nil {
+			return callErr
+		}{{end}}
+{{end}}		return {{if .HasError}}callErr{{else}}nil{{end}}
+	})
+	return {{.GoReturnValues}}
+}
+{{- end}}

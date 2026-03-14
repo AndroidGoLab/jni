@@ -1,0 +1,154 @@
+package: nfc
+go_import: "github.com/xaionaro-go/jni/nfc"
+
+go_types:
+  - go_name: Tag
+    doc: "NFC tag with ID and technology list"
+    fields:
+      - { go_name: ID, go_type: "[]byte" }
+      - { go_name: Techs, go_type: "[]string", doc: '"Ndef", "IsoDep", "MifareClassic", etc.' }
+
+  - go_name: NdefRecord
+    doc: "A single NDEF record"
+    fields:
+      - { go_name: TNF, go_type: int, doc: "Type Name Format" }
+      - { go_name: Type, go_type: "[]byte", doc: 'Record type (e.g. "U" for URI, "T" for text)' }
+      - { go_name: ID, go_type: "[]byte" }
+      - { go_name: Payload, go_type: "[]byte" }
+
+  - go_name: NdefMessage
+    doc: "Structured NFC data containing one or more records"
+    fields:
+      - { go_name: Records, go_type: "[]NdefRecord" }
+
+overrides:
+  android.nfc.NfcAdapter:
+    constructor:
+      go_name: NewAdapter
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+      implementation_notes: |
+        Call NfcAdapter.getDefaultAdapter(ctx) static factory
+
+    composite_methods:
+      - go_name: IsEnabled
+        doc: "Check if NFC is enabled"
+        params: []
+        returns: { go_type: bool, error: true }
+
+      - go_name: EnableReaderMode
+        doc: "Enable NFC reader mode with tag discovery callback"
+        params:
+          - { go_name: activity, go_type: "*app.Activity" }
+          - { go_name: flags, go_type: int }
+          - { go_name: onTag, go_type: "func(Tag)" }
+        returns: { go_type: "cancel func()", error: true }
+        implementation_notes: |
+          1. Create ReaderCallback that converts android.nfc.Tag to Tag struct, calls onTag
+          2. Call enableReaderMode(activity, callback, flags, nil)
+          3. Return cancel func that calls disableReaderMode(activity)
+
+  android.nfc.tech.Ndef:
+    constructor:
+      go_name: OpenNdef
+      params_override: [{ go_name: tag, go_type: Tag }]
+      implementation_notes: |
+        1. Call Ndef.get(tag) to get Ndef instance
+        2. Call connect()
+        3. Return NdefTag wrapper
+
+    composite_methods:
+      - go_name: Read
+        doc: "Read the NDEF message from the tag"
+        params: []
+        returns: { go_type: "*NdefMessage", error: true }
+        implementation_notes: |
+          1. Call getNdefMessageRaw() -> android NdefMessage
+          2. Call getRecords() -> NdefRecord[]
+          3. Extract TNF/Type/ID/Payload from each record
+          4. Populate NdefMessage struct
+
+      - go_name: Write
+        doc: "Write an NDEF message to the tag"
+        params: [{ go_name: msg, go_type: NdefMessage }]
+        returns: { error: true }
+        implementation_notes: |
+          1. For each record in msg.Records, construct android NdefRecord
+          2. Construct android NdefMessage from records array
+          3. Call writeNdefMessageRaw(ndefMessage)
+
+      - go_name: MakeReadOnly
+        doc: "Make the tag permanently read-only"
+        params: []
+        returns: { error: true }
+
+      - go_name: IsWritable
+        params: []
+        returns: { go_type: bool }
+
+      - go_name: MaxSize
+        params: []
+        returns: { go_type: int }
+
+      - go_name: Close
+        params: []
+        returns: { error: true }
+
+  android.nfc.tech.IsoDep:
+    constructor:
+      go_name: OpenIsoDep
+      params_override: [{ go_name: tag, go_type: Tag }]
+      implementation_notes: |
+        1. Call IsoDep.get(tag) to get IsoDep instance
+        2. Call connect()
+        3. Return IsoDepTag wrapper
+
+    composite_methods:
+      - go_name: Transceive
+        doc: "Send a command APDU and receive a response"
+        params: [{ go_name: command, go_type: "[]byte" }]
+        returns: { go_type: "[]byte", error: true }
+
+      - go_name: SetTimeout
+        doc: "Set transceive timeout"
+        params: [{ go_name: d, go_type: "time.Duration" }]
+        implementation_notes: |
+          Convert time.Duration to milliseconds, call setTimeoutMs(ms)
+
+      - go_name: GetMaxTransceiveLength
+        params: []
+        returns: { go_type: int }
+
+      - go_name: Close
+        params: []
+        returns: { error: true }
+
+# NDEF record helper functions (package-level)
+package_funcs:
+  - go_name: NewURIRecord
+    doc: "Create an NDEF record for a URI"
+    params: [{ go_name: uri, go_type: string }]
+    returns: { go_type: NdefRecord }
+    implementation_notes: |
+      Call NdefRecord.createUri(uri), extract fields into NdefRecord struct
+
+  - go_name: NewTextRecord
+    doc: "Create an NDEF record for text"
+    params:
+      - { go_name: text, go_type: string }
+      - { go_name: locale, go_type: string }
+    returns: { go_type: NdefRecord }
+    implementation_notes: |
+      Call NdefRecord.createTextRecord(locale, text), extract fields
+
+  - go_name: NewMimeRecord
+    doc: "Create an NDEF record for MIME data"
+    params:
+      - { go_name: mimeType, go_type: string }
+      - { go_name: data, go_type: "[]byte" }
+    returns: { go_type: NdefRecord }
+    implementation_notes: |
+      Call NdefRecord.createMime(mimeType, data), extract fields
+
+imports:
+  - "github.com/xaionaro-go/jni/app"
+  - "time"

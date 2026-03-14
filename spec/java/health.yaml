@@ -1,0 +1,60 @@
+package: health
+go_import: "github.com/xaionaro-go/jni/health/connect"
+
+classes:
+  - java_class: androidx.health.connect.client.HealthConnectClient
+    go_type: Manager
+    obtain: static_factory
+    close: false
+    methods:
+      - java_method: getOrCreate
+        go_name: getOrCreateRaw
+        static: true
+        params:
+          - { java_type: android.content.Context, go_name: ctx }
+        returns: androidx.health.connect.client.HealthConnectClient
+        error: true
+
+      - java_method: insertRecords
+        go_name: insertRecordsRaw
+        params:
+          - { java_type: java.util.List, go_name: records }
+        returns: androidx.health.connect.client.response.InsertRecordsResponse
+        error: true
+
+      - java_method: readRecords
+        go_name: readRecordsRaw
+        params:
+          - { java_type: androidx.health.connect.client.request.ReadRecordsRequest, go_name: request }
+        returns: androidx.health.connect.client.response.ReadRecordsResponse
+        error: true
+
+      - java_method: aggregate
+        go_name: aggregateRaw
+        params:
+          - { java_type: androidx.health.connect.client.request.AggregateRequest, go_name: request }
+        returns: androidx.health.connect.client.aggregate.AggregationResult
+        error: true
+
+      - java_method: deleteRecords
+        go_name: deleteRecordsRaw
+        params:
+          - { java_type: kotlin.reflect.KClass, go_name: recordType }
+          - { java_type: androidx.health.connect.client.time.TimeRangeFilter, go_name: timeRange }
+        returns: void
+        error: true
+
+constants:
+  - { go_name: Steps, value: '"Steps"', go_type: RecordType }
+  - { go_name: HeartRate, value: '"HeartRate"', go_type: RecordType }
+  - { go_name: Distance, value: '"Distance"', go_type: RecordType }
+  - { go_name: ActiveCaloriesBurned, value: '"ActiveCaloriesBurned"', go_type: RecordType }
+  - { go_name: TotalCaloriesBurned, value: '"TotalCaloriesBurned"', go_type: RecordType }
+  - { go_name: Weight, value: '"Weight"', go_type: RecordType }
+  - { go_name: Height, value: '"Height"', go_type: RecordType }
+  - { go_name: BloodPressure, value: '"BloodPressure"', go_type: RecordType }
+  - { go_name: BloodGlucose, value: '"BloodGlucose"', go_type: RecordType }
+  - { go_name: OxygenSaturation, value: '"OxygenSaturation"', go_type: RecordType }
+  - { go_name: SleepSession, value: '"SleepSession"', go_type: RecordType }
+
+callbacks: []

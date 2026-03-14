@@ -1,0 +1,28 @@
+overlays:
+  - target: Manager
+    synthetic_methods:
+      - go_name: SetText
+        go_signature: "func (m *Manager) SetText(label, text string) error"
+        implementation:
+          - call ClipData.newPlainText(label, text) to create ClipData
+          - call setPrimaryClip(clipData)
+
+      - go_name: GetText
+        go_signature: "func (m *Manager) GetText() (string, error)"
+        implementation:
+          - call getPrimaryClip() to get ClipData
+          - if nil, return "", nil
+          - call clipData.getItemAt(0) to get first item
+          - call item.getText() to get CharSequence
+          - convert CharSequence to string via toString()
+
+      - go_name: HasText
+        go_signature: "func (m *Manager) HasText() (bool, error)"
+        implementation: "call hasPrimaryClip()"
+
+      - go_name: OnChanged
+        go_signature: "func (m *Manager) OnChanged(fn func()) (cancel func(), err error)"
+        implementation:
+          - create OnPrimaryClipChangedListener proxy with OnChanged = fn
+          - call addListener(listener)
+          - "cancel: calls removeListener(listener)"

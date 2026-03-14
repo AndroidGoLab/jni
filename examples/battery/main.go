@@ -1,0 +1,126 @@
+//go:build android
+
+// Command battery demonstrates Android battery status constants. It is
+// built as a c-shared library and packaged into an APK using the
+// shared apk.mk infrastructure.
+//
+// Battery information is obtained from the sticky broadcast
+// android.intent.action.BATTERY_CHANGED via Intent extras. The battery
+// package provides typed constants for interpreting those extras.
+package main
+
+/*
+#include <jni.h>
+*/
+import "C"
+import (
+	"bytes"
+	"fmt"
+	"unsafe"
+
+	"github.com/xaionaro-go/jni"
+	"github.com/xaionaro-go/jni/app"
+	"github.com/xaionaro-go/jni/os/battery"
+)
+
+func main() {}
+
+var output bytes.Buffer
+
+//export goRun
+func goRun(cvm *C.JavaVM) {
+	vm := jni.VMFromPtr(unsafe.Pointer(cvm))
+	if err := run(vm); err != nil {
+		fmt.Fprintf(&output, "ERROR: %v\n", err)
+	}
+}
+
+//export goGetOutput
+func goGetOutput() *C.char {
+	return C.CString(output.String())
+}
+
+func run(vm *jni.VM) error {
+	ctx, err := getAppContext(vm)
+	if err != nil {
+		return fmt.Errorf("get context: %w", err)
+	}
+	defer ctx.Close()
+
+	// Battery status constants (android.os.BatteryManager.BATTERY_STATUS_*).
+	// The Status type is a named int for type safety.
+	fmt.Fprintf(&output, "status: unknown=%d, charging=%d, discharging=%d, not_charging=%d, full=%d\n",
+		battery.StatusUnknown, battery.StatusCharging, battery.StatusDischarging,
+		battery.StatusNotCharging, battery.StatusFull)
+
+	// Plugged state constants (android.os.BatteryManager.BATTERY_PLUGGED_*).
+	fmt.Fprintf(&output, "plugged: none=%d, ac=%d, usb=%d, wireless=%d\n",
+		battery.PluggedNone, battery.PluggedAC, battery.PluggedUSB,
+		battery.PluggedWireless)
+
+	// In a real app, battery info is read from the BATTERY_CHANGED sticky
+	// broadcast. Register a BroadcastReceiver via app.Context.RegisterReceiverRaw
+	// or read the sticky intent directly:
+	//
+	//   intent, _ := ctx.RegisterReceiverRaw(nil, batteryFilter)
+	//   status := battery.Status(intent.GetIntExtra("status", 0))
+	//   level := intent.GetIntExtra("level", 0)
+	//   scale := intent.GetIntExtra("scale", 100)
+	//   pct := float64(level) / float64(scale) * 100
+	//
+	// Available extras: level, scale, status, temperature, voltage, plugged,
+	// health, technology, present.
+
+	// Demonstrate Status type usage.
+	status := battery.StatusCharging
+	switch status {
+	case battery.StatusUnknown:
+		fmt.Fprintln(&output, "battery status: unknown")
+	case battery.StatusCharging:
+		fmt.Fprintln(&output, "battery status: charging")
+	case battery.StatusDischarging:
+		fmt.Fprintln(&output, "battery status: discharging")
+	case battery.StatusNotCharging:
+		fmt.Fprintln(&output, "battery status: not charging")
+	case battery.StatusFull:
+		fmt.Fprintln(&output, "battery status: full")
+	}
+
+	return nil
+}
+
+// getAppContext obtains an Android Context via ActivityThread.currentApplication().
+func getAppContext(vm *jni.VM) (*app.Context, error) {
+	var ctx app.Context
+	ctx.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := app.Init(env); err != nil {
+			return err
+		}
+
+		atClass, err := env.FindClass("android/app/ActivityThread")
+		if err != nil {
+			return fmt.Errorf("find ActivityThread: %w", err)
+		}
+
+		curAppMid, err := env.GetStaticMethodID(atClass, "currentApplication", "()Landroid/app/Application;")
+		if err != nil {
+			return fmt.Errorf("get currentApplication: %w", err)
+		}
+		appObj, err := env.CallStaticObjectMethod(atClass, curAppMid)
+		if err != nil {
+			return fmt.Errorf("call currentApplication: %w", err)
+		}
+		if appObj == nil || appObj.Ref() == 0 {
+			return fmt.Errorf("currentApplication returned null")
+		}
+
+		ctx.Obj = env.NewGlobalRef(appObj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &ctx, nil
+}

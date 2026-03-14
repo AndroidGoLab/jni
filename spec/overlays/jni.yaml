@@ -1,0 +1,659 @@
+# JNI overlay specification
+# Maps C JNI names to idiomatic Go: renames types, assigns receivers,
+# maps parameters, annotates exception-checking, and defines Go-friendly
+# method signatures.
+
+type_renames:
+  # Env and VM
+  JNIEnv: Env
+  JavaVM: VM
+
+  # Reference types → Go struct types (used as pointer receivers)
+  jobject: Object
+  jclass: Class
+  jstring: String
+  jthrowable: Throwable
+  jarray: Array
+  jbooleanArray: BooleanArray
+  jbyteArray: ByteArray
+  jcharArray: CharArray
+  jshortArray: ShortArray
+  jintArray: IntArray
+  jlongArray: LongArray
+  jfloatArray: FloatArray
+  jdoubleArray: DoubleArray
+  jobjectArray: ObjectArray
+  jweak: WeakRef
+
+  # Opaque ID types → Go value types
+  jmethodID: MethodID
+  jfieldID: FieldID
+
+  # Primitive types (kept as Go builtins, not renamed to custom types)
+  jboolean: uint8
+  jbyte: int8
+  jchar: uint16
+  jshort: int16
+  jint: int32
+  jlong: int64
+  jfloat: float32
+  jdouble: float64
+  jsize: int32
+
+  # Enum type
+  jobjectRefType: ObjectRefType
+
+receivers:
+  env_functions: "*Env"
+  function_families: "*Env"
+  vm_functions: "*VM"
+
+functions:
+  # ── Version ──────────────────────────────────────────────────────────
+  GetVersion:
+    go_name: GetVersion
+    returns: {go_type: int32}
+
+  # ── Class operations ─────────────────────────────────────────────────
+  DefineClass:
+    go_name: DefineClass
+    check_exception: true
+    params:
+      - {name: name, c_type: "const char*", go_type: string, transform: cstring}
+      - {name: loader, c_type: jobject, go_type: "*Object"}
+      - {name: buf, c_type: "const jbyte*", go_type: "[]byte", transform: byte_slice}
+      - {name: bufLen, c_type: jsize, go_type: int32, implicit: "len(buf)"}
+    returns: {go_type: "*Class"}
+
+  FindClass:
+    go_name: FindClass
+    check_exception: true
+    params:
+      - {name: name, c_type: "const char*", go_type: string, transform: cstring}
+    returns: {go_type: "*Class"}
+
+  GetSuperclass:
+    go_name: GetSuperclass
+    params:
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+    returns: {go_type: "*Class"}
+
+  IsAssignableFrom:
+    go_name: IsAssignableFrom
+    params:
+      - {name: cls1, c_type: jclass, go_type: "*Class"}
+      - {name: cls2, c_type: jclass, go_type: "*Class"}
+    returns: {go_type: bool}
+
+  # ── Exceptions ───────────────────────────────────────────────────────
+  Throw:
+    go_name: Throw
+    params:
+      - {name: throwable, c_type: jthrowable, go_type: "*Throwable"}
+    returns: {go_type: error, transform: jni_error}
+
+  ThrowNew:
+    go_name: ThrowNew
+    params:
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+      - {name: message, c_type: "const char*", go_type: string, transform: cstring}
+    returns: {go_type: error, transform: jni_error}
+
+  ExceptionOccurred:
+    go_name: ExceptionOccurred
+    returns: {go_type: "*Throwable"}
+
+  ExceptionDescribe:
+    go_name: ExceptionDescribe
+
+  ExceptionClear:
+    go_name: ExceptionClear
+
+  ExceptionCheck:
+    go_name: ExceptionCheck
+    returns: {go_type: bool}
+
+  FatalError:
+    go_name: FatalError
+    params:
+      - {name: msg, c_type: "const char*", go_type: string, transform: cstring}
+
+  # ── References ───────────────────────────────────────────────────────
+  NewGlobalRef:
+    go_name: NewGlobalRef
+    params:
+      - {name: obj, c_type: jobject, go_type: "*Object"}
+    returns: {go_type: "*Object"}
+
+  DeleteGlobalRef:
+    go_name: DeleteGlobalRef
+    params:
+      - {name: globalRef, c_type: jobject, go_type: "*Object"}
+
+  NewLocalRef:
+    go_name: NewLocalRef
+    params:
+      - {name: obj, c_type: jobject, go_type: "*Object"}
+    returns: {go_type: "*Object"}
+
+  DeleteLocalRef:
+    go_name: DeleteLocalRef
+    params:
+      - {name: localRef, c_type: jobject, go_type: "*Object"}
+
+  NewWeakGlobalRef:
+    go_name: NewWeakGlobalRef
+    params:
+      - {name: obj, c_type: jobject, go_type: "*Object"}
+    returns: {go_type: "*WeakRef"}
+
+  DeleteWeakGlobalRef:
+    go_name: DeleteWeakGlobalRef
+    params:
+      - {name: ref, c_type: jweak, go_type: "*WeakRef"}
+
+  # ── Local frames ────────────────────────────────────────────────────
+  PushLocalFrame:
+    go_name: PushLocalFrame
+    params:
+      - {name: capacity, c_type: jint, go_type: int32}
+    returns: {go_type: error, transform: jni_error}
+
+  PopLocalFrame:
+    go_name: PopLocalFrame
+    params:
+      - {name: result, c_type: jobject, go_type: "*Object"}
+    returns: {go_type: "*Object"}
+
+  EnsureLocalCapacity:
+    go_name: EnsureLocalCapacity
+    params:
+      - {name: capacity, c_type: jint, go_type: int32}
+    returns: {go_type: error, transform: jni_error}
+
+  # ── Object operations ───────────────────────────────────────────────
+  AllocObject:
+    go_name: AllocObject
+    check_exception: true
+    params:
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+    returns: {go_type: "*Object"}
+
+  NewObjectA:
+    go_name: NewObject
+    check_exception: true
+    params:
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+      - {name: method, c_type: jmethodID, go_type: MethodID}
+      - {name: args, c_type: "const jvalue*", go_type: "...Value", transform: jvalue_variadic}
+    returns: {go_type: "*Object"}
+
+  GetObjectClass:
+    go_name: GetObjectClass
+    params:
+      - {name: obj, c_type: jobject, go_type: "*Object"}
+    returns: {go_type: "*Class"}
+
+  IsInstanceOf:
+    go_name: IsInstanceOf
+    params:
+      - {name: obj, c_type: jobject, go_type: "*Object"}
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+    returns: {go_type: bool}
+
+  IsSameObject:
+    go_name: IsSameObject
+    params:
+      - {name: ref1, c_type: jobject, go_type: "*Object"}
+      - {name: ref2, c_type: jobject, go_type: "*Object"}
+    returns: {go_type: bool}
+
+  GetObjectRefType:
+    go_name: GetObjectRefType
+    params:
+      - {name: obj, c_type: jobject, go_type: "*Object"}
+    returns: {go_type: ObjectRefType}
+
+  # ── Method/Field ID lookup ──────────────────────────────────────────
+  GetMethodID:
+    go_name: GetMethodID
+    check_exception: true
+    params:
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+      - {name: name, c_type: "const char*", go_type: string, transform: cstring}
+      - {name: sig, c_type: "const char*", go_type: string, transform: cstring}
+    returns: {go_type: MethodID}
+
+  GetStaticMethodID:
+    go_name: GetStaticMethodID
+    check_exception: true
+    params:
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+      - {name: name, c_type: "const char*", go_type: string, transform: cstring}
+      - {name: sig, c_type: "const char*", go_type: string, transform: cstring}
+    returns: {go_type: MethodID}
+
+  GetFieldID:
+    go_name: GetFieldID
+    check_exception: true
+    params:
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+      - {name: name, c_type: "const char*", go_type: string, transform: cstring}
+      - {name: sig, c_type: "const char*", go_type: string, transform: cstring}
+    returns: {go_type: FieldID}
+
+  GetStaticFieldID:
+    go_name: GetStaticFieldID
+    check_exception: true
+    params:
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+      - {name: name, c_type: "const char*", go_type: string, transform: cstring}
+      - {name: sig, c_type: "const char*", go_type: string, transform: cstring}
+    returns: {go_type: FieldID}
+
+  # ── String operations ───────────────────────────────────────────────
+  NewString:
+    go_name: NewString
+    check_exception: true
+    params:
+      - {name: unicodeChars, c_type: "const jchar*", go_type: "[]uint16", transform: uint16_slice}
+      - {name: len, c_type: jsize, go_type: int32, implicit: "len(unicodeChars)"}
+    returns: {go_type: "*String"}
+
+  GetStringLength:
+    go_name: GetStringLength
+    params:
+      - {name: str, c_type: jstring, go_type: "*String"}
+    returns: {go_type: int32}
+
+  GetStringChars:
+    go_name: GetStringChars
+    check_exception: true
+    params:
+      - {name: str, c_type: jstring, go_type: "*String"}
+      - {name: isCopy, c_type: "jboolean*", go_type: "*uint8"}
+    returns: {go_type: "unsafe.Pointer"}
+
+  ReleaseStringChars:
+    go_name: ReleaseStringChars
+    params:
+      - {name: str, c_type: jstring, go_type: "*String"}
+      - {name: chars, c_type: "const jchar*", go_type: "unsafe.Pointer"}
+
+  NewStringUTF:
+    go_name: NewStringUTF
+    check_exception: true
+    params:
+      - {name: bytes, c_type: "const char*", go_type: string, transform: cstring}
+    returns: {go_type: "*String"}
+
+  GetStringUTFLength:
+    go_name: GetStringUTFLength
+    params:
+      - {name: str, c_type: jstring, go_type: "*String"}
+    returns: {go_type: int32}
+
+  GetStringUTFChars:
+    go_name: GetStringUTFChars
+    check_exception: true
+    params:
+      - {name: str, c_type: jstring, go_type: "*String"}
+      - {name: isCopy, c_type: "jboolean*", go_type: "*uint8"}
+    returns: {go_type: "unsafe.Pointer"}
+
+  ReleaseStringUTFChars:
+    go_name: ReleaseStringUTFChars
+    params:
+      - {name: str, c_type: jstring, go_type: "*String"}
+      - {name: utf, c_type: "const char*", go_type: "unsafe.Pointer"}
+
+  GetStringRegion:
+    go_name: GetStringRegion
+    check_exception: true
+    params:
+      - {name: str, c_type: jstring, go_type: "*String"}
+      - {name: start, c_type: jsize, go_type: int32}
+      - {name: len, c_type: jsize, go_type: int32}
+      - {name: buf, c_type: "jchar*", go_type: "[]uint16", transform: uint16_slice}
+
+  GetStringUTFRegion:
+    go_name: GetStringUTFRegion
+    check_exception: true
+    params:
+      - {name: str, c_type: jstring, go_type: "*String"}
+      - {name: start, c_type: jsize, go_type: int32}
+      - {name: len, c_type: jsize, go_type: int32}
+      - {name: buf, c_type: "char*", go_type: "[]byte", transform: byte_slice}
+
+  GetStringCritical:
+    go_name: GetStringCritical
+    params:
+      - {name: str, c_type: jstring, go_type: "*String"}
+      - {name: isCopy, c_type: "jboolean*", go_type: "*uint8"}
+    returns: {go_type: "unsafe.Pointer"}
+
+  ReleaseStringCritical:
+    go_name: ReleaseStringCritical
+    params:
+      - {name: str, c_type: jstring, go_type: "*String"}
+      - {name: cstr, c_type: "const jchar*", go_type: "unsafe.Pointer"}
+
+  # ── Array operations (non-typed) ────────────────────────────────────
+  GetArrayLength:
+    go_name: GetArrayLength
+    params:
+      - {name: array, c_type: jarray, go_type: "*Array"}
+    returns: {go_type: int32}
+
+  NewObjectArray:
+    go_name: NewObjectArray
+    check_exception: true
+    params:
+      - {name: length, c_type: jsize, go_type: int32}
+      - {name: elementClass, c_type: jclass, go_type: "*Class"}
+      - {name: initialElement, c_type: jobject, go_type: "*Object"}
+    returns: {go_type: "*ObjectArray"}
+
+  GetObjectArrayElement:
+    go_name: GetObjectArrayElement
+    check_exception: true
+    params:
+      - {name: array, c_type: jobjectArray, go_type: "*ObjectArray"}
+      - {name: index, c_type: jsize, go_type: int32}
+    returns: {go_type: "*Object"}
+
+  SetObjectArrayElement:
+    go_name: SetObjectArrayElement
+    check_exception: true
+    params:
+      - {name: array, c_type: jobjectArray, go_type: "*ObjectArray"}
+      - {name: index, c_type: jsize, go_type: int32}
+      - {name: value, c_type: jobject, go_type: "*Object"}
+
+  GetPrimitiveArrayCritical:
+    go_name: GetPrimitiveArrayCritical
+    params:
+      - {name: array, c_type: jarray, go_type: "*Array"}
+      - {name: isCopy, c_type: "jboolean*", go_type: "*uint8"}
+    returns: {go_type: "unsafe.Pointer"}
+
+  ReleasePrimitiveArrayCritical:
+    go_name: ReleasePrimitiveArrayCritical
+    params:
+      - {name: array, c_type: jarray, go_type: "*Array"}
+      - {name: carray, c_type: "void*", go_type: "unsafe.Pointer"}
+      - {name: mode, c_type: jint, go_type: int32}
+
+  # ── Direct byte buffers ─────────────────────────────────────────────
+  NewDirectByteBuffer:
+    go_name: NewDirectByteBuffer
+    params:
+      - {name: address, c_type: "void*", go_type: "unsafe.Pointer"}
+      - {name: capacity, c_type: jlong, go_type: int64}
+    returns: {go_type: "*Object"}
+
+  GetDirectBufferAddress:
+    go_name: GetDirectBufferAddress
+    params:
+      - {name: buf, c_type: jobject, go_type: "*Object"}
+    returns: {go_type: "unsafe.Pointer"}
+
+  GetDirectBufferCapacity:
+    go_name: GetDirectBufferCapacity
+    params:
+      - {name: buf, c_type: jobject, go_type: "*Object"}
+    returns: {go_type: int64}
+
+  # ── Monitor ─────────────────────────────────────────────────────────
+  MonitorEnter:
+    go_name: MonitorEnter
+    check_exception: true
+    params:
+      - {name: obj, c_type: jobject, go_type: "*Object"}
+    returns: {go_type: error, transform: jni_error}
+
+  MonitorExit:
+    go_name: MonitorExit
+    check_exception: true
+    params:
+      - {name: obj, c_type: jobject, go_type: "*Object"}
+    returns: {go_type: error, transform: jni_error}
+
+  # ── Reflection ──────────────────────────────────────────────────────
+  FromReflectedMethod:
+    go_name: FromReflectedMethod
+    params:
+      - {name: method, c_type: jobject, go_type: "*Object"}
+    returns: {go_type: MethodID}
+
+  FromReflectedField:
+    go_name: FromReflectedField
+    params:
+      - {name: field, c_type: jobject, go_type: "*Object"}
+    returns: {go_type: FieldID}
+
+  ToReflectedMethod:
+    go_name: ToReflectedMethod
+    params:
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+      - {name: method, c_type: jmethodID, go_type: MethodID}
+      - {name: isStatic, c_type: jboolean, go_type: bool}
+    returns: {go_type: "*Object"}
+
+  ToReflectedField:
+    go_name: ToReflectedField
+    params:
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+      - {name: field, c_type: jfieldID, go_type: FieldID}
+      - {name: isStatic, c_type: jboolean, go_type: bool}
+    returns: {go_type: "*Object"}
+
+  # ── Native method registration ──────────────────────────────────────
+  RegisterNatives:
+    go_name: RegisterNatives
+    params:
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+      - {name: methods, c_type: "const JNINativeMethod*", go_type: "unsafe.Pointer"}
+      - {name: nMethods, c_type: jint, go_type: int32}
+    returns: {go_type: error, transform: jni_error}
+
+  UnregisterNatives:
+    go_name: UnregisterNatives
+    params:
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+    returns: {go_type: error, transform: jni_error}
+
+  # ── VM functions ────────────────────────────────────────────────────
+  DestroyJavaVM:
+    go_name: Destroy
+    returns: {go_type: error, transform: jni_error}
+
+  AttachCurrentThread:
+    go_name: AttachCurrentThread
+    params:
+      - {name: env, c_type: "JNIEnv**", go_type: "**Env", transform: env_ptr}
+      - {name: args, c_type: "void*", go_type: "unsafe.Pointer"}
+    returns: {go_type: error, transform: jni_error}
+
+  DetachCurrentThread:
+    go_name: DetachCurrentThread
+    returns: {go_type: error, transform: jni_error}
+
+  GetEnv:
+    go_name: GetEnv
+    params:
+      - {name: env, c_type: "void**", go_type: "unsafe.Pointer", transform: env_void_ptr}
+      - {name: version, c_type: jint, go_type: int32}
+    returns: {go_type: error, transform: jni_error}
+
+  AttachCurrentThreadAsDaemon:
+    go_name: AttachCurrentThreadAsDaemon
+    params:
+      - {name: env, c_type: "JNIEnv**", go_type: "**Env", transform: env_ptr}
+      - {name: args, c_type: "void*", go_type: "unsafe.Pointer"}
+    returns: {go_type: error, transform: jni_error}
+
+# Typed family overlays — pattern-based rules applied during family expansion.
+family_overlays:
+  "Call{Type}MethodA":
+    go_pattern: "Call{Type}Method"
+    check_exception: true
+    params:
+      - {name: obj, c_type: jobject, go_type: "*Object"}
+      - {name: method, c_type: jmethodID, go_type: MethodID}
+      - {name: args, c_type: "const jvalue*", go_type: "...Value", transform: jvalue_variadic}
+    returns:
+      primitive: "{go_type}"
+      Object: "*Object"
+      Void: ~
+
+  "CallStatic{Type}MethodA":
+    go_pattern: "CallStatic{Type}Method"
+    check_exception: true
+    params:
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+      - {name: method, c_type: jmethodID, go_type: MethodID}
+      - {name: args, c_type: "const jvalue*", go_type: "...Value", transform: jvalue_variadic}
+    returns:
+      primitive: "{go_type}"
+      Object: "*Object"
+      Void: ~
+
+  "CallNonvirtual{Type}MethodA":
+    go_pattern: "CallNonvirtual{Type}Method"
+    check_exception: true
+    params:
+      - {name: obj, c_type: jobject, go_type: "*Object"}
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+      - {name: method, c_type: jmethodID, go_type: MethodID}
+      - {name: args, c_type: "const jvalue*", go_type: "...Value", transform: jvalue_variadic}
+    returns:
+      primitive: "{go_type}"
+      Object: "*Object"
+      Void: ~
+
+  "Get{Type}Field":
+    go_pattern: "Get{Type}Field"
+    params:
+      - {name: obj, c_type: jobject, go_type: "*Object"}
+      - {name: field, c_type: jfieldID, go_type: FieldID}
+    returns:
+      primitive: "{go_type}"
+      Object: "*Object"
+
+  "Set{Type}Field":
+    go_pattern: "Set{Type}Field"
+    params:
+      - {name: obj, c_type: jobject, go_type: "*Object"}
+      - {name: field, c_type: jfieldID, go_type: FieldID}
+      - {name: value, c_type: "{type}", go_type: "{go_type}"}
+
+  "GetStatic{Type}Field":
+    go_pattern: "GetStatic{Type}Field"
+    params:
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+      - {name: field, c_type: jfieldID, go_type: FieldID}
+    returns:
+      primitive: "{go_type}"
+      Object: "*Object"
+
+  "SetStatic{Type}Field":
+    go_pattern: "SetStatic{Type}Field"
+    params:
+      - {name: cls, c_type: jclass, go_type: "*Class"}
+      - {name: field, c_type: jfieldID, go_type: FieldID}
+      - {name: value, c_type: "{type}", go_type: "{go_type}"}
+
+  "New{Type}Array":
+    go_pattern: "New{Type}Array"
+    params:
+      - {name: length, c_type: jsize, go_type: int32}
+    returns: "*{Type}Array"
+
+  "Get{Type}ArrayElements":
+    go_pattern: "Get{Type}ArrayElements"
+    params:
+      - {name: array, c_type: "{type}Array", go_type: "*{Type}Array"}
+      - {name: isCopy, c_type: "jboolean*", go_type: "*uint8"}
+    returns: "unsafe.Pointer"
+
+  "Release{Type}ArrayElements":
+    go_pattern: "Release{Type}ArrayElements"
+    params:
+      - {name: array, c_type: "{type}Array", go_type: "*{Type}Array"}
+      - {name: elems, c_type: "{type}*", go_type: "unsafe.Pointer"}
+      - {name: mode, c_type: jint, go_type: int32}
+
+  "Get{Type}ArrayRegion":
+    go_pattern: "Get{Type}ArrayRegion"
+    params:
+      - {name: array, c_type: "{type}Array", go_type: "*{Type}Array"}
+      - {name: start, c_type: jsize, go_type: int32}
+      - {name: len, c_type: jsize, go_type: int32}
+      - {name: buf, c_type: "{type}*", go_type: "unsafe.Pointer"}
+
+  "Set{Type}ArrayRegion":
+    go_pattern: "Set{Type}ArrayRegion"
+    params:
+      - {name: array, c_type: "{type}Array", go_type: "*{Type}Array"}
+      - {name: start, c_type: jsize, go_type: int32}
+      - {name: len, c_type: jsize, go_type: int32}
+      - {name: buf, c_type: "const {type}*", go_type: "unsafe.Pointer"}
+
+# Parameter transform definitions — referenced by "transform" field in param overlays.
+param_transforms:
+  cstring:
+    description: "Convert Go string to C string with defer free"
+    go_type: string
+    c_type: "const char*"
+    to_c: |
+      c_{name} := C.CString({name})
+      defer C.free(unsafe.Pointer(c_{name}))
+    c_arg: "c_{name}"
+
+  jvalue_variadic:
+    description: "Convert ...Value variadic to *C.jvalue array"
+    go_type: "...Value"
+    c_type: "const jvalue*"
+    to_c: |
+      var c_{name} *C.jvalue
+      if len({name}) > 0 {
+          c_{name} = (*C.jvalue)(unsafe.Pointer(&{name}[0]))
+      }
+    c_arg: "c_{name}"
+
+  byte_slice:
+    description: "Convert []byte to C pointer + length"
+    go_type: "[]byte"
+    c_type: "const jbyte*"
+    to_c: |
+      c_{name} := (*C.jbyte)(unsafe.Pointer(&{name}[0]))
+    c_arg: "c_{name}"
+
+  uint16_slice:
+    description: "Convert []uint16 to jchar pointer"
+    go_type: "[]uint16"
+    c_type: "const jchar*"
+    to_c: |
+      c_{name} := (*C.jchar)(unsafe.Pointer(&{name}[0]))
+    c_arg: "c_{name}"
+
+  env_ptr:
+    description: "Convert **Env to **C.JNIEnv"
+    go_type: "**Env"
+    c_type: "JNIEnv**"
+    to_c: |
+      var c_{name} *C.JNIEnv
+    c_arg: "&c_{name}"
+    from_c: |
+      *{name} = envFromPtr(c_{name})
+
+  jni_error:
+    description: "Convert jint return code to error (nil if JNI_OK)"
+    go_type: error
+    c_type: jint
+    from_c: |
+      if ret != C.JNI_OK {
+          return Error(ret)
+      }
+      return nil

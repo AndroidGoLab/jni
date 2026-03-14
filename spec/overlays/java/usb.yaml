@@ -1,0 +1,175 @@
+overlays:
+  # Device hierarchy: iterate getInterface(0..N) and getEndpoint(0..N)
+  - target: usbDevice
+    doc: "Converts Java UsbDevice into Go Device struct with nested Interfaces and Endpoints"
+    extraction:
+      - name: extractDevice
+        steps:
+          - "Extract scalar fields (Name, VendorID, ProductID, etc.) via getters"
+          - "count = getInterfaceCount()"
+          - "for i := 0; i < count; i++:"
+          - "  javaIface = getInterface(i)"
+          - "  extract Interface fields (ID, Class, Subclass, Protocol)"
+          - "  epCount = javaIface.getEndpointCount()"
+          - "  for j := 0; j < epCount; j++:"
+          - "    javaEp = javaIface.getEndpoint(j)"
+          - "    extract Endpoint fields (Address, Direction, Type, MaxPacket)"
+          - "    append to iface.Endpoints"
+          - "  append iface to device.Interfaces"
+
+  - target: Manager
+    synthetic_methods:
+      # GetDeviceList: HashMap -> []Device
+      - go_name: GetDeviceList
+        go_signature: "func (m *Manager) GetDeviceList() ([]Device, error)"
+        doc: "Returns all currently connected USB devices."
+        implementation:
+          - "Call getDeviceList() to get HashMap<String, UsbDevice>"
+          - "Iterate HashMap entries via entrySet().iterator()"
+          - "For each UsbDevice, run extractDevice to build Device struct"
+          - "Return []Device slice"
+          - "Store map[int32]jobject for DeviceID->Java object lookup (needed by HasPermission, OpenDevice)"
+
+      # HasPermission: find Java object by DeviceID
+      - go_name: HasPermission
+        go_signature: "func (m *Manager) HasPermission(dev Device) (bool, error)"
+        doc: "Returns whether the app has permission to access the USB device."
+        implementation:
+          - "Look up stored Java UsbDevice object by dev.DeviceID"
+          - "Call hasPermission(javaDevice)"
+
+      # RequestPermission: blocking via PendingIntent + BroadcastReceiver
+      - go_name: RequestPermission
+        go_signature: "func (m *Manager) RequestPermission(activity *app.Activity, dev Device) error"
+        doc: "Requests permission to access a USB device. Blocks until the user responds."
+        implementation:
+          - "Create a unique action string, e.g. \"com.app.USB_PERMISSION.{deviceId}\""
+          - "Register a BroadcastReceiver for that action"
+          - "Create a PendingIntent (broadcast) for that action"
+          - "Look up Java UsbDevice by dev.DeviceID"
+          - "Call requestPermission(javaDevice, pendingIntent)"
+          - "Block on BroadcastReceiver, waiting for the permission result"
+          - "Extract EXTRA_PERMISSION_GRANTED boolean from received Intent"
+          - "Unregister BroadcastReceiver"
+          - "If not granted, return error"
+          - "If granted, return nil"
+
+      # OpenDevice: find Java object and wrap Connection
+      - go_name: OpenDevice
+        go_signature: "func (m *Manager) OpenDevice(dev Device) (*Connection, error)"
+        doc: "Opens a connection to the USB device. Requires permission."
+        implementation:
+          - "Look up Java UsbDevice by dev.DeviceID"
+          - "Call openDevice(javaDevice)"
+          - "If nil returned, return error \"failed to open device\""
+          - "Wrap in Connection struct, store interface/endpoint Java object mappings"
+
+      # Hotplug: OnDeviceAttached
+      - go_name: OnDeviceAttached
+        go_signature: "func (m *Manager) OnDeviceAttached(fn func(Device)) (cancel func(), err error)"
+        doc: "Registers a callback for USB device attach events."
+        implementation:
+          - "Register BroadcastReceiver for \"android.hardware.usb.action.USB_DEVICE_ATTACHED\""
+          - "On receive: extract UsbDevice from intent extras (EXTRA_DEVICE)"
+          - "Run extractDevice to convert to Device struct"
+          - "Call fn(device)"
+          - "cancel: unregister BroadcastReceiver"
+
+      # Hotplug: OnDeviceDetached
+      - go_name: OnDeviceDetached
+        go_signature: "func (m *Manager) OnDeviceDetached(fn func(Device)) (cancel func(), err error)"
+        doc: "Registers a callback for USB device detach events."
+        implementation:
+          - "Register BroadcastReceiver for \"android.hardware.usb.action.USB_DEVICE_DETACHED\""
+          - "On receive: extract UsbDevice from intent extras (EXTRA_DEVICE)"
+          - "Run extractDevice to convert to Device struct"
+          - "Call fn(device)"
+          - "cancel: unregister BroadcastReceiver"
+
+  - target: Connection
+    method_overlays:
+      # ClaimInterface: map Go Interface struct to Java UsbInterface object
+      - go_name: ClaimInterface
+        original: claimInterface
+        go_signature: "func (c *Connection) ClaimInterface(iface Interface, force bool) error"
+        transform: |
+          Look up stored Java UsbInterface object by iface.ID.
+          Call claimInterface(javaIface, force).
+          If returned boolean is false, return error "failed to claim interface".
+        doc: "Claims exclusive access to a USB interface."
+
+      # ReleaseInterface
+      - go_name: ReleaseInterface
+        original: releaseInterface
+        go_signature: "func (c *Connection) ReleaseInterface(iface Interface) error"
+        transform: |
+          Look up stored Java UsbInterface object by iface.ID.
+          Call releaseInterface(javaIface).
+          If returned boolean is false, return error "failed to release interface".
+        doc: "Releases a previously claimed USB interface."
+
+      # BulkTransfer: simplify byte[]+length into []byte, timeout as time.Duration
+      - go_name: BulkTransfer
+        original: bulkTransferRaw
+        go_signature: "func (c *Connection) BulkTransfer(ep Endpoint, data []byte, timeout time.Duration) (int, error)"
+        transform: |
+          Look up stored Java UsbEndpoint object by ep.Address.
+          Call bulkTransferRaw(javaEndpoint, data, len(data), int(timeout.Milliseconds())).
+          Return the number of bytes transferred.
+          If return value is negative, return error.
+        doc: "Performs a bulk transfer on the given endpoint."
+
+      # InterruptTransfer: same underlying Java method as bulkTransfer
+      - go_name: InterruptTransfer
+        original: bulkTransferRaw
+        go_signature: "func (c *Connection) InterruptTransfer(ep Endpoint, data []byte, timeout time.Duration) (int, error)"
+        transform: |
+          Same as BulkTransfer — Android uses bulkTransfer for both bulk and interrupt.
+          Look up endpoint, call bulkTransferRaw, return result.
+        doc: "Performs a transfer on an interrupt endpoint. Uses same underlying Java method as BulkTransfer."
+
+      # ControlTransfer: simplify byte[]+length into []byte, timeout as time.Duration
+      - go_name: ControlTransfer
+        original: controlTransferRaw
+        go_signature: "func (c *Connection) ControlTransfer(reqType, req, value, index int, data []byte, timeout time.Duration) (int, error)"
+        transform: |
+          Call controlTransferRaw(reqType, req, value, index, data, len(data), int(timeout.Milliseconds())).
+          Return the number of bytes transferred.
+          If return value is negative, return error.
+        doc: "Performs a USB control transfer."
+
+go_types:
+  - name: Device
+    doc: "Represents a connected USB device with its interface and endpoint hierarchy."
+    fields:
+      - { name: Name, type: string }
+      - { name: VendorID, type: int32 }
+      - { name: ProductID, type: int32 }
+      - { name: DeviceID, type: int32 }
+      - { name: DeviceClass, type: int32 }
+      - { name: DeviceSubclass, type: int32 }
+      - { name: DeviceProtocol, type: int32 }
+      - { name: ManufacturerName, type: string }
+      - { name: ProductName, type: string }
+      - { name: SerialNumber, type: string }
+      - { name: Interfaces, type: "[]Interface" }
+
+  - name: Interface
+    doc: "Represents a USB interface within a device."
+    fields:
+      - { name: ID, type: int32 }
+      - { name: Class, type: int32 }
+      - { name: Subclass, type: int32 }
+      - { name: Protocol, type: int32 }
+      - { name: Endpoints, type: "[]Endpoint" }
+
+  - name: Endpoint
+    doc: "Represents a USB endpoint within an interface."
+    fields:
+      - { name: Address, type: int32 }
+      - { name: Direction, type: int32, doc: "DirIn (0x80) or DirOut (0x00)" }
+      - { name: Type, type: int32, doc: "TransferBulk (2), TransferInterrupt (3), etc." }
+      - { name: MaxPacket, type: int32 }
+
+imports:
+  - "time"

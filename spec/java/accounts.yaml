@@ -1,0 +1,59 @@
+package: accounts
+go_import: "github.com/xaionaro-go/jni/accounts"
+
+classes:
+  - java_class: android.accounts.AccountManager
+    go_type: Manager
+    obtain: static_factory
+    close: false
+    methods:
+      - java_method: get
+        go_name: getManagerRaw
+        static: true
+        params:
+          - { java_type: android.content.Context, go_name: ctx }
+        returns: android.accounts.AccountManager
+        error: true
+
+      - java_method: getAccounts
+        go_name: getAccountsRaw
+        params: []
+        returns: "android.accounts.Account[]"
+        error: true
+
+      - java_method: getAccountsByType
+        go_name: getAccountsByTypeRaw
+        params:
+          - { java_type: String, go_name: accountType }
+        returns: "android.accounts.Account[]"
+        error: true
+
+      - java_method: getAuthToken
+        go_name: getAuthTokenRaw
+        params:
+          - { java_type: android.accounts.Account, go_name: account }
+          - { java_type: String, go_name: authTokenType }
+          - { java_type: android.os.Bundle, go_name: options }
+          - { java_type: android.app.Activity, go_name: activity }
+          - { java_type: android.accounts.AccountManagerCallback, go_name: callback }
+          - { java_type: android.os.Handler, go_name: handler }
+        returns: android.accounts.AccountManagerFuture
+        error: true
+
+      - java_method: invalidateAuthToken
+        go_name: invalidateAuthTokenRaw
+        params:
+          - { java_type: String, go_name: accountType }
+          - { java_type: String, go_name: authToken }
+        returns: void
+        error: true
+
+  - java_class: android.accounts.Account
+    go_type: Account
+    kind: data_class
+    fields:
+      - { java_field: name, returns: String, go_name: Name, go_type: string }
+      - { java_field: type, returns: String, go_name: Type, go_type: string }
+
+constants: []
+callbacks: []

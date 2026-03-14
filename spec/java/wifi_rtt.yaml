@@ -1,0 +1,67 @@
+package: wifi_rtt
+go_import: "github.com/xaionaro-go/jni/net/wifi/rtt"
+
+classes:
+  - java_class: android.net.wifi.rtt.WifiRttManager
+    go_type: Manager
+    obtain: system_service
+    service_name: "wifirtt"
+    close: false
+
+    methods:
+      - java_method: isAvailable
+        go_name: isAvailableRaw
+        params: []
+        returns: boolean
+        error: true
+
+      - java_method: startRanging
+        go_name: startRangingRaw
+        params:
+          - { java_type: android.net.wifi.rtt.RangingRequest, go_name: request }
+          - { java_type: java.util.concurrent.Executor, go_name: executor }
+          - { java_type: android.net.wifi.rtt.RangingResultCallback, go_name: callback }
+        returns: void
+        error: true
+
+  - java_class: android.net.wifi.rtt.RangingRequest$Builder
+    go_type: rangingRequestBuilder
+    obtain: constructor
+    kind: builder
+    methods:
+      - java_method: addAccessPoint
+        go_name: addAccessPoint
+        params:
+          - { java_type: android.net.wifi.ScanResult, go_name: scanResult }
+        returns: android.net.wifi.rtt.RangingRequest$Builder
+        error: false
+
+      - java_method: build
+        go_name: build
+        params: []
+        returns: android.net.wifi.rtt.RangingRequest
+        error: false
+
+  - java_class: android.net.wifi.rtt.RangingResult
+    go_type: RangingResult
+    kind: data_class
+    fields:
+      - { java_method: getDistanceMm, returns: int, go_name: DistanceMM, go_type: int32 }
+      - { java_method: getDistanceStdDevMm, returns: int, go_name: DistanceStdDevMM, go_type: int32 }
+      - { java_method: getRssi, returns: int, go_name: RSSI, go_type: int32 }
+      - { java_method: getNumAttemptedMeasurements, returns: int, go_name: NumAttempted, go_type: int32 }
+      - { java_method: getNumSuccessfulMeasurements, returns: int, go_name: NumSuccessful, go_type: int32 }
+      - { java_method: getStatus, returns: int, go_name: Status, go_type: int }
+
+callbacks:
+  - java_interface: android.net.wifi.rtt.RangingResultCallback
+    go_type: rangingResultCallback
+    abstract_class: true
+    methods:
+      - { java_method: onRangingResults, params: [java.util.List], go_field: OnRangingResults }
+      - { java_method: onRangingFailure, params: [int], go_field: OnRangingFailure }
+
+constants:
+  - { go_name: StatusSuccess, value: "0", go_type: int }
+  - { go_name: StatusFail, value: "1", go_type: int }
+  - { go_name: StatusResponderNotCapable, value: "2", go_type: int }

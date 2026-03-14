@@ -1,0 +1,49 @@
+package: keyguard
+go_import: "github.com/xaionaro-go/jni/os/keyguard"
+
+overrides:
+  android.app.KeyguardManager:
+    constructor:
+      go_name: NewManager
+      params_override: [{ go_name: ctx, go_type: "*app.Context" }]
+
+    composite_methods:
+      - go_name: RequestDismissKeyguard
+        doc: "Request dismissal of the keyguard. Calls onSuccess or onFailed on the main thread."
+        params:
+          - { go_name: activity, go_type: "*app.Activity" }
+          - { go_name: onSuccess, go_type: "func()" }
+          - { go_name: onFailed, go_type: "func()" }
+        returns: { go_type: void, error: true }
+        implementation_notes: |
+          Create KeyguardDismissCallback proxy via jni.NewProxy:
+            OnDismissSucceeded → onSuccess()
+            OnDismissError → onFailed()
+            OnDismissCancelled → onFailed()
+          Call requestDismissKeyguardRaw(activity, callback).
+
+      - go_name: CreateConfirmCredentialIntent
+        doc: "Create an Intent to confirm device credentials (PIN/pattern/password/biometric)"
+        params:
+          - { go_name: title, go_type: string }
+          - { go_name: description, go_type: string }
+        returns: { go_type: "*app.Intent", error: true }
+        implementation_notes: |
+          Call createConfirmDeviceCredentialIntentRaw(title, description).
+          Wrap returned Java Intent as *app.Intent.
+
+      - go_name: OnKeyguardLockedStateChanged
+        doc: "Register a listener for keyguard lock state changes (API 31+)"
+        params:
+          - { go_name: fn, go_type: "func(locked bool)" }
+        returns: { go_type: "cancel func(), err error" }
+        implementation_notes: |
+          Create KeyguardLockedStateListener proxy:
+            OnLockedStateChanged → fn(locked)
+          Get main executor via context.getMainExecutor().
+          Call addKeyguardLockedStateListener(executor, listener).
+          Return cancel func that calls removeKeyguardLockedStateListener(listener).
+        min_api: 31
+
+imports:
+  - "github.com/xaionaro-go/jni/app"
