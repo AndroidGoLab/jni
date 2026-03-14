@@ -112,6 +112,7 @@ service JNIService {
   rpc FromReflectedField  (FromReflectedFieldRequest)  returns (FromReflectedFieldResponse);
   rpc ToReflectedMethod   (ToReflectedMethodRequest)   returns (ToReflectedMethodResponse);
   rpc ToReflectedField    (ToReflectedFieldRequest)    returns (ToReflectedFieldResponse);
+
 }
 
 // ---- Version ----

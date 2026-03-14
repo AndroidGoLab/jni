@@ -302,8 +302,8 @@ func TestGenerate_OutputFilePatterns(t *testing.T) {
 		},
 		{
 			specName:      "permission",
-			expectFiles:   []string{"doc.go", "init.go", "constants.go"},
-			unexpectFiles: []string{"callbacks.go", "context_compat.go", "activity_compat.go"},
+			expectFiles:   []string{"doc.go", "init.go", "constants.go", "context_compat.go", "activity_compat.go"},
+			unexpectFiles: []string{"callbacks.go"},
 		},
 	}
 

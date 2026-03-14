@@ -671,6 +671,94 @@ func (x *GetColumnIndexResponse) GetResult() int32 {
 	return 0
 }
 
+type ParseRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UriString     string                 `protobuf:"bytes,1,opt,name=uri_string,json=uriString,proto3" json:"uri_string,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ParseRequest) Reset() {
+	*x = ParseRequest{}
+	mi := &file_proto_resolver_resolver_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ParseRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ParseRequest) ProtoMessage() {}
+
+func (x *ParseRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_resolver_resolver_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ParseRequest.ProtoReflect.Descriptor instead.
+func (*ParseRequest) Descriptor() ([]byte, []int) {
+	return file_proto_resolver_resolver_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *ParseRequest) GetUriString() string {
+	if x != nil {
+		return x.UriString
+	}
+	return ""
+}
+
+type ParseResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ParseResponse) Reset() {
+	*x = ParseResponse{}
+	mi := &file_proto_resolver_resolver_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ParseResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ParseResponse) ProtoMessage() {}
+
+func (x *ParseResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_resolver_resolver_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ParseResponse.ProtoReflect.Descriptor instead.
+func (*ParseResponse) Descriptor() ([]byte, []int) {
+	return file_proto_resolver_resolver_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ParseResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
 type GetFdRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -679,7 +767,7 @@ type GetFdRequest struct {
 
 func (x *GetFdRequest) Reset() {
 	*x = GetFdRequest{}
-	mi := &file_proto_resolver_resolver_proto_msgTypes[14]
+	mi := &file_proto_resolver_resolver_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -691,7 +779,7 @@ func (x *GetFdRequest) String() string {
 func (*GetFdRequest) ProtoMessage() {}
 
 func (x *GetFdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_resolver_resolver_proto_msgTypes[14]
+	mi := &file_proto_resolver_resolver_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -704,7 +792,7 @@ func (x *GetFdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetFdRequest.ProtoReflect.Descriptor instead.
 func (*GetFdRequest) Descriptor() ([]byte, []int) {
-	return file_proto_resolver_resolver_proto_rawDescGZIP(), []int{14}
+	return file_proto_resolver_resolver_proto_rawDescGZIP(), []int{16}
 }
 
 type GetFdResponse struct {
@@ -716,7 +804,7 @@ type GetFdResponse struct {
 
 func (x *GetFdResponse) Reset() {
 	*x = GetFdResponse{}
-	mi := &file_proto_resolver_resolver_proto_msgTypes[15]
+	mi := &file_proto_resolver_resolver_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -728,7 +816,7 @@ func (x *GetFdResponse) String() string {
 func (*GetFdResponse) ProtoMessage() {}
 
 func (x *GetFdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_resolver_resolver_proto_msgTypes[15]
+	mi := &file_proto_resolver_resolver_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -741,7 +829,7 @@ func (x *GetFdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetFdResponse.ProtoReflect.Descriptor instead.
 func (*GetFdResponse) Descriptor() ([]byte, []int) {
-	return file_proto_resolver_resolver_proto_rawDescGZIP(), []int{15}
+	return file_proto_resolver_resolver_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetFdResponse) GetResult() int32 {
@@ -759,7 +847,7 @@ type DetachFdRequest struct {
 
 func (x *DetachFdRequest) Reset() {
 	*x = DetachFdRequest{}
-	mi := &file_proto_resolver_resolver_proto_msgTypes[16]
+	mi := &file_proto_resolver_resolver_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -771,7 +859,7 @@ func (x *DetachFdRequest) String() string {
 func (*DetachFdRequest) ProtoMessage() {}
 
 func (x *DetachFdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_resolver_resolver_proto_msgTypes[16]
+	mi := &file_proto_resolver_resolver_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -784,7 +872,7 @@ func (x *DetachFdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DetachFdRequest.ProtoReflect.Descriptor instead.
 func (*DetachFdRequest) Descriptor() ([]byte, []int) {
-	return file_proto_resolver_resolver_proto_rawDescGZIP(), []int{16}
+	return file_proto_resolver_resolver_proto_rawDescGZIP(), []int{18}
 }
 
 type DetachFdResponse struct {
@@ -796,7 +884,7 @@ type DetachFdResponse struct {
 
 func (x *DetachFdResponse) Reset() {
 	*x = DetachFdResponse{}
-	mi := &file_proto_resolver_resolver_proto_msgTypes[17]
+	mi := &file_proto_resolver_resolver_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -808,7 +896,7 @@ func (x *DetachFdResponse) String() string {
 func (*DetachFdResponse) ProtoMessage() {}
 
 func (x *DetachFdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_resolver_resolver_proto_msgTypes[17]
+	mi := &file_proto_resolver_resolver_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -821,7 +909,7 @@ func (x *DetachFdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DetachFdResponse.ProtoReflect.Descriptor instead.
 func (*DetachFdResponse) Descriptor() ([]byte, []int) {
-	return file_proto_resolver_resolver_proto_rawDescGZIP(), []int{17}
+	return file_proto_resolver_resolver_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *DetachFdResponse) GetResult() int32 {
@@ -871,7 +959,12 @@ const file_proto_resolver_resolver_proto_rawDesc = "" +
 	"\vcolumn_name\x18\x01 \x01(\tR\n" +
 	"columnName\"0\n" +
 	"\x16GetColumnIndexResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x05R\x06result\"\x0e\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"-\n" +
+	"\fParseRequest\x12\x1d\n" +
+	"\n" +
+	"uri_string\x18\x01 \x01(\tR\turiString\"'\n" +
+	"\rParseResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x0e\n" +
 	"\fGetFdRequest\"'\n" +
 	"\rGetFdResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\x05R\x06result\"\x11\n" +
@@ -887,7 +980,10 @@ const file_proto_resolver_resolver_proto_rawDesc = "" +
 	"\tGetString\x12\x1a.resolver.GetStringRequest\x1a\x1b.resolver.GetStringResponse\x12;\n" +
 	"\x06GetInt\x12\x17.resolver.GetIntRequest\x1a\x18.resolver.GetIntResponse\x12>\n" +
 	"\aGetLong\x12\x18.resolver.GetLongRequest\x1a\x19.resolver.GetLongResponse\x12S\n" +
-	"\x0eGetColumnIndex\x12\x1f.resolver.GetColumnIndexRequest\x1a .resolver.GetColumnIndexResponse2\x8e\x01\n" +
+	"\x0eGetColumnIndex\x12\x1f.resolver.GetColumnIndexRequest\x1a .resolver.GetColumnIndexResponse2F\n" +
+	"\n" +
+	"UriService\x128\n" +
+	"\x05Parse\x12\x16.resolver.ParseRequest\x1a\x17.resolver.ParseResponse2\x8e\x01\n" +
 	"\x0fParcelFDService\x128\n" +
 	"\x05GetFd\x12\x16.resolver.GetFdRequest\x1a\x17.resolver.GetFdResponse\x12A\n" +
 	"\bDetachFd\x12\x19.resolver.DetachFdRequest\x1a\x1a.resolver.DetachFdResponseB+Z)github.com/xaionaro-go/jni/proto/resolverb\x06proto3"
@@ -904,7 +1000,7 @@ func file_proto_resolver_resolver_proto_rawDescGZIP() []byte {
 	return file_proto_resolver_resolver_proto_rawDescData
 }
 
-var file_proto_resolver_resolver_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_proto_resolver_resolver_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_proto_resolver_resolver_proto_goTypes = []any{
 	(*QueryRawRequest)(nil),               // 0: resolver.QueryRawRequest
 	(*QueryRawResponse)(nil),              // 1: resolver.QueryRawResponse
@@ -920,10 +1016,12 @@ var file_proto_resolver_resolver_proto_goTypes = []any{
 	(*GetLongResponse)(nil),               // 11: resolver.GetLongResponse
 	(*GetColumnIndexRequest)(nil),         // 12: resolver.GetColumnIndexRequest
 	(*GetColumnIndexResponse)(nil),        // 13: resolver.GetColumnIndexResponse
-	(*GetFdRequest)(nil),                  // 14: resolver.GetFdRequest
-	(*GetFdResponse)(nil),                 // 15: resolver.GetFdResponse
-	(*DetachFdRequest)(nil),               // 16: resolver.DetachFdRequest
-	(*DetachFdResponse)(nil),              // 17: resolver.DetachFdResponse
+	(*ParseRequest)(nil),                  // 14: resolver.ParseRequest
+	(*ParseResponse)(nil),                 // 15: resolver.ParseResponse
+	(*GetFdRequest)(nil),                  // 16: resolver.GetFdRequest
+	(*GetFdResponse)(nil),                 // 17: resolver.GetFdResponse
+	(*DetachFdRequest)(nil),               // 18: resolver.DetachFdRequest
+	(*DetachFdResponse)(nil),              // 19: resolver.DetachFdResponse
 }
 var file_proto_resolver_resolver_proto_depIdxs = []int32{
 	0,  // 0: resolver.ResolverService.QueryRaw:input_type -> resolver.QueryRawRequest
@@ -933,19 +1031,21 @@ var file_proto_resolver_resolver_proto_depIdxs = []int32{
 	8,  // 4: resolver.CursorService.GetInt:input_type -> resolver.GetIntRequest
 	10, // 5: resolver.CursorService.GetLong:input_type -> resolver.GetLongRequest
 	12, // 6: resolver.CursorService.GetColumnIndex:input_type -> resolver.GetColumnIndexRequest
-	14, // 7: resolver.ParcelFDService.GetFd:input_type -> resolver.GetFdRequest
-	16, // 8: resolver.ParcelFDService.DetachFd:input_type -> resolver.DetachFdRequest
-	1,  // 9: resolver.ResolverService.QueryRaw:output_type -> resolver.QueryRawResponse
-	3,  // 10: resolver.ResolverService.OpenFileDescriptorRaw:output_type -> resolver.OpenFileDescriptorRawResponse
-	5,  // 11: resolver.CursorService.MoveToNext:output_type -> resolver.MoveToNextResponse
-	7,  // 12: resolver.CursorService.GetString:output_type -> resolver.GetStringResponse
-	9,  // 13: resolver.CursorService.GetInt:output_type -> resolver.GetIntResponse
-	11, // 14: resolver.CursorService.GetLong:output_type -> resolver.GetLongResponse
-	13, // 15: resolver.CursorService.GetColumnIndex:output_type -> resolver.GetColumnIndexResponse
-	15, // 16: resolver.ParcelFDService.GetFd:output_type -> resolver.GetFdResponse
-	17, // 17: resolver.ParcelFDService.DetachFd:output_type -> resolver.DetachFdResponse
-	9,  // [9:18] is the sub-list for method output_type
-	0,  // [0:9] is the sub-list for method input_type
+	14, // 7: resolver.UriService.Parse:input_type -> resolver.ParseRequest
+	16, // 8: resolver.ParcelFDService.GetFd:input_type -> resolver.GetFdRequest
+	18, // 9: resolver.ParcelFDService.DetachFd:input_type -> resolver.DetachFdRequest
+	1,  // 10: resolver.ResolverService.QueryRaw:output_type -> resolver.QueryRawResponse
+	3,  // 11: resolver.ResolverService.OpenFileDescriptorRaw:output_type -> resolver.OpenFileDescriptorRawResponse
+	5,  // 12: resolver.CursorService.MoveToNext:output_type -> resolver.MoveToNextResponse
+	7,  // 13: resolver.CursorService.GetString:output_type -> resolver.GetStringResponse
+	9,  // 14: resolver.CursorService.GetInt:output_type -> resolver.GetIntResponse
+	11, // 15: resolver.CursorService.GetLong:output_type -> resolver.GetLongResponse
+	13, // 16: resolver.CursorService.GetColumnIndex:output_type -> resolver.GetColumnIndexResponse
+	15, // 17: resolver.UriService.Parse:output_type -> resolver.ParseResponse
+	17, // 18: resolver.ParcelFDService.GetFd:output_type -> resolver.GetFdResponse
+	19, // 19: resolver.ParcelFDService.DetachFd:output_type -> resolver.DetachFdResponse
+	10, // [10:20] is the sub-list for method output_type
+	0,  // [0:10] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -962,9 +1062,9 @@ func file_proto_resolver_resolver_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_resolver_resolver_proto_rawDesc), len(file_proto_resolver_resolver_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   20,
 			NumExtensions: 0,
-			NumServices:   3,
+			NumServices:   4,
 		},
 		GoTypes:           file_proto_resolver_resolver_proto_goTypes,
 		DependencyIndexes: file_proto_resolver_resolver_proto_depIdxs,

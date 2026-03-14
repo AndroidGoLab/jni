@@ -12,6 +12,17 @@ message ShowRequest {
 message ShowResponse {
 }
 
+message MakeTextRequest {
+  int64 ctx = 1;
+  int64 text = 2;
+  int32 duration = 3;
+}
+
+message MakeTextResponse {
+  int64 result = 1;
+}
+
 service ToastService {
   rpc Show (ShowRequest) returns (ShowResponse);
+  rpc MakeText (MakeTextRequest) returns (MakeTextResponse);
 }

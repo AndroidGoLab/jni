@@ -21,7 +21,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ToastService_Show_FullMethodName = "/toast.ToastService/Show"
+	ToastService_Show_FullMethodName     = "/toast.ToastService/Show"
+	ToastService_MakeText_FullMethodName = "/toast.ToastService/MakeText"
 )
 
 // ToastServiceClient is the client API for ToastService service.
@@ -29,6 +30,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ToastServiceClient interface {
 	Show(ctx context.Context, in *ShowRequest, opts ...grpc.CallOption) (*ShowResponse, error)
+	MakeText(ctx context.Context, in *MakeTextRequest, opts ...grpc.CallOption) (*MakeTextResponse, error)
 }
 
 type toastServiceClient struct {
@@ -49,11 +51,22 @@ func (c *toastServiceClient) Show(ctx context.Context, in *ShowRequest, opts ...
 	return out, nil
 }
 
+func (c *toastServiceClient) MakeText(ctx context.Context, in *MakeTextRequest, opts ...grpc.CallOption) (*MakeTextResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MakeTextResponse)
+	err := c.cc.Invoke(ctx, ToastService_MakeText_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ToastServiceServer is the server API for ToastService service.
 // All implementations must embed UnimplementedToastServiceServer
 // for forward compatibility.
 type ToastServiceServer interface {
 	Show(context.Context, *ShowRequest) (*ShowResponse, error)
+	MakeText(context.Context, *MakeTextRequest) (*MakeTextResponse, error)
 	mustEmbedUnimplementedToastServiceServer()
 }
 
@@ -66,6 +79,9 @@ type UnimplementedToastServiceServer struct{}
 
 func (UnimplementedToastServiceServer) Show(context.Context, *ShowRequest) (*ShowResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Show not implemented")
+}
+func (UnimplementedToastServiceServer) MakeText(context.Context, *MakeTextRequest) (*MakeTextResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method MakeText not implemented")
 }
 func (UnimplementedToastServiceServer) mustEmbedUnimplementedToastServiceServer() {}
 func (UnimplementedToastServiceServer) testEmbeddedByValue()                      {}
@@ -106,6 +122,24 @@ func _ToastService_Show_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ToastService_MakeText_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MakeTextRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ToastServiceServer).MakeText(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ToastService_MakeText_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ToastServiceServer).MakeText(ctx, req.(*MakeTextRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ToastService_ServiceDesc is the grpc.ServiceDesc for ToastService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -116,6 +150,10 @@ var ToastService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Show",
 			Handler:    _ToastService_Show_Handler,
+		},
+		{
+			MethodName: "MakeText",
+			Handler:    _ToastService_MakeText_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

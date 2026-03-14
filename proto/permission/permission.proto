@@ -5,3 +5,29 @@ syntax = "proto3";
 package permission;
 
 option go_package = "github.com/xaionaro-go/jni/proto/permission";
+
+message CheckSelfPermissionRequest {
+  int64 ctx = 1;
+  string permission = 2;
+}
+
+message CheckSelfPermissionResponse {
+  int32 result = 1;
+}
+
+message RequestPermissionsRequest {
+  int64 activity = 1;
+  int64 permissions = 2;
+  int32 request_code = 3;
+}
+
+message RequestPermissionsResponse {
+}
+
+service ContextCompatService {
+  rpc CheckSelfPermission (CheckSelfPermissionRequest) returns (CheckSelfPermissionResponse);
+}
+
+service ActivityCompatService {
+  rpc RequestPermissions (RequestPermissionsRequest) returns (RequestPermissionsResponse);
+}

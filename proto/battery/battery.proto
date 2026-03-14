@@ -5,3 +5,54 @@ syntax = "proto3";
 package battery;
 
 option go_package = "github.com/xaionaro-go/jni/proto/battery";
+
+message GetLevelRawRequest {
+}
+
+message GetLevelRawResponse {
+  int32 result = 1;
+}
+
+message GetScaleRawRequest {
+}
+
+message GetScaleRawResponse {
+  int32 result = 1;
+}
+
+message GetStatusRequest {
+}
+
+message GetStatusResponse {
+  int32 result = 1;
+}
+
+message GetTemperatureRawRequest {
+}
+
+message GetTemperatureRawResponse {
+  int32 result = 1;
+}
+
+message GetVoltageRawRequest {
+}
+
+message GetVoltageRawResponse {
+  int32 result = 1;
+}
+
+message GetPluggedRequest {
+}
+
+message GetPluggedResponse {
+  int32 result = 1;
+}
+
+service BatteryManagerService {
+  rpc GetLevelRaw (GetLevelRawRequest) returns (GetLevelRawResponse);
+  rpc GetScaleRaw (GetScaleRawRequest) returns (GetScaleRawResponse);
+  rpc GetStatus (GetStatusRequest) returns (GetStatusResponse);
+  rpc GetTemperatureRaw (GetTemperatureRawRequest) returns (GetTemperatureRawResponse);
+  rpc GetVoltageRaw (GetVoltageRawRequest) returns (GetVoltageRawResponse);
+  rpc GetPlugged (GetPluggedRequest) returns (GetPluggedResponse);
+}

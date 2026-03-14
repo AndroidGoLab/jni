@@ -21,6 +21,374 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	EnvironmentService_GetRootDirectory_FullMethodName                  = "/environment.EnvironmentService/GetRootDirectory"
+	EnvironmentService_GetDataDirectory_FullMethodName                  = "/environment.EnvironmentService/GetDataDirectory"
+	EnvironmentService_GetExternalStorageDirectory_FullMethodName       = "/environment.EnvironmentService/GetExternalStorageDirectory"
+	EnvironmentService_GetExternalStoragePublicDirectory_FullMethodName = "/environment.EnvironmentService/GetExternalStoragePublicDirectory"
+	EnvironmentService_GetExternalStorageState_FullMethodName           = "/environment.EnvironmentService/GetExternalStorageState"
+	EnvironmentService_IsExternalStorageRemovable_FullMethodName        = "/environment.EnvironmentService/IsExternalStorageRemovable"
+	EnvironmentService_IsExternalStorageEmulated_FullMethodName         = "/environment.EnvironmentService/IsExternalStorageEmulated"
+	EnvironmentService_IsExternalStorageManager_FullMethodName          = "/environment.EnvironmentService/IsExternalStorageManager"
+)
+
+// EnvironmentServiceClient is the client API for EnvironmentService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type EnvironmentServiceClient interface {
+	GetRootDirectory(ctx context.Context, in *GetRootDirectoryRequest, opts ...grpc.CallOption) (*GetRootDirectoryResponse, error)
+	GetDataDirectory(ctx context.Context, in *GetDataDirectoryRequest, opts ...grpc.CallOption) (*GetDataDirectoryResponse, error)
+	GetExternalStorageDirectory(ctx context.Context, in *GetExternalStorageDirectoryRequest, opts ...grpc.CallOption) (*GetExternalStorageDirectoryResponse, error)
+	GetExternalStoragePublicDirectory(ctx context.Context, in *GetExternalStoragePublicDirectoryRequest, opts ...grpc.CallOption) (*GetExternalStoragePublicDirectoryResponse, error)
+	GetExternalStorageState(ctx context.Context, in *GetExternalStorageStateRequest, opts ...grpc.CallOption) (*GetExternalStorageStateResponse, error)
+	IsExternalStorageRemovable(ctx context.Context, in *IsExternalStorageRemovableRequest, opts ...grpc.CallOption) (*IsExternalStorageRemovableResponse, error)
+	IsExternalStorageEmulated(ctx context.Context, in *IsExternalStorageEmulatedRequest, opts ...grpc.CallOption) (*IsExternalStorageEmulatedResponse, error)
+	IsExternalStorageManager(ctx context.Context, in *IsExternalStorageManagerRequest, opts ...grpc.CallOption) (*IsExternalStorageManagerResponse, error)
+}
+
+type environmentServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewEnvironmentServiceClient(cc grpc.ClientConnInterface) EnvironmentServiceClient {
+	return &environmentServiceClient{cc}
+}
+
+func (c *environmentServiceClient) GetRootDirectory(ctx context.Context, in *GetRootDirectoryRequest, opts ...grpc.CallOption) (*GetRootDirectoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRootDirectoryResponse)
+	err := c.cc.Invoke(ctx, EnvironmentService_GetRootDirectory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *environmentServiceClient) GetDataDirectory(ctx context.Context, in *GetDataDirectoryRequest, opts ...grpc.CallOption) (*GetDataDirectoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDataDirectoryResponse)
+	err := c.cc.Invoke(ctx, EnvironmentService_GetDataDirectory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *environmentServiceClient) GetExternalStorageDirectory(ctx context.Context, in *GetExternalStorageDirectoryRequest, opts ...grpc.CallOption) (*GetExternalStorageDirectoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetExternalStorageDirectoryResponse)
+	err := c.cc.Invoke(ctx, EnvironmentService_GetExternalStorageDirectory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *environmentServiceClient) GetExternalStoragePublicDirectory(ctx context.Context, in *GetExternalStoragePublicDirectoryRequest, opts ...grpc.CallOption) (*GetExternalStoragePublicDirectoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetExternalStoragePublicDirectoryResponse)
+	err := c.cc.Invoke(ctx, EnvironmentService_GetExternalStoragePublicDirectory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *environmentServiceClient) GetExternalStorageState(ctx context.Context, in *GetExternalStorageStateRequest, opts ...grpc.CallOption) (*GetExternalStorageStateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetExternalStorageStateResponse)
+	err := c.cc.Invoke(ctx, EnvironmentService_GetExternalStorageState_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *environmentServiceClient) IsExternalStorageRemovable(ctx context.Context, in *IsExternalStorageRemovableRequest, opts ...grpc.CallOption) (*IsExternalStorageRemovableResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsExternalStorageRemovableResponse)
+	err := c.cc.Invoke(ctx, EnvironmentService_IsExternalStorageRemovable_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *environmentServiceClient) IsExternalStorageEmulated(ctx context.Context, in *IsExternalStorageEmulatedRequest, opts ...grpc.CallOption) (*IsExternalStorageEmulatedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsExternalStorageEmulatedResponse)
+	err := c.cc.Invoke(ctx, EnvironmentService_IsExternalStorageEmulated_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *environmentServiceClient) IsExternalStorageManager(ctx context.Context, in *IsExternalStorageManagerRequest, opts ...grpc.CallOption) (*IsExternalStorageManagerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsExternalStorageManagerResponse)
+	err := c.cc.Invoke(ctx, EnvironmentService_IsExternalStorageManager_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// EnvironmentServiceServer is the server API for EnvironmentService service.
+// All implementations must embed UnimplementedEnvironmentServiceServer
+// for forward compatibility.
+type EnvironmentServiceServer interface {
+	GetRootDirectory(context.Context, *GetRootDirectoryRequest) (*GetRootDirectoryResponse, error)
+	GetDataDirectory(context.Context, *GetDataDirectoryRequest) (*GetDataDirectoryResponse, error)
+	GetExternalStorageDirectory(context.Context, *GetExternalStorageDirectoryRequest) (*GetExternalStorageDirectoryResponse, error)
+	GetExternalStoragePublicDirectory(context.Context, *GetExternalStoragePublicDirectoryRequest) (*GetExternalStoragePublicDirectoryResponse, error)
+	GetExternalStorageState(context.Context, *GetExternalStorageStateRequest) (*GetExternalStorageStateResponse, error)
+	IsExternalStorageRemovable(context.Context, *IsExternalStorageRemovableRequest) (*IsExternalStorageRemovableResponse, error)
+	IsExternalStorageEmulated(context.Context, *IsExternalStorageEmulatedRequest) (*IsExternalStorageEmulatedResponse, error)
+	IsExternalStorageManager(context.Context, *IsExternalStorageManagerRequest) (*IsExternalStorageManagerResponse, error)
+	mustEmbedUnimplementedEnvironmentServiceServer()
+}
+
+// UnimplementedEnvironmentServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedEnvironmentServiceServer struct{}
+
+func (UnimplementedEnvironmentServiceServer) GetRootDirectory(context.Context, *GetRootDirectoryRequest) (*GetRootDirectoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRootDirectory not implemented")
+}
+func (UnimplementedEnvironmentServiceServer) GetDataDirectory(context.Context, *GetDataDirectoryRequest) (*GetDataDirectoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDataDirectory not implemented")
+}
+func (UnimplementedEnvironmentServiceServer) GetExternalStorageDirectory(context.Context, *GetExternalStorageDirectoryRequest) (*GetExternalStorageDirectoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetExternalStorageDirectory not implemented")
+}
+func (UnimplementedEnvironmentServiceServer) GetExternalStoragePublicDirectory(context.Context, *GetExternalStoragePublicDirectoryRequest) (*GetExternalStoragePublicDirectoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetExternalStoragePublicDirectory not implemented")
+}
+func (UnimplementedEnvironmentServiceServer) GetExternalStorageState(context.Context, *GetExternalStorageStateRequest) (*GetExternalStorageStateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetExternalStorageState not implemented")
+}
+func (UnimplementedEnvironmentServiceServer) IsExternalStorageRemovable(context.Context, *IsExternalStorageRemovableRequest) (*IsExternalStorageRemovableResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsExternalStorageRemovable not implemented")
+}
+func (UnimplementedEnvironmentServiceServer) IsExternalStorageEmulated(context.Context, *IsExternalStorageEmulatedRequest) (*IsExternalStorageEmulatedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsExternalStorageEmulated not implemented")
+}
+func (UnimplementedEnvironmentServiceServer) IsExternalStorageManager(context.Context, *IsExternalStorageManagerRequest) (*IsExternalStorageManagerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsExternalStorageManager not implemented")
+}
+func (UnimplementedEnvironmentServiceServer) mustEmbedUnimplementedEnvironmentServiceServer() {}
+func (UnimplementedEnvironmentServiceServer) testEmbeddedByValue()                            {}
+
+// UnsafeEnvironmentServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to EnvironmentServiceServer will
+// result in compilation errors.
+type UnsafeEnvironmentServiceServer interface {
+	mustEmbedUnimplementedEnvironmentServiceServer()
+}
+
+func RegisterEnvironmentServiceServer(s grpc.ServiceRegistrar, srv EnvironmentServiceServer) {
+	// If the following call panics, it indicates UnimplementedEnvironmentServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&EnvironmentService_ServiceDesc, srv)
+}
+
+func _EnvironmentService_GetRootDirectory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRootDirectoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnvironmentServiceServer).GetRootDirectory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnvironmentService_GetRootDirectory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnvironmentServiceServer).GetRootDirectory(ctx, req.(*GetRootDirectoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EnvironmentService_GetDataDirectory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDataDirectoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnvironmentServiceServer).GetDataDirectory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnvironmentService_GetDataDirectory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnvironmentServiceServer).GetDataDirectory(ctx, req.(*GetDataDirectoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EnvironmentService_GetExternalStorageDirectory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetExternalStorageDirectoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnvironmentServiceServer).GetExternalStorageDirectory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnvironmentService_GetExternalStorageDirectory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnvironmentServiceServer).GetExternalStorageDirectory(ctx, req.(*GetExternalStorageDirectoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EnvironmentService_GetExternalStoragePublicDirectory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetExternalStoragePublicDirectoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnvironmentServiceServer).GetExternalStoragePublicDirectory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnvironmentService_GetExternalStoragePublicDirectory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnvironmentServiceServer).GetExternalStoragePublicDirectory(ctx, req.(*GetExternalStoragePublicDirectoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EnvironmentService_GetExternalStorageState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetExternalStorageStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnvironmentServiceServer).GetExternalStorageState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnvironmentService_GetExternalStorageState_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnvironmentServiceServer).GetExternalStorageState(ctx, req.(*GetExternalStorageStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EnvironmentService_IsExternalStorageRemovable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsExternalStorageRemovableRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnvironmentServiceServer).IsExternalStorageRemovable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnvironmentService_IsExternalStorageRemovable_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnvironmentServiceServer).IsExternalStorageRemovable(ctx, req.(*IsExternalStorageRemovableRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EnvironmentService_IsExternalStorageEmulated_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsExternalStorageEmulatedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnvironmentServiceServer).IsExternalStorageEmulated(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnvironmentService_IsExternalStorageEmulated_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnvironmentServiceServer).IsExternalStorageEmulated(ctx, req.(*IsExternalStorageEmulatedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EnvironmentService_IsExternalStorageManager_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsExternalStorageManagerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnvironmentServiceServer).IsExternalStorageManager(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnvironmentService_IsExternalStorageManager_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnvironmentServiceServer).IsExternalStorageManager(ctx, req.(*IsExternalStorageManagerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// EnvironmentService_ServiceDesc is the grpc.ServiceDesc for EnvironmentService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var EnvironmentService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "environment.EnvironmentService",
+	HandlerType: (*EnvironmentServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetRootDirectory",
+			Handler:    _EnvironmentService_GetRootDirectory_Handler,
+		},
+		{
+			MethodName: "GetDataDirectory",
+			Handler:    _EnvironmentService_GetDataDirectory_Handler,
+		},
+		{
+			MethodName: "GetExternalStorageDirectory",
+			Handler:    _EnvironmentService_GetExternalStorageDirectory_Handler,
+		},
+		{
+			MethodName: "GetExternalStoragePublicDirectory",
+			Handler:    _EnvironmentService_GetExternalStoragePublicDirectory_Handler,
+		},
+		{
+			MethodName: "GetExternalStorageState",
+			Handler:    _EnvironmentService_GetExternalStorageState_Handler,
+		},
+		{
+			MethodName: "IsExternalStorageRemovable",
+			Handler:    _EnvironmentService_IsExternalStorageRemovable_Handler,
+		},
+		{
+			MethodName: "IsExternalStorageEmulated",
+			Handler:    _EnvironmentService_IsExternalStorageEmulated_Handler,
+		},
+		{
+			MethodName: "IsExternalStorageManager",
+			Handler:    _EnvironmentService_IsExternalStorageManager_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/environment/environment.proto",
+}
+
+const (
 	JavaFileService_GetAbsolutePath_FullMethodName = "/environment.JavaFileService/GetAbsolutePath"
 )
 

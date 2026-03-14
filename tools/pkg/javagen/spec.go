@@ -11,23 +11,55 @@ import (
 
 // Spec represents a per-package Java API specification loaded from YAML.
 type Spec struct {
-	Package   string     `yaml:"package"`
-	GoImport  string     `yaml:"go_import"`
-	Classes   []Class    `yaml:"classes"`
-	Callbacks []Callback `yaml:"callbacks"`
-	Constants []Constant `yaml:"constants"`
+	Package      string        `yaml:"package"`
+	GoImport     string        `yaml:"go_import"`
+	Classes      []Class       `yaml:"classes"`
+	Callbacks    []Callback    `yaml:"callbacks"`
+	Constants    []Constant    `yaml:"constants"`
+	IntentExtras []IntentExtra `yaml:"intent_extras"`
 }
 
 // Class describes a Java class to wrap.
 type Class struct {
-	JavaClass   string   `yaml:"java_class"`
-	GoType      string   `yaml:"go_type"`
-	Obtain      string   `yaml:"obtain"`
-	ServiceName string   `yaml:"service_name"`
-	Kind        string   `yaml:"kind"`
-	Close       bool     `yaml:"close"`
-	Methods     []Method `yaml:"methods"`
-	Fields      []Field  `yaml:"fields"`
+	JavaClass     string        `yaml:"java_class"`
+	GoType        string        `yaml:"go_type"`
+	Obtain        string        `yaml:"obtain"`
+	ServiceName   string        `yaml:"service_name"`
+	Kind          string        `yaml:"kind"`
+	Close         bool          `yaml:"close"`
+	Methods       []Method      `yaml:"methods"`
+	StaticMethods []Method      `yaml:"static_methods"`
+	Fields        []Field       `yaml:"fields"`
+	StaticFields  []StaticField `yaml:"static_fields"`
+	IntentExtras  []IntentExtra `yaml:"intent_extras"`
+}
+
+// AllMethods returns both instance and static methods.
+// Static methods have their Static field set to true.
+func (c Class) AllMethods() []Method {
+	all := make([]Method, 0, len(c.Methods)+len(c.StaticMethods))
+	all = append(all, c.Methods...)
+	for _, m := range c.StaticMethods {
+		m.Static = true
+		all = append(all, m)
+	}
+	return all
+}
+
+// StaticField describes a Java static field to read.
+type StaticField struct {
+	JavaField string `yaml:"java_field"`
+	Returns   string `yaml:"returns"`
+	GoName    string `yaml:"go_name"`
+	GoType    string `yaml:"go_type"`
+}
+
+// IntentExtra describes a value extracted from a sticky broadcast intent.
+type IntentExtra struct {
+	JavaExtra string `yaml:"java_extra"`
+	JavaType  string `yaml:"java_type"`
+	GoName    string `yaml:"go_name"`
+	GoType    string `yaml:"go_type"`
 }
 
 // Method describes a Java method to generate a Go wrapper for.
@@ -133,7 +165,7 @@ func validateSpec(spec *Spec) error {
 		if cls.Obtain == "system_service" && cls.ServiceName == "" {
 			return fmt.Errorf("classes[%d] (%s): service_name is required when obtain is system_service", i, cls.JavaClass)
 		}
-		for j, m := range cls.Methods {
+		for j, m := range cls.AllMethods() {
 			if m.JavaMethod == "" {
 				return fmt.Errorf("classes[%d].methods[%d]: java_method is required", i, j)
 			}
