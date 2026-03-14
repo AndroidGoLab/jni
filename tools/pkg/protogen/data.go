@@ -207,15 +207,6 @@ func buildDataClassMessage(dc javagen.MergedDataClass, dataClassNames map[string
 	return msg
 }
 
-// isNonServiceKind reports whether a class kind should be skipped during
-// service generation (e.g. iterable_data, builder).
-func isNonServiceKind(kind string) bool {
-	switch kind {
-	case "iterable_data", "builder":
-		return true
-	}
-	return false
-}
 
 // buildServiceFromClass converts a MergedClass into a ProtoService and its
 // associated request/response messages.

@@ -6,7 +6,6 @@ import (
 	"go/token"
 	"strings"
 	"testing"
-	"text/template"
 )
 
 func TestJavaTemplatesParse(t *testing.T) {
@@ -323,27 +322,3 @@ func testLocationSpec() *MergedSpec {
 	}
 }
 
-// templateParseHelper is a helper to parse templates with the same funcMap as loadTemplates.
-func templateParseHelper(t *testing.T, src string) *template.Template {
-	t.Helper()
-	funcMap := template.FuncMap{
-		"lower":                 strings.ToLower,
-		"upper":                 strings.ToUpper,
-		"title":                 strings.Title,
-		"join":                  strings.Join,
-		"isManager":             IsManager,
-		"managerData":           ManagerConstructorData,
-		"buildCallbackType":     BuildCallbackType,
-		"buildCallbackDispatch": BuildCallbackDispatch,
-		"javaClassToSlash":      JavaClassToSlash,
-		"jniTypeSignature":      JNITypeSignature,
-		"resolveType":           ResolveType,
-		"paramConversionCode":   ParamConversionCode,
-		"returnConversionCode":  ReturnConversionCode,
-	}
-	tmpl, err := template.New("test").Funcs(funcMap).Parse(src)
-	if err != nil {
-		t.Fatalf("parse template: %v", err)
-	}
-	return tmpl
-}
