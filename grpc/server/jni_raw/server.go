@@ -31,6 +31,22 @@ func (s *Server) getObject(handle int64) *jni.Object {
 	return s.Handles.Get(handle)
 }
 
+func (s *Server) requireObject(handle int64) (*jni.Object, error) {
+	obj := s.Handles.Get(handle)
+	if obj == nil {
+		return nil, status.Errorf(codes.NotFound, "handle %d not found", handle)
+	}
+	return obj, nil
+}
+
+func (s *Server) requireClass(handle int64) (*jni.Class, error) {
+	obj, err := s.requireObject(handle)
+	if err != nil {
+		return nil, err
+	}
+	return (*jni.Class)(unsafe.Pointer(obj)), nil
+}
+
 func (s *Server) putObject(env *jni.Env, obj *jni.Object) int64 {
 	return s.Handles.Put(env, obj)
 }
@@ -122,9 +138,12 @@ func (s *Server) FindClass(_ context.Context, req *pb.FindClassRequest) (*pb.Fin
 }
 
 func (s *Server) GetSuperclass(_ context.Context, req *pb.GetSuperclassRequest) (*pb.GetSuperclassResponse, error) {
+	cls, err := s.requireClass(req.GetClassHandle())
+	if err != nil {
+		return nil, err
+	}
 	var handle int64
 	if err := s.withEnv(func(env *jni.Env) error {
-		cls := (*jni.Class)(unsafe.Pointer(s.getObject(req.GetClassHandle())))
 		super := env.GetSuperclass(cls)
 		if super != nil {
 			handle = s.putObject(env, &super.Object)
@@ -137,10 +156,16 @@ func (s *Server) GetSuperclass(_ context.Context, req *pb.GetSuperclassRequest) 
 }
 
 func (s *Server) IsAssignableFrom(_ context.Context, req *pb.IsAssignableFromRequest) (*pb.IsAssignableFromResponse, error) {
+	c1, err := s.requireClass(req.GetClass1())
+	if err != nil {
+		return nil, err
+	}
+	c2, err := s.requireClass(req.GetClass2())
+	if err != nil {
+		return nil, err
+	}
 	var result bool
 	if err := s.withEnv(func(env *jni.Env) error {
-		c1 := (*jni.Class)(unsafe.Pointer(s.getObject(req.GetClass1())))
-		c2 := (*jni.Class)(unsafe.Pointer(s.getObject(req.GetClass2())))
 		result = env.IsAssignableFrom(c1, c2)
 		return nil
 	}); err != nil {
@@ -152,9 +177,12 @@ func (s *Server) IsAssignableFrom(_ context.Context, req *pb.IsAssignableFromReq
 // ---- Object ----
 
 func (s *Server) AllocObject(_ context.Context, req *pb.AllocObjectRequest) (*pb.AllocObjectResponse, error) {
+	cls, err := s.requireClass(req.GetClassHandle())
+	if err != nil {
+		return nil, err
+	}
 	var handle int64
 	if err := s.withEnv(func(env *jni.Env) error {
-		cls := (*jni.Class)(unsafe.Pointer(s.getObject(req.GetClassHandle())))
 		obj, err := env.AllocObject(cls)
 		if err != nil {
 			return err
@@ -168,9 +196,12 @@ func (s *Server) AllocObject(_ context.Context, req *pb.AllocObjectRequest) (*pb
 }
 
 func (s *Server) NewObject(_ context.Context, req *pb.NewObjectRequest) (*pb.NewObjectResponse, error) {
+	cls, err := s.requireClass(req.GetClassHandle())
+	if err != nil {
+		return nil, err
+	}
 	var handle int64
 	if err := s.withEnv(func(env *jni.Env) error {
-		cls := (*jni.Class)(unsafe.Pointer(s.getObject(req.GetClassHandle())))
 		args := jvaluesFromProto(req.GetArgs(), s.Handles)
 		obj, err := env.NewObject(cls, methodID(req.GetMethodId()), args...)
 		if err != nil {
@@ -185,9 +216,12 @@ func (s *Server) NewObject(_ context.Context, req *pb.NewObjectRequest) (*pb.New
 }
 
 func (s *Server) GetObjectClass(_ context.Context, req *pb.GetObjectClassRequest) (*pb.GetObjectClassResponse, error) {
+	obj, err := s.requireObject(req.GetObjectHandle())
+	if err != nil {
+		return nil, err
+	}
 	var handle int64
 	if err := s.withEnv(func(env *jni.Env) error {
-		obj := s.getObject(req.GetObjectHandle())
 		cls := env.GetObjectClass(obj)
 		handle = s.putObject(env, &cls.Object)
 		return nil
@@ -198,10 +232,16 @@ func (s *Server) GetObjectClass(_ context.Context, req *pb.GetObjectClassRequest
 }
 
 func (s *Server) IsInstanceOf(_ context.Context, req *pb.IsInstanceOfRequest) (*pb.IsInstanceOfResponse, error) {
+	obj, err := s.requireObject(req.GetObjectHandle())
+	if err != nil {
+		return nil, err
+	}
+	cls, err := s.requireClass(req.GetClassHandle())
+	if err != nil {
+		return nil, err
+	}
 	var result bool
 	if err := s.withEnv(func(env *jni.Env) error {
-		obj := s.getObject(req.GetObjectHandle())
-		cls := (*jni.Class)(unsafe.Pointer(s.getObject(req.GetClassHandle())))
 		result = env.IsInstanceOf(obj, cls)
 		return nil
 	}); err != nil {
@@ -211,9 +251,17 @@ func (s *Server) IsInstanceOf(_ context.Context, req *pb.IsInstanceOfRequest) (*
 }
 
 func (s *Server) IsSameObject(_ context.Context, req *pb.IsSameObjectRequest) (*pb.IsSameObjectResponse, error) {
+	o1, err := s.requireObject(req.GetObject1())
+	if err != nil {
+		return nil, err
+	}
+	o2, err := s.requireObject(req.GetObject2())
+	if err != nil {
+		return nil, err
+	}
 	var result bool
 	if err := s.withEnv(func(env *jni.Env) error {
-		result = env.IsSameObject(s.getObject(req.GetObject1()), s.getObject(req.GetObject2()))
+		result = env.IsSameObject(o1, o2)
 		return nil
 	}); err != nil {
 		return nil, status.Errorf(codes.Internal, "%v", err)
@@ -222,9 +270,13 @@ func (s *Server) IsSameObject(_ context.Context, req *pb.IsSameObjectRequest) (*
 }
 
 func (s *Server) GetObjectRefType(_ context.Context, req *pb.GetObjectRefTypeRequest) (*pb.GetObjectRefTypeResponse, error) {
+	obj, err := s.requireObject(req.GetObjectHandle())
+	if err != nil {
+		return nil, err
+	}
 	var refType int32
 	if err := s.withEnv(func(env *jni.Env) error {
-		refType = int32(env.GetObjectRefType(s.getObject(req.GetObjectHandle())))
+		refType = int32(env.GetObjectRefType(obj))
 		return nil
 	}); err != nil {
 		return nil, status.Errorf(codes.Internal, "%v", err)
@@ -235,9 +287,12 @@ func (s *Server) GetObjectRefType(_ context.Context, req *pb.GetObjectRefTypeReq
 // ---- Method/Field ID lookup ----
 
 func (s *Server) GetMethodID(_ context.Context, req *pb.GetMethodIDRequest) (*pb.GetMethodIDResponse, error) {
+	cls, err := s.requireClass(req.GetClassHandle())
+	if err != nil {
+		return nil, err
+	}
 	var id int64
 	if err := s.withEnv(func(env *jni.Env) error {
-		cls := (*jni.Class)(unsafe.Pointer(s.getObject(req.GetClassHandle())))
 		mid, err := env.GetMethodID(cls, req.GetName(), req.GetSig())
 		if err != nil {
 			return err
@@ -251,9 +306,12 @@ func (s *Server) GetMethodID(_ context.Context, req *pb.GetMethodIDRequest) (*pb
 }
 
 func (s *Server) GetStaticMethodID(_ context.Context, req *pb.GetStaticMethodIDRequest) (*pb.GetStaticMethodIDResponse, error) {
+	cls, err := s.requireClass(req.GetClassHandle())
+	if err != nil {
+		return nil, err
+	}
 	var id int64
 	if err := s.withEnv(func(env *jni.Env) error {
-		cls := (*jni.Class)(unsafe.Pointer(s.getObject(req.GetClassHandle())))
 		mid, err := env.GetStaticMethodID(cls, req.GetName(), req.GetSig())
 		if err != nil {
 			return err
@@ -267,9 +325,12 @@ func (s *Server) GetStaticMethodID(_ context.Context, req *pb.GetStaticMethodIDR
 }
 
 func (s *Server) GetFieldID(_ context.Context, req *pb.GetFieldIDRequest) (*pb.GetFieldIDResponse, error) {
+	cls, err := s.requireClass(req.GetClassHandle())
+	if err != nil {
+		return nil, err
+	}
 	var id int64
 	if err := s.withEnv(func(env *jni.Env) error {
-		cls := (*jni.Class)(unsafe.Pointer(s.getObject(req.GetClassHandle())))
 		fid, err := env.GetFieldID(cls, req.GetName(), req.GetSig())
 		if err != nil {
 			return err
@@ -283,9 +344,12 @@ func (s *Server) GetFieldID(_ context.Context, req *pb.GetFieldIDRequest) (*pb.G
 }
 
 func (s *Server) GetStaticFieldID(_ context.Context, req *pb.GetStaticFieldIDRequest) (*pb.GetStaticFieldIDResponse, error) {
+	cls, err := s.requireClass(req.GetClassHandle())
+	if err != nil {
+		return nil, err
+	}
 	var id int64
 	if err := s.withEnv(func(env *jni.Env) error {
-		cls := (*jni.Class)(unsafe.Pointer(s.getObject(req.GetClassHandle())))
 		fid, err := env.GetStaticFieldID(cls, req.GetName(), req.GetSig())
 		if err != nil {
 			return err
@@ -301,9 +365,12 @@ func (s *Server) GetStaticFieldID(_ context.Context, req *pb.GetStaticFieldIDReq
 // ---- Method calls ----
 
 func (s *Server) CallMethod(_ context.Context, req *pb.CallMethodRequest) (*pb.CallMethodResponse, error) {
+	obj, err := s.requireObject(req.GetObjectHandle())
+	if err != nil {
+		return nil, err
+	}
 	var result *pb.JValue
 	if err := s.withEnv(func(env *jni.Env) error {
-		obj := s.getObject(req.GetObjectHandle())
 		mid := methodID(req.GetMethodId())
 		args := jvaluesFromProto(req.GetArgs(), s.Handles)
 		var err error
@@ -316,9 +383,12 @@ func (s *Server) CallMethod(_ context.Context, req *pb.CallMethodRequest) (*pb.C
 }
 
 func (s *Server) CallStaticMethod(_ context.Context, req *pb.CallStaticMethodRequest) (*pb.CallStaticMethodResponse, error) {
+	cls, err := s.requireClass(req.GetClassHandle())
+	if err != nil {
+		return nil, err
+	}
 	var result *pb.JValue
 	if err := s.withEnv(func(env *jni.Env) error {
-		cls := (*jni.Class)(unsafe.Pointer(s.getObject(req.GetClassHandle())))
 		mid := methodID(req.GetMethodId())
 		args := jvaluesFromProto(req.GetArgs(), s.Handles)
 		var err error
@@ -331,10 +401,16 @@ func (s *Server) CallStaticMethod(_ context.Context, req *pb.CallStaticMethodReq
 }
 
 func (s *Server) CallNonvirtualMethod(_ context.Context, req *pb.CallNonvirtualMethodRequest) (*pb.CallNonvirtualMethodResponse, error) {
+	obj, err := s.requireObject(req.GetObjectHandle())
+	if err != nil {
+		return nil, err
+	}
+	cls, err := s.requireClass(req.GetClassHandle())
+	if err != nil {
+		return nil, err
+	}
 	var result *pb.JValue
 	if err := s.withEnv(func(env *jni.Env) error {
-		obj := s.getObject(req.GetObjectHandle())
-		cls := (*jni.Class)(unsafe.Pointer(s.getObject(req.GetClassHandle())))
 		mid := methodID(req.GetMethodId())
 		args := jvaluesFromProto(req.GetArgs(), s.Handles)
 		var err error
@@ -386,7 +462,7 @@ func (s *Server) callMethod(
 			return nil, err
 		}
 		var h int64
-		if v != nil {
+		if v != nil && v.Ref() != 0 {
 			h = s.putObject(env, v)
 		}
 		return &pb.JValue{Value: &pb.JValue_L{L: h}}, nil
@@ -435,7 +511,7 @@ func (s *Server) callStaticMethod(
 			return nil, err
 		}
 		var h int64
-		if v != nil {
+		if v != nil && v.Ref() != 0 {
 			h = s.putObject(env, v)
 		}
 		return &pb.JValue{Value: &pb.JValue_L{L: h}}, nil
@@ -485,7 +561,7 @@ func (s *Server) callNonvirtualMethod(
 			return nil, err
 		}
 		var h int64
-		if v != nil {
+		if v != nil && v.Ref() != 0 {
 			h = s.putObject(env, v)
 		}
 		return &pb.JValue{Value: &pb.JValue_L{L: h}}, nil
@@ -512,9 +588,13 @@ func (s *Server) NewStringUTF(_ context.Context, req *pb.NewStringUTFRequest) (*
 }
 
 func (s *Server) GetStringUTFChars(_ context.Context, req *pb.GetStringUTFCharsRequest) (*pb.GetStringUTFCharsResponse, error) {
+	obj, err := s.requireObject(req.GetStringHandle())
+	if err != nil {
+		return nil, err
+	}
 	var value string
 	if err := s.withEnv(func(env *jni.Env) error {
-		str := (*jni.String)(unsafe.Pointer(s.getObject(req.GetStringHandle())))
+		str := (*jni.String)(unsafe.Pointer(obj))
 		value = env.GoString(str)
 		return nil
 	}); err != nil {
@@ -524,9 +604,13 @@ func (s *Server) GetStringUTFChars(_ context.Context, req *pb.GetStringUTFCharsR
 }
 
 func (s *Server) GetStringLength(_ context.Context, req *pb.GetStringLengthRequest) (*pb.GetStringLengthResponse, error) {
+	obj, err := s.requireObject(req.GetStringHandle())
+	if err != nil {
+		return nil, err
+	}
 	var length int32
 	if err := s.withEnv(func(env *jni.Env) error {
-		str := (*jni.String)(unsafe.Pointer(s.getObject(req.GetStringHandle())))
+		str := (*jni.String)(unsafe.Pointer(obj))
 		length = env.GetStringLength(str)
 		return nil
 	}); err != nil {
@@ -583,9 +667,12 @@ func (s *Server) ExceptionOccurred(_ context.Context, _ *pb.ExceptionOccurredReq
 }
 
 func (s *Server) Throw(_ context.Context, req *pb.ThrowRequest) (*pb.ThrowResponse, error) {
+	obj, err := s.requireObject(req.GetThrowableHandle())
+	if err != nil {
+		return nil, err
+	}
 	if err := s.withEnv(func(env *jni.Env) error {
-		t := (*jni.Throwable)(unsafe.Pointer(s.getObject(req.GetThrowableHandle())))
-		return env.Throw(t)
+		return env.Throw((*jni.Throwable)(unsafe.Pointer(obj)))
 	}); err != nil {
 		return nil, status.Errorf(codes.Internal, "%v", err)
 	}
@@ -593,8 +680,11 @@ func (s *Server) Throw(_ context.Context, req *pb.ThrowRequest) (*pb.ThrowRespon
 }
 
 func (s *Server) ThrowNew(_ context.Context, req *pb.ThrowNewRequest) (*pb.ThrowNewResponse, error) {
+	cls, err := s.requireClass(req.GetClassHandle())
+	if err != nil {
+		return nil, err
+	}
 	if err := s.withEnv(func(env *jni.Env) error {
-		cls := (*jni.Class)(unsafe.Pointer(s.getObject(req.GetClassHandle())))
 		return env.ThrowNew(cls, req.GetMessage())
 	}); err != nil {
 		return nil, status.Errorf(codes.Internal, "%v", err)
@@ -605,8 +695,12 @@ func (s *Server) ThrowNew(_ context.Context, req *pb.ThrowNewRequest) (*pb.Throw
 // ---- Monitor ----
 
 func (s *Server) MonitorEnter(_ context.Context, req *pb.MonitorEnterRequest) (*pb.MonitorEnterResponse, error) {
+	obj, err := s.requireObject(req.GetObjectHandle())
+	if err != nil {
+		return nil, err
+	}
 	if err := s.withEnv(func(env *jni.Env) error {
-		return env.MonitorEnter(s.getObject(req.GetObjectHandle()))
+		return env.MonitorEnter(obj)
 	}); err != nil {
 		return nil, status.Errorf(codes.Internal, "%v", err)
 	}
@@ -614,8 +708,12 @@ func (s *Server) MonitorEnter(_ context.Context, req *pb.MonitorEnterRequest) (*
 }
 
 func (s *Server) MonitorExit(_ context.Context, req *pb.MonitorExitRequest) (*pb.MonitorExitResponse, error) {
+	obj, err := s.requireObject(req.GetObjectHandle())
+	if err != nil {
+		return nil, err
+	}
 	if err := s.withEnv(func(env *jni.Env) error {
-		return env.MonitorExit(s.getObject(req.GetObjectHandle()))
+		return env.MonitorExit(obj)
 	}); err != nil {
 		return nil, status.Errorf(codes.Internal, "%v", err)
 	}
@@ -659,9 +757,12 @@ func (s *Server) EnsureLocalCapacity(_ context.Context, req *pb.EnsureLocalCapac
 // ---- Reflection ----
 
 func (s *Server) FromReflectedMethod(_ context.Context, req *pb.FromReflectedMethodRequest) (*pb.FromReflectedMethodResponse, error) {
+	obj, err := s.requireObject(req.GetMethodObject())
+	if err != nil {
+		return nil, err
+	}
 	var id int64
 	if err := s.withEnv(func(env *jni.Env) error {
-		obj := s.getObject(req.GetMethodObject())
 		mid := env.FromReflectedMethod(obj)
 		id = methodIDToInt64(mid)
 		return nil
@@ -672,9 +773,12 @@ func (s *Server) FromReflectedMethod(_ context.Context, req *pb.FromReflectedMet
 }
 
 func (s *Server) FromReflectedField(_ context.Context, req *pb.FromReflectedFieldRequest) (*pb.FromReflectedFieldResponse, error) {
+	obj, err := s.requireObject(req.GetFieldObject())
+	if err != nil {
+		return nil, err
+	}
 	var id int64
 	if err := s.withEnv(func(env *jni.Env) error {
-		obj := s.getObject(req.GetFieldObject())
 		fid := env.FromReflectedField(obj)
 		id = fieldIDToInt64(fid)
 		return nil
@@ -685,9 +789,12 @@ func (s *Server) FromReflectedField(_ context.Context, req *pb.FromReflectedFiel
 }
 
 func (s *Server) ToReflectedMethod(_ context.Context, req *pb.ToReflectedMethodRequest) (*pb.ToReflectedMethodResponse, error) {
+	cls, err := s.requireClass(req.GetClassHandle())
+	if err != nil {
+		return nil, err
+	}
 	var handle int64
 	if err := s.withEnv(func(env *jni.Env) error {
-		cls := (*jni.Class)(unsafe.Pointer(s.getObject(req.GetClassHandle())))
 		obj := env.ToReflectedMethod(cls, methodID(req.GetMethodId()), req.GetIsStatic())
 		if obj != nil {
 			handle = s.putObject(env, obj)
@@ -700,9 +807,12 @@ func (s *Server) ToReflectedMethod(_ context.Context, req *pb.ToReflectedMethodR
 }
 
 func (s *Server) ToReflectedField(_ context.Context, req *pb.ToReflectedFieldRequest) (*pb.ToReflectedFieldResponse, error) {
+	cls, err := s.requireClass(req.GetClassHandle())
+	if err != nil {
+		return nil, err
+	}
 	var handle int64
 	if err := s.withEnv(func(env *jni.Env) error {
-		cls := (*jni.Class)(unsafe.Pointer(s.getObject(req.GetClassHandle())))
 		obj := env.ToReflectedField(cls, fieldID(req.GetFieldId()), req.GetIsStatic())
 		if obj != nil {
 			handle = s.putObject(env, obj)
@@ -714,7 +824,202 @@ func (s *Server) ToReflectedField(_ context.Context, req *pb.ToReflectedFieldReq
 	return &pb.ToReflectedFieldResponse{FieldObject: handle}, nil
 }
 
-// Remaining RPCs (field access, arrays, references) follow the same pattern.
-// They are left unimplemented (returning Unimplemented status via the embedded
-// UnimplementedJNIServiceServer) and can be filled in as needed. The proto
-// definitions and CLI commands are complete.
+// ---- Field access ----
+
+func (s *Server) GetField(_ context.Context, req *pb.GetFieldValueRequest) (*pb.GetFieldValueResponse, error) {
+	obj, err := s.requireObject(req.GetObjectHandle())
+	if err != nil {
+		return nil, err
+	}
+	var result *pb.JValue
+	if err := s.withEnv(func(env *jni.Env) error {
+		fid := fieldID(req.GetFieldId())
+		var err error
+		result, err = s.getFieldValue(env, obj, fid, req.GetFieldType())
+		return err
+	}); err != nil {
+		return nil, status.Errorf(codes.Internal, "%v", err)
+	}
+	return &pb.GetFieldValueResponse{Result: result}, nil
+}
+
+func (s *Server) SetField(_ context.Context, req *pb.SetFieldValueRequest) (*pb.SetFieldValueResponse, error) {
+	obj, err := s.requireObject(req.GetObjectHandle())
+	if err != nil {
+		return nil, err
+	}
+	if err := s.withEnv(func(env *jni.Env) error {
+		fid := fieldID(req.GetFieldId())
+		s.setFieldValue(env, obj, fid, req.GetValue())
+		return nil
+	}); err != nil {
+		return nil, status.Errorf(codes.Internal, "%v", err)
+	}
+	return &pb.SetFieldValueResponse{}, nil
+}
+
+func (s *Server) GetStaticField(_ context.Context, req *pb.GetStaticFieldValueRequest) (*pb.GetStaticFieldValueResponse, error) {
+	cls, err := s.requireClass(req.GetClassHandle())
+	if err != nil {
+		return nil, err
+	}
+	var result *pb.JValue
+	if err := s.withEnv(func(env *jni.Env) error {
+		fid := fieldID(req.GetFieldId())
+		var err error
+		result, err = s.getStaticFieldValue(env, cls, fid, req.GetFieldType())
+		return err
+	}); err != nil {
+		return nil, status.Errorf(codes.Internal, "%v", err)
+	}
+	return &pb.GetStaticFieldValueResponse{Result: result}, nil
+}
+
+func (s *Server) SetStaticField(_ context.Context, req *pb.SetStaticFieldValueRequest) (*pb.SetStaticFieldValueResponse, error) {
+	cls, err := s.requireClass(req.GetClassHandle())
+	if err != nil {
+		return nil, err
+	}
+	if err := s.withEnv(func(env *jni.Env) error {
+		fid := fieldID(req.GetFieldId())
+		s.setStaticFieldValue(env, cls, fid, req.GetValue())
+		return nil
+	}); err != nil {
+		return nil, status.Errorf(codes.Internal, "%v", err)
+	}
+	return &pb.SetStaticFieldValueResponse{}, nil
+}
+
+func (s *Server) getFieldValue(
+	env *jni.Env,
+	obj *jni.Object,
+	fid jni.FieldID,
+	fieldType pb.JType,
+) (*pb.JValue, error) {
+	switch fieldType {
+	case pb.JType_BOOLEAN:
+		return &pb.JValue{Value: &pb.JValue_Z{Z: env.GetBooleanField(obj, fid) != 0}}, nil
+	case pb.JType_BYTE:
+		return &pb.JValue{Value: &pb.JValue_B{B: int32(env.GetByteField(obj, fid))}}, nil
+	case pb.JType_CHAR:
+		return &pb.JValue{Value: &pb.JValue_C{C: uint32(env.GetCharField(obj, fid))}}, nil
+	case pb.JType_SHORT:
+		return &pb.JValue{Value: &pb.JValue_S{S: int32(env.GetShortField(obj, fid))}}, nil
+	case pb.JType_INT:
+		return &pb.JValue{Value: &pb.JValue_I{I: env.GetIntField(obj, fid)}}, nil
+	case pb.JType_LONG:
+		return &pb.JValue{Value: &pb.JValue_J{J: env.GetLongField(obj, fid)}}, nil
+	case pb.JType_FLOAT:
+		return &pb.JValue{Value: &pb.JValue_F{F: env.GetFloatField(obj, fid)}}, nil
+	case pb.JType_DOUBLE:
+		return &pb.JValue{Value: &pb.JValue_D{D: env.GetDoubleField(obj, fid)}}, nil
+	case pb.JType_OBJECT:
+		v := env.GetObjectField(obj, fid)
+		var h int64
+		if v != nil && v.Ref() != 0 {
+			h = s.putObject(env, v)
+		}
+		return &pb.JValue{Value: &pb.JValue_L{L: h}}, nil
+	default:
+		return nil, fmt.Errorf("unknown field type: %v", fieldType)
+	}
+}
+
+func (s *Server) setFieldValue(
+	env *jni.Env,
+	obj *jni.Object,
+	fid jni.FieldID,
+	val *pb.JValue,
+) {
+	switch v := val.GetValue().(type) {
+	case *pb.JValue_Z:
+		var b uint8
+		if v.Z {
+			b = 1
+		}
+		env.SetBooleanField(obj, fid, b)
+	case *pb.JValue_B:
+		env.SetByteField(obj, fid, int8(v.B))
+	case *pb.JValue_C:
+		env.SetCharField(obj, fid, uint16(v.C))
+	case *pb.JValue_S:
+		env.SetShortField(obj, fid, int16(v.S))
+	case *pb.JValue_I:
+		env.SetIntField(obj, fid, v.I)
+	case *pb.JValue_J:
+		env.SetLongField(obj, fid, v.J)
+	case *pb.JValue_F:
+		env.SetFloatField(obj, fid, v.F)
+	case *pb.JValue_D:
+		env.SetDoubleField(obj, fid, v.D)
+	case *pb.JValue_L:
+		env.SetObjectField(obj, fid, s.getObject(v.L))
+	}
+}
+
+func (s *Server) getStaticFieldValue(
+	env *jni.Env,
+	cls *jni.Class,
+	fid jni.FieldID,
+	fieldType pb.JType,
+) (*pb.JValue, error) {
+	switch fieldType {
+	case pb.JType_BOOLEAN:
+		return &pb.JValue{Value: &pb.JValue_Z{Z: env.GetStaticBooleanField(cls, fid) != 0}}, nil
+	case pb.JType_BYTE:
+		return &pb.JValue{Value: &pb.JValue_B{B: int32(env.GetStaticByteField(cls, fid))}}, nil
+	case pb.JType_CHAR:
+		return &pb.JValue{Value: &pb.JValue_C{C: uint32(env.GetStaticCharField(cls, fid))}}, nil
+	case pb.JType_SHORT:
+		return &pb.JValue{Value: &pb.JValue_S{S: int32(env.GetStaticShortField(cls, fid))}}, nil
+	case pb.JType_INT:
+		return &pb.JValue{Value: &pb.JValue_I{I: env.GetStaticIntField(cls, fid)}}, nil
+	case pb.JType_LONG:
+		return &pb.JValue{Value: &pb.JValue_J{J: env.GetStaticLongField(cls, fid)}}, nil
+	case pb.JType_FLOAT:
+		return &pb.JValue{Value: &pb.JValue_F{F: env.GetStaticFloatField(cls, fid)}}, nil
+	case pb.JType_DOUBLE:
+		return &pb.JValue{Value: &pb.JValue_D{D: env.GetStaticDoubleField(cls, fid)}}, nil
+	case pb.JType_OBJECT:
+		v := env.GetStaticObjectField(cls, fid)
+		var h int64
+		if v != nil && v.Ref() != 0 {
+			h = s.putObject(env, v)
+		}
+		return &pb.JValue{Value: &pb.JValue_L{L: h}}, nil
+	default:
+		return nil, fmt.Errorf("unknown field type: %v", fieldType)
+	}
+}
+
+func (s *Server) setStaticFieldValue(
+	env *jni.Env,
+	cls *jni.Class,
+	fid jni.FieldID,
+	val *pb.JValue,
+) {
+	switch v := val.GetValue().(type) {
+	case *pb.JValue_Z:
+		var b uint8
+		if v.Z {
+			b = 1
+		}
+		env.SetStaticBooleanField(cls, fid, b)
+	case *pb.JValue_B:
+		env.SetStaticByteField(cls, fid, int8(v.B))
+	case *pb.JValue_C:
+		env.SetStaticCharField(cls, fid, uint16(v.C))
+	case *pb.JValue_S:
+		env.SetStaticShortField(cls, fid, int16(v.S))
+	case *pb.JValue_I:
+		env.SetStaticIntField(cls, fid, v.I)
+	case *pb.JValue_J:
+		env.SetStaticLongField(cls, fid, v.J)
+	case *pb.JValue_F:
+		env.SetStaticFloatField(cls, fid, v.F)
+	case *pb.JValue_D:
+		env.SetStaticDoubleField(cls, fid, v.D)
+	case *pb.JValue_L:
+		env.SetStaticObjectField(cls, fid, s.getObject(v.L))
+	}
+}
