@@ -100,12 +100,7 @@ func BuildProtoData(merged *javagen.MergedSpec, goModule string) *ProtoData {
 	}
 
 	// 2. Services from classes that have methods.
-	// Skip classes with special kinds (iterable_data, builder, etc.) that
-	// don't represent true service-like managers.
 	for _, cls := range merged.Classes {
-		if isNonServiceKind(cls.Kind) {
-			continue
-		}
 		if len(cls.Methods) == 0 {
 			continue
 		}

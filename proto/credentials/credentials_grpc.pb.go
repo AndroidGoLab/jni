@@ -235,3 +235,144 @@ var ManagerService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "proto/credentials/credentials.proto",
 }
+
+const (
+	GetCredentialRequestBuilderService_AddCredentialOption_FullMethodName = "/credentials.GetCredentialRequestBuilderService/AddCredentialOption"
+	GetCredentialRequestBuilderService_Build_FullMethodName               = "/credentials.GetCredentialRequestBuilderService/Build"
+)
+
+// GetCredentialRequestBuilderServiceClient is the client API for GetCredentialRequestBuilderService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type GetCredentialRequestBuilderServiceClient interface {
+	AddCredentialOption(ctx context.Context, in *AddCredentialOptionRequest, opts ...grpc.CallOption) (*AddCredentialOptionResponse, error)
+	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
+}
+
+type getCredentialRequestBuilderServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewGetCredentialRequestBuilderServiceClient(cc grpc.ClientConnInterface) GetCredentialRequestBuilderServiceClient {
+	return &getCredentialRequestBuilderServiceClient{cc}
+}
+
+func (c *getCredentialRequestBuilderServiceClient) AddCredentialOption(ctx context.Context, in *AddCredentialOptionRequest, opts ...grpc.CallOption) (*AddCredentialOptionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddCredentialOptionResponse)
+	err := c.cc.Invoke(ctx, GetCredentialRequestBuilderService_AddCredentialOption_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *getCredentialRequestBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuildResponse)
+	err := c.cc.Invoke(ctx, GetCredentialRequestBuilderService_Build_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// GetCredentialRequestBuilderServiceServer is the server API for GetCredentialRequestBuilderService service.
+// All implementations must embed UnimplementedGetCredentialRequestBuilderServiceServer
+// for forward compatibility.
+type GetCredentialRequestBuilderServiceServer interface {
+	AddCredentialOption(context.Context, *AddCredentialOptionRequest) (*AddCredentialOptionResponse, error)
+	Build(context.Context, *BuildRequest) (*BuildResponse, error)
+	mustEmbedUnimplementedGetCredentialRequestBuilderServiceServer()
+}
+
+// UnimplementedGetCredentialRequestBuilderServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedGetCredentialRequestBuilderServiceServer struct{}
+
+func (UnimplementedGetCredentialRequestBuilderServiceServer) AddCredentialOption(context.Context, *AddCredentialOptionRequest) (*AddCredentialOptionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddCredentialOption not implemented")
+}
+func (UnimplementedGetCredentialRequestBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
+}
+func (UnimplementedGetCredentialRequestBuilderServiceServer) mustEmbedUnimplementedGetCredentialRequestBuilderServiceServer() {
+}
+func (UnimplementedGetCredentialRequestBuilderServiceServer) testEmbeddedByValue() {}
+
+// UnsafeGetCredentialRequestBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to GetCredentialRequestBuilderServiceServer will
+// result in compilation errors.
+type UnsafeGetCredentialRequestBuilderServiceServer interface {
+	mustEmbedUnimplementedGetCredentialRequestBuilderServiceServer()
+}
+
+func RegisterGetCredentialRequestBuilderServiceServer(s grpc.ServiceRegistrar, srv GetCredentialRequestBuilderServiceServer) {
+	// If the following call panics, it indicates UnimplementedGetCredentialRequestBuilderServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&GetCredentialRequestBuilderService_ServiceDesc, srv)
+}
+
+func _GetCredentialRequestBuilderService_AddCredentialOption_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddCredentialOptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GetCredentialRequestBuilderServiceServer).AddCredentialOption(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GetCredentialRequestBuilderService_AddCredentialOption_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GetCredentialRequestBuilderServiceServer).AddCredentialOption(ctx, req.(*AddCredentialOptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GetCredentialRequestBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GetCredentialRequestBuilderServiceServer).Build(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GetCredentialRequestBuilderService_Build_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GetCredentialRequestBuilderServiceServer).Build(ctx, req.(*BuildRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// GetCredentialRequestBuilderService_ServiceDesc is the grpc.ServiceDesc for GetCredentialRequestBuilderService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var GetCredentialRequestBuilderService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "credentials.GetCredentialRequestBuilderService",
+	HandlerType: (*GetCredentialRequestBuilderServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddCredentialOption",
+			Handler:    _GetCredentialRequestBuilderService_AddCredentialOption_Handler,
+		},
+		{
+			MethodName: "Build",
+			Handler:    _GetCredentialRequestBuilderService_Build_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/credentials/credentials.proto",
+}

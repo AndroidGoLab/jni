@@ -162,6 +162,146 @@ message StartActivityForResultRequest {
 message StartActivityForResultResponse {
 }
 
+message SetActionRequest {
+  string action = 1;
+}
+
+message SetActionResponse {
+  int64 result = 1;
+}
+
+message SetDataRequest {
+  int64 uri = 1;
+}
+
+message SetDataResponse {
+  int64 result = 1;
+}
+
+message SetComponentRequest {
+  int64 component = 1;
+}
+
+message SetComponentResponse {
+  int64 result = 1;
+}
+
+message SetFlagsRequest {
+  int32 flags = 1;
+}
+
+message SetFlagsResponse {
+  int64 result = 1;
+}
+
+message AddFlagsRequest {
+  int32 flags = 1;
+}
+
+message AddFlagsResponse {
+  int64 result = 1;
+}
+
+message AddCategoryRequest {
+  string category = 1;
+}
+
+message AddCategoryResponse {
+  int64 result = 1;
+}
+
+message SetPackageRequest {
+  string pkg = 1;
+}
+
+message SetPackageResponse {
+  int64 result = 1;
+}
+
+message SetTypeRequest {
+  string mime_type = 1;
+}
+
+message SetTypeResponse {
+  int64 result = 1;
+}
+
+message GetActionRequest {
+}
+
+message GetActionResponse {
+  string result = 1;
+}
+
+message GetDataRequest {
+}
+
+message GetDataResponse {
+  int64 result = 1;
+}
+
+message GetStringExtraRequest {
+  string key = 1;
+}
+
+message GetStringExtraResponse {
+  string result = 1;
+}
+
+message GetBoolExtraRequest {
+  string key = 1;
+  bool default_val = 2;
+}
+
+message GetBoolExtraResponse {
+  bool result = 1;
+}
+
+message GetIntExtraRequest {
+  string key = 1;
+  int32 default_val = 2;
+}
+
+message GetIntExtraResponse {
+  int32 result = 1;
+}
+
+message PutStringExtraRequest {
+  string key = 1;
+  string value = 2;
+}
+
+message PutStringExtraResponse {
+  int64 result = 1;
+}
+
+message PutIntExtraRequest {
+  string key = 1;
+  int32 value = 2;
+}
+
+message PutIntExtraResponse {
+  int64 result = 1;
+}
+
+message PutBoolExtraRequest {
+  string key = 1;
+  bool value = 2;
+}
+
+message PutBoolExtraResponse {
+  int64 result = 1;
+}
+
+message PutLongExtraRequest {
+  string key = 1;
+  int64 value = 2;
+}
+
+message PutLongExtraResponse {
+  int64 result = 1;
+}
+
 message NewPendingActivityRequest {
   int64 ctx = 1;
   int32 request_code = 2;
@@ -242,6 +382,26 @@ service ActivityService {
   rpc GetWindow (GetWindowRequest) returns (GetWindowResponse);
   rpc RunOnUiThread (RunOnUiThreadRequest) returns (RunOnUiThreadResponse);
   rpc StartActivityForResult (StartActivityForResultRequest) returns (StartActivityForResultResponse);
+}
+
+service IntentService {
+  rpc SetAction (SetActionRequest) returns (SetActionResponse);
+  rpc SetData (SetDataRequest) returns (SetDataResponse);
+  rpc SetComponent (SetComponentRequest) returns (SetComponentResponse);
+  rpc SetFlags (SetFlagsRequest) returns (SetFlagsResponse);
+  rpc AddFlags (AddFlagsRequest) returns (AddFlagsResponse);
+  rpc AddCategory (AddCategoryRequest) returns (AddCategoryResponse);
+  rpc SetPackage (SetPackageRequest) returns (SetPackageResponse);
+  rpc SetType (SetTypeRequest) returns (SetTypeResponse);
+  rpc GetAction (GetActionRequest) returns (GetActionResponse);
+  rpc GetData (GetDataRequest) returns (GetDataResponse);
+  rpc GetStringExtra (GetStringExtraRequest) returns (GetStringExtraResponse);
+  rpc GetBoolExtra (GetBoolExtraRequest) returns (GetBoolExtraResponse);
+  rpc GetIntExtra (GetIntExtraRequest) returns (GetIntExtraResponse);
+  rpc PutStringExtra (PutStringExtraRequest) returns (PutStringExtraResponse);
+  rpc PutIntExtra (PutIntExtraRequest) returns (PutIntExtraResponse);
+  rpc PutBoolExtra (PutBoolExtraRequest) returns (PutBoolExtraResponse);
+  rpc PutLongExtra (PutLongExtraRequest) returns (PutLongExtraResponse);
 }
 
 service PendingIntentService {

@@ -275,6 +275,451 @@ var KeyStoreJavaService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	KeyGenParamBuilderService_SetKeySize_FullMethodName                                   = "/keystore.KeyGenParamBuilderService/SetKeySize"
+	KeyGenParamBuilderService_SetBlockModes_FullMethodName                                = "/keystore.KeyGenParamBuilderService/SetBlockModes"
+	KeyGenParamBuilderService_SetEncryptionPaddings_FullMethodName                        = "/keystore.KeyGenParamBuilderService/SetEncryptionPaddings"
+	KeyGenParamBuilderService_SetSignaturePaddings_FullMethodName                         = "/keystore.KeyGenParamBuilderService/SetSignaturePaddings"
+	KeyGenParamBuilderService_SetDigests_FullMethodName                                   = "/keystore.KeyGenParamBuilderService/SetDigests"
+	KeyGenParamBuilderService_SetUserAuthenticationRequired_FullMethodName                = "/keystore.KeyGenParamBuilderService/SetUserAuthenticationRequired"
+	KeyGenParamBuilderService_SetUserAuthenticationValidityDurationSeconds_FullMethodName = "/keystore.KeyGenParamBuilderService/SetUserAuthenticationValidityDurationSeconds"
+	KeyGenParamBuilderService_SetInvalidatedByBiometricEnrollment_FullMethodName          = "/keystore.KeyGenParamBuilderService/SetInvalidatedByBiometricEnrollment"
+	KeyGenParamBuilderService_SetUnlockedDeviceRequired_FullMethodName                    = "/keystore.KeyGenParamBuilderService/SetUnlockedDeviceRequired"
+	KeyGenParamBuilderService_Build_FullMethodName                                        = "/keystore.KeyGenParamBuilderService/Build"
+)
+
+// KeyGenParamBuilderServiceClient is the client API for KeyGenParamBuilderService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type KeyGenParamBuilderServiceClient interface {
+	SetKeySize(ctx context.Context, in *SetKeySizeRequest, opts ...grpc.CallOption) (*SetKeySizeResponse, error)
+	SetBlockModes(ctx context.Context, in *SetBlockModesRequest, opts ...grpc.CallOption) (*SetBlockModesResponse, error)
+	SetEncryptionPaddings(ctx context.Context, in *SetEncryptionPaddingsRequest, opts ...grpc.CallOption) (*SetEncryptionPaddingsResponse, error)
+	SetSignaturePaddings(ctx context.Context, in *SetSignaturePaddingsRequest, opts ...grpc.CallOption) (*SetSignaturePaddingsResponse, error)
+	SetDigests(ctx context.Context, in *SetDigestsRequest, opts ...grpc.CallOption) (*SetDigestsResponse, error)
+	SetUserAuthenticationRequired(ctx context.Context, in *SetUserAuthenticationRequiredRequest, opts ...grpc.CallOption) (*SetUserAuthenticationRequiredResponse, error)
+	SetUserAuthenticationValidityDurationSeconds(ctx context.Context, in *SetUserAuthenticationValidityDurationSecondsRequest, opts ...grpc.CallOption) (*SetUserAuthenticationValidityDurationSecondsResponse, error)
+	SetInvalidatedByBiometricEnrollment(ctx context.Context, in *SetInvalidatedByBiometricEnrollmentRequest, opts ...grpc.CallOption) (*SetInvalidatedByBiometricEnrollmentResponse, error)
+	SetUnlockedDeviceRequired(ctx context.Context, in *SetUnlockedDeviceRequiredRequest, opts ...grpc.CallOption) (*SetUnlockedDeviceRequiredResponse, error)
+	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
+}
+
+type keyGenParamBuilderServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewKeyGenParamBuilderServiceClient(cc grpc.ClientConnInterface) KeyGenParamBuilderServiceClient {
+	return &keyGenParamBuilderServiceClient{cc}
+}
+
+func (c *keyGenParamBuilderServiceClient) SetKeySize(ctx context.Context, in *SetKeySizeRequest, opts ...grpc.CallOption) (*SetKeySizeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetKeySizeResponse)
+	err := c.cc.Invoke(ctx, KeyGenParamBuilderService_SetKeySize_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *keyGenParamBuilderServiceClient) SetBlockModes(ctx context.Context, in *SetBlockModesRequest, opts ...grpc.CallOption) (*SetBlockModesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetBlockModesResponse)
+	err := c.cc.Invoke(ctx, KeyGenParamBuilderService_SetBlockModes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *keyGenParamBuilderServiceClient) SetEncryptionPaddings(ctx context.Context, in *SetEncryptionPaddingsRequest, opts ...grpc.CallOption) (*SetEncryptionPaddingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetEncryptionPaddingsResponse)
+	err := c.cc.Invoke(ctx, KeyGenParamBuilderService_SetEncryptionPaddings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *keyGenParamBuilderServiceClient) SetSignaturePaddings(ctx context.Context, in *SetSignaturePaddingsRequest, opts ...grpc.CallOption) (*SetSignaturePaddingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetSignaturePaddingsResponse)
+	err := c.cc.Invoke(ctx, KeyGenParamBuilderService_SetSignaturePaddings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *keyGenParamBuilderServiceClient) SetDigests(ctx context.Context, in *SetDigestsRequest, opts ...grpc.CallOption) (*SetDigestsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDigestsResponse)
+	err := c.cc.Invoke(ctx, KeyGenParamBuilderService_SetDigests_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *keyGenParamBuilderServiceClient) SetUserAuthenticationRequired(ctx context.Context, in *SetUserAuthenticationRequiredRequest, opts ...grpc.CallOption) (*SetUserAuthenticationRequiredResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetUserAuthenticationRequiredResponse)
+	err := c.cc.Invoke(ctx, KeyGenParamBuilderService_SetUserAuthenticationRequired_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *keyGenParamBuilderServiceClient) SetUserAuthenticationValidityDurationSeconds(ctx context.Context, in *SetUserAuthenticationValidityDurationSecondsRequest, opts ...grpc.CallOption) (*SetUserAuthenticationValidityDurationSecondsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetUserAuthenticationValidityDurationSecondsResponse)
+	err := c.cc.Invoke(ctx, KeyGenParamBuilderService_SetUserAuthenticationValidityDurationSeconds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *keyGenParamBuilderServiceClient) SetInvalidatedByBiometricEnrollment(ctx context.Context, in *SetInvalidatedByBiometricEnrollmentRequest, opts ...grpc.CallOption) (*SetInvalidatedByBiometricEnrollmentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetInvalidatedByBiometricEnrollmentResponse)
+	err := c.cc.Invoke(ctx, KeyGenParamBuilderService_SetInvalidatedByBiometricEnrollment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *keyGenParamBuilderServiceClient) SetUnlockedDeviceRequired(ctx context.Context, in *SetUnlockedDeviceRequiredRequest, opts ...grpc.CallOption) (*SetUnlockedDeviceRequiredResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetUnlockedDeviceRequiredResponse)
+	err := c.cc.Invoke(ctx, KeyGenParamBuilderService_SetUnlockedDeviceRequired_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *keyGenParamBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuildResponse)
+	err := c.cc.Invoke(ctx, KeyGenParamBuilderService_Build_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// KeyGenParamBuilderServiceServer is the server API for KeyGenParamBuilderService service.
+// All implementations must embed UnimplementedKeyGenParamBuilderServiceServer
+// for forward compatibility.
+type KeyGenParamBuilderServiceServer interface {
+	SetKeySize(context.Context, *SetKeySizeRequest) (*SetKeySizeResponse, error)
+	SetBlockModes(context.Context, *SetBlockModesRequest) (*SetBlockModesResponse, error)
+	SetEncryptionPaddings(context.Context, *SetEncryptionPaddingsRequest) (*SetEncryptionPaddingsResponse, error)
+	SetSignaturePaddings(context.Context, *SetSignaturePaddingsRequest) (*SetSignaturePaddingsResponse, error)
+	SetDigests(context.Context, *SetDigestsRequest) (*SetDigestsResponse, error)
+	SetUserAuthenticationRequired(context.Context, *SetUserAuthenticationRequiredRequest) (*SetUserAuthenticationRequiredResponse, error)
+	SetUserAuthenticationValidityDurationSeconds(context.Context, *SetUserAuthenticationValidityDurationSecondsRequest) (*SetUserAuthenticationValidityDurationSecondsResponse, error)
+	SetInvalidatedByBiometricEnrollment(context.Context, *SetInvalidatedByBiometricEnrollmentRequest) (*SetInvalidatedByBiometricEnrollmentResponse, error)
+	SetUnlockedDeviceRequired(context.Context, *SetUnlockedDeviceRequiredRequest) (*SetUnlockedDeviceRequiredResponse, error)
+	Build(context.Context, *BuildRequest) (*BuildResponse, error)
+	mustEmbedUnimplementedKeyGenParamBuilderServiceServer()
+}
+
+// UnimplementedKeyGenParamBuilderServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedKeyGenParamBuilderServiceServer struct{}
+
+func (UnimplementedKeyGenParamBuilderServiceServer) SetKeySize(context.Context, *SetKeySizeRequest) (*SetKeySizeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetKeySize not implemented")
+}
+func (UnimplementedKeyGenParamBuilderServiceServer) SetBlockModes(context.Context, *SetBlockModesRequest) (*SetBlockModesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetBlockModes not implemented")
+}
+func (UnimplementedKeyGenParamBuilderServiceServer) SetEncryptionPaddings(context.Context, *SetEncryptionPaddingsRequest) (*SetEncryptionPaddingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetEncryptionPaddings not implemented")
+}
+func (UnimplementedKeyGenParamBuilderServiceServer) SetSignaturePaddings(context.Context, *SetSignaturePaddingsRequest) (*SetSignaturePaddingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetSignaturePaddings not implemented")
+}
+func (UnimplementedKeyGenParamBuilderServiceServer) SetDigests(context.Context, *SetDigestsRequest) (*SetDigestsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetDigests not implemented")
+}
+func (UnimplementedKeyGenParamBuilderServiceServer) SetUserAuthenticationRequired(context.Context, *SetUserAuthenticationRequiredRequest) (*SetUserAuthenticationRequiredResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetUserAuthenticationRequired not implemented")
+}
+func (UnimplementedKeyGenParamBuilderServiceServer) SetUserAuthenticationValidityDurationSeconds(context.Context, *SetUserAuthenticationValidityDurationSecondsRequest) (*SetUserAuthenticationValidityDurationSecondsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetUserAuthenticationValidityDurationSeconds not implemented")
+}
+func (UnimplementedKeyGenParamBuilderServiceServer) SetInvalidatedByBiometricEnrollment(context.Context, *SetInvalidatedByBiometricEnrollmentRequest) (*SetInvalidatedByBiometricEnrollmentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetInvalidatedByBiometricEnrollment not implemented")
+}
+func (UnimplementedKeyGenParamBuilderServiceServer) SetUnlockedDeviceRequired(context.Context, *SetUnlockedDeviceRequiredRequest) (*SetUnlockedDeviceRequiredResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetUnlockedDeviceRequired not implemented")
+}
+func (UnimplementedKeyGenParamBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
+}
+func (UnimplementedKeyGenParamBuilderServiceServer) mustEmbedUnimplementedKeyGenParamBuilderServiceServer() {
+}
+func (UnimplementedKeyGenParamBuilderServiceServer) testEmbeddedByValue() {}
+
+// UnsafeKeyGenParamBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to KeyGenParamBuilderServiceServer will
+// result in compilation errors.
+type UnsafeKeyGenParamBuilderServiceServer interface {
+	mustEmbedUnimplementedKeyGenParamBuilderServiceServer()
+}
+
+func RegisterKeyGenParamBuilderServiceServer(s grpc.ServiceRegistrar, srv KeyGenParamBuilderServiceServer) {
+	// If the following call panics, it indicates UnimplementedKeyGenParamBuilderServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&KeyGenParamBuilderService_ServiceDesc, srv)
+}
+
+func _KeyGenParamBuilderService_SetKeySize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetKeySizeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KeyGenParamBuilderServiceServer).SetKeySize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KeyGenParamBuilderService_SetKeySize_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KeyGenParamBuilderServiceServer).SetKeySize(ctx, req.(*SetKeySizeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KeyGenParamBuilderService_SetBlockModes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetBlockModesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KeyGenParamBuilderServiceServer).SetBlockModes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KeyGenParamBuilderService_SetBlockModes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KeyGenParamBuilderServiceServer).SetBlockModes(ctx, req.(*SetBlockModesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KeyGenParamBuilderService_SetEncryptionPaddings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetEncryptionPaddingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KeyGenParamBuilderServiceServer).SetEncryptionPaddings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KeyGenParamBuilderService_SetEncryptionPaddings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KeyGenParamBuilderServiceServer).SetEncryptionPaddings(ctx, req.(*SetEncryptionPaddingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KeyGenParamBuilderService_SetSignaturePaddings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetSignaturePaddingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KeyGenParamBuilderServiceServer).SetSignaturePaddings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KeyGenParamBuilderService_SetSignaturePaddings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KeyGenParamBuilderServiceServer).SetSignaturePaddings(ctx, req.(*SetSignaturePaddingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KeyGenParamBuilderService_SetDigests_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDigestsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KeyGenParamBuilderServiceServer).SetDigests(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KeyGenParamBuilderService_SetDigests_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KeyGenParamBuilderServiceServer).SetDigests(ctx, req.(*SetDigestsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KeyGenParamBuilderService_SetUserAuthenticationRequired_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUserAuthenticationRequiredRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KeyGenParamBuilderServiceServer).SetUserAuthenticationRequired(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KeyGenParamBuilderService_SetUserAuthenticationRequired_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KeyGenParamBuilderServiceServer).SetUserAuthenticationRequired(ctx, req.(*SetUserAuthenticationRequiredRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KeyGenParamBuilderService_SetUserAuthenticationValidityDurationSeconds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUserAuthenticationValidityDurationSecondsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KeyGenParamBuilderServiceServer).SetUserAuthenticationValidityDurationSeconds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KeyGenParamBuilderService_SetUserAuthenticationValidityDurationSeconds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KeyGenParamBuilderServiceServer).SetUserAuthenticationValidityDurationSeconds(ctx, req.(*SetUserAuthenticationValidityDurationSecondsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KeyGenParamBuilderService_SetInvalidatedByBiometricEnrollment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetInvalidatedByBiometricEnrollmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KeyGenParamBuilderServiceServer).SetInvalidatedByBiometricEnrollment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KeyGenParamBuilderService_SetInvalidatedByBiometricEnrollment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KeyGenParamBuilderServiceServer).SetInvalidatedByBiometricEnrollment(ctx, req.(*SetInvalidatedByBiometricEnrollmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KeyGenParamBuilderService_SetUnlockedDeviceRequired_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUnlockedDeviceRequiredRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KeyGenParamBuilderServiceServer).SetUnlockedDeviceRequired(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KeyGenParamBuilderService_SetUnlockedDeviceRequired_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KeyGenParamBuilderServiceServer).SetUnlockedDeviceRequired(ctx, req.(*SetUnlockedDeviceRequiredRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KeyGenParamBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KeyGenParamBuilderServiceServer).Build(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KeyGenParamBuilderService_Build_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KeyGenParamBuilderServiceServer).Build(ctx, req.(*BuildRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// KeyGenParamBuilderService_ServiceDesc is the grpc.ServiceDesc for KeyGenParamBuilderService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var KeyGenParamBuilderService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "keystore.KeyGenParamBuilderService",
+	HandlerType: (*KeyGenParamBuilderServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SetKeySize",
+			Handler:    _KeyGenParamBuilderService_SetKeySize_Handler,
+		},
+		{
+			MethodName: "SetBlockModes",
+			Handler:    _KeyGenParamBuilderService_SetBlockModes_Handler,
+		},
+		{
+			MethodName: "SetEncryptionPaddings",
+			Handler:    _KeyGenParamBuilderService_SetEncryptionPaddings_Handler,
+		},
+		{
+			MethodName: "SetSignaturePaddings",
+			Handler:    _KeyGenParamBuilderService_SetSignaturePaddings_Handler,
+		},
+		{
+			MethodName: "SetDigests",
+			Handler:    _KeyGenParamBuilderService_SetDigests_Handler,
+		},
+		{
+			MethodName: "SetUserAuthenticationRequired",
+			Handler:    _KeyGenParamBuilderService_SetUserAuthenticationRequired_Handler,
+		},
+		{
+			MethodName: "SetUserAuthenticationValidityDurationSeconds",
+			Handler:    _KeyGenParamBuilderService_SetUserAuthenticationValidityDurationSeconds_Handler,
+		},
+		{
+			MethodName: "SetInvalidatedByBiometricEnrollment",
+			Handler:    _KeyGenParamBuilderService_SetInvalidatedByBiometricEnrollment_Handler,
+		},
+		{
+			MethodName: "SetUnlockedDeviceRequired",
+			Handler:    _KeyGenParamBuilderService_SetUnlockedDeviceRequired_Handler,
+		},
+		{
+			MethodName: "Build",
+			Handler:    _KeyGenParamBuilderService_Build_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/keystore/keystore.proto",
+}
+
+const (
 	KeyGeneratorJavaService_Init_FullMethodName        = "/keystore.KeyGeneratorJavaService/Init"
 	KeyGeneratorJavaService_GenerateKey_FullMethodName = "/keystore.KeyGeneratorJavaService/GenerateKey"
 )

@@ -959,6 +959,86 @@ func (*RequestPeersRawResponse) Descriptor() ([]byte, []int) {
 	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{19}
 }
 
+type ToStringRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToStringRequest) Reset() {
+	*x = ToStringRequest{}
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToStringRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToStringRequest) ProtoMessage() {}
+
+func (x *ToStringRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToStringRequest.ProtoReflect.Descriptor instead.
+func (*ToStringRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{20}
+}
+
+type ToStringResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToStringResponse) Reset() {
+	*x = ToStringResponse{}
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToStringResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToStringResponse) ProtoMessage() {}
+
+func (x *ToStringResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToStringResponse.ProtoReflect.Descriptor instead.
+func (*ToStringResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *ToStringResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
 type ActionListenerOnSuccessEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -967,7 +1047,7 @@ type ActionListenerOnSuccessEvent struct {
 
 func (x *ActionListenerOnSuccessEvent) Reset() {
 	*x = ActionListenerOnSuccessEvent{}
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[20]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -979,7 +1059,7 @@ func (x *ActionListenerOnSuccessEvent) String() string {
 func (*ActionListenerOnSuccessEvent) ProtoMessage() {}
 
 func (x *ActionListenerOnSuccessEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[20]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -992,7 +1072,7 @@ func (x *ActionListenerOnSuccessEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionListenerOnSuccessEvent.ProtoReflect.Descriptor instead.
 func (*ActionListenerOnSuccessEvent) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{20}
+	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{22}
 }
 
 type ActionListenerOnFailureEvent struct {
@@ -1004,7 +1084,7 @@ type ActionListenerOnFailureEvent struct {
 
 func (x *ActionListenerOnFailureEvent) Reset() {
 	*x = ActionListenerOnFailureEvent{}
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[21]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1016,7 +1096,7 @@ func (x *ActionListenerOnFailureEvent) String() string {
 func (*ActionListenerOnFailureEvent) ProtoMessage() {}
 
 func (x *ActionListenerOnFailureEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[21]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1029,7 +1109,7 @@ func (x *ActionListenerOnFailureEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionListenerOnFailureEvent.ProtoReflect.Descriptor instead.
 func (*ActionListenerOnFailureEvent) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{21}
+	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ActionListenerOnFailureEvent) GetArg0() int64 {
@@ -1049,7 +1129,7 @@ type ActionListenerEvent struct {
 
 func (x *ActionListenerEvent) Reset() {
 	*x = ActionListenerEvent{}
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[22]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1061,7 +1141,7 @@ func (x *ActionListenerEvent) String() string {
 func (*ActionListenerEvent) ProtoMessage() {}
 
 func (x *ActionListenerEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[22]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1074,7 +1154,7 @@ func (x *ActionListenerEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionListenerEvent.ProtoReflect.Descriptor instead.
 func (*ActionListenerEvent) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{22}
+	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ActionListenerEvent) GetOnSuccess() *ActionListenerOnSuccessEvent {
@@ -1099,7 +1179,7 @@ type SubscribeActionListenerRequest struct {
 
 func (x *SubscribeActionListenerRequest) Reset() {
 	*x = SubscribeActionListenerRequest{}
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[23]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1111,7 +1191,7 @@ func (x *SubscribeActionListenerRequest) String() string {
 func (*SubscribeActionListenerRequest) ProtoMessage() {}
 
 func (x *SubscribeActionListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[23]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1124,7 +1204,7 @@ func (x *SubscribeActionListenerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubscribeActionListenerRequest.ProtoReflect.Descriptor instead.
 func (*SubscribeActionListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{23}
+	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{25}
 }
 
 type PeerListListenerOnPeersAvailableEvent struct {
@@ -1136,7 +1216,7 @@ type PeerListListenerOnPeersAvailableEvent struct {
 
 func (x *PeerListListenerOnPeersAvailableEvent) Reset() {
 	*x = PeerListListenerOnPeersAvailableEvent{}
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[24]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1148,7 +1228,7 @@ func (x *PeerListListenerOnPeersAvailableEvent) String() string {
 func (*PeerListListenerOnPeersAvailableEvent) ProtoMessage() {}
 
 func (x *PeerListListenerOnPeersAvailableEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[24]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1161,7 +1241,7 @@ func (x *PeerListListenerOnPeersAvailableEvent) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use PeerListListenerOnPeersAvailableEvent.ProtoReflect.Descriptor instead.
 func (*PeerListListenerOnPeersAvailableEvent) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{24}
+	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *PeerListListenerOnPeersAvailableEvent) GetArg0() int64 {
@@ -1180,7 +1260,7 @@ type PeerListListenerEvent struct {
 
 func (x *PeerListListenerEvent) Reset() {
 	*x = PeerListListenerEvent{}
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[25]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1192,7 +1272,7 @@ func (x *PeerListListenerEvent) String() string {
 func (*PeerListListenerEvent) ProtoMessage() {}
 
 func (x *PeerListListenerEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[25]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1205,7 +1285,7 @@ func (x *PeerListListenerEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PeerListListenerEvent.ProtoReflect.Descriptor instead.
 func (*PeerListListenerEvent) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{25}
+	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *PeerListListenerEvent) GetOnPeersAvailable() *PeerListListenerOnPeersAvailableEvent {
@@ -1223,7 +1303,7 @@ type SubscribePeerListListenerRequest struct {
 
 func (x *SubscribePeerListListenerRequest) Reset() {
 	*x = SubscribePeerListListenerRequest{}
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[26]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1235,7 +1315,7 @@ func (x *SubscribePeerListListenerRequest) String() string {
 func (*SubscribePeerListListenerRequest) ProtoMessage() {}
 
 func (x *SubscribePeerListListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[26]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1248,7 +1328,7 @@ func (x *SubscribePeerListListenerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubscribePeerListListenerRequest.ProtoReflect.Descriptor instead.
 func (*SubscribePeerListListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{26}
+	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{28}
 }
 
 type ConnectionInfoListenerOnConnectionInfoAvailableEvent struct {
@@ -1260,7 +1340,7 @@ type ConnectionInfoListenerOnConnectionInfoAvailableEvent struct {
 
 func (x *ConnectionInfoListenerOnConnectionInfoAvailableEvent) Reset() {
 	*x = ConnectionInfoListenerOnConnectionInfoAvailableEvent{}
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[27]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1272,7 +1352,7 @@ func (x *ConnectionInfoListenerOnConnectionInfoAvailableEvent) String() string {
 func (*ConnectionInfoListenerOnConnectionInfoAvailableEvent) ProtoMessage() {}
 
 func (x *ConnectionInfoListenerOnConnectionInfoAvailableEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[27]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1285,7 +1365,7 @@ func (x *ConnectionInfoListenerOnConnectionInfoAvailableEvent) ProtoReflect() pr
 
 // Deprecated: Use ConnectionInfoListenerOnConnectionInfoAvailableEvent.ProtoReflect.Descriptor instead.
 func (*ConnectionInfoListenerOnConnectionInfoAvailableEvent) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{27}
+	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *ConnectionInfoListenerOnConnectionInfoAvailableEvent) GetArg0() int64 {
@@ -1304,7 +1384,7 @@ type ConnectionInfoListenerEvent struct {
 
 func (x *ConnectionInfoListenerEvent) Reset() {
 	*x = ConnectionInfoListenerEvent{}
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[28]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1316,7 +1396,7 @@ func (x *ConnectionInfoListenerEvent) String() string {
 func (*ConnectionInfoListenerEvent) ProtoMessage() {}
 
 func (x *ConnectionInfoListenerEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[28]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1329,7 +1409,7 @@ func (x *ConnectionInfoListenerEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConnectionInfoListenerEvent.ProtoReflect.Descriptor instead.
 func (*ConnectionInfoListenerEvent) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{28}
+	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *ConnectionInfoListenerEvent) GetOnConnectionInfoAvailable() *ConnectionInfoListenerOnConnectionInfoAvailableEvent {
@@ -1347,7 +1427,7 @@ type SubscribeConnectionInfoListenerRequest struct {
 
 func (x *SubscribeConnectionInfoListenerRequest) Reset() {
 	*x = SubscribeConnectionInfoListenerRequest{}
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[29]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1359,7 +1439,7 @@ func (x *SubscribeConnectionInfoListenerRequest) String() string {
 func (*SubscribeConnectionInfoListenerRequest) ProtoMessage() {}
 
 func (x *SubscribeConnectionInfoListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[29]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1372,7 +1452,7 @@ func (x *SubscribeConnectionInfoListenerRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use SubscribeConnectionInfoListenerRequest.ProtoReflect.Descriptor instead.
 func (*SubscribeConnectionInfoListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{29}
+	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{31}
 }
 
 type ChannelListenerOnChannelDisconnectedEvent struct {
@@ -1383,7 +1463,7 @@ type ChannelListenerOnChannelDisconnectedEvent struct {
 
 func (x *ChannelListenerOnChannelDisconnectedEvent) Reset() {
 	*x = ChannelListenerOnChannelDisconnectedEvent{}
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[30]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1395,7 +1475,7 @@ func (x *ChannelListenerOnChannelDisconnectedEvent) String() string {
 func (*ChannelListenerOnChannelDisconnectedEvent) ProtoMessage() {}
 
 func (x *ChannelListenerOnChannelDisconnectedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[30]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1408,7 +1488,7 @@ func (x *ChannelListenerOnChannelDisconnectedEvent) ProtoReflect() protoreflect.
 
 // Deprecated: Use ChannelListenerOnChannelDisconnectedEvent.ProtoReflect.Descriptor instead.
 func (*ChannelListenerOnChannelDisconnectedEvent) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{30}
+	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{32}
 }
 
 type ChannelListenerEvent struct {
@@ -1420,7 +1500,7 @@ type ChannelListenerEvent struct {
 
 func (x *ChannelListenerEvent) Reset() {
 	*x = ChannelListenerEvent{}
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[31]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1432,7 +1512,7 @@ func (x *ChannelListenerEvent) String() string {
 func (*ChannelListenerEvent) ProtoMessage() {}
 
 func (x *ChannelListenerEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[31]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1445,7 +1525,7 @@ func (x *ChannelListenerEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelListenerEvent.ProtoReflect.Descriptor instead.
 func (*ChannelListenerEvent) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{31}
+	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *ChannelListenerEvent) GetOnChannelDisconnected() *ChannelListenerOnChannelDisconnectedEvent {
@@ -1463,7 +1543,7 @@ type SubscribeChannelListenerRequest struct {
 
 func (x *SubscribeChannelListenerRequest) Reset() {
 	*x = SubscribeChannelListenerRequest{}
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[32]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1475,7 +1555,7 @@ func (x *SubscribeChannelListenerRequest) String() string {
 func (*SubscribeChannelListenerRequest) ProtoMessage() {}
 
 func (x *SubscribeChannelListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[32]
+	mi := &file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1488,7 +1568,7 @@ func (x *SubscribeChannelListenerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubscribeChannelListenerRequest.ProtoReflect.Descriptor instead.
 func (*SubscribeChannelListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{32}
+	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP(), []int{34}
 }
 
 var File_proto_wifi_p2p_wifi_p2p_proto protoreflect.FileDescriptor
@@ -1544,7 +1624,10 @@ const file_proto_wifi_p2p_wifi_p2p_proto_rawDesc = "" +
 	"\x16RequestPeersRawRequest\x12\x18\n" +
 	"\achannel\x18\x01 \x01(\x03R\achannel\x12\x1a\n" +
 	"\blistener\x18\x02 \x01(\x03R\blistener\"\x19\n" +
-	"\x17RequestPeersRawResponse\"\x1e\n" +
+	"\x17RequestPeersRawResponse\"\x11\n" +
+	"\x0fToStringRequest\"*\n" +
+	"\x10ToStringResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x1e\n" +
 	"\x1cActionListenerOnSuccessEvent\"2\n" +
 	"\x1cActionListenerOnFailureEvent\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\xcb\x01\n" +
@@ -1583,7 +1666,9 @@ const file_proto_wifi_p2p_wifi_p2p_proto_rawDesc = "" +
 	"\x0eCreateGroupRaw\x12\x1f.wifi_p2p.CreateGroupRawRequest\x1a .wifi_p2p.CreateGroupRawResponse\x12S\n" +
 	"\x0eRemoveGroupRaw\x12\x1f.wifi_p2p.RemoveGroupRawRequest\x1a .wifi_p2p.RemoveGroupRawResponse\x12q\n" +
 	"\x18RequestConnectionInfoRaw\x12).wifi_p2p.RequestConnectionInfoRawRequest\x1a*.wifi_p2p.RequestConnectionInfoRawResponse\x12V\n" +
-	"\x0fRequestPeersRaw\x12 .wifi_p2p.RequestPeersRawRequest\x1a!.wifi_p2p.RequestPeersRawResponse2}\n" +
+	"\x0fRequestPeersRaw\x12 .wifi_p2p.RequestPeersRawRequest\x1a!.wifi_p2p.RequestPeersRawResponse2U\n" +
+	"\x10P2pConfigService\x12A\n" +
+	"\bToString\x12\x19.wifi_p2p.ToStringRequest\x1a\x1a.wifi_p2p.ToStringResponse2}\n" +
 	"\x15ActionListenerService\x12d\n" +
 	"\x17SubscribeActionListener\x12(.wifi_p2p.SubscribeActionListenerRequest\x1a\x1d.wifi_p2p.ActionListenerEvent0\x012\x85\x01\n" +
 	"\x17PeerListListenerService\x12j\n" +
@@ -1605,7 +1690,7 @@ func file_proto_wifi_p2p_wifi_p2p_proto_rawDescGZIP() []byte {
 	return file_proto_wifi_p2p_wifi_p2p_proto_rawDescData
 }
 
-var file_proto_wifi_p2p_wifi_p2p_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
+var file_proto_wifi_p2p_wifi_p2p_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_proto_wifi_p2p_wifi_p2p_proto_goTypes = []any{
 	(*Device)(nil),                                               // 0: wifi_p2p.Device
 	(*Group)(nil),                                                // 1: wifi_p2p.Group
@@ -1627,26 +1712,28 @@ var file_proto_wifi_p2p_wifi_p2p_proto_goTypes = []any{
 	(*RequestConnectionInfoRawResponse)(nil),                     // 17: wifi_p2p.RequestConnectionInfoRawResponse
 	(*RequestPeersRawRequest)(nil),                               // 18: wifi_p2p.RequestPeersRawRequest
 	(*RequestPeersRawResponse)(nil),                              // 19: wifi_p2p.RequestPeersRawResponse
-	(*ActionListenerOnSuccessEvent)(nil),                         // 20: wifi_p2p.ActionListenerOnSuccessEvent
-	(*ActionListenerOnFailureEvent)(nil),                         // 21: wifi_p2p.ActionListenerOnFailureEvent
-	(*ActionListenerEvent)(nil),                                  // 22: wifi_p2p.ActionListenerEvent
-	(*SubscribeActionListenerRequest)(nil),                       // 23: wifi_p2p.SubscribeActionListenerRequest
-	(*PeerListListenerOnPeersAvailableEvent)(nil),                // 24: wifi_p2p.PeerListListenerOnPeersAvailableEvent
-	(*PeerListListenerEvent)(nil),                                // 25: wifi_p2p.PeerListListenerEvent
-	(*SubscribePeerListListenerRequest)(nil),                     // 26: wifi_p2p.SubscribePeerListListenerRequest
-	(*ConnectionInfoListenerOnConnectionInfoAvailableEvent)(nil), // 27: wifi_p2p.ConnectionInfoListenerOnConnectionInfoAvailableEvent
-	(*ConnectionInfoListenerEvent)(nil),                          // 28: wifi_p2p.ConnectionInfoListenerEvent
-	(*SubscribeConnectionInfoListenerRequest)(nil),               // 29: wifi_p2p.SubscribeConnectionInfoListenerRequest
-	(*ChannelListenerOnChannelDisconnectedEvent)(nil),            // 30: wifi_p2p.ChannelListenerOnChannelDisconnectedEvent
-	(*ChannelListenerEvent)(nil),                                 // 31: wifi_p2p.ChannelListenerEvent
-	(*SubscribeChannelListenerRequest)(nil),                      // 32: wifi_p2p.SubscribeChannelListenerRequest
+	(*ToStringRequest)(nil),                                      // 20: wifi_p2p.ToStringRequest
+	(*ToStringResponse)(nil),                                     // 21: wifi_p2p.ToStringResponse
+	(*ActionListenerOnSuccessEvent)(nil),                         // 22: wifi_p2p.ActionListenerOnSuccessEvent
+	(*ActionListenerOnFailureEvent)(nil),                         // 23: wifi_p2p.ActionListenerOnFailureEvent
+	(*ActionListenerEvent)(nil),                                  // 24: wifi_p2p.ActionListenerEvent
+	(*SubscribeActionListenerRequest)(nil),                       // 25: wifi_p2p.SubscribeActionListenerRequest
+	(*PeerListListenerOnPeersAvailableEvent)(nil),                // 26: wifi_p2p.PeerListListenerOnPeersAvailableEvent
+	(*PeerListListenerEvent)(nil),                                // 27: wifi_p2p.PeerListListenerEvent
+	(*SubscribePeerListListenerRequest)(nil),                     // 28: wifi_p2p.SubscribePeerListListenerRequest
+	(*ConnectionInfoListenerOnConnectionInfoAvailableEvent)(nil), // 29: wifi_p2p.ConnectionInfoListenerOnConnectionInfoAvailableEvent
+	(*ConnectionInfoListenerEvent)(nil),                          // 30: wifi_p2p.ConnectionInfoListenerEvent
+	(*SubscribeConnectionInfoListenerRequest)(nil),               // 31: wifi_p2p.SubscribeConnectionInfoListenerRequest
+	(*ChannelListenerOnChannelDisconnectedEvent)(nil),            // 32: wifi_p2p.ChannelListenerOnChannelDisconnectedEvent
+	(*ChannelListenerEvent)(nil),                                 // 33: wifi_p2p.ChannelListenerEvent
+	(*SubscribeChannelListenerRequest)(nil),                      // 34: wifi_p2p.SubscribeChannelListenerRequest
 }
 var file_proto_wifi_p2p_wifi_p2p_proto_depIdxs = []int32{
-	20, // 0: wifi_p2p.ActionListenerEvent.on_success:type_name -> wifi_p2p.ActionListenerOnSuccessEvent
-	21, // 1: wifi_p2p.ActionListenerEvent.on_failure:type_name -> wifi_p2p.ActionListenerOnFailureEvent
-	24, // 2: wifi_p2p.PeerListListenerEvent.on_peers_available:type_name -> wifi_p2p.PeerListListenerOnPeersAvailableEvent
-	27, // 3: wifi_p2p.ConnectionInfoListenerEvent.on_connection_info_available:type_name -> wifi_p2p.ConnectionInfoListenerOnConnectionInfoAvailableEvent
-	30, // 4: wifi_p2p.ChannelListenerEvent.on_channel_disconnected:type_name -> wifi_p2p.ChannelListenerOnChannelDisconnectedEvent
+	22, // 0: wifi_p2p.ActionListenerEvent.on_success:type_name -> wifi_p2p.ActionListenerOnSuccessEvent
+	23, // 1: wifi_p2p.ActionListenerEvent.on_failure:type_name -> wifi_p2p.ActionListenerOnFailureEvent
+	26, // 2: wifi_p2p.PeerListListenerEvent.on_peers_available:type_name -> wifi_p2p.PeerListListenerOnPeersAvailableEvent
+	29, // 3: wifi_p2p.ConnectionInfoListenerEvent.on_connection_info_available:type_name -> wifi_p2p.ConnectionInfoListenerOnConnectionInfoAvailableEvent
+	32, // 4: wifi_p2p.ChannelListenerEvent.on_channel_disconnected:type_name -> wifi_p2p.ChannelListenerOnChannelDisconnectedEvent
 	2,  // 5: wifi_p2p.ManagerService.InitializeRaw:input_type -> wifi_p2p.InitializeRawRequest
 	4,  // 6: wifi_p2p.ManagerService.DiscoverPeersRaw:input_type -> wifi_p2p.DiscoverPeersRawRequest
 	6,  // 7: wifi_p2p.ManagerService.StopPeerDiscoveryRaw:input_type -> wifi_p2p.StopPeerDiscoveryRawRequest
@@ -1656,25 +1743,27 @@ var file_proto_wifi_p2p_wifi_p2p_proto_depIdxs = []int32{
 	14, // 11: wifi_p2p.ManagerService.RemoveGroupRaw:input_type -> wifi_p2p.RemoveGroupRawRequest
 	16, // 12: wifi_p2p.ManagerService.RequestConnectionInfoRaw:input_type -> wifi_p2p.RequestConnectionInfoRawRequest
 	18, // 13: wifi_p2p.ManagerService.RequestPeersRaw:input_type -> wifi_p2p.RequestPeersRawRequest
-	23, // 14: wifi_p2p.ActionListenerService.SubscribeActionListener:input_type -> wifi_p2p.SubscribeActionListenerRequest
-	26, // 15: wifi_p2p.PeerListListenerService.SubscribePeerListListener:input_type -> wifi_p2p.SubscribePeerListListenerRequest
-	29, // 16: wifi_p2p.ConnectionInfoListenerService.SubscribeConnectionInfoListener:input_type -> wifi_p2p.SubscribeConnectionInfoListenerRequest
-	32, // 17: wifi_p2p.ChannelListenerService.SubscribeChannelListener:input_type -> wifi_p2p.SubscribeChannelListenerRequest
-	3,  // 18: wifi_p2p.ManagerService.InitializeRaw:output_type -> wifi_p2p.InitializeRawResponse
-	5,  // 19: wifi_p2p.ManagerService.DiscoverPeersRaw:output_type -> wifi_p2p.DiscoverPeersRawResponse
-	7,  // 20: wifi_p2p.ManagerService.StopPeerDiscoveryRaw:output_type -> wifi_p2p.StopPeerDiscoveryRawResponse
-	9,  // 21: wifi_p2p.ManagerService.ConnectRaw:output_type -> wifi_p2p.ConnectRawResponse
-	11, // 22: wifi_p2p.ManagerService.CancelConnectRaw:output_type -> wifi_p2p.CancelConnectRawResponse
-	13, // 23: wifi_p2p.ManagerService.CreateGroupRaw:output_type -> wifi_p2p.CreateGroupRawResponse
-	15, // 24: wifi_p2p.ManagerService.RemoveGroupRaw:output_type -> wifi_p2p.RemoveGroupRawResponse
-	17, // 25: wifi_p2p.ManagerService.RequestConnectionInfoRaw:output_type -> wifi_p2p.RequestConnectionInfoRawResponse
-	19, // 26: wifi_p2p.ManagerService.RequestPeersRaw:output_type -> wifi_p2p.RequestPeersRawResponse
-	22, // 27: wifi_p2p.ActionListenerService.SubscribeActionListener:output_type -> wifi_p2p.ActionListenerEvent
-	25, // 28: wifi_p2p.PeerListListenerService.SubscribePeerListListener:output_type -> wifi_p2p.PeerListListenerEvent
-	28, // 29: wifi_p2p.ConnectionInfoListenerService.SubscribeConnectionInfoListener:output_type -> wifi_p2p.ConnectionInfoListenerEvent
-	31, // 30: wifi_p2p.ChannelListenerService.SubscribeChannelListener:output_type -> wifi_p2p.ChannelListenerEvent
-	18, // [18:31] is the sub-list for method output_type
-	5,  // [5:18] is the sub-list for method input_type
+	20, // 14: wifi_p2p.P2pConfigService.ToString:input_type -> wifi_p2p.ToStringRequest
+	25, // 15: wifi_p2p.ActionListenerService.SubscribeActionListener:input_type -> wifi_p2p.SubscribeActionListenerRequest
+	28, // 16: wifi_p2p.PeerListListenerService.SubscribePeerListListener:input_type -> wifi_p2p.SubscribePeerListListenerRequest
+	31, // 17: wifi_p2p.ConnectionInfoListenerService.SubscribeConnectionInfoListener:input_type -> wifi_p2p.SubscribeConnectionInfoListenerRequest
+	34, // 18: wifi_p2p.ChannelListenerService.SubscribeChannelListener:input_type -> wifi_p2p.SubscribeChannelListenerRequest
+	3,  // 19: wifi_p2p.ManagerService.InitializeRaw:output_type -> wifi_p2p.InitializeRawResponse
+	5,  // 20: wifi_p2p.ManagerService.DiscoverPeersRaw:output_type -> wifi_p2p.DiscoverPeersRawResponse
+	7,  // 21: wifi_p2p.ManagerService.StopPeerDiscoveryRaw:output_type -> wifi_p2p.StopPeerDiscoveryRawResponse
+	9,  // 22: wifi_p2p.ManagerService.ConnectRaw:output_type -> wifi_p2p.ConnectRawResponse
+	11, // 23: wifi_p2p.ManagerService.CancelConnectRaw:output_type -> wifi_p2p.CancelConnectRawResponse
+	13, // 24: wifi_p2p.ManagerService.CreateGroupRaw:output_type -> wifi_p2p.CreateGroupRawResponse
+	15, // 25: wifi_p2p.ManagerService.RemoveGroupRaw:output_type -> wifi_p2p.RemoveGroupRawResponse
+	17, // 26: wifi_p2p.ManagerService.RequestConnectionInfoRaw:output_type -> wifi_p2p.RequestConnectionInfoRawResponse
+	19, // 27: wifi_p2p.ManagerService.RequestPeersRaw:output_type -> wifi_p2p.RequestPeersRawResponse
+	21, // 28: wifi_p2p.P2pConfigService.ToString:output_type -> wifi_p2p.ToStringResponse
+	24, // 29: wifi_p2p.ActionListenerService.SubscribeActionListener:output_type -> wifi_p2p.ActionListenerEvent
+	27, // 30: wifi_p2p.PeerListListenerService.SubscribePeerListListener:output_type -> wifi_p2p.PeerListListenerEvent
+	30, // 31: wifi_p2p.ConnectionInfoListenerService.SubscribeConnectionInfoListener:output_type -> wifi_p2p.ConnectionInfoListenerEvent
+	33, // 32: wifi_p2p.ChannelListenerService.SubscribeChannelListener:output_type -> wifi_p2p.ChannelListenerEvent
+	19, // [19:33] is the sub-list for method output_type
+	5,  // [5:19] is the sub-list for method input_type
 	5,  // [5:5] is the sub-list for extension type_name
 	5,  // [5:5] is the sub-list for extension extendee
 	0,  // [0:5] is the sub-list for field type_name
@@ -1685,19 +1774,19 @@ func file_proto_wifi_p2p_wifi_p2p_proto_init() {
 	if File_proto_wifi_p2p_wifi_p2p_proto != nil {
 		return
 	}
-	file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[22].OneofWrappers = []any{}
-	file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[25].OneofWrappers = []any{}
-	file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[28].OneofWrappers = []any{}
-	file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[31].OneofWrappers = []any{}
+	file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[24].OneofWrappers = []any{}
+	file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[27].OneofWrappers = []any{}
+	file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[30].OneofWrappers = []any{}
+	file_proto_wifi_p2p_wifi_p2p_proto_msgTypes[33].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_wifi_p2p_wifi_p2p_proto_rawDesc), len(file_proto_wifi_p2p_wifi_p2p_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   33,
+			NumMessages:   35,
 			NumExtensions: 0,
-			NumServices:   5,
+			NumServices:   6,
 		},
 		GoTypes:           file_proto_wifi_p2p_wifi_p2p_proto_goTypes,
 		DependencyIndexes: file_proto_wifi_p2p_wifi_p2p_proto_depIdxs,

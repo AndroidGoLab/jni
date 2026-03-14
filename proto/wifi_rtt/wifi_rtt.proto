@@ -31,6 +31,21 @@ message StartRangingRawRequest {
 message StartRangingRawResponse {
 }
 
+message AddAccessPointRequest {
+  int64 scan_result = 1;
+}
+
+message AddAccessPointResponse {
+  int64 result = 1;
+}
+
+message BuildRequest {
+}
+
+message BuildResponse {
+  int64 result = 1;
+}
+
 message RangingResultCallbackOnRangingResultsEvent {
   int64 arg0 = 1;
 }
@@ -50,6 +65,11 @@ message SubscribeRangingResultCallbackRequest {
 service ManagerService {
   rpc IsAvailableRaw (IsAvailableRawRequest) returns (IsAvailableRawResponse);
   rpc StartRangingRaw (StartRangingRawRequest) returns (StartRangingRawResponse);
+}
+
+service RangingRequestBuilderService {
+  rpc AddAccessPoint (AddAccessPointRequest) returns (AddAccessPointResponse);
+  rpc Build (BuildRequest) returns (BuildResponse);
 }
 
 service RangingResultCallbackService {

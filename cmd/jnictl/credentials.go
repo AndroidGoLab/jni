@@ -100,6 +100,46 @@ var credentialsManagerClearCredentialStateRawCmd = &cobra.Command{
 	},
 }
 
+var credentialsGetCredentialRequestBuilderCmd = &cobra.Command{
+	Use:   "get-credential-request-builder",
+	Short: "GetCredentialRequestBuilderService operations",
+}
+
+var credentialsGetCredentialRequestBuilderAddCredentialOptionCmd = &cobra.Command{
+	Use:   "add-credential-option",
+	Short: "AddCredentialOption RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewGetCredentialRequestBuilderServiceClient(grpcConn)
+		req := &pb.AddCredentialOptionRequest{}
+		if v, err := cmd.Flags().GetInt64("option"); err == nil {
+			req.Option = v
+		}
+		resp, err := client.AddCredentialOption(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var credentialsGetCredentialRequestBuilderBuildCmd = &cobra.Command{
+	Use:   "build",
+	Short: "Build RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewGetCredentialRequestBuilderServiceClient(grpcConn)
+		req := &pb.BuildRequest{}
+		resp, err := client.Build(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 func init() {
 	credentialsManagerCreateManagerRawCmd.Flags().Int64("ctx", 0, "ctx (int64)")
 	credentialsManagerCmd.AddCommand(credentialsManagerCreateManagerRawCmd)
@@ -112,5 +152,9 @@ func init() {
 	credentialsManagerClearCredentialStateRawCmd.Flags().Int64("request", 0, "request (int64)")
 	credentialsManagerCmd.AddCommand(credentialsManagerClearCredentialStateRawCmd)
 	credentialsCmd.AddCommand(credentialsManagerCmd)
+	credentialsGetCredentialRequestBuilderAddCredentialOptionCmd.Flags().Int64("option", 0, "option (int64)")
+	credentialsGetCredentialRequestBuilderCmd.AddCommand(credentialsGetCredentialRequestBuilderAddCredentialOptionCmd)
+	credentialsGetCredentialRequestBuilderCmd.AddCommand(credentialsGetCredentialRequestBuilderBuildCmd)
+	credentialsCmd.AddCommand(credentialsGetCredentialRequestBuilderCmd)
 	rootCmd.AddCommand(credentialsCmd)
 }

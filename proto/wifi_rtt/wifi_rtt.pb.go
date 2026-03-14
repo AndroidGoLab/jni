@@ -283,6 +283,174 @@ func (*StartRangingRawResponse) Descriptor() ([]byte, []int) {
 	return file_proto_wifi_rtt_wifi_rtt_proto_rawDescGZIP(), []int{4}
 }
 
+type AddAccessPointRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ScanResult    int64                  `protobuf:"varint,1,opt,name=scan_result,json=scanResult,proto3" json:"scan_result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddAccessPointRequest) Reset() {
+	*x = AddAccessPointRequest{}
+	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddAccessPointRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddAccessPointRequest) ProtoMessage() {}
+
+func (x *AddAccessPointRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddAccessPointRequest.ProtoReflect.Descriptor instead.
+func (*AddAccessPointRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_rtt_wifi_rtt_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *AddAccessPointRequest) GetScanResult() int64 {
+	if x != nil {
+		return x.ScanResult
+	}
+	return 0
+}
+
+type AddAccessPointResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddAccessPointResponse) Reset() {
+	*x = AddAccessPointResponse{}
+	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddAccessPointResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddAccessPointResponse) ProtoMessage() {}
+
+func (x *AddAccessPointResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddAccessPointResponse.ProtoReflect.Descriptor instead.
+func (*AddAccessPointResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_rtt_wifi_rtt_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *AddAccessPointResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type BuildRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuildRequest) Reset() {
+	*x = BuildRequest{}
+	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuildRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuildRequest) ProtoMessage() {}
+
+func (x *BuildRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuildRequest.ProtoReflect.Descriptor instead.
+func (*BuildRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_rtt_wifi_rtt_proto_rawDescGZIP(), []int{7}
+}
+
+type BuildResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuildResponse) Reset() {
+	*x = BuildResponse{}
+	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuildResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuildResponse) ProtoMessage() {}
+
+func (x *BuildResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuildResponse.ProtoReflect.Descriptor instead.
+func (*BuildResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_rtt_wifi_rtt_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *BuildResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
 type RangingResultCallbackOnRangingResultsEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
@@ -292,7 +460,7 @@ type RangingResultCallbackOnRangingResultsEvent struct {
 
 func (x *RangingResultCallbackOnRangingResultsEvent) Reset() {
 	*x = RangingResultCallbackOnRangingResultsEvent{}
-	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[5]
+	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -304,7 +472,7 @@ func (x *RangingResultCallbackOnRangingResultsEvent) String() string {
 func (*RangingResultCallbackOnRangingResultsEvent) ProtoMessage() {}
 
 func (x *RangingResultCallbackOnRangingResultsEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[5]
+	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -317,7 +485,7 @@ func (x *RangingResultCallbackOnRangingResultsEvent) ProtoReflect() protoreflect
 
 // Deprecated: Use RangingResultCallbackOnRangingResultsEvent.ProtoReflect.Descriptor instead.
 func (*RangingResultCallbackOnRangingResultsEvent) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_rtt_wifi_rtt_proto_rawDescGZIP(), []int{5}
+	return file_proto_wifi_rtt_wifi_rtt_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *RangingResultCallbackOnRangingResultsEvent) GetArg0() int64 {
@@ -336,7 +504,7 @@ type RangingResultCallbackOnRangingFailureEvent struct {
 
 func (x *RangingResultCallbackOnRangingFailureEvent) Reset() {
 	*x = RangingResultCallbackOnRangingFailureEvent{}
-	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[6]
+	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -348,7 +516,7 @@ func (x *RangingResultCallbackOnRangingFailureEvent) String() string {
 func (*RangingResultCallbackOnRangingFailureEvent) ProtoMessage() {}
 
 func (x *RangingResultCallbackOnRangingFailureEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[6]
+	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -361,7 +529,7 @@ func (x *RangingResultCallbackOnRangingFailureEvent) ProtoReflect() protoreflect
 
 // Deprecated: Use RangingResultCallbackOnRangingFailureEvent.ProtoReflect.Descriptor instead.
 func (*RangingResultCallbackOnRangingFailureEvent) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_rtt_wifi_rtt_proto_rawDescGZIP(), []int{6}
+	return file_proto_wifi_rtt_wifi_rtt_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *RangingResultCallbackOnRangingFailureEvent) GetArg0() int64 {
@@ -381,7 +549,7 @@ type RangingResultCallbackEvent struct {
 
 func (x *RangingResultCallbackEvent) Reset() {
 	*x = RangingResultCallbackEvent{}
-	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[7]
+	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -393,7 +561,7 @@ func (x *RangingResultCallbackEvent) String() string {
 func (*RangingResultCallbackEvent) ProtoMessage() {}
 
 func (x *RangingResultCallbackEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[7]
+	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -406,7 +574,7 @@ func (x *RangingResultCallbackEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RangingResultCallbackEvent.ProtoReflect.Descriptor instead.
 func (*RangingResultCallbackEvent) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_rtt_wifi_rtt_proto_rawDescGZIP(), []int{7}
+	return file_proto_wifi_rtt_wifi_rtt_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *RangingResultCallbackEvent) GetOnRangingResults() *RangingResultCallbackOnRangingResultsEvent {
@@ -431,7 +599,7 @@ type SubscribeRangingResultCallbackRequest struct {
 
 func (x *SubscribeRangingResultCallbackRequest) Reset() {
 	*x = SubscribeRangingResultCallbackRequest{}
-	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[8]
+	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -443,7 +611,7 @@ func (x *SubscribeRangingResultCallbackRequest) String() string {
 func (*SubscribeRangingResultCallbackRequest) ProtoMessage() {}
 
 func (x *SubscribeRangingResultCallbackRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[8]
+	mi := &file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -456,7 +624,7 @@ func (x *SubscribeRangingResultCallbackRequest) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use SubscribeRangingResultCallbackRequest.ProtoReflect.Descriptor instead.
 func (*SubscribeRangingResultCallbackRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_rtt_wifi_rtt_proto_rawDescGZIP(), []int{8}
+	return file_proto_wifi_rtt_wifi_rtt_proto_rawDescGZIP(), []int{12}
 }
 
 var File_proto_wifi_rtt_wifi_rtt_proto protoreflect.FileDescriptor
@@ -479,7 +647,15 @@ const file_proto_wifi_rtt_wifi_rtt_proto_rawDesc = "" +
 	"\arequest\x18\x01 \x01(\x03R\arequest\x12\x1a\n" +
 	"\bexecutor\x18\x02 \x01(\x03R\bexecutor\x12\x1a\n" +
 	"\bcallback\x18\x03 \x01(\x03R\bcallback\"\x19\n" +
-	"\x17StartRangingRawResponse\"@\n" +
+	"\x17StartRangingRawResponse\"8\n" +
+	"\x15AddAccessPointRequest\x12\x1f\n" +
+	"\vscan_result\x18\x01 \x01(\x03R\n" +
+	"scanResult\"0\n" +
+	"\x16AddAccessPointResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x0e\n" +
+	"\fBuildRequest\"'\n" +
+	"\rBuildResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"@\n" +
 	"*RangingResultCallbackOnRangingResultsEvent\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"@\n" +
 	"*RangingResultCallbackOnRangingFailureEvent\x12\x12\n" +
@@ -492,7 +668,10 @@ const file_proto_wifi_rtt_wifi_rtt_proto_rawDesc = "" +
 	"%SubscribeRangingResultCallbackRequest2\xbd\x01\n" +
 	"\x0eManagerService\x12S\n" +
 	"\x0eIsAvailableRaw\x12\x1f.wifi_rtt.IsAvailableRawRequest\x1a .wifi_rtt.IsAvailableRawResponse\x12V\n" +
-	"\x0fStartRangingRaw\x12 .wifi_rtt.StartRangingRawRequest\x1a!.wifi_rtt.StartRangingRawResponse2\x99\x01\n" +
+	"\x0fStartRangingRaw\x12 .wifi_rtt.StartRangingRawRequest\x1a!.wifi_rtt.StartRangingRawResponse2\xad\x01\n" +
+	"\x1cRangingRequestBuilderService\x12S\n" +
+	"\x0eAddAccessPoint\x12\x1f.wifi_rtt.AddAccessPointRequest\x1a .wifi_rtt.AddAccessPointResponse\x128\n" +
+	"\x05Build\x12\x16.wifi_rtt.BuildRequest\x1a\x17.wifi_rtt.BuildResponse2\x99\x01\n" +
 	"\x1cRangingResultCallbackService\x12y\n" +
 	"\x1eSubscribeRangingResultCallback\x12/.wifi_rtt.SubscribeRangingResultCallbackRequest\x1a$.wifi_rtt.RangingResultCallbackEvent0\x01B+Z)github.com/xaionaro-go/jni/proto/wifi_rttb\x06proto3"
 
@@ -508,32 +687,40 @@ func file_proto_wifi_rtt_wifi_rtt_proto_rawDescGZIP() []byte {
 	return file_proto_wifi_rtt_wifi_rtt_proto_rawDescData
 }
 
-var file_proto_wifi_rtt_wifi_rtt_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_proto_wifi_rtt_wifi_rtt_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_proto_wifi_rtt_wifi_rtt_proto_goTypes = []any{
 	(*RangingResult)(nil),                              // 0: wifi_rtt.RangingResult
 	(*IsAvailableRawRequest)(nil),                      // 1: wifi_rtt.IsAvailableRawRequest
 	(*IsAvailableRawResponse)(nil),                     // 2: wifi_rtt.IsAvailableRawResponse
 	(*StartRangingRawRequest)(nil),                     // 3: wifi_rtt.StartRangingRawRequest
 	(*StartRangingRawResponse)(nil),                    // 4: wifi_rtt.StartRangingRawResponse
-	(*RangingResultCallbackOnRangingResultsEvent)(nil), // 5: wifi_rtt.RangingResultCallbackOnRangingResultsEvent
-	(*RangingResultCallbackOnRangingFailureEvent)(nil), // 6: wifi_rtt.RangingResultCallbackOnRangingFailureEvent
-	(*RangingResultCallbackEvent)(nil),                 // 7: wifi_rtt.RangingResultCallbackEvent
-	(*SubscribeRangingResultCallbackRequest)(nil),      // 8: wifi_rtt.SubscribeRangingResultCallbackRequest
+	(*AddAccessPointRequest)(nil),                      // 5: wifi_rtt.AddAccessPointRequest
+	(*AddAccessPointResponse)(nil),                     // 6: wifi_rtt.AddAccessPointResponse
+	(*BuildRequest)(nil),                               // 7: wifi_rtt.BuildRequest
+	(*BuildResponse)(nil),                              // 8: wifi_rtt.BuildResponse
+	(*RangingResultCallbackOnRangingResultsEvent)(nil), // 9: wifi_rtt.RangingResultCallbackOnRangingResultsEvent
+	(*RangingResultCallbackOnRangingFailureEvent)(nil), // 10: wifi_rtt.RangingResultCallbackOnRangingFailureEvent
+	(*RangingResultCallbackEvent)(nil),                 // 11: wifi_rtt.RangingResultCallbackEvent
+	(*SubscribeRangingResultCallbackRequest)(nil),      // 12: wifi_rtt.SubscribeRangingResultCallbackRequest
 }
 var file_proto_wifi_rtt_wifi_rtt_proto_depIdxs = []int32{
-	5, // 0: wifi_rtt.RangingResultCallbackEvent.on_ranging_results:type_name -> wifi_rtt.RangingResultCallbackOnRangingResultsEvent
-	6, // 1: wifi_rtt.RangingResultCallbackEvent.on_ranging_failure:type_name -> wifi_rtt.RangingResultCallbackOnRangingFailureEvent
-	1, // 2: wifi_rtt.ManagerService.IsAvailableRaw:input_type -> wifi_rtt.IsAvailableRawRequest
-	3, // 3: wifi_rtt.ManagerService.StartRangingRaw:input_type -> wifi_rtt.StartRangingRawRequest
-	8, // 4: wifi_rtt.RangingResultCallbackService.SubscribeRangingResultCallback:input_type -> wifi_rtt.SubscribeRangingResultCallbackRequest
-	2, // 5: wifi_rtt.ManagerService.IsAvailableRaw:output_type -> wifi_rtt.IsAvailableRawResponse
-	4, // 6: wifi_rtt.ManagerService.StartRangingRaw:output_type -> wifi_rtt.StartRangingRawResponse
-	7, // 7: wifi_rtt.RangingResultCallbackService.SubscribeRangingResultCallback:output_type -> wifi_rtt.RangingResultCallbackEvent
-	5, // [5:8] is the sub-list for method output_type
-	2, // [2:5] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	9,  // 0: wifi_rtt.RangingResultCallbackEvent.on_ranging_results:type_name -> wifi_rtt.RangingResultCallbackOnRangingResultsEvent
+	10, // 1: wifi_rtt.RangingResultCallbackEvent.on_ranging_failure:type_name -> wifi_rtt.RangingResultCallbackOnRangingFailureEvent
+	1,  // 2: wifi_rtt.ManagerService.IsAvailableRaw:input_type -> wifi_rtt.IsAvailableRawRequest
+	3,  // 3: wifi_rtt.ManagerService.StartRangingRaw:input_type -> wifi_rtt.StartRangingRawRequest
+	5,  // 4: wifi_rtt.RangingRequestBuilderService.AddAccessPoint:input_type -> wifi_rtt.AddAccessPointRequest
+	7,  // 5: wifi_rtt.RangingRequestBuilderService.Build:input_type -> wifi_rtt.BuildRequest
+	12, // 6: wifi_rtt.RangingResultCallbackService.SubscribeRangingResultCallback:input_type -> wifi_rtt.SubscribeRangingResultCallbackRequest
+	2,  // 7: wifi_rtt.ManagerService.IsAvailableRaw:output_type -> wifi_rtt.IsAvailableRawResponse
+	4,  // 8: wifi_rtt.ManagerService.StartRangingRaw:output_type -> wifi_rtt.StartRangingRawResponse
+	6,  // 9: wifi_rtt.RangingRequestBuilderService.AddAccessPoint:output_type -> wifi_rtt.AddAccessPointResponse
+	8,  // 10: wifi_rtt.RangingRequestBuilderService.Build:output_type -> wifi_rtt.BuildResponse
+	11, // 11: wifi_rtt.RangingResultCallbackService.SubscribeRangingResultCallback:output_type -> wifi_rtt.RangingResultCallbackEvent
+	7,  // [7:12] is the sub-list for method output_type
+	2,  // [2:7] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_proto_wifi_rtt_wifi_rtt_proto_init() }
@@ -541,16 +728,16 @@ func file_proto_wifi_rtt_wifi_rtt_proto_init() {
 	if File_proto_wifi_rtt_wifi_rtt_proto != nil {
 		return
 	}
-	file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[7].OneofWrappers = []any{}
+	file_proto_wifi_rtt_wifi_rtt_proto_msgTypes[11].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_wifi_rtt_wifi_rtt_proto_rawDesc), len(file_proto_wifi_rtt_wifi_rtt_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   13,
 			NumExtensions: 0,
-			NumServices:   2,
+			NumServices:   3,
 		},
 		GoTypes:           file_proto_wifi_rtt_wifi_rtt_proto_goTypes,
 		DependencyIndexes: file_proto_wifi_rtt_wifi_rtt_proto_depIdxs,

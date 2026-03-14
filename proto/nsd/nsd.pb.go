@@ -463,6 +463,654 @@ func (*UnregisterServiceRawResponse) Descriptor() ([]byte, []int) {
 	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{9}
 }
 
+type SetServiceNameRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetServiceNameRequest) Reset() {
+	*x = SetServiceNameRequest{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetServiceNameRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetServiceNameRequest) ProtoMessage() {}
+
+func (x *SetServiceNameRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetServiceNameRequest.ProtoReflect.Descriptor instead.
+func (*SetServiceNameRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *SetServiceNameRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type SetServiceNameResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetServiceNameResponse) Reset() {
+	*x = SetServiceNameResponse{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetServiceNameResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetServiceNameResponse) ProtoMessage() {}
+
+func (x *SetServiceNameResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetServiceNameResponse.ProtoReflect.Descriptor instead.
+func (*SetServiceNameResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{11}
+}
+
+type SetServiceTypeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ServiceType   string                 `protobuf:"bytes,1,opt,name=service_type,json=serviceType,proto3" json:"service_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetServiceTypeRequest) Reset() {
+	*x = SetServiceTypeRequest{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetServiceTypeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetServiceTypeRequest) ProtoMessage() {}
+
+func (x *SetServiceTypeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetServiceTypeRequest.ProtoReflect.Descriptor instead.
+func (*SetServiceTypeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *SetServiceTypeRequest) GetServiceType() string {
+	if x != nil {
+		return x.ServiceType
+	}
+	return ""
+}
+
+type SetServiceTypeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetServiceTypeResponse) Reset() {
+	*x = SetServiceTypeResponse{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetServiceTypeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetServiceTypeResponse) ProtoMessage() {}
+
+func (x *SetServiceTypeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetServiceTypeResponse.ProtoReflect.Descriptor instead.
+func (*SetServiceTypeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{13}
+}
+
+type SetPortRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Port          int32                  `protobuf:"varint,1,opt,name=port,proto3" json:"port,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetPortRequest) Reset() {
+	*x = SetPortRequest{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetPortRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetPortRequest) ProtoMessage() {}
+
+func (x *SetPortRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetPortRequest.ProtoReflect.Descriptor instead.
+func (*SetPortRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *SetPortRequest) GetPort() int32 {
+	if x != nil {
+		return x.Port
+	}
+	return 0
+}
+
+type SetPortResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetPortResponse) Reset() {
+	*x = SetPortResponse{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetPortResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetPortResponse) ProtoMessage() {}
+
+func (x *SetPortResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetPortResponse.ProtoReflect.Descriptor instead.
+func (*SetPortResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{15}
+}
+
+type SetAttributeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Value         string                 `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAttributeRequest) Reset() {
+	*x = SetAttributeRequest{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAttributeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAttributeRequest) ProtoMessage() {}
+
+func (x *SetAttributeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAttributeRequest.ProtoReflect.Descriptor instead.
+func (*SetAttributeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *SetAttributeRequest) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *SetAttributeRequest) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+type SetAttributeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAttributeResponse) Reset() {
+	*x = SetAttributeResponse{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAttributeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAttributeResponse) ProtoMessage() {}
+
+func (x *SetAttributeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAttributeResponse.ProtoReflect.Descriptor instead.
+func (*SetAttributeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{17}
+}
+
+type GetServiceNameRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetServiceNameRequest) Reset() {
+	*x = GetServiceNameRequest{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetServiceNameRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetServiceNameRequest) ProtoMessage() {}
+
+func (x *GetServiceNameRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetServiceNameRequest.ProtoReflect.Descriptor instead.
+func (*GetServiceNameRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{18}
+}
+
+type GetServiceNameResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetServiceNameResponse) Reset() {
+	*x = GetServiceNameResponse{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetServiceNameResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetServiceNameResponse) ProtoMessage() {}
+
+func (x *GetServiceNameResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetServiceNameResponse.ProtoReflect.Descriptor instead.
+func (*GetServiceNameResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *GetServiceNameResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetServiceTypeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetServiceTypeRequest) Reset() {
+	*x = GetServiceTypeRequest{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetServiceTypeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetServiceTypeRequest) ProtoMessage() {}
+
+func (x *GetServiceTypeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetServiceTypeRequest.ProtoReflect.Descriptor instead.
+func (*GetServiceTypeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{20}
+}
+
+type GetServiceTypeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetServiceTypeResponse) Reset() {
+	*x = GetServiceTypeResponse{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetServiceTypeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetServiceTypeResponse) ProtoMessage() {}
+
+func (x *GetServiceTypeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetServiceTypeResponse.ProtoReflect.Descriptor instead.
+func (*GetServiceTypeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *GetServiceTypeResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetHostRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetHostRequest) Reset() {
+	*x = GetHostRequest{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetHostRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetHostRequest) ProtoMessage() {}
+
+func (x *GetHostRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetHostRequest.ProtoReflect.Descriptor instead.
+func (*GetHostRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{22}
+}
+
+type GetHostResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetHostResponse) Reset() {
+	*x = GetHostResponse{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetHostResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetHostResponse) ProtoMessage() {}
+
+func (x *GetHostResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetHostResponse.ProtoReflect.Descriptor instead.
+func (*GetHostResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *GetHostResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetPortRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPortRequest) Reset() {
+	*x = GetPortRequest{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPortRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPortRequest) ProtoMessage() {}
+
+func (x *GetPortRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPortRequest.ProtoReflect.Descriptor instead.
+func (*GetPortRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{24}
+}
+
+type GetPortResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPortResponse) Reset() {
+	*x = GetPortResponse{}
+	mi := &file_proto_nsd_nsd_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPortResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPortResponse) ProtoMessage() {}
+
+func (x *GetPortResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nsd_nsd_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPortResponse.ProtoReflect.Descriptor instead.
+func (*GetPortResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *GetPortResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
 type DiscoveryListenerOnServiceFoundEvent struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
@@ -472,7 +1120,7 @@ type DiscoveryListenerOnServiceFoundEvent struct {
 
 func (x *DiscoveryListenerOnServiceFoundEvent) Reset() {
 	*x = DiscoveryListenerOnServiceFoundEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[10]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -484,7 +1132,7 @@ func (x *DiscoveryListenerOnServiceFoundEvent) String() string {
 func (*DiscoveryListenerOnServiceFoundEvent) ProtoMessage() {}
 
 func (x *DiscoveryListenerOnServiceFoundEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[10]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -497,7 +1145,7 @@ func (x *DiscoveryListenerOnServiceFoundEvent) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use DiscoveryListenerOnServiceFoundEvent.ProtoReflect.Descriptor instead.
 func (*DiscoveryListenerOnServiceFoundEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{10}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *DiscoveryListenerOnServiceFoundEvent) GetArg0() int64 {
@@ -516,7 +1164,7 @@ type DiscoveryListenerOnServiceLostEvent struct {
 
 func (x *DiscoveryListenerOnServiceLostEvent) Reset() {
 	*x = DiscoveryListenerOnServiceLostEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[11]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -528,7 +1176,7 @@ func (x *DiscoveryListenerOnServiceLostEvent) String() string {
 func (*DiscoveryListenerOnServiceLostEvent) ProtoMessage() {}
 
 func (x *DiscoveryListenerOnServiceLostEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[11]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -541,7 +1189,7 @@ func (x *DiscoveryListenerOnServiceLostEvent) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use DiscoveryListenerOnServiceLostEvent.ProtoReflect.Descriptor instead.
 func (*DiscoveryListenerOnServiceLostEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{11}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *DiscoveryListenerOnServiceLostEvent) GetArg0() int64 {
@@ -560,7 +1208,7 @@ type DiscoveryListenerOnDiscoveryStartedEvent struct {
 
 func (x *DiscoveryListenerOnDiscoveryStartedEvent) Reset() {
 	*x = DiscoveryListenerOnDiscoveryStartedEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[12]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -572,7 +1220,7 @@ func (x *DiscoveryListenerOnDiscoveryStartedEvent) String() string {
 func (*DiscoveryListenerOnDiscoveryStartedEvent) ProtoMessage() {}
 
 func (x *DiscoveryListenerOnDiscoveryStartedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[12]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -585,7 +1233,7 @@ func (x *DiscoveryListenerOnDiscoveryStartedEvent) ProtoReflect() protoreflect.M
 
 // Deprecated: Use DiscoveryListenerOnDiscoveryStartedEvent.ProtoReflect.Descriptor instead.
 func (*DiscoveryListenerOnDiscoveryStartedEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{12}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *DiscoveryListenerOnDiscoveryStartedEvent) GetArg0() string {
@@ -604,7 +1252,7 @@ type DiscoveryListenerOnDiscoveryStoppedEvent struct {
 
 func (x *DiscoveryListenerOnDiscoveryStoppedEvent) Reset() {
 	*x = DiscoveryListenerOnDiscoveryStoppedEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[13]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -616,7 +1264,7 @@ func (x *DiscoveryListenerOnDiscoveryStoppedEvent) String() string {
 func (*DiscoveryListenerOnDiscoveryStoppedEvent) ProtoMessage() {}
 
 func (x *DiscoveryListenerOnDiscoveryStoppedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[13]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -629,7 +1277,7 @@ func (x *DiscoveryListenerOnDiscoveryStoppedEvent) ProtoReflect() protoreflect.M
 
 // Deprecated: Use DiscoveryListenerOnDiscoveryStoppedEvent.ProtoReflect.Descriptor instead.
 func (*DiscoveryListenerOnDiscoveryStoppedEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{13}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *DiscoveryListenerOnDiscoveryStoppedEvent) GetArg0() string {
@@ -649,7 +1297,7 @@ type DiscoveryListenerOnStartDiscoveryFailedEvent struct {
 
 func (x *DiscoveryListenerOnStartDiscoveryFailedEvent) Reset() {
 	*x = DiscoveryListenerOnStartDiscoveryFailedEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[14]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -661,7 +1309,7 @@ func (x *DiscoveryListenerOnStartDiscoveryFailedEvent) String() string {
 func (*DiscoveryListenerOnStartDiscoveryFailedEvent) ProtoMessage() {}
 
 func (x *DiscoveryListenerOnStartDiscoveryFailedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[14]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -674,7 +1322,7 @@ func (x *DiscoveryListenerOnStartDiscoveryFailedEvent) ProtoReflect() protorefle
 
 // Deprecated: Use DiscoveryListenerOnStartDiscoveryFailedEvent.ProtoReflect.Descriptor instead.
 func (*DiscoveryListenerOnStartDiscoveryFailedEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{14}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *DiscoveryListenerOnStartDiscoveryFailedEvent) GetArg0() string {
@@ -701,7 +1349,7 @@ type DiscoveryListenerOnStopDiscoveryFailedEvent struct {
 
 func (x *DiscoveryListenerOnStopDiscoveryFailedEvent) Reset() {
 	*x = DiscoveryListenerOnStopDiscoveryFailedEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[15]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -713,7 +1361,7 @@ func (x *DiscoveryListenerOnStopDiscoveryFailedEvent) String() string {
 func (*DiscoveryListenerOnStopDiscoveryFailedEvent) ProtoMessage() {}
 
 func (x *DiscoveryListenerOnStopDiscoveryFailedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[15]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -726,7 +1374,7 @@ func (x *DiscoveryListenerOnStopDiscoveryFailedEvent) ProtoReflect() protoreflec
 
 // Deprecated: Use DiscoveryListenerOnStopDiscoveryFailedEvent.ProtoReflect.Descriptor instead.
 func (*DiscoveryListenerOnStopDiscoveryFailedEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{15}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *DiscoveryListenerOnStopDiscoveryFailedEvent) GetArg0() string {
@@ -757,7 +1405,7 @@ type DiscoveryListenerEvent struct {
 
 func (x *DiscoveryListenerEvent) Reset() {
 	*x = DiscoveryListenerEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[16]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -769,7 +1417,7 @@ func (x *DiscoveryListenerEvent) String() string {
 func (*DiscoveryListenerEvent) ProtoMessage() {}
 
 func (x *DiscoveryListenerEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[16]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -782,7 +1430,7 @@ func (x *DiscoveryListenerEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DiscoveryListenerEvent.ProtoReflect.Descriptor instead.
 func (*DiscoveryListenerEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{16}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *DiscoveryListenerEvent) GetOnServiceFound() *DiscoveryListenerOnServiceFoundEvent {
@@ -835,7 +1483,7 @@ type SubscribeDiscoveryListenerRequest struct {
 
 func (x *SubscribeDiscoveryListenerRequest) Reset() {
 	*x = SubscribeDiscoveryListenerRequest{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[17]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -847,7 +1495,7 @@ func (x *SubscribeDiscoveryListenerRequest) String() string {
 func (*SubscribeDiscoveryListenerRequest) ProtoMessage() {}
 
 func (x *SubscribeDiscoveryListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[17]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -860,7 +1508,7 @@ func (x *SubscribeDiscoveryListenerRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use SubscribeDiscoveryListenerRequest.ProtoReflect.Descriptor instead.
 func (*SubscribeDiscoveryListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{17}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{33}
 }
 
 type ResolveListenerOnServiceResolvedEvent struct {
@@ -872,7 +1520,7 @@ type ResolveListenerOnServiceResolvedEvent struct {
 
 func (x *ResolveListenerOnServiceResolvedEvent) Reset() {
 	*x = ResolveListenerOnServiceResolvedEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[18]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -884,7 +1532,7 @@ func (x *ResolveListenerOnServiceResolvedEvent) String() string {
 func (*ResolveListenerOnServiceResolvedEvent) ProtoMessage() {}
 
 func (x *ResolveListenerOnServiceResolvedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[18]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -897,7 +1545,7 @@ func (x *ResolveListenerOnServiceResolvedEvent) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use ResolveListenerOnServiceResolvedEvent.ProtoReflect.Descriptor instead.
 func (*ResolveListenerOnServiceResolvedEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{18}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *ResolveListenerOnServiceResolvedEvent) GetArg0() int64 {
@@ -917,7 +1565,7 @@ type ResolveListenerOnResolveFailedEvent struct {
 
 func (x *ResolveListenerOnResolveFailedEvent) Reset() {
 	*x = ResolveListenerOnResolveFailedEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[19]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -929,7 +1577,7 @@ func (x *ResolveListenerOnResolveFailedEvent) String() string {
 func (*ResolveListenerOnResolveFailedEvent) ProtoMessage() {}
 
 func (x *ResolveListenerOnResolveFailedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[19]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -942,7 +1590,7 @@ func (x *ResolveListenerOnResolveFailedEvent) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use ResolveListenerOnResolveFailedEvent.ProtoReflect.Descriptor instead.
 func (*ResolveListenerOnResolveFailedEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{19}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *ResolveListenerOnResolveFailedEvent) GetArg0() int64 {
@@ -969,7 +1617,7 @@ type ResolveListenerEvent struct {
 
 func (x *ResolveListenerEvent) Reset() {
 	*x = ResolveListenerEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[20]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -981,7 +1629,7 @@ func (x *ResolveListenerEvent) String() string {
 func (*ResolveListenerEvent) ProtoMessage() {}
 
 func (x *ResolveListenerEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[20]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -994,7 +1642,7 @@ func (x *ResolveListenerEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResolveListenerEvent.ProtoReflect.Descriptor instead.
 func (*ResolveListenerEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{20}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *ResolveListenerEvent) GetOnServiceResolved() *ResolveListenerOnServiceResolvedEvent {
@@ -1019,7 +1667,7 @@ type SubscribeResolveListenerRequest struct {
 
 func (x *SubscribeResolveListenerRequest) Reset() {
 	*x = SubscribeResolveListenerRequest{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[21]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1031,7 +1679,7 @@ func (x *SubscribeResolveListenerRequest) String() string {
 func (*SubscribeResolveListenerRequest) ProtoMessage() {}
 
 func (x *SubscribeResolveListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[21]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1044,7 +1692,7 @@ func (x *SubscribeResolveListenerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubscribeResolveListenerRequest.ProtoReflect.Descriptor instead.
 func (*SubscribeResolveListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{21}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{37}
 }
 
 type RegistrationListenerOnServiceRegisteredEvent struct {
@@ -1056,7 +1704,7 @@ type RegistrationListenerOnServiceRegisteredEvent struct {
 
 func (x *RegistrationListenerOnServiceRegisteredEvent) Reset() {
 	*x = RegistrationListenerOnServiceRegisteredEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[22]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1068,7 +1716,7 @@ func (x *RegistrationListenerOnServiceRegisteredEvent) String() string {
 func (*RegistrationListenerOnServiceRegisteredEvent) ProtoMessage() {}
 
 func (x *RegistrationListenerOnServiceRegisteredEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[22]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1081,7 +1729,7 @@ func (x *RegistrationListenerOnServiceRegisteredEvent) ProtoReflect() protorefle
 
 // Deprecated: Use RegistrationListenerOnServiceRegisteredEvent.ProtoReflect.Descriptor instead.
 func (*RegistrationListenerOnServiceRegisteredEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{22}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *RegistrationListenerOnServiceRegisteredEvent) GetArg0() int64 {
@@ -1101,7 +1749,7 @@ type RegistrationListenerOnRegistrationFailedEvent struct {
 
 func (x *RegistrationListenerOnRegistrationFailedEvent) Reset() {
 	*x = RegistrationListenerOnRegistrationFailedEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[23]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1113,7 +1761,7 @@ func (x *RegistrationListenerOnRegistrationFailedEvent) String() string {
 func (*RegistrationListenerOnRegistrationFailedEvent) ProtoMessage() {}
 
 func (x *RegistrationListenerOnRegistrationFailedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[23]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1126,7 +1774,7 @@ func (x *RegistrationListenerOnRegistrationFailedEvent) ProtoReflect() protorefl
 
 // Deprecated: Use RegistrationListenerOnRegistrationFailedEvent.ProtoReflect.Descriptor instead.
 func (*RegistrationListenerOnRegistrationFailedEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{23}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *RegistrationListenerOnRegistrationFailedEvent) GetArg0() int64 {
@@ -1152,7 +1800,7 @@ type RegistrationListenerOnServiceUnregisteredEvent struct {
 
 func (x *RegistrationListenerOnServiceUnregisteredEvent) Reset() {
 	*x = RegistrationListenerOnServiceUnregisteredEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[24]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1164,7 +1812,7 @@ func (x *RegistrationListenerOnServiceUnregisteredEvent) String() string {
 func (*RegistrationListenerOnServiceUnregisteredEvent) ProtoMessage() {}
 
 func (x *RegistrationListenerOnServiceUnregisteredEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[24]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1177,7 +1825,7 @@ func (x *RegistrationListenerOnServiceUnregisteredEvent) ProtoReflect() protoref
 
 // Deprecated: Use RegistrationListenerOnServiceUnregisteredEvent.ProtoReflect.Descriptor instead.
 func (*RegistrationListenerOnServiceUnregisteredEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{24}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *RegistrationListenerOnServiceUnregisteredEvent) GetArg0() int64 {
@@ -1197,7 +1845,7 @@ type RegistrationListenerOnUnregistrationFailedEvent struct {
 
 func (x *RegistrationListenerOnUnregistrationFailedEvent) Reset() {
 	*x = RegistrationListenerOnUnregistrationFailedEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[25]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1209,7 +1857,7 @@ func (x *RegistrationListenerOnUnregistrationFailedEvent) String() string {
 func (*RegistrationListenerOnUnregistrationFailedEvent) ProtoMessage() {}
 
 func (x *RegistrationListenerOnUnregistrationFailedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[25]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1222,7 +1870,7 @@ func (x *RegistrationListenerOnUnregistrationFailedEvent) ProtoReflect() protore
 
 // Deprecated: Use RegistrationListenerOnUnregistrationFailedEvent.ProtoReflect.Descriptor instead.
 func (*RegistrationListenerOnUnregistrationFailedEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{25}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *RegistrationListenerOnUnregistrationFailedEvent) GetArg0() int64 {
@@ -1251,7 +1899,7 @@ type RegistrationListenerEvent struct {
 
 func (x *RegistrationListenerEvent) Reset() {
 	*x = RegistrationListenerEvent{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[26]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1263,7 +1911,7 @@ func (x *RegistrationListenerEvent) String() string {
 func (*RegistrationListenerEvent) ProtoMessage() {}
 
 func (x *RegistrationListenerEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[26]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1276,7 +1924,7 @@ func (x *RegistrationListenerEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegistrationListenerEvent.ProtoReflect.Descriptor instead.
 func (*RegistrationListenerEvent) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{26}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *RegistrationListenerEvent) GetOnServiceRegistered() *RegistrationListenerOnServiceRegisteredEvent {
@@ -1315,7 +1963,7 @@ type SubscribeRegistrationListenerRequest struct {
 
 func (x *SubscribeRegistrationListenerRequest) Reset() {
 	*x = SubscribeRegistrationListenerRequest{}
-	mi := &file_proto_nsd_nsd_proto_msgTypes[27]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1327,7 +1975,7 @@ func (x *SubscribeRegistrationListenerRequest) String() string {
 func (*SubscribeRegistrationListenerRequest) ProtoMessage() {}
 
 func (x *SubscribeRegistrationListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nsd_nsd_proto_msgTypes[27]
+	mi := &file_proto_nsd_nsd_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1340,7 +1988,7 @@ func (x *SubscribeRegistrationListenerRequest) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use SubscribeRegistrationListenerRequest.ProtoReflect.Descriptor instead.
 func (*SubscribeRegistrationListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{27}
+	return file_proto_nsd_nsd_proto_rawDescGZIP(), []int{43}
 }
 
 var File_proto_nsd_nsd_proto protoreflect.FileDescriptor
@@ -1367,7 +2015,32 @@ const file_proto_nsd_nsd_proto_rawDesc = "" +
 	"\x1aRegisterServiceRawResponse\"9\n" +
 	"\x1bUnregisterServiceRawRequest\x12\x1a\n" +
 	"\blistener\x18\x01 \x01(\x03R\blistener\"\x1e\n" +
-	"\x1cUnregisterServiceRawResponse\":\n" +
+	"\x1cUnregisterServiceRawResponse\"+\n" +
+	"\x15SetServiceNameRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\x18\n" +
+	"\x16SetServiceNameResponse\":\n" +
+	"\x15SetServiceTypeRequest\x12!\n" +
+	"\fservice_type\x18\x01 \x01(\tR\vserviceType\"\x18\n" +
+	"\x16SetServiceTypeResponse\"$\n" +
+	"\x0eSetPortRequest\x12\x12\n" +
+	"\x04port\x18\x01 \x01(\x05R\x04port\"\x11\n" +
+	"\x0fSetPortResponse\"=\n" +
+	"\x13SetAttributeRequest\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value\"\x16\n" +
+	"\x14SetAttributeResponse\"\x17\n" +
+	"\x15GetServiceNameRequest\"0\n" +
+	"\x16GetServiceNameResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x17\n" +
+	"\x15GetServiceTypeRequest\"0\n" +
+	"\x16GetServiceTypeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x10\n" +
+	"\x0eGetHostRequest\")\n" +
+	"\x0fGetHostResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x10\n" +
+	"\x0eGetPortRequest\")\n" +
+	"\x0fGetPortResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\":\n" +
 	"$DiscoveryListenerOnServiceFoundEvent\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"9\n" +
 	"#DiscoveryListenerOnServiceLostEvent\x12\x12\n" +
@@ -1432,7 +2105,16 @@ const file_proto_nsd_nsd_proto_rawDesc = "" +
 	"\x17StopServiceDiscoveryRaw\x12#.nsd.StopServiceDiscoveryRawRequest\x1a$.nsd.StopServiceDiscoveryRawResponse\x12R\n" +
 	"\x11ResolveServiceRaw\x12\x1d.nsd.ResolveServiceRawRequest\x1a\x1e.nsd.ResolveServiceRawResponse\x12U\n" +
 	"\x12RegisterServiceRaw\x12\x1e.nsd.RegisterServiceRawRequest\x1a\x1f.nsd.RegisterServiceRawResponse\x12[\n" +
-	"\x14UnregisterServiceRaw\x12 .nsd.UnregisterServiceRawRequest\x1a!.nsd.UnregisterServiceRawResponse2\x7f\n" +
+	"\x14UnregisterServiceRaw\x12 .nsd.UnregisterServiceRawRequest\x1a!.nsd.UnregisterServiceRawResponse2\xaa\x04\n" +
+	"\x15NsdServiceInfoService\x12I\n" +
+	"\x0eSetServiceName\x12\x1a.nsd.SetServiceNameRequest\x1a\x1b.nsd.SetServiceNameResponse\x12I\n" +
+	"\x0eSetServiceType\x12\x1a.nsd.SetServiceTypeRequest\x1a\x1b.nsd.SetServiceTypeResponse\x124\n" +
+	"\aSetPort\x12\x13.nsd.SetPortRequest\x1a\x14.nsd.SetPortResponse\x12C\n" +
+	"\fSetAttribute\x12\x18.nsd.SetAttributeRequest\x1a\x19.nsd.SetAttributeResponse\x12I\n" +
+	"\x0eGetServiceName\x12\x1a.nsd.GetServiceNameRequest\x1a\x1b.nsd.GetServiceNameResponse\x12I\n" +
+	"\x0eGetServiceType\x12\x1a.nsd.GetServiceTypeRequest\x1a\x1b.nsd.GetServiceTypeResponse\x124\n" +
+	"\aGetHost\x12\x13.nsd.GetHostRequest\x1a\x14.nsd.GetHostResponse\x124\n" +
+	"\aGetPort\x12\x13.nsd.GetPortRequest\x1a\x14.nsd.GetPortResponse2\x7f\n" +
 	"\x18DiscoveryListenerService\x12c\n" +
 	"\x1aSubscribeDiscoveryListener\x12&.nsd.SubscribeDiscoveryListenerRequest\x1a\x1b.nsd.DiscoveryListenerEvent0\x012w\n" +
 	"\x16ResolveListenerService\x12]\n" +
@@ -1452,7 +2134,7 @@ func file_proto_nsd_nsd_proto_rawDescGZIP() []byte {
 	return file_proto_nsd_nsd_proto_rawDescData
 }
 
-var file_proto_nsd_nsd_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_proto_nsd_nsd_proto_msgTypes = make([]protoimpl.MessageInfo, 44)
 var file_proto_nsd_nsd_proto_goTypes = []any{
 	(*DiscoverServicesRawRequest)(nil),                      // 0: nsd.DiscoverServicesRawRequest
 	(*DiscoverServicesRawResponse)(nil),                     // 1: nsd.DiscoverServicesRawResponse
@@ -1464,56 +2146,88 @@ var file_proto_nsd_nsd_proto_goTypes = []any{
 	(*RegisterServiceRawResponse)(nil),                      // 7: nsd.RegisterServiceRawResponse
 	(*UnregisterServiceRawRequest)(nil),                     // 8: nsd.UnregisterServiceRawRequest
 	(*UnregisterServiceRawResponse)(nil),                    // 9: nsd.UnregisterServiceRawResponse
-	(*DiscoveryListenerOnServiceFoundEvent)(nil),            // 10: nsd.DiscoveryListenerOnServiceFoundEvent
-	(*DiscoveryListenerOnServiceLostEvent)(nil),             // 11: nsd.DiscoveryListenerOnServiceLostEvent
-	(*DiscoveryListenerOnDiscoveryStartedEvent)(nil),        // 12: nsd.DiscoveryListenerOnDiscoveryStartedEvent
-	(*DiscoveryListenerOnDiscoveryStoppedEvent)(nil),        // 13: nsd.DiscoveryListenerOnDiscoveryStoppedEvent
-	(*DiscoveryListenerOnStartDiscoveryFailedEvent)(nil),    // 14: nsd.DiscoveryListenerOnStartDiscoveryFailedEvent
-	(*DiscoveryListenerOnStopDiscoveryFailedEvent)(nil),     // 15: nsd.DiscoveryListenerOnStopDiscoveryFailedEvent
-	(*DiscoveryListenerEvent)(nil),                          // 16: nsd.DiscoveryListenerEvent
-	(*SubscribeDiscoveryListenerRequest)(nil),               // 17: nsd.SubscribeDiscoveryListenerRequest
-	(*ResolveListenerOnServiceResolvedEvent)(nil),           // 18: nsd.ResolveListenerOnServiceResolvedEvent
-	(*ResolveListenerOnResolveFailedEvent)(nil),             // 19: nsd.ResolveListenerOnResolveFailedEvent
-	(*ResolveListenerEvent)(nil),                            // 20: nsd.ResolveListenerEvent
-	(*SubscribeResolveListenerRequest)(nil),                 // 21: nsd.SubscribeResolveListenerRequest
-	(*RegistrationListenerOnServiceRegisteredEvent)(nil),    // 22: nsd.RegistrationListenerOnServiceRegisteredEvent
-	(*RegistrationListenerOnRegistrationFailedEvent)(nil),   // 23: nsd.RegistrationListenerOnRegistrationFailedEvent
-	(*RegistrationListenerOnServiceUnregisteredEvent)(nil),  // 24: nsd.RegistrationListenerOnServiceUnregisteredEvent
-	(*RegistrationListenerOnUnregistrationFailedEvent)(nil), // 25: nsd.RegistrationListenerOnUnregistrationFailedEvent
-	(*RegistrationListenerEvent)(nil),                       // 26: nsd.RegistrationListenerEvent
-	(*SubscribeRegistrationListenerRequest)(nil),            // 27: nsd.SubscribeRegistrationListenerRequest
+	(*SetServiceNameRequest)(nil),                           // 10: nsd.SetServiceNameRequest
+	(*SetServiceNameResponse)(nil),                          // 11: nsd.SetServiceNameResponse
+	(*SetServiceTypeRequest)(nil),                           // 12: nsd.SetServiceTypeRequest
+	(*SetServiceTypeResponse)(nil),                          // 13: nsd.SetServiceTypeResponse
+	(*SetPortRequest)(nil),                                  // 14: nsd.SetPortRequest
+	(*SetPortResponse)(nil),                                 // 15: nsd.SetPortResponse
+	(*SetAttributeRequest)(nil),                             // 16: nsd.SetAttributeRequest
+	(*SetAttributeResponse)(nil),                            // 17: nsd.SetAttributeResponse
+	(*GetServiceNameRequest)(nil),                           // 18: nsd.GetServiceNameRequest
+	(*GetServiceNameResponse)(nil),                          // 19: nsd.GetServiceNameResponse
+	(*GetServiceTypeRequest)(nil),                           // 20: nsd.GetServiceTypeRequest
+	(*GetServiceTypeResponse)(nil),                          // 21: nsd.GetServiceTypeResponse
+	(*GetHostRequest)(nil),                                  // 22: nsd.GetHostRequest
+	(*GetHostResponse)(nil),                                 // 23: nsd.GetHostResponse
+	(*GetPortRequest)(nil),                                  // 24: nsd.GetPortRequest
+	(*GetPortResponse)(nil),                                 // 25: nsd.GetPortResponse
+	(*DiscoveryListenerOnServiceFoundEvent)(nil),            // 26: nsd.DiscoveryListenerOnServiceFoundEvent
+	(*DiscoveryListenerOnServiceLostEvent)(nil),             // 27: nsd.DiscoveryListenerOnServiceLostEvent
+	(*DiscoveryListenerOnDiscoveryStartedEvent)(nil),        // 28: nsd.DiscoveryListenerOnDiscoveryStartedEvent
+	(*DiscoveryListenerOnDiscoveryStoppedEvent)(nil),        // 29: nsd.DiscoveryListenerOnDiscoveryStoppedEvent
+	(*DiscoveryListenerOnStartDiscoveryFailedEvent)(nil),    // 30: nsd.DiscoveryListenerOnStartDiscoveryFailedEvent
+	(*DiscoveryListenerOnStopDiscoveryFailedEvent)(nil),     // 31: nsd.DiscoveryListenerOnStopDiscoveryFailedEvent
+	(*DiscoveryListenerEvent)(nil),                          // 32: nsd.DiscoveryListenerEvent
+	(*SubscribeDiscoveryListenerRequest)(nil),               // 33: nsd.SubscribeDiscoveryListenerRequest
+	(*ResolveListenerOnServiceResolvedEvent)(nil),           // 34: nsd.ResolveListenerOnServiceResolvedEvent
+	(*ResolveListenerOnResolveFailedEvent)(nil),             // 35: nsd.ResolveListenerOnResolveFailedEvent
+	(*ResolveListenerEvent)(nil),                            // 36: nsd.ResolveListenerEvent
+	(*SubscribeResolveListenerRequest)(nil),                 // 37: nsd.SubscribeResolveListenerRequest
+	(*RegistrationListenerOnServiceRegisteredEvent)(nil),    // 38: nsd.RegistrationListenerOnServiceRegisteredEvent
+	(*RegistrationListenerOnRegistrationFailedEvent)(nil),   // 39: nsd.RegistrationListenerOnRegistrationFailedEvent
+	(*RegistrationListenerOnServiceUnregisteredEvent)(nil),  // 40: nsd.RegistrationListenerOnServiceUnregisteredEvent
+	(*RegistrationListenerOnUnregistrationFailedEvent)(nil), // 41: nsd.RegistrationListenerOnUnregistrationFailedEvent
+	(*RegistrationListenerEvent)(nil),                       // 42: nsd.RegistrationListenerEvent
+	(*SubscribeRegistrationListenerRequest)(nil),            // 43: nsd.SubscribeRegistrationListenerRequest
 }
 var file_proto_nsd_nsd_proto_depIdxs = []int32{
-	10, // 0: nsd.DiscoveryListenerEvent.on_service_found:type_name -> nsd.DiscoveryListenerOnServiceFoundEvent
-	11, // 1: nsd.DiscoveryListenerEvent.on_service_lost:type_name -> nsd.DiscoveryListenerOnServiceLostEvent
-	12, // 2: nsd.DiscoveryListenerEvent.on_discovery_started:type_name -> nsd.DiscoveryListenerOnDiscoveryStartedEvent
-	13, // 3: nsd.DiscoveryListenerEvent.on_discovery_stopped:type_name -> nsd.DiscoveryListenerOnDiscoveryStoppedEvent
-	14, // 4: nsd.DiscoveryListenerEvent.on_start_discovery_failed:type_name -> nsd.DiscoveryListenerOnStartDiscoveryFailedEvent
-	15, // 5: nsd.DiscoveryListenerEvent.on_stop_discovery_failed:type_name -> nsd.DiscoveryListenerOnStopDiscoveryFailedEvent
-	18, // 6: nsd.ResolveListenerEvent.on_service_resolved:type_name -> nsd.ResolveListenerOnServiceResolvedEvent
-	19, // 7: nsd.ResolveListenerEvent.on_resolve_failed:type_name -> nsd.ResolveListenerOnResolveFailedEvent
-	22, // 8: nsd.RegistrationListenerEvent.on_service_registered:type_name -> nsd.RegistrationListenerOnServiceRegisteredEvent
-	23, // 9: nsd.RegistrationListenerEvent.on_registration_failed:type_name -> nsd.RegistrationListenerOnRegistrationFailedEvent
-	24, // 10: nsd.RegistrationListenerEvent.on_service_unregistered:type_name -> nsd.RegistrationListenerOnServiceUnregisteredEvent
-	25, // 11: nsd.RegistrationListenerEvent.on_unregistration_failed:type_name -> nsd.RegistrationListenerOnUnregistrationFailedEvent
+	26, // 0: nsd.DiscoveryListenerEvent.on_service_found:type_name -> nsd.DiscoveryListenerOnServiceFoundEvent
+	27, // 1: nsd.DiscoveryListenerEvent.on_service_lost:type_name -> nsd.DiscoveryListenerOnServiceLostEvent
+	28, // 2: nsd.DiscoveryListenerEvent.on_discovery_started:type_name -> nsd.DiscoveryListenerOnDiscoveryStartedEvent
+	29, // 3: nsd.DiscoveryListenerEvent.on_discovery_stopped:type_name -> nsd.DiscoveryListenerOnDiscoveryStoppedEvent
+	30, // 4: nsd.DiscoveryListenerEvent.on_start_discovery_failed:type_name -> nsd.DiscoveryListenerOnStartDiscoveryFailedEvent
+	31, // 5: nsd.DiscoveryListenerEvent.on_stop_discovery_failed:type_name -> nsd.DiscoveryListenerOnStopDiscoveryFailedEvent
+	34, // 6: nsd.ResolveListenerEvent.on_service_resolved:type_name -> nsd.ResolveListenerOnServiceResolvedEvent
+	35, // 7: nsd.ResolveListenerEvent.on_resolve_failed:type_name -> nsd.ResolveListenerOnResolveFailedEvent
+	38, // 8: nsd.RegistrationListenerEvent.on_service_registered:type_name -> nsd.RegistrationListenerOnServiceRegisteredEvent
+	39, // 9: nsd.RegistrationListenerEvent.on_registration_failed:type_name -> nsd.RegistrationListenerOnRegistrationFailedEvent
+	40, // 10: nsd.RegistrationListenerEvent.on_service_unregistered:type_name -> nsd.RegistrationListenerOnServiceUnregisteredEvent
+	41, // 11: nsd.RegistrationListenerEvent.on_unregistration_failed:type_name -> nsd.RegistrationListenerOnUnregistrationFailedEvent
 	0,  // 12: nsd.ManagerService.DiscoverServicesRaw:input_type -> nsd.DiscoverServicesRawRequest
 	2,  // 13: nsd.ManagerService.StopServiceDiscoveryRaw:input_type -> nsd.StopServiceDiscoveryRawRequest
 	4,  // 14: nsd.ManagerService.ResolveServiceRaw:input_type -> nsd.ResolveServiceRawRequest
 	6,  // 15: nsd.ManagerService.RegisterServiceRaw:input_type -> nsd.RegisterServiceRawRequest
 	8,  // 16: nsd.ManagerService.UnregisterServiceRaw:input_type -> nsd.UnregisterServiceRawRequest
-	17, // 17: nsd.DiscoveryListenerService.SubscribeDiscoveryListener:input_type -> nsd.SubscribeDiscoveryListenerRequest
-	21, // 18: nsd.ResolveListenerService.SubscribeResolveListener:input_type -> nsd.SubscribeResolveListenerRequest
-	27, // 19: nsd.RegistrationListenerService.SubscribeRegistrationListener:input_type -> nsd.SubscribeRegistrationListenerRequest
-	1,  // 20: nsd.ManagerService.DiscoverServicesRaw:output_type -> nsd.DiscoverServicesRawResponse
-	3,  // 21: nsd.ManagerService.StopServiceDiscoveryRaw:output_type -> nsd.StopServiceDiscoveryRawResponse
-	5,  // 22: nsd.ManagerService.ResolveServiceRaw:output_type -> nsd.ResolveServiceRawResponse
-	7,  // 23: nsd.ManagerService.RegisterServiceRaw:output_type -> nsd.RegisterServiceRawResponse
-	9,  // 24: nsd.ManagerService.UnregisterServiceRaw:output_type -> nsd.UnregisterServiceRawResponse
-	16, // 25: nsd.DiscoveryListenerService.SubscribeDiscoveryListener:output_type -> nsd.DiscoveryListenerEvent
-	20, // 26: nsd.ResolveListenerService.SubscribeResolveListener:output_type -> nsd.ResolveListenerEvent
-	26, // 27: nsd.RegistrationListenerService.SubscribeRegistrationListener:output_type -> nsd.RegistrationListenerEvent
-	20, // [20:28] is the sub-list for method output_type
-	12, // [12:20] is the sub-list for method input_type
+	10, // 17: nsd.NsdServiceInfoService.SetServiceName:input_type -> nsd.SetServiceNameRequest
+	12, // 18: nsd.NsdServiceInfoService.SetServiceType:input_type -> nsd.SetServiceTypeRequest
+	14, // 19: nsd.NsdServiceInfoService.SetPort:input_type -> nsd.SetPortRequest
+	16, // 20: nsd.NsdServiceInfoService.SetAttribute:input_type -> nsd.SetAttributeRequest
+	18, // 21: nsd.NsdServiceInfoService.GetServiceName:input_type -> nsd.GetServiceNameRequest
+	20, // 22: nsd.NsdServiceInfoService.GetServiceType:input_type -> nsd.GetServiceTypeRequest
+	22, // 23: nsd.NsdServiceInfoService.GetHost:input_type -> nsd.GetHostRequest
+	24, // 24: nsd.NsdServiceInfoService.GetPort:input_type -> nsd.GetPortRequest
+	33, // 25: nsd.DiscoveryListenerService.SubscribeDiscoveryListener:input_type -> nsd.SubscribeDiscoveryListenerRequest
+	37, // 26: nsd.ResolveListenerService.SubscribeResolveListener:input_type -> nsd.SubscribeResolveListenerRequest
+	43, // 27: nsd.RegistrationListenerService.SubscribeRegistrationListener:input_type -> nsd.SubscribeRegistrationListenerRequest
+	1,  // 28: nsd.ManagerService.DiscoverServicesRaw:output_type -> nsd.DiscoverServicesRawResponse
+	3,  // 29: nsd.ManagerService.StopServiceDiscoveryRaw:output_type -> nsd.StopServiceDiscoveryRawResponse
+	5,  // 30: nsd.ManagerService.ResolveServiceRaw:output_type -> nsd.ResolveServiceRawResponse
+	7,  // 31: nsd.ManagerService.RegisterServiceRaw:output_type -> nsd.RegisterServiceRawResponse
+	9,  // 32: nsd.ManagerService.UnregisterServiceRaw:output_type -> nsd.UnregisterServiceRawResponse
+	11, // 33: nsd.NsdServiceInfoService.SetServiceName:output_type -> nsd.SetServiceNameResponse
+	13, // 34: nsd.NsdServiceInfoService.SetServiceType:output_type -> nsd.SetServiceTypeResponse
+	15, // 35: nsd.NsdServiceInfoService.SetPort:output_type -> nsd.SetPortResponse
+	17, // 36: nsd.NsdServiceInfoService.SetAttribute:output_type -> nsd.SetAttributeResponse
+	19, // 37: nsd.NsdServiceInfoService.GetServiceName:output_type -> nsd.GetServiceNameResponse
+	21, // 38: nsd.NsdServiceInfoService.GetServiceType:output_type -> nsd.GetServiceTypeResponse
+	23, // 39: nsd.NsdServiceInfoService.GetHost:output_type -> nsd.GetHostResponse
+	25, // 40: nsd.NsdServiceInfoService.GetPort:output_type -> nsd.GetPortResponse
+	32, // 41: nsd.DiscoveryListenerService.SubscribeDiscoveryListener:output_type -> nsd.DiscoveryListenerEvent
+	36, // 42: nsd.ResolveListenerService.SubscribeResolveListener:output_type -> nsd.ResolveListenerEvent
+	42, // 43: nsd.RegistrationListenerService.SubscribeRegistrationListener:output_type -> nsd.RegistrationListenerEvent
+	28, // [28:44] is the sub-list for method output_type
+	12, // [12:28] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name
 	12, // [12:12] is the sub-list for extension extendee
 	0,  // [0:12] is the sub-list for field type_name
@@ -1524,18 +2238,18 @@ func file_proto_nsd_nsd_proto_init() {
 	if File_proto_nsd_nsd_proto != nil {
 		return
 	}
-	file_proto_nsd_nsd_proto_msgTypes[16].OneofWrappers = []any{}
-	file_proto_nsd_nsd_proto_msgTypes[20].OneofWrappers = []any{}
-	file_proto_nsd_nsd_proto_msgTypes[26].OneofWrappers = []any{}
+	file_proto_nsd_nsd_proto_msgTypes[32].OneofWrappers = []any{}
+	file_proto_nsd_nsd_proto_msgTypes[36].OneofWrappers = []any{}
+	file_proto_nsd_nsd_proto_msgTypes[42].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_nsd_nsd_proto_rawDesc), len(file_proto_nsd_nsd_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   28,
+			NumMessages:   44,
 			NumExtensions: 0,
-			NumServices:   4,
+			NumServices:   5,
 		},
 		GoTypes:           file_proto_nsd_nsd_proto_goTypes,
 		DependencyIndexes: file_proto_nsd_nsd_proto_depIdxs,

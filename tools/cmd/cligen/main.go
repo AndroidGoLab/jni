@@ -14,6 +14,7 @@ func main() {
 	overlaysDir := flag.String("overlays", "spec/overlays/java", "directory containing overlays")
 	outputDir := flag.String("output", "cmd/jnictl", "output directory for generated CLI files")
 	goModule := flag.String("go-module", "github.com/xaionaro-go/jni", "Go module path")
+	protoDir := flag.String("proto-dir", "proto", "directory containing compiled proto Go stubs")
 	flag.Parse()
 
 	specs, err := filepath.Glob(filepath.Join(*specsDir, "*.yaml"))
@@ -28,7 +29,7 @@ func main() {
 		baseName := strings.TrimSuffix(filepath.Base(specPath), ".yaml")
 		overlayPath := filepath.Join(*overlaysDir, baseName+".yaml")
 
-		if err := cligen.Generate(specPath, overlayPath, *outputDir, *goModule); err != nil {
+		if err := cligen.Generate(specPath, overlayPath, *outputDir, *goModule, *protoDir); err != nil {
 			log.Fatalf("generate %s: %v", baseName, err)
 		}
 	}

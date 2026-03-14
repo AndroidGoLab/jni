@@ -161,6 +161,147 @@ var ManagerService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	RangingRequestBuilderService_AddAccessPoint_FullMethodName = "/wifi_rtt.RangingRequestBuilderService/AddAccessPoint"
+	RangingRequestBuilderService_Build_FullMethodName          = "/wifi_rtt.RangingRequestBuilderService/Build"
+)
+
+// RangingRequestBuilderServiceClient is the client API for RangingRequestBuilderService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type RangingRequestBuilderServiceClient interface {
+	AddAccessPoint(ctx context.Context, in *AddAccessPointRequest, opts ...grpc.CallOption) (*AddAccessPointResponse, error)
+	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
+}
+
+type rangingRequestBuilderServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewRangingRequestBuilderServiceClient(cc grpc.ClientConnInterface) RangingRequestBuilderServiceClient {
+	return &rangingRequestBuilderServiceClient{cc}
+}
+
+func (c *rangingRequestBuilderServiceClient) AddAccessPoint(ctx context.Context, in *AddAccessPointRequest, opts ...grpc.CallOption) (*AddAccessPointResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddAccessPointResponse)
+	err := c.cc.Invoke(ctx, RangingRequestBuilderService_AddAccessPoint_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingRequestBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuildResponse)
+	err := c.cc.Invoke(ctx, RangingRequestBuilderService_Build_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// RangingRequestBuilderServiceServer is the server API for RangingRequestBuilderService service.
+// All implementations must embed UnimplementedRangingRequestBuilderServiceServer
+// for forward compatibility.
+type RangingRequestBuilderServiceServer interface {
+	AddAccessPoint(context.Context, *AddAccessPointRequest) (*AddAccessPointResponse, error)
+	Build(context.Context, *BuildRequest) (*BuildResponse, error)
+	mustEmbedUnimplementedRangingRequestBuilderServiceServer()
+}
+
+// UnimplementedRangingRequestBuilderServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedRangingRequestBuilderServiceServer struct{}
+
+func (UnimplementedRangingRequestBuilderServiceServer) AddAccessPoint(context.Context, *AddAccessPointRequest) (*AddAccessPointResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddAccessPoint not implemented")
+}
+func (UnimplementedRangingRequestBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
+}
+func (UnimplementedRangingRequestBuilderServiceServer) mustEmbedUnimplementedRangingRequestBuilderServiceServer() {
+}
+func (UnimplementedRangingRequestBuilderServiceServer) testEmbeddedByValue() {}
+
+// UnsafeRangingRequestBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to RangingRequestBuilderServiceServer will
+// result in compilation errors.
+type UnsafeRangingRequestBuilderServiceServer interface {
+	mustEmbedUnimplementedRangingRequestBuilderServiceServer()
+}
+
+func RegisterRangingRequestBuilderServiceServer(s grpc.ServiceRegistrar, srv RangingRequestBuilderServiceServer) {
+	// If the following call panics, it indicates UnimplementedRangingRequestBuilderServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&RangingRequestBuilderService_ServiceDesc, srv)
+}
+
+func _RangingRequestBuilderService_AddAccessPoint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddAccessPointRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingRequestBuilderServiceServer).AddAccessPoint(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingRequestBuilderService_AddAccessPoint_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingRequestBuilderServiceServer).AddAccessPoint(ctx, req.(*AddAccessPointRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingRequestBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingRequestBuilderServiceServer).Build(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingRequestBuilderService_Build_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingRequestBuilderServiceServer).Build(ctx, req.(*BuildRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// RangingRequestBuilderService_ServiceDesc is the grpc.ServiceDesc for RangingRequestBuilderService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var RangingRequestBuilderService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "wifi_rtt.RangingRequestBuilderService",
+	HandlerType: (*RangingRequestBuilderServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddAccessPoint",
+			Handler:    _RangingRequestBuilderService_AddAccessPoint_Handler,
+		},
+		{
+			MethodName: "Build",
+			Handler:    _RangingRequestBuilderService_Build_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/wifi_rtt/wifi_rtt.proto",
+}
+
+const (
 	RangingResultCallbackService_SubscribeRangingResultCallback_FullMethodName = "/wifi_rtt.RangingResultCallbackService/SubscribeRangingResultCallback"
 )
 

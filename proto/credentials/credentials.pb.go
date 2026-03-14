@@ -515,6 +515,174 @@ func (*ClearCredentialStateRawResponse) Descriptor() ([]byte, []int) {
 	return file_proto_credentials_credentials_proto_rawDescGZIP(), []int{10}
 }
 
+type AddCredentialOptionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Option        int64                  `protobuf:"varint,1,opt,name=option,proto3" json:"option,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddCredentialOptionRequest) Reset() {
+	*x = AddCredentialOptionRequest{}
+	mi := &file_proto_credentials_credentials_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddCredentialOptionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddCredentialOptionRequest) ProtoMessage() {}
+
+func (x *AddCredentialOptionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_credentials_credentials_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddCredentialOptionRequest.ProtoReflect.Descriptor instead.
+func (*AddCredentialOptionRequest) Descriptor() ([]byte, []int) {
+	return file_proto_credentials_credentials_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *AddCredentialOptionRequest) GetOption() int64 {
+	if x != nil {
+		return x.Option
+	}
+	return 0
+}
+
+type AddCredentialOptionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddCredentialOptionResponse) Reset() {
+	*x = AddCredentialOptionResponse{}
+	mi := &file_proto_credentials_credentials_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddCredentialOptionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddCredentialOptionResponse) ProtoMessage() {}
+
+func (x *AddCredentialOptionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_credentials_credentials_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddCredentialOptionResponse.ProtoReflect.Descriptor instead.
+func (*AddCredentialOptionResponse) Descriptor() ([]byte, []int) {
+	return file_proto_credentials_credentials_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *AddCredentialOptionResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type BuildRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuildRequest) Reset() {
+	*x = BuildRequest{}
+	mi := &file_proto_credentials_credentials_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuildRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuildRequest) ProtoMessage() {}
+
+func (x *BuildRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_credentials_credentials_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuildRequest.ProtoReflect.Descriptor instead.
+func (*BuildRequest) Descriptor() ([]byte, []int) {
+	return file_proto_credentials_credentials_proto_rawDescGZIP(), []int{13}
+}
+
+type BuildResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuildResponse) Reset() {
+	*x = BuildResponse{}
+	mi := &file_proto_credentials_credentials_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuildResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuildResponse) ProtoMessage() {}
+
+func (x *BuildResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_credentials_credentials_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuildResponse.ProtoReflect.Descriptor instead.
+func (*BuildResponse) Descriptor() ([]byte, []int) {
+	return file_proto_credentials_credentials_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *BuildResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
 var File_proto_credentials_credentials_proto protoreflect.FileDescriptor
 
 const file_proto_credentials_credentials_proto_rawDesc = "" +
@@ -542,12 +710,22 @@ const file_proto_credentials_credentials_proto_rawDesc = "" +
 	"\x06result\x18\x01 \x01(\x03R\x06result\":\n" +
 	"\x1eClearCredentialStateRawRequest\x12\x18\n" +
 	"\arequest\x18\x01 \x01(\x03R\arequest\"!\n" +
-	"\x1fClearCredentialStateRawResponse2\xb2\x03\n" +
+	"\x1fClearCredentialStateRawResponse\"4\n" +
+	"\x1aAddCredentialOptionRequest\x12\x16\n" +
+	"\x06option\x18\x01 \x01(\x03R\x06option\"5\n" +
+	"\x1bAddCredentialOptionResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x0e\n" +
+	"\fBuildRequest\"'\n" +
+	"\rBuildResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result2\xb2\x03\n" +
 	"\x0eManagerService\x12_\n" +
 	"\x10CreateManagerRaw\x12$.credentials.CreateManagerRawRequest\x1a%.credentials.CreateManagerRawResponse\x12_\n" +
 	"\x10GetCredentialRaw\x12$.credentials.GetCredentialRawRequest\x1a%.credentials.GetCredentialRawResponse\x12h\n" +
 	"\x13CreateCredentialRaw\x12'.credentials.CreateCredentialRawRequest\x1a(.credentials.CreateCredentialRawResponse\x12t\n" +
-	"\x17ClearCredentialStateRaw\x12+.credentials.ClearCredentialStateRawRequest\x1a,.credentials.ClearCredentialStateRawResponseB.Z,github.com/xaionaro-go/jni/proto/credentialsb\x06proto3"
+	"\x17ClearCredentialStateRaw\x12+.credentials.ClearCredentialStateRawRequest\x1a,.credentials.ClearCredentialStateRawResponse2\xce\x01\n" +
+	"\"GetCredentialRequestBuilderService\x12h\n" +
+	"\x13AddCredentialOption\x12'.credentials.AddCredentialOptionRequest\x1a(.credentials.AddCredentialOptionResponse\x12>\n" +
+	"\x05Build\x12\x19.credentials.BuildRequest\x1a\x1a.credentials.BuildResponseB.Z,github.com/xaionaro-go/jni/proto/credentialsb\x06proto3"
 
 var (
 	file_proto_credentials_credentials_proto_rawDescOnce sync.Once
@@ -561,7 +739,7 @@ func file_proto_credentials_credentials_proto_rawDescGZIP() []byte {
 	return file_proto_credentials_credentials_proto_rawDescData
 }
 
-var file_proto_credentials_credentials_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_proto_credentials_credentials_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_proto_credentials_credentials_proto_goTypes = []any{
 	(*GetCredentialResponse)(nil),           // 0: credentials.GetCredentialResponse
 	(*PasswordCredential)(nil),              // 1: credentials.PasswordCredential
@@ -574,6 +752,10 @@ var file_proto_credentials_credentials_proto_goTypes = []any{
 	(*CreateCredentialRawResponse)(nil),     // 8: credentials.CreateCredentialRawResponse
 	(*ClearCredentialStateRawRequest)(nil),  // 9: credentials.ClearCredentialStateRawRequest
 	(*ClearCredentialStateRawResponse)(nil), // 10: credentials.ClearCredentialStateRawResponse
+	(*AddCredentialOptionRequest)(nil),      // 11: credentials.AddCredentialOptionRequest
+	(*AddCredentialOptionResponse)(nil),     // 12: credentials.AddCredentialOptionResponse
+	(*BuildRequest)(nil),                    // 13: credentials.BuildRequest
+	(*BuildResponse)(nil),                   // 14: credentials.BuildResponse
 }
 var file_proto_credentials_credentials_proto_depIdxs = []int32{
 	0,  // 0: credentials.GetCredentialRawResponse.result:type_name -> credentials.GetCredentialResponse
@@ -581,12 +763,16 @@ var file_proto_credentials_credentials_proto_depIdxs = []int32{
 	5,  // 2: credentials.ManagerService.GetCredentialRaw:input_type -> credentials.GetCredentialRawRequest
 	7,  // 3: credentials.ManagerService.CreateCredentialRaw:input_type -> credentials.CreateCredentialRawRequest
 	9,  // 4: credentials.ManagerService.ClearCredentialStateRaw:input_type -> credentials.ClearCredentialStateRawRequest
-	4,  // 5: credentials.ManagerService.CreateManagerRaw:output_type -> credentials.CreateManagerRawResponse
-	6,  // 6: credentials.ManagerService.GetCredentialRaw:output_type -> credentials.GetCredentialRawResponse
-	8,  // 7: credentials.ManagerService.CreateCredentialRaw:output_type -> credentials.CreateCredentialRawResponse
-	10, // 8: credentials.ManagerService.ClearCredentialStateRaw:output_type -> credentials.ClearCredentialStateRawResponse
-	5,  // [5:9] is the sub-list for method output_type
-	1,  // [1:5] is the sub-list for method input_type
+	11, // 5: credentials.GetCredentialRequestBuilderService.AddCredentialOption:input_type -> credentials.AddCredentialOptionRequest
+	13, // 6: credentials.GetCredentialRequestBuilderService.Build:input_type -> credentials.BuildRequest
+	4,  // 7: credentials.ManagerService.CreateManagerRaw:output_type -> credentials.CreateManagerRawResponse
+	6,  // 8: credentials.ManagerService.GetCredentialRaw:output_type -> credentials.GetCredentialRawResponse
+	8,  // 9: credentials.ManagerService.CreateCredentialRaw:output_type -> credentials.CreateCredentialRawResponse
+	10, // 10: credentials.ManagerService.ClearCredentialStateRaw:output_type -> credentials.ClearCredentialStateRawResponse
+	12, // 11: credentials.GetCredentialRequestBuilderService.AddCredentialOption:output_type -> credentials.AddCredentialOptionResponse
+	14, // 12: credentials.GetCredentialRequestBuilderService.Build:output_type -> credentials.BuildResponse
+	7,  // [7:13] is the sub-list for method output_type
+	1,  // [1:7] is the sub-list for method input_type
 	1,  // [1:1] is the sub-list for extension type_name
 	1,  // [1:1] is the sub-list for extension extendee
 	0,  // [0:1] is the sub-list for field type_name
@@ -603,9 +789,9 @@ func file_proto_credentials_credentials_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_credentials_credentials_proto_rawDesc), len(file_proto_credentials_credentials_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   15,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_proto_credentials_credentials_proto_goTypes,
 		DependencyIndexes: file_proto_credentials_credentials_proto_depIdxs,

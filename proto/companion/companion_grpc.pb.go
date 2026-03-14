@@ -199,6 +199,185 @@ var ManagerService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	AssociationRequestBuilderService_SetSingleDevice_FullMethodName = "/companion.AssociationRequestBuilderService/SetSingleDevice"
+	AssociationRequestBuilderService_AddDeviceFilter_FullMethodName = "/companion.AssociationRequestBuilderService/AddDeviceFilter"
+	AssociationRequestBuilderService_Build_FullMethodName           = "/companion.AssociationRequestBuilderService/Build"
+)
+
+// AssociationRequestBuilderServiceClient is the client API for AssociationRequestBuilderService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type AssociationRequestBuilderServiceClient interface {
+	SetSingleDevice(ctx context.Context, in *SetSingleDeviceRequest, opts ...grpc.CallOption) (*SetSingleDeviceResponse, error)
+	AddDeviceFilter(ctx context.Context, in *AddDeviceFilterRequest, opts ...grpc.CallOption) (*AddDeviceFilterResponse, error)
+	Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error)
+}
+
+type associationRequestBuilderServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAssociationRequestBuilderServiceClient(cc grpc.ClientConnInterface) AssociationRequestBuilderServiceClient {
+	return &associationRequestBuilderServiceClient{cc}
+}
+
+func (c *associationRequestBuilderServiceClient) SetSingleDevice(ctx context.Context, in *SetSingleDeviceRequest, opts ...grpc.CallOption) (*SetSingleDeviceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetSingleDeviceResponse)
+	err := c.cc.Invoke(ctx, AssociationRequestBuilderService_SetSingleDevice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *associationRequestBuilderServiceClient) AddDeviceFilter(ctx context.Context, in *AddDeviceFilterRequest, opts ...grpc.CallOption) (*AddDeviceFilterResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddDeviceFilterResponse)
+	err := c.cc.Invoke(ctx, AssociationRequestBuilderService_AddDeviceFilter_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *associationRequestBuilderServiceClient) Build(ctx context.Context, in *BuildRequest, opts ...grpc.CallOption) (*BuildResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuildResponse)
+	err := c.cc.Invoke(ctx, AssociationRequestBuilderService_Build_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AssociationRequestBuilderServiceServer is the server API for AssociationRequestBuilderService service.
+// All implementations must embed UnimplementedAssociationRequestBuilderServiceServer
+// for forward compatibility.
+type AssociationRequestBuilderServiceServer interface {
+	SetSingleDevice(context.Context, *SetSingleDeviceRequest) (*SetSingleDeviceResponse, error)
+	AddDeviceFilter(context.Context, *AddDeviceFilterRequest) (*AddDeviceFilterResponse, error)
+	Build(context.Context, *BuildRequest) (*BuildResponse, error)
+	mustEmbedUnimplementedAssociationRequestBuilderServiceServer()
+}
+
+// UnimplementedAssociationRequestBuilderServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedAssociationRequestBuilderServiceServer struct{}
+
+func (UnimplementedAssociationRequestBuilderServiceServer) SetSingleDevice(context.Context, *SetSingleDeviceRequest) (*SetSingleDeviceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetSingleDevice not implemented")
+}
+func (UnimplementedAssociationRequestBuilderServiceServer) AddDeviceFilter(context.Context, *AddDeviceFilterRequest) (*AddDeviceFilterResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddDeviceFilter not implemented")
+}
+func (UnimplementedAssociationRequestBuilderServiceServer) Build(context.Context, *BuildRequest) (*BuildResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Build not implemented")
+}
+func (UnimplementedAssociationRequestBuilderServiceServer) mustEmbedUnimplementedAssociationRequestBuilderServiceServer() {
+}
+func (UnimplementedAssociationRequestBuilderServiceServer) testEmbeddedByValue() {}
+
+// UnsafeAssociationRequestBuilderServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AssociationRequestBuilderServiceServer will
+// result in compilation errors.
+type UnsafeAssociationRequestBuilderServiceServer interface {
+	mustEmbedUnimplementedAssociationRequestBuilderServiceServer()
+}
+
+func RegisterAssociationRequestBuilderServiceServer(s grpc.ServiceRegistrar, srv AssociationRequestBuilderServiceServer) {
+	// If the following call panics, it indicates UnimplementedAssociationRequestBuilderServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&AssociationRequestBuilderService_ServiceDesc, srv)
+}
+
+func _AssociationRequestBuilderService_SetSingleDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetSingleDeviceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssociationRequestBuilderServiceServer).SetSingleDevice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssociationRequestBuilderService_SetSingleDevice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssociationRequestBuilderServiceServer).SetSingleDevice(ctx, req.(*SetSingleDeviceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssociationRequestBuilderService_AddDeviceFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddDeviceFilterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssociationRequestBuilderServiceServer).AddDeviceFilter(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssociationRequestBuilderService_AddDeviceFilter_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssociationRequestBuilderServiceServer).AddDeviceFilter(ctx, req.(*AddDeviceFilterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssociationRequestBuilderService_Build_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuildRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssociationRequestBuilderServiceServer).Build(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssociationRequestBuilderService_Build_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssociationRequestBuilderServiceServer).Build(ctx, req.(*BuildRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// AssociationRequestBuilderService_ServiceDesc is the grpc.ServiceDesc for AssociationRequestBuilderService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var AssociationRequestBuilderService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "companion.AssociationRequestBuilderService",
+	HandlerType: (*AssociationRequestBuilderServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SetSingleDevice",
+			Handler:    _AssociationRequestBuilderService_SetSingleDevice_Handler,
+		},
+		{
+			MethodName: "AddDeviceFilter",
+			Handler:    _AssociationRequestBuilderService_AddDeviceFilter_Handler,
+		},
+		{
+			MethodName: "Build",
+			Handler:    _AssociationRequestBuilderService_Build_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/companion/companion.proto",
+}
+
+const (
 	CompanionCallbackService_SubscribeCompanionCallback_FullMethodName = "/companion.CompanionCallbackService/SubscribeCompanionCallback"
 )
 
