@@ -254,24 +254,36 @@ func (s *Server) Proxy(stream pb.JNIService_ProxyServer) error {
 		)
 
 		if err := s.VM.Do(func(env *jni.Env) error {
-			// Get the abstract class's simple name to derive the adapter class name.
+			// Get the class's full name to derive the adapter class name.
+			// E.g. "android.hardware.camera2.CameraDevice$StateCallback"
+			//   → adapter name: "CameraDeviceStateCallbackAdapter"
 			classCls, findErr := env.FindClass("java/lang/Class")
 			if findErr != nil {
 				return fmt.Errorf("finding java.lang.Class: %w", findErr)
 			}
-			getSimpleNameMID, findErr := env.GetMethodID(classCls, "getSimpleName", "()Ljava/lang/String;")
+			getNameMID, findErr := env.GetMethodID(classCls, "getName", "()Ljava/lang/String;")
 			if findErr != nil {
-				return fmt.Errorf("finding Class.getSimpleName: %w", findErr)
+				return fmt.Errorf("finding Class.getName: %w", findErr)
 			}
 
-			simpleNameObj, callErr := env.CallObjectMethod(&ifaces[0].Object, getSimpleNameMID)
+			nameObj, callErr := env.CallObjectMethod(&ifaces[0].Object, getNameMID)
 			if callErr != nil {
-				return fmt.Errorf("calling Class.getSimpleName: %w", callErr)
+				return fmt.Errorf("calling Class.getName: %w", callErr)
 			}
-			simpleName := env.GoString((*jni.String)(unsafe.Pointer(simpleNameObj)))
+			fullName := env.GoString((*jni.String)(unsafe.Pointer(nameObj)))
 
-			// Construct the adapter's fully qualified Java name.
-			adapterJavaName := "center.dx.jni.generated." + simpleName + "Adapter"
+			// Extract the adapter name: take the last package segment + inner
+			// class parts, remove '$' and '.', append "Adapter".
+			// "android.hardware.camera2.CameraDevice$StateCallback"
+			//  → lastDot split: "CameraDevice$StateCallback"
+			//  → replace "$" with "": "CameraDeviceStateCallback"
+			//  → append "Adapter": "CameraDeviceStateCallbackAdapter"
+			shortName := fullName
+			if idx := strings.LastIndex(fullName, "."); idx >= 0 {
+				shortName = fullName[idx+1:]
+			}
+			shortName = strings.ReplaceAll(shortName, "$", "")
+			adapterJavaName := "center.dx.jni.generated." + shortName + "Adapter"
 
 			// Load the adapter class via AppClassLoader (native threads
 			// use BootClassLoader which cannot find APK classes).
