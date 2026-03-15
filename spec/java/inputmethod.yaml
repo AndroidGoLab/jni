@@ -459,29 +459,29 @@ classes:
           error: true
 constants:
     - go_name: HandwritingDelegateFlagHomeDelegatorAllowed
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: HideImplicitOnly
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: HideNotAlways
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ResultHidden
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: ResultShown
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ResultUnchangedHidden
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ResultUnchangedShown
       value: "0"
       go_type: int
     - go_name: ShowForced
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ShowImplicit
-      value: "0"
+      value: "1"
       go_type: int

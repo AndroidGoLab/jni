@@ -3,38 +3,38 @@
 package player
 
 const (
-	MediaErrorIo                             = 0
-	MediaErrorMalformed                      = 0
-	MediaErrorNotValidForProgressivePlayback = 0
-	MediaErrorServerDied                     = 0
-	MediaErrorTimedOut                       = 0
-	MediaErrorUnknown                        = 0
-	MediaErrorUnsupported                    = 0
-	MediaInfoAudioNotPlaying                 = 0
-	MediaInfoBadInterleaving                 = 0
-	MediaInfoBufferingEnd                    = 0
-	MediaInfoBufferingStart                  = 0
-	MediaInfoMetadataUpdate                  = 0
-	MediaInfoNotSeekable                     = 0
-	MediaInfoStartedAsNext                   = 0
-	MediaInfoSubtitleTimedOut                = 0
-	MediaInfoUnknown                         = 0
-	MediaInfoUnsupportedSubtitle             = 0
-	MediaInfoVideoNotPlaying                 = 0
-	MediaInfoVideoRenderingStart             = 0
-	MediaInfoVideoTrackLagging               = 0
-	PrepareDrmStatusPreparationError         = 0
-	PrepareDrmStatusProvisioningNetworkError = 0
-	PrepareDrmStatusProvisioningServerError  = 0
+	MediaErrorIo                             = -1004
+	MediaErrorMalformed                      = -1007
+	MediaErrorNotValidForProgressivePlayback = 200
+	MediaErrorServerDied                     = 100
+	MediaErrorTimedOut                       = -110
+	MediaErrorUnknown                        = 1
+	MediaErrorUnsupported                    = -1010
+	MediaInfoAudioNotPlaying                 = 804
+	MediaInfoBadInterleaving                 = 800
+	MediaInfoBufferingEnd                    = 702
+	MediaInfoBufferingStart                  = 701
+	MediaInfoMetadataUpdate                  = 802
+	MediaInfoNotSeekable                     = 801
+	MediaInfoStartedAsNext                   = 2
+	MediaInfoSubtitleTimedOut                = 902
+	MediaInfoUnknown                         = 1
+	MediaInfoUnsupportedSubtitle             = 901
+	MediaInfoVideoNotPlaying                 = 805
+	MediaInfoVideoRenderingStart             = 3
+	MediaInfoVideoTrackLagging               = 700
+	PrepareDrmStatusPreparationError         = 3
+	PrepareDrmStatusProvisioningNetworkError = 1
+	PrepareDrmStatusProvisioningServerError  = 2
 	PrepareDrmStatusSuccess                  = 0
-	SeekClosest                              = 0
-	SeekClosestSync                          = 0
-	SeekNextSync                             = 0
+	SeekClosest                              = 3
+	SeekClosestSync                          = 2
+	SeekNextSync                             = 1
 	SeekPreviousSync                         = 0
-	VideoScalingModeScaleToFit               = 0
-	VideoScalingModeScaleToFitWithCropping   = 0
+	VideoScalingModeScaleToFit               = 1
+	VideoScalingModeScaleToFitWithCropping   = 2
 )
 
 const (
-	MediaMimetypeTextSubrip = ""
+	MediaMimetypeTextSubrip = "application/x-subrip"
 )

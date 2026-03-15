@@ -20,42 +20,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clswifiInfo                                 *jni.GlobalRef
-	midwifiInfoDescribeContents                 jni.MethodID
-	midwifiInfoEquals                           jni.MethodID
-	midwifiInfoGetAffiliatedMloLinks            jni.MethodID
-	midwifiInfoGetApMldMacAddress               jni.MethodID
-	midwifiInfoGetApMloLinkId                   jni.MethodID
-	midwifiInfoGetApplicableRedactions          jni.MethodID
-	midwifiInfoGetAssociatedMloLinks            jni.MethodID
-	midwifiInfoGetBSSID                         jni.MethodID
-	midwifiInfoGetCurrentSecurityType           jni.MethodID
-	midwifiInfoGetFrequency                     jni.MethodID
-	midwifiInfoGetHiddenSSID                    jni.MethodID
-	midwifiInfoGetInformationElements           jni.MethodID
-	midwifiInfoGetIpAddress                     jni.MethodID
-	midwifiInfoGetLinkSpeed                     jni.MethodID
-	midwifiInfoGetMacAddress                    jni.MethodID
-	midwifiInfoGetMaxSupportedRxLinkSpeedMbps   jni.MethodID
-	midwifiInfoGetMaxSupportedTxLinkSpeedMbps   jni.MethodID
-	midwifiInfoGetNetworkId                     jni.MethodID
-	midwifiInfoGetPasspointFqdn                 jni.MethodID
-	midwifiInfoGetPasspointProviderFriendlyName jni.MethodID
-	midwifiInfoGetPasspointUniqueId             jni.MethodID
-	midwifiInfoGetRssi                          jni.MethodID
-	midwifiInfoGetRxLinkSpeedMbps               jni.MethodID
-	midwifiInfoGetSSID                          jni.MethodID
-	midwifiInfoGetSubscriptionId                jni.MethodID
-	midwifiInfoGetSupplicantState               jni.MethodID
-	midwifiInfoGetTxLinkSpeedMbps               jni.MethodID
-	midwifiInfoGetWifiStandard                  jni.MethodID
-	midwifiInfoHashCode                         jni.MethodID
-	midwifiInfoIsRestricted                     jni.MethodID
-	midwifiInfoMakeCopy                         jni.MethodID
-	midwifiInfoToString                         jni.MethodID
-	midwifiInfoWriteToParcel                    jni.MethodID
-	midwifiInfoGetDetailedStateOf               jni.MethodID
-
 	clswifiManager                                                 *jni.GlobalRef
 	midwifiManagerAddLocalOnlyConnectionFailureListener            jni.MethodID
 	midwifiManagerAddNetwork                                       jni.MethodID
@@ -174,6 +138,42 @@ var (
 	midwifiManagerCalculateSignalLevel2_1                          jni.MethodID
 	midwifiManagerCompareSignalLevel                               jni.MethodID
 
+	clswifiInfo                                 *jni.GlobalRef
+	midwifiInfoDescribeContents                 jni.MethodID
+	midwifiInfoEquals                           jni.MethodID
+	midwifiInfoGetAffiliatedMloLinks            jni.MethodID
+	midwifiInfoGetApMldMacAddress               jni.MethodID
+	midwifiInfoGetApMloLinkId                   jni.MethodID
+	midwifiInfoGetApplicableRedactions          jni.MethodID
+	midwifiInfoGetAssociatedMloLinks            jni.MethodID
+	midwifiInfoGetBSSID                         jni.MethodID
+	midwifiInfoGetCurrentSecurityType           jni.MethodID
+	midwifiInfoGetFrequency                     jni.MethodID
+	midwifiInfoGetHiddenSSID                    jni.MethodID
+	midwifiInfoGetInformationElements           jni.MethodID
+	midwifiInfoGetIpAddress                     jni.MethodID
+	midwifiInfoGetLinkSpeed                     jni.MethodID
+	midwifiInfoGetMacAddress                    jni.MethodID
+	midwifiInfoGetMaxSupportedRxLinkSpeedMbps   jni.MethodID
+	midwifiInfoGetMaxSupportedTxLinkSpeedMbps   jni.MethodID
+	midwifiInfoGetNetworkId                     jni.MethodID
+	midwifiInfoGetPasspointFqdn                 jni.MethodID
+	midwifiInfoGetPasspointProviderFriendlyName jni.MethodID
+	midwifiInfoGetPasspointUniqueId             jni.MethodID
+	midwifiInfoGetRssi                          jni.MethodID
+	midwifiInfoGetRxLinkSpeedMbps               jni.MethodID
+	midwifiInfoGetSSID                          jni.MethodID
+	midwifiInfoGetSubscriptionId                jni.MethodID
+	midwifiInfoGetSupplicantState               jni.MethodID
+	midwifiInfoGetTxLinkSpeedMbps               jni.MethodID
+	midwifiInfoGetWifiStandard                  jni.MethodID
+	midwifiInfoHashCode                         jni.MethodID
+	midwifiInfoIsRestricted                     jni.MethodID
+	midwifiInfoMakeCopy                         jni.MethodID
+	midwifiInfoToString                         jni.MethodID
+	midwifiInfoWriteToParcel                    jni.MethodID
+	midwifiInfoGetDetailedStateOf               jni.MethodID
+
 	clsscanResult                                        *jni.GlobalRef
 	midscanResultDescribeContents                        jni.MethodID
 	midscanResultGetAffiliatedMloLinks                   jni.MethodID
@@ -218,284 +218,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/net/wifi/WifiInfo")
-	if err != nil {
-		return fmt.Errorf("find class android.net.wifi.WifiInfo: %w", err)
-	}
-	clswifiInfo = env.NewGlobalRef(&c.Object)
-
-	midwifiInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.describeContents")
-	}
-
-	midwifiInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.equals")
-	}
-
-	midwifiInfoGetAffiliatedMloLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getAffiliatedMloLinks", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getAffiliatedMloLinks")
-	}
-
-	midwifiInfoGetApMldMacAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getApMldMacAddress", "()Landroid/net/MacAddress;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getApMldMacAddress")
-	}
-
-	midwifiInfoGetApMloLinkId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getApMloLinkId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getApMloLinkId")
-	}
-
-	midwifiInfoGetApplicableRedactions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getApplicableRedactions", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getApplicableRedactions")
-	}
-
-	midwifiInfoGetAssociatedMloLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getAssociatedMloLinks", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getAssociatedMloLinks")
-	}
-
-	midwifiInfoGetBSSID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getBSSID", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getBSSID")
-	}
-
-	midwifiInfoGetCurrentSecurityType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getCurrentSecurityType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getCurrentSecurityType")
-	}
-
-	midwifiInfoGetFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getFrequency", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getFrequency")
-	}
-
-	midwifiInfoGetHiddenSSID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getHiddenSSID", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getHiddenSSID")
-	}
-
-	midwifiInfoGetInformationElements, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getInformationElements", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getInformationElements")
-	}
-
-	midwifiInfoGetIpAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getIpAddress", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getIpAddress")
-	}
-
-	midwifiInfoGetLinkSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getLinkSpeed", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getLinkSpeed")
-	}
-
-	midwifiInfoGetMacAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getMacAddress", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getMacAddress")
-	}
-
-	midwifiInfoGetMaxSupportedRxLinkSpeedMbps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getMaxSupportedRxLinkSpeedMbps", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getMaxSupportedRxLinkSpeedMbps")
-	}
-
-	midwifiInfoGetMaxSupportedTxLinkSpeedMbps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getMaxSupportedTxLinkSpeedMbps", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getMaxSupportedTxLinkSpeedMbps")
-	}
-
-	midwifiInfoGetNetworkId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getNetworkId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getNetworkId")
-	}
-
-	midwifiInfoGetPasspointFqdn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getPasspointFqdn", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getPasspointFqdn")
-	}
-
-	midwifiInfoGetPasspointProviderFriendlyName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getPasspointProviderFriendlyName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getPasspointProviderFriendlyName")
-	}
-
-	midwifiInfoGetPasspointUniqueId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getPasspointUniqueId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getPasspointUniqueId")
-	}
-
-	midwifiInfoGetRssi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getRssi", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getRssi")
-	}
-
-	midwifiInfoGetRxLinkSpeedMbps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getRxLinkSpeedMbps", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getRxLinkSpeedMbps")
-	}
-
-	midwifiInfoGetSSID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getSSID", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getSSID")
-	}
-
-	midwifiInfoGetSubscriptionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getSubscriptionId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getSubscriptionId")
-	}
-
-	midwifiInfoGetSupplicantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getSupplicantState", "()Landroid/net/wifi/SupplicantState;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getSupplicantState")
-	}
-
-	midwifiInfoGetTxLinkSpeedMbps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getTxLinkSpeedMbps", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getTxLinkSpeedMbps")
-	}
-
-	midwifiInfoGetWifiStandard, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getWifiStandard", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getWifiStandard")
-	}
-
-	midwifiInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.hashCode")
-	}
-
-	midwifiInfoIsRestricted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "isRestricted", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.isRestricted")
-	}
-
-	midwifiInfoMakeCopy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "makeCopy", "(J)Landroid/net/wifi/WifiInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.makeCopy")
-	}
-
-	midwifiInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.toString")
-	}
-
-	midwifiInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.writeToParcel")
-	}
-
-	midwifiInfoGetDetailedStateOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getDetailedStateOf", "(Landroid/net/wifi/SupplicantState;)Landroid/net/NetworkInfo$DetailedState;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getDetailedStateOf")
-	}
 
 	c, err = env.FindClass("android/net/wifi/WifiManager")
 	if err != nil {
@@ -1429,6 +1151,284 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.net.wifi.WifiManager.compareSignalLevel")
+	}
+
+	c, err = env.FindClass("android/net/wifi/WifiInfo")
+	if err != nil {
+		return fmt.Errorf("find class android.net.wifi.WifiInfo: %w", err)
+	}
+	clswifiInfo = env.NewGlobalRef(&c.Object)
+
+	midwifiInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.describeContents")
+	}
+
+	midwifiInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.equals")
+	}
+
+	midwifiInfoGetAffiliatedMloLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getAffiliatedMloLinks", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getAffiliatedMloLinks")
+	}
+
+	midwifiInfoGetApMldMacAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getApMldMacAddress", "()Landroid/net/MacAddress;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getApMldMacAddress")
+	}
+
+	midwifiInfoGetApMloLinkId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getApMloLinkId", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getApMloLinkId")
+	}
+
+	midwifiInfoGetApplicableRedactions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getApplicableRedactions", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getApplicableRedactions")
+	}
+
+	midwifiInfoGetAssociatedMloLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getAssociatedMloLinks", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getAssociatedMloLinks")
+	}
+
+	midwifiInfoGetBSSID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getBSSID", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getBSSID")
+	}
+
+	midwifiInfoGetCurrentSecurityType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getCurrentSecurityType", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getCurrentSecurityType")
+	}
+
+	midwifiInfoGetFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getFrequency", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getFrequency")
+	}
+
+	midwifiInfoGetHiddenSSID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getHiddenSSID", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getHiddenSSID")
+	}
+
+	midwifiInfoGetInformationElements, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getInformationElements", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getInformationElements")
+	}
+
+	midwifiInfoGetIpAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getIpAddress", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getIpAddress")
+	}
+
+	midwifiInfoGetLinkSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getLinkSpeed", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getLinkSpeed")
+	}
+
+	midwifiInfoGetMacAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getMacAddress", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getMacAddress")
+	}
+
+	midwifiInfoGetMaxSupportedRxLinkSpeedMbps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getMaxSupportedRxLinkSpeedMbps", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getMaxSupportedRxLinkSpeedMbps")
+	}
+
+	midwifiInfoGetMaxSupportedTxLinkSpeedMbps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getMaxSupportedTxLinkSpeedMbps", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getMaxSupportedTxLinkSpeedMbps")
+	}
+
+	midwifiInfoGetNetworkId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getNetworkId", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getNetworkId")
+	}
+
+	midwifiInfoGetPasspointFqdn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getPasspointFqdn", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getPasspointFqdn")
+	}
+
+	midwifiInfoGetPasspointProviderFriendlyName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getPasspointProviderFriendlyName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getPasspointProviderFriendlyName")
+	}
+
+	midwifiInfoGetPasspointUniqueId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getPasspointUniqueId", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getPasspointUniqueId")
+	}
+
+	midwifiInfoGetRssi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getRssi", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getRssi")
+	}
+
+	midwifiInfoGetRxLinkSpeedMbps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getRxLinkSpeedMbps", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getRxLinkSpeedMbps")
+	}
+
+	midwifiInfoGetSSID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getSSID", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getSSID")
+	}
+
+	midwifiInfoGetSubscriptionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getSubscriptionId", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getSubscriptionId")
+	}
+
+	midwifiInfoGetSupplicantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getSupplicantState", "()Landroid/net/wifi/SupplicantState;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getSupplicantState")
+	}
+
+	midwifiInfoGetTxLinkSpeedMbps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getTxLinkSpeedMbps", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getTxLinkSpeedMbps")
+	}
+
+	midwifiInfoGetWifiStandard, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getWifiStandard", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getWifiStandard")
+	}
+
+	midwifiInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.hashCode")
+	}
+
+	midwifiInfoIsRestricted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "isRestricted", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.isRestricted")
+	}
+
+	midwifiInfoMakeCopy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "makeCopy", "(J)Landroid/net/wifi/WifiInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.makeCopy")
+	}
+
+	midwifiInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.toString")
+	}
+
+	midwifiInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.writeToParcel")
+	}
+
+	midwifiInfoGetDetailedStateOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clswifiInfo)), "getDetailedStateOf", "(Landroid/net/wifi/SupplicantState;)Landroid/net/NetworkInfo$DetailedState;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.wifi.WifiInfo.getDetailedStateOf")
 	}
 
 	c, err = env.FindClass("android/net/wifi/ScanResult")

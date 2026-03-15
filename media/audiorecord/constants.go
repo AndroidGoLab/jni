@@ -3,15 +3,15 @@
 package audiorecord
 
 const (
-	Error                 = 0
-	ErrorBadValue         = 0
-	ErrorDeadObject       = 0
-	ErrorInvalidOperation = 0
+	Error                 = -1
+	ErrorBadValue         = -2
+	ErrorDeadObject       = -6
+	ErrorInvalidOperation = -3
 	ReadBlocking          = 0
-	ReadNonBlocking       = 0
-	RecordstateRecording  = 0
-	RecordstateStopped    = 0
-	StateInitialized      = 0
+	ReadNonBlocking       = 1
+	RecordstateRecording  = 3
+	RecordstateStopped    = 1
+	StateInitialized      = 1
 	StateUninitialized    = 0
 	Success               = 0
 )

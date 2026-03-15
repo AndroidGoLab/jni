@@ -30,32 +30,32 @@ classes:
           error: true
 constants:
     - go_name: RoleAssistant
-      value: '""'
+      value: '"android.app.role.ASSISTANT"'
       go_type: string
     - go_name: RoleBrowser
-      value: '""'
+      value: '"android.app.role.BROWSER"'
       go_type: string
     - go_name: RoleCallRedirection
-      value: '""'
+      value: '"android.app.role.CALL_REDIRECTION"'
       go_type: string
     - go_name: RoleCallScreening
-      value: '""'
+      value: '"android.app.role.CALL_SCREENING"'
       go_type: string
     - go_name: RoleDialer
-      value: '""'
+      value: '"android.app.role.DIALER"'
       go_type: string
     - go_name: RoleEmergency
-      value: '""'
+      value: '"android.app.role.EMERGENCY"'
       go_type: string
     - go_name: RoleHome
-      value: '""'
+      value: '"android.app.role.HOME"'
       go_type: string
     - go_name: RoleNotes
-      value: '""'
+      value: '"android.app.role.NOTES"'
       go_type: string
     - go_name: RoleSms
-      value: '""'
+      value: '"android.app.role.SMS"'
       go_type: string
     - go_name: RoleWallet
-      value: '""'
+      value: '"android.app.role.WALLET"'
       go_type: string

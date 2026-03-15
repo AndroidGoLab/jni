@@ -1,37 +1,6 @@
 package: accounts
 go_import: github.com/xaionaro-go/jni/accounts
 classes:
-    - java_class: android.accounts.Account
-      go_type: account
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
     - java_class: android.accounts.AccountManager
       go_type: accountManager
       methods:
@@ -262,130 +231,161 @@ classes:
               go_name: arg6
           returns: android.content.Intent
           error: true
+    - java_class: android.accounts.Account
+      go_type: account
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
 constants:
-    - go_name: Creator
-      value: "0"
-      go_type: int
     - go_name: ActionAccountRemoved
-      value: '""'
+      value: '"android.accounts.action.ACCOUNT_REMOVED"'
       go_type: string
     - go_name: ActionAuthenticatorIntent
-      value: '""'
+      value: '"android.accounts.AccountAuthenticator"'
       go_type: string
     - go_name: AuthenticatorAttributesName
-      value: '""'
+      value: '"account-authenticator"'
       go_type: string
     - go_name: AuthenticatorMetaDataName
-      value: '""'
+      value: '"android.accounts.AccountAuthenticator"'
       go_type: string
     - go_name: ErrorCodeBadArguments
-      value: "0"
+      value: "7"
       go_type: int
     - go_name: ErrorCodeBadAuthentication
-      value: "0"
+      value: "9"
       go_type: int
     - go_name: ErrorCodeBadRequest
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: ErrorCodeCanceled
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: ErrorCodeInvalidResponse
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: ErrorCodeNetworkError
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: ErrorCodeRemoteException
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ErrorCodeUnsupportedOperation
-      value: "0"
+      value: "6"
       go_type: int
     - go_name: KeyAccounts
-      value: '""'
+      value: '"accounts"'
       go_type: string
     - go_name: KeyAccountAuthenticatorResponse
-      value: '""'
+      value: '"accountAuthenticatorResponse"'
       go_type: string
     - go_name: KeyAccountManagerResponse
-      value: '""'
+      value: '"accountManagerResponse"'
       go_type: string
     - go_name: KeyAccountName
-      value: '""'
+      value: '"authAccount"'
       go_type: string
     - go_name: KeyAccountSessionBundle
-      value: '""'
+      value: '"accountSessionBundle"'
       go_type: string
     - go_name: KeyAccountStatusToken
-      value: '""'
+      value: '"accountStatusToken"'
       go_type: string
     - go_name: KeyAccountType
-      value: '""'
+      value: '"accountType"'
       go_type: string
     - go_name: KeyAndroidPackageName
-      value: '""'
+      value: '"androidPackageName"'
       go_type: string
     - go_name: KeyAuthenticatorTypes
-      value: '""'
+      value: '"authenticator_types"'
       go_type: string
     - go_name: KeyAuthtoken
-      value: '""'
+      value: '"authtoken"'
       go_type: string
     - go_name: KeyAuthFailedMessage
-      value: '""'
+      value: '"authFailedMessage"'
       go_type: string
     - go_name: KeyAuthTokenLabel
-      value: '""'
+      value: '"authTokenLabelKey"'
       go_type: string
     - go_name: KeyBooleanResult
-      value: '""'
+      value: '"booleanResult"'
       go_type: string
     - go_name: KeyCallerPid
-      value: '""'
+      value: '"callerPid"'
       go_type: string
     - go_name: KeyCallerUid
-      value: '""'
+      value: '"callerUid"'
       go_type: string
     - go_name: KeyErrorCode
-      value: '""'
+      value: '"errorCode"'
       go_type: string
     - go_name: KeyErrorMessage
-      value: '""'
+      value: '"errorMessage"'
       go_type: string
     - go_name: KeyIntent
-      value: '""'
+      value: '"intent"'
       go_type: string
     - go_name: KeyLastAuthenticatedTime
-      value: '""'
+      value: '"lastAuthenticatedTime"'
       go_type: string
     - go_name: KeyPassword
-      value: '""'
+      value: '"password"'
       go_type: string
     - go_name: KeyUserdata
-      value: '""'
+      value: '"userdata"'
       go_type: string
     - go_name: LoginAccountsChangedAction
-      value: '""'
+      value: '"android.accounts.LOGIN_ACCOUNTS_CHANGED"'
       go_type: string
     - go_name: PackageNameKeyLegacyNotVisible
-      value: '""'
+      value: '"android:accounts:key_legacy_not_visible"'
       go_type: string
     - go_name: PackageNameKeyLegacyVisible
-      value: '""'
+      value: '"android:accounts:key_legacy_visible"'
       go_type: string
     - go_name: VisibilityNotVisible
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: VisibilityUndefined
       value: "0"
       go_type: int
     - go_name: VisibilityUserManagedNotVisible
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: VisibilityUserManagedVisible
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: VisibilityVisible
+      value: "1"
+      go_type: int
+    - go_name: Creator
       value: "0"
       go_type: int

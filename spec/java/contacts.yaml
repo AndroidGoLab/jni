@@ -13,35 +13,35 @@ classes:
           error: true
 constants:
     - go_name: Authority
-      value: '""'
+      value: '"com.android.contacts"'
       go_type: string
     - go_name: AuthorityUri
       value: "0"
       go_type: int
     - go_name: CallerIsSyncadapter
-      value: '""'
+      value: '"caller_is_syncadapter"'
       go_type: string
     - go_name: DeferredSnippeting
-      value: '""'
+      value: '"deferred_snippeting"'
       go_type: string
     - go_name: DeferredSnippetingQuery
-      value: '""'
+      value: '"deferred_snippeting_query"'
       go_type: string
     - go_name: DirectoryParamKey
-      value: '""'
+      value: '"directory"'
       go_type: string
     - go_name: LimitParamKey
-      value: '""'
+      value: '"limit"'
       go_type: string
     - go_name: PrimaryAccountName
-      value: '""'
+      value: '"name_for_primary_account"'
       go_type: string
     - go_name: PrimaryAccountType
-      value: '""'
+      value: '"type_for_primary_account"'
       go_type: string
     - go_name: RemoveDuplicateEntries
-      value: '""'
+      value: '"remove_duplicate_entries"'
       go_type: string
     - go_name: StrequentPhoneOnly
-      value: '""'
+      value: '"strequent_phone_only"'
       go_type: string

@@ -4,11 +4,11 @@ package print
 
 const (
 	Creator        = 0
-	StateBlocked   = 0
-	StateCanceled  = 0
-	StateCompleted = 0
-	StateCreated   = 0
-	StateFailed    = 0
-	StateQueued    = 0
-	StateStarted   = 0
+	StateBlocked   = 4
+	StateCanceled  = 7
+	StateCompleted = 5
+	StateCreated   = 1
+	StateFailed    = 6
+	StateQueued    = 2
+	StateStarted   = 3
 )

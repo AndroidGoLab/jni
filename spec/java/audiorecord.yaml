@@ -266,31 +266,31 @@ classes:
           error: true
 constants:
     - go_name: Error
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: ErrorBadValue
-      value: "0"
+      value: "-2"
       go_type: int
     - go_name: ErrorDeadObject
-      value: "0"
+      value: "-6"
       go_type: int
     - go_name: ErrorInvalidOperation
-      value: "0"
+      value: "-3"
       go_type: int
     - go_name: ReadBlocking
       value: "0"
       go_type: int
     - go_name: ReadNonBlocking
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: RecordstateRecording
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: RecordstateStopped
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: StateInitialized
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: StateUninitialized
       value: "0"

@@ -112,7 +112,7 @@ constants:
       value: '""'
       go_type: string
     - go_name: Unknown
-      value: '""'
+      value: '"unknown"'
       go_type: string
     - go_name: User
       value: '""'

@@ -3,20 +3,20 @@
 package usage
 
 const (
-	ExtraEventAction   = ""
-	ExtraEventCategory = ""
+	ExtraEventAction   = "android.app.usage.extra.EVENT_ACTION"
+	ExtraEventCategory = "android.app.usage.extra.EVENT_CATEGORY"
 )
 
 const (
-	IntervalBest            = 0
+	IntervalBest            = 4
 	IntervalDaily           = 0
-	IntervalMonthly         = 0
-	IntervalWeekly          = 0
-	IntervalYearly          = 0
-	StandbyBucketActive     = 0
-	StandbyBucketFrequent   = 0
-	StandbyBucketRare       = 0
-	StandbyBucketRestricted = 0
-	StandbyBucketWorkingSet = 0
+	IntervalMonthly         = 2
+	IntervalWeekly          = 1
+	IntervalYearly          = 3
+	StandbyBucketActive     = 10
+	StandbyBucketFrequent   = 30
+	StandbyBucketRare       = 40
+	StandbyBucketRestricted = 45
+	StandbyBucketWorkingSet = 20
 	Creator                 = 0
 )

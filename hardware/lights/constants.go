@@ -4,11 +4,11 @@ package lights
 
 const (
 	Creator                    = 0
-	LightCapabilityBrightness  = 0
-	LightCapabilityColorRgb    = 0
+	LightCapabilityBrightness  = 1
+	LightCapabilityColorRgb    = 2
 	LightCapabilityRgb         = 0
-	LightTypeInput             = 0
-	LightTypeKeyboardBacklight = 0
-	LightTypeMicrophone        = 0
-	LightTypePlayerId          = 0
+	LightTypeInput             = 10001
+	LightTypeKeyboardBacklight = 10003
+	LightTypeMicrophone        = 8
+	LightTypePlayerId          = 10002
 )

@@ -23,6 +23,7 @@ type JavapClass struct {
 type JavapConstant struct {
 	Name     string // e.g. "ERROR_BAD_VALUE"
 	JavaType string // e.g. "int", "java.lang.String"
+	Value    string // e.g. "1", "gps" — extracted from ConstantValue attribute
 }
 
 // JavapMethod is a public method parsed from javap output.
@@ -40,22 +41,24 @@ type JavapParam struct {
 }
 
 var (
-	classLineRe    = regexp.MustCompile(`^public\s+(abstract\s+)?(final\s+)?(class|interface)\s+(\S+)`)
-	implementsRe   = regexp.MustCompile(`implements\s+(.+)\s*\{`)
-	constantRe     = regexp.MustCompile(`^\s+public static final\s+(\S+)\s+(\w+);`)
-	methodRe       = regexp.MustCompile(`^\s+public\s+(static\s+)?(\S+)\s+(\w+)\(([^)]*)\)(.*);\s*$`)
-	constructorRe  = regexp.MustCompile(`^\s+public\s+\S+\(([^)]*)\)(.*);\s*$`)
+	classLineRe      = regexp.MustCompile(`^public\s+(abstract\s+)?(final\s+)?(class|interface)\s+(\S+)`)
+	implementsRe     = regexp.MustCompile(`implements\s+(.+?)\s*\{?\s*$`)
+	constantRe       = regexp.MustCompile(`^\s+public static final\s+(\S+)\s+(\w+);`)
+	constantValueRe  = regexp.MustCompile(`^\s+ConstantValue:\s+(\S+)\s+(.+)$`)
+	methodRe         = regexp.MustCompile(`^\s+public\s+(static\s+)?(\S+)\s+(\w+)\(([^)]*)\)(.*);\s*$`)
+	constructorRe    = regexp.MustCompile(`^\s+public\s+\S+\(([^)]*)\)(.*);\s*$`)
 )
 
 // RunJavap executes javap and parses the output for a single class.
 // classPath can contain multiple entries separated by ":".
+// Uses -verbose to extract constant values from ConstantValue attributes.
 func RunJavap(classPath string, className string) (*JavapClass, error) {
 	var cmd *exec.Cmd
 	if classPath != "" {
-		cmd = exec.Command("javap", "-public", "-cp", classPath, className)
+		cmd = exec.Command("javap", "-public", "-verbose", "-cp", classPath, className)
 	} else {
 		// No classpath — javap uses the JDK's default (for java.* classes).
-		cmd = exec.Command("javap", "-public", className)
+		cmd = exec.Command("javap", "-public", "-verbose", className)
 	}
 	out, err := cmd.Output()
 	if err != nil {
@@ -67,6 +70,10 @@ func RunJavap(classPath string, className string) (*JavapClass, error) {
 func parseJavap(output string) (*JavapClass, error) {
 	lines := strings.Split(output, "\n")
 	jc := &JavapClass{}
+
+	// lastConstIdx tracks the index of the most recently parsed constant
+	// so that a subsequent ConstantValue line can be attached to it.
+	lastConstIdx := -1
 
 	for _, line := range lines {
 		line = strings.TrimRight(line, "\r")
@@ -92,11 +99,24 @@ func parseJavap(output string) (*JavapClass, error) {
 				JavaType: m[1],
 				Name:     m[2],
 			})
+			lastConstIdx = len(jc.Constants) - 1
 			continue
+		}
+
+		// Parse ConstantValue attribute (follows field declaration in
+		// javap -verbose output). Attaches the value to the preceding
+		// constant field.
+		if lastConstIdx >= 0 {
+			if m := constantValueRe.FindStringSubmatch(line); m != nil {
+				jc.Constants[lastConstIdx].Value = m[2]
+				lastConstIdx = -1
+				continue
+			}
 		}
 
 		// Parse methods.
 		if m := methodRe.FindStringSubmatch(line); m != nil {
+			lastConstIdx = -1
 			isStatic := strings.TrimSpace(m[1]) == "static"
 			retType := m[2]
 			name := m[3]

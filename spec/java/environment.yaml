@@ -95,35 +95,35 @@ classes:
           error: true
 constants:
     - go_name: MediaBadRemoval
-      value: '""'
+      value: '"bad_removal"'
       go_type: string
     - go_name: MediaChecking
-      value: '""'
+      value: '"checking"'
       go_type: string
     - go_name: MediaEjecting
-      value: '""'
+      value: '"ejecting"'
       go_type: string
     - go_name: MediaMounted
-      value: '""'
+      value: '"mounted"'
       go_type: string
     - go_name: MediaMountedReadOnly
-      value: '""'
+      value: '"mounted_ro"'
       go_type: string
     - go_name: MediaNofs
-      value: '""'
+      value: '"nofs"'
       go_type: string
     - go_name: MediaRemoved
-      value: '""'
+      value: '"removed"'
       go_type: string
     - go_name: MediaShared
-      value: '""'
+      value: '"shared"'
       go_type: string
     - go_name: MediaUnknown
-      value: '""'
+      value: '"unknown"'
       go_type: string
     - go_name: MediaUnmountable
-      value: '""'
+      value: '"unmountable"'
       go_type: string
     - go_name: MediaUnmounted
-      value: '""'
+      value: '"unmounted"'
       go_type: string

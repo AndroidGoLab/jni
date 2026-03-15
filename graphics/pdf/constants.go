@@ -3,22 +3,22 @@
 package pdf
 
 const (
-	DocumentLinearizedTypeLinearized    = 0
-	DocumentLinearizedTypeNonLinearized = 0
-	PdfFormTypeAcroForm                 = 0
-	PdfFormTypeNone                     = 0
-	PdfFormTypeXfaForeground            = 0
-	PdfFormTypeXfaFull                  = 0
-	RenderModeForDisplay                = 0
-	RenderModeForPrint                  = 0
 	Creator                             = 0
 	DensityNone                         = 0
-	ModeAppend                          = 0
-	ModeCreate                          = 0
-	ModeReadOnly                        = 0
-	ModeReadWrite                       = 0
-	ModeTruncate                        = 0
-	ModeWorldReadable                   = 0
-	ModeWorldWriteable                  = 0
-	ModeWriteOnly                       = 0
+	DocumentLinearizedTypeLinearized    = 1
+	DocumentLinearizedTypeNonLinearized = 0
+	PdfFormTypeAcroForm                 = 1
+	PdfFormTypeNone                     = 0
+	PdfFormTypeXfaForeground            = 3
+	PdfFormTypeXfaFull                  = 2
+	RenderModeForDisplay                = 1
+	RenderModeForPrint                  = 2
+	ModeAppend                          = 33554432
+	ModeCreate                          = 134217728
+	ModeReadOnly                        = 268435456
+	ModeReadWrite                       = 805306368
+	ModeTruncate                        = 67108864
+	ModeWorldReadable                   = 1
+	ModeWorldWriteable                  = 2
+	ModeWriteOnly                       = 536870912
 )

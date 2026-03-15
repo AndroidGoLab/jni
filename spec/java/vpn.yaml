@@ -53,8 +53,8 @@ classes:
           error: true
 constants:
     - go_name: ServiceInterface
-      value: '""'
+      value: '"android.net.VpnService"'
       go_type: string
     - go_name: ServiceMetaDataSupportsAlwaysOn
-      value: '""'
+      value: '"android.net.VpnService.SUPPORTS_ALWAYS_ON"'
       go_type: string

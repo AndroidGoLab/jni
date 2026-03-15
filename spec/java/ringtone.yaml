@@ -158,50 +158,50 @@ classes:
           error: true
 constants:
     - go_name: ActionRingtonePicker
-      value: '""'
+      value: '"android.intent.action.RINGTONE_PICKER"'
       go_type: string
     - go_name: ExtraRingtoneDefaultUri
-      value: '""'
+      value: '"android.intent.extra.ringtone.DEFAULT_URI"'
       go_type: string
     - go_name: ExtraRingtoneExistingUri
-      value: '""'
+      value: '"android.intent.extra.ringtone.EXISTING_URI"'
       go_type: string
     - go_name: ExtraRingtoneIncludeDrm
-      value: '""'
+      value: '"android.intent.extra.ringtone.INCLUDE_DRM"'
       go_type: string
     - go_name: ExtraRingtonePickedUri
-      value: '""'
+      value: '"android.intent.extra.ringtone.PICKED_URI"'
       go_type: string
     - go_name: ExtraRingtoneShowDefault
-      value: '""'
+      value: '"android.intent.extra.ringtone.SHOW_DEFAULT"'
       go_type: string
     - go_name: ExtraRingtoneShowSilent
-      value: '""'
+      value: '"android.intent.extra.ringtone.SHOW_SILENT"'
       go_type: string
     - go_name: ExtraRingtoneTitle
-      value: '""'
+      value: '"android.intent.extra.ringtone.TITLE"'
       go_type: string
     - go_name: ExtraRingtoneType
-      value: '""'
+      value: '"android.intent.extra.ringtone.TYPE"'
       go_type: string
     - go_name: IdColumnIndex
       value: "0"
       go_type: int
     - go_name: TitleColumnIndex
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: TypeAlarm
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: TypeAll
-      value: "0"
+      value: "7"
       go_type: int
     - go_name: TypeNotification
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: TypeRingtone
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: UriColumnIndex
-      value: "0"
+      value: "2"
       go_type: int

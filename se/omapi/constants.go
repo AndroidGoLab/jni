@@ -3,7 +3,7 @@
 package omapi
 
 const (
-	ActionSecureElementStateChanged = ""
-	ExtraReaderName                 = ""
-	ExtraReaderState                = ""
+	ActionSecureElementStateChanged = "android.se.omapi.action.SECURE_ELEMENT_STATE_CHANGED"
+	ExtraReaderName                 = "android.se.omapi.extra.READER_NAME"
+	ExtraReaderState                = "android.se.omapi.extra.READER_STATE"
 )

@@ -3,45 +3,45 @@
 package job
 
 const (
-	BackoffPolicyExponential                 = 0
+	PendingJobReasonApp                      = 1
+	PendingJobReasonAppStandby               = 2
+	PendingJobReasonBackgroundRestriction    = 3
+	PendingJobReasonConstraintBatteryNotLow  = 4
+	PendingJobReasonConstraintCharging       = 5
+	PendingJobReasonConstraintConnectivity   = 6
+	PendingJobReasonConstraintContentTrigger = 7
+	PendingJobReasonConstraintDeadline       = 16
+	PendingJobReasonConstraintDeviceIdle     = 8
+	PendingJobReasonConstraintMinimumLatency = 9
+	PendingJobReasonConstraintPrefetch       = 10
+	PendingJobReasonConstraintStorageNotLow  = 11
+	PendingJobReasonDeviceState              = 12
+	PendingJobReasonExecuting                = -1
+	PendingJobReasonInvalidJobId             = -2
+	PendingJobReasonJobSchedulerOptimization = 13
+	PendingJobReasonQuota                    = 14
+	PendingJobReasonUndefined                = 0
+	PendingJobReasonUser                     = 15
+	ResultFailure                            = 0
+	ResultSuccess                            = 1
+	BackoffPolicyExponential                 = 1
 	BackoffPolicyLinear                      = 0
 	Creator                                  = 0
-	NetworkBytesUnknown                      = 0
-	NetworkTypeAny                           = 0
-	NetworkTypeCellular                      = 0
-	NetworkTypeMetered                       = 0
+	NetworkBytesUnknown                      = -1
+	NetworkTypeAny                           = 1
+	NetworkTypeCellular                      = 4
+	NetworkTypeMetered                       = 4
 	NetworkTypeNone                          = 0
-	NetworkTypeNotRoaming                    = 0
-	NetworkTypeUnmetered                     = 0
-	PriorityDefault                          = 0
-	PriorityHigh                             = 0
-	PriorityLow                              = 0
-	PriorityMax                              = 0
-	PriorityMin                              = 0
-	PendingJobReasonApp                      = 0
-	PendingJobReasonAppStandby               = 0
-	PendingJobReasonBackgroundRestriction    = 0
-	PendingJobReasonConstraintBatteryNotLow  = 0
-	PendingJobReasonConstraintCharging       = 0
-	PendingJobReasonConstraintConnectivity   = 0
-	PendingJobReasonConstraintContentTrigger = 0
-	PendingJobReasonConstraintDeadline       = 0
-	PendingJobReasonConstraintDeviceIdle     = 0
-	PendingJobReasonConstraintMinimumLatency = 0
-	PendingJobReasonConstraintPrefetch       = 0
-	PendingJobReasonConstraintStorageNotLow  = 0
-	PendingJobReasonDeviceState              = 0
-	PendingJobReasonExecuting                = 0
-	PendingJobReasonInvalidJobId             = 0
-	PendingJobReasonJobSchedulerOptimization = 0
-	PendingJobReasonQuota                    = 0
-	PendingJobReasonUndefined                = 0
-	PendingJobReasonUser                     = 0
-	ResultFailure                            = 0
-	ResultSuccess                            = 0
+	NetworkTypeNotRoaming                    = 3
+	NetworkTypeUnmetered                     = 2
+	PriorityDefault                          = 300
+	PriorityHigh                             = 400
+	PriorityLow                              = 200
+	PriorityMax                              = 500
+	PriorityMin                              = 100
 )
 
 const (
-	DefaultInitialBackoffMillis = 0
-	MaxBackoffDelayMillis       = 0
+	DefaultInitialBackoffMillis = 30000
+	MaxBackoffDelayMillis       = 18000000
 )

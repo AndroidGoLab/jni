@@ -265,200 +265,200 @@ classes:
           error: true
 constants:
     - go_name: AccessMediaOwnerPackageNamePermission
-      value: '""'
+      value: '"com.android.providers.media.permission.ACCESS_MEDIA_OWNER_PACKAGE_NAME"'
       go_type: string
     - go_name: AccessOemMetadataPermission
-      value: '""'
+      value: '"com.android.providers.media.permission.ACCESS_OEM_METADATA"'
       go_type: string
     - go_name: ActionImageCapture
-      value: '""'
+      value: '"android.media.action.IMAGE_CAPTURE"'
       go_type: string
     - go_name: ActionImageCaptureSecure
-      value: '""'
+      value: '"android.media.action.IMAGE_CAPTURE_SECURE"'
       go_type: string
     - go_name: ActionMotionPhotoCapture
-      value: '""'
+      value: '"android.provider.action.MOTION_PHOTO_CAPTURE"'
       go_type: string
     - go_name: ActionMotionPhotoCaptureSecure
-      value: '""'
+      value: '"android.provider.action.MOTION_PHOTO_CAPTURE_SECURE"'
       go_type: string
     - go_name: ActionPickImages
-      value: '""'
+      value: '"android.provider.action.PICK_IMAGES"'
       go_type: string
     - go_name: ActionPickImagesSettings
-      value: '""'
+      value: '"android.provider.action.PICK_IMAGES_SETTINGS"'
       go_type: string
     - go_name: ActionReview
-      value: '""'
+      value: '"android.provider.action.REVIEW"'
       go_type: string
     - go_name: ActionReviewSecure
-      value: '""'
+      value: '"android.provider.action.REVIEW_SECURE"'
       go_type: string
     - go_name: ActionVideoCapture
-      value: '""'
+      value: '"android.media.action.VIDEO_CAPTURE"'
       go_type: string
     - go_name: Authority
-      value: '""'
+      value: '"media"'
       go_type: string
     - go_name: AuthorityUri
       value: "0"
       go_type: int
     - go_name: ExtraAcceptOriginalMediaFormat
-      value: '""'
+      value: '"android.provider.extra.ACCEPT_ORIGINAL_MEDIA_FORMAT"'
       go_type: string
     - go_name: ExtraBrightness
-      value: '""'
+      value: '"android.provider.extra.BRIGHTNESS"'
       go_type: string
     - go_name: ExtraDurationLimit
-      value: '""'
+      value: '"android.intent.extra.durationLimit"'
       go_type: string
     - go_name: ExtraFinishOnCompletion
-      value: '""'
+      value: '"android.intent.extra.finishOnCompletion"'
       go_type: string
     - go_name: ExtraFullScreen
-      value: '""'
+      value: '"android.intent.extra.fullScreen"'
       go_type: string
     - go_name: ExtraMediaAlbum
-      value: '""'
+      value: '"android.intent.extra.album"'
       go_type: string
     - go_name: ExtraMediaArtist
-      value: '""'
+      value: '"android.intent.extra.artist"'
       go_type: string
     - go_name: ExtraMediaCapabilities
-      value: '""'
+      value: '"android.provider.extra.MEDIA_CAPABILITIES"'
       go_type: string
     - go_name: ExtraMediaCapabilitiesUid
-      value: '""'
+      value: '"android.provider.extra.MEDIA_CAPABILITIES_UID"'
       go_type: string
     - go_name: ExtraMediaFocus
-      value: '""'
+      value: '"android.intent.extra.focus"'
       go_type: string
     - go_name: ExtraMediaGenre
-      value: '""'
+      value: '"android.intent.extra.genre"'
       go_type: string
     - go_name: ExtraMediaPlaylist
-      value: '""'
+      value: '"android.intent.extra.playlist"'
       go_type: string
     - go_name: ExtraMediaRadioChannel
-      value: '""'
+      value: '"android.intent.extra.radio_channel"'
       go_type: string
     - go_name: ExtraMediaTitle
-      value: '""'
+      value: '"android.intent.extra.title"'
       go_type: string
     - go_name: ExtraOutput
-      value: '""'
+      value: '"output"'
       go_type: string
     - go_name: ExtraPickerPreSelectionUris
-      value: '""'
+      value: '"android.provider.extra.PICKER_PRE_SELECTION_URIS"'
       go_type: string
     - go_name: ExtraPickImagesAccentColor
-      value: '""'
+      value: '"android.provider.extra.PICK_IMAGES_ACCENT_COLOR"'
       go_type: string
     - go_name: ExtraPickImagesInOrder
-      value: '""'
+      value: '"android.provider.extra.PICK_IMAGES_IN_ORDER"'
       go_type: string
     - go_name: ExtraPickImagesLaunchTab
-      value: '""'
+      value: '"android.provider.extra.PICK_IMAGES_LAUNCH_TAB"'
       go_type: string
     - go_name: ExtraPickImagesMax
-      value: '""'
+      value: '"android.provider.extra.PICK_IMAGES_MAX"'
       go_type: string
     - go_name: ExtraScreenOrientation
-      value: '""'
+      value: '"android.intent.extra.screenOrientation"'
       go_type: string
     - go_name: ExtraShowActionIcons
-      value: '""'
+      value: '"android.intent.extra.showActionIcons"'
       go_type: string
     - go_name: ExtraSizeLimit
-      value: '""'
+      value: '"android.intent.extra.sizeLimit"'
       go_type: string
     - go_name: ExtraVideoQuality
-      value: '""'
+      value: '"android.intent.extra.videoQuality"'
       go_type: string
     - go_name: IntentActionMediaPlayFromSearch
-      value: '""'
+      value: '"android.media.action.MEDIA_PLAY_FROM_SEARCH"'
       go_type: string
     - go_name: IntentActionMediaSearch
-      value: '""'
+      value: '"android.intent.action.MEDIA_SEARCH"'
       go_type: string
     - go_name: IntentActionMusicPlayer
-      value: '""'
+      value: '"android.intent.action.MUSIC_PLAYER"'
       go_type: string
     - go_name: IntentActionStillImageCamera
-      value: '""'
+      value: '"android.media.action.STILL_IMAGE_CAMERA"'
       go_type: string
     - go_name: IntentActionStillImageCameraSecure
-      value: '""'
+      value: '"android.media.action.STILL_IMAGE_CAMERA_SECURE"'
       go_type: string
     - go_name: IntentActionTextOpenFromSearch
-      value: '""'
+      value: '"android.media.action.TEXT_OPEN_FROM_SEARCH"'
       go_type: string
     - go_name: IntentActionVideoCamera
-      value: '""'
+      value: '"android.media.action.VIDEO_CAMERA"'
       go_type: string
     - go_name: IntentActionVideoPlayFromSearch
-      value: '""'
+      value: '"android.media.action.VIDEO_PLAY_FROM_SEARCH"'
       go_type: string
     - go_name: MatchDefault
       value: "0"
       go_type: int
     - go_name: MatchExclude
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: MatchInclude
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: MatchOnly
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: MediaIgnoreFilename
-      value: '""'
+      value: '".nomedia"'
       go_type: string
     - go_name: MediaScannerVolume
-      value: '""'
+      value: '"volume"'
       go_type: string
     - go_name: MetaDataReviewGalleryPrewarmService
-      value: '""'
+      value: '"android.media.review_gallery_prewarm_service"'
       go_type: string
     - go_name: MetaDataStillImageCameraPrewarmService
-      value: '""'
+      value: '"android.media.still_image_camera_preview_service"'
       go_type: string
     - go_name: PickImagesTabAlbums
       value: "0"
       go_type: int
     - go_name: PickImagesTabImages
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: QueryArgIncludeRecentlyUnmountedVolumes
-      value: '""'
+      value: '"android:query-arg-recently-unmounted-volumes"'
       go_type: string
     - go_name: QueryArgLatestSelectionOnly
-      value: '""'
+      value: '"android:query-arg-latest-selection-only"'
       go_type: string
     - go_name: QueryArgMatchFavorite
-      value: '""'
+      value: '"android:query-arg-match-favorite"'
       go_type: string
     - go_name: QueryArgMatchPending
-      value: '""'
+      value: '"android:query-arg-match-pending"'
       go_type: string
     - go_name: QueryArgMatchTrashed
-      value: '""'
+      value: '"android:query-arg-match-trashed"'
       go_type: string
     - go_name: QueryArgMediaStandardSortOrder
-      value: '""'
+      value: '"android:query-arg-media-standard-sort-order"'
       go_type: string
     - go_name: QueryArgRelatedUri
-      value: '""'
+      value: '"android:query-arg-related-uri"'
       go_type: string
     - go_name: UnknownString
-      value: '""'
+      value: '"<unknown>"'
       go_type: string
     - go_name: VolumeExternal
-      value: '""'
+      value: '"external"'
       go_type: string
     - go_name: VolumeExternalPrimary
-      value: '""'
+      value: '"external_primary"'
       go_type: string
     - go_name: VolumeInternal
-      value: '""'
+      value: '"internal"'
       go_type: string

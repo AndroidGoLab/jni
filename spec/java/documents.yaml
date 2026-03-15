@@ -279,56 +279,56 @@ classes:
           error: true
 constants:
     - go_name: ActionDocumentSettings
-      value: '""'
+      value: '"android.provider.action.DOCUMENT_SETTINGS"'
       go_type: string
     - go_name: ExtraError
-      value: '""'
+      value: '"error"'
       go_type: string
     - go_name: ExtraExcludeSelf
-      value: '""'
+      value: '"android.provider.extra.EXCLUDE_SELF"'
       go_type: string
     - go_name: ExtraInfo
-      value: '""'
+      value: '"info"'
       go_type: string
     - go_name: ExtraInitialUri
-      value: '""'
+      value: '"android.provider.extra.INITIAL_URI"'
       go_type: string
     - go_name: ExtraLoading
-      value: '""'
+      value: '"loading"'
       go_type: string
     - go_name: ExtraOrientation
-      value: '""'
+      value: '"android.provider.extra.ORIENTATION"'
       go_type: string
     - go_name: ExtraPrompt
-      value: '""'
+      value: '"android.provider.extra.PROMPT"'
       go_type: string
     - go_name: MetadataExif
-      value: '""'
+      value: '"android:documentExif"'
       go_type: string
     - go_name: MetadataTreeCount
-      value: '""'
+      value: '"android:metadataTreeCount"'
       go_type: string
     - go_name: MetadataTreeSize
-      value: '""'
+      value: '"android:metadataTreeSize"'
       go_type: string
     - go_name: MetadataTypes
-      value: '""'
+      value: '"android:documentMetadataTypes"'
       go_type: string
     - go_name: ProviderInterface
-      value: '""'
+      value: '"android.content.action.DOCUMENTS_PROVIDER"'
       go_type: string
     - go_name: QueryArgDisplayName
-      value: '""'
+      value: '"android:query-arg-display-name"'
       go_type: string
     - go_name: QueryArgExcludeMedia
-      value: '""'
+      value: '"android:query-arg-exclude-media"'
       go_type: string
     - go_name: QueryArgFileSizeOver
-      value: '""'
+      value: '"android:query-arg-file-size-over"'
       go_type: string
     - go_name: QueryArgLastModifiedAfter
-      value: '""'
+      value: '"android:query-arg-last-modified-after"'
       go_type: string
     - go_name: QueryArgMimeTypes
-      value: '""'
+      value: '"android:query-arg-mime-types"'
       go_type: string

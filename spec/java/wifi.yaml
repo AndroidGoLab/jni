@@ -1,160 +1,6 @@
 package: wifi
 go_import: github.com/xaionaro-go/jni/net/wifi
 classes:
-    - java_class: android.net.wifi.WifiInfo
-      go_type: wifiInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getAffiliatedMloLinks
-          go_name: GetAffiliatedMloLinks
-          returns: java.util.List<android.net.wifi.MloLink>
-          error: true
-        - java_method: getApMldMacAddress
-          go_name: GetApMldMacAddress
-          returns: android.net.MacAddress
-          error: true
-        - java_method: getApMloLinkId
-          go_name: GetApMloLinkId
-          returns: int
-          error: true
-        - java_method: getApplicableRedactions
-          go_name: GetApplicableRedactions
-          returns: long
-          error: true
-        - java_method: getAssociatedMloLinks
-          go_name: GetAssociatedMloLinks
-          returns: java.util.List<android.net.wifi.MloLink>
-          error: true
-        - java_method: getBSSID
-          go_name: GetBSSID
-          returns: String
-          error: true
-        - java_method: getCurrentSecurityType
-          go_name: GetCurrentSecurityType
-          returns: int
-          error: true
-        - java_method: getFrequency
-          go_name: GetFrequency
-          returns: int
-          error: true
-        - java_method: getHiddenSSID
-          go_name: GetHiddenSSID
-          returns: boolean
-          error: true
-        - java_method: getInformationElements
-          go_name: GetInformationElements
-          returns: java.util.List<android.net.wifi.ScanResult$InformationElement>
-          error: true
-        - java_method: getIpAddress
-          go_name: GetIpAddress
-          returns: int
-          error: true
-        - java_method: getLinkSpeed
-          go_name: GetLinkSpeed
-          returns: int
-          error: true
-        - java_method: getMacAddress
-          go_name: GetMacAddress
-          returns: String
-          error: true
-        - java_method: getMaxSupportedRxLinkSpeedMbps
-          go_name: GetMaxSupportedRxLinkSpeedMbps
-          returns: int
-          error: true
-        - java_method: getMaxSupportedTxLinkSpeedMbps
-          go_name: GetMaxSupportedTxLinkSpeedMbps
-          returns: int
-          error: true
-        - java_method: getNetworkId
-          go_name: GetNetworkId
-          returns: int
-          error: true
-        - java_method: getPasspointFqdn
-          go_name: GetPasspointFqdn
-          returns: String
-          error: true
-        - java_method: getPasspointProviderFriendlyName
-          go_name: GetPasspointProviderFriendlyName
-          returns: String
-          error: true
-        - java_method: getPasspointUniqueId
-          go_name: GetPasspointUniqueId
-          returns: String
-          error: true
-        - java_method: getRssi
-          go_name: GetRssi
-          returns: int
-          error: true
-        - java_method: getRxLinkSpeedMbps
-          go_name: GetRxLinkSpeedMbps
-          returns: int
-          error: true
-        - java_method: getSSID
-          go_name: GetSSID
-          returns: String
-          error: true
-        - java_method: getSubscriptionId
-          go_name: GetSubscriptionId
-          returns: int
-          error: true
-        - java_method: getSupplicantState
-          go_name: GetSupplicantState
-          returns: android.net.wifi.SupplicantState
-          error: true
-        - java_method: getTxLinkSpeedMbps
-          go_name: GetTxLinkSpeedMbps
-          returns: int
-          error: true
-        - java_method: getWifiStandard
-          go_name: GetWifiStandard
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isRestricted
-          go_name: IsRestricted
-          returns: boolean
-          error: true
-        - java_method: makeCopy
-          go_name: MakeCopy
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: android.net.wifi.WifiInfo
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-      static_methods:
-        - java_method: getDetailedStateOf
-          go_name: GetDetailedStateOf
-          params:
-            - java_type: android.net.wifi.SupplicantState
-              go_name: arg0
-          returns: android.net.NetworkInfo$DetailedState
-          error: true
     - java_class: android.net.wifi.WifiManager
       go_type: wifiManager
       obtain: system_service
@@ -863,6 +709,160 @@ classes:
               go_name: arg1
           returns: int
           error: true
+    - java_class: android.net.wifi.WifiInfo
+      go_type: wifiInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAffiliatedMloLinks
+          go_name: GetAffiliatedMloLinks
+          returns: java.util.List<android.net.wifi.MloLink>
+          error: true
+        - java_method: getApMldMacAddress
+          go_name: GetApMldMacAddress
+          returns: android.net.MacAddress
+          error: true
+        - java_method: getApMloLinkId
+          go_name: GetApMloLinkId
+          returns: int
+          error: true
+        - java_method: getApplicableRedactions
+          go_name: GetApplicableRedactions
+          returns: long
+          error: true
+        - java_method: getAssociatedMloLinks
+          go_name: GetAssociatedMloLinks
+          returns: java.util.List<android.net.wifi.MloLink>
+          error: true
+        - java_method: getBSSID
+          go_name: GetBSSID
+          returns: String
+          error: true
+        - java_method: getCurrentSecurityType
+          go_name: GetCurrentSecurityType
+          returns: int
+          error: true
+        - java_method: getFrequency
+          go_name: GetFrequency
+          returns: int
+          error: true
+        - java_method: getHiddenSSID
+          go_name: GetHiddenSSID
+          returns: boolean
+          error: true
+        - java_method: getInformationElements
+          go_name: GetInformationElements
+          returns: java.util.List<android.net.wifi.ScanResult$InformationElement>
+          error: true
+        - java_method: getIpAddress
+          go_name: GetIpAddress
+          returns: int
+          error: true
+        - java_method: getLinkSpeed
+          go_name: GetLinkSpeed
+          returns: int
+          error: true
+        - java_method: getMacAddress
+          go_name: GetMacAddress
+          returns: String
+          error: true
+        - java_method: getMaxSupportedRxLinkSpeedMbps
+          go_name: GetMaxSupportedRxLinkSpeedMbps
+          returns: int
+          error: true
+        - java_method: getMaxSupportedTxLinkSpeedMbps
+          go_name: GetMaxSupportedTxLinkSpeedMbps
+          returns: int
+          error: true
+        - java_method: getNetworkId
+          go_name: GetNetworkId
+          returns: int
+          error: true
+        - java_method: getPasspointFqdn
+          go_name: GetPasspointFqdn
+          returns: String
+          error: true
+        - java_method: getPasspointProviderFriendlyName
+          go_name: GetPasspointProviderFriendlyName
+          returns: String
+          error: true
+        - java_method: getPasspointUniqueId
+          go_name: GetPasspointUniqueId
+          returns: String
+          error: true
+        - java_method: getRssi
+          go_name: GetRssi
+          returns: int
+          error: true
+        - java_method: getRxLinkSpeedMbps
+          go_name: GetRxLinkSpeedMbps
+          returns: int
+          error: true
+        - java_method: getSSID
+          go_name: GetSSID
+          returns: String
+          error: true
+        - java_method: getSubscriptionId
+          go_name: GetSubscriptionId
+          returns: int
+          error: true
+        - java_method: getSupplicantState
+          go_name: GetSupplicantState
+          returns: android.net.wifi.SupplicantState
+          error: true
+        - java_method: getTxLinkSpeedMbps
+          go_name: GetTxLinkSpeedMbps
+          returns: int
+          error: true
+        - java_method: getWifiStandard
+          go_name: GetWifiStandard
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isRestricted
+          go_name: IsRestricted
+          returns: boolean
+          error: true
+        - java_method: makeCopy
+          go_name: MakeCopy
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.net.wifi.WifiInfo
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: getDetailedStateOf
+          go_name: GetDetailedStateOf
+          params:
+            - java_type: android.net.wifi.SupplicantState
+              go_name: arg0
+          returns: android.net.NetworkInfo$DetailedState
+          error: true
     - java_class: android.net.wifi.ScanResult
       go_type: scanResult
       methods:
@@ -953,368 +953,368 @@ classes:
           returns: int
           error: true
 constants:
-    - go_name: FrequencyUnits
-      value: '""'
-      go_type: string
-    - go_name: LinkSpeedUnits
-      value: '""'
-      go_type: string
-    - go_name: LinkSpeedUnknown
-      value: "0"
-      go_type: int
-    - go_name: SecurityTypeDpp
-      value: "0"
-      go_type: int
-    - go_name: SecurityTypeEap
-      value: "0"
-      go_type: int
-    - go_name: SecurityTypeEapWpa3Enterprise
-      value: "0"
-      go_type: int
-    - go_name: SecurityTypeEapWpa3Enterprise192Bit
-      value: "0"
-      go_type: int
-    - go_name: SecurityTypeOpen
-      value: "0"
-      go_type: int
-    - go_name: SecurityTypeOsen
-      value: "0"
-      go_type: int
-    - go_name: SecurityTypeOwe
-      value: "0"
-      go_type: int
-    - go_name: SecurityTypePasspointR1R2
-      value: "0"
-      go_type: int
-    - go_name: SecurityTypePasspointR3
-      value: "0"
-      go_type: int
-    - go_name: SecurityTypePsk
-      value: "0"
-      go_type: int
-    - go_name: SecurityTypeSae
-      value: "0"
-      go_type: int
-    - go_name: SecurityTypeUnknown
-      value: "0"
-      go_type: int
-    - go_name: SecurityTypeWapiCert
-      value: "0"
-      go_type: int
-    - go_name: SecurityTypeWapiPsk
-      value: "0"
-      go_type: int
-    - go_name: SecurityTypeWep
-      value: "0"
-      go_type: int
     - go_name: ActionPickWifiNetwork
-      value: '""'
+      value: '"android.net.wifi.PICK_WIFI_NETWORK"'
       go_type: string
     - go_name: ActionRemoveSuggestionDisconnect
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ActionRemoveSuggestionLinger
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ActionRequestScanAlwaysAvailable
-      value: '""'
+      value: '"android.net.wifi.action.REQUEST_SCAN_ALWAYS_AVAILABLE"'
       go_type: string
     - go_name: ActionWifiNetworkSuggestionPostConnection
-      value: '""'
+      value: '"android.net.wifi.action.WIFI_NETWORK_SUGGESTION_POST_CONNECTION"'
       go_type: string
     - go_name: ActionWifiScanAvailabilityChanged
-      value: '""'
+      value: '"android.net.wifi.action.WIFI_SCAN_AVAILABILITY_CHANGED"'
       go_type: string
     - go_name: ChannelDataKeyFrequencyMhz
-      value: '""'
+      value: '"CHANNEL_DATA_KEY_FREQUENCY_MHZ"'
       go_type: string
     - go_name: ChannelDataKeyNumAp
-      value: '""'
+      value: '"CHANNEL_DATA_KEY_NUM_AP"'
       go_type: string
     - go_name: ErrorAuthenticating
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ExtraBssid
-      value: '""'
+      value: '"bssid"'
       go_type: string
     - go_name: ExtraNetworkInfo
-      value: '""'
+      value: '"networkInfo"'
       go_type: string
     - go_name: ExtraNetworkSuggestion
-      value: '""'
+      value: '"android.net.wifi.extra.NETWORK_SUGGESTION"'
       go_type: string
     - go_name: ExtraNewRssi
-      value: '""'
+      value: '"newRssi"'
       go_type: string
     - go_name: ExtraNewState
-      value: '""'
+      value: '"newState"'
       go_type: string
     - go_name: ExtraPreviousWifiState
-      value: '""'
+      value: '"previous_wifi_state"'
       go_type: string
     - go_name: ExtraResultsUpdated
-      value: '""'
+      value: '"resultsUpdated"'
       go_type: string
     - go_name: ExtraScanAvailable
-      value: '""'
+      value: '"android.net.wifi.extra.SCAN_AVAILABLE"'
       go_type: string
     - go_name: ExtraSupplicantConnected
-      value: '""'
+      value: '"connected"'
       go_type: string
     - go_name: ExtraSupplicantError
-      value: '""'
+      value: '"supplicantError"'
       go_type: string
     - go_name: ExtraWifiInfo
-      value: '""'
+      value: '"wifiInfo"'
       go_type: string
     - go_name: ExtraWifiState
-      value: '""'
+      value: '"wifi_state"'
       go_type: string
     - go_name: FlagSendDhcpHostnameRestrictionOpen
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: FlagSendDhcpHostnameRestrictionSecure
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: NetworkIdsChangedAction
-      value: '""'
+      value: '"android.net.wifi.NETWORK_IDS_CHANGED"'
       go_type: string
     - go_name: NetworkStateChangedAction
-      value: '""'
+      value: '"android.net.wifi.STATE_CHANGE"'
       go_type: string
     - go_name: RoamingModeAggressive
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: RoamingModeNone
       value: "0"
       go_type: int
     - go_name: RoamingModeNormal
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: RssiChangedAction
-      value: '""'
+      value: '"android.net.wifi.RSSI_CHANGED"'
       go_type: string
     - go_name: ScanResultsAvailableAction
-      value: '""'
+      value: '"android.net.wifi.SCAN_RESULTS"'
       go_type: string
     - go_name: StatusLocalOnlyConnectionFailureAssociation
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: StatusLocalOnlyConnectionFailureAuthentication
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: StatusLocalOnlyConnectionFailureIpProvisioning
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: StatusLocalOnlyConnectionFailureNotFound
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: StatusLocalOnlyConnectionFailureNoResponse
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: StatusLocalOnlyConnectionFailureUnknown
       value: "0"
       go_type: int
     - go_name: StatusLocalOnlyConnectionFailureUserReject
-      value: "0"
+      value: "6"
       go_type: int
     - go_name: StatusNetworkSuggestionsErrorAddDuplicate
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: StatusNetworkSuggestionsErrorAddExceedsMaxPerApp
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: StatusNetworkSuggestionsErrorAddInvalid
-      value: "0"
+      value: "7"
       go_type: int
     - go_name: StatusNetworkSuggestionsErrorAddNotAllowed
-      value: "0"
+      value: "6"
       go_type: int
     - go_name: StatusNetworkSuggestionsErrorAppDisallowed
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: StatusNetworkSuggestionsErrorInternal
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: StatusNetworkSuggestionsErrorRemoveInvalid
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: StatusNetworkSuggestionsErrorRestrictedByAdmin
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: StatusNetworkSuggestionsSuccess
       value: "0"
       go_type: int
     - go_name: StatusSuggestionApprovalApprovedByCarrierPrivilege
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: StatusSuggestionApprovalApprovedByUser
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: StatusSuggestionApprovalPending
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: StatusSuggestionApprovalRejectedByUser
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: StatusSuggestionApprovalUnknown
       value: "0"
       go_type: int
     - go_name: StatusSuggestionConnectionFailureAssociation
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: StatusSuggestionConnectionFailureAuthentication
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: StatusSuggestionConnectionFailureIpProvisioning
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: StatusSuggestionConnectionFailureUnknown
       value: "0"
       go_type: int
     - go_name: SupplicantConnectionChangeAction
-      value: '""'
+      value: '"android.net.wifi.supplicant.CONNECTION_CHANGE"'
       go_type: string
     - go_name: SupplicantStateChangedAction
-      value: '""'
+      value: '"android.net.wifi.supplicant.STATE_CHANGE"'
       go_type: string
     - go_name: UnknownSsid
-      value: '""'
+      value: '"<unknown ssid>"'
       go_type: string
     - go_name: WifiInterfaceTypeAp
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: WifiInterfaceTypeAware
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: WifiInterfaceTypeDirect
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: WifiInterfaceTypeSta
       value: "0"
       go_type: int
     - go_name: WifiModeFull
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: WifiModeFullHighPerf
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: WifiModeFullLowLatency
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: WifiModeScanOnly
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: WifiMultiInternetModeDbsAp
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: WifiMultiInternetModeDisabled
       value: "0"
       go_type: int
     - go_name: WifiMultiInternetModeMultiAp
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: WifiStateChangedAction
-      value: '""'
+      value: '"android.net.wifi.WIFI_STATE_CHANGED"'
       go_type: string
     - go_name: WifiStateDisabled
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: WifiStateDisabling
       value: "0"
       go_type: int
     - go_name: WifiStateEnabled
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: WifiStateEnabling
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: WifiStateUnknown
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: WpsAuthFailure
-      value: "0"
+      value: "6"
       go_type: int
     - go_name: WpsOverlapError
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: WpsTimedOut
-      value: "0"
+      value: "7"
       go_type: int
     - go_name: WpsTkipOnlyProhibited
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: WpsWepProhibited
+      value: "4"
+      go_type: int
+    - go_name: FrequencyUnits
+      value: '"MHz"'
+      go_type: string
+    - go_name: LinkSpeedUnits
+      value: '"Mbps"'
+      go_type: string
+    - go_name: LinkSpeedUnknown
+      value: "-1"
+      go_type: int
+    - go_name: SecurityTypeDpp
+      value: "13"
+      go_type: int
+    - go_name: SecurityTypeEap
+      value: "3"
+      go_type: int
+    - go_name: SecurityTypeEapWpa3Enterprise
+      value: "9"
+      go_type: int
+    - go_name: SecurityTypeEapWpa3Enterprise192Bit
+      value: "5"
+      go_type: int
+    - go_name: SecurityTypeOpen
       value: "0"
       go_type: int
+    - go_name: SecurityTypeOsen
+      value: "10"
+      go_type: int
+    - go_name: SecurityTypeOwe
+      value: "6"
+      go_type: int
+    - go_name: SecurityTypePasspointR1R2
+      value: "11"
+      go_type: int
+    - go_name: SecurityTypePasspointR3
+      value: "12"
+      go_type: int
+    - go_name: SecurityTypePsk
+      value: "2"
+      go_type: int
+    - go_name: SecurityTypeSae
+      value: "4"
+      go_type: int
+    - go_name: SecurityTypeUnknown
+      value: "-1"
+      go_type: int
+    - go_name: SecurityTypeWapiCert
+      value: "8"
+      go_type: int
+    - go_name: SecurityTypeWapiPsk
+      value: "7"
+      go_type: int
+    - go_name: SecurityTypeWep
+      value: "1"
+      go_type: int
     - go_name: ChannelWidth160mhz
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: ChannelWidth20mhz
       value: "0"
       go_type: int
     - go_name: ChannelWidth320mhz
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: ChannelWidth40mhz
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ChannelWidth80mhz
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ChannelWidth80mhzPlusMhz
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: Creator
       value: "0"
       go_type: int
     - go_name: PreambleEht
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: PreambleHe
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: PreambleHt
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: PreambleLegacy
       value: "0"
       go_type: int
     - go_name: PreambleVht
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: Unspecified
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: WifiBand24Ghz
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: WifiBand5Ghz
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: WifiBand60Ghz
-      value: "0"
+      value: "16"
       go_type: int
     - go_name: WifiBand6Ghz
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: WifiStandard11ac
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: WifiStandard11ad
-      value: "0"
+      value: "7"
       go_type: int
     - go_name: WifiStandard11ax
-      value: "0"
+      value: "6"
       go_type: int
     - go_name: WifiStandard11be
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: WifiStandard11n
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: WifiStandardLegacy
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: WifiStandardUnknown
       value: "0"

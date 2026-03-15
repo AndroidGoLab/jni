@@ -20,6 +20,14 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsbluetoothLeScanner                        *jni.GlobalRef
+	midbluetoothLeScannerFlushPendingScanResults jni.MethodID
+	midbluetoothLeScannerStartScan1              jni.MethodID
+	midbluetoothLeScannerStartScan3_1            jni.MethodID
+	midbluetoothLeScannerStartScan3_2            jni.MethodID
+	midbluetoothLeScannerStopScan1               jni.MethodID
+	midbluetoothLeScannerStopScan1_1             jni.MethodID
+
 	clsscanResult                               *jni.GlobalRef
 	midscanResultDescribeContents               jni.MethodID
 	midscanResultEquals                         jni.MethodID
@@ -38,14 +46,6 @@ var (
 	midscanResultIsLegacy                       jni.MethodID
 	midscanResultToString                       jni.MethodID
 	midscanResultWriteToParcel                  jni.MethodID
-
-	clsbluetoothLeScanner                        *jni.GlobalRef
-	midbluetoothLeScannerFlushPendingScanResults jni.MethodID
-	midbluetoothLeScannerStartScan1              jni.MethodID
-	midbluetoothLeScannerStartScan3_1            jni.MethodID
-	midbluetoothLeScannerStartScan3_2            jni.MethodID
-	midbluetoothLeScannerStopScan1               jni.MethodID
-	midbluetoothLeScannerStopScan1_1             jni.MethodID
 
 	clsbluetoothLeAdvertiser                       *jni.GlobalRef
 	midbluetoothLeAdvertiserStartAdvertising3      jni.MethodID
@@ -79,6 +79,60 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/bluetooth/le/BluetoothLeScanner")
+	if err != nil {
+		return fmt.Errorf("find class android.bluetooth.le.BluetoothLeScanner: %w", err)
+	}
+	clsbluetoothLeScanner = env.NewGlobalRef(&c.Object)
+
+	midbluetoothLeScannerFlushPendingScanResults, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeScanner)), "flushPendingScanResults", "(Landroid/bluetooth/le/ScanCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeScanner.flushPendingScanResults")
+	}
+
+	midbluetoothLeScannerStartScan1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeScanner)), "startScan", "(Landroid/bluetooth/le/ScanCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeScanner.startScan")
+	}
+
+	midbluetoothLeScannerStartScan3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeScanner)), "startScan", "(Ljava/util/List;Landroid/bluetooth/le/ScanSettings;Landroid/app/PendingIntent;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeScanner.startScan")
+	}
+
+	midbluetoothLeScannerStartScan3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeScanner)), "startScan", "(Ljava/util/List;Landroid/bluetooth/le/ScanSettings;Landroid/bluetooth/le/ScanCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeScanner.startScan")
+	}
+
+	midbluetoothLeScannerStopScan1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeScanner)), "stopScan", "(Landroid/app/PendingIntent;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeScanner.stopScan")
+	}
+
+	midbluetoothLeScannerStopScan1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeScanner)), "stopScan", "(Landroid/bluetooth/le/ScanCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeScanner.stopScan")
+	}
 
 	c, err = env.FindClass("android/bluetooth/le/ScanResult")
 	if err != nil {
@@ -220,60 +274,6 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.bluetooth.le.ScanResult.writeToParcel")
-	}
-
-	c, err = env.FindClass("android/bluetooth/le/BluetoothLeScanner")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.le.BluetoothLeScanner: %w", err)
-	}
-	clsbluetoothLeScanner = env.NewGlobalRef(&c.Object)
-
-	midbluetoothLeScannerFlushPendingScanResults, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeScanner)), "flushPendingScanResults", "(Landroid/bluetooth/le/ScanCallback;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeScanner.flushPendingScanResults")
-	}
-
-	midbluetoothLeScannerStartScan1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeScanner)), "startScan", "(Landroid/bluetooth/le/ScanCallback;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeScanner.startScan")
-	}
-
-	midbluetoothLeScannerStartScan3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeScanner)), "startScan", "(Ljava/util/List;Landroid/bluetooth/le/ScanSettings;Landroid/app/PendingIntent;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeScanner.startScan")
-	}
-
-	midbluetoothLeScannerStartScan3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeScanner)), "startScan", "(Ljava/util/List;Landroid/bluetooth/le/ScanSettings;Landroid/bluetooth/le/ScanCallback;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeScanner.startScan")
-	}
-
-	midbluetoothLeScannerStopScan1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeScanner)), "stopScan", "(Landroid/app/PendingIntent;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeScanner.stopScan")
-	}
-
-	midbluetoothLeScannerStopScan1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothLeScanner)), "stopScan", "(Landroid/bluetooth/le/ScanCallback;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.bluetooth.le.BluetoothLeScanner.stopScan")
 	}
 
 	c, err = env.FindClass("android/bluetooth/le/BluetoothLeAdvertiser")

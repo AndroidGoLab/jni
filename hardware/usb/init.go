@@ -20,31 +20,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsusbInterface                     *jni.GlobalRef
-	midusbInterfaceDescribeContents     jni.MethodID
-	midusbInterfaceGetAlternateSetting  jni.MethodID
-	midusbInterfaceGetEndpoint          jni.MethodID
-	midusbInterfaceGetEndpointCount     jni.MethodID
-	midusbInterfaceGetId                jni.MethodID
-	midusbInterfaceGetInterfaceClass    jni.MethodID
-	midusbInterfaceGetInterfaceProtocol jni.MethodID
-	midusbInterfaceGetInterfaceSubclass jni.MethodID
-	midusbInterfaceGetName              jni.MethodID
-	midusbInterfaceToString             jni.MethodID
-	midusbInterfaceWriteToParcel        jni.MethodID
-
-	clsusbEndpoint                  *jni.GlobalRef
-	midusbEndpointDescribeContents  jni.MethodID
-	midusbEndpointGetAddress        jni.MethodID
-	midusbEndpointGetAttributes     jni.MethodID
-	midusbEndpointGetDirection      jni.MethodID
-	midusbEndpointGetEndpointNumber jni.MethodID
-	midusbEndpointGetInterval       jni.MethodID
-	midusbEndpointGetMaxPacketSize  jni.MethodID
-	midusbEndpointGetType           jni.MethodID
-	midusbEndpointToString          jni.MethodID
-	midusbEndpointWriteToParcel     jni.MethodID
-
 	clsusbDeviceConnection                   *jni.GlobalRef
 	midusbDeviceConnectionBulkTransfer4      jni.MethodID
 	midusbDeviceConnectionBulkTransfer5_1    jni.MethodID
@@ -61,16 +36,17 @@ var (
 	midusbDeviceConnectionSetConfiguration   jni.MethodID
 	midusbDeviceConnectionSetInterface       jni.MethodID
 
-	clsusbManager                          *jni.GlobalRef
-	midusbManagerGetAccessoryList          jni.MethodID
-	midusbManagerHasPermission1            jni.MethodID
-	midusbManagerHasPermission1_1          jni.MethodID
-	midusbManagerOpenAccessory             jni.MethodID
-	midusbManagerOpenAccessoryInputStream  jni.MethodID
-	midusbManagerOpenAccessoryOutputStream jni.MethodID
-	midusbManagerOpenDevice                jni.MethodID
-	midusbManagerRequestPermission2        jni.MethodID
-	midusbManagerRequestPermission2_1      jni.MethodID
+	clsusbEndpoint                  *jni.GlobalRef
+	midusbEndpointDescribeContents  jni.MethodID
+	midusbEndpointGetAddress        jni.MethodID
+	midusbEndpointGetAttributes     jni.MethodID
+	midusbEndpointGetDirection      jni.MethodID
+	midusbEndpointGetEndpointNumber jni.MethodID
+	midusbEndpointGetInterval       jni.MethodID
+	midusbEndpointGetMaxPacketSize  jni.MethodID
+	midusbEndpointGetType           jni.MethodID
+	midusbEndpointToString          jni.MethodID
+	midusbEndpointWriteToParcel     jni.MethodID
 
 	clsusbDevice                      *jni.GlobalRef
 	midusbDeviceDescribeContents      jni.MethodID
@@ -95,6 +71,30 @@ var (
 	midusbDeviceWriteToParcel         jni.MethodID
 	midusbDeviceGetDeviceId1_1        jni.MethodID
 	midusbDeviceGetDeviceName1_1      jni.MethodID
+
+	clsusbInterface                     *jni.GlobalRef
+	midusbInterfaceDescribeContents     jni.MethodID
+	midusbInterfaceGetAlternateSetting  jni.MethodID
+	midusbInterfaceGetEndpoint          jni.MethodID
+	midusbInterfaceGetEndpointCount     jni.MethodID
+	midusbInterfaceGetId                jni.MethodID
+	midusbInterfaceGetInterfaceClass    jni.MethodID
+	midusbInterfaceGetInterfaceProtocol jni.MethodID
+	midusbInterfaceGetInterfaceSubclass jni.MethodID
+	midusbInterfaceGetName              jni.MethodID
+	midusbInterfaceToString             jni.MethodID
+	midusbInterfaceWriteToParcel        jni.MethodID
+
+	clsusbManager                          *jni.GlobalRef
+	midusbManagerGetAccessoryList          jni.MethodID
+	midusbManagerHasPermission1            jni.MethodID
+	midusbManagerHasPermission1_1          jni.MethodID
+	midusbManagerOpenAccessory             jni.MethodID
+	midusbManagerOpenAccessoryInputStream  jni.MethodID
+	midusbManagerOpenAccessoryOutputStream jni.MethodID
+	midusbManagerOpenDevice                jni.MethodID
+	midusbManagerRequestPermission2        jni.MethodID
+	midusbManagerRequestPermission2_1      jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -120,186 +120,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/hardware/usb/UsbInterface")
-	if err != nil {
-		return fmt.Errorf("find class android.hardware.usb.UsbInterface: %w", err)
-	}
-	clsusbInterface = env.NewGlobalRef(&c.Object)
-
-	midusbInterfaceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.describeContents")
-	}
-
-	midusbInterfaceGetAlternateSetting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getAlternateSetting", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.getAlternateSetting")
-	}
-
-	midusbInterfaceGetEndpoint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getEndpoint", "(I)Landroid/hardware/usb/UsbEndpoint;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.getEndpoint")
-	}
-
-	midusbInterfaceGetEndpointCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getEndpointCount", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.getEndpointCount")
-	}
-
-	midusbInterfaceGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.getId")
-	}
-
-	midusbInterfaceGetInterfaceClass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getInterfaceClass", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.getInterfaceClass")
-	}
-
-	midusbInterfaceGetInterfaceProtocol, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getInterfaceProtocol", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.getInterfaceProtocol")
-	}
-
-	midusbInterfaceGetInterfaceSubclass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getInterfaceSubclass", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.getInterfaceSubclass")
-	}
-
-	midusbInterfaceGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.getName")
-	}
-
-	midusbInterfaceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.toString")
-	}
-
-	midusbInterfaceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.writeToParcel")
-	}
-
-	c, err = env.FindClass("android/hardware/usb/UsbEndpoint")
-	if err != nil {
-		return fmt.Errorf("find class android.hardware.usb.UsbEndpoint: %w", err)
-	}
-	clsusbEndpoint = env.NewGlobalRef(&c.Object)
-
-	midusbEndpointDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.describeContents")
-	}
-
-	midusbEndpointGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getAddress", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.getAddress")
-	}
-
-	midusbEndpointGetAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getAttributes", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.getAttributes")
-	}
-
-	midusbEndpointGetDirection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getDirection", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.getDirection")
-	}
-
-	midusbEndpointGetEndpointNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getEndpointNumber", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.getEndpointNumber")
-	}
-
-	midusbEndpointGetInterval, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getInterval", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.getInterval")
-	}
-
-	midusbEndpointGetMaxPacketSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getMaxPacketSize", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.getMaxPacketSize")
-	}
-
-	midusbEndpointGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.getType")
-	}
-
-	midusbEndpointToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.toString")
-	}
-
-	midusbEndpointWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.writeToParcel")
-	}
 
 	c, err = env.FindClass("android/hardware/usb/UsbDeviceConnection")
 	if err != nil {
@@ -419,82 +239,90 @@ func doInit(env *jni.Env) error {
 		initSkipped = append(initSkipped, "android.hardware.usb.UsbDeviceConnection.setInterface")
 	}
 
-	c, err = env.FindClass("android/hardware/usb/UsbManager")
+	c, err = env.FindClass("android/hardware/usb/UsbEndpoint")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.usb.UsbManager: %w", err)
+		return fmt.Errorf("find class android.hardware.usb.UsbEndpoint: %w", err)
 	}
-	clsusbManager = env.NewGlobalRef(&c.Object)
+	clsusbEndpoint = env.NewGlobalRef(&c.Object)
 
-	midusbManagerGetAccessoryList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "getAccessoryList", "()[Landroid/hardware/usb/UsbAccessory;")
+	midusbEndpointDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "describeContents", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.getAccessoryList")
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.describeContents")
 	}
 
-	midusbManagerHasPermission1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "hasPermission", "(Landroid/hardware/usb/UsbAccessory;)Z")
+	midusbEndpointGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getAddress", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.hasPermission")
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.getAddress")
 	}
 
-	midusbManagerHasPermission1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "hasPermission", "(Landroid/hardware/usb/UsbDevice;)Z")
+	midusbEndpointGetAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getAttributes", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.hasPermission")
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.getAttributes")
 	}
 
-	midusbManagerOpenAccessory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "openAccessory", "(Landroid/hardware/usb/UsbAccessory;)Landroid/os/ParcelFileDescriptor;")
+	midusbEndpointGetDirection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getDirection", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.openAccessory")
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.getDirection")
 	}
 
-	midusbManagerOpenAccessoryInputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "openAccessoryInputStream", "(Landroid/hardware/usb/UsbAccessory;)Ljava/io/InputStream;")
+	midusbEndpointGetEndpointNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getEndpointNumber", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.openAccessoryInputStream")
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.getEndpointNumber")
 	}
 
-	midusbManagerOpenAccessoryOutputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "openAccessoryOutputStream", "(Landroid/hardware/usb/UsbAccessory;)Ljava/io/OutputStream;")
+	midusbEndpointGetInterval, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getInterval", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.openAccessoryOutputStream")
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.getInterval")
 	}
 
-	midusbManagerOpenDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "openDevice", "(Landroid/hardware/usb/UsbDevice;)Landroid/hardware/usb/UsbDeviceConnection;")
+	midusbEndpointGetMaxPacketSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getMaxPacketSize", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.openDevice")
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.getMaxPacketSize")
 	}
 
-	midusbManagerRequestPermission2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "requestPermission", "(Landroid/hardware/usb/UsbAccessory;Landroid/app/PendingIntent;)V")
+	midusbEndpointGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getType", "()I")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.requestPermission")
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.getType")
 	}
 
-	midusbManagerRequestPermission2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "requestPermission", "(Landroid/hardware/usb/UsbDevice;Landroid/app/PendingIntent;)V")
+	midusbEndpointToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "toString", "()Ljava/lang/String;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.requestPermission")
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.toString")
+	}
+
+	midusbEndpointWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbEndpoint.writeToParcel")
 	}
 
 	c, err = env.FindClass("android/hardware/usb/UsbDevice")
@@ -677,6 +505,178 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.hardware.usb.UsbDevice.getDeviceName")
+	}
+
+	c, err = env.FindClass("android/hardware/usb/UsbInterface")
+	if err != nil {
+		return fmt.Errorf("find class android.hardware.usb.UsbInterface: %w", err)
+	}
+	clsusbInterface = env.NewGlobalRef(&c.Object)
+
+	midusbInterfaceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.describeContents")
+	}
+
+	midusbInterfaceGetAlternateSetting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getAlternateSetting", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.getAlternateSetting")
+	}
+
+	midusbInterfaceGetEndpoint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getEndpoint", "(I)Landroid/hardware/usb/UsbEndpoint;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.getEndpoint")
+	}
+
+	midusbInterfaceGetEndpointCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getEndpointCount", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.getEndpointCount")
+	}
+
+	midusbInterfaceGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getId", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.getId")
+	}
+
+	midusbInterfaceGetInterfaceClass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getInterfaceClass", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.getInterfaceClass")
+	}
+
+	midusbInterfaceGetInterfaceProtocol, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getInterfaceProtocol", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.getInterfaceProtocol")
+	}
+
+	midusbInterfaceGetInterfaceSubclass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getInterfaceSubclass", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.getInterfaceSubclass")
+	}
+
+	midusbInterfaceGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.getName")
+	}
+
+	midusbInterfaceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.toString")
+	}
+
+	midusbInterfaceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbInterface.writeToParcel")
+	}
+
+	c, err = env.FindClass("android/hardware/usb/UsbManager")
+	if err != nil {
+		return fmt.Errorf("find class android.hardware.usb.UsbManager: %w", err)
+	}
+	clsusbManager = env.NewGlobalRef(&c.Object)
+
+	midusbManagerGetAccessoryList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "getAccessoryList", "()[Landroid/hardware/usb/UsbAccessory;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.getAccessoryList")
+	}
+
+	midusbManagerHasPermission1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "hasPermission", "(Landroid/hardware/usb/UsbAccessory;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.hasPermission")
+	}
+
+	midusbManagerHasPermission1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "hasPermission", "(Landroid/hardware/usb/UsbDevice;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.hasPermission")
+	}
+
+	midusbManagerOpenAccessory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "openAccessory", "(Landroid/hardware/usb/UsbAccessory;)Landroid/os/ParcelFileDescriptor;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.openAccessory")
+	}
+
+	midusbManagerOpenAccessoryInputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "openAccessoryInputStream", "(Landroid/hardware/usb/UsbAccessory;)Ljava/io/InputStream;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.openAccessoryInputStream")
+	}
+
+	midusbManagerOpenAccessoryOutputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "openAccessoryOutputStream", "(Landroid/hardware/usb/UsbAccessory;)Ljava/io/OutputStream;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.openAccessoryOutputStream")
+	}
+
+	midusbManagerOpenDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "openDevice", "(Landroid/hardware/usb/UsbDevice;)Landroid/hardware/usb/UsbDeviceConnection;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.openDevice")
+	}
+
+	midusbManagerRequestPermission2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "requestPermission", "(Landroid/hardware/usb/UsbAccessory;Landroid/app/PendingIntent;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.requestPermission")
+	}
+
+	midusbManagerRequestPermission2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "requestPermission", "(Landroid/hardware/usb/UsbDevice;Landroid/app/PendingIntent;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.usb.UsbManager.requestPermission")
 	}
 
 	return nil

@@ -1,6 +1,55 @@
 package: lights
 go_import: github.com/xaionaro-go/jni/hardware/lights
 classes:
+    - java_class: android.hardware.lights.LightState
+      go_type: lightState
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getColor
+          go_name: GetColor
+          returns: int
+          error: true
+        - java_method: getPlayerId
+          go_name: GetPlayerId
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.hardware.lights.LightState$Builder
+      go_type: lightStateBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.hardware.lights.LightState
+          error: true
+        - java_method: setColor
+          go_name: SetColor
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.hardware.lights.LightState$Builder
+          error: true
+        - java_method: setPlayerId
+          go_name: SetPlayerId
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.hardware.lights.LightState$Builder
+          error: true
     - java_class: android.hardware.lights.Light
       go_type: light
       methods:
@@ -56,55 +105,6 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.hardware.lights.LightState
-      go_type: lightState
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getColor
-          go_name: GetColor
-          returns: int
-          error: true
-        - java_method: getPlayerId
-          go_name: GetPlayerId
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.hardware.lights.LightState$Builder
-      go_type: lightStateBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.hardware.lights.LightState
-          error: true
-        - java_method: setColor
-          go_name: SetColor
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.hardware.lights.LightState$Builder
-          error: true
-        - java_method: setPlayerId
-          go_name: SetPlayerId
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.hardware.lights.LightState$Builder
-          error: true
     - java_class: android.hardware.lights.LightsManager
       go_type: lightsManager
       obtain: system_service
@@ -117,23 +117,23 @@ constants:
       value: "0"
       go_type: int
     - go_name: LightCapabilityBrightness
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: LightCapabilityColorRgb
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: LightCapabilityRgb
       value: "0"
       go_type: int
     - go_name: LightTypeInput
-      value: "0"
+      value: "10001"
       go_type: int
     - go_name: LightTypeKeyboardBacklight
-      value: "0"
+      value: "10003"
       go_type: int
     - go_name: LightTypeMicrophone
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: LightTypePlayerId
-      value: "0"
+      value: "10002"
       go_type: int

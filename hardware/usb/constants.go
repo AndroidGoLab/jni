@@ -7,11 +7,11 @@ const (
 )
 
 const (
-	ActionUsbAccessoryAttached = ""
-	ActionUsbAccessoryDetached = ""
-	ActionUsbDeviceAttached    = ""
-	ActionUsbDeviceDetached    = ""
-	ExtraAccessory             = ""
-	ExtraDevice                = ""
-	ExtraPermissionGranted     = ""
+	ActionUsbAccessoryAttached = "android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
+	ActionUsbAccessoryDetached = "android.hardware.usb.action.USB_ACCESSORY_DETACHED"
+	ActionUsbDeviceAttached    = "android.hardware.usb.action.USB_DEVICE_ATTACHED"
+	ActionUsbDeviceDetached    = "android.hardware.usb.action.USB_DEVICE_DETACHED"
+	ExtraAccessory             = "accessory"
+	ExtraDevice                = "device"
+	ExtraPermissionGranted     = "permission"
 )

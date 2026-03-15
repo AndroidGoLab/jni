@@ -165,29 +165,29 @@ classes:
           error: true
 constants:
     - go_name: ExtraAssociation
-      value: '""'
+      value: '"android.companion.extra.ASSOCIATION"'
       go_type: string
     - go_name: ExtraDevice
-      value: '""'
+      value: '"android.companion.extra.DEVICE"'
       go_type: string
     - go_name: FlagCallMetadata
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ResultCanceled
       value: "0"
       go_type: int
     - go_name: ResultDiscoveryTimeout
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ResultInternalError
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: ResultOk
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: ResultSecurityError
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: ResultUserRejected
-      value: "0"
+      value: "1"
       go_type: int

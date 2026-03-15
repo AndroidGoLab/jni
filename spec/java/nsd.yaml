@@ -258,34 +258,34 @@ classes:
           error: true
 constants:
     - go_name: ActionNsdStateChanged
-      value: '""'
+      value: '"android.net.nsd.STATE_CHANGED"'
       go_type: string
     - go_name: ExtraNsdState
-      value: '""'
+      value: '"nsd_state"'
       go_type: string
     - go_name: FailureAlreadyActive
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: FailureBadParameters
-      value: "0"
+      value: "6"
       go_type: int
     - go_name: FailureInternalError
       value: "0"
       go_type: int
     - go_name: FailureMaxLimit
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: FailureOperationNotRunning
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: NsdStateDisabled
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: NsdStateEnabled
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ProtocolDnsSd
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: Creator
       value: "0"

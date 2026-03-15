@@ -22,27 +22,6 @@ var (
 
 	clscursor *jni.GlobalRef
 
-	clsuri                         *jni.GlobalRef
-	miduriCompareTo1               jni.MethodID
-	miduriEquals                   jni.MethodID
-	miduriGetBooleanQueryParameter jni.MethodID
-	miduriGetQueryParameter        jni.MethodID
-	miduriGetQueryParameterNames   jni.MethodID
-	miduriGetQueryParameters       jni.MethodID
-	miduriHashCode                 jni.MethodID
-	miduriIsAbsolute               jni.MethodID
-	miduriIsOpaque                 jni.MethodID
-	miduriNormalizeScheme          jni.MethodID
-	miduriCompareTo1_1             jni.MethodID
-	miduriDecode                   jni.MethodID
-	miduriEncode1                  jni.MethodID
-	miduriEncode2_1                jni.MethodID
-	miduriFromFile                 jni.MethodID
-	miduriFromParts                jni.MethodID
-	miduriParse                    jni.MethodID
-	miduriWithAppendedPath         jni.MethodID
-	miduriWriteToParcel            jni.MethodID
-
 	clscontentResolver                                   *jni.GlobalRef
 	midcontentResolverApplyBatch                         jni.MethodID
 	midcontentResolverCancelSync1_2                      jni.MethodID
@@ -80,6 +59,27 @@ var (
 	midcontentResolverValidateSyncExtrasBundle           jni.MethodID
 	midcontentResolverWrap1                              jni.MethodID
 	midcontentResolverWrap1_1                            jni.MethodID
+
+	clsuri                         *jni.GlobalRef
+	miduriCompareTo1               jni.MethodID
+	miduriEquals                   jni.MethodID
+	miduriGetBooleanQueryParameter jni.MethodID
+	miduriGetQueryParameter        jni.MethodID
+	miduriGetQueryParameterNames   jni.MethodID
+	miduriGetQueryParameters       jni.MethodID
+	miduriHashCode                 jni.MethodID
+	miduriIsAbsolute               jni.MethodID
+	miduriIsOpaque                 jni.MethodID
+	miduriNormalizeScheme          jni.MethodID
+	miduriCompareTo1_1             jni.MethodID
+	miduriDecode                   jni.MethodID
+	miduriEncode1                  jni.MethodID
+	miduriEncode2_1                jni.MethodID
+	miduriFromFile                 jni.MethodID
+	miduriFromParts                jni.MethodID
+	miduriParse                    jni.MethodID
+	miduriWithAppendedPath         jni.MethodID
+	miduriWriteToParcel            jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -111,164 +111,6 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("find class android.database.Cursor: %w", err)
 	}
 	clscursor = env.NewGlobalRef(&c.Object)
-
-	c, err = env.FindClass("android/net/Uri")
-	if err != nil {
-		return fmt.Errorf("find class android.net.Uri: %w", err)
-	}
-	clsuri = env.NewGlobalRef(&c.Object)
-
-	miduriCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "compareTo", "(Landroid/net/Uri;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.compareTo")
-	}
-
-	miduriEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.equals")
-	}
-
-	miduriGetBooleanQueryParameter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getBooleanQueryParameter", "(Ljava/lang/String;Z)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.getBooleanQueryParameter")
-	}
-
-	miduriGetQueryParameter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getQueryParameter", "(Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.getQueryParameter")
-	}
-
-	miduriGetQueryParameterNames, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getQueryParameterNames", "()Ljava/util/Set;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.getQueryParameterNames")
-	}
-
-	miduriGetQueryParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getQueryParameters", "(Ljava/lang/String;)Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.getQueryParameters")
-	}
-
-	miduriHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.hashCode")
-	}
-
-	miduriIsAbsolute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "isAbsolute", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.isAbsolute")
-	}
-
-	miduriIsOpaque, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "isOpaque", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.isOpaque")
-	}
-
-	miduriNormalizeScheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "normalizeScheme", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.normalizeScheme")
-	}
-
-	miduriCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "compareTo", "(Ljava/lang/Object;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.compareTo")
-	}
-
-	miduriDecode, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "decode", "(Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.decode")
-	}
-
-	miduriEncode1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "encode", "(Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.encode")
-	}
-
-	miduriEncode2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "encode", "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.encode")
-	}
-
-	miduriFromFile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "fromFile", "(Ljava/io/File;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.fromFile")
-	}
-
-	miduriFromParts, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "fromParts", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.fromParts")
-	}
-
-	miduriParse, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "parse", "(Ljava/lang/String;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.parse")
-	}
-
-	miduriWithAppendedPath, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "withAppendedPath", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.withAppendedPath")
-	}
-
-	miduriWriteToParcel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "writeToParcel", "(Landroid/os/Parcel;Landroid/net/Uri;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.net.Uri.writeToParcel")
-	}
 
 	c, err = env.FindClass("android/content/ContentResolver")
 	if err != nil {
@@ -562,6 +404,164 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.content.ContentResolver.wrap")
+	}
+
+	c, err = env.FindClass("android/net/Uri")
+	if err != nil {
+		return fmt.Errorf("find class android.net.Uri: %w", err)
+	}
+	clsuri = env.NewGlobalRef(&c.Object)
+
+	miduriCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "compareTo", "(Landroid/net/Uri;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.compareTo")
+	}
+
+	miduriEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.equals")
+	}
+
+	miduriGetBooleanQueryParameter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getBooleanQueryParameter", "(Ljava/lang/String;Z)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.getBooleanQueryParameter")
+	}
+
+	miduriGetQueryParameter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getQueryParameter", "(Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.getQueryParameter")
+	}
+
+	miduriGetQueryParameterNames, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getQueryParameterNames", "()Ljava/util/Set;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.getQueryParameterNames")
+	}
+
+	miduriGetQueryParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getQueryParameters", "(Ljava/lang/String;)Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.getQueryParameters")
+	}
+
+	miduriHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.hashCode")
+	}
+
+	miduriIsAbsolute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "isAbsolute", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.isAbsolute")
+	}
+
+	miduriIsOpaque, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "isOpaque", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.isOpaque")
+	}
+
+	miduriNormalizeScheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "normalizeScheme", "()Landroid/net/Uri;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.normalizeScheme")
+	}
+
+	miduriCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "compareTo", "(Ljava/lang/Object;)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.compareTo")
+	}
+
+	miduriDecode, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "decode", "(Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.decode")
+	}
+
+	miduriEncode1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "encode", "(Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.encode")
+	}
+
+	miduriEncode2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "encode", "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.encode")
+	}
+
+	miduriFromFile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "fromFile", "(Ljava/io/File;)Landroid/net/Uri;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.fromFile")
+	}
+
+	miduriFromParts, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "fromParts", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.fromParts")
+	}
+
+	miduriParse, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "parse", "(Ljava/lang/String;)Landroid/net/Uri;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.parse")
+	}
+
+	miduriWithAppendedPath, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "withAppendedPath", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.withAppendedPath")
+	}
+
+	miduriWriteToParcel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "writeToParcel", "(Landroid/os/Parcel;Landroid/net/Uri;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.Uri.writeToParcel")
 	}
 
 	return nil

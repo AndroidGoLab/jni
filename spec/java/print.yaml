@@ -29,60 +29,6 @@ classes:
               go_name: arg2
           returns: android.print.PrintJob
           error: true
-    - java_class: android.print.PrintJob
-      go_type: printJob
-      methods:
-        - java_method: cancel
-          go_name: Cancel
-          returns: void
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: android.print.PrintJobId
-          error: true
-        - java_method: getInfo
-          go_name: GetInfo
-          returns: android.print.PrintJobInfo
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isBlocked
-          go_name: IsBlocked
-          returns: boolean
-          error: true
-        - java_method: isCancelled
-          go_name: IsCancelled
-          returns: boolean
-          error: true
-        - java_method: isCompleted
-          go_name: IsCompleted
-          returns: boolean
-          error: true
-        - java_method: isFailed
-          go_name: IsFailed
-          returns: boolean
-          error: true
-        - java_method: isQueued
-          go_name: IsQueued
-          returns: boolean
-          error: true
-        - java_method: isStarted
-          go_name: IsStarted
-          returns: boolean
-          error: true
-        - java_method: restart
-          go_name: Restart
-          returns: void
-          error: true
     - java_class: android.print.PrintJobInfo
       go_type: printJobInfo
       methods:
@@ -156,28 +102,82 @@ classes:
               go_name: arg1
           returns: void
           error: true
+    - java_class: android.print.PrintJob
+      go_type: printJob
+      methods:
+        - java_method: cancel
+          go_name: Cancel
+          returns: void
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: android.print.PrintJobId
+          error: true
+        - java_method: getInfo
+          go_name: GetInfo
+          returns: android.print.PrintJobInfo
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isBlocked
+          go_name: IsBlocked
+          returns: boolean
+          error: true
+        - java_method: isCancelled
+          go_name: IsCancelled
+          returns: boolean
+          error: true
+        - java_method: isCompleted
+          go_name: IsCompleted
+          returns: boolean
+          error: true
+        - java_method: isFailed
+          go_name: IsFailed
+          returns: boolean
+          error: true
+        - java_method: isQueued
+          go_name: IsQueued
+          returns: boolean
+          error: true
+        - java_method: isStarted
+          go_name: IsStarted
+          returns: boolean
+          error: true
+        - java_method: restart
+          go_name: Restart
+          returns: void
+          error: true
 constants:
     - go_name: Creator
       value: "0"
       go_type: int
     - go_name: StateBlocked
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: StateCanceled
-      value: "0"
+      value: "7"
       go_type: int
     - go_name: StateCompleted
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: StateCreated
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: StateFailed
-      value: "0"
+      value: "6"
       go_type: int
     - go_name: StateQueued
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: StateStarted
-      value: "0"
+      value: "3"
       go_type: int

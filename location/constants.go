@@ -3,36 +3,36 @@
 package location
 
 const (
-	ConstellationBeidou  = 0
-	ConstellationGalileo = 0
-	ConstellationGlonass = 0
-	ConstellationGps     = 0
-	ConstellationIrnss   = 0
-	ConstellationQzss    = 0
-	ConstellationSbas    = 0
-	ConstellationUnknown = 0
-	Creator              = 0
-	FormatDegrees        = 0
-	FormatMinutes        = 0
-	FormatSeconds        = 0
+	ActionGnssCapabilitiesChanged = "android.location.action.GNSS_CAPABILITIES_CHANGED"
+	ExtraGnssCapabilities         = "android.location.extra.GNSS_CAPABILITIES"
+	ExtraLocationEnabled          = "android.location.extra.LOCATION_ENABLED"
+	ExtraProviderEnabled          = "android.location.extra.PROVIDER_ENABLED"
+	ExtraProviderName             = "android.location.extra.PROVIDER_NAME"
+	FusedProvider                 = "fused"
+	GpsProvider                   = "gps"
+	KeyFlushComplete              = "flushComplete"
+	KeyLocations                  = "locations"
+	KeyLocationChanged            = "location"
+	KeyProviderEnabled            = "providerEnabled"
+	KeyProximityEntering          = "entering"
+	KeyStatusChanged              = "status"
+	ModeChangedAction             = "android.location.MODE_CHANGED"
+	NetworkProvider               = "network"
+	PassiveProvider               = "passive"
+	ProvidersChangedAction        = "android.location.PROVIDERS_CHANGED"
 )
 
 const (
-	ActionGnssCapabilitiesChanged = ""
-	ExtraGnssCapabilities         = ""
-	ExtraLocationEnabled          = ""
-	ExtraProviderEnabled          = ""
-	ExtraProviderName             = ""
-	FusedProvider                 = ""
-	GpsProvider                   = ""
-	KeyFlushComplete              = ""
-	KeyLocations                  = ""
-	KeyLocationChanged            = ""
-	KeyProviderEnabled            = ""
-	KeyProximityEntering          = ""
-	KeyStatusChanged              = ""
-	ModeChangedAction             = ""
-	NetworkProvider               = ""
-	PassiveProvider               = ""
-	ProvidersChangedAction        = ""
+	Creator              = 0
+	FormatDegrees        = 0
+	FormatMinutes        = 1
+	FormatSeconds        = 2
+	ConstellationBeidou  = 5
+	ConstellationGalileo = 6
+	ConstellationGlonass = 3
+	ConstellationGps     = 1
+	ConstellationIrnss   = 7
+	ConstellationQzss    = 4
+	ConstellationSbas    = 2
+	ConstellationUnknown = 0
 )

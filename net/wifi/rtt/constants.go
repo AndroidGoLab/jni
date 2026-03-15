@@ -3,21 +3,21 @@
 package rtt
 
 const (
-	Creator                                  = 0
-	StatusFail                               = 0
-	StatusResponderDoesNotSupportIeee80211mc = 0
-	StatusSuccess                            = 0
-	Unspecified                              = 0
+	ActionWifiRttStateChanged                                = "android.net.wifi.rtt.action.WIFI_RTT_STATE_CHANGED"
+	CharacteristicsKeyBooleanLci                             = "key_lci"
+	CharacteristicsKeyBooleanLcr                             = "key_lcr"
+	CharacteristicsKeyBooleanNtbInitiator                    = "key_ntb_initiator"
+	CharacteristicsKeyBooleanOneSidedRtt                     = "key_one_sided_rtt"
+	CharacteristicsKeyBooleanRangingFrameProtectionSupported = "key_rnm_mfp_supported"
+	CharacteristicsKeyBooleanSecureHeLtfSupported            = "key_secure_he_ltf_supported"
+	CharacteristicsKeyBooleanStaResponder                    = "key_sta_responder"
+	CharacteristicsKeyIntMaxSupportedSecureHeLtfProtoVersion = "key_max_supported_secure_he_ltf_proto_ver"
 )
 
 const (
-	ActionWifiRttStateChanged                                = ""
-	CharacteristicsKeyBooleanLci                             = ""
-	CharacteristicsKeyBooleanLcr                             = ""
-	CharacteristicsKeyBooleanNtbInitiator                    = ""
-	CharacteristicsKeyBooleanOneSidedRtt                     = ""
-	CharacteristicsKeyBooleanRangingFrameProtectionSupported = ""
-	CharacteristicsKeyBooleanSecureHeLtfSupported            = ""
-	CharacteristicsKeyBooleanStaResponder                    = ""
-	CharacteristicsKeyIntMaxSupportedSecureHeLtfProtoVersion = ""
+	Creator                                  = 0
+	StatusFail                               = 1
+	StatusResponderDoesNotSupportIeee80211mc = 2
+	StatusSuccess                            = 0
+	Unspecified                              = -1
 )

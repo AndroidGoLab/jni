@@ -182,34 +182,34 @@ classes:
           error: true
 constants:
     - go_name: ActionNextAlarmClockChanged
-      value: '""'
+      value: '"android.app.action.NEXT_ALARM_CLOCK_CHANGED"'
       go_type: string
     - go_name: ActionScheduleExactAlarmPermissionStateChanged
-      value: '""'
+      value: '"android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED"'
       go_type: string
     - go_name: ElapsedRealtime
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: ElapsedRealtimeWakeup
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: IntervalDay
-      value: "0"
+      value: "86400000"
       go_type: int64
     - go_name: IntervalFifteenMinutes
-      value: "0"
+      value: "900000"
       go_type: int64
     - go_name: IntervalHalfDay
-      value: "0"
+      value: "43200000"
       go_type: int64
     - go_name: IntervalHalfHour
-      value: "0"
+      value: "1800000"
       go_type: int64
     - go_name: IntervalHour
-      value: "0"
+      value: "3600000"
       go_type: int64
     - go_name: Rtc
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: RtcWakeup
       value: "0"

@@ -20,26 +20,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsaudioDeviceInfo                              *jni.GlobalRef
-	midaudioDeviceInfoEquals                        jni.MethodID
-	midaudioDeviceInfoGetAddress                    jni.MethodID
-	midaudioDeviceInfoGetAudioDescriptors           jni.MethodID
-	midaudioDeviceInfoGetAudioProfiles              jni.MethodID
-	midaudioDeviceInfoGetChannelCounts              jni.MethodID
-	midaudioDeviceInfoGetChannelIndexMasks          jni.MethodID
-	midaudioDeviceInfoGetChannelMasks               jni.MethodID
-	midaudioDeviceInfoGetEncapsulationMetadataTypes jni.MethodID
-	midaudioDeviceInfoGetEncapsulationModes         jni.MethodID
-	midaudioDeviceInfoGetEncodings                  jni.MethodID
-	midaudioDeviceInfoGetId                         jni.MethodID
-	midaudioDeviceInfoGetProductName                jni.MethodID
-	midaudioDeviceInfoGetSampleRates                jni.MethodID
-	midaudioDeviceInfoGetSpeakerLayoutChannelMask   jni.MethodID
-	midaudioDeviceInfoGetType                       jni.MethodID
-	midaudioDeviceInfoHashCode                      jni.MethodID
-	midaudioDeviceInfoIsSink                        jni.MethodID
-	midaudioDeviceInfoIsSource                      jni.MethodID
-
 	clsaudioManager                                                *jni.GlobalRef
 	midaudioManagerAbandonAudioFocus                               jni.MethodID
 	midaudioManagerAbandonAudioFocusRequest                        jni.MethodID
@@ -138,6 +118,26 @@ var (
 	midaudioManagerGetPlaybackOffloadSupport                       jni.MethodID
 	midaudioManagerIsHapticPlaybackSupported                       jni.MethodID
 	midaudioManagerIsOffloadedPlaybackSupported                    jni.MethodID
+
+	clsaudioDeviceInfo                              *jni.GlobalRef
+	midaudioDeviceInfoEquals                        jni.MethodID
+	midaudioDeviceInfoGetAddress                    jni.MethodID
+	midaudioDeviceInfoGetAudioDescriptors           jni.MethodID
+	midaudioDeviceInfoGetAudioProfiles              jni.MethodID
+	midaudioDeviceInfoGetChannelCounts              jni.MethodID
+	midaudioDeviceInfoGetChannelIndexMasks          jni.MethodID
+	midaudioDeviceInfoGetChannelMasks               jni.MethodID
+	midaudioDeviceInfoGetEncapsulationMetadataTypes jni.MethodID
+	midaudioDeviceInfoGetEncapsulationModes         jni.MethodID
+	midaudioDeviceInfoGetEncodings                  jni.MethodID
+	midaudioDeviceInfoGetId                         jni.MethodID
+	midaudioDeviceInfoGetProductName                jni.MethodID
+	midaudioDeviceInfoGetSampleRates                jni.MethodID
+	midaudioDeviceInfoGetSpeakerLayoutChannelMask   jni.MethodID
+	midaudioDeviceInfoGetType                       jni.MethodID
+	midaudioDeviceInfoHashCode                      jni.MethodID
+	midaudioDeviceInfoIsSink                        jni.MethodID
+	midaudioDeviceInfoIsSource                      jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -163,156 +163,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/media/AudioDeviceInfo")
-	if err != nil {
-		return fmt.Errorf("find class android.media.AudioDeviceInfo: %w", err)
-	}
-	clsaudioDeviceInfo = env.NewGlobalRef(&c.Object)
-
-	midaudioDeviceInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.equals")
-	}
-
-	midaudioDeviceInfoGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getAddress", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getAddress")
-	}
-
-	midaudioDeviceInfoGetAudioDescriptors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getAudioDescriptors", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getAudioDescriptors")
-	}
-
-	midaudioDeviceInfoGetAudioProfiles, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getAudioProfiles", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getAudioProfiles")
-	}
-
-	midaudioDeviceInfoGetChannelCounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getChannelCounts", "()[I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getChannelCounts")
-	}
-
-	midaudioDeviceInfoGetChannelIndexMasks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getChannelIndexMasks", "()[I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getChannelIndexMasks")
-	}
-
-	midaudioDeviceInfoGetChannelMasks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getChannelMasks", "()[I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getChannelMasks")
-	}
-
-	midaudioDeviceInfoGetEncapsulationMetadataTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getEncapsulationMetadataTypes", "()[I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getEncapsulationMetadataTypes")
-	}
-
-	midaudioDeviceInfoGetEncapsulationModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getEncapsulationModes", "()[I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getEncapsulationModes")
-	}
-
-	midaudioDeviceInfoGetEncodings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getEncodings", "()[I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getEncodings")
-	}
-
-	midaudioDeviceInfoGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getId")
-	}
-
-	midaudioDeviceInfoGetProductName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getProductName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getProductName")
-	}
-
-	midaudioDeviceInfoGetSampleRates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getSampleRates", "()[I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getSampleRates")
-	}
-
-	midaudioDeviceInfoGetSpeakerLayoutChannelMask, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getSpeakerLayoutChannelMask", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getSpeakerLayoutChannelMask")
-	}
-
-	midaudioDeviceInfoGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getType")
-	}
-
-	midaudioDeviceInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.hashCode")
-	}
-
-	midaudioDeviceInfoIsSink, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "isSink", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.isSink")
-	}
-
-	midaudioDeviceInfoIsSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "isSource", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.isSource")
-	}
 
 	c, err = env.FindClass("android/media/AudioManager")
 	if err != nil {
@@ -1094,6 +944,156 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.media.AudioManager.isOffloadedPlaybackSupported")
+	}
+
+	c, err = env.FindClass("android/media/AudioDeviceInfo")
+	if err != nil {
+		return fmt.Errorf("find class android.media.AudioDeviceInfo: %w", err)
+	}
+	clsaudioDeviceInfo = env.NewGlobalRef(&c.Object)
+
+	midaudioDeviceInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.equals")
+	}
+
+	midaudioDeviceInfoGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getAddress", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getAddress")
+	}
+
+	midaudioDeviceInfoGetAudioDescriptors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getAudioDescriptors", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getAudioDescriptors")
+	}
+
+	midaudioDeviceInfoGetAudioProfiles, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getAudioProfiles", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getAudioProfiles")
+	}
+
+	midaudioDeviceInfoGetChannelCounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getChannelCounts", "()[I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getChannelCounts")
+	}
+
+	midaudioDeviceInfoGetChannelIndexMasks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getChannelIndexMasks", "()[I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getChannelIndexMasks")
+	}
+
+	midaudioDeviceInfoGetChannelMasks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getChannelMasks", "()[I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getChannelMasks")
+	}
+
+	midaudioDeviceInfoGetEncapsulationMetadataTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getEncapsulationMetadataTypes", "()[I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getEncapsulationMetadataTypes")
+	}
+
+	midaudioDeviceInfoGetEncapsulationModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getEncapsulationModes", "()[I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getEncapsulationModes")
+	}
+
+	midaudioDeviceInfoGetEncodings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getEncodings", "()[I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getEncodings")
+	}
+
+	midaudioDeviceInfoGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getId", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getId")
+	}
+
+	midaudioDeviceInfoGetProductName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getProductName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getProductName")
+	}
+
+	midaudioDeviceInfoGetSampleRates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getSampleRates", "()[I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getSampleRates")
+	}
+
+	midaudioDeviceInfoGetSpeakerLayoutChannelMask, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getSpeakerLayoutChannelMask", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getSpeakerLayoutChannelMask")
+	}
+
+	midaudioDeviceInfoGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getType", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.getType")
+	}
+
+	midaudioDeviceInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.hashCode")
+	}
+
+	midaudioDeviceInfoIsSink, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "isSink", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.isSink")
+	}
+
+	midaudioDeviceInfoIsSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "isSource", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.media.AudioDeviceInfo.isSource")
 	}
 
 	return nil

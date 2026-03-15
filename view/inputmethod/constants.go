@@ -3,13 +3,13 @@
 package inputmethod
 
 const (
-	HandwritingDelegateFlagHomeDelegatorAllowed = 0
-	HideImplicitOnly                            = 0
-	HideNotAlways                               = 0
-	ResultHidden                                = 0
-	ResultShown                                 = 0
-	ResultUnchangedHidden                       = 0
+	HandwritingDelegateFlagHomeDelegatorAllowed = 1
+	HideImplicitOnly                            = 1
+	HideNotAlways                               = 2
+	ResultHidden                                = 3
+	ResultShown                                 = 2
+	ResultUnchangedHidden                       = 1
 	ResultUnchangedShown                        = 0
-	ShowForced                                  = 0
-	ShowImplicit                                = 0
+	ShowForced                                  = 2
+	ShowImplicit                                = 1
 )

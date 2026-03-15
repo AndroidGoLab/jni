@@ -248,185 +248,185 @@ classes:
           error: true
 constants:
     - go_name: ActionChangeDefaultDialer
-      value: '""'
+      value: '"android.telecom.action.CHANGE_DEFAULT_DIALER"'
       go_type: string
     - go_name: ActionChangePhoneAccounts
-      value: '""'
+      value: '"android.telecom.action.CHANGE_PHONE_ACCOUNTS"'
       go_type: string
     - go_name: ActionConfigurePhoneAccount
-      value: '""'
+      value: '"android.telecom.action.CONFIGURE_PHONE_ACCOUNT"'
       go_type: string
     - go_name: ActionDefaultCallScreeningAppChanged
-      value: '""'
+      value: '"android.telecom.action.DEFAULT_CALL_SCREENING_APP_CHANGED"'
       go_type: string
     - go_name: ActionDefaultDialerChanged
-      value: '""'
+      value: '"android.telecom.action.DEFAULT_DIALER_CHANGED"'
       go_type: string
     - go_name: ActionIncomingCall
-      value: '""'
+      value: '"android.telecom.action.INCOMING_CALL"'
       go_type: string
     - go_name: ActionPhoneAccountRegistered
-      value: '""'
+      value: '"android.telecom.action.PHONE_ACCOUNT_REGISTERED"'
       go_type: string
     - go_name: ActionPhoneAccountUnregistered
-      value: '""'
+      value: '"android.telecom.action.PHONE_ACCOUNT_UNREGISTERED"'
       go_type: string
     - go_name: ActionPostCall
-      value: '""'
+      value: '"android.telecom.action.POST_CALL"'
       go_type: string
     - go_name: ActionShowCallAccessibilitySettings
-      value: '""'
+      value: '"android.telecom.action.SHOW_CALL_ACCESSIBILITY_SETTINGS"'
       go_type: string
     - go_name: ActionShowCallSettings
-      value: '""'
+      value: '"android.telecom.action.SHOW_CALL_SETTINGS"'
       go_type: string
     - go_name: ActionShowMissedCallsNotification
-      value: '""'
+      value: '"android.telecom.action.SHOW_MISSED_CALLS_NOTIFICATION"'
       go_type: string
     - go_name: ActionShowRespondViaSmsSettings
-      value: '""'
+      value: '"android.telecom.action.SHOW_RESPOND_VIA_SMS_SETTINGS"'
       go_type: string
     - go_name: DtmfCharacterPause
-      value: "0"
+      value: "44"
       go_type: int
     - go_name: DtmfCharacterWait
-      value: "0"
+      value: "59"
       go_type: int
     - go_name: DurationLong
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: DurationMedium
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: DurationShort
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: DurationVeryShort
       value: "0"
       go_type: int
     - go_name: ExtraCallBackNumber
-      value: '""'
+      value: '"android.telecom.extra.CALL_BACK_NUMBER"'
       go_type: string
     - go_name: ExtraCallDisconnectCause
-      value: '""'
+      value: '"android.telecom.extra.CALL_DISCONNECT_CAUSE"'
       go_type: string
     - go_name: ExtraCallDisconnectMessage
-      value: '""'
+      value: '"android.telecom.extra.CALL_DISCONNECT_MESSAGE"'
       go_type: string
     - go_name: ExtraCallDuration
-      value: '""'
+      value: '"android.telecom.extra.CALL_DURATION"'
       go_type: string
     - go_name: ExtraCallLogUri
-      value: '""'
+      value: '"android.telecom.extra.CALL_LOG_URI"'
       go_type: string
     - go_name: ExtraCallNetworkType
-      value: '""'
+      value: '"android.telecom.extra.CALL_NETWORK_TYPE"'
       go_type: string
     - go_name: ExtraCallSubject
-      value: '""'
+      value: '"android.telecom.extra.CALL_SUBJECT"'
       go_type: string
     - go_name: ExtraChangeDefaultDialerPackageName
-      value: '""'
+      value: '"android.telecom.extra.CHANGE_DEFAULT_DIALER_PACKAGE_NAME"'
       go_type: string
     - go_name: ExtraDefaultCallScreeningAppComponentName
-      value: '""'
+      value: '"android.telecom.extra.DEFAULT_CALL_SCREENING_APP_COMPONENT_NAME"'
       go_type: string
     - go_name: ExtraDisconnectCause
-      value: '""'
+      value: '"android.telecom.extra.DISCONNECT_CAUSE"'
       go_type: string
     - go_name: ExtraHandle
-      value: '""'
+      value: '"android.telecom.extra.HANDLE"'
       go_type: string
     - go_name: ExtraHasPicture
-      value: '""'
+      value: '"android.telecom.extra.HAS_PICTURE"'
       go_type: string
     - go_name: ExtraIncomingCallAddress
-      value: '""'
+      value: '"android.telecom.extra.INCOMING_CALL_ADDRESS"'
       go_type: string
     - go_name: ExtraIncomingCallExtras
-      value: '""'
+      value: '"android.telecom.extra.INCOMING_CALL_EXTRAS"'
       go_type: string
     - go_name: ExtraIncomingVideoState
-      value: '""'
+      value: '"android.telecom.extra.INCOMING_VIDEO_STATE"'
       go_type: string
     - go_name: ExtraIsDefaultCallScreeningApp
-      value: '""'
+      value: '"android.telecom.extra.IS_DEFAULT_CALL_SCREENING_APP"'
       go_type: string
     - go_name: ExtraLocation
-      value: '""'
+      value: '"android.telecom.extra.LOCATION"'
       go_type: string
     - go_name: ExtraNotificationCount
-      value: '""'
+      value: '"android.telecom.extra.NOTIFICATION_COUNT"'
       go_type: string
     - go_name: ExtraNotificationPhoneNumber
-      value: '""'
+      value: '"android.telecom.extra.NOTIFICATION_PHONE_NUMBER"'
       go_type: string
     - go_name: ExtraOutgoingCallExtras
-      value: '""'
+      value: '"android.telecom.extra.OUTGOING_CALL_EXTRAS"'
       go_type: string
     - go_name: ExtraOutgoingPicture
-      value: '""'
+      value: '"android.telecom.extra.OUTGOING_PICTURE"'
       go_type: string
     - go_name: ExtraPhoneAccountHandle
-      value: '""'
+      value: '"android.telecom.extra.PHONE_ACCOUNT_HANDLE"'
       go_type: string
     - go_name: ExtraPictureUri
-      value: '""'
+      value: '"android.telecom.extra.PICTURE_URI"'
       go_type: string
     - go_name: ExtraPriority
-      value: '""'
+      value: '"android.telecom.extra.PRIORITY"'
       go_type: string
     - go_name: ExtraStartCallWithRtt
-      value: '""'
+      value: '"android.telecom.extra.START_CALL_WITH_RTT"'
       go_type: string
     - go_name: ExtraStartCallWithSpeakerphone
-      value: '""'
+      value: '"android.telecom.extra.START_CALL_WITH_SPEAKERPHONE"'
       go_type: string
     - go_name: ExtraStartCallWithVideoState
-      value: '""'
+      value: '"android.telecom.extra.START_CALL_WITH_VIDEO_STATE"'
       go_type: string
     - go_name: ExtraUseAssistedDialing
-      value: '""'
+      value: '"android.telecom.extra.USE_ASSISTED_DIALING"'
       go_type: string
     - go_name: GatewayOriginalAddress
-      value: '""'
+      value: '"android.telecom.extra.GATEWAY_ORIGINAL_ADDRESS"'
       go_type: string
     - go_name: GatewayProviderPackage
-      value: '""'
+      value: '"android.telecom.extra.GATEWAY_PROVIDER_PACKAGE"'
       go_type: string
     - go_name: MetadataIncludeExternalCalls
-      value: '""'
+      value: '"android.telecom.INCLUDE_EXTERNAL_CALLS"'
       go_type: string
     - go_name: MetadataIncludeSelfManagedCalls
-      value: '""'
+      value: '"android.telecom.INCLUDE_SELF_MANAGED_CALLS"'
       go_type: string
     - go_name: MetadataInCallServiceCarModeUi
-      value: '""'
+      value: '"android.telecom.IN_CALL_SERVICE_CAR_MODE_UI"'
       go_type: string
     - go_name: MetadataInCallServiceRinging
-      value: '""'
+      value: '"android.telecom.IN_CALL_SERVICE_RINGING"'
       go_type: string
     - go_name: MetadataInCallServiceUi
-      value: '""'
+      value: '"android.telecom.IN_CALL_SERVICE_UI"'
       go_type: string
     - go_name: PresentationAllowed
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: PresentationPayphone
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: PresentationRestricted
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: PresentationUnavailable
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: PresentationUnknown
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: PriorityNormal
       value: "0"
       go_type: int
     - go_name: PriorityUrgent
-      value: "0"
+      value: "1"
       go_type: int

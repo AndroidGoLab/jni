@@ -3,17 +3,17 @@
 package calendar
 
 const (
-	AccountTypeLocal                      = ""
-	ActionEventReminder                   = ""
-	ActionHandleCustomEvent               = ""
-	ActionViewManagedProfileCalendarEvent = ""
-	Authority                             = ""
-	CallerIsSyncadapter                   = ""
-	ExtraCustomAppUri                     = ""
-	ExtraEventAllDay                      = ""
-	ExtraEventBeginTime                   = ""
-	ExtraEventEndTime                     = ""
-	ExtraEventId                          = ""
+	AccountTypeLocal                      = "LOCAL"
+	ActionEventReminder                   = "android.intent.action.EVENT_REMINDER"
+	ActionHandleCustomEvent               = "android.provider.calendar.action.HANDLE_CUSTOM_EVENT"
+	ActionViewManagedProfileCalendarEvent = "android.provider.calendar.action.VIEW_MANAGED_PROFILE_CALENDAR_EVENT"
+	Authority                             = "com.android.calendar"
+	CallerIsSyncadapter                   = "caller_is_syncadapter"
+	ExtraCustomAppUri                     = "customAppUri"
+	ExtraEventAllDay                      = "allDay"
+	ExtraEventBeginTime                   = "beginTime"
+	ExtraEventEndTime                     = "endTime"
+	ExtraEventId                          = "id"
 )
 
 const (

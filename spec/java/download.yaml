@@ -242,131 +242,131 @@ classes:
           error: true
 constants:
     - go_name: ActionDownloadComplete
-      value: '""'
+      value: '"android.intent.action.DOWNLOAD_COMPLETE"'
       go_type: string
     - go_name: ActionNotificationClicked
-      value: '""'
+      value: '"android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED"'
       go_type: string
     - go_name: ActionViewDownloads
-      value: '""'
+      value: '"android.intent.action.VIEW_DOWNLOADS"'
       go_type: string
     - go_name: ColumnBytesDownloadedSoFar
-      value: '""'
+      value: '"bytes_so_far"'
       go_type: string
     - go_name: ColumnDescription
-      value: '""'
+      value: '"description"'
       go_type: string
     - go_name: ColumnId
-      value: '""'
+      value: '"_id"'
       go_type: string
     - go_name: ColumnLastModifiedTimestamp
-      value: '""'
+      value: '"last_modified_timestamp"'
       go_type: string
     - go_name: ColumnLocalFilename
-      value: '""'
+      value: '"local_filename"'
       go_type: string
     - go_name: ColumnLocalUri
-      value: '""'
+      value: '"local_uri"'
       go_type: string
     - go_name: ColumnMediaproviderUri
-      value: '""'
+      value: '"mediaprovider_uri"'
       go_type: string
     - go_name: ColumnMediaType
-      value: '""'
+      value: '"media_type"'
       go_type: string
     - go_name: ColumnReason
-      value: '""'
+      value: '"reason"'
       go_type: string
     - go_name: ColumnStatus
-      value: '""'
+      value: '"status"'
       go_type: string
     - go_name: ColumnTitle
-      value: '""'
+      value: '"title"'
       go_type: string
     - go_name: ColumnTotalSizeBytes
-      value: '""'
+      value: '"total_size"'
       go_type: string
     - go_name: ColumnUri
-      value: '""'
+      value: '"uri"'
       go_type: string
     - go_name: ErrorCannotResume
-      value: "0"
+      value: "1008"
       go_type: int
     - go_name: ErrorDeviceNotFound
-      value: "0"
+      value: "1007"
       go_type: int
     - go_name: ErrorFileAlreadyExists
-      value: "0"
+      value: "1009"
       go_type: int
     - go_name: ErrorFileError
-      value: "0"
+      value: "1001"
       go_type: int
     - go_name: ErrorHttpDataError
-      value: "0"
+      value: "1004"
       go_type: int
     - go_name: ErrorInsufficientSpace
-      value: "0"
+      value: "1006"
       go_type: int
     - go_name: ErrorTooManyRedirects
-      value: "0"
+      value: "1005"
       go_type: int
     - go_name: ErrorUnhandledHttpCode
-      value: "0"
+      value: "1002"
       go_type: int
     - go_name: ErrorUnknown
-      value: "0"
+      value: "1000"
       go_type: int
     - go_name: ExtraDownloadId
-      value: '""'
+      value: '"extra_download_id"'
       go_type: string
     - go_name: ExtraNotificationClickDownloadIds
-      value: '""'
+      value: '"extra_click_download_ids"'
       go_type: string
     - go_name: IntentExtrasSortBySize
-      value: '""'
+      value: '"android.app.DownloadManager.extra_sortBySize"'
       go_type: string
     - go_name: PausedQueuedForWifi
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: PausedUnknown
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: PausedWaitingForNetwork
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: PausedWaitingToRetry
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: StatusFailed
-      value: "0"
+      value: "16"
       go_type: int
     - go_name: StatusPaused
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: StatusPending
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: StatusRunning
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: StatusSuccessful
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: NetworkMobile
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: NetworkWifi
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: VisibilityHidden
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: VisibilityVisible
       value: "0"
       go_type: int
     - go_name: VisibilityVisibleNotifyCompleted
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: VisibilityVisibleNotifyOnlyCompletion
-      value: "0"
+      value: "3"
       go_type: int

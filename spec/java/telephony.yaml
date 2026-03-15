@@ -859,274 +859,274 @@ classes:
           error: true
 constants:
     - go_name: ActionCarrierMessagingClientService
-      value: '""'
+      value: '"android.telephony.action.CARRIER_MESSAGING_CLIENT_SERVICE"'
       go_type: string
     - go_name: ActionCarrierSignalDefaultNetworkAvailable
-      value: '""'
+      value: '"android.telephony.action.CARRIER_SIGNAL_DEFAULT_NETWORK_AVAILABLE"'
       go_type: string
     - go_name: ActionCarrierSignalPcoValue
-      value: '""'
+      value: '"android.telephony.action.CARRIER_SIGNAL_PCO_VALUE"'
       go_type: string
     - go_name: ActionCarrierSignalRedirected
-      value: '""'
+      value: '"android.telephony.action.CARRIER_SIGNAL_REDIRECTED"'
       go_type: string
     - go_name: ActionCarrierSignalRequestNetworkFailed
-      value: '""'
+      value: '"android.telephony.action.CARRIER_SIGNAL_REQUEST_NETWORK_FAILED"'
       go_type: string
     - go_name: ActionCarrierSignalReset
-      value: '""'
+      value: '"android.telephony.action.CARRIER_SIGNAL_RESET"'
       go_type: string
     - go_name: ActionConfigureVoicemail
-      value: '""'
+      value: '"android.telephony.action.CONFIGURE_VOICEMAIL"'
       go_type: string
     - go_name: ActionMultiSimConfigChanged
-      value: '""'
+      value: '"android.telephony.action.MULTI_SIM_CONFIG_CHANGED"'
       go_type: string
     - go_name: ActionNetworkCountryChanged
-      value: '""'
+      value: '"android.telephony.action.NETWORK_COUNTRY_CHANGED"'
       go_type: string
     - go_name: ActionPhoneStateChanged
-      value: '""'
+      value: '"android.intent.action.PHONE_STATE"'
       go_type: string
     - go_name: ActionResetMobileNetworkSettings
-      value: '""'
+      value: '"android.telephony.action.RESET_MOBILE_NETWORK_SETTINGS"'
       go_type: string
     - go_name: ActionRespondViaMessage
-      value: '""'
+      value: '"android.intent.action.RESPOND_VIA_MESSAGE"'
       go_type: string
     - go_name: ActionSecretCode
-      value: '""'
+      value: '"android.telephony.action.SECRET_CODE"'
       go_type: string
     - go_name: ActionShowVoicemailNotification
-      value: '""'
+      value: '"android.telephony.action.SHOW_VOICEMAIL_NOTIFICATION"'
       go_type: string
     - go_name: ActionSubscriptionCarrierIdentityChanged
-      value: '""'
+      value: '"android.telephony.action.SUBSCRIPTION_CARRIER_IDENTITY_CHANGED"'
       go_type: string
     - go_name: ActionSubscriptionSpecificCarrierIdentityChanged
-      value: '""'
+      value: '"android.telephony.action.SUBSCRIPTION_SPECIFIC_CARRIER_IDENTITY_CHANGED"'
       go_type: string
     - go_name: AllowedNetworkTypesReasonCarrier
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: AllowedNetworkTypesReasonUser
       value: "0"
       go_type: int
     - go_name: ApptypeCsim
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: ApptypeIsim
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: ApptypeRuim
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: ApptypeSim
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ApptypeUnknown
       value: "0"
       go_type: int
     - go_name: ApptypeUsim
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: AuthtypeEapAka
-      value: "0"
+      value: "129"
       go_type: int
     - go_name: AuthtypeEapSim
-      value: "0"
+      value: "128"
       go_type: int
     - go_name: AuthtypeGbaBootstrap
-      value: "0"
+      value: "132"
       go_type: int
     - go_name: AuthtypeGbaNafKeyExternal
-      value: "0"
+      value: "133"
       go_type: int
     - go_name: CallComposerStatusBusinessOnly
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: CallComposerStatusOff
       value: "0"
       go_type: int
     - go_name: CallComposerStatusOn
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: CallStateIdle
       value: "0"
       go_type: int
     - go_name: CallStateOffhook
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: CallStateRinging
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: CapabilitySlicingConfigSupported
-      value: '""'
+      value: '"CAPABILITY_SLICING_CONFIG_SUPPORTED"'
       go_type: string
     - go_name: CarrierRestrictionStatusNotRestricted
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: CarrierRestrictionStatusRestricted
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: CarrierRestrictionStatusRestrictedToCaller
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: CarrierRestrictionStatusUnknown
       value: "0"
       go_type: int
     - go_name: CdmaRoamingModeAffiliated
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: CdmaRoamingModeAny
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: CdmaRoamingModeHome
       value: "0"
       go_type: int
     - go_name: CdmaRoamingModeRadioDefault
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: DataActivityDormant
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: DataActivityIn
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: DataActivityInout
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: DataActivityNone
       value: "0"
       go_type: int
     - go_name: DataActivityOut
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: DataConnected
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: DataConnecting
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: DataDisconnected
       value: "0"
       go_type: int
     - go_name: DataDisconnecting
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: DataEnabledReasonCarrier
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: DataEnabledReasonOverride
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: DataEnabledReasonPolicy
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: DataEnabledReasonThermal
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: DataEnabledReasonUnknown
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: DataEnabledReasonUser
       value: "0"
       go_type: int
     - go_name: DataHandoverInProgress
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: DataSuspended
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: DataUnknown
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: DefaultPortIndex
       value: "0"
       go_type: int
     - go_name: EriFlash
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: EriOff
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: EriOn
       value: "0"
       go_type: int
     - go_name: EventDisplayEmergencyMessage
-      value: '""'
+      value: '"android.telephony.event.DISPLAY_EMERGENCY_MESSAGE"'
       go_type: string
     - go_name: ExtraActiveSimSupportedCount
-      value: '""'
+      value: '"android.telephony.extra.ACTIVE_SIM_SUPPORTED_COUNT"'
       go_type: string
     - go_name: ExtraApnProtocol
-      value: '""'
+      value: '"android.telephony.extra.APN_PROTOCOL"'
       go_type: string
     - go_name: ExtraApnType
-      value: '""'
+      value: '"android.telephony.extra.APN_TYPE"'
       go_type: string
     - go_name: ExtraCallVoicemailIntent
-      value: '""'
+      value: '"android.telephony.extra.CALL_VOICEMAIL_INTENT"'
       go_type: string
     - go_name: ExtraCarrierId
-      value: '""'
+      value: '"android.telephony.extra.CARRIER_ID"'
       go_type: string
     - go_name: ExtraCarrierName
-      value: '""'
+      value: '"android.telephony.extra.CARRIER_NAME"'
       go_type: string
     - go_name: ExtraDataFailCause
-      value: '""'
+      value: '"android.telephony.extra.DATA_FAIL_CAUSE"'
       go_type: string
     - go_name: ExtraDefaultNetworkAvailable
-      value: '""'
+      value: '"android.telephony.extra.DEFAULT_NETWORK_AVAILABLE"'
       go_type: string
     - go_name: ExtraEmergencyCallToSatelliteHandoverType
-      value: '""'
+      value: '"android.telephony.extra.EMERGENCY_CALL_TO_SATELLITE_HANDOVER_TYPE"'
       go_type: string
     - go_name: ExtraEmergencyCallToSatelliteLaunchIntent
-      value: '""'
+      value: '"android.telephony.extra.EMERGENCY_CALL_TO_SATELLITE_LAUNCH_INTENT"'
       go_type: string
     - go_name: ExtraHidePublicSettings
-      value: '""'
+      value: '"android.telephony.extra.HIDE_PUBLIC_SETTINGS"'
       go_type: string
     - go_name: ExtraIncomingNumber
-      value: '""'
+      value: '"incoming_number"'
       go_type: string
     - go_name: ExtraIsRefresh
-      value: '""'
+      value: '"android.telephony.extra.IS_REFRESH"'
       go_type: string
     - go_name: ExtraLastKnownNetworkCountry
-      value: '""'
+      value: '"android.telephony.extra.LAST_KNOWN_NETWORK_COUNTRY"'
       go_type: string
     - go_name: ExtraLaunchVoicemailSettingsIntent
-      value: '""'
+      value: '"android.telephony.extra.LAUNCH_VOICEMAIL_SETTINGS_INTENT"'
       go_type: string
     - go_name: ExtraNetworkCountry
-      value: '""'
+      value: '"android.telephony.extra.NETWORK_COUNTRY"'
       go_type: string
     - go_name: ExtraNotificationCount
-      value: '""'
+      value: '"android.telephony.extra.NOTIFICATION_COUNT"'
       go_type: string
     - go_name: ExtraPcoId
-      value: '""'
+      value: '"android.telephony.extra.PCO_ID"'
       go_type: string
     - go_name: ExtraPcoValue
-      value: '""'
+      value: '"android.telephony.extra.PCO_VALUE"'
       go_type: string
     - go_name: ExtraPhoneAccountHandle
-      value: '""'
+      value: '"android.telephony.extra.PHONE_ACCOUNT_HANDLE"'
       go_type: string
     - go_name: ExtraRedirectionUrl
-      value: '""'
+      value: '"android.telephony.extra.REDIRECTION_URL"'
       go_type: string
     - go_name: ExtraSpecificCarrierId
-      value: '""'
+      value: '"android.telephony.extra.SPECIFIC_CARRIER_ID"'
       go_type: string
     - go_name: ExtraSpecificCarrierName
-      value: '""'
+      value: '"android.telephony.extra.SPECIFIC_CARRIER_NAME"'
       go_type: string
     - go_name: ExtraState
-      value: '""'
+      value: '"state"'
       go_type: string
     - go_name: ExtraStateIdle
       value: '""'
@@ -1138,320 +1138,320 @@ constants:
       value: '""'
       go_type: string
     - go_name: ExtraSubscriptionId
-      value: '""'
+      value: '"android.telephony.extra.SUBSCRIPTION_ID"'
       go_type: string
     - go_name: ExtraVoicemailNumber
-      value: '""'
+      value: '"android.telephony.extra.VOICEMAIL_NUMBER"'
       go_type: string
     - go_name: IncludeLocationDataCoarse
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: IncludeLocationDataFine
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: IncludeLocationDataNone
       value: "0"
       go_type: int
     - go_name: MetadataHideVoicemailSettingsMenu
-      value: '""'
+      value: '"android.telephony.HIDE_VOICEMAIL_SETTINGS_MENU"'
       go_type: string
     - go_name: MultisimAllowed
       value: "0"
       go_type: int
     - go_name: MultisimNotSupportedByCarrier
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: MultisimNotSupportedByHardware
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: NetworkSelectionModeAuto
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: NetworkSelectionModeManual
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: NetworkSelectionModeUnknown
       value: "0"
       go_type: int
     - go_name: NetworkType1xrtt
-      value: "0"
+      value: "7"
       go_type: int
     - go_name: NetworkTypeBitmask1xrtt
-      value: "0"
+      value: "64"
       go_type: int64
     - go_name: NetworkTypeBitmaskCdma
-      value: "0"
+      value: "8"
       go_type: int64
     - go_name: NetworkTypeBitmaskEdge
-      value: "0"
+      value: "2"
       go_type: int64
     - go_name: NetworkTypeBitmaskEhrpd
-      value: "0"
+      value: "8192"
       go_type: int64
     - go_name: NetworkTypeBitmaskEvdo0
-      value: "0"
+      value: "16"
       go_type: int64
     - go_name: NetworkTypeBitmaskEvdoA
-      value: "0"
+      value: "32"
       go_type: int64
     - go_name: NetworkTypeBitmaskEvdoB
-      value: "0"
+      value: "2048"
       go_type: int64
     - go_name: NetworkTypeBitmaskGprs
-      value: "0"
+      value: "1"
       go_type: int64
     - go_name: NetworkTypeBitmaskGsm
-      value: "0"
+      value: "32768"
       go_type: int64
     - go_name: NetworkTypeBitmaskHsdpa
-      value: "0"
+      value: "128"
       go_type: int64
     - go_name: NetworkTypeBitmaskHspa
-      value: "0"
+      value: "512"
       go_type: int64
     - go_name: NetworkTypeBitmaskHspap
-      value: "0"
+      value: "16384"
       go_type: int64
     - go_name: NetworkTypeBitmaskHsupa
-      value: "0"
+      value: "256"
       go_type: int64
     - go_name: NetworkTypeBitmaskIwlan
-      value: "0"
+      value: "131072"
       go_type: int64
     - go_name: NetworkTypeBitmaskLte
-      value: "0"
+      value: "4096"
       go_type: int64
     - go_name: NetworkTypeBitmaskLteCa
-      value: "0"
+      value: "262144"
       go_type: int64
     - go_name: NetworkTypeBitmaskNr
-      value: "0"
+      value: "524288"
       go_type: int64
     - go_name: NetworkTypeBitmaskTdScdma
-      value: "0"
+      value: "65536"
       go_type: int64
     - go_name: NetworkTypeBitmaskUmts
-      value: "0"
+      value: "4"
       go_type: int64
     - go_name: NetworkTypeBitmaskUnknown
       value: "0"
       go_type: int64
     - go_name: NetworkTypeCdma
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: NetworkTypeEdge
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: NetworkTypeEhrpd
-      value: "0"
+      value: "14"
       go_type: int
     - go_name: NetworkTypeEvdo0
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: NetworkTypeEvdoA
-      value: "0"
+      value: "6"
       go_type: int
     - go_name: NetworkTypeEvdoB
-      value: "0"
+      value: "12"
       go_type: int
     - go_name: NetworkTypeGprs
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: NetworkTypeGsm
-      value: "0"
+      value: "16"
       go_type: int
     - go_name: NetworkTypeHsdpa
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: NetworkTypeHspa
-      value: "0"
+      value: "10"
       go_type: int
     - go_name: NetworkTypeHspap
-      value: "0"
+      value: "15"
       go_type: int
     - go_name: NetworkTypeHsupa
-      value: "0"
+      value: "9"
       go_type: int
     - go_name: NetworkTypeIden
-      value: "0"
+      value: "11"
       go_type: int
     - go_name: NetworkTypeIwlan
-      value: "0"
+      value: "18"
       go_type: int
     - go_name: NetworkTypeLte
-      value: "0"
+      value: "13"
       go_type: int
     - go_name: NetworkTypeNr
-      value: "0"
+      value: "20"
       go_type: int
     - go_name: NetworkTypeTdScdma
-      value: "0"
+      value: "17"
       go_type: int
     - go_name: NetworkTypeUmts
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: NetworkTypeUnknown
       value: "0"
       go_type: int
     - go_name: PhoneTypeCdma
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: PhoneTypeGsm
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: PhoneTypeNone
       value: "0"
       go_type: int
     - go_name: PhoneTypeSip
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: PremiumCapabilityPrioritizeLatency
-      value: "0"
+      value: "34"
       go_type: int
     - go_name: PurchasePremiumCapabilityResultAlreadyInProgress
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: PurchasePremiumCapabilityResultAlreadyPurchased
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: PurchasePremiumCapabilityResultCarrierDisabled
-      value: "0"
+      value: "7"
       go_type: int
     - go_name: PurchasePremiumCapabilityResultCarrierError
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: PurchasePremiumCapabilityResultEntitlementCheckFailed
-      value: "0"
+      value: "13"
       go_type: int
     - go_name: PurchasePremiumCapabilityResultFeatureNotSupported
-      value: "0"
+      value: "10"
       go_type: int
     - go_name: PurchasePremiumCapabilityResultNetworkNotAvailable
-      value: "0"
+      value: "12"
       go_type: int
     - go_name: PurchasePremiumCapabilityResultNotDefaultDataSubscription
-      value: "0"
+      value: "14"
       go_type: int
     - go_name: PurchasePremiumCapabilityResultNotForeground
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: PurchasePremiumCapabilityResultPendingNetworkSetup
-      value: "0"
+      value: "15"
       go_type: int
     - go_name: PurchasePremiumCapabilityResultRequestFailed
-      value: "0"
+      value: "11"
       go_type: int
     - go_name: PurchasePremiumCapabilityResultSuccess
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: PurchasePremiumCapabilityResultThrottled
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: PurchasePremiumCapabilityResultTimeout
-      value: "0"
+      value: "9"
       go_type: int
     - go_name: PurchasePremiumCapabilityResultUserCanceled
-      value: "0"
+      value: "6"
       go_type: int
     - go_name: PurchasePremiumCapabilityResultUserDisabled
-      value: "0"
+      value: "16"
       go_type: int
     - go_name: SetOpportunisticSubInactiveSubscription
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: SetOpportunisticSubNoOpportunisticSubAvailable
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: SetOpportunisticSubRemoteServiceException
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: SetOpportunisticSubSuccess
       value: "0"
       go_type: int
     - go_name: SetOpportunisticSubValidationFailed
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: SimStateAbsent
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: SimStateCardIoError
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: SimStateCardRestricted
-      value: "0"
+      value: "9"
       go_type: int
     - go_name: SimStateNetworkLocked
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: SimStateNotReady
-      value: "0"
+      value: "6"
       go_type: int
     - go_name: SimStatePermDisabled
-      value: "0"
+      value: "7"
       go_type: int
     - go_name: SimStatePinRequired
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: SimStatePukRequired
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: SimStateReady
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: SimStateUnknown
       value: "0"
       go_type: int
     - go_name: UninitializedCardId
-      value: "0"
+      value: "-2"
       go_type: int
     - go_name: UnknownCarrierId
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: UnsupportedCardId
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: UpdateAvailableNetworksAborted
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: UpdateAvailableNetworksDisableModemFail
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: UpdateAvailableNetworksEnableModemFail
-      value: "0"
+      value: "6"
       go_type: int
     - go_name: UpdateAvailableNetworksInvalidArguments
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: UpdateAvailableNetworksMultipleNetworksNotSupported
-      value: "0"
+      value: "7"
       go_type: int
     - go_name: UpdateAvailableNetworksNoCarrierPrivilege
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: UpdateAvailableNetworksNoOpportunisticSubAvailable
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: UpdateAvailableNetworksRemoteServiceException
-      value: "0"
+      value: "9"
       go_type: int
     - go_name: UpdateAvailableNetworksServiceIsDisabled
-      value: "0"
+      value: "10"
       go_type: int
     - go_name: UpdateAvailableNetworksSuccess
       value: "0"
       go_type: int
     - go_name: UpdateAvailableNetworksUnknownFailure
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: UssdErrorServiceUnavail
-      value: "0"
+      value: "-2"
       go_type: int
     - go_name: UssdReturnFailure
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: VvmTypeCvvm
-      value: '""'
+      value: '"vvm_type_cvvm"'
       go_type: string
     - go_name: VvmTypeOmtp
-      value: '""'
+      value: '"vvm_type_omtp"'
       go_type: string

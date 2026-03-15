@@ -187,9 +187,28 @@ func addConstants(spec *SpecFile, jc *JavapClass) {
 	for _, c := range jc.Constants {
 		spec.Constants = append(spec.Constants, SpecConstant{
 			GoName: javaConstantToGoName(c.Name),
-			Value:  inferConstantDefault(c.JavaType),
+			Value:  formatConstantValue(c),
 			GoType: javaTypeToGoType(c.JavaType),
 		})
+	}
+}
+
+// formatConstantValue returns a YAML-ready representation of the constant's
+// value. If javap provided a ConstantValue attribute, that is used; otherwise
+// a type-appropriate placeholder is returned.
+func formatConstantValue(c JavapConstant) string {
+	if c.Value == "" {
+		return inferConstantDefault(c.JavaType)
+	}
+	switch c.JavaType {
+	case "java.lang.String":
+		return `"` + c.Value + `"`
+	case "long":
+		// javap outputs long values with a trailing "l" suffix (e.g. "86400000l")
+		// which is not valid Go syntax — strip it.
+		return strings.TrimSuffix(c.Value, "l")
+	default:
+		return c.Value
 	}
 }
 

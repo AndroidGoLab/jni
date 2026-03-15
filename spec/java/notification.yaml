@@ -632,143 +632,143 @@ constants:
       value: "0"
       go_type: int
     - go_name: DefaultChannelId
-      value: '""'
+      value: '"miscellaneous"'
       go_type: string
     - go_name: EditConversation
-      value: '""'
+      value: '"conversation"'
       go_type: string
     - go_name: EditImportance
-      value: '""'
+      value: '"importance"'
       go_type: string
     - go_name: EditLauncher
-      value: '""'
+      value: '"launcher"'
       go_type: string
     - go_name: EditLockedDevice
-      value: '""'
+      value: '"locked"'
       go_type: string
     - go_name: EditSound
-      value: '""'
+      value: '"sound"'
       go_type: string
     - go_name: EditVibration
-      value: '""'
+      value: '"vibration"'
       go_type: string
     - go_name: EditZen
-      value: '""'
+      value: '"zen"'
       go_type: string
     - go_name: ActionAppBlockStateChanged
-      value: '""'
+      value: '"android.app.action.APP_BLOCK_STATE_CHANGED"'
       go_type: string
     - go_name: ActionAutomaticZenRule
-      value: '""'
+      value: '"android.app.action.AUTOMATIC_ZEN_RULE"'
       go_type: string
     - go_name: ActionAutomaticZenRuleStatusChanged
-      value: '""'
+      value: '"android.app.action.AUTOMATIC_ZEN_RULE_STATUS_CHANGED"'
       go_type: string
     - go_name: ActionConsolidatedNotificationPolicyChanged
-      value: '""'
+      value: '"android.app.action.CONSOLIDATED_NOTIFICATION_POLICY_CHANGED"'
       go_type: string
     - go_name: ActionInterruptionFilterChanged
-      value: '""'
+      value: '"android.app.action.INTERRUPTION_FILTER_CHANGED"'
       go_type: string
     - go_name: ActionNotificationChannelBlockStateChanged
-      value: '""'
+      value: '"android.app.action.NOTIFICATION_CHANNEL_BLOCK_STATE_CHANGED"'
       go_type: string
     - go_name: ActionNotificationChannelGroupBlockStateChanged
-      value: '""'
+      value: '"android.app.action.NOTIFICATION_CHANNEL_GROUP_BLOCK_STATE_CHANGED"'
       go_type: string
     - go_name: ActionNotificationPolicyAccessGrantedChanged
-      value: '""'
+      value: '"android.app.action.NOTIFICATION_POLICY_ACCESS_GRANTED_CHANGED"'
       go_type: string
     - go_name: ActionNotificationPolicyChanged
-      value: '""'
+      value: '"android.app.action.NOTIFICATION_POLICY_CHANGED"'
       go_type: string
     - go_name: AutomaticRuleStatusActivated
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: AutomaticRuleStatusDeactivated
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: AutomaticRuleStatusDisabled
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: AutomaticRuleStatusEnabled
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: AutomaticRuleStatusRemoved
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: AutomaticRuleStatusUnknown
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: BubblePreferenceAll
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: BubblePreferenceNone
       value: "0"
       go_type: int
     - go_name: BubblePreferenceSelected
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ExtraAutomaticRuleId
-      value: '""'
+      value: '"android.app.extra.AUTOMATIC_RULE_ID"'
       go_type: string
     - go_name: ExtraAutomaticZenRuleId
-      value: '""'
+      value: '"android.app.extra.AUTOMATIC_ZEN_RULE_ID"'
       go_type: string
     - go_name: ExtraAutomaticZenRuleStatus
-      value: '""'
+      value: '"android.app.extra.AUTOMATIC_ZEN_RULE_STATUS"'
       go_type: string
     - go_name: ExtraBlockedState
-      value: '""'
+      value: '"android.app.extra.BLOCKED_STATE"'
       go_type: string
     - go_name: ExtraNotificationChannelGroupId
-      value: '""'
+      value: '"android.app.extra.NOTIFICATION_CHANNEL_GROUP_ID"'
       go_type: string
     - go_name: ExtraNotificationChannelId
-      value: '""'
+      value: '"android.app.extra.NOTIFICATION_CHANNEL_ID"'
       go_type: string
     - go_name: ExtraNotificationPolicy
-      value: '""'
+      value: '"android.app.extra.NOTIFICATION_POLICY"'
       go_type: string
     - go_name: ImportanceDefault
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: ImportanceHigh
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: ImportanceLow
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ImportanceMax
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: ImportanceMin
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ImportanceNone
       value: "0"
       go_type: int
     - go_name: ImportanceUnspecified
-      value: "0"
+      value: "-1000"
       go_type: int
     - go_name: InterruptionFilterAlarms
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: InterruptionFilterAll
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: InterruptionFilterNone
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: InterruptionFilterPriority
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: InterruptionFilterUnknown
       value: "0"
       go_type: int
     - go_name: MetaDataAutomaticRuleType
-      value: '""'
+      value: '"android.service.zen.automatic.ruleType"'
       go_type: string
     - go_name: MetaDataRuleInstanceLimit
-      value: '""'
+      value: '"android.service.zen.automatic.ruleInstanceLimit"'
       go_type: string

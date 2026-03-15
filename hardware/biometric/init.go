@@ -20,12 +20,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsbiometricManager                          *jni.GlobalRef
-	midbiometricManagerCanAuthenticate0          jni.MethodID
-	midbiometricManagerCanAuthenticate1_1        jni.MethodID
-	midbiometricManagerGetLastAuthenticationTime jni.MethodID
-	midbiometricManagerGetStrings                jni.MethodID
-
 	clsbiometricPrompt                         *jni.GlobalRef
 	midbiometricPromptAuthenticate4            jni.MethodID
 	midbiometricPromptAuthenticate3_1          jni.MethodID
@@ -53,6 +47,12 @@ var (
 	midbiometricPromptBuilderSetNegativeButton          jni.MethodID
 	midbiometricPromptBuilderSetSubtitle                jni.MethodID
 	midbiometricPromptBuilderSetTitle                   jni.MethodID
+
+	clsbiometricManager                          *jni.GlobalRef
+	midbiometricManagerCanAuthenticate0          jni.MethodID
+	midbiometricManagerCanAuthenticate1_1        jni.MethodID
+	midbiometricManagerGetLastAuthenticationTime jni.MethodID
+	midbiometricManagerGetStrings                jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -78,44 +78,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/hardware/biometrics/BiometricManager")
-	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.BiometricManager: %w", err)
-	}
-	clsbiometricManager = env.NewGlobalRef(&c.Object)
-
-	midbiometricManagerCanAuthenticate0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricManager)), "canAuthenticate", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricManager.canAuthenticate")
-	}
-
-	midbiometricManagerCanAuthenticate1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricManager)), "canAuthenticate", "(I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricManager.canAuthenticate")
-	}
-
-	midbiometricManagerGetLastAuthenticationTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricManager)), "getLastAuthenticationTime", "(I)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricManager.getLastAuthenticationTime")
-	}
-
-	midbiometricManagerGetStrings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricManager)), "getStrings", "(I)Landroid/hardware/biometrics/BiometricManager$Strings;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricManager.getStrings")
-	}
 
 	c, err = env.FindClass("android/hardware/biometrics/BiometricPrompt")
 	if err != nil {
@@ -319,6 +281,44 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setTitle")
+	}
+
+	c, err = env.FindClass("android/hardware/biometrics/BiometricManager")
+	if err != nil {
+		return fmt.Errorf("find class android.hardware.biometrics.BiometricManager: %w", err)
+	}
+	clsbiometricManager = env.NewGlobalRef(&c.Object)
+
+	midbiometricManagerCanAuthenticate0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricManager)), "canAuthenticate", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricManager.canAuthenticate")
+	}
+
+	midbiometricManagerCanAuthenticate1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricManager)), "canAuthenticate", "(I)I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricManager.canAuthenticate")
+	}
+
+	midbiometricManagerGetLastAuthenticationTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricManager)), "getLastAuthenticationTime", "(I)J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricManager.getLastAuthenticationTime")
+	}
+
+	midbiometricManagerGetStrings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricManager)), "getStrings", "(I)Landroid/hardware/biometrics/BiometricManager$Strings;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricManager.getStrings")
 	}
 
 	return nil

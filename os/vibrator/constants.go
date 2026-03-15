@@ -3,7 +3,7 @@
 package vibrator
 
 const (
-	VibrationEffectSupportNo      = 0
+	VibrationEffectSupportNo      = 2
 	VibrationEffectSupportUnknown = 0
-	VibrationEffectSupportYes     = 0
+	VibrationEffectSupportYes     = 1
 )

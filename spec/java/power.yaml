@@ -214,89 +214,89 @@ classes:
           error: true
 constants:
     - go_name: AcquireCausesWakeup
-      value: "0"
+      value: "268435456"
       go_type: int
     - go_name: ActionDeviceIdleModeChanged
-      value: '""'
+      value: '"android.os.action.DEVICE_IDLE_MODE_CHANGED"'
       go_type: string
     - go_name: ActionDeviceLightIdleModeChanged
-      value: '""'
+      value: '"android.os.action.LIGHT_DEVICE_IDLE_MODE_CHANGED"'
       go_type: string
     - go_name: ActionLowPowerStandbyEnabledChanged
-      value: '""'
+      value: '"android.os.action.LOW_POWER_STANDBY_ENABLED_CHANGED"'
       go_type: string
     - go_name: ActionLowPowerStandbyPolicyChanged
-      value: '""'
+      value: '"android.os.action.LOW_POWER_STANDBY_POLICY_CHANGED"'
       go_type: string
     - go_name: ActionPowerSaveModeChanged
-      value: '""'
+      value: '"android.os.action.POWER_SAVE_MODE_CHANGED"'
       go_type: string
     - go_name: FeatureWakeOnLanInLowPowerStandby
-      value: '""'
+      value: '"com.android.lowpowerstandby.WAKE_ON_LAN"'
       go_type: string
     - go_name: FullWakeLock
-      value: "0"
+      value: "26"
       go_type: int
     - go_name: LocationModeAllDisabledWhenScreenOff
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: LocationModeForegroundOnly
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: LocationModeGpsDisabledWhenScreenOff
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: LocationModeNoChange
       value: "0"
       go_type: int
     - go_name: LocationModeThrottleRequestsWhenScreenOff
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: LowPowerStandbyAllowedReasonOngoingCall
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: LowPowerStandbyAllowedReasonTempPowerSaveAllowlist
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: LowPowerStandbyAllowedReasonVoiceInteraction
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: OnAfterRelease
-      value: "0"
+      value: "536870912"
       go_type: int
     - go_name: PartialWakeLock
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ProximityScreenOffWakeLock
-      value: "0"
+      value: "32"
       go_type: int
     - go_name: ReleaseFlagWaitForNoProximity
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ScreenBrightWakeLock
-      value: "0"
+      value: "10"
       go_type: int
     - go_name: ScreenDimWakeLock
-      value: "0"
+      value: "6"
       go_type: int
     - go_name: ThermalStatusCritical
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: ThermalStatusEmergency
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: ThermalStatusLight
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ThermalStatusModerate
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ThermalStatusNone
       value: "0"
       go_type: int
     - go_name: ThermalStatusSevere
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: ThermalStatusShutdown
-      value: "0"
+      value: "6"
       go_type: int

@@ -1,6 +1,32 @@
 package: omapi
 go_import: github.com/xaionaro-go/jni/se/omapi
 classes:
+    - java_class: android.se.omapi.SEService
+      go_type: sEService
+      methods:
+        - java_method: getReaders
+          go_name: GetReaders
+          returns: android.se.omapi.Reader[]
+          error: true
+        - java_method: getUiccReader
+          go_name: GetUiccReader
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.se.omapi.Reader
+          error: true
+        - java_method: getVersion
+          go_name: GetVersion
+          returns: String
+          error: true
+        - java_method: isConnected
+          go_name: IsConnected
+          returns: boolean
+          error: true
+        - java_method: shutdown
+          go_name: Shutdown
+          returns: void
+          error: true
     - java_class: android.se.omapi.Channel
       go_type: channel
       methods:
@@ -57,32 +83,6 @@ classes:
         - java_method: openSession
           go_name: OpenSession
           returns: android.se.omapi.Session
-          error: true
-    - java_class: android.se.omapi.SEService
-      go_type: sEService
-      methods:
-        - java_method: getReaders
-          go_name: GetReaders
-          returns: android.se.omapi.Reader[]
-          error: true
-        - java_method: getUiccReader
-          go_name: GetUiccReader
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.se.omapi.Reader
-          error: true
-        - java_method: getVersion
-          go_name: GetVersion
-          returns: String
-          error: true
-        - java_method: isConnected
-          go_name: IsConnected
-          returns: boolean
-          error: true
-        - java_method: shutdown
-          go_name: Shutdown
-          returns: void
           error: true
     - java_class: android.se.omapi.Session
       go_type: session
@@ -141,11 +141,11 @@ classes:
           error: true
 constants:
     - go_name: ActionSecureElementStateChanged
-      value: '""'
+      value: '"android.se.omapi.action.SECURE_ELEMENT_STATE_CHANGED"'
       go_type: string
     - go_name: ExtraReaderName
-      value: '""'
+      value: '"android.se.omapi.extra.READER_NAME"'
       go_type: string
     - go_name: ExtraReaderState
-      value: '""'
+      value: '"android.se.omapi.extra.READER_STATE"'
       go_type: string

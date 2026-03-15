@@ -3,16 +3,16 @@
 package companion
 
 const (
-	ExtraAssociation = ""
-	ExtraDevice      = ""
+	ExtraAssociation = "android.companion.extra.ASSOCIATION"
+	ExtraDevice      = "android.companion.extra.DEVICE"
 )
 
 const (
-	FlagCallMetadata       = 0
+	FlagCallMetadata       = 1
 	ResultCanceled         = 0
-	ResultDiscoveryTimeout = 0
-	ResultInternalError    = 0
-	ResultOk               = 0
-	ResultSecurityError    = 0
-	ResultUserRejected     = 0
+	ResultDiscoveryTimeout = 2
+	ResultInternalError    = 3
+	ResultOk               = -1
+	ResultSecurityError    = 4
+	ResultUserRejected     = 1
 )

@@ -20,34 +20,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clspdfRenderer                             *jni.GlobalRef
-	midpdfRendererClose                        jni.MethodID
-	midpdfRendererGetDocumentLinearizationType jni.MethodID
-	midpdfRendererGetPageCount                 jni.MethodID
-	midpdfRendererGetPdfFormType               jni.MethodID
-	midpdfRendererOpenPage                     jni.MethodID
-	midpdfRendererShouldScaleForPrinting       jni.MethodID
-	midpdfRendererWrite                        jni.MethodID
-
-	clspdfRendererPage                            *jni.GlobalRef
-	midpdfRendererPageApplyEdit                   jni.MethodID
-	midpdfRendererPageClose                       jni.MethodID
-	midpdfRendererPageGetFormWidgetInfoAtIndex    jni.MethodID
-	midpdfRendererPageGetFormWidgetInfoAtPosition jni.MethodID
-	midpdfRendererPageGetFormWidgetInfos0         jni.MethodID
-	midpdfRendererPageGetFormWidgetInfos1_1       jni.MethodID
-	midpdfRendererPageGetGotoLinks                jni.MethodID
-	midpdfRendererPageGetHeight                   jni.MethodID
-	midpdfRendererPageGetImageContents            jni.MethodID
-	midpdfRendererPageGetIndex                    jni.MethodID
-	midpdfRendererPageGetLinkContents             jni.MethodID
-	midpdfRendererPageGetTextContents             jni.MethodID
-	midpdfRendererPageGetWidth                    jni.MethodID
-	midpdfRendererPageRender4                     jni.MethodID
-	midpdfRendererPageRender4_1                   jni.MethodID
-	midpdfRendererPageSearchText                  jni.MethodID
-	midpdfRendererPageSelectContent               jni.MethodID
-
 	clsbitmap                       *jni.GlobalRef
 	midbitmapAsShared               jni.MethodID
 	midbitmapCompress               jni.MethodID
@@ -120,6 +92,34 @@ var (
 	midbitmapCreateScaledBitmap     jni.MethodID
 	midbitmapWrapHardwareBuffer     jni.MethodID
 
+	clspdfRenderer                             *jni.GlobalRef
+	midpdfRendererClose                        jni.MethodID
+	midpdfRendererGetDocumentLinearizationType jni.MethodID
+	midpdfRendererGetPageCount                 jni.MethodID
+	midpdfRendererGetPdfFormType               jni.MethodID
+	midpdfRendererOpenPage                     jni.MethodID
+	midpdfRendererShouldScaleForPrinting       jni.MethodID
+	midpdfRendererWrite                        jni.MethodID
+
+	clspdfRendererPage                            *jni.GlobalRef
+	midpdfRendererPageApplyEdit                   jni.MethodID
+	midpdfRendererPageClose                       jni.MethodID
+	midpdfRendererPageGetFormWidgetInfoAtIndex    jni.MethodID
+	midpdfRendererPageGetFormWidgetInfoAtPosition jni.MethodID
+	midpdfRendererPageGetFormWidgetInfos0         jni.MethodID
+	midpdfRendererPageGetFormWidgetInfos1_1       jni.MethodID
+	midpdfRendererPageGetGotoLinks                jni.MethodID
+	midpdfRendererPageGetHeight                   jni.MethodID
+	midpdfRendererPageGetImageContents            jni.MethodID
+	midpdfRendererPageGetIndex                    jni.MethodID
+	midpdfRendererPageGetLinkContents             jni.MethodID
+	midpdfRendererPageGetTextContents             jni.MethodID
+	midpdfRendererPageGetWidth                    jni.MethodID
+	midpdfRendererPageRender4                     jni.MethodID
+	midpdfRendererPageRender4_1                   jni.MethodID
+	midpdfRendererPageSearchText                  jni.MethodID
+	midpdfRendererPageSelectContent               jni.MethodID
+
 	clsparcelFileDescriptor                         *jni.GlobalRef
 	midparcelFileDescriptorCanDetectErrors          jni.MethodID
 	midparcelFileDescriptorCheckError               jni.MethodID
@@ -169,210 +169,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/graphics/pdf/PdfRenderer")
-	if err != nil {
-		return fmt.Errorf("find class android.graphics.pdf.PdfRenderer: %w", err)
-	}
-	clspdfRenderer = env.NewGlobalRef(&c.Object)
-
-	midpdfRendererClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "close", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.close")
-	}
-
-	midpdfRendererGetDocumentLinearizationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "getDocumentLinearizationType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getDocumentLinearizationType")
-	}
-
-	midpdfRendererGetPageCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "getPageCount", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getPageCount")
-	}
-
-	midpdfRendererGetPdfFormType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "getPdfFormType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getPdfFormType")
-	}
-
-	midpdfRendererOpenPage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "openPage", "(I)Landroid/graphics/pdf/PdfRenderer$Page;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.openPage")
-	}
-
-	midpdfRendererShouldScaleForPrinting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "shouldScaleForPrinting", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.shouldScaleForPrinting")
-	}
-
-	midpdfRendererWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "write", "(Landroid/os/ParcelFileDescriptor;Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.write")
-	}
-
-	c, err = env.FindClass("android/graphics/pdf/PdfRenderer$Page")
-	if err != nil {
-		return fmt.Errorf("find class android.graphics.pdf.PdfRenderer$Page: %w", err)
-	}
-	clspdfRendererPage = env.NewGlobalRef(&c.Object)
-
-	midpdfRendererPageApplyEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "applyEdit", "(Landroid/graphics/pdf/models/FormEditRecord;)Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.applyEdit")
-	}
-
-	midpdfRendererPageClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "close", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.close")
-	}
-
-	midpdfRendererPageGetFormWidgetInfoAtIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getFormWidgetInfoAtIndex", "(I)Landroid/graphics/pdf/models/FormWidgetInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfoAtIndex")
-	}
-
-	midpdfRendererPageGetFormWidgetInfoAtPosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getFormWidgetInfoAtPosition", "(II)Landroid/graphics/pdf/models/FormWidgetInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfoAtPosition")
-	}
-
-	midpdfRendererPageGetFormWidgetInfos0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getFormWidgetInfos", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfos")
-	}
-
-	midpdfRendererPageGetFormWidgetInfos1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getFormWidgetInfos", "([I)Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfos")
-	}
-
-	midpdfRendererPageGetGotoLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getGotoLinks", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getGotoLinks")
-	}
-
-	midpdfRendererPageGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getHeight", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getHeight")
-	}
-
-	midpdfRendererPageGetImageContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getImageContents", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getImageContents")
-	}
-
-	midpdfRendererPageGetIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getIndex", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getIndex")
-	}
-
-	midpdfRendererPageGetLinkContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getLinkContents", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getLinkContents")
-	}
-
-	midpdfRendererPageGetTextContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getTextContents", "()Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getTextContents")
-	}
-
-	midpdfRendererPageGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getWidth", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getWidth")
-	}
-
-	midpdfRendererPageRender4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "render", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Matrix;Landroid/graphics/pdf/RenderParams;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.render")
-	}
-
-	midpdfRendererPageRender4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "render", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Matrix;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.render")
-	}
-
-	midpdfRendererPageSearchText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "searchText", "(Ljava/lang/String;)Ljava/util/List;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.searchText")
-	}
-
-	midpdfRendererPageSelectContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "selectContent", "(Landroid/graphics/pdf/models/selection/SelectionBoundary;Landroid/graphics/pdf/models/selection/SelectionBoundary;)Landroid/graphics/pdf/models/selection/PageSelection;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.selectContent")
-	}
 
 	c, err = env.FindClass("android/graphics/Bitmap")
 	if err != nil {
@@ -938,6 +734,210 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.graphics.Bitmap.wrapHardwareBuffer")
+	}
+
+	c, err = env.FindClass("android/graphics/pdf/PdfRenderer")
+	if err != nil {
+		return fmt.Errorf("find class android.graphics.pdf.PdfRenderer: %w", err)
+	}
+	clspdfRenderer = env.NewGlobalRef(&c.Object)
+
+	midpdfRendererClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "close", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.close")
+	}
+
+	midpdfRendererGetDocumentLinearizationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "getDocumentLinearizationType", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getDocumentLinearizationType")
+	}
+
+	midpdfRendererGetPageCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "getPageCount", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getPageCount")
+	}
+
+	midpdfRendererGetPdfFormType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "getPdfFormType", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.getPdfFormType")
+	}
+
+	midpdfRendererOpenPage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "openPage", "(I)Landroid/graphics/pdf/PdfRenderer$Page;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.openPage")
+	}
+
+	midpdfRendererShouldScaleForPrinting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "shouldScaleForPrinting", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.shouldScaleForPrinting")
+	}
+
+	midpdfRendererWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRenderer)), "write", "(Landroid/os/ParcelFileDescriptor;Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer.write")
+	}
+
+	c, err = env.FindClass("android/graphics/pdf/PdfRenderer$Page")
+	if err != nil {
+		return fmt.Errorf("find class android.graphics.pdf.PdfRenderer$Page: %w", err)
+	}
+	clspdfRendererPage = env.NewGlobalRef(&c.Object)
+
+	midpdfRendererPageApplyEdit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "applyEdit", "(Landroid/graphics/pdf/models/FormEditRecord;)Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.applyEdit")
+	}
+
+	midpdfRendererPageClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "close", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.close")
+	}
+
+	midpdfRendererPageGetFormWidgetInfoAtIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getFormWidgetInfoAtIndex", "(I)Landroid/graphics/pdf/models/FormWidgetInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfoAtIndex")
+	}
+
+	midpdfRendererPageGetFormWidgetInfoAtPosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getFormWidgetInfoAtPosition", "(II)Landroid/graphics/pdf/models/FormWidgetInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfoAtPosition")
+	}
+
+	midpdfRendererPageGetFormWidgetInfos0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getFormWidgetInfos", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfos")
+	}
+
+	midpdfRendererPageGetFormWidgetInfos1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getFormWidgetInfos", "([I)Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getFormWidgetInfos")
+	}
+
+	midpdfRendererPageGetGotoLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getGotoLinks", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getGotoLinks")
+	}
+
+	midpdfRendererPageGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getHeight", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getHeight")
+	}
+
+	midpdfRendererPageGetImageContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getImageContents", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getImageContents")
+	}
+
+	midpdfRendererPageGetIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getIndex", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getIndex")
+	}
+
+	midpdfRendererPageGetLinkContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getLinkContents", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getLinkContents")
+	}
+
+	midpdfRendererPageGetTextContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getTextContents", "()Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getTextContents")
+	}
+
+	midpdfRendererPageGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "getWidth", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.getWidth")
+	}
+
+	midpdfRendererPageRender4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "render", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Matrix;Landroid/graphics/pdf/RenderParams;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.render")
+	}
+
+	midpdfRendererPageRender4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "render", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Matrix;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.render")
+	}
+
+	midpdfRendererPageSearchText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "searchText", "(Ljava/lang/String;)Ljava/util/List;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.searchText")
+	}
+
+	midpdfRendererPageSelectContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspdfRendererPage)), "selectContent", "(Landroid/graphics/pdf/models/selection/SelectionBoundary;Landroid/graphics/pdf/models/selection/SelectionBoundary;)Landroid/graphics/pdf/models/selection/PageSelection;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.graphics.pdf.PdfRenderer$Page.selectContent")
 	}
 
 	c, err = env.FindClass("android/os/ParcelFileDescriptor")

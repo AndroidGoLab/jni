@@ -38,137 +38,137 @@ classes:
           error: true
 constants:
     - go_name: ActionCharging
-      value: '""'
+      value: '"android.os.action.CHARGING"'
       go_type: string
     - go_name: ActionDischarging
-      value: '""'
+      value: '"android.os.action.DISCHARGING"'
       go_type: string
     - go_name: BatteryCapacityLevelCritical
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: BatteryCapacityLevelFull
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: BatteryCapacityLevelHigh
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: BatteryCapacityLevelLow
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: BatteryCapacityLevelNormal
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: BatteryCapacityLevelUnknown
       value: "0"
       go_type: int
     - go_name: BatteryCapacityLevelUnsupported
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: BatteryHealthCold
-      value: "0"
+      value: "7"
       go_type: int
     - go_name: BatteryHealthDead
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: BatteryHealthGood
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: BatteryHealthOverheat
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: BatteryHealthOverVoltage
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: BatteryHealthUnknown
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: BatteryHealthUnspecifiedFailure
-      value: "0"
+      value: "6"
       go_type: int
     - go_name: BatteryPluggedAc
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: BatteryPluggedDock
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: BatteryPluggedUsb
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: BatteryPluggedWireless
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: BatteryPropertyCapacity
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: BatteryPropertyChargeCounter
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: BatteryPropertyCurrentAverage
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: BatteryPropertyCurrentNow
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: BatteryPropertyEnergyCounter
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: BatteryPropertyStatus
-      value: "0"
+      value: "6"
       go_type: int
     - go_name: BatteryStatusCharging
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: BatteryStatusDischarging
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: BatteryStatusFull
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: BatteryStatusNotCharging
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: BatteryStatusUnknown
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ExtraBatteryLow
-      value: '""'
+      value: '"battery_low"'
       go_type: string
     - go_name: ExtraCapacityLevel
-      value: '""'
+      value: '"android.os.extra.CAPACITY_LEVEL"'
       go_type: string
     - go_name: ExtraChargingStatus
-      value: '""'
+      value: '"android.os.extra.CHARGING_STATUS"'
       go_type: string
     - go_name: ExtraCycleCount
-      value: '""'
+      value: '"android.os.extra.CYCLE_COUNT"'
       go_type: string
     - go_name: ExtraHealth
-      value: '""'
+      value: '"health"'
       go_type: string
     - go_name: ExtraIconSmall
-      value: '""'
+      value: '"icon-small"'
       go_type: string
     - go_name: ExtraLevel
-      value: '""'
+      value: '"level"'
       go_type: string
     - go_name: ExtraPlugged
-      value: '""'
+      value: '"plugged"'
       go_type: string
     - go_name: ExtraPresent
-      value: '""'
+      value: '"present"'
       go_type: string
     - go_name: ExtraScale
-      value: '""'
+      value: '"scale"'
       go_type: string
     - go_name: ExtraStatus
-      value: '""'
+      value: '"status"'
       go_type: string
     - go_name: ExtraTechnology
-      value: '""'
+      value: '"technology"'
       go_type: string
     - go_name: ExtraTemperature
-      value: '""'
+      value: '"temperature"'
       go_type: string
     - go_name: ExtraVoltage
-      value: '""'
+      value: '"voltage"'
       go_type: string

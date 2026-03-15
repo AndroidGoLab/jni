@@ -3,11 +3,11 @@
 package recorder
 
 const (
-	MediaErrorServerDied                    = 0
-	MediaRecorderErrorUnknown               = 0
-	MediaRecorderInfoMaxDurationReached     = 0
-	MediaRecorderInfoMaxFilesizeApproaching = 0
-	MediaRecorderInfoMaxFilesizeReached     = 0
-	MediaRecorderInfoNextOutputFileStarted  = 0
-	MediaRecorderInfoUnknown                = 0
+	MediaErrorServerDied                    = 100
+	MediaRecorderErrorUnknown               = 1
+	MediaRecorderInfoMaxDurationReached     = 800
+	MediaRecorderInfoMaxFilesizeApproaching = 802
+	MediaRecorderInfoMaxFilesizeReached     = 801
+	MediaRecorderInfoNextOutputFileStarted  = 803
+	MediaRecorderInfoUnknown                = 1
 )

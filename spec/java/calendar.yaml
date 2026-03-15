@@ -23,38 +23,38 @@ classes:
           error: true
 constants:
     - go_name: AccountTypeLocal
-      value: '""'
+      value: '"LOCAL"'
       go_type: string
     - go_name: ActionEventReminder
-      value: '""'
+      value: '"android.intent.action.EVENT_REMINDER"'
       go_type: string
     - go_name: ActionHandleCustomEvent
-      value: '""'
+      value: '"android.provider.calendar.action.HANDLE_CUSTOM_EVENT"'
       go_type: string
     - go_name: ActionViewManagedProfileCalendarEvent
-      value: '""'
+      value: '"android.provider.calendar.action.VIEW_MANAGED_PROFILE_CALENDAR_EVENT"'
       go_type: string
     - go_name: Authority
-      value: '""'
+      value: '"com.android.calendar"'
       go_type: string
     - go_name: CallerIsSyncadapter
-      value: '""'
+      value: '"caller_is_syncadapter"'
       go_type: string
     - go_name: ContentUri
       value: "0"
       go_type: int
     - go_name: ExtraCustomAppUri
-      value: '""'
+      value: '"customAppUri"'
       go_type: string
     - go_name: ExtraEventAllDay
-      value: '""'
+      value: '"allDay"'
       go_type: string
     - go_name: ExtraEventBeginTime
-      value: '""'
+      value: '"beginTime"'
       go_type: string
     - go_name: ExtraEventEndTime
-      value: '""'
+      value: '"endTime"'
       go_type: string
     - go_name: ExtraEventId
-      value: '""'
+      value: '"id"'
       go_type: string

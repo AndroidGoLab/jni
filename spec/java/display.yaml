@@ -37,11 +37,6 @@ classes:
           go_name: ToString
           returns: String
           error: true
-    - java_class: android.view.WindowManager
-      go_type: windowManager
-      obtain: system_service
-      service_name: window
-      close: true
     - java_class: android.view.Display
       go_type: display
       methods:
@@ -239,190 +234,195 @@ classes:
               go_name: arg0
           returns: void
           error: true
+    - java_class: android.view.WindowManager
+      go_type: windowManager
+      obtain: system_service
+      service_name: window
+      close: true
 constants:
     - go_name: Density140
-      value: "0"
+      value: "140"
       go_type: int
     - go_name: Density180
-      value: "0"
+      value: "180"
       go_type: int
     - go_name: Density200
-      value: "0"
+      value: "200"
       go_type: int
     - go_name: Density220
-      value: "0"
+      value: "220"
       go_type: int
     - go_name: Density260
-      value: "0"
+      value: "260"
       go_type: int
     - go_name: Density280
-      value: "0"
+      value: "280"
       go_type: int
     - go_name: Density300
-      value: "0"
+      value: "300"
       go_type: int
     - go_name: Density340
-      value: "0"
+      value: "340"
       go_type: int
     - go_name: Density360
-      value: "0"
+      value: "360"
       go_type: int
     - go_name: Density390
-      value: "0"
+      value: "390"
       go_type: int
     - go_name: Density400
-      value: "0"
+      value: "400"
       go_type: int
     - go_name: Density420
-      value: "0"
+      value: "420"
       go_type: int
     - go_name: Density440
-      value: "0"
+      value: "440"
       go_type: int
     - go_name: Density450
-      value: "0"
+      value: "450"
       go_type: int
     - go_name: Density520
-      value: "0"
+      value: "520"
       go_type: int
     - go_name: Density560
-      value: "0"
+      value: "560"
       go_type: int
     - go_name: Density600
-      value: "0"
+      value: "600"
       go_type: int
     - go_name: DensityDefault
-      value: "0"
+      value: "160"
       go_type: int
     - go_name: DensityDeviceStable
       value: "0"
       go_type: int
     - go_name: DensityHigh
-      value: "0"
+      value: "240"
       go_type: int
     - go_name: DensityLow
-      value: "0"
+      value: "120"
       go_type: int
     - go_name: DensityMedium
-      value: "0"
+      value: "160"
       go_type: int
     - go_name: DensityTv
-      value: "0"
+      value: "213"
       go_type: int
     - go_name: DensityXhigh
-      value: "0"
+      value: "320"
       go_type: int
     - go_name: DensityXxhigh
-      value: "0"
+      value: "480"
       go_type: int
     - go_name: DensityXxxhigh
-      value: "0"
-      go_type: int
-    - go_name: CompatSmallCoverScreenOptIn
-      value: "0"
-      go_type: int
-    - go_name: PropertyActivityEmbeddingAllowSystemOverride
-      value: '""'
-      go_type: string
-    - go_name: PropertyActivityEmbeddingSplitsEnabled
-      value: '""'
-      go_type: string
-    - go_name: PropertyCameraCompatAllowForceRotation
-      value: '""'
-      go_type: string
-    - go_name: PropertyCameraCompatAllowRefresh
-      value: '""'
-      go_type: string
-    - go_name: PropertyCameraCompatEnableRefreshViaPause
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowDisplayOrientationOverride
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowIgnoringOrientationRequestWhenLoopDetected
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowMinAspectRatioOverride
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowOrientationOverride
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowResizeableActivityOverrides
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowSandboxingViewBoundsApis
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowSmallCoverScreen
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowUserAspectRatioFullscreenOverride
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatAllowUserAspectRatioOverride
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatEnableFakeFocus
-      value: '""'
-      go_type: string
-    - go_name: PropertyCompatIgnoreRequestedOrientation
-      value: '""'
-      go_type: string
-    - go_name: PropertySupportsMultiInstanceSystemUi
-      value: '""'
-      go_type: string
-    - go_name: ScreenRecordingStateNotVisible
-      value: "0"
-      go_type: int
-    - go_name: ScreenRecordingStateVisible
-      value: "0"
+      value: "640"
       go_type: int
     - go_name: DefaultDisplay
       value: "0"
       go_type: int
     - go_name: FlagPresentation
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: FlagPrivate
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: FlagRound
-      value: "0"
+      value: "16"
       go_type: int
     - go_name: FlagSecure
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: FlagSupportsProtectedBuffers
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: FrameRateCategoryHigh
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: FrameRateCategoryNormal
       value: "0"
       go_type: int
     - go_name: InvalidDisplay
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: StateDoze
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: StateDozeSuspend
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: StateOff
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: StateOn
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: StateOnSuspend
-      value: "0"
+      value: "6"
       go_type: int
     - go_name: StateUnknown
       value: "0"
       go_type: int
     - go_name: StateVr
+      value: "5"
+      go_type: int
+    - go_name: CompatSmallCoverScreenOptIn
+      value: "1"
+      go_type: int
+    - go_name: PropertyActivityEmbeddingAllowSystemOverride
+      value: '"android.window.PROPERTY_ACTIVITY_EMBEDDING_ALLOW_SYSTEM_OVERRIDE"'
+      go_type: string
+    - go_name: PropertyActivityEmbeddingSplitsEnabled
+      value: '"android.window.PROPERTY_ACTIVITY_EMBEDDING_SPLITS_ENABLED"'
+      go_type: string
+    - go_name: PropertyCameraCompatAllowForceRotation
+      value: '"android.window.PROPERTY_CAMERA_COMPAT_ALLOW_FORCE_ROTATION"'
+      go_type: string
+    - go_name: PropertyCameraCompatAllowRefresh
+      value: '"android.window.PROPERTY_CAMERA_COMPAT_ALLOW_REFRESH"'
+      go_type: string
+    - go_name: PropertyCameraCompatEnableRefreshViaPause
+      value: '"android.window.PROPERTY_CAMERA_COMPAT_ENABLE_REFRESH_VIA_PAUSE"'
+      go_type: string
+    - go_name: PropertyCompatAllowDisplayOrientationOverride
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_DISPLAY_ORIENTATION_OVERRIDE"'
+      go_type: string
+    - go_name: PropertyCompatAllowIgnoringOrientationRequestWhenLoopDetected
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_IGNORING_ORIENTATION_REQUEST_WHEN_LOOP_DETECTED"'
+      go_type: string
+    - go_name: PropertyCompatAllowMinAspectRatioOverride
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_MIN_ASPECT_RATIO_OVERRIDE"'
+      go_type: string
+    - go_name: PropertyCompatAllowOrientationOverride
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE"'
+      go_type: string
+    - go_name: PropertyCompatAllowResizeableActivityOverrides
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES"'
+      go_type: string
+    - go_name: PropertyCompatAllowSandboxingViewBoundsApis
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_SANDBOXING_VIEW_BOUNDS_APIS"'
+      go_type: string
+    - go_name: PropertyCompatAllowSmallCoverScreen
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_SMALL_COVER_SCREEN"'
+      go_type: string
+    - go_name: PropertyCompatAllowUserAspectRatioFullscreenOverride
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_FULLSCREEN_OVERRIDE"'
+      go_type: string
+    - go_name: PropertyCompatAllowUserAspectRatioOverride
+      value: '"android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE"'
+      go_type: string
+    - go_name: PropertyCompatEnableFakeFocus
+      value: '"android.window.PROPERTY_COMPAT_ENABLE_FAKE_FOCUS"'
+      go_type: string
+    - go_name: PropertyCompatIgnoreRequestedOrientation
+      value: '"android.window.PROPERTY_COMPAT_IGNORE_REQUESTED_ORIENTATION"'
+      go_type: string
+    - go_name: PropertySupportsMultiInstanceSystemUi
+      value: '"android.window.PROPERTY_SUPPORTS_MULTI_INSTANCE_SYSTEM_UI"'
+      go_type: string
+    - go_name: ScreenRecordingStateNotVisible
       value: "0"
+      go_type: int
+    - go_name: ScreenRecordingStateVisible
+      value: "1"
       go_type: int

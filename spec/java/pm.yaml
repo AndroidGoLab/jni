@@ -589,646 +589,646 @@ constants:
       value: "0"
       go_type: int
     - go_name: CertInputSha256
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ComponentEnabledStateDefault
       value: "0"
       go_type: int
     - go_name: ComponentEnabledStateDisabled
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ComponentEnabledStateDisabledUntilUsed
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: ComponentEnabledStateDisabledUser
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: ComponentEnabledStateEnabled
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: DeleteArchive
-      value: "0"
+      value: "16"
       go_type: int
     - go_name: DontKillApp
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ExtraVerificationId
-      value: '""'
+      value: '"android.content.pm.extra.VERIFICATION_ID"'
       go_type: string
     - go_name: ExtraVerificationResult
-      value: '""'
+      value: '"android.content.pm.extra.VERIFICATION_RESULT"'
       go_type: string
     - go_name: FeatureActivitiesOnSecondaryDisplays
-      value: '""'
+      value: '"android.software.activities_on_secondary_displays"'
       go_type: string
     - go_name: FeatureAppWidgets
-      value: '""'
+      value: '"android.software.app_widgets"'
       go_type: string
     - go_name: FeatureAudioLowLatency
-      value: '""'
+      value: '"android.hardware.audio.low_latency"'
       go_type: string
     - go_name: FeatureAudioOutput
-      value: '""'
+      value: '"android.hardware.audio.output"'
       go_type: string
     - go_name: FeatureAudioPro
-      value: '""'
+      value: '"android.hardware.audio.pro"'
       go_type: string
     - go_name: FeatureAudioSpatialHeadtrackingLowLatency
-      value: '""'
+      value: '"android.hardware.audio.spatial.headtracking.low_latency"'
       go_type: string
     - go_name: FeatureAutofill
-      value: '""'
+      value: '"android.software.autofill"'
       go_type: string
     - go_name: FeatureAutomotive
-      value: '""'
+      value: '"android.hardware.type.automotive"'
       go_type: string
     - go_name: FeatureBackup
-      value: '""'
+      value: '"android.software.backup"'
       go_type: string
     - go_name: FeatureBluetooth
-      value: '""'
+      value: '"android.hardware.bluetooth"'
       go_type: string
     - go_name: FeatureBluetoothLe
-      value: '""'
+      value: '"android.hardware.bluetooth_le"'
       go_type: string
     - go_name: FeatureBluetoothLeChannelSounding
-      value: '""'
+      value: '"android.hardware.bluetooth_le.channel_sounding"'
       go_type: string
     - go_name: FeatureCamera
-      value: '""'
+      value: '"android.hardware.camera"'
       go_type: string
     - go_name: FeatureCameraAny
-      value: '""'
+      value: '"android.hardware.camera.any"'
       go_type: string
     - go_name: FeatureCameraAr
-      value: '""'
+      value: '"android.hardware.camera.ar"'
       go_type: string
     - go_name: FeatureCameraAutofocus
-      value: '""'
+      value: '"android.hardware.camera.autofocus"'
       go_type: string
     - go_name: FeatureCameraCapabilityManualPostProcessing
-      value: '""'
+      value: '"android.hardware.camera.capability.manual_post_processing"'
       go_type: string
     - go_name: FeatureCameraCapabilityManualSensor
-      value: '""'
+      value: '"android.hardware.camera.capability.manual_sensor"'
       go_type: string
     - go_name: FeatureCameraCapabilityRaw
-      value: '""'
+      value: '"android.hardware.camera.capability.raw"'
       go_type: string
     - go_name: FeatureCameraConcurrent
-      value: '""'
+      value: '"android.hardware.camera.concurrent"'
       go_type: string
     - go_name: FeatureCameraExternal
-      value: '""'
+      value: '"android.hardware.camera.external"'
       go_type: string
     - go_name: FeatureCameraFlash
-      value: '""'
+      value: '"android.hardware.camera.flash"'
       go_type: string
     - go_name: FeatureCameraFront
-      value: '""'
+      value: '"android.hardware.camera.front"'
       go_type: string
     - go_name: FeatureCameraLevelFull
-      value: '""'
+      value: '"android.hardware.camera.level.full"'
       go_type: string
     - go_name: FeatureCantSaveState
-      value: '""'
+      value: '"android.software.cant_save_state"'
       go_type: string
     - go_name: FeatureCompanionDeviceSetup
-      value: '""'
+      value: '"android.software.companion_device_setup"'
       go_type: string
     - go_name: FeatureConnectionService
-      value: '""'
+      value: '"android.software.connectionservice"'
       go_type: string
     - go_name: FeatureConsumerIr
-      value: '""'
+      value: '"android.hardware.consumerir"'
       go_type: string
     - go_name: FeatureControls
-      value: '""'
+      value: '"android.software.controls"'
       go_type: string
     - go_name: FeatureCredentials
-      value: '""'
+      value: '"android.software.credentials"'
       go_type: string
     - go_name: FeatureDeviceAdmin
-      value: '""'
+      value: '"android.software.device_admin"'
       go_type: string
     - go_name: FeatureDeviceLock
-      value: '""'
+      value: '"android.software.device_lock"'
       go_type: string
     - go_name: FeatureEmbedded
-      value: '""'
+      value: '"android.hardware.type.embedded"'
       go_type: string
     - go_name: FeatureEthernet
-      value: '""'
+      value: '"android.hardware.ethernet"'
       go_type: string
     - go_name: FeatureExpandedPictureInPicture
-      value: '""'
+      value: '"android.software.expanded_picture_in_picture"'
       go_type: string
     - go_name: FeatureFace
-      value: '""'
+      value: '"android.hardware.biometrics.face"'
       go_type: string
     - go_name: FeatureFaketouch
-      value: '""'
+      value: '"android.hardware.faketouch"'
       go_type: string
     - go_name: FeatureFaketouchMultitouchDistinct
-      value: '""'
+      value: '"android.hardware.faketouch.multitouch.distinct"'
       go_type: string
     - go_name: FeatureFaketouchMultitouchJazzhand
-      value: '""'
+      value: '"android.hardware.faketouch.multitouch.jazzhand"'
       go_type: string
     - go_name: FeatureFingerprint
-      value: '""'
+      value: '"android.hardware.fingerprint"'
       go_type: string
     - go_name: FeatureFreeformWindowManagement
-      value: '""'
+      value: '"android.software.freeform_window_management"'
       go_type: string
     - go_name: FeatureGamepad
-      value: '""'
+      value: '"android.hardware.gamepad"'
       go_type: string
     - go_name: FeatureHardwareKeystore
-      value: '""'
+      value: '"android.hardware.hardware_keystore"'
       go_type: string
     - go_name: FeatureHifiSensors
-      value: '""'
+      value: '"android.hardware.sensor.hifi_sensors"'
       go_type: string
     - go_name: FeatureHomeScreen
-      value: '""'
+      value: '"android.software.home_screen"'
       go_type: string
     - go_name: FeatureIdentityCredentialHardware
-      value: '""'
+      value: '"android.hardware.identity_credential"'
       go_type: string
     - go_name: FeatureIdentityCredentialHardwareDirectAccess
-      value: '""'
+      value: '"android.hardware.identity_credential_direct_access"'
       go_type: string
     - go_name: FeatureInputMethods
-      value: '""'
+      value: '"android.software.input_methods"'
       go_type: string
     - go_name: FeatureIpsecTunnels
-      value: '""'
+      value: '"android.software.ipsec_tunnels"'
       go_type: string
     - go_name: FeatureIpsecTunnelMigration
-      value: '""'
+      value: '"android.software.ipsec_tunnel_migration"'
       go_type: string
     - go_name: FeatureIris
-      value: '""'
+      value: '"android.hardware.biometrics.iris"'
       go_type: string
     - go_name: FeatureKeystoreAppAttestKey
-      value: '""'
+      value: '"android.hardware.keystore.app_attest_key"'
       go_type: string
     - go_name: FeatureKeystoreLimitedUseKey
-      value: '""'
+      value: '"android.hardware.keystore.limited_use_key"'
       go_type: string
     - go_name: FeatureKeystoreSingleUseKey
-      value: '""'
+      value: '"android.hardware.keystore.single_use_key"'
       go_type: string
     - go_name: FeatureLeanback
-      value: '""'
+      value: '"android.software.leanback"'
       go_type: string
     - go_name: FeatureLeanbackOnly
-      value: '""'
+      value: '"android.software.leanback_only"'
       go_type: string
     - go_name: FeatureLiveTv
-      value: '""'
+      value: '"android.software.live_tv"'
       go_type: string
     - go_name: FeatureLiveWallpaper
-      value: '""'
+      value: '"android.software.live_wallpaper"'
       go_type: string
     - go_name: FeatureLocation
-      value: '""'
+      value: '"android.hardware.location"'
       go_type: string
     - go_name: FeatureLocationGps
-      value: '""'
+      value: '"android.hardware.location.gps"'
       go_type: string
     - go_name: FeatureLocationNetwork
-      value: '""'
+      value: '"android.hardware.location.network"'
       go_type: string
     - go_name: FeatureManagedUsers
-      value: '""'
+      value: '"android.software.managed_users"'
       go_type: string
     - go_name: FeatureMicrophone
-      value: '""'
+      value: '"android.hardware.microphone"'
       go_type: string
     - go_name: FeatureMidi
-      value: '""'
+      value: '"android.software.midi"'
       go_type: string
     - go_name: FeatureNfc
-      value: '""'
+      value: '"android.hardware.nfc"'
       go_type: string
     - go_name: FeatureNfcBeam
-      value: '""'
+      value: '"android.sofware.nfc.beam"'
       go_type: string
     - go_name: FeatureNfcHostCardEmulation
-      value: '""'
+      value: '"android.hardware.nfc.hce"'
       go_type: string
     - go_name: FeatureNfcHostCardEmulationNfcf
-      value: '""'
+      value: '"android.hardware.nfc.hcef"'
       go_type: string
     - go_name: FeatureNfcOffHostCardEmulationEse
-      value: '""'
+      value: '"android.hardware.nfc.ese"'
       go_type: string
     - go_name: FeatureNfcOffHostCardEmulationUicc
-      value: '""'
+      value: '"android.hardware.nfc.uicc"'
       go_type: string
     - go_name: FeatureOpenglesDeqpLevel
-      value: '""'
+      value: '"android.software.opengles.deqp.level"'
       go_type: string
     - go_name: FeatureOpenglesExtensionPack
-      value: '""'
+      value: '"android.hardware.opengles.aep"'
       go_type: string
     - go_name: FeaturePc
-      value: '""'
+      value: '"android.hardware.type.pc"'
       go_type: string
     - go_name: FeaturePictureInPicture
-      value: '""'
+      value: '"android.software.picture_in_picture"'
       go_type: string
     - go_name: FeaturePrinting
-      value: '""'
+      value: '"android.software.print"'
       go_type: string
     - go_name: FeatureRamLow
-      value: '""'
+      value: '"android.hardware.ram.low"'
       go_type: string
     - go_name: FeatureRamNormal
-      value: '""'
+      value: '"android.hardware.ram.normal"'
       go_type: string
     - go_name: FeatureScreenLandscape
-      value: '""'
+      value: '"android.hardware.screen.landscape"'
       go_type: string
     - go_name: FeatureScreenPortrait
-      value: '""'
+      value: '"android.hardware.screen.portrait"'
       go_type: string
     - go_name: FeatureSecurelyRemovesUsers
-      value: '""'
+      value: '"android.software.securely_removes_users"'
       go_type: string
     - go_name: FeatureSecureLockScreen
-      value: '""'
+      value: '"android.software.secure_lock_screen"'
       go_type: string
     - go_name: FeatureSecurityModelCompatible
-      value: '""'
+      value: '"android.hardware.security.model.compatible"'
       go_type: string
     - go_name: FeatureSensorAccelerometer
-      value: '""'
+      value: '"android.hardware.sensor.accelerometer"'
       go_type: string
     - go_name: FeatureSensorAccelerometerLimitedAxes
-      value: '""'
+      value: '"android.hardware.sensor.accelerometer_limited_axes"'
       go_type: string
     - go_name: FeatureSensorAccelerometerLimitedAxesUncalibrated
-      value: '""'
+      value: '"android.hardware.sensor.accelerometer_limited_axes_uncalibrated"'
       go_type: string
     - go_name: FeatureSensorAmbientTemperature
-      value: '""'
+      value: '"android.hardware.sensor.ambient_temperature"'
       go_type: string
     - go_name: FeatureSensorBarometer
-      value: '""'
+      value: '"android.hardware.sensor.barometer"'
       go_type: string
     - go_name: FeatureSensorCompass
-      value: '""'
+      value: '"android.hardware.sensor.compass"'
       go_type: string
     - go_name: FeatureSensorDynamicHeadTracker
-      value: '""'
+      value: '"android.hardware.sensor.dynamic.head_tracker"'
       go_type: string
     - go_name: FeatureSensorGyroscope
-      value: '""'
+      value: '"android.hardware.sensor.gyroscope"'
       go_type: string
     - go_name: FeatureSensorGyroscopeLimitedAxes
-      value: '""'
+      value: '"android.hardware.sensor.gyroscope_limited_axes"'
       go_type: string
     - go_name: FeatureSensorGyroscopeLimitedAxesUncalibrated
-      value: '""'
+      value: '"android.hardware.sensor.gyroscope_limited_axes_uncalibrated"'
       go_type: string
     - go_name: FeatureSensorHeading
-      value: '""'
+      value: '"android.hardware.sensor.heading"'
       go_type: string
     - go_name: FeatureSensorHeartRate
-      value: '""'
+      value: '"android.hardware.sensor.heartrate"'
       go_type: string
     - go_name: FeatureSensorHeartRateEcg
-      value: '""'
+      value: '"android.hardware.sensor.heartrate.ecg"'
       go_type: string
     - go_name: FeatureSensorHingeAngle
-      value: '""'
+      value: '"android.hardware.sensor.hinge_angle"'
       go_type: string
     - go_name: FeatureSensorLight
-      value: '""'
+      value: '"android.hardware.sensor.light"'
       go_type: string
     - go_name: FeatureSensorProximity
-      value: '""'
+      value: '"android.hardware.sensor.proximity"'
       go_type: string
     - go_name: FeatureSensorRelativeHumidity
-      value: '""'
+      value: '"android.hardware.sensor.relative_humidity"'
       go_type: string
     - go_name: FeatureSensorStepCounter
-      value: '""'
+      value: '"android.hardware.sensor.stepcounter"'
       go_type: string
     - go_name: FeatureSensorStepDetector
-      value: '""'
+      value: '"android.hardware.sensor.stepdetector"'
       go_type: string
     - go_name: FeatureSeOmapiEse
-      value: '""'
+      value: '"android.hardware.se.omapi.ese"'
       go_type: string
     - go_name: FeatureSeOmapiSd
-      value: '""'
+      value: '"android.hardware.se.omapi.sd"'
       go_type: string
     - go_name: FeatureSeOmapiUicc
-      value: '""'
+      value: '"android.hardware.se.omapi.uicc"'
       go_type: string
     - go_name: FeatureSip
-      value: '""'
+      value: '"android.software.sip"'
       go_type: string
     - go_name: FeatureSipVoip
-      value: '""'
+      value: '"android.software.sip.voip"'
       go_type: string
     - go_name: FeatureStrongboxKeystore
-      value: '""'
+      value: '"android.hardware.strongbox_keystore"'
       go_type: string
     - go_name: FeatureTelecom
-      value: '""'
+      value: '"android.software.telecom"'
       go_type: string
     - go_name: FeatureTelephony
-      value: '""'
+      value: '"android.hardware.telephony"'
       go_type: string
     - go_name: FeatureTelephonyCalling
-      value: '""'
+      value: '"android.hardware.telephony.calling"'
       go_type: string
     - go_name: FeatureTelephonyCdma
-      value: '""'
+      value: '"android.hardware.telephony.cdma"'
       go_type: string
     - go_name: FeatureTelephonyData
-      value: '""'
+      value: '"android.hardware.telephony.data"'
       go_type: string
     - go_name: FeatureTelephonyEuicc
-      value: '""'
+      value: '"android.hardware.telephony.euicc"'
       go_type: string
     - go_name: FeatureTelephonyEuiccMep
-      value: '""'
+      value: '"android.hardware.telephony.euicc.mep"'
       go_type: string
     - go_name: FeatureTelephonyGsm
-      value: '""'
+      value: '"android.hardware.telephony.gsm"'
       go_type: string
     - go_name: FeatureTelephonyIms
-      value: '""'
+      value: '"android.hardware.telephony.ims"'
       go_type: string
     - go_name: FeatureTelephonyMbms
-      value: '""'
+      value: '"android.hardware.telephony.mbms"'
       go_type: string
     - go_name: FeatureTelephonyMessaging
-      value: '""'
+      value: '"android.hardware.telephony.messaging"'
       go_type: string
     - go_name: FeatureTelephonyRadioAccess
-      value: '""'
+      value: '"android.hardware.telephony.radio.access"'
       go_type: string
     - go_name: FeatureTelephonySubscription
-      value: '""'
+      value: '"android.hardware.telephony.subscription"'
       go_type: string
     - go_name: FeatureTelevision
-      value: '""'
+      value: '"android.hardware.type.television"'
       go_type: string
     - go_name: FeatureThreadNetwork
-      value: '""'
+      value: '"android.hardware.thread_network"'
       go_type: string
     - go_name: FeatureTouchscreen
-      value: '""'
+      value: '"android.hardware.touchscreen"'
       go_type: string
     - go_name: FeatureTouchscreenMultitouch
-      value: '""'
+      value: '"android.hardware.touchscreen.multitouch"'
       go_type: string
     - go_name: FeatureTouchscreenMultitouchDistinct
-      value: '""'
+      value: '"android.hardware.touchscreen.multitouch.distinct"'
       go_type: string
     - go_name: FeatureTouchscreenMultitouchJazzhand
-      value: '""'
+      value: '"android.hardware.touchscreen.multitouch.jazzhand"'
       go_type: string
     - go_name: FeatureUsbAccessory
-      value: '""'
+      value: '"android.hardware.usb.accessory"'
       go_type: string
     - go_name: FeatureUsbHost
-      value: '""'
+      value: '"android.hardware.usb.host"'
       go_type: string
     - go_name: FeatureUwb
-      value: '""'
+      value: '"android.hardware.uwb"'
       go_type: string
     - go_name: FeatureVerifiedBoot
-      value: '""'
+      value: '"android.software.verified_boot"'
       go_type: string
     - go_name: FeatureVrHeadtracking
-      value: '""'
+      value: '"android.hardware.vr.headtracking"'
       go_type: string
     - go_name: FeatureVrMode
-      value: '""'
+      value: '"android.software.vr.mode"'
       go_type: string
     - go_name: FeatureVrModeHighPerformance
-      value: '""'
+      value: '"android.hardware.vr.high_performance"'
       go_type: string
     - go_name: FeatureVulkanDeqpLevel
-      value: '""'
+      value: '"android.software.vulkan.deqp.level"'
       go_type: string
     - go_name: FeatureVulkanHardwareCompute
-      value: '""'
+      value: '"android.hardware.vulkan.compute"'
       go_type: string
     - go_name: FeatureVulkanHardwareLevel
-      value: '""'
+      value: '"android.hardware.vulkan.level"'
       go_type: string
     - go_name: FeatureVulkanHardwareVersion
-      value: '""'
+      value: '"android.hardware.vulkan.version"'
       go_type: string
     - go_name: FeatureWalletLocationBasedSuggestions
-      value: '""'
+      value: '"android.software.wallet_location_based_suggestions"'
       go_type: string
     - go_name: FeatureWatch
-      value: '""'
+      value: '"android.hardware.type.watch"'
       go_type: string
     - go_name: FeatureWebview
-      value: '""'
+      value: '"android.software.webview"'
       go_type: string
     - go_name: FeatureWifi
-      value: '""'
+      value: '"android.hardware.wifi"'
       go_type: string
     - go_name: FeatureWifiAware
-      value: '""'
+      value: '"android.hardware.wifi.aware"'
       go_type: string
     - go_name: FeatureWifiDirect
-      value: '""'
+      value: '"android.hardware.wifi.direct"'
       go_type: string
     - go_name: FeatureWifiPasspoint
-      value: '""'
+      value: '"android.hardware.wifi.passpoint"'
       go_type: string
     - go_name: FeatureWifiRtt
-      value: '""'
+      value: '"android.hardware.wifi.rtt"'
       go_type: string
     - go_name: FeatureWindowMagnification
-      value: '""'
+      value: '"android.software.window_magnification"'
       go_type: string
     - go_name: FlagPermissionWhitelistInstaller
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: FlagPermissionWhitelistSystem
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: FlagPermissionWhitelistUpgrade
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: GetActivities
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: GetAttributions
-      value: "0"
+      value: "-2147483648"
       go_type: int
     - go_name: GetAttributionsLong
-      value: "0"
+      value: "2147483648"
       go_type: int64
     - go_name: GetConfigurations
-      value: "0"
+      value: "16384"
       go_type: int
     - go_name: GetDisabledComponents
-      value: "0"
+      value: "512"
       go_type: int
     - go_name: GetDisabledUntilUsedComponents
-      value: "0"
+      value: "32768"
       go_type: int
     - go_name: GetGids
-      value: "0"
+      value: "256"
       go_type: int
     - go_name: GetInstrumentation
-      value: "0"
+      value: "16"
       go_type: int
     - go_name: GetIntentFilters
-      value: "0"
+      value: "32"
       go_type: int
     - go_name: GetMetaData
-      value: "0"
+      value: "128"
       go_type: int
     - go_name: GetPermissions
-      value: "0"
+      value: "4096"
       go_type: int
     - go_name: GetProviders
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: GetReceivers
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: GetResolvedFilter
-      value: "0"
+      value: "64"
       go_type: int
     - go_name: GetServices
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: GetSharedLibraryFiles
-      value: "0"
+      value: "1024"
       go_type: int
     - go_name: GetSignatures
-      value: "0"
+      value: "64"
       go_type: int
     - go_name: GetSigningCertificates
-      value: "0"
+      value: "134217728"
       go_type: int
     - go_name: GetUninstalledPackages
-      value: "0"
+      value: "8192"
       go_type: int
     - go_name: GetUriPermissionPatterns
-      value: "0"
+      value: "2048"
       go_type: int
     - go_name: InstallReasonDeviceRestore
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: InstallReasonDeviceSetup
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: InstallReasonPolicy
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: InstallReasonUnknown
       value: "0"
       go_type: int
     - go_name: InstallReasonUser
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: InstallScenarioBulk
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: InstallScenarioBulkSecondary
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: InstallScenarioDefault
       value: "0"
       go_type: int
     - go_name: InstallScenarioFast
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: MatchAll
-      value: "0"
+      value: "131072"
       go_type: int
     - go_name: MatchApex
-      value: "0"
+      value: "1073741824"
       go_type: int
     - go_name: MatchArchivedPackages
-      value: "0"
+      value: "4294967296"
       go_type: int64
     - go_name: MatchDefaultOnly
-      value: "0"
+      value: "65536"
       go_type: int
     - go_name: MatchDirectBootAuto
-      value: "0"
+      value: "268435456"
       go_type: int
     - go_name: MatchDirectBootAware
-      value: "0"
+      value: "524288"
       go_type: int
     - go_name: MatchDirectBootUnaware
-      value: "0"
+      value: "262144"
       go_type: int
     - go_name: MatchDisabledComponents
-      value: "0"
+      value: "512"
       go_type: int
     - go_name: MatchDisabledUntilUsedComponents
-      value: "0"
+      value: "32768"
       go_type: int
     - go_name: MatchSystemOnly
-      value: "0"
+      value: "1048576"
       go_type: int
     - go_name: MatchUninstalledPackages
-      value: "0"
+      value: "8192"
       go_type: int
     - go_name: MaximumVerificationTimeout
-      value: "0"
+      value: "3600000"
       go_type: int64
     - go_name: PermissionDenied
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: PermissionGranted
       value: "0"
       go_type: int
     - go_name: PropertyCompatOverrideLandscapeToPortrait
-      value: '""'
+      value: '"android.camera.PROPERTY_COMPAT_OVERRIDE_LANDSCAPE_TO_PORTRAIT"'
       go_type: string
     - go_name: PropertyMediaCapabilities
-      value: '""'
+      value: '"android.media.PROPERTY_MEDIA_CAPABILITIES"'
       go_type: string
     - go_name: PropertySelfCertifiedNetworkCapabilities
-      value: '""'
+      value: '"android.net.PROPERTY_SELF_CERTIFIED_NETWORK_CAPABILITIES"'
       go_type: string
     - go_name: PropertySpecialUseFgsSubtype
-      value: '""'
+      value: '"android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"'
       go_type: string
     - go_name: PropertyUseRestrictedBackupMode
-      value: '""'
+      value: '"android.app.backup.PROPERTY_USE_RESTRICTED_BACKUP_MODE"'
       go_type: string
     - go_name: SignatureFirstNotSigned
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: SignatureMatch
       value: "0"
       go_type: int
     - go_name: SignatureNeitherSigned
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: SignatureNoMatch
-      value: "0"
+      value: "-3"
       go_type: int
     - go_name: SignatureSecondNotSigned
-      value: "0"
+      value: "-2"
       go_type: int
     - go_name: SignatureUnknownPackage
-      value: "0"
+      value: "-4"
       go_type: int
     - go_name: Synchronous
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: TrustAll
       value: "0"
@@ -1237,13 +1237,13 @@ constants:
       value: "0"
       go_type: int
     - go_name: VerificationAllow
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: VerificationReject
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: VersionCodeHighest
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: Creator
       value: "0"
@@ -1252,17 +1252,17 @@ constants:
       value: "0"
       go_type: int
     - go_name: InstallLocationInternalOnly
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: InstallLocationPreferExternal
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: RequestedPermissionGranted
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: RequestedPermissionImplicit
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: RequestedPermissionNeverForLocation
-      value: "0"
+      value: "65536"
       go_type: int

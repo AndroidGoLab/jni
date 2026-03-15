@@ -3,23 +3,23 @@
 package ringtone
 
 const (
-	ActionRingtonePicker     = ""
-	ExtraRingtoneDefaultUri  = ""
-	ExtraRingtoneExistingUri = ""
-	ExtraRingtoneIncludeDrm  = ""
-	ExtraRingtonePickedUri   = ""
-	ExtraRingtoneShowDefault = ""
-	ExtraRingtoneShowSilent  = ""
-	ExtraRingtoneTitle       = ""
-	ExtraRingtoneType        = ""
+	ActionRingtonePicker     = "android.intent.action.RINGTONE_PICKER"
+	ExtraRingtoneDefaultUri  = "android.intent.extra.ringtone.DEFAULT_URI"
+	ExtraRingtoneExistingUri = "android.intent.extra.ringtone.EXISTING_URI"
+	ExtraRingtoneIncludeDrm  = "android.intent.extra.ringtone.INCLUDE_DRM"
+	ExtraRingtonePickedUri   = "android.intent.extra.ringtone.PICKED_URI"
+	ExtraRingtoneShowDefault = "android.intent.extra.ringtone.SHOW_DEFAULT"
+	ExtraRingtoneShowSilent  = "android.intent.extra.ringtone.SHOW_SILENT"
+	ExtraRingtoneTitle       = "android.intent.extra.ringtone.TITLE"
+	ExtraRingtoneType        = "android.intent.extra.ringtone.TYPE"
 )
 
 const (
 	IdColumnIndex    = 0
-	TitleColumnIndex = 0
-	TypeAlarm        = 0
-	TypeAll          = 0
-	TypeNotification = 0
-	TypeRingtone     = 0
-	UriColumnIndex   = 0
+	TitleColumnIndex = 1
+	TypeAlarm        = 4
+	TypeAll          = 7
+	TypeNotification = 2
+	TypeRingtone     = 1
+	UriColumnIndex   = 2
 )

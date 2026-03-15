@@ -2290,475 +2290,475 @@ classes:
           error: true
 constants:
     - go_name: ActionAddDeviceAdmin
-      value: '""'
+      value: '"android.app.action.ADD_DEVICE_ADMIN"'
       go_type: string
     - go_name: ActionAdminPolicyCompliance
-      value: '""'
+      value: '"android.app.action.ADMIN_POLICY_COMPLIANCE"'
       go_type: string
     - go_name: ActionApplicationDelegationScopesChanged
-      value: '""'
+      value: '"android.app.action.APPLICATION_DELEGATION_SCOPES_CHANGED"'
       go_type: string
     - go_name: ActionCheckPolicyCompliance
-      value: '""'
+      value: '"android.app.action.CHECK_POLICY_COMPLIANCE"'
       go_type: string
     - go_name: ActionDeviceAdminService
-      value: '""'
+      value: '"android.app.action.DEVICE_ADMIN_SERVICE"'
       go_type: string
     - go_name: ActionDeviceFinancingStateChanged
-      value: '""'
+      value: '"android.app.admin.action.DEVICE_FINANCING_STATE_CHANGED"'
       go_type: string
     - go_name: ActionDeviceOwnerChanged
-      value: '""'
+      value: '"android.app.action.DEVICE_OWNER_CHANGED"'
       go_type: string
     - go_name: ActionDevicePolicyResourceUpdated
-      value: '""'
+      value: '"android.app.action.DEVICE_POLICY_RESOURCE_UPDATED"'
       go_type: string
     - go_name: ActionGetProvisioningMode
-      value: '""'
+      value: '"android.app.action.GET_PROVISIONING_MODE"'
       go_type: string
     - go_name: ActionManagedProfileProvisioned
-      value: '""'
+      value: '"android.app.action.MANAGED_PROFILE_PROVISIONED"'
       go_type: string
     - go_name: ActionProfileOwnerChanged
-      value: '""'
+      value: '"android.app.action.PROFILE_OWNER_CHANGED"'
       go_type: string
     - go_name: ActionProvisioningSuccessful
-      value: '""'
+      value: '"android.app.action.PROVISIONING_SUCCESSFUL"'
       go_type: string
     - go_name: ActionProvisionManagedDevice
-      value: '""'
+      value: '"android.app.action.PROVISION_MANAGED_DEVICE"'
       go_type: string
     - go_name: ActionProvisionManagedProfile
-      value: '""'
+      value: '"android.app.action.PROVISION_MANAGED_PROFILE"'
       go_type: string
     - go_name: ActionSetNewParentProfilePassword
-      value: '""'
+      value: '"android.app.action.SET_NEW_PARENT_PROFILE_PASSWORD"'
       go_type: string
     - go_name: ActionSetNewPassword
-      value: '""'
+      value: '"android.app.action.SET_NEW_PASSWORD"'
       go_type: string
     - go_name: ActionStartEncryption
-      value: '""'
+      value: '"android.app.action.START_ENCRYPTION"'
       go_type: string
     - go_name: ActionSystemUpdatePolicyChanged
-      value: '""'
+      value: '"android.app.action.SYSTEM_UPDATE_POLICY_CHANGED"'
       go_type: string
     - go_name: AppFunctionsDisabled
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: AppFunctionsDisabledCrossProfile
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: AppFunctionsNotControlledByPolicy
       value: "0"
       go_type: int
     - go_name: AutoTimeDisabled
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: AutoTimeEnabled
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: AutoTimeNotControlledByPolicy
       value: "0"
       go_type: int
     - go_name: AutoTimeZoneDisabled
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: AutoTimeZoneEnabled
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: AutoTimeZoneNotControlledByPolicy
       value: "0"
       go_type: int
     - go_name: ContentProtectionDisabled
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ContentProtectionEnabled
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ContentProtectionNotControlledByPolicy
       value: "0"
       go_type: int
     - go_name: DelegationAppRestrictions
-      value: '""'
+      value: '"delegation-app-restrictions"'
       go_type: string
     - go_name: DelegationBlockUninstall
-      value: '""'
+      value: '"delegation-block-uninstall"'
       go_type: string
     - go_name: DelegationCertInstall
-      value: '""'
+      value: '"delegation-cert-install"'
       go_type: string
     - go_name: DelegationCertSelection
-      value: '""'
+      value: '"delegation-cert-selection"'
       go_type: string
     - go_name: DelegationEnableSystemApp
-      value: '""'
+      value: '"delegation-enable-system-app"'
       go_type: string
     - go_name: DelegationInstallExistingPackage
-      value: '""'
+      value: '"delegation-install-existing-package"'
       go_type: string
     - go_name: DelegationKeepUninstalledPackages
-      value: '""'
+      value: '"delegation-keep-uninstalled-packages"'
       go_type: string
     - go_name: DelegationNetworkLogging
-      value: '""'
+      value: '"delegation-network-logging"'
       go_type: string
     - go_name: DelegationPackageAccess
-      value: '""'
+      value: '"delegation-package-access"'
       go_type: string
     - go_name: DelegationPermissionGrant
-      value: '""'
+      value: '"delegation-permission-grant"'
       go_type: string
     - go_name: DelegationSecurityLogging
-      value: '""'
+      value: '"delegation-security-logging"'
       go_type: string
     - go_name: EncryptionStatusActivating
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: EncryptionStatusActive
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: EncryptionStatusActiveDefaultKey
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: EncryptionStatusActivePerUser
-      value: "0"
+      value: "5"
       go_type: int
     - go_name: EncryptionStatusInactive
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: EncryptionStatusUnsupported
       value: "0"
       go_type: int
     - go_name: ExtraAddExplanation
-      value: '""'
+      value: '"android.app.extra.ADD_EXPLANATION"'
       go_type: string
     - go_name: ExtraDelegationScopes
-      value: '""'
+      value: '"android.app.extra.DELEGATION_SCOPES"'
       go_type: string
     - go_name: ExtraDeviceAdmin
-      value: '""'
+      value: '"android.app.extra.DEVICE_ADMIN"'
       go_type: string
     - go_name: ExtraDevicePasswordRequirementOnly
-      value: '""'
+      value: '"android.app.extra.DEVICE_PASSWORD_REQUIREMENT_ONLY"'
       go_type: string
     - go_name: ExtraPasswordComplexity
-      value: '""'
+      value: '"android.app.extra.PASSWORD_COMPLEXITY"'
       go_type: string
     - go_name: ExtraProvisioningAccountToMigrate
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_ACCOUNT_TO_MIGRATE"'
       go_type: string
     - go_name: ExtraProvisioningAdminExtrasBundle
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_ADMIN_EXTRAS_BUNDLE"'
       go_type: string
     - go_name: ExtraProvisioningAllowedProvisioningModes
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_ALLOWED_PROVISIONING_MODES"'
       go_type: string
     - go_name: ExtraProvisioningAllowOffline
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_ALLOW_OFFLINE"'
       go_type: string
     - go_name: ExtraProvisioningDeviceAdminComponentName
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_DEVICE_ADMIN_COMPONENT_NAME"'
       go_type: string
     - go_name: ExtraProvisioningDeviceAdminMinimumVersionCode
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_DEVICE_ADMIN_MINIMUM_VERSION_CODE"'
       go_type: string
     - go_name: ExtraProvisioningDeviceAdminPackageChecksum
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_CHECKSUM"'
       go_type: string
     - go_name: ExtraProvisioningDeviceAdminPackageDownloadCookieHeader
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_COOKIE_HEADER"'
       go_type: string
     - go_name: ExtraProvisioningDeviceAdminPackageDownloadLocation
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_DOWNLOAD_LOCATION"'
       go_type: string
     - go_name: ExtraProvisioningDeviceAdminPackageName
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_DEVICE_ADMIN_PACKAGE_NAME"'
       go_type: string
     - go_name: ExtraProvisioningDeviceAdminSignatureChecksum
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_DEVICE_ADMIN_SIGNATURE_CHECKSUM"'
       go_type: string
     - go_name: ExtraProvisioningDisclaimers
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_DISCLAIMERS"'
       go_type: string
     - go_name: ExtraProvisioningDisclaimerContent
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_DISCLAIMER_CONTENT"'
       go_type: string
     - go_name: ExtraProvisioningDisclaimerHeader
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_DISCLAIMER_HEADER"'
       go_type: string
     - go_name: ExtraProvisioningEmailAddress
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_EMAIL_ADDRESS"'
       go_type: string
     - go_name: ExtraProvisioningImei
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_IMEI"'
       go_type: string
     - go_name: ExtraProvisioningKeepAccountOnMigration
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_KEEP_ACCOUNT_ON_MIGRATION"'
       go_type: string
     - go_name: ExtraProvisioningKeepScreenOn
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_KEEP_SCREEN_ON"'
       go_type: string
     - go_name: ExtraProvisioningLeaveAllSystemAppsEnabled
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_LEAVE_ALL_SYSTEM_APPS_ENABLED"'
       go_type: string
     - go_name: ExtraProvisioningLocale
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_LOCALE"'
       go_type: string
     - go_name: ExtraProvisioningLocalTime
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_LOCAL_TIME"'
       go_type: string
     - go_name: ExtraProvisioningLogoUri
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_LOGO_URI"'
       go_type: string
     - go_name: ExtraProvisioningMainColor
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_MAIN_COLOR"'
       go_type: string
     - go_name: ExtraProvisioningMode
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_MODE"'
       go_type: string
     - go_name: ExtraProvisioningSensorsPermissionGrantOptOut
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_SENSORS_PERMISSION_GRANT_OPT_OUT"'
       go_type: string
     - go_name: ExtraProvisioningSerialNumber
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_SERIAL_NUMBER"'
       go_type: string
     - go_name: ExtraProvisioningShouldLaunchResultIntent
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_SHOULD_LAUNCH_RESULT_INTENT"'
       go_type: string
     - go_name: ExtraProvisioningSkipEducationScreens
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_SKIP_EDUCATION_SCREENS"'
       go_type: string
     - go_name: ExtraProvisioningSkipEncryption
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_SKIP_ENCRYPTION"'
       go_type: string
     - go_name: ExtraProvisioningSkipUserConsent
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_SKIP_USER_CONSENT"'
       go_type: string
     - go_name: ExtraProvisioningTimeZone
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_TIME_ZONE"'
       go_type: string
     - go_name: ExtraProvisioningUseMobileData
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_USE_MOBILE_DATA"'
       go_type: string
     - go_name: ExtraProvisioningWifiAnonymousIdentity
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_WIFI_ANONYMOUS_IDENTITY"'
       go_type: string
     - go_name: ExtraProvisioningWifiCaCertificate
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_WIFI_CA_CERTIFICATE"'
       go_type: string
     - go_name: ExtraProvisioningWifiDomain
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_WIFI_DOMAIN"'
       go_type: string
     - go_name: ExtraProvisioningWifiEapMethod
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_WIFI_EAP_METHOD"'
       go_type: string
     - go_name: ExtraProvisioningWifiHidden
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_WIFI_HIDDEN"'
       go_type: string
     - go_name: ExtraProvisioningWifiIdentity
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_WIFI_IDENTITY"'
       go_type: string
     - go_name: ExtraProvisioningWifiPacUrl
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_WIFI_PAC_URL"'
       go_type: string
     - go_name: ExtraProvisioningWifiPassword
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_WIFI_PASSWORD"'
       go_type: string
     - go_name: ExtraProvisioningWifiPhase2Auth
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_WIFI_PHASE2_AUTH"'
       go_type: string
     - go_name: ExtraProvisioningWifiProxyBypass
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_WIFI_PROXY_BYPASS"'
       go_type: string
     - go_name: ExtraProvisioningWifiProxyHost
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_WIFI_PROXY_HOST"'
       go_type: string
     - go_name: ExtraProvisioningWifiProxyPort
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_WIFI_PROXY_PORT"'
       go_type: string
     - go_name: ExtraProvisioningWifiSecurityType
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_WIFI_SECURITY_TYPE"'
       go_type: string
     - go_name: ExtraProvisioningWifiSsid
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_WIFI_SSID"'
       go_type: string
     - go_name: ExtraProvisioningWifiUserCertificate
-      value: '""'
+      value: '"android.app.extra.PROVISIONING_WIFI_USER_CERTIFICATE"'
       go_type: string
     - go_name: ExtraResourceIds
-      value: '""'
+      value: '"android.app.extra.RESOURCE_IDS"'
       go_type: string
     - go_name: ExtraResourceType
-      value: '""'
+      value: '"android.app.extra.RESOURCE_TYPE"'
       go_type: string
     - go_name: ExtraResourceTypeDrawable
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ExtraResourceTypeString
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ExtraResultLaunchIntent
-      value: '""'
+      value: '"android.app.extra.RESULT_LAUNCH_INTENT"'
       go_type: string
     - go_name: FlagEvictCredentialEncryptionKey
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: FlagManagedCanAccessParent
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: FlagParentCanAccessManaged
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: IdTypeBaseInfo
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: IdTypeImei
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: IdTypeIndividualAttestation
-      value: "0"
+      value: "16"
       go_type: int
     - go_name: IdTypeMeid
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: IdTypeSerial
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: InstallkeyRequestCredentialsAccess
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: InstallkeySetUserSelectable
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: KeyguardDisableBiometrics
-      value: "0"
+      value: "416"
       go_type: int
     - go_name: KeyguardDisableFace
-      value: "0"
+      value: "128"
       go_type: int
     - go_name: KeyguardDisableFeaturesAll
-      value: "0"
+      value: "2147483647"
       go_type: int
     - go_name: KeyguardDisableFeaturesNone
       value: "0"
       go_type: int
     - go_name: KeyguardDisableFingerprint
-      value: "0"
+      value: "32"
       go_type: int
     - go_name: KeyguardDisableIris
-      value: "0"
+      value: "256"
       go_type: int
     - go_name: KeyguardDisableRemoteInput
-      value: "0"
+      value: "64"
       go_type: int
     - go_name: KeyguardDisableSecureCamera
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: KeyguardDisableSecureNotifications
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: KeyguardDisableShortcutsAll
-      value: "0"
+      value: "512"
       go_type: int
     - go_name: KeyguardDisableTrustAgents
-      value: "0"
+      value: "16"
       go_type: int
     - go_name: KeyguardDisableUnredactedNotifications
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: KeyguardDisableWidgetsAll
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: LeaveAllSystemAppsEnabled
-      value: "0"
+      value: "16"
       go_type: int
     - go_name: LockTaskFeatureBlockActivityStartInTask
-      value: "0"
+      value: "64"
       go_type: int
     - go_name: LockTaskFeatureGlobalActions
-      value: "0"
+      value: "16"
       go_type: int
     - go_name: LockTaskFeatureHome
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: LockTaskFeatureKeyguard
-      value: "0"
+      value: "32"
       go_type: int
     - go_name: LockTaskFeatureNone
       value: "0"
       go_type: int
     - go_name: LockTaskFeatureNotifications
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: LockTaskFeatureOverview
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: LockTaskFeatureSystemInfo
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: MakeUserEphemeral
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: MimeTypeProvisioningNfc
-      value: '""'
+      value: '"application/com.android.managedprovisioning"'
       go_type: string
     - go_name: MteDisabled
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: MteEnabled
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: MteNotControlledByPolicy
       value: "0"
       go_type: int
     - go_name: NearbyStreamingDisabled
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: NearbyStreamingEnabled
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: NearbyStreamingNotControlledByPolicy
       value: "0"
       go_type: int
     - go_name: NearbyStreamingSameManagedAccountOnly
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: OperationSafetyReasonDrivingDistraction
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: PasswordComplexityHigh
-      value: "0"
+      value: "327680"
       go_type: int
     - go_name: PasswordComplexityLow
-      value: "0"
+      value: "65536"
       go_type: int
     - go_name: PasswordComplexityMedium
-      value: "0"
+      value: "196608"
       go_type: int
     - go_name: PasswordComplexityNone
       value: "0"
       go_type: int
     - go_name: PasswordQualityAlphabetic
-      value: "0"
+      value: "262144"
       go_type: int
     - go_name: PasswordQualityAlphanumeric
-      value: "0"
+      value: "327680"
       go_type: int
     - go_name: PasswordQualityBiometricWeak
-      value: "0"
+      value: "32768"
       go_type: int
     - go_name: PasswordQualityComplex
-      value: "0"
+      value: "393216"
       go_type: int
     - go_name: PasswordQualityNumeric
-      value: "0"
+      value: "131072"
       go_type: int
     - go_name: PasswordQualityNumericComplex
-      value: "0"
+      value: "196608"
       go_type: int
     - go_name: PasswordQualitySomething
-      value: "0"
+      value: "65536"
       go_type: int
     - go_name: PasswordQualityUnspecified
       value: "0"
@@ -2767,16 +2767,16 @@ constants:
       value: "0"
       go_type: int
     - go_name: PermissionGrantStateDenied
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: PermissionGrantStateGranted
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: PermissionPolicyAutoDeny
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: PermissionPolicyAutoGrant
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: PermissionPolicyPrompt
       value: "0"
@@ -2785,77 +2785,77 @@ constants:
       value: "0"
       go_type: int
     - go_name: PersonalAppsSuspendedExplicitly
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: PersonalAppsSuspendedProfileTimeout
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: PolicyDisableCamera
-      value: '""'
+      value: '"policy_disable_camera"'
       go_type: string
     - go_name: PolicyDisableScreenCapture
-      value: '""'
+      value: '"policy_disable_screen_capture"'
       go_type: string
     - go_name: PrivateDnsModeOff
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: PrivateDnsModeOpportunistic
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: PrivateDnsModeProviderHostname
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: PrivateDnsModeUnknown
       value: "0"
       go_type: int
     - go_name: PrivateDnsSetErrorFailureSetting
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: PrivateDnsSetErrorHostNotServing
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: PrivateDnsSetNoError
       value: "0"
       go_type: int
     - go_name: ProvisioningModeFullyManagedDevice
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ProvisioningModeManagedProfile
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ProvisioningModeManagedProfileOnPersonalDevice
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: ResetPasswordDoNotAskCredentialsOnBoot
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ResetPasswordRequireEntry
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: SkipSetupWizard
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: WifiSecurityEnterprise192
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: WifiSecurityEnterpriseEap
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: WifiSecurityOpen
       value: "0"
       go_type: int
     - go_name: WifiSecurityPersonal
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: WipeEuicc
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: WipeExternalStorage
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: WipeResetProtectionData
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: WipeSilently
-      value: "0"
+      value: "8"
       go_type: int

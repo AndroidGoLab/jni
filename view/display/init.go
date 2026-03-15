@@ -28,8 +28,6 @@ var (
 	middisplayMetricsSetToDefaults jni.MethodID
 	middisplayMetricsToString      jni.MethodID
 
-	clswindowManager *jni.GlobalRef
-
 	clsdisplay                                     *jni.GlobalRef
 	middisplayGetAppVsyncOffsetNanos               jni.MethodID
 	middisplayGetCurrentSizeRange                  jni.MethodID
@@ -71,6 +69,8 @@ var (
 	middisplayRegisterHdrSdrRatioChangedListener   jni.MethodID
 	middisplayToString                             jni.MethodID
 	middisplayUnregisterHdrSdrRatioChangedListener jni.MethodID
+
+	clswindowManager *jni.GlobalRef
 )
 
 // initSkipped records methods that were not found during init.
@@ -150,12 +150,6 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.util.DisplayMetrics.toString")
 	}
-
-	c, err = env.FindClass("android/view/WindowManager")
-	if err != nil {
-		return fmt.Errorf("find class android.view.WindowManager: %w", err)
-	}
-	clswindowManager = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/view/Display")
 	if err != nil {
@@ -482,6 +476,12 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.view.Display.unregisterHdrSdrRatioChangedListener")
 	}
+
+	c, err = env.FindClass("android/view/WindowManager")
+	if err != nil {
+		return fmt.Errorf("find class android.view.WindowManager: %w", err)
+	}
+	clswindowManager = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

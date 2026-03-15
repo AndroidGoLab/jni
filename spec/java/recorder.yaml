@@ -237,23 +237,23 @@ classes:
           error: true
 constants:
     - go_name: MediaErrorServerDied
-      value: "0"
+      value: "100"
       go_type: int
     - go_name: MediaRecorderErrorUnknown
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: MediaRecorderInfoMaxDurationReached
-      value: "0"
+      value: "800"
       go_type: int
     - go_name: MediaRecorderInfoMaxFilesizeApproaching
-      value: "0"
+      value: "802"
       go_type: int
     - go_name: MediaRecorderInfoMaxFilesizeReached
-      value: "0"
+      value: "801"
       go_type: int
     - go_name: MediaRecorderInfoNextOutputFileStarted
-      value: "0"
+      value: "803"
       go_type: int
     - go_name: MediaRecorderInfoUnknown
-      value: "0"
+      value: "1"
       go_type: int

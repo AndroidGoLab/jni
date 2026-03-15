@@ -3,16 +3,16 @@
 package contacts
 
 const (
-	Authority               = ""
-	CallerIsSyncadapter     = ""
-	DeferredSnippeting      = ""
-	DeferredSnippetingQuery = ""
-	DirectoryParamKey       = ""
-	LimitParamKey           = ""
-	PrimaryAccountName      = ""
-	PrimaryAccountType      = ""
-	RemoveDuplicateEntries  = ""
-	StrequentPhoneOnly      = ""
+	Authority               = "com.android.contacts"
+	CallerIsSyncadapter     = "caller_is_syncadapter"
+	DeferredSnippeting      = "deferred_snippeting"
+	DeferredSnippetingQuery = "deferred_snippeting_query"
+	DirectoryParamKey       = "directory"
+	LimitParamKey           = "limit"
+	PrimaryAccountName      = "name_for_primary_account"
+	PrimaryAccountType      = "type_for_primary_account"
+	RemoveDuplicateEntries  = "remove_duplicate_entries"
+	StrequentPhoneOnly      = "strequent_phone_only"
 )
 
 const (

@@ -137,40 +137,40 @@ classes:
           error: true
 constants:
     - go_name: ExtraEventAction
-      value: '""'
+      value: '"android.app.usage.extra.EVENT_ACTION"'
       go_type: string
     - go_name: ExtraEventCategory
-      value: '""'
+      value: '"android.app.usage.extra.EVENT_CATEGORY"'
       go_type: string
     - go_name: IntervalBest
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: IntervalDaily
       value: "0"
       go_type: int
     - go_name: IntervalMonthly
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: IntervalWeekly
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: IntervalYearly
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: StandbyBucketActive
-      value: "0"
+      value: "10"
       go_type: int
     - go_name: StandbyBucketFrequent
-      value: "0"
+      value: "30"
       go_type: int
     - go_name: StandbyBucketRare
-      value: "0"
+      value: "40"
       go_type: int
     - go_name: StandbyBucketRestricted
-      value: "0"
+      value: "45"
       go_type: int
     - go_name: StandbyBucketWorkingSet
-      value: "0"
+      value: "20"
       go_type: int
     - go_name: Creator
       value: "0"

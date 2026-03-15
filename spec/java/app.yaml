@@ -1,6 +1,28 @@
 package: app
 go_import: github.com/xaionaro-go/jni/app
 classes:
+    - java_class: android.os.CancellationSignal
+      go_type: cancellationSignal
+      methods:
+        - java_method: cancel
+          go_name: Cancel
+          returns: void
+          error: true
+        - java_method: isCanceled
+          go_name: IsCanceled
+          returns: boolean
+          error: true
+        - java_method: setOnCancelListener
+          go_name: SetOnCancelListener
+          params:
+            - java_type: android.os.CancellationSignal$OnCancelListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: throwIfCanceled
+          go_name: ThrowIfCanceled
+          returns: void
+          error: true
     - java_class: android.content.Context
       go_type: context
       methods:
@@ -311,6 +333,1365 @@ classes:
               go_name: arg1
             - java_type: int
               go_name: arg2
+          returns: void
+          error: true
+    - java_class: android.content.Intent
+      go_type: intent
+      methods:
+        - java_method: addCategory
+          go_name: AddCategory
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: addFlags
+          go_name: AddFlags
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: clone
+          go_name: Clone
+          returns: java.lang.Object
+          error: true
+        - java_method: cloneFilter
+          go_name: CloneFilter
+          returns: android.content.Intent
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: fillIn
+          go_name: FillIn
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: filterEquals
+          go_name: FilterEquals
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: filterHashCode
+          go_name: FilterHashCode
+          returns: int
+          error: true
+        - java_method: getAction
+          go_name: GetAction
+          returns: String
+          error: true
+        - java_method: getBooleanArrayExtra
+          go_name: GetBooleanArrayExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean[]
+          error: true
+        - java_method: getBooleanExtra
+          go_name: GetBooleanExtra
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: getBundleExtra
+          go_name: GetBundleExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.os.Bundle
+          error: true
+        - java_method: getByteArrayExtra
+          go_name: GetByteArrayExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: '[B'
+          error: true
+        - java_method: getByteExtra
+          go_name: GetByteExtra
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+          returns: byte
+          error: true
+        - java_method: getCategories
+          go_name: GetCategories
+          returns: java.util.Set<java.lang.String>
+          error: true
+        - java_method: getCharArrayExtra
+          go_name: GetCharArrayExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: char[]
+          error: true
+        - java_method: getCharExtra
+          go_name: GetCharExtra
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: char
+              go_name: arg1
+          returns: char
+          error: true
+        - java_method: getCharSequenceArrayExtra
+          go_name: GetCharSequenceArrayExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.lang.CharSequence[]
+          error: true
+        - java_method: getCharSequenceArrayListExtra
+          go_name: GetCharSequenceArrayListExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.ArrayList<java.lang.CharSequence>
+          error: true
+        - java_method: getCharSequenceExtra
+          go_name: GetCharSequenceExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getClipData
+          go_name: GetClipData
+          returns: android.content.ClipData
+          error: true
+        - java_method: getComponent
+          go_name: GetComponent
+          returns: android.content.ComponentName
+          error: true
+        - java_method: getData
+          go_name: GetData
+          returns: android.net.Uri
+          error: true
+        - java_method: getDataString
+          go_name: GetDataString
+          returns: String
+          error: true
+        - java_method: getDoubleArrayExtra
+          go_name: GetDoubleArrayExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: double[]
+          error: true
+        - java_method: getDoubleExtra
+          go_name: GetDoubleExtra
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: double
+              go_name: arg1
+          returns: double
+          error: true
+        - java_method: getExtras
+          go_name: GetExtras
+          returns: android.os.Bundle
+          error: true
+        - java_method: getFlags
+          go_name: GetFlags
+          returns: int
+          error: true
+        - java_method: getFloatArrayExtra
+          go_name: GetFloatArrayExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: float[]
+          error: true
+        - java_method: getFloatExtra
+          go_name: GetFloatExtra
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+          returns: float
+          error: true
+        - java_method: getIdentifier
+          go_name: GetIdentifier
+          returns: String
+          error: true
+        - java_method: getIntArrayExtra
+          go_name: GetIntArrayExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: '[I'
+          error: true
+        - java_method: getIntExtra
+          go_name: GetIntExtra
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: getIntegerArrayListExtra
+          go_name: GetIntegerArrayListExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.ArrayList<java.lang.Integer>
+          error: true
+        - java_method: getLongArrayExtra
+          go_name: GetLongArrayExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: '[J'
+          error: true
+        - java_method: getLongExtra
+          go_name: GetLongExtra
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: long
+          error: true
+        - java_method: getPackage
+          go_name: GetPackage
+          returns: String
+          error: true
+        - java_method: getParcelableArrayExtra
+          go_name: GetParcelableArrayExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.os.Parcelable[]
+          error: true
+        - java_method: getScheme
+          go_name: GetScheme
+          returns: String
+          error: true
+        - java_method: getSelector
+          go_name: GetSelector
+          returns: android.content.Intent
+          error: true
+        - java_method: getSerializableExtra
+          go_name: GetSerializableExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.io.Serializable
+          error: true
+        - java_method: getShortArrayExtra
+          go_name: GetShortArrayExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: short[]
+          error: true
+        - java_method: getShortExtra
+          go_name: GetShortExtra
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: short
+              go_name: arg1
+          returns: short
+          error: true
+        - java_method: getSourceBounds
+          go_name: GetSourceBounds
+          returns: android.graphics.Rect
+          error: true
+        - java_method: getStringArrayExtra
+          go_name: GetStringArrayExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.lang.String[]
+          error: true
+        - java_method: getStringArrayListExtra
+          go_name: GetStringArrayListExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.ArrayList<java.lang.String>
+          error: true
+        - java_method: getStringExtra
+          go_name: GetStringExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: String
+          error: true
+        - java_method: hasCategory
+          go_name: HasCategory
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasExtra
+          go_name: HasExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasFileDescriptors
+          go_name: HasFileDescriptors
+          returns: boolean
+          error: true
+        - java_method: isMismatchingFilter
+          go_name: IsMismatchingFilter
+          returns: boolean
+          error: true
+        - java_method: putCharSequenceArrayListExtra
+          go_name: PutCharSequenceArrayListExtra
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<java.lang.CharSequence>
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Parcelable
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Parcelable[]
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_3
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_4
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: boolean[]
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_5
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_6
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: '[B'
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_7
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: char
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_8
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: char[]
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_9
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: double
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_10
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: double[]
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_11
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_12
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: float[]
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_13
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_14
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: '[I'
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_15
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.io.Serializable
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_16
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_17
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.CharSequence[]
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_18
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_19
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.String[]
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_20
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_21
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: '[J'
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_22
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: short
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtra
+          go_name: PutExtra2_23
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: short[]
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtras
+          go_name: PutExtras1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: putExtras
+          go_name: PutExtras1_1
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: putIntegerArrayListExtra
+          go_name: PutIntegerArrayListExtra
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<java.lang.Integer>
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putParcelableArrayListExtra
+          go_name: PutParcelableArrayListExtra
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<? extends android.os.Parcelable>
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: putStringArrayListExtra
+          go_name: PutStringArrayListExtra
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<java.lang.String>
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: readFromParcel
+          go_name: ReadFromParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeCategory
+          go_name: RemoveCategory
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeExtra
+          go_name: RemoveExtra
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeFlags
+          go_name: RemoveFlags
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeLaunchSecurityProtection
+          go_name: RemoveLaunchSecurityProtection
+          returns: void
+          error: true
+        - java_method: replaceExtras
+          go_name: ReplaceExtras1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: replaceExtras
+          go_name: ReplaceExtras1_1
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: resolveActivity
+          go_name: ResolveActivity
+          params:
+            - java_type: android.content.pm.PackageManager
+              go_name: arg0
+          returns: android.content.ComponentName
+          error: true
+        - java_method: resolveActivityInfo
+          go_name: ResolveActivityInfo
+          params:
+            - java_type: android.content.pm.PackageManager
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.pm.ActivityInfo
+          error: true
+        - java_method: resolveType
+          go_name: ResolveType1
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: resolveType
+          go_name: ResolveType1_1
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: resolveTypeIfNeeded
+          go_name: ResolveTypeIfNeeded
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: setAction
+          go_name: SetAction
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: setClass
+          go_name: SetClass
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: java.lang.Class<?>
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: setClassName
+          go_name: SetClassName2
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: setClassName
+          go_name: SetClassName2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: setClipData
+          go_name: SetClipData
+          params:
+            - java_type: android.content.ClipData
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setComponent
+          go_name: SetComponent
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: setData
+          go_name: SetData
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: setDataAndNormalize
+          go_name: SetDataAndNormalize
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: setDataAndType
+          go_name: SetDataAndType
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: setDataAndTypeAndNormalize
+          go_name: SetDataAndTypeAndNormalize
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: setExtrasClassLoader
+          go_name: SetExtrasClassLoader
+          params:
+            - java_type: java.lang.ClassLoader
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setFlags
+          go_name: SetFlags
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: setIdentifier
+          go_name: SetIdentifier
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: setPackage
+          go_name: SetPackage
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: setSelector
+          go_name: SetSelector
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setSourceBounds
+          go_name: SetSourceBounds
+          params:
+            - java_type: android.graphics.Rect
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setType
+          go_name: SetType
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: setTypeAndNormalize
+          go_name: SetTypeAndNormalize
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: toURI
+          go_name: ToURI
+          returns: String
+          error: true
+        - java_method: toUri
+          go_name: ToUri
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: createChooser
+          go_name: CreateChooser2
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: createChooser
+          go_name: CreateChooser3_1
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.content.IntentSender
+              go_name: arg2
+          returns: android.content.Intent
+          error: true
+        - java_method: getIntent
+          go_name: GetIntent
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: getIntentOld
+          go_name: GetIntentOld
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: makeMainActivity
+          go_name: MakeMainActivity
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: makeMainSelectorActivity
+          go_name: MakeMainSelectorActivity
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+        - java_method: makeRestartActivityTask
+          go_name: MakeRestartActivityTask
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: normalizeMimeType
+          go_name: NormalizeMimeType
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: parseIntent
+          go_name: ParseIntent
+          params:
+            - java_type: android.content.res.Resources
+              go_name: arg0
+            - java_type: org.xmlpull.v1.XmlPullParser
+              go_name: arg1
+            - java_type: android.util.AttributeSet
+              go_name: arg2
+          returns: android.content.Intent
+          error: true
+        - java_method: parseUri
+          go_name: ParseUri
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.Intent
+          error: true
+    - java_class: android.os.Bundle
+      go_type: bundle
+      methods:
+        - java_method: clear
+          go_name: Clear
+          returns: void
+          error: true
+        - java_method: clone
+          go_name: Clone
+          returns: java.lang.Object
+          error: true
+        - java_method: deepCopy
+          go_name: DeepCopy
+          returns: android.os.Bundle
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getBinder
+          go_name: GetBinder
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: getBundle
+          go_name: GetBundle
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.os.Bundle
+          error: true
+        - java_method: getByte
+          go_name: GetByte1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: byte
+          error: true
+        - java_method: getByte
+          go_name: GetByte2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+          returns: java.lang.Byte
+          error: true
+        - java_method: getByteArray
+          go_name: GetByteArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: '[B'
+          error: true
+        - java_method: getChar
+          go_name: GetChar1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: char
+          error: true
+        - java_method: getChar
+          go_name: GetChar2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: char
+              go_name: arg1
+          returns: char
+          error: true
+        - java_method: getCharArray
+          go_name: GetCharArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: char[]
+          error: true
+        - java_method: getCharSequence
+          go_name: GetCharSequence1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getCharSequence
+          go_name: GetCharSequence2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: String
+          error: true
+        - java_method: getCharSequenceArray
+          go_name: GetCharSequenceArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.lang.CharSequence[]
+          error: true
+        - java_method: getCharSequenceArrayList
+          go_name: GetCharSequenceArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.ArrayList<java.lang.CharSequence>
+          error: true
+        - java_method: getClassLoader
+          go_name: GetClassLoader
+          returns: java.lang.ClassLoader
+          error: true
+        - java_method: getFloat
+          go_name: GetFloat1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: float
+          error: true
+        - java_method: getFloat
+          go_name: GetFloat2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+          returns: float
+          error: true
+        - java_method: getFloatArray
+          go_name: GetFloatArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: float[]
+          error: true
+        - java_method: getIntegerArrayList
+          go_name: GetIntegerArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.ArrayList<java.lang.Integer>
+          error: true
+        - java_method: getParcelableArray
+          go_name: GetParcelableArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.os.Parcelable[]
+          error: true
+        - java_method: getSerializable
+          go_name: GetSerializable
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.io.Serializable
+          error: true
+        - java_method: getShort
+          go_name: GetShort1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: short
+          error: true
+        - java_method: getShort
+          go_name: GetShort2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: short
+              go_name: arg1
+          returns: short
+          error: true
+        - java_method: getShortArray
+          go_name: GetShortArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: short[]
+          error: true
+        - java_method: getSize
+          go_name: GetSize
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.util.Size
+          error: true
+        - java_method: getSizeF
+          go_name: GetSizeF
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.util.SizeF
+          error: true
+        - java_method: getStringArrayList
+          go_name: GetStringArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.ArrayList<java.lang.String>
+          error: true
+        - java_method: hasFileDescriptors
+          go_name: HasFileDescriptors
+          returns: boolean
+          error: true
+        - java_method: putAll
+          go_name: PutAll
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: putBinder
+          go_name: PutBinder
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.IBinder
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putBundle
+          go_name: PutBundle
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putByte
+          go_name: PutByte
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putByteArray
+          go_name: PutByteArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: '[B'
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putChar
+          go_name: PutChar
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: char
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putCharArray
+          go_name: PutCharArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: char[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putCharSequence
+          go_name: PutCharSequence
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putCharSequenceArray
+          go_name: PutCharSequenceArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.CharSequence[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putCharSequenceArrayList
+          go_name: PutCharSequenceArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<java.lang.CharSequence>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putFloat
+          go_name: PutFloat
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putFloatArray
+          go_name: PutFloatArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: float[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putIntegerArrayList
+          go_name: PutIntegerArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<java.lang.Integer>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putParcelable
+          go_name: PutParcelable
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Parcelable
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putParcelableArray
+          go_name: PutParcelableArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Parcelable[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putParcelableArrayList
+          go_name: PutParcelableArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<? extends android.os.Parcelable>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putSerializable
+          go_name: PutSerializable
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.io.Serializable
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putShort
+          go_name: PutShort
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: short
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putShortArray
+          go_name: PutShortArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: short[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putSize
+          go_name: PutSize
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.util.Size
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putSizeF
+          go_name: PutSizeF
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.util.SizeF
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putSparseParcelableArray
+          go_name: PutSparseParcelableArray
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.util.SparseArray<? extends android.os.Parcelable>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putStringArrayList
+          go_name: PutStringArrayList
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<java.lang.String>
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: readFromParcel
+          go_name: ReadFromParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: remove
+          go_name: Remove
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setClassLoader
+          go_name: SetClassLoader
+          params:
+            - java_type: java.lang.ClassLoader
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
           returns: void
           error: true
     - java_class: android.app.Activity
@@ -2154,1810 +3535,1464 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.os.Bundle
-      go_type: bundle
-      methods:
-        - java_method: clear
-          go_name: Clear
-          returns: void
-          error: true
-        - java_method: clone
-          go_name: Clone
-          returns: java.lang.Object
-          error: true
-        - java_method: deepCopy
-          go_name: DeepCopy
-          returns: android.os.Bundle
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getBinder
-          go_name: GetBinder
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.os.IBinder
-          error: true
-        - java_method: getBundle
-          go_name: GetBundle
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.os.Bundle
-          error: true
-        - java_method: getByte
-          go_name: GetByte1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: byte
-          error: true
-        - java_method: getByte
-          go_name: GetByte2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: byte
-              go_name: arg1
-          returns: java.lang.Byte
-          error: true
-        - java_method: getByteArray
-          go_name: GetByteArray
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: '[B'
-          error: true
-        - java_method: getChar
-          go_name: GetChar1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: char
-          error: true
-        - java_method: getChar
-          go_name: GetChar2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: char
-              go_name: arg1
-          returns: char
-          error: true
-        - java_method: getCharArray
-          go_name: GetCharArray
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: char[]
-          error: true
-        - java_method: getCharSequence
-          go_name: GetCharSequence1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: getCharSequence
-          go_name: GetCharSequence2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: String
-          error: true
-        - java_method: getCharSequenceArray
-          go_name: GetCharSequenceArray
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.lang.CharSequence[]
-          error: true
-        - java_method: getCharSequenceArrayList
-          go_name: GetCharSequenceArrayList
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.util.ArrayList<java.lang.CharSequence>
-          error: true
-        - java_method: getClassLoader
-          go_name: GetClassLoader
-          returns: java.lang.ClassLoader
-          error: true
-        - java_method: getFloat
-          go_name: GetFloat1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: float
-          error: true
-        - java_method: getFloat
-          go_name: GetFloat2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: float
-              go_name: arg1
-          returns: float
-          error: true
-        - java_method: getFloatArray
-          go_name: GetFloatArray
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: float[]
-          error: true
-        - java_method: getIntegerArrayList
-          go_name: GetIntegerArrayList
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.util.ArrayList<java.lang.Integer>
-          error: true
-        - java_method: getParcelableArray
-          go_name: GetParcelableArray
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.os.Parcelable[]
-          error: true
-        - java_method: getSerializable
-          go_name: GetSerializable
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.io.Serializable
-          error: true
-        - java_method: getShort
-          go_name: GetShort1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: short
-          error: true
-        - java_method: getShort
-          go_name: GetShort2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: short
-              go_name: arg1
-          returns: short
-          error: true
-        - java_method: getShortArray
-          go_name: GetShortArray
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: short[]
-          error: true
-        - java_method: getSize
-          go_name: GetSize
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.util.Size
-          error: true
-        - java_method: getSizeF
-          go_name: GetSizeF
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.util.SizeF
-          error: true
-        - java_method: getStringArrayList
-          go_name: GetStringArrayList
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.util.ArrayList<java.lang.String>
-          error: true
-        - java_method: hasFileDescriptors
-          go_name: HasFileDescriptors
-          returns: boolean
-          error: true
-        - java_method: putAll
-          go_name: PutAll
-          params:
-            - java_type: android.os.Bundle
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: putBinder
-          go_name: PutBinder
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.IBinder
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putBundle
-          go_name: PutBundle
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putByte
-          go_name: PutByte
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: byte
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putByteArray
-          go_name: PutByteArray
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: '[B'
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putChar
-          go_name: PutChar
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: char
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putCharArray
-          go_name: PutCharArray
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: char[]
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putCharSequence
-          go_name: PutCharSequence
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putCharSequenceArray
-          go_name: PutCharSequenceArray
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.lang.CharSequence[]
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putCharSequenceArrayList
-          go_name: PutCharSequenceArrayList
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.util.ArrayList<java.lang.CharSequence>
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putFloat
-          go_name: PutFloat
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: float
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putFloatArray
-          go_name: PutFloatArray
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: float[]
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putIntegerArrayList
-          go_name: PutIntegerArrayList
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.util.ArrayList<java.lang.Integer>
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putParcelable
-          go_name: PutParcelable
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.Parcelable
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putParcelableArray
-          go_name: PutParcelableArray
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.Parcelable[]
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putParcelableArrayList
-          go_name: PutParcelableArrayList
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.util.ArrayList<? extends android.os.Parcelable>
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putSerializable
-          go_name: PutSerializable
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.io.Serializable
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putShort
-          go_name: PutShort
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: short
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putShortArray
-          go_name: PutShortArray
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: short[]
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putSize
-          go_name: PutSize
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.util.Size
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putSizeF
-          go_name: PutSizeF
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.util.SizeF
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putSparseParcelableArray
-          go_name: PutSparseParcelableArray
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.util.SparseArray<? extends android.os.Parcelable>
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putStringArrayList
-          go_name: PutStringArrayList
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.util.ArrayList<java.lang.String>
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: readFromParcel
-          go_name: ReadFromParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: remove
-          go_name: Remove
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setClassLoader
-          go_name: SetClassLoader
-          params:
-            - java_type: java.lang.ClassLoader
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.Intent
-      go_type: intent
-      methods:
-        - java_method: addCategory
-          go_name: AddCategory
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: addFlags
-          go_name: AddFlags
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: clone
-          go_name: Clone
-          returns: java.lang.Object
-          error: true
-        - java_method: cloneFilter
-          go_name: CloneFilter
-          returns: android.content.Intent
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: fillIn
-          go_name: FillIn
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: int
-          error: true
-        - java_method: filterEquals
-          go_name: FilterEquals
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: filterHashCode
-          go_name: FilterHashCode
-          returns: int
-          error: true
-        - java_method: getAction
-          go_name: GetAction
-          returns: String
-          error: true
-        - java_method: getBooleanArrayExtra
-          go_name: GetBooleanArrayExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean[]
-          error: true
-        - java_method: getBooleanExtra
-          go_name: GetBooleanExtra
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: getBundleExtra
-          go_name: GetBundleExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.os.Bundle
-          error: true
-        - java_method: getByteArrayExtra
-          go_name: GetByteArrayExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: '[B'
-          error: true
-        - java_method: getByteExtra
-          go_name: GetByteExtra
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: byte
-              go_name: arg1
-          returns: byte
-          error: true
-        - java_method: getCategories
-          go_name: GetCategories
-          returns: java.util.Set<java.lang.String>
-          error: true
-        - java_method: getCharArrayExtra
-          go_name: GetCharArrayExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: char[]
-          error: true
-        - java_method: getCharExtra
-          go_name: GetCharExtra
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: char
-              go_name: arg1
-          returns: char
-          error: true
-        - java_method: getCharSequenceArrayExtra
-          go_name: GetCharSequenceArrayExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.lang.CharSequence[]
-          error: true
-        - java_method: getCharSequenceArrayListExtra
-          go_name: GetCharSequenceArrayListExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.util.ArrayList<java.lang.CharSequence>
-          error: true
-        - java_method: getCharSequenceExtra
-          go_name: GetCharSequenceExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: getClipData
-          go_name: GetClipData
-          returns: android.content.ClipData
-          error: true
-        - java_method: getComponent
-          go_name: GetComponent
-          returns: android.content.ComponentName
-          error: true
-        - java_method: getData
-          go_name: GetData
-          returns: android.net.Uri
-          error: true
-        - java_method: getDataString
-          go_name: GetDataString
-          returns: String
-          error: true
-        - java_method: getDoubleArrayExtra
-          go_name: GetDoubleArrayExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: double[]
-          error: true
-        - java_method: getDoubleExtra
-          go_name: GetDoubleExtra
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: double
-              go_name: arg1
-          returns: double
-          error: true
-        - java_method: getExtras
-          go_name: GetExtras
-          returns: android.os.Bundle
-          error: true
-        - java_method: getFlags
-          go_name: GetFlags
-          returns: int
-          error: true
-        - java_method: getFloatArrayExtra
-          go_name: GetFloatArrayExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: float[]
-          error: true
-        - java_method: getFloatExtra
-          go_name: GetFloatExtra
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: float
-              go_name: arg1
-          returns: float
-          error: true
-        - java_method: getIdentifier
-          go_name: GetIdentifier
-          returns: String
-          error: true
-        - java_method: getIntArrayExtra
-          go_name: GetIntArrayExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: '[I'
-          error: true
-        - java_method: getIntExtra
-          go_name: GetIntExtra
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: int
-          error: true
-        - java_method: getIntegerArrayListExtra
-          go_name: GetIntegerArrayListExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.util.ArrayList<java.lang.Integer>
-          error: true
-        - java_method: getLongArrayExtra
-          go_name: GetLongArrayExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: '[J'
-          error: true
-        - java_method: getLongExtra
-          go_name: GetLongExtra
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: long
-          error: true
-        - java_method: getPackage
-          go_name: GetPackage
-          returns: String
-          error: true
-        - java_method: getParcelableArrayExtra
-          go_name: GetParcelableArrayExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.os.Parcelable[]
-          error: true
-        - java_method: getScheme
-          go_name: GetScheme
-          returns: String
-          error: true
-        - java_method: getSelector
-          go_name: GetSelector
-          returns: android.content.Intent
-          error: true
-        - java_method: getSerializableExtra
-          go_name: GetSerializableExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.io.Serializable
-          error: true
-        - java_method: getShortArrayExtra
-          go_name: GetShortArrayExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: short[]
-          error: true
-        - java_method: getShortExtra
-          go_name: GetShortExtra
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: short
-              go_name: arg1
-          returns: short
-          error: true
-        - java_method: getSourceBounds
-          go_name: GetSourceBounds
-          returns: android.graphics.Rect
-          error: true
-        - java_method: getStringArrayExtra
-          go_name: GetStringArrayExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.lang.String[]
-          error: true
-        - java_method: getStringArrayListExtra
-          go_name: GetStringArrayListExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.util.ArrayList<java.lang.String>
-          error: true
-        - java_method: getStringExtra
-          go_name: GetStringExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: getType
-          go_name: GetType
-          returns: String
-          error: true
-        - java_method: hasCategory
-          go_name: HasCategory
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hasExtra
-          go_name: HasExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hasFileDescriptors
-          go_name: HasFileDescriptors
-          returns: boolean
-          error: true
-        - java_method: isMismatchingFilter
-          go_name: IsMismatchingFilter
-          returns: boolean
-          error: true
-        - java_method: putCharSequenceArrayListExtra
-          go_name: PutCharSequenceArrayListExtra
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.util.ArrayList<java.lang.CharSequence>
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.Parcelable
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_2
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.Parcelable[]
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_3
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_4
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: boolean[]
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_5
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: byte
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_6
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: '[B'
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_7
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: char
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_8
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: char[]
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_9
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: double
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_10
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: double[]
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_11
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: float
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_12
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: float[]
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_13
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_14
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: '[I'
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_15
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.io.Serializable
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_16
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_17
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.lang.CharSequence[]
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_18
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_19
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.lang.String[]
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_20
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_21
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: '[J'
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_22
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: short
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtra
-          go_name: PutExtra2_23
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: short[]
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtras
-          go_name: PutExtras1
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: putExtras
-          go_name: PutExtras1_1
-          params:
-            - java_type: android.os.Bundle
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: putIntegerArrayListExtra
-          go_name: PutIntegerArrayListExtra
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.util.ArrayList<java.lang.Integer>
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putParcelableArrayListExtra
-          go_name: PutParcelableArrayListExtra
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.util.ArrayList<? extends android.os.Parcelable>
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: putStringArrayListExtra
-          go_name: PutStringArrayListExtra
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.util.ArrayList<java.lang.String>
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: readFromParcel
-          go_name: ReadFromParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: removeCategory
-          go_name: RemoveCategory
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: removeExtra
-          go_name: RemoveExtra
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: removeFlags
-          go_name: RemoveFlags
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: removeLaunchSecurityProtection
-          go_name: RemoveLaunchSecurityProtection
-          returns: void
-          error: true
-        - java_method: replaceExtras
-          go_name: ReplaceExtras1
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: replaceExtras
-          go_name: ReplaceExtras1_1
-          params:
-            - java_type: android.os.Bundle
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: resolveActivity
-          go_name: ResolveActivity
-          params:
-            - java_type: android.content.pm.PackageManager
-              go_name: arg0
-          returns: android.content.ComponentName
-          error: true
-        - java_method: resolveActivityInfo
-          go_name: ResolveActivityInfo
-          params:
-            - java_type: android.content.pm.PackageManager
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.content.pm.ActivityInfo
-          error: true
-        - java_method: resolveType
-          go_name: ResolveType1
-          params:
-            - java_type: android.content.ContentResolver
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: resolveType
-          go_name: ResolveType1_1
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: resolveTypeIfNeeded
-          go_name: ResolveTypeIfNeeded
-          params:
-            - java_type: android.content.ContentResolver
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: setAction
-          go_name: SetAction
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: setClass
-          go_name: SetClass
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: java.lang.Class<?>
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: setClassName
-          go_name: SetClassName2
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: setClassName
-          go_name: SetClassName2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: setClipData
-          go_name: SetClipData
-          params:
-            - java_type: android.content.ClipData
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setComponent
-          go_name: SetComponent
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: setData
-          go_name: SetData
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: setDataAndNormalize
-          go_name: SetDataAndNormalize
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: setDataAndType
-          go_name: SetDataAndType
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: setDataAndTypeAndNormalize
-          go_name: SetDataAndTypeAndNormalize
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: setExtrasClassLoader
-          go_name: SetExtrasClassLoader
-          params:
-            - java_type: java.lang.ClassLoader
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setFlags
-          go_name: SetFlags
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: setIdentifier
-          go_name: SetIdentifier
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: setPackage
-          go_name: SetPackage
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: setSelector
-          go_name: SetSelector
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setSourceBounds
-          go_name: SetSourceBounds
-          params:
-            - java_type: android.graphics.Rect
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setType
-          go_name: SetType
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: setTypeAndNormalize
-          go_name: SetTypeAndNormalize
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: toURI
-          go_name: ToURI
-          returns: String
-          error: true
-        - java_method: toUri
-          go_name: ToUri
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-      static_methods:
-        - java_method: createChooser
-          go_name: CreateChooser2
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: createChooser
-          go_name: CreateChooser3_1
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: android.content.IntentSender
-              go_name: arg2
-          returns: android.content.Intent
-          error: true
-        - java_method: getIntent
-          go_name: GetIntent
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: getIntentOld
-          go_name: GetIntentOld
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: makeMainActivity
-          go_name: MakeMainActivity
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: makeMainSelectorActivity
-          go_name: MakeMainSelectorActivity
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-        - java_method: makeRestartActivityTask
-          go_name: MakeRestartActivityTask
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: normalizeMimeType
-          go_name: NormalizeMimeType
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: parseIntent
-          go_name: ParseIntent
-          params:
-            - java_type: android.content.res.Resources
-              go_name: arg0
-            - java_type: org.xmlpull.v1.XmlPullParser
-              go_name: arg1
-            - java_type: android.util.AttributeSet
-              go_name: arg2
-          returns: android.content.Intent
-          error: true
-        - java_method: parseUri
-          go_name: ParseUri
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.content.Intent
-          error: true
-    - java_class: android.os.CancellationSignal
-      go_type: cancellationSignal
-      methods:
-        - java_method: cancel
-          go_name: Cancel
-          returns: void
-          error: true
-        - java_method: isCanceled
-          go_name: IsCanceled
-          returns: boolean
-          error: true
-        - java_method: setOnCancelListener
-          go_name: SetOnCancelListener
-          params:
-            - java_type: android.os.CancellationSignal$OnCancelListener
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: throwIfCanceled
-          go_name: ThrowIfCanceled
-          returns: void
-          error: true
 constants:
     - go_name: AccessibilityService
-      value: '""'
+      value: '"accessibility"'
       go_type: string
     - go_name: AccountService
-      value: '""'
+      value: '"account"'
       go_type: string
     - go_name: ActivityService
-      value: '""'
+      value: '"activity"'
       go_type: string
     - go_name: AdvancedProtectionService
-      value: '""'
+      value: '"advanced_protection"'
       go_type: string
     - go_name: AlarmService
-      value: '""'
+      value: '"alarm"'
       go_type: string
     - go_name: AppwidgetService
-      value: '""'
+      value: '"appwidget"'
       go_type: string
     - go_name: AppFunctionService
-      value: '""'
+      value: '"app_function"'
       go_type: string
     - go_name: AppOpsService
-      value: '""'
+      value: '"appops"'
       go_type: string
     - go_name: AppSearchService
-      value: '""'
+      value: '"app_search"'
       go_type: string
     - go_name: AudioService
-      value: '""'
+      value: '"audio"'
       go_type: string
     - go_name: BatteryService
-      value: '""'
+      value: '"batterymanager"'
       go_type: string
     - go_name: BindAboveClient
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: BindAdjustWithActivity
-      value: "0"
+      value: "128"
       go_type: int
     - go_name: BindAllowActivityStarts
-      value: "0"
+      value: "512"
       go_type: int
     - go_name: BindAllowOomManagement
-      value: "0"
+      value: "16"
       go_type: int
     - go_name: BindAutoCreate
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: BindDebugUnbind
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: BindExternalService
-      value: "0"
+      value: "-2147483648"
       go_type: int
     - go_name: BindExternalServiceLong
-      value: "0"
+      value: "4611686018427387904"
       go_type: int64
     - go_name: BindImportant
-      value: "0"
+      value: "64"
       go_type: int
     - go_name: BindIncludeCapabilities
-      value: "0"
+      value: "4096"
       go_type: int
     - go_name: BindNotForeground
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: BindNotPerceptible
-      value: "0"
+      value: "256"
       go_type: int
     - go_name: BindPackageIsolatedProcess
-      value: "0"
+      value: "16384"
       go_type: int
     - go_name: BindSharedIsolatedProcess
-      value: "0"
+      value: "8192"
       go_type: int
     - go_name: BindWaivePriority
-      value: "0"
+      value: "32"
       go_type: int
     - go_name: BiometricService
-      value: '""'
+      value: '"biometric"'
       go_type: string
     - go_name: BlobStoreService
-      value: '""'
+      value: '"blob_store"'
       go_type: string
     - go_name: BluetoothService
-      value: '""'
+      value: '"bluetooth"'
       go_type: string
     - go_name: BugreportService
-      value: '""'
+      value: '"bugreport"'
       go_type: string
     - go_name: CameraService
-      value: '""'
+      value: '"camera"'
       go_type: string
     - go_name: CaptioningService
-      value: '""'
+      value: '"captioning"'
       go_type: string
     - go_name: CarrierConfigService
-      value: '""'
+      value: '"carrier_config"'
       go_type: string
     - go_name: ClipboardService
-      value: '""'
+      value: '"clipboard"'
       go_type: string
     - go_name: CompanionDeviceService
-      value: '""'
+      value: '"companiondevice"'
       go_type: string
     - go_name: ConnectivityDiagnosticsService
-      value: '""'
+      value: '"connectivity_diagnostics"'
       go_type: string
     - go_name: ConnectivityService
-      value: '""'
+      value: '"connectivity"'
       go_type: string
     - go_name: ConsumerIrService
-      value: '""'
+      value: '"consumer_ir"'
       go_type: string
     - go_name: ContactKeysService
-      value: '""'
+      value: '"contact_keys"'
       go_type: string
     - go_name: ContextIgnoreSecurity
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ContextIncludeCode
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ContextRestricted
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: CredentialService
-      value: '""'
+      value: '"credential"'
       go_type: string
     - go_name: CrossProfileAppsService
-      value: '""'
+      value: '"crossprofileapps"'
       go_type: string
     - go_name: DeviceIdDefault
       value: "0"
       go_type: int
     - go_name: DeviceIdInvalid
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: DeviceLockService
-      value: '""'
+      value: '"device_lock"'
       go_type: string
     - go_name: DevicePolicyService
-      value: '""'
+      value: '"device_policy"'
       go_type: string
     - go_name: DisplayHashService
-      value: '""'
+      value: '"display_hash"'
       go_type: string
     - go_name: DisplayService
-      value: '""'
+      value: '"display"'
       go_type: string
     - go_name: DomainVerificationService
-      value: '""'
+      value: '"domain_verification"'
       go_type: string
     - go_name: DownloadService
-      value: '""'
+      value: '"download"'
       go_type: string
     - go_name: DropboxService
-      value: '""'
+      value: '"dropbox"'
       go_type: string
     - go_name: EuiccService
-      value: '""'
+      value: '"euicc"'
       go_type: string
     - go_name: FileIntegrityService
-      value: '""'
+      value: '"file_integrity"'
       go_type: string
     - go_name: FingerprintService
-      value: '""'
+      value: '"fingerprint"'
       go_type: string
     - go_name: GameService
-      value: '""'
+      value: '"game"'
       go_type: string
     - go_name: GrammaticalInflectionService
-      value: '""'
+      value: '"grammatical_inflection"'
       go_type: string
     - go_name: HardwarePropertiesService
-      value: '""'
+      value: '"hardware_properties"'
       go_type: string
     - go_name: HealthconnectService
-      value: '""'
+      value: '"healthconnect"'
       go_type: string
     - go_name: InputMethodService
-      value: '""'
+      value: '"input_method"'
       go_type: string
     - go_name: InputService
-      value: '""'
+      value: '"input"'
       go_type: string
     - go_name: IpsecService
-      value: '""'
+      value: '"ipsec"'
       go_type: string
     - go_name: JobSchedulerService
-      value: '""'
+      value: '"jobscheduler"'
       go_type: string
     - go_name: KeyguardService
-      value: '""'
+      value: '"keyguard"'
       go_type: string
     - go_name: KeystoreService
-      value: '""'
+      value: '"keystore"'
       go_type: string
     - go_name: LauncherAppsService
-      value: '""'
+      value: '"launcherapps"'
       go_type: string
     - go_name: LayoutInflaterService
-      value: '""'
+      value: '"layout_inflater"'
       go_type: string
     - go_name: LocaleService
-      value: '""'
+      value: '"locale"'
       go_type: string
     - go_name: LocationService
-      value: '""'
+      value: '"location"'
       go_type: string
     - go_name: MediaCommunicationService
-      value: '""'
+      value: '"media_communication"'
       go_type: string
     - go_name: MediaMetricsService
-      value: '""'
+      value: '"media_metrics"'
       go_type: string
     - go_name: MediaProjectionService
-      value: '""'
+      value: '"media_projection"'
       go_type: string
     - go_name: MediaQualityService
-      value: '""'
+      value: '"media_quality"'
       go_type: string
     - go_name: MediaRouterService
-      value: '""'
+      value: '"media_router"'
       go_type: string
     - go_name: MediaSessionService
-      value: '""'
+      value: '"media_session"'
       go_type: string
     - go_name: MidiService
-      value: '""'
+      value: '"midi"'
       go_type: string
     - go_name: ModeAppend
-      value: "0"
+      value: "32768"
       go_type: int
     - go_name: ModeEnableWriteAheadLogging
-      value: "0"
+      value: "8"
       go_type: int
     - go_name: ModeMultiProcess
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: ModeNoLocalizedCollators
-      value: "0"
+      value: "16"
       go_type: int
     - go_name: ModePrivate
       value: "0"
       go_type: int
     - go_name: ModeWorldReadable
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ModeWorldWriteable
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: NetworkStatsService
-      value: '""'
+      value: '"netstats"'
       go_type: string
     - go_name: NfcService
-      value: '""'
+      value: '"nfc"'
       go_type: string
     - go_name: NotificationService
-      value: '""'
+      value: '"notification"'
       go_type: string
     - go_name: NsdService
-      value: '""'
+      value: '"servicediscovery"'
       go_type: string
     - go_name: OverlayService
-      value: '""'
+      value: '"overlay"'
       go_type: string
     - go_name: PeopleService
-      value: '""'
+      value: '"people"'
       go_type: string
     - go_name: PerformanceHintService
-      value: '""'
+      value: '"performance_hint"'
       go_type: string
     - go_name: PersistentDataBlockService
-      value: '""'
+      value: '"persistent_data_block"'
       go_type: string
     - go_name: PowerService
-      value: '""'
+      value: '"power"'
       go_type: string
     - go_name: PrintService
-      value: '""'
+      value: '"print"'
       go_type: string
     - go_name: ProfilingService
-      value: '""'
+      value: '"profiling"'
       go_type: string
     - go_name: ReceiverExported
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: ReceiverNotExported
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: ReceiverVisibleToInstantApps
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: RestrictionsService
-      value: '""'
+      value: '"restrictions"'
       go_type: string
     - go_name: RoleService
-      value: '""'
+      value: '"role"'
       go_type: string
     - go_name: SatelliteService
-      value: '""'
+      value: '"satellite"'
       go_type: string
     - go_name: SearchService
-      value: '""'
+      value: '"search"'
       go_type: string
     - go_name: SecurityStateService
-      value: '""'
+      value: '"security_state"'
       go_type: string
     - go_name: SensorService
-      value: '""'
+      value: '"sensor"'
       go_type: string
     - go_name: ShortcutService
-      value: '""'
+      value: '"shortcut"'
       go_type: string
     - go_name: StatusBarService
-      value: '""'
+      value: '"statusbar"'
       go_type: string
     - go_name: StorageService
-      value: '""'
+      value: '"storage"'
       go_type: string
     - go_name: StorageStatsService
-      value: '""'
+      value: '"storagestats"'
       go_type: string
     - go_name: SystemHealthService
-      value: '""'
+      value: '"systemhealth"'
       go_type: string
     - go_name: TelecomService
-      value: '""'
+      value: '"telecom"'
       go_type: string
     - go_name: TelephonyImsService
-      value: '""'
+      value: '"telephony_ims"'
       go_type: string
     - go_name: TelephonyService
-      value: '""'
+      value: '"phone"'
       go_type: string
     - go_name: TelephonySubscriptionService
-      value: '""'
+      value: '"telephony_subscription_service"'
       go_type: string
     - go_name: TetheringService
-      value: '""'
+      value: '"tethering"'
       go_type: string
     - go_name: TextClassificationService
-      value: '""'
+      value: '"textclassification"'
       go_type: string
     - go_name: TextServicesManagerService
-      value: '""'
+      value: '"textservices"'
       go_type: string
     - go_name: TvAdService
-      value: '""'
+      value: '"tv_ad"'
       go_type: string
     - go_name: TvInputService
-      value: '""'
+      value: '"tv_input"'
       go_type: string
     - go_name: TvInteractiveAppService
-      value: '""'
+      value: '"tv_interactive_app"'
       go_type: string
     - go_name: UiModeService
-      value: '""'
+      value: '"uimode"'
       go_type: string
     - go_name: UsageStatsService
-      value: '""'
+      value: '"usagestats"'
       go_type: string
     - go_name: UsbService
-      value: '""'
+      value: '"usb"'
       go_type: string
     - go_name: UserService
-      value: '""'
+      value: '"user"'
       go_type: string
     - go_name: VibratorManagerService
-      value: '""'
+      value: '"vibrator_manager"'
       go_type: string
     - go_name: VibratorService
-      value: '""'
+      value: '"vibrator"'
       go_type: string
     - go_name: VirtualDeviceService
-      value: '""'
+      value: '"virtualdevice"'
       go_type: string
     - go_name: VpnManagementService
-      value: '""'
+      value: '"vpn_management"'
       go_type: string
     - go_name: WallpaperService
-      value: '""'
+      value: '"wallpaper"'
       go_type: string
     - go_name: WifiAwareService
-      value: '""'
+      value: '"wifiaware"'
       go_type: string
     - go_name: WifiP2pService
-      value: '""'
+      value: '"wifip2p"'
       go_type: string
     - go_name: WifiRttRangingService
-      value: '""'
+      value: '"wifirtt"'
       go_type: string
     - go_name: WifiService
-      value: '""'
+      value: '"wifi"'
       go_type: string
     - go_name: WindowService
-      value: '""'
+      value: '"window"'
       go_type: string
-    - go_name: DefaultKeysDialer
+    - go_name: ActionAirplaneModeChanged
+      value: '"android.intent.action.AIRPLANE_MODE"'
+      go_type: string
+    - go_name: ActionAllApps
+      value: '"android.intent.action.ALL_APPS"'
+      go_type: string
+    - go_name: ActionAnswer
+      value: '"android.intent.action.ANSWER"'
+      go_type: string
+    - go_name: ActionApplicationLocaleChanged
+      value: '"android.intent.action.APPLICATION_LOCALE_CHANGED"'
+      go_type: string
+    - go_name: ActionApplicationPreferences
+      value: '"android.intent.action.APPLICATION_PREFERENCES"'
+      go_type: string
+    - go_name: ActionApplicationRestrictionsChanged
+      value: '"android.intent.action.APPLICATION_RESTRICTIONS_CHANGED"'
+      go_type: string
+    - go_name: ActionAppError
+      value: '"android.intent.action.APP_ERROR"'
+      go_type: string
+    - go_name: ActionAssist
+      value: '"android.intent.action.ASSIST"'
+      go_type: string
+    - go_name: ActionAttachData
+      value: '"android.intent.action.ATTACH_DATA"'
+      go_type: string
+    - go_name: ActionAutoRevokePermissions
+      value: '"android.intent.action.AUTO_REVOKE_PERMISSIONS"'
+      go_type: string
+    - go_name: ActionBatteryChanged
+      value: '"android.intent.action.BATTERY_CHANGED"'
+      go_type: string
+    - go_name: ActionBatteryLow
+      value: '"android.intent.action.BATTERY_LOW"'
+      go_type: string
+    - go_name: ActionBatteryOkay
+      value: '"android.intent.action.BATTERY_OKAY"'
+      go_type: string
+    - go_name: ActionBootCompleted
+      value: '"android.intent.action.BOOT_COMPLETED"'
+      go_type: string
+    - go_name: ActionBugReport
+      value: '"android.intent.action.BUG_REPORT"'
+      go_type: string
+    - go_name: ActionCall
+      value: '"android.intent.action.CALL"'
+      go_type: string
+    - go_name: ActionCallButton
+      value: '"android.intent.action.CALL_BUTTON"'
+      go_type: string
+    - go_name: ActionCameraButton
+      value: '"android.intent.action.CAMERA_BUTTON"'
+      go_type: string
+    - go_name: ActionCarrierSetup
+      value: '"android.intent.action.CARRIER_SETUP"'
+      go_type: string
+    - go_name: ActionChooser
+      value: '"android.intent.action.CHOOSER"'
+      go_type: string
+    - go_name: ActionCloseSystemDialogs
+      value: '"android.intent.action.CLOSE_SYSTEM_DIALOGS"'
+      go_type: string
+    - go_name: ActionConfigurationChanged
+      value: '"android.intent.action.CONFIGURATION_CHANGED"'
+      go_type: string
+    - go_name: ActionCreateDocument
+      value: '"android.intent.action.CREATE_DOCUMENT"'
+      go_type: string
+    - go_name: ActionCreateNote
+      value: '"android.intent.action.CREATE_NOTE"'
+      go_type: string
+    - go_name: ActionCreateReminder
+      value: '"android.intent.action.CREATE_REMINDER"'
+      go_type: string
+    - go_name: ActionCreateShortcut
+      value: '"android.intent.action.CREATE_SHORTCUT"'
+      go_type: string
+    - go_name: ActionDateChanged
+      value: '"android.intent.action.DATE_CHANGED"'
+      go_type: string
+    - go_name: ActionDefault
+      value: '"android.intent.action.VIEW"'
+      go_type: string
+    - go_name: ActionDefine
+      value: '"android.intent.action.DEFINE"'
+      go_type: string
+    - go_name: ActionDelete
+      value: '"android.intent.action.DELETE"'
+      go_type: string
+    - go_name: ActionDeviceStorageLow
+      value: '"android.intent.action.DEVICE_STORAGE_LOW"'
+      go_type: string
+    - go_name: ActionDeviceStorageOk
+      value: '"android.intent.action.DEVICE_STORAGE_OK"'
+      go_type: string
+    - go_name: ActionDial
+      value: '"android.intent.action.DIAL"'
+      go_type: string
+    - go_name: ActionDockEvent
+      value: '"android.intent.action.DOCK_EVENT"'
+      go_type: string
+    - go_name: ActionDreamingStarted
+      value: '"android.intent.action.DREAMING_STARTED"'
+      go_type: string
+    - go_name: ActionDreamingStopped
+      value: '"android.intent.action.DREAMING_STOPPED"'
+      go_type: string
+    - go_name: ActionEdit
+      value: '"android.intent.action.EDIT"'
+      go_type: string
+    - go_name: ActionExternalApplicationsAvailable
+      value: '"android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE"'
+      go_type: string
+    - go_name: ActionExternalApplicationsUnavailable
+      value: '"android.intent.action.EXTERNAL_APPLICATIONS_UNAVAILABLE"'
+      go_type: string
+    - go_name: ActionFactoryTest
+      value: '"android.intent.action.FACTORY_TEST"'
+      go_type: string
+    - go_name: ActionGetContent
+      value: '"android.intent.action.GET_CONTENT"'
+      go_type: string
+    - go_name: ActionGetRestrictionEntries
+      value: '"android.intent.action.GET_RESTRICTION_ENTRIES"'
+      go_type: string
+    - go_name: ActionGtalkServiceConnected
+      value: '"android.intent.action.GTALK_CONNECTED"'
+      go_type: string
+    - go_name: ActionGtalkServiceDisconnected
+      value: '"android.intent.action.GTALK_DISCONNECTED"'
+      go_type: string
+    - go_name: ActionHeadsetPlug
+      value: '"android.intent.action.HEADSET_PLUG"'
+      go_type: string
+    - go_name: ActionInputMethodChanged
+      value: '"android.intent.action.INPUT_METHOD_CHANGED"'
+      go_type: string
+    - go_name: ActionInsert
+      value: '"android.intent.action.INSERT"'
+      go_type: string
+    - go_name: ActionInsertOrEdit
+      value: '"android.intent.action.INSERT_OR_EDIT"'
+      go_type: string
+    - go_name: ActionInstallFailure
+      value: '"android.intent.action.INSTALL_FAILURE"'
+      go_type: string
+    - go_name: ActionInstallPackage
+      value: '"android.intent.action.INSTALL_PACKAGE"'
+      go_type: string
+    - go_name: ActionLaunchCaptureContentActivityForNote
+      value: '"android.intent.action.LAUNCH_CAPTURE_CONTENT_ACTIVITY_FOR_NOTE"'
+      go_type: string
+    - go_name: ActionLocaleChanged
+      value: '"android.intent.action.LOCALE_CHANGED"'
+      go_type: string
+    - go_name: ActionLockedBootCompleted
+      value: '"android.intent.action.LOCKED_BOOT_COMPLETED"'
+      go_type: string
+    - go_name: ActionMain
+      value: '"android.intent.action.MAIN"'
+      go_type: string
+    - go_name: ActionManagedProfileAdded
+      value: '"android.intent.action.MANAGED_PROFILE_ADDED"'
+      go_type: string
+    - go_name: ActionManagedProfileAvailable
+      value: '"android.intent.action.MANAGED_PROFILE_AVAILABLE"'
+      go_type: string
+    - go_name: ActionManagedProfileRemoved
+      value: '"android.intent.action.MANAGED_PROFILE_REMOVED"'
+      go_type: string
+    - go_name: ActionManagedProfileUnavailable
+      value: '"android.intent.action.MANAGED_PROFILE_UNAVAILABLE"'
+      go_type: string
+    - go_name: ActionManagedProfileUnlocked
+      value: '"android.intent.action.MANAGED_PROFILE_UNLOCKED"'
+      go_type: string
+    - go_name: ActionManageNetworkUsage
+      value: '"android.intent.action.MANAGE_NETWORK_USAGE"'
+      go_type: string
+    - go_name: ActionManagePackageStorage
+      value: '"android.intent.action.MANAGE_PACKAGE_STORAGE"'
+      go_type: string
+    - go_name: ActionManageUnusedApps
+      value: '"android.intent.action.MANAGE_UNUSED_APPS"'
+      go_type: string
+    - go_name: ActionMediaBadRemoval
+      value: '"android.intent.action.MEDIA_BAD_REMOVAL"'
+      go_type: string
+    - go_name: ActionMediaButton
+      value: '"android.intent.action.MEDIA_BUTTON"'
+      go_type: string
+    - go_name: ActionMediaChecking
+      value: '"android.intent.action.MEDIA_CHECKING"'
+      go_type: string
+    - go_name: ActionMediaEject
+      value: '"android.intent.action.MEDIA_EJECT"'
+      go_type: string
+    - go_name: ActionMediaMounted
+      value: '"android.intent.action.MEDIA_MOUNTED"'
+      go_type: string
+    - go_name: ActionMediaNofs
+      value: '"android.intent.action.MEDIA_NOFS"'
+      go_type: string
+    - go_name: ActionMediaRemoved
+      value: '"android.intent.action.MEDIA_REMOVED"'
+      go_type: string
+    - go_name: ActionMediaScannerFinished
+      value: '"android.intent.action.MEDIA_SCANNER_FINISHED"'
+      go_type: string
+    - go_name: ActionMediaScannerScanFile
+      value: '"android.intent.action.MEDIA_SCANNER_SCAN_FILE"'
+      go_type: string
+    - go_name: ActionMediaScannerStarted
+      value: '"android.intent.action.MEDIA_SCANNER_STARTED"'
+      go_type: string
+    - go_name: ActionMediaShared
+      value: '"android.intent.action.MEDIA_SHARED"'
+      go_type: string
+    - go_name: ActionMediaUnmountable
+      value: '"android.intent.action.MEDIA_UNMOUNTABLE"'
+      go_type: string
+    - go_name: ActionMediaUnmounted
+      value: '"android.intent.action.MEDIA_UNMOUNTED"'
+      go_type: string
+    - go_name: ActionMyPackageReplaced
+      value: '"android.intent.action.MY_PACKAGE_REPLACED"'
+      go_type: string
+    - go_name: ActionMyPackageSuspended
+      value: '"android.intent.action.MY_PACKAGE_SUSPENDED"'
+      go_type: string
+    - go_name: ActionMyPackageUnsuspended
+      value: '"android.intent.action.MY_PACKAGE_UNSUSPENDED"'
+      go_type: string
+    - go_name: ActionNewOutgoingCall
+      value: '"android.intent.action.NEW_OUTGOING_CALL"'
+      go_type: string
+    - go_name: ActionOpenDocument
+      value: '"android.intent.action.OPEN_DOCUMENT"'
+      go_type: string
+    - go_name: ActionOpenDocumentTree
+      value: '"android.intent.action.OPEN_DOCUMENT_TREE"'
+      go_type: string
+    - go_name: ActionPackagesSuspended
+      value: '"android.intent.action.PACKAGES_SUSPENDED"'
+      go_type: string
+    - go_name: ActionPackagesUnsuspended
+      value: '"android.intent.action.PACKAGES_UNSUSPENDED"'
+      go_type: string
+    - go_name: ActionPackageAdded
+      value: '"android.intent.action.PACKAGE_ADDED"'
+      go_type: string
+    - go_name: ActionPackageChanged
+      value: '"android.intent.action.PACKAGE_CHANGED"'
+      go_type: string
+    - go_name: ActionPackageDataCleared
+      value: '"android.intent.action.PACKAGE_DATA_CLEARED"'
+      go_type: string
+    - go_name: ActionPackageFirstLaunch
+      value: '"android.intent.action.PACKAGE_FIRST_LAUNCH"'
+      go_type: string
+    - go_name: ActionPackageFullyRemoved
+      value: '"android.intent.action.PACKAGE_FULLY_REMOVED"'
+      go_type: string
+    - go_name: ActionPackageInstall
+      value: '"android.intent.action.PACKAGE_INSTALL"'
+      go_type: string
+    - go_name: ActionPackageNeedsVerification
+      value: '"android.intent.action.PACKAGE_NEEDS_VERIFICATION"'
+      go_type: string
+    - go_name: ActionPackageRemoved
+      value: '"android.intent.action.PACKAGE_REMOVED"'
+      go_type: string
+    - go_name: ActionPackageReplaced
+      value: '"android.intent.action.PACKAGE_REPLACED"'
+      go_type: string
+    - go_name: ActionPackageRestarted
+      value: '"android.intent.action.PACKAGE_RESTARTED"'
+      go_type: string
+    - go_name: ActionPackageUnstopped
+      value: '"android.intent.action.PACKAGE_UNSTOPPED"'
+      go_type: string
+    - go_name: ActionPackageVerified
+      value: '"android.intent.action.PACKAGE_VERIFIED"'
+      go_type: string
+    - go_name: ActionPaste
+      value: '"android.intent.action.PASTE"'
+      go_type: string
+    - go_name: ActionPick
+      value: '"android.intent.action.PICK"'
+      go_type: string
+    - go_name: ActionPickActivity
+      value: '"android.intent.action.PICK_ACTIVITY"'
+      go_type: string
+    - go_name: ActionPowerConnected
+      value: '"android.intent.action.ACTION_POWER_CONNECTED"'
+      go_type: string
+    - go_name: ActionPowerDisconnected
+      value: '"android.intent.action.ACTION_POWER_DISCONNECTED"'
+      go_type: string
+    - go_name: ActionPowerUsageSummary
+      value: '"android.intent.action.POWER_USAGE_SUMMARY"'
+      go_type: string
+    - go_name: ActionProcessText
+      value: '"android.intent.action.PROCESS_TEXT"'
+      go_type: string
+    - go_name: ActionProfileAccessible
+      value: '"android.intent.action.PROFILE_ACCESSIBLE"'
+      go_type: string
+    - go_name: ActionProfileAdded
+      value: '"android.intent.action.PROFILE_ADDED"'
+      go_type: string
+    - go_name: ActionProfileAvailable
+      value: '"android.intent.action.PROFILE_AVAILABLE"'
+      go_type: string
+    - go_name: ActionProfileInaccessible
+      value: '"android.intent.action.PROFILE_INACCESSIBLE"'
+      go_type: string
+    - go_name: ActionProfileRemoved
+      value: '"android.intent.action.PROFILE_REMOVED"'
+      go_type: string
+    - go_name: ActionProfileUnavailable
+      value: '"android.intent.action.PROFILE_UNAVAILABLE"'
+      go_type: string
+    - go_name: ActionProviderChanged
+      value: '"android.intent.action.PROVIDER_CHANGED"'
+      go_type: string
+    - go_name: ActionQuickClock
+      value: '"android.intent.action.QUICK_CLOCK"'
+      go_type: string
+    - go_name: ActionQuickView
+      value: '"android.intent.action.QUICK_VIEW"'
+      go_type: string
+    - go_name: ActionReboot
+      value: '"android.intent.action.REBOOT"'
+      go_type: string
+    - go_name: ActionRun
+      value: '"android.intent.action.RUN"'
+      go_type: string
+    - go_name: ActionSafetyCenter
+      value: '"android.intent.action.SAFETY_CENTER"'
+      go_type: string
+    - go_name: ActionScreenOff
+      value: '"android.intent.action.SCREEN_OFF"'
+      go_type: string
+    - go_name: ActionScreenOn
+      value: '"android.intent.action.SCREEN_ON"'
+      go_type: string
+    - go_name: ActionSearch
+      value: '"android.intent.action.SEARCH"'
+      go_type: string
+    - go_name: ActionSearchLongPress
+      value: '"android.intent.action.SEARCH_LONG_PRESS"'
+      go_type: string
+    - go_name: ActionSend
+      value: '"android.intent.action.SEND"'
+      go_type: string
+    - go_name: ActionSendto
+      value: '"android.intent.action.SENDTO"'
+      go_type: string
+    - go_name: ActionSendMultiple
+      value: '"android.intent.action.SEND_MULTIPLE"'
+      go_type: string
+    - go_name: ActionSetWallpaper
+      value: '"android.intent.action.SET_WALLPAPER"'
+      go_type: string
+    - go_name: ActionShowAppInfo
+      value: '"android.intent.action.SHOW_APP_INFO"'
+      go_type: string
+    - go_name: ActionShowWorkApps
+      value: '"android.intent.action.SHOW_WORK_APPS"'
+      go_type: string
+    - go_name: ActionShutdown
+      value: '"android.intent.action.ACTION_SHUTDOWN"'
+      go_type: string
+    - go_name: ActionSync
+      value: '"android.intent.action.SYNC"'
+      go_type: string
+    - go_name: ActionSystemTutorial
+      value: '"android.intent.action.SYSTEM_TUTORIAL"'
+      go_type: string
+    - go_name: ActionTimezoneChanged
+      value: '"android.intent.action.TIMEZONE_CHANGED"'
+      go_type: string
+    - go_name: ActionTimeChanged
+      value: '"android.intent.action.TIME_SET"'
+      go_type: string
+    - go_name: ActionTimeTick
+      value: '"android.intent.action.TIME_TICK"'
+      go_type: string
+    - go_name: ActionTranslate
+      value: '"android.intent.action.TRANSLATE"'
+      go_type: string
+    - go_name: ActionUidRemoved
+      value: '"android.intent.action.UID_REMOVED"'
+      go_type: string
+    - go_name: ActionUmsConnected
+      value: '"android.intent.action.UMS_CONNECTED"'
+      go_type: string
+    - go_name: ActionUmsDisconnected
+      value: '"android.intent.action.UMS_DISCONNECTED"'
+      go_type: string
+    - go_name: ActionUnarchivePackage
+      value: '"android.intent.action.UNARCHIVE_PACKAGE"'
+      go_type: string
+    - go_name: ActionUninstallPackage
+      value: '"android.intent.action.UNINSTALL_PACKAGE"'
+      go_type: string
+    - go_name: ActionUserBackground
+      value: '"android.intent.action.USER_BACKGROUND"'
+      go_type: string
+    - go_name: ActionUserForeground
+      value: '"android.intent.action.USER_FOREGROUND"'
+      go_type: string
+    - go_name: ActionUserInitialize
+      value: '"android.intent.action.USER_INITIALIZE"'
+      go_type: string
+    - go_name: ActionUserPresent
+      value: '"android.intent.action.USER_PRESENT"'
+      go_type: string
+    - go_name: ActionUserUnlocked
+      value: '"android.intent.action.USER_UNLOCKED"'
+      go_type: string
+    - go_name: ActionView
+      value: '"android.intent.action.VIEW"'
+      go_type: string
+    - go_name: ActionViewLocus
+      value: '"android.intent.action.VIEW_LOCUS"'
+      go_type: string
+    - go_name: ActionViewPermissionUsage
+      value: '"android.intent.action.VIEW_PERMISSION_USAGE"'
+      go_type: string
+    - go_name: ActionViewPermissionUsageForPeriod
+      value: '"android.intent.action.VIEW_PERMISSION_USAGE_FOR_PERIOD"'
+      go_type: string
+    - go_name: ActionVoiceCommand
+      value: '"android.intent.action.VOICE_COMMAND"'
+      go_type: string
+    - go_name: ActionWallpaperChanged
+      value: '"android.intent.action.WALLPAPER_CHANGED"'
+      go_type: string
+    - go_name: ActionWebSearch
+      value: '"android.intent.action.WEB_SEARCH"'
+      go_type: string
+    - go_name: CaptureContentForNoteBlockedByAdmin
+      value: "4"
+      go_type: int
+    - go_name: CaptureContentForNoteFailed
+      value: "1"
+      go_type: int
+    - go_name: CaptureContentForNoteSuccess
       value: "0"
+      go_type: int
+    - go_name: CaptureContentForNoteUserCanceled
+      value: "2"
+      go_type: int
+    - go_name: CaptureContentForNoteWindowModeUnsupported
+      value: "3"
+      go_type: int
+    - go_name: CategoryAccessibilityShortcutTarget
+      value: '"android.intent.category.ACCESSIBILITY_SHORTCUT_TARGET"'
+      go_type: string
+    - go_name: CategoryAlternative
+      value: '"android.intent.category.ALTERNATIVE"'
+      go_type: string
+    - go_name: CategoryAppBrowser
+      value: '"android.intent.category.APP_BROWSER"'
+      go_type: string
+    - go_name: CategoryAppCalculator
+      value: '"android.intent.category.APP_CALCULATOR"'
+      go_type: string
+    - go_name: CategoryAppCalendar
+      value: '"android.intent.category.APP_CALENDAR"'
+      go_type: string
+    - go_name: CategoryAppContacts
+      value: '"android.intent.category.APP_CONTACTS"'
+      go_type: string
+    - go_name: CategoryAppEmail
+      value: '"android.intent.category.APP_EMAIL"'
+      go_type: string
+    - go_name: CategoryAppFiles
+      value: '"android.intent.category.APP_FILES"'
+      go_type: string
+    - go_name: CategoryAppFitness
+      value: '"android.intent.category.APP_FITNESS"'
+      go_type: string
+    - go_name: CategoryAppGallery
+      value: '"android.intent.category.APP_GALLERY"'
+      go_type: string
+    - go_name: CategoryAppMaps
+      value: '"android.intent.category.APP_MAPS"'
+      go_type: string
+    - go_name: CategoryAppMarket
+      value: '"android.intent.category.APP_MARKET"'
+      go_type: string
+    - go_name: CategoryAppMessaging
+      value: '"android.intent.category.APP_MESSAGING"'
+      go_type: string
+    - go_name: CategoryAppMusic
+      value: '"android.intent.category.APP_MUSIC"'
+      go_type: string
+    - go_name: CategoryAppWeather
+      value: '"android.intent.category.APP_WEATHER"'
+      go_type: string
+    - go_name: CategoryBrowsable
+      value: '"android.intent.category.BROWSABLE"'
+      go_type: string
+    - go_name: CategoryCarDock
+      value: '"android.intent.category.CAR_DOCK"'
+      go_type: string
+    - go_name: CategoryCarMode
+      value: '"android.intent.category.CAR_MODE"'
+      go_type: string
+    - go_name: CategoryDefault
+      value: '"android.intent.category.DEFAULT"'
+      go_type: string
+    - go_name: CategoryDeskDock
+      value: '"android.intent.category.DESK_DOCK"'
+      go_type: string
+    - go_name: CategoryDevelopmentPreference
+      value: '"android.intent.category.DEVELOPMENT_PREFERENCE"'
+      go_type: string
+    - go_name: CategoryEmbed
+      value: '"android.intent.category.EMBED"'
+      go_type: string
+    - go_name: CategoryFrameworkInstrumentationTest
+      value: '"android.intent.category.FRAMEWORK_INSTRUMENTATION_TEST"'
+      go_type: string
+    - go_name: CategoryHeDeskDock
+      value: '"android.intent.category.HE_DESK_DOCK"'
+      go_type: string
+    - go_name: CategoryHome
+      value: '"android.intent.category.HOME"'
+      go_type: string
+    - go_name: CategoryInfo
+      value: '"android.intent.category.INFO"'
+      go_type: string
+    - go_name: CategoryLauncher
+      value: '"android.intent.category.LAUNCHER"'
+      go_type: string
+    - go_name: CategoryLeanbackLauncher
+      value: '"android.intent.category.LEANBACK_LAUNCHER"'
+      go_type: string
+    - go_name: CategoryLeDeskDock
+      value: '"android.intent.category.LE_DESK_DOCK"'
+      go_type: string
+    - go_name: CategoryMonkey
+      value: '"android.intent.category.MONKEY"'
+      go_type: string
+    - go_name: CategoryOpenable
+      value: '"android.intent.category.OPENABLE"'
+      go_type: string
+    - go_name: CategoryPreference
+      value: '"android.intent.category.PREFERENCE"'
+      go_type: string
+    - go_name: CategorySampleCode
+      value: '"android.intent.category.SAMPLE_CODE"'
+      go_type: string
+    - go_name: CategorySecondaryHome
+      value: '"android.intent.category.SECONDARY_HOME"'
+      go_type: string
+    - go_name: CategorySelectedAlternative
+      value: '"android.intent.category.SELECTED_ALTERNATIVE"'
+      go_type: string
+    - go_name: CategoryTab
+      value: '"android.intent.category.TAB"'
+      go_type: string
+    - go_name: CategoryTest
+      value: '"android.intent.category.TEST"'
+      go_type: string
+    - go_name: CategoryTypedOpenable
+      value: '"android.intent.category.TYPED_OPENABLE"'
+      go_type: string
+    - go_name: CategoryUnitTest
+      value: '"android.intent.category.UNIT_TEST"'
+      go_type: string
+    - go_name: CategoryVoice
+      value: '"android.intent.category.VOICE"'
+      go_type: string
+    - go_name: CategoryVrHome
+      value: '"android.intent.category.VR_HOME"'
+      go_type: string
+    - go_name: ChooserContentTypeAlbum
+      value: "1"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: ExtraAlarmCount
+      value: '"android.intent.extra.ALARM_COUNT"'
+      go_type: string
+    - go_name: ExtraAllowMultiple
+      value: '"android.intent.extra.ALLOW_MULTIPLE"'
+      go_type: string
+    - go_name: ExtraAllowReplace
+      value: '"android.intent.extra.ALLOW_REPLACE"'
+      go_type: string
+    - go_name: ExtraAlternateIntents
+      value: '"android.intent.extra.ALTERNATE_INTENTS"'
+      go_type: string
+    - go_name: ExtraArchival
+      value: '"android.intent.extra.ARCHIVAL"'
+      go_type: string
+    - go_name: ExtraAssistContext
+      value: '"android.intent.extra.ASSIST_CONTEXT"'
+      go_type: string
+    - go_name: ExtraAssistInputDeviceId
+      value: '"android.intent.extra.ASSIST_INPUT_DEVICE_ID"'
+      go_type: string
+    - go_name: ExtraAssistInputHintKeyboard
+      value: '"android.intent.extra.ASSIST_INPUT_HINT_KEYBOARD"'
+      go_type: string
+    - go_name: ExtraAssistPackage
+      value: '"android.intent.extra.ASSIST_PACKAGE"'
+      go_type: string
+    - go_name: ExtraAssistUid
+      value: '"android.intent.extra.ASSIST_UID"'
+      go_type: string
+    - go_name: ExtraAttributionTags
+      value: '"android.intent.extra.ATTRIBUTION_TAGS"'
+      go_type: string
+    - go_name: ExtraAutoLaunchSingleChoice
+      value: '"android.intent.extra.AUTO_LAUNCH_SINGLE_CHOICE"'
+      go_type: string
+    - go_name: ExtraBcc
+      value: '"android.intent.extra.BCC"'
+      go_type: string
+    - go_name: ExtraBugReport
+      value: '"android.intent.extra.BUG_REPORT"'
+      go_type: string
+    - go_name: ExtraCaptureContentForNoteStatusCode
+      value: '"android.intent.extra.CAPTURE_CONTENT_FOR_NOTE_STATUS_CODE"'
+      go_type: string
+    - go_name: ExtraCc
+      value: '"android.intent.extra.CC"'
+      go_type: string
+    - go_name: ExtraChangedComponentName
+      value: '"android.intent.extra.changed_component_name"'
+      go_type: string
+    - go_name: ExtraChangedComponentNameList
+      value: '"android.intent.extra.changed_component_name_list"'
+      go_type: string
+    - go_name: ExtraChangedPackageList
+      value: '"android.intent.extra.changed_package_list"'
+      go_type: string
+    - go_name: ExtraChangedUidList
+      value: '"android.intent.extra.changed_uid_list"'
+      go_type: string
+    - go_name: ExtraChooserAdditionalContentUri
+      value: '"android.intent.extra.CHOOSER_ADDITIONAL_CONTENT_URI"'
+      go_type: string
+    - go_name: ExtraChooserContentTypeHint
+      value: '"android.intent.extra.CHOOSER_CONTENT_TYPE_HINT"'
+      go_type: string
+    - go_name: ExtraChooserCustomActions
+      value: '"android.intent.extra.CHOOSER_CUSTOM_ACTIONS"'
+      go_type: string
+    - go_name: ExtraChooserFocusedItemPosition
+      value: '"android.intent.extra.CHOOSER_FOCUSED_ITEM_POSITION"'
+      go_type: string
+    - go_name: ExtraChooserModifyShareAction
+      value: '"android.intent.extra.CHOOSER_MODIFY_SHARE_ACTION"'
+      go_type: string
+    - go_name: ExtraChooserRefinementIntentSender
+      value: '"android.intent.extra.CHOOSER_REFINEMENT_INTENT_SENDER"'
+      go_type: string
+    - go_name: ExtraChooserResult
+      value: '"android.intent.extra.CHOOSER_RESULT"'
+      go_type: string
+    - go_name: ExtraChooserResultIntentSender
+      value: '"android.intent.extra.CHOOSER_RESULT_INTENT_SENDER"'
+      go_type: string
+    - go_name: ExtraChooserTargets
+      value: '"android.intent.extra.CHOOSER_TARGETS"'
+      go_type: string
+    - go_name: ExtraChosenComponent
+      value: '"android.intent.extra.CHOSEN_COMPONENT"'
+      go_type: string
+    - go_name: ExtraChosenComponentIntentSender
+      value: '"android.intent.extra.CHOSEN_COMPONENT_INTENT_SENDER"'
+      go_type: string
+    - go_name: ExtraComponentName
+      value: '"android.intent.extra.COMPONENT_NAME"'
+      go_type: string
+    - go_name: ExtraContentAnnotations
+      value: '"android.intent.extra.CONTENT_ANNOTATIONS"'
+      go_type: string
+    - go_name: ExtraContentQuery
+      value: '"android.intent.extra.CONTENT_QUERY"'
+      go_type: string
+    - go_name: ExtraDataRemoved
+      value: '"android.intent.extra.DATA_REMOVED"'
+      go_type: string
+    - go_name: ExtraDockState
+      value: '"android.intent.extra.DOCK_STATE"'
+      go_type: string
+    - go_name: ExtraDockStateCar
+      value: "2"
+      go_type: int
+    - go_name: ExtraDockStateDesk
+      value: "1"
+      go_type: int
+    - go_name: ExtraDockStateHeDesk
+      value: "4"
+      go_type: int
+    - go_name: ExtraDockStateLeDesk
+      value: "3"
+      go_type: int
+    - go_name: ExtraDockStateUndocked
+      value: "0"
+      go_type: int
+    - go_name: ExtraDontKillApp
+      value: '"android.intent.extra.DONT_KILL_APP"'
+      go_type: string
+    - go_name: ExtraDurationMillis
+      value: '"android.intent.extra.DURATION_MILLIS"'
+      go_type: string
+    - go_name: ExtraEmail
+      value: '"android.intent.extra.EMAIL"'
+      go_type: string
+    - go_name: ExtraEndTime
+      value: '"android.intent.extra.END_TIME"'
+      go_type: string
+    - go_name: ExtraExcludeComponents
+      value: '"android.intent.extra.EXCLUDE_COMPONENTS"'
+      go_type: string
+    - go_name: ExtraFromStorage
+      value: '"android.intent.extra.FROM_STORAGE"'
+      go_type: string
+    - go_name: ExtraHtmlText
+      value: '"android.intent.extra.HTML_TEXT"'
+      go_type: string
+    - go_name: ExtraIndex
+      value: '"android.intent.extra.INDEX"'
+      go_type: string
+    - go_name: ExtraInitialIntents
+      value: '"android.intent.extra.INITIAL_INTENTS"'
+      go_type: string
+    - go_name: ExtraInstallerPackageName
+      value: '"android.intent.extra.INSTALLER_PACKAGE_NAME"'
+      go_type: string
+    - go_name: ExtraIntent
+      value: '"android.intent.extra.INTENT"'
+      go_type: string
+    - go_name: ExtraKeyEvent
+      value: '"android.intent.extra.KEY_EVENT"'
+      go_type: string
+    - go_name: ExtraLocaleList
+      value: '"android.intent.extra.LOCALE_LIST"'
+      go_type: string
+    - go_name: ExtraLocalOnly
+      value: '"android.intent.extra.LOCAL_ONLY"'
+      go_type: string
+    - go_name: ExtraLocusId
+      value: '"android.intent.extra.LOCUS_ID"'
+      go_type: string
+    - go_name: ExtraMetadataText
+      value: '"android.intent.extra.METADATA_TEXT"'
+      go_type: string
+    - go_name: ExtraMimeTypes
+      value: '"android.intent.extra.MIME_TYPES"'
+      go_type: string
+    - go_name: ExtraNotUnknownSource
+      value: '"android.intent.extra.NOT_UNKNOWN_SOURCE"'
+      go_type: string
+    - go_name: ExtraOriginatingUri
+      value: '"android.intent.extra.ORIGINATING_URI"'
+      go_type: string
+    - go_name: ExtraPackages
+      value: '"android.intent.extra.PACKAGES"'
+      go_type: string
+    - go_name: ExtraPackageName
+      value: '"android.intent.extra.PACKAGE_NAME"'
+      go_type: string
+    - go_name: ExtraPermissionGroupName
+      value: '"android.intent.extra.PERMISSION_GROUP_NAME"'
+      go_type: string
+    - go_name: ExtraPhoneNumber
+      value: '"android.intent.extra.PHONE_NUMBER"'
+      go_type: string
+    - go_name: ExtraProcessText
+      value: '"android.intent.extra.PROCESS_TEXT"'
+      go_type: string
+    - go_name: ExtraProcessTextReadonly
+      value: '"android.intent.extra.PROCESS_TEXT_READONLY"'
+      go_type: string
+    - go_name: ExtraQuickViewFeatures
+      value: '"android.intent.extra.QUICK_VIEW_FEATURES"'
+      go_type: string
+    - go_name: ExtraQuietMode
+      value: '"android.intent.extra.QUIET_MODE"'
+      go_type: string
+    - go_name: ExtraReferrer
+      value: '"android.intent.extra.REFERRER"'
+      go_type: string
+    - go_name: ExtraReferrerName
+      value: '"android.intent.extra.REFERRER_NAME"'
+      go_type: string
+    - go_name: ExtraRemoteIntentToken
+      value: '"android.intent.extra.remote_intent_token"'
+      go_type: string
+    - go_name: ExtraReplacementExtras
+      value: '"android.intent.extra.REPLACEMENT_EXTRAS"'
+      go_type: string
+    - go_name: ExtraReplacing
+      value: '"android.intent.extra.REPLACING"'
+      go_type: string
+    - go_name: ExtraRestrictionsBundle
+      value: '"android.intent.extra.restrictions_bundle"'
+      go_type: string
+    - go_name: ExtraRestrictionsIntent
+      value: '"android.intent.extra.restrictions_intent"'
+      go_type: string
+    - go_name: ExtraRestrictionsList
+      value: '"android.intent.extra.restrictions_list"'
+      go_type: string
+    - go_name: ExtraResultReceiver
+      value: '"android.intent.extra.RESULT_RECEIVER"'
+      go_type: string
+    - go_name: ExtraReturnResult
+      value: '"android.intent.extra.RETURN_RESULT"'
+      go_type: string
+    - go_name: ExtraShortcutIcon
+      value: '"android.intent.extra.shortcut.ICON"'
+      go_type: string
+    - go_name: ExtraShortcutIconResource
+      value: '"android.intent.extra.shortcut.ICON_RESOURCE"'
+      go_type: string
+    - go_name: ExtraShortcutId
+      value: '"android.intent.extra.shortcut.ID"'
+      go_type: string
+    - go_name: ExtraShortcutIntent
+      value: '"android.intent.extra.shortcut.INTENT"'
+      go_type: string
+    - go_name: ExtraShortcutName
+      value: '"android.intent.extra.shortcut.NAME"'
+      go_type: string
+    - go_name: ExtraShutdownUserspaceOnly
+      value: '"android.intent.extra.SHUTDOWN_USERSPACE_ONLY"'
+      go_type: string
+    - go_name: ExtraSplitName
+      value: '"android.intent.extra.SPLIT_NAME"'
+      go_type: string
+    - go_name: ExtraStartTime
+      value: '"android.intent.extra.START_TIME"'
+      go_type: string
+    - go_name: ExtraStream
+      value: '"android.intent.extra.STREAM"'
+      go_type: string
+    - go_name: ExtraSubject
+      value: '"android.intent.extra.SUBJECT"'
+      go_type: string
+    - go_name: ExtraSuspendedPackageExtras
+      value: '"android.intent.extra.SUSPENDED_PACKAGE_EXTRAS"'
+      go_type: string
+    - go_name: ExtraTemplate
+      value: '"android.intent.extra.TEMPLATE"'
+      go_type: string
+    - go_name: ExtraText
+      value: '"android.intent.extra.TEXT"'
+      go_type: string
+    - go_name: ExtraTime
+      value: '"android.intent.extra.TIME"'
+      go_type: string
+    - go_name: ExtraTimezone
+      value: '"time-zone"'
+      go_type: string
+    - go_name: ExtraTitle
+      value: '"android.intent.extra.TITLE"'
+      go_type: string
+    - go_name: ExtraUid
+      value: '"android.intent.extra.UID"'
+      go_type: string
+    - go_name: ExtraUser
+      value: '"android.intent.extra.USER"'
+      go_type: string
+    - go_name: ExtraUserInitiated
+      value: '"android.intent.extra.USER_INITIATED"'
+      go_type: string
+    - go_name: ExtraUseStylusMode
+      value: '"android.intent.extra.USE_STYLUS_MODE"'
+      go_type: string
+    - go_name: FillInAction
+      value: "1"
+      go_type: int
+    - go_name: FillInCategories
+      value: "4"
+      go_type: int
+    - go_name: FillInClipData
+      value: "128"
+      go_type: int
+    - go_name: FillInComponent
+      value: "8"
+      go_type: int
+    - go_name: FillInData
+      value: "2"
+      go_type: int
+    - go_name: FillInIdentifier
+      value: "256"
+      go_type: int
+    - go_name: FillInPackage
+      value: "16"
+      go_type: int
+    - go_name: FillInSelector
+      value: "64"
+      go_type: int
+    - go_name: FillInSourceBounds
+      value: "32"
+      go_type: int
+    - go_name: FlagActivityBroughtToFront
+      value: "4194304"
+      go_type: int
+    - go_name: FlagActivityClearTask
+      value: "32768"
+      go_type: int
+    - go_name: FlagActivityClearTop
+      value: "67108864"
+      go_type: int
+    - go_name: FlagActivityClearWhenTaskReset
+      value: "524288"
+      go_type: int
+    - go_name: FlagActivityExcludeFromRecents
+      value: "8388608"
+      go_type: int
+    - go_name: FlagActivityForwardResult
+      value: "33554432"
+      go_type: int
+    - go_name: FlagActivityLaunchedFromHistory
+      value: "1048576"
+      go_type: int
+    - go_name: FlagActivityLaunchAdjacent
+      value: "4096"
+      go_type: int
+    - go_name: FlagActivityMatchExternal
+      value: "2048"
+      go_type: int
+    - go_name: FlagActivityMultipleTask
+      value: "134217728"
+      go_type: int
+    - go_name: FlagActivityNewDocument
+      value: "524288"
+      go_type: int
+    - go_name: FlagActivityNewTask
+      value: "268435456"
+      go_type: int
+    - go_name: FlagActivityNoAnimation
+      value: "65536"
+      go_type: int
+    - go_name: FlagActivityNoHistory
+      value: "1073741824"
+      go_type: int
+    - go_name: FlagActivityNoUserAction
+      value: "262144"
+      go_type: int
+    - go_name: FlagActivityPreviousIsTop
+      value: "16777216"
+      go_type: int
+    - go_name: FlagActivityReorderToFront
+      value: "131072"
+      go_type: int
+    - go_name: FlagActivityRequireDefault
+      value: "512"
+      go_type: int
+    - go_name: FlagActivityRequireNonBrowser
+      value: "1024"
+      go_type: int
+    - go_name: FlagActivityResetTaskIfNeeded
+      value: "2097152"
+      go_type: int
+    - go_name: FlagActivityRetainInRecents
+      value: "8192"
+      go_type: int
+    - go_name: FlagActivitySingleTop
+      value: "536870912"
+      go_type: int
+    - go_name: FlagActivityTaskOnHome
+      value: "16384"
+      go_type: int
+    - go_name: FlagDebugLogResolution
+      value: "8"
+      go_type: int
+    - go_name: FlagDirectBootAuto
+      value: "256"
+      go_type: int
+    - go_name: FlagExcludeStoppedPackages
+      value: "16"
+      go_type: int
+    - go_name: FlagFromBackground
+      value: "4"
+      go_type: int
+    - go_name: FlagGrantPersistableUriPermission
+      value: "64"
+      go_type: int
+    - go_name: FlagGrantPrefixUriPermission
+      value: "128"
+      go_type: int
+    - go_name: FlagGrantReadUriPermission
+      value: "1"
+      go_type: int
+    - go_name: FlagGrantWriteUriPermission
+      value: "2"
+      go_type: int
+    - go_name: FlagIncludeStoppedPackages
+      value: "32"
+      go_type: int
+    - go_name: FlagReceiverForeground
+      value: "268435456"
+      go_type: int
+    - go_name: FlagReceiverNoAbort
+      value: "134217728"
+      go_type: int
+    - go_name: FlagReceiverRegisteredOnly
+      value: "1073741824"
+      go_type: int
+    - go_name: FlagReceiverReplacePending
+      value: "536870912"
+      go_type: int
+    - go_name: FlagReceiverVisibleToInstantApps
+      value: "2097152"
+      go_type: int
+    - go_name: MetadataDockHome
+      value: '"android.dock_home"'
+      go_type: string
+    - go_name: UriAllowUnsafe
+      value: "4"
+      go_type: int
+    - go_name: UriAndroidAppScheme
+      value: "2"
+      go_type: int
+    - go_name: UriIntentScheme
+      value: "1"
+      go_type: int
+    - go_name: Empty
+      value: "0"
+      go_type: int
+    - go_name: DefaultKeysDialer
+      value: "1"
       go_type: int
     - go_name: DefaultKeysDisable
       value: "0"
       go_type: int
     - go_name: DefaultKeysSearchGlobal
-      value: "0"
+      value: "4"
       go_type: int
     - go_name: DefaultKeysSearchLocal
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: DefaultKeysShortcut
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: FullscreenModeRequestEnter
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: FullscreenModeRequestExit
       value: "0"
       go_type: int
     - go_name: OverrideTransitionClose
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: OverrideTransitionOpen
       value: "0"
@@ -3966,1064 +5001,29 @@ constants:
       value: "0"
       go_type: int
     - go_name: ResultFirstUser
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: ResultOk
-      value: "0"
-      go_type: int
-    - go_name: Creator
-      value: "0"
+      value: "-1"
       go_type: int
     - go_name: FlagAllowUnsafeImplicitIntent
-      value: "0"
+      value: "16777216"
       go_type: int
     - go_name: FlagCancelCurrent
-      value: "0"
+      value: "268435456"
       go_type: int
     - go_name: FlagImmutable
-      value: "0"
+      value: "67108864"
       go_type: int
     - go_name: FlagMutable
-      value: "0"
+      value: "33554432"
       go_type: int
     - go_name: FlagNoCreate
-      value: "0"
+      value: "536870912"
       go_type: int
     - go_name: FlagOneShot
-      value: "0"
+      value: "1073741824"
       go_type: int
     - go_name: FlagUpdateCurrent
-      value: "0"
-      go_type: int
-    - go_name: Empty
-      value: "0"
-      go_type: int
-    - go_name: ActionAirplaneModeChanged
-      value: '""'
-      go_type: string
-    - go_name: ActionAllApps
-      value: '""'
-      go_type: string
-    - go_name: ActionAnswer
-      value: '""'
-      go_type: string
-    - go_name: ActionApplicationLocaleChanged
-      value: '""'
-      go_type: string
-    - go_name: ActionApplicationPreferences
-      value: '""'
-      go_type: string
-    - go_name: ActionApplicationRestrictionsChanged
-      value: '""'
-      go_type: string
-    - go_name: ActionAppError
-      value: '""'
-      go_type: string
-    - go_name: ActionAssist
-      value: '""'
-      go_type: string
-    - go_name: ActionAttachData
-      value: '""'
-      go_type: string
-    - go_name: ActionAutoRevokePermissions
-      value: '""'
-      go_type: string
-    - go_name: ActionBatteryChanged
-      value: '""'
-      go_type: string
-    - go_name: ActionBatteryLow
-      value: '""'
-      go_type: string
-    - go_name: ActionBatteryOkay
-      value: '""'
-      go_type: string
-    - go_name: ActionBootCompleted
-      value: '""'
-      go_type: string
-    - go_name: ActionBugReport
-      value: '""'
-      go_type: string
-    - go_name: ActionCall
-      value: '""'
-      go_type: string
-    - go_name: ActionCallButton
-      value: '""'
-      go_type: string
-    - go_name: ActionCameraButton
-      value: '""'
-      go_type: string
-    - go_name: ActionCarrierSetup
-      value: '""'
-      go_type: string
-    - go_name: ActionChooser
-      value: '""'
-      go_type: string
-    - go_name: ActionCloseSystemDialogs
-      value: '""'
-      go_type: string
-    - go_name: ActionConfigurationChanged
-      value: '""'
-      go_type: string
-    - go_name: ActionCreateDocument
-      value: '""'
-      go_type: string
-    - go_name: ActionCreateNote
-      value: '""'
-      go_type: string
-    - go_name: ActionCreateReminder
-      value: '""'
-      go_type: string
-    - go_name: ActionCreateShortcut
-      value: '""'
-      go_type: string
-    - go_name: ActionDateChanged
-      value: '""'
-      go_type: string
-    - go_name: ActionDefault
-      value: '""'
-      go_type: string
-    - go_name: ActionDefine
-      value: '""'
-      go_type: string
-    - go_name: ActionDelete
-      value: '""'
-      go_type: string
-    - go_name: ActionDeviceStorageLow
-      value: '""'
-      go_type: string
-    - go_name: ActionDeviceStorageOk
-      value: '""'
-      go_type: string
-    - go_name: ActionDial
-      value: '""'
-      go_type: string
-    - go_name: ActionDockEvent
-      value: '""'
-      go_type: string
-    - go_name: ActionDreamingStarted
-      value: '""'
-      go_type: string
-    - go_name: ActionDreamingStopped
-      value: '""'
-      go_type: string
-    - go_name: ActionEdit
-      value: '""'
-      go_type: string
-    - go_name: ActionExternalApplicationsAvailable
-      value: '""'
-      go_type: string
-    - go_name: ActionExternalApplicationsUnavailable
-      value: '""'
-      go_type: string
-    - go_name: ActionFactoryTest
-      value: '""'
-      go_type: string
-    - go_name: ActionGetContent
-      value: '""'
-      go_type: string
-    - go_name: ActionGetRestrictionEntries
-      value: '""'
-      go_type: string
-    - go_name: ActionGtalkServiceConnected
-      value: '""'
-      go_type: string
-    - go_name: ActionGtalkServiceDisconnected
-      value: '""'
-      go_type: string
-    - go_name: ActionHeadsetPlug
-      value: '""'
-      go_type: string
-    - go_name: ActionInputMethodChanged
-      value: '""'
-      go_type: string
-    - go_name: ActionInsert
-      value: '""'
-      go_type: string
-    - go_name: ActionInsertOrEdit
-      value: '""'
-      go_type: string
-    - go_name: ActionInstallFailure
-      value: '""'
-      go_type: string
-    - go_name: ActionInstallPackage
-      value: '""'
-      go_type: string
-    - go_name: ActionLaunchCaptureContentActivityForNote
-      value: '""'
-      go_type: string
-    - go_name: ActionLocaleChanged
-      value: '""'
-      go_type: string
-    - go_name: ActionLockedBootCompleted
-      value: '""'
-      go_type: string
-    - go_name: ActionMain
-      value: '""'
-      go_type: string
-    - go_name: ActionManagedProfileAdded
-      value: '""'
-      go_type: string
-    - go_name: ActionManagedProfileAvailable
-      value: '""'
-      go_type: string
-    - go_name: ActionManagedProfileRemoved
-      value: '""'
-      go_type: string
-    - go_name: ActionManagedProfileUnavailable
-      value: '""'
-      go_type: string
-    - go_name: ActionManagedProfileUnlocked
-      value: '""'
-      go_type: string
-    - go_name: ActionManageNetworkUsage
-      value: '""'
-      go_type: string
-    - go_name: ActionManagePackageStorage
-      value: '""'
-      go_type: string
-    - go_name: ActionManageUnusedApps
-      value: '""'
-      go_type: string
-    - go_name: ActionMediaBadRemoval
-      value: '""'
-      go_type: string
-    - go_name: ActionMediaButton
-      value: '""'
-      go_type: string
-    - go_name: ActionMediaChecking
-      value: '""'
-      go_type: string
-    - go_name: ActionMediaEject
-      value: '""'
-      go_type: string
-    - go_name: ActionMediaMounted
-      value: '""'
-      go_type: string
-    - go_name: ActionMediaNofs
-      value: '""'
-      go_type: string
-    - go_name: ActionMediaRemoved
-      value: '""'
-      go_type: string
-    - go_name: ActionMediaScannerFinished
-      value: '""'
-      go_type: string
-    - go_name: ActionMediaScannerScanFile
-      value: '""'
-      go_type: string
-    - go_name: ActionMediaScannerStarted
-      value: '""'
-      go_type: string
-    - go_name: ActionMediaShared
-      value: '""'
-      go_type: string
-    - go_name: ActionMediaUnmountable
-      value: '""'
-      go_type: string
-    - go_name: ActionMediaUnmounted
-      value: '""'
-      go_type: string
-    - go_name: ActionMyPackageReplaced
-      value: '""'
-      go_type: string
-    - go_name: ActionMyPackageSuspended
-      value: '""'
-      go_type: string
-    - go_name: ActionMyPackageUnsuspended
-      value: '""'
-      go_type: string
-    - go_name: ActionNewOutgoingCall
-      value: '""'
-      go_type: string
-    - go_name: ActionOpenDocument
-      value: '""'
-      go_type: string
-    - go_name: ActionOpenDocumentTree
-      value: '""'
-      go_type: string
-    - go_name: ActionPackagesSuspended
-      value: '""'
-      go_type: string
-    - go_name: ActionPackagesUnsuspended
-      value: '""'
-      go_type: string
-    - go_name: ActionPackageAdded
-      value: '""'
-      go_type: string
-    - go_name: ActionPackageChanged
-      value: '""'
-      go_type: string
-    - go_name: ActionPackageDataCleared
-      value: '""'
-      go_type: string
-    - go_name: ActionPackageFirstLaunch
-      value: '""'
-      go_type: string
-    - go_name: ActionPackageFullyRemoved
-      value: '""'
-      go_type: string
-    - go_name: ActionPackageInstall
-      value: '""'
-      go_type: string
-    - go_name: ActionPackageNeedsVerification
-      value: '""'
-      go_type: string
-    - go_name: ActionPackageRemoved
-      value: '""'
-      go_type: string
-    - go_name: ActionPackageReplaced
-      value: '""'
-      go_type: string
-    - go_name: ActionPackageRestarted
-      value: '""'
-      go_type: string
-    - go_name: ActionPackageUnstopped
-      value: '""'
-      go_type: string
-    - go_name: ActionPackageVerified
-      value: '""'
-      go_type: string
-    - go_name: ActionPaste
-      value: '""'
-      go_type: string
-    - go_name: ActionPick
-      value: '""'
-      go_type: string
-    - go_name: ActionPickActivity
-      value: '""'
-      go_type: string
-    - go_name: ActionPowerConnected
-      value: '""'
-      go_type: string
-    - go_name: ActionPowerDisconnected
-      value: '""'
-      go_type: string
-    - go_name: ActionPowerUsageSummary
-      value: '""'
-      go_type: string
-    - go_name: ActionProcessText
-      value: '""'
-      go_type: string
-    - go_name: ActionProfileAccessible
-      value: '""'
-      go_type: string
-    - go_name: ActionProfileAdded
-      value: '""'
-      go_type: string
-    - go_name: ActionProfileAvailable
-      value: '""'
-      go_type: string
-    - go_name: ActionProfileInaccessible
-      value: '""'
-      go_type: string
-    - go_name: ActionProfileRemoved
-      value: '""'
-      go_type: string
-    - go_name: ActionProfileUnavailable
-      value: '""'
-      go_type: string
-    - go_name: ActionProviderChanged
-      value: '""'
-      go_type: string
-    - go_name: ActionQuickClock
-      value: '""'
-      go_type: string
-    - go_name: ActionQuickView
-      value: '""'
-      go_type: string
-    - go_name: ActionReboot
-      value: '""'
-      go_type: string
-    - go_name: ActionRun
-      value: '""'
-      go_type: string
-    - go_name: ActionSafetyCenter
-      value: '""'
-      go_type: string
-    - go_name: ActionScreenOff
-      value: '""'
-      go_type: string
-    - go_name: ActionScreenOn
-      value: '""'
-      go_type: string
-    - go_name: ActionSearch
-      value: '""'
-      go_type: string
-    - go_name: ActionSearchLongPress
-      value: '""'
-      go_type: string
-    - go_name: ActionSend
-      value: '""'
-      go_type: string
-    - go_name: ActionSendto
-      value: '""'
-      go_type: string
-    - go_name: ActionSendMultiple
-      value: '""'
-      go_type: string
-    - go_name: ActionSetWallpaper
-      value: '""'
-      go_type: string
-    - go_name: ActionShowAppInfo
-      value: '""'
-      go_type: string
-    - go_name: ActionShowWorkApps
-      value: '""'
-      go_type: string
-    - go_name: ActionShutdown
-      value: '""'
-      go_type: string
-    - go_name: ActionSync
-      value: '""'
-      go_type: string
-    - go_name: ActionSystemTutorial
-      value: '""'
-      go_type: string
-    - go_name: ActionTimezoneChanged
-      value: '""'
-      go_type: string
-    - go_name: ActionTimeChanged
-      value: '""'
-      go_type: string
-    - go_name: ActionTimeTick
-      value: '""'
-      go_type: string
-    - go_name: ActionTranslate
-      value: '""'
-      go_type: string
-    - go_name: ActionUidRemoved
-      value: '""'
-      go_type: string
-    - go_name: ActionUmsConnected
-      value: '""'
-      go_type: string
-    - go_name: ActionUmsDisconnected
-      value: '""'
-      go_type: string
-    - go_name: ActionUnarchivePackage
-      value: '""'
-      go_type: string
-    - go_name: ActionUninstallPackage
-      value: '""'
-      go_type: string
-    - go_name: ActionUserBackground
-      value: '""'
-      go_type: string
-    - go_name: ActionUserForeground
-      value: '""'
-      go_type: string
-    - go_name: ActionUserInitialize
-      value: '""'
-      go_type: string
-    - go_name: ActionUserPresent
-      value: '""'
-      go_type: string
-    - go_name: ActionUserUnlocked
-      value: '""'
-      go_type: string
-    - go_name: ActionView
-      value: '""'
-      go_type: string
-    - go_name: ActionViewLocus
-      value: '""'
-      go_type: string
-    - go_name: ActionViewPermissionUsage
-      value: '""'
-      go_type: string
-    - go_name: ActionViewPermissionUsageForPeriod
-      value: '""'
-      go_type: string
-    - go_name: ActionVoiceCommand
-      value: '""'
-      go_type: string
-    - go_name: ActionWallpaperChanged
-      value: '""'
-      go_type: string
-    - go_name: ActionWebSearch
-      value: '""'
-      go_type: string
-    - go_name: CaptureContentForNoteBlockedByAdmin
-      value: "0"
-      go_type: int
-    - go_name: CaptureContentForNoteFailed
-      value: "0"
-      go_type: int
-    - go_name: CaptureContentForNoteSuccess
-      value: "0"
-      go_type: int
-    - go_name: CaptureContentForNoteUserCanceled
-      value: "0"
-      go_type: int
-    - go_name: CaptureContentForNoteWindowModeUnsupported
-      value: "0"
-      go_type: int
-    - go_name: CategoryAccessibilityShortcutTarget
-      value: '""'
-      go_type: string
-    - go_name: CategoryAlternative
-      value: '""'
-      go_type: string
-    - go_name: CategoryAppBrowser
-      value: '""'
-      go_type: string
-    - go_name: CategoryAppCalculator
-      value: '""'
-      go_type: string
-    - go_name: CategoryAppCalendar
-      value: '""'
-      go_type: string
-    - go_name: CategoryAppContacts
-      value: '""'
-      go_type: string
-    - go_name: CategoryAppEmail
-      value: '""'
-      go_type: string
-    - go_name: CategoryAppFiles
-      value: '""'
-      go_type: string
-    - go_name: CategoryAppFitness
-      value: '""'
-      go_type: string
-    - go_name: CategoryAppGallery
-      value: '""'
-      go_type: string
-    - go_name: CategoryAppMaps
-      value: '""'
-      go_type: string
-    - go_name: CategoryAppMarket
-      value: '""'
-      go_type: string
-    - go_name: CategoryAppMessaging
-      value: '""'
-      go_type: string
-    - go_name: CategoryAppMusic
-      value: '""'
-      go_type: string
-    - go_name: CategoryAppWeather
-      value: '""'
-      go_type: string
-    - go_name: CategoryBrowsable
-      value: '""'
-      go_type: string
-    - go_name: CategoryCarDock
-      value: '""'
-      go_type: string
-    - go_name: CategoryCarMode
-      value: '""'
-      go_type: string
-    - go_name: CategoryDefault
-      value: '""'
-      go_type: string
-    - go_name: CategoryDeskDock
-      value: '""'
-      go_type: string
-    - go_name: CategoryDevelopmentPreference
-      value: '""'
-      go_type: string
-    - go_name: CategoryEmbed
-      value: '""'
-      go_type: string
-    - go_name: CategoryFrameworkInstrumentationTest
-      value: '""'
-      go_type: string
-    - go_name: CategoryHeDeskDock
-      value: '""'
-      go_type: string
-    - go_name: CategoryHome
-      value: '""'
-      go_type: string
-    - go_name: CategoryInfo
-      value: '""'
-      go_type: string
-    - go_name: CategoryLauncher
-      value: '""'
-      go_type: string
-    - go_name: CategoryLeanbackLauncher
-      value: '""'
-      go_type: string
-    - go_name: CategoryLeDeskDock
-      value: '""'
-      go_type: string
-    - go_name: CategoryMonkey
-      value: '""'
-      go_type: string
-    - go_name: CategoryOpenable
-      value: '""'
-      go_type: string
-    - go_name: CategoryPreference
-      value: '""'
-      go_type: string
-    - go_name: CategorySampleCode
-      value: '""'
-      go_type: string
-    - go_name: CategorySecondaryHome
-      value: '""'
-      go_type: string
-    - go_name: CategorySelectedAlternative
-      value: '""'
-      go_type: string
-    - go_name: CategoryTab
-      value: '""'
-      go_type: string
-    - go_name: CategoryTest
-      value: '""'
-      go_type: string
-    - go_name: CategoryTypedOpenable
-      value: '""'
-      go_type: string
-    - go_name: CategoryUnitTest
-      value: '""'
-      go_type: string
-    - go_name: CategoryVoice
-      value: '""'
-      go_type: string
-    - go_name: CategoryVrHome
-      value: '""'
-      go_type: string
-    - go_name: ChooserContentTypeAlbum
-      value: "0"
-      go_type: int
-    - go_name: ExtraAlarmCount
-      value: '""'
-      go_type: string
-    - go_name: ExtraAllowMultiple
-      value: '""'
-      go_type: string
-    - go_name: ExtraAllowReplace
-      value: '""'
-      go_type: string
-    - go_name: ExtraAlternateIntents
-      value: '""'
-      go_type: string
-    - go_name: ExtraArchival
-      value: '""'
-      go_type: string
-    - go_name: ExtraAssistContext
-      value: '""'
-      go_type: string
-    - go_name: ExtraAssistInputDeviceId
-      value: '""'
-      go_type: string
-    - go_name: ExtraAssistInputHintKeyboard
-      value: '""'
-      go_type: string
-    - go_name: ExtraAssistPackage
-      value: '""'
-      go_type: string
-    - go_name: ExtraAssistUid
-      value: '""'
-      go_type: string
-    - go_name: ExtraAttributionTags
-      value: '""'
-      go_type: string
-    - go_name: ExtraAutoLaunchSingleChoice
-      value: '""'
-      go_type: string
-    - go_name: ExtraBcc
-      value: '""'
-      go_type: string
-    - go_name: ExtraBugReport
-      value: '""'
-      go_type: string
-    - go_name: ExtraCaptureContentForNoteStatusCode
-      value: '""'
-      go_type: string
-    - go_name: ExtraCc
-      value: '""'
-      go_type: string
-    - go_name: ExtraChangedComponentName
-      value: '""'
-      go_type: string
-    - go_name: ExtraChangedComponentNameList
-      value: '""'
-      go_type: string
-    - go_name: ExtraChangedPackageList
-      value: '""'
-      go_type: string
-    - go_name: ExtraChangedUidList
-      value: '""'
-      go_type: string
-    - go_name: ExtraChooserAdditionalContentUri
-      value: '""'
-      go_type: string
-    - go_name: ExtraChooserContentTypeHint
-      value: '""'
-      go_type: string
-    - go_name: ExtraChooserCustomActions
-      value: '""'
-      go_type: string
-    - go_name: ExtraChooserFocusedItemPosition
-      value: '""'
-      go_type: string
-    - go_name: ExtraChooserModifyShareAction
-      value: '""'
-      go_type: string
-    - go_name: ExtraChooserRefinementIntentSender
-      value: '""'
-      go_type: string
-    - go_name: ExtraChooserResult
-      value: '""'
-      go_type: string
-    - go_name: ExtraChooserResultIntentSender
-      value: '""'
-      go_type: string
-    - go_name: ExtraChooserTargets
-      value: '""'
-      go_type: string
-    - go_name: ExtraChosenComponent
-      value: '""'
-      go_type: string
-    - go_name: ExtraChosenComponentIntentSender
-      value: '""'
-      go_type: string
-    - go_name: ExtraComponentName
-      value: '""'
-      go_type: string
-    - go_name: ExtraContentAnnotations
-      value: '""'
-      go_type: string
-    - go_name: ExtraContentQuery
-      value: '""'
-      go_type: string
-    - go_name: ExtraDataRemoved
-      value: '""'
-      go_type: string
-    - go_name: ExtraDockState
-      value: '""'
-      go_type: string
-    - go_name: ExtraDockStateCar
-      value: "0"
-      go_type: int
-    - go_name: ExtraDockStateDesk
-      value: "0"
-      go_type: int
-    - go_name: ExtraDockStateHeDesk
-      value: "0"
-      go_type: int
-    - go_name: ExtraDockStateLeDesk
-      value: "0"
-      go_type: int
-    - go_name: ExtraDockStateUndocked
-      value: "0"
-      go_type: int
-    - go_name: ExtraDontKillApp
-      value: '""'
-      go_type: string
-    - go_name: ExtraDurationMillis
-      value: '""'
-      go_type: string
-    - go_name: ExtraEmail
-      value: '""'
-      go_type: string
-    - go_name: ExtraEndTime
-      value: '""'
-      go_type: string
-    - go_name: ExtraExcludeComponents
-      value: '""'
-      go_type: string
-    - go_name: ExtraFromStorage
-      value: '""'
-      go_type: string
-    - go_name: ExtraHtmlText
-      value: '""'
-      go_type: string
-    - go_name: ExtraIndex
-      value: '""'
-      go_type: string
-    - go_name: ExtraInitialIntents
-      value: '""'
-      go_type: string
-    - go_name: ExtraInstallerPackageName
-      value: '""'
-      go_type: string
-    - go_name: ExtraIntent
-      value: '""'
-      go_type: string
-    - go_name: ExtraKeyEvent
-      value: '""'
-      go_type: string
-    - go_name: ExtraLocaleList
-      value: '""'
-      go_type: string
-    - go_name: ExtraLocalOnly
-      value: '""'
-      go_type: string
-    - go_name: ExtraLocusId
-      value: '""'
-      go_type: string
-    - go_name: ExtraMetadataText
-      value: '""'
-      go_type: string
-    - go_name: ExtraMimeTypes
-      value: '""'
-      go_type: string
-    - go_name: ExtraNotUnknownSource
-      value: '""'
-      go_type: string
-    - go_name: ExtraOriginatingUri
-      value: '""'
-      go_type: string
-    - go_name: ExtraPackages
-      value: '""'
-      go_type: string
-    - go_name: ExtraPackageName
-      value: '""'
-      go_type: string
-    - go_name: ExtraPermissionGroupName
-      value: '""'
-      go_type: string
-    - go_name: ExtraPhoneNumber
-      value: '""'
-      go_type: string
-    - go_name: ExtraProcessText
-      value: '""'
-      go_type: string
-    - go_name: ExtraProcessTextReadonly
-      value: '""'
-      go_type: string
-    - go_name: ExtraQuickViewFeatures
-      value: '""'
-      go_type: string
-    - go_name: ExtraQuietMode
-      value: '""'
-      go_type: string
-    - go_name: ExtraReferrer
-      value: '""'
-      go_type: string
-    - go_name: ExtraReferrerName
-      value: '""'
-      go_type: string
-    - go_name: ExtraRemoteIntentToken
-      value: '""'
-      go_type: string
-    - go_name: ExtraReplacementExtras
-      value: '""'
-      go_type: string
-    - go_name: ExtraReplacing
-      value: '""'
-      go_type: string
-    - go_name: ExtraRestrictionsBundle
-      value: '""'
-      go_type: string
-    - go_name: ExtraRestrictionsIntent
-      value: '""'
-      go_type: string
-    - go_name: ExtraRestrictionsList
-      value: '""'
-      go_type: string
-    - go_name: ExtraResultReceiver
-      value: '""'
-      go_type: string
-    - go_name: ExtraReturnResult
-      value: '""'
-      go_type: string
-    - go_name: ExtraShortcutIcon
-      value: '""'
-      go_type: string
-    - go_name: ExtraShortcutIconResource
-      value: '""'
-      go_type: string
-    - go_name: ExtraShortcutId
-      value: '""'
-      go_type: string
-    - go_name: ExtraShortcutIntent
-      value: '""'
-      go_type: string
-    - go_name: ExtraShortcutName
-      value: '""'
-      go_type: string
-    - go_name: ExtraShutdownUserspaceOnly
-      value: '""'
-      go_type: string
-    - go_name: ExtraSplitName
-      value: '""'
-      go_type: string
-    - go_name: ExtraStartTime
-      value: '""'
-      go_type: string
-    - go_name: ExtraStream
-      value: '""'
-      go_type: string
-    - go_name: ExtraSubject
-      value: '""'
-      go_type: string
-    - go_name: ExtraSuspendedPackageExtras
-      value: '""'
-      go_type: string
-    - go_name: ExtraTemplate
-      value: '""'
-      go_type: string
-    - go_name: ExtraText
-      value: '""'
-      go_type: string
-    - go_name: ExtraTime
-      value: '""'
-      go_type: string
-    - go_name: ExtraTimezone
-      value: '""'
-      go_type: string
-    - go_name: ExtraTitle
-      value: '""'
-      go_type: string
-    - go_name: ExtraUid
-      value: '""'
-      go_type: string
-    - go_name: ExtraUser
-      value: '""'
-      go_type: string
-    - go_name: ExtraUserInitiated
-      value: '""'
-      go_type: string
-    - go_name: ExtraUseStylusMode
-      value: '""'
-      go_type: string
-    - go_name: FillInAction
-      value: "0"
-      go_type: int
-    - go_name: FillInCategories
-      value: "0"
-      go_type: int
-    - go_name: FillInClipData
-      value: "0"
-      go_type: int
-    - go_name: FillInComponent
-      value: "0"
-      go_type: int
-    - go_name: FillInData
-      value: "0"
-      go_type: int
-    - go_name: FillInIdentifier
-      value: "0"
-      go_type: int
-    - go_name: FillInPackage
-      value: "0"
-      go_type: int
-    - go_name: FillInSelector
-      value: "0"
-      go_type: int
-    - go_name: FillInSourceBounds
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityBroughtToFront
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityClearTask
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityClearTop
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityClearWhenTaskReset
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityExcludeFromRecents
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityForwardResult
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityLaunchedFromHistory
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityLaunchAdjacent
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityMatchExternal
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityMultipleTask
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityNewDocument
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityNewTask
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityNoAnimation
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityNoHistory
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityNoUserAction
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityPreviousIsTop
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityReorderToFront
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityRequireDefault
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityRequireNonBrowser
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityResetTaskIfNeeded
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityRetainInRecents
-      value: "0"
-      go_type: int
-    - go_name: FlagActivitySingleTop
-      value: "0"
-      go_type: int
-    - go_name: FlagActivityTaskOnHome
-      value: "0"
-      go_type: int
-    - go_name: FlagDebugLogResolution
-      value: "0"
-      go_type: int
-    - go_name: FlagDirectBootAuto
-      value: "0"
-      go_type: int
-    - go_name: FlagExcludeStoppedPackages
-      value: "0"
-      go_type: int
-    - go_name: FlagFromBackground
-      value: "0"
-      go_type: int
-    - go_name: FlagGrantPersistableUriPermission
-      value: "0"
-      go_type: int
-    - go_name: FlagGrantPrefixUriPermission
-      value: "0"
-      go_type: int
-    - go_name: FlagGrantReadUriPermission
-      value: "0"
-      go_type: int
-    - go_name: FlagGrantWriteUriPermission
-      value: "0"
-      go_type: int
-    - go_name: FlagIncludeStoppedPackages
-      value: "0"
-      go_type: int
-    - go_name: FlagReceiverForeground
-      value: "0"
-      go_type: int
-    - go_name: FlagReceiverNoAbort
-      value: "0"
-      go_type: int
-    - go_name: FlagReceiverRegisteredOnly
-      value: "0"
-      go_type: int
-    - go_name: FlagReceiverReplacePending
-      value: "0"
-      go_type: int
-    - go_name: FlagReceiverVisibleToInstantApps
-      value: "0"
-      go_type: int
-    - go_name: MetadataDockHome
-      value: '""'
-      go_type: string
-    - go_name: UriAllowUnsafe
-      value: "0"
-      go_type: int
-    - go_name: UriAndroidAppScheme
-      value: "0"
-      go_type: int
-    - go_name: UriIntentScheme
-      value: "0"
+      value: "134217728"
       go_type: int

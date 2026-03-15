@@ -3,15 +3,15 @@
 package environment
 
 const (
-	MediaBadRemoval      = ""
-	MediaChecking        = ""
-	MediaEjecting        = ""
-	MediaMounted         = ""
-	MediaMountedReadOnly = ""
-	MediaNofs            = ""
-	MediaRemoved         = ""
-	MediaShared          = ""
-	MediaUnknown         = ""
-	MediaUnmountable     = ""
-	MediaUnmounted       = ""
+	MediaBadRemoval      = "bad_removal"
+	MediaChecking        = "checking"
+	MediaEjecting        = "ejecting"
+	MediaMounted         = "mounted"
+	MediaMountedReadOnly = "mounted_ro"
+	MediaNofs            = "nofs"
+	MediaRemoved         = "removed"
+	MediaShared          = "shared"
+	MediaUnknown         = "unknown"
+	MediaUnmountable     = "unmountable"
+	MediaUnmounted       = "unmounted"
 )

@@ -530,95 +530,95 @@ classes:
           error: true
 constants:
     - go_name: MediaErrorIo
-      value: "0"
+      value: "-1004"
       go_type: int
     - go_name: MediaErrorMalformed
-      value: "0"
+      value: "-1007"
       go_type: int
     - go_name: MediaErrorNotValidForProgressivePlayback
-      value: "0"
+      value: "200"
       go_type: int
     - go_name: MediaErrorServerDied
-      value: "0"
+      value: "100"
       go_type: int
     - go_name: MediaErrorTimedOut
-      value: "0"
+      value: "-110"
       go_type: int
     - go_name: MediaErrorUnknown
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: MediaErrorUnsupported
-      value: "0"
+      value: "-1010"
       go_type: int
     - go_name: MediaInfoAudioNotPlaying
-      value: "0"
+      value: "804"
       go_type: int
     - go_name: MediaInfoBadInterleaving
-      value: "0"
+      value: "800"
       go_type: int
     - go_name: MediaInfoBufferingEnd
-      value: "0"
+      value: "702"
       go_type: int
     - go_name: MediaInfoBufferingStart
-      value: "0"
+      value: "701"
       go_type: int
     - go_name: MediaInfoMetadataUpdate
-      value: "0"
+      value: "802"
       go_type: int
     - go_name: MediaInfoNotSeekable
-      value: "0"
+      value: "801"
       go_type: int
     - go_name: MediaInfoStartedAsNext
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: MediaInfoSubtitleTimedOut
-      value: "0"
+      value: "902"
       go_type: int
     - go_name: MediaInfoUnknown
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: MediaInfoUnsupportedSubtitle
-      value: "0"
+      value: "901"
       go_type: int
     - go_name: MediaInfoVideoNotPlaying
-      value: "0"
+      value: "805"
       go_type: int
     - go_name: MediaInfoVideoRenderingStart
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: MediaInfoVideoTrackLagging
-      value: "0"
+      value: "700"
       go_type: int
     - go_name: MediaMimetypeTextSubrip
-      value: '""'
+      value: '"application/x-subrip"'
       go_type: string
     - go_name: PrepareDrmStatusPreparationError
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: PrepareDrmStatusProvisioningNetworkError
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: PrepareDrmStatusProvisioningServerError
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: PrepareDrmStatusSuccess
       value: "0"
       go_type: int
     - go_name: SeekClosest
-      value: "0"
+      value: "3"
       go_type: int
     - go_name: SeekClosestSync
-      value: "0"
+      value: "2"
       go_type: int
     - go_name: SeekNextSync
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: SeekPreviousSync
       value: "0"
       go_type: int
     - go_name: VideoScalingModeScaleToFit
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: VideoScalingModeScaleToFitWithCropping
-      value: "0"
+      value: "2"
       go_type: int

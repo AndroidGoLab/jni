@@ -127,7 +127,7 @@ classes:
           error: true
 constants:
     - go_name: LengthLong
-      value: "0"
+      value: "1"
       go_type: int
     - go_name: LengthShort
       value: "0"

@@ -25,7 +25,7 @@ const (
 	SocModel                = ""
 	Tags                    = ""
 	Type                    = ""
-	Unknown                 = ""
+	Unknown                 = "unknown"
 	User                    = ""
 	BaseOs                  = ""
 	Codename                = ""
