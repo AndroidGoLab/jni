@@ -54,6 +54,20 @@ func unregisterProxy(id int64) {
 	proxyMu.Unlock()
 }
 
+// RegisterProxyHandler stores a basic ProxyHandler in the global registry
+// and returns a unique handler ID. This is used by the gRPC server layer
+// when creating abstract class adapter proxies (which dispatch without
+// a Method object). Call UnregisterProxyHandler when the proxy is no
+// longer needed.
+func RegisterProxyHandler(h ProxyHandler) int64 {
+	return registerProxy(h)
+}
+
+// UnregisterProxyHandler removes a handler by ID from the global registry.
+func UnregisterProxyHandler(id int64) {
+	unregisterProxy(id)
+}
+
 // lookupProxy retrieves a handler by ID.
 func lookupProxy(id int64) (ProxyHandler, bool) {
 	proxyMu.Lock()
