@@ -43,6 +43,30 @@ jobs:
           ANDROID_SDK: /usr/local/lib/android/sdk
           DIST_NDK: /usr/local/lib/android/sdk/ndk/27.0.12077973
 
+      - name: Build Magisk module
+        run: make magisk
+        env:
+          DIST_GOARCH: ${{ matrix.goarch }}
+          ANDROID_SDK: /usr/local/lib/android/sdk
+          DIST_NDK: /usr/local/lib/android/sdk/ndk/27.0.12077973
+
+      - name: Decode signing keystore
+        run: |
+          if [ -n "$JNISERVICE_KEYSTORE_B64" ]; then
+            echo "$JNISERVICE_KEYSTORE_B64" | base64 -d > build/release.keystore
+          fi
+        env:
+          JNISERVICE_KEYSTORE_B64: ${{ secrets.JNISERVICE_KEYSTORE_B64 }}
+
+      - name: Build APK
+        run: make apk
+        env:
+          DIST_GOARCH: ${{ matrix.goarch }}
+          ANDROID_SDK: /usr/local/lib/android/sdk
+          DIST_NDK: /usr/local/lib/android/sdk/ndk/27.0.12077973
+          JNISERVICE_KEYSTORE: build/release.keystore
+          JNISERVICE_KEYSTORE_PASSWORD: ${{ secrets.JNISERVICE_KEYSTORE_PASSWORD }}
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
