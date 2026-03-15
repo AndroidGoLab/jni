@@ -74,6 +74,9 @@ func Java_center_dx_jni_jniservice_JNIServiceForeground_setAppContext(cenv *C.JN
 		// so unsafe conversion is safe.
 		obj := jni.ObjectFromRef(*(*jni.CAPIObject)(unsafe.Pointer(&ctx)))
 		handle := globalHandles.Put(goEnv, obj)
+		if globalJNIServer != nil {
+			globalJNIServer.AppContextHandle = handle
+		}
 		fmt.Fprintf(os.Stderr, "jniservice: APK app context stored (handle=%d)\n", handle)
 
 		// Also store the APK's ClassLoader so FindClass can fall back to it
@@ -138,7 +141,7 @@ func runServer(cvm *C.JavaVM) {
 
 	// Initialize Android system context (Looper + ActivityThread).
 	// This makes the Context handle available for Android API calls.
-	initAndroidContext(vm, handles)
+	appContextHandle := initAndroidContext(vm, handles)
 
 	// Determine data directory. Try the APK's files dir first (writable by the
 	// app process), fall back to /data/local/tmp (writable by shell user in
@@ -215,8 +218,10 @@ func runServer(cvm *C.JavaVM) {
 
 	// Create app.Context from the Android Context stored in HandleStore.
 	var appCtx *app.Context
-	if ctxObj := handles.Get(1); ctxObj != nil {
-		appCtx = app.ContextFromObject(vm, ctxObj)
+	if appContextHandle != 0 {
+		if ctxObj := handles.Get(appContextHandle); ctxObj != nil {
+			appCtx = app.ContextFromObject(vm, ctxObj)
+		}
 	}
 
 	// Register handle store + any available Android API services.
@@ -245,8 +250,9 @@ func runServer(cvm *C.JavaVM) {
 
 	// Register the raw JNI service for low-level JNI access.
 	globalJNIServer = &jnirawserver.Server{
-		VM:      vm,
-		Handles: handles,
+		VM:               vm,
+		Handles:          handles,
+		AppContextHandle: appContextHandle,
 	}
 	jnirawpb.RegisterJNIServiceServer(grpcServer, globalJNIServer)
 	fmt.Fprintf(os.Stderr, "jniservice: registered jni_raw service\n")
@@ -329,7 +335,7 @@ func generateServerTLS(ca *certauth.CA) (tls.Certificate, error) {
 //     Use currentActivityThread().getApplication() to get the app's Context.
 //   - app_process mode: no ActivityThread exists. Create one via Looper.prepare()
 //     + ActivityThread.systemMain(), then use getSystemContext().
-func initAndroidContext(vm *jni.VM, handles *handlestore.HandleStore) {
+func initAndroidContext(vm *jni.VM, handles *handlestore.HandleStore) int64 {
 	// Pin to OS thread so Looper/ActivityThread calls run on the same thread.
 	runtime.LockOSThread()
 	defer runtime.UnlockOSThread()
@@ -409,9 +415,10 @@ func initAndroidContext(vm *jni.VM, handles *handlestore.HandleStore) {
 	})
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "jniservice: WARNING: context init failed: %v\n", err)
-		return
+		return 0
 	}
 	fmt.Fprintf(os.Stderr, "jniservice: android context initialized (handle=%d)\n", contextHandle)
+	return contextHandle
 }
 
 // launchPermissionDialog starts the PermissionDialogActivity via an Intent,
@@ -424,8 +431,11 @@ func launchPermissionDialog(
 	clientID string,
 	methods []string,
 ) error {
-	// Get the app context (handle 2 from setAppContext).
-	ctx := handles.Get(2)
+	if globalJNIServer == nil || globalJNIServer.AppContextHandle == 0 {
+		fmt.Fprintf(os.Stderr, "jniservice: no app context for permission dialog\n")
+		return nil
+	}
+	ctx := handles.Get(globalJNIServer.AppContextHandle)
 	if ctx == nil {
 		fmt.Fprintf(os.Stderr, "jniservice: no app context for permission dialog\n")
 		return nil
@@ -441,7 +451,7 @@ func launchPermissionDialog(
 		return fmt.Errorf("finding Context class: %w", err)
 	}
 	// Find PermissionDialogActivity class via ClassLoader.
-	clObj := handles.Get(3) // AppClassLoader handle
+	clObj := handles.Get(globalJNIServer.AppClassLoader)
 	if clObj == nil {
 		fmt.Fprintf(os.Stderr, "jniservice: no ClassLoader for permission dialog\n")
 		return nil

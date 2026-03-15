@@ -15,7 +15,11 @@ var locationGetCmd = &cobra.Command{
 		defer cancel()
 
 		client := pb.NewJNIServiceClient(grpcConn)
-		contextHandle := int64(2)
+		appCtx, err := client.GetAppContext(ctx, &pb.GetAppContextRequest{})
+		if err != nil {
+			return fmt.Errorf("getting app context: %w", err)
+		}
+		contextHandle := appCtx.GetContextHandle()
 
 		ctxCls, err := client.FindClass(ctx, &pb.FindClassRequest{Name: "android/content/Context"})
 		if err != nil {

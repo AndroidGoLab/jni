@@ -23,7 +23,6 @@ const (
 	defaultVideoFrameRate    = 30
 	defaultVideoWidth        = 1920
 	defaultVideoHeight       = 1080
-	appContextHandle         = 2 // pre-registered app Context handle
 )
 
 var cameraRecordCmd = &cobra.Command{
@@ -85,6 +84,11 @@ func recordVideo(
 	duration time.Duration,
 	width, height int,
 ) (_ []byte, _err error) {
+	appContextHandle, err := j.getAppContext()
+	if err != nil {
+		return nil, fmt.Errorf("getting app context: %w", err)
+	}
+
 	// Step 1: Create HandlerThread + Handler for camera callbacks.
 	handlerThread, handler, err := createHandlerThread(j)
 	if err != nil {
@@ -92,7 +96,7 @@ func recordVideo(
 	}
 
 	// Step 2: Get CameraManager and camera ID.
-	cameraID, cameraManager, err := getCameraID(j, cameraIndex)
+	cameraID, cameraManager, err := getCameraID(j, appContextHandle, cameraIndex)
 	if err != nil {
 		return nil, fmt.Errorf("getting camera ID: %w", err)
 	}
@@ -174,12 +178,12 @@ func recordVideo(
 	}()
 
 	// Step 6: Configure MediaRecorder.
-	outputPath, err := getOutputPath(j)
+	outputPath, err := getOutputPath(j, appContextHandle)
 	if err != nil {
 		return nil, fmt.Errorf("getting output path: %w", err)
 	}
 
-	recorder, err := setupMediaRecorder(j, outputPath, width, height)
+	recorder, err := setupMediaRecorder(j, appContextHandle, outputPath, width, height)
 	if err != nil {
 		return nil, fmt.Errorf("setting up MediaRecorder: %w", err)
 	}
@@ -450,7 +454,7 @@ func createHandlerThread(j *jniCaller) (handlerThread, handler int64, _ error) {
 }
 
 // getCameraID retrieves the camera ID string at the given index from CameraManager.
-func getCameraID(j *jniCaller, index int) (string, int64, error) {
+func getCameraID(j *jniCaller, appContextHandle int64, index int) (string, int64, error) {
 	contextCls, err := j.findClass("android/content/Context")
 	if err != nil {
 		return "", 0, fmt.Errorf("finding Context class: %w", err)
@@ -505,7 +509,7 @@ func getCameraID(j *jniCaller, index int) (string, int64, error) {
 }
 
 // getOutputPath returns a path in the app's cache directory for the recording.
-func getOutputPath(j *jniCaller) (string, error) {
+func getOutputPath(j *jniCaller, appContextHandle int64) (string, error) {
 	contextCls, err := j.findClass("android/content/Context")
 	if err != nil {
 		return "", fmt.Errorf("finding Context class: %w", err)
@@ -540,7 +544,7 @@ func getOutputPath(j *jniCaller) (string, error) {
 }
 
 // setupMediaRecorder creates and configures a MediaRecorder via JNI.
-func setupMediaRecorder(j *jniCaller, outputPath string, width, height int) (int64, error) {
+func setupMediaRecorder(j *jniCaller, appContextHandle int64, outputPath string, width, height int) (int64, error) {
 	mrCls, err := j.findClass("android/media/MediaRecorder")
 	if err != nil {
 		return 0, fmt.Errorf("finding MediaRecorder class: %w", err)

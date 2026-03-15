@@ -72,6 +72,7 @@ const (
 	JNIService_FromReflectedField_FullMethodName    = "/jni_raw.JNIService/FromReflectedField"
 	JNIService_ToReflectedMethod_FullMethodName     = "/jni_raw.JNIService/ToReflectedMethod"
 	JNIService_ToReflectedField_FullMethodName      = "/jni_raw.JNIService/ToReflectedField"
+	JNIService_GetAppContext_FullMethodName         = "/jni_raw.JNIService/GetAppContext"
 	JNIService_Proxy_FullMethodName                 = "/jni_raw.JNIService/Proxy"
 )
 
@@ -150,6 +151,8 @@ type JNIServiceClient interface {
 	FromReflectedField(ctx context.Context, in *FromReflectedFieldRequest, opts ...grpc.CallOption) (*FromReflectedFieldResponse, error)
 	ToReflectedMethod(ctx context.Context, in *ToReflectedMethodRequest, opts ...grpc.CallOption) (*ToReflectedMethodResponse, error)
 	ToReflectedField(ctx context.Context, in *ToReflectedFieldRequest, opts ...grpc.CallOption) (*ToReflectedFieldResponse, error)
+	// Returns the handle to the Android application Context.
+	GetAppContext(ctx context.Context, in *GetAppContextRequest, opts ...grpc.CallOption) (*GetAppContextResponse, error)
 	// Bidirectional stream for creating Java interface proxies with remote callbacks.
 	Proxy(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ProxyClientMessage, ProxyServerMessage], error)
 }
@@ -692,6 +695,16 @@ func (c *jNIServiceClient) ToReflectedField(ctx context.Context, in *ToReflected
 	return out, nil
 }
 
+func (c *jNIServiceClient) GetAppContext(ctx context.Context, in *GetAppContextRequest, opts ...grpc.CallOption) (*GetAppContextResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAppContextResponse)
+	err := c.cc.Invoke(ctx, JNIService_GetAppContext_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *jNIServiceClient) Proxy(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ProxyClientMessage, ProxyServerMessage], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &JNIService_ServiceDesc.Streams[0], JNIService_Proxy_FullMethodName, cOpts...)
@@ -780,6 +793,8 @@ type JNIServiceServer interface {
 	FromReflectedField(context.Context, *FromReflectedFieldRequest) (*FromReflectedFieldResponse, error)
 	ToReflectedMethod(context.Context, *ToReflectedMethodRequest) (*ToReflectedMethodResponse, error)
 	ToReflectedField(context.Context, *ToReflectedFieldRequest) (*ToReflectedFieldResponse, error)
+	// Returns the handle to the Android application Context.
+	GetAppContext(context.Context, *GetAppContextRequest) (*GetAppContextResponse, error)
 	// Bidirectional stream for creating Java interface proxies with remote callbacks.
 	Proxy(grpc.BidiStreamingServer[ProxyClientMessage, ProxyServerMessage]) error
 	mustEmbedUnimplementedJNIServiceServer()
@@ -950,6 +965,9 @@ func (UnimplementedJNIServiceServer) ToReflectedMethod(context.Context, *ToRefle
 }
 func (UnimplementedJNIServiceServer) ToReflectedField(context.Context, *ToReflectedFieldRequest) (*ToReflectedFieldResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ToReflectedField not implemented")
+}
+func (UnimplementedJNIServiceServer) GetAppContext(context.Context, *GetAppContextRequest) (*GetAppContextResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAppContext not implemented")
 }
 func (UnimplementedJNIServiceServer) Proxy(grpc.BidiStreamingServer[ProxyClientMessage, ProxyServerMessage]) error {
 	return status.Error(codes.Unimplemented, "method Proxy not implemented")
@@ -1929,6 +1947,24 @@ func _JNIService_ToReflectedField_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _JNIService_GetAppContext_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAppContextRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JNIServiceServer).GetAppContext(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JNIService_GetAppContext_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JNIServiceServer).GetAppContext(ctx, req.(*GetAppContextRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _JNIService_Proxy_Handler(srv interface{}, stream grpc.ServerStream) error {
 	return srv.(JNIServiceServer).Proxy(&grpc.GenericServerStream[ProxyClientMessage, ProxyServerMessage]{ServerStream: stream})
 }
@@ -2154,6 +2190,10 @@ var JNIService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ToReflectedField",
 			Handler:    _JNIService_ToReflectedField_Handler,
+		},
+		{
+			MethodName: "GetAppContext",
+			Handler:    _JNIService_GetAppContext_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

@@ -22,6 +22,10 @@ type Server struct {
 	pb.UnimplementedJNIServiceServer
 	VM      *jni.VM
 	Handles *handlestore.HandleStore
+	// AppContextHandle is the HandleStore handle for the Android
+	// application Context. Set during server startup so clients can
+	// retrieve it via the GetAppContext RPC instead of guessing.
+	AppContextHandle int64
 	// AppClassLoader is an optional handle to the APK's ClassLoader.
 	// When set, FindClass falls back to ClassLoader.loadClass() if the
 	// JNI FindClass fails (native threads use BootClassLoader which
@@ -124,6 +128,15 @@ func (s *Server) GetVersion(_ context.Context, _ *pb.GetVersionRequest) (*pb.Get
 		return nil, status.Errorf(codes.Internal, "%v", err)
 	}
 	return &pb.GetVersionResponse{Version: version}, nil
+}
+
+// ---- App Context ----
+
+func (s *Server) GetAppContext(_ context.Context, _ *pb.GetAppContextRequest) (*pb.GetAppContextResponse, error) {
+	if s.AppContextHandle == 0 {
+		return nil, status.Errorf(codes.FailedPrecondition, "app context not available")
+	}
+	return &pb.GetAppContextResponse{ContextHandle: s.AppContextHandle}, nil
 }
 
 // ---- Class ----

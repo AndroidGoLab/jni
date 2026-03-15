@@ -35,7 +35,11 @@ var cameraPhotoCmd = &cobra.Command{
 			return fmt.Errorf("getting takePicture method: %w", err)
 		}
 
-		contextHandle := int64(2)
+		appCtx, err := client.GetAppContext(ctx, &pb.GetAppContextRequest{})
+		if err != nil {
+			return fmt.Errorf("getting app context: %w", err)
+		}
+		contextHandle := appCtx.GetContextHandle()
 		result, err := client.CallStaticMethod(ctx, &pb.CallStaticMethodRequest{
 			ClassHandle: cls.GetClassHandle(),
 			MethodId:    method.GetMethodId(),

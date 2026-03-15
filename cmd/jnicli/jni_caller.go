@@ -14,6 +14,14 @@ type jniCaller struct {
 	ctx    context.Context
 }
 
+func (j *jniCaller) getAppContext() (int64, error) {
+	resp, err := j.client.GetAppContext(j.ctx, &pb.GetAppContextRequest{})
+	if err != nil {
+		return 0, fmt.Errorf("GetAppContext: %w", err)
+	}
+	return resp.GetContextHandle(), nil
+}
+
 func (j *jniCaller) findClass(name string) (int64, error) {
 	resp, err := j.client.FindClass(j.ctx, &pb.FindClassRequest{Name: name})
 	if err != nil {

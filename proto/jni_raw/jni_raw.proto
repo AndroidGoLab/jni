@@ -116,6 +116,9 @@ service JNIService {
   rpc ToReflectedMethod   (ToReflectedMethodRequest)   returns (ToReflectedMethodResponse);
   rpc ToReflectedField    (ToReflectedFieldRequest)    returns (ToReflectedFieldResponse);
 
+  // Returns the handle to the Android application Context.
+  rpc GetAppContext(GetAppContextRequest) returns (GetAppContextResponse);
+
   // Bidirectional stream for creating Java interface proxies with remote callbacks.
   rpc Proxy(stream ProxyClientMessage) returns (stream ProxyServerMessage);
 
@@ -339,6 +342,10 @@ message ToReflectedMethodResponse { int64 method_object = 1; }
 
 message ToReflectedFieldRequest { int64 class_handle = 1; int64 field_id = 2; bool is_static = 3; }
 message ToReflectedFieldResponse { int64 field_object = 1; }
+
+// ---- App Context ----
+message GetAppContextRequest {}
+message GetAppContextResponse { int64 context_handle = 1; }
 
 // ---- Proxy (remote callbacks) ----
 message ProxyClientMessage {
