@@ -2,20 +2,20 @@
 
 package usage
 
-// Interval represents a typed constant.
-type Interval int
-
 const (
-	Daily   Interval = 0
-	Weekly  Interval = 1
-	Monthly Interval = 2
-	Yearly  Interval = 3
+	ExtraEventAction   = ""
+	ExtraEventCategory = ""
 )
 
 const (
-	StandbyActive     = 10
-	StandbyWorkingSet = 20
-	StandbyFrequent   = 30
-	StandbyRare       = 40
-	StandbyRestricted = 45
+	IntervalBest            = 0
+	IntervalDaily           = 0
+	IntervalMonthly         = 0
+	IntervalWeekly          = 0
+	IntervalYearly          = 0
+	StandbyBucketActive     = 0
+	StandbyBucketFrequent   = 0
+	StandbyBucketRare       = 0
+	StandbyBucketRestricted = 0
+	StandbyBucketWorkingSet = 0
 )

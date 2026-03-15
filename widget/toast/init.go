@@ -20,8 +20,26 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clstoast     *jni.GlobalRef
-	midtoastshow jni.MethodID
+	clstoast                    *jni.GlobalRef
+	midtoastAddCallback         jni.MethodID
+	midtoastCancel              jni.MethodID
+	midtoastGetDuration         jni.MethodID
+	midtoastGetGravity          jni.MethodID
+	midtoastGetHorizontalMargin jni.MethodID
+	midtoastGetVerticalMargin   jni.MethodID
+	midtoastGetView             jni.MethodID
+	midtoastGetXOffset          jni.MethodID
+	midtoastGetYOffset          jni.MethodID
+	midtoastRemoveCallback      jni.MethodID
+	midtoastSetDuration         jni.MethodID
+	midtoastSetGravity          jni.MethodID
+	midtoastSetMargin           jni.MethodID
+	midtoastSetText1            jni.MethodID
+	midtoastSetText1_1          jni.MethodID
+	midtoastSetView             jni.MethodID
+	midtoastShow                jni.MethodID
+	midtoastMakeText3           jni.MethodID
+	midtoastMakeText3_1         jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -48,9 +66,99 @@ func doInit(env *jni.Env) error {
 	}
 	clstoast = env.NewGlobalRef(&c.Object)
 
-	midtoastshow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "show", "()V")
+	midtoastAddCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "addCallback", "(Landroid/widget/Toast$Callback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.addCallback: %w", err)
+	}
+
+	midtoastCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "cancel", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.cancel: %w", err)
+	}
+
+	midtoastGetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "getDuration", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.getDuration: %w", err)
+	}
+
+	midtoastGetGravity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "getGravity", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.getGravity: %w", err)
+	}
+
+	midtoastGetHorizontalMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "getHorizontalMargin", "()F")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.getHorizontalMargin: %w", err)
+	}
+
+	midtoastGetVerticalMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "getVerticalMargin", "()F")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.getVerticalMargin: %w", err)
+	}
+
+	midtoastGetView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "getView", "()Landroid/view/View;")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.getView: %w", err)
+	}
+
+	midtoastGetXOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "getXOffset", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.getXOffset: %w", err)
+	}
+
+	midtoastGetYOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "getYOffset", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.getYOffset: %w", err)
+	}
+
+	midtoastRemoveCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "removeCallback", "(Landroid/widget/Toast$Callback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.removeCallback: %w", err)
+	}
+
+	midtoastSetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "setDuration", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.setDuration: %w", err)
+	}
+
+	midtoastSetGravity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "setGravity", "(III)V")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.setGravity: %w", err)
+	}
+
+	midtoastSetMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "setMargin", "(FF)V")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.setMargin: %w", err)
+	}
+
+	midtoastSetText1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "setText", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.setText: %w", err)
+	}
+
+	midtoastSetText1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "setText", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.setText: %w", err)
+	}
+
+	midtoastSetView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "setView", "(Landroid/view/View;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.setView: %w", err)
+	}
+
+	midtoastShow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "show", "()V")
 	if err != nil {
 		return fmt.Errorf("get method android.widget.Toast.show: %w", err)
+	}
+
+	midtoastMakeText3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "makeText", "(Landroid/content/Context;II)Landroid/widget/Toast;")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.makeText: %w", err)
+	}
+
+	midtoastMakeText3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clstoast)), "makeText", "(Landroid/content/Context;Ljava/lang/String;I)Landroid/widget/Toast;")
+	if err != nil {
+		return fmt.Errorf("get method android.widget.Toast.makeText: %w", err)
 	}
 
 	return nil

@@ -20,9 +20,61 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                        *jni.GlobalRef
-	midManagershowSoftInput           jni.MethodID
-	midManagerhideSoftInputFromWindow jni.MethodID
+	clsinputMethodManager                                                     *jni.GlobalRef
+	midinputMethodManagerAcceptStylusHandwritingDelegation1                   jni.MethodID
+	midinputMethodManagerAcceptStylusHandwritingDelegation2_1                 jni.MethodID
+	midinputMethodManagerAcceptStylusHandwritingDelegation5_2                 jni.MethodID
+	midinputMethodManagerAcceptStylusHandwritingDelegation4_3                 jni.MethodID
+	midinputMethodManagerDispatchKeyEventFromInputMethod                      jni.MethodID
+	midinputMethodManagerDisplayCompletions                                   jni.MethodID
+	midinputMethodManagerGetCurrentInputMethodInfo                            jni.MethodID
+	midinputMethodManagerGetCurrentInputMethodSubtype                         jni.MethodID
+	midinputMethodManagerGetEnabledInputMethodList                            jni.MethodID
+	midinputMethodManagerGetEnabledInputMethodSubtypeList                     jni.MethodID
+	midinputMethodManagerGetInputMethodList                                   jni.MethodID
+	midinputMethodManagerGetLastInputMethodSubtype                            jni.MethodID
+	midinputMethodManagerHideSoftInputFromInputMethod                         jni.MethodID
+	midinputMethodManagerHideSoftInputFromWindow2                             jni.MethodID
+	midinputMethodManagerHideSoftInputFromWindow3_1                           jni.MethodID
+	midinputMethodManagerHideStatusIcon                                       jni.MethodID
+	midinputMethodManagerInvalidateInput                                      jni.MethodID
+	midinputMethodManagerIsAcceptingText                                      jni.MethodID
+	midinputMethodManagerIsActive0                                            jni.MethodID
+	midinputMethodManagerIsActive1_1                                          jni.MethodID
+	midinputMethodManagerIsConnectionlessStylusHandwritingAvailable           jni.MethodID
+	midinputMethodManagerIsFullscreenMode                                     jni.MethodID
+	midinputMethodManagerIsInputMethodSuppressingSpellChecker                 jni.MethodID
+	midinputMethodManagerIsStylusHandwritingAvailable                         jni.MethodID
+	midinputMethodManagerIsWatchingCursor                                     jni.MethodID
+	midinputMethodManagerPrepareStylusHandwritingDelegation1                  jni.MethodID
+	midinputMethodManagerPrepareStylusHandwritingDelegation2_1                jni.MethodID
+	midinputMethodManagerRestartInput                                         jni.MethodID
+	midinputMethodManagerSendAppPrivateCommand                                jni.MethodID
+	midinputMethodManagerSetAdditionalInputMethodSubtypes                     jni.MethodID
+	midinputMethodManagerSetCurrentInputMethodSubtype                         jni.MethodID
+	midinputMethodManagerSetExplicitlyEnabledInputMethodSubtypes              jni.MethodID
+	midinputMethodManagerSetInputMethod                                       jni.MethodID
+	midinputMethodManagerSetInputMethodAndSubtype                             jni.MethodID
+	midinputMethodManagerShouldOfferSwitchingToNextInputMethod                jni.MethodID
+	midinputMethodManagerShowInputMethodAndSubtypeEnabler                     jni.MethodID
+	midinputMethodManagerShowInputMethodPicker                                jni.MethodID
+	midinputMethodManagerShowSoftInput2                                       jni.MethodID
+	midinputMethodManagerShowSoftInput3_1                                     jni.MethodID
+	midinputMethodManagerShowSoftInputFromInputMethod                         jni.MethodID
+	midinputMethodManagerShowStatusIcon                                       jni.MethodID
+	midinputMethodManagerStartConnectionlessStylusHandwriting                 jni.MethodID
+	midinputMethodManagerStartConnectionlessStylusHandwritingForDelegation5   jni.MethodID
+	midinputMethodManagerStartConnectionlessStylusHandwritingForDelegation4_1 jni.MethodID
+	midinputMethodManagerStartStylusHandwriting                               jni.MethodID
+	midinputMethodManagerSwitchToLastInputMethod                              jni.MethodID
+	midinputMethodManagerSwitchToNextInputMethod                              jni.MethodID
+	midinputMethodManagerToggleSoftInput                                      jni.MethodID
+	midinputMethodManagerToggleSoftInputFromWindow                            jni.MethodID
+	midinputMethodManagerUpdateCursor                                         jni.MethodID
+	midinputMethodManagerUpdateCursorAnchorInfo                               jni.MethodID
+	midinputMethodManagerUpdateExtractedText                                  jni.MethodID
+	midinputMethodManagerUpdateSelection                                      jni.MethodID
+	midinputMethodManagerViewClicked                                          jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -47,16 +99,276 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.view.inputmethod.InputMethodManager: %w", err)
 	}
-	clsManager = env.NewGlobalRef(&c.Object)
+	clsinputMethodManager = env.NewGlobalRef(&c.Object)
 
-	midManagershowSoftInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "showSoftInput", "(Landroid/view/View;I)Z")
+	midinputMethodManagerAcceptStylusHandwritingDelegation1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "acceptStylusHandwritingDelegation", "(Landroid/view/View;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.acceptStylusHandwritingDelegation: %w", err)
+	}
+
+	midinputMethodManagerAcceptStylusHandwritingDelegation2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "acceptStylusHandwritingDelegation", "(Landroid/view/View;Ljava/lang/String;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.acceptStylusHandwritingDelegation: %w", err)
+	}
+
+	midinputMethodManagerAcceptStylusHandwritingDelegation5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "acceptStylusHandwritingDelegation", "(Landroid/view/View;Ljava/lang/String;ILjava/util/concurrent/Executor;Ljava/util/function/Consumer<java$lang$Boolean>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.acceptStylusHandwritingDelegation: %w", err)
+	}
+
+	midinputMethodManagerAcceptStylusHandwritingDelegation4_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "acceptStylusHandwritingDelegation", "(Landroid/view/View;Ljava/lang/String;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer<java$lang$Boolean>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.acceptStylusHandwritingDelegation: %w", err)
+	}
+
+	midinputMethodManagerDispatchKeyEventFromInputMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "dispatchKeyEventFromInputMethod", "(Landroid/view/View;Landroid/view/KeyEvent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.dispatchKeyEventFromInputMethod: %w", err)
+	}
+
+	midinputMethodManagerDisplayCompletions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "displayCompletions", "(Landroid/view/View;[Landroid/view/inputmethod/CompletionInfo;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.displayCompletions: %w", err)
+	}
+
+	midinputMethodManagerGetCurrentInputMethodInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "getCurrentInputMethodInfo", "()Landroid/view/inputmethod/InputMethodInfo;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.getCurrentInputMethodInfo: %w", err)
+	}
+
+	midinputMethodManagerGetCurrentInputMethodSubtype, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "getCurrentInputMethodSubtype", "()Landroid/view/inputmethod/InputMethodSubtype;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.getCurrentInputMethodSubtype: %w", err)
+	}
+
+	midinputMethodManagerGetEnabledInputMethodList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "getEnabledInputMethodList", "()Ljava/util/List<android$view$inputmethod$InputMethodInfo>;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.getEnabledInputMethodList: %w", err)
+	}
+
+	midinputMethodManagerGetEnabledInputMethodSubtypeList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "getEnabledInputMethodSubtypeList", "(Landroid/view/inputmethod/InputMethodInfo;Z)Ljava/util/List<android$view$inputmethod$InputMethodSubtype>;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.getEnabledInputMethodSubtypeList: %w", err)
+	}
+
+	midinputMethodManagerGetInputMethodList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "getInputMethodList", "()Ljava/util/List<android$view$inputmethod$InputMethodInfo>;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.getInputMethodList: %w", err)
+	}
+
+	midinputMethodManagerGetLastInputMethodSubtype, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "getLastInputMethodSubtype", "()Landroid/view/inputmethod/InputMethodSubtype;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.getLastInputMethodSubtype: %w", err)
+	}
+
+	midinputMethodManagerHideSoftInputFromInputMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "hideSoftInputFromInputMethod", "(Landroid/os/IBinder;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.hideSoftInputFromInputMethod: %w", err)
+	}
+
+	midinputMethodManagerHideSoftInputFromWindow2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "hideSoftInputFromWindow", "(Landroid/os/IBinder;I)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.hideSoftInputFromWindow: %w", err)
+	}
+
+	midinputMethodManagerHideSoftInputFromWindow3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "hideSoftInputFromWindow", "(Landroid/os/IBinder;ILandroid/os/ResultReceiver;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.hideSoftInputFromWindow: %w", err)
+	}
+
+	midinputMethodManagerHideStatusIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "hideStatusIcon", "(Landroid/os/IBinder;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.hideStatusIcon: %w", err)
+	}
+
+	midinputMethodManagerInvalidateInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "invalidateInput", "(Landroid/view/View;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.invalidateInput: %w", err)
+	}
+
+	midinputMethodManagerIsAcceptingText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "isAcceptingText", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.isAcceptingText: %w", err)
+	}
+
+	midinputMethodManagerIsActive0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "isActive", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.isActive: %w", err)
+	}
+
+	midinputMethodManagerIsActive1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "isActive", "(Landroid/view/View;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.isActive: %w", err)
+	}
+
+	midinputMethodManagerIsConnectionlessStylusHandwritingAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "isConnectionlessStylusHandwritingAvailable", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.isConnectionlessStylusHandwritingAvailable: %w", err)
+	}
+
+	midinputMethodManagerIsFullscreenMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "isFullscreenMode", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.isFullscreenMode: %w", err)
+	}
+
+	midinputMethodManagerIsInputMethodSuppressingSpellChecker, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "isInputMethodSuppressingSpellChecker", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.isInputMethodSuppressingSpellChecker: %w", err)
+	}
+
+	midinputMethodManagerIsStylusHandwritingAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "isStylusHandwritingAvailable", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.isStylusHandwritingAvailable: %w", err)
+	}
+
+	midinputMethodManagerIsWatchingCursor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "isWatchingCursor", "(Landroid/view/View;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.isWatchingCursor: %w", err)
+	}
+
+	midinputMethodManagerPrepareStylusHandwritingDelegation1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "prepareStylusHandwritingDelegation", "(Landroid/view/View;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.prepareStylusHandwritingDelegation: %w", err)
+	}
+
+	midinputMethodManagerPrepareStylusHandwritingDelegation2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "prepareStylusHandwritingDelegation", "(Landroid/view/View;Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.prepareStylusHandwritingDelegation: %w", err)
+	}
+
+	midinputMethodManagerRestartInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "restartInput", "(Landroid/view/View;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.restartInput: %w", err)
+	}
+
+	midinputMethodManagerSendAppPrivateCommand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "sendAppPrivateCommand", "(Landroid/view/View;Ljava/lang/String;Landroid/os/Bundle;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.sendAppPrivateCommand: %w", err)
+	}
+
+	midinputMethodManagerSetAdditionalInputMethodSubtypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "setAdditionalInputMethodSubtypes", "(Ljava/lang/String;[Landroid/view/inputmethod/InputMethodSubtype;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.setAdditionalInputMethodSubtypes: %w", err)
+	}
+
+	midinputMethodManagerSetCurrentInputMethodSubtype, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "setCurrentInputMethodSubtype", "(Landroid/view/inputmethod/InputMethodSubtype;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.setCurrentInputMethodSubtype: %w", err)
+	}
+
+	midinputMethodManagerSetExplicitlyEnabledInputMethodSubtypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "setExplicitlyEnabledInputMethodSubtypes", "(Ljava/lang/String;[I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.setExplicitlyEnabledInputMethodSubtypes: %w", err)
+	}
+
+	midinputMethodManagerSetInputMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "setInputMethod", "(Landroid/os/IBinder;Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.setInputMethod: %w", err)
+	}
+
+	midinputMethodManagerSetInputMethodAndSubtype, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "setInputMethodAndSubtype", "(Landroid/os/IBinder;Ljava/lang/String;Landroid/view/inputmethod/InputMethodSubtype;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.setInputMethodAndSubtype: %w", err)
+	}
+
+	midinputMethodManagerShouldOfferSwitchingToNextInputMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "shouldOfferSwitchingToNextInputMethod", "(Landroid/os/IBinder;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.shouldOfferSwitchingToNextInputMethod: %w", err)
+	}
+
+	midinputMethodManagerShowInputMethodAndSubtypeEnabler, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "showInputMethodAndSubtypeEnabler", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.showInputMethodAndSubtypeEnabler: %w", err)
+	}
+
+	midinputMethodManagerShowInputMethodPicker, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "showInputMethodPicker", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.showInputMethodPicker: %w", err)
+	}
+
+	midinputMethodManagerShowSoftInput2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "showSoftInput", "(Landroid/view/View;I)Z")
 	if err != nil {
 		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.showSoftInput: %w", err)
 	}
 
-	midManagerhideSoftInputFromWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hideSoftInputFromWindow", "(Landroid/os/IBinder;I)Z")
+	midinputMethodManagerShowSoftInput3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "showSoftInput", "(Landroid/view/View;ILandroid/os/ResultReceiver;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.hideSoftInputFromWindow: %w", err)
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.showSoftInput: %w", err)
+	}
+
+	midinputMethodManagerShowSoftInputFromInputMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "showSoftInputFromInputMethod", "(Landroid/os/IBinder;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.showSoftInputFromInputMethod: %w", err)
+	}
+
+	midinputMethodManagerShowStatusIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "showStatusIcon", "(Landroid/os/IBinder;Ljava/lang/String;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.showStatusIcon: %w", err)
+	}
+
+	midinputMethodManagerStartConnectionlessStylusHandwriting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "startConnectionlessStylusHandwriting", "(Landroid/view/View;Landroid/view/inputmethod/CursorAnchorInfo;Ljava/util/concurrent/Executor;Landroid/view/inputmethod/ConnectionlessHandwritingCallback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.startConnectionlessStylusHandwriting: %w", err)
+	}
+
+	midinputMethodManagerStartConnectionlessStylusHandwritingForDelegation5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "startConnectionlessStylusHandwritingForDelegation", "(Landroid/view/View;Landroid/view/inputmethod/CursorAnchorInfo;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/view/inputmethod/ConnectionlessHandwritingCallback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.startConnectionlessStylusHandwritingForDelegation: %w", err)
+	}
+
+	midinputMethodManagerStartConnectionlessStylusHandwritingForDelegation4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "startConnectionlessStylusHandwritingForDelegation", "(Landroid/view/View;Landroid/view/inputmethod/CursorAnchorInfo;Ljava/util/concurrent/Executor;Landroid/view/inputmethod/ConnectionlessHandwritingCallback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.startConnectionlessStylusHandwritingForDelegation: %w", err)
+	}
+
+	midinputMethodManagerStartStylusHandwriting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "startStylusHandwriting", "(Landroid/view/View;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.startStylusHandwriting: %w", err)
+	}
+
+	midinputMethodManagerSwitchToLastInputMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "switchToLastInputMethod", "(Landroid/os/IBinder;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.switchToLastInputMethod: %w", err)
+	}
+
+	midinputMethodManagerSwitchToNextInputMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "switchToNextInputMethod", "(Landroid/os/IBinder;Z)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.switchToNextInputMethod: %w", err)
+	}
+
+	midinputMethodManagerToggleSoftInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "toggleSoftInput", "(II)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.toggleSoftInput: %w", err)
+	}
+
+	midinputMethodManagerToggleSoftInputFromWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "toggleSoftInputFromWindow", "(Landroid/os/IBinder;II)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.toggleSoftInputFromWindow: %w", err)
+	}
+
+	midinputMethodManagerUpdateCursor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "updateCursor", "(Landroid/view/View;IIII)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.updateCursor: %w", err)
+	}
+
+	midinputMethodManagerUpdateCursorAnchorInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "updateCursorAnchorInfo", "(Landroid/view/View;Landroid/view/inputmethod/CursorAnchorInfo;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.updateCursorAnchorInfo: %w", err)
+	}
+
+	midinputMethodManagerUpdateExtractedText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "updateExtractedText", "(Landroid/view/View;ILandroid/view/inputmethod/ExtractedText;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.updateExtractedText: %w", err)
+	}
+
+	midinputMethodManagerUpdateSelection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "updateSelection", "(Landroid/view/View;IIII)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.updateSelection: %w", err)
+	}
+
+	midinputMethodManagerViewClicked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsinputMethodManager)), "viewClicked", "(Landroid/view/View;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.inputmethod.InputMethodManager.viewClicked: %w", err)
 	}
 
 	return nil

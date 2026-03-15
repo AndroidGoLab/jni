@@ -2,20 +2,53 @@
 
 package battery
 
-// Status represents a typed constant.
-type Status int
-
 const (
-	StatusUnknown     Status = 1
-	StatusCharging    Status = 2
-	StatusDischarging Status = 3
-	StatusNotCharging Status = 4
-	StatusFull        Status = 5
+	ActionCharging      = ""
+	ActionDischarging   = ""
+	ExtraBatteryLow     = ""
+	ExtraCapacityLevel  = ""
+	ExtraChargingStatus = ""
+	ExtraCycleCount     = ""
+	ExtraHealth         = ""
+	ExtraIconSmall      = ""
+	ExtraLevel          = ""
+	ExtraPlugged        = ""
+	ExtraPresent        = ""
+	ExtraScale          = ""
+	ExtraStatus         = ""
+	ExtraTechnology     = ""
+	ExtraTemperature    = ""
+	ExtraVoltage        = ""
 )
 
 const (
-	PluggedNone     = 0
-	PluggedAC       = 1
-	PluggedUSB      = 2
-	PluggedWireless = 4
+	BatteryCapacityLevelCritical    = 0
+	BatteryCapacityLevelFull        = 0
+	BatteryCapacityLevelHigh        = 0
+	BatteryCapacityLevelLow         = 0
+	BatteryCapacityLevelNormal      = 0
+	BatteryCapacityLevelUnknown     = 0
+	BatteryCapacityLevelUnsupported = 0
+	BatteryHealthCold               = 0
+	BatteryHealthDead               = 0
+	BatteryHealthGood               = 0
+	BatteryHealthOverheat           = 0
+	BatteryHealthOverVoltage        = 0
+	BatteryHealthUnknown            = 0
+	BatteryHealthUnspecifiedFailure = 0
+	BatteryPluggedAc                = 0
+	BatteryPluggedDock              = 0
+	BatteryPluggedUsb               = 0
+	BatteryPluggedWireless          = 0
+	BatteryPropertyCapacity         = 0
+	BatteryPropertyChargeCounter    = 0
+	BatteryPropertyCurrentAverage   = 0
+	BatteryPropertyCurrentNow       = 0
+	BatteryPropertyEnergyCounter    = 0
+	BatteryPropertyStatus           = 0
+	BatteryStatusCharging           = 0
+	BatteryStatusDischarging        = 0
+	BatteryStatusFull               = 0
+	BatteryStatusNotCharging        = 0
+	BatteryStatusUnknown            = 0
 )

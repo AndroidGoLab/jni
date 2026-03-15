@@ -20,14 +20,14 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                         *jni.GlobalRef
-	midManagerHasIrEmitter             jni.MethodID
-	midManagergetCarrierFrequenciesRaw jni.MethodID
-	midManagerTransmit                 jni.MethodID
+	clsconsumerIrManager                      *jni.GlobalRef
+	midconsumerIrManagerGetCarrierFrequencies jni.MethodID
+	midconsumerIrManagerHasIrEmitter          jni.MethodID
+	midconsumerIrManagerTransmit              jni.MethodID
 
-	clsfrequencyRange             *jni.GlobalRef
-	midfrequencyRangeMinFrequency jni.MethodID
-	midfrequencyRangeMaxFrequency jni.MethodID
+	clsconsumerIrManagerCarrierFrequencyRange                *jni.GlobalRef
+	midconsumerIrManagerCarrierFrequencyRangeGetMaxFrequency jni.MethodID
+	midconsumerIrManagerCarrierFrequencyRangeGetMinFrequency jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -52,19 +52,19 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.hardware.ConsumerIrManager: %w", err)
 	}
-	clsManager = env.NewGlobalRef(&c.Object)
+	clsconsumerIrManager = env.NewGlobalRef(&c.Object)
 
-	midManagerHasIrEmitter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasIrEmitter", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.ConsumerIrManager.hasIrEmitter: %w", err)
-	}
-
-	midManagergetCarrierFrequenciesRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCarrierFrequencies", "()[Landroid/hardware/ConsumerIrManager$CarrierFrequencyRange;")
+	midconsumerIrManagerGetCarrierFrequencies, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconsumerIrManager)), "getCarrierFrequencies", "()[Landroid/hardware/ConsumerIrManager$CarrierFrequencyRange;")
 	if err != nil {
 		return fmt.Errorf("get method android.hardware.ConsumerIrManager.getCarrierFrequencies: %w", err)
 	}
 
-	midManagerTransmit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "transmit", "(I[I)V")
+	midconsumerIrManagerHasIrEmitter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconsumerIrManager)), "hasIrEmitter", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.ConsumerIrManager.hasIrEmitter: %w", err)
+	}
+
+	midconsumerIrManagerTransmit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconsumerIrManager)), "transmit", "(I[I)V")
 	if err != nil {
 		return fmt.Errorf("get method android.hardware.ConsumerIrManager.transmit: %w", err)
 	}
@@ -73,16 +73,16 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.hardware.ConsumerIrManager$CarrierFrequencyRange: %w", err)
 	}
-	clsfrequencyRange = env.NewGlobalRef(&c.Object)
+	clsconsumerIrManagerCarrierFrequencyRange = env.NewGlobalRef(&c.Object)
 
-	midfrequencyRangeMinFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsfrequencyRange)), "getMinFrequency", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.ConsumerIrManager$CarrierFrequencyRange.getMinFrequency: %w", err)
-	}
-
-	midfrequencyRangeMaxFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsfrequencyRange)), "getMaxFrequency", "()I")
+	midconsumerIrManagerCarrierFrequencyRangeGetMaxFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconsumerIrManagerCarrierFrequencyRange)), "getMaxFrequency", "()I")
 	if err != nil {
 		return fmt.Errorf("get method android.hardware.ConsumerIrManager$CarrierFrequencyRange.getMaxFrequency: %w", err)
+	}
+
+	midconsumerIrManagerCarrierFrequencyRangeGetMinFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsconsumerIrManagerCarrierFrequencyRange)), "getMinFrequency", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.ConsumerIrManager$CarrierFrequencyRange.getMinFrequency: %w", err)
 	}
 
 	return nil

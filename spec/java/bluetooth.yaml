@@ -1,13 +1,20 @@
 package: bluetooth
 go_import: github.com/xaionaro-go/jni/bluetooth
 classes:
-    - java_class: android.bluetooth.BluetoothGattCharacteristic
-      go_type: bluetoothGattCharacteristic
+    - java_class: android.bluetooth.BluetoothGattService
+      go_type: bluetoothGattService
       methods:
-        - java_method: addDescriptor
-          go_name: AddDescriptor
+        - java_method: addCharacteristic
+          go_name: AddCharacteristic
           params:
-            - java_type: android.bluetooth.BluetoothGattDescriptor
+            - java_type: android.bluetooth.BluetoothGattCharacteristic
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: addService
+          go_name: AddService
+          params:
+            - java_type: android.bluetooth.BluetoothGattService
               go_name: arg0
           returns: boolean
           error: true
@@ -15,114 +22,32 @@ classes:
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getDescriptor
-          go_name: GetDescriptor
+        - java_method: getCharacteristic
+          go_name: GetCharacteristic
           params:
             - java_type: java.util.UUID
               go_name: arg0
-          returns: android.bluetooth.BluetoothGattDescriptor
+          returns: android.bluetooth.BluetoothGattCharacteristic
           error: true
-        - java_method: getDescriptors
-          go_name: GetDescriptors
-          returns: java.util.List<android.bluetooth.BluetoothGattDescriptor>
+        - java_method: getCharacteristics
+          go_name: GetCharacteristics
+          returns: java.util.List<android.bluetooth.BluetoothGattCharacteristic>
           error: true
-        - java_method: getFloatValue
-          go_name: GetFloatValue
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: java.lang.Float
+        - java_method: getIncludedServices
+          go_name: GetIncludedServices
+          returns: java.util.List<android.bluetooth.BluetoothGattService>
           error: true
         - java_method: getInstanceId
           go_name: GetInstanceId
           returns: int
           error: true
-        - java_method: getIntValue
-          go_name: GetIntValue
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: java.lang.Integer
-          error: true
-        - java_method: getPermissions
-          go_name: GetPermissions
+        - java_method: getType
+          go_name: GetType
           returns: int
-          error: true
-        - java_method: getProperties
-          go_name: GetProperties
-          returns: int
-          error: true
-        - java_method: getService
-          go_name: GetService
-          returns: android.bluetooth.BluetoothGattService
-          error: true
-        - java_method: getStringValue
-          go_name: GetStringValue
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
           error: true
         - java_method: getUuid
           go_name: GetUuid
           returns: java.util.UUID
-          error: true
-        - java_method: getValue
-          go_name: GetValue
-          returns: '[B'
-          error: true
-        - java_method: getWriteType
-          go_name: GetWriteType
-          returns: int
-          error: true
-        - java_method: setValue
-          go_name: SetValue1
-          params:
-            - java_type: '[B'
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: setValue
-          go_name: SetValue3_1
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: boolean
-          error: true
-        - java_method: setValue
-          go_name: SetValue4_2
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: boolean
-          error: true
-        - java_method: setValue
-          go_name: SetValue1_3
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: setWriteType
-          go_name: SetWriteType
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -137,84 +62,9 @@ constants:
     - go_name: Creator
       value: "0"
       go_type: int
-    - go_name: FormatFloat
+    - go_name: ServiceTypePrimary
       value: "0"
       go_type: int
-    - go_name: FormatSfloat
-      value: "0"
-      go_type: int
-    - go_name: FormatSint16
-      value: "0"
-      go_type: int
-    - go_name: FormatSint32
-      value: "0"
-      go_type: int
-    - go_name: FormatSint8
-      value: "0"
-      go_type: int
-    - go_name: FormatUint16
-      value: "0"
-      go_type: int
-    - go_name: FormatUint32
-      value: "0"
-      go_type: int
-    - go_name: FormatUint8
-      value: "0"
-      go_type: int
-    - go_name: PermissionRead
-      value: "0"
-      go_type: int
-    - go_name: PermissionReadEncrypted
-      value: "0"
-      go_type: int
-    - go_name: PermissionReadEncryptedMitm
-      value: "0"
-      go_type: int
-    - go_name: PermissionWrite
-      value: "0"
-      go_type: int
-    - go_name: PermissionWriteEncrypted
-      value: "0"
-      go_type: int
-    - go_name: PermissionWriteEncryptedMitm
-      value: "0"
-      go_type: int
-    - go_name: PermissionWriteSigned
-      value: "0"
-      go_type: int
-    - go_name: PermissionWriteSignedMitm
-      value: "0"
-      go_type: int
-    - go_name: PropertyBroadcast
-      value: "0"
-      go_type: int
-    - go_name: PropertyExtendedProps
-      value: "0"
-      go_type: int
-    - go_name: PropertyIndicate
-      value: "0"
-      go_type: int
-    - go_name: PropertyNotify
-      value: "0"
-      go_type: int
-    - go_name: PropertyRead
-      value: "0"
-      go_type: int
-    - go_name: PropertySignedWrite
-      value: "0"
-      go_type: int
-    - go_name: PropertyWrite
-      value: "0"
-      go_type: int
-    - go_name: PropertyWriteNoResponse
-      value: "0"
-      go_type: int
-    - go_name: WriteTypeDefault
-      value: "0"
-      go_type: int
-    - go_name: WriteTypeNoResponse
-      value: "0"
-      go_type: int
-    - go_name: WriteTypeSigned
+    - go_name: ServiceTypeSecondary
       value: "0"
       go_type: int

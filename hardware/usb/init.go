@@ -20,46 +20,16 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                  *jni.GlobalRef
-	midManagergetDeviceList     jni.MethodID
-	midManagerhasPermission     jni.MethodID
-	midManagerrequestPermission jni.MethodID
-	midManageropenDevice        jni.MethodID
-
-	clsConnection                   *jni.GlobalRef
-	midConnectionInit               jni.MethodID
-	midConnectionclaimInterface     jni.MethodID
-	midConnectionreleaseInterface   jni.MethodID
-	midConnectionbulkTransferRaw    jni.MethodID
-	midConnectioncontrolTransferRaw jni.MethodID
-	midConnectionGetFileDescriptor  jni.MethodID
-	midConnectionGetRawDescriptors  jni.MethodID
-
-	clsusbDevice                 *jni.GlobalRef
-	midusbDeviceName             jni.MethodID
-	midusbDeviceVendorID         jni.MethodID
-	midusbDeviceProductID        jni.MethodID
-	midusbDeviceDeviceID         jni.MethodID
-	midusbDeviceDeviceClass      jni.MethodID
-	midusbDeviceDeviceSubclass   jni.MethodID
-	midusbDeviceDeviceProtocol   jni.MethodID
-	midusbDeviceManufacturerName jni.MethodID
-	midusbDeviceProductName      jni.MethodID
-	midusbDeviceSerialNumber     jni.MethodID
-	midusbDeviceinterfaceCount   jni.MethodID
-
-	clsusbInterface              *jni.GlobalRef
-	midusbInterfaceID            jni.MethodID
-	midusbInterfaceClass         jni.MethodID
-	midusbInterfaceSubclass      jni.MethodID
-	midusbInterfaceProtocol      jni.MethodID
-	midusbInterfaceendpointCount jni.MethodID
-
-	clsusbEndpoint          *jni.GlobalRef
-	midusbEndpointAddress   jni.MethodID
-	midusbEndpointDirection jni.MethodID
-	midusbEndpointType      jni.MethodID
-	midusbEndpointMaxPacket jni.MethodID
+	clsusbManager                          *jni.GlobalRef
+	midusbManagerGetAccessoryList          jni.MethodID
+	midusbManagerHasPermission1            jni.MethodID
+	midusbManagerHasPermission1_1          jni.MethodID
+	midusbManagerOpenAccessory             jni.MethodID
+	midusbManagerOpenAccessoryInputStream  jni.MethodID
+	midusbManagerOpenAccessoryOutputStream jni.MethodID
+	midusbManagerOpenDevice                jni.MethodID
+	midusbManagerRequestPermission2        jni.MethodID
+	midusbManagerRequestPermission2_1      jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -84,184 +54,51 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.hardware.usb.UsbManager: %w", err)
 	}
-	clsManager = env.NewGlobalRef(&c.Object)
+	clsusbManager = env.NewGlobalRef(&c.Object)
 
-	midManagergetDeviceList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDeviceList", "()Ljava/util/HashMap;")
+	midusbManagerGetAccessoryList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "getAccessoryList", "()[Landroid/hardware/usb/UsbAccessory;")
 	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbManager.getDeviceList: %w", err)
+		return fmt.Errorf("get method android.hardware.usb.UsbManager.getAccessoryList: %w", err)
 	}
 
-	midManagerhasPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasPermission", "(Landroid/hardware/usb/UsbDevice;)Z")
+	midusbManagerHasPermission1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "hasPermission", "(Landroid/hardware/usb/UsbAccessory;)Z")
 	if err != nil {
 		return fmt.Errorf("get method android.hardware.usb.UsbManager.hasPermission: %w", err)
 	}
 
-	midManagerrequestPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestPermission", "(Landroid/hardware/usb/UsbDevice;Landroid/app/PendingIntent;)V")
+	midusbManagerHasPermission1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "hasPermission", "(Landroid/hardware/usb/UsbDevice;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbManager.requestPermission: %w", err)
+		return fmt.Errorf("get method android.hardware.usb.UsbManager.hasPermission: %w", err)
 	}
 
-	midManageropenDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "openDevice", "(Landroid/hardware/usb/UsbDevice;)Landroid/hardware/usb/UsbDeviceConnection;")
+	midusbManagerOpenAccessory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "openAccessory", "(Landroid/hardware/usb/UsbAccessory;)Landroid/os/ParcelFileDescriptor;")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.usb.UsbManager.openAccessory: %w", err)
+	}
+
+	midusbManagerOpenAccessoryInputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "openAccessoryInputStream", "(Landroid/hardware/usb/UsbAccessory;)Ljava/io/InputStream;")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.usb.UsbManager.openAccessoryInputStream: %w", err)
+	}
+
+	midusbManagerOpenAccessoryOutputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "openAccessoryOutputStream", "(Landroid/hardware/usb/UsbAccessory;)Ljava/io/OutputStream;")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.usb.UsbManager.openAccessoryOutputStream: %w", err)
+	}
+
+	midusbManagerOpenDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "openDevice", "(Landroid/hardware/usb/UsbDevice;)Landroid/hardware/usb/UsbDeviceConnection;")
 	if err != nil {
 		return fmt.Errorf("get method android.hardware.usb.UsbManager.openDevice: %w", err)
 	}
 
-	c, err = env.FindClass("android/hardware/usb/UsbDeviceConnection")
+	midusbManagerRequestPermission2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "requestPermission", "(Landroid/hardware/usb/UsbAccessory;Landroid/app/PendingIntent;)V")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.usb.UsbDeviceConnection: %w", err)
-	}
-	clsConnection = env.NewGlobalRef(&c.Object)
-	midConnectionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnection)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.hardware.usb.UsbDeviceConnection.<init>: %w", err)
+		return fmt.Errorf("get method android.hardware.usb.UsbManager.requestPermission: %w", err)
 	}
 
-	midConnectionclaimInterface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnection)), "claimInterface", "(Landroid/hardware/usb/UsbInterface;Z)Z")
+	midusbManagerRequestPermission2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbManager)), "requestPermission", "(Landroid/hardware/usb/UsbDevice;Landroid/app/PendingIntent;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDeviceConnection.claimInterface: %w", err)
-	}
-
-	midConnectionreleaseInterface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnection)), "releaseInterface", "(Landroid/hardware/usb/UsbInterface;)Z")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDeviceConnection.releaseInterface: %w", err)
-	}
-
-	midConnectionbulkTransferRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnection)), "bulkTransfer", "(Landroid/hardware/usb/UsbEndpoint;[BII)I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDeviceConnection.bulkTransfer: %w", err)
-	}
-
-	midConnectioncontrolTransferRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnection)), "controlTransfer", "(IIII[BII)I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDeviceConnection.controlTransfer: %w", err)
-	}
-
-	midConnectionGetFileDescriptor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnection)), "getFileDescriptor", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDeviceConnection.getFileDescriptor: %w", err)
-	}
-
-	midConnectionGetRawDescriptors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnection)), "getRawDescriptors", "()[B")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDeviceConnection.getRawDescriptors: %w", err)
-	}
-
-	c, err = env.FindClass("android/hardware/usb/UsbDevice")
-	if err != nil {
-		return fmt.Errorf("find class android.hardware.usb.UsbDevice: %w", err)
-	}
-	clsusbDevice = env.NewGlobalRef(&c.Object)
-
-	midusbDeviceName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbDevice)), "getDeviceName", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDevice.getDeviceName: %w", err)
-	}
-
-	midusbDeviceVendorID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbDevice)), "getVendorId", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDevice.getVendorId: %w", err)
-	}
-
-	midusbDeviceProductID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbDevice)), "getProductId", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDevice.getProductId: %w", err)
-	}
-
-	midusbDeviceDeviceID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbDevice)), "getDeviceId", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDevice.getDeviceId: %w", err)
-	}
-
-	midusbDeviceDeviceClass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbDevice)), "getDeviceClass", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDevice.getDeviceClass: %w", err)
-	}
-
-	midusbDeviceDeviceSubclass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbDevice)), "getDeviceSubclass", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDevice.getDeviceSubclass: %w", err)
-	}
-
-	midusbDeviceDeviceProtocol, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbDevice)), "getDeviceProtocol", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDevice.getDeviceProtocol: %w", err)
-	}
-
-	midusbDeviceManufacturerName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbDevice)), "getManufacturerName", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDevice.getManufacturerName: %w", err)
-	}
-
-	midusbDeviceProductName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbDevice)), "getProductName", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDevice.getProductName: %w", err)
-	}
-
-	midusbDeviceSerialNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbDevice)), "getSerialNumber", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDevice.getSerialNumber: %w", err)
-	}
-
-	midusbDeviceinterfaceCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbDevice)), "getInterfaceCount", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbDevice.getInterfaceCount: %w", err)
-	}
-
-	c, err = env.FindClass("android/hardware/usb/UsbInterface")
-	if err != nil {
-		return fmt.Errorf("find class android.hardware.usb.UsbInterface: %w", err)
-	}
-	clsusbInterface = env.NewGlobalRef(&c.Object)
-
-	midusbInterfaceID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getId", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbInterface.getId: %w", err)
-	}
-
-	midusbInterfaceClass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getInterfaceClass", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbInterface.getInterfaceClass: %w", err)
-	}
-
-	midusbInterfaceSubclass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getInterfaceSubclass", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbInterface.getInterfaceSubclass: %w", err)
-	}
-
-	midusbInterfaceProtocol, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getInterfaceProtocol", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbInterface.getInterfaceProtocol: %w", err)
-	}
-
-	midusbInterfaceendpointCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbInterface)), "getEndpointCount", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbInterface.getEndpointCount: %w", err)
-	}
-
-	c, err = env.FindClass("android/hardware/usb/UsbEndpoint")
-	if err != nil {
-		return fmt.Errorf("find class android.hardware.usb.UsbEndpoint: %w", err)
-	}
-	clsusbEndpoint = env.NewGlobalRef(&c.Object)
-
-	midusbEndpointAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getAddress", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbEndpoint.getAddress: %w", err)
-	}
-
-	midusbEndpointDirection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getDirection", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbEndpoint.getDirection: %w", err)
-	}
-
-	midusbEndpointType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getType", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbEndpoint.getType: %w", err)
-	}
-
-	midusbEndpointMaxPacket, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusbEndpoint)), "getMaxPacketSize", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.usb.UsbEndpoint.getMaxPacketSize: %w", err)
+		return fmt.Errorf("get method android.hardware.usb.UsbManager.requestPermission: %w", err)
 	}
 
 	return nil

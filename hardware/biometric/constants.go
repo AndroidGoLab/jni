@@ -3,18 +3,15 @@
 package biometric
 
 const (
-	Strong                      = 0x0f
-	Weak                        = 0xff
-	Credential                  = 0x8000
-	ErrNone                     = 0
-	ErrHWUnavailable            = 1
-	ErrCanceled                 = 5
-	ErrLockout                  = 7
-	ErrLockoutPermanent         = 9
-	ErrUserCanceled             = 10
-	ErrNoBiometrics             = 11
-	BiometricSuccess            = 0
-	BiometricErrorNoHardware    = 12
-	BiometricErrorHWUnavailable = 1
-	BiometricErrorNoneEnrolled  = 11
+	BiometricErrorHwUnavailable          = 0
+	BiometricErrorIdentityCheckNotActive = 0
+	BiometricErrorNoneEnrolled           = 0
+	BiometricErrorNotEnabledForApps      = 0
+	BiometricErrorNoHardware             = 0
+	BiometricErrorSecurityUpdateRequired = 0
+	BiometricSuccess                     = 0
+)
+
+const (
+	BiometricNoAuthentication = 0
 )

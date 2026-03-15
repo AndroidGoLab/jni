@@ -3,13 +3,24 @@
 package job
 
 const (
-	ResultSuccess            = 1
-	ResultFailure            = 0
-	NetworkNone              = 0
-	NetworkAny               = 1
-	NetworkUnmetered         = 2
-	NetworkNotRoaming        = 3
-	NetworkCellular          = 4
+	BackoffPolicyExponential = 0
 	BackoffPolicyLinear      = 0
-	BackoffPolicyExponential = 1
+	Creator                  = 0
+	NetworkBytesUnknown      = 0
+	NetworkTypeAny           = 0
+	NetworkTypeCellular      = 0
+	NetworkTypeMetered       = 0
+	NetworkTypeNone          = 0
+	NetworkTypeNotRoaming    = 0
+	NetworkTypeUnmetered     = 0
+	PriorityDefault          = 0
+	PriorityHigh             = 0
+	PriorityLow              = 0
+	PriorityMax              = 0
+	PriorityMin              = 0
+)
+
+const (
+	DefaultInitialBackoffMillis = 0
+	MaxBackoffDelayMillis       = 0
 )

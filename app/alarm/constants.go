@@ -3,8 +3,22 @@
 package alarm
 
 const (
-	RTCWakeup             = 0
-	RTC                   = 1
-	ElapsedRealtimeWakeup = 2
-	ElapsedRealtime       = 3
+	ActionNextAlarmClockChanged                    = ""
+	ActionScheduleExactAlarmPermissionStateChanged = ""
+)
+
+const (
+	ElapsedRealtime       = 0
+	ElapsedRealtimeWakeup = 0
+	Rtc                   = 0
+	RtcWakeup             = 0
+	Creator               = 0
+)
+
+const (
+	IntervalDay            = 0
+	IntervalFifteenMinutes = 0
+	IntervalHalfDay        = 0
+	IntervalHalfHour       = 0
+	IntervalHour           = 0
 )

@@ -20,16 +20,19 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                *jni.GlobalRef
-	midManagergetPrintJobsRaw jni.MethodID
-	midManagerprintRaw        jni.MethodID
-
-	clsprintJob     *jni.GlobalRef
-	midprintJobInfo jni.MethodID
-
-	clsprintJobInfo      *jni.GlobalRef
-	midprintJobInfoLabel jni.MethodID
-	midprintJobInfoState jni.MethodID
+	clsprintJob            *jni.GlobalRef
+	midprintJobCancel      jni.MethodID
+	midprintJobEquals      jni.MethodID
+	midprintJobGetId       jni.MethodID
+	midprintJobGetInfo     jni.MethodID
+	midprintJobHashCode    jni.MethodID
+	midprintJobIsBlocked   jni.MethodID
+	midprintJobIsCancelled jni.MethodID
+	midprintJobIsCompleted jni.MethodID
+	midprintJobIsFailed    jni.MethodID
+	midprintJobIsQueued    jni.MethodID
+	midprintJobIsStarted   jni.MethodID
+	midprintJobRestart     jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -50,47 +53,70 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/print/PrintManager")
-	if err != nil {
-		return fmt.Errorf("find class android.print.PrintManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagergetPrintJobsRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPrintJobs", "()Ljava/util/List;")
-	if err != nil {
-		return fmt.Errorf("get method android.print.PrintManager.getPrintJobs: %w", err)
-	}
-
-	midManagerprintRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "print", "(Ljava/lang/String;Landroid/print/PrintDocumentAdapter;Landroid/print/PrintAttributes;)Landroid/print/PrintJob;")
-	if err != nil {
-		return fmt.Errorf("get method android.print.PrintManager.print: %w", err)
-	}
-
 	c, err = env.FindClass("android/print/PrintJob")
 	if err != nil {
 		return fmt.Errorf("find class android.print.PrintJob: %w", err)
 	}
 	clsprintJob = env.NewGlobalRef(&c.Object)
 
-	midprintJobInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintJob)), "getInfo", "()Landroid/print/PrintJobInfo;")
+	midprintJobCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintJob)), "cancel", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.print.PrintJob.cancel: %w", err)
+	}
+
+	midprintJobEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintJob)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.print.PrintJob.equals: %w", err)
+	}
+
+	midprintJobGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintJob)), "getId", "()Landroid/print/PrintJobId;")
+	if err != nil {
+		return fmt.Errorf("get method android.print.PrintJob.getId: %w", err)
+	}
+
+	midprintJobGetInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintJob)), "getInfo", "()Landroid/print/PrintJobInfo;")
 	if err != nil {
 		return fmt.Errorf("get method android.print.PrintJob.getInfo: %w", err)
 	}
 
-	c, err = env.FindClass("android/print/PrintJobInfo")
+	midprintJobHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintJob)), "hashCode", "()I")
 	if err != nil {
-		return fmt.Errorf("find class android.print.PrintJobInfo: %w", err)
-	}
-	clsprintJobInfo = env.NewGlobalRef(&c.Object)
-
-	midprintJobInfoLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintJobInfo)), "getLabel", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.print.PrintJobInfo.getLabel: %w", err)
+		return fmt.Errorf("get method android.print.PrintJob.hashCode: %w", err)
 	}
 
-	midprintJobInfoState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintJobInfo)), "getState", "()I")
+	midprintJobIsBlocked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintJob)), "isBlocked", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.print.PrintJobInfo.getState: %w", err)
+		return fmt.Errorf("get method android.print.PrintJob.isBlocked: %w", err)
+	}
+
+	midprintJobIsCancelled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintJob)), "isCancelled", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.print.PrintJob.isCancelled: %w", err)
+	}
+
+	midprintJobIsCompleted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintJob)), "isCompleted", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.print.PrintJob.isCompleted: %w", err)
+	}
+
+	midprintJobIsFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintJob)), "isFailed", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.print.PrintJob.isFailed: %w", err)
+	}
+
+	midprintJobIsQueued, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintJob)), "isQueued", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.print.PrintJob.isQueued: %w", err)
+	}
+
+	midprintJobIsStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintJob)), "isStarted", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.print.PrintJob.isStarted: %w", err)
+	}
+
+	midprintJobRestart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsprintJob)), "restart", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.print.PrintJob.restart: %w", err)
 	}
 
 	return nil

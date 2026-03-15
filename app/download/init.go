@@ -20,27 +20,39 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager           *jni.GlobalRef
-	midManagerenqueueRaw jni.MethodID
-	midManagerremoveRaw  jni.MethodID
-	midManagerqueryRaw   jni.MethodID
+	clsdownloadManager                                 *jni.GlobalRef
+	middownloadManagerAddCompletedDownload7            jni.MethodID
+	middownloadManagerAddCompletedDownload9_1          jni.MethodID
+	middownloadManagerEnqueue                          jni.MethodID
+	middownloadManagerGetMimeTypeForDownloadedFile     jni.MethodID
+	middownloadManagerGetUriForDownloadedFile          jni.MethodID
+	middownloadManagerOpenDownloadedFile               jni.MethodID
+	middownloadManagerQuery                            jni.MethodID
+	middownloadManagerRemove                           jni.MethodID
+	middownloadManagerGetMaxBytesOverMobile            jni.MethodID
+	middownloadManagerGetRecommendedMaxBytesOverMobile jni.MethodID
 
-	clsdownloadRequest                                  *jni.GlobalRef
-	middownloadRequestInit                              jni.MethodID
-	middownloadRequestsetDestinationInExternalPublicDir jni.MethodID
-	middownloadRequestsetTitle                          jni.MethodID
-	middownloadRequestsetDescription                    jni.MethodID
-	middownloadRequestsetMimeType                       jni.MethodID
+	clsdownloadManagerQuery                  *jni.GlobalRef
+	middownloadManagerQuerySetFilterById     jni.MethodID
+	middownloadManagerQuerySetFilterByStatus jni.MethodID
 
-	clsdownloadQuery              *jni.GlobalRef
-	middownloadQueryInit          jni.MethodID
-	middownloadQuerysetFilterById jni.MethodID
-
-	clscursor               *jni.GlobalRef
-	midcursormoveToFirst    jni.MethodID
-	midcursorgetColumnIndex jni.MethodID
-	midcursorgetInt         jni.MethodID
-	midcursorclose          jni.MethodID
+	clsdownloadManagerRequest                                  *jni.GlobalRef
+	middownloadManagerRequestAddRequestHeader                  jni.MethodID
+	middownloadManagerRequestAllowScanningByMediaScanner       jni.MethodID
+	middownloadManagerRequestSetAllowedNetworkTypes            jni.MethodID
+	middownloadManagerRequestSetAllowedOverMetered             jni.MethodID
+	middownloadManagerRequestSetAllowedOverRoaming             jni.MethodID
+	middownloadManagerRequestSetDescription                    jni.MethodID
+	middownloadManagerRequestSetDestinationInExternalFilesDir  jni.MethodID
+	middownloadManagerRequestSetDestinationInExternalPublicDir jni.MethodID
+	middownloadManagerRequestSetDestinationUri                 jni.MethodID
+	middownloadManagerRequestSetMimeType                       jni.MethodID
+	middownloadManagerRequestSetNotificationVisibility         jni.MethodID
+	middownloadManagerRequestSetRequiresCharging               jni.MethodID
+	middownloadManagerRequestSetRequiresDeviceIdle             jni.MethodID
+	middownloadManagerRequestSetShowRunningNotification        jni.MethodID
+	middownloadManagerRequestSetTitle                          jni.MethodID
+	middownloadManagerRequestSetVisibleInDownloadsUi           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -65,92 +77,158 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.app.DownloadManager: %w", err)
 	}
-	clsManager = env.NewGlobalRef(&c.Object)
+	clsdownloadManager = env.NewGlobalRef(&c.Object)
 
-	midManagerenqueueRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "enqueue", "(Landroid/app/DownloadManager$Request;)J")
+	middownloadManagerAddCompletedDownload7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManager)), "addCompletedDownload", "(Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;JZ)J")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager.addCompletedDownload: %w", err)
+	}
+
+	middownloadManagerAddCompletedDownload9_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManager)), "addCompletedDownload", "(Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;JZLandroid/net/Uri;Landroid/net/Uri;)J")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager.addCompletedDownload: %w", err)
+	}
+
+	middownloadManagerEnqueue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManager)), "enqueue", "(Landroid/app/DownloadManager$Request;)J")
 	if err != nil {
 		return fmt.Errorf("get method android.app.DownloadManager.enqueue: %w", err)
 	}
 
-	midManagerremoveRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "remove", "([J)I")
+	middownloadManagerGetMimeTypeForDownloadedFile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManager)), "getMimeTypeForDownloadedFile", "(J)Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.DownloadManager.remove: %w", err)
+		return fmt.Errorf("get method android.app.DownloadManager.getMimeTypeForDownloadedFile: %w", err)
 	}
 
-	midManagerqueryRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "query", "(Landroid/app/DownloadManager$Query;)Landroid/database/Cursor;")
+	middownloadManagerGetUriForDownloadedFile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManager)), "getUriForDownloadedFile", "(J)Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager.getUriForDownloadedFile: %w", err)
+	}
+
+	middownloadManagerOpenDownloadedFile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManager)), "openDownloadedFile", "(J)Landroid/os/ParcelFileDescriptor;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager.openDownloadedFile: %w", err)
+	}
+
+	middownloadManagerQuery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManager)), "query", "(Landroid/app/DownloadManager$Query;)Landroid/database/Cursor;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.DownloadManager.query: %w", err)
 	}
 
-	c, err = env.FindClass("android/app/DownloadManager$Request")
+	middownloadManagerRemove, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManager)), "remove", "(Llong///;)I")
 	if err != nil {
-		return fmt.Errorf("find class android.app.DownloadManager$Request: %w", err)
-	}
-	clsdownloadRequest = env.NewGlobalRef(&c.Object)
-	middownloadRequestInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadRequest)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.app.DownloadManager$Request.<init>: %w", err)
+		return fmt.Errorf("get method android.app.DownloadManager.remove: %w", err)
 	}
 
-	middownloadRequestsetDestinationInExternalPublicDir, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadRequest)), "setDestinationInExternalPublicDir", "(Ljava/lang/String;Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+	middownloadManagerGetMaxBytesOverMobile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManager)), "getMaxBytesOverMobile", "(Landroid/content/Context;)Ljava/lang/Long;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.DownloadManager$Request.setDestinationInExternalPublicDir: %w", err)
+		return fmt.Errorf("get method android.app.DownloadManager.getMaxBytesOverMobile: %w", err)
 	}
 
-	middownloadRequestsetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadRequest)), "setTitle", "(Ljava/lang/CharSequence;)Landroid/app/DownloadManager$Request;")
+	middownloadManagerGetRecommendedMaxBytesOverMobile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManager)), "getRecommendedMaxBytesOverMobile", "(Landroid/content/Context;)Ljava/lang/Long;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.DownloadManager$Request.setTitle: %w", err)
-	}
-
-	middownloadRequestsetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadRequest)), "setDescription", "(Ljava/lang/CharSequence;)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.DownloadManager$Request.setDescription: %w", err)
-	}
-
-	middownloadRequestsetMimeType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadRequest)), "setMimeType", "(Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.DownloadManager$Request.setMimeType: %w", err)
+		return fmt.Errorf("get method android.app.DownloadManager.getRecommendedMaxBytesOverMobile: %w", err)
 	}
 
 	c, err = env.FindClass("android/app/DownloadManager$Query")
 	if err != nil {
 		return fmt.Errorf("find class android.app.DownloadManager$Query: %w", err)
 	}
-	clsdownloadQuery = env.NewGlobalRef(&c.Object)
-	middownloadQueryInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadQuery)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.app.DownloadManager$Query.<init>: %w", err)
-	}
+	clsdownloadManagerQuery = env.NewGlobalRef(&c.Object)
 
-	middownloadQuerysetFilterById, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadQuery)), "setFilterById", "([J)Landroid/app/DownloadManager$Query;")
+	middownloadManagerQuerySetFilterById, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerQuery)), "setFilterById", "(Llong///;)Landroid/app/DownloadManager$Query;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.DownloadManager$Query.setFilterById: %w", err)
 	}
 
-	c, err = env.FindClass("android/database/Cursor")
+	middownloadManagerQuerySetFilterByStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerQuery)), "setFilterByStatus", "(I)Landroid/app/DownloadManager$Query;")
 	if err != nil {
-		return fmt.Errorf("find class android.database.Cursor: %w", err)
-	}
-	clscursor = env.NewGlobalRef(&c.Object)
-
-	midcursormoveToFirst, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscursor)), "moveToFirst", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.database.Cursor.moveToFirst: %w", err)
+		return fmt.Errorf("get method android.app.DownloadManager$Query.setFilterByStatus: %w", err)
 	}
 
-	midcursorgetColumnIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscursor)), "getColumnIndex", "(Ljava/lang/String;)I")
+	c, err = env.FindClass("android/app/DownloadManager$Request")
 	if err != nil {
-		return fmt.Errorf("get method android.database.Cursor.getColumnIndex: %w", err)
+		return fmt.Errorf("find class android.app.DownloadManager$Request: %w", err)
+	}
+	clsdownloadManagerRequest = env.NewGlobalRef(&c.Object)
+
+	middownloadManagerRequestAddRequestHeader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerRequest)), "addRequestHeader", "(Ljava/lang/String;Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager$Request.addRequestHeader: %w", err)
 	}
 
-	midcursorgetInt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscursor)), "getInt", "(I)I")
+	middownloadManagerRequestAllowScanningByMediaScanner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerRequest)), "allowScanningByMediaScanner", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.database.Cursor.getInt: %w", err)
+		return fmt.Errorf("get method android.app.DownloadManager$Request.allowScanningByMediaScanner: %w", err)
 	}
 
-	midcursorclose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscursor)), "close", "()V")
+	middownloadManagerRequestSetAllowedNetworkTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerRequest)), "setAllowedNetworkTypes", "(I)Landroid/app/DownloadManager$Request;")
 	if err != nil {
-		return fmt.Errorf("get method android.database.Cursor.close: %w", err)
+		return fmt.Errorf("get method android.app.DownloadManager$Request.setAllowedNetworkTypes: %w", err)
+	}
+
+	middownloadManagerRequestSetAllowedOverMetered, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerRequest)), "setAllowedOverMetered", "(Z)Landroid/app/DownloadManager$Request;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager$Request.setAllowedOverMetered: %w", err)
+	}
+
+	middownloadManagerRequestSetAllowedOverRoaming, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerRequest)), "setAllowedOverRoaming", "(Z)Landroid/app/DownloadManager$Request;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager$Request.setAllowedOverRoaming: %w", err)
+	}
+
+	middownloadManagerRequestSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerRequest)), "setDescription", "(Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager$Request.setDescription: %w", err)
+	}
+
+	middownloadManagerRequestSetDestinationInExternalFilesDir, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerRequest)), "setDestinationInExternalFilesDir", "(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager$Request.setDestinationInExternalFilesDir: %w", err)
+	}
+
+	middownloadManagerRequestSetDestinationInExternalPublicDir, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerRequest)), "setDestinationInExternalPublicDir", "(Ljava/lang/String;Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager$Request.setDestinationInExternalPublicDir: %w", err)
+	}
+
+	middownloadManagerRequestSetDestinationUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerRequest)), "setDestinationUri", "(Landroid/net/Uri;)Landroid/app/DownloadManager$Request;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager$Request.setDestinationUri: %w", err)
+	}
+
+	middownloadManagerRequestSetMimeType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerRequest)), "setMimeType", "(Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager$Request.setMimeType: %w", err)
+	}
+
+	middownloadManagerRequestSetNotificationVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerRequest)), "setNotificationVisibility", "(I)Landroid/app/DownloadManager$Request;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager$Request.setNotificationVisibility: %w", err)
+	}
+
+	middownloadManagerRequestSetRequiresCharging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerRequest)), "setRequiresCharging", "(Z)Landroid/app/DownloadManager$Request;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager$Request.setRequiresCharging: %w", err)
+	}
+
+	middownloadManagerRequestSetRequiresDeviceIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerRequest)), "setRequiresDeviceIdle", "(Z)Landroid/app/DownloadManager$Request;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager$Request.setRequiresDeviceIdle: %w", err)
+	}
+
+	middownloadManagerRequestSetShowRunningNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerRequest)), "setShowRunningNotification", "(Z)Landroid/app/DownloadManager$Request;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager$Request.setShowRunningNotification: %w", err)
+	}
+
+	middownloadManagerRequestSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerRequest)), "setTitle", "(Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager$Request.setTitle: %w", err)
+	}
+
+	middownloadManagerRequestSetVisibleInDownloadsUi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdownloadManagerRequest)), "setVisibleInDownloadsUi", "(Z)Landroid/app/DownloadManager$Request;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.DownloadManager$Request.setVisibleInDownloadsUi: %w", err)
 	}
 
 	return nil

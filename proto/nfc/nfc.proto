@@ -6,161 +6,108 @@ package nfc;
 
 option go_package = "github.com/xaionaro-go/jni/proto/nfc";
 
-message DescribeContentsRequest {
+message CanMakeReadOnlyRequest {
 }
 
-message DescribeContentsResponse {
-  int32 result = 1;
-}
-
-message EqualsRequest {
-  int64 arg0 = 1;
-}
-
-message EqualsResponse {
+message CanMakeReadOnlyResponse {
   bool result = 1;
 }
 
-message GetIdRequest {
+message CloseRequest {
 }
 
-message GetIdResponse {
+message CloseResponse {
+}
+
+message ConnectRequest {
+}
+
+message ConnectResponse {
+}
+
+message GetCachedNdefMessageRequest {
+}
+
+message GetCachedNdefMessageResponse {
   int64 result = 1;
 }
 
-message GetPayloadRequest {
+message GetMaxSizeRequest {
 }
 
-message GetPayloadResponse {
-  int64 result = 1;
-}
-
-message GetTnfRequest {
-}
-
-message GetTnfResponse {
+message GetMaxSizeResponse {
   int32 result = 1;
+}
+
+message GetNdefMessageRequest {
+}
+
+message GetNdefMessageResponse {
+  int64 result = 1;
+}
+
+message GetTagRequest {
+}
+
+message GetTagResponse {
+  int64 result = 1;
 }
 
 message GetTypeRequest {
 }
 
 message GetTypeResponse {
-  int64 result = 1;
-}
-
-message HashCodeRequest {
-}
-
-message HashCodeResponse {
-  int32 result = 1;
-}
-
-message ToByteArrayRequest {
-}
-
-message ToByteArrayResponse {
-  int64 result = 1;
-}
-
-message ToMimeTypeRequest {
-}
-
-message ToMimeTypeResponse {
   string result = 1;
 }
 
-message ToStringRequest {
+message IsConnectedRequest {
 }
 
-message ToStringResponse {
-  string result = 1;
+message IsConnectedResponse {
+  bool result = 1;
 }
 
-message ToUriRequest {
+message IsWritableRequest {
 }
 
-message ToUriResponse {
-  int64 result = 1;
+message IsWritableResponse {
+  bool result = 1;
 }
 
-message WriteToParcelRequest {
-  int64 arg0 = 1;
-  int32 arg1 = 2;
+message MakeReadOnlyRequest {
 }
 
-message WriteToParcelResponse {
+message MakeReadOnlyResponse {
+  bool result = 1;
 }
 
-message CreateApplicationRecordRequest {
-  string arg0 = 1;
-}
-
-message CreateApplicationRecordResponse {
-  int64 result = 1;
-}
-
-message CreateExternalRequest {
-  string arg0 = 1;
-  string arg1 = 2;
-  int64 arg2 = 3;
-}
-
-message CreateExternalResponse {
-  int64 result = 1;
-}
-
-message CreateMimeRequest {
-  string arg0 = 1;
-  int64 arg1 = 2;
-}
-
-message CreateMimeResponse {
-  int64 result = 1;
-}
-
-message CreateTextRecordRequest {
-  string arg0 = 1;
-  string arg1 = 2;
-}
-
-message CreateTextRecordResponse {
-  int64 result = 1;
-}
-
-message CreateUri1Request {
+message WriteNdefMessageRequest {
   int64 arg0 = 1;
 }
 
-message CreateUri1Response {
+message WriteNdefMessageResponse {
+}
+
+message GetRequest {
+  int64 arg0 = 1;
+}
+
+message GetResponse {
   int64 result = 1;
 }
 
-message CreateUri1_1Request {
-  string arg0 = 1;
-}
-
-message CreateUri1_1Response {
-  int64 result = 1;
-}
-
-service NdefRecordService {
-  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
-  rpc Equals (EqualsRequest) returns (EqualsResponse);
-  rpc GetId (GetIdRequest) returns (GetIdResponse);
-  rpc GetPayload (GetPayloadRequest) returns (GetPayloadResponse);
-  rpc GetTnf (GetTnfRequest) returns (GetTnfResponse);
+service NdefService {
+  rpc CanMakeReadOnly (CanMakeReadOnlyRequest) returns (CanMakeReadOnlyResponse);
+  rpc Close (CloseRequest) returns (CloseResponse);
+  rpc Connect (ConnectRequest) returns (ConnectResponse);
+  rpc GetCachedNdefMessage (GetCachedNdefMessageRequest) returns (GetCachedNdefMessageResponse);
+  rpc GetMaxSize (GetMaxSizeRequest) returns (GetMaxSizeResponse);
+  rpc GetNdefMessage (GetNdefMessageRequest) returns (GetNdefMessageResponse);
+  rpc GetTag (GetTagRequest) returns (GetTagResponse);
   rpc GetType (GetTypeRequest) returns (GetTypeResponse);
-  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
-  rpc ToByteArray (ToByteArrayRequest) returns (ToByteArrayResponse);
-  rpc ToMimeType (ToMimeTypeRequest) returns (ToMimeTypeResponse);
-  rpc ToString (ToStringRequest) returns (ToStringResponse);
-  rpc ToUri (ToUriRequest) returns (ToUriResponse);
-  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
-  rpc CreateApplicationRecord (CreateApplicationRecordRequest) returns (CreateApplicationRecordResponse);
-  rpc CreateExternal (CreateExternalRequest) returns (CreateExternalResponse);
-  rpc CreateMime (CreateMimeRequest) returns (CreateMimeResponse);
-  rpc CreateTextRecord (CreateTextRecordRequest) returns (CreateTextRecordResponse);
-  rpc CreateUri1 (CreateUri1Request) returns (CreateUri1Response);
-  rpc CreateUri1_1 (CreateUri1_1Request) returns (CreateUri1_1Response);
+  rpc IsConnected (IsConnectedRequest) returns (IsConnectedResponse);
+  rpc IsWritable (IsWritableRequest) returns (IsWritableResponse);
+  rpc MakeReadOnly (MakeReadOnlyRequest) returns (MakeReadOnlyResponse);
+  rpc WriteNdefMessage (WriteNdefMessageRequest) returns (WriteNdefMessageResponse);
+  rpc Get (GetRequest) returns (GetResponse);
 }

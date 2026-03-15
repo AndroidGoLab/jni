@@ -20,33 +20,73 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                                *jni.GlobalRef
-	midManagerGetLastKnownLocation            jni.MethodID
-	midManagerIsProviderEnabled               jni.MethodID
-	midManagergetProvidersRaw                 jni.MethodID
-	midManagerrequestLocationUpdatesRaw       jni.MethodID
-	midManagerremoveUpdatesRaw                jni.MethodID
-	midManagergetCurrentLocationRaw           jni.MethodID
-	midManagerregisterGnssStatusCallbackRaw   jni.MethodID
-	midManagerunregisterGnssStatusCallbackRaw jni.MethodID
-
-	clsgnssStatus *jni.GlobalRef
-
-	clsLocation          *jni.GlobalRef
-	midLocationLatitude  jni.MethodID
-	midLocationLongitude jni.MethodID
-	midLocationAltitude  jni.MethodID
-	midLocationAccuracy  jni.MethodID
-	midLocationSpeed     jni.MethodID
-	midLocationBearing   jni.MethodID
-	midLocationTime      jni.MethodID
-	midLocationProvider  jni.MethodID
-
-	clslocationListener *jni.GlobalRef
-
-	clsgnssStatusCallback *jni.GlobalRef
-
-	clslocationConsumer *jni.GlobalRef
+	clslocationManager                                         *jni.GlobalRef
+	midlocationManagerAddGpsStatusListener                     jni.MethodID
+	midlocationManagerAddNmeaListener1                         jni.MethodID
+	midlocationManagerAddNmeaListener1_1                       jni.MethodID
+	midlocationManagerAddNmeaListener2_2                       jni.MethodID
+	midlocationManagerAddProximityAlert                        jni.MethodID
+	midlocationManagerAddTestProvider2                         jni.MethodID
+	midlocationManagerAddTestProvider3_1                       jni.MethodID
+	midlocationManagerAddTestProvider10_2                      jni.MethodID
+	midlocationManagerClearTestProviderEnabled                 jni.MethodID
+	midlocationManagerClearTestProviderLocation                jni.MethodID
+	midlocationManagerClearTestProviderStatus                  jni.MethodID
+	midlocationManagerGetAllProviders                          jni.MethodID
+	midlocationManagerGetBestProvider                          jni.MethodID
+	midlocationManagerGetCurrentLocation5                      jni.MethodID
+	midlocationManagerGetCurrentLocation4_1                    jni.MethodID
+	midlocationManagerGetGnssAntennaInfos                      jni.MethodID
+	midlocationManagerGetGnssCapabilities                      jni.MethodID
+	midlocationManagerGetGnssHardwareModelName                 jni.MethodID
+	midlocationManagerGetGnssYearOfHardware                    jni.MethodID
+	midlocationManagerGetGpsStatus                             jni.MethodID
+	midlocationManagerGetLastKnownLocation                     jni.MethodID
+	midlocationManagerGetProvider                              jni.MethodID
+	midlocationManagerGetProviderProperties                    jni.MethodID
+	midlocationManagerGetProviders2                            jni.MethodID
+	midlocationManagerGetProviders1_1                          jni.MethodID
+	midlocationManagerHasProvider                              jni.MethodID
+	midlocationManagerIsLocationEnabled                        jni.MethodID
+	midlocationManagerIsProviderEnabled                        jni.MethodID
+	midlocationManagerRegisterAntennaInfoListener              jni.MethodID
+	midlocationManagerRegisterGnssMeasurementsCallback3        jni.MethodID
+	midlocationManagerRegisterGnssMeasurementsCallback1_1      jni.MethodID
+	midlocationManagerRegisterGnssMeasurementsCallback2_2      jni.MethodID
+	midlocationManagerRegisterGnssNavigationMessageCallback1   jni.MethodID
+	midlocationManagerRegisterGnssNavigationMessageCallback2_1 jni.MethodID
+	midlocationManagerRegisterGnssStatusCallback1              jni.MethodID
+	midlocationManagerRegisterGnssStatusCallback2_1            jni.MethodID
+	midlocationManagerRemoveGpsStatusListener                  jni.MethodID
+	midlocationManagerRemoveNmeaListener1                      jni.MethodID
+	midlocationManagerRemoveNmeaListener1_1                    jni.MethodID
+	midlocationManagerRemoveProximityAlert                     jni.MethodID
+	midlocationManagerRemoveTestProvider                       jni.MethodID
+	midlocationManagerRemoveUpdates1                           jni.MethodID
+	midlocationManagerRemoveUpdates1_1                         jni.MethodID
+	midlocationManagerRequestFlush3                            jni.MethodID
+	midlocationManagerRequestFlush3_1                          jni.MethodID
+	midlocationManagerRequestLocationUpdates3                  jni.MethodID
+	midlocationManagerRequestLocationUpdates4_1                jni.MethodID
+	midlocationManagerRequestLocationUpdates4_2                jni.MethodID
+	midlocationManagerRequestLocationUpdates4_3                jni.MethodID
+	midlocationManagerRequestLocationUpdates5_4                jni.MethodID
+	midlocationManagerRequestLocationUpdates5_5                jni.MethodID
+	midlocationManagerRequestLocationUpdates4_6                jni.MethodID
+	midlocationManagerRequestLocationUpdates5_7                jni.MethodID
+	midlocationManagerRequestLocationUpdates5_8                jni.MethodID
+	midlocationManagerRequestSingleUpdate2                     jni.MethodID
+	midlocationManagerRequestSingleUpdate3_1                   jni.MethodID
+	midlocationManagerRequestSingleUpdate2_2                   jni.MethodID
+	midlocationManagerRequestSingleUpdate3_3                   jni.MethodID
+	midlocationManagerSendExtraCommand                         jni.MethodID
+	midlocationManagerSetTestProviderEnabled                   jni.MethodID
+	midlocationManagerSetTestProviderLocation                  jni.MethodID
+	midlocationManagerSetTestProviderStatus                    jni.MethodID
+	midlocationManagerUnregisterAntennaInfoListener            jni.MethodID
+	midlocationManagerUnregisterGnssMeasurementsCallback       jni.MethodID
+	midlocationManagerUnregisterGnssNavigationMessageCallback  jni.MethodID
+	midlocationManagerUnregisterGnssStatusCallback             jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -71,117 +111,337 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.location.LocationManager: %w", err)
 	}
-	clsManager = env.NewGlobalRef(&c.Object)
+	clslocationManager = env.NewGlobalRef(&c.Object)
 
-	midManagerGetLastKnownLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLastKnownLocation", "(Ljava/lang/String;)Landroid/location/Location;")
+	midlocationManagerAddGpsStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addGpsStatusListener", "(Landroid/location/GpsStatus$Listener;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.getLastKnownLocation: %w", err)
+		return fmt.Errorf("get method android.location.LocationManager.addGpsStatusListener: %w", err)
 	}
 
-	midManagerIsProviderEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isProviderEnabled", "(Ljava/lang/String;)Z")
+	midlocationManagerAddNmeaListener1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addNmeaListener", "(Landroid/location/GpsStatus$NmeaListener;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.isProviderEnabled: %w", err)
+		return fmt.Errorf("get method android.location.LocationManager.addNmeaListener: %w", err)
 	}
 
-	midManagergetProvidersRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getProviders", "(Z)Ljava/util/List;")
+	midlocationManagerAddNmeaListener1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addNmeaListener", "(Landroid/location/OnNmeaMessageListener;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.getProviders: %w", err)
+		return fmt.Errorf("get method android.location.LocationManager.addNmeaListener: %w", err)
 	}
 
-	midManagerrequestLocationUpdatesRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLandroid/location/LocationListener;)V")
+	midlocationManagerAddNmeaListener2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addNmeaListener", "(Ljava/util/concurrent/Executor;Landroid/location/OnNmeaMessageListener;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+		return fmt.Errorf("get method android.location.LocationManager.addNmeaListener: %w", err)
 	}
 
-	midManagerremoveUpdatesRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeUpdates", "(Landroid/location/LocationListener;)V")
+	midlocationManagerAddProximityAlert, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addProximityAlert", "(DDFJLandroid/app/PendingIntent;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.location.LocationManager.removeUpdates: %w", err)
+		return fmt.Errorf("get method android.location.LocationManager.addProximityAlert: %w", err)
 	}
 
-	midManagergetCurrentLocationRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCurrentLocation", "(Ljava/lang/String;Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
+	midlocationManagerAddTestProvider2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addTestProvider", "(Ljava/lang/String;Landroid/location/provider/ProviderProperties;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.addTestProvider: %w", err)
+	}
+
+	midlocationManagerAddTestProvider3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addTestProvider", "(Ljava/lang/String;Landroid/location/provider/ProviderProperties;Ljava/util/Set<java$lang$String>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.addTestProvider: %w", err)
+	}
+
+	midlocationManagerAddTestProvider10_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "addTestProvider", "(Ljava/lang/String;ZZZZZZZII)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.addTestProvider: %w", err)
+	}
+
+	midlocationManagerClearTestProviderEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "clearTestProviderEnabled", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.clearTestProviderEnabled: %w", err)
+	}
+
+	midlocationManagerClearTestProviderLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "clearTestProviderLocation", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.clearTestProviderLocation: %w", err)
+	}
+
+	midlocationManagerClearTestProviderStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "clearTestProviderStatus", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.clearTestProviderStatus: %w", err)
+	}
+
+	midlocationManagerGetAllProviders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getAllProviders", "()Ljava/util/List<java$lang$String>;")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.getAllProviders: %w", err)
+	}
+
+	midlocationManagerGetBestProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getBestProvider", "(Landroid/location/Criteria;Z)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.getBestProvider: %w", err)
+	}
+
+	midlocationManagerGetCurrentLocation5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getCurrentLocation", "(Ljava/lang/String;Landroid/location/LocationRequest;Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer<android$location$Location>;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.location.LocationManager.getCurrentLocation: %w", err)
 	}
 
-	midManagerregisterGnssStatusCallbackRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerGnssStatusCallback", "(Ljava/util/concurrent/Executor;Landroid/location/GnssStatus$Callback;)Z")
+	midlocationManagerGetCurrentLocation4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getCurrentLocation", "(Ljava/lang/String;Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer<android$location$Location>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.getCurrentLocation: %w", err)
+	}
+
+	midlocationManagerGetGnssAntennaInfos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGnssAntennaInfos", "()Ljava/util/List<android$location$GnssAntennaInfo>;")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.getGnssAntennaInfos: %w", err)
+	}
+
+	midlocationManagerGetGnssCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGnssCapabilities", "()Landroid/location/GnssCapabilities;")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.getGnssCapabilities: %w", err)
+	}
+
+	midlocationManagerGetGnssHardwareModelName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGnssHardwareModelName", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.getGnssHardwareModelName: %w", err)
+	}
+
+	midlocationManagerGetGnssYearOfHardware, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGnssYearOfHardware", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.getGnssYearOfHardware: %w", err)
+	}
+
+	midlocationManagerGetGpsStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getGpsStatus", "(Landroid/location/GpsStatus;)Landroid/location/GpsStatus;")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.getGpsStatus: %w", err)
+	}
+
+	midlocationManagerGetLastKnownLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getLastKnownLocation", "(Ljava/lang/String;)Landroid/location/Location;")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.getLastKnownLocation: %w", err)
+	}
+
+	midlocationManagerGetProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getProvider", "(Ljava/lang/String;)Landroid/location/LocationProvider;")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.getProvider: %w", err)
+	}
+
+	midlocationManagerGetProviderProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getProviderProperties", "(Ljava/lang/String;)Landroid/location/provider/ProviderProperties;")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.getProviderProperties: %w", err)
+	}
+
+	midlocationManagerGetProviders2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getProviders", "(Landroid/location/Criteria;Z)Ljava/util/List<java$lang$String>;")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.getProviders: %w", err)
+	}
+
+	midlocationManagerGetProviders1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "getProviders", "(Z)Ljava/util/List<java$lang$String>;")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.getProviders: %w", err)
+	}
+
+	midlocationManagerHasProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "hasProvider", "(Ljava/lang/String;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.hasProvider: %w", err)
+	}
+
+	midlocationManagerIsLocationEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "isLocationEnabled", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.isLocationEnabled: %w", err)
+	}
+
+	midlocationManagerIsProviderEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "isProviderEnabled", "(Ljava/lang/String;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.isProviderEnabled: %w", err)
+	}
+
+	midlocationManagerRegisterAntennaInfoListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerAntennaInfoListener", "(Ljava/util/concurrent/Executor;Landroid/location/GnssAntennaInfo$Listener;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.registerAntennaInfoListener: %w", err)
+	}
+
+	midlocationManagerRegisterGnssMeasurementsCallback3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssMeasurementsCallback", "(Landroid/location/GnssMeasurementRequest;Ljava/util/concurrent/Executor;Landroid/location/GnssMeasurementsEvent$Callback;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.registerGnssMeasurementsCallback: %w", err)
+	}
+
+	midlocationManagerRegisterGnssMeasurementsCallback1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssMeasurementsCallback", "(Landroid/location/GnssMeasurementsEvent$Callback;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.registerGnssMeasurementsCallback: %w", err)
+	}
+
+	midlocationManagerRegisterGnssMeasurementsCallback2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssMeasurementsCallback", "(Ljava/util/concurrent/Executor;Landroid/location/GnssMeasurementsEvent$Callback;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.registerGnssMeasurementsCallback: %w", err)
+	}
+
+	midlocationManagerRegisterGnssNavigationMessageCallback1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssNavigationMessageCallback", "(Landroid/location/GnssNavigationMessage$Callback;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.registerGnssNavigationMessageCallback: %w", err)
+	}
+
+	midlocationManagerRegisterGnssNavigationMessageCallback2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssNavigationMessageCallback", "(Ljava/util/concurrent/Executor;Landroid/location/GnssNavigationMessage$Callback;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.registerGnssNavigationMessageCallback: %w", err)
+	}
+
+	midlocationManagerRegisterGnssStatusCallback1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssStatusCallback", "(Landroid/location/GnssStatus$Callback;)Z")
 	if err != nil {
 		return fmt.Errorf("get method android.location.LocationManager.registerGnssStatusCallback: %w", err)
 	}
 
-	midManagerunregisterGnssStatusCallbackRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterGnssStatusCallback", "(Landroid/location/GnssStatus$Callback;)V")
+	midlocationManagerRegisterGnssStatusCallback2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "registerGnssStatusCallback", "(Ljava/util/concurrent/Executor;Landroid/location/GnssStatus$Callback;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.registerGnssStatusCallback: %w", err)
+	}
+
+	midlocationManagerRemoveGpsStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeGpsStatusListener", "(Landroid/location/GpsStatus$Listener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.removeGpsStatusListener: %w", err)
+	}
+
+	midlocationManagerRemoveNmeaListener1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeNmeaListener", "(Landroid/location/GpsStatus$NmeaListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.removeNmeaListener: %w", err)
+	}
+
+	midlocationManagerRemoveNmeaListener1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeNmeaListener", "(Landroid/location/OnNmeaMessageListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.removeNmeaListener: %w", err)
+	}
+
+	midlocationManagerRemoveProximityAlert, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeProximityAlert", "(Landroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.removeProximityAlert: %w", err)
+	}
+
+	midlocationManagerRemoveTestProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeTestProvider", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.removeTestProvider: %w", err)
+	}
+
+	midlocationManagerRemoveUpdates1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeUpdates", "(Landroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.removeUpdates: %w", err)
+	}
+
+	midlocationManagerRemoveUpdates1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "removeUpdates", "(Landroid/location/LocationListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.removeUpdates: %w", err)
+	}
+
+	midlocationManagerRequestFlush3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestFlush", "(Ljava/lang/String;Landroid/app/PendingIntent;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.requestFlush: %w", err)
+	}
+
+	midlocationManagerRequestFlush3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestFlush", "(Ljava/lang/String;Landroid/location/LocationListener;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.requestFlush: %w", err)
+	}
+
+	midlocationManagerRequestLocationUpdates3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;Landroid/location/LocationRequest;Landroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+	}
+
+	midlocationManagerRequestLocationUpdates4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;Landroid/location/LocationRequest;Ljava/util/concurrent/Executor;Landroid/location/LocationListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+	}
+
+	midlocationManagerRequestLocationUpdates4_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLandroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+	}
+
+	midlocationManagerRequestLocationUpdates4_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLandroid/location/LocationListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+	}
+
+	midlocationManagerRequestLocationUpdates5_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLandroid/location/LocationListener;Landroid/os/Looper;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+	}
+
+	midlocationManagerRequestLocationUpdates5_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(Ljava/lang/String;JFLjava/util/concurrent/Executor;Landroid/location/LocationListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+	}
+
+	midlocationManagerRequestLocationUpdates4_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(JFLandroid/location/Criteria;Landroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+	}
+
+	midlocationManagerRequestLocationUpdates5_7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(JFLandroid/location/Criteria;Landroid/location/LocationListener;Landroid/os/Looper;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+	}
+
+	midlocationManagerRequestLocationUpdates5_8, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestLocationUpdates", "(JFLandroid/location/Criteria;Ljava/util/concurrent/Executor;Landroid/location/LocationListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.requestLocationUpdates: %w", err)
+	}
+
+	midlocationManagerRequestSingleUpdate2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestSingleUpdate", "(Landroid/location/Criteria;Landroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.requestSingleUpdate: %w", err)
+	}
+
+	midlocationManagerRequestSingleUpdate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestSingleUpdate", "(Landroid/location/Criteria;Landroid/location/LocationListener;Landroid/os/Looper;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.requestSingleUpdate: %w", err)
+	}
+
+	midlocationManagerRequestSingleUpdate2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestSingleUpdate", "(Ljava/lang/String;Landroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.requestSingleUpdate: %w", err)
+	}
+
+	midlocationManagerRequestSingleUpdate3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "requestSingleUpdate", "(Ljava/lang/String;Landroid/location/LocationListener;Landroid/os/Looper;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.requestSingleUpdate: %w", err)
+	}
+
+	midlocationManagerSendExtraCommand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "sendExtraCommand", "(Ljava/lang/String;Ljava/lang/String;Landroid/os/Bundle;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.sendExtraCommand: %w", err)
+	}
+
+	midlocationManagerSetTestProviderEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "setTestProviderEnabled", "(Ljava/lang/String;Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.setTestProviderEnabled: %w", err)
+	}
+
+	midlocationManagerSetTestProviderLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "setTestProviderLocation", "(Ljava/lang/String;Landroid/location/Location;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.setTestProviderLocation: %w", err)
+	}
+
+	midlocationManagerSetTestProviderStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "setTestProviderStatus", "(Ljava/lang/String;ILandroid/os/Bundle;J)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.setTestProviderStatus: %w", err)
+	}
+
+	midlocationManagerUnregisterAntennaInfoListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "unregisterAntennaInfoListener", "(Landroid/location/GnssAntennaInfo$Listener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.unregisterAntennaInfoListener: %w", err)
+	}
+
+	midlocationManagerUnregisterGnssMeasurementsCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "unregisterGnssMeasurementsCallback", "(Landroid/location/GnssMeasurementsEvent$Callback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.unregisterGnssMeasurementsCallback: %w", err)
+	}
+
+	midlocationManagerUnregisterGnssNavigationMessageCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "unregisterGnssNavigationMessageCallback", "(Landroid/location/GnssNavigationMessage$Callback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.location.LocationManager.unregisterGnssNavigationMessageCallback: %w", err)
+	}
+
+	midlocationManagerUnregisterGnssStatusCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslocationManager)), "unregisterGnssStatusCallback", "(Landroid/location/GnssStatus$Callback;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.location.LocationManager.unregisterGnssStatusCallback: %w", err)
 	}
-
-	c, err = env.FindClass("android/location/GnssStatus")
-	if err != nil {
-		return fmt.Errorf("find class android.location.GnssStatus: %w", err)
-	}
-	clsgnssStatus = env.NewGlobalRef(&c.Object)
-
-	c, err = env.FindClass("android/location/Location")
-	if err != nil {
-		return fmt.Errorf("find class android.location.Location: %w", err)
-	}
-	clsLocation = env.NewGlobalRef(&c.Object)
-
-	midLocationLatitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getLatitude", "()D")
-	if err != nil {
-		return fmt.Errorf("get method android.location.Location.getLatitude: %w", err)
-	}
-
-	midLocationLongitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getLongitude", "()D")
-	if err != nil {
-		return fmt.Errorf("get method android.location.Location.getLongitude: %w", err)
-	}
-
-	midLocationAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getAltitude", "()D")
-	if err != nil {
-		return fmt.Errorf("get method android.location.Location.getAltitude: %w", err)
-	}
-
-	midLocationAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getAccuracy", "()F")
-	if err != nil {
-		return fmt.Errorf("get method android.location.Location.getAccuracy: %w", err)
-	}
-
-	midLocationSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getSpeed", "()F")
-	if err != nil {
-		return fmt.Errorf("get method android.location.Location.getSpeed: %w", err)
-	}
-
-	midLocationBearing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getBearing", "()F")
-	if err != nil {
-		return fmt.Errorf("get method android.location.Location.getBearing: %w", err)
-	}
-
-	midLocationTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getTime", "()J")
-	if err != nil {
-		return fmt.Errorf("get method android.location.Location.getTime: %w", err)
-	}
-
-	midLocationProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocation)), "getProvider", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.location.Location.getProvider: %w", err)
-	}
-
-	c, err = env.FindClass("android/location/LocationListener")
-	if err != nil {
-		return fmt.Errorf("find class android.location.LocationListener: %w", err)
-	}
-	clslocationListener = env.NewGlobalRef(&c.Object)
-
-	c, err = env.FindClass("android/location/GnssStatus$Callback")
-	if err != nil {
-		return fmt.Errorf("find class android.location.GnssStatus$Callback: %w", err)
-	}
-	clsgnssStatusCallback = env.NewGlobalRef(&c.Object)
-
-	c, err = env.FindClass("java/util/function/Consumer")
-	if err != nil {
-		return fmt.Errorf("find class java.util.function.Consumer: %w", err)
-	}
-	clslocationConsumer = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

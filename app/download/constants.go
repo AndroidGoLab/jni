@@ -3,9 +3,50 @@
 package download
 
 const (
-	StatusPending    = 1
-	StatusRunning    = 2
-	StatusPaused     = 4
-	StatusSuccessful = 8
-	StatusFailed     = 16
+	ActionDownloadComplete            = ""
+	ActionNotificationClicked         = ""
+	ActionViewDownloads               = ""
+	ColumnBytesDownloadedSoFar        = ""
+	ColumnDescription                 = ""
+	ColumnId                          = ""
+	ColumnLastModifiedTimestamp       = ""
+	ColumnLocalFilename               = ""
+	ColumnLocalUri                    = ""
+	ColumnMediaproviderUri            = ""
+	ColumnMediaType                   = ""
+	ColumnReason                      = ""
+	ColumnStatus                      = ""
+	ColumnTitle                       = ""
+	ColumnTotalSizeBytes              = ""
+	ColumnUri                         = ""
+	ExtraDownloadId                   = ""
+	ExtraNotificationClickDownloadIds = ""
+	IntentExtrasSortBySize            = ""
+)
+
+const (
+	ErrorCannotResume                     = 0
+	ErrorDeviceNotFound                   = 0
+	ErrorFileAlreadyExists                = 0
+	ErrorFileError                        = 0
+	ErrorHttpDataError                    = 0
+	ErrorInsufficientSpace                = 0
+	ErrorTooManyRedirects                 = 0
+	ErrorUnhandledHttpCode                = 0
+	ErrorUnknown                          = 0
+	PausedQueuedForWifi                   = 0
+	PausedUnknown                         = 0
+	PausedWaitingForNetwork               = 0
+	PausedWaitingToRetry                  = 0
+	StatusFailed                          = 0
+	StatusPaused                          = 0
+	StatusPending                         = 0
+	StatusRunning                         = 0
+	StatusSuccessful                      = 0
+	NetworkMobile                         = 0
+	NetworkWifi                           = 0
+	VisibilityHidden                      = 0
+	VisibilityVisible                     = 0
+	VisibilityVisibleNotifyCompleted      = 0
+	VisibilityVisibleNotifyOnlyCompletion = 0
 )

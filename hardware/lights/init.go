@@ -20,30 +20,18 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager               *jni.GlobalRef
-	midManagergetLightsRaw   jni.MethodID
-	midManageropenSessionRaw jni.MethodID
-
-	clsLightState *jni.GlobalRef
-
-	clslightStateBuilder            *jni.GlobalRef
-	midlightStateBuildersetColor    jni.MethodID
-	midlightStateBuildersetPlayerId jni.MethodID
-	midlightStateBuilderbuild       jni.MethodID
-
-	clsSession                 *jni.GlobalRef
-	midSessionrequestLightsRaw jni.MethodID
-	midSessioncloseRaw         jni.MethodID
-
-	clslightsRequestBuilder           *jni.GlobalRef
-	midlightsRequestBuilderaddLight   jni.MethodID
-	midlightsRequestBuilderclearLight jni.MethodID
-	midlightsRequestBuilderbuild      jni.MethodID
-
-	clsLight     *jni.GlobalRef
-	midLightID   jni.MethodID
-	midLightName jni.MethodID
-	midLightType jni.MethodID
+	clslight                     *jni.GlobalRef
+	midlightDescribeContents     jni.MethodID
+	midlightEquals               jni.MethodID
+	midlightGetId                jni.MethodID
+	midlightGetName              jni.MethodID
+	midlightGetOrdinal           jni.MethodID
+	midlightGetType              jni.MethodID
+	midlightHasBrightnessControl jni.MethodID
+	midlightHasRgbControl        jni.MethodID
+	midlightHashCode             jni.MethodID
+	midlightToString             jni.MethodID
+	midlightWriteToParcel        jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -64,105 +52,65 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/hardware/lights/LightsManager")
-	if err != nil {
-		return fmt.Errorf("find class android.hardware.lights.LightsManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagergetLightsRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLights", "()Ljava/util/List;")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.lights.LightsManager.getLights: %w", err)
-	}
-
-	midManageropenSessionRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "openSession", "()Landroid/hardware/lights/LightsManager$LightsSession;")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.lights.LightsManager.openSession: %w", err)
-	}
-
-	c, err = env.FindClass("android/hardware/lights/LightState")
-	if err != nil {
-		return fmt.Errorf("find class android.hardware.lights.LightState: %w", err)
-	}
-	clsLightState = env.NewGlobalRef(&c.Object)
-
-	c, err = env.FindClass("android/hardware/lights/LightState$Builder")
-	if err != nil {
-		return fmt.Errorf("find class android.hardware.lights.LightState$Builder: %w", err)
-	}
-	clslightStateBuilder = env.NewGlobalRef(&c.Object)
-
-	midlightStateBuildersetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslightStateBuilder)), "setColor", "(I)Landroid/hardware/lights/LightState$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.lights.LightState$Builder.setColor: %w", err)
-	}
-
-	midlightStateBuildersetPlayerId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslightStateBuilder)), "setPlayerId", "(I)Landroid/hardware/lights/LightState$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.lights.LightState$Builder.setPlayerId: %w", err)
-	}
-
-	midlightStateBuilderbuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslightStateBuilder)), "build", "()Landroid/hardware/lights/LightState;")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.lights.LightState$Builder.build: %w", err)
-	}
-
-	c, err = env.FindClass("android/hardware/lights/LightsManager$LightsSession")
-	if err != nil {
-		return fmt.Errorf("find class android.hardware.lights.LightsManager$LightsSession: %w", err)
-	}
-	clsSession = env.NewGlobalRef(&c.Object)
-
-	midSessionrequestLightsRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSession)), "requestLights", "(Landroid/hardware/lights/LightsRequest;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.lights.LightsManager$LightsSession.requestLights: %w", err)
-	}
-
-	midSessioncloseRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSession)), "close", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.lights.LightsManager$LightsSession.close: %w", err)
-	}
-
-	c, err = env.FindClass("android/hardware/lights/LightsRequest$Builder")
-	if err != nil {
-		return fmt.Errorf("find class android.hardware.lights.LightsRequest$Builder: %w", err)
-	}
-	clslightsRequestBuilder = env.NewGlobalRef(&c.Object)
-
-	midlightsRequestBuilderaddLight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslightsRequestBuilder)), "addLight", "(Landroid/hardware/lights/Light;Landroid/hardware/lights/LightState;)Landroid/hardware/lights/LightsRequest$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.lights.LightsRequest$Builder.addLight: %w", err)
-	}
-
-	midlightsRequestBuilderclearLight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslightsRequestBuilder)), "clearLight", "(Landroid/hardware/lights/Light;)Landroid/hardware/lights/LightsRequest$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.lights.LightsRequest$Builder.clearLight: %w", err)
-	}
-
-	midlightsRequestBuilderbuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslightsRequestBuilder)), "build", "()Landroid/hardware/lights/LightsRequest;")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.lights.LightsRequest$Builder.build: %w", err)
-	}
-
 	c, err = env.FindClass("android/hardware/lights/Light")
 	if err != nil {
 		return fmt.Errorf("find class android.hardware.lights.Light: %w", err)
 	}
-	clsLight = env.NewGlobalRef(&c.Object)
+	clslight = env.NewGlobalRef(&c.Object)
 
-	midLightID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLight)), "getId", "()I")
+	midlightDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "describeContents", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.lights.Light.describeContents: %w", err)
+	}
+
+	midlightEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.lights.Light.equals: %w", err)
+	}
+
+	midlightGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "getId", "()I")
 	if err != nil {
 		return fmt.Errorf("get method android.hardware.lights.Light.getId: %w", err)
 	}
 
-	midLightName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLight)), "getName", "()Ljava/lang/String;")
+	midlightGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "getName", "()Ljava/lang/String;")
 	if err != nil {
 		return fmt.Errorf("get method android.hardware.lights.Light.getName: %w", err)
 	}
 
-	midLightType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLight)), "getType", "()I")
+	midlightGetOrdinal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "getOrdinal", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.lights.Light.getOrdinal: %w", err)
+	}
+
+	midlightGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "getType", "()I")
 	if err != nil {
 		return fmt.Errorf("get method android.hardware.lights.Light.getType: %w", err)
+	}
+
+	midlightHasBrightnessControl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "hasBrightnessControl", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.lights.Light.hasBrightnessControl: %w", err)
+	}
+
+	midlightHasRgbControl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "hasRgbControl", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.lights.Light.hasRgbControl: %w", err)
+	}
+
+	midlightHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "hashCode", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.lights.Light.hashCode: %w", err)
+	}
+
+	midlightToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.lights.Light.toString: %w", err)
+	}
+
+	midlightWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clslight)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.lights.Light.writeToParcel: %w", err)
 	}
 
 	return nil

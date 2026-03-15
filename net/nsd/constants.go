@@ -3,5 +3,5 @@
 package nsd
 
 const (
-	ProtocolDNSSD = 1
+	Creator = 0
 )

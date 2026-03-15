@@ -23,22 +23,312 @@ type clipData struct {
 	Obj *jni.GlobalRef
 }
 
-// getItemAt calls android.content.ClipData.getItemAt.
-func (m *clipData) getItemAt(index int32) *jni.Object {
-	var result *jni.Object
+// AddItem1 calls android.content.ClipData.addItem.
+func (m *clipData) AddItem1(arg0 *jni.Object) error {
 
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
 
-		result, _ = env.CallObjectMethod(
+		callErr = env.CallVoidMethod(
 			m.Obj,
-			midclipDatagetItemAt, jni.IntValue(index),
+			midclipDataAddItem1, jni.ObjectValue(arg0),
 		)
-
-		return nil
+		return callErr
 	})
-	return result
+	return callErr
+}
+
+// AddItem2_1 calls android.content.ClipData.addItem.
+func (m *clipData) AddItem2_1(arg0 *jni.Object, arg1 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midclipDataAddItem2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// DescribeContents calls android.content.ClipData.describeContents.
+func (m *clipData) DescribeContents() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midclipDataDescribeContents,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetDescription calls android.content.ClipData.getDescription.
+func (m *clipData) GetDescription() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midclipDataGetDescription,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetItemAt calls android.content.ClipData.getItemAt.
+func (m *clipData) GetItemAt(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midclipDataGetItemAt, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetItemCount calls android.content.ClipData.getItemCount.
+func (m *clipData) GetItemCount() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midclipDataGetItemCount,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// ToString calls android.content.ClipData.toString.
+func (m *clipData) ToString() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midclipDataToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// WriteToParcel calls android.content.ClipData.writeToParcel.
+func (m *clipData) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midclipDataWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// NewHtmlText calls android.content.ClipData.newHtmlText.
+func (m *clipData) NewHtmlText(arg0 string, arg1 string, arg2 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsclipData)),
+			midclipDataNewHtmlText, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// NewIntent calls android.content.ClipData.newIntent.
+func (m *clipData) NewIntent(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsclipData)),
+			midclipDataNewIntent, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// NewPlainText calls android.content.ClipData.newPlainText.
+func (m *clipData) NewPlainText(arg0 string, arg1 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsclipData)),
+			midclipDataNewPlainText, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// NewRawUri calls android.content.ClipData.newRawUri.
+func (m *clipData) NewRawUri(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsclipData)),
+			midclipDataNewRawUri, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// NewUri calls android.content.ClipData.newUri.
+func (m *clipData) NewUri(arg0 *jni.Object, arg1 string, arg2 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsclipData)),
+			midclipDataNewUri, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
 }

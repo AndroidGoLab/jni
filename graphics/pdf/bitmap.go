@@ -23,8 +23,8 @@ type bitmap struct {
 	Obj *jni.GlobalRef
 }
 
-// createBitmapRaw calls android.graphics.Bitmap.createBitmap.
-func (m *bitmap) createBitmapRaw(width int32, height int32, config *jni.Object) (*jni.Object, error) {
+// AsShared calls android.graphics.Bitmap.asShared.
+func (m *bitmap) AsShared() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,10 +32,9 @@ func (m *bitmap) createBitmapRaw(width int32, height int32, config *jni.Object) 
 			callErr = err
 			return err
 		}
-
-		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsbitmap)),
-			midbitmapcreateBitmapRaw, jni.IntValue(width), jni.IntValue(height), jni.ObjectValue(config),
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midbitmapAsShared,
 		)
 		if callErr != nil {
 			return callErr
@@ -45,8 +44,58 @@ func (m *bitmap) createBitmapRaw(width int32, height int32, config *jni.Object) 
 	return result, callErr
 }
 
-// copyPixelsToBufferRaw calls android.graphics.Bitmap.copyPixelsToBuffer.
-func (m *bitmap) copyPixelsToBufferRaw(buffer *jni.Object) error {
+// Compress calls android.graphics.Bitmap.compress.
+func (m *bitmap) Compress(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midbitmapCompress, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// Copy calls android.graphics.Bitmap.copy.
+func (m *bitmap) Copy(arg0 *jni.Object, arg1 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		var jArg1 uint8
+		if arg1 {
+			jArg1 = 1
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midbitmapCopy, jni.ObjectValue(arg0), jni.BooleanValue(jArg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CopyPixelsFromBuffer calls android.graphics.Bitmap.copyPixelsFromBuffer.
+func (m *bitmap) CopyPixelsFromBuffer(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -57,9 +106,1431 @@ func (m *bitmap) copyPixelsToBufferRaw(buffer *jni.Object) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midbitmapcopyPixelsToBufferRaw, jni.ObjectValue(buffer),
+			midbitmapCopyPixelsFromBuffer, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
 	return callErr
+}
+
+// CopyPixelsToBuffer calls android.graphics.Bitmap.copyPixelsToBuffer.
+func (m *bitmap) CopyPixelsToBuffer(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapCopyPixelsToBuffer, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// DescribeContents calls android.graphics.Bitmap.describeContents.
+func (m *bitmap) DescribeContents() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midbitmapDescribeContents,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// EraseColor1 calls android.graphics.Bitmap.eraseColor.
+func (m *bitmap) EraseColor1(arg0 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapEraseColor1, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// EraseColor1_1 calls android.graphics.Bitmap.eraseColor.
+func (m *bitmap) EraseColor1_1(arg0 int64) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapEraseColor1_1, jni.LongValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// ExtractAlpha0 calls android.graphics.Bitmap.extractAlpha.
+func (m *bitmap) ExtractAlpha0() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midbitmapExtractAlpha0,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// ExtractAlpha2_1 calls android.graphics.Bitmap.extractAlpha.
+func (m *bitmap) ExtractAlpha2_1(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midbitmapExtractAlpha2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAllocationByteCount calls android.graphics.Bitmap.getAllocationByteCount.
+func (m *bitmap) GetAllocationByteCount() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midbitmapGetAllocationByteCount,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetByteCount calls android.graphics.Bitmap.getByteCount.
+func (m *bitmap) GetByteCount() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midbitmapGetByteCount,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetColor calls android.graphics.Bitmap.getColor.
+func (m *bitmap) GetColor(arg0 int32, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midbitmapGetColor, jni.IntValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetColorSpace calls android.graphics.Bitmap.getColorSpace.
+func (m *bitmap) GetColorSpace() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midbitmapGetColorSpace,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetConfig calls android.graphics.Bitmap.getConfig.
+func (m *bitmap) GetConfig() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midbitmapGetConfig,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetDensity calls android.graphics.Bitmap.getDensity.
+func (m *bitmap) GetDensity() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midbitmapGetDensity,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetGainmap calls android.graphics.Bitmap.getGainmap.
+func (m *bitmap) GetGainmap() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midbitmapGetGainmap,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetGenerationId calls android.graphics.Bitmap.getGenerationId.
+func (m *bitmap) GetGenerationId() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midbitmapGetGenerationId,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetHardwareBuffer calls android.graphics.Bitmap.getHardwareBuffer.
+func (m *bitmap) GetHardwareBuffer() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midbitmapGetHardwareBuffer,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetHeight calls android.graphics.Bitmap.getHeight.
+func (m *bitmap) GetHeight() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midbitmapGetHeight,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetNinePatchChunk calls android.graphics.Bitmap.getNinePatchChunk.
+func (m *bitmap) GetNinePatchChunk() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midbitmapGetNinePatchChunk,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPixel calls android.graphics.Bitmap.getPixel.
+func (m *bitmap) GetPixel(arg0 int32, arg1 int32) (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midbitmapGetPixel, jni.IntValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPixels calls android.graphics.Bitmap.getPixels.
+func (m *bitmap) GetPixels(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 int32, arg6 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapGetPixels, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.IntValue(arg6),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// GetRowBytes calls android.graphics.Bitmap.getRowBytes.
+func (m *bitmap) GetRowBytes() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midbitmapGetRowBytes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetScaledHeight1 calls android.graphics.Bitmap.getScaledHeight.
+func (m *bitmap) GetScaledHeight1(arg0 *jni.Object) (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midbitmapGetScaledHeight1, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetScaledHeight1_1 calls android.graphics.Bitmap.getScaledHeight.
+func (m *bitmap) GetScaledHeight1_1(arg0 *jni.Object) (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midbitmapGetScaledHeight1_1, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetScaledHeight1_2 calls android.graphics.Bitmap.getScaledHeight.
+func (m *bitmap) GetScaledHeight1_2(arg0 int32) (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midbitmapGetScaledHeight1_2, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetScaledWidth1 calls android.graphics.Bitmap.getScaledWidth.
+func (m *bitmap) GetScaledWidth1(arg0 *jni.Object) (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midbitmapGetScaledWidth1, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetScaledWidth1_1 calls android.graphics.Bitmap.getScaledWidth.
+func (m *bitmap) GetScaledWidth1_1(arg0 *jni.Object) (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midbitmapGetScaledWidth1_1, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetScaledWidth1_2 calls android.graphics.Bitmap.getScaledWidth.
+func (m *bitmap) GetScaledWidth1_2(arg0 int32) (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midbitmapGetScaledWidth1_2, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetWidth calls android.graphics.Bitmap.getWidth.
+func (m *bitmap) GetWidth() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midbitmapGetWidth,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// HasAlpha calls android.graphics.Bitmap.hasAlpha.
+func (m *bitmap) HasAlpha() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midbitmapHasAlpha,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// HasGainmap calls android.graphics.Bitmap.hasGainmap.
+func (m *bitmap) HasGainmap() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midbitmapHasGainmap,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// HasMipMap calls android.graphics.Bitmap.hasMipMap.
+func (m *bitmap) HasMipMap() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midbitmapHasMipMap,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsMutable calls android.graphics.Bitmap.isMutable.
+func (m *bitmap) IsMutable() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midbitmapIsMutable,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsPremultiplied calls android.graphics.Bitmap.isPremultiplied.
+func (m *bitmap) IsPremultiplied() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midbitmapIsPremultiplied,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsRecycled calls android.graphics.Bitmap.isRecycled.
+func (m *bitmap) IsRecycled() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midbitmapIsRecycled,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// PrepareToDraw calls android.graphics.Bitmap.prepareToDraw.
+func (m *bitmap) PrepareToDraw() error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapPrepareToDraw,
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// Reconfigure calls android.graphics.Bitmap.reconfigure.
+func (m *bitmap) Reconfigure(arg0 int32, arg1 int32, arg2 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapReconfigure, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// Recycle calls android.graphics.Bitmap.recycle.
+func (m *bitmap) Recycle() error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapRecycle,
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SameAs calls android.graphics.Bitmap.sameAs.
+func (m *bitmap) SameAs(arg0 *jni.Object) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midbitmapSameAs, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetColorSpace calls android.graphics.Bitmap.setColorSpace.
+func (m *bitmap) SetColorSpace(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapSetColorSpace, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetConfig calls android.graphics.Bitmap.setConfig.
+func (m *bitmap) SetConfig(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapSetConfig, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetDensity calls android.graphics.Bitmap.setDensity.
+func (m *bitmap) SetDensity(arg0 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapSetDensity, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetGainmap calls android.graphics.Bitmap.setGainmap.
+func (m *bitmap) SetGainmap(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapSetGainmap, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetHasAlpha calls android.graphics.Bitmap.setHasAlpha.
+func (m *bitmap) SetHasAlpha(arg0 bool) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapSetHasAlpha, jni.BooleanValue(jArg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetHasMipMap calls android.graphics.Bitmap.setHasMipMap.
+func (m *bitmap) SetHasMipMap(arg0 bool) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapSetHasMipMap, jni.BooleanValue(jArg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetHeight calls android.graphics.Bitmap.setHeight.
+func (m *bitmap) SetHeight(arg0 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapSetHeight, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetPixel calls android.graphics.Bitmap.setPixel.
+func (m *bitmap) SetPixel(arg0 int32, arg1 int32, arg2 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapSetPixel, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetPixels calls android.graphics.Bitmap.setPixels.
+func (m *bitmap) SetPixels(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 int32, arg6 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapSetPixels, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.IntValue(arg6),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetPremultiplied calls android.graphics.Bitmap.setPremultiplied.
+func (m *bitmap) SetPremultiplied(arg0 bool) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapSetPremultiplied, jni.BooleanValue(jArg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetWidth calls android.graphics.Bitmap.setWidth.
+func (m *bitmap) SetWidth(arg0 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapSetWidth, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// WriteToParcel calls android.graphics.Bitmap.writeToParcel.
+func (m *bitmap) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midbitmapWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// CreateBitmap1 calls android.graphics.Bitmap.createBitmap.
+func (m *bitmap) CreateBitmap1(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapCreateBitmap1, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateBitmap5_1 calls android.graphics.Bitmap.createBitmap.
+func (m *bitmap) CreateBitmap5_1(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapCreateBitmap5_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateBitmap7_2 calls android.graphics.Bitmap.createBitmap.
+func (m *bitmap) CreateBitmap7_2(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 *jni.Object, arg6 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		var jArg6 uint8
+		if arg6 {
+			jArg6 = 1
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapCreateBitmap7_2, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.ObjectValue(arg5), jni.BooleanValue(jArg6),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateBitmap1_3 calls android.graphics.Bitmap.createBitmap.
+func (m *bitmap) CreateBitmap1_3(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapCreateBitmap1_3, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateBitmap4_4 calls android.graphics.Bitmap.createBitmap.
+func (m *bitmap) CreateBitmap4_4(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapCreateBitmap4_4, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateBitmap4_5 calls android.graphics.Bitmap.createBitmap.
+func (m *bitmap) CreateBitmap4_5(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapCreateBitmap4_5, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateBitmap5_6 calls android.graphics.Bitmap.createBitmap.
+func (m *bitmap) CreateBitmap5_6(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object, arg4 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		var jArg4 uint8
+		if arg4 {
+			jArg4 = 1
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapCreateBitmap5_6, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.BooleanValue(jArg4),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateBitmap6_7 calls android.graphics.Bitmap.createBitmap.
+func (m *bitmap) CreateBitmap6_7(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object, arg4 bool, arg5 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		var jArg4 uint8
+		if arg4 {
+			jArg4 = 1
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapCreateBitmap6_7, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.BooleanValue(jArg4), jni.ObjectValue(arg5),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateBitmap5_8 calls android.graphics.Bitmap.createBitmap.
+func (m *bitmap) CreateBitmap5_8(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 int32, arg4 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapCreateBitmap5_8, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateBitmap7_9 calls android.graphics.Bitmap.createBitmap.
+func (m *bitmap) CreateBitmap7_9(arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 int32, arg4 int32, arg5 int32, arg6 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapCreateBitmap7_9, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.ObjectValue(arg6),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateBitmap3_10 calls android.graphics.Bitmap.createBitmap.
+func (m *bitmap) CreateBitmap3_10(arg0 int32, arg1 int32, arg2 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapCreateBitmap3_10, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateBitmap4_11 calls android.graphics.Bitmap.createBitmap.
+func (m *bitmap) CreateBitmap4_11(arg0 int32, arg1 int32, arg2 *jni.Object, arg3 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		var jArg3 uint8
+		if arg3 {
+			jArg3 = 1
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapCreateBitmap4_11, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.BooleanValue(jArg3),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateBitmap5_12 calls android.graphics.Bitmap.createBitmap.
+func (m *bitmap) CreateBitmap5_12(arg0 int32, arg1 int32, arg2 *jni.Object, arg3 bool, arg4 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		var jArg3 uint8
+		if arg3 {
+			jArg3 = 1
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapCreateBitmap5_12, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.BooleanValue(jArg3), jni.ObjectValue(arg4),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateBitmap4_13 calls android.graphics.Bitmap.createBitmap.
+func (m *bitmap) CreateBitmap4_13(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapCreateBitmap4_13, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateBitmap6_14 calls android.graphics.Bitmap.createBitmap.
+func (m *bitmap) CreateBitmap6_14(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapCreateBitmap6_14, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.ObjectValue(arg5),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateScaledBitmap calls android.graphics.Bitmap.createScaledBitmap.
+func (m *bitmap) CreateScaledBitmap(arg0 *jni.Object, arg1 int32, arg2 int32, arg3 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		var jArg3 uint8
+		if arg3 {
+			jArg3 = 1
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapCreateScaledBitmap, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.BooleanValue(jArg3),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// WrapHardwareBuffer calls android.graphics.Bitmap.wrapHardwareBuffer.
+func (m *bitmap) WrapHardwareBuffer(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsbitmap)),
+			midbitmapWrapHardwareBuffer, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
 }

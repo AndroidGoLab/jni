@@ -20,42 +20,20 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsAdapter                  *jni.GlobalRef
-	midAdapterisEnabled         jni.MethodID
-	midAdapterenableReaderMode  jni.MethodID
-	midAdapterdisableReaderMode jni.MethodID
-
-	clsndefMessage           *jni.GlobalRef
-	midndefMessageInit       jni.MethodID
-	midndefMessagegetRecords jni.MethodID
-
-	clsNdefTag                    *jni.GlobalRef
-	midNdefTagconnect             jni.MethodID
-	midNdefTaggetNdefMessageRaw   jni.MethodID
-	midNdefTagwriteNdefMessageRaw jni.MethodID
-	midNdefTagmakeReadOnly        jni.MethodID
-	midNdefTagisWritable          jni.MethodID
-	midNdefTaggetMaxSize          jni.MethodID
-	midNdefTagclose               jni.MethodID
-
-	clsIsoDepTag                       *jni.GlobalRef
-	midIsoDepTagconnect                jni.MethodID
-	midIsoDepTagtransceive             jni.MethodID
-	midIsoDepTagsetTimeoutMs           jni.MethodID
-	midIsoDepTaggetMaxTransceiveLength jni.MethodID
-	midIsoDepTagclose                  jni.MethodID
-
-	clstag         *jni.GlobalRef
-	midtagID       jni.MethodID
-	midtagTechList jni.MethodID
-
-	clsndefRecord        *jni.GlobalRef
-	midndefRecordTNF     jni.MethodID
-	midndefRecordType    jni.MethodID
-	midndefRecordID      jni.MethodID
-	midndefRecordPayload jni.MethodID
-
-	clsreaderCallback *jni.GlobalRef
+	clsndef                     *jni.GlobalRef
+	midndefCanMakeReadOnly      jni.MethodID
+	midndefClose                jni.MethodID
+	midndefConnect              jni.MethodID
+	midndefGetCachedNdefMessage jni.MethodID
+	midndefGetMaxSize           jni.MethodID
+	midndefGetNdefMessage       jni.MethodID
+	midndefGetTag               jni.MethodID
+	midndefGetType              jni.MethodID
+	midndefIsConnected          jni.MethodID
+	midndefIsWritable           jni.MethodID
+	midndefMakeReadOnly         jni.MethodID
+	midndefWriteNdefMessage     jni.MethodID
+	midndefGet                  jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -76,161 +54,76 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/nfc/NfcAdapter")
-	if err != nil {
-		return fmt.Errorf("find class android.nfc.NfcAdapter: %w", err)
-	}
-	clsAdapter = env.NewGlobalRef(&c.Object)
-
-	midAdapterisEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "isEnabled", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.nfc.NfcAdapter.isEnabled: %w", err)
-	}
-
-	midAdapterenableReaderMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "enableReaderMode", "(Landroid/app/Activity;Landroid/nfc/NfcAdapter$ReaderCallback;ILandroid/os/Bundle;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.nfc.NfcAdapter.enableReaderMode: %w", err)
-	}
-
-	midAdapterdisableReaderMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "disableReaderMode", "(Landroid/app/Activity;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.nfc.NfcAdapter.disableReaderMode: %w", err)
-	}
-
-	c, err = env.FindClass("android/nfc/NdefMessage")
-	if err != nil {
-		return fmt.Errorf("find class android.nfc.NdefMessage: %w", err)
-	}
-	clsndefMessage = env.NewGlobalRef(&c.Object)
-	midndefMessageInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefMessage)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.nfc.NdefMessage.<init>: %w", err)
-	}
-
-	midndefMessagegetRecords, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefMessage)), "getRecords", "()[Landroid/nfc/NdefRecord;")
-	if err != nil {
-		return fmt.Errorf("get method android.nfc.NdefMessage.getRecords: %w", err)
-	}
-
 	c, err = env.FindClass("android/nfc/tech/Ndef")
 	if err != nil {
 		return fmt.Errorf("find class android.nfc.tech.Ndef: %w", err)
 	}
-	clsNdefTag = env.NewGlobalRef(&c.Object)
+	clsndef = env.NewGlobalRef(&c.Object)
 
-	midNdefTagconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNdefTag)), "connect", "()V")
+	midndefCanMakeReadOnly, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "canMakeReadOnly", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.nfc.tech.Ndef.connect: %w", err)
+		return fmt.Errorf("get method android.nfc.tech.Ndef.canMakeReadOnly: %w", err)
 	}
 
-	midNdefTaggetNdefMessageRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNdefTag)), "getNdefMessage", "()Landroid/nfc/NdefMessage;")
-	if err != nil {
-		return fmt.Errorf("get method android.nfc.tech.Ndef.getNdefMessage: %w", err)
-	}
-
-	midNdefTagwriteNdefMessageRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNdefTag)), "writeNdefMessage", "(Landroid/nfc/NdefMessage;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.nfc.tech.Ndef.writeNdefMessage: %w", err)
-	}
-
-	midNdefTagmakeReadOnly, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNdefTag)), "makeReadOnly", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.nfc.tech.Ndef.makeReadOnly: %w", err)
-	}
-
-	midNdefTagisWritable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNdefTag)), "isWritable", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.nfc.tech.Ndef.isWritable: %w", err)
-	}
-
-	midNdefTaggetMaxSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNdefTag)), "getMaxSize", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.nfc.tech.Ndef.getMaxSize: %w", err)
-	}
-
-	midNdefTagclose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNdefTag)), "close", "()V")
+	midndefClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "close", "()V")
 	if err != nil {
 		return fmt.Errorf("get method android.nfc.tech.Ndef.close: %w", err)
 	}
 
-	c, err = env.FindClass("android/nfc/tech/IsoDep")
+	midndefConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "connect", "()V")
 	if err != nil {
-		return fmt.Errorf("find class android.nfc.tech.IsoDep: %w", err)
-	}
-	clsIsoDepTag = env.NewGlobalRef(&c.Object)
-
-	midIsoDepTagconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsoDepTag)), "connect", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.nfc.tech.IsoDep.connect: %w", err)
+		return fmt.Errorf("get method android.nfc.tech.Ndef.connect: %w", err)
 	}
 
-	midIsoDepTagtransceive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsoDepTag)), "transceive", "([B)[B")
+	midndefGetCachedNdefMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "getCachedNdefMessage", "()Landroid/nfc/NdefMessage;")
 	if err != nil {
-		return fmt.Errorf("get method android.nfc.tech.IsoDep.transceive: %w", err)
+		return fmt.Errorf("get method android.nfc.tech.Ndef.getCachedNdefMessage: %w", err)
 	}
 
-	midIsoDepTagsetTimeoutMs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsoDepTag)), "setTimeout", "(I)V")
+	midndefGetMaxSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "getMaxSize", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.nfc.tech.IsoDep.setTimeout: %w", err)
+		return fmt.Errorf("get method android.nfc.tech.Ndef.getMaxSize: %w", err)
 	}
 
-	midIsoDepTaggetMaxTransceiveLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsoDepTag)), "getMaxTransceiveLength", "()I")
+	midndefGetNdefMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "getNdefMessage", "()Landroid/nfc/NdefMessage;")
 	if err != nil {
-		return fmt.Errorf("get method android.nfc.tech.IsoDep.getMaxTransceiveLength: %w", err)
+		return fmt.Errorf("get method android.nfc.tech.Ndef.getNdefMessage: %w", err)
 	}
 
-	midIsoDepTagclose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsoDepTag)), "close", "()V")
+	midndefGetTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "getTag", "()Landroid/nfc/Tag;")
 	if err != nil {
-		return fmt.Errorf("get method android.nfc.tech.IsoDep.close: %w", err)
+		return fmt.Errorf("get method android.nfc.tech.Ndef.getTag: %w", err)
 	}
 
-	c, err = env.FindClass("android/nfc/Tag")
+	midndefGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "getType", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("find class android.nfc.Tag: %w", err)
-	}
-	clstag = env.NewGlobalRef(&c.Object)
-
-	midtagID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstag)), "getId", "()[B")
-	if err != nil {
-		return fmt.Errorf("get method android.nfc.Tag.getId: %w", err)
+		return fmt.Errorf("get method android.nfc.tech.Ndef.getType: %w", err)
 	}
 
-	midtagTechList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstag)), "getTechList", "()[Ljava/lang/String;")
+	midndefIsConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "isConnected", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.nfc.Tag.getTechList: %w", err)
+		return fmt.Errorf("get method android.nfc.tech.Ndef.isConnected: %w", err)
 	}
 
-	c, err = env.FindClass("android/nfc/NdefRecord")
+	midndefIsWritable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "isWritable", "()Z")
 	if err != nil {
-		return fmt.Errorf("find class android.nfc.NdefRecord: %w", err)
-	}
-	clsndefRecord = env.NewGlobalRef(&c.Object)
-
-	midndefRecordTNF, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "getTnf", "()S")
-	if err != nil {
-		return fmt.Errorf("get method android.nfc.NdefRecord.getTnf: %w", err)
+		return fmt.Errorf("get method android.nfc.tech.Ndef.isWritable: %w", err)
 	}
 
-	midndefRecordType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "getType", "()[B")
+	midndefMakeReadOnly, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "makeReadOnly", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.nfc.NdefRecord.getType: %w", err)
+		return fmt.Errorf("get method android.nfc.tech.Ndef.makeReadOnly: %w", err)
 	}
 
-	midndefRecordID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "getId", "()[B")
+	midndefWriteNdefMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "writeNdefMessage", "(Landroid/nfc/NdefMessage;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.nfc.NdefRecord.getId: %w", err)
+		return fmt.Errorf("get method android.nfc.tech.Ndef.writeNdefMessage: %w", err)
 	}
 
-	midndefRecordPayload, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "getPayload", "()[B")
+	midndefGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "get", "(Landroid/nfc/Tag;)Landroid/nfc/tech/Ndef;")
 	if err != nil {
-		return fmt.Errorf("get method android.nfc.NdefRecord.getPayload: %w", err)
+		return fmt.Errorf("get method android.nfc.tech.Ndef.get: %w", err)
 	}
-
-	c, err = env.FindClass("android/nfc/NfcAdapter$ReaderCallback")
-	if err != nil {
-		return fmt.Errorf("find class android.nfc.NfcAdapter$ReaderCallback: %w", err)
-	}
-	clsreaderCallback = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

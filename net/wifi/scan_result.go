@@ -17,46 +17,393 @@ var (
 	_ *app.Context
 )
 
-// ScanResult holds data extracted from android.net.wifi.ScanResult.
-type ScanResult struct {
-	SSID         string
-	BSSID        string
-	RSSI         int32
-	Frequency    int32
-	Capabilities string
+// scanResult wraps android.net.wifi.ScanResult.
+type scanResult struct {
+	VM  *jni.VM
+	Obj *jni.GlobalRef
 }
 
-// ExtractScanResult extracts all fields from a android.net.wifi.ScanResult JNI object.
-func ExtractScanResult(env *jni.Env, obj *jni.Object) (*ScanResult, error) {
-	if err := ensureInit(env); err != nil {
-		return nil, err
-	}
-	var result ScanResult
+// DescribeContents calls android.net.wifi.ScanResult.describeContents.
+func (m *scanResult) DescribeContents() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midscanResultDescribeContents,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
 
-	{
-		raw := env.GetObjectField(obj, fidScanResultSSID)
-		result.SSID = env.GoString((*jni.String)(unsafe.Pointer(raw)))
-	}
+// GetAffiliatedMloLinks calls android.net.wifi.ScanResult.getAffiliatedMloLinks.
+func (m *scanResult) GetAffiliatedMloLinks() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midscanResultGetAffiliatedMloLinks,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
 
-	{
-		raw := env.GetObjectField(obj, fidScanResultBSSID)
-		result.BSSID = env.GoString((*jni.String)(unsafe.Pointer(raw)))
-	}
+// GetApMldMacAddress calls android.net.wifi.ScanResult.getApMldMacAddress.
+func (m *scanResult) GetApMldMacAddress() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midscanResultGetApMldMacAddress,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
 
-	{
-		raw := env.GetIntField(obj, fidScanResultRSSI)
-		result.RSSI = int32(raw)
-	}
+// GetApMloLinkId calls android.net.wifi.ScanResult.getApMloLinkId.
+func (m *scanResult) GetApMloLinkId() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midscanResultGetApMloLinkId,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
 
-	{
-		raw := env.GetIntField(obj, fidScanResultFrequency)
-		result.Frequency = int32(raw)
-	}
+// GetInformationElements calls android.net.wifi.ScanResult.getInformationElements.
+func (m *scanResult) GetInformationElements() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midscanResultGetInformationElements,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
 
-	{
-		raw := env.GetObjectField(obj, fidScanResultCapabilities)
-		result.Capabilities = env.GoString((*jni.String)(unsafe.Pointer(raw)))
-	}
+// GetSecurityTypes calls android.net.wifi.ScanResult.getSecurityTypes.
+func (m *scanResult) GetSecurityTypes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midscanResultGetSecurityTypes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
 
-	return &result, nil
+// GetWifiSsid calls android.net.wifi.ScanResult.getWifiSsid.
+func (m *scanResult) GetWifiSsid() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midscanResultGetWifiSsid,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetWifiStandard calls android.net.wifi.ScanResult.getWifiStandard.
+func (m *scanResult) GetWifiStandard() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midscanResultGetWifiStandard,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// Is80211azNtbResponder calls android.net.wifi.ScanResult.is80211azNtbResponder.
+func (m *scanResult) Is80211azNtbResponder() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midscanResultIs80211azNtbResponder,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// Is80211mcResponder calls android.net.wifi.ScanResult.is80211mcResponder.
+func (m *scanResult) Is80211mcResponder() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midscanResultIs80211mcResponder,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsPasspointNetwork calls android.net.wifi.ScanResult.isPasspointNetwork.
+func (m *scanResult) IsPasspointNetwork() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midscanResultIsPasspointNetwork,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsRangingFrameProtectionRequired calls android.net.wifi.ScanResult.isRangingFrameProtectionRequired.
+func (m *scanResult) IsRangingFrameProtectionRequired() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midscanResultIsRangingFrameProtectionRequired,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsSecureHeLtfSupported calls android.net.wifi.ScanResult.isSecureHeLtfSupported.
+func (m *scanResult) IsSecureHeLtfSupported() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midscanResultIsSecureHeLtfSupported,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsTwtResponder calls android.net.wifi.ScanResult.isTwtResponder.
+func (m *scanResult) IsTwtResponder() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midscanResultIsTwtResponder,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// ToString calls android.net.wifi.ScanResult.toString.
+func (m *scanResult) ToString() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midscanResultToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// WriteToParcel calls android.net.wifi.ScanResult.writeToParcel.
+func (m *scanResult) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midscanResultWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// ConvertChannelToFrequencyMhzIfSupported calls android.net.wifi.ScanResult.convertChannelToFrequencyMhzIfSupported.
+func (m *scanResult) ConvertChannelToFrequencyMhzIfSupported(arg0 int32, arg1 int32) (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticIntMethod(
+			(*jni.Class)(unsafe.Pointer(clsscanResult)),
+			midscanResultConvertChannelToFrequencyMhzIfSupported, jni.IntValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// ConvertFrequencyMhzToChannelIfSupported calls android.net.wifi.ScanResult.convertFrequencyMhzToChannelIfSupported.
+func (m *scanResult) ConvertFrequencyMhzToChannelIfSupported(arg0 int32) (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticIntMethod(
+			(*jni.Class)(unsafe.Pointer(clsscanResult)),
+			midscanResultConvertFrequencyMhzToChannelIfSupported, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
 }

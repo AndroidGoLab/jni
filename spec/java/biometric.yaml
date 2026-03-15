@@ -1,231 +1,56 @@
 package: biometric
 go_import: github.com/xaionaro-go/jni/hardware/biometric
 classes:
-    - java_class: android.hardware.biometrics.BiometricPrompt
-      go_type: biometricPrompt
+    - java_class: android.hardware.biometrics.BiometricManager
+      go_type: biometricManager
       methods:
-        - java_method: authenticate
-          go_name: Authenticate4
-          params:
-            - java_type: android.hardware.biometrics.BiometricPrompt$CryptoObject
-              go_name: arg0
-            - java_type: android.os.CancellationSignal
-              go_name: arg1
-            - java_type: java.util.concurrent.Executor
-              go_name: arg2
-            - java_type: android.hardware.biometrics.BiometricPrompt$AuthenticationCallback
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: authenticate
-          go_name: Authenticate3_1
-          params:
-            - java_type: android.os.CancellationSignal
-              go_name: arg0
-            - java_type: java.util.concurrent.Executor
-              go_name: arg1
-            - java_type: android.hardware.biometrics.BiometricPrompt$AuthenticationCallback
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: getAllowedAuthenticators
-          go_name: GetAllowedAuthenticators
+        - java_method: canAuthenticate
+          go_name: CanAuthenticate0
           returns: int
           error: true
-        - java_method: getContentView
-          go_name: GetContentView
-          returns: android.hardware.biometrics.PromptContentView
-          error: true
-        - java_method: getDescription
-          go_name: GetDescription
-          returns: String
-          error: true
-        - java_method: getLogoBitmap
-          go_name: GetLogoBitmap
-          returns: android.graphics.Bitmap
-          error: true
-        - java_method: getLogoDescription
-          go_name: GetLogoDescription
-          returns: String
-          error: true
-        - java_method: getLogoRes
-          go_name: GetLogoRes
-          returns: int
-          error: true
-        - java_method: getNegativeButtonText
-          go_name: GetNegativeButtonText
-          returns: String
-          error: true
-        - java_method: getSubtitle
-          go_name: GetSubtitle
-          returns: String
-          error: true
-        - java_method: getTitle
-          go_name: GetTitle
-          returns: String
-          error: true
-        - java_method: isConfirmationRequired
-          go_name: IsConfirmationRequired
-          returns: boolean
-          error: true
-    - java_class: android.hardware.biometrics.BiometricPrompt$Builder
-      go_type: biometricPromptBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.hardware.biometrics.BiometricPrompt
-          error: true
-        - java_method: setAllowedAuthenticators
-          go_name: SetAllowedAuthenticators
+        - java_method: canAuthenticate
+          go_name: CanAuthenticate1_1
           params:
             - java_type: int
               go_name: arg0
-          returns: android.hardware.biometrics.BiometricPrompt$Builder
+          returns: int
           error: true
-        - java_method: setConfirmationRequired
-          go_name: SetConfirmationRequired
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.hardware.biometrics.BiometricPrompt$Builder
-          error: true
-        - java_method: setContentView
-          go_name: SetContentView
-          params:
-            - java_type: android.hardware.biometrics.PromptContentView
-              go_name: arg0
-          returns: android.hardware.biometrics.BiometricPrompt$Builder
-          error: true
-        - java_method: setDescription
-          go_name: SetDescription
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.hardware.biometrics.BiometricPrompt$Builder
-          error: true
-        - java_method: setDeviceCredentialAllowed
-          go_name: SetDeviceCredentialAllowed
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.hardware.biometrics.BiometricPrompt$Builder
-          error: true
-        - java_method: setLogoBitmap
-          go_name: SetLogoBitmap
-          params:
-            - java_type: android.graphics.Bitmap
-              go_name: arg0
-          returns: android.hardware.biometrics.BiometricPrompt$Builder
-          error: true
-        - java_method: setLogoDescription
-          go_name: SetLogoDescription
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.hardware.biometrics.BiometricPrompt$Builder
-          error: true
-        - java_method: setLogoRes
-          go_name: SetLogoRes
+        - java_method: getLastAuthenticationTime
+          go_name: GetLastAuthenticationTime
           params:
             - java_type: int
               go_name: arg0
-          returns: android.hardware.biometrics.BiometricPrompt$Builder
+          returns: long
           error: true
-        - java_method: setNegativeButton
-          go_name: SetNegativeButton
+        - java_method: getStrings
+          go_name: GetStrings
           params:
-            - java_type: String
+            - java_type: int
               go_name: arg0
-            - java_type: java.util.concurrent.Executor
-              go_name: arg1
-            - java_type: android.content.DialogInterface$OnClickListener
-              go_name: arg2
-          returns: android.hardware.biometrics.BiometricPrompt$Builder
-          error: true
-        - java_method: setSubtitle
-          go_name: SetSubtitle
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.hardware.biometrics.BiometricPrompt$Builder
-          error: true
-        - java_method: setTitle
-          go_name: SetTitle
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.hardware.biometrics.BiometricPrompt$Builder
+          returns: android.hardware.biometrics.BiometricManager$Strings
           error: true
 constants:
-    - go_name: AuthenticationResultTypeBiometric
-      value: "0"
-      go_type: int
-    - go_name: AuthenticationResultTypeDeviceCredential
-      value: "0"
-      go_type: int
-    - go_name: BiometricAcquiredGood
-      value: "0"
-      go_type: int
-    - go_name: BiometricAcquiredImagerDirty
-      value: "0"
-      go_type: int
-    - go_name: BiometricAcquiredInsufficient
-      value: "0"
-      go_type: int
-    - go_name: BiometricAcquiredPartial
-      value: "0"
-      go_type: int
-    - go_name: BiometricAcquiredTooFast
-      value: "0"
-      go_type: int
-    - go_name: BiometricAcquiredTooSlow
-      value: "0"
-      go_type: int
-    - go_name: BiometricErrorCanceled
-      value: "0"
-      go_type: int
-    - go_name: BiometricErrorHwNotPresent
-      value: "0"
-      go_type: int
     - go_name: BiometricErrorHwUnavailable
       value: "0"
       go_type: int
     - go_name: BiometricErrorIdentityCheckNotActive
       value: "0"
       go_type: int
-    - go_name: BiometricErrorLockout
-      value: "0"
-      go_type: int
-    - go_name: BiometricErrorLockoutPermanent
+    - go_name: BiometricErrorNoneEnrolled
       value: "0"
       go_type: int
     - go_name: BiometricErrorNotEnabledForApps
       value: "0"
       go_type: int
-    - go_name: BiometricErrorNoBiometrics
-      value: "0"
-      go_type: int
-    - go_name: BiometricErrorNoDeviceCredential
-      value: "0"
-      go_type: int
-    - go_name: BiometricErrorNoSpace
+    - go_name: BiometricErrorNoHardware
       value: "0"
       go_type: int
     - go_name: BiometricErrorSecurityUpdateRequired
       value: "0"
       go_type: int
-    - go_name: BiometricErrorTimeout
-      value: "0"
-      go_type: int
-    - go_name: BiometricErrorUnableToProcess
-      value: "0"
-      go_type: int
-    - go_name: BiometricErrorUserCanceled
-      value: "0"
-      go_type: int
-    - go_name: BiometricErrorVendor
-      value: "0"
-      go_type: int
     - go_name: BiometricNoAuthentication
       value: "0"
       go_type: int64
+    - go_name: BiometricSuccess
+      value: "0"
+      go_type: int

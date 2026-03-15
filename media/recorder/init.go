@@ -20,34 +20,43 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsRecorder                     *jni.GlobalRef
-	midRecorderInit                 jni.MethodID
-	midRecordersetAudioSource       jni.MethodID
-	midRecordersetVideoSource       jni.MethodID
-	midRecordersetOutputFormat      jni.MethodID
-	midRecordersetAudioEncoder      jni.MethodID
-	midRecordersetVideoEncoder      jni.MethodID
-	midRecordersetOutputFile        jni.MethodID
-	midRecordersetVideoSize         jni.MethodID
-	midRecordersetVideoFrameRate    jni.MethodID
-	midRecordersetAudioSamplingRate jni.MethodID
-	midRecordersetAudioChannels     jni.MethodID
-	midRecordersetMaxDurationMs     jni.MethodID
-	midRecordersetMaxFileSize       jni.MethodID
-	midRecorderprepare              jni.MethodID
-	midRecorderstart                jni.MethodID
-	midRecorderpause                jni.MethodID
-	midRecorderresume               jni.MethodID
-	midRecorderstop                 jni.MethodID
-	midRecorderreset                jni.MethodID
-	midRecorderrelease              jni.MethodID
-	midRecordergetMaxAmplitude      jni.MethodID
-	midRecordersetOnErrorListener   jni.MethodID
-	midRecordersetOnInfoListener    jni.MethodID
-
-	clsonErrorListener *jni.GlobalRef
-
-	clsonInfoListener *jni.GlobalRef
+	clsmediaRecorder                                     *jni.GlobalRef
+	midmediaRecorderGetActiveMicrophones                 jni.MethodID
+	midmediaRecorderGetActiveRecordingConfiguration      jni.MethodID
+	midmediaRecorderGetLogSessionId                      jni.MethodID
+	midmediaRecorderGetMetrics                           jni.MethodID
+	midmediaRecorderGetPreferredDevice                   jni.MethodID
+	midmediaRecorderGetRoutedDevice                      jni.MethodID
+	midmediaRecorderGetRoutedDevices                     jni.MethodID
+	midmediaRecorderPrepare                              jni.MethodID
+	midmediaRecorderRegisterAudioRecordingCallback       jni.MethodID
+	midmediaRecorderRemoveOnRoutingChangedListener       jni.MethodID
+	midmediaRecorderReset                                jni.MethodID
+	midmediaRecorderSetAudioChannels                     jni.MethodID
+	midmediaRecorderSetAudioEncodingBitRate              jni.MethodID
+	midmediaRecorderSetAudioProfile                      jni.MethodID
+	midmediaRecorderSetAudioSamplingRate                 jni.MethodID
+	midmediaRecorderSetCaptureRate                       jni.MethodID
+	midmediaRecorderSetInputSurface                      jni.MethodID
+	midmediaRecorderSetLocation                          jni.MethodID
+	midmediaRecorderSetLogSessionId                      jni.MethodID
+	midmediaRecorderSetNextOutputFile1                   jni.MethodID
+	midmediaRecorderSetNextOutputFile1_1                 jni.MethodID
+	midmediaRecorderSetOnErrorListener                   jni.MethodID
+	midmediaRecorderSetOnInfoListener                    jni.MethodID
+	midmediaRecorderSetOrientationHint                   jni.MethodID
+	midmediaRecorderSetOutputFile1                       jni.MethodID
+	midmediaRecorderSetOutputFile1_1                     jni.MethodID
+	midmediaRecorderSetOutputFile1_2                     jni.MethodID
+	midmediaRecorderSetPreferredDevice                   jni.MethodID
+	midmediaRecorderSetPreferredMicrophoneDirection      jni.MethodID
+	midmediaRecorderSetPreferredMicrophoneFieldDimension jni.MethodID
+	midmediaRecorderSetPreviewDisplay                    jni.MethodID
+	midmediaRecorderSetProfile                           jni.MethodID
+	midmediaRecorderSetVideoEncodingBitRate              jni.MethodID
+	midmediaRecorderSetVideoEncodingProfileLevel         jni.MethodID
+	midmediaRecorderSetVideoProfile                      jni.MethodID
+	midmediaRecorderUnregisterAudioRecordingCallback     jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -72,133 +81,187 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.media.MediaRecorder: %w", err)
 	}
-	clsRecorder = env.NewGlobalRef(&c.Object)
-	midRecorderInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "<init>", "()V")
+	clsmediaRecorder = env.NewGlobalRef(&c.Object)
+
+	midmediaRecorderGetActiveMicrophones, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "getActiveMicrophones", "()Ljava/util/List<android$media$MicrophoneInfo>;")
 	if err != nil {
-		return fmt.Errorf("get constructor android.media.MediaRecorder.<init>: %w", err)
+		return fmt.Errorf("get method android.media.MediaRecorder.getActiveMicrophones: %w", err)
 	}
 
-	midRecordersetAudioSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "setAudioSource", "(I)V")
+	midmediaRecorderGetActiveRecordingConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "getActiveRecordingConfiguration", "()Landroid/media/AudioRecordingConfiguration;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.setAudioSource: %w", err)
+		return fmt.Errorf("get method android.media.MediaRecorder.getActiveRecordingConfiguration: %w", err)
 	}
 
-	midRecordersetVideoSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "setVideoSource", "(I)V")
+	midmediaRecorderGetLogSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "getLogSessionId", "()Landroid/media/metrics/LogSessionId;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.setVideoSource: %w", err)
+		return fmt.Errorf("get method android.media.MediaRecorder.getLogSessionId: %w", err)
 	}
 
-	midRecordersetOutputFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "setOutputFormat", "(I)V")
+	midmediaRecorderGetMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "getMetrics", "()Landroid/os/PersistableBundle;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.setOutputFormat: %w", err)
+		return fmt.Errorf("get method android.media.MediaRecorder.getMetrics: %w", err)
 	}
 
-	midRecordersetAudioEncoder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "setAudioEncoder", "(I)V")
+	midmediaRecorderGetPreferredDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "getPreferredDevice", "()Landroid/media/AudioDeviceInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.setAudioEncoder: %w", err)
+		return fmt.Errorf("get method android.media.MediaRecorder.getPreferredDevice: %w", err)
 	}
 
-	midRecordersetVideoEncoder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "setVideoEncoder", "(I)V")
+	midmediaRecorderGetRoutedDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "getRoutedDevice", "()Landroid/media/AudioDeviceInfo;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.setVideoEncoder: %w", err)
+		return fmt.Errorf("get method android.media.MediaRecorder.getRoutedDevice: %w", err)
 	}
 
-	midRecordersetOutputFile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "setOutputFile", "(Ljava/lang/String;)V")
+	midmediaRecorderGetRoutedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "getRoutedDevices", "()Ljava/util/List<android$media$AudioDeviceInfo>;")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.setOutputFile: %w", err)
+		return fmt.Errorf("get method android.media.MediaRecorder.getRoutedDevices: %w", err)
 	}
 
-	midRecordersetVideoSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "setVideoSize", "(II)V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.setVideoSize: %w", err)
-	}
-
-	midRecordersetVideoFrameRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "setVideoFrameRate", "(I)V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.setVideoFrameRate: %w", err)
-	}
-
-	midRecordersetAudioSamplingRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "setAudioSamplingRate", "(I)V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.setAudioSamplingRate: %w", err)
-	}
-
-	midRecordersetAudioChannels, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "setAudioChannels", "(I)V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.setAudioChannels: %w", err)
-	}
-
-	midRecordersetMaxDurationMs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "setMaxDuration", "(I)V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.setMaxDuration: %w", err)
-	}
-
-	midRecordersetMaxFileSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "setMaxFileSize", "(J)V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.setMaxFileSize: %w", err)
-	}
-
-	midRecorderprepare, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "prepare", "()V")
+	midmediaRecorderPrepare, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "prepare", "()V")
 	if err != nil {
 		return fmt.Errorf("get method android.media.MediaRecorder.prepare: %w", err)
 	}
 
-	midRecorderstart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "start", "()V")
+	midmediaRecorderRegisterAudioRecordingCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "registerAudioRecordingCallback", "(Ljava/util/concurrent/Executor;Landroid/media/AudioManager$AudioRecordingCallback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.start: %w", err)
+		return fmt.Errorf("get method android.media.MediaRecorder.registerAudioRecordingCallback: %w", err)
 	}
 
-	midRecorderpause, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "pause", "()V")
+	midmediaRecorderRemoveOnRoutingChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "removeOnRoutingChangedListener", "(Landroid/media/AudioRouting$OnRoutingChangedListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.pause: %w", err)
+		return fmt.Errorf("get method android.media.MediaRecorder.removeOnRoutingChangedListener: %w", err)
 	}
 
-	midRecorderresume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "resume", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.resume: %w", err)
-	}
-
-	midRecorderstop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "stop", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.stop: %w", err)
-	}
-
-	midRecorderreset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "reset", "()V")
+	midmediaRecorderReset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "reset", "()V")
 	if err != nil {
 		return fmt.Errorf("get method android.media.MediaRecorder.reset: %w", err)
 	}
 
-	midRecorderrelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "release", "()V")
+	midmediaRecorderSetAudioChannels, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setAudioChannels", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.release: %w", err)
+		return fmt.Errorf("get method android.media.MediaRecorder.setAudioChannels: %w", err)
 	}
 
-	midRecordergetMaxAmplitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "getMaxAmplitude", "()I")
+	midmediaRecorderSetAudioEncodingBitRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setAudioEncodingBitRate", "(I)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaRecorder.getMaxAmplitude: %w", err)
+		return fmt.Errorf("get method android.media.MediaRecorder.setAudioEncodingBitRate: %w", err)
 	}
 
-	midRecordersetOnErrorListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "setOnErrorListener", "(Landroid/media/MediaRecorder$OnErrorListener;)V")
+	midmediaRecorderSetAudioProfile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setAudioProfile", "(Landroid/media/EncoderProfiles$AudioProfile;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setAudioProfile: %w", err)
+	}
+
+	midmediaRecorderSetAudioSamplingRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setAudioSamplingRate", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setAudioSamplingRate: %w", err)
+	}
+
+	midmediaRecorderSetCaptureRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setCaptureRate", "(D)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setCaptureRate: %w", err)
+	}
+
+	midmediaRecorderSetInputSurface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setInputSurface", "(Landroid/view/Surface;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setInputSurface: %w", err)
+	}
+
+	midmediaRecorderSetLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setLocation", "(FF)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setLocation: %w", err)
+	}
+
+	midmediaRecorderSetLogSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setLogSessionId", "(Landroid/media/metrics/LogSessionId;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setLogSessionId: %w", err)
+	}
+
+	midmediaRecorderSetNextOutputFile1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setNextOutputFile", "(Ljava/io/File;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setNextOutputFile: %w", err)
+	}
+
+	midmediaRecorderSetNextOutputFile1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setNextOutputFile", "(Ljava/io/FileDescriptor;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setNextOutputFile: %w", err)
+	}
+
+	midmediaRecorderSetOnErrorListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setOnErrorListener", "(Landroid/media/MediaRecorder$OnErrorListener;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.media.MediaRecorder.setOnErrorListener: %w", err)
 	}
 
-	midRecordersetOnInfoListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecorder)), "setOnInfoListener", "(Landroid/media/MediaRecorder$OnInfoListener;)V")
+	midmediaRecorderSetOnInfoListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setOnInfoListener", "(Landroid/media/MediaRecorder$OnInfoListener;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.media.MediaRecorder.setOnInfoListener: %w", err)
 	}
 
-	c, err = env.FindClass("android/media/MediaRecorder$OnErrorListener")
+	midmediaRecorderSetOrientationHint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setOrientationHint", "(I)V")
 	if err != nil {
-		return fmt.Errorf("find class android.media.MediaRecorder$OnErrorListener: %w", err)
+		return fmt.Errorf("get method android.media.MediaRecorder.setOrientationHint: %w", err)
 	}
-	clsonErrorListener = env.NewGlobalRef(&c.Object)
 
-	c, err = env.FindClass("android/media/MediaRecorder$OnInfoListener")
+	midmediaRecorderSetOutputFile1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setOutputFile", "(Ljava/io/File;)V")
 	if err != nil {
-		return fmt.Errorf("find class android.media.MediaRecorder$OnInfoListener: %w", err)
+		return fmt.Errorf("get method android.media.MediaRecorder.setOutputFile: %w", err)
 	}
-	clsonInfoListener = env.NewGlobalRef(&c.Object)
+
+	midmediaRecorderSetOutputFile1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setOutputFile", "(Ljava/io/FileDescriptor;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setOutputFile: %w", err)
+	}
+
+	midmediaRecorderSetOutputFile1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setOutputFile", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setOutputFile: %w", err)
+	}
+
+	midmediaRecorderSetPreferredDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setPreferredDevice", "(Landroid/media/AudioDeviceInfo;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setPreferredDevice: %w", err)
+	}
+
+	midmediaRecorderSetPreferredMicrophoneDirection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setPreferredMicrophoneDirection", "(I)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setPreferredMicrophoneDirection: %w", err)
+	}
+
+	midmediaRecorderSetPreferredMicrophoneFieldDimension, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setPreferredMicrophoneFieldDimension", "(F)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setPreferredMicrophoneFieldDimension: %w", err)
+	}
+
+	midmediaRecorderSetPreviewDisplay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setPreviewDisplay", "(Landroid/view/Surface;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setPreviewDisplay: %w", err)
+	}
+
+	midmediaRecorderSetProfile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setProfile", "(Landroid/media/CamcorderProfile;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setProfile: %w", err)
+	}
+
+	midmediaRecorderSetVideoEncodingBitRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setVideoEncodingBitRate", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setVideoEncodingBitRate: %w", err)
+	}
+
+	midmediaRecorderSetVideoEncodingProfileLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setVideoEncodingProfileLevel", "(II)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setVideoEncodingProfileLevel: %w", err)
+	}
+
+	midmediaRecorderSetVideoProfile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "setVideoProfile", "(Landroid/media/EncoderProfiles$VideoProfile;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.setVideoProfile: %w", err)
+	}
+
+	midmediaRecorderUnregisterAudioRecordingCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaRecorder)), "unregisterAudioRecordingCallback", "(Landroid/media/AudioManager$AudioRecordingCallback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaRecorder.unregisterAudioRecordingCallback: %w", err)
+	}
 
 	return nil
 }

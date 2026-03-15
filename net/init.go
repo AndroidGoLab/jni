@@ -20,18 +20,24 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                                  *jni.GlobalRef
-	midManagergetActiveNetworkRaw               jni.MethodID
-	midManagergetNetworkCapabilitiesRaw         jni.MethodID
-	midManagerregisterDefaultNetworkCallbackRaw jni.MethodID
-	midManagerunregisterNetworkCallbackRaw      jni.MethodID
-
-	clsnetworkCapabilities             *jni.GlobalRef
-	midnetworkCapabilitieshasTransport jni.MethodID
-	midnetworkCapabilitiesgetLinkDown  jni.MethodID
-	midnetworkCapabilitiesgetLinkUp    jni.MethodID
-
-	clsnetworkCallback *jni.GlobalRef
+	clsnetworkCapabilities                               *jni.GlobalRef
+	midnetworkCapabilitiesDescribeContents               jni.MethodID
+	midnetworkCapabilitiesEquals                         jni.MethodID
+	midnetworkCapabilitiesGetCapabilities                jni.MethodID
+	midnetworkCapabilitiesGetEnterpriseIds               jni.MethodID
+	midnetworkCapabilitiesGetLinkDownstreamBandwidthKbps jni.MethodID
+	midnetworkCapabilitiesGetLinkUpstreamBandwidthKbps   jni.MethodID
+	midnetworkCapabilitiesGetNetworkSpecifier            jni.MethodID
+	midnetworkCapabilitiesGetOwnerUid                    jni.MethodID
+	midnetworkCapabilitiesGetSignalStrength              jni.MethodID
+	midnetworkCapabilitiesGetSubscriptionIds             jni.MethodID
+	midnetworkCapabilitiesGetTransportInfo               jni.MethodID
+	midnetworkCapabilitiesHasCapability                  jni.MethodID
+	midnetworkCapabilitiesHasEnterpriseId                jni.MethodID
+	midnetworkCapabilitiesHasTransport                   jni.MethodID
+	midnetworkCapabilitiesHashCode                       jni.MethodID
+	midnetworkCapabilitiesToString                       jni.MethodID
+	midnetworkCapabilitiesWriteToParcel                  jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -52,58 +58,96 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/net/ConnectivityManager")
-	if err != nil {
-		return fmt.Errorf("find class android.net.ConnectivityManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagergetActiveNetworkRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getActiveNetwork", "()Landroid/net/Network;")
-	if err != nil {
-		return fmt.Errorf("get method android.net.ConnectivityManager.getActiveNetwork: %w", err)
-	}
-
-	midManagergetNetworkCapabilitiesRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getNetworkCapabilities", "(Landroid/net/Network;)Landroid/net/NetworkCapabilities;")
-	if err != nil {
-		return fmt.Errorf("get method android.net.ConnectivityManager.getNetworkCapabilities: %w", err)
-	}
-
-	midManagerregisterDefaultNetworkCallbackRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerDefaultNetworkCallback", "(Landroid/net/ConnectivityManager$NetworkCallback;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.net.ConnectivityManager.registerDefaultNetworkCallback: %w", err)
-	}
-
-	midManagerunregisterNetworkCallbackRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterNetworkCallback", "(Landroid/net/ConnectivityManager$NetworkCallback;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.net.ConnectivityManager.unregisterNetworkCallback: %w", err)
-	}
-
 	c, err = env.FindClass("android/net/NetworkCapabilities")
 	if err != nil {
 		return fmt.Errorf("find class android.net.NetworkCapabilities: %w", err)
 	}
 	clsnetworkCapabilities = env.NewGlobalRef(&c.Object)
 
-	midnetworkCapabilitieshasTransport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "hasTransport", "(I)Z")
+	midnetworkCapabilitiesDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "describeContents", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.net.NetworkCapabilities.hasTransport: %w", err)
+		return fmt.Errorf("get method android.net.NetworkCapabilities.describeContents: %w", err)
 	}
 
-	midnetworkCapabilitiesgetLinkDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getLinkDownstreamBandwidthKbps", "()I")
+	midnetworkCapabilitiesEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.NetworkCapabilities.equals: %w", err)
+	}
+
+	midnetworkCapabilitiesGetCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getCapabilities", "()[I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.NetworkCapabilities.getCapabilities: %w", err)
+	}
+
+	midnetworkCapabilitiesGetEnterpriseIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getEnterpriseIds", "()[I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.NetworkCapabilities.getEnterpriseIds: %w", err)
+	}
+
+	midnetworkCapabilitiesGetLinkDownstreamBandwidthKbps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getLinkDownstreamBandwidthKbps", "()I")
 	if err != nil {
 		return fmt.Errorf("get method android.net.NetworkCapabilities.getLinkDownstreamBandwidthKbps: %w", err)
 	}
 
-	midnetworkCapabilitiesgetLinkUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getLinkUpstreamBandwidthKbps", "()I")
+	midnetworkCapabilitiesGetLinkUpstreamBandwidthKbps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getLinkUpstreamBandwidthKbps", "()I")
 	if err != nil {
 		return fmt.Errorf("get method android.net.NetworkCapabilities.getLinkUpstreamBandwidthKbps: %w", err)
 	}
 
-	c, err = env.FindClass("android/net/ConnectivityManager$NetworkCallback")
+	midnetworkCapabilitiesGetNetworkSpecifier, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getNetworkSpecifier", "()Landroid/net/NetworkSpecifier;")
 	if err != nil {
-		return fmt.Errorf("find class android.net.ConnectivityManager$NetworkCallback: %w", err)
+		return fmt.Errorf("get method android.net.NetworkCapabilities.getNetworkSpecifier: %w", err)
 	}
-	clsnetworkCallback = env.NewGlobalRef(&c.Object)
+
+	midnetworkCapabilitiesGetOwnerUid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getOwnerUid", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.NetworkCapabilities.getOwnerUid: %w", err)
+	}
+
+	midnetworkCapabilitiesGetSignalStrength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getSignalStrength", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.NetworkCapabilities.getSignalStrength: %w", err)
+	}
+
+	midnetworkCapabilitiesGetSubscriptionIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getSubscriptionIds", "()Ljava/util/Set<java$lang$Integer>;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.NetworkCapabilities.getSubscriptionIds: %w", err)
+	}
+
+	midnetworkCapabilitiesGetTransportInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "getTransportInfo", "()Landroid/net/TransportInfo;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.NetworkCapabilities.getTransportInfo: %w", err)
+	}
+
+	midnetworkCapabilitiesHasCapability, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "hasCapability", "(I)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.NetworkCapabilities.hasCapability: %w", err)
+	}
+
+	midnetworkCapabilitiesHasEnterpriseId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "hasEnterpriseId", "(I)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.NetworkCapabilities.hasEnterpriseId: %w", err)
+	}
+
+	midnetworkCapabilitiesHasTransport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "hasTransport", "(I)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.NetworkCapabilities.hasTransport: %w", err)
+	}
+
+	midnetworkCapabilitiesHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "hashCode", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.NetworkCapabilities.hashCode: %w", err)
+	}
+
+	midnetworkCapabilitiesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.NetworkCapabilities.toString: %w", err)
+	}
+
+	midnetworkCapabilitiesWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnetworkCapabilities)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.net.NetworkCapabilities.writeToParcel: %w", err)
+	}
 
 	return nil
 }

@@ -20,28 +20,11 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                   *jni.GlobalRef
-	midManagercanAuthenticateRaw jni.MethodID
-
-	clsbiometricPromptBuilder                         *jni.GlobalRef
-	midbiometricPromptBuilderInit                     jni.MethodID
-	midbiometricPromptBuildersetTitle                 jni.MethodID
-	midbiometricPromptBuildersetSubtitle              jni.MethodID
-	midbiometricPromptBuildersetDescription           jni.MethodID
-	midbiometricPromptBuildersetNegativeButton        jni.MethodID
-	midbiometricPromptBuildersetAllowedAuthenticators jni.MethodID
-	midbiometricPromptBuilderbuild                    jni.MethodID
-
-	clsbiometricPrompt             *jni.GlobalRef
-	midbiometricPromptauthenticate jni.MethodID
-
-	clscancellationSignal       *jni.GlobalRef
-	midcancellationSignalInit   jni.MethodID
-	midcancellationSignalcancel jni.MethodID
-
-	clsauthenticationCallback *jni.GlobalRef
-
-	clsonClickListener *jni.GlobalRef
+	clsbiometricManager                          *jni.GlobalRef
+	midbiometricManagerCanAuthenticate0          jni.MethodID
+	midbiometricManagerCanAuthenticate1_1        jni.MethodID
+	midbiometricManagerGetLastAuthenticationTime jni.MethodID
+	midbiometricManagerGetStrings                jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -66,90 +49,27 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.hardware.biometrics.BiometricManager: %w", err)
 	}
-	clsManager = env.NewGlobalRef(&c.Object)
+	clsbiometricManager = env.NewGlobalRef(&c.Object)
 
-	midManagercanAuthenticateRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "canAuthenticate", "(I)I")
+	midbiometricManagerCanAuthenticate0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricManager)), "canAuthenticate", "()I")
 	if err != nil {
 		return fmt.Errorf("get method android.hardware.biometrics.BiometricManager.canAuthenticate: %w", err)
 	}
 
-	c, err = env.FindClass("android/hardware/biometrics/BiometricPrompt$Builder")
+	midbiometricManagerCanAuthenticate1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricManager)), "canAuthenticate", "(I)I")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.BiometricPrompt$Builder: %w", err)
-	}
-	clsbiometricPromptBuilder = env.NewGlobalRef(&c.Object)
-	midbiometricPromptBuilderInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.hardware.biometrics.BiometricPrompt$Builder.<init>: %w", err)
+		return fmt.Errorf("get method android.hardware.biometrics.BiometricManager.canAuthenticate: %w", err)
 	}
 
-	midbiometricPromptBuildersetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "setTitle", "(Ljava/lang/CharSequence;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+	midbiometricManagerGetLastAuthenticationTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricManager)), "getLastAuthenticationTime", "(I)J")
 	if err != nil {
-		return fmt.Errorf("get method android.hardware.biometrics.BiometricPrompt$Builder.setTitle: %w", err)
+		return fmt.Errorf("get method android.hardware.biometrics.BiometricManager.getLastAuthenticationTime: %w", err)
 	}
 
-	midbiometricPromptBuildersetSubtitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "setSubtitle", "(Ljava/lang/CharSequence;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+	midbiometricManagerGetStrings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricManager)), "getStrings", "(I)Landroid/hardware/biometrics/BiometricManager$Strings;")
 	if err != nil {
-		return fmt.Errorf("get method android.hardware.biometrics.BiometricPrompt$Builder.setSubtitle: %w", err)
+		return fmt.Errorf("get method android.hardware.biometrics.BiometricManager.getStrings: %w", err)
 	}
-
-	midbiometricPromptBuildersetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "setDescription", "(Ljava/lang/CharSequence;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.biometrics.BiometricPrompt$Builder.setDescription: %w", err)
-	}
-
-	midbiometricPromptBuildersetNegativeButton, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "setNegativeButton", "(Ljava/lang/CharSequence;Ljava/util/concurrent/Executor;Landroid/content/DialogInterface$OnClickListener;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.biometrics.BiometricPrompt$Builder.setNegativeButton: %w", err)
-	}
-
-	midbiometricPromptBuildersetAllowedAuthenticators, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "setAllowedAuthenticators", "(I)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.biometrics.BiometricPrompt$Builder.setAllowedAuthenticators: %w", err)
-	}
-
-	midbiometricPromptBuilderbuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "build", "()Landroid/hardware/biometrics/BiometricPrompt;")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.biometrics.BiometricPrompt$Builder.build: %w", err)
-	}
-
-	c, err = env.FindClass("android/hardware/biometrics/BiometricPrompt")
-	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.BiometricPrompt: %w", err)
-	}
-	clsbiometricPrompt = env.NewGlobalRef(&c.Object)
-
-	midbiometricPromptauthenticate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPrompt)), "authenticate", "(Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Landroid/hardware/biometrics/BiometricPrompt$AuthenticationCallback;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.biometrics.BiometricPrompt.authenticate: %w", err)
-	}
-
-	c, err = env.FindClass("android/os/CancellationSignal")
-	if err != nil {
-		return fmt.Errorf("find class android.os.CancellationSignal: %w", err)
-	}
-	clscancellationSignal = env.NewGlobalRef(&c.Object)
-	midcancellationSignalInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscancellationSignal)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.os.CancellationSignal.<init>: %w", err)
-	}
-
-	midcancellationSignalcancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscancellationSignal)), "cancel", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.os.CancellationSignal.cancel: %w", err)
-	}
-
-	c, err = env.FindClass("android/hardware/biometrics/BiometricPrompt$AuthenticationCallback")
-	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.BiometricPrompt$AuthenticationCallback: %w", err)
-	}
-	clsauthenticationCallback = env.NewGlobalRef(&c.Object)
-
-	c, err = env.FindClass("android/content/DialogInterface$OnClickListener")
-	if err != nil {
-		return fmt.Errorf("find class android.content.DialogInterface$OnClickListener: %w", err)
-	}
-	clsonClickListener = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

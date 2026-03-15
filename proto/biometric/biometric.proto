@@ -6,218 +6,40 @@ package biometric;
 
 option go_package = "github.com/xaionaro-go/jni/proto/biometric";
 
-message Authenticate4Request {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  int64 arg2 = 3;
-  int64 arg3 = 4;
+message CanAuthenticate0Request {
 }
 
-message Authenticate4Response {
-}
-
-message Authenticate3_1Request {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  int64 arg2 = 3;
-}
-
-message Authenticate3_1Response {
-}
-
-message GetAllowedAuthenticatorsRequest {
-}
-
-message GetAllowedAuthenticatorsResponse {
+message CanAuthenticate0Response {
   int32 result = 1;
 }
 
-message GetContentViewRequest {
+message CanAuthenticate1_1Request {
+  int32 arg0 = 1;
 }
 
-message GetContentViewResponse {
-  int64 result = 1;
-}
-
-message GetDescriptionRequest {
-}
-
-message GetDescriptionResponse {
-  string result = 1;
-}
-
-message GetLogoBitmapRequest {
-}
-
-message GetLogoBitmapResponse {
-  int64 result = 1;
-}
-
-message GetLogoDescriptionRequest {
-}
-
-message GetLogoDescriptionResponse {
-  string result = 1;
-}
-
-message GetLogoResRequest {
-}
-
-message GetLogoResResponse {
+message CanAuthenticate1_1Response {
   int32 result = 1;
 }
 
-message GetNegativeButtonTextRequest {
-}
-
-message GetNegativeButtonTextResponse {
-  string result = 1;
-}
-
-message GetSubtitleRequest {
-}
-
-message GetSubtitleResponse {
-  string result = 1;
-}
-
-message GetTitleRequest {
-}
-
-message GetTitleResponse {
-  string result = 1;
-}
-
-message IsConfirmationRequiredRequest {
-}
-
-message IsConfirmationRequiredResponse {
-  bool result = 1;
-}
-
-message BuildRequest {
-}
-
-message BuildResponse {
-  int64 result = 1;
-}
-
-message SetAllowedAuthenticatorsRequest {
+message GetLastAuthenticationTimeRequest {
   int32 arg0 = 1;
 }
 
-message SetAllowedAuthenticatorsResponse {
+message GetLastAuthenticationTimeResponse {
   int64 result = 1;
 }
 
-message SetConfirmationRequiredRequest {
-  bool arg0 = 1;
-}
-
-message SetConfirmationRequiredResponse {
-  int64 result = 1;
-}
-
-message SetContentViewRequest {
-  int64 arg0 = 1;
-}
-
-message SetContentViewResponse {
-  int64 result = 1;
-}
-
-message SetDescriptionRequest {
-  string arg0 = 1;
-}
-
-message SetDescriptionResponse {
-  int64 result = 1;
-}
-
-message SetDeviceCredentialAllowedRequest {
-  bool arg0 = 1;
-}
-
-message SetDeviceCredentialAllowedResponse {
-  int64 result = 1;
-}
-
-message SetLogoBitmapRequest {
-  int64 arg0 = 1;
-}
-
-message SetLogoBitmapResponse {
-  int64 result = 1;
-}
-
-message SetLogoDescriptionRequest {
-  string arg0 = 1;
-}
-
-message SetLogoDescriptionResponse {
-  int64 result = 1;
-}
-
-message SetLogoResRequest {
+message GetStringsRequest {
   int32 arg0 = 1;
 }
 
-message SetLogoResResponse {
+message GetStringsResponse {
   int64 result = 1;
 }
 
-message SetNegativeButtonRequest {
-  string arg0 = 1;
-  int64 arg1 = 2;
-  int64 arg2 = 3;
-}
-
-message SetNegativeButtonResponse {
-  int64 result = 1;
-}
-
-message SetSubtitleRequest {
-  string arg0 = 1;
-}
-
-message SetSubtitleResponse {
-  int64 result = 1;
-}
-
-message SetTitleRequest {
-  string arg0 = 1;
-}
-
-message SetTitleResponse {
-  int64 result = 1;
-}
-
-service BiometricPromptService {
-  rpc Authenticate4 (Authenticate4Request) returns (Authenticate4Response);
-  rpc Authenticate3_1 (Authenticate3_1Request) returns (Authenticate3_1Response);
-  rpc GetAllowedAuthenticators (GetAllowedAuthenticatorsRequest) returns (GetAllowedAuthenticatorsResponse);
-  rpc GetContentView (GetContentViewRequest) returns (GetContentViewResponse);
-  rpc GetDescription (GetDescriptionRequest) returns (GetDescriptionResponse);
-  rpc GetLogoBitmap (GetLogoBitmapRequest) returns (GetLogoBitmapResponse);
-  rpc GetLogoDescription (GetLogoDescriptionRequest) returns (GetLogoDescriptionResponse);
-  rpc GetLogoRes (GetLogoResRequest) returns (GetLogoResResponse);
-  rpc GetNegativeButtonText (GetNegativeButtonTextRequest) returns (GetNegativeButtonTextResponse);
-  rpc GetSubtitle (GetSubtitleRequest) returns (GetSubtitleResponse);
-  rpc GetTitle (GetTitleRequest) returns (GetTitleResponse);
-  rpc IsConfirmationRequired (IsConfirmationRequiredRequest) returns (IsConfirmationRequiredResponse);
-}
-
-service BiometricPromptBuilderService {
-  rpc Build (BuildRequest) returns (BuildResponse);
-  rpc SetAllowedAuthenticators (SetAllowedAuthenticatorsRequest) returns (SetAllowedAuthenticatorsResponse);
-  rpc SetConfirmationRequired (SetConfirmationRequiredRequest) returns (SetConfirmationRequiredResponse);
-  rpc SetContentView (SetContentViewRequest) returns (SetContentViewResponse);
-  rpc SetDescription (SetDescriptionRequest) returns (SetDescriptionResponse);
-  rpc SetDeviceCredentialAllowed (SetDeviceCredentialAllowedRequest) returns (SetDeviceCredentialAllowedResponse);
-  rpc SetLogoBitmap (SetLogoBitmapRequest) returns (SetLogoBitmapResponse);
-  rpc SetLogoDescription (SetLogoDescriptionRequest) returns (SetLogoDescriptionResponse);
-  rpc SetLogoRes (SetLogoResRequest) returns (SetLogoResResponse);
-  rpc SetNegativeButton (SetNegativeButtonRequest) returns (SetNegativeButtonResponse);
-  rpc SetSubtitle (SetSubtitleRequest) returns (SetSubtitleResponse);
-  rpc SetTitle (SetTitleRequest) returns (SetTitleResponse);
+service BiometricManagerService {
+  rpc CanAuthenticate0 (CanAuthenticate0Request) returns (CanAuthenticate0Response);
+  rpc CanAuthenticate1_1 (CanAuthenticate1_1Request) returns (CanAuthenticate1_1Response);
+  rpc GetLastAuthenticationTime (GetLastAuthenticationTimeRequest) returns (GetLastAuthenticationTimeResponse);
+  rpc GetStrings (GetStringsRequest) returns (GetStringsResponse);
 }

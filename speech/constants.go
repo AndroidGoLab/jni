@@ -3,15 +3,38 @@
 package speech
 
 const (
-	ErrNetworkTimeout          = 1
-	ErrNetwork                 = 2
-	ErrAudio                   = 3
-	ErrServer                  = 4
-	ErrClient                  = 5
-	ErrSpeechTimeout           = 6
-	ErrNoMatch                 = 7
-	ErrBusy                    = 8
-	ErrInsufficientPermissions = 9
-	QueueFlush                 = 0
-	QueueAdd                   = 1
+	ConfidenceScores                 = ""
+	DetectedLanguage                 = ""
+	LanguageDetectionConfidenceLevel = ""
+	LanguageSwitchResult             = ""
+	RecognitionParts                 = ""
+	ResultsAlternatives              = ""
+	ResultsRecognition               = ""
+	TopLocaleAlternatives            = ""
+)
+
+const (
+	ErrorAudio                                      = 0
+	ErrorCannotCheckSupport                         = 0
+	ErrorCannotListenToDownloadEvents               = 0
+	ErrorClient                                     = 0
+	ErrorInsufficientPermissions                    = 0
+	ErrorLanguageNotSupported                       = 0
+	ErrorLanguageUnavailable                        = 0
+	ErrorNetwork                                    = 0
+	ErrorNetworkTimeout                             = 0
+	ErrorNoMatch                                    = 0
+	ErrorRecognizerBusy                             = 0
+	ErrorServer                                     = 0
+	ErrorServerDisconnected                         = 0
+	ErrorSpeechTimeout                              = 0
+	ErrorTooManyRequests                            = 0
+	LanguageDetectionConfidenceLevelConfident       = 0
+	LanguageDetectionConfidenceLevelHighlyConfident = 0
+	LanguageDetectionConfidenceLevelNotConfident    = 0
+	LanguageDetectionConfidenceLevelUnknown         = 0
+	LanguageSwitchResultFailed                      = 0
+	LanguageSwitchResultNotAttempted                = 0
+	LanguageSwitchResultSkippedNoModel              = 0
+	LanguageSwitchResultSucceeded                   = 0
 )

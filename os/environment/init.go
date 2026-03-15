@@ -20,10 +20,24 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsenvironment *jni.GlobalRef
-
-	clsjavaFile                *jni.GlobalRef
-	midjavaFilegetAbsolutePath jni.MethodID
+	clsenvironment                                  *jni.GlobalRef
+	midenvironmentGetDataDirectory                  jni.MethodID
+	midenvironmentGetDownloadCacheDirectory         jni.MethodID
+	midenvironmentGetExternalStorageDirectory       jni.MethodID
+	midenvironmentGetExternalStoragePublicDirectory jni.MethodID
+	midenvironmentGetExternalStorageState0          jni.MethodID
+	midenvironmentGetExternalStorageState1_1        jni.MethodID
+	midenvironmentGetRootDirectory                  jni.MethodID
+	midenvironmentGetStorageDirectory               jni.MethodID
+	midenvironmentGetStorageState                   jni.MethodID
+	midenvironmentIsExternalStorageEmulated0        jni.MethodID
+	midenvironmentIsExternalStorageEmulated1_1      jni.MethodID
+	midenvironmentIsExternalStorageLegacy0          jni.MethodID
+	midenvironmentIsExternalStorageLegacy1_1        jni.MethodID
+	midenvironmentIsExternalStorageManager0         jni.MethodID
+	midenvironmentIsExternalStorageManager1_1       jni.MethodID
+	midenvironmentIsExternalStorageRemovable0       jni.MethodID
+	midenvironmentIsExternalStorageRemovable1_1     jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -50,15 +64,89 @@ func doInit(env *jni.Env) error {
 	}
 	clsenvironment = env.NewGlobalRef(&c.Object)
 
-	c, err = env.FindClass("java/io/File")
+	midenvironmentGetDataDirectory, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "getDataDirectory", "()Ljava/io/File;")
 	if err != nil {
-		return fmt.Errorf("find class java.io.File: %w", err)
+		return fmt.Errorf("get method android.os.Environment.getDataDirectory: %w", err)
 	}
-	clsjavaFile = env.NewGlobalRef(&c.Object)
 
-	midjavaFilegetAbsolutePath, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjavaFile)), "getAbsolutePath", "()Ljava/lang/String;")
+	midenvironmentGetDownloadCacheDirectory, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "getDownloadCacheDirectory", "()Ljava/io/File;")
 	if err != nil {
-		return fmt.Errorf("get method java.io.File.getAbsolutePath: %w", err)
+		return fmt.Errorf("get method android.os.Environment.getDownloadCacheDirectory: %w", err)
+	}
+
+	midenvironmentGetExternalStorageDirectory, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "getExternalStorageDirectory", "()Ljava/io/File;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Environment.getExternalStorageDirectory: %w", err)
+	}
+
+	midenvironmentGetExternalStoragePublicDirectory, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "getExternalStoragePublicDirectory", "(Ljava/lang/String;)Ljava/io/File;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Environment.getExternalStoragePublicDirectory: %w", err)
+	}
+
+	midenvironmentGetExternalStorageState0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "getExternalStorageState", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Environment.getExternalStorageState: %w", err)
+	}
+
+	midenvironmentGetExternalStorageState1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "getExternalStorageState", "(Ljava/io/File;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Environment.getExternalStorageState: %w", err)
+	}
+
+	midenvironmentGetRootDirectory, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "getRootDirectory", "()Ljava/io/File;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Environment.getRootDirectory: %w", err)
+	}
+
+	midenvironmentGetStorageDirectory, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "getStorageDirectory", "()Ljava/io/File;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Environment.getStorageDirectory: %w", err)
+	}
+
+	midenvironmentGetStorageState, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "getStorageState", "(Ljava/io/File;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Environment.getStorageState: %w", err)
+	}
+
+	midenvironmentIsExternalStorageEmulated0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "isExternalStorageEmulated", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Environment.isExternalStorageEmulated: %w", err)
+	}
+
+	midenvironmentIsExternalStorageEmulated1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "isExternalStorageEmulated", "(Ljava/io/File;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Environment.isExternalStorageEmulated: %w", err)
+	}
+
+	midenvironmentIsExternalStorageLegacy0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "isExternalStorageLegacy", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Environment.isExternalStorageLegacy: %w", err)
+	}
+
+	midenvironmentIsExternalStorageLegacy1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "isExternalStorageLegacy", "(Ljava/io/File;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Environment.isExternalStorageLegacy: %w", err)
+	}
+
+	midenvironmentIsExternalStorageManager0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "isExternalStorageManager", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Environment.isExternalStorageManager: %w", err)
+	}
+
+	midenvironmentIsExternalStorageManager1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "isExternalStorageManager", "(Ljava/io/File;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Environment.isExternalStorageManager: %w", err)
+	}
+
+	midenvironmentIsExternalStorageRemovable0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "isExternalStorageRemovable", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Environment.isExternalStorageRemovable: %w", err)
+	}
+
+	midenvironmentIsExternalStorageRemovable1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsenvironment)), "isExternalStorageRemovable", "(Ljava/io/File;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Environment.isExternalStorageRemovable: %w", err)
 	}
 
 	return nil

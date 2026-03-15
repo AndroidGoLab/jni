@@ -20,24 +20,9 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsPreferences          *jni.GlobalRef
-	midPreferencesGetString jni.MethodID
-	midPreferencesGetInt    jni.MethodID
-	midPreferencesGetBool   jni.MethodID
-	midPreferencesGetFloat  jni.MethodID
-	midPreferencesGetLong   jni.MethodID
-	midPreferencesContains  jni.MethodID
-	midPreferencesedit      jni.MethodID
+	clssharedPreferences *jni.GlobalRef
 
-	clseditor           *jni.GlobalRef
-	mideditorputString  jni.MethodID
-	mideditorputInt     jni.MethodID
-	mideditorputBoolean jni.MethodID
-	mideditorputFloat   jni.MethodID
-	mideditorputLong    jni.MethodID
-	mideditorremove     jni.MethodID
-	mideditorclear      jni.MethodID
-	mideditorapply      jni.MethodID
+	clssharedPreferencesEditor *jni.GlobalRef
 )
 
 func ensureInit(env *jni.Env) error {
@@ -62,88 +47,13 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.content.SharedPreferences: %w", err)
 	}
-	clsPreferences = env.NewGlobalRef(&c.Object)
-
-	midPreferencesGetString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferences)), "getString", "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.SharedPreferences.getString: %w", err)
-	}
-
-	midPreferencesGetInt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferences)), "getInt", "(Ljava/lang/String;I)I")
-	if err != nil {
-		return fmt.Errorf("get method android.content.SharedPreferences.getInt: %w", err)
-	}
-
-	midPreferencesGetBool, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferences)), "getBoolean", "(Ljava/lang/String;Z)Z")
-	if err != nil {
-		return fmt.Errorf("get method android.content.SharedPreferences.getBoolean: %w", err)
-	}
-
-	midPreferencesGetFloat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferences)), "getFloat", "(Ljava/lang/String;F)F")
-	if err != nil {
-		return fmt.Errorf("get method android.content.SharedPreferences.getFloat: %w", err)
-	}
-
-	midPreferencesGetLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferences)), "getLong", "(Ljava/lang/String;J)J")
-	if err != nil {
-		return fmt.Errorf("get method android.content.SharedPreferences.getLong: %w", err)
-	}
-
-	midPreferencesContains, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferences)), "contains", "(Ljava/lang/String;)Z")
-	if err != nil {
-		return fmt.Errorf("get method android.content.SharedPreferences.contains: %w", err)
-	}
-
-	midPreferencesedit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferences)), "edit", "()Landroid/content/SharedPreferences$Editor;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.SharedPreferences.edit: %w", err)
-	}
+	clssharedPreferences = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/content/SharedPreferences$Editor")
 	if err != nil {
 		return fmt.Errorf("find class android.content.SharedPreferences$Editor: %w", err)
 	}
-	clseditor = env.NewGlobalRef(&c.Object)
-
-	mideditorputString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clseditor)), "putString", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.SharedPreferences$Editor.putString: %w", err)
-	}
-
-	mideditorputInt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clseditor)), "putInt", "(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.SharedPreferences$Editor.putInt: %w", err)
-	}
-
-	mideditorputBoolean, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clseditor)), "putBoolean", "(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.SharedPreferences$Editor.putBoolean: %w", err)
-	}
-
-	mideditorputFloat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clseditor)), "putFloat", "(Ljava/lang/String;F)Landroid/content/SharedPreferences$Editor;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.SharedPreferences$Editor.putFloat: %w", err)
-	}
-
-	mideditorputLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clseditor)), "putLong", "(Ljava/lang/String;J)Landroid/content/SharedPreferences$Editor;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.SharedPreferences$Editor.putLong: %w", err)
-	}
-
-	mideditorremove, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clseditor)), "remove", "(Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.SharedPreferences$Editor.remove: %w", err)
-	}
-
-	mideditorclear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clseditor)), "clear", "()Landroid/content/SharedPreferences$Editor;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.SharedPreferences$Editor.clear: %w", err)
-	}
-
-	mideditorapply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clseditor)), "apply", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.content.SharedPreferences$Editor.apply: %w", err)
-	}
+	clssharedPreferencesEditor = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

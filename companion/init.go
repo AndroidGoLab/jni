@@ -20,17 +20,28 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                    *jni.GlobalRef
-	midManagerassociateRaw        jni.MethodID
-	midManagerdisassociateByIdRaw jni.MethodID
-	midManagergetAssociationsRaw  jni.MethodID
-
-	clsassociationRequestBuilder                *jni.GlobalRef
-	midassociationRequestBuildersetSingleDevice jni.MethodID
-	midassociationRequestBuilderaddDeviceFilter jni.MethodID
-	midassociationRequestBuilderbuild           jni.MethodID
-
-	clscompanionCallback *jni.GlobalRef
+	clscompanionDeviceManager                                         *jni.GlobalRef
+	midcompanionDeviceManagerAssociate                                jni.MethodID
+	midcompanionDeviceManagerAttachSystemDataTransport                jni.MethodID
+	midcompanionDeviceManagerBuildAssociationCancellationIntent       jni.MethodID
+	midcompanionDeviceManagerBuildPermissionTransferUserConsentIntent jni.MethodID
+	midcompanionDeviceManagerDetachSystemDataTransport                jni.MethodID
+	midcompanionDeviceManagerDisableSystemDataSyncForTypes            jni.MethodID
+	midcompanionDeviceManagerDisassociate1                            jni.MethodID
+	midcompanionDeviceManagerDisassociate1_1                          jni.MethodID
+	midcompanionDeviceManagerEnableSystemDataSyncForTypes             jni.MethodID
+	midcompanionDeviceManagerGetAssociations                          jni.MethodID
+	midcompanionDeviceManagerGetMyAssociations                        jni.MethodID
+	midcompanionDeviceManagerHasNotificationAccess                    jni.MethodID
+	midcompanionDeviceManagerIsPermissionTransferUserConsented        jni.MethodID
+	midcompanionDeviceManagerRemoveBond                               jni.MethodID
+	midcompanionDeviceManagerRequestNotificationAccess                jni.MethodID
+	midcompanionDeviceManagerSetDeviceId                              jni.MethodID
+	midcompanionDeviceManagerStartObservingDevicePresence1            jni.MethodID
+	midcompanionDeviceManagerStartObservingDevicePresence1_1          jni.MethodID
+	midcompanionDeviceManagerStartSystemDataTransfer                  jni.MethodID
+	midcompanionDeviceManagerStopObservingDevicePresence1             jni.MethodID
+	midcompanionDeviceManagerStopObservingDevicePresence1_1           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -55,49 +66,112 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.companion.CompanionDeviceManager: %w", err)
 	}
-	clsManager = env.NewGlobalRef(&c.Object)
+	clscompanionDeviceManager = env.NewGlobalRef(&c.Object)
 
-	midManagerassociateRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "associate", "(Landroid/companion/AssociationRequest;Landroid/companion/CompanionDeviceManager$Callback;Landroid/os/Handler;)V")
+	midcompanionDeviceManagerAssociate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "associate", "(Landroid/companion/AssociationRequest;Ljava/util/concurrent/Executor;Landroid/companion/CompanionDeviceManager$Callback;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.companion.CompanionDeviceManager.associate: %w", err)
 	}
 
-	midManagerdisassociateByIdRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "disassociate", "(I)V")
+	midcompanionDeviceManagerAttachSystemDataTransport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "attachSystemDataTransport", "(ILjava/io/InputStream;Ljava/io/OutputStream;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.attachSystemDataTransport: %w", err)
+	}
+
+	midcompanionDeviceManagerBuildAssociationCancellationIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "buildAssociationCancellationIntent", "()Landroid/content/IntentSender;")
+	if err != nil {
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.buildAssociationCancellationIntent: %w", err)
+	}
+
+	midcompanionDeviceManagerBuildPermissionTransferUserConsentIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "buildPermissionTransferUserConsentIntent", "(I)Landroid/content/IntentSender;")
+	if err != nil {
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.buildPermissionTransferUserConsentIntent: %w", err)
+	}
+
+	midcompanionDeviceManagerDetachSystemDataTransport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "detachSystemDataTransport", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.detachSystemDataTransport: %w", err)
+	}
+
+	midcompanionDeviceManagerDisableSystemDataSyncForTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "disableSystemDataSyncForTypes", "(II)V")
+	if err != nil {
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.disableSystemDataSyncForTypes: %w", err)
+	}
+
+	midcompanionDeviceManagerDisassociate1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "disassociate", "(I)V")
 	if err != nil {
 		return fmt.Errorf("get method android.companion.CompanionDeviceManager.disassociate: %w", err)
 	}
 
-	midManagergetAssociationsRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAssociations", "()Ljava/util/List;")
+	midcompanionDeviceManagerDisassociate1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "disassociate", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.disassociate: %w", err)
+	}
+
+	midcompanionDeviceManagerEnableSystemDataSyncForTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "enableSystemDataSyncForTypes", "(II)V")
+	if err != nil {
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.enableSystemDataSyncForTypes: %w", err)
+	}
+
+	midcompanionDeviceManagerGetAssociations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "getAssociations", "()Ljava/util/List<java$lang$String>;")
 	if err != nil {
 		return fmt.Errorf("get method android.companion.CompanionDeviceManager.getAssociations: %w", err)
 	}
 
-	c, err = env.FindClass("android/companion/AssociationRequest$Builder")
+	midcompanionDeviceManagerGetMyAssociations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "getMyAssociations", "()Ljava/util/List<android$companion$AssociationInfo>;")
 	if err != nil {
-		return fmt.Errorf("find class android.companion.AssociationRequest$Builder: %w", err)
-	}
-	clsassociationRequestBuilder = env.NewGlobalRef(&c.Object)
-
-	midassociationRequestBuildersetSingleDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsassociationRequestBuilder)), "setSingleDevice", "(Z)Landroid/companion/AssociationRequest$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.companion.AssociationRequest$Builder.setSingleDevice: %w", err)
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.getMyAssociations: %w", err)
 	}
 
-	midassociationRequestBuilderaddDeviceFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsassociationRequestBuilder)), "addDeviceFilter", "(Landroid/companion/DeviceFilter;)Landroid/companion/AssociationRequest$Builder;")
+	midcompanionDeviceManagerHasNotificationAccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "hasNotificationAccess", "(Landroid/content/ComponentName;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.AssociationRequest$Builder.addDeviceFilter: %w", err)
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.hasNotificationAccess: %w", err)
 	}
 
-	midassociationRequestBuilderbuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsassociationRequestBuilder)), "build", "()Landroid/companion/AssociationRequest;")
+	midcompanionDeviceManagerIsPermissionTransferUserConsented, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "isPermissionTransferUserConsented", "(I)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.companion.AssociationRequest$Builder.build: %w", err)
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.isPermissionTransferUserConsented: %w", err)
 	}
 
-	c, err = env.FindClass("android/companion/CompanionDeviceManager$Callback")
+	midcompanionDeviceManagerRemoveBond, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "removeBond", "(I)Z")
 	if err != nil {
-		return fmt.Errorf("find class android.companion.CompanionDeviceManager$Callback: %w", err)
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.removeBond: %w", err)
 	}
-	clscompanionCallback = env.NewGlobalRef(&c.Object)
+
+	midcompanionDeviceManagerRequestNotificationAccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "requestNotificationAccess", "(Landroid/content/ComponentName;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.requestNotificationAccess: %w", err)
+	}
+
+	midcompanionDeviceManagerSetDeviceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "setDeviceId", "(ILandroid/companion/DeviceId;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.setDeviceId: %w", err)
+	}
+
+	midcompanionDeviceManagerStartObservingDevicePresence1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "startObservingDevicePresence", "(Landroid/companion/ObservingDevicePresenceRequest;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.startObservingDevicePresence: %w", err)
+	}
+
+	midcompanionDeviceManagerStartObservingDevicePresence1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "startObservingDevicePresence", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.startObservingDevicePresence: %w", err)
+	}
+
+	midcompanionDeviceManagerStartSystemDataTransfer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "startSystemDataTransfer", "(ILjava/util/concurrent/Executor;Landroid/os/OutcomeReceiver<java$lang$Void;Landroid/companion/CompanionException>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.startSystemDataTransfer: %w", err)
+	}
+
+	midcompanionDeviceManagerStopObservingDevicePresence1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "stopObservingDevicePresence", "(Landroid/companion/ObservingDevicePresenceRequest;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.stopObservingDevicePresence: %w", err)
+	}
+
+	midcompanionDeviceManagerStopObservingDevicePresence1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscompanionDeviceManager)), "stopObservingDevicePresence", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.companion.CompanionDeviceManager.stopObservingDevicePresence: %w", err)
+	}
 
 	return nil
 }

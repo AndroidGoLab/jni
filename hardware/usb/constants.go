@@ -3,10 +3,11 @@
 package usb
 
 const (
-	DirIn               = 0x80
-	DirOut              = 0x00
-	TransferControl     = 0
-	TransferIsochronous = 1
-	TransferBulk        = 2
-	TransferInterrupt   = 3
+	ActionUsbAccessoryAttached = ""
+	ActionUsbAccessoryDetached = ""
+	ActionUsbDeviceAttached    = ""
+	ActionUsbDeviceDetached    = ""
+	ExtraAccessory             = ""
+	ExtraDevice                = ""
+	ExtraPermissionGranted     = ""
 )

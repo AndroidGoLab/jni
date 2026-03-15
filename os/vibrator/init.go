@@ -20,11 +20,23 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsVibrator                 *jni.GlobalRef
-	midVibratorHasVibrator      jni.MethodID
-	midVibratorvibrateMs        jni.MethodID
-	midVibratorvibratePatternMs jni.MethodID
-	midVibratorCancel           jni.MethodID
+	clsvibrator                            *jni.GlobalRef
+	midvibratorAreEffectsSupported         jni.MethodID
+	midvibratorAreEnvelopeEffectsSupported jni.MethodID
+	midvibratorArePrimitivesSupported      jni.MethodID
+	midvibratorGetEnvelopeEffectInfo       jni.MethodID
+	midvibratorGetFrequencyProfile         jni.MethodID
+	midvibratorGetId                       jni.MethodID
+	midvibratorGetPrimitiveDurations       jni.MethodID
+	midvibratorGetQFactor                  jni.MethodID
+	midvibratorGetResonantFrequency        jni.MethodID
+	midvibratorVibrate1                    jni.MethodID
+	midvibratorVibrate2_1                  jni.MethodID
+	midvibratorVibrate2_2                  jni.MethodID
+	midvibratorVibrate1_3                  jni.MethodID
+	midvibratorVibrate2_4                  jni.MethodID
+	midvibratorVibrate2_5                  jni.MethodID
+	midvibratorVibrate3_6                  jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -49,26 +61,86 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.os.Vibrator: %w", err)
 	}
-	clsVibrator = env.NewGlobalRef(&c.Object)
+	clsvibrator = env.NewGlobalRef(&c.Object)
 
-	midVibratorHasVibrator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "hasVibrator", "()Z")
+	midvibratorAreEffectsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "areEffectsSupported", "(Lint///;)[I")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.hasVibrator: %w", err)
+		return fmt.Errorf("get method android.os.Vibrator.areEffectsSupported: %w", err)
 	}
 
-	midVibratorvibrateMs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "(J)V")
+	midvibratorAreEnvelopeEffectsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "areEnvelopeEffectsSupported", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Vibrator.areEnvelopeEffectsSupported: %w", err)
+	}
+
+	midvibratorArePrimitivesSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "arePrimitivesSupported", "(Lint///;)[Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Vibrator.arePrimitivesSupported: %w", err)
+	}
+
+	midvibratorGetEnvelopeEffectInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "getEnvelopeEffectInfo", "()Landroid/os/vibrator/VibratorEnvelopeEffectInfo;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Vibrator.getEnvelopeEffectInfo: %w", err)
+	}
+
+	midvibratorGetFrequencyProfile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "getFrequencyProfile", "()Landroid/os/vibrator/VibratorFrequencyProfile;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Vibrator.getFrequencyProfile: %w", err)
+	}
+
+	midvibratorGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "getId", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Vibrator.getId: %w", err)
+	}
+
+	midvibratorGetPrimitiveDurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "getPrimitiveDurations", "(Lint///;)[I")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Vibrator.getPrimitiveDurations: %w", err)
+	}
+
+	midvibratorGetQFactor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "getQFactor", "()F")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Vibrator.getQFactor: %w", err)
+	}
+
+	midvibratorGetResonantFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "getResonantFrequency", "()F")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Vibrator.getResonantFrequency: %w", err)
+	}
+
+	midvibratorVibrate1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "vibrate", "(Landroid/os/VibrationEffect;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.os.Vibrator.vibrate: %w", err)
 	}
 
-	midVibratorvibratePatternMs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "([JI)V")
+	midvibratorVibrate2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "vibrate", "(Landroid/os/VibrationEffect;Landroid/media/AudioAttributes;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.os.Vibrator.vibrate: %w", err)
 	}
 
-	midVibratorCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "cancel", "()V")
+	midvibratorVibrate2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "vibrate", "(Landroid/os/VibrationEffect;Landroid/os/VibrationAttributes;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.os.Vibrator.cancel: %w", err)
+		return fmt.Errorf("get method android.os.Vibrator.vibrate: %w", err)
+	}
+
+	midvibratorVibrate1_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "vibrate", "(J)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Vibrator.vibrate: %w", err)
+	}
+
+	midvibratorVibrate2_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "vibrate", "(JLandroid/media/AudioAttributes;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Vibrator.vibrate: %w", err)
+	}
+
+	midvibratorVibrate2_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "vibrate", "([JI)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Vibrator.vibrate: %w", err)
+	}
+
+	midvibratorVibrate3_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsvibrator)), "vibrate", "([JILandroid/media/AudioAttributes;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Vibrator.vibrate: %w", err)
 	}
 
 	return nil

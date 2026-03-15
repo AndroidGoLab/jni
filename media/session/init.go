@@ -20,16 +20,27 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                                      *jni.GlobalRef
-	midManagergetActiveSessionsRaw                  jni.MethodID
-	midManageraddOnActiveSessionsChangedListener    jni.MethodID
-	midManagerremoveOnActiveSessionsChangedListener jni.MethodID
-
-	clsmediaController            *jni.GlobalRef
-	midmediaControllerPackageName jni.MethodID
-	midmediaControllerTag         jni.MethodID
-
-	clsonActiveSessionsChangedListener *jni.GlobalRef
+	clsmediaController                         *jni.GlobalRef
+	midmediaControllerAdjustVolume             jni.MethodID
+	midmediaControllerDispatchMediaButtonEvent jni.MethodID
+	midmediaControllerGetExtras                jni.MethodID
+	midmediaControllerGetFlags                 jni.MethodID
+	midmediaControllerGetMetadata              jni.MethodID
+	midmediaControllerGetPackageName           jni.MethodID
+	midmediaControllerGetPlaybackInfo          jni.MethodID
+	midmediaControllerGetPlaybackState         jni.MethodID
+	midmediaControllerGetQueue                 jni.MethodID
+	midmediaControllerGetQueueTitle            jni.MethodID
+	midmediaControllerGetRatingType            jni.MethodID
+	midmediaControllerGetSessionActivity       jni.MethodID
+	midmediaControllerGetSessionInfo           jni.MethodID
+	midmediaControllerGetSessionToken          jni.MethodID
+	midmediaControllerGetTag                   jni.MethodID
+	midmediaControllerGetTransportControls     jni.MethodID
+	midmediaControllerRegisterCallback         jni.MethodID
+	midmediaControllerSendCommand              jni.MethodID
+	midmediaControllerSetVolumeTo              jni.MethodID
+	midmediaControllerUnregisterCallback       jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -50,48 +61,111 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/media/session/MediaSessionManager")
-	if err != nil {
-		return fmt.Errorf("find class android.media.session.MediaSessionManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagergetActiveSessionsRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getActiveSessions", "(Landroid/content/ComponentName;)Ljava/util/List;")
-	if err != nil {
-		return fmt.Errorf("get method android.media.session.MediaSessionManager.getActiveSessions: %w", err)
-	}
-
-	midManageraddOnActiveSessionsChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addOnActiveSessionsChangedListener", "(Landroid/media/session/MediaSessionManager$OnActiveSessionsChangedListener;Landroid/content/ComponentName;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.session.MediaSessionManager.addOnActiveSessionsChangedListener: %w", err)
-	}
-
-	midManagerremoveOnActiveSessionsChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeOnActiveSessionsChangedListener", "(Landroid/media/session/MediaSessionManager$OnActiveSessionsChangedListener;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.session.MediaSessionManager.removeOnActiveSessionsChangedListener: %w", err)
-	}
-
 	c, err = env.FindClass("android/media/session/MediaController")
 	if err != nil {
 		return fmt.Errorf("find class android.media.session.MediaController: %w", err)
 	}
 	clsmediaController = env.NewGlobalRef(&c.Object)
 
-	midmediaControllerPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getPackageName", "()Ljava/lang/String;")
+	midmediaControllerAdjustVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "adjustVolume", "(II)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.adjustVolume: %w", err)
+	}
+
+	midmediaControllerDispatchMediaButtonEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "dispatchMediaButtonEvent", "(Landroid/view/KeyEvent;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.dispatchMediaButtonEvent: %w", err)
+	}
+
+	midmediaControllerGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getExtras", "()Landroid/os/Bundle;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.getExtras: %w", err)
+	}
+
+	midmediaControllerGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getFlags", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.getFlags: %w", err)
+	}
+
+	midmediaControllerGetMetadata, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getMetadata", "()Landroid/media/MediaMetadata;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.getMetadata: %w", err)
+	}
+
+	midmediaControllerGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getPackageName", "()Ljava/lang/String;")
 	if err != nil {
 		return fmt.Errorf("get method android.media.session.MediaController.getPackageName: %w", err)
 	}
 
-	midmediaControllerTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getTag", "()Ljava/lang/String;")
+	midmediaControllerGetPlaybackInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getPlaybackInfo", "()Landroid/media/session/MediaController$PlaybackInfo;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.getPlaybackInfo: %w", err)
+	}
+
+	midmediaControllerGetPlaybackState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getPlaybackState", "()Landroid/media/session/PlaybackState;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.getPlaybackState: %w", err)
+	}
+
+	midmediaControllerGetQueue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getQueue", "()Ljava/util/List<android/media/session/MediaSession$QueueItem>;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.getQueue: %w", err)
+	}
+
+	midmediaControllerGetQueueTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getQueueTitle", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.getQueueTitle: %w", err)
+	}
+
+	midmediaControllerGetRatingType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getRatingType", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.getRatingType: %w", err)
+	}
+
+	midmediaControllerGetSessionActivity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getSessionActivity", "()Landroid/app/PendingIntent;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.getSessionActivity: %w", err)
+	}
+
+	midmediaControllerGetSessionInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getSessionInfo", "()Landroid/os/Bundle;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.getSessionInfo: %w", err)
+	}
+
+	midmediaControllerGetSessionToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getSessionToken", "()Landroid/media/session/MediaSession$Token;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.getSessionToken: %w", err)
+	}
+
+	midmediaControllerGetTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getTag", "()Ljava/lang/String;")
 	if err != nil {
 		return fmt.Errorf("get method android.media.session.MediaController.getTag: %w", err)
 	}
 
-	c, err = env.FindClass("android/media/session/MediaSessionManager$OnActiveSessionsChangedListener")
+	midmediaControllerGetTransportControls, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "getTransportControls", "()Landroid/media/session/MediaController$TransportControls;")
 	if err != nil {
-		return fmt.Errorf("find class android.media.session.MediaSessionManager$OnActiveSessionsChangedListener: %w", err)
+		return fmt.Errorf("get method android.media.session.MediaController.getTransportControls: %w", err)
 	}
-	clsonActiveSessionsChangedListener = env.NewGlobalRef(&c.Object)
+
+	midmediaControllerRegisterCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "registerCallback", "(Landroid/media/session/MediaController$Callback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.registerCallback: %w", err)
+	}
+
+	midmediaControllerSendCommand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "sendCommand", "(Ljava/lang/String;Landroid/os/Bundle;Landroid/os/ResultReceiver;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.sendCommand: %w", err)
+	}
+
+	midmediaControllerSetVolumeTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "setVolumeTo", "(II)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.setVolumeTo: %w", err)
+	}
+
+	midmediaControllerUnregisterCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaController)), "unregisterCallback", "(Landroid/media/session/MediaController$Callback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.session.MediaController.unregisterCallback: %w", err)
+	}
 
 	return nil
 }

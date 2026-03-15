@@ -3,6 +3,6 @@
 package toast
 
 const (
-	Short = 0
-	Long  = 1
+	LengthLong  = 0
+	LengthShort = 0
 )

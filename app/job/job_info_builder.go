@@ -17,269 +17,693 @@ var (
 	_ *app.Context
 )
 
-// jobInfoBuilder wraps android.app.job.JobInfo.Builder.
+// jobInfoBuilder wraps android.app.job.JobInfo$Builder.
 type jobInfoBuilder struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
-// NewjobInfoBuilder creates a new android.app.job.JobInfo.Builder instance.
-func NewjobInfoBuilder(vm *jni.VM) (*jobInfoBuilder, error) {
-	var t jobInfoBuilder
-	t.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
+// AddDebugTag calls android.app.job.JobInfo$Builder.addDebugTag.
+func (m *jobInfoBuilder) AddDebugTag(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
+			callErr = err
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), midjobInfoBuilderInit)
+		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
 		}
-		t.Obj = env.NewGlobalRef(obj)
-		return nil
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderAddDebugTag, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	if err != nil {
-		return nil, err
-	}
-	return &t, nil
+	return result, callErr
 }
 
-// setRequiredNetworkType calls android.app.job.JobInfo.Builder.setRequiredNetworkType.
-func (m *jobInfoBuilder) setRequiredNetworkType(networkType int32) *jni.Object {
+// AddTriggerContentUri calls android.app.job.JobInfo$Builder.addTriggerContentUri.
+func (m *jobInfoBuilder) AddTriggerContentUri(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midjobInfoBuildersetRequiredNetworkType, jni.IntValue(networkType),
+			midjobInfoBuilderAddTriggerContentUri, jni.ObjectValue(arg0),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// setRequiresCharging calls android.app.job.JobInfo.Builder.setRequiresCharging.
-func (m *jobInfoBuilder) setRequiresCharging(requiresCharging bool) *jni.Object {
+// Build calls android.app.job.JobInfo$Builder.build.
+func (m *jobInfoBuilder) Build() (*jni.Object, error) {
 	var result *jni.Object
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		var jRequiresCharging uint8
-		if requiresCharging {
-			jRequiresCharging = 1
-		}
-
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midjobInfoBuildersetRequiresCharging, jni.BooleanValue(jRequiresCharging),
+			midjobInfoBuilderBuild,
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// setRequiresDeviceIdle calls android.app.job.JobInfo.Builder.setRequiresDeviceIdle.
-func (m *jobInfoBuilder) setRequiresDeviceIdle(requiresDeviceIdle bool) *jni.Object {
+// RemoveDebugTag calls android.app.job.JobInfo$Builder.removeDebugTag.
+func (m *jobInfoBuilder) RemoveDebugTag(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		var jRequiresDeviceIdle uint8
-		if requiresDeviceIdle {
-			jRequiresDeviceIdle = 1
-		}
-
-		result, _ = env.CallObjectMethod(
-			m.Obj,
-			midjobInfoBuildersetRequiresDeviceIdle, jni.BooleanValue(jRequiresDeviceIdle),
-		)
-
-		return nil
-	})
-	return result
-}
-
-// setRequiresBatteryNotLow calls android.app.job.JobInfo.Builder.setRequiresBatteryNotLow.
-func (m *jobInfoBuilder) setRequiresBatteryNotLow(requiresBatteryNotLow bool) *jni.Object {
-	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-
-			return err
-		}
-		var jRequiresBatteryNotLow uint8
-		if requiresBatteryNotLow {
-			jRequiresBatteryNotLow = 1
-		}
-
-		result, _ = env.CallObjectMethod(
-			m.Obj,
-			midjobInfoBuildersetRequiresBatteryNotLow, jni.BooleanValue(jRequiresBatteryNotLow),
-		)
-
-		return nil
-	})
-	return result
-}
-
-// setRequiresStorageNotLow calls android.app.job.JobInfo.Builder.setRequiresStorageNotLow.
-func (m *jobInfoBuilder) setRequiresStorageNotLow(requiresStorageNotLow bool) *jni.Object {
-	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-
-			return err
-		}
-		var jRequiresStorageNotLow uint8
-		if requiresStorageNotLow {
-			jRequiresStorageNotLow = 1
-		}
-
-		result, _ = env.CallObjectMethod(
-			m.Obj,
-			midjobInfoBuildersetRequiresStorageNotLow, jni.BooleanValue(jRequiresStorageNotLow),
-		)
-
-		return nil
-	})
-	return result
-}
-
-// setPeriodic calls android.app.job.JobInfo.Builder.setPeriodic.
-func (m *jobInfoBuilder) setPeriodic(intervalMillis int64) *jni.Object {
-	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
 			return err
 		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midjobInfoBuildersetPeriodic, jni.LongValue(intervalMillis),
+			midjobInfoBuilderRemoveDebugTag, jni.ObjectValue(&jArg0.Object),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// setMinimumLatency calls android.app.job.JobInfo.Builder.setMinimumLatency.
-func (m *jobInfoBuilder) setMinimumLatency(minLatencyMillis int64) *jni.Object {
+// SetBackoffCriteria calls android.app.job.JobInfo$Builder.setBackoffCriteria.
+func (m *jobInfoBuilder) SetBackoffCriteria(arg0 int64, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midjobInfoBuildersetMinimumLatency, jni.LongValue(minLatencyMillis),
+			midjobInfoBuilderSetBackoffCriteria, jni.LongValue(arg0), jni.IntValue(arg1),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// setOverrideDeadline calls android.app.job.JobInfo.Builder.setOverrideDeadline.
-func (m *jobInfoBuilder) setOverrideDeadline(maxExecutionDelayMillis int64) *jni.Object {
+// SetClipData calls android.app.job.JobInfo$Builder.setClipData.
+func (m *jobInfoBuilder) SetClipData(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midjobInfoBuildersetOverrideDeadline, jni.LongValue(maxExecutionDelayMillis),
+			midjobInfoBuilderSetClipData, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// setPersisted calls android.app.job.JobInfo.Builder.setPersisted.
-func (m *jobInfoBuilder) setPersisted(isPersisted bool) *jni.Object {
+// SetEstimatedNetworkBytes calls android.app.job.JobInfo$Builder.setEstimatedNetworkBytes.
+func (m *jobInfoBuilder) SetEstimatedNetworkBytes(arg0 int64, arg1 int64) (*jni.Object, error) {
 	var result *jni.Object
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
-			return err
-		}
-		var jIsPersisted uint8
-		if isPersisted {
-			jIsPersisted = 1
-		}
-
-		result, _ = env.CallObjectMethod(
-			m.Obj,
-			midjobInfoBuildersetPersisted, jni.BooleanValue(jIsPersisted),
-		)
-
-		return nil
-	})
-	return result
-}
-
-// setBackoffCriteria calls android.app.job.JobInfo.Builder.setBackoffCriteria.
-func (m *jobInfoBuilder) setBackoffCriteria(initialBackoffMillis int64, backoffPolicy int32) *jni.Object {
-	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midjobInfoBuildersetBackoffCriteria, jni.LongValue(initialBackoffMillis), jni.IntValue(backoffPolicy),
+			midjobInfoBuilderSetEstimatedNetworkBytes, jni.LongValue(arg0), jni.LongValue(arg1),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// build calls android.app.job.JobInfo.Builder.build.
-func (m *jobInfoBuilder) build() *jni.Object {
+// SetExpedited calls android.app.job.JobInfo$Builder.setExpedited.
+func (m *jobInfoBuilder) SetExpedited(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		result, _ = env.CallObjectMethod(
-			m.Obj,
-			midjobInfoBuilderbuild,
-		)
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
 
-		return nil
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetExpedited, jni.BooleanValue(jArg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
+}
+
+// SetExtras calls android.app.job.JobInfo$Builder.setExtras.
+func (m *jobInfoBuilder) SetExtras(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetExtras, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetImportantWhileForeground calls android.app.job.JobInfo$Builder.setImportantWhileForeground.
+func (m *jobInfoBuilder) SetImportantWhileForeground(arg0 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetImportantWhileForeground, jni.BooleanValue(jArg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetMinimumLatency calls android.app.job.JobInfo$Builder.setMinimumLatency.
+func (m *jobInfoBuilder) SetMinimumLatency(arg0 int64) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetMinimumLatency, jni.LongValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetMinimumNetworkChunkBytes calls android.app.job.JobInfo$Builder.setMinimumNetworkChunkBytes.
+func (m *jobInfoBuilder) SetMinimumNetworkChunkBytes(arg0 int64) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetMinimumNetworkChunkBytes, jni.LongValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetOverrideDeadline calls android.app.job.JobInfo$Builder.setOverrideDeadline.
+func (m *jobInfoBuilder) SetOverrideDeadline(arg0 int64) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetOverrideDeadline, jni.LongValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetPeriodic1 calls android.app.job.JobInfo$Builder.setPeriodic.
+func (m *jobInfoBuilder) SetPeriodic1(arg0 int64) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetPeriodic1, jni.LongValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetPeriodic2_1 calls android.app.job.JobInfo$Builder.setPeriodic.
+func (m *jobInfoBuilder) SetPeriodic2_1(arg0 int64, arg1 int64) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetPeriodic2_1, jni.LongValue(arg0), jni.LongValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetPersisted calls android.app.job.JobInfo$Builder.setPersisted.
+func (m *jobInfoBuilder) SetPersisted(arg0 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetPersisted, jni.BooleanValue(jArg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetPrefetch calls android.app.job.JobInfo$Builder.setPrefetch.
+func (m *jobInfoBuilder) SetPrefetch(arg0 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetPrefetch, jni.BooleanValue(jArg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetPriority calls android.app.job.JobInfo$Builder.setPriority.
+func (m *jobInfoBuilder) SetPriority(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetPriority, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetRequiredNetwork calls android.app.job.JobInfo$Builder.setRequiredNetwork.
+func (m *jobInfoBuilder) SetRequiredNetwork(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetRequiredNetwork, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetRequiredNetworkType calls android.app.job.JobInfo$Builder.setRequiredNetworkType.
+func (m *jobInfoBuilder) SetRequiredNetworkType(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetRequiredNetworkType, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetRequiresBatteryNotLow calls android.app.job.JobInfo$Builder.setRequiresBatteryNotLow.
+func (m *jobInfoBuilder) SetRequiresBatteryNotLow(arg0 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetRequiresBatteryNotLow, jni.BooleanValue(jArg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetRequiresCharging calls android.app.job.JobInfo$Builder.setRequiresCharging.
+func (m *jobInfoBuilder) SetRequiresCharging(arg0 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetRequiresCharging, jni.BooleanValue(jArg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetRequiresDeviceIdle calls android.app.job.JobInfo$Builder.setRequiresDeviceIdle.
+func (m *jobInfoBuilder) SetRequiresDeviceIdle(arg0 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetRequiresDeviceIdle, jni.BooleanValue(jArg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetRequiresStorageNotLow calls android.app.job.JobInfo$Builder.setRequiresStorageNotLow.
+func (m *jobInfoBuilder) SetRequiresStorageNotLow(arg0 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetRequiresStorageNotLow, jni.BooleanValue(jArg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetTraceTag calls android.app.job.JobInfo$Builder.setTraceTag.
+func (m *jobInfoBuilder) SetTraceTag(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetTraceTag, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetTransientExtras calls android.app.job.JobInfo$Builder.setTransientExtras.
+func (m *jobInfoBuilder) SetTransientExtras(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetTransientExtras, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetTriggerContentMaxDelay calls android.app.job.JobInfo$Builder.setTriggerContentMaxDelay.
+func (m *jobInfoBuilder) SetTriggerContentMaxDelay(arg0 int64) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetTriggerContentMaxDelay, jni.LongValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetTriggerContentUpdateDelay calls android.app.job.JobInfo$Builder.setTriggerContentUpdateDelay.
+func (m *jobInfoBuilder) SetTriggerContentUpdateDelay(arg0 int64) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetTriggerContentUpdateDelay, jni.LongValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetUserInitiated calls android.app.job.JobInfo$Builder.setUserInitiated.
+func (m *jobInfoBuilder) SetUserInitiated(arg0 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midjobInfoBuilderSetUserInitiated, jni.BooleanValue(jArg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
 }

@@ -3,18 +3,9 @@
 package nfc
 
 const (
-	FlagReaderNfcA             = 0x1
-	FlagReaderNfcB             = 0x2
-	FlagReaderNfcF             = 0x4
-	FlagReaderNfcV             = 0x8
-	FlagReaderNfcBarcode       = 0x10
-	FlagReaderNoPlatformSounds = 0x100
-	FlagReaderSkipNdefCheck    = 0x80
-	TNFEmpty                   = 0
-	TNFWellKnown               = 1
-	TNFMimeMedia               = 2
-	TNFAbsoluteURI             = 3
-	TNFExternalType            = 4
-	TNFUnknown                 = 5
-	TNFUnchanged               = 6
+	MifareClassic = ""
+	NfcForumType1 = ""
+	NfcForumType2 = ""
+	NfcForumType3 = ""
+	NfcForumType4 = ""
 )

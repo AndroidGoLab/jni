@@ -23,61 +23,366 @@ type networkCapabilities struct {
 	Obj *jni.GlobalRef
 }
 
-// hasTransport calls android.net.NetworkCapabilities.hasTransport.
-func (m *networkCapabilities) hasTransport(transport int32) bool {
+// DescribeContents calls android.net.NetworkCapabilities.describeContents.
+func (m *networkCapabilities) DescribeContents() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midnetworkCapabilitiesDescribeContents,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// Equals calls android.net.NetworkCapabilities.equals.
+func (m *networkCapabilities) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
 
-		resultRaw, _ := env.CallBooleanMethod(
+		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midnetworkCapabilitieshasTransport, jni.IntValue(transport),
+			midnetworkCapabilitiesEquals, jni.ObjectValue(arg0),
 		)
-
+		if callErr != nil {
+			return callErr
+		}
 		result = resultRaw != 0
-		return nil
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// getLinkDown calls android.net.NetworkCapabilities.getLinkDownstreamBandwidthKbps.
-func (m *networkCapabilities) getLinkDown() int32 {
-	var result int32
-
+// GetCapabilities calls android.net.NetworkCapabilities.getCapabilities.
+func (m *networkCapabilities) GetCapabilities() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		result, _ = env.CallIntMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midnetworkCapabilitiesgetLinkDown,
+			midnetworkCapabilitiesGetCapabilities,
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// getLinkUp calls android.net.NetworkCapabilities.getLinkUpstreamBandwidthKbps.
-func (m *networkCapabilities) getLinkUp() int32 {
-	var result int32
-
+// GetEnterpriseIds calls android.net.NetworkCapabilities.getEnterpriseIds.
+func (m *networkCapabilities) GetEnterpriseIds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		result, _ = env.CallIntMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midnetworkCapabilitiesgetLinkUp,
+			midnetworkCapabilitiesGetEnterpriseIds,
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
+}
+
+// GetLinkDownstreamBandwidthKbps calls android.net.NetworkCapabilities.getLinkDownstreamBandwidthKbps.
+func (m *networkCapabilities) GetLinkDownstreamBandwidthKbps() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midnetworkCapabilitiesGetLinkDownstreamBandwidthKbps,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetLinkUpstreamBandwidthKbps calls android.net.NetworkCapabilities.getLinkUpstreamBandwidthKbps.
+func (m *networkCapabilities) GetLinkUpstreamBandwidthKbps() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midnetworkCapabilitiesGetLinkUpstreamBandwidthKbps,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetNetworkSpecifier calls android.net.NetworkCapabilities.getNetworkSpecifier.
+func (m *networkCapabilities) GetNetworkSpecifier() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midnetworkCapabilitiesGetNetworkSpecifier,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetOwnerUid calls android.net.NetworkCapabilities.getOwnerUid.
+func (m *networkCapabilities) GetOwnerUid() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midnetworkCapabilitiesGetOwnerUid,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSignalStrength calls android.net.NetworkCapabilities.getSignalStrength.
+func (m *networkCapabilities) GetSignalStrength() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midnetworkCapabilitiesGetSignalStrength,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSubscriptionIds calls android.net.NetworkCapabilities.getSubscriptionIds.
+func (m *networkCapabilities) GetSubscriptionIds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midnetworkCapabilitiesGetSubscriptionIds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetTransportInfo calls android.net.NetworkCapabilities.getTransportInfo.
+func (m *networkCapabilities) GetTransportInfo() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midnetworkCapabilitiesGetTransportInfo,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// HasCapability calls android.net.NetworkCapabilities.hasCapability.
+func (m *networkCapabilities) HasCapability(arg0 int32) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midnetworkCapabilitiesHasCapability, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// HasEnterpriseId calls android.net.NetworkCapabilities.hasEnterpriseId.
+func (m *networkCapabilities) HasEnterpriseId(arg0 int32) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midnetworkCapabilitiesHasEnterpriseId, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// HasTransport calls android.net.NetworkCapabilities.hasTransport.
+func (m *networkCapabilities) HasTransport(arg0 int32) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midnetworkCapabilitiesHasTransport, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// HashCode calls android.net.NetworkCapabilities.hashCode.
+func (m *networkCapabilities) HashCode() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midnetworkCapabilitiesHashCode,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// ToString calls android.net.NetworkCapabilities.toString.
+func (m *networkCapabilities) ToString() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midnetworkCapabilitiesToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// WriteToParcel calls android.net.NetworkCapabilities.writeToParcel.
+func (m *networkCapabilities) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnetworkCapabilitiesWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
 }

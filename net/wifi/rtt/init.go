@@ -20,24 +20,40 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                *jni.GlobalRef
-	midManagerisAvailableRaw  jni.MethodID
-	midManagerstartRangingRaw jni.MethodID
-
-	clsrangingRequestBuilder               *jni.GlobalRef
-	midrangingRequestBuilderInit           jni.MethodID
-	midrangingRequestBuilderaddAccessPoint jni.MethodID
-	midrangingRequestBuilderbuild          jni.MethodID
-
-	clsRangingResult                 *jni.GlobalRef
-	midRangingResultDistanceMM       jni.MethodID
-	midRangingResultDistanceStdDevMM jni.MethodID
-	midRangingResultRSSI             jni.MethodID
-	midRangingResultNumAttempted     jni.MethodID
-	midRangingResultNumSuccessful    jni.MethodID
-	midRangingResultStatus           jni.MethodID
-
-	clsrangingResultCallback *jni.GlobalRef
+	clsrangingResult                                         *jni.GlobalRef
+	midrangingResultDescribeContents                         jni.MethodID
+	midrangingResultEquals                                   jni.MethodID
+	midrangingResultGet80211azInitiatorTxLtfRepetitionsCount jni.MethodID
+	midrangingResultGet80211azNumberOfRxSpatialStreams       jni.MethodID
+	midrangingResultGet80211azNumberOfTxSpatialStreams       jni.MethodID
+	midrangingResultGet80211azResponderTxLtfRepetitionsCount jni.MethodID
+	midrangingResultGetDistanceMm                            jni.MethodID
+	midrangingResultGetDistanceStdDevMm                      jni.MethodID
+	midrangingResultGetLci                                   jni.MethodID
+	midrangingResultGetLcr                                   jni.MethodID
+	midrangingResultGetMacAddress                            jni.MethodID
+	midrangingResultGetMaxTimeBetweenNtbMeasurementsMicros   jni.MethodID
+	midrangingResultGetMeasurementBandwidth                  jni.MethodID
+	midrangingResultGetMeasurementChannelFrequencyMHz        jni.MethodID
+	midrangingResultGetMinTimeBetweenNtbMeasurementsMicros   jni.MethodID
+	midrangingResultGetNumAttemptedMeasurements              jni.MethodID
+	midrangingResultGetNumSuccessfulMeasurements             jni.MethodID
+	midrangingResultGetPasnComebackAfterMillis               jni.MethodID
+	midrangingResultGetPasnComebackCookie                    jni.MethodID
+	midrangingResultGetPeerHandle                            jni.MethodID
+	midrangingResultGetRangingTimestampMillis                jni.MethodID
+	midrangingResultGetRssi                                  jni.MethodID
+	midrangingResultGetSecureHeLtfProtocolVersion            jni.MethodID
+	midrangingResultGetStatus                                jni.MethodID
+	midrangingResultGetUnverifiedResponderLocation           jni.MethodID
+	midrangingResultHashCode                                 jni.MethodID
+	midrangingResultIs80211azNtbMeasurement                  jni.MethodID
+	midrangingResultIs80211mcMeasurement                     jni.MethodID
+	midrangingResultIsRangingAuthenticated                   jni.MethodID
+	midrangingResultIsRangingFrameProtected                  jni.MethodID
+	midrangingResultIsSecureHeLtfEnabled                     jni.MethodID
+	midrangingResultToString                                 jni.MethodID
+	midrangingResultWriteToParcel                            jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -58,83 +74,176 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/net/wifi/rtt/WifiRttManager")
-	if err != nil {
-		return fmt.Errorf("find class android.net.wifi.rtt.WifiRttManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagerisAvailableRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isAvailable", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.WifiRttManager.isAvailable: %w", err)
-	}
-
-	midManagerstartRangingRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "startRanging", "(Landroid/net/wifi/rtt/RangingRequest;Ljava/util/concurrent/Executor;Landroid/net/wifi/rtt/RangingResultCallback;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.WifiRttManager.startRanging: %w", err)
-	}
-
-	c, err = env.FindClass("android/net/wifi/rtt/RangingRequest$Builder")
-	if err != nil {
-		return fmt.Errorf("find class android.net.wifi.rtt.RangingRequest$Builder: %w", err)
-	}
-	clsrangingRequestBuilder = env.NewGlobalRef(&c.Object)
-	midrangingRequestBuilderInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingRequestBuilder)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.net.wifi.rtt.RangingRequest$Builder.<init>: %w", err)
-	}
-
-	midrangingRequestBuilderaddAccessPoint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingRequestBuilder)), "addAccessPoint", "(Landroid/net/wifi/ScanResult;)Landroid/net/wifi/rtt/RangingRequest$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingRequest$Builder.addAccessPoint: %w", err)
-	}
-
-	midrangingRequestBuilderbuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingRequestBuilder)), "build", "()Landroid/net/wifi/rtt/RangingRequest;")
-	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingRequest$Builder.build: %w", err)
-	}
-
 	c, err = env.FindClass("android/net/wifi/rtt/RangingResult")
 	if err != nil {
 		return fmt.Errorf("find class android.net.wifi.rtt.RangingResult: %w", err)
 	}
-	clsRangingResult = env.NewGlobalRef(&c.Object)
+	clsrangingResult = env.NewGlobalRef(&c.Object)
 
-	midRangingResultDistanceMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangingResult)), "getDistanceMm", "()I")
+	midrangingResultDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "describeContents", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.describeContents: %w", err)
+	}
+
+	midrangingResultEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.equals: %w", err)
+	}
+
+	midrangingResultGet80211azInitiatorTxLtfRepetitionsCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "get80211azInitiatorTxLtfRepetitionsCount", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.get80211azInitiatorTxLtfRepetitionsCount: %w", err)
+	}
+
+	midrangingResultGet80211azNumberOfRxSpatialStreams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "get80211azNumberOfRxSpatialStreams", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.get80211azNumberOfRxSpatialStreams: %w", err)
+	}
+
+	midrangingResultGet80211azNumberOfTxSpatialStreams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "get80211azNumberOfTxSpatialStreams", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.get80211azNumberOfTxSpatialStreams: %w", err)
+	}
+
+	midrangingResultGet80211azResponderTxLtfRepetitionsCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "get80211azResponderTxLtfRepetitionsCount", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.get80211azResponderTxLtfRepetitionsCount: %w", err)
+	}
+
+	midrangingResultGetDistanceMm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getDistanceMm", "()I")
 	if err != nil {
 		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getDistanceMm: %w", err)
 	}
 
-	midRangingResultDistanceStdDevMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangingResult)), "getDistanceStdDevMm", "()I")
+	midrangingResultGetDistanceStdDevMm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getDistanceStdDevMm", "()I")
 	if err != nil {
 		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getDistanceStdDevMm: %w", err)
 	}
 
-	midRangingResultRSSI, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangingResult)), "getRssi", "()I")
+	midrangingResultGetLci, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getLci", "()[B")
 	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getRssi: %w", err)
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getLci: %w", err)
 	}
 
-	midRangingResultNumAttempted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangingResult)), "getNumAttemptedMeasurements", "()I")
+	midrangingResultGetLcr, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getLcr", "()[B")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getLcr: %w", err)
+	}
+
+	midrangingResultGetMacAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getMacAddress", "()Landroid/net/MacAddress;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getMacAddress: %w", err)
+	}
+
+	midrangingResultGetMaxTimeBetweenNtbMeasurementsMicros, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getMaxTimeBetweenNtbMeasurementsMicros", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getMaxTimeBetweenNtbMeasurementsMicros: %w", err)
+	}
+
+	midrangingResultGetMeasurementBandwidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getMeasurementBandwidth", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getMeasurementBandwidth: %w", err)
+	}
+
+	midrangingResultGetMeasurementChannelFrequencyMHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getMeasurementChannelFrequencyMHz", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getMeasurementChannelFrequencyMHz: %w", err)
+	}
+
+	midrangingResultGetMinTimeBetweenNtbMeasurementsMicros, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getMinTimeBetweenNtbMeasurementsMicros", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getMinTimeBetweenNtbMeasurementsMicros: %w", err)
+	}
+
+	midrangingResultGetNumAttemptedMeasurements, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getNumAttemptedMeasurements", "()I")
 	if err != nil {
 		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getNumAttemptedMeasurements: %w", err)
 	}
 
-	midRangingResultNumSuccessful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangingResult)), "getNumSuccessfulMeasurements", "()I")
+	midrangingResultGetNumSuccessfulMeasurements, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getNumSuccessfulMeasurements", "()I")
 	if err != nil {
 		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getNumSuccessfulMeasurements: %w", err)
 	}
 
-	midRangingResultStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangingResult)), "getStatus", "()I")
+	midrangingResultGetPasnComebackAfterMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getPasnComebackAfterMillis", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getPasnComebackAfterMillis: %w", err)
+	}
+
+	midrangingResultGetPasnComebackCookie, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getPasnComebackCookie", "()[B")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getPasnComebackCookie: %w", err)
+	}
+
+	midrangingResultGetPeerHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getPeerHandle", "()Landroid/net/wifi/aware/PeerHandle;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getPeerHandle: %w", err)
+	}
+
+	midrangingResultGetRangingTimestampMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getRangingTimestampMillis", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getRangingTimestampMillis: %w", err)
+	}
+
+	midrangingResultGetRssi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getRssi", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getRssi: %w", err)
+	}
+
+	midrangingResultGetSecureHeLtfProtocolVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getSecureHeLtfProtocolVersion", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getSecureHeLtfProtocolVersion: %w", err)
+	}
+
+	midrangingResultGetStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getStatus", "()I")
 	if err != nil {
 		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getStatus: %w", err)
 	}
 
-	c, err = env.FindClass("android/net/wifi/rtt/RangingResultCallback")
+	midrangingResultGetUnverifiedResponderLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "getUnverifiedResponderLocation", "()Landroid/net/wifi/rtt/ResponderLocation;")
 	if err != nil {
-		return fmt.Errorf("find class android.net.wifi.rtt.RangingResultCallback: %w", err)
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.getUnverifiedResponderLocation: %w", err)
 	}
-	clsrangingResultCallback = env.NewGlobalRef(&c.Object)
+
+	midrangingResultHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "hashCode", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.hashCode: %w", err)
+	}
+
+	midrangingResultIs80211azNtbMeasurement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "is80211azNtbMeasurement", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.is80211azNtbMeasurement: %w", err)
+	}
+
+	midrangingResultIs80211mcMeasurement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "is80211mcMeasurement", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.is80211mcMeasurement: %w", err)
+	}
+
+	midrangingResultIsRangingAuthenticated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "isRangingAuthenticated", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.isRangingAuthenticated: %w", err)
+	}
+
+	midrangingResultIsRangingFrameProtected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "isRangingFrameProtected", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.isRangingFrameProtected: %w", err)
+	}
+
+	midrangingResultIsSecureHeLtfEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "isSecureHeLtfEnabled", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.isSecureHeLtfEnabled: %w", err)
+	}
+
+	midrangingResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.toString: %w", err)
+	}
+
+	midrangingResultWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsrangingResult)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.rtt.RangingResult.writeToParcel: %w", err)
+	}
 
 	return nil
 }

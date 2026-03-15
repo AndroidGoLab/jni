@@ -23,8 +23,27 @@ type toast struct {
 	Obj *jni.GlobalRef
 }
 
-// show calls android.widget.Toast.show.
-func (m *toast) show() error {
+// AddCallback calls android.widget.Toast.addCallback.
+func (m *toast) AddCallback(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midtoastAddCallback, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// Cancel calls android.widget.Toast.cancel.
+func (m *toast) Cancel() error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -34,9 +53,360 @@ func (m *toast) show() error {
 		}
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midtoastshow,
+			midtoastCancel,
 		)
 		return callErr
 	})
 	return callErr
+}
+
+// GetDuration calls android.widget.Toast.getDuration.
+func (m *toast) GetDuration() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midtoastGetDuration,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetGravity calls android.widget.Toast.getGravity.
+func (m *toast) GetGravity() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midtoastGetGravity,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetHorizontalMargin calls android.widget.Toast.getHorizontalMargin.
+func (m *toast) GetHorizontalMargin() (float32, error) {
+	var result float32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallFloatMethod(
+			m.Obj,
+			midtoastGetHorizontalMargin,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetVerticalMargin calls android.widget.Toast.getVerticalMargin.
+func (m *toast) GetVerticalMargin() (float32, error) {
+	var result float32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallFloatMethod(
+			m.Obj,
+			midtoastGetVerticalMargin,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetView calls android.widget.Toast.getView.
+func (m *toast) GetView() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midtoastGetView,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetXOffset calls android.widget.Toast.getXOffset.
+func (m *toast) GetXOffset() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midtoastGetXOffset,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetYOffset calls android.widget.Toast.getYOffset.
+func (m *toast) GetYOffset() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midtoastGetYOffset,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// RemoveCallback calls android.widget.Toast.removeCallback.
+func (m *toast) RemoveCallback(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midtoastRemoveCallback, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetDuration calls android.widget.Toast.setDuration.
+func (m *toast) SetDuration(arg0 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midtoastSetDuration, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetGravity calls android.widget.Toast.setGravity.
+func (m *toast) SetGravity(arg0 int32, arg1 int32, arg2 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midtoastSetGravity, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetMargin calls android.widget.Toast.setMargin.
+func (m *toast) SetMargin(arg0 float32, arg1 float32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midtoastSetMargin, jni.FloatValue(arg0), jni.FloatValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetText1 calls android.widget.Toast.setText.
+func (m *toast) SetText1(arg0 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midtoastSetText1, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetText1_1 calls android.widget.Toast.setText.
+func (m *toast) SetText1_1(arg0 string) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midtoastSetText1_1, jni.ObjectValue(&jArg0.Object),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetView calls android.widget.Toast.setView.
+func (m *toast) SetView(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midtoastSetView, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// Show calls android.widget.Toast.show.
+func (m *toast) Show() error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midtoastShow,
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// MakeText3 calls android.widget.Toast.makeText.
+func (m *toast) MakeText3(arg0 *jni.Object, arg1 int32, arg2 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clstoast)),
+			midtoastMakeText3, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// MakeText3_1 calls android.widget.Toast.makeText.
+func (m *toast) MakeText3_1(arg0 *jni.Object, arg1 string, arg2 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clstoast)),
+			midtoastMakeText3_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
 }

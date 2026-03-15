@@ -6,159 +6,486 @@ package wifi_p2p;
 
 option go_package = "github.com/xaionaro-go/jni/proto/wifi_p2p";
 
-message DescribeContentsRequest {
-}
-
-message DescribeContentsResponse {
-  int32 result = 1;
-}
-
-message EqualsRequest {
+message AddExternalApproverRequest {
   int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
 }
 
-message EqualsResponse {
-  bool result = 1;
+message AddExternalApproverResponse {
 }
 
-message GetIpAddressRequest {
-}
-
-message GetIpAddressResponse {
-  int64 result = 1;
-}
-
-message GetVendorElementsRequest {
-}
-
-message GetVendorElementsResponse {
-  int64 result = 1;
-}
-
-message GetWfdInfoRequest {
-}
-
-message GetWfdInfoResponse {
-  int64 result = 1;
-}
-
-message HashCodeRequest {
-}
-
-message HashCodeResponse {
-  int32 result = 1;
-}
-
-message IsGroupOwnerRequest {
-}
-
-message IsGroupOwnerResponse {
-  bool result = 1;
-}
-
-message IsOpportunisticBootstrappingMethodSupportedRequest {
-}
-
-message IsOpportunisticBootstrappingMethodSupportedResponse {
-  bool result = 1;
-}
-
-message IsPassphraseDisplayBootstrappingMethodSupportedRequest {
-}
-
-message IsPassphraseDisplayBootstrappingMethodSupportedResponse {
-  bool result = 1;
-}
-
-message IsPassphraseKeypadBootstrappingMethodSupportedRequest {
-}
-
-message IsPassphraseKeypadBootstrappingMethodSupportedResponse {
-  bool result = 1;
-}
-
-message IsPinCodeDisplayBootstrappingMethodSupportedRequest {
-}
-
-message IsPinCodeDisplayBootstrappingMethodSupportedResponse {
-  bool result = 1;
-}
-
-message IsPinCodeKeypadBootstrappingMethodSupportedRequest {
-}
-
-message IsPinCodeKeypadBootstrappingMethodSupportedResponse {
-  bool result = 1;
-}
-
-message IsServiceDiscoveryCapableRequest {
-}
-
-message IsServiceDiscoveryCapableResponse {
-  bool result = 1;
-}
-
-message ToStringRequest {
-}
-
-message ToStringResponse {
-  string result = 1;
-}
-
-message UpdateRequest {
+message AddLocalServiceRequest {
   int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
 }
 
-message UpdateResponse {
+message AddLocalServiceResponse {
 }
 
-message WpsDisplaySupportedRequest {
+message AddServiceRequestRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
 }
 
-message WpsDisplaySupportedResponse {
-  bool result = 1;
+message AddServiceRequestResponse {
 }
 
-message WpsKeypadSupportedRequest {
+message CancelConnectRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
 }
 
-message WpsKeypadSupportedResponse {
-  bool result = 1;
+message CancelConnectResponse {
 }
 
-message WpsPbcSupportedRequest {
+message ClearLocalServicesRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
 }
 
-message WpsPbcSupportedResponse {
-  bool result = 1;
+message ClearLocalServicesResponse {
 }
 
-message WriteToParcelRequest {
+message ClearServiceRequestsRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message ClearServiceRequestsResponse {
+}
+
+message ConnectRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message ConnectResponse {
+}
+
+message CreateGroup3Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message CreateGroup3Response {
+}
+
+message CreateGroup2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message CreateGroup2_1Response {
+}
+
+message DiscoverPeersRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message DiscoverPeersResponse {
+}
+
+message DiscoverPeersOnSocialChannelsRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message DiscoverPeersOnSocialChannelsResponse {
+}
+
+message DiscoverPeersOnSpecificFrequencyRequest {
   int64 arg0 = 1;
   int32 arg1 = 2;
+  int64 arg2 = 3;
 }
 
-message WriteToParcelResponse {
+message DiscoverPeersOnSpecificFrequencyResponse {
 }
 
-service WifiP2pDeviceService {
-  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
-  rpc Equals (EqualsRequest) returns (EqualsResponse);
-  rpc GetIpAddress (GetIpAddressRequest) returns (GetIpAddressResponse);
-  rpc GetVendorElements (GetVendorElementsRequest) returns (GetVendorElementsResponse);
-  rpc GetWfdInfo (GetWfdInfoRequest) returns (GetWfdInfoResponse);
-  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
-  rpc IsGroupOwner (IsGroupOwnerRequest) returns (IsGroupOwnerResponse);
-  rpc IsOpportunisticBootstrappingMethodSupported (IsOpportunisticBootstrappingMethodSupportedRequest) returns (IsOpportunisticBootstrappingMethodSupportedResponse);
-  rpc IsPassphraseDisplayBootstrappingMethodSupported (IsPassphraseDisplayBootstrappingMethodSupportedRequest) returns (IsPassphraseDisplayBootstrappingMethodSupportedResponse);
-  rpc IsPassphraseKeypadBootstrappingMethodSupported (IsPassphraseKeypadBootstrappingMethodSupportedRequest) returns (IsPassphraseKeypadBootstrappingMethodSupportedResponse);
-  rpc IsPinCodeDisplayBootstrappingMethodSupported (IsPinCodeDisplayBootstrappingMethodSupportedRequest) returns (IsPinCodeDisplayBootstrappingMethodSupportedResponse);
-  rpc IsPinCodeKeypadBootstrappingMethodSupported (IsPinCodeKeypadBootstrappingMethodSupportedRequest) returns (IsPinCodeKeypadBootstrappingMethodSupportedResponse);
-  rpc IsServiceDiscoveryCapable (IsServiceDiscoveryCapableRequest) returns (IsServiceDiscoveryCapableResponse);
-  rpc ToString (ToStringRequest) returns (ToStringResponse);
-  rpc Update (UpdateRequest) returns (UpdateResponse);
-  rpc WpsDisplaySupported (WpsDisplaySupportedRequest) returns (WpsDisplaySupportedResponse);
-  rpc WpsKeypadSupported (WpsKeypadSupportedRequest) returns (WpsKeypadSupportedResponse);
-  rpc WpsPbcSupported (WpsPbcSupportedRequest) returns (WpsPbcSupportedResponse);
-  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+message DiscoverServicesRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message DiscoverServicesResponse {
+}
+
+message DiscoverUsdBasedServicesRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message DiscoverUsdBasedServicesResponse {
+}
+
+message GetListenStateRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message GetListenStateResponse {
+}
+
+message InitializeRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message InitializeResponse {
+  int64 result = 1;
+}
+
+message IsChannelConstrainedDiscoverySupportedRequest {
+}
+
+message IsChannelConstrainedDiscoverySupportedResponse {
+  bool result = 1;
+}
+
+message IsGroupClientRemovalSupportedRequest {
+}
+
+message IsGroupClientRemovalSupportedResponse {
+  bool result = 1;
+}
+
+message IsGroupOwnerIPv6LinkLocalAddressProvidedRequest {
+}
+
+message IsGroupOwnerIPv6LinkLocalAddressProvidedResponse {
+  bool result = 1;
+}
+
+message IsPccModeSupportedRequest {
+}
+
+message IsPccModeSupportedResponse {
+  bool result = 1;
+}
+
+message IsSetVendorElementsSupportedRequest {
+}
+
+message IsSetVendorElementsSupportedResponse {
+  bool result = 1;
+}
+
+message IsWiFiDirectR2SupportedRequest {
+}
+
+message IsWiFiDirectR2SupportedResponse {
+  bool result = 1;
+}
+
+message RegisterWifiP2pListenerRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RegisterWifiP2pListenerResponse {
+}
+
+message RemoveClientRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message RemoveClientResponse {
+}
+
+message RemoveExternalApproverRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message RemoveExternalApproverResponse {
+}
+
+message RemoveGroupRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RemoveGroupResponse {
+}
+
+message RemoveLocalServiceRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message RemoveLocalServiceResponse {
+}
+
+message RemoveServiceRequestRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message RemoveServiceRequestResponse {
+}
+
+message RequestConnectionInfoRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RequestConnectionInfoResponse {
+}
+
+message RequestDeviceInfoRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RequestDeviceInfoResponse {
+}
+
+message RequestDirInfoRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message RequestDirInfoResponse {
+}
+
+message RequestDiscoveryStateRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RequestDiscoveryStateResponse {
+}
+
+message RequestGroupInfoRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RequestGroupInfoResponse {
+}
+
+message RequestNetworkInfoRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RequestNetworkInfoResponse {
+}
+
+message RequestP2pStateRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RequestP2pStateResponse {
+}
+
+message RequestPeersRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RequestPeersResponse {
+}
+
+message SetConnectionRequestResult4Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int32 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message SetConnectionRequestResult4Response {
+}
+
+message SetConnectionRequestResult5_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int32 arg2 = 3;
+  string arg3 = 4;
+  int64 arg4 = 5;
+}
+
+message SetConnectionRequestResult5_1Response {
+}
+
+message SetDnsSdResponseListenersRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message SetDnsSdResponseListenersResponse {
+}
+
+message SetServiceResponseListenerRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message SetServiceResponseListenerResponse {
+}
+
+message SetUpnpServiceResponseListenerRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message SetUpnpServiceResponseListenerResponse {
+}
+
+message SetVendorElementsRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message SetVendorElementsResponse {
+}
+
+message SetWfdInfoRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message SetWfdInfoResponse {
+}
+
+message StartListeningRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message StartListeningResponse {
+}
+
+message StartPeerDiscoveryRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message StartPeerDiscoveryResponse {
+}
+
+message StartUsdBasedLocalServiceAdvertisementRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message StartUsdBasedLocalServiceAdvertisementResponse {
+}
+
+message StopListeningRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message StopListeningResponse {
+}
+
+message StopPeerDiscoveryRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message StopPeerDiscoveryResponse {
+}
+
+message UnregisterWifiP2pListenerRequest {
+  int64 arg0 = 1;
+}
+
+message UnregisterWifiP2pListenerResponse {
+}
+
+message ValidateDirInfoRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+  int64 arg4 = 5;
+}
+
+message ValidateDirInfoResponse {
+}
+
+message GetP2pMaxAllowedVendorElementsLengthBytesRequest {
+}
+
+message GetP2pMaxAllowedVendorElementsLengthBytesResponse {
+  int32 result = 1;
+}
+
+service WifiP2pManagerService {
+  rpc AddExternalApprover (AddExternalApproverRequest) returns (AddExternalApproverResponse);
+  rpc AddLocalService (AddLocalServiceRequest) returns (AddLocalServiceResponse);
+  rpc AddServiceRequest (AddServiceRequestRequest) returns (AddServiceRequestResponse);
+  rpc CancelConnect (CancelConnectRequest) returns (CancelConnectResponse);
+  rpc ClearLocalServices (ClearLocalServicesRequest) returns (ClearLocalServicesResponse);
+  rpc ClearServiceRequests (ClearServiceRequestsRequest) returns (ClearServiceRequestsResponse);
+  rpc Connect (ConnectRequest) returns (ConnectResponse);
+  rpc CreateGroup3 (CreateGroup3Request) returns (CreateGroup3Response);
+  rpc CreateGroup2_1 (CreateGroup2_1Request) returns (CreateGroup2_1Response);
+  rpc DiscoverPeers (DiscoverPeersRequest) returns (DiscoverPeersResponse);
+  rpc DiscoverPeersOnSocialChannels (DiscoverPeersOnSocialChannelsRequest) returns (DiscoverPeersOnSocialChannelsResponse);
+  rpc DiscoverPeersOnSpecificFrequency (DiscoverPeersOnSpecificFrequencyRequest) returns (DiscoverPeersOnSpecificFrequencyResponse);
+  rpc DiscoverServices (DiscoverServicesRequest) returns (DiscoverServicesResponse);
+  rpc DiscoverUsdBasedServices (DiscoverUsdBasedServicesRequest) returns (DiscoverUsdBasedServicesResponse);
+  rpc GetListenState (GetListenStateRequest) returns (GetListenStateResponse);
+  rpc Initialize (InitializeRequest) returns (InitializeResponse);
+  rpc IsChannelConstrainedDiscoverySupported (IsChannelConstrainedDiscoverySupportedRequest) returns (IsChannelConstrainedDiscoverySupportedResponse);
+  rpc IsGroupClientRemovalSupported (IsGroupClientRemovalSupportedRequest) returns (IsGroupClientRemovalSupportedResponse);
+  rpc IsGroupOwnerIPv6LinkLocalAddressProvided (IsGroupOwnerIPv6LinkLocalAddressProvidedRequest) returns (IsGroupOwnerIPv6LinkLocalAddressProvidedResponse);
+  rpc IsPccModeSupported (IsPccModeSupportedRequest) returns (IsPccModeSupportedResponse);
+  rpc IsSetVendorElementsSupported (IsSetVendorElementsSupportedRequest) returns (IsSetVendorElementsSupportedResponse);
+  rpc IsWiFiDirectR2Supported (IsWiFiDirectR2SupportedRequest) returns (IsWiFiDirectR2SupportedResponse);
+  rpc RegisterWifiP2pListener (RegisterWifiP2pListenerRequest) returns (RegisterWifiP2pListenerResponse);
+  rpc RemoveClient (RemoveClientRequest) returns (RemoveClientResponse);
+  rpc RemoveExternalApprover (RemoveExternalApproverRequest) returns (RemoveExternalApproverResponse);
+  rpc RemoveGroup (RemoveGroupRequest) returns (RemoveGroupResponse);
+  rpc RemoveLocalService (RemoveLocalServiceRequest) returns (RemoveLocalServiceResponse);
+  rpc RemoveServiceRequest (RemoveServiceRequestRequest) returns (RemoveServiceRequestResponse);
+  rpc RequestConnectionInfo (RequestConnectionInfoRequest) returns (RequestConnectionInfoResponse);
+  rpc RequestDeviceInfo (RequestDeviceInfoRequest) returns (RequestDeviceInfoResponse);
+  rpc RequestDirInfo (RequestDirInfoRequest) returns (RequestDirInfoResponse);
+  rpc RequestDiscoveryState (RequestDiscoveryStateRequest) returns (RequestDiscoveryStateResponse);
+  rpc RequestGroupInfo (RequestGroupInfoRequest) returns (RequestGroupInfoResponse);
+  rpc RequestNetworkInfo (RequestNetworkInfoRequest) returns (RequestNetworkInfoResponse);
+  rpc RequestP2pState (RequestP2pStateRequest) returns (RequestP2pStateResponse);
+  rpc RequestPeers (RequestPeersRequest) returns (RequestPeersResponse);
+  rpc SetConnectionRequestResult4 (SetConnectionRequestResult4Request) returns (SetConnectionRequestResult4Response);
+  rpc SetConnectionRequestResult5_1 (SetConnectionRequestResult5_1Request) returns (SetConnectionRequestResult5_1Response);
+  rpc SetDnsSdResponseListeners (SetDnsSdResponseListenersRequest) returns (SetDnsSdResponseListenersResponse);
+  rpc SetServiceResponseListener (SetServiceResponseListenerRequest) returns (SetServiceResponseListenerResponse);
+  rpc SetUpnpServiceResponseListener (SetUpnpServiceResponseListenerRequest) returns (SetUpnpServiceResponseListenerResponse);
+  rpc SetVendorElements (SetVendorElementsRequest) returns (SetVendorElementsResponse);
+  rpc SetWfdInfo (SetWfdInfoRequest) returns (SetWfdInfoResponse);
+  rpc StartListening (StartListeningRequest) returns (StartListeningResponse);
+  rpc StartPeerDiscovery (StartPeerDiscoveryRequest) returns (StartPeerDiscoveryResponse);
+  rpc StartUsdBasedLocalServiceAdvertisement (StartUsdBasedLocalServiceAdvertisementRequest) returns (StartUsdBasedLocalServiceAdvertisementResponse);
+  rpc StopListening (StopListeningRequest) returns (StopListeningResponse);
+  rpc StopPeerDiscovery (StopPeerDiscoveryRequest) returns (StopPeerDiscoveryResponse);
+  rpc UnregisterWifiP2pListener (UnregisterWifiP2pListenerRequest) returns (UnregisterWifiP2pListenerResponse);
+  rpc ValidateDirInfo (ValidateDirInfoRequest) returns (ValidateDirInfoResponse);
+  rpc GetP2pMaxAllowedVendorElementsLengthBytes (GetP2pMaxAllowedVendorElementsLengthBytesRequest) returns (GetP2pMaxAllowedVendorElementsLengthBytesResponse);
 }

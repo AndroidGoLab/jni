@@ -20,37 +20,104 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                              *jni.GlobalRef
-	midManagergetDevicesRaw                 jni.MethodID
-	midManagerregisterAudioDeviceCallback   jni.MethodID
-	midManagerunregisterAudioDeviceCallback jni.MethodID
-	midManagerrequestAudioFocusRaw          jni.MethodID
-	midManagerabandonAudioFocusRequest      jni.MethodID
-	midManagergetStreamVolume               jni.MethodID
-	midManagersetStreamVolume               jni.MethodID
-	midManagergetStreamMaxVolume            jni.MethodID
-	midManagerisSpeakerphoneOn              jni.MethodID
-	midManagersetSpeakerphoneOn             jni.MethodID
-
-	clsaudioFocusRequestBuilder                              *jni.GlobalRef
-	midaudioFocusRequestBuilderInit                          jni.MethodID
-	midaudioFocusRequestBuildersetOnAudioFocusChangeListener jni.MethodID
-	midaudioFocusRequestBuilderbuild                         jni.MethodID
-
-	clsaudioDeviceInfo              *jni.GlobalRef
-	midaudioDeviceInfoID            jni.MethodID
-	midaudioDeviceInfoType          jni.MethodID
-	midaudioDeviceInfoProductName   jni.MethodID
-	midaudioDeviceInfoAddress       jni.MethodID
-	midaudioDeviceInfoIsSource      jni.MethodID
-	midaudioDeviceInfoIsSink        jni.MethodID
-	midaudioDeviceInfoSampleRates   jni.MethodID
-	midaudioDeviceInfoChannelCounts jni.MethodID
-	midaudioDeviceInfoEncodings     jni.MethodID
-
-	clsaudioDeviceCallback *jni.GlobalRef
-
-	clsaudioFocusChangeListener *jni.GlobalRef
+	clsaudioManager                                                *jni.GlobalRef
+	midaudioManagerAbandonAudioFocus                               jni.MethodID
+	midaudioManagerAbandonAudioFocusRequest                        jni.MethodID
+	midaudioManagerAddOnCommunicationDeviceChangedListener         jni.MethodID
+	midaudioManagerAddOnModeChangedListener                        jni.MethodID
+	midaudioManagerAddOnPreferredMixerAttributesChangedListener    jni.MethodID
+	midaudioManagerAdjustStreamVolume                              jni.MethodID
+	midaudioManagerAdjustSuggestedStreamVolume                     jni.MethodID
+	midaudioManagerAdjustVolume                                    jni.MethodID
+	midaudioManagerAdjustVolumeGroupVolume                         jni.MethodID
+	midaudioManagerClearCommunicationDevice                        jni.MethodID
+	midaudioManagerClearPreferredMixerAttributes                   jni.MethodID
+	midaudioManagerDispatchMediaKeyEvent                           jni.MethodID
+	midaudioManagerGenerateAudioSessionId                          jni.MethodID
+	midaudioManagerGetActivePlaybackConfigurations                 jni.MethodID
+	midaudioManagerGetActiveRecordingConfigurations                jni.MethodID
+	midaudioManagerGetAllowedCapturePolicy                         jni.MethodID
+	midaudioManagerGetAudioDevicesForAttributes                    jni.MethodID
+	midaudioManagerGetAudioHwSyncForSession                        jni.MethodID
+	midaudioManagerGetAvailableCommunicationDevices                jni.MethodID
+	midaudioManagerGetCommunicationDevice                          jni.MethodID
+	midaudioManagerGetDevices                                      jni.MethodID
+	midaudioManagerGetDirectProfilesForAttributes                  jni.MethodID
+	midaudioManagerGetEncodedSurroundMode                          jni.MethodID
+	midaudioManagerGetMicrophones                                  jni.MethodID
+	midaudioManagerGetMode                                         jni.MethodID
+	midaudioManagerGetParameters                                   jni.MethodID
+	midaudioManagerGetPreferredMixerAttributes                     jni.MethodID
+	midaudioManagerGetProperty                                     jni.MethodID
+	midaudioManagerGetRingerMode                                   jni.MethodID
+	midaudioManagerGetRouting                                      jni.MethodID
+	midaudioManagerGetSpatializer                                  jni.MethodID
+	midaudioManagerGetStreamMaxVolume                              jni.MethodID
+	midaudioManagerGetStreamMinVolume                              jni.MethodID
+	midaudioManagerGetStreamVolume                                 jni.MethodID
+	midaudioManagerGetStreamVolumeDb                               jni.MethodID
+	midaudioManagerGetSupportedDeviceTypes                         jni.MethodID
+	midaudioManagerGetSupportedMixerAttributes                     jni.MethodID
+	midaudioManagerGetVibrateSetting                               jni.MethodID
+	midaudioManagerGetVolumeGroupIdForAttributes                   jni.MethodID
+	midaudioManagerIsBluetoothA2dpOn                               jni.MethodID
+	midaudioManagerIsBluetoothScoAvailableOffCall                  jni.MethodID
+	midaudioManagerIsBluetoothScoOn                                jni.MethodID
+	midaudioManagerIsCallScreeningModeSupported                    jni.MethodID
+	midaudioManagerIsMicrophoneMute                                jni.MethodID
+	midaudioManagerIsMusicActive                                   jni.MethodID
+	midaudioManagerIsRampingRingerEnabled                          jni.MethodID
+	midaudioManagerIsSpeakerphoneOn                                jni.MethodID
+	midaudioManagerIsStreamMute                                    jni.MethodID
+	midaudioManagerIsSurroundFormatEnabled                         jni.MethodID
+	midaudioManagerIsVolumeFixed                                   jni.MethodID
+	midaudioManagerIsVolumeGroupMuted                              jni.MethodID
+	midaudioManagerIsWiredHeadsetOn                                jni.MethodID
+	midaudioManagerLoadSoundEffects                                jni.MethodID
+	midaudioManagerPlaySoundEffect1                                jni.MethodID
+	midaudioManagerPlaySoundEffect2_1                              jni.MethodID
+	midaudioManagerRegisterMediaButtonEventReceiver1               jni.MethodID
+	midaudioManagerRegisterMediaButtonEventReceiver1_1             jni.MethodID
+	midaudioManagerRegisterRemoteControlClient                     jni.MethodID
+	midaudioManagerRegisterRemoteController                        jni.MethodID
+	midaudioManagerRemoveOnCommunicationDeviceChangedListener      jni.MethodID
+	midaudioManagerRemoveOnModeChangedListener                     jni.MethodID
+	midaudioManagerRemoveOnPreferredMixerAttributesChangedListener jni.MethodID
+	midaudioManagerRequestAudioFocus1                              jni.MethodID
+	midaudioManagerRequestAudioFocus3_1                            jni.MethodID
+	midaudioManagerSetAllowedCapturePolicy                         jni.MethodID
+	midaudioManagerSetBluetoothA2dpOn                              jni.MethodID
+	midaudioManagerSetBluetoothScoOn                               jni.MethodID
+	midaudioManagerSetCommunicationDevice                          jni.MethodID
+	midaudioManagerSetEncodedSurroundMode                          jni.MethodID
+	midaudioManagerSetMicrophoneMute                               jni.MethodID
+	midaudioManagerSetMode                                         jni.MethodID
+	midaudioManagerSetParameters                                   jni.MethodID
+	midaudioManagerSetPreferredMixerAttributes                     jni.MethodID
+	midaudioManagerSetRingerMode                                   jni.MethodID
+	midaudioManagerSetRouting                                      jni.MethodID
+	midaudioManagerSetSpeakerphoneOn                               jni.MethodID
+	midaudioManagerSetStreamMute                                   jni.MethodID
+	midaudioManagerSetStreamSolo                                   jni.MethodID
+	midaudioManagerSetStreamVolume                                 jni.MethodID
+	midaudioManagerSetSurroundFormatEnabled                        jni.MethodID
+	midaudioManagerSetVibrateSetting                               jni.MethodID
+	midaudioManagerSetWiredHeadsetOn                               jni.MethodID
+	midaudioManagerShouldVibrate                                   jni.MethodID
+	midaudioManagerStartBluetoothSco                               jni.MethodID
+	midaudioManagerStopBluetoothSco                                jni.MethodID
+	midaudioManagerUnloadSoundEffects                              jni.MethodID
+	midaudioManagerUnregisterAudioDeviceCallback                   jni.MethodID
+	midaudioManagerUnregisterAudioPlaybackCallback                 jni.MethodID
+	midaudioManagerUnregisterAudioRecordingCallback                jni.MethodID
+	midaudioManagerUnregisterMediaButtonEventReceiver1             jni.MethodID
+	midaudioManagerUnregisterMediaButtonEventReceiver1_1           jni.MethodID
+	midaudioManagerUnregisterRemoteControlClient                   jni.MethodID
+	midaudioManagerUnregisterRemoteController                      jni.MethodID
+	midaudioManagerGetDirectPlaybackSupport                        jni.MethodID
+	midaudioManagerGetPlaybackOffloadSupport                       jni.MethodID
+	midaudioManagerIsHapticPlaybackSupported                       jni.MethodID
+	midaudioManagerIsOffloadedPlaybackSupported                    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -75,140 +142,492 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.media.AudioManager: %w", err)
 	}
-	clsManager = env.NewGlobalRef(&c.Object)
+	clsaudioManager = env.NewGlobalRef(&c.Object)
 
-	midManagergetDevicesRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDevices", "(I)[Landroid/media/AudioDeviceInfo;")
+	midaudioManagerAbandonAudioFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "abandonAudioFocus", "(Landroid/media/AudioManager$OnAudioFocusChangeListener;)I")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioManager.getDevices: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.abandonAudioFocus: %w", err)
 	}
 
-	midManagerregisterAudioDeviceCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerAudioDeviceCallback", "(Landroid/media/AudioDeviceCallback;Landroid/os/Handler;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.AudioManager.registerAudioDeviceCallback: %w", err)
-	}
-
-	midManagerunregisterAudioDeviceCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterAudioDeviceCallback", "(Landroid/media/AudioDeviceCallback;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.AudioManager.unregisterAudioDeviceCallback: %w", err)
-	}
-
-	midManagerrequestAudioFocusRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestAudioFocus", "(Landroid/media/AudioFocusRequest;)I")
-	if err != nil {
-		return fmt.Errorf("get method android.media.AudioManager.requestAudioFocus: %w", err)
-	}
-
-	midManagerabandonAudioFocusRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "abandonAudioFocusRequest", "(Landroid/media/AudioFocusRequest;)I")
+	midaudioManagerAbandonAudioFocusRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "abandonAudioFocusRequest", "(Landroid/media/AudioFocusRequest;)I")
 	if err != nil {
 		return fmt.Errorf("get method android.media.AudioManager.abandonAudioFocusRequest: %w", err)
 	}
 
-	midManagergetStreamVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getStreamVolume", "(I)I")
+	midaudioManagerAddOnCommunicationDeviceChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "addOnCommunicationDeviceChangedListener", "(Ljava/util/concurrent/Executor;Landroid/media/AudioManager$OnCommunicationDeviceChangedListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioManager.getStreamVolume: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.addOnCommunicationDeviceChangedListener: %w", err)
 	}
 
-	midManagersetStreamVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setStreamVolume", "(III)V")
+	midaudioManagerAddOnModeChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "addOnModeChangedListener", "(Ljava/util/concurrent/Executor;Landroid/media/AudioManager$OnModeChangedListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioManager.setStreamVolume: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.addOnModeChangedListener: %w", err)
 	}
 
-	midManagergetStreamMaxVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getStreamMaxVolume", "(I)I")
+	midaudioManagerAddOnPreferredMixerAttributesChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "addOnPreferredMixerAttributesChangedListener", "(Ljava/util/concurrent/Executor;Landroid/media/AudioManager$OnPreferredMixerAttributesChangedListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.addOnPreferredMixerAttributesChangedListener: %w", err)
+	}
+
+	midaudioManagerAdjustStreamVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "adjustStreamVolume", "(III)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.adjustStreamVolume: %w", err)
+	}
+
+	midaudioManagerAdjustSuggestedStreamVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "adjustSuggestedStreamVolume", "(III)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.adjustSuggestedStreamVolume: %w", err)
+	}
+
+	midaudioManagerAdjustVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "adjustVolume", "(II)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.adjustVolume: %w", err)
+	}
+
+	midaudioManagerAdjustVolumeGroupVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "adjustVolumeGroupVolume", "(III)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.adjustVolumeGroupVolume: %w", err)
+	}
+
+	midaudioManagerClearCommunicationDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "clearCommunicationDevice", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.clearCommunicationDevice: %w", err)
+	}
+
+	midaudioManagerClearPreferredMixerAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "clearPreferredMixerAttributes", "(Landroid/media/AudioAttributes;Landroid/media/AudioDeviceInfo;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.clearPreferredMixerAttributes: %w", err)
+	}
+
+	midaudioManagerDispatchMediaKeyEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "dispatchMediaKeyEvent", "(Landroid/view/KeyEvent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.dispatchMediaKeyEvent: %w", err)
+	}
+
+	midaudioManagerGenerateAudioSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "generateAudioSessionId", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.generateAudioSessionId: %w", err)
+	}
+
+	midaudioManagerGetActivePlaybackConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getActivePlaybackConfigurations", "()Ljava/util/List<android$media$AudioPlaybackConfiguration>;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getActivePlaybackConfigurations: %w", err)
+	}
+
+	midaudioManagerGetActiveRecordingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getActiveRecordingConfigurations", "()Ljava/util/List<android$media$AudioRecordingConfiguration>;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getActiveRecordingConfigurations: %w", err)
+	}
+
+	midaudioManagerGetAllowedCapturePolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getAllowedCapturePolicy", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getAllowedCapturePolicy: %w", err)
+	}
+
+	midaudioManagerGetAudioDevicesForAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getAudioDevicesForAttributes", "(Landroid/media/AudioAttributes;)Ljava/util/List<android$media$AudioDeviceInfo>;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getAudioDevicesForAttributes: %w", err)
+	}
+
+	midaudioManagerGetAudioHwSyncForSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getAudioHwSyncForSession", "(I)I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getAudioHwSyncForSession: %w", err)
+	}
+
+	midaudioManagerGetAvailableCommunicationDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getAvailableCommunicationDevices", "()Ljava/util/List<android$media$AudioDeviceInfo>;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getAvailableCommunicationDevices: %w", err)
+	}
+
+	midaudioManagerGetCommunicationDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getCommunicationDevice", "()Landroid/media/AudioDeviceInfo;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getCommunicationDevice: %w", err)
+	}
+
+	midaudioManagerGetDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getDevices", "(I)[Landroid/media/AudioDeviceInfo;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getDevices: %w", err)
+	}
+
+	midaudioManagerGetDirectProfilesForAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getDirectProfilesForAttributes", "(Landroid/media/AudioAttributes;)Ljava/util/List<android$media$AudioProfile>;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getDirectProfilesForAttributes: %w", err)
+	}
+
+	midaudioManagerGetEncodedSurroundMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getEncodedSurroundMode", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getEncodedSurroundMode: %w", err)
+	}
+
+	midaudioManagerGetMicrophones, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getMicrophones", "()Ljava/util/List<android$media$MicrophoneInfo>;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getMicrophones: %w", err)
+	}
+
+	midaudioManagerGetMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getMode", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getMode: %w", err)
+	}
+
+	midaudioManagerGetParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getParameters", "(Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getParameters: %w", err)
+	}
+
+	midaudioManagerGetPreferredMixerAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getPreferredMixerAttributes", "(Landroid/media/AudioAttributes;Landroid/media/AudioDeviceInfo;)Landroid/media/AudioMixerAttributes;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getPreferredMixerAttributes: %w", err)
+	}
+
+	midaudioManagerGetProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getProperty", "(Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getProperty: %w", err)
+	}
+
+	midaudioManagerGetRingerMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getRingerMode", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getRingerMode: %w", err)
+	}
+
+	midaudioManagerGetRouting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getRouting", "(I)I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getRouting: %w", err)
+	}
+
+	midaudioManagerGetSpatializer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getSpatializer", "()Landroid/media/Spatializer;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getSpatializer: %w", err)
+	}
+
+	midaudioManagerGetStreamMaxVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getStreamMaxVolume", "(I)I")
 	if err != nil {
 		return fmt.Errorf("get method android.media.AudioManager.getStreamMaxVolume: %w", err)
 	}
 
-	midManagerisSpeakerphoneOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isSpeakerphoneOn", "()Z")
+	midaudioManagerGetStreamMinVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getStreamMinVolume", "(I)I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getStreamMinVolume: %w", err)
+	}
+
+	midaudioManagerGetStreamVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getStreamVolume", "(I)I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getStreamVolume: %w", err)
+	}
+
+	midaudioManagerGetStreamVolumeDb, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getStreamVolumeDb", "(III)F")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getStreamVolumeDb: %w", err)
+	}
+
+	midaudioManagerGetSupportedDeviceTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getSupportedDeviceTypes", "(I)Ljava/util/Set<java$lang$Integer>;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getSupportedDeviceTypes: %w", err)
+	}
+
+	midaudioManagerGetSupportedMixerAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getSupportedMixerAttributes", "(Landroid/media/AudioDeviceInfo;)Ljava/util/List<android$media$AudioMixerAttributes>;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getSupportedMixerAttributes: %w", err)
+	}
+
+	midaudioManagerGetVibrateSetting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getVibrateSetting", "(I)I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getVibrateSetting: %w", err)
+	}
+
+	midaudioManagerGetVolumeGroupIdForAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getVolumeGroupIdForAttributes", "(Landroid/media/AudioAttributes;)I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getVolumeGroupIdForAttributes: %w", err)
+	}
+
+	midaudioManagerIsBluetoothA2dpOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isBluetoothA2dpOn", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.isBluetoothA2dpOn: %w", err)
+	}
+
+	midaudioManagerIsBluetoothScoAvailableOffCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isBluetoothScoAvailableOffCall", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.isBluetoothScoAvailableOffCall: %w", err)
+	}
+
+	midaudioManagerIsBluetoothScoOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isBluetoothScoOn", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.isBluetoothScoOn: %w", err)
+	}
+
+	midaudioManagerIsCallScreeningModeSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isCallScreeningModeSupported", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.isCallScreeningModeSupported: %w", err)
+	}
+
+	midaudioManagerIsMicrophoneMute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isMicrophoneMute", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.isMicrophoneMute: %w", err)
+	}
+
+	midaudioManagerIsMusicActive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isMusicActive", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.isMusicActive: %w", err)
+	}
+
+	midaudioManagerIsRampingRingerEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isRampingRingerEnabled", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.isRampingRingerEnabled: %w", err)
+	}
+
+	midaudioManagerIsSpeakerphoneOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isSpeakerphoneOn", "()Z")
 	if err != nil {
 		return fmt.Errorf("get method android.media.AudioManager.isSpeakerphoneOn: %w", err)
 	}
 
-	midManagersetSpeakerphoneOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setSpeakerphoneOn", "(Z)V")
+	midaudioManagerIsStreamMute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isStreamMute", "(I)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.isStreamMute: %w", err)
+	}
+
+	midaudioManagerIsSurroundFormatEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isSurroundFormatEnabled", "(I)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.isSurroundFormatEnabled: %w", err)
+	}
+
+	midaudioManagerIsVolumeFixed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isVolumeFixed", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.isVolumeFixed: %w", err)
+	}
+
+	midaudioManagerIsVolumeGroupMuted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isVolumeGroupMuted", "(I)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.isVolumeGroupMuted: %w", err)
+	}
+
+	midaudioManagerIsWiredHeadsetOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isWiredHeadsetOn", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.isWiredHeadsetOn: %w", err)
+	}
+
+	midaudioManagerLoadSoundEffects, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "loadSoundEffects", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.loadSoundEffects: %w", err)
+	}
+
+	midaudioManagerPlaySoundEffect1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "playSoundEffect", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.playSoundEffect: %w", err)
+	}
+
+	midaudioManagerPlaySoundEffect2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "playSoundEffect", "(IF)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.playSoundEffect: %w", err)
+	}
+
+	midaudioManagerRegisterMediaButtonEventReceiver1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "registerMediaButtonEventReceiver", "(Landroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.registerMediaButtonEventReceiver: %w", err)
+	}
+
+	midaudioManagerRegisterMediaButtonEventReceiver1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "registerMediaButtonEventReceiver", "(Landroid/content/ComponentName;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.registerMediaButtonEventReceiver: %w", err)
+	}
+
+	midaudioManagerRegisterRemoteControlClient, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "registerRemoteControlClient", "(Landroid/media/RemoteControlClient;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.registerRemoteControlClient: %w", err)
+	}
+
+	midaudioManagerRegisterRemoteController, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "registerRemoteController", "(Landroid/media/RemoteController;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.registerRemoteController: %w", err)
+	}
+
+	midaudioManagerRemoveOnCommunicationDeviceChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "removeOnCommunicationDeviceChangedListener", "(Landroid/media/AudioManager$OnCommunicationDeviceChangedListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.removeOnCommunicationDeviceChangedListener: %w", err)
+	}
+
+	midaudioManagerRemoveOnModeChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "removeOnModeChangedListener", "(Landroid/media/AudioManager$OnModeChangedListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.removeOnModeChangedListener: %w", err)
+	}
+
+	midaudioManagerRemoveOnPreferredMixerAttributesChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "removeOnPreferredMixerAttributesChangedListener", "(Landroid/media/AudioManager$OnPreferredMixerAttributesChangedListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.removeOnPreferredMixerAttributesChangedListener: %w", err)
+	}
+
+	midaudioManagerRequestAudioFocus1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "requestAudioFocus", "(Landroid/media/AudioFocusRequest;)I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.requestAudioFocus: %w", err)
+	}
+
+	midaudioManagerRequestAudioFocus3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "requestAudioFocus", "(Landroid/media/AudioManager$OnAudioFocusChangeListener;II)I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.requestAudioFocus: %w", err)
+	}
+
+	midaudioManagerSetAllowedCapturePolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setAllowedCapturePolicy", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.setAllowedCapturePolicy: %w", err)
+	}
+
+	midaudioManagerSetBluetoothA2dpOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setBluetoothA2dpOn", "(Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.setBluetoothA2dpOn: %w", err)
+	}
+
+	midaudioManagerSetBluetoothScoOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setBluetoothScoOn", "(Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.setBluetoothScoOn: %w", err)
+	}
+
+	midaudioManagerSetCommunicationDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setCommunicationDevice", "(Landroid/media/AudioDeviceInfo;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.setCommunicationDevice: %w", err)
+	}
+
+	midaudioManagerSetEncodedSurroundMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setEncodedSurroundMode", "(I)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.setEncodedSurroundMode: %w", err)
+	}
+
+	midaudioManagerSetMicrophoneMute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setMicrophoneMute", "(Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.setMicrophoneMute: %w", err)
+	}
+
+	midaudioManagerSetMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setMode", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.setMode: %w", err)
+	}
+
+	midaudioManagerSetParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setParameters", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.setParameters: %w", err)
+	}
+
+	midaudioManagerSetPreferredMixerAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setPreferredMixerAttributes", "(Landroid/media/AudioAttributes;Landroid/media/AudioDeviceInfo;Landroid/media/AudioMixerAttributes;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.setPreferredMixerAttributes: %w", err)
+	}
+
+	midaudioManagerSetRingerMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setRingerMode", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.setRingerMode: %w", err)
+	}
+
+	midaudioManagerSetRouting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setRouting", "(III)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.setRouting: %w", err)
+	}
+
+	midaudioManagerSetSpeakerphoneOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setSpeakerphoneOn", "(Z)V")
 	if err != nil {
 		return fmt.Errorf("get method android.media.AudioManager.setSpeakerphoneOn: %w", err)
 	}
 
-	c, err = env.FindClass("android/media/AudioFocusRequest$Builder")
+	midaudioManagerSetStreamMute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setStreamMute", "(IZ)V")
 	if err != nil {
-		return fmt.Errorf("find class android.media.AudioFocusRequest$Builder: %w", err)
-	}
-	clsaudioFocusRequestBuilder = env.NewGlobalRef(&c.Object)
-	midaudioFocusRequestBuilderInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioFocusRequestBuilder)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.media.AudioFocusRequest$Builder.<init>: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.setStreamMute: %w", err)
 	}
 
-	midaudioFocusRequestBuildersetOnAudioFocusChangeListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioFocusRequestBuilder)), "setOnAudioFocusChangeListener", "(Landroid/media/AudioManager$OnAudioFocusChangeListener;)Landroid/media/AudioFocusRequest$Builder;")
+	midaudioManagerSetStreamSolo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setStreamSolo", "(IZ)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioFocusRequest$Builder.setOnAudioFocusChangeListener: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.setStreamSolo: %w", err)
 	}
 
-	midaudioFocusRequestBuilderbuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioFocusRequestBuilder)), "build", "()Landroid/media/AudioFocusRequest;")
+	midaudioManagerSetStreamVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setStreamVolume", "(III)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioFocusRequest$Builder.build: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.setStreamVolume: %w", err)
 	}
 
-	c, err = env.FindClass("android/media/AudioDeviceInfo")
+	midaudioManagerSetSurroundFormatEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setSurroundFormatEnabled", "(IZ)Z")
 	if err != nil {
-		return fmt.Errorf("find class android.media.AudioDeviceInfo: %w", err)
-	}
-	clsaudioDeviceInfo = env.NewGlobalRef(&c.Object)
-
-	midaudioDeviceInfoID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getId", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.media.AudioDeviceInfo.getId: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.setSurroundFormatEnabled: %w", err)
 	}
 
-	midaudioDeviceInfoType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getType", "()I")
+	midaudioManagerSetVibrateSetting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setVibrateSetting", "(II)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioDeviceInfo.getType: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.setVibrateSetting: %w", err)
 	}
 
-	midaudioDeviceInfoProductName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getProductName", "()Ljava/lang/CharSequence;")
+	midaudioManagerSetWiredHeadsetOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "setWiredHeadsetOn", "(Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioDeviceInfo.getProductName: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.setWiredHeadsetOn: %w", err)
 	}
 
-	midaudioDeviceInfoAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getAddress", "()Ljava/lang/String;")
+	midaudioManagerShouldVibrate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "shouldVibrate", "(I)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioDeviceInfo.getAddress: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.shouldVibrate: %w", err)
 	}
 
-	midaudioDeviceInfoIsSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "isSource", "()Z")
+	midaudioManagerStartBluetoothSco, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "startBluetoothSco", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioDeviceInfo.isSource: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.startBluetoothSco: %w", err)
 	}
 
-	midaudioDeviceInfoIsSink, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "isSink", "()Z")
+	midaudioManagerStopBluetoothSco, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "stopBluetoothSco", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioDeviceInfo.isSink: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.stopBluetoothSco: %w", err)
 	}
 
-	midaudioDeviceInfoSampleRates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getSampleRates", "()[I")
+	midaudioManagerUnloadSoundEffects, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "unloadSoundEffects", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioDeviceInfo.getSampleRates: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.unloadSoundEffects: %w", err)
 	}
 
-	midaudioDeviceInfoChannelCounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getChannelCounts", "()[I")
+	midaudioManagerUnregisterAudioDeviceCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "unregisterAudioDeviceCallback", "(Landroid/media/AudioDeviceCallback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioDeviceInfo.getChannelCounts: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.unregisterAudioDeviceCallback: %w", err)
 	}
 
-	midaudioDeviceInfoEncodings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioDeviceInfo)), "getEncodings", "()[I")
+	midaudioManagerUnregisterAudioPlaybackCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "unregisterAudioPlaybackCallback", "(Landroid/media/AudioManager$AudioPlaybackCallback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.AudioDeviceInfo.getEncodings: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.unregisterAudioPlaybackCallback: %w", err)
 	}
 
-	c, err = env.FindClass("android/media/AudioDeviceCallback")
+	midaudioManagerUnregisterAudioRecordingCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "unregisterAudioRecordingCallback", "(Landroid/media/AudioManager$AudioRecordingCallback;)V")
 	if err != nil {
-		return fmt.Errorf("find class android.media.AudioDeviceCallback: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.unregisterAudioRecordingCallback: %w", err)
 	}
-	clsaudioDeviceCallback = env.NewGlobalRef(&c.Object)
 
-	c, err = env.FindClass("android/media/AudioManager$OnAudioFocusChangeListener")
+	midaudioManagerUnregisterMediaButtonEventReceiver1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "unregisterMediaButtonEventReceiver", "(Landroid/app/PendingIntent;)V")
 	if err != nil {
-		return fmt.Errorf("find class android.media.AudioManager$OnAudioFocusChangeListener: %w", err)
+		return fmt.Errorf("get method android.media.AudioManager.unregisterMediaButtonEventReceiver: %w", err)
 	}
-	clsaudioFocusChangeListener = env.NewGlobalRef(&c.Object)
+
+	midaudioManagerUnregisterMediaButtonEventReceiver1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "unregisterMediaButtonEventReceiver", "(Landroid/content/ComponentName;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.unregisterMediaButtonEventReceiver: %w", err)
+	}
+
+	midaudioManagerUnregisterRemoteControlClient, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "unregisterRemoteControlClient", "(Landroid/media/RemoteControlClient;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.unregisterRemoteControlClient: %w", err)
+	}
+
+	midaudioManagerUnregisterRemoteController, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "unregisterRemoteController", "(Landroid/media/RemoteController;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.unregisterRemoteController: %w", err)
+	}
+
+	midaudioManagerGetDirectPlaybackSupport, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getDirectPlaybackSupport", "(Landroid/media/AudioFormat;Landroid/media/AudioAttributes;)I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getDirectPlaybackSupport: %w", err)
+	}
+
+	midaudioManagerGetPlaybackOffloadSupport, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "getPlaybackOffloadSupport", "(Landroid/media/AudioFormat;Landroid/media/AudioAttributes;)I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.getPlaybackOffloadSupport: %w", err)
+	}
+
+	midaudioManagerIsHapticPlaybackSupported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isHapticPlaybackSupported", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.isHapticPlaybackSupported: %w", err)
+	}
+
+	midaudioManagerIsOffloadedPlaybackSupported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsaudioManager)), "isOffloadedPlaybackSupported", "(Landroid/media/AudioFormat;Landroid/media/AudioAttributes;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.AudioManager.isOffloadedPlaybackSupported: %w", err)
+	}
 
 	return nil
 }

@@ -20,25 +20,25 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                     *jni.GlobalRef
-	midManagerIsEnabled            jni.MethodID
-	midManagergetConnectionInfoRaw jni.MethodID
-	midManagergetScanResultsRaw    jni.MethodID
-
-	clsConnectionInfo          *jni.GlobalRef
-	midConnectionInfoSSID      jni.MethodID
-	midConnectionInfoBSSID     jni.MethodID
-	midConnectionInfoRSSI      jni.MethodID
-	midConnectionInfoLinkSpeed jni.MethodID
-	midConnectionInfoFrequency jni.MethodID
-	midConnectionInfoIPAddress jni.MethodID
-
-	clsScanResult             *jni.GlobalRef
-	fidScanResultSSID         jni.FieldID
-	fidScanResultBSSID        jni.FieldID
-	fidScanResultRSSI         jni.FieldID
-	fidScanResultFrequency    jni.FieldID
-	fidScanResultCapabilities jni.FieldID
+	clsscanResult                                        *jni.GlobalRef
+	midscanResultDescribeContents                        jni.MethodID
+	midscanResultGetAffiliatedMloLinks                   jni.MethodID
+	midscanResultGetApMldMacAddress                      jni.MethodID
+	midscanResultGetApMloLinkId                          jni.MethodID
+	midscanResultGetInformationElements                  jni.MethodID
+	midscanResultGetSecurityTypes                        jni.MethodID
+	midscanResultGetWifiSsid                             jni.MethodID
+	midscanResultGetWifiStandard                         jni.MethodID
+	midscanResultIs80211azNtbResponder                   jni.MethodID
+	midscanResultIs80211mcResponder                      jni.MethodID
+	midscanResultIsPasspointNetwork                      jni.MethodID
+	midscanResultIsRangingFrameProtectionRequired        jni.MethodID
+	midscanResultIsSecureHeLtfSupported                  jni.MethodID
+	midscanResultIsTwtResponder                          jni.MethodID
+	midscanResultToString                                jni.MethodID
+	midscanResultWriteToParcel                           jni.MethodID
+	midscanResultConvertChannelToFrequencyMhzIfSupported jni.MethodID
+	midscanResultConvertFrequencyMhzToChannelIfSupported jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -59,92 +59,100 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/net/wifi/WifiManager")
-	if err != nil {
-		return fmt.Errorf("find class android.net.wifi.WifiManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagerIsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isWifiEnabled", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.WifiManager.isWifiEnabled: %w", err)
-	}
-
-	midManagergetConnectionInfoRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getConnectionInfo", "()Landroid/net/wifi/WifiInfo;")
-	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.WifiManager.getConnectionInfo: %w", err)
-	}
-
-	midManagergetScanResultsRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getScanResults", "()Ljava/util/List;")
-	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.WifiManager.getScanResults: %w", err)
-	}
-
-	c, err = env.FindClass("android/net/wifi/WifiInfo")
-	if err != nil {
-		return fmt.Errorf("find class android.net.wifi.WifiInfo: %w", err)
-	}
-	clsConnectionInfo = env.NewGlobalRef(&c.Object)
-
-	midConnectionInfoSSID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionInfo)), "getSSID", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.WifiInfo.getSSID: %w", err)
-	}
-
-	midConnectionInfoBSSID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionInfo)), "getBSSID", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.WifiInfo.getBSSID: %w", err)
-	}
-
-	midConnectionInfoRSSI, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionInfo)), "getRssi", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.WifiInfo.getRssi: %w", err)
-	}
-
-	midConnectionInfoLinkSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionInfo)), "getLinkSpeed", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.WifiInfo.getLinkSpeed: %w", err)
-	}
-
-	midConnectionInfoFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionInfo)), "getFrequency", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.WifiInfo.getFrequency: %w", err)
-	}
-
-	midConnectionInfoIPAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionInfo)), "getIpAddress", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.net.wifi.WifiInfo.getIpAddress: %w", err)
-	}
-
 	c, err = env.FindClass("android/net/wifi/ScanResult")
 	if err != nil {
 		return fmt.Errorf("find class android.net.wifi.ScanResult: %w", err)
 	}
-	clsScanResult = env.NewGlobalRef(&c.Object)
+	clsscanResult = env.NewGlobalRef(&c.Object)
 
-	fidScanResultSSID, err = env.GetFieldID((*jni.Class)(unsafe.Pointer(clsScanResult)), "SSID", "Ljava/lang/String;")
+	midscanResultDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "describeContents", "()I")
 	if err != nil {
-		return fmt.Errorf("get field android.net.wifi.ScanResult.SSID: %w", err)
+		return fmt.Errorf("get method android.net.wifi.ScanResult.describeContents: %w", err)
 	}
 
-	fidScanResultBSSID, err = env.GetFieldID((*jni.Class)(unsafe.Pointer(clsScanResult)), "BSSID", "Ljava/lang/String;")
+	midscanResultGetAffiliatedMloLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getAffiliatedMloLinks", "()Ljava/util/List<android$net$wifi$MloLink>;")
 	if err != nil {
-		return fmt.Errorf("get field android.net.wifi.ScanResult.BSSID: %w", err)
+		return fmt.Errorf("get method android.net.wifi.ScanResult.getAffiliatedMloLinks: %w", err)
 	}
 
-	fidScanResultRSSI, err = env.GetFieldID((*jni.Class)(unsafe.Pointer(clsScanResult)), "level", "I")
+	midscanResultGetApMldMacAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getApMldMacAddress", "()Landroid/net/MacAddress;")
 	if err != nil {
-		return fmt.Errorf("get field android.net.wifi.ScanResult.level: %w", err)
+		return fmt.Errorf("get method android.net.wifi.ScanResult.getApMldMacAddress: %w", err)
 	}
 
-	fidScanResultFrequency, err = env.GetFieldID((*jni.Class)(unsafe.Pointer(clsScanResult)), "frequency", "I")
+	midscanResultGetApMloLinkId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getApMloLinkId", "()I")
 	if err != nil {
-		return fmt.Errorf("get field android.net.wifi.ScanResult.frequency: %w", err)
+		return fmt.Errorf("get method android.net.wifi.ScanResult.getApMloLinkId: %w", err)
 	}
 
-	fidScanResultCapabilities, err = env.GetFieldID((*jni.Class)(unsafe.Pointer(clsScanResult)), "capabilities", "Ljava/lang/String;")
+	midscanResultGetInformationElements, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getInformationElements", "()Ljava/util/List<android/net/wifi/ScanResult$InformationElement>;")
 	if err != nil {
-		return fmt.Errorf("get field android.net.wifi.ScanResult.capabilities: %w", err)
+		return fmt.Errorf("get method android.net.wifi.ScanResult.getInformationElements: %w", err)
+	}
+
+	midscanResultGetSecurityTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getSecurityTypes", "()[I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.ScanResult.getSecurityTypes: %w", err)
+	}
+
+	midscanResultGetWifiSsid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getWifiSsid", "()Landroid/net/wifi/WifiSsid;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.ScanResult.getWifiSsid: %w", err)
+	}
+
+	midscanResultGetWifiStandard, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "getWifiStandard", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.ScanResult.getWifiStandard: %w", err)
+	}
+
+	midscanResultIs80211azNtbResponder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "is80211azNtbResponder", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.ScanResult.is80211azNtbResponder: %w", err)
+	}
+
+	midscanResultIs80211mcResponder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "is80211mcResponder", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.ScanResult.is80211mcResponder: %w", err)
+	}
+
+	midscanResultIsPasspointNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "isPasspointNetwork", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.ScanResult.isPasspointNetwork: %w", err)
+	}
+
+	midscanResultIsRangingFrameProtectionRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "isRangingFrameProtectionRequired", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.ScanResult.isRangingFrameProtectionRequired: %w", err)
+	}
+
+	midscanResultIsSecureHeLtfSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "isSecureHeLtfSupported", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.ScanResult.isSecureHeLtfSupported: %w", err)
+	}
+
+	midscanResultIsTwtResponder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "isTwtResponder", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.ScanResult.isTwtResponder: %w", err)
+	}
+
+	midscanResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.ScanResult.toString: %w", err)
+	}
+
+	midscanResultWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.ScanResult.writeToParcel: %w", err)
+	}
+
+	midscanResultConvertChannelToFrequencyMhzIfSupported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "convertChannelToFrequencyMhzIfSupported", "(II)I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.ScanResult.convertChannelToFrequencyMhzIfSupported: %w", err)
+	}
+
+	midscanResultConvertFrequencyMhzToChannelIfSupported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsscanResult)), "convertFrequencyMhzToChannelIfSupported", "(I)I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.wifi.ScanResult.convertFrequencyMhzToChannelIfSupported: %w", err)
 	}
 
 	return nil

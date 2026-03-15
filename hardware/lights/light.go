@@ -17,43 +17,243 @@ var (
 	_ *app.Context
 )
 
-// Light holds data extracted from android.hardware.lights.Light.
-type Light struct {
-	ID   int
-	Name string
-	Type int
+// light wraps android.hardware.lights.Light.
+type light struct {
+	VM  *jni.VM
+	Obj *jni.GlobalRef
 }
 
-// ExtractLight extracts all fields from a android.hardware.lights.Light JNI object.
-func ExtractLight(env *jni.Env, obj *jni.Object) (*Light, error) {
-	if err := ensureInit(env); err != nil {
-		return nil, err
-	}
-	var result Light
-
-	{
-		raw, err := env.CallIntMethod(obj, midLightID)
-		if err != nil {
-			return nil, fmt.Errorf("Light.ID: %w", err)
+// DescribeContents calls android.hardware.lights.Light.describeContents.
+func (m *light) DescribeContents() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
 		}
-		result.ID = int(raw)
-	}
-
-	{
-		raw, err := env.CallObjectMethod(obj, midLightName)
-		if err != nil {
-			return nil, fmt.Errorf("Light.Name: %w", err)
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midlightDescribeContents,
+		)
+		if callErr != nil {
+			return callErr
 		}
-		result.Name = env.GoString((*jni.String)(unsafe.Pointer(raw)))
-	}
+		return callErr
+	})
+	return result, callErr
+}
 
-	{
-		raw, err := env.CallIntMethod(obj, midLightType)
-		if err != nil {
-			return nil, fmt.Errorf("Light.Type: %w", err)
+// Equals calls android.hardware.lights.Light.equals.
+func (m *light) Equals(arg0 *jni.Object) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
 		}
-		result.Type = int(raw)
-	}
 
-	return &result, nil
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midlightEquals, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetId calls android.hardware.lights.Light.getId.
+func (m *light) GetId() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midlightGetId,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetName calls android.hardware.lights.Light.getName.
+func (m *light) GetName() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midlightGetName,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetOrdinal calls android.hardware.lights.Light.getOrdinal.
+func (m *light) GetOrdinal() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midlightGetOrdinal,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetType calls android.hardware.lights.Light.getType.
+func (m *light) GetType() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midlightGetType,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// HasBrightnessControl calls android.hardware.lights.Light.hasBrightnessControl.
+func (m *light) HasBrightnessControl() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midlightHasBrightnessControl,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// HasRgbControl calls android.hardware.lights.Light.hasRgbControl.
+func (m *light) HasRgbControl() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midlightHasRgbControl,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// HashCode calls android.hardware.lights.Light.hashCode.
+func (m *light) HashCode() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midlightHashCode,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// ToString calls android.hardware.lights.Light.toString.
+func (m *light) ToString() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midlightToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// WriteToParcel calls android.hardware.lights.Light.writeToParcel.
+func (m *light) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midlightWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
 }

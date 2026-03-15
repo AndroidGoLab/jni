@@ -6,102 +6,84 @@ package usage;
 
 option go_package = "github.com/xaionaro-go/jni/proto/usage";
 
-message AddRequest {
-  int64 arg0 = 1;
+message GetAppStandbyBucketRequest {
 }
 
-message AddResponse {
-}
-
-message DescribeContentsRequest {
-}
-
-message DescribeContentsResponse {
+message GetAppStandbyBucketResponse {
   int32 result = 1;
 }
 
-message GetFirstTimeStampRequest {
+message IsAppInactiveRequest {
+  string arg0 = 1;
 }
 
-message GetFirstTimeStampResponse {
+message IsAppInactiveResponse {
+  bool result = 1;
+}
+
+message QueryConfigurationsRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message QueryConfigurationsResponse {
   int64 result = 1;
 }
 
-message GetLastTimeForegroundServiceUsedRequest {
+message QueryEventStatsRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
 }
 
-message GetLastTimeForegroundServiceUsedResponse {
+message QueryEventStatsResponse {
   int64 result = 1;
 }
 
-message GetLastTimeStampRequest {
-}
-
-message GetLastTimeStampResponse {
-  int64 result = 1;
-}
-
-message GetLastTimeUsedRequest {
-}
-
-message GetLastTimeUsedResponse {
-  int64 result = 1;
-}
-
-message GetLastTimeVisibleRequest {
-}
-
-message GetLastTimeVisibleResponse {
-  int64 result = 1;
-}
-
-message GetPackageNameRequest {
-}
-
-message GetPackageNameResponse {
-  string result = 1;
-}
-
-message GetTotalTimeForegroundServiceUsedRequest {
-}
-
-message GetTotalTimeForegroundServiceUsedResponse {
-  int64 result = 1;
-}
-
-message GetTotalTimeInForegroundRequest {
-}
-
-message GetTotalTimeInForegroundResponse {
-  int64 result = 1;
-}
-
-message GetTotalTimeVisibleRequest {
-}
-
-message GetTotalTimeVisibleResponse {
-  int64 result = 1;
-}
-
-message WriteToParcelRequest {
+message QueryEvents1Request {
   int64 arg0 = 1;
-  int32 arg1 = 2;
 }
 
-message WriteToParcelResponse {
+message QueryEvents1Response {
+  int64 result = 1;
 }
 
-service UsageStatsService {
-  rpc Add (AddRequest) returns (AddResponse);
-  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
-  rpc GetFirstTimeStamp (GetFirstTimeStampRequest) returns (GetFirstTimeStampResponse);
-  rpc GetLastTimeForegroundServiceUsed (GetLastTimeForegroundServiceUsedRequest) returns (GetLastTimeForegroundServiceUsedResponse);
-  rpc GetLastTimeStamp (GetLastTimeStampRequest) returns (GetLastTimeStampResponse);
-  rpc GetLastTimeUsed (GetLastTimeUsedRequest) returns (GetLastTimeUsedResponse);
-  rpc GetLastTimeVisible (GetLastTimeVisibleRequest) returns (GetLastTimeVisibleResponse);
-  rpc GetPackageName (GetPackageNameRequest) returns (GetPackageNameResponse);
-  rpc GetTotalTimeForegroundServiceUsed (GetTotalTimeForegroundServiceUsedRequest) returns (GetTotalTimeForegroundServiceUsedResponse);
-  rpc GetTotalTimeInForeground (GetTotalTimeInForegroundRequest) returns (GetTotalTimeInForegroundResponse);
-  rpc GetTotalTimeVisible (GetTotalTimeVisibleRequest) returns (GetTotalTimeVisibleResponse);
-  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+message QueryEvents2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message QueryEvents2_1Response {
+  int64 result = 1;
+}
+
+message QueryEventsForSelfRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message QueryEventsForSelfResponse {
+  int64 result = 1;
+}
+
+message QueryUsageStatsRequest {
+  int32 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message QueryUsageStatsResponse {
+  int64 result = 1;
+}
+
+service UsageStatsManagerService {
+  rpc GetAppStandbyBucket (GetAppStandbyBucketRequest) returns (GetAppStandbyBucketResponse);
+  rpc IsAppInactive (IsAppInactiveRequest) returns (IsAppInactiveResponse);
+  rpc QueryConfigurations (QueryConfigurationsRequest) returns (QueryConfigurationsResponse);
+  rpc QueryEventStats (QueryEventStatsRequest) returns (QueryEventStatsResponse);
+  rpc QueryEvents1 (QueryEvents1Request) returns (QueryEvents1Response);
+  rpc QueryEvents2_1 (QueryEvents2_1Request) returns (QueryEvents2_1Response);
+  rpc QueryEventsForSelf (QueryEventsForSelfRequest) returns (QueryEventsForSelfResponse);
+  rpc QueryUsageStats (QueryUsageStatsRequest) returns (QueryUsageStatsResponse);
 }

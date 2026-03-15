@@ -20,17 +20,18 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                                       *jni.GlobalRef
-	midManagerIsKeyguardLocked                       jni.MethodID
-	midManagerIsKeyguardSecure                       jni.MethodID
-	midManagerIsDeviceLocked                         jni.MethodID
-	midManagerIsDeviceSecure                         jni.MethodID
-	midManagerrequestDismissKeyguardRaw              jni.MethodID
-	midManagercreateConfirmDeviceCredentialIntentRaw jni.MethodID
-
-	clskeyguardDismissCallback *jni.GlobalRef
-
-	clskeyguardLockedStateListener *jni.GlobalRef
+	clskeyguardManager                                    *jni.GlobalRef
+	midkeyguardManagerAddKeyguardLockedStateListener      jni.MethodID
+	midkeyguardManagerCreateConfirmDeviceCredentialIntent jni.MethodID
+	midkeyguardManagerExitKeyguardSecurely                jni.MethodID
+	midkeyguardManagerInKeyguardRestrictedInputMode       jni.MethodID
+	midkeyguardManagerIsDeviceLocked                      jni.MethodID
+	midkeyguardManagerIsDeviceSecure                      jni.MethodID
+	midkeyguardManagerIsKeyguardLocked                    jni.MethodID
+	midkeyguardManagerIsKeyguardSecure                    jni.MethodID
+	midkeyguardManagerNewKeyguardLock                     jni.MethodID
+	midkeyguardManagerRemoveKeyguardLockedStateListener   jni.MethodID
+	midkeyguardManagerRequestDismissKeyguard              jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -55,49 +56,62 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.app.KeyguardManager: %w", err)
 	}
-	clsManager = env.NewGlobalRef(&c.Object)
+	clskeyguardManager = env.NewGlobalRef(&c.Object)
 
-	midManagerIsKeyguardLocked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isKeyguardLocked", "()Z")
+	midkeyguardManagerAddKeyguardLockedStateListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "addKeyguardLockedStateListener", "(Ljava/util/concurrent/Executor;Landroid/app/KeyguardManager$KeyguardLockedStateListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.app.KeyguardManager.isKeyguardLocked: %w", err)
+		return fmt.Errorf("get method android.app.KeyguardManager.addKeyguardLockedStateListener: %w", err)
 	}
 
-	midManagerIsKeyguardSecure, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isKeyguardSecure", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.app.KeyguardManager.isKeyguardSecure: %w", err)
-	}
-
-	midManagerIsDeviceLocked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDeviceLocked", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.app.KeyguardManager.isDeviceLocked: %w", err)
-	}
-
-	midManagerIsDeviceSecure, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDeviceSecure", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.app.KeyguardManager.isDeviceSecure: %w", err)
-	}
-
-	midManagerrequestDismissKeyguardRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "requestDismissKeyguard", "(Landroid/app/Activity;Landroid/app/KeyguardManager$KeyguardDismissCallback;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.KeyguardManager.requestDismissKeyguard: %w", err)
-	}
-
-	midManagercreateConfirmDeviceCredentialIntentRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createConfirmDeviceCredentialIntent", "(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Landroid/content/Intent;")
+	midkeyguardManagerCreateConfirmDeviceCredentialIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "createConfirmDeviceCredentialIntent", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.KeyguardManager.createConfirmDeviceCredentialIntent: %w", err)
 	}
 
-	c, err = env.FindClass("android/app/KeyguardManager$KeyguardDismissCallback")
+	midkeyguardManagerExitKeyguardSecurely, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "exitKeyguardSecurely", "(Landroid/app/KeyguardManager$OnKeyguardExitResult;)V")
 	if err != nil {
-		return fmt.Errorf("find class android.app.KeyguardManager.KeyguardDismissCallback: %w", err)
+		return fmt.Errorf("get method android.app.KeyguardManager.exitKeyguardSecurely: %w", err)
 	}
-	clskeyguardDismissCallback = env.NewGlobalRef(&c.Object)
 
-	c, err = env.FindClass("android/app/KeyguardManager$KeyguardLockedStateListener")
+	midkeyguardManagerInKeyguardRestrictedInputMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "inKeyguardRestrictedInputMode", "()Z")
 	if err != nil {
-		return fmt.Errorf("find class android.app.KeyguardManager.KeyguardLockedStateListener: %w", err)
+		return fmt.Errorf("get method android.app.KeyguardManager.inKeyguardRestrictedInputMode: %w", err)
 	}
-	clskeyguardLockedStateListener = env.NewGlobalRef(&c.Object)
+
+	midkeyguardManagerIsDeviceLocked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "isDeviceLocked", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.KeyguardManager.isDeviceLocked: %w", err)
+	}
+
+	midkeyguardManagerIsDeviceSecure, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "isDeviceSecure", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.KeyguardManager.isDeviceSecure: %w", err)
+	}
+
+	midkeyguardManagerIsKeyguardLocked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "isKeyguardLocked", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.KeyguardManager.isKeyguardLocked: %w", err)
+	}
+
+	midkeyguardManagerIsKeyguardSecure, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "isKeyguardSecure", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.KeyguardManager.isKeyguardSecure: %w", err)
+	}
+
+	midkeyguardManagerNewKeyguardLock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "newKeyguardLock", "(Ljava/lang/String;)Landroid/app/KeyguardManager$KeyguardLock;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.KeyguardManager.newKeyguardLock: %w", err)
+	}
+
+	midkeyguardManagerRemoveKeyguardLockedStateListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "removeKeyguardLockedStateListener", "(Landroid/app/KeyguardManager$KeyguardLockedStateListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.KeyguardManager.removeKeyguardLockedStateListener: %w", err)
+	}
+
+	midkeyguardManagerRequestDismissKeyguard, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clskeyguardManager)), "requestDismissKeyguard", "(Landroid/app/Activity;Landroid/app/KeyguardManager$KeyguardDismissCallback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.KeyguardManager.requestDismissKeyguard: %w", err)
+	}
 
 	return nil
 }

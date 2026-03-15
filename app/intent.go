@@ -15,430 +15,3083 @@ var (
 	_ = unsafe.Pointer(nil)
 )
 
-// Intent wraps android.content.Intent.
-type Intent struct {
+// intent wraps android.content.Intent.
+type intent struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
-// NewIntent creates a new android.content.Intent instance.
-func NewIntent(vm *jni.VM) (*Intent, error) {
-	var t Intent
-	t.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			return err
-		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIntent)), midIntentInit)
-		if err != nil {
-			return err
-		}
-		t.Obj = env.NewGlobalRef(obj)
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return &t, nil
-}
-
-// SetAction calls android.content.Intent.setAction.
-func (m *Intent) SetAction(action string) *jni.Object {
+// AddCategory calls android.content.Intent.addCategory.
+func (m *intent) AddCategory(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		jAction, err := env.NewStringUTF(action)
+		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
 		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midIntentSetAction, jni.ObjectValue(&jAction.Object),
+			midintentAddCategory, jni.ObjectValue(&jArg0.Object),
 		)
-
-		return nil
-	})
-	return result
-}
-
-// SetData calls android.content.Intent.setData.
-func (m *Intent) SetData(uri *jni.Object) *jni.Object {
-	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-
-			return err
+		if callErr != nil {
+			return callErr
 		}
-
-		result, _ = env.CallObjectMethod(
-			m.Obj,
-			midIntentSetData, jni.ObjectValue(uri),
-		)
-
-		return nil
+		return callErr
 	})
-	return result
-}
-
-// SetComponent calls android.content.Intent.setComponent.
-func (m *Intent) SetComponent(component *jni.Object) *jni.Object {
-	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-
-			return err
-		}
-
-		result, _ = env.CallObjectMethod(
-			m.Obj,
-			midIntentSetComponent, jni.ObjectValue(component),
-		)
-
-		return nil
-	})
-	return result
-}
-
-// SetFlags calls android.content.Intent.setFlags.
-func (m *Intent) SetFlags(flags int32) *jni.Object {
-	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-
-			return err
-		}
-
-		result, _ = env.CallObjectMethod(
-			m.Obj,
-			midIntentSetFlags, jni.IntValue(flags),
-		)
-
-		return nil
-	})
-	return result
+	return result, callErr
 }
 
 // AddFlags calls android.content.Intent.addFlags.
-func (m *Intent) AddFlags(flags int32) *jni.Object {
+func (m *intent) AddFlags(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midIntentAddFlags, jni.IntValue(flags),
+			midintentAddFlags, jni.IntValue(arg0),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// AddCategory calls android.content.Intent.addCategory.
-func (m *Intent) AddCategory(category string) *jni.Object {
+// Clone calls android.content.Intent.clone.
+func (m *intent) Clone() (*jni.Object, error) {
 	var result *jni.Object
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		jCategory, err := env.NewStringUTF(category)
-		if err != nil {
-			return err
-		}
-
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midIntentAddCategory, jni.ObjectValue(&jCategory.Object),
+			midintentClone,
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// SetPackage calls android.content.Intent.setPackage.
-func (m *Intent) SetPackage(pkg string) *jni.Object {
+// CloneFilter calls android.content.Intent.cloneFilter.
+func (m *intent) CloneFilter() (*jni.Object, error) {
 	var result *jni.Object
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		jPkg, err := env.NewStringUTF(pkg)
-		if err != nil {
-			return err
-		}
-
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midIntentSetPackage, jni.ObjectValue(&jPkg.Object),
+			midintentCloneFilter,
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// SetType calls android.content.Intent.setType.
-func (m *Intent) SetType(mimeType string) *jni.Object {
-	var result *jni.Object
-
+// DescribeContents calls android.content.Intent.describeContents.
+func (m *intent) DescribeContents() (int32, error) {
+	var result int32
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		jMimeType, err := env.NewStringUTF(mimeType)
-		if err != nil {
-			return err
-		}
-
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midIntentSetType, jni.ObjectValue(&jMimeType.Object),
+			midintentDescribeContents,
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
+}
+
+// FillIn calls android.content.Intent.fillIn.
+func (m *intent) FillIn(arg0 *jni.Object, arg1 int32) (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midintentFillIn, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// FilterEquals calls android.content.Intent.filterEquals.
+func (m *intent) FilterEquals(arg0 *jni.Object) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midintentFilterEquals, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// FilterHashCode calls android.content.Intent.filterHashCode.
+func (m *intent) FilterHashCode() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midintentFilterHashCode,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
 }
 
 // GetAction calls android.content.Intent.getAction.
-func (m *Intent) GetAction() string {
+func (m *intent) GetAction() (string, error) {
 	var result string
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		resultObj, _ := env.CallObjectMethod(
+		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midIntentGetAction,
+			midintentGetAction,
 		)
-
+		if callErr != nil {
+			return callErr
+		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
-		return nil
+		return callErr
 	})
-	return result
+	return result, callErr
+}
+
+// GetBooleanArrayExtra calls android.content.Intent.getBooleanArrayExtra.
+func (m *intent) GetBooleanArrayExtra(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetBooleanArrayExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetBooleanExtra calls android.content.Intent.getBooleanExtra.
+func (m *intent) GetBooleanExtra(arg0 string, arg1 bool) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		var jArg1 uint8
+		if arg1 {
+			jArg1 = 1
+		}
+
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midintentGetBooleanExtra, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetBundleExtra calls android.content.Intent.getBundleExtra.
+func (m *intent) GetBundleExtra(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetBundleExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetByteArrayExtra calls android.content.Intent.getByteArrayExtra.
+func (m *intent) GetByteArrayExtra(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetByteArrayExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetByteExtra calls android.content.Intent.getByteExtra.
+func (m *intent) GetByteExtra(arg0 string, arg1 byte) (byte, error) {
+	var result byte
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallByteMethod(
+			m.Obj,
+			midintentGetByteExtra, jni.ObjectValue(&jArg0.Object), jni.ByteValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCategories calls android.content.Intent.getCategories.
+func (m *intent) GetCategories() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetCategories,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCharArrayExtra calls android.content.Intent.getCharArrayExtra.
+func (m *intent) GetCharArrayExtra(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetCharArrayExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCharExtra calls android.content.Intent.getCharExtra.
+func (m *intent) GetCharExtra(arg0 string, arg1 uint16) (uint16, error) {
+	var result uint16
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallCharMethod(
+			m.Obj,
+			midintentGetCharExtra, jni.ObjectValue(&jArg0.Object), jni.CharValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCharSequenceArrayExtra calls android.content.Intent.getCharSequenceArrayExtra.
+func (m *intent) GetCharSequenceArrayExtra(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetCharSequenceArrayExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCharSequenceArrayListExtra calls android.content.Intent.getCharSequenceArrayListExtra.
+func (m *intent) GetCharSequenceArrayListExtra(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetCharSequenceArrayListExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCharSequenceExtra calls android.content.Intent.getCharSequenceExtra.
+func (m *intent) GetCharSequenceExtra(arg0 string) (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midintentGetCharSequenceExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetClipData calls android.content.Intent.getClipData.
+func (m *intent) GetClipData() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetClipData,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetComponent calls android.content.Intent.getComponent.
+func (m *intent) GetComponent() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetComponent,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
 }
 
 // GetData calls android.content.Intent.getData.
-func (m *Intent) GetData() *jni.Object {
+func (m *intent) GetData() (*jni.Object, error) {
 	var result *jni.Object
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midIntentGetData,
+			midintentGetData,
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// GetStringExtra calls android.content.Intent.getStringExtra.
-func (m *Intent) GetStringExtra(key string) string {
+// GetDataString calls android.content.Intent.getDataString.
+func (m *intent) GetDataString() (string, error) {
 	var result string
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		jKey, err := env.NewStringUTF(key)
-		if err != nil {
-			return err
-		}
-
-		resultObj, _ := env.CallObjectMethod(
+		resultObj, callErr := env.CallObjectMethod(
 			m.Obj,
-			midIntentGetStringExtra, jni.ObjectValue(&jKey.Object),
+			midintentGetDataString,
 		)
-
+		if callErr != nil {
+			return callErr
+		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
-		return nil
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// GetBoolExtra calls android.content.Intent.getBooleanExtra.
-func (m *Intent) GetBoolExtra(key string, defaultVal bool) bool {
-	var result bool
-
+// GetDoubleArrayExtra calls android.content.Intent.getDoubleArrayExtra.
+func (m *intent) GetDoubleArrayExtra(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		jKey, err := env.NewStringUTF(key)
+		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
 		}
 
-		var jDefaultVal uint8
-		if defaultVal {
-			jDefaultVal = 1
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetDoubleArrayExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetDoubleExtra calls android.content.Intent.getDoubleExtra.
+func (m *intent) GetDoubleExtra(arg0 string, arg1 float64) (float64, error) {
+	var result float64
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
 		}
 
-		resultRaw, _ := env.CallBooleanMethod(
+		result, callErr = env.CallDoubleMethod(
 			m.Obj,
-			midIntentGetBoolExtra, jni.ObjectValue(&jKey.Object), jni.BooleanValue(jDefaultVal),
+			midintentGetDoubleExtra, jni.ObjectValue(&jArg0.Object), jni.DoubleValue(arg1),
 		)
-
-		result = resultRaw != 0
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
+}
+
+// GetExtras calls android.content.Intent.getExtras.
+func (m *intent) GetExtras() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetExtras,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFlags calls android.content.Intent.getFlags.
+func (m *intent) GetFlags() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midintentGetFlags,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFloatArrayExtra calls android.content.Intent.getFloatArrayExtra.
+func (m *intent) GetFloatArrayExtra(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetFloatArrayExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFloatExtra calls android.content.Intent.getFloatExtra.
+func (m *intent) GetFloatExtra(arg0 string, arg1 float32) (float32, error) {
+	var result float32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallFloatMethod(
+			m.Obj,
+			midintentGetFloatExtra, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetIdentifier calls android.content.Intent.getIdentifier.
+func (m *intent) GetIdentifier() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midintentGetIdentifier,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetIntArrayExtra calls android.content.Intent.getIntArrayExtra.
+func (m *intent) GetIntArrayExtra(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetIntArrayExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
 }
 
 // GetIntExtra calls android.content.Intent.getIntExtra.
-func (m *Intent) GetIntExtra(key string, defaultVal int32) int32 {
+func (m *intent) GetIntExtra(arg0 string, arg1 int32) (int32, error) {
 	var result int32
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		jKey, err := env.NewStringUTF(key)
+		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
 		}
 
-		result, _ = env.CallIntMethod(
+		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midIntentGetIntExtra, jni.ObjectValue(&jKey.Object), jni.IntValue(defaultVal),
+			midintentGetIntExtra, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// PutStringExtra calls android.content.Intent.putExtra.
-func (m *Intent) PutStringExtra(key string, value string) *jni.Object {
+// GetIntegerArrayListExtra calls android.content.Intent.getIntegerArrayListExtra.
+func (m *intent) GetIntegerArrayListExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		jKey, err := env.NewStringUTF(key)
+		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
 		}
 
-		jValue, err := env.NewStringUTF(value)
-		if err != nil {
-			return err
-		}
-
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midIntentPutStringExtra, jni.ObjectValue(&jKey.Object), jni.ObjectValue(&jValue.Object),
+			midintentGetIntegerArrayListExtra, jni.ObjectValue(&jArg0.Object),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// PutIntExtra calls android.content.Intent.putExtra.
-func (m *Intent) PutIntExtra(key string, value int32) *jni.Object {
+// GetLongArrayExtra calls android.content.Intent.getLongArrayExtra.
+func (m *intent) GetLongArrayExtra(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		jKey, err := env.NewStringUTF(key)
+		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
 		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midIntentPutIntExtra, jni.ObjectValue(&jKey.Object), jni.IntValue(value),
+			midintentGetLongArrayExtra, jni.ObjectValue(&jArg0.Object),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// PutBoolExtra calls android.content.Intent.putExtra.
-func (m *Intent) PutBoolExtra(key string, value bool) *jni.Object {
-	var result *jni.Object
-
+// GetLongExtra calls android.content.Intent.getLongExtra.
+func (m *intent) GetLongExtra(arg0 string, arg1 int64) (int64, error) {
+	var result int64
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		jKey, err := env.NewStringUTF(key)
+		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
 		}
 
-		var jValue uint8
-		if value {
-			jValue = 1
-		}
-
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallLongMethod(
 			m.Obj,
-			midIntentPutBoolExtra, jni.ObjectValue(&jKey.Object), jni.BooleanValue(jValue),
+			midintentGetLongExtra, jni.ObjectValue(&jArg0.Object), jni.LongValue(arg1),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// PutLongExtra calls android.content.Intent.putExtra.
-func (m *Intent) PutLongExtra(key string, value int64) *jni.Object {
-	var result *jni.Object
-
+// GetPackage calls android.content.Intent.getPackage.
+func (m *intent) GetPackage() (string, error) {
+	var result string
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		jKey, err := env.NewStringUTF(key)
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midintentGetPackage,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetParcelableArrayExtra calls android.content.Intent.getParcelableArrayExtra.
+func (m *intent) GetParcelableArrayExtra(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
 		}
 
-		result, _ = env.CallObjectMethod(
+		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midIntentPutLongExtra, jni.ObjectValue(&jKey.Object), jni.LongValue(value),
+			midintentGetParcelableArrayExtra, jni.ObjectValue(&jArg0.Object),
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
+}
+
+// GetScheme calls android.content.Intent.getScheme.
+func (m *intent) GetScheme() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midintentGetScheme,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSelector calls android.content.Intent.getSelector.
+func (m *intent) GetSelector() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetSelector,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSerializableExtra calls android.content.Intent.getSerializableExtra.
+func (m *intent) GetSerializableExtra(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetSerializableExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetShortArrayExtra calls android.content.Intent.getShortArrayExtra.
+func (m *intent) GetShortArrayExtra(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetShortArrayExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetShortExtra calls android.content.Intent.getShortExtra.
+func (m *intent) GetShortExtra(arg0 string, arg1 int16) (int16, error) {
+	var result int16
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallShortMethod(
+			m.Obj,
+			midintentGetShortExtra, jni.ObjectValue(&jArg0.Object), jni.ShortValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSourceBounds calls android.content.Intent.getSourceBounds.
+func (m *intent) GetSourceBounds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetSourceBounds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetStringArrayExtra calls android.content.Intent.getStringArrayExtra.
+func (m *intent) GetStringArrayExtra(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetStringArrayExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetStringArrayListExtra calls android.content.Intent.getStringArrayListExtra.
+func (m *intent) GetStringArrayListExtra(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentGetStringArrayListExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetStringExtra calls android.content.Intent.getStringExtra.
+func (m *intent) GetStringExtra(arg0 string) (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midintentGetStringExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetType calls android.content.Intent.getType.
+func (m *intent) GetType() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midintentGetType,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// HasCategory calls android.content.Intent.hasCategory.
+func (m *intent) HasCategory(arg0 string) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midintentHasCategory, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// HasExtra calls android.content.Intent.hasExtra.
+func (m *intent) HasExtra(arg0 string) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midintentHasExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// HasFileDescriptors calls android.content.Intent.hasFileDescriptors.
+func (m *intent) HasFileDescriptors() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midintentHasFileDescriptors,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsMismatchingFilter calls android.content.Intent.isMismatchingFilter.
+func (m *intent) IsMismatchingFilter() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midintentIsMismatchingFilter,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutCharSequenceArrayListExtra calls android.content.Intent.putCharSequenceArrayListExtra.
+func (m *intent) PutCharSequenceArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutCharSequenceArrayListExtra, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_1 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_1(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_2 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_2, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_3 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_3(arg0 string, arg1 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		var jArg1 uint8
+		if arg1 {
+			jArg1 = 1
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_3, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_4 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_4(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_4, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_5 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_5(arg0 string, arg1 byte) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_5, jni.ObjectValue(&jArg0.Object), jni.ByteValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_6 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_6(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_6, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_7 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_7(arg0 string, arg1 uint16) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_7, jni.ObjectValue(&jArg0.Object), jni.CharValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_8 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_8(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_8, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_9 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_9(arg0 string, arg1 float64) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_9, jni.ObjectValue(&jArg0.Object), jni.DoubleValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_10 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_10(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_10, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_11 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_11(arg0 string, arg1 float32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_11, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_12 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_12(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_12, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_13 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_13(arg0 string, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_13, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_14 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_14(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_14, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_15 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_15(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_15, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_16 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_16(arg0 string, arg1 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_16, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_17 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_17(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_17, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_18 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_18(arg0 string, arg1 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_18, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_19 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_19(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_19, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_20 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_20(arg0 string, arg1 int64) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_20, jni.ObjectValue(&jArg0.Object), jni.LongValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_21 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_21(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_21, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_22 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_22(arg0 string, arg1 int16) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_22, jni.ObjectValue(&jArg0.Object), jni.ShortValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtra2_23 calls android.content.Intent.putExtra.
+func (m *intent) PutExtra2_23(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtra2_23, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtras1 calls android.content.Intent.putExtras.
+func (m *intent) PutExtras1(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtras1, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutExtras1_1 calls android.content.Intent.putExtras.
+func (m *intent) PutExtras1_1(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutExtras1_1, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutIntegerArrayListExtra calls android.content.Intent.putIntegerArrayListExtra.
+func (m *intent) PutIntegerArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutIntegerArrayListExtra, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutParcelableArrayListExtra calls android.content.Intent.putParcelableArrayListExtra.
+func (m *intent) PutParcelableArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutParcelableArrayListExtra, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// PutStringArrayListExtra calls android.content.Intent.putStringArrayListExtra.
+func (m *intent) PutStringArrayListExtra(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentPutStringArrayListExtra, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// ReadFromParcel calls android.content.Intent.readFromParcel.
+func (m *intent) ReadFromParcel(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midintentReadFromParcel, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// RemoveCategory calls android.content.Intent.removeCategory.
+func (m *intent) RemoveCategory(arg0 string) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midintentRemoveCategory, jni.ObjectValue(&jArg0.Object),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// RemoveExtra calls android.content.Intent.removeExtra.
+func (m *intent) RemoveExtra(arg0 string) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midintentRemoveExtra, jni.ObjectValue(&jArg0.Object),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// RemoveFlags calls android.content.Intent.removeFlags.
+func (m *intent) RemoveFlags(arg0 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midintentRemoveFlags, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// RemoveLaunchSecurityProtection calls android.content.Intent.removeLaunchSecurityProtection.
+func (m *intent) RemoveLaunchSecurityProtection() error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midintentRemoveLaunchSecurityProtection,
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// ReplaceExtras1 calls android.content.Intent.replaceExtras.
+func (m *intent) ReplaceExtras1(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentReplaceExtras1, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// ReplaceExtras1_1 calls android.content.Intent.replaceExtras.
+func (m *intent) ReplaceExtras1_1(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentReplaceExtras1_1, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// ResolveActivity calls android.content.Intent.resolveActivity.
+func (m *intent) ResolveActivity(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentResolveActivity, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// ResolveActivityInfo calls android.content.Intent.resolveActivityInfo.
+func (m *intent) ResolveActivityInfo(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentResolveActivityInfo, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// ResolveType1 calls android.content.Intent.resolveType.
+func (m *intent) ResolveType1(arg0 *jni.Object) (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midintentResolveType1, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// ResolveType1_1 calls android.content.Intent.resolveType.
+func (m *intent) ResolveType1_1(arg0 *jni.Object) (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midintentResolveType1_1, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// ResolveTypeIfNeeded calls android.content.Intent.resolveTypeIfNeeded.
+func (m *intent) ResolveTypeIfNeeded(arg0 *jni.Object) (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midintentResolveTypeIfNeeded, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetAction calls android.content.Intent.setAction.
+func (m *intent) SetAction(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentSetAction, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetClass calls android.content.Intent.setClass.
+func (m *intent) SetClass(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentSetClass, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetClassName2 calls android.content.Intent.setClassName.
+func (m *intent) SetClassName2(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentSetClassName2, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetClassName2_1 calls android.content.Intent.setClassName.
+func (m *intent) SetClassName2_1(arg0 string, arg1 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentSetClassName2_1, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetClipData calls android.content.Intent.setClipData.
+func (m *intent) SetClipData(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midintentSetClipData, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetComponent calls android.content.Intent.setComponent.
+func (m *intent) SetComponent(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentSetComponent, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetData calls android.content.Intent.setData.
+func (m *intent) SetData(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentSetData, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetDataAndNormalize calls android.content.Intent.setDataAndNormalize.
+func (m *intent) SetDataAndNormalize(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentSetDataAndNormalize, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetDataAndType calls android.content.Intent.setDataAndType.
+func (m *intent) SetDataAndType(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentSetDataAndType, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetDataAndTypeAndNormalize calls android.content.Intent.setDataAndTypeAndNormalize.
+func (m *intent) SetDataAndTypeAndNormalize(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentSetDataAndTypeAndNormalize, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetExtrasClassLoader calls android.content.Intent.setExtrasClassLoader.
+func (m *intent) SetExtrasClassLoader(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midintentSetExtrasClassLoader, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetFlags calls android.content.Intent.setFlags.
+func (m *intent) SetFlags(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentSetFlags, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetIdentifier calls android.content.Intent.setIdentifier.
+func (m *intent) SetIdentifier(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentSetIdentifier, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetPackage calls android.content.Intent.setPackage.
+func (m *intent) SetPackage(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentSetPackage, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetSelector calls android.content.Intent.setSelector.
+func (m *intent) SetSelector(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midintentSetSelector, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetSourceBounds calls android.content.Intent.setSourceBounds.
+func (m *intent) SetSourceBounds(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midintentSetSourceBounds, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetType calls android.content.Intent.setType.
+func (m *intent) SetType(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentSetType, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetTypeAndNormalize calls android.content.Intent.setTypeAndNormalize.
+func (m *intent) SetTypeAndNormalize(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midintentSetTypeAndNormalize, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// ToString calls android.content.Intent.toString.
+func (m *intent) ToString() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midintentToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// ToURI calls android.content.Intent.toURI.
+func (m *intent) ToURI() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midintentToURI,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// ToUri calls android.content.Intent.toUri.
+func (m *intent) ToUri(arg0 int32) (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midintentToUri, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// WriteToParcel calls android.content.Intent.writeToParcel.
+func (m *intent) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midintentWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// CreateChooser2 calls android.content.Intent.createChooser.
+func (m *intent) CreateChooser2(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsintent)),
+			midintentCreateChooser2, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateChooser3_1 calls android.content.Intent.createChooser.
+func (m *intent) CreateChooser3_1(arg0 *jni.Object, arg1 string, arg2 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsintent)),
+			midintentCreateChooser3_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetIntent calls android.content.Intent.getIntent.
+func (m *intent) GetIntent(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsintent)),
+			midintentGetIntent, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetIntentOld calls android.content.Intent.getIntentOld.
+func (m *intent) GetIntentOld(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsintent)),
+			midintentGetIntentOld, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// MakeMainActivity calls android.content.Intent.makeMainActivity.
+func (m *intent) MakeMainActivity(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsintent)),
+			midintentMakeMainActivity, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// MakeMainSelectorActivity calls android.content.Intent.makeMainSelectorActivity.
+func (m *intent) MakeMainSelectorActivity(arg0 string, arg1 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsintent)),
+			midintentMakeMainSelectorActivity, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// MakeRestartActivityTask calls android.content.Intent.makeRestartActivityTask.
+func (m *intent) MakeRestartActivityTask(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsintent)),
+			midintentMakeRestartActivityTask, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// NormalizeMimeType calls android.content.Intent.normalizeMimeType.
+func (m *intent) NormalizeMimeType(arg0 string) (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		resultObj, callErr := env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsintent)),
+			midintentNormalizeMimeType, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// ParseIntent calls android.content.Intent.parseIntent.
+func (m *intent) ParseIntent(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsintent)),
+			midintentParseIntent, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// ParseUri calls android.content.Intent.parseUri.
+func (m *intent) ParseUri(arg0 string, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsintent)),
+			midintentParseUri, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
 }

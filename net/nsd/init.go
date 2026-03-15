@@ -20,29 +20,27 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                        *jni.GlobalRef
-	midManagerdiscoverServicesRaw     jni.MethodID
-	midManagerstopServiceDiscoveryRaw jni.MethodID
-	midManagerresolveServiceRaw       jni.MethodID
-	midManagerregisterServiceRaw      jni.MethodID
-	midManagerunregisterServiceRaw    jni.MethodID
-
-	clsnsdServiceInfo               *jni.GlobalRef
-	midnsdServiceInfoInit           jni.MethodID
-	midnsdServiceInfosetServiceName jni.MethodID
-	midnsdServiceInfosetServiceType jni.MethodID
-	midnsdServiceInfosetPort        jni.MethodID
-	midnsdServiceInfosetAttribute   jni.MethodID
-	midnsdServiceInfogetServiceName jni.MethodID
-	midnsdServiceInfogetServiceType jni.MethodID
-	midnsdServiceInfogetHost        jni.MethodID
-	midnsdServiceInfogetPort        jni.MethodID
-
-	clsdiscoveryListener *jni.GlobalRef
-
-	clsresolveListener *jni.GlobalRef
-
-	clsregistrationListener *jni.GlobalRef
+	clsnsdServiceInfo                 *jni.GlobalRef
+	midnsdServiceInfoDescribeContents jni.MethodID
+	midnsdServiceInfoGetHost          jni.MethodID
+	midnsdServiceInfoGetHostAddresses jni.MethodID
+	midnsdServiceInfoGetHostname      jni.MethodID
+	midnsdServiceInfoGetNetwork       jni.MethodID
+	midnsdServiceInfoGetPort          jni.MethodID
+	midnsdServiceInfoGetServiceName   jni.MethodID
+	midnsdServiceInfoGetServiceType   jni.MethodID
+	midnsdServiceInfoGetSubtypes      jni.MethodID
+	midnsdServiceInfoRemoveAttribute  jni.MethodID
+	midnsdServiceInfoSetAttribute     jni.MethodID
+	midnsdServiceInfoSetHost          jni.MethodID
+	midnsdServiceInfoSetHostAddresses jni.MethodID
+	midnsdServiceInfoSetNetwork       jni.MethodID
+	midnsdServiceInfoSetPort          jni.MethodID
+	midnsdServiceInfoSetServiceName   jni.MethodID
+	midnsdServiceInfoSetServiceType   jni.MethodID
+	midnsdServiceInfoSetSubtypes      jni.MethodID
+	midnsdServiceInfoToString         jni.MethodID
+	midnsdServiceInfoWriteToParcel    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -63,104 +61,111 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/net/nsd/NsdManager")
-	if err != nil {
-		return fmt.Errorf("find class android.net.nsd.NsdManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagerdiscoverServicesRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "discoverServices", "(Ljava/lang/String;ILandroid/net/nsd/NsdManager$DiscoveryListener;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdManager.discoverServices: %w", err)
-	}
-
-	midManagerstopServiceDiscoveryRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "stopServiceDiscovery", "(Landroid/net/nsd/NsdManager$DiscoveryListener;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdManager.stopServiceDiscovery: %w", err)
-	}
-
-	midManagerresolveServiceRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "resolveService", "(Landroid/net/nsd/NsdServiceInfo;Landroid/net/nsd/NsdManager$ResolveListener;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdManager.resolveService: %w", err)
-	}
-
-	midManagerregisterServiceRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerService", "(Landroid/net/nsd/NsdServiceInfo;ILandroid/net/nsd/NsdManager$RegistrationListener;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdManager.registerService: %w", err)
-	}
-
-	midManagerunregisterServiceRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterService", "(Landroid/net/nsd/NsdManager$RegistrationListener;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdManager.unregisterService: %w", err)
-	}
-
 	c, err = env.FindClass("android/net/nsd/NsdServiceInfo")
 	if err != nil {
 		return fmt.Errorf("find class android.net.nsd.NsdServiceInfo: %w", err)
 	}
 	clsnsdServiceInfo = env.NewGlobalRef(&c.Object)
-	midnsdServiceInfoInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "<init>", "()V")
+
+	midnsdServiceInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "describeContents", "()I")
 	if err != nil {
-		return fmt.Errorf("get constructor android.net.nsd.NsdServiceInfo.<init>: %w", err)
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.describeContents: %w", err)
 	}
 
-	midnsdServiceInfosetServiceName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setServiceName", "(Ljava/lang/String;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setServiceName: %w", err)
-	}
-
-	midnsdServiceInfosetServiceType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setServiceType", "(Ljava/lang/String;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setServiceType: %w", err)
-	}
-
-	midnsdServiceInfosetPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setPort", "(I)V")
-	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setPort: %w", err)
-	}
-
-	midnsdServiceInfosetAttribute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setAttribute", "(Ljava/lang/String;Ljava/lang/String;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setAttribute: %w", err)
-	}
-
-	midnsdServiceInfogetServiceName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getServiceName", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getServiceName: %w", err)
-	}
-
-	midnsdServiceInfogetServiceType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getServiceType", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getServiceType: %w", err)
-	}
-
-	midnsdServiceInfogetHost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getHost", "()Ljava/net/InetAddress;")
+	midnsdServiceInfoGetHost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getHost", "()Ljava/net/InetAddress;")
 	if err != nil {
 		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getHost: %w", err)
 	}
 
-	midnsdServiceInfogetPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getPort", "()I")
+	midnsdServiceInfoGetHostAddresses, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getHostAddresses", "()Ljava/util/List<java$net$InetAddress>;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getHostAddresses: %w", err)
+	}
+
+	midnsdServiceInfoGetHostname, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getHostname", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getHostname: %w", err)
+	}
+
+	midnsdServiceInfoGetNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getNetwork", "()Landroid/net/Network;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getNetwork: %w", err)
+	}
+
+	midnsdServiceInfoGetPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getPort", "()I")
 	if err != nil {
 		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getPort: %w", err)
 	}
 
-	c, err = env.FindClass("android/net/nsd/NsdManager$DiscoveryListener")
+	midnsdServiceInfoGetServiceName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getServiceName", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("find class android.net.nsd.NsdManager$DiscoveryListener: %w", err)
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getServiceName: %w", err)
 	}
-	clsdiscoveryListener = env.NewGlobalRef(&c.Object)
 
-	c, err = env.FindClass("android/net/nsd/NsdManager$ResolveListener")
+	midnsdServiceInfoGetServiceType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getServiceType", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("find class android.net.nsd.NsdManager$ResolveListener: %w", err)
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getServiceType: %w", err)
 	}
-	clsresolveListener = env.NewGlobalRef(&c.Object)
 
-	c, err = env.FindClass("android/net/nsd/NsdManager$RegistrationListener")
+	midnsdServiceInfoGetSubtypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "getSubtypes", "()Ljava/util/Set<java$lang$String>;")
 	if err != nil {
-		return fmt.Errorf("find class android.net.nsd.NsdManager$RegistrationListener: %w", err)
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.getSubtypes: %w", err)
 	}
-	clsregistrationListener = env.NewGlobalRef(&c.Object)
+
+	midnsdServiceInfoRemoveAttribute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "removeAttribute", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.removeAttribute: %w", err)
+	}
+
+	midnsdServiceInfoSetAttribute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setAttribute", "(Ljava/lang/String;Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setAttribute: %w", err)
+	}
+
+	midnsdServiceInfoSetHost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setHost", "(Ljava/net/InetAddress;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setHost: %w", err)
+	}
+
+	midnsdServiceInfoSetHostAddresses, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setHostAddresses", "(Ljava/util/List<java$net$InetAddress>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setHostAddresses: %w", err)
+	}
+
+	midnsdServiceInfoSetNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setNetwork", "(Landroid/net/Network;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setNetwork: %w", err)
+	}
+
+	midnsdServiceInfoSetPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setPort", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setPort: %w", err)
+	}
+
+	midnsdServiceInfoSetServiceName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setServiceName", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setServiceName: %w", err)
+	}
+
+	midnsdServiceInfoSetServiceType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setServiceType", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setServiceType: %w", err)
+	}
+
+	midnsdServiceInfoSetSubtypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "setSubtypes", "(Ljava/util/Set<java$lang$String>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.setSubtypes: %w", err)
+	}
+
+	midnsdServiceInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.toString: %w", err)
+	}
+
+	midnsdServiceInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.net.nsd.NsdServiceInfo.writeToParcel: %w", err)
+	}
 
 	return nil
 }

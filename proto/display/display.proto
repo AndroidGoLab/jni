@@ -6,40 +6,274 @@ package display;
 
 option go_package = "github.com/xaionaro-go/jni/proto/display";
 
-message Equals1Request {
+message GetAppVsyncOffsetNanosRequest {
+}
+
+message GetAppVsyncOffsetNanosResponse {
+  int64 result = 1;
+}
+
+message GetCurrentSizeRangeRequest {
   int64 arg0 = 1;
+  int64 arg1 = 2;
 }
 
-message Equals1Response {
-  bool result = 1;
+message GetCurrentSizeRangeResponse {
 }
 
-message Equals1_1Request {
-  int64 arg0 = 1;
+message GetCutoutRequest {
 }
 
-message Equals1_1Response {
-  bool result = 1;
+message GetCutoutResponse {
+  int64 result = 1;
 }
 
-message HashCodeRequest {
+message GetDeviceProductInfoRequest {
 }
 
-message HashCodeResponse {
+message GetDeviceProductInfoResponse {
+  int64 result = 1;
+}
+
+message GetDisplayIdRequest {
+}
+
+message GetDisplayIdResponse {
   int32 result = 1;
 }
 
-message SetToRequest {
+message GetFlagsRequest {
+}
+
+message GetFlagsResponse {
+  int32 result = 1;
+}
+
+message GetHdrCapabilitiesRequest {
+}
+
+message GetHdrCapabilitiesResponse {
+  int64 result = 1;
+}
+
+message GetHdrSdrRatioRequest {
+}
+
+message GetHdrSdrRatioResponse {
+  float result = 1;
+}
+
+message GetHeightRequest {
+}
+
+message GetHeightResponse {
+  int32 result = 1;
+}
+
+message GetHighestHdrSdrRatioRequest {
+}
+
+message GetHighestHdrSdrRatioResponse {
+  float result = 1;
+}
+
+message GetMetricsRequest {
   int64 arg0 = 1;
 }
 
-message SetToResponse {
+message GetMetricsResponse {
 }
 
-message SetToDefaultsRequest {
+message GetModeRequest {
 }
 
-message SetToDefaultsResponse {
+message GetModeResponse {
+  int64 result = 1;
+}
+
+message GetNameRequest {
+}
+
+message GetNameResponse {
+  string result = 1;
+}
+
+message GetOrientationRequest {
+}
+
+message GetOrientationResponse {
+  int32 result = 1;
+}
+
+message GetOverlaySupportRequest {
+}
+
+message GetOverlaySupportResponse {
+  int64 result = 1;
+}
+
+message GetPixelFormatRequest {
+}
+
+message GetPixelFormatResponse {
+  int32 result = 1;
+}
+
+message GetPreferredWideGamutColorSpaceRequest {
+}
+
+message GetPreferredWideGamutColorSpaceResponse {
+  int64 result = 1;
+}
+
+message GetPresentationDeadlineNanosRequest {
+}
+
+message GetPresentationDeadlineNanosResponse {
+  int64 result = 1;
+}
+
+message GetRealMetricsRequest {
+  int64 arg0 = 1;
+}
+
+message GetRealMetricsResponse {
+}
+
+message GetRealSizeRequest {
+  int64 arg0 = 1;
+}
+
+message GetRealSizeResponse {
+}
+
+message GetRectSizeRequest {
+  int64 arg0 = 1;
+}
+
+message GetRectSizeResponse {
+}
+
+message GetRefreshRateRequest {
+}
+
+message GetRefreshRateResponse {
+  float result = 1;
+}
+
+message GetRotationRequest {
+}
+
+message GetRotationResponse {
+  int32 result = 1;
+}
+
+message GetRoundedCornerRequest {
+  int32 arg0 = 1;
+}
+
+message GetRoundedCornerResponse {
+  int64 result = 1;
+}
+
+message GetShapeRequest {
+}
+
+message GetShapeResponse {
+  int64 result = 1;
+}
+
+message GetSizeRequest {
+  int64 arg0 = 1;
+}
+
+message GetSizeResponse {
+}
+
+message GetStateRequest {
+}
+
+message GetStateResponse {
+  int32 result = 1;
+}
+
+message GetSuggestedFrameRateRequest {
+  int32 arg0 = 1;
+}
+
+message GetSuggestedFrameRateResponse {
+  float result = 1;
+}
+
+message GetSupportedModesRequest {
+}
+
+message GetSupportedModesResponse {
+  int64 result = 1;
+}
+
+message GetSupportedRefreshRatesRequest {
+}
+
+message GetSupportedRefreshRatesResponse {
+  int64 result = 1;
+}
+
+message GetWidthRequest {
+}
+
+message GetWidthResponse {
+  int32 result = 1;
+}
+
+message HasArrSupportRequest {
+}
+
+message HasArrSupportResponse {
+  bool result = 1;
+}
+
+message IsHdrRequest {
+}
+
+message IsHdrResponse {
+  bool result = 1;
+}
+
+message IsHdrSdrRatioAvailableRequest {
+}
+
+message IsHdrSdrRatioAvailableResponse {
+  bool result = 1;
+}
+
+message IsMinimalPostProcessingSupportedRequest {
+}
+
+message IsMinimalPostProcessingSupportedResponse {
+  bool result = 1;
+}
+
+message IsValidRequest {
+}
+
+message IsValidResponse {
+  bool result = 1;
+}
+
+message IsWideColorGamutRequest {
+}
+
+message IsWideColorGamutResponse {
+  bool result = 1;
+}
+
+message RegisterHdrSdrRatioChangedListenerRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RegisterHdrSdrRatioChangedListenerResponse {
 }
 
 message ToStringRequest {
@@ -49,11 +283,52 @@ message ToStringResponse {
   string result = 1;
 }
 
-service DisplayMetricsService {
-  rpc Equals1 (Equals1Request) returns (Equals1Response);
-  rpc Equals1_1 (Equals1_1Request) returns (Equals1_1Response);
-  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
-  rpc SetTo (SetToRequest) returns (SetToResponse);
-  rpc SetToDefaults (SetToDefaultsRequest) returns (SetToDefaultsResponse);
+message UnregisterHdrSdrRatioChangedListenerRequest {
+  int64 arg0 = 1;
+}
+
+message UnregisterHdrSdrRatioChangedListenerResponse {
+}
+
+service DisplayService {
+  rpc GetAppVsyncOffsetNanos (GetAppVsyncOffsetNanosRequest) returns (GetAppVsyncOffsetNanosResponse);
+  rpc GetCurrentSizeRange (GetCurrentSizeRangeRequest) returns (GetCurrentSizeRangeResponse);
+  rpc GetCutout (GetCutoutRequest) returns (GetCutoutResponse);
+  rpc GetDeviceProductInfo (GetDeviceProductInfoRequest) returns (GetDeviceProductInfoResponse);
+  rpc GetDisplayId (GetDisplayIdRequest) returns (GetDisplayIdResponse);
+  rpc GetFlags (GetFlagsRequest) returns (GetFlagsResponse);
+  rpc GetHdrCapabilities (GetHdrCapabilitiesRequest) returns (GetHdrCapabilitiesResponse);
+  rpc GetHdrSdrRatio (GetHdrSdrRatioRequest) returns (GetHdrSdrRatioResponse);
+  rpc GetHeight (GetHeightRequest) returns (GetHeightResponse);
+  rpc GetHighestHdrSdrRatio (GetHighestHdrSdrRatioRequest) returns (GetHighestHdrSdrRatioResponse);
+  rpc GetMetrics (GetMetricsRequest) returns (GetMetricsResponse);
+  rpc GetMode (GetModeRequest) returns (GetModeResponse);
+  rpc GetName (GetNameRequest) returns (GetNameResponse);
+  rpc GetOrientation (GetOrientationRequest) returns (GetOrientationResponse);
+  rpc GetOverlaySupport (GetOverlaySupportRequest) returns (GetOverlaySupportResponse);
+  rpc GetPixelFormat (GetPixelFormatRequest) returns (GetPixelFormatResponse);
+  rpc GetPreferredWideGamutColorSpace (GetPreferredWideGamutColorSpaceRequest) returns (GetPreferredWideGamutColorSpaceResponse);
+  rpc GetPresentationDeadlineNanos (GetPresentationDeadlineNanosRequest) returns (GetPresentationDeadlineNanosResponse);
+  rpc GetRealMetrics (GetRealMetricsRequest) returns (GetRealMetricsResponse);
+  rpc GetRealSize (GetRealSizeRequest) returns (GetRealSizeResponse);
+  rpc GetRectSize (GetRectSizeRequest) returns (GetRectSizeResponse);
+  rpc GetRefreshRate (GetRefreshRateRequest) returns (GetRefreshRateResponse);
+  rpc GetRotation (GetRotationRequest) returns (GetRotationResponse);
+  rpc GetRoundedCorner (GetRoundedCornerRequest) returns (GetRoundedCornerResponse);
+  rpc GetShape (GetShapeRequest) returns (GetShapeResponse);
+  rpc GetSize (GetSizeRequest) returns (GetSizeResponse);
+  rpc GetState (GetStateRequest) returns (GetStateResponse);
+  rpc GetSuggestedFrameRate (GetSuggestedFrameRateRequest) returns (GetSuggestedFrameRateResponse);
+  rpc GetSupportedModes (GetSupportedModesRequest) returns (GetSupportedModesResponse);
+  rpc GetSupportedRefreshRates (GetSupportedRefreshRatesRequest) returns (GetSupportedRefreshRatesResponse);
+  rpc GetWidth (GetWidthRequest) returns (GetWidthResponse);
+  rpc HasArrSupport (HasArrSupportRequest) returns (HasArrSupportResponse);
+  rpc IsHdr (IsHdrRequest) returns (IsHdrResponse);
+  rpc IsHdrSdrRatioAvailable (IsHdrSdrRatioAvailableRequest) returns (IsHdrSdrRatioAvailableResponse);
+  rpc IsMinimalPostProcessingSupported (IsMinimalPostProcessingSupportedRequest) returns (IsMinimalPostProcessingSupportedResponse);
+  rpc IsValid (IsValidRequest) returns (IsValidResponse);
+  rpc IsWideColorGamut (IsWideColorGamutRequest) returns (IsWideColorGamutResponse);
+  rpc RegisterHdrSdrRatioChangedListener (RegisterHdrSdrRatioChangedListenerRequest) returns (RegisterHdrSdrRatioChangedListenerResponse);
   rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc UnregisterHdrSdrRatioChangedListener (UnregisterHdrSdrRatioChangedListenerRequest) returns (UnregisterHdrSdrRatioChangedListenerResponse);
 }

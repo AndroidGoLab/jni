@@ -20,24 +20,77 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsRenderer             *jni.GlobalRef
-	midRendererInit         jni.MethodID
-	midRendererGetPageCount jni.MethodID
-	midRendereropenPageRaw  jni.MethodID
-	midRenderercloseRaw     jni.MethodID
-
-	clsPage          *jni.GlobalRef
-	midPageGetWidth  jni.MethodID
-	midPageGetHeight jni.MethodID
-	midPagerenderRaw jni.MethodID
-	midPagecloseRaw  jni.MethodID
-
-	clsparcelFileDescriptor        *jni.GlobalRef
-	midparcelFileDescriptoropenRaw jni.MethodID
-
-	clsbitmap                      *jni.GlobalRef
-	midbitmapcreateBitmapRaw       jni.MethodID
-	midbitmapcopyPixelsToBufferRaw jni.MethodID
+	clsbitmap                       *jni.GlobalRef
+	midbitmapAsShared               jni.MethodID
+	midbitmapCompress               jni.MethodID
+	midbitmapCopy                   jni.MethodID
+	midbitmapCopyPixelsFromBuffer   jni.MethodID
+	midbitmapCopyPixelsToBuffer     jni.MethodID
+	midbitmapDescribeContents       jni.MethodID
+	midbitmapEraseColor1            jni.MethodID
+	midbitmapEraseColor1_1          jni.MethodID
+	midbitmapExtractAlpha0          jni.MethodID
+	midbitmapExtractAlpha2_1        jni.MethodID
+	midbitmapGetAllocationByteCount jni.MethodID
+	midbitmapGetByteCount           jni.MethodID
+	midbitmapGetColor               jni.MethodID
+	midbitmapGetColorSpace          jni.MethodID
+	midbitmapGetConfig              jni.MethodID
+	midbitmapGetDensity             jni.MethodID
+	midbitmapGetGainmap             jni.MethodID
+	midbitmapGetGenerationId        jni.MethodID
+	midbitmapGetHardwareBuffer      jni.MethodID
+	midbitmapGetHeight              jni.MethodID
+	midbitmapGetNinePatchChunk      jni.MethodID
+	midbitmapGetPixel               jni.MethodID
+	midbitmapGetPixels              jni.MethodID
+	midbitmapGetRowBytes            jni.MethodID
+	midbitmapGetScaledHeight1       jni.MethodID
+	midbitmapGetScaledHeight1_1     jni.MethodID
+	midbitmapGetScaledHeight1_2     jni.MethodID
+	midbitmapGetScaledWidth1        jni.MethodID
+	midbitmapGetScaledWidth1_1      jni.MethodID
+	midbitmapGetScaledWidth1_2      jni.MethodID
+	midbitmapGetWidth               jni.MethodID
+	midbitmapHasAlpha               jni.MethodID
+	midbitmapHasGainmap             jni.MethodID
+	midbitmapHasMipMap              jni.MethodID
+	midbitmapIsMutable              jni.MethodID
+	midbitmapIsPremultiplied        jni.MethodID
+	midbitmapIsRecycled             jni.MethodID
+	midbitmapPrepareToDraw          jni.MethodID
+	midbitmapReconfigure            jni.MethodID
+	midbitmapRecycle                jni.MethodID
+	midbitmapSameAs                 jni.MethodID
+	midbitmapSetColorSpace          jni.MethodID
+	midbitmapSetConfig              jni.MethodID
+	midbitmapSetDensity             jni.MethodID
+	midbitmapSetGainmap             jni.MethodID
+	midbitmapSetHasAlpha            jni.MethodID
+	midbitmapSetHasMipMap           jni.MethodID
+	midbitmapSetHeight              jni.MethodID
+	midbitmapSetPixel               jni.MethodID
+	midbitmapSetPixels              jni.MethodID
+	midbitmapSetPremultiplied       jni.MethodID
+	midbitmapSetWidth               jni.MethodID
+	midbitmapWriteToParcel          jni.MethodID
+	midbitmapCreateBitmap1          jni.MethodID
+	midbitmapCreateBitmap5_1        jni.MethodID
+	midbitmapCreateBitmap7_2        jni.MethodID
+	midbitmapCreateBitmap1_3        jni.MethodID
+	midbitmapCreateBitmap4_4        jni.MethodID
+	midbitmapCreateBitmap4_5        jni.MethodID
+	midbitmapCreateBitmap5_6        jni.MethodID
+	midbitmapCreateBitmap6_7        jni.MethodID
+	midbitmapCreateBitmap5_8        jni.MethodID
+	midbitmapCreateBitmap7_9        jni.MethodID
+	midbitmapCreateBitmap3_10       jni.MethodID
+	midbitmapCreateBitmap4_11       jni.MethodID
+	midbitmapCreateBitmap5_12       jni.MethodID
+	midbitmapCreateBitmap4_13       jni.MethodID
+	midbitmapCreateBitmap6_14       jni.MethodID
+	midbitmapCreateScaledBitmap     jni.MethodID
+	midbitmapWrapHardwareBuffer     jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -58,82 +111,360 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/graphics/pdf/PdfRenderer")
-	if err != nil {
-		return fmt.Errorf("find class android.graphics.pdf.PdfRenderer: %w", err)
-	}
-	clsRenderer = env.NewGlobalRef(&c.Object)
-	midRendererInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.graphics.pdf.PdfRenderer.<init>: %w", err)
-	}
-
-	midRendererGetPageCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "getPageCount", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.graphics.pdf.PdfRenderer.getPageCount: %w", err)
-	}
-
-	midRendereropenPageRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "openPage", "(I)Landroid/graphics/pdf/PdfRenderer$Page;")
-	if err != nil {
-		return fmt.Errorf("get method android.graphics.pdf.PdfRenderer.openPage: %w", err)
-	}
-
-	midRenderercloseRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "close", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.graphics.pdf.PdfRenderer.close: %w", err)
-	}
-
-	c, err = env.FindClass("android/graphics/pdf/PdfRenderer$Page")
-	if err != nil {
-		return fmt.Errorf("find class android.graphics.pdf.PdfRenderer$Page: %w", err)
-	}
-	clsPage = env.NewGlobalRef(&c.Object)
-
-	midPageGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPage)), "getWidth", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.graphics.pdf.PdfRenderer$Page.getWidth: %w", err)
-	}
-
-	midPageGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPage)), "getHeight", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.graphics.pdf.PdfRenderer$Page.getHeight: %w", err)
-	}
-
-	midPagerenderRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPage)), "render", "(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/Matrix;I)V")
-	if err != nil {
-		return fmt.Errorf("get method android.graphics.pdf.PdfRenderer$Page.render: %w", err)
-	}
-
-	midPagecloseRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPage)), "close", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.graphics.pdf.PdfRenderer$Page.close: %w", err)
-	}
-
-	c, err = env.FindClass("android/os/ParcelFileDescriptor")
-	if err != nil {
-		return fmt.Errorf("find class android.os.ParcelFileDescriptor: %w", err)
-	}
-	clsparcelFileDescriptor = env.NewGlobalRef(&c.Object)
-
-	midparcelFileDescriptoropenRaw, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsparcelFileDescriptor)), "open", "(Ljava/io/File;I)Landroid/os/ParcelFileDescriptor;")
-	if err != nil {
-		return fmt.Errorf("get method android.os.ParcelFileDescriptor.open: %w", err)
-	}
-
 	c, err = env.FindClass("android/graphics/Bitmap")
 	if err != nil {
 		return fmt.Errorf("find class android.graphics.Bitmap: %w", err)
 	}
 	clsbitmap = env.NewGlobalRef(&c.Object)
 
-	midbitmapcreateBitmapRaw, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	midbitmapAsShared, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "asShared", "()Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.asShared: %w", err)
+	}
+
+	midbitmapCompress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "compress", "(Landroid/graphics/Bitmap$CompressFormat;ILjava/io/OutputStream;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.compress: %w", err)
+	}
+
+	midbitmapCopy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "copy", "(Landroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.copy: %w", err)
+	}
+
+	midbitmapCopyPixelsFromBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "copyPixelsFromBuffer", "(Ljava/nio/Buffer;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.copyPixelsFromBuffer: %w", err)
+	}
+
+	midbitmapCopyPixelsToBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "copyPixelsToBuffer", "(Ljava/nio/Buffer;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.copyPixelsToBuffer: %w", err)
+	}
+
+	midbitmapDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "describeContents", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.describeContents: %w", err)
+	}
+
+	midbitmapEraseColor1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "eraseColor", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.eraseColor: %w", err)
+	}
+
+	midbitmapEraseColor1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "eraseColor", "(J)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.eraseColor: %w", err)
+	}
+
+	midbitmapExtractAlpha0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "extractAlpha", "()Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.extractAlpha: %w", err)
+	}
+
+	midbitmapExtractAlpha2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "extractAlpha", "(Landroid/graphics/Paint;[I)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.extractAlpha: %w", err)
+	}
+
+	midbitmapGetAllocationByteCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getAllocationByteCount", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getAllocationByteCount: %w", err)
+	}
+
+	midbitmapGetByteCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getByteCount", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getByteCount: %w", err)
+	}
+
+	midbitmapGetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getColor", "(II)Landroid/graphics/Color;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getColor: %w", err)
+	}
+
+	midbitmapGetColorSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getColorSpace", "()Landroid/graphics/ColorSpace;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getColorSpace: %w", err)
+	}
+
+	midbitmapGetConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getConfig", "()Landroid/graphics/Bitmap$Config;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getConfig: %w", err)
+	}
+
+	midbitmapGetDensity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getDensity", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getDensity: %w", err)
+	}
+
+	midbitmapGetGainmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getGainmap", "()Landroid/graphics/Gainmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getGainmap: %w", err)
+	}
+
+	midbitmapGetGenerationId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getGenerationId", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getGenerationId: %w", err)
+	}
+
+	midbitmapGetHardwareBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getHardwareBuffer", "()Landroid/hardware/HardwareBuffer;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getHardwareBuffer: %w", err)
+	}
+
+	midbitmapGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getHeight", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getHeight: %w", err)
+	}
+
+	midbitmapGetNinePatchChunk, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getNinePatchChunk", "()[B")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getNinePatchChunk: %w", err)
+	}
+
+	midbitmapGetPixel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getPixel", "(II)I")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getPixel: %w", err)
+	}
+
+	midbitmapGetPixels, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getPixels", "([IIIIIII)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getPixels: %w", err)
+	}
+
+	midbitmapGetRowBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getRowBytes", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getRowBytes: %w", err)
+	}
+
+	midbitmapGetScaledHeight1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledHeight", "(Landroid/graphics/Canvas;)I")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getScaledHeight: %w", err)
+	}
+
+	midbitmapGetScaledHeight1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledHeight", "(Landroid/util/DisplayMetrics;)I")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getScaledHeight: %w", err)
+	}
+
+	midbitmapGetScaledHeight1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledHeight", "(I)I")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getScaledHeight: %w", err)
+	}
+
+	midbitmapGetScaledWidth1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledWidth", "(Landroid/graphics/Canvas;)I")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getScaledWidth: %w", err)
+	}
+
+	midbitmapGetScaledWidth1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledWidth", "(Landroid/util/DisplayMetrics;)I")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getScaledWidth: %w", err)
+	}
+
+	midbitmapGetScaledWidth1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getScaledWidth", "(I)I")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getScaledWidth: %w", err)
+	}
+
+	midbitmapGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "getWidth", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.getWidth: %w", err)
+	}
+
+	midbitmapHasAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "hasAlpha", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.hasAlpha: %w", err)
+	}
+
+	midbitmapHasGainmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "hasGainmap", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.hasGainmap: %w", err)
+	}
+
+	midbitmapHasMipMap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "hasMipMap", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.hasMipMap: %w", err)
+	}
+
+	midbitmapIsMutable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "isMutable", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.isMutable: %w", err)
+	}
+
+	midbitmapIsPremultiplied, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "isPremultiplied", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.isPremultiplied: %w", err)
+	}
+
+	midbitmapIsRecycled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "isRecycled", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.isRecycled: %w", err)
+	}
+
+	midbitmapPrepareToDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "prepareToDraw", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.prepareToDraw: %w", err)
+	}
+
+	midbitmapReconfigure, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "reconfigure", "(IILandroid/graphics/Bitmap$Config;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.reconfigure: %w", err)
+	}
+
+	midbitmapRecycle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "recycle", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.recycle: %w", err)
+	}
+
+	midbitmapSameAs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "sameAs", "(Landroid/graphics/Bitmap;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.sameAs: %w", err)
+	}
+
+	midbitmapSetColorSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setColorSpace", "(Landroid/graphics/ColorSpace;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.setColorSpace: %w", err)
+	}
+
+	midbitmapSetConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setConfig", "(Landroid/graphics/Bitmap$Config;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.setConfig: %w", err)
+	}
+
+	midbitmapSetDensity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setDensity", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.setDensity: %w", err)
+	}
+
+	midbitmapSetGainmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setGainmap", "(Landroid/graphics/Gainmap;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.setGainmap: %w", err)
+	}
+
+	midbitmapSetHasAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setHasAlpha", "(Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.setHasAlpha: %w", err)
+	}
+
+	midbitmapSetHasMipMap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setHasMipMap", "(Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.setHasMipMap: %w", err)
+	}
+
+	midbitmapSetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setHeight", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.setHeight: %w", err)
+	}
+
+	midbitmapSetPixel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setPixel", "(III)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.setPixel: %w", err)
+	}
+
+	midbitmapSetPixels, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setPixels", "([IIIIIII)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.setPixels: %w", err)
+	}
+
+	midbitmapSetPremultiplied, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setPremultiplied", "(Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.setPremultiplied: %w", err)
+	}
+
+	midbitmapSetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "setWidth", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.setWidth: %w", err)
+	}
+
+	midbitmapWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.writeToParcel: %w", err)
+	}
+
+	midbitmapCreateBitmap1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Bitmap;)Landroid/graphics/Bitmap;")
 	if err != nil {
 		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
 	}
 
-	midbitmapcopyPixelsToBufferRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "copyPixelsToBuffer", "(Ljava/nio/Buffer;)V")
+	midbitmapCreateBitmap5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Bitmap;IIII)Landroid/graphics/Bitmap;")
 	if err != nil {
-		return fmt.Errorf("get method android.graphics.Bitmap.copyPixelsToBuffer: %w", err)
+		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+	}
+
+	midbitmapCreateBitmap7_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Bitmap;IIIILandroid/graphics/Matrix;Z)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+	}
+
+	midbitmapCreateBitmap1_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Picture;)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+	}
+
+	midbitmapCreateBitmap4_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/graphics/Picture;IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+	}
+
+	midbitmapCreateBitmap4_5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+	}
+
+	midbitmapCreateBitmap5_6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+	}
+
+	midbitmapCreateBitmap6_7, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;IILandroid/graphics/Bitmap$Config;ZLandroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+	}
+
+	midbitmapCreateBitmap5_8, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;[IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+	}
+
+	midbitmapCreateBitmap7_9, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(Landroid/util/DisplayMetrics;[IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+	}
+
+	midbitmapCreateBitmap3_10, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(IILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+	}
+
+	midbitmapCreateBitmap4_11, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(IILandroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+	}
+
+	midbitmapCreateBitmap5_12, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "(IILandroid/graphics/Bitmap$Config;ZLandroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+	}
+
+	midbitmapCreateBitmap4_13, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "([IIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+	}
+
+	midbitmapCreateBitmap6_14, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createBitmap", "([IIIIILandroid/graphics/Bitmap$Config;)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.createBitmap: %w", err)
+	}
+
+	midbitmapCreateScaledBitmap, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "createScaledBitmap", "(Landroid/graphics/Bitmap;IIZ)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.createScaledBitmap: %w", err)
+	}
+
+	midbitmapWrapHardwareBuffer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbitmap)), "wrapHardwareBuffer", "(Landroid/hardware/HardwareBuffer;Landroid/graphics/ColorSpace;)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.graphics.Bitmap.wrapHardwareBuffer: %w", err)
 	}
 
 	return nil

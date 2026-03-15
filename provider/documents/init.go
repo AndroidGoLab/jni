@@ -20,13 +20,36 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsdocumentsContract                  *jni.GlobalRef
-	middocumentsContractcreateDocumentRaw jni.MethodID
-	middocumentsContractrenameDocumentRaw jni.MethodID
-	middocumentsContractcopyDocumentRaw   jni.MethodID
-	middocumentsContractmoveDocumentRaw   jni.MethodID
-	middocumentsContractdeleteDocumentRaw jni.MethodID
-	middocumentsContractisDocumentUriRaw  jni.MethodID
+	clsdocumentsContract                                *jni.GlobalRef
+	middocumentsContractBuildChildDocumentsUri          jni.MethodID
+	middocumentsContractBuildChildDocumentsUriUsingTree jni.MethodID
+	middocumentsContractBuildDocumentUri                jni.MethodID
+	middocumentsContractBuildDocumentUriUsingTree       jni.MethodID
+	middocumentsContractBuildRecentDocumentsUri         jni.MethodID
+	middocumentsContractBuildRootUri                    jni.MethodID
+	middocumentsContractBuildRootsUri                   jni.MethodID
+	middocumentsContractBuildSearchDocumentsUri         jni.MethodID
+	middocumentsContractBuildTreeDocumentUri            jni.MethodID
+	middocumentsContractCopyDocument                    jni.MethodID
+	middocumentsContractCreateDocument                  jni.MethodID
+	middocumentsContractCreateWebLinkIntent             jni.MethodID
+	middocumentsContractDeleteDocument                  jni.MethodID
+	middocumentsContractEjectRoot                       jni.MethodID
+	middocumentsContractFindDocumentPath                jni.MethodID
+	middocumentsContractGetDocumentId                   jni.MethodID
+	middocumentsContractGetDocumentMetadata             jni.MethodID
+	middocumentsContractGetDocumentThumbnail            jni.MethodID
+	middocumentsContractGetRootId                       jni.MethodID
+	middocumentsContractGetSearchDocumentsQuery         jni.MethodID
+	middocumentsContractGetTreeDocumentId               jni.MethodID
+	middocumentsContractIsChildDocument                 jni.MethodID
+	middocumentsContractIsDocumentUri                   jni.MethodID
+	middocumentsContractIsRootUri                       jni.MethodID
+	middocumentsContractIsRootsUri                      jni.MethodID
+	middocumentsContractIsTreeUri                       jni.MethodID
+	middocumentsContractMoveDocument                    jni.MethodID
+	middocumentsContractRemoveDocument                  jni.MethodID
+	middocumentsContractRenameDocument                  jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -53,34 +76,149 @@ func doInit(env *jni.Env) error {
 	}
 	clsdocumentsContract = env.NewGlobalRef(&c.Object)
 
-	middocumentsContractcreateDocumentRaw, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "createDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
+	middocumentsContractBuildChildDocumentsUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "buildChildDocumentsUri", "(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
-		return fmt.Errorf("get method android.provider.DocumentsContract.createDocument: %w", err)
+		return fmt.Errorf("get method android.provider.DocumentsContract.buildChildDocumentsUri: %w", err)
 	}
 
-	middocumentsContractrenameDocumentRaw, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "renameDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
+	middocumentsContractBuildChildDocumentsUriUsingTree, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "buildChildDocumentsUriUsingTree", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
-		return fmt.Errorf("get method android.provider.DocumentsContract.renameDocument: %w", err)
+		return fmt.Errorf("get method android.provider.DocumentsContract.buildChildDocumentsUriUsingTree: %w", err)
 	}
 
-	middocumentsContractcopyDocumentRaw, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "copyDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;)Landroid/net/Uri;")
+	middocumentsContractBuildDocumentUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "buildDocumentUri", "(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.buildDocumentUri: %w", err)
+	}
+
+	middocumentsContractBuildDocumentUriUsingTree, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "buildDocumentUriUsingTree", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.buildDocumentUriUsingTree: %w", err)
+	}
+
+	middocumentsContractBuildRecentDocumentsUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "buildRecentDocumentsUri", "(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.buildRecentDocumentsUri: %w", err)
+	}
+
+	middocumentsContractBuildRootUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "buildRootUri", "(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.buildRootUri: %w", err)
+	}
+
+	middocumentsContractBuildRootsUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "buildRootsUri", "(Ljava/lang/String;)Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.buildRootsUri: %w", err)
+	}
+
+	middocumentsContractBuildSearchDocumentsUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "buildSearchDocumentsUri", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.buildSearchDocumentsUri: %w", err)
+	}
+
+	middocumentsContractBuildTreeDocumentUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "buildTreeDocumentUri", "(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.buildTreeDocumentUri: %w", err)
+	}
+
+	middocumentsContractCopyDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "copyDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;)Landroid/net/Uri;")
 	if err != nil {
 		return fmt.Errorf("get method android.provider.DocumentsContract.copyDocument: %w", err)
 	}
 
-	middocumentsContractmoveDocumentRaw, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "moveDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;Landroid/net/Uri;)Landroid/net/Uri;")
+	middocumentsContractCreateDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "createDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
 	if err != nil {
-		return fmt.Errorf("get method android.provider.DocumentsContract.moveDocument: %w", err)
+		return fmt.Errorf("get method android.provider.DocumentsContract.createDocument: %w", err)
 	}
 
-	middocumentsContractdeleteDocumentRaw, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "deleteDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Z")
+	middocumentsContractCreateWebLinkIntent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "createWebLinkIntent", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/os/Bundle;)Landroid/content/IntentSender;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.createWebLinkIntent: %w", err)
+	}
+
+	middocumentsContractDeleteDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "deleteDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Z")
 	if err != nil {
 		return fmt.Errorf("get method android.provider.DocumentsContract.deleteDocument: %w", err)
 	}
 
-	middocumentsContractisDocumentUriRaw, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "isDocumentUri", "(Landroid/content/Context;Landroid/net/Uri;)Z")
+	middocumentsContractEjectRoot, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "ejectRoot", "(Landroid/content/ContentResolver;Landroid/net/Uri;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.ejectRoot: %w", err)
+	}
+
+	middocumentsContractFindDocumentPath, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "findDocumentPath", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/provider/DocumentsContract$Path;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.findDocumentPath: %w", err)
+	}
+
+	middocumentsContractGetDocumentId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "getDocumentId", "(Landroid/net/Uri;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.getDocumentId: %w", err)
+	}
+
+	middocumentsContractGetDocumentMetadata, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "getDocumentMetadata", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/os/Bundle;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.getDocumentMetadata: %w", err)
+	}
+
+	middocumentsContractGetDocumentThumbnail, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "getDocumentThumbnail", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/graphics/Point;Landroid/os/CancellationSignal;)Landroid/graphics/Bitmap;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.getDocumentThumbnail: %w", err)
+	}
+
+	middocumentsContractGetRootId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "getRootId", "(Landroid/net/Uri;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.getRootId: %w", err)
+	}
+
+	middocumentsContractGetSearchDocumentsQuery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "getSearchDocumentsQuery", "(Landroid/net/Uri;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.getSearchDocumentsQuery: %w", err)
+	}
+
+	middocumentsContractGetTreeDocumentId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "getTreeDocumentId", "(Landroid/net/Uri;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.getTreeDocumentId: %w", err)
+	}
+
+	middocumentsContractIsChildDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "isChildDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.isChildDocument: %w", err)
+	}
+
+	middocumentsContractIsDocumentUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "isDocumentUri", "(Landroid/content/Context;Landroid/net/Uri;)Z")
 	if err != nil {
 		return fmt.Errorf("get method android.provider.DocumentsContract.isDocumentUri: %w", err)
+	}
+
+	middocumentsContractIsRootUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "isRootUri", "(Landroid/content/Context;Landroid/net/Uri;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.isRootUri: %w", err)
+	}
+
+	middocumentsContractIsRootsUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "isRootsUri", "(Landroid/content/Context;Landroid/net/Uri;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.isRootsUri: %w", err)
+	}
+
+	middocumentsContractIsTreeUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "isTreeUri", "(Landroid/net/Uri;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.isTreeUri: %w", err)
+	}
+
+	middocumentsContractMoveDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "moveDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;Landroid/net/Uri;)Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.moveDocument: %w", err)
+	}
+
+	middocumentsContractRemoveDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "removeDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Landroid/net/Uri;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.removeDocument: %w", err)
+	}
+
+	middocumentsContractRenameDocument, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsdocumentsContract)), "renameDocument", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.provider.DocumentsContract.renameDocument: %w", err)
 	}
 
 	return nil

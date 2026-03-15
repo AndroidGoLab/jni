@@ -20,22 +20,26 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsResolver                      *jni.GlobalRef
-	midResolverqueryRaw              jni.MethodID
-	midResolveropenFileDescriptorRaw jni.MethodID
-
-	clsCursor               *jni.GlobalRef
-	midCursormoveToNext     jni.MethodID
-	midCursorGetString      jni.MethodID
-	midCursorGetInt         jni.MethodID
-	midCursorGetLong        jni.MethodID
-	midCursorGetColumnIndex jni.MethodID
-
-	clsuri *jni.GlobalRef
-
-	clsparcelFD         *jni.GlobalRef
-	midparcelFDgetFd    jni.MethodID
-	midparcelFDdetachFd jni.MethodID
+	clsuri                         *jni.GlobalRef
+	miduriCompareTo1               jni.MethodID
+	miduriEquals                   jni.MethodID
+	miduriGetBooleanQueryParameter jni.MethodID
+	miduriGetQueryParameter        jni.MethodID
+	miduriGetQueryParameterNames   jni.MethodID
+	miduriGetQueryParameters       jni.MethodID
+	miduriHashCode                 jni.MethodID
+	miduriIsAbsolute               jni.MethodID
+	miduriIsOpaque                 jni.MethodID
+	miduriNormalizeScheme          jni.MethodID
+	miduriCompareTo1_1             jni.MethodID
+	miduriDecode                   jni.MethodID
+	miduriEncode1                  jni.MethodID
+	miduriEncode2_1                jni.MethodID
+	miduriFromFile                 jni.MethodID
+	miduriFromParts                jni.MethodID
+	miduriParse                    jni.MethodID
+	miduriWithAppendedPath         jni.MethodID
+	miduriWriteToParcel            jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -56,73 +60,105 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/content/ContentResolver")
-	if err != nil {
-		return fmt.Errorf("find class android.content.ContentResolver: %w", err)
-	}
-	clsResolver = env.NewGlobalRef(&c.Object)
-
-	midResolverqueryRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "query", "(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.ContentResolver.query: %w", err)
-	}
-
-	midResolveropenFileDescriptorRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResolver)), "openFileDescriptor", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/os/ParcelFileDescriptor;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.ContentResolver.openFileDescriptor: %w", err)
-	}
-
-	c, err = env.FindClass("android/database/Cursor")
-	if err != nil {
-		return fmt.Errorf("find class android.database.Cursor: %w", err)
-	}
-	clsCursor = env.NewGlobalRef(&c.Object)
-
-	midCursormoveToNext, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursor)), "moveToNext", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.database.Cursor.moveToNext: %w", err)
-	}
-
-	midCursorGetString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursor)), "getString", "(I)Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.database.Cursor.getString: %w", err)
-	}
-
-	midCursorGetInt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursor)), "getInt", "(I)I")
-	if err != nil {
-		return fmt.Errorf("get method android.database.Cursor.getInt: %w", err)
-	}
-
-	midCursorGetLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursor)), "getLong", "(I)J")
-	if err != nil {
-		return fmt.Errorf("get method android.database.Cursor.getLong: %w", err)
-	}
-
-	midCursorGetColumnIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursor)), "getColumnIndex", "(Ljava/lang/String;)I")
-	if err != nil {
-		return fmt.Errorf("get method android.database.Cursor.getColumnIndex: %w", err)
-	}
-
 	c, err = env.FindClass("android/net/Uri")
 	if err != nil {
 		return fmt.Errorf("find class android.net.Uri: %w", err)
 	}
 	clsuri = env.NewGlobalRef(&c.Object)
 
-	c, err = env.FindClass("android/os/ParcelFileDescriptor")
+	miduriCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "compareTo", "(Landroid/net/Uri;)I")
 	if err != nil {
-		return fmt.Errorf("find class android.os.ParcelFileDescriptor: %w", err)
-	}
-	clsparcelFD = env.NewGlobalRef(&c.Object)
-
-	midparcelFDgetFd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsparcelFD)), "getFd", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.os.ParcelFileDescriptor.getFd: %w", err)
+		return fmt.Errorf("get method android.net.Uri.compareTo: %w", err)
 	}
 
-	midparcelFDdetachFd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsparcelFD)), "detachFd", "()I")
+	miduriEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "equals", "(Ljava/lang/Object;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.os.ParcelFileDescriptor.detachFd: %w", err)
+		return fmt.Errorf("get method android.net.Uri.equals: %w", err)
+	}
+
+	miduriGetBooleanQueryParameter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getBooleanQueryParameter", "(Ljava/lang/String;Z)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.getBooleanQueryParameter: %w", err)
+	}
+
+	miduriGetQueryParameter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getQueryParameter", "(Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.getQueryParameter: %w", err)
+	}
+
+	miduriGetQueryParameterNames, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getQueryParameterNames", "()Ljava/util/Set<java$lang$String>;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.getQueryParameterNames: %w", err)
+	}
+
+	miduriGetQueryParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "getQueryParameters", "(Ljava/lang/String;)Ljava/util/List<java$lang$String>;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.getQueryParameters: %w", err)
+	}
+
+	miduriHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "hashCode", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.hashCode: %w", err)
+	}
+
+	miduriIsAbsolute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "isAbsolute", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.isAbsolute: %w", err)
+	}
+
+	miduriIsOpaque, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "isOpaque", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.isOpaque: %w", err)
+	}
+
+	miduriNormalizeScheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "normalizeScheme", "()Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.normalizeScheme: %w", err)
+	}
+
+	miduriCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "compareTo", "(Ljava/lang/Object;)I")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.compareTo: %w", err)
+	}
+
+	miduriDecode, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "decode", "(Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.decode: %w", err)
+	}
+
+	miduriEncode1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "encode", "(Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.encode: %w", err)
+	}
+
+	miduriEncode2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "encode", "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.encode: %w", err)
+	}
+
+	miduriFromFile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "fromFile", "(Ljava/io/File;)Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.fromFile: %w", err)
+	}
+
+	miduriFromParts, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "fromParts", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.fromParts: %w", err)
+	}
+
+	miduriParse, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "parse", "(Ljava/lang/String;)Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.parse: %w", err)
+	}
+
+	miduriWithAppendedPath, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "withAppendedPath", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.withAppendedPath: %w", err)
+	}
+
+	miduriWriteToParcel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsuri)), "writeToParcel", "(Landroid/os/Parcel;Landroid/net/Uri;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.net.Uri.writeToParcel: %w", err)
 	}
 
 	return nil

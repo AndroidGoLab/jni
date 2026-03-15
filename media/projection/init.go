@@ -20,19 +20,9 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                          *jni.GlobalRef
-	midManagercreateScreenCaptureIntent jni.MethodID
-	midManagergetMediaProjection        jni.MethodID
-
-	clsProjection                        *jni.GlobalRef
-	midProjectionstop                    jni.MethodID
-	midProjectionregisterCallback        jni.MethodID
-	midProjectioncreateVirtualDisplayRaw jni.MethodID
-
-	clsVirtualDisplay        *jni.GlobalRef
-	midVirtualDisplayrelease jni.MethodID
-
-	clsprojectionCallback *jni.GlobalRef
+	clsmediaProjection                   *jni.GlobalRef
+	midmediaProjectionStop               jni.MethodID
+	midmediaProjectionUnregisterCallback jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -53,59 +43,21 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/media/projection/MediaProjectionManager")
-	if err != nil {
-		return fmt.Errorf("find class android.media.projection.MediaProjectionManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagercreateScreenCaptureIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createScreenCaptureIntent", "()Landroid/content/Intent;")
-	if err != nil {
-		return fmt.Errorf("get method android.media.projection.MediaProjectionManager.createScreenCaptureIntent: %w", err)
-	}
-
-	midManagergetMediaProjection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getMediaProjection", "(ILandroid/content/Intent;)Landroid/media/projection/MediaProjection;")
-	if err != nil {
-		return fmt.Errorf("get method android.media.projection.MediaProjectionManager.getMediaProjection: %w", err)
-	}
-
 	c, err = env.FindClass("android/media/projection/MediaProjection")
 	if err != nil {
 		return fmt.Errorf("find class android.media.projection.MediaProjection: %w", err)
 	}
-	clsProjection = env.NewGlobalRef(&c.Object)
+	clsmediaProjection = env.NewGlobalRef(&c.Object)
 
-	midProjectionstop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProjection)), "stop", "()V")
+	midmediaProjectionStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaProjection)), "stop", "()V")
 	if err != nil {
 		return fmt.Errorf("get method android.media.projection.MediaProjection.stop: %w", err)
 	}
 
-	midProjectionregisterCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProjection)), "registerCallback", "(Landroid/media/projection/MediaProjection$Callback;Landroid/os/Handler;)V")
+	midmediaProjectionUnregisterCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaProjection)), "unregisterCallback", "(Landroid/media/projection/MediaProjection$Callback;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.projection.MediaProjection.registerCallback: %w", err)
+		return fmt.Errorf("get method android.media.projection.MediaProjection.unregisterCallback: %w", err)
 	}
-
-	midProjectioncreateVirtualDisplayRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProjection)), "createVirtualDisplay", "(Ljava/lang/String;IIIILandroid/view/Surface;Landroid/hardware/display/VirtualDisplay$Callback;Landroid/os/Handler;)Landroid/hardware/display/VirtualDisplay;")
-	if err != nil {
-		return fmt.Errorf("get method android.media.projection.MediaProjection.createVirtualDisplay: %w", err)
-	}
-
-	c, err = env.FindClass("android/hardware/display/VirtualDisplay")
-	if err != nil {
-		return fmt.Errorf("find class android.hardware.display.VirtualDisplay: %w", err)
-	}
-	clsVirtualDisplay = env.NewGlobalRef(&c.Object)
-
-	midVirtualDisplayrelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVirtualDisplay)), "release", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.hardware.display.VirtualDisplay.release: %w", err)
-	}
-
-	c, err = env.FindClass("android/media/projection/MediaProjection$Callback")
-	if err != nil {
-		return fmt.Errorf("find class android.media.projection.MediaProjection$Callback: %w", err)
-	}
-	clsprojectionCallback = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

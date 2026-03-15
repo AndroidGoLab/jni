@@ -17,19 +17,19 @@ var (
 	_ *app.Context
 )
 
-// Vibrator wraps android.os.Vibrator.
-type Vibrator struct {
+// vibrator wraps android.os.Vibrator.
+type vibrator struct {
 	VM  *jni.VM
 	Ctx *app.Context
 	Obj *jni.GlobalRef
 }
 
-// NewVibrator obtains android.os.Vibrator from the Android system service manager.
-func NewVibrator(ctx *app.Context) (*Vibrator, error) {
+// Newvibrator obtains android.os.Vibrator from the Android system service manager.
+func Newvibrator(ctx *app.Context) (*vibrator, error) {
 	if ctx == nil {
-		return nil, fmt.Errorf("Vibrator: nil Context")
+		return nil, fmt.Errorf("vibrator: nil Context")
 	}
-	var mgr Vibrator
+	var mgr vibrator
 	mgr.VM = ctx.VM
 	mgr.Ctx = ctx
 
@@ -53,8 +53,42 @@ func NewVibrator(ctx *app.Context) (*Vibrator, error) {
 	return &mgr, nil
 }
 
-// HasVibrator calls android.os.Vibrator.hasVibrator.
-func (m *Vibrator) HasVibrator() (bool, error) {
+// Close releases the global reference to the underlying Java object.
+// After Close, the vibrator must not be used.
+func (m *vibrator) Close() {
+	if m.Obj != nil {
+		m.VM.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(m.Obj)
+			m.Obj = nil
+			return nil
+		})
+	}
+}
+
+// AreEffectsSupported calls android.os.Vibrator.areEffectsSupported.
+func (m *vibrator) AreEffectsSupported(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midvibratorAreEffectsSupported, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// AreEnvelopeEffectsSupported calls android.os.Vibrator.areEnvelopeEffectsSupported.
+func (m *vibrator) AreEnvelopeEffectsSupported() (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -64,7 +98,7 @@ func (m *Vibrator) HasVibrator() (bool, error) {
 		}
 		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midVibratorHasVibrator,
+			midvibratorAreEnvelopeEffectsSupported,
 		)
 		if callErr != nil {
 			return callErr
@@ -75,8 +109,157 @@ func (m *Vibrator) HasVibrator() (bool, error) {
 	return result, callErr
 }
 
-// vibrateMs calls android.os.Vibrator.vibrate.
-func (m *Vibrator) vibrateMs(milliseconds int64) error {
+// ArePrimitivesSupported calls android.os.Vibrator.arePrimitivesSupported.
+func (m *vibrator) ArePrimitivesSupported(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midvibratorArePrimitivesSupported, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetEnvelopeEffectInfo calls android.os.Vibrator.getEnvelopeEffectInfo.
+func (m *vibrator) GetEnvelopeEffectInfo() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midvibratorGetEnvelopeEffectInfo,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFrequencyProfile calls android.os.Vibrator.getFrequencyProfile.
+func (m *vibrator) GetFrequencyProfile() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midvibratorGetFrequencyProfile,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetId calls android.os.Vibrator.getId.
+func (m *vibrator) GetId() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midvibratorGetId,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPrimitiveDurations calls android.os.Vibrator.getPrimitiveDurations.
+func (m *vibrator) GetPrimitiveDurations(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midvibratorGetPrimitiveDurations, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetQFactor calls android.os.Vibrator.getQFactor.
+func (m *vibrator) GetQFactor() (float32, error) {
+	var result float32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallFloatMethod(
+			m.Obj,
+			midvibratorGetQFactor,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetResonantFrequency calls android.os.Vibrator.getResonantFrequency.
+func (m *vibrator) GetResonantFrequency() (float32, error) {
+	var result float32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallFloatMethod(
+			m.Obj,
+			midvibratorGetResonantFrequency,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// Vibrate1 calls android.os.Vibrator.vibrate.
+func (m *vibrator) Vibrate1(arg0 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -87,15 +270,15 @@ func (m *Vibrator) vibrateMs(milliseconds int64) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midVibratorvibrateMs, jni.LongValue(milliseconds),
+			midvibratorVibrate1, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
 	return callErr
 }
 
-// vibratePatternMs calls android.os.Vibrator.vibrate.
-func (m *Vibrator) vibratePatternMs(pattern *jni.Object, repeat int32) error {
+// Vibrate2_1 calls android.os.Vibrator.vibrate.
+func (m *vibrator) Vibrate2_1(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -106,15 +289,15 @@ func (m *Vibrator) vibratePatternMs(pattern *jni.Object, repeat int32) error {
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midVibratorvibratePatternMs, jni.ObjectValue(pattern), jni.IntValue(repeat),
+			midvibratorVibrate2_1, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		return callErr
 	})
 	return callErr
 }
 
-// Cancel calls android.os.Vibrator.cancel.
-func (m *Vibrator) Cancel() error {
+// Vibrate2_2 calls android.os.Vibrator.vibrate.
+func (m *vibrator) Vibrate2_2(arg0 *jni.Object, arg1 *jni.Object) error {
 
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -122,9 +305,86 @@ func (m *Vibrator) Cancel() error {
 			callErr = err
 			return err
 		}
+
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midVibratorCancel,
+			midvibratorVibrate2_2, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// Vibrate1_3 calls android.os.Vibrator.vibrate.
+func (m *vibrator) Vibrate1_3(arg0 int64) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midvibratorVibrate1_3, jni.LongValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// Vibrate2_4 calls android.os.Vibrator.vibrate.
+func (m *vibrator) Vibrate2_4(arg0 int64, arg1 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midvibratorVibrate2_4, jni.LongValue(arg0), jni.ObjectValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// Vibrate2_5 calls android.os.Vibrator.vibrate.
+func (m *vibrator) Vibrate2_5(arg0 *jni.Object, arg1 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midvibratorVibrate2_5, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// Vibrate3_6 calls android.os.Vibrator.vibrate.
+func (m *vibrator) Vibrate3_6(arg0 *jni.Object, arg1 int32, arg2 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midvibratorVibrate3_6, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})

@@ -20,32 +20,79 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsPlayer                        *jni.GlobalRef
-	midPlayerInit                    jni.MethodID
-	midPlayersetDataSourcePath       jni.MethodID
-	midPlayersetDataSourceUri        jni.MethodID
-	midPlayerprepare                 jni.MethodID
-	midPlayerprepareAsync            jni.MethodID
-	midPlayerstart                   jni.MethodID
-	midPlayerpause                   jni.MethodID
-	midPlayerstop                    jni.MethodID
-	midPlayerseekTo                  jni.MethodID
-	midPlayergetDuration             jni.MethodID
-	midPlayergetCurrentPosition      jni.MethodID
-	midPlayerisPlaying               jni.MethodID
-	midPlayersetVolume               jni.MethodID
-	midPlayersetLooping              jni.MethodID
-	midPlayersetOnCompletionListener jni.MethodID
-	midPlayersetOnErrorListener      jni.MethodID
-	midPlayersetOnPreparedListener   jni.MethodID
-	midPlayerrelease                 jni.MethodID
-	midPlayerreset                   jni.MethodID
-
-	clsonCompletionListener *jni.GlobalRef
-
-	clsonErrorListener *jni.GlobalRef
-
-	clsonPreparedListener *jni.GlobalRef
+	clsmediaPlayer                                      *jni.GlobalRef
+	midmediaPlayerAddTimedTextSource3                   jni.MethodID
+	midmediaPlayerAddTimedTextSource2_1                 jni.MethodID
+	midmediaPlayerAddTimedTextSource4_2                 jni.MethodID
+	midmediaPlayerAddTimedTextSource2_3                 jni.MethodID
+	midmediaPlayerClearOnMediaTimeDiscontinuityListener jni.MethodID
+	midmediaPlayerClearOnSubtitleDataListener           jni.MethodID
+	midmediaPlayerCreateVolumeShaper                    jni.MethodID
+	midmediaPlayerDeselectTrack                         jni.MethodID
+	midmediaPlayerGetDrmInfo                            jni.MethodID
+	midmediaPlayerGetDrmPropertyString                  jni.MethodID
+	midmediaPlayerGetKeyRequest                         jni.MethodID
+	midmediaPlayerGetMetrics                            jni.MethodID
+	midmediaPlayerGetPreferredDevice                    jni.MethodID
+	midmediaPlayerGetRoutedDevice                       jni.MethodID
+	midmediaPlayerGetRoutedDevices                      jni.MethodID
+	midmediaPlayerGetSelectedTrack                      jni.MethodID
+	midmediaPlayerGetTimestamp                          jni.MethodID
+	midmediaPlayerGetTrackInfo                          jni.MethodID
+	midmediaPlayerPause                                 jni.MethodID
+	midmediaPlayerPrepare                               jni.MethodID
+	midmediaPlayerPrepareAsync                          jni.MethodID
+	midmediaPlayerPrepareDrm                            jni.MethodID
+	midmediaPlayerProvideKeyResponse                    jni.MethodID
+	midmediaPlayerRelease                               jni.MethodID
+	midmediaPlayerReleaseDrm                            jni.MethodID
+	midmediaPlayerRemoveOnRoutingChangedListener        jni.MethodID
+	midmediaPlayerReset                                 jni.MethodID
+	midmediaPlayerRestoreKeys                           jni.MethodID
+	midmediaPlayerSeekTo1                               jni.MethodID
+	midmediaPlayerSeekTo2_1                             jni.MethodID
+	midmediaPlayerSelectTrack                           jni.MethodID
+	midmediaPlayerSetAudioAttributes                    jni.MethodID
+	midmediaPlayerSetAudioSessionId                     jni.MethodID
+	midmediaPlayerSetAudioStreamType                    jni.MethodID
+	midmediaPlayerSetAuxEffectSendLevel                 jni.MethodID
+	midmediaPlayerSetDataSource2                        jni.MethodID
+	midmediaPlayerSetDataSource4_1                      jni.MethodID
+	midmediaPlayerSetDataSource5_2                      jni.MethodID
+	midmediaPlayerSetDataSource1_3                      jni.MethodID
+	midmediaPlayerSetDataSource1_4                      jni.MethodID
+	midmediaPlayerSetDataSource1_5                      jni.MethodID
+	midmediaPlayerSetDataSource3_6                      jni.MethodID
+	midmediaPlayerSetDataSource1_7                      jni.MethodID
+	midmediaPlayerSetDisplay                            jni.MethodID
+	midmediaPlayerSetDrmPropertyString                  jni.MethodID
+	midmediaPlayerSetOnBufferingUpdateListener          jni.MethodID
+	midmediaPlayerSetOnCompletionListener               jni.MethodID
+	midmediaPlayerSetOnDrmConfigHelper                  jni.MethodID
+	midmediaPlayerSetOnDrmInfoListener                  jni.MethodID
+	midmediaPlayerSetOnDrmPreparedListener              jni.MethodID
+	midmediaPlayerSetOnErrorListener                    jni.MethodID
+	midmediaPlayerSetOnInfoListener                     jni.MethodID
+	midmediaPlayerSetOnMediaTimeDiscontinuityListener   jni.MethodID
+	midmediaPlayerSetOnPreparedListener                 jni.MethodID
+	midmediaPlayerSetOnSeekCompleteListener             jni.MethodID
+	midmediaPlayerSetOnSubtitleDataListener             jni.MethodID
+	midmediaPlayerSetOnTimedMetaDataAvailableListener   jni.MethodID
+	midmediaPlayerSetOnTimedTextListener                jni.MethodID
+	midmediaPlayerSetOnVideoSizeChangedListener         jni.MethodID
+	midmediaPlayerSetPreferredDevice                    jni.MethodID
+	midmediaPlayerSetScreenOnWhilePlaying               jni.MethodID
+	midmediaPlayerSetSurface                            jni.MethodID
+	midmediaPlayerSetVideoScalingMode                   jni.MethodID
+	midmediaPlayerSetVolume                             jni.MethodID
+	midmediaPlayerSetWakeMode                           jni.MethodID
+	midmediaPlayerStart                                 jni.MethodID
+	midmediaPlayerStop                                  jni.MethodID
+	midmediaPlayerCreate2                               jni.MethodID
+	midmediaPlayerCreate3_1                             jni.MethodID
+	midmediaPlayerCreate5_2                             jni.MethodID
+	midmediaPlayerCreate2_3                             jni.MethodID
+	midmediaPlayerCreate4_4                             jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -70,119 +117,367 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.media.MediaPlayer: %w", err)
 	}
-	clsPlayer = env.NewGlobalRef(&c.Object)
-	midPlayerInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "<init>", "()V")
+	clsmediaPlayer = env.NewGlobalRef(&c.Object)
+
+	midmediaPlayerAddTimedTextSource3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "addTimedTextSource", "(Landroid/content/Context;Landroid/net/Uri;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get constructor android.media.MediaPlayer.<init>: %w", err)
+		return fmt.Errorf("get method android.media.MediaPlayer.addTimedTextSource: %w", err)
 	}
 
-	midPlayersetDataSourcePath, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "setDataSource", "(Ljava/lang/String;)V")
+	midmediaPlayerAddTimedTextSource2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "addTimedTextSource", "(Ljava/io/FileDescriptor;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaPlayer.setDataSource: %w", err)
+		return fmt.Errorf("get method android.media.MediaPlayer.addTimedTextSource: %w", err)
 	}
 
-	midPlayersetDataSourceUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "setDataSource", "(Landroid/content/Context;Landroid/net/Uri;)V")
+	midmediaPlayerAddTimedTextSource4_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "addTimedTextSource", "(Ljava/io/FileDescriptor;JJLjava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaPlayer.setDataSource: %w", err)
+		return fmt.Errorf("get method android.media.MediaPlayer.addTimedTextSource: %w", err)
 	}
 
-	midPlayerprepare, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "prepare", "()V")
+	midmediaPlayerAddTimedTextSource2_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "addTimedTextSource", "(Ljava/lang/String;Ljava/lang/String;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaPlayer.prepare: %w", err)
+		return fmt.Errorf("get method android.media.MediaPlayer.addTimedTextSource: %w", err)
 	}
 
-	midPlayerprepareAsync, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "prepareAsync", "()V")
+	midmediaPlayerClearOnMediaTimeDiscontinuityListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "clearOnMediaTimeDiscontinuityListener", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaPlayer.prepareAsync: %w", err)
+		return fmt.Errorf("get method android.media.MediaPlayer.clearOnMediaTimeDiscontinuityListener: %w", err)
 	}
 
-	midPlayerstart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "start", "()V")
+	midmediaPlayerClearOnSubtitleDataListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "clearOnSubtitleDataListener", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaPlayer.start: %w", err)
+		return fmt.Errorf("get method android.media.MediaPlayer.clearOnSubtitleDataListener: %w", err)
 	}
 
-	midPlayerpause, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "pause", "()V")
+	midmediaPlayerCreateVolumeShaper, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "createVolumeShaper", "(Landroid/media/VolumeShaper$Configuration;)Landroid/media/VolumeShaper;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.createVolumeShaper: %w", err)
+	}
+
+	midmediaPlayerDeselectTrack, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "deselectTrack", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.deselectTrack: %w", err)
+	}
+
+	midmediaPlayerGetDrmInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "getDrmInfo", "()Landroid/media/MediaPlayer$DrmInfo;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.getDrmInfo: %w", err)
+	}
+
+	midmediaPlayerGetDrmPropertyString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "getDrmPropertyString", "(Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.getDrmPropertyString: %w", err)
+	}
+
+	midmediaPlayerGetKeyRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "getKeyRequest", "([B[BLjava/lang/String;ILjava/util/Map<java$lang$String;Ljava/lang/String>;)Landroid/media/MediaDrm$KeyRequest;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.getKeyRequest: %w", err)
+	}
+
+	midmediaPlayerGetMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "getMetrics", "()Landroid/os/PersistableBundle;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.getMetrics: %w", err)
+	}
+
+	midmediaPlayerGetPreferredDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "getPreferredDevice", "()Landroid/media/AudioDeviceInfo;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.getPreferredDevice: %w", err)
+	}
+
+	midmediaPlayerGetRoutedDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "getRoutedDevice", "()Landroid/media/AudioDeviceInfo;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.getRoutedDevice: %w", err)
+	}
+
+	midmediaPlayerGetRoutedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "getRoutedDevices", "()Ljava/util/List<android$media$AudioDeviceInfo>;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.getRoutedDevices: %w", err)
+	}
+
+	midmediaPlayerGetSelectedTrack, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "getSelectedTrack", "(I)I")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.getSelectedTrack: %w", err)
+	}
+
+	midmediaPlayerGetTimestamp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "getTimestamp", "()Landroid/media/MediaTimestamp;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.getTimestamp: %w", err)
+	}
+
+	midmediaPlayerGetTrackInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "getTrackInfo", "()[Landroid/media/MediaPlayer$TrackInfo;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.getTrackInfo: %w", err)
+	}
+
+	midmediaPlayerPause, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "pause", "()V")
 	if err != nil {
 		return fmt.Errorf("get method android.media.MediaPlayer.pause: %w", err)
 	}
 
-	midPlayerstop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "stop", "()V")
+	midmediaPlayerPrepare, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "prepare", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaPlayer.stop: %w", err)
+		return fmt.Errorf("get method android.media.MediaPlayer.prepare: %w", err)
 	}
 
-	midPlayerseekTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "seekTo", "(I)V")
+	midmediaPlayerPrepareAsync, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "prepareAsync", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaPlayer.seekTo: %w", err)
+		return fmt.Errorf("get method android.media.MediaPlayer.prepareAsync: %w", err)
 	}
 
-	midPlayergetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "getDuration", "()I")
+	midmediaPlayerPrepareDrm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "prepareDrm", "(Ljava/util/UUID;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaPlayer.getDuration: %w", err)
+		return fmt.Errorf("get method android.media.MediaPlayer.prepareDrm: %w", err)
 	}
 
-	midPlayergetCurrentPosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "getCurrentPosition", "()I")
+	midmediaPlayerProvideKeyResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "provideKeyResponse", "([B[B)[B")
 	if err != nil {
-		return fmt.Errorf("get method android.media.MediaPlayer.getCurrentPosition: %w", err)
+		return fmt.Errorf("get method android.media.MediaPlayer.provideKeyResponse: %w", err)
 	}
 
-	midPlayerisPlaying, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "isPlaying", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.media.MediaPlayer.isPlaying: %w", err)
-	}
-
-	midPlayersetVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "setVolume", "(FF)V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.MediaPlayer.setVolume: %w", err)
-	}
-
-	midPlayersetLooping, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "setLooping", "(Z)V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.MediaPlayer.setLooping: %w", err)
-	}
-
-	midPlayersetOnCompletionListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "setOnCompletionListener", "(Landroid/media/MediaPlayer$OnCompletionListener;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.MediaPlayer.setOnCompletionListener: %w", err)
-	}
-
-	midPlayersetOnErrorListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "setOnErrorListener", "(Landroid/media/MediaPlayer$OnErrorListener;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.MediaPlayer.setOnErrorListener: %w", err)
-	}
-
-	midPlayersetOnPreparedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "setOnPreparedListener", "(Landroid/media/MediaPlayer$OnPreparedListener;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.media.MediaPlayer.setOnPreparedListener: %w", err)
-	}
-
-	midPlayerrelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "release", "()V")
+	midmediaPlayerRelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "release", "()V")
 	if err != nil {
 		return fmt.Errorf("get method android.media.MediaPlayer.release: %w", err)
 	}
 
-	midPlayerreset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlayer)), "reset", "()V")
+	midmediaPlayerReleaseDrm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "releaseDrm", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.releaseDrm: %w", err)
+	}
+
+	midmediaPlayerRemoveOnRoutingChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "removeOnRoutingChangedListener", "(Landroid/media/AudioRouting$OnRoutingChangedListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.removeOnRoutingChangedListener: %w", err)
+	}
+
+	midmediaPlayerReset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "reset", "()V")
 	if err != nil {
 		return fmt.Errorf("get method android.media.MediaPlayer.reset: %w", err)
 	}
 
-	c, err = env.FindClass("android/media/MediaPlayer$OnCompletionListener")
+	midmediaPlayerRestoreKeys, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "restoreKeys", "([B)V")
 	if err != nil {
-		return fmt.Errorf("find class android.media.MediaPlayer$OnCompletionListener: %w", err)
+		return fmt.Errorf("get method android.media.MediaPlayer.restoreKeys: %w", err)
 	}
-	clsonCompletionListener = env.NewGlobalRef(&c.Object)
 
-	c, err = env.FindClass("android/media/MediaPlayer$OnErrorListener")
+	midmediaPlayerSeekTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "seekTo", "(I)V")
 	if err != nil {
-		return fmt.Errorf("find class android.media.MediaPlayer$OnErrorListener: %w", err)
+		return fmt.Errorf("get method android.media.MediaPlayer.seekTo: %w", err)
 	}
-	clsonErrorListener = env.NewGlobalRef(&c.Object)
 
-	c, err = env.FindClass("android/media/MediaPlayer$OnPreparedListener")
+	midmediaPlayerSeekTo2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "seekTo", "(JI)V")
 	if err != nil {
-		return fmt.Errorf("find class android.media.MediaPlayer$OnPreparedListener: %w", err)
+		return fmt.Errorf("get method android.media.MediaPlayer.seekTo: %w", err)
 	}
-	clsonPreparedListener = env.NewGlobalRef(&c.Object)
+
+	midmediaPlayerSelectTrack, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "selectTrack", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.selectTrack: %w", err)
+	}
+
+	midmediaPlayerSetAudioAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setAudioAttributes", "(Landroid/media/AudioAttributes;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setAudioAttributes: %w", err)
+	}
+
+	midmediaPlayerSetAudioSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setAudioSessionId", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setAudioSessionId: %w", err)
+	}
+
+	midmediaPlayerSetAudioStreamType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setAudioStreamType", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setAudioStreamType: %w", err)
+	}
+
+	midmediaPlayerSetAuxEffectSendLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setAuxEffectSendLevel", "(F)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setAuxEffectSendLevel: %w", err)
+	}
+
+	midmediaPlayerSetDataSource2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setDataSource", "(Landroid/content/Context;Landroid/net/Uri;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setDataSource: %w", err)
+	}
+
+	midmediaPlayerSetDataSource4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setDataSource", "(Landroid/content/Context;Landroid/net/Uri;Ljava/util/Map<java$lang$String;Ljava/lang/String>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setDataSource: %w", err)
+	}
+
+	midmediaPlayerSetDataSource5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setDataSource", "(Landroid/content/Context;Landroid/net/Uri;Ljava/util/Map<java$lang$String;Ljava/lang/String>;Ljava/util/List<java$net$HttpCookie>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setDataSource: %w", err)
+	}
+
+	midmediaPlayerSetDataSource1_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setDataSource", "(Landroid/content/res/AssetFileDescriptor;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setDataSource: %w", err)
+	}
+
+	midmediaPlayerSetDataSource1_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setDataSource", "(Landroid/media/MediaDataSource;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setDataSource: %w", err)
+	}
+
+	midmediaPlayerSetDataSource1_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setDataSource", "(Ljava/io/FileDescriptor;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setDataSource: %w", err)
+	}
+
+	midmediaPlayerSetDataSource3_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setDataSource", "(Ljava/io/FileDescriptor;JJ)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setDataSource: %w", err)
+	}
+
+	midmediaPlayerSetDataSource1_7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setDataSource", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setDataSource: %w", err)
+	}
+
+	midmediaPlayerSetDisplay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setDisplay", "(Landroid/view/SurfaceHolder;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setDisplay: %w", err)
+	}
+
+	midmediaPlayerSetDrmPropertyString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setDrmPropertyString", "(Ljava/lang/String;Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setDrmPropertyString: %w", err)
+	}
+
+	midmediaPlayerSetOnBufferingUpdateListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setOnBufferingUpdateListener", "(Landroid/media/MediaPlayer$OnBufferingUpdateListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setOnBufferingUpdateListener: %w", err)
+	}
+
+	midmediaPlayerSetOnCompletionListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setOnCompletionListener", "(Landroid/media/MediaPlayer$OnCompletionListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setOnCompletionListener: %w", err)
+	}
+
+	midmediaPlayerSetOnDrmConfigHelper, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setOnDrmConfigHelper", "(Landroid/media/MediaPlayer$OnDrmConfigHelper;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setOnDrmConfigHelper: %w", err)
+	}
+
+	midmediaPlayerSetOnDrmInfoListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setOnDrmInfoListener", "(Landroid/media/MediaPlayer$OnDrmInfoListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setOnDrmInfoListener: %w", err)
+	}
+
+	midmediaPlayerSetOnDrmPreparedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setOnDrmPreparedListener", "(Landroid/media/MediaPlayer$OnDrmPreparedListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setOnDrmPreparedListener: %w", err)
+	}
+
+	midmediaPlayerSetOnErrorListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setOnErrorListener", "(Landroid/media/MediaPlayer$OnErrorListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setOnErrorListener: %w", err)
+	}
+
+	midmediaPlayerSetOnInfoListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setOnInfoListener", "(Landroid/media/MediaPlayer$OnInfoListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setOnInfoListener: %w", err)
+	}
+
+	midmediaPlayerSetOnMediaTimeDiscontinuityListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setOnMediaTimeDiscontinuityListener", "(Landroid/media/MediaPlayer$OnMediaTimeDiscontinuityListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setOnMediaTimeDiscontinuityListener: %w", err)
+	}
+
+	midmediaPlayerSetOnPreparedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setOnPreparedListener", "(Landroid/media/MediaPlayer$OnPreparedListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setOnPreparedListener: %w", err)
+	}
+
+	midmediaPlayerSetOnSeekCompleteListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setOnSeekCompleteListener", "(Landroid/media/MediaPlayer$OnSeekCompleteListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setOnSeekCompleteListener: %w", err)
+	}
+
+	midmediaPlayerSetOnSubtitleDataListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setOnSubtitleDataListener", "(Landroid/media/MediaPlayer$OnSubtitleDataListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setOnSubtitleDataListener: %w", err)
+	}
+
+	midmediaPlayerSetOnTimedMetaDataAvailableListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setOnTimedMetaDataAvailableListener", "(Landroid/media/MediaPlayer$OnTimedMetaDataAvailableListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setOnTimedMetaDataAvailableListener: %w", err)
+	}
+
+	midmediaPlayerSetOnTimedTextListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setOnTimedTextListener", "(Landroid/media/MediaPlayer$OnTimedTextListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setOnTimedTextListener: %w", err)
+	}
+
+	midmediaPlayerSetOnVideoSizeChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setOnVideoSizeChangedListener", "(Landroid/media/MediaPlayer$OnVideoSizeChangedListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setOnVideoSizeChangedListener: %w", err)
+	}
+
+	midmediaPlayerSetPreferredDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setPreferredDevice", "(Landroid/media/AudioDeviceInfo;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setPreferredDevice: %w", err)
+	}
+
+	midmediaPlayerSetScreenOnWhilePlaying, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setScreenOnWhilePlaying", "(Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setScreenOnWhilePlaying: %w", err)
+	}
+
+	midmediaPlayerSetSurface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setSurface", "(Landroid/view/Surface;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setSurface: %w", err)
+	}
+
+	midmediaPlayerSetVideoScalingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setVideoScalingMode", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setVideoScalingMode: %w", err)
+	}
+
+	midmediaPlayerSetVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setVolume", "(FF)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setVolume: %w", err)
+	}
+
+	midmediaPlayerSetWakeMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "setWakeMode", "(Landroid/content/Context;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.setWakeMode: %w", err)
+	}
+
+	midmediaPlayerStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "start", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.start: %w", err)
+	}
+
+	midmediaPlayerStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "stop", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.stop: %w", err)
+	}
+
+	midmediaPlayerCreate2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "create", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/media/MediaPlayer;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.create: %w", err)
+	}
+
+	midmediaPlayerCreate3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "create", "(Landroid/content/Context;Landroid/net/Uri;Landroid/view/SurfaceHolder;)Landroid/media/MediaPlayer;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.create: %w", err)
+	}
+
+	midmediaPlayerCreate5_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "create", "(Landroid/content/Context;Landroid/net/Uri;Landroid/view/SurfaceHolder;Landroid/media/AudioAttributes;I)Landroid/media/MediaPlayer;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.create: %w", err)
+	}
+
+	midmediaPlayerCreate2_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "create", "(Landroid/content/Context;I)Landroid/media/MediaPlayer;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.create: %w", err)
+	}
+
+	midmediaPlayerCreate4_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsmediaPlayer)), "create", "(Landroid/content/Context;ILandroid/media/AudioAttributes;I)Landroid/media/MediaPlayer;")
+	if err != nil {
+		return fmt.Errorf("get method android.media.MediaPlayer.create: %w", err)
+	}
 
 	return nil
 }

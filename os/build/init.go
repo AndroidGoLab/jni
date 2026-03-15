@@ -20,9 +20,14 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsbuildInfo *jni.GlobalRef
+	clsbuild                           *jni.GlobalRef
+	midbuildGetFingerprintedPartitions jni.MethodID
+	midbuildGetMajorSdkVersion         jni.MethodID
+	midbuildGetMinorSdkVersion         jni.MethodID
+	midbuildGetRadioVersion            jni.MethodID
+	midbuildGetSerial                  jni.MethodID
 
-	clsversionInfo *jni.GlobalRef
+	clsbuildVERSION *jni.GlobalRef
 )
 
 func ensureInit(env *jni.Env) error {
@@ -47,13 +52,38 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.os.Build: %w", err)
 	}
-	clsbuildInfo = env.NewGlobalRef(&c.Object)
+	clsbuild = env.NewGlobalRef(&c.Object)
+
+	midbuildGetFingerprintedPartitions, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbuild)), "getFingerprintedPartitions", "()Ljava/util/List<android/os/Build$Partition>;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Build.getFingerprintedPartitions: %w", err)
+	}
+
+	midbuildGetMajorSdkVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbuild)), "getMajorSdkVersion", "(I)I")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Build.getMajorSdkVersion: %w", err)
+	}
+
+	midbuildGetMinorSdkVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbuild)), "getMinorSdkVersion", "(I)I")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Build.getMinorSdkVersion: %w", err)
+	}
+
+	midbuildGetRadioVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbuild)), "getRadioVersion", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Build.getRadioVersion: %w", err)
+	}
+
+	midbuildGetSerial, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsbuild)), "getSerial", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.Build.getSerial: %w", err)
+	}
 
 	c, err = env.FindClass("android/os/Build$VERSION")
 	if err != nil {
 		return fmt.Errorf("find class android.os.Build$VERSION: %w", err)
 	}
-	clsversionInfo = env.NewGlobalRef(&c.Object)
+	clsbuildVERSION = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

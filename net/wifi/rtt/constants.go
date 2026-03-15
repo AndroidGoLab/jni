@@ -3,7 +3,9 @@
 package rtt
 
 const (
-	StatusSuccess             = 0
-	StatusFail                = 1
-	StatusResponderNotCapable = 2
+	Creator                                  = 0
+	StatusFail                               = 0
+	StatusResponderDoesNotSupportIeee80211mc = 0
+	StatusSuccess                            = 0
+	Unspecified                              = 0
 )

@@ -20,14 +20,44 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                *jni.GlobalRef
-	midManagerIsInteractive   jni.MethodID
-	midManagerIsPowerSaveMode jni.MethodID
-	midManagernewWakeLock     jni.MethodID
+	clspowerManager                                         *jni.GlobalRef
+	midpowerManagerAddThermalHeadroomListener1              jni.MethodID
+	midpowerManagerAddThermalHeadroomListener2_1            jni.MethodID
+	midpowerManagerAddThermalStatusListener1                jni.MethodID
+	midpowerManagerAddThermalStatusListener2_1              jni.MethodID
+	midpowerManagerGetBatteryDischargePrediction            jni.MethodID
+	midpowerManagerGetCurrentThermalStatus                  jni.MethodID
+	midpowerManagerGetLocationPowerSaveMode                 jni.MethodID
+	midpowerManagerGetThermalHeadroom                       jni.MethodID
+	midpowerManagerIsAllowedInLowPowerStandby1              jni.MethodID
+	midpowerManagerIsAllowedInLowPowerStandby1_1            jni.MethodID
+	midpowerManagerIsBatteryDischargePredictionPersonalized jni.MethodID
+	midpowerManagerIsDeviceIdleMode                         jni.MethodID
+	midpowerManagerIsDeviceLightIdleMode                    jni.MethodID
+	midpowerManagerIsExemptFromLowPowerStandby              jni.MethodID
+	midpowerManagerIsIgnoringBatteryOptimizations           jni.MethodID
+	midpowerManagerIsInteractive                            jni.MethodID
+	midpowerManagerIsLowPowerStandbyEnabled                 jni.MethodID
+	midpowerManagerIsPowerSaveMode                          jni.MethodID
+	midpowerManagerIsRebootingUserspaceSupported            jni.MethodID
+	midpowerManagerIsScreenOn                               jni.MethodID
+	midpowerManagerIsSustainedPerformanceModeSupported      jni.MethodID
+	midpowerManagerIsWakeLockLevelSupported                 jni.MethodID
+	midpowerManagerNewWakeLock                              jni.MethodID
+	midpowerManagerReboot                                   jni.MethodID
+	midpowerManagerRemoveThermalHeadroomListener            jni.MethodID
+	midpowerManagerRemoveThermalStatusListener              jni.MethodID
 
-	clsWakeLock          *jni.GlobalRef
-	midWakeLockacquireMs jni.MethodID
-	midWakeLockRelease   jni.MethodID
+	clspowerManagerWakeLock                    *jni.GlobalRef
+	midpowerManagerWakeLockAcquire0            jni.MethodID
+	midpowerManagerWakeLockAcquire1_1          jni.MethodID
+	midpowerManagerWakeLockIsHeld              jni.MethodID
+	midpowerManagerWakeLockRelease0            jni.MethodID
+	midpowerManagerWakeLockRelease1_1          jni.MethodID
+	midpowerManagerWakeLockSetReferenceCounted jni.MethodID
+	midpowerManagerWakeLockSetStateListener    jni.MethodID
+	midpowerManagerWakeLockSetWorkSource       jni.MethodID
+	midpowerManagerWakeLockToString            jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -52,37 +82,187 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.os.PowerManager: %w", err)
 	}
-	clsManager = env.NewGlobalRef(&c.Object)
+	clspowerManager = env.NewGlobalRef(&c.Object)
 
-	midManagerIsInteractive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isInteractive", "()Z")
+	midpowerManagerAddThermalHeadroomListener1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "addThermalHeadroomListener", "(Landroid/os/PowerManager$OnThermalHeadroomChangedListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.addThermalHeadroomListener: %w", err)
+	}
+
+	midpowerManagerAddThermalHeadroomListener2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "addThermalHeadroomListener", "(Ljava/util/concurrent/Executor;Landroid/os/PowerManager$OnThermalHeadroomChangedListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.addThermalHeadroomListener: %w", err)
+	}
+
+	midpowerManagerAddThermalStatusListener1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "addThermalStatusListener", "(Landroid/os/PowerManager$OnThermalStatusChangedListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.addThermalStatusListener: %w", err)
+	}
+
+	midpowerManagerAddThermalStatusListener2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "addThermalStatusListener", "(Ljava/util/concurrent/Executor;Landroid/os/PowerManager$OnThermalStatusChangedListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.addThermalStatusListener: %w", err)
+	}
+
+	midpowerManagerGetBatteryDischargePrediction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "getBatteryDischargePrediction", "()Ljava/time/Duration;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.getBatteryDischargePrediction: %w", err)
+	}
+
+	midpowerManagerGetCurrentThermalStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "getCurrentThermalStatus", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.getCurrentThermalStatus: %w", err)
+	}
+
+	midpowerManagerGetLocationPowerSaveMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "getLocationPowerSaveMode", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.getLocationPowerSaveMode: %w", err)
+	}
+
+	midpowerManagerGetThermalHeadroom, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "getThermalHeadroom", "(I)F")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.getThermalHeadroom: %w", err)
+	}
+
+	midpowerManagerIsAllowedInLowPowerStandby1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "isAllowedInLowPowerStandby", "(I)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.isAllowedInLowPowerStandby: %w", err)
+	}
+
+	midpowerManagerIsAllowedInLowPowerStandby1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "isAllowedInLowPowerStandby", "(Ljava/lang/String;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.isAllowedInLowPowerStandby: %w", err)
+	}
+
+	midpowerManagerIsBatteryDischargePredictionPersonalized, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "isBatteryDischargePredictionPersonalized", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.isBatteryDischargePredictionPersonalized: %w", err)
+	}
+
+	midpowerManagerIsDeviceIdleMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "isDeviceIdleMode", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.isDeviceIdleMode: %w", err)
+	}
+
+	midpowerManagerIsDeviceLightIdleMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "isDeviceLightIdleMode", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.isDeviceLightIdleMode: %w", err)
+	}
+
+	midpowerManagerIsExemptFromLowPowerStandby, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "isExemptFromLowPowerStandby", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.isExemptFromLowPowerStandby: %w", err)
+	}
+
+	midpowerManagerIsIgnoringBatteryOptimizations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "isIgnoringBatteryOptimizations", "(Ljava/lang/String;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.isIgnoringBatteryOptimizations: %w", err)
+	}
+
+	midpowerManagerIsInteractive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "isInteractive", "()Z")
 	if err != nil {
 		return fmt.Errorf("get method android.os.PowerManager.isInteractive: %w", err)
 	}
 
-	midManagerIsPowerSaveMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isPowerSaveMode", "()Z")
+	midpowerManagerIsLowPowerStandbyEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "isLowPowerStandbyEnabled", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.isLowPowerStandbyEnabled: %w", err)
+	}
+
+	midpowerManagerIsPowerSaveMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "isPowerSaveMode", "()Z")
 	if err != nil {
 		return fmt.Errorf("get method android.os.PowerManager.isPowerSaveMode: %w", err)
 	}
 
-	midManagernewWakeLock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "newWakeLock", "(ILjava/lang/String;)Landroid/os/PowerManager$WakeLock;")
+	midpowerManagerIsRebootingUserspaceSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "isRebootingUserspaceSupported", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.isRebootingUserspaceSupported: %w", err)
+	}
+
+	midpowerManagerIsScreenOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "isScreenOn", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.isScreenOn: %w", err)
+	}
+
+	midpowerManagerIsSustainedPerformanceModeSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "isSustainedPerformanceModeSupported", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.isSustainedPerformanceModeSupported: %w", err)
+	}
+
+	midpowerManagerIsWakeLockLevelSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "isWakeLockLevelSupported", "(I)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.isWakeLockLevelSupported: %w", err)
+	}
+
+	midpowerManagerNewWakeLock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "newWakeLock", "(ILjava/lang/String;)Landroid/os/PowerManager$WakeLock;")
 	if err != nil {
 		return fmt.Errorf("get method android.os.PowerManager.newWakeLock: %w", err)
+	}
+
+	midpowerManagerReboot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "reboot", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.reboot: %w", err)
+	}
+
+	midpowerManagerRemoveThermalHeadroomListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "removeThermalHeadroomListener", "(Landroid/os/PowerManager$OnThermalHeadroomChangedListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.removeThermalHeadroomListener: %w", err)
+	}
+
+	midpowerManagerRemoveThermalStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManager)), "removeThermalStatusListener", "(Landroid/os/PowerManager$OnThermalStatusChangedListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager.removeThermalStatusListener: %w", err)
 	}
 
 	c, err = env.FindClass("android/os/PowerManager$WakeLock")
 	if err != nil {
 		return fmt.Errorf("find class android.os.PowerManager$WakeLock: %w", err)
 	}
-	clsWakeLock = env.NewGlobalRef(&c.Object)
+	clspowerManagerWakeLock = env.NewGlobalRef(&c.Object)
 
-	midWakeLockacquireMs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWakeLock)), "acquire", "(J)V")
+	midpowerManagerWakeLockAcquire0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManagerWakeLock)), "acquire", "()V")
 	if err != nil {
 		return fmt.Errorf("get method android.os.PowerManager$WakeLock.acquire: %w", err)
 	}
 
-	midWakeLockRelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWakeLock)), "release", "()V")
+	midpowerManagerWakeLockAcquire1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManagerWakeLock)), "acquire", "(J)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager$WakeLock.acquire: %w", err)
+	}
+
+	midpowerManagerWakeLockIsHeld, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManagerWakeLock)), "isHeld", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager$WakeLock.isHeld: %w", err)
+	}
+
+	midpowerManagerWakeLockRelease0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManagerWakeLock)), "release", "()V")
 	if err != nil {
 		return fmt.Errorf("get method android.os.PowerManager$WakeLock.release: %w", err)
+	}
+
+	midpowerManagerWakeLockRelease1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManagerWakeLock)), "release", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager$WakeLock.release: %w", err)
+	}
+
+	midpowerManagerWakeLockSetReferenceCounted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManagerWakeLock)), "setReferenceCounted", "(Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager$WakeLock.setReferenceCounted: %w", err)
+	}
+
+	midpowerManagerWakeLockSetStateListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManagerWakeLock)), "setStateListener", "(Ljava/util/concurrent/Executor;Landroid/os/PowerManager$WakeLockStateListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager$WakeLock.setStateListener: %w", err)
+	}
+
+	midpowerManagerWakeLockSetWorkSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManagerWakeLock)), "setWorkSource", "(Landroid/os/WorkSource;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager$WakeLock.setWorkSource: %w", err)
+	}
+
+	midpowerManagerWakeLockToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clspowerManagerWakeLock)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.PowerManager$WakeLock.toString: %w", err)
 	}
 
 	return nil

@@ -20,20 +20,32 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager               *jni.GlobalRef
-	midManagersetPrimaryClip jni.MethodID
-	midManagergetPrimaryClip jni.MethodID
-	midManagerhasPrimaryClip jni.MethodID
-	midManageraddListener    jni.MethodID
-	midManagerremoveListener jni.MethodID
+	clsclipData                 *jni.GlobalRef
+	midclipDataAddItem1         jni.MethodID
+	midclipDataAddItem2_1       jni.MethodID
+	midclipDataDescribeContents jni.MethodID
+	midclipDataGetDescription   jni.MethodID
+	midclipDataGetItemAt        jni.MethodID
+	midclipDataGetItemCount     jni.MethodID
+	midclipDataToString         jni.MethodID
+	midclipDataWriteToParcel    jni.MethodID
+	midclipDataNewHtmlText      jni.MethodID
+	midclipDataNewIntent        jni.MethodID
+	midclipDataNewPlainText     jni.MethodID
+	midclipDataNewRawUri        jni.MethodID
+	midclipDataNewUri           jni.MethodID
 
-	clsclipData          *jni.GlobalRef
-	midclipDatagetItemAt jni.MethodID
-
-	clsclipItem        *jni.GlobalRef
-	midclipItemgetText jni.MethodID
-
-	clsclipChangedListener *jni.GlobalRef
+	clsclipDataItem                   *jni.GlobalRef
+	midclipDataItemCoerceToHtmlText   jni.MethodID
+	midclipDataItemCoerceToStyledText jni.MethodID
+	midclipDataItemCoerceToText       jni.MethodID
+	midclipDataItemGetHtmlText        jni.MethodID
+	midclipDataItemGetIntent          jni.MethodID
+	midclipDataItemGetIntentSender    jni.MethodID
+	midclipDataItemGetText            jni.MethodID
+	midclipDataItemGetTextLinks       jni.MethodID
+	midclipDataItemGetUri             jni.MethodID
+	midclipDataItemToString           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -54,64 +66,132 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/content/ClipboardManager")
-	if err != nil {
-		return fmt.Errorf("find class android.content.ClipboardManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagersetPrimaryClip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setPrimaryClip", "(Landroid/content/ClipData;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.content.ClipboardManager.setPrimaryClip: %w", err)
-	}
-
-	midManagergetPrimaryClip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPrimaryClip", "()Landroid/content/ClipData;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.ClipboardManager.getPrimaryClip: %w", err)
-	}
-
-	midManagerhasPrimaryClip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasPrimaryClip", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.content.ClipboardManager.hasPrimaryClip: %w", err)
-	}
-
-	midManageraddListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addPrimaryClipChangedListener", "(Landroid/content/ClipboardManager$OnPrimaryClipChangedListener;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.content.ClipboardManager.addPrimaryClipChangedListener: %w", err)
-	}
-
-	midManagerremoveListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removePrimaryClipChangedListener", "(Landroid/content/ClipboardManager$OnPrimaryClipChangedListener;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.content.ClipboardManager.removePrimaryClipChangedListener: %w", err)
-	}
-
 	c, err = env.FindClass("android/content/ClipData")
 	if err != nil {
 		return fmt.Errorf("find class android.content.ClipData: %w", err)
 	}
 	clsclipData = env.NewGlobalRef(&c.Object)
 
-	midclipDatagetItemAt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "getItemAt", "(I)Landroid/content/ClipData$Item;")
+	midclipDataAddItem1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "addItem", "(Landroid/content/ClipData$Item;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData.addItem: %w", err)
+	}
+
+	midclipDataAddItem2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "addItem", "(Landroid/content/ContentResolver;Landroid/content/ClipData$Item;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData.addItem: %w", err)
+	}
+
+	midclipDataDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "describeContents", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData.describeContents: %w", err)
+	}
+
+	midclipDataGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "getDescription", "()Landroid/content/ClipDescription;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData.getDescription: %w", err)
+	}
+
+	midclipDataGetItemAt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "getItemAt", "(I)Landroid/content/ClipData$Item;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.ClipData.getItemAt: %w", err)
+	}
+
+	midclipDataGetItemCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "getItemCount", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData.getItemCount: %w", err)
+	}
+
+	midclipDataToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData.toString: %w", err)
+	}
+
+	midclipDataWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData.writeToParcel: %w", err)
+	}
+
+	midclipDataNewHtmlText, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "newHtmlText", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/content/ClipData;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData.newHtmlText: %w", err)
+	}
+
+	midclipDataNewIntent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "newIntent", "(Ljava/lang/String;Landroid/content/Intent;)Landroid/content/ClipData;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData.newIntent: %w", err)
+	}
+
+	midclipDataNewPlainText, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "newPlainText", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/ClipData;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData.newPlainText: %w", err)
+	}
+
+	midclipDataNewRawUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "newRawUri", "(Ljava/lang/String;Landroid/net/Uri;)Landroid/content/ClipData;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData.newRawUri: %w", err)
+	}
+
+	midclipDataNewUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsclipData)), "newUri", "(Landroid/content/ContentResolver;Ljava/lang/String;Landroid/net/Uri;)Landroid/content/ClipData;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData.newUri: %w", err)
 	}
 
 	c, err = env.FindClass("android/content/ClipData$Item")
 	if err != nil {
 		return fmt.Errorf("find class android.content.ClipData$Item: %w", err)
 	}
-	clsclipItem = env.NewGlobalRef(&c.Object)
+	clsclipDataItem = env.NewGlobalRef(&c.Object)
 
-	midclipItemgetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipItem)), "getText", "()Ljava/lang/CharSequence;")
+	midclipDataItemCoerceToHtmlText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "coerceToHtmlText", "(Landroid/content/Context;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData$Item.coerceToHtmlText: %w", err)
+	}
+
+	midclipDataItemCoerceToStyledText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "coerceToStyledText", "(Landroid/content/Context;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData$Item.coerceToStyledText: %w", err)
+	}
+
+	midclipDataItemCoerceToText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "coerceToText", "(Landroid/content/Context;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData$Item.coerceToText: %w", err)
+	}
+
+	midclipDataItemGetHtmlText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "getHtmlText", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData$Item.getHtmlText: %w", err)
+	}
+
+	midclipDataItemGetIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "getIntent", "()Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData$Item.getIntent: %w", err)
+	}
+
+	midclipDataItemGetIntentSender, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "getIntentSender", "()Landroid/content/IntentSender;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData$Item.getIntentSender: %w", err)
+	}
+
+	midclipDataItemGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "getText", "()Ljava/lang/String;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.ClipData$Item.getText: %w", err)
 	}
 
-	c, err = env.FindClass("android/content/ClipboardManager$OnPrimaryClipChangedListener")
+	midclipDataItemGetTextLinks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "getTextLinks", "()Landroid/view/textclassifier/TextLinks;")
 	if err != nil {
-		return fmt.Errorf("find class android.content.ClipboardManager$OnPrimaryClipChangedListener: %w", err)
+		return fmt.Errorf("get method android.content.ClipData$Item.getTextLinks: %w", err)
 	}
-	clsclipChangedListener = env.NewGlobalRef(&c.Object)
+
+	midclipDataItemGetUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "getUri", "()Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData$Item.getUri: %w", err)
+	}
+
+	midclipDataItemToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsclipDataItem)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.ClipData$Item.toString: %w", err)
+	}
 
 	return nil
 }

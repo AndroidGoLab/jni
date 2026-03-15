@@ -20,41 +20,76 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsScheduler                     *jni.GlobalRef
-	midSchedulerscheduleRaw          jni.MethodID
-	midSchedulerCancel               jni.MethodID
-	midSchedulerCancelAll            jni.MethodID
-	midSchedulergetPendingJobRaw     jni.MethodID
-	midSchedulergetAllPendingJobsRaw jni.MethodID
+	clsjobInfo                                 *jni.GlobalRef
+	midjobInfoDescribeContents                 jni.MethodID
+	midjobInfoEquals                           jni.MethodID
+	midjobInfoGetBackoffPolicy                 jni.MethodID
+	midjobInfoGetClipData                      jni.MethodID
+	midjobInfoGetClipGrantFlags                jni.MethodID
+	midjobInfoGetDebugTags                     jni.MethodID
+	midjobInfoGetEstimatedNetworkDownloadBytes jni.MethodID
+	midjobInfoGetEstimatedNetworkUploadBytes   jni.MethodID
+	midjobInfoGetExtras                        jni.MethodID
+	midjobInfoGetFlexMillis                    jni.MethodID
+	midjobInfoGetId                            jni.MethodID
+	midjobInfoGetInitialBackoffMillis          jni.MethodID
+	midjobInfoGetIntervalMillis                jni.MethodID
+	midjobInfoGetMaxExecutionDelayMillis       jni.MethodID
+	midjobInfoGetMinLatencyMillis              jni.MethodID
+	midjobInfoGetMinimumNetworkChunkBytes      jni.MethodID
+	midjobInfoGetNetworkType                   jni.MethodID
+	midjobInfoGetPriority                      jni.MethodID
+	midjobInfoGetRequiredNetwork               jni.MethodID
+	midjobInfoGetService                       jni.MethodID
+	midjobInfoGetTraceTag                      jni.MethodID
+	midjobInfoGetTransientExtras               jni.MethodID
+	midjobInfoGetTriggerContentMaxDelay        jni.MethodID
+	midjobInfoGetTriggerContentUpdateDelay     jni.MethodID
+	midjobInfoGetTriggerContentUris            jni.MethodID
+	midjobInfoHashCode                         jni.MethodID
+	midjobInfoIsExpedited                      jni.MethodID
+	midjobInfoIsImportantWhileForeground       jni.MethodID
+	midjobInfoIsPeriodic                       jni.MethodID
+	midjobInfoIsPersisted                      jni.MethodID
+	midjobInfoIsPrefetch                       jni.MethodID
+	midjobInfoIsRequireBatteryNotLow           jni.MethodID
+	midjobInfoIsRequireCharging                jni.MethodID
+	midjobInfoIsRequireDeviceIdle              jni.MethodID
+	midjobInfoIsRequireStorageNotLow           jni.MethodID
+	midjobInfoIsUserInitiated                  jni.MethodID
+	midjobInfoToString                         jni.MethodID
+	midjobInfoWriteToParcel                    jni.MethodID
 
-	clsjobInfoBuilder                         *jni.GlobalRef
-	midjobInfoBuilderInit                     jni.MethodID
-	midjobInfoBuildersetRequiredNetworkType   jni.MethodID
-	midjobInfoBuildersetRequiresCharging      jni.MethodID
-	midjobInfoBuildersetRequiresDeviceIdle    jni.MethodID
-	midjobInfoBuildersetRequiresBatteryNotLow jni.MethodID
-	midjobInfoBuildersetRequiresStorageNotLow jni.MethodID
-	midjobInfoBuildersetPeriodic              jni.MethodID
-	midjobInfoBuildersetMinimumLatency        jni.MethodID
-	midjobInfoBuildersetOverrideDeadline      jni.MethodID
-	midjobInfoBuildersetPersisted             jni.MethodID
-	midjobInfoBuildersetBackoffCriteria       jni.MethodID
-	midjobInfoBuilderbuild                    jni.MethodID
-
-	clsjobInfoJava                     *jni.GlobalRef
-	midjobInfoJavaID                   jni.MethodID
-	midjobInfoJavaService              jni.MethodID
-	midjobInfoJavaNetworkType          jni.MethodID
-	midjobInfoJavaRequireCharging      jni.MethodID
-	midjobInfoJavaRequireDeviceIdle    jni.MethodID
-	midjobInfoJavaRequireBatteryNotLow jni.MethodID
-	midjobInfoJavaRequireStorageNotLow jni.MethodID
-	midjobInfoJavaIntervalMillis       jni.MethodID
-	midjobInfoJavaMinLatencyMillis     jni.MethodID
-	midjobInfoJavaMaxDelayMillis       jni.MethodID
-	midjobInfoJavaPersisted            jni.MethodID
-	midjobInfoJavaInitialBackoffMillis jni.MethodID
-	midjobInfoJavaBackoffPolicy        jni.MethodID
+	clsjobInfoBuilder                             *jni.GlobalRef
+	midjobInfoBuilderAddDebugTag                  jni.MethodID
+	midjobInfoBuilderAddTriggerContentUri         jni.MethodID
+	midjobInfoBuilderBuild                        jni.MethodID
+	midjobInfoBuilderRemoveDebugTag               jni.MethodID
+	midjobInfoBuilderSetBackoffCriteria           jni.MethodID
+	midjobInfoBuilderSetClipData                  jni.MethodID
+	midjobInfoBuilderSetEstimatedNetworkBytes     jni.MethodID
+	midjobInfoBuilderSetExpedited                 jni.MethodID
+	midjobInfoBuilderSetExtras                    jni.MethodID
+	midjobInfoBuilderSetImportantWhileForeground  jni.MethodID
+	midjobInfoBuilderSetMinimumLatency            jni.MethodID
+	midjobInfoBuilderSetMinimumNetworkChunkBytes  jni.MethodID
+	midjobInfoBuilderSetOverrideDeadline          jni.MethodID
+	midjobInfoBuilderSetPeriodic1                 jni.MethodID
+	midjobInfoBuilderSetPeriodic2_1               jni.MethodID
+	midjobInfoBuilderSetPersisted                 jni.MethodID
+	midjobInfoBuilderSetPrefetch                  jni.MethodID
+	midjobInfoBuilderSetPriority                  jni.MethodID
+	midjobInfoBuilderSetRequiredNetwork           jni.MethodID
+	midjobInfoBuilderSetRequiredNetworkType       jni.MethodID
+	midjobInfoBuilderSetRequiresBatteryNotLow     jni.MethodID
+	midjobInfoBuilderSetRequiresCharging          jni.MethodID
+	midjobInfoBuilderSetRequiresDeviceIdle        jni.MethodID
+	midjobInfoBuilderSetRequiresStorageNotLow     jni.MethodID
+	midjobInfoBuilderSetTraceTag                  jni.MethodID
+	midjobInfoBuilderSetTransientExtras           jni.MethodID
+	midjobInfoBuilderSetTriggerContentMaxDelay    jni.MethodID
+	midjobInfoBuilderSetTriggerContentUpdateDelay jni.MethodID
+	midjobInfoBuilderSetUserInitiated             jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -75,171 +110,351 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/app/job/JobScheduler")
-	if err != nil {
-		return fmt.Errorf("find class android.app.job.JobScheduler: %w", err)
-	}
-	clsScheduler = env.NewGlobalRef(&c.Object)
-
-	midSchedulerscheduleRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "schedule", "(Landroid/app/job/JobInfo;)I")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobScheduler.schedule: %w", err)
-	}
-
-	midSchedulerCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "cancel", "(I)V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobScheduler.cancel: %w", err)
-	}
-
-	midSchedulerCancelAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "cancelAll", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobScheduler.cancelAll: %w", err)
-	}
-
-	midSchedulergetPendingJobRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getPendingJob", "(I)Landroid/app/job/JobInfo;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobScheduler.getPendingJob: %w", err)
-	}
-
-	midSchedulergetAllPendingJobsRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "getAllPendingJobs", "()Ljava/util/List;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobScheduler.getAllPendingJobs: %w", err)
-	}
-
-	c, err = env.FindClass("android/app/job/JobInfo$Builder")
-	if err != nil {
-		return fmt.Errorf("find class android.app.job.JobInfo.Builder: %w", err)
-	}
-	clsjobInfoBuilder = env.NewGlobalRef(&c.Object)
-	midjobInfoBuilderInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.app.job.JobInfo.Builder.<init>: %w", err)
-	}
-
-	midjobInfoBuildersetRequiredNetworkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiredNetworkType", "(I)Landroid/app/job/JobInfo$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.Builder.setRequiredNetworkType: %w", err)
-	}
-
-	midjobInfoBuildersetRequiresCharging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiresCharging", "(Z)Landroid/app/job/JobInfo$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.Builder.setRequiresCharging: %w", err)
-	}
-
-	midjobInfoBuildersetRequiresDeviceIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiresDeviceIdle", "(Z)Landroid/app/job/JobInfo$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.Builder.setRequiresDeviceIdle: %w", err)
-	}
-
-	midjobInfoBuildersetRequiresBatteryNotLow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiresBatteryNotLow", "(Z)Landroid/app/job/JobInfo$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.Builder.setRequiresBatteryNotLow: %w", err)
-	}
-
-	midjobInfoBuildersetRequiresStorageNotLow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiresStorageNotLow", "(Z)Landroid/app/job/JobInfo$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.Builder.setRequiresStorageNotLow: %w", err)
-	}
-
-	midjobInfoBuildersetPeriodic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setPeriodic", "(J)Landroid/app/job/JobInfo$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.Builder.setPeriodic: %w", err)
-	}
-
-	midjobInfoBuildersetMinimumLatency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setMinimumLatency", "(J)Landroid/app/job/JobInfo$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.Builder.setMinimumLatency: %w", err)
-	}
-
-	midjobInfoBuildersetOverrideDeadline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setOverrideDeadline", "(J)Landroid/app/job/JobInfo$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.Builder.setOverrideDeadline: %w", err)
-	}
-
-	midjobInfoBuildersetPersisted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setPersisted", "(Z)Landroid/app/job/JobInfo$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.Builder.setPersisted: %w", err)
-	}
-
-	midjobInfoBuildersetBackoffCriteria, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setBackoffCriteria", "(JI)Landroid/app/job/JobInfo$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.Builder.setBackoffCriteria: %w", err)
-	}
-
-	midjobInfoBuilderbuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "build", "()Landroid/app/job/JobInfo;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.Builder.build: %w", err)
-	}
-
 	c, err = env.FindClass("android/app/job/JobInfo")
 	if err != nil {
 		return fmt.Errorf("find class android.app.job.JobInfo: %w", err)
 	}
-	clsjobInfoJava = env.NewGlobalRef(&c.Object)
+	clsjobInfo = env.NewGlobalRef(&c.Object)
 
-	midjobInfoJavaID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoJava)), "getId", "()I")
+	midjobInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "describeContents", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.describeContents: %w", err)
+	}
+
+	midjobInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.equals: %w", err)
+	}
+
+	midjobInfoGetBackoffPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getBackoffPolicy", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getBackoffPolicy: %w", err)
+	}
+
+	midjobInfoGetClipData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getClipData", "()Landroid/content/ClipData;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getClipData: %w", err)
+	}
+
+	midjobInfoGetClipGrantFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getClipGrantFlags", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getClipGrantFlags: %w", err)
+	}
+
+	midjobInfoGetDebugTags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getDebugTags", "()Ljava/util/Set<java$lang$String>;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getDebugTags: %w", err)
+	}
+
+	midjobInfoGetEstimatedNetworkDownloadBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getEstimatedNetworkDownloadBytes", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getEstimatedNetworkDownloadBytes: %w", err)
+	}
+
+	midjobInfoGetEstimatedNetworkUploadBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getEstimatedNetworkUploadBytes", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getEstimatedNetworkUploadBytes: %w", err)
+	}
+
+	midjobInfoGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getExtras", "()Landroid/os/PersistableBundle;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getExtras: %w", err)
+	}
+
+	midjobInfoGetFlexMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getFlexMillis", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getFlexMillis: %w", err)
+	}
+
+	midjobInfoGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getId", "()I")
 	if err != nil {
 		return fmt.Errorf("get method android.app.job.JobInfo.getId: %w", err)
 	}
 
-	midjobInfoJavaService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoJava)), "getService", "()Landroid/content/ComponentName;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getService: %w", err)
-	}
-
-	midjobInfoJavaNetworkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoJava)), "getNetworkType", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getNetworkType: %w", err)
-	}
-
-	midjobInfoJavaRequireCharging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoJava)), "isRequireCharging", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.isRequireCharging: %w", err)
-	}
-
-	midjobInfoJavaRequireDeviceIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoJava)), "isRequireDeviceIdle", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.isRequireDeviceIdle: %w", err)
-	}
-
-	midjobInfoJavaRequireBatteryNotLow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoJava)), "isRequireBatteryNotLow", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.isRequireBatteryNotLow: %w", err)
-	}
-
-	midjobInfoJavaRequireStorageNotLow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoJava)), "isRequireStorageNotLow", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.isRequireStorageNotLow: %w", err)
-	}
-
-	midjobInfoJavaIntervalMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoJava)), "getIntervalMillis", "()J")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getIntervalMillis: %w", err)
-	}
-
-	midjobInfoJavaMinLatencyMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoJava)), "getMinLatencyMillis", "()J")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getMinLatencyMillis: %w", err)
-	}
-
-	midjobInfoJavaMaxDelayMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoJava)), "getMaxExecutionDelayMillis", "()J")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getMaxExecutionDelayMillis: %w", err)
-	}
-
-	midjobInfoJavaPersisted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoJava)), "isPersisted", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.isPersisted: %w", err)
-	}
-
-	midjobInfoJavaInitialBackoffMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoJava)), "getInitialBackoffMillis", "()J")
+	midjobInfoGetInitialBackoffMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getInitialBackoffMillis", "()J")
 	if err != nil {
 		return fmt.Errorf("get method android.app.job.JobInfo.getInitialBackoffMillis: %w", err)
 	}
 
-	midjobInfoJavaBackoffPolicy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoJava)), "getBackoffPolicy", "()I")
+	midjobInfoGetIntervalMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getIntervalMillis", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.job.JobInfo.getBackoffPolicy: %w", err)
+		return fmt.Errorf("get method android.app.job.JobInfo.getIntervalMillis: %w", err)
+	}
+
+	midjobInfoGetMaxExecutionDelayMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getMaxExecutionDelayMillis", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getMaxExecutionDelayMillis: %w", err)
+	}
+
+	midjobInfoGetMinLatencyMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getMinLatencyMillis", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getMinLatencyMillis: %w", err)
+	}
+
+	midjobInfoGetMinimumNetworkChunkBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getMinimumNetworkChunkBytes", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getMinimumNetworkChunkBytes: %w", err)
+	}
+
+	midjobInfoGetNetworkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getNetworkType", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getNetworkType: %w", err)
+	}
+
+	midjobInfoGetPriority, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getPriority", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getPriority: %w", err)
+	}
+
+	midjobInfoGetRequiredNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getRequiredNetwork", "()Landroid/net/NetworkRequest;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getRequiredNetwork: %w", err)
+	}
+
+	midjobInfoGetService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getService", "()Landroid/content/ComponentName;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getService: %w", err)
+	}
+
+	midjobInfoGetTraceTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getTraceTag", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getTraceTag: %w", err)
+	}
+
+	midjobInfoGetTransientExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getTransientExtras", "()Landroid/os/Bundle;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getTransientExtras: %w", err)
+	}
+
+	midjobInfoGetTriggerContentMaxDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getTriggerContentMaxDelay", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getTriggerContentMaxDelay: %w", err)
+	}
+
+	midjobInfoGetTriggerContentUpdateDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getTriggerContentUpdateDelay", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getTriggerContentUpdateDelay: %w", err)
+	}
+
+	midjobInfoGetTriggerContentUris, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "getTriggerContentUris", "()[Landroid/app/job/JobInfo$TriggerContentUri;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.getTriggerContentUris: %w", err)
+	}
+
+	midjobInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "hashCode", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.hashCode: %w", err)
+	}
+
+	midjobInfoIsExpedited, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isExpedited", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.isExpedited: %w", err)
+	}
+
+	midjobInfoIsImportantWhileForeground, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isImportantWhileForeground", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.isImportantWhileForeground: %w", err)
+	}
+
+	midjobInfoIsPeriodic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isPeriodic", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.isPeriodic: %w", err)
+	}
+
+	midjobInfoIsPersisted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isPersisted", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.isPersisted: %w", err)
+	}
+
+	midjobInfoIsPrefetch, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isPrefetch", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.isPrefetch: %w", err)
+	}
+
+	midjobInfoIsRequireBatteryNotLow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isRequireBatteryNotLow", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.isRequireBatteryNotLow: %w", err)
+	}
+
+	midjobInfoIsRequireCharging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isRequireCharging", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.isRequireCharging: %w", err)
+	}
+
+	midjobInfoIsRequireDeviceIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isRequireDeviceIdle", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.isRequireDeviceIdle: %w", err)
+	}
+
+	midjobInfoIsRequireStorageNotLow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isRequireStorageNotLow", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.isRequireStorageNotLow: %w", err)
+	}
+
+	midjobInfoIsUserInitiated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "isUserInitiated", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.isUserInitiated: %w", err)
+	}
+
+	midjobInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.toString: %w", err)
+	}
+
+	midjobInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo.writeToParcel: %w", err)
+	}
+
+	c, err = env.FindClass("android/app/job/JobInfo$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.app.job.JobInfo$Builder: %w", err)
+	}
+	clsjobInfoBuilder = env.NewGlobalRef(&c.Object)
+
+	midjobInfoBuilderAddDebugTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "addDebugTag", "(Ljava/lang/String;)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.addDebugTag: %w", err)
+	}
+
+	midjobInfoBuilderAddTriggerContentUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "addTriggerContentUri", "(Landroid/app/job/JobInfo$TriggerContentUri;)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.addTriggerContentUri: %w", err)
+	}
+
+	midjobInfoBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "build", "()Landroid/app/job/JobInfo;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.build: %w", err)
+	}
+
+	midjobInfoBuilderRemoveDebugTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "removeDebugTag", "(Ljava/lang/String;)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.removeDebugTag: %w", err)
+	}
+
+	midjobInfoBuilderSetBackoffCriteria, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setBackoffCriteria", "(JI)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setBackoffCriteria: %w", err)
+	}
+
+	midjobInfoBuilderSetClipData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setClipData", "(Landroid/content/ClipData;I)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setClipData: %w", err)
+	}
+
+	midjobInfoBuilderSetEstimatedNetworkBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setEstimatedNetworkBytes", "(JJ)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setEstimatedNetworkBytes: %w", err)
+	}
+
+	midjobInfoBuilderSetExpedited, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setExpedited", "(Z)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setExpedited: %w", err)
+	}
+
+	midjobInfoBuilderSetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setExtras", "(Landroid/os/PersistableBundle;)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setExtras: %w", err)
+	}
+
+	midjobInfoBuilderSetImportantWhileForeground, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setImportantWhileForeground", "(Z)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setImportantWhileForeground: %w", err)
+	}
+
+	midjobInfoBuilderSetMinimumLatency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setMinimumLatency", "(J)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setMinimumLatency: %w", err)
+	}
+
+	midjobInfoBuilderSetMinimumNetworkChunkBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setMinimumNetworkChunkBytes", "(J)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setMinimumNetworkChunkBytes: %w", err)
+	}
+
+	midjobInfoBuilderSetOverrideDeadline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setOverrideDeadline", "(J)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setOverrideDeadline: %w", err)
+	}
+
+	midjobInfoBuilderSetPeriodic1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setPeriodic", "(J)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setPeriodic: %w", err)
+	}
+
+	midjobInfoBuilderSetPeriodic2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setPeriodic", "(JJ)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setPeriodic: %w", err)
+	}
+
+	midjobInfoBuilderSetPersisted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setPersisted", "(Z)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setPersisted: %w", err)
+	}
+
+	midjobInfoBuilderSetPrefetch, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setPrefetch", "(Z)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setPrefetch: %w", err)
+	}
+
+	midjobInfoBuilderSetPriority, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setPriority", "(I)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setPriority: %w", err)
+	}
+
+	midjobInfoBuilderSetRequiredNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiredNetwork", "(Landroid/net/NetworkRequest;)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setRequiredNetwork: %w", err)
+	}
+
+	midjobInfoBuilderSetRequiredNetworkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiredNetworkType", "(I)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setRequiredNetworkType: %w", err)
+	}
+
+	midjobInfoBuilderSetRequiresBatteryNotLow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiresBatteryNotLow", "(Z)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setRequiresBatteryNotLow: %w", err)
+	}
+
+	midjobInfoBuilderSetRequiresCharging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiresCharging", "(Z)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setRequiresCharging: %w", err)
+	}
+
+	midjobInfoBuilderSetRequiresDeviceIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiresDeviceIdle", "(Z)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setRequiresDeviceIdle: %w", err)
+	}
+
+	midjobInfoBuilderSetRequiresStorageNotLow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setRequiresStorageNotLow", "(Z)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setRequiresStorageNotLow: %w", err)
+	}
+
+	midjobInfoBuilderSetTraceTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setTraceTag", "(Ljava/lang/String;)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setTraceTag: %w", err)
+	}
+
+	midjobInfoBuilderSetTransientExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setTransientExtras", "(Landroid/os/Bundle;)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setTransientExtras: %w", err)
+	}
+
+	midjobInfoBuilderSetTriggerContentMaxDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setTriggerContentMaxDelay", "(J)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setTriggerContentMaxDelay: %w", err)
+	}
+
+	midjobInfoBuilderSetTriggerContentUpdateDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setTriggerContentUpdateDelay", "(J)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setTriggerContentUpdateDelay: %w", err)
+	}
+
+	midjobInfoBuilderSetUserInitiated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsjobInfoBuilder)), "setUserInitiated", "(Z)Landroid/app/job/JobInfo$Builder;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.job.JobInfo$Builder.setUserInitiated: %w", err)
 	}
 
 	return nil

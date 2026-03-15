@@ -20,12 +20,22 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                        *jni.GlobalRef
-	midManagersetTorchMode            jni.MethodID
-	midManagerregisterTorchCallback   jni.MethodID
-	midManagerunregisterTorchCallback jni.MethodID
-
-	clstorchCallback *jni.GlobalRef
+	clscameraManager                                          *jni.GlobalRef
+	midcameraManagerGetCameraCharacteristics                  jni.MethodID
+	midcameraManagerGetCameraDeviceSetup                      jni.MethodID
+	midcameraManagerGetCameraExtensionCharacteristics         jni.MethodID
+	midcameraManagerGetCameraIdList                           jni.MethodID
+	midcameraManagerGetConcurrentCameraIds                    jni.MethodID
+	midcameraManagerGetTorchStrengthLevel                     jni.MethodID
+	midcameraManagerIsCameraDeviceSetupSupported              jni.MethodID
+	midcameraManagerIsConcurrentSessionConfigurationSupported jni.MethodID
+	midcameraManagerOpenCamera                                jni.MethodID
+	midcameraManagerRegisterAvailabilityCallback              jni.MethodID
+	midcameraManagerRegisterTorchCallback                     jni.MethodID
+	midcameraManagerSetTorchMode                              jni.MethodID
+	midcameraManagerTurnOnTorchWithStrengthLevel              jni.MethodID
+	midcameraManagerUnregisterAvailabilityCallback            jni.MethodID
+	midcameraManagerUnregisterTorchCallback                   jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -50,28 +60,82 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.hardware.camera2.CameraManager: %w", err)
 	}
-	clsManager = env.NewGlobalRef(&c.Object)
+	clscameraManager = env.NewGlobalRef(&c.Object)
 
-	midManagersetTorchMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setTorchMode", "(Ljava/lang/String;Z)V")
+	midcameraManagerGetCameraCharacteristics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "getCameraCharacteristics", "(Ljava/lang/String;)Landroid/hardware/camera2/CameraCharacteristics;")
 	if err != nil {
-		return fmt.Errorf("get method android.hardware.camera2.CameraManager.setTorchMode: %w", err)
+		return fmt.Errorf("get method android.hardware.camera2.CameraManager.getCameraCharacteristics: %w", err)
 	}
 
-	midManagerregisterTorchCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerTorchCallback", "(Landroid/hardware/camera2/CameraManager$TorchCallback;Landroid/os/Handler;)V")
+	midcameraManagerGetCameraDeviceSetup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "getCameraDeviceSetup", "(Ljava/lang/String;)Landroid/hardware/camera2/CameraDevice$CameraDeviceSetup;")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.camera2.CameraManager.getCameraDeviceSetup: %w", err)
+	}
+
+	midcameraManagerGetCameraExtensionCharacteristics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "getCameraExtensionCharacteristics", "(Ljava/lang/String;)Landroid/hardware/camera2/CameraExtensionCharacteristics;")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.camera2.CameraManager.getCameraExtensionCharacteristics: %w", err)
+	}
+
+	midcameraManagerGetCameraIdList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "getCameraIdList", "()[Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.camera2.CameraManager.getCameraIdList: %w", err)
+	}
+
+	midcameraManagerGetConcurrentCameraIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "getConcurrentCameraIds", "()Ljava/util/Set<java$util$Set<java$lang$String>>;")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.camera2.CameraManager.getConcurrentCameraIds: %w", err)
+	}
+
+	midcameraManagerGetTorchStrengthLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "getTorchStrengthLevel", "(Ljava/lang/String;)I")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.camera2.CameraManager.getTorchStrengthLevel: %w", err)
+	}
+
+	midcameraManagerIsCameraDeviceSetupSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "isCameraDeviceSetupSupported", "(Ljava/lang/String;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.camera2.CameraManager.isCameraDeviceSetupSupported: %w", err)
+	}
+
+	midcameraManagerIsConcurrentSessionConfigurationSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "isConcurrentSessionConfigurationSupported", "(Ljava/util/Map<java$lang$String;Landroid/hardware/camera2/params/SessionConfiguration>;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.camera2.CameraManager.isConcurrentSessionConfigurationSupported: %w", err)
+	}
+
+	midcameraManagerOpenCamera, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "openCamera", "(Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/hardware/camera2/CameraDevice$StateCallback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.camera2.CameraManager.openCamera: %w", err)
+	}
+
+	midcameraManagerRegisterAvailabilityCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "registerAvailabilityCallback", "(Ljava/util/concurrent/Executor;Landroid/hardware/camera2/CameraManager$AvailabilityCallback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.camera2.CameraManager.registerAvailabilityCallback: %w", err)
+	}
+
+	midcameraManagerRegisterTorchCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "registerTorchCallback", "(Ljava/util/concurrent/Executor;Landroid/hardware/camera2/CameraManager$TorchCallback;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.hardware.camera2.CameraManager.registerTorchCallback: %w", err)
 	}
 
-	midManagerunregisterTorchCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterTorchCallback", "(Landroid/hardware/camera2/CameraManager$TorchCallback;)V")
+	midcameraManagerSetTorchMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "setTorchMode", "(Ljava/lang/String;Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.camera2.CameraManager.setTorchMode: %w", err)
+	}
+
+	midcameraManagerTurnOnTorchWithStrengthLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "turnOnTorchWithStrengthLevel", "(Ljava/lang/String;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.camera2.CameraManager.turnOnTorchWithStrengthLevel: %w", err)
+	}
+
+	midcameraManagerUnregisterAvailabilityCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "unregisterAvailabilityCallback", "(Landroid/hardware/camera2/CameraManager$AvailabilityCallback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.hardware.camera2.CameraManager.unregisterAvailabilityCallback: %w", err)
+	}
+
+	midcameraManagerUnregisterTorchCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clscameraManager)), "unregisterTorchCallback", "(Landroid/hardware/camera2/CameraManager$TorchCallback;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.hardware.camera2.CameraManager.unregisterTorchCallback: %w", err)
 	}
-
-	c, err = env.FindClass("android/hardware/camera2/CameraManager$TorchCallback")
-	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraManager$TorchCallback: %w", err)
-	}
-	clstorchCallback = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

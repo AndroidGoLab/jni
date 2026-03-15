@@ -20,17 +20,15 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                    *jni.GlobalRef
-	midManagerqueryUsageStatsRaw  jni.MethodID
-	midManagerIsAppInactive       jni.MethodID
-	midManagerGetAppStandbyBucket jni.MethodID
-
-	clsStats                    *jni.GlobalRef
-	midStatsPackageName         jni.MethodID
-	midStatsFirstTimestamp      jni.MethodID
-	midStatsLastTimestamp       jni.MethodID
-	midStatsTotalTimeVisible    jni.MethodID
-	midStatsTotalTimeForeground jni.MethodID
+	clsusageStatsManager                    *jni.GlobalRef
+	midusageStatsManagerGetAppStandbyBucket jni.MethodID
+	midusageStatsManagerIsAppInactive       jni.MethodID
+	midusageStatsManagerQueryConfigurations jni.MethodID
+	midusageStatsManagerQueryEventStats     jni.MethodID
+	midusageStatsManagerQueryEvents1        jni.MethodID
+	midusageStatsManagerQueryEvents2_1      jni.MethodID
+	midusageStatsManagerQueryEventsForSelf  jni.MethodID
+	midusageStatsManagerQueryUsageStats     jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -55,52 +53,46 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.app.usage.UsageStatsManager: %w", err)
 	}
-	clsManager = env.NewGlobalRef(&c.Object)
+	clsusageStatsManager = env.NewGlobalRef(&c.Object)
 
-	midManagerqueryUsageStatsRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "queryUsageStats", "(IJJ)Ljava/util/List;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryUsageStats: %w", err)
-	}
-
-	midManagerIsAppInactive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isAppInactive", "(Ljava/lang/String;)Z")
-	if err != nil {
-		return fmt.Errorf("get method android.app.usage.UsageStatsManager.isAppInactive: %w", err)
-	}
-
-	midManagerGetAppStandbyBucket, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAppStandbyBucket", "()I")
+	midusageStatsManagerGetAppStandbyBucket, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "getAppStandbyBucket", "()I")
 	if err != nil {
 		return fmt.Errorf("get method android.app.usage.UsageStatsManager.getAppStandbyBucket: %w", err)
 	}
 
-	c, err = env.FindClass("android/app/usage/UsageStats")
+	midusageStatsManagerIsAppInactive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "isAppInactive", "(Ljava/lang/String;)Z")
 	if err != nil {
-		return fmt.Errorf("find class android.app.usage.UsageStats: %w", err)
-	}
-	clsStats = env.NewGlobalRef(&c.Object)
-
-	midStatsPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStats)), "getPackageName", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.usage.UsageStats.getPackageName: %w", err)
+		return fmt.Errorf("get method android.app.usage.UsageStatsManager.isAppInactive: %w", err)
 	}
 
-	midStatsFirstTimestamp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStats)), "getFirstTimeStamp", "()J")
+	midusageStatsManagerQueryConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryConfigurations", "(IJJ)Ljava/util/List<android$app$usage$ConfigurationStats>;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.usage.UsageStats.getFirstTimeStamp: %w", err)
+		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryConfigurations: %w", err)
 	}
 
-	midStatsLastTimestamp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStats)), "getLastTimeStamp", "()J")
+	midusageStatsManagerQueryEventStats, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryEventStats", "(IJJ)Ljava/util/List<android$app$usage$EventStats>;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.usage.UsageStats.getLastTimeStamp: %w", err)
+		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryEventStats: %w", err)
 	}
 
-	midStatsTotalTimeVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStats)), "getTotalTimeVisible", "()J")
+	midusageStatsManagerQueryEvents1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryEvents", "(Landroid/app/usage/UsageEventsQuery;)Landroid/app/usage/UsageEvents;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.usage.UsageStats.getTotalTimeVisible: %w", err)
+		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryEvents: %w", err)
 	}
 
-	midStatsTotalTimeForeground, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStats)), "getTotalTimeInForeground", "()J")
+	midusageStatsManagerQueryEvents2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryEvents", "(JJ)Landroid/app/usage/UsageEvents;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.usage.UsageStats.getTotalTimeInForeground: %w", err)
+		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryEvents: %w", err)
+	}
+
+	midusageStatsManagerQueryEventsForSelf, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryEventsForSelf", "(JJ)Landroid/app/usage/UsageEvents;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryEventsForSelf: %w", err)
+	}
+
+	midusageStatsManagerQueryUsageStats, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStatsManager)), "queryUsageStats", "(IJJ)Ljava/util/List<android$app$usage$UsageStats>;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.usage.UsageStatsManager.queryUsageStats: %w", err)
 	}
 
 	return nil

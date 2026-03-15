@@ -20,16 +20,12 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                       *jni.GlobalRef
-	midManagergetManagerRaw          jni.MethodID
-	midManagergetAccountsRaw         jni.MethodID
-	midManagergetAccountsByTypeRaw   jni.MethodID
-	midManagergetAuthTokenRaw        jni.MethodID
-	midManagerinvalidateAuthTokenRaw jni.MethodID
-
-	clsAccount     *jni.GlobalRef
-	fidAccountName jni.FieldID
-	fidAccountType jni.FieldID
+	clsaccount                 *jni.GlobalRef
+	midaccountDescribeContents jni.MethodID
+	midaccountEquals           jni.MethodID
+	midaccountHashCode         jni.MethodID
+	midaccountToString         jni.MethodID
+	midaccountWriteToParcel    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -50,51 +46,35 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/accounts/AccountManager")
-	if err != nil {
-		return fmt.Errorf("find class android.accounts.AccountManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagergetManagerRaw, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "get", "(Landroid/content/Context;)Landroid/accounts/AccountManager;")
-	if err != nil {
-		return fmt.Errorf("get method android.accounts.AccountManager.get: %w", err)
-	}
-
-	midManagergetAccountsRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAccounts", "()[Landroid/accounts/Account;")
-	if err != nil {
-		return fmt.Errorf("get method android.accounts.AccountManager.getAccounts: %w", err)
-	}
-
-	midManagergetAccountsByTypeRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAccountsByType", "(Ljava/lang/String;)[Landroid/accounts/Account;")
-	if err != nil {
-		return fmt.Errorf("get method android.accounts.AccountManager.getAccountsByType: %w", err)
-	}
-
-	midManagergetAuthTokenRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAuthToken", "(Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;Landroid/app/Activity;Landroid/accounts/AccountManagerCallback;Landroid/os/Handler;)Landroid/accounts/AccountManagerFuture;")
-	if err != nil {
-		return fmt.Errorf("get method android.accounts.AccountManager.getAuthToken: %w", err)
-	}
-
-	midManagerinvalidateAuthTokenRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "invalidateAuthToken", "(Ljava/lang/String;Ljava/lang/String;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.accounts.AccountManager.invalidateAuthToken: %w", err)
-	}
-
 	c, err = env.FindClass("android/accounts/Account")
 	if err != nil {
 		return fmt.Errorf("find class android.accounts.Account: %w", err)
 	}
-	clsAccount = env.NewGlobalRef(&c.Object)
+	clsaccount = env.NewGlobalRef(&c.Object)
 
-	fidAccountName, err = env.GetFieldID((*jni.Class)(unsafe.Pointer(clsAccount)), "name", "Ljava/lang/String;")
+	midaccountDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccount)), "describeContents", "()I")
 	if err != nil {
-		return fmt.Errorf("get field android.accounts.Account.name: %w", err)
+		return fmt.Errorf("get method android.accounts.Account.describeContents: %w", err)
 	}
 
-	fidAccountType, err = env.GetFieldID((*jni.Class)(unsafe.Pointer(clsAccount)), "type", "Ljava/lang/String;")
+	midaccountEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccount)), "equals", "(Ljava/lang/Object;)Z")
 	if err != nil {
-		return fmt.Errorf("get field android.accounts.Account.type: %w", err)
+		return fmt.Errorf("get method android.accounts.Account.equals: %w", err)
+	}
+
+	midaccountHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccount)), "hashCode", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.accounts.Account.hashCode: %w", err)
+	}
+
+	midaccountToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccount)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.accounts.Account.toString: %w", err)
+	}
+
+	midaccountWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsaccount)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.accounts.Account.writeToParcel: %w", err)
 	}
 
 	return nil

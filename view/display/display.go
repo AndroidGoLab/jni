@@ -23,76 +23,836 @@ type display struct {
 	Obj *jni.GlobalRef
 }
 
-// getRotation calls android.view.Display.getRotation.
-func (m *display) getRotation() int32 {
+// GetAppVsyncOffsetNanos calls android.view.Display.getAppVsyncOffsetNanos.
+func (m *display) GetAppVsyncOffsetNanos() (int64, error) {
+	var result int64
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallLongMethod(
+			m.Obj,
+			middisplayGetAppVsyncOffsetNanos,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCurrentSizeRange calls android.view.Display.getCurrentSizeRange.
+func (m *display) GetCurrentSizeRange(arg0 *jni.Object, arg1 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			middisplayGetCurrentSizeRange, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// GetCutout calls android.view.Display.getCutout.
+func (m *display) GetCutout() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			middisplayGetCutout,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetDeviceProductInfo calls android.view.Display.getDeviceProductInfo.
+func (m *display) GetDeviceProductInfo() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			middisplayGetDeviceProductInfo,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetDisplayId calls android.view.Display.getDisplayId.
+func (m *display) GetDisplayId() (int32, error) {
 	var result int32
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		result, _ = env.CallIntMethod(
+		result, callErr = env.CallIntMethod(
 			m.Obj,
-			middisplaygetRotation,
+			middisplayGetDisplayId,
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// getRefreshRate calls android.view.Display.getRefreshRate.
-func (m *display) getRefreshRate() float32 {
+// GetFlags calls android.view.Display.getFlags.
+func (m *display) GetFlags() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			middisplayGetFlags,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetHdrCapabilities calls android.view.Display.getHdrCapabilities.
+func (m *display) GetHdrCapabilities() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			middisplayGetHdrCapabilities,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetHdrSdrRatio calls android.view.Display.getHdrSdrRatio.
+func (m *display) GetHdrSdrRatio() (float32, error) {
 	var result float32
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		result, _ = env.CallFloatMethod(
+		result, callErr = env.CallFloatMethod(
 			m.Obj,
-			middisplaygetRefreshRate,
+			middisplayGetHdrSdrRatio,
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// getMetrics calls android.view.Display.getMetrics.
-func (m *display) getMetrics(metrics *jni.Object) {
-
+// GetHeight calls android.view.Display.getHeight.
+func (m *display) GetHeight() (int32, error) {
+	var result int32
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-
-		env.CallVoidMethod(
+		result, callErr = env.CallIntMethod(
 			m.Obj,
-			middisplaygetMetrics, jni.ObjectValue(metrics),
+			middisplayGetHeight,
 		)
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return
+	return result, callErr
 }
 
-// getRealMetrics calls android.view.Display.getRealMetrics.
-func (m *display) getRealMetrics(metrics *jni.Object) {
-
+// GetHighestHdrSdrRatio calls android.view.Display.getHighestHdrSdrRatio.
+func (m *display) GetHighestHdrSdrRatio() (float32, error) {
+	var result float32
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallFloatMethod(
+			m.Obj,
+			middisplayGetHighestHdrSdrRatio,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
 
+// GetMetrics calls android.view.Display.getMetrics.
+func (m *display) GetMetrics(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
 			return err
 		}
 
-		env.CallVoidMethod(
+		callErr = env.CallVoidMethod(
 			m.Obj,
-			middisplaygetRealMetrics, jni.ObjectValue(metrics),
+			middisplayGetMetrics, jni.ObjectValue(arg0),
 		)
-		return nil
+		return callErr
 	})
-	return
+	return callErr
+}
+
+// GetMode calls android.view.Display.getMode.
+func (m *display) GetMode() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			middisplayGetMode,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetName calls android.view.Display.getName.
+func (m *display) GetName() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			middisplayGetName,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetOrientation calls android.view.Display.getOrientation.
+func (m *display) GetOrientation() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			middisplayGetOrientation,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetOverlaySupport calls android.view.Display.getOverlaySupport.
+func (m *display) GetOverlaySupport() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			middisplayGetOverlaySupport,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPixelFormat calls android.view.Display.getPixelFormat.
+func (m *display) GetPixelFormat() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			middisplayGetPixelFormat,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPreferredWideGamutColorSpace calls android.view.Display.getPreferredWideGamutColorSpace.
+func (m *display) GetPreferredWideGamutColorSpace() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			middisplayGetPreferredWideGamutColorSpace,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPresentationDeadlineNanos calls android.view.Display.getPresentationDeadlineNanos.
+func (m *display) GetPresentationDeadlineNanos() (int64, error) {
+	var result int64
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallLongMethod(
+			m.Obj,
+			middisplayGetPresentationDeadlineNanos,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRealMetrics calls android.view.Display.getRealMetrics.
+func (m *display) GetRealMetrics(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			middisplayGetRealMetrics, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// GetRealSize calls android.view.Display.getRealSize.
+func (m *display) GetRealSize(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			middisplayGetRealSize, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// GetRectSize calls android.view.Display.getRectSize.
+func (m *display) GetRectSize(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			middisplayGetRectSize, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// GetRefreshRate calls android.view.Display.getRefreshRate.
+func (m *display) GetRefreshRate() (float32, error) {
+	var result float32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallFloatMethod(
+			m.Obj,
+			middisplayGetRefreshRate,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRotation calls android.view.Display.getRotation.
+func (m *display) GetRotation() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			middisplayGetRotation,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRoundedCorner calls android.view.Display.getRoundedCorner.
+func (m *display) GetRoundedCorner(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			middisplayGetRoundedCorner, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetShape calls android.view.Display.getShape.
+func (m *display) GetShape() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			middisplayGetShape,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSize calls android.view.Display.getSize.
+func (m *display) GetSize(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			middisplayGetSize, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// GetState calls android.view.Display.getState.
+func (m *display) GetState() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			middisplayGetState,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSuggestedFrameRate calls android.view.Display.getSuggestedFrameRate.
+func (m *display) GetSuggestedFrameRate(arg0 int32) (float32, error) {
+	var result float32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallFloatMethod(
+			m.Obj,
+			middisplayGetSuggestedFrameRate, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedModes calls android.view.Display.getSupportedModes.
+func (m *display) GetSupportedModes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			middisplayGetSupportedModes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedRefreshRates calls android.view.Display.getSupportedRefreshRates.
+func (m *display) GetSupportedRefreshRates() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			middisplayGetSupportedRefreshRates,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetWidth calls android.view.Display.getWidth.
+func (m *display) GetWidth() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			middisplayGetWidth,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// HasArrSupport calls android.view.Display.hasArrSupport.
+func (m *display) HasArrSupport() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			middisplayHasArrSupport,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsHdr calls android.view.Display.isHdr.
+func (m *display) IsHdr() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			middisplayIsHdr,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsHdrSdrRatioAvailable calls android.view.Display.isHdrSdrRatioAvailable.
+func (m *display) IsHdrSdrRatioAvailable() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			middisplayIsHdrSdrRatioAvailable,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsMinimalPostProcessingSupported calls android.view.Display.isMinimalPostProcessingSupported.
+func (m *display) IsMinimalPostProcessingSupported() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			middisplayIsMinimalPostProcessingSupported,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsValid calls android.view.Display.isValid.
+func (m *display) IsValid() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			middisplayIsValid,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsWideColorGamut calls android.view.Display.isWideColorGamut.
+func (m *display) IsWideColorGamut() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			middisplayIsWideColorGamut,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// RegisterHdrSdrRatioChangedListener calls android.view.Display.registerHdrSdrRatioChangedListener.
+func (m *display) RegisterHdrSdrRatioChangedListener(arg0 *jni.Object, arg1 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			middisplayRegisterHdrSdrRatioChangedListener, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// ToString calls android.view.Display.toString.
+func (m *display) ToString() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			middisplayToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// UnregisterHdrSdrRatioChangedListener calls android.view.Display.unregisterHdrSdrRatioChangedListener.
+func (m *display) UnregisterHdrSdrRatioChangedListener(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			middisplayUnregisterHdrSdrRatioChangedListener, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
 }

@@ -20,14 +20,147 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                       *jni.GlobalRef
-	midManagergetNetworkOperatorName jni.MethodID
-	midManagergetNetworkOperator     jni.MethodID
-	midManagergetPhoneType           jni.MethodID
-	midManagergetSimState            jni.MethodID
-	midManagerisNetworkRoaming       jni.MethodID
-	midManagergetDataState           jni.MethodID
-	midManagergetDataNetworkType     jni.MethodID
+	clstelephonyManager                                          *jni.GlobalRef
+	midtelephonyManagerCanChangeDtmfToneLength                   jni.MethodID
+	midtelephonyManagerClearSignalStrengthUpdateRequest          jni.MethodID
+	midtelephonyManagerCreateForPhoneAccountHandle               jni.MethodID
+	midtelephonyManagerCreateForSubscriptionId                   jni.MethodID
+	midtelephonyManagerDoesSwitchMultiSimConfigTriggerReboot     jni.MethodID
+	midtelephonyManagerGetActiveModemCount                       jni.MethodID
+	midtelephonyManagerGetAllCellInfo                            jni.MethodID
+	midtelephonyManagerGetAllowedNetworkTypesForReason           jni.MethodID
+	midtelephonyManagerGetCallComposerStatus                     jni.MethodID
+	midtelephonyManagerGetCallState                              jni.MethodID
+	midtelephonyManagerGetCallStateForSubscription               jni.MethodID
+	midtelephonyManagerGetCardIdForDefaultEuicc                  jni.MethodID
+	midtelephonyManagerGetCarrierConfig                          jni.MethodID
+	midtelephonyManagerGetCarrierIdFromSimMccMnc                 jni.MethodID
+	midtelephonyManagerGetCarrierRestrictionStatus               jni.MethodID
+	midtelephonyManagerGetCellLocation                           jni.MethodID
+	midtelephonyManagerGetDataActivity                           jni.MethodID
+	midtelephonyManagerGetDataNetworkType                        jni.MethodID
+	midtelephonyManagerGetDataState                              jni.MethodID
+	midtelephonyManagerGetDeviceId0                              jni.MethodID
+	midtelephonyManagerGetDeviceId1_1                            jni.MethodID
+	midtelephonyManagerGetDeviceSoftwareVersion                  jni.MethodID
+	midtelephonyManagerGetEquivalentHomePlmns                    jni.MethodID
+	midtelephonyManagerGetForbiddenPlmns                         jni.MethodID
+	midtelephonyManagerGetGroupIdLevel1                          jni.MethodID
+	midtelephonyManagerGetIccAuthentication                      jni.MethodID
+	midtelephonyManagerGetImei0                                  jni.MethodID
+	midtelephonyManagerGetImei1_1                                jni.MethodID
+	midtelephonyManagerGetLine1Number                            jni.MethodID
+	midtelephonyManagerGetManualNetworkSelectionPlmn             jni.MethodID
+	midtelephonyManagerGetManufacturerCode0                      jni.MethodID
+	midtelephonyManagerGetManufacturerCode1_1                    jni.MethodID
+	midtelephonyManagerGetMeid0                                  jni.MethodID
+	midtelephonyManagerGetMeid1_1                                jni.MethodID
+	midtelephonyManagerGetMmsUAProfUrl                           jni.MethodID
+	midtelephonyManagerGetMmsUserAgent                           jni.MethodID
+	midtelephonyManagerGetNai                                    jni.MethodID
+	midtelephonyManagerGetNetworkCountryIso0                     jni.MethodID
+	midtelephonyManagerGetNetworkCountryIso1_1                   jni.MethodID
+	midtelephonyManagerGetNetworkOperator                        jni.MethodID
+	midtelephonyManagerGetNetworkOperatorName                    jni.MethodID
+	midtelephonyManagerGetNetworkSelectionMode                   jni.MethodID
+	midtelephonyManagerGetNetworkSlicingConfiguration            jni.MethodID
+	midtelephonyManagerGetNetworkSpecifier                       jni.MethodID
+	midtelephonyManagerGetNetworkType                            jni.MethodID
+	midtelephonyManagerGetPhoneAccountHandle                     jni.MethodID
+	midtelephonyManagerGetPhoneCount                             jni.MethodID
+	midtelephonyManagerGetPhoneType                              jni.MethodID
+	midtelephonyManagerGetPreferredOpportunisticDataSubscription jni.MethodID
+	midtelephonyManagerGetPrimaryImei                            jni.MethodID
+	midtelephonyManagerGetServiceState0                          jni.MethodID
+	midtelephonyManagerGetServiceState1_1                        jni.MethodID
+	midtelephonyManagerGetSignalStrength                         jni.MethodID
+	midtelephonyManagerGetSimCarrierId                           jni.MethodID
+	midtelephonyManagerGetSimCarrierIdName                       jni.MethodID
+	midtelephonyManagerGetSimCountryIso                          jni.MethodID
+	midtelephonyManagerGetSimOperator                            jni.MethodID
+	midtelephonyManagerGetSimOperatorName                        jni.MethodID
+	midtelephonyManagerGetSimSerialNumber                        jni.MethodID
+	midtelephonyManagerGetSimSpecificCarrierId                   jni.MethodID
+	midtelephonyManagerGetSimSpecificCarrierIdName               jni.MethodID
+	midtelephonyManagerGetSimState0                              jni.MethodID
+	midtelephonyManagerGetSimState1_1                            jni.MethodID
+	midtelephonyManagerGetSubscriberId                           jni.MethodID
+	midtelephonyManagerGetSubscriptionId0                        jni.MethodID
+	midtelephonyManagerGetSubscriptionId1_1                      jni.MethodID
+	midtelephonyManagerGetSupportedModemCount                    jni.MethodID
+	midtelephonyManagerGetSupportedRadioAccessFamily             jni.MethodID
+	midtelephonyManagerGetTypeAllocationCode0                    jni.MethodID
+	midtelephonyManagerGetTypeAllocationCode1_1                  jni.MethodID
+	midtelephonyManagerGetUiccCardsInfo                          jni.MethodID
+	midtelephonyManagerGetVisualVoicemailPackageName             jni.MethodID
+	midtelephonyManagerGetVoiceMailAlphaTag                      jni.MethodID
+	midtelephonyManagerGetVoiceMailNumber                        jni.MethodID
+	midtelephonyManagerGetVoiceNetworkType                       jni.MethodID
+	midtelephonyManagerGetVoicemailRingtoneUri                   jni.MethodID
+	midtelephonyManagerHasCarrierPrivileges                      jni.MethodID
+	midtelephonyManagerHasIccCard                                jni.MethodID
+	midtelephonyManagerIccCloseLogicalChannel                    jni.MethodID
+	midtelephonyManagerIccExchangeSimIO                          jni.MethodID
+	midtelephonyManagerIccOpenLogicalChannel1                    jni.MethodID
+	midtelephonyManagerIccOpenLogicalChannel2_1                  jni.MethodID
+	midtelephonyManagerIccTransmitApduBasicChannel               jni.MethodID
+	midtelephonyManagerIccTransmitApduLogicalChannel             jni.MethodID
+	midtelephonyManagerIsConcurrentVoiceAndDataSupported         jni.MethodID
+	midtelephonyManagerIsDataCapable                             jni.MethodID
+	midtelephonyManagerIsDataConnectionAllowed                   jni.MethodID
+	midtelephonyManagerIsDataEnabled                             jni.MethodID
+	midtelephonyManagerIsDataEnabledForReason                    jni.MethodID
+	midtelephonyManagerIsDataRoamingEnabled                      jni.MethodID
+	midtelephonyManagerIsDeviceSmsCapable                        jni.MethodID
+	midtelephonyManagerIsDeviceVoiceCapable                      jni.MethodID
+	midtelephonyManagerIsEmergencyNumber                         jni.MethodID
+	midtelephonyManagerIsHearingAidCompatibilitySupported        jni.MethodID
+	midtelephonyManagerIsManualNetworkSelectionAllowed           jni.MethodID
+	midtelephonyManagerIsModemEnabledForSlot                     jni.MethodID
+	midtelephonyManagerIsMultiSimSupported                       jni.MethodID
+	midtelephonyManagerIsNetworkRoaming                          jni.MethodID
+	midtelephonyManagerIsPremiumCapabilityAvailableForPurchase   jni.MethodID
+	midtelephonyManagerIsRadioInterfaceCapabilitySupported       jni.MethodID
+	midtelephonyManagerIsRttSupported                            jni.MethodID
+	midtelephonyManagerIsSmsCapable                              jni.MethodID
+	midtelephonyManagerIsTtyModeSupported                        jni.MethodID
+	midtelephonyManagerIsVoiceCapable                            jni.MethodID
+	midtelephonyManagerIsVoicemailVibrationEnabled               jni.MethodID
+	midtelephonyManagerIsWorldPhone                              jni.MethodID
+	midtelephonyManagerListen                                    jni.MethodID
+	midtelephonyManagerPurchasePremiumCapability                 jni.MethodID
+	midtelephonyManagerRebootModem                               jni.MethodID
+	midtelephonyManagerRegisterTelephonyCallback3                jni.MethodID
+	midtelephonyManagerRegisterTelephonyCallback2_1              jni.MethodID
+	midtelephonyManagerRequestCellInfoUpdate                     jni.MethodID
+	midtelephonyManagerRequestNetworkScan3                       jni.MethodID
+	midtelephonyManagerRequestNetworkScan4_1                     jni.MethodID
+	midtelephonyManagerSendDialerSpecialCode                     jni.MethodID
+	midtelephonyManagerSendEnvelopeWithStatus                    jni.MethodID
+	midtelephonyManagerSendVisualVoicemailSms                    jni.MethodID
+	midtelephonyManagerSetAllowedNetworkTypesForReason           jni.MethodID
+	midtelephonyManagerSetCallComposerStatus                     jni.MethodID
+	midtelephonyManagerSetDataEnabled                            jni.MethodID
+	midtelephonyManagerSetDataEnabledForReason                   jni.MethodID
+	midtelephonyManagerSetForbiddenPlmns                         jni.MethodID
+	midtelephonyManagerSetLine1NumberForDisplay                  jni.MethodID
+	midtelephonyManagerSetNetworkSelectionModeAutomatic          jni.MethodID
+	midtelephonyManagerSetNetworkSelectionModeManual2            jni.MethodID
+	midtelephonyManagerSetNetworkSelectionModeManual3_1          jni.MethodID
+	midtelephonyManagerSetOperatorBrandOverride                  jni.MethodID
+	midtelephonyManagerSetPreferredNetworkTypeToGlobal           jni.MethodID
+	midtelephonyManagerSetPreferredOpportunisticDataSubscription jni.MethodID
+	midtelephonyManagerSetSignalStrengthUpdateRequest            jni.MethodID
+	midtelephonyManagerSetVisualVoicemailSmsFilterSettings       jni.MethodID
+	midtelephonyManagerSetVoiceMailNumber                        jni.MethodID
+	midtelephonyManagerSetVoicemailRingtoneUri                   jni.MethodID
+	midtelephonyManagerSetVoicemailVibrationEnabled              jni.MethodID
+	midtelephonyManagerSwitchMultiSimConfig                      jni.MethodID
+	midtelephonyManagerUnregisterTelephonyCallback               jni.MethodID
+	midtelephonyManagerUpdateAvailableNetworks                   jni.MethodID
+	midtelephonyManagerUploadCallComposerPicture5                jni.MethodID
+	midtelephonyManagerUploadCallComposerPicture5_1              jni.MethodID
+	midtelephonyManagerGetMaximumCallComposerPictureSize         jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -52,41 +185,706 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.telephony.TelephonyManager: %w", err)
 	}
-	clsManager = env.NewGlobalRef(&c.Object)
+	clstelephonyManager = env.NewGlobalRef(&c.Object)
 
-	midManagergetNetworkOperatorName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getNetworkOperatorName", "()Ljava/lang/String;")
+	midtelephonyManagerCanChangeDtmfToneLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "canChangeDtmfToneLength", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.telephony.TelephonyManager.getNetworkOperatorName: %w", err)
+		return fmt.Errorf("get method android.telephony.TelephonyManager.canChangeDtmfToneLength: %w", err)
 	}
 
-	midManagergetNetworkOperator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getNetworkOperator", "()Ljava/lang/String;")
+	midtelephonyManagerClearSignalStrengthUpdateRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "clearSignalStrengthUpdateRequest", "(Landroid/telephony/SignalStrengthUpdateRequest;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.telephony.TelephonyManager.getNetworkOperator: %w", err)
+		return fmt.Errorf("get method android.telephony.TelephonyManager.clearSignalStrengthUpdateRequest: %w", err)
 	}
 
-	midManagergetPhoneType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPhoneType", "()I")
+	midtelephonyManagerCreateForPhoneAccountHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "createForPhoneAccountHandle", "(Landroid/telecom/PhoneAccountHandle;)Landroid/telephony/TelephonyManager;")
 	if err != nil {
-		return fmt.Errorf("get method android.telephony.TelephonyManager.getPhoneType: %w", err)
+		return fmt.Errorf("get method android.telephony.TelephonyManager.createForPhoneAccountHandle: %w", err)
 	}
 
-	midManagergetSimState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimState", "()I")
+	midtelephonyManagerCreateForSubscriptionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "createForSubscriptionId", "(I)Landroid/telephony/TelephonyManager;")
 	if err != nil {
-		return fmt.Errorf("get method android.telephony.TelephonyManager.getSimState: %w", err)
+		return fmt.Errorf("get method android.telephony.TelephonyManager.createForSubscriptionId: %w", err)
 	}
 
-	midManagerisNetworkRoaming, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isNetworkRoaming", "()Z")
+	midtelephonyManagerDoesSwitchMultiSimConfigTriggerReboot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "doesSwitchMultiSimConfigTriggerReboot", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.telephony.TelephonyManager.isNetworkRoaming: %w", err)
+		return fmt.Errorf("get method android.telephony.TelephonyManager.doesSwitchMultiSimConfigTriggerReboot: %w", err)
 	}
 
-	midManagergetDataState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDataState", "()I")
+	midtelephonyManagerGetActiveModemCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getActiveModemCount", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getActiveModemCount: %w", err)
+	}
+
+	midtelephonyManagerGetAllCellInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getAllCellInfo", "()Ljava/util/List<android$telephony$CellInfo>;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getAllCellInfo: %w", err)
+	}
+
+	midtelephonyManagerGetAllowedNetworkTypesForReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getAllowedNetworkTypesForReason", "(I)J")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getAllowedNetworkTypesForReason: %w", err)
+	}
+
+	midtelephonyManagerGetCallComposerStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCallComposerStatus", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getCallComposerStatus: %w", err)
+	}
+
+	midtelephonyManagerGetCallState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCallState", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getCallState: %w", err)
+	}
+
+	midtelephonyManagerGetCallStateForSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCallStateForSubscription", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getCallStateForSubscription: %w", err)
+	}
+
+	midtelephonyManagerGetCardIdForDefaultEuicc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCardIdForDefaultEuicc", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getCardIdForDefaultEuicc: %w", err)
+	}
+
+	midtelephonyManagerGetCarrierConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCarrierConfig", "()Landroid/os/PersistableBundle;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getCarrierConfig: %w", err)
+	}
+
+	midtelephonyManagerGetCarrierIdFromSimMccMnc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCarrierIdFromSimMccMnc", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getCarrierIdFromSimMccMnc: %w", err)
+	}
+
+	midtelephonyManagerGetCarrierRestrictionStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCarrierRestrictionStatus", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer<java$lang$Integer>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getCarrierRestrictionStatus: %w", err)
+	}
+
+	midtelephonyManagerGetCellLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getCellLocation", "()Landroid/telephony/CellLocation;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getCellLocation: %w", err)
+	}
+
+	midtelephonyManagerGetDataActivity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getDataActivity", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getDataActivity: %w", err)
+	}
+
+	midtelephonyManagerGetDataNetworkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getDataNetworkType", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getDataNetworkType: %w", err)
+	}
+
+	midtelephonyManagerGetDataState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getDataState", "()I")
 	if err != nil {
 		return fmt.Errorf("get method android.telephony.TelephonyManager.getDataState: %w", err)
 	}
 
-	midManagergetDataNetworkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDataNetworkType", "()I")
+	midtelephonyManagerGetDeviceId0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getDeviceId", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.telephony.TelephonyManager.getDataNetworkType: %w", err)
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getDeviceId: %w", err)
+	}
+
+	midtelephonyManagerGetDeviceId1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getDeviceId", "(I)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getDeviceId: %w", err)
+	}
+
+	midtelephonyManagerGetDeviceSoftwareVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getDeviceSoftwareVersion", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getDeviceSoftwareVersion: %w", err)
+	}
+
+	midtelephonyManagerGetEquivalentHomePlmns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getEquivalentHomePlmns", "()Ljava/util/List<java$lang$String>;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getEquivalentHomePlmns: %w", err)
+	}
+
+	midtelephonyManagerGetForbiddenPlmns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getForbiddenPlmns", "()[Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getForbiddenPlmns: %w", err)
+	}
+
+	midtelephonyManagerGetGroupIdLevel1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getGroupIdLevel1", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getGroupIdLevel1: %w", err)
+	}
+
+	midtelephonyManagerGetIccAuthentication, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getIccAuthentication", "(IILjava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getIccAuthentication: %w", err)
+	}
+
+	midtelephonyManagerGetImei0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getImei", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getImei: %w", err)
+	}
+
+	midtelephonyManagerGetImei1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getImei", "(I)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getImei: %w", err)
+	}
+
+	midtelephonyManagerGetLine1Number, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getLine1Number", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getLine1Number: %w", err)
+	}
+
+	midtelephonyManagerGetManualNetworkSelectionPlmn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getManualNetworkSelectionPlmn", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getManualNetworkSelectionPlmn: %w", err)
+	}
+
+	midtelephonyManagerGetManufacturerCode0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getManufacturerCode", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getManufacturerCode: %w", err)
+	}
+
+	midtelephonyManagerGetManufacturerCode1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getManufacturerCode", "(I)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getManufacturerCode: %w", err)
+	}
+
+	midtelephonyManagerGetMeid0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getMeid", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getMeid: %w", err)
+	}
+
+	midtelephonyManagerGetMeid1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getMeid", "(I)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getMeid: %w", err)
+	}
+
+	midtelephonyManagerGetMmsUAProfUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getMmsUAProfUrl", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getMmsUAProfUrl: %w", err)
+	}
+
+	midtelephonyManagerGetMmsUserAgent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getMmsUserAgent", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getMmsUserAgent: %w", err)
+	}
+
+	midtelephonyManagerGetNai, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNai", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getNai: %w", err)
+	}
+
+	midtelephonyManagerGetNetworkCountryIso0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkCountryIso", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getNetworkCountryIso: %w", err)
+	}
+
+	midtelephonyManagerGetNetworkCountryIso1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkCountryIso", "(I)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getNetworkCountryIso: %w", err)
+	}
+
+	midtelephonyManagerGetNetworkOperator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkOperator", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getNetworkOperator: %w", err)
+	}
+
+	midtelephonyManagerGetNetworkOperatorName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkOperatorName", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getNetworkOperatorName: %w", err)
+	}
+
+	midtelephonyManagerGetNetworkSelectionMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkSelectionMode", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getNetworkSelectionMode: %w", err)
+	}
+
+	midtelephonyManagerGetNetworkSlicingConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkSlicingConfiguration", "(Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver<android$telephony$data$NetworkSlicingConfig;Landroid/telephony/TelephonyManager$NetworkSlicingException>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getNetworkSlicingConfiguration: %w", err)
+	}
+
+	midtelephonyManagerGetNetworkSpecifier, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkSpecifier", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getNetworkSpecifier: %w", err)
+	}
+
+	midtelephonyManagerGetNetworkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getNetworkType", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getNetworkType: %w", err)
+	}
+
+	midtelephonyManagerGetPhoneAccountHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getPhoneAccountHandle", "()Landroid/telecom/PhoneAccountHandle;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getPhoneAccountHandle: %w", err)
+	}
+
+	midtelephonyManagerGetPhoneCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getPhoneCount", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getPhoneCount: %w", err)
+	}
+
+	midtelephonyManagerGetPhoneType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getPhoneType", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getPhoneType: %w", err)
+	}
+
+	midtelephonyManagerGetPreferredOpportunisticDataSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getPreferredOpportunisticDataSubscription", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getPreferredOpportunisticDataSubscription: %w", err)
+	}
+
+	midtelephonyManagerGetPrimaryImei, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getPrimaryImei", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getPrimaryImei: %w", err)
+	}
+
+	midtelephonyManagerGetServiceState0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getServiceState", "()Landroid/telephony/ServiceState;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getServiceState: %w", err)
+	}
+
+	midtelephonyManagerGetServiceState1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getServiceState", "(I)Landroid/telephony/ServiceState;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getServiceState: %w", err)
+	}
+
+	midtelephonyManagerGetSignalStrength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSignalStrength", "()Landroid/telephony/SignalStrength;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getSignalStrength: %w", err)
+	}
+
+	midtelephonyManagerGetSimCarrierId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimCarrierId", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getSimCarrierId: %w", err)
+	}
+
+	midtelephonyManagerGetSimCarrierIdName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimCarrierIdName", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getSimCarrierIdName: %w", err)
+	}
+
+	midtelephonyManagerGetSimCountryIso, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimCountryIso", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getSimCountryIso: %w", err)
+	}
+
+	midtelephonyManagerGetSimOperator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimOperator", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getSimOperator: %w", err)
+	}
+
+	midtelephonyManagerGetSimOperatorName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimOperatorName", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getSimOperatorName: %w", err)
+	}
+
+	midtelephonyManagerGetSimSerialNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimSerialNumber", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getSimSerialNumber: %w", err)
+	}
+
+	midtelephonyManagerGetSimSpecificCarrierId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimSpecificCarrierId", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getSimSpecificCarrierId: %w", err)
+	}
+
+	midtelephonyManagerGetSimSpecificCarrierIdName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimSpecificCarrierIdName", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getSimSpecificCarrierIdName: %w", err)
+	}
+
+	midtelephonyManagerGetSimState0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimState", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getSimState: %w", err)
+	}
+
+	midtelephonyManagerGetSimState1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSimState", "(I)I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getSimState: %w", err)
+	}
+
+	midtelephonyManagerGetSubscriberId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSubscriberId", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getSubscriberId: %w", err)
+	}
+
+	midtelephonyManagerGetSubscriptionId0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSubscriptionId", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getSubscriptionId: %w", err)
+	}
+
+	midtelephonyManagerGetSubscriptionId1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSubscriptionId", "(Landroid/telecom/PhoneAccountHandle;)I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getSubscriptionId: %w", err)
+	}
+
+	midtelephonyManagerGetSupportedModemCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSupportedModemCount", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getSupportedModemCount: %w", err)
+	}
+
+	midtelephonyManagerGetSupportedRadioAccessFamily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getSupportedRadioAccessFamily", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getSupportedRadioAccessFamily: %w", err)
+	}
+
+	midtelephonyManagerGetTypeAllocationCode0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getTypeAllocationCode", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getTypeAllocationCode: %w", err)
+	}
+
+	midtelephonyManagerGetTypeAllocationCode1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getTypeAllocationCode", "(I)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getTypeAllocationCode: %w", err)
+	}
+
+	midtelephonyManagerGetUiccCardsInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getUiccCardsInfo", "()Ljava/util/List<android$telephony$UiccCardInfo>;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getUiccCardsInfo: %w", err)
+	}
+
+	midtelephonyManagerGetVisualVoicemailPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getVisualVoicemailPackageName", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getVisualVoicemailPackageName: %w", err)
+	}
+
+	midtelephonyManagerGetVoiceMailAlphaTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getVoiceMailAlphaTag", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getVoiceMailAlphaTag: %w", err)
+	}
+
+	midtelephonyManagerGetVoiceMailNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getVoiceMailNumber", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getVoiceMailNumber: %w", err)
+	}
+
+	midtelephonyManagerGetVoiceNetworkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getVoiceNetworkType", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getVoiceNetworkType: %w", err)
+	}
+
+	midtelephonyManagerGetVoicemailRingtoneUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getVoicemailRingtoneUri", "(Landroid/telecom/PhoneAccountHandle;)Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getVoicemailRingtoneUri: %w", err)
+	}
+
+	midtelephonyManagerHasCarrierPrivileges, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "hasCarrierPrivileges", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.hasCarrierPrivileges: %w", err)
+	}
+
+	midtelephonyManagerHasIccCard, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "hasIccCard", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.hasIccCard: %w", err)
+	}
+
+	midtelephonyManagerIccCloseLogicalChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "iccCloseLogicalChannel", "(I)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.iccCloseLogicalChannel: %w", err)
+	}
+
+	midtelephonyManagerIccExchangeSimIO, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "iccExchangeSimIO", "(IIIIILjava/lang/String;)[B")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.iccExchangeSimIO: %w", err)
+	}
+
+	midtelephonyManagerIccOpenLogicalChannel1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "iccOpenLogicalChannel", "(Ljava/lang/String;)Landroid/telephony/IccOpenLogicalChannelResponse;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.iccOpenLogicalChannel: %w", err)
+	}
+
+	midtelephonyManagerIccOpenLogicalChannel2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "iccOpenLogicalChannel", "(Ljava/lang/String;I)Landroid/telephony/IccOpenLogicalChannelResponse;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.iccOpenLogicalChannel: %w", err)
+	}
+
+	midtelephonyManagerIccTransmitApduBasicChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "iccTransmitApduBasicChannel", "(IIIIILjava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.iccTransmitApduBasicChannel: %w", err)
+	}
+
+	midtelephonyManagerIccTransmitApduLogicalChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "iccTransmitApduLogicalChannel", "(IIIIIILjava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.iccTransmitApduLogicalChannel: %w", err)
+	}
+
+	midtelephonyManagerIsConcurrentVoiceAndDataSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isConcurrentVoiceAndDataSupported", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isConcurrentVoiceAndDataSupported: %w", err)
+	}
+
+	midtelephonyManagerIsDataCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isDataCapable", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isDataCapable: %w", err)
+	}
+
+	midtelephonyManagerIsDataConnectionAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isDataConnectionAllowed", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isDataConnectionAllowed: %w", err)
+	}
+
+	midtelephonyManagerIsDataEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isDataEnabled", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isDataEnabled: %w", err)
+	}
+
+	midtelephonyManagerIsDataEnabledForReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isDataEnabledForReason", "(I)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isDataEnabledForReason: %w", err)
+	}
+
+	midtelephonyManagerIsDataRoamingEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isDataRoamingEnabled", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isDataRoamingEnabled: %w", err)
+	}
+
+	midtelephonyManagerIsDeviceSmsCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isDeviceSmsCapable", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isDeviceSmsCapable: %w", err)
+	}
+
+	midtelephonyManagerIsDeviceVoiceCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isDeviceVoiceCapable", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isDeviceVoiceCapable: %w", err)
+	}
+
+	midtelephonyManagerIsEmergencyNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isEmergencyNumber", "(Ljava/lang/String;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isEmergencyNumber: %w", err)
+	}
+
+	midtelephonyManagerIsHearingAidCompatibilitySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isHearingAidCompatibilitySupported", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isHearingAidCompatibilitySupported: %w", err)
+	}
+
+	midtelephonyManagerIsManualNetworkSelectionAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isManualNetworkSelectionAllowed", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isManualNetworkSelectionAllowed: %w", err)
+	}
+
+	midtelephonyManagerIsModemEnabledForSlot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isModemEnabledForSlot", "(I)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isModemEnabledForSlot: %w", err)
+	}
+
+	midtelephonyManagerIsMultiSimSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isMultiSimSupported", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isMultiSimSupported: %w", err)
+	}
+
+	midtelephonyManagerIsNetworkRoaming, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isNetworkRoaming", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isNetworkRoaming: %w", err)
+	}
+
+	midtelephonyManagerIsPremiumCapabilityAvailableForPurchase, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isPremiumCapabilityAvailableForPurchase", "(I)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isPremiumCapabilityAvailableForPurchase: %w", err)
+	}
+
+	midtelephonyManagerIsRadioInterfaceCapabilitySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isRadioInterfaceCapabilitySupported", "(Ljava/lang/String;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isRadioInterfaceCapabilitySupported: %w", err)
+	}
+
+	midtelephonyManagerIsRttSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isRttSupported", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isRttSupported: %w", err)
+	}
+
+	midtelephonyManagerIsSmsCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isSmsCapable", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isSmsCapable: %w", err)
+	}
+
+	midtelephonyManagerIsTtyModeSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isTtyModeSupported", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isTtyModeSupported: %w", err)
+	}
+
+	midtelephonyManagerIsVoiceCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isVoiceCapable", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isVoiceCapable: %w", err)
+	}
+
+	midtelephonyManagerIsVoicemailVibrationEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isVoicemailVibrationEnabled", "(Landroid/telecom/PhoneAccountHandle;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isVoicemailVibrationEnabled: %w", err)
+	}
+
+	midtelephonyManagerIsWorldPhone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "isWorldPhone", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.isWorldPhone: %w", err)
+	}
+
+	midtelephonyManagerListen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "listen", "(Landroid/telephony/PhoneStateListener;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.listen: %w", err)
+	}
+
+	midtelephonyManagerPurchasePremiumCapability, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "purchasePremiumCapability", "(ILjava/util/concurrent/Executor;Ljava/util/function/Consumer<java$lang$Integer>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.purchasePremiumCapability: %w", err)
+	}
+
+	midtelephonyManagerRebootModem, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "rebootModem", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.rebootModem: %w", err)
+	}
+
+	midtelephonyManagerRegisterTelephonyCallback3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "registerTelephonyCallback", "(ILjava/util/concurrent/Executor;Landroid/telephony/TelephonyCallback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.registerTelephonyCallback: %w", err)
+	}
+
+	midtelephonyManagerRegisterTelephonyCallback2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "registerTelephonyCallback", "(Ljava/util/concurrent/Executor;Landroid/telephony/TelephonyCallback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.registerTelephonyCallback: %w", err)
+	}
+
+	midtelephonyManagerRequestCellInfoUpdate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "requestCellInfoUpdate", "(Ljava/util/concurrent/Executor;Landroid/telephony/TelephonyManager$CellInfoCallback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.requestCellInfoUpdate: %w", err)
+	}
+
+	midtelephonyManagerRequestNetworkScan3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "requestNetworkScan", "(Landroid/telephony/NetworkScanRequest;Ljava/util/concurrent/Executor;Landroid/telephony/TelephonyScanManager$NetworkScanCallback;)Landroid/telephony/NetworkScan;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.requestNetworkScan: %w", err)
+	}
+
+	midtelephonyManagerRequestNetworkScan4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "requestNetworkScan", "(ILandroid/telephony/NetworkScanRequest;Ljava/util/concurrent/Executor;Landroid/telephony/TelephonyScanManager$NetworkScanCallback;)Landroid/telephony/NetworkScan;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.requestNetworkScan: %w", err)
+	}
+
+	midtelephonyManagerSendDialerSpecialCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "sendDialerSpecialCode", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.sendDialerSpecialCode: %w", err)
+	}
+
+	midtelephonyManagerSendEnvelopeWithStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "sendEnvelopeWithStatus", "(Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.sendEnvelopeWithStatus: %w", err)
+	}
+
+	midtelephonyManagerSendVisualVoicemailSms, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "sendVisualVoicemailSms", "(Ljava/lang/String;ILjava/lang/String;Landroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.sendVisualVoicemailSms: %w", err)
+	}
+
+	midtelephonyManagerSetAllowedNetworkTypesForReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setAllowedNetworkTypesForReason", "(IJ)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setAllowedNetworkTypesForReason: %w", err)
+	}
+
+	midtelephonyManagerSetCallComposerStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setCallComposerStatus", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setCallComposerStatus: %w", err)
+	}
+
+	midtelephonyManagerSetDataEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setDataEnabled", "(Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setDataEnabled: %w", err)
+	}
+
+	midtelephonyManagerSetDataEnabledForReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setDataEnabledForReason", "(IZ)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setDataEnabledForReason: %w", err)
+	}
+
+	midtelephonyManagerSetForbiddenPlmns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setForbiddenPlmns", "(Ljava/util/List<java$lang$String>;)I")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setForbiddenPlmns: %w", err)
+	}
+
+	midtelephonyManagerSetLine1NumberForDisplay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setLine1NumberForDisplay", "(Ljava/lang/String;Ljava/lang/String;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setLine1NumberForDisplay: %w", err)
+	}
+
+	midtelephonyManagerSetNetworkSelectionModeAutomatic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setNetworkSelectionModeAutomatic", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setNetworkSelectionModeAutomatic: %w", err)
+	}
+
+	midtelephonyManagerSetNetworkSelectionModeManual2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setNetworkSelectionModeManual", "(Ljava/lang/String;Z)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setNetworkSelectionModeManual: %w", err)
+	}
+
+	midtelephonyManagerSetNetworkSelectionModeManual3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setNetworkSelectionModeManual", "(Ljava/lang/String;ZI)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setNetworkSelectionModeManual: %w", err)
+	}
+
+	midtelephonyManagerSetOperatorBrandOverride, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setOperatorBrandOverride", "(Ljava/lang/String;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setOperatorBrandOverride: %w", err)
+	}
+
+	midtelephonyManagerSetPreferredNetworkTypeToGlobal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setPreferredNetworkTypeToGlobal", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setPreferredNetworkTypeToGlobal: %w", err)
+	}
+
+	midtelephonyManagerSetPreferredOpportunisticDataSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setPreferredOpportunisticDataSubscription", "(IZLjava/util/concurrent/Executor;Ljava/util/function/Consumer<java$lang$Integer>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setPreferredOpportunisticDataSubscription: %w", err)
+	}
+
+	midtelephonyManagerSetSignalStrengthUpdateRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setSignalStrengthUpdateRequest", "(Landroid/telephony/SignalStrengthUpdateRequest;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setSignalStrengthUpdateRequest: %w", err)
+	}
+
+	midtelephonyManagerSetVisualVoicemailSmsFilterSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setVisualVoicemailSmsFilterSettings", "(Landroid/telephony/VisualVoicemailSmsFilterSettings;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setVisualVoicemailSmsFilterSettings: %w", err)
+	}
+
+	midtelephonyManagerSetVoiceMailNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setVoiceMailNumber", "(Ljava/lang/String;Ljava/lang/String;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setVoiceMailNumber: %w", err)
+	}
+
+	midtelephonyManagerSetVoicemailRingtoneUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setVoicemailRingtoneUri", "(Landroid/telecom/PhoneAccountHandle;Landroid/net/Uri;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setVoicemailRingtoneUri: %w", err)
+	}
+
+	midtelephonyManagerSetVoicemailVibrationEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "setVoicemailVibrationEnabled", "(Landroid/telecom/PhoneAccountHandle;Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.setVoicemailVibrationEnabled: %w", err)
+	}
+
+	midtelephonyManagerSwitchMultiSimConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "switchMultiSimConfig", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.switchMultiSimConfig: %w", err)
+	}
+
+	midtelephonyManagerUnregisterTelephonyCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "unregisterTelephonyCallback", "(Landroid/telephony/TelephonyCallback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.unregisterTelephonyCallback: %w", err)
+	}
+
+	midtelephonyManagerUpdateAvailableNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "updateAvailableNetworks", "(Ljava/util/List<android$telephony$AvailableNetworkInfo>;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer<java$lang$Integer>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.updateAvailableNetworks: %w", err)
+	}
+
+	midtelephonyManagerUploadCallComposerPicture5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "uploadCallComposerPicture", "(Ljava/io/InputStream;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver<android$os$ParcelUuid;Landroid/telephony/TelephonyManager$CallComposerException>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.uploadCallComposerPicture: %w", err)
+	}
+
+	midtelephonyManagerUploadCallComposerPicture5_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "uploadCallComposerPicture", "(Ljava/nio/file/Path;Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver<android$os$ParcelUuid;Landroid/telephony/TelephonyManager$CallComposerException>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.uploadCallComposerPicture: %w", err)
+	}
+
+	midtelephonyManagerGetMaximumCallComposerPictureSize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clstelephonyManager)), "getMaximumCallComposerPictureSize", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.telephony.TelephonyManager.getMaximumCallComposerPictureSize: %w", err)
 	}
 
 	return nil

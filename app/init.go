@@ -20,65 +20,133 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsContext                    *jni.GlobalRef
-	midContextInit                jni.MethodID
-	midContextGetSystemService    jni.MethodID
-	midContextPackageName         jni.MethodID
-	midContextApplicationContext  jni.MethodID
-	midContextStartActivity       jni.MethodID
-	midContextSendBroadcast       jni.MethodID
-	midContextStartService        jni.MethodID
-	midContextRegisterReceiverRaw jni.MethodID
-	midContextUnregisterReceiver  jni.MethodID
-	midContextContentResolver     jni.MethodID
-	midContextPackageManager      jni.MethodID
-	midContextCacheDir            jni.MethodID
-	midContextFilesDir            jni.MethodID
-	midContextExternalFilesDir    jni.MethodID
-	midContextExternalCacheDir    jni.MethodID
-	midContextDataDir             jni.MethodID
-
-	clsActivity                       *jni.GlobalRef
-	midActivityInit                   jni.MethodID
-	midActivityFinish                 jni.MethodID
-	midActivityGetIntent              jni.MethodID
-	midActivitySetResult              jni.MethodID
-	midActivityGetWindow              jni.MethodID
-	midActivityRunOnUiThread          jni.MethodID
-	midActivityStartActivityForResult jni.MethodID
-
-	clsIntent               *jni.GlobalRef
-	midIntentInit           jni.MethodID
-	midIntentSetAction      jni.MethodID
-	midIntentSetData        jni.MethodID
-	midIntentSetComponent   jni.MethodID
-	midIntentSetFlags       jni.MethodID
-	midIntentAddFlags       jni.MethodID
-	midIntentAddCategory    jni.MethodID
-	midIntentSetPackage     jni.MethodID
-	midIntentSetType        jni.MethodID
-	midIntentGetAction      jni.MethodID
-	midIntentGetData        jni.MethodID
-	midIntentGetStringExtra jni.MethodID
-	midIntentGetBoolExtra   jni.MethodID
-	midIntentGetIntExtra    jni.MethodID
-	midIntentPutStringExtra jni.MethodID
-	midIntentPutIntExtra    jni.MethodID
-	midIntentPutBoolExtra   jni.MethodID
-	midIntentPutLongExtra   jni.MethodID
-
-	clsPendingIntent                    *jni.GlobalRef
-	midPendingIntentNewPendingActivity  jni.MethodID
-	midPendingIntentNewPendingBroadcast jni.MethodID
-	midPendingIntentNewPendingService   jni.MethodID
-
-	clsBroadcastReceiver *jni.GlobalRef
-
-	clsBundle *jni.GlobalRef
-
-	clsbroadcastReceiver *jni.GlobalRef
-
-	clsrunnable *jni.GlobalRef
+	clsintent                               *jni.GlobalRef
+	midintentAddCategory                    jni.MethodID
+	midintentAddFlags                       jni.MethodID
+	midintentClone                          jni.MethodID
+	midintentCloneFilter                    jni.MethodID
+	midintentDescribeContents               jni.MethodID
+	midintentFillIn                         jni.MethodID
+	midintentFilterEquals                   jni.MethodID
+	midintentFilterHashCode                 jni.MethodID
+	midintentGetAction                      jni.MethodID
+	midintentGetBooleanArrayExtra           jni.MethodID
+	midintentGetBooleanExtra                jni.MethodID
+	midintentGetBundleExtra                 jni.MethodID
+	midintentGetByteArrayExtra              jni.MethodID
+	midintentGetByteExtra                   jni.MethodID
+	midintentGetCategories                  jni.MethodID
+	midintentGetCharArrayExtra              jni.MethodID
+	midintentGetCharExtra                   jni.MethodID
+	midintentGetCharSequenceArrayExtra      jni.MethodID
+	midintentGetCharSequenceArrayListExtra  jni.MethodID
+	midintentGetCharSequenceExtra           jni.MethodID
+	midintentGetClipData                    jni.MethodID
+	midintentGetComponent                   jni.MethodID
+	midintentGetData                        jni.MethodID
+	midintentGetDataString                  jni.MethodID
+	midintentGetDoubleArrayExtra            jni.MethodID
+	midintentGetDoubleExtra                 jni.MethodID
+	midintentGetExtras                      jni.MethodID
+	midintentGetFlags                       jni.MethodID
+	midintentGetFloatArrayExtra             jni.MethodID
+	midintentGetFloatExtra                  jni.MethodID
+	midintentGetIdentifier                  jni.MethodID
+	midintentGetIntArrayExtra               jni.MethodID
+	midintentGetIntExtra                    jni.MethodID
+	midintentGetIntegerArrayListExtra       jni.MethodID
+	midintentGetLongArrayExtra              jni.MethodID
+	midintentGetLongExtra                   jni.MethodID
+	midintentGetPackage                     jni.MethodID
+	midintentGetParcelableArrayExtra        jni.MethodID
+	midintentGetScheme                      jni.MethodID
+	midintentGetSelector                    jni.MethodID
+	midintentGetSerializableExtra           jni.MethodID
+	midintentGetShortArrayExtra             jni.MethodID
+	midintentGetShortExtra                  jni.MethodID
+	midintentGetSourceBounds                jni.MethodID
+	midintentGetStringArrayExtra            jni.MethodID
+	midintentGetStringArrayListExtra        jni.MethodID
+	midintentGetStringExtra                 jni.MethodID
+	midintentGetType                        jni.MethodID
+	midintentHasCategory                    jni.MethodID
+	midintentHasExtra                       jni.MethodID
+	midintentHasFileDescriptors             jni.MethodID
+	midintentIsMismatchingFilter            jni.MethodID
+	midintentPutCharSequenceArrayListExtra  jni.MethodID
+	midintentPutExtra2                      jni.MethodID
+	midintentPutExtra2_1                    jni.MethodID
+	midintentPutExtra2_2                    jni.MethodID
+	midintentPutExtra2_3                    jni.MethodID
+	midintentPutExtra2_4                    jni.MethodID
+	midintentPutExtra2_5                    jni.MethodID
+	midintentPutExtra2_6                    jni.MethodID
+	midintentPutExtra2_7                    jni.MethodID
+	midintentPutExtra2_8                    jni.MethodID
+	midintentPutExtra2_9                    jni.MethodID
+	midintentPutExtra2_10                   jni.MethodID
+	midintentPutExtra2_11                   jni.MethodID
+	midintentPutExtra2_12                   jni.MethodID
+	midintentPutExtra2_13                   jni.MethodID
+	midintentPutExtra2_14                   jni.MethodID
+	midintentPutExtra2_15                   jni.MethodID
+	midintentPutExtra2_16                   jni.MethodID
+	midintentPutExtra2_17                   jni.MethodID
+	midintentPutExtra2_18                   jni.MethodID
+	midintentPutExtra2_19                   jni.MethodID
+	midintentPutExtra2_20                   jni.MethodID
+	midintentPutExtra2_21                   jni.MethodID
+	midintentPutExtra2_22                   jni.MethodID
+	midintentPutExtra2_23                   jni.MethodID
+	midintentPutExtras1                     jni.MethodID
+	midintentPutExtras1_1                   jni.MethodID
+	midintentPutIntegerArrayListExtra       jni.MethodID
+	midintentPutParcelableArrayListExtra    jni.MethodID
+	midintentPutStringArrayListExtra        jni.MethodID
+	midintentReadFromParcel                 jni.MethodID
+	midintentRemoveCategory                 jni.MethodID
+	midintentRemoveExtra                    jni.MethodID
+	midintentRemoveFlags                    jni.MethodID
+	midintentRemoveLaunchSecurityProtection jni.MethodID
+	midintentReplaceExtras1                 jni.MethodID
+	midintentReplaceExtras1_1               jni.MethodID
+	midintentResolveActivity                jni.MethodID
+	midintentResolveActivityInfo            jni.MethodID
+	midintentResolveType1                   jni.MethodID
+	midintentResolveType1_1                 jni.MethodID
+	midintentResolveTypeIfNeeded            jni.MethodID
+	midintentSetAction                      jni.MethodID
+	midintentSetClass                       jni.MethodID
+	midintentSetClassName2                  jni.MethodID
+	midintentSetClassName2_1                jni.MethodID
+	midintentSetClipData                    jni.MethodID
+	midintentSetComponent                   jni.MethodID
+	midintentSetData                        jni.MethodID
+	midintentSetDataAndNormalize            jni.MethodID
+	midintentSetDataAndType                 jni.MethodID
+	midintentSetDataAndTypeAndNormalize     jni.MethodID
+	midintentSetExtrasClassLoader           jni.MethodID
+	midintentSetFlags                       jni.MethodID
+	midintentSetIdentifier                  jni.MethodID
+	midintentSetPackage                     jni.MethodID
+	midintentSetSelector                    jni.MethodID
+	midintentSetSourceBounds                jni.MethodID
+	midintentSetType                        jni.MethodID
+	midintentSetTypeAndNormalize            jni.MethodID
+	midintentToString                       jni.MethodID
+	midintentToURI                          jni.MethodID
+	midintentToUri                          jni.MethodID
+	midintentWriteToParcel                  jni.MethodID
+	midintentCreateChooser2                 jni.MethodID
+	midintentCreateChooser3_1               jni.MethodID
+	midintentGetIntent                      jni.MethodID
+	midintentGetIntentOld                   jni.MethodID
+	midintentMakeMainActivity               jni.MethodID
+	midintentMakeMainSelectorActivity       jni.MethodID
+	midintentMakeRestartActivityTask        jni.MethodID
+	midintentNormalizeMimeType              jni.MethodID
+	midintentParseIntent                    jni.MethodID
+	midintentParseUri                       jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -99,270 +167,641 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/content/Context")
-	if err != nil {
-		return fmt.Errorf("find class android.content.Context: %w", err)
-	}
-	clsContext = env.NewGlobalRef(&c.Object)
-	midContextInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.content.Context.<init>: %w", err)
-	}
-
-	midContextGetSystemService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getSystemService", "(Ljava/lang/String;)Ljava/lang/Object;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Context.getSystemService: %w", err)
-	}
-
-	midContextPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getPackageName", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Context.getPackageName: %w", err)
-	}
-
-	midContextApplicationContext, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getApplicationContext", "()Landroid/content/Context;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Context.getApplicationContext: %w", err)
-	}
-
-	midContextStartActivity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "startActivity", "(Landroid/content/Intent;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Context.startActivity: %w", err)
-	}
-
-	midContextSendBroadcast, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "sendBroadcast", "(Landroid/content/Intent;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Context.sendBroadcast: %w", err)
-	}
-
-	midContextStartService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "startService", "(Landroid/content/Intent;)Landroid/content/ComponentName;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Context.startService: %w", err)
-	}
-
-	midContextRegisterReceiverRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "registerReceiver", "(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;)Landroid/content/Intent;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Context.registerReceiver: %w", err)
-	}
-
-	midContextUnregisterReceiver, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "unregisterReceiver", "(Landroid/content/BroadcastReceiver;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Context.unregisterReceiver: %w", err)
-	}
-
-	midContextContentResolver, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getContentResolver", "()Landroid/content/ContentResolver;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Context.getContentResolver: %w", err)
-	}
-
-	midContextPackageManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getPackageManager", "()Landroid/content/pm/PackageManager;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Context.getPackageManager: %w", err)
-	}
-
-	midContextCacheDir, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getCacheDir", "()Ljava/io/File;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Context.getCacheDir: %w", err)
-	}
-
-	midContextFilesDir, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getFilesDir", "()Ljava/io/File;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Context.getFilesDir: %w", err)
-	}
-
-	midContextExternalFilesDir, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getExternalFilesDir", "(Ljava/lang/String;)Ljava/io/File;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Context.getExternalFilesDir: %w", err)
-	}
-
-	midContextExternalCacheDir, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getExternalCacheDir", "()Ljava/io/File;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Context.getExternalCacheDir: %w", err)
-	}
-
-	midContextDataDir, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getDataDir", "()Ljava/io/File;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Context.getDataDir: %w", err)
-	}
-
-	c, err = env.FindClass("android/app/Activity")
-	if err != nil {
-		return fmt.Errorf("find class android.app.Activity: %w", err)
-	}
-	clsActivity = env.NewGlobalRef(&c.Object)
-	midActivityInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.app.Activity.<init>: %w", err)
-	}
-
-	midActivityFinish, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "finish", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.Activity.finish: %w", err)
-	}
-
-	midActivityGetIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "getIntent", "()Landroid/content/Intent;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.Activity.getIntent: %w", err)
-	}
-
-	midActivitySetResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "setResult", "(ILandroid/content/Intent;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.Activity.setResult: %w", err)
-	}
-
-	midActivityGetWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "getWindow", "()Landroid/view/Window;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.Activity.getWindow: %w", err)
-	}
-
-	midActivityRunOnUiThread, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "runOnUiThread", "(Ljava/lang/Runnable;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.Activity.runOnUiThread: %w", err)
-	}
-
-	midActivityStartActivityForResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "startActivityForResult", "(Landroid/content/Intent;I)V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.Activity.startActivityForResult: %w", err)
-	}
-
 	c, err = env.FindClass("android/content/Intent")
 	if err != nil {
 		return fmt.Errorf("find class android.content.Intent: %w", err)
 	}
-	clsIntent = env.NewGlobalRef(&c.Object)
-	midIntentInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.content.Intent.<init>: %w", err)
-	}
+	clsintent = env.NewGlobalRef(&c.Object)
 
-	midIntentSetAction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "setAction", "(Ljava/lang/String;)Landroid/content/Intent;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setAction: %w", err)
-	}
-
-	midIntentSetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "setData", "(Landroid/net/Uri;)Landroid/content/Intent;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setData: %w", err)
-	}
-
-	midIntentSetComponent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "setComponent", "(Landroid/content/ComponentName;)Landroid/content/Intent;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setComponent: %w", err)
-	}
-
-	midIntentSetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "setFlags", "(I)Landroid/content/Intent;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setFlags: %w", err)
-	}
-
-	midIntentAddFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "addFlags", "(I)Landroid/content/Intent;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.addFlags: %w", err)
-	}
-
-	midIntentAddCategory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "addCategory", "(Ljava/lang/String;)Landroid/content/Intent;")
+	midintentAddCategory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "addCategory", "(Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.addCategory: %w", err)
 	}
 
-	midIntentSetPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "setPackage", "(Ljava/lang/String;)Landroid/content/Intent;")
+	midintentAddFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "addFlags", "(I)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setPackage: %w", err)
+		return fmt.Errorf("get method android.content.Intent.addFlags: %w", err)
 	}
 
-	midIntentSetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "setType", "(Ljava/lang/String;)Landroid/content/Intent;")
+	midintentClone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "clone", "()Ljava/lang/Object;")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.setType: %w", err)
+		return fmt.Errorf("get method android.content.Intent.clone: %w", err)
 	}
 
-	midIntentGetAction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "getAction", "()Ljava/lang/String;")
+	midintentCloneFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "cloneFilter", "()Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.cloneFilter: %w", err)
+	}
+
+	midintentDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "describeContents", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.describeContents: %w", err)
+	}
+
+	midintentFillIn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "fillIn", "(Landroid/content/Intent;I)I")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.fillIn: %w", err)
+	}
+
+	midintentFilterEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "filterEquals", "(Landroid/content/Intent;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.filterEquals: %w", err)
+	}
+
+	midintentFilterHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "filterHashCode", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.filterHashCode: %w", err)
+	}
+
+	midintentGetAction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getAction", "()Ljava/lang/String;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.getAction: %w", err)
 	}
 
-	midIntentGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "getData", "()Landroid/net/Uri;")
+	midintentGetBooleanArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getBooleanArrayExtra", "(Ljava/lang/String;)[Z")
 	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getData: %w", err)
+		return fmt.Errorf("get method android.content.Intent.getBooleanArrayExtra: %w", err)
 	}
 
-	midIntentGetStringExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "getStringExtra", "(Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.content.Intent.getStringExtra: %w", err)
-	}
-
-	midIntentGetBoolExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "getBooleanExtra", "(Ljava/lang/String;Z)Z")
+	midintentGetBooleanExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getBooleanExtra", "(Ljava/lang/String;Z)Z")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.getBooleanExtra: %w", err)
 	}
 
-	midIntentGetIntExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "getIntExtra", "(Ljava/lang/String;I)I")
+	midintentGetBundleExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getBundleExtra", "(Ljava/lang/String;)Landroid/os/Bundle;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getBundleExtra: %w", err)
+	}
+
+	midintentGetByteArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getByteArrayExtra", "(Ljava/lang/String;)[B")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getByteArrayExtra: %w", err)
+	}
+
+	midintentGetByteExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getByteExtra", "(Ljava/lang/String;B)B")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getByteExtra: %w", err)
+	}
+
+	midintentGetCategories, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getCategories", "()Ljava/util/Set<java$lang$String>;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getCategories: %w", err)
+	}
+
+	midintentGetCharArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getCharArrayExtra", "(Ljava/lang/String;)[C")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getCharArrayExtra: %w", err)
+	}
+
+	midintentGetCharExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getCharExtra", "(Ljava/lang/String;C)C")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getCharExtra: %w", err)
+	}
+
+	midintentGetCharSequenceArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getCharSequenceArrayExtra", "(Ljava/lang/String;)[Ljava/lang/CharSequence;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getCharSequenceArrayExtra: %w", err)
+	}
+
+	midintentGetCharSequenceArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getCharSequenceArrayListExtra", "(Ljava/lang/String;)Ljava/util/ArrayList<java$lang$CharSequence>;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getCharSequenceArrayListExtra: %w", err)
+	}
+
+	midintentGetCharSequenceExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getCharSequenceExtra", "(Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getCharSequenceExtra: %w", err)
+	}
+
+	midintentGetClipData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getClipData", "()Landroid/content/ClipData;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getClipData: %w", err)
+	}
+
+	midintentGetComponent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getComponent", "()Landroid/content/ComponentName;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getComponent: %w", err)
+	}
+
+	midintentGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getData", "()Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getData: %w", err)
+	}
+
+	midintentGetDataString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getDataString", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getDataString: %w", err)
+	}
+
+	midintentGetDoubleArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getDoubleArrayExtra", "(Ljava/lang/String;)[D")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getDoubleArrayExtra: %w", err)
+	}
+
+	midintentGetDoubleExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getDoubleExtra", "(Ljava/lang/String;D)D")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getDoubleExtra: %w", err)
+	}
+
+	midintentGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getExtras", "()Landroid/os/Bundle;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getExtras: %w", err)
+	}
+
+	midintentGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getFlags", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getFlags: %w", err)
+	}
+
+	midintentGetFloatArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getFloatArrayExtra", "(Ljava/lang/String;)[F")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getFloatArrayExtra: %w", err)
+	}
+
+	midintentGetFloatExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getFloatExtra", "(Ljava/lang/String;F)F")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getFloatExtra: %w", err)
+	}
+
+	midintentGetIdentifier, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getIdentifier", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getIdentifier: %w", err)
+	}
+
+	midintentGetIntArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getIntArrayExtra", "(Ljava/lang/String;)[I")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getIntArrayExtra: %w", err)
+	}
+
+	midintentGetIntExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getIntExtra", "(Ljava/lang/String;I)I")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.getIntExtra: %w", err)
 	}
 
-	midIntentPutStringExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "putExtra", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;")
+	midintentGetIntegerArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getIntegerArrayListExtra", "(Ljava/lang/String;)Ljava/util/ArrayList<java$lang$Integer>;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getIntegerArrayListExtra: %w", err)
+	}
+
+	midintentGetLongArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getLongArrayExtra", "(Ljava/lang/String;)[J")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getLongArrayExtra: %w", err)
+	}
+
+	midintentGetLongExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getLongExtra", "(Ljava/lang/String;J)J")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getLongExtra: %w", err)
+	}
+
+	midintentGetPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getPackage", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getPackage: %w", err)
+	}
+
+	midintentGetParcelableArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getParcelableArrayExtra", "(Ljava/lang/String;)[Landroid/os/Parcelable;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getParcelableArrayExtra: %w", err)
+	}
+
+	midintentGetScheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getScheme", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getScheme: %w", err)
+	}
+
+	midintentGetSelector, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getSelector", "()Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getSelector: %w", err)
+	}
+
+	midintentGetSerializableExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getSerializableExtra", "(Ljava/lang/String;)Ljava/io/Serializable;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getSerializableExtra: %w", err)
+	}
+
+	midintentGetShortArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getShortArrayExtra", "(Ljava/lang/String;)[S")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getShortArrayExtra: %w", err)
+	}
+
+	midintentGetShortExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getShortExtra", "(Ljava/lang/String;S)S")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getShortExtra: %w", err)
+	}
+
+	midintentGetSourceBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getSourceBounds", "()Landroid/graphics/Rect;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getSourceBounds: %w", err)
+	}
+
+	midintentGetStringArrayExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getStringArrayExtra", "(Ljava/lang/String;)[Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getStringArrayExtra: %w", err)
+	}
+
+	midintentGetStringArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getStringArrayListExtra", "(Ljava/lang/String;)Ljava/util/ArrayList<java$lang$String>;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getStringArrayListExtra: %w", err)
+	}
+
+	midintentGetStringExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getStringExtra", "(Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getStringExtra: %w", err)
+	}
+
+	midintentGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getType", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getType: %w", err)
+	}
+
+	midintentHasCategory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "hasCategory", "(Ljava/lang/String;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.hasCategory: %w", err)
+	}
+
+	midintentHasExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "hasExtra", "(Ljava/lang/String;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.hasExtra: %w", err)
+	}
+
+	midintentHasFileDescriptors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "hasFileDescriptors", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.hasFileDescriptors: %w", err)
+	}
+
+	midintentIsMismatchingFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "isMismatchingFilter", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.isMismatchingFilter: %w", err)
+	}
+
+	midintentPutCharSequenceArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putCharSequenceArrayListExtra", "(Ljava/lang/String;Ljava/util/ArrayList<java$lang$CharSequence>;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putCharSequenceArrayListExtra: %w", err)
+	}
+
+	midintentPutExtra2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;Landroid/os/Bundle;)Landroid/content/Intent;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
 	}
 
-	midIntentPutIntExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "putExtra", "(Ljava/lang/String;I)Landroid/content/Intent;")
+	midintentPutExtra2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;Landroid/os/Parcelable;)Landroid/content/Intent;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
 	}
 
-	midIntentPutBoolExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "putExtra", "(Ljava/lang/String;Z)Landroid/content/Intent;")
+	midintentPutExtra2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[Landroid/os/Parcelable;)Landroid/content/Intent;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
 	}
 
-	midIntentPutLongExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntent)), "putExtra", "(Ljava/lang/String;J)Landroid/content/Intent;")
+	midintentPutExtra2_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;Z)Landroid/content/Intent;")
 	if err != nil {
 		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
 	}
 
-	c, err = env.FindClass("android/app/PendingIntent")
+	midintentPutExtra2_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[Z)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("find class android.app.PendingIntent: %w", err)
-	}
-	clsPendingIntent = env.NewGlobalRef(&c.Object)
-
-	midPendingIntentNewPendingActivity, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPendingIntent)), "getActivity", "(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.PendingIntent.getActivity: %w", err)
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
 	}
 
-	midPendingIntentNewPendingBroadcast, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPendingIntent)), "getBroadcast", "(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;")
+	midintentPutExtra2_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;B)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.PendingIntent.getBroadcast: %w", err)
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
 	}
 
-	midPendingIntentNewPendingService, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPendingIntent)), "getService", "(Landroid/content/Context;ILandroid/content/Intent;I)Landroid/app/PendingIntent;")
+	midintentPutExtra2_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[B)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.PendingIntent.getService: %w", err)
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
 	}
 
-	c, err = env.FindClass("android/content/BroadcastReceiver")
+	midintentPutExtra2_7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;C)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("find class android.content.BroadcastReceiver: %w", err)
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
 	}
-	clsBroadcastReceiver = env.NewGlobalRef(&c.Object)
 
-	c, err = env.FindClass("android/os/Bundle")
+	midintentPutExtra2_8, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[C)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("find class android.os.Bundle: %w", err)
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
 	}
-	clsBundle = env.NewGlobalRef(&c.Object)
 
-	c, err = env.FindClass("android/content/BroadcastReceiver")
+	midintentPutExtra2_9, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;D)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("find class android.content.BroadcastReceiver: %w", err)
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
 	}
-	clsbroadcastReceiver = env.NewGlobalRef(&c.Object)
 
-	c, err = env.FindClass("java/lang/Runnable")
+	midintentPutExtra2_10, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[D)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("find class java.lang.Runnable: %w", err)
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
 	}
-	clsrunnable = env.NewGlobalRef(&c.Object)
+
+	midintentPutExtra2_11, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;F)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+	}
+
+	midintentPutExtra2_12, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[F)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+	}
+
+	midintentPutExtra2_13, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;I)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+	}
+
+	midintentPutExtra2_14, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[I)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+	}
+
+	midintentPutExtra2_15, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;Ljava/io/Serializable;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+	}
+
+	midintentPutExtra2_16, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+	}
+
+	midintentPutExtra2_17, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[Ljava/lang/CharSequence;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+	}
+
+	midintentPutExtra2_18, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+	}
+
+	midintentPutExtra2_19, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+	}
+
+	midintentPutExtra2_20, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;J)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+	}
+
+	midintentPutExtra2_21, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[J)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+	}
+
+	midintentPutExtra2_22, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;S)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+	}
+
+	midintentPutExtra2_23, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtra", "(Ljava/lang/String;[S)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putExtra: %w", err)
+	}
+
+	midintentPutExtras1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtras", "(Landroid/content/Intent;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putExtras: %w", err)
+	}
+
+	midintentPutExtras1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putExtras", "(Landroid/os/Bundle;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putExtras: %w", err)
+	}
+
+	midintentPutIntegerArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putIntegerArrayListExtra", "(Ljava/lang/String;Ljava/util/ArrayList<java$lang$Integer>;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putIntegerArrayListExtra: %w", err)
+	}
+
+	midintentPutParcelableArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putParcelableArrayListExtra", "(Ljava/lang/String;Ljava/util/ArrayList<? extends android$os$Parcelable>;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putParcelableArrayListExtra: %w", err)
+	}
+
+	midintentPutStringArrayListExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "putStringArrayListExtra", "(Ljava/lang/String;Ljava/util/ArrayList<java$lang$String>;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.putStringArrayListExtra: %w", err)
+	}
+
+	midintentReadFromParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "readFromParcel", "(Landroid/os/Parcel;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.readFromParcel: %w", err)
+	}
+
+	midintentRemoveCategory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "removeCategory", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.removeCategory: %w", err)
+	}
+
+	midintentRemoveExtra, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "removeExtra", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.removeExtra: %w", err)
+	}
+
+	midintentRemoveFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "removeFlags", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.removeFlags: %w", err)
+	}
+
+	midintentRemoveLaunchSecurityProtection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "removeLaunchSecurityProtection", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.removeLaunchSecurityProtection: %w", err)
+	}
+
+	midintentReplaceExtras1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "replaceExtras", "(Landroid/content/Intent;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.replaceExtras: %w", err)
+	}
+
+	midintentReplaceExtras1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "replaceExtras", "(Landroid/os/Bundle;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.replaceExtras: %w", err)
+	}
+
+	midintentResolveActivity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "resolveActivity", "(Landroid/content/pm/PackageManager;)Landroid/content/ComponentName;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.resolveActivity: %w", err)
+	}
+
+	midintentResolveActivityInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "resolveActivityInfo", "(Landroid/content/pm/PackageManager;I)Landroid/content/pm/ActivityInfo;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.resolveActivityInfo: %w", err)
+	}
+
+	midintentResolveType1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "resolveType", "(Landroid/content/ContentResolver;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.resolveType: %w", err)
+	}
+
+	midintentResolveType1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "resolveType", "(Landroid/content/Context;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.resolveType: %w", err)
+	}
+
+	midintentResolveTypeIfNeeded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "resolveTypeIfNeeded", "(Landroid/content/ContentResolver;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.resolveTypeIfNeeded: %w", err)
+	}
+
+	midintentSetAction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setAction", "(Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setAction: %w", err)
+	}
+
+	midintentSetClass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setClass", "(Landroid/content/Context;Ljava/lang/Class<?>;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setClass: %w", err)
+	}
+
+	midintentSetClassName2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setClassName", "(Landroid/content/Context;Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setClassName: %w", err)
+	}
+
+	midintentSetClassName2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setClassName", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setClassName: %w", err)
+	}
+
+	midintentSetClipData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setClipData", "(Landroid/content/ClipData;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setClipData: %w", err)
+	}
+
+	midintentSetComponent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setComponent", "(Landroid/content/ComponentName;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setComponent: %w", err)
+	}
+
+	midintentSetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setData", "(Landroid/net/Uri;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setData: %w", err)
+	}
+
+	midintentSetDataAndNormalize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setDataAndNormalize", "(Landroid/net/Uri;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setDataAndNormalize: %w", err)
+	}
+
+	midintentSetDataAndType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setDataAndType", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setDataAndType: %w", err)
+	}
+
+	midintentSetDataAndTypeAndNormalize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setDataAndTypeAndNormalize", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setDataAndTypeAndNormalize: %w", err)
+	}
+
+	midintentSetExtrasClassLoader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setExtrasClassLoader", "(Ljava/lang/ClassLoader;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setExtrasClassLoader: %w", err)
+	}
+
+	midintentSetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setFlags", "(I)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setFlags: %w", err)
+	}
+
+	midintentSetIdentifier, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setIdentifier", "(Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setIdentifier: %w", err)
+	}
+
+	midintentSetPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setPackage", "(Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setPackage: %w", err)
+	}
+
+	midintentSetSelector, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setSelector", "(Landroid/content/Intent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setSelector: %w", err)
+	}
+
+	midintentSetSourceBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setSourceBounds", "(Landroid/graphics/Rect;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setSourceBounds: %w", err)
+	}
+
+	midintentSetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setType", "(Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setType: %w", err)
+	}
+
+	midintentSetTypeAndNormalize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "setTypeAndNormalize", "(Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.setTypeAndNormalize: %w", err)
+	}
+
+	midintentToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.toString: %w", err)
+	}
+
+	midintentToURI, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "toURI", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.toURI: %w", err)
+	}
+
+	midintentToUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "toUri", "(I)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.toUri: %w", err)
+	}
+
+	midintentWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.writeToParcel: %w", err)
+	}
+
+	midintentCreateChooser2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "createChooser", "(Landroid/content/Intent;Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.createChooser: %w", err)
+	}
+
+	midintentCreateChooser3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "createChooser", "(Landroid/content/Intent;Ljava/lang/String;Landroid/content/IntentSender;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.createChooser: %w", err)
+	}
+
+	midintentGetIntent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getIntent", "(Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getIntent: %w", err)
+	}
+
+	midintentGetIntentOld, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "getIntentOld", "(Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.getIntentOld: %w", err)
+	}
+
+	midintentMakeMainActivity, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "makeMainActivity", "(Landroid/content/ComponentName;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.makeMainActivity: %w", err)
+	}
+
+	midintentMakeMainSelectorActivity, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "makeMainSelectorActivity", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.makeMainSelectorActivity: %w", err)
+	}
+
+	midintentMakeRestartActivityTask, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "makeRestartActivityTask", "(Landroid/content/ComponentName;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.makeRestartActivityTask: %w", err)
+	}
+
+	midintentNormalizeMimeType, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "normalizeMimeType", "(Ljava/lang/String;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.normalizeMimeType: %w", err)
+	}
+
+	midintentParseIntent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "parseIntent", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.parseIntent: %w", err)
+	}
+
+	midintentParseUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsintent)), "parseUri", "(Ljava/lang/String;I)Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.content.Intent.parseUri: %w", err)
+	}
 
 	return nil
 }

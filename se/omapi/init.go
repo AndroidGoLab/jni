@@ -20,31 +20,12 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsService              *jni.GlobalRef
-	midServiceInit          jni.MethodID
-	midServiceIsConnected   jni.MethodID
-	midServicegetReadersRaw jni.MethodID
-	midServiceShutdown      jni.MethodID
-
-	clsReader                       *jni.GlobalRef
-	midReaderGetName                jni.MethodID
-	midReaderIsSecureElementPresent jni.MethodID
-	midReaderopenSessionRaw         jni.MethodID
-
-	clsSession                      *jni.GlobalRef
-	midSessionopenBasicChannelRaw   jni.MethodID
-	midSessionopenLogicalChannelRaw jni.MethodID
-	midSessionGetATR                jni.MethodID
-	midSessioncloseRaw              jni.MethodID
-
-	clsChannel                  *jni.GlobalRef
-	midChannelTransmit          jni.MethodID
-	midChannelSelectNext        jni.MethodID
-	midChannelGetSelectResponse jni.MethodID
-	midChannelIsBasicChannel    jni.MethodID
-	midChannelcloseRaw          jni.MethodID
-
-	clsonConnectedListener *jni.GlobalRef
+	clssEService              *jni.GlobalRef
+	midsEServiceGetReaders    jni.MethodID
+	midsEServiceGetUiccReader jni.MethodID
+	midsEServiceGetVersion    jni.MethodID
+	midsEServiceIsConnected   jni.MethodID
+	midsEServiceShutdown      jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -69,110 +50,32 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.se.omapi.SEService: %w", err)
 	}
-	clsService = env.NewGlobalRef(&c.Object)
-	midServiceInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.se.omapi.SEService.<init>: %w", err)
-	}
+	clssEService = env.NewGlobalRef(&c.Object)
 
-	midServiceIsConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "isConnected", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.SEService.isConnected: %w", err)
-	}
-
-	midServicegetReadersRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "getReaders", "()[Landroid/se/omapi/Reader;")
+	midsEServiceGetReaders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clssEService)), "getReaders", "()[Landroid/se/omapi/Reader;")
 	if err != nil {
 		return fmt.Errorf("get method android.se.omapi.SEService.getReaders: %w", err)
 	}
 
-	midServiceShutdown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "shutdown", "()V")
+	midsEServiceGetUiccReader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clssEService)), "getUiccReader", "(I)Landroid/se/omapi/Reader;")
+	if err != nil {
+		return fmt.Errorf("get method android.se.omapi.SEService.getUiccReader: %w", err)
+	}
+
+	midsEServiceGetVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clssEService)), "getVersion", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.se.omapi.SEService.getVersion: %w", err)
+	}
+
+	midsEServiceIsConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clssEService)), "isConnected", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.se.omapi.SEService.isConnected: %w", err)
+	}
+
+	midsEServiceShutdown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clssEService)), "shutdown", "()V")
 	if err != nil {
 		return fmt.Errorf("get method android.se.omapi.SEService.shutdown: %w", err)
 	}
-
-	c, err = env.FindClass("android/se/omapi/Reader")
-	if err != nil {
-		return fmt.Errorf("find class android.se.omapi.Reader: %w", err)
-	}
-	clsReader = env.NewGlobalRef(&c.Object)
-
-	midReaderGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReader)), "getName", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.Reader.getName: %w", err)
-	}
-
-	midReaderIsSecureElementPresent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReader)), "isSecureElementPresent", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.Reader.isSecureElementPresent: %w", err)
-	}
-
-	midReaderopenSessionRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReader)), "openSession", "()Landroid/se/omapi/Session;")
-	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.Reader.openSession: %w", err)
-	}
-
-	c, err = env.FindClass("android/se/omapi/Session")
-	if err != nil {
-		return fmt.Errorf("find class android.se.omapi.Session: %w", err)
-	}
-	clsSession = env.NewGlobalRef(&c.Object)
-
-	midSessionopenBasicChannelRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSession)), "openBasicChannel", "([B)Landroid/se/omapi/Channel;")
-	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.Session.openBasicChannel: %w", err)
-	}
-
-	midSessionopenLogicalChannelRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSession)), "openLogicalChannel", "([B)Landroid/se/omapi/Channel;")
-	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.Session.openLogicalChannel: %w", err)
-	}
-
-	midSessionGetATR, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSession)), "getATR", "()[B")
-	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.Session.getATR: %w", err)
-	}
-
-	midSessioncloseRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSession)), "close", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.Session.close: %w", err)
-	}
-
-	c, err = env.FindClass("android/se/omapi/Channel")
-	if err != nil {
-		return fmt.Errorf("find class android.se.omapi.Channel: %w", err)
-	}
-	clsChannel = env.NewGlobalRef(&c.Object)
-
-	midChannelTransmit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "transmit", "([B)[B")
-	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.Channel.transmit: %w", err)
-	}
-
-	midChannelSelectNext, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "selectNext", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.Channel.selectNext: %w", err)
-	}
-
-	midChannelGetSelectResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getSelectResponse", "()[B")
-	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.Channel.getSelectResponse: %w", err)
-	}
-
-	midChannelIsBasicChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isBasicChannel", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.Channel.isBasicChannel: %w", err)
-	}
-
-	midChannelcloseRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "close", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.se.omapi.Channel.close: %w", err)
-	}
-
-	c, err = env.FindClass("android/se/omapi/SEService$OnConnectedListener")
-	if err != nil {
-		return fmt.Errorf("find class android.se.omapi.SEService$OnConnectedListener: %w", err)
-	}
-	clsonConnectedListener = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

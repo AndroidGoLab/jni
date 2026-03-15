@@ -20,14 +20,45 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                           *jni.GlobalRef
-	midManagerisInCallRaw                jni.MethodID
-	midManagerisInManagedCallRaw         jni.MethodID
-	midManagergetDefaultDialerPackageRaw jni.MethodID
-	midManagerplaceCallRaw               jni.MethodID
-	midManagersilenceRingerRaw           jni.MethodID
-	midManageracceptRingingCallRaw       jni.MethodID
-	midManagerendCallRaw                 jni.MethodID
+	clstelecomManager                                    *jni.GlobalRef
+	midtelecomManagerAcceptHandover                      jni.MethodID
+	midtelecomManagerAcceptRingingCall0                  jni.MethodID
+	midtelecomManagerAcceptRingingCall1_1                jni.MethodID
+	midtelecomManagerAddCall                             jni.MethodID
+	midtelecomManagerAddNewIncomingCall                  jni.MethodID
+	midtelecomManagerAddNewIncomingConference            jni.MethodID
+	midtelecomManagerCancelMissedCallsNotification       jni.MethodID
+	midtelecomManagerCreateManageBlockedNumbersIntent    jni.MethodID
+	midtelecomManagerEndCall                             jni.MethodID
+	midtelecomManagerGetAdnUriForPhoneAccount            jni.MethodID
+	midtelecomManagerGetCallCapablePhoneAccounts         jni.MethodID
+	midtelecomManagerGetDefaultDialerPackage             jni.MethodID
+	midtelecomManagerGetDefaultOutgoingPhoneAccount      jni.MethodID
+	midtelecomManagerGetLine1Number                      jni.MethodID
+	midtelecomManagerGetOwnSelfManagedPhoneAccounts      jni.MethodID
+	midtelecomManagerGetPhoneAccount                     jni.MethodID
+	midtelecomManagerGetRegisteredPhoneAccounts          jni.MethodID
+	midtelecomManagerGetSelfManagedPhoneAccounts         jni.MethodID
+	midtelecomManagerGetSimCallManager                   jni.MethodID
+	midtelecomManagerGetSimCallManagerForSubscription    jni.MethodID
+	midtelecomManagerGetSystemDialerPackage              jni.MethodID
+	midtelecomManagerGetUserSelectedOutgoingPhoneAccount jni.MethodID
+	midtelecomManagerGetVoiceMailNumber                  jni.MethodID
+	midtelecomManagerHandleMmi1                          jni.MethodID
+	midtelecomManagerHandleMmi2_1                        jni.MethodID
+	midtelecomManagerHasManageOngoingCallsPermission     jni.MethodID
+	midtelecomManagerIsInCall                            jni.MethodID
+	midtelecomManagerIsInManagedCall                     jni.MethodID
+	midtelecomManagerIsIncomingCallPermitted             jni.MethodID
+	midtelecomManagerIsOutgoingCallPermitted             jni.MethodID
+	midtelecomManagerIsTtySupported                      jni.MethodID
+	midtelecomManagerIsVoiceMailNumber                   jni.MethodID
+	midtelecomManagerPlaceCall                           jni.MethodID
+	midtelecomManagerRegisterPhoneAccount                jni.MethodID
+	midtelecomManagerShowInCallScreen                    jni.MethodID
+	midtelecomManagerSilenceRinger                       jni.MethodID
+	midtelecomManagerStartConference                     jni.MethodID
+	midtelecomManagerUnregisterPhoneAccount              jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -52,41 +83,196 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.telecom.TelecomManager: %w", err)
 	}
-	clsManager = env.NewGlobalRef(&c.Object)
+	clstelecomManager = env.NewGlobalRef(&c.Object)
 
-	midManagerisInCallRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isInCall", "()Z")
+	midtelecomManagerAcceptHandover, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "acceptHandover", "(Landroid/net/Uri;ILandroid/telecom/PhoneAccountHandle;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.telecom.TelecomManager.isInCall: %w", err)
+		return fmt.Errorf("get method android.telecom.TelecomManager.acceptHandover: %w", err)
 	}
 
-	midManagerisInManagedCallRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isInManagedCall", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.telecom.TelecomManager.isInManagedCall: %w", err)
-	}
-
-	midManagergetDefaultDialerPackageRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDefaultDialerPackage", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.telecom.TelecomManager.getDefaultDialerPackage: %w", err)
-	}
-
-	midManagerplaceCallRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "placeCall", "(Landroid/net/Uri;Landroid/os/Bundle;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.telecom.TelecomManager.placeCall: %w", err)
-	}
-
-	midManagersilenceRingerRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "silenceRinger", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.telecom.TelecomManager.silenceRinger: %w", err)
-	}
-
-	midManageracceptRingingCallRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "acceptRingingCall", "()V")
+	midtelecomManagerAcceptRingingCall0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "acceptRingingCall", "()V")
 	if err != nil {
 		return fmt.Errorf("get method android.telecom.TelecomManager.acceptRingingCall: %w", err)
 	}
 
-	midManagerendCallRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "endCall", "()Z")
+	midtelecomManagerAcceptRingingCall1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "acceptRingingCall", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.acceptRingingCall: %w", err)
+	}
+
+	midtelecomManagerAddCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "addCall", "(Landroid/telecom/CallAttributes;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver<android$telecom$CallControl;Landroid/telecom/CallException>;Landroid/telecom/CallControlCallback;Landroid/telecom/CallEventCallback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.addCall: %w", err)
+	}
+
+	midtelecomManagerAddNewIncomingCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "addNewIncomingCall", "(Landroid/telecom/PhoneAccountHandle;Landroid/os/Bundle;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.addNewIncomingCall: %w", err)
+	}
+
+	midtelecomManagerAddNewIncomingConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "addNewIncomingConference", "(Landroid/telecom/PhoneAccountHandle;Landroid/os/Bundle;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.addNewIncomingConference: %w", err)
+	}
+
+	midtelecomManagerCancelMissedCallsNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "cancelMissedCallsNotification", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.cancelMissedCallsNotification: %w", err)
+	}
+
+	midtelecomManagerCreateManageBlockedNumbersIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "createManageBlockedNumbersIntent", "()Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.createManageBlockedNumbersIntent: %w", err)
+	}
+
+	midtelecomManagerEndCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "endCall", "()Z")
 	if err != nil {
 		return fmt.Errorf("get method android.telecom.TelecomManager.endCall: %w", err)
+	}
+
+	midtelecomManagerGetAdnUriForPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getAdnUriForPhoneAccount", "(Landroid/telecom/PhoneAccountHandle;)Landroid/net/Uri;")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.getAdnUriForPhoneAccount: %w", err)
+	}
+
+	midtelecomManagerGetCallCapablePhoneAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getCallCapablePhoneAccounts", "()Ljava/util/List<android$telecom$PhoneAccountHandle>;")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.getCallCapablePhoneAccounts: %w", err)
+	}
+
+	midtelecomManagerGetDefaultDialerPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getDefaultDialerPackage", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.getDefaultDialerPackage: %w", err)
+	}
+
+	midtelecomManagerGetDefaultOutgoingPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getDefaultOutgoingPhoneAccount", "(Ljava/lang/String;)Landroid/telecom/PhoneAccountHandle;")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.getDefaultOutgoingPhoneAccount: %w", err)
+	}
+
+	midtelecomManagerGetLine1Number, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getLine1Number", "(Landroid/telecom/PhoneAccountHandle;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.getLine1Number: %w", err)
+	}
+
+	midtelecomManagerGetOwnSelfManagedPhoneAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getOwnSelfManagedPhoneAccounts", "()Ljava/util/List<android$telecom$PhoneAccountHandle>;")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.getOwnSelfManagedPhoneAccounts: %w", err)
+	}
+
+	midtelecomManagerGetPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getPhoneAccount", "(Landroid/telecom/PhoneAccountHandle;)Landroid/telecom/PhoneAccount;")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.getPhoneAccount: %w", err)
+	}
+
+	midtelecomManagerGetRegisteredPhoneAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getRegisteredPhoneAccounts", "()Ljava/util/List<android$telecom$PhoneAccount>;")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.getRegisteredPhoneAccounts: %w", err)
+	}
+
+	midtelecomManagerGetSelfManagedPhoneAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getSelfManagedPhoneAccounts", "()Ljava/util/List<android$telecom$PhoneAccountHandle>;")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.getSelfManagedPhoneAccounts: %w", err)
+	}
+
+	midtelecomManagerGetSimCallManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getSimCallManager", "()Landroid/telecom/PhoneAccountHandle;")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.getSimCallManager: %w", err)
+	}
+
+	midtelecomManagerGetSimCallManagerForSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getSimCallManagerForSubscription", "(I)Landroid/telecom/PhoneAccountHandle;")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.getSimCallManagerForSubscription: %w", err)
+	}
+
+	midtelecomManagerGetSystemDialerPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getSystemDialerPackage", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.getSystemDialerPackage: %w", err)
+	}
+
+	midtelecomManagerGetUserSelectedOutgoingPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getUserSelectedOutgoingPhoneAccount", "()Landroid/telecom/PhoneAccountHandle;")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.getUserSelectedOutgoingPhoneAccount: %w", err)
+	}
+
+	midtelecomManagerGetVoiceMailNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "getVoiceMailNumber", "(Landroid/telecom/PhoneAccountHandle;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.getVoiceMailNumber: %w", err)
+	}
+
+	midtelecomManagerHandleMmi1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "handleMmi", "(Ljava/lang/String;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.handleMmi: %w", err)
+	}
+
+	midtelecomManagerHandleMmi2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "handleMmi", "(Ljava/lang/String;Landroid/telecom/PhoneAccountHandle;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.handleMmi: %w", err)
+	}
+
+	midtelecomManagerHasManageOngoingCallsPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "hasManageOngoingCallsPermission", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.hasManageOngoingCallsPermission: %w", err)
+	}
+
+	midtelecomManagerIsInCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "isInCall", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.isInCall: %w", err)
+	}
+
+	midtelecomManagerIsInManagedCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "isInManagedCall", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.isInManagedCall: %w", err)
+	}
+
+	midtelecomManagerIsIncomingCallPermitted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "isIncomingCallPermitted", "(Landroid/telecom/PhoneAccountHandle;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.isIncomingCallPermitted: %w", err)
+	}
+
+	midtelecomManagerIsOutgoingCallPermitted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "isOutgoingCallPermitted", "(Landroid/telecom/PhoneAccountHandle;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.isOutgoingCallPermitted: %w", err)
+	}
+
+	midtelecomManagerIsTtySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "isTtySupported", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.isTtySupported: %w", err)
+	}
+
+	midtelecomManagerIsVoiceMailNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "isVoiceMailNumber", "(Landroid/telecom/PhoneAccountHandle;Ljava/lang/String;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.isVoiceMailNumber: %w", err)
+	}
+
+	midtelecomManagerPlaceCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "placeCall", "(Landroid/net/Uri;Landroid/os/Bundle;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.placeCall: %w", err)
+	}
+
+	midtelecomManagerRegisterPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "registerPhoneAccount", "(Landroid/telecom/PhoneAccount;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.registerPhoneAccount: %w", err)
+	}
+
+	midtelecomManagerShowInCallScreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "showInCallScreen", "(Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.showInCallScreen: %w", err)
+	}
+
+	midtelecomManagerSilenceRinger, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "silenceRinger", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.silenceRinger: %w", err)
+	}
+
+	midtelecomManagerStartConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "startConference", "(Ljava/util/List<android$net$Uri>;Landroid/os/Bundle;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.startConference: %w", err)
+	}
+
+	midtelecomManagerUnregisterPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstelecomManager)), "unregisterPhoneAccount", "(Landroid/telecom/PhoneAccountHandle;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.telecom.TelecomManager.unregisterPhoneAccount: %w", err)
 	}
 
 	return nil

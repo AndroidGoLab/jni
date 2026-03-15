@@ -6,61 +6,45 @@ package omapi;
 
 option go_package = "github.com/xaionaro-go/jni/proto/omapi";
 
-message CloseRequest {
+message GetReadersRequest {
 }
 
-message CloseResponse {
-}
-
-message GetSelectResponseRequest {
-}
-
-message GetSelectResponseResponse {
+message GetReadersResponse {
   int64 result = 1;
 }
 
-message GetSessionRequest {
+message GetUiccReaderRequest {
+  int32 arg0 = 1;
 }
 
-message GetSessionResponse {
+message GetUiccReaderResponse {
   int64 result = 1;
 }
 
-message IsBasicChannelRequest {
+message GetVersionRequest {
 }
 
-message IsBasicChannelResponse {
+message GetVersionResponse {
+  string result = 1;
+}
+
+message IsConnectedRequest {
+}
+
+message IsConnectedResponse {
   bool result = 1;
 }
 
-message IsOpenRequest {
+message ShutdownRequest {
 }
 
-message IsOpenResponse {
-  bool result = 1;
+message ShutdownResponse {
 }
 
-message SelectNextRequest {
-}
-
-message SelectNextResponse {
-  bool result = 1;
-}
-
-message TransmitRequest {
-  int64 arg0 = 1;
-}
-
-message TransmitResponse {
-  int64 result = 1;
-}
-
-service ChannelService {
-  rpc Close (CloseRequest) returns (CloseResponse);
-  rpc GetSelectResponse (GetSelectResponseRequest) returns (GetSelectResponseResponse);
-  rpc GetSession (GetSessionRequest) returns (GetSessionResponse);
-  rpc IsBasicChannel (IsBasicChannelRequest) returns (IsBasicChannelResponse);
-  rpc IsOpen (IsOpenRequest) returns (IsOpenResponse);
-  rpc SelectNext (SelectNextRequest) returns (SelectNextResponse);
-  rpc Transmit (TransmitRequest) returns (TransmitResponse);
+service SEServiceService {
+  rpc GetReaders (GetReadersRequest) returns (GetReadersResponse);
+  rpc GetUiccReader (GetUiccReaderRequest) returns (GetUiccReaderResponse);
+  rpc GetVersion (GetVersionRequest) returns (GetVersionResponse);
+  rpc IsConnected (IsConnectedRequest) returns (IsConnectedResponse);
+  rpc Shutdown (ShutdownRequest) returns (ShutdownResponse);
 }

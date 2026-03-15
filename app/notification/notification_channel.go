@@ -23,124 +23,978 @@ type notificationChannel struct {
 	Obj *jni.GlobalRef
 }
 
-// NewnotificationChannel creates a new android.app.NotificationChannel instance.
-func NewnotificationChannel(vm *jni.VM) (*notificationChannel, error) {
-	var t notificationChannel
-	t.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			return err
-		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), midnotificationChannelInit)
-		if err != nil {
-			return err
-		}
-		t.Obj = env.NewGlobalRef(obj)
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return &t, nil
-}
-
-// setDescription calls android.app.NotificationChannel.setDescription.
-func (m *notificationChannel) setDescription(description string) {
-
+// CanBubble calls android.app.NotificationChannel.canBubble.
+func (m *notificationChannel) CanBubble() (bool, error) {
+	var result bool
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		jDescription, err := env.NewStringUTF(description)
-		if err != nil {
-			return err
-		}
-
-		env.CallVoidMethod(
+		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midnotificationChannelsetDescription, jni.ObjectValue(&jDescription.Object),
+			midnotificationChannelCanBubble,
 		)
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
 	})
-	return
+	return result, callErr
 }
 
-// getId calls android.app.NotificationChannel.getId.
-func (m *notificationChannel) getId() string {
-	var result string
-
+// CanBypassDnd calls android.app.NotificationChannel.canBypassDnd.
+func (m *notificationChannel) CanBypassDnd() (bool, error) {
+	var result bool
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		resultObj, _ := env.CallObjectMethod(
+		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midnotificationChannelgetId,
+			midnotificationChannelCanBypassDnd,
 		)
-
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// getName calls android.app.NotificationChannel.getName.
-func (m *notificationChannel) getName() *jni.Object {
-	var result *jni.Object
-
+// CanShowBadge calls android.app.NotificationChannel.canShowBadge.
+func (m *notificationChannel) CanShowBadge() (bool, error) {
+	var result bool
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		result, _ = env.CallObjectMethod(
+		resultRaw, callErr := env.CallBooleanMethod(
 			m.Obj,
-			midnotificationChannelgetName,
+			midnotificationChannelCanShowBadge,
 		)
-
-		return nil
-	})
-	return result
-}
-
-// getDescription calls android.app.NotificationChannel.getDescription.
-func (m *notificationChannel) getDescription() string {
-	var result string
-
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-
-			return err
+		if callErr != nil {
+			return callErr
 		}
-		resultObj, _ := env.CallObjectMethod(
-			m.Obj,
-			midnotificationChannelgetDescription,
-		)
-
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
-		return nil
+		result = resultRaw != 0
+		return callErr
 	})
-	return result
+	return result, callErr
 }
 
-// getImportance calls android.app.NotificationChannel.getImportance.
-func (m *notificationChannel) getImportance() int32 {
+// DescribeContents calls android.app.NotificationChannel.describeContents.
+func (m *notificationChannel) DescribeContents() (int32, error) {
 	var result int32
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		result, _ = env.CallIntMethod(
+		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midnotificationChannelgetImportance,
+			midnotificationChannelDescribeContents,
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
+}
+
+// EnableLights calls android.app.NotificationChannel.enableLights.
+func (m *notificationChannel) EnableLights(arg0 bool) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelEnableLights, jni.BooleanValue(jArg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// EnableVibration calls android.app.NotificationChannel.enableVibration.
+func (m *notificationChannel) EnableVibration(arg0 bool) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelEnableVibration, jni.BooleanValue(jArg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// Equals calls android.app.NotificationChannel.equals.
+func (m *notificationChannel) Equals(arg0 *jni.Object) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midnotificationChannelEquals, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAudioAttributes calls android.app.NotificationChannel.getAudioAttributes.
+func (m *notificationChannel) GetAudioAttributes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midnotificationChannelGetAudioAttributes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetConversationId calls android.app.NotificationChannel.getConversationId.
+func (m *notificationChannel) GetConversationId() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midnotificationChannelGetConversationId,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetDescription calls android.app.NotificationChannel.getDescription.
+func (m *notificationChannel) GetDescription() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midnotificationChannelGetDescription,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetGroup calls android.app.NotificationChannel.getGroup.
+func (m *notificationChannel) GetGroup() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midnotificationChannelGetGroup,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetId calls android.app.NotificationChannel.getId.
+func (m *notificationChannel) GetId() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midnotificationChannelGetId,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetImportance calls android.app.NotificationChannel.getImportance.
+func (m *notificationChannel) GetImportance() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midnotificationChannelGetImportance,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetLightColor calls android.app.NotificationChannel.getLightColor.
+func (m *notificationChannel) GetLightColor() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midnotificationChannelGetLightColor,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetLockscreenVisibility calls android.app.NotificationChannel.getLockscreenVisibility.
+func (m *notificationChannel) GetLockscreenVisibility() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midnotificationChannelGetLockscreenVisibility,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetName calls android.app.NotificationChannel.getName.
+func (m *notificationChannel) GetName() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midnotificationChannelGetName,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetParentChannelId calls android.app.NotificationChannel.getParentChannelId.
+func (m *notificationChannel) GetParentChannelId() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midnotificationChannelGetParentChannelId,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSound calls android.app.NotificationChannel.getSound.
+func (m *notificationChannel) GetSound() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midnotificationChannelGetSound,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetVibrationEffect calls android.app.NotificationChannel.getVibrationEffect.
+func (m *notificationChannel) GetVibrationEffect() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midnotificationChannelGetVibrationEffect,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetVibrationPattern calls android.app.NotificationChannel.getVibrationPattern.
+func (m *notificationChannel) GetVibrationPattern() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midnotificationChannelGetVibrationPattern,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// HasUserSetImportance calls android.app.NotificationChannel.hasUserSetImportance.
+func (m *notificationChannel) HasUserSetImportance() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midnotificationChannelHasUserSetImportance,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// HasUserSetSound calls android.app.NotificationChannel.hasUserSetSound.
+func (m *notificationChannel) HasUserSetSound() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midnotificationChannelHasUserSetSound,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// HashCode calls android.app.NotificationChannel.hashCode.
+func (m *notificationChannel) HashCode() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midnotificationChannelHashCode,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsBlockable calls android.app.NotificationChannel.isBlockable.
+func (m *notificationChannel) IsBlockable() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midnotificationChannelIsBlockable,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsConversation calls android.app.NotificationChannel.isConversation.
+func (m *notificationChannel) IsConversation() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midnotificationChannelIsConversation,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsDemoted calls android.app.NotificationChannel.isDemoted.
+func (m *notificationChannel) IsDemoted() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midnotificationChannelIsDemoted,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsImportantConversation calls android.app.NotificationChannel.isImportantConversation.
+func (m *notificationChannel) IsImportantConversation() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midnotificationChannelIsImportantConversation,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetAllowBubbles calls android.app.NotificationChannel.setAllowBubbles.
+func (m *notificationChannel) SetAllowBubbles(arg0 bool) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelSetAllowBubbles, jni.BooleanValue(jArg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetBlockable calls android.app.NotificationChannel.setBlockable.
+func (m *notificationChannel) SetBlockable(arg0 bool) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelSetBlockable, jni.BooleanValue(jArg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetBypassDnd calls android.app.NotificationChannel.setBypassDnd.
+func (m *notificationChannel) SetBypassDnd(arg0 bool) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelSetBypassDnd, jni.BooleanValue(jArg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetConversationId calls android.app.NotificationChannel.setConversationId.
+func (m *notificationChannel) SetConversationId(arg0 string, arg1 string) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelSetConversationId, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetDescription calls android.app.NotificationChannel.setDescription.
+func (m *notificationChannel) SetDescription(arg0 string) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelSetDescription, jni.ObjectValue(&jArg0.Object),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetGroup calls android.app.NotificationChannel.setGroup.
+func (m *notificationChannel) SetGroup(arg0 string) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelSetGroup, jni.ObjectValue(&jArg0.Object),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetImportance calls android.app.NotificationChannel.setImportance.
+func (m *notificationChannel) SetImportance(arg0 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelSetImportance, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetLightColor calls android.app.NotificationChannel.setLightColor.
+func (m *notificationChannel) SetLightColor(arg0 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelSetLightColor, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetLockscreenVisibility calls android.app.NotificationChannel.setLockscreenVisibility.
+func (m *notificationChannel) SetLockscreenVisibility(arg0 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelSetLockscreenVisibility, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetName calls android.app.NotificationChannel.setName.
+func (m *notificationChannel) SetName(arg0 string) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelSetName, jni.ObjectValue(&jArg0.Object),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetShowBadge calls android.app.NotificationChannel.setShowBadge.
+func (m *notificationChannel) SetShowBadge(arg0 bool) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = 1
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelSetShowBadge, jni.BooleanValue(jArg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetSound calls android.app.NotificationChannel.setSound.
+func (m *notificationChannel) SetSound(arg0 *jni.Object, arg1 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelSetSound, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetVibrationEffect calls android.app.NotificationChannel.setVibrationEffect.
+func (m *notificationChannel) SetVibrationEffect(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelSetVibrationEffect, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetVibrationPattern calls android.app.NotificationChannel.setVibrationPattern.
+func (m *notificationChannel) SetVibrationPattern(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelSetVibrationPattern, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// ShouldShowLights calls android.app.NotificationChannel.shouldShowLights.
+func (m *notificationChannel) ShouldShowLights() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midnotificationChannelShouldShowLights,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// ShouldVibrate calls android.app.NotificationChannel.shouldVibrate.
+func (m *notificationChannel) ShouldVibrate() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midnotificationChannelShouldVibrate,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// ToString calls android.app.NotificationChannel.toString.
+func (m *notificationChannel) ToString() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midnotificationChannelToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// WriteToParcel calls android.app.NotificationChannel.writeToParcel.
+func (m *notificationChannel) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnotificationChannelWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
 }

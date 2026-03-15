@@ -3,7 +3,21 @@
 package location
 
 const (
-	GPS     = "gps"
-	Network = "network"
-	Passive = "passive"
+	ActionGnssCapabilitiesChanged = ""
+	ExtraGnssCapabilities         = ""
+	ExtraLocationEnabled          = ""
+	ExtraProviderEnabled          = ""
+	ExtraProviderName             = ""
+	FusedProvider                 = ""
+	GpsProvider                   = ""
+	KeyFlushComplete              = ""
+	KeyLocations                  = ""
+	KeyLocationChanged            = ""
+	KeyProviderEnabled            = ""
+	KeyProximityEntering          = ""
+	KeyStatusChanged              = ""
+	ModeChangedAction             = ""
+	NetworkProvider               = ""
+	PassiveProvider               = ""
+	ProvidersChangedAction        = ""
 )

@@ -17,25 +17,262 @@ var (
 	_ *app.Context
 )
 
-// printJob holds data extracted from android.print.PrintJob.
+// printJob wraps android.print.PrintJob.
 type printJob struct {
-	Info printJobInfo
+	VM  *jni.VM
+	Obj *jni.GlobalRef
 }
 
-// ExtractprintJob extracts all fields from a android.print.PrintJob JNI object.
-func ExtractprintJob(env *jni.Env, obj *jni.Object) (*printJob, error) {
-	if err := ensureInit(env); err != nil {
-		return nil, err
-	}
-	var result printJob
+// Cancel calls android.print.PrintJob.cancel.
+func (m *printJob) Cancel() error {
 
-	{
-		raw, err := env.CallObjectMethod(obj, midprintJobInfo)
-		if err != nil {
-			return nil, fmt.Errorf("printJob.Info: %w", err)
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
 		}
-		_ = raw // TODO: conversion to printJobInfo requires manual wrapper
-	}
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midprintJobCancel,
+		)
+		return callErr
+	})
+	return callErr
+}
 
-	return &result, nil
+// Equals calls android.print.PrintJob.equals.
+func (m *printJob) Equals(arg0 *jni.Object) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midprintJobEquals, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetId calls android.print.PrintJob.getId.
+func (m *printJob) GetId() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midprintJobGetId,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetInfo calls android.print.PrintJob.getInfo.
+func (m *printJob) GetInfo() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midprintJobGetInfo,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// HashCode calls android.print.PrintJob.hashCode.
+func (m *printJob) HashCode() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midprintJobHashCode,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsBlocked calls android.print.PrintJob.isBlocked.
+func (m *printJob) IsBlocked() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midprintJobIsBlocked,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsCancelled calls android.print.PrintJob.isCancelled.
+func (m *printJob) IsCancelled() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midprintJobIsCancelled,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsCompleted calls android.print.PrintJob.isCompleted.
+func (m *printJob) IsCompleted() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midprintJobIsCompleted,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsFailed calls android.print.PrintJob.isFailed.
+func (m *printJob) IsFailed() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midprintJobIsFailed,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsQueued calls android.print.PrintJob.isQueued.
+func (m *printJob) IsQueued() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midprintJobIsQueued,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsStarted calls android.print.PrintJob.isStarted.
+func (m *printJob) IsStarted() (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midprintJobIsStarted,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// Restart calls android.print.PrintJob.restart.
+func (m *printJob) Restart() error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midprintJobRestart,
+		)
+		return callErr
+	})
+	return callErr
 }

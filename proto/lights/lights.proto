@@ -13,17 +13,60 @@ message DescribeContentsResponse {
   int32 result = 1;
 }
 
-message GetColorRequest {
+message EqualsRequest {
+  int64 arg0 = 1;
 }
 
-message GetColorResponse {
+message EqualsResponse {
+  bool result = 1;
+}
+
+message GetIdRequest {
+}
+
+message GetIdResponse {
   int32 result = 1;
 }
 
-message GetPlayerIdRequest {
+message GetNameRequest {
 }
 
-message GetPlayerIdResponse {
+message GetNameResponse {
+  string result = 1;
+}
+
+message GetOrdinalRequest {
+}
+
+message GetOrdinalResponse {
+  int32 result = 1;
+}
+
+message GetTypeRequest {
+}
+
+message GetTypeResponse {
+  int32 result = 1;
+}
+
+message HasBrightnessControlRequest {
+}
+
+message HasBrightnessControlResponse {
+  bool result = 1;
+}
+
+message HasRgbControlRequest {
+}
+
+message HasRgbControlResponse {
+  bool result = 1;
+}
+
+message HashCodeRequest {
+}
+
+message HashCodeResponse {
   int32 result = 1;
 }
 
@@ -42,39 +85,16 @@ message WriteToParcelRequest {
 message WriteToParcelResponse {
 }
 
-message BuildRequest {
-}
-
-message BuildResponse {
-  int64 result = 1;
-}
-
-message SetColorRequest {
-  int32 arg0 = 1;
-}
-
-message SetColorResponse {
-  int64 result = 1;
-}
-
-message SetPlayerIdRequest {
-  int32 arg0 = 1;
-}
-
-message SetPlayerIdResponse {
-  int64 result = 1;
-}
-
-service LightStateService {
+service LightService {
   rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
-  rpc GetColor (GetColorRequest) returns (GetColorResponse);
-  rpc GetPlayerId (GetPlayerIdRequest) returns (GetPlayerIdResponse);
+  rpc Equals (EqualsRequest) returns (EqualsResponse);
+  rpc GetId (GetIdRequest) returns (GetIdResponse);
+  rpc GetName (GetNameRequest) returns (GetNameResponse);
+  rpc GetOrdinal (GetOrdinalRequest) returns (GetOrdinalResponse);
+  rpc GetType (GetTypeRequest) returns (GetTypeResponse);
+  rpc HasBrightnessControl (HasBrightnessControlRequest) returns (HasBrightnessControlResponse);
+  rpc HasRgbControl (HasRgbControlRequest) returns (HasRgbControlResponse);
+  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
   rpc ToString (ToStringRequest) returns (ToStringResponse);
   rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
-}
-
-service LightStateBuilderService {
-  rpc Build (BuildRequest) returns (BuildResponse);
-  rpc SetColor (SetColorRequest) returns (SetColorResponse);
-  rpc SetPlayerId (SetPlayerIdRequest) returns (SetPlayerIdResponse);
 }

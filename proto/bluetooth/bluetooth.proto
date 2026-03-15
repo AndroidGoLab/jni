@@ -6,11 +6,19 @@ package bluetooth;
 
 option go_package = "github.com/xaionaro-go/jni/proto/bluetooth";
 
-message AddDescriptorRequest {
+message AddCharacteristicRequest {
   int64 arg0 = 1;
 }
 
-message AddDescriptorResponse {
+message AddCharacteristicResponse {
+  bool result = 1;
+}
+
+message AddServiceRequest {
+  int64 arg0 = 1;
+}
+
+message AddServiceResponse {
   bool result = 1;
 }
 
@@ -21,27 +29,25 @@ message DescribeContentsResponse {
   int32 result = 1;
 }
 
-message GetDescriptorRequest {
+message GetCharacteristicRequest {
   int64 arg0 = 1;
 }
 
-message GetDescriptorResponse {
+message GetCharacteristicResponse {
   int64 result = 1;
 }
 
-message GetDescriptorsRequest {
+message GetCharacteristicsRequest {
 }
 
-message GetDescriptorsResponse {
+message GetCharacteristicsResponse {
   int64 result = 1;
 }
 
-message GetFloatValueRequest {
-  int32 arg0 = 1;
-  int32 arg1 = 2;
+message GetIncludedServicesRequest {
 }
 
-message GetFloatValueResponse {
+message GetIncludedServicesResponse {
   int64 result = 1;
 }
 
@@ -52,42 +58,11 @@ message GetInstanceIdResponse {
   int32 result = 1;
 }
 
-message GetIntValueRequest {
-  int32 arg0 = 1;
-  int32 arg1 = 2;
+message GetTypeRequest {
 }
 
-message GetIntValueResponse {
-  int64 result = 1;
-}
-
-message GetPermissionsRequest {
-}
-
-message GetPermissionsResponse {
+message GetTypeResponse {
   int32 result = 1;
-}
-
-message GetPropertiesRequest {
-}
-
-message GetPropertiesResponse {
-  int32 result = 1;
-}
-
-message GetServiceRequest {
-}
-
-message GetServiceResponse {
-  int64 result = 1;
-}
-
-message GetStringValueRequest {
-  int32 arg0 = 1;
-}
-
-message GetStringValueResponse {
-  string result = 1;
 }
 
 message GetUuidRequest {
@@ -95,64 +70,6 @@ message GetUuidRequest {
 
 message GetUuidResponse {
   int64 result = 1;
-}
-
-message GetValueRequest {
-}
-
-message GetValueResponse {
-  int64 result = 1;
-}
-
-message GetWriteTypeRequest {
-}
-
-message GetWriteTypeResponse {
-  int32 result = 1;
-}
-
-message SetValue1Request {
-  int64 arg0 = 1;
-}
-
-message SetValue1Response {
-  bool result = 1;
-}
-
-message SetValue3_1Request {
-  int32 arg0 = 1;
-  int32 arg1 = 2;
-  int32 arg2 = 3;
-}
-
-message SetValue3_1Response {
-  bool result = 1;
-}
-
-message SetValue4_2Request {
-  int32 arg0 = 1;
-  int32 arg1 = 2;
-  int32 arg2 = 3;
-  int32 arg3 = 4;
-}
-
-message SetValue4_2Response {
-  bool result = 1;
-}
-
-message SetValue1_3Request {
-  string arg0 = 1;
-}
-
-message SetValue1_3Response {
-  bool result = 1;
-}
-
-message SetWriteTypeRequest {
-  int32 arg0 = 1;
-}
-
-message SetWriteTypeResponse {
 }
 
 message WriteToParcelRequest {
@@ -163,25 +80,15 @@ message WriteToParcelRequest {
 message WriteToParcelResponse {
 }
 
-service BluetoothGattCharacteristicService {
-  rpc AddDescriptor (AddDescriptorRequest) returns (AddDescriptorResponse);
+service BluetoothGattServiceService {
+  rpc AddCharacteristic (AddCharacteristicRequest) returns (AddCharacteristicResponse);
+  rpc AddService (AddServiceRequest) returns (AddServiceResponse);
   rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
-  rpc GetDescriptor (GetDescriptorRequest) returns (GetDescriptorResponse);
-  rpc GetDescriptors (GetDescriptorsRequest) returns (GetDescriptorsResponse);
-  rpc GetFloatValue (GetFloatValueRequest) returns (GetFloatValueResponse);
+  rpc GetCharacteristic (GetCharacteristicRequest) returns (GetCharacteristicResponse);
+  rpc GetCharacteristics (GetCharacteristicsRequest) returns (GetCharacteristicsResponse);
+  rpc GetIncludedServices (GetIncludedServicesRequest) returns (GetIncludedServicesResponse);
   rpc GetInstanceId (GetInstanceIdRequest) returns (GetInstanceIdResponse);
-  rpc GetIntValue (GetIntValueRequest) returns (GetIntValueResponse);
-  rpc GetPermissions (GetPermissionsRequest) returns (GetPermissionsResponse);
-  rpc GetProperties (GetPropertiesRequest) returns (GetPropertiesResponse);
-  rpc GetService (GetServiceRequest) returns (GetServiceResponse);
-  rpc GetStringValue (GetStringValueRequest) returns (GetStringValueResponse);
+  rpc GetType (GetTypeRequest) returns (GetTypeResponse);
   rpc GetUuid (GetUuidRequest) returns (GetUuidResponse);
-  rpc GetValue (GetValueRequest) returns (GetValueResponse);
-  rpc GetWriteType (GetWriteTypeRequest) returns (GetWriteTypeResponse);
-  rpc SetValue1 (SetValue1Request) returns (SetValue1Response);
-  rpc SetValue3_1 (SetValue3_1Request) returns (SetValue3_1Response);
-  rpc SetValue4_2 (SetValue4_2Request) returns (SetValue4_2Response);
-  rpc SetValue1_3 (SetValue1_3Request) returns (SetValue1_3Response);
-  rpc SetWriteType (SetWriteTypeRequest) returns (SetWriteTypeResponse);
   rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
 }

@@ -3,23 +3,7 @@
 package bluetooth
 
 const (
-	DeviceTypeClassic       = 1
-	DeviceTypeLE            = 2
-	DeviceTypeDual          = 3
-	BondNone                = 10
-	BondBonding             = 11
-	BondBonded              = 12
-	ScanModeLowPower        = 0
-	ScanModeBalanced        = 1
-	ScanModeLowLatency      = 2
-	AdvertiseModeLowPower   = 0
-	AdvertiseModeBalanced   = 1
-	AdvertiseModeLowLatency = 2
-	PropertyRead            = 2
-	PropertyWrite           = 8
-	PropertyNotify          = 16
-	PropertyIndicate        = 32
-	GATTSuccess             = 0
-	StateDisconnected       = 0
-	StateConnected          = 2
+	Creator              = 0
+	ServiceTypePrimary   = 0
+	ServiceTypeSecondary = 0
 )

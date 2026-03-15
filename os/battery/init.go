@@ -20,7 +20,12 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsbatteryManager *jni.GlobalRef
+	clsbatteryManager                           *jni.GlobalRef
+	midbatteryManagerComputeChargeTimeRemaining jni.MethodID
+	midbatteryManagerGetIntProperty             jni.MethodID
+	midbatteryManagerGetLongProperty            jni.MethodID
+	midbatteryManagerGetStringProperty          jni.MethodID
+	midbatteryManagerIsCharging                 jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -46,6 +51,31 @@ func doInit(env *jni.Env) error {
 		return fmt.Errorf("find class android.os.BatteryManager: %w", err)
 	}
 	clsbatteryManager = env.NewGlobalRef(&c.Object)
+
+	midbatteryManagerComputeChargeTimeRemaining, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbatteryManager)), "computeChargeTimeRemaining", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.os.BatteryManager.computeChargeTimeRemaining: %w", err)
+	}
+
+	midbatteryManagerGetIntProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbatteryManager)), "getIntProperty", "(I)I")
+	if err != nil {
+		return fmt.Errorf("get method android.os.BatteryManager.getIntProperty: %w", err)
+	}
+
+	midbatteryManagerGetLongProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbatteryManager)), "getLongProperty", "(I)J")
+	if err != nil {
+		return fmt.Errorf("get method android.os.BatteryManager.getLongProperty: %w", err)
+	}
+
+	midbatteryManagerGetStringProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbatteryManager)), "getStringProperty", "(I)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.BatteryManager.getStringProperty: %w", err)
+	}
+
+	midbatteryManagerIsCharging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbatteryManager)), "isCharging", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.BatteryManager.isCharging: %w", err)
+	}
 
 	return nil
 }

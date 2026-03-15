@@ -20,20 +20,29 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                             *jni.GlobalRef
-	midManagersetRaw                       jni.MethodID
-	midManagersetExactRaw                  jni.MethodID
-	midManagersetExactAndAllowWhileIdleRaw jni.MethodID
-	midManagersetRepeatingRaw              jni.MethodID
-	midManagersetWindowRaw                 jni.MethodID
-	midManagersetAlarmClockRaw             jni.MethodID
-	midManagerCancel                       jni.MethodID
-	midManagergetNextAlarmClockRaw         jni.MethodID
-	midManagerCanScheduleExactAlarms       jni.MethodID
+	clsalarmManager                          *jni.GlobalRef
+	midalarmManagerCanScheduleExactAlarms    jni.MethodID
+	midalarmManagerCancel1                   jni.MethodID
+	midalarmManagerCancel1_1                 jni.MethodID
+	midalarmManagerCancelAll                 jni.MethodID
+	midalarmManagerGetNextAlarmClock         jni.MethodID
+	midalarmManagerSet                       jni.MethodID
+	midalarmManagerSetAlarmClock             jni.MethodID
+	midalarmManagerSetAndAllowWhileIdle      jni.MethodID
+	midalarmManagerSetExact                  jni.MethodID
+	midalarmManagerSetExactAndAllowWhileIdle jni.MethodID
+	midalarmManagerSetInexactRepeating       jni.MethodID
+	midalarmManagerSetRepeating              jni.MethodID
+	midalarmManagerSetTime                   jni.MethodID
+	midalarmManagerSetTimeZone               jni.MethodID
+	midalarmManagerSetWindow4                jni.MethodID
+	midalarmManagerSetWindow6_1              jni.MethodID
 
-	clsalarmClockInfo            *jni.GlobalRef
-	midalarmClockInfoTriggerTime jni.MethodID
-	midalarmClockInfoShowIntent  jni.MethodID
+	clsalarmManagerAlarmClockInfo                 *jni.GlobalRef
+	midalarmManagerAlarmClockInfoDescribeContents jni.MethodID
+	midalarmManagerAlarmClockInfoGetShowIntent    jni.MethodID
+	midalarmManagerAlarmClockInfoGetTriggerTime   jni.MethodID
+	midalarmManagerAlarmClockInfoWriteToParcel    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -58,67 +67,112 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.app.AlarmManager: %w", err)
 	}
-	clsManager = env.NewGlobalRef(&c.Object)
+	clsalarmManager = env.NewGlobalRef(&c.Object)
 
-	midManagersetRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "set", "(IJLandroid/app/PendingIntent;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.AlarmManager.set: %w", err)
-	}
-
-	midManagersetExactRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setExact", "(IJLandroid/app/PendingIntent;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.AlarmManager.setExact: %w", err)
-	}
-
-	midManagersetExactAndAllowWhileIdleRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setExactAndAllowWhileIdle", "(IJLandroid/app/PendingIntent;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.AlarmManager.setExactAndAllowWhileIdle: %w", err)
-	}
-
-	midManagersetRepeatingRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setRepeating", "(IJJLandroid/app/PendingIntent;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.AlarmManager.setRepeating: %w", err)
-	}
-
-	midManagersetWindowRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setWindow", "(IJJLandroid/app/PendingIntent;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.AlarmManager.setWindow: %w", err)
-	}
-
-	midManagersetAlarmClockRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setAlarmClock", "(Landroid/app/AlarmManager$AlarmClockInfo;Landroid/app/PendingIntent;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.AlarmManager.setAlarmClock: %w", err)
-	}
-
-	midManagerCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "cancel", "(Landroid/app/PendingIntent;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.AlarmManager.cancel: %w", err)
-	}
-
-	midManagergetNextAlarmClockRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getNextAlarmClock", "()Landroid/app/AlarmManager$AlarmClockInfo;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.AlarmManager.getNextAlarmClock: %w", err)
-	}
-
-	midManagerCanScheduleExactAlarms, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "canScheduleExactAlarms", "()Z")
+	midalarmManagerCanScheduleExactAlarms, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManager)), "canScheduleExactAlarms", "()Z")
 	if err != nil {
 		return fmt.Errorf("get method android.app.AlarmManager.canScheduleExactAlarms: %w", err)
 	}
 
+	midalarmManagerCancel1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManager)), "cancel", "(Landroid/app/AlarmManager$OnAlarmListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager.cancel: %w", err)
+	}
+
+	midalarmManagerCancel1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManager)), "cancel", "(Landroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager.cancel: %w", err)
+	}
+
+	midalarmManagerCancelAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManager)), "cancelAll", "()V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager.cancelAll: %w", err)
+	}
+
+	midalarmManagerGetNextAlarmClock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManager)), "getNextAlarmClock", "()Landroid/app/AlarmManager$AlarmClockInfo;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager.getNextAlarmClock: %w", err)
+	}
+
+	midalarmManagerSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManager)), "set", "(IJLandroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager.set: %w", err)
+	}
+
+	midalarmManagerSetAlarmClock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManager)), "setAlarmClock", "(Landroid/app/AlarmManager$AlarmClockInfo;Landroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager.setAlarmClock: %w", err)
+	}
+
+	midalarmManagerSetAndAllowWhileIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManager)), "setAndAllowWhileIdle", "(IJLandroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager.setAndAllowWhileIdle: %w", err)
+	}
+
+	midalarmManagerSetExact, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManager)), "setExact", "(IJLandroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager.setExact: %w", err)
+	}
+
+	midalarmManagerSetExactAndAllowWhileIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManager)), "setExactAndAllowWhileIdle", "(IJLandroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager.setExactAndAllowWhileIdle: %w", err)
+	}
+
+	midalarmManagerSetInexactRepeating, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManager)), "setInexactRepeating", "(IJJLandroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager.setInexactRepeating: %w", err)
+	}
+
+	midalarmManagerSetRepeating, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManager)), "setRepeating", "(IJJLandroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager.setRepeating: %w", err)
+	}
+
+	midalarmManagerSetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManager)), "setTime", "(J)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager.setTime: %w", err)
+	}
+
+	midalarmManagerSetTimeZone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManager)), "setTimeZone", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager.setTimeZone: %w", err)
+	}
+
+	midalarmManagerSetWindow4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManager)), "setWindow", "(IJJLandroid/app/PendingIntent;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager.setWindow: %w", err)
+	}
+
+	midalarmManagerSetWindow6_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManager)), "setWindow", "(IJJLjava/lang/String;Ljava/util/concurrent/Executor;Landroid/app/AlarmManager$OnAlarmListener;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager.setWindow: %w", err)
+	}
+
 	c, err = env.FindClass("android/app/AlarmManager$AlarmClockInfo")
 	if err != nil {
-		return fmt.Errorf("find class android.app.AlarmManager.AlarmClockInfo: %w", err)
+		return fmt.Errorf("find class android.app.AlarmManager$AlarmClockInfo: %w", err)
 	}
-	clsalarmClockInfo = env.NewGlobalRef(&c.Object)
+	clsalarmManagerAlarmClockInfo = env.NewGlobalRef(&c.Object)
 
-	midalarmClockInfoTriggerTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmClockInfo)), "getTriggerTime", "()J")
+	midalarmManagerAlarmClockInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManagerAlarmClockInfo)), "describeContents", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.AlarmManager.AlarmClockInfo.getTriggerTime: %w", err)
+		return fmt.Errorf("get method android.app.AlarmManager$AlarmClockInfo.describeContents: %w", err)
 	}
 
-	midalarmClockInfoShowIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmClockInfo)), "getShowIntent", "()Landroid/app/PendingIntent;")
+	midalarmManagerAlarmClockInfoGetShowIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManagerAlarmClockInfo)), "getShowIntent", "()Landroid/app/PendingIntent;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.AlarmManager.AlarmClockInfo.getShowIntent: %w", err)
+		return fmt.Errorf("get method android.app.AlarmManager$AlarmClockInfo.getShowIntent: %w", err)
+	}
+
+	midalarmManagerAlarmClockInfoGetTriggerTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManagerAlarmClockInfo)), "getTriggerTime", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager$AlarmClockInfo.getTriggerTime: %w", err)
+	}
+
+	midalarmManagerAlarmClockInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsalarmManagerAlarmClockInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.AlarmManager$AlarmClockInfo.writeToParcel: %w", err)
 	}
 
 	return nil

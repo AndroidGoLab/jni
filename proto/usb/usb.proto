@@ -6,95 +6,85 @@ package usb;
 
 option go_package = "github.com/xaionaro-go/jni/proto/usb";
 
-message DescribeContentsRequest {
+message GetAccessoryListRequest {
 }
 
-message DescribeContentsResponse {
-  int32 result = 1;
-}
-
-message GetAlternateSettingRequest {
-}
-
-message GetAlternateSettingResponse {
-  int32 result = 1;
-}
-
-message GetEndpointRequest {
-  int32 arg0 = 1;
-}
-
-message GetEndpointResponse {
+message GetAccessoryListResponse {
   int64 result = 1;
 }
 
-message GetEndpointCountRequest {
-}
-
-message GetEndpointCountResponse {
-  int32 result = 1;
-}
-
-message GetIdRequest {
-}
-
-message GetIdResponse {
-  int32 result = 1;
-}
-
-message GetInterfaceClassRequest {
-}
-
-message GetInterfaceClassResponse {
-  int32 result = 1;
-}
-
-message GetInterfaceProtocolRequest {
-}
-
-message GetInterfaceProtocolResponse {
-  int32 result = 1;
-}
-
-message GetInterfaceSubclassRequest {
-}
-
-message GetInterfaceSubclassResponse {
-  int32 result = 1;
-}
-
-message GetNameRequest {
-}
-
-message GetNameResponse {
-  string result = 1;
-}
-
-message ToStringRequest {
-}
-
-message ToStringResponse {
-  string result = 1;
-}
-
-message WriteToParcelRequest {
+message HasPermission1Request {
   int64 arg0 = 1;
-  int32 arg1 = 2;
 }
 
-message WriteToParcelResponse {
+message HasPermission1Response {
+  bool result = 1;
 }
 
-service UsbInterfaceService {
-  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
-  rpc GetAlternateSetting (GetAlternateSettingRequest) returns (GetAlternateSettingResponse);
-  rpc GetEndpoint (GetEndpointRequest) returns (GetEndpointResponse);
-  rpc GetEndpointCount (GetEndpointCountRequest) returns (GetEndpointCountResponse);
-  rpc GetId (GetIdRequest) returns (GetIdResponse);
-  rpc GetInterfaceClass (GetInterfaceClassRequest) returns (GetInterfaceClassResponse);
-  rpc GetInterfaceProtocol (GetInterfaceProtocolRequest) returns (GetInterfaceProtocolResponse);
-  rpc GetInterfaceSubclass (GetInterfaceSubclassRequest) returns (GetInterfaceSubclassResponse);
-  rpc GetName (GetNameRequest) returns (GetNameResponse);
-  rpc ToString (ToStringRequest) returns (ToStringResponse);
-  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+message HasPermission1_1Request {
+  int64 arg0 = 1;
+}
+
+message HasPermission1_1Response {
+  bool result = 1;
+}
+
+message OpenAccessoryRequest {
+  int64 arg0 = 1;
+}
+
+message OpenAccessoryResponse {
+  int64 result = 1;
+}
+
+message OpenAccessoryInputStreamRequest {
+  int64 arg0 = 1;
+}
+
+message OpenAccessoryInputStreamResponse {
+  int64 result = 1;
+}
+
+message OpenAccessoryOutputStreamRequest {
+  int64 arg0 = 1;
+}
+
+message OpenAccessoryOutputStreamResponse {
+  int64 result = 1;
+}
+
+message OpenDeviceRequest {
+  int64 arg0 = 1;
+}
+
+message OpenDeviceResponse {
+  int64 result = 1;
+}
+
+message RequestPermission2Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RequestPermission2Response {
+}
+
+message RequestPermission2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RequestPermission2_1Response {
+}
+
+service UsbManagerService {
+  rpc GetAccessoryList (GetAccessoryListRequest) returns (GetAccessoryListResponse);
+  rpc HasPermission1 (HasPermission1Request) returns (HasPermission1Response);
+  rpc HasPermission1_1 (HasPermission1_1Request) returns (HasPermission1_1Response);
+  rpc OpenAccessory (OpenAccessoryRequest) returns (OpenAccessoryResponse);
+  rpc OpenAccessoryInputStream (OpenAccessoryInputStreamRequest) returns (OpenAccessoryInputStreamResponse);
+  rpc OpenAccessoryOutputStream (OpenAccessoryOutputStreamRequest) returns (OpenAccessoryOutputStreamResponse);
+  rpc OpenDevice (OpenDeviceRequest) returns (OpenDeviceResponse);
+  rpc RequestPermission2 (RequestPermission2Request) returns (RequestPermission2Response);
+  rpc RequestPermission2_1 (RequestPermission2_1Request) returns (RequestPermission2_1Response);
 }

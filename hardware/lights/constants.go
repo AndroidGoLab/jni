@@ -3,14 +3,12 @@
 package lights
 
 const (
-	LightTypeBacklight     = 0
-	LightTypeKeyboard      = 1
-	LightTypeButtons       = 2
-	LightTypeBattery       = 3
-	LightTypeNotifications = 4
-	LightTypeAttention     = 5
-	LightTypePlayer1       = 8
-	LightTypePlayer2       = 9
-	LightTypePlayer3       = 10
-	LightTypePlayer4       = 11
+	Creator                    = 0
+	LightCapabilityBrightness  = 0
+	LightCapabilityColorRgb    = 0
+	LightCapabilityRgb         = 0
+	LightTypeInput             = 0
+	LightTypeKeyboardBacklight = 0
+	LightTypeMicrophone        = 0
+	LightTypePlayerId          = 0
 )

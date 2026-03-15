@@ -20,104 +20,17 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsAdapter                 *jni.GlobalRef
-	midAdapterIsEnabled        jni.MethodID
-	midAdapterGetName          jni.MethodID
-	midAdapterGetAddress       jni.MethodID
-	midAdapterGetBondedDevices jni.MethodID
-	midAdapterstartDiscovery   jni.MethodID
-	midAdaptercancelDiscovery  jni.MethodID
-	midAdaptergetLeScanner     jni.MethodID
-	midAdaptergetLeAdvertiser  jni.MethodID
-	midAdapterlistenRfcomm     jni.MethodID
-
-	clsSocket                *jni.GlobalRef
-	midSocketconnect         jni.MethodID
-	midSocketgetInputStream  jni.MethodID
-	midSocketgetOutputStream jni.MethodID
-	midSocketRemoteDevice    jni.MethodID
-
-	clsServerSocket       *jni.GlobalRef
-	midServerSocketaccept jni.MethodID
-
-	clsleScanner          *jni.GlobalRef
-	midleScannerstartScan jni.MethodID
-	midleScannerstopScan  jni.MethodID
-
-	clsscanFilterBuilder                 *jni.GlobalRef
-	midscanFilterBuildersetDeviceName    jni.MethodID
-	midscanFilterBuildersetDeviceAddress jni.MethodID
-	midscanFilterBuildersetServiceUuid   jni.MethodID
-	midscanFilterBuilderbuild            jni.MethodID
-
-	clsscanSettingsBuilder               *jni.GlobalRef
-	midscanSettingsBuildersetScanMode    jni.MethodID
-	midscanSettingsBuildersetReportDelay jni.MethodID
-	midscanSettingsBuilderbuild          jni.MethodID
-
-	clsleAdvertiser                 *jni.GlobalRef
-	midleAdvertiserstartAdvertising jni.MethodID
-	midleAdvertiserstopAdvertising  jni.MethodID
-
-	clsadvertiseSettingsBuilder                 *jni.GlobalRef
-	midadvertiseSettingsBuildersetAdvertiseMode jni.MethodID
-	midadvertiseSettingsBuildersetConnectable   jni.MethodID
-	midadvertiseSettingsBuildersetTimeout       jni.MethodID
-	midadvertiseSettingsBuilderbuild            jni.MethodID
-
-	clsadvertiseDataBuilder                       *jni.GlobalRef
-	midadvertiseDataBuilderaddServiceUuid         jni.MethodID
-	midadvertiseDataBuilderaddServiceData         jni.MethodID
-	midadvertiseDataBuilderaddManufacturerData    jni.MethodID
-	midadvertiseDataBuildersetIncludeDeviceName   jni.MethodID
-	midadvertiseDataBuildersetIncludeTxPowerLevel jni.MethodID
-	midadvertiseDataBuilderbuild                  jni.MethodID
-
-	clsGATTClient                              *jni.GlobalRef
-	midGATTClientdiscoverServices              jni.MethodID
-	midGATTClientgetServices                   jni.MethodID
-	midGATTClientreadCharacteristic            jni.MethodID
-	midGATTClientwriteCharacteristic           jni.MethodID
-	midGATTClientsetCharacteristicNotification jni.MethodID
-	midGATTClientrequestMtu                    jni.MethodID
-	midGATTClientreadRemoteRssi                jni.MethodID
-
-	clsGATTServer                     *jni.GlobalRef
-	midGATTServerAddService           jni.MethodID
-	midGATTServerNotifyCharacteristic jni.MethodID
-
-	clsDevice          *jni.GlobalRef
-	midDeviceName      jni.MethodID
-	midDeviceAddress   jni.MethodID
-	midDeviceType      jni.MethodID
-	midDeviceBondState jni.MethodID
-	midDeviceUUIDs     jni.MethodID
-
-	clsScanResult       *jni.GlobalRef
-	midScanResultDevice jni.MethodID
-	midScanResultRSSI   jni.MethodID
-	midScanResultRecord jni.MethodID
-
-	clsService                *jni.GlobalRef
-	midServiceUUID            jni.MethodID
-	midServiceCharacteristics jni.MethodID
-
-	clsCharacteristic            *jni.GlobalRef
-	midCharacteristicUUID        jni.MethodID
-	midCharacteristicProperties  jni.MethodID
-	midCharacteristicDescriptors jni.MethodID
-	midCharacteristicValue       jni.MethodID
-
-	clsDescriptor     *jni.GlobalRef
-	midDescriptorUUID jni.MethodID
-
-	clsscanCallback *jni.GlobalRef
-
-	clsadvertiseCallback *jni.GlobalRef
-
-	clsgattCallback *jni.GlobalRef
-
-	clsgattServerCallback *jni.GlobalRef
+	clsbluetoothGattService                    *jni.GlobalRef
+	midbluetoothGattServiceAddCharacteristic   jni.MethodID
+	midbluetoothGattServiceAddService          jni.MethodID
+	midbluetoothGattServiceDescribeContents    jni.MethodID
+	midbluetoothGattServiceGetCharacteristic   jni.MethodID
+	midbluetoothGattServiceGetCharacteristics  jni.MethodID
+	midbluetoothGattServiceGetIncludedServices jni.MethodID
+	midbluetoothGattServiceGetInstanceId       jni.MethodID
+	midbluetoothGattServiceGetType             jni.MethodID
+	midbluetoothGattServiceGetUuid             jni.MethodID
+	midbluetoothGattServiceWriteToParcel       jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -138,420 +51,61 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/bluetooth/BluetoothAdapter")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.BluetoothAdapter: %w", err)
-	}
-	clsAdapter = env.NewGlobalRef(&c.Object)
-
-	midAdapterIsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "isEnabled", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothAdapter.isEnabled: %w", err)
-	}
-
-	midAdapterGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getName", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothAdapter.getName: %w", err)
-	}
-
-	midAdapterGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getAddress", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothAdapter.getAddress: %w", err)
-	}
-
-	midAdapterGetBondedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getBondedDevices", "()Ljava/util/Set;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothAdapter.getBondedDevices: %w", err)
-	}
-
-	midAdapterstartDiscovery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "startDiscovery", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothAdapter.startDiscovery: %w", err)
-	}
-
-	midAdaptercancelDiscovery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "cancelDiscovery", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothAdapter.cancelDiscovery: %w", err)
-	}
-
-	midAdaptergetLeScanner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getBluetoothLeScanner", "()Landroid/bluetooth/le/BluetoothLeScanner;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothAdapter.getBluetoothLeScanner: %w", err)
-	}
-
-	midAdaptergetLeAdvertiser, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getBluetoothLeAdvertiser", "()Landroid/bluetooth/le/BluetoothLeAdvertiser;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothAdapter.getBluetoothLeAdvertiser: %w", err)
-	}
-
-	midAdapterlistenRfcomm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "listenUsingRfcommWithServiceRecord", "(Ljava/lang/String;Ljava/util/UUID;)Landroid/bluetooth/BluetoothServerSocket;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothAdapter.listenUsingRfcommWithServiceRecord: %w", err)
-	}
-
-	c, err = env.FindClass("android/bluetooth/BluetoothSocket")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.BluetoothSocket: %w", err)
-	}
-	clsSocket = env.NewGlobalRef(&c.Object)
-
-	midSocketconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "connect", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothSocket.connect: %w", err)
-	}
-
-	midSocketgetInputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getInputStream", "()Ljava/io/InputStream;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothSocket.getInputStream: %w", err)
-	}
-
-	midSocketgetOutputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getOutputStream", "()Ljava/io/OutputStream;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothSocket.getOutputStream: %w", err)
-	}
-
-	midSocketRemoteDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocket)), "getRemoteDevice", "()Landroid/bluetooth/BluetoothDevice;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothSocket.getRemoteDevice: %w", err)
-	}
-
-	c, err = env.FindClass("android/bluetooth/BluetoothServerSocket")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.BluetoothServerSocket: %w", err)
-	}
-	clsServerSocket = env.NewGlobalRef(&c.Object)
-
-	midServerSocketaccept, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServerSocket)), "accept", "(I)Landroid/bluetooth/BluetoothSocket;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothServerSocket.accept: %w", err)
-	}
-
-	c, err = env.FindClass("android/bluetooth/le/BluetoothLeScanner")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.le.BluetoothLeScanner: %w", err)
-	}
-	clsleScanner = env.NewGlobalRef(&c.Object)
-
-	midleScannerstartScan, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsleScanner)), "startScan", "(Ljava/util/List;Landroid/bluetooth/le/ScanSettings;Landroid/bluetooth/le/ScanCallback;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.BluetoothLeScanner.startScan: %w", err)
-	}
-
-	midleScannerstopScan, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsleScanner)), "stopScan", "(Landroid/bluetooth/le/ScanCallback;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.BluetoothLeScanner.stopScan: %w", err)
-	}
-
-	c, err = env.FindClass("android/bluetooth/le/ScanFilter$Builder")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.le.ScanFilter.Builder: %w", err)
-	}
-	clsscanFilterBuilder = env.NewGlobalRef(&c.Object)
-
-	midscanFilterBuildersetDeviceName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanFilterBuilder)), "setDeviceName", "(Ljava/lang/String;)Landroid/bluetooth/le/ScanFilter$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.ScanFilter.Builder.setDeviceName: %w", err)
-	}
-
-	midscanFilterBuildersetDeviceAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanFilterBuilder)), "setDeviceAddress", "(Ljava/lang/String;)Landroid/bluetooth/le/ScanFilter$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.ScanFilter.Builder.setDeviceAddress: %w", err)
-	}
-
-	midscanFilterBuildersetServiceUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanFilterBuilder)), "setServiceUuid", "(Landroid/os/ParcelUuid;)Landroid/bluetooth/le/ScanFilter$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.ScanFilter.Builder.setServiceUuid: %w", err)
-	}
-
-	midscanFilterBuilderbuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanFilterBuilder)), "build", "()Landroid/bluetooth/le/ScanFilter;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.ScanFilter.Builder.build: %w", err)
-	}
-
-	c, err = env.FindClass("android/bluetooth/le/ScanSettings$Builder")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.le.ScanSettings.Builder: %w", err)
-	}
-	clsscanSettingsBuilder = env.NewGlobalRef(&c.Object)
-
-	midscanSettingsBuildersetScanMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanSettingsBuilder)), "setScanMode", "(I)Landroid/bluetooth/le/ScanSettings$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.ScanSettings.Builder.setScanMode: %w", err)
-	}
-
-	midscanSettingsBuildersetReportDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanSettingsBuilder)), "setReportDelay", "(J)Landroid/bluetooth/le/ScanSettings$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.ScanSettings.Builder.setReportDelay: %w", err)
-	}
-
-	midscanSettingsBuilderbuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsscanSettingsBuilder)), "build", "()Landroid/bluetooth/le/ScanSettings;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.ScanSettings.Builder.build: %w", err)
-	}
-
-	c, err = env.FindClass("android/bluetooth/le/BluetoothLeAdvertiser")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.le.BluetoothLeAdvertiser: %w", err)
-	}
-	clsleAdvertiser = env.NewGlobalRef(&c.Object)
-
-	midleAdvertiserstartAdvertising, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsleAdvertiser)), "startAdvertising", "(Landroid/bluetooth/le/AdvertiseSettings;Landroid/bluetooth/le/AdvertiseData;Landroid/bluetooth/le/AdvertiseCallback;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.BluetoothLeAdvertiser.startAdvertising: %w", err)
-	}
-
-	midleAdvertiserstopAdvertising, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsleAdvertiser)), "stopAdvertising", "(Landroid/bluetooth/le/AdvertiseCallback;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.BluetoothLeAdvertiser.stopAdvertising: %w", err)
-	}
-
-	c, err = env.FindClass("android/bluetooth/le/AdvertiseSettings$Builder")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.le.AdvertiseSettings.Builder: %w", err)
-	}
-	clsadvertiseSettingsBuilder = env.NewGlobalRef(&c.Object)
-
-	midadvertiseSettingsBuildersetAdvertiseMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsadvertiseSettingsBuilder)), "setAdvertiseMode", "(I)Landroid/bluetooth/le/AdvertiseSettings$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.AdvertiseSettings.Builder.setAdvertiseMode: %w", err)
-	}
-
-	midadvertiseSettingsBuildersetConnectable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsadvertiseSettingsBuilder)), "setConnectable", "(Z)Landroid/bluetooth/le/AdvertiseSettings$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.AdvertiseSettings.Builder.setConnectable: %w", err)
-	}
-
-	midadvertiseSettingsBuildersetTimeout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsadvertiseSettingsBuilder)), "setTimeout", "(I)Landroid/bluetooth/le/AdvertiseSettings$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.AdvertiseSettings.Builder.setTimeout: %w", err)
-	}
-
-	midadvertiseSettingsBuilderbuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsadvertiseSettingsBuilder)), "build", "()Landroid/bluetooth/le/AdvertiseSettings;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.AdvertiseSettings.Builder.build: %w", err)
-	}
-
-	c, err = env.FindClass("android/bluetooth/le/AdvertiseData$Builder")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.le.AdvertiseData.Builder: %w", err)
-	}
-	clsadvertiseDataBuilder = env.NewGlobalRef(&c.Object)
-
-	midadvertiseDataBuilderaddServiceUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsadvertiseDataBuilder)), "addServiceUuid", "(Landroid/os/ParcelUuid;)Landroid/bluetooth/le/AdvertiseData$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.AdvertiseData.Builder.addServiceUuid: %w", err)
-	}
-
-	midadvertiseDataBuilderaddServiceData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsadvertiseDataBuilder)), "addServiceData", "(Landroid/os/ParcelUuid;[B)Landroid/bluetooth/le/AdvertiseData$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.AdvertiseData.Builder.addServiceData: %w", err)
-	}
-
-	midadvertiseDataBuilderaddManufacturerData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsadvertiseDataBuilder)), "addManufacturerData", "(I[B)Landroid/bluetooth/le/AdvertiseData$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.AdvertiseData.Builder.addManufacturerData: %w", err)
-	}
-
-	midadvertiseDataBuildersetIncludeDeviceName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsadvertiseDataBuilder)), "setIncludeDeviceName", "(Z)Landroid/bluetooth/le/AdvertiseData$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.AdvertiseData.Builder.setIncludeDeviceName: %w", err)
-	}
-
-	midadvertiseDataBuildersetIncludeTxPowerLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsadvertiseDataBuilder)), "setIncludeTxPowerLevel", "(Z)Landroid/bluetooth/le/AdvertiseData$Builder;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.AdvertiseData.Builder.setIncludeTxPowerLevel: %w", err)
-	}
-
-	midadvertiseDataBuilderbuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsadvertiseDataBuilder)), "build", "()Landroid/bluetooth/le/AdvertiseData;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.AdvertiseData.Builder.build: %w", err)
-	}
-
-	c, err = env.FindClass("android/bluetooth/BluetoothGatt")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.BluetoothGatt: %w", err)
-	}
-	clsGATTClient = env.NewGlobalRef(&c.Object)
-
-	midGATTClientdiscoverServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGATTClient)), "discoverServices", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothGatt.discoverServices: %w", err)
-	}
-
-	midGATTClientgetServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGATTClient)), "getServices", "()Ljava/util/List;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothGatt.getServices: %w", err)
-	}
-
-	midGATTClientreadCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGATTClient)), "readCharacteristic", "(Landroid/bluetooth/BluetoothGattCharacteristic;)Z")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothGatt.readCharacteristic: %w", err)
-	}
-
-	midGATTClientwriteCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGATTClient)), "writeCharacteristic", "(Landroid/bluetooth/BluetoothGattCharacteristic;)Z")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothGatt.writeCharacteristic: %w", err)
-	}
-
-	midGATTClientsetCharacteristicNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGATTClient)), "setCharacteristicNotification", "(Landroid/bluetooth/BluetoothGattCharacteristic;Z)Z")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothGatt.setCharacteristicNotification: %w", err)
-	}
-
-	midGATTClientrequestMtu, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGATTClient)), "requestMtu", "(I)Z")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothGatt.requestMtu: %w", err)
-	}
-
-	midGATTClientreadRemoteRssi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGATTClient)), "readRemoteRssi", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothGatt.readRemoteRssi: %w", err)
-	}
-
-	c, err = env.FindClass("android/bluetooth/BluetoothGattServer")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.BluetoothGattServer: %w", err)
-	}
-	clsGATTServer = env.NewGlobalRef(&c.Object)
-
-	midGATTServerAddService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGATTServer)), "addService", "(Landroid/bluetooth/BluetoothGattService;)Z")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothGattServer.addService: %w", err)
-	}
-
-	midGATTServerNotifyCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGATTServer)), "notifyCharacteristicChanged", "(Landroid/bluetooth/BluetoothDevice;Landroid/bluetooth/BluetoothGattCharacteristic;Z)Z")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothGattServer.notifyCharacteristicChanged: %w", err)
-	}
-
-	c, err = env.FindClass("android/bluetooth/BluetoothDevice")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.BluetoothDevice: %w", err)
-	}
-	clsDevice = env.NewGlobalRef(&c.Object)
-
-	midDeviceName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getName", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothDevice.getName: %w", err)
-	}
-
-	midDeviceAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getAddress", "()Ljava/lang/String;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothDevice.getAddress: %w", err)
-	}
-
-	midDeviceType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getType", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothDevice.getType: %w", err)
-	}
-
-	midDeviceBondState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getBondState", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothDevice.getBondState: %w", err)
-	}
-
-	midDeviceUUIDs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getUuids", "()[Landroid/os/ParcelUuid;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothDevice.getUuids: %w", err)
-	}
-
-	c, err = env.FindClass("android/bluetooth/le/ScanResult")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.le.ScanResult: %w", err)
-	}
-	clsScanResult = env.NewGlobalRef(&c.Object)
-
-	midScanResultDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScanResult)), "getDevice", "()Landroid/bluetooth/BluetoothDevice;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.ScanResult.getDevice: %w", err)
-	}
-
-	midScanResultRSSI, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScanResult)), "getRssi", "()I")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.ScanResult.getRssi: %w", err)
-	}
-
-	midScanResultRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScanResult)), "getScanRecord", "()Landroid/bluetooth/le/ScanRecord;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.le.ScanResult.getScanRecord: %w", err)
-	}
-
 	c, err = env.FindClass("android/bluetooth/BluetoothGattService")
 	if err != nil {
 		return fmt.Errorf("find class android.bluetooth.BluetoothGattService: %w", err)
 	}
-	clsService = env.NewGlobalRef(&c.Object)
+	clsbluetoothGattService = env.NewGlobalRef(&c.Object)
 
-	midServiceUUID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "getUuid", "()Ljava/util/UUID;")
+	midbluetoothGattServiceAddCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "addCharacteristic", "(Landroid/bluetooth/BluetoothGattCharacteristic;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothGattService.getUuid: %w", err)
+		return fmt.Errorf("get method android.bluetooth.BluetoothGattService.addCharacteristic: %w", err)
 	}
 
-	midServiceCharacteristics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "getCharacteristics", "()Ljava/util/List;")
+	midbluetoothGattServiceAddService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "addService", "(Landroid/bluetooth/BluetoothGattService;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.bluetooth.BluetoothGattService.addService: %w", err)
+	}
+
+	midbluetoothGattServiceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "describeContents", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.bluetooth.BluetoothGattService.describeContents: %w", err)
+	}
+
+	midbluetoothGattServiceGetCharacteristic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "getCharacteristic", "(Ljava/util/UUID;)Landroid/bluetooth/BluetoothGattCharacteristic;")
+	if err != nil {
+		return fmt.Errorf("get method android.bluetooth.BluetoothGattService.getCharacteristic: %w", err)
+	}
+
+	midbluetoothGattServiceGetCharacteristics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "getCharacteristics", "()Ljava/util/List<android$bluetooth$BluetoothGattCharacteristic>;")
 	if err != nil {
 		return fmt.Errorf("get method android.bluetooth.BluetoothGattService.getCharacteristics: %w", err)
 	}
 
-	c, err = env.FindClass("android/bluetooth/BluetoothGattCharacteristic")
+	midbluetoothGattServiceGetIncludedServices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "getIncludedServices", "()Ljava/util/List<android$bluetooth$BluetoothGattService>;")
 	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.BluetoothGattCharacteristic: %w", err)
-	}
-	clsCharacteristic = env.NewGlobalRef(&c.Object)
-
-	midCharacteristicUUID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharacteristic)), "getUuid", "()Ljava/util/UUID;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothGattCharacteristic.getUuid: %w", err)
+		return fmt.Errorf("get method android.bluetooth.BluetoothGattService.getIncludedServices: %w", err)
 	}
 
-	midCharacteristicProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharacteristic)), "getProperties", "()I")
+	midbluetoothGattServiceGetInstanceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "getInstanceId", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothGattCharacteristic.getProperties: %w", err)
+		return fmt.Errorf("get method android.bluetooth.BluetoothGattService.getInstanceId: %w", err)
 	}
 
-	midCharacteristicDescriptors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharacteristic)), "getDescriptors", "()Ljava/util/List;")
+	midbluetoothGattServiceGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "getType", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothGattCharacteristic.getDescriptors: %w", err)
+		return fmt.Errorf("get method android.bluetooth.BluetoothGattService.getType: %w", err)
 	}
 
-	midCharacteristicValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharacteristic)), "getValue", "()[B")
+	midbluetoothGattServiceGetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "getUuid", "()Ljava/util/UUID;")
 	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothGattCharacteristic.getValue: %w", err)
+		return fmt.Errorf("get method android.bluetooth.BluetoothGattService.getUuid: %w", err)
 	}
 
-	c, err = env.FindClass("android/bluetooth/BluetoothGattDescriptor")
+	midbluetoothGattServiceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbluetoothGattService)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.BluetoothGattDescriptor: %w", err)
+		return fmt.Errorf("get method android.bluetooth.BluetoothGattService.writeToParcel: %w", err)
 	}
-	clsDescriptor = env.NewGlobalRef(&c.Object)
-
-	midDescriptorUUID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDescriptor)), "getUuid", "()Ljava/util/UUID;")
-	if err != nil {
-		return fmt.Errorf("get method android.bluetooth.BluetoothGattDescriptor.getUuid: %w", err)
-	}
-
-	c, err = env.FindClass("android/bluetooth/le/ScanCallback")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.le.ScanCallback: %w", err)
-	}
-	clsscanCallback = env.NewGlobalRef(&c.Object)
-
-	c, err = env.FindClass("android/bluetooth/le/AdvertiseCallback")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.le.AdvertiseCallback: %w", err)
-	}
-	clsadvertiseCallback = env.NewGlobalRef(&c.Object)
-
-	c, err = env.FindClass("android/bluetooth/BluetoothGattCallback")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.BluetoothGattCallback: %w", err)
-	}
-	clsgattCallback = env.NewGlobalRef(&c.Object)
-
-	c, err = env.FindClass("android/bluetooth/BluetoothGattServerCallback")
-	if err != nil {
-		return fmt.Errorf("find class android.bluetooth.BluetoothGattServerCallback: %w", err)
-	}
-	clsgattServerCallback = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

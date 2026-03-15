@@ -6,64 +6,578 @@ package job;
 
 option go_package = "github.com/xaionaro-go/jni/proto/job";
 
-message CanRunUserInitiatedJobsRequest {
+message DescribeContentsRequest {
 }
 
-message CanRunUserInitiatedJobsResponse {
-  bool result = 1;
-}
-
-message CancelInAllNamespacesRequest {
-}
-
-message CancelInAllNamespacesResponse {
-}
-
-message ForNamespaceRequest {
-  string arg0 = 1;
-}
-
-message ForNamespaceResponse {
-  int64 result = 1;
-}
-
-message GetNamespaceRequest {
-}
-
-message GetNamespaceResponse {
-  string result = 1;
-}
-
-message GetPendingJobReasonRequest {
-  int32 arg0 = 1;
-}
-
-message GetPendingJobReasonResponse {
+message DescribeContentsResponse {
   int32 result = 1;
 }
 
-message GetPendingJobReasonsRequest {
-  int32 arg0 = 1;
+message EqualsRequest {
+  int64 arg0 = 1;
 }
 
-message GetPendingJobReasonsResponse {
+message EqualsResponse {
+  bool result = 1;
+}
+
+message GetBackoffPolicyRequest {
+}
+
+message GetBackoffPolicyResponse {
+  int32 result = 1;
+}
+
+message GetClipDataRequest {
+}
+
+message GetClipDataResponse {
   int64 result = 1;
 }
 
-message GetPendingJobReasonsHistoryRequest {
-  int32 arg0 = 1;
+message GetClipGrantFlagsRequest {
 }
 
-message GetPendingJobReasonsHistoryResponse {
+message GetClipGrantFlagsResponse {
+  int32 result = 1;
+}
+
+message GetDebugTagsRequest {
+}
+
+message GetDebugTagsResponse {
   int64 result = 1;
 }
 
-service JobSchedulerService {
-  rpc CanRunUserInitiatedJobs (CanRunUserInitiatedJobsRequest) returns (CanRunUserInitiatedJobsResponse);
-  rpc CancelInAllNamespaces (CancelInAllNamespacesRequest) returns (CancelInAllNamespacesResponse);
-  rpc ForNamespace (ForNamespaceRequest) returns (ForNamespaceResponse);
-  rpc GetNamespace (GetNamespaceRequest) returns (GetNamespaceResponse);
-  rpc GetPendingJobReason (GetPendingJobReasonRequest) returns (GetPendingJobReasonResponse);
-  rpc GetPendingJobReasons (GetPendingJobReasonsRequest) returns (GetPendingJobReasonsResponse);
-  rpc GetPendingJobReasonsHistory (GetPendingJobReasonsHistoryRequest) returns (GetPendingJobReasonsHistoryResponse);
+message GetEstimatedNetworkDownloadBytesRequest {
+}
+
+message GetEstimatedNetworkDownloadBytesResponse {
+  int64 result = 1;
+}
+
+message GetEstimatedNetworkUploadBytesRequest {
+}
+
+message GetEstimatedNetworkUploadBytesResponse {
+  int64 result = 1;
+}
+
+message GetExtrasRequest {
+}
+
+message GetExtrasResponse {
+  int64 result = 1;
+}
+
+message GetFlexMillisRequest {
+}
+
+message GetFlexMillisResponse {
+  int64 result = 1;
+}
+
+message GetIdRequest {
+}
+
+message GetIdResponse {
+  int32 result = 1;
+}
+
+message GetInitialBackoffMillisRequest {
+}
+
+message GetInitialBackoffMillisResponse {
+  int64 result = 1;
+}
+
+message GetIntervalMillisRequest {
+}
+
+message GetIntervalMillisResponse {
+  int64 result = 1;
+}
+
+message GetMaxExecutionDelayMillisRequest {
+}
+
+message GetMaxExecutionDelayMillisResponse {
+  int64 result = 1;
+}
+
+message GetMinLatencyMillisRequest {
+}
+
+message GetMinLatencyMillisResponse {
+  int64 result = 1;
+}
+
+message GetMinimumNetworkChunkBytesRequest {
+}
+
+message GetMinimumNetworkChunkBytesResponse {
+  int64 result = 1;
+}
+
+message GetNetworkTypeRequest {
+}
+
+message GetNetworkTypeResponse {
+  int32 result = 1;
+}
+
+message GetPriorityRequest {
+}
+
+message GetPriorityResponse {
+  int32 result = 1;
+}
+
+message GetRequiredNetworkRequest {
+}
+
+message GetRequiredNetworkResponse {
+  int64 result = 1;
+}
+
+message GetServiceRequest {
+}
+
+message GetServiceResponse {
+  int64 result = 1;
+}
+
+message GetTraceTagRequest {
+}
+
+message GetTraceTagResponse {
+  string result = 1;
+}
+
+message GetTransientExtrasRequest {
+}
+
+message GetTransientExtrasResponse {
+  int64 result = 1;
+}
+
+message GetTriggerContentMaxDelayRequest {
+}
+
+message GetTriggerContentMaxDelayResponse {
+  int64 result = 1;
+}
+
+message GetTriggerContentUpdateDelayRequest {
+}
+
+message GetTriggerContentUpdateDelayResponse {
+  int64 result = 1;
+}
+
+message GetTriggerContentUrisRequest {
+}
+
+message GetTriggerContentUrisResponse {
+  int64 result = 1;
+}
+
+message HashCodeRequest {
+}
+
+message HashCodeResponse {
+  int32 result = 1;
+}
+
+message IsExpeditedRequest {
+}
+
+message IsExpeditedResponse {
+  bool result = 1;
+}
+
+message IsImportantWhileForegroundRequest {
+}
+
+message IsImportantWhileForegroundResponse {
+  bool result = 1;
+}
+
+message IsPeriodicRequest {
+}
+
+message IsPeriodicResponse {
+  bool result = 1;
+}
+
+message IsPersistedRequest {
+}
+
+message IsPersistedResponse {
+  bool result = 1;
+}
+
+message IsPrefetchRequest {
+}
+
+message IsPrefetchResponse {
+  bool result = 1;
+}
+
+message IsRequireBatteryNotLowRequest {
+}
+
+message IsRequireBatteryNotLowResponse {
+  bool result = 1;
+}
+
+message IsRequireChargingRequest {
+}
+
+message IsRequireChargingResponse {
+  bool result = 1;
+}
+
+message IsRequireDeviceIdleRequest {
+}
+
+message IsRequireDeviceIdleResponse {
+  bool result = 1;
+}
+
+message IsRequireStorageNotLowRequest {
+}
+
+message IsRequireStorageNotLowResponse {
+  bool result = 1;
+}
+
+message IsUserInitiatedRequest {
+}
+
+message IsUserInitiatedResponse {
+  bool result = 1;
+}
+
+message ToStringRequest {
+}
+
+message ToStringResponse {
+  string result = 1;
+}
+
+message WriteToParcelRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message WriteToParcelResponse {
+}
+
+message AddDebugTagRequest {
+  string arg0 = 1;
+}
+
+message AddDebugTagResponse {
+  int64 result = 1;
+}
+
+message AddTriggerContentUriRequest {
+  int64 arg0 = 1;
+}
+
+message AddTriggerContentUriResponse {
+  int64 result = 1;
+}
+
+message BuildRequest {
+}
+
+message BuildResponse {
+  int64 result = 1;
+}
+
+message RemoveDebugTagRequest {
+  string arg0 = 1;
+}
+
+message RemoveDebugTagResponse {
+  int64 result = 1;
+}
+
+message SetBackoffCriteriaRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message SetBackoffCriteriaResponse {
+  int64 result = 1;
+}
+
+message SetClipDataRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message SetClipDataResponse {
+  int64 result = 1;
+}
+
+message SetEstimatedNetworkBytesRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message SetEstimatedNetworkBytesResponse {
+  int64 result = 1;
+}
+
+message SetExpeditedRequest {
+  bool arg0 = 1;
+}
+
+message SetExpeditedResponse {
+  int64 result = 1;
+}
+
+message SetExtrasRequest {
+  int64 arg0 = 1;
+}
+
+message SetExtrasResponse {
+  int64 result = 1;
+}
+
+message SetImportantWhileForegroundRequest {
+  bool arg0 = 1;
+}
+
+message SetImportantWhileForegroundResponse {
+  int64 result = 1;
+}
+
+message SetMinimumLatencyRequest {
+  int64 arg0 = 1;
+}
+
+message SetMinimumLatencyResponse {
+  int64 result = 1;
+}
+
+message SetMinimumNetworkChunkBytesRequest {
+  int64 arg0 = 1;
+}
+
+message SetMinimumNetworkChunkBytesResponse {
+  int64 result = 1;
+}
+
+message SetOverrideDeadlineRequest {
+  int64 arg0 = 1;
+}
+
+message SetOverrideDeadlineResponse {
+  int64 result = 1;
+}
+
+message SetPeriodic1Request {
+  int64 arg0 = 1;
+}
+
+message SetPeriodic1Response {
+  int64 result = 1;
+}
+
+message SetPeriodic2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message SetPeriodic2_1Response {
+  int64 result = 1;
+}
+
+message SetPersistedRequest {
+  bool arg0 = 1;
+}
+
+message SetPersistedResponse {
+  int64 result = 1;
+}
+
+message SetPrefetchRequest {
+  bool arg0 = 1;
+}
+
+message SetPrefetchResponse {
+  int64 result = 1;
+}
+
+message SetPriorityRequest {
+  int32 arg0 = 1;
+}
+
+message SetPriorityResponse {
+  int64 result = 1;
+}
+
+message SetRequiredNetworkRequest {
+  int64 arg0 = 1;
+}
+
+message SetRequiredNetworkResponse {
+  int64 result = 1;
+}
+
+message SetRequiredNetworkTypeRequest {
+  int32 arg0 = 1;
+}
+
+message SetRequiredNetworkTypeResponse {
+  int64 result = 1;
+}
+
+message SetRequiresBatteryNotLowRequest {
+  bool arg0 = 1;
+}
+
+message SetRequiresBatteryNotLowResponse {
+  int64 result = 1;
+}
+
+message SetRequiresChargingRequest {
+  bool arg0 = 1;
+}
+
+message SetRequiresChargingResponse {
+  int64 result = 1;
+}
+
+message SetRequiresDeviceIdleRequest {
+  bool arg0 = 1;
+}
+
+message SetRequiresDeviceIdleResponse {
+  int64 result = 1;
+}
+
+message SetRequiresStorageNotLowRequest {
+  bool arg0 = 1;
+}
+
+message SetRequiresStorageNotLowResponse {
+  int64 result = 1;
+}
+
+message SetTraceTagRequest {
+  string arg0 = 1;
+}
+
+message SetTraceTagResponse {
+  int64 result = 1;
+}
+
+message SetTransientExtrasRequest {
+  int64 arg0 = 1;
+}
+
+message SetTransientExtrasResponse {
+  int64 result = 1;
+}
+
+message SetTriggerContentMaxDelayRequest {
+  int64 arg0 = 1;
+}
+
+message SetTriggerContentMaxDelayResponse {
+  int64 result = 1;
+}
+
+message SetTriggerContentUpdateDelayRequest {
+  int64 arg0 = 1;
+}
+
+message SetTriggerContentUpdateDelayResponse {
+  int64 result = 1;
+}
+
+message SetUserInitiatedRequest {
+  bool arg0 = 1;
+}
+
+message SetUserInitiatedResponse {
+  int64 result = 1;
+}
+
+service JobInfoService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc Equals (EqualsRequest) returns (EqualsResponse);
+  rpc GetBackoffPolicy (GetBackoffPolicyRequest) returns (GetBackoffPolicyResponse);
+  rpc GetClipData (GetClipDataRequest) returns (GetClipDataResponse);
+  rpc GetClipGrantFlags (GetClipGrantFlagsRequest) returns (GetClipGrantFlagsResponse);
+  rpc GetDebugTags (GetDebugTagsRequest) returns (GetDebugTagsResponse);
+  rpc GetEstimatedNetworkDownloadBytes (GetEstimatedNetworkDownloadBytesRequest) returns (GetEstimatedNetworkDownloadBytesResponse);
+  rpc GetEstimatedNetworkUploadBytes (GetEstimatedNetworkUploadBytesRequest) returns (GetEstimatedNetworkUploadBytesResponse);
+  rpc GetExtras (GetExtrasRequest) returns (GetExtrasResponse);
+  rpc GetFlexMillis (GetFlexMillisRequest) returns (GetFlexMillisResponse);
+  rpc GetId (GetIdRequest) returns (GetIdResponse);
+  rpc GetInitialBackoffMillis (GetInitialBackoffMillisRequest) returns (GetInitialBackoffMillisResponse);
+  rpc GetIntervalMillis (GetIntervalMillisRequest) returns (GetIntervalMillisResponse);
+  rpc GetMaxExecutionDelayMillis (GetMaxExecutionDelayMillisRequest) returns (GetMaxExecutionDelayMillisResponse);
+  rpc GetMinLatencyMillis (GetMinLatencyMillisRequest) returns (GetMinLatencyMillisResponse);
+  rpc GetMinimumNetworkChunkBytes (GetMinimumNetworkChunkBytesRequest) returns (GetMinimumNetworkChunkBytesResponse);
+  rpc GetNetworkType (GetNetworkTypeRequest) returns (GetNetworkTypeResponse);
+  rpc GetPriority (GetPriorityRequest) returns (GetPriorityResponse);
+  rpc GetRequiredNetwork (GetRequiredNetworkRequest) returns (GetRequiredNetworkResponse);
+  rpc GetService (GetServiceRequest) returns (GetServiceResponse);
+  rpc GetTraceTag (GetTraceTagRequest) returns (GetTraceTagResponse);
+  rpc GetTransientExtras (GetTransientExtrasRequest) returns (GetTransientExtrasResponse);
+  rpc GetTriggerContentMaxDelay (GetTriggerContentMaxDelayRequest) returns (GetTriggerContentMaxDelayResponse);
+  rpc GetTriggerContentUpdateDelay (GetTriggerContentUpdateDelayRequest) returns (GetTriggerContentUpdateDelayResponse);
+  rpc GetTriggerContentUris (GetTriggerContentUrisRequest) returns (GetTriggerContentUrisResponse);
+  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
+  rpc IsExpedited (IsExpeditedRequest) returns (IsExpeditedResponse);
+  rpc IsImportantWhileForeground (IsImportantWhileForegroundRequest) returns (IsImportantWhileForegroundResponse);
+  rpc IsPeriodic (IsPeriodicRequest) returns (IsPeriodicResponse);
+  rpc IsPersisted (IsPersistedRequest) returns (IsPersistedResponse);
+  rpc IsPrefetch (IsPrefetchRequest) returns (IsPrefetchResponse);
+  rpc IsRequireBatteryNotLow (IsRequireBatteryNotLowRequest) returns (IsRequireBatteryNotLowResponse);
+  rpc IsRequireCharging (IsRequireChargingRequest) returns (IsRequireChargingResponse);
+  rpc IsRequireDeviceIdle (IsRequireDeviceIdleRequest) returns (IsRequireDeviceIdleResponse);
+  rpc IsRequireStorageNotLow (IsRequireStorageNotLowRequest) returns (IsRequireStorageNotLowResponse);
+  rpc IsUserInitiated (IsUserInitiatedRequest) returns (IsUserInitiatedResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+}
+
+service JobInfoBuilderService {
+  rpc AddDebugTag (AddDebugTagRequest) returns (AddDebugTagResponse);
+  rpc AddTriggerContentUri (AddTriggerContentUriRequest) returns (AddTriggerContentUriResponse);
+  rpc Build (BuildRequest) returns (BuildResponse);
+  rpc RemoveDebugTag (RemoveDebugTagRequest) returns (RemoveDebugTagResponse);
+  rpc SetBackoffCriteria (SetBackoffCriteriaRequest) returns (SetBackoffCriteriaResponse);
+  rpc SetClipData (SetClipDataRequest) returns (SetClipDataResponse);
+  rpc SetEstimatedNetworkBytes (SetEstimatedNetworkBytesRequest) returns (SetEstimatedNetworkBytesResponse);
+  rpc SetExpedited (SetExpeditedRequest) returns (SetExpeditedResponse);
+  rpc SetExtras (SetExtrasRequest) returns (SetExtrasResponse);
+  rpc SetImportantWhileForeground (SetImportantWhileForegroundRequest) returns (SetImportantWhileForegroundResponse);
+  rpc SetMinimumLatency (SetMinimumLatencyRequest) returns (SetMinimumLatencyResponse);
+  rpc SetMinimumNetworkChunkBytes (SetMinimumNetworkChunkBytesRequest) returns (SetMinimumNetworkChunkBytesResponse);
+  rpc SetOverrideDeadline (SetOverrideDeadlineRequest) returns (SetOverrideDeadlineResponse);
+  rpc SetPeriodic1 (SetPeriodic1Request) returns (SetPeriodic1Response);
+  rpc SetPeriodic2_1 (SetPeriodic2_1Request) returns (SetPeriodic2_1Response);
+  rpc SetPersisted (SetPersistedRequest) returns (SetPersistedResponse);
+  rpc SetPrefetch (SetPrefetchRequest) returns (SetPrefetchResponse);
+  rpc SetPriority (SetPriorityRequest) returns (SetPriorityResponse);
+  rpc SetRequiredNetwork (SetRequiredNetworkRequest) returns (SetRequiredNetworkResponse);
+  rpc SetRequiredNetworkType (SetRequiredNetworkTypeRequest) returns (SetRequiredNetworkTypeResponse);
+  rpc SetRequiresBatteryNotLow (SetRequiresBatteryNotLowRequest) returns (SetRequiresBatteryNotLowResponse);
+  rpc SetRequiresCharging (SetRequiresChargingRequest) returns (SetRequiresChargingResponse);
+  rpc SetRequiresDeviceIdle (SetRequiresDeviceIdleRequest) returns (SetRequiresDeviceIdleResponse);
+  rpc SetRequiresStorageNotLow (SetRequiresStorageNotLowRequest) returns (SetRequiresStorageNotLowResponse);
+  rpc SetTraceTag (SetTraceTagRequest) returns (SetTraceTagResponse);
+  rpc SetTransientExtras (SetTransientExtrasRequest) returns (SetTransientExtrasResponse);
+  rpc SetTriggerContentMaxDelay (SetTriggerContentMaxDelayRequest) returns (SetTriggerContentMaxDelayResponse);
+  rpc SetTriggerContentUpdateDelay (SetTriggerContentUpdateDelayRequest) returns (SetTriggerContentUpdateDelayResponse);
+  rpc SetUserInitiated (SetUserInitiatedRequest) returns (SetUserInitiatedResponse);
 }

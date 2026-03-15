@@ -3,16 +3,11 @@
 package recorder
 
 const (
-	AudioMic         = 1
-	AudioVoiceCall   = 4
-	AudioCamcorder   = 5
-	AudioVoiceComm   = 7
-	AudioUnprocessed = 9
-	VideoCamera      = 1
-	VideoSurface     = 2
-	FormatMPEG4      = 2
-	FormatThreeGPP   = 1
-	FormatWebM       = 9
-	FormatAAC_ADTS   = 6
-	FormatOGG        = 11
+	MediaErrorServerDied                    = 0
+	MediaRecorderErrorUnknown               = 0
+	MediaRecorderInfoMaxDurationReached     = 0
+	MediaRecorderInfoMaxFilesizeApproaching = 0
+	MediaRecorderInfoMaxFilesizeReached     = 0
+	MediaRecorderInfoNextOutputFileStarted  = 0
+	MediaRecorderInfoUnknown                = 0
 )

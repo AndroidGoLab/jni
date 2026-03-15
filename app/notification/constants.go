@@ -3,9 +3,16 @@
 package notification
 
 const (
-	ImportanceNone    = 0
-	ImportanceMin     = 1
-	ImportanceLow     = 2
-	ImportanceDefault = 3
-	ImportanceHigh    = 4
+	Creator = 0
+)
+
+const (
+	DefaultChannelId = ""
+	EditConversation = ""
+	EditImportance   = ""
+	EditLauncher     = ""
+	EditLockedDevice = ""
+	EditSound        = ""
+	EditVibration    = ""
+	EditZen          = ""
 )

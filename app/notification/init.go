@@ -20,44 +20,52 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                           *jni.GlobalRef
-	midManagerareNotificationsEnabled    jni.MethodID
-	midManagercreateNotificationChannel  jni.MethodID
-	midManagerdeleteNotificationChannel  jni.MethodID
-	midManagergetNotificationChannelsRaw jni.MethodID
-	midManagernotifyRaw                  jni.MethodID
-	midManagercancel                     jni.MethodID
-	midManagercancelAll                  jni.MethodID
-	midManagergetActiveNotificationsRaw  jni.MethodID
-
-	clsnotificationChannel               *jni.GlobalRef
-	midnotificationChannelInit           jni.MethodID
-	midnotificationChannelsetDescription jni.MethodID
-	midnotificationChannelgetId          jni.MethodID
-	midnotificationChannelgetName        jni.MethodID
-	midnotificationChannelgetDescription jni.MethodID
-	midnotificationChannelgetImportance  jni.MethodID
-
-	clsnotificationBuilder                 *jni.GlobalRef
-	midnotificationBuilderInit             jni.MethodID
-	midnotificationBuildersetContentTitle  jni.MethodID
-	midnotificationBuildersetContentText   jni.MethodID
-	midnotificationBuildersetSmallIcon     jni.MethodID
-	midnotificationBuildersetContentIntent jni.MethodID
-	midnotificationBuildersetAutoCancel    jni.MethodID
-	midnotificationBuildersetOngoing       jni.MethodID
-	midnotificationBuildersetStyle         jni.MethodID
-	midnotificationBuildersetGroup         jni.MethodID
-	midnotificationBuildersetProgress      jni.MethodID
-	midnotificationBuilderaddAction        jni.MethodID
-	midnotificationBuilderbuild            jni.MethodID
-
-	clsbigTextStyle        *jni.GlobalRef
-	midbigTextStyleInit    jni.MethodID
-	midbigTextStylebigText jni.MethodID
-
-	clsstatusBarNotification   *jni.GlobalRef
-	midstatusBarNotificationID jni.MethodID
+	clsnotificationChannel                        *jni.GlobalRef
+	midnotificationChannelCanBubble               jni.MethodID
+	midnotificationChannelCanBypassDnd            jni.MethodID
+	midnotificationChannelCanShowBadge            jni.MethodID
+	midnotificationChannelDescribeContents        jni.MethodID
+	midnotificationChannelEnableLights            jni.MethodID
+	midnotificationChannelEnableVibration         jni.MethodID
+	midnotificationChannelEquals                  jni.MethodID
+	midnotificationChannelGetAudioAttributes      jni.MethodID
+	midnotificationChannelGetConversationId       jni.MethodID
+	midnotificationChannelGetDescription          jni.MethodID
+	midnotificationChannelGetGroup                jni.MethodID
+	midnotificationChannelGetId                   jni.MethodID
+	midnotificationChannelGetImportance           jni.MethodID
+	midnotificationChannelGetLightColor           jni.MethodID
+	midnotificationChannelGetLockscreenVisibility jni.MethodID
+	midnotificationChannelGetName                 jni.MethodID
+	midnotificationChannelGetParentChannelId      jni.MethodID
+	midnotificationChannelGetSound                jni.MethodID
+	midnotificationChannelGetVibrationEffect      jni.MethodID
+	midnotificationChannelGetVibrationPattern     jni.MethodID
+	midnotificationChannelHasUserSetImportance    jni.MethodID
+	midnotificationChannelHasUserSetSound         jni.MethodID
+	midnotificationChannelHashCode                jni.MethodID
+	midnotificationChannelIsBlockable             jni.MethodID
+	midnotificationChannelIsConversation          jni.MethodID
+	midnotificationChannelIsDemoted               jni.MethodID
+	midnotificationChannelIsImportantConversation jni.MethodID
+	midnotificationChannelSetAllowBubbles         jni.MethodID
+	midnotificationChannelSetBlockable            jni.MethodID
+	midnotificationChannelSetBypassDnd            jni.MethodID
+	midnotificationChannelSetConversationId       jni.MethodID
+	midnotificationChannelSetDescription          jni.MethodID
+	midnotificationChannelSetGroup                jni.MethodID
+	midnotificationChannelSetImportance           jni.MethodID
+	midnotificationChannelSetLightColor           jni.MethodID
+	midnotificationChannelSetLockscreenVisibility jni.MethodID
+	midnotificationChannelSetName                 jni.MethodID
+	midnotificationChannelSetShowBadge            jni.MethodID
+	midnotificationChannelSetSound                jni.MethodID
+	midnotificationChannelSetVibrationEffect      jni.MethodID
+	midnotificationChannelSetVibrationPattern     jni.MethodID
+	midnotificationChannelShouldShowLights        jni.MethodID
+	midnotificationChannelShouldVibrate           jni.MethodID
+	midnotificationChannelToString                jni.MethodID
+	midnotificationChannelWriteToParcel           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -78,176 +86,235 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/app/NotificationManager")
-	if err != nil {
-		return fmt.Errorf("find class android.app.NotificationManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagerareNotificationsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "areNotificationsEnabled", "()Z")
-	if err != nil {
-		return fmt.Errorf("get method android.app.NotificationManager.areNotificationsEnabled: %w", err)
-	}
-
-	midManagercreateNotificationChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createNotificationChannel", "(Landroid/app/NotificationChannel;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.NotificationManager.createNotificationChannel: %w", err)
-	}
-
-	midManagerdeleteNotificationChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "deleteNotificationChannel", "(Ljava/lang/String;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.NotificationManager.deleteNotificationChannel: %w", err)
-	}
-
-	midManagergetNotificationChannelsRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getNotificationChannels", "()Ljava/util/List;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.NotificationManager.getNotificationChannels: %w", err)
-	}
-
-	midManagernotifyRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "notify", "(ILandroid/app/Notification;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.NotificationManager.notify: %w", err)
-	}
-
-	midManagercancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "cancel", "(I)V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.NotificationManager.cancel: %w", err)
-	}
-
-	midManagercancelAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "cancelAll", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.app.NotificationManager.cancelAll: %w", err)
-	}
-
-	midManagergetActiveNotificationsRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getActiveNotifications", "()[Landroid/service/notification/StatusBarNotification;")
-	if err != nil {
-		return fmt.Errorf("get method android.app.NotificationManager.getActiveNotifications: %w", err)
-	}
-
 	c, err = env.FindClass("android/app/NotificationChannel")
 	if err != nil {
 		return fmt.Errorf("find class android.app.NotificationChannel: %w", err)
 	}
 	clsnotificationChannel = env.NewGlobalRef(&c.Object)
-	midnotificationChannelInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "<init>", "()V")
+
+	midnotificationChannelCanBubble, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "canBubble", "()Z")
 	if err != nil {
-		return fmt.Errorf("get constructor android.app.NotificationChannel.<init>: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.canBubble: %w", err)
 	}
 
-	midnotificationChannelsetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "setDescription", "(Ljava/lang/String;)V")
+	midnotificationChannelCanBypassDnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "canBypassDnd", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.NotificationChannel.setDescription: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.canBypassDnd: %w", err)
 	}
 
-	midnotificationChannelgetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getId", "()Ljava/lang/String;")
+	midnotificationChannelCanShowBadge, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "canShowBadge", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.NotificationChannel.getId: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.canShowBadge: %w", err)
 	}
 
-	midnotificationChannelgetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getName", "()Ljava/lang/CharSequence;")
+	midnotificationChannelDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "describeContents", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.NotificationChannel.getName: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.describeContents: %w", err)
 	}
 
-	midnotificationChannelgetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getDescription", "()Ljava/lang/String;")
+	midnotificationChannelEnableLights, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "enableLights", "(Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.enableLights: %w", err)
+	}
+
+	midnotificationChannelEnableVibration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "enableVibration", "(Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.enableVibration: %w", err)
+	}
+
+	midnotificationChannelEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.equals: %w", err)
+	}
+
+	midnotificationChannelGetAudioAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getAudioAttributes", "()Landroid/media/AudioAttributes;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.getAudioAttributes: %w", err)
+	}
+
+	midnotificationChannelGetConversationId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getConversationId", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.getConversationId: %w", err)
+	}
+
+	midnotificationChannelGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getDescription", "()Ljava/lang/String;")
 	if err != nil {
 		return fmt.Errorf("get method android.app.NotificationChannel.getDescription: %w", err)
 	}
 
-	midnotificationChannelgetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getImportance", "()I")
+	midnotificationChannelGetGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getGroup", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.getGroup: %w", err)
+	}
+
+	midnotificationChannelGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getId", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.getId: %w", err)
+	}
+
+	midnotificationChannelGetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getImportance", "()I")
 	if err != nil {
 		return fmt.Errorf("get method android.app.NotificationChannel.getImportance: %w", err)
 	}
 
-	c, err = env.FindClass("android/app/Notification$Builder")
+	midnotificationChannelGetLightColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getLightColor", "()I")
 	if err != nil {
-		return fmt.Errorf("find class android.app.Notification$Builder: %w", err)
-	}
-	clsnotificationBuilder = env.NewGlobalRef(&c.Object)
-	midnotificationBuilderInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationBuilder)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.app.Notification$Builder.<init>: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.getLightColor: %w", err)
 	}
 
-	midnotificationBuildersetContentTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationBuilder)), "setContentTitle", "(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;")
+	midnotificationChannelGetLockscreenVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getLockscreenVisibility", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.Notification$Builder.setContentTitle: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.getLockscreenVisibility: %w", err)
 	}
 
-	midnotificationBuildersetContentText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationBuilder)), "setContentText", "(Ljava/lang/CharSequence;)Landroid/app/Notification$Builder;")
+	midnotificationChannelGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getName", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.Notification$Builder.setContentText: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.getName: %w", err)
 	}
 
-	midnotificationBuildersetSmallIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationBuilder)), "setSmallIcon", "(I)Landroid/app/Notification$Builder;")
+	midnotificationChannelGetParentChannelId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getParentChannelId", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.Notification$Builder.setSmallIcon: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.getParentChannelId: %w", err)
 	}
 
-	midnotificationBuildersetContentIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationBuilder)), "setContentIntent", "(Landroid/app/PendingIntent;)Landroid/app/Notification$Builder;")
+	midnotificationChannelGetSound, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getSound", "()Landroid/net/Uri;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.Notification$Builder.setContentIntent: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.getSound: %w", err)
 	}
 
-	midnotificationBuildersetAutoCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationBuilder)), "setAutoCancel", "(Z)Landroid/app/Notification$Builder;")
+	midnotificationChannelGetVibrationEffect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getVibrationEffect", "()Landroid/os/VibrationEffect;")
 	if err != nil {
-		return fmt.Errorf("get method android.app.Notification$Builder.setAutoCancel: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.getVibrationEffect: %w", err)
 	}
 
-	midnotificationBuildersetOngoing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationBuilder)), "setOngoing", "(Z)Landroid/app/Notification$Builder;")
+	midnotificationChannelGetVibrationPattern, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "getVibrationPattern", "()[J")
 	if err != nil {
-		return fmt.Errorf("get method android.app.Notification$Builder.setOngoing: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.getVibrationPattern: %w", err)
 	}
 
-	midnotificationBuildersetStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationBuilder)), "setStyle", "(Landroid/app/Notification$Style;)Landroid/app/Notification$Builder;")
+	midnotificationChannelHasUserSetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "hasUserSetImportance", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.Notification$Builder.setStyle: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.hasUserSetImportance: %w", err)
 	}
 
-	midnotificationBuildersetGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationBuilder)), "setGroup", "(Ljava/lang/String;)Landroid/app/Notification$Builder;")
+	midnotificationChannelHasUserSetSound, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "hasUserSetSound", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.Notification$Builder.setGroup: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.hasUserSetSound: %w", err)
 	}
 
-	midnotificationBuildersetProgress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationBuilder)), "setProgress", "(IIZ)Landroid/app/Notification$Builder;")
+	midnotificationChannelHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "hashCode", "()I")
 	if err != nil {
-		return fmt.Errorf("get method android.app.Notification$Builder.setProgress: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.hashCode: %w", err)
 	}
 
-	midnotificationBuilderaddAction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationBuilder)), "addAction", "(ILjava/lang/CharSequence;Landroid/app/PendingIntent;)Landroid/app/Notification$Builder;")
+	midnotificationChannelIsBlockable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "isBlockable", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.Notification$Builder.addAction: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.isBlockable: %w", err)
 	}
 
-	midnotificationBuilderbuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationBuilder)), "build", "()Landroid/app/Notification;")
+	midnotificationChannelIsConversation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "isConversation", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.Notification$Builder.build: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.isConversation: %w", err)
 	}
 
-	c, err = env.FindClass("android/app/Notification$BigTextStyle")
+	midnotificationChannelIsDemoted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "isDemoted", "()Z")
 	if err != nil {
-		return fmt.Errorf("find class android.app.Notification$BigTextStyle: %w", err)
-	}
-	clsbigTextStyle = env.NewGlobalRef(&c.Object)
-	midbigTextStyleInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbigTextStyle)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.app.Notification$BigTextStyle.<init>: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.isDemoted: %w", err)
 	}
 
-	midbigTextStylebigText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbigTextStyle)), "bigText", "(Ljava/lang/CharSequence;)Landroid/app/Notification$BigTextStyle;")
+	midnotificationChannelIsImportantConversation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "isImportantConversation", "()Z")
 	if err != nil {
-		return fmt.Errorf("get method android.app.Notification$BigTextStyle.bigText: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.isImportantConversation: %w", err)
 	}
 
-	c, err = env.FindClass("android/service/notification/StatusBarNotification")
+	midnotificationChannelSetAllowBubbles, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "setAllowBubbles", "(Z)V")
 	if err != nil {
-		return fmt.Errorf("find class android.service.notification.StatusBarNotification: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.setAllowBubbles: %w", err)
 	}
-	clsstatusBarNotification = env.NewGlobalRef(&c.Object)
 
-	midstatusBarNotificationID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstatusBarNotification)), "getId", "()I")
+	midnotificationChannelSetBlockable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "setBlockable", "(Z)V")
 	if err != nil {
-		return fmt.Errorf("get method android.service.notification.StatusBarNotification.getId: %w", err)
+		return fmt.Errorf("get method android.app.NotificationChannel.setBlockable: %w", err)
+	}
+
+	midnotificationChannelSetBypassDnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "setBypassDnd", "(Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.setBypassDnd: %w", err)
+	}
+
+	midnotificationChannelSetConversationId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "setConversationId", "(Ljava/lang/String;Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.setConversationId: %w", err)
+	}
+
+	midnotificationChannelSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "setDescription", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.setDescription: %w", err)
+	}
+
+	midnotificationChannelSetGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "setGroup", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.setGroup: %w", err)
+	}
+
+	midnotificationChannelSetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "setImportance", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.setImportance: %w", err)
+	}
+
+	midnotificationChannelSetLightColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "setLightColor", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.setLightColor: %w", err)
+	}
+
+	midnotificationChannelSetLockscreenVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "setLockscreenVisibility", "(I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.setLockscreenVisibility: %w", err)
+	}
+
+	midnotificationChannelSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "setName", "(Ljava/lang/String;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.setName: %w", err)
+	}
+
+	midnotificationChannelSetShowBadge, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "setShowBadge", "(Z)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.setShowBadge: %w", err)
+	}
+
+	midnotificationChannelSetSound, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "setSound", "(Landroid/net/Uri;Landroid/media/AudioAttributes;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.setSound: %w", err)
+	}
+
+	midnotificationChannelSetVibrationEffect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "setVibrationEffect", "(Landroid/os/VibrationEffect;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.setVibrationEffect: %w", err)
+	}
+
+	midnotificationChannelSetVibrationPattern, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "setVibrationPattern", "([J)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.setVibrationPattern: %w", err)
+	}
+
+	midnotificationChannelShouldShowLights, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "shouldShowLights", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.shouldShowLights: %w", err)
+	}
+
+	midnotificationChannelShouldVibrate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "shouldVibrate", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.shouldVibrate: %w", err)
+	}
+
+	midnotificationChannelToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.toString: %w", err)
+	}
+
+	midnotificationChannelWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnotificationChannel)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.app.NotificationChannel.writeToParcel: %w", err)
 	}
 
 	return nil

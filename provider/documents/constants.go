@@ -3,10 +3,22 @@
 package documents
 
 const (
-	ActionOpenDocument     = "android.intent.action.OPEN_DOCUMENT"
-	ActionOpenDocumentTree = "android.intent.action.OPEN_DOCUMENT_TREE"
-	ActionCreateDocument   = "android.intent.action.CREATE_DOCUMENT"
-	ExtraMimeTypes         = "android.intent.extra.MIME_TYPES"
-	ExtraAllowMultiple     = "android.intent.extra.ALLOW_MULTIPLE"
-	ExtraTitle             = "android.intent.extra.TITLE"
+	ActionDocumentSettings    = ""
+	ExtraError                = ""
+	ExtraExcludeSelf          = ""
+	ExtraInfo                 = ""
+	ExtraInitialUri           = ""
+	ExtraLoading              = ""
+	ExtraOrientation          = ""
+	ExtraPrompt               = ""
+	MetadataExif              = ""
+	MetadataTreeCount         = ""
+	MetadataTreeSize          = ""
+	MetadataTypes             = ""
+	ProviderInterface         = ""
+	QueryArgDisplayName       = ""
+	QueryArgExcludeMedia      = ""
+	QueryArgFileSizeOver      = ""
+	QueryArgLastModifiedAfter = ""
+	QueryArgMimeTypes         = ""
 )

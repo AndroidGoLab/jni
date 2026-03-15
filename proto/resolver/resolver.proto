@@ -6,336 +6,176 @@ package resolver;
 
 option go_package = "github.com/xaionaro-go/jni/proto/resolver";
 
-message ApplyBatchRequest {
-  string arg0 = 1;
-  int64 arg1 = 2;
-}
-
-message ApplyBatchResponse {
-  int64 result = 1;
-}
-
-message CancelSync1_2Request {
+message CompareTo1Request {
   int64 arg0 = 1;
 }
 
-message CancelSync1_2Response {
-}
-
-message GetOutgoingPersistedUriPermissionsRequest {
-}
-
-message GetOutgoingPersistedUriPermissionsResponse {
-  int64 result = 1;
-}
-
-message GetPersistedUriPermissionsRequest {
-}
-
-message GetPersistedUriPermissionsResponse {
-  int64 result = 1;
-}
-
-message GetStreamTypesRequest {
-  int64 arg0 = 1;
-  string arg1 = 2;
-}
-
-message GetStreamTypesResponse {
-  int64 result = 1;
-}
-
-message LoadThumbnailRequest {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  int64 arg2 = 3;
-}
-
-message LoadThumbnailResponse {
-  int64 result = 1;
-}
-
-message NotifyChange2Request {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-}
-
-message NotifyChange2Response {
-}
-
-message NotifyChange3_1Request {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  bool arg2 = 3;
-}
-
-message NotifyChange3_1Response {
-}
-
-message NotifyChange3_2Request {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  int32 arg2 = 3;
-}
-
-message NotifyChange3_2Response {
-}
-
-message NotifyChange3_3Request {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-  int32 arg2 = 3;
-}
-
-message NotifyChange3_3Response {
-}
-
-message ReleasePersistableUriPermissionRequest {
-  int64 arg0 = 1;
-  int32 arg1 = 2;
-}
-
-message ReleasePersistableUriPermissionResponse {
-}
-
-message StartSyncRequest {
-  int64 arg0 = 1;
-  int64 arg1 = 2;
-}
-
-message StartSyncResponse {
-}
-
-message TakePersistableUriPermissionRequest {
-  int64 arg0 = 1;
-  int32 arg1 = 2;
-}
-
-message TakePersistableUriPermissionResponse {
-}
-
-message AddPeriodicSyncRequest {
-  int64 arg0 = 1;
-  string arg1 = 2;
-  int64 arg2 = 3;
-  int64 arg3 = 4;
-}
-
-message AddPeriodicSyncResponse {
-}
-
-message AddStatusChangeListenerRequest {
-  int32 arg0 = 1;
-  int64 arg1 = 2;
-}
-
-message AddStatusChangeListenerResponse {
-  int64 result = 1;
-}
-
-message CancelSync2Request {
-  int64 arg0 = 1;
-  string arg1 = 2;
-}
-
-message CancelSync2Response {
-}
-
-message CancelSync1_1Request {
-  int64 arg0 = 1;
-}
-
-message CancelSync1_1Response {
-}
-
-message GetCurrentSyncRequest {
-}
-
-message GetCurrentSyncResponse {
-  int64 result = 1;
-}
-
-message GetCurrentSyncsRequest {
-}
-
-message GetCurrentSyncsResponse {
-  int64 result = 1;
-}
-
-message GetIsSyncableRequest {
-  int64 arg0 = 1;
-  string arg1 = 2;
-}
-
-message GetIsSyncableResponse {
+message CompareTo1Response {
   int32 result = 1;
 }
 
-message GetMasterSyncAutomaticallyRequest {
+message EqualsRequest {
+  int64 arg0 = 1;
 }
 
-message GetMasterSyncAutomaticallyResponse {
+message EqualsResponse {
   bool result = 1;
 }
 
-message GetPeriodicSyncsRequest {
-  int64 arg0 = 1;
-  string arg1 = 2;
+message GetBooleanQueryParameterRequest {
+  string arg0 = 1;
+  bool arg1 = 2;
 }
 
-message GetPeriodicSyncsResponse {
-  int64 result = 1;
-}
-
-message GetSyncAdapterTypesRequest {
-}
-
-message GetSyncAdapterTypesResponse {
-  int64 result = 1;
-}
-
-message GetSyncAutomaticallyRequest {
-  int64 arg0 = 1;
-  string arg1 = 2;
-}
-
-message GetSyncAutomaticallyResponse {
+message GetBooleanQueryParameterResponse {
   bool result = 1;
 }
 
-message IsSyncActiveRequest {
-  int64 arg0 = 1;
-  string arg1 = 2;
+message GetQueryParameterRequest {
+  string arg0 = 1;
 }
 
-message IsSyncActiveResponse {
-  bool result = 1;
+message GetQueryParameterResponse {
+  string result = 1;
 }
 
-message IsSyncPendingRequest {
-  int64 arg0 = 1;
-  string arg1 = 2;
+message GetQueryParameterNamesRequest {
 }
 
-message IsSyncPendingResponse {
-  bool result = 1;
-}
-
-message RemovePeriodicSyncRequest {
-  int64 arg0 = 1;
-  string arg1 = 2;
-  int64 arg2 = 3;
-}
-
-message RemovePeriodicSyncResponse {
-}
-
-message RemoveStatusChangeListenerRequest {
-  int64 arg0 = 1;
-}
-
-message RemoveStatusChangeListenerResponse {
-}
-
-message RequestSync3Request {
-  int64 arg0 = 1;
-  string arg1 = 2;
-  int64 arg2 = 3;
-}
-
-message RequestSync3Response {
-}
-
-message RequestSync1_1Request {
-  int64 arg0 = 1;
-}
-
-message RequestSync1_1Response {
-}
-
-message SetIsSyncableRequest {
-  int64 arg0 = 1;
-  string arg1 = 2;
-  int32 arg2 = 3;
-}
-
-message SetIsSyncableResponse {
-}
-
-message SetMasterSyncAutomaticallyRequest {
-  bool arg0 = 1;
-}
-
-message SetMasterSyncAutomaticallyResponse {
-}
-
-message SetSyncAutomaticallyRequest {
-  int64 arg0 = 1;
-  string arg1 = 2;
-  bool arg2 = 3;
-}
-
-message SetSyncAutomaticallyResponse {
-}
-
-message ValidateSyncExtrasBundleRequest {
-  int64 arg0 = 1;
-}
-
-message ValidateSyncExtrasBundleResponse {
-}
-
-message Wrap1Request {
-  int64 arg0 = 1;
-}
-
-message Wrap1Response {
+message GetQueryParameterNamesResponse {
   int64 result = 1;
 }
 
-message Wrap1_1Request {
-  int64 arg0 = 1;
+message GetQueryParametersRequest {
+  string arg0 = 1;
 }
 
-message Wrap1_1Response {
+message GetQueryParametersResponse {
   int64 result = 1;
 }
 
-service ContentResolverService {
-  rpc ApplyBatch (ApplyBatchRequest) returns (ApplyBatchResponse);
-  rpc CancelSync1_2 (CancelSync1_2Request) returns (CancelSync1_2Response);
-  rpc GetOutgoingPersistedUriPermissions (GetOutgoingPersistedUriPermissionsRequest) returns (GetOutgoingPersistedUriPermissionsResponse);
-  rpc GetPersistedUriPermissions (GetPersistedUriPermissionsRequest) returns (GetPersistedUriPermissionsResponse);
-  rpc GetStreamTypes (GetStreamTypesRequest) returns (GetStreamTypesResponse);
-  rpc LoadThumbnail (LoadThumbnailRequest) returns (LoadThumbnailResponse);
-  rpc NotifyChange2 (NotifyChange2Request) returns (NotifyChange2Response);
-  rpc NotifyChange3_1 (NotifyChange3_1Request) returns (NotifyChange3_1Response);
-  rpc NotifyChange3_2 (NotifyChange3_2Request) returns (NotifyChange3_2Response);
-  rpc NotifyChange3_3 (NotifyChange3_3Request) returns (NotifyChange3_3Response);
-  rpc ReleasePersistableUriPermission (ReleasePersistableUriPermissionRequest) returns (ReleasePersistableUriPermissionResponse);
-  rpc StartSync (StartSyncRequest) returns (StartSyncResponse);
-  rpc TakePersistableUriPermission (TakePersistableUriPermissionRequest) returns (TakePersistableUriPermissionResponse);
-  rpc AddPeriodicSync (AddPeriodicSyncRequest) returns (AddPeriodicSyncResponse);
-  rpc AddStatusChangeListener (AddStatusChangeListenerRequest) returns (AddStatusChangeListenerResponse);
-  rpc CancelSync2 (CancelSync2Request) returns (CancelSync2Response);
-  rpc CancelSync1_1 (CancelSync1_1Request) returns (CancelSync1_1Response);
-  rpc GetCurrentSync (GetCurrentSyncRequest) returns (GetCurrentSyncResponse);
-  rpc GetCurrentSyncs (GetCurrentSyncsRequest) returns (GetCurrentSyncsResponse);
-  rpc GetIsSyncable (GetIsSyncableRequest) returns (GetIsSyncableResponse);
-  rpc GetMasterSyncAutomatically (GetMasterSyncAutomaticallyRequest) returns (GetMasterSyncAutomaticallyResponse);
-  rpc GetPeriodicSyncs (GetPeriodicSyncsRequest) returns (GetPeriodicSyncsResponse);
-  rpc GetSyncAdapterTypes (GetSyncAdapterTypesRequest) returns (GetSyncAdapterTypesResponse);
-  rpc GetSyncAutomatically (GetSyncAutomaticallyRequest) returns (GetSyncAutomaticallyResponse);
-  rpc IsSyncActive (IsSyncActiveRequest) returns (IsSyncActiveResponse);
-  rpc IsSyncPending (IsSyncPendingRequest) returns (IsSyncPendingResponse);
-  rpc RemovePeriodicSync (RemovePeriodicSyncRequest) returns (RemovePeriodicSyncResponse);
-  rpc RemoveStatusChangeListener (RemoveStatusChangeListenerRequest) returns (RemoveStatusChangeListenerResponse);
-  rpc RequestSync3 (RequestSync3Request) returns (RequestSync3Response);
-  rpc RequestSync1_1 (RequestSync1_1Request) returns (RequestSync1_1Response);
-  rpc SetIsSyncable (SetIsSyncableRequest) returns (SetIsSyncableResponse);
-  rpc SetMasterSyncAutomatically (SetMasterSyncAutomaticallyRequest) returns (SetMasterSyncAutomaticallyResponse);
-  rpc SetSyncAutomatically (SetSyncAutomaticallyRequest) returns (SetSyncAutomaticallyResponse);
-  rpc ValidateSyncExtrasBundle (ValidateSyncExtrasBundleRequest) returns (ValidateSyncExtrasBundleResponse);
-  rpc Wrap1 (Wrap1Request) returns (Wrap1Response);
-  rpc Wrap1_1 (Wrap1_1Request) returns (Wrap1_1Response);
+message HashCodeRequest {
+}
+
+message HashCodeResponse {
+  int32 result = 1;
+}
+
+message IsAbsoluteRequest {
+}
+
+message IsAbsoluteResponse {
+  bool result = 1;
+}
+
+message IsOpaqueRequest {
+}
+
+message IsOpaqueResponse {
+  bool result = 1;
+}
+
+message NormalizeSchemeRequest {
+}
+
+message NormalizeSchemeResponse {
+  int64 result = 1;
+}
+
+message CompareTo1_1Request {
+  int64 arg0 = 1;
+}
+
+message CompareTo1_1Response {
+  int32 result = 1;
+}
+
+message DecodeRequest {
+  string arg0 = 1;
+}
+
+message DecodeResponse {
+  string result = 1;
+}
+
+message Encode1Request {
+  string arg0 = 1;
+}
+
+message Encode1Response {
+  string result = 1;
+}
+
+message Encode2_1Request {
+  string arg0 = 1;
+  string arg1 = 2;
+}
+
+message Encode2_1Response {
+  string result = 1;
+}
+
+message FromFileRequest {
+  int64 arg0 = 1;
+}
+
+message FromFileResponse {
+  int64 result = 1;
+}
+
+message FromPartsRequest {
+  string arg0 = 1;
+  string arg1 = 2;
+  string arg2 = 3;
+}
+
+message FromPartsResponse {
+  int64 result = 1;
+}
+
+message ParseRequest {
+  string arg0 = 1;
+}
+
+message ParseResponse {
+  int64 result = 1;
+}
+
+message WithAppendedPathRequest {
+  int64 arg0 = 1;
+  string arg1 = 2;
+}
+
+message WithAppendedPathResponse {
+  int64 result = 1;
+}
+
+message WriteToParcelRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message WriteToParcelResponse {
+}
+
+service UriService {
+  rpc CompareTo1 (CompareTo1Request) returns (CompareTo1Response);
+  rpc Equals (EqualsRequest) returns (EqualsResponse);
+  rpc GetBooleanQueryParameter (GetBooleanQueryParameterRequest) returns (GetBooleanQueryParameterResponse);
+  rpc GetQueryParameter (GetQueryParameterRequest) returns (GetQueryParameterResponse);
+  rpc GetQueryParameterNames (GetQueryParameterNamesRequest) returns (GetQueryParameterNamesResponse);
+  rpc GetQueryParameters (GetQueryParametersRequest) returns (GetQueryParametersResponse);
+  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
+  rpc IsAbsolute (IsAbsoluteRequest) returns (IsAbsoluteResponse);
+  rpc IsOpaque (IsOpaqueRequest) returns (IsOpaqueResponse);
+  rpc NormalizeScheme (NormalizeSchemeRequest) returns (NormalizeSchemeResponse);
+  rpc CompareTo1_1 (CompareTo1_1Request) returns (CompareTo1_1Response);
+  rpc Decode (DecodeRequest) returns (DecodeResponse);
+  rpc Encode1 (Encode1Request) returns (Encode1Response);
+  rpc Encode2_1 (Encode2_1Request) returns (Encode2_1Response);
+  rpc FromFile (FromFileRequest) returns (FromFileResponse);
+  rpc FromParts (FromPartsRequest) returns (FromPartsResponse);
+  rpc Parse (ParseRequest) returns (ParseResponse);
+  rpc WithAppendedPath (WithAppendedPathRequest) returns (WithAppendedPathResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
 }

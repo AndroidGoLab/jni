@@ -23,8 +23,8 @@ type documentsContract struct {
 	Obj *jni.GlobalRef
 }
 
-// createDocumentRaw calls android.provider.DocumentsContract.createDocument.
-func (m *documentsContract) createDocumentRaw(resolver *jni.Object, parentUri *jni.Object, mimeType string, displayName string) (*jni.Object, error) {
+// BuildChildDocumentsUri calls android.provider.DocumentsContract.buildChildDocumentsUri.
+func (m *documentsContract) BuildChildDocumentsUri(arg0 string, arg1 string) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -32,47 +32,19 @@ func (m *documentsContract) createDocumentRaw(resolver *jni.Object, parentUri *j
 			callErr = err
 			return err
 		}
-
-		jMimeType, err := env.NewStringUTF(mimeType)
+		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
 		}
 
-		jDisplayName, err := env.NewStringUTF(displayName)
-		if err != nil {
-			return err
-		}
-
-		result, callErr = env.CallStaticObjectMethod(
-			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
-			middocumentsContractcreateDocumentRaw, jni.ObjectValue(resolver), jni.ObjectValue(parentUri), jni.ObjectValue(&jMimeType.Object), jni.ObjectValue(&jDisplayName.Object),
-		)
-		if callErr != nil {
-			return callErr
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
-// renameDocumentRaw calls android.provider.DocumentsContract.renameDocument.
-func (m *documentsContract) renameDocumentRaw(resolver *jni.Object, uri *jni.Object, displayName string) (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-
-		jDisplayName, err := env.NewStringUTF(displayName)
+		jArg1, err := env.NewStringUTF(arg1)
 		if err != nil {
 			return err
 		}
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
-			middocumentsContractrenameDocumentRaw, jni.ObjectValue(resolver), jni.ObjectValue(uri), jni.ObjectValue(&jDisplayName.Object),
+			middocumentsContractBuildChildDocumentsUri, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -82,8 +54,248 @@ func (m *documentsContract) renameDocumentRaw(resolver *jni.Object, uri *jni.Obj
 	return result, callErr
 }
 
-// copyDocumentRaw calls android.provider.DocumentsContract.copyDocument.
-func (m *documentsContract) copyDocumentRaw(resolver *jni.Object, srcUri *jni.Object, destParentUri *jni.Object) (*jni.Object, error) {
+// BuildChildDocumentsUriUsingTree calls android.provider.DocumentsContract.buildChildDocumentsUriUsingTree.
+func (m *documentsContract) BuildChildDocumentsUriUsingTree(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractBuildChildDocumentsUriUsingTree, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// BuildDocumentUri calls android.provider.DocumentsContract.buildDocumentUri.
+func (m *documentsContract) BuildDocumentUri(arg0 string, arg1 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractBuildDocumentUri, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// BuildDocumentUriUsingTree calls android.provider.DocumentsContract.buildDocumentUriUsingTree.
+func (m *documentsContract) BuildDocumentUriUsingTree(arg0 *jni.Object, arg1 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractBuildDocumentUriUsingTree, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// BuildRecentDocumentsUri calls android.provider.DocumentsContract.buildRecentDocumentsUri.
+func (m *documentsContract) BuildRecentDocumentsUri(arg0 string, arg1 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractBuildRecentDocumentsUri, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// BuildRootUri calls android.provider.DocumentsContract.buildRootUri.
+func (m *documentsContract) BuildRootUri(arg0 string, arg1 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractBuildRootUri, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// BuildRootsUri calls android.provider.DocumentsContract.buildRootsUri.
+func (m *documentsContract) BuildRootsUri(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractBuildRootsUri, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// BuildSearchDocumentsUri calls android.provider.DocumentsContract.buildSearchDocumentsUri.
+func (m *documentsContract) BuildSearchDocumentsUri(arg0 string, arg1 string, arg2 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractBuildSearchDocumentsUri, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// BuildTreeDocumentUri calls android.provider.DocumentsContract.buildTreeDocumentUri.
+func (m *documentsContract) BuildTreeDocumentUri(arg0 string, arg1 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractBuildTreeDocumentUri, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CopyDocument calls android.provider.DocumentsContract.copyDocument.
+func (m *documentsContract) CopyDocument(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -94,7 +306,7 @@ func (m *documentsContract) copyDocumentRaw(resolver *jni.Object, srcUri *jni.Ob
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
-			middocumentsContractcopyDocumentRaw, jni.ObjectValue(resolver), jni.ObjectValue(srcUri), jni.ObjectValue(destParentUri),
+			middocumentsContractCopyDocument, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -104,8 +316,40 @@ func (m *documentsContract) copyDocumentRaw(resolver *jni.Object, srcUri *jni.Ob
 	return result, callErr
 }
 
-// moveDocumentRaw calls android.provider.DocumentsContract.moveDocument.
-func (m *documentsContract) moveDocumentRaw(resolver *jni.Object, srcUri *jni.Object, srcParentUri *jni.Object, destParentUri *jni.Object) (*jni.Object, error) {
+// CreateDocument calls android.provider.DocumentsContract.createDocument.
+func (m *documentsContract) CreateDocument(arg0 *jni.Object, arg1 *jni.Object, arg2 string, arg3 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+
+		jArg3, err := env.NewStringUTF(arg3)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractCreateDocument, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(&jArg3.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateWebLinkIntent calls android.provider.DocumentsContract.createWebLinkIntent.
+func (m *documentsContract) CreateWebLinkIntent(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -116,7 +360,7 @@ func (m *documentsContract) moveDocumentRaw(resolver *jni.Object, srcUri *jni.Ob
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
-			middocumentsContractmoveDocumentRaw, jni.ObjectValue(resolver), jni.ObjectValue(srcUri), jni.ObjectValue(srcParentUri), jni.ObjectValue(destParentUri),
+			middocumentsContractCreateWebLinkIntent, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -126,8 +370,8 @@ func (m *documentsContract) moveDocumentRaw(resolver *jni.Object, srcUri *jni.Ob
 	return result, callErr
 }
 
-// deleteDocumentRaw calls android.provider.DocumentsContract.deleteDocument.
-func (m *documentsContract) deleteDocumentRaw(resolver *jni.Object, uri *jni.Object) (bool, error) {
+// DeleteDocument calls android.provider.DocumentsContract.deleteDocument.
+func (m *documentsContract) DeleteDocument(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
@@ -138,7 +382,7 @@ func (m *documentsContract) deleteDocumentRaw(resolver *jni.Object, uri *jni.Obj
 
 		resultRaw, callErr := env.CallStaticBooleanMethod(
 			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
-			middocumentsContractdeleteDocumentRaw, jni.ObjectValue(resolver), jni.ObjectValue(uri),
+			middocumentsContractDeleteDocument, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -149,23 +393,366 @@ func (m *documentsContract) deleteDocumentRaw(resolver *jni.Object, uri *jni.Obj
 	return result, callErr
 }
 
-// isDocumentUriRaw calls android.provider.DocumentsContract.isDocumentUri.
-func (m *documentsContract) isDocumentUriRaw(ctx *jni.Object, uri *jni.Object) bool {
-	var result bool
+// EjectRoot calls android.provider.DocumentsContract.ejectRoot.
+func (m *documentsContract) EjectRoot(arg0 *jni.Object, arg1 *jni.Object) error {
 
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
 
-		resultRaw, _ := env.CallStaticBooleanMethod(
+		callErr = env.CallStaticVoidMethod(
 			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
-			middocumentsContractisDocumentUriRaw, jni.ObjectValue(ctx), jni.ObjectValue(uri),
+			middocumentsContractEjectRoot, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
-
-		result = resultRaw != 0
-		return nil
+		return callErr
 	})
-	return result
+	return callErr
+}
+
+// FindDocumentPath calls android.provider.DocumentsContract.findDocumentPath.
+func (m *documentsContract) FindDocumentPath(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractFindDocumentPath, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetDocumentId calls android.provider.DocumentsContract.getDocumentId.
+func (m *documentsContract) GetDocumentId(arg0 *jni.Object) (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultObj, callErr := env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractGetDocumentId, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetDocumentMetadata calls android.provider.DocumentsContract.getDocumentMetadata.
+func (m *documentsContract) GetDocumentMetadata(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractGetDocumentMetadata, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetDocumentThumbnail calls android.provider.DocumentsContract.getDocumentThumbnail.
+func (m *documentsContract) GetDocumentThumbnail(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractGetDocumentThumbnail, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRootId calls android.provider.DocumentsContract.getRootId.
+func (m *documentsContract) GetRootId(arg0 *jni.Object) (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultObj, callErr := env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractGetRootId, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSearchDocumentsQuery calls android.provider.DocumentsContract.getSearchDocumentsQuery.
+func (m *documentsContract) GetSearchDocumentsQuery(arg0 *jni.Object) (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultObj, callErr := env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractGetSearchDocumentsQuery, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetTreeDocumentId calls android.provider.DocumentsContract.getTreeDocumentId.
+func (m *documentsContract) GetTreeDocumentId(arg0 *jni.Object) (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultObj, callErr := env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractGetTreeDocumentId, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsChildDocument calls android.provider.DocumentsContract.isChildDocument.
+func (m *documentsContract) IsChildDocument(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultRaw, callErr := env.CallStaticBooleanMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractIsChildDocument, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsDocumentUri calls android.provider.DocumentsContract.isDocumentUri.
+func (m *documentsContract) IsDocumentUri(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultRaw, callErr := env.CallStaticBooleanMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractIsDocumentUri, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsRootUri calls android.provider.DocumentsContract.isRootUri.
+func (m *documentsContract) IsRootUri(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultRaw, callErr := env.CallStaticBooleanMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractIsRootUri, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsRootsUri calls android.provider.DocumentsContract.isRootsUri.
+func (m *documentsContract) IsRootsUri(arg0 *jni.Object, arg1 *jni.Object) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultRaw, callErr := env.CallStaticBooleanMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractIsRootsUri, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsTreeUri calls android.provider.DocumentsContract.isTreeUri.
+func (m *documentsContract) IsTreeUri(arg0 *jni.Object) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultRaw, callErr := env.CallStaticBooleanMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractIsTreeUri, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// MoveDocument calls android.provider.DocumentsContract.moveDocument.
+func (m *documentsContract) MoveDocument(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractMoveDocument, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// RemoveDocument calls android.provider.DocumentsContract.removeDocument.
+func (m *documentsContract) RemoveDocument(arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		resultRaw, callErr := env.CallStaticBooleanMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractRemoveDocument, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// RenameDocument calls android.provider.DocumentsContract.renameDocument.
+func (m *documentsContract) RenameDocument(arg0 *jni.Object, arg1 *jni.Object, arg2 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsdocumentsContract)),
+			middocumentsContractRenameDocument, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(&jArg2.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
 }

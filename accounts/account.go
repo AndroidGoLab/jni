@@ -17,28 +17,114 @@ var (
 	_ *app.Context
 )
 
-// Account holds data extracted from android.accounts.Account.
-type Account struct {
-	Name string
-	Type string
+// account wraps android.accounts.Account.
+type account struct {
+	VM  *jni.VM
+	Obj *jni.GlobalRef
 }
 
-// ExtractAccount extracts all fields from a android.accounts.Account JNI object.
-func ExtractAccount(env *jni.Env, obj *jni.Object) (*Account, error) {
-	if err := ensureInit(env); err != nil {
-		return nil, err
-	}
-	var result Account
+// DescribeContents calls android.accounts.Account.describeContents.
+func (m *account) DescribeContents() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midaccountDescribeContents,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
 
-	{
-		raw := env.GetObjectField(obj, fidAccountName)
-		result.Name = env.GoString((*jni.String)(unsafe.Pointer(raw)))
-	}
+// Equals calls android.accounts.Account.equals.
+func (m *account) Equals(arg0 *jni.Object) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
 
-	{
-		raw := env.GetObjectField(obj, fidAccountType)
-		result.Type = env.GoString((*jni.String)(unsafe.Pointer(raw)))
-	}
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midaccountEquals, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
 
-	return &result, nil
+// HashCode calls android.accounts.Account.hashCode.
+func (m *account) HashCode() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midaccountHashCode,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// ToString calls android.accounts.Account.toString.
+func (m *account) ToString() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midaccountToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// WriteToParcel calls android.accounts.Account.writeToParcel.
+func (m *account) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midaccountWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
 }

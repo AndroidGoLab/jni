@@ -23,191 +23,427 @@ type nsdServiceInfo struct {
 	Obj *jni.GlobalRef
 }
 
-// NewnsdServiceInfo creates a new android.net.nsd.NsdServiceInfo instance.
-func NewnsdServiceInfo(vm *jni.VM) (*nsdServiceInfo, error) {
-	var t nsdServiceInfo
-	t.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			return err
-		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsnsdServiceInfo)), midnsdServiceInfoInit)
-		if err != nil {
-			return err
-		}
-		t.Obj = env.NewGlobalRef(obj)
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return &t, nil
-}
-
-// setServiceName calls android.net.nsd.NsdServiceInfo.setServiceName.
-func (m *nsdServiceInfo) setServiceName(name string) {
-
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-
-			return err
-		}
-		jName, err := env.NewStringUTF(name)
-		if err != nil {
-			return err
-		}
-
-		env.CallVoidMethod(
-			m.Obj,
-			midnsdServiceInfosetServiceName, jni.ObjectValue(&jName.Object),
-		)
-		return nil
-	})
-	return
-}
-
-// setServiceType calls android.net.nsd.NsdServiceInfo.setServiceType.
-func (m *nsdServiceInfo) setServiceType(serviceType string) {
-
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-
-			return err
-		}
-		jServiceType, err := env.NewStringUTF(serviceType)
-		if err != nil {
-			return err
-		}
-
-		env.CallVoidMethod(
-			m.Obj,
-			midnsdServiceInfosetServiceType, jni.ObjectValue(&jServiceType.Object),
-		)
-		return nil
-	})
-	return
-}
-
-// setPort calls android.net.nsd.NsdServiceInfo.setPort.
-func (m *nsdServiceInfo) setPort(port int32) {
-
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-
-			return err
-		}
-
-		env.CallVoidMethod(
-			m.Obj,
-			midnsdServiceInfosetPort, jni.IntValue(port),
-		)
-		return nil
-	})
-	return
-}
-
-// setAttribute calls android.net.nsd.NsdServiceInfo.setAttribute.
-func (m *nsdServiceInfo) setAttribute(key string, value string) {
-
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-
-			return err
-		}
-		jKey, err := env.NewStringUTF(key)
-		if err != nil {
-			return err
-		}
-
-		jValue, err := env.NewStringUTF(value)
-		if err != nil {
-			return err
-		}
-
-		env.CallVoidMethod(
-			m.Obj,
-			midnsdServiceInfosetAttribute, jni.ObjectValue(&jKey.Object), jni.ObjectValue(&jValue.Object),
-		)
-		return nil
-	})
-	return
-}
-
-// getServiceName calls android.net.nsd.NsdServiceInfo.getServiceName.
-func (m *nsdServiceInfo) getServiceName() string {
-	var result string
-
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-
-			return err
-		}
-		resultObj, _ := env.CallObjectMethod(
-			m.Obj,
-			midnsdServiceInfogetServiceName,
-		)
-
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
-		return nil
-	})
-	return result
-}
-
-// getServiceType calls android.net.nsd.NsdServiceInfo.getServiceType.
-func (m *nsdServiceInfo) getServiceType() string {
-	var result string
-
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-
-			return err
-		}
-		resultObj, _ := env.CallObjectMethod(
-			m.Obj,
-			midnsdServiceInfogetServiceType,
-		)
-
-		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
-		return nil
-	})
-	return result
-}
-
-// getHost calls android.net.nsd.NsdServiceInfo.getHost.
-func (m *nsdServiceInfo) getHost() *jni.Object {
-	var result *jni.Object
-
-	m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-
-			return err
-		}
-		result, _ = env.CallObjectMethod(
-			m.Obj,
-			midnsdServiceInfogetHost,
-		)
-
-		return nil
-	})
-	return result
-}
-
-// getPort calls android.net.nsd.NsdServiceInfo.getPort.
-func (m *nsdServiceInfo) getPort() int32 {
+// DescribeContents calls android.net.nsd.NsdServiceInfo.describeContents.
+func (m *nsdServiceInfo) DescribeContents() (int32, error) {
 	var result int32
-
+	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
-
+			callErr = err
 			return err
 		}
-		result, _ = env.CallIntMethod(
+		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midnsdServiceInfogetPort,
+			midnsdServiceInfoDescribeContents,
 		)
-
-		return nil
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
 	})
-	return result
+	return result, callErr
+}
+
+// GetHost calls android.net.nsd.NsdServiceInfo.getHost.
+func (m *nsdServiceInfo) GetHost() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midnsdServiceInfoGetHost,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetHostAddresses calls android.net.nsd.NsdServiceInfo.getHostAddresses.
+func (m *nsdServiceInfo) GetHostAddresses() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midnsdServiceInfoGetHostAddresses,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetHostname calls android.net.nsd.NsdServiceInfo.getHostname.
+func (m *nsdServiceInfo) GetHostname() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midnsdServiceInfoGetHostname,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetNetwork calls android.net.nsd.NsdServiceInfo.getNetwork.
+func (m *nsdServiceInfo) GetNetwork() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midnsdServiceInfoGetNetwork,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPort calls android.net.nsd.NsdServiceInfo.getPort.
+func (m *nsdServiceInfo) GetPort() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midnsdServiceInfoGetPort,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetServiceName calls android.net.nsd.NsdServiceInfo.getServiceName.
+func (m *nsdServiceInfo) GetServiceName() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midnsdServiceInfoGetServiceName,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetServiceType calls android.net.nsd.NsdServiceInfo.getServiceType.
+func (m *nsdServiceInfo) GetServiceType() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midnsdServiceInfoGetServiceType,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSubtypes calls android.net.nsd.NsdServiceInfo.getSubtypes.
+func (m *nsdServiceInfo) GetSubtypes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midnsdServiceInfoGetSubtypes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// RemoveAttribute calls android.net.nsd.NsdServiceInfo.removeAttribute.
+func (m *nsdServiceInfo) RemoveAttribute(arg0 string) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnsdServiceInfoRemoveAttribute, jni.ObjectValue(&jArg0.Object),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetAttribute calls android.net.nsd.NsdServiceInfo.setAttribute.
+func (m *nsdServiceInfo) SetAttribute(arg0 string, arg1 string) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnsdServiceInfoSetAttribute, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetHost calls android.net.nsd.NsdServiceInfo.setHost.
+func (m *nsdServiceInfo) SetHost(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnsdServiceInfoSetHost, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetHostAddresses calls android.net.nsd.NsdServiceInfo.setHostAddresses.
+func (m *nsdServiceInfo) SetHostAddresses(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnsdServiceInfoSetHostAddresses, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetNetwork calls android.net.nsd.NsdServiceInfo.setNetwork.
+func (m *nsdServiceInfo) SetNetwork(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnsdServiceInfoSetNetwork, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetPort calls android.net.nsd.NsdServiceInfo.setPort.
+func (m *nsdServiceInfo) SetPort(arg0 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnsdServiceInfoSetPort, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetServiceName calls android.net.nsd.NsdServiceInfo.setServiceName.
+func (m *nsdServiceInfo) SetServiceName(arg0 string) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnsdServiceInfoSetServiceName, jni.ObjectValue(&jArg0.Object),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetServiceType calls android.net.nsd.NsdServiceInfo.setServiceType.
+func (m *nsdServiceInfo) SetServiceType(arg0 string) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnsdServiceInfoSetServiceType, jni.ObjectValue(&jArg0.Object),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetSubtypes calls android.net.nsd.NsdServiceInfo.setSubtypes.
+func (m *nsdServiceInfo) SetSubtypes(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnsdServiceInfoSetSubtypes, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// ToString calls android.net.nsd.NsdServiceInfo.toString.
+func (m *nsdServiceInfo) ToString() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midnsdServiceInfoToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// WriteToParcel calls android.net.nsd.NsdServiceInfo.writeToParcel.
+func (m *nsdServiceInfo) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midnsdServiceInfoWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
 }

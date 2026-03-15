@@ -3,7 +3,6 @@
 package pdf
 
 const (
-	RenderModeForDisplay = 1
-	RenderModeForPrint   = 2
-	ModeReadOnly         = 268435456
+	Creator     = 0
+	DensityNone = 0
 )

@@ -6,62 +6,20 @@ package projection;
 
 option go_package = "github.com/xaionaro-go/jni/proto/projection";
 
-message GetDisplayRequest {
+message StopRequest {
 }
 
-message GetDisplayResponse {
-  int64 result = 1;
+message StopResponse {
 }
 
-message GetSurfaceRequest {
-}
-
-message GetSurfaceResponse {
-  int64 result = 1;
-}
-
-message ReleaseRequest {
-}
-
-message ReleaseResponse {
-}
-
-message ResizeRequest {
-  int32 arg0 = 1;
-  int32 arg1 = 2;
-  int32 arg2 = 3;
-}
-
-message ResizeResponse {
-}
-
-message SetRotationRequest {
-  int32 arg0 = 1;
-}
-
-message SetRotationResponse {
-}
-
-message SetSurfaceRequest {
+message UnregisterCallbackRequest {
   int64 arg0 = 1;
 }
 
-message SetSurfaceResponse {
+message UnregisterCallbackResponse {
 }
 
-message ToStringRequest {
-}
-
-message ToStringResponse {
-  string result = 1;
-}
-
-service VirtualDisplayService {
-  rpc GetDisplay (GetDisplayRequest) returns (GetDisplayResponse);
-  rpc GetSurface (GetSurfaceRequest) returns (GetSurfaceResponse);
-  rpc Release (ReleaseRequest) returns (ReleaseResponse);
-  rpc Resize (ResizeRequest) returns (ResizeResponse);
-  rpc SetRotation (SetRotationRequest) returns (SetRotationResponse);
-  rpc SetSurface (SetSurfaceRequest) returns (SetSurfaceResponse);
-  rpc ToString (ToStringRequest) returns (ToStringResponse);
+service MediaProjectionService {
+  rpc Stop (StopRequest) returns (StopResponse);
+  rpc UnregisterCallback (UnregisterCallbackRequest) returns (UnregisterCallbackResponse);
 }

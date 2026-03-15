@@ -17,34 +17,427 @@ var (
 	_ *app.Context
 )
 
-// mediaController holds data extracted from android.media.session.MediaController.
+// mediaController wraps android.media.session.MediaController.
 type mediaController struct {
-	PackageName string
-	Tag         string
+	VM  *jni.VM
+	Obj *jni.GlobalRef
 }
 
-// ExtractmediaController extracts all fields from a android.media.session.MediaController JNI object.
-func ExtractmediaController(env *jni.Env, obj *jni.Object) (*mediaController, error) {
-	if err := ensureInit(env); err != nil {
-		return nil, err
-	}
-	var result mediaController
+// AdjustVolume calls android.media.session.MediaController.adjustVolume.
+func (m *mediaController) AdjustVolume(arg0 int32, arg1 int32) error {
 
-	{
-		raw, err := env.CallObjectMethod(obj, midmediaControllerPackageName)
-		if err != nil {
-			return nil, fmt.Errorf("mediaController.PackageName: %w", err)
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
 		}
-		result.PackageName = env.GoString((*jni.String)(unsafe.Pointer(raw)))
-	}
 
-	{
-		raw, err := env.CallObjectMethod(obj, midmediaControllerTag)
-		if err != nil {
-			return nil, fmt.Errorf("mediaController.Tag: %w", err)
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midmediaControllerAdjustVolume, jni.IntValue(arg0), jni.IntValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// DispatchMediaButtonEvent calls android.media.session.MediaController.dispatchMediaButtonEvent.
+func (m *mediaController) DispatchMediaButtonEvent(arg0 *jni.Object) (bool, error) {
+	var result bool
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
 		}
-		result.Tag = env.GoString((*jni.String)(unsafe.Pointer(raw)))
-	}
 
-	return &result, nil
+		resultRaw, callErr := env.CallBooleanMethod(
+			m.Obj,
+			midmediaControllerDispatchMediaButtonEvent, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetExtras calls android.media.session.MediaController.getExtras.
+func (m *mediaController) GetExtras() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midmediaControllerGetExtras,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFlags calls android.media.session.MediaController.getFlags.
+func (m *mediaController) GetFlags() (int64, error) {
+	var result int64
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallLongMethod(
+			m.Obj,
+			midmediaControllerGetFlags,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetMetadata calls android.media.session.MediaController.getMetadata.
+func (m *mediaController) GetMetadata() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midmediaControllerGetMetadata,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPackageName calls android.media.session.MediaController.getPackageName.
+func (m *mediaController) GetPackageName() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midmediaControllerGetPackageName,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPlaybackInfo calls android.media.session.MediaController.getPlaybackInfo.
+func (m *mediaController) GetPlaybackInfo() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midmediaControllerGetPlaybackInfo,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPlaybackState calls android.media.session.MediaController.getPlaybackState.
+func (m *mediaController) GetPlaybackState() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midmediaControllerGetPlaybackState,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetQueue calls android.media.session.MediaController.getQueue.
+func (m *mediaController) GetQueue() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midmediaControllerGetQueue,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetQueueTitle calls android.media.session.MediaController.getQueueTitle.
+func (m *mediaController) GetQueueTitle() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midmediaControllerGetQueueTitle,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRatingType calls android.media.session.MediaController.getRatingType.
+func (m *mediaController) GetRatingType() (int32, error) {
+	var result int32
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midmediaControllerGetRatingType,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSessionActivity calls android.media.session.MediaController.getSessionActivity.
+func (m *mediaController) GetSessionActivity() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midmediaControllerGetSessionActivity,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSessionInfo calls android.media.session.MediaController.getSessionInfo.
+func (m *mediaController) GetSessionInfo() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midmediaControllerGetSessionInfo,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSessionToken calls android.media.session.MediaController.getSessionToken.
+func (m *mediaController) GetSessionToken() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midmediaControllerGetSessionToken,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetTag calls android.media.session.MediaController.getTag.
+func (m *mediaController) GetTag() (string, error) {
+	var result string
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		resultObj, callErr := env.CallObjectMethod(
+			m.Obj,
+			midmediaControllerGetTag,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetTransportControls calls android.media.session.MediaController.getTransportControls.
+func (m *mediaController) GetTransportControls() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midmediaControllerGetTransportControls,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// RegisterCallback calls android.media.session.MediaController.registerCallback.
+func (m *mediaController) RegisterCallback(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midmediaControllerRegisterCallback, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SendCommand calls android.media.session.MediaController.sendCommand.
+func (m *mediaController) SendCommand(arg0 string, arg1 *jni.Object, arg2 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midmediaControllerSendCommand, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetVolumeTo calls android.media.session.MediaController.setVolumeTo.
+func (m *mediaController) SetVolumeTo(arg0 int32, arg1 int32) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midmediaControllerSetVolumeTo, jni.IntValue(arg0), jni.IntValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// UnregisterCallback calls android.media.session.MediaController.unregisterCallback.
+func (m *mediaController) UnregisterCallback(arg0 *jni.Object) error {
+
+	var callErr error
+	m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midmediaControllerUnregisterCallback, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
 }

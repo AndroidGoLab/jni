@@ -20,17 +20,47 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clswindowManager                  *jni.GlobalRef
-	midwindowManagergetDefaultDisplay jni.MethodID
-
-	clsdisplay               *jni.GlobalRef
-	middisplaygetRotation    jni.MethodID
-	middisplaygetRefreshRate jni.MethodID
-	middisplaygetMetrics     jni.MethodID
-	middisplaygetRealMetrics jni.MethodID
-
-	clsdisplayMetrics     *jni.GlobalRef
-	middisplayMetricsInit jni.MethodID
+	clsdisplay                                     *jni.GlobalRef
+	middisplayGetAppVsyncOffsetNanos               jni.MethodID
+	middisplayGetCurrentSizeRange                  jni.MethodID
+	middisplayGetCutout                            jni.MethodID
+	middisplayGetDeviceProductInfo                 jni.MethodID
+	middisplayGetDisplayId                         jni.MethodID
+	middisplayGetFlags                             jni.MethodID
+	middisplayGetHdrCapabilities                   jni.MethodID
+	middisplayGetHdrSdrRatio                       jni.MethodID
+	middisplayGetHeight                            jni.MethodID
+	middisplayGetHighestHdrSdrRatio                jni.MethodID
+	middisplayGetMetrics                           jni.MethodID
+	middisplayGetMode                              jni.MethodID
+	middisplayGetName                              jni.MethodID
+	middisplayGetOrientation                       jni.MethodID
+	middisplayGetOverlaySupport                    jni.MethodID
+	middisplayGetPixelFormat                       jni.MethodID
+	middisplayGetPreferredWideGamutColorSpace      jni.MethodID
+	middisplayGetPresentationDeadlineNanos         jni.MethodID
+	middisplayGetRealMetrics                       jni.MethodID
+	middisplayGetRealSize                          jni.MethodID
+	middisplayGetRectSize                          jni.MethodID
+	middisplayGetRefreshRate                       jni.MethodID
+	middisplayGetRotation                          jni.MethodID
+	middisplayGetRoundedCorner                     jni.MethodID
+	middisplayGetShape                             jni.MethodID
+	middisplayGetSize                              jni.MethodID
+	middisplayGetState                             jni.MethodID
+	middisplayGetSuggestedFrameRate                jni.MethodID
+	middisplayGetSupportedModes                    jni.MethodID
+	middisplayGetSupportedRefreshRates             jni.MethodID
+	middisplayGetWidth                             jni.MethodID
+	middisplayHasArrSupport                        jni.MethodID
+	middisplayIsHdr                                jni.MethodID
+	middisplayIsHdrSdrRatioAvailable               jni.MethodID
+	middisplayIsMinimalPostProcessingSupported     jni.MethodID
+	middisplayIsValid                              jni.MethodID
+	middisplayIsWideColorGamut                     jni.MethodID
+	middisplayRegisterHdrSdrRatioChangedListener   jni.MethodID
+	middisplayToString                             jni.MethodID
+	middisplayUnregisterHdrSdrRatioChangedListener jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -51,51 +81,210 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/view/WindowManager")
-	if err != nil {
-		return fmt.Errorf("find class android.view.WindowManager: %w", err)
-	}
-	clswindowManager = env.NewGlobalRef(&c.Object)
-
-	midwindowManagergetDefaultDisplay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clswindowManager)), "getDefaultDisplay", "()Landroid/view/Display;")
-	if err != nil {
-		return fmt.Errorf("get method android.view.WindowManager.getDefaultDisplay: %w", err)
-	}
-
 	c, err = env.FindClass("android/view/Display")
 	if err != nil {
 		return fmt.Errorf("find class android.view.Display: %w", err)
 	}
 	clsdisplay = env.NewGlobalRef(&c.Object)
 
-	middisplaygetRotation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getRotation", "()I")
+	middisplayGetAppVsyncOffsetNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getAppVsyncOffsetNanos", "()J")
 	if err != nil {
-		return fmt.Errorf("get method android.view.Display.getRotation: %w", err)
+		return fmt.Errorf("get method android.view.Display.getAppVsyncOffsetNanos: %w", err)
 	}
 
-	middisplaygetRefreshRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getRefreshRate", "()F")
+	middisplayGetCurrentSizeRange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getCurrentSizeRange", "(Landroid/graphics/Point;Landroid/graphics/Point;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.view.Display.getRefreshRate: %w", err)
+		return fmt.Errorf("get method android.view.Display.getCurrentSizeRange: %w", err)
 	}
 
-	middisplaygetMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getMetrics", "(Landroid/util/DisplayMetrics;)V")
+	middisplayGetCutout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getCutout", "()Landroid/view/DisplayCutout;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getCutout: %w", err)
+	}
+
+	middisplayGetDeviceProductInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getDeviceProductInfo", "()Landroid/hardware/display/DeviceProductInfo;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getDeviceProductInfo: %w", err)
+	}
+
+	middisplayGetDisplayId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getDisplayId", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getDisplayId: %w", err)
+	}
+
+	middisplayGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getFlags", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getFlags: %w", err)
+	}
+
+	middisplayGetHdrCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getHdrCapabilities", "()Landroid/view/Display$HdrCapabilities;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getHdrCapabilities: %w", err)
+	}
+
+	middisplayGetHdrSdrRatio, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getHdrSdrRatio", "()F")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getHdrSdrRatio: %w", err)
+	}
+
+	middisplayGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getHeight", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getHeight: %w", err)
+	}
+
+	middisplayGetHighestHdrSdrRatio, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getHighestHdrSdrRatio", "()F")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getHighestHdrSdrRatio: %w", err)
+	}
+
+	middisplayGetMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getMetrics", "(Landroid/util/DisplayMetrics;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.view.Display.getMetrics: %w", err)
 	}
 
-	middisplaygetRealMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getRealMetrics", "(Landroid/util/DisplayMetrics;)V")
+	middisplayGetMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getMode", "()Landroid/view/Display$Mode;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getMode: %w", err)
+	}
+
+	middisplayGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getName", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getName: %w", err)
+	}
+
+	middisplayGetOrientation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getOrientation", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getOrientation: %w", err)
+	}
+
+	middisplayGetOverlaySupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getOverlaySupport", "()Landroid/hardware/OverlayProperties;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getOverlaySupport: %w", err)
+	}
+
+	middisplayGetPixelFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getPixelFormat", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getPixelFormat: %w", err)
+	}
+
+	middisplayGetPreferredWideGamutColorSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getPreferredWideGamutColorSpace", "()Landroid/graphics/ColorSpace;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getPreferredWideGamutColorSpace: %w", err)
+	}
+
+	middisplayGetPresentationDeadlineNanos, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getPresentationDeadlineNanos", "()J")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getPresentationDeadlineNanos: %w", err)
+	}
+
+	middisplayGetRealMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getRealMetrics", "(Landroid/util/DisplayMetrics;)V")
 	if err != nil {
 		return fmt.Errorf("get method android.view.Display.getRealMetrics: %w", err)
 	}
 
-	c, err = env.FindClass("android/util/DisplayMetrics")
+	middisplayGetRealSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getRealSize", "(Landroid/graphics/Point;)V")
 	if err != nil {
-		return fmt.Errorf("find class android.util.DisplayMetrics: %w", err)
+		return fmt.Errorf("get method android.view.Display.getRealSize: %w", err)
 	}
-	clsdisplayMetrics = env.NewGlobalRef(&c.Object)
-	middisplayMetricsInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplayMetrics)), "<init>", "()V")
+
+	middisplayGetRectSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getRectSize", "(Landroid/graphics/Rect;)V")
 	if err != nil {
-		return fmt.Errorf("get constructor android.util.DisplayMetrics.<init>: %w", err)
+		return fmt.Errorf("get method android.view.Display.getRectSize: %w", err)
+	}
+
+	middisplayGetRefreshRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getRefreshRate", "()F")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getRefreshRate: %w", err)
+	}
+
+	middisplayGetRotation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getRotation", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getRotation: %w", err)
+	}
+
+	middisplayGetRoundedCorner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getRoundedCorner", "(I)Landroid/view/RoundedCorner;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getRoundedCorner: %w", err)
+	}
+
+	middisplayGetShape, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getShape", "()Landroid/view/DisplayShape;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getShape: %w", err)
+	}
+
+	middisplayGetSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getSize", "(Landroid/graphics/Point;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getSize: %w", err)
+	}
+
+	middisplayGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getState", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getState: %w", err)
+	}
+
+	middisplayGetSuggestedFrameRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getSuggestedFrameRate", "(I)F")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getSuggestedFrameRate: %w", err)
+	}
+
+	middisplayGetSupportedModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getSupportedModes", "()[Landroid/view/Display$Mode;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getSupportedModes: %w", err)
+	}
+
+	middisplayGetSupportedRefreshRates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getSupportedRefreshRates", "()[F")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getSupportedRefreshRates: %w", err)
+	}
+
+	middisplayGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "getWidth", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.getWidth: %w", err)
+	}
+
+	middisplayHasArrSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "hasArrSupport", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.hasArrSupport: %w", err)
+	}
+
+	middisplayIsHdr, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "isHdr", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.isHdr: %w", err)
+	}
+
+	middisplayIsHdrSdrRatioAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "isHdrSdrRatioAvailable", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.isHdrSdrRatioAvailable: %w", err)
+	}
+
+	middisplayIsMinimalPostProcessingSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "isMinimalPostProcessingSupported", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.isMinimalPostProcessingSupported: %w", err)
+	}
+
+	middisplayIsValid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "isValid", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.isValid: %w", err)
+	}
+
+	middisplayIsWideColorGamut, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "isWideColorGamut", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.isWideColorGamut: %w", err)
+	}
+
+	middisplayRegisterHdrSdrRatioChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "registerHdrSdrRatioChangedListener", "(Ljava/util/concurrent/Executor;Ljava/util/function/Consumer<android$view$Display>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.registerHdrSdrRatioChangedListener: %w", err)
+	}
+
+	middisplayToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.toString: %w", err)
+	}
+
+	middisplayUnregisterHdrSdrRatioChangedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplay)), "unregisterHdrSdrRatioChangedListener", "(Ljava/util/function/Consumer<android$view$Display>;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.view.Display.unregisterHdrSdrRatioChangedListener: %w", err)
 	}
 
 	return nil

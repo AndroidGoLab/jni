@@ -20,20 +20,24 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManager                        *jni.GlobalRef
-	midManagergetStorageVolumes       jni.MethodID
-	midManagergetPrimaryStorageVolume jni.MethodID
-	midManagergetAllocatableBytes     jni.MethodID
-	midManagerallocateBytes           jni.MethodID
-	midManagergetCacheSizeBytes       jni.MethodID
-	midManagergetCacheQuotaBytes      jni.MethodID
-
-	clsVolume            *jni.GlobalRef
-	midVolumeUUID        jni.MethodID
-	midVolumeState       jni.MethodID
-	midVolumeIsPrimary   jni.MethodID
-	midVolumeIsRemovable jni.MethodID
-	midVolumeIsEmulated  jni.MethodID
+	clsstorageVolume                             *jni.GlobalRef
+	midstorageVolumeCreateAccessIntent           jni.MethodID
+	midstorageVolumeCreateOpenDocumentTreeIntent jni.MethodID
+	midstorageVolumeDescribeContents             jni.MethodID
+	midstorageVolumeEquals                       jni.MethodID
+	midstorageVolumeGetDescription               jni.MethodID
+	midstorageVolumeGetDirectory                 jni.MethodID
+	midstorageVolumeGetMediaStoreVolumeName      jni.MethodID
+	midstorageVolumeGetOwner                     jni.MethodID
+	midstorageVolumeGetState                     jni.MethodID
+	midstorageVolumeGetStorageUuid               jni.MethodID
+	midstorageVolumeGetUuid                      jni.MethodID
+	midstorageVolumeHashCode                     jni.MethodID
+	midstorageVolumeIsEmulated                   jni.MethodID
+	midstorageVolumeIsPrimary                    jni.MethodID
+	midstorageVolumeIsRemovable                  jni.MethodID
+	midstorageVolumeToString                     jni.MethodID
+	midstorageVolumeWriteToParcel                jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -54,71 +58,95 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/os/storage/StorageManager")
-	if err != nil {
-		return fmt.Errorf("find class android.os.storage.StorageManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagergetStorageVolumes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getStorageVolumes", "()Ljava/util/List;")
-	if err != nil {
-		return fmt.Errorf("get method android.os.storage.StorageManager.getStorageVolumes: %w", err)
-	}
-
-	midManagergetPrimaryStorageVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPrimaryStorageVolume", "()Landroid/os/storage/StorageVolume;")
-	if err != nil {
-		return fmt.Errorf("get method android.os.storage.StorageManager.getPrimaryStorageVolume: %w", err)
-	}
-
-	midManagergetAllocatableBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAllocatableBytes", "(Ljava/util/UUID;)J")
-	if err != nil {
-		return fmt.Errorf("get method android.os.storage.StorageManager.getAllocatableBytes: %w", err)
-	}
-
-	midManagerallocateBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "allocateBytes", "(Ljava/util/UUID;J)V")
-	if err != nil {
-		return fmt.Errorf("get method android.os.storage.StorageManager.allocateBytes: %w", err)
-	}
-
-	midManagergetCacheSizeBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCacheSizeBytes", "(Ljava/util/UUID;)J")
-	if err != nil {
-		return fmt.Errorf("get method android.os.storage.StorageManager.getCacheSizeBytes: %w", err)
-	}
-
-	midManagergetCacheQuotaBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCacheQuotaBytes", "(Ljava/util/UUID;)J")
-	if err != nil {
-		return fmt.Errorf("get method android.os.storage.StorageManager.getCacheQuotaBytes: %w", err)
-	}
-
 	c, err = env.FindClass("android/os/storage/StorageVolume")
 	if err != nil {
 		return fmt.Errorf("find class android.os.storage.StorageVolume: %w", err)
 	}
-	clsVolume = env.NewGlobalRef(&c.Object)
+	clsstorageVolume = env.NewGlobalRef(&c.Object)
 
-	midVolumeUUID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "getUuid", "()Ljava/lang/String;")
+	midstorageVolumeCreateAccessIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "createAccessIntent", "(Ljava/lang/String;)Landroid/content/Intent;")
 	if err != nil {
-		return fmt.Errorf("get method android.os.storage.StorageVolume.getUuid: %w", err)
+		return fmt.Errorf("get method android.os.storage.StorageVolume.createAccessIntent: %w", err)
 	}
 
-	midVolumeState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "getState", "()Ljava/lang/String;")
+	midstorageVolumeCreateOpenDocumentTreeIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "createOpenDocumentTreeIntent", "()Landroid/content/Intent;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.storage.StorageVolume.createOpenDocumentTreeIntent: %w", err)
+	}
+
+	midstorageVolumeDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "describeContents", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.os.storage.StorageVolume.describeContents: %w", err)
+	}
+
+	midstorageVolumeEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.storage.StorageVolume.equals: %w", err)
+	}
+
+	midstorageVolumeGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "getDescription", "(Landroid/content/Context;)Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.storage.StorageVolume.getDescription: %w", err)
+	}
+
+	midstorageVolumeGetDirectory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "getDirectory", "()Ljava/io/File;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.storage.StorageVolume.getDirectory: %w", err)
+	}
+
+	midstorageVolumeGetMediaStoreVolumeName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "getMediaStoreVolumeName", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.storage.StorageVolume.getMediaStoreVolumeName: %w", err)
+	}
+
+	midstorageVolumeGetOwner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "getOwner", "()Landroid/os/UserHandle;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.storage.StorageVolume.getOwner: %w", err)
+	}
+
+	midstorageVolumeGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "getState", "()Ljava/lang/String;")
 	if err != nil {
 		return fmt.Errorf("get method android.os.storage.StorageVolume.getState: %w", err)
 	}
 
-	midVolumeIsPrimary, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "isPrimary", "()Z")
+	midstorageVolumeGetStorageUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "getStorageUuid", "()Ljava/util/UUID;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.storage.StorageVolume.getStorageUuid: %w", err)
+	}
+
+	midstorageVolumeGetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "getUuid", "()Ljava/lang/String;")
+	if err != nil {
+		return fmt.Errorf("get method android.os.storage.StorageVolume.getUuid: %w", err)
+	}
+
+	midstorageVolumeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "hashCode", "()I")
+	if err != nil {
+		return fmt.Errorf("get method android.os.storage.StorageVolume.hashCode: %w", err)
+	}
+
+	midstorageVolumeIsEmulated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "isEmulated", "()Z")
+	if err != nil {
+		return fmt.Errorf("get method android.os.storage.StorageVolume.isEmulated: %w", err)
+	}
+
+	midstorageVolumeIsPrimary, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "isPrimary", "()Z")
 	if err != nil {
 		return fmt.Errorf("get method android.os.storage.StorageVolume.isPrimary: %w", err)
 	}
 
-	midVolumeIsRemovable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "isRemovable", "()Z")
+	midstorageVolumeIsRemovable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "isRemovable", "()Z")
 	if err != nil {
 		return fmt.Errorf("get method android.os.storage.StorageVolume.isRemovable: %w", err)
 	}
 
-	midVolumeIsEmulated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVolume)), "isEmulated", "()Z")
+	midstorageVolumeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "toString", "()Ljava/lang/String;")
 	if err != nil {
-		return fmt.Errorf("get method android.os.storage.StorageVolume.isEmulated: %w", err)
+		return fmt.Errorf("get method android.os.storage.StorageVolume.toString: %w", err)
+	}
+
+	midstorageVolumeWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsstorageVolume)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		return fmt.Errorf("get method android.os.storage.StorageVolume.writeToParcel: %w", err)
 	}
 
 	return nil

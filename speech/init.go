@@ -20,32 +20,20 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsRecognizer                       *jni.GlobalRef
-	midRecognizercreateRecognizer       jni.MethodID
-	midRecognizerisRecognitionAvailable jni.MethodID
-	midRecognizersetRecognitionListener jni.MethodID
-	midRecognizerstartListeningRaw      jni.MethodID
-	midRecognizerstopListeningRaw       jni.MethodID
-	midRecognizercancelRaw              jni.MethodID
-	midRecognizerdestroyRaw             jni.MethodID
-
-	clsTTS                                  *jni.GlobalRef
-	midTTSInit                              jni.MethodID
-	midTTSspeakRaw                          jni.MethodID
-	midTTSstopRaw                           jni.MethodID
-	midTTSisSpeakingRaw                     jni.MethodID
-	midTTSsetLanguageRaw                    jni.MethodID
-	midTTSsetPitchRaw                       jni.MethodID
-	midTTSsetSpeechRateRaw                  jni.MethodID
-	midTTSgetAvailableLanguagesRaw          jni.MethodID
-	midTTSshutdownRaw                       jni.MethodID
-	midTTSsetOnUtteranceProgressListenerRaw jni.MethodID
-
-	clsrecognitionListener *jni.GlobalRef
-
-	clsttsOnInitListener *jni.GlobalRef
-
-	clsutteranceProgressListener *jni.GlobalRef
+	clsspeechRecognizer                               *jni.GlobalRef
+	midspeechRecognizerCancel                         jni.MethodID
+	midspeechRecognizerCheckRecognitionSupport        jni.MethodID
+	midspeechRecognizerDestroy                        jni.MethodID
+	midspeechRecognizerSetRecognitionListener         jni.MethodID
+	midspeechRecognizerStartListening                 jni.MethodID
+	midspeechRecognizerStopListening                  jni.MethodID
+	midspeechRecognizerTriggerModelDownload1          jni.MethodID
+	midspeechRecognizerTriggerModelDownload3_1        jni.MethodID
+	midspeechRecognizerCreateOnDeviceSpeechRecognizer jni.MethodID
+	midspeechRecognizerCreateSpeechRecognizer1        jni.MethodID
+	midspeechRecognizerCreateSpeechRecognizer2_1      jni.MethodID
+	midspeechRecognizerIsOnDeviceRecognitionAvailable jni.MethodID
+	midspeechRecognizerIsRecognitionAvailable         jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -70,115 +58,72 @@ func doInit(env *jni.Env) error {
 	if err != nil {
 		return fmt.Errorf("find class android.speech.SpeechRecognizer: %w", err)
 	}
-	clsRecognizer = env.NewGlobalRef(&c.Object)
+	clsspeechRecognizer = env.NewGlobalRef(&c.Object)
 
-	midRecognizercreateRecognizer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "createSpeechRecognizer", "(Landroid/content/Context;)Landroid/speech/SpeechRecognizer;")
-	if err != nil {
-		return fmt.Errorf("get method android.speech.SpeechRecognizer.createSpeechRecognizer: %w", err)
-	}
-
-	midRecognizerisRecognitionAvailable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "isRecognitionAvailable", "(Landroid/content/Context;)Z")
-	if err != nil {
-		return fmt.Errorf("get method android.speech.SpeechRecognizer.isRecognitionAvailable: %w", err)
-	}
-
-	midRecognizersetRecognitionListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "setRecognitionListener", "(Landroid/speech/RecognitionListener;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.speech.SpeechRecognizer.setRecognitionListener: %w", err)
-	}
-
-	midRecognizerstartListeningRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "startListening", "(Landroid/content/Intent;)V")
-	if err != nil {
-		return fmt.Errorf("get method android.speech.SpeechRecognizer.startListening: %w", err)
-	}
-
-	midRecognizerstopListeningRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "stopListening", "()V")
-	if err != nil {
-		return fmt.Errorf("get method android.speech.SpeechRecognizer.stopListening: %w", err)
-	}
-
-	midRecognizercancelRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "cancel", "()V")
+	midspeechRecognizerCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "cancel", "()V")
 	if err != nil {
 		return fmt.Errorf("get method android.speech.SpeechRecognizer.cancel: %w", err)
 	}
 
-	midRecognizerdestroyRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecognizer)), "destroy", "()V")
+	midspeechRecognizerCheckRecognitionSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "checkRecognitionSupport", "(Landroid/content/Intent;Ljava/util/concurrent/Executor;Landroid/speech/RecognitionSupportCallback;)V")
+	if err != nil {
+		return fmt.Errorf("get method android.speech.SpeechRecognizer.checkRecognitionSupport: %w", err)
+	}
+
+	midspeechRecognizerDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "destroy", "()V")
 	if err != nil {
 		return fmt.Errorf("get method android.speech.SpeechRecognizer.destroy: %w", err)
 	}
 
-	c, err = env.FindClass("android/speech/tts/TextToSpeech")
+	midspeechRecognizerSetRecognitionListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "setRecognitionListener", "(Landroid/speech/RecognitionListener;)V")
 	if err != nil {
-		return fmt.Errorf("find class android.speech.tts.TextToSpeech: %w", err)
-	}
-	clsTTS = env.NewGlobalRef(&c.Object)
-	midTTSInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "<init>", "()V")
-	if err != nil {
-		return fmt.Errorf("get constructor android.speech.tts.TextToSpeech.<init>: %w", err)
+		return fmt.Errorf("get method android.speech.SpeechRecognizer.setRecognitionListener: %w", err)
 	}
 
-	midTTSspeakRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "speak", "(Ljava/lang/CharSequence;ILandroid/os/Bundle;Ljava/lang/String;)I")
+	midspeechRecognizerStartListening, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "startListening", "(Landroid/content/Intent;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.speech.tts.TextToSpeech.speak: %w", err)
+		return fmt.Errorf("get method android.speech.SpeechRecognizer.startListening: %w", err)
 	}
 
-	midTTSstopRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "stop", "()I")
+	midspeechRecognizerStopListening, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "stopListening", "()V")
 	if err != nil {
-		return fmt.Errorf("get method android.speech.tts.TextToSpeech.stop: %w", err)
+		return fmt.Errorf("get method android.speech.SpeechRecognizer.stopListening: %w", err)
 	}
 
-	midTTSisSpeakingRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "isSpeaking", "()Z")
+	midspeechRecognizerTriggerModelDownload1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "triggerModelDownload", "(Landroid/content/Intent;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.speech.tts.TextToSpeech.isSpeaking: %w", err)
+		return fmt.Errorf("get method android.speech.SpeechRecognizer.triggerModelDownload: %w", err)
 	}
 
-	midTTSsetLanguageRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "setLanguage", "(Ljava/util/Locale;)I")
+	midspeechRecognizerTriggerModelDownload3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "triggerModelDownload", "(Landroid/content/Intent;Ljava/util/concurrent/Executor;Landroid/speech/ModelDownloadListener;)V")
 	if err != nil {
-		return fmt.Errorf("get method android.speech.tts.TextToSpeech.setLanguage: %w", err)
+		return fmt.Errorf("get method android.speech.SpeechRecognizer.triggerModelDownload: %w", err)
 	}
 
-	midTTSsetPitchRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "setPitch", "(F)I")
+	midspeechRecognizerCreateOnDeviceSpeechRecognizer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "createOnDeviceSpeechRecognizer", "(Landroid/content/Context;)Landroid/speech/SpeechRecognizer;")
 	if err != nil {
-		return fmt.Errorf("get method android.speech.tts.TextToSpeech.setPitch: %w", err)
+		return fmt.Errorf("get method android.speech.SpeechRecognizer.createOnDeviceSpeechRecognizer: %w", err)
 	}
 
-	midTTSsetSpeechRateRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "setSpeechRate", "(F)I")
+	midspeechRecognizerCreateSpeechRecognizer1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "createSpeechRecognizer", "(Landroid/content/Context;)Landroid/speech/SpeechRecognizer;")
 	if err != nil {
-		return fmt.Errorf("get method android.speech.tts.TextToSpeech.setSpeechRate: %w", err)
+		return fmt.Errorf("get method android.speech.SpeechRecognizer.createSpeechRecognizer: %w", err)
 	}
 
-	midTTSgetAvailableLanguagesRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "getAvailableLanguages", "()Ljava/util/Set;")
+	midspeechRecognizerCreateSpeechRecognizer2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "createSpeechRecognizer", "(Landroid/content/Context;Landroid/content/ComponentName;)Landroid/speech/SpeechRecognizer;")
 	if err != nil {
-		return fmt.Errorf("get method android.speech.tts.TextToSpeech.getAvailableLanguages: %w", err)
+		return fmt.Errorf("get method android.speech.SpeechRecognizer.createSpeechRecognizer: %w", err)
 	}
 
-	midTTSshutdownRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "shutdown", "()V")
+	midspeechRecognizerIsOnDeviceRecognitionAvailable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "isOnDeviceRecognitionAvailable", "(Landroid/content/Context;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.speech.tts.TextToSpeech.shutdown: %w", err)
+		return fmt.Errorf("get method android.speech.SpeechRecognizer.isOnDeviceRecognitionAvailable: %w", err)
 	}
 
-	midTTSsetOnUtteranceProgressListenerRaw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTTS)), "setOnUtteranceProgressListener", "(Landroid/speech/tts/UtteranceProgressListener;)I")
+	midspeechRecognizerIsRecognitionAvailable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "isRecognitionAvailable", "(Landroid/content/Context;)Z")
 	if err != nil {
-		return fmt.Errorf("get method android.speech.tts.TextToSpeech.setOnUtteranceProgressListener: %w", err)
+		return fmt.Errorf("get method android.speech.SpeechRecognizer.isRecognitionAvailable: %w", err)
 	}
-
-	c, err = env.FindClass("android/speech/RecognitionListener")
-	if err != nil {
-		return fmt.Errorf("find class android.speech.RecognitionListener: %w", err)
-	}
-	clsrecognitionListener = env.NewGlobalRef(&c.Object)
-
-	c, err = env.FindClass("android/speech/tts/TextToSpeech$OnInitListener")
-	if err != nil {
-		return fmt.Errorf("find class android.speech.tts.TextToSpeech$OnInitListener: %w", err)
-	}
-	clsttsOnInitListener = env.NewGlobalRef(&c.Object)
-
-	c, err = env.FindClass("android/speech/tts/UtteranceProgressListener")
-	if err != nil {
-		return fmt.Errorf("find class android.speech.tts.UtteranceProgressListener: %w", err)
-	}
-	clsutteranceProgressListener = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

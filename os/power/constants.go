@@ -3,5 +3,36 @@
 package power
 
 const (
-	PartialWakeLock = 1
+	AcquireCausesWakeup                                = 0
+	FullWakeLock                                       = 0
+	LocationModeAllDisabledWhenScreenOff               = 0
+	LocationModeForegroundOnly                         = 0
+	LocationModeGpsDisabledWhenScreenOff               = 0
+	LocationModeNoChange                               = 0
+	LocationModeThrottleRequestsWhenScreenOff          = 0
+	LowPowerStandbyAllowedReasonOngoingCall            = 0
+	LowPowerStandbyAllowedReasonTempPowerSaveAllowlist = 0
+	LowPowerStandbyAllowedReasonVoiceInteraction       = 0
+	OnAfterRelease                                     = 0
+	PartialWakeLock                                    = 0
+	ProximityScreenOffWakeLock                         = 0
+	ReleaseFlagWaitForNoProximity                      = 0
+	ScreenBrightWakeLock                               = 0
+	ScreenDimWakeLock                                  = 0
+	ThermalStatusCritical                              = 0
+	ThermalStatusEmergency                             = 0
+	ThermalStatusLight                                 = 0
+	ThermalStatusModerate                              = 0
+	ThermalStatusNone                                  = 0
+	ThermalStatusSevere                                = 0
+	ThermalStatusShutdown                              = 0
+)
+
+const (
+	ActionDeviceIdleModeChanged         = ""
+	ActionDeviceLightIdleModeChanged    = ""
+	ActionLowPowerStandbyEnabledChanged = ""
+	ActionLowPowerStandbyPolicyChanged  = ""
+	ActionPowerSaveModeChanged          = ""
+	FeatureWakeOnLanInLowPowerStandby   = ""
 )
