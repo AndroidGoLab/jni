@@ -1,0 +1,6 @@
+id=jniservice
+name=JNI gRPC Service
+version=v0.0.0
+versionCode=1
+author=xaionaro
+description=Runs jniservice gRPC server on boot via app_process
