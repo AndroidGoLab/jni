@@ -132,6 +132,9 @@ dist-jnictl-linux:
 	CGO_ENABLED=0 GOOS=linux GOARCH=$(DIST_GOARCH) \
 		go build -o dist/jnictl-linux-$(DIST_GOARCH) ./cmd/jnictl/
 
+# android/amd64 requires external (CGO) linking for PIE (Go toolchain limitation:
+# InternalLinkPIESupported lists android/arm64 but not android/amd64).
+# Use CGO_ENABLED=1 unconditionally since arm64 also works fine with it.
 dist-jnictl-android:
 	@mkdir -p dist
 	CGO_ENABLED=1 GOOS=android GOARCH=$(DIST_GOARCH) CC=$(DIST_CC) \
