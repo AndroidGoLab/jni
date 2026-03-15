@@ -339,6 +339,53 @@ flowchart TD
 | `make lint` | Run golangci-lint | golangci-lint |
 | `make clean` | Remove all generated files | -- |
 
+## Running jniservice on Android
+
+jniservice is a gRPC server that exposes the JNI surface and Android APIs over the network.
+
+### Development (via adb)
+
+```bash
+make deploy                    # build, push, start, forward port
+make deploy HOST_PORT=50052    # use different host port
+make stop-server               # stop the server
+```
+
+### Rooted devices (Magisk module)
+
+Auto-starts on boot. Self-contained — no `make deploy` needed after install.
+
+```bash
+make magisk DIST_GOARCH=arm64                          # build module
+adb push build/jniservice-magisk-arm64-v8a.zip /sdcard/
+adb shell su -c "magisk --install-module /sdcard/jniservice-magisk-arm64-v8a.zip"
+adb reboot                                             # starts on next boot
+```
+
+Configuration: create `/data/local/tmp/jniservice.env` on the device:
+```bash
+JNISERVICE_PORT=50051
+JNISERVICE_TOKEN=my-secret-token
+```
+
+### Non-rooted devices (APK)
+
+Auto-starts on boot via foreground service.
+
+```bash
+make apk DIST_GOARCH=arm64          # build APK
+adb install build/jniservice-arm64-v8a.apk
+```
+
+Open "jniservice" from the launcher once to start the service and register the boot receiver.
+
+### Connecting
+
+```bash
+adb forward tcp:50051 tcp:50051
+jnictl --addr localhost:50051 --insecure jni get-version
+```
+
 ## E2E Test Verification
 
 Run `make test-emulator` to test against a connected device or emulator. Tests skip when `JNICTL_E2E_ADDR` is not set.
