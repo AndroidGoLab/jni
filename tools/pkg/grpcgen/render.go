@@ -3,6 +3,7 @@ package grpcgen
 import (
 	"bytes"
 	"fmt"
+	"go/format"
 	"os"
 	"text/template"
 )
@@ -133,10 +134,7 @@ func renderServer(data *ServerData, outputPath string) error {
 	if err != nil {
 		return err
 	}
-	if err := os.WriteFile(outputPath, []byte(src), 0o644); err != nil {
-		return fmt.Errorf("write %s: %w", outputPath, err)
-	}
-	return nil
+	return writeFormattedGo(outputPath, []byte(src))
 }
 
 // renderServerToString renders a ServerData to Go source code as a string.
@@ -243,10 +241,7 @@ func renderClient(data *ClientData, outputPath string) error {
 	if err != nil {
 		return err
 	}
-	if err := os.WriteFile(outputPath, []byte(src), 0o644); err != nil {
-		return fmt.Errorf("write %s: %w", outputPath, err)
-	}
-	return nil
+	return writeFormattedGo(outputPath, []byte(src))
 }
 
 // clientRenderData is the combined data passed to the client template.
@@ -279,4 +274,19 @@ func renderClientToString(data *ClientData) (string, error) {
 		return "", fmt.Errorf("execute template: %w", err)
 	}
 	return buf.String(), nil
+}
+
+// writeFormattedGo runs go/format on src and writes the result to outputPath.
+// If formatting fails (e.g. the generated code has a syntax error), the
+// unformatted source is written as a fallback so the user can debug.
+func writeFormattedGo(outputPath string, src []byte) error {
+	formatted, err := format.Source(src)
+	if err != nil {
+		// Fall back to unformatted output so the user can inspect the error.
+		formatted = src
+	}
+	if err := os.WriteFile(outputPath, formatted, 0o644); err != nil {
+		return fmt.Errorf("write %s: %w", outputPath, err)
+	}
+	return nil
 }

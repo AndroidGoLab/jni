@@ -89,8 +89,7 @@ func (c *Client) DisplayCompletions(ctx context.Context, arg0 int64, arg1 int64)
 
 // GetCurrentInputMethodInfo calls the GetCurrentInputMethodInfo RPC.
 func (c *Client) GetCurrentInputMethodInfo(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetCurrentInputMethodInfo(ctx, &pb.GetCurrentInputMethodInfoRequest{
-	})
+	resp, err := c.svc.GetCurrentInputMethodInfo(ctx, &pb.GetCurrentInputMethodInfoRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -99,8 +98,7 @@ func (c *Client) GetCurrentInputMethodInfo(ctx context.Context) (int64, error) {
 
 // GetCurrentInputMethodSubtype calls the GetCurrentInputMethodSubtype RPC.
 func (c *Client) GetCurrentInputMethodSubtype(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetCurrentInputMethodSubtype(ctx, &pb.GetCurrentInputMethodSubtypeRequest{
-	})
+	resp, err := c.svc.GetCurrentInputMethodSubtype(ctx, &pb.GetCurrentInputMethodSubtypeRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -109,8 +107,7 @@ func (c *Client) GetCurrentInputMethodSubtype(ctx context.Context) (int64, error
 
 // GetEnabledInputMethodList calls the GetEnabledInputMethodList RPC.
 func (c *Client) GetEnabledInputMethodList(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetEnabledInputMethodList(ctx, &pb.GetEnabledInputMethodListRequest{
-	})
+	resp, err := c.svc.GetEnabledInputMethodList(ctx, &pb.GetEnabledInputMethodListRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -131,8 +128,7 @@ func (c *Client) GetEnabledInputMethodSubtypeList(ctx context.Context, arg0 int6
 
 // GetInputMethodList calls the GetInputMethodList RPC.
 func (c *Client) GetInputMethodList(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetInputMethodList(ctx, &pb.GetInputMethodListRequest{
-	})
+	resp, err := c.svc.GetInputMethodList(ctx, &pb.GetInputMethodListRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -141,8 +137,7 @@ func (c *Client) GetInputMethodList(ctx context.Context) (int64, error) {
 
 // GetLastInputMethodSubtype calls the GetLastInputMethodSubtype RPC.
 func (c *Client) GetLastInputMethodSubtype(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetLastInputMethodSubtype(ctx, &pb.GetLastInputMethodSubtypeRequest{
-	})
+	resp, err := c.svc.GetLastInputMethodSubtype(ctx, &pb.GetLastInputMethodSubtypeRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -201,8 +196,7 @@ func (c *Client) InvalidateInput(ctx context.Context, arg0 int64) error {
 
 // IsAcceptingText calls the IsAcceptingText RPC.
 func (c *Client) IsAcceptingText(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsAcceptingText(ctx, &pb.IsAcceptingTextRequest{
-	})
+	resp, err := c.svc.IsAcceptingText(ctx, &pb.IsAcceptingTextRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -211,8 +205,7 @@ func (c *Client) IsAcceptingText(ctx context.Context) (bool, error) {
 
 // IsActive0 calls the IsActive0 RPC.
 func (c *Client) IsActive0(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsActive0(ctx, &pb.IsActive0Request{
-	})
+	resp, err := c.svc.IsActive0(ctx, &pb.IsActive0Request{})
 	if err != nil {
 		return false, err
 	}
@@ -232,8 +225,7 @@ func (c *Client) IsActive1_1(ctx context.Context, arg0 int64) (bool, error) {
 
 // IsConnectionlessStylusHandwritingAvailable calls the IsConnectionlessStylusHandwritingAvailable RPC.
 func (c *Client) IsConnectionlessStylusHandwritingAvailable(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsConnectionlessStylusHandwritingAvailable(ctx, &pb.IsConnectionlessStylusHandwritingAvailableRequest{
-	})
+	resp, err := c.svc.IsConnectionlessStylusHandwritingAvailable(ctx, &pb.IsConnectionlessStylusHandwritingAvailableRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -242,8 +234,7 @@ func (c *Client) IsConnectionlessStylusHandwritingAvailable(ctx context.Context)
 
 // IsFullscreenMode calls the IsFullscreenMode RPC.
 func (c *Client) IsFullscreenMode(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsFullscreenMode(ctx, &pb.IsFullscreenModeRequest{
-	})
+	resp, err := c.svc.IsFullscreenMode(ctx, &pb.IsFullscreenModeRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -252,8 +243,7 @@ func (c *Client) IsFullscreenMode(ctx context.Context) (bool, error) {
 
 // IsInputMethodSuppressingSpellChecker calls the IsInputMethodSuppressingSpellChecker RPC.
 func (c *Client) IsInputMethodSuppressingSpellChecker(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsInputMethodSuppressingSpellChecker(ctx, &pb.IsInputMethodSuppressingSpellCheckerRequest{
-	})
+	resp, err := c.svc.IsInputMethodSuppressingSpellChecker(ctx, &pb.IsInputMethodSuppressingSpellCheckerRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -262,8 +252,7 @@ func (c *Client) IsInputMethodSuppressingSpellChecker(ctx context.Context) (bool
 
 // IsStylusHandwritingAvailable calls the IsStylusHandwritingAvailable RPC.
 func (c *Client) IsStylusHandwritingAvailable(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsStylusHandwritingAvailable(ctx, &pb.IsStylusHandwritingAvailableRequest{
-	})
+	resp, err := c.svc.IsStylusHandwritingAvailable(ctx, &pb.IsStylusHandwritingAvailableRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -385,8 +374,7 @@ func (c *Client) ShowInputMethodAndSubtypeEnabler(ctx context.Context, arg0 stri
 
 // ShowInputMethodPicker calls the ShowInputMethodPicker RPC.
 func (c *Client) ShowInputMethodPicker(ctx context.Context) error {
-	_, err := c.svc.ShowInputMethodPicker(ctx, &pb.ShowInputMethodPickerRequest{
-	})
+	_, err := c.svc.ShowInputMethodPicker(ctx, &pb.ShowInputMethodPickerRequest{})
 	return err
 }
 

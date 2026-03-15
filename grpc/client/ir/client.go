@@ -25,8 +25,7 @@ func NewClient(cc grpc.ClientConnInterface) *Client {
 
 // GetCarrierFrequencies calls the GetCarrierFrequencies RPC.
 func (c *Client) GetCarrierFrequencies(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetCarrierFrequencies(ctx, &pb.GetCarrierFrequenciesRequest{
-	})
+	resp, err := c.svc.GetCarrierFrequencies(ctx, &pb.GetCarrierFrequenciesRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -35,8 +34,7 @@ func (c *Client) GetCarrierFrequencies(ctx context.Context) (int64, error) {
 
 // HasIrEmitter calls the HasIrEmitter RPC.
 func (c *Client) HasIrEmitter(ctx context.Context) (bool, error) {
-	resp, err := c.svc.HasIrEmitter(ctx, &pb.HasIrEmitterRequest{
-	})
+	resp, err := c.svc.HasIrEmitter(ctx, &pb.HasIrEmitterRequest{})
 	if err != nil {
 		return false, err
 	}

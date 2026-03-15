@@ -95,10 +95,10 @@ var (
 	midNewProxyInstance capi.JmethodID
 
 	// center.dx.jni.internal.GoInvocationHandler (loaded at init time)
-	clsGoHandler        capi.Class
-	midHandlerCtr       capi.JmethodID
-	fidHandlerID        capi.JfieldID  // GoInvocationHandler.handlerID
-	midMethodGetName    capi.JmethodID // java.lang.reflect.Method.getName()
+	clsGoHandler     capi.Class
+	midHandlerCtr    capi.JmethodID
+	fidHandlerID     capi.JfieldID  // GoInvocationHandler.handlerID
+	midMethodGetName capi.JmethodID // java.lang.reflect.Method.getName()
 
 	// center.dx.jni.internal.GoAbstractDispatch (loaded at init time)
 	clsGoAbstractDispatch capi.Class

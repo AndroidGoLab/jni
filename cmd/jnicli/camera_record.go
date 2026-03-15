@@ -14,16 +14,16 @@ import (
 
 // Android MediaRecorder / Camera2 constants used by the JNI calls below.
 const (
-	audioSourceMIC           = 1 // MediaRecorder.AudioSource.MIC
-	videoSourceSurface       = 2 // MediaRecorder.VideoSource.SURFACE
-	outputFormatMPEG4        = 2 // MediaRecorder.OutputFormat.MPEG_4
-	videoEncoderH264         = 2 // MediaRecorder.VideoEncoder.H264
-	audioEncoderAAC          = 3 // MediaRecorder.AudioEncoder.AAC
-	templateRecord           = 3 // CameraDevice.TEMPLATE_RECORD
-	defaultVideoBitRate      = 10_000_000
-	defaultVideoFrameRate    = 30
-	defaultVideoWidth        = 1920
-	defaultVideoHeight       = 1080
+	audioSourceMIC        = 1 // MediaRecorder.AudioSource.MIC
+	videoSourceSurface    = 2 // MediaRecorder.VideoSource.SURFACE
+	outputFormatMPEG4     = 2 // MediaRecorder.OutputFormat.MPEG_4
+	videoEncoderH264      = 2 // MediaRecorder.VideoEncoder.H264
+	audioEncoderAAC       = 3 // MediaRecorder.AudioEncoder.AAC
+	templateRecord        = 3 // CameraDevice.TEMPLATE_RECORD
+	defaultVideoBitRate   = 10_000_000
+	defaultVideoFrameRate = 30
+	defaultVideoWidth     = 1920
+	defaultVideoHeight    = 1080
 )
 
 var cameraRecordCmd = &cobra.Command{

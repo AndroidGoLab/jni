@@ -15,7 +15,7 @@ import (
 // BatteryManagerServer implements pb.BatteryManagerServiceServer.
 type BatteryManagerServer struct {
 	pb.UnimplementedBatteryManagerServiceServer
-	Ctx     *app.Context
+	Ctx *app.Context
 }
 
 func (s *BatteryManagerServer) ComputeChargeTimeRemaining(_ context.Context, req *pb.ComputeChargeTimeRemainingRequest) (*pb.ComputeChargeTimeRemainingResponse, error) {

@@ -25,8 +25,7 @@ func NewClient(cc grpc.ClientConnInterface) *Client {
 
 // CanScheduleExactAlarms calls the CanScheduleExactAlarms RPC.
 func (c *Client) CanScheduleExactAlarms(ctx context.Context) (bool, error) {
-	resp, err := c.svc.CanScheduleExactAlarms(ctx, &pb.CanScheduleExactAlarmsRequest{
-	})
+	resp, err := c.svc.CanScheduleExactAlarms(ctx, &pb.CanScheduleExactAlarmsRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -51,15 +50,13 @@ func (c *Client) Cancel1_1(ctx context.Context, arg0 int64) error {
 
 // CancelAll calls the CancelAll RPC.
 func (c *Client) CancelAll(ctx context.Context) error {
-	_, err := c.svc.CancelAll(ctx, &pb.CancelAllRequest{
-	})
+	_, err := c.svc.CancelAll(ctx, &pb.CancelAllRequest{})
 	return err
 }
 
 // GetNextAlarmClock calls the GetNextAlarmClock RPC.
 func (c *Client) GetNextAlarmClock(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetNextAlarmClock(ctx, &pb.GetNextAlarmClockRequest{
-	})
+	resp, err := c.svc.GetNextAlarmClock(ctx, &pb.GetNextAlarmClockRequest{})
 	if err != nil {
 		return 0, err
 	}

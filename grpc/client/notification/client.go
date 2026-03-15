@@ -36,8 +36,7 @@ func (c *Client) AddAutomaticZenRule(ctx context.Context, arg0 int64) (string, e
 
 // AreAutomaticZenRulesUserManaged calls the AreAutomaticZenRulesUserManaged RPC.
 func (c *Client) AreAutomaticZenRulesUserManaged(ctx context.Context) (bool, error) {
-	resp, err := c.svc.AreAutomaticZenRulesUserManaged(ctx, &pb.AreAutomaticZenRulesUserManagedRequest{
-	})
+	resp, err := c.svc.AreAutomaticZenRulesUserManaged(ctx, &pb.AreAutomaticZenRulesUserManagedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -46,8 +45,7 @@ func (c *Client) AreAutomaticZenRulesUserManaged(ctx context.Context) (bool, err
 
 // AreBubblesAllowed calls the AreBubblesAllowed RPC.
 func (c *Client) AreBubblesAllowed(ctx context.Context) (bool, error) {
-	resp, err := c.svc.AreBubblesAllowed(ctx, &pb.AreBubblesAllowedRequest{
-	})
+	resp, err := c.svc.AreBubblesAllowed(ctx, &pb.AreBubblesAllowedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -56,8 +54,7 @@ func (c *Client) AreBubblesAllowed(ctx context.Context) (bool, error) {
 
 // AreBubblesEnabled calls the AreBubblesEnabled RPC.
 func (c *Client) AreBubblesEnabled(ctx context.Context) (bool, error) {
-	resp, err := c.svc.AreBubblesEnabled(ctx, &pb.AreBubblesEnabledRequest{
-	})
+	resp, err := c.svc.AreBubblesEnabled(ctx, &pb.AreBubblesEnabledRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -66,8 +63,7 @@ func (c *Client) AreBubblesEnabled(ctx context.Context) (bool, error) {
 
 // AreNotificationsEnabled calls the AreNotificationsEnabled RPC.
 func (c *Client) AreNotificationsEnabled(ctx context.Context) (bool, error) {
-	resp, err := c.svc.AreNotificationsEnabled(ctx, &pb.AreNotificationsEnabledRequest{
-	})
+	resp, err := c.svc.AreNotificationsEnabled(ctx, &pb.AreNotificationsEnabledRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -76,8 +72,7 @@ func (c *Client) AreNotificationsEnabled(ctx context.Context) (bool, error) {
 
 // AreNotificationsPaused calls the AreNotificationsPaused RPC.
 func (c *Client) AreNotificationsPaused(ctx context.Context) (bool, error) {
-	resp, err := c.svc.AreNotificationsPaused(ctx, &pb.AreNotificationsPausedRequest{
-	})
+	resp, err := c.svc.AreNotificationsPaused(ctx, &pb.AreNotificationsPausedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -97,8 +92,7 @@ func (c *Client) CanNotifyAsPackage(ctx context.Context, arg0 string) (bool, err
 
 // CanPostPromotedNotifications calls the CanPostPromotedNotifications RPC.
 func (c *Client) CanPostPromotedNotifications(ctx context.Context) (bool, error) {
-	resp, err := c.svc.CanPostPromotedNotifications(ctx, &pb.CanPostPromotedNotificationsRequest{
-	})
+	resp, err := c.svc.CanPostPromotedNotifications(ctx, &pb.CanPostPromotedNotificationsRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -107,8 +101,7 @@ func (c *Client) CanPostPromotedNotifications(ctx context.Context) (bool, error)
 
 // CanUseFullScreenIntent calls the CanUseFullScreenIntent RPC.
 func (c *Client) CanUseFullScreenIntent(ctx context.Context) (bool, error) {
-	resp, err := c.svc.CanUseFullScreenIntent(ctx, &pb.CanUseFullScreenIntentRequest{
-	})
+	resp, err := c.svc.CanUseFullScreenIntent(ctx, &pb.CanUseFullScreenIntentRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -134,8 +127,7 @@ func (c *Client) Cancel2_1(ctx context.Context, arg0 string, arg1 int32) error {
 
 // CancelAll calls the CancelAll RPC.
 func (c *Client) CancelAll(ctx context.Context) error {
-	_, err := c.svc.CancelAll(ctx, &pb.CancelAllRequest{
-	})
+	_, err := c.svc.CancelAll(ctx, &pb.CancelAllRequest{})
 	return err
 }
 
@@ -199,8 +191,7 @@ func (c *Client) DeleteNotificationChannelGroup(ctx context.Context, arg0 string
 
 // GetActiveNotifications calls the GetActiveNotifications RPC.
 func (c *Client) GetActiveNotifications(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetActiveNotifications(ctx, &pb.GetActiveNotificationsRequest{
-	})
+	resp, err := c.svc.GetActiveNotifications(ctx, &pb.GetActiveNotificationsRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -231,8 +222,7 @@ func (c *Client) GetAutomaticZenRuleState(ctx context.Context, arg0 string) (int
 
 // GetBubblePreference calls the GetBubblePreference RPC.
 func (c *Client) GetBubblePreference(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetBubblePreference(ctx, &pb.GetBubblePreferenceRequest{
-	})
+	resp, err := c.svc.GetBubblePreference(ctx, &pb.GetBubblePreferenceRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -241,8 +231,7 @@ func (c *Client) GetBubblePreference(ctx context.Context) (int32, error) {
 
 // GetConsolidatedNotificationPolicy calls the GetConsolidatedNotificationPolicy RPC.
 func (c *Client) GetConsolidatedNotificationPolicy(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetConsolidatedNotificationPolicy(ctx, &pb.GetConsolidatedNotificationPolicyRequest{
-	})
+	resp, err := c.svc.GetConsolidatedNotificationPolicy(ctx, &pb.GetConsolidatedNotificationPolicyRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -251,8 +240,7 @@ func (c *Client) GetConsolidatedNotificationPolicy(ctx context.Context) (int64, 
 
 // GetImportance calls the GetImportance RPC.
 func (c *Client) GetImportance(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetImportance(ctx, &pb.GetImportanceRequest{
-	})
+	resp, err := c.svc.GetImportance(ctx, &pb.GetImportanceRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -295,8 +283,7 @@ func (c *Client) GetNotificationChannelGroup(ctx context.Context, arg0 string) (
 
 // GetNotificationChannelGroups calls the GetNotificationChannelGroups RPC.
 func (c *Client) GetNotificationChannelGroups(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetNotificationChannelGroups(ctx, &pb.GetNotificationChannelGroupsRequest{
-	})
+	resp, err := c.svc.GetNotificationChannelGroups(ctx, &pb.GetNotificationChannelGroupsRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -305,8 +292,7 @@ func (c *Client) GetNotificationChannelGroups(ctx context.Context) (int64, error
 
 // GetNotificationChannels calls the GetNotificationChannels RPC.
 func (c *Client) GetNotificationChannels(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetNotificationChannels(ctx, &pb.GetNotificationChannelsRequest{
-	})
+	resp, err := c.svc.GetNotificationChannels(ctx, &pb.GetNotificationChannelsRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -315,8 +301,7 @@ func (c *Client) GetNotificationChannels(ctx context.Context) (int64, error) {
 
 // GetNotificationDelegate calls the GetNotificationDelegate RPC.
 func (c *Client) GetNotificationDelegate(ctx context.Context) (string, error) {
-	resp, err := c.svc.GetNotificationDelegate(ctx, &pb.GetNotificationDelegateRequest{
-	})
+	resp, err := c.svc.GetNotificationDelegate(ctx, &pb.GetNotificationDelegateRequest{})
 	if err != nil {
 		return "", err
 	}
@@ -325,8 +310,7 @@ func (c *Client) GetNotificationDelegate(ctx context.Context) (string, error) {
 
 // GetNotificationPolicy calls the GetNotificationPolicy RPC.
 func (c *Client) GetNotificationPolicy(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetNotificationPolicy(ctx, &pb.GetNotificationPolicyRequest{
-	})
+	resp, err := c.svc.GetNotificationPolicy(ctx, &pb.GetNotificationPolicyRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -346,8 +330,7 @@ func (c *Client) IsNotificationListenerAccessGranted(ctx context.Context, arg0 i
 
 // IsNotificationPolicyAccessGranted calls the IsNotificationPolicyAccessGranted RPC.
 func (c *Client) IsNotificationPolicyAccessGranted(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsNotificationPolicyAccessGranted(ctx, &pb.IsNotificationPolicyAccessGrantedRequest{
-	})
+	resp, err := c.svc.IsNotificationPolicyAccessGranted(ctx, &pb.IsNotificationPolicyAccessGrantedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -433,8 +416,7 @@ func (c *Client) SetNotificationPolicy(ctx context.Context, arg0 int64) error {
 
 // ShouldHideSilentStatusBarIcons calls the ShouldHideSilentStatusBarIcons RPC.
 func (c *Client) ShouldHideSilentStatusBarIcons(ctx context.Context) (bool, error) {
-	resp, err := c.svc.ShouldHideSilentStatusBarIcons(ctx, &pb.ShouldHideSilentStatusBarIconsRequest{
-	})
+	resp, err := c.svc.ShouldHideSilentStatusBarIcons(ctx, &pb.ShouldHideSilentStatusBarIconsRequest{})
 	if err != nil {
 		return false, err
 	}

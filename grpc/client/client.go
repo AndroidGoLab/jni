@@ -40,69 +40,69 @@ import (
 
 // Client provides access to all Android API services over gRPC.
 type Client struct {
-	handles handlepb.HandleStoreServiceClient
-	Admin *adminclient.Client
-	Alarm *alarmclient.Client
+	handles      handlepb.HandleStoreServiceClient
+	Admin        *adminclient.Client
+	Alarm        *alarmclient.Client
 	Audiomanager *audiomanagerclient.Client
-	Battery *batteryclient.Client
-	Blob *blobclient.Client
-	Camera *cameraclient.Client
-	Clipboard *clipboardclient.Client
-	Companion *companionclient.Client
-	Inputmethod *inputmethodclient.Client
-	Ir *irclient.Client
-	Job *jobclient.Client
-	Keyguard *keyguardclient.Client
-	Location *locationclient.Client
-	Net *netclient.Client
+	Battery      *batteryclient.Client
+	Blob         *blobclient.Client
+	Camera       *cameraclient.Client
+	Clipboard    *clipboardclient.Client
+	Companion    *companionclient.Client
+	Inputmethod  *inputmethodclient.Client
+	Ir           *irclient.Client
+	Job          *jobclient.Client
+	Keyguard     *keyguardclient.Client
+	Location     *locationclient.Client
+	Net          *netclient.Client
 	Notification *notificationclient.Client
-	Power *powerclient.Client
-	Print *printclient.Client
-	Projection *projectionclient.Client
-	Role *roleclient.Client
-	Session *sessionclient.Client
-	Storage *storageclient.Client
-	Telecom *telecomclient.Client
-	Telephony *telephonyclient.Client
-	Usage *usageclient.Client
-	Vibrator *vibratorclient.Client
-	Wifi *wificlient.Client
-	Wifi_p2p *wifi_p2pclient.Client
-	Wifi_rtt *wifi_rttclient.Client
+	Power        *powerclient.Client
+	Print        *printclient.Client
+	Projection   *projectionclient.Client
+	Role         *roleclient.Client
+	Session      *sessionclient.Client
+	Storage      *storageclient.Client
+	Telecom      *telecomclient.Client
+	Telephony    *telephonyclient.Client
+	Usage        *usageclient.Client
+	Vibrator     *vibratorclient.Client
+	Wifi         *wificlient.Client
+	Wifi_p2p     *wifi_p2pclient.Client
+	Wifi_rtt     *wifi_rttclient.Client
 }
 
 // NewClient creates a composite client from a gRPC connection.
 func NewClient(cc grpc.ClientConnInterface) *Client {
 	return &Client{
-		handles: handlepb.NewHandleStoreServiceClient(cc),
-		Admin: adminclient.NewClient(cc),
-		Alarm: alarmclient.NewClient(cc),
+		handles:      handlepb.NewHandleStoreServiceClient(cc),
+		Admin:        adminclient.NewClient(cc),
+		Alarm:        alarmclient.NewClient(cc),
 		Audiomanager: audiomanagerclient.NewClient(cc),
-		Battery: batteryclient.NewClient(cc),
-		Blob: blobclient.NewClient(cc),
-		Camera: cameraclient.NewClient(cc),
-		Clipboard: clipboardclient.NewClient(cc),
-		Companion: companionclient.NewClient(cc),
-		Inputmethod: inputmethodclient.NewClient(cc),
-		Ir: irclient.NewClient(cc),
-		Job: jobclient.NewClient(cc),
-		Keyguard: keyguardclient.NewClient(cc),
-		Location: locationclient.NewClient(cc),
-		Net: netclient.NewClient(cc),
+		Battery:      batteryclient.NewClient(cc),
+		Blob:         blobclient.NewClient(cc),
+		Camera:       cameraclient.NewClient(cc),
+		Clipboard:    clipboardclient.NewClient(cc),
+		Companion:    companionclient.NewClient(cc),
+		Inputmethod:  inputmethodclient.NewClient(cc),
+		Ir:           irclient.NewClient(cc),
+		Job:          jobclient.NewClient(cc),
+		Keyguard:     keyguardclient.NewClient(cc),
+		Location:     locationclient.NewClient(cc),
+		Net:          netclient.NewClient(cc),
 		Notification: notificationclient.NewClient(cc),
-		Power: powerclient.NewClient(cc),
-		Print: printclient.NewClient(cc),
-		Projection: projectionclient.NewClient(cc),
-		Role: roleclient.NewClient(cc),
-		Session: sessionclient.NewClient(cc),
-		Storage: storageclient.NewClient(cc),
-		Telecom: telecomclient.NewClient(cc),
-		Telephony: telephonyclient.NewClient(cc),
-		Usage: usageclient.NewClient(cc),
-		Vibrator: vibratorclient.NewClient(cc),
-		Wifi: wificlient.NewClient(cc),
-		Wifi_p2p: wifi_p2pclient.NewClient(cc),
-		Wifi_rtt: wifi_rttclient.NewClient(cc),
+		Power:        powerclient.NewClient(cc),
+		Print:        printclient.NewClient(cc),
+		Projection:   projectionclient.NewClient(cc),
+		Role:         roleclient.NewClient(cc),
+		Session:      sessionclient.NewClient(cc),
+		Storage:      storageclient.NewClient(cc),
+		Telecom:      telecomclient.NewClient(cc),
+		Telephony:    telephonyclient.NewClient(cc),
+		Usage:        usageclient.NewClient(cc),
+		Vibrator:     vibratorclient.NewClient(cc),
+		Wifi:         wificlient.NewClient(cc),
+		Wifi_p2p:     wifi_p2pclient.NewClient(cc),
+		Wifi_rtt:     wifi_rttclient.NewClient(cc),
 	}
 }
 

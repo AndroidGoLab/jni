@@ -22,8 +22,8 @@ type PermissionRequestNotifier func(requestID int64, clientID string, methods []
 // AuthServiceServer implements pb.AuthServiceServer.
 type AuthServiceServer struct {
 	pb.UnimplementedAuthServiceServer
-	CA       *certauth.CA
-	Store    *acl.Store
+	CA                  *certauth.CA
+	Store               *acl.Store
 	OnPermissionRequest PermissionRequestNotifier
 }
 

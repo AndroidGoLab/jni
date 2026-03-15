@@ -59,8 +59,7 @@ func (c *Client) AddThermalStatusListener2_1(ctx context.Context, arg0 int64, ar
 
 // GetBatteryDischargePrediction calls the GetBatteryDischargePrediction RPC.
 func (c *Client) GetBatteryDischargePrediction(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetBatteryDischargePrediction(ctx, &pb.GetBatteryDischargePredictionRequest{
-	})
+	resp, err := c.svc.GetBatteryDischargePrediction(ctx, &pb.GetBatteryDischargePredictionRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -69,8 +68,7 @@ func (c *Client) GetBatteryDischargePrediction(ctx context.Context) (int64, erro
 
 // GetCurrentThermalStatus calls the GetCurrentThermalStatus RPC.
 func (c *Client) GetCurrentThermalStatus(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetCurrentThermalStatus(ctx, &pb.GetCurrentThermalStatusRequest{
-	})
+	resp, err := c.svc.GetCurrentThermalStatus(ctx, &pb.GetCurrentThermalStatusRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -79,8 +77,7 @@ func (c *Client) GetCurrentThermalStatus(ctx context.Context) (int32, error) {
 
 // GetLocationPowerSaveMode calls the GetLocationPowerSaveMode RPC.
 func (c *Client) GetLocationPowerSaveMode(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetLocationPowerSaveMode(ctx, &pb.GetLocationPowerSaveModeRequest{
-	})
+	resp, err := c.svc.GetLocationPowerSaveMode(ctx, &pb.GetLocationPowerSaveModeRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -122,8 +119,7 @@ func (c *Client) IsAllowedInLowPowerStandby1_1(ctx context.Context, arg0 string)
 
 // IsBatteryDischargePredictionPersonalized calls the IsBatteryDischargePredictionPersonalized RPC.
 func (c *Client) IsBatteryDischargePredictionPersonalized(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsBatteryDischargePredictionPersonalized(ctx, &pb.IsBatteryDischargePredictionPersonalizedRequest{
-	})
+	resp, err := c.svc.IsBatteryDischargePredictionPersonalized(ctx, &pb.IsBatteryDischargePredictionPersonalizedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -132,8 +128,7 @@ func (c *Client) IsBatteryDischargePredictionPersonalized(ctx context.Context) (
 
 // IsDeviceIdleMode calls the IsDeviceIdleMode RPC.
 func (c *Client) IsDeviceIdleMode(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsDeviceIdleMode(ctx, &pb.IsDeviceIdleModeRequest{
-	})
+	resp, err := c.svc.IsDeviceIdleMode(ctx, &pb.IsDeviceIdleModeRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -142,8 +137,7 @@ func (c *Client) IsDeviceIdleMode(ctx context.Context) (bool, error) {
 
 // IsDeviceLightIdleMode calls the IsDeviceLightIdleMode RPC.
 func (c *Client) IsDeviceLightIdleMode(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsDeviceLightIdleMode(ctx, &pb.IsDeviceLightIdleModeRequest{
-	})
+	resp, err := c.svc.IsDeviceLightIdleMode(ctx, &pb.IsDeviceLightIdleModeRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -152,8 +146,7 @@ func (c *Client) IsDeviceLightIdleMode(ctx context.Context) (bool, error) {
 
 // IsExemptFromLowPowerStandby calls the IsExemptFromLowPowerStandby RPC.
 func (c *Client) IsExemptFromLowPowerStandby(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsExemptFromLowPowerStandby(ctx, &pb.IsExemptFromLowPowerStandbyRequest{
-	})
+	resp, err := c.svc.IsExemptFromLowPowerStandby(ctx, &pb.IsExemptFromLowPowerStandbyRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -173,8 +166,7 @@ func (c *Client) IsIgnoringBatteryOptimizations(ctx context.Context, arg0 string
 
 // IsInteractive calls the IsInteractive RPC.
 func (c *Client) IsInteractive(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsInteractive(ctx, &pb.IsInteractiveRequest{
-	})
+	resp, err := c.svc.IsInteractive(ctx, &pb.IsInteractiveRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -183,8 +175,7 @@ func (c *Client) IsInteractive(ctx context.Context) (bool, error) {
 
 // IsLowPowerStandbyEnabled calls the IsLowPowerStandbyEnabled RPC.
 func (c *Client) IsLowPowerStandbyEnabled(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsLowPowerStandbyEnabled(ctx, &pb.IsLowPowerStandbyEnabledRequest{
-	})
+	resp, err := c.svc.IsLowPowerStandbyEnabled(ctx, &pb.IsLowPowerStandbyEnabledRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -193,8 +184,7 @@ func (c *Client) IsLowPowerStandbyEnabled(ctx context.Context) (bool, error) {
 
 // IsPowerSaveMode calls the IsPowerSaveMode RPC.
 func (c *Client) IsPowerSaveMode(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsPowerSaveMode(ctx, &pb.IsPowerSaveModeRequest{
-	})
+	resp, err := c.svc.IsPowerSaveMode(ctx, &pb.IsPowerSaveModeRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -203,8 +193,7 @@ func (c *Client) IsPowerSaveMode(ctx context.Context) (bool, error) {
 
 // IsRebootingUserspaceSupported calls the IsRebootingUserspaceSupported RPC.
 func (c *Client) IsRebootingUserspaceSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsRebootingUserspaceSupported(ctx, &pb.IsRebootingUserspaceSupportedRequest{
-	})
+	resp, err := c.svc.IsRebootingUserspaceSupported(ctx, &pb.IsRebootingUserspaceSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -213,8 +202,7 @@ func (c *Client) IsRebootingUserspaceSupported(ctx context.Context) (bool, error
 
 // IsScreenOn calls the IsScreenOn RPC.
 func (c *Client) IsScreenOn(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsScreenOn(ctx, &pb.IsScreenOnRequest{
-	})
+	resp, err := c.svc.IsScreenOn(ctx, &pb.IsScreenOnRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -223,8 +211,7 @@ func (c *Client) IsScreenOn(ctx context.Context) (bool, error) {
 
 // IsSustainedPerformanceModeSupported calls the IsSustainedPerformanceModeSupported RPC.
 func (c *Client) IsSustainedPerformanceModeSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsSustainedPerformanceModeSupported(ctx, &pb.IsSustainedPerformanceModeSupportedRequest{
-	})
+	resp, err := c.svc.IsSustainedPerformanceModeSupported(ctx, &pb.IsSustainedPerformanceModeSupportedRequest{})
 	if err != nil {
 		return false, err
 	}

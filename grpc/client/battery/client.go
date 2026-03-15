@@ -25,8 +25,7 @@ func NewClient(cc grpc.ClientConnInterface) *Client {
 
 // ComputeChargeTimeRemaining calls the ComputeChargeTimeRemaining RPC.
 func (c *Client) ComputeChargeTimeRemaining(ctx context.Context) (int64, error) {
-	resp, err := c.svc.ComputeChargeTimeRemaining(ctx, &pb.ComputeChargeTimeRemainingRequest{
-	})
+	resp, err := c.svc.ComputeChargeTimeRemaining(ctx, &pb.ComputeChargeTimeRemainingRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -68,8 +67,7 @@ func (c *Client) GetStringProperty(ctx context.Context, arg0 int32) (string, err
 
 // IsCharging calls the IsCharging RPC.
 func (c *Client) IsCharging(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsCharging(ctx, &pb.IsChargingRequest{
-	})
+	resp, err := c.svc.IsCharging(ctx, &pb.IsChargingRequest{})
 	if err != nil {
 		return false, err
 	}

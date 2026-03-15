@@ -82,8 +82,7 @@ func (c *Client) CreateSession(ctx context.Context, arg0 int64) (int64, error) {
 
 // GetLeasedBlobs calls the GetLeasedBlobs RPC.
 func (c *Client) GetLeasedBlobs(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetLeasedBlobs(ctx, &pb.GetLeasedBlobsRequest{
-	})
+	resp, err := c.svc.GetLeasedBlobs(ctx, &pb.GetLeasedBlobsRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -92,8 +91,7 @@ func (c *Client) GetLeasedBlobs(ctx context.Context) (int64, error) {
 
 // GetRemainingLeaseQuotaBytes calls the GetRemainingLeaseQuotaBytes RPC.
 func (c *Client) GetRemainingLeaseQuotaBytes(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetRemainingLeaseQuotaBytes(ctx, &pb.GetRemainingLeaseQuotaBytesRequest{
-	})
+	resp, err := c.svc.GetRemainingLeaseQuotaBytes(ctx, &pb.GetRemainingLeaseQuotaBytesRequest{})
 	if err != nil {
 		return 0, err
 	}

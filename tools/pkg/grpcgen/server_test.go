@@ -331,10 +331,10 @@ func TestHasContextConstructor(t *testing.T) {
 
 func TestBuildCallArgs(t *testing.T) {
 	tests := []struct {
-		name         string
-		params       []javagen.MergedParam
-		want         string
-		wantHandles  bool
+		name        string
+		params      []javagen.MergedParam
+		want        string
+		wantHandles bool
 	}{
 		{
 			name:   "empty",

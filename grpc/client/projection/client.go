@@ -25,8 +25,7 @@ func NewClient(cc grpc.ClientConnInterface) *Client {
 
 // CreateScreenCaptureIntent0 calls the CreateScreenCaptureIntent0 RPC.
 func (c *Client) CreateScreenCaptureIntent0(ctx context.Context) (int64, error) {
-	resp, err := c.svc.CreateScreenCaptureIntent0(ctx, &pb.CreateScreenCaptureIntent0Request{
-	})
+	resp, err := c.svc.CreateScreenCaptureIntent0(ctx, &pb.CreateScreenCaptureIntent0Request{})
 	if err != nil {
 		return 0, err
 	}

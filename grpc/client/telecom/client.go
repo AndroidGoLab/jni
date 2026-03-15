@@ -35,8 +35,7 @@ func (c *Client) AcceptHandover(ctx context.Context, arg0 int64, arg1 int32, arg
 
 // AcceptRingingCall0 calls the AcceptRingingCall0 RPC.
 func (c *Client) AcceptRingingCall0(ctx context.Context) error {
-	_, err := c.svc.AcceptRingingCall0(ctx, &pb.AcceptRingingCall0Request{
-	})
+	_, err := c.svc.AcceptRingingCall0(ctx, &pb.AcceptRingingCall0Request{})
 	return err
 }
 
@@ -80,15 +79,13 @@ func (c *Client) AddNewIncomingConference(ctx context.Context, arg0 int64, arg1 
 
 // CancelMissedCallsNotification calls the CancelMissedCallsNotification RPC.
 func (c *Client) CancelMissedCallsNotification(ctx context.Context) error {
-	_, err := c.svc.CancelMissedCallsNotification(ctx, &pb.CancelMissedCallsNotificationRequest{
-	})
+	_, err := c.svc.CancelMissedCallsNotification(ctx, &pb.CancelMissedCallsNotificationRequest{})
 	return err
 }
 
 // CreateManageBlockedNumbersIntent calls the CreateManageBlockedNumbersIntent RPC.
 func (c *Client) CreateManageBlockedNumbersIntent(ctx context.Context) (int64, error) {
-	resp, err := c.svc.CreateManageBlockedNumbersIntent(ctx, &pb.CreateManageBlockedNumbersIntentRequest{
-	})
+	resp, err := c.svc.CreateManageBlockedNumbersIntent(ctx, &pb.CreateManageBlockedNumbersIntentRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -97,8 +94,7 @@ func (c *Client) CreateManageBlockedNumbersIntent(ctx context.Context) (int64, e
 
 // EndCall calls the EndCall RPC.
 func (c *Client) EndCall(ctx context.Context) (bool, error) {
-	resp, err := c.svc.EndCall(ctx, &pb.EndCallRequest{
-	})
+	resp, err := c.svc.EndCall(ctx, &pb.EndCallRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -118,8 +114,7 @@ func (c *Client) GetAdnUriForPhoneAccount(ctx context.Context, arg0 int64) (int6
 
 // GetCallCapablePhoneAccounts calls the GetCallCapablePhoneAccounts RPC.
 func (c *Client) GetCallCapablePhoneAccounts(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetCallCapablePhoneAccounts(ctx, &pb.GetCallCapablePhoneAccountsRequest{
-	})
+	resp, err := c.svc.GetCallCapablePhoneAccounts(ctx, &pb.GetCallCapablePhoneAccountsRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -128,8 +123,7 @@ func (c *Client) GetCallCapablePhoneAccounts(ctx context.Context) (int64, error)
 
 // GetDefaultDialerPackage calls the GetDefaultDialerPackage RPC.
 func (c *Client) GetDefaultDialerPackage(ctx context.Context) (string, error) {
-	resp, err := c.svc.GetDefaultDialerPackage(ctx, &pb.GetDefaultDialerPackageRequest{
-	})
+	resp, err := c.svc.GetDefaultDialerPackage(ctx, &pb.GetDefaultDialerPackageRequest{})
 	if err != nil {
 		return "", err
 	}
@@ -160,8 +154,7 @@ func (c *Client) GetLine1Number(ctx context.Context, arg0 int64) (string, error)
 
 // GetOwnSelfManagedPhoneAccounts calls the GetOwnSelfManagedPhoneAccounts RPC.
 func (c *Client) GetOwnSelfManagedPhoneAccounts(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetOwnSelfManagedPhoneAccounts(ctx, &pb.GetOwnSelfManagedPhoneAccountsRequest{
-	})
+	resp, err := c.svc.GetOwnSelfManagedPhoneAccounts(ctx, &pb.GetOwnSelfManagedPhoneAccountsRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -181,8 +174,7 @@ func (c *Client) GetPhoneAccount(ctx context.Context, arg0 int64) (int64, error)
 
 // GetRegisteredPhoneAccounts calls the GetRegisteredPhoneAccounts RPC.
 func (c *Client) GetRegisteredPhoneAccounts(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetRegisteredPhoneAccounts(ctx, &pb.GetRegisteredPhoneAccountsRequest{
-	})
+	resp, err := c.svc.GetRegisteredPhoneAccounts(ctx, &pb.GetRegisteredPhoneAccountsRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -191,8 +183,7 @@ func (c *Client) GetRegisteredPhoneAccounts(ctx context.Context) (int64, error) 
 
 // GetSelfManagedPhoneAccounts calls the GetSelfManagedPhoneAccounts RPC.
 func (c *Client) GetSelfManagedPhoneAccounts(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetSelfManagedPhoneAccounts(ctx, &pb.GetSelfManagedPhoneAccountsRequest{
-	})
+	resp, err := c.svc.GetSelfManagedPhoneAccounts(ctx, &pb.GetSelfManagedPhoneAccountsRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -201,8 +192,7 @@ func (c *Client) GetSelfManagedPhoneAccounts(ctx context.Context) (int64, error)
 
 // GetSimCallManager calls the GetSimCallManager RPC.
 func (c *Client) GetSimCallManager(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetSimCallManager(ctx, &pb.GetSimCallManagerRequest{
-	})
+	resp, err := c.svc.GetSimCallManager(ctx, &pb.GetSimCallManagerRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -222,8 +212,7 @@ func (c *Client) GetSimCallManagerForSubscription(ctx context.Context, arg0 int3
 
 // GetSystemDialerPackage calls the GetSystemDialerPackage RPC.
 func (c *Client) GetSystemDialerPackage(ctx context.Context) (string, error) {
-	resp, err := c.svc.GetSystemDialerPackage(ctx, &pb.GetSystemDialerPackageRequest{
-	})
+	resp, err := c.svc.GetSystemDialerPackage(ctx, &pb.GetSystemDialerPackageRequest{})
 	if err != nil {
 		return "", err
 	}
@@ -232,8 +221,7 @@ func (c *Client) GetSystemDialerPackage(ctx context.Context) (string, error) {
 
 // GetUserSelectedOutgoingPhoneAccount calls the GetUserSelectedOutgoingPhoneAccount RPC.
 func (c *Client) GetUserSelectedOutgoingPhoneAccount(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetUserSelectedOutgoingPhoneAccount(ctx, &pb.GetUserSelectedOutgoingPhoneAccountRequest{
-	})
+	resp, err := c.svc.GetUserSelectedOutgoingPhoneAccount(ctx, &pb.GetUserSelectedOutgoingPhoneAccountRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -276,8 +264,7 @@ func (c *Client) HandleMmi2_1(ctx context.Context, arg0 string, arg1 int64) (boo
 
 // HasManageOngoingCallsPermission calls the HasManageOngoingCallsPermission RPC.
 func (c *Client) HasManageOngoingCallsPermission(ctx context.Context) (bool, error) {
-	resp, err := c.svc.HasManageOngoingCallsPermission(ctx, &pb.HasManageOngoingCallsPermissionRequest{
-	})
+	resp, err := c.svc.HasManageOngoingCallsPermission(ctx, &pb.HasManageOngoingCallsPermissionRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -286,8 +273,7 @@ func (c *Client) HasManageOngoingCallsPermission(ctx context.Context) (bool, err
 
 // IsInCall calls the IsInCall RPC.
 func (c *Client) IsInCall(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsInCall(ctx, &pb.IsInCallRequest{
-	})
+	resp, err := c.svc.IsInCall(ctx, &pb.IsInCallRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -296,8 +282,7 @@ func (c *Client) IsInCall(ctx context.Context) (bool, error) {
 
 // IsInManagedCall calls the IsInManagedCall RPC.
 func (c *Client) IsInManagedCall(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsInManagedCall(ctx, &pb.IsInManagedCallRequest{
-	})
+	resp, err := c.svc.IsInManagedCall(ctx, &pb.IsInManagedCallRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -328,8 +313,7 @@ func (c *Client) IsOutgoingCallPermitted(ctx context.Context, arg0 int64) (bool,
 
 // IsTtySupported calls the IsTtySupported RPC.
 func (c *Client) IsTtySupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsTtySupported(ctx, &pb.IsTtySupportedRequest{
-	})
+	resp, err := c.svc.IsTtySupported(ctx, &pb.IsTtySupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -375,8 +359,7 @@ func (c *Client) ShowInCallScreen(ctx context.Context, arg0 bool) error {
 
 // SilenceRinger calls the SilenceRinger RPC.
 func (c *Client) SilenceRinger(ctx context.Context) error {
-	_, err := c.svc.SilenceRinger(ctx, &pb.SilenceRingerRequest{
-	})
+	_, err := c.svc.SilenceRinger(ctx, &pb.SilenceRingerRequest{})
 	return err
 }
 

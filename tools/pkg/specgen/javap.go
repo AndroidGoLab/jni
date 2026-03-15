@@ -41,12 +41,12 @@ type JavapParam struct {
 }
 
 var (
-	classLineRe      = regexp.MustCompile(`^public\s+(abstract\s+)?(final\s+)?(class|interface)\s+(\S+)`)
-	implementsRe     = regexp.MustCompile(`implements\s+(.+?)\s*\{?\s*$`)
-	constantRe       = regexp.MustCompile(`^\s+public static final\s+(\S+)\s+(\w+);`)
-	constantValueRe  = regexp.MustCompile(`^\s+ConstantValue:\s+(\S+)\s+(.+)$`)
-	methodRe         = regexp.MustCompile(`^\s+public\s+(static\s+)?(\S+)\s+(\w+)\(([^)]*)\)(.*);\s*$`)
-	constructorRe    = regexp.MustCompile(`^\s+public\s+\S+\(([^)]*)\)(.*);\s*$`)
+	classLineRe     = regexp.MustCompile(`^public\s+(abstract\s+)?(final\s+)?(class|interface)\s+(\S+)`)
+	implementsRe    = regexp.MustCompile(`implements\s+(.+?)\s*\{?\s*$`)
+	constantRe      = regexp.MustCompile(`^\s+public static final\s+(\S+)\s+(\w+);`)
+	constantValueRe = regexp.MustCompile(`^\s+ConstantValue:\s+(\S+)\s+(.+)$`)
+	methodRe        = regexp.MustCompile(`^\s+public\s+(static\s+)?(\S+)\s+(\w+)\(([^)]*)\)(.*);\s*$`)
+	constructorRe   = regexp.MustCompile(`^\s+public\s+\S+\(([^)]*)\)(.*);\s*$`)
 )
 
 // RunJavap executes javap and parses the output for a single class.

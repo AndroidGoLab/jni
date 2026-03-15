@@ -182,8 +182,7 @@ func (c *Client) DisallowCurrentSuggestedNetwork(ctx context.Context, arg0 int64
 
 // Disconnect calls the Disconnect RPC.
 func (c *Client) Disconnect(ctx context.Context) (bool, error) {
-	resp, err := c.svc.Disconnect(ctx, &pb.DisconnectRequest{
-	})
+	resp, err := c.svc.Disconnect(ctx, &pb.DisconnectRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -204,8 +203,7 @@ func (c *Client) EnableNetwork(ctx context.Context, arg0 int32, arg1 bool) (bool
 
 // FlushPasspointAnqpCache calls the FlushPasspointAnqpCache RPC.
 func (c *Client) FlushPasspointAnqpCache(ctx context.Context) error {
-	_, err := c.svc.FlushPasspointAnqpCache(ctx, &pb.FlushPasspointAnqpCacheRequest{
-	})
+	_, err := c.svc.FlushPasspointAnqpCache(ctx, &pb.FlushPasspointAnqpCacheRequest{})
 	return err
 }
 
@@ -223,8 +221,7 @@ func (c *Client) GetAllowedChannels(ctx context.Context, arg0 int32, arg1 int32)
 
 // GetCallerConfiguredNetworks calls the GetCallerConfiguredNetworks RPC.
 func (c *Client) GetCallerConfiguredNetworks(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetCallerConfiguredNetworks(ctx, &pb.GetCallerConfiguredNetworksRequest{
-	})
+	resp, err := c.svc.GetCallerConfiguredNetworks(ctx, &pb.GetCallerConfiguredNetworksRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -242,8 +239,7 @@ func (c *Client) GetChannelData(ctx context.Context, arg0 int64, arg1 int64) err
 
 // GetConfiguredNetworks calls the GetConfiguredNetworks RPC.
 func (c *Client) GetConfiguredNetworks(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetConfiguredNetworks(ctx, &pb.GetConfiguredNetworksRequest{
-	})
+	resp, err := c.svc.GetConfiguredNetworks(ctx, &pb.GetConfiguredNetworksRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -252,8 +248,7 @@ func (c *Client) GetConfiguredNetworks(ctx context.Context) (int64, error) {
 
 // GetConnectionInfo calls the GetConnectionInfo RPC.
 func (c *Client) GetConnectionInfo(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetConnectionInfo(ctx, &pb.GetConnectionInfoRequest{
-	})
+	resp, err := c.svc.GetConnectionInfo(ctx, &pb.GetConnectionInfoRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -262,8 +257,7 @@ func (c *Client) GetConnectionInfo(ctx context.Context) (int64, error) {
 
 // GetDhcpInfo calls the GetDhcpInfo RPC.
 func (c *Client) GetDhcpInfo(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetDhcpInfo(ctx, &pb.GetDhcpInfoRequest{
-	})
+	resp, err := c.svc.GetDhcpInfo(ctx, &pb.GetDhcpInfoRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -272,8 +266,7 @@ func (c *Client) GetDhcpInfo(ctx context.Context) (int64, error) {
 
 // GetMaxNumberOfChannelsPerNetworkSpecifierRequest calls the GetMaxNumberOfChannelsPerNetworkSpecifierRequest RPC.
 func (c *Client) GetMaxNumberOfChannelsPerNetworkSpecifierRequest(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetMaxNumberOfChannelsPerNetworkSpecifierRequest(ctx, &pb.GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest{
-	})
+	resp, err := c.svc.GetMaxNumberOfChannelsPerNetworkSpecifierRequest(ctx, &pb.GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -282,8 +275,7 @@ func (c *Client) GetMaxNumberOfChannelsPerNetworkSpecifierRequest(ctx context.Co
 
 // GetMaxNumberOfNetworkSuggestionsPerApp calls the GetMaxNumberOfNetworkSuggestionsPerApp RPC.
 func (c *Client) GetMaxNumberOfNetworkSuggestionsPerApp(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetMaxNumberOfNetworkSuggestionsPerApp(ctx, &pb.GetMaxNumberOfNetworkSuggestionsPerAppRequest{
-	})
+	resp, err := c.svc.GetMaxNumberOfNetworkSuggestionsPerApp(ctx, &pb.GetMaxNumberOfNetworkSuggestionsPerAppRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -292,8 +284,7 @@ func (c *Client) GetMaxNumberOfNetworkSuggestionsPerApp(ctx context.Context) (in
 
 // GetMaxSignalLevel calls the GetMaxSignalLevel RPC.
 func (c *Client) GetMaxSignalLevel(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetMaxSignalLevel(ctx, &pb.GetMaxSignalLevelRequest{
-	})
+	resp, err := c.svc.GetMaxSignalLevel(ctx, &pb.GetMaxSignalLevelRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -311,8 +302,7 @@ func (c *Client) GetMaxSupportedConcurrentTdlsSessions(ctx context.Context, arg0
 
 // GetNetworkSuggestions calls the GetNetworkSuggestions RPC.
 func (c *Client) GetNetworkSuggestions(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetNetworkSuggestions(ctx, &pb.GetNetworkSuggestionsRequest{
-	})
+	resp, err := c.svc.GetNetworkSuggestions(ctx, &pb.GetNetworkSuggestionsRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -330,8 +320,7 @@ func (c *Client) GetNumberOfEnabledTdlsSessions(ctx context.Context, arg0 int64,
 
 // GetPasspointConfigurations calls the GetPasspointConfigurations RPC.
 func (c *Client) GetPasspointConfigurations(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetPasspointConfigurations(ctx, &pb.GetPasspointConfigurationsRequest{
-	})
+	resp, err := c.svc.GetPasspointConfigurations(ctx, &pb.GetPasspointConfigurationsRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -349,8 +338,7 @@ func (c *Client) GetPerSsidRoamingModes(ctx context.Context, arg0 int64, arg1 in
 
 // GetScanResults calls the GetScanResults RPC.
 func (c *Client) GetScanResults(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetScanResults(ctx, &pb.GetScanResultsRequest{
-	})
+	resp, err := c.svc.GetScanResults(ctx, &pb.GetScanResultsRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -359,8 +347,7 @@ func (c *Client) GetScanResults(ctx context.Context) (int64, error) {
 
 // GetStaConcurrencyForMultiInternetMode calls the GetStaConcurrencyForMultiInternetMode RPC.
 func (c *Client) GetStaConcurrencyForMultiInternetMode(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetStaConcurrencyForMultiInternetMode(ctx, &pb.GetStaConcurrencyForMultiInternetModeRequest{
-	})
+	resp, err := c.svc.GetStaConcurrencyForMultiInternetMode(ctx, &pb.GetStaConcurrencyForMultiInternetModeRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -381,8 +368,7 @@ func (c *Client) GetUsableChannels(ctx context.Context, arg0 int32, arg1 int32) 
 
 // GetWifiState calls the GetWifiState RPC.
 func (c *Client) GetWifiState(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetWifiState(ctx, &pb.GetWifiStateRequest{
-	})
+	resp, err := c.svc.GetWifiState(ctx, &pb.GetWifiStateRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -391,8 +377,7 @@ func (c *Client) GetWifiState(ctx context.Context) (int32, error) {
 
 // Is24GHzBandSupported calls the Is24GHzBandSupported RPC.
 func (c *Client) Is24GHzBandSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.Is24GHzBandSupported(ctx, &pb.Is24GHzBandSupportedRequest{
-	})
+	resp, err := c.svc.Is24GHzBandSupported(ctx, &pb.Is24GHzBandSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -401,8 +386,7 @@ func (c *Client) Is24GHzBandSupported(ctx context.Context) (bool, error) {
 
 // Is5GHzBandSupported calls the Is5GHzBandSupported RPC.
 func (c *Client) Is5GHzBandSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.Is5GHzBandSupported(ctx, &pb.Is5GHzBandSupportedRequest{
-	})
+	resp, err := c.svc.Is5GHzBandSupported(ctx, &pb.Is5GHzBandSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -411,8 +395,7 @@ func (c *Client) Is5GHzBandSupported(ctx context.Context) (bool, error) {
 
 // Is60GHzBandSupported calls the Is60GHzBandSupported RPC.
 func (c *Client) Is60GHzBandSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.Is60GHzBandSupported(ctx, &pb.Is60GHzBandSupportedRequest{
-	})
+	resp, err := c.svc.Is60GHzBandSupported(ctx, &pb.Is60GHzBandSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -421,8 +404,7 @@ func (c *Client) Is60GHzBandSupported(ctx context.Context) (bool, error) {
 
 // Is6GHzBandSupported calls the Is6GHzBandSupported RPC.
 func (c *Client) Is6GHzBandSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.Is6GHzBandSupported(ctx, &pb.Is6GHzBandSupportedRequest{
-	})
+	resp, err := c.svc.Is6GHzBandSupported(ctx, &pb.Is6GHzBandSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -431,8 +413,7 @@ func (c *Client) Is6GHzBandSupported(ctx context.Context) (bool, error) {
 
 // IsAggressiveRoamingModeSupported calls the IsAggressiveRoamingModeSupported RPC.
 func (c *Client) IsAggressiveRoamingModeSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsAggressiveRoamingModeSupported(ctx, &pb.IsAggressiveRoamingModeSupportedRequest{
-	})
+	resp, err := c.svc.IsAggressiveRoamingModeSupported(ctx, &pb.IsAggressiveRoamingModeSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -441,8 +422,7 @@ func (c *Client) IsAggressiveRoamingModeSupported(ctx context.Context) (bool, er
 
 // IsAutoWakeupEnabled calls the IsAutoWakeupEnabled RPC.
 func (c *Client) IsAutoWakeupEnabled(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsAutoWakeupEnabled(ctx, &pb.IsAutoWakeupEnabledRequest{
-	})
+	resp, err := c.svc.IsAutoWakeupEnabled(ctx, &pb.IsAutoWakeupEnabledRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -451,8 +431,7 @@ func (c *Client) IsAutoWakeupEnabled(ctx context.Context) (bool, error) {
 
 // IsBridgedApConcurrencySupported calls the IsBridgedApConcurrencySupported RPC.
 func (c *Client) IsBridgedApConcurrencySupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsBridgedApConcurrencySupported(ctx, &pb.IsBridgedApConcurrencySupportedRequest{
-	})
+	resp, err := c.svc.IsBridgedApConcurrencySupported(ctx, &pb.IsBridgedApConcurrencySupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -473,8 +452,7 @@ func (c *Client) IsCarrierNetworkOffloadEnabled(ctx context.Context, arg0 int32,
 
 // IsD2DSupportedWhenInfraStaDisabled calls the IsD2DSupportedWhenInfraStaDisabled RPC.
 func (c *Client) IsD2DSupportedWhenInfraStaDisabled(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsD2DSupportedWhenInfraStaDisabled(ctx, &pb.IsD2DSupportedWhenInfraStaDisabledRequest{
-	})
+	resp, err := c.svc.IsD2DSupportedWhenInfraStaDisabled(ctx, &pb.IsD2DSupportedWhenInfraStaDisabledRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -483,8 +461,7 @@ func (c *Client) IsD2DSupportedWhenInfraStaDisabled(ctx context.Context) (bool, 
 
 // IsDecoratedIdentitySupported calls the IsDecoratedIdentitySupported RPC.
 func (c *Client) IsDecoratedIdentitySupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsDecoratedIdentitySupported(ctx, &pb.IsDecoratedIdentitySupportedRequest{
-	})
+	resp, err := c.svc.IsDecoratedIdentitySupported(ctx, &pb.IsDecoratedIdentitySupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -493,8 +470,7 @@ func (c *Client) IsDecoratedIdentitySupported(ctx context.Context) (bool, error)
 
 // IsDeviceToApRttSupported calls the IsDeviceToApRttSupported RPC.
 func (c *Client) IsDeviceToApRttSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsDeviceToApRttSupported(ctx, &pb.IsDeviceToApRttSupportedRequest{
-	})
+	resp, err := c.svc.IsDeviceToApRttSupported(ctx, &pb.IsDeviceToApRttSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -503,8 +479,7 @@ func (c *Client) IsDeviceToApRttSupported(ctx context.Context) (bool, error) {
 
 // IsDualBandSimultaneousSupported calls the IsDualBandSimultaneousSupported RPC.
 func (c *Client) IsDualBandSimultaneousSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsDualBandSimultaneousSupported(ctx, &pb.IsDualBandSimultaneousSupportedRequest{
-	})
+	resp, err := c.svc.IsDualBandSimultaneousSupported(ctx, &pb.IsDualBandSimultaneousSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -513,8 +488,7 @@ func (c *Client) IsDualBandSimultaneousSupported(ctx context.Context) (bool, err
 
 // IsEasyConnectDppAkmSupported calls the IsEasyConnectDppAkmSupported RPC.
 func (c *Client) IsEasyConnectDppAkmSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsEasyConnectDppAkmSupported(ctx, &pb.IsEasyConnectDppAkmSupportedRequest{
-	})
+	resp, err := c.svc.IsEasyConnectDppAkmSupported(ctx, &pb.IsEasyConnectDppAkmSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -523,8 +497,7 @@ func (c *Client) IsEasyConnectDppAkmSupported(ctx context.Context) (bool, error)
 
 // IsEasyConnectEnrolleeResponderModeSupported calls the IsEasyConnectEnrolleeResponderModeSupported RPC.
 func (c *Client) IsEasyConnectEnrolleeResponderModeSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsEasyConnectEnrolleeResponderModeSupported(ctx, &pb.IsEasyConnectEnrolleeResponderModeSupportedRequest{
-	})
+	resp, err := c.svc.IsEasyConnectEnrolleeResponderModeSupported(ctx, &pb.IsEasyConnectEnrolleeResponderModeSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -533,8 +506,7 @@ func (c *Client) IsEasyConnectEnrolleeResponderModeSupported(ctx context.Context
 
 // IsEasyConnectSupported calls the IsEasyConnectSupported RPC.
 func (c *Client) IsEasyConnectSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsEasyConnectSupported(ctx, &pb.IsEasyConnectSupportedRequest{
-	})
+	resp, err := c.svc.IsEasyConnectSupported(ctx, &pb.IsEasyConnectSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -543,8 +515,7 @@ func (c *Client) IsEasyConnectSupported(ctx context.Context) (bool, error) {
 
 // IsEnhancedOpenSupported calls the IsEnhancedOpenSupported RPC.
 func (c *Client) IsEnhancedOpenSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsEnhancedOpenSupported(ctx, &pb.IsEnhancedOpenSupportedRequest{
-	})
+	resp, err := c.svc.IsEnhancedOpenSupported(ctx, &pb.IsEnhancedOpenSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -553,8 +524,7 @@ func (c *Client) IsEnhancedOpenSupported(ctx context.Context) (bool, error) {
 
 // IsEnhancedPowerReportingSupported calls the IsEnhancedPowerReportingSupported RPC.
 func (c *Client) IsEnhancedPowerReportingSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsEnhancedPowerReportingSupported(ctx, &pb.IsEnhancedPowerReportingSupportedRequest{
-	})
+	resp, err := c.svc.IsEnhancedPowerReportingSupported(ctx, &pb.IsEnhancedPowerReportingSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -563,8 +533,7 @@ func (c *Client) IsEnhancedPowerReportingSupported(ctx context.Context) (bool, e
 
 // IsMakeBeforeBreakWifiSwitchingSupported calls the IsMakeBeforeBreakWifiSwitchingSupported RPC.
 func (c *Client) IsMakeBeforeBreakWifiSwitchingSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsMakeBeforeBreakWifiSwitchingSupported(ctx, &pb.IsMakeBeforeBreakWifiSwitchingSupportedRequest{
-	})
+	resp, err := c.svc.IsMakeBeforeBreakWifiSwitchingSupported(ctx, &pb.IsMakeBeforeBreakWifiSwitchingSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -573,8 +542,7 @@ func (c *Client) IsMakeBeforeBreakWifiSwitchingSupported(ctx context.Context) (b
 
 // IsP2PSupported calls the IsP2PSupported RPC.
 func (c *Client) IsP2PSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsP2PSupported(ctx, &pb.IsP2PSupportedRequest{
-	})
+	resp, err := c.svc.IsP2PSupported(ctx, &pb.IsP2PSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -583,8 +551,7 @@ func (c *Client) IsP2PSupported(ctx context.Context) (bool, error) {
 
 // IsPasspointTermsAndConditionsSupported calls the IsPasspointTermsAndConditionsSupported RPC.
 func (c *Client) IsPasspointTermsAndConditionsSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsPasspointTermsAndConditionsSupported(ctx, &pb.IsPasspointTermsAndConditionsSupportedRequest{
-	})
+	resp, err := c.svc.IsPasspointTermsAndConditionsSupported(ctx, &pb.IsPasspointTermsAndConditionsSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -593,8 +560,7 @@ func (c *Client) IsPasspointTermsAndConditionsSupported(ctx context.Context) (bo
 
 // IsPreferredNetworkOffloadSupported calls the IsPreferredNetworkOffloadSupported RPC.
 func (c *Client) IsPreferredNetworkOffloadSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsPreferredNetworkOffloadSupported(ctx, &pb.IsPreferredNetworkOffloadSupportedRequest{
-	})
+	resp, err := c.svc.IsPreferredNetworkOffloadSupported(ctx, &pb.IsPreferredNetworkOffloadSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -603,8 +569,7 @@ func (c *Client) IsPreferredNetworkOffloadSupported(ctx context.Context) (bool, 
 
 // IsScanAlwaysAvailable calls the IsScanAlwaysAvailable RPC.
 func (c *Client) IsScanAlwaysAvailable(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsScanAlwaysAvailable(ctx, &pb.IsScanAlwaysAvailableRequest{
-	})
+	resp, err := c.svc.IsScanAlwaysAvailable(ctx, &pb.IsScanAlwaysAvailableRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -613,8 +578,7 @@ func (c *Client) IsScanAlwaysAvailable(ctx context.Context) (bool, error) {
 
 // IsScanThrottleEnabled calls the IsScanThrottleEnabled RPC.
 func (c *Client) IsScanThrottleEnabled(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsScanThrottleEnabled(ctx, &pb.IsScanThrottleEnabledRequest{
-	})
+	resp, err := c.svc.IsScanThrottleEnabled(ctx, &pb.IsScanThrottleEnabledRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -623,8 +587,7 @@ func (c *Client) IsScanThrottleEnabled(ctx context.Context) (bool, error) {
 
 // IsStaApConcurrencySupported calls the IsStaApConcurrencySupported RPC.
 func (c *Client) IsStaApConcurrencySupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsStaApConcurrencySupported(ctx, &pb.IsStaApConcurrencySupportedRequest{
-	})
+	resp, err := c.svc.IsStaApConcurrencySupported(ctx, &pb.IsStaApConcurrencySupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -633,8 +596,7 @@ func (c *Client) IsStaApConcurrencySupported(ctx context.Context) (bool, error) 
 
 // IsStaBridgedApConcurrencySupported calls the IsStaBridgedApConcurrencySupported RPC.
 func (c *Client) IsStaBridgedApConcurrencySupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsStaBridgedApConcurrencySupported(ctx, &pb.IsStaBridgedApConcurrencySupportedRequest{
-	})
+	resp, err := c.svc.IsStaBridgedApConcurrencySupported(ctx, &pb.IsStaBridgedApConcurrencySupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -643,8 +605,7 @@ func (c *Client) IsStaBridgedApConcurrencySupported(ctx context.Context) (bool, 
 
 // IsStaConcurrencyForLocalOnlyConnectionsSupported calls the IsStaConcurrencyForLocalOnlyConnectionsSupported RPC.
 func (c *Client) IsStaConcurrencyForLocalOnlyConnectionsSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsStaConcurrencyForLocalOnlyConnectionsSupported(ctx, &pb.IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest{
-	})
+	resp, err := c.svc.IsStaConcurrencyForLocalOnlyConnectionsSupported(ctx, &pb.IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -653,8 +614,7 @@ func (c *Client) IsStaConcurrencyForLocalOnlyConnectionsSupported(ctx context.Co
 
 // IsStaConcurrencyForMultiInternetSupported calls the IsStaConcurrencyForMultiInternetSupported RPC.
 func (c *Client) IsStaConcurrencyForMultiInternetSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsStaConcurrencyForMultiInternetSupported(ctx, &pb.IsStaConcurrencyForMultiInternetSupportedRequest{
-	})
+	resp, err := c.svc.IsStaConcurrencyForMultiInternetSupported(ctx, &pb.IsStaConcurrencyForMultiInternetSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -672,8 +632,7 @@ func (c *Client) IsTdlsOperationCurrentlyAvailable(ctx context.Context, arg0 int
 
 // IsTdlsSupported calls the IsTdlsSupported RPC.
 func (c *Client) IsTdlsSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsTdlsSupported(ctx, &pb.IsTdlsSupportedRequest{
-	})
+	resp, err := c.svc.IsTdlsSupported(ctx, &pb.IsTdlsSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -682,8 +641,7 @@ func (c *Client) IsTdlsSupported(ctx context.Context) (bool, error) {
 
 // IsTidToLinkMappingNegotiationSupported calls the IsTidToLinkMappingNegotiationSupported RPC.
 func (c *Client) IsTidToLinkMappingNegotiationSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsTidToLinkMappingNegotiationSupported(ctx, &pb.IsTidToLinkMappingNegotiationSupportedRequest{
-	})
+	resp, err := c.svc.IsTidToLinkMappingNegotiationSupported(ctx, &pb.IsTidToLinkMappingNegotiationSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -692,8 +650,7 @@ func (c *Client) IsTidToLinkMappingNegotiationSupported(ctx context.Context) (bo
 
 // IsTlsMinimumVersionSupported calls the IsTlsMinimumVersionSupported RPC.
 func (c *Client) IsTlsMinimumVersionSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsTlsMinimumVersionSupported(ctx, &pb.IsTlsMinimumVersionSupportedRequest{
-	})
+	resp, err := c.svc.IsTlsMinimumVersionSupported(ctx, &pb.IsTlsMinimumVersionSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -702,8 +659,7 @@ func (c *Client) IsTlsMinimumVersionSupported(ctx context.Context) (bool, error)
 
 // IsTlsV13Supported calls the IsTlsV13Supported RPC.
 func (c *Client) IsTlsV13Supported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsTlsV13Supported(ctx, &pb.IsTlsV13SupportedRequest{
-	})
+	resp, err := c.svc.IsTlsV13Supported(ctx, &pb.IsTlsV13SupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -712,8 +668,7 @@ func (c *Client) IsTlsV13Supported(ctx context.Context) (bool, error) {
 
 // IsTrustOnFirstUseSupported calls the IsTrustOnFirstUseSupported RPC.
 func (c *Client) IsTrustOnFirstUseSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsTrustOnFirstUseSupported(ctx, &pb.IsTrustOnFirstUseSupportedRequest{
-	})
+	resp, err := c.svc.IsTrustOnFirstUseSupported(ctx, &pb.IsTrustOnFirstUseSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -722,8 +677,7 @@ func (c *Client) IsTrustOnFirstUseSupported(ctx context.Context) (bool, error) {
 
 // IsWapiSupported calls the IsWapiSupported RPC.
 func (c *Client) IsWapiSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsWapiSupported(ctx, &pb.IsWapiSupportedRequest{
-	})
+	resp, err := c.svc.IsWapiSupported(ctx, &pb.IsWapiSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -732,8 +686,7 @@ func (c *Client) IsWapiSupported(ctx context.Context) (bool, error) {
 
 // IsWepSupported calls the IsWepSupported RPC.
 func (c *Client) IsWepSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsWepSupported(ctx, &pb.IsWepSupportedRequest{
-	})
+	resp, err := c.svc.IsWepSupported(ctx, &pb.IsWepSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -742,8 +695,7 @@ func (c *Client) IsWepSupported(ctx context.Context) (bool, error) {
 
 // IsWifiDisplayR2Supported calls the IsWifiDisplayR2Supported RPC.
 func (c *Client) IsWifiDisplayR2Supported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsWifiDisplayR2Supported(ctx, &pb.IsWifiDisplayR2SupportedRequest{
-	})
+	resp, err := c.svc.IsWifiDisplayR2Supported(ctx, &pb.IsWifiDisplayR2SupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -752,8 +704,7 @@ func (c *Client) IsWifiDisplayR2Supported(ctx context.Context) (bool, error) {
 
 // IsWifiEnabled calls the IsWifiEnabled RPC.
 func (c *Client) IsWifiEnabled(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsWifiEnabled(ctx, &pb.IsWifiEnabledRequest{
-	})
+	resp, err := c.svc.IsWifiEnabled(ctx, &pb.IsWifiEnabledRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -762,8 +713,7 @@ func (c *Client) IsWifiEnabled(ctx context.Context) (bool, error) {
 
 // IsWifiPasspointEnabled calls the IsWifiPasspointEnabled RPC.
 func (c *Client) IsWifiPasspointEnabled(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsWifiPasspointEnabled(ctx, &pb.IsWifiPasspointEnabledRequest{
-	})
+	resp, err := c.svc.IsWifiPasspointEnabled(ctx, &pb.IsWifiPasspointEnabledRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -783,8 +733,7 @@ func (c *Client) IsWifiStandardSupported(ctx context.Context, arg0 int32) (bool,
 
 // IsWpa3SaeH2ESupported calls the IsWpa3SaeH2ESupported RPC.
 func (c *Client) IsWpa3SaeH2ESupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsWpa3SaeH2ESupported(ctx, &pb.IsWpa3SaeH2ESupportedRequest{
-	})
+	resp, err := c.svc.IsWpa3SaeH2ESupported(ctx, &pb.IsWpa3SaeH2ESupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -793,8 +742,7 @@ func (c *Client) IsWpa3SaeH2ESupported(ctx context.Context) (bool, error) {
 
 // IsWpa3SaePublicKeySupported calls the IsWpa3SaePublicKeySupported RPC.
 func (c *Client) IsWpa3SaePublicKeySupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsWpa3SaePublicKeySupported(ctx, &pb.IsWpa3SaePublicKeySupportedRequest{
-	})
+	resp, err := c.svc.IsWpa3SaePublicKeySupported(ctx, &pb.IsWpa3SaePublicKeySupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -803,8 +751,7 @@ func (c *Client) IsWpa3SaePublicKeySupported(ctx context.Context) (bool, error) 
 
 // IsWpa3SaeSupported calls the IsWpa3SaeSupported RPC.
 func (c *Client) IsWpa3SaeSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsWpa3SaeSupported(ctx, &pb.IsWpa3SaeSupportedRequest{
-	})
+	resp, err := c.svc.IsWpa3SaeSupported(ctx, &pb.IsWpa3SaeSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -813,8 +760,7 @@ func (c *Client) IsWpa3SaeSupported(ctx context.Context) (bool, error) {
 
 // IsWpa3SuiteBSupported calls the IsWpa3SuiteBSupported RPC.
 func (c *Client) IsWpa3SuiteBSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsWpa3SuiteBSupported(ctx, &pb.IsWpa3SuiteBSupportedRequest{
-	})
+	resp, err := c.svc.IsWpa3SuiteBSupported(ctx, &pb.IsWpa3SuiteBSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -823,8 +769,7 @@ func (c *Client) IsWpa3SuiteBSupported(ctx context.Context) (bool, error) {
 
 // IsWpaPersonalSupported calls the IsWpaPersonalSupported RPC.
 func (c *Client) IsWpaPersonalSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsWpaPersonalSupported(ctx, &pb.IsWpaPersonalSupportedRequest{
-	})
+	resp, err := c.svc.IsWpaPersonalSupported(ctx, &pb.IsWpaPersonalSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -833,8 +778,7 @@ func (c *Client) IsWpaPersonalSupported(ctx context.Context) (bool, error) {
 
 // PingSupplicant calls the PingSupplicant RPC.
 func (c *Client) PingSupplicant(ctx context.Context) (bool, error) {
-	resp, err := c.svc.PingSupplicant(ctx, &pb.PingSupplicantRequest{
-	})
+	resp, err := c.svc.PingSupplicant(ctx, &pb.PingSupplicantRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -861,8 +805,7 @@ func (c *Client) QuerySendDhcpHostnameRestriction(ctx context.Context, arg0 int6
 
 // Reassociate calls the Reassociate RPC.
 func (c *Client) Reassociate(ctx context.Context) (bool, error) {
-	resp, err := c.svc.Reassociate(ctx, &pb.ReassociateRequest{
-	})
+	resp, err := c.svc.Reassociate(ctx, &pb.ReassociateRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -871,8 +814,7 @@ func (c *Client) Reassociate(ctx context.Context) (bool, error) {
 
 // Reconnect calls the Reconnect RPC.
 func (c *Client) Reconnect(ctx context.Context) (bool, error) {
-	resp, err := c.svc.Reconnect(ctx, &pb.ReconnectRequest{
-	})
+	resp, err := c.svc.Reconnect(ctx, &pb.ReconnectRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -941,8 +883,7 @@ func (c *Client) RemoveNetworkSuggestions2_1(ctx context.Context, arg0 int64, ar
 
 // RemoveNonCallerConfiguredNetworks calls the RemoveNonCallerConfiguredNetworks RPC.
 func (c *Client) RemoveNonCallerConfiguredNetworks(ctx context.Context) (bool, error) {
-	resp, err := c.svc.RemoveNonCallerConfiguredNetworks(ctx, &pb.RemoveNonCallerConfiguredNetworksRequest{
-	})
+	resp, err := c.svc.RemoveNonCallerConfiguredNetworks(ctx, &pb.RemoveNonCallerConfiguredNetworksRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -1002,8 +943,7 @@ func (c *Client) ReportCreateInterfaceImpact(ctx context.Context, arg0 int32, ar
 
 // SaveConfiguration calls the SaveConfiguration RPC.
 func (c *Client) SaveConfiguration(ctx context.Context) (bool, error) {
-	resp, err := c.svc.SaveConfiguration(ctx, &pb.SaveConfigurationRequest{
-	})
+	resp, err := c.svc.SaveConfiguration(ctx, &pb.SaveConfigurationRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -1090,8 +1030,7 @@ func (c *Client) StartLocalOnlyHotspotWithConfiguration(ctx context.Context, arg
 
 // StartScan calls the StartScan RPC.
 func (c *Client) StartScan(ctx context.Context) (bool, error) {
-	resp, err := c.svc.StartScan(ctx, &pb.StartScanRequest{
-	})
+	resp, err := c.svc.StartScan(ctx, &pb.StartScanRequest{})
 	if err != nil {
 		return false, err
 	}

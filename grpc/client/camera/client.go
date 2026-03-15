@@ -58,8 +58,7 @@ func (c *Client) GetCameraExtensionCharacteristics(ctx context.Context, arg0 str
 
 // GetCameraIdList calls the GetCameraIdList RPC.
 func (c *Client) GetCameraIdList(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetCameraIdList(ctx, &pb.GetCameraIdListRequest{
-	})
+	resp, err := c.svc.GetCameraIdList(ctx, &pb.GetCameraIdListRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -68,8 +67,7 @@ func (c *Client) GetCameraIdList(ctx context.Context) (int64, error) {
 
 // GetConcurrentCameraIds calls the GetConcurrentCameraIds RPC.
 func (c *Client) GetConcurrentCameraIds(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetConcurrentCameraIds(ctx, &pb.GetConcurrentCameraIdsRequest{
-	})
+	resp, err := c.svc.GetConcurrentCameraIds(ctx, &pb.GetConcurrentCameraIdsRequest{})
 	if err != nil {
 		return 0, err
 	}

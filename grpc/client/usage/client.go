@@ -25,8 +25,7 @@ func NewClient(cc grpc.ClientConnInterface) *Client {
 
 // GetAppStandbyBucket calls the GetAppStandbyBucket RPC.
 func (c *Client) GetAppStandbyBucket(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetAppStandbyBucket(ctx, &pb.GetAppStandbyBucketRequest{
-	})
+	resp, err := c.svc.GetAppStandbyBucket(ctx, &pb.GetAppStandbyBucketRequest{})
 	if err != nil {
 		return 0, err
 	}

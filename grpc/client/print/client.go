@@ -25,8 +25,7 @@ func NewClient(cc grpc.ClientConnInterface) *Client {
 
 // GetPrintJobs calls the GetPrintJobs RPC.
 func (c *Client) GetPrintJobs(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetPrintJobs(ctx, &pb.GetPrintJobsRequest{
-	})
+	resp, err := c.svc.GetPrintJobs(ctx, &pb.GetPrintJobsRequest{})
 	if err != nil {
 		return 0, err
 	}

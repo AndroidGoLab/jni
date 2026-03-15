@@ -8,8 +8,8 @@ import (
 	"github.com/xaionaro-go/jni"
 
 	"github.com/xaionaro-go/jni/app"
-	"github.com/xaionaro-go/jni/handlestore"
 	jnipkg "github.com/xaionaro-go/jni/app/usage"
+	"github.com/xaionaro-go/jni/handlestore"
 	pb "github.com/xaionaro-go/jni/proto/usage"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

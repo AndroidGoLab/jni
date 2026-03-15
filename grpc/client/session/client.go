@@ -62,8 +62,7 @@ func (c *Client) GetActiveSessions(ctx context.Context, arg0 int64) (int64, erro
 
 // GetMediaKeyEventSession calls the GetMediaKeyEventSession RPC.
 func (c *Client) GetMediaKeyEventSession(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetMediaKeyEventSession(ctx, &pb.GetMediaKeyEventSessionRequest{
-	})
+	resp, err := c.svc.GetMediaKeyEventSession(ctx, &pb.GetMediaKeyEventSessionRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -72,8 +71,7 @@ func (c *Client) GetMediaKeyEventSession(ctx context.Context) (int64, error) {
 
 // GetMediaKeyEventSessionPackageName calls the GetMediaKeyEventSessionPackageName RPC.
 func (c *Client) GetMediaKeyEventSessionPackageName(ctx context.Context) (string, error) {
-	resp, err := c.svc.GetMediaKeyEventSessionPackageName(ctx, &pb.GetMediaKeyEventSessionPackageNameRequest{
-	})
+	resp, err := c.svc.GetMediaKeyEventSessionPackageName(ctx, &pb.GetMediaKeyEventSessionPackageNameRequest{})
 	if err != nil {
 		return "", err
 	}
@@ -82,8 +80,7 @@ func (c *Client) GetMediaKeyEventSessionPackageName(ctx context.Context) (string
 
 // GetSession2Tokens calls the GetSession2Tokens RPC.
 func (c *Client) GetSession2Tokens(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetSession2Tokens(ctx, &pb.GetSession2TokensRequest{
-	})
+	resp, err := c.svc.GetSession2Tokens(ctx, &pb.GetSession2TokensRequest{})
 	if err != nil {
 		return 0, err
 	}

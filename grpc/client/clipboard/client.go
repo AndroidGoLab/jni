@@ -33,15 +33,13 @@ func (c *Client) AddPrimaryClipChangedListener(ctx context.Context, arg0 int64) 
 
 // ClearPrimaryClip calls the ClearPrimaryClip RPC.
 func (c *Client) ClearPrimaryClip(ctx context.Context) error {
-	_, err := c.svc.ClearPrimaryClip(ctx, &pb.ClearPrimaryClipRequest{
-	})
+	_, err := c.svc.ClearPrimaryClip(ctx, &pb.ClearPrimaryClipRequest{})
 	return err
 }
 
 // GetPrimaryClip calls the GetPrimaryClip RPC.
 func (c *Client) GetPrimaryClip(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetPrimaryClip(ctx, &pb.GetPrimaryClipRequest{
-	})
+	resp, err := c.svc.GetPrimaryClip(ctx, &pb.GetPrimaryClipRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -50,8 +48,7 @@ func (c *Client) GetPrimaryClip(ctx context.Context) (int64, error) {
 
 // GetPrimaryClipDescription calls the GetPrimaryClipDescription RPC.
 func (c *Client) GetPrimaryClipDescription(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetPrimaryClipDescription(ctx, &pb.GetPrimaryClipDescriptionRequest{
-	})
+	resp, err := c.svc.GetPrimaryClipDescription(ctx, &pb.GetPrimaryClipDescriptionRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -60,8 +57,7 @@ func (c *Client) GetPrimaryClipDescription(ctx context.Context) (int64, error) {
 
 // GetText calls the GetText RPC.
 func (c *Client) GetText(ctx context.Context) (string, error) {
-	resp, err := c.svc.GetText(ctx, &pb.GetTextRequest{
-	})
+	resp, err := c.svc.GetText(ctx, &pb.GetTextRequest{})
 	if err != nil {
 		return "", err
 	}
@@ -70,8 +66,7 @@ func (c *Client) GetText(ctx context.Context) (string, error) {
 
 // HasPrimaryClip calls the HasPrimaryClip RPC.
 func (c *Client) HasPrimaryClip(ctx context.Context) (bool, error) {
-	resp, err := c.svc.HasPrimaryClip(ctx, &pb.HasPrimaryClipRequest{
-	})
+	resp, err := c.svc.HasPrimaryClip(ctx, &pb.HasPrimaryClipRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -80,8 +75,7 @@ func (c *Client) HasPrimaryClip(ctx context.Context) (bool, error) {
 
 // HasText calls the HasText RPC.
 func (c *Client) HasText(ctx context.Context) (bool, error) {
-	resp, err := c.svc.HasText(ctx, &pb.HasTextRequest{
-	})
+	resp, err := c.svc.HasText(ctx, &pb.HasTextRequest{})
 	if err != nil {
 		return false, err
 	}

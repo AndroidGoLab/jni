@@ -3,6 +3,7 @@ package grpcgen
 import (
 	"bytes"
 	"fmt"
+	"go/format"
 	"os"
 	"path/filepath"
 	"sort"
@@ -53,7 +54,13 @@ func GenerateCompositeServer(entries []CompositeEntry, outputDir, goModule strin
 		return fmt.Errorf("mkdir grpc/server: %w", err)
 	}
 	outPath := filepath.Join(serverDir, "server.go")
-	if err := os.WriteFile(outPath, buf.Bytes(), 0o644); err != nil {
+
+	out := buf.Bytes()
+	formatted, fmtErr := format.Source(out)
+	if fmtErr != nil {
+		formatted = out
+	}
+	if err := os.WriteFile(outPath, formatted, 0o644); err != nil {
 		return fmt.Errorf("write %s: %w", outPath, err)
 	}
 	return nil
@@ -85,7 +92,13 @@ func GenerateCompositeClient(entries []CompositeEntry, outputDir, goModule strin
 		return fmt.Errorf("mkdir grpc/client: %w", err)
 	}
 	outPath := filepath.Join(clientDir, "client.go")
-	if err := os.WriteFile(outPath, buf.Bytes(), 0o644); err != nil {
+
+	out := buf.Bytes()
+	formatted, fmtErr := format.Source(out)
+	if fmtErr != nil {
+		formatted = out
+	}
+	if err := os.WriteFile(outPath, formatted, 0o644); err != nil {
 		return fmt.Errorf("write %s: %w", outPath, err)
 	}
 	return nil

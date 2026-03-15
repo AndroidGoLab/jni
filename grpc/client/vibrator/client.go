@@ -36,8 +36,7 @@ func (c *Client) AreEffectsSupported(ctx context.Context, arg0 int64) (int64, er
 
 // AreEnvelopeEffectsSupported calls the AreEnvelopeEffectsSupported RPC.
 func (c *Client) AreEnvelopeEffectsSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.AreEnvelopeEffectsSupported(ctx, &pb.AreEnvelopeEffectsSupportedRequest{
-	})
+	resp, err := c.svc.AreEnvelopeEffectsSupported(ctx, &pb.AreEnvelopeEffectsSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -57,8 +56,7 @@ func (c *Client) ArePrimitivesSupported(ctx context.Context, arg0 int64) (int64,
 
 // GetEnvelopeEffectInfo calls the GetEnvelopeEffectInfo RPC.
 func (c *Client) GetEnvelopeEffectInfo(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetEnvelopeEffectInfo(ctx, &pb.GetEnvelopeEffectInfoRequest{
-	})
+	resp, err := c.svc.GetEnvelopeEffectInfo(ctx, &pb.GetEnvelopeEffectInfoRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -67,8 +65,7 @@ func (c *Client) GetEnvelopeEffectInfo(ctx context.Context) (int64, error) {
 
 // GetFrequencyProfile calls the GetFrequencyProfile RPC.
 func (c *Client) GetFrequencyProfile(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetFrequencyProfile(ctx, &pb.GetFrequencyProfileRequest{
-	})
+	resp, err := c.svc.GetFrequencyProfile(ctx, &pb.GetFrequencyProfileRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -77,8 +74,7 @@ func (c *Client) GetFrequencyProfile(ctx context.Context) (int64, error) {
 
 // GetId calls the GetId RPC.
 func (c *Client) GetId(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetId(ctx, &pb.GetIdRequest{
-	})
+	resp, err := c.svc.GetId(ctx, &pb.GetIdRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -98,8 +94,7 @@ func (c *Client) GetPrimitiveDurations(ctx context.Context, arg0 int64) (int64, 
 
 // GetQFactor calls the GetQFactor RPC.
 func (c *Client) GetQFactor(ctx context.Context) (float32, error) {
-	resp, err := c.svc.GetQFactor(ctx, &pb.GetQFactorRequest{
-	})
+	resp, err := c.svc.GetQFactor(ctx, &pb.GetQFactorRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -108,8 +103,7 @@ func (c *Client) GetQFactor(ctx context.Context) (float32, error) {
 
 // GetResonantFrequency calls the GetResonantFrequency RPC.
 func (c *Client) GetResonantFrequency(ctx context.Context) (float32, error) {
-	resp, err := c.svc.GetResonantFrequency(ctx, &pb.GetResonantFrequencyRequest{
-	})
+	resp, err := c.svc.GetResonantFrequency(ctx, &pb.GetResonantFrequencyRequest{})
 	if err != nil {
 		return 0, err
 	}

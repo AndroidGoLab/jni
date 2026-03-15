@@ -181,8 +181,7 @@ func (c *Client) Initialize(ctx context.Context, arg0 int64, arg1 int64, arg2 in
 
 // IsChannelConstrainedDiscoverySupported calls the IsChannelConstrainedDiscoverySupported RPC.
 func (c *Client) IsChannelConstrainedDiscoverySupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsChannelConstrainedDiscoverySupported(ctx, &pb.IsChannelConstrainedDiscoverySupportedRequest{
-	})
+	resp, err := c.svc.IsChannelConstrainedDiscoverySupported(ctx, &pb.IsChannelConstrainedDiscoverySupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -191,8 +190,7 @@ func (c *Client) IsChannelConstrainedDiscoverySupported(ctx context.Context) (bo
 
 // IsGroupClientRemovalSupported calls the IsGroupClientRemovalSupported RPC.
 func (c *Client) IsGroupClientRemovalSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsGroupClientRemovalSupported(ctx, &pb.IsGroupClientRemovalSupportedRequest{
-	})
+	resp, err := c.svc.IsGroupClientRemovalSupported(ctx, &pb.IsGroupClientRemovalSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -201,8 +199,7 @@ func (c *Client) IsGroupClientRemovalSupported(ctx context.Context) (bool, error
 
 // IsGroupOwnerIPv6LinkLocalAddressProvided calls the IsGroupOwnerIPv6LinkLocalAddressProvided RPC.
 func (c *Client) IsGroupOwnerIPv6LinkLocalAddressProvided(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsGroupOwnerIPv6LinkLocalAddressProvided(ctx, &pb.IsGroupOwnerIPv6LinkLocalAddressProvidedRequest{
-	})
+	resp, err := c.svc.IsGroupOwnerIPv6LinkLocalAddressProvided(ctx, &pb.IsGroupOwnerIPv6LinkLocalAddressProvidedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -211,8 +208,7 @@ func (c *Client) IsGroupOwnerIPv6LinkLocalAddressProvided(ctx context.Context) (
 
 // IsPccModeSupported calls the IsPccModeSupported RPC.
 func (c *Client) IsPccModeSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsPccModeSupported(ctx, &pb.IsPccModeSupportedRequest{
-	})
+	resp, err := c.svc.IsPccModeSupported(ctx, &pb.IsPccModeSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -221,8 +217,7 @@ func (c *Client) IsPccModeSupported(ctx context.Context) (bool, error) {
 
 // IsSetVendorElementsSupported calls the IsSetVendorElementsSupported RPC.
 func (c *Client) IsSetVendorElementsSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsSetVendorElementsSupported(ctx, &pb.IsSetVendorElementsSupportedRequest{
-	})
+	resp, err := c.svc.IsSetVendorElementsSupported(ctx, &pb.IsSetVendorElementsSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -231,8 +226,7 @@ func (c *Client) IsSetVendorElementsSupported(ctx context.Context) (bool, error)
 
 // IsWiFiDirectR2Supported calls the IsWiFiDirectR2Supported RPC.
 func (c *Client) IsWiFiDirectR2Supported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsWiFiDirectR2Supported(ctx, &pb.IsWiFiDirectR2SupportedRequest{
-	})
+	resp, err := c.svc.IsWiFiDirectR2Supported(ctx, &pb.IsWiFiDirectR2SupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -510,8 +504,7 @@ func (c *Client) ValidateDirInfo(ctx context.Context, arg0 int64, arg1 int64, ar
 
 // GetP2PMaxAllowedVendorElementsLengthBytes calls the GetP2PMaxAllowedVendorElementsLengthBytes RPC.
 func (c *Client) GetP2PMaxAllowedVendorElementsLengthBytes(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetP2PMaxAllowedVendorElementsLengthBytes(ctx, &pb.GetP2PMaxAllowedVendorElementsLengthBytesRequest{
-	})
+	resp, err := c.svc.GetP2PMaxAllowedVendorElementsLengthBytes(ctx, &pb.GetP2PMaxAllowedVendorElementsLengthBytesRequest{})
 	if err != nil {
 		return 0, err
 	}

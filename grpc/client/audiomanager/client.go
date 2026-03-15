@@ -113,8 +113,7 @@ func (c *Client) AdjustVolumeGroupVolume(ctx context.Context, arg0 int32, arg1 i
 
 // ClearCommunicationDevice calls the ClearCommunicationDevice RPC.
 func (c *Client) ClearCommunicationDevice(ctx context.Context) error {
-	_, err := c.svc.ClearCommunicationDevice(ctx, &pb.ClearCommunicationDeviceRequest{
-	})
+	_, err := c.svc.ClearCommunicationDevice(ctx, &pb.ClearCommunicationDeviceRequest{})
 	return err
 }
 
@@ -140,8 +139,7 @@ func (c *Client) DispatchMediaKeyEvent(ctx context.Context, arg0 int64) error {
 
 // GenerateAudioSessionId calls the GenerateAudioSessionId RPC.
 func (c *Client) GenerateAudioSessionId(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GenerateAudioSessionId(ctx, &pb.GenerateAudioSessionIdRequest{
-	})
+	resp, err := c.svc.GenerateAudioSessionId(ctx, &pb.GenerateAudioSessionIdRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -150,8 +148,7 @@ func (c *Client) GenerateAudioSessionId(ctx context.Context) (int32, error) {
 
 // GetActivePlaybackConfigurations calls the GetActivePlaybackConfigurations RPC.
 func (c *Client) GetActivePlaybackConfigurations(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetActivePlaybackConfigurations(ctx, &pb.GetActivePlaybackConfigurationsRequest{
-	})
+	resp, err := c.svc.GetActivePlaybackConfigurations(ctx, &pb.GetActivePlaybackConfigurationsRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -160,8 +157,7 @@ func (c *Client) GetActivePlaybackConfigurations(ctx context.Context) (int64, er
 
 // GetActiveRecordingConfigurations calls the GetActiveRecordingConfigurations RPC.
 func (c *Client) GetActiveRecordingConfigurations(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetActiveRecordingConfigurations(ctx, &pb.GetActiveRecordingConfigurationsRequest{
-	})
+	resp, err := c.svc.GetActiveRecordingConfigurations(ctx, &pb.GetActiveRecordingConfigurationsRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -170,8 +166,7 @@ func (c *Client) GetActiveRecordingConfigurations(ctx context.Context) (int64, e
 
 // GetAllowedCapturePolicy calls the GetAllowedCapturePolicy RPC.
 func (c *Client) GetAllowedCapturePolicy(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetAllowedCapturePolicy(ctx, &pb.GetAllowedCapturePolicyRequest{
-	})
+	resp, err := c.svc.GetAllowedCapturePolicy(ctx, &pb.GetAllowedCapturePolicyRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -202,8 +197,7 @@ func (c *Client) GetAudioHwSyncForSession(ctx context.Context, arg0 int32) (int3
 
 // GetAvailableCommunicationDevices calls the GetAvailableCommunicationDevices RPC.
 func (c *Client) GetAvailableCommunicationDevices(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetAvailableCommunicationDevices(ctx, &pb.GetAvailableCommunicationDevicesRequest{
-	})
+	resp, err := c.svc.GetAvailableCommunicationDevices(ctx, &pb.GetAvailableCommunicationDevicesRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -212,8 +206,7 @@ func (c *Client) GetAvailableCommunicationDevices(ctx context.Context) (int64, e
 
 // GetCommunicationDevice calls the GetCommunicationDevice RPC.
 func (c *Client) GetCommunicationDevice(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetCommunicationDevice(ctx, &pb.GetCommunicationDeviceRequest{
-	})
+	resp, err := c.svc.GetCommunicationDevice(ctx, &pb.GetCommunicationDeviceRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -244,8 +237,7 @@ func (c *Client) GetDirectProfilesForAttributes(ctx context.Context, arg0 int64)
 
 // GetEncodedSurroundMode calls the GetEncodedSurroundMode RPC.
 func (c *Client) GetEncodedSurroundMode(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetEncodedSurroundMode(ctx, &pb.GetEncodedSurroundModeRequest{
-	})
+	resp, err := c.svc.GetEncodedSurroundMode(ctx, &pb.GetEncodedSurroundModeRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -254,8 +246,7 @@ func (c *Client) GetEncodedSurroundMode(ctx context.Context) (int32, error) {
 
 // GetMicrophones calls the GetMicrophones RPC.
 func (c *Client) GetMicrophones(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetMicrophones(ctx, &pb.GetMicrophonesRequest{
-	})
+	resp, err := c.svc.GetMicrophones(ctx, &pb.GetMicrophonesRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -264,8 +255,7 @@ func (c *Client) GetMicrophones(ctx context.Context) (int64, error) {
 
 // GetMode calls the GetMode RPC.
 func (c *Client) GetMode(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetMode(ctx, &pb.GetModeRequest{
-	})
+	resp, err := c.svc.GetMode(ctx, &pb.GetModeRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -308,8 +298,7 @@ func (c *Client) GetProperty(ctx context.Context, arg0 string) (string, error) {
 
 // GetRingerMode calls the GetRingerMode RPC.
 func (c *Client) GetRingerMode(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetRingerMode(ctx, &pb.GetRingerModeRequest{
-	})
+	resp, err := c.svc.GetRingerMode(ctx, &pb.GetRingerModeRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -329,8 +318,7 @@ func (c *Client) GetRouting(ctx context.Context, arg0 int32) (int32, error) {
 
 // GetSpatializer calls the GetSpatializer RPC.
 func (c *Client) GetSpatializer(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetSpatializer(ctx, &pb.GetSpatializerRequest{
-	})
+	resp, err := c.svc.GetSpatializer(ctx, &pb.GetSpatializerRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -429,8 +417,7 @@ func (c *Client) GetVolumeGroupIdForAttributes(ctx context.Context, arg0 int64) 
 
 // IsBluetoothA2DpOn calls the IsBluetoothA2DpOn RPC.
 func (c *Client) IsBluetoothA2DpOn(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsBluetoothA2DpOn(ctx, &pb.IsBluetoothA2DpOnRequest{
-	})
+	resp, err := c.svc.IsBluetoothA2DpOn(ctx, &pb.IsBluetoothA2DpOnRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -439,8 +426,7 @@ func (c *Client) IsBluetoothA2DpOn(ctx context.Context) (bool, error) {
 
 // IsBluetoothScoAvailableOffCall calls the IsBluetoothScoAvailableOffCall RPC.
 func (c *Client) IsBluetoothScoAvailableOffCall(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsBluetoothScoAvailableOffCall(ctx, &pb.IsBluetoothScoAvailableOffCallRequest{
-	})
+	resp, err := c.svc.IsBluetoothScoAvailableOffCall(ctx, &pb.IsBluetoothScoAvailableOffCallRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -449,8 +435,7 @@ func (c *Client) IsBluetoothScoAvailableOffCall(ctx context.Context) (bool, erro
 
 // IsBluetoothScoOn calls the IsBluetoothScoOn RPC.
 func (c *Client) IsBluetoothScoOn(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsBluetoothScoOn(ctx, &pb.IsBluetoothScoOnRequest{
-	})
+	resp, err := c.svc.IsBluetoothScoOn(ctx, &pb.IsBluetoothScoOnRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -459,8 +444,7 @@ func (c *Client) IsBluetoothScoOn(ctx context.Context) (bool, error) {
 
 // IsCallScreeningModeSupported calls the IsCallScreeningModeSupported RPC.
 func (c *Client) IsCallScreeningModeSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsCallScreeningModeSupported(ctx, &pb.IsCallScreeningModeSupportedRequest{
-	})
+	resp, err := c.svc.IsCallScreeningModeSupported(ctx, &pb.IsCallScreeningModeSupportedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -469,8 +453,7 @@ func (c *Client) IsCallScreeningModeSupported(ctx context.Context) (bool, error)
 
 // IsMicrophoneMute calls the IsMicrophoneMute RPC.
 func (c *Client) IsMicrophoneMute(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsMicrophoneMute(ctx, &pb.IsMicrophoneMuteRequest{
-	})
+	resp, err := c.svc.IsMicrophoneMute(ctx, &pb.IsMicrophoneMuteRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -479,8 +462,7 @@ func (c *Client) IsMicrophoneMute(ctx context.Context) (bool, error) {
 
 // IsMusicActive calls the IsMusicActive RPC.
 func (c *Client) IsMusicActive(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsMusicActive(ctx, &pb.IsMusicActiveRequest{
-	})
+	resp, err := c.svc.IsMusicActive(ctx, &pb.IsMusicActiveRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -489,8 +471,7 @@ func (c *Client) IsMusicActive(ctx context.Context) (bool, error) {
 
 // IsRampingRingerEnabled calls the IsRampingRingerEnabled RPC.
 func (c *Client) IsRampingRingerEnabled(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsRampingRingerEnabled(ctx, &pb.IsRampingRingerEnabledRequest{
-	})
+	resp, err := c.svc.IsRampingRingerEnabled(ctx, &pb.IsRampingRingerEnabledRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -499,8 +480,7 @@ func (c *Client) IsRampingRingerEnabled(ctx context.Context) (bool, error) {
 
 // IsSpeakerphoneOn calls the IsSpeakerphoneOn RPC.
 func (c *Client) IsSpeakerphoneOn(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsSpeakerphoneOn(ctx, &pb.IsSpeakerphoneOnRequest{
-	})
+	resp, err := c.svc.IsSpeakerphoneOn(ctx, &pb.IsSpeakerphoneOnRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -531,8 +511,7 @@ func (c *Client) IsSurroundFormatEnabled(ctx context.Context, arg0 int32) (bool,
 
 // IsVolumeFixed calls the IsVolumeFixed RPC.
 func (c *Client) IsVolumeFixed(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsVolumeFixed(ctx, &pb.IsVolumeFixedRequest{
-	})
+	resp, err := c.svc.IsVolumeFixed(ctx, &pb.IsVolumeFixedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -552,8 +531,7 @@ func (c *Client) IsVolumeGroupMuted(ctx context.Context, arg0 int32) (bool, erro
 
 // IsWiredHeadsetOn calls the IsWiredHeadsetOn RPC.
 func (c *Client) IsWiredHeadsetOn(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsWiredHeadsetOn(ctx, &pb.IsWiredHeadsetOnRequest{
-	})
+	resp, err := c.svc.IsWiredHeadsetOn(ctx, &pb.IsWiredHeadsetOnRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -562,8 +540,7 @@ func (c *Client) IsWiredHeadsetOn(ctx context.Context) (bool, error) {
 
 // LoadSoundEffects calls the LoadSoundEffects RPC.
 func (c *Client) LoadSoundEffects(ctx context.Context) error {
-	_, err := c.svc.LoadSoundEffects(ctx, &pb.LoadSoundEffectsRequest{
-	})
+	_, err := c.svc.LoadSoundEffects(ctx, &pb.LoadSoundEffectsRequest{})
 	return err
 }
 
@@ -846,22 +823,19 @@ func (c *Client) ShouldVibrate(ctx context.Context, arg0 int32) (bool, error) {
 
 // StartBluetoothSco calls the StartBluetoothSco RPC.
 func (c *Client) StartBluetoothSco(ctx context.Context) error {
-	_, err := c.svc.StartBluetoothSco(ctx, &pb.StartBluetoothScoRequest{
-	})
+	_, err := c.svc.StartBluetoothSco(ctx, &pb.StartBluetoothScoRequest{})
 	return err
 }
 
 // StopBluetoothSco calls the StopBluetoothSco RPC.
 func (c *Client) StopBluetoothSco(ctx context.Context) error {
-	_, err := c.svc.StopBluetoothSco(ctx, &pb.StopBluetoothScoRequest{
-	})
+	_, err := c.svc.StopBluetoothSco(ctx, &pb.StopBluetoothScoRequest{})
 	return err
 }
 
 // UnloadSoundEffects calls the UnloadSoundEffects RPC.
 func (c *Client) UnloadSoundEffects(ctx context.Context) error {
-	_, err := c.svc.UnloadSoundEffects(ctx, &pb.UnloadSoundEffectsRequest{
-	})
+	_, err := c.svc.UnloadSoundEffects(ctx, &pb.UnloadSoundEffectsRequest{})
 	return err
 }
 
@@ -947,8 +921,7 @@ func (c *Client) GetPlaybackOffloadSupport(ctx context.Context, arg0 int64, arg1
 
 // IsHapticPlaybackSupported calls the IsHapticPlaybackSupported RPC.
 func (c *Client) IsHapticPlaybackSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsHapticPlaybackSupported(ctx, &pb.IsHapticPlaybackSupportedRequest{
-	})
+	resp, err := c.svc.IsHapticPlaybackSupported(ctx, &pb.IsHapticPlaybackSupportedRequest{})
 	if err != nil {
 		return false, err
 	}

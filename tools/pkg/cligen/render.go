@@ -3,6 +3,7 @@ package cligen
 import (
 	"bytes"
 	"fmt"
+	"go/format"
 	"os"
 	"text/template"
 )
@@ -111,7 +112,7 @@ func renderPackage(pkg *CLIPackage, outputPath string) error {
 		*CLIPackage
 		HasStreaming bool
 	}{
-		CLIPackage:  pkg,
+		CLIPackage:   pkg,
 		HasStreaming: hasStreaming,
 	}
 
@@ -120,7 +121,14 @@ func renderPackage(pkg *CLIPackage, outputPath string) error {
 		return fmt.Errorf("execute template: %w", err)
 	}
 
-	if err := os.WriteFile(outputPath, buf.Bytes(), 0o644); err != nil {
+	// Run gofmt on the generated code; fall back to unformatted if it fails.
+	out := buf.Bytes()
+	formatted, err := format.Source(out)
+	if err != nil {
+		formatted = out
+	}
+
+	if err := os.WriteFile(outputPath, formatted, 0o644); err != nil {
 		return fmt.Errorf("write %s: %w", outputPath, err)
 	}
 	return nil

@@ -286,9 +286,9 @@ func TestMerge_WithOverlay(t *testing.T) {
 		GoImport: "github.com/example/test",
 		Classes: []Class{
 			{
-				JavaClass: "com.example.Svc",
-				GoType:    "Svc",
-				Obtain:    "system_service",
+				JavaClass:   "com.example.Svc",
+				GoType:      "Svc",
+				Obtain:      "system_service",
 				ServiceName: "svc",
 				Methods: []Method{
 					{

@@ -25,8 +25,7 @@ func NewClient(cc grpc.ClientConnInterface) *Client {
 
 // GetRttCharacteristics calls the GetRttCharacteristics RPC.
 func (c *Client) GetRttCharacteristics(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetRttCharacteristics(ctx, &pb.GetRttCharacteristicsRequest{
-	})
+	resp, err := c.svc.GetRttCharacteristics(ctx, &pb.GetRttCharacteristicsRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -35,8 +34,7 @@ func (c *Client) GetRttCharacteristics(ctx context.Context) (int64, error) {
 
 // IsAvailable calls the IsAvailable RPC.
 func (c *Client) IsAvailable(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsAvailable(ctx, &pb.IsAvailableRequest{
-	})
+	resp, err := c.svc.IsAvailable(ctx, &pb.IsAvailableRequest{})
 	if err != nil {
 		return false, err
 	}

@@ -23,13 +23,13 @@ type ProtoService struct {
 
 // ProtoRPC describes a single RPC method in a gRPC service.
 type ProtoRPC struct {
-	Name           string
-	OriginalName   string // Name before collision renaming (empty if unchanged).
-	InputType      string
-	OutputType     string
+	Name            string
+	OriginalName    string // Name before collision renaming (empty if unchanged).
+	InputType       string
+	OutputType      string
 	ClientStreaming bool
 	ServerStreaming bool
-	Comment        string
+	Comment         string
 }
 
 // ProtoMessage describes a protobuf message type.
@@ -235,7 +235,6 @@ func buildDataClassMessage(dc javagen.MergedDataClass, dataClassNames map[string
 	return msg
 }
 
-
 // buildServiceFromClass converts a MergedClass into a ProtoService and its
 // associated request/response messages.
 func buildServiceFromClass(cls javagen.MergedClass, dataClassNames map[string]bool, javaClassToDataMsg map[string]string) (ProtoService, []ProtoMessage) {
@@ -348,23 +347,23 @@ func buildStreamingFromCallback(cb javagen.MergedCallback, dataClassNames map[st
 	switch pattern {
 	case ServerStreaming:
 		rpcs = append(rpcs, ProtoRPC{
-			Name:           "Subscribe" + goType,
-			InputType:      subscribeReqName,
-			OutputType:     streamEventName,
+			Name:            "Subscribe" + goType,
+			InputType:       subscribeReqName,
+			OutputType:      streamEventName,
 			ServerStreaming: true,
-			Comment:        "Server-streaming events from " + cb.JavaInterface,
+			Comment:         "Server-streaming events from " + cb.JavaInterface,
 		})
 	case BidiStreaming:
 		// For bidi, create a client message too.
 		clientMsgName := goType + "Command"
 		msgs = append(msgs, ProtoMessage{Name: clientMsgName})
 		rpcs = append(rpcs, ProtoRPC{
-			Name:           goType + "Stream",
-			InputType:      clientMsgName,
-			OutputType:     streamEventName,
+			Name:            goType + "Stream",
+			InputType:       clientMsgName,
+			OutputType:      streamEventName,
 			ClientStreaming: true,
 			ServerStreaming: true,
-			Comment:        "Bidirectional streaming for " + cb.JavaInterface,
+			Comment:         "Bidirectional streaming for " + cb.JavaInterface,
 		})
 	}
 

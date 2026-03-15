@@ -20,9 +20,9 @@ type Context struct {
 }
 
 var (
-	ctxInitOnce               sync.Once
-	ctxInitErr                error
-	clsContext                *jni.GlobalRef
+	ctxInitOnce                sync.Once
+	ctxInitErr                 error
+	clsContext                 *jni.GlobalRef
 	midContextGetSystemService jni.MethodID
 )
 

@@ -60,8 +60,7 @@ func (c *Client) CreateSocketKeepalive(ctx context.Context, arg0 int64, arg1 int
 
 // GetActiveNetwork calls the GetActiveNetwork RPC.
 func (c *Client) GetActiveNetwork(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetActiveNetwork(ctx, &pb.GetActiveNetworkRequest{
-	})
+	resp, err := c.svc.GetActiveNetwork(ctx, &pb.GetActiveNetworkRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -70,8 +69,7 @@ func (c *Client) GetActiveNetwork(ctx context.Context) (int64, error) {
 
 // GetActiveNetworkInfo calls the GetActiveNetworkInfo RPC.
 func (c *Client) GetActiveNetworkInfo(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetActiveNetworkInfo(ctx, &pb.GetActiveNetworkInfoRequest{
-	})
+	resp, err := c.svc.GetActiveNetworkInfo(ctx, &pb.GetActiveNetworkInfoRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -80,8 +78,7 @@ func (c *Client) GetActiveNetworkInfo(ctx context.Context) (int64, error) {
 
 // GetAllNetworkInfo calls the GetAllNetworkInfo RPC.
 func (c *Client) GetAllNetworkInfo(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetAllNetworkInfo(ctx, &pb.GetAllNetworkInfoRequest{
-	})
+	resp, err := c.svc.GetAllNetworkInfo(ctx, &pb.GetAllNetworkInfoRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -90,8 +87,7 @@ func (c *Client) GetAllNetworkInfo(ctx context.Context) (int64, error) {
 
 // GetAllNetworks calls the GetAllNetworks RPC.
 func (c *Client) GetAllNetworks(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetAllNetworks(ctx, &pb.GetAllNetworksRequest{
-	})
+	resp, err := c.svc.GetAllNetworks(ctx, &pb.GetAllNetworksRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -100,8 +96,7 @@ func (c *Client) GetAllNetworks(ctx context.Context) (int64, error) {
 
 // GetBackgroundDataSetting calls the GetBackgroundDataSetting RPC.
 func (c *Client) GetBackgroundDataSetting(ctx context.Context) (bool, error) {
-	resp, err := c.svc.GetBackgroundDataSetting(ctx, &pb.GetBackgroundDataSettingRequest{
-	})
+	resp, err := c.svc.GetBackgroundDataSetting(ctx, &pb.GetBackgroundDataSettingRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -110,8 +105,7 @@ func (c *Client) GetBackgroundDataSetting(ctx context.Context) (bool, error) {
 
 // GetBoundNetworkForProcess calls the GetBoundNetworkForProcess RPC.
 func (c *Client) GetBoundNetworkForProcess(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetBoundNetworkForProcess(ctx, &pb.GetBoundNetworkForProcessRequest{
-	})
+	resp, err := c.svc.GetBoundNetworkForProcess(ctx, &pb.GetBoundNetworkForProcessRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -133,8 +127,7 @@ func (c *Client) GetConnectionOwnerUid(ctx context.Context, arg0 int32, arg1 int
 
 // GetDefaultProxy calls the GetDefaultProxy RPC.
 func (c *Client) GetDefaultProxy(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetDefaultProxy(ctx, &pb.GetDefaultProxyRequest{
-	})
+	resp, err := c.svc.GetDefaultProxy(ctx, &pb.GetDefaultProxyRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -198,8 +191,7 @@ func (c *Client) GetNetworkInfo1_1(ctx context.Context, arg0 int32) (int64, erro
 
 // GetNetworkPreference calls the GetNetworkPreference RPC.
 func (c *Client) GetNetworkPreference(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetNetworkPreference(ctx, &pb.GetNetworkPreferenceRequest{
-	})
+	resp, err := c.svc.GetNetworkPreference(ctx, &pb.GetNetworkPreferenceRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -208,8 +200,7 @@ func (c *Client) GetNetworkPreference(ctx context.Context) (int32, error) {
 
 // GetNetworkWatchlistConfigHash calls the GetNetworkWatchlistConfigHash RPC.
 func (c *Client) GetNetworkWatchlistConfigHash(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetNetworkWatchlistConfigHash(ctx, &pb.GetNetworkWatchlistConfigHashRequest{
-	})
+	resp, err := c.svc.GetNetworkWatchlistConfigHash(ctx, &pb.GetNetworkWatchlistConfigHashRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -218,8 +209,7 @@ func (c *Client) GetNetworkWatchlistConfigHash(ctx context.Context) (int64, erro
 
 // GetRestrictBackgroundStatus calls the GetRestrictBackgroundStatus RPC.
 func (c *Client) GetRestrictBackgroundStatus(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetRestrictBackgroundStatus(ctx, &pb.GetRestrictBackgroundStatusRequest{
-	})
+	resp, err := c.svc.GetRestrictBackgroundStatus(ctx, &pb.GetRestrictBackgroundStatusRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -228,8 +218,7 @@ func (c *Client) GetRestrictBackgroundStatus(ctx context.Context) (int32, error)
 
 // IsActiveNetworkMetered calls the IsActiveNetworkMetered RPC.
 func (c *Client) IsActiveNetworkMetered(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsActiveNetworkMetered(ctx, &pb.IsActiveNetworkMeteredRequest{
-	})
+	resp, err := c.svc.IsActiveNetworkMetered(ctx, &pb.IsActiveNetworkMeteredRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -238,8 +227,7 @@ func (c *Client) IsActiveNetworkMetered(ctx context.Context) (bool, error) {
 
 // IsDefaultNetworkActive calls the IsDefaultNetworkActive RPC.
 func (c *Client) IsDefaultNetworkActive(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsDefaultNetworkActive(ctx, &pb.IsDefaultNetworkActiveRequest{
-	})
+	resp, err := c.svc.IsDefaultNetworkActive(ctx, &pb.IsDefaultNetworkActiveRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -370,8 +358,7 @@ func (c *Client) UnregisterNetworkCallback1_1(ctx context.Context, arg0 int64) e
 
 // GetProcessDefaultNetwork calls the GetProcessDefaultNetwork RPC.
 func (c *Client) GetProcessDefaultNetwork(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetProcessDefaultNetwork(ctx, &pb.GetProcessDefaultNetworkRequest{
-	})
+	resp, err := c.svc.GetProcessDefaultNetwork(ctx, &pb.GetProcessDefaultNetworkRequest{})
 	if err != nil {
 		return 0, err
 	}

@@ -54,8 +54,7 @@ func (c *Client) ExitKeyguardSecurely(ctx context.Context, arg0 int64) error {
 
 // InKeyguardRestrictedInputMode calls the InKeyguardRestrictedInputMode RPC.
 func (c *Client) InKeyguardRestrictedInputMode(ctx context.Context) (bool, error) {
-	resp, err := c.svc.InKeyguardRestrictedInputMode(ctx, &pb.InKeyguardRestrictedInputModeRequest{
-	})
+	resp, err := c.svc.InKeyguardRestrictedInputMode(ctx, &pb.InKeyguardRestrictedInputModeRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -64,8 +63,7 @@ func (c *Client) InKeyguardRestrictedInputMode(ctx context.Context) (bool, error
 
 // IsDeviceLocked calls the IsDeviceLocked RPC.
 func (c *Client) IsDeviceLocked(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsDeviceLocked(ctx, &pb.IsDeviceLockedRequest{
-	})
+	resp, err := c.svc.IsDeviceLocked(ctx, &pb.IsDeviceLockedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -74,8 +72,7 @@ func (c *Client) IsDeviceLocked(ctx context.Context) (bool, error) {
 
 // IsDeviceSecure calls the IsDeviceSecure RPC.
 func (c *Client) IsDeviceSecure(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsDeviceSecure(ctx, &pb.IsDeviceSecureRequest{
-	})
+	resp, err := c.svc.IsDeviceSecure(ctx, &pb.IsDeviceSecureRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -84,8 +81,7 @@ func (c *Client) IsDeviceSecure(ctx context.Context) (bool, error) {
 
 // IsKeyguardLocked calls the IsKeyguardLocked RPC.
 func (c *Client) IsKeyguardLocked(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsKeyguardLocked(ctx, &pb.IsKeyguardLockedRequest{
-	})
+	resp, err := c.svc.IsKeyguardLocked(ctx, &pb.IsKeyguardLockedRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -94,8 +90,7 @@ func (c *Client) IsKeyguardLocked(ctx context.Context) (bool, error) {
 
 // IsKeyguardSecure calls the IsKeyguardSecure RPC.
 func (c *Client) IsKeyguardSecure(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsKeyguardSecure(ctx, &pb.IsKeyguardSecureRequest{
-	})
+	resp, err := c.svc.IsKeyguardSecure(ctx, &pb.IsKeyguardSecureRequest{})
 	if err != nil {
 		return false, err
 	}

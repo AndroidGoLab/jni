@@ -9,8 +9,8 @@ import (
 
 	"github.com/xaionaro-go/jni/app"
 	"github.com/xaionaro-go/jni/handlestore"
-	jnipkg "github.com/xaionaro-go/jni/view/inputmethod"
 	pb "github.com/xaionaro-go/jni/proto/inputmethod"
+	jnipkg "github.com/xaionaro-go/jni/view/inputmethod"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

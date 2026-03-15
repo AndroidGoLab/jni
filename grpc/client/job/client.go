@@ -25,8 +25,7 @@ func NewClient(cc grpc.ClientConnInterface) *Client {
 
 // CanRunUserInitiatedJobs calls the CanRunUserInitiatedJobs RPC.
 func (c *Client) CanRunUserInitiatedJobs(ctx context.Context) (bool, error) {
-	resp, err := c.svc.CanRunUserInitiatedJobs(ctx, &pb.CanRunUserInitiatedJobsRequest{
-	})
+	resp, err := c.svc.CanRunUserInitiatedJobs(ctx, &pb.CanRunUserInitiatedJobsRequest{})
 	if err != nil {
 		return false, err
 	}
@@ -35,8 +34,7 @@ func (c *Client) CanRunUserInitiatedJobs(ctx context.Context) (bool, error) {
 
 // CancelInAllNamespaces calls the CancelInAllNamespaces RPC.
 func (c *Client) CancelInAllNamespaces(ctx context.Context) error {
-	_, err := c.svc.CancelInAllNamespaces(ctx, &pb.CancelInAllNamespacesRequest{
-	})
+	_, err := c.svc.CancelInAllNamespaces(ctx, &pb.CancelInAllNamespacesRequest{})
 	return err
 }
 
@@ -53,8 +51,7 @@ func (c *Client) ForNamespace(ctx context.Context, arg0 string) (int64, error) {
 
 // GetNamespace calls the GetNamespace RPC.
 func (c *Client) GetNamespace(ctx context.Context) (string, error) {
-	resp, err := c.svc.GetNamespace(ctx, &pb.GetNamespaceRequest{
-	})
+	resp, err := c.svc.GetNamespace(ctx, &pb.GetNamespaceRequest{})
 	if err != nil {
 		return "", err
 	}

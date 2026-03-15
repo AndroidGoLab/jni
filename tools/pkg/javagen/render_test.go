@@ -320,4 +320,3 @@ func testLocationSpec() *MergedSpec {
 		},
 	}
 }
-

@@ -142,8 +142,7 @@ func (c *Client) ClearTestProviderStatus(ctx context.Context, arg0 string) error
 
 // GetAllProviders calls the GetAllProviders RPC.
 func (c *Client) GetAllProviders(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetAllProviders(ctx, &pb.GetAllProvidersRequest{
-	})
+	resp, err := c.svc.GetAllProviders(ctx, &pb.GetAllProvidersRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -187,8 +186,7 @@ func (c *Client) GetCurrentLocation4_1(ctx context.Context, arg0 string, arg1 in
 
 // GetGnssAntennaInfos calls the GetGnssAntennaInfos RPC.
 func (c *Client) GetGnssAntennaInfos(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetGnssAntennaInfos(ctx, &pb.GetGnssAntennaInfosRequest{
-	})
+	resp, err := c.svc.GetGnssAntennaInfos(ctx, &pb.GetGnssAntennaInfosRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -197,8 +195,7 @@ func (c *Client) GetGnssAntennaInfos(ctx context.Context) (int64, error) {
 
 // GetGnssCapabilities calls the GetGnssCapabilities RPC.
 func (c *Client) GetGnssCapabilities(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetGnssCapabilities(ctx, &pb.GetGnssCapabilitiesRequest{
-	})
+	resp, err := c.svc.GetGnssCapabilities(ctx, &pb.GetGnssCapabilitiesRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -207,8 +204,7 @@ func (c *Client) GetGnssCapabilities(ctx context.Context) (int64, error) {
 
 // GetGnssHardwareModelName calls the GetGnssHardwareModelName RPC.
 func (c *Client) GetGnssHardwareModelName(ctx context.Context) (string, error) {
-	resp, err := c.svc.GetGnssHardwareModelName(ctx, &pb.GetGnssHardwareModelNameRequest{
-	})
+	resp, err := c.svc.GetGnssHardwareModelName(ctx, &pb.GetGnssHardwareModelNameRequest{})
 	if err != nil {
 		return "", err
 	}
@@ -217,8 +213,7 @@ func (c *Client) GetGnssHardwareModelName(ctx context.Context) (string, error) {
 
 // GetGnssYearOfHardware calls the GetGnssYearOfHardware RPC.
 func (c *Client) GetGnssYearOfHardware(ctx context.Context) (int32, error) {
-	resp, err := c.svc.GetGnssYearOfHardware(ctx, &pb.GetGnssYearOfHardwareRequest{
-	})
+	resp, err := c.svc.GetGnssYearOfHardware(ctx, &pb.GetGnssYearOfHardwareRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -305,8 +300,7 @@ func (c *Client) HasProvider(ctx context.Context, arg0 string) (bool, error) {
 
 // IsLocationEnabled calls the IsLocationEnabled RPC.
 func (c *Client) IsLocationEnabled(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsLocationEnabled(ctx, &pb.IsLocationEnabledRequest{
-	})
+	resp, err := c.svc.IsLocationEnabled(ctx, &pb.IsLocationEnabledRequest{})
 	if err != nil {
 		return false, err
 	}

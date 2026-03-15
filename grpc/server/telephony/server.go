@@ -9,8 +9,8 @@ import (
 
 	"github.com/xaionaro-go/jni/app"
 	"github.com/xaionaro-go/jni/handlestore"
-	jnipkg "github.com/xaionaro-go/jni/telephony"
 	pb "github.com/xaionaro-go/jni/proto/telephony"
+	jnipkg "github.com/xaionaro-go/jni/telephony"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

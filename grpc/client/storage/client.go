@@ -99,8 +99,7 @@ func (c *Client) GetMountedObbPath(ctx context.Context, arg0 string) (string, er
 
 // GetPrimaryStorageVolume calls the GetPrimaryStorageVolume RPC.
 func (c *Client) GetPrimaryStorageVolume(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetPrimaryStorageVolume(ctx, &pb.GetPrimaryStorageVolumeRequest{
-	})
+	resp, err := c.svc.GetPrimaryStorageVolume(ctx, &pb.GetPrimaryStorageVolumeRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -109,8 +108,7 @@ func (c *Client) GetPrimaryStorageVolume(ctx context.Context) (int64, error) {
 
 // GetRecentStorageVolumes calls the GetRecentStorageVolumes RPC.
 func (c *Client) GetRecentStorageVolumes(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetRecentStorageVolumes(ctx, &pb.GetRecentStorageVolumesRequest{
-	})
+	resp, err := c.svc.GetRecentStorageVolumes(ctx, &pb.GetRecentStorageVolumesRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -141,8 +139,7 @@ func (c *Client) GetStorageVolume1_1(ctx context.Context, arg0 int64) (int64, er
 
 // GetStorageVolumes calls the GetStorageVolumes RPC.
 func (c *Client) GetStorageVolumes(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetStorageVolumes(ctx, &pb.GetStorageVolumesRequest{
-	})
+	resp, err := c.svc.GetStorageVolumes(ctx, &pb.GetStorageVolumesRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -151,8 +148,7 @@ func (c *Client) GetStorageVolumes(ctx context.Context) (int64, error) {
 
 // GetStorageVolumesIncludingSharedProfiles calls the GetStorageVolumesIncludingSharedProfiles RPC.
 func (c *Client) GetStorageVolumesIncludingSharedProfiles(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetStorageVolumesIncludingSharedProfiles(ctx, &pb.GetStorageVolumesIncludingSharedProfilesRequest{
-	})
+	resp, err := c.svc.GetStorageVolumesIncludingSharedProfiles(ctx, &pb.GetStorageVolumesIncludingSharedProfilesRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -205,8 +201,7 @@ func (c *Client) IsCacheBehaviorTombstone(ctx context.Context, arg0 int64) (bool
 
 // IsCheckpointSupported calls the IsCheckpointSupported RPC.
 func (c *Client) IsCheckpointSupported(ctx context.Context) (bool, error) {
-	resp, err := c.svc.IsCheckpointSupported(ctx, &pb.IsCheckpointSupportedRequest{
-	})
+	resp, err := c.svc.IsCheckpointSupported(ctx, &pb.IsCheckpointSupportedRequest{})
 	if err != nil {
 		return false, err
 	}

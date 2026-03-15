@@ -45,8 +45,7 @@ func (c *Client) AttachSystemDataTransport(ctx context.Context, arg0 int32, arg1
 
 // BuildAssociationCancellationIntent calls the BuildAssociationCancellationIntent RPC.
 func (c *Client) BuildAssociationCancellationIntent(ctx context.Context) (int64, error) {
-	resp, err := c.svc.BuildAssociationCancellationIntent(ctx, &pb.BuildAssociationCancellationIntentRequest{
-	})
+	resp, err := c.svc.BuildAssociationCancellationIntent(ctx, &pb.BuildAssociationCancellationIntentRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -108,8 +107,7 @@ func (c *Client) EnableSystemDataSyncForTypes(ctx context.Context, arg0 int32, a
 
 // GetAssociations calls the GetAssociations RPC.
 func (c *Client) GetAssociations(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetAssociations(ctx, &pb.GetAssociationsRequest{
-	})
+	resp, err := c.svc.GetAssociations(ctx, &pb.GetAssociationsRequest{})
 	if err != nil {
 		return 0, err
 	}
@@ -118,8 +116,7 @@ func (c *Client) GetAssociations(ctx context.Context) (int64, error) {
 
 // GetMyAssociations calls the GetMyAssociations RPC.
 func (c *Client) GetMyAssociations(ctx context.Context) (int64, error) {
-	resp, err := c.svc.GetMyAssociations(ctx, &pb.GetMyAssociationsRequest{
-	})
+	resp, err := c.svc.GetMyAssociations(ctx, &pb.GetMyAssociationsRequest{})
 	if err != nil {
 		return 0, err
 	}
