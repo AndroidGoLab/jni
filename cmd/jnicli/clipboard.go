@@ -13,6 +13,183 @@ var clipboardCmd = &cobra.Command{
 	Short: "clipboard service operations",
 }
 
+var clipboardClipboardManagerCmd = &cobra.Command{
+	Use:   "clipboard-manager",
+	Short: "ClipboardManagerService operations",
+}
+
+var clipboardClipboardManagerAddPrimaryClipChangedListenerCmd = &cobra.Command{
+	Use:   "add-primary-clip-changed-listener",
+	Short: "AddPrimaryClipChangedListener RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewClipboardManagerServiceClient(grpcConn)
+		req := &pb.AddPrimaryClipChangedListenerRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.AddPrimaryClipChangedListener(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var clipboardClipboardManagerClearPrimaryClipCmd = &cobra.Command{
+	Use:   "clear-primary-clip",
+	Short: "ClearPrimaryClip RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewClipboardManagerServiceClient(grpcConn)
+		req := &pb.ClearPrimaryClipRequest{}
+		resp, err := client.ClearPrimaryClip(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var clipboardClipboardManagerGetPrimaryClipCmd = &cobra.Command{
+	Use:   "get-primary-clip",
+	Short: "GetPrimaryClip RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewClipboardManagerServiceClient(grpcConn)
+		req := &pb.GetPrimaryClipRequest{}
+		resp, err := client.GetPrimaryClip(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var clipboardClipboardManagerGetPrimaryClipDescriptionCmd = &cobra.Command{
+	Use:   "get-primary-clip-description",
+	Short: "GetPrimaryClipDescription RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewClipboardManagerServiceClient(grpcConn)
+		req := &pb.GetPrimaryClipDescriptionRequest{}
+		resp, err := client.GetPrimaryClipDescription(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var clipboardClipboardManagerGetTextCmd = &cobra.Command{
+	Use:   "get-text",
+	Short: "GetText RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewClipboardManagerServiceClient(grpcConn)
+		req := &pb.GetTextRequest{}
+		resp, err := client.GetText(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var clipboardClipboardManagerHasPrimaryClipCmd = &cobra.Command{
+	Use:   "has-primary-clip",
+	Short: "HasPrimaryClip RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewClipboardManagerServiceClient(grpcConn)
+		req := &pb.HasPrimaryClipRequest{}
+		resp, err := client.HasPrimaryClip(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var clipboardClipboardManagerHasTextCmd = &cobra.Command{
+	Use:   "has-text",
+	Short: "HasText RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewClipboardManagerServiceClient(grpcConn)
+		req := &pb.HasTextRequest{}
+		resp, err := client.HasText(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var clipboardClipboardManagerRemovePrimaryClipChangedListenerCmd = &cobra.Command{
+	Use:   "remove-primary-clip-changed-listener",
+	Short: "RemovePrimaryClipChangedListener RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewClipboardManagerServiceClient(grpcConn)
+		req := &pb.RemovePrimaryClipChangedListenerRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RemovePrimaryClipChangedListener(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var clipboardClipboardManagerSetPrimaryClipCmd = &cobra.Command{
+	Use:   "set-primary-clip",
+	Short: "SetPrimaryClip RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewClipboardManagerServiceClient(grpcConn)
+		req := &pb.SetPrimaryClipRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetPrimaryClip(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var clipboardClipboardManagerSetTextCmd = &cobra.Command{
+	Use:   "set-text",
+	Short: "SetText RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewClipboardManagerServiceClient(grpcConn)
+		req := &pb.SetTextRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetText(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 var clipboardClipDataCmd = &cobra.Command{
 	Use:   "clip-data",
 	Short: "ClipDataService operations",
@@ -455,6 +632,21 @@ var clipboardClipDataItemToStringCmd = &cobra.Command{
 }
 
 func init() {
+	clipboardClipboardManagerAddPrimaryClipChangedListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	clipboardClipboardManagerCmd.AddCommand(clipboardClipboardManagerAddPrimaryClipChangedListenerCmd)
+	clipboardClipboardManagerCmd.AddCommand(clipboardClipboardManagerClearPrimaryClipCmd)
+	clipboardClipboardManagerCmd.AddCommand(clipboardClipboardManagerGetPrimaryClipCmd)
+	clipboardClipboardManagerCmd.AddCommand(clipboardClipboardManagerGetPrimaryClipDescriptionCmd)
+	clipboardClipboardManagerCmd.AddCommand(clipboardClipboardManagerGetTextCmd)
+	clipboardClipboardManagerCmd.AddCommand(clipboardClipboardManagerHasPrimaryClipCmd)
+	clipboardClipboardManagerCmd.AddCommand(clipboardClipboardManagerHasTextCmd)
+	clipboardClipboardManagerRemovePrimaryClipChangedListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	clipboardClipboardManagerCmd.AddCommand(clipboardClipboardManagerRemovePrimaryClipChangedListenerCmd)
+	clipboardClipboardManagerSetPrimaryClipCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	clipboardClipboardManagerCmd.AddCommand(clipboardClipboardManagerSetPrimaryClipCmd)
+	clipboardClipboardManagerSetTextCmd.Flags().String("arg0", "", "arg0 (string)")
+	clipboardClipboardManagerCmd.AddCommand(clipboardClipboardManagerSetTextCmd)
+	clipboardCmd.AddCommand(clipboardClipboardManagerCmd)
 	clipboardClipDataAddItem1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
 	clipboardClipDataCmd.AddCommand(clipboardClipDataAddItem1Cmd)
 	clipboardClipDataAddItem2_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")

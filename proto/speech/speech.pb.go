@@ -3791,6 +3791,1102 @@ func (x *GetMaxSpeechInputLengthResponse) GetResult() int32 {
 	return 0
 }
 
+type CancelRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CancelRequest) Reset() {
+	*x = CancelRequest{}
+	mi := &file_proto_speech_speech_proto_msgTypes[82]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelRequest) ProtoMessage() {}
+
+func (x *CancelRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[82]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelRequest.ProtoReflect.Descriptor instead.
+func (*CancelRequest) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{82}
+}
+
+type CancelResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CancelResponse) Reset() {
+	*x = CancelResponse{}
+	mi := &file_proto_speech_speech_proto_msgTypes[83]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelResponse) ProtoMessage() {}
+
+func (x *CancelResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[83]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelResponse.ProtoReflect.Descriptor instead.
+func (*CancelResponse) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{83}
+}
+
+type CheckRecognitionSupportRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckRecognitionSupportRequest) Reset() {
+	*x = CheckRecognitionSupportRequest{}
+	mi := &file_proto_speech_speech_proto_msgTypes[84]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckRecognitionSupportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckRecognitionSupportRequest) ProtoMessage() {}
+
+func (x *CheckRecognitionSupportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[84]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckRecognitionSupportRequest.ProtoReflect.Descriptor instead.
+func (*CheckRecognitionSupportRequest) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{84}
+}
+
+func (x *CheckRecognitionSupportRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *CheckRecognitionSupportRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *CheckRecognitionSupportRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type CheckRecognitionSupportResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckRecognitionSupportResponse) Reset() {
+	*x = CheckRecognitionSupportResponse{}
+	mi := &file_proto_speech_speech_proto_msgTypes[85]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckRecognitionSupportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckRecognitionSupportResponse) ProtoMessage() {}
+
+func (x *CheckRecognitionSupportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[85]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckRecognitionSupportResponse.ProtoReflect.Descriptor instead.
+func (*CheckRecognitionSupportResponse) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{85}
+}
+
+type DestroyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DestroyRequest) Reset() {
+	*x = DestroyRequest{}
+	mi := &file_proto_speech_speech_proto_msgTypes[86]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DestroyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DestroyRequest) ProtoMessage() {}
+
+func (x *DestroyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[86]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DestroyRequest.ProtoReflect.Descriptor instead.
+func (*DestroyRequest) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{86}
+}
+
+type DestroyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DestroyResponse) Reset() {
+	*x = DestroyResponse{}
+	mi := &file_proto_speech_speech_proto_msgTypes[87]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DestroyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DestroyResponse) ProtoMessage() {}
+
+func (x *DestroyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[87]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DestroyResponse.ProtoReflect.Descriptor instead.
+func (*DestroyResponse) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{87}
+}
+
+type SetRecognitionListenerRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetRecognitionListenerRequest) Reset() {
+	*x = SetRecognitionListenerRequest{}
+	mi := &file_proto_speech_speech_proto_msgTypes[88]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetRecognitionListenerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetRecognitionListenerRequest) ProtoMessage() {}
+
+func (x *SetRecognitionListenerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[88]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetRecognitionListenerRequest.ProtoReflect.Descriptor instead.
+func (*SetRecognitionListenerRequest) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{88}
+}
+
+func (x *SetRecognitionListenerRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetRecognitionListenerResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetRecognitionListenerResponse) Reset() {
+	*x = SetRecognitionListenerResponse{}
+	mi := &file_proto_speech_speech_proto_msgTypes[89]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetRecognitionListenerResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetRecognitionListenerResponse) ProtoMessage() {}
+
+func (x *SetRecognitionListenerResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[89]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetRecognitionListenerResponse.ProtoReflect.Descriptor instead.
+func (*SetRecognitionListenerResponse) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{89}
+}
+
+type StartListeningRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartListeningRequest) Reset() {
+	*x = StartListeningRequest{}
+	mi := &file_proto_speech_speech_proto_msgTypes[90]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartListeningRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartListeningRequest) ProtoMessage() {}
+
+func (x *StartListeningRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[90]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartListeningRequest.ProtoReflect.Descriptor instead.
+func (*StartListeningRequest) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{90}
+}
+
+func (x *StartListeningRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type StartListeningResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartListeningResponse) Reset() {
+	*x = StartListeningResponse{}
+	mi := &file_proto_speech_speech_proto_msgTypes[91]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartListeningResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartListeningResponse) ProtoMessage() {}
+
+func (x *StartListeningResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[91]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartListeningResponse.ProtoReflect.Descriptor instead.
+func (*StartListeningResponse) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{91}
+}
+
+type StopListeningRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopListeningRequest) Reset() {
+	*x = StopListeningRequest{}
+	mi := &file_proto_speech_speech_proto_msgTypes[92]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopListeningRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopListeningRequest) ProtoMessage() {}
+
+func (x *StopListeningRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[92]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopListeningRequest.ProtoReflect.Descriptor instead.
+func (*StopListeningRequest) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{92}
+}
+
+type StopListeningResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopListeningResponse) Reset() {
+	*x = StopListeningResponse{}
+	mi := &file_proto_speech_speech_proto_msgTypes[93]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopListeningResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopListeningResponse) ProtoMessage() {}
+
+func (x *StopListeningResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[93]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopListeningResponse.ProtoReflect.Descriptor instead.
+func (*StopListeningResponse) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{93}
+}
+
+type TriggerModelDownload1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TriggerModelDownload1Request) Reset() {
+	*x = TriggerModelDownload1Request{}
+	mi := &file_proto_speech_speech_proto_msgTypes[94]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TriggerModelDownload1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TriggerModelDownload1Request) ProtoMessage() {}
+
+func (x *TriggerModelDownload1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[94]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TriggerModelDownload1Request.ProtoReflect.Descriptor instead.
+func (*TriggerModelDownload1Request) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{94}
+}
+
+func (x *TriggerModelDownload1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type TriggerModelDownload1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TriggerModelDownload1Response) Reset() {
+	*x = TriggerModelDownload1Response{}
+	mi := &file_proto_speech_speech_proto_msgTypes[95]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TriggerModelDownload1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TriggerModelDownload1Response) ProtoMessage() {}
+
+func (x *TriggerModelDownload1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[95]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TriggerModelDownload1Response.ProtoReflect.Descriptor instead.
+func (*TriggerModelDownload1Response) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{95}
+}
+
+type TriggerModelDownload3_1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TriggerModelDownload3_1Request) Reset() {
+	*x = TriggerModelDownload3_1Request{}
+	mi := &file_proto_speech_speech_proto_msgTypes[96]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TriggerModelDownload3_1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TriggerModelDownload3_1Request) ProtoMessage() {}
+
+func (x *TriggerModelDownload3_1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[96]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TriggerModelDownload3_1Request.ProtoReflect.Descriptor instead.
+func (*TriggerModelDownload3_1Request) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{96}
+}
+
+func (x *TriggerModelDownload3_1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *TriggerModelDownload3_1Request) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *TriggerModelDownload3_1Request) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type TriggerModelDownload3_1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TriggerModelDownload3_1Response) Reset() {
+	*x = TriggerModelDownload3_1Response{}
+	mi := &file_proto_speech_speech_proto_msgTypes[97]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TriggerModelDownload3_1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TriggerModelDownload3_1Response) ProtoMessage() {}
+
+func (x *TriggerModelDownload3_1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[97]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TriggerModelDownload3_1Response.ProtoReflect.Descriptor instead.
+func (*TriggerModelDownload3_1Response) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{97}
+}
+
+type CreateOnDeviceSpeechRecognizerRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateOnDeviceSpeechRecognizerRequest) Reset() {
+	*x = CreateOnDeviceSpeechRecognizerRequest{}
+	mi := &file_proto_speech_speech_proto_msgTypes[98]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateOnDeviceSpeechRecognizerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateOnDeviceSpeechRecognizerRequest) ProtoMessage() {}
+
+func (x *CreateOnDeviceSpeechRecognizerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[98]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateOnDeviceSpeechRecognizerRequest.ProtoReflect.Descriptor instead.
+func (*CreateOnDeviceSpeechRecognizerRequest) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{98}
+}
+
+func (x *CreateOnDeviceSpeechRecognizerRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type CreateOnDeviceSpeechRecognizerResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateOnDeviceSpeechRecognizerResponse) Reset() {
+	*x = CreateOnDeviceSpeechRecognizerResponse{}
+	mi := &file_proto_speech_speech_proto_msgTypes[99]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateOnDeviceSpeechRecognizerResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateOnDeviceSpeechRecognizerResponse) ProtoMessage() {}
+
+func (x *CreateOnDeviceSpeechRecognizerResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[99]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateOnDeviceSpeechRecognizerResponse.ProtoReflect.Descriptor instead.
+func (*CreateOnDeviceSpeechRecognizerResponse) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{99}
+}
+
+func (x *CreateOnDeviceSpeechRecognizerResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type CreateSpeechRecognizer1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSpeechRecognizer1Request) Reset() {
+	*x = CreateSpeechRecognizer1Request{}
+	mi := &file_proto_speech_speech_proto_msgTypes[100]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSpeechRecognizer1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSpeechRecognizer1Request) ProtoMessage() {}
+
+func (x *CreateSpeechRecognizer1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[100]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSpeechRecognizer1Request.ProtoReflect.Descriptor instead.
+func (*CreateSpeechRecognizer1Request) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{100}
+}
+
+func (x *CreateSpeechRecognizer1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type CreateSpeechRecognizer1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSpeechRecognizer1Response) Reset() {
+	*x = CreateSpeechRecognizer1Response{}
+	mi := &file_proto_speech_speech_proto_msgTypes[101]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSpeechRecognizer1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSpeechRecognizer1Response) ProtoMessage() {}
+
+func (x *CreateSpeechRecognizer1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[101]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSpeechRecognizer1Response.ProtoReflect.Descriptor instead.
+func (*CreateSpeechRecognizer1Response) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{101}
+}
+
+func (x *CreateSpeechRecognizer1Response) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type CreateSpeechRecognizer2_1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSpeechRecognizer2_1Request) Reset() {
+	*x = CreateSpeechRecognizer2_1Request{}
+	mi := &file_proto_speech_speech_proto_msgTypes[102]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSpeechRecognizer2_1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSpeechRecognizer2_1Request) ProtoMessage() {}
+
+func (x *CreateSpeechRecognizer2_1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[102]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSpeechRecognizer2_1Request.ProtoReflect.Descriptor instead.
+func (*CreateSpeechRecognizer2_1Request) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{102}
+}
+
+func (x *CreateSpeechRecognizer2_1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *CreateSpeechRecognizer2_1Request) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type CreateSpeechRecognizer2_1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateSpeechRecognizer2_1Response) Reset() {
+	*x = CreateSpeechRecognizer2_1Response{}
+	mi := &file_proto_speech_speech_proto_msgTypes[103]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateSpeechRecognizer2_1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateSpeechRecognizer2_1Response) ProtoMessage() {}
+
+func (x *CreateSpeechRecognizer2_1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[103]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateSpeechRecognizer2_1Response.ProtoReflect.Descriptor instead.
+func (*CreateSpeechRecognizer2_1Response) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{103}
+}
+
+func (x *CreateSpeechRecognizer2_1Response) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type IsOnDeviceRecognitionAvailableRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsOnDeviceRecognitionAvailableRequest) Reset() {
+	*x = IsOnDeviceRecognitionAvailableRequest{}
+	mi := &file_proto_speech_speech_proto_msgTypes[104]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsOnDeviceRecognitionAvailableRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsOnDeviceRecognitionAvailableRequest) ProtoMessage() {}
+
+func (x *IsOnDeviceRecognitionAvailableRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[104]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsOnDeviceRecognitionAvailableRequest.ProtoReflect.Descriptor instead.
+func (*IsOnDeviceRecognitionAvailableRequest) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{104}
+}
+
+func (x *IsOnDeviceRecognitionAvailableRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type IsOnDeviceRecognitionAvailableResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsOnDeviceRecognitionAvailableResponse) Reset() {
+	*x = IsOnDeviceRecognitionAvailableResponse{}
+	mi := &file_proto_speech_speech_proto_msgTypes[105]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsOnDeviceRecognitionAvailableResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsOnDeviceRecognitionAvailableResponse) ProtoMessage() {}
+
+func (x *IsOnDeviceRecognitionAvailableResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[105]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsOnDeviceRecognitionAvailableResponse.ProtoReflect.Descriptor instead.
+func (*IsOnDeviceRecognitionAvailableResponse) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{105}
+}
+
+func (x *IsOnDeviceRecognitionAvailableResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsRecognitionAvailableRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsRecognitionAvailableRequest) Reset() {
+	*x = IsRecognitionAvailableRequest{}
+	mi := &file_proto_speech_speech_proto_msgTypes[106]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsRecognitionAvailableRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsRecognitionAvailableRequest) ProtoMessage() {}
+
+func (x *IsRecognitionAvailableRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[106]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsRecognitionAvailableRequest.ProtoReflect.Descriptor instead.
+func (*IsRecognitionAvailableRequest) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{106}
+}
+
+func (x *IsRecognitionAvailableRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type IsRecognitionAvailableResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsRecognitionAvailableResponse) Reset() {
+	*x = IsRecognitionAvailableResponse{}
+	mi := &file_proto_speech_speech_proto_msgTypes[107]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsRecognitionAvailableResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsRecognitionAvailableResponse) ProtoMessage() {}
+
+func (x *IsRecognitionAvailableResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_speech_speech_proto_msgTypes[107]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsRecognitionAvailableResponse.ProtoReflect.Descriptor instead.
+func (*IsRecognitionAvailableResponse) Descriptor() ([]byte, []int) {
+	return file_proto_speech_speech_proto_rawDescGZIP(), []int{107}
+}
+
+func (x *IsRecognitionAvailableResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
 var File_proto_speech_speech_proto protoreflect.FileDescriptor
 
 const file_proto_speech_speech_proto_rawDesc = "" +
@@ -3979,7 +5075,53 @@ const file_proto_speech_speech_proto_rawDesc = "" +
 	"\x06result\x18\x01 \x01(\x05R\x06result\" \n" +
 	"\x1eGetMaxSpeechInputLengthRequest\"9\n" +
 	"\x1fGetMaxSpeechInputLengthResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x05R\x06result2\x83\x1a\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x0f\n" +
+	"\rCancelRequest\"\x10\n" +
+	"\x0eCancelResponse\"\\\n" +
+	"\x1eCheckRecognitionSupportRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"!\n" +
+	"\x1fCheckRecognitionSupportResponse\"\x10\n" +
+	"\x0eDestroyRequest\"\x11\n" +
+	"\x0fDestroyResponse\"3\n" +
+	"\x1dSetRecognitionListenerRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\" \n" +
+	"\x1eSetRecognitionListenerResponse\"+\n" +
+	"\x15StartListeningRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x18\n" +
+	"\x16StartListeningResponse\"\x16\n" +
+	"\x14StopListeningRequest\"\x17\n" +
+	"\x15StopListeningResponse\"2\n" +
+	"\x1cTriggerModelDownload1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1f\n" +
+	"\x1dTriggerModelDownload1Response\"\\\n" +
+	"\x1eTriggerModelDownload3_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"!\n" +
+	"\x1fTriggerModelDownload3_1Response\";\n" +
+	"%CreateOnDeviceSpeechRecognizerRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"@\n" +
+	"&CreateOnDeviceSpeechRecognizerResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"4\n" +
+	"\x1eCreateSpeechRecognizer1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"9\n" +
+	"\x1fCreateSpeechRecognizer1Response\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"J\n" +
+	" CreateSpeechRecognizer2_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\";\n" +
+	"!CreateSpeechRecognizer2_1Response\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\";\n" +
+	"%IsOnDeviceRecognitionAvailableRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"@\n" +
+	"&IsOnDeviceRecognitionAvailableResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"3\n" +
+	"\x1dIsRecognitionAvailableRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"8\n" +
+	"\x1eIsRecognitionAvailableResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result2\x83\x1a\n" +
 	"\x13TextToSpeechService\x12C\n" +
 	"\n" +
 	"AddEarcon2\x12\x19.speech.AddEarcon2Request\x1a\x1a.speech.AddEarcon2Response\x12I\n" +
@@ -4025,7 +5167,22 @@ const file_proto_speech_speech_proto_rawDesc = "" +
 	"\x11SynthesizeToFile4\x12 .speech.SynthesizeToFile4Request\x1a!.speech.SynthesizeToFile4Response\x12^\n" +
 	"\x13SynthesizeToFile4_1\x12\".speech.SynthesizeToFile4_1Request\x1a#.speech.SynthesizeToFile4_1Response\x12^\n" +
 	"\x13SynthesizeToFile3_2\x12\".speech.SynthesizeToFile3_2Request\x1a#.speech.SynthesizeToFile3_2Response\x12j\n" +
-	"\x17GetMaxSpeechInputLength\x12&.speech.GetMaxSpeechInputLengthRequest\x1a'.speech.GetMaxSpeechInputLengthResponseB)Z'github.com/xaionaro-go/jni/proto/speechb\x06proto3"
+	"\x17GetMaxSpeechInputLength\x12&.speech.GetMaxSpeechInputLengthRequest\x1a'.speech.GetMaxSpeechInputLengthResponse2\x9d\n" +
+	"\n" +
+	"\x17SpeechRecognizerService\x127\n" +
+	"\x06Cancel\x12\x15.speech.CancelRequest\x1a\x16.speech.CancelResponse\x12j\n" +
+	"\x17CheckRecognitionSupport\x12&.speech.CheckRecognitionSupportRequest\x1a'.speech.CheckRecognitionSupportResponse\x12:\n" +
+	"\aDestroy\x12\x16.speech.DestroyRequest\x1a\x17.speech.DestroyResponse\x12g\n" +
+	"\x16SetRecognitionListener\x12%.speech.SetRecognitionListenerRequest\x1a&.speech.SetRecognitionListenerResponse\x12O\n" +
+	"\x0eStartListening\x12\x1d.speech.StartListeningRequest\x1a\x1e.speech.StartListeningResponse\x12L\n" +
+	"\rStopListening\x12\x1c.speech.StopListeningRequest\x1a\x1d.speech.StopListeningResponse\x12d\n" +
+	"\x15TriggerModelDownload1\x12$.speech.TriggerModelDownload1Request\x1a%.speech.TriggerModelDownload1Response\x12j\n" +
+	"\x17TriggerModelDownload3_1\x12&.speech.TriggerModelDownload3_1Request\x1a'.speech.TriggerModelDownload3_1Response\x12\x7f\n" +
+	"\x1eCreateOnDeviceSpeechRecognizer\x12-.speech.CreateOnDeviceSpeechRecognizerRequest\x1a..speech.CreateOnDeviceSpeechRecognizerResponse\x12j\n" +
+	"\x17CreateSpeechRecognizer1\x12&.speech.CreateSpeechRecognizer1Request\x1a'.speech.CreateSpeechRecognizer1Response\x12p\n" +
+	"\x19CreateSpeechRecognizer2_1\x12(.speech.CreateSpeechRecognizer2_1Request\x1a).speech.CreateSpeechRecognizer2_1Response\x12\x7f\n" +
+	"\x1eIsOnDeviceRecognitionAvailable\x12-.speech.IsOnDeviceRecognitionAvailableRequest\x1a..speech.IsOnDeviceRecognitionAvailableResponse\x12g\n" +
+	"\x16IsRecognitionAvailable\x12%.speech.IsRecognitionAvailableRequest\x1a&.speech.IsRecognitionAvailableResponseB)Z'github.com/xaionaro-go/jni/proto/speechb\x06proto3"
 
 var (
 	file_proto_speech_speech_proto_rawDescOnce sync.Once
@@ -4039,7 +5196,7 @@ func file_proto_speech_speech_proto_rawDescGZIP() []byte {
 	return file_proto_speech_speech_proto_rawDescData
 }
 
-var file_proto_speech_speech_proto_msgTypes = make([]protoimpl.MessageInfo, 82)
+var file_proto_speech_speech_proto_msgTypes = make([]protoimpl.MessageInfo, 108)
 var file_proto_speech_speech_proto_goTypes = []any{
 	(*AddEarcon2Request)(nil),                       // 0: speech.AddEarcon2Request
 	(*AddEarcon2Response)(nil),                      // 1: speech.AddEarcon2Response
@@ -4123,95 +5280,147 @@ var file_proto_speech_speech_proto_goTypes = []any{
 	(*SynthesizeToFile3_2Response)(nil),             // 79: speech.SynthesizeToFile3_2Response
 	(*GetMaxSpeechInputLengthRequest)(nil),          // 80: speech.GetMaxSpeechInputLengthRequest
 	(*GetMaxSpeechInputLengthResponse)(nil),         // 81: speech.GetMaxSpeechInputLengthResponse
+	(*CancelRequest)(nil),                           // 82: speech.CancelRequest
+	(*CancelResponse)(nil),                          // 83: speech.CancelResponse
+	(*CheckRecognitionSupportRequest)(nil),          // 84: speech.CheckRecognitionSupportRequest
+	(*CheckRecognitionSupportResponse)(nil),         // 85: speech.CheckRecognitionSupportResponse
+	(*DestroyRequest)(nil),                          // 86: speech.DestroyRequest
+	(*DestroyResponse)(nil),                         // 87: speech.DestroyResponse
+	(*SetRecognitionListenerRequest)(nil),           // 88: speech.SetRecognitionListenerRequest
+	(*SetRecognitionListenerResponse)(nil),          // 89: speech.SetRecognitionListenerResponse
+	(*StartListeningRequest)(nil),                   // 90: speech.StartListeningRequest
+	(*StartListeningResponse)(nil),                  // 91: speech.StartListeningResponse
+	(*StopListeningRequest)(nil),                    // 92: speech.StopListeningRequest
+	(*StopListeningResponse)(nil),                   // 93: speech.StopListeningResponse
+	(*TriggerModelDownload1Request)(nil),            // 94: speech.TriggerModelDownload1Request
+	(*TriggerModelDownload1Response)(nil),           // 95: speech.TriggerModelDownload1Response
+	(*TriggerModelDownload3_1Request)(nil),          // 96: speech.TriggerModelDownload3_1Request
+	(*TriggerModelDownload3_1Response)(nil),         // 97: speech.TriggerModelDownload3_1Response
+	(*CreateOnDeviceSpeechRecognizerRequest)(nil),   // 98: speech.CreateOnDeviceSpeechRecognizerRequest
+	(*CreateOnDeviceSpeechRecognizerResponse)(nil),  // 99: speech.CreateOnDeviceSpeechRecognizerResponse
+	(*CreateSpeechRecognizer1Request)(nil),          // 100: speech.CreateSpeechRecognizer1Request
+	(*CreateSpeechRecognizer1Response)(nil),         // 101: speech.CreateSpeechRecognizer1Response
+	(*CreateSpeechRecognizer2_1Request)(nil),        // 102: speech.CreateSpeechRecognizer2_1Request
+	(*CreateSpeechRecognizer2_1Response)(nil),       // 103: speech.CreateSpeechRecognizer2_1Response
+	(*IsOnDeviceRecognitionAvailableRequest)(nil),   // 104: speech.IsOnDeviceRecognitionAvailableRequest
+	(*IsOnDeviceRecognitionAvailableResponse)(nil),  // 105: speech.IsOnDeviceRecognitionAvailableResponse
+	(*IsRecognitionAvailableRequest)(nil),           // 106: speech.IsRecognitionAvailableRequest
+	(*IsRecognitionAvailableResponse)(nil),          // 107: speech.IsRecognitionAvailableResponse
 }
 var file_proto_speech_speech_proto_depIdxs = []int32{
-	0,  // 0: speech.TextToSpeechService.AddEarcon2:input_type -> speech.AddEarcon2Request
-	2,  // 1: speech.TextToSpeechService.AddEarcon2_1:input_type -> speech.AddEarcon2_1Request
-	4,  // 2: speech.TextToSpeechService.AddEarcon2_2:input_type -> speech.AddEarcon2_2Request
-	6,  // 3: speech.TextToSpeechService.AddEarcon3_3:input_type -> speech.AddEarcon3_3Request
-	8,  // 4: speech.TextToSpeechService.AddSpeech2:input_type -> speech.AddSpeech2Request
-	10, // 5: speech.TextToSpeechService.AddSpeech2_1:input_type -> speech.AddSpeech2_1Request
-	12, // 6: speech.TextToSpeechService.AddSpeech3_2:input_type -> speech.AddSpeech3_2Request
-	14, // 7: speech.TextToSpeechService.AddSpeech2_3:input_type -> speech.AddSpeech2_3Request
-	16, // 8: speech.TextToSpeechService.AddSpeech3_4:input_type -> speech.AddSpeech3_4Request
-	18, // 9: speech.TextToSpeechService.AreDefaultsEnforced:input_type -> speech.AreDefaultsEnforcedRequest
-	20, // 10: speech.TextToSpeechService.GetAvailableLanguages:input_type -> speech.GetAvailableLanguagesRequest
-	22, // 11: speech.TextToSpeechService.GetDefaultEngine:input_type -> speech.GetDefaultEngineRequest
-	24, // 12: speech.TextToSpeechService.GetDefaultLanguage:input_type -> speech.GetDefaultLanguageRequest
-	26, // 13: speech.TextToSpeechService.GetDefaultVoice:input_type -> speech.GetDefaultVoiceRequest
-	28, // 14: speech.TextToSpeechService.GetEngines:input_type -> speech.GetEnginesRequest
-	30, // 15: speech.TextToSpeechService.GetFeatures:input_type -> speech.GetFeaturesRequest
-	32, // 16: speech.TextToSpeechService.GetLanguage:input_type -> speech.GetLanguageRequest
-	34, // 17: speech.TextToSpeechService.GetVoice:input_type -> speech.GetVoiceRequest
-	36, // 18: speech.TextToSpeechService.GetVoices:input_type -> speech.GetVoicesRequest
-	38, // 19: speech.TextToSpeechService.IsLanguageAvailable:input_type -> speech.IsLanguageAvailableRequest
-	40, // 20: speech.TextToSpeechService.IsSpeaking:input_type -> speech.IsSpeakingRequest
-	42, // 21: speech.TextToSpeechService.PlayEarcon4:input_type -> speech.PlayEarcon4Request
-	44, // 22: speech.TextToSpeechService.PlayEarcon3_1:input_type -> speech.PlayEarcon3_1Request
-	46, // 23: speech.TextToSpeechService.PlaySilence:input_type -> speech.PlaySilenceRequest
-	48, // 24: speech.TextToSpeechService.PlaySilentUtterance:input_type -> speech.PlaySilentUtteranceRequest
-	50, // 25: speech.TextToSpeechService.SetAudioAttributes:input_type -> speech.SetAudioAttributesRequest
-	52, // 26: speech.TextToSpeechService.SetEngineByPackageName:input_type -> speech.SetEngineByPackageNameRequest
-	54, // 27: speech.TextToSpeechService.SetLanguage:input_type -> speech.SetLanguageRequest
-	56, // 28: speech.TextToSpeechService.SetOnUtteranceCompletedListener:input_type -> speech.SetOnUtteranceCompletedListenerRequest
-	58, // 29: speech.TextToSpeechService.SetOnUtteranceProgressListener:input_type -> speech.SetOnUtteranceProgressListenerRequest
-	60, // 30: speech.TextToSpeechService.SetPitch:input_type -> speech.SetPitchRequest
-	62, // 31: speech.TextToSpeechService.SetSpeechRate:input_type -> speech.SetSpeechRateRequest
-	64, // 32: speech.TextToSpeechService.SetVoice:input_type -> speech.SetVoiceRequest
-	66, // 33: speech.TextToSpeechService.Shutdown:input_type -> speech.ShutdownRequest
-	68, // 34: speech.TextToSpeechService.Speak4:input_type -> speech.Speak4Request
-	70, // 35: speech.TextToSpeechService.Speak3_1:input_type -> speech.Speak3_1Request
-	72, // 36: speech.TextToSpeechService.Stop:input_type -> speech.StopRequest
-	74, // 37: speech.TextToSpeechService.SynthesizeToFile4:input_type -> speech.SynthesizeToFile4Request
-	76, // 38: speech.TextToSpeechService.SynthesizeToFile4_1:input_type -> speech.SynthesizeToFile4_1Request
-	78, // 39: speech.TextToSpeechService.SynthesizeToFile3_2:input_type -> speech.SynthesizeToFile3_2Request
-	80, // 40: speech.TextToSpeechService.GetMaxSpeechInputLength:input_type -> speech.GetMaxSpeechInputLengthRequest
-	1,  // 41: speech.TextToSpeechService.AddEarcon2:output_type -> speech.AddEarcon2Response
-	3,  // 42: speech.TextToSpeechService.AddEarcon2_1:output_type -> speech.AddEarcon2_1Response
-	5,  // 43: speech.TextToSpeechService.AddEarcon2_2:output_type -> speech.AddEarcon2_2Response
-	7,  // 44: speech.TextToSpeechService.AddEarcon3_3:output_type -> speech.AddEarcon3_3Response
-	9,  // 45: speech.TextToSpeechService.AddSpeech2:output_type -> speech.AddSpeech2Response
-	11, // 46: speech.TextToSpeechService.AddSpeech2_1:output_type -> speech.AddSpeech2_1Response
-	13, // 47: speech.TextToSpeechService.AddSpeech3_2:output_type -> speech.AddSpeech3_2Response
-	15, // 48: speech.TextToSpeechService.AddSpeech2_3:output_type -> speech.AddSpeech2_3Response
-	17, // 49: speech.TextToSpeechService.AddSpeech3_4:output_type -> speech.AddSpeech3_4Response
-	19, // 50: speech.TextToSpeechService.AreDefaultsEnforced:output_type -> speech.AreDefaultsEnforcedResponse
-	21, // 51: speech.TextToSpeechService.GetAvailableLanguages:output_type -> speech.GetAvailableLanguagesResponse
-	23, // 52: speech.TextToSpeechService.GetDefaultEngine:output_type -> speech.GetDefaultEngineResponse
-	25, // 53: speech.TextToSpeechService.GetDefaultLanguage:output_type -> speech.GetDefaultLanguageResponse
-	27, // 54: speech.TextToSpeechService.GetDefaultVoice:output_type -> speech.GetDefaultVoiceResponse
-	29, // 55: speech.TextToSpeechService.GetEngines:output_type -> speech.GetEnginesResponse
-	31, // 56: speech.TextToSpeechService.GetFeatures:output_type -> speech.GetFeaturesResponse
-	33, // 57: speech.TextToSpeechService.GetLanguage:output_type -> speech.GetLanguageResponse
-	35, // 58: speech.TextToSpeechService.GetVoice:output_type -> speech.GetVoiceResponse
-	37, // 59: speech.TextToSpeechService.GetVoices:output_type -> speech.GetVoicesResponse
-	39, // 60: speech.TextToSpeechService.IsLanguageAvailable:output_type -> speech.IsLanguageAvailableResponse
-	41, // 61: speech.TextToSpeechService.IsSpeaking:output_type -> speech.IsSpeakingResponse
-	43, // 62: speech.TextToSpeechService.PlayEarcon4:output_type -> speech.PlayEarcon4Response
-	45, // 63: speech.TextToSpeechService.PlayEarcon3_1:output_type -> speech.PlayEarcon3_1Response
-	47, // 64: speech.TextToSpeechService.PlaySilence:output_type -> speech.PlaySilenceResponse
-	49, // 65: speech.TextToSpeechService.PlaySilentUtterance:output_type -> speech.PlaySilentUtteranceResponse
-	51, // 66: speech.TextToSpeechService.SetAudioAttributes:output_type -> speech.SetAudioAttributesResponse
-	53, // 67: speech.TextToSpeechService.SetEngineByPackageName:output_type -> speech.SetEngineByPackageNameResponse
-	55, // 68: speech.TextToSpeechService.SetLanguage:output_type -> speech.SetLanguageResponse
-	57, // 69: speech.TextToSpeechService.SetOnUtteranceCompletedListener:output_type -> speech.SetOnUtteranceCompletedListenerResponse
-	59, // 70: speech.TextToSpeechService.SetOnUtteranceProgressListener:output_type -> speech.SetOnUtteranceProgressListenerResponse
-	61, // 71: speech.TextToSpeechService.SetPitch:output_type -> speech.SetPitchResponse
-	63, // 72: speech.TextToSpeechService.SetSpeechRate:output_type -> speech.SetSpeechRateResponse
-	65, // 73: speech.TextToSpeechService.SetVoice:output_type -> speech.SetVoiceResponse
-	67, // 74: speech.TextToSpeechService.Shutdown:output_type -> speech.ShutdownResponse
-	69, // 75: speech.TextToSpeechService.Speak4:output_type -> speech.Speak4Response
-	71, // 76: speech.TextToSpeechService.Speak3_1:output_type -> speech.Speak3_1Response
-	73, // 77: speech.TextToSpeechService.Stop:output_type -> speech.StopResponse
-	75, // 78: speech.TextToSpeechService.SynthesizeToFile4:output_type -> speech.SynthesizeToFile4Response
-	77, // 79: speech.TextToSpeechService.SynthesizeToFile4_1:output_type -> speech.SynthesizeToFile4_1Response
-	79, // 80: speech.TextToSpeechService.SynthesizeToFile3_2:output_type -> speech.SynthesizeToFile3_2Response
-	81, // 81: speech.TextToSpeechService.GetMaxSpeechInputLength:output_type -> speech.GetMaxSpeechInputLengthResponse
-	41, // [41:82] is the sub-list for method output_type
-	0,  // [0:41] is the sub-list for method input_type
-	0,  // [0:0] is the sub-list for extension type_name
-	0,  // [0:0] is the sub-list for extension extendee
-	0,  // [0:0] is the sub-list for field type_name
+	0,   // 0: speech.TextToSpeechService.AddEarcon2:input_type -> speech.AddEarcon2Request
+	2,   // 1: speech.TextToSpeechService.AddEarcon2_1:input_type -> speech.AddEarcon2_1Request
+	4,   // 2: speech.TextToSpeechService.AddEarcon2_2:input_type -> speech.AddEarcon2_2Request
+	6,   // 3: speech.TextToSpeechService.AddEarcon3_3:input_type -> speech.AddEarcon3_3Request
+	8,   // 4: speech.TextToSpeechService.AddSpeech2:input_type -> speech.AddSpeech2Request
+	10,  // 5: speech.TextToSpeechService.AddSpeech2_1:input_type -> speech.AddSpeech2_1Request
+	12,  // 6: speech.TextToSpeechService.AddSpeech3_2:input_type -> speech.AddSpeech3_2Request
+	14,  // 7: speech.TextToSpeechService.AddSpeech2_3:input_type -> speech.AddSpeech2_3Request
+	16,  // 8: speech.TextToSpeechService.AddSpeech3_4:input_type -> speech.AddSpeech3_4Request
+	18,  // 9: speech.TextToSpeechService.AreDefaultsEnforced:input_type -> speech.AreDefaultsEnforcedRequest
+	20,  // 10: speech.TextToSpeechService.GetAvailableLanguages:input_type -> speech.GetAvailableLanguagesRequest
+	22,  // 11: speech.TextToSpeechService.GetDefaultEngine:input_type -> speech.GetDefaultEngineRequest
+	24,  // 12: speech.TextToSpeechService.GetDefaultLanguage:input_type -> speech.GetDefaultLanguageRequest
+	26,  // 13: speech.TextToSpeechService.GetDefaultVoice:input_type -> speech.GetDefaultVoiceRequest
+	28,  // 14: speech.TextToSpeechService.GetEngines:input_type -> speech.GetEnginesRequest
+	30,  // 15: speech.TextToSpeechService.GetFeatures:input_type -> speech.GetFeaturesRequest
+	32,  // 16: speech.TextToSpeechService.GetLanguage:input_type -> speech.GetLanguageRequest
+	34,  // 17: speech.TextToSpeechService.GetVoice:input_type -> speech.GetVoiceRequest
+	36,  // 18: speech.TextToSpeechService.GetVoices:input_type -> speech.GetVoicesRequest
+	38,  // 19: speech.TextToSpeechService.IsLanguageAvailable:input_type -> speech.IsLanguageAvailableRequest
+	40,  // 20: speech.TextToSpeechService.IsSpeaking:input_type -> speech.IsSpeakingRequest
+	42,  // 21: speech.TextToSpeechService.PlayEarcon4:input_type -> speech.PlayEarcon4Request
+	44,  // 22: speech.TextToSpeechService.PlayEarcon3_1:input_type -> speech.PlayEarcon3_1Request
+	46,  // 23: speech.TextToSpeechService.PlaySilence:input_type -> speech.PlaySilenceRequest
+	48,  // 24: speech.TextToSpeechService.PlaySilentUtterance:input_type -> speech.PlaySilentUtteranceRequest
+	50,  // 25: speech.TextToSpeechService.SetAudioAttributes:input_type -> speech.SetAudioAttributesRequest
+	52,  // 26: speech.TextToSpeechService.SetEngineByPackageName:input_type -> speech.SetEngineByPackageNameRequest
+	54,  // 27: speech.TextToSpeechService.SetLanguage:input_type -> speech.SetLanguageRequest
+	56,  // 28: speech.TextToSpeechService.SetOnUtteranceCompletedListener:input_type -> speech.SetOnUtteranceCompletedListenerRequest
+	58,  // 29: speech.TextToSpeechService.SetOnUtteranceProgressListener:input_type -> speech.SetOnUtteranceProgressListenerRequest
+	60,  // 30: speech.TextToSpeechService.SetPitch:input_type -> speech.SetPitchRequest
+	62,  // 31: speech.TextToSpeechService.SetSpeechRate:input_type -> speech.SetSpeechRateRequest
+	64,  // 32: speech.TextToSpeechService.SetVoice:input_type -> speech.SetVoiceRequest
+	66,  // 33: speech.TextToSpeechService.Shutdown:input_type -> speech.ShutdownRequest
+	68,  // 34: speech.TextToSpeechService.Speak4:input_type -> speech.Speak4Request
+	70,  // 35: speech.TextToSpeechService.Speak3_1:input_type -> speech.Speak3_1Request
+	72,  // 36: speech.TextToSpeechService.Stop:input_type -> speech.StopRequest
+	74,  // 37: speech.TextToSpeechService.SynthesizeToFile4:input_type -> speech.SynthesizeToFile4Request
+	76,  // 38: speech.TextToSpeechService.SynthesizeToFile4_1:input_type -> speech.SynthesizeToFile4_1Request
+	78,  // 39: speech.TextToSpeechService.SynthesizeToFile3_2:input_type -> speech.SynthesizeToFile3_2Request
+	80,  // 40: speech.TextToSpeechService.GetMaxSpeechInputLength:input_type -> speech.GetMaxSpeechInputLengthRequest
+	82,  // 41: speech.SpeechRecognizerService.Cancel:input_type -> speech.CancelRequest
+	84,  // 42: speech.SpeechRecognizerService.CheckRecognitionSupport:input_type -> speech.CheckRecognitionSupportRequest
+	86,  // 43: speech.SpeechRecognizerService.Destroy:input_type -> speech.DestroyRequest
+	88,  // 44: speech.SpeechRecognizerService.SetRecognitionListener:input_type -> speech.SetRecognitionListenerRequest
+	90,  // 45: speech.SpeechRecognizerService.StartListening:input_type -> speech.StartListeningRequest
+	92,  // 46: speech.SpeechRecognizerService.StopListening:input_type -> speech.StopListeningRequest
+	94,  // 47: speech.SpeechRecognizerService.TriggerModelDownload1:input_type -> speech.TriggerModelDownload1Request
+	96,  // 48: speech.SpeechRecognizerService.TriggerModelDownload3_1:input_type -> speech.TriggerModelDownload3_1Request
+	98,  // 49: speech.SpeechRecognizerService.CreateOnDeviceSpeechRecognizer:input_type -> speech.CreateOnDeviceSpeechRecognizerRequest
+	100, // 50: speech.SpeechRecognizerService.CreateSpeechRecognizer1:input_type -> speech.CreateSpeechRecognizer1Request
+	102, // 51: speech.SpeechRecognizerService.CreateSpeechRecognizer2_1:input_type -> speech.CreateSpeechRecognizer2_1Request
+	104, // 52: speech.SpeechRecognizerService.IsOnDeviceRecognitionAvailable:input_type -> speech.IsOnDeviceRecognitionAvailableRequest
+	106, // 53: speech.SpeechRecognizerService.IsRecognitionAvailable:input_type -> speech.IsRecognitionAvailableRequest
+	1,   // 54: speech.TextToSpeechService.AddEarcon2:output_type -> speech.AddEarcon2Response
+	3,   // 55: speech.TextToSpeechService.AddEarcon2_1:output_type -> speech.AddEarcon2_1Response
+	5,   // 56: speech.TextToSpeechService.AddEarcon2_2:output_type -> speech.AddEarcon2_2Response
+	7,   // 57: speech.TextToSpeechService.AddEarcon3_3:output_type -> speech.AddEarcon3_3Response
+	9,   // 58: speech.TextToSpeechService.AddSpeech2:output_type -> speech.AddSpeech2Response
+	11,  // 59: speech.TextToSpeechService.AddSpeech2_1:output_type -> speech.AddSpeech2_1Response
+	13,  // 60: speech.TextToSpeechService.AddSpeech3_2:output_type -> speech.AddSpeech3_2Response
+	15,  // 61: speech.TextToSpeechService.AddSpeech2_3:output_type -> speech.AddSpeech2_3Response
+	17,  // 62: speech.TextToSpeechService.AddSpeech3_4:output_type -> speech.AddSpeech3_4Response
+	19,  // 63: speech.TextToSpeechService.AreDefaultsEnforced:output_type -> speech.AreDefaultsEnforcedResponse
+	21,  // 64: speech.TextToSpeechService.GetAvailableLanguages:output_type -> speech.GetAvailableLanguagesResponse
+	23,  // 65: speech.TextToSpeechService.GetDefaultEngine:output_type -> speech.GetDefaultEngineResponse
+	25,  // 66: speech.TextToSpeechService.GetDefaultLanguage:output_type -> speech.GetDefaultLanguageResponse
+	27,  // 67: speech.TextToSpeechService.GetDefaultVoice:output_type -> speech.GetDefaultVoiceResponse
+	29,  // 68: speech.TextToSpeechService.GetEngines:output_type -> speech.GetEnginesResponse
+	31,  // 69: speech.TextToSpeechService.GetFeatures:output_type -> speech.GetFeaturesResponse
+	33,  // 70: speech.TextToSpeechService.GetLanguage:output_type -> speech.GetLanguageResponse
+	35,  // 71: speech.TextToSpeechService.GetVoice:output_type -> speech.GetVoiceResponse
+	37,  // 72: speech.TextToSpeechService.GetVoices:output_type -> speech.GetVoicesResponse
+	39,  // 73: speech.TextToSpeechService.IsLanguageAvailable:output_type -> speech.IsLanguageAvailableResponse
+	41,  // 74: speech.TextToSpeechService.IsSpeaking:output_type -> speech.IsSpeakingResponse
+	43,  // 75: speech.TextToSpeechService.PlayEarcon4:output_type -> speech.PlayEarcon4Response
+	45,  // 76: speech.TextToSpeechService.PlayEarcon3_1:output_type -> speech.PlayEarcon3_1Response
+	47,  // 77: speech.TextToSpeechService.PlaySilence:output_type -> speech.PlaySilenceResponse
+	49,  // 78: speech.TextToSpeechService.PlaySilentUtterance:output_type -> speech.PlaySilentUtteranceResponse
+	51,  // 79: speech.TextToSpeechService.SetAudioAttributes:output_type -> speech.SetAudioAttributesResponse
+	53,  // 80: speech.TextToSpeechService.SetEngineByPackageName:output_type -> speech.SetEngineByPackageNameResponse
+	55,  // 81: speech.TextToSpeechService.SetLanguage:output_type -> speech.SetLanguageResponse
+	57,  // 82: speech.TextToSpeechService.SetOnUtteranceCompletedListener:output_type -> speech.SetOnUtteranceCompletedListenerResponse
+	59,  // 83: speech.TextToSpeechService.SetOnUtteranceProgressListener:output_type -> speech.SetOnUtteranceProgressListenerResponse
+	61,  // 84: speech.TextToSpeechService.SetPitch:output_type -> speech.SetPitchResponse
+	63,  // 85: speech.TextToSpeechService.SetSpeechRate:output_type -> speech.SetSpeechRateResponse
+	65,  // 86: speech.TextToSpeechService.SetVoice:output_type -> speech.SetVoiceResponse
+	67,  // 87: speech.TextToSpeechService.Shutdown:output_type -> speech.ShutdownResponse
+	69,  // 88: speech.TextToSpeechService.Speak4:output_type -> speech.Speak4Response
+	71,  // 89: speech.TextToSpeechService.Speak3_1:output_type -> speech.Speak3_1Response
+	73,  // 90: speech.TextToSpeechService.Stop:output_type -> speech.StopResponse
+	75,  // 91: speech.TextToSpeechService.SynthesizeToFile4:output_type -> speech.SynthesizeToFile4Response
+	77,  // 92: speech.TextToSpeechService.SynthesizeToFile4_1:output_type -> speech.SynthesizeToFile4_1Response
+	79,  // 93: speech.TextToSpeechService.SynthesizeToFile3_2:output_type -> speech.SynthesizeToFile3_2Response
+	81,  // 94: speech.TextToSpeechService.GetMaxSpeechInputLength:output_type -> speech.GetMaxSpeechInputLengthResponse
+	83,  // 95: speech.SpeechRecognizerService.Cancel:output_type -> speech.CancelResponse
+	85,  // 96: speech.SpeechRecognizerService.CheckRecognitionSupport:output_type -> speech.CheckRecognitionSupportResponse
+	87,  // 97: speech.SpeechRecognizerService.Destroy:output_type -> speech.DestroyResponse
+	89,  // 98: speech.SpeechRecognizerService.SetRecognitionListener:output_type -> speech.SetRecognitionListenerResponse
+	91,  // 99: speech.SpeechRecognizerService.StartListening:output_type -> speech.StartListeningResponse
+	93,  // 100: speech.SpeechRecognizerService.StopListening:output_type -> speech.StopListeningResponse
+	95,  // 101: speech.SpeechRecognizerService.TriggerModelDownload1:output_type -> speech.TriggerModelDownload1Response
+	97,  // 102: speech.SpeechRecognizerService.TriggerModelDownload3_1:output_type -> speech.TriggerModelDownload3_1Response
+	99,  // 103: speech.SpeechRecognizerService.CreateOnDeviceSpeechRecognizer:output_type -> speech.CreateOnDeviceSpeechRecognizerResponse
+	101, // 104: speech.SpeechRecognizerService.CreateSpeechRecognizer1:output_type -> speech.CreateSpeechRecognizer1Response
+	103, // 105: speech.SpeechRecognizerService.CreateSpeechRecognizer2_1:output_type -> speech.CreateSpeechRecognizer2_1Response
+	105, // 106: speech.SpeechRecognizerService.IsOnDeviceRecognitionAvailable:output_type -> speech.IsOnDeviceRecognitionAvailableResponse
+	107, // 107: speech.SpeechRecognizerService.IsRecognitionAvailable:output_type -> speech.IsRecognitionAvailableResponse
+	54,  // [54:108] is the sub-list for method output_type
+	0,   // [0:54] is the sub-list for method input_type
+	0,   // [0:0] is the sub-list for extension type_name
+	0,   // [0:0] is the sub-list for extension extendee
+	0,   // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_speech_speech_proto_init() }
@@ -4225,9 +5434,9 @@ func file_proto_speech_speech_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_speech_speech_proto_rawDesc), len(file_proto_speech_speech_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   82,
+			NumMessages:   108,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_proto_speech_speech_proto_goTypes,
 		DependencyIndexes: file_proto_speech_speech_proto_depIdxs,

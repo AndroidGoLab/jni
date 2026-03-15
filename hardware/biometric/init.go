@@ -25,6 +25,34 @@ var (
 	midbiometricManagerCanAuthenticate1_1        jni.MethodID
 	midbiometricManagerGetLastAuthenticationTime jni.MethodID
 	midbiometricManagerGetStrings                jni.MethodID
+
+	clsbiometricPrompt                         *jni.GlobalRef
+	midbiometricPromptAuthenticate4            jni.MethodID
+	midbiometricPromptAuthenticate3_1          jni.MethodID
+	midbiometricPromptGetAllowedAuthenticators jni.MethodID
+	midbiometricPromptGetContentView           jni.MethodID
+	midbiometricPromptGetDescription           jni.MethodID
+	midbiometricPromptGetLogoBitmap            jni.MethodID
+	midbiometricPromptGetLogoDescription       jni.MethodID
+	midbiometricPromptGetLogoRes               jni.MethodID
+	midbiometricPromptGetNegativeButtonText    jni.MethodID
+	midbiometricPromptGetSubtitle              jni.MethodID
+	midbiometricPromptGetTitle                 jni.MethodID
+	midbiometricPromptIsConfirmationRequired   jni.MethodID
+
+	clsbiometricPromptBuilder                           *jni.GlobalRef
+	midbiometricPromptBuilderBuild                      jni.MethodID
+	midbiometricPromptBuilderSetAllowedAuthenticators   jni.MethodID
+	midbiometricPromptBuilderSetConfirmationRequired    jni.MethodID
+	midbiometricPromptBuilderSetContentView             jni.MethodID
+	midbiometricPromptBuilderSetDescription             jni.MethodID
+	midbiometricPromptBuilderSetDeviceCredentialAllowed jni.MethodID
+	midbiometricPromptBuilderSetLogoBitmap              jni.MethodID
+	midbiometricPromptBuilderSetLogoDescription         jni.MethodID
+	midbiometricPromptBuilderSetLogoRes                 jni.MethodID
+	midbiometricPromptBuilderSetNegativeButton          jni.MethodID
+	midbiometricPromptBuilderSetSubtitle                jni.MethodID
+	midbiometricPromptBuilderSetTitle                   jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -87,6 +115,210 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricManager.getStrings")
+	}
+
+	c, err = env.FindClass("android/hardware/biometrics/BiometricPrompt")
+	if err != nil {
+		return fmt.Errorf("find class android.hardware.biometrics.BiometricPrompt: %w", err)
+	}
+	clsbiometricPrompt = env.NewGlobalRef(&c.Object)
+
+	midbiometricPromptAuthenticate4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPrompt)), "authenticate", "(Landroid/hardware/biometrics/BiometricPrompt$CryptoObject;Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Landroid/hardware/biometrics/BiometricPrompt$AuthenticationCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.authenticate")
+	}
+
+	midbiometricPromptAuthenticate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPrompt)), "authenticate", "(Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Landroid/hardware/biometrics/BiometricPrompt$AuthenticationCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.authenticate")
+	}
+
+	midbiometricPromptGetAllowedAuthenticators, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPrompt)), "getAllowedAuthenticators", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getAllowedAuthenticators")
+	}
+
+	midbiometricPromptGetContentView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPrompt)), "getContentView", "()Landroid/hardware/biometrics/PromptContentView;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getContentView")
+	}
+
+	midbiometricPromptGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPrompt)), "getDescription", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getDescription")
+	}
+
+	midbiometricPromptGetLogoBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPrompt)), "getLogoBitmap", "()Landroid/graphics/Bitmap;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getLogoBitmap")
+	}
+
+	midbiometricPromptGetLogoDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPrompt)), "getLogoDescription", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getLogoDescription")
+	}
+
+	midbiometricPromptGetLogoRes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPrompt)), "getLogoRes", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getLogoRes")
+	}
+
+	midbiometricPromptGetNegativeButtonText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPrompt)), "getNegativeButtonText", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getNegativeButtonText")
+	}
+
+	midbiometricPromptGetSubtitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPrompt)), "getSubtitle", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getSubtitle")
+	}
+
+	midbiometricPromptGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPrompt)), "getTitle", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.getTitle")
+	}
+
+	midbiometricPromptIsConfirmationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPrompt)), "isConfirmationRequired", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt.isConfirmationRequired")
+	}
+
+	c, err = env.FindClass("android/hardware/biometrics/BiometricPrompt$Builder")
+	if err != nil {
+		return fmt.Errorf("find class android.hardware.biometrics.BiometricPrompt$Builder: %w", err)
+	}
+	clsbiometricPromptBuilder = env.NewGlobalRef(&c.Object)
+
+	midbiometricPromptBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "build", "()Landroid/hardware/biometrics/BiometricPrompt;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.build")
+	}
+
+	midbiometricPromptBuilderSetAllowedAuthenticators, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "setAllowedAuthenticators", "(I)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setAllowedAuthenticators")
+	}
+
+	midbiometricPromptBuilderSetConfirmationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "setConfirmationRequired", "(Z)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setConfirmationRequired")
+	}
+
+	midbiometricPromptBuilderSetContentView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "setContentView", "(Landroid/hardware/biometrics/PromptContentView;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setContentView")
+	}
+
+	midbiometricPromptBuilderSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "setDescription", "(Ljava/lang/String;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setDescription")
+	}
+
+	midbiometricPromptBuilderSetDeviceCredentialAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "setDeviceCredentialAllowed", "(Z)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setDeviceCredentialAllowed")
+	}
+
+	midbiometricPromptBuilderSetLogoBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "setLogoBitmap", "(Landroid/graphics/Bitmap;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setLogoBitmap")
+	}
+
+	midbiometricPromptBuilderSetLogoDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "setLogoDescription", "(Ljava/lang/String;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setLogoDescription")
+	}
+
+	midbiometricPromptBuilderSetLogoRes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "setLogoRes", "(I)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setLogoRes")
+	}
+
+	midbiometricPromptBuilderSetNegativeButton, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "setNegativeButton", "(Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/content/DialogInterface$OnClickListener;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setNegativeButton")
+	}
+
+	midbiometricPromptBuilderSetSubtitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "setSubtitle", "(Ljava/lang/String;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setSubtitle")
+	}
+
+	midbiometricPromptBuilderSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsbiometricPromptBuilder)), "setTitle", "(Ljava/lang/String;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.hardware.biometrics.BiometricPrompt$Builder.setTitle")
 	}
 
 	return nil

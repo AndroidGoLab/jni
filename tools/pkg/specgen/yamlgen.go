@@ -135,12 +135,20 @@ func GenerateFromRefDir(
 		cp = refDir + ":" + extraClassPath
 	}
 
+	// Accumulate specs per Go package so that multiple Java classes
+	// mapping to the same package are merged instead of overwritten.
+	specs := make(map[string]*SpecFile) // key: Go package name
+
 	for parentName, entry := range topLevel {
 		mapping := inferClassMapping(parentName, goModule)
 
-		spec := &SpecFile{
-			Package:  mapping.Package,
-			GoImport: mapping.GoImport,
+		spec, ok := specs[mapping.Package]
+		if !ok {
+			spec = &SpecFile{
+				Package:  mapping.Package,
+				GoImport: mapping.GoImport,
+			}
+			specs[mapping.Package] = spec
 		}
 
 		// Parse the top-level class.
@@ -162,8 +170,11 @@ func GenerateFromRefDir(
 			spec.Classes = append(spec.Classes, icls)
 			addConstants(spec, ijc)
 		}
+	}
 
-		outPath := filepath.Join(outputDir, mapping.Package+".yaml")
+	for pkgName, spec := range specs {
+		spec.Constants = deduplicateConstants(spec.Constants)
+		outPath := filepath.Join(outputDir, pkgName+".yaml")
 		if err := writeSpecFile(spec, outPath); err != nil {
 			return fmt.Errorf("write %s: %w", outPath, err)
 		}
@@ -538,6 +549,22 @@ type SpecConstant struct {
 	GoName string `yaml:"go_name"`
 	Value  string `yaml:"value"`
 	GoType string `yaml:"go_type"`
+}
+
+// deduplicateConstants removes duplicate constants (by GoName) that
+// arise when multiple Java classes in the same Go package export
+// identically-named constants (e.g. CREATOR on Parcelable classes).
+func deduplicateConstants(constants []SpecConstant) []SpecConstant {
+	seen := make(map[string]struct{}, len(constants))
+	result := make([]SpecConstant, 0, len(constants))
+	for _, c := range constants {
+		if _, ok := seen[c.GoName]; ok {
+			continue
+		}
+		seen[c.GoName] = struct{}{}
+		result = append(result, c)
+	}
+	return result
 }
 
 func writeSpecFile(spec *SpecFile, path string) error {

@@ -6,19 +6,145 @@ package location;
 
 option go_package = "github.com/xaionaro-go/jni/proto/location";
 
+message DescribeContentsRequest {
+}
+
+message DescribeContentsResponse {
+  int32 result = 1;
+}
+
+message EqualsRequest {
+  int64 arg0 = 1;
+}
+
+message EqualsResponse {
+  bool result = 1;
+}
+
+message GetAzimuthDegreesRequest {
+  int32 arg0 = 1;
+}
+
+message GetAzimuthDegreesResponse {
+  float result = 1;
+}
+
+message GetBasebandCn0DbHzRequest {
+  int32 arg0 = 1;
+}
+
+message GetBasebandCn0DbHzResponse {
+  float result = 1;
+}
+
+message GetCarrierFrequencyHzRequest {
+  int32 arg0 = 1;
+}
+
+message GetCarrierFrequencyHzResponse {
+  float result = 1;
+}
+
+message GetCn0DbHzRequest {
+  int32 arg0 = 1;
+}
+
+message GetCn0DbHzResponse {
+  float result = 1;
+}
+
+message GetConstellationTypeRequest {
+  int32 arg0 = 1;
+}
+
+message GetConstellationTypeResponse {
+  int32 result = 1;
+}
+
+message GetElevationDegreesRequest {
+  int32 arg0 = 1;
+}
+
+message GetElevationDegreesResponse {
+  float result = 1;
+}
+
+message GetSatelliteCountRequest {
+}
+
+message GetSatelliteCountResponse {
+  int32 result = 1;
+}
+
+message GetSvidRequest {
+  int32 arg0 = 1;
+}
+
+message GetSvidResponse {
+  int32 result = 1;
+}
+
+message HasAlmanacDataRequest {
+  int32 arg0 = 1;
+}
+
+message HasAlmanacDataResponse {
+  bool result = 1;
+}
+
+message HasBasebandCn0DbHzRequest {
+  int32 arg0 = 1;
+}
+
+message HasBasebandCn0DbHzResponse {
+  bool result = 1;
+}
+
+message HasCarrierFrequencyHzRequest {
+  int32 arg0 = 1;
+}
+
+message HasCarrierFrequencyHzResponse {
+  bool result = 1;
+}
+
+message HasEphemerisDataRequest {
+  int32 arg0 = 1;
+}
+
+message HasEphemerisDataResponse {
+  bool result = 1;
+}
+
+message HashCodeRequest {
+}
+
+message HashCodeResponse {
+  int32 result = 1;
+}
+
+message UsedInFixRequest {
+  int32 arg0 = 1;
+}
+
+message UsedInFixResponse {
+  bool result = 1;
+}
+
+message WriteToParcelRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message WriteToParcelResponse {
+}
+
 message BearingToRequest {
   int64 arg0 = 1;
 }
 
 message BearingToResponse {
   float result = 1;
-}
-
-message DescribeContentsRequest {
-}
-
-message DescribeContentsResponse {
-  int32 result = 1;
 }
 
 message DistanceToRequest {
@@ -35,14 +161,6 @@ message DumpRequest {
 }
 
 message DumpResponse {
-}
-
-message EqualsRequest {
-  int64 arg0 = 1;
-}
-
-message EqualsResponse {
-  bool result = 1;
 }
 
 message GetAccuracyRequest {
@@ -247,13 +365,6 @@ message HasVerticalAccuracyRequest {
 
 message HasVerticalAccuracyResponse {
   bool result = 1;
-}
-
-message HashCodeRequest {
-}
-
-message HashCodeResponse {
-  int32 result = 1;
 }
 
 message IsCompleteRequest {
@@ -476,14 +587,6 @@ message ToStringResponse {
   string result = 1;
 }
 
-message WriteToParcelRequest {
-  int64 arg0 = 1;
-  int32 arg1 = 2;
-}
-
-message WriteToParcelResponse {
-}
-
 message Convert2Request {
   double arg0 = 1;
   int32 arg1 = 2;
@@ -510,6 +613,589 @@ message DistanceBetweenRequest {
 }
 
 message DistanceBetweenResponse {
+}
+
+message AddGpsStatusListenerRequest {
+  int64 arg0 = 1;
+}
+
+message AddGpsStatusListenerResponse {
+  bool result = 1;
+}
+
+message AddNmeaListener1Request {
+  int64 arg0 = 1;
+}
+
+message AddNmeaListener1Response {
+  bool result = 1;
+}
+
+message AddNmeaListener1_1Request {
+  int64 arg0 = 1;
+}
+
+message AddNmeaListener1_1Response {
+  bool result = 1;
+}
+
+message AddNmeaListener2_2Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message AddNmeaListener2_2Response {
+  bool result = 1;
+}
+
+message AddProximityAlertRequest {
+  double arg0 = 1;
+  double arg1 = 2;
+  float arg2 = 3;
+  int64 arg3 = 4;
+  int64 arg4 = 5;
+}
+
+message AddProximityAlertResponse {
+}
+
+message AddTestProvider2Request {
+  string arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message AddTestProvider2Response {
+}
+
+message AddTestProvider3_1Request {
+  string arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message AddTestProvider3_1Response {
+}
+
+message AddTestProvider10_2Request {
+  string arg0 = 1;
+  bool arg1 = 2;
+  bool arg2 = 3;
+  bool arg3 = 4;
+  bool arg4 = 5;
+  bool arg5 = 6;
+  bool arg6 = 7;
+  bool arg7 = 8;
+  int32 arg8 = 9;
+  int32 arg9 = 10;
+}
+
+message AddTestProvider10_2Response {
+}
+
+message ClearTestProviderEnabledRequest {
+  string arg0 = 1;
+}
+
+message ClearTestProviderEnabledResponse {
+}
+
+message ClearTestProviderLocationRequest {
+  string arg0 = 1;
+}
+
+message ClearTestProviderLocationResponse {
+}
+
+message ClearTestProviderStatusRequest {
+  string arg0 = 1;
+}
+
+message ClearTestProviderStatusResponse {
+}
+
+message GetAllProvidersRequest {
+}
+
+message GetAllProvidersResponse {
+  int64 result = 1;
+}
+
+message GetBestProviderRequest {
+  int64 arg0 = 1;
+  bool arg1 = 2;
+}
+
+message GetBestProviderResponse {
+  string result = 1;
+}
+
+message GetCurrentLocation5Request {
+  string arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+  int64 arg4 = 5;
+}
+
+message GetCurrentLocation5Response {
+}
+
+message GetCurrentLocation4_1Request {
+  string arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message GetCurrentLocation4_1Response {
+}
+
+message GetGnssAntennaInfosRequest {
+}
+
+message GetGnssAntennaInfosResponse {
+  int64 result = 1;
+}
+
+message GetGnssCapabilitiesRequest {
+}
+
+message GetGnssCapabilitiesResponse {
+  int64 result = 1;
+}
+
+message GetGnssHardwareModelNameRequest {
+}
+
+message GetGnssHardwareModelNameResponse {
+  string result = 1;
+}
+
+message GetGnssYearOfHardwareRequest {
+}
+
+message GetGnssYearOfHardwareResponse {
+  int32 result = 1;
+}
+
+message GetGpsStatusRequest {
+  int64 arg0 = 1;
+}
+
+message GetGpsStatusResponse {
+  int64 result = 1;
+}
+
+message GetLastKnownLocationRequest {
+  string arg0 = 1;
+}
+
+message GetLastKnownLocationResponse {
+  int64 result = 1;
+}
+
+message LocationManagerGetProviderRequest {
+  string arg0 = 1;
+}
+
+message LocationManagerGetProviderResponse {
+  int64 result = 1;
+}
+
+message GetProviderPropertiesRequest {
+  string arg0 = 1;
+}
+
+message GetProviderPropertiesResponse {
+  int64 result = 1;
+}
+
+message GetProviders2Request {
+  int64 arg0 = 1;
+  bool arg1 = 2;
+}
+
+message GetProviders2Response {
+  int64 result = 1;
+}
+
+message GetProviders1_1Request {
+  bool arg0 = 1;
+}
+
+message GetProviders1_1Response {
+  int64 result = 1;
+}
+
+message HasProviderRequest {
+  string arg0 = 1;
+}
+
+message HasProviderResponse {
+  bool result = 1;
+}
+
+message IsLocationEnabledRequest {
+}
+
+message IsLocationEnabledResponse {
+  bool result = 1;
+}
+
+message IsProviderEnabledRequest {
+  string arg0 = 1;
+}
+
+message IsProviderEnabledResponse {
+  bool result = 1;
+}
+
+message RegisterAntennaInfoListenerRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RegisterAntennaInfoListenerResponse {
+  bool result = 1;
+}
+
+message RegisterGnssMeasurementsCallback3Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message RegisterGnssMeasurementsCallback3Response {
+  bool result = 1;
+}
+
+message RegisterGnssMeasurementsCallback1_1Request {
+  int64 arg0 = 1;
+}
+
+message RegisterGnssMeasurementsCallback1_1Response {
+  bool result = 1;
+}
+
+message RegisterGnssMeasurementsCallback2_2Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RegisterGnssMeasurementsCallback2_2Response {
+  bool result = 1;
+}
+
+message RegisterGnssNavigationMessageCallback1Request {
+  int64 arg0 = 1;
+}
+
+message RegisterGnssNavigationMessageCallback1Response {
+  bool result = 1;
+}
+
+message RegisterGnssNavigationMessageCallback2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RegisterGnssNavigationMessageCallback2_1Response {
+  bool result = 1;
+}
+
+message RegisterGnssStatusCallback1Request {
+  int64 arg0 = 1;
+}
+
+message RegisterGnssStatusCallback1Response {
+  bool result = 1;
+}
+
+message RegisterGnssStatusCallback2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RegisterGnssStatusCallback2_1Response {
+  bool result = 1;
+}
+
+message RemoveGpsStatusListenerRequest {
+  int64 arg0 = 1;
+}
+
+message RemoveGpsStatusListenerResponse {
+}
+
+message RemoveNmeaListener1Request {
+  int64 arg0 = 1;
+}
+
+message RemoveNmeaListener1Response {
+}
+
+message RemoveNmeaListener1_1Request {
+  int64 arg0 = 1;
+}
+
+message RemoveNmeaListener1_1Response {
+}
+
+message RemoveProximityAlertRequest {
+  int64 arg0 = 1;
+}
+
+message RemoveProximityAlertResponse {
+}
+
+message RemoveTestProviderRequest {
+  string arg0 = 1;
+}
+
+message RemoveTestProviderResponse {
+}
+
+message RemoveUpdates1Request {
+  int64 arg0 = 1;
+}
+
+message RemoveUpdates1Response {
+}
+
+message RemoveUpdates1_1Request {
+  int64 arg0 = 1;
+}
+
+message RemoveUpdates1_1Response {
+}
+
+message RequestFlush3Request {
+  string arg0 = 1;
+  int64 arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message RequestFlush3Response {
+}
+
+message RequestFlush3_1Request {
+  string arg0 = 1;
+  int64 arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message RequestFlush3_1Response {
+}
+
+message RequestLocationUpdates3Request {
+  string arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message RequestLocationUpdates3Response {
+}
+
+message RequestLocationUpdates4_1Request {
+  string arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message RequestLocationUpdates4_1Response {
+}
+
+message RequestLocationUpdates4_2Request {
+  string arg0 = 1;
+  int64 arg1 = 2;
+  float arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message RequestLocationUpdates4_2Response {
+}
+
+message RequestLocationUpdates4_3Request {
+  string arg0 = 1;
+  int64 arg1 = 2;
+  float arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message RequestLocationUpdates4_3Response {
+}
+
+message RequestLocationUpdates5_4Request {
+  string arg0 = 1;
+  int64 arg1 = 2;
+  float arg2 = 3;
+  int64 arg3 = 4;
+  int64 arg4 = 5;
+}
+
+message RequestLocationUpdates5_4Response {
+}
+
+message RequestLocationUpdates5_5Request {
+  string arg0 = 1;
+  int64 arg1 = 2;
+  float arg2 = 3;
+  int64 arg3 = 4;
+  int64 arg4 = 5;
+}
+
+message RequestLocationUpdates5_5Response {
+}
+
+message RequestLocationUpdates4_6Request {
+  int64 arg0 = 1;
+  float arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message RequestLocationUpdates4_6Response {
+}
+
+message RequestLocationUpdates5_7Request {
+  int64 arg0 = 1;
+  float arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+  int64 arg4 = 5;
+}
+
+message RequestLocationUpdates5_7Response {
+}
+
+message RequestLocationUpdates5_8Request {
+  int64 arg0 = 1;
+  float arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+  int64 arg4 = 5;
+}
+
+message RequestLocationUpdates5_8Response {
+}
+
+message RequestSingleUpdate2Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RequestSingleUpdate2Response {
+}
+
+message RequestSingleUpdate3_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message RequestSingleUpdate3_1Response {
+}
+
+message RequestSingleUpdate2_2Request {
+  string arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message RequestSingleUpdate2_2Response {
+}
+
+message RequestSingleUpdate3_3Request {
+  string arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message RequestSingleUpdate3_3Response {
+}
+
+message SendExtraCommandRequest {
+  string arg0 = 1;
+  string arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message SendExtraCommandResponse {
+  bool result = 1;
+}
+
+message SetTestProviderEnabledRequest {
+  string arg0 = 1;
+  bool arg1 = 2;
+}
+
+message SetTestProviderEnabledResponse {
+}
+
+message SetTestProviderLocationRequest {
+  string arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message SetTestProviderLocationResponse {
+}
+
+message SetTestProviderStatusRequest {
+  string arg0 = 1;
+  int32 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message SetTestProviderStatusResponse {
+}
+
+message UnregisterAntennaInfoListenerRequest {
+  int64 arg0 = 1;
+}
+
+message UnregisterAntennaInfoListenerResponse {
+}
+
+message UnregisterGnssMeasurementsCallbackRequest {
+  int64 arg0 = 1;
+}
+
+message UnregisterGnssMeasurementsCallbackResponse {
+}
+
+message UnregisterGnssNavigationMessageCallbackRequest {
+  int64 arg0 = 1;
+}
+
+message UnregisterGnssNavigationMessageCallbackResponse {
+}
+
+message UnregisterGnssStatusCallbackRequest {
+  int64 arg0 = 1;
+}
+
+message UnregisterGnssStatusCallbackResponse {
+}
+
+service GnssStatusService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc Equals (EqualsRequest) returns (EqualsResponse);
+  rpc GetAzimuthDegrees (GetAzimuthDegreesRequest) returns (GetAzimuthDegreesResponse);
+  rpc GetBasebandCn0DbHz (GetBasebandCn0DbHzRequest) returns (GetBasebandCn0DbHzResponse);
+  rpc GetCarrierFrequencyHz (GetCarrierFrequencyHzRequest) returns (GetCarrierFrequencyHzResponse);
+  rpc GetCn0DbHz (GetCn0DbHzRequest) returns (GetCn0DbHzResponse);
+  rpc GetConstellationType (GetConstellationTypeRequest) returns (GetConstellationTypeResponse);
+  rpc GetElevationDegrees (GetElevationDegreesRequest) returns (GetElevationDegreesResponse);
+  rpc GetSatelliteCount (GetSatelliteCountRequest) returns (GetSatelliteCountResponse);
+  rpc GetSvid (GetSvidRequest) returns (GetSvidResponse);
+  rpc HasAlmanacData (HasAlmanacDataRequest) returns (HasAlmanacDataResponse);
+  rpc HasBasebandCn0DbHz (HasBasebandCn0DbHzRequest) returns (HasBasebandCn0DbHzResponse);
+  rpc HasCarrierFrequencyHz (HasCarrierFrequencyHzRequest) returns (HasCarrierFrequencyHzResponse);
+  rpc HasEphemerisData (HasEphemerisDataRequest) returns (HasEphemerisDataResponse);
+  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
+  rpc UsedInFix (UsedInFixRequest) returns (UsedInFixResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
 }
 
 service LocationService {
@@ -585,4 +1271,73 @@ service LocationService {
   rpc Convert2 (Convert2Request) returns (Convert2Response);
   rpc Convert1_1 (Convert1_1Request) returns (Convert1_1Response);
   rpc DistanceBetween (DistanceBetweenRequest) returns (DistanceBetweenResponse);
+}
+
+service LocationManagerService {
+  rpc AddGpsStatusListener (AddGpsStatusListenerRequest) returns (AddGpsStatusListenerResponse);
+  rpc AddNmeaListener1 (AddNmeaListener1Request) returns (AddNmeaListener1Response);
+  rpc AddNmeaListener1_1 (AddNmeaListener1_1Request) returns (AddNmeaListener1_1Response);
+  rpc AddNmeaListener2_2 (AddNmeaListener2_2Request) returns (AddNmeaListener2_2Response);
+  rpc AddProximityAlert (AddProximityAlertRequest) returns (AddProximityAlertResponse);
+  rpc AddTestProvider2 (AddTestProvider2Request) returns (AddTestProvider2Response);
+  rpc AddTestProvider3_1 (AddTestProvider3_1Request) returns (AddTestProvider3_1Response);
+  rpc AddTestProvider10_2 (AddTestProvider10_2Request) returns (AddTestProvider10_2Response);
+  rpc ClearTestProviderEnabled (ClearTestProviderEnabledRequest) returns (ClearTestProviderEnabledResponse);
+  rpc ClearTestProviderLocation (ClearTestProviderLocationRequest) returns (ClearTestProviderLocationResponse);
+  rpc ClearTestProviderStatus (ClearTestProviderStatusRequest) returns (ClearTestProviderStatusResponse);
+  rpc GetAllProviders (GetAllProvidersRequest) returns (GetAllProvidersResponse);
+  rpc GetBestProvider (GetBestProviderRequest) returns (GetBestProviderResponse);
+  rpc GetCurrentLocation5 (GetCurrentLocation5Request) returns (GetCurrentLocation5Response);
+  rpc GetCurrentLocation4_1 (GetCurrentLocation4_1Request) returns (GetCurrentLocation4_1Response);
+  rpc GetGnssAntennaInfos (GetGnssAntennaInfosRequest) returns (GetGnssAntennaInfosResponse);
+  rpc GetGnssCapabilities (GetGnssCapabilitiesRequest) returns (GetGnssCapabilitiesResponse);
+  rpc GetGnssHardwareModelName (GetGnssHardwareModelNameRequest) returns (GetGnssHardwareModelNameResponse);
+  rpc GetGnssYearOfHardware (GetGnssYearOfHardwareRequest) returns (GetGnssYearOfHardwareResponse);
+  rpc GetGpsStatus (GetGpsStatusRequest) returns (GetGpsStatusResponse);
+  rpc GetLastKnownLocation (GetLastKnownLocationRequest) returns (GetLastKnownLocationResponse);
+  rpc GetProvider (LocationManagerGetProviderRequest) returns (LocationManagerGetProviderResponse);
+  rpc GetProviderProperties (GetProviderPropertiesRequest) returns (GetProviderPropertiesResponse);
+  rpc GetProviders2 (GetProviders2Request) returns (GetProviders2Response);
+  rpc GetProviders1_1 (GetProviders1_1Request) returns (GetProviders1_1Response);
+  rpc HasProvider (HasProviderRequest) returns (HasProviderResponse);
+  rpc IsLocationEnabled (IsLocationEnabledRequest) returns (IsLocationEnabledResponse);
+  rpc IsProviderEnabled (IsProviderEnabledRequest) returns (IsProviderEnabledResponse);
+  rpc RegisterAntennaInfoListener (RegisterAntennaInfoListenerRequest) returns (RegisterAntennaInfoListenerResponse);
+  rpc RegisterGnssMeasurementsCallback3 (RegisterGnssMeasurementsCallback3Request) returns (RegisterGnssMeasurementsCallback3Response);
+  rpc RegisterGnssMeasurementsCallback1_1 (RegisterGnssMeasurementsCallback1_1Request) returns (RegisterGnssMeasurementsCallback1_1Response);
+  rpc RegisterGnssMeasurementsCallback2_2 (RegisterGnssMeasurementsCallback2_2Request) returns (RegisterGnssMeasurementsCallback2_2Response);
+  rpc RegisterGnssNavigationMessageCallback1 (RegisterGnssNavigationMessageCallback1Request) returns (RegisterGnssNavigationMessageCallback1Response);
+  rpc RegisterGnssNavigationMessageCallback2_1 (RegisterGnssNavigationMessageCallback2_1Request) returns (RegisterGnssNavigationMessageCallback2_1Response);
+  rpc RegisterGnssStatusCallback1 (RegisterGnssStatusCallback1Request) returns (RegisterGnssStatusCallback1Response);
+  rpc RegisterGnssStatusCallback2_1 (RegisterGnssStatusCallback2_1Request) returns (RegisterGnssStatusCallback2_1Response);
+  rpc RemoveGpsStatusListener (RemoveGpsStatusListenerRequest) returns (RemoveGpsStatusListenerResponse);
+  rpc RemoveNmeaListener1 (RemoveNmeaListener1Request) returns (RemoveNmeaListener1Response);
+  rpc RemoveNmeaListener1_1 (RemoveNmeaListener1_1Request) returns (RemoveNmeaListener1_1Response);
+  rpc RemoveProximityAlert (RemoveProximityAlertRequest) returns (RemoveProximityAlertResponse);
+  rpc RemoveTestProvider (RemoveTestProviderRequest) returns (RemoveTestProviderResponse);
+  rpc RemoveUpdates1 (RemoveUpdates1Request) returns (RemoveUpdates1Response);
+  rpc RemoveUpdates1_1 (RemoveUpdates1_1Request) returns (RemoveUpdates1_1Response);
+  rpc RequestFlush3 (RequestFlush3Request) returns (RequestFlush3Response);
+  rpc RequestFlush3_1 (RequestFlush3_1Request) returns (RequestFlush3_1Response);
+  rpc RequestLocationUpdates3 (RequestLocationUpdates3Request) returns (RequestLocationUpdates3Response);
+  rpc RequestLocationUpdates4_1 (RequestLocationUpdates4_1Request) returns (RequestLocationUpdates4_1Response);
+  rpc RequestLocationUpdates4_2 (RequestLocationUpdates4_2Request) returns (RequestLocationUpdates4_2Response);
+  rpc RequestLocationUpdates4_3 (RequestLocationUpdates4_3Request) returns (RequestLocationUpdates4_3Response);
+  rpc RequestLocationUpdates5_4 (RequestLocationUpdates5_4Request) returns (RequestLocationUpdates5_4Response);
+  rpc RequestLocationUpdates5_5 (RequestLocationUpdates5_5Request) returns (RequestLocationUpdates5_5Response);
+  rpc RequestLocationUpdates4_6 (RequestLocationUpdates4_6Request) returns (RequestLocationUpdates4_6Response);
+  rpc RequestLocationUpdates5_7 (RequestLocationUpdates5_7Request) returns (RequestLocationUpdates5_7Response);
+  rpc RequestLocationUpdates5_8 (RequestLocationUpdates5_8Request) returns (RequestLocationUpdates5_8Response);
+  rpc RequestSingleUpdate2 (RequestSingleUpdate2Request) returns (RequestSingleUpdate2Response);
+  rpc RequestSingleUpdate3_1 (RequestSingleUpdate3_1Request) returns (RequestSingleUpdate3_1Response);
+  rpc RequestSingleUpdate2_2 (RequestSingleUpdate2_2Request) returns (RequestSingleUpdate2_2Response);
+  rpc RequestSingleUpdate3_3 (RequestSingleUpdate3_3Request) returns (RequestSingleUpdate3_3Response);
+  rpc SendExtraCommand (SendExtraCommandRequest) returns (SendExtraCommandResponse);
+  rpc SetTestProviderEnabled (SetTestProviderEnabledRequest) returns (SetTestProviderEnabledResponse);
+  rpc SetTestProviderLocation (SetTestProviderLocationRequest) returns (SetTestProviderLocationResponse);
+  rpc SetTestProviderStatus (SetTestProviderStatusRequest) returns (SetTestProviderStatusResponse);
+  rpc UnregisterAntennaInfoListener (UnregisterAntennaInfoListenerRequest) returns (UnregisterAntennaInfoListenerResponse);
+  rpc UnregisterGnssMeasurementsCallback (UnregisterGnssMeasurementsCallbackRequest) returns (UnregisterGnssMeasurementsCallbackResponse);
+  rpc UnregisterGnssNavigationMessageCallback (UnregisterGnssNavigationMessageCallbackRequest) returns (UnregisterGnssNavigationMessageCallbackResponse);
+  rpc UnregisterGnssStatusCallback (UnregisterGnssStatusCallbackRequest) returns (UnregisterGnssStatusCallbackResponse);
 }

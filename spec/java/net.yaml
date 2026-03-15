@@ -263,6 +263,94 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
+    - java_class: android.net.NetworkCapabilities
+      go_type: networkCapabilities
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getCapabilities
+          go_name: GetCapabilities
+          returns: '[I'
+          error: true
+        - java_method: getEnterpriseIds
+          go_name: GetEnterpriseIds
+          returns: '[I'
+          error: true
+        - java_method: getLinkDownstreamBandwidthKbps
+          go_name: GetLinkDownstreamBandwidthKbps
+          returns: int
+          error: true
+        - java_method: getLinkUpstreamBandwidthKbps
+          go_name: GetLinkUpstreamBandwidthKbps
+          returns: int
+          error: true
+        - java_method: getNetworkSpecifier
+          go_name: GetNetworkSpecifier
+          returns: android.net.NetworkSpecifier
+          error: true
+        - java_method: getOwnerUid
+          go_name: GetOwnerUid
+          returns: int
+          error: true
+        - java_method: getSignalStrength
+          go_name: GetSignalStrength
+          returns: int
+          error: true
+        - java_method: getSubscriptionIds
+          go_name: GetSubscriptionIds
+          returns: java.util.Set<java.lang.Integer>
+          error: true
+        - java_method: getTransportInfo
+          go_name: GetTransportInfo
+          returns: android.net.TransportInfo
+          error: true
+        - java_method: hasCapability
+          go_name: HasCapability
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasEnterpriseId
+          go_name: HasEnterpriseId
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasTransport
+          go_name: HasTransport
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
 constants:
     - go_name: ActionBackgroundDataSettingChanged
       value: '""'
@@ -361,5 +449,149 @@ constants:
       value: "0"
       go_type: int
     - go_name: TypeWimax
+      value: "0"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityCaptivePortal
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityCbs
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityDun
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityEims
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityEnterprise
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityForeground
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityFota
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityHeadUnit
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityIa
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityIms
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityInternet
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityLocalNetwork
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityMcx
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityMms
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityMmtel
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityNotBandwidthConstrained
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityNotCongested
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityNotMetered
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityNotRestricted
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityNotRoaming
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityNotSuspended
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityNotVpn
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityPrioritizeBandwidth
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityPrioritizeLatency
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityRcs
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilitySupl
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityTemporarilyNotMetered
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityTrusted
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityValidated
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityWifiP2p
+      value: "0"
+      go_type: int
+    - go_name: NetCapabilityXcap
+      value: "0"
+      go_type: int
+    - go_name: NetEnterpriseId1
+      value: "0"
+      go_type: int
+    - go_name: NetEnterpriseId2
+      value: "0"
+      go_type: int
+    - go_name: NetEnterpriseId3
+      value: "0"
+      go_type: int
+    - go_name: NetEnterpriseId4
+      value: "0"
+      go_type: int
+    - go_name: NetEnterpriseId5
+      value: "0"
+      go_type: int
+    - go_name: SignalStrengthUnspecified
+      value: "0"
+      go_type: int
+    - go_name: TransportBluetooth
+      value: "0"
+      go_type: int
+    - go_name: TransportCellular
+      value: "0"
+      go_type: int
+    - go_name: TransportEthernet
+      value: "0"
+      go_type: int
+    - go_name: TransportLowpan
+      value: "0"
+      go_type: int
+    - go_name: TransportSatellite
+      value: "0"
+      go_type: int
+    - go_name: TransportThread
+      value: "0"
+      go_type: int
+    - go_name: TransportUsb
+      value: "0"
+      go_type: int
+    - go_name: TransportVpn
+      value: "0"
+      go_type: int
+    - go_name: TransportWifi
+      value: "0"
+      go_type: int
+    - go_name: TransportWifiAware
       value: "0"
       go_type: int

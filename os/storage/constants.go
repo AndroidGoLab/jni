@@ -3,9 +3,14 @@
 package storage
 
 const (
-	Creator = 0
+	Creator     = 0
+	UuidDefault = 0
 )
 
 const (
-	ExtraStorageVolume = ""
+	ExtraStorageVolume  = ""
+	ActionClearAppCache = ""
+	ActionManageStorage = ""
+	ExtraRequestedBytes = ""
+	ExtraUuid           = ""
 )

@@ -151,15 +151,22 @@ func buildClientData(
 		data.DataClasses = append(data.DataClasses, cdc)
 	}
 
-	// Build RPC name lookup from protogen data (handles collision renames).
-	// Maps lowercase(original name) → final RPC name.
-	protoRPCNames := make(map[string]string)
+	// Build RPC lookup from protogen data (handles collision renames and
+	// cross-class message name disambiguation).
+	protoRPCLookup := make(map[string]rpcInfo)
 	for _, ps := range protoData.Services {
 		for _, rpc := range ps.RPCs {
-			if rpc.OriginalName != "" {
-				protoRPCNames[strings.ToLower(rpc.OriginalName)] = rpc.Name
+			info := rpcInfo{
+				Name:       rpc.Name,
+				InputType:  rpc.InputType,
+				OutputType: rpc.OutputType,
 			}
-			protoRPCNames[strings.ToLower(rpc.Name)] = rpc.Name
+			key := ps.Name + "/" + strings.ToLower(rpc.Name)
+			protoRPCLookup[key] = info
+			if rpc.OriginalName != "" {
+				origKey := ps.Name + "/" + strings.ToLower(rpc.OriginalName)
+				protoRPCLookup[origKey] = info
+			}
 		}
 	}
 
@@ -171,6 +178,7 @@ func buildClientData(
 
 		rawServiceName := exportName(cls.GoType) + "Service"
 		serviceName := goNames.ResolveService(rawServiceName)
+		protoServiceName := rawServiceName
 		svc := ClientService{
 			GoType:      cls.GoType,
 			ServiceName: serviceName,
@@ -180,7 +188,7 @@ func buildClientData(
 			if !isExported(m.GoName) {
 				continue
 			}
-			cm := buildClientMethod(m, javaClassToDataClass, dcFieldMap, protoRPCNames, goNames)
+			cm := buildClientMethod(m, javaClassToDataClass, dcFieldMap, protoRPCLookup, protoServiceName, goNames)
 			svc.Methods = append(svc.Methods, cm)
 		}
 
@@ -198,18 +206,28 @@ func buildClientMethod(
 	m javagen.MergedMethod,
 	javaClassToDataMsg map[string]string,
 	dcFieldMap map[string][]javagen.MergedField,
-	protoRPCNames map[string]string,
+	protoRPCLookup map[string]rpcInfo,
+	protoServiceName string,
 	goNames protoscan.GoNames,
 ) ClientMethod {
 	rawName := exportName(m.GoName)
-	// Resolve through protogen (collision renames) then protoc (naming quirks).
 	goName := rawName
-	if resolved, ok := protoRPCNames[strings.ToLower(rawName)]; ok {
-		goName = resolved
+
+	lookupKey := protoServiceName + "/" + strings.ToLower(rawName)
+	info, found := protoRPCLookup[lookupKey]
+	if found {
+		goName = info.Name
 	}
 	goName = goNames.ResolveRPC(goName)
+
 	reqType := goName + "Request"
 	respType := goName + "Response"
+	if found {
+		reqType = info.InputType
+		respType = info.OutputType
+	}
+	reqType = goNames.ResolveMessage(reqType)
+	respType = goNames.ResolveMessage(respType)
 
 	cm := ClientMethod{
 		GoName:       goName,

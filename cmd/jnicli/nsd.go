@@ -13,6 +13,324 @@ var nsdCmd = &cobra.Command{
 	Short: "nsd service operations",
 }
 
+var nsdNsdManagerCmd = &cobra.Command{
+	Use:   "nsd-manager",
+	Short: "NsdManagerService operations",
+}
+
+var nsdNsdManagerDiscoverServices3Cmd = &cobra.Command{
+	Use:   "discover-services3",
+	Short: "DiscoverServices3 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdManagerServiceClient(grpcConn)
+		req := &pb.DiscoverServices3Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.DiscoverServices3(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdManagerDiscoverServices5_1Cmd = &cobra.Command{
+	Use:   "discover-services5_1",
+	Short: "DiscoverServices5_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdManagerServiceClient(grpcConn)
+		req := &pb.DiscoverServices5_1Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		resp, err := client.DiscoverServices5_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdManagerDiscoverServices5_2Cmd = &cobra.Command{
+	Use:   "discover-services5_2",
+	Short: "DiscoverServices5_2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdManagerServiceClient(grpcConn)
+		req := &pb.DiscoverServices5_2Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg4"); err == nil {
+			req.Arg4 = v
+		}
+		resp, err := client.DiscoverServices5_2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdManagerDiscoverServices3_3Cmd = &cobra.Command{
+	Use:   "discover-services3_3",
+	Short: "DiscoverServices3_3 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdManagerServiceClient(grpcConn)
+		req := &pb.DiscoverServices3_3Request{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.DiscoverServices3_3(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdManagerRegisterService3Cmd = &cobra.Command{
+	Use:   "register-service3",
+	Short: "RegisterService3 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdManagerServiceClient(grpcConn)
+		req := &pb.RegisterService3Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.RegisterService3(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdManagerRegisterService4_1Cmd = &cobra.Command{
+	Use:   "register-service4_1",
+	Short: "RegisterService4_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdManagerServiceClient(grpcConn)
+		req := &pb.RegisterService4_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg3"); err == nil {
+			req.Arg3 = v
+		}
+		resp, err := client.RegisterService4_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdManagerRegisterServiceInfoCallbackCmd = &cobra.Command{
+	Use:   "register-service-info-callback",
+	Short: "RegisterServiceInfoCallback RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdManagerServiceClient(grpcConn)
+		req := &pb.RegisterServiceInfoCallbackRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.RegisterServiceInfoCallback(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdManagerResolveService2Cmd = &cobra.Command{
+	Use:   "resolve-service2",
+	Short: "ResolveService2 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdManagerServiceClient(grpcConn)
+		req := &pb.ResolveService2Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.ResolveService2(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdManagerResolveService3_1Cmd = &cobra.Command{
+	Use:   "resolve-service3_1",
+	Short: "ResolveService3_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdManagerServiceClient(grpcConn)
+		req := &pb.ResolveService3_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.ResolveService3_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdManagerStopServiceDiscoveryCmd = &cobra.Command{
+	Use:   "stop-service-discovery",
+	Short: "StopServiceDiscovery RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdManagerServiceClient(grpcConn)
+		req := &pb.StopServiceDiscoveryRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.StopServiceDiscovery(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdManagerStopServiceResolutionCmd = &cobra.Command{
+	Use:   "stop-service-resolution",
+	Short: "StopServiceResolution RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdManagerServiceClient(grpcConn)
+		req := &pb.StopServiceResolutionRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.StopServiceResolution(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdManagerUnregisterServiceCmd = &cobra.Command{
+	Use:   "unregister-service",
+	Short: "UnregisterService RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdManagerServiceClient(grpcConn)
+		req := &pb.UnregisterServiceRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.UnregisterService(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var nsdNsdManagerUnregisterServiceInfoCallbackCmd = &cobra.Command{
+	Use:   "unregister-service-info-callback",
+	Short: "UnregisterServiceInfoCallback RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewNsdManagerServiceClient(grpcConn)
+		req := &pb.UnregisterServiceInfoCallbackRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.UnregisterServiceInfoCallback(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 var nsdNsdServiceInfoCmd = &cobra.Command{
 	Use:   "nsd-service-info",
 	Short: "NsdServiceInfoService operations",
@@ -375,6 +693,55 @@ var nsdNsdServiceInfoWriteToParcelCmd = &cobra.Command{
 }
 
 func init() {
+	nsdNsdManagerDiscoverServices3Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nsdNsdManagerDiscoverServices3Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	nsdNsdManagerDiscoverServices3Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	nsdNsdManagerCmd.AddCommand(nsdNsdManagerDiscoverServices3Cmd)
+	nsdNsdManagerDiscoverServices5_1Cmd.Flags().String("arg0", "", "arg0 (string)")
+	nsdNsdManagerDiscoverServices5_1Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	nsdNsdManagerDiscoverServices5_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	nsdNsdManagerDiscoverServices5_1Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	nsdNsdManagerDiscoverServices5_1Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
+	nsdNsdManagerCmd.AddCommand(nsdNsdManagerDiscoverServices5_1Cmd)
+	nsdNsdManagerDiscoverServices5_2Cmd.Flags().String("arg0", "", "arg0 (string)")
+	nsdNsdManagerDiscoverServices5_2Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	nsdNsdManagerDiscoverServices5_2Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	nsdNsdManagerDiscoverServices5_2Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	nsdNsdManagerDiscoverServices5_2Cmd.Flags().Int64("arg4", 0, "arg4 (int64)")
+	nsdNsdManagerCmd.AddCommand(nsdNsdManagerDiscoverServices5_2Cmd)
+	nsdNsdManagerDiscoverServices3_3Cmd.Flags().String("arg0", "", "arg0 (string)")
+	nsdNsdManagerDiscoverServices3_3Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	nsdNsdManagerDiscoverServices3_3Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	nsdNsdManagerCmd.AddCommand(nsdNsdManagerDiscoverServices3_3Cmd)
+	nsdNsdManagerRegisterService3Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nsdNsdManagerRegisterService3Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	nsdNsdManagerRegisterService3Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	nsdNsdManagerCmd.AddCommand(nsdNsdManagerRegisterService3Cmd)
+	nsdNsdManagerRegisterService4_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nsdNsdManagerRegisterService4_1Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	nsdNsdManagerRegisterService4_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	nsdNsdManagerRegisterService4_1Cmd.Flags().Int64("arg3", 0, "arg3 (int64)")
+	nsdNsdManagerCmd.AddCommand(nsdNsdManagerRegisterService4_1Cmd)
+	nsdNsdManagerRegisterServiceInfoCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nsdNsdManagerRegisterServiceInfoCallbackCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	nsdNsdManagerRegisterServiceInfoCallbackCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	nsdNsdManagerCmd.AddCommand(nsdNsdManagerRegisterServiceInfoCallbackCmd)
+	nsdNsdManagerResolveService2Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nsdNsdManagerResolveService2Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	nsdNsdManagerCmd.AddCommand(nsdNsdManagerResolveService2Cmd)
+	nsdNsdManagerResolveService3_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nsdNsdManagerResolveService3_1Cmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	nsdNsdManagerResolveService3_1Cmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	nsdNsdManagerCmd.AddCommand(nsdNsdManagerResolveService3_1Cmd)
+	nsdNsdManagerStopServiceDiscoveryCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nsdNsdManagerCmd.AddCommand(nsdNsdManagerStopServiceDiscoveryCmd)
+	nsdNsdManagerStopServiceResolutionCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nsdNsdManagerCmd.AddCommand(nsdNsdManagerStopServiceResolutionCmd)
+	nsdNsdManagerUnregisterServiceCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nsdNsdManagerCmd.AddCommand(nsdNsdManagerUnregisterServiceCmd)
+	nsdNsdManagerUnregisterServiceInfoCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	nsdNsdManagerCmd.AddCommand(nsdNsdManagerUnregisterServiceInfoCallbackCmd)
+	nsdCmd.AddCommand(nsdNsdManagerCmd)
 	nsdNsdServiceInfoCmd.AddCommand(nsdNsdServiceInfoDescribeContentsCmd)
 	nsdNsdServiceInfoCmd.AddCommand(nsdNsdServiceInfoGetHostCmd)
 	nsdNsdServiceInfoCmd.AddCommand(nsdNsdServiceInfoGetHostAddressesCmd)

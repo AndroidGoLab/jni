@@ -3,8 +3,36 @@
 package location
 
 const (
-	Creator       = 0
-	FormatDegrees = 0
-	FormatMinutes = 0
-	FormatSeconds = 0
+	ConstellationBeidou  = 0
+	ConstellationGalileo = 0
+	ConstellationGlonass = 0
+	ConstellationGps     = 0
+	ConstellationIrnss   = 0
+	ConstellationQzss    = 0
+	ConstellationSbas    = 0
+	ConstellationUnknown = 0
+	Creator              = 0
+	FormatDegrees        = 0
+	FormatMinutes        = 0
+	FormatSeconds        = 0
+)
+
+const (
+	ActionGnssCapabilitiesChanged = ""
+	ExtraGnssCapabilities         = ""
+	ExtraLocationEnabled          = ""
+	ExtraProviderEnabled          = ""
+	ExtraProviderName             = ""
+	FusedProvider                 = ""
+	GpsProvider                   = ""
+	KeyFlushComplete              = ""
+	KeyLocations                  = ""
+	KeyLocationChanged            = ""
+	KeyProviderEnabled            = ""
+	KeyProximityEntering          = ""
+	KeyStatusChanged              = ""
+	ModeChangedAction             = ""
+	NetworkProvider               = ""
+	PassiveProvider               = ""
+	ProvidersChangedAction        = ""
 )

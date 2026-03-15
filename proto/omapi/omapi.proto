@@ -12,6 +12,118 @@ message CloseRequest {
 message CloseResponse {
 }
 
+message GetSelectResponseRequest {
+}
+
+message GetSelectResponseResponse {
+  int64 result = 1;
+}
+
+message GetSessionRequest {
+}
+
+message GetSessionResponse {
+  int64 result = 1;
+}
+
+message IsBasicChannelRequest {
+}
+
+message IsBasicChannelResponse {
+  bool result = 1;
+}
+
+message IsOpenRequest {
+}
+
+message IsOpenResponse {
+  bool result = 1;
+}
+
+message SelectNextRequest {
+}
+
+message SelectNextResponse {
+  bool result = 1;
+}
+
+message TransmitRequest {
+  int64 arg0 = 1;
+}
+
+message TransmitResponse {
+  int64 result = 1;
+}
+
+message CloseSessionsRequest {
+}
+
+message CloseSessionsResponse {
+}
+
+message GetNameRequest {
+}
+
+message GetNameResponse {
+  string result = 1;
+}
+
+message GetSEServiceRequest {
+}
+
+message GetSEServiceResponse {
+  int64 result = 1;
+}
+
+message IsSecureElementPresentRequest {
+}
+
+message IsSecureElementPresentResponse {
+  bool result = 1;
+}
+
+message OpenSessionRequest {
+}
+
+message OpenSessionResponse {
+  int64 result = 1;
+}
+
+message GetReadersRequest {
+}
+
+message GetReadersResponse {
+  int64 result = 1;
+}
+
+message GetUiccReaderRequest {
+  int32 arg0 = 1;
+}
+
+message GetUiccReaderResponse {
+  int64 result = 1;
+}
+
+message GetVersionRequest {
+}
+
+message GetVersionResponse {
+  string result = 1;
+}
+
+message IsConnectedRequest {
+}
+
+message IsConnectedResponse {
+  bool result = 1;
+}
+
+message ShutdownRequest {
+}
+
+message ShutdownResponse {
+}
+
 message CloseChannelsRequest {
 }
 
@@ -71,6 +183,32 @@ message OpenLogicalChannel2_1Request {
 
 message OpenLogicalChannel2_1Response {
   int64 result = 1;
+}
+
+service ChannelService {
+  rpc Close (CloseRequest) returns (CloseResponse);
+  rpc GetSelectResponse (GetSelectResponseRequest) returns (GetSelectResponseResponse);
+  rpc GetSession (GetSessionRequest) returns (GetSessionResponse);
+  rpc IsBasicChannel (IsBasicChannelRequest) returns (IsBasicChannelResponse);
+  rpc IsOpen (IsOpenRequest) returns (IsOpenResponse);
+  rpc SelectNext (SelectNextRequest) returns (SelectNextResponse);
+  rpc Transmit (TransmitRequest) returns (TransmitResponse);
+}
+
+service ReaderService {
+  rpc CloseSessions (CloseSessionsRequest) returns (CloseSessionsResponse);
+  rpc GetName (GetNameRequest) returns (GetNameResponse);
+  rpc GetSEService (GetSEServiceRequest) returns (GetSEServiceResponse);
+  rpc IsSecureElementPresent (IsSecureElementPresentRequest) returns (IsSecureElementPresentResponse);
+  rpc OpenSession (OpenSessionRequest) returns (OpenSessionResponse);
+}
+
+service SEServiceService {
+  rpc GetReaders (GetReadersRequest) returns (GetReadersResponse);
+  rpc GetUiccReader (GetUiccReaderRequest) returns (GetUiccReaderResponse);
+  rpc GetVersion (GetVersionRequest) returns (GetVersionResponse);
+  rpc IsConnected (IsConnectedRequest) returns (IsConnectedResponse);
+  rpc Shutdown (ShutdownRequest) returns (ShutdownResponse);
 }
 
 service SessionService {

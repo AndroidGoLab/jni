@@ -3,21 +3,42 @@
 package job
 
 const (
-	BackoffPolicyExponential = 0
-	BackoffPolicyLinear      = 0
-	Creator                  = 0
-	NetworkBytesUnknown      = 0
-	NetworkTypeAny           = 0
-	NetworkTypeCellular      = 0
-	NetworkTypeMetered       = 0
-	NetworkTypeNone          = 0
-	NetworkTypeNotRoaming    = 0
-	NetworkTypeUnmetered     = 0
-	PriorityDefault          = 0
-	PriorityHigh             = 0
-	PriorityLow              = 0
-	PriorityMax              = 0
-	PriorityMin              = 0
+	BackoffPolicyExponential                 = 0
+	BackoffPolicyLinear                      = 0
+	Creator                                  = 0
+	NetworkBytesUnknown                      = 0
+	NetworkTypeAny                           = 0
+	NetworkTypeCellular                      = 0
+	NetworkTypeMetered                       = 0
+	NetworkTypeNone                          = 0
+	NetworkTypeNotRoaming                    = 0
+	NetworkTypeUnmetered                     = 0
+	PriorityDefault                          = 0
+	PriorityHigh                             = 0
+	PriorityLow                              = 0
+	PriorityMax                              = 0
+	PriorityMin                              = 0
+	PendingJobReasonApp                      = 0
+	PendingJobReasonAppStandby               = 0
+	PendingJobReasonBackgroundRestriction    = 0
+	PendingJobReasonConstraintBatteryNotLow  = 0
+	PendingJobReasonConstraintCharging       = 0
+	PendingJobReasonConstraintConnectivity   = 0
+	PendingJobReasonConstraintContentTrigger = 0
+	PendingJobReasonConstraintDeadline       = 0
+	PendingJobReasonConstraintDeviceIdle     = 0
+	PendingJobReasonConstraintMinimumLatency = 0
+	PendingJobReasonConstraintPrefetch       = 0
+	PendingJobReasonConstraintStorageNotLow  = 0
+	PendingJobReasonDeviceState              = 0
+	PendingJobReasonExecuting                = 0
+	PendingJobReasonInvalidJobId             = 0
+	PendingJobReasonJobSchedulerOptimization = 0
+	PendingJobReasonQuota                    = 0
+	PendingJobReasonUndefined                = 0
+	PendingJobReasonUser                     = 0
+	ResultFailure                            = 0
+	ResultSuccess                            = 0
 )
 
 const (

@@ -23,6 +23,662 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type DescribeContentsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DescribeContentsRequest) Reset() {
+	*x = DescribeContentsRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DescribeContentsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DescribeContentsRequest) ProtoMessage() {}
+
+func (x *DescribeContentsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DescribeContentsRequest.ProtoReflect.Descriptor instead.
+func (*DescribeContentsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{0}
+}
+
+type DescribeContentsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DescribeContentsResponse) Reset() {
+	*x = DescribeContentsResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DescribeContentsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DescribeContentsResponse) ProtoMessage() {}
+
+func (x *DescribeContentsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DescribeContentsResponse.ProtoReflect.Descriptor instead.
+func (*DescribeContentsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *DescribeContentsResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type EqualsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EqualsRequest) Reset() {
+	*x = EqualsRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EqualsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EqualsRequest) ProtoMessage() {}
+
+func (x *EqualsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EqualsRequest.ProtoReflect.Descriptor instead.
+func (*EqualsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *EqualsRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type EqualsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EqualsResponse) Reset() {
+	*x = EqualsResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EqualsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EqualsResponse) ProtoMessage() {}
+
+func (x *EqualsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EqualsResponse.ProtoReflect.Descriptor instead.
+func (*EqualsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *EqualsResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type GetByteArrayLengthRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetByteArrayLengthRequest) Reset() {
+	*x = GetByteArrayLengthRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetByteArrayLengthRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetByteArrayLengthRequest) ProtoMessage() {}
+
+func (x *GetByteArrayLengthRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetByteArrayLengthRequest.ProtoReflect.Descriptor instead.
+func (*GetByteArrayLengthRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{4}
+}
+
+type GetByteArrayLengthResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetByteArrayLengthResponse) Reset() {
+	*x = GetByteArrayLengthResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetByteArrayLengthResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetByteArrayLengthResponse) ProtoMessage() {}
+
+func (x *GetByteArrayLengthResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetByteArrayLengthResponse.ProtoReflect.Descriptor instead.
+func (*GetByteArrayLengthResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetByteArrayLengthResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetRecordsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRecordsRequest) Reset() {
+	*x = GetRecordsRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRecordsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRecordsRequest) ProtoMessage() {}
+
+func (x *GetRecordsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRecordsRequest.ProtoReflect.Descriptor instead.
+func (*GetRecordsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{6}
+}
+
+type GetRecordsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRecordsResponse) Reset() {
+	*x = GetRecordsResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRecordsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRecordsResponse) ProtoMessage() {}
+
+func (x *GetRecordsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRecordsResponse.ProtoReflect.Descriptor instead.
+func (*GetRecordsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetRecordsResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type HashCodeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HashCodeRequest) Reset() {
+	*x = HashCodeRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HashCodeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HashCodeRequest) ProtoMessage() {}
+
+func (x *HashCodeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HashCodeRequest.ProtoReflect.Descriptor instead.
+func (*HashCodeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{8}
+}
+
+type HashCodeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HashCodeResponse) Reset() {
+	*x = HashCodeResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HashCodeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HashCodeResponse) ProtoMessage() {}
+
+func (x *HashCodeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HashCodeResponse.ProtoReflect.Descriptor instead.
+func (*HashCodeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *HashCodeResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type ToByteArrayRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToByteArrayRequest) Reset() {
+	*x = ToByteArrayRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToByteArrayRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToByteArrayRequest) ProtoMessage() {}
+
+func (x *ToByteArrayRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToByteArrayRequest.ProtoReflect.Descriptor instead.
+func (*ToByteArrayRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{10}
+}
+
+type ToByteArrayResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToByteArrayResponse) Reset() {
+	*x = ToByteArrayResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToByteArrayResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToByteArrayResponse) ProtoMessage() {}
+
+func (x *ToByteArrayResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToByteArrayResponse.ProtoReflect.Descriptor instead.
+func (*ToByteArrayResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ToByteArrayResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type ToStringRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToStringRequest) Reset() {
+	*x = ToStringRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToStringRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToStringRequest) ProtoMessage() {}
+
+func (x *ToStringRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToStringRequest.ProtoReflect.Descriptor instead.
+func (*ToStringRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{12}
+}
+
+type ToStringResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToStringResponse) Reset() {
+	*x = ToStringResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToStringResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToStringResponse) ProtoMessage() {}
+
+func (x *ToStringResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToStringResponse.ProtoReflect.Descriptor instead.
+func (*ToStringResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ToStringResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type WriteToParcelRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int32                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WriteToParcelRequest) Reset() {
+	*x = WriteToParcelRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WriteToParcelRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WriteToParcelRequest) ProtoMessage() {}
+
+func (x *WriteToParcelRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WriteToParcelRequest.ProtoReflect.Descriptor instead.
+func (*WriteToParcelRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *WriteToParcelRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *WriteToParcelRequest) GetArg1() int32 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type WriteToParcelResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WriteToParcelResponse) Reset() {
+	*x = WriteToParcelResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WriteToParcelResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WriteToParcelResponse) ProtoMessage() {}
+
+func (x *WriteToParcelResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WriteToParcelResponse.ProtoReflect.Descriptor instead.
+func (*WriteToParcelResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{15}
+}
+
 type CloseRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -31,7 +687,7 @@ type CloseRequest struct {
 
 func (x *CloseRequest) Reset() {
 	*x = CloseRequest{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[0]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +699,7 @@ func (x *CloseRequest) String() string {
 func (*CloseRequest) ProtoMessage() {}
 
 func (x *CloseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[0]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +712,7 @@ func (x *CloseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CloseRequest.ProtoReflect.Descriptor instead.
 func (*CloseRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{0}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{16}
 }
 
 type CloseResponse struct {
@@ -67,7 +723,7 @@ type CloseResponse struct {
 
 func (x *CloseResponse) Reset() {
 	*x = CloseResponse{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[1]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -79,7 +735,7 @@ func (x *CloseResponse) String() string {
 func (*CloseResponse) ProtoMessage() {}
 
 func (x *CloseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[1]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -92,7 +748,7 @@ func (x *CloseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CloseResponse.ProtoReflect.Descriptor instead.
 func (*CloseResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{1}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{17}
 }
 
 type ConnectRequest struct {
@@ -103,7 +759,7 @@ type ConnectRequest struct {
 
 func (x *ConnectRequest) Reset() {
 	*x = ConnectRequest{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[2]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -115,7 +771,7 @@ func (x *ConnectRequest) String() string {
 func (*ConnectRequest) ProtoMessage() {}
 
 func (x *ConnectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[2]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -128,7 +784,7 @@ func (x *ConnectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConnectRequest.ProtoReflect.Descriptor instead.
 func (*ConnectRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{2}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{18}
 }
 
 type ConnectResponse struct {
@@ -139,7 +795,7 @@ type ConnectResponse struct {
 
 func (x *ConnectResponse) Reset() {
 	*x = ConnectResponse{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[3]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -151,7 +807,7 @@ func (x *ConnectResponse) String() string {
 func (*ConnectResponse) ProtoMessage() {}
 
 func (x *ConnectResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[3]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -164,7 +820,7 @@ func (x *ConnectResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConnectResponse.ProtoReflect.Descriptor instead.
 func (*ConnectResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{3}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{19}
 }
 
 type GetHiLayerResponseRequest struct {
@@ -175,7 +831,7 @@ type GetHiLayerResponseRequest struct {
 
 func (x *GetHiLayerResponseRequest) Reset() {
 	*x = GetHiLayerResponseRequest{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[4]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -187,7 +843,7 @@ func (x *GetHiLayerResponseRequest) String() string {
 func (*GetHiLayerResponseRequest) ProtoMessage() {}
 
 func (x *GetHiLayerResponseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[4]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -200,7 +856,7 @@ func (x *GetHiLayerResponseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHiLayerResponseRequest.ProtoReflect.Descriptor instead.
 func (*GetHiLayerResponseRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{4}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{20}
 }
 
 type GetHiLayerResponseResponse struct {
@@ -212,7 +868,7 @@ type GetHiLayerResponseResponse struct {
 
 func (x *GetHiLayerResponseResponse) Reset() {
 	*x = GetHiLayerResponseResponse{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[5]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -224,7 +880,7 @@ func (x *GetHiLayerResponseResponse) String() string {
 func (*GetHiLayerResponseResponse) ProtoMessage() {}
 
 func (x *GetHiLayerResponseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[5]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -237,7 +893,7 @@ func (x *GetHiLayerResponseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHiLayerResponseResponse.ProtoReflect.Descriptor instead.
 func (*GetHiLayerResponseResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{5}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *GetHiLayerResponseResponse) GetResult() int64 {
@@ -255,7 +911,7 @@ type GetHistoricalBytesRequest struct {
 
 func (x *GetHistoricalBytesRequest) Reset() {
 	*x = GetHistoricalBytesRequest{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[6]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -267,7 +923,7 @@ func (x *GetHistoricalBytesRequest) String() string {
 func (*GetHistoricalBytesRequest) ProtoMessage() {}
 
 func (x *GetHistoricalBytesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[6]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -280,7 +936,7 @@ func (x *GetHistoricalBytesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHistoricalBytesRequest.ProtoReflect.Descriptor instead.
 func (*GetHistoricalBytesRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{6}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{22}
 }
 
 type GetHistoricalBytesResponse struct {
@@ -292,7 +948,7 @@ type GetHistoricalBytesResponse struct {
 
 func (x *GetHistoricalBytesResponse) Reset() {
 	*x = GetHistoricalBytesResponse{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[7]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -304,7 +960,7 @@ func (x *GetHistoricalBytesResponse) String() string {
 func (*GetHistoricalBytesResponse) ProtoMessage() {}
 
 func (x *GetHistoricalBytesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[7]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -317,7 +973,7 @@ func (x *GetHistoricalBytesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHistoricalBytesResponse.ProtoReflect.Descriptor instead.
 func (*GetHistoricalBytesResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{7}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *GetHistoricalBytesResponse) GetResult() int64 {
@@ -335,7 +991,7 @@ type GetMaxTransceiveLengthRequest struct {
 
 func (x *GetMaxTransceiveLengthRequest) Reset() {
 	*x = GetMaxTransceiveLengthRequest{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[8]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -347,7 +1003,7 @@ func (x *GetMaxTransceiveLengthRequest) String() string {
 func (*GetMaxTransceiveLengthRequest) ProtoMessage() {}
 
 func (x *GetMaxTransceiveLengthRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[8]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -360,7 +1016,7 @@ func (x *GetMaxTransceiveLengthRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMaxTransceiveLengthRequest.ProtoReflect.Descriptor instead.
 func (*GetMaxTransceiveLengthRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{8}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{24}
 }
 
 type GetMaxTransceiveLengthResponse struct {
@@ -372,7 +1028,7 @@ type GetMaxTransceiveLengthResponse struct {
 
 func (x *GetMaxTransceiveLengthResponse) Reset() {
 	*x = GetMaxTransceiveLengthResponse{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[9]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -384,7 +1040,7 @@ func (x *GetMaxTransceiveLengthResponse) String() string {
 func (*GetMaxTransceiveLengthResponse) ProtoMessage() {}
 
 func (x *GetMaxTransceiveLengthResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[9]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -397,7 +1053,7 @@ func (x *GetMaxTransceiveLengthResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMaxTransceiveLengthResponse.ProtoReflect.Descriptor instead.
 func (*GetMaxTransceiveLengthResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{9}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *GetMaxTransceiveLengthResponse) GetResult() int32 {
@@ -415,7 +1071,7 @@ type GetTagRequest struct {
 
 func (x *GetTagRequest) Reset() {
 	*x = GetTagRequest{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[10]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -427,7 +1083,7 @@ func (x *GetTagRequest) String() string {
 func (*GetTagRequest) ProtoMessage() {}
 
 func (x *GetTagRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[10]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -440,7 +1096,7 @@ func (x *GetTagRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTagRequest.ProtoReflect.Descriptor instead.
 func (*GetTagRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{10}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{26}
 }
 
 type GetTagResponse struct {
@@ -452,7 +1108,7 @@ type GetTagResponse struct {
 
 func (x *GetTagResponse) Reset() {
 	*x = GetTagResponse{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[11]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -464,7 +1120,7 @@ func (x *GetTagResponse) String() string {
 func (*GetTagResponse) ProtoMessage() {}
 
 func (x *GetTagResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[11]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -477,7 +1133,7 @@ func (x *GetTagResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTagResponse.ProtoReflect.Descriptor instead.
 func (*GetTagResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{11}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *GetTagResponse) GetResult() int64 {
@@ -495,7 +1151,7 @@ type GetTimeoutRequest struct {
 
 func (x *GetTimeoutRequest) Reset() {
 	*x = GetTimeoutRequest{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[12]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -507,7 +1163,7 @@ func (x *GetTimeoutRequest) String() string {
 func (*GetTimeoutRequest) ProtoMessage() {}
 
 func (x *GetTimeoutRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[12]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -520,7 +1176,7 @@ func (x *GetTimeoutRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTimeoutRequest.ProtoReflect.Descriptor instead.
 func (*GetTimeoutRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{12}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{28}
 }
 
 type GetTimeoutResponse struct {
@@ -532,7 +1188,7 @@ type GetTimeoutResponse struct {
 
 func (x *GetTimeoutResponse) Reset() {
 	*x = GetTimeoutResponse{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[13]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -544,7 +1200,7 @@ func (x *GetTimeoutResponse) String() string {
 func (*GetTimeoutResponse) ProtoMessage() {}
 
 func (x *GetTimeoutResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[13]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -557,7 +1213,7 @@ func (x *GetTimeoutResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTimeoutResponse.ProtoReflect.Descriptor instead.
 func (*GetTimeoutResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{13}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *GetTimeoutResponse) GetResult() int32 {
@@ -575,7 +1231,7 @@ type IsConnectedRequest struct {
 
 func (x *IsConnectedRequest) Reset() {
 	*x = IsConnectedRequest{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[14]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -587,7 +1243,7 @@ func (x *IsConnectedRequest) String() string {
 func (*IsConnectedRequest) ProtoMessage() {}
 
 func (x *IsConnectedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[14]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -600,7 +1256,7 @@ func (x *IsConnectedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsConnectedRequest.ProtoReflect.Descriptor instead.
 func (*IsConnectedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{14}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{30}
 }
 
 type IsConnectedResponse struct {
@@ -612,7 +1268,7 @@ type IsConnectedResponse struct {
 
 func (x *IsConnectedResponse) Reset() {
 	*x = IsConnectedResponse{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[15]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -624,7 +1280,7 @@ func (x *IsConnectedResponse) String() string {
 func (*IsConnectedResponse) ProtoMessage() {}
 
 func (x *IsConnectedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[15]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -637,7 +1293,7 @@ func (x *IsConnectedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsConnectedResponse.ProtoReflect.Descriptor instead.
 func (*IsConnectedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{15}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *IsConnectedResponse) GetResult() bool {
@@ -655,7 +1311,7 @@ type IsExtendedLengthApduSupportedRequest struct {
 
 func (x *IsExtendedLengthApduSupportedRequest) Reset() {
 	*x = IsExtendedLengthApduSupportedRequest{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[16]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -667,7 +1323,7 @@ func (x *IsExtendedLengthApduSupportedRequest) String() string {
 func (*IsExtendedLengthApduSupportedRequest) ProtoMessage() {}
 
 func (x *IsExtendedLengthApduSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[16]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -680,7 +1336,7 @@ func (x *IsExtendedLengthApduSupportedRequest) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use IsExtendedLengthApduSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsExtendedLengthApduSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{16}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{32}
 }
 
 type IsExtendedLengthApduSupportedResponse struct {
@@ -692,7 +1348,7 @@ type IsExtendedLengthApduSupportedResponse struct {
 
 func (x *IsExtendedLengthApduSupportedResponse) Reset() {
 	*x = IsExtendedLengthApduSupportedResponse{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[17]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -704,7 +1360,7 @@ func (x *IsExtendedLengthApduSupportedResponse) String() string {
 func (*IsExtendedLengthApduSupportedResponse) ProtoMessage() {}
 
 func (x *IsExtendedLengthApduSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[17]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -717,7 +1373,7 @@ func (x *IsExtendedLengthApduSupportedResponse) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use IsExtendedLengthApduSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsExtendedLengthApduSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{17}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *IsExtendedLengthApduSupportedResponse) GetResult() bool {
@@ -736,7 +1392,7 @@ type SetTimeoutRequest struct {
 
 func (x *SetTimeoutRequest) Reset() {
 	*x = SetTimeoutRequest{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[18]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -748,7 +1404,7 @@ func (x *SetTimeoutRequest) String() string {
 func (*SetTimeoutRequest) ProtoMessage() {}
 
 func (x *SetTimeoutRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[18]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -761,7 +1417,7 @@ func (x *SetTimeoutRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetTimeoutRequest.ProtoReflect.Descriptor instead.
 func (*SetTimeoutRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{18}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *SetTimeoutRequest) GetArg0() int32 {
@@ -779,7 +1435,7 @@ type SetTimeoutResponse struct {
 
 func (x *SetTimeoutResponse) Reset() {
 	*x = SetTimeoutResponse{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[19]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -791,7 +1447,7 @@ func (x *SetTimeoutResponse) String() string {
 func (*SetTimeoutResponse) ProtoMessage() {}
 
 func (x *SetTimeoutResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[19]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -804,7 +1460,7 @@ func (x *SetTimeoutResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetTimeoutResponse.ProtoReflect.Descriptor instead.
 func (*SetTimeoutResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{19}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{35}
 }
 
 type TransceiveRequest struct {
@@ -816,7 +1472,7 @@ type TransceiveRequest struct {
 
 func (x *TransceiveRequest) Reset() {
 	*x = TransceiveRequest{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[20]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -828,7 +1484,7 @@ func (x *TransceiveRequest) String() string {
 func (*TransceiveRequest) ProtoMessage() {}
 
 func (x *TransceiveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[20]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -841,7 +1497,7 @@ func (x *TransceiveRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransceiveRequest.ProtoReflect.Descriptor instead.
 func (*TransceiveRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{20}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *TransceiveRequest) GetArg0() int64 {
@@ -860,7 +1516,7 @@ type TransceiveResponse struct {
 
 func (x *TransceiveResponse) Reset() {
 	*x = TransceiveResponse{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[21]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -872,7 +1528,7 @@ func (x *TransceiveResponse) String() string {
 func (*TransceiveResponse) ProtoMessage() {}
 
 func (x *TransceiveResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[21]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -885,7 +1541,7 @@ func (x *TransceiveResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransceiveResponse.ProtoReflect.Descriptor instead.
 func (*TransceiveResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{21}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *TransceiveResponse) GetResult() int64 {
@@ -904,7 +1560,7 @@ type GetRequest struct {
 
 func (x *GetRequest) Reset() {
 	*x = GetRequest{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[22]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -916,7 +1572,7 @@ func (x *GetRequest) String() string {
 func (*GetRequest) ProtoMessage() {}
 
 func (x *GetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[22]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -929,7 +1585,7 @@ func (x *GetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRequest.ProtoReflect.Descriptor instead.
 func (*GetRequest) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{22}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *GetRequest) GetArg0() int64 {
@@ -948,7 +1604,7 @@ type GetResponse struct {
 
 func (x *GetResponse) Reset() {
 	*x = GetResponse{}
-	mi := &file_proto_nfc_nfc_proto_msgTypes[23]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -960,7 +1616,7 @@ func (x *GetResponse) String() string {
 func (*GetResponse) ProtoMessage() {}
 
 func (x *GetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_nfc_nfc_proto_msgTypes[23]
+	mi := &file_proto_nfc_nfc_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -973,7 +1629,7 @@ func (x *GetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetResponse.ProtoReflect.Descriptor instead.
 func (*GetResponse) Descriptor() ([]byte, []int) {
-	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{23}
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *GetResponse) GetResult() int64 {
@@ -983,11 +1639,3441 @@ func (x *GetResponse) GetResult() int64 {
 	return 0
 }
 
+type DisableRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisableRequest) Reset() {
+	*x = DisableRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableRequest) ProtoMessage() {}
+
+func (x *DisableRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableRequest.ProtoReflect.Descriptor instead.
+func (*DisableRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{40}
+}
+
+type DisableResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisableResponse) Reset() {
+	*x = DisableResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableResponse) ProtoMessage() {}
+
+func (x *DisableResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableResponse.ProtoReflect.Descriptor instead.
+func (*DisableResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *DisableResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type DisableForegroundDispatchRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisableForegroundDispatchRequest) Reset() {
+	*x = DisableForegroundDispatchRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableForegroundDispatchRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableForegroundDispatchRequest) ProtoMessage() {}
+
+func (x *DisableForegroundDispatchRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableForegroundDispatchRequest.ProtoReflect.Descriptor instead.
+func (*DisableForegroundDispatchRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *DisableForegroundDispatchRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type DisableForegroundDispatchResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisableForegroundDispatchResponse) Reset() {
+	*x = DisableForegroundDispatchResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableForegroundDispatchResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableForegroundDispatchResponse) ProtoMessage() {}
+
+func (x *DisableForegroundDispatchResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableForegroundDispatchResponse.ProtoReflect.Descriptor instead.
+func (*DisableForegroundDispatchResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{43}
+}
+
+type DisableReaderModeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisableReaderModeRequest) Reset() {
+	*x = DisableReaderModeRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableReaderModeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableReaderModeRequest) ProtoMessage() {}
+
+func (x *DisableReaderModeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableReaderModeRequest.ProtoReflect.Descriptor instead.
+func (*DisableReaderModeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *DisableReaderModeRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type DisableReaderModeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisableReaderModeResponse) Reset() {
+	*x = DisableReaderModeResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableReaderModeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableReaderModeResponse) ProtoMessage() {}
+
+func (x *DisableReaderModeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableReaderModeResponse.ProtoReflect.Descriptor instead.
+func (*DisableReaderModeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{45}
+}
+
+type EnableRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnableRequest) Reset() {
+	*x = EnableRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableRequest) ProtoMessage() {}
+
+func (x *EnableRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableRequest.ProtoReflect.Descriptor instead.
+func (*EnableRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{46}
+}
+
+type EnableResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnableResponse) Reset() {
+	*x = EnableResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableResponse) ProtoMessage() {}
+
+func (x *EnableResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableResponse.ProtoReflect.Descriptor instead.
+func (*EnableResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{47}
+}
+
+func (x *EnableResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type EnableForegroundDispatchRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnableForegroundDispatchRequest) Reset() {
+	*x = EnableForegroundDispatchRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableForegroundDispatchRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableForegroundDispatchRequest) ProtoMessage() {}
+
+func (x *EnableForegroundDispatchRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableForegroundDispatchRequest.ProtoReflect.Descriptor instead.
+func (*EnableForegroundDispatchRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *EnableForegroundDispatchRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *EnableForegroundDispatchRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *EnableForegroundDispatchRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+func (x *EnableForegroundDispatchRequest) GetArg3() int64 {
+	if x != nil {
+		return x.Arg3
+	}
+	return 0
+}
+
+type EnableForegroundDispatchResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnableForegroundDispatchResponse) Reset() {
+	*x = EnableForegroundDispatchResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableForegroundDispatchResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableForegroundDispatchResponse) ProtoMessage() {}
+
+func (x *EnableForegroundDispatchResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableForegroundDispatchResponse.ProtoReflect.Descriptor instead.
+func (*EnableForegroundDispatchResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{49}
+}
+
+type EnableReaderModeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int32                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnableReaderModeRequest) Reset() {
+	*x = EnableReaderModeRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableReaderModeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableReaderModeRequest) ProtoMessage() {}
+
+func (x *EnableReaderModeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableReaderModeRequest.ProtoReflect.Descriptor instead.
+func (*EnableReaderModeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *EnableReaderModeRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *EnableReaderModeRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *EnableReaderModeRequest) GetArg2() int32 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+func (x *EnableReaderModeRequest) GetArg3() int64 {
+	if x != nil {
+		return x.Arg3
+	}
+	return 0
+}
+
+type EnableReaderModeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnableReaderModeResponse) Reset() {
+	*x = EnableReaderModeResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableReaderModeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableReaderModeResponse) ProtoMessage() {}
+
+func (x *EnableReaderModeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableReaderModeResponse.ProtoReflect.Descriptor instead.
+func (*EnableReaderModeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{51}
+}
+
+type GetNfcAntennaInfoRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNfcAntennaInfoRequest) Reset() {
+	*x = GetNfcAntennaInfoRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNfcAntennaInfoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNfcAntennaInfoRequest) ProtoMessage() {}
+
+func (x *GetNfcAntennaInfoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNfcAntennaInfoRequest.ProtoReflect.Descriptor instead.
+func (*GetNfcAntennaInfoRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{52}
+}
+
+type GetNfcAntennaInfoResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNfcAntennaInfoResponse) Reset() {
+	*x = GetNfcAntennaInfoResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNfcAntennaInfoResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNfcAntennaInfoResponse) ProtoMessage() {}
+
+func (x *GetNfcAntennaInfoResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNfcAntennaInfoResponse.ProtoReflect.Descriptor instead.
+func (*GetNfcAntennaInfoResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{53}
+}
+
+func (x *GetNfcAntennaInfoResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type IsEnabledRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsEnabledRequest) Reset() {
+	*x = IsEnabledRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsEnabledRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsEnabledRequest) ProtoMessage() {}
+
+func (x *IsEnabledRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsEnabledRequest.ProtoReflect.Descriptor instead.
+func (*IsEnabledRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{54}
+}
+
+type IsEnabledResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsEnabledResponse) Reset() {
+	*x = IsEnabledResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsEnabledResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsEnabledResponse) ProtoMessage() {}
+
+func (x *IsEnabledResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsEnabledResponse.ProtoReflect.Descriptor instead.
+func (*IsEnabledResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{55}
+}
+
+func (x *IsEnabledResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsObserveModeEnabledRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsObserveModeEnabledRequest) Reset() {
+	*x = IsObserveModeEnabledRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[56]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsObserveModeEnabledRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsObserveModeEnabledRequest) ProtoMessage() {}
+
+func (x *IsObserveModeEnabledRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[56]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsObserveModeEnabledRequest.ProtoReflect.Descriptor instead.
+func (*IsObserveModeEnabledRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{56}
+}
+
+type IsObserveModeEnabledResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsObserveModeEnabledResponse) Reset() {
+	*x = IsObserveModeEnabledResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[57]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsObserveModeEnabledResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsObserveModeEnabledResponse) ProtoMessage() {}
+
+func (x *IsObserveModeEnabledResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[57]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsObserveModeEnabledResponse.ProtoReflect.Descriptor instead.
+func (*IsObserveModeEnabledResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{57}
+}
+
+func (x *IsObserveModeEnabledResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsObserveModeSupportedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsObserveModeSupportedRequest) Reset() {
+	*x = IsObserveModeSupportedRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[58]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsObserveModeSupportedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsObserveModeSupportedRequest) ProtoMessage() {}
+
+func (x *IsObserveModeSupportedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[58]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsObserveModeSupportedRequest.ProtoReflect.Descriptor instead.
+func (*IsObserveModeSupportedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{58}
+}
+
+type IsObserveModeSupportedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsObserveModeSupportedResponse) Reset() {
+	*x = IsObserveModeSupportedResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[59]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsObserveModeSupportedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsObserveModeSupportedResponse) ProtoMessage() {}
+
+func (x *IsObserveModeSupportedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[59]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsObserveModeSupportedResponse.ProtoReflect.Descriptor instead.
+func (*IsObserveModeSupportedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{59}
+}
+
+func (x *IsObserveModeSupportedResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsReaderOptionEnabledRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsReaderOptionEnabledRequest) Reset() {
+	*x = IsReaderOptionEnabledRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[60]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsReaderOptionEnabledRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsReaderOptionEnabledRequest) ProtoMessage() {}
+
+func (x *IsReaderOptionEnabledRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[60]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsReaderOptionEnabledRequest.ProtoReflect.Descriptor instead.
+func (*IsReaderOptionEnabledRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{60}
+}
+
+type IsReaderOptionEnabledResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsReaderOptionEnabledResponse) Reset() {
+	*x = IsReaderOptionEnabledResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[61]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsReaderOptionEnabledResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsReaderOptionEnabledResponse) ProtoMessage() {}
+
+func (x *IsReaderOptionEnabledResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[61]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsReaderOptionEnabledResponse.ProtoReflect.Descriptor instead.
+func (*IsReaderOptionEnabledResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{61}
+}
+
+func (x *IsReaderOptionEnabledResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsReaderOptionSupportedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsReaderOptionSupportedRequest) Reset() {
+	*x = IsReaderOptionSupportedRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[62]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsReaderOptionSupportedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsReaderOptionSupportedRequest) ProtoMessage() {}
+
+func (x *IsReaderOptionSupportedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[62]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsReaderOptionSupportedRequest.ProtoReflect.Descriptor instead.
+func (*IsReaderOptionSupportedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{62}
+}
+
+type IsReaderOptionSupportedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsReaderOptionSupportedResponse) Reset() {
+	*x = IsReaderOptionSupportedResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[63]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsReaderOptionSupportedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsReaderOptionSupportedResponse) ProtoMessage() {}
+
+func (x *IsReaderOptionSupportedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[63]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsReaderOptionSupportedResponse.ProtoReflect.Descriptor instead.
+func (*IsReaderOptionSupportedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{63}
+}
+
+func (x *IsReaderOptionSupportedResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsSecureNfcEnabledRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsSecureNfcEnabledRequest) Reset() {
+	*x = IsSecureNfcEnabledRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[64]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsSecureNfcEnabledRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsSecureNfcEnabledRequest) ProtoMessage() {}
+
+func (x *IsSecureNfcEnabledRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[64]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsSecureNfcEnabledRequest.ProtoReflect.Descriptor instead.
+func (*IsSecureNfcEnabledRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{64}
+}
+
+type IsSecureNfcEnabledResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsSecureNfcEnabledResponse) Reset() {
+	*x = IsSecureNfcEnabledResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[65]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsSecureNfcEnabledResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsSecureNfcEnabledResponse) ProtoMessage() {}
+
+func (x *IsSecureNfcEnabledResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[65]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsSecureNfcEnabledResponse.ProtoReflect.Descriptor instead.
+func (*IsSecureNfcEnabledResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{65}
+}
+
+func (x *IsSecureNfcEnabledResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsSecureNfcSupportedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsSecureNfcSupportedRequest) Reset() {
+	*x = IsSecureNfcSupportedRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[66]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsSecureNfcSupportedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsSecureNfcSupportedRequest) ProtoMessage() {}
+
+func (x *IsSecureNfcSupportedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[66]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsSecureNfcSupportedRequest.ProtoReflect.Descriptor instead.
+func (*IsSecureNfcSupportedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{66}
+}
+
+type IsSecureNfcSupportedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsSecureNfcSupportedResponse) Reset() {
+	*x = IsSecureNfcSupportedResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[67]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsSecureNfcSupportedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsSecureNfcSupportedResponse) ProtoMessage() {}
+
+func (x *IsSecureNfcSupportedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[67]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsSecureNfcSupportedResponse.ProtoReflect.Descriptor instead.
+func (*IsSecureNfcSupportedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{67}
+}
+
+func (x *IsSecureNfcSupportedResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsTagIntentAllowedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsTagIntentAllowedRequest) Reset() {
+	*x = IsTagIntentAllowedRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[68]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsTagIntentAllowedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsTagIntentAllowedRequest) ProtoMessage() {}
+
+func (x *IsTagIntentAllowedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[68]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsTagIntentAllowedRequest.ProtoReflect.Descriptor instead.
+func (*IsTagIntentAllowedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{68}
+}
+
+type IsTagIntentAllowedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsTagIntentAllowedResponse) Reset() {
+	*x = IsTagIntentAllowedResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[69]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsTagIntentAllowedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsTagIntentAllowedResponse) ProtoMessage() {}
+
+func (x *IsTagIntentAllowedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[69]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsTagIntentAllowedResponse.ProtoReflect.Descriptor instead.
+func (*IsTagIntentAllowedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{69}
+}
+
+func (x *IsTagIntentAllowedResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsTagIntentAppPreferenceSupportedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsTagIntentAppPreferenceSupportedRequest) Reset() {
+	*x = IsTagIntentAppPreferenceSupportedRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[70]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsTagIntentAppPreferenceSupportedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsTagIntentAppPreferenceSupportedRequest) ProtoMessage() {}
+
+func (x *IsTagIntentAppPreferenceSupportedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[70]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsTagIntentAppPreferenceSupportedRequest.ProtoReflect.Descriptor instead.
+func (*IsTagIntentAppPreferenceSupportedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{70}
+}
+
+type IsTagIntentAppPreferenceSupportedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsTagIntentAppPreferenceSupportedResponse) Reset() {
+	*x = IsTagIntentAppPreferenceSupportedResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[71]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsTagIntentAppPreferenceSupportedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsTagIntentAppPreferenceSupportedResponse) ProtoMessage() {}
+
+func (x *IsTagIntentAppPreferenceSupportedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[71]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsTagIntentAppPreferenceSupportedResponse.ProtoReflect.Descriptor instead.
+func (*IsTagIntentAppPreferenceSupportedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{71}
+}
+
+func (x *IsTagIntentAppPreferenceSupportedResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type ResetDiscoveryTechnologyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResetDiscoveryTechnologyRequest) Reset() {
+	*x = ResetDiscoveryTechnologyRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[72]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResetDiscoveryTechnologyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResetDiscoveryTechnologyRequest) ProtoMessage() {}
+
+func (x *ResetDiscoveryTechnologyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[72]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResetDiscoveryTechnologyRequest.ProtoReflect.Descriptor instead.
+func (*ResetDiscoveryTechnologyRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{72}
+}
+
+func (x *ResetDiscoveryTechnologyRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type ResetDiscoveryTechnologyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResetDiscoveryTechnologyResponse) Reset() {
+	*x = ResetDiscoveryTechnologyResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[73]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResetDiscoveryTechnologyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResetDiscoveryTechnologyResponse) ProtoMessage() {}
+
+func (x *ResetDiscoveryTechnologyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[73]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResetDiscoveryTechnologyResponse.ProtoReflect.Descriptor instead.
+func (*ResetDiscoveryTechnologyResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{73}
+}
+
+type SetDiscoveryTechnologyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int32                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int32                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetDiscoveryTechnologyRequest) Reset() {
+	*x = SetDiscoveryTechnologyRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[74]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetDiscoveryTechnologyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetDiscoveryTechnologyRequest) ProtoMessage() {}
+
+func (x *SetDiscoveryTechnologyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[74]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetDiscoveryTechnologyRequest.ProtoReflect.Descriptor instead.
+func (*SetDiscoveryTechnologyRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{74}
+}
+
+func (x *SetDiscoveryTechnologyRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *SetDiscoveryTechnologyRequest) GetArg1() int32 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *SetDiscoveryTechnologyRequest) GetArg2() int32 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type SetDiscoveryTechnologyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetDiscoveryTechnologyResponse) Reset() {
+	*x = SetDiscoveryTechnologyResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[75]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetDiscoveryTechnologyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetDiscoveryTechnologyResponse) ProtoMessage() {}
+
+func (x *SetDiscoveryTechnologyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[75]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetDiscoveryTechnologyResponse.ProtoReflect.Descriptor instead.
+func (*SetDiscoveryTechnologyResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{75}
+}
+
+type SetObserveModeEnabledRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetObserveModeEnabledRequest) Reset() {
+	*x = SetObserveModeEnabledRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[76]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetObserveModeEnabledRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetObserveModeEnabledRequest) ProtoMessage() {}
+
+func (x *SetObserveModeEnabledRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[76]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetObserveModeEnabledRequest.ProtoReflect.Descriptor instead.
+func (*SetObserveModeEnabledRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{76}
+}
+
+func (x *SetObserveModeEnabledRequest) GetArg0() bool {
+	if x != nil {
+		return x.Arg0
+	}
+	return false
+}
+
+type SetObserveModeEnabledResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetObserveModeEnabledResponse) Reset() {
+	*x = SetObserveModeEnabledResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[77]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetObserveModeEnabledResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetObserveModeEnabledResponse) ProtoMessage() {}
+
+func (x *SetObserveModeEnabledResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[77]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetObserveModeEnabledResponse.ProtoReflect.Descriptor instead.
+func (*SetObserveModeEnabledResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{77}
+}
+
+func (x *SetObserveModeEnabledResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type GetDefaultAdapterRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDefaultAdapterRequest) Reset() {
+	*x = GetDefaultAdapterRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[78]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDefaultAdapterRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDefaultAdapterRequest) ProtoMessage() {}
+
+func (x *GetDefaultAdapterRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[78]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDefaultAdapterRequest.ProtoReflect.Descriptor instead.
+func (*GetDefaultAdapterRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{78}
+}
+
+func (x *GetDefaultAdapterRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type GetDefaultAdapterResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDefaultAdapterResponse) Reset() {
+	*x = GetDefaultAdapterResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[79]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDefaultAdapterResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDefaultAdapterResponse) ProtoMessage() {}
+
+func (x *GetDefaultAdapterResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[79]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDefaultAdapterResponse.ProtoReflect.Descriptor instead.
+func (*GetDefaultAdapterResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{79}
+}
+
+func (x *GetDefaultAdapterResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetIdRequest) Reset() {
+	*x = GetIdRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[80]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetIdRequest) ProtoMessage() {}
+
+func (x *GetIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[80]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetIdRequest.ProtoReflect.Descriptor instead.
+func (*GetIdRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{80}
+}
+
+type GetIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetIdResponse) Reset() {
+	*x = GetIdResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[81]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetIdResponse) ProtoMessage() {}
+
+func (x *GetIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[81]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetIdResponse.ProtoReflect.Descriptor instead.
+func (*GetIdResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{81}
+}
+
+func (x *GetIdResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetTechListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTechListRequest) Reset() {
+	*x = GetTechListRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[82]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTechListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTechListRequest) ProtoMessage() {}
+
+func (x *GetTechListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[82]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTechListRequest.ProtoReflect.Descriptor instead.
+func (*GetTechListRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{82}
+}
+
+type GetTechListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTechListResponse) Reset() {
+	*x = GetTechListResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[83]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTechListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTechListResponse) ProtoMessage() {}
+
+func (x *GetTechListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[83]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTechListResponse.ProtoReflect.Descriptor instead.
+func (*GetTechListResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{83}
+}
+
+func (x *GetTechListResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetPayloadRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPayloadRequest) Reset() {
+	*x = GetPayloadRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[84]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPayloadRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPayloadRequest) ProtoMessage() {}
+
+func (x *GetPayloadRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[84]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPayloadRequest.ProtoReflect.Descriptor instead.
+func (*GetPayloadRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{84}
+}
+
+type GetPayloadResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPayloadResponse) Reset() {
+	*x = GetPayloadResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[85]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPayloadResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPayloadResponse) ProtoMessage() {}
+
+func (x *GetPayloadResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[85]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPayloadResponse.ProtoReflect.Descriptor instead.
+func (*GetPayloadResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{85}
+}
+
+func (x *GetPayloadResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetTnfRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTnfRequest) Reset() {
+	*x = GetTnfRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[86]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTnfRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTnfRequest) ProtoMessage() {}
+
+func (x *GetTnfRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[86]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTnfRequest.ProtoReflect.Descriptor instead.
+func (*GetTnfRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{86}
+}
+
+type GetTnfResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTnfResponse) Reset() {
+	*x = GetTnfResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[87]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTnfResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTnfResponse) ProtoMessage() {}
+
+func (x *GetTnfResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[87]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTnfResponse.ProtoReflect.Descriptor instead.
+func (*GetTnfResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{87}
+}
+
+func (x *GetTnfResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetTypeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTypeRequest) Reset() {
+	*x = GetTypeRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[88]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTypeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTypeRequest) ProtoMessage() {}
+
+func (x *GetTypeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[88]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTypeRequest.ProtoReflect.Descriptor instead.
+func (*GetTypeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{88}
+}
+
+type GetTypeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTypeResponse) Reset() {
+	*x = GetTypeResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[89]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTypeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTypeResponse) ProtoMessage() {}
+
+func (x *GetTypeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[89]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTypeResponse.ProtoReflect.Descriptor instead.
+func (*GetTypeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{89}
+}
+
+func (x *GetTypeResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type ToMimeTypeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToMimeTypeRequest) Reset() {
+	*x = ToMimeTypeRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[90]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToMimeTypeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToMimeTypeRequest) ProtoMessage() {}
+
+func (x *ToMimeTypeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[90]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToMimeTypeRequest.ProtoReflect.Descriptor instead.
+func (*ToMimeTypeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{90}
+}
+
+type ToMimeTypeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToMimeTypeResponse) Reset() {
+	*x = ToMimeTypeResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[91]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToMimeTypeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToMimeTypeResponse) ProtoMessage() {}
+
+func (x *ToMimeTypeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[91]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToMimeTypeResponse.ProtoReflect.Descriptor instead.
+func (*ToMimeTypeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{91}
+}
+
+func (x *ToMimeTypeResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type ToUriRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToUriRequest) Reset() {
+	*x = ToUriRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[92]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToUriRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToUriRequest) ProtoMessage() {}
+
+func (x *ToUriRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[92]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToUriRequest.ProtoReflect.Descriptor instead.
+func (*ToUriRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{92}
+}
+
+type ToUriResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToUriResponse) Reset() {
+	*x = ToUriResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[93]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToUriResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToUriResponse) ProtoMessage() {}
+
+func (x *ToUriResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[93]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToUriResponse.ProtoReflect.Descriptor instead.
+func (*ToUriResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{93}
+}
+
+func (x *ToUriResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type CreateApplicationRecordRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateApplicationRecordRequest) Reset() {
+	*x = CreateApplicationRecordRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[94]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateApplicationRecordRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateApplicationRecordRequest) ProtoMessage() {}
+
+func (x *CreateApplicationRecordRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[94]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateApplicationRecordRequest.ProtoReflect.Descriptor instead.
+func (*CreateApplicationRecordRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{94}
+}
+
+func (x *CreateApplicationRecordRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type CreateApplicationRecordResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateApplicationRecordResponse) Reset() {
+	*x = CreateApplicationRecordResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[95]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateApplicationRecordResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateApplicationRecordResponse) ProtoMessage() {}
+
+func (x *CreateApplicationRecordResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[95]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateApplicationRecordResponse.ProtoReflect.Descriptor instead.
+func (*CreateApplicationRecordResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{95}
+}
+
+func (x *CreateApplicationRecordResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type CreateExternalRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateExternalRequest) Reset() {
+	*x = CreateExternalRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[96]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateExternalRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateExternalRequest) ProtoMessage() {}
+
+func (x *CreateExternalRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[96]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateExternalRequest.ProtoReflect.Descriptor instead.
+func (*CreateExternalRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{96}
+}
+
+func (x *CreateExternalRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+func (x *CreateExternalRequest) GetArg1() string {
+	if x != nil {
+		return x.Arg1
+	}
+	return ""
+}
+
+func (x *CreateExternalRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type CreateExternalResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateExternalResponse) Reset() {
+	*x = CreateExternalResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[97]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateExternalResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateExternalResponse) ProtoMessage() {}
+
+func (x *CreateExternalResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[97]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateExternalResponse.ProtoReflect.Descriptor instead.
+func (*CreateExternalResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{97}
+}
+
+func (x *CreateExternalResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type CreateMimeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateMimeRequest) Reset() {
+	*x = CreateMimeRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[98]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateMimeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateMimeRequest) ProtoMessage() {}
+
+func (x *CreateMimeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[98]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateMimeRequest.ProtoReflect.Descriptor instead.
+func (*CreateMimeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{98}
+}
+
+func (x *CreateMimeRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+func (x *CreateMimeRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type CreateMimeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateMimeResponse) Reset() {
+	*x = CreateMimeResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[99]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateMimeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateMimeResponse) ProtoMessage() {}
+
+func (x *CreateMimeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[99]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateMimeResponse.ProtoReflect.Descriptor instead.
+func (*CreateMimeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{99}
+}
+
+func (x *CreateMimeResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type CreateTextRecordRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          string                 `protobuf:"bytes,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateTextRecordRequest) Reset() {
+	*x = CreateTextRecordRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[100]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateTextRecordRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateTextRecordRequest) ProtoMessage() {}
+
+func (x *CreateTextRecordRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[100]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateTextRecordRequest.ProtoReflect.Descriptor instead.
+func (*CreateTextRecordRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{100}
+}
+
+func (x *CreateTextRecordRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+func (x *CreateTextRecordRequest) GetArg1() string {
+	if x != nil {
+		return x.Arg1
+	}
+	return ""
+}
+
+type CreateTextRecordResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateTextRecordResponse) Reset() {
+	*x = CreateTextRecordResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[101]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateTextRecordResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateTextRecordResponse) ProtoMessage() {}
+
+func (x *CreateTextRecordResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[101]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateTextRecordResponse.ProtoReflect.Descriptor instead.
+func (*CreateTextRecordResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{101}
+}
+
+func (x *CreateTextRecordResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type CreateUri1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateUri1Request) Reset() {
+	*x = CreateUri1Request{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[102]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateUri1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUri1Request) ProtoMessage() {}
+
+func (x *CreateUri1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[102]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUri1Request.ProtoReflect.Descriptor instead.
+func (*CreateUri1Request) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{102}
+}
+
+func (x *CreateUri1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type CreateUri1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateUri1Response) Reset() {
+	*x = CreateUri1Response{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[103]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateUri1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUri1Response) ProtoMessage() {}
+
+func (x *CreateUri1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[103]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUri1Response.ProtoReflect.Descriptor instead.
+func (*CreateUri1Response) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{103}
+}
+
+func (x *CreateUri1Response) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type CreateUri1_1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateUri1_1Request) Reset() {
+	*x = CreateUri1_1Request{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[104]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateUri1_1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUri1_1Request) ProtoMessage() {}
+
+func (x *CreateUri1_1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[104]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUri1_1Request.ProtoReflect.Descriptor instead.
+func (*CreateUri1_1Request) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{104}
+}
+
+func (x *CreateUri1_1Request) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type CreateUri1_1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateUri1_1Response) Reset() {
+	*x = CreateUri1_1Response{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[105]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateUri1_1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUri1_1Response) ProtoMessage() {}
+
+func (x *CreateUri1_1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[105]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUri1_1Response.ProtoReflect.Descriptor instead.
+func (*CreateUri1_1Response) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{105}
+}
+
+func (x *CreateUri1_1Response) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type CanMakeReadOnlyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CanMakeReadOnlyRequest) Reset() {
+	*x = CanMakeReadOnlyRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[106]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CanMakeReadOnlyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CanMakeReadOnlyRequest) ProtoMessage() {}
+
+func (x *CanMakeReadOnlyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[106]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CanMakeReadOnlyRequest.ProtoReflect.Descriptor instead.
+func (*CanMakeReadOnlyRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{106}
+}
+
+type CanMakeReadOnlyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CanMakeReadOnlyResponse) Reset() {
+	*x = CanMakeReadOnlyResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[107]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CanMakeReadOnlyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CanMakeReadOnlyResponse) ProtoMessage() {}
+
+func (x *CanMakeReadOnlyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[107]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CanMakeReadOnlyResponse.ProtoReflect.Descriptor instead.
+func (*CanMakeReadOnlyResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{107}
+}
+
+func (x *CanMakeReadOnlyResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type GetCachedNdefMessageRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetCachedNdefMessageRequest) Reset() {
+	*x = GetCachedNdefMessageRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[108]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCachedNdefMessageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCachedNdefMessageRequest) ProtoMessage() {}
+
+func (x *GetCachedNdefMessageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[108]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCachedNdefMessageRequest.ProtoReflect.Descriptor instead.
+func (*GetCachedNdefMessageRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{108}
+}
+
+type GetCachedNdefMessageResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetCachedNdefMessageResponse) Reset() {
+	*x = GetCachedNdefMessageResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[109]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCachedNdefMessageResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCachedNdefMessageResponse) ProtoMessage() {}
+
+func (x *GetCachedNdefMessageResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[109]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCachedNdefMessageResponse.ProtoReflect.Descriptor instead.
+func (*GetCachedNdefMessageResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{109}
+}
+
+func (x *GetCachedNdefMessageResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetMaxSizeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMaxSizeRequest) Reset() {
+	*x = GetMaxSizeRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[110]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMaxSizeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMaxSizeRequest) ProtoMessage() {}
+
+func (x *GetMaxSizeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[110]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMaxSizeRequest.ProtoReflect.Descriptor instead.
+func (*GetMaxSizeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{110}
+}
+
+type GetMaxSizeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMaxSizeResponse) Reset() {
+	*x = GetMaxSizeResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[111]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMaxSizeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMaxSizeResponse) ProtoMessage() {}
+
+func (x *GetMaxSizeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[111]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMaxSizeResponse.ProtoReflect.Descriptor instead.
+func (*GetMaxSizeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{111}
+}
+
+func (x *GetMaxSizeResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetNdefMessageRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNdefMessageRequest) Reset() {
+	*x = GetNdefMessageRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[112]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNdefMessageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNdefMessageRequest) ProtoMessage() {}
+
+func (x *GetNdefMessageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[112]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNdefMessageRequest.ProtoReflect.Descriptor instead.
+func (*GetNdefMessageRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{112}
+}
+
+type GetNdefMessageResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNdefMessageResponse) Reset() {
+	*x = GetNdefMessageResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[113]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNdefMessageResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNdefMessageResponse) ProtoMessage() {}
+
+func (x *GetNdefMessageResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[113]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNdefMessageResponse.ProtoReflect.Descriptor instead.
+func (*GetNdefMessageResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{113}
+}
+
+func (x *GetNdefMessageResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type NdefGetTypeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NdefGetTypeResponse) Reset() {
+	*x = NdefGetTypeResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[114]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NdefGetTypeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NdefGetTypeResponse) ProtoMessage() {}
+
+func (x *NdefGetTypeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[114]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NdefGetTypeResponse.ProtoReflect.Descriptor instead.
+func (*NdefGetTypeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{114}
+}
+
+func (x *NdefGetTypeResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type IsWritableRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsWritableRequest) Reset() {
+	*x = IsWritableRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[115]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsWritableRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsWritableRequest) ProtoMessage() {}
+
+func (x *IsWritableRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[115]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsWritableRequest.ProtoReflect.Descriptor instead.
+func (*IsWritableRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{115}
+}
+
+type IsWritableResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsWritableResponse) Reset() {
+	*x = IsWritableResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[116]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsWritableResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsWritableResponse) ProtoMessage() {}
+
+func (x *IsWritableResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[116]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsWritableResponse.ProtoReflect.Descriptor instead.
+func (*IsWritableResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{116}
+}
+
+func (x *IsWritableResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type MakeReadOnlyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MakeReadOnlyRequest) Reset() {
+	*x = MakeReadOnlyRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[117]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MakeReadOnlyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MakeReadOnlyRequest) ProtoMessage() {}
+
+func (x *MakeReadOnlyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[117]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MakeReadOnlyRequest.ProtoReflect.Descriptor instead.
+func (*MakeReadOnlyRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{117}
+}
+
+type MakeReadOnlyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MakeReadOnlyResponse) Reset() {
+	*x = MakeReadOnlyResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[118]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MakeReadOnlyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MakeReadOnlyResponse) ProtoMessage() {}
+
+func (x *MakeReadOnlyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[118]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MakeReadOnlyResponse.ProtoReflect.Descriptor instead.
+func (*MakeReadOnlyResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{118}
+}
+
+func (x *MakeReadOnlyResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type WriteNdefMessageRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WriteNdefMessageRequest) Reset() {
+	*x = WriteNdefMessageRequest{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[119]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WriteNdefMessageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WriteNdefMessageRequest) ProtoMessage() {}
+
+func (x *WriteNdefMessageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[119]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WriteNdefMessageRequest.ProtoReflect.Descriptor instead.
+func (*WriteNdefMessageRequest) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{119}
+}
+
+func (x *WriteNdefMessageRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type WriteNdefMessageResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WriteNdefMessageResponse) Reset() {
+	*x = WriteNdefMessageResponse{}
+	mi := &file_proto_nfc_nfc_proto_msgTypes[120]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WriteNdefMessageResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WriteNdefMessageResponse) ProtoMessage() {}
+
+func (x *WriteNdefMessageResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_nfc_nfc_proto_msgTypes[120]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WriteNdefMessageResponse.ProtoReflect.Descriptor instead.
+func (*WriteNdefMessageResponse) Descriptor() ([]byte, []int) {
+	return file_proto_nfc_nfc_proto_rawDescGZIP(), []int{120}
+}
+
 var File_proto_nfc_nfc_proto protoreflect.FileDescriptor
 
 const file_proto_nfc_nfc_proto_rawDesc = "" +
 	"\n" +
-	"\x13proto/nfc/nfc.proto\x12\x03nfc\"\x0e\n" +
+	"\x13proto/nfc/nfc.proto\x12\x03nfc\"\x19\n" +
+	"\x17DescribeContentsRequest\"2\n" +
+	"\x18DescribeContentsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"#\n" +
+	"\rEqualsRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"(\n" +
+	"\x0eEqualsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x1b\n" +
+	"\x19GetByteArrayLengthRequest\"4\n" +
+	"\x1aGetByteArrayLengthResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x13\n" +
+	"\x11GetRecordsRequest\",\n" +
+	"\x12GetRecordsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x11\n" +
+	"\x0fHashCodeRequest\"*\n" +
+	"\x10HashCodeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x14\n" +
+	"\x12ToByteArrayRequest\"-\n" +
+	"\x13ToByteArrayResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x11\n" +
+	"\x0fToStringRequest\"*\n" +
+	"\x10ToStringResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\">\n" +
+	"\x14WriteToParcelRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\"\x17\n" +
+	"\x15WriteToParcelResponse\"\x0e\n" +
 	"\fCloseRequest\"\x0f\n" +
 	"\rCloseResponse\"\x10\n" +
 	"\x0eConnectRequest\"\x11\n" +
@@ -1024,7 +5110,159 @@ const file_proto_nfc_nfc_proto_rawDesc = "" +
 	"GetRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"%\n" +
 	"\vGetResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result2\xda\x06\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x10\n" +
+	"\x0eDisableRequest\")\n" +
+	"\x0fDisableResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"6\n" +
+	" DisableForegroundDispatchRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"#\n" +
+	"!DisableForegroundDispatchResponse\".\n" +
+	"\x18DisableReaderModeRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1b\n" +
+	"\x19DisableReaderModeResponse\"\x0f\n" +
+	"\rEnableRequest\"(\n" +
+	"\x0eEnableResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"q\n" +
+	"\x1fEnableForegroundDispatchRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
+	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"\"\n" +
+	" EnableForegroundDispatchResponse\"i\n" +
+	"\x17EnableReaderModeRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x05R\x04arg2\x12\x12\n" +
+	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"\x1a\n" +
+	"\x18EnableReaderModeResponse\"\x1a\n" +
+	"\x18GetNfcAntennaInfoRequest\"3\n" +
+	"\x19GetNfcAntennaInfoResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x12\n" +
+	"\x10IsEnabledRequest\"+\n" +
+	"\x11IsEnabledResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x1d\n" +
+	"\x1bIsObserveModeEnabledRequest\"6\n" +
+	"\x1cIsObserveModeEnabledResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x1f\n" +
+	"\x1dIsObserveModeSupportedRequest\"8\n" +
+	"\x1eIsObserveModeSupportedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x1e\n" +
+	"\x1cIsReaderOptionEnabledRequest\"7\n" +
+	"\x1dIsReaderOptionEnabledResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\" \n" +
+	"\x1eIsReaderOptionSupportedRequest\"9\n" +
+	"\x1fIsReaderOptionSupportedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x1b\n" +
+	"\x19IsSecureNfcEnabledRequest\"4\n" +
+	"\x1aIsSecureNfcEnabledResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x1d\n" +
+	"\x1bIsSecureNfcSupportedRequest\"6\n" +
+	"\x1cIsSecureNfcSupportedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x1b\n" +
+	"\x19IsTagIntentAllowedRequest\"4\n" +
+	"\x1aIsTagIntentAllowedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"*\n" +
+	"(IsTagIntentAppPreferenceSupportedRequest\"C\n" +
+	")IsTagIntentAppPreferenceSupportedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"5\n" +
+	"\x1fResetDiscoveryTechnologyRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\"\n" +
+	" ResetDiscoveryTechnologyResponse\"[\n" +
+	"\x1dSetDiscoveryTechnologyRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x05R\x04arg2\" \n" +
+	"\x1eSetDiscoveryTechnologyResponse\"2\n" +
+	"\x1cSetObserveModeEnabledRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"7\n" +
+	"\x1dSetObserveModeEnabledResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\".\n" +
+	"\x18GetDefaultAdapterRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"3\n" +
+	"\x19GetDefaultAdapterResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x0e\n" +
+	"\fGetIdRequest\"'\n" +
+	"\rGetIdResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x14\n" +
+	"\x12GetTechListRequest\"-\n" +
+	"\x13GetTechListResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x13\n" +
+	"\x11GetPayloadRequest\",\n" +
+	"\x12GetPayloadResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x0f\n" +
+	"\rGetTnfRequest\"(\n" +
+	"\x0eGetTnfResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x10\n" +
+	"\x0eGetTypeRequest\")\n" +
+	"\x0fGetTypeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x13\n" +
+	"\x11ToMimeTypeRequest\",\n" +
+	"\x12ToMimeTypeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x0e\n" +
+	"\fToUriRequest\"'\n" +
+	"\rToUriResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"4\n" +
+	"\x1eCreateApplicationRecordRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"9\n" +
+	"\x1fCreateApplicationRecordResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"S\n" +
+	"\x15CreateExternalRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\tR\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"0\n" +
+	"\x16CreateExternalResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\";\n" +
+	"\x11CreateMimeRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\",\n" +
+	"\x12CreateMimeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"A\n" +
+	"\x17CreateTextRecordRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\tR\x04arg1\"2\n" +
+	"\x18CreateTextRecordResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"'\n" +
+	"\x11CreateUri1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\",\n" +
+	"\x12CreateUri1Response\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\")\n" +
+	"\x13CreateUri1_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\".\n" +
+	"\x14CreateUri1_1Response\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x18\n" +
+	"\x16CanMakeReadOnlyRequest\"1\n" +
+	"\x17CanMakeReadOnlyResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x1d\n" +
+	"\x1bGetCachedNdefMessageRequest\"6\n" +
+	"\x1cGetCachedNdefMessageResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x13\n" +
+	"\x11GetMaxSizeRequest\",\n" +
+	"\x12GetMaxSizeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x17\n" +
+	"\x15GetNdefMessageRequest\"0\n" +
+	"\x16GetNdefMessageResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"-\n" +
+	"\x13NdefGetTypeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x13\n" +
+	"\x11IsWritableRequest\",\n" +
+	"\x12IsWritableResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x15\n" +
+	"\x13MakeReadOnlyRequest\".\n" +
+	"\x14MakeReadOnlyResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"-\n" +
+	"\x17WriteNdefMessageRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1a\n" +
+	"\x18WriteNdefMessageResponse2\xaa\x04\n" +
+	"\x12NdefMessageService\x12O\n" +
+	"\x10DescribeContents\x12\x1c.nfc.DescribeContentsRequest\x1a\x1d.nfc.DescribeContentsResponse\x121\n" +
+	"\x06Equals\x12\x12.nfc.EqualsRequest\x1a\x13.nfc.EqualsResponse\x12U\n" +
+	"\x12GetByteArrayLength\x12\x1e.nfc.GetByteArrayLengthRequest\x1a\x1f.nfc.GetByteArrayLengthResponse\x12=\n" +
+	"\n" +
+	"GetRecords\x12\x16.nfc.GetRecordsRequest\x1a\x17.nfc.GetRecordsResponse\x127\n" +
+	"\bHashCode\x12\x14.nfc.HashCodeRequest\x1a\x15.nfc.HashCodeResponse\x12@\n" +
+	"\vToByteArray\x12\x17.nfc.ToByteArrayRequest\x1a\x18.nfc.ToByteArrayResponse\x127\n" +
+	"\bToString\x12\x14.nfc.ToStringRequest\x1a\x15.nfc.ToStringResponse\x12F\n" +
+	"\rWriteToParcel\x12\x19.nfc.WriteToParcelRequest\x1a\x1a.nfc.WriteToParcelResponse2\xda\x06\n" +
 	"\rIsoDepService\x12.\n" +
 	"\x05Close\x12\x11.nfc.CloseRequest\x1a\x12.nfc.CloseResponse\x124\n" +
 	"\aConnect\x12\x13.nfc.ConnectRequest\x1a\x14.nfc.ConnectResponse\x12U\n" +
@@ -1040,6 +5278,73 @@ const file_proto_nfc_nfc_proto_rawDesc = "" +
 	"SetTimeout\x12\x16.nfc.SetTimeoutRequest\x1a\x17.nfc.SetTimeoutResponse\x12=\n" +
 	"\n" +
 	"Transceive\x12\x16.nfc.TransceiveRequest\x1a\x17.nfc.TransceiveResponse\x12(\n" +
+	"\x03Get\x12\x0f.nfc.GetRequest\x1a\x10.nfc.GetResponse2\x9c\x0e\n" +
+	"\x11NfcAdapterService\x124\n" +
+	"\aDisable\x12\x13.nfc.DisableRequest\x1a\x14.nfc.DisableResponse\x12j\n" +
+	"\x19DisableForegroundDispatch\x12%.nfc.DisableForegroundDispatchRequest\x1a&.nfc.DisableForegroundDispatchResponse\x12R\n" +
+	"\x11DisableReaderMode\x12\x1d.nfc.DisableReaderModeRequest\x1a\x1e.nfc.DisableReaderModeResponse\x121\n" +
+	"\x06Enable\x12\x12.nfc.EnableRequest\x1a\x13.nfc.EnableResponse\x12g\n" +
+	"\x18EnableForegroundDispatch\x12$.nfc.EnableForegroundDispatchRequest\x1a%.nfc.EnableForegroundDispatchResponse\x12O\n" +
+	"\x10EnableReaderMode\x12\x1c.nfc.EnableReaderModeRequest\x1a\x1d.nfc.EnableReaderModeResponse\x12R\n" +
+	"\x11GetNfcAntennaInfo\x12\x1d.nfc.GetNfcAntennaInfoRequest\x1a\x1e.nfc.GetNfcAntennaInfoResponse\x12:\n" +
+	"\tIsEnabled\x12\x15.nfc.IsEnabledRequest\x1a\x16.nfc.IsEnabledResponse\x12[\n" +
+	"\x14IsObserveModeEnabled\x12 .nfc.IsObserveModeEnabledRequest\x1a!.nfc.IsObserveModeEnabledResponse\x12a\n" +
+	"\x16IsObserveModeSupported\x12\".nfc.IsObserveModeSupportedRequest\x1a#.nfc.IsObserveModeSupportedResponse\x12^\n" +
+	"\x15IsReaderOptionEnabled\x12!.nfc.IsReaderOptionEnabledRequest\x1a\".nfc.IsReaderOptionEnabledResponse\x12d\n" +
+	"\x17IsReaderOptionSupported\x12#.nfc.IsReaderOptionSupportedRequest\x1a$.nfc.IsReaderOptionSupportedResponse\x12U\n" +
+	"\x12IsSecureNfcEnabled\x12\x1e.nfc.IsSecureNfcEnabledRequest\x1a\x1f.nfc.IsSecureNfcEnabledResponse\x12[\n" +
+	"\x14IsSecureNfcSupported\x12 .nfc.IsSecureNfcSupportedRequest\x1a!.nfc.IsSecureNfcSupportedResponse\x12U\n" +
+	"\x12IsTagIntentAllowed\x12\x1e.nfc.IsTagIntentAllowedRequest\x1a\x1f.nfc.IsTagIntentAllowedResponse\x12\x82\x01\n" +
+	"!IsTagIntentAppPreferenceSupported\x12-.nfc.IsTagIntentAppPreferenceSupportedRequest\x1a..nfc.IsTagIntentAppPreferenceSupportedResponse\x12g\n" +
+	"\x18ResetDiscoveryTechnology\x12$.nfc.ResetDiscoveryTechnologyRequest\x1a%.nfc.ResetDiscoveryTechnologyResponse\x12a\n" +
+	"\x16SetDiscoveryTechnology\x12\".nfc.SetDiscoveryTechnologyRequest\x1a#.nfc.SetDiscoveryTechnologyResponse\x12^\n" +
+	"\x15SetObserveModeEnabled\x12!.nfc.SetObserveModeEnabledRequest\x1a\".nfc.SetObserveModeEnabledResponse\x12R\n" +
+	"\x11GetDefaultAdapter\x12\x1d.nfc.GetDefaultAdapterRequest\x1a\x1e.nfc.GetDefaultAdapterResponse2\xd0\x02\n" +
+	"\n" +
+	"TagService\x12O\n" +
+	"\x10DescribeContents\x12\x1c.nfc.DescribeContentsRequest\x1a\x1d.nfc.DescribeContentsResponse\x12.\n" +
+	"\x05GetId\x12\x11.nfc.GetIdRequest\x1a\x12.nfc.GetIdResponse\x12@\n" +
+	"\vGetTechList\x12\x17.nfc.GetTechListRequest\x1a\x18.nfc.GetTechListResponse\x127\n" +
+	"\bToString\x12\x14.nfc.ToStringRequest\x1a\x15.nfc.ToStringResponse\x12F\n" +
+	"\rWriteToParcel\x12\x19.nfc.WriteToParcelRequest\x1a\x1a.nfc.WriteToParcelResponse2\x9f\t\n" +
+	"\x11NdefRecordService\x12O\n" +
+	"\x10DescribeContents\x12\x1c.nfc.DescribeContentsRequest\x1a\x1d.nfc.DescribeContentsResponse\x121\n" +
+	"\x06Equals\x12\x12.nfc.EqualsRequest\x1a\x13.nfc.EqualsResponse\x12.\n" +
+	"\x05GetId\x12\x11.nfc.GetIdRequest\x1a\x12.nfc.GetIdResponse\x12=\n" +
+	"\n" +
+	"GetPayload\x12\x16.nfc.GetPayloadRequest\x1a\x17.nfc.GetPayloadResponse\x121\n" +
+	"\x06GetTnf\x12\x12.nfc.GetTnfRequest\x1a\x13.nfc.GetTnfResponse\x124\n" +
+	"\aGetType\x12\x13.nfc.GetTypeRequest\x1a\x14.nfc.GetTypeResponse\x127\n" +
+	"\bHashCode\x12\x14.nfc.HashCodeRequest\x1a\x15.nfc.HashCodeResponse\x12@\n" +
+	"\vToByteArray\x12\x17.nfc.ToByteArrayRequest\x1a\x18.nfc.ToByteArrayResponse\x12=\n" +
+	"\n" +
+	"ToMimeType\x12\x16.nfc.ToMimeTypeRequest\x1a\x17.nfc.ToMimeTypeResponse\x127\n" +
+	"\bToString\x12\x14.nfc.ToStringRequest\x1a\x15.nfc.ToStringResponse\x12.\n" +
+	"\x05ToUri\x12\x11.nfc.ToUriRequest\x1a\x12.nfc.ToUriResponse\x12F\n" +
+	"\rWriteToParcel\x12\x19.nfc.WriteToParcelRequest\x1a\x1a.nfc.WriteToParcelResponse\x12d\n" +
+	"\x17CreateApplicationRecord\x12#.nfc.CreateApplicationRecordRequest\x1a$.nfc.CreateApplicationRecordResponse\x12I\n" +
+	"\x0eCreateExternal\x12\x1a.nfc.CreateExternalRequest\x1a\x1b.nfc.CreateExternalResponse\x12=\n" +
+	"\n" +
+	"CreateMime\x12\x16.nfc.CreateMimeRequest\x1a\x17.nfc.CreateMimeResponse\x12O\n" +
+	"\x10CreateTextRecord\x12\x1c.nfc.CreateTextRecordRequest\x1a\x1d.nfc.CreateTextRecordResponse\x12=\n" +
+	"\n" +
+	"CreateUri1\x12\x16.nfc.CreateUri1Request\x1a\x17.nfc.CreateUri1Response\x12C\n" +
+	"\fCreateUri1_1\x12\x18.nfc.CreateUri1_1Request\x1a\x19.nfc.CreateUri1_1Response2\xd6\x06\n" +
+	"\vNdefService\x12L\n" +
+	"\x0fCanMakeReadOnly\x12\x1b.nfc.CanMakeReadOnlyRequest\x1a\x1c.nfc.CanMakeReadOnlyResponse\x12.\n" +
+	"\x05Close\x12\x11.nfc.CloseRequest\x1a\x12.nfc.CloseResponse\x124\n" +
+	"\aConnect\x12\x13.nfc.ConnectRequest\x1a\x14.nfc.ConnectResponse\x12[\n" +
+	"\x14GetCachedNdefMessage\x12 .nfc.GetCachedNdefMessageRequest\x1a!.nfc.GetCachedNdefMessageResponse\x12=\n" +
+	"\n" +
+	"GetMaxSize\x12\x16.nfc.GetMaxSizeRequest\x1a\x17.nfc.GetMaxSizeResponse\x12I\n" +
+	"\x0eGetNdefMessage\x12\x1a.nfc.GetNdefMessageRequest\x1a\x1b.nfc.GetNdefMessageResponse\x121\n" +
+	"\x06GetTag\x12\x12.nfc.GetTagRequest\x1a\x13.nfc.GetTagResponse\x128\n" +
+	"\aGetType\x12\x13.nfc.GetTypeRequest\x1a\x18.nfc.NdefGetTypeResponse\x12@\n" +
+	"\vIsConnected\x12\x17.nfc.IsConnectedRequest\x1a\x18.nfc.IsConnectedResponse\x12=\n" +
+	"\n" +
+	"IsWritable\x12\x16.nfc.IsWritableRequest\x1a\x17.nfc.IsWritableResponse\x12C\n" +
+	"\fMakeReadOnly\x12\x18.nfc.MakeReadOnlyRequest\x1a\x19.nfc.MakeReadOnlyResponse\x12O\n" +
+	"\x10WriteNdefMessage\x12\x1c.nfc.WriteNdefMessageRequest\x1a\x1d.nfc.WriteNdefMessageResponse\x12(\n" +
 	"\x03Get\x12\x0f.nfc.GetRequest\x1a\x10.nfc.GetResponseB&Z$github.com/xaionaro-go/jni/proto/nfcb\x06proto3"
 
 var (
@@ -1054,63 +5359,288 @@ func file_proto_nfc_nfc_proto_rawDescGZIP() []byte {
 	return file_proto_nfc_nfc_proto_rawDescData
 }
 
-var file_proto_nfc_nfc_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_proto_nfc_nfc_proto_msgTypes = make([]protoimpl.MessageInfo, 121)
 var file_proto_nfc_nfc_proto_goTypes = []any{
-	(*CloseRequest)(nil),                          // 0: nfc.CloseRequest
-	(*CloseResponse)(nil),                         // 1: nfc.CloseResponse
-	(*ConnectRequest)(nil),                        // 2: nfc.ConnectRequest
-	(*ConnectResponse)(nil),                       // 3: nfc.ConnectResponse
-	(*GetHiLayerResponseRequest)(nil),             // 4: nfc.GetHiLayerResponseRequest
-	(*GetHiLayerResponseResponse)(nil),            // 5: nfc.GetHiLayerResponseResponse
-	(*GetHistoricalBytesRequest)(nil),             // 6: nfc.GetHistoricalBytesRequest
-	(*GetHistoricalBytesResponse)(nil),            // 7: nfc.GetHistoricalBytesResponse
-	(*GetMaxTransceiveLengthRequest)(nil),         // 8: nfc.GetMaxTransceiveLengthRequest
-	(*GetMaxTransceiveLengthResponse)(nil),        // 9: nfc.GetMaxTransceiveLengthResponse
-	(*GetTagRequest)(nil),                         // 10: nfc.GetTagRequest
-	(*GetTagResponse)(nil),                        // 11: nfc.GetTagResponse
-	(*GetTimeoutRequest)(nil),                     // 12: nfc.GetTimeoutRequest
-	(*GetTimeoutResponse)(nil),                    // 13: nfc.GetTimeoutResponse
-	(*IsConnectedRequest)(nil),                    // 14: nfc.IsConnectedRequest
-	(*IsConnectedResponse)(nil),                   // 15: nfc.IsConnectedResponse
-	(*IsExtendedLengthApduSupportedRequest)(nil),  // 16: nfc.IsExtendedLengthApduSupportedRequest
-	(*IsExtendedLengthApduSupportedResponse)(nil), // 17: nfc.IsExtendedLengthApduSupportedResponse
-	(*SetTimeoutRequest)(nil),                     // 18: nfc.SetTimeoutRequest
-	(*SetTimeoutResponse)(nil),                    // 19: nfc.SetTimeoutResponse
-	(*TransceiveRequest)(nil),                     // 20: nfc.TransceiveRequest
-	(*TransceiveResponse)(nil),                    // 21: nfc.TransceiveResponse
-	(*GetRequest)(nil),                            // 22: nfc.GetRequest
-	(*GetResponse)(nil),                           // 23: nfc.GetResponse
+	(*DescribeContentsRequest)(nil),                   // 0: nfc.DescribeContentsRequest
+	(*DescribeContentsResponse)(nil),                  // 1: nfc.DescribeContentsResponse
+	(*EqualsRequest)(nil),                             // 2: nfc.EqualsRequest
+	(*EqualsResponse)(nil),                            // 3: nfc.EqualsResponse
+	(*GetByteArrayLengthRequest)(nil),                 // 4: nfc.GetByteArrayLengthRequest
+	(*GetByteArrayLengthResponse)(nil),                // 5: nfc.GetByteArrayLengthResponse
+	(*GetRecordsRequest)(nil),                         // 6: nfc.GetRecordsRequest
+	(*GetRecordsResponse)(nil),                        // 7: nfc.GetRecordsResponse
+	(*HashCodeRequest)(nil),                           // 8: nfc.HashCodeRequest
+	(*HashCodeResponse)(nil),                          // 9: nfc.HashCodeResponse
+	(*ToByteArrayRequest)(nil),                        // 10: nfc.ToByteArrayRequest
+	(*ToByteArrayResponse)(nil),                       // 11: nfc.ToByteArrayResponse
+	(*ToStringRequest)(nil),                           // 12: nfc.ToStringRequest
+	(*ToStringResponse)(nil),                          // 13: nfc.ToStringResponse
+	(*WriteToParcelRequest)(nil),                      // 14: nfc.WriteToParcelRequest
+	(*WriteToParcelResponse)(nil),                     // 15: nfc.WriteToParcelResponse
+	(*CloseRequest)(nil),                              // 16: nfc.CloseRequest
+	(*CloseResponse)(nil),                             // 17: nfc.CloseResponse
+	(*ConnectRequest)(nil),                            // 18: nfc.ConnectRequest
+	(*ConnectResponse)(nil),                           // 19: nfc.ConnectResponse
+	(*GetHiLayerResponseRequest)(nil),                 // 20: nfc.GetHiLayerResponseRequest
+	(*GetHiLayerResponseResponse)(nil),                // 21: nfc.GetHiLayerResponseResponse
+	(*GetHistoricalBytesRequest)(nil),                 // 22: nfc.GetHistoricalBytesRequest
+	(*GetHistoricalBytesResponse)(nil),                // 23: nfc.GetHistoricalBytesResponse
+	(*GetMaxTransceiveLengthRequest)(nil),             // 24: nfc.GetMaxTransceiveLengthRequest
+	(*GetMaxTransceiveLengthResponse)(nil),            // 25: nfc.GetMaxTransceiveLengthResponse
+	(*GetTagRequest)(nil),                             // 26: nfc.GetTagRequest
+	(*GetTagResponse)(nil),                            // 27: nfc.GetTagResponse
+	(*GetTimeoutRequest)(nil),                         // 28: nfc.GetTimeoutRequest
+	(*GetTimeoutResponse)(nil),                        // 29: nfc.GetTimeoutResponse
+	(*IsConnectedRequest)(nil),                        // 30: nfc.IsConnectedRequest
+	(*IsConnectedResponse)(nil),                       // 31: nfc.IsConnectedResponse
+	(*IsExtendedLengthApduSupportedRequest)(nil),      // 32: nfc.IsExtendedLengthApduSupportedRequest
+	(*IsExtendedLengthApduSupportedResponse)(nil),     // 33: nfc.IsExtendedLengthApduSupportedResponse
+	(*SetTimeoutRequest)(nil),                         // 34: nfc.SetTimeoutRequest
+	(*SetTimeoutResponse)(nil),                        // 35: nfc.SetTimeoutResponse
+	(*TransceiveRequest)(nil),                         // 36: nfc.TransceiveRequest
+	(*TransceiveResponse)(nil),                        // 37: nfc.TransceiveResponse
+	(*GetRequest)(nil),                                // 38: nfc.GetRequest
+	(*GetResponse)(nil),                               // 39: nfc.GetResponse
+	(*DisableRequest)(nil),                            // 40: nfc.DisableRequest
+	(*DisableResponse)(nil),                           // 41: nfc.DisableResponse
+	(*DisableForegroundDispatchRequest)(nil),          // 42: nfc.DisableForegroundDispatchRequest
+	(*DisableForegroundDispatchResponse)(nil),         // 43: nfc.DisableForegroundDispatchResponse
+	(*DisableReaderModeRequest)(nil),                  // 44: nfc.DisableReaderModeRequest
+	(*DisableReaderModeResponse)(nil),                 // 45: nfc.DisableReaderModeResponse
+	(*EnableRequest)(nil),                             // 46: nfc.EnableRequest
+	(*EnableResponse)(nil),                            // 47: nfc.EnableResponse
+	(*EnableForegroundDispatchRequest)(nil),           // 48: nfc.EnableForegroundDispatchRequest
+	(*EnableForegroundDispatchResponse)(nil),          // 49: nfc.EnableForegroundDispatchResponse
+	(*EnableReaderModeRequest)(nil),                   // 50: nfc.EnableReaderModeRequest
+	(*EnableReaderModeResponse)(nil),                  // 51: nfc.EnableReaderModeResponse
+	(*GetNfcAntennaInfoRequest)(nil),                  // 52: nfc.GetNfcAntennaInfoRequest
+	(*GetNfcAntennaInfoResponse)(nil),                 // 53: nfc.GetNfcAntennaInfoResponse
+	(*IsEnabledRequest)(nil),                          // 54: nfc.IsEnabledRequest
+	(*IsEnabledResponse)(nil),                         // 55: nfc.IsEnabledResponse
+	(*IsObserveModeEnabledRequest)(nil),               // 56: nfc.IsObserveModeEnabledRequest
+	(*IsObserveModeEnabledResponse)(nil),              // 57: nfc.IsObserveModeEnabledResponse
+	(*IsObserveModeSupportedRequest)(nil),             // 58: nfc.IsObserveModeSupportedRequest
+	(*IsObserveModeSupportedResponse)(nil),            // 59: nfc.IsObserveModeSupportedResponse
+	(*IsReaderOptionEnabledRequest)(nil),              // 60: nfc.IsReaderOptionEnabledRequest
+	(*IsReaderOptionEnabledResponse)(nil),             // 61: nfc.IsReaderOptionEnabledResponse
+	(*IsReaderOptionSupportedRequest)(nil),            // 62: nfc.IsReaderOptionSupportedRequest
+	(*IsReaderOptionSupportedResponse)(nil),           // 63: nfc.IsReaderOptionSupportedResponse
+	(*IsSecureNfcEnabledRequest)(nil),                 // 64: nfc.IsSecureNfcEnabledRequest
+	(*IsSecureNfcEnabledResponse)(nil),                // 65: nfc.IsSecureNfcEnabledResponse
+	(*IsSecureNfcSupportedRequest)(nil),               // 66: nfc.IsSecureNfcSupportedRequest
+	(*IsSecureNfcSupportedResponse)(nil),              // 67: nfc.IsSecureNfcSupportedResponse
+	(*IsTagIntentAllowedRequest)(nil),                 // 68: nfc.IsTagIntentAllowedRequest
+	(*IsTagIntentAllowedResponse)(nil),                // 69: nfc.IsTagIntentAllowedResponse
+	(*IsTagIntentAppPreferenceSupportedRequest)(nil),  // 70: nfc.IsTagIntentAppPreferenceSupportedRequest
+	(*IsTagIntentAppPreferenceSupportedResponse)(nil), // 71: nfc.IsTagIntentAppPreferenceSupportedResponse
+	(*ResetDiscoveryTechnologyRequest)(nil),           // 72: nfc.ResetDiscoveryTechnologyRequest
+	(*ResetDiscoveryTechnologyResponse)(nil),          // 73: nfc.ResetDiscoveryTechnologyResponse
+	(*SetDiscoveryTechnologyRequest)(nil),             // 74: nfc.SetDiscoveryTechnologyRequest
+	(*SetDiscoveryTechnologyResponse)(nil),            // 75: nfc.SetDiscoveryTechnologyResponse
+	(*SetObserveModeEnabledRequest)(nil),              // 76: nfc.SetObserveModeEnabledRequest
+	(*SetObserveModeEnabledResponse)(nil),             // 77: nfc.SetObserveModeEnabledResponse
+	(*GetDefaultAdapterRequest)(nil),                  // 78: nfc.GetDefaultAdapterRequest
+	(*GetDefaultAdapterResponse)(nil),                 // 79: nfc.GetDefaultAdapterResponse
+	(*GetIdRequest)(nil),                              // 80: nfc.GetIdRequest
+	(*GetIdResponse)(nil),                             // 81: nfc.GetIdResponse
+	(*GetTechListRequest)(nil),                        // 82: nfc.GetTechListRequest
+	(*GetTechListResponse)(nil),                       // 83: nfc.GetTechListResponse
+	(*GetPayloadRequest)(nil),                         // 84: nfc.GetPayloadRequest
+	(*GetPayloadResponse)(nil),                        // 85: nfc.GetPayloadResponse
+	(*GetTnfRequest)(nil),                             // 86: nfc.GetTnfRequest
+	(*GetTnfResponse)(nil),                            // 87: nfc.GetTnfResponse
+	(*GetTypeRequest)(nil),                            // 88: nfc.GetTypeRequest
+	(*GetTypeResponse)(nil),                           // 89: nfc.GetTypeResponse
+	(*ToMimeTypeRequest)(nil),                         // 90: nfc.ToMimeTypeRequest
+	(*ToMimeTypeResponse)(nil),                        // 91: nfc.ToMimeTypeResponse
+	(*ToUriRequest)(nil),                              // 92: nfc.ToUriRequest
+	(*ToUriResponse)(nil),                             // 93: nfc.ToUriResponse
+	(*CreateApplicationRecordRequest)(nil),            // 94: nfc.CreateApplicationRecordRequest
+	(*CreateApplicationRecordResponse)(nil),           // 95: nfc.CreateApplicationRecordResponse
+	(*CreateExternalRequest)(nil),                     // 96: nfc.CreateExternalRequest
+	(*CreateExternalResponse)(nil),                    // 97: nfc.CreateExternalResponse
+	(*CreateMimeRequest)(nil),                         // 98: nfc.CreateMimeRequest
+	(*CreateMimeResponse)(nil),                        // 99: nfc.CreateMimeResponse
+	(*CreateTextRecordRequest)(nil),                   // 100: nfc.CreateTextRecordRequest
+	(*CreateTextRecordResponse)(nil),                  // 101: nfc.CreateTextRecordResponse
+	(*CreateUri1Request)(nil),                         // 102: nfc.CreateUri1Request
+	(*CreateUri1Response)(nil),                        // 103: nfc.CreateUri1Response
+	(*CreateUri1_1Request)(nil),                       // 104: nfc.CreateUri1_1Request
+	(*CreateUri1_1Response)(nil),                      // 105: nfc.CreateUri1_1Response
+	(*CanMakeReadOnlyRequest)(nil),                    // 106: nfc.CanMakeReadOnlyRequest
+	(*CanMakeReadOnlyResponse)(nil),                   // 107: nfc.CanMakeReadOnlyResponse
+	(*GetCachedNdefMessageRequest)(nil),               // 108: nfc.GetCachedNdefMessageRequest
+	(*GetCachedNdefMessageResponse)(nil),              // 109: nfc.GetCachedNdefMessageResponse
+	(*GetMaxSizeRequest)(nil),                         // 110: nfc.GetMaxSizeRequest
+	(*GetMaxSizeResponse)(nil),                        // 111: nfc.GetMaxSizeResponse
+	(*GetNdefMessageRequest)(nil),                     // 112: nfc.GetNdefMessageRequest
+	(*GetNdefMessageResponse)(nil),                    // 113: nfc.GetNdefMessageResponse
+	(*NdefGetTypeResponse)(nil),                       // 114: nfc.NdefGetTypeResponse
+	(*IsWritableRequest)(nil),                         // 115: nfc.IsWritableRequest
+	(*IsWritableResponse)(nil),                        // 116: nfc.IsWritableResponse
+	(*MakeReadOnlyRequest)(nil),                       // 117: nfc.MakeReadOnlyRequest
+	(*MakeReadOnlyResponse)(nil),                      // 118: nfc.MakeReadOnlyResponse
+	(*WriteNdefMessageRequest)(nil),                   // 119: nfc.WriteNdefMessageRequest
+	(*WriteNdefMessageResponse)(nil),                  // 120: nfc.WriteNdefMessageResponse
 }
 var file_proto_nfc_nfc_proto_depIdxs = []int32{
-	0,  // 0: nfc.IsoDepService.Close:input_type -> nfc.CloseRequest
-	2,  // 1: nfc.IsoDepService.Connect:input_type -> nfc.ConnectRequest
-	4,  // 2: nfc.IsoDepService.GetHiLayerResponse:input_type -> nfc.GetHiLayerResponseRequest
-	6,  // 3: nfc.IsoDepService.GetHistoricalBytes:input_type -> nfc.GetHistoricalBytesRequest
-	8,  // 4: nfc.IsoDepService.GetMaxTransceiveLength:input_type -> nfc.GetMaxTransceiveLengthRequest
-	10, // 5: nfc.IsoDepService.GetTag:input_type -> nfc.GetTagRequest
-	12, // 6: nfc.IsoDepService.GetTimeout:input_type -> nfc.GetTimeoutRequest
-	14, // 7: nfc.IsoDepService.IsConnected:input_type -> nfc.IsConnectedRequest
-	16, // 8: nfc.IsoDepService.IsExtendedLengthApduSupported:input_type -> nfc.IsExtendedLengthApduSupportedRequest
-	18, // 9: nfc.IsoDepService.SetTimeout:input_type -> nfc.SetTimeoutRequest
-	20, // 10: nfc.IsoDepService.Transceive:input_type -> nfc.TransceiveRequest
-	22, // 11: nfc.IsoDepService.Get:input_type -> nfc.GetRequest
-	1,  // 12: nfc.IsoDepService.Close:output_type -> nfc.CloseResponse
-	3,  // 13: nfc.IsoDepService.Connect:output_type -> nfc.ConnectResponse
-	5,  // 14: nfc.IsoDepService.GetHiLayerResponse:output_type -> nfc.GetHiLayerResponseResponse
-	7,  // 15: nfc.IsoDepService.GetHistoricalBytes:output_type -> nfc.GetHistoricalBytesResponse
-	9,  // 16: nfc.IsoDepService.GetMaxTransceiveLength:output_type -> nfc.GetMaxTransceiveLengthResponse
-	11, // 17: nfc.IsoDepService.GetTag:output_type -> nfc.GetTagResponse
-	13, // 18: nfc.IsoDepService.GetTimeout:output_type -> nfc.GetTimeoutResponse
-	15, // 19: nfc.IsoDepService.IsConnected:output_type -> nfc.IsConnectedResponse
-	17, // 20: nfc.IsoDepService.IsExtendedLengthApduSupported:output_type -> nfc.IsExtendedLengthApduSupportedResponse
-	19, // 21: nfc.IsoDepService.SetTimeout:output_type -> nfc.SetTimeoutResponse
-	21, // 22: nfc.IsoDepService.Transceive:output_type -> nfc.TransceiveResponse
-	23, // 23: nfc.IsoDepService.Get:output_type -> nfc.GetResponse
-	12, // [12:24] is the sub-list for method output_type
-	0,  // [0:12] is the sub-list for method input_type
-	0,  // [0:0] is the sub-list for extension type_name
-	0,  // [0:0] is the sub-list for extension extendee
-	0,  // [0:0] is the sub-list for field type_name
+	0,   // 0: nfc.NdefMessageService.DescribeContents:input_type -> nfc.DescribeContentsRequest
+	2,   // 1: nfc.NdefMessageService.Equals:input_type -> nfc.EqualsRequest
+	4,   // 2: nfc.NdefMessageService.GetByteArrayLength:input_type -> nfc.GetByteArrayLengthRequest
+	6,   // 3: nfc.NdefMessageService.GetRecords:input_type -> nfc.GetRecordsRequest
+	8,   // 4: nfc.NdefMessageService.HashCode:input_type -> nfc.HashCodeRequest
+	10,  // 5: nfc.NdefMessageService.ToByteArray:input_type -> nfc.ToByteArrayRequest
+	12,  // 6: nfc.NdefMessageService.ToString:input_type -> nfc.ToStringRequest
+	14,  // 7: nfc.NdefMessageService.WriteToParcel:input_type -> nfc.WriteToParcelRequest
+	16,  // 8: nfc.IsoDepService.Close:input_type -> nfc.CloseRequest
+	18,  // 9: nfc.IsoDepService.Connect:input_type -> nfc.ConnectRequest
+	20,  // 10: nfc.IsoDepService.GetHiLayerResponse:input_type -> nfc.GetHiLayerResponseRequest
+	22,  // 11: nfc.IsoDepService.GetHistoricalBytes:input_type -> nfc.GetHistoricalBytesRequest
+	24,  // 12: nfc.IsoDepService.GetMaxTransceiveLength:input_type -> nfc.GetMaxTransceiveLengthRequest
+	26,  // 13: nfc.IsoDepService.GetTag:input_type -> nfc.GetTagRequest
+	28,  // 14: nfc.IsoDepService.GetTimeout:input_type -> nfc.GetTimeoutRequest
+	30,  // 15: nfc.IsoDepService.IsConnected:input_type -> nfc.IsConnectedRequest
+	32,  // 16: nfc.IsoDepService.IsExtendedLengthApduSupported:input_type -> nfc.IsExtendedLengthApduSupportedRequest
+	34,  // 17: nfc.IsoDepService.SetTimeout:input_type -> nfc.SetTimeoutRequest
+	36,  // 18: nfc.IsoDepService.Transceive:input_type -> nfc.TransceiveRequest
+	38,  // 19: nfc.IsoDepService.Get:input_type -> nfc.GetRequest
+	40,  // 20: nfc.NfcAdapterService.Disable:input_type -> nfc.DisableRequest
+	42,  // 21: nfc.NfcAdapterService.DisableForegroundDispatch:input_type -> nfc.DisableForegroundDispatchRequest
+	44,  // 22: nfc.NfcAdapterService.DisableReaderMode:input_type -> nfc.DisableReaderModeRequest
+	46,  // 23: nfc.NfcAdapterService.Enable:input_type -> nfc.EnableRequest
+	48,  // 24: nfc.NfcAdapterService.EnableForegroundDispatch:input_type -> nfc.EnableForegroundDispatchRequest
+	50,  // 25: nfc.NfcAdapterService.EnableReaderMode:input_type -> nfc.EnableReaderModeRequest
+	52,  // 26: nfc.NfcAdapterService.GetNfcAntennaInfo:input_type -> nfc.GetNfcAntennaInfoRequest
+	54,  // 27: nfc.NfcAdapterService.IsEnabled:input_type -> nfc.IsEnabledRequest
+	56,  // 28: nfc.NfcAdapterService.IsObserveModeEnabled:input_type -> nfc.IsObserveModeEnabledRequest
+	58,  // 29: nfc.NfcAdapterService.IsObserveModeSupported:input_type -> nfc.IsObserveModeSupportedRequest
+	60,  // 30: nfc.NfcAdapterService.IsReaderOptionEnabled:input_type -> nfc.IsReaderOptionEnabledRequest
+	62,  // 31: nfc.NfcAdapterService.IsReaderOptionSupported:input_type -> nfc.IsReaderOptionSupportedRequest
+	64,  // 32: nfc.NfcAdapterService.IsSecureNfcEnabled:input_type -> nfc.IsSecureNfcEnabledRequest
+	66,  // 33: nfc.NfcAdapterService.IsSecureNfcSupported:input_type -> nfc.IsSecureNfcSupportedRequest
+	68,  // 34: nfc.NfcAdapterService.IsTagIntentAllowed:input_type -> nfc.IsTagIntentAllowedRequest
+	70,  // 35: nfc.NfcAdapterService.IsTagIntentAppPreferenceSupported:input_type -> nfc.IsTagIntentAppPreferenceSupportedRequest
+	72,  // 36: nfc.NfcAdapterService.ResetDiscoveryTechnology:input_type -> nfc.ResetDiscoveryTechnologyRequest
+	74,  // 37: nfc.NfcAdapterService.SetDiscoveryTechnology:input_type -> nfc.SetDiscoveryTechnologyRequest
+	76,  // 38: nfc.NfcAdapterService.SetObserveModeEnabled:input_type -> nfc.SetObserveModeEnabledRequest
+	78,  // 39: nfc.NfcAdapterService.GetDefaultAdapter:input_type -> nfc.GetDefaultAdapterRequest
+	0,   // 40: nfc.TagService.DescribeContents:input_type -> nfc.DescribeContentsRequest
+	80,  // 41: nfc.TagService.GetId:input_type -> nfc.GetIdRequest
+	82,  // 42: nfc.TagService.GetTechList:input_type -> nfc.GetTechListRequest
+	12,  // 43: nfc.TagService.ToString:input_type -> nfc.ToStringRequest
+	14,  // 44: nfc.TagService.WriteToParcel:input_type -> nfc.WriteToParcelRequest
+	0,   // 45: nfc.NdefRecordService.DescribeContents:input_type -> nfc.DescribeContentsRequest
+	2,   // 46: nfc.NdefRecordService.Equals:input_type -> nfc.EqualsRequest
+	80,  // 47: nfc.NdefRecordService.GetId:input_type -> nfc.GetIdRequest
+	84,  // 48: nfc.NdefRecordService.GetPayload:input_type -> nfc.GetPayloadRequest
+	86,  // 49: nfc.NdefRecordService.GetTnf:input_type -> nfc.GetTnfRequest
+	88,  // 50: nfc.NdefRecordService.GetType:input_type -> nfc.GetTypeRequest
+	8,   // 51: nfc.NdefRecordService.HashCode:input_type -> nfc.HashCodeRequest
+	10,  // 52: nfc.NdefRecordService.ToByteArray:input_type -> nfc.ToByteArrayRequest
+	90,  // 53: nfc.NdefRecordService.ToMimeType:input_type -> nfc.ToMimeTypeRequest
+	12,  // 54: nfc.NdefRecordService.ToString:input_type -> nfc.ToStringRequest
+	92,  // 55: nfc.NdefRecordService.ToUri:input_type -> nfc.ToUriRequest
+	14,  // 56: nfc.NdefRecordService.WriteToParcel:input_type -> nfc.WriteToParcelRequest
+	94,  // 57: nfc.NdefRecordService.CreateApplicationRecord:input_type -> nfc.CreateApplicationRecordRequest
+	96,  // 58: nfc.NdefRecordService.CreateExternal:input_type -> nfc.CreateExternalRequest
+	98,  // 59: nfc.NdefRecordService.CreateMime:input_type -> nfc.CreateMimeRequest
+	100, // 60: nfc.NdefRecordService.CreateTextRecord:input_type -> nfc.CreateTextRecordRequest
+	102, // 61: nfc.NdefRecordService.CreateUri1:input_type -> nfc.CreateUri1Request
+	104, // 62: nfc.NdefRecordService.CreateUri1_1:input_type -> nfc.CreateUri1_1Request
+	106, // 63: nfc.NdefService.CanMakeReadOnly:input_type -> nfc.CanMakeReadOnlyRequest
+	16,  // 64: nfc.NdefService.Close:input_type -> nfc.CloseRequest
+	18,  // 65: nfc.NdefService.Connect:input_type -> nfc.ConnectRequest
+	108, // 66: nfc.NdefService.GetCachedNdefMessage:input_type -> nfc.GetCachedNdefMessageRequest
+	110, // 67: nfc.NdefService.GetMaxSize:input_type -> nfc.GetMaxSizeRequest
+	112, // 68: nfc.NdefService.GetNdefMessage:input_type -> nfc.GetNdefMessageRequest
+	26,  // 69: nfc.NdefService.GetTag:input_type -> nfc.GetTagRequest
+	88,  // 70: nfc.NdefService.GetType:input_type -> nfc.GetTypeRequest
+	30,  // 71: nfc.NdefService.IsConnected:input_type -> nfc.IsConnectedRequest
+	115, // 72: nfc.NdefService.IsWritable:input_type -> nfc.IsWritableRequest
+	117, // 73: nfc.NdefService.MakeReadOnly:input_type -> nfc.MakeReadOnlyRequest
+	119, // 74: nfc.NdefService.WriteNdefMessage:input_type -> nfc.WriteNdefMessageRequest
+	38,  // 75: nfc.NdefService.Get:input_type -> nfc.GetRequest
+	1,   // 76: nfc.NdefMessageService.DescribeContents:output_type -> nfc.DescribeContentsResponse
+	3,   // 77: nfc.NdefMessageService.Equals:output_type -> nfc.EqualsResponse
+	5,   // 78: nfc.NdefMessageService.GetByteArrayLength:output_type -> nfc.GetByteArrayLengthResponse
+	7,   // 79: nfc.NdefMessageService.GetRecords:output_type -> nfc.GetRecordsResponse
+	9,   // 80: nfc.NdefMessageService.HashCode:output_type -> nfc.HashCodeResponse
+	11,  // 81: nfc.NdefMessageService.ToByteArray:output_type -> nfc.ToByteArrayResponse
+	13,  // 82: nfc.NdefMessageService.ToString:output_type -> nfc.ToStringResponse
+	15,  // 83: nfc.NdefMessageService.WriteToParcel:output_type -> nfc.WriteToParcelResponse
+	17,  // 84: nfc.IsoDepService.Close:output_type -> nfc.CloseResponse
+	19,  // 85: nfc.IsoDepService.Connect:output_type -> nfc.ConnectResponse
+	21,  // 86: nfc.IsoDepService.GetHiLayerResponse:output_type -> nfc.GetHiLayerResponseResponse
+	23,  // 87: nfc.IsoDepService.GetHistoricalBytes:output_type -> nfc.GetHistoricalBytesResponse
+	25,  // 88: nfc.IsoDepService.GetMaxTransceiveLength:output_type -> nfc.GetMaxTransceiveLengthResponse
+	27,  // 89: nfc.IsoDepService.GetTag:output_type -> nfc.GetTagResponse
+	29,  // 90: nfc.IsoDepService.GetTimeout:output_type -> nfc.GetTimeoutResponse
+	31,  // 91: nfc.IsoDepService.IsConnected:output_type -> nfc.IsConnectedResponse
+	33,  // 92: nfc.IsoDepService.IsExtendedLengthApduSupported:output_type -> nfc.IsExtendedLengthApduSupportedResponse
+	35,  // 93: nfc.IsoDepService.SetTimeout:output_type -> nfc.SetTimeoutResponse
+	37,  // 94: nfc.IsoDepService.Transceive:output_type -> nfc.TransceiveResponse
+	39,  // 95: nfc.IsoDepService.Get:output_type -> nfc.GetResponse
+	41,  // 96: nfc.NfcAdapterService.Disable:output_type -> nfc.DisableResponse
+	43,  // 97: nfc.NfcAdapterService.DisableForegroundDispatch:output_type -> nfc.DisableForegroundDispatchResponse
+	45,  // 98: nfc.NfcAdapterService.DisableReaderMode:output_type -> nfc.DisableReaderModeResponse
+	47,  // 99: nfc.NfcAdapterService.Enable:output_type -> nfc.EnableResponse
+	49,  // 100: nfc.NfcAdapterService.EnableForegroundDispatch:output_type -> nfc.EnableForegroundDispatchResponse
+	51,  // 101: nfc.NfcAdapterService.EnableReaderMode:output_type -> nfc.EnableReaderModeResponse
+	53,  // 102: nfc.NfcAdapterService.GetNfcAntennaInfo:output_type -> nfc.GetNfcAntennaInfoResponse
+	55,  // 103: nfc.NfcAdapterService.IsEnabled:output_type -> nfc.IsEnabledResponse
+	57,  // 104: nfc.NfcAdapterService.IsObserveModeEnabled:output_type -> nfc.IsObserveModeEnabledResponse
+	59,  // 105: nfc.NfcAdapterService.IsObserveModeSupported:output_type -> nfc.IsObserveModeSupportedResponse
+	61,  // 106: nfc.NfcAdapterService.IsReaderOptionEnabled:output_type -> nfc.IsReaderOptionEnabledResponse
+	63,  // 107: nfc.NfcAdapterService.IsReaderOptionSupported:output_type -> nfc.IsReaderOptionSupportedResponse
+	65,  // 108: nfc.NfcAdapterService.IsSecureNfcEnabled:output_type -> nfc.IsSecureNfcEnabledResponse
+	67,  // 109: nfc.NfcAdapterService.IsSecureNfcSupported:output_type -> nfc.IsSecureNfcSupportedResponse
+	69,  // 110: nfc.NfcAdapterService.IsTagIntentAllowed:output_type -> nfc.IsTagIntentAllowedResponse
+	71,  // 111: nfc.NfcAdapterService.IsTagIntentAppPreferenceSupported:output_type -> nfc.IsTagIntentAppPreferenceSupportedResponse
+	73,  // 112: nfc.NfcAdapterService.ResetDiscoveryTechnology:output_type -> nfc.ResetDiscoveryTechnologyResponse
+	75,  // 113: nfc.NfcAdapterService.SetDiscoveryTechnology:output_type -> nfc.SetDiscoveryTechnologyResponse
+	77,  // 114: nfc.NfcAdapterService.SetObserveModeEnabled:output_type -> nfc.SetObserveModeEnabledResponse
+	79,  // 115: nfc.NfcAdapterService.GetDefaultAdapter:output_type -> nfc.GetDefaultAdapterResponse
+	1,   // 116: nfc.TagService.DescribeContents:output_type -> nfc.DescribeContentsResponse
+	81,  // 117: nfc.TagService.GetId:output_type -> nfc.GetIdResponse
+	83,  // 118: nfc.TagService.GetTechList:output_type -> nfc.GetTechListResponse
+	13,  // 119: nfc.TagService.ToString:output_type -> nfc.ToStringResponse
+	15,  // 120: nfc.TagService.WriteToParcel:output_type -> nfc.WriteToParcelResponse
+	1,   // 121: nfc.NdefRecordService.DescribeContents:output_type -> nfc.DescribeContentsResponse
+	3,   // 122: nfc.NdefRecordService.Equals:output_type -> nfc.EqualsResponse
+	81,  // 123: nfc.NdefRecordService.GetId:output_type -> nfc.GetIdResponse
+	85,  // 124: nfc.NdefRecordService.GetPayload:output_type -> nfc.GetPayloadResponse
+	87,  // 125: nfc.NdefRecordService.GetTnf:output_type -> nfc.GetTnfResponse
+	89,  // 126: nfc.NdefRecordService.GetType:output_type -> nfc.GetTypeResponse
+	9,   // 127: nfc.NdefRecordService.HashCode:output_type -> nfc.HashCodeResponse
+	11,  // 128: nfc.NdefRecordService.ToByteArray:output_type -> nfc.ToByteArrayResponse
+	91,  // 129: nfc.NdefRecordService.ToMimeType:output_type -> nfc.ToMimeTypeResponse
+	13,  // 130: nfc.NdefRecordService.ToString:output_type -> nfc.ToStringResponse
+	93,  // 131: nfc.NdefRecordService.ToUri:output_type -> nfc.ToUriResponse
+	15,  // 132: nfc.NdefRecordService.WriteToParcel:output_type -> nfc.WriteToParcelResponse
+	95,  // 133: nfc.NdefRecordService.CreateApplicationRecord:output_type -> nfc.CreateApplicationRecordResponse
+	97,  // 134: nfc.NdefRecordService.CreateExternal:output_type -> nfc.CreateExternalResponse
+	99,  // 135: nfc.NdefRecordService.CreateMime:output_type -> nfc.CreateMimeResponse
+	101, // 136: nfc.NdefRecordService.CreateTextRecord:output_type -> nfc.CreateTextRecordResponse
+	103, // 137: nfc.NdefRecordService.CreateUri1:output_type -> nfc.CreateUri1Response
+	105, // 138: nfc.NdefRecordService.CreateUri1_1:output_type -> nfc.CreateUri1_1Response
+	107, // 139: nfc.NdefService.CanMakeReadOnly:output_type -> nfc.CanMakeReadOnlyResponse
+	17,  // 140: nfc.NdefService.Close:output_type -> nfc.CloseResponse
+	19,  // 141: nfc.NdefService.Connect:output_type -> nfc.ConnectResponse
+	109, // 142: nfc.NdefService.GetCachedNdefMessage:output_type -> nfc.GetCachedNdefMessageResponse
+	111, // 143: nfc.NdefService.GetMaxSize:output_type -> nfc.GetMaxSizeResponse
+	113, // 144: nfc.NdefService.GetNdefMessage:output_type -> nfc.GetNdefMessageResponse
+	27,  // 145: nfc.NdefService.GetTag:output_type -> nfc.GetTagResponse
+	114, // 146: nfc.NdefService.GetType:output_type -> nfc.NdefGetTypeResponse
+	31,  // 147: nfc.NdefService.IsConnected:output_type -> nfc.IsConnectedResponse
+	116, // 148: nfc.NdefService.IsWritable:output_type -> nfc.IsWritableResponse
+	118, // 149: nfc.NdefService.MakeReadOnly:output_type -> nfc.MakeReadOnlyResponse
+	120, // 150: nfc.NdefService.WriteNdefMessage:output_type -> nfc.WriteNdefMessageResponse
+	39,  // 151: nfc.NdefService.Get:output_type -> nfc.GetResponse
+	76,  // [76:152] is the sub-list for method output_type
+	0,   // [0:76] is the sub-list for method input_type
+	0,   // [0:0] is the sub-list for extension type_name
+	0,   // [0:0] is the sub-list for extension extendee
+	0,   // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_nfc_nfc_proto_init() }
@@ -1124,9 +5654,9 @@ func file_proto_nfc_nfc_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_nfc_nfc_proto_rawDesc), len(file_proto_nfc_nfc_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   24,
+			NumMessages:   121,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   6,
 		},
 		GoTypes:           file_proto_nfc_nfc_proto_goTypes,
 		DependencyIndexes: file_proto_nfc_nfc_proto_depIdxs,

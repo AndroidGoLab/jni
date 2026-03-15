@@ -6,6 +6,674 @@ package bluetooth;
 
 option go_package = "github.com/xaionaro-go/jni/proto/bluetooth";
 
+message CloseRequest {
+}
+
+message CloseResponse {
+}
+
+message ConnectRequest {
+}
+
+message ConnectResponse {
+}
+
+message GetConnectionTypeRequest {
+}
+
+message GetConnectionTypeResponse {
+  int32 result = 1;
+}
+
+message GetInputStreamRequest {
+}
+
+message GetInputStreamResponse {
+  int64 result = 1;
+}
+
+message GetMaxReceivePacketSizeRequest {
+}
+
+message GetMaxReceivePacketSizeResponse {
+  int32 result = 1;
+}
+
+message GetMaxTransmitPacketSizeRequest {
+}
+
+message GetMaxTransmitPacketSizeResponse {
+  int32 result = 1;
+}
+
+message GetOutputStreamRequest {
+}
+
+message GetOutputStreamResponse {
+  int64 result = 1;
+}
+
+message GetRemoteDeviceRequest {
+}
+
+message GetRemoteDeviceResponse {
+  int64 result = 1;
+}
+
+message IsConnectedRequest {
+}
+
+message IsConnectedResponse {
+  bool result = 1;
+}
+
+message ToStringRequest {
+}
+
+message ToStringResponse {
+  string result = 1;
+}
+
+message AbortReliableWrite0Request {
+}
+
+message AbortReliableWrite0Response {
+}
+
+message AbortReliableWrite1_1Request {
+  int64 arg0 = 1;
+}
+
+message AbortReliableWrite1_1Response {
+}
+
+message BeginReliableWriteRequest {
+}
+
+message BeginReliableWriteResponse {
+  bool result = 1;
+}
+
+message BluetoothGattConnectResponse {
+  bool result = 1;
+}
+
+message DisconnectRequest {
+}
+
+message DisconnectResponse {
+}
+
+message DiscoverServicesRequest {
+}
+
+message DiscoverServicesResponse {
+  bool result = 1;
+}
+
+message ExecuteReliableWriteRequest {
+}
+
+message ExecuteReliableWriteResponse {
+  bool result = 1;
+}
+
+message GetConnectedDevicesRequest {
+}
+
+message GetConnectedDevicesResponse {
+  int64 result = 1;
+}
+
+message GetConnectionStateRequest {
+  int64 arg0 = 1;
+}
+
+message GetConnectionStateResponse {
+  int32 result = 1;
+}
+
+message GetDeviceRequest {
+}
+
+message GetDeviceResponse {
+  int64 result = 1;
+}
+
+message GetDevicesMatchingConnectionStatesRequest {
+  int64 arg0 = 1;
+}
+
+message GetDevicesMatchingConnectionStatesResponse {
+  int64 result = 1;
+}
+
+message GetServiceRequest {
+  int64 arg0 = 1;
+}
+
+message GetServiceResponse {
+  int64 result = 1;
+}
+
+message GetServicesRequest {
+}
+
+message GetServicesResponse {
+  int64 result = 1;
+}
+
+message ReadCharacteristicRequest {
+  int64 arg0 = 1;
+}
+
+message ReadCharacteristicResponse {
+  bool result = 1;
+}
+
+message ReadDescriptorRequest {
+  int64 arg0 = 1;
+}
+
+message ReadDescriptorResponse {
+  bool result = 1;
+}
+
+message ReadPhyRequest {
+}
+
+message ReadPhyResponse {
+}
+
+message ReadRemoteRssiRequest {
+}
+
+message ReadRemoteRssiResponse {
+  bool result = 1;
+}
+
+message RequestConnectionPriorityRequest {
+  int32 arg0 = 1;
+}
+
+message RequestConnectionPriorityResponse {
+  bool result = 1;
+}
+
+message RequestMtuRequest {
+  int32 arg0 = 1;
+}
+
+message RequestMtuResponse {
+  bool result = 1;
+}
+
+message SetCharacteristicNotificationRequest {
+  int64 arg0 = 1;
+  bool arg1 = 2;
+}
+
+message SetCharacteristicNotificationResponse {
+  bool result = 1;
+}
+
+message SetPreferredPhyRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message SetPreferredPhyResponse {
+}
+
+message WriteCharacteristic1Request {
+  int64 arg0 = 1;
+}
+
+message WriteCharacteristic1Response {
+  bool result = 1;
+}
+
+message WriteCharacteristic3_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message WriteCharacteristic3_1Response {
+  int32 result = 1;
+}
+
+message WriteDescriptor1Request {
+  int64 arg0 = 1;
+}
+
+message WriteDescriptor1Response {
+  bool result = 1;
+}
+
+message WriteDescriptor2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message WriteDescriptor2_1Response {
+  int32 result = 1;
+}
+
+message AddDescriptorRequest {
+  int64 arg0 = 1;
+}
+
+message AddDescriptorResponse {
+  bool result = 1;
+}
+
+message DescribeContentsRequest {
+}
+
+message DescribeContentsResponse {
+  int32 result = 1;
+}
+
+message GetDescriptorRequest {
+  int64 arg0 = 1;
+}
+
+message GetDescriptorResponse {
+  int64 result = 1;
+}
+
+message GetDescriptorsRequest {
+}
+
+message GetDescriptorsResponse {
+  int64 result = 1;
+}
+
+message GetFloatValueRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message GetFloatValueResponse {
+  int64 result = 1;
+}
+
+message GetInstanceIdRequest {
+}
+
+message GetInstanceIdResponse {
+  int32 result = 1;
+}
+
+message GetIntValueRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message GetIntValueResponse {
+  int64 result = 1;
+}
+
+message GetPermissionsRequest {
+}
+
+message GetPermissionsResponse {
+  int32 result = 1;
+}
+
+message GetPropertiesRequest {
+}
+
+message GetPropertiesResponse {
+  int32 result = 1;
+}
+
+message BluetoothGattCharacteristicGetServiceRequest {
+}
+
+message GetStringValueRequest {
+  int32 arg0 = 1;
+}
+
+message GetStringValueResponse {
+  string result = 1;
+}
+
+message GetUuidRequest {
+}
+
+message GetUuidResponse {
+  int64 result = 1;
+}
+
+message GetValueRequest {
+}
+
+message GetValueResponse {
+  int64 result = 1;
+}
+
+message GetWriteTypeRequest {
+}
+
+message GetWriteTypeResponse {
+  int32 result = 1;
+}
+
+message SetValue1Request {
+  int64 arg0 = 1;
+}
+
+message SetValue1Response {
+  bool result = 1;
+}
+
+message SetValue3_1Request {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message SetValue3_1Response {
+  bool result = 1;
+}
+
+message SetValue4_2Request {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+  int32 arg3 = 4;
+}
+
+message SetValue4_2Response {
+  bool result = 1;
+}
+
+message SetValue1_3Request {
+  string arg0 = 1;
+}
+
+message SetValue1_3Response {
+  bool result = 1;
+}
+
+message SetWriteTypeRequest {
+  int32 arg0 = 1;
+}
+
+message SetWriteTypeResponse {
+}
+
+message WriteToParcelRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message WriteToParcelResponse {
+}
+
+message AddCharacteristicRequest {
+  int64 arg0 = 1;
+}
+
+message AddCharacteristicResponse {
+  bool result = 1;
+}
+
+message AddServiceRequest {
+  int64 arg0 = 1;
+}
+
+message AddServiceResponse {
+  bool result = 1;
+}
+
+message GetCharacteristicRequest {
+  int64 arg0 = 1;
+}
+
+message GetCharacteristicResponse {
+  int64 result = 1;
+}
+
+message GetCharacteristicsRequest {
+}
+
+message GetCharacteristicsResponse {
+  int64 result = 1;
+}
+
+message GetIncludedServicesRequest {
+}
+
+message GetIncludedServicesResponse {
+  int64 result = 1;
+}
+
+message GetTypeRequest {
+}
+
+message GetTypeResponse {
+  int32 result = 1;
+}
+
+message BluetoothGattDescriptorGetCharacteristicRequest {
+}
+
+message SetValueRequest {
+  int64 arg0 = 1;
+}
+
+message SetValueResponse {
+  bool result = 1;
+}
+
+message Accept0Request {
+}
+
+message Accept0Response {
+  int64 result = 1;
+}
+
+message Accept1_1Request {
+  int32 arg0 = 1;
+}
+
+message Accept1_1Response {
+  int64 result = 1;
+}
+
+message GetPsmRequest {
+}
+
+message GetPsmResponse {
+  int32 result = 1;
+}
+
+message ConnectGatt3Request {
+  int64 arg0 = 1;
+  bool arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message ConnectGatt3Response {
+  int64 result = 1;
+}
+
+message ConnectGatt4_1Request {
+  int64 arg0 = 1;
+  bool arg1 = 2;
+  int64 arg2 = 3;
+  int32 arg3 = 4;
+}
+
+message ConnectGatt4_1Response {
+  int64 result = 1;
+}
+
+message ConnectGatt5_2Request {
+  int64 arg0 = 1;
+  bool arg1 = 2;
+  int64 arg2 = 3;
+  int32 arg3 = 4;
+  int32 arg4 = 5;
+}
+
+message ConnectGatt5_2Response {
+  int64 result = 1;
+}
+
+message CreateBondRequest {
+}
+
+message CreateBondResponse {
+  bool result = 1;
+}
+
+message CreateInsecureL2capChannelRequest {
+  int32 arg0 = 1;
+}
+
+message CreateInsecureL2capChannelResponse {
+  int64 result = 1;
+}
+
+message CreateInsecureRfcommSocketToServiceRecordRequest {
+  int64 arg0 = 1;
+}
+
+message CreateInsecureRfcommSocketToServiceRecordResponse {
+  int64 result = 1;
+}
+
+message CreateL2capChannelRequest {
+  int32 arg0 = 1;
+}
+
+message CreateL2capChannelResponse {
+  int64 result = 1;
+}
+
+message CreateRfcommSocketToServiceRecordRequest {
+  int64 arg0 = 1;
+}
+
+message CreateRfcommSocketToServiceRecordResponse {
+  int64 result = 1;
+}
+
+message CreateUsingSocketSettingsRequest {
+  int64 arg0 = 1;
+}
+
+message CreateUsingSocketSettingsResponse {
+  int64 result = 1;
+}
+
+message EqualsRequest {
+  int64 arg0 = 1;
+}
+
+message EqualsResponse {
+  bool result = 1;
+}
+
+message FetchUuidsWithSdpRequest {
+}
+
+message FetchUuidsWithSdpResponse {
+  bool result = 1;
+}
+
+message GetAddressRequest {
+}
+
+message GetAddressResponse {
+  string result = 1;
+}
+
+message GetAddressTypeRequest {
+}
+
+message GetAddressTypeResponse {
+  int32 result = 1;
+}
+
+message GetAliasRequest {
+}
+
+message GetAliasResponse {
+  string result = 1;
+}
+
+message GetBluetoothClassRequest {
+}
+
+message GetBluetoothClassResponse {
+  int64 result = 1;
+}
+
+message GetBondStateRequest {
+}
+
+message GetBondStateResponse {
+  int32 result = 1;
+}
+
+message GetIdentityAddressWithTypeRequest {
+}
+
+message GetIdentityAddressWithTypeResponse {
+  int64 result = 1;
+}
+
+message GetNameRequest {
+}
+
+message GetNameResponse {
+  string result = 1;
+}
+
+message GetUuidsRequest {
+}
+
+message GetUuidsResponse {
+  int64 result = 1;
+}
+
+message HashCodeRequest {
+}
+
+message HashCodeResponse {
+  int32 result = 1;
+}
+
+message SetAliasRequest {
+  string arg0 = 1;
+}
+
+message SetAliasResponse {
+  int32 result = 1;
+}
+
+message SetPairingConfirmationRequest {
+  bool arg0 = 1;
+}
+
+message SetPairingConfirmationResponse {
+  bool result = 1;
+}
+
+message SetPinRequest {
+  int64 arg0 = 1;
+}
+
+message SetPinResponse {
+  bool result = 1;
+}
+
 message CancelDiscoveryRequest {
 }
 
@@ -33,13 +701,6 @@ message EnableRequest {
 
 message EnableResponse {
   bool result = 1;
-}
-
-message GetAddressRequest {
-}
-
-message GetAddressResponse {
-  string result = 1;
 }
 
 message GetBluetoothLeAdvertiserRequest {
@@ -82,13 +743,6 @@ message GetMaxConnectedAudioDevicesRequest {
 
 message GetMaxConnectedAudioDevicesResponse {
   int32 result = 1;
-}
-
-message GetNameRequest {
-}
-
-message GetNameResponse {
-  string result = 1;
 }
 
 message GetProfileConnectionStateRequest {
@@ -319,6 +973,206 @@ message CheckBluetoothAddressResponse {
   bool result = 1;
 }
 
+message CancelConnectionRequest {
+  int64 arg0 = 1;
+}
+
+message CancelConnectionResponse {
+}
+
+message ClearServicesRequest {
+}
+
+message ClearServicesResponse {
+}
+
+message BluetoothGattServerConnectRequest {
+  int64 arg0 = 1;
+  bool arg1 = 2;
+}
+
+message BluetoothGattServerConnectResponse {
+  bool result = 1;
+}
+
+message NotifyCharacteristicChanged3Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  bool arg2 = 3;
+}
+
+message NotifyCharacteristicChanged3Response {
+  bool result = 1;
+}
+
+message NotifyCharacteristicChanged4_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  bool arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message NotifyCharacteristicChanged4_1Response {
+  int32 result = 1;
+}
+
+message BluetoothGattServerReadPhyRequest {
+  int64 arg0 = 1;
+}
+
+message RemoveServiceRequest {
+  int64 arg0 = 1;
+}
+
+message RemoveServiceResponse {
+  bool result = 1;
+}
+
+message SendResponseRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+  int32 arg3 = 4;
+  int64 arg4 = 5;
+}
+
+message SendResponseResponse {
+  bool result = 1;
+}
+
+message BluetoothGattServerSetPreferredPhyRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+  int32 arg3 = 4;
+}
+
+service BluetoothSocketService {
+  rpc Close (CloseRequest) returns (CloseResponse);
+  rpc Connect (ConnectRequest) returns (ConnectResponse);
+  rpc GetConnectionType (GetConnectionTypeRequest) returns (GetConnectionTypeResponse);
+  rpc GetInputStream (GetInputStreamRequest) returns (GetInputStreamResponse);
+  rpc GetMaxReceivePacketSize (GetMaxReceivePacketSizeRequest) returns (GetMaxReceivePacketSizeResponse);
+  rpc GetMaxTransmitPacketSize (GetMaxTransmitPacketSizeRequest) returns (GetMaxTransmitPacketSizeResponse);
+  rpc GetOutputStream (GetOutputStreamRequest) returns (GetOutputStreamResponse);
+  rpc GetRemoteDevice (GetRemoteDeviceRequest) returns (GetRemoteDeviceResponse);
+  rpc IsConnected (IsConnectedRequest) returns (IsConnectedResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+}
+
+service BluetoothGattService {
+  rpc AbortReliableWrite0 (AbortReliableWrite0Request) returns (AbortReliableWrite0Response);
+  rpc AbortReliableWrite1_1 (AbortReliableWrite1_1Request) returns (AbortReliableWrite1_1Response);
+  rpc BeginReliableWrite (BeginReliableWriteRequest) returns (BeginReliableWriteResponse);
+  rpc Close (CloseRequest) returns (CloseResponse);
+  rpc Connect (ConnectRequest) returns (BluetoothGattConnectResponse);
+  rpc Disconnect (DisconnectRequest) returns (DisconnectResponse);
+  rpc DiscoverServices (DiscoverServicesRequest) returns (DiscoverServicesResponse);
+  rpc ExecuteReliableWrite (ExecuteReliableWriteRequest) returns (ExecuteReliableWriteResponse);
+  rpc GetConnectedDevices (GetConnectedDevicesRequest) returns (GetConnectedDevicesResponse);
+  rpc GetConnectionState (GetConnectionStateRequest) returns (GetConnectionStateResponse);
+  rpc GetDevice (GetDeviceRequest) returns (GetDeviceResponse);
+  rpc GetDevicesMatchingConnectionStates (GetDevicesMatchingConnectionStatesRequest) returns (GetDevicesMatchingConnectionStatesResponse);
+  rpc GetService (GetServiceRequest) returns (GetServiceResponse);
+  rpc GetServices (GetServicesRequest) returns (GetServicesResponse);
+  rpc ReadCharacteristic (ReadCharacteristicRequest) returns (ReadCharacteristicResponse);
+  rpc ReadDescriptor (ReadDescriptorRequest) returns (ReadDescriptorResponse);
+  rpc ReadPhy (ReadPhyRequest) returns (ReadPhyResponse);
+  rpc ReadRemoteRssi (ReadRemoteRssiRequest) returns (ReadRemoteRssiResponse);
+  rpc RequestConnectionPriority (RequestConnectionPriorityRequest) returns (RequestConnectionPriorityResponse);
+  rpc RequestMtu (RequestMtuRequest) returns (RequestMtuResponse);
+  rpc SetCharacteristicNotification (SetCharacteristicNotificationRequest) returns (SetCharacteristicNotificationResponse);
+  rpc SetPreferredPhy (SetPreferredPhyRequest) returns (SetPreferredPhyResponse);
+  rpc WriteCharacteristic1 (WriteCharacteristic1Request) returns (WriteCharacteristic1Response);
+  rpc WriteCharacteristic3_1 (WriteCharacteristic3_1Request) returns (WriteCharacteristic3_1Response);
+  rpc WriteDescriptor1 (WriteDescriptor1Request) returns (WriteDescriptor1Response);
+  rpc WriteDescriptor2_1 (WriteDescriptor2_1Request) returns (WriteDescriptor2_1Response);
+}
+
+service BluetoothGattCharacteristicService {
+  rpc AddDescriptor (AddDescriptorRequest) returns (AddDescriptorResponse);
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc GetDescriptor (GetDescriptorRequest) returns (GetDescriptorResponse);
+  rpc GetDescriptors (GetDescriptorsRequest) returns (GetDescriptorsResponse);
+  rpc GetFloatValue (GetFloatValueRequest) returns (GetFloatValueResponse);
+  rpc GetInstanceId (GetInstanceIdRequest) returns (GetInstanceIdResponse);
+  rpc GetIntValue (GetIntValueRequest) returns (GetIntValueResponse);
+  rpc GetPermissions (GetPermissionsRequest) returns (GetPermissionsResponse);
+  rpc GetProperties (GetPropertiesRequest) returns (GetPropertiesResponse);
+  rpc GetService (BluetoothGattCharacteristicGetServiceRequest) returns (GetServiceResponse);
+  rpc GetStringValue (GetStringValueRequest) returns (GetStringValueResponse);
+  rpc GetUuid (GetUuidRequest) returns (GetUuidResponse);
+  rpc GetValue (GetValueRequest) returns (GetValueResponse);
+  rpc GetWriteType (GetWriteTypeRequest) returns (GetWriteTypeResponse);
+  rpc SetValue1 (SetValue1Request) returns (SetValue1Response);
+  rpc SetValue3_1 (SetValue3_1Request) returns (SetValue3_1Response);
+  rpc SetValue4_2 (SetValue4_2Request) returns (SetValue4_2Response);
+  rpc SetValue1_3 (SetValue1_3Request) returns (SetValue1_3Response);
+  rpc SetWriteType (SetWriteTypeRequest) returns (SetWriteTypeResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+}
+
+service BluetoothGattServiceService {
+  rpc AddCharacteristic (AddCharacteristicRequest) returns (AddCharacteristicResponse);
+  rpc AddService (AddServiceRequest) returns (AddServiceResponse);
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc GetCharacteristic (GetCharacteristicRequest) returns (GetCharacteristicResponse);
+  rpc GetCharacteristics (GetCharacteristicsRequest) returns (GetCharacteristicsResponse);
+  rpc GetIncludedServices (GetIncludedServicesRequest) returns (GetIncludedServicesResponse);
+  rpc GetInstanceId (GetInstanceIdRequest) returns (GetInstanceIdResponse);
+  rpc GetType (GetTypeRequest) returns (GetTypeResponse);
+  rpc GetUuid (GetUuidRequest) returns (GetUuidResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+}
+
+service BluetoothGattDescriptorService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc GetCharacteristic (BluetoothGattDescriptorGetCharacteristicRequest) returns (GetCharacteristicResponse);
+  rpc GetPermissions (GetPermissionsRequest) returns (GetPermissionsResponse);
+  rpc GetUuid (GetUuidRequest) returns (GetUuidResponse);
+  rpc GetValue (GetValueRequest) returns (GetValueResponse);
+  rpc SetValue (SetValueRequest) returns (SetValueResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+}
+
+service BluetoothServerSocketService {
+  rpc Accept0 (Accept0Request) returns (Accept0Response);
+  rpc Accept1_1 (Accept1_1Request) returns (Accept1_1Response);
+  rpc Close (CloseRequest) returns (CloseResponse);
+  rpc GetPsm (GetPsmRequest) returns (GetPsmResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+}
+
+service BluetoothDeviceService {
+  rpc ConnectGatt3 (ConnectGatt3Request) returns (ConnectGatt3Response);
+  rpc ConnectGatt4_1 (ConnectGatt4_1Request) returns (ConnectGatt4_1Response);
+  rpc ConnectGatt5_2 (ConnectGatt5_2Request) returns (ConnectGatt5_2Response);
+  rpc CreateBond (CreateBondRequest) returns (CreateBondResponse);
+  rpc CreateInsecureL2capChannel (CreateInsecureL2capChannelRequest) returns (CreateInsecureL2capChannelResponse);
+  rpc CreateInsecureRfcommSocketToServiceRecord (CreateInsecureRfcommSocketToServiceRecordRequest) returns (CreateInsecureRfcommSocketToServiceRecordResponse);
+  rpc CreateL2capChannel (CreateL2capChannelRequest) returns (CreateL2capChannelResponse);
+  rpc CreateRfcommSocketToServiceRecord (CreateRfcommSocketToServiceRecordRequest) returns (CreateRfcommSocketToServiceRecordResponse);
+  rpc CreateUsingSocketSettings (CreateUsingSocketSettingsRequest) returns (CreateUsingSocketSettingsResponse);
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc Equals (EqualsRequest) returns (EqualsResponse);
+  rpc FetchUuidsWithSdp (FetchUuidsWithSdpRequest) returns (FetchUuidsWithSdpResponse);
+  rpc GetAddress (GetAddressRequest) returns (GetAddressResponse);
+  rpc GetAddressType (GetAddressTypeRequest) returns (GetAddressTypeResponse);
+  rpc GetAlias (GetAliasRequest) returns (GetAliasResponse);
+  rpc GetBluetoothClass (GetBluetoothClassRequest) returns (GetBluetoothClassResponse);
+  rpc GetBondState (GetBondStateRequest) returns (GetBondStateResponse);
+  rpc GetIdentityAddressWithType (GetIdentityAddressWithTypeRequest) returns (GetIdentityAddressWithTypeResponse);
+  rpc GetName (GetNameRequest) returns (GetNameResponse);
+  rpc GetType (GetTypeRequest) returns (GetTypeResponse);
+  rpc GetUuids (GetUuidsRequest) returns (GetUuidsResponse);
+  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
+  rpc SetAlias (SetAliasRequest) returns (SetAliasResponse);
+  rpc SetPairingConfirmation (SetPairingConfirmationRequest) returns (SetPairingConfirmationResponse);
+  rpc SetPin (SetPinRequest) returns (SetPinResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+}
+
 service BluetoothAdapterService {
   rpc CancelDiscovery (CancelDiscoveryRequest) returns (CancelDiscoveryResponse);
   rpc CloseProfileProxy (CloseProfileProxyRequest) returns (CloseProfileProxyResponse);
@@ -362,4 +1216,23 @@ service BluetoothAdapterService {
   rpc StartLeScan2_1 (StartLeScan2_1Request) returns (StartLeScan2_1Response);
   rpc StopLeScan (StopLeScanRequest) returns (StopLeScanResponse);
   rpc CheckBluetoothAddress (CheckBluetoothAddressRequest) returns (CheckBluetoothAddressResponse);
+}
+
+service BluetoothGattServerService {
+  rpc AddService (AddServiceRequest) returns (AddServiceResponse);
+  rpc CancelConnection (CancelConnectionRequest) returns (CancelConnectionResponse);
+  rpc ClearServices (ClearServicesRequest) returns (ClearServicesResponse);
+  rpc Close (CloseRequest) returns (CloseResponse);
+  rpc Connect (BluetoothGattServerConnectRequest) returns (BluetoothGattServerConnectResponse);
+  rpc GetConnectedDevices (GetConnectedDevicesRequest) returns (GetConnectedDevicesResponse);
+  rpc GetConnectionState (GetConnectionStateRequest) returns (GetConnectionStateResponse);
+  rpc GetDevicesMatchingConnectionStates (GetDevicesMatchingConnectionStatesRequest) returns (GetDevicesMatchingConnectionStatesResponse);
+  rpc GetService (GetServiceRequest) returns (GetServiceResponse);
+  rpc GetServices (GetServicesRequest) returns (GetServicesResponse);
+  rpc NotifyCharacteristicChanged3 (NotifyCharacteristicChanged3Request) returns (NotifyCharacteristicChanged3Response);
+  rpc NotifyCharacteristicChanged4_1 (NotifyCharacteristicChanged4_1Request) returns (NotifyCharacteristicChanged4_1Response);
+  rpc ReadPhy (BluetoothGattServerReadPhyRequest) returns (ReadPhyResponse);
+  rpc RemoveService (RemoveServiceRequest) returns (RemoveServiceResponse);
+  rpc SendResponse (SendResponseRequest) returns (SendResponseResponse);
+  rpc SetPreferredPhy (BluetoothGattServerSetPreferredPhyRequest) returns (SetPreferredPhyResponse);
 }

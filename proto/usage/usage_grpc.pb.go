@@ -388,3 +388,523 @@ var UsageStatsManagerService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "proto/usage/usage.proto",
 }
+
+const (
+	UsageStatsService_Add_FullMethodName                               = "/usage.UsageStatsService/Add"
+	UsageStatsService_DescribeContents_FullMethodName                  = "/usage.UsageStatsService/DescribeContents"
+	UsageStatsService_GetFirstTimeStamp_FullMethodName                 = "/usage.UsageStatsService/GetFirstTimeStamp"
+	UsageStatsService_GetLastTimeForegroundServiceUsed_FullMethodName  = "/usage.UsageStatsService/GetLastTimeForegroundServiceUsed"
+	UsageStatsService_GetLastTimeStamp_FullMethodName                  = "/usage.UsageStatsService/GetLastTimeStamp"
+	UsageStatsService_GetLastTimeUsed_FullMethodName                   = "/usage.UsageStatsService/GetLastTimeUsed"
+	UsageStatsService_GetLastTimeVisible_FullMethodName                = "/usage.UsageStatsService/GetLastTimeVisible"
+	UsageStatsService_GetPackageName_FullMethodName                    = "/usage.UsageStatsService/GetPackageName"
+	UsageStatsService_GetTotalTimeForegroundServiceUsed_FullMethodName = "/usage.UsageStatsService/GetTotalTimeForegroundServiceUsed"
+	UsageStatsService_GetTotalTimeInForeground_FullMethodName          = "/usage.UsageStatsService/GetTotalTimeInForeground"
+	UsageStatsService_GetTotalTimeVisible_FullMethodName               = "/usage.UsageStatsService/GetTotalTimeVisible"
+	UsageStatsService_WriteToParcel_FullMethodName                     = "/usage.UsageStatsService/WriteToParcel"
+)
+
+// UsageStatsServiceClient is the client API for UsageStatsService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type UsageStatsServiceClient interface {
+	Add(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*AddResponse, error)
+	DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error)
+	GetFirstTimeStamp(ctx context.Context, in *GetFirstTimeStampRequest, opts ...grpc.CallOption) (*GetFirstTimeStampResponse, error)
+	GetLastTimeForegroundServiceUsed(ctx context.Context, in *GetLastTimeForegroundServiceUsedRequest, opts ...grpc.CallOption) (*GetLastTimeForegroundServiceUsedResponse, error)
+	GetLastTimeStamp(ctx context.Context, in *GetLastTimeStampRequest, opts ...grpc.CallOption) (*GetLastTimeStampResponse, error)
+	GetLastTimeUsed(ctx context.Context, in *GetLastTimeUsedRequest, opts ...grpc.CallOption) (*GetLastTimeUsedResponse, error)
+	GetLastTimeVisible(ctx context.Context, in *GetLastTimeVisibleRequest, opts ...grpc.CallOption) (*GetLastTimeVisibleResponse, error)
+	GetPackageName(ctx context.Context, in *GetPackageNameRequest, opts ...grpc.CallOption) (*GetPackageNameResponse, error)
+	GetTotalTimeForegroundServiceUsed(ctx context.Context, in *GetTotalTimeForegroundServiceUsedRequest, opts ...grpc.CallOption) (*GetTotalTimeForegroundServiceUsedResponse, error)
+	GetTotalTimeInForeground(ctx context.Context, in *GetTotalTimeInForegroundRequest, opts ...grpc.CallOption) (*GetTotalTimeInForegroundResponse, error)
+	GetTotalTimeVisible(ctx context.Context, in *GetTotalTimeVisibleRequest, opts ...grpc.CallOption) (*GetTotalTimeVisibleResponse, error)
+	WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error)
+}
+
+type usageStatsServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewUsageStatsServiceClient(cc grpc.ClientConnInterface) UsageStatsServiceClient {
+	return &usageStatsServiceClient{cc}
+}
+
+func (c *usageStatsServiceClient) Add(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*AddResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddResponse)
+	err := c.cc.Invoke(ctx, UsageStatsService_Add_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usageStatsServiceClient) DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DescribeContentsResponse)
+	err := c.cc.Invoke(ctx, UsageStatsService_DescribeContents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usageStatsServiceClient) GetFirstTimeStamp(ctx context.Context, in *GetFirstTimeStampRequest, opts ...grpc.CallOption) (*GetFirstTimeStampResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetFirstTimeStampResponse)
+	err := c.cc.Invoke(ctx, UsageStatsService_GetFirstTimeStamp_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usageStatsServiceClient) GetLastTimeForegroundServiceUsed(ctx context.Context, in *GetLastTimeForegroundServiceUsedRequest, opts ...grpc.CallOption) (*GetLastTimeForegroundServiceUsedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLastTimeForegroundServiceUsedResponse)
+	err := c.cc.Invoke(ctx, UsageStatsService_GetLastTimeForegroundServiceUsed_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usageStatsServiceClient) GetLastTimeStamp(ctx context.Context, in *GetLastTimeStampRequest, opts ...grpc.CallOption) (*GetLastTimeStampResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLastTimeStampResponse)
+	err := c.cc.Invoke(ctx, UsageStatsService_GetLastTimeStamp_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usageStatsServiceClient) GetLastTimeUsed(ctx context.Context, in *GetLastTimeUsedRequest, opts ...grpc.CallOption) (*GetLastTimeUsedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLastTimeUsedResponse)
+	err := c.cc.Invoke(ctx, UsageStatsService_GetLastTimeUsed_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usageStatsServiceClient) GetLastTimeVisible(ctx context.Context, in *GetLastTimeVisibleRequest, opts ...grpc.CallOption) (*GetLastTimeVisibleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLastTimeVisibleResponse)
+	err := c.cc.Invoke(ctx, UsageStatsService_GetLastTimeVisible_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usageStatsServiceClient) GetPackageName(ctx context.Context, in *GetPackageNameRequest, opts ...grpc.CallOption) (*GetPackageNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPackageNameResponse)
+	err := c.cc.Invoke(ctx, UsageStatsService_GetPackageName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usageStatsServiceClient) GetTotalTimeForegroundServiceUsed(ctx context.Context, in *GetTotalTimeForegroundServiceUsedRequest, opts ...grpc.CallOption) (*GetTotalTimeForegroundServiceUsedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTotalTimeForegroundServiceUsedResponse)
+	err := c.cc.Invoke(ctx, UsageStatsService_GetTotalTimeForegroundServiceUsed_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usageStatsServiceClient) GetTotalTimeInForeground(ctx context.Context, in *GetTotalTimeInForegroundRequest, opts ...grpc.CallOption) (*GetTotalTimeInForegroundResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTotalTimeInForegroundResponse)
+	err := c.cc.Invoke(ctx, UsageStatsService_GetTotalTimeInForeground_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usageStatsServiceClient) GetTotalTimeVisible(ctx context.Context, in *GetTotalTimeVisibleRequest, opts ...grpc.CallOption) (*GetTotalTimeVisibleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTotalTimeVisibleResponse)
+	err := c.cc.Invoke(ctx, UsageStatsService_GetTotalTimeVisible_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usageStatsServiceClient) WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteToParcelResponse)
+	err := c.cc.Invoke(ctx, UsageStatsService_WriteToParcel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// UsageStatsServiceServer is the server API for UsageStatsService service.
+// All implementations must embed UnimplementedUsageStatsServiceServer
+// for forward compatibility.
+type UsageStatsServiceServer interface {
+	Add(context.Context, *AddRequest) (*AddResponse, error)
+	DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error)
+	GetFirstTimeStamp(context.Context, *GetFirstTimeStampRequest) (*GetFirstTimeStampResponse, error)
+	GetLastTimeForegroundServiceUsed(context.Context, *GetLastTimeForegroundServiceUsedRequest) (*GetLastTimeForegroundServiceUsedResponse, error)
+	GetLastTimeStamp(context.Context, *GetLastTimeStampRequest) (*GetLastTimeStampResponse, error)
+	GetLastTimeUsed(context.Context, *GetLastTimeUsedRequest) (*GetLastTimeUsedResponse, error)
+	GetLastTimeVisible(context.Context, *GetLastTimeVisibleRequest) (*GetLastTimeVisibleResponse, error)
+	GetPackageName(context.Context, *GetPackageNameRequest) (*GetPackageNameResponse, error)
+	GetTotalTimeForegroundServiceUsed(context.Context, *GetTotalTimeForegroundServiceUsedRequest) (*GetTotalTimeForegroundServiceUsedResponse, error)
+	GetTotalTimeInForeground(context.Context, *GetTotalTimeInForegroundRequest) (*GetTotalTimeInForegroundResponse, error)
+	GetTotalTimeVisible(context.Context, *GetTotalTimeVisibleRequest) (*GetTotalTimeVisibleResponse, error)
+	WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error)
+	mustEmbedUnimplementedUsageStatsServiceServer()
+}
+
+// UnimplementedUsageStatsServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedUsageStatsServiceServer struct{}
+
+func (UnimplementedUsageStatsServiceServer) Add(context.Context, *AddRequest) (*AddResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Add not implemented")
+}
+func (UnimplementedUsageStatsServiceServer) DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DescribeContents not implemented")
+}
+func (UnimplementedUsageStatsServiceServer) GetFirstTimeStamp(context.Context, *GetFirstTimeStampRequest) (*GetFirstTimeStampResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetFirstTimeStamp not implemented")
+}
+func (UnimplementedUsageStatsServiceServer) GetLastTimeForegroundServiceUsed(context.Context, *GetLastTimeForegroundServiceUsedRequest) (*GetLastTimeForegroundServiceUsedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLastTimeForegroundServiceUsed not implemented")
+}
+func (UnimplementedUsageStatsServiceServer) GetLastTimeStamp(context.Context, *GetLastTimeStampRequest) (*GetLastTimeStampResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLastTimeStamp not implemented")
+}
+func (UnimplementedUsageStatsServiceServer) GetLastTimeUsed(context.Context, *GetLastTimeUsedRequest) (*GetLastTimeUsedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLastTimeUsed not implemented")
+}
+func (UnimplementedUsageStatsServiceServer) GetLastTimeVisible(context.Context, *GetLastTimeVisibleRequest) (*GetLastTimeVisibleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLastTimeVisible not implemented")
+}
+func (UnimplementedUsageStatsServiceServer) GetPackageName(context.Context, *GetPackageNameRequest) (*GetPackageNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPackageName not implemented")
+}
+func (UnimplementedUsageStatsServiceServer) GetTotalTimeForegroundServiceUsed(context.Context, *GetTotalTimeForegroundServiceUsedRequest) (*GetTotalTimeForegroundServiceUsedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetTotalTimeForegroundServiceUsed not implemented")
+}
+func (UnimplementedUsageStatsServiceServer) GetTotalTimeInForeground(context.Context, *GetTotalTimeInForegroundRequest) (*GetTotalTimeInForegroundResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetTotalTimeInForeground not implemented")
+}
+func (UnimplementedUsageStatsServiceServer) GetTotalTimeVisible(context.Context, *GetTotalTimeVisibleRequest) (*GetTotalTimeVisibleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetTotalTimeVisible not implemented")
+}
+func (UnimplementedUsageStatsServiceServer) WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteToParcel not implemented")
+}
+func (UnimplementedUsageStatsServiceServer) mustEmbedUnimplementedUsageStatsServiceServer() {}
+func (UnimplementedUsageStatsServiceServer) testEmbeddedByValue()                           {}
+
+// UnsafeUsageStatsServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to UsageStatsServiceServer will
+// result in compilation errors.
+type UnsafeUsageStatsServiceServer interface {
+	mustEmbedUnimplementedUsageStatsServiceServer()
+}
+
+func RegisterUsageStatsServiceServer(s grpc.ServiceRegistrar, srv UsageStatsServiceServer) {
+	// If the following call panics, it indicates UnimplementedUsageStatsServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&UsageStatsService_ServiceDesc, srv)
+}
+
+func _UsageStatsService_Add_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsageStatsServiceServer).Add(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UsageStatsService_Add_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsageStatsServiceServer).Add(ctx, req.(*AddRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UsageStatsService_DescribeContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeContentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsageStatsServiceServer).DescribeContents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UsageStatsService_DescribeContents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsageStatsServiceServer).DescribeContents(ctx, req.(*DescribeContentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UsageStatsService_GetFirstTimeStamp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFirstTimeStampRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsageStatsServiceServer).GetFirstTimeStamp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UsageStatsService_GetFirstTimeStamp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsageStatsServiceServer).GetFirstTimeStamp(ctx, req.(*GetFirstTimeStampRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UsageStatsService_GetLastTimeForegroundServiceUsed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLastTimeForegroundServiceUsedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsageStatsServiceServer).GetLastTimeForegroundServiceUsed(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UsageStatsService_GetLastTimeForegroundServiceUsed_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsageStatsServiceServer).GetLastTimeForegroundServiceUsed(ctx, req.(*GetLastTimeForegroundServiceUsedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UsageStatsService_GetLastTimeStamp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLastTimeStampRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsageStatsServiceServer).GetLastTimeStamp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UsageStatsService_GetLastTimeStamp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsageStatsServiceServer).GetLastTimeStamp(ctx, req.(*GetLastTimeStampRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UsageStatsService_GetLastTimeUsed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLastTimeUsedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsageStatsServiceServer).GetLastTimeUsed(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UsageStatsService_GetLastTimeUsed_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsageStatsServiceServer).GetLastTimeUsed(ctx, req.(*GetLastTimeUsedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UsageStatsService_GetLastTimeVisible_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLastTimeVisibleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsageStatsServiceServer).GetLastTimeVisible(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UsageStatsService_GetLastTimeVisible_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsageStatsServiceServer).GetLastTimeVisible(ctx, req.(*GetLastTimeVisibleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UsageStatsService_GetPackageName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPackageNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsageStatsServiceServer).GetPackageName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UsageStatsService_GetPackageName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsageStatsServiceServer).GetPackageName(ctx, req.(*GetPackageNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UsageStatsService_GetTotalTimeForegroundServiceUsed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTotalTimeForegroundServiceUsedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsageStatsServiceServer).GetTotalTimeForegroundServiceUsed(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UsageStatsService_GetTotalTimeForegroundServiceUsed_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsageStatsServiceServer).GetTotalTimeForegroundServiceUsed(ctx, req.(*GetTotalTimeForegroundServiceUsedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UsageStatsService_GetTotalTimeInForeground_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTotalTimeInForegroundRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsageStatsServiceServer).GetTotalTimeInForeground(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UsageStatsService_GetTotalTimeInForeground_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsageStatsServiceServer).GetTotalTimeInForeground(ctx, req.(*GetTotalTimeInForegroundRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UsageStatsService_GetTotalTimeVisible_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTotalTimeVisibleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsageStatsServiceServer).GetTotalTimeVisible(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UsageStatsService_GetTotalTimeVisible_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsageStatsServiceServer).GetTotalTimeVisible(ctx, req.(*GetTotalTimeVisibleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UsageStatsService_WriteToParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteToParcelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsageStatsServiceServer).WriteToParcel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UsageStatsService_WriteToParcel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsageStatsServiceServer).WriteToParcel(ctx, req.(*WriteToParcelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// UsageStatsService_ServiceDesc is the grpc.ServiceDesc for UsageStatsService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var UsageStatsService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "usage.UsageStatsService",
+	HandlerType: (*UsageStatsServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Add",
+			Handler:    _UsageStatsService_Add_Handler,
+		},
+		{
+			MethodName: "DescribeContents",
+			Handler:    _UsageStatsService_DescribeContents_Handler,
+		},
+		{
+			MethodName: "GetFirstTimeStamp",
+			Handler:    _UsageStatsService_GetFirstTimeStamp_Handler,
+		},
+		{
+			MethodName: "GetLastTimeForegroundServiceUsed",
+			Handler:    _UsageStatsService_GetLastTimeForegroundServiceUsed_Handler,
+		},
+		{
+			MethodName: "GetLastTimeStamp",
+			Handler:    _UsageStatsService_GetLastTimeStamp_Handler,
+		},
+		{
+			MethodName: "GetLastTimeUsed",
+			Handler:    _UsageStatsService_GetLastTimeUsed_Handler,
+		},
+		{
+			MethodName: "GetLastTimeVisible",
+			Handler:    _UsageStatsService_GetLastTimeVisible_Handler,
+		},
+		{
+			MethodName: "GetPackageName",
+			Handler:    _UsageStatsService_GetPackageName_Handler,
+		},
+		{
+			MethodName: "GetTotalTimeForegroundServiceUsed",
+			Handler:    _UsageStatsService_GetTotalTimeForegroundServiceUsed_Handler,
+		},
+		{
+			MethodName: "GetTotalTimeInForeground",
+			Handler:    _UsageStatsService_GetTotalTimeInForeground_Handler,
+		},
+		{
+			MethodName: "GetTotalTimeVisible",
+			Handler:    _UsageStatsService_GetTotalTimeVisible_Handler,
+		},
+		{
+			MethodName: "WriteToParcel",
+			Handler:    _UsageStatsService_WriteToParcel_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/usage/usage.proto",
+}

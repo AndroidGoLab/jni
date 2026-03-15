@@ -249,7 +249,7 @@ func (c *Client) GetLastKnownLocation(ctx context.Context, arg0 string) (int64, 
 
 // GetProvider calls the GetProvider RPC.
 func (c *Client) GetProvider(ctx context.Context, arg0 string) (int64, error) {
-	resp, err := c.svc.GetProvider(ctx, &pb.GetProviderRequest{
+	resp, err := c.svc.GetProvider(ctx, &pb.LocationManagerGetProviderRequest{
 		Arg0: arg0,
 	})
 	if err != nil {

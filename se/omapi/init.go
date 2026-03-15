@@ -20,6 +20,29 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clschannel                  *jni.GlobalRef
+	midchannelClose             jni.MethodID
+	midchannelGetSelectResponse jni.MethodID
+	midchannelGetSession        jni.MethodID
+	midchannelIsBasicChannel    jni.MethodID
+	midchannelIsOpen            jni.MethodID
+	midchannelSelectNext        jni.MethodID
+	midchannelTransmit          jni.MethodID
+
+	clsreader                       *jni.GlobalRef
+	midreaderCloseSessions          jni.MethodID
+	midreaderGetName                jni.MethodID
+	midreaderGetSEService           jni.MethodID
+	midreaderIsSecureElementPresent jni.MethodID
+	midreaderOpenSession            jni.MethodID
+
+	clssEService              *jni.GlobalRef
+	midsEServiceGetReaders    jni.MethodID
+	midsEServiceGetUiccReader jni.MethodID
+	midsEServiceGetVersion    jni.MethodID
+	midsEServiceIsConnected   jni.MethodID
+	midsEServiceShutdown      jni.MethodID
+
 	clssession                      *jni.GlobalRef
 	midsessionClose                 jni.MethodID
 	midsessionCloseChannels         jni.MethodID
@@ -55,6 +78,160 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/se/omapi/Channel")
+	if err != nil {
+		return fmt.Errorf("find class android.se.omapi.Channel: %w", err)
+	}
+	clschannel = env.NewGlobalRef(&c.Object)
+
+	midchannelClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clschannel)), "close", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.Channel.close")
+	}
+
+	midchannelGetSelectResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clschannel)), "getSelectResponse", "()[B")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.Channel.getSelectResponse")
+	}
+
+	midchannelGetSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clschannel)), "getSession", "()Landroid/se/omapi/Session;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.Channel.getSession")
+	}
+
+	midchannelIsBasicChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clschannel)), "isBasicChannel", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.Channel.isBasicChannel")
+	}
+
+	midchannelIsOpen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clschannel)), "isOpen", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.Channel.isOpen")
+	}
+
+	midchannelSelectNext, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clschannel)), "selectNext", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.Channel.selectNext")
+	}
+
+	midchannelTransmit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clschannel)), "transmit", "([B)[B")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.Channel.transmit")
+	}
+
+	c, err = env.FindClass("android/se/omapi/Reader")
+	if err != nil {
+		return fmt.Errorf("find class android.se.omapi.Reader: %w", err)
+	}
+	clsreader = env.NewGlobalRef(&c.Object)
+
+	midreaderCloseSessions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsreader)), "closeSessions", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.Reader.closeSessions")
+	}
+
+	midreaderGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsreader)), "getName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.Reader.getName")
+	}
+
+	midreaderGetSEService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsreader)), "getSEService", "()Landroid/se/omapi/SEService;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.Reader.getSEService")
+	}
+
+	midreaderIsSecureElementPresent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsreader)), "isSecureElementPresent", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.Reader.isSecureElementPresent")
+	}
+
+	midreaderOpenSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsreader)), "openSession", "()Landroid/se/omapi/Session;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.Reader.openSession")
+	}
+
+	c, err = env.FindClass("android/se/omapi/SEService")
+	if err != nil {
+		return fmt.Errorf("find class android.se.omapi.SEService: %w", err)
+	}
+	clssEService = env.NewGlobalRef(&c.Object)
+
+	midsEServiceGetReaders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clssEService)), "getReaders", "()[Landroid/se/omapi/Reader;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.SEService.getReaders")
+	}
+
+	midsEServiceGetUiccReader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clssEService)), "getUiccReader", "(I)Landroid/se/omapi/Reader;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.SEService.getUiccReader")
+	}
+
+	midsEServiceGetVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clssEService)), "getVersion", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.SEService.getVersion")
+	}
+
+	midsEServiceIsConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clssEService)), "isConnected", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.SEService.isConnected")
+	}
+
+	midsEServiceShutdown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clssEService)), "shutdown", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.se.omapi.SEService.shutdown")
+	}
 
 	c, err = env.FindClass("android/se/omapi/Session")
 	if err != nil {

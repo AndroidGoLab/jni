@@ -367,6 +367,2070 @@ func (x *GetStringsResponse) GetResult() int64 {
 	return 0
 }
 
+type Authenticate4Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	Arg3          int64                  `protobuf:"varint,4,opt,name=arg3,proto3" json:"arg3,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Authenticate4Request) Reset() {
+	*x = Authenticate4Request{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Authenticate4Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Authenticate4Request) ProtoMessage() {}
+
+func (x *Authenticate4Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Authenticate4Request.ProtoReflect.Descriptor instead.
+func (*Authenticate4Request) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Authenticate4Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *Authenticate4Request) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *Authenticate4Request) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+func (x *Authenticate4Request) GetArg3() int64 {
+	if x != nil {
+		return x.Arg3
+	}
+	return 0
+}
+
+type Authenticate4Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Authenticate4Response) Reset() {
+	*x = Authenticate4Response{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Authenticate4Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Authenticate4Response) ProtoMessage() {}
+
+func (x *Authenticate4Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Authenticate4Response.ProtoReflect.Descriptor instead.
+func (*Authenticate4Response) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{9}
+}
+
+type Authenticate3_1Request struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Authenticate3_1Request) Reset() {
+	*x = Authenticate3_1Request{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Authenticate3_1Request) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Authenticate3_1Request) ProtoMessage() {}
+
+func (x *Authenticate3_1Request) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Authenticate3_1Request.ProtoReflect.Descriptor instead.
+func (*Authenticate3_1Request) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *Authenticate3_1Request) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *Authenticate3_1Request) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *Authenticate3_1Request) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type Authenticate3_1Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Authenticate3_1Response) Reset() {
+	*x = Authenticate3_1Response{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Authenticate3_1Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Authenticate3_1Response) ProtoMessage() {}
+
+func (x *Authenticate3_1Response) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Authenticate3_1Response.ProtoReflect.Descriptor instead.
+func (*Authenticate3_1Response) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{11}
+}
+
+type GetAllowedAuthenticatorsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAllowedAuthenticatorsRequest) Reset() {
+	*x = GetAllowedAuthenticatorsRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAllowedAuthenticatorsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAllowedAuthenticatorsRequest) ProtoMessage() {}
+
+func (x *GetAllowedAuthenticatorsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAllowedAuthenticatorsRequest.ProtoReflect.Descriptor instead.
+func (*GetAllowedAuthenticatorsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{12}
+}
+
+type GetAllowedAuthenticatorsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAllowedAuthenticatorsResponse) Reset() {
+	*x = GetAllowedAuthenticatorsResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAllowedAuthenticatorsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAllowedAuthenticatorsResponse) ProtoMessage() {}
+
+func (x *GetAllowedAuthenticatorsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAllowedAuthenticatorsResponse.ProtoReflect.Descriptor instead.
+func (*GetAllowedAuthenticatorsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GetAllowedAuthenticatorsResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetContentViewRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetContentViewRequest) Reset() {
+	*x = GetContentViewRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetContentViewRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetContentViewRequest) ProtoMessage() {}
+
+func (x *GetContentViewRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetContentViewRequest.ProtoReflect.Descriptor instead.
+func (*GetContentViewRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{14}
+}
+
+type GetContentViewResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetContentViewResponse) Reset() {
+	*x = GetContentViewResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetContentViewResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetContentViewResponse) ProtoMessage() {}
+
+func (x *GetContentViewResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetContentViewResponse.ProtoReflect.Descriptor instead.
+func (*GetContentViewResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *GetContentViewResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetDescriptionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDescriptionRequest) Reset() {
+	*x = GetDescriptionRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDescriptionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDescriptionRequest) ProtoMessage() {}
+
+func (x *GetDescriptionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDescriptionRequest.ProtoReflect.Descriptor instead.
+func (*GetDescriptionRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{16}
+}
+
+type GetDescriptionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDescriptionResponse) Reset() {
+	*x = GetDescriptionResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDescriptionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDescriptionResponse) ProtoMessage() {}
+
+func (x *GetDescriptionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDescriptionResponse.ProtoReflect.Descriptor instead.
+func (*GetDescriptionResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *GetDescriptionResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetLogoBitmapRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLogoBitmapRequest) Reset() {
+	*x = GetLogoBitmapRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLogoBitmapRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLogoBitmapRequest) ProtoMessage() {}
+
+func (x *GetLogoBitmapRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLogoBitmapRequest.ProtoReflect.Descriptor instead.
+func (*GetLogoBitmapRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{18}
+}
+
+type GetLogoBitmapResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLogoBitmapResponse) Reset() {
+	*x = GetLogoBitmapResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLogoBitmapResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLogoBitmapResponse) ProtoMessage() {}
+
+func (x *GetLogoBitmapResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLogoBitmapResponse.ProtoReflect.Descriptor instead.
+func (*GetLogoBitmapResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *GetLogoBitmapResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetLogoDescriptionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLogoDescriptionRequest) Reset() {
+	*x = GetLogoDescriptionRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLogoDescriptionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLogoDescriptionRequest) ProtoMessage() {}
+
+func (x *GetLogoDescriptionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLogoDescriptionRequest.ProtoReflect.Descriptor instead.
+func (*GetLogoDescriptionRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{20}
+}
+
+type GetLogoDescriptionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLogoDescriptionResponse) Reset() {
+	*x = GetLogoDescriptionResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLogoDescriptionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLogoDescriptionResponse) ProtoMessage() {}
+
+func (x *GetLogoDescriptionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLogoDescriptionResponse.ProtoReflect.Descriptor instead.
+func (*GetLogoDescriptionResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *GetLogoDescriptionResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetLogoResRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLogoResRequest) Reset() {
+	*x = GetLogoResRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLogoResRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLogoResRequest) ProtoMessage() {}
+
+func (x *GetLogoResRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLogoResRequest.ProtoReflect.Descriptor instead.
+func (*GetLogoResRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{22}
+}
+
+type GetLogoResResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLogoResResponse) Reset() {
+	*x = GetLogoResResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLogoResResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLogoResResponse) ProtoMessage() {}
+
+func (x *GetLogoResResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLogoResResponse.ProtoReflect.Descriptor instead.
+func (*GetLogoResResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *GetLogoResResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetNegativeButtonTextRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNegativeButtonTextRequest) Reset() {
+	*x = GetNegativeButtonTextRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNegativeButtonTextRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNegativeButtonTextRequest) ProtoMessage() {}
+
+func (x *GetNegativeButtonTextRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNegativeButtonTextRequest.ProtoReflect.Descriptor instead.
+func (*GetNegativeButtonTextRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{24}
+}
+
+type GetNegativeButtonTextResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNegativeButtonTextResponse) Reset() {
+	*x = GetNegativeButtonTextResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNegativeButtonTextResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNegativeButtonTextResponse) ProtoMessage() {}
+
+func (x *GetNegativeButtonTextResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNegativeButtonTextResponse.ProtoReflect.Descriptor instead.
+func (*GetNegativeButtonTextResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *GetNegativeButtonTextResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetSubtitleRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSubtitleRequest) Reset() {
+	*x = GetSubtitleRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSubtitleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSubtitleRequest) ProtoMessage() {}
+
+func (x *GetSubtitleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSubtitleRequest.ProtoReflect.Descriptor instead.
+func (*GetSubtitleRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{26}
+}
+
+type GetSubtitleResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSubtitleResponse) Reset() {
+	*x = GetSubtitleResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSubtitleResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSubtitleResponse) ProtoMessage() {}
+
+func (x *GetSubtitleResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSubtitleResponse.ProtoReflect.Descriptor instead.
+func (*GetSubtitleResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *GetSubtitleResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetTitleRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTitleRequest) Reset() {
+	*x = GetTitleRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTitleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTitleRequest) ProtoMessage() {}
+
+func (x *GetTitleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTitleRequest.ProtoReflect.Descriptor instead.
+func (*GetTitleRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{28}
+}
+
+type GetTitleResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTitleResponse) Reset() {
+	*x = GetTitleResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTitleResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTitleResponse) ProtoMessage() {}
+
+func (x *GetTitleResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTitleResponse.ProtoReflect.Descriptor instead.
+func (*GetTitleResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *GetTitleResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type IsConfirmationRequiredRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsConfirmationRequiredRequest) Reset() {
+	*x = IsConfirmationRequiredRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsConfirmationRequiredRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsConfirmationRequiredRequest) ProtoMessage() {}
+
+func (x *IsConfirmationRequiredRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsConfirmationRequiredRequest.ProtoReflect.Descriptor instead.
+func (*IsConfirmationRequiredRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{30}
+}
+
+type IsConfirmationRequiredResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsConfirmationRequiredResponse) Reset() {
+	*x = IsConfirmationRequiredResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsConfirmationRequiredResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsConfirmationRequiredResponse) ProtoMessage() {}
+
+func (x *IsConfirmationRequiredResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsConfirmationRequiredResponse.ProtoReflect.Descriptor instead.
+func (*IsConfirmationRequiredResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *IsConfirmationRequiredResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type BuildRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuildRequest) Reset() {
+	*x = BuildRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuildRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuildRequest) ProtoMessage() {}
+
+func (x *BuildRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuildRequest.ProtoReflect.Descriptor instead.
+func (*BuildRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{32}
+}
+
+type BuildResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuildResponse) Reset() {
+	*x = BuildResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuildResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuildResponse) ProtoMessage() {}
+
+func (x *BuildResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuildResponse.ProtoReflect.Descriptor instead.
+func (*BuildResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *BuildResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetAllowedAuthenticatorsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAllowedAuthenticatorsRequest) Reset() {
+	*x = SetAllowedAuthenticatorsRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAllowedAuthenticatorsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAllowedAuthenticatorsRequest) ProtoMessage() {}
+
+func (x *SetAllowedAuthenticatorsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAllowedAuthenticatorsRequest.ProtoReflect.Descriptor instead.
+func (*SetAllowedAuthenticatorsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *SetAllowedAuthenticatorsRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetAllowedAuthenticatorsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetAllowedAuthenticatorsResponse) Reset() {
+	*x = SetAllowedAuthenticatorsResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetAllowedAuthenticatorsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetAllowedAuthenticatorsResponse) ProtoMessage() {}
+
+func (x *SetAllowedAuthenticatorsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetAllowedAuthenticatorsResponse.ProtoReflect.Descriptor instead.
+func (*SetAllowedAuthenticatorsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *SetAllowedAuthenticatorsResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetConfirmationRequiredRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetConfirmationRequiredRequest) Reset() {
+	*x = SetConfirmationRequiredRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetConfirmationRequiredRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetConfirmationRequiredRequest) ProtoMessage() {}
+
+func (x *SetConfirmationRequiredRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetConfirmationRequiredRequest.ProtoReflect.Descriptor instead.
+func (*SetConfirmationRequiredRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *SetConfirmationRequiredRequest) GetArg0() bool {
+	if x != nil {
+		return x.Arg0
+	}
+	return false
+}
+
+type SetConfirmationRequiredResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetConfirmationRequiredResponse) Reset() {
+	*x = SetConfirmationRequiredResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetConfirmationRequiredResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetConfirmationRequiredResponse) ProtoMessage() {}
+
+func (x *SetConfirmationRequiredResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetConfirmationRequiredResponse.ProtoReflect.Descriptor instead.
+func (*SetConfirmationRequiredResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *SetConfirmationRequiredResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetContentViewRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetContentViewRequest) Reset() {
+	*x = SetContentViewRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetContentViewRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetContentViewRequest) ProtoMessage() {}
+
+func (x *SetContentViewRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetContentViewRequest.ProtoReflect.Descriptor instead.
+func (*SetContentViewRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *SetContentViewRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetContentViewResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetContentViewResponse) Reset() {
+	*x = SetContentViewResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetContentViewResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetContentViewResponse) ProtoMessage() {}
+
+func (x *SetContentViewResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetContentViewResponse.ProtoReflect.Descriptor instead.
+func (*SetContentViewResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *SetContentViewResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetDescriptionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetDescriptionRequest) Reset() {
+	*x = SetDescriptionRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetDescriptionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetDescriptionRequest) ProtoMessage() {}
+
+func (x *SetDescriptionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetDescriptionRequest.ProtoReflect.Descriptor instead.
+func (*SetDescriptionRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *SetDescriptionRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type SetDescriptionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetDescriptionResponse) Reset() {
+	*x = SetDescriptionResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetDescriptionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetDescriptionResponse) ProtoMessage() {}
+
+func (x *SetDescriptionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetDescriptionResponse.ProtoReflect.Descriptor instead.
+func (*SetDescriptionResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *SetDescriptionResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetDeviceCredentialAllowedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          bool                   `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetDeviceCredentialAllowedRequest) Reset() {
+	*x = SetDeviceCredentialAllowedRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetDeviceCredentialAllowedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetDeviceCredentialAllowedRequest) ProtoMessage() {}
+
+func (x *SetDeviceCredentialAllowedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetDeviceCredentialAllowedRequest.ProtoReflect.Descriptor instead.
+func (*SetDeviceCredentialAllowedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *SetDeviceCredentialAllowedRequest) GetArg0() bool {
+	if x != nil {
+		return x.Arg0
+	}
+	return false
+}
+
+type SetDeviceCredentialAllowedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetDeviceCredentialAllowedResponse) Reset() {
+	*x = SetDeviceCredentialAllowedResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetDeviceCredentialAllowedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetDeviceCredentialAllowedResponse) ProtoMessage() {}
+
+func (x *SetDeviceCredentialAllowedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetDeviceCredentialAllowedResponse.ProtoReflect.Descriptor instead.
+func (*SetDeviceCredentialAllowedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *SetDeviceCredentialAllowedResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetLogoBitmapRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetLogoBitmapRequest) Reset() {
+	*x = SetLogoBitmapRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetLogoBitmapRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetLogoBitmapRequest) ProtoMessage() {}
+
+func (x *SetLogoBitmapRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetLogoBitmapRequest.ProtoReflect.Descriptor instead.
+func (*SetLogoBitmapRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *SetLogoBitmapRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetLogoBitmapResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetLogoBitmapResponse) Reset() {
+	*x = SetLogoBitmapResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetLogoBitmapResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetLogoBitmapResponse) ProtoMessage() {}
+
+func (x *SetLogoBitmapResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetLogoBitmapResponse.ProtoReflect.Descriptor instead.
+func (*SetLogoBitmapResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *SetLogoBitmapResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetLogoDescriptionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetLogoDescriptionRequest) Reset() {
+	*x = SetLogoDescriptionRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetLogoDescriptionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetLogoDescriptionRequest) ProtoMessage() {}
+
+func (x *SetLogoDescriptionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetLogoDescriptionRequest.ProtoReflect.Descriptor instead.
+func (*SetLogoDescriptionRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *SetLogoDescriptionRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type SetLogoDescriptionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetLogoDescriptionResponse) Reset() {
+	*x = SetLogoDescriptionResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetLogoDescriptionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetLogoDescriptionResponse) ProtoMessage() {}
+
+func (x *SetLogoDescriptionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetLogoDescriptionResponse.ProtoReflect.Descriptor instead.
+func (*SetLogoDescriptionResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{47}
+}
+
+func (x *SetLogoDescriptionResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetLogoResRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetLogoResRequest) Reset() {
+	*x = SetLogoResRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetLogoResRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetLogoResRequest) ProtoMessage() {}
+
+func (x *SetLogoResRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetLogoResRequest.ProtoReflect.Descriptor instead.
+func (*SetLogoResRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *SetLogoResRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetLogoResResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetLogoResResponse) Reset() {
+	*x = SetLogoResResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetLogoResResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetLogoResResponse) ProtoMessage() {}
+
+func (x *SetLogoResResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetLogoResResponse.ProtoReflect.Descriptor instead.
+func (*SetLogoResResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *SetLogoResResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetNegativeButtonRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int64                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int64                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetNegativeButtonRequest) Reset() {
+	*x = SetNegativeButtonRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetNegativeButtonRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetNegativeButtonRequest) ProtoMessage() {}
+
+func (x *SetNegativeButtonRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetNegativeButtonRequest.ProtoReflect.Descriptor instead.
+func (*SetNegativeButtonRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *SetNegativeButtonRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+func (x *SetNegativeButtonRequest) GetArg1() int64 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *SetNegativeButtonRequest) GetArg2() int64 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type SetNegativeButtonResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetNegativeButtonResponse) Reset() {
+	*x = SetNegativeButtonResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetNegativeButtonResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetNegativeButtonResponse) ProtoMessage() {}
+
+func (x *SetNegativeButtonResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetNegativeButtonResponse.ProtoReflect.Descriptor instead.
+func (*SetNegativeButtonResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{51}
+}
+
+func (x *SetNegativeButtonResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetSubtitleRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetSubtitleRequest) Reset() {
+	*x = SetSubtitleRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetSubtitleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetSubtitleRequest) ProtoMessage() {}
+
+func (x *SetSubtitleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetSubtitleRequest.ProtoReflect.Descriptor instead.
+func (*SetSubtitleRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{52}
+}
+
+func (x *SetSubtitleRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type SetSubtitleResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetSubtitleResponse) Reset() {
+	*x = SetSubtitleResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetSubtitleResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetSubtitleResponse) ProtoMessage() {}
+
+func (x *SetSubtitleResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetSubtitleResponse.ProtoReflect.Descriptor instead.
+func (*SetSubtitleResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{53}
+}
+
+func (x *SetSubtitleResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type SetTitleRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetTitleRequest) Reset() {
+	*x = SetTitleRequest{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetTitleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetTitleRequest) ProtoMessage() {}
+
+func (x *SetTitleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetTitleRequest.ProtoReflect.Descriptor instead.
+func (*SetTitleRequest) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{54}
+}
+
+func (x *SetTitleRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type SetTitleResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetTitleResponse) Reset() {
+	*x = SetTitleResponse{}
+	mi := &file_proto_biometric_biometric_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetTitleResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetTitleResponse) ProtoMessage() {}
+
+func (x *SetTitleResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_biometric_biometric_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetTitleResponse.ProtoReflect.Descriptor instead.
+func (*SetTitleResponse) Descriptor() ([]byte, []int) {
+	return file_proto_biometric_biometric_proto_rawDescGZIP(), []int{55}
+}
+
+func (x *SetTitleResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
 var File_proto_biometric_biometric_proto protoreflect.FileDescriptor
 
 const file_proto_biometric_biometric_proto_rawDesc = "" +
@@ -386,13 +2450,131 @@ const file_proto_biometric_biometric_proto_rawDesc = "" +
 	"\x11GetStringsRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\",\n" +
 	"\x12GetStringsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"f\n" +
+	"\x14Authenticate4Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\x12\x12\n" +
+	"\x04arg3\x18\x04 \x01(\x03R\x04arg3\"\x17\n" +
+	"\x15Authenticate4Response\"T\n" +
+	"\x16Authenticate3_1Request\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"\x19\n" +
+	"\x17Authenticate3_1Response\"!\n" +
+	"\x1fGetAllowedAuthenticatorsRequest\":\n" +
+	" GetAllowedAuthenticatorsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x17\n" +
+	"\x15GetContentViewRequest\"0\n" +
+	"\x16GetContentViewResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x17\n" +
+	"\x15GetDescriptionRequest\"0\n" +
+	"\x16GetDescriptionResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x16\n" +
+	"\x14GetLogoBitmapRequest\"/\n" +
+	"\x15GetLogoBitmapResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x1b\n" +
+	"\x19GetLogoDescriptionRequest\"4\n" +
+	"\x1aGetLogoDescriptionResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x13\n" +
+	"\x11GetLogoResRequest\",\n" +
+	"\x12GetLogoResResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x1e\n" +
+	"\x1cGetNegativeButtonTextRequest\"7\n" +
+	"\x1dGetNegativeButtonTextResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x14\n" +
+	"\x12GetSubtitleRequest\"-\n" +
+	"\x13GetSubtitleResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x11\n" +
+	"\x0fGetTitleRequest\"*\n" +
+	"\x10GetTitleResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x1f\n" +
+	"\x1dIsConfirmationRequiredRequest\"8\n" +
+	"\x1eIsConfirmationRequiredResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x0e\n" +
+	"\fBuildRequest\"'\n" +
+	"\rBuildResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"5\n" +
+	"\x1fSetAllowedAuthenticatorsRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\":\n" +
+	" SetAllowedAuthenticatorsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"4\n" +
+	"\x1eSetConfirmationRequiredRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"9\n" +
+	"\x1fSetConfirmationRequiredResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"+\n" +
+	"\x15SetContentViewRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"0\n" +
+	"\x16SetContentViewResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"+\n" +
+	"\x15SetDescriptionRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"0\n" +
+	"\x16SetDescriptionResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"7\n" +
+	"!SetDeviceCredentialAllowedRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"<\n" +
+	"\"SetDeviceCredentialAllowedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"*\n" +
+	"\x14SetLogoBitmapRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"/\n" +
+	"\x15SetLogoBitmapResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"/\n" +
+	"\x19SetLogoDescriptionRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"4\n" +
+	"\x1aSetLogoDescriptionResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"'\n" +
+	"\x11SetLogoResRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\",\n" +
+	"\x12SetLogoResResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"V\n" +
+	"\x18SetNegativeButtonRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x03R\x04arg2\"3\n" +
+	"\x19SetNegativeButtonResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"(\n" +
+	"\x12SetSubtitleRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"-\n" +
+	"\x13SetSubtitleResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"%\n" +
+	"\x0fSetTitleRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\"*\n" +
+	"\x10SetTitleResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\x03R\x06result2\x9c\x03\n" +
 	"\x17BiometricManagerService\x12[\n" +
 	"\x10CanAuthenticate0\x12\".biometric.CanAuthenticate0Request\x1a#.biometric.CanAuthenticate0Response\x12a\n" +
 	"\x12CanAuthenticate1_1\x12$.biometric.CanAuthenticate1_1Request\x1a%.biometric.CanAuthenticate1_1Response\x12v\n" +
 	"\x19GetLastAuthenticationTime\x12+.biometric.GetLastAuthenticationTimeRequest\x1a,.biometric.GetLastAuthenticationTimeResponse\x12I\n" +
 	"\n" +
-	"GetStrings\x12\x1c.biometric.GetStringsRequest\x1a\x1d.biometric.GetStringsResponseB,Z*github.com/xaionaro-go/jni/proto/biometricb\x06proto3"
+	"GetStrings\x12\x1c.biometric.GetStringsRequest\x1a\x1d.biometric.GetStringsResponse2\xd9\b\n" +
+	"\x16BiometricPromptService\x12R\n" +
+	"\rAuthenticate4\x12\x1f.biometric.Authenticate4Request\x1a .biometric.Authenticate4Response\x12X\n" +
+	"\x0fAuthenticate3_1\x12!.biometric.Authenticate3_1Request\x1a\".biometric.Authenticate3_1Response\x12s\n" +
+	"\x18GetAllowedAuthenticators\x12*.biometric.GetAllowedAuthenticatorsRequest\x1a+.biometric.GetAllowedAuthenticatorsResponse\x12U\n" +
+	"\x0eGetContentView\x12 .biometric.GetContentViewRequest\x1a!.biometric.GetContentViewResponse\x12U\n" +
+	"\x0eGetDescription\x12 .biometric.GetDescriptionRequest\x1a!.biometric.GetDescriptionResponse\x12R\n" +
+	"\rGetLogoBitmap\x12\x1f.biometric.GetLogoBitmapRequest\x1a .biometric.GetLogoBitmapResponse\x12a\n" +
+	"\x12GetLogoDescription\x12$.biometric.GetLogoDescriptionRequest\x1a%.biometric.GetLogoDescriptionResponse\x12I\n" +
+	"\n" +
+	"GetLogoRes\x12\x1c.biometric.GetLogoResRequest\x1a\x1d.biometric.GetLogoResResponse\x12j\n" +
+	"\x15GetNegativeButtonText\x12'.biometric.GetNegativeButtonTextRequest\x1a(.biometric.GetNegativeButtonTextResponse\x12L\n" +
+	"\vGetSubtitle\x12\x1d.biometric.GetSubtitleRequest\x1a\x1e.biometric.GetSubtitleResponse\x12C\n" +
+	"\bGetTitle\x12\x1a.biometric.GetTitleRequest\x1a\x1b.biometric.GetTitleResponse\x12m\n" +
+	"\x16IsConfirmationRequired\x12(.biometric.IsConfirmationRequiredRequest\x1a).biometric.IsConfirmationRequiredResponse2\xe0\b\n" +
+	"\x1dBiometricPromptBuilderService\x12:\n" +
+	"\x05Build\x12\x17.biometric.BuildRequest\x1a\x18.biometric.BuildResponse\x12s\n" +
+	"\x18SetAllowedAuthenticators\x12*.biometric.SetAllowedAuthenticatorsRequest\x1a+.biometric.SetAllowedAuthenticatorsResponse\x12p\n" +
+	"\x17SetConfirmationRequired\x12).biometric.SetConfirmationRequiredRequest\x1a*.biometric.SetConfirmationRequiredResponse\x12U\n" +
+	"\x0eSetContentView\x12 .biometric.SetContentViewRequest\x1a!.biometric.SetContentViewResponse\x12U\n" +
+	"\x0eSetDescription\x12 .biometric.SetDescriptionRequest\x1a!.biometric.SetDescriptionResponse\x12y\n" +
+	"\x1aSetDeviceCredentialAllowed\x12,.biometric.SetDeviceCredentialAllowedRequest\x1a-.biometric.SetDeviceCredentialAllowedResponse\x12R\n" +
+	"\rSetLogoBitmap\x12\x1f.biometric.SetLogoBitmapRequest\x1a .biometric.SetLogoBitmapResponse\x12a\n" +
+	"\x12SetLogoDescription\x12$.biometric.SetLogoDescriptionRequest\x1a%.biometric.SetLogoDescriptionResponse\x12I\n" +
+	"\n" +
+	"SetLogoRes\x12\x1c.biometric.SetLogoResRequest\x1a\x1d.biometric.SetLogoResResponse\x12^\n" +
+	"\x11SetNegativeButton\x12#.biometric.SetNegativeButtonRequest\x1a$.biometric.SetNegativeButtonResponse\x12L\n" +
+	"\vSetSubtitle\x12\x1d.biometric.SetSubtitleRequest\x1a\x1e.biometric.SetSubtitleResponse\x12C\n" +
+	"\bSetTitle\x12\x1a.biometric.SetTitleRequest\x1a\x1b.biometric.SetTitleResponseB,Z*github.com/xaionaro-go/jni/proto/biometricb\x06proto3"
 
 var (
 	file_proto_biometric_biometric_proto_rawDescOnce sync.Once
@@ -406,31 +2588,127 @@ func file_proto_biometric_biometric_proto_rawDescGZIP() []byte {
 	return file_proto_biometric_biometric_proto_rawDescData
 }
 
-var file_proto_biometric_biometric_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_proto_biometric_biometric_proto_msgTypes = make([]protoimpl.MessageInfo, 56)
 var file_proto_biometric_biometric_proto_goTypes = []any{
-	(*CanAuthenticate0Request)(nil),           // 0: biometric.CanAuthenticate0Request
-	(*CanAuthenticate0Response)(nil),          // 1: biometric.CanAuthenticate0Response
-	(*CanAuthenticate1_1Request)(nil),         // 2: biometric.CanAuthenticate1_1Request
-	(*CanAuthenticate1_1Response)(nil),        // 3: biometric.CanAuthenticate1_1Response
-	(*GetLastAuthenticationTimeRequest)(nil),  // 4: biometric.GetLastAuthenticationTimeRequest
-	(*GetLastAuthenticationTimeResponse)(nil), // 5: biometric.GetLastAuthenticationTimeResponse
-	(*GetStringsRequest)(nil),                 // 6: biometric.GetStringsRequest
-	(*GetStringsResponse)(nil),                // 7: biometric.GetStringsResponse
+	(*CanAuthenticate0Request)(nil),            // 0: biometric.CanAuthenticate0Request
+	(*CanAuthenticate0Response)(nil),           // 1: biometric.CanAuthenticate0Response
+	(*CanAuthenticate1_1Request)(nil),          // 2: biometric.CanAuthenticate1_1Request
+	(*CanAuthenticate1_1Response)(nil),         // 3: biometric.CanAuthenticate1_1Response
+	(*GetLastAuthenticationTimeRequest)(nil),   // 4: biometric.GetLastAuthenticationTimeRequest
+	(*GetLastAuthenticationTimeResponse)(nil),  // 5: biometric.GetLastAuthenticationTimeResponse
+	(*GetStringsRequest)(nil),                  // 6: biometric.GetStringsRequest
+	(*GetStringsResponse)(nil),                 // 7: biometric.GetStringsResponse
+	(*Authenticate4Request)(nil),               // 8: biometric.Authenticate4Request
+	(*Authenticate4Response)(nil),              // 9: biometric.Authenticate4Response
+	(*Authenticate3_1Request)(nil),             // 10: biometric.Authenticate3_1Request
+	(*Authenticate3_1Response)(nil),            // 11: biometric.Authenticate3_1Response
+	(*GetAllowedAuthenticatorsRequest)(nil),    // 12: biometric.GetAllowedAuthenticatorsRequest
+	(*GetAllowedAuthenticatorsResponse)(nil),   // 13: biometric.GetAllowedAuthenticatorsResponse
+	(*GetContentViewRequest)(nil),              // 14: biometric.GetContentViewRequest
+	(*GetContentViewResponse)(nil),             // 15: biometric.GetContentViewResponse
+	(*GetDescriptionRequest)(nil),              // 16: biometric.GetDescriptionRequest
+	(*GetDescriptionResponse)(nil),             // 17: biometric.GetDescriptionResponse
+	(*GetLogoBitmapRequest)(nil),               // 18: biometric.GetLogoBitmapRequest
+	(*GetLogoBitmapResponse)(nil),              // 19: biometric.GetLogoBitmapResponse
+	(*GetLogoDescriptionRequest)(nil),          // 20: biometric.GetLogoDescriptionRequest
+	(*GetLogoDescriptionResponse)(nil),         // 21: biometric.GetLogoDescriptionResponse
+	(*GetLogoResRequest)(nil),                  // 22: biometric.GetLogoResRequest
+	(*GetLogoResResponse)(nil),                 // 23: biometric.GetLogoResResponse
+	(*GetNegativeButtonTextRequest)(nil),       // 24: biometric.GetNegativeButtonTextRequest
+	(*GetNegativeButtonTextResponse)(nil),      // 25: biometric.GetNegativeButtonTextResponse
+	(*GetSubtitleRequest)(nil),                 // 26: biometric.GetSubtitleRequest
+	(*GetSubtitleResponse)(nil),                // 27: biometric.GetSubtitleResponse
+	(*GetTitleRequest)(nil),                    // 28: biometric.GetTitleRequest
+	(*GetTitleResponse)(nil),                   // 29: biometric.GetTitleResponse
+	(*IsConfirmationRequiredRequest)(nil),      // 30: biometric.IsConfirmationRequiredRequest
+	(*IsConfirmationRequiredResponse)(nil),     // 31: biometric.IsConfirmationRequiredResponse
+	(*BuildRequest)(nil),                       // 32: biometric.BuildRequest
+	(*BuildResponse)(nil),                      // 33: biometric.BuildResponse
+	(*SetAllowedAuthenticatorsRequest)(nil),    // 34: biometric.SetAllowedAuthenticatorsRequest
+	(*SetAllowedAuthenticatorsResponse)(nil),   // 35: biometric.SetAllowedAuthenticatorsResponse
+	(*SetConfirmationRequiredRequest)(nil),     // 36: biometric.SetConfirmationRequiredRequest
+	(*SetConfirmationRequiredResponse)(nil),    // 37: biometric.SetConfirmationRequiredResponse
+	(*SetContentViewRequest)(nil),              // 38: biometric.SetContentViewRequest
+	(*SetContentViewResponse)(nil),             // 39: biometric.SetContentViewResponse
+	(*SetDescriptionRequest)(nil),              // 40: biometric.SetDescriptionRequest
+	(*SetDescriptionResponse)(nil),             // 41: biometric.SetDescriptionResponse
+	(*SetDeviceCredentialAllowedRequest)(nil),  // 42: biometric.SetDeviceCredentialAllowedRequest
+	(*SetDeviceCredentialAllowedResponse)(nil), // 43: biometric.SetDeviceCredentialAllowedResponse
+	(*SetLogoBitmapRequest)(nil),               // 44: biometric.SetLogoBitmapRequest
+	(*SetLogoBitmapResponse)(nil),              // 45: biometric.SetLogoBitmapResponse
+	(*SetLogoDescriptionRequest)(nil),          // 46: biometric.SetLogoDescriptionRequest
+	(*SetLogoDescriptionResponse)(nil),         // 47: biometric.SetLogoDescriptionResponse
+	(*SetLogoResRequest)(nil),                  // 48: biometric.SetLogoResRequest
+	(*SetLogoResResponse)(nil),                 // 49: biometric.SetLogoResResponse
+	(*SetNegativeButtonRequest)(nil),           // 50: biometric.SetNegativeButtonRequest
+	(*SetNegativeButtonResponse)(nil),          // 51: biometric.SetNegativeButtonResponse
+	(*SetSubtitleRequest)(nil),                 // 52: biometric.SetSubtitleRequest
+	(*SetSubtitleResponse)(nil),                // 53: biometric.SetSubtitleResponse
+	(*SetTitleRequest)(nil),                    // 54: biometric.SetTitleRequest
+	(*SetTitleResponse)(nil),                   // 55: biometric.SetTitleResponse
 }
 var file_proto_biometric_biometric_proto_depIdxs = []int32{
-	0, // 0: biometric.BiometricManagerService.CanAuthenticate0:input_type -> biometric.CanAuthenticate0Request
-	2, // 1: biometric.BiometricManagerService.CanAuthenticate1_1:input_type -> biometric.CanAuthenticate1_1Request
-	4, // 2: biometric.BiometricManagerService.GetLastAuthenticationTime:input_type -> biometric.GetLastAuthenticationTimeRequest
-	6, // 3: biometric.BiometricManagerService.GetStrings:input_type -> biometric.GetStringsRequest
-	1, // 4: biometric.BiometricManagerService.CanAuthenticate0:output_type -> biometric.CanAuthenticate0Response
-	3, // 5: biometric.BiometricManagerService.CanAuthenticate1_1:output_type -> biometric.CanAuthenticate1_1Response
-	5, // 6: biometric.BiometricManagerService.GetLastAuthenticationTime:output_type -> biometric.GetLastAuthenticationTimeResponse
-	7, // 7: biometric.BiometricManagerService.GetStrings:output_type -> biometric.GetStringsResponse
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0,  // 0: biometric.BiometricManagerService.CanAuthenticate0:input_type -> biometric.CanAuthenticate0Request
+	2,  // 1: biometric.BiometricManagerService.CanAuthenticate1_1:input_type -> biometric.CanAuthenticate1_1Request
+	4,  // 2: biometric.BiometricManagerService.GetLastAuthenticationTime:input_type -> biometric.GetLastAuthenticationTimeRequest
+	6,  // 3: biometric.BiometricManagerService.GetStrings:input_type -> biometric.GetStringsRequest
+	8,  // 4: biometric.BiometricPromptService.Authenticate4:input_type -> biometric.Authenticate4Request
+	10, // 5: biometric.BiometricPromptService.Authenticate3_1:input_type -> biometric.Authenticate3_1Request
+	12, // 6: biometric.BiometricPromptService.GetAllowedAuthenticators:input_type -> biometric.GetAllowedAuthenticatorsRequest
+	14, // 7: biometric.BiometricPromptService.GetContentView:input_type -> biometric.GetContentViewRequest
+	16, // 8: biometric.BiometricPromptService.GetDescription:input_type -> biometric.GetDescriptionRequest
+	18, // 9: biometric.BiometricPromptService.GetLogoBitmap:input_type -> biometric.GetLogoBitmapRequest
+	20, // 10: biometric.BiometricPromptService.GetLogoDescription:input_type -> biometric.GetLogoDescriptionRequest
+	22, // 11: biometric.BiometricPromptService.GetLogoRes:input_type -> biometric.GetLogoResRequest
+	24, // 12: biometric.BiometricPromptService.GetNegativeButtonText:input_type -> biometric.GetNegativeButtonTextRequest
+	26, // 13: biometric.BiometricPromptService.GetSubtitle:input_type -> biometric.GetSubtitleRequest
+	28, // 14: biometric.BiometricPromptService.GetTitle:input_type -> biometric.GetTitleRequest
+	30, // 15: biometric.BiometricPromptService.IsConfirmationRequired:input_type -> biometric.IsConfirmationRequiredRequest
+	32, // 16: biometric.BiometricPromptBuilderService.Build:input_type -> biometric.BuildRequest
+	34, // 17: biometric.BiometricPromptBuilderService.SetAllowedAuthenticators:input_type -> biometric.SetAllowedAuthenticatorsRequest
+	36, // 18: biometric.BiometricPromptBuilderService.SetConfirmationRequired:input_type -> biometric.SetConfirmationRequiredRequest
+	38, // 19: biometric.BiometricPromptBuilderService.SetContentView:input_type -> biometric.SetContentViewRequest
+	40, // 20: biometric.BiometricPromptBuilderService.SetDescription:input_type -> biometric.SetDescriptionRequest
+	42, // 21: biometric.BiometricPromptBuilderService.SetDeviceCredentialAllowed:input_type -> biometric.SetDeviceCredentialAllowedRequest
+	44, // 22: biometric.BiometricPromptBuilderService.SetLogoBitmap:input_type -> biometric.SetLogoBitmapRequest
+	46, // 23: biometric.BiometricPromptBuilderService.SetLogoDescription:input_type -> biometric.SetLogoDescriptionRequest
+	48, // 24: biometric.BiometricPromptBuilderService.SetLogoRes:input_type -> biometric.SetLogoResRequest
+	50, // 25: biometric.BiometricPromptBuilderService.SetNegativeButton:input_type -> biometric.SetNegativeButtonRequest
+	52, // 26: biometric.BiometricPromptBuilderService.SetSubtitle:input_type -> biometric.SetSubtitleRequest
+	54, // 27: biometric.BiometricPromptBuilderService.SetTitle:input_type -> biometric.SetTitleRequest
+	1,  // 28: biometric.BiometricManagerService.CanAuthenticate0:output_type -> biometric.CanAuthenticate0Response
+	3,  // 29: biometric.BiometricManagerService.CanAuthenticate1_1:output_type -> biometric.CanAuthenticate1_1Response
+	5,  // 30: biometric.BiometricManagerService.GetLastAuthenticationTime:output_type -> biometric.GetLastAuthenticationTimeResponse
+	7,  // 31: biometric.BiometricManagerService.GetStrings:output_type -> biometric.GetStringsResponse
+	9,  // 32: biometric.BiometricPromptService.Authenticate4:output_type -> biometric.Authenticate4Response
+	11, // 33: biometric.BiometricPromptService.Authenticate3_1:output_type -> biometric.Authenticate3_1Response
+	13, // 34: biometric.BiometricPromptService.GetAllowedAuthenticators:output_type -> biometric.GetAllowedAuthenticatorsResponse
+	15, // 35: biometric.BiometricPromptService.GetContentView:output_type -> biometric.GetContentViewResponse
+	17, // 36: biometric.BiometricPromptService.GetDescription:output_type -> biometric.GetDescriptionResponse
+	19, // 37: biometric.BiometricPromptService.GetLogoBitmap:output_type -> biometric.GetLogoBitmapResponse
+	21, // 38: biometric.BiometricPromptService.GetLogoDescription:output_type -> biometric.GetLogoDescriptionResponse
+	23, // 39: biometric.BiometricPromptService.GetLogoRes:output_type -> biometric.GetLogoResResponse
+	25, // 40: biometric.BiometricPromptService.GetNegativeButtonText:output_type -> biometric.GetNegativeButtonTextResponse
+	27, // 41: biometric.BiometricPromptService.GetSubtitle:output_type -> biometric.GetSubtitleResponse
+	29, // 42: biometric.BiometricPromptService.GetTitle:output_type -> biometric.GetTitleResponse
+	31, // 43: biometric.BiometricPromptService.IsConfirmationRequired:output_type -> biometric.IsConfirmationRequiredResponse
+	33, // 44: biometric.BiometricPromptBuilderService.Build:output_type -> biometric.BuildResponse
+	35, // 45: biometric.BiometricPromptBuilderService.SetAllowedAuthenticators:output_type -> biometric.SetAllowedAuthenticatorsResponse
+	37, // 46: biometric.BiometricPromptBuilderService.SetConfirmationRequired:output_type -> biometric.SetConfirmationRequiredResponse
+	39, // 47: biometric.BiometricPromptBuilderService.SetContentView:output_type -> biometric.SetContentViewResponse
+	41, // 48: biometric.BiometricPromptBuilderService.SetDescription:output_type -> biometric.SetDescriptionResponse
+	43, // 49: biometric.BiometricPromptBuilderService.SetDeviceCredentialAllowed:output_type -> biometric.SetDeviceCredentialAllowedResponse
+	45, // 50: biometric.BiometricPromptBuilderService.SetLogoBitmap:output_type -> biometric.SetLogoBitmapResponse
+	47, // 51: biometric.BiometricPromptBuilderService.SetLogoDescription:output_type -> biometric.SetLogoDescriptionResponse
+	49, // 52: biometric.BiometricPromptBuilderService.SetLogoRes:output_type -> biometric.SetLogoResResponse
+	51, // 53: biometric.BiometricPromptBuilderService.SetNegativeButton:output_type -> biometric.SetNegativeButtonResponse
+	53, // 54: biometric.BiometricPromptBuilderService.SetSubtitle:output_type -> biometric.SetSubtitleResponse
+	55, // 55: biometric.BiometricPromptBuilderService.SetTitle:output_type -> biometric.SetTitleResponse
+	28, // [28:56] is the sub-list for method output_type
+	0,  // [0:28] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_biometric_biometric_proto_init() }
@@ -444,9 +2722,9 @@ func file_proto_biometric_biometric_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_biometric_biometric_proto_rawDesc), len(file_proto_biometric_biometric_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   56,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   3,
 		},
 		GoTypes:           file_proto_biometric_biometric_proto_goTypes,
 		DependencyIndexes: file_proto_biometric_biometric_proto_depIdxs,

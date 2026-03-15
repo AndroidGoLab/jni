@@ -86,6 +86,199 @@ classes:
               go_name: arg1
           returns: void
           error: true
+    - java_class: android.os.storage.StorageManager
+      go_type: storageManager
+      obtain: system_service
+      service_name: storage
+      close: true
+      methods:
+        - java_method: allocateBytes
+          go_name: AllocateBytes2
+          params:
+            - java_type: java.io.FileDescriptor
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: allocateBytes
+          go_name: AllocateBytes2_1
+          params:
+            - java_type: java.util.UUID
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: getAllocatableBytes
+          go_name: GetAllocatableBytes
+          params:
+            - java_type: java.util.UUID
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getCacheQuotaBytes
+          go_name: GetCacheQuotaBytes
+          params:
+            - java_type: java.util.UUID
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getCacheSizeBytes
+          go_name: GetCacheSizeBytes
+          params:
+            - java_type: java.util.UUID
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getManageSpaceActivityIntent
+          go_name: GetManageSpaceActivityIntent
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.app.PendingIntent
+          error: true
+        - java_method: getMountedObbPath
+          go_name: GetMountedObbPath
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getPrimaryStorageVolume
+          go_name: GetPrimaryStorageVolume
+          returns: android.os.storage.StorageVolume
+          error: true
+        - java_method: getRecentStorageVolumes
+          go_name: GetRecentStorageVolumes
+          returns: java.util.List<android.os.storage.StorageVolume>
+          error: true
+        - java_method: getStorageVolume
+          go_name: GetStorageVolume1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.os.storage.StorageVolume
+          error: true
+        - java_method: getStorageVolume
+          go_name: GetStorageVolume1_1
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: android.os.storage.StorageVolume
+          error: true
+        - java_method: getStorageVolumes
+          go_name: GetStorageVolumes
+          returns: java.util.List<android.os.storage.StorageVolume>
+          error: true
+        - java_method: getStorageVolumesIncludingSharedProfiles
+          go_name: GetStorageVolumesIncludingSharedProfiles
+          returns: java.util.List<android.os.storage.StorageVolume>
+          error: true
+        - java_method: getUuidForPath
+          go_name: GetUuidForPath
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: java.util.UUID
+          error: true
+        - java_method: isAllocationSupported
+          go_name: IsAllocationSupported
+          params:
+            - java_type: java.io.FileDescriptor
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isCacheBehaviorGroup
+          go_name: IsCacheBehaviorGroup
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isCacheBehaviorTombstone
+          go_name: IsCacheBehaviorTombstone
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isCheckpointSupported
+          go_name: IsCheckpointSupported
+          returns: boolean
+          error: true
+        - java_method: isEncrypted
+          go_name: IsEncrypted
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isObbMounted
+          go_name: IsObbMounted
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: mountObb
+          go_name: MountObb
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.storage.OnObbStateChangeListener
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: registerStorageVolumeCallback
+          go_name: RegisterStorageVolumeCallback
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.os.storage.StorageManager$StorageVolumeCallback
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setCacheBehaviorGroup
+          go_name: SetCacheBehaviorGroup
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setCacheBehaviorTombstone
+          go_name: SetCacheBehaviorTombstone
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: unmountObb
+          go_name: UnmountObb
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+            - java_type: android.os.storage.OnObbStateChangeListener
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: unregisterStorageVolumeCallback
+          go_name: UnregisterStorageVolumeCallback
+          params:
+            - java_type: android.os.storage.StorageManager$StorageVolumeCallback
+              go_name: arg0
+          returns: void
+          error: true
 constants:
     - go_name: Creator
       value: "0"
@@ -93,3 +286,18 @@ constants:
     - go_name: ExtraStorageVolume
       value: '""'
       go_type: string
+    - go_name: ActionClearAppCache
+      value: '""'
+      go_type: string
+    - go_name: ActionManageStorage
+      value: '""'
+      go_type: string
+    - go_name: ExtraRequestedBytes
+      value: '""'
+      go_type: string
+    - go_name: ExtraUuid
+      value: '""'
+      go_type: string
+    - go_name: UuidDefault
+      value: "0"
+      go_type: int

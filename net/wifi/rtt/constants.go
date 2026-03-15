@@ -3,6 +3,14 @@
 package rtt
 
 const (
+	Creator                                  = 0
+	StatusFail                               = 0
+	StatusResponderDoesNotSupportIeee80211mc = 0
+	StatusSuccess                            = 0
+	Unspecified                              = 0
+)
+
+const (
 	ActionWifiRttStateChanged                                = ""
 	CharacteristicsKeyBooleanLci                             = ""
 	CharacteristicsKeyBooleanLcr                             = ""

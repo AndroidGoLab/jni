@@ -6,6 +6,114 @@ package print;
 
 option go_package = "github.com/xaionaro-go/jni/proto/print";
 
+message GetPrintJobsRequest {
+}
+
+message GetPrintJobsResponse {
+  int64 result = 1;
+}
+
+message IsPrintServiceEnabledRequest {
+  int64 arg0 = 1;
+}
+
+message IsPrintServiceEnabledResponse {
+  bool result = 1;
+}
+
+message PrintRequest {
+  string arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message PrintResponse {
+  int64 result = 1;
+}
+
+message CancelRequest {
+}
+
+message CancelResponse {
+}
+
+message EqualsRequest {
+  int64 arg0 = 1;
+}
+
+message EqualsResponse {
+  bool result = 1;
+}
+
+message GetIdRequest {
+}
+
+message GetIdResponse {
+  int64 result = 1;
+}
+
+message GetInfoRequest {
+}
+
+message GetInfoResponse {
+  int64 result = 1;
+}
+
+message HashCodeRequest {
+}
+
+message HashCodeResponse {
+  int32 result = 1;
+}
+
+message IsBlockedRequest {
+}
+
+message IsBlockedResponse {
+  bool result = 1;
+}
+
+message IsCancelledRequest {
+}
+
+message IsCancelledResponse {
+  bool result = 1;
+}
+
+message IsCompletedRequest {
+}
+
+message IsCompletedResponse {
+  bool result = 1;
+}
+
+message IsFailedRequest {
+}
+
+message IsFailedResponse {
+  bool result = 1;
+}
+
+message IsQueuedRequest {
+}
+
+message IsQueuedResponse {
+  bool result = 1;
+}
+
+message IsStartedRequest {
+}
+
+message IsStartedResponse {
+  bool result = 1;
+}
+
+message RestartRequest {
+}
+
+message RestartResponse {
+}
+
 message DescribeContentsRequest {
 }
 
@@ -47,13 +155,6 @@ message GetCreationTimeRequest {
 }
 
 message GetCreationTimeResponse {
-  int64 result = 1;
-}
-
-message GetIdRequest {
-}
-
-message GetIdResponse {
   int64 result = 1;
 }
 
@@ -106,6 +207,27 @@ message WriteToParcelRequest {
 }
 
 message WriteToParcelResponse {
+}
+
+service PrintManagerService {
+  rpc GetPrintJobs (GetPrintJobsRequest) returns (GetPrintJobsResponse);
+  rpc IsPrintServiceEnabled (IsPrintServiceEnabledRequest) returns (IsPrintServiceEnabledResponse);
+  rpc Print (PrintRequest) returns (PrintResponse);
+}
+
+service PrintJobService {
+  rpc Cancel (CancelRequest) returns (CancelResponse);
+  rpc Equals (EqualsRequest) returns (EqualsResponse);
+  rpc GetId (GetIdRequest) returns (GetIdResponse);
+  rpc GetInfo (GetInfoRequest) returns (GetInfoResponse);
+  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
+  rpc IsBlocked (IsBlockedRequest) returns (IsBlockedResponse);
+  rpc IsCancelled (IsCancelledRequest) returns (IsCancelledResponse);
+  rpc IsCompleted (IsCompletedRequest) returns (IsCompletedResponse);
+  rpc IsFailed (IsFailedRequest) returns (IsFailedResponse);
+  rpc IsQueued (IsQueuedRequest) returns (IsQueuedResponse);
+  rpc IsStarted (IsStartedRequest) returns (IsStartedResponse);
+  rpc Restart (RestartRequest) returns (RestartResponse);
 }
 
 service PrintJobInfoService {

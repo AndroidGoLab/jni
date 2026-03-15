@@ -6,6 +6,127 @@ package bluetooth_le;
 
 option go_package = "github.com/xaionaro-go/jni/proto/bluetooth_le";
 
+message DescribeContentsRequest {
+}
+
+message DescribeContentsResponse {
+  int32 result = 1;
+}
+
+message EqualsRequest {
+  int64 arg0 = 1;
+}
+
+message EqualsResponse {
+  bool result = 1;
+}
+
+message GetAdvertisingSidRequest {
+}
+
+message GetAdvertisingSidResponse {
+  int32 result = 1;
+}
+
+message GetDataStatusRequest {
+}
+
+message GetDataStatusResponse {
+  int32 result = 1;
+}
+
+message GetDeviceRequest {
+}
+
+message GetDeviceResponse {
+  int64 result = 1;
+}
+
+message GetPeriodicAdvertisingIntervalRequest {
+}
+
+message GetPeriodicAdvertisingIntervalResponse {
+  int32 result = 1;
+}
+
+message GetPrimaryPhyRequest {
+}
+
+message GetPrimaryPhyResponse {
+  int32 result = 1;
+}
+
+message GetRssiRequest {
+}
+
+message GetRssiResponse {
+  int32 result = 1;
+}
+
+message GetScanRecordRequest {
+}
+
+message GetScanRecordResponse {
+  int64 result = 1;
+}
+
+message GetSecondaryPhyRequest {
+}
+
+message GetSecondaryPhyResponse {
+  int32 result = 1;
+}
+
+message GetTimestampNanosRequest {
+}
+
+message GetTimestampNanosResponse {
+  int64 result = 1;
+}
+
+message GetTxPowerRequest {
+}
+
+message GetTxPowerResponse {
+  int32 result = 1;
+}
+
+message HashCodeRequest {
+}
+
+message HashCodeResponse {
+  int32 result = 1;
+}
+
+message IsConnectableRequest {
+}
+
+message IsConnectableResponse {
+  bool result = 1;
+}
+
+message IsLegacyRequest {
+}
+
+message IsLegacyResponse {
+  bool result = 1;
+}
+
+message ToStringRequest {
+}
+
+message ToStringResponse {
+  string result = 1;
+}
+
+message WriteToParcelRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message WriteToParcelResponse {
+}
+
 message FlushPendingScanResultsRequest {
   int64 arg0 = 1;
 }
@@ -53,6 +174,85 @@ message StopScan1_1Request {
 message StopScan1_1Response {
 }
 
+message StartAdvertising3Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message StartAdvertising3Response {
+}
+
+message StartAdvertising4_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message StartAdvertising4_1Response {
+}
+
+message StartAdvertisingSet6Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+  int64 arg4 = 5;
+  int64 arg5 = 6;
+}
+
+message StartAdvertisingSet6Response {
+}
+
+message StartAdvertisingSet8_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+  int64 arg4 = 5;
+  int32 arg5 = 6;
+  int32 arg6 = 7;
+  int64 arg7 = 8;
+}
+
+message StartAdvertisingSet8_1Response {
+}
+
+message StopAdvertisingRequest {
+  int64 arg0 = 1;
+}
+
+message StopAdvertisingResponse {
+}
+
+message StopAdvertisingSetRequest {
+  int64 arg0 = 1;
+}
+
+message StopAdvertisingSetResponse {
+}
+
+service ScanResultService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc Equals (EqualsRequest) returns (EqualsResponse);
+  rpc GetAdvertisingSid (GetAdvertisingSidRequest) returns (GetAdvertisingSidResponse);
+  rpc GetDataStatus (GetDataStatusRequest) returns (GetDataStatusResponse);
+  rpc GetDevice (GetDeviceRequest) returns (GetDeviceResponse);
+  rpc GetPeriodicAdvertisingInterval (GetPeriodicAdvertisingIntervalRequest) returns (GetPeriodicAdvertisingIntervalResponse);
+  rpc GetPrimaryPhy (GetPrimaryPhyRequest) returns (GetPrimaryPhyResponse);
+  rpc GetRssi (GetRssiRequest) returns (GetRssiResponse);
+  rpc GetScanRecord (GetScanRecordRequest) returns (GetScanRecordResponse);
+  rpc GetSecondaryPhy (GetSecondaryPhyRequest) returns (GetSecondaryPhyResponse);
+  rpc GetTimestampNanos (GetTimestampNanosRequest) returns (GetTimestampNanosResponse);
+  rpc GetTxPower (GetTxPowerRequest) returns (GetTxPowerResponse);
+  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
+  rpc IsConnectable (IsConnectableRequest) returns (IsConnectableResponse);
+  rpc IsLegacy (IsLegacyRequest) returns (IsLegacyResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+}
+
 service BluetoothLeScannerService {
   rpc FlushPendingScanResults (FlushPendingScanResultsRequest) returns (FlushPendingScanResultsResponse);
   rpc StartScan1 (StartScan1Request) returns (StartScan1Response);
@@ -60,4 +260,13 @@ service BluetoothLeScannerService {
   rpc StartScan3_2 (StartScan3_2Request) returns (StartScan3_2Response);
   rpc StopScan1 (StopScan1Request) returns (StopScan1Response);
   rpc StopScan1_1 (StopScan1_1Request) returns (StopScan1_1Response);
+}
+
+service BluetoothLeAdvertiserService {
+  rpc StartAdvertising3 (StartAdvertising3Request) returns (StartAdvertising3Response);
+  rpc StartAdvertising4_1 (StartAdvertising4_1Request) returns (StartAdvertising4_1Response);
+  rpc StartAdvertisingSet6 (StartAdvertisingSet6Request) returns (StartAdvertisingSet6Response);
+  rpc StartAdvertisingSet8_1 (StartAdvertisingSet8_1Request) returns (StartAdvertisingSet8_1Response);
+  rpc StopAdvertising (StopAdvertisingRequest) returns (StopAdvertisingResponse);
+  rpc StopAdvertisingSet (StopAdvertisingSetRequest) returns (StopAdvertisingSetResponse);
 }

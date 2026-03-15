@@ -5655,6 +5655,590 @@ func (x *SetUserInitiatedResponse) GetResult() int64 {
 	return 0
 }
 
+type CanRunUserInitiatedJobsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CanRunUserInitiatedJobsRequest) Reset() {
+	*x = CanRunUserInitiatedJobsRequest{}
+	mi := &file_proto_job_job_proto_msgTypes[134]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CanRunUserInitiatedJobsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CanRunUserInitiatedJobsRequest) ProtoMessage() {}
+
+func (x *CanRunUserInitiatedJobsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_job_job_proto_msgTypes[134]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CanRunUserInitiatedJobsRequest.ProtoReflect.Descriptor instead.
+func (*CanRunUserInitiatedJobsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_job_job_proto_rawDescGZIP(), []int{134}
+}
+
+type CanRunUserInitiatedJobsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CanRunUserInitiatedJobsResponse) Reset() {
+	*x = CanRunUserInitiatedJobsResponse{}
+	mi := &file_proto_job_job_proto_msgTypes[135]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CanRunUserInitiatedJobsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CanRunUserInitiatedJobsResponse) ProtoMessage() {}
+
+func (x *CanRunUserInitiatedJobsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_job_job_proto_msgTypes[135]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CanRunUserInitiatedJobsResponse.ProtoReflect.Descriptor instead.
+func (*CanRunUserInitiatedJobsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_job_job_proto_rawDescGZIP(), []int{135}
+}
+
+func (x *CanRunUserInitiatedJobsResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type CancelInAllNamespacesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CancelInAllNamespacesRequest) Reset() {
+	*x = CancelInAllNamespacesRequest{}
+	mi := &file_proto_job_job_proto_msgTypes[136]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelInAllNamespacesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelInAllNamespacesRequest) ProtoMessage() {}
+
+func (x *CancelInAllNamespacesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_job_job_proto_msgTypes[136]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelInAllNamespacesRequest.ProtoReflect.Descriptor instead.
+func (*CancelInAllNamespacesRequest) Descriptor() ([]byte, []int) {
+	return file_proto_job_job_proto_rawDescGZIP(), []int{136}
+}
+
+type CancelInAllNamespacesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CancelInAllNamespacesResponse) Reset() {
+	*x = CancelInAllNamespacesResponse{}
+	mi := &file_proto_job_job_proto_msgTypes[137]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelInAllNamespacesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelInAllNamespacesResponse) ProtoMessage() {}
+
+func (x *CancelInAllNamespacesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_job_job_proto_msgTypes[137]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelInAllNamespacesResponse.ProtoReflect.Descriptor instead.
+func (*CancelInAllNamespacesResponse) Descriptor() ([]byte, []int) {
+	return file_proto_job_job_proto_rawDescGZIP(), []int{137}
+}
+
+type ForNamespaceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          string                 `protobuf:"bytes,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ForNamespaceRequest) Reset() {
+	*x = ForNamespaceRequest{}
+	mi := &file_proto_job_job_proto_msgTypes[138]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ForNamespaceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ForNamespaceRequest) ProtoMessage() {}
+
+func (x *ForNamespaceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_job_job_proto_msgTypes[138]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ForNamespaceRequest.ProtoReflect.Descriptor instead.
+func (*ForNamespaceRequest) Descriptor() ([]byte, []int) {
+	return file_proto_job_job_proto_rawDescGZIP(), []int{138}
+}
+
+func (x *ForNamespaceRequest) GetArg0() string {
+	if x != nil {
+		return x.Arg0
+	}
+	return ""
+}
+
+type ForNamespaceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ForNamespaceResponse) Reset() {
+	*x = ForNamespaceResponse{}
+	mi := &file_proto_job_job_proto_msgTypes[139]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ForNamespaceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ForNamespaceResponse) ProtoMessage() {}
+
+func (x *ForNamespaceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_job_job_proto_msgTypes[139]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ForNamespaceResponse.ProtoReflect.Descriptor instead.
+func (*ForNamespaceResponse) Descriptor() ([]byte, []int) {
+	return file_proto_job_job_proto_rawDescGZIP(), []int{139}
+}
+
+func (x *ForNamespaceResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetNamespaceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNamespaceRequest) Reset() {
+	*x = GetNamespaceRequest{}
+	mi := &file_proto_job_job_proto_msgTypes[140]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNamespaceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNamespaceRequest) ProtoMessage() {}
+
+func (x *GetNamespaceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_job_job_proto_msgTypes[140]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNamespaceRequest.ProtoReflect.Descriptor instead.
+func (*GetNamespaceRequest) Descriptor() ([]byte, []int) {
+	return file_proto_job_job_proto_rawDescGZIP(), []int{140}
+}
+
+type GetNamespaceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNamespaceResponse) Reset() {
+	*x = GetNamespaceResponse{}
+	mi := &file_proto_job_job_proto_msgTypes[141]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNamespaceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNamespaceResponse) ProtoMessage() {}
+
+func (x *GetNamespaceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_job_job_proto_msgTypes[141]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNamespaceResponse.ProtoReflect.Descriptor instead.
+func (*GetNamespaceResponse) Descriptor() ([]byte, []int) {
+	return file_proto_job_job_proto_rawDescGZIP(), []int{141}
+}
+
+func (x *GetNamespaceResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetPendingJobReasonRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPendingJobReasonRequest) Reset() {
+	*x = GetPendingJobReasonRequest{}
+	mi := &file_proto_job_job_proto_msgTypes[142]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPendingJobReasonRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPendingJobReasonRequest) ProtoMessage() {}
+
+func (x *GetPendingJobReasonRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_job_job_proto_msgTypes[142]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPendingJobReasonRequest.ProtoReflect.Descriptor instead.
+func (*GetPendingJobReasonRequest) Descriptor() ([]byte, []int) {
+	return file_proto_job_job_proto_rawDescGZIP(), []int{142}
+}
+
+func (x *GetPendingJobReasonRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type GetPendingJobReasonResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPendingJobReasonResponse) Reset() {
+	*x = GetPendingJobReasonResponse{}
+	mi := &file_proto_job_job_proto_msgTypes[143]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPendingJobReasonResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPendingJobReasonResponse) ProtoMessage() {}
+
+func (x *GetPendingJobReasonResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_job_job_proto_msgTypes[143]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPendingJobReasonResponse.ProtoReflect.Descriptor instead.
+func (*GetPendingJobReasonResponse) Descriptor() ([]byte, []int) {
+	return file_proto_job_job_proto_rawDescGZIP(), []int{143}
+}
+
+func (x *GetPendingJobReasonResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetPendingJobReasonsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPendingJobReasonsRequest) Reset() {
+	*x = GetPendingJobReasonsRequest{}
+	mi := &file_proto_job_job_proto_msgTypes[144]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPendingJobReasonsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPendingJobReasonsRequest) ProtoMessage() {}
+
+func (x *GetPendingJobReasonsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_job_job_proto_msgTypes[144]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPendingJobReasonsRequest.ProtoReflect.Descriptor instead.
+func (*GetPendingJobReasonsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_job_job_proto_rawDescGZIP(), []int{144}
+}
+
+func (x *GetPendingJobReasonsRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type GetPendingJobReasonsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPendingJobReasonsResponse) Reset() {
+	*x = GetPendingJobReasonsResponse{}
+	mi := &file_proto_job_job_proto_msgTypes[145]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPendingJobReasonsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPendingJobReasonsResponse) ProtoMessage() {}
+
+func (x *GetPendingJobReasonsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_job_job_proto_msgTypes[145]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPendingJobReasonsResponse.ProtoReflect.Descriptor instead.
+func (*GetPendingJobReasonsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_job_job_proto_rawDescGZIP(), []int{145}
+}
+
+func (x *GetPendingJobReasonsResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetPendingJobReasonsHistoryRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPendingJobReasonsHistoryRequest) Reset() {
+	*x = GetPendingJobReasonsHistoryRequest{}
+	mi := &file_proto_job_job_proto_msgTypes[146]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPendingJobReasonsHistoryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPendingJobReasonsHistoryRequest) ProtoMessage() {}
+
+func (x *GetPendingJobReasonsHistoryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_job_job_proto_msgTypes[146]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPendingJobReasonsHistoryRequest.ProtoReflect.Descriptor instead.
+func (*GetPendingJobReasonsHistoryRequest) Descriptor() ([]byte, []int) {
+	return file_proto_job_job_proto_rawDescGZIP(), []int{146}
+}
+
+func (x *GetPendingJobReasonsHistoryRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type GetPendingJobReasonsHistoryResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPendingJobReasonsHistoryResponse) Reset() {
+	*x = GetPendingJobReasonsHistoryResponse{}
+	mi := &file_proto_job_job_proto_msgTypes[147]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPendingJobReasonsHistoryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPendingJobReasonsHistoryResponse) ProtoMessage() {}
+
+func (x *GetPendingJobReasonsHistoryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_job_job_proto_msgTypes[147]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPendingJobReasonsHistoryResponse.ProtoReflect.Descriptor instead.
+func (*GetPendingJobReasonsHistoryResponse) Descriptor() ([]byte, []int) {
+	return file_proto_job_job_proto_rawDescGZIP(), []int{147}
+}
+
+func (x *GetPendingJobReasonsHistoryResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
 var File_proto_job_job_proto protoreflect.FileDescriptor
 
 const file_proto_job_job_proto_rawDesc = "" +
@@ -5894,6 +6478,30 @@ const file_proto_job_job_proto_rawDesc = "" +
 	"\x17SetUserInitiatedRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\bR\x04arg0\"2\n" +
 	"\x18SetUserInitiatedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\" \n" +
+	"\x1eCanRunUserInitiatedJobsRequest\"9\n" +
+	"\x1fCanRunUserInitiatedJobsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x1e\n" +
+	"\x1cCancelInAllNamespacesRequest\"\x1f\n" +
+	"\x1dCancelInAllNamespacesResponse\")\n" +
+	"\x13ForNamespaceRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\tR\x04arg0\".\n" +
+	"\x14ForNamespaceResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x15\n" +
+	"\x13GetNamespaceRequest\".\n" +
+	"\x14GetNamespaceResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"0\n" +
+	"\x1aGetPendingJobReasonRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"5\n" +
+	"\x1bGetPendingJobReasonResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"1\n" +
+	"\x1bGetPendingJobReasonsRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"6\n" +
+	"\x1cGetPendingJobReasonsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"8\n" +
+	"\"GetPendingJobReasonsHistoryRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"=\n" +
+	"#GetPendingJobReasonsHistoryResponse\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\x03R\x06result2\xcf\x18\n" +
 	"\x0eJobInfoService\x12O\n" +
 	"\x10DescribeContents\x12\x1c.job.DescribeContentsRequest\x1a\x1d.job.DescribeContentsResponse\x121\n" +
@@ -5966,7 +6574,15 @@ const file_proto_job_job_proto_rawDesc = "" +
 	"\x12SetTransientExtras\x12\x1e.job.SetTransientExtrasRequest\x1a\x1f.job.SetTransientExtrasResponse\x12j\n" +
 	"\x19SetTriggerContentMaxDelay\x12%.job.SetTriggerContentMaxDelayRequest\x1a&.job.SetTriggerContentMaxDelayResponse\x12s\n" +
 	"\x1cSetTriggerContentUpdateDelay\x12(.job.SetTriggerContentUpdateDelayRequest\x1a).job.SetTriggerContentUpdateDelayResponse\x12O\n" +
-	"\x10SetUserInitiated\x12\x1c.job.SetUserInitiatedRequest\x1a\x1d.job.SetUserInitiatedResponseB&Z$github.com/xaionaro-go/jni/proto/jobb\x06proto3"
+	"\x10SetUserInitiated\x12\x1c.job.SetUserInitiatedRequest\x1a\x1d.job.SetUserInitiatedResponse2\x8e\x05\n" +
+	"\x13JobSchedulerService\x12d\n" +
+	"\x17CanRunUserInitiatedJobs\x12#.job.CanRunUserInitiatedJobsRequest\x1a$.job.CanRunUserInitiatedJobsResponse\x12^\n" +
+	"\x15CancelInAllNamespaces\x12!.job.CancelInAllNamespacesRequest\x1a\".job.CancelInAllNamespacesResponse\x12C\n" +
+	"\fForNamespace\x12\x18.job.ForNamespaceRequest\x1a\x19.job.ForNamespaceResponse\x12C\n" +
+	"\fGetNamespace\x12\x18.job.GetNamespaceRequest\x1a\x19.job.GetNamespaceResponse\x12X\n" +
+	"\x13GetPendingJobReason\x12\x1f.job.GetPendingJobReasonRequest\x1a .job.GetPendingJobReasonResponse\x12[\n" +
+	"\x14GetPendingJobReasons\x12 .job.GetPendingJobReasonsRequest\x1a!.job.GetPendingJobReasonsResponse\x12p\n" +
+	"\x1bGetPendingJobReasonsHistory\x12'.job.GetPendingJobReasonsHistoryRequest\x1a(.job.GetPendingJobReasonsHistoryResponseB&Z$github.com/xaionaro-go/jni/proto/jobb\x06proto3"
 
 var (
 	file_proto_job_job_proto_rawDescOnce sync.Once
@@ -5980,7 +6596,7 @@ func file_proto_job_job_proto_rawDescGZIP() []byte {
 	return file_proto_job_job_proto_rawDescData
 }
 
-var file_proto_job_job_proto_msgTypes = make([]protoimpl.MessageInfo, 134)
+var file_proto_job_job_proto_msgTypes = make([]protoimpl.MessageInfo, 148)
 var file_proto_job_job_proto_goTypes = []any{
 	(*DescribeContentsRequest)(nil),                  // 0: job.DescribeContentsRequest
 	(*DescribeContentsResponse)(nil),                 // 1: job.DescribeContentsResponse
@@ -6116,6 +6732,20 @@ var file_proto_job_job_proto_goTypes = []any{
 	(*SetTriggerContentUpdateDelayResponse)(nil),     // 131: job.SetTriggerContentUpdateDelayResponse
 	(*SetUserInitiatedRequest)(nil),                  // 132: job.SetUserInitiatedRequest
 	(*SetUserInitiatedResponse)(nil),                 // 133: job.SetUserInitiatedResponse
+	(*CanRunUserInitiatedJobsRequest)(nil),           // 134: job.CanRunUserInitiatedJobsRequest
+	(*CanRunUserInitiatedJobsResponse)(nil),          // 135: job.CanRunUserInitiatedJobsResponse
+	(*CancelInAllNamespacesRequest)(nil),             // 136: job.CancelInAllNamespacesRequest
+	(*CancelInAllNamespacesResponse)(nil),            // 137: job.CancelInAllNamespacesResponse
+	(*ForNamespaceRequest)(nil),                      // 138: job.ForNamespaceRequest
+	(*ForNamespaceResponse)(nil),                     // 139: job.ForNamespaceResponse
+	(*GetNamespaceRequest)(nil),                      // 140: job.GetNamespaceRequest
+	(*GetNamespaceResponse)(nil),                     // 141: job.GetNamespaceResponse
+	(*GetPendingJobReasonRequest)(nil),               // 142: job.GetPendingJobReasonRequest
+	(*GetPendingJobReasonResponse)(nil),              // 143: job.GetPendingJobReasonResponse
+	(*GetPendingJobReasonsRequest)(nil),              // 144: job.GetPendingJobReasonsRequest
+	(*GetPendingJobReasonsResponse)(nil),             // 145: job.GetPendingJobReasonsResponse
+	(*GetPendingJobReasonsHistoryRequest)(nil),       // 146: job.GetPendingJobReasonsHistoryRequest
+	(*GetPendingJobReasonsHistoryResponse)(nil),      // 147: job.GetPendingJobReasonsHistoryResponse
 }
 var file_proto_job_job_proto_depIdxs = []int32{
 	0,   // 0: job.JobInfoService.DescribeContents:input_type -> job.DescribeContentsRequest
@@ -6185,75 +6815,89 @@ var file_proto_job_job_proto_depIdxs = []int32{
 	128, // 64: job.JobInfoBuilderService.SetTriggerContentMaxDelay:input_type -> job.SetTriggerContentMaxDelayRequest
 	130, // 65: job.JobInfoBuilderService.SetTriggerContentUpdateDelay:input_type -> job.SetTriggerContentUpdateDelayRequest
 	132, // 66: job.JobInfoBuilderService.SetUserInitiated:input_type -> job.SetUserInitiatedRequest
-	1,   // 67: job.JobInfoService.DescribeContents:output_type -> job.DescribeContentsResponse
-	3,   // 68: job.JobInfoService.Equals:output_type -> job.EqualsResponse
-	5,   // 69: job.JobInfoService.GetBackoffPolicy:output_type -> job.GetBackoffPolicyResponse
-	7,   // 70: job.JobInfoService.GetClipData:output_type -> job.GetClipDataResponse
-	9,   // 71: job.JobInfoService.GetClipGrantFlags:output_type -> job.GetClipGrantFlagsResponse
-	11,  // 72: job.JobInfoService.GetDebugTags:output_type -> job.GetDebugTagsResponse
-	13,  // 73: job.JobInfoService.GetEstimatedNetworkDownloadBytes:output_type -> job.GetEstimatedNetworkDownloadBytesResponse
-	15,  // 74: job.JobInfoService.GetEstimatedNetworkUploadBytes:output_type -> job.GetEstimatedNetworkUploadBytesResponse
-	17,  // 75: job.JobInfoService.GetExtras:output_type -> job.GetExtrasResponse
-	19,  // 76: job.JobInfoService.GetFlexMillis:output_type -> job.GetFlexMillisResponse
-	21,  // 77: job.JobInfoService.GetId:output_type -> job.GetIdResponse
-	23,  // 78: job.JobInfoService.GetInitialBackoffMillis:output_type -> job.GetInitialBackoffMillisResponse
-	25,  // 79: job.JobInfoService.GetIntervalMillis:output_type -> job.GetIntervalMillisResponse
-	27,  // 80: job.JobInfoService.GetMaxExecutionDelayMillis:output_type -> job.GetMaxExecutionDelayMillisResponse
-	29,  // 81: job.JobInfoService.GetMinLatencyMillis:output_type -> job.GetMinLatencyMillisResponse
-	31,  // 82: job.JobInfoService.GetMinimumNetworkChunkBytes:output_type -> job.GetMinimumNetworkChunkBytesResponse
-	33,  // 83: job.JobInfoService.GetNetworkType:output_type -> job.GetNetworkTypeResponse
-	35,  // 84: job.JobInfoService.GetPriority:output_type -> job.GetPriorityResponse
-	37,  // 85: job.JobInfoService.GetRequiredNetwork:output_type -> job.GetRequiredNetworkResponse
-	39,  // 86: job.JobInfoService.GetService:output_type -> job.GetServiceResponse
-	41,  // 87: job.JobInfoService.GetTraceTag:output_type -> job.GetTraceTagResponse
-	43,  // 88: job.JobInfoService.GetTransientExtras:output_type -> job.GetTransientExtrasResponse
-	45,  // 89: job.JobInfoService.GetTriggerContentMaxDelay:output_type -> job.GetTriggerContentMaxDelayResponse
-	47,  // 90: job.JobInfoService.GetTriggerContentUpdateDelay:output_type -> job.GetTriggerContentUpdateDelayResponse
-	49,  // 91: job.JobInfoService.GetTriggerContentUris:output_type -> job.GetTriggerContentUrisResponse
-	51,  // 92: job.JobInfoService.HashCode:output_type -> job.HashCodeResponse
-	53,  // 93: job.JobInfoService.IsExpedited:output_type -> job.IsExpeditedResponse
-	55,  // 94: job.JobInfoService.IsImportantWhileForeground:output_type -> job.IsImportantWhileForegroundResponse
-	57,  // 95: job.JobInfoService.IsPeriodic:output_type -> job.IsPeriodicResponse
-	59,  // 96: job.JobInfoService.IsPersisted:output_type -> job.IsPersistedResponse
-	61,  // 97: job.JobInfoService.IsPrefetch:output_type -> job.IsPrefetchResponse
-	63,  // 98: job.JobInfoService.IsRequireBatteryNotLow:output_type -> job.IsRequireBatteryNotLowResponse
-	65,  // 99: job.JobInfoService.IsRequireCharging:output_type -> job.IsRequireChargingResponse
-	67,  // 100: job.JobInfoService.IsRequireDeviceIdle:output_type -> job.IsRequireDeviceIdleResponse
-	69,  // 101: job.JobInfoService.IsRequireStorageNotLow:output_type -> job.IsRequireStorageNotLowResponse
-	71,  // 102: job.JobInfoService.IsUserInitiated:output_type -> job.IsUserInitiatedResponse
-	73,  // 103: job.JobInfoService.ToString:output_type -> job.ToStringResponse
-	75,  // 104: job.JobInfoService.WriteToParcel:output_type -> job.WriteToParcelResponse
-	77,  // 105: job.JobInfoBuilderService.AddDebugTag:output_type -> job.AddDebugTagResponse
-	79,  // 106: job.JobInfoBuilderService.AddTriggerContentUri:output_type -> job.AddTriggerContentUriResponse
-	81,  // 107: job.JobInfoBuilderService.Build:output_type -> job.BuildResponse
-	83,  // 108: job.JobInfoBuilderService.RemoveDebugTag:output_type -> job.RemoveDebugTagResponse
-	85,  // 109: job.JobInfoBuilderService.SetBackoffCriteria:output_type -> job.SetBackoffCriteriaResponse
-	87,  // 110: job.JobInfoBuilderService.SetClipData:output_type -> job.SetClipDataResponse
-	89,  // 111: job.JobInfoBuilderService.SetEstimatedNetworkBytes:output_type -> job.SetEstimatedNetworkBytesResponse
-	91,  // 112: job.JobInfoBuilderService.SetExpedited:output_type -> job.SetExpeditedResponse
-	93,  // 113: job.JobInfoBuilderService.SetExtras:output_type -> job.SetExtrasResponse
-	95,  // 114: job.JobInfoBuilderService.SetImportantWhileForeground:output_type -> job.SetImportantWhileForegroundResponse
-	97,  // 115: job.JobInfoBuilderService.SetMinimumLatency:output_type -> job.SetMinimumLatencyResponse
-	99,  // 116: job.JobInfoBuilderService.SetMinimumNetworkChunkBytes:output_type -> job.SetMinimumNetworkChunkBytesResponse
-	101, // 117: job.JobInfoBuilderService.SetOverrideDeadline:output_type -> job.SetOverrideDeadlineResponse
-	103, // 118: job.JobInfoBuilderService.SetPeriodic1:output_type -> job.SetPeriodic1Response
-	105, // 119: job.JobInfoBuilderService.SetPeriodic2_1:output_type -> job.SetPeriodic2_1Response
-	107, // 120: job.JobInfoBuilderService.SetPersisted:output_type -> job.SetPersistedResponse
-	109, // 121: job.JobInfoBuilderService.SetPrefetch:output_type -> job.SetPrefetchResponse
-	111, // 122: job.JobInfoBuilderService.SetPriority:output_type -> job.SetPriorityResponse
-	113, // 123: job.JobInfoBuilderService.SetRequiredNetwork:output_type -> job.SetRequiredNetworkResponse
-	115, // 124: job.JobInfoBuilderService.SetRequiredNetworkType:output_type -> job.SetRequiredNetworkTypeResponse
-	117, // 125: job.JobInfoBuilderService.SetRequiresBatteryNotLow:output_type -> job.SetRequiresBatteryNotLowResponse
-	119, // 126: job.JobInfoBuilderService.SetRequiresCharging:output_type -> job.SetRequiresChargingResponse
-	121, // 127: job.JobInfoBuilderService.SetRequiresDeviceIdle:output_type -> job.SetRequiresDeviceIdleResponse
-	123, // 128: job.JobInfoBuilderService.SetRequiresStorageNotLow:output_type -> job.SetRequiresStorageNotLowResponse
-	125, // 129: job.JobInfoBuilderService.SetTraceTag:output_type -> job.SetTraceTagResponse
-	127, // 130: job.JobInfoBuilderService.SetTransientExtras:output_type -> job.SetTransientExtrasResponse
-	129, // 131: job.JobInfoBuilderService.SetTriggerContentMaxDelay:output_type -> job.SetTriggerContentMaxDelayResponse
-	131, // 132: job.JobInfoBuilderService.SetTriggerContentUpdateDelay:output_type -> job.SetTriggerContentUpdateDelayResponse
-	133, // 133: job.JobInfoBuilderService.SetUserInitiated:output_type -> job.SetUserInitiatedResponse
-	67,  // [67:134] is the sub-list for method output_type
-	0,   // [0:67] is the sub-list for method input_type
+	134, // 67: job.JobSchedulerService.CanRunUserInitiatedJobs:input_type -> job.CanRunUserInitiatedJobsRequest
+	136, // 68: job.JobSchedulerService.CancelInAllNamespaces:input_type -> job.CancelInAllNamespacesRequest
+	138, // 69: job.JobSchedulerService.ForNamespace:input_type -> job.ForNamespaceRequest
+	140, // 70: job.JobSchedulerService.GetNamespace:input_type -> job.GetNamespaceRequest
+	142, // 71: job.JobSchedulerService.GetPendingJobReason:input_type -> job.GetPendingJobReasonRequest
+	144, // 72: job.JobSchedulerService.GetPendingJobReasons:input_type -> job.GetPendingJobReasonsRequest
+	146, // 73: job.JobSchedulerService.GetPendingJobReasonsHistory:input_type -> job.GetPendingJobReasonsHistoryRequest
+	1,   // 74: job.JobInfoService.DescribeContents:output_type -> job.DescribeContentsResponse
+	3,   // 75: job.JobInfoService.Equals:output_type -> job.EqualsResponse
+	5,   // 76: job.JobInfoService.GetBackoffPolicy:output_type -> job.GetBackoffPolicyResponse
+	7,   // 77: job.JobInfoService.GetClipData:output_type -> job.GetClipDataResponse
+	9,   // 78: job.JobInfoService.GetClipGrantFlags:output_type -> job.GetClipGrantFlagsResponse
+	11,  // 79: job.JobInfoService.GetDebugTags:output_type -> job.GetDebugTagsResponse
+	13,  // 80: job.JobInfoService.GetEstimatedNetworkDownloadBytes:output_type -> job.GetEstimatedNetworkDownloadBytesResponse
+	15,  // 81: job.JobInfoService.GetEstimatedNetworkUploadBytes:output_type -> job.GetEstimatedNetworkUploadBytesResponse
+	17,  // 82: job.JobInfoService.GetExtras:output_type -> job.GetExtrasResponse
+	19,  // 83: job.JobInfoService.GetFlexMillis:output_type -> job.GetFlexMillisResponse
+	21,  // 84: job.JobInfoService.GetId:output_type -> job.GetIdResponse
+	23,  // 85: job.JobInfoService.GetInitialBackoffMillis:output_type -> job.GetInitialBackoffMillisResponse
+	25,  // 86: job.JobInfoService.GetIntervalMillis:output_type -> job.GetIntervalMillisResponse
+	27,  // 87: job.JobInfoService.GetMaxExecutionDelayMillis:output_type -> job.GetMaxExecutionDelayMillisResponse
+	29,  // 88: job.JobInfoService.GetMinLatencyMillis:output_type -> job.GetMinLatencyMillisResponse
+	31,  // 89: job.JobInfoService.GetMinimumNetworkChunkBytes:output_type -> job.GetMinimumNetworkChunkBytesResponse
+	33,  // 90: job.JobInfoService.GetNetworkType:output_type -> job.GetNetworkTypeResponse
+	35,  // 91: job.JobInfoService.GetPriority:output_type -> job.GetPriorityResponse
+	37,  // 92: job.JobInfoService.GetRequiredNetwork:output_type -> job.GetRequiredNetworkResponse
+	39,  // 93: job.JobInfoService.GetService:output_type -> job.GetServiceResponse
+	41,  // 94: job.JobInfoService.GetTraceTag:output_type -> job.GetTraceTagResponse
+	43,  // 95: job.JobInfoService.GetTransientExtras:output_type -> job.GetTransientExtrasResponse
+	45,  // 96: job.JobInfoService.GetTriggerContentMaxDelay:output_type -> job.GetTriggerContentMaxDelayResponse
+	47,  // 97: job.JobInfoService.GetTriggerContentUpdateDelay:output_type -> job.GetTriggerContentUpdateDelayResponse
+	49,  // 98: job.JobInfoService.GetTriggerContentUris:output_type -> job.GetTriggerContentUrisResponse
+	51,  // 99: job.JobInfoService.HashCode:output_type -> job.HashCodeResponse
+	53,  // 100: job.JobInfoService.IsExpedited:output_type -> job.IsExpeditedResponse
+	55,  // 101: job.JobInfoService.IsImportantWhileForeground:output_type -> job.IsImportantWhileForegroundResponse
+	57,  // 102: job.JobInfoService.IsPeriodic:output_type -> job.IsPeriodicResponse
+	59,  // 103: job.JobInfoService.IsPersisted:output_type -> job.IsPersistedResponse
+	61,  // 104: job.JobInfoService.IsPrefetch:output_type -> job.IsPrefetchResponse
+	63,  // 105: job.JobInfoService.IsRequireBatteryNotLow:output_type -> job.IsRequireBatteryNotLowResponse
+	65,  // 106: job.JobInfoService.IsRequireCharging:output_type -> job.IsRequireChargingResponse
+	67,  // 107: job.JobInfoService.IsRequireDeviceIdle:output_type -> job.IsRequireDeviceIdleResponse
+	69,  // 108: job.JobInfoService.IsRequireStorageNotLow:output_type -> job.IsRequireStorageNotLowResponse
+	71,  // 109: job.JobInfoService.IsUserInitiated:output_type -> job.IsUserInitiatedResponse
+	73,  // 110: job.JobInfoService.ToString:output_type -> job.ToStringResponse
+	75,  // 111: job.JobInfoService.WriteToParcel:output_type -> job.WriteToParcelResponse
+	77,  // 112: job.JobInfoBuilderService.AddDebugTag:output_type -> job.AddDebugTagResponse
+	79,  // 113: job.JobInfoBuilderService.AddTriggerContentUri:output_type -> job.AddTriggerContentUriResponse
+	81,  // 114: job.JobInfoBuilderService.Build:output_type -> job.BuildResponse
+	83,  // 115: job.JobInfoBuilderService.RemoveDebugTag:output_type -> job.RemoveDebugTagResponse
+	85,  // 116: job.JobInfoBuilderService.SetBackoffCriteria:output_type -> job.SetBackoffCriteriaResponse
+	87,  // 117: job.JobInfoBuilderService.SetClipData:output_type -> job.SetClipDataResponse
+	89,  // 118: job.JobInfoBuilderService.SetEstimatedNetworkBytes:output_type -> job.SetEstimatedNetworkBytesResponse
+	91,  // 119: job.JobInfoBuilderService.SetExpedited:output_type -> job.SetExpeditedResponse
+	93,  // 120: job.JobInfoBuilderService.SetExtras:output_type -> job.SetExtrasResponse
+	95,  // 121: job.JobInfoBuilderService.SetImportantWhileForeground:output_type -> job.SetImportantWhileForegroundResponse
+	97,  // 122: job.JobInfoBuilderService.SetMinimumLatency:output_type -> job.SetMinimumLatencyResponse
+	99,  // 123: job.JobInfoBuilderService.SetMinimumNetworkChunkBytes:output_type -> job.SetMinimumNetworkChunkBytesResponse
+	101, // 124: job.JobInfoBuilderService.SetOverrideDeadline:output_type -> job.SetOverrideDeadlineResponse
+	103, // 125: job.JobInfoBuilderService.SetPeriodic1:output_type -> job.SetPeriodic1Response
+	105, // 126: job.JobInfoBuilderService.SetPeriodic2_1:output_type -> job.SetPeriodic2_1Response
+	107, // 127: job.JobInfoBuilderService.SetPersisted:output_type -> job.SetPersistedResponse
+	109, // 128: job.JobInfoBuilderService.SetPrefetch:output_type -> job.SetPrefetchResponse
+	111, // 129: job.JobInfoBuilderService.SetPriority:output_type -> job.SetPriorityResponse
+	113, // 130: job.JobInfoBuilderService.SetRequiredNetwork:output_type -> job.SetRequiredNetworkResponse
+	115, // 131: job.JobInfoBuilderService.SetRequiredNetworkType:output_type -> job.SetRequiredNetworkTypeResponse
+	117, // 132: job.JobInfoBuilderService.SetRequiresBatteryNotLow:output_type -> job.SetRequiresBatteryNotLowResponse
+	119, // 133: job.JobInfoBuilderService.SetRequiresCharging:output_type -> job.SetRequiresChargingResponse
+	121, // 134: job.JobInfoBuilderService.SetRequiresDeviceIdle:output_type -> job.SetRequiresDeviceIdleResponse
+	123, // 135: job.JobInfoBuilderService.SetRequiresStorageNotLow:output_type -> job.SetRequiresStorageNotLowResponse
+	125, // 136: job.JobInfoBuilderService.SetTraceTag:output_type -> job.SetTraceTagResponse
+	127, // 137: job.JobInfoBuilderService.SetTransientExtras:output_type -> job.SetTransientExtrasResponse
+	129, // 138: job.JobInfoBuilderService.SetTriggerContentMaxDelay:output_type -> job.SetTriggerContentMaxDelayResponse
+	131, // 139: job.JobInfoBuilderService.SetTriggerContentUpdateDelay:output_type -> job.SetTriggerContentUpdateDelayResponse
+	133, // 140: job.JobInfoBuilderService.SetUserInitiated:output_type -> job.SetUserInitiatedResponse
+	135, // 141: job.JobSchedulerService.CanRunUserInitiatedJobs:output_type -> job.CanRunUserInitiatedJobsResponse
+	137, // 142: job.JobSchedulerService.CancelInAllNamespaces:output_type -> job.CancelInAllNamespacesResponse
+	139, // 143: job.JobSchedulerService.ForNamespace:output_type -> job.ForNamespaceResponse
+	141, // 144: job.JobSchedulerService.GetNamespace:output_type -> job.GetNamespaceResponse
+	143, // 145: job.JobSchedulerService.GetPendingJobReason:output_type -> job.GetPendingJobReasonResponse
+	145, // 146: job.JobSchedulerService.GetPendingJobReasons:output_type -> job.GetPendingJobReasonsResponse
+	147, // 147: job.JobSchedulerService.GetPendingJobReasonsHistory:output_type -> job.GetPendingJobReasonsHistoryResponse
+	74,  // [74:148] is the sub-list for method output_type
+	0,   // [0:74] is the sub-list for method input_type
 	0,   // [0:0] is the sub-list for extension type_name
 	0,   // [0:0] is the sub-list for extension extendee
 	0,   // [0:0] is the sub-list for field type_name
@@ -6270,9 +6914,9 @@ func file_proto_job_job_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_job_job_proto_rawDesc), len(file_proto_job_job_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   134,
+			NumMessages:   148,
 			NumExtensions: 0,
-			NumServices:   2,
+			NumServices:   3,
 		},
 		GoTypes:           file_proto_job_job_proto_goTypes,
 		DependencyIndexes: file_proto_job_job_proto_depIdxs,

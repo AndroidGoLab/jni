@@ -20,6 +20,16 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsndefMessage                   *jni.GlobalRef
+	midndefMessageDescribeContents   jni.MethodID
+	midndefMessageEquals             jni.MethodID
+	midndefMessageGetByteArrayLength jni.MethodID
+	midndefMessageGetRecords         jni.MethodID
+	midndefMessageHashCode           jni.MethodID
+	midndefMessageToByteArray        jni.MethodID
+	midndefMessageToString           jni.MethodID
+	midndefMessageWriteToParcel      jni.MethodID
+
 	clsisoDep                              *jni.GlobalRef
 	midisoDepClose                         jni.MethodID
 	midisoDepConnect                       jni.MethodID
@@ -33,6 +43,70 @@ var (
 	midisoDepSetTimeout                    jni.MethodID
 	midisoDepTransceive                    jni.MethodID
 	midisoDepGet                           jni.MethodID
+
+	clsnfcAdapter                                  *jni.GlobalRef
+	midnfcAdapterDisable                           jni.MethodID
+	midnfcAdapterDisableForegroundDispatch         jni.MethodID
+	midnfcAdapterDisableReaderMode                 jni.MethodID
+	midnfcAdapterEnable                            jni.MethodID
+	midnfcAdapterEnableForegroundDispatch          jni.MethodID
+	midnfcAdapterEnableReaderMode                  jni.MethodID
+	midnfcAdapterGetNfcAntennaInfo                 jni.MethodID
+	midnfcAdapterIsEnabled                         jni.MethodID
+	midnfcAdapterIsObserveModeEnabled              jni.MethodID
+	midnfcAdapterIsObserveModeSupported            jni.MethodID
+	midnfcAdapterIsReaderOptionEnabled             jni.MethodID
+	midnfcAdapterIsReaderOptionSupported           jni.MethodID
+	midnfcAdapterIsSecureNfcEnabled                jni.MethodID
+	midnfcAdapterIsSecureNfcSupported              jni.MethodID
+	midnfcAdapterIsTagIntentAllowed                jni.MethodID
+	midnfcAdapterIsTagIntentAppPreferenceSupported jni.MethodID
+	midnfcAdapterResetDiscoveryTechnology          jni.MethodID
+	midnfcAdapterSetDiscoveryTechnology            jni.MethodID
+	midnfcAdapterSetObserveModeEnabled             jni.MethodID
+	midnfcAdapterGetDefaultAdapter                 jni.MethodID
+
+	clstag                 *jni.GlobalRef
+	midtagDescribeContents jni.MethodID
+	midtagGetId            jni.MethodID
+	midtagGetTechList      jni.MethodID
+	midtagToString         jni.MethodID
+	midtagWriteToParcel    jni.MethodID
+
+	clsndefRecord                        *jni.GlobalRef
+	midndefRecordDescribeContents        jni.MethodID
+	midndefRecordEquals                  jni.MethodID
+	midndefRecordGetId                   jni.MethodID
+	midndefRecordGetPayload              jni.MethodID
+	midndefRecordGetTnf                  jni.MethodID
+	midndefRecordGetType                 jni.MethodID
+	midndefRecordHashCode                jni.MethodID
+	midndefRecordToByteArray             jni.MethodID
+	midndefRecordToMimeType              jni.MethodID
+	midndefRecordToString                jni.MethodID
+	midndefRecordToUri                   jni.MethodID
+	midndefRecordWriteToParcel           jni.MethodID
+	midndefRecordCreateApplicationRecord jni.MethodID
+	midndefRecordCreateExternal          jni.MethodID
+	midndefRecordCreateMime              jni.MethodID
+	midndefRecordCreateTextRecord        jni.MethodID
+	midndefRecordCreateUri1              jni.MethodID
+	midndefRecordCreateUri1_1            jni.MethodID
+
+	clsndef                     *jni.GlobalRef
+	midndefCanMakeReadOnly      jni.MethodID
+	midndefClose                jni.MethodID
+	midndefConnect              jni.MethodID
+	midndefGetCachedNdefMessage jni.MethodID
+	midndefGetMaxSize           jni.MethodID
+	midndefGetNdefMessage       jni.MethodID
+	midndefGetTag               jni.MethodID
+	midndefGetType              jni.MethodID
+	midndefIsConnected          jni.MethodID
+	midndefIsWritable           jni.MethodID
+	midndefMakeReadOnly         jni.MethodID
+	midndefWriteNdefMessage     jni.MethodID
+	midndefGet                  jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -58,6 +132,76 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/nfc/NdefMessage")
+	if err != nil {
+		return fmt.Errorf("find class android.nfc.NdefMessage: %w", err)
+	}
+	clsndefMessage = env.NewGlobalRef(&c.Object)
+
+	midndefMessageDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefMessage)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefMessage.describeContents")
+	}
+
+	midndefMessageEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefMessage)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefMessage.equals")
+	}
+
+	midndefMessageGetByteArrayLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefMessage)), "getByteArrayLength", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefMessage.getByteArrayLength")
+	}
+
+	midndefMessageGetRecords, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefMessage)), "getRecords", "()[Landroid/nfc/NdefRecord;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefMessage.getRecords")
+	}
+
+	midndefMessageHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefMessage)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefMessage.hashCode")
+	}
+
+	midndefMessageToByteArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefMessage)), "toByteArray", "()[B")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefMessage.toByteArray")
+	}
+
+	midndefMessageToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefMessage)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefMessage.toString")
+	}
+
+	midndefMessageWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefMessage)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefMessage.writeToParcel")
+	}
 
 	c, err = env.FindClass("android/nfc/tech/IsoDep")
 	if err != nil {
@@ -159,6 +303,478 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.nfc.tech.IsoDep.get")
+	}
+
+	c, err = env.FindClass("android/nfc/NfcAdapter")
+	if err != nil {
+		return fmt.Errorf("find class android.nfc.NfcAdapter: %w", err)
+	}
+	clsnfcAdapter = env.NewGlobalRef(&c.Object)
+
+	midnfcAdapterDisable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "disable", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.disable")
+	}
+
+	midnfcAdapterDisableForegroundDispatch, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "disableForegroundDispatch", "(Landroid/app/Activity;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.disableForegroundDispatch")
+	}
+
+	midnfcAdapterDisableReaderMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "disableReaderMode", "(Landroid/app/Activity;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.disableReaderMode")
+	}
+
+	midnfcAdapterEnable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "enable", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.enable")
+	}
+
+	midnfcAdapterEnableForegroundDispatch, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "enableForegroundDispatch", "(Landroid/app/Activity;Landroid/app/PendingIntent;[Landroid/content/IntentFilter;[[Ljava/lang/String;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.enableForegroundDispatch")
+	}
+
+	midnfcAdapterEnableReaderMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "enableReaderMode", "(Landroid/app/Activity;Landroid/nfc/NfcAdapter$ReaderCallback;ILandroid/os/Bundle;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.enableReaderMode")
+	}
+
+	midnfcAdapterGetNfcAntennaInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "getNfcAntennaInfo", "()Landroid/nfc/NfcAntennaInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.getNfcAntennaInfo")
+	}
+
+	midnfcAdapterIsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "isEnabled", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.isEnabled")
+	}
+
+	midnfcAdapterIsObserveModeEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "isObserveModeEnabled", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.isObserveModeEnabled")
+	}
+
+	midnfcAdapterIsObserveModeSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "isObserveModeSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.isObserveModeSupported")
+	}
+
+	midnfcAdapterIsReaderOptionEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "isReaderOptionEnabled", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.isReaderOptionEnabled")
+	}
+
+	midnfcAdapterIsReaderOptionSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "isReaderOptionSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.isReaderOptionSupported")
+	}
+
+	midnfcAdapterIsSecureNfcEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "isSecureNfcEnabled", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.isSecureNfcEnabled")
+	}
+
+	midnfcAdapterIsSecureNfcSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "isSecureNfcSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.isSecureNfcSupported")
+	}
+
+	midnfcAdapterIsTagIntentAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "isTagIntentAllowed", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.isTagIntentAllowed")
+	}
+
+	midnfcAdapterIsTagIntentAppPreferenceSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "isTagIntentAppPreferenceSupported", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.isTagIntentAppPreferenceSupported")
+	}
+
+	midnfcAdapterResetDiscoveryTechnology, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "resetDiscoveryTechnology", "(Landroid/app/Activity;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.resetDiscoveryTechnology")
+	}
+
+	midnfcAdapterSetDiscoveryTechnology, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "setDiscoveryTechnology", "(Landroid/app/Activity;II)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.setDiscoveryTechnology")
+	}
+
+	midnfcAdapterSetObserveModeEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "setObserveModeEnabled", "(Z)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.setObserveModeEnabled")
+	}
+
+	midnfcAdapterGetDefaultAdapter, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsnfcAdapter)), "getDefaultAdapter", "(Landroid/content/Context;)Landroid/nfc/NfcAdapter;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NfcAdapter.getDefaultAdapter")
+	}
+
+	c, err = env.FindClass("android/nfc/Tag")
+	if err != nil {
+		return fmt.Errorf("find class android.nfc.Tag: %w", err)
+	}
+	clstag = env.NewGlobalRef(&c.Object)
+
+	midtagDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstag)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.Tag.describeContents")
+	}
+
+	midtagGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstag)), "getId", "()[B")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.Tag.getId")
+	}
+
+	midtagGetTechList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstag)), "getTechList", "()[Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.Tag.getTechList")
+	}
+
+	midtagToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstag)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.Tag.toString")
+	}
+
+	midtagWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clstag)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.Tag.writeToParcel")
+	}
+
+	c, err = env.FindClass("android/nfc/NdefRecord")
+	if err != nil {
+		return fmt.Errorf("find class android.nfc.NdefRecord: %w", err)
+	}
+	clsndefRecord = env.NewGlobalRef(&c.Object)
+
+	midndefRecordDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.describeContents")
+	}
+
+	midndefRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.equals")
+	}
+
+	midndefRecordGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "getId", "()[B")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.getId")
+	}
+
+	midndefRecordGetPayload, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "getPayload", "()[B")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.getPayload")
+	}
+
+	midndefRecordGetTnf, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "getTnf", "()S")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.getTnf")
+	}
+
+	midndefRecordGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "getType", "()[B")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.getType")
+	}
+
+	midndefRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.hashCode")
+	}
+
+	midndefRecordToByteArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "toByteArray", "()[B")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.toByteArray")
+	}
+
+	midndefRecordToMimeType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "toMimeType", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.toMimeType")
+	}
+
+	midndefRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.toString")
+	}
+
+	midndefRecordToUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "toUri", "()Landroid/net/Uri;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.toUri")
+	}
+
+	midndefRecordWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.writeToParcel")
+	}
+
+	midndefRecordCreateApplicationRecord, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "createApplicationRecord", "(Ljava/lang/String;)Landroid/nfc/NdefRecord;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.createApplicationRecord")
+	}
+
+	midndefRecordCreateExternal, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "createExternal", "(Ljava/lang/String;Ljava/lang/String;[B)Landroid/nfc/NdefRecord;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.createExternal")
+	}
+
+	midndefRecordCreateMime, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "createMime", "(Ljava/lang/String;[B)Landroid/nfc/NdefRecord;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.createMime")
+	}
+
+	midndefRecordCreateTextRecord, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "createTextRecord", "(Ljava/lang/String;Ljava/lang/String;)Landroid/nfc/NdefRecord;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.createTextRecord")
+	}
+
+	midndefRecordCreateUri1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "createUri", "(Landroid/net/Uri;)Landroid/nfc/NdefRecord;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.createUri")
+	}
+
+	midndefRecordCreateUri1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsndefRecord)), "createUri", "(Ljava/lang/String;)Landroid/nfc/NdefRecord;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.NdefRecord.createUri")
+	}
+
+	c, err = env.FindClass("android/nfc/tech/Ndef")
+	if err != nil {
+		return fmt.Errorf("find class android.nfc.tech.Ndef: %w", err)
+	}
+	clsndef = env.NewGlobalRef(&c.Object)
+
+	midndefCanMakeReadOnly, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "canMakeReadOnly", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.tech.Ndef.canMakeReadOnly")
+	}
+
+	midndefClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "close", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.tech.Ndef.close")
+	}
+
+	midndefConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "connect", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.tech.Ndef.connect")
+	}
+
+	midndefGetCachedNdefMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "getCachedNdefMessage", "()Landroid/nfc/NdefMessage;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.tech.Ndef.getCachedNdefMessage")
+	}
+
+	midndefGetMaxSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "getMaxSize", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.tech.Ndef.getMaxSize")
+	}
+
+	midndefGetNdefMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "getNdefMessage", "()Landroid/nfc/NdefMessage;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.tech.Ndef.getNdefMessage")
+	}
+
+	midndefGetTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "getTag", "()Landroid/nfc/Tag;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.tech.Ndef.getTag")
+	}
+
+	midndefGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "getType", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.tech.Ndef.getType")
+	}
+
+	midndefIsConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "isConnected", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.tech.Ndef.isConnected")
+	}
+
+	midndefIsWritable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "isWritable", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.tech.Ndef.isWritable")
+	}
+
+	midndefMakeReadOnly, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "makeReadOnly", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.tech.Ndef.makeReadOnly")
+	}
+
+	midndefWriteNdefMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "writeNdefMessage", "(Landroid/nfc/NdefMessage;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.tech.Ndef.writeNdefMessage")
+	}
+
+	midndefGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsndef)), "get", "(Landroid/nfc/Tag;)Landroid/nfc/tech/Ndef;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.nfc.tech.Ndef.get")
 	}
 
 	return nil

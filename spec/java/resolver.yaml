@@ -3,6 +3,442 @@ go_import: github.com/xaionaro-go/jni/content/resolver
 classes:
     - java_class: android.database.Cursor
       go_type: cursor
+    - java_class: android.net.Uri
+      go_type: uri
+      methods:
+        - java_method: compareTo
+          go_name: CompareTo1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getBooleanQueryParameter
+          go_name: GetBooleanQueryParameter
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: getQueryParameter
+          go_name: GetQueryParameter
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getQueryParameterNames
+          go_name: GetQueryParameterNames
+          returns: java.util.Set<java.lang.String>
+          error: true
+        - java_method: getQueryParameters
+          go_name: GetQueryParameters
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isAbsolute
+          go_name: IsAbsolute
+          returns: boolean
+          error: true
+        - java_method: isOpaque
+          go_name: IsOpaque
+          returns: boolean
+          error: true
+        - java_method: normalizeScheme
+          go_name: NormalizeScheme
+          returns: android.net.Uri
+          error: true
+        - java_method: compareTo
+          go_name: CompareTo1_1
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: int
+          error: true
+      static_methods:
+        - java_method: decode
+          go_name: Decode
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: encode
+          go_name: Encode1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: encode
+          go_name: Encode2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: String
+          error: true
+        - java_method: fromFile
+          go_name: FromFile
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: fromParts
+          go_name: FromParts
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: android.net.Uri
+          error: true
+        - java_method: parse
+          go_name: Parse
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: withAppendedPath
+          go_name: WithAppendedPath
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.ContentResolver
+      go_type: contentResolver
+      methods:
+        - java_method: applyBatch
+          go_name: ApplyBatch
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.util.ArrayList<android.content.ContentProviderOperation>
+              go_name: arg1
+          returns: android.content.ContentProviderResult[]
+          error: true
+        - java_method: cancelSync
+          go_name: CancelSync1_2
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getOutgoingPersistedUriPermissions
+          go_name: GetOutgoingPersistedUriPermissions
+          returns: java.util.List<android.content.UriPermission>
+          error: true
+        - java_method: getPersistedUriPermissions
+          go_name: GetPersistedUriPermissions
+          returns: java.util.List<android.content.UriPermission>
+          error: true
+        - java_method: getStreamTypes
+          go_name: GetStreamTypes
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: java.lang.String[]
+          error: true
+        - java_method: loadThumbnail
+          go_name: LoadThumbnail
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.util.Size
+              go_name: arg1
+            - java_type: android.os.CancellationSignal
+              go_name: arg2
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: notifyChange
+          go_name: NotifyChange2
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.database.ContentObserver
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: notifyChange
+          go_name: NotifyChange3_1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.database.ContentObserver
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: notifyChange
+          go_name: NotifyChange3_2
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.database.ContentObserver
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: notifyChange
+          go_name: NotifyChange3_3
+          params:
+            - java_type: java.util.Collection<android.net.Uri>
+              go_name: arg0
+            - java_type: android.database.ContentObserver
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: releasePersistableUriPermission
+          go_name: ReleasePersistableUriPermission
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: startSync
+          go_name: StartSync
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: takePersistableUriPermission
+          go_name: TakePersistableUriPermission
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: addPeriodicSync
+          go_name: AddPeriodicSync
+          params:
+            - java_type: android.accounts.Account
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+            - java_type: long
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: addStatusChangeListener
+          go_name: AddStatusChangeListener
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.content.SyncStatusObserver
+              go_name: arg1
+          returns: java.lang.Object
+          error: true
+        - java_method: cancelSync
+          go_name: CancelSync2
+          params:
+            - java_type: android.accounts.Account
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: cancelSync
+          go_name: CancelSync1_1
+          params:
+            - java_type: android.content.SyncRequest
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getCurrentSync
+          go_name: GetCurrentSync
+          returns: android.content.SyncInfo
+          error: true
+        - java_method: getCurrentSyncs
+          go_name: GetCurrentSyncs
+          returns: java.util.List<android.content.SyncInfo>
+          error: true
+        - java_method: getIsSyncable
+          go_name: GetIsSyncable
+          params:
+            - java_type: android.accounts.Account
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: getMasterSyncAutomatically
+          go_name: GetMasterSyncAutomatically
+          returns: boolean
+          error: true
+        - java_method: getPeriodicSyncs
+          go_name: GetPeriodicSyncs
+          params:
+            - java_type: android.accounts.Account
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: java.util.List<android.content.PeriodicSync>
+          error: true
+        - java_method: getSyncAdapterTypes
+          go_name: GetSyncAdapterTypes
+          returns: android.content.SyncAdapterType[]
+          error: true
+        - java_method: getSyncAutomatically
+          go_name: GetSyncAutomatically
+          params:
+            - java_type: android.accounts.Account
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: isSyncActive
+          go_name: IsSyncActive
+          params:
+            - java_type: android.accounts.Account
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: isSyncPending
+          go_name: IsSyncPending
+          params:
+            - java_type: android.accounts.Account
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: removePeriodicSync
+          go_name: RemovePeriodicSync
+          params:
+            - java_type: android.accounts.Account
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: removeStatusChangeListener
+          go_name: RemoveStatusChangeListener
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: requestSync
+          go_name: RequestSync3
+          params:
+            - java_type: android.accounts.Account
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: requestSync
+          go_name: RequestSync1_1
+          params:
+            - java_type: android.content.SyncRequest
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setIsSyncable
+          go_name: SetIsSyncable
+          params:
+            - java_type: android.accounts.Account
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setMasterSyncAutomatically
+          go_name: SetMasterSyncAutomatically
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setSyncAutomatically
+          go_name: SetSyncAutomatically
+          params:
+            - java_type: android.accounts.Account
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: validateSyncExtrasBundle
+          go_name: ValidateSyncExtrasBundle
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: wrap
+          go_name: Wrap1
+          params:
+            - java_type: android.content.ContentProvider
+              go_name: arg0
+          returns: android.content.ContentResolver
+          error: true
+        - java_method: wrap
+          go_name: Wrap1_1
+          params:
+            - java_type: android.content.ContentProviderClient
+              go_name: arg0
+          returns: android.content.ContentResolver
+          error: true
 constants:
     - go_name: FieldTypeBlob
       value: "0"
@@ -17,5 +453,149 @@ constants:
       value: "0"
       go_type: int
     - go_name: FieldTypeString
+      value: "0"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: Empty
+      value: "0"
+      go_type: int
+    - go_name: AnyCursorItemType
+      value: '""'
+      go_type: string
+    - go_name: CursorDirBaseType
+      value: '""'
+      go_type: string
+    - go_name: CursorItemBaseType
+      value: '""'
+      go_type: string
+    - go_name: ExtraHonoredArgs
+      value: '""'
+      go_type: string
+    - go_name: ExtraRefreshSupported
+      value: '""'
+      go_type: string
+    - go_name: ExtraSize
+      value: '""'
+      go_type: string
+    - go_name: ExtraTotalCount
+      value: '""'
+      go_type: string
+    - go_name: NotifyDelete
+      value: "0"
+      go_type: int
+    - go_name: NotifyInsert
+      value: "0"
+      go_type: int
+    - go_name: NotifySkipNotifyForDescendants
+      value: "0"
+      go_type: int
+    - go_name: NotifySyncToNetwork
+      value: "0"
+      go_type: int
+    - go_name: NotifyUpdate
+      value: "0"
+      go_type: int
+    - go_name: QueryArgGroupColumns
+      value: '""'
+      go_type: string
+    - go_name: QueryArgLimit
+      value: '""'
+      go_type: string
+    - go_name: QueryArgOffset
+      value: '""'
+      go_type: string
+    - go_name: QueryArgSortCollation
+      value: '""'
+      go_type: string
+    - go_name: QueryArgSortColumns
+      value: '""'
+      go_type: string
+    - go_name: QueryArgSortDirection
+      value: '""'
+      go_type: string
+    - go_name: QueryArgSortLocale
+      value: '""'
+      go_type: string
+    - go_name: QueryArgSqlGroupBy
+      value: '""'
+      go_type: string
+    - go_name: QueryArgSqlHaving
+      value: '""'
+      go_type: string
+    - go_name: QueryArgSqlLimit
+      value: '""'
+      go_type: string
+    - go_name: QueryArgSqlSelection
+      value: '""'
+      go_type: string
+    - go_name: QueryArgSqlSelectionArgs
+      value: '""'
+      go_type: string
+    - go_name: QueryArgSqlSortOrder
+      value: '""'
+      go_type: string
+    - go_name: QuerySortDirectionAscending
+      value: "0"
+      go_type: int
+    - go_name: QuerySortDirectionDescending
+      value: "0"
+      go_type: int
+    - go_name: SchemeAndroidResource
+      value: '""'
+      go_type: string
+    - go_name: SchemeContent
+      value: '""'
+      go_type: string
+    - go_name: SchemeFile
+      value: '""'
+      go_type: string
+    - go_name: SyncExtrasAccount
+      value: '""'
+      go_type: string
+    - go_name: SyncExtrasDiscardLocalDeletions
+      value: '""'
+      go_type: string
+    - go_name: SyncExtrasDoNotRetry
+      value: '""'
+      go_type: string
+    - go_name: SyncExtrasExpedited
+      value: '""'
+      go_type: string
+    - go_name: SyncExtrasForce
+      value: '""'
+      go_type: string
+    - go_name: SyncExtrasIgnoreBackoff
+      value: '""'
+      go_type: string
+    - go_name: SyncExtrasIgnoreSettings
+      value: '""'
+      go_type: string
+    - go_name: SyncExtrasInitialize
+      value: '""'
+      go_type: string
+    - go_name: SyncExtrasManual
+      value: '""'
+      go_type: string
+    - go_name: SyncExtrasOverrideTooManyDeletions
+      value: '""'
+      go_type: string
+    - go_name: SyncExtrasRequireCharging
+      value: '""'
+      go_type: string
+    - go_name: SyncExtrasScheduleAsExpeditedJob
+      value: '""'
+      go_type: string
+    - go_name: SyncExtrasUpload
+      value: '""'
+      go_type: string
+    - go_name: SyncObserverTypeActive
+      value: "0"
+      go_type: int
+    - go_name: SyncObserverTypePending
+      value: "0"
+      go_type: int
+    - go_name: SyncObserverTypeSettings
       value: "0"
       go_type: int

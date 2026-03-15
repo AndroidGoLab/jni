@@ -3,16 +3,55 @@
 package notification
 
 const (
-	Creator = 0
+	Creator                        = 0
+	AutomaticRuleStatusActivated   = 0
+	AutomaticRuleStatusDeactivated = 0
+	AutomaticRuleStatusDisabled    = 0
+	AutomaticRuleStatusEnabled     = 0
+	AutomaticRuleStatusRemoved     = 0
+	AutomaticRuleStatusUnknown     = 0
+	BubblePreferenceAll            = 0
+	BubblePreferenceNone           = 0
+	BubblePreferenceSelected       = 0
+	ImportanceDefault              = 0
+	ImportanceHigh                 = 0
+	ImportanceLow                  = 0
+	ImportanceMax                  = 0
+	ImportanceMin                  = 0
+	ImportanceNone                 = 0
+	ImportanceUnspecified          = 0
+	InterruptionFilterAlarms       = 0
+	InterruptionFilterAll          = 0
+	InterruptionFilterNone         = 0
+	InterruptionFilterPriority     = 0
+	InterruptionFilterUnknown      = 0
 )
 
 const (
-	DefaultChannelId = ""
-	EditConversation = ""
-	EditImportance   = ""
-	EditLauncher     = ""
-	EditLockedDevice = ""
-	EditSound        = ""
-	EditVibration    = ""
-	EditZen          = ""
+	DefaultChannelId                                = ""
+	EditConversation                                = ""
+	EditImportance                                  = ""
+	EditLauncher                                    = ""
+	EditLockedDevice                                = ""
+	EditSound                                       = ""
+	EditVibration                                   = ""
+	EditZen                                         = ""
+	ActionAppBlockStateChanged                      = ""
+	ActionAutomaticZenRule                          = ""
+	ActionAutomaticZenRuleStatusChanged             = ""
+	ActionConsolidatedNotificationPolicyChanged     = ""
+	ActionInterruptionFilterChanged                 = ""
+	ActionNotificationChannelBlockStateChanged      = ""
+	ActionNotificationChannelGroupBlockStateChanged = ""
+	ActionNotificationPolicyAccessGrantedChanged    = ""
+	ActionNotificationPolicyChanged                 = ""
+	ExtraAutomaticRuleId                            = ""
+	ExtraAutomaticZenRuleId                         = ""
+	ExtraAutomaticZenRuleStatus                     = ""
+	ExtraBlockedState                               = ""
+	ExtraNotificationChannelGroupId                 = ""
+	ExtraNotificationChannelId                      = ""
+	ExtraNotificationPolicy                         = ""
+	MetaDataAutomaticRuleType                       = ""
+	MetaDataRuleInstanceLimit                       = ""
 )

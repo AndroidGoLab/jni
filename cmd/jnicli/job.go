@@ -1200,6 +1200,135 @@ var jobJobInfoBuilderSetUserInitiatedCmd = &cobra.Command{
 	},
 }
 
+var jobJobSchedulerCmd = &cobra.Command{
+	Use:   "job-scheduler",
+	Short: "JobSchedulerService operations",
+}
+
+var jobJobSchedulerCanRunUserInitiatedJobsCmd = &cobra.Command{
+	Use:   "can-run-user-initiated-jobs",
+	Short: "CanRunUserInitiatedJobs RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobSchedulerServiceClient(grpcConn)
+		req := &pb.CanRunUserInitiatedJobsRequest{}
+		resp, err := client.CanRunUserInitiatedJobs(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var jobJobSchedulerCancelInAllNamespacesCmd = &cobra.Command{
+	Use:   "cancel-in-all-namespaces",
+	Short: "CancelInAllNamespaces RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobSchedulerServiceClient(grpcConn)
+		req := &pb.CancelInAllNamespacesRequest{}
+		resp, err := client.CancelInAllNamespaces(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var jobJobSchedulerForNamespaceCmd = &cobra.Command{
+	Use:   "for-namespace",
+	Short: "ForNamespace RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobSchedulerServiceClient(grpcConn)
+		req := &pb.ForNamespaceRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.ForNamespace(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var jobJobSchedulerGetNamespaceCmd = &cobra.Command{
+	Use:   "get-namespace",
+	Short: "GetNamespace RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobSchedulerServiceClient(grpcConn)
+		req := &pb.GetNamespaceRequest{}
+		resp, err := client.GetNamespace(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var jobJobSchedulerGetPendingJobReasonCmd = &cobra.Command{
+	Use:   "get-pending-job-reason",
+	Short: "GetPendingJobReason RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobSchedulerServiceClient(grpcConn)
+		req := &pb.GetPendingJobReasonRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetPendingJobReason(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var jobJobSchedulerGetPendingJobReasonsCmd = &cobra.Command{
+	Use:   "get-pending-job-reasons",
+	Short: "GetPendingJobReasons RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobSchedulerServiceClient(grpcConn)
+		req := &pb.GetPendingJobReasonsRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetPendingJobReasons(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var jobJobSchedulerGetPendingJobReasonsHistoryCmd = &cobra.Command{
+	Use:   "get-pending-job-reasons-history",
+	Short: "GetPendingJobReasonsHistory RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewJobSchedulerServiceClient(grpcConn)
+		req := &pb.GetPendingJobReasonsHistoryRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetPendingJobReasonsHistory(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 func init() {
 	jobJobInfoCmd.AddCommand(jobJobInfoDescribeContentsCmd)
 	jobJobInfoEqualsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
@@ -1305,5 +1434,17 @@ func init() {
 	jobJobInfoBuilderSetUserInitiatedCmd.Flags().Bool("arg0", false, "arg0 (bool)")
 	jobJobInfoBuilderCmd.AddCommand(jobJobInfoBuilderSetUserInitiatedCmd)
 	jobCmd.AddCommand(jobJobInfoBuilderCmd)
+	jobJobSchedulerCmd.AddCommand(jobJobSchedulerCanRunUserInitiatedJobsCmd)
+	jobJobSchedulerCmd.AddCommand(jobJobSchedulerCancelInAllNamespacesCmd)
+	jobJobSchedulerForNamespaceCmd.Flags().String("arg0", "", "arg0 (string)")
+	jobJobSchedulerCmd.AddCommand(jobJobSchedulerForNamespaceCmd)
+	jobJobSchedulerCmd.AddCommand(jobJobSchedulerGetNamespaceCmd)
+	jobJobSchedulerGetPendingJobReasonCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	jobJobSchedulerCmd.AddCommand(jobJobSchedulerGetPendingJobReasonCmd)
+	jobJobSchedulerGetPendingJobReasonsCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	jobJobSchedulerCmd.AddCommand(jobJobSchedulerGetPendingJobReasonsCmd)
+	jobJobSchedulerGetPendingJobReasonsHistoryCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	jobJobSchedulerCmd.AddCommand(jobJobSchedulerGetPendingJobReasonsHistoryCmd)
+	jobCmd.AddCommand(jobJobSchedulerCmd)
 	rootCmd.AddCommand(jobCmd)
 }

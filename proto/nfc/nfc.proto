@@ -6,6 +6,64 @@ package nfc;
 
 option go_package = "github.com/xaionaro-go/jni/proto/nfc";
 
+message DescribeContentsRequest {
+}
+
+message DescribeContentsResponse {
+  int32 result = 1;
+}
+
+message EqualsRequest {
+  int64 arg0 = 1;
+}
+
+message EqualsResponse {
+  bool result = 1;
+}
+
+message GetByteArrayLengthRequest {
+}
+
+message GetByteArrayLengthResponse {
+  int32 result = 1;
+}
+
+message GetRecordsRequest {
+}
+
+message GetRecordsResponse {
+  int64 result = 1;
+}
+
+message HashCodeRequest {
+}
+
+message HashCodeResponse {
+  int32 result = 1;
+}
+
+message ToByteArrayRequest {
+}
+
+message ToByteArrayResponse {
+  int64 result = 1;
+}
+
+message ToStringRequest {
+}
+
+message ToStringResponse {
+  string result = 1;
+}
+
+message WriteToParcelRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message WriteToParcelResponse {
+}
+
 message CloseRequest {
 }
 
@@ -90,6 +148,321 @@ message GetResponse {
   int64 result = 1;
 }
 
+message DisableRequest {
+}
+
+message DisableResponse {
+  bool result = 1;
+}
+
+message DisableForegroundDispatchRequest {
+  int64 arg0 = 1;
+}
+
+message DisableForegroundDispatchResponse {
+}
+
+message DisableReaderModeRequest {
+  int64 arg0 = 1;
+}
+
+message DisableReaderModeResponse {
+}
+
+message EnableRequest {
+}
+
+message EnableResponse {
+  bool result = 1;
+}
+
+message EnableForegroundDispatchRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message EnableForegroundDispatchResponse {
+}
+
+message EnableReaderModeRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int32 arg2 = 3;
+  int64 arg3 = 4;
+}
+
+message EnableReaderModeResponse {
+}
+
+message GetNfcAntennaInfoRequest {
+}
+
+message GetNfcAntennaInfoResponse {
+  int64 result = 1;
+}
+
+message IsEnabledRequest {
+}
+
+message IsEnabledResponse {
+  bool result = 1;
+}
+
+message IsObserveModeEnabledRequest {
+}
+
+message IsObserveModeEnabledResponse {
+  bool result = 1;
+}
+
+message IsObserveModeSupportedRequest {
+}
+
+message IsObserveModeSupportedResponse {
+  bool result = 1;
+}
+
+message IsReaderOptionEnabledRequest {
+}
+
+message IsReaderOptionEnabledResponse {
+  bool result = 1;
+}
+
+message IsReaderOptionSupportedRequest {
+}
+
+message IsReaderOptionSupportedResponse {
+  bool result = 1;
+}
+
+message IsSecureNfcEnabledRequest {
+}
+
+message IsSecureNfcEnabledResponse {
+  bool result = 1;
+}
+
+message IsSecureNfcSupportedRequest {
+}
+
+message IsSecureNfcSupportedResponse {
+  bool result = 1;
+}
+
+message IsTagIntentAllowedRequest {
+}
+
+message IsTagIntentAllowedResponse {
+  bool result = 1;
+}
+
+message IsTagIntentAppPreferenceSupportedRequest {
+}
+
+message IsTagIntentAppPreferenceSupportedResponse {
+  bool result = 1;
+}
+
+message ResetDiscoveryTechnologyRequest {
+  int64 arg0 = 1;
+}
+
+message ResetDiscoveryTechnologyResponse {
+}
+
+message SetDiscoveryTechnologyRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message SetDiscoveryTechnologyResponse {
+}
+
+message SetObserveModeEnabledRequest {
+  bool arg0 = 1;
+}
+
+message SetObserveModeEnabledResponse {
+  bool result = 1;
+}
+
+message GetDefaultAdapterRequest {
+  int64 arg0 = 1;
+}
+
+message GetDefaultAdapterResponse {
+  int64 result = 1;
+}
+
+message GetIdRequest {
+}
+
+message GetIdResponse {
+  int64 result = 1;
+}
+
+message GetTechListRequest {
+}
+
+message GetTechListResponse {
+  int64 result = 1;
+}
+
+message GetPayloadRequest {
+}
+
+message GetPayloadResponse {
+  int64 result = 1;
+}
+
+message GetTnfRequest {
+}
+
+message GetTnfResponse {
+  int32 result = 1;
+}
+
+message GetTypeRequest {
+}
+
+message GetTypeResponse {
+  int64 result = 1;
+}
+
+message ToMimeTypeRequest {
+}
+
+message ToMimeTypeResponse {
+  string result = 1;
+}
+
+message ToUriRequest {
+}
+
+message ToUriResponse {
+  int64 result = 1;
+}
+
+message CreateApplicationRecordRequest {
+  string arg0 = 1;
+}
+
+message CreateApplicationRecordResponse {
+  int64 result = 1;
+}
+
+message CreateExternalRequest {
+  string arg0 = 1;
+  string arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message CreateExternalResponse {
+  int64 result = 1;
+}
+
+message CreateMimeRequest {
+  string arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message CreateMimeResponse {
+  int64 result = 1;
+}
+
+message CreateTextRecordRequest {
+  string arg0 = 1;
+  string arg1 = 2;
+}
+
+message CreateTextRecordResponse {
+  int64 result = 1;
+}
+
+message CreateUri1Request {
+  int64 arg0 = 1;
+}
+
+message CreateUri1Response {
+  int64 result = 1;
+}
+
+message CreateUri1_1Request {
+  string arg0 = 1;
+}
+
+message CreateUri1_1Response {
+  int64 result = 1;
+}
+
+message CanMakeReadOnlyRequest {
+}
+
+message CanMakeReadOnlyResponse {
+  bool result = 1;
+}
+
+message GetCachedNdefMessageRequest {
+}
+
+message GetCachedNdefMessageResponse {
+  int64 result = 1;
+}
+
+message GetMaxSizeRequest {
+}
+
+message GetMaxSizeResponse {
+  int32 result = 1;
+}
+
+message GetNdefMessageRequest {
+}
+
+message GetNdefMessageResponse {
+  int64 result = 1;
+}
+
+message NdefGetTypeResponse {
+  string result = 1;
+}
+
+message IsWritableRequest {
+}
+
+message IsWritableResponse {
+  bool result = 1;
+}
+
+message MakeReadOnlyRequest {
+}
+
+message MakeReadOnlyResponse {
+  bool result = 1;
+}
+
+message WriteNdefMessageRequest {
+  int64 arg0 = 1;
+}
+
+message WriteNdefMessageResponse {
+}
+
+service NdefMessageService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc Equals (EqualsRequest) returns (EqualsResponse);
+  rpc GetByteArrayLength (GetByteArrayLengthRequest) returns (GetByteArrayLengthResponse);
+  rpc GetRecords (GetRecordsRequest) returns (GetRecordsResponse);
+  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
+  rpc ToByteArray (ToByteArrayRequest) returns (ToByteArrayResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+}
+
 service IsoDepService {
   rpc Close (CloseRequest) returns (CloseResponse);
   rpc Connect (ConnectRequest) returns (ConnectResponse);
@@ -102,5 +475,73 @@ service IsoDepService {
   rpc IsExtendedLengthApduSupported (IsExtendedLengthApduSupportedRequest) returns (IsExtendedLengthApduSupportedResponse);
   rpc SetTimeout (SetTimeoutRequest) returns (SetTimeoutResponse);
   rpc Transceive (TransceiveRequest) returns (TransceiveResponse);
+  rpc Get (GetRequest) returns (GetResponse);
+}
+
+service NfcAdapterService {
+  rpc Disable (DisableRequest) returns (DisableResponse);
+  rpc DisableForegroundDispatch (DisableForegroundDispatchRequest) returns (DisableForegroundDispatchResponse);
+  rpc DisableReaderMode (DisableReaderModeRequest) returns (DisableReaderModeResponse);
+  rpc Enable (EnableRequest) returns (EnableResponse);
+  rpc EnableForegroundDispatch (EnableForegroundDispatchRequest) returns (EnableForegroundDispatchResponse);
+  rpc EnableReaderMode (EnableReaderModeRequest) returns (EnableReaderModeResponse);
+  rpc GetNfcAntennaInfo (GetNfcAntennaInfoRequest) returns (GetNfcAntennaInfoResponse);
+  rpc IsEnabled (IsEnabledRequest) returns (IsEnabledResponse);
+  rpc IsObserveModeEnabled (IsObserveModeEnabledRequest) returns (IsObserveModeEnabledResponse);
+  rpc IsObserveModeSupported (IsObserveModeSupportedRequest) returns (IsObserveModeSupportedResponse);
+  rpc IsReaderOptionEnabled (IsReaderOptionEnabledRequest) returns (IsReaderOptionEnabledResponse);
+  rpc IsReaderOptionSupported (IsReaderOptionSupportedRequest) returns (IsReaderOptionSupportedResponse);
+  rpc IsSecureNfcEnabled (IsSecureNfcEnabledRequest) returns (IsSecureNfcEnabledResponse);
+  rpc IsSecureNfcSupported (IsSecureNfcSupportedRequest) returns (IsSecureNfcSupportedResponse);
+  rpc IsTagIntentAllowed (IsTagIntentAllowedRequest) returns (IsTagIntentAllowedResponse);
+  rpc IsTagIntentAppPreferenceSupported (IsTagIntentAppPreferenceSupportedRequest) returns (IsTagIntentAppPreferenceSupportedResponse);
+  rpc ResetDiscoveryTechnology (ResetDiscoveryTechnologyRequest) returns (ResetDiscoveryTechnologyResponse);
+  rpc SetDiscoveryTechnology (SetDiscoveryTechnologyRequest) returns (SetDiscoveryTechnologyResponse);
+  rpc SetObserveModeEnabled (SetObserveModeEnabledRequest) returns (SetObserveModeEnabledResponse);
+  rpc GetDefaultAdapter (GetDefaultAdapterRequest) returns (GetDefaultAdapterResponse);
+}
+
+service TagService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc GetId (GetIdRequest) returns (GetIdResponse);
+  rpc GetTechList (GetTechListRequest) returns (GetTechListResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+}
+
+service NdefRecordService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc Equals (EqualsRequest) returns (EqualsResponse);
+  rpc GetId (GetIdRequest) returns (GetIdResponse);
+  rpc GetPayload (GetPayloadRequest) returns (GetPayloadResponse);
+  rpc GetTnf (GetTnfRequest) returns (GetTnfResponse);
+  rpc GetType (GetTypeRequest) returns (GetTypeResponse);
+  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
+  rpc ToByteArray (ToByteArrayRequest) returns (ToByteArrayResponse);
+  rpc ToMimeType (ToMimeTypeRequest) returns (ToMimeTypeResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc ToUri (ToUriRequest) returns (ToUriResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+  rpc CreateApplicationRecord (CreateApplicationRecordRequest) returns (CreateApplicationRecordResponse);
+  rpc CreateExternal (CreateExternalRequest) returns (CreateExternalResponse);
+  rpc CreateMime (CreateMimeRequest) returns (CreateMimeResponse);
+  rpc CreateTextRecord (CreateTextRecordRequest) returns (CreateTextRecordResponse);
+  rpc CreateUri1 (CreateUri1Request) returns (CreateUri1Response);
+  rpc CreateUri1_1 (CreateUri1_1Request) returns (CreateUri1_1Response);
+}
+
+service NdefService {
+  rpc CanMakeReadOnly (CanMakeReadOnlyRequest) returns (CanMakeReadOnlyResponse);
+  rpc Close (CloseRequest) returns (CloseResponse);
+  rpc Connect (ConnectRequest) returns (ConnectResponse);
+  rpc GetCachedNdefMessage (GetCachedNdefMessageRequest) returns (GetCachedNdefMessageResponse);
+  rpc GetMaxSize (GetMaxSizeRequest) returns (GetMaxSizeResponse);
+  rpc GetNdefMessage (GetNdefMessageRequest) returns (GetNdefMessageResponse);
+  rpc GetTag (GetTagRequest) returns (GetTagResponse);
+  rpc GetType (GetTypeRequest) returns (NdefGetTypeResponse);
+  rpc IsConnected (IsConnectedRequest) returns (IsConnectedResponse);
+  rpc IsWritable (IsWritableRequest) returns (IsWritableResponse);
+  rpc MakeReadOnly (MakeReadOnlyRequest) returns (MakeReadOnlyResponse);
+  rpc WriteNdefMessage (WriteNdefMessageRequest) returns (WriteNdefMessageResponse);
   rpc Get (GetRequest) returns (GetResponse);
 }

@@ -23,6 +23,158 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type StopRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopRequest) Reset() {
+	*x = StopRequest{}
+	mi := &file_proto_projection_projection_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopRequest) ProtoMessage() {}
+
+func (x *StopRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopRequest.ProtoReflect.Descriptor instead.
+func (*StopRequest) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{0}
+}
+
+type StopResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopResponse) Reset() {
+	*x = StopResponse{}
+	mi := &file_proto_projection_projection_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopResponse) ProtoMessage() {}
+
+func (x *StopResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopResponse.ProtoReflect.Descriptor instead.
+func (*StopResponse) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{1}
+}
+
+type UnregisterCallbackRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UnregisterCallbackRequest) Reset() {
+	*x = UnregisterCallbackRequest{}
+	mi := &file_proto_projection_projection_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UnregisterCallbackRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnregisterCallbackRequest) ProtoMessage() {}
+
+func (x *UnregisterCallbackRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnregisterCallbackRequest.ProtoReflect.Descriptor instead.
+func (*UnregisterCallbackRequest) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UnregisterCallbackRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type UnregisterCallbackResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UnregisterCallbackResponse) Reset() {
+	*x = UnregisterCallbackResponse{}
+	mi := &file_proto_projection_projection_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UnregisterCallbackResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnregisterCallbackResponse) ProtoMessage() {}
+
+func (x *UnregisterCallbackResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnregisterCallbackResponse.ProtoReflect.Descriptor instead.
+func (*UnregisterCallbackResponse) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{3}
+}
+
 type CreateScreenCaptureIntent0Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -31,7 +183,7 @@ type CreateScreenCaptureIntent0Request struct {
 
 func (x *CreateScreenCaptureIntent0Request) Reset() {
 	*x = CreateScreenCaptureIntent0Request{}
-	mi := &file_proto_projection_projection_proto_msgTypes[0]
+	mi := &file_proto_projection_projection_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +195,7 @@ func (x *CreateScreenCaptureIntent0Request) String() string {
 func (*CreateScreenCaptureIntent0Request) ProtoMessage() {}
 
 func (x *CreateScreenCaptureIntent0Request) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_projection_projection_proto_msgTypes[0]
+	mi := &file_proto_projection_projection_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +208,7 @@ func (x *CreateScreenCaptureIntent0Request) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use CreateScreenCaptureIntent0Request.ProtoReflect.Descriptor instead.
 func (*CreateScreenCaptureIntent0Request) Descriptor() ([]byte, []int) {
-	return file_proto_projection_projection_proto_rawDescGZIP(), []int{0}
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{4}
 }
 
 type CreateScreenCaptureIntent0Response struct {
@@ -68,7 +220,7 @@ type CreateScreenCaptureIntent0Response struct {
 
 func (x *CreateScreenCaptureIntent0Response) Reset() {
 	*x = CreateScreenCaptureIntent0Response{}
-	mi := &file_proto_projection_projection_proto_msgTypes[1]
+	mi := &file_proto_projection_projection_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -80,7 +232,7 @@ func (x *CreateScreenCaptureIntent0Response) String() string {
 func (*CreateScreenCaptureIntent0Response) ProtoMessage() {}
 
 func (x *CreateScreenCaptureIntent0Response) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_projection_projection_proto_msgTypes[1]
+	mi := &file_proto_projection_projection_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -93,7 +245,7 @@ func (x *CreateScreenCaptureIntent0Response) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use CreateScreenCaptureIntent0Response.ProtoReflect.Descriptor instead.
 func (*CreateScreenCaptureIntent0Response) Descriptor() ([]byte, []int) {
-	return file_proto_projection_projection_proto_rawDescGZIP(), []int{1}
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CreateScreenCaptureIntent0Response) GetResult() int64 {
@@ -112,7 +264,7 @@ type CreateScreenCaptureIntent1_1Request struct {
 
 func (x *CreateScreenCaptureIntent1_1Request) Reset() {
 	*x = CreateScreenCaptureIntent1_1Request{}
-	mi := &file_proto_projection_projection_proto_msgTypes[2]
+	mi := &file_proto_projection_projection_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -124,7 +276,7 @@ func (x *CreateScreenCaptureIntent1_1Request) String() string {
 func (*CreateScreenCaptureIntent1_1Request) ProtoMessage() {}
 
 func (x *CreateScreenCaptureIntent1_1Request) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_projection_projection_proto_msgTypes[2]
+	mi := &file_proto_projection_projection_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -137,7 +289,7 @@ func (x *CreateScreenCaptureIntent1_1Request) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use CreateScreenCaptureIntent1_1Request.ProtoReflect.Descriptor instead.
 func (*CreateScreenCaptureIntent1_1Request) Descriptor() ([]byte, []int) {
-	return file_proto_projection_projection_proto_rawDescGZIP(), []int{2}
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CreateScreenCaptureIntent1_1Request) GetArg0() int64 {
@@ -156,7 +308,7 @@ type CreateScreenCaptureIntent1_1Response struct {
 
 func (x *CreateScreenCaptureIntent1_1Response) Reset() {
 	*x = CreateScreenCaptureIntent1_1Response{}
-	mi := &file_proto_projection_projection_proto_msgTypes[3]
+	mi := &file_proto_projection_projection_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -168,7 +320,7 @@ func (x *CreateScreenCaptureIntent1_1Response) String() string {
 func (*CreateScreenCaptureIntent1_1Response) ProtoMessage() {}
 
 func (x *CreateScreenCaptureIntent1_1Response) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_projection_projection_proto_msgTypes[3]
+	mi := &file_proto_projection_projection_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -181,7 +333,7 @@ func (x *CreateScreenCaptureIntent1_1Response) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use CreateScreenCaptureIntent1_1Response.ProtoReflect.Descriptor instead.
 func (*CreateScreenCaptureIntent1_1Response) Descriptor() ([]byte, []int) {
-	return file_proto_projection_projection_proto_rawDescGZIP(), []int{3}
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CreateScreenCaptureIntent1_1Response) GetResult() int64 {
@@ -201,7 +353,7 @@ type GetMediaProjectionRequest struct {
 
 func (x *GetMediaProjectionRequest) Reset() {
 	*x = GetMediaProjectionRequest{}
-	mi := &file_proto_projection_projection_proto_msgTypes[4]
+	mi := &file_proto_projection_projection_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -213,7 +365,7 @@ func (x *GetMediaProjectionRequest) String() string {
 func (*GetMediaProjectionRequest) ProtoMessage() {}
 
 func (x *GetMediaProjectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_projection_projection_proto_msgTypes[4]
+	mi := &file_proto_projection_projection_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -226,7 +378,7 @@ func (x *GetMediaProjectionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMediaProjectionRequest.ProtoReflect.Descriptor instead.
 func (*GetMediaProjectionRequest) Descriptor() ([]byte, []int) {
-	return file_proto_projection_projection_proto_rawDescGZIP(), []int{4}
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetMediaProjectionRequest) GetArg0() int32 {
@@ -252,7 +404,7 @@ type GetMediaProjectionResponse struct {
 
 func (x *GetMediaProjectionResponse) Reset() {
 	*x = GetMediaProjectionResponse{}
-	mi := &file_proto_projection_projection_proto_msgTypes[5]
+	mi := &file_proto_projection_projection_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -264,7 +416,7 @@ func (x *GetMediaProjectionResponse) String() string {
 func (*GetMediaProjectionResponse) ProtoMessage() {}
 
 func (x *GetMediaProjectionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_projection_projection_proto_msgTypes[5]
+	mi := &file_proto_projection_projection_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -277,7 +429,7 @@ func (x *GetMediaProjectionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMediaProjectionResponse.ProtoReflect.Descriptor instead.
 func (*GetMediaProjectionResponse) Descriptor() ([]byte, []int) {
-	return file_proto_projection_projection_proto_rawDescGZIP(), []int{5}
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetMediaProjectionResponse) GetResult() int64 {
@@ -287,12 +439,585 @@ func (x *GetMediaProjectionResponse) GetResult() int64 {
 	return 0
 }
 
+type GetDisplayRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDisplayRequest) Reset() {
+	*x = GetDisplayRequest{}
+	mi := &file_proto_projection_projection_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDisplayRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDisplayRequest) ProtoMessage() {}
+
+func (x *GetDisplayRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDisplayRequest.ProtoReflect.Descriptor instead.
+func (*GetDisplayRequest) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{10}
+}
+
+type GetDisplayResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDisplayResponse) Reset() {
+	*x = GetDisplayResponse{}
+	mi := &file_proto_projection_projection_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDisplayResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDisplayResponse) ProtoMessage() {}
+
+func (x *GetDisplayResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDisplayResponse.ProtoReflect.Descriptor instead.
+func (*GetDisplayResponse) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *GetDisplayResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetSurfaceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSurfaceRequest) Reset() {
+	*x = GetSurfaceRequest{}
+	mi := &file_proto_projection_projection_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSurfaceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSurfaceRequest) ProtoMessage() {}
+
+func (x *GetSurfaceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSurfaceRequest.ProtoReflect.Descriptor instead.
+func (*GetSurfaceRequest) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{12}
+}
+
+type GetSurfaceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSurfaceResponse) Reset() {
+	*x = GetSurfaceResponse{}
+	mi := &file_proto_projection_projection_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSurfaceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSurfaceResponse) ProtoMessage() {}
+
+func (x *GetSurfaceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSurfaceResponse.ProtoReflect.Descriptor instead.
+func (*GetSurfaceResponse) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GetSurfaceResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type ReleaseRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReleaseRequest) Reset() {
+	*x = ReleaseRequest{}
+	mi := &file_proto_projection_projection_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReleaseRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReleaseRequest) ProtoMessage() {}
+
+func (x *ReleaseRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReleaseRequest.ProtoReflect.Descriptor instead.
+func (*ReleaseRequest) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{14}
+}
+
+type ReleaseResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReleaseResponse) Reset() {
+	*x = ReleaseResponse{}
+	mi := &file_proto_projection_projection_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReleaseResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReleaseResponse) ProtoMessage() {}
+
+func (x *ReleaseResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReleaseResponse.ProtoReflect.Descriptor instead.
+func (*ReleaseResponse) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{15}
+}
+
+type ResizeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int32                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	Arg2          int32                  `protobuf:"varint,3,opt,name=arg2,proto3" json:"arg2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResizeRequest) Reset() {
+	*x = ResizeRequest{}
+	mi := &file_proto_projection_projection_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResizeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResizeRequest) ProtoMessage() {}
+
+func (x *ResizeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResizeRequest.ProtoReflect.Descriptor instead.
+func (*ResizeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ResizeRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *ResizeRequest) GetArg1() int32 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+func (x *ResizeRequest) GetArg2() int32 {
+	if x != nil {
+		return x.Arg2
+	}
+	return 0
+}
+
+type ResizeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResizeResponse) Reset() {
+	*x = ResizeResponse{}
+	mi := &file_proto_projection_projection_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResizeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResizeResponse) ProtoMessage() {}
+
+func (x *ResizeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResizeResponse.ProtoReflect.Descriptor instead.
+func (*ResizeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{17}
+}
+
+type SetRotationRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetRotationRequest) Reset() {
+	*x = SetRotationRequest{}
+	mi := &file_proto_projection_projection_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetRotationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetRotationRequest) ProtoMessage() {}
+
+func (x *SetRotationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetRotationRequest.ProtoReflect.Descriptor instead.
+func (*SetRotationRequest) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *SetRotationRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetRotationResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetRotationResponse) Reset() {
+	*x = SetRotationResponse{}
+	mi := &file_proto_projection_projection_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetRotationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetRotationResponse) ProtoMessage() {}
+
+func (x *SetRotationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetRotationResponse.ProtoReflect.Descriptor instead.
+func (*SetRotationResponse) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{19}
+}
+
+type SetSurfaceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetSurfaceRequest) Reset() {
+	*x = SetSurfaceRequest{}
+	mi := &file_proto_projection_projection_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetSurfaceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetSurfaceRequest) ProtoMessage() {}
+
+func (x *SetSurfaceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetSurfaceRequest.ProtoReflect.Descriptor instead.
+func (*SetSurfaceRequest) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *SetSurfaceRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type SetSurfaceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetSurfaceResponse) Reset() {
+	*x = SetSurfaceResponse{}
+	mi := &file_proto_projection_projection_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetSurfaceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetSurfaceResponse) ProtoMessage() {}
+
+func (x *SetSurfaceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetSurfaceResponse.ProtoReflect.Descriptor instead.
+func (*SetSurfaceResponse) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{21}
+}
+
+type ToStringRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToStringRequest) Reset() {
+	*x = ToStringRequest{}
+	mi := &file_proto_projection_projection_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToStringRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToStringRequest) ProtoMessage() {}
+
+func (x *ToStringRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToStringRequest.ProtoReflect.Descriptor instead.
+func (*ToStringRequest) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{22}
+}
+
+type ToStringResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToStringResponse) Reset() {
+	*x = ToStringResponse{}
+	mi := &file_proto_projection_projection_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToStringResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToStringResponse) ProtoMessage() {}
+
+func (x *ToStringResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_projection_projection_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToStringResponse.ProtoReflect.Descriptor instead.
+func (*ToStringResponse) Descriptor() ([]byte, []int) {
+	return file_proto_projection_projection_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *ToStringResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
 var File_proto_projection_projection_proto protoreflect.FileDescriptor
 
 const file_proto_projection_projection_proto_rawDesc = "" +
 	"\n" +
 	"!proto/projection/projection.proto\x12\n" +
-	"projection\"#\n" +
+	"projection\"\r\n" +
+	"\vStopRequest\"\x0e\n" +
+	"\fStopResponse\"/\n" +
+	"\x19UnregisterCallbackRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x1c\n" +
+	"\x1aUnregisterCallbackResponse\"#\n" +
 	"!CreateScreenCaptureIntent0Request\"<\n" +
 	"\"CreateScreenCaptureIntent0Response\x12\x16\n" +
 	"\x06result\x18\x01 \x01(\x03R\x06result\"9\n" +
@@ -304,11 +1029,47 @@ const file_proto_projection_projection_proto_rawDesc = "" +
 	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"4\n" +
 	"\x1aGetMediaProjectionResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x03R\x06result2\x85\x03\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x13\n" +
+	"\x11GetDisplayRequest\",\n" +
+	"\x12GetDisplayResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x13\n" +
+	"\x11GetSurfaceRequest\",\n" +
+	"\x12GetSurfaceResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x10\n" +
+	"\x0eReleaseRequest\"\x11\n" +
+	"\x0fReleaseResponse\"K\n" +
+	"\rResizeRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\x12\x12\n" +
+	"\x04arg2\x18\x03 \x01(\x05R\x04arg2\"\x10\n" +
+	"\x0eResizeResponse\"(\n" +
+	"\x12SetRotationRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"\x15\n" +
+	"\x13SetRotationResponse\"'\n" +
+	"\x11SetSurfaceRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"\x14\n" +
+	"\x12SetSurfaceResponse\"\x11\n" +
+	"\x0fToStringRequest\"*\n" +
+	"\x10ToStringResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result2\xb8\x01\n" +
+	"\x16MediaProjectionService\x129\n" +
+	"\x04Stop\x12\x17.projection.StopRequest\x1a\x18.projection.StopResponse\x12c\n" +
+	"\x12UnregisterCallback\x12%.projection.UnregisterCallbackRequest\x1a&.projection.UnregisterCallbackResponse2\x85\x03\n" +
 	"\x1dMediaProjectionManagerService\x12{\n" +
 	"\x1aCreateScreenCaptureIntent0\x12-.projection.CreateScreenCaptureIntent0Request\x1a..projection.CreateScreenCaptureIntent0Response\x12\x81\x01\n" +
 	"\x1cCreateScreenCaptureIntent1_1\x12/.projection.CreateScreenCaptureIntent1_1Request\x1a0.projection.CreateScreenCaptureIntent1_1Response\x12c\n" +
-	"\x12GetMediaProjection\x12%.projection.GetMediaProjectionRequest\x1a&.projection.GetMediaProjectionResponseB-Z+github.com/xaionaro-go/jni/proto/projectionb\x06proto3"
+	"\x12GetMediaProjection\x12%.projection.GetMediaProjectionRequest\x1a&.projection.GetMediaProjectionResponse2\x9a\x04\n" +
+	"\x15VirtualDisplayService\x12K\n" +
+	"\n" +
+	"GetDisplay\x12\x1d.projection.GetDisplayRequest\x1a\x1e.projection.GetDisplayResponse\x12K\n" +
+	"\n" +
+	"GetSurface\x12\x1d.projection.GetSurfaceRequest\x1a\x1e.projection.GetSurfaceResponse\x12B\n" +
+	"\aRelease\x12\x1a.projection.ReleaseRequest\x1a\x1b.projection.ReleaseResponse\x12?\n" +
+	"\x06Resize\x12\x19.projection.ResizeRequest\x1a\x1a.projection.ResizeResponse\x12N\n" +
+	"\vSetRotation\x12\x1e.projection.SetRotationRequest\x1a\x1f.projection.SetRotationResponse\x12K\n" +
+	"\n" +
+	"SetSurface\x12\x1d.projection.SetSurfaceRequest\x1a\x1e.projection.SetSurfaceResponse\x12E\n" +
+	"\bToString\x12\x1b.projection.ToStringRequest\x1a\x1c.projection.ToStringResponseB-Z+github.com/xaionaro-go/jni/proto/projectionb\x06proto3"
 
 var (
 	file_proto_projection_projection_proto_rawDescOnce sync.Once
@@ -322,27 +1083,63 @@ func file_proto_projection_projection_proto_rawDescGZIP() []byte {
 	return file_proto_projection_projection_proto_rawDescData
 }
 
-var file_proto_projection_projection_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_proto_projection_projection_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_proto_projection_projection_proto_goTypes = []any{
-	(*CreateScreenCaptureIntent0Request)(nil),    // 0: projection.CreateScreenCaptureIntent0Request
-	(*CreateScreenCaptureIntent0Response)(nil),   // 1: projection.CreateScreenCaptureIntent0Response
-	(*CreateScreenCaptureIntent1_1Request)(nil),  // 2: projection.CreateScreenCaptureIntent1_1Request
-	(*CreateScreenCaptureIntent1_1Response)(nil), // 3: projection.CreateScreenCaptureIntent1_1Response
-	(*GetMediaProjectionRequest)(nil),            // 4: projection.GetMediaProjectionRequest
-	(*GetMediaProjectionResponse)(nil),           // 5: projection.GetMediaProjectionResponse
+	(*StopRequest)(nil),                          // 0: projection.StopRequest
+	(*StopResponse)(nil),                         // 1: projection.StopResponse
+	(*UnregisterCallbackRequest)(nil),            // 2: projection.UnregisterCallbackRequest
+	(*UnregisterCallbackResponse)(nil),           // 3: projection.UnregisterCallbackResponse
+	(*CreateScreenCaptureIntent0Request)(nil),    // 4: projection.CreateScreenCaptureIntent0Request
+	(*CreateScreenCaptureIntent0Response)(nil),   // 5: projection.CreateScreenCaptureIntent0Response
+	(*CreateScreenCaptureIntent1_1Request)(nil),  // 6: projection.CreateScreenCaptureIntent1_1Request
+	(*CreateScreenCaptureIntent1_1Response)(nil), // 7: projection.CreateScreenCaptureIntent1_1Response
+	(*GetMediaProjectionRequest)(nil),            // 8: projection.GetMediaProjectionRequest
+	(*GetMediaProjectionResponse)(nil),           // 9: projection.GetMediaProjectionResponse
+	(*GetDisplayRequest)(nil),                    // 10: projection.GetDisplayRequest
+	(*GetDisplayResponse)(nil),                   // 11: projection.GetDisplayResponse
+	(*GetSurfaceRequest)(nil),                    // 12: projection.GetSurfaceRequest
+	(*GetSurfaceResponse)(nil),                   // 13: projection.GetSurfaceResponse
+	(*ReleaseRequest)(nil),                       // 14: projection.ReleaseRequest
+	(*ReleaseResponse)(nil),                      // 15: projection.ReleaseResponse
+	(*ResizeRequest)(nil),                        // 16: projection.ResizeRequest
+	(*ResizeResponse)(nil),                       // 17: projection.ResizeResponse
+	(*SetRotationRequest)(nil),                   // 18: projection.SetRotationRequest
+	(*SetRotationResponse)(nil),                  // 19: projection.SetRotationResponse
+	(*SetSurfaceRequest)(nil),                    // 20: projection.SetSurfaceRequest
+	(*SetSurfaceResponse)(nil),                   // 21: projection.SetSurfaceResponse
+	(*ToStringRequest)(nil),                      // 22: projection.ToStringRequest
+	(*ToStringResponse)(nil),                     // 23: projection.ToStringResponse
 }
 var file_proto_projection_projection_proto_depIdxs = []int32{
-	0, // 0: projection.MediaProjectionManagerService.CreateScreenCaptureIntent0:input_type -> projection.CreateScreenCaptureIntent0Request
-	2, // 1: projection.MediaProjectionManagerService.CreateScreenCaptureIntent1_1:input_type -> projection.CreateScreenCaptureIntent1_1Request
-	4, // 2: projection.MediaProjectionManagerService.GetMediaProjection:input_type -> projection.GetMediaProjectionRequest
-	1, // 3: projection.MediaProjectionManagerService.CreateScreenCaptureIntent0:output_type -> projection.CreateScreenCaptureIntent0Response
-	3, // 4: projection.MediaProjectionManagerService.CreateScreenCaptureIntent1_1:output_type -> projection.CreateScreenCaptureIntent1_1Response
-	5, // 5: projection.MediaProjectionManagerService.GetMediaProjection:output_type -> projection.GetMediaProjectionResponse
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0,  // 0: projection.MediaProjectionService.Stop:input_type -> projection.StopRequest
+	2,  // 1: projection.MediaProjectionService.UnregisterCallback:input_type -> projection.UnregisterCallbackRequest
+	4,  // 2: projection.MediaProjectionManagerService.CreateScreenCaptureIntent0:input_type -> projection.CreateScreenCaptureIntent0Request
+	6,  // 3: projection.MediaProjectionManagerService.CreateScreenCaptureIntent1_1:input_type -> projection.CreateScreenCaptureIntent1_1Request
+	8,  // 4: projection.MediaProjectionManagerService.GetMediaProjection:input_type -> projection.GetMediaProjectionRequest
+	10, // 5: projection.VirtualDisplayService.GetDisplay:input_type -> projection.GetDisplayRequest
+	12, // 6: projection.VirtualDisplayService.GetSurface:input_type -> projection.GetSurfaceRequest
+	14, // 7: projection.VirtualDisplayService.Release:input_type -> projection.ReleaseRequest
+	16, // 8: projection.VirtualDisplayService.Resize:input_type -> projection.ResizeRequest
+	18, // 9: projection.VirtualDisplayService.SetRotation:input_type -> projection.SetRotationRequest
+	20, // 10: projection.VirtualDisplayService.SetSurface:input_type -> projection.SetSurfaceRequest
+	22, // 11: projection.VirtualDisplayService.ToString:input_type -> projection.ToStringRequest
+	1,  // 12: projection.MediaProjectionService.Stop:output_type -> projection.StopResponse
+	3,  // 13: projection.MediaProjectionService.UnregisterCallback:output_type -> projection.UnregisterCallbackResponse
+	5,  // 14: projection.MediaProjectionManagerService.CreateScreenCaptureIntent0:output_type -> projection.CreateScreenCaptureIntent0Response
+	7,  // 15: projection.MediaProjectionManagerService.CreateScreenCaptureIntent1_1:output_type -> projection.CreateScreenCaptureIntent1_1Response
+	9,  // 16: projection.MediaProjectionManagerService.GetMediaProjection:output_type -> projection.GetMediaProjectionResponse
+	11, // 17: projection.VirtualDisplayService.GetDisplay:output_type -> projection.GetDisplayResponse
+	13, // 18: projection.VirtualDisplayService.GetSurface:output_type -> projection.GetSurfaceResponse
+	15, // 19: projection.VirtualDisplayService.Release:output_type -> projection.ReleaseResponse
+	17, // 20: projection.VirtualDisplayService.Resize:output_type -> projection.ResizeResponse
+	19, // 21: projection.VirtualDisplayService.SetRotation:output_type -> projection.SetRotationResponse
+	21, // 22: projection.VirtualDisplayService.SetSurface:output_type -> projection.SetSurfaceResponse
+	23, // 23: projection.VirtualDisplayService.ToString:output_type -> projection.ToStringResponse
+	12, // [12:24] is the sub-list for method output_type
+	0,  // [0:12] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_proto_projection_projection_proto_init() }
@@ -356,9 +1153,9 @@ func file_proto_projection_projection_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_projection_projection_proto_rawDesc), len(file_proto_projection_projection_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   24,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   3,
 		},
 		GoTypes:           file_proto_projection_projection_proto_goTypes,
 		DependencyIndexes: file_proto_projection_projection_proto_depIdxs,

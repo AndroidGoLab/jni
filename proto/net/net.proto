@@ -297,6 +297,130 @@ message SetProcessDefaultNetworkResponse {
   bool result = 1;
 }
 
+message DescribeContentsRequest {
+}
+
+message DescribeContentsResponse {
+  int32 result = 1;
+}
+
+message EqualsRequest {
+  int64 arg0 = 1;
+}
+
+message EqualsResponse {
+  bool result = 1;
+}
+
+message GetCapabilitiesRequest {
+}
+
+message GetCapabilitiesResponse {
+  int64 result = 1;
+}
+
+message GetEnterpriseIdsRequest {
+}
+
+message GetEnterpriseIdsResponse {
+  int64 result = 1;
+}
+
+message GetLinkDownstreamBandwidthKbpsRequest {
+}
+
+message GetLinkDownstreamBandwidthKbpsResponse {
+  int32 result = 1;
+}
+
+message GetLinkUpstreamBandwidthKbpsRequest {
+}
+
+message GetLinkUpstreamBandwidthKbpsResponse {
+  int32 result = 1;
+}
+
+message GetNetworkSpecifierRequest {
+}
+
+message GetNetworkSpecifierResponse {
+  int64 result = 1;
+}
+
+message GetOwnerUidRequest {
+}
+
+message GetOwnerUidResponse {
+  int32 result = 1;
+}
+
+message GetSignalStrengthRequest {
+}
+
+message GetSignalStrengthResponse {
+  int32 result = 1;
+}
+
+message GetSubscriptionIdsRequest {
+}
+
+message GetSubscriptionIdsResponse {
+  int64 result = 1;
+}
+
+message GetTransportInfoRequest {
+}
+
+message GetTransportInfoResponse {
+  int64 result = 1;
+}
+
+message HasCapabilityRequest {
+  int32 arg0 = 1;
+}
+
+message HasCapabilityResponse {
+  bool result = 1;
+}
+
+message HasEnterpriseIdRequest {
+  int32 arg0 = 1;
+}
+
+message HasEnterpriseIdResponse {
+  bool result = 1;
+}
+
+message HasTransportRequest {
+  int32 arg0 = 1;
+}
+
+message HasTransportResponse {
+  bool result = 1;
+}
+
+message HashCodeRequest {
+}
+
+message HashCodeResponse {
+  int32 result = 1;
+}
+
+message ToStringRequest {
+}
+
+message ToStringResponse {
+  string result = 1;
+}
+
+message WriteToParcelRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message WriteToParcelResponse {
+}
+
 service ConnectivityManagerService {
   rpc AddDefaultNetworkActiveListener (AddDefaultNetworkActiveListenerRequest) returns (AddDefaultNetworkActiveListenerResponse);
   rpc BindProcessToNetwork (BindProcessToNetworkRequest) returns (BindProcessToNetworkResponse);
@@ -336,4 +460,24 @@ service ConnectivityManagerService {
   rpc GetProcessDefaultNetwork (GetProcessDefaultNetworkRequest) returns (GetProcessDefaultNetworkResponse);
   rpc IsNetworkTypeValid (IsNetworkTypeValidRequest) returns (IsNetworkTypeValidResponse);
   rpc SetProcessDefaultNetwork (SetProcessDefaultNetworkRequest) returns (SetProcessDefaultNetworkResponse);
+}
+
+service NetworkCapabilitiesService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc Equals (EqualsRequest) returns (EqualsResponse);
+  rpc GetCapabilities (GetCapabilitiesRequest) returns (GetCapabilitiesResponse);
+  rpc GetEnterpriseIds (GetEnterpriseIdsRequest) returns (GetEnterpriseIdsResponse);
+  rpc GetLinkDownstreamBandwidthKbps (GetLinkDownstreamBandwidthKbpsRequest) returns (GetLinkDownstreamBandwidthKbpsResponse);
+  rpc GetLinkUpstreamBandwidthKbps (GetLinkUpstreamBandwidthKbpsRequest) returns (GetLinkUpstreamBandwidthKbpsResponse);
+  rpc GetNetworkSpecifier (GetNetworkSpecifierRequest) returns (GetNetworkSpecifierResponse);
+  rpc GetOwnerUid (GetOwnerUidRequest) returns (GetOwnerUidResponse);
+  rpc GetSignalStrength (GetSignalStrengthRequest) returns (GetSignalStrengthResponse);
+  rpc GetSubscriptionIds (GetSubscriptionIdsRequest) returns (GetSubscriptionIdsResponse);
+  rpc GetTransportInfo (GetTransportInfoRequest) returns (GetTransportInfoResponse);
+  rpc HasCapability (HasCapabilityRequest) returns (HasCapabilityResponse);
+  rpc HasEnterpriseId (HasEnterpriseIdRequest) returns (HasEnterpriseIdResponse);
+  rpc HasTransport (HasTransportRequest) returns (HasTransportResponse);
+  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
 }

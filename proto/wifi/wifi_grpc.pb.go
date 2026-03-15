@@ -21,6 +21,1362 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	WifiInfoService_DescribeContents_FullMethodName                 = "/wifi.WifiInfoService/DescribeContents"
+	WifiInfoService_Equals_FullMethodName                           = "/wifi.WifiInfoService/Equals"
+	WifiInfoService_GetAffiliatedMloLinks_FullMethodName            = "/wifi.WifiInfoService/GetAffiliatedMloLinks"
+	WifiInfoService_GetApMldMacAddress_FullMethodName               = "/wifi.WifiInfoService/GetApMldMacAddress"
+	WifiInfoService_GetApMloLinkId_FullMethodName                   = "/wifi.WifiInfoService/GetApMloLinkId"
+	WifiInfoService_GetApplicableRedactions_FullMethodName          = "/wifi.WifiInfoService/GetApplicableRedactions"
+	WifiInfoService_GetAssociatedMloLinks_FullMethodName            = "/wifi.WifiInfoService/GetAssociatedMloLinks"
+	WifiInfoService_GetBSSID_FullMethodName                         = "/wifi.WifiInfoService/GetBSSID"
+	WifiInfoService_GetCurrentSecurityType_FullMethodName           = "/wifi.WifiInfoService/GetCurrentSecurityType"
+	WifiInfoService_GetFrequency_FullMethodName                     = "/wifi.WifiInfoService/GetFrequency"
+	WifiInfoService_GetHiddenSSID_FullMethodName                    = "/wifi.WifiInfoService/GetHiddenSSID"
+	WifiInfoService_GetInformationElements_FullMethodName           = "/wifi.WifiInfoService/GetInformationElements"
+	WifiInfoService_GetIpAddress_FullMethodName                     = "/wifi.WifiInfoService/GetIpAddress"
+	WifiInfoService_GetLinkSpeed_FullMethodName                     = "/wifi.WifiInfoService/GetLinkSpeed"
+	WifiInfoService_GetMacAddress_FullMethodName                    = "/wifi.WifiInfoService/GetMacAddress"
+	WifiInfoService_GetMaxSupportedRxLinkSpeedMbps_FullMethodName   = "/wifi.WifiInfoService/GetMaxSupportedRxLinkSpeedMbps"
+	WifiInfoService_GetMaxSupportedTxLinkSpeedMbps_FullMethodName   = "/wifi.WifiInfoService/GetMaxSupportedTxLinkSpeedMbps"
+	WifiInfoService_GetNetworkId_FullMethodName                     = "/wifi.WifiInfoService/GetNetworkId"
+	WifiInfoService_GetPasspointFqdn_FullMethodName                 = "/wifi.WifiInfoService/GetPasspointFqdn"
+	WifiInfoService_GetPasspointProviderFriendlyName_FullMethodName = "/wifi.WifiInfoService/GetPasspointProviderFriendlyName"
+	WifiInfoService_GetPasspointUniqueId_FullMethodName             = "/wifi.WifiInfoService/GetPasspointUniqueId"
+	WifiInfoService_GetRssi_FullMethodName                          = "/wifi.WifiInfoService/GetRssi"
+	WifiInfoService_GetRxLinkSpeedMbps_FullMethodName               = "/wifi.WifiInfoService/GetRxLinkSpeedMbps"
+	WifiInfoService_GetSSID_FullMethodName                          = "/wifi.WifiInfoService/GetSSID"
+	WifiInfoService_GetSubscriptionId_FullMethodName                = "/wifi.WifiInfoService/GetSubscriptionId"
+	WifiInfoService_GetSupplicantState_FullMethodName               = "/wifi.WifiInfoService/GetSupplicantState"
+	WifiInfoService_GetTxLinkSpeedMbps_FullMethodName               = "/wifi.WifiInfoService/GetTxLinkSpeedMbps"
+	WifiInfoService_GetWifiStandard_FullMethodName                  = "/wifi.WifiInfoService/GetWifiStandard"
+	WifiInfoService_HashCode_FullMethodName                         = "/wifi.WifiInfoService/HashCode"
+	WifiInfoService_IsRestricted_FullMethodName                     = "/wifi.WifiInfoService/IsRestricted"
+	WifiInfoService_MakeCopy_FullMethodName                         = "/wifi.WifiInfoService/MakeCopy"
+	WifiInfoService_ToString_FullMethodName                         = "/wifi.WifiInfoService/ToString"
+	WifiInfoService_WriteToParcel_FullMethodName                    = "/wifi.WifiInfoService/WriteToParcel"
+	WifiInfoService_GetDetailedStateOf_FullMethodName               = "/wifi.WifiInfoService/GetDetailedStateOf"
+)
+
+// WifiInfoServiceClient is the client API for WifiInfoService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type WifiInfoServiceClient interface {
+	DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error)
+	Equals(ctx context.Context, in *EqualsRequest, opts ...grpc.CallOption) (*EqualsResponse, error)
+	GetAffiliatedMloLinks(ctx context.Context, in *GetAffiliatedMloLinksRequest, opts ...grpc.CallOption) (*GetAffiliatedMloLinksResponse, error)
+	GetApMldMacAddress(ctx context.Context, in *GetApMldMacAddressRequest, opts ...grpc.CallOption) (*GetApMldMacAddressResponse, error)
+	GetApMloLinkId(ctx context.Context, in *GetApMloLinkIdRequest, opts ...grpc.CallOption) (*GetApMloLinkIdResponse, error)
+	GetApplicableRedactions(ctx context.Context, in *GetApplicableRedactionsRequest, opts ...grpc.CallOption) (*GetApplicableRedactionsResponse, error)
+	GetAssociatedMloLinks(ctx context.Context, in *GetAssociatedMloLinksRequest, opts ...grpc.CallOption) (*GetAssociatedMloLinksResponse, error)
+	GetBSSID(ctx context.Context, in *GetBSSIDRequest, opts ...grpc.CallOption) (*GetBSSIDResponse, error)
+	GetCurrentSecurityType(ctx context.Context, in *GetCurrentSecurityTypeRequest, opts ...grpc.CallOption) (*GetCurrentSecurityTypeResponse, error)
+	GetFrequency(ctx context.Context, in *GetFrequencyRequest, opts ...grpc.CallOption) (*GetFrequencyResponse, error)
+	GetHiddenSSID(ctx context.Context, in *GetHiddenSSIDRequest, opts ...grpc.CallOption) (*GetHiddenSSIDResponse, error)
+	GetInformationElements(ctx context.Context, in *GetInformationElementsRequest, opts ...grpc.CallOption) (*GetInformationElementsResponse, error)
+	GetIpAddress(ctx context.Context, in *GetIpAddressRequest, opts ...grpc.CallOption) (*GetIpAddressResponse, error)
+	GetLinkSpeed(ctx context.Context, in *GetLinkSpeedRequest, opts ...grpc.CallOption) (*GetLinkSpeedResponse, error)
+	GetMacAddress(ctx context.Context, in *GetMacAddressRequest, opts ...grpc.CallOption) (*GetMacAddressResponse, error)
+	GetMaxSupportedRxLinkSpeedMbps(ctx context.Context, in *GetMaxSupportedRxLinkSpeedMbpsRequest, opts ...grpc.CallOption) (*GetMaxSupportedRxLinkSpeedMbpsResponse, error)
+	GetMaxSupportedTxLinkSpeedMbps(ctx context.Context, in *GetMaxSupportedTxLinkSpeedMbpsRequest, opts ...grpc.CallOption) (*GetMaxSupportedTxLinkSpeedMbpsResponse, error)
+	GetNetworkId(ctx context.Context, in *GetNetworkIdRequest, opts ...grpc.CallOption) (*GetNetworkIdResponse, error)
+	GetPasspointFqdn(ctx context.Context, in *GetPasspointFqdnRequest, opts ...grpc.CallOption) (*GetPasspointFqdnResponse, error)
+	GetPasspointProviderFriendlyName(ctx context.Context, in *GetPasspointProviderFriendlyNameRequest, opts ...grpc.CallOption) (*GetPasspointProviderFriendlyNameResponse, error)
+	GetPasspointUniqueId(ctx context.Context, in *GetPasspointUniqueIdRequest, opts ...grpc.CallOption) (*GetPasspointUniqueIdResponse, error)
+	GetRssi(ctx context.Context, in *GetRssiRequest, opts ...grpc.CallOption) (*GetRssiResponse, error)
+	GetRxLinkSpeedMbps(ctx context.Context, in *GetRxLinkSpeedMbpsRequest, opts ...grpc.CallOption) (*GetRxLinkSpeedMbpsResponse, error)
+	GetSSID(ctx context.Context, in *GetSSIDRequest, opts ...grpc.CallOption) (*GetSSIDResponse, error)
+	GetSubscriptionId(ctx context.Context, in *GetSubscriptionIdRequest, opts ...grpc.CallOption) (*GetSubscriptionIdResponse, error)
+	GetSupplicantState(ctx context.Context, in *GetSupplicantStateRequest, opts ...grpc.CallOption) (*GetSupplicantStateResponse, error)
+	GetTxLinkSpeedMbps(ctx context.Context, in *GetTxLinkSpeedMbpsRequest, opts ...grpc.CallOption) (*GetTxLinkSpeedMbpsResponse, error)
+	GetWifiStandard(ctx context.Context, in *GetWifiStandardRequest, opts ...grpc.CallOption) (*GetWifiStandardResponse, error)
+	HashCode(ctx context.Context, in *HashCodeRequest, opts ...grpc.CallOption) (*HashCodeResponse, error)
+	IsRestricted(ctx context.Context, in *IsRestrictedRequest, opts ...grpc.CallOption) (*IsRestrictedResponse, error)
+	MakeCopy(ctx context.Context, in *MakeCopyRequest, opts ...grpc.CallOption) (*MakeCopyResponse, error)
+	ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error)
+	WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error)
+	GetDetailedStateOf(ctx context.Context, in *GetDetailedStateOfRequest, opts ...grpc.CallOption) (*GetDetailedStateOfResponse, error)
+}
+
+type wifiInfoServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewWifiInfoServiceClient(cc grpc.ClientConnInterface) WifiInfoServiceClient {
+	return &wifiInfoServiceClient{cc}
+}
+
+func (c *wifiInfoServiceClient) DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DescribeContentsResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_DescribeContents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) Equals(ctx context.Context, in *EqualsRequest, opts ...grpc.CallOption) (*EqualsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EqualsResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_Equals_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetAffiliatedMloLinks(ctx context.Context, in *GetAffiliatedMloLinksRequest, opts ...grpc.CallOption) (*GetAffiliatedMloLinksResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAffiliatedMloLinksResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetAffiliatedMloLinks_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetApMldMacAddress(ctx context.Context, in *GetApMldMacAddressRequest, opts ...grpc.CallOption) (*GetApMldMacAddressResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetApMldMacAddressResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetApMldMacAddress_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetApMloLinkId(ctx context.Context, in *GetApMloLinkIdRequest, opts ...grpc.CallOption) (*GetApMloLinkIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetApMloLinkIdResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetApMloLinkId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetApplicableRedactions(ctx context.Context, in *GetApplicableRedactionsRequest, opts ...grpc.CallOption) (*GetApplicableRedactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetApplicableRedactionsResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetApplicableRedactions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetAssociatedMloLinks(ctx context.Context, in *GetAssociatedMloLinksRequest, opts ...grpc.CallOption) (*GetAssociatedMloLinksResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAssociatedMloLinksResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetAssociatedMloLinks_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetBSSID(ctx context.Context, in *GetBSSIDRequest, opts ...grpc.CallOption) (*GetBSSIDResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBSSIDResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetBSSID_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetCurrentSecurityType(ctx context.Context, in *GetCurrentSecurityTypeRequest, opts ...grpc.CallOption) (*GetCurrentSecurityTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCurrentSecurityTypeResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetCurrentSecurityType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetFrequency(ctx context.Context, in *GetFrequencyRequest, opts ...grpc.CallOption) (*GetFrequencyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetFrequencyResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetFrequency_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetHiddenSSID(ctx context.Context, in *GetHiddenSSIDRequest, opts ...grpc.CallOption) (*GetHiddenSSIDResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetHiddenSSIDResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetHiddenSSID_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetInformationElements(ctx context.Context, in *GetInformationElementsRequest, opts ...grpc.CallOption) (*GetInformationElementsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetInformationElementsResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetInformationElements_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetIpAddress(ctx context.Context, in *GetIpAddressRequest, opts ...grpc.CallOption) (*GetIpAddressResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetIpAddressResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetIpAddress_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetLinkSpeed(ctx context.Context, in *GetLinkSpeedRequest, opts ...grpc.CallOption) (*GetLinkSpeedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLinkSpeedResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetLinkSpeed_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetMacAddress(ctx context.Context, in *GetMacAddressRequest, opts ...grpc.CallOption) (*GetMacAddressResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMacAddressResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetMacAddress_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetMaxSupportedRxLinkSpeedMbps(ctx context.Context, in *GetMaxSupportedRxLinkSpeedMbpsRequest, opts ...grpc.CallOption) (*GetMaxSupportedRxLinkSpeedMbpsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMaxSupportedRxLinkSpeedMbpsResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetMaxSupportedRxLinkSpeedMbps_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetMaxSupportedTxLinkSpeedMbps(ctx context.Context, in *GetMaxSupportedTxLinkSpeedMbpsRequest, opts ...grpc.CallOption) (*GetMaxSupportedTxLinkSpeedMbpsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMaxSupportedTxLinkSpeedMbpsResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetMaxSupportedTxLinkSpeedMbps_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetNetworkId(ctx context.Context, in *GetNetworkIdRequest, opts ...grpc.CallOption) (*GetNetworkIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNetworkIdResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetNetworkId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetPasspointFqdn(ctx context.Context, in *GetPasspointFqdnRequest, opts ...grpc.CallOption) (*GetPasspointFqdnResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPasspointFqdnResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetPasspointFqdn_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetPasspointProviderFriendlyName(ctx context.Context, in *GetPasspointProviderFriendlyNameRequest, opts ...grpc.CallOption) (*GetPasspointProviderFriendlyNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPasspointProviderFriendlyNameResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetPasspointProviderFriendlyName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetPasspointUniqueId(ctx context.Context, in *GetPasspointUniqueIdRequest, opts ...grpc.CallOption) (*GetPasspointUniqueIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPasspointUniqueIdResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetPasspointUniqueId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetRssi(ctx context.Context, in *GetRssiRequest, opts ...grpc.CallOption) (*GetRssiResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRssiResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetRssi_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetRxLinkSpeedMbps(ctx context.Context, in *GetRxLinkSpeedMbpsRequest, opts ...grpc.CallOption) (*GetRxLinkSpeedMbpsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRxLinkSpeedMbpsResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetRxLinkSpeedMbps_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetSSID(ctx context.Context, in *GetSSIDRequest, opts ...grpc.CallOption) (*GetSSIDResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSSIDResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetSSID_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetSubscriptionId(ctx context.Context, in *GetSubscriptionIdRequest, opts ...grpc.CallOption) (*GetSubscriptionIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSubscriptionIdResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetSubscriptionId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetSupplicantState(ctx context.Context, in *GetSupplicantStateRequest, opts ...grpc.CallOption) (*GetSupplicantStateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSupplicantStateResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetSupplicantState_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetTxLinkSpeedMbps(ctx context.Context, in *GetTxLinkSpeedMbpsRequest, opts ...grpc.CallOption) (*GetTxLinkSpeedMbpsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTxLinkSpeedMbpsResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetTxLinkSpeedMbps_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetWifiStandard(ctx context.Context, in *GetWifiStandardRequest, opts ...grpc.CallOption) (*GetWifiStandardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWifiStandardResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetWifiStandard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) HashCode(ctx context.Context, in *HashCodeRequest, opts ...grpc.CallOption) (*HashCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HashCodeResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_HashCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) IsRestricted(ctx context.Context, in *IsRestrictedRequest, opts ...grpc.CallOption) (*IsRestrictedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsRestrictedResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_IsRestricted_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) MakeCopy(ctx context.Context, in *MakeCopyRequest, opts ...grpc.CallOption) (*MakeCopyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MakeCopyResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_MakeCopy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ToStringResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_ToString_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteToParcelResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_WriteToParcel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wifiInfoServiceClient) GetDetailedStateOf(ctx context.Context, in *GetDetailedStateOfRequest, opts ...grpc.CallOption) (*GetDetailedStateOfResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDetailedStateOfResponse)
+	err := c.cc.Invoke(ctx, WifiInfoService_GetDetailedStateOf_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// WifiInfoServiceServer is the server API for WifiInfoService service.
+// All implementations must embed UnimplementedWifiInfoServiceServer
+// for forward compatibility.
+type WifiInfoServiceServer interface {
+	DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error)
+	Equals(context.Context, *EqualsRequest) (*EqualsResponse, error)
+	GetAffiliatedMloLinks(context.Context, *GetAffiliatedMloLinksRequest) (*GetAffiliatedMloLinksResponse, error)
+	GetApMldMacAddress(context.Context, *GetApMldMacAddressRequest) (*GetApMldMacAddressResponse, error)
+	GetApMloLinkId(context.Context, *GetApMloLinkIdRequest) (*GetApMloLinkIdResponse, error)
+	GetApplicableRedactions(context.Context, *GetApplicableRedactionsRequest) (*GetApplicableRedactionsResponse, error)
+	GetAssociatedMloLinks(context.Context, *GetAssociatedMloLinksRequest) (*GetAssociatedMloLinksResponse, error)
+	GetBSSID(context.Context, *GetBSSIDRequest) (*GetBSSIDResponse, error)
+	GetCurrentSecurityType(context.Context, *GetCurrentSecurityTypeRequest) (*GetCurrentSecurityTypeResponse, error)
+	GetFrequency(context.Context, *GetFrequencyRequest) (*GetFrequencyResponse, error)
+	GetHiddenSSID(context.Context, *GetHiddenSSIDRequest) (*GetHiddenSSIDResponse, error)
+	GetInformationElements(context.Context, *GetInformationElementsRequest) (*GetInformationElementsResponse, error)
+	GetIpAddress(context.Context, *GetIpAddressRequest) (*GetIpAddressResponse, error)
+	GetLinkSpeed(context.Context, *GetLinkSpeedRequest) (*GetLinkSpeedResponse, error)
+	GetMacAddress(context.Context, *GetMacAddressRequest) (*GetMacAddressResponse, error)
+	GetMaxSupportedRxLinkSpeedMbps(context.Context, *GetMaxSupportedRxLinkSpeedMbpsRequest) (*GetMaxSupportedRxLinkSpeedMbpsResponse, error)
+	GetMaxSupportedTxLinkSpeedMbps(context.Context, *GetMaxSupportedTxLinkSpeedMbpsRequest) (*GetMaxSupportedTxLinkSpeedMbpsResponse, error)
+	GetNetworkId(context.Context, *GetNetworkIdRequest) (*GetNetworkIdResponse, error)
+	GetPasspointFqdn(context.Context, *GetPasspointFqdnRequest) (*GetPasspointFqdnResponse, error)
+	GetPasspointProviderFriendlyName(context.Context, *GetPasspointProviderFriendlyNameRequest) (*GetPasspointProviderFriendlyNameResponse, error)
+	GetPasspointUniqueId(context.Context, *GetPasspointUniqueIdRequest) (*GetPasspointUniqueIdResponse, error)
+	GetRssi(context.Context, *GetRssiRequest) (*GetRssiResponse, error)
+	GetRxLinkSpeedMbps(context.Context, *GetRxLinkSpeedMbpsRequest) (*GetRxLinkSpeedMbpsResponse, error)
+	GetSSID(context.Context, *GetSSIDRequest) (*GetSSIDResponse, error)
+	GetSubscriptionId(context.Context, *GetSubscriptionIdRequest) (*GetSubscriptionIdResponse, error)
+	GetSupplicantState(context.Context, *GetSupplicantStateRequest) (*GetSupplicantStateResponse, error)
+	GetTxLinkSpeedMbps(context.Context, *GetTxLinkSpeedMbpsRequest) (*GetTxLinkSpeedMbpsResponse, error)
+	GetWifiStandard(context.Context, *GetWifiStandardRequest) (*GetWifiStandardResponse, error)
+	HashCode(context.Context, *HashCodeRequest) (*HashCodeResponse, error)
+	IsRestricted(context.Context, *IsRestrictedRequest) (*IsRestrictedResponse, error)
+	MakeCopy(context.Context, *MakeCopyRequest) (*MakeCopyResponse, error)
+	ToString(context.Context, *ToStringRequest) (*ToStringResponse, error)
+	WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error)
+	GetDetailedStateOf(context.Context, *GetDetailedStateOfRequest) (*GetDetailedStateOfResponse, error)
+	mustEmbedUnimplementedWifiInfoServiceServer()
+}
+
+// UnimplementedWifiInfoServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedWifiInfoServiceServer struct{}
+
+func (UnimplementedWifiInfoServiceServer) DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DescribeContents not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) Equals(context.Context, *EqualsRequest) (*EqualsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Equals not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetAffiliatedMloLinks(context.Context, *GetAffiliatedMloLinksRequest) (*GetAffiliatedMloLinksResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAffiliatedMloLinks not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetApMldMacAddress(context.Context, *GetApMldMacAddressRequest) (*GetApMldMacAddressResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetApMldMacAddress not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetApMloLinkId(context.Context, *GetApMloLinkIdRequest) (*GetApMloLinkIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetApMloLinkId not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetApplicableRedactions(context.Context, *GetApplicableRedactionsRequest) (*GetApplicableRedactionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetApplicableRedactions not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetAssociatedMloLinks(context.Context, *GetAssociatedMloLinksRequest) (*GetAssociatedMloLinksResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAssociatedMloLinks not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetBSSID(context.Context, *GetBSSIDRequest) (*GetBSSIDResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBSSID not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetCurrentSecurityType(context.Context, *GetCurrentSecurityTypeRequest) (*GetCurrentSecurityTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCurrentSecurityType not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetFrequency(context.Context, *GetFrequencyRequest) (*GetFrequencyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetFrequency not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetHiddenSSID(context.Context, *GetHiddenSSIDRequest) (*GetHiddenSSIDResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetHiddenSSID not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetInformationElements(context.Context, *GetInformationElementsRequest) (*GetInformationElementsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetInformationElements not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetIpAddress(context.Context, *GetIpAddressRequest) (*GetIpAddressResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetIpAddress not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetLinkSpeed(context.Context, *GetLinkSpeedRequest) (*GetLinkSpeedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLinkSpeed not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetMacAddress(context.Context, *GetMacAddressRequest) (*GetMacAddressResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMacAddress not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetMaxSupportedRxLinkSpeedMbps(context.Context, *GetMaxSupportedRxLinkSpeedMbpsRequest) (*GetMaxSupportedRxLinkSpeedMbpsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMaxSupportedRxLinkSpeedMbps not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetMaxSupportedTxLinkSpeedMbps(context.Context, *GetMaxSupportedTxLinkSpeedMbpsRequest) (*GetMaxSupportedTxLinkSpeedMbpsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMaxSupportedTxLinkSpeedMbps not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetNetworkId(context.Context, *GetNetworkIdRequest) (*GetNetworkIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetNetworkId not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetPasspointFqdn(context.Context, *GetPasspointFqdnRequest) (*GetPasspointFqdnResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPasspointFqdn not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetPasspointProviderFriendlyName(context.Context, *GetPasspointProviderFriendlyNameRequest) (*GetPasspointProviderFriendlyNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPasspointProviderFriendlyName not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetPasspointUniqueId(context.Context, *GetPasspointUniqueIdRequest) (*GetPasspointUniqueIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPasspointUniqueId not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetRssi(context.Context, *GetRssiRequest) (*GetRssiResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRssi not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetRxLinkSpeedMbps(context.Context, *GetRxLinkSpeedMbpsRequest) (*GetRxLinkSpeedMbpsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRxLinkSpeedMbps not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetSSID(context.Context, *GetSSIDRequest) (*GetSSIDResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSSID not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetSubscriptionId(context.Context, *GetSubscriptionIdRequest) (*GetSubscriptionIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSubscriptionId not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetSupplicantState(context.Context, *GetSupplicantStateRequest) (*GetSupplicantStateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSupplicantState not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetTxLinkSpeedMbps(context.Context, *GetTxLinkSpeedMbpsRequest) (*GetTxLinkSpeedMbpsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetTxLinkSpeedMbps not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetWifiStandard(context.Context, *GetWifiStandardRequest) (*GetWifiStandardResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetWifiStandard not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) HashCode(context.Context, *HashCodeRequest) (*HashCodeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method HashCode not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) IsRestricted(context.Context, *IsRestrictedRequest) (*IsRestrictedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsRestricted not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) MakeCopy(context.Context, *MakeCopyRequest) (*MakeCopyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method MakeCopy not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) ToString(context.Context, *ToStringRequest) (*ToStringResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ToString not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteToParcel not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) GetDetailedStateOf(context.Context, *GetDetailedStateOfRequest) (*GetDetailedStateOfResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDetailedStateOf not implemented")
+}
+func (UnimplementedWifiInfoServiceServer) mustEmbedUnimplementedWifiInfoServiceServer() {}
+func (UnimplementedWifiInfoServiceServer) testEmbeddedByValue()                         {}
+
+// UnsafeWifiInfoServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to WifiInfoServiceServer will
+// result in compilation errors.
+type UnsafeWifiInfoServiceServer interface {
+	mustEmbedUnimplementedWifiInfoServiceServer()
+}
+
+func RegisterWifiInfoServiceServer(s grpc.ServiceRegistrar, srv WifiInfoServiceServer) {
+	// If the following call panics, it indicates UnimplementedWifiInfoServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&WifiInfoService_ServiceDesc, srv)
+}
+
+func _WifiInfoService_DescribeContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeContentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).DescribeContents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_DescribeContents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).DescribeContents(ctx, req.(*DescribeContentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_Equals_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EqualsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).Equals(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_Equals_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).Equals(ctx, req.(*EqualsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetAffiliatedMloLinks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAffiliatedMloLinksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetAffiliatedMloLinks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetAffiliatedMloLinks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetAffiliatedMloLinks(ctx, req.(*GetAffiliatedMloLinksRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetApMldMacAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetApMldMacAddressRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetApMldMacAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetApMldMacAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetApMldMacAddress(ctx, req.(*GetApMldMacAddressRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetApMloLinkId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetApMloLinkIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetApMloLinkId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetApMloLinkId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetApMloLinkId(ctx, req.(*GetApMloLinkIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetApplicableRedactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetApplicableRedactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetApplicableRedactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetApplicableRedactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetApplicableRedactions(ctx, req.(*GetApplicableRedactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetAssociatedMloLinks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAssociatedMloLinksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetAssociatedMloLinks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetAssociatedMloLinks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetAssociatedMloLinks(ctx, req.(*GetAssociatedMloLinksRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetBSSID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBSSIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetBSSID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetBSSID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetBSSID(ctx, req.(*GetBSSIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetCurrentSecurityType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCurrentSecurityTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetCurrentSecurityType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetCurrentSecurityType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetCurrentSecurityType(ctx, req.(*GetCurrentSecurityTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetFrequency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFrequencyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetFrequency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetFrequency_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetFrequency(ctx, req.(*GetFrequencyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetHiddenSSID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHiddenSSIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetHiddenSSID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetHiddenSSID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetHiddenSSID(ctx, req.(*GetHiddenSSIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetInformationElements_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInformationElementsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetInformationElements(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetInformationElements_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetInformationElements(ctx, req.(*GetInformationElementsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetIpAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIpAddressRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetIpAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetIpAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetIpAddress(ctx, req.(*GetIpAddressRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetLinkSpeed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLinkSpeedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetLinkSpeed(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetLinkSpeed_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetLinkSpeed(ctx, req.(*GetLinkSpeedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetMacAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMacAddressRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetMacAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetMacAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetMacAddress(ctx, req.(*GetMacAddressRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetMaxSupportedRxLinkSpeedMbps_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMaxSupportedRxLinkSpeedMbpsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetMaxSupportedRxLinkSpeedMbps(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetMaxSupportedRxLinkSpeedMbps_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetMaxSupportedRxLinkSpeedMbps(ctx, req.(*GetMaxSupportedRxLinkSpeedMbpsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetMaxSupportedTxLinkSpeedMbps_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMaxSupportedTxLinkSpeedMbpsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetMaxSupportedTxLinkSpeedMbps(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetMaxSupportedTxLinkSpeedMbps_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetMaxSupportedTxLinkSpeedMbps(ctx, req.(*GetMaxSupportedTxLinkSpeedMbpsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetNetworkId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNetworkIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetNetworkId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetNetworkId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetNetworkId(ctx, req.(*GetNetworkIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetPasspointFqdn_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPasspointFqdnRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetPasspointFqdn(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetPasspointFqdn_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetPasspointFqdn(ctx, req.(*GetPasspointFqdnRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetPasspointProviderFriendlyName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPasspointProviderFriendlyNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetPasspointProviderFriendlyName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetPasspointProviderFriendlyName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetPasspointProviderFriendlyName(ctx, req.(*GetPasspointProviderFriendlyNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetPasspointUniqueId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPasspointUniqueIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetPasspointUniqueId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetPasspointUniqueId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetPasspointUniqueId(ctx, req.(*GetPasspointUniqueIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetRssi_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRssiRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetRssi(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetRssi_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetRssi(ctx, req.(*GetRssiRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetRxLinkSpeedMbps_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRxLinkSpeedMbpsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetRxLinkSpeedMbps(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetRxLinkSpeedMbps_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetRxLinkSpeedMbps(ctx, req.(*GetRxLinkSpeedMbpsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetSSID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSSIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetSSID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetSSID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetSSID(ctx, req.(*GetSSIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetSubscriptionId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSubscriptionIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetSubscriptionId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetSubscriptionId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetSubscriptionId(ctx, req.(*GetSubscriptionIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetSupplicantState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSupplicantStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetSupplicantState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetSupplicantState_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetSupplicantState(ctx, req.(*GetSupplicantStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetTxLinkSpeedMbps_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTxLinkSpeedMbpsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetTxLinkSpeedMbps(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetTxLinkSpeedMbps_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetTxLinkSpeedMbps(ctx, req.(*GetTxLinkSpeedMbpsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetWifiStandard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWifiStandardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetWifiStandard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetWifiStandard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetWifiStandard(ctx, req.(*GetWifiStandardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_HashCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HashCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).HashCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_HashCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).HashCode(ctx, req.(*HashCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_IsRestricted_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsRestrictedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).IsRestricted(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_IsRestricted_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).IsRestricted(ctx, req.(*IsRestrictedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_MakeCopy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MakeCopyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).MakeCopy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_MakeCopy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).MakeCopy(ctx, req.(*MakeCopyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_ToString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToStringRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).ToString(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_ToString_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).ToString(ctx, req.(*ToStringRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_WriteToParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteToParcelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).WriteToParcel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_WriteToParcel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).WriteToParcel(ctx, req.(*WriteToParcelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WifiInfoService_GetDetailedStateOf_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDetailedStateOfRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WifiInfoServiceServer).GetDetailedStateOf(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WifiInfoService_GetDetailedStateOf_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WifiInfoServiceServer).GetDetailedStateOf(ctx, req.(*GetDetailedStateOfRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// WifiInfoService_ServiceDesc is the grpc.ServiceDesc for WifiInfoService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var WifiInfoService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "wifi.WifiInfoService",
+	HandlerType: (*WifiInfoServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "DescribeContents",
+			Handler:    _WifiInfoService_DescribeContents_Handler,
+		},
+		{
+			MethodName: "Equals",
+			Handler:    _WifiInfoService_Equals_Handler,
+		},
+		{
+			MethodName: "GetAffiliatedMloLinks",
+			Handler:    _WifiInfoService_GetAffiliatedMloLinks_Handler,
+		},
+		{
+			MethodName: "GetApMldMacAddress",
+			Handler:    _WifiInfoService_GetApMldMacAddress_Handler,
+		},
+		{
+			MethodName: "GetApMloLinkId",
+			Handler:    _WifiInfoService_GetApMloLinkId_Handler,
+		},
+		{
+			MethodName: "GetApplicableRedactions",
+			Handler:    _WifiInfoService_GetApplicableRedactions_Handler,
+		},
+		{
+			MethodName: "GetAssociatedMloLinks",
+			Handler:    _WifiInfoService_GetAssociatedMloLinks_Handler,
+		},
+		{
+			MethodName: "GetBSSID",
+			Handler:    _WifiInfoService_GetBSSID_Handler,
+		},
+		{
+			MethodName: "GetCurrentSecurityType",
+			Handler:    _WifiInfoService_GetCurrentSecurityType_Handler,
+		},
+		{
+			MethodName: "GetFrequency",
+			Handler:    _WifiInfoService_GetFrequency_Handler,
+		},
+		{
+			MethodName: "GetHiddenSSID",
+			Handler:    _WifiInfoService_GetHiddenSSID_Handler,
+		},
+		{
+			MethodName: "GetInformationElements",
+			Handler:    _WifiInfoService_GetInformationElements_Handler,
+		},
+		{
+			MethodName: "GetIpAddress",
+			Handler:    _WifiInfoService_GetIpAddress_Handler,
+		},
+		{
+			MethodName: "GetLinkSpeed",
+			Handler:    _WifiInfoService_GetLinkSpeed_Handler,
+		},
+		{
+			MethodName: "GetMacAddress",
+			Handler:    _WifiInfoService_GetMacAddress_Handler,
+		},
+		{
+			MethodName: "GetMaxSupportedRxLinkSpeedMbps",
+			Handler:    _WifiInfoService_GetMaxSupportedRxLinkSpeedMbps_Handler,
+		},
+		{
+			MethodName: "GetMaxSupportedTxLinkSpeedMbps",
+			Handler:    _WifiInfoService_GetMaxSupportedTxLinkSpeedMbps_Handler,
+		},
+		{
+			MethodName: "GetNetworkId",
+			Handler:    _WifiInfoService_GetNetworkId_Handler,
+		},
+		{
+			MethodName: "GetPasspointFqdn",
+			Handler:    _WifiInfoService_GetPasspointFqdn_Handler,
+		},
+		{
+			MethodName: "GetPasspointProviderFriendlyName",
+			Handler:    _WifiInfoService_GetPasspointProviderFriendlyName_Handler,
+		},
+		{
+			MethodName: "GetPasspointUniqueId",
+			Handler:    _WifiInfoService_GetPasspointUniqueId_Handler,
+		},
+		{
+			MethodName: "GetRssi",
+			Handler:    _WifiInfoService_GetRssi_Handler,
+		},
+		{
+			MethodName: "GetRxLinkSpeedMbps",
+			Handler:    _WifiInfoService_GetRxLinkSpeedMbps_Handler,
+		},
+		{
+			MethodName: "GetSSID",
+			Handler:    _WifiInfoService_GetSSID_Handler,
+		},
+		{
+			MethodName: "GetSubscriptionId",
+			Handler:    _WifiInfoService_GetSubscriptionId_Handler,
+		},
+		{
+			MethodName: "GetSupplicantState",
+			Handler:    _WifiInfoService_GetSupplicantState_Handler,
+		},
+		{
+			MethodName: "GetTxLinkSpeedMbps",
+			Handler:    _WifiInfoService_GetTxLinkSpeedMbps_Handler,
+		},
+		{
+			MethodName: "GetWifiStandard",
+			Handler:    _WifiInfoService_GetWifiStandard_Handler,
+		},
+		{
+			MethodName: "HashCode",
+			Handler:    _WifiInfoService_HashCode_Handler,
+		},
+		{
+			MethodName: "IsRestricted",
+			Handler:    _WifiInfoService_IsRestricted_Handler,
+		},
+		{
+			MethodName: "MakeCopy",
+			Handler:    _WifiInfoService_MakeCopy_Handler,
+		},
+		{
+			MethodName: "ToString",
+			Handler:    _WifiInfoService_ToString_Handler,
+		},
+		{
+			MethodName: "WriteToParcel",
+			Handler:    _WifiInfoService_WriteToParcel_Handler,
+		},
+		{
+			MethodName: "GetDetailedStateOf",
+			Handler:    _WifiInfoService_GetDetailedStateOf_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/wifi/wifi.proto",
+}
+
+const (
 	WifiManagerService_AddLocalOnlyConnectionFailureListener_FullMethodName            = "/wifi.WifiManagerService/AddLocalOnlyConnectionFailureListener"
 	WifiManagerService_AddNetwork_FullMethodName                                       = "/wifi.WifiManagerService/AddNetwork"
 	WifiManagerService_AddNetworkPrivileged_FullMethodName                             = "/wifi.WifiManagerService/AddNetworkPrivileged"
@@ -4486,6 +5842,754 @@ var WifiManagerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CompareSignalLevel",
 			Handler:    _WifiManagerService_CompareSignalLevel_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/wifi/wifi.proto",
+}
+
+const (
+	ScanResultService_DescribeContents_FullMethodName                        = "/wifi.ScanResultService/DescribeContents"
+	ScanResultService_GetAffiliatedMloLinks_FullMethodName                   = "/wifi.ScanResultService/GetAffiliatedMloLinks"
+	ScanResultService_GetApMldMacAddress_FullMethodName                      = "/wifi.ScanResultService/GetApMldMacAddress"
+	ScanResultService_GetApMloLinkId_FullMethodName                          = "/wifi.ScanResultService/GetApMloLinkId"
+	ScanResultService_GetInformationElements_FullMethodName                  = "/wifi.ScanResultService/GetInformationElements"
+	ScanResultService_GetSecurityTypes_FullMethodName                        = "/wifi.ScanResultService/GetSecurityTypes"
+	ScanResultService_GetWifiSsid_FullMethodName                             = "/wifi.ScanResultService/GetWifiSsid"
+	ScanResultService_GetWifiStandard_FullMethodName                         = "/wifi.ScanResultService/GetWifiStandard"
+	ScanResultService_Is80211AzNtbResponder_FullMethodName                   = "/wifi.ScanResultService/Is80211azNtbResponder"
+	ScanResultService_Is80211McResponder_FullMethodName                      = "/wifi.ScanResultService/Is80211mcResponder"
+	ScanResultService_IsPasspointNetwork_FullMethodName                      = "/wifi.ScanResultService/IsPasspointNetwork"
+	ScanResultService_IsRangingFrameProtectionRequired_FullMethodName        = "/wifi.ScanResultService/IsRangingFrameProtectionRequired"
+	ScanResultService_IsSecureHeLtfSupported_FullMethodName                  = "/wifi.ScanResultService/IsSecureHeLtfSupported"
+	ScanResultService_IsTwtResponder_FullMethodName                          = "/wifi.ScanResultService/IsTwtResponder"
+	ScanResultService_ToString_FullMethodName                                = "/wifi.ScanResultService/ToString"
+	ScanResultService_WriteToParcel_FullMethodName                           = "/wifi.ScanResultService/WriteToParcel"
+	ScanResultService_ConvertChannelToFrequencyMhzIfSupported_FullMethodName = "/wifi.ScanResultService/ConvertChannelToFrequencyMhzIfSupported"
+	ScanResultService_ConvertFrequencyMhzToChannelIfSupported_FullMethodName = "/wifi.ScanResultService/ConvertFrequencyMhzToChannelIfSupported"
+)
+
+// ScanResultServiceClient is the client API for ScanResultService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ScanResultServiceClient interface {
+	DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error)
+	GetAffiliatedMloLinks(ctx context.Context, in *GetAffiliatedMloLinksRequest, opts ...grpc.CallOption) (*GetAffiliatedMloLinksResponse, error)
+	GetApMldMacAddress(ctx context.Context, in *GetApMldMacAddressRequest, opts ...grpc.CallOption) (*GetApMldMacAddressResponse, error)
+	GetApMloLinkId(ctx context.Context, in *GetApMloLinkIdRequest, opts ...grpc.CallOption) (*GetApMloLinkIdResponse, error)
+	GetInformationElements(ctx context.Context, in *GetInformationElementsRequest, opts ...grpc.CallOption) (*GetInformationElementsResponse, error)
+	GetSecurityTypes(ctx context.Context, in *GetSecurityTypesRequest, opts ...grpc.CallOption) (*GetSecurityTypesResponse, error)
+	GetWifiSsid(ctx context.Context, in *GetWifiSsidRequest, opts ...grpc.CallOption) (*GetWifiSsidResponse, error)
+	GetWifiStandard(ctx context.Context, in *GetWifiStandardRequest, opts ...grpc.CallOption) (*GetWifiStandardResponse, error)
+	Is80211AzNtbResponder(ctx context.Context, in *Is80211AzNtbResponderRequest, opts ...grpc.CallOption) (*Is80211AzNtbResponderResponse, error)
+	Is80211McResponder(ctx context.Context, in *Is80211McResponderRequest, opts ...grpc.CallOption) (*Is80211McResponderResponse, error)
+	IsPasspointNetwork(ctx context.Context, in *IsPasspointNetworkRequest, opts ...grpc.CallOption) (*IsPasspointNetworkResponse, error)
+	IsRangingFrameProtectionRequired(ctx context.Context, in *IsRangingFrameProtectionRequiredRequest, opts ...grpc.CallOption) (*IsRangingFrameProtectionRequiredResponse, error)
+	IsSecureHeLtfSupported(ctx context.Context, in *IsSecureHeLtfSupportedRequest, opts ...grpc.CallOption) (*IsSecureHeLtfSupportedResponse, error)
+	IsTwtResponder(ctx context.Context, in *IsTwtResponderRequest, opts ...grpc.CallOption) (*IsTwtResponderResponse, error)
+	ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error)
+	WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error)
+	ConvertChannelToFrequencyMhzIfSupported(ctx context.Context, in *ConvertChannelToFrequencyMhzIfSupportedRequest, opts ...grpc.CallOption) (*ConvertChannelToFrequencyMhzIfSupportedResponse, error)
+	ConvertFrequencyMhzToChannelIfSupported(ctx context.Context, in *ConvertFrequencyMhzToChannelIfSupportedRequest, opts ...grpc.CallOption) (*ConvertFrequencyMhzToChannelIfSupportedResponse, error)
+}
+
+type scanResultServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewScanResultServiceClient(cc grpc.ClientConnInterface) ScanResultServiceClient {
+	return &scanResultServiceClient{cc}
+}
+
+func (c *scanResultServiceClient) DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DescribeContentsResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_DescribeContents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) GetAffiliatedMloLinks(ctx context.Context, in *GetAffiliatedMloLinksRequest, opts ...grpc.CallOption) (*GetAffiliatedMloLinksResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAffiliatedMloLinksResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_GetAffiliatedMloLinks_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) GetApMldMacAddress(ctx context.Context, in *GetApMldMacAddressRequest, opts ...grpc.CallOption) (*GetApMldMacAddressResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetApMldMacAddressResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_GetApMldMacAddress_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) GetApMloLinkId(ctx context.Context, in *GetApMloLinkIdRequest, opts ...grpc.CallOption) (*GetApMloLinkIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetApMloLinkIdResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_GetApMloLinkId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) GetInformationElements(ctx context.Context, in *GetInformationElementsRequest, opts ...grpc.CallOption) (*GetInformationElementsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetInformationElementsResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_GetInformationElements_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) GetSecurityTypes(ctx context.Context, in *GetSecurityTypesRequest, opts ...grpc.CallOption) (*GetSecurityTypesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSecurityTypesResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_GetSecurityTypes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) GetWifiSsid(ctx context.Context, in *GetWifiSsidRequest, opts ...grpc.CallOption) (*GetWifiSsidResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWifiSsidResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_GetWifiSsid_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) GetWifiStandard(ctx context.Context, in *GetWifiStandardRequest, opts ...grpc.CallOption) (*GetWifiStandardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWifiStandardResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_GetWifiStandard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) Is80211AzNtbResponder(ctx context.Context, in *Is80211AzNtbResponderRequest, opts ...grpc.CallOption) (*Is80211AzNtbResponderResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Is80211AzNtbResponderResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_Is80211AzNtbResponder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) Is80211McResponder(ctx context.Context, in *Is80211McResponderRequest, opts ...grpc.CallOption) (*Is80211McResponderResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Is80211McResponderResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_Is80211McResponder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) IsPasspointNetwork(ctx context.Context, in *IsPasspointNetworkRequest, opts ...grpc.CallOption) (*IsPasspointNetworkResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsPasspointNetworkResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_IsPasspointNetwork_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) IsRangingFrameProtectionRequired(ctx context.Context, in *IsRangingFrameProtectionRequiredRequest, opts ...grpc.CallOption) (*IsRangingFrameProtectionRequiredResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsRangingFrameProtectionRequiredResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_IsRangingFrameProtectionRequired_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) IsSecureHeLtfSupported(ctx context.Context, in *IsSecureHeLtfSupportedRequest, opts ...grpc.CallOption) (*IsSecureHeLtfSupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsSecureHeLtfSupportedResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_IsSecureHeLtfSupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) IsTwtResponder(ctx context.Context, in *IsTwtResponderRequest, opts ...grpc.CallOption) (*IsTwtResponderResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsTwtResponderResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_IsTwtResponder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ToStringResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_ToString_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteToParcelResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_WriteToParcel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) ConvertChannelToFrequencyMhzIfSupported(ctx context.Context, in *ConvertChannelToFrequencyMhzIfSupportedRequest, opts ...grpc.CallOption) (*ConvertChannelToFrequencyMhzIfSupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConvertChannelToFrequencyMhzIfSupportedResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_ConvertChannelToFrequencyMhzIfSupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *scanResultServiceClient) ConvertFrequencyMhzToChannelIfSupported(ctx context.Context, in *ConvertFrequencyMhzToChannelIfSupportedRequest, opts ...grpc.CallOption) (*ConvertFrequencyMhzToChannelIfSupportedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConvertFrequencyMhzToChannelIfSupportedResponse)
+	err := c.cc.Invoke(ctx, ScanResultService_ConvertFrequencyMhzToChannelIfSupported_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ScanResultServiceServer is the server API for ScanResultService service.
+// All implementations must embed UnimplementedScanResultServiceServer
+// for forward compatibility.
+type ScanResultServiceServer interface {
+	DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error)
+	GetAffiliatedMloLinks(context.Context, *GetAffiliatedMloLinksRequest) (*GetAffiliatedMloLinksResponse, error)
+	GetApMldMacAddress(context.Context, *GetApMldMacAddressRequest) (*GetApMldMacAddressResponse, error)
+	GetApMloLinkId(context.Context, *GetApMloLinkIdRequest) (*GetApMloLinkIdResponse, error)
+	GetInformationElements(context.Context, *GetInformationElementsRequest) (*GetInformationElementsResponse, error)
+	GetSecurityTypes(context.Context, *GetSecurityTypesRequest) (*GetSecurityTypesResponse, error)
+	GetWifiSsid(context.Context, *GetWifiSsidRequest) (*GetWifiSsidResponse, error)
+	GetWifiStandard(context.Context, *GetWifiStandardRequest) (*GetWifiStandardResponse, error)
+	Is80211AzNtbResponder(context.Context, *Is80211AzNtbResponderRequest) (*Is80211AzNtbResponderResponse, error)
+	Is80211McResponder(context.Context, *Is80211McResponderRequest) (*Is80211McResponderResponse, error)
+	IsPasspointNetwork(context.Context, *IsPasspointNetworkRequest) (*IsPasspointNetworkResponse, error)
+	IsRangingFrameProtectionRequired(context.Context, *IsRangingFrameProtectionRequiredRequest) (*IsRangingFrameProtectionRequiredResponse, error)
+	IsSecureHeLtfSupported(context.Context, *IsSecureHeLtfSupportedRequest) (*IsSecureHeLtfSupportedResponse, error)
+	IsTwtResponder(context.Context, *IsTwtResponderRequest) (*IsTwtResponderResponse, error)
+	ToString(context.Context, *ToStringRequest) (*ToStringResponse, error)
+	WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error)
+	ConvertChannelToFrequencyMhzIfSupported(context.Context, *ConvertChannelToFrequencyMhzIfSupportedRequest) (*ConvertChannelToFrequencyMhzIfSupportedResponse, error)
+	ConvertFrequencyMhzToChannelIfSupported(context.Context, *ConvertFrequencyMhzToChannelIfSupportedRequest) (*ConvertFrequencyMhzToChannelIfSupportedResponse, error)
+	mustEmbedUnimplementedScanResultServiceServer()
+}
+
+// UnimplementedScanResultServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedScanResultServiceServer struct{}
+
+func (UnimplementedScanResultServiceServer) DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DescribeContents not implemented")
+}
+func (UnimplementedScanResultServiceServer) GetAffiliatedMloLinks(context.Context, *GetAffiliatedMloLinksRequest) (*GetAffiliatedMloLinksResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAffiliatedMloLinks not implemented")
+}
+func (UnimplementedScanResultServiceServer) GetApMldMacAddress(context.Context, *GetApMldMacAddressRequest) (*GetApMldMacAddressResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetApMldMacAddress not implemented")
+}
+func (UnimplementedScanResultServiceServer) GetApMloLinkId(context.Context, *GetApMloLinkIdRequest) (*GetApMloLinkIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetApMloLinkId not implemented")
+}
+func (UnimplementedScanResultServiceServer) GetInformationElements(context.Context, *GetInformationElementsRequest) (*GetInformationElementsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetInformationElements not implemented")
+}
+func (UnimplementedScanResultServiceServer) GetSecurityTypes(context.Context, *GetSecurityTypesRequest) (*GetSecurityTypesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSecurityTypes not implemented")
+}
+func (UnimplementedScanResultServiceServer) GetWifiSsid(context.Context, *GetWifiSsidRequest) (*GetWifiSsidResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetWifiSsid not implemented")
+}
+func (UnimplementedScanResultServiceServer) GetWifiStandard(context.Context, *GetWifiStandardRequest) (*GetWifiStandardResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetWifiStandard not implemented")
+}
+func (UnimplementedScanResultServiceServer) Is80211AzNtbResponder(context.Context, *Is80211AzNtbResponderRequest) (*Is80211AzNtbResponderResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Is80211AzNtbResponder not implemented")
+}
+func (UnimplementedScanResultServiceServer) Is80211McResponder(context.Context, *Is80211McResponderRequest) (*Is80211McResponderResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Is80211McResponder not implemented")
+}
+func (UnimplementedScanResultServiceServer) IsPasspointNetwork(context.Context, *IsPasspointNetworkRequest) (*IsPasspointNetworkResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsPasspointNetwork not implemented")
+}
+func (UnimplementedScanResultServiceServer) IsRangingFrameProtectionRequired(context.Context, *IsRangingFrameProtectionRequiredRequest) (*IsRangingFrameProtectionRequiredResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsRangingFrameProtectionRequired not implemented")
+}
+func (UnimplementedScanResultServiceServer) IsSecureHeLtfSupported(context.Context, *IsSecureHeLtfSupportedRequest) (*IsSecureHeLtfSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsSecureHeLtfSupported not implemented")
+}
+func (UnimplementedScanResultServiceServer) IsTwtResponder(context.Context, *IsTwtResponderRequest) (*IsTwtResponderResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsTwtResponder not implemented")
+}
+func (UnimplementedScanResultServiceServer) ToString(context.Context, *ToStringRequest) (*ToStringResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ToString not implemented")
+}
+func (UnimplementedScanResultServiceServer) WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteToParcel not implemented")
+}
+func (UnimplementedScanResultServiceServer) ConvertChannelToFrequencyMhzIfSupported(context.Context, *ConvertChannelToFrequencyMhzIfSupportedRequest) (*ConvertChannelToFrequencyMhzIfSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConvertChannelToFrequencyMhzIfSupported not implemented")
+}
+func (UnimplementedScanResultServiceServer) ConvertFrequencyMhzToChannelIfSupported(context.Context, *ConvertFrequencyMhzToChannelIfSupportedRequest) (*ConvertFrequencyMhzToChannelIfSupportedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConvertFrequencyMhzToChannelIfSupported not implemented")
+}
+func (UnimplementedScanResultServiceServer) mustEmbedUnimplementedScanResultServiceServer() {}
+func (UnimplementedScanResultServiceServer) testEmbeddedByValue()                           {}
+
+// UnsafeScanResultServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ScanResultServiceServer will
+// result in compilation errors.
+type UnsafeScanResultServiceServer interface {
+	mustEmbedUnimplementedScanResultServiceServer()
+}
+
+func RegisterScanResultServiceServer(s grpc.ServiceRegistrar, srv ScanResultServiceServer) {
+	// If the following call panics, it indicates UnimplementedScanResultServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&ScanResultService_ServiceDesc, srv)
+}
+
+func _ScanResultService_DescribeContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeContentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).DescribeContents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_DescribeContents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).DescribeContents(ctx, req.(*DescribeContentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_GetAffiliatedMloLinks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAffiliatedMloLinksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).GetAffiliatedMloLinks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_GetAffiliatedMloLinks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).GetAffiliatedMloLinks(ctx, req.(*GetAffiliatedMloLinksRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_GetApMldMacAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetApMldMacAddressRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).GetApMldMacAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_GetApMldMacAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).GetApMldMacAddress(ctx, req.(*GetApMldMacAddressRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_GetApMloLinkId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetApMloLinkIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).GetApMloLinkId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_GetApMloLinkId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).GetApMloLinkId(ctx, req.(*GetApMloLinkIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_GetInformationElements_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInformationElementsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).GetInformationElements(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_GetInformationElements_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).GetInformationElements(ctx, req.(*GetInformationElementsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_GetSecurityTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSecurityTypesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).GetSecurityTypes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_GetSecurityTypes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).GetSecurityTypes(ctx, req.(*GetSecurityTypesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_GetWifiSsid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWifiSsidRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).GetWifiSsid(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_GetWifiSsid_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).GetWifiSsid(ctx, req.(*GetWifiSsidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_GetWifiStandard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWifiStandardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).GetWifiStandard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_GetWifiStandard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).GetWifiStandard(ctx, req.(*GetWifiStandardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_Is80211AzNtbResponder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Is80211AzNtbResponderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).Is80211AzNtbResponder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_Is80211AzNtbResponder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).Is80211AzNtbResponder(ctx, req.(*Is80211AzNtbResponderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_Is80211McResponder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Is80211McResponderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).Is80211McResponder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_Is80211McResponder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).Is80211McResponder(ctx, req.(*Is80211McResponderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_IsPasspointNetwork_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsPasspointNetworkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).IsPasspointNetwork(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_IsPasspointNetwork_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).IsPasspointNetwork(ctx, req.(*IsPasspointNetworkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_IsRangingFrameProtectionRequired_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsRangingFrameProtectionRequiredRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).IsRangingFrameProtectionRequired(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_IsRangingFrameProtectionRequired_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).IsRangingFrameProtectionRequired(ctx, req.(*IsRangingFrameProtectionRequiredRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_IsSecureHeLtfSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsSecureHeLtfSupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).IsSecureHeLtfSupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_IsSecureHeLtfSupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).IsSecureHeLtfSupported(ctx, req.(*IsSecureHeLtfSupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_IsTwtResponder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsTwtResponderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).IsTwtResponder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_IsTwtResponder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).IsTwtResponder(ctx, req.(*IsTwtResponderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_ToString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToStringRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).ToString(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_ToString_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).ToString(ctx, req.(*ToStringRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_WriteToParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteToParcelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).WriteToParcel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_WriteToParcel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).WriteToParcel(ctx, req.(*WriteToParcelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_ConvertChannelToFrequencyMhzIfSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConvertChannelToFrequencyMhzIfSupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).ConvertChannelToFrequencyMhzIfSupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_ConvertChannelToFrequencyMhzIfSupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).ConvertChannelToFrequencyMhzIfSupported(ctx, req.(*ConvertChannelToFrequencyMhzIfSupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ScanResultService_ConvertFrequencyMhzToChannelIfSupported_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConvertFrequencyMhzToChannelIfSupportedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScanResultServiceServer).ConvertFrequencyMhzToChannelIfSupported(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ScanResultService_ConvertFrequencyMhzToChannelIfSupported_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScanResultServiceServer).ConvertFrequencyMhzToChannelIfSupported(ctx, req.(*ConvertFrequencyMhzToChannelIfSupportedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ScanResultService_ServiceDesc is the grpc.ServiceDesc for ScanResultService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ScanResultService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "wifi.ScanResultService",
+	HandlerType: (*ScanResultServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "DescribeContents",
+			Handler:    _ScanResultService_DescribeContents_Handler,
+		},
+		{
+			MethodName: "GetAffiliatedMloLinks",
+			Handler:    _ScanResultService_GetAffiliatedMloLinks_Handler,
+		},
+		{
+			MethodName: "GetApMldMacAddress",
+			Handler:    _ScanResultService_GetApMldMacAddress_Handler,
+		},
+		{
+			MethodName: "GetApMloLinkId",
+			Handler:    _ScanResultService_GetApMloLinkId_Handler,
+		},
+		{
+			MethodName: "GetInformationElements",
+			Handler:    _ScanResultService_GetInformationElements_Handler,
+		},
+		{
+			MethodName: "GetSecurityTypes",
+			Handler:    _ScanResultService_GetSecurityTypes_Handler,
+		},
+		{
+			MethodName: "GetWifiSsid",
+			Handler:    _ScanResultService_GetWifiSsid_Handler,
+		},
+		{
+			MethodName: "GetWifiStandard",
+			Handler:    _ScanResultService_GetWifiStandard_Handler,
+		},
+		{
+			MethodName: "Is80211azNtbResponder",
+			Handler:    _ScanResultService_Is80211AzNtbResponder_Handler,
+		},
+		{
+			MethodName: "Is80211mcResponder",
+			Handler:    _ScanResultService_Is80211McResponder_Handler,
+		},
+		{
+			MethodName: "IsPasspointNetwork",
+			Handler:    _ScanResultService_IsPasspointNetwork_Handler,
+		},
+		{
+			MethodName: "IsRangingFrameProtectionRequired",
+			Handler:    _ScanResultService_IsRangingFrameProtectionRequired_Handler,
+		},
+		{
+			MethodName: "IsSecureHeLtfSupported",
+			Handler:    _ScanResultService_IsSecureHeLtfSupported_Handler,
+		},
+		{
+			MethodName: "IsTwtResponder",
+			Handler:    _ScanResultService_IsTwtResponder_Handler,
+		},
+		{
+			MethodName: "ToString",
+			Handler:    _ScanResultService_ToString_Handler,
+		},
+		{
+			MethodName: "WriteToParcel",
+			Handler:    _ScanResultService_WriteToParcel_Handler,
+		},
+		{
+			MethodName: "ConvertChannelToFrequencyMhzIfSupported",
+			Handler:    _ScanResultService_ConvertChannelToFrequencyMhzIfSupported_Handler,
+		},
+		{
+			MethodName: "ConvertFrequencyMhzToChannelIfSupported",
+			Handler:    _ScanResultService_ConvertFrequencyMhzToChannelIfSupported_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

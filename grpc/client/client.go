@@ -10,23 +10,31 @@ import (
 
 	adminclient "github.com/xaionaro-go/jni/grpc/client/admin"
 	alarmclient "github.com/xaionaro-go/jni/grpc/client/alarm"
+	audiomanagerclient "github.com/xaionaro-go/jni/grpc/client/audiomanager"
 	batteryclient "github.com/xaionaro-go/jni/grpc/client/battery"
 	blobclient "github.com/xaionaro-go/jni/grpc/client/blob"
 	cameraclient "github.com/xaionaro-go/jni/grpc/client/camera"
+	clipboardclient "github.com/xaionaro-go/jni/grpc/client/clipboard"
 	companionclient "github.com/xaionaro-go/jni/grpc/client/companion"
 	inputmethodclient "github.com/xaionaro-go/jni/grpc/client/inputmethod"
 	irclient "github.com/xaionaro-go/jni/grpc/client/ir"
+	jobclient "github.com/xaionaro-go/jni/grpc/client/job"
 	keyguardclient "github.com/xaionaro-go/jni/grpc/client/keyguard"
+	locationclient "github.com/xaionaro-go/jni/grpc/client/location"
 	netclient "github.com/xaionaro-go/jni/grpc/client/net"
+	notificationclient "github.com/xaionaro-go/jni/grpc/client/notification"
 	powerclient "github.com/xaionaro-go/jni/grpc/client/power"
+	printclient "github.com/xaionaro-go/jni/grpc/client/print"
 	projectionclient "github.com/xaionaro-go/jni/grpc/client/projection"
 	roleclient "github.com/xaionaro-go/jni/grpc/client/role"
 	sessionclient "github.com/xaionaro-go/jni/grpc/client/session"
+	storageclient "github.com/xaionaro-go/jni/grpc/client/storage"
 	telecomclient "github.com/xaionaro-go/jni/grpc/client/telecom"
 	telephonyclient "github.com/xaionaro-go/jni/grpc/client/telephony"
 	usageclient "github.com/xaionaro-go/jni/grpc/client/usage"
 	vibratorclient "github.com/xaionaro-go/jni/grpc/client/vibrator"
 	wificlient "github.com/xaionaro-go/jni/grpc/client/wifi"
+	wifi_p2pclient "github.com/xaionaro-go/jni/grpc/client/wifi_p2p"
 	wifi_rttclient "github.com/xaionaro-go/jni/grpc/client/wifi_rtt"
 )
 
@@ -35,23 +43,31 @@ type Client struct {
 	handles handlepb.HandleStoreServiceClient
 	Admin *adminclient.Client
 	Alarm *alarmclient.Client
+	Audiomanager *audiomanagerclient.Client
 	Battery *batteryclient.Client
 	Blob *blobclient.Client
 	Camera *cameraclient.Client
+	Clipboard *clipboardclient.Client
 	Companion *companionclient.Client
 	Inputmethod *inputmethodclient.Client
 	Ir *irclient.Client
+	Job *jobclient.Client
 	Keyguard *keyguardclient.Client
+	Location *locationclient.Client
 	Net *netclient.Client
+	Notification *notificationclient.Client
 	Power *powerclient.Client
+	Print *printclient.Client
 	Projection *projectionclient.Client
 	Role *roleclient.Client
 	Session *sessionclient.Client
+	Storage *storageclient.Client
 	Telecom *telecomclient.Client
 	Telephony *telephonyclient.Client
 	Usage *usageclient.Client
 	Vibrator *vibratorclient.Client
 	Wifi *wificlient.Client
+	Wifi_p2p *wifi_p2pclient.Client
 	Wifi_rtt *wifi_rttclient.Client
 }
 
@@ -61,23 +77,31 @@ func NewClient(cc grpc.ClientConnInterface) *Client {
 		handles: handlepb.NewHandleStoreServiceClient(cc),
 		Admin: adminclient.NewClient(cc),
 		Alarm: alarmclient.NewClient(cc),
+		Audiomanager: audiomanagerclient.NewClient(cc),
 		Battery: batteryclient.NewClient(cc),
 		Blob: blobclient.NewClient(cc),
 		Camera: cameraclient.NewClient(cc),
+		Clipboard: clipboardclient.NewClient(cc),
 		Companion: companionclient.NewClient(cc),
 		Inputmethod: inputmethodclient.NewClient(cc),
 		Ir: irclient.NewClient(cc),
+		Job: jobclient.NewClient(cc),
 		Keyguard: keyguardclient.NewClient(cc),
+		Location: locationclient.NewClient(cc),
 		Net: netclient.NewClient(cc),
+		Notification: notificationclient.NewClient(cc),
 		Power: powerclient.NewClient(cc),
+		Print: printclient.NewClient(cc),
 		Projection: projectionclient.NewClient(cc),
 		Role: roleclient.NewClient(cc),
 		Session: sessionclient.NewClient(cc),
+		Storage: storageclient.NewClient(cc),
 		Telecom: telecomclient.NewClient(cc),
 		Telephony: telephonyclient.NewClient(cc),
 		Usage: usageclient.NewClient(cc),
 		Vibrator: vibratorclient.NewClient(cc),
 		Wifi: wificlient.NewClient(cc),
+		Wifi_p2p: wifi_p2pclient.NewClient(cc),
 		Wifi_rtt: wifi_rttclient.NewClient(cc),
 	}
 }

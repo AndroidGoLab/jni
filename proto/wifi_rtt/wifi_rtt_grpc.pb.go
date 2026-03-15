@@ -21,6 +21,1324 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	RangingResultService_DescribeContents_FullMethodName                         = "/wifi_rtt.RangingResultService/DescribeContents"
+	RangingResultService_Equals_FullMethodName                                   = "/wifi_rtt.RangingResultService/Equals"
+	RangingResultService_Get80211AzInitiatorTxLtfRepetitionsCount_FullMethodName = "/wifi_rtt.RangingResultService/Get80211azInitiatorTxLtfRepetitionsCount"
+	RangingResultService_Get80211AzNumberOfRxSpatialStreams_FullMethodName       = "/wifi_rtt.RangingResultService/Get80211azNumberOfRxSpatialStreams"
+	RangingResultService_Get80211AzNumberOfTxSpatialStreams_FullMethodName       = "/wifi_rtt.RangingResultService/Get80211azNumberOfTxSpatialStreams"
+	RangingResultService_Get80211AzResponderTxLtfRepetitionsCount_FullMethodName = "/wifi_rtt.RangingResultService/Get80211azResponderTxLtfRepetitionsCount"
+	RangingResultService_GetDistanceMm_FullMethodName                            = "/wifi_rtt.RangingResultService/GetDistanceMm"
+	RangingResultService_GetDistanceStdDevMm_FullMethodName                      = "/wifi_rtt.RangingResultService/GetDistanceStdDevMm"
+	RangingResultService_GetLci_FullMethodName                                   = "/wifi_rtt.RangingResultService/GetLci"
+	RangingResultService_GetLcr_FullMethodName                                   = "/wifi_rtt.RangingResultService/GetLcr"
+	RangingResultService_GetMacAddress_FullMethodName                            = "/wifi_rtt.RangingResultService/GetMacAddress"
+	RangingResultService_GetMaxTimeBetweenNtbMeasurementsMicros_FullMethodName   = "/wifi_rtt.RangingResultService/GetMaxTimeBetweenNtbMeasurementsMicros"
+	RangingResultService_GetMeasurementBandwidth_FullMethodName                  = "/wifi_rtt.RangingResultService/GetMeasurementBandwidth"
+	RangingResultService_GetMeasurementChannelFrequencyMHz_FullMethodName        = "/wifi_rtt.RangingResultService/GetMeasurementChannelFrequencyMHz"
+	RangingResultService_GetMinTimeBetweenNtbMeasurementsMicros_FullMethodName   = "/wifi_rtt.RangingResultService/GetMinTimeBetweenNtbMeasurementsMicros"
+	RangingResultService_GetNumAttemptedMeasurements_FullMethodName              = "/wifi_rtt.RangingResultService/GetNumAttemptedMeasurements"
+	RangingResultService_GetNumSuccessfulMeasurements_FullMethodName             = "/wifi_rtt.RangingResultService/GetNumSuccessfulMeasurements"
+	RangingResultService_GetPasnComebackAfterMillis_FullMethodName               = "/wifi_rtt.RangingResultService/GetPasnComebackAfterMillis"
+	RangingResultService_GetPasnComebackCookie_FullMethodName                    = "/wifi_rtt.RangingResultService/GetPasnComebackCookie"
+	RangingResultService_GetPeerHandle_FullMethodName                            = "/wifi_rtt.RangingResultService/GetPeerHandle"
+	RangingResultService_GetRangingTimestampMillis_FullMethodName                = "/wifi_rtt.RangingResultService/GetRangingTimestampMillis"
+	RangingResultService_GetRssi_FullMethodName                                  = "/wifi_rtt.RangingResultService/GetRssi"
+	RangingResultService_GetSecureHeLtfProtocolVersion_FullMethodName            = "/wifi_rtt.RangingResultService/GetSecureHeLtfProtocolVersion"
+	RangingResultService_GetStatus_FullMethodName                                = "/wifi_rtt.RangingResultService/GetStatus"
+	RangingResultService_GetUnverifiedResponderLocation_FullMethodName           = "/wifi_rtt.RangingResultService/GetUnverifiedResponderLocation"
+	RangingResultService_HashCode_FullMethodName                                 = "/wifi_rtt.RangingResultService/HashCode"
+	RangingResultService_Is80211AzNtbMeasurement_FullMethodName                  = "/wifi_rtt.RangingResultService/Is80211azNtbMeasurement"
+	RangingResultService_Is80211McMeasurement_FullMethodName                     = "/wifi_rtt.RangingResultService/Is80211mcMeasurement"
+	RangingResultService_IsRangingAuthenticated_FullMethodName                   = "/wifi_rtt.RangingResultService/IsRangingAuthenticated"
+	RangingResultService_IsRangingFrameProtected_FullMethodName                  = "/wifi_rtt.RangingResultService/IsRangingFrameProtected"
+	RangingResultService_IsSecureHeLtfEnabled_FullMethodName                     = "/wifi_rtt.RangingResultService/IsSecureHeLtfEnabled"
+	RangingResultService_ToString_FullMethodName                                 = "/wifi_rtt.RangingResultService/ToString"
+	RangingResultService_WriteToParcel_FullMethodName                            = "/wifi_rtt.RangingResultService/WriteToParcel"
+)
+
+// RangingResultServiceClient is the client API for RangingResultService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type RangingResultServiceClient interface {
+	DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error)
+	Equals(ctx context.Context, in *EqualsRequest, opts ...grpc.CallOption) (*EqualsResponse, error)
+	Get80211AzInitiatorTxLtfRepetitionsCount(ctx context.Context, in *Get80211AzInitiatorTxLtfRepetitionsCountRequest, opts ...grpc.CallOption) (*Get80211AzInitiatorTxLtfRepetitionsCountResponse, error)
+	Get80211AzNumberOfRxSpatialStreams(ctx context.Context, in *Get80211AzNumberOfRxSpatialStreamsRequest, opts ...grpc.CallOption) (*Get80211AzNumberOfRxSpatialStreamsResponse, error)
+	Get80211AzNumberOfTxSpatialStreams(ctx context.Context, in *Get80211AzNumberOfTxSpatialStreamsRequest, opts ...grpc.CallOption) (*Get80211AzNumberOfTxSpatialStreamsResponse, error)
+	Get80211AzResponderTxLtfRepetitionsCount(ctx context.Context, in *Get80211AzResponderTxLtfRepetitionsCountRequest, opts ...grpc.CallOption) (*Get80211AzResponderTxLtfRepetitionsCountResponse, error)
+	GetDistanceMm(ctx context.Context, in *GetDistanceMmRequest, opts ...grpc.CallOption) (*GetDistanceMmResponse, error)
+	GetDistanceStdDevMm(ctx context.Context, in *GetDistanceStdDevMmRequest, opts ...grpc.CallOption) (*GetDistanceStdDevMmResponse, error)
+	GetLci(ctx context.Context, in *GetLciRequest, opts ...grpc.CallOption) (*GetLciResponse, error)
+	GetLcr(ctx context.Context, in *GetLcrRequest, opts ...grpc.CallOption) (*GetLcrResponse, error)
+	GetMacAddress(ctx context.Context, in *GetMacAddressRequest, opts ...grpc.CallOption) (*GetMacAddressResponse, error)
+	GetMaxTimeBetweenNtbMeasurementsMicros(ctx context.Context, in *GetMaxTimeBetweenNtbMeasurementsMicrosRequest, opts ...grpc.CallOption) (*GetMaxTimeBetweenNtbMeasurementsMicrosResponse, error)
+	GetMeasurementBandwidth(ctx context.Context, in *GetMeasurementBandwidthRequest, opts ...grpc.CallOption) (*GetMeasurementBandwidthResponse, error)
+	GetMeasurementChannelFrequencyMHz(ctx context.Context, in *GetMeasurementChannelFrequencyMHzRequest, opts ...grpc.CallOption) (*GetMeasurementChannelFrequencyMHzResponse, error)
+	GetMinTimeBetweenNtbMeasurementsMicros(ctx context.Context, in *GetMinTimeBetweenNtbMeasurementsMicrosRequest, opts ...grpc.CallOption) (*GetMinTimeBetweenNtbMeasurementsMicrosResponse, error)
+	GetNumAttemptedMeasurements(ctx context.Context, in *GetNumAttemptedMeasurementsRequest, opts ...grpc.CallOption) (*GetNumAttemptedMeasurementsResponse, error)
+	GetNumSuccessfulMeasurements(ctx context.Context, in *GetNumSuccessfulMeasurementsRequest, opts ...grpc.CallOption) (*GetNumSuccessfulMeasurementsResponse, error)
+	GetPasnComebackAfterMillis(ctx context.Context, in *GetPasnComebackAfterMillisRequest, opts ...grpc.CallOption) (*GetPasnComebackAfterMillisResponse, error)
+	GetPasnComebackCookie(ctx context.Context, in *GetPasnComebackCookieRequest, opts ...grpc.CallOption) (*GetPasnComebackCookieResponse, error)
+	GetPeerHandle(ctx context.Context, in *GetPeerHandleRequest, opts ...grpc.CallOption) (*GetPeerHandleResponse, error)
+	GetRangingTimestampMillis(ctx context.Context, in *GetRangingTimestampMillisRequest, opts ...grpc.CallOption) (*GetRangingTimestampMillisResponse, error)
+	GetRssi(ctx context.Context, in *GetRssiRequest, opts ...grpc.CallOption) (*GetRssiResponse, error)
+	GetSecureHeLtfProtocolVersion(ctx context.Context, in *GetSecureHeLtfProtocolVersionRequest, opts ...grpc.CallOption) (*GetSecureHeLtfProtocolVersionResponse, error)
+	GetStatus(ctx context.Context, in *GetStatusRequest, opts ...grpc.CallOption) (*GetStatusResponse, error)
+	GetUnverifiedResponderLocation(ctx context.Context, in *GetUnverifiedResponderLocationRequest, opts ...grpc.CallOption) (*GetUnverifiedResponderLocationResponse, error)
+	HashCode(ctx context.Context, in *HashCodeRequest, opts ...grpc.CallOption) (*HashCodeResponse, error)
+	Is80211AzNtbMeasurement(ctx context.Context, in *Is80211AzNtbMeasurementRequest, opts ...grpc.CallOption) (*Is80211AzNtbMeasurementResponse, error)
+	Is80211McMeasurement(ctx context.Context, in *Is80211McMeasurementRequest, opts ...grpc.CallOption) (*Is80211McMeasurementResponse, error)
+	IsRangingAuthenticated(ctx context.Context, in *IsRangingAuthenticatedRequest, opts ...grpc.CallOption) (*IsRangingAuthenticatedResponse, error)
+	IsRangingFrameProtected(ctx context.Context, in *IsRangingFrameProtectedRequest, opts ...grpc.CallOption) (*IsRangingFrameProtectedResponse, error)
+	IsSecureHeLtfEnabled(ctx context.Context, in *IsSecureHeLtfEnabledRequest, opts ...grpc.CallOption) (*IsSecureHeLtfEnabledResponse, error)
+	ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error)
+	WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error)
+}
+
+type rangingResultServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewRangingResultServiceClient(cc grpc.ClientConnInterface) RangingResultServiceClient {
+	return &rangingResultServiceClient{cc}
+}
+
+func (c *rangingResultServiceClient) DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DescribeContentsResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_DescribeContents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) Equals(ctx context.Context, in *EqualsRequest, opts ...grpc.CallOption) (*EqualsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EqualsResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_Equals_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) Get80211AzInitiatorTxLtfRepetitionsCount(ctx context.Context, in *Get80211AzInitiatorTxLtfRepetitionsCountRequest, opts ...grpc.CallOption) (*Get80211AzInitiatorTxLtfRepetitionsCountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Get80211AzInitiatorTxLtfRepetitionsCountResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_Get80211AzInitiatorTxLtfRepetitionsCount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) Get80211AzNumberOfRxSpatialStreams(ctx context.Context, in *Get80211AzNumberOfRxSpatialStreamsRequest, opts ...grpc.CallOption) (*Get80211AzNumberOfRxSpatialStreamsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Get80211AzNumberOfRxSpatialStreamsResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_Get80211AzNumberOfRxSpatialStreams_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) Get80211AzNumberOfTxSpatialStreams(ctx context.Context, in *Get80211AzNumberOfTxSpatialStreamsRequest, opts ...grpc.CallOption) (*Get80211AzNumberOfTxSpatialStreamsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Get80211AzNumberOfTxSpatialStreamsResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_Get80211AzNumberOfTxSpatialStreams_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) Get80211AzResponderTxLtfRepetitionsCount(ctx context.Context, in *Get80211AzResponderTxLtfRepetitionsCountRequest, opts ...grpc.CallOption) (*Get80211AzResponderTxLtfRepetitionsCountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Get80211AzResponderTxLtfRepetitionsCountResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_Get80211AzResponderTxLtfRepetitionsCount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetDistanceMm(ctx context.Context, in *GetDistanceMmRequest, opts ...grpc.CallOption) (*GetDistanceMmResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDistanceMmResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetDistanceMm_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetDistanceStdDevMm(ctx context.Context, in *GetDistanceStdDevMmRequest, opts ...grpc.CallOption) (*GetDistanceStdDevMmResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDistanceStdDevMmResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetDistanceStdDevMm_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetLci(ctx context.Context, in *GetLciRequest, opts ...grpc.CallOption) (*GetLciResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLciResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetLci_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetLcr(ctx context.Context, in *GetLcrRequest, opts ...grpc.CallOption) (*GetLcrResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLcrResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetLcr_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetMacAddress(ctx context.Context, in *GetMacAddressRequest, opts ...grpc.CallOption) (*GetMacAddressResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMacAddressResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetMacAddress_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetMaxTimeBetweenNtbMeasurementsMicros(ctx context.Context, in *GetMaxTimeBetweenNtbMeasurementsMicrosRequest, opts ...grpc.CallOption) (*GetMaxTimeBetweenNtbMeasurementsMicrosResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMaxTimeBetweenNtbMeasurementsMicrosResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetMaxTimeBetweenNtbMeasurementsMicros_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetMeasurementBandwidth(ctx context.Context, in *GetMeasurementBandwidthRequest, opts ...grpc.CallOption) (*GetMeasurementBandwidthResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMeasurementBandwidthResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetMeasurementBandwidth_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetMeasurementChannelFrequencyMHz(ctx context.Context, in *GetMeasurementChannelFrequencyMHzRequest, opts ...grpc.CallOption) (*GetMeasurementChannelFrequencyMHzResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMeasurementChannelFrequencyMHzResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetMeasurementChannelFrequencyMHz_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetMinTimeBetweenNtbMeasurementsMicros(ctx context.Context, in *GetMinTimeBetweenNtbMeasurementsMicrosRequest, opts ...grpc.CallOption) (*GetMinTimeBetweenNtbMeasurementsMicrosResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMinTimeBetweenNtbMeasurementsMicrosResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetMinTimeBetweenNtbMeasurementsMicros_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetNumAttemptedMeasurements(ctx context.Context, in *GetNumAttemptedMeasurementsRequest, opts ...grpc.CallOption) (*GetNumAttemptedMeasurementsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNumAttemptedMeasurementsResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetNumAttemptedMeasurements_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetNumSuccessfulMeasurements(ctx context.Context, in *GetNumSuccessfulMeasurementsRequest, opts ...grpc.CallOption) (*GetNumSuccessfulMeasurementsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNumSuccessfulMeasurementsResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetNumSuccessfulMeasurements_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetPasnComebackAfterMillis(ctx context.Context, in *GetPasnComebackAfterMillisRequest, opts ...grpc.CallOption) (*GetPasnComebackAfterMillisResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPasnComebackAfterMillisResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetPasnComebackAfterMillis_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetPasnComebackCookie(ctx context.Context, in *GetPasnComebackCookieRequest, opts ...grpc.CallOption) (*GetPasnComebackCookieResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPasnComebackCookieResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetPasnComebackCookie_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetPeerHandle(ctx context.Context, in *GetPeerHandleRequest, opts ...grpc.CallOption) (*GetPeerHandleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPeerHandleResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetPeerHandle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetRangingTimestampMillis(ctx context.Context, in *GetRangingTimestampMillisRequest, opts ...grpc.CallOption) (*GetRangingTimestampMillisResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRangingTimestampMillisResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetRangingTimestampMillis_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetRssi(ctx context.Context, in *GetRssiRequest, opts ...grpc.CallOption) (*GetRssiResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRssiResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetRssi_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetSecureHeLtfProtocolVersion(ctx context.Context, in *GetSecureHeLtfProtocolVersionRequest, opts ...grpc.CallOption) (*GetSecureHeLtfProtocolVersionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSecureHeLtfProtocolVersionResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetSecureHeLtfProtocolVersion_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetStatus(ctx context.Context, in *GetStatusRequest, opts ...grpc.CallOption) (*GetStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetStatusResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) GetUnverifiedResponderLocation(ctx context.Context, in *GetUnverifiedResponderLocationRequest, opts ...grpc.CallOption) (*GetUnverifiedResponderLocationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUnverifiedResponderLocationResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_GetUnverifiedResponderLocation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) HashCode(ctx context.Context, in *HashCodeRequest, opts ...grpc.CallOption) (*HashCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HashCodeResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_HashCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) Is80211AzNtbMeasurement(ctx context.Context, in *Is80211AzNtbMeasurementRequest, opts ...grpc.CallOption) (*Is80211AzNtbMeasurementResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Is80211AzNtbMeasurementResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_Is80211AzNtbMeasurement_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) Is80211McMeasurement(ctx context.Context, in *Is80211McMeasurementRequest, opts ...grpc.CallOption) (*Is80211McMeasurementResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Is80211McMeasurementResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_Is80211McMeasurement_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) IsRangingAuthenticated(ctx context.Context, in *IsRangingAuthenticatedRequest, opts ...grpc.CallOption) (*IsRangingAuthenticatedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsRangingAuthenticatedResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_IsRangingAuthenticated_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) IsRangingFrameProtected(ctx context.Context, in *IsRangingFrameProtectedRequest, opts ...grpc.CallOption) (*IsRangingFrameProtectedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsRangingFrameProtectedResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_IsRangingFrameProtected_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) IsSecureHeLtfEnabled(ctx context.Context, in *IsSecureHeLtfEnabledRequest, opts ...grpc.CallOption) (*IsSecureHeLtfEnabledResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsSecureHeLtfEnabledResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_IsSecureHeLtfEnabled_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ToStringResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_ToString_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *rangingResultServiceClient) WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteToParcelResponse)
+	err := c.cc.Invoke(ctx, RangingResultService_WriteToParcel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// RangingResultServiceServer is the server API for RangingResultService service.
+// All implementations must embed UnimplementedRangingResultServiceServer
+// for forward compatibility.
+type RangingResultServiceServer interface {
+	DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error)
+	Equals(context.Context, *EqualsRequest) (*EqualsResponse, error)
+	Get80211AzInitiatorTxLtfRepetitionsCount(context.Context, *Get80211AzInitiatorTxLtfRepetitionsCountRequest) (*Get80211AzInitiatorTxLtfRepetitionsCountResponse, error)
+	Get80211AzNumberOfRxSpatialStreams(context.Context, *Get80211AzNumberOfRxSpatialStreamsRequest) (*Get80211AzNumberOfRxSpatialStreamsResponse, error)
+	Get80211AzNumberOfTxSpatialStreams(context.Context, *Get80211AzNumberOfTxSpatialStreamsRequest) (*Get80211AzNumberOfTxSpatialStreamsResponse, error)
+	Get80211AzResponderTxLtfRepetitionsCount(context.Context, *Get80211AzResponderTxLtfRepetitionsCountRequest) (*Get80211AzResponderTxLtfRepetitionsCountResponse, error)
+	GetDistanceMm(context.Context, *GetDistanceMmRequest) (*GetDistanceMmResponse, error)
+	GetDistanceStdDevMm(context.Context, *GetDistanceStdDevMmRequest) (*GetDistanceStdDevMmResponse, error)
+	GetLci(context.Context, *GetLciRequest) (*GetLciResponse, error)
+	GetLcr(context.Context, *GetLcrRequest) (*GetLcrResponse, error)
+	GetMacAddress(context.Context, *GetMacAddressRequest) (*GetMacAddressResponse, error)
+	GetMaxTimeBetweenNtbMeasurementsMicros(context.Context, *GetMaxTimeBetweenNtbMeasurementsMicrosRequest) (*GetMaxTimeBetweenNtbMeasurementsMicrosResponse, error)
+	GetMeasurementBandwidth(context.Context, *GetMeasurementBandwidthRequest) (*GetMeasurementBandwidthResponse, error)
+	GetMeasurementChannelFrequencyMHz(context.Context, *GetMeasurementChannelFrequencyMHzRequest) (*GetMeasurementChannelFrequencyMHzResponse, error)
+	GetMinTimeBetweenNtbMeasurementsMicros(context.Context, *GetMinTimeBetweenNtbMeasurementsMicrosRequest) (*GetMinTimeBetweenNtbMeasurementsMicrosResponse, error)
+	GetNumAttemptedMeasurements(context.Context, *GetNumAttemptedMeasurementsRequest) (*GetNumAttemptedMeasurementsResponse, error)
+	GetNumSuccessfulMeasurements(context.Context, *GetNumSuccessfulMeasurementsRequest) (*GetNumSuccessfulMeasurementsResponse, error)
+	GetPasnComebackAfterMillis(context.Context, *GetPasnComebackAfterMillisRequest) (*GetPasnComebackAfterMillisResponse, error)
+	GetPasnComebackCookie(context.Context, *GetPasnComebackCookieRequest) (*GetPasnComebackCookieResponse, error)
+	GetPeerHandle(context.Context, *GetPeerHandleRequest) (*GetPeerHandleResponse, error)
+	GetRangingTimestampMillis(context.Context, *GetRangingTimestampMillisRequest) (*GetRangingTimestampMillisResponse, error)
+	GetRssi(context.Context, *GetRssiRequest) (*GetRssiResponse, error)
+	GetSecureHeLtfProtocolVersion(context.Context, *GetSecureHeLtfProtocolVersionRequest) (*GetSecureHeLtfProtocolVersionResponse, error)
+	GetStatus(context.Context, *GetStatusRequest) (*GetStatusResponse, error)
+	GetUnverifiedResponderLocation(context.Context, *GetUnverifiedResponderLocationRequest) (*GetUnverifiedResponderLocationResponse, error)
+	HashCode(context.Context, *HashCodeRequest) (*HashCodeResponse, error)
+	Is80211AzNtbMeasurement(context.Context, *Is80211AzNtbMeasurementRequest) (*Is80211AzNtbMeasurementResponse, error)
+	Is80211McMeasurement(context.Context, *Is80211McMeasurementRequest) (*Is80211McMeasurementResponse, error)
+	IsRangingAuthenticated(context.Context, *IsRangingAuthenticatedRequest) (*IsRangingAuthenticatedResponse, error)
+	IsRangingFrameProtected(context.Context, *IsRangingFrameProtectedRequest) (*IsRangingFrameProtectedResponse, error)
+	IsSecureHeLtfEnabled(context.Context, *IsSecureHeLtfEnabledRequest) (*IsSecureHeLtfEnabledResponse, error)
+	ToString(context.Context, *ToStringRequest) (*ToStringResponse, error)
+	WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error)
+	mustEmbedUnimplementedRangingResultServiceServer()
+}
+
+// UnimplementedRangingResultServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedRangingResultServiceServer struct{}
+
+func (UnimplementedRangingResultServiceServer) DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DescribeContents not implemented")
+}
+func (UnimplementedRangingResultServiceServer) Equals(context.Context, *EqualsRequest) (*EqualsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Equals not implemented")
+}
+func (UnimplementedRangingResultServiceServer) Get80211AzInitiatorTxLtfRepetitionsCount(context.Context, *Get80211AzInitiatorTxLtfRepetitionsCountRequest) (*Get80211AzInitiatorTxLtfRepetitionsCountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Get80211AzInitiatorTxLtfRepetitionsCount not implemented")
+}
+func (UnimplementedRangingResultServiceServer) Get80211AzNumberOfRxSpatialStreams(context.Context, *Get80211AzNumberOfRxSpatialStreamsRequest) (*Get80211AzNumberOfRxSpatialStreamsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Get80211AzNumberOfRxSpatialStreams not implemented")
+}
+func (UnimplementedRangingResultServiceServer) Get80211AzNumberOfTxSpatialStreams(context.Context, *Get80211AzNumberOfTxSpatialStreamsRequest) (*Get80211AzNumberOfTxSpatialStreamsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Get80211AzNumberOfTxSpatialStreams not implemented")
+}
+func (UnimplementedRangingResultServiceServer) Get80211AzResponderTxLtfRepetitionsCount(context.Context, *Get80211AzResponderTxLtfRepetitionsCountRequest) (*Get80211AzResponderTxLtfRepetitionsCountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Get80211AzResponderTxLtfRepetitionsCount not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetDistanceMm(context.Context, *GetDistanceMmRequest) (*GetDistanceMmResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDistanceMm not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetDistanceStdDevMm(context.Context, *GetDistanceStdDevMmRequest) (*GetDistanceStdDevMmResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDistanceStdDevMm not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetLci(context.Context, *GetLciRequest) (*GetLciResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLci not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetLcr(context.Context, *GetLcrRequest) (*GetLcrResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetLcr not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetMacAddress(context.Context, *GetMacAddressRequest) (*GetMacAddressResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMacAddress not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetMaxTimeBetweenNtbMeasurementsMicros(context.Context, *GetMaxTimeBetweenNtbMeasurementsMicrosRequest) (*GetMaxTimeBetweenNtbMeasurementsMicrosResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMaxTimeBetweenNtbMeasurementsMicros not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetMeasurementBandwidth(context.Context, *GetMeasurementBandwidthRequest) (*GetMeasurementBandwidthResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMeasurementBandwidth not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetMeasurementChannelFrequencyMHz(context.Context, *GetMeasurementChannelFrequencyMHzRequest) (*GetMeasurementChannelFrequencyMHzResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMeasurementChannelFrequencyMHz not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetMinTimeBetweenNtbMeasurementsMicros(context.Context, *GetMinTimeBetweenNtbMeasurementsMicrosRequest) (*GetMinTimeBetweenNtbMeasurementsMicrosResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMinTimeBetweenNtbMeasurementsMicros not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetNumAttemptedMeasurements(context.Context, *GetNumAttemptedMeasurementsRequest) (*GetNumAttemptedMeasurementsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetNumAttemptedMeasurements not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetNumSuccessfulMeasurements(context.Context, *GetNumSuccessfulMeasurementsRequest) (*GetNumSuccessfulMeasurementsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetNumSuccessfulMeasurements not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetPasnComebackAfterMillis(context.Context, *GetPasnComebackAfterMillisRequest) (*GetPasnComebackAfterMillisResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPasnComebackAfterMillis not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetPasnComebackCookie(context.Context, *GetPasnComebackCookieRequest) (*GetPasnComebackCookieResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPasnComebackCookie not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetPeerHandle(context.Context, *GetPeerHandleRequest) (*GetPeerHandleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPeerHandle not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetRangingTimestampMillis(context.Context, *GetRangingTimestampMillisRequest) (*GetRangingTimestampMillisResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRangingTimestampMillis not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetRssi(context.Context, *GetRssiRequest) (*GetRssiResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRssi not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetSecureHeLtfProtocolVersion(context.Context, *GetSecureHeLtfProtocolVersionRequest) (*GetSecureHeLtfProtocolVersionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSecureHeLtfProtocolVersion not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetStatus(context.Context, *GetStatusRequest) (*GetStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetStatus not implemented")
+}
+func (UnimplementedRangingResultServiceServer) GetUnverifiedResponderLocation(context.Context, *GetUnverifiedResponderLocationRequest) (*GetUnverifiedResponderLocationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUnverifiedResponderLocation not implemented")
+}
+func (UnimplementedRangingResultServiceServer) HashCode(context.Context, *HashCodeRequest) (*HashCodeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method HashCode not implemented")
+}
+func (UnimplementedRangingResultServiceServer) Is80211AzNtbMeasurement(context.Context, *Is80211AzNtbMeasurementRequest) (*Is80211AzNtbMeasurementResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Is80211AzNtbMeasurement not implemented")
+}
+func (UnimplementedRangingResultServiceServer) Is80211McMeasurement(context.Context, *Is80211McMeasurementRequest) (*Is80211McMeasurementResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Is80211McMeasurement not implemented")
+}
+func (UnimplementedRangingResultServiceServer) IsRangingAuthenticated(context.Context, *IsRangingAuthenticatedRequest) (*IsRangingAuthenticatedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsRangingAuthenticated not implemented")
+}
+func (UnimplementedRangingResultServiceServer) IsRangingFrameProtected(context.Context, *IsRangingFrameProtectedRequest) (*IsRangingFrameProtectedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsRangingFrameProtected not implemented")
+}
+func (UnimplementedRangingResultServiceServer) IsSecureHeLtfEnabled(context.Context, *IsSecureHeLtfEnabledRequest) (*IsSecureHeLtfEnabledResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsSecureHeLtfEnabled not implemented")
+}
+func (UnimplementedRangingResultServiceServer) ToString(context.Context, *ToStringRequest) (*ToStringResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ToString not implemented")
+}
+func (UnimplementedRangingResultServiceServer) WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteToParcel not implemented")
+}
+func (UnimplementedRangingResultServiceServer) mustEmbedUnimplementedRangingResultServiceServer() {}
+func (UnimplementedRangingResultServiceServer) testEmbeddedByValue()                              {}
+
+// UnsafeRangingResultServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to RangingResultServiceServer will
+// result in compilation errors.
+type UnsafeRangingResultServiceServer interface {
+	mustEmbedUnimplementedRangingResultServiceServer()
+}
+
+func RegisterRangingResultServiceServer(s grpc.ServiceRegistrar, srv RangingResultServiceServer) {
+	// If the following call panics, it indicates UnimplementedRangingResultServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&RangingResultService_ServiceDesc, srv)
+}
+
+func _RangingResultService_DescribeContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeContentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).DescribeContents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_DescribeContents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).DescribeContents(ctx, req.(*DescribeContentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_Equals_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EqualsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).Equals(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_Equals_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).Equals(ctx, req.(*EqualsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_Get80211AzInitiatorTxLtfRepetitionsCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Get80211AzInitiatorTxLtfRepetitionsCountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).Get80211AzInitiatorTxLtfRepetitionsCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_Get80211AzInitiatorTxLtfRepetitionsCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).Get80211AzInitiatorTxLtfRepetitionsCount(ctx, req.(*Get80211AzInitiatorTxLtfRepetitionsCountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_Get80211AzNumberOfRxSpatialStreams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Get80211AzNumberOfRxSpatialStreamsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).Get80211AzNumberOfRxSpatialStreams(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_Get80211AzNumberOfRxSpatialStreams_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).Get80211AzNumberOfRxSpatialStreams(ctx, req.(*Get80211AzNumberOfRxSpatialStreamsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_Get80211AzNumberOfTxSpatialStreams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Get80211AzNumberOfTxSpatialStreamsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).Get80211AzNumberOfTxSpatialStreams(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_Get80211AzNumberOfTxSpatialStreams_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).Get80211AzNumberOfTxSpatialStreams(ctx, req.(*Get80211AzNumberOfTxSpatialStreamsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_Get80211AzResponderTxLtfRepetitionsCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Get80211AzResponderTxLtfRepetitionsCountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).Get80211AzResponderTxLtfRepetitionsCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_Get80211AzResponderTxLtfRepetitionsCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).Get80211AzResponderTxLtfRepetitionsCount(ctx, req.(*Get80211AzResponderTxLtfRepetitionsCountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetDistanceMm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDistanceMmRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetDistanceMm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetDistanceMm_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetDistanceMm(ctx, req.(*GetDistanceMmRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetDistanceStdDevMm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDistanceStdDevMmRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetDistanceStdDevMm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetDistanceStdDevMm_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetDistanceStdDevMm(ctx, req.(*GetDistanceStdDevMmRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetLci_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLciRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetLci(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetLci_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetLci(ctx, req.(*GetLciRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetLcr_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLcrRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetLcr(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetLcr_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetLcr(ctx, req.(*GetLcrRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetMacAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMacAddressRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetMacAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetMacAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetMacAddress(ctx, req.(*GetMacAddressRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetMaxTimeBetweenNtbMeasurementsMicros_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMaxTimeBetweenNtbMeasurementsMicrosRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetMaxTimeBetweenNtbMeasurementsMicros(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetMaxTimeBetweenNtbMeasurementsMicros_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetMaxTimeBetweenNtbMeasurementsMicros(ctx, req.(*GetMaxTimeBetweenNtbMeasurementsMicrosRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetMeasurementBandwidth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMeasurementBandwidthRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetMeasurementBandwidth(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetMeasurementBandwidth_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetMeasurementBandwidth(ctx, req.(*GetMeasurementBandwidthRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetMeasurementChannelFrequencyMHz_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMeasurementChannelFrequencyMHzRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetMeasurementChannelFrequencyMHz(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetMeasurementChannelFrequencyMHz_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetMeasurementChannelFrequencyMHz(ctx, req.(*GetMeasurementChannelFrequencyMHzRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetMinTimeBetweenNtbMeasurementsMicros_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMinTimeBetweenNtbMeasurementsMicrosRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetMinTimeBetweenNtbMeasurementsMicros(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetMinTimeBetweenNtbMeasurementsMicros_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetMinTimeBetweenNtbMeasurementsMicros(ctx, req.(*GetMinTimeBetweenNtbMeasurementsMicrosRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetNumAttemptedMeasurements_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNumAttemptedMeasurementsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetNumAttemptedMeasurements(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetNumAttemptedMeasurements_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetNumAttemptedMeasurements(ctx, req.(*GetNumAttemptedMeasurementsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetNumSuccessfulMeasurements_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNumSuccessfulMeasurementsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetNumSuccessfulMeasurements(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetNumSuccessfulMeasurements_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetNumSuccessfulMeasurements(ctx, req.(*GetNumSuccessfulMeasurementsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetPasnComebackAfterMillis_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPasnComebackAfterMillisRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetPasnComebackAfterMillis(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetPasnComebackAfterMillis_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetPasnComebackAfterMillis(ctx, req.(*GetPasnComebackAfterMillisRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetPasnComebackCookie_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPasnComebackCookieRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetPasnComebackCookie(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetPasnComebackCookie_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetPasnComebackCookie(ctx, req.(*GetPasnComebackCookieRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetPeerHandle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPeerHandleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetPeerHandle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetPeerHandle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetPeerHandle(ctx, req.(*GetPeerHandleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetRangingTimestampMillis_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRangingTimestampMillisRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetRangingTimestampMillis(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetRangingTimestampMillis_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetRangingTimestampMillis(ctx, req.(*GetRangingTimestampMillisRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetRssi_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRssiRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetRssi(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetRssi_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetRssi(ctx, req.(*GetRssiRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetSecureHeLtfProtocolVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSecureHeLtfProtocolVersionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetSecureHeLtfProtocolVersion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetSecureHeLtfProtocolVersion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetSecureHeLtfProtocolVersion(ctx, req.(*GetSecureHeLtfProtocolVersionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetStatus(ctx, req.(*GetStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_GetUnverifiedResponderLocation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUnverifiedResponderLocationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).GetUnverifiedResponderLocation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_GetUnverifiedResponderLocation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).GetUnverifiedResponderLocation(ctx, req.(*GetUnverifiedResponderLocationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_HashCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HashCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).HashCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_HashCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).HashCode(ctx, req.(*HashCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_Is80211AzNtbMeasurement_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Is80211AzNtbMeasurementRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).Is80211AzNtbMeasurement(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_Is80211AzNtbMeasurement_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).Is80211AzNtbMeasurement(ctx, req.(*Is80211AzNtbMeasurementRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_Is80211McMeasurement_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Is80211McMeasurementRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).Is80211McMeasurement(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_Is80211McMeasurement_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).Is80211McMeasurement(ctx, req.(*Is80211McMeasurementRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_IsRangingAuthenticated_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsRangingAuthenticatedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).IsRangingAuthenticated(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_IsRangingAuthenticated_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).IsRangingAuthenticated(ctx, req.(*IsRangingAuthenticatedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_IsRangingFrameProtected_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsRangingFrameProtectedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).IsRangingFrameProtected(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_IsRangingFrameProtected_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).IsRangingFrameProtected(ctx, req.(*IsRangingFrameProtectedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_IsSecureHeLtfEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsSecureHeLtfEnabledRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).IsSecureHeLtfEnabled(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_IsSecureHeLtfEnabled_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).IsSecureHeLtfEnabled(ctx, req.(*IsSecureHeLtfEnabledRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_ToString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToStringRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).ToString(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_ToString_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).ToString(ctx, req.(*ToStringRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RangingResultService_WriteToParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteToParcelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RangingResultServiceServer).WriteToParcel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RangingResultService_WriteToParcel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RangingResultServiceServer).WriteToParcel(ctx, req.(*WriteToParcelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// RangingResultService_ServiceDesc is the grpc.ServiceDesc for RangingResultService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var RangingResultService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "wifi_rtt.RangingResultService",
+	HandlerType: (*RangingResultServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "DescribeContents",
+			Handler:    _RangingResultService_DescribeContents_Handler,
+		},
+		{
+			MethodName: "Equals",
+			Handler:    _RangingResultService_Equals_Handler,
+		},
+		{
+			MethodName: "Get80211azInitiatorTxLtfRepetitionsCount",
+			Handler:    _RangingResultService_Get80211AzInitiatorTxLtfRepetitionsCount_Handler,
+		},
+		{
+			MethodName: "Get80211azNumberOfRxSpatialStreams",
+			Handler:    _RangingResultService_Get80211AzNumberOfRxSpatialStreams_Handler,
+		},
+		{
+			MethodName: "Get80211azNumberOfTxSpatialStreams",
+			Handler:    _RangingResultService_Get80211AzNumberOfTxSpatialStreams_Handler,
+		},
+		{
+			MethodName: "Get80211azResponderTxLtfRepetitionsCount",
+			Handler:    _RangingResultService_Get80211AzResponderTxLtfRepetitionsCount_Handler,
+		},
+		{
+			MethodName: "GetDistanceMm",
+			Handler:    _RangingResultService_GetDistanceMm_Handler,
+		},
+		{
+			MethodName: "GetDistanceStdDevMm",
+			Handler:    _RangingResultService_GetDistanceStdDevMm_Handler,
+		},
+		{
+			MethodName: "GetLci",
+			Handler:    _RangingResultService_GetLci_Handler,
+		},
+		{
+			MethodName: "GetLcr",
+			Handler:    _RangingResultService_GetLcr_Handler,
+		},
+		{
+			MethodName: "GetMacAddress",
+			Handler:    _RangingResultService_GetMacAddress_Handler,
+		},
+		{
+			MethodName: "GetMaxTimeBetweenNtbMeasurementsMicros",
+			Handler:    _RangingResultService_GetMaxTimeBetweenNtbMeasurementsMicros_Handler,
+		},
+		{
+			MethodName: "GetMeasurementBandwidth",
+			Handler:    _RangingResultService_GetMeasurementBandwidth_Handler,
+		},
+		{
+			MethodName: "GetMeasurementChannelFrequencyMHz",
+			Handler:    _RangingResultService_GetMeasurementChannelFrequencyMHz_Handler,
+		},
+		{
+			MethodName: "GetMinTimeBetweenNtbMeasurementsMicros",
+			Handler:    _RangingResultService_GetMinTimeBetweenNtbMeasurementsMicros_Handler,
+		},
+		{
+			MethodName: "GetNumAttemptedMeasurements",
+			Handler:    _RangingResultService_GetNumAttemptedMeasurements_Handler,
+		},
+		{
+			MethodName: "GetNumSuccessfulMeasurements",
+			Handler:    _RangingResultService_GetNumSuccessfulMeasurements_Handler,
+		},
+		{
+			MethodName: "GetPasnComebackAfterMillis",
+			Handler:    _RangingResultService_GetPasnComebackAfterMillis_Handler,
+		},
+		{
+			MethodName: "GetPasnComebackCookie",
+			Handler:    _RangingResultService_GetPasnComebackCookie_Handler,
+		},
+		{
+			MethodName: "GetPeerHandle",
+			Handler:    _RangingResultService_GetPeerHandle_Handler,
+		},
+		{
+			MethodName: "GetRangingTimestampMillis",
+			Handler:    _RangingResultService_GetRangingTimestampMillis_Handler,
+		},
+		{
+			MethodName: "GetRssi",
+			Handler:    _RangingResultService_GetRssi_Handler,
+		},
+		{
+			MethodName: "GetSecureHeLtfProtocolVersion",
+			Handler:    _RangingResultService_GetSecureHeLtfProtocolVersion_Handler,
+		},
+		{
+			MethodName: "GetStatus",
+			Handler:    _RangingResultService_GetStatus_Handler,
+		},
+		{
+			MethodName: "GetUnverifiedResponderLocation",
+			Handler:    _RangingResultService_GetUnverifiedResponderLocation_Handler,
+		},
+		{
+			MethodName: "HashCode",
+			Handler:    _RangingResultService_HashCode_Handler,
+		},
+		{
+			MethodName: "Is80211azNtbMeasurement",
+			Handler:    _RangingResultService_Is80211AzNtbMeasurement_Handler,
+		},
+		{
+			MethodName: "Is80211mcMeasurement",
+			Handler:    _RangingResultService_Is80211McMeasurement_Handler,
+		},
+		{
+			MethodName: "IsRangingAuthenticated",
+			Handler:    _RangingResultService_IsRangingAuthenticated_Handler,
+		},
+		{
+			MethodName: "IsRangingFrameProtected",
+			Handler:    _RangingResultService_IsRangingFrameProtected_Handler,
+		},
+		{
+			MethodName: "IsSecureHeLtfEnabled",
+			Handler:    _RangingResultService_IsSecureHeLtfEnabled_Handler,
+		},
+		{
+			MethodName: "ToString",
+			Handler:    _RangingResultService_ToString_Handler,
+		},
+		{
+			MethodName: "WriteToParcel",
+			Handler:    _RangingResultService_WriteToParcel_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/wifi_rtt/wifi_rtt.proto",
+}
+
+const (
 	WifiRttManagerService_GetRttCharacteristics_FullMethodName = "/wifi_rtt.WifiRttManagerService/GetRttCharacteristics"
 	WifiRttManagerService_IsAvailable_FullMethodName           = "/wifi_rtt.WifiRttManagerService/IsAvailable"
 	WifiRttManagerService_StartRanging_FullMethodName          = "/wifi_rtt.WifiRttManagerService/StartRanging"

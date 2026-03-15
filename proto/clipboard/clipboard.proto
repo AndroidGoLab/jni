@@ -6,6 +6,75 @@ package clipboard;
 
 option go_package = "github.com/xaionaro-go/jni/proto/clipboard";
 
+message AddPrimaryClipChangedListenerRequest {
+  int64 arg0 = 1;
+}
+
+message AddPrimaryClipChangedListenerResponse {
+}
+
+message ClearPrimaryClipRequest {
+}
+
+message ClearPrimaryClipResponse {
+}
+
+message GetPrimaryClipRequest {
+}
+
+message GetPrimaryClipResponse {
+  int64 result = 1;
+}
+
+message GetPrimaryClipDescriptionRequest {
+}
+
+message GetPrimaryClipDescriptionResponse {
+  int64 result = 1;
+}
+
+message GetTextRequest {
+}
+
+message GetTextResponse {
+  string result = 1;
+}
+
+message HasPrimaryClipRequest {
+}
+
+message HasPrimaryClipResponse {
+  bool result = 1;
+}
+
+message HasTextRequest {
+}
+
+message HasTextResponse {
+  bool result = 1;
+}
+
+message RemovePrimaryClipChangedListenerRequest {
+  int64 arg0 = 1;
+}
+
+message RemovePrimaryClipChangedListenerResponse {
+}
+
+message SetPrimaryClipRequest {
+  int64 arg0 = 1;
+}
+
+message SetPrimaryClipResponse {
+}
+
+message SetTextRequest {
+  string arg0 = 1;
+}
+
+message SetTextResponse {
+}
+
 message AddItem1Request {
   int64 arg0 = 1;
 }
@@ -157,13 +226,6 @@ message GetIntentSenderResponse {
   int64 result = 1;
 }
 
-message GetTextRequest {
-}
-
-message GetTextResponse {
-  string result = 1;
-}
-
 message GetTextLinksRequest {
 }
 
@@ -176,6 +238,19 @@ message GetUriRequest {
 
 message GetUriResponse {
   int64 result = 1;
+}
+
+service ClipboardManagerService {
+  rpc AddPrimaryClipChangedListener (AddPrimaryClipChangedListenerRequest) returns (AddPrimaryClipChangedListenerResponse);
+  rpc ClearPrimaryClip (ClearPrimaryClipRequest) returns (ClearPrimaryClipResponse);
+  rpc GetPrimaryClip (GetPrimaryClipRequest) returns (GetPrimaryClipResponse);
+  rpc GetPrimaryClipDescription (GetPrimaryClipDescriptionRequest) returns (GetPrimaryClipDescriptionResponse);
+  rpc GetText (GetTextRequest) returns (GetTextResponse);
+  rpc HasPrimaryClip (HasPrimaryClipRequest) returns (HasPrimaryClipResponse);
+  rpc HasText (HasTextRequest) returns (HasTextResponse);
+  rpc RemovePrimaryClipChangedListener (RemovePrimaryClipChangedListenerRequest) returns (RemovePrimaryClipChangedListenerResponse);
+  rpc SetPrimaryClip (SetPrimaryClipRequest) returns (SetPrimaryClipResponse);
+  rpc SetText (SetTextRequest) returns (SetTextResponse);
 }
 
 service ClipDataService {

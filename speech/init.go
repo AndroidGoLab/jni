@@ -62,6 +62,21 @@ var (
 	midtextToSpeechSynthesizeToFile4_1             jni.MethodID
 	midtextToSpeechSynthesizeToFile3_2             jni.MethodID
 	midtextToSpeechGetMaxSpeechInputLength         jni.MethodID
+
+	clsspeechRecognizer                               *jni.GlobalRef
+	midspeechRecognizerCancel                         jni.MethodID
+	midspeechRecognizerCheckRecognitionSupport        jni.MethodID
+	midspeechRecognizerDestroy                        jni.MethodID
+	midspeechRecognizerSetRecognitionListener         jni.MethodID
+	midspeechRecognizerStartListening                 jni.MethodID
+	midspeechRecognizerStopListening                  jni.MethodID
+	midspeechRecognizerTriggerModelDownload1          jni.MethodID
+	midspeechRecognizerTriggerModelDownload3_1        jni.MethodID
+	midspeechRecognizerCreateOnDeviceSpeechRecognizer jni.MethodID
+	midspeechRecognizerCreateSpeechRecognizer1        jni.MethodID
+	midspeechRecognizerCreateSpeechRecognizer2_1      jni.MethodID
+	midspeechRecognizerIsOnDeviceRecognitionAvailable jni.MethodID
+	midspeechRecognizerIsRecognitionAvailable         jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -420,6 +435,116 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.speech.tts.TextToSpeech.getMaxSpeechInputLength")
+	}
+
+	c, err = env.FindClass("android/speech/SpeechRecognizer")
+	if err != nil {
+		return fmt.Errorf("find class android.speech.SpeechRecognizer: %w", err)
+	}
+	clsspeechRecognizer = env.NewGlobalRef(&c.Object)
+
+	midspeechRecognizerCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "cancel", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.cancel")
+	}
+
+	midspeechRecognizerCheckRecognitionSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "checkRecognitionSupport", "(Landroid/content/Intent;Ljava/util/concurrent/Executor;Landroid/speech/RecognitionSupportCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.checkRecognitionSupport")
+	}
+
+	midspeechRecognizerDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "destroy", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.destroy")
+	}
+
+	midspeechRecognizerSetRecognitionListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "setRecognitionListener", "(Landroid/speech/RecognitionListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.setRecognitionListener")
+	}
+
+	midspeechRecognizerStartListening, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "startListening", "(Landroid/content/Intent;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.startListening")
+	}
+
+	midspeechRecognizerStopListening, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "stopListening", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.stopListening")
+	}
+
+	midspeechRecognizerTriggerModelDownload1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "triggerModelDownload", "(Landroid/content/Intent;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.triggerModelDownload")
+	}
+
+	midspeechRecognizerTriggerModelDownload3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "triggerModelDownload", "(Landroid/content/Intent;Ljava/util/concurrent/Executor;Landroid/speech/ModelDownloadListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.triggerModelDownload")
+	}
+
+	midspeechRecognizerCreateOnDeviceSpeechRecognizer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "createOnDeviceSpeechRecognizer", "(Landroid/content/Context;)Landroid/speech/SpeechRecognizer;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.createOnDeviceSpeechRecognizer")
+	}
+
+	midspeechRecognizerCreateSpeechRecognizer1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "createSpeechRecognizer", "(Landroid/content/Context;)Landroid/speech/SpeechRecognizer;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.createSpeechRecognizer")
+	}
+
+	midspeechRecognizerCreateSpeechRecognizer2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "createSpeechRecognizer", "(Landroid/content/Context;Landroid/content/ComponentName;)Landroid/speech/SpeechRecognizer;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.createSpeechRecognizer")
+	}
+
+	midspeechRecognizerIsOnDeviceRecognitionAvailable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "isOnDeviceRecognitionAvailable", "(Landroid/content/Context;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.isOnDeviceRecognitionAvailable")
+	}
+
+	midspeechRecognizerIsRecognitionAvailable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsspeechRecognizer)), "isRecognitionAvailable", "(Landroid/content/Context;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.speech.SpeechRecognizer.isRecognitionAvailable")
 	}
 
 	return nil

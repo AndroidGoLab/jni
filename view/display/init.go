@@ -20,6 +20,16 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsdisplayMetrics              *jni.GlobalRef
+	middisplayMetricsEquals1       jni.MethodID
+	middisplayMetricsEquals1_1     jni.MethodID
+	middisplayMetricsHashCode      jni.MethodID
+	middisplayMetricsSetTo         jni.MethodID
+	middisplayMetricsSetToDefaults jni.MethodID
+	middisplayMetricsToString      jni.MethodID
+
+	clswindowManager *jni.GlobalRef
+
 	clsdisplay                                     *jni.GlobalRef
 	middisplayGetAppVsyncOffsetNanos               jni.MethodID
 	middisplayGetCurrentSizeRange                  jni.MethodID
@@ -86,6 +96,66 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/util/DisplayMetrics")
+	if err != nil {
+		return fmt.Errorf("find class android.util.DisplayMetrics: %w", err)
+	}
+	clsdisplayMetrics = env.NewGlobalRef(&c.Object)
+
+	middisplayMetricsEquals1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplayMetrics)), "equals", "(Landroid/util/DisplayMetrics;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.util.DisplayMetrics.equals")
+	}
+
+	middisplayMetricsEquals1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplayMetrics)), "equals", "(Ljava/lang/Object;)Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.util.DisplayMetrics.equals")
+	}
+
+	middisplayMetricsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplayMetrics)), "hashCode", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.util.DisplayMetrics.hashCode")
+	}
+
+	middisplayMetricsSetTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplayMetrics)), "setTo", "(Landroid/util/DisplayMetrics;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.util.DisplayMetrics.setTo")
+	}
+
+	middisplayMetricsSetToDefaults, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplayMetrics)), "setToDefaults", "()V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.util.DisplayMetrics.setToDefaults")
+	}
+
+	middisplayMetricsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsdisplayMetrics)), "toString", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.util.DisplayMetrics.toString")
+	}
+
+	c, err = env.FindClass("android/view/WindowManager")
+	if err != nil {
+		return fmt.Errorf("find class android.view.WindowManager: %w", err)
+	}
+	clswindowManager = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/view/Display")
 	if err != nil {

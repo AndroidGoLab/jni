@@ -3,6 +3,8 @@
 package wifi
 
 const (
+	FrequencyUnits                            = ""
+	LinkSpeedUnits                            = ""
 	ActionPickWifiNetwork                     = ""
 	ActionRequestScanAlwaysAvailable          = ""
 	ActionWifiNetworkSuggestionPostConnection = ""
@@ -32,6 +34,22 @@ const (
 )
 
 const (
+	LinkSpeedUnknown                                   = 0
+	SecurityTypeDpp                                    = 0
+	SecurityTypeEap                                    = 0
+	SecurityTypeEapWpa3Enterprise                      = 0
+	SecurityTypeEapWpa3Enterprise192Bit                = 0
+	SecurityTypeOpen                                   = 0
+	SecurityTypeOsen                                   = 0
+	SecurityTypeOwe                                    = 0
+	SecurityTypePasspointR1R2                          = 0
+	SecurityTypePasspointR3                            = 0
+	SecurityTypePsk                                    = 0
+	SecurityTypeSae                                    = 0
+	SecurityTypeUnknown                                = 0
+	SecurityTypeWapiCert                               = 0
+	SecurityTypeWapiPsk                                = 0
+	SecurityTypeWep                                    = 0
 	ActionRemoveSuggestionDisconnect                   = 0
 	ActionRemoveSuggestionLinger                       = 0
 	ErrorAuthenticating                                = 0
@@ -86,4 +104,28 @@ const (
 	WpsTimedOut                                        = 0
 	WpsTkipOnlyProhibited                              = 0
 	WpsWepProhibited                                   = 0
+	ChannelWidth160mhz                                 = 0
+	ChannelWidth20mhz                                  = 0
+	ChannelWidth320mhz                                 = 0
+	ChannelWidth40mhz                                  = 0
+	ChannelWidth80mhz                                  = 0
+	ChannelWidth80mhzPlusMhz                           = 0
+	Creator                                            = 0
+	PreambleEht                                        = 0
+	PreambleHe                                         = 0
+	PreambleHt                                         = 0
+	PreambleLegacy                                     = 0
+	PreambleVht                                        = 0
+	Unspecified                                        = 0
+	WifiBand24Ghz                                      = 0
+	WifiBand5Ghz                                       = 0
+	WifiBand60Ghz                                      = 0
+	WifiBand6Ghz                                       = 0
+	WifiStandard11ac                                   = 0
+	WifiStandard11ad                                   = 0
+	WifiStandard11ax                                   = 0
+	WifiStandard11be                                   = 0
+	WifiStandard11n                                    = 0
+	WifiStandardLegacy                                 = 0
+	WifiStandardUnknown                                = 0
 )

@@ -3,5 +3,18 @@
 package nsd
 
 const (
-	Creator = 0
+	ActionNsdStateChanged = ""
+	ExtraNsdState         = ""
+)
+
+const (
+	FailureAlreadyActive       = 0
+	FailureBadParameters       = 0
+	FailureInternalError       = 0
+	FailureMaxLimit            = 0
+	FailureOperationNotRunning = 0
+	NsdStateDisabled           = 0
+	NsdStateEnabled            = 0
+	ProtocolDnsSd              = 0
+	Creator                    = 0
 )

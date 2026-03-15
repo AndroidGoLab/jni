@@ -6,6 +6,239 @@ package wifi_rtt;
 
 option go_package = "github.com/xaionaro-go/jni/proto/wifi_rtt";
 
+message DescribeContentsRequest {
+}
+
+message DescribeContentsResponse {
+  int32 result = 1;
+}
+
+message EqualsRequest {
+  int64 arg0 = 1;
+}
+
+message EqualsResponse {
+  bool result = 1;
+}
+
+message Get80211azInitiatorTxLtfRepetitionsCountRequest {
+}
+
+message Get80211azInitiatorTxLtfRepetitionsCountResponse {
+  int32 result = 1;
+}
+
+message Get80211azNumberOfRxSpatialStreamsRequest {
+}
+
+message Get80211azNumberOfRxSpatialStreamsResponse {
+  int32 result = 1;
+}
+
+message Get80211azNumberOfTxSpatialStreamsRequest {
+}
+
+message Get80211azNumberOfTxSpatialStreamsResponse {
+  int32 result = 1;
+}
+
+message Get80211azResponderTxLtfRepetitionsCountRequest {
+}
+
+message Get80211azResponderTxLtfRepetitionsCountResponse {
+  int32 result = 1;
+}
+
+message GetDistanceMmRequest {
+}
+
+message GetDistanceMmResponse {
+  int32 result = 1;
+}
+
+message GetDistanceStdDevMmRequest {
+}
+
+message GetDistanceStdDevMmResponse {
+  int32 result = 1;
+}
+
+message GetLciRequest {
+}
+
+message GetLciResponse {
+  int64 result = 1;
+}
+
+message GetLcrRequest {
+}
+
+message GetLcrResponse {
+  int64 result = 1;
+}
+
+message GetMacAddressRequest {
+}
+
+message GetMacAddressResponse {
+  int64 result = 1;
+}
+
+message GetMaxTimeBetweenNtbMeasurementsMicrosRequest {
+}
+
+message GetMaxTimeBetweenNtbMeasurementsMicrosResponse {
+  int64 result = 1;
+}
+
+message GetMeasurementBandwidthRequest {
+}
+
+message GetMeasurementBandwidthResponse {
+  int32 result = 1;
+}
+
+message GetMeasurementChannelFrequencyMHzRequest {
+}
+
+message GetMeasurementChannelFrequencyMHzResponse {
+  int32 result = 1;
+}
+
+message GetMinTimeBetweenNtbMeasurementsMicrosRequest {
+}
+
+message GetMinTimeBetweenNtbMeasurementsMicrosResponse {
+  int64 result = 1;
+}
+
+message GetNumAttemptedMeasurementsRequest {
+}
+
+message GetNumAttemptedMeasurementsResponse {
+  int32 result = 1;
+}
+
+message GetNumSuccessfulMeasurementsRequest {
+}
+
+message GetNumSuccessfulMeasurementsResponse {
+  int32 result = 1;
+}
+
+message GetPasnComebackAfterMillisRequest {
+}
+
+message GetPasnComebackAfterMillisResponse {
+  int64 result = 1;
+}
+
+message GetPasnComebackCookieRequest {
+}
+
+message GetPasnComebackCookieResponse {
+  int64 result = 1;
+}
+
+message GetPeerHandleRequest {
+}
+
+message GetPeerHandleResponse {
+  int64 result = 1;
+}
+
+message GetRangingTimestampMillisRequest {
+}
+
+message GetRangingTimestampMillisResponse {
+  int64 result = 1;
+}
+
+message GetRssiRequest {
+}
+
+message GetRssiResponse {
+  int32 result = 1;
+}
+
+message GetSecureHeLtfProtocolVersionRequest {
+}
+
+message GetSecureHeLtfProtocolVersionResponse {
+  int32 result = 1;
+}
+
+message GetStatusRequest {
+}
+
+message GetStatusResponse {
+  int32 result = 1;
+}
+
+message GetUnverifiedResponderLocationRequest {
+}
+
+message GetUnverifiedResponderLocationResponse {
+  int64 result = 1;
+}
+
+message HashCodeRequest {
+}
+
+message HashCodeResponse {
+  int32 result = 1;
+}
+
+message Is80211azNtbMeasurementRequest {
+}
+
+message Is80211azNtbMeasurementResponse {
+  bool result = 1;
+}
+
+message Is80211mcMeasurementRequest {
+}
+
+message Is80211mcMeasurementResponse {
+  bool result = 1;
+}
+
+message IsRangingAuthenticatedRequest {
+}
+
+message IsRangingAuthenticatedResponse {
+  bool result = 1;
+}
+
+message IsRangingFrameProtectedRequest {
+}
+
+message IsRangingFrameProtectedResponse {
+  bool result = 1;
+}
+
+message IsSecureHeLtfEnabledRequest {
+}
+
+message IsSecureHeLtfEnabledResponse {
+  bool result = 1;
+}
+
+message ToStringRequest {
+}
+
+message ToStringResponse {
+  string result = 1;
+}
+
+message WriteToParcelRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message WriteToParcelResponse {
+}
+
 message GetRttCharacteristicsRequest {
 }
 
@@ -27,6 +260,42 @@ message StartRangingRequest {
 }
 
 message StartRangingResponse {
+}
+
+service RangingResultService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc Equals (EqualsRequest) returns (EqualsResponse);
+  rpc Get80211azInitiatorTxLtfRepetitionsCount (Get80211azInitiatorTxLtfRepetitionsCountRequest) returns (Get80211azInitiatorTxLtfRepetitionsCountResponse);
+  rpc Get80211azNumberOfRxSpatialStreams (Get80211azNumberOfRxSpatialStreamsRequest) returns (Get80211azNumberOfRxSpatialStreamsResponse);
+  rpc Get80211azNumberOfTxSpatialStreams (Get80211azNumberOfTxSpatialStreamsRequest) returns (Get80211azNumberOfTxSpatialStreamsResponse);
+  rpc Get80211azResponderTxLtfRepetitionsCount (Get80211azResponderTxLtfRepetitionsCountRequest) returns (Get80211azResponderTxLtfRepetitionsCountResponse);
+  rpc GetDistanceMm (GetDistanceMmRequest) returns (GetDistanceMmResponse);
+  rpc GetDistanceStdDevMm (GetDistanceStdDevMmRequest) returns (GetDistanceStdDevMmResponse);
+  rpc GetLci (GetLciRequest) returns (GetLciResponse);
+  rpc GetLcr (GetLcrRequest) returns (GetLcrResponse);
+  rpc GetMacAddress (GetMacAddressRequest) returns (GetMacAddressResponse);
+  rpc GetMaxTimeBetweenNtbMeasurementsMicros (GetMaxTimeBetweenNtbMeasurementsMicrosRequest) returns (GetMaxTimeBetweenNtbMeasurementsMicrosResponse);
+  rpc GetMeasurementBandwidth (GetMeasurementBandwidthRequest) returns (GetMeasurementBandwidthResponse);
+  rpc GetMeasurementChannelFrequencyMHz (GetMeasurementChannelFrequencyMHzRequest) returns (GetMeasurementChannelFrequencyMHzResponse);
+  rpc GetMinTimeBetweenNtbMeasurementsMicros (GetMinTimeBetweenNtbMeasurementsMicrosRequest) returns (GetMinTimeBetweenNtbMeasurementsMicrosResponse);
+  rpc GetNumAttemptedMeasurements (GetNumAttemptedMeasurementsRequest) returns (GetNumAttemptedMeasurementsResponse);
+  rpc GetNumSuccessfulMeasurements (GetNumSuccessfulMeasurementsRequest) returns (GetNumSuccessfulMeasurementsResponse);
+  rpc GetPasnComebackAfterMillis (GetPasnComebackAfterMillisRequest) returns (GetPasnComebackAfterMillisResponse);
+  rpc GetPasnComebackCookie (GetPasnComebackCookieRequest) returns (GetPasnComebackCookieResponse);
+  rpc GetPeerHandle (GetPeerHandleRequest) returns (GetPeerHandleResponse);
+  rpc GetRangingTimestampMillis (GetRangingTimestampMillisRequest) returns (GetRangingTimestampMillisResponse);
+  rpc GetRssi (GetRssiRequest) returns (GetRssiResponse);
+  rpc GetSecureHeLtfProtocolVersion (GetSecureHeLtfProtocolVersionRequest) returns (GetSecureHeLtfProtocolVersionResponse);
+  rpc GetStatus (GetStatusRequest) returns (GetStatusResponse);
+  rpc GetUnverifiedResponderLocation (GetUnverifiedResponderLocationRequest) returns (GetUnverifiedResponderLocationResponse);
+  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
+  rpc Is80211azNtbMeasurement (Is80211azNtbMeasurementRequest) returns (Is80211azNtbMeasurementResponse);
+  rpc Is80211mcMeasurement (Is80211mcMeasurementRequest) returns (Is80211mcMeasurementResponse);
+  rpc IsRangingAuthenticated (IsRangingAuthenticatedRequest) returns (IsRangingAuthenticatedResponse);
+  rpc IsRangingFrameProtected (IsRangingFrameProtectedRequest) returns (IsRangingFrameProtectedResponse);
+  rpc IsSecureHeLtfEnabled (IsSecureHeLtfEnabledRequest) returns (IsSecureHeLtfEnabledResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
 }
 
 service WifiRttManagerService {

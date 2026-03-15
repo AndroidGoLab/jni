@@ -2693,3 +2693,333 @@ var JobInfoBuilderService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "proto/job/job.proto",
 }
+
+const (
+	JobSchedulerService_CanRunUserInitiatedJobs_FullMethodName     = "/job.JobSchedulerService/CanRunUserInitiatedJobs"
+	JobSchedulerService_CancelInAllNamespaces_FullMethodName       = "/job.JobSchedulerService/CancelInAllNamespaces"
+	JobSchedulerService_ForNamespace_FullMethodName                = "/job.JobSchedulerService/ForNamespace"
+	JobSchedulerService_GetNamespace_FullMethodName                = "/job.JobSchedulerService/GetNamespace"
+	JobSchedulerService_GetPendingJobReason_FullMethodName         = "/job.JobSchedulerService/GetPendingJobReason"
+	JobSchedulerService_GetPendingJobReasons_FullMethodName        = "/job.JobSchedulerService/GetPendingJobReasons"
+	JobSchedulerService_GetPendingJobReasonsHistory_FullMethodName = "/job.JobSchedulerService/GetPendingJobReasonsHistory"
+)
+
+// JobSchedulerServiceClient is the client API for JobSchedulerService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type JobSchedulerServiceClient interface {
+	CanRunUserInitiatedJobs(ctx context.Context, in *CanRunUserInitiatedJobsRequest, opts ...grpc.CallOption) (*CanRunUserInitiatedJobsResponse, error)
+	CancelInAllNamespaces(ctx context.Context, in *CancelInAllNamespacesRequest, opts ...grpc.CallOption) (*CancelInAllNamespacesResponse, error)
+	ForNamespace(ctx context.Context, in *ForNamespaceRequest, opts ...grpc.CallOption) (*ForNamespaceResponse, error)
+	GetNamespace(ctx context.Context, in *GetNamespaceRequest, opts ...grpc.CallOption) (*GetNamespaceResponse, error)
+	GetPendingJobReason(ctx context.Context, in *GetPendingJobReasonRequest, opts ...grpc.CallOption) (*GetPendingJobReasonResponse, error)
+	GetPendingJobReasons(ctx context.Context, in *GetPendingJobReasonsRequest, opts ...grpc.CallOption) (*GetPendingJobReasonsResponse, error)
+	GetPendingJobReasonsHistory(ctx context.Context, in *GetPendingJobReasonsHistoryRequest, opts ...grpc.CallOption) (*GetPendingJobReasonsHistoryResponse, error)
+}
+
+type jobSchedulerServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewJobSchedulerServiceClient(cc grpc.ClientConnInterface) JobSchedulerServiceClient {
+	return &jobSchedulerServiceClient{cc}
+}
+
+func (c *jobSchedulerServiceClient) CanRunUserInitiatedJobs(ctx context.Context, in *CanRunUserInitiatedJobsRequest, opts ...grpc.CallOption) (*CanRunUserInitiatedJobsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CanRunUserInitiatedJobsResponse)
+	err := c.cc.Invoke(ctx, JobSchedulerService_CanRunUserInitiatedJobs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobSchedulerServiceClient) CancelInAllNamespaces(ctx context.Context, in *CancelInAllNamespacesRequest, opts ...grpc.CallOption) (*CancelInAllNamespacesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CancelInAllNamespacesResponse)
+	err := c.cc.Invoke(ctx, JobSchedulerService_CancelInAllNamespaces_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobSchedulerServiceClient) ForNamespace(ctx context.Context, in *ForNamespaceRequest, opts ...grpc.CallOption) (*ForNamespaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ForNamespaceResponse)
+	err := c.cc.Invoke(ctx, JobSchedulerService_ForNamespace_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobSchedulerServiceClient) GetNamespace(ctx context.Context, in *GetNamespaceRequest, opts ...grpc.CallOption) (*GetNamespaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNamespaceResponse)
+	err := c.cc.Invoke(ctx, JobSchedulerService_GetNamespace_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobSchedulerServiceClient) GetPendingJobReason(ctx context.Context, in *GetPendingJobReasonRequest, opts ...grpc.CallOption) (*GetPendingJobReasonResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPendingJobReasonResponse)
+	err := c.cc.Invoke(ctx, JobSchedulerService_GetPendingJobReason_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobSchedulerServiceClient) GetPendingJobReasons(ctx context.Context, in *GetPendingJobReasonsRequest, opts ...grpc.CallOption) (*GetPendingJobReasonsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPendingJobReasonsResponse)
+	err := c.cc.Invoke(ctx, JobSchedulerService_GetPendingJobReasons_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobSchedulerServiceClient) GetPendingJobReasonsHistory(ctx context.Context, in *GetPendingJobReasonsHistoryRequest, opts ...grpc.CallOption) (*GetPendingJobReasonsHistoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPendingJobReasonsHistoryResponse)
+	err := c.cc.Invoke(ctx, JobSchedulerService_GetPendingJobReasonsHistory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// JobSchedulerServiceServer is the server API for JobSchedulerService service.
+// All implementations must embed UnimplementedJobSchedulerServiceServer
+// for forward compatibility.
+type JobSchedulerServiceServer interface {
+	CanRunUserInitiatedJobs(context.Context, *CanRunUserInitiatedJobsRequest) (*CanRunUserInitiatedJobsResponse, error)
+	CancelInAllNamespaces(context.Context, *CancelInAllNamespacesRequest) (*CancelInAllNamespacesResponse, error)
+	ForNamespace(context.Context, *ForNamespaceRequest) (*ForNamespaceResponse, error)
+	GetNamespace(context.Context, *GetNamespaceRequest) (*GetNamespaceResponse, error)
+	GetPendingJobReason(context.Context, *GetPendingJobReasonRequest) (*GetPendingJobReasonResponse, error)
+	GetPendingJobReasons(context.Context, *GetPendingJobReasonsRequest) (*GetPendingJobReasonsResponse, error)
+	GetPendingJobReasonsHistory(context.Context, *GetPendingJobReasonsHistoryRequest) (*GetPendingJobReasonsHistoryResponse, error)
+	mustEmbedUnimplementedJobSchedulerServiceServer()
+}
+
+// UnimplementedJobSchedulerServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedJobSchedulerServiceServer struct{}
+
+func (UnimplementedJobSchedulerServiceServer) CanRunUserInitiatedJobs(context.Context, *CanRunUserInitiatedJobsRequest) (*CanRunUserInitiatedJobsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CanRunUserInitiatedJobs not implemented")
+}
+func (UnimplementedJobSchedulerServiceServer) CancelInAllNamespaces(context.Context, *CancelInAllNamespacesRequest) (*CancelInAllNamespacesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CancelInAllNamespaces not implemented")
+}
+func (UnimplementedJobSchedulerServiceServer) ForNamespace(context.Context, *ForNamespaceRequest) (*ForNamespaceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ForNamespace not implemented")
+}
+func (UnimplementedJobSchedulerServiceServer) GetNamespace(context.Context, *GetNamespaceRequest) (*GetNamespaceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetNamespace not implemented")
+}
+func (UnimplementedJobSchedulerServiceServer) GetPendingJobReason(context.Context, *GetPendingJobReasonRequest) (*GetPendingJobReasonResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPendingJobReason not implemented")
+}
+func (UnimplementedJobSchedulerServiceServer) GetPendingJobReasons(context.Context, *GetPendingJobReasonsRequest) (*GetPendingJobReasonsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPendingJobReasons not implemented")
+}
+func (UnimplementedJobSchedulerServiceServer) GetPendingJobReasonsHistory(context.Context, *GetPendingJobReasonsHistoryRequest) (*GetPendingJobReasonsHistoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPendingJobReasonsHistory not implemented")
+}
+func (UnimplementedJobSchedulerServiceServer) mustEmbedUnimplementedJobSchedulerServiceServer() {}
+func (UnimplementedJobSchedulerServiceServer) testEmbeddedByValue()                             {}
+
+// UnsafeJobSchedulerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to JobSchedulerServiceServer will
+// result in compilation errors.
+type UnsafeJobSchedulerServiceServer interface {
+	mustEmbedUnimplementedJobSchedulerServiceServer()
+}
+
+func RegisterJobSchedulerServiceServer(s grpc.ServiceRegistrar, srv JobSchedulerServiceServer) {
+	// If the following call panics, it indicates UnimplementedJobSchedulerServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&JobSchedulerService_ServiceDesc, srv)
+}
+
+func _JobSchedulerService_CanRunUserInitiatedJobs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CanRunUserInitiatedJobsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobSchedulerServiceServer).CanRunUserInitiatedJobs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobSchedulerService_CanRunUserInitiatedJobs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobSchedulerServiceServer).CanRunUserInitiatedJobs(ctx, req.(*CanRunUserInitiatedJobsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _JobSchedulerService_CancelInAllNamespaces_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelInAllNamespacesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobSchedulerServiceServer).CancelInAllNamespaces(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobSchedulerService_CancelInAllNamespaces_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobSchedulerServiceServer).CancelInAllNamespaces(ctx, req.(*CancelInAllNamespacesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _JobSchedulerService_ForNamespace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ForNamespaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobSchedulerServiceServer).ForNamespace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobSchedulerService_ForNamespace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobSchedulerServiceServer).ForNamespace(ctx, req.(*ForNamespaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _JobSchedulerService_GetNamespace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNamespaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobSchedulerServiceServer).GetNamespace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobSchedulerService_GetNamespace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobSchedulerServiceServer).GetNamespace(ctx, req.(*GetNamespaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _JobSchedulerService_GetPendingJobReason_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPendingJobReasonRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobSchedulerServiceServer).GetPendingJobReason(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobSchedulerService_GetPendingJobReason_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobSchedulerServiceServer).GetPendingJobReason(ctx, req.(*GetPendingJobReasonRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _JobSchedulerService_GetPendingJobReasons_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPendingJobReasonsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobSchedulerServiceServer).GetPendingJobReasons(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobSchedulerService_GetPendingJobReasons_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobSchedulerServiceServer).GetPendingJobReasons(ctx, req.(*GetPendingJobReasonsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _JobSchedulerService_GetPendingJobReasonsHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPendingJobReasonsHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobSchedulerServiceServer).GetPendingJobReasonsHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: JobSchedulerService_GetPendingJobReasonsHistory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobSchedulerServiceServer).GetPendingJobReasonsHistory(ctx, req.(*GetPendingJobReasonsHistoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// JobSchedulerService_ServiceDesc is the grpc.ServiceDesc for JobSchedulerService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var JobSchedulerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "job.JobSchedulerService",
+	HandlerType: (*JobSchedulerServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CanRunUserInitiatedJobs",
+			Handler:    _JobSchedulerService_CanRunUserInitiatedJobs_Handler,
+		},
+		{
+			MethodName: "CancelInAllNamespaces",
+			Handler:    _JobSchedulerService_CancelInAllNamespaces_Handler,
+		},
+		{
+			MethodName: "ForNamespace",
+			Handler:    _JobSchedulerService_ForNamespace_Handler,
+		},
+		{
+			MethodName: "GetNamespace",
+			Handler:    _JobSchedulerService_GetNamespace_Handler,
+		},
+		{
+			MethodName: "GetPendingJobReason",
+			Handler:    _JobSchedulerService_GetPendingJobReason_Handler,
+		},
+		{
+			MethodName: "GetPendingJobReasons",
+			Handler:    _JobSchedulerService_GetPendingJobReasons_Handler,
+		},
+		{
+			MethodName: "GetPendingJobReasonsHistory",
+			Handler:    _JobSchedulerService_GetPendingJobReasonsHistory_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/job/job.proto",
+}

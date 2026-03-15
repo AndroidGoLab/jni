@@ -29,6 +29,20 @@ var (
 	midusageStatsManagerQueryEvents2_1      jni.MethodID
 	midusageStatsManagerQueryEventsForSelf  jni.MethodID
 	midusageStatsManagerQueryUsageStats     jni.MethodID
+
+	clsusageStats                                  *jni.GlobalRef
+	midusageStatsAdd                               jni.MethodID
+	midusageStatsDescribeContents                  jni.MethodID
+	midusageStatsGetFirstTimeStamp                 jni.MethodID
+	midusageStatsGetLastTimeForegroundServiceUsed  jni.MethodID
+	midusageStatsGetLastTimeStamp                  jni.MethodID
+	midusageStatsGetLastTimeUsed                   jni.MethodID
+	midusageStatsGetLastTimeVisible                jni.MethodID
+	midusageStatsGetPackageName                    jni.MethodID
+	midusageStatsGetTotalTimeForegroundServiceUsed jni.MethodID
+	midusageStatsGetTotalTimeInForeground          jni.MethodID
+	midusageStatsGetTotalTimeVisible               jni.MethodID
+	midusageStatsWriteToParcel                     jni.MethodID
 )
 
 // initSkipped records methods that were not found during init.
@@ -123,6 +137,108 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 		initSkipped = append(initSkipped, "android.app.usage.UsageStatsManager.queryUsageStats")
+	}
+
+	c, err = env.FindClass("android/app/usage/UsageStats")
+	if err != nil {
+		return fmt.Errorf("find class android.app.usage.UsageStats: %w", err)
+	}
+	clsusageStats = env.NewGlobalRef(&c.Object)
+
+	midusageStatsAdd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStats)), "add", "(Landroid/app/usage/UsageStats;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStats.add")
+	}
+
+	midusageStatsDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStats)), "describeContents", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStats.describeContents")
+	}
+
+	midusageStatsGetFirstTimeStamp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStats)), "getFirstTimeStamp", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStats.getFirstTimeStamp")
+	}
+
+	midusageStatsGetLastTimeForegroundServiceUsed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStats)), "getLastTimeForegroundServiceUsed", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStats.getLastTimeForegroundServiceUsed")
+	}
+
+	midusageStatsGetLastTimeStamp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStats)), "getLastTimeStamp", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStats.getLastTimeStamp")
+	}
+
+	midusageStatsGetLastTimeUsed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStats)), "getLastTimeUsed", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStats.getLastTimeUsed")
+	}
+
+	midusageStatsGetLastTimeVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStats)), "getLastTimeVisible", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStats.getLastTimeVisible")
+	}
+
+	midusageStatsGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStats)), "getPackageName", "()Ljava/lang/String;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStats.getPackageName")
+	}
+
+	midusageStatsGetTotalTimeForegroundServiceUsed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStats)), "getTotalTimeForegroundServiceUsed", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStats.getTotalTimeForegroundServiceUsed")
+	}
+
+	midusageStatsGetTotalTimeInForeground, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStats)), "getTotalTimeInForeground", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStats.getTotalTimeInForeground")
+	}
+
+	midusageStatsGetTotalTimeVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStats)), "getTotalTimeVisible", "()J")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStats.getTotalTimeVisible")
+	}
+
+	midusageStatsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsusageStats)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.app.usage.UsageStats.writeToParcel")
 	}
 
 	return nil

@@ -354,6 +354,104 @@ message GetMaxSpeechInputLengthResponse {
   int32 result = 1;
 }
 
+message CancelRequest {
+}
+
+message CancelResponse {
+}
+
+message CheckRecognitionSupportRequest {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message CheckRecognitionSupportResponse {
+}
+
+message DestroyRequest {
+}
+
+message DestroyResponse {
+}
+
+message SetRecognitionListenerRequest {
+  int64 arg0 = 1;
+}
+
+message SetRecognitionListenerResponse {
+}
+
+message StartListeningRequest {
+  int64 arg0 = 1;
+}
+
+message StartListeningResponse {
+}
+
+message StopListeningRequest {
+}
+
+message StopListeningResponse {
+}
+
+message TriggerModelDownload1Request {
+  int64 arg0 = 1;
+}
+
+message TriggerModelDownload1Response {
+}
+
+message TriggerModelDownload3_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+  int64 arg2 = 3;
+}
+
+message TriggerModelDownload3_1Response {
+}
+
+message CreateOnDeviceSpeechRecognizerRequest {
+  int64 arg0 = 1;
+}
+
+message CreateOnDeviceSpeechRecognizerResponse {
+  int64 result = 1;
+}
+
+message CreateSpeechRecognizer1Request {
+  int64 arg0 = 1;
+}
+
+message CreateSpeechRecognizer1Response {
+  int64 result = 1;
+}
+
+message CreateSpeechRecognizer2_1Request {
+  int64 arg0 = 1;
+  int64 arg1 = 2;
+}
+
+message CreateSpeechRecognizer2_1Response {
+  int64 result = 1;
+}
+
+message IsOnDeviceRecognitionAvailableRequest {
+  int64 arg0 = 1;
+}
+
+message IsOnDeviceRecognitionAvailableResponse {
+  bool result = 1;
+}
+
+message IsRecognitionAvailableRequest {
+  int64 arg0 = 1;
+}
+
+message IsRecognitionAvailableResponse {
+  bool result = 1;
+}
+
 service TextToSpeechService {
   rpc AddEarcon2 (AddEarcon2Request) returns (AddEarcon2Response);
   rpc AddEarcon2_1 (AddEarcon2_1Request) returns (AddEarcon2_1Response);
@@ -396,4 +494,20 @@ service TextToSpeechService {
   rpc SynthesizeToFile4_1 (SynthesizeToFile4_1Request) returns (SynthesizeToFile4_1Response);
   rpc SynthesizeToFile3_2 (SynthesizeToFile3_2Request) returns (SynthesizeToFile3_2Response);
   rpc GetMaxSpeechInputLength (GetMaxSpeechInputLengthRequest) returns (GetMaxSpeechInputLengthResponse);
+}
+
+service SpeechRecognizerService {
+  rpc Cancel (CancelRequest) returns (CancelResponse);
+  rpc CheckRecognitionSupport (CheckRecognitionSupportRequest) returns (CheckRecognitionSupportResponse);
+  rpc Destroy (DestroyRequest) returns (DestroyResponse);
+  rpc SetRecognitionListener (SetRecognitionListenerRequest) returns (SetRecognitionListenerResponse);
+  rpc StartListening (StartListeningRequest) returns (StartListeningResponse);
+  rpc StopListening (StopListeningRequest) returns (StopListeningResponse);
+  rpc TriggerModelDownload1 (TriggerModelDownload1Request) returns (TriggerModelDownload1Response);
+  rpc TriggerModelDownload3_1 (TriggerModelDownload3_1Request) returns (TriggerModelDownload3_1Response);
+  rpc CreateOnDeviceSpeechRecognizer (CreateOnDeviceSpeechRecognizerRequest) returns (CreateOnDeviceSpeechRecognizerResponse);
+  rpc CreateSpeechRecognizer1 (CreateSpeechRecognizer1Request) returns (CreateSpeechRecognizer1Response);
+  rpc CreateSpeechRecognizer2_1 (CreateSpeechRecognizer2_1Request) returns (CreateSpeechRecognizer2_1Response);
+  rpc IsOnDeviceRecognitionAvailable (IsOnDeviceRecognitionAvailableRequest) returns (IsOnDeviceRecognitionAvailableResponse);
+  rpc IsRecognitionAvailable (IsRecognitionAvailableRequest) returns (IsRecognitionAvailableResponse);
 }

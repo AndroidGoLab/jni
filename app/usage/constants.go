@@ -18,4 +18,5 @@ const (
 	StandbyBucketRare       = 0
 	StandbyBucketRestricted = 0
 	StandbyBucketWorkingSet = 0
+	Creator                 = 0
 )

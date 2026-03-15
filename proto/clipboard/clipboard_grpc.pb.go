@@ -21,6 +21,451 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	ClipboardManagerService_AddPrimaryClipChangedListener_FullMethodName    = "/clipboard.ClipboardManagerService/AddPrimaryClipChangedListener"
+	ClipboardManagerService_ClearPrimaryClip_FullMethodName                 = "/clipboard.ClipboardManagerService/ClearPrimaryClip"
+	ClipboardManagerService_GetPrimaryClip_FullMethodName                   = "/clipboard.ClipboardManagerService/GetPrimaryClip"
+	ClipboardManagerService_GetPrimaryClipDescription_FullMethodName        = "/clipboard.ClipboardManagerService/GetPrimaryClipDescription"
+	ClipboardManagerService_GetText_FullMethodName                          = "/clipboard.ClipboardManagerService/GetText"
+	ClipboardManagerService_HasPrimaryClip_FullMethodName                   = "/clipboard.ClipboardManagerService/HasPrimaryClip"
+	ClipboardManagerService_HasText_FullMethodName                          = "/clipboard.ClipboardManagerService/HasText"
+	ClipboardManagerService_RemovePrimaryClipChangedListener_FullMethodName = "/clipboard.ClipboardManagerService/RemovePrimaryClipChangedListener"
+	ClipboardManagerService_SetPrimaryClip_FullMethodName                   = "/clipboard.ClipboardManagerService/SetPrimaryClip"
+	ClipboardManagerService_SetText_FullMethodName                          = "/clipboard.ClipboardManagerService/SetText"
+)
+
+// ClipboardManagerServiceClient is the client API for ClipboardManagerService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ClipboardManagerServiceClient interface {
+	AddPrimaryClipChangedListener(ctx context.Context, in *AddPrimaryClipChangedListenerRequest, opts ...grpc.CallOption) (*AddPrimaryClipChangedListenerResponse, error)
+	ClearPrimaryClip(ctx context.Context, in *ClearPrimaryClipRequest, opts ...grpc.CallOption) (*ClearPrimaryClipResponse, error)
+	GetPrimaryClip(ctx context.Context, in *GetPrimaryClipRequest, opts ...grpc.CallOption) (*GetPrimaryClipResponse, error)
+	GetPrimaryClipDescription(ctx context.Context, in *GetPrimaryClipDescriptionRequest, opts ...grpc.CallOption) (*GetPrimaryClipDescriptionResponse, error)
+	GetText(ctx context.Context, in *GetTextRequest, opts ...grpc.CallOption) (*GetTextResponse, error)
+	HasPrimaryClip(ctx context.Context, in *HasPrimaryClipRequest, opts ...grpc.CallOption) (*HasPrimaryClipResponse, error)
+	HasText(ctx context.Context, in *HasTextRequest, opts ...grpc.CallOption) (*HasTextResponse, error)
+	RemovePrimaryClipChangedListener(ctx context.Context, in *RemovePrimaryClipChangedListenerRequest, opts ...grpc.CallOption) (*RemovePrimaryClipChangedListenerResponse, error)
+	SetPrimaryClip(ctx context.Context, in *SetPrimaryClipRequest, opts ...grpc.CallOption) (*SetPrimaryClipResponse, error)
+	SetText(ctx context.Context, in *SetTextRequest, opts ...grpc.CallOption) (*SetTextResponse, error)
+}
+
+type clipboardManagerServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewClipboardManagerServiceClient(cc grpc.ClientConnInterface) ClipboardManagerServiceClient {
+	return &clipboardManagerServiceClient{cc}
+}
+
+func (c *clipboardManagerServiceClient) AddPrimaryClipChangedListener(ctx context.Context, in *AddPrimaryClipChangedListenerRequest, opts ...grpc.CallOption) (*AddPrimaryClipChangedListenerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddPrimaryClipChangedListenerResponse)
+	err := c.cc.Invoke(ctx, ClipboardManagerService_AddPrimaryClipChangedListener_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clipboardManagerServiceClient) ClearPrimaryClip(ctx context.Context, in *ClearPrimaryClipRequest, opts ...grpc.CallOption) (*ClearPrimaryClipResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ClearPrimaryClipResponse)
+	err := c.cc.Invoke(ctx, ClipboardManagerService_ClearPrimaryClip_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clipboardManagerServiceClient) GetPrimaryClip(ctx context.Context, in *GetPrimaryClipRequest, opts ...grpc.CallOption) (*GetPrimaryClipResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPrimaryClipResponse)
+	err := c.cc.Invoke(ctx, ClipboardManagerService_GetPrimaryClip_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clipboardManagerServiceClient) GetPrimaryClipDescription(ctx context.Context, in *GetPrimaryClipDescriptionRequest, opts ...grpc.CallOption) (*GetPrimaryClipDescriptionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPrimaryClipDescriptionResponse)
+	err := c.cc.Invoke(ctx, ClipboardManagerService_GetPrimaryClipDescription_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clipboardManagerServiceClient) GetText(ctx context.Context, in *GetTextRequest, opts ...grpc.CallOption) (*GetTextResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTextResponse)
+	err := c.cc.Invoke(ctx, ClipboardManagerService_GetText_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clipboardManagerServiceClient) HasPrimaryClip(ctx context.Context, in *HasPrimaryClipRequest, opts ...grpc.CallOption) (*HasPrimaryClipResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HasPrimaryClipResponse)
+	err := c.cc.Invoke(ctx, ClipboardManagerService_HasPrimaryClip_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clipboardManagerServiceClient) HasText(ctx context.Context, in *HasTextRequest, opts ...grpc.CallOption) (*HasTextResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HasTextResponse)
+	err := c.cc.Invoke(ctx, ClipboardManagerService_HasText_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clipboardManagerServiceClient) RemovePrimaryClipChangedListener(ctx context.Context, in *RemovePrimaryClipChangedListenerRequest, opts ...grpc.CallOption) (*RemovePrimaryClipChangedListenerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemovePrimaryClipChangedListenerResponse)
+	err := c.cc.Invoke(ctx, ClipboardManagerService_RemovePrimaryClipChangedListener_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clipboardManagerServiceClient) SetPrimaryClip(ctx context.Context, in *SetPrimaryClipRequest, opts ...grpc.CallOption) (*SetPrimaryClipResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetPrimaryClipResponse)
+	err := c.cc.Invoke(ctx, ClipboardManagerService_SetPrimaryClip_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clipboardManagerServiceClient) SetText(ctx context.Context, in *SetTextRequest, opts ...grpc.CallOption) (*SetTextResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetTextResponse)
+	err := c.cc.Invoke(ctx, ClipboardManagerService_SetText_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ClipboardManagerServiceServer is the server API for ClipboardManagerService service.
+// All implementations must embed UnimplementedClipboardManagerServiceServer
+// for forward compatibility.
+type ClipboardManagerServiceServer interface {
+	AddPrimaryClipChangedListener(context.Context, *AddPrimaryClipChangedListenerRequest) (*AddPrimaryClipChangedListenerResponse, error)
+	ClearPrimaryClip(context.Context, *ClearPrimaryClipRequest) (*ClearPrimaryClipResponse, error)
+	GetPrimaryClip(context.Context, *GetPrimaryClipRequest) (*GetPrimaryClipResponse, error)
+	GetPrimaryClipDescription(context.Context, *GetPrimaryClipDescriptionRequest) (*GetPrimaryClipDescriptionResponse, error)
+	GetText(context.Context, *GetTextRequest) (*GetTextResponse, error)
+	HasPrimaryClip(context.Context, *HasPrimaryClipRequest) (*HasPrimaryClipResponse, error)
+	HasText(context.Context, *HasTextRequest) (*HasTextResponse, error)
+	RemovePrimaryClipChangedListener(context.Context, *RemovePrimaryClipChangedListenerRequest) (*RemovePrimaryClipChangedListenerResponse, error)
+	SetPrimaryClip(context.Context, *SetPrimaryClipRequest) (*SetPrimaryClipResponse, error)
+	SetText(context.Context, *SetTextRequest) (*SetTextResponse, error)
+	mustEmbedUnimplementedClipboardManagerServiceServer()
+}
+
+// UnimplementedClipboardManagerServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedClipboardManagerServiceServer struct{}
+
+func (UnimplementedClipboardManagerServiceServer) AddPrimaryClipChangedListener(context.Context, *AddPrimaryClipChangedListenerRequest) (*AddPrimaryClipChangedListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddPrimaryClipChangedListener not implemented")
+}
+func (UnimplementedClipboardManagerServiceServer) ClearPrimaryClip(context.Context, *ClearPrimaryClipRequest) (*ClearPrimaryClipResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ClearPrimaryClip not implemented")
+}
+func (UnimplementedClipboardManagerServiceServer) GetPrimaryClip(context.Context, *GetPrimaryClipRequest) (*GetPrimaryClipResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPrimaryClip not implemented")
+}
+func (UnimplementedClipboardManagerServiceServer) GetPrimaryClipDescription(context.Context, *GetPrimaryClipDescriptionRequest) (*GetPrimaryClipDescriptionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPrimaryClipDescription not implemented")
+}
+func (UnimplementedClipboardManagerServiceServer) GetText(context.Context, *GetTextRequest) (*GetTextResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetText not implemented")
+}
+func (UnimplementedClipboardManagerServiceServer) HasPrimaryClip(context.Context, *HasPrimaryClipRequest) (*HasPrimaryClipResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method HasPrimaryClip not implemented")
+}
+func (UnimplementedClipboardManagerServiceServer) HasText(context.Context, *HasTextRequest) (*HasTextResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method HasText not implemented")
+}
+func (UnimplementedClipboardManagerServiceServer) RemovePrimaryClipChangedListener(context.Context, *RemovePrimaryClipChangedListenerRequest) (*RemovePrimaryClipChangedListenerResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemovePrimaryClipChangedListener not implemented")
+}
+func (UnimplementedClipboardManagerServiceServer) SetPrimaryClip(context.Context, *SetPrimaryClipRequest) (*SetPrimaryClipResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetPrimaryClip not implemented")
+}
+func (UnimplementedClipboardManagerServiceServer) SetText(context.Context, *SetTextRequest) (*SetTextResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetText not implemented")
+}
+func (UnimplementedClipboardManagerServiceServer) mustEmbedUnimplementedClipboardManagerServiceServer() {
+}
+func (UnimplementedClipboardManagerServiceServer) testEmbeddedByValue() {}
+
+// UnsafeClipboardManagerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ClipboardManagerServiceServer will
+// result in compilation errors.
+type UnsafeClipboardManagerServiceServer interface {
+	mustEmbedUnimplementedClipboardManagerServiceServer()
+}
+
+func RegisterClipboardManagerServiceServer(s grpc.ServiceRegistrar, srv ClipboardManagerServiceServer) {
+	// If the following call panics, it indicates UnimplementedClipboardManagerServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&ClipboardManagerService_ServiceDesc, srv)
+}
+
+func _ClipboardManagerService_AddPrimaryClipChangedListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddPrimaryClipChangedListenerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClipboardManagerServiceServer).AddPrimaryClipChangedListener(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClipboardManagerService_AddPrimaryClipChangedListener_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClipboardManagerServiceServer).AddPrimaryClipChangedListener(ctx, req.(*AddPrimaryClipChangedListenerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClipboardManagerService_ClearPrimaryClip_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClearPrimaryClipRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClipboardManagerServiceServer).ClearPrimaryClip(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClipboardManagerService_ClearPrimaryClip_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClipboardManagerServiceServer).ClearPrimaryClip(ctx, req.(*ClearPrimaryClipRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClipboardManagerService_GetPrimaryClip_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPrimaryClipRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClipboardManagerServiceServer).GetPrimaryClip(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClipboardManagerService_GetPrimaryClip_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClipboardManagerServiceServer).GetPrimaryClip(ctx, req.(*GetPrimaryClipRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClipboardManagerService_GetPrimaryClipDescription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPrimaryClipDescriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClipboardManagerServiceServer).GetPrimaryClipDescription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClipboardManagerService_GetPrimaryClipDescription_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClipboardManagerServiceServer).GetPrimaryClipDescription(ctx, req.(*GetPrimaryClipDescriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClipboardManagerService_GetText_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTextRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClipboardManagerServiceServer).GetText(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClipboardManagerService_GetText_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClipboardManagerServiceServer).GetText(ctx, req.(*GetTextRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClipboardManagerService_HasPrimaryClip_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HasPrimaryClipRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClipboardManagerServiceServer).HasPrimaryClip(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClipboardManagerService_HasPrimaryClip_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClipboardManagerServiceServer).HasPrimaryClip(ctx, req.(*HasPrimaryClipRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClipboardManagerService_HasText_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HasTextRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClipboardManagerServiceServer).HasText(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClipboardManagerService_HasText_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClipboardManagerServiceServer).HasText(ctx, req.(*HasTextRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClipboardManagerService_RemovePrimaryClipChangedListener_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemovePrimaryClipChangedListenerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClipboardManagerServiceServer).RemovePrimaryClipChangedListener(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClipboardManagerService_RemovePrimaryClipChangedListener_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClipboardManagerServiceServer).RemovePrimaryClipChangedListener(ctx, req.(*RemovePrimaryClipChangedListenerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClipboardManagerService_SetPrimaryClip_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPrimaryClipRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClipboardManagerServiceServer).SetPrimaryClip(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClipboardManagerService_SetPrimaryClip_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClipboardManagerServiceServer).SetPrimaryClip(ctx, req.(*SetPrimaryClipRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClipboardManagerService_SetText_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTextRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClipboardManagerServiceServer).SetText(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClipboardManagerService_SetText_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClipboardManagerServiceServer).SetText(ctx, req.(*SetTextRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ClipboardManagerService_ServiceDesc is the grpc.ServiceDesc for ClipboardManagerService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ClipboardManagerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "clipboard.ClipboardManagerService",
+	HandlerType: (*ClipboardManagerServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddPrimaryClipChangedListener",
+			Handler:    _ClipboardManagerService_AddPrimaryClipChangedListener_Handler,
+		},
+		{
+			MethodName: "ClearPrimaryClip",
+			Handler:    _ClipboardManagerService_ClearPrimaryClip_Handler,
+		},
+		{
+			MethodName: "GetPrimaryClip",
+			Handler:    _ClipboardManagerService_GetPrimaryClip_Handler,
+		},
+		{
+			MethodName: "GetPrimaryClipDescription",
+			Handler:    _ClipboardManagerService_GetPrimaryClipDescription_Handler,
+		},
+		{
+			MethodName: "GetText",
+			Handler:    _ClipboardManagerService_GetText_Handler,
+		},
+		{
+			MethodName: "HasPrimaryClip",
+			Handler:    _ClipboardManagerService_HasPrimaryClip_Handler,
+		},
+		{
+			MethodName: "HasText",
+			Handler:    _ClipboardManagerService_HasText_Handler,
+		},
+		{
+			MethodName: "RemovePrimaryClipChangedListener",
+			Handler:    _ClipboardManagerService_RemovePrimaryClipChangedListener_Handler,
+		},
+		{
+			MethodName: "SetPrimaryClip",
+			Handler:    _ClipboardManagerService_SetPrimaryClip_Handler,
+		},
+		{
+			MethodName: "SetText",
+			Handler:    _ClipboardManagerService_SetText_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/clipboard/clipboard.proto",
+}
+
+const (
 	ClipDataService_AddItem1_FullMethodName         = "/clipboard.ClipDataService/AddItem1"
 	ClipDataService_AddItem2_1_FullMethodName       = "/clipboard.ClipDataService/AddItem2_1"
 	ClipDataService_DescribeContents_FullMethodName = "/clipboard.ClipDataService/DescribeContents"

@@ -20,6 +20,21 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsnsdManager                              *jni.GlobalRef
+	midnsdManagerDiscoverServices3             jni.MethodID
+	midnsdManagerDiscoverServices5_1           jni.MethodID
+	midnsdManagerDiscoverServices5_2           jni.MethodID
+	midnsdManagerDiscoverServices3_3           jni.MethodID
+	midnsdManagerRegisterService3              jni.MethodID
+	midnsdManagerRegisterService4_1            jni.MethodID
+	midnsdManagerRegisterServiceInfoCallback   jni.MethodID
+	midnsdManagerResolveService2               jni.MethodID
+	midnsdManagerResolveService3_1             jni.MethodID
+	midnsdManagerStopServiceDiscovery          jni.MethodID
+	midnsdManagerStopServiceResolution         jni.MethodID
+	midnsdManagerUnregisterService             jni.MethodID
+	midnsdManagerUnregisterServiceInfoCallback jni.MethodID
+
 	clsnsdServiceInfo                 *jni.GlobalRef
 	midnsdServiceInfoDescribeContents jni.MethodID
 	midnsdServiceInfoGetHost          jni.MethodID
@@ -66,6 +81,116 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/net/nsd/NsdManager")
+	if err != nil {
+		return fmt.Errorf("find class android.net.nsd.NsdManager: %w", err)
+	}
+	clsnsdManager = env.NewGlobalRef(&c.Object)
+
+	midnsdManagerDiscoverServices3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdManager)), "discoverServices", "(Landroid/net/nsd/DiscoveryRequest;Ljava/util/concurrent/Executor;Landroid/net/nsd/NsdManager$DiscoveryListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.discoverServices")
+	}
+
+	midnsdManagerDiscoverServices5_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdManager)), "discoverServices", "(Ljava/lang/String;ILandroid/net/Network;Ljava/util/concurrent/Executor;Landroid/net/nsd/NsdManager$DiscoveryListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.discoverServices")
+	}
+
+	midnsdManagerDiscoverServices5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdManager)), "discoverServices", "(Ljava/lang/String;ILandroid/net/NetworkRequest;Ljava/util/concurrent/Executor;Landroid/net/nsd/NsdManager$DiscoveryListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.discoverServices")
+	}
+
+	midnsdManagerDiscoverServices3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdManager)), "discoverServices", "(Ljava/lang/String;ILandroid/net/nsd/NsdManager$DiscoveryListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.discoverServices")
+	}
+
+	midnsdManagerRegisterService3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdManager)), "registerService", "(Landroid/net/nsd/NsdServiceInfo;ILandroid/net/nsd/NsdManager$RegistrationListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.registerService")
+	}
+
+	midnsdManagerRegisterService4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdManager)), "registerService", "(Landroid/net/nsd/NsdServiceInfo;ILjava/util/concurrent/Executor;Landroid/net/nsd/NsdManager$RegistrationListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.registerService")
+	}
+
+	midnsdManagerRegisterServiceInfoCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdManager)), "registerServiceInfoCallback", "(Landroid/net/nsd/NsdServiceInfo;Ljava/util/concurrent/Executor;Landroid/net/nsd/NsdManager$ServiceInfoCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.registerServiceInfoCallback")
+	}
+
+	midnsdManagerResolveService2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdManager)), "resolveService", "(Landroid/net/nsd/NsdServiceInfo;Landroid/net/nsd/NsdManager$ResolveListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.resolveService")
+	}
+
+	midnsdManagerResolveService3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdManager)), "resolveService", "(Landroid/net/nsd/NsdServiceInfo;Ljava/util/concurrent/Executor;Landroid/net/nsd/NsdManager$ResolveListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.resolveService")
+	}
+
+	midnsdManagerStopServiceDiscovery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdManager)), "stopServiceDiscovery", "(Landroid/net/nsd/NsdManager$DiscoveryListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.stopServiceDiscovery")
+	}
+
+	midnsdManagerStopServiceResolution, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdManager)), "stopServiceResolution", "(Landroid/net/nsd/NsdManager$ResolveListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.stopServiceResolution")
+	}
+
+	midnsdManagerUnregisterService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdManager)), "unregisterService", "(Landroid/net/nsd/NsdManager$RegistrationListener;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.unregisterService")
+	}
+
+	midnsdManagerUnregisterServiceInfoCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsnsdManager)), "unregisterServiceInfoCallback", "(Landroid/net/nsd/NsdManager$ServiceInfoCallback;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+		initSkipped = append(initSkipped, "android.net.nsd.NsdManager.unregisterServiceInfoCallback")
+	}
 
 	c, err = env.FindClass("android/net/nsd/NsdServiceInfo")
 	if err != nil {

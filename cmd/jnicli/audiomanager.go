@@ -309,6 +309,1863 @@ var audiomanagerAudioDeviceInfoIsSourceCmd = &cobra.Command{
 	},
 }
 
+var audiomanagerAudioManagerCmd = &cobra.Command{
+	Use:   "audio-manager",
+	Short: "AudioManagerService operations",
+}
+
+var audiomanagerAudioManagerAbandonAudioFocusCmd = &cobra.Command{
+	Use:   "abandon-audio-focus",
+	Short: "AbandonAudioFocus RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.AbandonAudioFocusRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.AbandonAudioFocus(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerAbandonAudioFocusRequestOpCmd = &cobra.Command{
+	Use:   "abandon-audio-focus-request-op",
+	Short: "AbandonAudioFocusRequestOp RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.AbandonAudioFocusRequestOpRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.AbandonAudioFocusRequestOp(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerAddOnCommunicationDeviceChangedListenerCmd = &cobra.Command{
+	Use:   "add-on-communication-device-changed-listener",
+	Short: "AddOnCommunicationDeviceChangedListener RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.AddOnCommunicationDeviceChangedListenerRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.AddOnCommunicationDeviceChangedListener(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerAddOnModeChangedListenerCmd = &cobra.Command{
+	Use:   "add-on-mode-changed-listener",
+	Short: "AddOnModeChangedListener RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.AddOnModeChangedListenerRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.AddOnModeChangedListener(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerAddOnPreferredMixerAttributesChangedListenerCmd = &cobra.Command{
+	Use:   "add-on-preferred-mixer-attributes-changed-listener",
+	Short: "AddOnPreferredMixerAttributesChangedListener RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.AddOnPreferredMixerAttributesChangedListenerRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.AddOnPreferredMixerAttributesChangedListener(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerAdjustStreamVolumeCmd = &cobra.Command{
+	Use:   "adjust-stream-volume",
+	Short: "AdjustStreamVolume RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.AdjustStreamVolumeRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.AdjustStreamVolume(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerAdjustSuggestedStreamVolumeCmd = &cobra.Command{
+	Use:   "adjust-suggested-stream-volume",
+	Short: "AdjustSuggestedStreamVolume RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.AdjustSuggestedStreamVolumeRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.AdjustSuggestedStreamVolume(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerAdjustVolumeCmd = &cobra.Command{
+	Use:   "adjust-volume",
+	Short: "AdjustVolume RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.AdjustVolumeRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.AdjustVolume(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerAdjustVolumeGroupVolumeCmd = &cobra.Command{
+	Use:   "adjust-volume-group-volume",
+	Short: "AdjustVolumeGroupVolume RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.AdjustVolumeGroupVolumeRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.AdjustVolumeGroupVolume(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerClearCommunicationDeviceCmd = &cobra.Command{
+	Use:   "clear-communication-device",
+	Short: "ClearCommunicationDevice RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.ClearCommunicationDeviceRequest{}
+		resp, err := client.ClearCommunicationDevice(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerClearPreferredMixerAttributesCmd = &cobra.Command{
+	Use:   "clear-preferred-mixer-attributes",
+	Short: "ClearPreferredMixerAttributes RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.ClearPreferredMixerAttributesRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.ClearPreferredMixerAttributes(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerDispatchMediaKeyEventCmd = &cobra.Command{
+	Use:   "dispatch-media-key-event",
+	Short: "DispatchMediaKeyEvent RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.DispatchMediaKeyEventRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.DispatchMediaKeyEvent(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGenerateAudioSessionIdCmd = &cobra.Command{
+	Use:   "generate-audio-session-id",
+	Short: "GenerateAudioSessionId RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GenerateAudioSessionIdRequest{}
+		resp, err := client.GenerateAudioSessionId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetActivePlaybackConfigurationsCmd = &cobra.Command{
+	Use:   "get-active-playback-configurations",
+	Short: "GetActivePlaybackConfigurations RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetActivePlaybackConfigurationsRequest{}
+		resp, err := client.GetActivePlaybackConfigurations(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetActiveRecordingConfigurationsCmd = &cobra.Command{
+	Use:   "get-active-recording-configurations",
+	Short: "GetActiveRecordingConfigurations RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetActiveRecordingConfigurationsRequest{}
+		resp, err := client.GetActiveRecordingConfigurations(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetAllowedCapturePolicyCmd = &cobra.Command{
+	Use:   "get-allowed-capture-policy",
+	Short: "GetAllowedCapturePolicy RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetAllowedCapturePolicyRequest{}
+		resp, err := client.GetAllowedCapturePolicy(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetAudioDevicesForAttributesCmd = &cobra.Command{
+	Use:   "get-audio-devices-for-attributes",
+	Short: "GetAudioDevicesForAttributes RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetAudioDevicesForAttributesRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetAudioDevicesForAttributes(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetAudioHwSyncForSessionCmd = &cobra.Command{
+	Use:   "get-audio-hw-sync-for-session",
+	Short: "GetAudioHwSyncForSession RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetAudioHwSyncForSessionRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetAudioHwSyncForSession(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetAvailableCommunicationDevicesCmd = &cobra.Command{
+	Use:   "get-available-communication-devices",
+	Short: "GetAvailableCommunicationDevices RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetAvailableCommunicationDevicesRequest{}
+		resp, err := client.GetAvailableCommunicationDevices(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetCommunicationDeviceCmd = &cobra.Command{
+	Use:   "get-communication-device",
+	Short: "GetCommunicationDevice RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetCommunicationDeviceRequest{}
+		resp, err := client.GetCommunicationDevice(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetDevicesCmd = &cobra.Command{
+	Use:   "get-devices",
+	Short: "GetDevices RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetDevicesRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetDevices(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetDirectProfilesForAttributesCmd = &cobra.Command{
+	Use:   "get-direct-profiles-for-attributes",
+	Short: "GetDirectProfilesForAttributes RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetDirectProfilesForAttributesRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetDirectProfilesForAttributes(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetEncodedSurroundModeCmd = &cobra.Command{
+	Use:   "get-encoded-surround-mode",
+	Short: "GetEncodedSurroundMode RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetEncodedSurroundModeRequest{}
+		resp, err := client.GetEncodedSurroundMode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetMicrophonesCmd = &cobra.Command{
+	Use:   "get-microphones",
+	Short: "GetMicrophones RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetMicrophonesRequest{}
+		resp, err := client.GetMicrophones(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetModeCmd = &cobra.Command{
+	Use:   "get-mode",
+	Short: "GetMode RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetModeRequest{}
+		resp, err := client.GetMode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetParametersCmd = &cobra.Command{
+	Use:   "get-parameters",
+	Short: "GetParameters RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetParametersRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetParameters(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetPreferredMixerAttributesCmd = &cobra.Command{
+	Use:   "get-preferred-mixer-attributes",
+	Short: "GetPreferredMixerAttributes RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetPreferredMixerAttributesRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetPreferredMixerAttributes(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetPropertyCmd = &cobra.Command{
+	Use:   "get-property",
+	Short: "GetProperty RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetPropertyRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetProperty(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetRingerModeCmd = &cobra.Command{
+	Use:   "get-ringer-mode",
+	Short: "GetRingerMode RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetRingerModeRequest{}
+		resp, err := client.GetRingerMode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetRoutingCmd = &cobra.Command{
+	Use:   "get-routing",
+	Short: "GetRouting RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetRoutingRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetRouting(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetSpatializerCmd = &cobra.Command{
+	Use:   "get-spatializer",
+	Short: "GetSpatializer RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetSpatializerRequest{}
+		resp, err := client.GetSpatializer(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetStreamMaxVolumeCmd = &cobra.Command{
+	Use:   "get-stream-max-volume",
+	Short: "GetStreamMaxVolume RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetStreamMaxVolumeRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetStreamMaxVolume(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetStreamMinVolumeCmd = &cobra.Command{
+	Use:   "get-stream-min-volume",
+	Short: "GetStreamMinVolume RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetStreamMinVolumeRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetStreamMinVolume(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetStreamVolumeCmd = &cobra.Command{
+	Use:   "get-stream-volume",
+	Short: "GetStreamVolume RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetStreamVolumeRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetStreamVolume(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetStreamVolumeDbCmd = &cobra.Command{
+	Use:   "get-stream-volume-db",
+	Short: "GetStreamVolumeDb RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetStreamVolumeDbRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.GetStreamVolumeDb(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetSupportedDeviceTypesCmd = &cobra.Command{
+	Use:   "get-supported-device-types",
+	Short: "GetSupportedDeviceTypes RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetSupportedDeviceTypesRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetSupportedDeviceTypes(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetSupportedMixerAttributesCmd = &cobra.Command{
+	Use:   "get-supported-mixer-attributes",
+	Short: "GetSupportedMixerAttributes RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetSupportedMixerAttributesRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetSupportedMixerAttributes(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetVibrateSettingCmd = &cobra.Command{
+	Use:   "get-vibrate-setting",
+	Short: "GetVibrateSetting RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetVibrateSettingRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetVibrateSetting(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetVolumeGroupIdForAttributesCmd = &cobra.Command{
+	Use:   "get-volume-group-id-for-attributes",
+	Short: "GetVolumeGroupIdForAttributes RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetVolumeGroupIdForAttributesRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.GetVolumeGroupIdForAttributes(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerIsBluetoothA2dpOnCmd = &cobra.Command{
+	Use:   "is-bluetooth-a2dp-on",
+	Short: "IsBluetoothA2dpOn RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.IsBluetoothA2DpOnRequest{}
+		resp, err := client.IsBluetoothA2DpOn(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerIsBluetoothScoAvailableOffCallCmd = &cobra.Command{
+	Use:   "is-bluetooth-sco-available-off-call",
+	Short: "IsBluetoothScoAvailableOffCall RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.IsBluetoothScoAvailableOffCallRequest{}
+		resp, err := client.IsBluetoothScoAvailableOffCall(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerIsBluetoothScoOnCmd = &cobra.Command{
+	Use:   "is-bluetooth-sco-on",
+	Short: "IsBluetoothScoOn RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.IsBluetoothScoOnRequest{}
+		resp, err := client.IsBluetoothScoOn(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerIsCallScreeningModeSupportedCmd = &cobra.Command{
+	Use:   "is-call-screening-mode-supported",
+	Short: "IsCallScreeningModeSupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.IsCallScreeningModeSupportedRequest{}
+		resp, err := client.IsCallScreeningModeSupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerIsMicrophoneMuteCmd = &cobra.Command{
+	Use:   "is-microphone-mute",
+	Short: "IsMicrophoneMute RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.IsMicrophoneMuteRequest{}
+		resp, err := client.IsMicrophoneMute(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerIsMusicActiveCmd = &cobra.Command{
+	Use:   "is-music-active",
+	Short: "IsMusicActive RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.IsMusicActiveRequest{}
+		resp, err := client.IsMusicActive(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerIsRampingRingerEnabledCmd = &cobra.Command{
+	Use:   "is-ramping-ringer-enabled",
+	Short: "IsRampingRingerEnabled RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.IsRampingRingerEnabledRequest{}
+		resp, err := client.IsRampingRingerEnabled(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerIsSpeakerphoneOnCmd = &cobra.Command{
+	Use:   "is-speakerphone-on",
+	Short: "IsSpeakerphoneOn RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.IsSpeakerphoneOnRequest{}
+		resp, err := client.IsSpeakerphoneOn(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerIsStreamMuteCmd = &cobra.Command{
+	Use:   "is-stream-mute",
+	Short: "IsStreamMute RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.IsStreamMuteRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.IsStreamMute(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerIsSurroundFormatEnabledCmd = &cobra.Command{
+	Use:   "is-surround-format-enabled",
+	Short: "IsSurroundFormatEnabled RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.IsSurroundFormatEnabledRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.IsSurroundFormatEnabled(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerIsVolumeFixedCmd = &cobra.Command{
+	Use:   "is-volume-fixed",
+	Short: "IsVolumeFixed RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.IsVolumeFixedRequest{}
+		resp, err := client.IsVolumeFixed(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerIsVolumeGroupMutedCmd = &cobra.Command{
+	Use:   "is-volume-group-muted",
+	Short: "IsVolumeGroupMuted RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.IsVolumeGroupMutedRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.IsVolumeGroupMuted(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerIsWiredHeadsetOnCmd = &cobra.Command{
+	Use:   "is-wired-headset-on",
+	Short: "IsWiredHeadsetOn RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.IsWiredHeadsetOnRequest{}
+		resp, err := client.IsWiredHeadsetOn(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerLoadSoundEffectsCmd = &cobra.Command{
+	Use:   "load-sound-effects",
+	Short: "LoadSoundEffects RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.LoadSoundEffectsRequest{}
+		resp, err := client.LoadSoundEffects(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerPlaySoundEffect1Cmd = &cobra.Command{
+	Use:   "play-sound-effect1",
+	Short: "PlaySoundEffect1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.PlaySoundEffect1Request{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.PlaySoundEffect1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerPlaySoundEffect2_1Cmd = &cobra.Command{
+	Use:   "play-sound-effect2_1",
+	Short: "PlaySoundEffect2_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.PlaySoundEffect2_1Request{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetFloat32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.PlaySoundEffect2_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerRegisterMediaButtonEventReceiver1Cmd = &cobra.Command{
+	Use:   "register-media-button-event-receiver1",
+	Short: "RegisterMediaButtonEventReceiver1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.RegisterMediaButtonEventReceiver1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RegisterMediaButtonEventReceiver1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerRegisterMediaButtonEventReceiver1_1Cmd = &cobra.Command{
+	Use:   "register-media-button-event-receiver1_1",
+	Short: "RegisterMediaButtonEventReceiver1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.RegisterMediaButtonEventReceiver1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RegisterMediaButtonEventReceiver1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerRegisterRemoteControlClientCmd = &cobra.Command{
+	Use:   "register-remote-control-client",
+	Short: "RegisterRemoteControlClient RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.RegisterRemoteControlClientRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RegisterRemoteControlClient(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerRegisterRemoteControllerCmd = &cobra.Command{
+	Use:   "register-remote-controller",
+	Short: "RegisterRemoteController RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.RegisterRemoteControllerRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RegisterRemoteController(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerRemoveOnCommunicationDeviceChangedListenerCmd = &cobra.Command{
+	Use:   "remove-on-communication-device-changed-listener",
+	Short: "RemoveOnCommunicationDeviceChangedListener RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.RemoveOnCommunicationDeviceChangedListenerRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RemoveOnCommunicationDeviceChangedListener(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerRemoveOnModeChangedListenerCmd = &cobra.Command{
+	Use:   "remove-on-mode-changed-listener",
+	Short: "RemoveOnModeChangedListener RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.RemoveOnModeChangedListenerRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RemoveOnModeChangedListener(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerRemoveOnPreferredMixerAttributesChangedListenerCmd = &cobra.Command{
+	Use:   "remove-on-preferred-mixer-attributes-changed-listener",
+	Short: "RemoveOnPreferredMixerAttributesChangedListener RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.RemoveOnPreferredMixerAttributesChangedListenerRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RemoveOnPreferredMixerAttributesChangedListener(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerRequestAudioFocus1Cmd = &cobra.Command{
+	Use:   "request-audio-focus1",
+	Short: "RequestAudioFocus1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.RequestAudioFocus1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.RequestAudioFocus1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerRequestAudioFocus3_1Cmd = &cobra.Command{
+	Use:   "request-audio-focus3_1",
+	Short: "RequestAudioFocus3_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.RequestAudioFocus3_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.RequestAudioFocus3_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetAllowedCapturePolicyCmd = &cobra.Command{
+	Use:   "set-allowed-capture-policy",
+	Short: "SetAllowedCapturePolicy RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetAllowedCapturePolicyRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetAllowedCapturePolicy(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetBluetoothA2dpOnCmd = &cobra.Command{
+	Use:   "set-bluetooth-a2dp-on",
+	Short: "SetBluetoothA2dpOn RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetBluetoothA2DpOnRequest{}
+		if v, err := cmd.Flags().GetBool("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetBluetoothA2DpOn(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetBluetoothScoOnCmd = &cobra.Command{
+	Use:   "set-bluetooth-sco-on",
+	Short: "SetBluetoothScoOn RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetBluetoothScoOnRequest{}
+		if v, err := cmd.Flags().GetBool("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetBluetoothScoOn(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetCommunicationDeviceCmd = &cobra.Command{
+	Use:   "set-communication-device",
+	Short: "SetCommunicationDevice RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetCommunicationDeviceRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetCommunicationDevice(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetEncodedSurroundModeCmd = &cobra.Command{
+	Use:   "set-encoded-surround-mode",
+	Short: "SetEncodedSurroundMode RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetEncodedSurroundModeRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetEncodedSurroundMode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetMicrophoneMuteCmd = &cobra.Command{
+	Use:   "set-microphone-mute",
+	Short: "SetMicrophoneMute RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetMicrophoneMuteRequest{}
+		if v, err := cmd.Flags().GetBool("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetMicrophoneMute(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetModeCmd = &cobra.Command{
+	Use:   "set-mode",
+	Short: "SetMode RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetModeRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetMode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetParametersCmd = &cobra.Command{
+	Use:   "set-parameters",
+	Short: "SetParameters RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetParametersRequest{}
+		if v, err := cmd.Flags().GetString("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetParameters(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetPreferredMixerAttributesCmd = &cobra.Command{
+	Use:   "set-preferred-mixer-attributes",
+	Short: "SetPreferredMixerAttributes RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetPreferredMixerAttributesRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.SetPreferredMixerAttributes(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetRingerModeCmd = &cobra.Command{
+	Use:   "set-ringer-mode",
+	Short: "SetRingerMode RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetRingerModeRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetRingerMode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetRoutingCmd = &cobra.Command{
+	Use:   "set-routing",
+	Short: "SetRouting RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetRoutingRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.SetRouting(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetSpeakerphoneOnCmd = &cobra.Command{
+	Use:   "set-speakerphone-on",
+	Short: "SetSpeakerphoneOn RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetSpeakerphoneOnRequest{}
+		if v, err := cmd.Flags().GetBool("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetSpeakerphoneOn(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetStreamMuteCmd = &cobra.Command{
+	Use:   "set-stream-mute",
+	Short: "SetStreamMute RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetStreamMuteRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetStreamMute(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetStreamSoloCmd = &cobra.Command{
+	Use:   "set-stream-solo",
+	Short: "SetStreamSolo RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetStreamSoloRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetStreamSolo(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetStreamVolumeCmd = &cobra.Command{
+	Use:   "set-stream-volume",
+	Short: "SetStreamVolume RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetStreamVolumeRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg2"); err == nil {
+			req.Arg2 = v
+		}
+		resp, err := client.SetStreamVolume(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetSurroundFormatEnabledCmd = &cobra.Command{
+	Use:   "set-surround-format-enabled",
+	Short: "SetSurroundFormatEnabled RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetSurroundFormatEnabledRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetBool("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetSurroundFormatEnabled(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetVibrateSettingCmd = &cobra.Command{
+	Use:   "set-vibrate-setting",
+	Short: "SetVibrateSetting RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetVibrateSettingRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt32("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.SetVibrateSetting(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerSetWiredHeadsetOnCmd = &cobra.Command{
+	Use:   "set-wired-headset-on",
+	Short: "SetWiredHeadsetOn RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.SetWiredHeadsetOnRequest{}
+		if v, err := cmd.Flags().GetBool("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.SetWiredHeadsetOn(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerShouldVibrateCmd = &cobra.Command{
+	Use:   "should-vibrate",
+	Short: "ShouldVibrate RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.ShouldVibrateRequest{}
+		if v, err := cmd.Flags().GetInt32("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.ShouldVibrate(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerStartBluetoothScoCmd = &cobra.Command{
+	Use:   "start-bluetooth-sco",
+	Short: "StartBluetoothSco RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.StartBluetoothScoRequest{}
+		resp, err := client.StartBluetoothSco(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerStopBluetoothScoCmd = &cobra.Command{
+	Use:   "stop-bluetooth-sco",
+	Short: "StopBluetoothSco RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.StopBluetoothScoRequest{}
+		resp, err := client.StopBluetoothSco(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerUnloadSoundEffectsCmd = &cobra.Command{
+	Use:   "unload-sound-effects",
+	Short: "UnloadSoundEffects RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.UnloadSoundEffectsRequest{}
+		resp, err := client.UnloadSoundEffects(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerUnregisterAudioDeviceCallbackCmd = &cobra.Command{
+	Use:   "unregister-audio-device-callback",
+	Short: "UnregisterAudioDeviceCallback RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.UnregisterAudioDeviceCallbackRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.UnregisterAudioDeviceCallback(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerUnregisterAudioPlaybackCallbackCmd = &cobra.Command{
+	Use:   "unregister-audio-playback-callback",
+	Short: "UnregisterAudioPlaybackCallback RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.UnregisterAudioPlaybackCallbackRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.UnregisterAudioPlaybackCallback(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerUnregisterAudioRecordingCallbackCmd = &cobra.Command{
+	Use:   "unregister-audio-recording-callback",
+	Short: "UnregisterAudioRecordingCallback RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.UnregisterAudioRecordingCallbackRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.UnregisterAudioRecordingCallback(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerUnregisterMediaButtonEventReceiver1Cmd = &cobra.Command{
+	Use:   "unregister-media-button-event-receiver1",
+	Short: "UnregisterMediaButtonEventReceiver1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.UnregisterMediaButtonEventReceiver1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.UnregisterMediaButtonEventReceiver1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerUnregisterMediaButtonEventReceiver1_1Cmd = &cobra.Command{
+	Use:   "unregister-media-button-event-receiver1_1",
+	Short: "UnregisterMediaButtonEventReceiver1_1 RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.UnregisterMediaButtonEventReceiver1_1Request{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.UnregisterMediaButtonEventReceiver1_1(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerUnregisterRemoteControlClientCmd = &cobra.Command{
+	Use:   "unregister-remote-control-client",
+	Short: "UnregisterRemoteControlClient RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.UnregisterRemoteControlClientRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.UnregisterRemoteControlClient(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerUnregisterRemoteControllerCmd = &cobra.Command{
+	Use:   "unregister-remote-controller",
+	Short: "UnregisterRemoteController RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.UnregisterRemoteControllerRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		resp, err := client.UnregisterRemoteController(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetDirectPlaybackSupportCmd = &cobra.Command{
+	Use:   "get-direct-playback-support",
+	Short: "GetDirectPlaybackSupport RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetDirectPlaybackSupportRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetDirectPlaybackSupport(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerGetPlaybackOffloadSupportCmd = &cobra.Command{
+	Use:   "get-playback-offload-support",
+	Short: "GetPlaybackOffloadSupport RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.GetPlaybackOffloadSupportRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.GetPlaybackOffloadSupport(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerIsHapticPlaybackSupportedCmd = &cobra.Command{
+	Use:   "is-haptic-playback-supported",
+	Short: "IsHapticPlaybackSupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.IsHapticPlaybackSupportedRequest{}
+		resp, err := client.IsHapticPlaybackSupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
+var audiomanagerAudioManagerIsOffloadedPlaybackSupportedCmd = &cobra.Command{
+	Use:   "is-offloaded-playback-supported",
+	Short: "IsOffloadedPlaybackSupported RPC",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		ctx, cancel := requestContext(cmd)
+		defer cancel()
+		client := pb.NewAudioManagerServiceClient(grpcConn)
+		req := &pb.IsOffloadedPlaybackSupportedRequest{}
+		if v, err := cmd.Flags().GetInt64("arg0"); err == nil {
+			req.Arg0 = v
+		}
+		if v, err := cmd.Flags().GetInt64("arg1"); err == nil {
+			req.Arg1 = v
+		}
+		resp, err := client.IsOffloadedPlaybackSupported(ctx, req)
+		if err != nil {
+			return err
+		}
+		return printProtoMessage(resp)
+	},
+}
+
 func init() {
 	audiomanagerAudioDeviceInfoEqualsCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
 	audiomanagerAudioDeviceInfoCmd.AddCommand(audiomanagerAudioDeviceInfoEqualsCmd)
@@ -330,5 +2187,203 @@ func init() {
 	audiomanagerAudioDeviceInfoCmd.AddCommand(audiomanagerAudioDeviceInfoIsSinkCmd)
 	audiomanagerAudioDeviceInfoCmd.AddCommand(audiomanagerAudioDeviceInfoIsSourceCmd)
 	audiomanagerCmd.AddCommand(audiomanagerAudioDeviceInfoCmd)
+	audiomanagerAudioManagerAbandonAudioFocusCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerAbandonAudioFocusCmd)
+	audiomanagerAudioManagerAbandonAudioFocusRequestOpCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerAbandonAudioFocusRequestOpCmd)
+	audiomanagerAudioManagerAddOnCommunicationDeviceChangedListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerAddOnCommunicationDeviceChangedListenerCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerAddOnCommunicationDeviceChangedListenerCmd)
+	audiomanagerAudioManagerAddOnModeChangedListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerAddOnModeChangedListenerCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerAddOnModeChangedListenerCmd)
+	audiomanagerAudioManagerAddOnPreferredMixerAttributesChangedListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerAddOnPreferredMixerAttributesChangedListenerCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerAddOnPreferredMixerAttributesChangedListenerCmd)
+	audiomanagerAudioManagerAdjustStreamVolumeCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerAdjustStreamVolumeCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	audiomanagerAudioManagerAdjustStreamVolumeCmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerAdjustStreamVolumeCmd)
+	audiomanagerAudioManagerAdjustSuggestedStreamVolumeCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerAdjustSuggestedStreamVolumeCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	audiomanagerAudioManagerAdjustSuggestedStreamVolumeCmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerAdjustSuggestedStreamVolumeCmd)
+	audiomanagerAudioManagerAdjustVolumeCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerAdjustVolumeCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerAdjustVolumeCmd)
+	audiomanagerAudioManagerAdjustVolumeGroupVolumeCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerAdjustVolumeGroupVolumeCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	audiomanagerAudioManagerAdjustVolumeGroupVolumeCmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerAdjustVolumeGroupVolumeCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerClearCommunicationDeviceCmd)
+	audiomanagerAudioManagerClearPreferredMixerAttributesCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerClearPreferredMixerAttributesCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerClearPreferredMixerAttributesCmd)
+	audiomanagerAudioManagerDispatchMediaKeyEventCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerDispatchMediaKeyEventCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGenerateAudioSessionIdCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetActivePlaybackConfigurationsCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetActiveRecordingConfigurationsCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetAllowedCapturePolicyCmd)
+	audiomanagerAudioManagerGetAudioDevicesForAttributesCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetAudioDevicesForAttributesCmd)
+	audiomanagerAudioManagerGetAudioHwSyncForSessionCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetAudioHwSyncForSessionCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetAvailableCommunicationDevicesCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetCommunicationDeviceCmd)
+	audiomanagerAudioManagerGetDevicesCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetDevicesCmd)
+	audiomanagerAudioManagerGetDirectProfilesForAttributesCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetDirectProfilesForAttributesCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetEncodedSurroundModeCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetMicrophonesCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetModeCmd)
+	audiomanagerAudioManagerGetParametersCmd.Flags().String("arg0", "", "arg0 (string)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetParametersCmd)
+	audiomanagerAudioManagerGetPreferredMixerAttributesCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerGetPreferredMixerAttributesCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetPreferredMixerAttributesCmd)
+	audiomanagerAudioManagerGetPropertyCmd.Flags().String("arg0", "", "arg0 (string)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetPropertyCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetRingerModeCmd)
+	audiomanagerAudioManagerGetRoutingCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetRoutingCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetSpatializerCmd)
+	audiomanagerAudioManagerGetStreamMaxVolumeCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetStreamMaxVolumeCmd)
+	audiomanagerAudioManagerGetStreamMinVolumeCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetStreamMinVolumeCmd)
+	audiomanagerAudioManagerGetStreamVolumeCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetStreamVolumeCmd)
+	audiomanagerAudioManagerGetStreamVolumeDbCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerGetStreamVolumeDbCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	audiomanagerAudioManagerGetStreamVolumeDbCmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetStreamVolumeDbCmd)
+	audiomanagerAudioManagerGetSupportedDeviceTypesCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetSupportedDeviceTypesCmd)
+	audiomanagerAudioManagerGetSupportedMixerAttributesCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetSupportedMixerAttributesCmd)
+	audiomanagerAudioManagerGetVibrateSettingCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetVibrateSettingCmd)
+	audiomanagerAudioManagerGetVolumeGroupIdForAttributesCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetVolumeGroupIdForAttributesCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerIsBluetoothA2dpOnCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerIsBluetoothScoAvailableOffCallCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerIsBluetoothScoOnCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerIsCallScreeningModeSupportedCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerIsMicrophoneMuteCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerIsMusicActiveCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerIsRampingRingerEnabledCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerIsSpeakerphoneOnCmd)
+	audiomanagerAudioManagerIsStreamMuteCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerIsStreamMuteCmd)
+	audiomanagerAudioManagerIsSurroundFormatEnabledCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerIsSurroundFormatEnabledCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerIsVolumeFixedCmd)
+	audiomanagerAudioManagerIsVolumeGroupMutedCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerIsVolumeGroupMutedCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerIsWiredHeadsetOnCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerLoadSoundEffectsCmd)
+	audiomanagerAudioManagerPlaySoundEffect1Cmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerPlaySoundEffect1Cmd)
+	audiomanagerAudioManagerPlaySoundEffect2_1Cmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerPlaySoundEffect2_1Cmd.Flags().Float32("arg1", 0, "arg1 (float32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerPlaySoundEffect2_1Cmd)
+	audiomanagerAudioManagerRegisterMediaButtonEventReceiver1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerRegisterMediaButtonEventReceiver1Cmd)
+	audiomanagerAudioManagerRegisterMediaButtonEventReceiver1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerRegisterMediaButtonEventReceiver1_1Cmd)
+	audiomanagerAudioManagerRegisterRemoteControlClientCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerRegisterRemoteControlClientCmd)
+	audiomanagerAudioManagerRegisterRemoteControllerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerRegisterRemoteControllerCmd)
+	audiomanagerAudioManagerRemoveOnCommunicationDeviceChangedListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerRemoveOnCommunicationDeviceChangedListenerCmd)
+	audiomanagerAudioManagerRemoveOnModeChangedListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerRemoveOnModeChangedListenerCmd)
+	audiomanagerAudioManagerRemoveOnPreferredMixerAttributesChangedListenerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerRemoveOnPreferredMixerAttributesChangedListenerCmd)
+	audiomanagerAudioManagerRequestAudioFocus1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerRequestAudioFocus1Cmd)
+	audiomanagerAudioManagerRequestAudioFocus3_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerRequestAudioFocus3_1Cmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	audiomanagerAudioManagerRequestAudioFocus3_1Cmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerRequestAudioFocus3_1Cmd)
+	audiomanagerAudioManagerSetAllowedCapturePolicyCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetAllowedCapturePolicyCmd)
+	audiomanagerAudioManagerSetBluetoothA2dpOnCmd.Flags().Bool("arg0", false, "arg0 (bool)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetBluetoothA2dpOnCmd)
+	audiomanagerAudioManagerSetBluetoothScoOnCmd.Flags().Bool("arg0", false, "arg0 (bool)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetBluetoothScoOnCmd)
+	audiomanagerAudioManagerSetCommunicationDeviceCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetCommunicationDeviceCmd)
+	audiomanagerAudioManagerSetEncodedSurroundModeCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetEncodedSurroundModeCmd)
+	audiomanagerAudioManagerSetMicrophoneMuteCmd.Flags().Bool("arg0", false, "arg0 (bool)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetMicrophoneMuteCmd)
+	audiomanagerAudioManagerSetModeCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetModeCmd)
+	audiomanagerAudioManagerSetParametersCmd.Flags().String("arg0", "", "arg0 (string)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetParametersCmd)
+	audiomanagerAudioManagerSetPreferredMixerAttributesCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerSetPreferredMixerAttributesCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	audiomanagerAudioManagerSetPreferredMixerAttributesCmd.Flags().Int64("arg2", 0, "arg2 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetPreferredMixerAttributesCmd)
+	audiomanagerAudioManagerSetRingerModeCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetRingerModeCmd)
+	audiomanagerAudioManagerSetRoutingCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerSetRoutingCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	audiomanagerAudioManagerSetRoutingCmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetRoutingCmd)
+	audiomanagerAudioManagerSetSpeakerphoneOnCmd.Flags().Bool("arg0", false, "arg0 (bool)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetSpeakerphoneOnCmd)
+	audiomanagerAudioManagerSetStreamMuteCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerSetStreamMuteCmd.Flags().Bool("arg1", false, "arg1 (bool)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetStreamMuteCmd)
+	audiomanagerAudioManagerSetStreamSoloCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerSetStreamSoloCmd.Flags().Bool("arg1", false, "arg1 (bool)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetStreamSoloCmd)
+	audiomanagerAudioManagerSetStreamVolumeCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerSetStreamVolumeCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	audiomanagerAudioManagerSetStreamVolumeCmd.Flags().Int32("arg2", 0, "arg2 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetStreamVolumeCmd)
+	audiomanagerAudioManagerSetSurroundFormatEnabledCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerSetSurroundFormatEnabledCmd.Flags().Bool("arg1", false, "arg1 (bool)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetSurroundFormatEnabledCmd)
+	audiomanagerAudioManagerSetVibrateSettingCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerSetVibrateSettingCmd.Flags().Int32("arg1", 0, "arg1 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetVibrateSettingCmd)
+	audiomanagerAudioManagerSetWiredHeadsetOnCmd.Flags().Bool("arg0", false, "arg0 (bool)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerSetWiredHeadsetOnCmd)
+	audiomanagerAudioManagerShouldVibrateCmd.Flags().Int32("arg0", 0, "arg0 (int32)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerShouldVibrateCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerStartBluetoothScoCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerStopBluetoothScoCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerUnloadSoundEffectsCmd)
+	audiomanagerAudioManagerUnregisterAudioDeviceCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerUnregisterAudioDeviceCallbackCmd)
+	audiomanagerAudioManagerUnregisterAudioPlaybackCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerUnregisterAudioPlaybackCallbackCmd)
+	audiomanagerAudioManagerUnregisterAudioRecordingCallbackCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerUnregisterAudioRecordingCallbackCmd)
+	audiomanagerAudioManagerUnregisterMediaButtonEventReceiver1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerUnregisterMediaButtonEventReceiver1Cmd)
+	audiomanagerAudioManagerUnregisterMediaButtonEventReceiver1_1Cmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerUnregisterMediaButtonEventReceiver1_1Cmd)
+	audiomanagerAudioManagerUnregisterRemoteControlClientCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerUnregisterRemoteControlClientCmd)
+	audiomanagerAudioManagerUnregisterRemoteControllerCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerUnregisterRemoteControllerCmd)
+	audiomanagerAudioManagerGetDirectPlaybackSupportCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerGetDirectPlaybackSupportCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetDirectPlaybackSupportCmd)
+	audiomanagerAudioManagerGetPlaybackOffloadSupportCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerGetPlaybackOffloadSupportCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerGetPlaybackOffloadSupportCmd)
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerIsHapticPlaybackSupportedCmd)
+	audiomanagerAudioManagerIsOffloadedPlaybackSupportedCmd.Flags().Int64("arg0", 0, "arg0 (int64)")
+	audiomanagerAudioManagerIsOffloadedPlaybackSupportedCmd.Flags().Int64("arg1", 0, "arg1 (int64)")
+	audiomanagerAudioManagerCmd.AddCommand(audiomanagerAudioManagerIsOffloadedPlaybackSupportedCmd)
+	audiomanagerCmd.AddCommand(audiomanagerAudioManagerCmd)
 	rootCmd.AddCommand(audiomanagerCmd)
 }

@@ -6,6 +6,19 @@ package projection;
 
 option go_package = "github.com/xaionaro-go/jni/proto/projection";
 
+message StopRequest {
+}
+
+message StopResponse {
+}
+
+message UnregisterCallbackRequest {
+  int64 arg0 = 1;
+}
+
+message UnregisterCallbackResponse {
+}
+
 message CreateScreenCaptureIntent0Request {
 }
 
@@ -30,8 +43,73 @@ message GetMediaProjectionResponse {
   int64 result = 1;
 }
 
+message GetDisplayRequest {
+}
+
+message GetDisplayResponse {
+  int64 result = 1;
+}
+
+message GetSurfaceRequest {
+}
+
+message GetSurfaceResponse {
+  int64 result = 1;
+}
+
+message ReleaseRequest {
+}
+
+message ReleaseResponse {
+}
+
+message ResizeRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+  int32 arg2 = 3;
+}
+
+message ResizeResponse {
+}
+
+message SetRotationRequest {
+  int32 arg0 = 1;
+}
+
+message SetRotationResponse {
+}
+
+message SetSurfaceRequest {
+  int64 arg0 = 1;
+}
+
+message SetSurfaceResponse {
+}
+
+message ToStringRequest {
+}
+
+message ToStringResponse {
+  string result = 1;
+}
+
+service MediaProjectionService {
+  rpc Stop (StopRequest) returns (StopResponse);
+  rpc UnregisterCallback (UnregisterCallbackRequest) returns (UnregisterCallbackResponse);
+}
+
 service MediaProjectionManagerService {
   rpc CreateScreenCaptureIntent0 (CreateScreenCaptureIntent0Request) returns (CreateScreenCaptureIntent0Response);
   rpc CreateScreenCaptureIntent1_1 (CreateScreenCaptureIntent1_1Request) returns (CreateScreenCaptureIntent1_1Response);
   rpc GetMediaProjection (GetMediaProjectionRequest) returns (GetMediaProjectionResponse);
+}
+
+service VirtualDisplayService {
+  rpc GetDisplay (GetDisplayRequest) returns (GetDisplayResponse);
+  rpc GetSurface (GetSurfaceRequest) returns (GetSurfaceResponse);
+  rpc Release (ReleaseRequest) returns (ReleaseResponse);
+  rpc Resize (ResizeRequest) returns (ResizeResponse);
+  rpc SetRotation (SetRotationRequest) returns (SetRotationResponse);
+  rpc SetSurface (SetSurfaceRequest) returns (SetSurfaceResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
 }

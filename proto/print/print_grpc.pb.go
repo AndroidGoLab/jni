@@ -21,6 +21,704 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	PrintManagerService_GetPrintJobs_FullMethodName          = "/print.PrintManagerService/GetPrintJobs"
+	PrintManagerService_IsPrintServiceEnabled_FullMethodName = "/print.PrintManagerService/IsPrintServiceEnabled"
+	PrintManagerService_Print_FullMethodName                 = "/print.PrintManagerService/Print"
+)
+
+// PrintManagerServiceClient is the client API for PrintManagerService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type PrintManagerServiceClient interface {
+	GetPrintJobs(ctx context.Context, in *GetPrintJobsRequest, opts ...grpc.CallOption) (*GetPrintJobsResponse, error)
+	IsPrintServiceEnabled(ctx context.Context, in *IsPrintServiceEnabledRequest, opts ...grpc.CallOption) (*IsPrintServiceEnabledResponse, error)
+	Print(ctx context.Context, in *PrintRequest, opts ...grpc.CallOption) (*PrintResponse, error)
+}
+
+type printManagerServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPrintManagerServiceClient(cc grpc.ClientConnInterface) PrintManagerServiceClient {
+	return &printManagerServiceClient{cc}
+}
+
+func (c *printManagerServiceClient) GetPrintJobs(ctx context.Context, in *GetPrintJobsRequest, opts ...grpc.CallOption) (*GetPrintJobsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPrintJobsResponse)
+	err := c.cc.Invoke(ctx, PrintManagerService_GetPrintJobs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *printManagerServiceClient) IsPrintServiceEnabled(ctx context.Context, in *IsPrintServiceEnabledRequest, opts ...grpc.CallOption) (*IsPrintServiceEnabledResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsPrintServiceEnabledResponse)
+	err := c.cc.Invoke(ctx, PrintManagerService_IsPrintServiceEnabled_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *printManagerServiceClient) Print(ctx context.Context, in *PrintRequest, opts ...grpc.CallOption) (*PrintResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PrintResponse)
+	err := c.cc.Invoke(ctx, PrintManagerService_Print_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PrintManagerServiceServer is the server API for PrintManagerService service.
+// All implementations must embed UnimplementedPrintManagerServiceServer
+// for forward compatibility.
+type PrintManagerServiceServer interface {
+	GetPrintJobs(context.Context, *GetPrintJobsRequest) (*GetPrintJobsResponse, error)
+	IsPrintServiceEnabled(context.Context, *IsPrintServiceEnabledRequest) (*IsPrintServiceEnabledResponse, error)
+	Print(context.Context, *PrintRequest) (*PrintResponse, error)
+	mustEmbedUnimplementedPrintManagerServiceServer()
+}
+
+// UnimplementedPrintManagerServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedPrintManagerServiceServer struct{}
+
+func (UnimplementedPrintManagerServiceServer) GetPrintJobs(context.Context, *GetPrintJobsRequest) (*GetPrintJobsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPrintJobs not implemented")
+}
+func (UnimplementedPrintManagerServiceServer) IsPrintServiceEnabled(context.Context, *IsPrintServiceEnabledRequest) (*IsPrintServiceEnabledResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsPrintServiceEnabled not implemented")
+}
+func (UnimplementedPrintManagerServiceServer) Print(context.Context, *PrintRequest) (*PrintResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Print not implemented")
+}
+func (UnimplementedPrintManagerServiceServer) mustEmbedUnimplementedPrintManagerServiceServer() {}
+func (UnimplementedPrintManagerServiceServer) testEmbeddedByValue()                             {}
+
+// UnsafePrintManagerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PrintManagerServiceServer will
+// result in compilation errors.
+type UnsafePrintManagerServiceServer interface {
+	mustEmbedUnimplementedPrintManagerServiceServer()
+}
+
+func RegisterPrintManagerServiceServer(s grpc.ServiceRegistrar, srv PrintManagerServiceServer) {
+	// If the following call panics, it indicates UnimplementedPrintManagerServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&PrintManagerService_ServiceDesc, srv)
+}
+
+func _PrintManagerService_GetPrintJobs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPrintJobsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrintManagerServiceServer).GetPrintJobs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrintManagerService_GetPrintJobs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrintManagerServiceServer).GetPrintJobs(ctx, req.(*GetPrintJobsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrintManagerService_IsPrintServiceEnabled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsPrintServiceEnabledRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrintManagerServiceServer).IsPrintServiceEnabled(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrintManagerService_IsPrintServiceEnabled_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrintManagerServiceServer).IsPrintServiceEnabled(ctx, req.(*IsPrintServiceEnabledRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrintManagerService_Print_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PrintRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrintManagerServiceServer).Print(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrintManagerService_Print_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrintManagerServiceServer).Print(ctx, req.(*PrintRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// PrintManagerService_ServiceDesc is the grpc.ServiceDesc for PrintManagerService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var PrintManagerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "print.PrintManagerService",
+	HandlerType: (*PrintManagerServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetPrintJobs",
+			Handler:    _PrintManagerService_GetPrintJobs_Handler,
+		},
+		{
+			MethodName: "IsPrintServiceEnabled",
+			Handler:    _PrintManagerService_IsPrintServiceEnabled_Handler,
+		},
+		{
+			MethodName: "Print",
+			Handler:    _PrintManagerService_Print_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/print/print.proto",
+}
+
+const (
+	PrintJobService_Cancel_FullMethodName      = "/print.PrintJobService/Cancel"
+	PrintJobService_Equals_FullMethodName      = "/print.PrintJobService/Equals"
+	PrintJobService_GetId_FullMethodName       = "/print.PrintJobService/GetId"
+	PrintJobService_GetInfo_FullMethodName     = "/print.PrintJobService/GetInfo"
+	PrintJobService_HashCode_FullMethodName    = "/print.PrintJobService/HashCode"
+	PrintJobService_IsBlocked_FullMethodName   = "/print.PrintJobService/IsBlocked"
+	PrintJobService_IsCancelled_FullMethodName = "/print.PrintJobService/IsCancelled"
+	PrintJobService_IsCompleted_FullMethodName = "/print.PrintJobService/IsCompleted"
+	PrintJobService_IsFailed_FullMethodName    = "/print.PrintJobService/IsFailed"
+	PrintJobService_IsQueued_FullMethodName    = "/print.PrintJobService/IsQueued"
+	PrintJobService_IsStarted_FullMethodName   = "/print.PrintJobService/IsStarted"
+	PrintJobService_Restart_FullMethodName     = "/print.PrintJobService/Restart"
+)
+
+// PrintJobServiceClient is the client API for PrintJobService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type PrintJobServiceClient interface {
+	Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*CancelResponse, error)
+	Equals(ctx context.Context, in *EqualsRequest, opts ...grpc.CallOption) (*EqualsResponse, error)
+	GetId(ctx context.Context, in *GetIdRequest, opts ...grpc.CallOption) (*GetIdResponse, error)
+	GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error)
+	HashCode(ctx context.Context, in *HashCodeRequest, opts ...grpc.CallOption) (*HashCodeResponse, error)
+	IsBlocked(ctx context.Context, in *IsBlockedRequest, opts ...grpc.CallOption) (*IsBlockedResponse, error)
+	IsCancelled(ctx context.Context, in *IsCancelledRequest, opts ...grpc.CallOption) (*IsCancelledResponse, error)
+	IsCompleted(ctx context.Context, in *IsCompletedRequest, opts ...grpc.CallOption) (*IsCompletedResponse, error)
+	IsFailed(ctx context.Context, in *IsFailedRequest, opts ...grpc.CallOption) (*IsFailedResponse, error)
+	IsQueued(ctx context.Context, in *IsQueuedRequest, opts ...grpc.CallOption) (*IsQueuedResponse, error)
+	IsStarted(ctx context.Context, in *IsStartedRequest, opts ...grpc.CallOption) (*IsStartedResponse, error)
+	Restart(ctx context.Context, in *RestartRequest, opts ...grpc.CallOption) (*RestartResponse, error)
+}
+
+type printJobServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPrintJobServiceClient(cc grpc.ClientConnInterface) PrintJobServiceClient {
+	return &printJobServiceClient{cc}
+}
+
+func (c *printJobServiceClient) Cancel(ctx context.Context, in *CancelRequest, opts ...grpc.CallOption) (*CancelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CancelResponse)
+	err := c.cc.Invoke(ctx, PrintJobService_Cancel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *printJobServiceClient) Equals(ctx context.Context, in *EqualsRequest, opts ...grpc.CallOption) (*EqualsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EqualsResponse)
+	err := c.cc.Invoke(ctx, PrintJobService_Equals_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *printJobServiceClient) GetId(ctx context.Context, in *GetIdRequest, opts ...grpc.CallOption) (*GetIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetIdResponse)
+	err := c.cc.Invoke(ctx, PrintJobService_GetId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *printJobServiceClient) GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetInfoResponse)
+	err := c.cc.Invoke(ctx, PrintJobService_GetInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *printJobServiceClient) HashCode(ctx context.Context, in *HashCodeRequest, opts ...grpc.CallOption) (*HashCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HashCodeResponse)
+	err := c.cc.Invoke(ctx, PrintJobService_HashCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *printJobServiceClient) IsBlocked(ctx context.Context, in *IsBlockedRequest, opts ...grpc.CallOption) (*IsBlockedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsBlockedResponse)
+	err := c.cc.Invoke(ctx, PrintJobService_IsBlocked_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *printJobServiceClient) IsCancelled(ctx context.Context, in *IsCancelledRequest, opts ...grpc.CallOption) (*IsCancelledResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsCancelledResponse)
+	err := c.cc.Invoke(ctx, PrintJobService_IsCancelled_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *printJobServiceClient) IsCompleted(ctx context.Context, in *IsCompletedRequest, opts ...grpc.CallOption) (*IsCompletedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsCompletedResponse)
+	err := c.cc.Invoke(ctx, PrintJobService_IsCompleted_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *printJobServiceClient) IsFailed(ctx context.Context, in *IsFailedRequest, opts ...grpc.CallOption) (*IsFailedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsFailedResponse)
+	err := c.cc.Invoke(ctx, PrintJobService_IsFailed_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *printJobServiceClient) IsQueued(ctx context.Context, in *IsQueuedRequest, opts ...grpc.CallOption) (*IsQueuedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsQueuedResponse)
+	err := c.cc.Invoke(ctx, PrintJobService_IsQueued_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *printJobServiceClient) IsStarted(ctx context.Context, in *IsStartedRequest, opts ...grpc.CallOption) (*IsStartedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsStartedResponse)
+	err := c.cc.Invoke(ctx, PrintJobService_IsStarted_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *printJobServiceClient) Restart(ctx context.Context, in *RestartRequest, opts ...grpc.CallOption) (*RestartResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RestartResponse)
+	err := c.cc.Invoke(ctx, PrintJobService_Restart_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PrintJobServiceServer is the server API for PrintJobService service.
+// All implementations must embed UnimplementedPrintJobServiceServer
+// for forward compatibility.
+type PrintJobServiceServer interface {
+	Cancel(context.Context, *CancelRequest) (*CancelResponse, error)
+	Equals(context.Context, *EqualsRequest) (*EqualsResponse, error)
+	GetId(context.Context, *GetIdRequest) (*GetIdResponse, error)
+	GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error)
+	HashCode(context.Context, *HashCodeRequest) (*HashCodeResponse, error)
+	IsBlocked(context.Context, *IsBlockedRequest) (*IsBlockedResponse, error)
+	IsCancelled(context.Context, *IsCancelledRequest) (*IsCancelledResponse, error)
+	IsCompleted(context.Context, *IsCompletedRequest) (*IsCompletedResponse, error)
+	IsFailed(context.Context, *IsFailedRequest) (*IsFailedResponse, error)
+	IsQueued(context.Context, *IsQueuedRequest) (*IsQueuedResponse, error)
+	IsStarted(context.Context, *IsStartedRequest) (*IsStartedResponse, error)
+	Restart(context.Context, *RestartRequest) (*RestartResponse, error)
+	mustEmbedUnimplementedPrintJobServiceServer()
+}
+
+// UnimplementedPrintJobServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedPrintJobServiceServer struct{}
+
+func (UnimplementedPrintJobServiceServer) Cancel(context.Context, *CancelRequest) (*CancelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Cancel not implemented")
+}
+func (UnimplementedPrintJobServiceServer) Equals(context.Context, *EqualsRequest) (*EqualsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Equals not implemented")
+}
+func (UnimplementedPrintJobServiceServer) GetId(context.Context, *GetIdRequest) (*GetIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetId not implemented")
+}
+func (UnimplementedPrintJobServiceServer) GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetInfo not implemented")
+}
+func (UnimplementedPrintJobServiceServer) HashCode(context.Context, *HashCodeRequest) (*HashCodeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method HashCode not implemented")
+}
+func (UnimplementedPrintJobServiceServer) IsBlocked(context.Context, *IsBlockedRequest) (*IsBlockedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsBlocked not implemented")
+}
+func (UnimplementedPrintJobServiceServer) IsCancelled(context.Context, *IsCancelledRequest) (*IsCancelledResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsCancelled not implemented")
+}
+func (UnimplementedPrintJobServiceServer) IsCompleted(context.Context, *IsCompletedRequest) (*IsCompletedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsCompleted not implemented")
+}
+func (UnimplementedPrintJobServiceServer) IsFailed(context.Context, *IsFailedRequest) (*IsFailedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsFailed not implemented")
+}
+func (UnimplementedPrintJobServiceServer) IsQueued(context.Context, *IsQueuedRequest) (*IsQueuedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsQueued not implemented")
+}
+func (UnimplementedPrintJobServiceServer) IsStarted(context.Context, *IsStartedRequest) (*IsStartedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsStarted not implemented")
+}
+func (UnimplementedPrintJobServiceServer) Restart(context.Context, *RestartRequest) (*RestartResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Restart not implemented")
+}
+func (UnimplementedPrintJobServiceServer) mustEmbedUnimplementedPrintJobServiceServer() {}
+func (UnimplementedPrintJobServiceServer) testEmbeddedByValue()                         {}
+
+// UnsafePrintJobServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PrintJobServiceServer will
+// result in compilation errors.
+type UnsafePrintJobServiceServer interface {
+	mustEmbedUnimplementedPrintJobServiceServer()
+}
+
+func RegisterPrintJobServiceServer(s grpc.ServiceRegistrar, srv PrintJobServiceServer) {
+	// If the following call panics, it indicates UnimplementedPrintJobServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&PrintJobService_ServiceDesc, srv)
+}
+
+func _PrintJobService_Cancel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrintJobServiceServer).Cancel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrintJobService_Cancel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrintJobServiceServer).Cancel(ctx, req.(*CancelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrintJobService_Equals_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EqualsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrintJobServiceServer).Equals(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrintJobService_Equals_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrintJobServiceServer).Equals(ctx, req.(*EqualsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrintJobService_GetId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrintJobServiceServer).GetId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrintJobService_GetId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrintJobServiceServer).GetId(ctx, req.(*GetIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrintJobService_GetInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrintJobServiceServer).GetInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrintJobService_GetInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrintJobServiceServer).GetInfo(ctx, req.(*GetInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrintJobService_HashCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HashCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrintJobServiceServer).HashCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrintJobService_HashCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrintJobServiceServer).HashCode(ctx, req.(*HashCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrintJobService_IsBlocked_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsBlockedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrintJobServiceServer).IsBlocked(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrintJobService_IsBlocked_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrintJobServiceServer).IsBlocked(ctx, req.(*IsBlockedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrintJobService_IsCancelled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsCancelledRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrintJobServiceServer).IsCancelled(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrintJobService_IsCancelled_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrintJobServiceServer).IsCancelled(ctx, req.(*IsCancelledRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrintJobService_IsCompleted_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsCompletedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrintJobServiceServer).IsCompleted(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrintJobService_IsCompleted_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrintJobServiceServer).IsCompleted(ctx, req.(*IsCompletedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrintJobService_IsFailed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsFailedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrintJobServiceServer).IsFailed(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrintJobService_IsFailed_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrintJobServiceServer).IsFailed(ctx, req.(*IsFailedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrintJobService_IsQueued_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsQueuedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrintJobServiceServer).IsQueued(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrintJobService_IsQueued_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrintJobServiceServer).IsQueued(ctx, req.(*IsQueuedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrintJobService_IsStarted_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsStartedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrintJobServiceServer).IsStarted(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrintJobService_IsStarted_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrintJobServiceServer).IsStarted(ctx, req.(*IsStartedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PrintJobService_Restart_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestartRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrintJobServiceServer).Restart(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrintJobService_Restart_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrintJobServiceServer).Restart(ctx, req.(*RestartRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// PrintJobService_ServiceDesc is the grpc.ServiceDesc for PrintJobService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var PrintJobService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "print.PrintJobService",
+	HandlerType: (*PrintJobServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Cancel",
+			Handler:    _PrintJobService_Cancel_Handler,
+		},
+		{
+			MethodName: "Equals",
+			Handler:    _PrintJobService_Equals_Handler,
+		},
+		{
+			MethodName: "GetId",
+			Handler:    _PrintJobService_GetId_Handler,
+		},
+		{
+			MethodName: "GetInfo",
+			Handler:    _PrintJobService_GetInfo_Handler,
+		},
+		{
+			MethodName: "HashCode",
+			Handler:    _PrintJobService_HashCode_Handler,
+		},
+		{
+			MethodName: "IsBlocked",
+			Handler:    _PrintJobService_IsBlocked_Handler,
+		},
+		{
+			MethodName: "IsCancelled",
+			Handler:    _PrintJobService_IsCancelled_Handler,
+		},
+		{
+			MethodName: "IsCompleted",
+			Handler:    _PrintJobService_IsCompleted_Handler,
+		},
+		{
+			MethodName: "IsFailed",
+			Handler:    _PrintJobService_IsFailed_Handler,
+		},
+		{
+			MethodName: "IsQueued",
+			Handler:    _PrintJobService_IsQueued_Handler,
+		},
+		{
+			MethodName: "IsStarted",
+			Handler:    _PrintJobService_IsStarted_Handler,
+		},
+		{
+			MethodName: "Restart",
+			Handler:    _PrintJobService_Restart_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/print/print.proto",
+}
+
+const (
 	PrintJobInfoService_DescribeContents_FullMethodName        = "/print.PrintJobInfoService/DescribeContents"
 	PrintJobInfoService_GetAdvancedIntOption_FullMethodName    = "/print.PrintJobInfoService/GetAdvancedIntOption"
 	PrintJobInfoService_GetAdvancedStringOption_FullMethodName = "/print.PrintJobInfoService/GetAdvancedStringOption"

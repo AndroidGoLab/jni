@@ -6,6 +6,248 @@ package wifi;
 
 option go_package = "github.com/xaionaro-go/jni/proto/wifi";
 
+message DescribeContentsRequest {
+}
+
+message DescribeContentsResponse {
+  int32 result = 1;
+}
+
+message EqualsRequest {
+  int64 arg0 = 1;
+}
+
+message EqualsResponse {
+  bool result = 1;
+}
+
+message GetAffiliatedMloLinksRequest {
+}
+
+message GetAffiliatedMloLinksResponse {
+  int64 result = 1;
+}
+
+message GetApMldMacAddressRequest {
+}
+
+message GetApMldMacAddressResponse {
+  int64 result = 1;
+}
+
+message GetApMloLinkIdRequest {
+}
+
+message GetApMloLinkIdResponse {
+  int32 result = 1;
+}
+
+message GetApplicableRedactionsRequest {
+}
+
+message GetApplicableRedactionsResponse {
+  int64 result = 1;
+}
+
+message GetAssociatedMloLinksRequest {
+}
+
+message GetAssociatedMloLinksResponse {
+  int64 result = 1;
+}
+
+message GetBSSIDRequest {
+}
+
+message GetBSSIDResponse {
+  string result = 1;
+}
+
+message GetCurrentSecurityTypeRequest {
+}
+
+message GetCurrentSecurityTypeResponse {
+  int32 result = 1;
+}
+
+message GetFrequencyRequest {
+}
+
+message GetFrequencyResponse {
+  int32 result = 1;
+}
+
+message GetHiddenSSIDRequest {
+}
+
+message GetHiddenSSIDResponse {
+  bool result = 1;
+}
+
+message GetInformationElementsRequest {
+}
+
+message GetInformationElementsResponse {
+  int64 result = 1;
+}
+
+message GetIpAddressRequest {
+}
+
+message GetIpAddressResponse {
+  int32 result = 1;
+}
+
+message GetLinkSpeedRequest {
+}
+
+message GetLinkSpeedResponse {
+  int32 result = 1;
+}
+
+message GetMacAddressRequest {
+}
+
+message GetMacAddressResponse {
+  string result = 1;
+}
+
+message GetMaxSupportedRxLinkSpeedMbpsRequest {
+}
+
+message GetMaxSupportedRxLinkSpeedMbpsResponse {
+  int32 result = 1;
+}
+
+message GetMaxSupportedTxLinkSpeedMbpsRequest {
+}
+
+message GetMaxSupportedTxLinkSpeedMbpsResponse {
+  int32 result = 1;
+}
+
+message GetNetworkIdRequest {
+}
+
+message GetNetworkIdResponse {
+  int32 result = 1;
+}
+
+message GetPasspointFqdnRequest {
+}
+
+message GetPasspointFqdnResponse {
+  string result = 1;
+}
+
+message GetPasspointProviderFriendlyNameRequest {
+}
+
+message GetPasspointProviderFriendlyNameResponse {
+  string result = 1;
+}
+
+message GetPasspointUniqueIdRequest {
+}
+
+message GetPasspointUniqueIdResponse {
+  string result = 1;
+}
+
+message GetRssiRequest {
+}
+
+message GetRssiResponse {
+  int32 result = 1;
+}
+
+message GetRxLinkSpeedMbpsRequest {
+}
+
+message GetRxLinkSpeedMbpsResponse {
+  int32 result = 1;
+}
+
+message GetSSIDRequest {
+}
+
+message GetSSIDResponse {
+  string result = 1;
+}
+
+message GetSubscriptionIdRequest {
+}
+
+message GetSubscriptionIdResponse {
+  int32 result = 1;
+}
+
+message GetSupplicantStateRequest {
+}
+
+message GetSupplicantStateResponse {
+  int64 result = 1;
+}
+
+message GetTxLinkSpeedMbpsRequest {
+}
+
+message GetTxLinkSpeedMbpsResponse {
+  int32 result = 1;
+}
+
+message GetWifiStandardRequest {
+}
+
+message GetWifiStandardResponse {
+  int32 result = 1;
+}
+
+message HashCodeRequest {
+}
+
+message HashCodeResponse {
+  int32 result = 1;
+}
+
+message IsRestrictedRequest {
+}
+
+message IsRestrictedResponse {
+  bool result = 1;
+}
+
+message MakeCopyRequest {
+  int64 arg0 = 1;
+}
+
+message MakeCopyResponse {
+  int64 result = 1;
+}
+
+message ToStringRequest {
+}
+
+message ToStringResponse {
+  string result = 1;
+}
+
+message WriteToParcelRequest {
+  int64 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message WriteToParcelResponse {
+}
+
+message GetDetailedStateOfRequest {
+  int64 arg0 = 1;
+}
+
+message GetDetailedStateOfResponse {
+  int64 result = 1;
+}
+
 message AddLocalOnlyConnectionFailureListenerRequest {
   int64 arg0 = 1;
   int64 arg1 = 2;
@@ -874,6 +1116,116 @@ message CompareSignalLevelResponse {
   int32 result = 1;
 }
 
+message GetSecurityTypesRequest {
+}
+
+message GetSecurityTypesResponse {
+  int64 result = 1;
+}
+
+message GetWifiSsidRequest {
+}
+
+message GetWifiSsidResponse {
+  int64 result = 1;
+}
+
+message Is80211azNtbResponderRequest {
+}
+
+message Is80211azNtbResponderResponse {
+  bool result = 1;
+}
+
+message Is80211mcResponderRequest {
+}
+
+message Is80211mcResponderResponse {
+  bool result = 1;
+}
+
+message IsPasspointNetworkRequest {
+}
+
+message IsPasspointNetworkResponse {
+  bool result = 1;
+}
+
+message IsRangingFrameProtectionRequiredRequest {
+}
+
+message IsRangingFrameProtectionRequiredResponse {
+  bool result = 1;
+}
+
+message IsSecureHeLtfSupportedRequest {
+}
+
+message IsSecureHeLtfSupportedResponse {
+  bool result = 1;
+}
+
+message IsTwtResponderRequest {
+}
+
+message IsTwtResponderResponse {
+  bool result = 1;
+}
+
+message ConvertChannelToFrequencyMhzIfSupportedRequest {
+  int32 arg0 = 1;
+  int32 arg1 = 2;
+}
+
+message ConvertChannelToFrequencyMhzIfSupportedResponse {
+  int32 result = 1;
+}
+
+message ConvertFrequencyMhzToChannelIfSupportedRequest {
+  int32 arg0 = 1;
+}
+
+message ConvertFrequencyMhzToChannelIfSupportedResponse {
+  int32 result = 1;
+}
+
+service WifiInfoService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc Equals (EqualsRequest) returns (EqualsResponse);
+  rpc GetAffiliatedMloLinks (GetAffiliatedMloLinksRequest) returns (GetAffiliatedMloLinksResponse);
+  rpc GetApMldMacAddress (GetApMldMacAddressRequest) returns (GetApMldMacAddressResponse);
+  rpc GetApMloLinkId (GetApMloLinkIdRequest) returns (GetApMloLinkIdResponse);
+  rpc GetApplicableRedactions (GetApplicableRedactionsRequest) returns (GetApplicableRedactionsResponse);
+  rpc GetAssociatedMloLinks (GetAssociatedMloLinksRequest) returns (GetAssociatedMloLinksResponse);
+  rpc GetBSSID (GetBSSIDRequest) returns (GetBSSIDResponse);
+  rpc GetCurrentSecurityType (GetCurrentSecurityTypeRequest) returns (GetCurrentSecurityTypeResponse);
+  rpc GetFrequency (GetFrequencyRequest) returns (GetFrequencyResponse);
+  rpc GetHiddenSSID (GetHiddenSSIDRequest) returns (GetHiddenSSIDResponse);
+  rpc GetInformationElements (GetInformationElementsRequest) returns (GetInformationElementsResponse);
+  rpc GetIpAddress (GetIpAddressRequest) returns (GetIpAddressResponse);
+  rpc GetLinkSpeed (GetLinkSpeedRequest) returns (GetLinkSpeedResponse);
+  rpc GetMacAddress (GetMacAddressRequest) returns (GetMacAddressResponse);
+  rpc GetMaxSupportedRxLinkSpeedMbps (GetMaxSupportedRxLinkSpeedMbpsRequest) returns (GetMaxSupportedRxLinkSpeedMbpsResponse);
+  rpc GetMaxSupportedTxLinkSpeedMbps (GetMaxSupportedTxLinkSpeedMbpsRequest) returns (GetMaxSupportedTxLinkSpeedMbpsResponse);
+  rpc GetNetworkId (GetNetworkIdRequest) returns (GetNetworkIdResponse);
+  rpc GetPasspointFqdn (GetPasspointFqdnRequest) returns (GetPasspointFqdnResponse);
+  rpc GetPasspointProviderFriendlyName (GetPasspointProviderFriendlyNameRequest) returns (GetPasspointProviderFriendlyNameResponse);
+  rpc GetPasspointUniqueId (GetPasspointUniqueIdRequest) returns (GetPasspointUniqueIdResponse);
+  rpc GetRssi (GetRssiRequest) returns (GetRssiResponse);
+  rpc GetRxLinkSpeedMbps (GetRxLinkSpeedMbpsRequest) returns (GetRxLinkSpeedMbpsResponse);
+  rpc GetSSID (GetSSIDRequest) returns (GetSSIDResponse);
+  rpc GetSubscriptionId (GetSubscriptionIdRequest) returns (GetSubscriptionIdResponse);
+  rpc GetSupplicantState (GetSupplicantStateRequest) returns (GetSupplicantStateResponse);
+  rpc GetTxLinkSpeedMbps (GetTxLinkSpeedMbpsRequest) returns (GetTxLinkSpeedMbpsResponse);
+  rpc GetWifiStandard (GetWifiStandardRequest) returns (GetWifiStandardResponse);
+  rpc HashCode (HashCodeRequest) returns (HashCodeResponse);
+  rpc IsRestricted (IsRestrictedRequest) returns (IsRestrictedResponse);
+  rpc MakeCopy (MakeCopyRequest) returns (MakeCopyResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+  rpc GetDetailedStateOf (GetDetailedStateOfRequest) returns (GetDetailedStateOfResponse);
+}
+
 service WifiManagerService {
   rpc AddLocalOnlyConnectionFailureListener (AddLocalOnlyConnectionFailureListenerRequest) returns (AddLocalOnlyConnectionFailureListenerResponse);
   rpc AddNetwork (AddNetworkRequest) returns (AddNetworkResponse);
@@ -991,4 +1343,25 @@ service WifiManagerService {
   rpc ValidateSoftApConfiguration (ValidateSoftApConfigurationRequest) returns (ValidateSoftApConfigurationResponse);
   rpc CalculateSignalLevel2_1 (CalculateSignalLevel2_1Request) returns (CalculateSignalLevel2_1Response);
   rpc CompareSignalLevel (CompareSignalLevelRequest) returns (CompareSignalLevelResponse);
+}
+
+service ScanResultService {
+  rpc DescribeContents (DescribeContentsRequest) returns (DescribeContentsResponse);
+  rpc GetAffiliatedMloLinks (GetAffiliatedMloLinksRequest) returns (GetAffiliatedMloLinksResponse);
+  rpc GetApMldMacAddress (GetApMldMacAddressRequest) returns (GetApMldMacAddressResponse);
+  rpc GetApMloLinkId (GetApMloLinkIdRequest) returns (GetApMloLinkIdResponse);
+  rpc GetInformationElements (GetInformationElementsRequest) returns (GetInformationElementsResponse);
+  rpc GetSecurityTypes (GetSecurityTypesRequest) returns (GetSecurityTypesResponse);
+  rpc GetWifiSsid (GetWifiSsidRequest) returns (GetWifiSsidResponse);
+  rpc GetWifiStandard (GetWifiStandardRequest) returns (GetWifiStandardResponse);
+  rpc Is80211azNtbResponder (Is80211azNtbResponderRequest) returns (Is80211azNtbResponderResponse);
+  rpc Is80211mcResponder (Is80211mcResponderRequest) returns (Is80211mcResponderResponse);
+  rpc IsPasspointNetwork (IsPasspointNetworkRequest) returns (IsPasspointNetworkResponse);
+  rpc IsRangingFrameProtectionRequired (IsRangingFrameProtectionRequiredRequest) returns (IsRangingFrameProtectionRequiredResponse);
+  rpc IsSecureHeLtfSupported (IsSecureHeLtfSupportedRequest) returns (IsSecureHeLtfSupportedResponse);
+  rpc IsTwtResponder (IsTwtResponderRequest) returns (IsTwtResponderResponse);
+  rpc ToString (ToStringRequest) returns (ToStringResponse);
+  rpc WriteToParcel (WriteToParcelRequest) returns (WriteToParcelResponse);
+  rpc ConvertChannelToFrequencyMhzIfSupported (ConvertChannelToFrequencyMhzIfSupportedRequest) returns (ConvertChannelToFrequencyMhzIfSupportedResponse);
+  rpc ConvertFrequencyMhzToChannelIfSupported (ConvertFrequencyMhzToChannelIfSupportedRequest) returns (ConvertFrequencyMhzToChannelIfSupportedResponse);
 }

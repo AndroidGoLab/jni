@@ -3,6 +3,16 @@
 package le
 
 const (
+	Creator                    = 0
+	DataComplete               = 0
+	DataTruncated              = 0
+	PeriodicIntervalNotPresent = 0
+	PhyUnused                  = 0
+	SidNotPresent              = 0
+	TxPowerNotPresent          = 0
+)
+
+const (
 	ExtraCallbackType   = ""
 	ExtraErrorCode      = ""
 	ExtraListScanResult = ""

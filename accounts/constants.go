@@ -3,6 +3,23 @@
 package accounts
 
 const (
+	Creator                         = 0
+	ErrorCodeBadArguments           = 0
+	ErrorCodeBadAuthentication      = 0
+	ErrorCodeBadRequest             = 0
+	ErrorCodeCanceled               = 0
+	ErrorCodeInvalidResponse        = 0
+	ErrorCodeNetworkError           = 0
+	ErrorCodeRemoteException        = 0
+	ErrorCodeUnsupportedOperation   = 0
+	VisibilityNotVisible            = 0
+	VisibilityUndefined             = 0
+	VisibilityUserManagedNotVisible = 0
+	VisibilityUserManagedVisible    = 0
+	VisibilityVisible               = 0
+)
+
+const (
 	ActionAccountRemoved            = ""
 	ActionAuthenticatorIntent       = ""
 	AuthenticatorAttributesName     = ""
@@ -31,20 +48,4 @@ const (
 	LoginAccountsChangedAction      = ""
 	PackageNameKeyLegacyNotVisible  = ""
 	PackageNameKeyLegacyVisible     = ""
-)
-
-const (
-	ErrorCodeBadArguments           = 0
-	ErrorCodeBadAuthentication      = 0
-	ErrorCodeBadRequest             = 0
-	ErrorCodeCanceled               = 0
-	ErrorCodeInvalidResponse        = 0
-	ErrorCodeNetworkError           = 0
-	ErrorCodeRemoteException        = 0
-	ErrorCodeUnsupportedOperation   = 0
-	VisibilityNotVisible            = 0
-	VisibilityUndefined             = 0
-	VisibilityUserManagedNotVisible = 0
-	VisibilityUserManagedVisible    = 0
-	VisibilityVisible               = 0
 )

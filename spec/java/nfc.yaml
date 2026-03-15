@@ -1,6 +1,49 @@
 package: nfc
 go_import: github.com/xaionaro-go/jni/nfc
 classes:
+    - java_class: android.nfc.NdefMessage
+      go_type: ndefMessage
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getByteArrayLength
+          go_name: GetByteArrayLength
+          returns: int
+          error: true
+        - java_method: getRecords
+          go_name: GetRecords
+          returns: android.nfc.NdefRecord[]
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toByteArray
+          go_name: ToByteArray
+          returns: '[B'
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.nfc.tech.IsoDep
       go_type: isoDep
       methods:
@@ -62,3 +105,499 @@ classes:
               go_name: arg0
           returns: android.nfc.tech.IsoDep
           error: true
+    - java_class: android.nfc.NfcAdapter
+      go_type: nfcAdapter
+      methods:
+        - java_method: disable
+          go_name: Disable
+          returns: boolean
+          error: true
+        - java_method: disableForegroundDispatch
+          go_name: DisableForegroundDispatch
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: disableReaderMode
+          go_name: DisableReaderMode
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: enable
+          go_name: Enable
+          returns: boolean
+          error: true
+        - java_method: enableForegroundDispatch
+          go_name: EnableForegroundDispatch
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+            - java_type: android.app.PendingIntent
+              go_name: arg1
+            - java_type: android.content.IntentFilter[]
+              go_name: arg2
+            - java_type: java.lang.String[][]
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: enableReaderMode
+          go_name: EnableReaderMode
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+            - java_type: android.nfc.NfcAdapter$ReaderCallback
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: android.os.Bundle
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: getNfcAntennaInfo
+          go_name: GetNfcAntennaInfo
+          returns: android.nfc.NfcAntennaInfo
+          error: true
+        - java_method: isEnabled
+          go_name: IsEnabled
+          returns: boolean
+          error: true
+        - java_method: isObserveModeEnabled
+          go_name: IsObserveModeEnabled
+          returns: boolean
+          error: true
+        - java_method: isObserveModeSupported
+          go_name: IsObserveModeSupported
+          returns: boolean
+          error: true
+        - java_method: isReaderOptionEnabled
+          go_name: IsReaderOptionEnabled
+          returns: boolean
+          error: true
+        - java_method: isReaderOptionSupported
+          go_name: IsReaderOptionSupported
+          returns: boolean
+          error: true
+        - java_method: isSecureNfcEnabled
+          go_name: IsSecureNfcEnabled
+          returns: boolean
+          error: true
+        - java_method: isSecureNfcSupported
+          go_name: IsSecureNfcSupported
+          returns: boolean
+          error: true
+        - java_method: isTagIntentAllowed
+          go_name: IsTagIntentAllowed
+          returns: boolean
+          error: true
+        - java_method: isTagIntentAppPreferenceSupported
+          go_name: IsTagIntentAppPreferenceSupported
+          returns: boolean
+          error: true
+        - java_method: resetDiscoveryTechnology
+          go_name: ResetDiscoveryTechnology
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDiscoveryTechnology
+          go_name: SetDiscoveryTechnology
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setObserveModeEnabled
+          go_name: SetObserveModeEnabled
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: boolean
+          error: true
+      static_methods:
+        - java_method: getDefaultAdapter
+          go_name: GetDefaultAdapter
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: android.nfc.NfcAdapter
+          error: true
+    - java_class: android.nfc.Tag
+      go_type: tag
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: '[B'
+          error: true
+        - java_method: getTechList
+          go_name: GetTechList
+          returns: java.lang.String[]
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.nfc.NdefRecord
+      go_type: ndefRecord
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: '[B'
+          error: true
+        - java_method: getPayload
+          go_name: GetPayload
+          returns: '[B'
+          error: true
+        - java_method: getTnf
+          go_name: GetTnf
+          returns: short
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: '[B'
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toByteArray
+          go_name: ToByteArray
+          returns: '[B'
+          error: true
+        - java_method: toMimeType
+          go_name: ToMimeType
+          returns: String
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: toUri
+          go_name: ToUri
+          returns: android.net.Uri
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: createApplicationRecord
+          go_name: CreateApplicationRecord
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.nfc.NdefRecord
+          error: true
+        - java_method: createExternal
+          go_name: CreateExternal
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: '[B'
+              go_name: arg2
+          returns: android.nfc.NdefRecord
+          error: true
+        - java_method: createMime
+          go_name: CreateMime
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: '[B'
+              go_name: arg1
+          returns: android.nfc.NdefRecord
+          error: true
+        - java_method: createTextRecord
+          go_name: CreateTextRecord
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.nfc.NdefRecord
+          error: true
+        - java_method: createUri
+          go_name: CreateUri1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.nfc.NdefRecord
+          error: true
+        - java_method: createUri
+          go_name: CreateUri1_1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.nfc.NdefRecord
+          error: true
+    - java_class: android.nfc.tech.Ndef
+      go_type: ndef
+      methods:
+        - java_method: canMakeReadOnly
+          go_name: CanMakeReadOnly
+          returns: boolean
+          error: true
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: connect
+          go_name: Connect
+          returns: void
+          error: true
+        - java_method: getCachedNdefMessage
+          go_name: GetCachedNdefMessage
+          returns: android.nfc.NdefMessage
+          error: true
+        - java_method: getMaxSize
+          go_name: GetMaxSize
+          returns: int
+          error: true
+        - java_method: getNdefMessage
+          go_name: GetNdefMessage
+          returns: android.nfc.NdefMessage
+          error: true
+        - java_method: getTag
+          go_name: GetTag
+          returns: android.nfc.Tag
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: String
+          error: true
+        - java_method: isConnected
+          go_name: IsConnected
+          returns: boolean
+          error: true
+        - java_method: isWritable
+          go_name: IsWritable
+          returns: boolean
+          error: true
+        - java_method: makeReadOnly
+          go_name: MakeReadOnly
+          returns: boolean
+          error: true
+        - java_method: writeNdefMessage
+          go_name: WriteNdefMessage
+          params:
+            - java_type: android.nfc.NdefMessage
+              go_name: arg0
+          returns: void
+          error: true
+      static_methods:
+        - java_method: get
+          go_name: Get
+          params:
+            - java_type: android.nfc.Tag
+              go_name: arg0
+          returns: android.nfc.tech.Ndef
+          error: true
+constants:
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: ActionAdapterStateChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionChangeTagIntentPreference
+      value: '""'
+      go_type: string
+    - go_name: ActionNdefDiscovered
+      value: '""'
+      go_type: string
+    - go_name: ActionPreferredPaymentChanged
+      value: '""'
+      go_type: string
+    - go_name: ActionTagDiscovered
+      value: '""'
+      go_type: string
+    - go_name: ActionTechDiscovered
+      value: '""'
+      go_type: string
+    - go_name: ActionTransactionDetected
+      value: '""'
+      go_type: string
+    - go_name: ExtraAdapterState
+      value: '""'
+      go_type: string
+    - go_name: ExtraAid
+      value: '""'
+      go_type: string
+    - go_name: ExtraData
+      value: '""'
+      go_type: string
+    - go_name: ExtraId
+      value: '""'
+      go_type: string
+    - go_name: ExtraNdefMessages
+      value: '""'
+      go_type: string
+    - go_name: ExtraPreferredPaymentChangedReason
+      value: '""'
+      go_type: string
+    - go_name: ExtraReaderPresenceCheckDelay
+      value: '""'
+      go_type: string
+    - go_name: ExtraSecureElementName
+      value: '""'
+      go_type: string
+    - go_name: ExtraTag
+      value: '""'
+      go_type: string
+    - go_name: FlagListenDisable
+      value: "0"
+      go_type: int
+    - go_name: FlagListenKeep
+      value: "0"
+      go_type: int
+    - go_name: FlagListenNfcPassiveA
+      value: "0"
+      go_type: int
+    - go_name: FlagListenNfcPassiveB
+      value: "0"
+      go_type: int
+    - go_name: FlagListenNfcPassiveF
+      value: "0"
+      go_type: int
+    - go_name: FlagReaderDisable
+      value: "0"
+      go_type: int
+    - go_name: FlagReaderKeep
+      value: "0"
+      go_type: int
+    - go_name: FlagReaderNfcA
+      value: "0"
+      go_type: int
+    - go_name: FlagReaderNfcB
+      value: "0"
+      go_type: int
+    - go_name: FlagReaderNfcBarcode
+      value: "0"
+      go_type: int
+    - go_name: FlagReaderNfcF
+      value: "0"
+      go_type: int
+    - go_name: FlagReaderNfcV
+      value: "0"
+      go_type: int
+    - go_name: FlagReaderNoPlatformSounds
+      value: "0"
+      go_type: int
+    - go_name: FlagReaderSkipNdefCheck
+      value: "0"
+      go_type: int
+    - go_name: PreferredPaymentChanged
+      value: "0"
+      go_type: int
+    - go_name: PreferredPaymentLoaded
+      value: "0"
+      go_type: int
+    - go_name: PreferredPaymentUpdated
+      value: "0"
+      go_type: int
+    - go_name: StateOff
+      value: "0"
+      go_type: int
+    - go_name: StateOn
+      value: "0"
+      go_type: int
+    - go_name: StateTurningOff
+      value: "0"
+      go_type: int
+    - go_name: StateTurningOn
+      value: "0"
+      go_type: int
+    - go_name: RtdAlternativeCarrier
+      value: "0"
+      go_type: int
+    - go_name: RtdHandoverCarrier
+      value: "0"
+      go_type: int
+    - go_name: RtdHandoverRequest
+      value: "0"
+      go_type: int
+    - go_name: RtdHandoverSelect
+      value: "0"
+      go_type: int
+    - go_name: RtdSmartPoster
+      value: "0"
+      go_type: int
+    - go_name: RtdText
+      value: "0"
+      go_type: int
+    - go_name: RtdUri
+      value: "0"
+      go_type: int
+    - go_name: TnfAbsoluteUri
+      value: "0"
+      go_type: int
+    - go_name: TnfEmpty
+      value: "0"
+      go_type: int
+    - go_name: TnfExternalType
+      value: "0"
+      go_type: int
+    - go_name: TnfMimeMedia
+      value: "0"
+      go_type: int
+    - go_name: TnfUnchanged
+      value: "0"
+      go_type: int
+    - go_name: TnfUnknown
+      value: "0"
+      go_type: int
+    - go_name: TnfWellKnown
+      value: "0"
+      go_type: int
+    - go_name: MifareClassic
+      value: '""'
+      go_type: string
+    - go_name: NfcForumType1
+      value: '""'
+      go_type: string
+    - go_name: NfcForumType2
+      value: '""'
+      go_type: string
+    - go_name: NfcForumType3
+      value: '""'
+      go_type: string
+    - go_name: NfcForumType4
+      value: '""'
+      go_type: string

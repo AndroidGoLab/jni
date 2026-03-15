@@ -106,14 +106,23 @@ func buildServerData(
 		data.DataClasses = append(data.DataClasses, sdc)
 	}
 
-	// Build RPC name lookup from protogen data (handles collision renames).
-	protoRPCNames := make(map[string]string)
+	// Build RPC lookup from protogen data (handles collision renames and
+	// cross-class message name disambiguation).
+	// Key: "ServiceName/lowercaseRPCName" for per-service lookup.
+	protoRPCLookup := make(map[string]rpcInfo)
 	for _, ps := range protoData.Services {
 		for _, rpc := range ps.RPCs {
-			if rpc.OriginalName != "" {
-				protoRPCNames[strings.ToLower(rpc.OriginalName)] = rpc.Name
+			info := rpcInfo{
+				Name:       rpc.Name,
+				InputType:  rpc.InputType,
+				OutputType: rpc.OutputType,
 			}
-			protoRPCNames[strings.ToLower(rpc.Name)] = rpc.Name
+			key := ps.Name + "/" + strings.ToLower(rpc.Name)
+			protoRPCLookup[key] = info
+			if rpc.OriginalName != "" {
+				origKey := ps.Name + "/" + strings.ToLower(rpc.OriginalName)
+				protoRPCLookup[origKey] = info
+			}
 		}
 	}
 
@@ -128,6 +137,8 @@ func buildServerData(
 
 		rawServiceName := exportName(cls.GoType) + "Service"
 		serviceName := goNames.ResolveService(rawServiceName)
+		// The protogen service name uses the same convention.
+		protoServiceName := rawServiceName
 
 		svc := ServerService{
 			GoType:      cls.GoType,
@@ -140,7 +151,7 @@ func buildServerData(
 			if !isExported(m.GoName) {
 				continue
 			}
-			sm := buildServerMethod(m, dataClassMap, javaClassToDataClass, dcFieldMap, protoRPCNames, goNames)
+			sm := buildServerMethod(m, dataClassMap, javaClassToDataClass, dcFieldMap, protoRPCLookup, protoServiceName, goNames)
 			if sm.ReturnKind == "data_class" || sm.ReturnKind == "object" {
 				data.NeedsJNI = true
 			}
@@ -160,6 +171,15 @@ func buildServerData(
 	return data
 }
 
+// rpcInfo holds the proto RPC name and its actual message type names,
+// which may differ from the default "Name+Request"/"Name+Response"
+// when cross-class message collisions required disambiguation.
+type rpcInfo struct {
+	Name       string
+	InputType  string
+	OutputType string
+}
+
 // buildServerMethod converts a MergedMethod to a ServerMethod with
 // pre-rendered template expressions.
 func buildServerMethod(
@@ -167,17 +187,32 @@ func buildServerMethod(
 	dataClassNames map[string]bool,
 	javaClassToDataMsg map[string]string,
 	dcFieldMap map[string][]javagen.MergedField,
-	protoRPCNames map[string]string,
+	protoRPCLookup map[string]rpcInfo,
+	protoServiceName string,
 	goNames protoscan.GoNames,
 ) ServerMethod {
 	rawName := exportName(m.GoName)
 	goName := rawName
-	if resolved, ok := protoRPCNames[strings.ToLower(rawName)]; ok {
-		goName = resolved
+
+	// Look up the actual proto RPC info (handles collision renames).
+	lookupKey := protoServiceName + "/" + strings.ToLower(rawName)
+	info, found := protoRPCLookup[lookupKey]
+	if found {
+		goName = info.Name
 	}
 	goName = goNames.ResolveRPC(goName)
+
+	// Use the actual proto message types when available, which may
+	// include a class prefix for disambiguation. Then resolve through
+	// protoscan to handle protoc naming quirks (e.g., P2p -> P2P).
 	reqType := goName + "Request"
 	respType := goName + "Response"
+	if found {
+		reqType = info.InputType
+		respType = info.OutputType
+	}
+	reqType = goNames.ResolveMessage(reqType)
+	respType = goNames.ResolveMessage(respType)
 
 	sm := ServerMethod{
 		GoName:       goName,

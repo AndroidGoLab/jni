@@ -21,6 +21,564 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	NsdManagerService_DiscoverServices3_FullMethodName             = "/nsd.NsdManagerService/DiscoverServices3"
+	NsdManagerService_DiscoverServices5_1_FullMethodName           = "/nsd.NsdManagerService/DiscoverServices5_1"
+	NsdManagerService_DiscoverServices5_2_FullMethodName           = "/nsd.NsdManagerService/DiscoverServices5_2"
+	NsdManagerService_DiscoverServices3_3_FullMethodName           = "/nsd.NsdManagerService/DiscoverServices3_3"
+	NsdManagerService_RegisterService3_FullMethodName              = "/nsd.NsdManagerService/RegisterService3"
+	NsdManagerService_RegisterService4_1_FullMethodName            = "/nsd.NsdManagerService/RegisterService4_1"
+	NsdManagerService_RegisterServiceInfoCallback_FullMethodName   = "/nsd.NsdManagerService/RegisterServiceInfoCallback"
+	NsdManagerService_ResolveService2_FullMethodName               = "/nsd.NsdManagerService/ResolveService2"
+	NsdManagerService_ResolveService3_1_FullMethodName             = "/nsd.NsdManagerService/ResolveService3_1"
+	NsdManagerService_StopServiceDiscovery_FullMethodName          = "/nsd.NsdManagerService/StopServiceDiscovery"
+	NsdManagerService_StopServiceResolution_FullMethodName         = "/nsd.NsdManagerService/StopServiceResolution"
+	NsdManagerService_UnregisterService_FullMethodName             = "/nsd.NsdManagerService/UnregisterService"
+	NsdManagerService_UnregisterServiceInfoCallback_FullMethodName = "/nsd.NsdManagerService/UnregisterServiceInfoCallback"
+)
+
+// NsdManagerServiceClient is the client API for NsdManagerService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type NsdManagerServiceClient interface {
+	DiscoverServices3(ctx context.Context, in *DiscoverServices3Request, opts ...grpc.CallOption) (*DiscoverServices3Response, error)
+	DiscoverServices5_1(ctx context.Context, in *DiscoverServices5_1Request, opts ...grpc.CallOption) (*DiscoverServices5_1Response, error)
+	DiscoverServices5_2(ctx context.Context, in *DiscoverServices5_2Request, opts ...grpc.CallOption) (*DiscoverServices5_2Response, error)
+	DiscoverServices3_3(ctx context.Context, in *DiscoverServices3_3Request, opts ...grpc.CallOption) (*DiscoverServices3_3Response, error)
+	RegisterService3(ctx context.Context, in *RegisterService3Request, opts ...grpc.CallOption) (*RegisterService3Response, error)
+	RegisterService4_1(ctx context.Context, in *RegisterService4_1Request, opts ...grpc.CallOption) (*RegisterService4_1Response, error)
+	RegisterServiceInfoCallback(ctx context.Context, in *RegisterServiceInfoCallbackRequest, opts ...grpc.CallOption) (*RegisterServiceInfoCallbackResponse, error)
+	ResolveService2(ctx context.Context, in *ResolveService2Request, opts ...grpc.CallOption) (*ResolveService2Response, error)
+	ResolveService3_1(ctx context.Context, in *ResolveService3_1Request, opts ...grpc.CallOption) (*ResolveService3_1Response, error)
+	StopServiceDiscovery(ctx context.Context, in *StopServiceDiscoveryRequest, opts ...grpc.CallOption) (*StopServiceDiscoveryResponse, error)
+	StopServiceResolution(ctx context.Context, in *StopServiceResolutionRequest, opts ...grpc.CallOption) (*StopServiceResolutionResponse, error)
+	UnregisterService(ctx context.Context, in *UnregisterServiceRequest, opts ...grpc.CallOption) (*UnregisterServiceResponse, error)
+	UnregisterServiceInfoCallback(ctx context.Context, in *UnregisterServiceInfoCallbackRequest, opts ...grpc.CallOption) (*UnregisterServiceInfoCallbackResponse, error)
+}
+
+type nsdManagerServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewNsdManagerServiceClient(cc grpc.ClientConnInterface) NsdManagerServiceClient {
+	return &nsdManagerServiceClient{cc}
+}
+
+func (c *nsdManagerServiceClient) DiscoverServices3(ctx context.Context, in *DiscoverServices3Request, opts ...grpc.CallOption) (*DiscoverServices3Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DiscoverServices3Response)
+	err := c.cc.Invoke(ctx, NsdManagerService_DiscoverServices3_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nsdManagerServiceClient) DiscoverServices5_1(ctx context.Context, in *DiscoverServices5_1Request, opts ...grpc.CallOption) (*DiscoverServices5_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DiscoverServices5_1Response)
+	err := c.cc.Invoke(ctx, NsdManagerService_DiscoverServices5_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nsdManagerServiceClient) DiscoverServices5_2(ctx context.Context, in *DiscoverServices5_2Request, opts ...grpc.CallOption) (*DiscoverServices5_2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DiscoverServices5_2Response)
+	err := c.cc.Invoke(ctx, NsdManagerService_DiscoverServices5_2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nsdManagerServiceClient) DiscoverServices3_3(ctx context.Context, in *DiscoverServices3_3Request, opts ...grpc.CallOption) (*DiscoverServices3_3Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DiscoverServices3_3Response)
+	err := c.cc.Invoke(ctx, NsdManagerService_DiscoverServices3_3_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nsdManagerServiceClient) RegisterService3(ctx context.Context, in *RegisterService3Request, opts ...grpc.CallOption) (*RegisterService3Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterService3Response)
+	err := c.cc.Invoke(ctx, NsdManagerService_RegisterService3_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nsdManagerServiceClient) RegisterService4_1(ctx context.Context, in *RegisterService4_1Request, opts ...grpc.CallOption) (*RegisterService4_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterService4_1Response)
+	err := c.cc.Invoke(ctx, NsdManagerService_RegisterService4_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nsdManagerServiceClient) RegisterServiceInfoCallback(ctx context.Context, in *RegisterServiceInfoCallbackRequest, opts ...grpc.CallOption) (*RegisterServiceInfoCallbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterServiceInfoCallbackResponse)
+	err := c.cc.Invoke(ctx, NsdManagerService_RegisterServiceInfoCallback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nsdManagerServiceClient) ResolveService2(ctx context.Context, in *ResolveService2Request, opts ...grpc.CallOption) (*ResolveService2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResolveService2Response)
+	err := c.cc.Invoke(ctx, NsdManagerService_ResolveService2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nsdManagerServiceClient) ResolveService3_1(ctx context.Context, in *ResolveService3_1Request, opts ...grpc.CallOption) (*ResolveService3_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResolveService3_1Response)
+	err := c.cc.Invoke(ctx, NsdManagerService_ResolveService3_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nsdManagerServiceClient) StopServiceDiscovery(ctx context.Context, in *StopServiceDiscoveryRequest, opts ...grpc.CallOption) (*StopServiceDiscoveryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StopServiceDiscoveryResponse)
+	err := c.cc.Invoke(ctx, NsdManagerService_StopServiceDiscovery_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nsdManagerServiceClient) StopServiceResolution(ctx context.Context, in *StopServiceResolutionRequest, opts ...grpc.CallOption) (*StopServiceResolutionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StopServiceResolutionResponse)
+	err := c.cc.Invoke(ctx, NsdManagerService_StopServiceResolution_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nsdManagerServiceClient) UnregisterService(ctx context.Context, in *UnregisterServiceRequest, opts ...grpc.CallOption) (*UnregisterServiceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnregisterServiceResponse)
+	err := c.cc.Invoke(ctx, NsdManagerService_UnregisterService_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nsdManagerServiceClient) UnregisterServiceInfoCallback(ctx context.Context, in *UnregisterServiceInfoCallbackRequest, opts ...grpc.CallOption) (*UnregisterServiceInfoCallbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnregisterServiceInfoCallbackResponse)
+	err := c.cc.Invoke(ctx, NsdManagerService_UnregisterServiceInfoCallback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// NsdManagerServiceServer is the server API for NsdManagerService service.
+// All implementations must embed UnimplementedNsdManagerServiceServer
+// for forward compatibility.
+type NsdManagerServiceServer interface {
+	DiscoverServices3(context.Context, *DiscoverServices3Request) (*DiscoverServices3Response, error)
+	DiscoverServices5_1(context.Context, *DiscoverServices5_1Request) (*DiscoverServices5_1Response, error)
+	DiscoverServices5_2(context.Context, *DiscoverServices5_2Request) (*DiscoverServices5_2Response, error)
+	DiscoverServices3_3(context.Context, *DiscoverServices3_3Request) (*DiscoverServices3_3Response, error)
+	RegisterService3(context.Context, *RegisterService3Request) (*RegisterService3Response, error)
+	RegisterService4_1(context.Context, *RegisterService4_1Request) (*RegisterService4_1Response, error)
+	RegisterServiceInfoCallback(context.Context, *RegisterServiceInfoCallbackRequest) (*RegisterServiceInfoCallbackResponse, error)
+	ResolveService2(context.Context, *ResolveService2Request) (*ResolveService2Response, error)
+	ResolveService3_1(context.Context, *ResolveService3_1Request) (*ResolveService3_1Response, error)
+	StopServiceDiscovery(context.Context, *StopServiceDiscoveryRequest) (*StopServiceDiscoveryResponse, error)
+	StopServiceResolution(context.Context, *StopServiceResolutionRequest) (*StopServiceResolutionResponse, error)
+	UnregisterService(context.Context, *UnregisterServiceRequest) (*UnregisterServiceResponse, error)
+	UnregisterServiceInfoCallback(context.Context, *UnregisterServiceInfoCallbackRequest) (*UnregisterServiceInfoCallbackResponse, error)
+	mustEmbedUnimplementedNsdManagerServiceServer()
+}
+
+// UnimplementedNsdManagerServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedNsdManagerServiceServer struct{}
+
+func (UnimplementedNsdManagerServiceServer) DiscoverServices3(context.Context, *DiscoverServices3Request) (*DiscoverServices3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method DiscoverServices3 not implemented")
+}
+func (UnimplementedNsdManagerServiceServer) DiscoverServices5_1(context.Context, *DiscoverServices5_1Request) (*DiscoverServices5_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method DiscoverServices5_1 not implemented")
+}
+func (UnimplementedNsdManagerServiceServer) DiscoverServices5_2(context.Context, *DiscoverServices5_2Request) (*DiscoverServices5_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method DiscoverServices5_2 not implemented")
+}
+func (UnimplementedNsdManagerServiceServer) DiscoverServices3_3(context.Context, *DiscoverServices3_3Request) (*DiscoverServices3_3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method DiscoverServices3_3 not implemented")
+}
+func (UnimplementedNsdManagerServiceServer) RegisterService3(context.Context, *RegisterService3Request) (*RegisterService3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterService3 not implemented")
+}
+func (UnimplementedNsdManagerServiceServer) RegisterService4_1(context.Context, *RegisterService4_1Request) (*RegisterService4_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterService4_1 not implemented")
+}
+func (UnimplementedNsdManagerServiceServer) RegisterServiceInfoCallback(context.Context, *RegisterServiceInfoCallbackRequest) (*RegisterServiceInfoCallbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RegisterServiceInfoCallback not implemented")
+}
+func (UnimplementedNsdManagerServiceServer) ResolveService2(context.Context, *ResolveService2Request) (*ResolveService2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResolveService2 not implemented")
+}
+func (UnimplementedNsdManagerServiceServer) ResolveService3_1(context.Context, *ResolveService3_1Request) (*ResolveService3_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResolveService3_1 not implemented")
+}
+func (UnimplementedNsdManagerServiceServer) StopServiceDiscovery(context.Context, *StopServiceDiscoveryRequest) (*StopServiceDiscoveryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method StopServiceDiscovery not implemented")
+}
+func (UnimplementedNsdManagerServiceServer) StopServiceResolution(context.Context, *StopServiceResolutionRequest) (*StopServiceResolutionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method StopServiceResolution not implemented")
+}
+func (UnimplementedNsdManagerServiceServer) UnregisterService(context.Context, *UnregisterServiceRequest) (*UnregisterServiceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnregisterService not implemented")
+}
+func (UnimplementedNsdManagerServiceServer) UnregisterServiceInfoCallback(context.Context, *UnregisterServiceInfoCallbackRequest) (*UnregisterServiceInfoCallbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnregisterServiceInfoCallback not implemented")
+}
+func (UnimplementedNsdManagerServiceServer) mustEmbedUnimplementedNsdManagerServiceServer() {}
+func (UnimplementedNsdManagerServiceServer) testEmbeddedByValue()                           {}
+
+// UnsafeNsdManagerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to NsdManagerServiceServer will
+// result in compilation errors.
+type UnsafeNsdManagerServiceServer interface {
+	mustEmbedUnimplementedNsdManagerServiceServer()
+}
+
+func RegisterNsdManagerServiceServer(s grpc.ServiceRegistrar, srv NsdManagerServiceServer) {
+	// If the following call panics, it indicates UnimplementedNsdManagerServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&NsdManagerService_ServiceDesc, srv)
+}
+
+func _NsdManagerService_DiscoverServices3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DiscoverServices3Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NsdManagerServiceServer).DiscoverServices3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NsdManagerService_DiscoverServices3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NsdManagerServiceServer).DiscoverServices3(ctx, req.(*DiscoverServices3Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NsdManagerService_DiscoverServices5_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DiscoverServices5_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NsdManagerServiceServer).DiscoverServices5_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NsdManagerService_DiscoverServices5_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NsdManagerServiceServer).DiscoverServices5_1(ctx, req.(*DiscoverServices5_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NsdManagerService_DiscoverServices5_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DiscoverServices5_2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NsdManagerServiceServer).DiscoverServices5_2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NsdManagerService_DiscoverServices5_2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NsdManagerServiceServer).DiscoverServices5_2(ctx, req.(*DiscoverServices5_2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NsdManagerService_DiscoverServices3_3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DiscoverServices3_3Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NsdManagerServiceServer).DiscoverServices3_3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NsdManagerService_DiscoverServices3_3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NsdManagerServiceServer).DiscoverServices3_3(ctx, req.(*DiscoverServices3_3Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NsdManagerService_RegisterService3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterService3Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NsdManagerServiceServer).RegisterService3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NsdManagerService_RegisterService3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NsdManagerServiceServer).RegisterService3(ctx, req.(*RegisterService3Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NsdManagerService_RegisterService4_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterService4_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NsdManagerServiceServer).RegisterService4_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NsdManagerService_RegisterService4_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NsdManagerServiceServer).RegisterService4_1(ctx, req.(*RegisterService4_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NsdManagerService_RegisterServiceInfoCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterServiceInfoCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NsdManagerServiceServer).RegisterServiceInfoCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NsdManagerService_RegisterServiceInfoCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NsdManagerServiceServer).RegisterServiceInfoCallback(ctx, req.(*RegisterServiceInfoCallbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NsdManagerService_ResolveService2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveService2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NsdManagerServiceServer).ResolveService2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NsdManagerService_ResolveService2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NsdManagerServiceServer).ResolveService2(ctx, req.(*ResolveService2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NsdManagerService_ResolveService3_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveService3_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NsdManagerServiceServer).ResolveService3_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NsdManagerService_ResolveService3_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NsdManagerServiceServer).ResolveService3_1(ctx, req.(*ResolveService3_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NsdManagerService_StopServiceDiscovery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StopServiceDiscoveryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NsdManagerServiceServer).StopServiceDiscovery(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NsdManagerService_StopServiceDiscovery_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NsdManagerServiceServer).StopServiceDiscovery(ctx, req.(*StopServiceDiscoveryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NsdManagerService_StopServiceResolution_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StopServiceResolutionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NsdManagerServiceServer).StopServiceResolution(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NsdManagerService_StopServiceResolution_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NsdManagerServiceServer).StopServiceResolution(ctx, req.(*StopServiceResolutionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NsdManagerService_UnregisterService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnregisterServiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NsdManagerServiceServer).UnregisterService(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NsdManagerService_UnregisterService_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NsdManagerServiceServer).UnregisterService(ctx, req.(*UnregisterServiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NsdManagerService_UnregisterServiceInfoCallback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnregisterServiceInfoCallbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NsdManagerServiceServer).UnregisterServiceInfoCallback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NsdManagerService_UnregisterServiceInfoCallback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NsdManagerServiceServer).UnregisterServiceInfoCallback(ctx, req.(*UnregisterServiceInfoCallbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// NsdManagerService_ServiceDesc is the grpc.ServiceDesc for NsdManagerService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var NsdManagerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "nsd.NsdManagerService",
+	HandlerType: (*NsdManagerServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "DiscoverServices3",
+			Handler:    _NsdManagerService_DiscoverServices3_Handler,
+		},
+		{
+			MethodName: "DiscoverServices5_1",
+			Handler:    _NsdManagerService_DiscoverServices5_1_Handler,
+		},
+		{
+			MethodName: "DiscoverServices5_2",
+			Handler:    _NsdManagerService_DiscoverServices5_2_Handler,
+		},
+		{
+			MethodName: "DiscoverServices3_3",
+			Handler:    _NsdManagerService_DiscoverServices3_3_Handler,
+		},
+		{
+			MethodName: "RegisterService3",
+			Handler:    _NsdManagerService_RegisterService3_Handler,
+		},
+		{
+			MethodName: "RegisterService4_1",
+			Handler:    _NsdManagerService_RegisterService4_1_Handler,
+		},
+		{
+			MethodName: "RegisterServiceInfoCallback",
+			Handler:    _NsdManagerService_RegisterServiceInfoCallback_Handler,
+		},
+		{
+			MethodName: "ResolveService2",
+			Handler:    _NsdManagerService_ResolveService2_Handler,
+		},
+		{
+			MethodName: "ResolveService3_1",
+			Handler:    _NsdManagerService_ResolveService3_1_Handler,
+		},
+		{
+			MethodName: "StopServiceDiscovery",
+			Handler:    _NsdManagerService_StopServiceDiscovery_Handler,
+		},
+		{
+			MethodName: "StopServiceResolution",
+			Handler:    _NsdManagerService_StopServiceResolution_Handler,
+		},
+		{
+			MethodName: "UnregisterService",
+			Handler:    _NsdManagerService_UnregisterService_Handler,
+		},
+		{
+			MethodName: "UnregisterServiceInfoCallback",
+			Handler:    _NsdManagerService_UnregisterServiceInfoCallback_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/nsd/nsd.proto",
+}
+
+const (
 	NsdServiceInfoService_DescribeContents_FullMethodName = "/nsd.NsdServiceInfoService/DescribeContents"
 	NsdServiceInfoService_GetHost_FullMethodName          = "/nsd.NsdServiceInfoService/GetHost"
 	NsdServiceInfoService_GetHostAddresses_FullMethodName = "/nsd.NsdServiceInfoService/GetHostAddresses"

@@ -87,9 +87,47 @@ func BuildProtoData(merged *javagen.MergedSpec, goModule string) *ProtoData {
 	// Track seen message names to avoid duplicates when multiple services
 	// share the same method names (e.g., connect, close).
 	seenMessages := make(map[string]bool)
+	seenMessageFields := make(map[string]string) // name -> fields fingerprint
 	for _, m := range data.Messages {
 		seenMessages[m.Name] = true
+		seenMessageFields[m.Name] = messageFingerprint(m)
 	}
+
+	// 2. Services from classes that have methods.
+	// When two classes in the same package share a method name with
+	// different parameter lists, their Request/Response messages
+	// collide. We detect this and prefix the second class's RPC
+	// and messages with the class name to disambiguate.
+	for _, cls := range merged.Classes {
+		if len(cls.Methods) == 0 {
+			continue
+		}
+		svc, msgs := buildServiceFromClass(cls, dataClassNames, javaClassToDataMsg)
+
+		// Detect collisions and rename as needed.
+		classPrefix := capitalizeFirst(cls.GoType)
+		for i, m := range msgs {
+			fp := messageFingerprint(m)
+			if existingFP, exists := seenMessageFields[m.Name]; exists {
+				if existingFP == fp {
+					// Identical message -- safe to share.
+					continue
+				}
+				// Different fields under the same name: rename this
+				// message and update the RPC that references it.
+				newName := classPrefix + m.Name
+				updateServiceRPCMessageName(&svc, m.Name, newName)
+				msgs[i].Name = newName
+				m = msgs[i]
+			}
+			seenMessages[m.Name] = true
+			seenMessageFields[m.Name] = fp
+			data.Messages = append(data.Messages, m)
+		}
+
+		data.Services = append(data.Services, svc)
+	}
+
 	appendUniqueMessages := func(msgs []ProtoMessage) {
 		for _, m := range msgs {
 			if seenMessages[m.Name] {
@@ -98,16 +136,6 @@ func BuildProtoData(merged *javagen.MergedSpec, goModule string) *ProtoData {
 			seenMessages[m.Name] = true
 			data.Messages = append(data.Messages, m)
 		}
-	}
-
-	// 2. Services from classes that have methods.
-	for _, cls := range merged.Classes {
-		if len(cls.Methods) == 0 {
-			continue
-		}
-		svc, msgs := buildServiceFromClass(cls, dataClassNames, javaClassToDataMsg)
-		data.Services = append(data.Services, svc)
-		appendUniqueMessages(msgs)
 	}
 
 	// 3. Streaming RPCs from callbacks.
@@ -447,6 +475,32 @@ func capitalizeFirst(s string) string {
 		return string(first-'a'+'A') + s[1:]
 	}
 	return s
+}
+
+// messageFingerprint returns a string that uniquely identifies a message's
+// structure (field count, names, and types) for collision detection.
+func messageFingerprint(m ProtoMessage) string {
+	var b strings.Builder
+	for _, f := range m.Fields {
+		b.WriteString(f.Name)
+		b.WriteByte(':')
+		b.WriteString(f.Type)
+		b.WriteByte(';')
+	}
+	return b.String()
+}
+
+// updateServiceRPCMessageName replaces references to oldName with newName
+// in all RPCs of the given service (both InputType and OutputType).
+func updateServiceRPCMessageName(svc *ProtoService, oldName, newName string) {
+	for i := range svc.RPCs {
+		if svc.RPCs[i].InputType == oldName {
+			svc.RPCs[i].InputType = newName
+		}
+		if svc.RPCs[i].OutputType == oldName {
+			svc.RPCs[i].OutputType = newName
+		}
+	}
 }
 
 // toSnakeCase converts a PascalCase or camelCase string to snake_case.

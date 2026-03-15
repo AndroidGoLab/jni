@@ -99,3 +99,13 @@ func (n GoNames) ResolveRPC(rpcName string) string {
 	}
 	return rpcName
 }
+
+// ResolveMessage returns the actual Go message type name (as generated
+// by protoc-gen-go), falling back to the input if no resolution is found.
+// Protoc-gen-go may rename identifiers (e.g., P2p -> P2P, A2dp -> A2Dp).
+func (n GoNames) ResolveMessage(msgName string) string {
+	if resolved, ok := n.MessageTypes[strings.ToLower(msgName)]; ok {
+		return resolved
+	}
+	return msgName
+}

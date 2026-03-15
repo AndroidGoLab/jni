@@ -21,6 +21,4450 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	BluetoothSocketService_Close_FullMethodName                    = "/bluetooth.BluetoothSocketService/Close"
+	BluetoothSocketService_Connect_FullMethodName                  = "/bluetooth.BluetoothSocketService/Connect"
+	BluetoothSocketService_GetConnectionType_FullMethodName        = "/bluetooth.BluetoothSocketService/GetConnectionType"
+	BluetoothSocketService_GetInputStream_FullMethodName           = "/bluetooth.BluetoothSocketService/GetInputStream"
+	BluetoothSocketService_GetMaxReceivePacketSize_FullMethodName  = "/bluetooth.BluetoothSocketService/GetMaxReceivePacketSize"
+	BluetoothSocketService_GetMaxTransmitPacketSize_FullMethodName = "/bluetooth.BluetoothSocketService/GetMaxTransmitPacketSize"
+	BluetoothSocketService_GetOutputStream_FullMethodName          = "/bluetooth.BluetoothSocketService/GetOutputStream"
+	BluetoothSocketService_GetRemoteDevice_FullMethodName          = "/bluetooth.BluetoothSocketService/GetRemoteDevice"
+	BluetoothSocketService_IsConnected_FullMethodName              = "/bluetooth.BluetoothSocketService/IsConnected"
+	BluetoothSocketService_ToString_FullMethodName                 = "/bluetooth.BluetoothSocketService/ToString"
+)
+
+// BluetoothSocketServiceClient is the client API for BluetoothSocketService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type BluetoothSocketServiceClient interface {
+	Close(ctx context.Context, in *CloseRequest, opts ...grpc.CallOption) (*CloseResponse, error)
+	Connect(ctx context.Context, in *ConnectRequest, opts ...grpc.CallOption) (*ConnectResponse, error)
+	GetConnectionType(ctx context.Context, in *GetConnectionTypeRequest, opts ...grpc.CallOption) (*GetConnectionTypeResponse, error)
+	GetInputStream(ctx context.Context, in *GetInputStreamRequest, opts ...grpc.CallOption) (*GetInputStreamResponse, error)
+	GetMaxReceivePacketSize(ctx context.Context, in *GetMaxReceivePacketSizeRequest, opts ...grpc.CallOption) (*GetMaxReceivePacketSizeResponse, error)
+	GetMaxTransmitPacketSize(ctx context.Context, in *GetMaxTransmitPacketSizeRequest, opts ...grpc.CallOption) (*GetMaxTransmitPacketSizeResponse, error)
+	GetOutputStream(ctx context.Context, in *GetOutputStreamRequest, opts ...grpc.CallOption) (*GetOutputStreamResponse, error)
+	GetRemoteDevice(ctx context.Context, in *GetRemoteDeviceRequest, opts ...grpc.CallOption) (*GetRemoteDeviceResponse, error)
+	IsConnected(ctx context.Context, in *IsConnectedRequest, opts ...grpc.CallOption) (*IsConnectedResponse, error)
+	ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error)
+}
+
+type bluetoothSocketServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewBluetoothSocketServiceClient(cc grpc.ClientConnInterface) BluetoothSocketServiceClient {
+	return &bluetoothSocketServiceClient{cc}
+}
+
+func (c *bluetoothSocketServiceClient) Close(ctx context.Context, in *CloseRequest, opts ...grpc.CallOption) (*CloseResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CloseResponse)
+	err := c.cc.Invoke(ctx, BluetoothSocketService_Close_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothSocketServiceClient) Connect(ctx context.Context, in *ConnectRequest, opts ...grpc.CallOption) (*ConnectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConnectResponse)
+	err := c.cc.Invoke(ctx, BluetoothSocketService_Connect_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothSocketServiceClient) GetConnectionType(ctx context.Context, in *GetConnectionTypeRequest, opts ...grpc.CallOption) (*GetConnectionTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetConnectionTypeResponse)
+	err := c.cc.Invoke(ctx, BluetoothSocketService_GetConnectionType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothSocketServiceClient) GetInputStream(ctx context.Context, in *GetInputStreamRequest, opts ...grpc.CallOption) (*GetInputStreamResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetInputStreamResponse)
+	err := c.cc.Invoke(ctx, BluetoothSocketService_GetInputStream_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothSocketServiceClient) GetMaxReceivePacketSize(ctx context.Context, in *GetMaxReceivePacketSizeRequest, opts ...grpc.CallOption) (*GetMaxReceivePacketSizeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMaxReceivePacketSizeResponse)
+	err := c.cc.Invoke(ctx, BluetoothSocketService_GetMaxReceivePacketSize_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothSocketServiceClient) GetMaxTransmitPacketSize(ctx context.Context, in *GetMaxTransmitPacketSizeRequest, opts ...grpc.CallOption) (*GetMaxTransmitPacketSizeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMaxTransmitPacketSizeResponse)
+	err := c.cc.Invoke(ctx, BluetoothSocketService_GetMaxTransmitPacketSize_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothSocketServiceClient) GetOutputStream(ctx context.Context, in *GetOutputStreamRequest, opts ...grpc.CallOption) (*GetOutputStreamResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOutputStreamResponse)
+	err := c.cc.Invoke(ctx, BluetoothSocketService_GetOutputStream_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothSocketServiceClient) GetRemoteDevice(ctx context.Context, in *GetRemoteDeviceRequest, opts ...grpc.CallOption) (*GetRemoteDeviceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRemoteDeviceResponse)
+	err := c.cc.Invoke(ctx, BluetoothSocketService_GetRemoteDevice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothSocketServiceClient) IsConnected(ctx context.Context, in *IsConnectedRequest, opts ...grpc.CallOption) (*IsConnectedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(IsConnectedResponse)
+	err := c.cc.Invoke(ctx, BluetoothSocketService_IsConnected_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothSocketServiceClient) ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ToStringResponse)
+	err := c.cc.Invoke(ctx, BluetoothSocketService_ToString_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// BluetoothSocketServiceServer is the server API for BluetoothSocketService service.
+// All implementations must embed UnimplementedBluetoothSocketServiceServer
+// for forward compatibility.
+type BluetoothSocketServiceServer interface {
+	Close(context.Context, *CloseRequest) (*CloseResponse, error)
+	Connect(context.Context, *ConnectRequest) (*ConnectResponse, error)
+	GetConnectionType(context.Context, *GetConnectionTypeRequest) (*GetConnectionTypeResponse, error)
+	GetInputStream(context.Context, *GetInputStreamRequest) (*GetInputStreamResponse, error)
+	GetMaxReceivePacketSize(context.Context, *GetMaxReceivePacketSizeRequest) (*GetMaxReceivePacketSizeResponse, error)
+	GetMaxTransmitPacketSize(context.Context, *GetMaxTransmitPacketSizeRequest) (*GetMaxTransmitPacketSizeResponse, error)
+	GetOutputStream(context.Context, *GetOutputStreamRequest) (*GetOutputStreamResponse, error)
+	GetRemoteDevice(context.Context, *GetRemoteDeviceRequest) (*GetRemoteDeviceResponse, error)
+	IsConnected(context.Context, *IsConnectedRequest) (*IsConnectedResponse, error)
+	ToString(context.Context, *ToStringRequest) (*ToStringResponse, error)
+	mustEmbedUnimplementedBluetoothSocketServiceServer()
+}
+
+// UnimplementedBluetoothSocketServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedBluetoothSocketServiceServer struct{}
+
+func (UnimplementedBluetoothSocketServiceServer) Close(context.Context, *CloseRequest) (*CloseResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Close not implemented")
+}
+func (UnimplementedBluetoothSocketServiceServer) Connect(context.Context, *ConnectRequest) (*ConnectResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Connect not implemented")
+}
+func (UnimplementedBluetoothSocketServiceServer) GetConnectionType(context.Context, *GetConnectionTypeRequest) (*GetConnectionTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetConnectionType not implemented")
+}
+func (UnimplementedBluetoothSocketServiceServer) GetInputStream(context.Context, *GetInputStreamRequest) (*GetInputStreamResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetInputStream not implemented")
+}
+func (UnimplementedBluetoothSocketServiceServer) GetMaxReceivePacketSize(context.Context, *GetMaxReceivePacketSizeRequest) (*GetMaxReceivePacketSizeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMaxReceivePacketSize not implemented")
+}
+func (UnimplementedBluetoothSocketServiceServer) GetMaxTransmitPacketSize(context.Context, *GetMaxTransmitPacketSizeRequest) (*GetMaxTransmitPacketSizeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMaxTransmitPacketSize not implemented")
+}
+func (UnimplementedBluetoothSocketServiceServer) GetOutputStream(context.Context, *GetOutputStreamRequest) (*GetOutputStreamResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOutputStream not implemented")
+}
+func (UnimplementedBluetoothSocketServiceServer) GetRemoteDevice(context.Context, *GetRemoteDeviceRequest) (*GetRemoteDeviceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetRemoteDevice not implemented")
+}
+func (UnimplementedBluetoothSocketServiceServer) IsConnected(context.Context, *IsConnectedRequest) (*IsConnectedResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method IsConnected not implemented")
+}
+func (UnimplementedBluetoothSocketServiceServer) ToString(context.Context, *ToStringRequest) (*ToStringResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ToString not implemented")
+}
+func (UnimplementedBluetoothSocketServiceServer) mustEmbedUnimplementedBluetoothSocketServiceServer() {
+}
+func (UnimplementedBluetoothSocketServiceServer) testEmbeddedByValue() {}
+
+// UnsafeBluetoothSocketServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BluetoothSocketServiceServer will
+// result in compilation errors.
+type UnsafeBluetoothSocketServiceServer interface {
+	mustEmbedUnimplementedBluetoothSocketServiceServer()
+}
+
+func RegisterBluetoothSocketServiceServer(s grpc.ServiceRegistrar, srv BluetoothSocketServiceServer) {
+	// If the following call panics, it indicates UnimplementedBluetoothSocketServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&BluetoothSocketService_ServiceDesc, srv)
+}
+
+func _BluetoothSocketService_Close_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CloseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothSocketServiceServer).Close(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothSocketService_Close_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothSocketServiceServer).Close(ctx, req.(*CloseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothSocketService_Connect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConnectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothSocketServiceServer).Connect(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothSocketService_Connect_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothSocketServiceServer).Connect(ctx, req.(*ConnectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothSocketService_GetConnectionType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConnectionTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothSocketServiceServer).GetConnectionType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothSocketService_GetConnectionType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothSocketServiceServer).GetConnectionType(ctx, req.(*GetConnectionTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothSocketService_GetInputStream_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInputStreamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothSocketServiceServer).GetInputStream(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothSocketService_GetInputStream_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothSocketServiceServer).GetInputStream(ctx, req.(*GetInputStreamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothSocketService_GetMaxReceivePacketSize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMaxReceivePacketSizeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothSocketServiceServer).GetMaxReceivePacketSize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothSocketService_GetMaxReceivePacketSize_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothSocketServiceServer).GetMaxReceivePacketSize(ctx, req.(*GetMaxReceivePacketSizeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothSocketService_GetMaxTransmitPacketSize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMaxTransmitPacketSizeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothSocketServiceServer).GetMaxTransmitPacketSize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothSocketService_GetMaxTransmitPacketSize_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothSocketServiceServer).GetMaxTransmitPacketSize(ctx, req.(*GetMaxTransmitPacketSizeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothSocketService_GetOutputStream_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOutputStreamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothSocketServiceServer).GetOutputStream(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothSocketService_GetOutputStream_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothSocketServiceServer).GetOutputStream(ctx, req.(*GetOutputStreamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothSocketService_GetRemoteDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRemoteDeviceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothSocketServiceServer).GetRemoteDevice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothSocketService_GetRemoteDevice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothSocketServiceServer).GetRemoteDevice(ctx, req.(*GetRemoteDeviceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothSocketService_IsConnected_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IsConnectedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothSocketServiceServer).IsConnected(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothSocketService_IsConnected_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothSocketServiceServer).IsConnected(ctx, req.(*IsConnectedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothSocketService_ToString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToStringRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothSocketServiceServer).ToString(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothSocketService_ToString_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothSocketServiceServer).ToString(ctx, req.(*ToStringRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// BluetoothSocketService_ServiceDesc is the grpc.ServiceDesc for BluetoothSocketService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var BluetoothSocketService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bluetooth.BluetoothSocketService",
+	HandlerType: (*BluetoothSocketServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Close",
+			Handler:    _BluetoothSocketService_Close_Handler,
+		},
+		{
+			MethodName: "Connect",
+			Handler:    _BluetoothSocketService_Connect_Handler,
+		},
+		{
+			MethodName: "GetConnectionType",
+			Handler:    _BluetoothSocketService_GetConnectionType_Handler,
+		},
+		{
+			MethodName: "GetInputStream",
+			Handler:    _BluetoothSocketService_GetInputStream_Handler,
+		},
+		{
+			MethodName: "GetMaxReceivePacketSize",
+			Handler:    _BluetoothSocketService_GetMaxReceivePacketSize_Handler,
+		},
+		{
+			MethodName: "GetMaxTransmitPacketSize",
+			Handler:    _BluetoothSocketService_GetMaxTransmitPacketSize_Handler,
+		},
+		{
+			MethodName: "GetOutputStream",
+			Handler:    _BluetoothSocketService_GetOutputStream_Handler,
+		},
+		{
+			MethodName: "GetRemoteDevice",
+			Handler:    _BluetoothSocketService_GetRemoteDevice_Handler,
+		},
+		{
+			MethodName: "IsConnected",
+			Handler:    _BluetoothSocketService_IsConnected_Handler,
+		},
+		{
+			MethodName: "ToString",
+			Handler:    _BluetoothSocketService_ToString_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/bluetooth/bluetooth.proto",
+}
+
+const (
+	BluetoothGattService_AbortReliableWrite0_FullMethodName                = "/bluetooth.BluetoothGattService/AbortReliableWrite0"
+	BluetoothGattService_AbortReliableWrite1_1_FullMethodName              = "/bluetooth.BluetoothGattService/AbortReliableWrite1_1"
+	BluetoothGattService_BeginReliableWrite_FullMethodName                 = "/bluetooth.BluetoothGattService/BeginReliableWrite"
+	BluetoothGattService_Close_FullMethodName                              = "/bluetooth.BluetoothGattService/Close"
+	BluetoothGattService_Connect_FullMethodName                            = "/bluetooth.BluetoothGattService/Connect"
+	BluetoothGattService_Disconnect_FullMethodName                         = "/bluetooth.BluetoothGattService/Disconnect"
+	BluetoothGattService_DiscoverServices_FullMethodName                   = "/bluetooth.BluetoothGattService/DiscoverServices"
+	BluetoothGattService_ExecuteReliableWrite_FullMethodName               = "/bluetooth.BluetoothGattService/ExecuteReliableWrite"
+	BluetoothGattService_GetConnectedDevices_FullMethodName                = "/bluetooth.BluetoothGattService/GetConnectedDevices"
+	BluetoothGattService_GetConnectionState_FullMethodName                 = "/bluetooth.BluetoothGattService/GetConnectionState"
+	BluetoothGattService_GetDevice_FullMethodName                          = "/bluetooth.BluetoothGattService/GetDevice"
+	BluetoothGattService_GetDevicesMatchingConnectionStates_FullMethodName = "/bluetooth.BluetoothGattService/GetDevicesMatchingConnectionStates"
+	BluetoothGattService_GetService_FullMethodName                         = "/bluetooth.BluetoothGattService/GetService"
+	BluetoothGattService_GetServices_FullMethodName                        = "/bluetooth.BluetoothGattService/GetServices"
+	BluetoothGattService_ReadCharacteristic_FullMethodName                 = "/bluetooth.BluetoothGattService/ReadCharacteristic"
+	BluetoothGattService_ReadDescriptor_FullMethodName                     = "/bluetooth.BluetoothGattService/ReadDescriptor"
+	BluetoothGattService_ReadPhy_FullMethodName                            = "/bluetooth.BluetoothGattService/ReadPhy"
+	BluetoothGattService_ReadRemoteRssi_FullMethodName                     = "/bluetooth.BluetoothGattService/ReadRemoteRssi"
+	BluetoothGattService_RequestConnectionPriority_FullMethodName          = "/bluetooth.BluetoothGattService/RequestConnectionPriority"
+	BluetoothGattService_RequestMtu_FullMethodName                         = "/bluetooth.BluetoothGattService/RequestMtu"
+	BluetoothGattService_SetCharacteristicNotification_FullMethodName      = "/bluetooth.BluetoothGattService/SetCharacteristicNotification"
+	BluetoothGattService_SetPreferredPhy_FullMethodName                    = "/bluetooth.BluetoothGattService/SetPreferredPhy"
+	BluetoothGattService_WriteCharacteristic1_FullMethodName               = "/bluetooth.BluetoothGattService/WriteCharacteristic1"
+	BluetoothGattService_WriteCharacteristic3_1_FullMethodName             = "/bluetooth.BluetoothGattService/WriteCharacteristic3_1"
+	BluetoothGattService_WriteDescriptor1_FullMethodName                   = "/bluetooth.BluetoothGattService/WriteDescriptor1"
+	BluetoothGattService_WriteDescriptor2_1_FullMethodName                 = "/bluetooth.BluetoothGattService/WriteDescriptor2_1"
+)
+
+// BluetoothGattServiceClient is the client API for BluetoothGattService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type BluetoothGattServiceClient interface {
+	AbortReliableWrite0(ctx context.Context, in *AbortReliableWrite0Request, opts ...grpc.CallOption) (*AbortReliableWrite0Response, error)
+	AbortReliableWrite1_1(ctx context.Context, in *AbortReliableWrite1_1Request, opts ...grpc.CallOption) (*AbortReliableWrite1_1Response, error)
+	BeginReliableWrite(ctx context.Context, in *BeginReliableWriteRequest, opts ...grpc.CallOption) (*BeginReliableWriteResponse, error)
+	Close(ctx context.Context, in *CloseRequest, opts ...grpc.CallOption) (*CloseResponse, error)
+	Connect(ctx context.Context, in *ConnectRequest, opts ...grpc.CallOption) (*BluetoothGattConnectResponse, error)
+	Disconnect(ctx context.Context, in *DisconnectRequest, opts ...grpc.CallOption) (*DisconnectResponse, error)
+	DiscoverServices(ctx context.Context, in *DiscoverServicesRequest, opts ...grpc.CallOption) (*DiscoverServicesResponse, error)
+	ExecuteReliableWrite(ctx context.Context, in *ExecuteReliableWriteRequest, opts ...grpc.CallOption) (*ExecuteReliableWriteResponse, error)
+	GetConnectedDevices(ctx context.Context, in *GetConnectedDevicesRequest, opts ...grpc.CallOption) (*GetConnectedDevicesResponse, error)
+	GetConnectionState(ctx context.Context, in *GetConnectionStateRequest, opts ...grpc.CallOption) (*GetConnectionStateResponse, error)
+	GetDevice(ctx context.Context, in *GetDeviceRequest, opts ...grpc.CallOption) (*GetDeviceResponse, error)
+	GetDevicesMatchingConnectionStates(ctx context.Context, in *GetDevicesMatchingConnectionStatesRequest, opts ...grpc.CallOption) (*GetDevicesMatchingConnectionStatesResponse, error)
+	GetService(ctx context.Context, in *GetServiceRequest, opts ...grpc.CallOption) (*GetServiceResponse, error)
+	GetServices(ctx context.Context, in *GetServicesRequest, opts ...grpc.CallOption) (*GetServicesResponse, error)
+	ReadCharacteristic(ctx context.Context, in *ReadCharacteristicRequest, opts ...grpc.CallOption) (*ReadCharacteristicResponse, error)
+	ReadDescriptor(ctx context.Context, in *ReadDescriptorRequest, opts ...grpc.CallOption) (*ReadDescriptorResponse, error)
+	ReadPhy(ctx context.Context, in *ReadPhyRequest, opts ...grpc.CallOption) (*ReadPhyResponse, error)
+	ReadRemoteRssi(ctx context.Context, in *ReadRemoteRssiRequest, opts ...grpc.CallOption) (*ReadRemoteRssiResponse, error)
+	RequestConnectionPriority(ctx context.Context, in *RequestConnectionPriorityRequest, opts ...grpc.CallOption) (*RequestConnectionPriorityResponse, error)
+	RequestMtu(ctx context.Context, in *RequestMtuRequest, opts ...grpc.CallOption) (*RequestMtuResponse, error)
+	SetCharacteristicNotification(ctx context.Context, in *SetCharacteristicNotificationRequest, opts ...grpc.CallOption) (*SetCharacteristicNotificationResponse, error)
+	SetPreferredPhy(ctx context.Context, in *SetPreferredPhyRequest, opts ...grpc.CallOption) (*SetPreferredPhyResponse, error)
+	WriteCharacteristic1(ctx context.Context, in *WriteCharacteristic1Request, opts ...grpc.CallOption) (*WriteCharacteristic1Response, error)
+	WriteCharacteristic3_1(ctx context.Context, in *WriteCharacteristic3_1Request, opts ...grpc.CallOption) (*WriteCharacteristic3_1Response, error)
+	WriteDescriptor1(ctx context.Context, in *WriteDescriptor1Request, opts ...grpc.CallOption) (*WriteDescriptor1Response, error)
+	WriteDescriptor2_1(ctx context.Context, in *WriteDescriptor2_1Request, opts ...grpc.CallOption) (*WriteDescriptor2_1Response, error)
+}
+
+type bluetoothGattServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewBluetoothGattServiceClient(cc grpc.ClientConnInterface) BluetoothGattServiceClient {
+	return &bluetoothGattServiceClient{cc}
+}
+
+func (c *bluetoothGattServiceClient) AbortReliableWrite0(ctx context.Context, in *AbortReliableWrite0Request, opts ...grpc.CallOption) (*AbortReliableWrite0Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AbortReliableWrite0Response)
+	err := c.cc.Invoke(ctx, BluetoothGattService_AbortReliableWrite0_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) AbortReliableWrite1_1(ctx context.Context, in *AbortReliableWrite1_1Request, opts ...grpc.CallOption) (*AbortReliableWrite1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AbortReliableWrite1_1Response)
+	err := c.cc.Invoke(ctx, BluetoothGattService_AbortReliableWrite1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) BeginReliableWrite(ctx context.Context, in *BeginReliableWriteRequest, opts ...grpc.CallOption) (*BeginReliableWriteResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BeginReliableWriteResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_BeginReliableWrite_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) Close(ctx context.Context, in *CloseRequest, opts ...grpc.CallOption) (*CloseResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CloseResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_Close_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) Connect(ctx context.Context, in *ConnectRequest, opts ...grpc.CallOption) (*BluetoothGattConnectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BluetoothGattConnectResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_Connect_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) Disconnect(ctx context.Context, in *DisconnectRequest, opts ...grpc.CallOption) (*DisconnectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DisconnectResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_Disconnect_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) DiscoverServices(ctx context.Context, in *DiscoverServicesRequest, opts ...grpc.CallOption) (*DiscoverServicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DiscoverServicesResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_DiscoverServices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) ExecuteReliableWrite(ctx context.Context, in *ExecuteReliableWriteRequest, opts ...grpc.CallOption) (*ExecuteReliableWriteResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExecuteReliableWriteResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_ExecuteReliableWrite_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) GetConnectedDevices(ctx context.Context, in *GetConnectedDevicesRequest, opts ...grpc.CallOption) (*GetConnectedDevicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetConnectedDevicesResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_GetConnectedDevices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) GetConnectionState(ctx context.Context, in *GetConnectionStateRequest, opts ...grpc.CallOption) (*GetConnectionStateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetConnectionStateResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_GetConnectionState_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) GetDevice(ctx context.Context, in *GetDeviceRequest, opts ...grpc.CallOption) (*GetDeviceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDeviceResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_GetDevice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) GetDevicesMatchingConnectionStates(ctx context.Context, in *GetDevicesMatchingConnectionStatesRequest, opts ...grpc.CallOption) (*GetDevicesMatchingConnectionStatesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDevicesMatchingConnectionStatesResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_GetDevicesMatchingConnectionStates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) GetService(ctx context.Context, in *GetServiceRequest, opts ...grpc.CallOption) (*GetServiceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetServiceResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_GetService_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) GetServices(ctx context.Context, in *GetServicesRequest, opts ...grpc.CallOption) (*GetServicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetServicesResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_GetServices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) ReadCharacteristic(ctx context.Context, in *ReadCharacteristicRequest, opts ...grpc.CallOption) (*ReadCharacteristicResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReadCharacteristicResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_ReadCharacteristic_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) ReadDescriptor(ctx context.Context, in *ReadDescriptorRequest, opts ...grpc.CallOption) (*ReadDescriptorResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReadDescriptorResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_ReadDescriptor_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) ReadPhy(ctx context.Context, in *ReadPhyRequest, opts ...grpc.CallOption) (*ReadPhyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReadPhyResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_ReadPhy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) ReadRemoteRssi(ctx context.Context, in *ReadRemoteRssiRequest, opts ...grpc.CallOption) (*ReadRemoteRssiResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReadRemoteRssiResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_ReadRemoteRssi_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) RequestConnectionPriority(ctx context.Context, in *RequestConnectionPriorityRequest, opts ...grpc.CallOption) (*RequestConnectionPriorityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestConnectionPriorityResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_RequestConnectionPriority_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) RequestMtu(ctx context.Context, in *RequestMtuRequest, opts ...grpc.CallOption) (*RequestMtuResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RequestMtuResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_RequestMtu_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) SetCharacteristicNotification(ctx context.Context, in *SetCharacteristicNotificationRequest, opts ...grpc.CallOption) (*SetCharacteristicNotificationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetCharacteristicNotificationResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_SetCharacteristicNotification_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) SetPreferredPhy(ctx context.Context, in *SetPreferredPhyRequest, opts ...grpc.CallOption) (*SetPreferredPhyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetPreferredPhyResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattService_SetPreferredPhy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) WriteCharacteristic1(ctx context.Context, in *WriteCharacteristic1Request, opts ...grpc.CallOption) (*WriteCharacteristic1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteCharacteristic1Response)
+	err := c.cc.Invoke(ctx, BluetoothGattService_WriteCharacteristic1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) WriteCharacteristic3_1(ctx context.Context, in *WriteCharacteristic3_1Request, opts ...grpc.CallOption) (*WriteCharacteristic3_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteCharacteristic3_1Response)
+	err := c.cc.Invoke(ctx, BluetoothGattService_WriteCharacteristic3_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) WriteDescriptor1(ctx context.Context, in *WriteDescriptor1Request, opts ...grpc.CallOption) (*WriteDescriptor1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteDescriptor1Response)
+	err := c.cc.Invoke(ctx, BluetoothGattService_WriteDescriptor1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceClient) WriteDescriptor2_1(ctx context.Context, in *WriteDescriptor2_1Request, opts ...grpc.CallOption) (*WriteDescriptor2_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteDescriptor2_1Response)
+	err := c.cc.Invoke(ctx, BluetoothGattService_WriteDescriptor2_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// BluetoothGattServiceServer is the server API for BluetoothGattService service.
+// All implementations must embed UnimplementedBluetoothGattServiceServer
+// for forward compatibility.
+type BluetoothGattServiceServer interface {
+	AbortReliableWrite0(context.Context, *AbortReliableWrite0Request) (*AbortReliableWrite0Response, error)
+	AbortReliableWrite1_1(context.Context, *AbortReliableWrite1_1Request) (*AbortReliableWrite1_1Response, error)
+	BeginReliableWrite(context.Context, *BeginReliableWriteRequest) (*BeginReliableWriteResponse, error)
+	Close(context.Context, *CloseRequest) (*CloseResponse, error)
+	Connect(context.Context, *ConnectRequest) (*BluetoothGattConnectResponse, error)
+	Disconnect(context.Context, *DisconnectRequest) (*DisconnectResponse, error)
+	DiscoverServices(context.Context, *DiscoverServicesRequest) (*DiscoverServicesResponse, error)
+	ExecuteReliableWrite(context.Context, *ExecuteReliableWriteRequest) (*ExecuteReliableWriteResponse, error)
+	GetConnectedDevices(context.Context, *GetConnectedDevicesRequest) (*GetConnectedDevicesResponse, error)
+	GetConnectionState(context.Context, *GetConnectionStateRequest) (*GetConnectionStateResponse, error)
+	GetDevice(context.Context, *GetDeviceRequest) (*GetDeviceResponse, error)
+	GetDevicesMatchingConnectionStates(context.Context, *GetDevicesMatchingConnectionStatesRequest) (*GetDevicesMatchingConnectionStatesResponse, error)
+	GetService(context.Context, *GetServiceRequest) (*GetServiceResponse, error)
+	GetServices(context.Context, *GetServicesRequest) (*GetServicesResponse, error)
+	ReadCharacteristic(context.Context, *ReadCharacteristicRequest) (*ReadCharacteristicResponse, error)
+	ReadDescriptor(context.Context, *ReadDescriptorRequest) (*ReadDescriptorResponse, error)
+	ReadPhy(context.Context, *ReadPhyRequest) (*ReadPhyResponse, error)
+	ReadRemoteRssi(context.Context, *ReadRemoteRssiRequest) (*ReadRemoteRssiResponse, error)
+	RequestConnectionPriority(context.Context, *RequestConnectionPriorityRequest) (*RequestConnectionPriorityResponse, error)
+	RequestMtu(context.Context, *RequestMtuRequest) (*RequestMtuResponse, error)
+	SetCharacteristicNotification(context.Context, *SetCharacteristicNotificationRequest) (*SetCharacteristicNotificationResponse, error)
+	SetPreferredPhy(context.Context, *SetPreferredPhyRequest) (*SetPreferredPhyResponse, error)
+	WriteCharacteristic1(context.Context, *WriteCharacteristic1Request) (*WriteCharacteristic1Response, error)
+	WriteCharacteristic3_1(context.Context, *WriteCharacteristic3_1Request) (*WriteCharacteristic3_1Response, error)
+	WriteDescriptor1(context.Context, *WriteDescriptor1Request) (*WriteDescriptor1Response, error)
+	WriteDescriptor2_1(context.Context, *WriteDescriptor2_1Request) (*WriteDescriptor2_1Response, error)
+	mustEmbedUnimplementedBluetoothGattServiceServer()
+}
+
+// UnimplementedBluetoothGattServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedBluetoothGattServiceServer struct{}
+
+func (UnimplementedBluetoothGattServiceServer) AbortReliableWrite0(context.Context, *AbortReliableWrite0Request) (*AbortReliableWrite0Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AbortReliableWrite0 not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) AbortReliableWrite1_1(context.Context, *AbortReliableWrite1_1Request) (*AbortReliableWrite1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method AbortReliableWrite1_1 not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) BeginReliableWrite(context.Context, *BeginReliableWriteRequest) (*BeginReliableWriteResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BeginReliableWrite not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) Close(context.Context, *CloseRequest) (*CloseResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Close not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) Connect(context.Context, *ConnectRequest) (*BluetoothGattConnectResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Connect not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) Disconnect(context.Context, *DisconnectRequest) (*DisconnectResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Disconnect not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) DiscoverServices(context.Context, *DiscoverServicesRequest) (*DiscoverServicesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DiscoverServices not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) ExecuteReliableWrite(context.Context, *ExecuteReliableWriteRequest) (*ExecuteReliableWriteResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExecuteReliableWrite not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) GetConnectedDevices(context.Context, *GetConnectedDevicesRequest) (*GetConnectedDevicesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetConnectedDevices not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) GetConnectionState(context.Context, *GetConnectionStateRequest) (*GetConnectionStateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetConnectionState not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) GetDevice(context.Context, *GetDeviceRequest) (*GetDeviceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDevice not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) GetDevicesMatchingConnectionStates(context.Context, *GetDevicesMatchingConnectionStatesRequest) (*GetDevicesMatchingConnectionStatesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDevicesMatchingConnectionStates not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) GetService(context.Context, *GetServiceRequest) (*GetServiceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetService not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) GetServices(context.Context, *GetServicesRequest) (*GetServicesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetServices not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) ReadCharacteristic(context.Context, *ReadCharacteristicRequest) (*ReadCharacteristicResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReadCharacteristic not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) ReadDescriptor(context.Context, *ReadDescriptorRequest) (*ReadDescriptorResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReadDescriptor not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) ReadPhy(context.Context, *ReadPhyRequest) (*ReadPhyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReadPhy not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) ReadRemoteRssi(context.Context, *ReadRemoteRssiRequest) (*ReadRemoteRssiResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReadRemoteRssi not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) RequestConnectionPriority(context.Context, *RequestConnectionPriorityRequest) (*RequestConnectionPriorityResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestConnectionPriority not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) RequestMtu(context.Context, *RequestMtuRequest) (*RequestMtuResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RequestMtu not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) SetCharacteristicNotification(context.Context, *SetCharacteristicNotificationRequest) (*SetCharacteristicNotificationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetCharacteristicNotification not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) SetPreferredPhy(context.Context, *SetPreferredPhyRequest) (*SetPreferredPhyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetPreferredPhy not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) WriteCharacteristic1(context.Context, *WriteCharacteristic1Request) (*WriteCharacteristic1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteCharacteristic1 not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) WriteCharacteristic3_1(context.Context, *WriteCharacteristic3_1Request) (*WriteCharacteristic3_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteCharacteristic3_1 not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) WriteDescriptor1(context.Context, *WriteDescriptor1Request) (*WriteDescriptor1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteDescriptor1 not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) WriteDescriptor2_1(context.Context, *WriteDescriptor2_1Request) (*WriteDescriptor2_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteDescriptor2_1 not implemented")
+}
+func (UnimplementedBluetoothGattServiceServer) mustEmbedUnimplementedBluetoothGattServiceServer() {}
+func (UnimplementedBluetoothGattServiceServer) testEmbeddedByValue()                              {}
+
+// UnsafeBluetoothGattServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BluetoothGattServiceServer will
+// result in compilation errors.
+type UnsafeBluetoothGattServiceServer interface {
+	mustEmbedUnimplementedBluetoothGattServiceServer()
+}
+
+func RegisterBluetoothGattServiceServer(s grpc.ServiceRegistrar, srv BluetoothGattServiceServer) {
+	// If the following call panics, it indicates UnimplementedBluetoothGattServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&BluetoothGattService_ServiceDesc, srv)
+}
+
+func _BluetoothGattService_AbortReliableWrite0_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AbortReliableWrite0Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).AbortReliableWrite0(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_AbortReliableWrite0_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).AbortReliableWrite0(ctx, req.(*AbortReliableWrite0Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_AbortReliableWrite1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AbortReliableWrite1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).AbortReliableWrite1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_AbortReliableWrite1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).AbortReliableWrite1_1(ctx, req.(*AbortReliableWrite1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_BeginReliableWrite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BeginReliableWriteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).BeginReliableWrite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_BeginReliableWrite_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).BeginReliableWrite(ctx, req.(*BeginReliableWriteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_Close_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CloseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).Close(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_Close_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).Close(ctx, req.(*CloseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_Connect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConnectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).Connect(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_Connect_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).Connect(ctx, req.(*ConnectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_Disconnect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DisconnectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).Disconnect(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_Disconnect_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).Disconnect(ctx, req.(*DisconnectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_DiscoverServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DiscoverServicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).DiscoverServices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_DiscoverServices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).DiscoverServices(ctx, req.(*DiscoverServicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_ExecuteReliableWrite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExecuteReliableWriteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).ExecuteReliableWrite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_ExecuteReliableWrite_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).ExecuteReliableWrite(ctx, req.(*ExecuteReliableWriteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_GetConnectedDevices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConnectedDevicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).GetConnectedDevices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_GetConnectedDevices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).GetConnectedDevices(ctx, req.(*GetConnectedDevicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_GetConnectionState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConnectionStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).GetConnectionState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_GetConnectionState_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).GetConnectionState(ctx, req.(*GetConnectionStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_GetDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDeviceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).GetDevice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_GetDevice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).GetDevice(ctx, req.(*GetDeviceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_GetDevicesMatchingConnectionStates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDevicesMatchingConnectionStatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).GetDevicesMatchingConnectionStates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_GetDevicesMatchingConnectionStates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).GetDevicesMatchingConnectionStates(ctx, req.(*GetDevicesMatchingConnectionStatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_GetService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetServiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).GetService(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_GetService_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).GetService(ctx, req.(*GetServiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_GetServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetServicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).GetServices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_GetServices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).GetServices(ctx, req.(*GetServicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_ReadCharacteristic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadCharacteristicRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).ReadCharacteristic(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_ReadCharacteristic_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).ReadCharacteristic(ctx, req.(*ReadCharacteristicRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_ReadDescriptor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadDescriptorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).ReadDescriptor(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_ReadDescriptor_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).ReadDescriptor(ctx, req.(*ReadDescriptorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_ReadPhy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadPhyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).ReadPhy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_ReadPhy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).ReadPhy(ctx, req.(*ReadPhyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_ReadRemoteRssi_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadRemoteRssiRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).ReadRemoteRssi(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_ReadRemoteRssi_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).ReadRemoteRssi(ctx, req.(*ReadRemoteRssiRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_RequestConnectionPriority_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestConnectionPriorityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).RequestConnectionPriority(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_RequestConnectionPriority_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).RequestConnectionPriority(ctx, req.(*RequestConnectionPriorityRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_RequestMtu_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestMtuRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).RequestMtu(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_RequestMtu_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).RequestMtu(ctx, req.(*RequestMtuRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_SetCharacteristicNotification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetCharacteristicNotificationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).SetCharacteristicNotification(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_SetCharacteristicNotification_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).SetCharacteristicNotification(ctx, req.(*SetCharacteristicNotificationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_SetPreferredPhy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPreferredPhyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).SetPreferredPhy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_SetPreferredPhy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).SetPreferredPhy(ctx, req.(*SetPreferredPhyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_WriteCharacteristic1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteCharacteristic1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).WriteCharacteristic1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_WriteCharacteristic1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).WriteCharacteristic1(ctx, req.(*WriteCharacteristic1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_WriteCharacteristic3_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteCharacteristic3_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).WriteCharacteristic3_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_WriteCharacteristic3_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).WriteCharacteristic3_1(ctx, req.(*WriteCharacteristic3_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_WriteDescriptor1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteDescriptor1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).WriteDescriptor1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_WriteDescriptor1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).WriteDescriptor1(ctx, req.(*WriteDescriptor1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattService_WriteDescriptor2_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteDescriptor2_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServer).WriteDescriptor2_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattService_WriteDescriptor2_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServer).WriteDescriptor2_1(ctx, req.(*WriteDescriptor2_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// BluetoothGattService_ServiceDesc is the grpc.ServiceDesc for BluetoothGattService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var BluetoothGattService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bluetooth.BluetoothGattService",
+	HandlerType: (*BluetoothGattServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AbortReliableWrite0",
+			Handler:    _BluetoothGattService_AbortReliableWrite0_Handler,
+		},
+		{
+			MethodName: "AbortReliableWrite1_1",
+			Handler:    _BluetoothGattService_AbortReliableWrite1_1_Handler,
+		},
+		{
+			MethodName: "BeginReliableWrite",
+			Handler:    _BluetoothGattService_BeginReliableWrite_Handler,
+		},
+		{
+			MethodName: "Close",
+			Handler:    _BluetoothGattService_Close_Handler,
+		},
+		{
+			MethodName: "Connect",
+			Handler:    _BluetoothGattService_Connect_Handler,
+		},
+		{
+			MethodName: "Disconnect",
+			Handler:    _BluetoothGattService_Disconnect_Handler,
+		},
+		{
+			MethodName: "DiscoverServices",
+			Handler:    _BluetoothGattService_DiscoverServices_Handler,
+		},
+		{
+			MethodName: "ExecuteReliableWrite",
+			Handler:    _BluetoothGattService_ExecuteReliableWrite_Handler,
+		},
+		{
+			MethodName: "GetConnectedDevices",
+			Handler:    _BluetoothGattService_GetConnectedDevices_Handler,
+		},
+		{
+			MethodName: "GetConnectionState",
+			Handler:    _BluetoothGattService_GetConnectionState_Handler,
+		},
+		{
+			MethodName: "GetDevice",
+			Handler:    _BluetoothGattService_GetDevice_Handler,
+		},
+		{
+			MethodName: "GetDevicesMatchingConnectionStates",
+			Handler:    _BluetoothGattService_GetDevicesMatchingConnectionStates_Handler,
+		},
+		{
+			MethodName: "GetService",
+			Handler:    _BluetoothGattService_GetService_Handler,
+		},
+		{
+			MethodName: "GetServices",
+			Handler:    _BluetoothGattService_GetServices_Handler,
+		},
+		{
+			MethodName: "ReadCharacteristic",
+			Handler:    _BluetoothGattService_ReadCharacteristic_Handler,
+		},
+		{
+			MethodName: "ReadDescriptor",
+			Handler:    _BluetoothGattService_ReadDescriptor_Handler,
+		},
+		{
+			MethodName: "ReadPhy",
+			Handler:    _BluetoothGattService_ReadPhy_Handler,
+		},
+		{
+			MethodName: "ReadRemoteRssi",
+			Handler:    _BluetoothGattService_ReadRemoteRssi_Handler,
+		},
+		{
+			MethodName: "RequestConnectionPriority",
+			Handler:    _BluetoothGattService_RequestConnectionPriority_Handler,
+		},
+		{
+			MethodName: "RequestMtu",
+			Handler:    _BluetoothGattService_RequestMtu_Handler,
+		},
+		{
+			MethodName: "SetCharacteristicNotification",
+			Handler:    _BluetoothGattService_SetCharacteristicNotification_Handler,
+		},
+		{
+			MethodName: "SetPreferredPhy",
+			Handler:    _BluetoothGattService_SetPreferredPhy_Handler,
+		},
+		{
+			MethodName: "WriteCharacteristic1",
+			Handler:    _BluetoothGattService_WriteCharacteristic1_Handler,
+		},
+		{
+			MethodName: "WriteCharacteristic3_1",
+			Handler:    _BluetoothGattService_WriteCharacteristic3_1_Handler,
+		},
+		{
+			MethodName: "WriteDescriptor1",
+			Handler:    _BluetoothGattService_WriteDescriptor1_Handler,
+		},
+		{
+			MethodName: "WriteDescriptor2_1",
+			Handler:    _BluetoothGattService_WriteDescriptor2_1_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/bluetooth/bluetooth.proto",
+}
+
+const (
+	BluetoothGattCharacteristicService_AddDescriptor_FullMethodName    = "/bluetooth.BluetoothGattCharacteristicService/AddDescriptor"
+	BluetoothGattCharacteristicService_DescribeContents_FullMethodName = "/bluetooth.BluetoothGattCharacteristicService/DescribeContents"
+	BluetoothGattCharacteristicService_GetDescriptor_FullMethodName    = "/bluetooth.BluetoothGattCharacteristicService/GetDescriptor"
+	BluetoothGattCharacteristicService_GetDescriptors_FullMethodName   = "/bluetooth.BluetoothGattCharacteristicService/GetDescriptors"
+	BluetoothGattCharacteristicService_GetFloatValue_FullMethodName    = "/bluetooth.BluetoothGattCharacteristicService/GetFloatValue"
+	BluetoothGattCharacteristicService_GetInstanceId_FullMethodName    = "/bluetooth.BluetoothGattCharacteristicService/GetInstanceId"
+	BluetoothGattCharacteristicService_GetIntValue_FullMethodName      = "/bluetooth.BluetoothGattCharacteristicService/GetIntValue"
+	BluetoothGattCharacteristicService_GetPermissions_FullMethodName   = "/bluetooth.BluetoothGattCharacteristicService/GetPermissions"
+	BluetoothGattCharacteristicService_GetProperties_FullMethodName    = "/bluetooth.BluetoothGattCharacteristicService/GetProperties"
+	BluetoothGattCharacteristicService_GetService_FullMethodName       = "/bluetooth.BluetoothGattCharacteristicService/GetService"
+	BluetoothGattCharacteristicService_GetStringValue_FullMethodName   = "/bluetooth.BluetoothGattCharacteristicService/GetStringValue"
+	BluetoothGattCharacteristicService_GetUuid_FullMethodName          = "/bluetooth.BluetoothGattCharacteristicService/GetUuid"
+	BluetoothGattCharacteristicService_GetValue_FullMethodName         = "/bluetooth.BluetoothGattCharacteristicService/GetValue"
+	BluetoothGattCharacteristicService_GetWriteType_FullMethodName     = "/bluetooth.BluetoothGattCharacteristicService/GetWriteType"
+	BluetoothGattCharacteristicService_SetValue1_FullMethodName        = "/bluetooth.BluetoothGattCharacteristicService/SetValue1"
+	BluetoothGattCharacteristicService_SetValue3_1_FullMethodName      = "/bluetooth.BluetoothGattCharacteristicService/SetValue3_1"
+	BluetoothGattCharacteristicService_SetValue4_2_FullMethodName      = "/bluetooth.BluetoothGattCharacteristicService/SetValue4_2"
+	BluetoothGattCharacteristicService_SetValue1_3_FullMethodName      = "/bluetooth.BluetoothGattCharacteristicService/SetValue1_3"
+	BluetoothGattCharacteristicService_SetWriteType_FullMethodName     = "/bluetooth.BluetoothGattCharacteristicService/SetWriteType"
+	BluetoothGattCharacteristicService_WriteToParcel_FullMethodName    = "/bluetooth.BluetoothGattCharacteristicService/WriteToParcel"
+)
+
+// BluetoothGattCharacteristicServiceClient is the client API for BluetoothGattCharacteristicService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type BluetoothGattCharacteristicServiceClient interface {
+	AddDescriptor(ctx context.Context, in *AddDescriptorRequest, opts ...grpc.CallOption) (*AddDescriptorResponse, error)
+	DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error)
+	GetDescriptor(ctx context.Context, in *GetDescriptorRequest, opts ...grpc.CallOption) (*GetDescriptorResponse, error)
+	GetDescriptors(ctx context.Context, in *GetDescriptorsRequest, opts ...grpc.CallOption) (*GetDescriptorsResponse, error)
+	GetFloatValue(ctx context.Context, in *GetFloatValueRequest, opts ...grpc.CallOption) (*GetFloatValueResponse, error)
+	GetInstanceId(ctx context.Context, in *GetInstanceIdRequest, opts ...grpc.CallOption) (*GetInstanceIdResponse, error)
+	GetIntValue(ctx context.Context, in *GetIntValueRequest, opts ...grpc.CallOption) (*GetIntValueResponse, error)
+	GetPermissions(ctx context.Context, in *GetPermissionsRequest, opts ...grpc.CallOption) (*GetPermissionsResponse, error)
+	GetProperties(ctx context.Context, in *GetPropertiesRequest, opts ...grpc.CallOption) (*GetPropertiesResponse, error)
+	GetService(ctx context.Context, in *BluetoothGattCharacteristicGetServiceRequest, opts ...grpc.CallOption) (*GetServiceResponse, error)
+	GetStringValue(ctx context.Context, in *GetStringValueRequest, opts ...grpc.CallOption) (*GetStringValueResponse, error)
+	GetUuid(ctx context.Context, in *GetUuidRequest, opts ...grpc.CallOption) (*GetUuidResponse, error)
+	GetValue(ctx context.Context, in *GetValueRequest, opts ...grpc.CallOption) (*GetValueResponse, error)
+	GetWriteType(ctx context.Context, in *GetWriteTypeRequest, opts ...grpc.CallOption) (*GetWriteTypeResponse, error)
+	SetValue1(ctx context.Context, in *SetValue1Request, opts ...grpc.CallOption) (*SetValue1Response, error)
+	SetValue3_1(ctx context.Context, in *SetValue3_1Request, opts ...grpc.CallOption) (*SetValue3_1Response, error)
+	SetValue4_2(ctx context.Context, in *SetValue4_2Request, opts ...grpc.CallOption) (*SetValue4_2Response, error)
+	SetValue1_3(ctx context.Context, in *SetValue1_3Request, opts ...grpc.CallOption) (*SetValue1_3Response, error)
+	SetWriteType(ctx context.Context, in *SetWriteTypeRequest, opts ...grpc.CallOption) (*SetWriteTypeResponse, error)
+	WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error)
+}
+
+type bluetoothGattCharacteristicServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewBluetoothGattCharacteristicServiceClient(cc grpc.ClientConnInterface) BluetoothGattCharacteristicServiceClient {
+	return &bluetoothGattCharacteristicServiceClient{cc}
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) AddDescriptor(ctx context.Context, in *AddDescriptorRequest, opts ...grpc.CallOption) (*AddDescriptorResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddDescriptorResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_AddDescriptor_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DescribeContentsResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_DescribeContents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) GetDescriptor(ctx context.Context, in *GetDescriptorRequest, opts ...grpc.CallOption) (*GetDescriptorResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDescriptorResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetDescriptor_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) GetDescriptors(ctx context.Context, in *GetDescriptorsRequest, opts ...grpc.CallOption) (*GetDescriptorsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDescriptorsResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetDescriptors_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) GetFloatValue(ctx context.Context, in *GetFloatValueRequest, opts ...grpc.CallOption) (*GetFloatValueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetFloatValueResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetFloatValue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) GetInstanceId(ctx context.Context, in *GetInstanceIdRequest, opts ...grpc.CallOption) (*GetInstanceIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetInstanceIdResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetInstanceId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) GetIntValue(ctx context.Context, in *GetIntValueRequest, opts ...grpc.CallOption) (*GetIntValueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetIntValueResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetIntValue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) GetPermissions(ctx context.Context, in *GetPermissionsRequest, opts ...grpc.CallOption) (*GetPermissionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPermissionsResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetPermissions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) GetProperties(ctx context.Context, in *GetPropertiesRequest, opts ...grpc.CallOption) (*GetPropertiesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPropertiesResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetProperties_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) GetService(ctx context.Context, in *BluetoothGattCharacteristicGetServiceRequest, opts ...grpc.CallOption) (*GetServiceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetServiceResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetService_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) GetStringValue(ctx context.Context, in *GetStringValueRequest, opts ...grpc.CallOption) (*GetStringValueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetStringValueResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetStringValue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) GetUuid(ctx context.Context, in *GetUuidRequest, opts ...grpc.CallOption) (*GetUuidResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUuidResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetUuid_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) GetValue(ctx context.Context, in *GetValueRequest, opts ...grpc.CallOption) (*GetValueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetValueResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetValue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) GetWriteType(ctx context.Context, in *GetWriteTypeRequest, opts ...grpc.CallOption) (*GetWriteTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWriteTypeResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_GetWriteType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) SetValue1(ctx context.Context, in *SetValue1Request, opts ...grpc.CallOption) (*SetValue1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetValue1Response)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_SetValue1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) SetValue3_1(ctx context.Context, in *SetValue3_1Request, opts ...grpc.CallOption) (*SetValue3_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetValue3_1Response)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_SetValue3_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) SetValue4_2(ctx context.Context, in *SetValue4_2Request, opts ...grpc.CallOption) (*SetValue4_2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetValue4_2Response)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_SetValue4_2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) SetValue1_3(ctx context.Context, in *SetValue1_3Request, opts ...grpc.CallOption) (*SetValue1_3Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetValue1_3Response)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_SetValue1_3_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) SetWriteType(ctx context.Context, in *SetWriteTypeRequest, opts ...grpc.CallOption) (*SetWriteTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetWriteTypeResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_SetWriteType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattCharacteristicServiceClient) WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteToParcelResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattCharacteristicService_WriteToParcel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// BluetoothGattCharacteristicServiceServer is the server API for BluetoothGattCharacteristicService service.
+// All implementations must embed UnimplementedBluetoothGattCharacteristicServiceServer
+// for forward compatibility.
+type BluetoothGattCharacteristicServiceServer interface {
+	AddDescriptor(context.Context, *AddDescriptorRequest) (*AddDescriptorResponse, error)
+	DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error)
+	GetDescriptor(context.Context, *GetDescriptorRequest) (*GetDescriptorResponse, error)
+	GetDescriptors(context.Context, *GetDescriptorsRequest) (*GetDescriptorsResponse, error)
+	GetFloatValue(context.Context, *GetFloatValueRequest) (*GetFloatValueResponse, error)
+	GetInstanceId(context.Context, *GetInstanceIdRequest) (*GetInstanceIdResponse, error)
+	GetIntValue(context.Context, *GetIntValueRequest) (*GetIntValueResponse, error)
+	GetPermissions(context.Context, *GetPermissionsRequest) (*GetPermissionsResponse, error)
+	GetProperties(context.Context, *GetPropertiesRequest) (*GetPropertiesResponse, error)
+	GetService(context.Context, *BluetoothGattCharacteristicGetServiceRequest) (*GetServiceResponse, error)
+	GetStringValue(context.Context, *GetStringValueRequest) (*GetStringValueResponse, error)
+	GetUuid(context.Context, *GetUuidRequest) (*GetUuidResponse, error)
+	GetValue(context.Context, *GetValueRequest) (*GetValueResponse, error)
+	GetWriteType(context.Context, *GetWriteTypeRequest) (*GetWriteTypeResponse, error)
+	SetValue1(context.Context, *SetValue1Request) (*SetValue1Response, error)
+	SetValue3_1(context.Context, *SetValue3_1Request) (*SetValue3_1Response, error)
+	SetValue4_2(context.Context, *SetValue4_2Request) (*SetValue4_2Response, error)
+	SetValue1_3(context.Context, *SetValue1_3Request) (*SetValue1_3Response, error)
+	SetWriteType(context.Context, *SetWriteTypeRequest) (*SetWriteTypeResponse, error)
+	WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error)
+	mustEmbedUnimplementedBluetoothGattCharacteristicServiceServer()
+}
+
+// UnimplementedBluetoothGattCharacteristicServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedBluetoothGattCharacteristicServiceServer struct{}
+
+func (UnimplementedBluetoothGattCharacteristicServiceServer) AddDescriptor(context.Context, *AddDescriptorRequest) (*AddDescriptorResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddDescriptor not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DescribeContents not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetDescriptor(context.Context, *GetDescriptorRequest) (*GetDescriptorResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDescriptor not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetDescriptors(context.Context, *GetDescriptorsRequest) (*GetDescriptorsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDescriptors not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetFloatValue(context.Context, *GetFloatValueRequest) (*GetFloatValueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetFloatValue not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetInstanceId(context.Context, *GetInstanceIdRequest) (*GetInstanceIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetInstanceId not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetIntValue(context.Context, *GetIntValueRequest) (*GetIntValueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetIntValue not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetPermissions(context.Context, *GetPermissionsRequest) (*GetPermissionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPermissions not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetProperties(context.Context, *GetPropertiesRequest) (*GetPropertiesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetProperties not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetService(context.Context, *BluetoothGattCharacteristicGetServiceRequest) (*GetServiceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetService not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetStringValue(context.Context, *GetStringValueRequest) (*GetStringValueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetStringValue not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetUuid(context.Context, *GetUuidRequest) (*GetUuidResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUuid not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetValue(context.Context, *GetValueRequest) (*GetValueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetValue not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) GetWriteType(context.Context, *GetWriteTypeRequest) (*GetWriteTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetWriteType not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) SetValue1(context.Context, *SetValue1Request) (*SetValue1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetValue1 not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) SetValue3_1(context.Context, *SetValue3_1Request) (*SetValue3_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetValue3_1 not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) SetValue4_2(context.Context, *SetValue4_2Request) (*SetValue4_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetValue4_2 not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) SetValue1_3(context.Context, *SetValue1_3Request) (*SetValue1_3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetValue1_3 not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) SetWriteType(context.Context, *SetWriteTypeRequest) (*SetWriteTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetWriteType not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteToParcel not implemented")
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) mustEmbedUnimplementedBluetoothGattCharacteristicServiceServer() {
+}
+func (UnimplementedBluetoothGattCharacteristicServiceServer) testEmbeddedByValue() {}
+
+// UnsafeBluetoothGattCharacteristicServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BluetoothGattCharacteristicServiceServer will
+// result in compilation errors.
+type UnsafeBluetoothGattCharacteristicServiceServer interface {
+	mustEmbedUnimplementedBluetoothGattCharacteristicServiceServer()
+}
+
+func RegisterBluetoothGattCharacteristicServiceServer(s grpc.ServiceRegistrar, srv BluetoothGattCharacteristicServiceServer) {
+	// If the following call panics, it indicates UnimplementedBluetoothGattCharacteristicServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&BluetoothGattCharacteristicService_ServiceDesc, srv)
+}
+
+func _BluetoothGattCharacteristicService_AddDescriptor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddDescriptorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).AddDescriptor(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_AddDescriptor_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).AddDescriptor(ctx, req.(*AddDescriptorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_DescribeContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeContentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).DescribeContents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_DescribeContents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).DescribeContents(ctx, req.(*DescribeContentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_GetDescriptor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDescriptorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetDescriptor(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetDescriptor_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetDescriptor(ctx, req.(*GetDescriptorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_GetDescriptors_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDescriptorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetDescriptors(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetDescriptors_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetDescriptors(ctx, req.(*GetDescriptorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_GetFloatValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFloatValueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetFloatValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetFloatValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetFloatValue(ctx, req.(*GetFloatValueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_GetInstanceId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInstanceIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetInstanceId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetInstanceId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetInstanceId(ctx, req.(*GetInstanceIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_GetIntValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIntValueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetIntValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetIntValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetIntValue(ctx, req.(*GetIntValueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_GetPermissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPermissionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetPermissions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetPermissions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetPermissions(ctx, req.(*GetPermissionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_GetProperties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPropertiesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetProperties(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetProperties_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetProperties(ctx, req.(*GetPropertiesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_GetService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BluetoothGattCharacteristicGetServiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetService(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetService_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetService(ctx, req.(*BluetoothGattCharacteristicGetServiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_GetStringValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStringValueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetStringValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetStringValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetStringValue(ctx, req.(*GetStringValueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_GetUuid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUuidRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetUuid(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetUuid_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetUuid(ctx, req.(*GetUuidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_GetValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetValueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetValue(ctx, req.(*GetValueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_GetWriteType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWriteTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetWriteType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_GetWriteType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).GetWriteType(ctx, req.(*GetWriteTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_SetValue1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetValue1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetValue1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_SetValue1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetValue1(ctx, req.(*SetValue1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_SetValue3_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetValue3_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetValue3_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_SetValue3_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetValue3_1(ctx, req.(*SetValue3_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_SetValue4_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetValue4_2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetValue4_2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_SetValue4_2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetValue4_2(ctx, req.(*SetValue4_2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_SetValue1_3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetValue1_3Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetValue1_3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_SetValue1_3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetValue1_3(ctx, req.(*SetValue1_3Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_SetWriteType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetWriteTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetWriteType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_SetWriteType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).SetWriteType(ctx, req.(*SetWriteTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattCharacteristicService_WriteToParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteToParcelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattCharacteristicServiceServer).WriteToParcel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattCharacteristicService_WriteToParcel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattCharacteristicServiceServer).WriteToParcel(ctx, req.(*WriteToParcelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// BluetoothGattCharacteristicService_ServiceDesc is the grpc.ServiceDesc for BluetoothGattCharacteristicService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var BluetoothGattCharacteristicService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bluetooth.BluetoothGattCharacteristicService",
+	HandlerType: (*BluetoothGattCharacteristicServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddDescriptor",
+			Handler:    _BluetoothGattCharacteristicService_AddDescriptor_Handler,
+		},
+		{
+			MethodName: "DescribeContents",
+			Handler:    _BluetoothGattCharacteristicService_DescribeContents_Handler,
+		},
+		{
+			MethodName: "GetDescriptor",
+			Handler:    _BluetoothGattCharacteristicService_GetDescriptor_Handler,
+		},
+		{
+			MethodName: "GetDescriptors",
+			Handler:    _BluetoothGattCharacteristicService_GetDescriptors_Handler,
+		},
+		{
+			MethodName: "GetFloatValue",
+			Handler:    _BluetoothGattCharacteristicService_GetFloatValue_Handler,
+		},
+		{
+			MethodName: "GetInstanceId",
+			Handler:    _BluetoothGattCharacteristicService_GetInstanceId_Handler,
+		},
+		{
+			MethodName: "GetIntValue",
+			Handler:    _BluetoothGattCharacteristicService_GetIntValue_Handler,
+		},
+		{
+			MethodName: "GetPermissions",
+			Handler:    _BluetoothGattCharacteristicService_GetPermissions_Handler,
+		},
+		{
+			MethodName: "GetProperties",
+			Handler:    _BluetoothGattCharacteristicService_GetProperties_Handler,
+		},
+		{
+			MethodName: "GetService",
+			Handler:    _BluetoothGattCharacteristicService_GetService_Handler,
+		},
+		{
+			MethodName: "GetStringValue",
+			Handler:    _BluetoothGattCharacteristicService_GetStringValue_Handler,
+		},
+		{
+			MethodName: "GetUuid",
+			Handler:    _BluetoothGattCharacteristicService_GetUuid_Handler,
+		},
+		{
+			MethodName: "GetValue",
+			Handler:    _BluetoothGattCharacteristicService_GetValue_Handler,
+		},
+		{
+			MethodName: "GetWriteType",
+			Handler:    _BluetoothGattCharacteristicService_GetWriteType_Handler,
+		},
+		{
+			MethodName: "SetValue1",
+			Handler:    _BluetoothGattCharacteristicService_SetValue1_Handler,
+		},
+		{
+			MethodName: "SetValue3_1",
+			Handler:    _BluetoothGattCharacteristicService_SetValue3_1_Handler,
+		},
+		{
+			MethodName: "SetValue4_2",
+			Handler:    _BluetoothGattCharacteristicService_SetValue4_2_Handler,
+		},
+		{
+			MethodName: "SetValue1_3",
+			Handler:    _BluetoothGattCharacteristicService_SetValue1_3_Handler,
+		},
+		{
+			MethodName: "SetWriteType",
+			Handler:    _BluetoothGattCharacteristicService_SetWriteType_Handler,
+		},
+		{
+			MethodName: "WriteToParcel",
+			Handler:    _BluetoothGattCharacteristicService_WriteToParcel_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/bluetooth/bluetooth.proto",
+}
+
+const (
+	BluetoothGattServiceService_AddCharacteristic_FullMethodName   = "/bluetooth.BluetoothGattServiceService/AddCharacteristic"
+	BluetoothGattServiceService_AddService_FullMethodName          = "/bluetooth.BluetoothGattServiceService/AddService"
+	BluetoothGattServiceService_DescribeContents_FullMethodName    = "/bluetooth.BluetoothGattServiceService/DescribeContents"
+	BluetoothGattServiceService_GetCharacteristic_FullMethodName   = "/bluetooth.BluetoothGattServiceService/GetCharacteristic"
+	BluetoothGattServiceService_GetCharacteristics_FullMethodName  = "/bluetooth.BluetoothGattServiceService/GetCharacteristics"
+	BluetoothGattServiceService_GetIncludedServices_FullMethodName = "/bluetooth.BluetoothGattServiceService/GetIncludedServices"
+	BluetoothGattServiceService_GetInstanceId_FullMethodName       = "/bluetooth.BluetoothGattServiceService/GetInstanceId"
+	BluetoothGattServiceService_GetType_FullMethodName             = "/bluetooth.BluetoothGattServiceService/GetType"
+	BluetoothGattServiceService_GetUuid_FullMethodName             = "/bluetooth.BluetoothGattServiceService/GetUuid"
+	BluetoothGattServiceService_WriteToParcel_FullMethodName       = "/bluetooth.BluetoothGattServiceService/WriteToParcel"
+)
+
+// BluetoothGattServiceServiceClient is the client API for BluetoothGattServiceService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type BluetoothGattServiceServiceClient interface {
+	AddCharacteristic(ctx context.Context, in *AddCharacteristicRequest, opts ...grpc.CallOption) (*AddCharacteristicResponse, error)
+	AddService(ctx context.Context, in *AddServiceRequest, opts ...grpc.CallOption) (*AddServiceResponse, error)
+	DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error)
+	GetCharacteristic(ctx context.Context, in *GetCharacteristicRequest, opts ...grpc.CallOption) (*GetCharacteristicResponse, error)
+	GetCharacteristics(ctx context.Context, in *GetCharacteristicsRequest, opts ...grpc.CallOption) (*GetCharacteristicsResponse, error)
+	GetIncludedServices(ctx context.Context, in *GetIncludedServicesRequest, opts ...grpc.CallOption) (*GetIncludedServicesResponse, error)
+	GetInstanceId(ctx context.Context, in *GetInstanceIdRequest, opts ...grpc.CallOption) (*GetInstanceIdResponse, error)
+	GetType(ctx context.Context, in *GetTypeRequest, opts ...grpc.CallOption) (*GetTypeResponse, error)
+	GetUuid(ctx context.Context, in *GetUuidRequest, opts ...grpc.CallOption) (*GetUuidResponse, error)
+	WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error)
+}
+
+type bluetoothGattServiceServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewBluetoothGattServiceServiceClient(cc grpc.ClientConnInterface) BluetoothGattServiceServiceClient {
+	return &bluetoothGattServiceServiceClient{cc}
+}
+
+func (c *bluetoothGattServiceServiceClient) AddCharacteristic(ctx context.Context, in *AddCharacteristicRequest, opts ...grpc.CallOption) (*AddCharacteristicResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddCharacteristicResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServiceService_AddCharacteristic_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceServiceClient) AddService(ctx context.Context, in *AddServiceRequest, opts ...grpc.CallOption) (*AddServiceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddServiceResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServiceService_AddService_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceServiceClient) DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DescribeContentsResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServiceService_DescribeContents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceServiceClient) GetCharacteristic(ctx context.Context, in *GetCharacteristicRequest, opts ...grpc.CallOption) (*GetCharacteristicResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCharacteristicResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServiceService_GetCharacteristic_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceServiceClient) GetCharacteristics(ctx context.Context, in *GetCharacteristicsRequest, opts ...grpc.CallOption) (*GetCharacteristicsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCharacteristicsResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServiceService_GetCharacteristics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceServiceClient) GetIncludedServices(ctx context.Context, in *GetIncludedServicesRequest, opts ...grpc.CallOption) (*GetIncludedServicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetIncludedServicesResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServiceService_GetIncludedServices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceServiceClient) GetInstanceId(ctx context.Context, in *GetInstanceIdRequest, opts ...grpc.CallOption) (*GetInstanceIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetInstanceIdResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServiceService_GetInstanceId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceServiceClient) GetType(ctx context.Context, in *GetTypeRequest, opts ...grpc.CallOption) (*GetTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTypeResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServiceService_GetType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceServiceClient) GetUuid(ctx context.Context, in *GetUuidRequest, opts ...grpc.CallOption) (*GetUuidResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUuidResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServiceService_GetUuid_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServiceServiceClient) WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteToParcelResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServiceService_WriteToParcel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// BluetoothGattServiceServiceServer is the server API for BluetoothGattServiceService service.
+// All implementations must embed UnimplementedBluetoothGattServiceServiceServer
+// for forward compatibility.
+type BluetoothGattServiceServiceServer interface {
+	AddCharacteristic(context.Context, *AddCharacteristicRequest) (*AddCharacteristicResponse, error)
+	AddService(context.Context, *AddServiceRequest) (*AddServiceResponse, error)
+	DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error)
+	GetCharacteristic(context.Context, *GetCharacteristicRequest) (*GetCharacteristicResponse, error)
+	GetCharacteristics(context.Context, *GetCharacteristicsRequest) (*GetCharacteristicsResponse, error)
+	GetIncludedServices(context.Context, *GetIncludedServicesRequest) (*GetIncludedServicesResponse, error)
+	GetInstanceId(context.Context, *GetInstanceIdRequest) (*GetInstanceIdResponse, error)
+	GetType(context.Context, *GetTypeRequest) (*GetTypeResponse, error)
+	GetUuid(context.Context, *GetUuidRequest) (*GetUuidResponse, error)
+	WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error)
+	mustEmbedUnimplementedBluetoothGattServiceServiceServer()
+}
+
+// UnimplementedBluetoothGattServiceServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedBluetoothGattServiceServiceServer struct{}
+
+func (UnimplementedBluetoothGattServiceServiceServer) AddCharacteristic(context.Context, *AddCharacteristicRequest) (*AddCharacteristicResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddCharacteristic not implemented")
+}
+func (UnimplementedBluetoothGattServiceServiceServer) AddService(context.Context, *AddServiceRequest) (*AddServiceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddService not implemented")
+}
+func (UnimplementedBluetoothGattServiceServiceServer) DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DescribeContents not implemented")
+}
+func (UnimplementedBluetoothGattServiceServiceServer) GetCharacteristic(context.Context, *GetCharacteristicRequest) (*GetCharacteristicResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCharacteristic not implemented")
+}
+func (UnimplementedBluetoothGattServiceServiceServer) GetCharacteristics(context.Context, *GetCharacteristicsRequest) (*GetCharacteristicsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCharacteristics not implemented")
+}
+func (UnimplementedBluetoothGattServiceServiceServer) GetIncludedServices(context.Context, *GetIncludedServicesRequest) (*GetIncludedServicesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetIncludedServices not implemented")
+}
+func (UnimplementedBluetoothGattServiceServiceServer) GetInstanceId(context.Context, *GetInstanceIdRequest) (*GetInstanceIdResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetInstanceId not implemented")
+}
+func (UnimplementedBluetoothGattServiceServiceServer) GetType(context.Context, *GetTypeRequest) (*GetTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetType not implemented")
+}
+func (UnimplementedBluetoothGattServiceServiceServer) GetUuid(context.Context, *GetUuidRequest) (*GetUuidResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUuid not implemented")
+}
+func (UnimplementedBluetoothGattServiceServiceServer) WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteToParcel not implemented")
+}
+func (UnimplementedBluetoothGattServiceServiceServer) mustEmbedUnimplementedBluetoothGattServiceServiceServer() {
+}
+func (UnimplementedBluetoothGattServiceServiceServer) testEmbeddedByValue() {}
+
+// UnsafeBluetoothGattServiceServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BluetoothGattServiceServiceServer will
+// result in compilation errors.
+type UnsafeBluetoothGattServiceServiceServer interface {
+	mustEmbedUnimplementedBluetoothGattServiceServiceServer()
+}
+
+func RegisterBluetoothGattServiceServiceServer(s grpc.ServiceRegistrar, srv BluetoothGattServiceServiceServer) {
+	// If the following call panics, it indicates UnimplementedBluetoothGattServiceServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&BluetoothGattServiceService_ServiceDesc, srv)
+}
+
+func _BluetoothGattServiceService_AddCharacteristic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddCharacteristicRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServiceServer).AddCharacteristic(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServiceService_AddCharacteristic_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServiceServer).AddCharacteristic(ctx, req.(*AddCharacteristicRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServiceService_AddService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddServiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServiceServer).AddService(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServiceService_AddService_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServiceServer).AddService(ctx, req.(*AddServiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServiceService_DescribeContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeContentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServiceServer).DescribeContents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServiceService_DescribeContents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServiceServer).DescribeContents(ctx, req.(*DescribeContentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServiceService_GetCharacteristic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCharacteristicRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServiceServer).GetCharacteristic(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServiceService_GetCharacteristic_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServiceServer).GetCharacteristic(ctx, req.(*GetCharacteristicRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServiceService_GetCharacteristics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCharacteristicsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServiceServer).GetCharacteristics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServiceService_GetCharacteristics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServiceServer).GetCharacteristics(ctx, req.(*GetCharacteristicsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServiceService_GetIncludedServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIncludedServicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServiceServer).GetIncludedServices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServiceService_GetIncludedServices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServiceServer).GetIncludedServices(ctx, req.(*GetIncludedServicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServiceService_GetInstanceId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInstanceIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServiceServer).GetInstanceId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServiceService_GetInstanceId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServiceServer).GetInstanceId(ctx, req.(*GetInstanceIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServiceService_GetType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServiceServer).GetType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServiceService_GetType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServiceServer).GetType(ctx, req.(*GetTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServiceService_GetUuid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUuidRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServiceServer).GetUuid(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServiceService_GetUuid_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServiceServer).GetUuid(ctx, req.(*GetUuidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServiceService_WriteToParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteToParcelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServiceServiceServer).WriteToParcel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServiceService_WriteToParcel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServiceServiceServer).WriteToParcel(ctx, req.(*WriteToParcelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// BluetoothGattServiceService_ServiceDesc is the grpc.ServiceDesc for BluetoothGattServiceService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var BluetoothGattServiceService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bluetooth.BluetoothGattServiceService",
+	HandlerType: (*BluetoothGattServiceServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddCharacteristic",
+			Handler:    _BluetoothGattServiceService_AddCharacteristic_Handler,
+		},
+		{
+			MethodName: "AddService",
+			Handler:    _BluetoothGattServiceService_AddService_Handler,
+		},
+		{
+			MethodName: "DescribeContents",
+			Handler:    _BluetoothGattServiceService_DescribeContents_Handler,
+		},
+		{
+			MethodName: "GetCharacteristic",
+			Handler:    _BluetoothGattServiceService_GetCharacteristic_Handler,
+		},
+		{
+			MethodName: "GetCharacteristics",
+			Handler:    _BluetoothGattServiceService_GetCharacteristics_Handler,
+		},
+		{
+			MethodName: "GetIncludedServices",
+			Handler:    _BluetoothGattServiceService_GetIncludedServices_Handler,
+		},
+		{
+			MethodName: "GetInstanceId",
+			Handler:    _BluetoothGattServiceService_GetInstanceId_Handler,
+		},
+		{
+			MethodName: "GetType",
+			Handler:    _BluetoothGattServiceService_GetType_Handler,
+		},
+		{
+			MethodName: "GetUuid",
+			Handler:    _BluetoothGattServiceService_GetUuid_Handler,
+		},
+		{
+			MethodName: "WriteToParcel",
+			Handler:    _BluetoothGattServiceService_WriteToParcel_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/bluetooth/bluetooth.proto",
+}
+
+const (
+	BluetoothGattDescriptorService_DescribeContents_FullMethodName  = "/bluetooth.BluetoothGattDescriptorService/DescribeContents"
+	BluetoothGattDescriptorService_GetCharacteristic_FullMethodName = "/bluetooth.BluetoothGattDescriptorService/GetCharacteristic"
+	BluetoothGattDescriptorService_GetPermissions_FullMethodName    = "/bluetooth.BluetoothGattDescriptorService/GetPermissions"
+	BluetoothGattDescriptorService_GetUuid_FullMethodName           = "/bluetooth.BluetoothGattDescriptorService/GetUuid"
+	BluetoothGattDescriptorService_GetValue_FullMethodName          = "/bluetooth.BluetoothGattDescriptorService/GetValue"
+	BluetoothGattDescriptorService_SetValue_FullMethodName          = "/bluetooth.BluetoothGattDescriptorService/SetValue"
+	BluetoothGattDescriptorService_WriteToParcel_FullMethodName     = "/bluetooth.BluetoothGattDescriptorService/WriteToParcel"
+)
+
+// BluetoothGattDescriptorServiceClient is the client API for BluetoothGattDescriptorService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type BluetoothGattDescriptorServiceClient interface {
+	DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error)
+	GetCharacteristic(ctx context.Context, in *BluetoothGattDescriptorGetCharacteristicRequest, opts ...grpc.CallOption) (*GetCharacteristicResponse, error)
+	GetPermissions(ctx context.Context, in *GetPermissionsRequest, opts ...grpc.CallOption) (*GetPermissionsResponse, error)
+	GetUuid(ctx context.Context, in *GetUuidRequest, opts ...grpc.CallOption) (*GetUuidResponse, error)
+	GetValue(ctx context.Context, in *GetValueRequest, opts ...grpc.CallOption) (*GetValueResponse, error)
+	SetValue(ctx context.Context, in *SetValueRequest, opts ...grpc.CallOption) (*SetValueResponse, error)
+	WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error)
+}
+
+type bluetoothGattDescriptorServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewBluetoothGattDescriptorServiceClient(cc grpc.ClientConnInterface) BluetoothGattDescriptorServiceClient {
+	return &bluetoothGattDescriptorServiceClient{cc}
+}
+
+func (c *bluetoothGattDescriptorServiceClient) DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DescribeContentsResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattDescriptorService_DescribeContents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattDescriptorServiceClient) GetCharacteristic(ctx context.Context, in *BluetoothGattDescriptorGetCharacteristicRequest, opts ...grpc.CallOption) (*GetCharacteristicResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCharacteristicResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattDescriptorService_GetCharacteristic_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattDescriptorServiceClient) GetPermissions(ctx context.Context, in *GetPermissionsRequest, opts ...grpc.CallOption) (*GetPermissionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPermissionsResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattDescriptorService_GetPermissions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattDescriptorServiceClient) GetUuid(ctx context.Context, in *GetUuidRequest, opts ...grpc.CallOption) (*GetUuidResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUuidResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattDescriptorService_GetUuid_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattDescriptorServiceClient) GetValue(ctx context.Context, in *GetValueRequest, opts ...grpc.CallOption) (*GetValueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetValueResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattDescriptorService_GetValue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattDescriptorServiceClient) SetValue(ctx context.Context, in *SetValueRequest, opts ...grpc.CallOption) (*SetValueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetValueResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattDescriptorService_SetValue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattDescriptorServiceClient) WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteToParcelResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattDescriptorService_WriteToParcel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// BluetoothGattDescriptorServiceServer is the server API for BluetoothGattDescriptorService service.
+// All implementations must embed UnimplementedBluetoothGattDescriptorServiceServer
+// for forward compatibility.
+type BluetoothGattDescriptorServiceServer interface {
+	DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error)
+	GetCharacteristic(context.Context, *BluetoothGattDescriptorGetCharacteristicRequest) (*GetCharacteristicResponse, error)
+	GetPermissions(context.Context, *GetPermissionsRequest) (*GetPermissionsResponse, error)
+	GetUuid(context.Context, *GetUuidRequest) (*GetUuidResponse, error)
+	GetValue(context.Context, *GetValueRequest) (*GetValueResponse, error)
+	SetValue(context.Context, *SetValueRequest) (*SetValueResponse, error)
+	WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error)
+	mustEmbedUnimplementedBluetoothGattDescriptorServiceServer()
+}
+
+// UnimplementedBluetoothGattDescriptorServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedBluetoothGattDescriptorServiceServer struct{}
+
+func (UnimplementedBluetoothGattDescriptorServiceServer) DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DescribeContents not implemented")
+}
+func (UnimplementedBluetoothGattDescriptorServiceServer) GetCharacteristic(context.Context, *BluetoothGattDescriptorGetCharacteristicRequest) (*GetCharacteristicResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCharacteristic not implemented")
+}
+func (UnimplementedBluetoothGattDescriptorServiceServer) GetPermissions(context.Context, *GetPermissionsRequest) (*GetPermissionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPermissions not implemented")
+}
+func (UnimplementedBluetoothGattDescriptorServiceServer) GetUuid(context.Context, *GetUuidRequest) (*GetUuidResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUuid not implemented")
+}
+func (UnimplementedBluetoothGattDescriptorServiceServer) GetValue(context.Context, *GetValueRequest) (*GetValueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetValue not implemented")
+}
+func (UnimplementedBluetoothGattDescriptorServiceServer) SetValue(context.Context, *SetValueRequest) (*SetValueResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetValue not implemented")
+}
+func (UnimplementedBluetoothGattDescriptorServiceServer) WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteToParcel not implemented")
+}
+func (UnimplementedBluetoothGattDescriptorServiceServer) mustEmbedUnimplementedBluetoothGattDescriptorServiceServer() {
+}
+func (UnimplementedBluetoothGattDescriptorServiceServer) testEmbeddedByValue() {}
+
+// UnsafeBluetoothGattDescriptorServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BluetoothGattDescriptorServiceServer will
+// result in compilation errors.
+type UnsafeBluetoothGattDescriptorServiceServer interface {
+	mustEmbedUnimplementedBluetoothGattDescriptorServiceServer()
+}
+
+func RegisterBluetoothGattDescriptorServiceServer(s grpc.ServiceRegistrar, srv BluetoothGattDescriptorServiceServer) {
+	// If the following call panics, it indicates UnimplementedBluetoothGattDescriptorServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&BluetoothGattDescriptorService_ServiceDesc, srv)
+}
+
+func _BluetoothGattDescriptorService_DescribeContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeContentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattDescriptorServiceServer).DescribeContents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattDescriptorService_DescribeContents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattDescriptorServiceServer).DescribeContents(ctx, req.(*DescribeContentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattDescriptorService_GetCharacteristic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BluetoothGattDescriptorGetCharacteristicRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattDescriptorServiceServer).GetCharacteristic(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattDescriptorService_GetCharacteristic_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattDescriptorServiceServer).GetCharacteristic(ctx, req.(*BluetoothGattDescriptorGetCharacteristicRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattDescriptorService_GetPermissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPermissionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattDescriptorServiceServer).GetPermissions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattDescriptorService_GetPermissions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattDescriptorServiceServer).GetPermissions(ctx, req.(*GetPermissionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattDescriptorService_GetUuid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUuidRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattDescriptorServiceServer).GetUuid(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattDescriptorService_GetUuid_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattDescriptorServiceServer).GetUuid(ctx, req.(*GetUuidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattDescriptorService_GetValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetValueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattDescriptorServiceServer).GetValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattDescriptorService_GetValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattDescriptorServiceServer).GetValue(ctx, req.(*GetValueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattDescriptorService_SetValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetValueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattDescriptorServiceServer).SetValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattDescriptorService_SetValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattDescriptorServiceServer).SetValue(ctx, req.(*SetValueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattDescriptorService_WriteToParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteToParcelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattDescriptorServiceServer).WriteToParcel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattDescriptorService_WriteToParcel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattDescriptorServiceServer).WriteToParcel(ctx, req.(*WriteToParcelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// BluetoothGattDescriptorService_ServiceDesc is the grpc.ServiceDesc for BluetoothGattDescriptorService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var BluetoothGattDescriptorService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bluetooth.BluetoothGattDescriptorService",
+	HandlerType: (*BluetoothGattDescriptorServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "DescribeContents",
+			Handler:    _BluetoothGattDescriptorService_DescribeContents_Handler,
+		},
+		{
+			MethodName: "GetCharacteristic",
+			Handler:    _BluetoothGattDescriptorService_GetCharacteristic_Handler,
+		},
+		{
+			MethodName: "GetPermissions",
+			Handler:    _BluetoothGattDescriptorService_GetPermissions_Handler,
+		},
+		{
+			MethodName: "GetUuid",
+			Handler:    _BluetoothGattDescriptorService_GetUuid_Handler,
+		},
+		{
+			MethodName: "GetValue",
+			Handler:    _BluetoothGattDescriptorService_GetValue_Handler,
+		},
+		{
+			MethodName: "SetValue",
+			Handler:    _BluetoothGattDescriptorService_SetValue_Handler,
+		},
+		{
+			MethodName: "WriteToParcel",
+			Handler:    _BluetoothGattDescriptorService_WriteToParcel_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/bluetooth/bluetooth.proto",
+}
+
+const (
+	BluetoothServerSocketService_Accept0_FullMethodName   = "/bluetooth.BluetoothServerSocketService/Accept0"
+	BluetoothServerSocketService_Accept1_1_FullMethodName = "/bluetooth.BluetoothServerSocketService/Accept1_1"
+	BluetoothServerSocketService_Close_FullMethodName     = "/bluetooth.BluetoothServerSocketService/Close"
+	BluetoothServerSocketService_GetPsm_FullMethodName    = "/bluetooth.BluetoothServerSocketService/GetPsm"
+	BluetoothServerSocketService_ToString_FullMethodName  = "/bluetooth.BluetoothServerSocketService/ToString"
+)
+
+// BluetoothServerSocketServiceClient is the client API for BluetoothServerSocketService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type BluetoothServerSocketServiceClient interface {
+	Accept0(ctx context.Context, in *Accept0Request, opts ...grpc.CallOption) (*Accept0Response, error)
+	Accept1_1(ctx context.Context, in *Accept1_1Request, opts ...grpc.CallOption) (*Accept1_1Response, error)
+	Close(ctx context.Context, in *CloseRequest, opts ...grpc.CallOption) (*CloseResponse, error)
+	GetPsm(ctx context.Context, in *GetPsmRequest, opts ...grpc.CallOption) (*GetPsmResponse, error)
+	ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error)
+}
+
+type bluetoothServerSocketServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewBluetoothServerSocketServiceClient(cc grpc.ClientConnInterface) BluetoothServerSocketServiceClient {
+	return &bluetoothServerSocketServiceClient{cc}
+}
+
+func (c *bluetoothServerSocketServiceClient) Accept0(ctx context.Context, in *Accept0Request, opts ...grpc.CallOption) (*Accept0Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Accept0Response)
+	err := c.cc.Invoke(ctx, BluetoothServerSocketService_Accept0_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothServerSocketServiceClient) Accept1_1(ctx context.Context, in *Accept1_1Request, opts ...grpc.CallOption) (*Accept1_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Accept1_1Response)
+	err := c.cc.Invoke(ctx, BluetoothServerSocketService_Accept1_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothServerSocketServiceClient) Close(ctx context.Context, in *CloseRequest, opts ...grpc.CallOption) (*CloseResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CloseResponse)
+	err := c.cc.Invoke(ctx, BluetoothServerSocketService_Close_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothServerSocketServiceClient) GetPsm(ctx context.Context, in *GetPsmRequest, opts ...grpc.CallOption) (*GetPsmResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPsmResponse)
+	err := c.cc.Invoke(ctx, BluetoothServerSocketService_GetPsm_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothServerSocketServiceClient) ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ToStringResponse)
+	err := c.cc.Invoke(ctx, BluetoothServerSocketService_ToString_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// BluetoothServerSocketServiceServer is the server API for BluetoothServerSocketService service.
+// All implementations must embed UnimplementedBluetoothServerSocketServiceServer
+// for forward compatibility.
+type BluetoothServerSocketServiceServer interface {
+	Accept0(context.Context, *Accept0Request) (*Accept0Response, error)
+	Accept1_1(context.Context, *Accept1_1Request) (*Accept1_1Response, error)
+	Close(context.Context, *CloseRequest) (*CloseResponse, error)
+	GetPsm(context.Context, *GetPsmRequest) (*GetPsmResponse, error)
+	ToString(context.Context, *ToStringRequest) (*ToStringResponse, error)
+	mustEmbedUnimplementedBluetoothServerSocketServiceServer()
+}
+
+// UnimplementedBluetoothServerSocketServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedBluetoothServerSocketServiceServer struct{}
+
+func (UnimplementedBluetoothServerSocketServiceServer) Accept0(context.Context, *Accept0Request) (*Accept0Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Accept0 not implemented")
+}
+func (UnimplementedBluetoothServerSocketServiceServer) Accept1_1(context.Context, *Accept1_1Request) (*Accept1_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method Accept1_1 not implemented")
+}
+func (UnimplementedBluetoothServerSocketServiceServer) Close(context.Context, *CloseRequest) (*CloseResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Close not implemented")
+}
+func (UnimplementedBluetoothServerSocketServiceServer) GetPsm(context.Context, *GetPsmRequest) (*GetPsmResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPsm not implemented")
+}
+func (UnimplementedBluetoothServerSocketServiceServer) ToString(context.Context, *ToStringRequest) (*ToStringResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ToString not implemented")
+}
+func (UnimplementedBluetoothServerSocketServiceServer) mustEmbedUnimplementedBluetoothServerSocketServiceServer() {
+}
+func (UnimplementedBluetoothServerSocketServiceServer) testEmbeddedByValue() {}
+
+// UnsafeBluetoothServerSocketServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BluetoothServerSocketServiceServer will
+// result in compilation errors.
+type UnsafeBluetoothServerSocketServiceServer interface {
+	mustEmbedUnimplementedBluetoothServerSocketServiceServer()
+}
+
+func RegisterBluetoothServerSocketServiceServer(s grpc.ServiceRegistrar, srv BluetoothServerSocketServiceServer) {
+	// If the following call panics, it indicates UnimplementedBluetoothServerSocketServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&BluetoothServerSocketService_ServiceDesc, srv)
+}
+
+func _BluetoothServerSocketService_Accept0_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Accept0Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothServerSocketServiceServer).Accept0(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothServerSocketService_Accept0_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothServerSocketServiceServer).Accept0(ctx, req.(*Accept0Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothServerSocketService_Accept1_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Accept1_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothServerSocketServiceServer).Accept1_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothServerSocketService_Accept1_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothServerSocketServiceServer).Accept1_1(ctx, req.(*Accept1_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothServerSocketService_Close_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CloseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothServerSocketServiceServer).Close(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothServerSocketService_Close_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothServerSocketServiceServer).Close(ctx, req.(*CloseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothServerSocketService_GetPsm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPsmRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothServerSocketServiceServer).GetPsm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothServerSocketService_GetPsm_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothServerSocketServiceServer).GetPsm(ctx, req.(*GetPsmRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothServerSocketService_ToString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToStringRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothServerSocketServiceServer).ToString(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothServerSocketService_ToString_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothServerSocketServiceServer).ToString(ctx, req.(*ToStringRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// BluetoothServerSocketService_ServiceDesc is the grpc.ServiceDesc for BluetoothServerSocketService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var BluetoothServerSocketService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bluetooth.BluetoothServerSocketService",
+	HandlerType: (*BluetoothServerSocketServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Accept0",
+			Handler:    _BluetoothServerSocketService_Accept0_Handler,
+		},
+		{
+			MethodName: "Accept1_1",
+			Handler:    _BluetoothServerSocketService_Accept1_1_Handler,
+		},
+		{
+			MethodName: "Close",
+			Handler:    _BluetoothServerSocketService_Close_Handler,
+		},
+		{
+			MethodName: "GetPsm",
+			Handler:    _BluetoothServerSocketService_GetPsm_Handler,
+		},
+		{
+			MethodName: "ToString",
+			Handler:    _BluetoothServerSocketService_ToString_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/bluetooth/bluetooth.proto",
+}
+
+const (
+	BluetoothDeviceService_ConnectGatt3_FullMethodName                              = "/bluetooth.BluetoothDeviceService/ConnectGatt3"
+	BluetoothDeviceService_ConnectGatt4_1_FullMethodName                            = "/bluetooth.BluetoothDeviceService/ConnectGatt4_1"
+	BluetoothDeviceService_ConnectGatt5_2_FullMethodName                            = "/bluetooth.BluetoothDeviceService/ConnectGatt5_2"
+	BluetoothDeviceService_CreateBond_FullMethodName                                = "/bluetooth.BluetoothDeviceService/CreateBond"
+	BluetoothDeviceService_CreateInsecureL2CapChannel_FullMethodName                = "/bluetooth.BluetoothDeviceService/CreateInsecureL2capChannel"
+	BluetoothDeviceService_CreateInsecureRfcommSocketToServiceRecord_FullMethodName = "/bluetooth.BluetoothDeviceService/CreateInsecureRfcommSocketToServiceRecord"
+	BluetoothDeviceService_CreateL2CapChannel_FullMethodName                        = "/bluetooth.BluetoothDeviceService/CreateL2capChannel"
+	BluetoothDeviceService_CreateRfcommSocketToServiceRecord_FullMethodName         = "/bluetooth.BluetoothDeviceService/CreateRfcommSocketToServiceRecord"
+	BluetoothDeviceService_CreateUsingSocketSettings_FullMethodName                 = "/bluetooth.BluetoothDeviceService/CreateUsingSocketSettings"
+	BluetoothDeviceService_DescribeContents_FullMethodName                          = "/bluetooth.BluetoothDeviceService/DescribeContents"
+	BluetoothDeviceService_Equals_FullMethodName                                    = "/bluetooth.BluetoothDeviceService/Equals"
+	BluetoothDeviceService_FetchUuidsWithSdp_FullMethodName                         = "/bluetooth.BluetoothDeviceService/FetchUuidsWithSdp"
+	BluetoothDeviceService_GetAddress_FullMethodName                                = "/bluetooth.BluetoothDeviceService/GetAddress"
+	BluetoothDeviceService_GetAddressType_FullMethodName                            = "/bluetooth.BluetoothDeviceService/GetAddressType"
+	BluetoothDeviceService_GetAlias_FullMethodName                                  = "/bluetooth.BluetoothDeviceService/GetAlias"
+	BluetoothDeviceService_GetBluetoothClass_FullMethodName                         = "/bluetooth.BluetoothDeviceService/GetBluetoothClass"
+	BluetoothDeviceService_GetBondState_FullMethodName                              = "/bluetooth.BluetoothDeviceService/GetBondState"
+	BluetoothDeviceService_GetIdentityAddressWithType_FullMethodName                = "/bluetooth.BluetoothDeviceService/GetIdentityAddressWithType"
+	BluetoothDeviceService_GetName_FullMethodName                                   = "/bluetooth.BluetoothDeviceService/GetName"
+	BluetoothDeviceService_GetType_FullMethodName                                   = "/bluetooth.BluetoothDeviceService/GetType"
+	BluetoothDeviceService_GetUuids_FullMethodName                                  = "/bluetooth.BluetoothDeviceService/GetUuids"
+	BluetoothDeviceService_HashCode_FullMethodName                                  = "/bluetooth.BluetoothDeviceService/HashCode"
+	BluetoothDeviceService_SetAlias_FullMethodName                                  = "/bluetooth.BluetoothDeviceService/SetAlias"
+	BluetoothDeviceService_SetPairingConfirmation_FullMethodName                    = "/bluetooth.BluetoothDeviceService/SetPairingConfirmation"
+	BluetoothDeviceService_SetPin_FullMethodName                                    = "/bluetooth.BluetoothDeviceService/SetPin"
+	BluetoothDeviceService_ToString_FullMethodName                                  = "/bluetooth.BluetoothDeviceService/ToString"
+	BluetoothDeviceService_WriteToParcel_FullMethodName                             = "/bluetooth.BluetoothDeviceService/WriteToParcel"
+)
+
+// BluetoothDeviceServiceClient is the client API for BluetoothDeviceService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type BluetoothDeviceServiceClient interface {
+	ConnectGatt3(ctx context.Context, in *ConnectGatt3Request, opts ...grpc.CallOption) (*ConnectGatt3Response, error)
+	ConnectGatt4_1(ctx context.Context, in *ConnectGatt4_1Request, opts ...grpc.CallOption) (*ConnectGatt4_1Response, error)
+	ConnectGatt5_2(ctx context.Context, in *ConnectGatt5_2Request, opts ...grpc.CallOption) (*ConnectGatt5_2Response, error)
+	CreateBond(ctx context.Context, in *CreateBondRequest, opts ...grpc.CallOption) (*CreateBondResponse, error)
+	CreateInsecureL2CapChannel(ctx context.Context, in *CreateInsecureL2CapChannelRequest, opts ...grpc.CallOption) (*CreateInsecureL2CapChannelResponse, error)
+	CreateInsecureRfcommSocketToServiceRecord(ctx context.Context, in *CreateInsecureRfcommSocketToServiceRecordRequest, opts ...grpc.CallOption) (*CreateInsecureRfcommSocketToServiceRecordResponse, error)
+	CreateL2CapChannel(ctx context.Context, in *CreateL2CapChannelRequest, opts ...grpc.CallOption) (*CreateL2CapChannelResponse, error)
+	CreateRfcommSocketToServiceRecord(ctx context.Context, in *CreateRfcommSocketToServiceRecordRequest, opts ...grpc.CallOption) (*CreateRfcommSocketToServiceRecordResponse, error)
+	CreateUsingSocketSettings(ctx context.Context, in *CreateUsingSocketSettingsRequest, opts ...grpc.CallOption) (*CreateUsingSocketSettingsResponse, error)
+	DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error)
+	Equals(ctx context.Context, in *EqualsRequest, opts ...grpc.CallOption) (*EqualsResponse, error)
+	FetchUuidsWithSdp(ctx context.Context, in *FetchUuidsWithSdpRequest, opts ...grpc.CallOption) (*FetchUuidsWithSdpResponse, error)
+	GetAddress(ctx context.Context, in *GetAddressRequest, opts ...grpc.CallOption) (*GetAddressResponse, error)
+	GetAddressType(ctx context.Context, in *GetAddressTypeRequest, opts ...grpc.CallOption) (*GetAddressTypeResponse, error)
+	GetAlias(ctx context.Context, in *GetAliasRequest, opts ...grpc.CallOption) (*GetAliasResponse, error)
+	GetBluetoothClass(ctx context.Context, in *GetBluetoothClassRequest, opts ...grpc.CallOption) (*GetBluetoothClassResponse, error)
+	GetBondState(ctx context.Context, in *GetBondStateRequest, opts ...grpc.CallOption) (*GetBondStateResponse, error)
+	GetIdentityAddressWithType(ctx context.Context, in *GetIdentityAddressWithTypeRequest, opts ...grpc.CallOption) (*GetIdentityAddressWithTypeResponse, error)
+	GetName(ctx context.Context, in *GetNameRequest, opts ...grpc.CallOption) (*GetNameResponse, error)
+	GetType(ctx context.Context, in *GetTypeRequest, opts ...grpc.CallOption) (*GetTypeResponse, error)
+	GetUuids(ctx context.Context, in *GetUuidsRequest, opts ...grpc.CallOption) (*GetUuidsResponse, error)
+	HashCode(ctx context.Context, in *HashCodeRequest, opts ...grpc.CallOption) (*HashCodeResponse, error)
+	SetAlias(ctx context.Context, in *SetAliasRequest, opts ...grpc.CallOption) (*SetAliasResponse, error)
+	SetPairingConfirmation(ctx context.Context, in *SetPairingConfirmationRequest, opts ...grpc.CallOption) (*SetPairingConfirmationResponse, error)
+	SetPin(ctx context.Context, in *SetPinRequest, opts ...grpc.CallOption) (*SetPinResponse, error)
+	ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error)
+	WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error)
+}
+
+type bluetoothDeviceServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewBluetoothDeviceServiceClient(cc grpc.ClientConnInterface) BluetoothDeviceServiceClient {
+	return &bluetoothDeviceServiceClient{cc}
+}
+
+func (c *bluetoothDeviceServiceClient) ConnectGatt3(ctx context.Context, in *ConnectGatt3Request, opts ...grpc.CallOption) (*ConnectGatt3Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConnectGatt3Response)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_ConnectGatt3_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) ConnectGatt4_1(ctx context.Context, in *ConnectGatt4_1Request, opts ...grpc.CallOption) (*ConnectGatt4_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConnectGatt4_1Response)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_ConnectGatt4_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) ConnectGatt5_2(ctx context.Context, in *ConnectGatt5_2Request, opts ...grpc.CallOption) (*ConnectGatt5_2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConnectGatt5_2Response)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_ConnectGatt5_2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) CreateBond(ctx context.Context, in *CreateBondRequest, opts ...grpc.CallOption) (*CreateBondResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateBondResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_CreateBond_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) CreateInsecureL2CapChannel(ctx context.Context, in *CreateInsecureL2CapChannelRequest, opts ...grpc.CallOption) (*CreateInsecureL2CapChannelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateInsecureL2CapChannelResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_CreateInsecureL2CapChannel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) CreateInsecureRfcommSocketToServiceRecord(ctx context.Context, in *CreateInsecureRfcommSocketToServiceRecordRequest, opts ...grpc.CallOption) (*CreateInsecureRfcommSocketToServiceRecordResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateInsecureRfcommSocketToServiceRecordResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_CreateInsecureRfcommSocketToServiceRecord_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) CreateL2CapChannel(ctx context.Context, in *CreateL2CapChannelRequest, opts ...grpc.CallOption) (*CreateL2CapChannelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateL2CapChannelResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_CreateL2CapChannel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) CreateRfcommSocketToServiceRecord(ctx context.Context, in *CreateRfcommSocketToServiceRecordRequest, opts ...grpc.CallOption) (*CreateRfcommSocketToServiceRecordResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateRfcommSocketToServiceRecordResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_CreateRfcommSocketToServiceRecord_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) CreateUsingSocketSettings(ctx context.Context, in *CreateUsingSocketSettingsRequest, opts ...grpc.CallOption) (*CreateUsingSocketSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateUsingSocketSettingsResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_CreateUsingSocketSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) DescribeContents(ctx context.Context, in *DescribeContentsRequest, opts ...grpc.CallOption) (*DescribeContentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DescribeContentsResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_DescribeContents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) Equals(ctx context.Context, in *EqualsRequest, opts ...grpc.CallOption) (*EqualsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EqualsResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_Equals_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) FetchUuidsWithSdp(ctx context.Context, in *FetchUuidsWithSdpRequest, opts ...grpc.CallOption) (*FetchUuidsWithSdpResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FetchUuidsWithSdpResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_FetchUuidsWithSdp_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) GetAddress(ctx context.Context, in *GetAddressRequest, opts ...grpc.CallOption) (*GetAddressResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAddressResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_GetAddress_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) GetAddressType(ctx context.Context, in *GetAddressTypeRequest, opts ...grpc.CallOption) (*GetAddressTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAddressTypeResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_GetAddressType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) GetAlias(ctx context.Context, in *GetAliasRequest, opts ...grpc.CallOption) (*GetAliasResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAliasResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_GetAlias_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) GetBluetoothClass(ctx context.Context, in *GetBluetoothClassRequest, opts ...grpc.CallOption) (*GetBluetoothClassResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBluetoothClassResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_GetBluetoothClass_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) GetBondState(ctx context.Context, in *GetBondStateRequest, opts ...grpc.CallOption) (*GetBondStateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBondStateResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_GetBondState_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) GetIdentityAddressWithType(ctx context.Context, in *GetIdentityAddressWithTypeRequest, opts ...grpc.CallOption) (*GetIdentityAddressWithTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetIdentityAddressWithTypeResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_GetIdentityAddressWithType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) GetName(ctx context.Context, in *GetNameRequest, opts ...grpc.CallOption) (*GetNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetNameResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_GetName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) GetType(ctx context.Context, in *GetTypeRequest, opts ...grpc.CallOption) (*GetTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTypeResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_GetType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) GetUuids(ctx context.Context, in *GetUuidsRequest, opts ...grpc.CallOption) (*GetUuidsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUuidsResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_GetUuids_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) HashCode(ctx context.Context, in *HashCodeRequest, opts ...grpc.CallOption) (*HashCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HashCodeResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_HashCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) SetAlias(ctx context.Context, in *SetAliasRequest, opts ...grpc.CallOption) (*SetAliasResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetAliasResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_SetAlias_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) SetPairingConfirmation(ctx context.Context, in *SetPairingConfirmationRequest, opts ...grpc.CallOption) (*SetPairingConfirmationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetPairingConfirmationResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_SetPairingConfirmation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) SetPin(ctx context.Context, in *SetPinRequest, opts ...grpc.CallOption) (*SetPinResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetPinResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_SetPin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) ToString(ctx context.Context, in *ToStringRequest, opts ...grpc.CallOption) (*ToStringResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ToStringResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_ToString_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothDeviceServiceClient) WriteToParcel(ctx context.Context, in *WriteToParcelRequest, opts ...grpc.CallOption) (*WriteToParcelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteToParcelResponse)
+	err := c.cc.Invoke(ctx, BluetoothDeviceService_WriteToParcel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// BluetoothDeviceServiceServer is the server API for BluetoothDeviceService service.
+// All implementations must embed UnimplementedBluetoothDeviceServiceServer
+// for forward compatibility.
+type BluetoothDeviceServiceServer interface {
+	ConnectGatt3(context.Context, *ConnectGatt3Request) (*ConnectGatt3Response, error)
+	ConnectGatt4_1(context.Context, *ConnectGatt4_1Request) (*ConnectGatt4_1Response, error)
+	ConnectGatt5_2(context.Context, *ConnectGatt5_2Request) (*ConnectGatt5_2Response, error)
+	CreateBond(context.Context, *CreateBondRequest) (*CreateBondResponse, error)
+	CreateInsecureL2CapChannel(context.Context, *CreateInsecureL2CapChannelRequest) (*CreateInsecureL2CapChannelResponse, error)
+	CreateInsecureRfcommSocketToServiceRecord(context.Context, *CreateInsecureRfcommSocketToServiceRecordRequest) (*CreateInsecureRfcommSocketToServiceRecordResponse, error)
+	CreateL2CapChannel(context.Context, *CreateL2CapChannelRequest) (*CreateL2CapChannelResponse, error)
+	CreateRfcommSocketToServiceRecord(context.Context, *CreateRfcommSocketToServiceRecordRequest) (*CreateRfcommSocketToServiceRecordResponse, error)
+	CreateUsingSocketSettings(context.Context, *CreateUsingSocketSettingsRequest) (*CreateUsingSocketSettingsResponse, error)
+	DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error)
+	Equals(context.Context, *EqualsRequest) (*EqualsResponse, error)
+	FetchUuidsWithSdp(context.Context, *FetchUuidsWithSdpRequest) (*FetchUuidsWithSdpResponse, error)
+	GetAddress(context.Context, *GetAddressRequest) (*GetAddressResponse, error)
+	GetAddressType(context.Context, *GetAddressTypeRequest) (*GetAddressTypeResponse, error)
+	GetAlias(context.Context, *GetAliasRequest) (*GetAliasResponse, error)
+	GetBluetoothClass(context.Context, *GetBluetoothClassRequest) (*GetBluetoothClassResponse, error)
+	GetBondState(context.Context, *GetBondStateRequest) (*GetBondStateResponse, error)
+	GetIdentityAddressWithType(context.Context, *GetIdentityAddressWithTypeRequest) (*GetIdentityAddressWithTypeResponse, error)
+	GetName(context.Context, *GetNameRequest) (*GetNameResponse, error)
+	GetType(context.Context, *GetTypeRequest) (*GetTypeResponse, error)
+	GetUuids(context.Context, *GetUuidsRequest) (*GetUuidsResponse, error)
+	HashCode(context.Context, *HashCodeRequest) (*HashCodeResponse, error)
+	SetAlias(context.Context, *SetAliasRequest) (*SetAliasResponse, error)
+	SetPairingConfirmation(context.Context, *SetPairingConfirmationRequest) (*SetPairingConfirmationResponse, error)
+	SetPin(context.Context, *SetPinRequest) (*SetPinResponse, error)
+	ToString(context.Context, *ToStringRequest) (*ToStringResponse, error)
+	WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error)
+	mustEmbedUnimplementedBluetoothDeviceServiceServer()
+}
+
+// UnimplementedBluetoothDeviceServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedBluetoothDeviceServiceServer struct{}
+
+func (UnimplementedBluetoothDeviceServiceServer) ConnectGatt3(context.Context, *ConnectGatt3Request) (*ConnectGatt3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConnectGatt3 not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) ConnectGatt4_1(context.Context, *ConnectGatt4_1Request) (*ConnectGatt4_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConnectGatt4_1 not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) ConnectGatt5_2(context.Context, *ConnectGatt5_2Request) (*ConnectGatt5_2Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConnectGatt5_2 not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) CreateBond(context.Context, *CreateBondRequest) (*CreateBondResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateBond not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) CreateInsecureL2CapChannel(context.Context, *CreateInsecureL2CapChannelRequest) (*CreateInsecureL2CapChannelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateInsecureL2CapChannel not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) CreateInsecureRfcommSocketToServiceRecord(context.Context, *CreateInsecureRfcommSocketToServiceRecordRequest) (*CreateInsecureRfcommSocketToServiceRecordResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateInsecureRfcommSocketToServiceRecord not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) CreateL2CapChannel(context.Context, *CreateL2CapChannelRequest) (*CreateL2CapChannelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateL2CapChannel not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) CreateRfcommSocketToServiceRecord(context.Context, *CreateRfcommSocketToServiceRecordRequest) (*CreateRfcommSocketToServiceRecordResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateRfcommSocketToServiceRecord not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) CreateUsingSocketSettings(context.Context, *CreateUsingSocketSettingsRequest) (*CreateUsingSocketSettingsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateUsingSocketSettings not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) DescribeContents(context.Context, *DescribeContentsRequest) (*DescribeContentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DescribeContents not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) Equals(context.Context, *EqualsRequest) (*EqualsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Equals not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) FetchUuidsWithSdp(context.Context, *FetchUuidsWithSdpRequest) (*FetchUuidsWithSdpResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FetchUuidsWithSdp not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) GetAddress(context.Context, *GetAddressRequest) (*GetAddressResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAddress not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) GetAddressType(context.Context, *GetAddressTypeRequest) (*GetAddressTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAddressType not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) GetAlias(context.Context, *GetAliasRequest) (*GetAliasResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAlias not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) GetBluetoothClass(context.Context, *GetBluetoothClassRequest) (*GetBluetoothClassResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBluetoothClass not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) GetBondState(context.Context, *GetBondStateRequest) (*GetBondStateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetBondState not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) GetIdentityAddressWithType(context.Context, *GetIdentityAddressWithTypeRequest) (*GetIdentityAddressWithTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetIdentityAddressWithType not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) GetName(context.Context, *GetNameRequest) (*GetNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetName not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) GetType(context.Context, *GetTypeRequest) (*GetTypeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetType not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) GetUuids(context.Context, *GetUuidsRequest) (*GetUuidsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUuids not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) HashCode(context.Context, *HashCodeRequest) (*HashCodeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method HashCode not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) SetAlias(context.Context, *SetAliasRequest) (*SetAliasResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetAlias not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) SetPairingConfirmation(context.Context, *SetPairingConfirmationRequest) (*SetPairingConfirmationResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetPairingConfirmation not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) SetPin(context.Context, *SetPinRequest) (*SetPinResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetPin not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) ToString(context.Context, *ToStringRequest) (*ToStringResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ToString not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) WriteToParcel(context.Context, *WriteToParcelRequest) (*WriteToParcelResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method WriteToParcel not implemented")
+}
+func (UnimplementedBluetoothDeviceServiceServer) mustEmbedUnimplementedBluetoothDeviceServiceServer() {
+}
+func (UnimplementedBluetoothDeviceServiceServer) testEmbeddedByValue() {}
+
+// UnsafeBluetoothDeviceServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BluetoothDeviceServiceServer will
+// result in compilation errors.
+type UnsafeBluetoothDeviceServiceServer interface {
+	mustEmbedUnimplementedBluetoothDeviceServiceServer()
+}
+
+func RegisterBluetoothDeviceServiceServer(s grpc.ServiceRegistrar, srv BluetoothDeviceServiceServer) {
+	// If the following call panics, it indicates UnimplementedBluetoothDeviceServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&BluetoothDeviceService_ServiceDesc, srv)
+}
+
+func _BluetoothDeviceService_ConnectGatt3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConnectGatt3Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).ConnectGatt3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_ConnectGatt3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).ConnectGatt3(ctx, req.(*ConnectGatt3Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_ConnectGatt4_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConnectGatt4_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).ConnectGatt4_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_ConnectGatt4_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).ConnectGatt4_1(ctx, req.(*ConnectGatt4_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_ConnectGatt5_2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConnectGatt5_2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).ConnectGatt5_2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_ConnectGatt5_2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).ConnectGatt5_2(ctx, req.(*ConnectGatt5_2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_CreateBond_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateBondRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).CreateBond(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_CreateBond_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).CreateBond(ctx, req.(*CreateBondRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_CreateInsecureL2CapChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateInsecureL2CapChannelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).CreateInsecureL2CapChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_CreateInsecureL2CapChannel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).CreateInsecureL2CapChannel(ctx, req.(*CreateInsecureL2CapChannelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_CreateInsecureRfcommSocketToServiceRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateInsecureRfcommSocketToServiceRecordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).CreateInsecureRfcommSocketToServiceRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_CreateInsecureRfcommSocketToServiceRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).CreateInsecureRfcommSocketToServiceRecord(ctx, req.(*CreateInsecureRfcommSocketToServiceRecordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_CreateL2CapChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateL2CapChannelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).CreateL2CapChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_CreateL2CapChannel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).CreateL2CapChannel(ctx, req.(*CreateL2CapChannelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_CreateRfcommSocketToServiceRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateRfcommSocketToServiceRecordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).CreateRfcommSocketToServiceRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_CreateRfcommSocketToServiceRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).CreateRfcommSocketToServiceRecord(ctx, req.(*CreateRfcommSocketToServiceRecordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_CreateUsingSocketSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUsingSocketSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).CreateUsingSocketSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_CreateUsingSocketSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).CreateUsingSocketSettings(ctx, req.(*CreateUsingSocketSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_DescribeContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeContentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).DescribeContents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_DescribeContents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).DescribeContents(ctx, req.(*DescribeContentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_Equals_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EqualsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).Equals(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_Equals_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).Equals(ctx, req.(*EqualsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_FetchUuidsWithSdp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FetchUuidsWithSdpRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).FetchUuidsWithSdp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_FetchUuidsWithSdp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).FetchUuidsWithSdp(ctx, req.(*FetchUuidsWithSdpRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_GetAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAddressRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).GetAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_GetAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).GetAddress(ctx, req.(*GetAddressRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_GetAddressType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAddressTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).GetAddressType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_GetAddressType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).GetAddressType(ctx, req.(*GetAddressTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_GetAlias_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAliasRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).GetAlias(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_GetAlias_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).GetAlias(ctx, req.(*GetAliasRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_GetBluetoothClass_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBluetoothClassRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).GetBluetoothClass(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_GetBluetoothClass_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).GetBluetoothClass(ctx, req.(*GetBluetoothClassRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_GetBondState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBondStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).GetBondState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_GetBondState_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).GetBondState(ctx, req.(*GetBondStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_GetIdentityAddressWithType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIdentityAddressWithTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).GetIdentityAddressWithType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_GetIdentityAddressWithType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).GetIdentityAddressWithType(ctx, req.(*GetIdentityAddressWithTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_GetName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).GetName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_GetName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).GetName(ctx, req.(*GetNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_GetType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).GetType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_GetType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).GetType(ctx, req.(*GetTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_GetUuids_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUuidsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).GetUuids(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_GetUuids_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).GetUuids(ctx, req.(*GetUuidsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_HashCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HashCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).HashCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_HashCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).HashCode(ctx, req.(*HashCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_SetAlias_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetAliasRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).SetAlias(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_SetAlias_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).SetAlias(ctx, req.(*SetAliasRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_SetPairingConfirmation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPairingConfirmationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).SetPairingConfirmation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_SetPairingConfirmation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).SetPairingConfirmation(ctx, req.(*SetPairingConfirmationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_SetPin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPinRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).SetPin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_SetPin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).SetPin(ctx, req.(*SetPinRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_ToString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ToStringRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).ToString(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_ToString_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).ToString(ctx, req.(*ToStringRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothDeviceService_WriteToParcel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteToParcelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothDeviceServiceServer).WriteToParcel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothDeviceService_WriteToParcel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothDeviceServiceServer).WriteToParcel(ctx, req.(*WriteToParcelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// BluetoothDeviceService_ServiceDesc is the grpc.ServiceDesc for BluetoothDeviceService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var BluetoothDeviceService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bluetooth.BluetoothDeviceService",
+	HandlerType: (*BluetoothDeviceServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ConnectGatt3",
+			Handler:    _BluetoothDeviceService_ConnectGatt3_Handler,
+		},
+		{
+			MethodName: "ConnectGatt4_1",
+			Handler:    _BluetoothDeviceService_ConnectGatt4_1_Handler,
+		},
+		{
+			MethodName: "ConnectGatt5_2",
+			Handler:    _BluetoothDeviceService_ConnectGatt5_2_Handler,
+		},
+		{
+			MethodName: "CreateBond",
+			Handler:    _BluetoothDeviceService_CreateBond_Handler,
+		},
+		{
+			MethodName: "CreateInsecureL2capChannel",
+			Handler:    _BluetoothDeviceService_CreateInsecureL2CapChannel_Handler,
+		},
+		{
+			MethodName: "CreateInsecureRfcommSocketToServiceRecord",
+			Handler:    _BluetoothDeviceService_CreateInsecureRfcommSocketToServiceRecord_Handler,
+		},
+		{
+			MethodName: "CreateL2capChannel",
+			Handler:    _BluetoothDeviceService_CreateL2CapChannel_Handler,
+		},
+		{
+			MethodName: "CreateRfcommSocketToServiceRecord",
+			Handler:    _BluetoothDeviceService_CreateRfcommSocketToServiceRecord_Handler,
+		},
+		{
+			MethodName: "CreateUsingSocketSettings",
+			Handler:    _BluetoothDeviceService_CreateUsingSocketSettings_Handler,
+		},
+		{
+			MethodName: "DescribeContents",
+			Handler:    _BluetoothDeviceService_DescribeContents_Handler,
+		},
+		{
+			MethodName: "Equals",
+			Handler:    _BluetoothDeviceService_Equals_Handler,
+		},
+		{
+			MethodName: "FetchUuidsWithSdp",
+			Handler:    _BluetoothDeviceService_FetchUuidsWithSdp_Handler,
+		},
+		{
+			MethodName: "GetAddress",
+			Handler:    _BluetoothDeviceService_GetAddress_Handler,
+		},
+		{
+			MethodName: "GetAddressType",
+			Handler:    _BluetoothDeviceService_GetAddressType_Handler,
+		},
+		{
+			MethodName: "GetAlias",
+			Handler:    _BluetoothDeviceService_GetAlias_Handler,
+		},
+		{
+			MethodName: "GetBluetoothClass",
+			Handler:    _BluetoothDeviceService_GetBluetoothClass_Handler,
+		},
+		{
+			MethodName: "GetBondState",
+			Handler:    _BluetoothDeviceService_GetBondState_Handler,
+		},
+		{
+			MethodName: "GetIdentityAddressWithType",
+			Handler:    _BluetoothDeviceService_GetIdentityAddressWithType_Handler,
+		},
+		{
+			MethodName: "GetName",
+			Handler:    _BluetoothDeviceService_GetName_Handler,
+		},
+		{
+			MethodName: "GetType",
+			Handler:    _BluetoothDeviceService_GetType_Handler,
+		},
+		{
+			MethodName: "GetUuids",
+			Handler:    _BluetoothDeviceService_GetUuids_Handler,
+		},
+		{
+			MethodName: "HashCode",
+			Handler:    _BluetoothDeviceService_HashCode_Handler,
+		},
+		{
+			MethodName: "SetAlias",
+			Handler:    _BluetoothDeviceService_SetAlias_Handler,
+		},
+		{
+			MethodName: "SetPairingConfirmation",
+			Handler:    _BluetoothDeviceService_SetPairingConfirmation_Handler,
+		},
+		{
+			MethodName: "SetPin",
+			Handler:    _BluetoothDeviceService_SetPin_Handler,
+		},
+		{
+			MethodName: "ToString",
+			Handler:    _BluetoothDeviceService_ToString_Handler,
+		},
+		{
+			MethodName: "WriteToParcel",
+			Handler:    _BluetoothDeviceService_WriteToParcel_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/bluetooth/bluetooth.proto",
+}
+
+const (
 	BluetoothAdapterService_CancelDiscovery_FullMethodName                            = "/bluetooth.BluetoothAdapterService/CancelDiscovery"
 	BluetoothAdapterService_CloseProfileProxy_FullMethodName                          = "/bluetooth.BluetoothAdapterService/CloseProfileProxy"
 	BluetoothAdapterService_Disable_FullMethodName                                    = "/bluetooth.BluetoothAdapterService/Disable"
@@ -1675,6 +6119,679 @@ var BluetoothAdapterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CheckBluetoothAddress",
 			Handler:    _BluetoothAdapterService_CheckBluetoothAddress_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "proto/bluetooth/bluetooth.proto",
+}
+
+const (
+	BluetoothGattServerService_AddService_FullMethodName                         = "/bluetooth.BluetoothGattServerService/AddService"
+	BluetoothGattServerService_CancelConnection_FullMethodName                   = "/bluetooth.BluetoothGattServerService/CancelConnection"
+	BluetoothGattServerService_ClearServices_FullMethodName                      = "/bluetooth.BluetoothGattServerService/ClearServices"
+	BluetoothGattServerService_Close_FullMethodName                              = "/bluetooth.BluetoothGattServerService/Close"
+	BluetoothGattServerService_Connect_FullMethodName                            = "/bluetooth.BluetoothGattServerService/Connect"
+	BluetoothGattServerService_GetConnectedDevices_FullMethodName                = "/bluetooth.BluetoothGattServerService/GetConnectedDevices"
+	BluetoothGattServerService_GetConnectionState_FullMethodName                 = "/bluetooth.BluetoothGattServerService/GetConnectionState"
+	BluetoothGattServerService_GetDevicesMatchingConnectionStates_FullMethodName = "/bluetooth.BluetoothGattServerService/GetDevicesMatchingConnectionStates"
+	BluetoothGattServerService_GetService_FullMethodName                         = "/bluetooth.BluetoothGattServerService/GetService"
+	BluetoothGattServerService_GetServices_FullMethodName                        = "/bluetooth.BluetoothGattServerService/GetServices"
+	BluetoothGattServerService_NotifyCharacteristicChanged3_FullMethodName       = "/bluetooth.BluetoothGattServerService/NotifyCharacteristicChanged3"
+	BluetoothGattServerService_NotifyCharacteristicChanged4_1_FullMethodName     = "/bluetooth.BluetoothGattServerService/NotifyCharacteristicChanged4_1"
+	BluetoothGattServerService_ReadPhy_FullMethodName                            = "/bluetooth.BluetoothGattServerService/ReadPhy"
+	BluetoothGattServerService_RemoveService_FullMethodName                      = "/bluetooth.BluetoothGattServerService/RemoveService"
+	BluetoothGattServerService_SendResponse_FullMethodName                       = "/bluetooth.BluetoothGattServerService/SendResponse"
+	BluetoothGattServerService_SetPreferredPhy_FullMethodName                    = "/bluetooth.BluetoothGattServerService/SetPreferredPhy"
+)
+
+// BluetoothGattServerServiceClient is the client API for BluetoothGattServerService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type BluetoothGattServerServiceClient interface {
+	AddService(ctx context.Context, in *AddServiceRequest, opts ...grpc.CallOption) (*AddServiceResponse, error)
+	CancelConnection(ctx context.Context, in *CancelConnectionRequest, opts ...grpc.CallOption) (*CancelConnectionResponse, error)
+	ClearServices(ctx context.Context, in *ClearServicesRequest, opts ...grpc.CallOption) (*ClearServicesResponse, error)
+	Close(ctx context.Context, in *CloseRequest, opts ...grpc.CallOption) (*CloseResponse, error)
+	Connect(ctx context.Context, in *BluetoothGattServerConnectRequest, opts ...grpc.CallOption) (*BluetoothGattServerConnectResponse, error)
+	GetConnectedDevices(ctx context.Context, in *GetConnectedDevicesRequest, opts ...grpc.CallOption) (*GetConnectedDevicesResponse, error)
+	GetConnectionState(ctx context.Context, in *GetConnectionStateRequest, opts ...grpc.CallOption) (*GetConnectionStateResponse, error)
+	GetDevicesMatchingConnectionStates(ctx context.Context, in *GetDevicesMatchingConnectionStatesRequest, opts ...grpc.CallOption) (*GetDevicesMatchingConnectionStatesResponse, error)
+	GetService(ctx context.Context, in *GetServiceRequest, opts ...grpc.CallOption) (*GetServiceResponse, error)
+	GetServices(ctx context.Context, in *GetServicesRequest, opts ...grpc.CallOption) (*GetServicesResponse, error)
+	NotifyCharacteristicChanged3(ctx context.Context, in *NotifyCharacteristicChanged3Request, opts ...grpc.CallOption) (*NotifyCharacteristicChanged3Response, error)
+	NotifyCharacteristicChanged4_1(ctx context.Context, in *NotifyCharacteristicChanged4_1Request, opts ...grpc.CallOption) (*NotifyCharacteristicChanged4_1Response, error)
+	ReadPhy(ctx context.Context, in *BluetoothGattServerReadPhyRequest, opts ...grpc.CallOption) (*ReadPhyResponse, error)
+	RemoveService(ctx context.Context, in *RemoveServiceRequest, opts ...grpc.CallOption) (*RemoveServiceResponse, error)
+	SendResponse(ctx context.Context, in *SendResponseRequest, opts ...grpc.CallOption) (*SendResponseResponse, error)
+	SetPreferredPhy(ctx context.Context, in *BluetoothGattServerSetPreferredPhyRequest, opts ...grpc.CallOption) (*SetPreferredPhyResponse, error)
+}
+
+type bluetoothGattServerServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewBluetoothGattServerServiceClient(cc grpc.ClientConnInterface) BluetoothGattServerServiceClient {
+	return &bluetoothGattServerServiceClient{cc}
+}
+
+func (c *bluetoothGattServerServiceClient) AddService(ctx context.Context, in *AddServiceRequest, opts ...grpc.CallOption) (*AddServiceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddServiceResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServerService_AddService_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServerServiceClient) CancelConnection(ctx context.Context, in *CancelConnectionRequest, opts ...grpc.CallOption) (*CancelConnectionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CancelConnectionResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServerService_CancelConnection_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServerServiceClient) ClearServices(ctx context.Context, in *ClearServicesRequest, opts ...grpc.CallOption) (*ClearServicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ClearServicesResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServerService_ClearServices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServerServiceClient) Close(ctx context.Context, in *CloseRequest, opts ...grpc.CallOption) (*CloseResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CloseResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServerService_Close_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServerServiceClient) Connect(ctx context.Context, in *BluetoothGattServerConnectRequest, opts ...grpc.CallOption) (*BluetoothGattServerConnectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BluetoothGattServerConnectResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServerService_Connect_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServerServiceClient) GetConnectedDevices(ctx context.Context, in *GetConnectedDevicesRequest, opts ...grpc.CallOption) (*GetConnectedDevicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetConnectedDevicesResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServerService_GetConnectedDevices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServerServiceClient) GetConnectionState(ctx context.Context, in *GetConnectionStateRequest, opts ...grpc.CallOption) (*GetConnectionStateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetConnectionStateResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServerService_GetConnectionState_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServerServiceClient) GetDevicesMatchingConnectionStates(ctx context.Context, in *GetDevicesMatchingConnectionStatesRequest, opts ...grpc.CallOption) (*GetDevicesMatchingConnectionStatesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDevicesMatchingConnectionStatesResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServerService_GetDevicesMatchingConnectionStates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServerServiceClient) GetService(ctx context.Context, in *GetServiceRequest, opts ...grpc.CallOption) (*GetServiceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetServiceResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServerService_GetService_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServerServiceClient) GetServices(ctx context.Context, in *GetServicesRequest, opts ...grpc.CallOption) (*GetServicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetServicesResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServerService_GetServices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServerServiceClient) NotifyCharacteristicChanged3(ctx context.Context, in *NotifyCharacteristicChanged3Request, opts ...grpc.CallOption) (*NotifyCharacteristicChanged3Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NotifyCharacteristicChanged3Response)
+	err := c.cc.Invoke(ctx, BluetoothGattServerService_NotifyCharacteristicChanged3_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServerServiceClient) NotifyCharacteristicChanged4_1(ctx context.Context, in *NotifyCharacteristicChanged4_1Request, opts ...grpc.CallOption) (*NotifyCharacteristicChanged4_1Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NotifyCharacteristicChanged4_1Response)
+	err := c.cc.Invoke(ctx, BluetoothGattServerService_NotifyCharacteristicChanged4_1_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServerServiceClient) ReadPhy(ctx context.Context, in *BluetoothGattServerReadPhyRequest, opts ...grpc.CallOption) (*ReadPhyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReadPhyResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServerService_ReadPhy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServerServiceClient) RemoveService(ctx context.Context, in *RemoveServiceRequest, opts ...grpc.CallOption) (*RemoveServiceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveServiceResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServerService_RemoveService_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServerServiceClient) SendResponse(ctx context.Context, in *SendResponseRequest, opts ...grpc.CallOption) (*SendResponseResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendResponseResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServerService_SendResponse_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bluetoothGattServerServiceClient) SetPreferredPhy(ctx context.Context, in *BluetoothGattServerSetPreferredPhyRequest, opts ...grpc.CallOption) (*SetPreferredPhyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetPreferredPhyResponse)
+	err := c.cc.Invoke(ctx, BluetoothGattServerService_SetPreferredPhy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// BluetoothGattServerServiceServer is the server API for BluetoothGattServerService service.
+// All implementations must embed UnimplementedBluetoothGattServerServiceServer
+// for forward compatibility.
+type BluetoothGattServerServiceServer interface {
+	AddService(context.Context, *AddServiceRequest) (*AddServiceResponse, error)
+	CancelConnection(context.Context, *CancelConnectionRequest) (*CancelConnectionResponse, error)
+	ClearServices(context.Context, *ClearServicesRequest) (*ClearServicesResponse, error)
+	Close(context.Context, *CloseRequest) (*CloseResponse, error)
+	Connect(context.Context, *BluetoothGattServerConnectRequest) (*BluetoothGattServerConnectResponse, error)
+	GetConnectedDevices(context.Context, *GetConnectedDevicesRequest) (*GetConnectedDevicesResponse, error)
+	GetConnectionState(context.Context, *GetConnectionStateRequest) (*GetConnectionStateResponse, error)
+	GetDevicesMatchingConnectionStates(context.Context, *GetDevicesMatchingConnectionStatesRequest) (*GetDevicesMatchingConnectionStatesResponse, error)
+	GetService(context.Context, *GetServiceRequest) (*GetServiceResponse, error)
+	GetServices(context.Context, *GetServicesRequest) (*GetServicesResponse, error)
+	NotifyCharacteristicChanged3(context.Context, *NotifyCharacteristicChanged3Request) (*NotifyCharacteristicChanged3Response, error)
+	NotifyCharacteristicChanged4_1(context.Context, *NotifyCharacteristicChanged4_1Request) (*NotifyCharacteristicChanged4_1Response, error)
+	ReadPhy(context.Context, *BluetoothGattServerReadPhyRequest) (*ReadPhyResponse, error)
+	RemoveService(context.Context, *RemoveServiceRequest) (*RemoveServiceResponse, error)
+	SendResponse(context.Context, *SendResponseRequest) (*SendResponseResponse, error)
+	SetPreferredPhy(context.Context, *BluetoothGattServerSetPreferredPhyRequest) (*SetPreferredPhyResponse, error)
+	mustEmbedUnimplementedBluetoothGattServerServiceServer()
+}
+
+// UnimplementedBluetoothGattServerServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedBluetoothGattServerServiceServer struct{}
+
+func (UnimplementedBluetoothGattServerServiceServer) AddService(context.Context, *AddServiceRequest) (*AddServiceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddService not implemented")
+}
+func (UnimplementedBluetoothGattServerServiceServer) CancelConnection(context.Context, *CancelConnectionRequest) (*CancelConnectionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CancelConnection not implemented")
+}
+func (UnimplementedBluetoothGattServerServiceServer) ClearServices(context.Context, *ClearServicesRequest) (*ClearServicesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ClearServices not implemented")
+}
+func (UnimplementedBluetoothGattServerServiceServer) Close(context.Context, *CloseRequest) (*CloseResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Close not implemented")
+}
+func (UnimplementedBluetoothGattServerServiceServer) Connect(context.Context, *BluetoothGattServerConnectRequest) (*BluetoothGattServerConnectResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Connect not implemented")
+}
+func (UnimplementedBluetoothGattServerServiceServer) GetConnectedDevices(context.Context, *GetConnectedDevicesRequest) (*GetConnectedDevicesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetConnectedDevices not implemented")
+}
+func (UnimplementedBluetoothGattServerServiceServer) GetConnectionState(context.Context, *GetConnectionStateRequest) (*GetConnectionStateResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetConnectionState not implemented")
+}
+func (UnimplementedBluetoothGattServerServiceServer) GetDevicesMatchingConnectionStates(context.Context, *GetDevicesMatchingConnectionStatesRequest) (*GetDevicesMatchingConnectionStatesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDevicesMatchingConnectionStates not implemented")
+}
+func (UnimplementedBluetoothGattServerServiceServer) GetService(context.Context, *GetServiceRequest) (*GetServiceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetService not implemented")
+}
+func (UnimplementedBluetoothGattServerServiceServer) GetServices(context.Context, *GetServicesRequest) (*GetServicesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetServices not implemented")
+}
+func (UnimplementedBluetoothGattServerServiceServer) NotifyCharacteristicChanged3(context.Context, *NotifyCharacteristicChanged3Request) (*NotifyCharacteristicChanged3Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method NotifyCharacteristicChanged3 not implemented")
+}
+func (UnimplementedBluetoothGattServerServiceServer) NotifyCharacteristicChanged4_1(context.Context, *NotifyCharacteristicChanged4_1Request) (*NotifyCharacteristicChanged4_1Response, error) {
+	return nil, status.Error(codes.Unimplemented, "method NotifyCharacteristicChanged4_1 not implemented")
+}
+func (UnimplementedBluetoothGattServerServiceServer) ReadPhy(context.Context, *BluetoothGattServerReadPhyRequest) (*ReadPhyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReadPhy not implemented")
+}
+func (UnimplementedBluetoothGattServerServiceServer) RemoveService(context.Context, *RemoveServiceRequest) (*RemoveServiceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveService not implemented")
+}
+func (UnimplementedBluetoothGattServerServiceServer) SendResponse(context.Context, *SendResponseRequest) (*SendResponseResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SendResponse not implemented")
+}
+func (UnimplementedBluetoothGattServerServiceServer) SetPreferredPhy(context.Context, *BluetoothGattServerSetPreferredPhyRequest) (*SetPreferredPhyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetPreferredPhy not implemented")
+}
+func (UnimplementedBluetoothGattServerServiceServer) mustEmbedUnimplementedBluetoothGattServerServiceServer() {
+}
+func (UnimplementedBluetoothGattServerServiceServer) testEmbeddedByValue() {}
+
+// UnsafeBluetoothGattServerServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BluetoothGattServerServiceServer will
+// result in compilation errors.
+type UnsafeBluetoothGattServerServiceServer interface {
+	mustEmbedUnimplementedBluetoothGattServerServiceServer()
+}
+
+func RegisterBluetoothGattServerServiceServer(s grpc.ServiceRegistrar, srv BluetoothGattServerServiceServer) {
+	// If the following call panics, it indicates UnimplementedBluetoothGattServerServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&BluetoothGattServerService_ServiceDesc, srv)
+}
+
+func _BluetoothGattServerService_AddService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddServiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServerServiceServer).AddService(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServerService_AddService_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServerServiceServer).AddService(ctx, req.(*AddServiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServerService_CancelConnection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelConnectionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServerServiceServer).CancelConnection(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServerService_CancelConnection_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServerServiceServer).CancelConnection(ctx, req.(*CancelConnectionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServerService_ClearServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClearServicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServerServiceServer).ClearServices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServerService_ClearServices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServerServiceServer).ClearServices(ctx, req.(*ClearServicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServerService_Close_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CloseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServerServiceServer).Close(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServerService_Close_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServerServiceServer).Close(ctx, req.(*CloseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServerService_Connect_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BluetoothGattServerConnectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServerServiceServer).Connect(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServerService_Connect_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServerServiceServer).Connect(ctx, req.(*BluetoothGattServerConnectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServerService_GetConnectedDevices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConnectedDevicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServerServiceServer).GetConnectedDevices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServerService_GetConnectedDevices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServerServiceServer).GetConnectedDevices(ctx, req.(*GetConnectedDevicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServerService_GetConnectionState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConnectionStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServerServiceServer).GetConnectionState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServerService_GetConnectionState_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServerServiceServer).GetConnectionState(ctx, req.(*GetConnectionStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServerService_GetDevicesMatchingConnectionStates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDevicesMatchingConnectionStatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServerServiceServer).GetDevicesMatchingConnectionStates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServerService_GetDevicesMatchingConnectionStates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServerServiceServer).GetDevicesMatchingConnectionStates(ctx, req.(*GetDevicesMatchingConnectionStatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServerService_GetService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetServiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServerServiceServer).GetService(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServerService_GetService_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServerServiceServer).GetService(ctx, req.(*GetServiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServerService_GetServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetServicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServerServiceServer).GetServices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServerService_GetServices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServerServiceServer).GetServices(ctx, req.(*GetServicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServerService_NotifyCharacteristicChanged3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NotifyCharacteristicChanged3Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServerServiceServer).NotifyCharacteristicChanged3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServerService_NotifyCharacteristicChanged3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServerServiceServer).NotifyCharacteristicChanged3(ctx, req.(*NotifyCharacteristicChanged3Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServerService_NotifyCharacteristicChanged4_1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NotifyCharacteristicChanged4_1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServerServiceServer).NotifyCharacteristicChanged4_1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServerService_NotifyCharacteristicChanged4_1_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServerServiceServer).NotifyCharacteristicChanged4_1(ctx, req.(*NotifyCharacteristicChanged4_1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServerService_ReadPhy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BluetoothGattServerReadPhyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServerServiceServer).ReadPhy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServerService_ReadPhy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServerServiceServer).ReadPhy(ctx, req.(*BluetoothGattServerReadPhyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServerService_RemoveService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveServiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServerServiceServer).RemoveService(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServerService_RemoveService_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServerServiceServer).RemoveService(ctx, req.(*RemoveServiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServerService_SendResponse_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendResponseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServerServiceServer).SendResponse(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServerService_SendResponse_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServerServiceServer).SendResponse(ctx, req.(*SendResponseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BluetoothGattServerService_SetPreferredPhy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BluetoothGattServerSetPreferredPhyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BluetoothGattServerServiceServer).SetPreferredPhy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BluetoothGattServerService_SetPreferredPhy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BluetoothGattServerServiceServer).SetPreferredPhy(ctx, req.(*BluetoothGattServerSetPreferredPhyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// BluetoothGattServerService_ServiceDesc is the grpc.ServiceDesc for BluetoothGattServerService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var BluetoothGattServerService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "bluetooth.BluetoothGattServerService",
+	HandlerType: (*BluetoothGattServerServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddService",
+			Handler:    _BluetoothGattServerService_AddService_Handler,
+		},
+		{
+			MethodName: "CancelConnection",
+			Handler:    _BluetoothGattServerService_CancelConnection_Handler,
+		},
+		{
+			MethodName: "ClearServices",
+			Handler:    _BluetoothGattServerService_ClearServices_Handler,
+		},
+		{
+			MethodName: "Close",
+			Handler:    _BluetoothGattServerService_Close_Handler,
+		},
+		{
+			MethodName: "Connect",
+			Handler:    _BluetoothGattServerService_Connect_Handler,
+		},
+		{
+			MethodName: "GetConnectedDevices",
+			Handler:    _BluetoothGattServerService_GetConnectedDevices_Handler,
+		},
+		{
+			MethodName: "GetConnectionState",
+			Handler:    _BluetoothGattServerService_GetConnectionState_Handler,
+		},
+		{
+			MethodName: "GetDevicesMatchingConnectionStates",
+			Handler:    _BluetoothGattServerService_GetDevicesMatchingConnectionStates_Handler,
+		},
+		{
+			MethodName: "GetService",
+			Handler:    _BluetoothGattServerService_GetService_Handler,
+		},
+		{
+			MethodName: "GetServices",
+			Handler:    _BluetoothGattServerService_GetServices_Handler,
+		},
+		{
+			MethodName: "NotifyCharacteristicChanged3",
+			Handler:    _BluetoothGattServerService_NotifyCharacteristicChanged3_Handler,
+		},
+		{
+			MethodName: "NotifyCharacteristicChanged4_1",
+			Handler:    _BluetoothGattServerService_NotifyCharacteristicChanged4_1_Handler,
+		},
+		{
+			MethodName: "ReadPhy",
+			Handler:    _BluetoothGattServerService_ReadPhy_Handler,
+		},
+		{
+			MethodName: "RemoveService",
+			Handler:    _BluetoothGattServerService_RemoveService_Handler,
+		},
+		{
+			MethodName: "SendResponse",
+			Handler:    _BluetoothGattServerService_SendResponse_Handler,
+		},
+		{
+			MethodName: "SetPreferredPhy",
+			Handler:    _BluetoothGattServerService_SetPreferredPhy_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

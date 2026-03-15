@@ -3,9 +3,60 @@
 package resolver
 
 const (
-	FieldTypeBlob    = 0
-	FieldTypeFloat   = 0
-	FieldTypeInteger = 0
-	FieldTypeNull    = 0
-	FieldTypeString  = 0
+	FieldTypeBlob                  = 0
+	FieldTypeFloat                 = 0
+	FieldTypeInteger               = 0
+	FieldTypeNull                  = 0
+	FieldTypeString                = 0
+	Creator                        = 0
+	Empty                          = 0
+	NotifyDelete                   = 0
+	NotifyInsert                   = 0
+	NotifySkipNotifyForDescendants = 0
+	NotifySyncToNetwork            = 0
+	NotifyUpdate                   = 0
+	QuerySortDirectionAscending    = 0
+	QuerySortDirectionDescending   = 0
+	SyncObserverTypeActive         = 0
+	SyncObserverTypePending        = 0
+	SyncObserverTypeSettings       = 0
+)
+
+const (
+	AnyCursorItemType                  = ""
+	CursorDirBaseType                  = ""
+	CursorItemBaseType                 = ""
+	ExtraHonoredArgs                   = ""
+	ExtraRefreshSupported              = ""
+	ExtraSize                          = ""
+	ExtraTotalCount                    = ""
+	QueryArgGroupColumns               = ""
+	QueryArgLimit                      = ""
+	QueryArgOffset                     = ""
+	QueryArgSortCollation              = ""
+	QueryArgSortColumns                = ""
+	QueryArgSortDirection              = ""
+	QueryArgSortLocale                 = ""
+	QueryArgSqlGroupBy                 = ""
+	QueryArgSqlHaving                  = ""
+	QueryArgSqlLimit                   = ""
+	QueryArgSqlSelection               = ""
+	QueryArgSqlSelectionArgs           = ""
+	QueryArgSqlSortOrder               = ""
+	SchemeAndroidResource              = ""
+	SchemeContent                      = ""
+	SchemeFile                         = ""
+	SyncExtrasAccount                  = ""
+	SyncExtrasDiscardLocalDeletions    = ""
+	SyncExtrasDoNotRetry               = ""
+	SyncExtrasExpedited                = ""
+	SyncExtrasForce                    = ""
+	SyncExtrasIgnoreBackoff            = ""
+	SyncExtrasIgnoreSettings           = ""
+	SyncExtrasInitialize               = ""
+	SyncExtrasManual                   = ""
+	SyncExtrasOverrideTooManyDeletions = ""
+	SyncExtrasRequireCharging          = ""
+	SyncExtrasScheduleAsExpeditedJob   = ""
+	SyncExtrasUpload                   = ""
 )

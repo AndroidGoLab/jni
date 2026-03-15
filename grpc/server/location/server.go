@@ -352,7 +352,7 @@ func (s *LocationManagerServer) GetLastKnownLocation(_ context.Context, req *pb.
 	return &pb.GetLastKnownLocationResponse{Result: handle}, nil
 }
 
-func (s *LocationManagerServer) GetProvider(_ context.Context, req *pb.GetProviderRequest) (*pb.GetProviderResponse, error) {
+func (s *LocationManagerServer) GetProvider(_ context.Context, req *pb.LocationManagerGetProviderRequest) (*pb.LocationManagerGetProviderResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -372,7 +372,7 @@ func (s *LocationManagerServer) GetProvider(_ context.Context, req *pb.GetProvid
 			return nil, status.Errorf(codes.Internal, "store handle: %v", doErr)
 		}
 	}
-	return &pb.GetProviderResponse{Result: handle}, nil
+	return &pb.LocationManagerGetProviderResponse{Result: handle}, nil
 }
 
 func (s *LocationManagerServer) GetProviderProperties(_ context.Context, req *pb.GetProviderPropertiesRequest) (*pb.GetProviderPropertiesResponse, error) {

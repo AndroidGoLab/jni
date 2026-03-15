@@ -23,6 +23,2758 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type DescribeContentsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DescribeContentsRequest) Reset() {
+	*x = DescribeContentsRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DescribeContentsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DescribeContentsRequest) ProtoMessage() {}
+
+func (x *DescribeContentsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DescribeContentsRequest.ProtoReflect.Descriptor instead.
+func (*DescribeContentsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{0}
+}
+
+type DescribeContentsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DescribeContentsResponse) Reset() {
+	*x = DescribeContentsResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DescribeContentsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DescribeContentsResponse) ProtoMessage() {}
+
+func (x *DescribeContentsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DescribeContentsResponse.ProtoReflect.Descriptor instead.
+func (*DescribeContentsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *DescribeContentsResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type EqualsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EqualsRequest) Reset() {
+	*x = EqualsRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EqualsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EqualsRequest) ProtoMessage() {}
+
+func (x *EqualsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EqualsRequest.ProtoReflect.Descriptor instead.
+func (*EqualsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *EqualsRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type EqualsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EqualsResponse) Reset() {
+	*x = EqualsResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EqualsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EqualsResponse) ProtoMessage() {}
+
+func (x *EqualsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EqualsResponse.ProtoReflect.Descriptor instead.
+func (*EqualsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *EqualsResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type GetAffiliatedMloLinksRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAffiliatedMloLinksRequest) Reset() {
+	*x = GetAffiliatedMloLinksRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAffiliatedMloLinksRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAffiliatedMloLinksRequest) ProtoMessage() {}
+
+func (x *GetAffiliatedMloLinksRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAffiliatedMloLinksRequest.ProtoReflect.Descriptor instead.
+func (*GetAffiliatedMloLinksRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{4}
+}
+
+type GetAffiliatedMloLinksResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAffiliatedMloLinksResponse) Reset() {
+	*x = GetAffiliatedMloLinksResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAffiliatedMloLinksResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAffiliatedMloLinksResponse) ProtoMessage() {}
+
+func (x *GetAffiliatedMloLinksResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAffiliatedMloLinksResponse.ProtoReflect.Descriptor instead.
+func (*GetAffiliatedMloLinksResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetAffiliatedMloLinksResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetApMldMacAddressRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetApMldMacAddressRequest) Reset() {
+	*x = GetApMldMacAddressRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetApMldMacAddressRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetApMldMacAddressRequest) ProtoMessage() {}
+
+func (x *GetApMldMacAddressRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetApMldMacAddressRequest.ProtoReflect.Descriptor instead.
+func (*GetApMldMacAddressRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{6}
+}
+
+type GetApMldMacAddressResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetApMldMacAddressResponse) Reset() {
+	*x = GetApMldMacAddressResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetApMldMacAddressResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetApMldMacAddressResponse) ProtoMessage() {}
+
+func (x *GetApMldMacAddressResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetApMldMacAddressResponse.ProtoReflect.Descriptor instead.
+func (*GetApMldMacAddressResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetApMldMacAddressResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetApMloLinkIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetApMloLinkIdRequest) Reset() {
+	*x = GetApMloLinkIdRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetApMloLinkIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetApMloLinkIdRequest) ProtoMessage() {}
+
+func (x *GetApMloLinkIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetApMloLinkIdRequest.ProtoReflect.Descriptor instead.
+func (*GetApMloLinkIdRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{8}
+}
+
+type GetApMloLinkIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetApMloLinkIdResponse) Reset() {
+	*x = GetApMloLinkIdResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetApMloLinkIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetApMloLinkIdResponse) ProtoMessage() {}
+
+func (x *GetApMloLinkIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetApMloLinkIdResponse.ProtoReflect.Descriptor instead.
+func (*GetApMloLinkIdResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetApMloLinkIdResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetApplicableRedactionsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetApplicableRedactionsRequest) Reset() {
+	*x = GetApplicableRedactionsRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetApplicableRedactionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetApplicableRedactionsRequest) ProtoMessage() {}
+
+func (x *GetApplicableRedactionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetApplicableRedactionsRequest.ProtoReflect.Descriptor instead.
+func (*GetApplicableRedactionsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{10}
+}
+
+type GetApplicableRedactionsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetApplicableRedactionsResponse) Reset() {
+	*x = GetApplicableRedactionsResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetApplicableRedactionsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetApplicableRedactionsResponse) ProtoMessage() {}
+
+func (x *GetApplicableRedactionsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetApplicableRedactionsResponse.ProtoReflect.Descriptor instead.
+func (*GetApplicableRedactionsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *GetApplicableRedactionsResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetAssociatedMloLinksRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAssociatedMloLinksRequest) Reset() {
+	*x = GetAssociatedMloLinksRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAssociatedMloLinksRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAssociatedMloLinksRequest) ProtoMessage() {}
+
+func (x *GetAssociatedMloLinksRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAssociatedMloLinksRequest.ProtoReflect.Descriptor instead.
+func (*GetAssociatedMloLinksRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{12}
+}
+
+type GetAssociatedMloLinksResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAssociatedMloLinksResponse) Reset() {
+	*x = GetAssociatedMloLinksResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAssociatedMloLinksResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAssociatedMloLinksResponse) ProtoMessage() {}
+
+func (x *GetAssociatedMloLinksResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAssociatedMloLinksResponse.ProtoReflect.Descriptor instead.
+func (*GetAssociatedMloLinksResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GetAssociatedMloLinksResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetBSSIDRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBSSIDRequest) Reset() {
+	*x = GetBSSIDRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBSSIDRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBSSIDRequest) ProtoMessage() {}
+
+func (x *GetBSSIDRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBSSIDRequest.ProtoReflect.Descriptor instead.
+func (*GetBSSIDRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{14}
+}
+
+type GetBSSIDResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBSSIDResponse) Reset() {
+	*x = GetBSSIDResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBSSIDResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBSSIDResponse) ProtoMessage() {}
+
+func (x *GetBSSIDResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBSSIDResponse.ProtoReflect.Descriptor instead.
+func (*GetBSSIDResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *GetBSSIDResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetCurrentSecurityTypeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetCurrentSecurityTypeRequest) Reset() {
+	*x = GetCurrentSecurityTypeRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCurrentSecurityTypeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCurrentSecurityTypeRequest) ProtoMessage() {}
+
+func (x *GetCurrentSecurityTypeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCurrentSecurityTypeRequest.ProtoReflect.Descriptor instead.
+func (*GetCurrentSecurityTypeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{16}
+}
+
+type GetCurrentSecurityTypeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetCurrentSecurityTypeResponse) Reset() {
+	*x = GetCurrentSecurityTypeResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCurrentSecurityTypeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCurrentSecurityTypeResponse) ProtoMessage() {}
+
+func (x *GetCurrentSecurityTypeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCurrentSecurityTypeResponse.ProtoReflect.Descriptor instead.
+func (*GetCurrentSecurityTypeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *GetCurrentSecurityTypeResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetFrequencyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetFrequencyRequest) Reset() {
+	*x = GetFrequencyRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetFrequencyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetFrequencyRequest) ProtoMessage() {}
+
+func (x *GetFrequencyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetFrequencyRequest.ProtoReflect.Descriptor instead.
+func (*GetFrequencyRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{18}
+}
+
+type GetFrequencyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetFrequencyResponse) Reset() {
+	*x = GetFrequencyResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetFrequencyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetFrequencyResponse) ProtoMessage() {}
+
+func (x *GetFrequencyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetFrequencyResponse.ProtoReflect.Descriptor instead.
+func (*GetFrequencyResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *GetFrequencyResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetHiddenSSIDRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetHiddenSSIDRequest) Reset() {
+	*x = GetHiddenSSIDRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetHiddenSSIDRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetHiddenSSIDRequest) ProtoMessage() {}
+
+func (x *GetHiddenSSIDRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetHiddenSSIDRequest.ProtoReflect.Descriptor instead.
+func (*GetHiddenSSIDRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{20}
+}
+
+type GetHiddenSSIDResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetHiddenSSIDResponse) Reset() {
+	*x = GetHiddenSSIDResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetHiddenSSIDResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetHiddenSSIDResponse) ProtoMessage() {}
+
+func (x *GetHiddenSSIDResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetHiddenSSIDResponse.ProtoReflect.Descriptor instead.
+func (*GetHiddenSSIDResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *GetHiddenSSIDResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type GetInformationElementsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetInformationElementsRequest) Reset() {
+	*x = GetInformationElementsRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetInformationElementsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetInformationElementsRequest) ProtoMessage() {}
+
+func (x *GetInformationElementsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetInformationElementsRequest.ProtoReflect.Descriptor instead.
+func (*GetInformationElementsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{22}
+}
+
+type GetInformationElementsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetInformationElementsResponse) Reset() {
+	*x = GetInformationElementsResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetInformationElementsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetInformationElementsResponse) ProtoMessage() {}
+
+func (x *GetInformationElementsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetInformationElementsResponse.ProtoReflect.Descriptor instead.
+func (*GetInformationElementsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *GetInformationElementsResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetIpAddressRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetIpAddressRequest) Reset() {
+	*x = GetIpAddressRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetIpAddressRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetIpAddressRequest) ProtoMessage() {}
+
+func (x *GetIpAddressRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetIpAddressRequest.ProtoReflect.Descriptor instead.
+func (*GetIpAddressRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{24}
+}
+
+type GetIpAddressResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetIpAddressResponse) Reset() {
+	*x = GetIpAddressResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetIpAddressResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetIpAddressResponse) ProtoMessage() {}
+
+func (x *GetIpAddressResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetIpAddressResponse.ProtoReflect.Descriptor instead.
+func (*GetIpAddressResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *GetIpAddressResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetLinkSpeedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLinkSpeedRequest) Reset() {
+	*x = GetLinkSpeedRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLinkSpeedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLinkSpeedRequest) ProtoMessage() {}
+
+func (x *GetLinkSpeedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLinkSpeedRequest.ProtoReflect.Descriptor instead.
+func (*GetLinkSpeedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{26}
+}
+
+type GetLinkSpeedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLinkSpeedResponse) Reset() {
+	*x = GetLinkSpeedResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLinkSpeedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLinkSpeedResponse) ProtoMessage() {}
+
+func (x *GetLinkSpeedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLinkSpeedResponse.ProtoReflect.Descriptor instead.
+func (*GetLinkSpeedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *GetLinkSpeedResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetMacAddressRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMacAddressRequest) Reset() {
+	*x = GetMacAddressRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMacAddressRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMacAddressRequest) ProtoMessage() {}
+
+func (x *GetMacAddressRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMacAddressRequest.ProtoReflect.Descriptor instead.
+func (*GetMacAddressRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{28}
+}
+
+type GetMacAddressResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMacAddressResponse) Reset() {
+	*x = GetMacAddressResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMacAddressResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMacAddressResponse) ProtoMessage() {}
+
+func (x *GetMacAddressResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMacAddressResponse.ProtoReflect.Descriptor instead.
+func (*GetMacAddressResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *GetMacAddressResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetMaxSupportedRxLinkSpeedMbpsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMaxSupportedRxLinkSpeedMbpsRequest) Reset() {
+	*x = GetMaxSupportedRxLinkSpeedMbpsRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMaxSupportedRxLinkSpeedMbpsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMaxSupportedRxLinkSpeedMbpsRequest) ProtoMessage() {}
+
+func (x *GetMaxSupportedRxLinkSpeedMbpsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMaxSupportedRxLinkSpeedMbpsRequest.ProtoReflect.Descriptor instead.
+func (*GetMaxSupportedRxLinkSpeedMbpsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{30}
+}
+
+type GetMaxSupportedRxLinkSpeedMbpsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMaxSupportedRxLinkSpeedMbpsResponse) Reset() {
+	*x = GetMaxSupportedRxLinkSpeedMbpsResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMaxSupportedRxLinkSpeedMbpsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMaxSupportedRxLinkSpeedMbpsResponse) ProtoMessage() {}
+
+func (x *GetMaxSupportedRxLinkSpeedMbpsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMaxSupportedRxLinkSpeedMbpsResponse.ProtoReflect.Descriptor instead.
+func (*GetMaxSupportedRxLinkSpeedMbpsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *GetMaxSupportedRxLinkSpeedMbpsResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetMaxSupportedTxLinkSpeedMbpsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMaxSupportedTxLinkSpeedMbpsRequest) Reset() {
+	*x = GetMaxSupportedTxLinkSpeedMbpsRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMaxSupportedTxLinkSpeedMbpsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMaxSupportedTxLinkSpeedMbpsRequest) ProtoMessage() {}
+
+func (x *GetMaxSupportedTxLinkSpeedMbpsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMaxSupportedTxLinkSpeedMbpsRequest.ProtoReflect.Descriptor instead.
+func (*GetMaxSupportedTxLinkSpeedMbpsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{32}
+}
+
+type GetMaxSupportedTxLinkSpeedMbpsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMaxSupportedTxLinkSpeedMbpsResponse) Reset() {
+	*x = GetMaxSupportedTxLinkSpeedMbpsResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMaxSupportedTxLinkSpeedMbpsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMaxSupportedTxLinkSpeedMbpsResponse) ProtoMessage() {}
+
+func (x *GetMaxSupportedTxLinkSpeedMbpsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMaxSupportedTxLinkSpeedMbpsResponse.ProtoReflect.Descriptor instead.
+func (*GetMaxSupportedTxLinkSpeedMbpsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *GetMaxSupportedTxLinkSpeedMbpsResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetNetworkIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNetworkIdRequest) Reset() {
+	*x = GetNetworkIdRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNetworkIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNetworkIdRequest) ProtoMessage() {}
+
+func (x *GetNetworkIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNetworkIdRequest.ProtoReflect.Descriptor instead.
+func (*GetNetworkIdRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{34}
+}
+
+type GetNetworkIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNetworkIdResponse) Reset() {
+	*x = GetNetworkIdResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNetworkIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNetworkIdResponse) ProtoMessage() {}
+
+func (x *GetNetworkIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNetworkIdResponse.ProtoReflect.Descriptor instead.
+func (*GetNetworkIdResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *GetNetworkIdResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetPasspointFqdnRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPasspointFqdnRequest) Reset() {
+	*x = GetPasspointFqdnRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPasspointFqdnRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPasspointFqdnRequest) ProtoMessage() {}
+
+func (x *GetPasspointFqdnRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPasspointFqdnRequest.ProtoReflect.Descriptor instead.
+func (*GetPasspointFqdnRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{36}
+}
+
+type GetPasspointFqdnResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPasspointFqdnResponse) Reset() {
+	*x = GetPasspointFqdnResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPasspointFqdnResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPasspointFqdnResponse) ProtoMessage() {}
+
+func (x *GetPasspointFqdnResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPasspointFqdnResponse.ProtoReflect.Descriptor instead.
+func (*GetPasspointFqdnResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *GetPasspointFqdnResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetPasspointProviderFriendlyNameRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPasspointProviderFriendlyNameRequest) Reset() {
+	*x = GetPasspointProviderFriendlyNameRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPasspointProviderFriendlyNameRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPasspointProviderFriendlyNameRequest) ProtoMessage() {}
+
+func (x *GetPasspointProviderFriendlyNameRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPasspointProviderFriendlyNameRequest.ProtoReflect.Descriptor instead.
+func (*GetPasspointProviderFriendlyNameRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{38}
+}
+
+type GetPasspointProviderFriendlyNameResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPasspointProviderFriendlyNameResponse) Reset() {
+	*x = GetPasspointProviderFriendlyNameResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPasspointProviderFriendlyNameResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPasspointProviderFriendlyNameResponse) ProtoMessage() {}
+
+func (x *GetPasspointProviderFriendlyNameResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPasspointProviderFriendlyNameResponse.ProtoReflect.Descriptor instead.
+func (*GetPasspointProviderFriendlyNameResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *GetPasspointProviderFriendlyNameResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetPasspointUniqueIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPasspointUniqueIdRequest) Reset() {
+	*x = GetPasspointUniqueIdRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPasspointUniqueIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPasspointUniqueIdRequest) ProtoMessage() {}
+
+func (x *GetPasspointUniqueIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPasspointUniqueIdRequest.ProtoReflect.Descriptor instead.
+func (*GetPasspointUniqueIdRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{40}
+}
+
+type GetPasspointUniqueIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPasspointUniqueIdResponse) Reset() {
+	*x = GetPasspointUniqueIdResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPasspointUniqueIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPasspointUniqueIdResponse) ProtoMessage() {}
+
+func (x *GetPasspointUniqueIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPasspointUniqueIdResponse.ProtoReflect.Descriptor instead.
+func (*GetPasspointUniqueIdResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *GetPasspointUniqueIdResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetRssiRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRssiRequest) Reset() {
+	*x = GetRssiRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRssiRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRssiRequest) ProtoMessage() {}
+
+func (x *GetRssiRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRssiRequest.ProtoReflect.Descriptor instead.
+func (*GetRssiRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{42}
+}
+
+type GetRssiResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRssiResponse) Reset() {
+	*x = GetRssiResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRssiResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRssiResponse) ProtoMessage() {}
+
+func (x *GetRssiResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRssiResponse.ProtoReflect.Descriptor instead.
+func (*GetRssiResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *GetRssiResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetRxLinkSpeedMbpsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRxLinkSpeedMbpsRequest) Reset() {
+	*x = GetRxLinkSpeedMbpsRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRxLinkSpeedMbpsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRxLinkSpeedMbpsRequest) ProtoMessage() {}
+
+func (x *GetRxLinkSpeedMbpsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRxLinkSpeedMbpsRequest.ProtoReflect.Descriptor instead.
+func (*GetRxLinkSpeedMbpsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{44}
+}
+
+type GetRxLinkSpeedMbpsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetRxLinkSpeedMbpsResponse) Reset() {
+	*x = GetRxLinkSpeedMbpsResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetRxLinkSpeedMbpsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetRxLinkSpeedMbpsResponse) ProtoMessage() {}
+
+func (x *GetRxLinkSpeedMbpsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetRxLinkSpeedMbpsResponse.ProtoReflect.Descriptor instead.
+func (*GetRxLinkSpeedMbpsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *GetRxLinkSpeedMbpsResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetSSIDRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSSIDRequest) Reset() {
+	*x = GetSSIDRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSSIDRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSSIDRequest) ProtoMessage() {}
+
+func (x *GetSSIDRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSSIDRequest.ProtoReflect.Descriptor instead.
+func (*GetSSIDRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{46}
+}
+
+type GetSSIDResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSSIDResponse) Reset() {
+	*x = GetSSIDResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSSIDResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSSIDResponse) ProtoMessage() {}
+
+func (x *GetSSIDResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSSIDResponse.ProtoReflect.Descriptor instead.
+func (*GetSSIDResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{47}
+}
+
+func (x *GetSSIDResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type GetSubscriptionIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSubscriptionIdRequest) Reset() {
+	*x = GetSubscriptionIdRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSubscriptionIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSubscriptionIdRequest) ProtoMessage() {}
+
+func (x *GetSubscriptionIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSubscriptionIdRequest.ProtoReflect.Descriptor instead.
+func (*GetSubscriptionIdRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{48}
+}
+
+type GetSubscriptionIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSubscriptionIdResponse) Reset() {
+	*x = GetSubscriptionIdResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSubscriptionIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSubscriptionIdResponse) ProtoMessage() {}
+
+func (x *GetSubscriptionIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSubscriptionIdResponse.ProtoReflect.Descriptor instead.
+func (*GetSubscriptionIdResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *GetSubscriptionIdResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetSupplicantStateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSupplicantStateRequest) Reset() {
+	*x = GetSupplicantStateRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSupplicantStateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSupplicantStateRequest) ProtoMessage() {}
+
+func (x *GetSupplicantStateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSupplicantStateRequest.ProtoReflect.Descriptor instead.
+func (*GetSupplicantStateRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{50}
+}
+
+type GetSupplicantStateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSupplicantStateResponse) Reset() {
+	*x = GetSupplicantStateResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSupplicantStateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSupplicantStateResponse) ProtoMessage() {}
+
+func (x *GetSupplicantStateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSupplicantStateResponse.ProtoReflect.Descriptor instead.
+func (*GetSupplicantStateResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{51}
+}
+
+func (x *GetSupplicantStateResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetTxLinkSpeedMbpsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTxLinkSpeedMbpsRequest) Reset() {
+	*x = GetTxLinkSpeedMbpsRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTxLinkSpeedMbpsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTxLinkSpeedMbpsRequest) ProtoMessage() {}
+
+func (x *GetTxLinkSpeedMbpsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTxLinkSpeedMbpsRequest.ProtoReflect.Descriptor instead.
+func (*GetTxLinkSpeedMbpsRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{52}
+}
+
+type GetTxLinkSpeedMbpsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTxLinkSpeedMbpsResponse) Reset() {
+	*x = GetTxLinkSpeedMbpsResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTxLinkSpeedMbpsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTxLinkSpeedMbpsResponse) ProtoMessage() {}
+
+func (x *GetTxLinkSpeedMbpsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTxLinkSpeedMbpsResponse.ProtoReflect.Descriptor instead.
+func (*GetTxLinkSpeedMbpsResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{53}
+}
+
+func (x *GetTxLinkSpeedMbpsResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetWifiStandardRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetWifiStandardRequest) Reset() {
+	*x = GetWifiStandardRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetWifiStandardRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWifiStandardRequest) ProtoMessage() {}
+
+func (x *GetWifiStandardRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWifiStandardRequest.ProtoReflect.Descriptor instead.
+func (*GetWifiStandardRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{54}
+}
+
+type GetWifiStandardResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetWifiStandardResponse) Reset() {
+	*x = GetWifiStandardResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetWifiStandardResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWifiStandardResponse) ProtoMessage() {}
+
+func (x *GetWifiStandardResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWifiStandardResponse.ProtoReflect.Descriptor instead.
+func (*GetWifiStandardResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{55}
+}
+
+func (x *GetWifiStandardResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type HashCodeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HashCodeRequest) Reset() {
+	*x = HashCodeRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[56]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HashCodeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HashCodeRequest) ProtoMessage() {}
+
+func (x *HashCodeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[56]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HashCodeRequest.ProtoReflect.Descriptor instead.
+func (*HashCodeRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{56}
+}
+
+type HashCodeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HashCodeResponse) Reset() {
+	*x = HashCodeResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[57]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HashCodeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HashCodeResponse) ProtoMessage() {}
+
+func (x *HashCodeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[57]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HashCodeResponse.ProtoReflect.Descriptor instead.
+func (*HashCodeResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{57}
+}
+
+func (x *HashCodeResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type IsRestrictedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsRestrictedRequest) Reset() {
+	*x = IsRestrictedRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[58]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsRestrictedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsRestrictedRequest) ProtoMessage() {}
+
+func (x *IsRestrictedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[58]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsRestrictedRequest.ProtoReflect.Descriptor instead.
+func (*IsRestrictedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{58}
+}
+
+type IsRestrictedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsRestrictedResponse) Reset() {
+	*x = IsRestrictedResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[59]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsRestrictedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsRestrictedResponse) ProtoMessage() {}
+
+func (x *IsRestrictedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[59]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsRestrictedResponse.ProtoReflect.Descriptor instead.
+func (*IsRestrictedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{59}
+}
+
+func (x *IsRestrictedResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type MakeCopyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MakeCopyRequest) Reset() {
+	*x = MakeCopyRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[60]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MakeCopyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MakeCopyRequest) ProtoMessage() {}
+
+func (x *MakeCopyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[60]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MakeCopyRequest.ProtoReflect.Descriptor instead.
+func (*MakeCopyRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{60}
+}
+
+func (x *MakeCopyRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type MakeCopyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MakeCopyResponse) Reset() {
+	*x = MakeCopyResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[61]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MakeCopyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MakeCopyResponse) ProtoMessage() {}
+
+func (x *MakeCopyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[61]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MakeCopyResponse.ProtoReflect.Descriptor instead.
+func (*MakeCopyResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{61}
+}
+
+func (x *MakeCopyResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type ToStringRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToStringRequest) Reset() {
+	*x = ToStringRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[62]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToStringRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToStringRequest) ProtoMessage() {}
+
+func (x *ToStringRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[62]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToStringRequest.ProtoReflect.Descriptor instead.
+func (*ToStringRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{62}
+}
+
+type ToStringResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        string                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToStringResponse) Reset() {
+	*x = ToStringResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[63]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToStringResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToStringResponse) ProtoMessage() {}
+
+func (x *ToStringResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[63]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToStringResponse.ProtoReflect.Descriptor instead.
+func (*ToStringResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{63}
+}
+
+func (x *ToStringResponse) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+type WriteToParcelRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int32                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WriteToParcelRequest) Reset() {
+	*x = WriteToParcelRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[64]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WriteToParcelRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WriteToParcelRequest) ProtoMessage() {}
+
+func (x *WriteToParcelRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[64]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WriteToParcelRequest.ProtoReflect.Descriptor instead.
+func (*WriteToParcelRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{64}
+}
+
+func (x *WriteToParcelRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *WriteToParcelRequest) GetArg1() int32 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type WriteToParcelResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WriteToParcelResponse) Reset() {
+	*x = WriteToParcelResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[65]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WriteToParcelResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WriteToParcelResponse) ProtoMessage() {}
+
+func (x *WriteToParcelResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[65]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WriteToParcelResponse.ProtoReflect.Descriptor instead.
+func (*WriteToParcelResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{65}
+}
+
+type GetDetailedStateOfRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDetailedStateOfRequest) Reset() {
+	*x = GetDetailedStateOfRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[66]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDetailedStateOfRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDetailedStateOfRequest) ProtoMessage() {}
+
+func (x *GetDetailedStateOfRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[66]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDetailedStateOfRequest.ProtoReflect.Descriptor instead.
+func (*GetDetailedStateOfRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{66}
+}
+
+func (x *GetDetailedStateOfRequest) GetArg0() int64 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type GetDetailedStateOfResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDetailedStateOfResponse) Reset() {
+	*x = GetDetailedStateOfResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[67]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDetailedStateOfResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDetailedStateOfResponse) ProtoMessage() {}
+
+func (x *GetDetailedStateOfResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[67]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDetailedStateOfResponse.ProtoReflect.Descriptor instead.
+func (*GetDetailedStateOfResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{67}
+}
+
+func (x *GetDetailedStateOfResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
 type AddLocalOnlyConnectionFailureListenerRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Arg0          int64                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
@@ -33,7 +2785,7 @@ type AddLocalOnlyConnectionFailureListenerRequest struct {
 
 func (x *AddLocalOnlyConnectionFailureListenerRequest) Reset() {
 	*x = AddLocalOnlyConnectionFailureListenerRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[0]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +2797,7 @@ func (x *AddLocalOnlyConnectionFailureListenerRequest) String() string {
 func (*AddLocalOnlyConnectionFailureListenerRequest) ProtoMessage() {}
 
 func (x *AddLocalOnlyConnectionFailureListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[0]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +2810,7 @@ func (x *AddLocalOnlyConnectionFailureListenerRequest) ProtoReflect() protorefle
 
 // Deprecated: Use AddLocalOnlyConnectionFailureListenerRequest.ProtoReflect.Descriptor instead.
 func (*AddLocalOnlyConnectionFailureListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{0}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *AddLocalOnlyConnectionFailureListenerRequest) GetArg0() int64 {
@@ -83,7 +2835,7 @@ type AddLocalOnlyConnectionFailureListenerResponse struct {
 
 func (x *AddLocalOnlyConnectionFailureListenerResponse) Reset() {
 	*x = AddLocalOnlyConnectionFailureListenerResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[1]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -95,7 +2847,7 @@ func (x *AddLocalOnlyConnectionFailureListenerResponse) String() string {
 func (*AddLocalOnlyConnectionFailureListenerResponse) ProtoMessage() {}
 
 func (x *AddLocalOnlyConnectionFailureListenerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[1]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -108,7 +2860,7 @@ func (x *AddLocalOnlyConnectionFailureListenerResponse) ProtoReflect() protorefl
 
 // Deprecated: Use AddLocalOnlyConnectionFailureListenerResponse.ProtoReflect.Descriptor instead.
 func (*AddLocalOnlyConnectionFailureListenerResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{1}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{69}
 }
 
 type AddNetworkRequest struct {
@@ -120,7 +2872,7 @@ type AddNetworkRequest struct {
 
 func (x *AddNetworkRequest) Reset() {
 	*x = AddNetworkRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[2]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -132,7 +2884,7 @@ func (x *AddNetworkRequest) String() string {
 func (*AddNetworkRequest) ProtoMessage() {}
 
 func (x *AddNetworkRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[2]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -145,7 +2897,7 @@ func (x *AddNetworkRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddNetworkRequest.ProtoReflect.Descriptor instead.
 func (*AddNetworkRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{2}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *AddNetworkRequest) GetArg0() int64 {
@@ -164,7 +2916,7 @@ type AddNetworkResponse struct {
 
 func (x *AddNetworkResponse) Reset() {
 	*x = AddNetworkResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[3]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -176,7 +2928,7 @@ func (x *AddNetworkResponse) String() string {
 func (*AddNetworkResponse) ProtoMessage() {}
 
 func (x *AddNetworkResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[3]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -189,7 +2941,7 @@ func (x *AddNetworkResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddNetworkResponse.ProtoReflect.Descriptor instead.
 func (*AddNetworkResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{3}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *AddNetworkResponse) GetResult() int32 {
@@ -208,7 +2960,7 @@ type AddNetworkPrivilegedRequest struct {
 
 func (x *AddNetworkPrivilegedRequest) Reset() {
 	*x = AddNetworkPrivilegedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[4]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -220,7 +2972,7 @@ func (x *AddNetworkPrivilegedRequest) String() string {
 func (*AddNetworkPrivilegedRequest) ProtoMessage() {}
 
 func (x *AddNetworkPrivilegedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[4]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -233,7 +2985,7 @@ func (x *AddNetworkPrivilegedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddNetworkPrivilegedRequest.ProtoReflect.Descriptor instead.
 func (*AddNetworkPrivilegedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{4}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *AddNetworkPrivilegedRequest) GetArg0() int64 {
@@ -252,7 +3004,7 @@ type AddNetworkPrivilegedResponse struct {
 
 func (x *AddNetworkPrivilegedResponse) Reset() {
 	*x = AddNetworkPrivilegedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[5]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -264,7 +3016,7 @@ func (x *AddNetworkPrivilegedResponse) String() string {
 func (*AddNetworkPrivilegedResponse) ProtoMessage() {}
 
 func (x *AddNetworkPrivilegedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[5]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -277,7 +3029,7 @@ func (x *AddNetworkPrivilegedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddNetworkPrivilegedResponse.ProtoReflect.Descriptor instead.
 func (*AddNetworkPrivilegedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{5}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *AddNetworkPrivilegedResponse) GetResult() int64 {
@@ -296,7 +3048,7 @@ type AddNetworkSuggestionsRequest struct {
 
 func (x *AddNetworkSuggestionsRequest) Reset() {
 	*x = AddNetworkSuggestionsRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[6]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -308,7 +3060,7 @@ func (x *AddNetworkSuggestionsRequest) String() string {
 func (*AddNetworkSuggestionsRequest) ProtoMessage() {}
 
 func (x *AddNetworkSuggestionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[6]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -321,7 +3073,7 @@ func (x *AddNetworkSuggestionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddNetworkSuggestionsRequest.ProtoReflect.Descriptor instead.
 func (*AddNetworkSuggestionsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{6}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *AddNetworkSuggestionsRequest) GetArg0() int64 {
@@ -340,7 +3092,7 @@ type AddNetworkSuggestionsResponse struct {
 
 func (x *AddNetworkSuggestionsResponse) Reset() {
 	*x = AddNetworkSuggestionsResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[7]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -352,7 +3104,7 @@ func (x *AddNetworkSuggestionsResponse) String() string {
 func (*AddNetworkSuggestionsResponse) ProtoMessage() {}
 
 func (x *AddNetworkSuggestionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[7]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -365,7 +3117,7 @@ func (x *AddNetworkSuggestionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddNetworkSuggestionsResponse.ProtoReflect.Descriptor instead.
 func (*AddNetworkSuggestionsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{7}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *AddNetworkSuggestionsResponse) GetResult() int32 {
@@ -384,7 +3136,7 @@ type AddOrUpdatePasspointConfigurationRequest struct {
 
 func (x *AddOrUpdatePasspointConfigurationRequest) Reset() {
 	*x = AddOrUpdatePasspointConfigurationRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[8]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -396,7 +3148,7 @@ func (x *AddOrUpdatePasspointConfigurationRequest) String() string {
 func (*AddOrUpdatePasspointConfigurationRequest) ProtoMessage() {}
 
 func (x *AddOrUpdatePasspointConfigurationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[8]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -409,7 +3161,7 @@ func (x *AddOrUpdatePasspointConfigurationRequest) ProtoReflect() protoreflect.M
 
 // Deprecated: Use AddOrUpdatePasspointConfigurationRequest.ProtoReflect.Descriptor instead.
 func (*AddOrUpdatePasspointConfigurationRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{8}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *AddOrUpdatePasspointConfigurationRequest) GetArg0() int64 {
@@ -427,7 +3179,7 @@ type AddOrUpdatePasspointConfigurationResponse struct {
 
 func (x *AddOrUpdatePasspointConfigurationResponse) Reset() {
 	*x = AddOrUpdatePasspointConfigurationResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[9]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -439,7 +3191,7 @@ func (x *AddOrUpdatePasspointConfigurationResponse) String() string {
 func (*AddOrUpdatePasspointConfigurationResponse) ProtoMessage() {}
 
 func (x *AddOrUpdatePasspointConfigurationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[9]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -452,7 +3204,7 @@ func (x *AddOrUpdatePasspointConfigurationResponse) ProtoReflect() protoreflect.
 
 // Deprecated: Use AddOrUpdatePasspointConfigurationResponse.ProtoReflect.Descriptor instead.
 func (*AddOrUpdatePasspointConfigurationResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{9}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{77}
 }
 
 type AddSuggestionConnectionStatusListenerRequest struct {
@@ -465,7 +3217,7 @@ type AddSuggestionConnectionStatusListenerRequest struct {
 
 func (x *AddSuggestionConnectionStatusListenerRequest) Reset() {
 	*x = AddSuggestionConnectionStatusListenerRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[10]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -477,7 +3229,7 @@ func (x *AddSuggestionConnectionStatusListenerRequest) String() string {
 func (*AddSuggestionConnectionStatusListenerRequest) ProtoMessage() {}
 
 func (x *AddSuggestionConnectionStatusListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[10]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -490,7 +3242,7 @@ func (x *AddSuggestionConnectionStatusListenerRequest) ProtoReflect() protorefle
 
 // Deprecated: Use AddSuggestionConnectionStatusListenerRequest.ProtoReflect.Descriptor instead.
 func (*AddSuggestionConnectionStatusListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{10}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{78}
 }
 
 func (x *AddSuggestionConnectionStatusListenerRequest) GetArg0() int64 {
@@ -515,7 +3267,7 @@ type AddSuggestionConnectionStatusListenerResponse struct {
 
 func (x *AddSuggestionConnectionStatusListenerResponse) Reset() {
 	*x = AddSuggestionConnectionStatusListenerResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[11]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -527,7 +3279,7 @@ func (x *AddSuggestionConnectionStatusListenerResponse) String() string {
 func (*AddSuggestionConnectionStatusListenerResponse) ProtoMessage() {}
 
 func (x *AddSuggestionConnectionStatusListenerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[11]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -540,7 +3292,7 @@ func (x *AddSuggestionConnectionStatusListenerResponse) ProtoReflect() protorefl
 
 // Deprecated: Use AddSuggestionConnectionStatusListenerResponse.ProtoReflect.Descriptor instead.
 func (*AddSuggestionConnectionStatusListenerResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{11}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{79}
 }
 
 type AddSuggestionUserApprovalStatusListenerRequest struct {
@@ -553,7 +3305,7 @@ type AddSuggestionUserApprovalStatusListenerRequest struct {
 
 func (x *AddSuggestionUserApprovalStatusListenerRequest) Reset() {
 	*x = AddSuggestionUserApprovalStatusListenerRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[12]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -565,7 +3317,7 @@ func (x *AddSuggestionUserApprovalStatusListenerRequest) String() string {
 func (*AddSuggestionUserApprovalStatusListenerRequest) ProtoMessage() {}
 
 func (x *AddSuggestionUserApprovalStatusListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[12]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -578,7 +3330,7 @@ func (x *AddSuggestionUserApprovalStatusListenerRequest) ProtoReflect() protoref
 
 // Deprecated: Use AddSuggestionUserApprovalStatusListenerRequest.ProtoReflect.Descriptor instead.
 func (*AddSuggestionUserApprovalStatusListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{12}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{80}
 }
 
 func (x *AddSuggestionUserApprovalStatusListenerRequest) GetArg0() int64 {
@@ -603,7 +3355,7 @@ type AddSuggestionUserApprovalStatusListenerResponse struct {
 
 func (x *AddSuggestionUserApprovalStatusListenerResponse) Reset() {
 	*x = AddSuggestionUserApprovalStatusListenerResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[13]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -615,7 +3367,7 @@ func (x *AddSuggestionUserApprovalStatusListenerResponse) String() string {
 func (*AddSuggestionUserApprovalStatusListenerResponse) ProtoMessage() {}
 
 func (x *AddSuggestionUserApprovalStatusListenerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[13]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -628,7 +3380,7 @@ func (x *AddSuggestionUserApprovalStatusListenerResponse) ProtoReflect() protore
 
 // Deprecated: Use AddSuggestionUserApprovalStatusListenerResponse.ProtoReflect.Descriptor instead.
 func (*AddSuggestionUserApprovalStatusListenerResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{13}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{81}
 }
 
 type AddWifiStateChangedListenerRequest struct {
@@ -641,7 +3393,7 @@ type AddWifiStateChangedListenerRequest struct {
 
 func (x *AddWifiStateChangedListenerRequest) Reset() {
 	*x = AddWifiStateChangedListenerRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[14]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -653,7 +3405,7 @@ func (x *AddWifiStateChangedListenerRequest) String() string {
 func (*AddWifiStateChangedListenerRequest) ProtoMessage() {}
 
 func (x *AddWifiStateChangedListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[14]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -666,7 +3418,7 @@ func (x *AddWifiStateChangedListenerRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use AddWifiStateChangedListenerRequest.ProtoReflect.Descriptor instead.
 func (*AddWifiStateChangedListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{14}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{82}
 }
 
 func (x *AddWifiStateChangedListenerRequest) GetArg0() int64 {
@@ -691,7 +3443,7 @@ type AddWifiStateChangedListenerResponse struct {
 
 func (x *AddWifiStateChangedListenerResponse) Reset() {
 	*x = AddWifiStateChangedListenerResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[15]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -703,7 +3455,7 @@ func (x *AddWifiStateChangedListenerResponse) String() string {
 func (*AddWifiStateChangedListenerResponse) ProtoMessage() {}
 
 func (x *AddWifiStateChangedListenerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[15]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -716,7 +3468,7 @@ func (x *AddWifiStateChangedListenerResponse) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use AddWifiStateChangedListenerResponse.ProtoReflect.Descriptor instead.
 func (*AddWifiStateChangedListenerResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{15}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{83}
 }
 
 type AllowAutojoinGlobalRequest struct {
@@ -728,7 +3480,7 @@ type AllowAutojoinGlobalRequest struct {
 
 func (x *AllowAutojoinGlobalRequest) Reset() {
 	*x = AllowAutojoinGlobalRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[16]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -740,7 +3492,7 @@ func (x *AllowAutojoinGlobalRequest) String() string {
 func (*AllowAutojoinGlobalRequest) ProtoMessage() {}
 
 func (x *AllowAutojoinGlobalRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[16]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -753,7 +3505,7 @@ func (x *AllowAutojoinGlobalRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AllowAutojoinGlobalRequest.ProtoReflect.Descriptor instead.
 func (*AllowAutojoinGlobalRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{16}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{84}
 }
 
 func (x *AllowAutojoinGlobalRequest) GetArg0() bool {
@@ -771,7 +3523,7 @@ type AllowAutojoinGlobalResponse struct {
 
 func (x *AllowAutojoinGlobalResponse) Reset() {
 	*x = AllowAutojoinGlobalResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[17]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -783,7 +3535,7 @@ func (x *AllowAutojoinGlobalResponse) String() string {
 func (*AllowAutojoinGlobalResponse) ProtoMessage() {}
 
 func (x *AllowAutojoinGlobalResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[17]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -796,7 +3548,7 @@ func (x *AllowAutojoinGlobalResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AllowAutojoinGlobalResponse.ProtoReflect.Descriptor instead.
 func (*AllowAutojoinGlobalResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{17}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{85}
 }
 
 type CalculateSignalLevel1Request struct {
@@ -808,7 +3560,7 @@ type CalculateSignalLevel1Request struct {
 
 func (x *CalculateSignalLevel1Request) Reset() {
 	*x = CalculateSignalLevel1Request{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[18]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -820,7 +3572,7 @@ func (x *CalculateSignalLevel1Request) String() string {
 func (*CalculateSignalLevel1Request) ProtoMessage() {}
 
 func (x *CalculateSignalLevel1Request) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[18]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -833,7 +3585,7 @@ func (x *CalculateSignalLevel1Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CalculateSignalLevel1Request.ProtoReflect.Descriptor instead.
 func (*CalculateSignalLevel1Request) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{18}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{86}
 }
 
 func (x *CalculateSignalLevel1Request) GetArg0() int32 {
@@ -852,7 +3604,7 @@ type CalculateSignalLevel1Response struct {
 
 func (x *CalculateSignalLevel1Response) Reset() {
 	*x = CalculateSignalLevel1Response{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[19]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -864,7 +3616,7 @@ func (x *CalculateSignalLevel1Response) String() string {
 func (*CalculateSignalLevel1Response) ProtoMessage() {}
 
 func (x *CalculateSignalLevel1Response) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[19]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -877,7 +3629,7 @@ func (x *CalculateSignalLevel1Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CalculateSignalLevel1Response.ProtoReflect.Descriptor instead.
 func (*CalculateSignalLevel1Response) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{19}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{87}
 }
 
 func (x *CalculateSignalLevel1Response) GetResult() int32 {
@@ -896,7 +3648,7 @@ type CancelWpsRequest struct {
 
 func (x *CancelWpsRequest) Reset() {
 	*x = CancelWpsRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[20]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -908,7 +3660,7 @@ func (x *CancelWpsRequest) String() string {
 func (*CancelWpsRequest) ProtoMessage() {}
 
 func (x *CancelWpsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[20]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -921,7 +3673,7 @@ func (x *CancelWpsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancelWpsRequest.ProtoReflect.Descriptor instead.
 func (*CancelWpsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{20}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{88}
 }
 
 func (x *CancelWpsRequest) GetArg0() int64 {
@@ -939,7 +3691,7 @@ type CancelWpsResponse struct {
 
 func (x *CancelWpsResponse) Reset() {
 	*x = CancelWpsResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[21]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -951,7 +3703,7 @@ func (x *CancelWpsResponse) String() string {
 func (*CancelWpsResponse) ProtoMessage() {}
 
 func (x *CancelWpsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[21]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -964,7 +3716,7 @@ func (x *CancelWpsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancelWpsResponse.ProtoReflect.Descriptor instead.
 func (*CancelWpsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{21}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{89}
 }
 
 type CreateMulticastLockRequest struct {
@@ -976,7 +3728,7 @@ type CreateMulticastLockRequest struct {
 
 func (x *CreateMulticastLockRequest) Reset() {
 	*x = CreateMulticastLockRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[22]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -988,7 +3740,7 @@ func (x *CreateMulticastLockRequest) String() string {
 func (*CreateMulticastLockRequest) ProtoMessage() {}
 
 func (x *CreateMulticastLockRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[22]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1001,7 +3753,7 @@ func (x *CreateMulticastLockRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateMulticastLockRequest.ProtoReflect.Descriptor instead.
 func (*CreateMulticastLockRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{22}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{90}
 }
 
 func (x *CreateMulticastLockRequest) GetArg0() string {
@@ -1020,7 +3772,7 @@ type CreateMulticastLockResponse struct {
 
 func (x *CreateMulticastLockResponse) Reset() {
 	*x = CreateMulticastLockResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[23]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1032,7 +3784,7 @@ func (x *CreateMulticastLockResponse) String() string {
 func (*CreateMulticastLockResponse) ProtoMessage() {}
 
 func (x *CreateMulticastLockResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[23]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1045,7 +3797,7 @@ func (x *CreateMulticastLockResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateMulticastLockResponse.ProtoReflect.Descriptor instead.
 func (*CreateMulticastLockResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{23}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{91}
 }
 
 func (x *CreateMulticastLockResponse) GetResult() int64 {
@@ -1065,7 +3817,7 @@ type CreateWifiLock2Request struct {
 
 func (x *CreateWifiLock2Request) Reset() {
 	*x = CreateWifiLock2Request{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[24]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1077,7 +3829,7 @@ func (x *CreateWifiLock2Request) String() string {
 func (*CreateWifiLock2Request) ProtoMessage() {}
 
 func (x *CreateWifiLock2Request) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[24]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1090,7 +3842,7 @@ func (x *CreateWifiLock2Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateWifiLock2Request.ProtoReflect.Descriptor instead.
 func (*CreateWifiLock2Request) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{24}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{92}
 }
 
 func (x *CreateWifiLock2Request) GetArg0() int32 {
@@ -1116,7 +3868,7 @@ type CreateWifiLock2Response struct {
 
 func (x *CreateWifiLock2Response) Reset() {
 	*x = CreateWifiLock2Response{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[25]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1128,7 +3880,7 @@ func (x *CreateWifiLock2Response) String() string {
 func (*CreateWifiLock2Response) ProtoMessage() {}
 
 func (x *CreateWifiLock2Response) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[25]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1141,7 +3893,7 @@ func (x *CreateWifiLock2Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateWifiLock2Response.ProtoReflect.Descriptor instead.
 func (*CreateWifiLock2Response) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{25}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{93}
 }
 
 func (x *CreateWifiLock2Response) GetResult() int64 {
@@ -1160,7 +3912,7 @@ type CreateWifiLock1_1Request struct {
 
 func (x *CreateWifiLock1_1Request) Reset() {
 	*x = CreateWifiLock1_1Request{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[26]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1172,7 +3924,7 @@ func (x *CreateWifiLock1_1Request) String() string {
 func (*CreateWifiLock1_1Request) ProtoMessage() {}
 
 func (x *CreateWifiLock1_1Request) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[26]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1185,7 +3937,7 @@ func (x *CreateWifiLock1_1Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateWifiLock1_1Request.ProtoReflect.Descriptor instead.
 func (*CreateWifiLock1_1Request) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{26}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{94}
 }
 
 func (x *CreateWifiLock1_1Request) GetArg0() string {
@@ -1204,7 +3956,7 @@ type CreateWifiLock1_1Response struct {
 
 func (x *CreateWifiLock1_1Response) Reset() {
 	*x = CreateWifiLock1_1Response{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[27]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1216,7 +3968,7 @@ func (x *CreateWifiLock1_1Response) String() string {
 func (*CreateWifiLock1_1Response) ProtoMessage() {}
 
 func (x *CreateWifiLock1_1Response) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[27]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1229,7 +3981,7 @@ func (x *CreateWifiLock1_1Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateWifiLock1_1Response.ProtoReflect.Descriptor instead.
 func (*CreateWifiLock1_1Response) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{27}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{95}
 }
 
 func (x *CreateWifiLock1_1Response) GetResult() int64 {
@@ -1248,7 +4000,7 @@ type DisableNetworkRequest struct {
 
 func (x *DisableNetworkRequest) Reset() {
 	*x = DisableNetworkRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[28]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1260,7 +4012,7 @@ func (x *DisableNetworkRequest) String() string {
 func (*DisableNetworkRequest) ProtoMessage() {}
 
 func (x *DisableNetworkRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[28]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1273,7 +4025,7 @@ func (x *DisableNetworkRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DisableNetworkRequest.ProtoReflect.Descriptor instead.
 func (*DisableNetworkRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{28}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{96}
 }
 
 func (x *DisableNetworkRequest) GetArg0() int32 {
@@ -1292,7 +4044,7 @@ type DisableNetworkResponse struct {
 
 func (x *DisableNetworkResponse) Reset() {
 	*x = DisableNetworkResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[29]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[97]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1304,7 +4056,7 @@ func (x *DisableNetworkResponse) String() string {
 func (*DisableNetworkResponse) ProtoMessage() {}
 
 func (x *DisableNetworkResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[29]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[97]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1317,7 +4069,7 @@ func (x *DisableNetworkResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DisableNetworkResponse.ProtoReflect.Descriptor instead.
 func (*DisableNetworkResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{29}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{97}
 }
 
 func (x *DisableNetworkResponse) GetResult() bool {
@@ -1336,7 +4088,7 @@ type DisallowCurrentSuggestedNetworkRequest struct {
 
 func (x *DisallowCurrentSuggestedNetworkRequest) Reset() {
 	*x = DisallowCurrentSuggestedNetworkRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[30]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[98]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1348,7 +4100,7 @@ func (x *DisallowCurrentSuggestedNetworkRequest) String() string {
 func (*DisallowCurrentSuggestedNetworkRequest) ProtoMessage() {}
 
 func (x *DisallowCurrentSuggestedNetworkRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[30]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[98]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1361,7 +4113,7 @@ func (x *DisallowCurrentSuggestedNetworkRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use DisallowCurrentSuggestedNetworkRequest.ProtoReflect.Descriptor instead.
 func (*DisallowCurrentSuggestedNetworkRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{30}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{98}
 }
 
 func (x *DisallowCurrentSuggestedNetworkRequest) GetArg0() int64 {
@@ -1379,7 +4131,7 @@ type DisallowCurrentSuggestedNetworkResponse struct {
 
 func (x *DisallowCurrentSuggestedNetworkResponse) Reset() {
 	*x = DisallowCurrentSuggestedNetworkResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[31]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[99]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1391,7 +4143,7 @@ func (x *DisallowCurrentSuggestedNetworkResponse) String() string {
 func (*DisallowCurrentSuggestedNetworkResponse) ProtoMessage() {}
 
 func (x *DisallowCurrentSuggestedNetworkResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[31]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[99]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1404,7 +4156,7 @@ func (x *DisallowCurrentSuggestedNetworkResponse) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use DisallowCurrentSuggestedNetworkResponse.ProtoReflect.Descriptor instead.
 func (*DisallowCurrentSuggestedNetworkResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{31}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{99}
 }
 
 type DisconnectRequest struct {
@@ -1415,7 +4167,7 @@ type DisconnectRequest struct {
 
 func (x *DisconnectRequest) Reset() {
 	*x = DisconnectRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[32]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[100]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1427,7 +4179,7 @@ func (x *DisconnectRequest) String() string {
 func (*DisconnectRequest) ProtoMessage() {}
 
 func (x *DisconnectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[32]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[100]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1440,7 +4192,7 @@ func (x *DisconnectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DisconnectRequest.ProtoReflect.Descriptor instead.
 func (*DisconnectRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{32}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{100}
 }
 
 type DisconnectResponse struct {
@@ -1452,7 +4204,7 @@ type DisconnectResponse struct {
 
 func (x *DisconnectResponse) Reset() {
 	*x = DisconnectResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[33]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[101]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1464,7 +4216,7 @@ func (x *DisconnectResponse) String() string {
 func (*DisconnectResponse) ProtoMessage() {}
 
 func (x *DisconnectResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[33]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[101]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1477,7 +4229,7 @@ func (x *DisconnectResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DisconnectResponse.ProtoReflect.Descriptor instead.
 func (*DisconnectResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{33}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{101}
 }
 
 func (x *DisconnectResponse) GetResult() bool {
@@ -1497,7 +4249,7 @@ type EnableNetworkRequest struct {
 
 func (x *EnableNetworkRequest) Reset() {
 	*x = EnableNetworkRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[34]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[102]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1509,7 +4261,7 @@ func (x *EnableNetworkRequest) String() string {
 func (*EnableNetworkRequest) ProtoMessage() {}
 
 func (x *EnableNetworkRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[34]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[102]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1522,7 +4274,7 @@ func (x *EnableNetworkRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnableNetworkRequest.ProtoReflect.Descriptor instead.
 func (*EnableNetworkRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{34}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{102}
 }
 
 func (x *EnableNetworkRequest) GetArg0() int32 {
@@ -1548,7 +4300,7 @@ type EnableNetworkResponse struct {
 
 func (x *EnableNetworkResponse) Reset() {
 	*x = EnableNetworkResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[35]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[103]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1560,7 +4312,7 @@ func (x *EnableNetworkResponse) String() string {
 func (*EnableNetworkResponse) ProtoMessage() {}
 
 func (x *EnableNetworkResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[35]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[103]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1573,7 +4325,7 @@ func (x *EnableNetworkResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EnableNetworkResponse.ProtoReflect.Descriptor instead.
 func (*EnableNetworkResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{35}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{103}
 }
 
 func (x *EnableNetworkResponse) GetResult() bool {
@@ -1591,7 +4343,7 @@ type FlushPasspointAnqpCacheRequest struct {
 
 func (x *FlushPasspointAnqpCacheRequest) Reset() {
 	*x = FlushPasspointAnqpCacheRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[36]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[104]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1603,7 +4355,7 @@ func (x *FlushPasspointAnqpCacheRequest) String() string {
 func (*FlushPasspointAnqpCacheRequest) ProtoMessage() {}
 
 func (x *FlushPasspointAnqpCacheRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[36]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[104]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1616,7 +4368,7 @@ func (x *FlushPasspointAnqpCacheRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FlushPasspointAnqpCacheRequest.ProtoReflect.Descriptor instead.
 func (*FlushPasspointAnqpCacheRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{36}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{104}
 }
 
 type FlushPasspointAnqpCacheResponse struct {
@@ -1627,7 +4379,7 @@ type FlushPasspointAnqpCacheResponse struct {
 
 func (x *FlushPasspointAnqpCacheResponse) Reset() {
 	*x = FlushPasspointAnqpCacheResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[37]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[105]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1639,7 +4391,7 @@ func (x *FlushPasspointAnqpCacheResponse) String() string {
 func (*FlushPasspointAnqpCacheResponse) ProtoMessage() {}
 
 func (x *FlushPasspointAnqpCacheResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[37]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[105]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1652,7 +4404,7 @@ func (x *FlushPasspointAnqpCacheResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FlushPasspointAnqpCacheResponse.ProtoReflect.Descriptor instead.
 func (*FlushPasspointAnqpCacheResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{37}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{105}
 }
 
 type GetAllowedChannelsRequest struct {
@@ -1665,7 +4417,7 @@ type GetAllowedChannelsRequest struct {
 
 func (x *GetAllowedChannelsRequest) Reset() {
 	*x = GetAllowedChannelsRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[38]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[106]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1677,7 +4429,7 @@ func (x *GetAllowedChannelsRequest) String() string {
 func (*GetAllowedChannelsRequest) ProtoMessage() {}
 
 func (x *GetAllowedChannelsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[38]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[106]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1690,7 +4442,7 @@ func (x *GetAllowedChannelsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllowedChannelsRequest.ProtoReflect.Descriptor instead.
 func (*GetAllowedChannelsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{38}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{106}
 }
 
 func (x *GetAllowedChannelsRequest) GetArg0() int32 {
@@ -1716,7 +4468,7 @@ type GetAllowedChannelsResponse struct {
 
 func (x *GetAllowedChannelsResponse) Reset() {
 	*x = GetAllowedChannelsResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[39]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[107]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1728,7 +4480,7 @@ func (x *GetAllowedChannelsResponse) String() string {
 func (*GetAllowedChannelsResponse) ProtoMessage() {}
 
 func (x *GetAllowedChannelsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[39]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[107]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1741,7 +4493,7 @@ func (x *GetAllowedChannelsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAllowedChannelsResponse.ProtoReflect.Descriptor instead.
 func (*GetAllowedChannelsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{39}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{107}
 }
 
 func (x *GetAllowedChannelsResponse) GetResult() int64 {
@@ -1759,7 +4511,7 @@ type GetCallerConfiguredNetworksRequest struct {
 
 func (x *GetCallerConfiguredNetworksRequest) Reset() {
 	*x = GetCallerConfiguredNetworksRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[40]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[108]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1771,7 +4523,7 @@ func (x *GetCallerConfiguredNetworksRequest) String() string {
 func (*GetCallerConfiguredNetworksRequest) ProtoMessage() {}
 
 func (x *GetCallerConfiguredNetworksRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[40]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[108]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1784,7 +4536,7 @@ func (x *GetCallerConfiguredNetworksRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use GetCallerConfiguredNetworksRequest.ProtoReflect.Descriptor instead.
 func (*GetCallerConfiguredNetworksRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{40}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{108}
 }
 
 type GetCallerConfiguredNetworksResponse struct {
@@ -1796,7 +4548,7 @@ type GetCallerConfiguredNetworksResponse struct {
 
 func (x *GetCallerConfiguredNetworksResponse) Reset() {
 	*x = GetCallerConfiguredNetworksResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[41]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[109]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1808,7 +4560,7 @@ func (x *GetCallerConfiguredNetworksResponse) String() string {
 func (*GetCallerConfiguredNetworksResponse) ProtoMessage() {}
 
 func (x *GetCallerConfiguredNetworksResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[41]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[109]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1821,7 +4573,7 @@ func (x *GetCallerConfiguredNetworksResponse) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use GetCallerConfiguredNetworksResponse.ProtoReflect.Descriptor instead.
 func (*GetCallerConfiguredNetworksResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{41}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{109}
 }
 
 func (x *GetCallerConfiguredNetworksResponse) GetResult() int64 {
@@ -1841,7 +4593,7 @@ type GetChannelDataRequest struct {
 
 func (x *GetChannelDataRequest) Reset() {
 	*x = GetChannelDataRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[42]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[110]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1853,7 +4605,7 @@ func (x *GetChannelDataRequest) String() string {
 func (*GetChannelDataRequest) ProtoMessage() {}
 
 func (x *GetChannelDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[42]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[110]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1866,7 +4618,7 @@ func (x *GetChannelDataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetChannelDataRequest.ProtoReflect.Descriptor instead.
 func (*GetChannelDataRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{42}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{110}
 }
 
 func (x *GetChannelDataRequest) GetArg0() int64 {
@@ -1891,7 +4643,7 @@ type GetChannelDataResponse struct {
 
 func (x *GetChannelDataResponse) Reset() {
 	*x = GetChannelDataResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[43]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[111]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1903,7 +4655,7 @@ func (x *GetChannelDataResponse) String() string {
 func (*GetChannelDataResponse) ProtoMessage() {}
 
 func (x *GetChannelDataResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[43]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[111]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1916,7 +4668,7 @@ func (x *GetChannelDataResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetChannelDataResponse.ProtoReflect.Descriptor instead.
 func (*GetChannelDataResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{43}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{111}
 }
 
 type GetConfiguredNetworksRequest struct {
@@ -1927,7 +4679,7 @@ type GetConfiguredNetworksRequest struct {
 
 func (x *GetConfiguredNetworksRequest) Reset() {
 	*x = GetConfiguredNetworksRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[44]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[112]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1939,7 +4691,7 @@ func (x *GetConfiguredNetworksRequest) String() string {
 func (*GetConfiguredNetworksRequest) ProtoMessage() {}
 
 func (x *GetConfiguredNetworksRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[44]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[112]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1952,7 +4704,7 @@ func (x *GetConfiguredNetworksRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetConfiguredNetworksRequest.ProtoReflect.Descriptor instead.
 func (*GetConfiguredNetworksRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{44}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{112}
 }
 
 type GetConfiguredNetworksResponse struct {
@@ -1964,7 +4716,7 @@ type GetConfiguredNetworksResponse struct {
 
 func (x *GetConfiguredNetworksResponse) Reset() {
 	*x = GetConfiguredNetworksResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[45]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[113]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1976,7 +4728,7 @@ func (x *GetConfiguredNetworksResponse) String() string {
 func (*GetConfiguredNetworksResponse) ProtoMessage() {}
 
 func (x *GetConfiguredNetworksResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[45]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[113]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1989,7 +4741,7 @@ func (x *GetConfiguredNetworksResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetConfiguredNetworksResponse.ProtoReflect.Descriptor instead.
 func (*GetConfiguredNetworksResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{45}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{113}
 }
 
 func (x *GetConfiguredNetworksResponse) GetResult() int64 {
@@ -2007,7 +4759,7 @@ type GetConnectionInfoRequest struct {
 
 func (x *GetConnectionInfoRequest) Reset() {
 	*x = GetConnectionInfoRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[46]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[114]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2019,7 +4771,7 @@ func (x *GetConnectionInfoRequest) String() string {
 func (*GetConnectionInfoRequest) ProtoMessage() {}
 
 func (x *GetConnectionInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[46]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[114]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2032,7 +4784,7 @@ func (x *GetConnectionInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetConnectionInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetConnectionInfoRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{46}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{114}
 }
 
 type GetConnectionInfoResponse struct {
@@ -2044,7 +4796,7 @@ type GetConnectionInfoResponse struct {
 
 func (x *GetConnectionInfoResponse) Reset() {
 	*x = GetConnectionInfoResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[47]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[115]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2056,7 +4808,7 @@ func (x *GetConnectionInfoResponse) String() string {
 func (*GetConnectionInfoResponse) ProtoMessage() {}
 
 func (x *GetConnectionInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[47]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[115]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2069,7 +4821,7 @@ func (x *GetConnectionInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetConnectionInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetConnectionInfoResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{47}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{115}
 }
 
 func (x *GetConnectionInfoResponse) GetResult() int64 {
@@ -2087,7 +4839,7 @@ type GetDhcpInfoRequest struct {
 
 func (x *GetDhcpInfoRequest) Reset() {
 	*x = GetDhcpInfoRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[48]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[116]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2099,7 +4851,7 @@ func (x *GetDhcpInfoRequest) String() string {
 func (*GetDhcpInfoRequest) ProtoMessage() {}
 
 func (x *GetDhcpInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[48]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[116]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2112,7 +4864,7 @@ func (x *GetDhcpInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDhcpInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetDhcpInfoRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{48}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{116}
 }
 
 type GetDhcpInfoResponse struct {
@@ -2124,7 +4876,7 @@ type GetDhcpInfoResponse struct {
 
 func (x *GetDhcpInfoResponse) Reset() {
 	*x = GetDhcpInfoResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[49]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[117]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2136,7 +4888,7 @@ func (x *GetDhcpInfoResponse) String() string {
 func (*GetDhcpInfoResponse) ProtoMessage() {}
 
 func (x *GetDhcpInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[49]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[117]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2149,7 +4901,7 @@ func (x *GetDhcpInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDhcpInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetDhcpInfoResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{49}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{117}
 }
 
 func (x *GetDhcpInfoResponse) GetResult() int64 {
@@ -2167,7 +4919,7 @@ type GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest struct {
 
 func (x *GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest) Reset() {
 	*x = GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[50]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[118]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2179,7 +4931,7 @@ func (x *GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest) String() strin
 func (*GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest) ProtoMessage() {}
 
 func (x *GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[50]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[118]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2192,7 +4944,7 @@ func (x *GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest) ProtoReflect()
 
 // Deprecated: Use GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest.ProtoReflect.Descriptor instead.
 func (*GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{50}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{118}
 }
 
 type GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse struct {
@@ -2204,7 +4956,7 @@ type GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse struct {
 
 func (x *GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse) Reset() {
 	*x = GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[51]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[119]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2216,7 +4968,7 @@ func (x *GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse) String() stri
 func (*GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse) ProtoMessage() {}
 
 func (x *GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[51]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[119]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2229,7 +4981,7 @@ func (x *GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse) ProtoReflect(
 
 // Deprecated: Use GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse.ProtoReflect.Descriptor instead.
 func (*GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{51}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{119}
 }
 
 func (x *GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse) GetResult() int32 {
@@ -2247,7 +4999,7 @@ type GetMaxNumberOfNetworkSuggestionsPerAppRequest struct {
 
 func (x *GetMaxNumberOfNetworkSuggestionsPerAppRequest) Reset() {
 	*x = GetMaxNumberOfNetworkSuggestionsPerAppRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[52]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[120]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2259,7 +5011,7 @@ func (x *GetMaxNumberOfNetworkSuggestionsPerAppRequest) String() string {
 func (*GetMaxNumberOfNetworkSuggestionsPerAppRequest) ProtoMessage() {}
 
 func (x *GetMaxNumberOfNetworkSuggestionsPerAppRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[52]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[120]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2272,7 +5024,7 @@ func (x *GetMaxNumberOfNetworkSuggestionsPerAppRequest) ProtoReflect() protorefl
 
 // Deprecated: Use GetMaxNumberOfNetworkSuggestionsPerAppRequest.ProtoReflect.Descriptor instead.
 func (*GetMaxNumberOfNetworkSuggestionsPerAppRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{52}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{120}
 }
 
 type GetMaxNumberOfNetworkSuggestionsPerAppResponse struct {
@@ -2284,7 +5036,7 @@ type GetMaxNumberOfNetworkSuggestionsPerAppResponse struct {
 
 func (x *GetMaxNumberOfNetworkSuggestionsPerAppResponse) Reset() {
 	*x = GetMaxNumberOfNetworkSuggestionsPerAppResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[53]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[121]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2296,7 +5048,7 @@ func (x *GetMaxNumberOfNetworkSuggestionsPerAppResponse) String() string {
 func (*GetMaxNumberOfNetworkSuggestionsPerAppResponse) ProtoMessage() {}
 
 func (x *GetMaxNumberOfNetworkSuggestionsPerAppResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[53]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[121]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2309,7 +5061,7 @@ func (x *GetMaxNumberOfNetworkSuggestionsPerAppResponse) ProtoReflect() protoref
 
 // Deprecated: Use GetMaxNumberOfNetworkSuggestionsPerAppResponse.ProtoReflect.Descriptor instead.
 func (*GetMaxNumberOfNetworkSuggestionsPerAppResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{53}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{121}
 }
 
 func (x *GetMaxNumberOfNetworkSuggestionsPerAppResponse) GetResult() int32 {
@@ -2327,7 +5079,7 @@ type GetMaxSignalLevelRequest struct {
 
 func (x *GetMaxSignalLevelRequest) Reset() {
 	*x = GetMaxSignalLevelRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[54]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[122]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2339,7 +5091,7 @@ func (x *GetMaxSignalLevelRequest) String() string {
 func (*GetMaxSignalLevelRequest) ProtoMessage() {}
 
 func (x *GetMaxSignalLevelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[54]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[122]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2352,7 +5104,7 @@ func (x *GetMaxSignalLevelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMaxSignalLevelRequest.ProtoReflect.Descriptor instead.
 func (*GetMaxSignalLevelRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{54}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{122}
 }
 
 type GetMaxSignalLevelResponse struct {
@@ -2364,7 +5116,7 @@ type GetMaxSignalLevelResponse struct {
 
 func (x *GetMaxSignalLevelResponse) Reset() {
 	*x = GetMaxSignalLevelResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[55]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[123]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2376,7 +5128,7 @@ func (x *GetMaxSignalLevelResponse) String() string {
 func (*GetMaxSignalLevelResponse) ProtoMessage() {}
 
 func (x *GetMaxSignalLevelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[55]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[123]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2389,7 +5141,7 @@ func (x *GetMaxSignalLevelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMaxSignalLevelResponse.ProtoReflect.Descriptor instead.
 func (*GetMaxSignalLevelResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{55}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{123}
 }
 
 func (x *GetMaxSignalLevelResponse) GetResult() int32 {
@@ -2409,7 +5161,7 @@ type GetMaxSupportedConcurrentTdlsSessionsRequest struct {
 
 func (x *GetMaxSupportedConcurrentTdlsSessionsRequest) Reset() {
 	*x = GetMaxSupportedConcurrentTdlsSessionsRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[56]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[124]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2421,7 +5173,7 @@ func (x *GetMaxSupportedConcurrentTdlsSessionsRequest) String() string {
 func (*GetMaxSupportedConcurrentTdlsSessionsRequest) ProtoMessage() {}
 
 func (x *GetMaxSupportedConcurrentTdlsSessionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[56]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[124]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2434,7 +5186,7 @@ func (x *GetMaxSupportedConcurrentTdlsSessionsRequest) ProtoReflect() protorefle
 
 // Deprecated: Use GetMaxSupportedConcurrentTdlsSessionsRequest.ProtoReflect.Descriptor instead.
 func (*GetMaxSupportedConcurrentTdlsSessionsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{56}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{124}
 }
 
 func (x *GetMaxSupportedConcurrentTdlsSessionsRequest) GetArg0() int64 {
@@ -2459,7 +5211,7 @@ type GetMaxSupportedConcurrentTdlsSessionsResponse struct {
 
 func (x *GetMaxSupportedConcurrentTdlsSessionsResponse) Reset() {
 	*x = GetMaxSupportedConcurrentTdlsSessionsResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[57]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[125]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2471,7 +5223,7 @@ func (x *GetMaxSupportedConcurrentTdlsSessionsResponse) String() string {
 func (*GetMaxSupportedConcurrentTdlsSessionsResponse) ProtoMessage() {}
 
 func (x *GetMaxSupportedConcurrentTdlsSessionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[57]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[125]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2484,7 +5236,7 @@ func (x *GetMaxSupportedConcurrentTdlsSessionsResponse) ProtoReflect() protorefl
 
 // Deprecated: Use GetMaxSupportedConcurrentTdlsSessionsResponse.ProtoReflect.Descriptor instead.
 func (*GetMaxSupportedConcurrentTdlsSessionsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{57}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{125}
 }
 
 type GetNetworkSuggestionsRequest struct {
@@ -2495,7 +5247,7 @@ type GetNetworkSuggestionsRequest struct {
 
 func (x *GetNetworkSuggestionsRequest) Reset() {
 	*x = GetNetworkSuggestionsRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[58]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[126]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2507,7 +5259,7 @@ func (x *GetNetworkSuggestionsRequest) String() string {
 func (*GetNetworkSuggestionsRequest) ProtoMessage() {}
 
 func (x *GetNetworkSuggestionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[58]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[126]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2520,7 +5272,7 @@ func (x *GetNetworkSuggestionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetNetworkSuggestionsRequest.ProtoReflect.Descriptor instead.
 func (*GetNetworkSuggestionsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{58}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{126}
 }
 
 type GetNetworkSuggestionsResponse struct {
@@ -2532,7 +5284,7 @@ type GetNetworkSuggestionsResponse struct {
 
 func (x *GetNetworkSuggestionsResponse) Reset() {
 	*x = GetNetworkSuggestionsResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[59]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[127]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2544,7 +5296,7 @@ func (x *GetNetworkSuggestionsResponse) String() string {
 func (*GetNetworkSuggestionsResponse) ProtoMessage() {}
 
 func (x *GetNetworkSuggestionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[59]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[127]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2557,7 +5309,7 @@ func (x *GetNetworkSuggestionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetNetworkSuggestionsResponse.ProtoReflect.Descriptor instead.
 func (*GetNetworkSuggestionsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{59}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{127}
 }
 
 func (x *GetNetworkSuggestionsResponse) GetResult() int64 {
@@ -2577,7 +5329,7 @@ type GetNumberOfEnabledTdlsSessionsRequest struct {
 
 func (x *GetNumberOfEnabledTdlsSessionsRequest) Reset() {
 	*x = GetNumberOfEnabledTdlsSessionsRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[60]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[128]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2589,7 +5341,7 @@ func (x *GetNumberOfEnabledTdlsSessionsRequest) String() string {
 func (*GetNumberOfEnabledTdlsSessionsRequest) ProtoMessage() {}
 
 func (x *GetNumberOfEnabledTdlsSessionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[60]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[128]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2602,7 +5354,7 @@ func (x *GetNumberOfEnabledTdlsSessionsRequest) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use GetNumberOfEnabledTdlsSessionsRequest.ProtoReflect.Descriptor instead.
 func (*GetNumberOfEnabledTdlsSessionsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{60}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{128}
 }
 
 func (x *GetNumberOfEnabledTdlsSessionsRequest) GetArg0() int64 {
@@ -2627,7 +5379,7 @@ type GetNumberOfEnabledTdlsSessionsResponse struct {
 
 func (x *GetNumberOfEnabledTdlsSessionsResponse) Reset() {
 	*x = GetNumberOfEnabledTdlsSessionsResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[61]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[129]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2639,7 +5391,7 @@ func (x *GetNumberOfEnabledTdlsSessionsResponse) String() string {
 func (*GetNumberOfEnabledTdlsSessionsResponse) ProtoMessage() {}
 
 func (x *GetNumberOfEnabledTdlsSessionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[61]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[129]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2652,7 +5404,7 @@ func (x *GetNumberOfEnabledTdlsSessionsResponse) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use GetNumberOfEnabledTdlsSessionsResponse.ProtoReflect.Descriptor instead.
 func (*GetNumberOfEnabledTdlsSessionsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{61}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{129}
 }
 
 type GetPasspointConfigurationsRequest struct {
@@ -2663,7 +5415,7 @@ type GetPasspointConfigurationsRequest struct {
 
 func (x *GetPasspointConfigurationsRequest) Reset() {
 	*x = GetPasspointConfigurationsRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[62]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[130]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2675,7 +5427,7 @@ func (x *GetPasspointConfigurationsRequest) String() string {
 func (*GetPasspointConfigurationsRequest) ProtoMessage() {}
 
 func (x *GetPasspointConfigurationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[62]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[130]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2688,7 +5440,7 @@ func (x *GetPasspointConfigurationsRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use GetPasspointConfigurationsRequest.ProtoReflect.Descriptor instead.
 func (*GetPasspointConfigurationsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{62}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{130}
 }
 
 type GetPasspointConfigurationsResponse struct {
@@ -2700,7 +5452,7 @@ type GetPasspointConfigurationsResponse struct {
 
 func (x *GetPasspointConfigurationsResponse) Reset() {
 	*x = GetPasspointConfigurationsResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[63]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[131]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2712,7 +5464,7 @@ func (x *GetPasspointConfigurationsResponse) String() string {
 func (*GetPasspointConfigurationsResponse) ProtoMessage() {}
 
 func (x *GetPasspointConfigurationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[63]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[131]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2725,7 +5477,7 @@ func (x *GetPasspointConfigurationsResponse) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use GetPasspointConfigurationsResponse.ProtoReflect.Descriptor instead.
 func (*GetPasspointConfigurationsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{63}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{131}
 }
 
 func (x *GetPasspointConfigurationsResponse) GetResult() int64 {
@@ -2745,7 +5497,7 @@ type GetPerSsidRoamingModesRequest struct {
 
 func (x *GetPerSsidRoamingModesRequest) Reset() {
 	*x = GetPerSsidRoamingModesRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[64]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[132]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2757,7 +5509,7 @@ func (x *GetPerSsidRoamingModesRequest) String() string {
 func (*GetPerSsidRoamingModesRequest) ProtoMessage() {}
 
 func (x *GetPerSsidRoamingModesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[64]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[132]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2770,7 +5522,7 @@ func (x *GetPerSsidRoamingModesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPerSsidRoamingModesRequest.ProtoReflect.Descriptor instead.
 func (*GetPerSsidRoamingModesRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{64}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{132}
 }
 
 func (x *GetPerSsidRoamingModesRequest) GetArg0() int64 {
@@ -2795,7 +5547,7 @@ type GetPerSsidRoamingModesResponse struct {
 
 func (x *GetPerSsidRoamingModesResponse) Reset() {
 	*x = GetPerSsidRoamingModesResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[65]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[133]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2807,7 +5559,7 @@ func (x *GetPerSsidRoamingModesResponse) String() string {
 func (*GetPerSsidRoamingModesResponse) ProtoMessage() {}
 
 func (x *GetPerSsidRoamingModesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[65]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[133]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2820,7 +5572,7 @@ func (x *GetPerSsidRoamingModesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPerSsidRoamingModesResponse.ProtoReflect.Descriptor instead.
 func (*GetPerSsidRoamingModesResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{65}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{133}
 }
 
 type GetScanResultsRequest struct {
@@ -2831,7 +5583,7 @@ type GetScanResultsRequest struct {
 
 func (x *GetScanResultsRequest) Reset() {
 	*x = GetScanResultsRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[66]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[134]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2843,7 +5595,7 @@ func (x *GetScanResultsRequest) String() string {
 func (*GetScanResultsRequest) ProtoMessage() {}
 
 func (x *GetScanResultsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[66]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[134]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2856,7 +5608,7 @@ func (x *GetScanResultsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetScanResultsRequest.ProtoReflect.Descriptor instead.
 func (*GetScanResultsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{66}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{134}
 }
 
 type GetScanResultsResponse struct {
@@ -2868,7 +5620,7 @@ type GetScanResultsResponse struct {
 
 func (x *GetScanResultsResponse) Reset() {
 	*x = GetScanResultsResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[67]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[135]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2880,7 +5632,7 @@ func (x *GetScanResultsResponse) String() string {
 func (*GetScanResultsResponse) ProtoMessage() {}
 
 func (x *GetScanResultsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[67]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[135]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2893,7 +5645,7 @@ func (x *GetScanResultsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetScanResultsResponse.ProtoReflect.Descriptor instead.
 func (*GetScanResultsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{67}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{135}
 }
 
 func (x *GetScanResultsResponse) GetResult() int64 {
@@ -2911,7 +5663,7 @@ type GetStaConcurrencyForMultiInternetModeRequest struct {
 
 func (x *GetStaConcurrencyForMultiInternetModeRequest) Reset() {
 	*x = GetStaConcurrencyForMultiInternetModeRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[68]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[136]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2923,7 +5675,7 @@ func (x *GetStaConcurrencyForMultiInternetModeRequest) String() string {
 func (*GetStaConcurrencyForMultiInternetModeRequest) ProtoMessage() {}
 
 func (x *GetStaConcurrencyForMultiInternetModeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[68]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[136]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2936,7 +5688,7 @@ func (x *GetStaConcurrencyForMultiInternetModeRequest) ProtoReflect() protorefle
 
 // Deprecated: Use GetStaConcurrencyForMultiInternetModeRequest.ProtoReflect.Descriptor instead.
 func (*GetStaConcurrencyForMultiInternetModeRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{68}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{136}
 }
 
 type GetStaConcurrencyForMultiInternetModeResponse struct {
@@ -2948,7 +5700,7 @@ type GetStaConcurrencyForMultiInternetModeResponse struct {
 
 func (x *GetStaConcurrencyForMultiInternetModeResponse) Reset() {
 	*x = GetStaConcurrencyForMultiInternetModeResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[69]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[137]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2960,7 +5712,7 @@ func (x *GetStaConcurrencyForMultiInternetModeResponse) String() string {
 func (*GetStaConcurrencyForMultiInternetModeResponse) ProtoMessage() {}
 
 func (x *GetStaConcurrencyForMultiInternetModeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[69]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[137]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2973,7 +5725,7 @@ func (x *GetStaConcurrencyForMultiInternetModeResponse) ProtoReflect() protorefl
 
 // Deprecated: Use GetStaConcurrencyForMultiInternetModeResponse.ProtoReflect.Descriptor instead.
 func (*GetStaConcurrencyForMultiInternetModeResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{69}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{137}
 }
 
 func (x *GetStaConcurrencyForMultiInternetModeResponse) GetResult() int32 {
@@ -2993,7 +5745,7 @@ type GetUsableChannelsRequest struct {
 
 func (x *GetUsableChannelsRequest) Reset() {
 	*x = GetUsableChannelsRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[70]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[138]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3005,7 +5757,7 @@ func (x *GetUsableChannelsRequest) String() string {
 func (*GetUsableChannelsRequest) ProtoMessage() {}
 
 func (x *GetUsableChannelsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[70]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[138]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3018,7 +5770,7 @@ func (x *GetUsableChannelsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUsableChannelsRequest.ProtoReflect.Descriptor instead.
 func (*GetUsableChannelsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{70}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{138}
 }
 
 func (x *GetUsableChannelsRequest) GetArg0() int32 {
@@ -3044,7 +5796,7 @@ type GetUsableChannelsResponse struct {
 
 func (x *GetUsableChannelsResponse) Reset() {
 	*x = GetUsableChannelsResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[71]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[139]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3056,7 +5808,7 @@ func (x *GetUsableChannelsResponse) String() string {
 func (*GetUsableChannelsResponse) ProtoMessage() {}
 
 func (x *GetUsableChannelsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[71]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[139]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3069,7 +5821,7 @@ func (x *GetUsableChannelsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUsableChannelsResponse.ProtoReflect.Descriptor instead.
 func (*GetUsableChannelsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{71}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{139}
 }
 
 func (x *GetUsableChannelsResponse) GetResult() int64 {
@@ -3087,7 +5839,7 @@ type GetWifiStateRequest struct {
 
 func (x *GetWifiStateRequest) Reset() {
 	*x = GetWifiStateRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[72]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[140]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3099,7 +5851,7 @@ func (x *GetWifiStateRequest) String() string {
 func (*GetWifiStateRequest) ProtoMessage() {}
 
 func (x *GetWifiStateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[72]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[140]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3112,7 +5864,7 @@ func (x *GetWifiStateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetWifiStateRequest.ProtoReflect.Descriptor instead.
 func (*GetWifiStateRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{72}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{140}
 }
 
 type GetWifiStateResponse struct {
@@ -3124,7 +5876,7 @@ type GetWifiStateResponse struct {
 
 func (x *GetWifiStateResponse) Reset() {
 	*x = GetWifiStateResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[73]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[141]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3136,7 +5888,7 @@ func (x *GetWifiStateResponse) String() string {
 func (*GetWifiStateResponse) ProtoMessage() {}
 
 func (x *GetWifiStateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[73]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[141]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3149,7 +5901,7 @@ func (x *GetWifiStateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetWifiStateResponse.ProtoReflect.Descriptor instead.
 func (*GetWifiStateResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{73}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{141}
 }
 
 func (x *GetWifiStateResponse) GetResult() int32 {
@@ -3167,7 +5919,7 @@ type Is24GHzBandSupportedRequest struct {
 
 func (x *Is24GHzBandSupportedRequest) Reset() {
 	*x = Is24GHzBandSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[74]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[142]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3179,7 +5931,7 @@ func (x *Is24GHzBandSupportedRequest) String() string {
 func (*Is24GHzBandSupportedRequest) ProtoMessage() {}
 
 func (x *Is24GHzBandSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[74]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[142]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3192,7 +5944,7 @@ func (x *Is24GHzBandSupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Is24GHzBandSupportedRequest.ProtoReflect.Descriptor instead.
 func (*Is24GHzBandSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{74}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{142}
 }
 
 type Is24GHzBandSupportedResponse struct {
@@ -3204,7 +5956,7 @@ type Is24GHzBandSupportedResponse struct {
 
 func (x *Is24GHzBandSupportedResponse) Reset() {
 	*x = Is24GHzBandSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[75]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[143]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3216,7 +5968,7 @@ func (x *Is24GHzBandSupportedResponse) String() string {
 func (*Is24GHzBandSupportedResponse) ProtoMessage() {}
 
 func (x *Is24GHzBandSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[75]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[143]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3229,7 +5981,7 @@ func (x *Is24GHzBandSupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Is24GHzBandSupportedResponse.ProtoReflect.Descriptor instead.
 func (*Is24GHzBandSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{75}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{143}
 }
 
 func (x *Is24GHzBandSupportedResponse) GetResult() bool {
@@ -3247,7 +5999,7 @@ type Is5GHzBandSupportedRequest struct {
 
 func (x *Is5GHzBandSupportedRequest) Reset() {
 	*x = Is5GHzBandSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[76]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[144]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3259,7 +6011,7 @@ func (x *Is5GHzBandSupportedRequest) String() string {
 func (*Is5GHzBandSupportedRequest) ProtoMessage() {}
 
 func (x *Is5GHzBandSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[76]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[144]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3272,7 +6024,7 @@ func (x *Is5GHzBandSupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Is5GHzBandSupportedRequest.ProtoReflect.Descriptor instead.
 func (*Is5GHzBandSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{76}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{144}
 }
 
 type Is5GHzBandSupportedResponse struct {
@@ -3284,7 +6036,7 @@ type Is5GHzBandSupportedResponse struct {
 
 func (x *Is5GHzBandSupportedResponse) Reset() {
 	*x = Is5GHzBandSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[77]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[145]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3296,7 +6048,7 @@ func (x *Is5GHzBandSupportedResponse) String() string {
 func (*Is5GHzBandSupportedResponse) ProtoMessage() {}
 
 func (x *Is5GHzBandSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[77]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[145]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3309,7 +6061,7 @@ func (x *Is5GHzBandSupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Is5GHzBandSupportedResponse.ProtoReflect.Descriptor instead.
 func (*Is5GHzBandSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{77}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{145}
 }
 
 func (x *Is5GHzBandSupportedResponse) GetResult() bool {
@@ -3327,7 +6079,7 @@ type Is60GHzBandSupportedRequest struct {
 
 func (x *Is60GHzBandSupportedRequest) Reset() {
 	*x = Is60GHzBandSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[78]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[146]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3339,7 +6091,7 @@ func (x *Is60GHzBandSupportedRequest) String() string {
 func (*Is60GHzBandSupportedRequest) ProtoMessage() {}
 
 func (x *Is60GHzBandSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[78]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[146]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3352,7 +6104,7 @@ func (x *Is60GHzBandSupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Is60GHzBandSupportedRequest.ProtoReflect.Descriptor instead.
 func (*Is60GHzBandSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{78}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{146}
 }
 
 type Is60GHzBandSupportedResponse struct {
@@ -3364,7 +6116,7 @@ type Is60GHzBandSupportedResponse struct {
 
 func (x *Is60GHzBandSupportedResponse) Reset() {
 	*x = Is60GHzBandSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[79]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[147]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3376,7 +6128,7 @@ func (x *Is60GHzBandSupportedResponse) String() string {
 func (*Is60GHzBandSupportedResponse) ProtoMessage() {}
 
 func (x *Is60GHzBandSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[79]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[147]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3389,7 +6141,7 @@ func (x *Is60GHzBandSupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Is60GHzBandSupportedResponse.ProtoReflect.Descriptor instead.
 func (*Is60GHzBandSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{79}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{147}
 }
 
 func (x *Is60GHzBandSupportedResponse) GetResult() bool {
@@ -3407,7 +6159,7 @@ type Is6GHzBandSupportedRequest struct {
 
 func (x *Is6GHzBandSupportedRequest) Reset() {
 	*x = Is6GHzBandSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[80]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[148]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3419,7 +6171,7 @@ func (x *Is6GHzBandSupportedRequest) String() string {
 func (*Is6GHzBandSupportedRequest) ProtoMessage() {}
 
 func (x *Is6GHzBandSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[80]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[148]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3432,7 +6184,7 @@ func (x *Is6GHzBandSupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Is6GHzBandSupportedRequest.ProtoReflect.Descriptor instead.
 func (*Is6GHzBandSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{80}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{148}
 }
 
 type Is6GHzBandSupportedResponse struct {
@@ -3444,7 +6196,7 @@ type Is6GHzBandSupportedResponse struct {
 
 func (x *Is6GHzBandSupportedResponse) Reset() {
 	*x = Is6GHzBandSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[81]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[149]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3456,7 +6208,7 @@ func (x *Is6GHzBandSupportedResponse) String() string {
 func (*Is6GHzBandSupportedResponse) ProtoMessage() {}
 
 func (x *Is6GHzBandSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[81]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[149]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3469,7 +6221,7 @@ func (x *Is6GHzBandSupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Is6GHzBandSupportedResponse.ProtoReflect.Descriptor instead.
 func (*Is6GHzBandSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{81}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{149}
 }
 
 func (x *Is6GHzBandSupportedResponse) GetResult() bool {
@@ -3487,7 +6239,7 @@ type IsAggressiveRoamingModeSupportedRequest struct {
 
 func (x *IsAggressiveRoamingModeSupportedRequest) Reset() {
 	*x = IsAggressiveRoamingModeSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[82]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[150]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3499,7 +6251,7 @@ func (x *IsAggressiveRoamingModeSupportedRequest) String() string {
 func (*IsAggressiveRoamingModeSupportedRequest) ProtoMessage() {}
 
 func (x *IsAggressiveRoamingModeSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[82]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[150]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3512,7 +6264,7 @@ func (x *IsAggressiveRoamingModeSupportedRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use IsAggressiveRoamingModeSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsAggressiveRoamingModeSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{82}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{150}
 }
 
 type IsAggressiveRoamingModeSupportedResponse struct {
@@ -3524,7 +6276,7 @@ type IsAggressiveRoamingModeSupportedResponse struct {
 
 func (x *IsAggressiveRoamingModeSupportedResponse) Reset() {
 	*x = IsAggressiveRoamingModeSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[83]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[151]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3536,7 +6288,7 @@ func (x *IsAggressiveRoamingModeSupportedResponse) String() string {
 func (*IsAggressiveRoamingModeSupportedResponse) ProtoMessage() {}
 
 func (x *IsAggressiveRoamingModeSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[83]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[151]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3549,7 +6301,7 @@ func (x *IsAggressiveRoamingModeSupportedResponse) ProtoReflect() protoreflect.M
 
 // Deprecated: Use IsAggressiveRoamingModeSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsAggressiveRoamingModeSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{83}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{151}
 }
 
 func (x *IsAggressiveRoamingModeSupportedResponse) GetResult() bool {
@@ -3567,7 +6319,7 @@ type IsAutoWakeupEnabledRequest struct {
 
 func (x *IsAutoWakeupEnabledRequest) Reset() {
 	*x = IsAutoWakeupEnabledRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[84]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[152]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3579,7 +6331,7 @@ func (x *IsAutoWakeupEnabledRequest) String() string {
 func (*IsAutoWakeupEnabledRequest) ProtoMessage() {}
 
 func (x *IsAutoWakeupEnabledRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[84]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[152]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3592,7 +6344,7 @@ func (x *IsAutoWakeupEnabledRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsAutoWakeupEnabledRequest.ProtoReflect.Descriptor instead.
 func (*IsAutoWakeupEnabledRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{84}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{152}
 }
 
 type IsAutoWakeupEnabledResponse struct {
@@ -3604,7 +6356,7 @@ type IsAutoWakeupEnabledResponse struct {
 
 func (x *IsAutoWakeupEnabledResponse) Reset() {
 	*x = IsAutoWakeupEnabledResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[85]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[153]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3616,7 +6368,7 @@ func (x *IsAutoWakeupEnabledResponse) String() string {
 func (*IsAutoWakeupEnabledResponse) ProtoMessage() {}
 
 func (x *IsAutoWakeupEnabledResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[85]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[153]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3629,7 +6381,7 @@ func (x *IsAutoWakeupEnabledResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsAutoWakeupEnabledResponse.ProtoReflect.Descriptor instead.
 func (*IsAutoWakeupEnabledResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{85}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{153}
 }
 
 func (x *IsAutoWakeupEnabledResponse) GetResult() bool {
@@ -3647,7 +6399,7 @@ type IsBridgedApConcurrencySupportedRequest struct {
 
 func (x *IsBridgedApConcurrencySupportedRequest) Reset() {
 	*x = IsBridgedApConcurrencySupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[86]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[154]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3659,7 +6411,7 @@ func (x *IsBridgedApConcurrencySupportedRequest) String() string {
 func (*IsBridgedApConcurrencySupportedRequest) ProtoMessage() {}
 
 func (x *IsBridgedApConcurrencySupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[86]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[154]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3672,7 +6424,7 @@ func (x *IsBridgedApConcurrencySupportedRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use IsBridgedApConcurrencySupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsBridgedApConcurrencySupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{86}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{154}
 }
 
 type IsBridgedApConcurrencySupportedResponse struct {
@@ -3684,7 +6436,7 @@ type IsBridgedApConcurrencySupportedResponse struct {
 
 func (x *IsBridgedApConcurrencySupportedResponse) Reset() {
 	*x = IsBridgedApConcurrencySupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[87]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[155]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3696,7 +6448,7 @@ func (x *IsBridgedApConcurrencySupportedResponse) String() string {
 func (*IsBridgedApConcurrencySupportedResponse) ProtoMessage() {}
 
 func (x *IsBridgedApConcurrencySupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[87]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[155]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3709,7 +6461,7 @@ func (x *IsBridgedApConcurrencySupportedResponse) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use IsBridgedApConcurrencySupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsBridgedApConcurrencySupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{87}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{155}
 }
 
 func (x *IsBridgedApConcurrencySupportedResponse) GetResult() bool {
@@ -3729,7 +6481,7 @@ type IsCarrierNetworkOffloadEnabledRequest struct {
 
 func (x *IsCarrierNetworkOffloadEnabledRequest) Reset() {
 	*x = IsCarrierNetworkOffloadEnabledRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[88]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[156]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3741,7 +6493,7 @@ func (x *IsCarrierNetworkOffloadEnabledRequest) String() string {
 func (*IsCarrierNetworkOffloadEnabledRequest) ProtoMessage() {}
 
 func (x *IsCarrierNetworkOffloadEnabledRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[88]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[156]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3754,7 +6506,7 @@ func (x *IsCarrierNetworkOffloadEnabledRequest) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use IsCarrierNetworkOffloadEnabledRequest.ProtoReflect.Descriptor instead.
 func (*IsCarrierNetworkOffloadEnabledRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{88}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{156}
 }
 
 func (x *IsCarrierNetworkOffloadEnabledRequest) GetArg0() int32 {
@@ -3780,7 +6532,7 @@ type IsCarrierNetworkOffloadEnabledResponse struct {
 
 func (x *IsCarrierNetworkOffloadEnabledResponse) Reset() {
 	*x = IsCarrierNetworkOffloadEnabledResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[89]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[157]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3792,7 +6544,7 @@ func (x *IsCarrierNetworkOffloadEnabledResponse) String() string {
 func (*IsCarrierNetworkOffloadEnabledResponse) ProtoMessage() {}
 
 func (x *IsCarrierNetworkOffloadEnabledResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[89]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[157]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3805,7 +6557,7 @@ func (x *IsCarrierNetworkOffloadEnabledResponse) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use IsCarrierNetworkOffloadEnabledResponse.ProtoReflect.Descriptor instead.
 func (*IsCarrierNetworkOffloadEnabledResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{89}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{157}
 }
 
 func (x *IsCarrierNetworkOffloadEnabledResponse) GetResult() bool {
@@ -3823,7 +6575,7 @@ type IsD2DSupportedWhenInfraStaDisabledRequest struct {
 
 func (x *IsD2DSupportedWhenInfraStaDisabledRequest) Reset() {
 	*x = IsD2DSupportedWhenInfraStaDisabledRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[90]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[158]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3835,7 +6587,7 @@ func (x *IsD2DSupportedWhenInfraStaDisabledRequest) String() string {
 func (*IsD2DSupportedWhenInfraStaDisabledRequest) ProtoMessage() {}
 
 func (x *IsD2DSupportedWhenInfraStaDisabledRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[90]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[158]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3848,7 +6600,7 @@ func (x *IsD2DSupportedWhenInfraStaDisabledRequest) ProtoReflect() protoreflect.
 
 // Deprecated: Use IsD2DSupportedWhenInfraStaDisabledRequest.ProtoReflect.Descriptor instead.
 func (*IsD2DSupportedWhenInfraStaDisabledRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{90}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{158}
 }
 
 type IsD2DSupportedWhenInfraStaDisabledResponse struct {
@@ -3860,7 +6612,7 @@ type IsD2DSupportedWhenInfraStaDisabledResponse struct {
 
 func (x *IsD2DSupportedWhenInfraStaDisabledResponse) Reset() {
 	*x = IsD2DSupportedWhenInfraStaDisabledResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[91]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[159]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3872,7 +6624,7 @@ func (x *IsD2DSupportedWhenInfraStaDisabledResponse) String() string {
 func (*IsD2DSupportedWhenInfraStaDisabledResponse) ProtoMessage() {}
 
 func (x *IsD2DSupportedWhenInfraStaDisabledResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[91]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[159]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3885,7 +6637,7 @@ func (x *IsD2DSupportedWhenInfraStaDisabledResponse) ProtoReflect() protoreflect
 
 // Deprecated: Use IsD2DSupportedWhenInfraStaDisabledResponse.ProtoReflect.Descriptor instead.
 func (*IsD2DSupportedWhenInfraStaDisabledResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{91}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{159}
 }
 
 func (x *IsD2DSupportedWhenInfraStaDisabledResponse) GetResult() bool {
@@ -3903,7 +6655,7 @@ type IsDecoratedIdentitySupportedRequest struct {
 
 func (x *IsDecoratedIdentitySupportedRequest) Reset() {
 	*x = IsDecoratedIdentitySupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[92]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[160]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3915,7 +6667,7 @@ func (x *IsDecoratedIdentitySupportedRequest) String() string {
 func (*IsDecoratedIdentitySupportedRequest) ProtoMessage() {}
 
 func (x *IsDecoratedIdentitySupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[92]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[160]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3928,7 +6680,7 @@ func (x *IsDecoratedIdentitySupportedRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use IsDecoratedIdentitySupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsDecoratedIdentitySupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{92}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{160}
 }
 
 type IsDecoratedIdentitySupportedResponse struct {
@@ -3940,7 +6692,7 @@ type IsDecoratedIdentitySupportedResponse struct {
 
 func (x *IsDecoratedIdentitySupportedResponse) Reset() {
 	*x = IsDecoratedIdentitySupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[93]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[161]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3952,7 +6704,7 @@ func (x *IsDecoratedIdentitySupportedResponse) String() string {
 func (*IsDecoratedIdentitySupportedResponse) ProtoMessage() {}
 
 func (x *IsDecoratedIdentitySupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[93]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[161]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3965,7 +6717,7 @@ func (x *IsDecoratedIdentitySupportedResponse) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use IsDecoratedIdentitySupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsDecoratedIdentitySupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{93}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{161}
 }
 
 func (x *IsDecoratedIdentitySupportedResponse) GetResult() bool {
@@ -3983,7 +6735,7 @@ type IsDeviceToApRttSupportedRequest struct {
 
 func (x *IsDeviceToApRttSupportedRequest) Reset() {
 	*x = IsDeviceToApRttSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[94]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[162]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3995,7 +6747,7 @@ func (x *IsDeviceToApRttSupportedRequest) String() string {
 func (*IsDeviceToApRttSupportedRequest) ProtoMessage() {}
 
 func (x *IsDeviceToApRttSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[94]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[162]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4008,7 +6760,7 @@ func (x *IsDeviceToApRttSupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsDeviceToApRttSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsDeviceToApRttSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{94}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{162}
 }
 
 type IsDeviceToApRttSupportedResponse struct {
@@ -4020,7 +6772,7 @@ type IsDeviceToApRttSupportedResponse struct {
 
 func (x *IsDeviceToApRttSupportedResponse) Reset() {
 	*x = IsDeviceToApRttSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[95]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[163]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4032,7 +6784,7 @@ func (x *IsDeviceToApRttSupportedResponse) String() string {
 func (*IsDeviceToApRttSupportedResponse) ProtoMessage() {}
 
 func (x *IsDeviceToApRttSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[95]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[163]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4045,7 +6797,7 @@ func (x *IsDeviceToApRttSupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsDeviceToApRttSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsDeviceToApRttSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{95}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{163}
 }
 
 func (x *IsDeviceToApRttSupportedResponse) GetResult() bool {
@@ -4063,7 +6815,7 @@ type IsDualBandSimultaneousSupportedRequest struct {
 
 func (x *IsDualBandSimultaneousSupportedRequest) Reset() {
 	*x = IsDualBandSimultaneousSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[96]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[164]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4075,7 +6827,7 @@ func (x *IsDualBandSimultaneousSupportedRequest) String() string {
 func (*IsDualBandSimultaneousSupportedRequest) ProtoMessage() {}
 
 func (x *IsDualBandSimultaneousSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[96]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[164]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4088,7 +6840,7 @@ func (x *IsDualBandSimultaneousSupportedRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use IsDualBandSimultaneousSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsDualBandSimultaneousSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{96}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{164}
 }
 
 type IsDualBandSimultaneousSupportedResponse struct {
@@ -4100,7 +6852,7 @@ type IsDualBandSimultaneousSupportedResponse struct {
 
 func (x *IsDualBandSimultaneousSupportedResponse) Reset() {
 	*x = IsDualBandSimultaneousSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[97]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[165]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4112,7 +6864,7 @@ func (x *IsDualBandSimultaneousSupportedResponse) String() string {
 func (*IsDualBandSimultaneousSupportedResponse) ProtoMessage() {}
 
 func (x *IsDualBandSimultaneousSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[97]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[165]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4125,7 +6877,7 @@ func (x *IsDualBandSimultaneousSupportedResponse) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use IsDualBandSimultaneousSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsDualBandSimultaneousSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{97}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{165}
 }
 
 func (x *IsDualBandSimultaneousSupportedResponse) GetResult() bool {
@@ -4143,7 +6895,7 @@ type IsEasyConnectDppAkmSupportedRequest struct {
 
 func (x *IsEasyConnectDppAkmSupportedRequest) Reset() {
 	*x = IsEasyConnectDppAkmSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[98]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[166]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4155,7 +6907,7 @@ func (x *IsEasyConnectDppAkmSupportedRequest) String() string {
 func (*IsEasyConnectDppAkmSupportedRequest) ProtoMessage() {}
 
 func (x *IsEasyConnectDppAkmSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[98]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[166]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4168,7 +6920,7 @@ func (x *IsEasyConnectDppAkmSupportedRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use IsEasyConnectDppAkmSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsEasyConnectDppAkmSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{98}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{166}
 }
 
 type IsEasyConnectDppAkmSupportedResponse struct {
@@ -4180,7 +6932,7 @@ type IsEasyConnectDppAkmSupportedResponse struct {
 
 func (x *IsEasyConnectDppAkmSupportedResponse) Reset() {
 	*x = IsEasyConnectDppAkmSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[99]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[167]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4192,7 +6944,7 @@ func (x *IsEasyConnectDppAkmSupportedResponse) String() string {
 func (*IsEasyConnectDppAkmSupportedResponse) ProtoMessage() {}
 
 func (x *IsEasyConnectDppAkmSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[99]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[167]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4205,7 +6957,7 @@ func (x *IsEasyConnectDppAkmSupportedResponse) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use IsEasyConnectDppAkmSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsEasyConnectDppAkmSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{99}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{167}
 }
 
 func (x *IsEasyConnectDppAkmSupportedResponse) GetResult() bool {
@@ -4223,7 +6975,7 @@ type IsEasyConnectEnrolleeResponderModeSupportedRequest struct {
 
 func (x *IsEasyConnectEnrolleeResponderModeSupportedRequest) Reset() {
 	*x = IsEasyConnectEnrolleeResponderModeSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[100]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[168]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4235,7 +6987,7 @@ func (x *IsEasyConnectEnrolleeResponderModeSupportedRequest) String() string {
 func (*IsEasyConnectEnrolleeResponderModeSupportedRequest) ProtoMessage() {}
 
 func (x *IsEasyConnectEnrolleeResponderModeSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[100]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[168]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4248,7 +7000,7 @@ func (x *IsEasyConnectEnrolleeResponderModeSupportedRequest) ProtoReflect() prot
 
 // Deprecated: Use IsEasyConnectEnrolleeResponderModeSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsEasyConnectEnrolleeResponderModeSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{100}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{168}
 }
 
 type IsEasyConnectEnrolleeResponderModeSupportedResponse struct {
@@ -4260,7 +7012,7 @@ type IsEasyConnectEnrolleeResponderModeSupportedResponse struct {
 
 func (x *IsEasyConnectEnrolleeResponderModeSupportedResponse) Reset() {
 	*x = IsEasyConnectEnrolleeResponderModeSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[101]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[169]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4272,7 +7024,7 @@ func (x *IsEasyConnectEnrolleeResponderModeSupportedResponse) String() string {
 func (*IsEasyConnectEnrolleeResponderModeSupportedResponse) ProtoMessage() {}
 
 func (x *IsEasyConnectEnrolleeResponderModeSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[101]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[169]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4285,7 +7037,7 @@ func (x *IsEasyConnectEnrolleeResponderModeSupportedResponse) ProtoReflect() pro
 
 // Deprecated: Use IsEasyConnectEnrolleeResponderModeSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsEasyConnectEnrolleeResponderModeSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{101}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{169}
 }
 
 func (x *IsEasyConnectEnrolleeResponderModeSupportedResponse) GetResult() bool {
@@ -4303,7 +7055,7 @@ type IsEasyConnectSupportedRequest struct {
 
 func (x *IsEasyConnectSupportedRequest) Reset() {
 	*x = IsEasyConnectSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[102]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[170]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4315,7 +7067,7 @@ func (x *IsEasyConnectSupportedRequest) String() string {
 func (*IsEasyConnectSupportedRequest) ProtoMessage() {}
 
 func (x *IsEasyConnectSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[102]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[170]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4328,7 +7080,7 @@ func (x *IsEasyConnectSupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsEasyConnectSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsEasyConnectSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{102}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{170}
 }
 
 type IsEasyConnectSupportedResponse struct {
@@ -4340,7 +7092,7 @@ type IsEasyConnectSupportedResponse struct {
 
 func (x *IsEasyConnectSupportedResponse) Reset() {
 	*x = IsEasyConnectSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[103]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[171]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4352,7 +7104,7 @@ func (x *IsEasyConnectSupportedResponse) String() string {
 func (*IsEasyConnectSupportedResponse) ProtoMessage() {}
 
 func (x *IsEasyConnectSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[103]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[171]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4365,7 +7117,7 @@ func (x *IsEasyConnectSupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsEasyConnectSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsEasyConnectSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{103}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{171}
 }
 
 func (x *IsEasyConnectSupportedResponse) GetResult() bool {
@@ -4383,7 +7135,7 @@ type IsEnhancedOpenSupportedRequest struct {
 
 func (x *IsEnhancedOpenSupportedRequest) Reset() {
 	*x = IsEnhancedOpenSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[104]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[172]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4395,7 +7147,7 @@ func (x *IsEnhancedOpenSupportedRequest) String() string {
 func (*IsEnhancedOpenSupportedRequest) ProtoMessage() {}
 
 func (x *IsEnhancedOpenSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[104]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[172]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4408,7 +7160,7 @@ func (x *IsEnhancedOpenSupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsEnhancedOpenSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsEnhancedOpenSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{104}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{172}
 }
 
 type IsEnhancedOpenSupportedResponse struct {
@@ -4420,7 +7172,7 @@ type IsEnhancedOpenSupportedResponse struct {
 
 func (x *IsEnhancedOpenSupportedResponse) Reset() {
 	*x = IsEnhancedOpenSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[105]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[173]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4432,7 +7184,7 @@ func (x *IsEnhancedOpenSupportedResponse) String() string {
 func (*IsEnhancedOpenSupportedResponse) ProtoMessage() {}
 
 func (x *IsEnhancedOpenSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[105]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[173]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4445,7 +7197,7 @@ func (x *IsEnhancedOpenSupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsEnhancedOpenSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsEnhancedOpenSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{105}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{173}
 }
 
 func (x *IsEnhancedOpenSupportedResponse) GetResult() bool {
@@ -4463,7 +7215,7 @@ type IsEnhancedPowerReportingSupportedRequest struct {
 
 func (x *IsEnhancedPowerReportingSupportedRequest) Reset() {
 	*x = IsEnhancedPowerReportingSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[106]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[174]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4475,7 +7227,7 @@ func (x *IsEnhancedPowerReportingSupportedRequest) String() string {
 func (*IsEnhancedPowerReportingSupportedRequest) ProtoMessage() {}
 
 func (x *IsEnhancedPowerReportingSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[106]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[174]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4488,7 +7240,7 @@ func (x *IsEnhancedPowerReportingSupportedRequest) ProtoReflect() protoreflect.M
 
 // Deprecated: Use IsEnhancedPowerReportingSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsEnhancedPowerReportingSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{106}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{174}
 }
 
 type IsEnhancedPowerReportingSupportedResponse struct {
@@ -4500,7 +7252,7 @@ type IsEnhancedPowerReportingSupportedResponse struct {
 
 func (x *IsEnhancedPowerReportingSupportedResponse) Reset() {
 	*x = IsEnhancedPowerReportingSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[107]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[175]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4512,7 +7264,7 @@ func (x *IsEnhancedPowerReportingSupportedResponse) String() string {
 func (*IsEnhancedPowerReportingSupportedResponse) ProtoMessage() {}
 
 func (x *IsEnhancedPowerReportingSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[107]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[175]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4525,7 +7277,7 @@ func (x *IsEnhancedPowerReportingSupportedResponse) ProtoReflect() protoreflect.
 
 // Deprecated: Use IsEnhancedPowerReportingSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsEnhancedPowerReportingSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{107}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{175}
 }
 
 func (x *IsEnhancedPowerReportingSupportedResponse) GetResult() bool {
@@ -4543,7 +7295,7 @@ type IsMakeBeforeBreakWifiSwitchingSupportedRequest struct {
 
 func (x *IsMakeBeforeBreakWifiSwitchingSupportedRequest) Reset() {
 	*x = IsMakeBeforeBreakWifiSwitchingSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[108]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[176]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4555,7 +7307,7 @@ func (x *IsMakeBeforeBreakWifiSwitchingSupportedRequest) String() string {
 func (*IsMakeBeforeBreakWifiSwitchingSupportedRequest) ProtoMessage() {}
 
 func (x *IsMakeBeforeBreakWifiSwitchingSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[108]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[176]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4568,7 +7320,7 @@ func (x *IsMakeBeforeBreakWifiSwitchingSupportedRequest) ProtoReflect() protoref
 
 // Deprecated: Use IsMakeBeforeBreakWifiSwitchingSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsMakeBeforeBreakWifiSwitchingSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{108}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{176}
 }
 
 type IsMakeBeforeBreakWifiSwitchingSupportedResponse struct {
@@ -4580,7 +7332,7 @@ type IsMakeBeforeBreakWifiSwitchingSupportedResponse struct {
 
 func (x *IsMakeBeforeBreakWifiSwitchingSupportedResponse) Reset() {
 	*x = IsMakeBeforeBreakWifiSwitchingSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[109]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[177]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4592,7 +7344,7 @@ func (x *IsMakeBeforeBreakWifiSwitchingSupportedResponse) String() string {
 func (*IsMakeBeforeBreakWifiSwitchingSupportedResponse) ProtoMessage() {}
 
 func (x *IsMakeBeforeBreakWifiSwitchingSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[109]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[177]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4605,7 +7357,7 @@ func (x *IsMakeBeforeBreakWifiSwitchingSupportedResponse) ProtoReflect() protore
 
 // Deprecated: Use IsMakeBeforeBreakWifiSwitchingSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsMakeBeforeBreakWifiSwitchingSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{109}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{177}
 }
 
 func (x *IsMakeBeforeBreakWifiSwitchingSupportedResponse) GetResult() bool {
@@ -4623,7 +7375,7 @@ type IsP2PSupportedRequest struct {
 
 func (x *IsP2PSupportedRequest) Reset() {
 	*x = IsP2PSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[110]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[178]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4635,7 +7387,7 @@ func (x *IsP2PSupportedRequest) String() string {
 func (*IsP2PSupportedRequest) ProtoMessage() {}
 
 func (x *IsP2PSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[110]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[178]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4648,7 +7400,7 @@ func (x *IsP2PSupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsP2PSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsP2PSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{110}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{178}
 }
 
 type IsP2PSupportedResponse struct {
@@ -4660,7 +7412,7 @@ type IsP2PSupportedResponse struct {
 
 func (x *IsP2PSupportedResponse) Reset() {
 	*x = IsP2PSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[111]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[179]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4672,7 +7424,7 @@ func (x *IsP2PSupportedResponse) String() string {
 func (*IsP2PSupportedResponse) ProtoMessage() {}
 
 func (x *IsP2PSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[111]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[179]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4685,7 +7437,7 @@ func (x *IsP2PSupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsP2PSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsP2PSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{111}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{179}
 }
 
 func (x *IsP2PSupportedResponse) GetResult() bool {
@@ -4703,7 +7455,7 @@ type IsPasspointTermsAndConditionsSupportedRequest struct {
 
 func (x *IsPasspointTermsAndConditionsSupportedRequest) Reset() {
 	*x = IsPasspointTermsAndConditionsSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[112]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[180]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4715,7 +7467,7 @@ func (x *IsPasspointTermsAndConditionsSupportedRequest) String() string {
 func (*IsPasspointTermsAndConditionsSupportedRequest) ProtoMessage() {}
 
 func (x *IsPasspointTermsAndConditionsSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[112]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[180]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4728,7 +7480,7 @@ func (x *IsPasspointTermsAndConditionsSupportedRequest) ProtoReflect() protorefl
 
 // Deprecated: Use IsPasspointTermsAndConditionsSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsPasspointTermsAndConditionsSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{112}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{180}
 }
 
 type IsPasspointTermsAndConditionsSupportedResponse struct {
@@ -4740,7 +7492,7 @@ type IsPasspointTermsAndConditionsSupportedResponse struct {
 
 func (x *IsPasspointTermsAndConditionsSupportedResponse) Reset() {
 	*x = IsPasspointTermsAndConditionsSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[113]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[181]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4752,7 +7504,7 @@ func (x *IsPasspointTermsAndConditionsSupportedResponse) String() string {
 func (*IsPasspointTermsAndConditionsSupportedResponse) ProtoMessage() {}
 
 func (x *IsPasspointTermsAndConditionsSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[113]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[181]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4765,7 +7517,7 @@ func (x *IsPasspointTermsAndConditionsSupportedResponse) ProtoReflect() protoref
 
 // Deprecated: Use IsPasspointTermsAndConditionsSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsPasspointTermsAndConditionsSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{113}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{181}
 }
 
 func (x *IsPasspointTermsAndConditionsSupportedResponse) GetResult() bool {
@@ -4783,7 +7535,7 @@ type IsPreferredNetworkOffloadSupportedRequest struct {
 
 func (x *IsPreferredNetworkOffloadSupportedRequest) Reset() {
 	*x = IsPreferredNetworkOffloadSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[114]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[182]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4795,7 +7547,7 @@ func (x *IsPreferredNetworkOffloadSupportedRequest) String() string {
 func (*IsPreferredNetworkOffloadSupportedRequest) ProtoMessage() {}
 
 func (x *IsPreferredNetworkOffloadSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[114]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[182]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4808,7 +7560,7 @@ func (x *IsPreferredNetworkOffloadSupportedRequest) ProtoReflect() protoreflect.
 
 // Deprecated: Use IsPreferredNetworkOffloadSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsPreferredNetworkOffloadSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{114}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{182}
 }
 
 type IsPreferredNetworkOffloadSupportedResponse struct {
@@ -4820,7 +7572,7 @@ type IsPreferredNetworkOffloadSupportedResponse struct {
 
 func (x *IsPreferredNetworkOffloadSupportedResponse) Reset() {
 	*x = IsPreferredNetworkOffloadSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[115]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[183]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4832,7 +7584,7 @@ func (x *IsPreferredNetworkOffloadSupportedResponse) String() string {
 func (*IsPreferredNetworkOffloadSupportedResponse) ProtoMessage() {}
 
 func (x *IsPreferredNetworkOffloadSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[115]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[183]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4845,7 +7597,7 @@ func (x *IsPreferredNetworkOffloadSupportedResponse) ProtoReflect() protoreflect
 
 // Deprecated: Use IsPreferredNetworkOffloadSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsPreferredNetworkOffloadSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{115}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{183}
 }
 
 func (x *IsPreferredNetworkOffloadSupportedResponse) GetResult() bool {
@@ -4863,7 +7615,7 @@ type IsScanAlwaysAvailableRequest struct {
 
 func (x *IsScanAlwaysAvailableRequest) Reset() {
 	*x = IsScanAlwaysAvailableRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[116]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[184]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4875,7 +7627,7 @@ func (x *IsScanAlwaysAvailableRequest) String() string {
 func (*IsScanAlwaysAvailableRequest) ProtoMessage() {}
 
 func (x *IsScanAlwaysAvailableRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[116]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[184]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4888,7 +7640,7 @@ func (x *IsScanAlwaysAvailableRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsScanAlwaysAvailableRequest.ProtoReflect.Descriptor instead.
 func (*IsScanAlwaysAvailableRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{116}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{184}
 }
 
 type IsScanAlwaysAvailableResponse struct {
@@ -4900,7 +7652,7 @@ type IsScanAlwaysAvailableResponse struct {
 
 func (x *IsScanAlwaysAvailableResponse) Reset() {
 	*x = IsScanAlwaysAvailableResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[117]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[185]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4912,7 +7664,7 @@ func (x *IsScanAlwaysAvailableResponse) String() string {
 func (*IsScanAlwaysAvailableResponse) ProtoMessage() {}
 
 func (x *IsScanAlwaysAvailableResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[117]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[185]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4925,7 +7677,7 @@ func (x *IsScanAlwaysAvailableResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsScanAlwaysAvailableResponse.ProtoReflect.Descriptor instead.
 func (*IsScanAlwaysAvailableResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{117}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{185}
 }
 
 func (x *IsScanAlwaysAvailableResponse) GetResult() bool {
@@ -4943,7 +7695,7 @@ type IsScanThrottleEnabledRequest struct {
 
 func (x *IsScanThrottleEnabledRequest) Reset() {
 	*x = IsScanThrottleEnabledRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[118]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[186]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4955,7 +7707,7 @@ func (x *IsScanThrottleEnabledRequest) String() string {
 func (*IsScanThrottleEnabledRequest) ProtoMessage() {}
 
 func (x *IsScanThrottleEnabledRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[118]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[186]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4968,7 +7720,7 @@ func (x *IsScanThrottleEnabledRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsScanThrottleEnabledRequest.ProtoReflect.Descriptor instead.
 func (*IsScanThrottleEnabledRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{118}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{186}
 }
 
 type IsScanThrottleEnabledResponse struct {
@@ -4980,7 +7732,7 @@ type IsScanThrottleEnabledResponse struct {
 
 func (x *IsScanThrottleEnabledResponse) Reset() {
 	*x = IsScanThrottleEnabledResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[119]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[187]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4992,7 +7744,7 @@ func (x *IsScanThrottleEnabledResponse) String() string {
 func (*IsScanThrottleEnabledResponse) ProtoMessage() {}
 
 func (x *IsScanThrottleEnabledResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[119]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[187]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5005,7 +7757,7 @@ func (x *IsScanThrottleEnabledResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsScanThrottleEnabledResponse.ProtoReflect.Descriptor instead.
 func (*IsScanThrottleEnabledResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{119}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{187}
 }
 
 func (x *IsScanThrottleEnabledResponse) GetResult() bool {
@@ -5023,7 +7775,7 @@ type IsStaApConcurrencySupportedRequest struct {
 
 func (x *IsStaApConcurrencySupportedRequest) Reset() {
 	*x = IsStaApConcurrencySupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[120]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[188]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5035,7 +7787,7 @@ func (x *IsStaApConcurrencySupportedRequest) String() string {
 func (*IsStaApConcurrencySupportedRequest) ProtoMessage() {}
 
 func (x *IsStaApConcurrencySupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[120]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[188]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5048,7 +7800,7 @@ func (x *IsStaApConcurrencySupportedRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use IsStaApConcurrencySupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsStaApConcurrencySupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{120}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{188}
 }
 
 type IsStaApConcurrencySupportedResponse struct {
@@ -5060,7 +7812,7 @@ type IsStaApConcurrencySupportedResponse struct {
 
 func (x *IsStaApConcurrencySupportedResponse) Reset() {
 	*x = IsStaApConcurrencySupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[121]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[189]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5072,7 +7824,7 @@ func (x *IsStaApConcurrencySupportedResponse) String() string {
 func (*IsStaApConcurrencySupportedResponse) ProtoMessage() {}
 
 func (x *IsStaApConcurrencySupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[121]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[189]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5085,7 +7837,7 @@ func (x *IsStaApConcurrencySupportedResponse) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use IsStaApConcurrencySupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsStaApConcurrencySupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{121}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{189}
 }
 
 func (x *IsStaApConcurrencySupportedResponse) GetResult() bool {
@@ -5103,7 +7855,7 @@ type IsStaBridgedApConcurrencySupportedRequest struct {
 
 func (x *IsStaBridgedApConcurrencySupportedRequest) Reset() {
 	*x = IsStaBridgedApConcurrencySupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[122]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[190]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5115,7 +7867,7 @@ func (x *IsStaBridgedApConcurrencySupportedRequest) String() string {
 func (*IsStaBridgedApConcurrencySupportedRequest) ProtoMessage() {}
 
 func (x *IsStaBridgedApConcurrencySupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[122]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[190]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5128,7 +7880,7 @@ func (x *IsStaBridgedApConcurrencySupportedRequest) ProtoReflect() protoreflect.
 
 // Deprecated: Use IsStaBridgedApConcurrencySupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsStaBridgedApConcurrencySupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{122}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{190}
 }
 
 type IsStaBridgedApConcurrencySupportedResponse struct {
@@ -5140,7 +7892,7 @@ type IsStaBridgedApConcurrencySupportedResponse struct {
 
 func (x *IsStaBridgedApConcurrencySupportedResponse) Reset() {
 	*x = IsStaBridgedApConcurrencySupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[123]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[191]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5152,7 +7904,7 @@ func (x *IsStaBridgedApConcurrencySupportedResponse) String() string {
 func (*IsStaBridgedApConcurrencySupportedResponse) ProtoMessage() {}
 
 func (x *IsStaBridgedApConcurrencySupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[123]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[191]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5165,7 +7917,7 @@ func (x *IsStaBridgedApConcurrencySupportedResponse) ProtoReflect() protoreflect
 
 // Deprecated: Use IsStaBridgedApConcurrencySupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsStaBridgedApConcurrencySupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{123}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{191}
 }
 
 func (x *IsStaBridgedApConcurrencySupportedResponse) GetResult() bool {
@@ -5183,7 +7935,7 @@ type IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest struct {
 
 func (x *IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest) Reset() {
 	*x = IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[124]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[192]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5195,7 +7947,7 @@ func (x *IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest) String() strin
 func (*IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest) ProtoMessage() {}
 
 func (x *IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[124]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[192]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5208,7 +7960,7 @@ func (x *IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest) ProtoReflect()
 
 // Deprecated: Use IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{124}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{192}
 }
 
 type IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse struct {
@@ -5220,7 +7972,7 @@ type IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse struct {
 
 func (x *IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse) Reset() {
 	*x = IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[125]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[193]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5232,7 +7984,7 @@ func (x *IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse) String() stri
 func (*IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse) ProtoMessage() {}
 
 func (x *IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[125]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[193]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5245,7 +7997,7 @@ func (x *IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse) ProtoReflect(
 
 // Deprecated: Use IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{125}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{193}
 }
 
 func (x *IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse) GetResult() bool {
@@ -5263,7 +8015,7 @@ type IsStaConcurrencyForMultiInternetSupportedRequest struct {
 
 func (x *IsStaConcurrencyForMultiInternetSupportedRequest) Reset() {
 	*x = IsStaConcurrencyForMultiInternetSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[126]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[194]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5275,7 +8027,7 @@ func (x *IsStaConcurrencyForMultiInternetSupportedRequest) String() string {
 func (*IsStaConcurrencyForMultiInternetSupportedRequest) ProtoMessage() {}
 
 func (x *IsStaConcurrencyForMultiInternetSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[126]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[194]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5288,7 +8040,7 @@ func (x *IsStaConcurrencyForMultiInternetSupportedRequest) ProtoReflect() protor
 
 // Deprecated: Use IsStaConcurrencyForMultiInternetSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsStaConcurrencyForMultiInternetSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{126}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{194}
 }
 
 type IsStaConcurrencyForMultiInternetSupportedResponse struct {
@@ -5300,7 +8052,7 @@ type IsStaConcurrencyForMultiInternetSupportedResponse struct {
 
 func (x *IsStaConcurrencyForMultiInternetSupportedResponse) Reset() {
 	*x = IsStaConcurrencyForMultiInternetSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[127]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[195]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5312,7 +8064,7 @@ func (x *IsStaConcurrencyForMultiInternetSupportedResponse) String() string {
 func (*IsStaConcurrencyForMultiInternetSupportedResponse) ProtoMessage() {}
 
 func (x *IsStaConcurrencyForMultiInternetSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[127]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[195]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5325,7 +8077,7 @@ func (x *IsStaConcurrencyForMultiInternetSupportedResponse) ProtoReflect() proto
 
 // Deprecated: Use IsStaConcurrencyForMultiInternetSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsStaConcurrencyForMultiInternetSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{127}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{195}
 }
 
 func (x *IsStaConcurrencyForMultiInternetSupportedResponse) GetResult() bool {
@@ -5345,7 +8097,7 @@ type IsTdlsOperationCurrentlyAvailableRequest struct {
 
 func (x *IsTdlsOperationCurrentlyAvailableRequest) Reset() {
 	*x = IsTdlsOperationCurrentlyAvailableRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[128]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[196]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5357,7 +8109,7 @@ func (x *IsTdlsOperationCurrentlyAvailableRequest) String() string {
 func (*IsTdlsOperationCurrentlyAvailableRequest) ProtoMessage() {}
 
 func (x *IsTdlsOperationCurrentlyAvailableRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[128]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[196]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5370,7 +8122,7 @@ func (x *IsTdlsOperationCurrentlyAvailableRequest) ProtoReflect() protoreflect.M
 
 // Deprecated: Use IsTdlsOperationCurrentlyAvailableRequest.ProtoReflect.Descriptor instead.
 func (*IsTdlsOperationCurrentlyAvailableRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{128}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{196}
 }
 
 func (x *IsTdlsOperationCurrentlyAvailableRequest) GetArg0() int64 {
@@ -5395,7 +8147,7 @@ type IsTdlsOperationCurrentlyAvailableResponse struct {
 
 func (x *IsTdlsOperationCurrentlyAvailableResponse) Reset() {
 	*x = IsTdlsOperationCurrentlyAvailableResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[129]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[197]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5407,7 +8159,7 @@ func (x *IsTdlsOperationCurrentlyAvailableResponse) String() string {
 func (*IsTdlsOperationCurrentlyAvailableResponse) ProtoMessage() {}
 
 func (x *IsTdlsOperationCurrentlyAvailableResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[129]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[197]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5420,7 +8172,7 @@ func (x *IsTdlsOperationCurrentlyAvailableResponse) ProtoReflect() protoreflect.
 
 // Deprecated: Use IsTdlsOperationCurrentlyAvailableResponse.ProtoReflect.Descriptor instead.
 func (*IsTdlsOperationCurrentlyAvailableResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{129}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{197}
 }
 
 type IsTdlsSupportedRequest struct {
@@ -5431,7 +8183,7 @@ type IsTdlsSupportedRequest struct {
 
 func (x *IsTdlsSupportedRequest) Reset() {
 	*x = IsTdlsSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[130]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[198]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5443,7 +8195,7 @@ func (x *IsTdlsSupportedRequest) String() string {
 func (*IsTdlsSupportedRequest) ProtoMessage() {}
 
 func (x *IsTdlsSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[130]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[198]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5456,7 +8208,7 @@ func (x *IsTdlsSupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsTdlsSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsTdlsSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{130}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{198}
 }
 
 type IsTdlsSupportedResponse struct {
@@ -5468,7 +8220,7 @@ type IsTdlsSupportedResponse struct {
 
 func (x *IsTdlsSupportedResponse) Reset() {
 	*x = IsTdlsSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[131]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[199]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5480,7 +8232,7 @@ func (x *IsTdlsSupportedResponse) String() string {
 func (*IsTdlsSupportedResponse) ProtoMessage() {}
 
 func (x *IsTdlsSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[131]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[199]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5493,7 +8245,7 @@ func (x *IsTdlsSupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsTdlsSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsTdlsSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{131}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{199}
 }
 
 func (x *IsTdlsSupportedResponse) GetResult() bool {
@@ -5511,7 +8263,7 @@ type IsTidToLinkMappingNegotiationSupportedRequest struct {
 
 func (x *IsTidToLinkMappingNegotiationSupportedRequest) Reset() {
 	*x = IsTidToLinkMappingNegotiationSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[132]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[200]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5523,7 +8275,7 @@ func (x *IsTidToLinkMappingNegotiationSupportedRequest) String() string {
 func (*IsTidToLinkMappingNegotiationSupportedRequest) ProtoMessage() {}
 
 func (x *IsTidToLinkMappingNegotiationSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[132]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[200]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5536,7 +8288,7 @@ func (x *IsTidToLinkMappingNegotiationSupportedRequest) ProtoReflect() protorefl
 
 // Deprecated: Use IsTidToLinkMappingNegotiationSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsTidToLinkMappingNegotiationSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{132}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{200}
 }
 
 type IsTidToLinkMappingNegotiationSupportedResponse struct {
@@ -5548,7 +8300,7 @@ type IsTidToLinkMappingNegotiationSupportedResponse struct {
 
 func (x *IsTidToLinkMappingNegotiationSupportedResponse) Reset() {
 	*x = IsTidToLinkMappingNegotiationSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[133]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[201]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5560,7 +8312,7 @@ func (x *IsTidToLinkMappingNegotiationSupportedResponse) String() string {
 func (*IsTidToLinkMappingNegotiationSupportedResponse) ProtoMessage() {}
 
 func (x *IsTidToLinkMappingNegotiationSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[133]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[201]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5573,7 +8325,7 @@ func (x *IsTidToLinkMappingNegotiationSupportedResponse) ProtoReflect() protoref
 
 // Deprecated: Use IsTidToLinkMappingNegotiationSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsTidToLinkMappingNegotiationSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{133}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{201}
 }
 
 func (x *IsTidToLinkMappingNegotiationSupportedResponse) GetResult() bool {
@@ -5591,7 +8343,7 @@ type IsTlsMinimumVersionSupportedRequest struct {
 
 func (x *IsTlsMinimumVersionSupportedRequest) Reset() {
 	*x = IsTlsMinimumVersionSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[134]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[202]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5603,7 +8355,7 @@ func (x *IsTlsMinimumVersionSupportedRequest) String() string {
 func (*IsTlsMinimumVersionSupportedRequest) ProtoMessage() {}
 
 func (x *IsTlsMinimumVersionSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[134]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[202]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5616,7 +8368,7 @@ func (x *IsTlsMinimumVersionSupportedRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use IsTlsMinimumVersionSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsTlsMinimumVersionSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{134}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{202}
 }
 
 type IsTlsMinimumVersionSupportedResponse struct {
@@ -5628,7 +8380,7 @@ type IsTlsMinimumVersionSupportedResponse struct {
 
 func (x *IsTlsMinimumVersionSupportedResponse) Reset() {
 	*x = IsTlsMinimumVersionSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[135]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[203]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5640,7 +8392,7 @@ func (x *IsTlsMinimumVersionSupportedResponse) String() string {
 func (*IsTlsMinimumVersionSupportedResponse) ProtoMessage() {}
 
 func (x *IsTlsMinimumVersionSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[135]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[203]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5653,7 +8405,7 @@ func (x *IsTlsMinimumVersionSupportedResponse) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use IsTlsMinimumVersionSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsTlsMinimumVersionSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{135}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{203}
 }
 
 func (x *IsTlsMinimumVersionSupportedResponse) GetResult() bool {
@@ -5671,7 +8423,7 @@ type IsTlsV13SupportedRequest struct {
 
 func (x *IsTlsV13SupportedRequest) Reset() {
 	*x = IsTlsV13SupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[136]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[204]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5683,7 +8435,7 @@ func (x *IsTlsV13SupportedRequest) String() string {
 func (*IsTlsV13SupportedRequest) ProtoMessage() {}
 
 func (x *IsTlsV13SupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[136]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[204]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5696,7 +8448,7 @@ func (x *IsTlsV13SupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsTlsV13SupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsTlsV13SupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{136}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{204}
 }
 
 type IsTlsV13SupportedResponse struct {
@@ -5708,7 +8460,7 @@ type IsTlsV13SupportedResponse struct {
 
 func (x *IsTlsV13SupportedResponse) Reset() {
 	*x = IsTlsV13SupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[137]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[205]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5720,7 +8472,7 @@ func (x *IsTlsV13SupportedResponse) String() string {
 func (*IsTlsV13SupportedResponse) ProtoMessage() {}
 
 func (x *IsTlsV13SupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[137]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[205]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5733,7 +8485,7 @@ func (x *IsTlsV13SupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsTlsV13SupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsTlsV13SupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{137}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{205}
 }
 
 func (x *IsTlsV13SupportedResponse) GetResult() bool {
@@ -5751,7 +8503,7 @@ type IsTrustOnFirstUseSupportedRequest struct {
 
 func (x *IsTrustOnFirstUseSupportedRequest) Reset() {
 	*x = IsTrustOnFirstUseSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[138]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[206]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5763,7 +8515,7 @@ func (x *IsTrustOnFirstUseSupportedRequest) String() string {
 func (*IsTrustOnFirstUseSupportedRequest) ProtoMessage() {}
 
 func (x *IsTrustOnFirstUseSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[138]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[206]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5776,7 +8528,7 @@ func (x *IsTrustOnFirstUseSupportedRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use IsTrustOnFirstUseSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsTrustOnFirstUseSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{138}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{206}
 }
 
 type IsTrustOnFirstUseSupportedResponse struct {
@@ -5788,7 +8540,7 @@ type IsTrustOnFirstUseSupportedResponse struct {
 
 func (x *IsTrustOnFirstUseSupportedResponse) Reset() {
 	*x = IsTrustOnFirstUseSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[139]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[207]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5800,7 +8552,7 @@ func (x *IsTrustOnFirstUseSupportedResponse) String() string {
 func (*IsTrustOnFirstUseSupportedResponse) ProtoMessage() {}
 
 func (x *IsTrustOnFirstUseSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[139]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[207]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5813,7 +8565,7 @@ func (x *IsTrustOnFirstUseSupportedResponse) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use IsTrustOnFirstUseSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsTrustOnFirstUseSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{139}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{207}
 }
 
 func (x *IsTrustOnFirstUseSupportedResponse) GetResult() bool {
@@ -5831,7 +8583,7 @@ type IsWapiSupportedRequest struct {
 
 func (x *IsWapiSupportedRequest) Reset() {
 	*x = IsWapiSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[140]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[208]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5843,7 +8595,7 @@ func (x *IsWapiSupportedRequest) String() string {
 func (*IsWapiSupportedRequest) ProtoMessage() {}
 
 func (x *IsWapiSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[140]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[208]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5856,7 +8608,7 @@ func (x *IsWapiSupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWapiSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsWapiSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{140}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{208}
 }
 
 type IsWapiSupportedResponse struct {
@@ -5868,7 +8620,7 @@ type IsWapiSupportedResponse struct {
 
 func (x *IsWapiSupportedResponse) Reset() {
 	*x = IsWapiSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[141]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[209]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5880,7 +8632,7 @@ func (x *IsWapiSupportedResponse) String() string {
 func (*IsWapiSupportedResponse) ProtoMessage() {}
 
 func (x *IsWapiSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[141]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[209]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5893,7 +8645,7 @@ func (x *IsWapiSupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWapiSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsWapiSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{141}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{209}
 }
 
 func (x *IsWapiSupportedResponse) GetResult() bool {
@@ -5911,7 +8663,7 @@ type IsWepSupportedRequest struct {
 
 func (x *IsWepSupportedRequest) Reset() {
 	*x = IsWepSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[142]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[210]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5923,7 +8675,7 @@ func (x *IsWepSupportedRequest) String() string {
 func (*IsWepSupportedRequest) ProtoMessage() {}
 
 func (x *IsWepSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[142]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[210]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5936,7 +8688,7 @@ func (x *IsWepSupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWepSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsWepSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{142}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{210}
 }
 
 type IsWepSupportedResponse struct {
@@ -5948,7 +8700,7 @@ type IsWepSupportedResponse struct {
 
 func (x *IsWepSupportedResponse) Reset() {
 	*x = IsWepSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[143]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[211]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5960,7 +8712,7 @@ func (x *IsWepSupportedResponse) String() string {
 func (*IsWepSupportedResponse) ProtoMessage() {}
 
 func (x *IsWepSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[143]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[211]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5973,7 +8725,7 @@ func (x *IsWepSupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWepSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsWepSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{143}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{211}
 }
 
 func (x *IsWepSupportedResponse) GetResult() bool {
@@ -5991,7 +8743,7 @@ type IsWifiDisplayR2SupportedRequest struct {
 
 func (x *IsWifiDisplayR2SupportedRequest) Reset() {
 	*x = IsWifiDisplayR2SupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[144]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[212]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6003,7 +8755,7 @@ func (x *IsWifiDisplayR2SupportedRequest) String() string {
 func (*IsWifiDisplayR2SupportedRequest) ProtoMessage() {}
 
 func (x *IsWifiDisplayR2SupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[144]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[212]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6016,7 +8768,7 @@ func (x *IsWifiDisplayR2SupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWifiDisplayR2SupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsWifiDisplayR2SupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{144}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{212}
 }
 
 type IsWifiDisplayR2SupportedResponse struct {
@@ -6028,7 +8780,7 @@ type IsWifiDisplayR2SupportedResponse struct {
 
 func (x *IsWifiDisplayR2SupportedResponse) Reset() {
 	*x = IsWifiDisplayR2SupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[145]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[213]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6040,7 +8792,7 @@ func (x *IsWifiDisplayR2SupportedResponse) String() string {
 func (*IsWifiDisplayR2SupportedResponse) ProtoMessage() {}
 
 func (x *IsWifiDisplayR2SupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[145]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[213]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6053,7 +8805,7 @@ func (x *IsWifiDisplayR2SupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWifiDisplayR2SupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsWifiDisplayR2SupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{145}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{213}
 }
 
 func (x *IsWifiDisplayR2SupportedResponse) GetResult() bool {
@@ -6071,7 +8823,7 @@ type IsWifiEnabledRequest struct {
 
 func (x *IsWifiEnabledRequest) Reset() {
 	*x = IsWifiEnabledRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[146]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[214]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6083,7 +8835,7 @@ func (x *IsWifiEnabledRequest) String() string {
 func (*IsWifiEnabledRequest) ProtoMessage() {}
 
 func (x *IsWifiEnabledRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[146]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[214]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6096,7 +8848,7 @@ func (x *IsWifiEnabledRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWifiEnabledRequest.ProtoReflect.Descriptor instead.
 func (*IsWifiEnabledRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{146}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{214}
 }
 
 type IsWifiEnabledResponse struct {
@@ -6108,7 +8860,7 @@ type IsWifiEnabledResponse struct {
 
 func (x *IsWifiEnabledResponse) Reset() {
 	*x = IsWifiEnabledResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[147]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[215]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6120,7 +8872,7 @@ func (x *IsWifiEnabledResponse) String() string {
 func (*IsWifiEnabledResponse) ProtoMessage() {}
 
 func (x *IsWifiEnabledResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[147]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[215]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6133,7 +8885,7 @@ func (x *IsWifiEnabledResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWifiEnabledResponse.ProtoReflect.Descriptor instead.
 func (*IsWifiEnabledResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{147}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{215}
 }
 
 func (x *IsWifiEnabledResponse) GetResult() bool {
@@ -6151,7 +8903,7 @@ type IsWifiPasspointEnabledRequest struct {
 
 func (x *IsWifiPasspointEnabledRequest) Reset() {
 	*x = IsWifiPasspointEnabledRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[148]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[216]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6163,7 +8915,7 @@ func (x *IsWifiPasspointEnabledRequest) String() string {
 func (*IsWifiPasspointEnabledRequest) ProtoMessage() {}
 
 func (x *IsWifiPasspointEnabledRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[148]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[216]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6176,7 +8928,7 @@ func (x *IsWifiPasspointEnabledRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWifiPasspointEnabledRequest.ProtoReflect.Descriptor instead.
 func (*IsWifiPasspointEnabledRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{148}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{216}
 }
 
 type IsWifiPasspointEnabledResponse struct {
@@ -6188,7 +8940,7 @@ type IsWifiPasspointEnabledResponse struct {
 
 func (x *IsWifiPasspointEnabledResponse) Reset() {
 	*x = IsWifiPasspointEnabledResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[149]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[217]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6200,7 +8952,7 @@ func (x *IsWifiPasspointEnabledResponse) String() string {
 func (*IsWifiPasspointEnabledResponse) ProtoMessage() {}
 
 func (x *IsWifiPasspointEnabledResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[149]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[217]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6213,7 +8965,7 @@ func (x *IsWifiPasspointEnabledResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWifiPasspointEnabledResponse.ProtoReflect.Descriptor instead.
 func (*IsWifiPasspointEnabledResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{149}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{217}
 }
 
 func (x *IsWifiPasspointEnabledResponse) GetResult() bool {
@@ -6232,7 +8984,7 @@ type IsWifiStandardSupportedRequest struct {
 
 func (x *IsWifiStandardSupportedRequest) Reset() {
 	*x = IsWifiStandardSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[150]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[218]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6244,7 +8996,7 @@ func (x *IsWifiStandardSupportedRequest) String() string {
 func (*IsWifiStandardSupportedRequest) ProtoMessage() {}
 
 func (x *IsWifiStandardSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[150]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[218]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6257,7 +9009,7 @@ func (x *IsWifiStandardSupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWifiStandardSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsWifiStandardSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{150}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{218}
 }
 
 func (x *IsWifiStandardSupportedRequest) GetArg0() int32 {
@@ -6276,7 +9028,7 @@ type IsWifiStandardSupportedResponse struct {
 
 func (x *IsWifiStandardSupportedResponse) Reset() {
 	*x = IsWifiStandardSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[151]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[219]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6288,7 +9040,7 @@ func (x *IsWifiStandardSupportedResponse) String() string {
 func (*IsWifiStandardSupportedResponse) ProtoMessage() {}
 
 func (x *IsWifiStandardSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[151]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[219]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6301,7 +9053,7 @@ func (x *IsWifiStandardSupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWifiStandardSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsWifiStandardSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{151}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{219}
 }
 
 func (x *IsWifiStandardSupportedResponse) GetResult() bool {
@@ -6319,7 +9071,7 @@ type IsWpa3SaeH2ESupportedRequest struct {
 
 func (x *IsWpa3SaeH2ESupportedRequest) Reset() {
 	*x = IsWpa3SaeH2ESupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[152]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[220]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6331,7 +9083,7 @@ func (x *IsWpa3SaeH2ESupportedRequest) String() string {
 func (*IsWpa3SaeH2ESupportedRequest) ProtoMessage() {}
 
 func (x *IsWpa3SaeH2ESupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[152]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[220]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6344,7 +9096,7 @@ func (x *IsWpa3SaeH2ESupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWpa3SaeH2ESupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsWpa3SaeH2ESupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{152}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{220}
 }
 
 type IsWpa3SaeH2ESupportedResponse struct {
@@ -6356,7 +9108,7 @@ type IsWpa3SaeH2ESupportedResponse struct {
 
 func (x *IsWpa3SaeH2ESupportedResponse) Reset() {
 	*x = IsWpa3SaeH2ESupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[153]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[221]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6368,7 +9120,7 @@ func (x *IsWpa3SaeH2ESupportedResponse) String() string {
 func (*IsWpa3SaeH2ESupportedResponse) ProtoMessage() {}
 
 func (x *IsWpa3SaeH2ESupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[153]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[221]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6381,7 +9133,7 @@ func (x *IsWpa3SaeH2ESupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWpa3SaeH2ESupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsWpa3SaeH2ESupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{153}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{221}
 }
 
 func (x *IsWpa3SaeH2ESupportedResponse) GetResult() bool {
@@ -6399,7 +9151,7 @@ type IsWpa3SaePublicKeySupportedRequest struct {
 
 func (x *IsWpa3SaePublicKeySupportedRequest) Reset() {
 	*x = IsWpa3SaePublicKeySupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[154]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[222]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6411,7 +9163,7 @@ func (x *IsWpa3SaePublicKeySupportedRequest) String() string {
 func (*IsWpa3SaePublicKeySupportedRequest) ProtoMessage() {}
 
 func (x *IsWpa3SaePublicKeySupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[154]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[222]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6424,7 +9176,7 @@ func (x *IsWpa3SaePublicKeySupportedRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use IsWpa3SaePublicKeySupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsWpa3SaePublicKeySupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{154}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{222}
 }
 
 type IsWpa3SaePublicKeySupportedResponse struct {
@@ -6436,7 +9188,7 @@ type IsWpa3SaePublicKeySupportedResponse struct {
 
 func (x *IsWpa3SaePublicKeySupportedResponse) Reset() {
 	*x = IsWpa3SaePublicKeySupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[155]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[223]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6448,7 +9200,7 @@ func (x *IsWpa3SaePublicKeySupportedResponse) String() string {
 func (*IsWpa3SaePublicKeySupportedResponse) ProtoMessage() {}
 
 func (x *IsWpa3SaePublicKeySupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[155]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[223]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6461,7 +9213,7 @@ func (x *IsWpa3SaePublicKeySupportedResponse) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use IsWpa3SaePublicKeySupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsWpa3SaePublicKeySupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{155}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{223}
 }
 
 func (x *IsWpa3SaePublicKeySupportedResponse) GetResult() bool {
@@ -6479,7 +9231,7 @@ type IsWpa3SaeSupportedRequest struct {
 
 func (x *IsWpa3SaeSupportedRequest) Reset() {
 	*x = IsWpa3SaeSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[156]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[224]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6491,7 +9243,7 @@ func (x *IsWpa3SaeSupportedRequest) String() string {
 func (*IsWpa3SaeSupportedRequest) ProtoMessage() {}
 
 func (x *IsWpa3SaeSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[156]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[224]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6504,7 +9256,7 @@ func (x *IsWpa3SaeSupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWpa3SaeSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsWpa3SaeSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{156}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{224}
 }
 
 type IsWpa3SaeSupportedResponse struct {
@@ -6516,7 +9268,7 @@ type IsWpa3SaeSupportedResponse struct {
 
 func (x *IsWpa3SaeSupportedResponse) Reset() {
 	*x = IsWpa3SaeSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[157]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[225]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6528,7 +9280,7 @@ func (x *IsWpa3SaeSupportedResponse) String() string {
 func (*IsWpa3SaeSupportedResponse) ProtoMessage() {}
 
 func (x *IsWpa3SaeSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[157]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[225]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6541,7 +9293,7 @@ func (x *IsWpa3SaeSupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWpa3SaeSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsWpa3SaeSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{157}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{225}
 }
 
 func (x *IsWpa3SaeSupportedResponse) GetResult() bool {
@@ -6559,7 +9311,7 @@ type IsWpa3SuiteBSupportedRequest struct {
 
 func (x *IsWpa3SuiteBSupportedRequest) Reset() {
 	*x = IsWpa3SuiteBSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[158]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[226]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6571,7 +9323,7 @@ func (x *IsWpa3SuiteBSupportedRequest) String() string {
 func (*IsWpa3SuiteBSupportedRequest) ProtoMessage() {}
 
 func (x *IsWpa3SuiteBSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[158]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[226]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6584,7 +9336,7 @@ func (x *IsWpa3SuiteBSupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWpa3SuiteBSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsWpa3SuiteBSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{158}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{226}
 }
 
 type IsWpa3SuiteBSupportedResponse struct {
@@ -6596,7 +9348,7 @@ type IsWpa3SuiteBSupportedResponse struct {
 
 func (x *IsWpa3SuiteBSupportedResponse) Reset() {
 	*x = IsWpa3SuiteBSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[159]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[227]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6608,7 +9360,7 @@ func (x *IsWpa3SuiteBSupportedResponse) String() string {
 func (*IsWpa3SuiteBSupportedResponse) ProtoMessage() {}
 
 func (x *IsWpa3SuiteBSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[159]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[227]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6621,7 +9373,7 @@ func (x *IsWpa3SuiteBSupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWpa3SuiteBSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsWpa3SuiteBSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{159}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{227}
 }
 
 func (x *IsWpa3SuiteBSupportedResponse) GetResult() bool {
@@ -6639,7 +9391,7 @@ type IsWpaPersonalSupportedRequest struct {
 
 func (x *IsWpaPersonalSupportedRequest) Reset() {
 	*x = IsWpaPersonalSupportedRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[160]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[228]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6651,7 +9403,7 @@ func (x *IsWpaPersonalSupportedRequest) String() string {
 func (*IsWpaPersonalSupportedRequest) ProtoMessage() {}
 
 func (x *IsWpaPersonalSupportedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[160]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[228]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6664,7 +9416,7 @@ func (x *IsWpaPersonalSupportedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWpaPersonalSupportedRequest.ProtoReflect.Descriptor instead.
 func (*IsWpaPersonalSupportedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{160}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{228}
 }
 
 type IsWpaPersonalSupportedResponse struct {
@@ -6676,7 +9428,7 @@ type IsWpaPersonalSupportedResponse struct {
 
 func (x *IsWpaPersonalSupportedResponse) Reset() {
 	*x = IsWpaPersonalSupportedResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[161]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[229]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6688,7 +9440,7 @@ func (x *IsWpaPersonalSupportedResponse) String() string {
 func (*IsWpaPersonalSupportedResponse) ProtoMessage() {}
 
 func (x *IsWpaPersonalSupportedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[161]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[229]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6701,7 +9453,7 @@ func (x *IsWpaPersonalSupportedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsWpaPersonalSupportedResponse.ProtoReflect.Descriptor instead.
 func (*IsWpaPersonalSupportedResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{161}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{229}
 }
 
 func (x *IsWpaPersonalSupportedResponse) GetResult() bool {
@@ -6719,7 +9471,7 @@ type PingSupplicantRequest struct {
 
 func (x *PingSupplicantRequest) Reset() {
 	*x = PingSupplicantRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[162]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[230]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6731,7 +9483,7 @@ func (x *PingSupplicantRequest) String() string {
 func (*PingSupplicantRequest) ProtoMessage() {}
 
 func (x *PingSupplicantRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[162]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[230]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6744,7 +9496,7 @@ func (x *PingSupplicantRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PingSupplicantRequest.ProtoReflect.Descriptor instead.
 func (*PingSupplicantRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{162}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{230}
 }
 
 type PingSupplicantResponse struct {
@@ -6756,7 +9508,7 @@ type PingSupplicantResponse struct {
 
 func (x *PingSupplicantResponse) Reset() {
 	*x = PingSupplicantResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[163]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[231]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6768,7 +9520,7 @@ func (x *PingSupplicantResponse) String() string {
 func (*PingSupplicantResponse) ProtoMessage() {}
 
 func (x *PingSupplicantResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[163]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[231]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6781,7 +9533,7 @@ func (x *PingSupplicantResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PingSupplicantResponse.ProtoReflect.Descriptor instead.
 func (*PingSupplicantResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{163}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{231}
 }
 
 func (x *PingSupplicantResponse) GetResult() bool {
@@ -6801,7 +9553,7 @@ type QueryAutojoinGlobalRequest struct {
 
 func (x *QueryAutojoinGlobalRequest) Reset() {
 	*x = QueryAutojoinGlobalRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[164]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[232]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6813,7 +9565,7 @@ func (x *QueryAutojoinGlobalRequest) String() string {
 func (*QueryAutojoinGlobalRequest) ProtoMessage() {}
 
 func (x *QueryAutojoinGlobalRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[164]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[232]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6826,7 +9578,7 @@ func (x *QueryAutojoinGlobalRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryAutojoinGlobalRequest.ProtoReflect.Descriptor instead.
 func (*QueryAutojoinGlobalRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{164}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{232}
 }
 
 func (x *QueryAutojoinGlobalRequest) GetArg0() int64 {
@@ -6851,7 +9603,7 @@ type QueryAutojoinGlobalResponse struct {
 
 func (x *QueryAutojoinGlobalResponse) Reset() {
 	*x = QueryAutojoinGlobalResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[165]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[233]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6863,7 +9615,7 @@ func (x *QueryAutojoinGlobalResponse) String() string {
 func (*QueryAutojoinGlobalResponse) ProtoMessage() {}
 
 func (x *QueryAutojoinGlobalResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[165]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[233]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6876,7 +9628,7 @@ func (x *QueryAutojoinGlobalResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryAutojoinGlobalResponse.ProtoReflect.Descriptor instead.
 func (*QueryAutojoinGlobalResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{165}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{233}
 }
 
 type QuerySendDhcpHostnameRestrictionRequest struct {
@@ -6889,7 +9641,7 @@ type QuerySendDhcpHostnameRestrictionRequest struct {
 
 func (x *QuerySendDhcpHostnameRestrictionRequest) Reset() {
 	*x = QuerySendDhcpHostnameRestrictionRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[166]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[234]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6901,7 +9653,7 @@ func (x *QuerySendDhcpHostnameRestrictionRequest) String() string {
 func (*QuerySendDhcpHostnameRestrictionRequest) ProtoMessage() {}
 
 func (x *QuerySendDhcpHostnameRestrictionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[166]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[234]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6914,7 +9666,7 @@ func (x *QuerySendDhcpHostnameRestrictionRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use QuerySendDhcpHostnameRestrictionRequest.ProtoReflect.Descriptor instead.
 func (*QuerySendDhcpHostnameRestrictionRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{166}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{234}
 }
 
 func (x *QuerySendDhcpHostnameRestrictionRequest) GetArg0() int64 {
@@ -6939,7 +9691,7 @@ type QuerySendDhcpHostnameRestrictionResponse struct {
 
 func (x *QuerySendDhcpHostnameRestrictionResponse) Reset() {
 	*x = QuerySendDhcpHostnameRestrictionResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[167]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[235]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6951,7 +9703,7 @@ func (x *QuerySendDhcpHostnameRestrictionResponse) String() string {
 func (*QuerySendDhcpHostnameRestrictionResponse) ProtoMessage() {}
 
 func (x *QuerySendDhcpHostnameRestrictionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[167]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[235]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6964,7 +9716,7 @@ func (x *QuerySendDhcpHostnameRestrictionResponse) ProtoReflect() protoreflect.M
 
 // Deprecated: Use QuerySendDhcpHostnameRestrictionResponse.ProtoReflect.Descriptor instead.
 func (*QuerySendDhcpHostnameRestrictionResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{167}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{235}
 }
 
 type ReassociateRequest struct {
@@ -6975,7 +9727,7 @@ type ReassociateRequest struct {
 
 func (x *ReassociateRequest) Reset() {
 	*x = ReassociateRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[168]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[236]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6987,7 +9739,7 @@ func (x *ReassociateRequest) String() string {
 func (*ReassociateRequest) ProtoMessage() {}
 
 func (x *ReassociateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[168]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[236]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7000,7 +9752,7 @@ func (x *ReassociateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReassociateRequest.ProtoReflect.Descriptor instead.
 func (*ReassociateRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{168}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{236}
 }
 
 type ReassociateResponse struct {
@@ -7012,7 +9764,7 @@ type ReassociateResponse struct {
 
 func (x *ReassociateResponse) Reset() {
 	*x = ReassociateResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[169]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[237]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7024,7 +9776,7 @@ func (x *ReassociateResponse) String() string {
 func (*ReassociateResponse) ProtoMessage() {}
 
 func (x *ReassociateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[169]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[237]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7037,7 +9789,7 @@ func (x *ReassociateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReassociateResponse.ProtoReflect.Descriptor instead.
 func (*ReassociateResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{169}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{237}
 }
 
 func (x *ReassociateResponse) GetResult() bool {
@@ -7055,7 +9807,7 @@ type ReconnectRequest struct {
 
 func (x *ReconnectRequest) Reset() {
 	*x = ReconnectRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[170]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[238]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7067,7 +9819,7 @@ func (x *ReconnectRequest) String() string {
 func (*ReconnectRequest) ProtoMessage() {}
 
 func (x *ReconnectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[170]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[238]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7080,7 +9832,7 @@ func (x *ReconnectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReconnectRequest.ProtoReflect.Descriptor instead.
 func (*ReconnectRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{170}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{238}
 }
 
 type ReconnectResponse struct {
@@ -7092,7 +9844,7 @@ type ReconnectResponse struct {
 
 func (x *ReconnectResponse) Reset() {
 	*x = ReconnectResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[171]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[239]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7104,7 +9856,7 @@ func (x *ReconnectResponse) String() string {
 func (*ReconnectResponse) ProtoMessage() {}
 
 func (x *ReconnectResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[171]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[239]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7117,7 +9869,7 @@ func (x *ReconnectResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReconnectResponse.ProtoReflect.Descriptor instead.
 func (*ReconnectResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{171}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{239}
 }
 
 func (x *ReconnectResponse) GetResult() bool {
@@ -7137,7 +9889,7 @@ type RegisterScanResultsCallbackRequest struct {
 
 func (x *RegisterScanResultsCallbackRequest) Reset() {
 	*x = RegisterScanResultsCallbackRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[172]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[240]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7149,7 +9901,7 @@ func (x *RegisterScanResultsCallbackRequest) String() string {
 func (*RegisterScanResultsCallbackRequest) ProtoMessage() {}
 
 func (x *RegisterScanResultsCallbackRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[172]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[240]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7162,7 +9914,7 @@ func (x *RegisterScanResultsCallbackRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use RegisterScanResultsCallbackRequest.ProtoReflect.Descriptor instead.
 func (*RegisterScanResultsCallbackRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{172}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{240}
 }
 
 func (x *RegisterScanResultsCallbackRequest) GetArg0() int64 {
@@ -7187,7 +9939,7 @@ type RegisterScanResultsCallbackResponse struct {
 
 func (x *RegisterScanResultsCallbackResponse) Reset() {
 	*x = RegisterScanResultsCallbackResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[173]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[241]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7199,7 +9951,7 @@ func (x *RegisterScanResultsCallbackResponse) String() string {
 func (*RegisterScanResultsCallbackResponse) ProtoMessage() {}
 
 func (x *RegisterScanResultsCallbackResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[173]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[241]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7212,7 +9964,7 @@ func (x *RegisterScanResultsCallbackResponse) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use RegisterScanResultsCallbackResponse.ProtoReflect.Descriptor instead.
 func (*RegisterScanResultsCallbackResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{173}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{241}
 }
 
 type RegisterSubsystemRestartTrackingCallbackRequest struct {
@@ -7225,7 +9977,7 @@ type RegisterSubsystemRestartTrackingCallbackRequest struct {
 
 func (x *RegisterSubsystemRestartTrackingCallbackRequest) Reset() {
 	*x = RegisterSubsystemRestartTrackingCallbackRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[174]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[242]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7237,7 +9989,7 @@ func (x *RegisterSubsystemRestartTrackingCallbackRequest) String() string {
 func (*RegisterSubsystemRestartTrackingCallbackRequest) ProtoMessage() {}
 
 func (x *RegisterSubsystemRestartTrackingCallbackRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[174]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[242]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7250,7 +10002,7 @@ func (x *RegisterSubsystemRestartTrackingCallbackRequest) ProtoReflect() protore
 
 // Deprecated: Use RegisterSubsystemRestartTrackingCallbackRequest.ProtoReflect.Descriptor instead.
 func (*RegisterSubsystemRestartTrackingCallbackRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{174}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{242}
 }
 
 func (x *RegisterSubsystemRestartTrackingCallbackRequest) GetArg0() int64 {
@@ -7275,7 +10027,7 @@ type RegisterSubsystemRestartTrackingCallbackResponse struct {
 
 func (x *RegisterSubsystemRestartTrackingCallbackResponse) Reset() {
 	*x = RegisterSubsystemRestartTrackingCallbackResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[175]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[243]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7287,7 +10039,7 @@ func (x *RegisterSubsystemRestartTrackingCallbackResponse) String() string {
 func (*RegisterSubsystemRestartTrackingCallbackResponse) ProtoMessage() {}
 
 func (x *RegisterSubsystemRestartTrackingCallbackResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[175]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[243]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7300,7 +10052,7 @@ func (x *RegisterSubsystemRestartTrackingCallbackResponse) ProtoReflect() protor
 
 // Deprecated: Use RegisterSubsystemRestartTrackingCallbackResponse.ProtoReflect.Descriptor instead.
 func (*RegisterSubsystemRestartTrackingCallbackResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{175}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{243}
 }
 
 type RemoveLocalOnlyConnectionFailureListenerRequest struct {
@@ -7312,7 +10064,7 @@ type RemoveLocalOnlyConnectionFailureListenerRequest struct {
 
 func (x *RemoveLocalOnlyConnectionFailureListenerRequest) Reset() {
 	*x = RemoveLocalOnlyConnectionFailureListenerRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[176]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[244]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7324,7 +10076,7 @@ func (x *RemoveLocalOnlyConnectionFailureListenerRequest) String() string {
 func (*RemoveLocalOnlyConnectionFailureListenerRequest) ProtoMessage() {}
 
 func (x *RemoveLocalOnlyConnectionFailureListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[176]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[244]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7337,7 +10089,7 @@ func (x *RemoveLocalOnlyConnectionFailureListenerRequest) ProtoReflect() protore
 
 // Deprecated: Use RemoveLocalOnlyConnectionFailureListenerRequest.ProtoReflect.Descriptor instead.
 func (*RemoveLocalOnlyConnectionFailureListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{176}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{244}
 }
 
 func (x *RemoveLocalOnlyConnectionFailureListenerRequest) GetArg0() int64 {
@@ -7355,7 +10107,7 @@ type RemoveLocalOnlyConnectionFailureListenerResponse struct {
 
 func (x *RemoveLocalOnlyConnectionFailureListenerResponse) Reset() {
 	*x = RemoveLocalOnlyConnectionFailureListenerResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[177]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[245]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7367,7 +10119,7 @@ func (x *RemoveLocalOnlyConnectionFailureListenerResponse) String() string {
 func (*RemoveLocalOnlyConnectionFailureListenerResponse) ProtoMessage() {}
 
 func (x *RemoveLocalOnlyConnectionFailureListenerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[177]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[245]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7380,7 +10132,7 @@ func (x *RemoveLocalOnlyConnectionFailureListenerResponse) ProtoReflect() protor
 
 // Deprecated: Use RemoveLocalOnlyConnectionFailureListenerResponse.ProtoReflect.Descriptor instead.
 func (*RemoveLocalOnlyConnectionFailureListenerResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{177}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{245}
 }
 
 type RemoveNetworkRequest struct {
@@ -7392,7 +10144,7 @@ type RemoveNetworkRequest struct {
 
 func (x *RemoveNetworkRequest) Reset() {
 	*x = RemoveNetworkRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[178]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[246]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7404,7 +10156,7 @@ func (x *RemoveNetworkRequest) String() string {
 func (*RemoveNetworkRequest) ProtoMessage() {}
 
 func (x *RemoveNetworkRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[178]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[246]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7417,7 +10169,7 @@ func (x *RemoveNetworkRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveNetworkRequest.ProtoReflect.Descriptor instead.
 func (*RemoveNetworkRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{178}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{246}
 }
 
 func (x *RemoveNetworkRequest) GetArg0() int32 {
@@ -7436,7 +10188,7 @@ type RemoveNetworkResponse struct {
 
 func (x *RemoveNetworkResponse) Reset() {
 	*x = RemoveNetworkResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[179]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[247]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7448,7 +10200,7 @@ func (x *RemoveNetworkResponse) String() string {
 func (*RemoveNetworkResponse) ProtoMessage() {}
 
 func (x *RemoveNetworkResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[179]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[247]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7461,7 +10213,7 @@ func (x *RemoveNetworkResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveNetworkResponse.ProtoReflect.Descriptor instead.
 func (*RemoveNetworkResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{179}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{247}
 }
 
 func (x *RemoveNetworkResponse) GetResult() bool {
@@ -7480,7 +10232,7 @@ type RemoveNetworkSuggestions1Request struct {
 
 func (x *RemoveNetworkSuggestions1Request) Reset() {
 	*x = RemoveNetworkSuggestions1Request{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[180]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[248]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7492,7 +10244,7 @@ func (x *RemoveNetworkSuggestions1Request) String() string {
 func (*RemoveNetworkSuggestions1Request) ProtoMessage() {}
 
 func (x *RemoveNetworkSuggestions1Request) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[180]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[248]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7505,7 +10257,7 @@ func (x *RemoveNetworkSuggestions1Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveNetworkSuggestions1Request.ProtoReflect.Descriptor instead.
 func (*RemoveNetworkSuggestions1Request) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{180}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{248}
 }
 
 func (x *RemoveNetworkSuggestions1Request) GetArg0() int64 {
@@ -7524,7 +10276,7 @@ type RemoveNetworkSuggestions1Response struct {
 
 func (x *RemoveNetworkSuggestions1Response) Reset() {
 	*x = RemoveNetworkSuggestions1Response{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[181]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[249]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7536,7 +10288,7 @@ func (x *RemoveNetworkSuggestions1Response) String() string {
 func (*RemoveNetworkSuggestions1Response) ProtoMessage() {}
 
 func (x *RemoveNetworkSuggestions1Response) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[181]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[249]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7549,7 +10301,7 @@ func (x *RemoveNetworkSuggestions1Response) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use RemoveNetworkSuggestions1Response.ProtoReflect.Descriptor instead.
 func (*RemoveNetworkSuggestions1Response) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{181}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{249}
 }
 
 func (x *RemoveNetworkSuggestions1Response) GetResult() int32 {
@@ -7569,7 +10321,7 @@ type RemoveNetworkSuggestions2_1Request struct {
 
 func (x *RemoveNetworkSuggestions2_1Request) Reset() {
 	*x = RemoveNetworkSuggestions2_1Request{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[182]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[250]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7581,7 +10333,7 @@ func (x *RemoveNetworkSuggestions2_1Request) String() string {
 func (*RemoveNetworkSuggestions2_1Request) ProtoMessage() {}
 
 func (x *RemoveNetworkSuggestions2_1Request) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[182]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[250]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7594,7 +10346,7 @@ func (x *RemoveNetworkSuggestions2_1Request) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use RemoveNetworkSuggestions2_1Request.ProtoReflect.Descriptor instead.
 func (*RemoveNetworkSuggestions2_1Request) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{182}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{250}
 }
 
 func (x *RemoveNetworkSuggestions2_1Request) GetArg0() int64 {
@@ -7620,7 +10372,7 @@ type RemoveNetworkSuggestions2_1Response struct {
 
 func (x *RemoveNetworkSuggestions2_1Response) Reset() {
 	*x = RemoveNetworkSuggestions2_1Response{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[183]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[251]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7632,7 +10384,7 @@ func (x *RemoveNetworkSuggestions2_1Response) String() string {
 func (*RemoveNetworkSuggestions2_1Response) ProtoMessage() {}
 
 func (x *RemoveNetworkSuggestions2_1Response) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[183]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[251]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7645,7 +10397,7 @@ func (x *RemoveNetworkSuggestions2_1Response) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use RemoveNetworkSuggestions2_1Response.ProtoReflect.Descriptor instead.
 func (*RemoveNetworkSuggestions2_1Response) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{183}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{251}
 }
 
 func (x *RemoveNetworkSuggestions2_1Response) GetResult() int32 {
@@ -7663,7 +10415,7 @@ type RemoveNonCallerConfiguredNetworksRequest struct {
 
 func (x *RemoveNonCallerConfiguredNetworksRequest) Reset() {
 	*x = RemoveNonCallerConfiguredNetworksRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[184]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[252]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7675,7 +10427,7 @@ func (x *RemoveNonCallerConfiguredNetworksRequest) String() string {
 func (*RemoveNonCallerConfiguredNetworksRequest) ProtoMessage() {}
 
 func (x *RemoveNonCallerConfiguredNetworksRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[184]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[252]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7688,7 +10440,7 @@ func (x *RemoveNonCallerConfiguredNetworksRequest) ProtoReflect() protoreflect.M
 
 // Deprecated: Use RemoveNonCallerConfiguredNetworksRequest.ProtoReflect.Descriptor instead.
 func (*RemoveNonCallerConfiguredNetworksRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{184}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{252}
 }
 
 type RemoveNonCallerConfiguredNetworksResponse struct {
@@ -7700,7 +10452,7 @@ type RemoveNonCallerConfiguredNetworksResponse struct {
 
 func (x *RemoveNonCallerConfiguredNetworksResponse) Reset() {
 	*x = RemoveNonCallerConfiguredNetworksResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[185]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[253]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7712,7 +10464,7 @@ func (x *RemoveNonCallerConfiguredNetworksResponse) String() string {
 func (*RemoveNonCallerConfiguredNetworksResponse) ProtoMessage() {}
 
 func (x *RemoveNonCallerConfiguredNetworksResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[185]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[253]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7725,7 +10477,7 @@ func (x *RemoveNonCallerConfiguredNetworksResponse) ProtoReflect() protoreflect.
 
 // Deprecated: Use RemoveNonCallerConfiguredNetworksResponse.ProtoReflect.Descriptor instead.
 func (*RemoveNonCallerConfiguredNetworksResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{185}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{253}
 }
 
 func (x *RemoveNonCallerConfiguredNetworksResponse) GetResult() bool {
@@ -7744,7 +10496,7 @@ type RemovePasspointConfigurationRequest struct {
 
 func (x *RemovePasspointConfigurationRequest) Reset() {
 	*x = RemovePasspointConfigurationRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[186]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[254]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7756,7 +10508,7 @@ func (x *RemovePasspointConfigurationRequest) String() string {
 func (*RemovePasspointConfigurationRequest) ProtoMessage() {}
 
 func (x *RemovePasspointConfigurationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[186]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[254]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7769,7 +10521,7 @@ func (x *RemovePasspointConfigurationRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use RemovePasspointConfigurationRequest.ProtoReflect.Descriptor instead.
 func (*RemovePasspointConfigurationRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{186}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{254}
 }
 
 func (x *RemovePasspointConfigurationRequest) GetArg0() string {
@@ -7787,7 +10539,7 @@ type RemovePasspointConfigurationResponse struct {
 
 func (x *RemovePasspointConfigurationResponse) Reset() {
 	*x = RemovePasspointConfigurationResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[187]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[255]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7799,7 +10551,7 @@ func (x *RemovePasspointConfigurationResponse) String() string {
 func (*RemovePasspointConfigurationResponse) ProtoMessage() {}
 
 func (x *RemovePasspointConfigurationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[187]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[255]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7812,7 +10564,7 @@ func (x *RemovePasspointConfigurationResponse) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use RemovePasspointConfigurationResponse.ProtoReflect.Descriptor instead.
 func (*RemovePasspointConfigurationResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{187}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{255}
 }
 
 type RemovePerSsidRoamingModeRequest struct {
@@ -7824,7 +10576,7 @@ type RemovePerSsidRoamingModeRequest struct {
 
 func (x *RemovePerSsidRoamingModeRequest) Reset() {
 	*x = RemovePerSsidRoamingModeRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[188]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[256]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7836,7 +10588,7 @@ func (x *RemovePerSsidRoamingModeRequest) String() string {
 func (*RemovePerSsidRoamingModeRequest) ProtoMessage() {}
 
 func (x *RemovePerSsidRoamingModeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[188]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[256]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7849,7 +10601,7 @@ func (x *RemovePerSsidRoamingModeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemovePerSsidRoamingModeRequest.ProtoReflect.Descriptor instead.
 func (*RemovePerSsidRoamingModeRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{188}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{256}
 }
 
 func (x *RemovePerSsidRoamingModeRequest) GetArg0() int64 {
@@ -7867,7 +10619,7 @@ type RemovePerSsidRoamingModeResponse struct {
 
 func (x *RemovePerSsidRoamingModeResponse) Reset() {
 	*x = RemovePerSsidRoamingModeResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[189]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[257]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7879,7 +10631,7 @@ func (x *RemovePerSsidRoamingModeResponse) String() string {
 func (*RemovePerSsidRoamingModeResponse) ProtoMessage() {}
 
 func (x *RemovePerSsidRoamingModeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[189]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[257]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7892,7 +10644,7 @@ func (x *RemovePerSsidRoamingModeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemovePerSsidRoamingModeResponse.ProtoReflect.Descriptor instead.
 func (*RemovePerSsidRoamingModeResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{189}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{257}
 }
 
 type RemoveSuggestionConnectionStatusListenerRequest struct {
@@ -7904,7 +10656,7 @@ type RemoveSuggestionConnectionStatusListenerRequest struct {
 
 func (x *RemoveSuggestionConnectionStatusListenerRequest) Reset() {
 	*x = RemoveSuggestionConnectionStatusListenerRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[190]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[258]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7916,7 +10668,7 @@ func (x *RemoveSuggestionConnectionStatusListenerRequest) String() string {
 func (*RemoveSuggestionConnectionStatusListenerRequest) ProtoMessage() {}
 
 func (x *RemoveSuggestionConnectionStatusListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[190]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[258]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7929,7 +10681,7 @@ func (x *RemoveSuggestionConnectionStatusListenerRequest) ProtoReflect() protore
 
 // Deprecated: Use RemoveSuggestionConnectionStatusListenerRequest.ProtoReflect.Descriptor instead.
 func (*RemoveSuggestionConnectionStatusListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{190}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{258}
 }
 
 func (x *RemoveSuggestionConnectionStatusListenerRequest) GetArg0() int64 {
@@ -7947,7 +10699,7 @@ type RemoveSuggestionConnectionStatusListenerResponse struct {
 
 func (x *RemoveSuggestionConnectionStatusListenerResponse) Reset() {
 	*x = RemoveSuggestionConnectionStatusListenerResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[191]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[259]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7959,7 +10711,7 @@ func (x *RemoveSuggestionConnectionStatusListenerResponse) String() string {
 func (*RemoveSuggestionConnectionStatusListenerResponse) ProtoMessage() {}
 
 func (x *RemoveSuggestionConnectionStatusListenerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[191]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[259]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7972,7 +10724,7 @@ func (x *RemoveSuggestionConnectionStatusListenerResponse) ProtoReflect() protor
 
 // Deprecated: Use RemoveSuggestionConnectionStatusListenerResponse.ProtoReflect.Descriptor instead.
 func (*RemoveSuggestionConnectionStatusListenerResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{191}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{259}
 }
 
 type RemoveSuggestionUserApprovalStatusListenerRequest struct {
@@ -7984,7 +10736,7 @@ type RemoveSuggestionUserApprovalStatusListenerRequest struct {
 
 func (x *RemoveSuggestionUserApprovalStatusListenerRequest) Reset() {
 	*x = RemoveSuggestionUserApprovalStatusListenerRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[192]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[260]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7996,7 +10748,7 @@ func (x *RemoveSuggestionUserApprovalStatusListenerRequest) String() string {
 func (*RemoveSuggestionUserApprovalStatusListenerRequest) ProtoMessage() {}
 
 func (x *RemoveSuggestionUserApprovalStatusListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[192]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[260]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8009,7 +10761,7 @@ func (x *RemoveSuggestionUserApprovalStatusListenerRequest) ProtoReflect() proto
 
 // Deprecated: Use RemoveSuggestionUserApprovalStatusListenerRequest.ProtoReflect.Descriptor instead.
 func (*RemoveSuggestionUserApprovalStatusListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{192}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{260}
 }
 
 func (x *RemoveSuggestionUserApprovalStatusListenerRequest) GetArg0() int64 {
@@ -8027,7 +10779,7 @@ type RemoveSuggestionUserApprovalStatusListenerResponse struct {
 
 func (x *RemoveSuggestionUserApprovalStatusListenerResponse) Reset() {
 	*x = RemoveSuggestionUserApprovalStatusListenerResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[193]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[261]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8039,7 +10791,7 @@ func (x *RemoveSuggestionUserApprovalStatusListenerResponse) String() string {
 func (*RemoveSuggestionUserApprovalStatusListenerResponse) ProtoMessage() {}
 
 func (x *RemoveSuggestionUserApprovalStatusListenerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[193]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[261]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8052,7 +10804,7 @@ func (x *RemoveSuggestionUserApprovalStatusListenerResponse) ProtoReflect() prot
 
 // Deprecated: Use RemoveSuggestionUserApprovalStatusListenerResponse.ProtoReflect.Descriptor instead.
 func (*RemoveSuggestionUserApprovalStatusListenerResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{193}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{261}
 }
 
 type RemoveWifiStateChangedListenerRequest struct {
@@ -8064,7 +10816,7 @@ type RemoveWifiStateChangedListenerRequest struct {
 
 func (x *RemoveWifiStateChangedListenerRequest) Reset() {
 	*x = RemoveWifiStateChangedListenerRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[194]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[262]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8076,7 +10828,7 @@ func (x *RemoveWifiStateChangedListenerRequest) String() string {
 func (*RemoveWifiStateChangedListenerRequest) ProtoMessage() {}
 
 func (x *RemoveWifiStateChangedListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[194]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[262]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8089,7 +10841,7 @@ func (x *RemoveWifiStateChangedListenerRequest) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use RemoveWifiStateChangedListenerRequest.ProtoReflect.Descriptor instead.
 func (*RemoveWifiStateChangedListenerRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{194}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{262}
 }
 
 func (x *RemoveWifiStateChangedListenerRequest) GetArg0() int64 {
@@ -8107,7 +10859,7 @@ type RemoveWifiStateChangedListenerResponse struct {
 
 func (x *RemoveWifiStateChangedListenerResponse) Reset() {
 	*x = RemoveWifiStateChangedListenerResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[195]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[263]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8119,7 +10871,7 @@ func (x *RemoveWifiStateChangedListenerResponse) String() string {
 func (*RemoveWifiStateChangedListenerResponse) ProtoMessage() {}
 
 func (x *RemoveWifiStateChangedListenerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[195]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[263]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8132,7 +10884,7 @@ func (x *RemoveWifiStateChangedListenerResponse) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use RemoveWifiStateChangedListenerResponse.ProtoReflect.Descriptor instead.
 func (*RemoveWifiStateChangedListenerResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{195}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{263}
 }
 
 type ReportCreateInterfaceImpactRequest struct {
@@ -8147,7 +10899,7 @@ type ReportCreateInterfaceImpactRequest struct {
 
 func (x *ReportCreateInterfaceImpactRequest) Reset() {
 	*x = ReportCreateInterfaceImpactRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[196]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[264]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8159,7 +10911,7 @@ func (x *ReportCreateInterfaceImpactRequest) String() string {
 func (*ReportCreateInterfaceImpactRequest) ProtoMessage() {}
 
 func (x *ReportCreateInterfaceImpactRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[196]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[264]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8172,7 +10924,7 @@ func (x *ReportCreateInterfaceImpactRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ReportCreateInterfaceImpactRequest.ProtoReflect.Descriptor instead.
 func (*ReportCreateInterfaceImpactRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{196}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{264}
 }
 
 func (x *ReportCreateInterfaceImpactRequest) GetArg0() int32 {
@@ -8211,7 +10963,7 @@ type ReportCreateInterfaceImpactResponse struct {
 
 func (x *ReportCreateInterfaceImpactResponse) Reset() {
 	*x = ReportCreateInterfaceImpactResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[197]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[265]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8223,7 +10975,7 @@ func (x *ReportCreateInterfaceImpactResponse) String() string {
 func (*ReportCreateInterfaceImpactResponse) ProtoMessage() {}
 
 func (x *ReportCreateInterfaceImpactResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[197]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[265]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8236,7 +10988,7 @@ func (x *ReportCreateInterfaceImpactResponse) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use ReportCreateInterfaceImpactResponse.ProtoReflect.Descriptor instead.
 func (*ReportCreateInterfaceImpactResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{197}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{265}
 }
 
 type SaveConfigurationRequest struct {
@@ -8247,7 +10999,7 @@ type SaveConfigurationRequest struct {
 
 func (x *SaveConfigurationRequest) Reset() {
 	*x = SaveConfigurationRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[198]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[266]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8259,7 +11011,7 @@ func (x *SaveConfigurationRequest) String() string {
 func (*SaveConfigurationRequest) ProtoMessage() {}
 
 func (x *SaveConfigurationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[198]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[266]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8272,7 +11024,7 @@ func (x *SaveConfigurationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SaveConfigurationRequest.ProtoReflect.Descriptor instead.
 func (*SaveConfigurationRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{198}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{266}
 }
 
 type SaveConfigurationResponse struct {
@@ -8284,7 +11036,7 @@ type SaveConfigurationResponse struct {
 
 func (x *SaveConfigurationResponse) Reset() {
 	*x = SaveConfigurationResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[199]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[267]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8296,7 +11048,7 @@ func (x *SaveConfigurationResponse) String() string {
 func (*SaveConfigurationResponse) ProtoMessage() {}
 
 func (x *SaveConfigurationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[199]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[267]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8309,7 +11061,7 @@ func (x *SaveConfigurationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SaveConfigurationResponse.ProtoReflect.Descriptor instead.
 func (*SaveConfigurationResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{199}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{267}
 }
 
 func (x *SaveConfigurationResponse) GetResult() bool {
@@ -8329,7 +11081,7 @@ type SetPerSsidRoamingModeRequest struct {
 
 func (x *SetPerSsidRoamingModeRequest) Reset() {
 	*x = SetPerSsidRoamingModeRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[200]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[268]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8341,7 +11093,7 @@ func (x *SetPerSsidRoamingModeRequest) String() string {
 func (*SetPerSsidRoamingModeRequest) ProtoMessage() {}
 
 func (x *SetPerSsidRoamingModeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[200]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[268]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8354,7 +11106,7 @@ func (x *SetPerSsidRoamingModeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetPerSsidRoamingModeRequest.ProtoReflect.Descriptor instead.
 func (*SetPerSsidRoamingModeRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{200}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{268}
 }
 
 func (x *SetPerSsidRoamingModeRequest) GetArg0() int64 {
@@ -8379,7 +11131,7 @@ type SetPerSsidRoamingModeResponse struct {
 
 func (x *SetPerSsidRoamingModeResponse) Reset() {
 	*x = SetPerSsidRoamingModeResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[201]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[269]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8391,7 +11143,7 @@ func (x *SetPerSsidRoamingModeResponse) String() string {
 func (*SetPerSsidRoamingModeResponse) ProtoMessage() {}
 
 func (x *SetPerSsidRoamingModeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[201]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[269]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8404,7 +11156,7 @@ func (x *SetPerSsidRoamingModeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetPerSsidRoamingModeResponse.ProtoReflect.Descriptor instead.
 func (*SetPerSsidRoamingModeResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{201}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{269}
 }
 
 type SetSendDhcpHostnameRestrictionRequest struct {
@@ -8416,7 +11168,7 @@ type SetSendDhcpHostnameRestrictionRequest struct {
 
 func (x *SetSendDhcpHostnameRestrictionRequest) Reset() {
 	*x = SetSendDhcpHostnameRestrictionRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[202]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[270]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8428,7 +11180,7 @@ func (x *SetSendDhcpHostnameRestrictionRequest) String() string {
 func (*SetSendDhcpHostnameRestrictionRequest) ProtoMessage() {}
 
 func (x *SetSendDhcpHostnameRestrictionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[202]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[270]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8441,7 +11193,7 @@ func (x *SetSendDhcpHostnameRestrictionRequest) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use SetSendDhcpHostnameRestrictionRequest.ProtoReflect.Descriptor instead.
 func (*SetSendDhcpHostnameRestrictionRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{202}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{270}
 }
 
 func (x *SetSendDhcpHostnameRestrictionRequest) GetArg0() int32 {
@@ -8459,7 +11211,7 @@ type SetSendDhcpHostnameRestrictionResponse struct {
 
 func (x *SetSendDhcpHostnameRestrictionResponse) Reset() {
 	*x = SetSendDhcpHostnameRestrictionResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[203]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[271]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8471,7 +11223,7 @@ func (x *SetSendDhcpHostnameRestrictionResponse) String() string {
 func (*SetSendDhcpHostnameRestrictionResponse) ProtoMessage() {}
 
 func (x *SetSendDhcpHostnameRestrictionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[203]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[271]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8484,7 +11236,7 @@ func (x *SetSendDhcpHostnameRestrictionResponse) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use SetSendDhcpHostnameRestrictionResponse.ProtoReflect.Descriptor instead.
 func (*SetSendDhcpHostnameRestrictionResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{203}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{271}
 }
 
 type SetTdlsEnabled2Request struct {
@@ -8497,7 +11249,7 @@ type SetTdlsEnabled2Request struct {
 
 func (x *SetTdlsEnabled2Request) Reset() {
 	*x = SetTdlsEnabled2Request{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[204]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[272]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8509,7 +11261,7 @@ func (x *SetTdlsEnabled2Request) String() string {
 func (*SetTdlsEnabled2Request) ProtoMessage() {}
 
 func (x *SetTdlsEnabled2Request) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[204]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[272]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8522,7 +11274,7 @@ func (x *SetTdlsEnabled2Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetTdlsEnabled2Request.ProtoReflect.Descriptor instead.
 func (*SetTdlsEnabled2Request) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{204}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{272}
 }
 
 func (x *SetTdlsEnabled2Request) GetArg0() int64 {
@@ -8547,7 +11299,7 @@ type SetTdlsEnabled2Response struct {
 
 func (x *SetTdlsEnabled2Response) Reset() {
 	*x = SetTdlsEnabled2Response{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[205]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[273]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8559,7 +11311,7 @@ func (x *SetTdlsEnabled2Response) String() string {
 func (*SetTdlsEnabled2Response) ProtoMessage() {}
 
 func (x *SetTdlsEnabled2Response) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[205]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[273]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8572,7 +11324,7 @@ func (x *SetTdlsEnabled2Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetTdlsEnabled2Response.ProtoReflect.Descriptor instead.
 func (*SetTdlsEnabled2Response) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{205}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{273}
 }
 
 type SetTdlsEnabled4_1Request struct {
@@ -8587,7 +11339,7 @@ type SetTdlsEnabled4_1Request struct {
 
 func (x *SetTdlsEnabled4_1Request) Reset() {
 	*x = SetTdlsEnabled4_1Request{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[206]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[274]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8599,7 +11351,7 @@ func (x *SetTdlsEnabled4_1Request) String() string {
 func (*SetTdlsEnabled4_1Request) ProtoMessage() {}
 
 func (x *SetTdlsEnabled4_1Request) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[206]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[274]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8612,7 +11364,7 @@ func (x *SetTdlsEnabled4_1Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetTdlsEnabled4_1Request.ProtoReflect.Descriptor instead.
 func (*SetTdlsEnabled4_1Request) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{206}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{274}
 }
 
 func (x *SetTdlsEnabled4_1Request) GetArg0() int64 {
@@ -8651,7 +11403,7 @@ type SetTdlsEnabled4_1Response struct {
 
 func (x *SetTdlsEnabled4_1Response) Reset() {
 	*x = SetTdlsEnabled4_1Response{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[207]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[275]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8663,7 +11415,7 @@ func (x *SetTdlsEnabled4_1Response) String() string {
 func (*SetTdlsEnabled4_1Response) ProtoMessage() {}
 
 func (x *SetTdlsEnabled4_1Response) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[207]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[275]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8676,7 +11428,7 @@ func (x *SetTdlsEnabled4_1Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetTdlsEnabled4_1Response.ProtoReflect.Descriptor instead.
 func (*SetTdlsEnabled4_1Response) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{207}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{275}
 }
 
 type SetTdlsEnabledWithMacAddress2Request struct {
@@ -8689,7 +11441,7 @@ type SetTdlsEnabledWithMacAddress2Request struct {
 
 func (x *SetTdlsEnabledWithMacAddress2Request) Reset() {
 	*x = SetTdlsEnabledWithMacAddress2Request{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[208]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[276]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8701,7 +11453,7 @@ func (x *SetTdlsEnabledWithMacAddress2Request) String() string {
 func (*SetTdlsEnabledWithMacAddress2Request) ProtoMessage() {}
 
 func (x *SetTdlsEnabledWithMacAddress2Request) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[208]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[276]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8714,7 +11466,7 @@ func (x *SetTdlsEnabledWithMacAddress2Request) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use SetTdlsEnabledWithMacAddress2Request.ProtoReflect.Descriptor instead.
 func (*SetTdlsEnabledWithMacAddress2Request) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{208}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{276}
 }
 
 func (x *SetTdlsEnabledWithMacAddress2Request) GetArg0() string {
@@ -8739,7 +11491,7 @@ type SetTdlsEnabledWithMacAddress2Response struct {
 
 func (x *SetTdlsEnabledWithMacAddress2Response) Reset() {
 	*x = SetTdlsEnabledWithMacAddress2Response{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[209]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[277]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8751,7 +11503,7 @@ func (x *SetTdlsEnabledWithMacAddress2Response) String() string {
 func (*SetTdlsEnabledWithMacAddress2Response) ProtoMessage() {}
 
 func (x *SetTdlsEnabledWithMacAddress2Response) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[209]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[277]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8764,7 +11516,7 @@ func (x *SetTdlsEnabledWithMacAddress2Response) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use SetTdlsEnabledWithMacAddress2Response.ProtoReflect.Descriptor instead.
 func (*SetTdlsEnabledWithMacAddress2Response) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{209}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{277}
 }
 
 type SetTdlsEnabledWithMacAddress4_1Request struct {
@@ -8779,7 +11531,7 @@ type SetTdlsEnabledWithMacAddress4_1Request struct {
 
 func (x *SetTdlsEnabledWithMacAddress4_1Request) Reset() {
 	*x = SetTdlsEnabledWithMacAddress4_1Request{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[210]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[278]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8791,7 +11543,7 @@ func (x *SetTdlsEnabledWithMacAddress4_1Request) String() string {
 func (*SetTdlsEnabledWithMacAddress4_1Request) ProtoMessage() {}
 
 func (x *SetTdlsEnabledWithMacAddress4_1Request) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[210]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[278]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8804,7 +11556,7 @@ func (x *SetTdlsEnabledWithMacAddress4_1Request) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use SetTdlsEnabledWithMacAddress4_1Request.ProtoReflect.Descriptor instead.
 func (*SetTdlsEnabledWithMacAddress4_1Request) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{210}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{278}
 }
 
 func (x *SetTdlsEnabledWithMacAddress4_1Request) GetArg0() string {
@@ -8843,7 +11595,7 @@ type SetTdlsEnabledWithMacAddress4_1Response struct {
 
 func (x *SetTdlsEnabledWithMacAddress4_1Response) Reset() {
 	*x = SetTdlsEnabledWithMacAddress4_1Response{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[211]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[279]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8855,7 +11607,7 @@ func (x *SetTdlsEnabledWithMacAddress4_1Response) String() string {
 func (*SetTdlsEnabledWithMacAddress4_1Response) ProtoMessage() {}
 
 func (x *SetTdlsEnabledWithMacAddress4_1Response) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[211]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[279]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8868,7 +11620,7 @@ func (x *SetTdlsEnabledWithMacAddress4_1Response) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use SetTdlsEnabledWithMacAddress4_1Response.ProtoReflect.Descriptor instead.
 func (*SetTdlsEnabledWithMacAddress4_1Response) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{211}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{279}
 }
 
 type SetWifiEnabledRequest struct {
@@ -8880,7 +11632,7 @@ type SetWifiEnabledRequest struct {
 
 func (x *SetWifiEnabledRequest) Reset() {
 	*x = SetWifiEnabledRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[212]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[280]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8892,7 +11644,7 @@ func (x *SetWifiEnabledRequest) String() string {
 func (*SetWifiEnabledRequest) ProtoMessage() {}
 
 func (x *SetWifiEnabledRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[212]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[280]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8905,7 +11657,7 @@ func (x *SetWifiEnabledRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetWifiEnabledRequest.ProtoReflect.Descriptor instead.
 func (*SetWifiEnabledRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{212}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{280}
 }
 
 func (x *SetWifiEnabledRequest) GetArg0() bool {
@@ -8924,7 +11676,7 @@ type SetWifiEnabledResponse struct {
 
 func (x *SetWifiEnabledResponse) Reset() {
 	*x = SetWifiEnabledResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[213]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[281]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8936,7 +11688,7 @@ func (x *SetWifiEnabledResponse) String() string {
 func (*SetWifiEnabledResponse) ProtoMessage() {}
 
 func (x *SetWifiEnabledResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[213]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[281]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8949,7 +11701,7 @@ func (x *SetWifiEnabledResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetWifiEnabledResponse.ProtoReflect.Descriptor instead.
 func (*SetWifiEnabledResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{213}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{281}
 }
 
 func (x *SetWifiEnabledResponse) GetResult() bool {
@@ -8970,7 +11722,7 @@ type StartLocalOnlyHotspotWithConfigurationRequest struct {
 
 func (x *StartLocalOnlyHotspotWithConfigurationRequest) Reset() {
 	*x = StartLocalOnlyHotspotWithConfigurationRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[214]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[282]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8982,7 +11734,7 @@ func (x *StartLocalOnlyHotspotWithConfigurationRequest) String() string {
 func (*StartLocalOnlyHotspotWithConfigurationRequest) ProtoMessage() {}
 
 func (x *StartLocalOnlyHotspotWithConfigurationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[214]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[282]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8995,7 +11747,7 @@ func (x *StartLocalOnlyHotspotWithConfigurationRequest) ProtoReflect() protorefl
 
 // Deprecated: Use StartLocalOnlyHotspotWithConfigurationRequest.ProtoReflect.Descriptor instead.
 func (*StartLocalOnlyHotspotWithConfigurationRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{214}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{282}
 }
 
 func (x *StartLocalOnlyHotspotWithConfigurationRequest) GetArg0() int64 {
@@ -9027,7 +11779,7 @@ type StartLocalOnlyHotspotWithConfigurationResponse struct {
 
 func (x *StartLocalOnlyHotspotWithConfigurationResponse) Reset() {
 	*x = StartLocalOnlyHotspotWithConfigurationResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[215]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[283]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9039,7 +11791,7 @@ func (x *StartLocalOnlyHotspotWithConfigurationResponse) String() string {
 func (*StartLocalOnlyHotspotWithConfigurationResponse) ProtoMessage() {}
 
 func (x *StartLocalOnlyHotspotWithConfigurationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[215]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[283]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9052,7 +11804,7 @@ func (x *StartLocalOnlyHotspotWithConfigurationResponse) ProtoReflect() protoref
 
 // Deprecated: Use StartLocalOnlyHotspotWithConfigurationResponse.ProtoReflect.Descriptor instead.
 func (*StartLocalOnlyHotspotWithConfigurationResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{215}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{283}
 }
 
 type StartScanRequest struct {
@@ -9063,7 +11815,7 @@ type StartScanRequest struct {
 
 func (x *StartScanRequest) Reset() {
 	*x = StartScanRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[216]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[284]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9075,7 +11827,7 @@ func (x *StartScanRequest) String() string {
 func (*StartScanRequest) ProtoMessage() {}
 
 func (x *StartScanRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[216]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[284]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9088,7 +11840,7 @@ func (x *StartScanRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartScanRequest.ProtoReflect.Descriptor instead.
 func (*StartScanRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{216}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{284}
 }
 
 type StartScanResponse struct {
@@ -9100,7 +11852,7 @@ type StartScanResponse struct {
 
 func (x *StartScanResponse) Reset() {
 	*x = StartScanResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[217]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[285]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9112,7 +11864,7 @@ func (x *StartScanResponse) String() string {
 func (*StartScanResponse) ProtoMessage() {}
 
 func (x *StartScanResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[217]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[285]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9125,7 +11877,7 @@ func (x *StartScanResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartScanResponse.ProtoReflect.Descriptor instead.
 func (*StartScanResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{217}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{285}
 }
 
 func (x *StartScanResponse) GetResult() bool {
@@ -9145,7 +11897,7 @@ type StartWpsRequest struct {
 
 func (x *StartWpsRequest) Reset() {
 	*x = StartWpsRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[218]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[286]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9157,7 +11909,7 @@ func (x *StartWpsRequest) String() string {
 func (*StartWpsRequest) ProtoMessage() {}
 
 func (x *StartWpsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[218]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[286]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9170,7 +11922,7 @@ func (x *StartWpsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartWpsRequest.ProtoReflect.Descriptor instead.
 func (*StartWpsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{218}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{286}
 }
 
 func (x *StartWpsRequest) GetArg0() int64 {
@@ -9195,7 +11947,7 @@ type StartWpsResponse struct {
 
 func (x *StartWpsResponse) Reset() {
 	*x = StartWpsResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[219]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[287]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9207,7 +11959,7 @@ func (x *StartWpsResponse) String() string {
 func (*StartWpsResponse) ProtoMessage() {}
 
 func (x *StartWpsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[219]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[287]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9220,7 +11972,7 @@ func (x *StartWpsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartWpsResponse.ProtoReflect.Descriptor instead.
 func (*StartWpsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{219}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{287}
 }
 
 type UnregisterScanResultsCallbackRequest struct {
@@ -9232,7 +11984,7 @@ type UnregisterScanResultsCallbackRequest struct {
 
 func (x *UnregisterScanResultsCallbackRequest) Reset() {
 	*x = UnregisterScanResultsCallbackRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[220]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[288]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9244,7 +11996,7 @@ func (x *UnregisterScanResultsCallbackRequest) String() string {
 func (*UnregisterScanResultsCallbackRequest) ProtoMessage() {}
 
 func (x *UnregisterScanResultsCallbackRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[220]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[288]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9257,7 +12009,7 @@ func (x *UnregisterScanResultsCallbackRequest) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use UnregisterScanResultsCallbackRequest.ProtoReflect.Descriptor instead.
 func (*UnregisterScanResultsCallbackRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{220}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{288}
 }
 
 func (x *UnregisterScanResultsCallbackRequest) GetArg0() int64 {
@@ -9275,7 +12027,7 @@ type UnregisterScanResultsCallbackResponse struct {
 
 func (x *UnregisterScanResultsCallbackResponse) Reset() {
 	*x = UnregisterScanResultsCallbackResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[221]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[289]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9287,7 +12039,7 @@ func (x *UnregisterScanResultsCallbackResponse) String() string {
 func (*UnregisterScanResultsCallbackResponse) ProtoMessage() {}
 
 func (x *UnregisterScanResultsCallbackResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[221]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[289]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9300,7 +12052,7 @@ func (x *UnregisterScanResultsCallbackResponse) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use UnregisterScanResultsCallbackResponse.ProtoReflect.Descriptor instead.
 func (*UnregisterScanResultsCallbackResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{221}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{289}
 }
 
 type UnregisterSubsystemRestartTrackingCallbackRequest struct {
@@ -9312,7 +12064,7 @@ type UnregisterSubsystemRestartTrackingCallbackRequest struct {
 
 func (x *UnregisterSubsystemRestartTrackingCallbackRequest) Reset() {
 	*x = UnregisterSubsystemRestartTrackingCallbackRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[222]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[290]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9324,7 +12076,7 @@ func (x *UnregisterSubsystemRestartTrackingCallbackRequest) String() string {
 func (*UnregisterSubsystemRestartTrackingCallbackRequest) ProtoMessage() {}
 
 func (x *UnregisterSubsystemRestartTrackingCallbackRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[222]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[290]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9337,7 +12089,7 @@ func (x *UnregisterSubsystemRestartTrackingCallbackRequest) ProtoReflect() proto
 
 // Deprecated: Use UnregisterSubsystemRestartTrackingCallbackRequest.ProtoReflect.Descriptor instead.
 func (*UnregisterSubsystemRestartTrackingCallbackRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{222}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{290}
 }
 
 func (x *UnregisterSubsystemRestartTrackingCallbackRequest) GetArg0() int64 {
@@ -9355,7 +12107,7 @@ type UnregisterSubsystemRestartTrackingCallbackResponse struct {
 
 func (x *UnregisterSubsystemRestartTrackingCallbackResponse) Reset() {
 	*x = UnregisterSubsystemRestartTrackingCallbackResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[223]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[291]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9367,7 +12119,7 @@ func (x *UnregisterSubsystemRestartTrackingCallbackResponse) String() string {
 func (*UnregisterSubsystemRestartTrackingCallbackResponse) ProtoMessage() {}
 
 func (x *UnregisterSubsystemRestartTrackingCallbackResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[223]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[291]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9380,7 +12132,7 @@ func (x *UnregisterSubsystemRestartTrackingCallbackResponse) ProtoReflect() prot
 
 // Deprecated: Use UnregisterSubsystemRestartTrackingCallbackResponse.ProtoReflect.Descriptor instead.
 func (*UnregisterSubsystemRestartTrackingCallbackResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{223}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{291}
 }
 
 type UpdateNetworkRequest struct {
@@ -9392,7 +12144,7 @@ type UpdateNetworkRequest struct {
 
 func (x *UpdateNetworkRequest) Reset() {
 	*x = UpdateNetworkRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[224]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[292]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9404,7 +12156,7 @@ func (x *UpdateNetworkRequest) String() string {
 func (*UpdateNetworkRequest) ProtoMessage() {}
 
 func (x *UpdateNetworkRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[224]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[292]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9417,7 +12169,7 @@ func (x *UpdateNetworkRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateNetworkRequest.ProtoReflect.Descriptor instead.
 func (*UpdateNetworkRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{224}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{292}
 }
 
 func (x *UpdateNetworkRequest) GetArg0() int64 {
@@ -9436,7 +12188,7 @@ type UpdateNetworkResponse struct {
 
 func (x *UpdateNetworkResponse) Reset() {
 	*x = UpdateNetworkResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[225]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[293]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9448,7 +12200,7 @@ func (x *UpdateNetworkResponse) String() string {
 func (*UpdateNetworkResponse) ProtoMessage() {}
 
 func (x *UpdateNetworkResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[225]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[293]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9461,7 +12213,7 @@ func (x *UpdateNetworkResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateNetworkResponse.ProtoReflect.Descriptor instead.
 func (*UpdateNetworkResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{225}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{293}
 }
 
 func (x *UpdateNetworkResponse) GetResult() int32 {
@@ -9480,7 +12232,7 @@ type ValidateSoftApConfigurationRequest struct {
 
 func (x *ValidateSoftApConfigurationRequest) Reset() {
 	*x = ValidateSoftApConfigurationRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[226]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[294]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9492,7 +12244,7 @@ func (x *ValidateSoftApConfigurationRequest) String() string {
 func (*ValidateSoftApConfigurationRequest) ProtoMessage() {}
 
 func (x *ValidateSoftApConfigurationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[226]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[294]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9505,7 +12257,7 @@ func (x *ValidateSoftApConfigurationRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ValidateSoftApConfigurationRequest.ProtoReflect.Descriptor instead.
 func (*ValidateSoftApConfigurationRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{226}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{294}
 }
 
 func (x *ValidateSoftApConfigurationRequest) GetArg0() int64 {
@@ -9524,7 +12276,7 @@ type ValidateSoftApConfigurationResponse struct {
 
 func (x *ValidateSoftApConfigurationResponse) Reset() {
 	*x = ValidateSoftApConfigurationResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[227]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[295]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9536,7 +12288,7 @@ func (x *ValidateSoftApConfigurationResponse) String() string {
 func (*ValidateSoftApConfigurationResponse) ProtoMessage() {}
 
 func (x *ValidateSoftApConfigurationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[227]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[295]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9549,7 +12301,7 @@ func (x *ValidateSoftApConfigurationResponse) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use ValidateSoftApConfigurationResponse.ProtoReflect.Descriptor instead.
 func (*ValidateSoftApConfigurationResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{227}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{295}
 }
 
 func (x *ValidateSoftApConfigurationResponse) GetResult() bool {
@@ -9569,7 +12321,7 @@ type CalculateSignalLevel2_1Request struct {
 
 func (x *CalculateSignalLevel2_1Request) Reset() {
 	*x = CalculateSignalLevel2_1Request{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[228]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[296]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9581,7 +12333,7 @@ func (x *CalculateSignalLevel2_1Request) String() string {
 func (*CalculateSignalLevel2_1Request) ProtoMessage() {}
 
 func (x *CalculateSignalLevel2_1Request) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[228]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[296]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9594,7 +12346,7 @@ func (x *CalculateSignalLevel2_1Request) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CalculateSignalLevel2_1Request.ProtoReflect.Descriptor instead.
 func (*CalculateSignalLevel2_1Request) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{228}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{296}
 }
 
 func (x *CalculateSignalLevel2_1Request) GetArg0() int32 {
@@ -9620,7 +12372,7 @@ type CalculateSignalLevel2_1Response struct {
 
 func (x *CalculateSignalLevel2_1Response) Reset() {
 	*x = CalculateSignalLevel2_1Response{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[229]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[297]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9632,7 +12384,7 @@ func (x *CalculateSignalLevel2_1Response) String() string {
 func (*CalculateSignalLevel2_1Response) ProtoMessage() {}
 
 func (x *CalculateSignalLevel2_1Response) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[229]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[297]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9645,7 +12397,7 @@ func (x *CalculateSignalLevel2_1Response) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CalculateSignalLevel2_1Response.ProtoReflect.Descriptor instead.
 func (*CalculateSignalLevel2_1Response) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{229}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{297}
 }
 
 func (x *CalculateSignalLevel2_1Response) GetResult() int32 {
@@ -9665,7 +12417,7 @@ type CompareSignalLevelRequest struct {
 
 func (x *CompareSignalLevelRequest) Reset() {
 	*x = CompareSignalLevelRequest{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[230]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[298]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9677,7 +12429,7 @@ func (x *CompareSignalLevelRequest) String() string {
 func (*CompareSignalLevelRequest) ProtoMessage() {}
 
 func (x *CompareSignalLevelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[230]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[298]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9690,7 +12442,7 @@ func (x *CompareSignalLevelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CompareSignalLevelRequest.ProtoReflect.Descriptor instead.
 func (*CompareSignalLevelRequest) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{230}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{298}
 }
 
 func (x *CompareSignalLevelRequest) GetArg0() int32 {
@@ -9716,7 +12468,7 @@ type CompareSignalLevelResponse struct {
 
 func (x *CompareSignalLevelResponse) Reset() {
 	*x = CompareSignalLevelResponse{}
-	mi := &file_proto_wifi_wifi_proto_msgTypes[231]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[299]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9728,7 +12480,7 @@ func (x *CompareSignalLevelResponse) String() string {
 func (*CompareSignalLevelResponse) ProtoMessage() {}
 
 func (x *CompareSignalLevelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_wifi_wifi_proto_msgTypes[231]
+	mi := &file_proto_wifi_wifi_proto_msgTypes[299]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9741,10 +12493,834 @@ func (x *CompareSignalLevelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CompareSignalLevelResponse.ProtoReflect.Descriptor instead.
 func (*CompareSignalLevelResponse) Descriptor() ([]byte, []int) {
-	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{231}
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{299}
 }
 
 func (x *CompareSignalLevelResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetSecurityTypesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSecurityTypesRequest) Reset() {
+	*x = GetSecurityTypesRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[300]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSecurityTypesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSecurityTypesRequest) ProtoMessage() {}
+
+func (x *GetSecurityTypesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[300]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSecurityTypesRequest.ProtoReflect.Descriptor instead.
+func (*GetSecurityTypesRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{300}
+}
+
+type GetSecurityTypesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSecurityTypesResponse) Reset() {
+	*x = GetSecurityTypesResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[301]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSecurityTypesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSecurityTypesResponse) ProtoMessage() {}
+
+func (x *GetSecurityTypesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[301]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSecurityTypesResponse.ProtoReflect.Descriptor instead.
+func (*GetSecurityTypesResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{301}
+}
+
+func (x *GetSecurityTypesResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type GetWifiSsidRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetWifiSsidRequest) Reset() {
+	*x = GetWifiSsidRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[302]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetWifiSsidRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWifiSsidRequest) ProtoMessage() {}
+
+func (x *GetWifiSsidRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[302]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWifiSsidRequest.ProtoReflect.Descriptor instead.
+func (*GetWifiSsidRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{302}
+}
+
+type GetWifiSsidResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int64                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetWifiSsidResponse) Reset() {
+	*x = GetWifiSsidResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[303]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetWifiSsidResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWifiSsidResponse) ProtoMessage() {}
+
+func (x *GetWifiSsidResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[303]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWifiSsidResponse.ProtoReflect.Descriptor instead.
+func (*GetWifiSsidResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{303}
+}
+
+func (x *GetWifiSsidResponse) GetResult() int64 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type Is80211AzNtbResponderRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Is80211AzNtbResponderRequest) Reset() {
+	*x = Is80211AzNtbResponderRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[304]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Is80211AzNtbResponderRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Is80211AzNtbResponderRequest) ProtoMessage() {}
+
+func (x *Is80211AzNtbResponderRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[304]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Is80211AzNtbResponderRequest.ProtoReflect.Descriptor instead.
+func (*Is80211AzNtbResponderRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{304}
+}
+
+type Is80211AzNtbResponderResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Is80211AzNtbResponderResponse) Reset() {
+	*x = Is80211AzNtbResponderResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[305]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Is80211AzNtbResponderResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Is80211AzNtbResponderResponse) ProtoMessage() {}
+
+func (x *Is80211AzNtbResponderResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[305]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Is80211AzNtbResponderResponse.ProtoReflect.Descriptor instead.
+func (*Is80211AzNtbResponderResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{305}
+}
+
+func (x *Is80211AzNtbResponderResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type Is80211McResponderRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Is80211McResponderRequest) Reset() {
+	*x = Is80211McResponderRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[306]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Is80211McResponderRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Is80211McResponderRequest) ProtoMessage() {}
+
+func (x *Is80211McResponderRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[306]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Is80211McResponderRequest.ProtoReflect.Descriptor instead.
+func (*Is80211McResponderRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{306}
+}
+
+type Is80211McResponderResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Is80211McResponderResponse) Reset() {
+	*x = Is80211McResponderResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[307]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Is80211McResponderResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Is80211McResponderResponse) ProtoMessage() {}
+
+func (x *Is80211McResponderResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[307]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Is80211McResponderResponse.ProtoReflect.Descriptor instead.
+func (*Is80211McResponderResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{307}
+}
+
+func (x *Is80211McResponderResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsPasspointNetworkRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsPasspointNetworkRequest) Reset() {
+	*x = IsPasspointNetworkRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[308]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsPasspointNetworkRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsPasspointNetworkRequest) ProtoMessage() {}
+
+func (x *IsPasspointNetworkRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[308]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsPasspointNetworkRequest.ProtoReflect.Descriptor instead.
+func (*IsPasspointNetworkRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{308}
+}
+
+type IsPasspointNetworkResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsPasspointNetworkResponse) Reset() {
+	*x = IsPasspointNetworkResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[309]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsPasspointNetworkResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsPasspointNetworkResponse) ProtoMessage() {}
+
+func (x *IsPasspointNetworkResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[309]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsPasspointNetworkResponse.ProtoReflect.Descriptor instead.
+func (*IsPasspointNetworkResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{309}
+}
+
+func (x *IsPasspointNetworkResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsRangingFrameProtectionRequiredRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsRangingFrameProtectionRequiredRequest) Reset() {
+	*x = IsRangingFrameProtectionRequiredRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[310]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsRangingFrameProtectionRequiredRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsRangingFrameProtectionRequiredRequest) ProtoMessage() {}
+
+func (x *IsRangingFrameProtectionRequiredRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[310]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsRangingFrameProtectionRequiredRequest.ProtoReflect.Descriptor instead.
+func (*IsRangingFrameProtectionRequiredRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{310}
+}
+
+type IsRangingFrameProtectionRequiredResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsRangingFrameProtectionRequiredResponse) Reset() {
+	*x = IsRangingFrameProtectionRequiredResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[311]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsRangingFrameProtectionRequiredResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsRangingFrameProtectionRequiredResponse) ProtoMessage() {}
+
+func (x *IsRangingFrameProtectionRequiredResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[311]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsRangingFrameProtectionRequiredResponse.ProtoReflect.Descriptor instead.
+func (*IsRangingFrameProtectionRequiredResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{311}
+}
+
+func (x *IsRangingFrameProtectionRequiredResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsSecureHeLtfSupportedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsSecureHeLtfSupportedRequest) Reset() {
+	*x = IsSecureHeLtfSupportedRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[312]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsSecureHeLtfSupportedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsSecureHeLtfSupportedRequest) ProtoMessage() {}
+
+func (x *IsSecureHeLtfSupportedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[312]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsSecureHeLtfSupportedRequest.ProtoReflect.Descriptor instead.
+func (*IsSecureHeLtfSupportedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{312}
+}
+
+type IsSecureHeLtfSupportedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsSecureHeLtfSupportedResponse) Reset() {
+	*x = IsSecureHeLtfSupportedResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[313]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsSecureHeLtfSupportedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsSecureHeLtfSupportedResponse) ProtoMessage() {}
+
+func (x *IsSecureHeLtfSupportedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[313]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsSecureHeLtfSupportedResponse.ProtoReflect.Descriptor instead.
+func (*IsSecureHeLtfSupportedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{313}
+}
+
+func (x *IsSecureHeLtfSupportedResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type IsTwtResponderRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsTwtResponderRequest) Reset() {
+	*x = IsTwtResponderRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[314]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsTwtResponderRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsTwtResponderRequest) ProtoMessage() {}
+
+func (x *IsTwtResponderRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[314]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsTwtResponderRequest.ProtoReflect.Descriptor instead.
+func (*IsTwtResponderRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{314}
+}
+
+type IsTwtResponderResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        bool                   `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *IsTwtResponderResponse) Reset() {
+	*x = IsTwtResponderResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[315]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IsTwtResponderResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IsTwtResponderResponse) ProtoMessage() {}
+
+func (x *IsTwtResponderResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[315]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IsTwtResponderResponse.ProtoReflect.Descriptor instead.
+func (*IsTwtResponderResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{315}
+}
+
+func (x *IsTwtResponderResponse) GetResult() bool {
+	if x != nil {
+		return x.Result
+	}
+	return false
+}
+
+type ConvertChannelToFrequencyMhzIfSupportedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	Arg1          int32                  `protobuf:"varint,2,opt,name=arg1,proto3" json:"arg1,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConvertChannelToFrequencyMhzIfSupportedRequest) Reset() {
+	*x = ConvertChannelToFrequencyMhzIfSupportedRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[316]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConvertChannelToFrequencyMhzIfSupportedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConvertChannelToFrequencyMhzIfSupportedRequest) ProtoMessage() {}
+
+func (x *ConvertChannelToFrequencyMhzIfSupportedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[316]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConvertChannelToFrequencyMhzIfSupportedRequest.ProtoReflect.Descriptor instead.
+func (*ConvertChannelToFrequencyMhzIfSupportedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{316}
+}
+
+func (x *ConvertChannelToFrequencyMhzIfSupportedRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+func (x *ConvertChannelToFrequencyMhzIfSupportedRequest) GetArg1() int32 {
+	if x != nil {
+		return x.Arg1
+	}
+	return 0
+}
+
+type ConvertChannelToFrequencyMhzIfSupportedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConvertChannelToFrequencyMhzIfSupportedResponse) Reset() {
+	*x = ConvertChannelToFrequencyMhzIfSupportedResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[317]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConvertChannelToFrequencyMhzIfSupportedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConvertChannelToFrequencyMhzIfSupportedResponse) ProtoMessage() {}
+
+func (x *ConvertChannelToFrequencyMhzIfSupportedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[317]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConvertChannelToFrequencyMhzIfSupportedResponse.ProtoReflect.Descriptor instead.
+func (*ConvertChannelToFrequencyMhzIfSupportedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{317}
+}
+
+func (x *ConvertChannelToFrequencyMhzIfSupportedResponse) GetResult() int32 {
+	if x != nil {
+		return x.Result
+	}
+	return 0
+}
+
+type ConvertFrequencyMhzToChannelIfSupportedRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Arg0          int32                  `protobuf:"varint,1,opt,name=arg0,proto3" json:"arg0,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConvertFrequencyMhzToChannelIfSupportedRequest) Reset() {
+	*x = ConvertFrequencyMhzToChannelIfSupportedRequest{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[318]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConvertFrequencyMhzToChannelIfSupportedRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConvertFrequencyMhzToChannelIfSupportedRequest) ProtoMessage() {}
+
+func (x *ConvertFrequencyMhzToChannelIfSupportedRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[318]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConvertFrequencyMhzToChannelIfSupportedRequest.ProtoReflect.Descriptor instead.
+func (*ConvertFrequencyMhzToChannelIfSupportedRequest) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{318}
+}
+
+func (x *ConvertFrequencyMhzToChannelIfSupportedRequest) GetArg0() int32 {
+	if x != nil {
+		return x.Arg0
+	}
+	return 0
+}
+
+type ConvertFrequencyMhzToChannelIfSupportedResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Result        int32                  `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConvertFrequencyMhzToChannelIfSupportedResponse) Reset() {
+	*x = ConvertFrequencyMhzToChannelIfSupportedResponse{}
+	mi := &file_proto_wifi_wifi_proto_msgTypes[319]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConvertFrequencyMhzToChannelIfSupportedResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConvertFrequencyMhzToChannelIfSupportedResponse) ProtoMessage() {}
+
+func (x *ConvertFrequencyMhzToChannelIfSupportedResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wifi_wifi_proto_msgTypes[319]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConvertFrequencyMhzToChannelIfSupportedResponse.ProtoReflect.Descriptor instead.
+func (*ConvertFrequencyMhzToChannelIfSupportedResponse) Descriptor() ([]byte, []int) {
+	return file_proto_wifi_wifi_proto_rawDescGZIP(), []int{319}
+}
+
+func (x *ConvertFrequencyMhzToChannelIfSupportedResponse) GetResult() int32 {
 	if x != nil {
 		return x.Result
 	}
@@ -9755,7 +13331,113 @@ var File_proto_wifi_wifi_proto protoreflect.FileDescriptor
 
 const file_proto_wifi_wifi_proto_rawDesc = "" +
 	"\n" +
-	"\x15proto/wifi/wifi.proto\x12\x04wifi\"V\n" +
+	"\x15proto/wifi/wifi.proto\x12\x04wifi\"\x19\n" +
+	"\x17DescribeContentsRequest\"2\n" +
+	"\x18DescribeContentsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"#\n" +
+	"\rEqualsRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"(\n" +
+	"\x0eEqualsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x1e\n" +
+	"\x1cGetAffiliatedMloLinksRequest\"7\n" +
+	"\x1dGetAffiliatedMloLinksResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x1b\n" +
+	"\x19GetApMldMacAddressRequest\"4\n" +
+	"\x1aGetApMldMacAddressResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x17\n" +
+	"\x15GetApMloLinkIdRequest\"0\n" +
+	"\x16GetApMloLinkIdResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\" \n" +
+	"\x1eGetApplicableRedactionsRequest\"9\n" +
+	"\x1fGetApplicableRedactionsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x1e\n" +
+	"\x1cGetAssociatedMloLinksRequest\"7\n" +
+	"\x1dGetAssociatedMloLinksResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x11\n" +
+	"\x0fGetBSSIDRequest\"*\n" +
+	"\x10GetBSSIDResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x1f\n" +
+	"\x1dGetCurrentSecurityTypeRequest\"8\n" +
+	"\x1eGetCurrentSecurityTypeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x15\n" +
+	"\x13GetFrequencyRequest\".\n" +
+	"\x14GetFrequencyResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x16\n" +
+	"\x14GetHiddenSSIDRequest\"/\n" +
+	"\x15GetHiddenSSIDResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x1f\n" +
+	"\x1dGetInformationElementsRequest\"8\n" +
+	"\x1eGetInformationElementsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x15\n" +
+	"\x13GetIpAddressRequest\".\n" +
+	"\x14GetIpAddressResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x15\n" +
+	"\x13GetLinkSpeedRequest\".\n" +
+	"\x14GetLinkSpeedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x16\n" +
+	"\x14GetMacAddressRequest\"/\n" +
+	"\x15GetMacAddressResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"'\n" +
+	"%GetMaxSupportedRxLinkSpeedMbpsRequest\"@\n" +
+	"&GetMaxSupportedRxLinkSpeedMbpsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"'\n" +
+	"%GetMaxSupportedTxLinkSpeedMbpsRequest\"@\n" +
+	"&GetMaxSupportedTxLinkSpeedMbpsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x15\n" +
+	"\x13GetNetworkIdRequest\".\n" +
+	"\x14GetNetworkIdResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x19\n" +
+	"\x17GetPasspointFqdnRequest\"2\n" +
+	"\x18GetPasspointFqdnResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\")\n" +
+	"'GetPasspointProviderFriendlyNameRequest\"B\n" +
+	"(GetPasspointProviderFriendlyNameResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x1d\n" +
+	"\x1bGetPasspointUniqueIdRequest\"6\n" +
+	"\x1cGetPasspointUniqueIdResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x10\n" +
+	"\x0eGetRssiRequest\")\n" +
+	"\x0fGetRssiResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x1b\n" +
+	"\x19GetRxLinkSpeedMbpsRequest\"4\n" +
+	"\x1aGetRxLinkSpeedMbpsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x10\n" +
+	"\x0eGetSSIDRequest\")\n" +
+	"\x0fGetSSIDResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\"\x1a\n" +
+	"\x18GetSubscriptionIdRequest\"3\n" +
+	"\x19GetSubscriptionIdResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x1b\n" +
+	"\x19GetSupplicantStateRequest\"4\n" +
+	"\x1aGetSupplicantStateResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x1b\n" +
+	"\x19GetTxLinkSpeedMbpsRequest\"4\n" +
+	"\x1aGetTxLinkSpeedMbpsResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x18\n" +
+	"\x16GetWifiStandardRequest\"1\n" +
+	"\x17GetWifiStandardResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x11\n" +
+	"\x0fHashCodeRequest\"*\n" +
+	"\x10HashCodeResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x15\n" +
+	"\x13IsRestrictedRequest\".\n" +
+	"\x14IsRestrictedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"%\n" +
+	"\x0fMakeCopyRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"*\n" +
+	"\x10MakeCopyResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x11\n" +
+	"\x0fToStringRequest\"*\n" +
+	"\x10ToStringResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\tR\x06result\">\n" +
+	"\x14WriteToParcelRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\"\x17\n" +
+	"\x15WriteToParcelResponse\"/\n" +
+	"\x19GetDetailedStateOfRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\"4\n" +
+	"\x1aGetDetailedStateOfResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"V\n" +
 	",AddLocalOnlyConnectionFailureListenerRequest\x12\x12\n" +
 	"\x04arg0\x18\x01 \x01(\x03R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x03R\x04arg1\"/\n" +
@@ -10159,7 +13841,75 @@ const file_proto_wifi_wifi_proto_rawDesc = "" +
 	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
 	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\"4\n" +
 	"\x1aCompareSignalLevelResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x05R\x06result2\xfeb\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"\x19\n" +
+	"\x17GetSecurityTypesRequest\"2\n" +
+	"\x18GetSecurityTypesResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x14\n" +
+	"\x12GetWifiSsidRequest\"-\n" +
+	"\x13GetWifiSsidResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x03R\x06result\"\x1e\n" +
+	"\x1cIs80211azNtbResponderRequest\"7\n" +
+	"\x1dIs80211azNtbResponderResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x1b\n" +
+	"\x19Is80211mcResponderRequest\"4\n" +
+	"\x1aIs80211mcResponderResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x1b\n" +
+	"\x19IsPasspointNetworkRequest\"4\n" +
+	"\x1aIsPasspointNetworkResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\")\n" +
+	"'IsRangingFrameProtectionRequiredRequest\"B\n" +
+	"(IsRangingFrameProtectionRequiredResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x1f\n" +
+	"\x1dIsSecureHeLtfSupportedRequest\"8\n" +
+	"\x1eIsSecureHeLtfSupportedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"\x17\n" +
+	"\x15IsTwtResponderRequest\"0\n" +
+	"\x16IsTwtResponderResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\bR\x06result\"X\n" +
+	".ConvertChannelToFrequencyMhzIfSupportedRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\x12\x12\n" +
+	"\x04arg1\x18\x02 \x01(\x05R\x04arg1\"I\n" +
+	"/ConvertChannelToFrequencyMhzIfSupportedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result\"D\n" +
+	".ConvertFrequencyMhzToChannelIfSupportedRequest\x12\x12\n" +
+	"\x04arg0\x18\x01 \x01(\x05R\x04arg0\"I\n" +
+	"/ConvertFrequencyMhzToChannelIfSupportedResponse\x12\x16\n" +
+	"\x06result\x18\x01 \x01(\x05R\x06result2\x8c\x16\n" +
+	"\x0fWifiInfoService\x12Q\n" +
+	"\x10DescribeContents\x12\x1d.wifi.DescribeContentsRequest\x1a\x1e.wifi.DescribeContentsResponse\x123\n" +
+	"\x06Equals\x12\x13.wifi.EqualsRequest\x1a\x14.wifi.EqualsResponse\x12`\n" +
+	"\x15GetAffiliatedMloLinks\x12\".wifi.GetAffiliatedMloLinksRequest\x1a#.wifi.GetAffiliatedMloLinksResponse\x12W\n" +
+	"\x12GetApMldMacAddress\x12\x1f.wifi.GetApMldMacAddressRequest\x1a .wifi.GetApMldMacAddressResponse\x12K\n" +
+	"\x0eGetApMloLinkId\x12\x1b.wifi.GetApMloLinkIdRequest\x1a\x1c.wifi.GetApMloLinkIdResponse\x12f\n" +
+	"\x17GetApplicableRedactions\x12$.wifi.GetApplicableRedactionsRequest\x1a%.wifi.GetApplicableRedactionsResponse\x12`\n" +
+	"\x15GetAssociatedMloLinks\x12\".wifi.GetAssociatedMloLinksRequest\x1a#.wifi.GetAssociatedMloLinksResponse\x129\n" +
+	"\bGetBSSID\x12\x15.wifi.GetBSSIDRequest\x1a\x16.wifi.GetBSSIDResponse\x12c\n" +
+	"\x16GetCurrentSecurityType\x12#.wifi.GetCurrentSecurityTypeRequest\x1a$.wifi.GetCurrentSecurityTypeResponse\x12E\n" +
+	"\fGetFrequency\x12\x19.wifi.GetFrequencyRequest\x1a\x1a.wifi.GetFrequencyResponse\x12H\n" +
+	"\rGetHiddenSSID\x12\x1a.wifi.GetHiddenSSIDRequest\x1a\x1b.wifi.GetHiddenSSIDResponse\x12c\n" +
+	"\x16GetInformationElements\x12#.wifi.GetInformationElementsRequest\x1a$.wifi.GetInformationElementsResponse\x12E\n" +
+	"\fGetIpAddress\x12\x19.wifi.GetIpAddressRequest\x1a\x1a.wifi.GetIpAddressResponse\x12E\n" +
+	"\fGetLinkSpeed\x12\x19.wifi.GetLinkSpeedRequest\x1a\x1a.wifi.GetLinkSpeedResponse\x12H\n" +
+	"\rGetMacAddress\x12\x1a.wifi.GetMacAddressRequest\x1a\x1b.wifi.GetMacAddressResponse\x12{\n" +
+	"\x1eGetMaxSupportedRxLinkSpeedMbps\x12+.wifi.GetMaxSupportedRxLinkSpeedMbpsRequest\x1a,.wifi.GetMaxSupportedRxLinkSpeedMbpsResponse\x12{\n" +
+	"\x1eGetMaxSupportedTxLinkSpeedMbps\x12+.wifi.GetMaxSupportedTxLinkSpeedMbpsRequest\x1a,.wifi.GetMaxSupportedTxLinkSpeedMbpsResponse\x12E\n" +
+	"\fGetNetworkId\x12\x19.wifi.GetNetworkIdRequest\x1a\x1a.wifi.GetNetworkIdResponse\x12Q\n" +
+	"\x10GetPasspointFqdn\x12\x1d.wifi.GetPasspointFqdnRequest\x1a\x1e.wifi.GetPasspointFqdnResponse\x12\x81\x01\n" +
+	" GetPasspointProviderFriendlyName\x12-.wifi.GetPasspointProviderFriendlyNameRequest\x1a..wifi.GetPasspointProviderFriendlyNameResponse\x12]\n" +
+	"\x14GetPasspointUniqueId\x12!.wifi.GetPasspointUniqueIdRequest\x1a\".wifi.GetPasspointUniqueIdResponse\x126\n" +
+	"\aGetRssi\x12\x14.wifi.GetRssiRequest\x1a\x15.wifi.GetRssiResponse\x12W\n" +
+	"\x12GetRxLinkSpeedMbps\x12\x1f.wifi.GetRxLinkSpeedMbpsRequest\x1a .wifi.GetRxLinkSpeedMbpsResponse\x126\n" +
+	"\aGetSSID\x12\x14.wifi.GetSSIDRequest\x1a\x15.wifi.GetSSIDResponse\x12T\n" +
+	"\x11GetSubscriptionId\x12\x1e.wifi.GetSubscriptionIdRequest\x1a\x1f.wifi.GetSubscriptionIdResponse\x12W\n" +
+	"\x12GetSupplicantState\x12\x1f.wifi.GetSupplicantStateRequest\x1a .wifi.GetSupplicantStateResponse\x12W\n" +
+	"\x12GetTxLinkSpeedMbps\x12\x1f.wifi.GetTxLinkSpeedMbpsRequest\x1a .wifi.GetTxLinkSpeedMbpsResponse\x12N\n" +
+	"\x0fGetWifiStandard\x12\x1c.wifi.GetWifiStandardRequest\x1a\x1d.wifi.GetWifiStandardResponse\x129\n" +
+	"\bHashCode\x12\x15.wifi.HashCodeRequest\x1a\x16.wifi.HashCodeResponse\x12E\n" +
+	"\fIsRestricted\x12\x19.wifi.IsRestrictedRequest\x1a\x1a.wifi.IsRestrictedResponse\x129\n" +
+	"\bMakeCopy\x12\x15.wifi.MakeCopyRequest\x1a\x16.wifi.MakeCopyResponse\x129\n" +
+	"\bToString\x12\x15.wifi.ToStringRequest\x1a\x16.wifi.ToStringResponse\x12H\n" +
+	"\rWriteToParcel\x12\x1a.wifi.WriteToParcelRequest\x1a\x1b.wifi.WriteToParcelResponse\x12W\n" +
+	"\x12GetDetailedStateOf\x12\x1f.wifi.GetDetailedStateOfRequest\x1a .wifi.GetDetailedStateOfResponse2\xfeb\n" +
 	"\x12WifiManagerService\x12\x90\x01\n" +
 	"%AddLocalOnlyConnectionFailureListener\x122.wifi.AddLocalOnlyConnectionFailureListenerRequest\x1a3.wifi.AddLocalOnlyConnectionFailureListenerResponse\x12?\n" +
 	"\n" +
@@ -10278,7 +14028,26 @@ const file_proto_wifi_wifi_proto_rawDesc = "" +
 	"\rUpdateNetwork\x12\x1a.wifi.UpdateNetworkRequest\x1a\x1b.wifi.UpdateNetworkResponse\x12r\n" +
 	"\x1bValidateSoftApConfiguration\x12(.wifi.ValidateSoftApConfigurationRequest\x1a).wifi.ValidateSoftApConfigurationResponse\x12f\n" +
 	"\x17CalculateSignalLevel2_1\x12$.wifi.CalculateSignalLevel2_1Request\x1a%.wifi.CalculateSignalLevel2_1Response\x12W\n" +
-	"\x12CompareSignalLevel\x12\x1f.wifi.CompareSignalLevelRequest\x1a .wifi.CompareSignalLevelResponseB'Z%github.com/xaionaro-go/jni/proto/wifib\x06proto3"
+	"\x12CompareSignalLevel\x12\x1f.wifi.CompareSignalLevelRequest\x1a .wifi.CompareSignalLevelResponse2\xbb\r\n" +
+	"\x11ScanResultService\x12Q\n" +
+	"\x10DescribeContents\x12\x1d.wifi.DescribeContentsRequest\x1a\x1e.wifi.DescribeContentsResponse\x12`\n" +
+	"\x15GetAffiliatedMloLinks\x12\".wifi.GetAffiliatedMloLinksRequest\x1a#.wifi.GetAffiliatedMloLinksResponse\x12W\n" +
+	"\x12GetApMldMacAddress\x12\x1f.wifi.GetApMldMacAddressRequest\x1a .wifi.GetApMldMacAddressResponse\x12K\n" +
+	"\x0eGetApMloLinkId\x12\x1b.wifi.GetApMloLinkIdRequest\x1a\x1c.wifi.GetApMloLinkIdResponse\x12c\n" +
+	"\x16GetInformationElements\x12#.wifi.GetInformationElementsRequest\x1a$.wifi.GetInformationElementsResponse\x12Q\n" +
+	"\x10GetSecurityTypes\x12\x1d.wifi.GetSecurityTypesRequest\x1a\x1e.wifi.GetSecurityTypesResponse\x12B\n" +
+	"\vGetWifiSsid\x12\x18.wifi.GetWifiSsidRequest\x1a\x19.wifi.GetWifiSsidResponse\x12N\n" +
+	"\x0fGetWifiStandard\x12\x1c.wifi.GetWifiStandardRequest\x1a\x1d.wifi.GetWifiStandardResponse\x12`\n" +
+	"\x15Is80211azNtbResponder\x12\".wifi.Is80211azNtbResponderRequest\x1a#.wifi.Is80211azNtbResponderResponse\x12W\n" +
+	"\x12Is80211mcResponder\x12\x1f.wifi.Is80211mcResponderRequest\x1a .wifi.Is80211mcResponderResponse\x12W\n" +
+	"\x12IsPasspointNetwork\x12\x1f.wifi.IsPasspointNetworkRequest\x1a .wifi.IsPasspointNetworkResponse\x12\x81\x01\n" +
+	" IsRangingFrameProtectionRequired\x12-.wifi.IsRangingFrameProtectionRequiredRequest\x1a..wifi.IsRangingFrameProtectionRequiredResponse\x12c\n" +
+	"\x16IsSecureHeLtfSupported\x12#.wifi.IsSecureHeLtfSupportedRequest\x1a$.wifi.IsSecureHeLtfSupportedResponse\x12K\n" +
+	"\x0eIsTwtResponder\x12\x1b.wifi.IsTwtResponderRequest\x1a\x1c.wifi.IsTwtResponderResponse\x129\n" +
+	"\bToString\x12\x15.wifi.ToStringRequest\x1a\x16.wifi.ToStringResponse\x12H\n" +
+	"\rWriteToParcel\x12\x1a.wifi.WriteToParcelRequest\x1a\x1b.wifi.WriteToParcelResponse\x12\x96\x01\n" +
+	"'ConvertChannelToFrequencyMhzIfSupported\x124.wifi.ConvertChannelToFrequencyMhzIfSupportedRequest\x1a5.wifi.ConvertChannelToFrequencyMhzIfSupportedResponse\x12\x96\x01\n" +
+	"'ConvertFrequencyMhzToChannelIfSupported\x124.wifi.ConvertFrequencyMhzToChannelIfSupportedRequest\x1a5.wifi.ConvertFrequencyMhzToChannelIfSupportedResponseB'Z%github.com/xaionaro-go/jni/proto/wifib\x06proto3"
 
 var (
 	file_proto_wifi_wifi_proto_rawDescOnce sync.Once
@@ -10292,476 +14061,668 @@ func file_proto_wifi_wifi_proto_rawDescGZIP() []byte {
 	return file_proto_wifi_wifi_proto_rawDescData
 }
 
-var file_proto_wifi_wifi_proto_msgTypes = make([]protoimpl.MessageInfo, 232)
+var file_proto_wifi_wifi_proto_msgTypes = make([]protoimpl.MessageInfo, 320)
 var file_proto_wifi_wifi_proto_goTypes = []any{
-	(*AddLocalOnlyConnectionFailureListenerRequest)(nil),             // 0: wifi.AddLocalOnlyConnectionFailureListenerRequest
-	(*AddLocalOnlyConnectionFailureListenerResponse)(nil),            // 1: wifi.AddLocalOnlyConnectionFailureListenerResponse
-	(*AddNetworkRequest)(nil),                                        // 2: wifi.AddNetworkRequest
-	(*AddNetworkResponse)(nil),                                       // 3: wifi.AddNetworkResponse
-	(*AddNetworkPrivilegedRequest)(nil),                              // 4: wifi.AddNetworkPrivilegedRequest
-	(*AddNetworkPrivilegedResponse)(nil),                             // 5: wifi.AddNetworkPrivilegedResponse
-	(*AddNetworkSuggestionsRequest)(nil),                             // 6: wifi.AddNetworkSuggestionsRequest
-	(*AddNetworkSuggestionsResponse)(nil),                            // 7: wifi.AddNetworkSuggestionsResponse
-	(*AddOrUpdatePasspointConfigurationRequest)(nil),                 // 8: wifi.AddOrUpdatePasspointConfigurationRequest
-	(*AddOrUpdatePasspointConfigurationResponse)(nil),                // 9: wifi.AddOrUpdatePasspointConfigurationResponse
-	(*AddSuggestionConnectionStatusListenerRequest)(nil),             // 10: wifi.AddSuggestionConnectionStatusListenerRequest
-	(*AddSuggestionConnectionStatusListenerResponse)(nil),            // 11: wifi.AddSuggestionConnectionStatusListenerResponse
-	(*AddSuggestionUserApprovalStatusListenerRequest)(nil),           // 12: wifi.AddSuggestionUserApprovalStatusListenerRequest
-	(*AddSuggestionUserApprovalStatusListenerResponse)(nil),          // 13: wifi.AddSuggestionUserApprovalStatusListenerResponse
-	(*AddWifiStateChangedListenerRequest)(nil),                       // 14: wifi.AddWifiStateChangedListenerRequest
-	(*AddWifiStateChangedListenerResponse)(nil),                      // 15: wifi.AddWifiStateChangedListenerResponse
-	(*AllowAutojoinGlobalRequest)(nil),                               // 16: wifi.AllowAutojoinGlobalRequest
-	(*AllowAutojoinGlobalResponse)(nil),                              // 17: wifi.AllowAutojoinGlobalResponse
-	(*CalculateSignalLevel1Request)(nil),                             // 18: wifi.CalculateSignalLevel1Request
-	(*CalculateSignalLevel1Response)(nil),                            // 19: wifi.CalculateSignalLevel1Response
-	(*CancelWpsRequest)(nil),                                         // 20: wifi.CancelWpsRequest
-	(*CancelWpsResponse)(nil),                                        // 21: wifi.CancelWpsResponse
-	(*CreateMulticastLockRequest)(nil),                               // 22: wifi.CreateMulticastLockRequest
-	(*CreateMulticastLockResponse)(nil),                              // 23: wifi.CreateMulticastLockResponse
-	(*CreateWifiLock2Request)(nil),                                   // 24: wifi.CreateWifiLock2Request
-	(*CreateWifiLock2Response)(nil),                                  // 25: wifi.CreateWifiLock2Response
-	(*CreateWifiLock1_1Request)(nil),                                 // 26: wifi.CreateWifiLock1_1Request
-	(*CreateWifiLock1_1Response)(nil),                                // 27: wifi.CreateWifiLock1_1Response
-	(*DisableNetworkRequest)(nil),                                    // 28: wifi.DisableNetworkRequest
-	(*DisableNetworkResponse)(nil),                                   // 29: wifi.DisableNetworkResponse
-	(*DisallowCurrentSuggestedNetworkRequest)(nil),                   // 30: wifi.DisallowCurrentSuggestedNetworkRequest
-	(*DisallowCurrentSuggestedNetworkResponse)(nil),                  // 31: wifi.DisallowCurrentSuggestedNetworkResponse
-	(*DisconnectRequest)(nil),                                        // 32: wifi.DisconnectRequest
-	(*DisconnectResponse)(nil),                                       // 33: wifi.DisconnectResponse
-	(*EnableNetworkRequest)(nil),                                     // 34: wifi.EnableNetworkRequest
-	(*EnableNetworkResponse)(nil),                                    // 35: wifi.EnableNetworkResponse
-	(*FlushPasspointAnqpCacheRequest)(nil),                           // 36: wifi.FlushPasspointAnqpCacheRequest
-	(*FlushPasspointAnqpCacheResponse)(nil),                          // 37: wifi.FlushPasspointAnqpCacheResponse
-	(*GetAllowedChannelsRequest)(nil),                                // 38: wifi.GetAllowedChannelsRequest
-	(*GetAllowedChannelsResponse)(nil),                               // 39: wifi.GetAllowedChannelsResponse
-	(*GetCallerConfiguredNetworksRequest)(nil),                       // 40: wifi.GetCallerConfiguredNetworksRequest
-	(*GetCallerConfiguredNetworksResponse)(nil),                      // 41: wifi.GetCallerConfiguredNetworksResponse
-	(*GetChannelDataRequest)(nil),                                    // 42: wifi.GetChannelDataRequest
-	(*GetChannelDataResponse)(nil),                                   // 43: wifi.GetChannelDataResponse
-	(*GetConfiguredNetworksRequest)(nil),                             // 44: wifi.GetConfiguredNetworksRequest
-	(*GetConfiguredNetworksResponse)(nil),                            // 45: wifi.GetConfiguredNetworksResponse
-	(*GetConnectionInfoRequest)(nil),                                 // 46: wifi.GetConnectionInfoRequest
-	(*GetConnectionInfoResponse)(nil),                                // 47: wifi.GetConnectionInfoResponse
-	(*GetDhcpInfoRequest)(nil),                                       // 48: wifi.GetDhcpInfoRequest
-	(*GetDhcpInfoResponse)(nil),                                      // 49: wifi.GetDhcpInfoResponse
-	(*GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest)(nil),  // 50: wifi.GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest
-	(*GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse)(nil), // 51: wifi.GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse
-	(*GetMaxNumberOfNetworkSuggestionsPerAppRequest)(nil),            // 52: wifi.GetMaxNumberOfNetworkSuggestionsPerAppRequest
-	(*GetMaxNumberOfNetworkSuggestionsPerAppResponse)(nil),           // 53: wifi.GetMaxNumberOfNetworkSuggestionsPerAppResponse
-	(*GetMaxSignalLevelRequest)(nil),                                 // 54: wifi.GetMaxSignalLevelRequest
-	(*GetMaxSignalLevelResponse)(nil),                                // 55: wifi.GetMaxSignalLevelResponse
-	(*GetMaxSupportedConcurrentTdlsSessionsRequest)(nil),             // 56: wifi.GetMaxSupportedConcurrentTdlsSessionsRequest
-	(*GetMaxSupportedConcurrentTdlsSessionsResponse)(nil),            // 57: wifi.GetMaxSupportedConcurrentTdlsSessionsResponse
-	(*GetNetworkSuggestionsRequest)(nil),                             // 58: wifi.GetNetworkSuggestionsRequest
-	(*GetNetworkSuggestionsResponse)(nil),                            // 59: wifi.GetNetworkSuggestionsResponse
-	(*GetNumberOfEnabledTdlsSessionsRequest)(nil),                    // 60: wifi.GetNumberOfEnabledTdlsSessionsRequest
-	(*GetNumberOfEnabledTdlsSessionsResponse)(nil),                   // 61: wifi.GetNumberOfEnabledTdlsSessionsResponse
-	(*GetPasspointConfigurationsRequest)(nil),                        // 62: wifi.GetPasspointConfigurationsRequest
-	(*GetPasspointConfigurationsResponse)(nil),                       // 63: wifi.GetPasspointConfigurationsResponse
-	(*GetPerSsidRoamingModesRequest)(nil),                            // 64: wifi.GetPerSsidRoamingModesRequest
-	(*GetPerSsidRoamingModesResponse)(nil),                           // 65: wifi.GetPerSsidRoamingModesResponse
-	(*GetScanResultsRequest)(nil),                                    // 66: wifi.GetScanResultsRequest
-	(*GetScanResultsResponse)(nil),                                   // 67: wifi.GetScanResultsResponse
-	(*GetStaConcurrencyForMultiInternetModeRequest)(nil),             // 68: wifi.GetStaConcurrencyForMultiInternetModeRequest
-	(*GetStaConcurrencyForMultiInternetModeResponse)(nil),            // 69: wifi.GetStaConcurrencyForMultiInternetModeResponse
-	(*GetUsableChannelsRequest)(nil),                                 // 70: wifi.GetUsableChannelsRequest
-	(*GetUsableChannelsResponse)(nil),                                // 71: wifi.GetUsableChannelsResponse
-	(*GetWifiStateRequest)(nil),                                      // 72: wifi.GetWifiStateRequest
-	(*GetWifiStateResponse)(nil),                                     // 73: wifi.GetWifiStateResponse
-	(*Is24GHzBandSupportedRequest)(nil),                              // 74: wifi.Is24GHzBandSupportedRequest
-	(*Is24GHzBandSupportedResponse)(nil),                             // 75: wifi.Is24GHzBandSupportedResponse
-	(*Is5GHzBandSupportedRequest)(nil),                               // 76: wifi.Is5GHzBandSupportedRequest
-	(*Is5GHzBandSupportedResponse)(nil),                              // 77: wifi.Is5GHzBandSupportedResponse
-	(*Is60GHzBandSupportedRequest)(nil),                              // 78: wifi.Is60GHzBandSupportedRequest
-	(*Is60GHzBandSupportedResponse)(nil),                             // 79: wifi.Is60GHzBandSupportedResponse
-	(*Is6GHzBandSupportedRequest)(nil),                               // 80: wifi.Is6GHzBandSupportedRequest
-	(*Is6GHzBandSupportedResponse)(nil),                              // 81: wifi.Is6GHzBandSupportedResponse
-	(*IsAggressiveRoamingModeSupportedRequest)(nil),                  // 82: wifi.IsAggressiveRoamingModeSupportedRequest
-	(*IsAggressiveRoamingModeSupportedResponse)(nil),                 // 83: wifi.IsAggressiveRoamingModeSupportedResponse
-	(*IsAutoWakeupEnabledRequest)(nil),                               // 84: wifi.IsAutoWakeupEnabledRequest
-	(*IsAutoWakeupEnabledResponse)(nil),                              // 85: wifi.IsAutoWakeupEnabledResponse
-	(*IsBridgedApConcurrencySupportedRequest)(nil),                   // 86: wifi.IsBridgedApConcurrencySupportedRequest
-	(*IsBridgedApConcurrencySupportedResponse)(nil),                  // 87: wifi.IsBridgedApConcurrencySupportedResponse
-	(*IsCarrierNetworkOffloadEnabledRequest)(nil),                    // 88: wifi.IsCarrierNetworkOffloadEnabledRequest
-	(*IsCarrierNetworkOffloadEnabledResponse)(nil),                   // 89: wifi.IsCarrierNetworkOffloadEnabledResponse
-	(*IsD2DSupportedWhenInfraStaDisabledRequest)(nil),                // 90: wifi.IsD2dSupportedWhenInfraStaDisabledRequest
-	(*IsD2DSupportedWhenInfraStaDisabledResponse)(nil),               // 91: wifi.IsD2dSupportedWhenInfraStaDisabledResponse
-	(*IsDecoratedIdentitySupportedRequest)(nil),                      // 92: wifi.IsDecoratedIdentitySupportedRequest
-	(*IsDecoratedIdentitySupportedResponse)(nil),                     // 93: wifi.IsDecoratedIdentitySupportedResponse
-	(*IsDeviceToApRttSupportedRequest)(nil),                          // 94: wifi.IsDeviceToApRttSupportedRequest
-	(*IsDeviceToApRttSupportedResponse)(nil),                         // 95: wifi.IsDeviceToApRttSupportedResponse
-	(*IsDualBandSimultaneousSupportedRequest)(nil),                   // 96: wifi.IsDualBandSimultaneousSupportedRequest
-	(*IsDualBandSimultaneousSupportedResponse)(nil),                  // 97: wifi.IsDualBandSimultaneousSupportedResponse
-	(*IsEasyConnectDppAkmSupportedRequest)(nil),                      // 98: wifi.IsEasyConnectDppAkmSupportedRequest
-	(*IsEasyConnectDppAkmSupportedResponse)(nil),                     // 99: wifi.IsEasyConnectDppAkmSupportedResponse
-	(*IsEasyConnectEnrolleeResponderModeSupportedRequest)(nil),       // 100: wifi.IsEasyConnectEnrolleeResponderModeSupportedRequest
-	(*IsEasyConnectEnrolleeResponderModeSupportedResponse)(nil),      // 101: wifi.IsEasyConnectEnrolleeResponderModeSupportedResponse
-	(*IsEasyConnectSupportedRequest)(nil),                            // 102: wifi.IsEasyConnectSupportedRequest
-	(*IsEasyConnectSupportedResponse)(nil),                           // 103: wifi.IsEasyConnectSupportedResponse
-	(*IsEnhancedOpenSupportedRequest)(nil),                           // 104: wifi.IsEnhancedOpenSupportedRequest
-	(*IsEnhancedOpenSupportedResponse)(nil),                          // 105: wifi.IsEnhancedOpenSupportedResponse
-	(*IsEnhancedPowerReportingSupportedRequest)(nil),                 // 106: wifi.IsEnhancedPowerReportingSupportedRequest
-	(*IsEnhancedPowerReportingSupportedResponse)(nil),                // 107: wifi.IsEnhancedPowerReportingSupportedResponse
-	(*IsMakeBeforeBreakWifiSwitchingSupportedRequest)(nil),           // 108: wifi.IsMakeBeforeBreakWifiSwitchingSupportedRequest
-	(*IsMakeBeforeBreakWifiSwitchingSupportedResponse)(nil),          // 109: wifi.IsMakeBeforeBreakWifiSwitchingSupportedResponse
-	(*IsP2PSupportedRequest)(nil),                                    // 110: wifi.IsP2pSupportedRequest
-	(*IsP2PSupportedResponse)(nil),                                   // 111: wifi.IsP2pSupportedResponse
-	(*IsPasspointTermsAndConditionsSupportedRequest)(nil),            // 112: wifi.IsPasspointTermsAndConditionsSupportedRequest
-	(*IsPasspointTermsAndConditionsSupportedResponse)(nil),           // 113: wifi.IsPasspointTermsAndConditionsSupportedResponse
-	(*IsPreferredNetworkOffloadSupportedRequest)(nil),                // 114: wifi.IsPreferredNetworkOffloadSupportedRequest
-	(*IsPreferredNetworkOffloadSupportedResponse)(nil),               // 115: wifi.IsPreferredNetworkOffloadSupportedResponse
-	(*IsScanAlwaysAvailableRequest)(nil),                             // 116: wifi.IsScanAlwaysAvailableRequest
-	(*IsScanAlwaysAvailableResponse)(nil),                            // 117: wifi.IsScanAlwaysAvailableResponse
-	(*IsScanThrottleEnabledRequest)(nil),                             // 118: wifi.IsScanThrottleEnabledRequest
-	(*IsScanThrottleEnabledResponse)(nil),                            // 119: wifi.IsScanThrottleEnabledResponse
-	(*IsStaApConcurrencySupportedRequest)(nil),                       // 120: wifi.IsStaApConcurrencySupportedRequest
-	(*IsStaApConcurrencySupportedResponse)(nil),                      // 121: wifi.IsStaApConcurrencySupportedResponse
-	(*IsStaBridgedApConcurrencySupportedRequest)(nil),                // 122: wifi.IsStaBridgedApConcurrencySupportedRequest
-	(*IsStaBridgedApConcurrencySupportedResponse)(nil),               // 123: wifi.IsStaBridgedApConcurrencySupportedResponse
-	(*IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest)(nil),  // 124: wifi.IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest
-	(*IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse)(nil), // 125: wifi.IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse
-	(*IsStaConcurrencyForMultiInternetSupportedRequest)(nil),         // 126: wifi.IsStaConcurrencyForMultiInternetSupportedRequest
-	(*IsStaConcurrencyForMultiInternetSupportedResponse)(nil),        // 127: wifi.IsStaConcurrencyForMultiInternetSupportedResponse
-	(*IsTdlsOperationCurrentlyAvailableRequest)(nil),                 // 128: wifi.IsTdlsOperationCurrentlyAvailableRequest
-	(*IsTdlsOperationCurrentlyAvailableResponse)(nil),                // 129: wifi.IsTdlsOperationCurrentlyAvailableResponse
-	(*IsTdlsSupportedRequest)(nil),                                   // 130: wifi.IsTdlsSupportedRequest
-	(*IsTdlsSupportedResponse)(nil),                                  // 131: wifi.IsTdlsSupportedResponse
-	(*IsTidToLinkMappingNegotiationSupportedRequest)(nil),            // 132: wifi.IsTidToLinkMappingNegotiationSupportedRequest
-	(*IsTidToLinkMappingNegotiationSupportedResponse)(nil),           // 133: wifi.IsTidToLinkMappingNegotiationSupportedResponse
-	(*IsTlsMinimumVersionSupportedRequest)(nil),                      // 134: wifi.IsTlsMinimumVersionSupportedRequest
-	(*IsTlsMinimumVersionSupportedResponse)(nil),                     // 135: wifi.IsTlsMinimumVersionSupportedResponse
-	(*IsTlsV13SupportedRequest)(nil),                                 // 136: wifi.IsTlsV13SupportedRequest
-	(*IsTlsV13SupportedResponse)(nil),                                // 137: wifi.IsTlsV13SupportedResponse
-	(*IsTrustOnFirstUseSupportedRequest)(nil),                        // 138: wifi.IsTrustOnFirstUseSupportedRequest
-	(*IsTrustOnFirstUseSupportedResponse)(nil),                       // 139: wifi.IsTrustOnFirstUseSupportedResponse
-	(*IsWapiSupportedRequest)(nil),                                   // 140: wifi.IsWapiSupportedRequest
-	(*IsWapiSupportedResponse)(nil),                                  // 141: wifi.IsWapiSupportedResponse
-	(*IsWepSupportedRequest)(nil),                                    // 142: wifi.IsWepSupportedRequest
-	(*IsWepSupportedResponse)(nil),                                   // 143: wifi.IsWepSupportedResponse
-	(*IsWifiDisplayR2SupportedRequest)(nil),                          // 144: wifi.IsWifiDisplayR2SupportedRequest
-	(*IsWifiDisplayR2SupportedResponse)(nil),                         // 145: wifi.IsWifiDisplayR2SupportedResponse
-	(*IsWifiEnabledRequest)(nil),                                     // 146: wifi.IsWifiEnabledRequest
-	(*IsWifiEnabledResponse)(nil),                                    // 147: wifi.IsWifiEnabledResponse
-	(*IsWifiPasspointEnabledRequest)(nil),                            // 148: wifi.IsWifiPasspointEnabledRequest
-	(*IsWifiPasspointEnabledResponse)(nil),                           // 149: wifi.IsWifiPasspointEnabledResponse
-	(*IsWifiStandardSupportedRequest)(nil),                           // 150: wifi.IsWifiStandardSupportedRequest
-	(*IsWifiStandardSupportedResponse)(nil),                          // 151: wifi.IsWifiStandardSupportedResponse
-	(*IsWpa3SaeH2ESupportedRequest)(nil),                             // 152: wifi.IsWpa3SaeH2eSupportedRequest
-	(*IsWpa3SaeH2ESupportedResponse)(nil),                            // 153: wifi.IsWpa3SaeH2eSupportedResponse
-	(*IsWpa3SaePublicKeySupportedRequest)(nil),                       // 154: wifi.IsWpa3SaePublicKeySupportedRequest
-	(*IsWpa3SaePublicKeySupportedResponse)(nil),                      // 155: wifi.IsWpa3SaePublicKeySupportedResponse
-	(*IsWpa3SaeSupportedRequest)(nil),                                // 156: wifi.IsWpa3SaeSupportedRequest
-	(*IsWpa3SaeSupportedResponse)(nil),                               // 157: wifi.IsWpa3SaeSupportedResponse
-	(*IsWpa3SuiteBSupportedRequest)(nil),                             // 158: wifi.IsWpa3SuiteBSupportedRequest
-	(*IsWpa3SuiteBSupportedResponse)(nil),                            // 159: wifi.IsWpa3SuiteBSupportedResponse
-	(*IsWpaPersonalSupportedRequest)(nil),                            // 160: wifi.IsWpaPersonalSupportedRequest
-	(*IsWpaPersonalSupportedResponse)(nil),                           // 161: wifi.IsWpaPersonalSupportedResponse
-	(*PingSupplicantRequest)(nil),                                    // 162: wifi.PingSupplicantRequest
-	(*PingSupplicantResponse)(nil),                                   // 163: wifi.PingSupplicantResponse
-	(*QueryAutojoinGlobalRequest)(nil),                               // 164: wifi.QueryAutojoinGlobalRequest
-	(*QueryAutojoinGlobalResponse)(nil),                              // 165: wifi.QueryAutojoinGlobalResponse
-	(*QuerySendDhcpHostnameRestrictionRequest)(nil),                  // 166: wifi.QuerySendDhcpHostnameRestrictionRequest
-	(*QuerySendDhcpHostnameRestrictionResponse)(nil),                 // 167: wifi.QuerySendDhcpHostnameRestrictionResponse
-	(*ReassociateRequest)(nil),                                       // 168: wifi.ReassociateRequest
-	(*ReassociateResponse)(nil),                                      // 169: wifi.ReassociateResponse
-	(*ReconnectRequest)(nil),                                         // 170: wifi.ReconnectRequest
-	(*ReconnectResponse)(nil),                                        // 171: wifi.ReconnectResponse
-	(*RegisterScanResultsCallbackRequest)(nil),                       // 172: wifi.RegisterScanResultsCallbackRequest
-	(*RegisterScanResultsCallbackResponse)(nil),                      // 173: wifi.RegisterScanResultsCallbackResponse
-	(*RegisterSubsystemRestartTrackingCallbackRequest)(nil),          // 174: wifi.RegisterSubsystemRestartTrackingCallbackRequest
-	(*RegisterSubsystemRestartTrackingCallbackResponse)(nil),         // 175: wifi.RegisterSubsystemRestartTrackingCallbackResponse
-	(*RemoveLocalOnlyConnectionFailureListenerRequest)(nil),          // 176: wifi.RemoveLocalOnlyConnectionFailureListenerRequest
-	(*RemoveLocalOnlyConnectionFailureListenerResponse)(nil),         // 177: wifi.RemoveLocalOnlyConnectionFailureListenerResponse
-	(*RemoveNetworkRequest)(nil),                                     // 178: wifi.RemoveNetworkRequest
-	(*RemoveNetworkResponse)(nil),                                    // 179: wifi.RemoveNetworkResponse
-	(*RemoveNetworkSuggestions1Request)(nil),                         // 180: wifi.RemoveNetworkSuggestions1Request
-	(*RemoveNetworkSuggestions1Response)(nil),                        // 181: wifi.RemoveNetworkSuggestions1Response
-	(*RemoveNetworkSuggestions2_1Request)(nil),                       // 182: wifi.RemoveNetworkSuggestions2_1Request
-	(*RemoveNetworkSuggestions2_1Response)(nil),                      // 183: wifi.RemoveNetworkSuggestions2_1Response
-	(*RemoveNonCallerConfiguredNetworksRequest)(nil),                 // 184: wifi.RemoveNonCallerConfiguredNetworksRequest
-	(*RemoveNonCallerConfiguredNetworksResponse)(nil),                // 185: wifi.RemoveNonCallerConfiguredNetworksResponse
-	(*RemovePasspointConfigurationRequest)(nil),                      // 186: wifi.RemovePasspointConfigurationRequest
-	(*RemovePasspointConfigurationResponse)(nil),                     // 187: wifi.RemovePasspointConfigurationResponse
-	(*RemovePerSsidRoamingModeRequest)(nil),                          // 188: wifi.RemovePerSsidRoamingModeRequest
-	(*RemovePerSsidRoamingModeResponse)(nil),                         // 189: wifi.RemovePerSsidRoamingModeResponse
-	(*RemoveSuggestionConnectionStatusListenerRequest)(nil),          // 190: wifi.RemoveSuggestionConnectionStatusListenerRequest
-	(*RemoveSuggestionConnectionStatusListenerResponse)(nil),         // 191: wifi.RemoveSuggestionConnectionStatusListenerResponse
-	(*RemoveSuggestionUserApprovalStatusListenerRequest)(nil),        // 192: wifi.RemoveSuggestionUserApprovalStatusListenerRequest
-	(*RemoveSuggestionUserApprovalStatusListenerResponse)(nil),       // 193: wifi.RemoveSuggestionUserApprovalStatusListenerResponse
-	(*RemoveWifiStateChangedListenerRequest)(nil),                    // 194: wifi.RemoveWifiStateChangedListenerRequest
-	(*RemoveWifiStateChangedListenerResponse)(nil),                   // 195: wifi.RemoveWifiStateChangedListenerResponse
-	(*ReportCreateInterfaceImpactRequest)(nil),                       // 196: wifi.ReportCreateInterfaceImpactRequest
-	(*ReportCreateInterfaceImpactResponse)(nil),                      // 197: wifi.ReportCreateInterfaceImpactResponse
-	(*SaveConfigurationRequest)(nil),                                 // 198: wifi.SaveConfigurationRequest
-	(*SaveConfigurationResponse)(nil),                                // 199: wifi.SaveConfigurationResponse
-	(*SetPerSsidRoamingModeRequest)(nil),                             // 200: wifi.SetPerSsidRoamingModeRequest
-	(*SetPerSsidRoamingModeResponse)(nil),                            // 201: wifi.SetPerSsidRoamingModeResponse
-	(*SetSendDhcpHostnameRestrictionRequest)(nil),                    // 202: wifi.SetSendDhcpHostnameRestrictionRequest
-	(*SetSendDhcpHostnameRestrictionResponse)(nil),                   // 203: wifi.SetSendDhcpHostnameRestrictionResponse
-	(*SetTdlsEnabled2Request)(nil),                                   // 204: wifi.SetTdlsEnabled2Request
-	(*SetTdlsEnabled2Response)(nil),                                  // 205: wifi.SetTdlsEnabled2Response
-	(*SetTdlsEnabled4_1Request)(nil),                                 // 206: wifi.SetTdlsEnabled4_1Request
-	(*SetTdlsEnabled4_1Response)(nil),                                // 207: wifi.SetTdlsEnabled4_1Response
-	(*SetTdlsEnabledWithMacAddress2Request)(nil),                     // 208: wifi.SetTdlsEnabledWithMacAddress2Request
-	(*SetTdlsEnabledWithMacAddress2Response)(nil),                    // 209: wifi.SetTdlsEnabledWithMacAddress2Response
-	(*SetTdlsEnabledWithMacAddress4_1Request)(nil),                   // 210: wifi.SetTdlsEnabledWithMacAddress4_1Request
-	(*SetTdlsEnabledWithMacAddress4_1Response)(nil),                  // 211: wifi.SetTdlsEnabledWithMacAddress4_1Response
-	(*SetWifiEnabledRequest)(nil),                                    // 212: wifi.SetWifiEnabledRequest
-	(*SetWifiEnabledResponse)(nil),                                   // 213: wifi.SetWifiEnabledResponse
-	(*StartLocalOnlyHotspotWithConfigurationRequest)(nil),            // 214: wifi.StartLocalOnlyHotspotWithConfigurationRequest
-	(*StartLocalOnlyHotspotWithConfigurationResponse)(nil),           // 215: wifi.StartLocalOnlyHotspotWithConfigurationResponse
-	(*StartScanRequest)(nil),                                         // 216: wifi.StartScanRequest
-	(*StartScanResponse)(nil),                                        // 217: wifi.StartScanResponse
-	(*StartWpsRequest)(nil),                                          // 218: wifi.StartWpsRequest
-	(*StartWpsResponse)(nil),                                         // 219: wifi.StartWpsResponse
-	(*UnregisterScanResultsCallbackRequest)(nil),                     // 220: wifi.UnregisterScanResultsCallbackRequest
-	(*UnregisterScanResultsCallbackResponse)(nil),                    // 221: wifi.UnregisterScanResultsCallbackResponse
-	(*UnregisterSubsystemRestartTrackingCallbackRequest)(nil),        // 222: wifi.UnregisterSubsystemRestartTrackingCallbackRequest
-	(*UnregisterSubsystemRestartTrackingCallbackResponse)(nil),       // 223: wifi.UnregisterSubsystemRestartTrackingCallbackResponse
-	(*UpdateNetworkRequest)(nil),                                     // 224: wifi.UpdateNetworkRequest
-	(*UpdateNetworkResponse)(nil),                                    // 225: wifi.UpdateNetworkResponse
-	(*ValidateSoftApConfigurationRequest)(nil),                       // 226: wifi.ValidateSoftApConfigurationRequest
-	(*ValidateSoftApConfigurationResponse)(nil),                      // 227: wifi.ValidateSoftApConfigurationResponse
-	(*CalculateSignalLevel2_1Request)(nil),                           // 228: wifi.CalculateSignalLevel2_1Request
-	(*CalculateSignalLevel2_1Response)(nil),                          // 229: wifi.CalculateSignalLevel2_1Response
-	(*CompareSignalLevelRequest)(nil),                                // 230: wifi.CompareSignalLevelRequest
-	(*CompareSignalLevelResponse)(nil),                               // 231: wifi.CompareSignalLevelResponse
+	(*DescribeContentsRequest)(nil),                                  // 0: wifi.DescribeContentsRequest
+	(*DescribeContentsResponse)(nil),                                 // 1: wifi.DescribeContentsResponse
+	(*EqualsRequest)(nil),                                            // 2: wifi.EqualsRequest
+	(*EqualsResponse)(nil),                                           // 3: wifi.EqualsResponse
+	(*GetAffiliatedMloLinksRequest)(nil),                             // 4: wifi.GetAffiliatedMloLinksRequest
+	(*GetAffiliatedMloLinksResponse)(nil),                            // 5: wifi.GetAffiliatedMloLinksResponse
+	(*GetApMldMacAddressRequest)(nil),                                // 6: wifi.GetApMldMacAddressRequest
+	(*GetApMldMacAddressResponse)(nil),                               // 7: wifi.GetApMldMacAddressResponse
+	(*GetApMloLinkIdRequest)(nil),                                    // 8: wifi.GetApMloLinkIdRequest
+	(*GetApMloLinkIdResponse)(nil),                                   // 9: wifi.GetApMloLinkIdResponse
+	(*GetApplicableRedactionsRequest)(nil),                           // 10: wifi.GetApplicableRedactionsRequest
+	(*GetApplicableRedactionsResponse)(nil),                          // 11: wifi.GetApplicableRedactionsResponse
+	(*GetAssociatedMloLinksRequest)(nil),                             // 12: wifi.GetAssociatedMloLinksRequest
+	(*GetAssociatedMloLinksResponse)(nil),                            // 13: wifi.GetAssociatedMloLinksResponse
+	(*GetBSSIDRequest)(nil),                                          // 14: wifi.GetBSSIDRequest
+	(*GetBSSIDResponse)(nil),                                         // 15: wifi.GetBSSIDResponse
+	(*GetCurrentSecurityTypeRequest)(nil),                            // 16: wifi.GetCurrentSecurityTypeRequest
+	(*GetCurrentSecurityTypeResponse)(nil),                           // 17: wifi.GetCurrentSecurityTypeResponse
+	(*GetFrequencyRequest)(nil),                                      // 18: wifi.GetFrequencyRequest
+	(*GetFrequencyResponse)(nil),                                     // 19: wifi.GetFrequencyResponse
+	(*GetHiddenSSIDRequest)(nil),                                     // 20: wifi.GetHiddenSSIDRequest
+	(*GetHiddenSSIDResponse)(nil),                                    // 21: wifi.GetHiddenSSIDResponse
+	(*GetInformationElementsRequest)(nil),                            // 22: wifi.GetInformationElementsRequest
+	(*GetInformationElementsResponse)(nil),                           // 23: wifi.GetInformationElementsResponse
+	(*GetIpAddressRequest)(nil),                                      // 24: wifi.GetIpAddressRequest
+	(*GetIpAddressResponse)(nil),                                     // 25: wifi.GetIpAddressResponse
+	(*GetLinkSpeedRequest)(nil),                                      // 26: wifi.GetLinkSpeedRequest
+	(*GetLinkSpeedResponse)(nil),                                     // 27: wifi.GetLinkSpeedResponse
+	(*GetMacAddressRequest)(nil),                                     // 28: wifi.GetMacAddressRequest
+	(*GetMacAddressResponse)(nil),                                    // 29: wifi.GetMacAddressResponse
+	(*GetMaxSupportedRxLinkSpeedMbpsRequest)(nil),                    // 30: wifi.GetMaxSupportedRxLinkSpeedMbpsRequest
+	(*GetMaxSupportedRxLinkSpeedMbpsResponse)(nil),                   // 31: wifi.GetMaxSupportedRxLinkSpeedMbpsResponse
+	(*GetMaxSupportedTxLinkSpeedMbpsRequest)(nil),                    // 32: wifi.GetMaxSupportedTxLinkSpeedMbpsRequest
+	(*GetMaxSupportedTxLinkSpeedMbpsResponse)(nil),                   // 33: wifi.GetMaxSupportedTxLinkSpeedMbpsResponse
+	(*GetNetworkIdRequest)(nil),                                      // 34: wifi.GetNetworkIdRequest
+	(*GetNetworkIdResponse)(nil),                                     // 35: wifi.GetNetworkIdResponse
+	(*GetPasspointFqdnRequest)(nil),                                  // 36: wifi.GetPasspointFqdnRequest
+	(*GetPasspointFqdnResponse)(nil),                                 // 37: wifi.GetPasspointFqdnResponse
+	(*GetPasspointProviderFriendlyNameRequest)(nil),                  // 38: wifi.GetPasspointProviderFriendlyNameRequest
+	(*GetPasspointProviderFriendlyNameResponse)(nil),                 // 39: wifi.GetPasspointProviderFriendlyNameResponse
+	(*GetPasspointUniqueIdRequest)(nil),                              // 40: wifi.GetPasspointUniqueIdRequest
+	(*GetPasspointUniqueIdResponse)(nil),                             // 41: wifi.GetPasspointUniqueIdResponse
+	(*GetRssiRequest)(nil),                                           // 42: wifi.GetRssiRequest
+	(*GetRssiResponse)(nil),                                          // 43: wifi.GetRssiResponse
+	(*GetRxLinkSpeedMbpsRequest)(nil),                                // 44: wifi.GetRxLinkSpeedMbpsRequest
+	(*GetRxLinkSpeedMbpsResponse)(nil),                               // 45: wifi.GetRxLinkSpeedMbpsResponse
+	(*GetSSIDRequest)(nil),                                           // 46: wifi.GetSSIDRequest
+	(*GetSSIDResponse)(nil),                                          // 47: wifi.GetSSIDResponse
+	(*GetSubscriptionIdRequest)(nil),                                 // 48: wifi.GetSubscriptionIdRequest
+	(*GetSubscriptionIdResponse)(nil),                                // 49: wifi.GetSubscriptionIdResponse
+	(*GetSupplicantStateRequest)(nil),                                // 50: wifi.GetSupplicantStateRequest
+	(*GetSupplicantStateResponse)(nil),                               // 51: wifi.GetSupplicantStateResponse
+	(*GetTxLinkSpeedMbpsRequest)(nil),                                // 52: wifi.GetTxLinkSpeedMbpsRequest
+	(*GetTxLinkSpeedMbpsResponse)(nil),                               // 53: wifi.GetTxLinkSpeedMbpsResponse
+	(*GetWifiStandardRequest)(nil),                                   // 54: wifi.GetWifiStandardRequest
+	(*GetWifiStandardResponse)(nil),                                  // 55: wifi.GetWifiStandardResponse
+	(*HashCodeRequest)(nil),                                          // 56: wifi.HashCodeRequest
+	(*HashCodeResponse)(nil),                                         // 57: wifi.HashCodeResponse
+	(*IsRestrictedRequest)(nil),                                      // 58: wifi.IsRestrictedRequest
+	(*IsRestrictedResponse)(nil),                                     // 59: wifi.IsRestrictedResponse
+	(*MakeCopyRequest)(nil),                                          // 60: wifi.MakeCopyRequest
+	(*MakeCopyResponse)(nil),                                         // 61: wifi.MakeCopyResponse
+	(*ToStringRequest)(nil),                                          // 62: wifi.ToStringRequest
+	(*ToStringResponse)(nil),                                         // 63: wifi.ToStringResponse
+	(*WriteToParcelRequest)(nil),                                     // 64: wifi.WriteToParcelRequest
+	(*WriteToParcelResponse)(nil),                                    // 65: wifi.WriteToParcelResponse
+	(*GetDetailedStateOfRequest)(nil),                                // 66: wifi.GetDetailedStateOfRequest
+	(*GetDetailedStateOfResponse)(nil),                               // 67: wifi.GetDetailedStateOfResponse
+	(*AddLocalOnlyConnectionFailureListenerRequest)(nil),             // 68: wifi.AddLocalOnlyConnectionFailureListenerRequest
+	(*AddLocalOnlyConnectionFailureListenerResponse)(nil),            // 69: wifi.AddLocalOnlyConnectionFailureListenerResponse
+	(*AddNetworkRequest)(nil),                                        // 70: wifi.AddNetworkRequest
+	(*AddNetworkResponse)(nil),                                       // 71: wifi.AddNetworkResponse
+	(*AddNetworkPrivilegedRequest)(nil),                              // 72: wifi.AddNetworkPrivilegedRequest
+	(*AddNetworkPrivilegedResponse)(nil),                             // 73: wifi.AddNetworkPrivilegedResponse
+	(*AddNetworkSuggestionsRequest)(nil),                             // 74: wifi.AddNetworkSuggestionsRequest
+	(*AddNetworkSuggestionsResponse)(nil),                            // 75: wifi.AddNetworkSuggestionsResponse
+	(*AddOrUpdatePasspointConfigurationRequest)(nil),                 // 76: wifi.AddOrUpdatePasspointConfigurationRequest
+	(*AddOrUpdatePasspointConfigurationResponse)(nil),                // 77: wifi.AddOrUpdatePasspointConfigurationResponse
+	(*AddSuggestionConnectionStatusListenerRequest)(nil),             // 78: wifi.AddSuggestionConnectionStatusListenerRequest
+	(*AddSuggestionConnectionStatusListenerResponse)(nil),            // 79: wifi.AddSuggestionConnectionStatusListenerResponse
+	(*AddSuggestionUserApprovalStatusListenerRequest)(nil),           // 80: wifi.AddSuggestionUserApprovalStatusListenerRequest
+	(*AddSuggestionUserApprovalStatusListenerResponse)(nil),          // 81: wifi.AddSuggestionUserApprovalStatusListenerResponse
+	(*AddWifiStateChangedListenerRequest)(nil),                       // 82: wifi.AddWifiStateChangedListenerRequest
+	(*AddWifiStateChangedListenerResponse)(nil),                      // 83: wifi.AddWifiStateChangedListenerResponse
+	(*AllowAutojoinGlobalRequest)(nil),                               // 84: wifi.AllowAutojoinGlobalRequest
+	(*AllowAutojoinGlobalResponse)(nil),                              // 85: wifi.AllowAutojoinGlobalResponse
+	(*CalculateSignalLevel1Request)(nil),                             // 86: wifi.CalculateSignalLevel1Request
+	(*CalculateSignalLevel1Response)(nil),                            // 87: wifi.CalculateSignalLevel1Response
+	(*CancelWpsRequest)(nil),                                         // 88: wifi.CancelWpsRequest
+	(*CancelWpsResponse)(nil),                                        // 89: wifi.CancelWpsResponse
+	(*CreateMulticastLockRequest)(nil),                               // 90: wifi.CreateMulticastLockRequest
+	(*CreateMulticastLockResponse)(nil),                              // 91: wifi.CreateMulticastLockResponse
+	(*CreateWifiLock2Request)(nil),                                   // 92: wifi.CreateWifiLock2Request
+	(*CreateWifiLock2Response)(nil),                                  // 93: wifi.CreateWifiLock2Response
+	(*CreateWifiLock1_1Request)(nil),                                 // 94: wifi.CreateWifiLock1_1Request
+	(*CreateWifiLock1_1Response)(nil),                                // 95: wifi.CreateWifiLock1_1Response
+	(*DisableNetworkRequest)(nil),                                    // 96: wifi.DisableNetworkRequest
+	(*DisableNetworkResponse)(nil),                                   // 97: wifi.DisableNetworkResponse
+	(*DisallowCurrentSuggestedNetworkRequest)(nil),                   // 98: wifi.DisallowCurrentSuggestedNetworkRequest
+	(*DisallowCurrentSuggestedNetworkResponse)(nil),                  // 99: wifi.DisallowCurrentSuggestedNetworkResponse
+	(*DisconnectRequest)(nil),                                        // 100: wifi.DisconnectRequest
+	(*DisconnectResponse)(nil),                                       // 101: wifi.DisconnectResponse
+	(*EnableNetworkRequest)(nil),                                     // 102: wifi.EnableNetworkRequest
+	(*EnableNetworkResponse)(nil),                                    // 103: wifi.EnableNetworkResponse
+	(*FlushPasspointAnqpCacheRequest)(nil),                           // 104: wifi.FlushPasspointAnqpCacheRequest
+	(*FlushPasspointAnqpCacheResponse)(nil),                          // 105: wifi.FlushPasspointAnqpCacheResponse
+	(*GetAllowedChannelsRequest)(nil),                                // 106: wifi.GetAllowedChannelsRequest
+	(*GetAllowedChannelsResponse)(nil),                               // 107: wifi.GetAllowedChannelsResponse
+	(*GetCallerConfiguredNetworksRequest)(nil),                       // 108: wifi.GetCallerConfiguredNetworksRequest
+	(*GetCallerConfiguredNetworksResponse)(nil),                      // 109: wifi.GetCallerConfiguredNetworksResponse
+	(*GetChannelDataRequest)(nil),                                    // 110: wifi.GetChannelDataRequest
+	(*GetChannelDataResponse)(nil),                                   // 111: wifi.GetChannelDataResponse
+	(*GetConfiguredNetworksRequest)(nil),                             // 112: wifi.GetConfiguredNetworksRequest
+	(*GetConfiguredNetworksResponse)(nil),                            // 113: wifi.GetConfiguredNetworksResponse
+	(*GetConnectionInfoRequest)(nil),                                 // 114: wifi.GetConnectionInfoRequest
+	(*GetConnectionInfoResponse)(nil),                                // 115: wifi.GetConnectionInfoResponse
+	(*GetDhcpInfoRequest)(nil),                                       // 116: wifi.GetDhcpInfoRequest
+	(*GetDhcpInfoResponse)(nil),                                      // 117: wifi.GetDhcpInfoResponse
+	(*GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest)(nil),  // 118: wifi.GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest
+	(*GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse)(nil), // 119: wifi.GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse
+	(*GetMaxNumberOfNetworkSuggestionsPerAppRequest)(nil),            // 120: wifi.GetMaxNumberOfNetworkSuggestionsPerAppRequest
+	(*GetMaxNumberOfNetworkSuggestionsPerAppResponse)(nil),           // 121: wifi.GetMaxNumberOfNetworkSuggestionsPerAppResponse
+	(*GetMaxSignalLevelRequest)(nil),                                 // 122: wifi.GetMaxSignalLevelRequest
+	(*GetMaxSignalLevelResponse)(nil),                                // 123: wifi.GetMaxSignalLevelResponse
+	(*GetMaxSupportedConcurrentTdlsSessionsRequest)(nil),             // 124: wifi.GetMaxSupportedConcurrentTdlsSessionsRequest
+	(*GetMaxSupportedConcurrentTdlsSessionsResponse)(nil),            // 125: wifi.GetMaxSupportedConcurrentTdlsSessionsResponse
+	(*GetNetworkSuggestionsRequest)(nil),                             // 126: wifi.GetNetworkSuggestionsRequest
+	(*GetNetworkSuggestionsResponse)(nil),                            // 127: wifi.GetNetworkSuggestionsResponse
+	(*GetNumberOfEnabledTdlsSessionsRequest)(nil),                    // 128: wifi.GetNumberOfEnabledTdlsSessionsRequest
+	(*GetNumberOfEnabledTdlsSessionsResponse)(nil),                   // 129: wifi.GetNumberOfEnabledTdlsSessionsResponse
+	(*GetPasspointConfigurationsRequest)(nil),                        // 130: wifi.GetPasspointConfigurationsRequest
+	(*GetPasspointConfigurationsResponse)(nil),                       // 131: wifi.GetPasspointConfigurationsResponse
+	(*GetPerSsidRoamingModesRequest)(nil),                            // 132: wifi.GetPerSsidRoamingModesRequest
+	(*GetPerSsidRoamingModesResponse)(nil),                           // 133: wifi.GetPerSsidRoamingModesResponse
+	(*GetScanResultsRequest)(nil),                                    // 134: wifi.GetScanResultsRequest
+	(*GetScanResultsResponse)(nil),                                   // 135: wifi.GetScanResultsResponse
+	(*GetStaConcurrencyForMultiInternetModeRequest)(nil),             // 136: wifi.GetStaConcurrencyForMultiInternetModeRequest
+	(*GetStaConcurrencyForMultiInternetModeResponse)(nil),            // 137: wifi.GetStaConcurrencyForMultiInternetModeResponse
+	(*GetUsableChannelsRequest)(nil),                                 // 138: wifi.GetUsableChannelsRequest
+	(*GetUsableChannelsResponse)(nil),                                // 139: wifi.GetUsableChannelsResponse
+	(*GetWifiStateRequest)(nil),                                      // 140: wifi.GetWifiStateRequest
+	(*GetWifiStateResponse)(nil),                                     // 141: wifi.GetWifiStateResponse
+	(*Is24GHzBandSupportedRequest)(nil),                              // 142: wifi.Is24GHzBandSupportedRequest
+	(*Is24GHzBandSupportedResponse)(nil),                             // 143: wifi.Is24GHzBandSupportedResponse
+	(*Is5GHzBandSupportedRequest)(nil),                               // 144: wifi.Is5GHzBandSupportedRequest
+	(*Is5GHzBandSupportedResponse)(nil),                              // 145: wifi.Is5GHzBandSupportedResponse
+	(*Is60GHzBandSupportedRequest)(nil),                              // 146: wifi.Is60GHzBandSupportedRequest
+	(*Is60GHzBandSupportedResponse)(nil),                             // 147: wifi.Is60GHzBandSupportedResponse
+	(*Is6GHzBandSupportedRequest)(nil),                               // 148: wifi.Is6GHzBandSupportedRequest
+	(*Is6GHzBandSupportedResponse)(nil),                              // 149: wifi.Is6GHzBandSupportedResponse
+	(*IsAggressiveRoamingModeSupportedRequest)(nil),                  // 150: wifi.IsAggressiveRoamingModeSupportedRequest
+	(*IsAggressiveRoamingModeSupportedResponse)(nil),                 // 151: wifi.IsAggressiveRoamingModeSupportedResponse
+	(*IsAutoWakeupEnabledRequest)(nil),                               // 152: wifi.IsAutoWakeupEnabledRequest
+	(*IsAutoWakeupEnabledResponse)(nil),                              // 153: wifi.IsAutoWakeupEnabledResponse
+	(*IsBridgedApConcurrencySupportedRequest)(nil),                   // 154: wifi.IsBridgedApConcurrencySupportedRequest
+	(*IsBridgedApConcurrencySupportedResponse)(nil),                  // 155: wifi.IsBridgedApConcurrencySupportedResponse
+	(*IsCarrierNetworkOffloadEnabledRequest)(nil),                    // 156: wifi.IsCarrierNetworkOffloadEnabledRequest
+	(*IsCarrierNetworkOffloadEnabledResponse)(nil),                   // 157: wifi.IsCarrierNetworkOffloadEnabledResponse
+	(*IsD2DSupportedWhenInfraStaDisabledRequest)(nil),                // 158: wifi.IsD2dSupportedWhenInfraStaDisabledRequest
+	(*IsD2DSupportedWhenInfraStaDisabledResponse)(nil),               // 159: wifi.IsD2dSupportedWhenInfraStaDisabledResponse
+	(*IsDecoratedIdentitySupportedRequest)(nil),                      // 160: wifi.IsDecoratedIdentitySupportedRequest
+	(*IsDecoratedIdentitySupportedResponse)(nil),                     // 161: wifi.IsDecoratedIdentitySupportedResponse
+	(*IsDeviceToApRttSupportedRequest)(nil),                          // 162: wifi.IsDeviceToApRttSupportedRequest
+	(*IsDeviceToApRttSupportedResponse)(nil),                         // 163: wifi.IsDeviceToApRttSupportedResponse
+	(*IsDualBandSimultaneousSupportedRequest)(nil),                   // 164: wifi.IsDualBandSimultaneousSupportedRequest
+	(*IsDualBandSimultaneousSupportedResponse)(nil),                  // 165: wifi.IsDualBandSimultaneousSupportedResponse
+	(*IsEasyConnectDppAkmSupportedRequest)(nil),                      // 166: wifi.IsEasyConnectDppAkmSupportedRequest
+	(*IsEasyConnectDppAkmSupportedResponse)(nil),                     // 167: wifi.IsEasyConnectDppAkmSupportedResponse
+	(*IsEasyConnectEnrolleeResponderModeSupportedRequest)(nil),       // 168: wifi.IsEasyConnectEnrolleeResponderModeSupportedRequest
+	(*IsEasyConnectEnrolleeResponderModeSupportedResponse)(nil),      // 169: wifi.IsEasyConnectEnrolleeResponderModeSupportedResponse
+	(*IsEasyConnectSupportedRequest)(nil),                            // 170: wifi.IsEasyConnectSupportedRequest
+	(*IsEasyConnectSupportedResponse)(nil),                           // 171: wifi.IsEasyConnectSupportedResponse
+	(*IsEnhancedOpenSupportedRequest)(nil),                           // 172: wifi.IsEnhancedOpenSupportedRequest
+	(*IsEnhancedOpenSupportedResponse)(nil),                          // 173: wifi.IsEnhancedOpenSupportedResponse
+	(*IsEnhancedPowerReportingSupportedRequest)(nil),                 // 174: wifi.IsEnhancedPowerReportingSupportedRequest
+	(*IsEnhancedPowerReportingSupportedResponse)(nil),                // 175: wifi.IsEnhancedPowerReportingSupportedResponse
+	(*IsMakeBeforeBreakWifiSwitchingSupportedRequest)(nil),           // 176: wifi.IsMakeBeforeBreakWifiSwitchingSupportedRequest
+	(*IsMakeBeforeBreakWifiSwitchingSupportedResponse)(nil),          // 177: wifi.IsMakeBeforeBreakWifiSwitchingSupportedResponse
+	(*IsP2PSupportedRequest)(nil),                                    // 178: wifi.IsP2pSupportedRequest
+	(*IsP2PSupportedResponse)(nil),                                   // 179: wifi.IsP2pSupportedResponse
+	(*IsPasspointTermsAndConditionsSupportedRequest)(nil),            // 180: wifi.IsPasspointTermsAndConditionsSupportedRequest
+	(*IsPasspointTermsAndConditionsSupportedResponse)(nil),           // 181: wifi.IsPasspointTermsAndConditionsSupportedResponse
+	(*IsPreferredNetworkOffloadSupportedRequest)(nil),                // 182: wifi.IsPreferredNetworkOffloadSupportedRequest
+	(*IsPreferredNetworkOffloadSupportedResponse)(nil),               // 183: wifi.IsPreferredNetworkOffloadSupportedResponse
+	(*IsScanAlwaysAvailableRequest)(nil),                             // 184: wifi.IsScanAlwaysAvailableRequest
+	(*IsScanAlwaysAvailableResponse)(nil),                            // 185: wifi.IsScanAlwaysAvailableResponse
+	(*IsScanThrottleEnabledRequest)(nil),                             // 186: wifi.IsScanThrottleEnabledRequest
+	(*IsScanThrottleEnabledResponse)(nil),                            // 187: wifi.IsScanThrottleEnabledResponse
+	(*IsStaApConcurrencySupportedRequest)(nil),                       // 188: wifi.IsStaApConcurrencySupportedRequest
+	(*IsStaApConcurrencySupportedResponse)(nil),                      // 189: wifi.IsStaApConcurrencySupportedResponse
+	(*IsStaBridgedApConcurrencySupportedRequest)(nil),                // 190: wifi.IsStaBridgedApConcurrencySupportedRequest
+	(*IsStaBridgedApConcurrencySupportedResponse)(nil),               // 191: wifi.IsStaBridgedApConcurrencySupportedResponse
+	(*IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest)(nil),  // 192: wifi.IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest
+	(*IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse)(nil), // 193: wifi.IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse
+	(*IsStaConcurrencyForMultiInternetSupportedRequest)(nil),         // 194: wifi.IsStaConcurrencyForMultiInternetSupportedRequest
+	(*IsStaConcurrencyForMultiInternetSupportedResponse)(nil),        // 195: wifi.IsStaConcurrencyForMultiInternetSupportedResponse
+	(*IsTdlsOperationCurrentlyAvailableRequest)(nil),                 // 196: wifi.IsTdlsOperationCurrentlyAvailableRequest
+	(*IsTdlsOperationCurrentlyAvailableResponse)(nil),                // 197: wifi.IsTdlsOperationCurrentlyAvailableResponse
+	(*IsTdlsSupportedRequest)(nil),                                   // 198: wifi.IsTdlsSupportedRequest
+	(*IsTdlsSupportedResponse)(nil),                                  // 199: wifi.IsTdlsSupportedResponse
+	(*IsTidToLinkMappingNegotiationSupportedRequest)(nil),            // 200: wifi.IsTidToLinkMappingNegotiationSupportedRequest
+	(*IsTidToLinkMappingNegotiationSupportedResponse)(nil),           // 201: wifi.IsTidToLinkMappingNegotiationSupportedResponse
+	(*IsTlsMinimumVersionSupportedRequest)(nil),                      // 202: wifi.IsTlsMinimumVersionSupportedRequest
+	(*IsTlsMinimumVersionSupportedResponse)(nil),                     // 203: wifi.IsTlsMinimumVersionSupportedResponse
+	(*IsTlsV13SupportedRequest)(nil),                                 // 204: wifi.IsTlsV13SupportedRequest
+	(*IsTlsV13SupportedResponse)(nil),                                // 205: wifi.IsTlsV13SupportedResponse
+	(*IsTrustOnFirstUseSupportedRequest)(nil),                        // 206: wifi.IsTrustOnFirstUseSupportedRequest
+	(*IsTrustOnFirstUseSupportedResponse)(nil),                       // 207: wifi.IsTrustOnFirstUseSupportedResponse
+	(*IsWapiSupportedRequest)(nil),                                   // 208: wifi.IsWapiSupportedRequest
+	(*IsWapiSupportedResponse)(nil),                                  // 209: wifi.IsWapiSupportedResponse
+	(*IsWepSupportedRequest)(nil),                                    // 210: wifi.IsWepSupportedRequest
+	(*IsWepSupportedResponse)(nil),                                   // 211: wifi.IsWepSupportedResponse
+	(*IsWifiDisplayR2SupportedRequest)(nil),                          // 212: wifi.IsWifiDisplayR2SupportedRequest
+	(*IsWifiDisplayR2SupportedResponse)(nil),                         // 213: wifi.IsWifiDisplayR2SupportedResponse
+	(*IsWifiEnabledRequest)(nil),                                     // 214: wifi.IsWifiEnabledRequest
+	(*IsWifiEnabledResponse)(nil),                                    // 215: wifi.IsWifiEnabledResponse
+	(*IsWifiPasspointEnabledRequest)(nil),                            // 216: wifi.IsWifiPasspointEnabledRequest
+	(*IsWifiPasspointEnabledResponse)(nil),                           // 217: wifi.IsWifiPasspointEnabledResponse
+	(*IsWifiStandardSupportedRequest)(nil),                           // 218: wifi.IsWifiStandardSupportedRequest
+	(*IsWifiStandardSupportedResponse)(nil),                          // 219: wifi.IsWifiStandardSupportedResponse
+	(*IsWpa3SaeH2ESupportedRequest)(nil),                             // 220: wifi.IsWpa3SaeH2eSupportedRequest
+	(*IsWpa3SaeH2ESupportedResponse)(nil),                            // 221: wifi.IsWpa3SaeH2eSupportedResponse
+	(*IsWpa3SaePublicKeySupportedRequest)(nil),                       // 222: wifi.IsWpa3SaePublicKeySupportedRequest
+	(*IsWpa3SaePublicKeySupportedResponse)(nil),                      // 223: wifi.IsWpa3SaePublicKeySupportedResponse
+	(*IsWpa3SaeSupportedRequest)(nil),                                // 224: wifi.IsWpa3SaeSupportedRequest
+	(*IsWpa3SaeSupportedResponse)(nil),                               // 225: wifi.IsWpa3SaeSupportedResponse
+	(*IsWpa3SuiteBSupportedRequest)(nil),                             // 226: wifi.IsWpa3SuiteBSupportedRequest
+	(*IsWpa3SuiteBSupportedResponse)(nil),                            // 227: wifi.IsWpa3SuiteBSupportedResponse
+	(*IsWpaPersonalSupportedRequest)(nil),                            // 228: wifi.IsWpaPersonalSupportedRequest
+	(*IsWpaPersonalSupportedResponse)(nil),                           // 229: wifi.IsWpaPersonalSupportedResponse
+	(*PingSupplicantRequest)(nil),                                    // 230: wifi.PingSupplicantRequest
+	(*PingSupplicantResponse)(nil),                                   // 231: wifi.PingSupplicantResponse
+	(*QueryAutojoinGlobalRequest)(nil),                               // 232: wifi.QueryAutojoinGlobalRequest
+	(*QueryAutojoinGlobalResponse)(nil),                              // 233: wifi.QueryAutojoinGlobalResponse
+	(*QuerySendDhcpHostnameRestrictionRequest)(nil),                  // 234: wifi.QuerySendDhcpHostnameRestrictionRequest
+	(*QuerySendDhcpHostnameRestrictionResponse)(nil),                 // 235: wifi.QuerySendDhcpHostnameRestrictionResponse
+	(*ReassociateRequest)(nil),                                       // 236: wifi.ReassociateRequest
+	(*ReassociateResponse)(nil),                                      // 237: wifi.ReassociateResponse
+	(*ReconnectRequest)(nil),                                         // 238: wifi.ReconnectRequest
+	(*ReconnectResponse)(nil),                                        // 239: wifi.ReconnectResponse
+	(*RegisterScanResultsCallbackRequest)(nil),                       // 240: wifi.RegisterScanResultsCallbackRequest
+	(*RegisterScanResultsCallbackResponse)(nil),                      // 241: wifi.RegisterScanResultsCallbackResponse
+	(*RegisterSubsystemRestartTrackingCallbackRequest)(nil),          // 242: wifi.RegisterSubsystemRestartTrackingCallbackRequest
+	(*RegisterSubsystemRestartTrackingCallbackResponse)(nil),         // 243: wifi.RegisterSubsystemRestartTrackingCallbackResponse
+	(*RemoveLocalOnlyConnectionFailureListenerRequest)(nil),          // 244: wifi.RemoveLocalOnlyConnectionFailureListenerRequest
+	(*RemoveLocalOnlyConnectionFailureListenerResponse)(nil),         // 245: wifi.RemoveLocalOnlyConnectionFailureListenerResponse
+	(*RemoveNetworkRequest)(nil),                                     // 246: wifi.RemoveNetworkRequest
+	(*RemoveNetworkResponse)(nil),                                    // 247: wifi.RemoveNetworkResponse
+	(*RemoveNetworkSuggestions1Request)(nil),                         // 248: wifi.RemoveNetworkSuggestions1Request
+	(*RemoveNetworkSuggestions1Response)(nil),                        // 249: wifi.RemoveNetworkSuggestions1Response
+	(*RemoveNetworkSuggestions2_1Request)(nil),                       // 250: wifi.RemoveNetworkSuggestions2_1Request
+	(*RemoveNetworkSuggestions2_1Response)(nil),                      // 251: wifi.RemoveNetworkSuggestions2_1Response
+	(*RemoveNonCallerConfiguredNetworksRequest)(nil),                 // 252: wifi.RemoveNonCallerConfiguredNetworksRequest
+	(*RemoveNonCallerConfiguredNetworksResponse)(nil),                // 253: wifi.RemoveNonCallerConfiguredNetworksResponse
+	(*RemovePasspointConfigurationRequest)(nil),                      // 254: wifi.RemovePasspointConfigurationRequest
+	(*RemovePasspointConfigurationResponse)(nil),                     // 255: wifi.RemovePasspointConfigurationResponse
+	(*RemovePerSsidRoamingModeRequest)(nil),                          // 256: wifi.RemovePerSsidRoamingModeRequest
+	(*RemovePerSsidRoamingModeResponse)(nil),                         // 257: wifi.RemovePerSsidRoamingModeResponse
+	(*RemoveSuggestionConnectionStatusListenerRequest)(nil),          // 258: wifi.RemoveSuggestionConnectionStatusListenerRequest
+	(*RemoveSuggestionConnectionStatusListenerResponse)(nil),         // 259: wifi.RemoveSuggestionConnectionStatusListenerResponse
+	(*RemoveSuggestionUserApprovalStatusListenerRequest)(nil),        // 260: wifi.RemoveSuggestionUserApprovalStatusListenerRequest
+	(*RemoveSuggestionUserApprovalStatusListenerResponse)(nil),       // 261: wifi.RemoveSuggestionUserApprovalStatusListenerResponse
+	(*RemoveWifiStateChangedListenerRequest)(nil),                    // 262: wifi.RemoveWifiStateChangedListenerRequest
+	(*RemoveWifiStateChangedListenerResponse)(nil),                   // 263: wifi.RemoveWifiStateChangedListenerResponse
+	(*ReportCreateInterfaceImpactRequest)(nil),                       // 264: wifi.ReportCreateInterfaceImpactRequest
+	(*ReportCreateInterfaceImpactResponse)(nil),                      // 265: wifi.ReportCreateInterfaceImpactResponse
+	(*SaveConfigurationRequest)(nil),                                 // 266: wifi.SaveConfigurationRequest
+	(*SaveConfigurationResponse)(nil),                                // 267: wifi.SaveConfigurationResponse
+	(*SetPerSsidRoamingModeRequest)(nil),                             // 268: wifi.SetPerSsidRoamingModeRequest
+	(*SetPerSsidRoamingModeResponse)(nil),                            // 269: wifi.SetPerSsidRoamingModeResponse
+	(*SetSendDhcpHostnameRestrictionRequest)(nil),                    // 270: wifi.SetSendDhcpHostnameRestrictionRequest
+	(*SetSendDhcpHostnameRestrictionResponse)(nil),                   // 271: wifi.SetSendDhcpHostnameRestrictionResponse
+	(*SetTdlsEnabled2Request)(nil),                                   // 272: wifi.SetTdlsEnabled2Request
+	(*SetTdlsEnabled2Response)(nil),                                  // 273: wifi.SetTdlsEnabled2Response
+	(*SetTdlsEnabled4_1Request)(nil),                                 // 274: wifi.SetTdlsEnabled4_1Request
+	(*SetTdlsEnabled4_1Response)(nil),                                // 275: wifi.SetTdlsEnabled4_1Response
+	(*SetTdlsEnabledWithMacAddress2Request)(nil),                     // 276: wifi.SetTdlsEnabledWithMacAddress2Request
+	(*SetTdlsEnabledWithMacAddress2Response)(nil),                    // 277: wifi.SetTdlsEnabledWithMacAddress2Response
+	(*SetTdlsEnabledWithMacAddress4_1Request)(nil),                   // 278: wifi.SetTdlsEnabledWithMacAddress4_1Request
+	(*SetTdlsEnabledWithMacAddress4_1Response)(nil),                  // 279: wifi.SetTdlsEnabledWithMacAddress4_1Response
+	(*SetWifiEnabledRequest)(nil),                                    // 280: wifi.SetWifiEnabledRequest
+	(*SetWifiEnabledResponse)(nil),                                   // 281: wifi.SetWifiEnabledResponse
+	(*StartLocalOnlyHotspotWithConfigurationRequest)(nil),            // 282: wifi.StartLocalOnlyHotspotWithConfigurationRequest
+	(*StartLocalOnlyHotspotWithConfigurationResponse)(nil),           // 283: wifi.StartLocalOnlyHotspotWithConfigurationResponse
+	(*StartScanRequest)(nil),                                         // 284: wifi.StartScanRequest
+	(*StartScanResponse)(nil),                                        // 285: wifi.StartScanResponse
+	(*StartWpsRequest)(nil),                                          // 286: wifi.StartWpsRequest
+	(*StartWpsResponse)(nil),                                         // 287: wifi.StartWpsResponse
+	(*UnregisterScanResultsCallbackRequest)(nil),                     // 288: wifi.UnregisterScanResultsCallbackRequest
+	(*UnregisterScanResultsCallbackResponse)(nil),                    // 289: wifi.UnregisterScanResultsCallbackResponse
+	(*UnregisterSubsystemRestartTrackingCallbackRequest)(nil),        // 290: wifi.UnregisterSubsystemRestartTrackingCallbackRequest
+	(*UnregisterSubsystemRestartTrackingCallbackResponse)(nil),       // 291: wifi.UnregisterSubsystemRestartTrackingCallbackResponse
+	(*UpdateNetworkRequest)(nil),                                     // 292: wifi.UpdateNetworkRequest
+	(*UpdateNetworkResponse)(nil),                                    // 293: wifi.UpdateNetworkResponse
+	(*ValidateSoftApConfigurationRequest)(nil),                       // 294: wifi.ValidateSoftApConfigurationRequest
+	(*ValidateSoftApConfigurationResponse)(nil),                      // 295: wifi.ValidateSoftApConfigurationResponse
+	(*CalculateSignalLevel2_1Request)(nil),                           // 296: wifi.CalculateSignalLevel2_1Request
+	(*CalculateSignalLevel2_1Response)(nil),                          // 297: wifi.CalculateSignalLevel2_1Response
+	(*CompareSignalLevelRequest)(nil),                                // 298: wifi.CompareSignalLevelRequest
+	(*CompareSignalLevelResponse)(nil),                               // 299: wifi.CompareSignalLevelResponse
+	(*GetSecurityTypesRequest)(nil),                                  // 300: wifi.GetSecurityTypesRequest
+	(*GetSecurityTypesResponse)(nil),                                 // 301: wifi.GetSecurityTypesResponse
+	(*GetWifiSsidRequest)(nil),                                       // 302: wifi.GetWifiSsidRequest
+	(*GetWifiSsidResponse)(nil),                                      // 303: wifi.GetWifiSsidResponse
+	(*Is80211AzNtbResponderRequest)(nil),                             // 304: wifi.Is80211azNtbResponderRequest
+	(*Is80211AzNtbResponderResponse)(nil),                            // 305: wifi.Is80211azNtbResponderResponse
+	(*Is80211McResponderRequest)(nil),                                // 306: wifi.Is80211mcResponderRequest
+	(*Is80211McResponderResponse)(nil),                               // 307: wifi.Is80211mcResponderResponse
+	(*IsPasspointNetworkRequest)(nil),                                // 308: wifi.IsPasspointNetworkRequest
+	(*IsPasspointNetworkResponse)(nil),                               // 309: wifi.IsPasspointNetworkResponse
+	(*IsRangingFrameProtectionRequiredRequest)(nil),                  // 310: wifi.IsRangingFrameProtectionRequiredRequest
+	(*IsRangingFrameProtectionRequiredResponse)(nil),                 // 311: wifi.IsRangingFrameProtectionRequiredResponse
+	(*IsSecureHeLtfSupportedRequest)(nil),                            // 312: wifi.IsSecureHeLtfSupportedRequest
+	(*IsSecureHeLtfSupportedResponse)(nil),                           // 313: wifi.IsSecureHeLtfSupportedResponse
+	(*IsTwtResponderRequest)(nil),                                    // 314: wifi.IsTwtResponderRequest
+	(*IsTwtResponderResponse)(nil),                                   // 315: wifi.IsTwtResponderResponse
+	(*ConvertChannelToFrequencyMhzIfSupportedRequest)(nil),           // 316: wifi.ConvertChannelToFrequencyMhzIfSupportedRequest
+	(*ConvertChannelToFrequencyMhzIfSupportedResponse)(nil),          // 317: wifi.ConvertChannelToFrequencyMhzIfSupportedResponse
+	(*ConvertFrequencyMhzToChannelIfSupportedRequest)(nil),           // 318: wifi.ConvertFrequencyMhzToChannelIfSupportedRequest
+	(*ConvertFrequencyMhzToChannelIfSupportedResponse)(nil),          // 319: wifi.ConvertFrequencyMhzToChannelIfSupportedResponse
 }
 var file_proto_wifi_wifi_proto_depIdxs = []int32{
-	0,   // 0: wifi.WifiManagerService.AddLocalOnlyConnectionFailureListener:input_type -> wifi.AddLocalOnlyConnectionFailureListenerRequest
-	2,   // 1: wifi.WifiManagerService.AddNetwork:input_type -> wifi.AddNetworkRequest
-	4,   // 2: wifi.WifiManagerService.AddNetworkPrivileged:input_type -> wifi.AddNetworkPrivilegedRequest
-	6,   // 3: wifi.WifiManagerService.AddNetworkSuggestions:input_type -> wifi.AddNetworkSuggestionsRequest
-	8,   // 4: wifi.WifiManagerService.AddOrUpdatePasspointConfiguration:input_type -> wifi.AddOrUpdatePasspointConfigurationRequest
-	10,  // 5: wifi.WifiManagerService.AddSuggestionConnectionStatusListener:input_type -> wifi.AddSuggestionConnectionStatusListenerRequest
-	12,  // 6: wifi.WifiManagerService.AddSuggestionUserApprovalStatusListener:input_type -> wifi.AddSuggestionUserApprovalStatusListenerRequest
-	14,  // 7: wifi.WifiManagerService.AddWifiStateChangedListener:input_type -> wifi.AddWifiStateChangedListenerRequest
-	16,  // 8: wifi.WifiManagerService.AllowAutojoinGlobal:input_type -> wifi.AllowAutojoinGlobalRequest
-	18,  // 9: wifi.WifiManagerService.CalculateSignalLevel1:input_type -> wifi.CalculateSignalLevel1Request
-	20,  // 10: wifi.WifiManagerService.CancelWps:input_type -> wifi.CancelWpsRequest
-	22,  // 11: wifi.WifiManagerService.CreateMulticastLock:input_type -> wifi.CreateMulticastLockRequest
-	24,  // 12: wifi.WifiManagerService.CreateWifiLock2:input_type -> wifi.CreateWifiLock2Request
-	26,  // 13: wifi.WifiManagerService.CreateWifiLock1_1:input_type -> wifi.CreateWifiLock1_1Request
-	28,  // 14: wifi.WifiManagerService.DisableNetwork:input_type -> wifi.DisableNetworkRequest
-	30,  // 15: wifi.WifiManagerService.DisallowCurrentSuggestedNetwork:input_type -> wifi.DisallowCurrentSuggestedNetworkRequest
-	32,  // 16: wifi.WifiManagerService.Disconnect:input_type -> wifi.DisconnectRequest
-	34,  // 17: wifi.WifiManagerService.EnableNetwork:input_type -> wifi.EnableNetworkRequest
-	36,  // 18: wifi.WifiManagerService.FlushPasspointAnqpCache:input_type -> wifi.FlushPasspointAnqpCacheRequest
-	38,  // 19: wifi.WifiManagerService.GetAllowedChannels:input_type -> wifi.GetAllowedChannelsRequest
-	40,  // 20: wifi.WifiManagerService.GetCallerConfiguredNetworks:input_type -> wifi.GetCallerConfiguredNetworksRequest
-	42,  // 21: wifi.WifiManagerService.GetChannelData:input_type -> wifi.GetChannelDataRequest
-	44,  // 22: wifi.WifiManagerService.GetConfiguredNetworks:input_type -> wifi.GetConfiguredNetworksRequest
-	46,  // 23: wifi.WifiManagerService.GetConnectionInfo:input_type -> wifi.GetConnectionInfoRequest
-	48,  // 24: wifi.WifiManagerService.GetDhcpInfo:input_type -> wifi.GetDhcpInfoRequest
-	50,  // 25: wifi.WifiManagerService.GetMaxNumberOfChannelsPerNetworkSpecifierRequest:input_type -> wifi.GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest
-	52,  // 26: wifi.WifiManagerService.GetMaxNumberOfNetworkSuggestionsPerApp:input_type -> wifi.GetMaxNumberOfNetworkSuggestionsPerAppRequest
-	54,  // 27: wifi.WifiManagerService.GetMaxSignalLevel:input_type -> wifi.GetMaxSignalLevelRequest
-	56,  // 28: wifi.WifiManagerService.GetMaxSupportedConcurrentTdlsSessions:input_type -> wifi.GetMaxSupportedConcurrentTdlsSessionsRequest
-	58,  // 29: wifi.WifiManagerService.GetNetworkSuggestions:input_type -> wifi.GetNetworkSuggestionsRequest
-	60,  // 30: wifi.WifiManagerService.GetNumberOfEnabledTdlsSessions:input_type -> wifi.GetNumberOfEnabledTdlsSessionsRequest
-	62,  // 31: wifi.WifiManagerService.GetPasspointConfigurations:input_type -> wifi.GetPasspointConfigurationsRequest
-	64,  // 32: wifi.WifiManagerService.GetPerSsidRoamingModes:input_type -> wifi.GetPerSsidRoamingModesRequest
-	66,  // 33: wifi.WifiManagerService.GetScanResults:input_type -> wifi.GetScanResultsRequest
-	68,  // 34: wifi.WifiManagerService.GetStaConcurrencyForMultiInternetMode:input_type -> wifi.GetStaConcurrencyForMultiInternetModeRequest
-	70,  // 35: wifi.WifiManagerService.GetUsableChannels:input_type -> wifi.GetUsableChannelsRequest
-	72,  // 36: wifi.WifiManagerService.GetWifiState:input_type -> wifi.GetWifiStateRequest
-	74,  // 37: wifi.WifiManagerService.Is24GHzBandSupported:input_type -> wifi.Is24GHzBandSupportedRequest
-	76,  // 38: wifi.WifiManagerService.Is5GHzBandSupported:input_type -> wifi.Is5GHzBandSupportedRequest
-	78,  // 39: wifi.WifiManagerService.Is60GHzBandSupported:input_type -> wifi.Is60GHzBandSupportedRequest
-	80,  // 40: wifi.WifiManagerService.Is6GHzBandSupported:input_type -> wifi.Is6GHzBandSupportedRequest
-	82,  // 41: wifi.WifiManagerService.IsAggressiveRoamingModeSupported:input_type -> wifi.IsAggressiveRoamingModeSupportedRequest
-	84,  // 42: wifi.WifiManagerService.IsAutoWakeupEnabled:input_type -> wifi.IsAutoWakeupEnabledRequest
-	86,  // 43: wifi.WifiManagerService.IsBridgedApConcurrencySupported:input_type -> wifi.IsBridgedApConcurrencySupportedRequest
-	88,  // 44: wifi.WifiManagerService.IsCarrierNetworkOffloadEnabled:input_type -> wifi.IsCarrierNetworkOffloadEnabledRequest
-	90,  // 45: wifi.WifiManagerService.IsD2dSupportedWhenInfraStaDisabled:input_type -> wifi.IsD2dSupportedWhenInfraStaDisabledRequest
-	92,  // 46: wifi.WifiManagerService.IsDecoratedIdentitySupported:input_type -> wifi.IsDecoratedIdentitySupportedRequest
-	94,  // 47: wifi.WifiManagerService.IsDeviceToApRttSupported:input_type -> wifi.IsDeviceToApRttSupportedRequest
-	96,  // 48: wifi.WifiManagerService.IsDualBandSimultaneousSupported:input_type -> wifi.IsDualBandSimultaneousSupportedRequest
-	98,  // 49: wifi.WifiManagerService.IsEasyConnectDppAkmSupported:input_type -> wifi.IsEasyConnectDppAkmSupportedRequest
-	100, // 50: wifi.WifiManagerService.IsEasyConnectEnrolleeResponderModeSupported:input_type -> wifi.IsEasyConnectEnrolleeResponderModeSupportedRequest
-	102, // 51: wifi.WifiManagerService.IsEasyConnectSupported:input_type -> wifi.IsEasyConnectSupportedRequest
-	104, // 52: wifi.WifiManagerService.IsEnhancedOpenSupported:input_type -> wifi.IsEnhancedOpenSupportedRequest
-	106, // 53: wifi.WifiManagerService.IsEnhancedPowerReportingSupported:input_type -> wifi.IsEnhancedPowerReportingSupportedRequest
-	108, // 54: wifi.WifiManagerService.IsMakeBeforeBreakWifiSwitchingSupported:input_type -> wifi.IsMakeBeforeBreakWifiSwitchingSupportedRequest
-	110, // 55: wifi.WifiManagerService.IsP2pSupported:input_type -> wifi.IsP2pSupportedRequest
-	112, // 56: wifi.WifiManagerService.IsPasspointTermsAndConditionsSupported:input_type -> wifi.IsPasspointTermsAndConditionsSupportedRequest
-	114, // 57: wifi.WifiManagerService.IsPreferredNetworkOffloadSupported:input_type -> wifi.IsPreferredNetworkOffloadSupportedRequest
-	116, // 58: wifi.WifiManagerService.IsScanAlwaysAvailable:input_type -> wifi.IsScanAlwaysAvailableRequest
-	118, // 59: wifi.WifiManagerService.IsScanThrottleEnabled:input_type -> wifi.IsScanThrottleEnabledRequest
-	120, // 60: wifi.WifiManagerService.IsStaApConcurrencySupported:input_type -> wifi.IsStaApConcurrencySupportedRequest
-	122, // 61: wifi.WifiManagerService.IsStaBridgedApConcurrencySupported:input_type -> wifi.IsStaBridgedApConcurrencySupportedRequest
-	124, // 62: wifi.WifiManagerService.IsStaConcurrencyForLocalOnlyConnectionsSupported:input_type -> wifi.IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest
-	126, // 63: wifi.WifiManagerService.IsStaConcurrencyForMultiInternetSupported:input_type -> wifi.IsStaConcurrencyForMultiInternetSupportedRequest
-	128, // 64: wifi.WifiManagerService.IsTdlsOperationCurrentlyAvailable:input_type -> wifi.IsTdlsOperationCurrentlyAvailableRequest
-	130, // 65: wifi.WifiManagerService.IsTdlsSupported:input_type -> wifi.IsTdlsSupportedRequest
-	132, // 66: wifi.WifiManagerService.IsTidToLinkMappingNegotiationSupported:input_type -> wifi.IsTidToLinkMappingNegotiationSupportedRequest
-	134, // 67: wifi.WifiManagerService.IsTlsMinimumVersionSupported:input_type -> wifi.IsTlsMinimumVersionSupportedRequest
-	136, // 68: wifi.WifiManagerService.IsTlsV13Supported:input_type -> wifi.IsTlsV13SupportedRequest
-	138, // 69: wifi.WifiManagerService.IsTrustOnFirstUseSupported:input_type -> wifi.IsTrustOnFirstUseSupportedRequest
-	140, // 70: wifi.WifiManagerService.IsWapiSupported:input_type -> wifi.IsWapiSupportedRequest
-	142, // 71: wifi.WifiManagerService.IsWepSupported:input_type -> wifi.IsWepSupportedRequest
-	144, // 72: wifi.WifiManagerService.IsWifiDisplayR2Supported:input_type -> wifi.IsWifiDisplayR2SupportedRequest
-	146, // 73: wifi.WifiManagerService.IsWifiEnabled:input_type -> wifi.IsWifiEnabledRequest
-	148, // 74: wifi.WifiManagerService.IsWifiPasspointEnabled:input_type -> wifi.IsWifiPasspointEnabledRequest
-	150, // 75: wifi.WifiManagerService.IsWifiStandardSupported:input_type -> wifi.IsWifiStandardSupportedRequest
-	152, // 76: wifi.WifiManagerService.IsWpa3SaeH2eSupported:input_type -> wifi.IsWpa3SaeH2eSupportedRequest
-	154, // 77: wifi.WifiManagerService.IsWpa3SaePublicKeySupported:input_type -> wifi.IsWpa3SaePublicKeySupportedRequest
-	156, // 78: wifi.WifiManagerService.IsWpa3SaeSupported:input_type -> wifi.IsWpa3SaeSupportedRequest
-	158, // 79: wifi.WifiManagerService.IsWpa3SuiteBSupported:input_type -> wifi.IsWpa3SuiteBSupportedRequest
-	160, // 80: wifi.WifiManagerService.IsWpaPersonalSupported:input_type -> wifi.IsWpaPersonalSupportedRequest
-	162, // 81: wifi.WifiManagerService.PingSupplicant:input_type -> wifi.PingSupplicantRequest
-	164, // 82: wifi.WifiManagerService.QueryAutojoinGlobal:input_type -> wifi.QueryAutojoinGlobalRequest
-	166, // 83: wifi.WifiManagerService.QuerySendDhcpHostnameRestriction:input_type -> wifi.QuerySendDhcpHostnameRestrictionRequest
-	168, // 84: wifi.WifiManagerService.Reassociate:input_type -> wifi.ReassociateRequest
-	170, // 85: wifi.WifiManagerService.Reconnect:input_type -> wifi.ReconnectRequest
-	172, // 86: wifi.WifiManagerService.RegisterScanResultsCallback:input_type -> wifi.RegisterScanResultsCallbackRequest
-	174, // 87: wifi.WifiManagerService.RegisterSubsystemRestartTrackingCallback:input_type -> wifi.RegisterSubsystemRestartTrackingCallbackRequest
-	176, // 88: wifi.WifiManagerService.RemoveLocalOnlyConnectionFailureListener:input_type -> wifi.RemoveLocalOnlyConnectionFailureListenerRequest
-	178, // 89: wifi.WifiManagerService.RemoveNetwork:input_type -> wifi.RemoveNetworkRequest
-	180, // 90: wifi.WifiManagerService.RemoveNetworkSuggestions1:input_type -> wifi.RemoveNetworkSuggestions1Request
-	182, // 91: wifi.WifiManagerService.RemoveNetworkSuggestions2_1:input_type -> wifi.RemoveNetworkSuggestions2_1Request
-	184, // 92: wifi.WifiManagerService.RemoveNonCallerConfiguredNetworks:input_type -> wifi.RemoveNonCallerConfiguredNetworksRequest
-	186, // 93: wifi.WifiManagerService.RemovePasspointConfiguration:input_type -> wifi.RemovePasspointConfigurationRequest
-	188, // 94: wifi.WifiManagerService.RemovePerSsidRoamingMode:input_type -> wifi.RemovePerSsidRoamingModeRequest
-	190, // 95: wifi.WifiManagerService.RemoveSuggestionConnectionStatusListener:input_type -> wifi.RemoveSuggestionConnectionStatusListenerRequest
-	192, // 96: wifi.WifiManagerService.RemoveSuggestionUserApprovalStatusListener:input_type -> wifi.RemoveSuggestionUserApprovalStatusListenerRequest
-	194, // 97: wifi.WifiManagerService.RemoveWifiStateChangedListener:input_type -> wifi.RemoveWifiStateChangedListenerRequest
-	196, // 98: wifi.WifiManagerService.ReportCreateInterfaceImpact:input_type -> wifi.ReportCreateInterfaceImpactRequest
-	198, // 99: wifi.WifiManagerService.SaveConfiguration:input_type -> wifi.SaveConfigurationRequest
-	200, // 100: wifi.WifiManagerService.SetPerSsidRoamingMode:input_type -> wifi.SetPerSsidRoamingModeRequest
-	202, // 101: wifi.WifiManagerService.SetSendDhcpHostnameRestriction:input_type -> wifi.SetSendDhcpHostnameRestrictionRequest
-	204, // 102: wifi.WifiManagerService.SetTdlsEnabled2:input_type -> wifi.SetTdlsEnabled2Request
-	206, // 103: wifi.WifiManagerService.SetTdlsEnabled4_1:input_type -> wifi.SetTdlsEnabled4_1Request
-	208, // 104: wifi.WifiManagerService.SetTdlsEnabledWithMacAddress2:input_type -> wifi.SetTdlsEnabledWithMacAddress2Request
-	210, // 105: wifi.WifiManagerService.SetTdlsEnabledWithMacAddress4_1:input_type -> wifi.SetTdlsEnabledWithMacAddress4_1Request
-	212, // 106: wifi.WifiManagerService.SetWifiEnabled:input_type -> wifi.SetWifiEnabledRequest
-	214, // 107: wifi.WifiManagerService.StartLocalOnlyHotspotWithConfiguration:input_type -> wifi.StartLocalOnlyHotspotWithConfigurationRequest
-	216, // 108: wifi.WifiManagerService.StartScan:input_type -> wifi.StartScanRequest
-	218, // 109: wifi.WifiManagerService.StartWps:input_type -> wifi.StartWpsRequest
-	220, // 110: wifi.WifiManagerService.UnregisterScanResultsCallback:input_type -> wifi.UnregisterScanResultsCallbackRequest
-	222, // 111: wifi.WifiManagerService.UnregisterSubsystemRestartTrackingCallback:input_type -> wifi.UnregisterSubsystemRestartTrackingCallbackRequest
-	224, // 112: wifi.WifiManagerService.UpdateNetwork:input_type -> wifi.UpdateNetworkRequest
-	226, // 113: wifi.WifiManagerService.ValidateSoftApConfiguration:input_type -> wifi.ValidateSoftApConfigurationRequest
-	228, // 114: wifi.WifiManagerService.CalculateSignalLevel2_1:input_type -> wifi.CalculateSignalLevel2_1Request
-	230, // 115: wifi.WifiManagerService.CompareSignalLevel:input_type -> wifi.CompareSignalLevelRequest
-	1,   // 116: wifi.WifiManagerService.AddLocalOnlyConnectionFailureListener:output_type -> wifi.AddLocalOnlyConnectionFailureListenerResponse
-	3,   // 117: wifi.WifiManagerService.AddNetwork:output_type -> wifi.AddNetworkResponse
-	5,   // 118: wifi.WifiManagerService.AddNetworkPrivileged:output_type -> wifi.AddNetworkPrivilegedResponse
-	7,   // 119: wifi.WifiManagerService.AddNetworkSuggestions:output_type -> wifi.AddNetworkSuggestionsResponse
-	9,   // 120: wifi.WifiManagerService.AddOrUpdatePasspointConfiguration:output_type -> wifi.AddOrUpdatePasspointConfigurationResponse
-	11,  // 121: wifi.WifiManagerService.AddSuggestionConnectionStatusListener:output_type -> wifi.AddSuggestionConnectionStatusListenerResponse
-	13,  // 122: wifi.WifiManagerService.AddSuggestionUserApprovalStatusListener:output_type -> wifi.AddSuggestionUserApprovalStatusListenerResponse
-	15,  // 123: wifi.WifiManagerService.AddWifiStateChangedListener:output_type -> wifi.AddWifiStateChangedListenerResponse
-	17,  // 124: wifi.WifiManagerService.AllowAutojoinGlobal:output_type -> wifi.AllowAutojoinGlobalResponse
-	19,  // 125: wifi.WifiManagerService.CalculateSignalLevel1:output_type -> wifi.CalculateSignalLevel1Response
-	21,  // 126: wifi.WifiManagerService.CancelWps:output_type -> wifi.CancelWpsResponse
-	23,  // 127: wifi.WifiManagerService.CreateMulticastLock:output_type -> wifi.CreateMulticastLockResponse
-	25,  // 128: wifi.WifiManagerService.CreateWifiLock2:output_type -> wifi.CreateWifiLock2Response
-	27,  // 129: wifi.WifiManagerService.CreateWifiLock1_1:output_type -> wifi.CreateWifiLock1_1Response
-	29,  // 130: wifi.WifiManagerService.DisableNetwork:output_type -> wifi.DisableNetworkResponse
-	31,  // 131: wifi.WifiManagerService.DisallowCurrentSuggestedNetwork:output_type -> wifi.DisallowCurrentSuggestedNetworkResponse
-	33,  // 132: wifi.WifiManagerService.Disconnect:output_type -> wifi.DisconnectResponse
-	35,  // 133: wifi.WifiManagerService.EnableNetwork:output_type -> wifi.EnableNetworkResponse
-	37,  // 134: wifi.WifiManagerService.FlushPasspointAnqpCache:output_type -> wifi.FlushPasspointAnqpCacheResponse
-	39,  // 135: wifi.WifiManagerService.GetAllowedChannels:output_type -> wifi.GetAllowedChannelsResponse
-	41,  // 136: wifi.WifiManagerService.GetCallerConfiguredNetworks:output_type -> wifi.GetCallerConfiguredNetworksResponse
-	43,  // 137: wifi.WifiManagerService.GetChannelData:output_type -> wifi.GetChannelDataResponse
-	45,  // 138: wifi.WifiManagerService.GetConfiguredNetworks:output_type -> wifi.GetConfiguredNetworksResponse
-	47,  // 139: wifi.WifiManagerService.GetConnectionInfo:output_type -> wifi.GetConnectionInfoResponse
-	49,  // 140: wifi.WifiManagerService.GetDhcpInfo:output_type -> wifi.GetDhcpInfoResponse
-	51,  // 141: wifi.WifiManagerService.GetMaxNumberOfChannelsPerNetworkSpecifierRequest:output_type -> wifi.GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse
-	53,  // 142: wifi.WifiManagerService.GetMaxNumberOfNetworkSuggestionsPerApp:output_type -> wifi.GetMaxNumberOfNetworkSuggestionsPerAppResponse
-	55,  // 143: wifi.WifiManagerService.GetMaxSignalLevel:output_type -> wifi.GetMaxSignalLevelResponse
-	57,  // 144: wifi.WifiManagerService.GetMaxSupportedConcurrentTdlsSessions:output_type -> wifi.GetMaxSupportedConcurrentTdlsSessionsResponse
-	59,  // 145: wifi.WifiManagerService.GetNetworkSuggestions:output_type -> wifi.GetNetworkSuggestionsResponse
-	61,  // 146: wifi.WifiManagerService.GetNumberOfEnabledTdlsSessions:output_type -> wifi.GetNumberOfEnabledTdlsSessionsResponse
-	63,  // 147: wifi.WifiManagerService.GetPasspointConfigurations:output_type -> wifi.GetPasspointConfigurationsResponse
-	65,  // 148: wifi.WifiManagerService.GetPerSsidRoamingModes:output_type -> wifi.GetPerSsidRoamingModesResponse
-	67,  // 149: wifi.WifiManagerService.GetScanResults:output_type -> wifi.GetScanResultsResponse
-	69,  // 150: wifi.WifiManagerService.GetStaConcurrencyForMultiInternetMode:output_type -> wifi.GetStaConcurrencyForMultiInternetModeResponse
-	71,  // 151: wifi.WifiManagerService.GetUsableChannels:output_type -> wifi.GetUsableChannelsResponse
-	73,  // 152: wifi.WifiManagerService.GetWifiState:output_type -> wifi.GetWifiStateResponse
-	75,  // 153: wifi.WifiManagerService.Is24GHzBandSupported:output_type -> wifi.Is24GHzBandSupportedResponse
-	77,  // 154: wifi.WifiManagerService.Is5GHzBandSupported:output_type -> wifi.Is5GHzBandSupportedResponse
-	79,  // 155: wifi.WifiManagerService.Is60GHzBandSupported:output_type -> wifi.Is60GHzBandSupportedResponse
-	81,  // 156: wifi.WifiManagerService.Is6GHzBandSupported:output_type -> wifi.Is6GHzBandSupportedResponse
-	83,  // 157: wifi.WifiManagerService.IsAggressiveRoamingModeSupported:output_type -> wifi.IsAggressiveRoamingModeSupportedResponse
-	85,  // 158: wifi.WifiManagerService.IsAutoWakeupEnabled:output_type -> wifi.IsAutoWakeupEnabledResponse
-	87,  // 159: wifi.WifiManagerService.IsBridgedApConcurrencySupported:output_type -> wifi.IsBridgedApConcurrencySupportedResponse
-	89,  // 160: wifi.WifiManagerService.IsCarrierNetworkOffloadEnabled:output_type -> wifi.IsCarrierNetworkOffloadEnabledResponse
-	91,  // 161: wifi.WifiManagerService.IsD2dSupportedWhenInfraStaDisabled:output_type -> wifi.IsD2dSupportedWhenInfraStaDisabledResponse
-	93,  // 162: wifi.WifiManagerService.IsDecoratedIdentitySupported:output_type -> wifi.IsDecoratedIdentitySupportedResponse
-	95,  // 163: wifi.WifiManagerService.IsDeviceToApRttSupported:output_type -> wifi.IsDeviceToApRttSupportedResponse
-	97,  // 164: wifi.WifiManagerService.IsDualBandSimultaneousSupported:output_type -> wifi.IsDualBandSimultaneousSupportedResponse
-	99,  // 165: wifi.WifiManagerService.IsEasyConnectDppAkmSupported:output_type -> wifi.IsEasyConnectDppAkmSupportedResponse
-	101, // 166: wifi.WifiManagerService.IsEasyConnectEnrolleeResponderModeSupported:output_type -> wifi.IsEasyConnectEnrolleeResponderModeSupportedResponse
-	103, // 167: wifi.WifiManagerService.IsEasyConnectSupported:output_type -> wifi.IsEasyConnectSupportedResponse
-	105, // 168: wifi.WifiManagerService.IsEnhancedOpenSupported:output_type -> wifi.IsEnhancedOpenSupportedResponse
-	107, // 169: wifi.WifiManagerService.IsEnhancedPowerReportingSupported:output_type -> wifi.IsEnhancedPowerReportingSupportedResponse
-	109, // 170: wifi.WifiManagerService.IsMakeBeforeBreakWifiSwitchingSupported:output_type -> wifi.IsMakeBeforeBreakWifiSwitchingSupportedResponse
-	111, // 171: wifi.WifiManagerService.IsP2pSupported:output_type -> wifi.IsP2pSupportedResponse
-	113, // 172: wifi.WifiManagerService.IsPasspointTermsAndConditionsSupported:output_type -> wifi.IsPasspointTermsAndConditionsSupportedResponse
-	115, // 173: wifi.WifiManagerService.IsPreferredNetworkOffloadSupported:output_type -> wifi.IsPreferredNetworkOffloadSupportedResponse
-	117, // 174: wifi.WifiManagerService.IsScanAlwaysAvailable:output_type -> wifi.IsScanAlwaysAvailableResponse
-	119, // 175: wifi.WifiManagerService.IsScanThrottleEnabled:output_type -> wifi.IsScanThrottleEnabledResponse
-	121, // 176: wifi.WifiManagerService.IsStaApConcurrencySupported:output_type -> wifi.IsStaApConcurrencySupportedResponse
-	123, // 177: wifi.WifiManagerService.IsStaBridgedApConcurrencySupported:output_type -> wifi.IsStaBridgedApConcurrencySupportedResponse
-	125, // 178: wifi.WifiManagerService.IsStaConcurrencyForLocalOnlyConnectionsSupported:output_type -> wifi.IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse
-	127, // 179: wifi.WifiManagerService.IsStaConcurrencyForMultiInternetSupported:output_type -> wifi.IsStaConcurrencyForMultiInternetSupportedResponse
-	129, // 180: wifi.WifiManagerService.IsTdlsOperationCurrentlyAvailable:output_type -> wifi.IsTdlsOperationCurrentlyAvailableResponse
-	131, // 181: wifi.WifiManagerService.IsTdlsSupported:output_type -> wifi.IsTdlsSupportedResponse
-	133, // 182: wifi.WifiManagerService.IsTidToLinkMappingNegotiationSupported:output_type -> wifi.IsTidToLinkMappingNegotiationSupportedResponse
-	135, // 183: wifi.WifiManagerService.IsTlsMinimumVersionSupported:output_type -> wifi.IsTlsMinimumVersionSupportedResponse
-	137, // 184: wifi.WifiManagerService.IsTlsV13Supported:output_type -> wifi.IsTlsV13SupportedResponse
-	139, // 185: wifi.WifiManagerService.IsTrustOnFirstUseSupported:output_type -> wifi.IsTrustOnFirstUseSupportedResponse
-	141, // 186: wifi.WifiManagerService.IsWapiSupported:output_type -> wifi.IsWapiSupportedResponse
-	143, // 187: wifi.WifiManagerService.IsWepSupported:output_type -> wifi.IsWepSupportedResponse
-	145, // 188: wifi.WifiManagerService.IsWifiDisplayR2Supported:output_type -> wifi.IsWifiDisplayR2SupportedResponse
-	147, // 189: wifi.WifiManagerService.IsWifiEnabled:output_type -> wifi.IsWifiEnabledResponse
-	149, // 190: wifi.WifiManagerService.IsWifiPasspointEnabled:output_type -> wifi.IsWifiPasspointEnabledResponse
-	151, // 191: wifi.WifiManagerService.IsWifiStandardSupported:output_type -> wifi.IsWifiStandardSupportedResponse
-	153, // 192: wifi.WifiManagerService.IsWpa3SaeH2eSupported:output_type -> wifi.IsWpa3SaeH2eSupportedResponse
-	155, // 193: wifi.WifiManagerService.IsWpa3SaePublicKeySupported:output_type -> wifi.IsWpa3SaePublicKeySupportedResponse
-	157, // 194: wifi.WifiManagerService.IsWpa3SaeSupported:output_type -> wifi.IsWpa3SaeSupportedResponse
-	159, // 195: wifi.WifiManagerService.IsWpa3SuiteBSupported:output_type -> wifi.IsWpa3SuiteBSupportedResponse
-	161, // 196: wifi.WifiManagerService.IsWpaPersonalSupported:output_type -> wifi.IsWpaPersonalSupportedResponse
-	163, // 197: wifi.WifiManagerService.PingSupplicant:output_type -> wifi.PingSupplicantResponse
-	165, // 198: wifi.WifiManagerService.QueryAutojoinGlobal:output_type -> wifi.QueryAutojoinGlobalResponse
-	167, // 199: wifi.WifiManagerService.QuerySendDhcpHostnameRestriction:output_type -> wifi.QuerySendDhcpHostnameRestrictionResponse
-	169, // 200: wifi.WifiManagerService.Reassociate:output_type -> wifi.ReassociateResponse
-	171, // 201: wifi.WifiManagerService.Reconnect:output_type -> wifi.ReconnectResponse
-	173, // 202: wifi.WifiManagerService.RegisterScanResultsCallback:output_type -> wifi.RegisterScanResultsCallbackResponse
-	175, // 203: wifi.WifiManagerService.RegisterSubsystemRestartTrackingCallback:output_type -> wifi.RegisterSubsystemRestartTrackingCallbackResponse
-	177, // 204: wifi.WifiManagerService.RemoveLocalOnlyConnectionFailureListener:output_type -> wifi.RemoveLocalOnlyConnectionFailureListenerResponse
-	179, // 205: wifi.WifiManagerService.RemoveNetwork:output_type -> wifi.RemoveNetworkResponse
-	181, // 206: wifi.WifiManagerService.RemoveNetworkSuggestions1:output_type -> wifi.RemoveNetworkSuggestions1Response
-	183, // 207: wifi.WifiManagerService.RemoveNetworkSuggestions2_1:output_type -> wifi.RemoveNetworkSuggestions2_1Response
-	185, // 208: wifi.WifiManagerService.RemoveNonCallerConfiguredNetworks:output_type -> wifi.RemoveNonCallerConfiguredNetworksResponse
-	187, // 209: wifi.WifiManagerService.RemovePasspointConfiguration:output_type -> wifi.RemovePasspointConfigurationResponse
-	189, // 210: wifi.WifiManagerService.RemovePerSsidRoamingMode:output_type -> wifi.RemovePerSsidRoamingModeResponse
-	191, // 211: wifi.WifiManagerService.RemoveSuggestionConnectionStatusListener:output_type -> wifi.RemoveSuggestionConnectionStatusListenerResponse
-	193, // 212: wifi.WifiManagerService.RemoveSuggestionUserApprovalStatusListener:output_type -> wifi.RemoveSuggestionUserApprovalStatusListenerResponse
-	195, // 213: wifi.WifiManagerService.RemoveWifiStateChangedListener:output_type -> wifi.RemoveWifiStateChangedListenerResponse
-	197, // 214: wifi.WifiManagerService.ReportCreateInterfaceImpact:output_type -> wifi.ReportCreateInterfaceImpactResponse
-	199, // 215: wifi.WifiManagerService.SaveConfiguration:output_type -> wifi.SaveConfigurationResponse
-	201, // 216: wifi.WifiManagerService.SetPerSsidRoamingMode:output_type -> wifi.SetPerSsidRoamingModeResponse
-	203, // 217: wifi.WifiManagerService.SetSendDhcpHostnameRestriction:output_type -> wifi.SetSendDhcpHostnameRestrictionResponse
-	205, // 218: wifi.WifiManagerService.SetTdlsEnabled2:output_type -> wifi.SetTdlsEnabled2Response
-	207, // 219: wifi.WifiManagerService.SetTdlsEnabled4_1:output_type -> wifi.SetTdlsEnabled4_1Response
-	209, // 220: wifi.WifiManagerService.SetTdlsEnabledWithMacAddress2:output_type -> wifi.SetTdlsEnabledWithMacAddress2Response
-	211, // 221: wifi.WifiManagerService.SetTdlsEnabledWithMacAddress4_1:output_type -> wifi.SetTdlsEnabledWithMacAddress4_1Response
-	213, // 222: wifi.WifiManagerService.SetWifiEnabled:output_type -> wifi.SetWifiEnabledResponse
-	215, // 223: wifi.WifiManagerService.StartLocalOnlyHotspotWithConfiguration:output_type -> wifi.StartLocalOnlyHotspotWithConfigurationResponse
-	217, // 224: wifi.WifiManagerService.StartScan:output_type -> wifi.StartScanResponse
-	219, // 225: wifi.WifiManagerService.StartWps:output_type -> wifi.StartWpsResponse
-	221, // 226: wifi.WifiManagerService.UnregisterScanResultsCallback:output_type -> wifi.UnregisterScanResultsCallbackResponse
-	223, // 227: wifi.WifiManagerService.UnregisterSubsystemRestartTrackingCallback:output_type -> wifi.UnregisterSubsystemRestartTrackingCallbackResponse
-	225, // 228: wifi.WifiManagerService.UpdateNetwork:output_type -> wifi.UpdateNetworkResponse
-	227, // 229: wifi.WifiManagerService.ValidateSoftApConfiguration:output_type -> wifi.ValidateSoftApConfigurationResponse
-	229, // 230: wifi.WifiManagerService.CalculateSignalLevel2_1:output_type -> wifi.CalculateSignalLevel2_1Response
-	231, // 231: wifi.WifiManagerService.CompareSignalLevel:output_type -> wifi.CompareSignalLevelResponse
-	116, // [116:232] is the sub-list for method output_type
-	0,   // [0:116] is the sub-list for method input_type
+	0,   // 0: wifi.WifiInfoService.DescribeContents:input_type -> wifi.DescribeContentsRequest
+	2,   // 1: wifi.WifiInfoService.Equals:input_type -> wifi.EqualsRequest
+	4,   // 2: wifi.WifiInfoService.GetAffiliatedMloLinks:input_type -> wifi.GetAffiliatedMloLinksRequest
+	6,   // 3: wifi.WifiInfoService.GetApMldMacAddress:input_type -> wifi.GetApMldMacAddressRequest
+	8,   // 4: wifi.WifiInfoService.GetApMloLinkId:input_type -> wifi.GetApMloLinkIdRequest
+	10,  // 5: wifi.WifiInfoService.GetApplicableRedactions:input_type -> wifi.GetApplicableRedactionsRequest
+	12,  // 6: wifi.WifiInfoService.GetAssociatedMloLinks:input_type -> wifi.GetAssociatedMloLinksRequest
+	14,  // 7: wifi.WifiInfoService.GetBSSID:input_type -> wifi.GetBSSIDRequest
+	16,  // 8: wifi.WifiInfoService.GetCurrentSecurityType:input_type -> wifi.GetCurrentSecurityTypeRequest
+	18,  // 9: wifi.WifiInfoService.GetFrequency:input_type -> wifi.GetFrequencyRequest
+	20,  // 10: wifi.WifiInfoService.GetHiddenSSID:input_type -> wifi.GetHiddenSSIDRequest
+	22,  // 11: wifi.WifiInfoService.GetInformationElements:input_type -> wifi.GetInformationElementsRequest
+	24,  // 12: wifi.WifiInfoService.GetIpAddress:input_type -> wifi.GetIpAddressRequest
+	26,  // 13: wifi.WifiInfoService.GetLinkSpeed:input_type -> wifi.GetLinkSpeedRequest
+	28,  // 14: wifi.WifiInfoService.GetMacAddress:input_type -> wifi.GetMacAddressRequest
+	30,  // 15: wifi.WifiInfoService.GetMaxSupportedRxLinkSpeedMbps:input_type -> wifi.GetMaxSupportedRxLinkSpeedMbpsRequest
+	32,  // 16: wifi.WifiInfoService.GetMaxSupportedTxLinkSpeedMbps:input_type -> wifi.GetMaxSupportedTxLinkSpeedMbpsRequest
+	34,  // 17: wifi.WifiInfoService.GetNetworkId:input_type -> wifi.GetNetworkIdRequest
+	36,  // 18: wifi.WifiInfoService.GetPasspointFqdn:input_type -> wifi.GetPasspointFqdnRequest
+	38,  // 19: wifi.WifiInfoService.GetPasspointProviderFriendlyName:input_type -> wifi.GetPasspointProviderFriendlyNameRequest
+	40,  // 20: wifi.WifiInfoService.GetPasspointUniqueId:input_type -> wifi.GetPasspointUniqueIdRequest
+	42,  // 21: wifi.WifiInfoService.GetRssi:input_type -> wifi.GetRssiRequest
+	44,  // 22: wifi.WifiInfoService.GetRxLinkSpeedMbps:input_type -> wifi.GetRxLinkSpeedMbpsRequest
+	46,  // 23: wifi.WifiInfoService.GetSSID:input_type -> wifi.GetSSIDRequest
+	48,  // 24: wifi.WifiInfoService.GetSubscriptionId:input_type -> wifi.GetSubscriptionIdRequest
+	50,  // 25: wifi.WifiInfoService.GetSupplicantState:input_type -> wifi.GetSupplicantStateRequest
+	52,  // 26: wifi.WifiInfoService.GetTxLinkSpeedMbps:input_type -> wifi.GetTxLinkSpeedMbpsRequest
+	54,  // 27: wifi.WifiInfoService.GetWifiStandard:input_type -> wifi.GetWifiStandardRequest
+	56,  // 28: wifi.WifiInfoService.HashCode:input_type -> wifi.HashCodeRequest
+	58,  // 29: wifi.WifiInfoService.IsRestricted:input_type -> wifi.IsRestrictedRequest
+	60,  // 30: wifi.WifiInfoService.MakeCopy:input_type -> wifi.MakeCopyRequest
+	62,  // 31: wifi.WifiInfoService.ToString:input_type -> wifi.ToStringRequest
+	64,  // 32: wifi.WifiInfoService.WriteToParcel:input_type -> wifi.WriteToParcelRequest
+	66,  // 33: wifi.WifiInfoService.GetDetailedStateOf:input_type -> wifi.GetDetailedStateOfRequest
+	68,  // 34: wifi.WifiManagerService.AddLocalOnlyConnectionFailureListener:input_type -> wifi.AddLocalOnlyConnectionFailureListenerRequest
+	70,  // 35: wifi.WifiManagerService.AddNetwork:input_type -> wifi.AddNetworkRequest
+	72,  // 36: wifi.WifiManagerService.AddNetworkPrivileged:input_type -> wifi.AddNetworkPrivilegedRequest
+	74,  // 37: wifi.WifiManagerService.AddNetworkSuggestions:input_type -> wifi.AddNetworkSuggestionsRequest
+	76,  // 38: wifi.WifiManagerService.AddOrUpdatePasspointConfiguration:input_type -> wifi.AddOrUpdatePasspointConfigurationRequest
+	78,  // 39: wifi.WifiManagerService.AddSuggestionConnectionStatusListener:input_type -> wifi.AddSuggestionConnectionStatusListenerRequest
+	80,  // 40: wifi.WifiManagerService.AddSuggestionUserApprovalStatusListener:input_type -> wifi.AddSuggestionUserApprovalStatusListenerRequest
+	82,  // 41: wifi.WifiManagerService.AddWifiStateChangedListener:input_type -> wifi.AddWifiStateChangedListenerRequest
+	84,  // 42: wifi.WifiManagerService.AllowAutojoinGlobal:input_type -> wifi.AllowAutojoinGlobalRequest
+	86,  // 43: wifi.WifiManagerService.CalculateSignalLevel1:input_type -> wifi.CalculateSignalLevel1Request
+	88,  // 44: wifi.WifiManagerService.CancelWps:input_type -> wifi.CancelWpsRequest
+	90,  // 45: wifi.WifiManagerService.CreateMulticastLock:input_type -> wifi.CreateMulticastLockRequest
+	92,  // 46: wifi.WifiManagerService.CreateWifiLock2:input_type -> wifi.CreateWifiLock2Request
+	94,  // 47: wifi.WifiManagerService.CreateWifiLock1_1:input_type -> wifi.CreateWifiLock1_1Request
+	96,  // 48: wifi.WifiManagerService.DisableNetwork:input_type -> wifi.DisableNetworkRequest
+	98,  // 49: wifi.WifiManagerService.DisallowCurrentSuggestedNetwork:input_type -> wifi.DisallowCurrentSuggestedNetworkRequest
+	100, // 50: wifi.WifiManagerService.Disconnect:input_type -> wifi.DisconnectRequest
+	102, // 51: wifi.WifiManagerService.EnableNetwork:input_type -> wifi.EnableNetworkRequest
+	104, // 52: wifi.WifiManagerService.FlushPasspointAnqpCache:input_type -> wifi.FlushPasspointAnqpCacheRequest
+	106, // 53: wifi.WifiManagerService.GetAllowedChannels:input_type -> wifi.GetAllowedChannelsRequest
+	108, // 54: wifi.WifiManagerService.GetCallerConfiguredNetworks:input_type -> wifi.GetCallerConfiguredNetworksRequest
+	110, // 55: wifi.WifiManagerService.GetChannelData:input_type -> wifi.GetChannelDataRequest
+	112, // 56: wifi.WifiManagerService.GetConfiguredNetworks:input_type -> wifi.GetConfiguredNetworksRequest
+	114, // 57: wifi.WifiManagerService.GetConnectionInfo:input_type -> wifi.GetConnectionInfoRequest
+	116, // 58: wifi.WifiManagerService.GetDhcpInfo:input_type -> wifi.GetDhcpInfoRequest
+	118, // 59: wifi.WifiManagerService.GetMaxNumberOfChannelsPerNetworkSpecifierRequest:input_type -> wifi.GetMaxNumberOfChannelsPerNetworkSpecifierRequestRequest
+	120, // 60: wifi.WifiManagerService.GetMaxNumberOfNetworkSuggestionsPerApp:input_type -> wifi.GetMaxNumberOfNetworkSuggestionsPerAppRequest
+	122, // 61: wifi.WifiManagerService.GetMaxSignalLevel:input_type -> wifi.GetMaxSignalLevelRequest
+	124, // 62: wifi.WifiManagerService.GetMaxSupportedConcurrentTdlsSessions:input_type -> wifi.GetMaxSupportedConcurrentTdlsSessionsRequest
+	126, // 63: wifi.WifiManagerService.GetNetworkSuggestions:input_type -> wifi.GetNetworkSuggestionsRequest
+	128, // 64: wifi.WifiManagerService.GetNumberOfEnabledTdlsSessions:input_type -> wifi.GetNumberOfEnabledTdlsSessionsRequest
+	130, // 65: wifi.WifiManagerService.GetPasspointConfigurations:input_type -> wifi.GetPasspointConfigurationsRequest
+	132, // 66: wifi.WifiManagerService.GetPerSsidRoamingModes:input_type -> wifi.GetPerSsidRoamingModesRequest
+	134, // 67: wifi.WifiManagerService.GetScanResults:input_type -> wifi.GetScanResultsRequest
+	136, // 68: wifi.WifiManagerService.GetStaConcurrencyForMultiInternetMode:input_type -> wifi.GetStaConcurrencyForMultiInternetModeRequest
+	138, // 69: wifi.WifiManagerService.GetUsableChannels:input_type -> wifi.GetUsableChannelsRequest
+	140, // 70: wifi.WifiManagerService.GetWifiState:input_type -> wifi.GetWifiStateRequest
+	142, // 71: wifi.WifiManagerService.Is24GHzBandSupported:input_type -> wifi.Is24GHzBandSupportedRequest
+	144, // 72: wifi.WifiManagerService.Is5GHzBandSupported:input_type -> wifi.Is5GHzBandSupportedRequest
+	146, // 73: wifi.WifiManagerService.Is60GHzBandSupported:input_type -> wifi.Is60GHzBandSupportedRequest
+	148, // 74: wifi.WifiManagerService.Is6GHzBandSupported:input_type -> wifi.Is6GHzBandSupportedRequest
+	150, // 75: wifi.WifiManagerService.IsAggressiveRoamingModeSupported:input_type -> wifi.IsAggressiveRoamingModeSupportedRequest
+	152, // 76: wifi.WifiManagerService.IsAutoWakeupEnabled:input_type -> wifi.IsAutoWakeupEnabledRequest
+	154, // 77: wifi.WifiManagerService.IsBridgedApConcurrencySupported:input_type -> wifi.IsBridgedApConcurrencySupportedRequest
+	156, // 78: wifi.WifiManagerService.IsCarrierNetworkOffloadEnabled:input_type -> wifi.IsCarrierNetworkOffloadEnabledRequest
+	158, // 79: wifi.WifiManagerService.IsD2dSupportedWhenInfraStaDisabled:input_type -> wifi.IsD2dSupportedWhenInfraStaDisabledRequest
+	160, // 80: wifi.WifiManagerService.IsDecoratedIdentitySupported:input_type -> wifi.IsDecoratedIdentitySupportedRequest
+	162, // 81: wifi.WifiManagerService.IsDeviceToApRttSupported:input_type -> wifi.IsDeviceToApRttSupportedRequest
+	164, // 82: wifi.WifiManagerService.IsDualBandSimultaneousSupported:input_type -> wifi.IsDualBandSimultaneousSupportedRequest
+	166, // 83: wifi.WifiManagerService.IsEasyConnectDppAkmSupported:input_type -> wifi.IsEasyConnectDppAkmSupportedRequest
+	168, // 84: wifi.WifiManagerService.IsEasyConnectEnrolleeResponderModeSupported:input_type -> wifi.IsEasyConnectEnrolleeResponderModeSupportedRequest
+	170, // 85: wifi.WifiManagerService.IsEasyConnectSupported:input_type -> wifi.IsEasyConnectSupportedRequest
+	172, // 86: wifi.WifiManagerService.IsEnhancedOpenSupported:input_type -> wifi.IsEnhancedOpenSupportedRequest
+	174, // 87: wifi.WifiManagerService.IsEnhancedPowerReportingSupported:input_type -> wifi.IsEnhancedPowerReportingSupportedRequest
+	176, // 88: wifi.WifiManagerService.IsMakeBeforeBreakWifiSwitchingSupported:input_type -> wifi.IsMakeBeforeBreakWifiSwitchingSupportedRequest
+	178, // 89: wifi.WifiManagerService.IsP2pSupported:input_type -> wifi.IsP2pSupportedRequest
+	180, // 90: wifi.WifiManagerService.IsPasspointTermsAndConditionsSupported:input_type -> wifi.IsPasspointTermsAndConditionsSupportedRequest
+	182, // 91: wifi.WifiManagerService.IsPreferredNetworkOffloadSupported:input_type -> wifi.IsPreferredNetworkOffloadSupportedRequest
+	184, // 92: wifi.WifiManagerService.IsScanAlwaysAvailable:input_type -> wifi.IsScanAlwaysAvailableRequest
+	186, // 93: wifi.WifiManagerService.IsScanThrottleEnabled:input_type -> wifi.IsScanThrottleEnabledRequest
+	188, // 94: wifi.WifiManagerService.IsStaApConcurrencySupported:input_type -> wifi.IsStaApConcurrencySupportedRequest
+	190, // 95: wifi.WifiManagerService.IsStaBridgedApConcurrencySupported:input_type -> wifi.IsStaBridgedApConcurrencySupportedRequest
+	192, // 96: wifi.WifiManagerService.IsStaConcurrencyForLocalOnlyConnectionsSupported:input_type -> wifi.IsStaConcurrencyForLocalOnlyConnectionsSupportedRequest
+	194, // 97: wifi.WifiManagerService.IsStaConcurrencyForMultiInternetSupported:input_type -> wifi.IsStaConcurrencyForMultiInternetSupportedRequest
+	196, // 98: wifi.WifiManagerService.IsTdlsOperationCurrentlyAvailable:input_type -> wifi.IsTdlsOperationCurrentlyAvailableRequest
+	198, // 99: wifi.WifiManagerService.IsTdlsSupported:input_type -> wifi.IsTdlsSupportedRequest
+	200, // 100: wifi.WifiManagerService.IsTidToLinkMappingNegotiationSupported:input_type -> wifi.IsTidToLinkMappingNegotiationSupportedRequest
+	202, // 101: wifi.WifiManagerService.IsTlsMinimumVersionSupported:input_type -> wifi.IsTlsMinimumVersionSupportedRequest
+	204, // 102: wifi.WifiManagerService.IsTlsV13Supported:input_type -> wifi.IsTlsV13SupportedRequest
+	206, // 103: wifi.WifiManagerService.IsTrustOnFirstUseSupported:input_type -> wifi.IsTrustOnFirstUseSupportedRequest
+	208, // 104: wifi.WifiManagerService.IsWapiSupported:input_type -> wifi.IsWapiSupportedRequest
+	210, // 105: wifi.WifiManagerService.IsWepSupported:input_type -> wifi.IsWepSupportedRequest
+	212, // 106: wifi.WifiManagerService.IsWifiDisplayR2Supported:input_type -> wifi.IsWifiDisplayR2SupportedRequest
+	214, // 107: wifi.WifiManagerService.IsWifiEnabled:input_type -> wifi.IsWifiEnabledRequest
+	216, // 108: wifi.WifiManagerService.IsWifiPasspointEnabled:input_type -> wifi.IsWifiPasspointEnabledRequest
+	218, // 109: wifi.WifiManagerService.IsWifiStandardSupported:input_type -> wifi.IsWifiStandardSupportedRequest
+	220, // 110: wifi.WifiManagerService.IsWpa3SaeH2eSupported:input_type -> wifi.IsWpa3SaeH2eSupportedRequest
+	222, // 111: wifi.WifiManagerService.IsWpa3SaePublicKeySupported:input_type -> wifi.IsWpa3SaePublicKeySupportedRequest
+	224, // 112: wifi.WifiManagerService.IsWpa3SaeSupported:input_type -> wifi.IsWpa3SaeSupportedRequest
+	226, // 113: wifi.WifiManagerService.IsWpa3SuiteBSupported:input_type -> wifi.IsWpa3SuiteBSupportedRequest
+	228, // 114: wifi.WifiManagerService.IsWpaPersonalSupported:input_type -> wifi.IsWpaPersonalSupportedRequest
+	230, // 115: wifi.WifiManagerService.PingSupplicant:input_type -> wifi.PingSupplicantRequest
+	232, // 116: wifi.WifiManagerService.QueryAutojoinGlobal:input_type -> wifi.QueryAutojoinGlobalRequest
+	234, // 117: wifi.WifiManagerService.QuerySendDhcpHostnameRestriction:input_type -> wifi.QuerySendDhcpHostnameRestrictionRequest
+	236, // 118: wifi.WifiManagerService.Reassociate:input_type -> wifi.ReassociateRequest
+	238, // 119: wifi.WifiManagerService.Reconnect:input_type -> wifi.ReconnectRequest
+	240, // 120: wifi.WifiManagerService.RegisterScanResultsCallback:input_type -> wifi.RegisterScanResultsCallbackRequest
+	242, // 121: wifi.WifiManagerService.RegisterSubsystemRestartTrackingCallback:input_type -> wifi.RegisterSubsystemRestartTrackingCallbackRequest
+	244, // 122: wifi.WifiManagerService.RemoveLocalOnlyConnectionFailureListener:input_type -> wifi.RemoveLocalOnlyConnectionFailureListenerRequest
+	246, // 123: wifi.WifiManagerService.RemoveNetwork:input_type -> wifi.RemoveNetworkRequest
+	248, // 124: wifi.WifiManagerService.RemoveNetworkSuggestions1:input_type -> wifi.RemoveNetworkSuggestions1Request
+	250, // 125: wifi.WifiManagerService.RemoveNetworkSuggestions2_1:input_type -> wifi.RemoveNetworkSuggestions2_1Request
+	252, // 126: wifi.WifiManagerService.RemoveNonCallerConfiguredNetworks:input_type -> wifi.RemoveNonCallerConfiguredNetworksRequest
+	254, // 127: wifi.WifiManagerService.RemovePasspointConfiguration:input_type -> wifi.RemovePasspointConfigurationRequest
+	256, // 128: wifi.WifiManagerService.RemovePerSsidRoamingMode:input_type -> wifi.RemovePerSsidRoamingModeRequest
+	258, // 129: wifi.WifiManagerService.RemoveSuggestionConnectionStatusListener:input_type -> wifi.RemoveSuggestionConnectionStatusListenerRequest
+	260, // 130: wifi.WifiManagerService.RemoveSuggestionUserApprovalStatusListener:input_type -> wifi.RemoveSuggestionUserApprovalStatusListenerRequest
+	262, // 131: wifi.WifiManagerService.RemoveWifiStateChangedListener:input_type -> wifi.RemoveWifiStateChangedListenerRequest
+	264, // 132: wifi.WifiManagerService.ReportCreateInterfaceImpact:input_type -> wifi.ReportCreateInterfaceImpactRequest
+	266, // 133: wifi.WifiManagerService.SaveConfiguration:input_type -> wifi.SaveConfigurationRequest
+	268, // 134: wifi.WifiManagerService.SetPerSsidRoamingMode:input_type -> wifi.SetPerSsidRoamingModeRequest
+	270, // 135: wifi.WifiManagerService.SetSendDhcpHostnameRestriction:input_type -> wifi.SetSendDhcpHostnameRestrictionRequest
+	272, // 136: wifi.WifiManagerService.SetTdlsEnabled2:input_type -> wifi.SetTdlsEnabled2Request
+	274, // 137: wifi.WifiManagerService.SetTdlsEnabled4_1:input_type -> wifi.SetTdlsEnabled4_1Request
+	276, // 138: wifi.WifiManagerService.SetTdlsEnabledWithMacAddress2:input_type -> wifi.SetTdlsEnabledWithMacAddress2Request
+	278, // 139: wifi.WifiManagerService.SetTdlsEnabledWithMacAddress4_1:input_type -> wifi.SetTdlsEnabledWithMacAddress4_1Request
+	280, // 140: wifi.WifiManagerService.SetWifiEnabled:input_type -> wifi.SetWifiEnabledRequest
+	282, // 141: wifi.WifiManagerService.StartLocalOnlyHotspotWithConfiguration:input_type -> wifi.StartLocalOnlyHotspotWithConfigurationRequest
+	284, // 142: wifi.WifiManagerService.StartScan:input_type -> wifi.StartScanRequest
+	286, // 143: wifi.WifiManagerService.StartWps:input_type -> wifi.StartWpsRequest
+	288, // 144: wifi.WifiManagerService.UnregisterScanResultsCallback:input_type -> wifi.UnregisterScanResultsCallbackRequest
+	290, // 145: wifi.WifiManagerService.UnregisterSubsystemRestartTrackingCallback:input_type -> wifi.UnregisterSubsystemRestartTrackingCallbackRequest
+	292, // 146: wifi.WifiManagerService.UpdateNetwork:input_type -> wifi.UpdateNetworkRequest
+	294, // 147: wifi.WifiManagerService.ValidateSoftApConfiguration:input_type -> wifi.ValidateSoftApConfigurationRequest
+	296, // 148: wifi.WifiManagerService.CalculateSignalLevel2_1:input_type -> wifi.CalculateSignalLevel2_1Request
+	298, // 149: wifi.WifiManagerService.CompareSignalLevel:input_type -> wifi.CompareSignalLevelRequest
+	0,   // 150: wifi.ScanResultService.DescribeContents:input_type -> wifi.DescribeContentsRequest
+	4,   // 151: wifi.ScanResultService.GetAffiliatedMloLinks:input_type -> wifi.GetAffiliatedMloLinksRequest
+	6,   // 152: wifi.ScanResultService.GetApMldMacAddress:input_type -> wifi.GetApMldMacAddressRequest
+	8,   // 153: wifi.ScanResultService.GetApMloLinkId:input_type -> wifi.GetApMloLinkIdRequest
+	22,  // 154: wifi.ScanResultService.GetInformationElements:input_type -> wifi.GetInformationElementsRequest
+	300, // 155: wifi.ScanResultService.GetSecurityTypes:input_type -> wifi.GetSecurityTypesRequest
+	302, // 156: wifi.ScanResultService.GetWifiSsid:input_type -> wifi.GetWifiSsidRequest
+	54,  // 157: wifi.ScanResultService.GetWifiStandard:input_type -> wifi.GetWifiStandardRequest
+	304, // 158: wifi.ScanResultService.Is80211azNtbResponder:input_type -> wifi.Is80211azNtbResponderRequest
+	306, // 159: wifi.ScanResultService.Is80211mcResponder:input_type -> wifi.Is80211mcResponderRequest
+	308, // 160: wifi.ScanResultService.IsPasspointNetwork:input_type -> wifi.IsPasspointNetworkRequest
+	310, // 161: wifi.ScanResultService.IsRangingFrameProtectionRequired:input_type -> wifi.IsRangingFrameProtectionRequiredRequest
+	312, // 162: wifi.ScanResultService.IsSecureHeLtfSupported:input_type -> wifi.IsSecureHeLtfSupportedRequest
+	314, // 163: wifi.ScanResultService.IsTwtResponder:input_type -> wifi.IsTwtResponderRequest
+	62,  // 164: wifi.ScanResultService.ToString:input_type -> wifi.ToStringRequest
+	64,  // 165: wifi.ScanResultService.WriteToParcel:input_type -> wifi.WriteToParcelRequest
+	316, // 166: wifi.ScanResultService.ConvertChannelToFrequencyMhzIfSupported:input_type -> wifi.ConvertChannelToFrequencyMhzIfSupportedRequest
+	318, // 167: wifi.ScanResultService.ConvertFrequencyMhzToChannelIfSupported:input_type -> wifi.ConvertFrequencyMhzToChannelIfSupportedRequest
+	1,   // 168: wifi.WifiInfoService.DescribeContents:output_type -> wifi.DescribeContentsResponse
+	3,   // 169: wifi.WifiInfoService.Equals:output_type -> wifi.EqualsResponse
+	5,   // 170: wifi.WifiInfoService.GetAffiliatedMloLinks:output_type -> wifi.GetAffiliatedMloLinksResponse
+	7,   // 171: wifi.WifiInfoService.GetApMldMacAddress:output_type -> wifi.GetApMldMacAddressResponse
+	9,   // 172: wifi.WifiInfoService.GetApMloLinkId:output_type -> wifi.GetApMloLinkIdResponse
+	11,  // 173: wifi.WifiInfoService.GetApplicableRedactions:output_type -> wifi.GetApplicableRedactionsResponse
+	13,  // 174: wifi.WifiInfoService.GetAssociatedMloLinks:output_type -> wifi.GetAssociatedMloLinksResponse
+	15,  // 175: wifi.WifiInfoService.GetBSSID:output_type -> wifi.GetBSSIDResponse
+	17,  // 176: wifi.WifiInfoService.GetCurrentSecurityType:output_type -> wifi.GetCurrentSecurityTypeResponse
+	19,  // 177: wifi.WifiInfoService.GetFrequency:output_type -> wifi.GetFrequencyResponse
+	21,  // 178: wifi.WifiInfoService.GetHiddenSSID:output_type -> wifi.GetHiddenSSIDResponse
+	23,  // 179: wifi.WifiInfoService.GetInformationElements:output_type -> wifi.GetInformationElementsResponse
+	25,  // 180: wifi.WifiInfoService.GetIpAddress:output_type -> wifi.GetIpAddressResponse
+	27,  // 181: wifi.WifiInfoService.GetLinkSpeed:output_type -> wifi.GetLinkSpeedResponse
+	29,  // 182: wifi.WifiInfoService.GetMacAddress:output_type -> wifi.GetMacAddressResponse
+	31,  // 183: wifi.WifiInfoService.GetMaxSupportedRxLinkSpeedMbps:output_type -> wifi.GetMaxSupportedRxLinkSpeedMbpsResponse
+	33,  // 184: wifi.WifiInfoService.GetMaxSupportedTxLinkSpeedMbps:output_type -> wifi.GetMaxSupportedTxLinkSpeedMbpsResponse
+	35,  // 185: wifi.WifiInfoService.GetNetworkId:output_type -> wifi.GetNetworkIdResponse
+	37,  // 186: wifi.WifiInfoService.GetPasspointFqdn:output_type -> wifi.GetPasspointFqdnResponse
+	39,  // 187: wifi.WifiInfoService.GetPasspointProviderFriendlyName:output_type -> wifi.GetPasspointProviderFriendlyNameResponse
+	41,  // 188: wifi.WifiInfoService.GetPasspointUniqueId:output_type -> wifi.GetPasspointUniqueIdResponse
+	43,  // 189: wifi.WifiInfoService.GetRssi:output_type -> wifi.GetRssiResponse
+	45,  // 190: wifi.WifiInfoService.GetRxLinkSpeedMbps:output_type -> wifi.GetRxLinkSpeedMbpsResponse
+	47,  // 191: wifi.WifiInfoService.GetSSID:output_type -> wifi.GetSSIDResponse
+	49,  // 192: wifi.WifiInfoService.GetSubscriptionId:output_type -> wifi.GetSubscriptionIdResponse
+	51,  // 193: wifi.WifiInfoService.GetSupplicantState:output_type -> wifi.GetSupplicantStateResponse
+	53,  // 194: wifi.WifiInfoService.GetTxLinkSpeedMbps:output_type -> wifi.GetTxLinkSpeedMbpsResponse
+	55,  // 195: wifi.WifiInfoService.GetWifiStandard:output_type -> wifi.GetWifiStandardResponse
+	57,  // 196: wifi.WifiInfoService.HashCode:output_type -> wifi.HashCodeResponse
+	59,  // 197: wifi.WifiInfoService.IsRestricted:output_type -> wifi.IsRestrictedResponse
+	61,  // 198: wifi.WifiInfoService.MakeCopy:output_type -> wifi.MakeCopyResponse
+	63,  // 199: wifi.WifiInfoService.ToString:output_type -> wifi.ToStringResponse
+	65,  // 200: wifi.WifiInfoService.WriteToParcel:output_type -> wifi.WriteToParcelResponse
+	67,  // 201: wifi.WifiInfoService.GetDetailedStateOf:output_type -> wifi.GetDetailedStateOfResponse
+	69,  // 202: wifi.WifiManagerService.AddLocalOnlyConnectionFailureListener:output_type -> wifi.AddLocalOnlyConnectionFailureListenerResponse
+	71,  // 203: wifi.WifiManagerService.AddNetwork:output_type -> wifi.AddNetworkResponse
+	73,  // 204: wifi.WifiManagerService.AddNetworkPrivileged:output_type -> wifi.AddNetworkPrivilegedResponse
+	75,  // 205: wifi.WifiManagerService.AddNetworkSuggestions:output_type -> wifi.AddNetworkSuggestionsResponse
+	77,  // 206: wifi.WifiManagerService.AddOrUpdatePasspointConfiguration:output_type -> wifi.AddOrUpdatePasspointConfigurationResponse
+	79,  // 207: wifi.WifiManagerService.AddSuggestionConnectionStatusListener:output_type -> wifi.AddSuggestionConnectionStatusListenerResponse
+	81,  // 208: wifi.WifiManagerService.AddSuggestionUserApprovalStatusListener:output_type -> wifi.AddSuggestionUserApprovalStatusListenerResponse
+	83,  // 209: wifi.WifiManagerService.AddWifiStateChangedListener:output_type -> wifi.AddWifiStateChangedListenerResponse
+	85,  // 210: wifi.WifiManagerService.AllowAutojoinGlobal:output_type -> wifi.AllowAutojoinGlobalResponse
+	87,  // 211: wifi.WifiManagerService.CalculateSignalLevel1:output_type -> wifi.CalculateSignalLevel1Response
+	89,  // 212: wifi.WifiManagerService.CancelWps:output_type -> wifi.CancelWpsResponse
+	91,  // 213: wifi.WifiManagerService.CreateMulticastLock:output_type -> wifi.CreateMulticastLockResponse
+	93,  // 214: wifi.WifiManagerService.CreateWifiLock2:output_type -> wifi.CreateWifiLock2Response
+	95,  // 215: wifi.WifiManagerService.CreateWifiLock1_1:output_type -> wifi.CreateWifiLock1_1Response
+	97,  // 216: wifi.WifiManagerService.DisableNetwork:output_type -> wifi.DisableNetworkResponse
+	99,  // 217: wifi.WifiManagerService.DisallowCurrentSuggestedNetwork:output_type -> wifi.DisallowCurrentSuggestedNetworkResponse
+	101, // 218: wifi.WifiManagerService.Disconnect:output_type -> wifi.DisconnectResponse
+	103, // 219: wifi.WifiManagerService.EnableNetwork:output_type -> wifi.EnableNetworkResponse
+	105, // 220: wifi.WifiManagerService.FlushPasspointAnqpCache:output_type -> wifi.FlushPasspointAnqpCacheResponse
+	107, // 221: wifi.WifiManagerService.GetAllowedChannels:output_type -> wifi.GetAllowedChannelsResponse
+	109, // 222: wifi.WifiManagerService.GetCallerConfiguredNetworks:output_type -> wifi.GetCallerConfiguredNetworksResponse
+	111, // 223: wifi.WifiManagerService.GetChannelData:output_type -> wifi.GetChannelDataResponse
+	113, // 224: wifi.WifiManagerService.GetConfiguredNetworks:output_type -> wifi.GetConfiguredNetworksResponse
+	115, // 225: wifi.WifiManagerService.GetConnectionInfo:output_type -> wifi.GetConnectionInfoResponse
+	117, // 226: wifi.WifiManagerService.GetDhcpInfo:output_type -> wifi.GetDhcpInfoResponse
+	119, // 227: wifi.WifiManagerService.GetMaxNumberOfChannelsPerNetworkSpecifierRequest:output_type -> wifi.GetMaxNumberOfChannelsPerNetworkSpecifierRequestResponse
+	121, // 228: wifi.WifiManagerService.GetMaxNumberOfNetworkSuggestionsPerApp:output_type -> wifi.GetMaxNumberOfNetworkSuggestionsPerAppResponse
+	123, // 229: wifi.WifiManagerService.GetMaxSignalLevel:output_type -> wifi.GetMaxSignalLevelResponse
+	125, // 230: wifi.WifiManagerService.GetMaxSupportedConcurrentTdlsSessions:output_type -> wifi.GetMaxSupportedConcurrentTdlsSessionsResponse
+	127, // 231: wifi.WifiManagerService.GetNetworkSuggestions:output_type -> wifi.GetNetworkSuggestionsResponse
+	129, // 232: wifi.WifiManagerService.GetNumberOfEnabledTdlsSessions:output_type -> wifi.GetNumberOfEnabledTdlsSessionsResponse
+	131, // 233: wifi.WifiManagerService.GetPasspointConfigurations:output_type -> wifi.GetPasspointConfigurationsResponse
+	133, // 234: wifi.WifiManagerService.GetPerSsidRoamingModes:output_type -> wifi.GetPerSsidRoamingModesResponse
+	135, // 235: wifi.WifiManagerService.GetScanResults:output_type -> wifi.GetScanResultsResponse
+	137, // 236: wifi.WifiManagerService.GetStaConcurrencyForMultiInternetMode:output_type -> wifi.GetStaConcurrencyForMultiInternetModeResponse
+	139, // 237: wifi.WifiManagerService.GetUsableChannels:output_type -> wifi.GetUsableChannelsResponse
+	141, // 238: wifi.WifiManagerService.GetWifiState:output_type -> wifi.GetWifiStateResponse
+	143, // 239: wifi.WifiManagerService.Is24GHzBandSupported:output_type -> wifi.Is24GHzBandSupportedResponse
+	145, // 240: wifi.WifiManagerService.Is5GHzBandSupported:output_type -> wifi.Is5GHzBandSupportedResponse
+	147, // 241: wifi.WifiManagerService.Is60GHzBandSupported:output_type -> wifi.Is60GHzBandSupportedResponse
+	149, // 242: wifi.WifiManagerService.Is6GHzBandSupported:output_type -> wifi.Is6GHzBandSupportedResponse
+	151, // 243: wifi.WifiManagerService.IsAggressiveRoamingModeSupported:output_type -> wifi.IsAggressiveRoamingModeSupportedResponse
+	153, // 244: wifi.WifiManagerService.IsAutoWakeupEnabled:output_type -> wifi.IsAutoWakeupEnabledResponse
+	155, // 245: wifi.WifiManagerService.IsBridgedApConcurrencySupported:output_type -> wifi.IsBridgedApConcurrencySupportedResponse
+	157, // 246: wifi.WifiManagerService.IsCarrierNetworkOffloadEnabled:output_type -> wifi.IsCarrierNetworkOffloadEnabledResponse
+	159, // 247: wifi.WifiManagerService.IsD2dSupportedWhenInfraStaDisabled:output_type -> wifi.IsD2dSupportedWhenInfraStaDisabledResponse
+	161, // 248: wifi.WifiManagerService.IsDecoratedIdentitySupported:output_type -> wifi.IsDecoratedIdentitySupportedResponse
+	163, // 249: wifi.WifiManagerService.IsDeviceToApRttSupported:output_type -> wifi.IsDeviceToApRttSupportedResponse
+	165, // 250: wifi.WifiManagerService.IsDualBandSimultaneousSupported:output_type -> wifi.IsDualBandSimultaneousSupportedResponse
+	167, // 251: wifi.WifiManagerService.IsEasyConnectDppAkmSupported:output_type -> wifi.IsEasyConnectDppAkmSupportedResponse
+	169, // 252: wifi.WifiManagerService.IsEasyConnectEnrolleeResponderModeSupported:output_type -> wifi.IsEasyConnectEnrolleeResponderModeSupportedResponse
+	171, // 253: wifi.WifiManagerService.IsEasyConnectSupported:output_type -> wifi.IsEasyConnectSupportedResponse
+	173, // 254: wifi.WifiManagerService.IsEnhancedOpenSupported:output_type -> wifi.IsEnhancedOpenSupportedResponse
+	175, // 255: wifi.WifiManagerService.IsEnhancedPowerReportingSupported:output_type -> wifi.IsEnhancedPowerReportingSupportedResponse
+	177, // 256: wifi.WifiManagerService.IsMakeBeforeBreakWifiSwitchingSupported:output_type -> wifi.IsMakeBeforeBreakWifiSwitchingSupportedResponse
+	179, // 257: wifi.WifiManagerService.IsP2pSupported:output_type -> wifi.IsP2pSupportedResponse
+	181, // 258: wifi.WifiManagerService.IsPasspointTermsAndConditionsSupported:output_type -> wifi.IsPasspointTermsAndConditionsSupportedResponse
+	183, // 259: wifi.WifiManagerService.IsPreferredNetworkOffloadSupported:output_type -> wifi.IsPreferredNetworkOffloadSupportedResponse
+	185, // 260: wifi.WifiManagerService.IsScanAlwaysAvailable:output_type -> wifi.IsScanAlwaysAvailableResponse
+	187, // 261: wifi.WifiManagerService.IsScanThrottleEnabled:output_type -> wifi.IsScanThrottleEnabledResponse
+	189, // 262: wifi.WifiManagerService.IsStaApConcurrencySupported:output_type -> wifi.IsStaApConcurrencySupportedResponse
+	191, // 263: wifi.WifiManagerService.IsStaBridgedApConcurrencySupported:output_type -> wifi.IsStaBridgedApConcurrencySupportedResponse
+	193, // 264: wifi.WifiManagerService.IsStaConcurrencyForLocalOnlyConnectionsSupported:output_type -> wifi.IsStaConcurrencyForLocalOnlyConnectionsSupportedResponse
+	195, // 265: wifi.WifiManagerService.IsStaConcurrencyForMultiInternetSupported:output_type -> wifi.IsStaConcurrencyForMultiInternetSupportedResponse
+	197, // 266: wifi.WifiManagerService.IsTdlsOperationCurrentlyAvailable:output_type -> wifi.IsTdlsOperationCurrentlyAvailableResponse
+	199, // 267: wifi.WifiManagerService.IsTdlsSupported:output_type -> wifi.IsTdlsSupportedResponse
+	201, // 268: wifi.WifiManagerService.IsTidToLinkMappingNegotiationSupported:output_type -> wifi.IsTidToLinkMappingNegotiationSupportedResponse
+	203, // 269: wifi.WifiManagerService.IsTlsMinimumVersionSupported:output_type -> wifi.IsTlsMinimumVersionSupportedResponse
+	205, // 270: wifi.WifiManagerService.IsTlsV13Supported:output_type -> wifi.IsTlsV13SupportedResponse
+	207, // 271: wifi.WifiManagerService.IsTrustOnFirstUseSupported:output_type -> wifi.IsTrustOnFirstUseSupportedResponse
+	209, // 272: wifi.WifiManagerService.IsWapiSupported:output_type -> wifi.IsWapiSupportedResponse
+	211, // 273: wifi.WifiManagerService.IsWepSupported:output_type -> wifi.IsWepSupportedResponse
+	213, // 274: wifi.WifiManagerService.IsWifiDisplayR2Supported:output_type -> wifi.IsWifiDisplayR2SupportedResponse
+	215, // 275: wifi.WifiManagerService.IsWifiEnabled:output_type -> wifi.IsWifiEnabledResponse
+	217, // 276: wifi.WifiManagerService.IsWifiPasspointEnabled:output_type -> wifi.IsWifiPasspointEnabledResponse
+	219, // 277: wifi.WifiManagerService.IsWifiStandardSupported:output_type -> wifi.IsWifiStandardSupportedResponse
+	221, // 278: wifi.WifiManagerService.IsWpa3SaeH2eSupported:output_type -> wifi.IsWpa3SaeH2eSupportedResponse
+	223, // 279: wifi.WifiManagerService.IsWpa3SaePublicKeySupported:output_type -> wifi.IsWpa3SaePublicKeySupportedResponse
+	225, // 280: wifi.WifiManagerService.IsWpa3SaeSupported:output_type -> wifi.IsWpa3SaeSupportedResponse
+	227, // 281: wifi.WifiManagerService.IsWpa3SuiteBSupported:output_type -> wifi.IsWpa3SuiteBSupportedResponse
+	229, // 282: wifi.WifiManagerService.IsWpaPersonalSupported:output_type -> wifi.IsWpaPersonalSupportedResponse
+	231, // 283: wifi.WifiManagerService.PingSupplicant:output_type -> wifi.PingSupplicantResponse
+	233, // 284: wifi.WifiManagerService.QueryAutojoinGlobal:output_type -> wifi.QueryAutojoinGlobalResponse
+	235, // 285: wifi.WifiManagerService.QuerySendDhcpHostnameRestriction:output_type -> wifi.QuerySendDhcpHostnameRestrictionResponse
+	237, // 286: wifi.WifiManagerService.Reassociate:output_type -> wifi.ReassociateResponse
+	239, // 287: wifi.WifiManagerService.Reconnect:output_type -> wifi.ReconnectResponse
+	241, // 288: wifi.WifiManagerService.RegisterScanResultsCallback:output_type -> wifi.RegisterScanResultsCallbackResponse
+	243, // 289: wifi.WifiManagerService.RegisterSubsystemRestartTrackingCallback:output_type -> wifi.RegisterSubsystemRestartTrackingCallbackResponse
+	245, // 290: wifi.WifiManagerService.RemoveLocalOnlyConnectionFailureListener:output_type -> wifi.RemoveLocalOnlyConnectionFailureListenerResponse
+	247, // 291: wifi.WifiManagerService.RemoveNetwork:output_type -> wifi.RemoveNetworkResponse
+	249, // 292: wifi.WifiManagerService.RemoveNetworkSuggestions1:output_type -> wifi.RemoveNetworkSuggestions1Response
+	251, // 293: wifi.WifiManagerService.RemoveNetworkSuggestions2_1:output_type -> wifi.RemoveNetworkSuggestions2_1Response
+	253, // 294: wifi.WifiManagerService.RemoveNonCallerConfiguredNetworks:output_type -> wifi.RemoveNonCallerConfiguredNetworksResponse
+	255, // 295: wifi.WifiManagerService.RemovePasspointConfiguration:output_type -> wifi.RemovePasspointConfigurationResponse
+	257, // 296: wifi.WifiManagerService.RemovePerSsidRoamingMode:output_type -> wifi.RemovePerSsidRoamingModeResponse
+	259, // 297: wifi.WifiManagerService.RemoveSuggestionConnectionStatusListener:output_type -> wifi.RemoveSuggestionConnectionStatusListenerResponse
+	261, // 298: wifi.WifiManagerService.RemoveSuggestionUserApprovalStatusListener:output_type -> wifi.RemoveSuggestionUserApprovalStatusListenerResponse
+	263, // 299: wifi.WifiManagerService.RemoveWifiStateChangedListener:output_type -> wifi.RemoveWifiStateChangedListenerResponse
+	265, // 300: wifi.WifiManagerService.ReportCreateInterfaceImpact:output_type -> wifi.ReportCreateInterfaceImpactResponse
+	267, // 301: wifi.WifiManagerService.SaveConfiguration:output_type -> wifi.SaveConfigurationResponse
+	269, // 302: wifi.WifiManagerService.SetPerSsidRoamingMode:output_type -> wifi.SetPerSsidRoamingModeResponse
+	271, // 303: wifi.WifiManagerService.SetSendDhcpHostnameRestriction:output_type -> wifi.SetSendDhcpHostnameRestrictionResponse
+	273, // 304: wifi.WifiManagerService.SetTdlsEnabled2:output_type -> wifi.SetTdlsEnabled2Response
+	275, // 305: wifi.WifiManagerService.SetTdlsEnabled4_1:output_type -> wifi.SetTdlsEnabled4_1Response
+	277, // 306: wifi.WifiManagerService.SetTdlsEnabledWithMacAddress2:output_type -> wifi.SetTdlsEnabledWithMacAddress2Response
+	279, // 307: wifi.WifiManagerService.SetTdlsEnabledWithMacAddress4_1:output_type -> wifi.SetTdlsEnabledWithMacAddress4_1Response
+	281, // 308: wifi.WifiManagerService.SetWifiEnabled:output_type -> wifi.SetWifiEnabledResponse
+	283, // 309: wifi.WifiManagerService.StartLocalOnlyHotspotWithConfiguration:output_type -> wifi.StartLocalOnlyHotspotWithConfigurationResponse
+	285, // 310: wifi.WifiManagerService.StartScan:output_type -> wifi.StartScanResponse
+	287, // 311: wifi.WifiManagerService.StartWps:output_type -> wifi.StartWpsResponse
+	289, // 312: wifi.WifiManagerService.UnregisterScanResultsCallback:output_type -> wifi.UnregisterScanResultsCallbackResponse
+	291, // 313: wifi.WifiManagerService.UnregisterSubsystemRestartTrackingCallback:output_type -> wifi.UnregisterSubsystemRestartTrackingCallbackResponse
+	293, // 314: wifi.WifiManagerService.UpdateNetwork:output_type -> wifi.UpdateNetworkResponse
+	295, // 315: wifi.WifiManagerService.ValidateSoftApConfiguration:output_type -> wifi.ValidateSoftApConfigurationResponse
+	297, // 316: wifi.WifiManagerService.CalculateSignalLevel2_1:output_type -> wifi.CalculateSignalLevel2_1Response
+	299, // 317: wifi.WifiManagerService.CompareSignalLevel:output_type -> wifi.CompareSignalLevelResponse
+	1,   // 318: wifi.ScanResultService.DescribeContents:output_type -> wifi.DescribeContentsResponse
+	5,   // 319: wifi.ScanResultService.GetAffiliatedMloLinks:output_type -> wifi.GetAffiliatedMloLinksResponse
+	7,   // 320: wifi.ScanResultService.GetApMldMacAddress:output_type -> wifi.GetApMldMacAddressResponse
+	9,   // 321: wifi.ScanResultService.GetApMloLinkId:output_type -> wifi.GetApMloLinkIdResponse
+	23,  // 322: wifi.ScanResultService.GetInformationElements:output_type -> wifi.GetInformationElementsResponse
+	301, // 323: wifi.ScanResultService.GetSecurityTypes:output_type -> wifi.GetSecurityTypesResponse
+	303, // 324: wifi.ScanResultService.GetWifiSsid:output_type -> wifi.GetWifiSsidResponse
+	55,  // 325: wifi.ScanResultService.GetWifiStandard:output_type -> wifi.GetWifiStandardResponse
+	305, // 326: wifi.ScanResultService.Is80211azNtbResponder:output_type -> wifi.Is80211azNtbResponderResponse
+	307, // 327: wifi.ScanResultService.Is80211mcResponder:output_type -> wifi.Is80211mcResponderResponse
+	309, // 328: wifi.ScanResultService.IsPasspointNetwork:output_type -> wifi.IsPasspointNetworkResponse
+	311, // 329: wifi.ScanResultService.IsRangingFrameProtectionRequired:output_type -> wifi.IsRangingFrameProtectionRequiredResponse
+	313, // 330: wifi.ScanResultService.IsSecureHeLtfSupported:output_type -> wifi.IsSecureHeLtfSupportedResponse
+	315, // 331: wifi.ScanResultService.IsTwtResponder:output_type -> wifi.IsTwtResponderResponse
+	63,  // 332: wifi.ScanResultService.ToString:output_type -> wifi.ToStringResponse
+	65,  // 333: wifi.ScanResultService.WriteToParcel:output_type -> wifi.WriteToParcelResponse
+	317, // 334: wifi.ScanResultService.ConvertChannelToFrequencyMhzIfSupported:output_type -> wifi.ConvertChannelToFrequencyMhzIfSupportedResponse
+	319, // 335: wifi.ScanResultService.ConvertFrequencyMhzToChannelIfSupported:output_type -> wifi.ConvertFrequencyMhzToChannelIfSupportedResponse
+	168, // [168:336] is the sub-list for method output_type
+	0,   // [0:168] is the sub-list for method input_type
 	0,   // [0:0] is the sub-list for extension type_name
 	0,   // [0:0] is the sub-list for extension extendee
 	0,   // [0:0] is the sub-list for field type_name
@@ -10778,9 +14739,9 @@ func file_proto_wifi_wifi_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_wifi_wifi_proto_rawDesc), len(file_proto_wifi_wifi_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   232,
+			NumMessages:   320,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   3,
 		},
 		GoTypes:           file_proto_wifi_wifi_proto_goTypes,
 		DependencyIndexes: file_proto_wifi_wifi_proto_depIdxs,

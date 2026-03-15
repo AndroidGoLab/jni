@@ -3,13 +3,32 @@
 package biometric
 
 const (
-	BiometricErrorHwUnavailable          = 0
-	BiometricErrorIdentityCheckNotActive = 0
-	BiometricErrorNoneEnrolled           = 0
-	BiometricErrorNotEnabledForApps      = 0
-	BiometricErrorNoHardware             = 0
-	BiometricErrorSecurityUpdateRequired = 0
-	BiometricSuccess                     = 0
+	BiometricErrorHwUnavailable              = 0
+	BiometricErrorIdentityCheckNotActive     = 0
+	BiometricErrorNoneEnrolled               = 0
+	BiometricErrorNotEnabledForApps          = 0
+	BiometricErrorNoHardware                 = 0
+	BiometricErrorSecurityUpdateRequired     = 0
+	BiometricSuccess                         = 0
+	AuthenticationResultTypeBiometric        = 0
+	AuthenticationResultTypeDeviceCredential = 0
+	BiometricAcquiredGood                    = 0
+	BiometricAcquiredImagerDirty             = 0
+	BiometricAcquiredInsufficient            = 0
+	BiometricAcquiredPartial                 = 0
+	BiometricAcquiredTooFast                 = 0
+	BiometricAcquiredTooSlow                 = 0
+	BiometricErrorCanceled                   = 0
+	BiometricErrorHwNotPresent               = 0
+	BiometricErrorLockout                    = 0
+	BiometricErrorLockoutPermanent           = 0
+	BiometricErrorNoBiometrics               = 0
+	BiometricErrorNoDeviceCredential         = 0
+	BiometricErrorNoSpace                    = 0
+	BiometricErrorTimeout                    = 0
+	BiometricErrorUnableToProcess            = 0
+	BiometricErrorUserCanceled               = 0
+	BiometricErrorVendor                     = 0
 )
 
 const (

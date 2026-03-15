@@ -11,4 +11,14 @@ const (
 	PdfFormTypeXfaFull                  = 0
 	RenderModeForDisplay                = 0
 	RenderModeForPrint                  = 0
+	Creator                             = 0
+	DensityNone                         = 0
+	ModeAppend                          = 0
+	ModeCreate                          = 0
+	ModeReadOnly                        = 0
+	ModeReadWrite                       = 0
+	ModeTruncate                        = 0
+	ModeWorldReadable                   = 0
+	ModeWorldWriteable                  = 0
+	ModeWriteOnly                       = 0
 )

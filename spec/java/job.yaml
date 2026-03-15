@@ -375,6 +375,52 @@ classes:
               go_name: arg0
           returns: android.app.job.JobInfo$Builder
           error: true
+    - java_class: android.app.job.JobScheduler
+      go_type: jobScheduler
+      obtain: system_service
+      service_name: jobscheduler
+      close: true
+      methods:
+        - java_method: canRunUserInitiatedJobs
+          go_name: CanRunUserInitiatedJobs
+          returns: boolean
+          error: true
+        - java_method: cancelInAllNamespaces
+          go_name: CancelInAllNamespaces
+          returns: void
+          error: true
+        - java_method: forNamespace
+          go_name: ForNamespace
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.job.JobScheduler
+          error: true
+        - java_method: getNamespace
+          go_name: GetNamespace
+          returns: String
+          error: true
+        - java_method: getPendingJobReason
+          go_name: GetPendingJobReason
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getPendingJobReasons
+          go_name: GetPendingJobReasons
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: '[I'
+          error: true
+        - java_method: getPendingJobReasonsHistory
+          go_name: GetPendingJobReasonsHistory
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: java.util.List<android.app.job.PendingJobReasonsInfo>
+          error: true
 constants:
     - go_name: BackoffPolicyExponential
       value: "0"
@@ -425,5 +471,68 @@ constants:
       value: "0"
       go_type: int
     - go_name: PriorityMin
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonApp
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonAppStandby
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonBackgroundRestriction
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonConstraintBatteryNotLow
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonConstraintCharging
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonConstraintConnectivity
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonConstraintContentTrigger
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonConstraintDeadline
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonConstraintDeviceIdle
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonConstraintMinimumLatency
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonConstraintPrefetch
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonConstraintStorageNotLow
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonDeviceState
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonExecuting
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonInvalidJobId
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonJobSchedulerOptimization
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonQuota
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonUndefined
+      value: "0"
+      go_type: int
+    - go_name: PendingJobReasonUser
+      value: "0"
+      go_type: int
+    - go_name: ResultFailure
+      value: "0"
+      go_type: int
+    - go_name: ResultSuccess
       value: "0"
       go_type: int
