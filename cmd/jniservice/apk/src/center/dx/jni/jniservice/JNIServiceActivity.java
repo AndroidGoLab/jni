@@ -31,6 +31,12 @@ public class JNIServiceActivity extends Activity {
     private TextView statusText;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        updateStatus();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
