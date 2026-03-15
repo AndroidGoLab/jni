@@ -1,2 +1,6 @@
+/build/
+/tests/e2e-grpc/build/
+/build_info
+*.so
 cover.out
 examples/test_results/
