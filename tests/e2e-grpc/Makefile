@@ -14,6 +14,7 @@ CC_ARM64 := $(NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-andro
 CC_X86 := $(NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android$(API_LEVEL)-clang
 ARCH ?= $(shell $(ADB) shell getprop ro.product.cpu.abi 2>/dev/null)
 REMOTE_DIR := /data/local/tmp
+REMOTE_ACL_DB ?= $(REMOTE_DIR)/jniservice/acl.db
 PORT ?= 50051
 HOST_PORT ?= $(PORT)
 
@@ -25,16 +26,22 @@ else
   CC := $(CC_X86)
 endif
 
-.PHONY: build build-host build-android push deploy start-server stop-server forward \
-	test test-go test-sh clean
+.PHONY: build build-host build-android build-admin push push-admin deploy \
+	start-server stop-server forward test test-go test-sh clean
 
 # Build host + android binaries.
 build: build-host build-android
 
-# Build jnicli for the host (used by test runners).
+# Build jnicli and jniserviceadmin for the host (used by test runners).
 build-host:
 	@mkdir -p build
 	CGO_ENABLED=0 go build -o build/jnicli-host ../../cmd/jnicli/
+	CGO_ENABLED=0 go build -o build/jniserviceadmin-host ../../cmd/jniserviceadmin/
+
+# Build jniserviceadmin for Android (for granting permissions on device).
+build-admin:
+	@mkdir -p build
+	CGO_ENABLED=0 GOOS=android GOARCH=$(GOARCH) go build -o build/jniserviceadmin ../../cmd/jniserviceadmin/
 
 # Build jnicli + libjniservice.so + classes.dex for Android.
 build-android:
@@ -53,6 +60,11 @@ push: build-android
 	$(ADB) shell chmod +x $(REMOTE_DIR)/jnicli
 	$(ADB) push build/libjniservice.so $(REMOTE_DIR)/libjniservice.so
 	$(ADB) push build/classes.dex $(REMOTE_DIR)/jniservice.dex
+
+# Push jniserviceadmin to the device.
+push-admin: build-admin
+	$(ADB) push build/jniserviceadmin $(REMOTE_DIR)/jniserviceadmin
+	$(ADB) shell chmod +x $(REMOTE_DIR)/jniserviceadmin
 
 # Deploy = push + start + forward. Ready for testing.
 deploy: push start-server forward
@@ -86,12 +98,18 @@ forward:
 	@echo "Port forwarding: localhost:$(HOST_PORT) -> device:$(PORT)"
 
 # Full E2E test pipeline: build, deploy, test, clean up.
-test: build push start-server forward test-go
+test: build push push-admin start-server forward test-go
 	@$(MAKE) stop-server
 
 # Run Go E2E tests (requires server running + port forwarded).
+# Uses ADB mode: jniserviceadmin runs on the device via "adb shell"
+# to grant permissions in the device-side ACL database.
 test-go: build-host
-	JNICTL_E2E_ADDR=localhost:$(HOST_PORT) JNICTL_BIN=$$(pwd)/build/jnicli-host \
+	JNICTL_E2E_ADDR=localhost:$(HOST_PORT) \
+	JNICTL_BIN=$$(pwd)/build/jnicli-host \
+	JNISERVICEADMIN_ADB_BIN=$(REMOTE_DIR)/jniserviceadmin \
+	JNISERVICE_DB=$(REMOTE_ACL_DB) \
+	ADB=$(ADB) \
 		go test -v -run TestE2E ./
 
 # Run shell-based E2E tests (requires server running + port forwarded).

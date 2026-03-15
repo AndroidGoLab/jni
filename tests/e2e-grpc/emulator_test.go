@@ -32,7 +32,8 @@ func skipIfNoEmulator(t *testing.T) {
 func runLiveJnicli(t *testing.T, args ...string) string {
 	t.Helper()
 	addr := os.Getenv("JNICTL_E2E_ADDR")
-	fullArgs := append([]string{"--addr", addr, "--insecure"}, args...)
+	fullArgs := append([]string{"--addr", addr, "--insecure"}, mtlsFlags()...)
+	fullArgs = append(fullArgs, args...)
 
 	cmd := jnicliCommand(fullArgs...)
 
@@ -51,7 +52,8 @@ func runLiveJnicli(t *testing.T, args ...string) string {
 func runLiveJnicliExpectError(t *testing.T, args ...string) string {
 	t.Helper()
 	addr := os.Getenv("JNICTL_E2E_ADDR")
-	fullArgs := append([]string{"--addr", addr, "--insecure"}, args...)
+	fullArgs := append([]string{"--addr", addr, "--insecure"}, mtlsFlags()...)
+	fullArgs = append(fullArgs, args...)
 
 	cmd := jnicliCommand(fullArgs...)
 
@@ -61,6 +63,20 @@ func runLiveJnicliExpectError(t *testing.T, args ...string) string {
 			strings.Join(args, " "), out)
 	}
 	return string(out)
+}
+
+// mtlsFlags returns --cert/--key/--ca flags if TestMain registered
+// a client certificate. Returns nil when no certs are available
+// (e.g. when JNICTL_E2E_ADDR is not set and setup was skipped).
+func mtlsFlags() []string {
+	if testCertFile == "" {
+		return nil
+	}
+	return []string{
+		"--cert", testCertFile,
+		"--key", testKeyFile,
+		"--ca", testCAFile,
+	}
 }
 
 // jnicliCommand returns an exec.Cmd for jnicli.
