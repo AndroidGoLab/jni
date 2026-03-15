@@ -1,4 +1,4 @@
-package com.github.xaionaro_go.jni.example;
+package center.dx.jni.example;
 
 import android.app.Activity;
 import android.content.pm.ApplicationInfo;

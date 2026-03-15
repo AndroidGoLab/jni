@@ -37,11 +37,11 @@ all: run
 build: $(BUILD_DIR)/libe2etest.so $(BUILD_DIR)/classes.dex
 
 $(BUILD_DIR)/classes.dex: TestRunner.java $(HANDLER_JAVA)
-	@mkdir -p $(BUILD_DIR)/com/github/xaionaro_go/jni/internal
-	@cp $(HANDLER_JAVA) $(BUILD_DIR)/com/github/xaionaro_go/jni/internal/
-	javac --release 17 -d $(BUILD_DIR) TestRunner.java $(BUILD_DIR)/com/github/xaionaro_go/jni/internal/GoInvocationHandler.java
+	@mkdir -p $(BUILD_DIR)/center/dx/jni/internal
+	@cp $(HANDLER_JAVA) $(BUILD_DIR)/center/dx/jni/internal/
+	javac --release 17 -d $(BUILD_DIR) TestRunner.java $(BUILD_DIR)/center/dx/jni/internal/GoInvocationHandler.java
 	$(D8) --lib $(PLATFORM)/android.jar --output $(BUILD_DIR) \
-		$(BUILD_DIR)/TestRunner.class $(BUILD_DIR)/com/github/xaionaro_go/jni/internal/GoInvocationHandler.class
+		$(BUILD_DIR)/TestRunner.class $(BUILD_DIR)/center/dx/jni/internal/GoInvocationHandler.class
 
 $(BUILD_DIR)/libe2etest.so: e2e.go jni_onload.c
 	cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=$(GOARCH) CC=$(CC) \

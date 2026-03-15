@@ -1,4 +1,4 @@
-package com.xaionaro.jniservice;
+package center.dx.jni.jniservice;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

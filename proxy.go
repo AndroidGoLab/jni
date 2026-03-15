@@ -56,7 +56,7 @@ var (
 	clsProxy            capi.Class
 	midNewProxyInstance capi.JmethodID
 
-	// com.github.xaionaro_go.jni.internal.GoInvocationHandler (loaded at init time)
+	// center.dx.jni.internal.GoInvocationHandler (loaded at init time)
 	clsGoHandler        capi.Class
 	midHandlerCtr       capi.JmethodID
 	fidHandlerID        capi.JfieldID  // GoInvocationHandler.handlerID
@@ -122,12 +122,12 @@ func doProxyInit(env *Env) error {
 		return fmt.Errorf("jni: proxy init: cannot find Class.getClassLoader")
 	}
 
-	// Find com.github.xaionaro_go.jni.internal.GoInvocationHandler (must be on the classpath)
-	handlerClassName := cstringLiteral("com/github/xaionaro_go/jni/internal/GoInvocationHandler")
+	// Find center.dx.jni.internal.GoInvocationHandler (must be on the classpath)
+	handlerClassName := cstringLiteral("center/dx/jni/internal/GoInvocationHandler")
 	hc := capi.FindClass(env.ptr, handlerClassName)
 	if hc == 0 {
 		capi.ExceptionClear(env.ptr)
-		return fmt.Errorf("jni: proxy init: cannot find com.github.xaionaro_go.jni.internal.GoInvocationHandler — " +
+		return fmt.Errorf("jni: proxy init: cannot find center.dx.jni.internal.GoInvocationHandler — " +
 			"ensure the helper class is on the classpath")
 	}
 	clsGoHandler = capi.Class(capi.NewGlobalRef(env.ptr, capi.Object(hc)))

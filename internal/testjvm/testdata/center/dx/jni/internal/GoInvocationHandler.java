@@ -1,4 +1,4 @@
-package com.github.xaionaro_go.jni.internal;
+package center.dx.jni.internal;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

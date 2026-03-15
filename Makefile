@@ -272,7 +272,7 @@ apk: dist-jniservice
 	javac --release 17 \
 		-cp $(APK_PLATFORM)/android.jar \
 		-d $(APK_STAGING)/classes \
-		$(APK_SRC)/src/com/xaionaro/jniservice/*.java
+		$(APK_SRC)/src/center/dx/jni/jniservice/*.java
 	$(APK_BUILD_TOOLS)/d8 \
 		--lib $(APK_PLATFORM)/android.jar \
 		--output $(APK_STAGING) \
