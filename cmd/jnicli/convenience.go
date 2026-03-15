@@ -9,24 +9,20 @@ import (
 	pb "github.com/xaionaro-go/jni/proto/jni_raw"
 )
 
-var captureCmd = &cobra.Command{
-	Use:   "capture",
-	Short: "High-level capture commands (camera, location)",
-}
+// ---- camera ----
+// cameraCmd is defined in the generated camera.go file.
 
-var captureCameraCmd = &cobra.Command{
-	Use:   "camera",
-	Short: "Take a photo and save as JPEG",
-	Long:  "Captures a JPEG photo from the device camera using the CameraCapture helper class.",
+var cameraPhotoCmd = &cobra.Command{
+	Use:   "photo",
+	Short: "Take a JPEG photo",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 
-		cameraIndex, _ := cmd.Flags().GetInt("camera")
+		cameraIndex, _ := cmd.Flags().GetInt("index")
 		output, _ := cmd.Flags().GetString("output")
 		client := pb.NewJNIServiceClient(grpcConn)
 
-		// Find CameraCapture class.
 		cls, err := client.FindClass(ctx, &pb.FindClassRequest{
 			Name: "center/dx/jni/jniservice/CameraCapture",
 		})
@@ -34,7 +30,6 @@ var captureCameraCmd = &cobra.Command{
 			return fmt.Errorf("finding CameraCapture class (is the APK installed?): %w", err)
 		}
 
-		// Get takePicture method.
 		method, err := client.GetStaticMethodID(ctx, &pb.GetStaticMethodIDRequest{
 			ClassHandle: cls.GetClassHandle(),
 			Name:        "takePicture",
@@ -44,11 +39,7 @@ var captureCameraCmd = &cobra.Command{
 			return fmt.Errorf("getting takePicture method: %w", err)
 		}
 
-		// The app context is typically handle 1 (from initAndroidContext) or
-		// handle 2 (from setAppContext in APK mode). Try handle 2 first.
 		contextHandle := int64(2)
-
-		// Call takePicture(context, cameraIndex).
 		result, err := client.CallStaticMethod(ctx, &pb.CallStaticMethodRequest{
 			ClassHandle: cls.GetClassHandle(),
 			MethodId:    method.GetMethodId(),
@@ -67,7 +58,6 @@ var captureCameraCmd = &cobra.Command{
 			return fmt.Errorf("camera returned null (check camera permission)")
 		}
 
-		// Get the JPEG bytes.
 		data, err := client.GetByteArrayData(ctx, &pb.GetByteArrayDataRequest{
 			ArrayHandle: arrayHandle,
 		})
@@ -75,6 +65,10 @@ var captureCameraCmd = &cobra.Command{
 			return fmt.Errorf("reading image data: %w", err)
 		}
 
+		if output == "-" || output == "" {
+			_, err := os.Stdout.Write(data.GetData())
+			return err
+		}
 		if err := os.WriteFile(output, data.GetData(), 0644); err != nil {
 			return fmt.Errorf("writing %s: %w", output, err)
 		}
@@ -83,18 +77,26 @@ var captureCameraCmd = &cobra.Command{
 	},
 }
 
-var captureLocationCmd = &cobra.Command{
-	Use:   "location",
-	Short: "Get current GPS coordinates",
-	Long:  "Returns the last known location from the device's location providers.",
+var cameraVideoCmd = &cobra.Command{
+	Use:   "video",
+	Short: "Record a video (not yet implemented)",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return fmt.Errorf("video recording is not yet implemented; requires MediaRecorder Java helper")
+	},
+}
+
+// ---- location ----
+
+var locationGetCmd = &cobra.Command{
+	Use:   "get",
+	Short: "Get last known GPS coordinates",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
 		defer cancel()
 
 		client := pb.NewJNIServiceClient(grpcConn)
-		contextHandle := int64(2) // APK app context
+		contextHandle := int64(2)
 
-		// Get Context class + getSystemService method.
 		ctxCls, err := client.FindClass(ctx, &pb.FindClassRequest{Name: "android/content/Context"})
 		if err != nil {
 			return fmt.Errorf("finding Context class: %w", err)
@@ -108,13 +110,11 @@ var captureLocationCmd = &cobra.Command{
 			return fmt.Errorf("getting getSystemService: %w", err)
 		}
 
-		// Create "location" string.
 		locStr, err := client.NewStringUTF(ctx, &pb.NewStringUTFRequest{Value: "location"})
 		if err != nil {
 			return err
 		}
 
-		// Get LocationManager.
 		lmResult, err := client.CallMethod(ctx, &pb.CallMethodRequest{
 			ObjectHandle: contextHandle,
 			MethodId:     gssMID.GetMethodId(),
@@ -129,7 +129,6 @@ var captureLocationCmd = &cobra.Command{
 			return fmt.Errorf("LocationManager is null")
 		}
 
-		// Get LocationManager class + getLastKnownLocation.
 		lmCls, err := client.FindClass(ctx, &pb.FindClassRequest{Name: "android/location/LocationManager"})
 		if err != nil {
 			return err
@@ -143,37 +142,23 @@ var captureLocationCmd = &cobra.Command{
 			return err
 		}
 
-		// Location class methods.
 		locCls, err := client.FindClass(ctx, &pb.FindClassRequest{Name: "android/location/Location"})
 		if err != nil {
 			return err
 		}
-		getLatMID, err := client.GetMethodID(ctx, &pb.GetMethodIDRequest{
+		getLatMID, _ := client.GetMethodID(ctx, &pb.GetMethodIDRequest{
 			ClassHandle: locCls.GetClassHandle(), Name: "getLatitude", Sig: "()D",
 		})
-		if err != nil {
-			return err
-		}
-		getLngMID, err := client.GetMethodID(ctx, &pb.GetMethodIDRequest{
+		getLngMID, _ := client.GetMethodID(ctx, &pb.GetMethodIDRequest{
 			ClassHandle: locCls.GetClassHandle(), Name: "getLongitude", Sig: "()D",
 		})
-		if err != nil {
-			return err
-		}
-		getAccMID, err := client.GetMethodID(ctx, &pb.GetMethodIDRequest{
+		getAccMID, _ := client.GetMethodID(ctx, &pb.GetMethodIDRequest{
 			ClassHandle: locCls.GetClassHandle(), Name: "getAccuracy", Sig: "()F",
 		})
-		if err != nil {
-			return err
-		}
-		getAltMID, err := client.GetMethodID(ctx, &pb.GetMethodIDRequest{
+		getAltMID, _ := client.GetMethodID(ctx, &pb.GetMethodIDRequest{
 			ClassHandle: locCls.GetClassHandle(), Name: "getAltitude", Sig: "()D",
 		})
-		if err != nil {
-			return err
-		}
 
-		// Try providers in order.
 		providers := []string{"gps", "network", "fused", "passive"}
 		for _, provider := range providers {
 			provStr, err := client.NewStringUTF(ctx, &pb.NewStringUTFRequest{Value: provider})
@@ -219,8 +204,15 @@ var captureLocationCmd = &cobra.Command{
 	},
 }
 
-var captureDeviceInfoCmd = &cobra.Command{
-	Use:   "device-info",
+// ---- device ----
+
+var deviceCmd = &cobra.Command{
+	Use:   "device",
+	Short: "Device information",
+}
+
+var deviceInfoCmd = &cobra.Command{
+	Use:   "info",
 	Short: "Get device model, manufacturer, SDK version",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx, cancel := requestContext(cmd)
@@ -228,7 +220,6 @@ var captureDeviceInfoCmd = &cobra.Command{
 
 		client := pb.NewJNIServiceClient(grpcConn)
 
-		// Build class has static String fields.
 		buildCls, err := client.FindClass(ctx, &pb.FindClassRequest{Name: "android/os/Build"})
 		if err != nil {
 			return err
@@ -260,7 +251,6 @@ var captureDeviceInfoCmd = &cobra.Command{
 			return str.GetValue()
 		}
 
-		// Build.VERSION has SDK_INT.
 		verCls, err := client.FindClass(ctx, &pb.FindClassRequest{Name: "android/os/Build$VERSION"})
 		if err != nil {
 			return err
@@ -280,6 +270,16 @@ var captureDeviceInfoCmd = &cobra.Command{
 			return err
 		}
 
+		releaseFID, _ := client.GetStaticFieldID(ctx, &pb.GetStaticFieldIDRequest{
+			ClassHandle: verCls.GetClassHandle(), Name: "RELEASE", Sig: "Ljava/lang/String;",
+		})
+		releaseVal, _ := client.GetStaticField(ctx, &pb.GetStaticFieldValueRequest{
+			ClassHandle: verCls.GetClassHandle(), FieldId: releaseFID.GetFieldId(), FieldType: pb.JType_OBJECT,
+		})
+		releaseStr, _ := client.GetStringUTFChars(ctx, &pb.GetStringUTFCharsRequest{
+			StringHandle: releaseVal.GetResult().GetL(),
+		})
+
 		return printResult(map[string]any{
 			"manufacturer": getStringField("MANUFACTURER"),
 			"model":        getStringField("MODEL"),
@@ -287,24 +287,40 @@ var captureDeviceInfoCmd = &cobra.Command{
 			"device":       getStringField("DEVICE"),
 			"product":      getStringField("PRODUCT"),
 			"sdk_int":      strconv.Itoa(int(sdkVal.GetResult().GetI())),
-			"release":      func() string {
-				fid, _ := client.GetStaticFieldID(ctx, &pb.GetStaticFieldIDRequest{
-					ClassHandle: verCls.GetClassHandle(), Name: "RELEASE", Sig: "Ljava/lang/String;",
-				})
-				val, _ := client.GetStaticField(ctx, &pb.GetStaticFieldValueRequest{
-					ClassHandle: verCls.GetClassHandle(), FieldId: fid.GetFieldId(), FieldType: pb.JType_OBJECT,
-				})
-				str, _ := client.GetStringUTFChars(ctx, &pb.GetStringUTFCharsRequest{StringHandle: val.GetResult().GetL()})
-				return str.GetValue()
-			}(),
+			"release":      releaseStr.GetValue(),
 		})
 	},
 }
 
-func init() {
-	captureCameraCmd.Flags().Int("camera", 0, "camera index (0=back, 1=front)")
-	captureCameraCmd.Flags().StringP("output", "o", "capture.jpg", "output JPEG file path")
+// ---- microphone ----
 
-	captureCmd.AddCommand(captureCameraCmd, captureLocationCmd, captureDeviceInfoCmd)
-	rootCmd.AddCommand(captureCmd)
+var microphoneCmd = &cobra.Command{
+	Use:   "microphone",
+	Short: "Microphone operations (record)",
+}
+
+var microphoneRecordCmd = &cobra.Command{
+	Use:   "record",
+	Short: "Record audio from the microphone (not yet implemented)",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return fmt.Errorf("microphone recording is not yet implemented; requires MediaRecorder Java helper")
+	},
+}
+
+// ---- init ----
+
+func init() {
+	cameraPhotoCmd.Flags().Int("index", 0, "camera index (0=back, 1=front)")
+	cameraPhotoCmd.Flags().StringP("output", "o", "", "output file (default: stdout)")
+	// Add convenience subcommands to existing generated parent commands.
+	cameraCmd.AddCommand(cameraPhotoCmd, cameraVideoCmd)
+	locationCmd.AddCommand(locationGetCmd)
+
+	deviceCmd.AddCommand(deviceInfoCmd)
+
+	microphoneRecordCmd.Flags().StringP("output", "o", "", "output file (default: stdout)")
+	microphoneRecordCmd.Flags().DurationP("duration", "d", 0, "recording duration (0 = until interrupted)")
+	microphoneCmd.AddCommand(microphoneRecordCmd)
+
+	rootCmd.AddCommand(deviceCmd, microphoneCmd)
 }
