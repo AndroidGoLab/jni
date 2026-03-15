@@ -271,6 +271,10 @@ func generateServerTLS(ca *certauth.CA) (tls.Certificate, error) {
 		NotAfter:     now.Add(365 * 24 * time.Hour),
 		KeyUsage:     x509.KeyUsageDigitalSignature,
 		ExtKeyUsage:  []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth},
+		// SANs so clients can verify the server cert when connecting via
+		// localhost, 127.0.0.1, or 0.0.0.0 (common for adb port-forward).
+		DNSNames:    []string{"localhost", "jniservice"},
+		IPAddresses: []net.IP{net.IPv4(127, 0, 0, 1), net.IPv4(0, 0, 0, 0), net.IPv6loopback},
 	}
 
 	certDER, err := x509.CreateCertificate(rand.Reader, tmpl, ca.Cert, &key.PublicKey, ca.Key)
