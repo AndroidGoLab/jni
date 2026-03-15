@@ -249,8 +249,16 @@ func (s *Server) Proxy(stream pb.JNIService_ProxyServer) error {
 		}
 
 	default:
-		// Abstract class path: register a basic ProxyHandler, find the
-		// generated adapter class, and instantiate it with the handler ID.
+		// Abstract class path: ensure native methods are registered (the
+		// interface path does this inside NewProxyFull, but we bypass it here).
+		if err := s.VM.Do(func(env *jni.Env) error {
+			return jni.EnsureProxyInit(env)
+		}); err != nil {
+			return status.Errorf(codes.Internal, "proxy init: %v", err)
+		}
+
+		// Register a basic ProxyHandler, find the generated adapter class,
+		// and instantiate it with the handler ID.
 		handlerID := jni.RegisterProxyHandler(
 			func(env *jni.Env, methodName string, args []*jni.Object) (*jni.Object, error) {
 				// Abstract class adapters don't pass a Method object, so we

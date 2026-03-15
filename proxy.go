@@ -133,9 +133,13 @@ func SetProxyClassLoader(cl *Object) {
 	}
 }
 
-// ensureProxyInit performs one-time initialization of the proxy
-// infrastructure. It finds and caches all Java classes and method IDs
-// needed to create Proxy instances.
+// EnsureProxyInit performs one-time initialization of the proxy
+// infrastructure (native method registration for GoInvocationHandler
+// and GoAbstractDispatch). Safe to call multiple times.
+func EnsureProxyInit(env *Env) error {
+	return ensureProxyInit(env)
+}
+
 func ensureProxyInit(env *Env) error {
 	proxyInitOnce.Do(func() {
 		proxyInitErr = doProxyInit(env)
