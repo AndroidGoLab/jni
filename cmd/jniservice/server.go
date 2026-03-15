@@ -99,7 +99,9 @@ func Java_center_dx_jni_jniservice_JNIServiceForeground_setAppContext(cenv *C.JN
 		// Set the ClassLoader for proxy init so GoInvocationHandler can be
 		// found in APK mode (JNI FindClass from native threads uses
 		// BootClassLoader which can't see APK classes).
-		jni.SetProxyClassLoader(clObj)
+		// Use the global ref from the HandleStore (not the local ref).
+		clGlobalRef := globalHandles.Get(clHandle)
+		jni.SetProxyClassLoader(clGlobalRef)
 		fmt.Fprintf(os.Stderr, "jniservice: APK ClassLoader stored (handle=%d)\n", clHandle)
 
 		return nil

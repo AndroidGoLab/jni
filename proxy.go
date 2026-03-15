@@ -105,7 +105,7 @@ var proxyClassLoader capi.Object
 // SetProxyClassLoader sets a fallback ClassLoader that proxy init uses
 // to find GoInvocationHandler when JNI FindClass fails. Call this with
 // the APK's ClassLoader (from Context.getClassLoader()) before creating
-// any proxies.
+// any proxies. The caller must pass a global ref (not a local ref).
 func SetProxyClassLoader(cl *Object) {
 	if cl != nil {
 		proxyClassLoader = cl.Ref()
@@ -179,7 +179,7 @@ func doProxyInit(env *Env) error {
 					javaName := capi.NewStringUTF(env.ptr, cstringLiteral("center.dx.jni.internal.GoInvocationHandler"))
 					if javaName != 0 {
 						var nameVal capi.Jvalue
-						*(*uintptr)(unsafe.Pointer(&nameVal)) = uintptr(javaName)
+						binary.NativeEndian.PutUint64(nameVal[:], uint64(javaName))
 						loaded := capi.CallObjectMethodA(env.ptr, proxyClassLoader, loadMID, &nameVal)
 						capi.DeleteLocalRef(env.ptr, capi.Object(javaName))
 						if capi.ExceptionCheck(env.ptr) == capi.JNI_TRUE {
