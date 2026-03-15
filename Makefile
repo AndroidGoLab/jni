@@ -1,5 +1,5 @@
 .PHONY: generate specs jni java proto protoc grpc cli clean lint test test-tools test-e2e test-emulator \
-	build build-server list-commands dist dist-jnictl-linux dist-jnictl-android dist-jniservice dist-dex \
+	build build-server list-commands dist dist-jnicli-linux dist-jnicli-android dist-jniservice dist-dex \
 	magisk apk deploy push start-server stop-server forward
 
 # JDK detection for host tests (jni.h and libjvm.so).
@@ -45,13 +45,13 @@ protoc: proto
 grpc: protoc
 	go run ./tools/cmd/grpcgen/ -specs spec/java/ -overlays spec/overlays/java/ -output . -go-module github.com/xaionaro-go/jni
 
-# Run cligen — generates jnictl cobra commands from Java API specs
+# Run cligen — generates jnicli cobra commands from Java API specs
 cli: grpc
-	go run ./tools/cmd/cligen/ -specs spec/java/ -overlays spec/overlays/java/ -output cmd/jnictl/ -go-module github.com/xaionaro-go/jni
+	go run ./tools/cmd/cligen/ -specs spec/java/ -overlays spec/overlays/java/ -output cmd/jnicli/ -go-module github.com/xaionaro-go/jni
 
-# List all jnictl leaf commands as full paths
+# List all jnicli leaf commands as full paths
 list-commands:
-	@go run ./cmd/jnictl/ list-commands
+	@go run ./cmd/jnicli/ list-commands
 
 # Remove all generated files (identified by "DO NOT EDIT" header), excluding tools/
 clean:
@@ -195,20 +195,20 @@ endif
 DIST_CC := $(DIST_NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/$(DIST_NDK_TRIPLE)$(DIST_API_LEVEL)-clang
 
 # Build all release artifacts for a single GOARCH.
-dist: dist-jnictl-linux dist-jnictl-android dist-jniservice dist-dex
+dist: dist-jnicli-linux dist-jnicli-android dist-jniservice dist-dex
 
-dist-jnictl-linux:
+dist-jnicli-linux:
 	@mkdir -p build
 	CGO_ENABLED=0 GOOS=linux GOARCH=$(DIST_GOARCH) \
-		go build -o build/jnictl-linux-$(DIST_GOARCH) ./cmd/jnictl/
+		go build -o build/jnicli-linux-$(DIST_GOARCH) ./cmd/jnicli/
 
 # android/amd64 requires external (CGO) linking for PIE (Go toolchain limitation:
 # InternalLinkPIESupported lists android/arm64 but not android/amd64).
 # Use CGO_ENABLED=1 unconditionally since arm64 also works fine with it.
-dist-jnictl-android:
+dist-jnicli-android:
 	@mkdir -p build
 	CGO_ENABLED=1 GOOS=android GOARCH=$(DIST_GOARCH) CC=$(DIST_CC) \
-		go build -o build/jnictl-android-$(DIST_GOARCH) ./cmd/jnictl/
+		go build -o build/jnicli-android-$(DIST_GOARCH) ./cmd/jnicli/
 
 dist-jniservice:
 	@mkdir -p build

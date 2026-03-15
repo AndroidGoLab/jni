@@ -52,7 +52,7 @@ jobs:
             ${{ runner.os }}-go-
 
       - name: Vet packages
-        run: go vet ./cmd/jnictl/ ./tools/...
+        run: go vet ./cmd/jnicli/ ./tools/...
 
   build-cli:
     name: Build CLI
@@ -73,8 +73,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
-      - name: Build jnictl
-        run: GOOS=linux GOARCH=amd64 go build -o /dev/null ./cmd/jnictl/
+      - name: Build jnicli
+        run: GOOS=linux GOARCH=amd64 go build -o /dev/null ./cmd/jnicli/
 
   lint:
     name: Lint

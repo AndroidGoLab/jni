@@ -8,11 +8,11 @@ import (
 	"testing"
 )
 
-var jnictlBin = "../../cmd/jnictl"
+var jnicliBin = "../../cmd/jnicli"
 
-// TestJnictlHelp verifies the root command exists and lists expected subcommands.
-func TestJnictlHelp(t *testing.T) {
-	out := runJnictlHelp(t)
+// TestJnicliHelp verifies the root command exists and lists expected subcommands.
+func TestJnicliHelp(t *testing.T) {
+	out := runJnicliHelp(t)
 	requiredCommands := []string{
 		"alarm", "bluetooth", "camera", "location", "notification",
 		"power", "vibrator", "wifi", "jni", "handle",
@@ -24,9 +24,9 @@ func TestJnictlHelp(t *testing.T) {
 	}
 }
 
-// TestJnictlCommandCount verifies the expected number of leaf commands.
-func TestJnictlCommandCount(t *testing.T) {
-	cmd := exec.Command("go", "run", jnictlBin, "list-commands")
+// TestJnicliCommandCount verifies the expected number of leaf commands.
+func TestJnicliCommandCount(t *testing.T) {
+	cmd := exec.Command("go", "run", jnicliBin, "list-commands")
 	out, err := cmd.Output()
 	if err != nil {
 		t.Fatalf("list-commands: %v", err)
@@ -38,12 +38,12 @@ func TestJnictlCommandCount(t *testing.T) {
 	t.Logf("total leaf commands: %d", len(lines))
 }
 
-func runJnictlHelp(t *testing.T) string {
+func runJnicliHelp(t *testing.T) string {
 	t.Helper()
-	cmd := exec.Command("go", "run", jnictlBin, "--help")
+	cmd := exec.Command("go", "run", jnicliBin, "--help")
 	out, err := cmd.CombinedOutput()
 	if err != nil {
-		t.Fatalf("jnictl --help: %v\n%s", err, out)
+		t.Fatalf("jnicli --help: %v\n%s", err, out)
 	}
 	return string(out)
 }

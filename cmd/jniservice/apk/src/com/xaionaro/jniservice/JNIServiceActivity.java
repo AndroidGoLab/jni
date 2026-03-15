@@ -10,7 +10,7 @@ public class JNIServiceActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TextView tv = new TextView(this);
-        tv.setText("jniservice is running.\n\nConnect with:\n  jnictl --addr <device-ip>:50051 --insecure jni get-version");
+        tv.setText("jniservice is running.\n\nConnect with:\n  jnicli --addr <device-ip>:50051 --insecure jni get-version");
         tv.setPadding(48, 48, 48, 48);
         tv.setTextSize(16);
         setContentView(tv);

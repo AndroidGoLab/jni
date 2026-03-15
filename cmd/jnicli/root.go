@@ -23,9 +23,9 @@ var grpcConn *grpc.ClientConn
 var grpcClient *client.Client
 
 var rootCmd = &cobra.Command{
-	Use:   "jnictl",
+	Use:   "jnicli",
 	Short: "CLI for Android API access over gRPC",
-	Long:  "jnictl provides command-line access to Android system services via the go-jni gRPC layer.",
+	Long:  "jnicli provides command-line access to Android system services via the go-jni gRPC layer.",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		switch cmd.Name() {
 		case "help", "completion", "list-commands":

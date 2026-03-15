@@ -1,5 +1,5 @@
 // Package cligen generates cobra CLI commands from Java API YAML specs.
-// It produces Go source files for cmd/jnictl that call proto-generated
+// It produces Go source files for cmd/jnicli that call proto-generated
 // gRPC stubs directly, covering the full Android API surface.
 package cligen
 

@@ -1,4 +1,4 @@
-# E2E gRPC tests for jnictl against jniservice on Android.
+# E2E gRPC tests for jnicli against jniservice on Android.
 #
 # Usage:
 #   make -C tests/e2e-grpc test      # Full pipeline: build, push, start, forward, test, stop
@@ -31,15 +31,15 @@ endif
 # Build host + android binaries.
 build: build-host build-android
 
-# Build jnictl for the host (used by test runners).
+# Build jnicli for the host (used by test runners).
 build-host:
 	@mkdir -p build
-	CGO_ENABLED=0 go build -o build/jnictl-host ../../cmd/jnictl/
+	CGO_ENABLED=0 go build -o build/jnicli-host ../../cmd/jnicli/
 
-# Build jnictl + libjniservice.so + classes.dex for Android.
+# Build jnicli + libjniservice.so + classes.dex for Android.
 build-android:
 	@mkdir -p build
-	CGO_ENABLED=0 GOOS=android GOARCH=$(GOARCH) go build -o build/jnictl ../../cmd/jnictl/
+	CGO_ENABLED=0 GOOS=android GOARCH=$(GOARCH) go build -o build/jnicli ../../cmd/jnicli/
 	CGO_ENABLED=1 GOOS=android GOARCH=$(GOARCH) CC=$(CC) \
 		go build -buildmode=c-shared -o build/libjniservice.so ../../cmd/jniservice/
 	javac --release 17 -d build ../../cmd/jniservice/JNIService.java
@@ -49,8 +49,8 @@ build-android:
 
 # Push artifacts to the device.
 push: build-android
-	$(ADB) push build/jnictl $(REMOTE_DIR)/jnictl
-	$(ADB) shell chmod +x $(REMOTE_DIR)/jnictl
+	$(ADB) push build/jnicli $(REMOTE_DIR)/jnicli
+	$(ADB) shell chmod +x $(REMOTE_DIR)/jnicli
 	$(ADB) push build/libjniservice.so $(REMOTE_DIR)/libjniservice.so
 	$(ADB) push build/classes.dex $(REMOTE_DIR)/jniservice.dex
 
@@ -91,12 +91,12 @@ test: build push start-server forward test-go
 
 # Run Go E2E tests (requires server running + port forwarded).
 test-go: build-host
-	JNICTL_E2E_ADDR=localhost:$(HOST_PORT) JNICTL_BIN=$$(pwd)/build/jnictl-host \
+	JNICTL_E2E_ADDR=localhost:$(HOST_PORT) JNICTL_BIN=$$(pwd)/build/jnicli-host \
 		go test -v -run TestE2E ./
 
 # Run shell-based E2E tests (requires server running + port forwarded).
 test-sh: build-host
-	JNICTL_E2E_ADDR=localhost:$(HOST_PORT) JNICTL_BIN=$$(pwd)/build/jnictl-host \
+	JNICTL_E2E_ADDR=localhost:$(HOST_PORT) JNICTL_BIN=$$(pwd)/build/jnicli-host \
 		./run_e2e.sh
 
 clean:

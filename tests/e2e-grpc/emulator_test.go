@@ -15,7 +15,7 @@ import (
 
 // These tests require a running jniservice on an Android device or emulator.
 // Set JNICTL_E2E_ADDR=<host:port> to enable them.
-// Optionally set JNICTL_BIN to the path of a pre-built jnictl binary.
+// Optionally set JNICTL_BIN to the path of a pre-built jnicli binary.
 //
 // Run with:
 //   JNICTL_E2E_ADDR=localhost:50051 go test -v -count=1 -run TestE2E ./
@@ -27,49 +27,49 @@ func skipIfNoEmulator(t *testing.T) {
 	}
 }
 
-// runLiveJnictl runs jnictl against the live server and returns stdout.
+// runLiveJnicli runs jnicli against the live server and returns stdout.
 // Fails the test on non-zero exit.
-func runLiveJnictl(t *testing.T, args ...string) string {
+func runLiveJnicli(t *testing.T, args ...string) string {
 	t.Helper()
 	addr := os.Getenv("JNICTL_E2E_ADDR")
 	fullArgs := append([]string{"--addr", addr, "--insecure"}, args...)
 
-	cmd := jnictlCommand(fullArgs...)
+	cmd := jnicliCommand(fullArgs...)
 
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
 
 	if err := cmd.Run(); err != nil {
-		t.Fatalf("jnictl %s: %v\nstdout: %s\nstderr: %s",
+		t.Fatalf("jnicli %s: %v\nstdout: %s\nstderr: %s",
 			strings.Join(args, " "), err, stdout.String(), stderr.String())
 	}
 	return stdout.String()
 }
 
-// runLiveJnictlExpectError runs jnictl and expects a non-zero exit code.
-func runLiveJnictlExpectError(t *testing.T, args ...string) string {
+// runLiveJnicliExpectError runs jnicli and expects a non-zero exit code.
+func runLiveJnicliExpectError(t *testing.T, args ...string) string {
 	t.Helper()
 	addr := os.Getenv("JNICTL_E2E_ADDR")
 	fullArgs := append([]string{"--addr", addr, "--insecure"}, args...)
 
-	cmd := jnictlCommand(fullArgs...)
+	cmd := jnicliCommand(fullArgs...)
 
 	out, err := cmd.CombinedOutput()
 	if err == nil {
-		t.Fatalf("expected error from jnictl %s but got success:\n%s",
+		t.Fatalf("expected error from jnicli %s but got success:\n%s",
 			strings.Join(args, " "), out)
 	}
 	return string(out)
 }
 
-// jnictlCommand returns an exec.Cmd for jnictl.
+// jnicliCommand returns an exec.Cmd for jnicli.
 // Uses JNICTL_BIN if set, otherwise falls back to "go run".
-func jnictlCommand(args ...string) *exec.Cmd {
+func jnicliCommand(args ...string) *exec.Cmd {
 	if bin := os.Getenv("JNICTL_BIN"); bin != "" {
 		return exec.Command(bin, args...)
 	}
-	return exec.Command("go", append([]string{"run", jnictlBin}, args...)...)
+	return exec.Command("go", append([]string{"run", jnicliBin}, args...)...)
 }
 
 // parseJSON parses a JSON string into a map.
@@ -109,7 +109,7 @@ func getInt64Field(t *testing.T, resp map[string]any, field string) int64 {
 
 func TestE2E_JNIGetVersion(t *testing.T) {
 	skipIfNoEmulator(t)
-	out := runLiveJnictl(t, "jni", "get-version")
+	out := runLiveJnicli(t, "jni", "get-version")
 	resp := parseJSON(t, out)
 
 	version, ok := resp["version"]
@@ -132,7 +132,7 @@ func TestE2E_FindClass(t *testing.T) {
 	skipIfNoEmulator(t)
 
 	t.Run("java/lang/String", func(t *testing.T) {
-		out := runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/String")
+		out := runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/String")
 		resp := parseJSON(t, out)
 		handle := getInt64Field(t, resp, "classHandle")
 		if handle <= 0 {
@@ -142,7 +142,7 @@ func TestE2E_FindClass(t *testing.T) {
 	})
 
 	t.Run("java/lang/System", func(t *testing.T) {
-		out := runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/System")
+		out := runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/System")
 		resp := parseJSON(t, out)
 		handle := getInt64Field(t, resp, "classHandle")
 		if handle <= 0 {
@@ -152,7 +152,7 @@ func TestE2E_FindClass(t *testing.T) {
 	})
 
 	t.Run("java/lang/Integer", func(t *testing.T) {
-		out := runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/Integer")
+		out := runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/Integer")
 		resp := parseJSON(t, out)
 		handle := getInt64Field(t, resp, "classHandle")
 		if handle <= 0 {
@@ -164,7 +164,7 @@ func TestE2E_FindClass(t *testing.T) {
 
 func TestE2E_FindClassNotFound(t *testing.T) {
 	skipIfNoEmulator(t)
-	out := runLiveJnictlExpectError(t, "jni", "class", "find", "--name", "does/not/Exist")
+	out := runLiveJnicliExpectError(t, "jni", "class", "find", "--name", "does/not/Exist")
 	t.Logf("expected error output: %s", out)
 }
 
@@ -173,10 +173,10 @@ func TestE2E_FindClassNotFound(t *testing.T) {
 func TestE2E_GetStaticMethodID(t *testing.T) {
 	skipIfNoEmulator(t)
 
-	out := runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/System")
+	out := runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/System")
 	classHandle := getInt64Field(t, parseJSON(t, out), "classHandle")
 
-	out = runLiveJnictl(t, "jni", "method", "get-static-id",
+	out = runLiveJnicli(t, "jni", "method", "get-static-id",
 		"--class", strconv.FormatInt(classHandle, 10),
 		"--name", "currentTimeMillis",
 		"--sig", "()J")
@@ -194,18 +194,18 @@ func TestE2E_CallStaticMethod_CurrentTimeMillis(t *testing.T) {
 	skipIfNoEmulator(t)
 
 	// Find java/lang/System.
-	out := runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/System")
+	out := runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/System")
 	classHandle := getInt64Field(t, parseJSON(t, out), "classHandle")
 
 	// Get currentTimeMillis method ID.
-	out = runLiveJnictl(t, "jni", "method", "get-static-id",
+	out = runLiveJnicli(t, "jni", "method", "get-static-id",
 		"--class", strconv.FormatInt(classHandle, 10),
 		"--name", "currentTimeMillis",
 		"--sig", "()J")
 	methodID := getInt64Field(t, parseJSON(t, out), "methodId")
 
 	// Call it.
-	out = runLiveJnictl(t, "jni", "method", "call-static",
+	out = runLiveJnicli(t, "jni", "method", "call-static",
 		"--class", strconv.FormatInt(classHandle, 10),
 		"--method", strconv.FormatInt(methodID, 10),
 		"--return-type", "long")
@@ -235,7 +235,7 @@ func TestE2E_StringNewAndGet(t *testing.T) {
 	const testString = "hello world"
 
 	// Create a new Java string.
-	out := runLiveJnictl(t, "jni", "string", "new", "--value", testString)
+	out := runLiveJnicli(t, "jni", "string", "new", "--value", testString)
 	resp := parseJSON(t, out)
 	handle := getInt64Field(t, resp, "stringHandle")
 	if handle <= 0 {
@@ -243,7 +243,7 @@ func TestE2E_StringNewAndGet(t *testing.T) {
 	}
 
 	// Read it back.
-	out = runLiveJnictl(t, "jni", "string", "get",
+	out = runLiveJnicli(t, "jni", "string", "get",
 		"--handle", strconv.FormatInt(handle, 10))
 	resp = parseJSON(t, out)
 	value, ok := resp["value"]
@@ -261,10 +261,10 @@ func TestE2E_StringLength(t *testing.T) {
 
 	const testString = "hello"
 
-	out := runLiveJnictl(t, "jni", "string", "new", "--value", testString)
+	out := runLiveJnicli(t, "jni", "string", "new", "--value", testString)
 	handle := getInt64Field(t, parseJSON(t, out), "stringHandle")
 
-	out = runLiveJnictl(t, "jni", "string", "length",
+	out = runLiveJnicli(t, "jni", "string", "length",
 		"--handle", strconv.FormatInt(handle, 10))
 	resp := parseJSON(t, out)
 
@@ -288,11 +288,11 @@ func TestE2E_ObjectIsSame(t *testing.T) {
 	skipIfNoEmulator(t)
 
 	// Get a handle via FindClass.
-	out := runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/String")
+	out := runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/String")
 	handle := getInt64Field(t, parseJSON(t, out), "classHandle")
 
 	// Same handle must be same object.
-	out = runLiveJnictl(t, "jni", "object", "is-same",
+	out = runLiveJnicli(t, "jni", "object", "is-same",
 		"--object1", strconv.FormatInt(handle, 10),
 		"--object2", strconv.FormatInt(handle, 10))
 	resp := parseJSON(t, out)
@@ -311,13 +311,13 @@ func TestE2E_ObjectIsSame_DifferentObjects(t *testing.T) {
 	skipIfNoEmulator(t)
 
 	// Two different classes should not be the same object.
-	out1 := runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/String")
+	out1 := runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/String")
 	h1 := getInt64Field(t, parseJSON(t, out1), "classHandle")
 
-	out2 := runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/Integer")
+	out2 := runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/Integer")
 	h2 := getInt64Field(t, parseJSON(t, out2), "classHandle")
 
-	out := runLiveJnictl(t, "jni", "object", "is-same",
+	out := runLiveJnicli(t, "jni", "object", "is-same",
 		"--object1", strconv.FormatInt(h1, 10),
 		"--object2", strconv.FormatInt(h2, 10))
 	resp := parseJSON(t, out)
@@ -332,10 +332,10 @@ func TestE2E_ObjectGetClass(t *testing.T) {
 	skipIfNoEmulator(t)
 
 	// Create a string object and get its class.
-	out := runLiveJnictl(t, "jni", "string", "new", "--value", "test")
+	out := runLiveJnicli(t, "jni", "string", "new", "--value", "test")
 	strHandle := getInt64Field(t, parseJSON(t, out), "stringHandle")
 
-	out = runLiveJnictl(t, "jni", "object", "get-class",
+	out = runLiveJnicli(t, "jni", "object", "get-class",
 		"--object", strconv.FormatInt(strHandle, 10))
 	resp := parseJSON(t, out)
 	classHandle := getInt64Field(t, resp, "classHandle")
@@ -351,16 +351,16 @@ func TestE2E_HandleRelease(t *testing.T) {
 	skipIfNoEmulator(t)
 
 	// Create a disposable string.
-	out := runLiveJnictl(t, "jni", "string", "new", "--value", "disposable")
+	out := runLiveJnicli(t, "jni", "string", "new", "--value", "disposable")
 	handle := getInt64Field(t, parseJSON(t, out), "stringHandle")
 
 	// Release it — should succeed.
-	out = runLiveJnictl(t, "handle", "release",
+	out = runLiveJnicli(t, "handle", "release",
 		"--handle", strconv.FormatInt(handle, 10))
 	t.Logf("release response: %s", strings.TrimSpace(out))
 
 	// Releasing again should fail (handle no longer exists).
-	runLiveJnictlExpectError(t, "handle", "release",
+	runLiveJnicliExpectError(t, "handle", "release",
 		"--handle", strconv.FormatInt(handle, 10))
 }
 
@@ -369,7 +369,7 @@ func TestE2E_HandleRelease(t *testing.T) {
 func TestE2E_ExceptionCheck(t *testing.T) {
 	skipIfNoEmulator(t)
 
-	out := runLiveJnictl(t, "jni", "exception", "check")
+	out := runLiveJnicli(t, "jni", "exception", "check")
 	resp := parseJSON(t, out)
 
 	// No exception should be pending after normal operations.
@@ -385,12 +385,12 @@ func TestE2E_ErrorCases(t *testing.T) {
 	skipIfNoEmulator(t)
 
 	t.Run("FindClass_NonexistentClass", func(t *testing.T) {
-		runLiveJnictlExpectError(t, "jni", "class", "find", "--name", "com/fake/DoesNotExist")
+		runLiveJnicliExpectError(t, "jni", "class", "find", "--name", "com/fake/DoesNotExist")
 	})
 
 	t.Run("GetMethodID_InvalidClass", func(t *testing.T) {
 		// Handle 999999 doesn't exist — should return a gRPC error.
-		runLiveJnictlExpectError(t, "jni", "method", "get-static-id",
+		runLiveJnicliExpectError(t, "jni", "method", "get-static-id",
 			"--class", "999999",
 			"--name", "foo",
 			"--sig", "()V")
@@ -398,17 +398,17 @@ func TestE2E_ErrorCases(t *testing.T) {
 
 	t.Run("GetMethodID_NonexistentMethod", func(t *testing.T) {
 		// Valid class, but method doesn't exist.
-		out := runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/System")
+		out := runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/System")
 		classHandle := getInt64Field(t, parseJSON(t, out), "classHandle")
 
-		runLiveJnictlExpectError(t, "jni", "method", "get-static-id",
+		runLiveJnicliExpectError(t, "jni", "method", "get-static-id",
 			"--class", strconv.FormatInt(classHandle, 10),
 			"--name", "nonExistentMethod",
 			"--sig", "()V")
 	})
 
 	t.Run("GetString_InvalidHandle", func(t *testing.T) {
-		runLiveJnictlExpectError(t, "jni", "string", "get", "--handle", "999999")
+		runLiveJnicliExpectError(t, "jni", "string", "get", "--handle", "999999")
 	})
 }
 
@@ -418,12 +418,12 @@ func TestE2E_FullWorkflow_CallAnyJavaMethod(t *testing.T) {
 	skipIfNoEmulator(t)
 
 	// 1. Find java/lang/System.
-	out := runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/System")
+	out := runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/System")
 	classHandle := getInt64Field(t, parseJSON(t, out), "classHandle")
 	t.Logf("step 1: System class handle=%d", classHandle)
 
 	// 2. Get static method ID for currentTimeMillis.
-	out = runLiveJnictl(t, "jni", "method", "get-static-id",
+	out = runLiveJnicli(t, "jni", "method", "get-static-id",
 		"--class", strconv.FormatInt(classHandle, 10),
 		"--name", "currentTimeMillis",
 		"--sig", "()J")
@@ -431,7 +431,7 @@ func TestE2E_FullWorkflow_CallAnyJavaMethod(t *testing.T) {
 	t.Logf("step 2: method ID=%d", methodID)
 
 	// 3. Call currentTimeMillis.
-	out = runLiveJnictl(t, "jni", "method", "call-static",
+	out = runLiveJnicli(t, "jni", "method", "call-static",
 		"--class", strconv.FormatInt(classHandle, 10),
 		"--method", strconv.FormatInt(methodID, 10),
 		"--return-type", "long")
@@ -448,7 +448,7 @@ func TestE2E_FullWorkflow_CallAnyJavaMethod(t *testing.T) {
 	}
 
 	// 4. Call again — value should be >= previous.
-	out = runLiveJnictl(t, "jni", "method", "call-static",
+	out = runLiveJnicli(t, "jni", "method", "call-static",
 		"--class", strconv.FormatInt(classHandle, 10),
 		"--method", strconv.FormatInt(methodID, 10),
 		"--return-type", "long")
@@ -465,7 +465,7 @@ func TestE2E_FullWorkflow_CallAnyJavaMethod(t *testing.T) {
 	}
 
 	// 5. Verify no exception pending.
-	out = runLiveJnictl(t, "jni", "exception", "check")
+	out = runLiveJnicli(t, "jni", "exception", "check")
 	excResp := parseJSON(t, out)
 	if excResp["hasException"] == true {
 		t.Error("unexpected exception after calls")
@@ -474,10 +474,10 @@ func TestE2E_FullWorkflow_CallAnyJavaMethod(t *testing.T) {
 
 	// 6. Create a string, read it back, verify.
 	const msg = "e2e-workflow-test"
-	out = runLiveJnictl(t, "jni", "string", "new", "--value", msg)
+	out = runLiveJnicli(t, "jni", "string", "new", "--value", msg)
 	strHandle := getInt64Field(t, parseJSON(t, out), "stringHandle")
 
-	out = runLiveJnictl(t, "jni", "string", "get",
+	out = runLiveJnicli(t, "jni", "string", "get",
 		"--handle", strconv.FormatInt(strHandle, 10))
 	strResp := parseJSON(t, out)
 	if strResp["value"] != msg {
@@ -486,9 +486,9 @@ func TestE2E_FullWorkflow_CallAnyJavaMethod(t *testing.T) {
 	t.Logf("step 6: string round-trip OK: %q", msg)
 
 	// 7. Release handles.
-	runLiveJnictl(t, "handle", "release",
+	runLiveJnicli(t, "handle", "release",
 		"--handle", strconv.FormatInt(classHandle, 10))
-	runLiveJnictl(t, "handle", "release",
+	runLiveJnicli(t, "handle", "release",
 		"--handle", strconv.FormatInt(strHandle, 10))
 	t.Log("step 7: handles released")
 }
@@ -499,10 +499,10 @@ func TestE2E_GetSuperclass(t *testing.T) {
 	skipIfNoEmulator(t)
 
 	// String's superclass should be Object.
-	out := runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/String")
+	out := runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/String")
 	strClassHandle := getInt64Field(t, parseJSON(t, out), "classHandle")
 
-	out = runLiveJnictl(t, "jni", "class", "get-superclass",
+	out = runLiveJnicli(t, "jni", "class", "get-superclass",
 		"--class", strconv.FormatInt(strClassHandle, 10))
 	resp := parseJSON(t, out)
 	superHandle := getInt64Field(t, resp, "classHandle")
@@ -516,10 +516,10 @@ func TestE2E_IsAssignableFrom(t *testing.T) {
 	skipIfNoEmulator(t)
 
 	// String is assignable from String.
-	out := runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/String")
+	out := runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/String")
 	strClass := getInt64Field(t, parseJSON(t, out), "classHandle")
 
-	out = runLiveJnictl(t, "jni", "class", "is-assignable-from",
+	out = runLiveJnicli(t, "jni", "class", "is-assignable-from",
 		"--class1", strconv.FormatInt(strClass, 10),
 		"--class2", strconv.FormatInt(strClass, 10))
 	resp := parseJSON(t, out)
@@ -539,13 +539,13 @@ func TestE2E_IsInstanceOf(t *testing.T) {
 	skipIfNoEmulator(t)
 
 	// Create a string, check it's an instance of String class.
-	out := runLiveJnictl(t, "jni", "string", "new", "--value", "test")
+	out := runLiveJnicli(t, "jni", "string", "new", "--value", "test")
 	strHandle := getInt64Field(t, parseJSON(t, out), "stringHandle")
 
-	out = runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/String")
+	out = runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/String")
 	strClass := getInt64Field(t, parseJSON(t, out), "classHandle")
 
-	out = runLiveJnictl(t, "jni", "object", "is-instance-of",
+	out = runLiveJnicli(t, "jni", "object", "is-instance-of",
 		"--object", strconv.FormatInt(strHandle, 10),
 		"--class", strconv.FormatInt(strClass, 10))
 	resp := parseJSON(t, out)
@@ -565,10 +565,10 @@ func TestE2E_GetMethodID(t *testing.T) {
 	skipIfNoEmulator(t)
 
 	// String.length() instance method.
-	out := runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/String")
+	out := runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/String")
 	strClass := getInt64Field(t, parseJSON(t, out), "classHandle")
 
-	out = runLiveJnictl(t, "jni", "method", "get-id",
+	out = runLiveJnicli(t, "jni", "method", "get-id",
 		"--class", strconv.FormatInt(strClass, 10),
 		"--name", "length",
 		"--sig", "()I")
@@ -588,22 +588,22 @@ func TestE2E_CallMethod_StringLength(t *testing.T) {
 	const testStr = "abcde"
 
 	// Create a String object.
-	out := runLiveJnictl(t, "jni", "string", "new", "--value", testStr)
+	out := runLiveJnicli(t, "jni", "string", "new", "--value", testStr)
 	strHandle := getInt64Field(t, parseJSON(t, out), "stringHandle")
 
 	// Find String class.
-	out = runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/String")
+	out = runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/String")
 	strClass := getInt64Field(t, parseJSON(t, out), "classHandle")
 
 	// Get String.length() method ID.
-	out = runLiveJnictl(t, "jni", "method", "get-id",
+	out = runLiveJnicli(t, "jni", "method", "get-id",
 		"--class", strconv.FormatInt(strClass, 10),
 		"--name", "length",
 		"--sig", "()I")
 	methodID := getInt64Field(t, parseJSON(t, out), "methodId")
 
 	// Call String.length() on our string.
-	out = runLiveJnictl(t, "jni", "method", "call",
+	out = runLiveJnicli(t, "jni", "method", "call",
 		"--object", strconv.FormatInt(strHandle, 10),
 		"--method", strconv.FormatInt(methodID, 10),
 		"--return-type", "int")
@@ -626,10 +626,10 @@ func TestE2E_GetFieldID(t *testing.T) {
 	skipIfNoEmulator(t)
 
 	// Integer has a "value" field (private, but JNI doesn't enforce access).
-	out := runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/Integer")
+	out := runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/Integer")
 	cls := getInt64Field(t, parseJSON(t, out), "classHandle")
 
-	out = runLiveJnictl(t, "jni", "field", "get-id",
+	out = runLiveJnicli(t, "jni", "field", "get-id",
 		"--class", strconv.FormatInt(cls, 10),
 		"--name", "value",
 		"--sig", "I")
@@ -647,10 +647,10 @@ func TestE2E_GetStaticFieldID(t *testing.T) {
 	skipIfNoEmulator(t)
 
 	// Integer.MAX_VALUE static field.
-	out := runLiveJnictl(t, "jni", "class", "find", "--name", "java/lang/Integer")
+	out := runLiveJnicli(t, "jni", "class", "find", "--name", "java/lang/Integer")
 	cls := getInt64Field(t, parseJSON(t, out), "classHandle")
 
-	out = runLiveJnictl(t, "jni", "field", "get-static-id",
+	out = runLiveJnicli(t, "jni", "field", "get-static-id",
 		"--class", strconv.FormatInt(cls, 10),
 		"--name", "MAX_VALUE",
 		"--sig", "I")
@@ -664,7 +664,7 @@ func TestE2E_GetStaticFieldID(t *testing.T) {
 	// Verify the static field value using call: Integer.MAX_VALUE = 2147483647.
 	// This uses GetStaticField which may not be implemented yet.
 	// If it is, verify the value.
-	out2 := runLiveJnictl(t, "jni", "field", "get-static",
+	out2 := runLiveJnicli(t, "jni", "field", "get-static",
 		"--class", strconv.FormatInt(cls, 10),
 		"--field", strconv.FormatInt(fieldID, 10),
 		"--type", "int")
@@ -720,7 +720,7 @@ func TestE2E_SummaryOfTests(t *testing.T) {
 	t.Logf("Binary: %s", bin)
 
 	// Quick smoke test: get version to confirm connectivity.
-	out := runLiveJnictl(t, "jni", "get-version")
+	out := runLiveJnicli(t, "jni", "get-version")
 	t.Logf("Smoke test (get-version): %s", strings.TrimSpace(out))
 	fmt.Fprintf(os.Stderr, "E2E: connected to %s, %d tests available\n", addr, len(tests))
 }

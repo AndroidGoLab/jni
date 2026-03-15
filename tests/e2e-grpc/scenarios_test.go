@@ -59,18 +59,18 @@ func TestScenario_RawJNICommandsExist(t *testing.T) {
 	assertCommandExists(t, "jni", "string", "get")
 }
 
-// assertCommandExists verifies a jnictl subcommand exists by checking its help output.
+// assertCommandExists verifies a jnicli subcommand exists by checking its help output.
 func assertCommandExists(t *testing.T, args ...string) {
 	t.Helper()
 	fullArgs := append(args, "--help")
-	cmd := exec.Command("go", append([]string{"run", jnictlBin}, fullArgs...)...)
+	cmd := exec.Command("go", append([]string{"run", jnicliBin}, fullArgs...)...)
 	out, err := cmd.CombinedOutput()
 	if err != nil {
-		t.Errorf("command jnictl %s: %v\n%s", strings.Join(args, " "), err, out)
+		t.Errorf("command jnicli %s: %v\n%s", strings.Join(args, " "), err, out)
 		return
 	}
 	// Verify it's a real command (has "Usage:" section), not just a group
 	if !strings.Contains(string(out), "Usage:") {
-		t.Errorf("command jnictl %s produced no Usage section", strings.Join(args, " "))
+		t.Errorf("command jnicli %s produced no Usage section", strings.Join(args, " "))
 	}
 }

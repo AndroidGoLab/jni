@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
-# Shell-based E2E test runner for jnictl against a running jniservice.
+# Shell-based E2E test runner for jnicli against a running jniservice.
 #
 # Prerequisites:
 #   - JNICTL_E2E_ADDR set to the server address (e.g. localhost:50051)
-#   - JNICTL_BIN set to the path of the jnictl binary (or jnictl in PATH)
+#   - JNICTL_BIN set to the path of the jnicli binary (or jnicli in PATH)
 #   - jq installed for JSON parsing
 #
 # Usage:
-#   JNICTL_E2E_ADDR=localhost:50051 JNICTL_BIN=./build/jnictl-host ./run_e2e.sh
+#   JNICTL_E2E_ADDR=localhost:50051 JNICTL_BIN=./build/jnicli-host ./run_e2e.sh
 
 set -euo pipefail
 
 : "${JNICTL_E2E_ADDR:?JNICTL_E2E_ADDR must be set (e.g. localhost:50051)}"
-JNICTL="${JNICTL_BIN:-jnictl}"
+JNICTL="${JNICTL_BIN:-jnicli}"
 PASS=0
 FAIL=0
 TOTAL=0
 
-jnictl() {
+jnicli() {
     "$JNICTL" --addr "$JNICTL_E2E_ADDR" --insecure "$@"
 }
 
@@ -38,7 +38,7 @@ run_test() {
 
 test_get_version() {
     local out
-    out=$(jnictl jni get-version)
+    out=$(jnicli jni get-version)
     local version
     version=$(echo "$out" | jq -r '.version')
     [ "$version" -gt 0 ]
@@ -46,7 +46,7 @@ test_get_version() {
 
 test_find_class_string() {
     local out
-    out=$(jnictl jni class find --name java/lang/String)
+    out=$(jnicli jni class find --name java/lang/String)
     local handle
     handle=$(echo "$out" | jq -r '.classHandle')
     [ -n "$handle" ] && [ "$handle" != "null" ] && [ "$handle" != "0" ]
@@ -54,7 +54,7 @@ test_find_class_string() {
 
 test_find_class_system() {
     local out
-    out=$(jnictl jni class find --name java/lang/System)
+    out=$(jnicli jni class find --name java/lang/System)
     local handle
     handle=$(echo "$out" | jq -r '.classHandle')
     [ -n "$handle" ] && [ "$handle" != "null" ] && [ "$handle" != "0" ]
@@ -62,7 +62,7 @@ test_find_class_system() {
 
 test_find_class_not_found() {
     # Should fail (non-zero exit).
-    if jnictl jni class find --name does/not/Exist 2>/dev/null; then
+    if jnicli jni class find --name does/not/Exist 2>/dev/null; then
         return 1
     fi
     return 0
@@ -70,11 +70,11 @@ test_find_class_not_found() {
 
 test_get_static_method_id() {
     local class_out method_out
-    class_out=$(jnictl jni class find --name java/lang/System)
+    class_out=$(jnicli jni class find --name java/lang/System)
     local class_handle
     class_handle=$(echo "$class_out" | jq -r '.classHandle')
 
-    method_out=$(jnictl jni method get-static-id \
+    method_out=$(jnicli jni method get-static-id \
         --class "$class_handle" --name currentTimeMillis --sig '()J')
     local method_id
     method_id=$(echo "$method_out" | jq -r '.methodId')
@@ -83,16 +83,16 @@ test_get_static_method_id() {
 
 test_call_current_time_millis() {
     local class_out method_out call_out
-    class_out=$(jnictl jni class find --name java/lang/System)
+    class_out=$(jnicli jni class find --name java/lang/System)
     local class_handle
     class_handle=$(echo "$class_out" | jq -r '.classHandle')
 
-    method_out=$(jnictl jni method get-static-id \
+    method_out=$(jnicli jni method get-static-id \
         --class "$class_handle" --name currentTimeMillis --sig '()J')
     local method_id
     method_id=$(echo "$method_out" | jq -r '.methodId')
 
-    call_out=$(jnictl jni method call-static \
+    call_out=$(jnicli jni method call-static \
         --class "$class_handle" --method "$method_id" --return-type long)
     local time_val
     time_val=$(echo "$call_out" | jq -r '.result.j')
@@ -101,11 +101,11 @@ test_call_current_time_millis() {
 
 test_string_new_and_get() {
     local new_out get_out
-    new_out=$(jnictl jni string new --value "hello world")
+    new_out=$(jnicli jni string new --value "hello world")
     local handle
     handle=$(echo "$new_out" | jq -r '.stringHandle')
 
-    get_out=$(jnictl jni string get --handle "$handle")
+    get_out=$(jnicli jni string get --handle "$handle")
     local value
     value=$(echo "$get_out" | jq -r '.value')
     [ "$value" = "hello world" ]
@@ -113,11 +113,11 @@ test_string_new_and_get() {
 
 test_string_length() {
     local new_out length_out
-    new_out=$(jnictl jni string new --value "hello")
+    new_out=$(jnicli jni string new --value "hello")
     local handle
     handle=$(echo "$new_out" | jq -r '.stringHandle')
 
-    length_out=$(jnictl jni string length --handle "$handle")
+    length_out=$(jnicli jni string length --handle "$handle")
     local length
     length=$(echo "$length_out" | jq -r '.length')
     [ "$length" = "5" ]
@@ -125,12 +125,12 @@ test_string_length() {
 
 test_object_is_same() {
     local out
-    out=$(jnictl jni class find --name java/lang/String)
+    out=$(jnicli jni class find --name java/lang/String)
     local handle
     handle=$(echo "$out" | jq -r '.classHandle')
 
     local same_out
-    same_out=$(jnictl jni object is-same --object1 "$handle" --object2 "$handle")
+    same_out=$(jnicli jni object is-same --object1 "$handle" --object2 "$handle")
     local result
     result=$(echo "$same_out" | jq -r '.result')
     [ "$result" = "true" ]
@@ -138,12 +138,12 @@ test_object_is_same() {
 
 test_object_get_class() {
     local new_out
-    new_out=$(jnictl jni string new --value "test")
+    new_out=$(jnicli jni string new --value "test")
     local str_handle
     str_handle=$(echo "$new_out" | jq -r '.stringHandle')
 
     local class_out
-    class_out=$(jnictl jni object get-class --object "$str_handle")
+    class_out=$(jnicli jni object get-class --object "$str_handle")
     local class_handle
     class_handle=$(echo "$class_out" | jq -r '.classHandle')
     [ -n "$class_handle" ] && [ "$class_handle" != "null" ] && [ "$class_handle" != "0" ]
@@ -151,15 +151,15 @@ test_object_get_class() {
 
 test_handle_release() {
     local new_out
-    new_out=$(jnictl jni string new --value "disposable")
+    new_out=$(jnicli jni string new --value "disposable")
     local handle
     handle=$(echo "$new_out" | jq -r '.stringHandle')
 
     # Release should succeed.
-    jnictl handle release --handle "$handle" >/dev/null
+    jnicli handle release --handle "$handle" >/dev/null
 
     # Second release should fail (handle no longer exists).
-    if jnictl handle release --handle "$handle" 2>/dev/null; then
+    if jnicli handle release --handle "$handle" 2>/dev/null; then
         return 1
     fi
     return 0
@@ -167,7 +167,7 @@ test_handle_release() {
 
 test_exception_check() {
     local out
-    out=$(jnictl jni exception check)
+    out=$(jnicli jni exception check)
     # hasException should be false (protojson omits false, so missing = ok).
     local has_exc
     has_exc=$(echo "$out" | jq -r '.hasException // false')
@@ -176,12 +176,12 @@ test_exception_check() {
 
 test_get_superclass() {
     local out
-    out=$(jnictl jni class find --name java/lang/String)
+    out=$(jnicli jni class find --name java/lang/String)
     local class_handle
     class_handle=$(echo "$out" | jq -r '.classHandle')
 
     local super_out
-    super_out=$(jnictl jni class get-superclass --class "$class_handle")
+    super_out=$(jnicli jni class get-superclass --class "$class_handle")
     local super_handle
     super_handle=$(echo "$super_out" | jq -r '.classHandle')
     [ -n "$super_handle" ] && [ "$super_handle" != "null" ] && [ "$super_handle" != "0" ]
@@ -189,12 +189,12 @@ test_get_superclass() {
 
 test_is_assignable_from() {
     local out
-    out=$(jnictl jni class find --name java/lang/String)
+    out=$(jnicli jni class find --name java/lang/String)
     local handle
     handle=$(echo "$out" | jq -r '.classHandle')
 
     local result_out
-    result_out=$(jnictl jni class is-assignable-from --class1 "$handle" --class2 "$handle")
+    result_out=$(jnicli jni class is-assignable-from --class1 "$handle" --class2 "$handle")
     local result
     result=$(echo "$result_out" | jq -r '.result')
     [ "$result" = "true" ]

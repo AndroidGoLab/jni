@@ -383,7 +383,7 @@ Open "jniservice" from the launcher once to start the service and register the b
 
 ```bash
 adb forward tcp:50051 tcp:50051
-jnictl --addr localhost:50051 --insecure jni get-version
+jnicli --addr localhost:50051 --insecure jni get-version
 ```
 
 ## E2E Test Verification
