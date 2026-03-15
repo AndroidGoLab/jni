@@ -15,6 +15,11 @@ jobs:
     strategy:
       matrix:
         goarch: [arm64, amd64]
+        include:
+          - goarch: arm64
+            abi: arm64-v8a
+          - goarch: amd64
+            abi: x86_64
 
     steps:
       - uses: actions/checkout@v4
@@ -37,14 +42,7 @@ jobs:
         run: sdkmanager --install "ndk;27.0.12077973" "build-tools;35.0.0" "platforms;android-35"
 
       - name: Build all artifacts
-        run: make dist
-        env:
-          DIST_GOARCH: ${{ matrix.goarch }}
-          ANDROID_SDK: /usr/local/lib/android/sdk
-          DIST_NDK: /usr/local/lib/android/sdk/ndk/27.0.12077973
-
-      - name: Build Magisk module
-        run: make magisk
+        run: make dist magisk
         env:
           DIST_GOARCH: ${{ matrix.goarch }}
           ANDROID_SDK: /usr/local/lib/android/sdk
@@ -67,11 +65,47 @@ jobs:
           JNISERVICE_KEYSTORE: build/release.keystore
           JNISERVICE_KEYSTORE_PASSWORD: ${{ secrets.JNISERVICE_KEYSTORE_PASSWORD }}
 
+      - name: Prepare release artifacts with descriptive names
+        run: |
+          mkdir -p release
+          TAG="${GITHUB_REF_NAME}"
+          ABI="${{ matrix.abi }}"
+
+          # CLI tool for Linux hosts
+          cp build/jnicli-linux-${{ matrix.goarch }} \
+             "release/jnicli-${TAG}-linux-${{ matrix.goarch }}"
+
+          # CLI tool for Android devices
+          cp build/jnicli-android-${{ matrix.goarch }} \
+             "release/jnicli-${TAG}-android-${ABI}"
+
+          # Admin tool for Android devices
+          cp build/jniserviceadmin-android-${{ matrix.goarch }} \
+             "release/jniserviceadmin-${TAG}-android-${ABI}"
+
+          # APK installer (no root required)
+          cp build/jniservice-${ABI}.apk \
+             "release/jniservice-${TAG}-${ABI}.apk"
+
+          # Magisk module (rooted devices, auto-start on boot)
+          cp build/jniservice-magisk-${ABI}.zip \
+             "release/jniservice-magisk-${TAG}-${ABI}.zip"
+
+          # Shared library (for app_process deployment or custom integration)
+          cp build/libjniservice-${ABI}.so \
+             "release/libjniservice-${TAG}-${ABI}.so"
+
+          # Java entrypoint DEX (for app_process deployment)
+          cp build/classes.dex \
+             "release/jniservice-entrypoint-${TAG}.dex"
+
+          ls -la release/
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: release-${{ matrix.goarch }}
-          path: build/
+          path: release/
 
   release:
     name: Create GitHub release
