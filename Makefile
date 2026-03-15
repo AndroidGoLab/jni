@@ -1,5 +1,5 @@
 .PHONY: generate specs jni java proto protoc grpc cli clean lint test test-tools test-e2e test-emulator \
-	build build-server list-commands dist dist-jnicli-linux dist-jnicli-android dist-jniservice dist-dex \
+	build build-server list-commands dist dist-jnicli-linux dist-jnicli-android dist-jniserviceadmin dist-jniservice dist-dex \
 	magisk apk deploy push start-server stop-server forward
 
 # JDK detection for host tests (jni.h and libjvm.so).
@@ -195,7 +195,7 @@ endif
 DIST_CC := $(DIST_NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/$(DIST_NDK_TRIPLE)$(DIST_API_LEVEL)-clang
 
 # Build all release artifacts for a single GOARCH.
-dist: dist-jnicli-linux dist-jnicli-android dist-jniservice dist-dex
+dist: dist-jnicli-linux dist-jnicli-android dist-jniservice dist-jniserviceadmin dist-dex
 
 dist-jnicli-linux:
 	@mkdir -p build
@@ -209,6 +209,11 @@ dist-jnicli-android:
 	@mkdir -p build
 	CGO_ENABLED=1 GOOS=android GOARCH=$(DIST_GOARCH) CC=$(DIST_CC) \
 		go build -o build/jnicli-android-$(DIST_GOARCH) ./cmd/jnicli/
+
+dist-jniserviceadmin:
+	@mkdir -p build
+	CGO_ENABLED=1 GOOS=android GOARCH=$(DIST_GOARCH) CC=$(DIST_CC) \
+		go build -o build/jniserviceadmin-android-$(DIST_GOARCH) ./cmd/jniserviceadmin/
 
 dist-jniservice:
 	@mkdir -p build
