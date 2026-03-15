@@ -15,14 +15,14 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// locationManagerServer implements pb.LocationManagerServiceServer.
-type locationManagerServer struct {
+// LocationManagerServer implements pb.LocationManagerServiceServer.
+type LocationManagerServer struct {
 	pb.UnimplementedLocationManagerServiceServer
 	Ctx     *app.Context
 	Handles *handlestore.HandleStore
 }
 
-func (s *locationManagerServer) AddGpsStatusListener(_ context.Context, req *pb.AddGpsStatusListenerRequest) (*pb.AddGpsStatusListenerResponse, error) {
+func (s *LocationManagerServer) AddGpsStatusListener(_ context.Context, req *pb.AddGpsStatusListenerRequest) (*pb.AddGpsStatusListenerResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -36,7 +36,7 @@ func (s *locationManagerServer) AddGpsStatusListener(_ context.Context, req *pb.
 	return &pb.AddGpsStatusListenerResponse{Result: result}, nil
 }
 
-func (s *locationManagerServer) AddNmeaListener1(_ context.Context, req *pb.AddNmeaListener1Request) (*pb.AddNmeaListener1Response, error) {
+func (s *LocationManagerServer) AddNmeaListener1(_ context.Context, req *pb.AddNmeaListener1Request) (*pb.AddNmeaListener1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -50,7 +50,7 @@ func (s *locationManagerServer) AddNmeaListener1(_ context.Context, req *pb.AddN
 	return &pb.AddNmeaListener1Response{Result: result}, nil
 }
 
-func (s *locationManagerServer) AddNmeaListener1_1(_ context.Context, req *pb.AddNmeaListener1_1Request) (*pb.AddNmeaListener1_1Response, error) {
+func (s *LocationManagerServer) AddNmeaListener1_1(_ context.Context, req *pb.AddNmeaListener1_1Request) (*pb.AddNmeaListener1_1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -64,7 +64,7 @@ func (s *locationManagerServer) AddNmeaListener1_1(_ context.Context, req *pb.Ad
 	return &pb.AddNmeaListener1_1Response{Result: result}, nil
 }
 
-func (s *locationManagerServer) AddNmeaListener2_2(_ context.Context, req *pb.AddNmeaListener2_2Request) (*pb.AddNmeaListener2_2Response, error) {
+func (s *LocationManagerServer) AddNmeaListener2_2(_ context.Context, req *pb.AddNmeaListener2_2Request) (*pb.AddNmeaListener2_2Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -78,7 +78,7 @@ func (s *locationManagerServer) AddNmeaListener2_2(_ context.Context, req *pb.Ad
 	return &pb.AddNmeaListener2_2Response{Result: result}, nil
 }
 
-func (s *locationManagerServer) AddProximityAlert(_ context.Context, req *pb.AddProximityAlertRequest) (*pb.AddProximityAlertResponse, error) {
+func (s *LocationManagerServer) AddProximityAlert(_ context.Context, req *pb.AddProximityAlertRequest) (*pb.AddProximityAlertResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -91,7 +91,7 @@ func (s *locationManagerServer) AddProximityAlert(_ context.Context, req *pb.Add
 	return &pb.AddProximityAlertResponse{}, nil
 }
 
-func (s *locationManagerServer) AddTestProvider2(_ context.Context, req *pb.AddTestProvider2Request) (*pb.AddTestProvider2Response, error) {
+func (s *LocationManagerServer) AddTestProvider2(_ context.Context, req *pb.AddTestProvider2Request) (*pb.AddTestProvider2Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -104,7 +104,7 @@ func (s *locationManagerServer) AddTestProvider2(_ context.Context, req *pb.AddT
 	return &pb.AddTestProvider2Response{}, nil
 }
 
-func (s *locationManagerServer) AddTestProvider3_1(_ context.Context, req *pb.AddTestProvider3_1Request) (*pb.AddTestProvider3_1Response, error) {
+func (s *LocationManagerServer) AddTestProvider3_1(_ context.Context, req *pb.AddTestProvider3_1Request) (*pb.AddTestProvider3_1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -117,7 +117,7 @@ func (s *locationManagerServer) AddTestProvider3_1(_ context.Context, req *pb.Ad
 	return &pb.AddTestProvider3_1Response{}, nil
 }
 
-func (s *locationManagerServer) AddTestProvider10_2(_ context.Context, req *pb.AddTestProvider10_2Request) (*pb.AddTestProvider10_2Response, error) {
+func (s *LocationManagerServer) AddTestProvider10_2(_ context.Context, req *pb.AddTestProvider10_2Request) (*pb.AddTestProvider10_2Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -130,7 +130,7 @@ func (s *locationManagerServer) AddTestProvider10_2(_ context.Context, req *pb.A
 	return &pb.AddTestProvider10_2Response{}, nil
 }
 
-func (s *locationManagerServer) ClearTestProviderEnabled(_ context.Context, req *pb.ClearTestProviderEnabledRequest) (*pb.ClearTestProviderEnabledResponse, error) {
+func (s *LocationManagerServer) ClearTestProviderEnabled(_ context.Context, req *pb.ClearTestProviderEnabledRequest) (*pb.ClearTestProviderEnabledResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -143,7 +143,7 @@ func (s *locationManagerServer) ClearTestProviderEnabled(_ context.Context, req 
 	return &pb.ClearTestProviderEnabledResponse{}, nil
 }
 
-func (s *locationManagerServer) ClearTestProviderLocation(_ context.Context, req *pb.ClearTestProviderLocationRequest) (*pb.ClearTestProviderLocationResponse, error) {
+func (s *LocationManagerServer) ClearTestProviderLocation(_ context.Context, req *pb.ClearTestProviderLocationRequest) (*pb.ClearTestProviderLocationResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -156,7 +156,7 @@ func (s *locationManagerServer) ClearTestProviderLocation(_ context.Context, req
 	return &pb.ClearTestProviderLocationResponse{}, nil
 }
 
-func (s *locationManagerServer) ClearTestProviderStatus(_ context.Context, req *pb.ClearTestProviderStatusRequest) (*pb.ClearTestProviderStatusResponse, error) {
+func (s *LocationManagerServer) ClearTestProviderStatus(_ context.Context, req *pb.ClearTestProviderStatusRequest) (*pb.ClearTestProviderStatusResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -169,7 +169,7 @@ func (s *locationManagerServer) ClearTestProviderStatus(_ context.Context, req *
 	return &pb.ClearTestProviderStatusResponse{}, nil
 }
 
-func (s *locationManagerServer) GetAllProviders(_ context.Context, req *pb.GetAllProvidersRequest) (*pb.GetAllProvidersResponse, error) {
+func (s *LocationManagerServer) GetAllProviders(_ context.Context, req *pb.GetAllProvidersRequest) (*pb.GetAllProvidersResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -192,7 +192,7 @@ func (s *locationManagerServer) GetAllProviders(_ context.Context, req *pb.GetAl
 	return &pb.GetAllProvidersResponse{Result: handle}, nil
 }
 
-func (s *locationManagerServer) GetBestProvider(_ context.Context, req *pb.GetBestProviderRequest) (*pb.GetBestProviderResponse, error) {
+func (s *LocationManagerServer) GetBestProvider(_ context.Context, req *pb.GetBestProviderRequest) (*pb.GetBestProviderResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -206,7 +206,7 @@ func (s *locationManagerServer) GetBestProvider(_ context.Context, req *pb.GetBe
 	return &pb.GetBestProviderResponse{Result: result}, nil
 }
 
-func (s *locationManagerServer) GetCurrentLocation5(_ context.Context, req *pb.GetCurrentLocation5Request) (*pb.GetCurrentLocation5Response, error) {
+func (s *LocationManagerServer) GetCurrentLocation5(_ context.Context, req *pb.GetCurrentLocation5Request) (*pb.GetCurrentLocation5Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -219,7 +219,7 @@ func (s *locationManagerServer) GetCurrentLocation5(_ context.Context, req *pb.G
 	return &pb.GetCurrentLocation5Response{}, nil
 }
 
-func (s *locationManagerServer) GetCurrentLocation4_1(_ context.Context, req *pb.GetCurrentLocation4_1Request) (*pb.GetCurrentLocation4_1Response, error) {
+func (s *LocationManagerServer) GetCurrentLocation4_1(_ context.Context, req *pb.GetCurrentLocation4_1Request) (*pb.GetCurrentLocation4_1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -232,7 +232,7 @@ func (s *locationManagerServer) GetCurrentLocation4_1(_ context.Context, req *pb
 	return &pb.GetCurrentLocation4_1Response{}, nil
 }
 
-func (s *locationManagerServer) GetGnssAntennaInfos(_ context.Context, req *pb.GetGnssAntennaInfosRequest) (*pb.GetGnssAntennaInfosResponse, error) {
+func (s *LocationManagerServer) GetGnssAntennaInfos(_ context.Context, req *pb.GetGnssAntennaInfosRequest) (*pb.GetGnssAntennaInfosResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -255,7 +255,7 @@ func (s *locationManagerServer) GetGnssAntennaInfos(_ context.Context, req *pb.G
 	return &pb.GetGnssAntennaInfosResponse{Result: handle}, nil
 }
 
-func (s *locationManagerServer) GetGnssCapabilities(_ context.Context, req *pb.GetGnssCapabilitiesRequest) (*pb.GetGnssCapabilitiesResponse, error) {
+func (s *LocationManagerServer) GetGnssCapabilities(_ context.Context, req *pb.GetGnssCapabilitiesRequest) (*pb.GetGnssCapabilitiesResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -278,7 +278,7 @@ func (s *locationManagerServer) GetGnssCapabilities(_ context.Context, req *pb.G
 	return &pb.GetGnssCapabilitiesResponse{Result: handle}, nil
 }
 
-func (s *locationManagerServer) GetGnssHardwareModelName(_ context.Context, req *pb.GetGnssHardwareModelNameRequest) (*pb.GetGnssHardwareModelNameResponse, error) {
+func (s *LocationManagerServer) GetGnssHardwareModelName(_ context.Context, req *pb.GetGnssHardwareModelNameRequest) (*pb.GetGnssHardwareModelNameResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -292,7 +292,7 @@ func (s *locationManagerServer) GetGnssHardwareModelName(_ context.Context, req 
 	return &pb.GetGnssHardwareModelNameResponse{Result: result}, nil
 }
 
-func (s *locationManagerServer) GetGnssYearOfHardware(_ context.Context, req *pb.GetGnssYearOfHardwareRequest) (*pb.GetGnssYearOfHardwareResponse, error) {
+func (s *LocationManagerServer) GetGnssYearOfHardware(_ context.Context, req *pb.GetGnssYearOfHardwareRequest) (*pb.GetGnssYearOfHardwareResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -306,7 +306,7 @@ func (s *locationManagerServer) GetGnssYearOfHardware(_ context.Context, req *pb
 	return &pb.GetGnssYearOfHardwareResponse{Result: result}, nil
 }
 
-func (s *locationManagerServer) GetGpsStatus(_ context.Context, req *pb.GetGpsStatusRequest) (*pb.GetGpsStatusResponse, error) {
+func (s *LocationManagerServer) GetGpsStatus(_ context.Context, req *pb.GetGpsStatusRequest) (*pb.GetGpsStatusResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -329,7 +329,7 @@ func (s *locationManagerServer) GetGpsStatus(_ context.Context, req *pb.GetGpsSt
 	return &pb.GetGpsStatusResponse{Result: handle}, nil
 }
 
-func (s *locationManagerServer) GetLastKnownLocation(_ context.Context, req *pb.GetLastKnownLocationRequest) (*pb.GetLastKnownLocationResponse, error) {
+func (s *LocationManagerServer) GetLastKnownLocation(_ context.Context, req *pb.GetLastKnownLocationRequest) (*pb.GetLastKnownLocationResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -352,7 +352,7 @@ func (s *locationManagerServer) GetLastKnownLocation(_ context.Context, req *pb.
 	return &pb.GetLastKnownLocationResponse{Result: handle}, nil
 }
 
-func (s *locationManagerServer) GetProvider(_ context.Context, req *pb.GetProviderRequest) (*pb.GetProviderResponse, error) {
+func (s *LocationManagerServer) GetProvider(_ context.Context, req *pb.GetProviderRequest) (*pb.GetProviderResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -375,7 +375,7 @@ func (s *locationManagerServer) GetProvider(_ context.Context, req *pb.GetProvid
 	return &pb.GetProviderResponse{Result: handle}, nil
 }
 
-func (s *locationManagerServer) GetProviderProperties(_ context.Context, req *pb.GetProviderPropertiesRequest) (*pb.GetProviderPropertiesResponse, error) {
+func (s *LocationManagerServer) GetProviderProperties(_ context.Context, req *pb.GetProviderPropertiesRequest) (*pb.GetProviderPropertiesResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -398,7 +398,7 @@ func (s *locationManagerServer) GetProviderProperties(_ context.Context, req *pb
 	return &pb.GetProviderPropertiesResponse{Result: handle}, nil
 }
 
-func (s *locationManagerServer) GetProviders2(_ context.Context, req *pb.GetProviders2Request) (*pb.GetProviders2Response, error) {
+func (s *LocationManagerServer) GetProviders2(_ context.Context, req *pb.GetProviders2Request) (*pb.GetProviders2Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -421,7 +421,7 @@ func (s *locationManagerServer) GetProviders2(_ context.Context, req *pb.GetProv
 	return &pb.GetProviders2Response{Result: handle}, nil
 }
 
-func (s *locationManagerServer) GetProviders1_1(_ context.Context, req *pb.GetProviders1_1Request) (*pb.GetProviders1_1Response, error) {
+func (s *LocationManagerServer) GetProviders1_1(_ context.Context, req *pb.GetProviders1_1Request) (*pb.GetProviders1_1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -444,7 +444,7 @@ func (s *locationManagerServer) GetProviders1_1(_ context.Context, req *pb.GetPr
 	return &pb.GetProviders1_1Response{Result: handle}, nil
 }
 
-func (s *locationManagerServer) HasProvider(_ context.Context, req *pb.HasProviderRequest) (*pb.HasProviderResponse, error) {
+func (s *LocationManagerServer) HasProvider(_ context.Context, req *pb.HasProviderRequest) (*pb.HasProviderResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -458,7 +458,7 @@ func (s *locationManagerServer) HasProvider(_ context.Context, req *pb.HasProvid
 	return &pb.HasProviderResponse{Result: result}, nil
 }
 
-func (s *locationManagerServer) IsLocationEnabled(_ context.Context, req *pb.IsLocationEnabledRequest) (*pb.IsLocationEnabledResponse, error) {
+func (s *LocationManagerServer) IsLocationEnabled(_ context.Context, req *pb.IsLocationEnabledRequest) (*pb.IsLocationEnabledResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -472,7 +472,7 @@ func (s *locationManagerServer) IsLocationEnabled(_ context.Context, req *pb.IsL
 	return &pb.IsLocationEnabledResponse{Result: result}, nil
 }
 
-func (s *locationManagerServer) IsProviderEnabled(_ context.Context, req *pb.IsProviderEnabledRequest) (*pb.IsProviderEnabledResponse, error) {
+func (s *LocationManagerServer) IsProviderEnabled(_ context.Context, req *pb.IsProviderEnabledRequest) (*pb.IsProviderEnabledResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -486,7 +486,7 @@ func (s *locationManagerServer) IsProviderEnabled(_ context.Context, req *pb.IsP
 	return &pb.IsProviderEnabledResponse{Result: result}, nil
 }
 
-func (s *locationManagerServer) RegisterAntennaInfoListener(_ context.Context, req *pb.RegisterAntennaInfoListenerRequest) (*pb.RegisterAntennaInfoListenerResponse, error) {
+func (s *LocationManagerServer) RegisterAntennaInfoListener(_ context.Context, req *pb.RegisterAntennaInfoListenerRequest) (*pb.RegisterAntennaInfoListenerResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -500,7 +500,7 @@ func (s *locationManagerServer) RegisterAntennaInfoListener(_ context.Context, r
 	return &pb.RegisterAntennaInfoListenerResponse{Result: result}, nil
 }
 
-func (s *locationManagerServer) RegisterGnssMeasurementsCallback3(_ context.Context, req *pb.RegisterGnssMeasurementsCallback3Request) (*pb.RegisterGnssMeasurementsCallback3Response, error) {
+func (s *LocationManagerServer) RegisterGnssMeasurementsCallback3(_ context.Context, req *pb.RegisterGnssMeasurementsCallback3Request) (*pb.RegisterGnssMeasurementsCallback3Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -514,7 +514,7 @@ func (s *locationManagerServer) RegisterGnssMeasurementsCallback3(_ context.Cont
 	return &pb.RegisterGnssMeasurementsCallback3Response{Result: result}, nil
 }
 
-func (s *locationManagerServer) RegisterGnssMeasurementsCallback1_1(_ context.Context, req *pb.RegisterGnssMeasurementsCallback1_1Request) (*pb.RegisterGnssMeasurementsCallback1_1Response, error) {
+func (s *LocationManagerServer) RegisterGnssMeasurementsCallback1_1(_ context.Context, req *pb.RegisterGnssMeasurementsCallback1_1Request) (*pb.RegisterGnssMeasurementsCallback1_1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -528,7 +528,7 @@ func (s *locationManagerServer) RegisterGnssMeasurementsCallback1_1(_ context.Co
 	return &pb.RegisterGnssMeasurementsCallback1_1Response{Result: result}, nil
 }
 
-func (s *locationManagerServer) RegisterGnssMeasurementsCallback2_2(_ context.Context, req *pb.RegisterGnssMeasurementsCallback2_2Request) (*pb.RegisterGnssMeasurementsCallback2_2Response, error) {
+func (s *LocationManagerServer) RegisterGnssMeasurementsCallback2_2(_ context.Context, req *pb.RegisterGnssMeasurementsCallback2_2Request) (*pb.RegisterGnssMeasurementsCallback2_2Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -542,7 +542,7 @@ func (s *locationManagerServer) RegisterGnssMeasurementsCallback2_2(_ context.Co
 	return &pb.RegisterGnssMeasurementsCallback2_2Response{Result: result}, nil
 }
 
-func (s *locationManagerServer) RegisterGnssNavigationMessageCallback1(_ context.Context, req *pb.RegisterGnssNavigationMessageCallback1Request) (*pb.RegisterGnssNavigationMessageCallback1Response, error) {
+func (s *LocationManagerServer) RegisterGnssNavigationMessageCallback1(_ context.Context, req *pb.RegisterGnssNavigationMessageCallback1Request) (*pb.RegisterGnssNavigationMessageCallback1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -556,7 +556,7 @@ func (s *locationManagerServer) RegisterGnssNavigationMessageCallback1(_ context
 	return &pb.RegisterGnssNavigationMessageCallback1Response{Result: result}, nil
 }
 
-func (s *locationManagerServer) RegisterGnssNavigationMessageCallback2_1(_ context.Context, req *pb.RegisterGnssNavigationMessageCallback2_1Request) (*pb.RegisterGnssNavigationMessageCallback2_1Response, error) {
+func (s *LocationManagerServer) RegisterGnssNavigationMessageCallback2_1(_ context.Context, req *pb.RegisterGnssNavigationMessageCallback2_1Request) (*pb.RegisterGnssNavigationMessageCallback2_1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -570,7 +570,7 @@ func (s *locationManagerServer) RegisterGnssNavigationMessageCallback2_1(_ conte
 	return &pb.RegisterGnssNavigationMessageCallback2_1Response{Result: result}, nil
 }
 
-func (s *locationManagerServer) RegisterGnssStatusCallback1(_ context.Context, req *pb.RegisterGnssStatusCallback1Request) (*pb.RegisterGnssStatusCallback1Response, error) {
+func (s *LocationManagerServer) RegisterGnssStatusCallback1(_ context.Context, req *pb.RegisterGnssStatusCallback1Request) (*pb.RegisterGnssStatusCallback1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -584,7 +584,7 @@ func (s *locationManagerServer) RegisterGnssStatusCallback1(_ context.Context, r
 	return &pb.RegisterGnssStatusCallback1Response{Result: result}, nil
 }
 
-func (s *locationManagerServer) RegisterGnssStatusCallback2_1(_ context.Context, req *pb.RegisterGnssStatusCallback2_1Request) (*pb.RegisterGnssStatusCallback2_1Response, error) {
+func (s *LocationManagerServer) RegisterGnssStatusCallback2_1(_ context.Context, req *pb.RegisterGnssStatusCallback2_1Request) (*pb.RegisterGnssStatusCallback2_1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -598,7 +598,7 @@ func (s *locationManagerServer) RegisterGnssStatusCallback2_1(_ context.Context,
 	return &pb.RegisterGnssStatusCallback2_1Response{Result: result}, nil
 }
 
-func (s *locationManagerServer) RemoveGpsStatusListener(_ context.Context, req *pb.RemoveGpsStatusListenerRequest) (*pb.RemoveGpsStatusListenerResponse, error) {
+func (s *LocationManagerServer) RemoveGpsStatusListener(_ context.Context, req *pb.RemoveGpsStatusListenerRequest) (*pb.RemoveGpsStatusListenerResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -611,7 +611,7 @@ func (s *locationManagerServer) RemoveGpsStatusListener(_ context.Context, req *
 	return &pb.RemoveGpsStatusListenerResponse{}, nil
 }
 
-func (s *locationManagerServer) RemoveNmeaListener1(_ context.Context, req *pb.RemoveNmeaListener1Request) (*pb.RemoveNmeaListener1Response, error) {
+func (s *LocationManagerServer) RemoveNmeaListener1(_ context.Context, req *pb.RemoveNmeaListener1Request) (*pb.RemoveNmeaListener1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -624,7 +624,7 @@ func (s *locationManagerServer) RemoveNmeaListener1(_ context.Context, req *pb.R
 	return &pb.RemoveNmeaListener1Response{}, nil
 }
 
-func (s *locationManagerServer) RemoveNmeaListener1_1(_ context.Context, req *pb.RemoveNmeaListener1_1Request) (*pb.RemoveNmeaListener1_1Response, error) {
+func (s *LocationManagerServer) RemoveNmeaListener1_1(_ context.Context, req *pb.RemoveNmeaListener1_1Request) (*pb.RemoveNmeaListener1_1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -637,7 +637,7 @@ func (s *locationManagerServer) RemoveNmeaListener1_1(_ context.Context, req *pb
 	return &pb.RemoveNmeaListener1_1Response{}, nil
 }
 
-func (s *locationManagerServer) RemoveProximityAlert(_ context.Context, req *pb.RemoveProximityAlertRequest) (*pb.RemoveProximityAlertResponse, error) {
+func (s *LocationManagerServer) RemoveProximityAlert(_ context.Context, req *pb.RemoveProximityAlertRequest) (*pb.RemoveProximityAlertResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -650,7 +650,7 @@ func (s *locationManagerServer) RemoveProximityAlert(_ context.Context, req *pb.
 	return &pb.RemoveProximityAlertResponse{}, nil
 }
 
-func (s *locationManagerServer) RemoveTestProvider(_ context.Context, req *pb.RemoveTestProviderRequest) (*pb.RemoveTestProviderResponse, error) {
+func (s *LocationManagerServer) RemoveTestProvider(_ context.Context, req *pb.RemoveTestProviderRequest) (*pb.RemoveTestProviderResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -663,7 +663,7 @@ func (s *locationManagerServer) RemoveTestProvider(_ context.Context, req *pb.Re
 	return &pb.RemoveTestProviderResponse{}, nil
 }
 
-func (s *locationManagerServer) RemoveUpdates1(_ context.Context, req *pb.RemoveUpdates1Request) (*pb.RemoveUpdates1Response, error) {
+func (s *LocationManagerServer) RemoveUpdates1(_ context.Context, req *pb.RemoveUpdates1Request) (*pb.RemoveUpdates1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -676,7 +676,7 @@ func (s *locationManagerServer) RemoveUpdates1(_ context.Context, req *pb.Remove
 	return &pb.RemoveUpdates1Response{}, nil
 }
 
-func (s *locationManagerServer) RemoveUpdates1_1(_ context.Context, req *pb.RemoveUpdates1_1Request) (*pb.RemoveUpdates1_1Response, error) {
+func (s *LocationManagerServer) RemoveUpdates1_1(_ context.Context, req *pb.RemoveUpdates1_1Request) (*pb.RemoveUpdates1_1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -689,7 +689,7 @@ func (s *locationManagerServer) RemoveUpdates1_1(_ context.Context, req *pb.Remo
 	return &pb.RemoveUpdates1_1Response{}, nil
 }
 
-func (s *locationManagerServer) RequestFlush3(_ context.Context, req *pb.RequestFlush3Request) (*pb.RequestFlush3Response, error) {
+func (s *LocationManagerServer) RequestFlush3(_ context.Context, req *pb.RequestFlush3Request) (*pb.RequestFlush3Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -702,7 +702,7 @@ func (s *locationManagerServer) RequestFlush3(_ context.Context, req *pb.Request
 	return &pb.RequestFlush3Response{}, nil
 }
 
-func (s *locationManagerServer) RequestFlush3_1(_ context.Context, req *pb.RequestFlush3_1Request) (*pb.RequestFlush3_1Response, error) {
+func (s *LocationManagerServer) RequestFlush3_1(_ context.Context, req *pb.RequestFlush3_1Request) (*pb.RequestFlush3_1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -715,7 +715,7 @@ func (s *locationManagerServer) RequestFlush3_1(_ context.Context, req *pb.Reque
 	return &pb.RequestFlush3_1Response{}, nil
 }
 
-func (s *locationManagerServer) RequestLocationUpdates3(_ context.Context, req *pb.RequestLocationUpdates3Request) (*pb.RequestLocationUpdates3Response, error) {
+func (s *LocationManagerServer) RequestLocationUpdates3(_ context.Context, req *pb.RequestLocationUpdates3Request) (*pb.RequestLocationUpdates3Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -728,7 +728,7 @@ func (s *locationManagerServer) RequestLocationUpdates3(_ context.Context, req *
 	return &pb.RequestLocationUpdates3Response{}, nil
 }
 
-func (s *locationManagerServer) RequestLocationUpdates4_1(_ context.Context, req *pb.RequestLocationUpdates4_1Request) (*pb.RequestLocationUpdates4_1Response, error) {
+func (s *LocationManagerServer) RequestLocationUpdates4_1(_ context.Context, req *pb.RequestLocationUpdates4_1Request) (*pb.RequestLocationUpdates4_1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -741,7 +741,7 @@ func (s *locationManagerServer) RequestLocationUpdates4_1(_ context.Context, req
 	return &pb.RequestLocationUpdates4_1Response{}, nil
 }
 
-func (s *locationManagerServer) RequestLocationUpdates4_2(_ context.Context, req *pb.RequestLocationUpdates4_2Request) (*pb.RequestLocationUpdates4_2Response, error) {
+func (s *LocationManagerServer) RequestLocationUpdates4_2(_ context.Context, req *pb.RequestLocationUpdates4_2Request) (*pb.RequestLocationUpdates4_2Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -754,7 +754,7 @@ func (s *locationManagerServer) RequestLocationUpdates4_2(_ context.Context, req
 	return &pb.RequestLocationUpdates4_2Response{}, nil
 }
 
-func (s *locationManagerServer) RequestLocationUpdates4_3(_ context.Context, req *pb.RequestLocationUpdates4_3Request) (*pb.RequestLocationUpdates4_3Response, error) {
+func (s *LocationManagerServer) RequestLocationUpdates4_3(_ context.Context, req *pb.RequestLocationUpdates4_3Request) (*pb.RequestLocationUpdates4_3Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -767,7 +767,7 @@ func (s *locationManagerServer) RequestLocationUpdates4_3(_ context.Context, req
 	return &pb.RequestLocationUpdates4_3Response{}, nil
 }
 
-func (s *locationManagerServer) RequestLocationUpdates5_4(_ context.Context, req *pb.RequestLocationUpdates5_4Request) (*pb.RequestLocationUpdates5_4Response, error) {
+func (s *LocationManagerServer) RequestLocationUpdates5_4(_ context.Context, req *pb.RequestLocationUpdates5_4Request) (*pb.RequestLocationUpdates5_4Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -780,7 +780,7 @@ func (s *locationManagerServer) RequestLocationUpdates5_4(_ context.Context, req
 	return &pb.RequestLocationUpdates5_4Response{}, nil
 }
 
-func (s *locationManagerServer) RequestLocationUpdates5_5(_ context.Context, req *pb.RequestLocationUpdates5_5Request) (*pb.RequestLocationUpdates5_5Response, error) {
+func (s *LocationManagerServer) RequestLocationUpdates5_5(_ context.Context, req *pb.RequestLocationUpdates5_5Request) (*pb.RequestLocationUpdates5_5Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -793,7 +793,7 @@ func (s *locationManagerServer) RequestLocationUpdates5_5(_ context.Context, req
 	return &pb.RequestLocationUpdates5_5Response{}, nil
 }
 
-func (s *locationManagerServer) RequestLocationUpdates4_6(_ context.Context, req *pb.RequestLocationUpdates4_6Request) (*pb.RequestLocationUpdates4_6Response, error) {
+func (s *LocationManagerServer) RequestLocationUpdates4_6(_ context.Context, req *pb.RequestLocationUpdates4_6Request) (*pb.RequestLocationUpdates4_6Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -806,7 +806,7 @@ func (s *locationManagerServer) RequestLocationUpdates4_6(_ context.Context, req
 	return &pb.RequestLocationUpdates4_6Response{}, nil
 }
 
-func (s *locationManagerServer) RequestLocationUpdates5_7(_ context.Context, req *pb.RequestLocationUpdates5_7Request) (*pb.RequestLocationUpdates5_7Response, error) {
+func (s *LocationManagerServer) RequestLocationUpdates5_7(_ context.Context, req *pb.RequestLocationUpdates5_7Request) (*pb.RequestLocationUpdates5_7Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -819,7 +819,7 @@ func (s *locationManagerServer) RequestLocationUpdates5_7(_ context.Context, req
 	return &pb.RequestLocationUpdates5_7Response{}, nil
 }
 
-func (s *locationManagerServer) RequestLocationUpdates5_8(_ context.Context, req *pb.RequestLocationUpdates5_8Request) (*pb.RequestLocationUpdates5_8Response, error) {
+func (s *LocationManagerServer) RequestLocationUpdates5_8(_ context.Context, req *pb.RequestLocationUpdates5_8Request) (*pb.RequestLocationUpdates5_8Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -832,7 +832,7 @@ func (s *locationManagerServer) RequestLocationUpdates5_8(_ context.Context, req
 	return &pb.RequestLocationUpdates5_8Response{}, nil
 }
 
-func (s *locationManagerServer) RequestSingleUpdate2(_ context.Context, req *pb.RequestSingleUpdate2Request) (*pb.RequestSingleUpdate2Response, error) {
+func (s *LocationManagerServer) RequestSingleUpdate2(_ context.Context, req *pb.RequestSingleUpdate2Request) (*pb.RequestSingleUpdate2Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -845,7 +845,7 @@ func (s *locationManagerServer) RequestSingleUpdate2(_ context.Context, req *pb.
 	return &pb.RequestSingleUpdate2Response{}, nil
 }
 
-func (s *locationManagerServer) RequestSingleUpdate3_1(_ context.Context, req *pb.RequestSingleUpdate3_1Request) (*pb.RequestSingleUpdate3_1Response, error) {
+func (s *LocationManagerServer) RequestSingleUpdate3_1(_ context.Context, req *pb.RequestSingleUpdate3_1Request) (*pb.RequestSingleUpdate3_1Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -858,7 +858,7 @@ func (s *locationManagerServer) RequestSingleUpdate3_1(_ context.Context, req *p
 	return &pb.RequestSingleUpdate3_1Response{}, nil
 }
 
-func (s *locationManagerServer) RequestSingleUpdate2_2(_ context.Context, req *pb.RequestSingleUpdate2_2Request) (*pb.RequestSingleUpdate2_2Response, error) {
+func (s *LocationManagerServer) RequestSingleUpdate2_2(_ context.Context, req *pb.RequestSingleUpdate2_2Request) (*pb.RequestSingleUpdate2_2Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -871,7 +871,7 @@ func (s *locationManagerServer) RequestSingleUpdate2_2(_ context.Context, req *p
 	return &pb.RequestSingleUpdate2_2Response{}, nil
 }
 
-func (s *locationManagerServer) RequestSingleUpdate3_3(_ context.Context, req *pb.RequestSingleUpdate3_3Request) (*pb.RequestSingleUpdate3_3Response, error) {
+func (s *LocationManagerServer) RequestSingleUpdate3_3(_ context.Context, req *pb.RequestSingleUpdate3_3Request) (*pb.RequestSingleUpdate3_3Response, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -884,7 +884,7 @@ func (s *locationManagerServer) RequestSingleUpdate3_3(_ context.Context, req *p
 	return &pb.RequestSingleUpdate3_3Response{}, nil
 }
 
-func (s *locationManagerServer) SendExtraCommand(_ context.Context, req *pb.SendExtraCommandRequest) (*pb.SendExtraCommandResponse, error) {
+func (s *LocationManagerServer) SendExtraCommand(_ context.Context, req *pb.SendExtraCommandRequest) (*pb.SendExtraCommandResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -898,7 +898,7 @@ func (s *locationManagerServer) SendExtraCommand(_ context.Context, req *pb.Send
 	return &pb.SendExtraCommandResponse{Result: result}, nil
 }
 
-func (s *locationManagerServer) SetTestProviderEnabled(_ context.Context, req *pb.SetTestProviderEnabledRequest) (*pb.SetTestProviderEnabledResponse, error) {
+func (s *LocationManagerServer) SetTestProviderEnabled(_ context.Context, req *pb.SetTestProviderEnabledRequest) (*pb.SetTestProviderEnabledResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -911,7 +911,7 @@ func (s *locationManagerServer) SetTestProviderEnabled(_ context.Context, req *p
 	return &pb.SetTestProviderEnabledResponse{}, nil
 }
 
-func (s *locationManagerServer) SetTestProviderLocation(_ context.Context, req *pb.SetTestProviderLocationRequest) (*pb.SetTestProviderLocationResponse, error) {
+func (s *LocationManagerServer) SetTestProviderLocation(_ context.Context, req *pb.SetTestProviderLocationRequest) (*pb.SetTestProviderLocationResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -924,7 +924,7 @@ func (s *locationManagerServer) SetTestProviderLocation(_ context.Context, req *
 	return &pb.SetTestProviderLocationResponse{}, nil
 }
 
-func (s *locationManagerServer) SetTestProviderStatus(_ context.Context, req *pb.SetTestProviderStatusRequest) (*pb.SetTestProviderStatusResponse, error) {
+func (s *LocationManagerServer) SetTestProviderStatus(_ context.Context, req *pb.SetTestProviderStatusRequest) (*pb.SetTestProviderStatusResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -937,7 +937,7 @@ func (s *locationManagerServer) SetTestProviderStatus(_ context.Context, req *pb
 	return &pb.SetTestProviderStatusResponse{}, nil
 }
 
-func (s *locationManagerServer) UnregisterAntennaInfoListener(_ context.Context, req *pb.UnregisterAntennaInfoListenerRequest) (*pb.UnregisterAntennaInfoListenerResponse, error) {
+func (s *LocationManagerServer) UnregisterAntennaInfoListener(_ context.Context, req *pb.UnregisterAntennaInfoListenerRequest) (*pb.UnregisterAntennaInfoListenerResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -950,7 +950,7 @@ func (s *locationManagerServer) UnregisterAntennaInfoListener(_ context.Context,
 	return &pb.UnregisterAntennaInfoListenerResponse{}, nil
 }
 
-func (s *locationManagerServer) UnregisterGnssMeasurementsCallback(_ context.Context, req *pb.UnregisterGnssMeasurementsCallbackRequest) (*pb.UnregisterGnssMeasurementsCallbackResponse, error) {
+func (s *LocationManagerServer) UnregisterGnssMeasurementsCallback(_ context.Context, req *pb.UnregisterGnssMeasurementsCallbackRequest) (*pb.UnregisterGnssMeasurementsCallbackResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -963,7 +963,7 @@ func (s *locationManagerServer) UnregisterGnssMeasurementsCallback(_ context.Con
 	return &pb.UnregisterGnssMeasurementsCallbackResponse{}, nil
 }
 
-func (s *locationManagerServer) UnregisterGnssNavigationMessageCallback(_ context.Context, req *pb.UnregisterGnssNavigationMessageCallbackRequest) (*pb.UnregisterGnssNavigationMessageCallbackResponse, error) {
+func (s *LocationManagerServer) UnregisterGnssNavigationMessageCallback(_ context.Context, req *pb.UnregisterGnssNavigationMessageCallbackRequest) (*pb.UnregisterGnssNavigationMessageCallbackResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -976,7 +976,7 @@ func (s *locationManagerServer) UnregisterGnssNavigationMessageCallback(_ contex
 	return &pb.UnregisterGnssNavigationMessageCallbackResponse{}, nil
 }
 
-func (s *locationManagerServer) UnregisterGnssStatusCallback(_ context.Context, req *pb.UnregisterGnssStatusCallbackRequest) (*pb.UnregisterGnssStatusCallbackResponse, error) {
+func (s *LocationManagerServer) UnregisterGnssStatusCallback(_ context.Context, req *pb.UnregisterGnssStatusCallbackRequest) (*pb.UnregisterGnssStatusCallbackResponse, error) {
 	mgr, err := jnipkg.NewlocationManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)

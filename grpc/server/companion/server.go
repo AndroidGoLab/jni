@@ -15,14 +15,14 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// companionDeviceManagerServer implements pb.CompanionDeviceManagerServiceServer.
-type companionDeviceManagerServer struct {
+// CompanionDeviceManagerServer implements pb.CompanionDeviceManagerServiceServer.
+type CompanionDeviceManagerServer struct {
 	pb.UnimplementedCompanionDeviceManagerServiceServer
 	Ctx     *app.Context
 	Handles *handlestore.HandleStore
 }
 
-func (s *companionDeviceManagerServer) Associate(_ context.Context, req *pb.AssociateRequest) (*pb.AssociateResponse, error) {
+func (s *CompanionDeviceManagerServer) Associate(_ context.Context, req *pb.AssociateRequest) (*pb.AssociateResponse, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -35,7 +35,7 @@ func (s *companionDeviceManagerServer) Associate(_ context.Context, req *pb.Asso
 	return &pb.AssociateResponse{}, nil
 }
 
-func (s *companionDeviceManagerServer) AttachSystemDataTransport(_ context.Context, req *pb.AttachSystemDataTransportRequest) (*pb.AttachSystemDataTransportResponse, error) {
+func (s *CompanionDeviceManagerServer) AttachSystemDataTransport(_ context.Context, req *pb.AttachSystemDataTransportRequest) (*pb.AttachSystemDataTransportResponse, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -48,7 +48,7 @@ func (s *companionDeviceManagerServer) AttachSystemDataTransport(_ context.Conte
 	return &pb.AttachSystemDataTransportResponse{}, nil
 }
 
-func (s *companionDeviceManagerServer) BuildAssociationCancellationIntent(_ context.Context, req *pb.BuildAssociationCancellationIntentRequest) (*pb.BuildAssociationCancellationIntentResponse, error) {
+func (s *CompanionDeviceManagerServer) BuildAssociationCancellationIntent(_ context.Context, req *pb.BuildAssociationCancellationIntentRequest) (*pb.BuildAssociationCancellationIntentResponse, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -71,7 +71,7 @@ func (s *companionDeviceManagerServer) BuildAssociationCancellationIntent(_ cont
 	return &pb.BuildAssociationCancellationIntentResponse{Result: handle}, nil
 }
 
-func (s *companionDeviceManagerServer) BuildPermissionTransferUserConsentIntent(_ context.Context, req *pb.BuildPermissionTransferUserConsentIntentRequest) (*pb.BuildPermissionTransferUserConsentIntentResponse, error) {
+func (s *CompanionDeviceManagerServer) BuildPermissionTransferUserConsentIntent(_ context.Context, req *pb.BuildPermissionTransferUserConsentIntentRequest) (*pb.BuildPermissionTransferUserConsentIntentResponse, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -94,7 +94,7 @@ func (s *companionDeviceManagerServer) BuildPermissionTransferUserConsentIntent(
 	return &pb.BuildPermissionTransferUserConsentIntentResponse{Result: handle}, nil
 }
 
-func (s *companionDeviceManagerServer) DetachSystemDataTransport(_ context.Context, req *pb.DetachSystemDataTransportRequest) (*pb.DetachSystemDataTransportResponse, error) {
+func (s *CompanionDeviceManagerServer) DetachSystemDataTransport(_ context.Context, req *pb.DetachSystemDataTransportRequest) (*pb.DetachSystemDataTransportResponse, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -107,7 +107,7 @@ func (s *companionDeviceManagerServer) DetachSystemDataTransport(_ context.Conte
 	return &pb.DetachSystemDataTransportResponse{}, nil
 }
 
-func (s *companionDeviceManagerServer) DisableSystemDataSyncForTypes(_ context.Context, req *pb.DisableSystemDataSyncForTypesRequest) (*pb.DisableSystemDataSyncForTypesResponse, error) {
+func (s *CompanionDeviceManagerServer) DisableSystemDataSyncForTypes(_ context.Context, req *pb.DisableSystemDataSyncForTypesRequest) (*pb.DisableSystemDataSyncForTypesResponse, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -120,7 +120,7 @@ func (s *companionDeviceManagerServer) DisableSystemDataSyncForTypes(_ context.C
 	return &pb.DisableSystemDataSyncForTypesResponse{}, nil
 }
 
-func (s *companionDeviceManagerServer) Disassociate1(_ context.Context, req *pb.Disassociate1Request) (*pb.Disassociate1Response, error) {
+func (s *CompanionDeviceManagerServer) Disassociate1(_ context.Context, req *pb.Disassociate1Request) (*pb.Disassociate1Response, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -133,7 +133,7 @@ func (s *companionDeviceManagerServer) Disassociate1(_ context.Context, req *pb.
 	return &pb.Disassociate1Response{}, nil
 }
 
-func (s *companionDeviceManagerServer) Disassociate1_1(_ context.Context, req *pb.Disassociate1_1Request) (*pb.Disassociate1_1Response, error) {
+func (s *CompanionDeviceManagerServer) Disassociate1_1(_ context.Context, req *pb.Disassociate1_1Request) (*pb.Disassociate1_1Response, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -146,7 +146,7 @@ func (s *companionDeviceManagerServer) Disassociate1_1(_ context.Context, req *p
 	return &pb.Disassociate1_1Response{}, nil
 }
 
-func (s *companionDeviceManagerServer) EnableSystemDataSyncForTypes(_ context.Context, req *pb.EnableSystemDataSyncForTypesRequest) (*pb.EnableSystemDataSyncForTypesResponse, error) {
+func (s *CompanionDeviceManagerServer) EnableSystemDataSyncForTypes(_ context.Context, req *pb.EnableSystemDataSyncForTypesRequest) (*pb.EnableSystemDataSyncForTypesResponse, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -159,7 +159,7 @@ func (s *companionDeviceManagerServer) EnableSystemDataSyncForTypes(_ context.Co
 	return &pb.EnableSystemDataSyncForTypesResponse{}, nil
 }
 
-func (s *companionDeviceManagerServer) GetAssociations(_ context.Context, req *pb.GetAssociationsRequest) (*pb.GetAssociationsResponse, error) {
+func (s *CompanionDeviceManagerServer) GetAssociations(_ context.Context, req *pb.GetAssociationsRequest) (*pb.GetAssociationsResponse, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -182,7 +182,7 @@ func (s *companionDeviceManagerServer) GetAssociations(_ context.Context, req *p
 	return &pb.GetAssociationsResponse{Result: handle}, nil
 }
 
-func (s *companionDeviceManagerServer) GetMyAssociations(_ context.Context, req *pb.GetMyAssociationsRequest) (*pb.GetMyAssociationsResponse, error) {
+func (s *CompanionDeviceManagerServer) GetMyAssociations(_ context.Context, req *pb.GetMyAssociationsRequest) (*pb.GetMyAssociationsResponse, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -205,7 +205,7 @@ func (s *companionDeviceManagerServer) GetMyAssociations(_ context.Context, req 
 	return &pb.GetMyAssociationsResponse{Result: handle}, nil
 }
 
-func (s *companionDeviceManagerServer) HasNotificationAccess(_ context.Context, req *pb.HasNotificationAccessRequest) (*pb.HasNotificationAccessResponse, error) {
+func (s *CompanionDeviceManagerServer) HasNotificationAccess(_ context.Context, req *pb.HasNotificationAccessRequest) (*pb.HasNotificationAccessResponse, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -219,7 +219,7 @@ func (s *companionDeviceManagerServer) HasNotificationAccess(_ context.Context, 
 	return &pb.HasNotificationAccessResponse{Result: result}, nil
 }
 
-func (s *companionDeviceManagerServer) IsPermissionTransferUserConsented(_ context.Context, req *pb.IsPermissionTransferUserConsentedRequest) (*pb.IsPermissionTransferUserConsentedResponse, error) {
+func (s *CompanionDeviceManagerServer) IsPermissionTransferUserConsented(_ context.Context, req *pb.IsPermissionTransferUserConsentedRequest) (*pb.IsPermissionTransferUserConsentedResponse, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -233,7 +233,7 @@ func (s *companionDeviceManagerServer) IsPermissionTransferUserConsented(_ conte
 	return &pb.IsPermissionTransferUserConsentedResponse{Result: result}, nil
 }
 
-func (s *companionDeviceManagerServer) RemoveBond(_ context.Context, req *pb.RemoveBondRequest) (*pb.RemoveBondResponse, error) {
+func (s *CompanionDeviceManagerServer) RemoveBond(_ context.Context, req *pb.RemoveBondRequest) (*pb.RemoveBondResponse, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -247,7 +247,7 @@ func (s *companionDeviceManagerServer) RemoveBond(_ context.Context, req *pb.Rem
 	return &pb.RemoveBondResponse{Result: result}, nil
 }
 
-func (s *companionDeviceManagerServer) RequestNotificationAccess(_ context.Context, req *pb.RequestNotificationAccessRequest) (*pb.RequestNotificationAccessResponse, error) {
+func (s *CompanionDeviceManagerServer) RequestNotificationAccess(_ context.Context, req *pb.RequestNotificationAccessRequest) (*pb.RequestNotificationAccessResponse, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -260,7 +260,7 @@ func (s *companionDeviceManagerServer) RequestNotificationAccess(_ context.Conte
 	return &pb.RequestNotificationAccessResponse{}, nil
 }
 
-func (s *companionDeviceManagerServer) SetDeviceId(_ context.Context, req *pb.SetDeviceIdRequest) (*pb.SetDeviceIdResponse, error) {
+func (s *CompanionDeviceManagerServer) SetDeviceId(_ context.Context, req *pb.SetDeviceIdRequest) (*pb.SetDeviceIdResponse, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -273,7 +273,7 @@ func (s *companionDeviceManagerServer) SetDeviceId(_ context.Context, req *pb.Se
 	return &pb.SetDeviceIdResponse{}, nil
 }
 
-func (s *companionDeviceManagerServer) StartObservingDevicePresence1(_ context.Context, req *pb.StartObservingDevicePresence1Request) (*pb.StartObservingDevicePresence1Response, error) {
+func (s *CompanionDeviceManagerServer) StartObservingDevicePresence1(_ context.Context, req *pb.StartObservingDevicePresence1Request) (*pb.StartObservingDevicePresence1Response, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -286,7 +286,7 @@ func (s *companionDeviceManagerServer) StartObservingDevicePresence1(_ context.C
 	return &pb.StartObservingDevicePresence1Response{}, nil
 }
 
-func (s *companionDeviceManagerServer) StartObservingDevicePresence1_1(_ context.Context, req *pb.StartObservingDevicePresence1_1Request) (*pb.StartObservingDevicePresence1_1Response, error) {
+func (s *CompanionDeviceManagerServer) StartObservingDevicePresence1_1(_ context.Context, req *pb.StartObservingDevicePresence1_1Request) (*pb.StartObservingDevicePresence1_1Response, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -299,7 +299,7 @@ func (s *companionDeviceManagerServer) StartObservingDevicePresence1_1(_ context
 	return &pb.StartObservingDevicePresence1_1Response{}, nil
 }
 
-func (s *companionDeviceManagerServer) StartSystemDataTransfer(_ context.Context, req *pb.StartSystemDataTransferRequest) (*pb.StartSystemDataTransferResponse, error) {
+func (s *CompanionDeviceManagerServer) StartSystemDataTransfer(_ context.Context, req *pb.StartSystemDataTransferRequest) (*pb.StartSystemDataTransferResponse, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -312,7 +312,7 @@ func (s *companionDeviceManagerServer) StartSystemDataTransfer(_ context.Context
 	return &pb.StartSystemDataTransferResponse{}, nil
 }
 
-func (s *companionDeviceManagerServer) StopObservingDevicePresence1(_ context.Context, req *pb.StopObservingDevicePresence1Request) (*pb.StopObservingDevicePresence1Response, error) {
+func (s *CompanionDeviceManagerServer) StopObservingDevicePresence1(_ context.Context, req *pb.StopObservingDevicePresence1Request) (*pb.StopObservingDevicePresence1Response, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -325,7 +325,7 @@ func (s *companionDeviceManagerServer) StopObservingDevicePresence1(_ context.Co
 	return &pb.StopObservingDevicePresence1Response{}, nil
 }
 
-func (s *companionDeviceManagerServer) StopObservingDevicePresence1_1(_ context.Context, req *pb.StopObservingDevicePresence1_1Request) (*pb.StopObservingDevicePresence1_1Response, error) {
+func (s *CompanionDeviceManagerServer) StopObservingDevicePresence1_1(_ context.Context, req *pb.StopObservingDevicePresence1_1Request) (*pb.StopObservingDevicePresence1_1Response, error) {
 	mgr, err := jnipkg.NewcompanionDeviceManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)

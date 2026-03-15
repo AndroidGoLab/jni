@@ -15,7 +15,7 @@ type TypeConv struct {
 
 var primitiveTypeMap = map[string]TypeConv{
 	"boolean": {GoType: "bool", JNISig: "Z", CallSuffix: "Boolean"},
-	"byte":    {GoType: "byte", JNISig: "B", CallSuffix: "Byte"},
+	"byte":    {GoType: "int8", JNISig: "B", CallSuffix: "Byte"},
 	"char":    {GoType: "uint16", JNISig: "C", CallSuffix: "Char"},
 	"short":   {GoType: "int16", JNISig: "S", CallSuffix: "Short"},
 	"int":     {GoType: "int32", JNISig: "I", CallSuffix: "Int"},

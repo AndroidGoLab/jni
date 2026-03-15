@@ -127,7 +127,7 @@ import (
 func RegisterAll(s grpc.ServiceRegistrar, ctx *app.Context, handles *handlestore.HandleStore) {
 	handlepb.RegisterHandleStoreServiceServer(s, &handlestore.Server{VM: ctx.VM, Handles: handles})
 {{- range .Entries}}
-	{{.Package}}pb.Register{{.ServiceName}}Server(s, &{{.Package}}server.{{.GoType}}Server{Ctx: ctx{{if .NeedsHandles}}, Handles: handles{{end}}})
+	{{.Package}}pb.Register{{.ServiceName}}Server(s, &{{.Package}}server.{{export .GoType}}Server{Ctx: ctx{{if .NeedsHandles}}, Handles: handles{{end}}})
 {{- end}}
 }
 `))

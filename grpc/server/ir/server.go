@@ -15,14 +15,14 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// consumerIrManagerServer implements pb.ConsumerIrManagerServiceServer.
-type consumerIrManagerServer struct {
+// ConsumerIrManagerServer implements pb.ConsumerIrManagerServiceServer.
+type ConsumerIrManagerServer struct {
 	pb.UnimplementedConsumerIrManagerServiceServer
 	Ctx     *app.Context
 	Handles *handlestore.HandleStore
 }
 
-func (s *consumerIrManagerServer) GetCarrierFrequencies(_ context.Context, req *pb.GetCarrierFrequenciesRequest) (*pb.GetCarrierFrequenciesResponse, error) {
+func (s *ConsumerIrManagerServer) GetCarrierFrequencies(_ context.Context, req *pb.GetCarrierFrequenciesRequest) (*pb.GetCarrierFrequenciesResponse, error) {
 	mgr, err := jnipkg.NewconsumerIrManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -45,7 +45,7 @@ func (s *consumerIrManagerServer) GetCarrierFrequencies(_ context.Context, req *
 	return &pb.GetCarrierFrequenciesResponse{Result: handle}, nil
 }
 
-func (s *consumerIrManagerServer) HasIrEmitter(_ context.Context, req *pb.HasIrEmitterRequest) (*pb.HasIrEmitterResponse, error) {
+func (s *ConsumerIrManagerServer) HasIrEmitter(_ context.Context, req *pb.HasIrEmitterRequest) (*pb.HasIrEmitterResponse, error) {
 	mgr, err := jnipkg.NewconsumerIrManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -59,7 +59,7 @@ func (s *consumerIrManagerServer) HasIrEmitter(_ context.Context, req *pb.HasIrE
 	return &pb.HasIrEmitterResponse{Result: result}, nil
 }
 
-func (s *consumerIrManagerServer) Transmit(_ context.Context, req *pb.TransmitRequest) (*pb.TransmitResponse, error) {
+func (s *ConsumerIrManagerServer) Transmit(_ context.Context, req *pb.TransmitRequest) (*pb.TransmitResponse, error) {
 	mgr, err := jnipkg.NewconsumerIrManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)

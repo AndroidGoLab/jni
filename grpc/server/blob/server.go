@@ -15,14 +15,14 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// blobStoreManagerServer implements pb.BlobStoreManagerServiceServer.
-type blobStoreManagerServer struct {
+// BlobStoreManagerServer implements pb.BlobStoreManagerServiceServer.
+type BlobStoreManagerServer struct {
 	pb.UnimplementedBlobStoreManagerServiceServer
 	Ctx     *app.Context
 	Handles *handlestore.HandleStore
 }
 
-func (s *blobStoreManagerServer) AbandonSession(_ context.Context, req *pb.AbandonSessionRequest) (*pb.AbandonSessionResponse, error) {
+func (s *BlobStoreManagerServer) AbandonSession(_ context.Context, req *pb.AbandonSessionRequest) (*pb.AbandonSessionResponse, error) {
 	mgr, err := jnipkg.NewblobStoreManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -35,7 +35,7 @@ func (s *blobStoreManagerServer) AbandonSession(_ context.Context, req *pb.Aband
 	return &pb.AbandonSessionResponse{}, nil
 }
 
-func (s *blobStoreManagerServer) AcquireLease2(_ context.Context, req *pb.AcquireLease2Request) (*pb.AcquireLease2Response, error) {
+func (s *BlobStoreManagerServer) AcquireLease2(_ context.Context, req *pb.AcquireLease2Request) (*pb.AcquireLease2Response, error) {
 	mgr, err := jnipkg.NewblobStoreManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -48,7 +48,7 @@ func (s *blobStoreManagerServer) AcquireLease2(_ context.Context, req *pb.Acquir
 	return &pb.AcquireLease2Response{}, nil
 }
 
-func (s *blobStoreManagerServer) AcquireLease3_1(_ context.Context, req *pb.AcquireLease3_1Request) (*pb.AcquireLease3_1Response, error) {
+func (s *BlobStoreManagerServer) AcquireLease3_1(_ context.Context, req *pb.AcquireLease3_1Request) (*pb.AcquireLease3_1Response, error) {
 	mgr, err := jnipkg.NewblobStoreManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -61,7 +61,7 @@ func (s *blobStoreManagerServer) AcquireLease3_1(_ context.Context, req *pb.Acqu
 	return &pb.AcquireLease3_1Response{}, nil
 }
 
-func (s *blobStoreManagerServer) AcquireLease2_2(_ context.Context, req *pb.AcquireLease2_2Request) (*pb.AcquireLease2_2Response, error) {
+func (s *BlobStoreManagerServer) AcquireLease2_2(_ context.Context, req *pb.AcquireLease2_2Request) (*pb.AcquireLease2_2Response, error) {
 	mgr, err := jnipkg.NewblobStoreManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -74,7 +74,7 @@ func (s *blobStoreManagerServer) AcquireLease2_2(_ context.Context, req *pb.Acqu
 	return &pb.AcquireLease2_2Response{}, nil
 }
 
-func (s *blobStoreManagerServer) AcquireLease3_3(_ context.Context, req *pb.AcquireLease3_3Request) (*pb.AcquireLease3_3Response, error) {
+func (s *BlobStoreManagerServer) AcquireLease3_3(_ context.Context, req *pb.AcquireLease3_3Request) (*pb.AcquireLease3_3Response, error) {
 	mgr, err := jnipkg.NewblobStoreManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -87,7 +87,7 @@ func (s *blobStoreManagerServer) AcquireLease3_3(_ context.Context, req *pb.Acqu
 	return &pb.AcquireLease3_3Response{}, nil
 }
 
-func (s *blobStoreManagerServer) CreateSession(_ context.Context, req *pb.CreateSessionRequest) (*pb.CreateSessionResponse, error) {
+func (s *BlobStoreManagerServer) CreateSession(_ context.Context, req *pb.CreateSessionRequest) (*pb.CreateSessionResponse, error) {
 	mgr, err := jnipkg.NewblobStoreManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -101,7 +101,7 @@ func (s *blobStoreManagerServer) CreateSession(_ context.Context, req *pb.Create
 	return &pb.CreateSessionResponse{Result: result}, nil
 }
 
-func (s *blobStoreManagerServer) GetLeasedBlobs(_ context.Context, req *pb.GetLeasedBlobsRequest) (*pb.GetLeasedBlobsResponse, error) {
+func (s *BlobStoreManagerServer) GetLeasedBlobs(_ context.Context, req *pb.GetLeasedBlobsRequest) (*pb.GetLeasedBlobsResponse, error) {
 	mgr, err := jnipkg.NewblobStoreManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -124,7 +124,7 @@ func (s *blobStoreManagerServer) GetLeasedBlobs(_ context.Context, req *pb.GetLe
 	return &pb.GetLeasedBlobsResponse{Result: handle}, nil
 }
 
-func (s *blobStoreManagerServer) GetRemainingLeaseQuotaBytes(_ context.Context, req *pb.GetRemainingLeaseQuotaBytesRequest) (*pb.GetRemainingLeaseQuotaBytesResponse, error) {
+func (s *BlobStoreManagerServer) GetRemainingLeaseQuotaBytes(_ context.Context, req *pb.GetRemainingLeaseQuotaBytesRequest) (*pb.GetRemainingLeaseQuotaBytesResponse, error) {
 	mgr, err := jnipkg.NewblobStoreManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -138,7 +138,7 @@ func (s *blobStoreManagerServer) GetRemainingLeaseQuotaBytes(_ context.Context, 
 	return &pb.GetRemainingLeaseQuotaBytesResponse{Result: result}, nil
 }
 
-func (s *blobStoreManagerServer) OpenBlob(_ context.Context, req *pb.OpenBlobRequest) (*pb.OpenBlobResponse, error) {
+func (s *BlobStoreManagerServer) OpenBlob(_ context.Context, req *pb.OpenBlobRequest) (*pb.OpenBlobResponse, error) {
 	mgr, err := jnipkg.NewblobStoreManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -161,7 +161,7 @@ func (s *blobStoreManagerServer) OpenBlob(_ context.Context, req *pb.OpenBlobReq
 	return &pb.OpenBlobResponse{Result: handle}, nil
 }
 
-func (s *blobStoreManagerServer) OpenSession(_ context.Context, req *pb.OpenSessionRequest) (*pb.OpenSessionResponse, error) {
+func (s *BlobStoreManagerServer) OpenSession(_ context.Context, req *pb.OpenSessionRequest) (*pb.OpenSessionResponse, error) {
 	mgr, err := jnipkg.NewblobStoreManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -184,7 +184,7 @@ func (s *blobStoreManagerServer) OpenSession(_ context.Context, req *pb.OpenSess
 	return &pb.OpenSessionResponse{Result: handle}, nil
 }
 
-func (s *blobStoreManagerServer) ReleaseLease(_ context.Context, req *pb.ReleaseLeaseRequest) (*pb.ReleaseLeaseResponse, error) {
+func (s *BlobStoreManagerServer) ReleaseLease(_ context.Context, req *pb.ReleaseLeaseRequest) (*pb.ReleaseLeaseResponse, error) {
 	mgr, err := jnipkg.NewblobStoreManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)

@@ -15,14 +15,14 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// wifiP2pManagerServer implements pb.WifiP2PManagerServiceServer.
-type wifiP2pManagerServer struct {
+// WifiP2pManagerServer implements pb.WifiP2PManagerServiceServer.
+type WifiP2pManagerServer struct {
 	pb.UnimplementedWifiP2PManagerServiceServer
 	Ctx     *app.Context
 	Handles *handlestore.HandleStore
 }
 
-func (s *wifiP2pManagerServer) AddExternalApprover(_ context.Context, req *pb.AddExternalApproverRequest) (*pb.AddExternalApproverResponse, error) {
+func (s *WifiP2pManagerServer) AddExternalApprover(_ context.Context, req *pb.AddExternalApproverRequest) (*pb.AddExternalApproverResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -35,7 +35,7 @@ func (s *wifiP2pManagerServer) AddExternalApprover(_ context.Context, req *pb.Ad
 	return &pb.AddExternalApproverResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) AddLocalService(_ context.Context, req *pb.AddLocalServiceRequest) (*pb.AddLocalServiceResponse, error) {
+func (s *WifiP2pManagerServer) AddLocalService(_ context.Context, req *pb.AddLocalServiceRequest) (*pb.AddLocalServiceResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -48,7 +48,7 @@ func (s *wifiP2pManagerServer) AddLocalService(_ context.Context, req *pb.AddLoc
 	return &pb.AddLocalServiceResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) AddServiceRequest(_ context.Context, req *pb.AddServiceRequestRequest) (*pb.AddServiceRequestResponse, error) {
+func (s *WifiP2pManagerServer) AddServiceRequest(_ context.Context, req *pb.AddServiceRequestRequest) (*pb.AddServiceRequestResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -61,7 +61,7 @@ func (s *wifiP2pManagerServer) AddServiceRequest(_ context.Context, req *pb.AddS
 	return &pb.AddServiceRequestResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) CancelConnect(_ context.Context, req *pb.CancelConnectRequest) (*pb.CancelConnectResponse, error) {
+func (s *WifiP2pManagerServer) CancelConnect(_ context.Context, req *pb.CancelConnectRequest) (*pb.CancelConnectResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -74,7 +74,7 @@ func (s *wifiP2pManagerServer) CancelConnect(_ context.Context, req *pb.CancelCo
 	return &pb.CancelConnectResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) ClearLocalServices(_ context.Context, req *pb.ClearLocalServicesRequest) (*pb.ClearLocalServicesResponse, error) {
+func (s *WifiP2pManagerServer) ClearLocalServices(_ context.Context, req *pb.ClearLocalServicesRequest) (*pb.ClearLocalServicesResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -87,7 +87,7 @@ func (s *wifiP2pManagerServer) ClearLocalServices(_ context.Context, req *pb.Cle
 	return &pb.ClearLocalServicesResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) ClearServiceRequests(_ context.Context, req *pb.ClearServiceRequestsRequest) (*pb.ClearServiceRequestsResponse, error) {
+func (s *WifiP2pManagerServer) ClearServiceRequests(_ context.Context, req *pb.ClearServiceRequestsRequest) (*pb.ClearServiceRequestsResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -100,7 +100,7 @@ func (s *wifiP2pManagerServer) ClearServiceRequests(_ context.Context, req *pb.C
 	return &pb.ClearServiceRequestsResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) Connect(_ context.Context, req *pb.ConnectRequest) (*pb.ConnectResponse, error) {
+func (s *WifiP2pManagerServer) Connect(_ context.Context, req *pb.ConnectRequest) (*pb.ConnectResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -113,7 +113,7 @@ func (s *wifiP2pManagerServer) Connect(_ context.Context, req *pb.ConnectRequest
 	return &pb.ConnectResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) CreateGroup3(_ context.Context, req *pb.CreateGroup3Request) (*pb.CreateGroup3Response, error) {
+func (s *WifiP2pManagerServer) CreateGroup3(_ context.Context, req *pb.CreateGroup3Request) (*pb.CreateGroup3Response, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -126,7 +126,7 @@ func (s *wifiP2pManagerServer) CreateGroup3(_ context.Context, req *pb.CreateGro
 	return &pb.CreateGroup3Response{}, nil
 }
 
-func (s *wifiP2pManagerServer) CreateGroup2_1(_ context.Context, req *pb.CreateGroup2_1Request) (*pb.CreateGroup2_1Response, error) {
+func (s *WifiP2pManagerServer) CreateGroup2_1(_ context.Context, req *pb.CreateGroup2_1Request) (*pb.CreateGroup2_1Response, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -139,7 +139,7 @@ func (s *wifiP2pManagerServer) CreateGroup2_1(_ context.Context, req *pb.CreateG
 	return &pb.CreateGroup2_1Response{}, nil
 }
 
-func (s *wifiP2pManagerServer) DiscoverPeers(_ context.Context, req *pb.DiscoverPeersRequest) (*pb.DiscoverPeersResponse, error) {
+func (s *WifiP2pManagerServer) DiscoverPeers(_ context.Context, req *pb.DiscoverPeersRequest) (*pb.DiscoverPeersResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -152,7 +152,7 @@ func (s *wifiP2pManagerServer) DiscoverPeers(_ context.Context, req *pb.Discover
 	return &pb.DiscoverPeersResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) DiscoverPeersOnSocialChannels(_ context.Context, req *pb.DiscoverPeersOnSocialChannelsRequest) (*pb.DiscoverPeersOnSocialChannelsResponse, error) {
+func (s *WifiP2pManagerServer) DiscoverPeersOnSocialChannels(_ context.Context, req *pb.DiscoverPeersOnSocialChannelsRequest) (*pb.DiscoverPeersOnSocialChannelsResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -165,7 +165,7 @@ func (s *wifiP2pManagerServer) DiscoverPeersOnSocialChannels(_ context.Context, 
 	return &pb.DiscoverPeersOnSocialChannelsResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) DiscoverPeersOnSpecificFrequency(_ context.Context, req *pb.DiscoverPeersOnSpecificFrequencyRequest) (*pb.DiscoverPeersOnSpecificFrequencyResponse, error) {
+func (s *WifiP2pManagerServer) DiscoverPeersOnSpecificFrequency(_ context.Context, req *pb.DiscoverPeersOnSpecificFrequencyRequest) (*pb.DiscoverPeersOnSpecificFrequencyResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -178,7 +178,7 @@ func (s *wifiP2pManagerServer) DiscoverPeersOnSpecificFrequency(_ context.Contex
 	return &pb.DiscoverPeersOnSpecificFrequencyResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) DiscoverServices(_ context.Context, req *pb.DiscoverServicesRequest) (*pb.DiscoverServicesResponse, error) {
+func (s *WifiP2pManagerServer) DiscoverServices(_ context.Context, req *pb.DiscoverServicesRequest) (*pb.DiscoverServicesResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -191,7 +191,7 @@ func (s *wifiP2pManagerServer) DiscoverServices(_ context.Context, req *pb.Disco
 	return &pb.DiscoverServicesResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) DiscoverUsdBasedServices(_ context.Context, req *pb.DiscoverUsdBasedServicesRequest) (*pb.DiscoverUsdBasedServicesResponse, error) {
+func (s *WifiP2pManagerServer) DiscoverUsdBasedServices(_ context.Context, req *pb.DiscoverUsdBasedServicesRequest) (*pb.DiscoverUsdBasedServicesResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -204,7 +204,7 @@ func (s *wifiP2pManagerServer) DiscoverUsdBasedServices(_ context.Context, req *
 	return &pb.DiscoverUsdBasedServicesResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) GetListenState(_ context.Context, req *pb.GetListenStateRequest) (*pb.GetListenStateResponse, error) {
+func (s *WifiP2pManagerServer) GetListenState(_ context.Context, req *pb.GetListenStateRequest) (*pb.GetListenStateResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -217,7 +217,7 @@ func (s *wifiP2pManagerServer) GetListenState(_ context.Context, req *pb.GetList
 	return &pb.GetListenStateResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) Initialize(_ context.Context, req *pb.InitializeRequest) (*pb.InitializeResponse, error) {
+func (s *WifiP2pManagerServer) Initialize(_ context.Context, req *pb.InitializeRequest) (*pb.InitializeResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -240,7 +240,7 @@ func (s *wifiP2pManagerServer) Initialize(_ context.Context, req *pb.InitializeR
 	return &pb.InitializeResponse{Result: handle}, nil
 }
 
-func (s *wifiP2pManagerServer) IsChannelConstrainedDiscoverySupported(_ context.Context, req *pb.IsChannelConstrainedDiscoverySupportedRequest) (*pb.IsChannelConstrainedDiscoverySupportedResponse, error) {
+func (s *WifiP2pManagerServer) IsChannelConstrainedDiscoverySupported(_ context.Context, req *pb.IsChannelConstrainedDiscoverySupportedRequest) (*pb.IsChannelConstrainedDiscoverySupportedResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -254,7 +254,7 @@ func (s *wifiP2pManagerServer) IsChannelConstrainedDiscoverySupported(_ context.
 	return &pb.IsChannelConstrainedDiscoverySupportedResponse{Result: result}, nil
 }
 
-func (s *wifiP2pManagerServer) IsGroupClientRemovalSupported(_ context.Context, req *pb.IsGroupClientRemovalSupportedRequest) (*pb.IsGroupClientRemovalSupportedResponse, error) {
+func (s *WifiP2pManagerServer) IsGroupClientRemovalSupported(_ context.Context, req *pb.IsGroupClientRemovalSupportedRequest) (*pb.IsGroupClientRemovalSupportedResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -268,7 +268,7 @@ func (s *wifiP2pManagerServer) IsGroupClientRemovalSupported(_ context.Context, 
 	return &pb.IsGroupClientRemovalSupportedResponse{Result: result}, nil
 }
 
-func (s *wifiP2pManagerServer) IsGroupOwnerIPv6LinkLocalAddressProvided(_ context.Context, req *pb.IsGroupOwnerIPv6LinkLocalAddressProvidedRequest) (*pb.IsGroupOwnerIPv6LinkLocalAddressProvidedResponse, error) {
+func (s *WifiP2pManagerServer) IsGroupOwnerIPv6LinkLocalAddressProvided(_ context.Context, req *pb.IsGroupOwnerIPv6LinkLocalAddressProvidedRequest) (*pb.IsGroupOwnerIPv6LinkLocalAddressProvidedResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -282,7 +282,7 @@ func (s *wifiP2pManagerServer) IsGroupOwnerIPv6LinkLocalAddressProvided(_ contex
 	return &pb.IsGroupOwnerIPv6LinkLocalAddressProvidedResponse{Result: result}, nil
 }
 
-func (s *wifiP2pManagerServer) IsPccModeSupported(_ context.Context, req *pb.IsPccModeSupportedRequest) (*pb.IsPccModeSupportedResponse, error) {
+func (s *WifiP2pManagerServer) IsPccModeSupported(_ context.Context, req *pb.IsPccModeSupportedRequest) (*pb.IsPccModeSupportedResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -296,7 +296,7 @@ func (s *wifiP2pManagerServer) IsPccModeSupported(_ context.Context, req *pb.IsP
 	return &pb.IsPccModeSupportedResponse{Result: result}, nil
 }
 
-func (s *wifiP2pManagerServer) IsSetVendorElementsSupported(_ context.Context, req *pb.IsSetVendorElementsSupportedRequest) (*pb.IsSetVendorElementsSupportedResponse, error) {
+func (s *WifiP2pManagerServer) IsSetVendorElementsSupported(_ context.Context, req *pb.IsSetVendorElementsSupportedRequest) (*pb.IsSetVendorElementsSupportedResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -310,7 +310,7 @@ func (s *wifiP2pManagerServer) IsSetVendorElementsSupported(_ context.Context, r
 	return &pb.IsSetVendorElementsSupportedResponse{Result: result}, nil
 }
 
-func (s *wifiP2pManagerServer) IsWiFiDirectR2Supported(_ context.Context, req *pb.IsWiFiDirectR2SupportedRequest) (*pb.IsWiFiDirectR2SupportedResponse, error) {
+func (s *WifiP2pManagerServer) IsWiFiDirectR2Supported(_ context.Context, req *pb.IsWiFiDirectR2SupportedRequest) (*pb.IsWiFiDirectR2SupportedResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -324,7 +324,7 @@ func (s *wifiP2pManagerServer) IsWiFiDirectR2Supported(_ context.Context, req *p
 	return &pb.IsWiFiDirectR2SupportedResponse{Result: result}, nil
 }
 
-func (s *wifiP2pManagerServer) RegisterWifiP2PListener(_ context.Context, req *pb.RegisterWifiP2PListenerRequest) (*pb.RegisterWifiP2PListenerResponse, error) {
+func (s *WifiP2pManagerServer) RegisterWifiP2PListener(_ context.Context, req *pb.RegisterWifiP2PListenerRequest) (*pb.RegisterWifiP2PListenerResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -337,7 +337,7 @@ func (s *wifiP2pManagerServer) RegisterWifiP2PListener(_ context.Context, req *p
 	return &pb.RegisterWifiP2PListenerResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) RemoveClient(_ context.Context, req *pb.RemoveClientRequest) (*pb.RemoveClientResponse, error) {
+func (s *WifiP2pManagerServer) RemoveClient(_ context.Context, req *pb.RemoveClientRequest) (*pb.RemoveClientResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -350,7 +350,7 @@ func (s *wifiP2pManagerServer) RemoveClient(_ context.Context, req *pb.RemoveCli
 	return &pb.RemoveClientResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) RemoveExternalApprover(_ context.Context, req *pb.RemoveExternalApproverRequest) (*pb.RemoveExternalApproverResponse, error) {
+func (s *WifiP2pManagerServer) RemoveExternalApprover(_ context.Context, req *pb.RemoveExternalApproverRequest) (*pb.RemoveExternalApproverResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -363,7 +363,7 @@ func (s *wifiP2pManagerServer) RemoveExternalApprover(_ context.Context, req *pb
 	return &pb.RemoveExternalApproverResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) RemoveGroup(_ context.Context, req *pb.RemoveGroupRequest) (*pb.RemoveGroupResponse, error) {
+func (s *WifiP2pManagerServer) RemoveGroup(_ context.Context, req *pb.RemoveGroupRequest) (*pb.RemoveGroupResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -376,7 +376,7 @@ func (s *wifiP2pManagerServer) RemoveGroup(_ context.Context, req *pb.RemoveGrou
 	return &pb.RemoveGroupResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) RemoveLocalService(_ context.Context, req *pb.RemoveLocalServiceRequest) (*pb.RemoveLocalServiceResponse, error) {
+func (s *WifiP2pManagerServer) RemoveLocalService(_ context.Context, req *pb.RemoveLocalServiceRequest) (*pb.RemoveLocalServiceResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -389,7 +389,7 @@ func (s *wifiP2pManagerServer) RemoveLocalService(_ context.Context, req *pb.Rem
 	return &pb.RemoveLocalServiceResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) RemoveServiceRequest(_ context.Context, req *pb.RemoveServiceRequestRequest) (*pb.RemoveServiceRequestResponse, error) {
+func (s *WifiP2pManagerServer) RemoveServiceRequest(_ context.Context, req *pb.RemoveServiceRequestRequest) (*pb.RemoveServiceRequestResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -402,7 +402,7 @@ func (s *wifiP2pManagerServer) RemoveServiceRequest(_ context.Context, req *pb.R
 	return &pb.RemoveServiceRequestResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) RequestConnectionInfo(_ context.Context, req *pb.RequestConnectionInfoRequest) (*pb.RequestConnectionInfoResponse, error) {
+func (s *WifiP2pManagerServer) RequestConnectionInfo(_ context.Context, req *pb.RequestConnectionInfoRequest) (*pb.RequestConnectionInfoResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -415,7 +415,7 @@ func (s *wifiP2pManagerServer) RequestConnectionInfo(_ context.Context, req *pb.
 	return &pb.RequestConnectionInfoResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) RequestDeviceInfo(_ context.Context, req *pb.RequestDeviceInfoRequest) (*pb.RequestDeviceInfoResponse, error) {
+func (s *WifiP2pManagerServer) RequestDeviceInfo(_ context.Context, req *pb.RequestDeviceInfoRequest) (*pb.RequestDeviceInfoResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -428,7 +428,7 @@ func (s *wifiP2pManagerServer) RequestDeviceInfo(_ context.Context, req *pb.Requ
 	return &pb.RequestDeviceInfoResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) RequestDirInfo(_ context.Context, req *pb.RequestDirInfoRequest) (*pb.RequestDirInfoResponse, error) {
+func (s *WifiP2pManagerServer) RequestDirInfo(_ context.Context, req *pb.RequestDirInfoRequest) (*pb.RequestDirInfoResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -441,7 +441,7 @@ func (s *wifiP2pManagerServer) RequestDirInfo(_ context.Context, req *pb.Request
 	return &pb.RequestDirInfoResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) RequestDiscoveryState(_ context.Context, req *pb.RequestDiscoveryStateRequest) (*pb.RequestDiscoveryStateResponse, error) {
+func (s *WifiP2pManagerServer) RequestDiscoveryState(_ context.Context, req *pb.RequestDiscoveryStateRequest) (*pb.RequestDiscoveryStateResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -454,7 +454,7 @@ func (s *wifiP2pManagerServer) RequestDiscoveryState(_ context.Context, req *pb.
 	return &pb.RequestDiscoveryStateResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) RequestGroupInfo(_ context.Context, req *pb.RequestGroupInfoRequest) (*pb.RequestGroupInfoResponse, error) {
+func (s *WifiP2pManagerServer) RequestGroupInfo(_ context.Context, req *pb.RequestGroupInfoRequest) (*pb.RequestGroupInfoResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -467,7 +467,7 @@ func (s *wifiP2pManagerServer) RequestGroupInfo(_ context.Context, req *pb.Reque
 	return &pb.RequestGroupInfoResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) RequestNetworkInfo(_ context.Context, req *pb.RequestNetworkInfoRequest) (*pb.RequestNetworkInfoResponse, error) {
+func (s *WifiP2pManagerServer) RequestNetworkInfo(_ context.Context, req *pb.RequestNetworkInfoRequest) (*pb.RequestNetworkInfoResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -480,7 +480,7 @@ func (s *wifiP2pManagerServer) RequestNetworkInfo(_ context.Context, req *pb.Req
 	return &pb.RequestNetworkInfoResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) RequestP2PState(_ context.Context, req *pb.RequestP2PStateRequest) (*pb.RequestP2PStateResponse, error) {
+func (s *WifiP2pManagerServer) RequestP2PState(_ context.Context, req *pb.RequestP2PStateRequest) (*pb.RequestP2PStateResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -493,7 +493,7 @@ func (s *wifiP2pManagerServer) RequestP2PState(_ context.Context, req *pb.Reques
 	return &pb.RequestP2PStateResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) RequestPeers(_ context.Context, req *pb.RequestPeersRequest) (*pb.RequestPeersResponse, error) {
+func (s *WifiP2pManagerServer) RequestPeers(_ context.Context, req *pb.RequestPeersRequest) (*pb.RequestPeersResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -506,7 +506,7 @@ func (s *wifiP2pManagerServer) RequestPeers(_ context.Context, req *pb.RequestPe
 	return &pb.RequestPeersResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) SetConnectionRequestResult4(_ context.Context, req *pb.SetConnectionRequestResult4Request) (*pb.SetConnectionRequestResult4Response, error) {
+func (s *WifiP2pManagerServer) SetConnectionRequestResult4(_ context.Context, req *pb.SetConnectionRequestResult4Request) (*pb.SetConnectionRequestResult4Response, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -519,7 +519,7 @@ func (s *wifiP2pManagerServer) SetConnectionRequestResult4(_ context.Context, re
 	return &pb.SetConnectionRequestResult4Response{}, nil
 }
 
-func (s *wifiP2pManagerServer) SetConnectionRequestResult5_1(_ context.Context, req *pb.SetConnectionRequestResult5_1Request) (*pb.SetConnectionRequestResult5_1Response, error) {
+func (s *WifiP2pManagerServer) SetConnectionRequestResult5_1(_ context.Context, req *pb.SetConnectionRequestResult5_1Request) (*pb.SetConnectionRequestResult5_1Response, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -532,7 +532,7 @@ func (s *wifiP2pManagerServer) SetConnectionRequestResult5_1(_ context.Context, 
 	return &pb.SetConnectionRequestResult5_1Response{}, nil
 }
 
-func (s *wifiP2pManagerServer) SetDnsSdResponseListeners(_ context.Context, req *pb.SetDnsSdResponseListenersRequest) (*pb.SetDnsSdResponseListenersResponse, error) {
+func (s *WifiP2pManagerServer) SetDnsSdResponseListeners(_ context.Context, req *pb.SetDnsSdResponseListenersRequest) (*pb.SetDnsSdResponseListenersResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -545,7 +545,7 @@ func (s *wifiP2pManagerServer) SetDnsSdResponseListeners(_ context.Context, req 
 	return &pb.SetDnsSdResponseListenersResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) SetServiceResponseListener(_ context.Context, req *pb.SetServiceResponseListenerRequest) (*pb.SetServiceResponseListenerResponse, error) {
+func (s *WifiP2pManagerServer) SetServiceResponseListener(_ context.Context, req *pb.SetServiceResponseListenerRequest) (*pb.SetServiceResponseListenerResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -558,7 +558,7 @@ func (s *wifiP2pManagerServer) SetServiceResponseListener(_ context.Context, req
 	return &pb.SetServiceResponseListenerResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) SetUpnpServiceResponseListener(_ context.Context, req *pb.SetUpnpServiceResponseListenerRequest) (*pb.SetUpnpServiceResponseListenerResponse, error) {
+func (s *WifiP2pManagerServer) SetUpnpServiceResponseListener(_ context.Context, req *pb.SetUpnpServiceResponseListenerRequest) (*pb.SetUpnpServiceResponseListenerResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -571,7 +571,7 @@ func (s *wifiP2pManagerServer) SetUpnpServiceResponseListener(_ context.Context,
 	return &pb.SetUpnpServiceResponseListenerResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) SetVendorElements(_ context.Context, req *pb.SetVendorElementsRequest) (*pb.SetVendorElementsResponse, error) {
+func (s *WifiP2pManagerServer) SetVendorElements(_ context.Context, req *pb.SetVendorElementsRequest) (*pb.SetVendorElementsResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -584,7 +584,7 @@ func (s *wifiP2pManagerServer) SetVendorElements(_ context.Context, req *pb.SetV
 	return &pb.SetVendorElementsResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) SetWfdInfo(_ context.Context, req *pb.SetWfdInfoRequest) (*pb.SetWfdInfoResponse, error) {
+func (s *WifiP2pManagerServer) SetWfdInfo(_ context.Context, req *pb.SetWfdInfoRequest) (*pb.SetWfdInfoResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -597,7 +597,7 @@ func (s *wifiP2pManagerServer) SetWfdInfo(_ context.Context, req *pb.SetWfdInfoR
 	return &pb.SetWfdInfoResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) StartListening(_ context.Context, req *pb.StartListeningRequest) (*pb.StartListeningResponse, error) {
+func (s *WifiP2pManagerServer) StartListening(_ context.Context, req *pb.StartListeningRequest) (*pb.StartListeningResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -610,7 +610,7 @@ func (s *wifiP2pManagerServer) StartListening(_ context.Context, req *pb.StartLi
 	return &pb.StartListeningResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) StartPeerDiscovery(_ context.Context, req *pb.StartPeerDiscoveryRequest) (*pb.StartPeerDiscoveryResponse, error) {
+func (s *WifiP2pManagerServer) StartPeerDiscovery(_ context.Context, req *pb.StartPeerDiscoveryRequest) (*pb.StartPeerDiscoveryResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -623,7 +623,7 @@ func (s *wifiP2pManagerServer) StartPeerDiscovery(_ context.Context, req *pb.Sta
 	return &pb.StartPeerDiscoveryResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) StartUsdBasedLocalServiceAdvertisement(_ context.Context, req *pb.StartUsdBasedLocalServiceAdvertisementRequest) (*pb.StartUsdBasedLocalServiceAdvertisementResponse, error) {
+func (s *WifiP2pManagerServer) StartUsdBasedLocalServiceAdvertisement(_ context.Context, req *pb.StartUsdBasedLocalServiceAdvertisementRequest) (*pb.StartUsdBasedLocalServiceAdvertisementResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -636,7 +636,7 @@ func (s *wifiP2pManagerServer) StartUsdBasedLocalServiceAdvertisement(_ context.
 	return &pb.StartUsdBasedLocalServiceAdvertisementResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) StopListening(_ context.Context, req *pb.StopListeningRequest) (*pb.StopListeningResponse, error) {
+func (s *WifiP2pManagerServer) StopListening(_ context.Context, req *pb.StopListeningRequest) (*pb.StopListeningResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -649,7 +649,7 @@ func (s *wifiP2pManagerServer) StopListening(_ context.Context, req *pb.StopList
 	return &pb.StopListeningResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) StopPeerDiscovery(_ context.Context, req *pb.StopPeerDiscoveryRequest) (*pb.StopPeerDiscoveryResponse, error) {
+func (s *WifiP2pManagerServer) StopPeerDiscovery(_ context.Context, req *pb.StopPeerDiscoveryRequest) (*pb.StopPeerDiscoveryResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -662,7 +662,7 @@ func (s *wifiP2pManagerServer) StopPeerDiscovery(_ context.Context, req *pb.Stop
 	return &pb.StopPeerDiscoveryResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) UnregisterWifiP2PListener(_ context.Context, req *pb.UnregisterWifiP2PListenerRequest) (*pb.UnregisterWifiP2PListenerResponse, error) {
+func (s *WifiP2pManagerServer) UnregisterWifiP2PListener(_ context.Context, req *pb.UnregisterWifiP2PListenerRequest) (*pb.UnregisterWifiP2PListenerResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -675,7 +675,7 @@ func (s *wifiP2pManagerServer) UnregisterWifiP2PListener(_ context.Context, req 
 	return &pb.UnregisterWifiP2PListenerResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) ValidateDirInfo(_ context.Context, req *pb.ValidateDirInfoRequest) (*pb.ValidateDirInfoResponse, error) {
+func (s *WifiP2pManagerServer) ValidateDirInfo(_ context.Context, req *pb.ValidateDirInfoRequest) (*pb.ValidateDirInfoResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -688,7 +688,7 @@ func (s *wifiP2pManagerServer) ValidateDirInfo(_ context.Context, req *pb.Valida
 	return &pb.ValidateDirInfoResponse{}, nil
 }
 
-func (s *wifiP2pManagerServer) GetP2PMaxAllowedVendorElementsLengthBytes(_ context.Context, req *pb.GetP2PMaxAllowedVendorElementsLengthBytesRequest) (*pb.GetP2PMaxAllowedVendorElementsLengthBytesResponse, error) {
+func (s *WifiP2pManagerServer) GetP2PMaxAllowedVendorElementsLengthBytes(_ context.Context, req *pb.GetP2PMaxAllowedVendorElementsLengthBytesRequest) (*pb.GetP2PMaxAllowedVendorElementsLengthBytesResponse, error) {
 	mgr, err := jnipkg.NewwifiP2pManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)

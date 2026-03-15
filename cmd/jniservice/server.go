@@ -34,12 +34,14 @@ import (
 	"unsafe"
 
 	"github.com/xaionaro-go/jni"
+	"github.com/xaionaro-go/jni/app"
 	"github.com/xaionaro-go/jni/grpc/server"
 	"github.com/xaionaro-go/jni/grpc/server/acl"
 	"github.com/xaionaro-go/jni/grpc/server/certauth"
 	jnirawserver "github.com/xaionaro-go/jni/grpc/server/jni_raw"
 	"github.com/xaionaro-go/jni/handlestore"
 	authpb "github.com/xaionaro-go/jni/proto/auth"
+	handlepb "github.com/xaionaro-go/jni/proto/handlestore"
 	jnirawpb "github.com/xaionaro-go/jni/proto/jni_raw"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -211,9 +213,21 @@ func runServer(cvm *C.JavaVM) {
 
 	grpcServer := grpc.NewServer(opts...)
 
+	// Create app.Context from the Android Context stored in HandleStore.
+	var appCtx *app.Context
+	if ctxObj := handles.Get(1); ctxObj != nil {
+		appCtx = app.ContextFromObject(vm, ctxObj)
+	}
+
 	// Register handle store + any available Android API services.
-	server.RegisterAll(grpcServer, vm, handles)
-	fmt.Fprintf(os.Stderr, "jniservice: registered handlestore\n")
+	if appCtx != nil {
+		server.RegisterAll(grpcServer, appCtx, handles)
+		fmt.Fprintf(os.Stderr, "jniservice: registered Android API services\n")
+	} else {
+		// Fall back to HandleStore-only registration if no Context available.
+		handlepb.RegisterHandleStoreServiceServer(grpcServer, &handlestore.Server{VM: vm, Handles: handles})
+		fmt.Fprintf(os.Stderr, "jniservice: WARNING: no Android Context; only HandleStore registered\n")
+	}
 
 	// Register AuthService (always available — Register is the unauthenticated
 	// entry point for client enrollment).

@@ -15,14 +15,14 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// vibratorServer implements pb.VibratorServiceServer.
-type vibratorServer struct {
+// VibratorServer implements pb.VibratorServiceServer.
+type VibratorServer struct {
 	pb.UnimplementedVibratorServiceServer
 	Ctx     *app.Context
 	Handles *handlestore.HandleStore
 }
 
-func (s *vibratorServer) AreEffectsSupported(_ context.Context, req *pb.AreEffectsSupportedRequest) (*pb.AreEffectsSupportedResponse, error) {
+func (s *VibratorServer) AreEffectsSupported(_ context.Context, req *pb.AreEffectsSupportedRequest) (*pb.AreEffectsSupportedResponse, error) {
 	mgr, err := jnipkg.Newvibrator(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -45,7 +45,7 @@ func (s *vibratorServer) AreEffectsSupported(_ context.Context, req *pb.AreEffec
 	return &pb.AreEffectsSupportedResponse{Result: handle}, nil
 }
 
-func (s *vibratorServer) AreEnvelopeEffectsSupported(_ context.Context, req *pb.AreEnvelopeEffectsSupportedRequest) (*pb.AreEnvelopeEffectsSupportedResponse, error) {
+func (s *VibratorServer) AreEnvelopeEffectsSupported(_ context.Context, req *pb.AreEnvelopeEffectsSupportedRequest) (*pb.AreEnvelopeEffectsSupportedResponse, error) {
 	mgr, err := jnipkg.Newvibrator(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -59,7 +59,7 @@ func (s *vibratorServer) AreEnvelopeEffectsSupported(_ context.Context, req *pb.
 	return &pb.AreEnvelopeEffectsSupportedResponse{Result: result}, nil
 }
 
-func (s *vibratorServer) ArePrimitivesSupported(_ context.Context, req *pb.ArePrimitivesSupportedRequest) (*pb.ArePrimitivesSupportedResponse, error) {
+func (s *VibratorServer) ArePrimitivesSupported(_ context.Context, req *pb.ArePrimitivesSupportedRequest) (*pb.ArePrimitivesSupportedResponse, error) {
 	mgr, err := jnipkg.Newvibrator(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -82,7 +82,7 @@ func (s *vibratorServer) ArePrimitivesSupported(_ context.Context, req *pb.ArePr
 	return &pb.ArePrimitivesSupportedResponse{Result: handle}, nil
 }
 
-func (s *vibratorServer) GetEnvelopeEffectInfo(_ context.Context, req *pb.GetEnvelopeEffectInfoRequest) (*pb.GetEnvelopeEffectInfoResponse, error) {
+func (s *VibratorServer) GetEnvelopeEffectInfo(_ context.Context, req *pb.GetEnvelopeEffectInfoRequest) (*pb.GetEnvelopeEffectInfoResponse, error) {
 	mgr, err := jnipkg.Newvibrator(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -105,7 +105,7 @@ func (s *vibratorServer) GetEnvelopeEffectInfo(_ context.Context, req *pb.GetEnv
 	return &pb.GetEnvelopeEffectInfoResponse{Result: handle}, nil
 }
 
-func (s *vibratorServer) GetFrequencyProfile(_ context.Context, req *pb.GetFrequencyProfileRequest) (*pb.GetFrequencyProfileResponse, error) {
+func (s *VibratorServer) GetFrequencyProfile(_ context.Context, req *pb.GetFrequencyProfileRequest) (*pb.GetFrequencyProfileResponse, error) {
 	mgr, err := jnipkg.Newvibrator(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -128,7 +128,7 @@ func (s *vibratorServer) GetFrequencyProfile(_ context.Context, req *pb.GetFrequ
 	return &pb.GetFrequencyProfileResponse{Result: handle}, nil
 }
 
-func (s *vibratorServer) GetId(_ context.Context, req *pb.GetIdRequest) (*pb.GetIdResponse, error) {
+func (s *VibratorServer) GetId(_ context.Context, req *pb.GetIdRequest) (*pb.GetIdResponse, error) {
 	mgr, err := jnipkg.Newvibrator(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -142,7 +142,7 @@ func (s *vibratorServer) GetId(_ context.Context, req *pb.GetIdRequest) (*pb.Get
 	return &pb.GetIdResponse{Result: result}, nil
 }
 
-func (s *vibratorServer) GetPrimitiveDurations(_ context.Context, req *pb.GetPrimitiveDurationsRequest) (*pb.GetPrimitiveDurationsResponse, error) {
+func (s *VibratorServer) GetPrimitiveDurations(_ context.Context, req *pb.GetPrimitiveDurationsRequest) (*pb.GetPrimitiveDurationsResponse, error) {
 	mgr, err := jnipkg.Newvibrator(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -165,7 +165,7 @@ func (s *vibratorServer) GetPrimitiveDurations(_ context.Context, req *pb.GetPri
 	return &pb.GetPrimitiveDurationsResponse{Result: handle}, nil
 }
 
-func (s *vibratorServer) GetQFactor(_ context.Context, req *pb.GetQFactorRequest) (*pb.GetQFactorResponse, error) {
+func (s *VibratorServer) GetQFactor(_ context.Context, req *pb.GetQFactorRequest) (*pb.GetQFactorResponse, error) {
 	mgr, err := jnipkg.Newvibrator(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -179,7 +179,7 @@ func (s *vibratorServer) GetQFactor(_ context.Context, req *pb.GetQFactorRequest
 	return &pb.GetQFactorResponse{Result: result}, nil
 }
 
-func (s *vibratorServer) GetResonantFrequency(_ context.Context, req *pb.GetResonantFrequencyRequest) (*pb.GetResonantFrequencyResponse, error) {
+func (s *VibratorServer) GetResonantFrequency(_ context.Context, req *pb.GetResonantFrequencyRequest) (*pb.GetResonantFrequencyResponse, error) {
 	mgr, err := jnipkg.Newvibrator(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -193,7 +193,7 @@ func (s *vibratorServer) GetResonantFrequency(_ context.Context, req *pb.GetReso
 	return &pb.GetResonantFrequencyResponse{Result: result}, nil
 }
 
-func (s *vibratorServer) Vibrate1(_ context.Context, req *pb.Vibrate1Request) (*pb.Vibrate1Response, error) {
+func (s *VibratorServer) Vibrate1(_ context.Context, req *pb.Vibrate1Request) (*pb.Vibrate1Response, error) {
 	mgr, err := jnipkg.Newvibrator(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -206,7 +206,7 @@ func (s *vibratorServer) Vibrate1(_ context.Context, req *pb.Vibrate1Request) (*
 	return &pb.Vibrate1Response{}, nil
 }
 
-func (s *vibratorServer) Vibrate2_1(_ context.Context, req *pb.Vibrate2_1Request) (*pb.Vibrate2_1Response, error) {
+func (s *VibratorServer) Vibrate2_1(_ context.Context, req *pb.Vibrate2_1Request) (*pb.Vibrate2_1Response, error) {
 	mgr, err := jnipkg.Newvibrator(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -219,7 +219,7 @@ func (s *vibratorServer) Vibrate2_1(_ context.Context, req *pb.Vibrate2_1Request
 	return &pb.Vibrate2_1Response{}, nil
 }
 
-func (s *vibratorServer) Vibrate2_2(_ context.Context, req *pb.Vibrate2_2Request) (*pb.Vibrate2_2Response, error) {
+func (s *VibratorServer) Vibrate2_2(_ context.Context, req *pb.Vibrate2_2Request) (*pb.Vibrate2_2Response, error) {
 	mgr, err := jnipkg.Newvibrator(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -232,7 +232,7 @@ func (s *vibratorServer) Vibrate2_2(_ context.Context, req *pb.Vibrate2_2Request
 	return &pb.Vibrate2_2Response{}, nil
 }
 
-func (s *vibratorServer) Vibrate1_3(_ context.Context, req *pb.Vibrate1_3Request) (*pb.Vibrate1_3Response, error) {
+func (s *VibratorServer) Vibrate1_3(_ context.Context, req *pb.Vibrate1_3Request) (*pb.Vibrate1_3Response, error) {
 	mgr, err := jnipkg.Newvibrator(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -245,7 +245,7 @@ func (s *vibratorServer) Vibrate1_3(_ context.Context, req *pb.Vibrate1_3Request
 	return &pb.Vibrate1_3Response{}, nil
 }
 
-func (s *vibratorServer) Vibrate2_4(_ context.Context, req *pb.Vibrate2_4Request) (*pb.Vibrate2_4Response, error) {
+func (s *VibratorServer) Vibrate2_4(_ context.Context, req *pb.Vibrate2_4Request) (*pb.Vibrate2_4Response, error) {
 	mgr, err := jnipkg.Newvibrator(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -258,7 +258,7 @@ func (s *vibratorServer) Vibrate2_4(_ context.Context, req *pb.Vibrate2_4Request
 	return &pb.Vibrate2_4Response{}, nil
 }
 
-func (s *vibratorServer) Vibrate2_5(_ context.Context, req *pb.Vibrate2_5Request) (*pb.Vibrate2_5Response, error) {
+func (s *VibratorServer) Vibrate2_5(_ context.Context, req *pb.Vibrate2_5Request) (*pb.Vibrate2_5Response, error) {
 	mgr, err := jnipkg.Newvibrator(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -271,7 +271,7 @@ func (s *vibratorServer) Vibrate2_5(_ context.Context, req *pb.Vibrate2_5Request
 	return &pb.Vibrate2_5Response{}, nil
 }
 
-func (s *vibratorServer) Vibrate3_6(_ context.Context, req *pb.Vibrate3_6Request) (*pb.Vibrate3_6Response, error) {
+func (s *VibratorServer) Vibrate3_6(_ context.Context, req *pb.Vibrate3_6Request) (*pb.Vibrate3_6Response, error) {
 	mgr, err := jnipkg.Newvibrator(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)

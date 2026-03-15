@@ -15,14 +15,14 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// telecomManagerServer implements pb.TelecomManagerServiceServer.
-type telecomManagerServer struct {
+// TelecomManagerServer implements pb.TelecomManagerServiceServer.
+type TelecomManagerServer struct {
 	pb.UnimplementedTelecomManagerServiceServer
 	Ctx     *app.Context
 	Handles *handlestore.HandleStore
 }
 
-func (s *telecomManagerServer) AcceptHandover(_ context.Context, req *pb.AcceptHandoverRequest) (*pb.AcceptHandoverResponse, error) {
+func (s *TelecomManagerServer) AcceptHandover(_ context.Context, req *pb.AcceptHandoverRequest) (*pb.AcceptHandoverResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -35,7 +35,7 @@ func (s *telecomManagerServer) AcceptHandover(_ context.Context, req *pb.AcceptH
 	return &pb.AcceptHandoverResponse{}, nil
 }
 
-func (s *telecomManagerServer) AcceptRingingCall0(_ context.Context, req *pb.AcceptRingingCall0Request) (*pb.AcceptRingingCall0Response, error) {
+func (s *TelecomManagerServer) AcceptRingingCall0(_ context.Context, req *pb.AcceptRingingCall0Request) (*pb.AcceptRingingCall0Response, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -48,7 +48,7 @@ func (s *telecomManagerServer) AcceptRingingCall0(_ context.Context, req *pb.Acc
 	return &pb.AcceptRingingCall0Response{}, nil
 }
 
-func (s *telecomManagerServer) AcceptRingingCall1_1(_ context.Context, req *pb.AcceptRingingCall1_1Request) (*pb.AcceptRingingCall1_1Response, error) {
+func (s *TelecomManagerServer) AcceptRingingCall1_1(_ context.Context, req *pb.AcceptRingingCall1_1Request) (*pb.AcceptRingingCall1_1Response, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -61,7 +61,7 @@ func (s *telecomManagerServer) AcceptRingingCall1_1(_ context.Context, req *pb.A
 	return &pb.AcceptRingingCall1_1Response{}, nil
 }
 
-func (s *telecomManagerServer) AddCall(_ context.Context, req *pb.AddCallRequest) (*pb.AddCallResponse, error) {
+func (s *TelecomManagerServer) AddCall(_ context.Context, req *pb.AddCallRequest) (*pb.AddCallResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -74,7 +74,7 @@ func (s *telecomManagerServer) AddCall(_ context.Context, req *pb.AddCallRequest
 	return &pb.AddCallResponse{}, nil
 }
 
-func (s *telecomManagerServer) AddNewIncomingCall(_ context.Context, req *pb.AddNewIncomingCallRequest) (*pb.AddNewIncomingCallResponse, error) {
+func (s *TelecomManagerServer) AddNewIncomingCall(_ context.Context, req *pb.AddNewIncomingCallRequest) (*pb.AddNewIncomingCallResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -87,7 +87,7 @@ func (s *telecomManagerServer) AddNewIncomingCall(_ context.Context, req *pb.Add
 	return &pb.AddNewIncomingCallResponse{}, nil
 }
 
-func (s *telecomManagerServer) AddNewIncomingConference(_ context.Context, req *pb.AddNewIncomingConferenceRequest) (*pb.AddNewIncomingConferenceResponse, error) {
+func (s *TelecomManagerServer) AddNewIncomingConference(_ context.Context, req *pb.AddNewIncomingConferenceRequest) (*pb.AddNewIncomingConferenceResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -100,7 +100,7 @@ func (s *telecomManagerServer) AddNewIncomingConference(_ context.Context, req *
 	return &pb.AddNewIncomingConferenceResponse{}, nil
 }
 
-func (s *telecomManagerServer) CancelMissedCallsNotification(_ context.Context, req *pb.CancelMissedCallsNotificationRequest) (*pb.CancelMissedCallsNotificationResponse, error) {
+func (s *TelecomManagerServer) CancelMissedCallsNotification(_ context.Context, req *pb.CancelMissedCallsNotificationRequest) (*pb.CancelMissedCallsNotificationResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -113,7 +113,7 @@ func (s *telecomManagerServer) CancelMissedCallsNotification(_ context.Context, 
 	return &pb.CancelMissedCallsNotificationResponse{}, nil
 }
 
-func (s *telecomManagerServer) CreateManageBlockedNumbersIntent(_ context.Context, req *pb.CreateManageBlockedNumbersIntentRequest) (*pb.CreateManageBlockedNumbersIntentResponse, error) {
+func (s *TelecomManagerServer) CreateManageBlockedNumbersIntent(_ context.Context, req *pb.CreateManageBlockedNumbersIntentRequest) (*pb.CreateManageBlockedNumbersIntentResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -136,7 +136,7 @@ func (s *telecomManagerServer) CreateManageBlockedNumbersIntent(_ context.Contex
 	return &pb.CreateManageBlockedNumbersIntentResponse{Result: handle}, nil
 }
 
-func (s *telecomManagerServer) EndCall(_ context.Context, req *pb.EndCallRequest) (*pb.EndCallResponse, error) {
+func (s *TelecomManagerServer) EndCall(_ context.Context, req *pb.EndCallRequest) (*pb.EndCallResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -150,7 +150,7 @@ func (s *telecomManagerServer) EndCall(_ context.Context, req *pb.EndCallRequest
 	return &pb.EndCallResponse{Result: result}, nil
 }
 
-func (s *telecomManagerServer) GetAdnUriForPhoneAccount(_ context.Context, req *pb.GetAdnUriForPhoneAccountRequest) (*pb.GetAdnUriForPhoneAccountResponse, error) {
+func (s *TelecomManagerServer) GetAdnUriForPhoneAccount(_ context.Context, req *pb.GetAdnUriForPhoneAccountRequest) (*pb.GetAdnUriForPhoneAccountResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -173,7 +173,7 @@ func (s *telecomManagerServer) GetAdnUriForPhoneAccount(_ context.Context, req *
 	return &pb.GetAdnUriForPhoneAccountResponse{Result: handle}, nil
 }
 
-func (s *telecomManagerServer) GetCallCapablePhoneAccounts(_ context.Context, req *pb.GetCallCapablePhoneAccountsRequest) (*pb.GetCallCapablePhoneAccountsResponse, error) {
+func (s *TelecomManagerServer) GetCallCapablePhoneAccounts(_ context.Context, req *pb.GetCallCapablePhoneAccountsRequest) (*pb.GetCallCapablePhoneAccountsResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -196,7 +196,7 @@ func (s *telecomManagerServer) GetCallCapablePhoneAccounts(_ context.Context, re
 	return &pb.GetCallCapablePhoneAccountsResponse{Result: handle}, nil
 }
 
-func (s *telecomManagerServer) GetDefaultDialerPackage(_ context.Context, req *pb.GetDefaultDialerPackageRequest) (*pb.GetDefaultDialerPackageResponse, error) {
+func (s *TelecomManagerServer) GetDefaultDialerPackage(_ context.Context, req *pb.GetDefaultDialerPackageRequest) (*pb.GetDefaultDialerPackageResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -210,7 +210,7 @@ func (s *telecomManagerServer) GetDefaultDialerPackage(_ context.Context, req *p
 	return &pb.GetDefaultDialerPackageResponse{Result: result}, nil
 }
 
-func (s *telecomManagerServer) GetDefaultOutgoingPhoneAccount(_ context.Context, req *pb.GetDefaultOutgoingPhoneAccountRequest) (*pb.GetDefaultOutgoingPhoneAccountResponse, error) {
+func (s *TelecomManagerServer) GetDefaultOutgoingPhoneAccount(_ context.Context, req *pb.GetDefaultOutgoingPhoneAccountRequest) (*pb.GetDefaultOutgoingPhoneAccountResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -233,7 +233,7 @@ func (s *telecomManagerServer) GetDefaultOutgoingPhoneAccount(_ context.Context,
 	return &pb.GetDefaultOutgoingPhoneAccountResponse{Result: handle}, nil
 }
 
-func (s *telecomManagerServer) GetLine1Number(_ context.Context, req *pb.GetLine1NumberRequest) (*pb.GetLine1NumberResponse, error) {
+func (s *TelecomManagerServer) GetLine1Number(_ context.Context, req *pb.GetLine1NumberRequest) (*pb.GetLine1NumberResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -247,7 +247,7 @@ func (s *telecomManagerServer) GetLine1Number(_ context.Context, req *pb.GetLine
 	return &pb.GetLine1NumberResponse{Result: result}, nil
 }
 
-func (s *telecomManagerServer) GetOwnSelfManagedPhoneAccounts(_ context.Context, req *pb.GetOwnSelfManagedPhoneAccountsRequest) (*pb.GetOwnSelfManagedPhoneAccountsResponse, error) {
+func (s *TelecomManagerServer) GetOwnSelfManagedPhoneAccounts(_ context.Context, req *pb.GetOwnSelfManagedPhoneAccountsRequest) (*pb.GetOwnSelfManagedPhoneAccountsResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -270,7 +270,7 @@ func (s *telecomManagerServer) GetOwnSelfManagedPhoneAccounts(_ context.Context,
 	return &pb.GetOwnSelfManagedPhoneAccountsResponse{Result: handle}, nil
 }
 
-func (s *telecomManagerServer) GetPhoneAccount(_ context.Context, req *pb.GetPhoneAccountRequest) (*pb.GetPhoneAccountResponse, error) {
+func (s *TelecomManagerServer) GetPhoneAccount(_ context.Context, req *pb.GetPhoneAccountRequest) (*pb.GetPhoneAccountResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -293,7 +293,7 @@ func (s *telecomManagerServer) GetPhoneAccount(_ context.Context, req *pb.GetPho
 	return &pb.GetPhoneAccountResponse{Result: handle}, nil
 }
 
-func (s *telecomManagerServer) GetRegisteredPhoneAccounts(_ context.Context, req *pb.GetRegisteredPhoneAccountsRequest) (*pb.GetRegisteredPhoneAccountsResponse, error) {
+func (s *TelecomManagerServer) GetRegisteredPhoneAccounts(_ context.Context, req *pb.GetRegisteredPhoneAccountsRequest) (*pb.GetRegisteredPhoneAccountsResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -316,7 +316,7 @@ func (s *telecomManagerServer) GetRegisteredPhoneAccounts(_ context.Context, req
 	return &pb.GetRegisteredPhoneAccountsResponse{Result: handle}, nil
 }
 
-func (s *telecomManagerServer) GetSelfManagedPhoneAccounts(_ context.Context, req *pb.GetSelfManagedPhoneAccountsRequest) (*pb.GetSelfManagedPhoneAccountsResponse, error) {
+func (s *TelecomManagerServer) GetSelfManagedPhoneAccounts(_ context.Context, req *pb.GetSelfManagedPhoneAccountsRequest) (*pb.GetSelfManagedPhoneAccountsResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -339,7 +339,7 @@ func (s *telecomManagerServer) GetSelfManagedPhoneAccounts(_ context.Context, re
 	return &pb.GetSelfManagedPhoneAccountsResponse{Result: handle}, nil
 }
 
-func (s *telecomManagerServer) GetSimCallManager(_ context.Context, req *pb.GetSimCallManagerRequest) (*pb.GetSimCallManagerResponse, error) {
+func (s *TelecomManagerServer) GetSimCallManager(_ context.Context, req *pb.GetSimCallManagerRequest) (*pb.GetSimCallManagerResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -362,7 +362,7 @@ func (s *telecomManagerServer) GetSimCallManager(_ context.Context, req *pb.GetS
 	return &pb.GetSimCallManagerResponse{Result: handle}, nil
 }
 
-func (s *telecomManagerServer) GetSimCallManagerForSubscription(_ context.Context, req *pb.GetSimCallManagerForSubscriptionRequest) (*pb.GetSimCallManagerForSubscriptionResponse, error) {
+func (s *TelecomManagerServer) GetSimCallManagerForSubscription(_ context.Context, req *pb.GetSimCallManagerForSubscriptionRequest) (*pb.GetSimCallManagerForSubscriptionResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -385,7 +385,7 @@ func (s *telecomManagerServer) GetSimCallManagerForSubscription(_ context.Contex
 	return &pb.GetSimCallManagerForSubscriptionResponse{Result: handle}, nil
 }
 
-func (s *telecomManagerServer) GetSystemDialerPackage(_ context.Context, req *pb.GetSystemDialerPackageRequest) (*pb.GetSystemDialerPackageResponse, error) {
+func (s *TelecomManagerServer) GetSystemDialerPackage(_ context.Context, req *pb.GetSystemDialerPackageRequest) (*pb.GetSystemDialerPackageResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -399,7 +399,7 @@ func (s *telecomManagerServer) GetSystemDialerPackage(_ context.Context, req *pb
 	return &pb.GetSystemDialerPackageResponse{Result: result}, nil
 }
 
-func (s *telecomManagerServer) GetUserSelectedOutgoingPhoneAccount(_ context.Context, req *pb.GetUserSelectedOutgoingPhoneAccountRequest) (*pb.GetUserSelectedOutgoingPhoneAccountResponse, error) {
+func (s *TelecomManagerServer) GetUserSelectedOutgoingPhoneAccount(_ context.Context, req *pb.GetUserSelectedOutgoingPhoneAccountRequest) (*pb.GetUserSelectedOutgoingPhoneAccountResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -422,7 +422,7 @@ func (s *telecomManagerServer) GetUserSelectedOutgoingPhoneAccount(_ context.Con
 	return &pb.GetUserSelectedOutgoingPhoneAccountResponse{Result: handle}, nil
 }
 
-func (s *telecomManagerServer) GetVoiceMailNumber(_ context.Context, req *pb.GetVoiceMailNumberRequest) (*pb.GetVoiceMailNumberResponse, error) {
+func (s *TelecomManagerServer) GetVoiceMailNumber(_ context.Context, req *pb.GetVoiceMailNumberRequest) (*pb.GetVoiceMailNumberResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -436,7 +436,7 @@ func (s *telecomManagerServer) GetVoiceMailNumber(_ context.Context, req *pb.Get
 	return &pb.GetVoiceMailNumberResponse{Result: result}, nil
 }
 
-func (s *telecomManagerServer) HandleMmi1(_ context.Context, req *pb.HandleMmi1Request) (*pb.HandleMmi1Response, error) {
+func (s *TelecomManagerServer) HandleMmi1(_ context.Context, req *pb.HandleMmi1Request) (*pb.HandleMmi1Response, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -450,7 +450,7 @@ func (s *telecomManagerServer) HandleMmi1(_ context.Context, req *pb.HandleMmi1R
 	return &pb.HandleMmi1Response{Result: result}, nil
 }
 
-func (s *telecomManagerServer) HandleMmi2_1(_ context.Context, req *pb.HandleMmi2_1Request) (*pb.HandleMmi2_1Response, error) {
+func (s *TelecomManagerServer) HandleMmi2_1(_ context.Context, req *pb.HandleMmi2_1Request) (*pb.HandleMmi2_1Response, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -464,7 +464,7 @@ func (s *telecomManagerServer) HandleMmi2_1(_ context.Context, req *pb.HandleMmi
 	return &pb.HandleMmi2_1Response{Result: result}, nil
 }
 
-func (s *telecomManagerServer) HasManageOngoingCallsPermission(_ context.Context, req *pb.HasManageOngoingCallsPermissionRequest) (*pb.HasManageOngoingCallsPermissionResponse, error) {
+func (s *TelecomManagerServer) HasManageOngoingCallsPermission(_ context.Context, req *pb.HasManageOngoingCallsPermissionRequest) (*pb.HasManageOngoingCallsPermissionResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -478,7 +478,7 @@ func (s *telecomManagerServer) HasManageOngoingCallsPermission(_ context.Context
 	return &pb.HasManageOngoingCallsPermissionResponse{Result: result}, nil
 }
 
-func (s *telecomManagerServer) IsInCall(_ context.Context, req *pb.IsInCallRequest) (*pb.IsInCallResponse, error) {
+func (s *TelecomManagerServer) IsInCall(_ context.Context, req *pb.IsInCallRequest) (*pb.IsInCallResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -492,7 +492,7 @@ func (s *telecomManagerServer) IsInCall(_ context.Context, req *pb.IsInCallReque
 	return &pb.IsInCallResponse{Result: result}, nil
 }
 
-func (s *telecomManagerServer) IsInManagedCall(_ context.Context, req *pb.IsInManagedCallRequest) (*pb.IsInManagedCallResponse, error) {
+func (s *TelecomManagerServer) IsInManagedCall(_ context.Context, req *pb.IsInManagedCallRequest) (*pb.IsInManagedCallResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -506,7 +506,7 @@ func (s *telecomManagerServer) IsInManagedCall(_ context.Context, req *pb.IsInMa
 	return &pb.IsInManagedCallResponse{Result: result}, nil
 }
 
-func (s *telecomManagerServer) IsIncomingCallPermitted(_ context.Context, req *pb.IsIncomingCallPermittedRequest) (*pb.IsIncomingCallPermittedResponse, error) {
+func (s *TelecomManagerServer) IsIncomingCallPermitted(_ context.Context, req *pb.IsIncomingCallPermittedRequest) (*pb.IsIncomingCallPermittedResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -520,7 +520,7 @@ func (s *telecomManagerServer) IsIncomingCallPermitted(_ context.Context, req *p
 	return &pb.IsIncomingCallPermittedResponse{Result: result}, nil
 }
 
-func (s *telecomManagerServer) IsOutgoingCallPermitted(_ context.Context, req *pb.IsOutgoingCallPermittedRequest) (*pb.IsOutgoingCallPermittedResponse, error) {
+func (s *TelecomManagerServer) IsOutgoingCallPermitted(_ context.Context, req *pb.IsOutgoingCallPermittedRequest) (*pb.IsOutgoingCallPermittedResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -534,7 +534,7 @@ func (s *telecomManagerServer) IsOutgoingCallPermitted(_ context.Context, req *p
 	return &pb.IsOutgoingCallPermittedResponse{Result: result}, nil
 }
 
-func (s *telecomManagerServer) IsTtySupported(_ context.Context, req *pb.IsTtySupportedRequest) (*pb.IsTtySupportedResponse, error) {
+func (s *TelecomManagerServer) IsTtySupported(_ context.Context, req *pb.IsTtySupportedRequest) (*pb.IsTtySupportedResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -548,7 +548,7 @@ func (s *telecomManagerServer) IsTtySupported(_ context.Context, req *pb.IsTtySu
 	return &pb.IsTtySupportedResponse{Result: result}, nil
 }
 
-func (s *telecomManagerServer) IsVoiceMailNumber(_ context.Context, req *pb.IsVoiceMailNumberRequest) (*pb.IsVoiceMailNumberResponse, error) {
+func (s *TelecomManagerServer) IsVoiceMailNumber(_ context.Context, req *pb.IsVoiceMailNumberRequest) (*pb.IsVoiceMailNumberResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -562,7 +562,7 @@ func (s *telecomManagerServer) IsVoiceMailNumber(_ context.Context, req *pb.IsVo
 	return &pb.IsVoiceMailNumberResponse{Result: result}, nil
 }
 
-func (s *telecomManagerServer) PlaceCall(_ context.Context, req *pb.PlaceCallRequest) (*pb.PlaceCallResponse, error) {
+func (s *TelecomManagerServer) PlaceCall(_ context.Context, req *pb.PlaceCallRequest) (*pb.PlaceCallResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -575,7 +575,7 @@ func (s *telecomManagerServer) PlaceCall(_ context.Context, req *pb.PlaceCallReq
 	return &pb.PlaceCallResponse{}, nil
 }
 
-func (s *telecomManagerServer) RegisterPhoneAccount(_ context.Context, req *pb.RegisterPhoneAccountRequest) (*pb.RegisterPhoneAccountResponse, error) {
+func (s *TelecomManagerServer) RegisterPhoneAccount(_ context.Context, req *pb.RegisterPhoneAccountRequest) (*pb.RegisterPhoneAccountResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -588,7 +588,7 @@ func (s *telecomManagerServer) RegisterPhoneAccount(_ context.Context, req *pb.R
 	return &pb.RegisterPhoneAccountResponse{}, nil
 }
 
-func (s *telecomManagerServer) ShowInCallScreen(_ context.Context, req *pb.ShowInCallScreenRequest) (*pb.ShowInCallScreenResponse, error) {
+func (s *TelecomManagerServer) ShowInCallScreen(_ context.Context, req *pb.ShowInCallScreenRequest) (*pb.ShowInCallScreenResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -601,7 +601,7 @@ func (s *telecomManagerServer) ShowInCallScreen(_ context.Context, req *pb.ShowI
 	return &pb.ShowInCallScreenResponse{}, nil
 }
 
-func (s *telecomManagerServer) SilenceRinger(_ context.Context, req *pb.SilenceRingerRequest) (*pb.SilenceRingerResponse, error) {
+func (s *TelecomManagerServer) SilenceRinger(_ context.Context, req *pb.SilenceRingerRequest) (*pb.SilenceRingerResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -614,7 +614,7 @@ func (s *telecomManagerServer) SilenceRinger(_ context.Context, req *pb.SilenceR
 	return &pb.SilenceRingerResponse{}, nil
 }
 
-func (s *telecomManagerServer) StartConference(_ context.Context, req *pb.StartConferenceRequest) (*pb.StartConferenceResponse, error) {
+func (s *TelecomManagerServer) StartConference(_ context.Context, req *pb.StartConferenceRequest) (*pb.StartConferenceResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -627,7 +627,7 @@ func (s *telecomManagerServer) StartConference(_ context.Context, req *pb.StartC
 	return &pb.StartConferenceResponse{}, nil
 }
 
-func (s *telecomManagerServer) UnregisterPhoneAccount(_ context.Context, req *pb.UnregisterPhoneAccountRequest) (*pb.UnregisterPhoneAccountResponse, error) {
+func (s *TelecomManagerServer) UnregisterPhoneAccount(_ context.Context, req *pb.UnregisterPhoneAccountRequest) (*pb.UnregisterPhoneAccountResponse, error) {
 	mgr, err := jnipkg.NewtelecomManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)

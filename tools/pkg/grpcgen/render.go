@@ -9,7 +9,8 @@ import (
 
 // serverFuncMap defines template functions used in the server template.
 var serverFuncMap = template.FuncMap{
-	"lower": lower,
+	"lower":  lower,
+	"export": exportName,
 }
 
 // serverTemplate is the Go text/template for rendering a gRPC server file.
@@ -34,8 +35,8 @@ import (
 	"google.golang.org/grpc/status"
 )
 {{range $svc := .Services}}
-// {{$svc.GoType}}Server implements pb.{{$svc.ServiceName}}Server.
-type {{$svc.GoType}}Server struct {
+// {{export $svc.GoType}}Server implements pb.{{$svc.ServiceName}}Server.
+type {{export $svc.GoType}}Server struct {
 	pb.Unimplemented{{$svc.ServiceName}}Server
 	Ctx     *app.Context
 {{- if $svc.NeedsHandles}}
@@ -43,7 +44,7 @@ type {{$svc.GoType}}Server struct {
 {{- end}}
 }
 {{range $m := $svc.Methods}}
-func (s *{{$svc.GoType}}Server) {{$m.GoName}}(_ context.Context, req *pb.{{$m.RequestType}}) (*pb.{{$m.ResponseType}}, error) {
+func (s *{{export $svc.GoType}}Server) {{$m.GoName}}(_ context.Context, req *pb.{{$m.RequestType}}) (*pb.{{$m.ResponseType}}, error) {
 	mgr, err := jnipkg.New{{$svc.GoType}}(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)

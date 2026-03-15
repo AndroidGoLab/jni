@@ -331,8 +331,8 @@ func (m *intent) GetByteArrayExtra(arg0 string) (*jni.Object, error) {
 }
 
 // GetByteExtra calls android.content.Intent.getByteExtra.
-func (m *intent) GetByteExtra(arg0 string, arg1 byte) (byte, error) {
-	var result byte
+func (m *intent) GetByteExtra(arg0 string, arg1 int8) (int8, error) {
+	var result int8
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {
 		if err := ensureInit(env); err != nil {
@@ -1442,7 +1442,7 @@ func (m *intent) PutExtra2_4(arg0 string, arg1 *jni.Object) (*jni.Object, error)
 }
 
 // PutExtra2_5 calls android.content.Intent.putExtra.
-func (m *intent) PutExtra2_5(arg0 string, arg1 byte) (*jni.Object, error) {
+func (m *intent) PutExtra2_5(arg0 string, arg1 int8) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	m.VM.Do(func(env *jni.Env) error {

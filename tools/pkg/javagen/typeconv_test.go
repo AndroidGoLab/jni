@@ -13,7 +13,7 @@ func TestResolveType_Primitives(t *testing.T) {
 		wantIsObject   bool
 	}{
 		{"boolean", "bool", "Z", "Boolean", false},
-		{"byte", "byte", "B", "Byte", false},
+		{"byte", "int8", "B", "Byte", false},
 		{"char", "uint16", "C", "Char", false},
 		{"short", "int16", "S", "Short", false},
 		{"int", "int32", "I", "Int", false},

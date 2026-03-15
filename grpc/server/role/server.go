@@ -15,14 +15,14 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// roleManagerServer implements pb.RoleManagerServiceServer.
-type roleManagerServer struct {
+// RoleManagerServer implements pb.RoleManagerServiceServer.
+type RoleManagerServer struct {
 	pb.UnimplementedRoleManagerServiceServer
 	Ctx     *app.Context
 	Handles *handlestore.HandleStore
 }
 
-func (s *roleManagerServer) CreateRequestRoleIntent(_ context.Context, req *pb.CreateRequestRoleIntentRequest) (*pb.CreateRequestRoleIntentResponse, error) {
+func (s *RoleManagerServer) CreateRequestRoleIntent(_ context.Context, req *pb.CreateRequestRoleIntentRequest) (*pb.CreateRequestRoleIntentResponse, error) {
 	mgr, err := jnipkg.NewroleManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -45,7 +45,7 @@ func (s *roleManagerServer) CreateRequestRoleIntent(_ context.Context, req *pb.C
 	return &pb.CreateRequestRoleIntentResponse{Result: handle}, nil
 }
 
-func (s *roleManagerServer) IsRoleAvailable(_ context.Context, req *pb.IsRoleAvailableRequest) (*pb.IsRoleAvailableResponse, error) {
+func (s *RoleManagerServer) IsRoleAvailable(_ context.Context, req *pb.IsRoleAvailableRequest) (*pb.IsRoleAvailableResponse, error) {
 	mgr, err := jnipkg.NewroleManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -59,7 +59,7 @@ func (s *roleManagerServer) IsRoleAvailable(_ context.Context, req *pb.IsRoleAva
 	return &pb.IsRoleAvailableResponse{Result: result}, nil
 }
 
-func (s *roleManagerServer) IsRoleHeld(_ context.Context, req *pb.IsRoleHeldRequest) (*pb.IsRoleHeldResponse, error) {
+func (s *RoleManagerServer) IsRoleHeld(_ context.Context, req *pb.IsRoleHeldRequest) (*pb.IsRoleHeldResponse, error) {
 	mgr, err := jnipkg.NewroleManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)

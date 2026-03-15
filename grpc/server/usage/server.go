@@ -15,14 +15,14 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// usageStatsManagerServer implements pb.UsageStatsManagerServiceServer.
-type usageStatsManagerServer struct {
+// UsageStatsManagerServer implements pb.UsageStatsManagerServiceServer.
+type UsageStatsManagerServer struct {
 	pb.UnimplementedUsageStatsManagerServiceServer
 	Ctx     *app.Context
 	Handles *handlestore.HandleStore
 }
 
-func (s *usageStatsManagerServer) GetAppStandbyBucket(_ context.Context, req *pb.GetAppStandbyBucketRequest) (*pb.GetAppStandbyBucketResponse, error) {
+func (s *UsageStatsManagerServer) GetAppStandbyBucket(_ context.Context, req *pb.GetAppStandbyBucketRequest) (*pb.GetAppStandbyBucketResponse, error) {
 	mgr, err := jnipkg.NewusageStatsManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -36,7 +36,7 @@ func (s *usageStatsManagerServer) GetAppStandbyBucket(_ context.Context, req *pb
 	return &pb.GetAppStandbyBucketResponse{Result: result}, nil
 }
 
-func (s *usageStatsManagerServer) IsAppInactive(_ context.Context, req *pb.IsAppInactiveRequest) (*pb.IsAppInactiveResponse, error) {
+func (s *UsageStatsManagerServer) IsAppInactive(_ context.Context, req *pb.IsAppInactiveRequest) (*pb.IsAppInactiveResponse, error) {
 	mgr, err := jnipkg.NewusageStatsManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -50,7 +50,7 @@ func (s *usageStatsManagerServer) IsAppInactive(_ context.Context, req *pb.IsApp
 	return &pb.IsAppInactiveResponse{Result: result}, nil
 }
 
-func (s *usageStatsManagerServer) QueryConfigurations(_ context.Context, req *pb.QueryConfigurationsRequest) (*pb.QueryConfigurationsResponse, error) {
+func (s *UsageStatsManagerServer) QueryConfigurations(_ context.Context, req *pb.QueryConfigurationsRequest) (*pb.QueryConfigurationsResponse, error) {
 	mgr, err := jnipkg.NewusageStatsManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -73,7 +73,7 @@ func (s *usageStatsManagerServer) QueryConfigurations(_ context.Context, req *pb
 	return &pb.QueryConfigurationsResponse{Result: handle}, nil
 }
 
-func (s *usageStatsManagerServer) QueryEventStats(_ context.Context, req *pb.QueryEventStatsRequest) (*pb.QueryEventStatsResponse, error) {
+func (s *UsageStatsManagerServer) QueryEventStats(_ context.Context, req *pb.QueryEventStatsRequest) (*pb.QueryEventStatsResponse, error) {
 	mgr, err := jnipkg.NewusageStatsManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -96,7 +96,7 @@ func (s *usageStatsManagerServer) QueryEventStats(_ context.Context, req *pb.Que
 	return &pb.QueryEventStatsResponse{Result: handle}, nil
 }
 
-func (s *usageStatsManagerServer) QueryEvents1(_ context.Context, req *pb.QueryEvents1Request) (*pb.QueryEvents1Response, error) {
+func (s *UsageStatsManagerServer) QueryEvents1(_ context.Context, req *pb.QueryEvents1Request) (*pb.QueryEvents1Response, error) {
 	mgr, err := jnipkg.NewusageStatsManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -119,7 +119,7 @@ func (s *usageStatsManagerServer) QueryEvents1(_ context.Context, req *pb.QueryE
 	return &pb.QueryEvents1Response{Result: handle}, nil
 }
 
-func (s *usageStatsManagerServer) QueryEvents2_1(_ context.Context, req *pb.QueryEvents2_1Request) (*pb.QueryEvents2_1Response, error) {
+func (s *UsageStatsManagerServer) QueryEvents2_1(_ context.Context, req *pb.QueryEvents2_1Request) (*pb.QueryEvents2_1Response, error) {
 	mgr, err := jnipkg.NewusageStatsManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -142,7 +142,7 @@ func (s *usageStatsManagerServer) QueryEvents2_1(_ context.Context, req *pb.Quer
 	return &pb.QueryEvents2_1Response{Result: handle}, nil
 }
 
-func (s *usageStatsManagerServer) QueryEventsForSelf(_ context.Context, req *pb.QueryEventsForSelfRequest) (*pb.QueryEventsForSelfResponse, error) {
+func (s *UsageStatsManagerServer) QueryEventsForSelf(_ context.Context, req *pb.QueryEventsForSelfRequest) (*pb.QueryEventsForSelfResponse, error) {
 	mgr, err := jnipkg.NewusageStatsManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -165,7 +165,7 @@ func (s *usageStatsManagerServer) QueryEventsForSelf(_ context.Context, req *pb.
 	return &pb.QueryEventsForSelfResponse{Result: handle}, nil
 }
 
-func (s *usageStatsManagerServer) QueryUsageStats(_ context.Context, req *pb.QueryUsageStatsRequest) (*pb.QueryUsageStatsResponse, error) {
+func (s *UsageStatsManagerServer) QueryUsageStats(_ context.Context, req *pb.QueryUsageStatsRequest) (*pb.QueryUsageStatsResponse, error) {
 	mgr, err := jnipkg.NewusageStatsManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)

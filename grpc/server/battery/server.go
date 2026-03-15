@@ -12,13 +12,13 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// batteryManagerServer implements pb.BatteryManagerServiceServer.
-type batteryManagerServer struct {
+// BatteryManagerServer implements pb.BatteryManagerServiceServer.
+type BatteryManagerServer struct {
 	pb.UnimplementedBatteryManagerServiceServer
 	Ctx     *app.Context
 }
 
-func (s *batteryManagerServer) ComputeChargeTimeRemaining(_ context.Context, req *pb.ComputeChargeTimeRemainingRequest) (*pb.ComputeChargeTimeRemainingResponse, error) {
+func (s *BatteryManagerServer) ComputeChargeTimeRemaining(_ context.Context, req *pb.ComputeChargeTimeRemainingRequest) (*pb.ComputeChargeTimeRemainingResponse, error) {
 	mgr, err := jnipkg.NewbatteryManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -32,7 +32,7 @@ func (s *batteryManagerServer) ComputeChargeTimeRemaining(_ context.Context, req
 	return &pb.ComputeChargeTimeRemainingResponse{Result: result}, nil
 }
 
-func (s *batteryManagerServer) GetIntProperty(_ context.Context, req *pb.GetIntPropertyRequest) (*pb.GetIntPropertyResponse, error) {
+func (s *BatteryManagerServer) GetIntProperty(_ context.Context, req *pb.GetIntPropertyRequest) (*pb.GetIntPropertyResponse, error) {
 	mgr, err := jnipkg.NewbatteryManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -46,7 +46,7 @@ func (s *batteryManagerServer) GetIntProperty(_ context.Context, req *pb.GetIntP
 	return &pb.GetIntPropertyResponse{Result: result}, nil
 }
 
-func (s *batteryManagerServer) GetLongProperty(_ context.Context, req *pb.GetLongPropertyRequest) (*pb.GetLongPropertyResponse, error) {
+func (s *BatteryManagerServer) GetLongProperty(_ context.Context, req *pb.GetLongPropertyRequest) (*pb.GetLongPropertyResponse, error) {
 	mgr, err := jnipkg.NewbatteryManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -60,7 +60,7 @@ func (s *batteryManagerServer) GetLongProperty(_ context.Context, req *pb.GetLon
 	return &pb.GetLongPropertyResponse{Result: result}, nil
 }
 
-func (s *batteryManagerServer) GetStringProperty(_ context.Context, req *pb.GetStringPropertyRequest) (*pb.GetStringPropertyResponse, error) {
+func (s *BatteryManagerServer) GetStringProperty(_ context.Context, req *pb.GetStringPropertyRequest) (*pb.GetStringPropertyResponse, error) {
 	mgr, err := jnipkg.NewbatteryManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
@@ -74,7 +74,7 @@ func (s *batteryManagerServer) GetStringProperty(_ context.Context, req *pb.GetS
 	return &pb.GetStringPropertyResponse{Result: result}, nil
 }
 
-func (s *batteryManagerServer) IsCharging(_ context.Context, req *pb.IsChargingRequest) (*pb.IsChargingResponse, error) {
+func (s *BatteryManagerServer) IsCharging(_ context.Context, req *pb.IsChargingRequest) (*pb.IsChargingResponse, error) {
 	mgr, err := jnipkg.NewbatteryManager(s.Ctx)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "create manager: %v", err)
