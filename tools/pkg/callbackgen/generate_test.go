@@ -5,9 +5,6 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 func TestGenerate(t *testing.T) {
@@ -36,35 +33,55 @@ callbacks:
 `
 	specDir := t.TempDir()
 	specPath := filepath.Join(specDir, "callbacks.yaml")
-	require.NoError(t, os.WriteFile(specPath, []byte(specContent), 0o644))
+	if err := os.WriteFile(specPath, []byte(specContent), 0o644); err != nil {
+		t.Fatal(err)
+	}
 
 	outputDir := t.TempDir()
-	require.NoError(t, Generate(specPath, outputDir))
+	if err := Generate(specPath, outputDir); err != nil {
+		t.Fatal(err)
+	}
 
 	t.Run("extends_adapter", func(t *testing.T) {
 		data, err := os.ReadFile(filepath.Join(outputDir, "FooCallbackAdapter.java"))
-		require.NoError(t, err)
+		if err != nil {
+			t.Fatal(err)
+		}
 		content := string(data)
 
-		assert.Contains(t, content, "DO NOT EDIT")
-		assert.Contains(t, content, "extends com.example.Foo.Callback")
-		assert.Contains(t, content, "public FooCallbackAdapter(long handlerID)")
-		assert.Contains(t, content, `GoAbstractDispatch.invoke(handlerID, "onEvent", new Object[]{foo, Integer.valueOf(code), Boolean.valueOf(ok)})`)
-
-		// Verify it does NOT use "implements" for a class-based callback.
-		assert.NotContains(t, content, "implements com.example.Foo.Callback")
+		for _, want := range []string{
+			"DO NOT EDIT",
+			"extends com.example.Foo.Callback",
+			"public FooCallbackAdapter(long handlerID)",
+			`GoAbstractDispatch.invoke(handlerID, "onEvent", new Object[]{foo, Integer.valueOf(code), Boolean.valueOf(ok)})`,
+		} {
+			if !strings.Contains(content, want) {
+				t.Errorf("missing %q in output", want)
+			}
+		}
+		if strings.Contains(content, "implements com.example.Foo.Callback") {
+			t.Error("should not use 'implements' for class-based callback")
+		}
 	})
 
 	t.Run("implements_adapter", func(t *testing.T) {
 		data, err := os.ReadFile(filepath.Join(outputDir, "BarListenerAdapter.java"))
-		require.NoError(t, err)
+		if err != nil {
+			t.Fatal(err)
+		}
 		content := string(data)
 
-		assert.Contains(t, content, "implements com.example.Bar.Listener")
-		assert.Contains(t, content, `GoAbstractDispatch.invoke(handlerID, "onBar", new Object[]{bar})`)
-
-		// Verify it does NOT use "extends" for an interface-based callback.
-		assert.NotContains(t, content, "extends com.example.Bar.Listener")
+		for _, want := range []string{
+			"implements com.example.Bar.Listener",
+			`GoAbstractDispatch.invoke(handlerID, "onBar", new Object[]{bar})`,
+		} {
+			if !strings.Contains(content, want) {
+				t.Errorf("missing %q in output", want)
+			}
+		}
+		if strings.Contains(content, "extends com.example.Bar.Listener") {
+			t.Error("should not use 'extends' for interface-based callback")
+		}
 	})
 }
 
@@ -85,25 +102,23 @@ func TestBoxExpression(t *testing.T) {
 		{"com.example.Foo", "foo", "foo"},
 		{"android.hardware.camera2.CameraDevice", "cam", "cam"},
 	}
-
 	for _, tt := range tests {
 		t.Run(tt.javaType+"_"+tt.param, func(t *testing.T) {
 			got := BoxExpression(tt.javaType, tt.param)
-			assert.Equal(t, tt.want, got)
+			if got != tt.want {
+				t.Errorf("BoxExpression(%q, %q) = %q, want %q", tt.javaType, tt.param, got, tt.want)
+			}
 		})
 	}
 }
 
 func TestInheritanceKeyword(t *testing.T) {
-	t.Run("class_uses_extends", func(t *testing.T) {
-		entry := CallbackEntry{Interface: false}
-		assert.Equal(t, "extends", inheritanceKeyword(entry))
-	})
-
-	t.Run("interface_uses_implements", func(t *testing.T) {
-		entry := CallbackEntry{Interface: true}
-		assert.Equal(t, "implements", inheritanceKeyword(entry))
-	})
+	if got := inheritanceKeyword(CallbackEntry{Interface: false}); got != "extends" {
+		t.Errorf("class: got %q, want extends", got)
+	}
+	if got := inheritanceKeyword(CallbackEntry{Interface: true}); got != "implements" {
+		t.Errorf("interface: got %q, want implements", got)
+	}
 }
 
 func TestRenderParamDecl(t *testing.T) {
@@ -112,7 +127,10 @@ func TestRenderParamDecl(t *testing.T) {
 		{Type: "int", Name: "error"},
 	}
 	got := renderParamDecl(params)
-	assert.Equal(t, "android.hardware.camera2.CameraDevice camera, int error", got)
+	want := "android.hardware.camera2.CameraDevice camera, int error"
+	if got != want {
+		t.Errorf("got %q, want %q", got, want)
+	}
 }
 
 func TestRenderArgsList(t *testing.T) {
@@ -121,7 +139,10 @@ func TestRenderArgsList(t *testing.T) {
 		{Type: "int", Name: "error"},
 	}
 	got := renderArgsList(params)
-	assert.Equal(t, "camera, Integer.valueOf(error)", got)
+	want := "camera, Integer.valueOf(error)"
+	if got != want {
+		t.Errorf("got %q, want %q", got, want)
+	}
 }
 
 func TestGenerateAllPrimitiveBoxing(t *testing.T) {
@@ -151,13 +172,19 @@ callbacks:
 `
 	specDir := t.TempDir()
 	specPath := filepath.Join(specDir, "callbacks.yaml")
-	require.NoError(t, os.WriteFile(specPath, []byte(specContent), 0o644))
+	if err := os.WriteFile(specPath, []byte(specContent), 0o644); err != nil {
+		t.Fatal(err)
+	}
 
 	outputDir := t.TempDir()
-	require.NoError(t, Generate(specPath, outputDir))
+	if err := Generate(specPath, outputDir); err != nil {
+		t.Fatal(err)
+	}
 
 	data, err := os.ReadFile(filepath.Join(outputDir, "AllPrimitivesAdapter.java"))
-	require.NoError(t, err)
+	if err != nil {
+		t.Fatal(err)
+	}
 	content := string(data)
 
 	expectedBoxed := strings.Join([]string{
@@ -170,5 +197,7 @@ callbacks:
 		"Character.valueOf(c)",
 		"Short.valueOf(s)",
 	}, ", ")
-	assert.Contains(t, content, expectedBoxed)
+	if !strings.Contains(content, expectedBoxed) {
+		t.Errorf("missing boxed args %q in output", expectedBoxed)
+	}
 }

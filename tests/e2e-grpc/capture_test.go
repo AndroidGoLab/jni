@@ -25,7 +25,7 @@ func TestE2E_CameraRecord(t *testing.T) {
 	runLiveJnicli(t,
 		"--timeout", "60s",
 		"camera", "record",
-		"-d", "3s",
+		"-d", "1s",
 		"-o", outFile,
 	)
 
@@ -51,7 +51,7 @@ func TestE2E_MicrophoneRecord(t *testing.T) {
 	runLiveJnicli(t,
 		"--timeout", "60s",
 		"microphone", "record",
-		"-d", "3s",
+		"-d", "1s",
 		"-o", outFile,
 	)
 
