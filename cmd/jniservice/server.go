@@ -13,6 +13,7 @@
 //	JNISERVICE_PORT   TCP port (default "50051")
 //	JNISERVICE_LISTEN Listen address (default "0.0.0.0")
 //	JNISERVICE_TOKEN  Bearer token for auth (empty = no auth)
+//	JNISERVICE_MTLS   Set to "1" to enable mTLS with ACL-based auth
 package main
 
 /*
@@ -20,18 +21,30 @@ package main
 */
 import "C"
 import (
+	"crypto/ecdsa"
+	"crypto/elliptic"
+	"crypto/rand"
+	"crypto/tls"
+	"crypto/x509"
+	"crypto/x509/pkix"
 	"fmt"
+	"math/big"
 	"net"
 	"os"
 	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/xaionaro-go/jni"
 	"github.com/xaionaro-go/jni/grpc/server"
+	"github.com/xaionaro-go/jni/grpc/server/acl"
+	"github.com/xaionaro-go/jni/grpc/server/certauth"
 	jnirawserver "github.com/xaionaro-go/jni/grpc/server/jni_raw"
 	"github.com/xaionaro-go/jni/handlestore"
+	authpb "github.com/xaionaro-go/jni/proto/auth"
 	jnirawpb "github.com/xaionaro-go/jni/proto/jni_raw"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 )
 
 //export runServer
@@ -49,6 +62,7 @@ func runServer(cvm *C.JavaVM) {
 	}
 
 	token := os.Getenv("JNISERVICE_TOKEN")
+	mtlsEnabled := os.Getenv("JNISERVICE_MTLS") == "1"
 
 	handles := handlestore.New()
 
@@ -56,23 +70,78 @@ func runServer(cvm *C.JavaVM) {
 	// This makes the Context handle available for Android API calls.
 	initAndroidContext(vm, handles)
 
-	// Build the auth interceptor chain.
-	var auth server.Authorizer
+	// Build the auth interceptor chain and server options.
+	var (
+		auth    server.Authorizer
+		opts    []grpc.ServerOption
+		ca      *certauth.CA
+		aclStore *acl.Store
+	)
+
 	switch {
+	case mtlsEnabled:
+		var err error
+		ca, err = certauth.LoadOrCreateCA("/data/local/tmp/jniservice-ca/")
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "jniservice: load/create CA: %v\n", err)
+			os.Exit(1)
+		}
+		fmt.Fprintf(os.Stderr, "jniservice: CA loaded\n")
+
+		aclStore, err = acl.OpenStore("/data/local/tmp/jniservice.db")
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "jniservice: open ACL store: %v\n", err)
+			os.Exit(1)
+		}
+		fmt.Fprintf(os.Stderr, "jniservice: ACL store opened\n")
+
+		serverTLS, err := generateServerTLS(ca)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "jniservice: generate server TLS: %v\n", err)
+			os.Exit(1)
+		}
+
+		caPool := x509.NewCertPool()
+		caPool.AddCert(ca.Cert)
+
+		tlsConfig := &tls.Config{
+			Certificates: []tls.Certificate{serverTLS},
+			// VerifyClientCertIfGiven allows Register to work without a cert.
+			ClientAuth: tls.VerifyClientCertIfGiven,
+			ClientCAs:  caPool,
+			MinVersion: tls.VersionTLS12,
+		}
+
+		opts = append(opts, grpc.Creds(credentials.NewTLS(tlsConfig)))
+		auth = server.ACLAuth{Store: aclStore}
+		fmt.Fprintf(os.Stderr, "jniservice: mTLS enabled\n")
+
 	case token != "":
 		auth = server.TokenAuth{Token: token}
+
 	default:
 		auth = server.NoAuth{}
 	}
 
-	grpcServer := grpc.NewServer(
+	opts = append(opts,
 		grpc.ChainUnaryInterceptor(server.UnaryAuthInterceptor(auth)),
 		grpc.ChainStreamInterceptor(server.StreamAuthInterceptor(auth)),
 	)
 
+	grpcServer := grpc.NewServer(opts...)
+
 	// Register handle store + any available Android API services.
 	server.RegisterAll(grpcServer, vm, handles)
 	fmt.Fprintf(os.Stderr, "jniservice: registered handlestore\n")
+
+	// Register AuthService when mTLS is enabled.
+	if mtlsEnabled {
+		authpb.RegisterAuthServiceServer(grpcServer, &server.AuthServiceServer{
+			CA:    ca,
+			Store: aclStore,
+		})
+		fmt.Fprintf(os.Stderr, "jniservice: registered auth service\n")
+	}
 
 	// Register the raw JNI service for low-level JNI access.
 	jnirawpb.RegisterJNIServiceServer(grpcServer, &jnirawserver.Server{
@@ -104,6 +173,48 @@ func runServer(cvm *C.JavaVM) {
 			fmt.Fprintf(os.Stderr, "jniservice: serve: %v\n", err)
 		}
 	}()
+}
+
+// generateServerTLS creates an ephemeral server TLS certificate signed
+// by the CA. The key is kept in memory only (not written to disk).
+// The certificate has ExtKeyUsageServerAuth so it can be used for TLS
+// server authentication.
+func generateServerTLS(ca *certauth.CA) (tls.Certificate, error) {
+	key, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+	if err != nil {
+		return tls.Certificate{}, fmt.Errorf("generating server key: %w", err)
+	}
+
+	serial, err := rand.Int(rand.Reader, new(big.Int).Lsh(big.NewInt(1), 128))
+	if err != nil {
+		return tls.Certificate{}, fmt.Errorf("generating serial: %w", err)
+	}
+
+	now := time.Now()
+	tmpl := &x509.Certificate{
+		SerialNumber: serial,
+		Subject:      pkix.Name{CommonName: "jniservice"},
+		NotBefore:    now,
+		NotAfter:     now.Add(365 * 24 * time.Hour),
+		KeyUsage:     x509.KeyUsageDigitalSignature,
+		ExtKeyUsage:  []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth},
+	}
+
+	certDER, err := x509.CreateCertificate(rand.Reader, tmpl, ca.Cert, &key.PublicKey, ca.Key)
+	if err != nil {
+		return tls.Certificate{}, fmt.Errorf("signing server certificate: %w", err)
+	}
+
+	serverCert, err := x509.ParseCertificate(certDER)
+	if err != nil {
+		return tls.Certificate{}, fmt.Errorf("parsing server certificate: %w", err)
+	}
+
+	return tls.Certificate{
+		Certificate: [][]byte{certDER},
+		PrivateKey:  key,
+		Leaf:        serverCert,
+	}, nil
 }
 
 // initAndroidContext initializes the Android system context by calling
