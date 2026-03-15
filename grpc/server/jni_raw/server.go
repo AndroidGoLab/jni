@@ -870,6 +870,86 @@ func (s *Server) ToReflectedField(_ context.Context, req *pb.ToReflectedFieldReq
 	return &pb.ToReflectedFieldResponse{FieldObject: handle}, nil
 }
 
+// ---- Array operations ----
+
+func (s *Server) GetArrayLength(_ context.Context, req *pb.GetArrayLengthRequest) (*pb.GetArrayLengthResponse, error) {
+	obj, err := s.requireObject(req.GetArrayHandle())
+	if err != nil {
+		return nil, err
+	}
+	var length int32
+	if err := s.withEnv(func(env *jni.Env) error {
+		length = env.GetArrayLength((*jni.Array)(unsafe.Pointer(obj)))
+		return nil
+	}); err != nil {
+		return nil, status.Errorf(codes.Internal, "%v", err)
+	}
+	return &pb.GetArrayLengthResponse{Length: length}, nil
+}
+
+func (s *Server) NewObjectArray(_ context.Context, req *pb.NewObjectArrayRequest) (*pb.NewObjectArrayResponse, error) {
+	cls, err := s.requireClass(req.GetClassHandle())
+	if err != nil {
+		return nil, err
+	}
+	var handle int64
+	if err := s.withEnv(func(env *jni.Env) error {
+		var initElem *jni.Object
+		if req.GetInitElement() != 0 {
+			initElem = s.getObject(req.GetInitElement())
+		}
+		arr, err := env.NewObjectArray(req.GetLength(), cls, initElem)
+		if err != nil {
+			return err
+		}
+		handle = s.putObject(env, &arr.Object)
+		return nil
+	}); err != nil {
+		return nil, status.Errorf(codes.Internal, "%v", err)
+	}
+	return &pb.NewObjectArrayResponse{ArrayHandle: handle}, nil
+}
+
+func (s *Server) GetObjectArrayElement(_ context.Context, req *pb.GetObjectArrayElementRequest) (*pb.GetObjectArrayElementResponse, error) {
+	obj, err := s.requireObject(req.GetArrayHandle())
+	if err != nil {
+		return nil, err
+	}
+	var handle int64
+	if err := s.withEnv(func(env *jni.Env) error {
+		arr := (*jni.ObjectArray)(unsafe.Pointer(obj))
+		elem, err := env.GetObjectArrayElement(arr, req.GetIndex())
+		if err != nil {
+			return err
+		}
+		if elem != nil && elem.Ref() != 0 {
+			handle = s.putObject(env, elem)
+		}
+		return nil
+	}); err != nil {
+		return nil, status.Errorf(codes.Internal, "%v", err)
+	}
+	return &pb.GetObjectArrayElementResponse{ElementHandle: handle}, nil
+}
+
+func (s *Server) SetObjectArrayElement(_ context.Context, req *pb.SetObjectArrayElementRequest) (*pb.SetObjectArrayElementResponse, error) {
+	obj, err := s.requireObject(req.GetArrayHandle())
+	if err != nil {
+		return nil, err
+	}
+	if err := s.withEnv(func(env *jni.Env) error {
+		arr := (*jni.ObjectArray)(unsafe.Pointer(obj))
+		var elem *jni.Object
+		if req.GetElementHandle() != 0 {
+			elem = s.getObject(req.GetElementHandle())
+		}
+		return env.SetObjectArrayElement(arr, req.GetIndex(), elem)
+	}); err != nil {
+		return nil, status.Errorf(codes.Internal, "%v", err)
+	}
+	return &pb.SetObjectArrayElementResponse{}, nil
+}
+
 // ---- Bulk byte array transfer ----
 
 func (s *Server) GetByteArrayData(_ context.Context, req *pb.GetByteArrayDataRequest) (*pb.GetByteArrayDataResponse, error) {

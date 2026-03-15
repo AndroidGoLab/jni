@@ -97,6 +97,21 @@ var (
 // the native invoke() method on GoInvocationHandler via RegisterNatives.
 var proxyNativeRegistrar func(envPtr *capi.Env, cls capi.Class) error
 
+// proxyClassLoader is an optional fallback ClassLoader for finding
+// GoInvocationHandler in APK mode (where JNI FindClass from native
+// threads uses BootClassLoader which can't see APK classes).
+var proxyClassLoader capi.Object
+
+// SetProxyClassLoader sets a fallback ClassLoader that proxy init uses
+// to find GoInvocationHandler when JNI FindClass fails. Call this with
+// the APK's ClassLoader (from Context.getClassLoader()) before creating
+// any proxies.
+func SetProxyClassLoader(cl *Object) {
+	if cl != nil {
+		proxyClassLoader = cl.Ref()
+	}
+}
+
 // ensureProxyInit performs one-time initialization of the proxy
 // infrastructure. It finds and caches all Java classes and method IDs
 // needed to create Proxy instances.
@@ -146,13 +161,41 @@ func doProxyInit(env *Env) error {
 		return fmt.Errorf("jni: proxy init: cannot find Class.getClassLoader")
 	}
 
-	// Find center.dx.jni.internal.GoInvocationHandler (must be on the classpath)
+	// Find center.dx.jni.internal.GoInvocationHandler.
+	// Try JNI FindClass first (works in app_process mode where the dex
+	// is on the system classpath). Fall back to ClassLoader.loadClass()
+	// for APK mode where native threads use BootClassLoader.
 	handlerClassName := cstringLiteral("center/dx/jni/internal/GoInvocationHandler")
 	hc := capi.FindClass(env.ptr, handlerClassName)
 	if hc == 0 {
 		capi.ExceptionClear(env.ptr)
-		return fmt.Errorf("jni: proxy init: cannot find center.dx.jni.internal.GoInvocationHandler — " +
-			"ensure the helper class is on the classpath")
+		if proxyClassLoader != 0 {
+			// Retry via ClassLoader.loadClass().
+			clCls := capi.FindClass(env.ptr, cstringLiteral("java/lang/ClassLoader"))
+			if clCls != 0 {
+				loadMID := capi.GetMethodID(env.ptr, clCls, cstringLiteral("loadClass"),
+					cstringLiteral("(Ljava/lang/String;)Ljava/lang/Class;"))
+				if loadMID != nil {
+					javaName := capi.NewStringUTF(env.ptr, cstringLiteral("center.dx.jni.internal.GoInvocationHandler"))
+					if javaName != 0 {
+						var nameVal capi.Jvalue
+						*(*uintptr)(unsafe.Pointer(&nameVal)) = uintptr(javaName)
+						loaded := capi.CallObjectMethodA(env.ptr, proxyClassLoader, loadMID, &nameVal)
+						capi.DeleteLocalRef(env.ptr, capi.Object(javaName))
+						if capi.ExceptionCheck(env.ptr) == capi.JNI_TRUE {
+							capi.ExceptionClear(env.ptr)
+						} else if loaded != 0 {
+							hc = capi.Class(loaded)
+						}
+					}
+				}
+				capi.DeleteLocalRef(env.ptr, capi.Object(clCls))
+			}
+		}
+		if hc == 0 {
+			return fmt.Errorf("jni: proxy init: cannot find center.dx.jni.internal.GoInvocationHandler — " +
+				"ensure the helper class is on the classpath")
+		}
 	}
 	clsGoHandler = capi.Class(capi.NewGlobalRef(env.ptr, capi.Object(hc)))
 	capi.DeleteLocalRef(env.ptr, capi.Object(hc))
