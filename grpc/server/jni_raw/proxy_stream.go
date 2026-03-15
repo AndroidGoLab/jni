@@ -203,6 +203,7 @@ func (s *Server) Proxy(stream pb.JNIService_ProxyServer) error {
 	var (
 		proxyObj     *jni.Object
 		proxyCleanup func()
+		proxyHandle  int64
 	)
 
 	var isInterface bool
@@ -236,7 +237,13 @@ func (s *Server) Proxy(stream pb.JNIService_ProxyServer) error {
 					return sendCallback(env, methodName, args, expectsResponse)
 				},
 			)
-			return createErr
+			if createErr != nil {
+				return createErr
+			}
+			// Store in HandleStore within the same VM.Do — local refs are
+			// thread-local and invalid across VM.Do boundaries.
+			proxyHandle = s.Handles.Put(env, proxyObj)
+			return nil
 		}); err != nil {
 			return status.Errorf(codes.Internal, "creating interface proxy: %v", err)
 		}
@@ -305,6 +312,9 @@ func (s *Server) Proxy(stream pb.JNIService_ProxyServer) error {
 			}
 
 			proxyObj = adapterObj
+			// Store in HandleStore within the same VM.Do — local refs are
+			// thread-local and invalid across VM.Do boundaries.
+			proxyHandle = s.Handles.Put(env, adapterObj)
 			return nil
 		}); err != nil {
 			jni.UnregisterProxyHandler(handlerID)
@@ -317,12 +327,8 @@ func (s *Server) Proxy(stream pb.JNIService_ProxyServer) error {
 	}
 	defer proxyCleanup()
 
-	// 7. Store proxy in HandleStore and send response.
-	var proxyHandle int64
-	s.VM.Do(func(env *jni.Env) error {
-		proxyHandle = s.Handles.Put(env, proxyObj)
-		return nil
-	})
+	// 7. proxyHandle was set inside the VM.Do callbacks above (local JNI
+	// refs are thread-local — must be stored before VM.Do returns).
 
 	sendMu.Lock()
 	err = stream.Send(&pb.ProxyServerMessage{
